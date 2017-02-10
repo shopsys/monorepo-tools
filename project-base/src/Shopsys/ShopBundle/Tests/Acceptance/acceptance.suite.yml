@@ -1,0 +1,41 @@
+# Codeception Test Suite Configuration
+
+# suite for acceptance tests.
+# perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+class_name: AcceptanceTester
+modules:
+  enabled:
+    # SymfonyHelper enables using Symfony DI container.
+    - Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper
+    # DatabaseHelper sets the configuration of Db module in _initialize().
+    # Db module reads this configuration in its own _initialize(),
+    # therefore DatabaseHelper must be included before Db.
+    - Shopsys\ShopBundle\Tests\Test\Codeception\Helper\DatabaseHelper
+    - Shopsys\ShopBundle\Tests\Test\Codeception\Module\Db
+    - Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver
+    - Shopsys\ShopBundle\Tests\Test\Codeception\Helper\WebDriverHelper
+    # DomainHelper sets WebDriver's URL in _before().
+    # The setting is reset before _before() of WebDriver is called,
+    # so DomainHelper must be included after WebDriver.
+    - Shopsys\ShopBundle\Tests\Test\Codeception\Helper\DomainHelper
+    - Shopsys\ShopBundle\Tests\Test\Codeception\Helper\CloseNewlyOpenedWindowsHelper
+  config:
+    Shopsys\ShopBundle\Tests\Test\Codeception\Module\Db:
+      dsn: ~
+      user: ~
+      password: ~
+      dump: ../app/cache/test-db-dump.sql
+      populate: false
+      cleanup: true
+    Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver:
+      host: localhost
+      port: 4444
+      url: ~
+      browser: chrome
+      capabilities:
+        # accept untrusted (eg. self-signed) HTTPS certificates
+        acceptSslCerts: true
+      window_size: 1024x786
+      wait: 1

@@ -1,0 +1,40 @@
+{% extends '@ShopsysGenerator/base.html.twig' %}
+
+{% block html_body %}
+	<h1>Code Generator</h1>
+
+	{% if createdFiles|length > 0 %}
+		<div class="message-success">
+			<b>Following files were created:</b>
+			<ul>
+				{% for createdFile in createdFiles %}
+					<li>{{ createdFile }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+
+	{% if errorMessage %}
+		<div class="message-error">
+			{{ errorMessage }}
+		</div>
+	{% endif %}
+
+	{% form_theme form '@ShopsysGenerator/formTheme.html.twig' %}
+	{{ form_start(form) }}
+		{{ form_row(form.bundle, { label: 'Generate to bundle' }) }}
+
+		{% for generatorName in generatorsNames %}
+			<div class="generator js-generator">
+				<div class="generator-title js-generator-title">
+					{{ form_row(form[generatorName ~ '_enable'], { label: generatorName|humanize, withoutColon: true }) }}
+				</div>
+				<div class="generator-form js-generator-form">
+					{{ form_widget(form[generatorName]) }}
+				</div>
+			</div>
+		{% endfor %}
+
+		{{ form_row(form.submit, { label: 'Generate' }) }}
+	{{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,173 @@
+{% extends '@ShopsysShop/Front/Layout/layoutWithoutPanel.html.twig' %}
+
+{% block meta_robots -%}
+	<meta name="robots" content="noindex, follow">
+{% endblock %}
+
+{% block title %}
+	{{ 'Cart'|trans }}
+{% endblock %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block main_content %}
+	{% include '@ShopsysShop/Front/Inline/OrderProgress/index.html.twig' with {step: 1} only %}
+
+	<h1>{{ 'Your cart'|trans }}</h1>
+
+
+	{% if cart.itemsCount > 0 %}
+		{{ form_start(form, { attr: { class: 'js-no-validate js-cart-form' }}) }}
+			{{ form_errors(form) }}
+			<table class="table-cart js-cart">
+				<thead>
+					<tr class="table-cart__row">
+						<th class="table-cart__cell table-cart__cell--image">{{ 'Picture'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--name">{{ 'Name'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--price">{{ 'Unit price including VAT'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--price">{{ 'VAT rate'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--amount">{{ 'Amount'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--price">{{ 'Price including VAT'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--action">&nbsp;</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for cartItem in cartItems %}
+						{% set cartItemPrice = cartItemPrices[cartItem.id] %}
+						{% set cartItemDiscount = cartItemDiscounts[cartItem.id] %}
+						<tr class="table-cart__row js-cart-item">
+							<td class="table-cart__cell table-cart__cell--image">
+								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="{{ cartItem.product.name }}" class="table-cart__cell__image">
+									{{ image(cartItem.product, { size: 'thumbnail' }) }}
+								</a>
+							</td>
+
+							<td class="table-cart__cell table-cart__cell--name js-cart-item-name">
+								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="">
+									{{ cartItem.name }}
+								</a>
+								<div class="table-cart__cell__price-mobile">
+									{{ cartItemPrice.totalPrice.priceWithVat|price }}
+									{% if cartItemDiscount is not null %}
+										<div>
+											{{ 'Discount'|trans }}:
+											{{ cartItemDiscount.priceWithVat|price }}
+										</div>
+									{% endif %}
+								</div>
+							</td>
+
+							<td class="table-cart__cell table-cart__cell--price">
+								{{ cartItemPrice.unitPrice.priceWithVat|price }}
+							</td>
+
+							<td class="table-cart__cell table-cart__cell--price">
+								{{ cartItem.product.vat.percent|formatPercent }}
+							</td>
+
+							<td class="table-cart__cell table-cart__cell--amount">
+								<span class="form-input-spinbox js-spinbox">
+									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'form-input-spinbox__input input-no-style js-spinbox-input', 'data-spinbox-min': 1}}) }}
+									<button type="button" class="btn-no-style form-input-spinbox__btn js-spinbox-plus">+</button>
+									<button type="button" class="btn-no-style form-input-spinbox__btn form-input-spinbox__btn--minus js-spinbox-minus">-</button>
+								</span>
+							</td>
+
+							<td class="table-cart__cell table-cart__cell--price js-cart-item-total-price">
+								{{ cartItemPrice.totalPrice.priceWithVat|price }}
+								{% if cartItemDiscount is not null %}
+									<div>
+										{{ 'Discount'|trans }}:
+										{{ cartItemDiscount.priceWithVat|price }}
+									</div>
+								{% endif %}
+							</td>
+
+							<td class="table-cart__cell table-cart__cell--action">
+								<a
+									href="{{ url('front_cart_delete', {cartItemId: cartItem.id, _token: csrf_token('front_cart_delete_' ~ cartItem.id)}) }}"
+									class="js-cart-item-remove-button"
+								>
+									<i class="svg svg-remove"></i>
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+
+				<tfoot>
+					<tr class="table-cart__row">
+						<td class="table-cart__cell table-cart__cell--image">&nbsp;</td>
+						<td class="table-cart__cell table-cart__cell--name">&nbsp;</td>
+						<td class="table-cart__cell  table-cart__cell--price">&nbsp;</td>
+						<td class="table-cart__cell table-cart__cell--total-price js-cart-total-price" colspan="2">
+							{{ 'Total price including VAT'|trans }}:
+							<span>
+								{{ productsPrice.priceWithVat|price }}
+							</span>
+						</td>
+						<td class="table-cart__cell">&nbsp;</td>
+					</tr>
+				</tfoot>
+
+			</table>
+
+			<div class="box-cart-bottom">
+				<div class="box-cart-bottom__info">
+					{% if isFreeTransportAndPaymentActive %}
+						{% if isPaymentAndTransportFree %}
+							<div class="box-free-transport box-free-transport--done">
+								{% trans %}
+									Shipping and payment <strong>for free!</strong>
+								{% endtrans %}
+							</div>
+						{% else %}
+							<div class="box-free-transport">
+								{% trans with {'%price%': remainingPriceWithVat|price} %}
+									You still have to purchase products for <strong> %price% </strong> for <strong> free </strong> shipping and payment.
+								{% endtrans %}
+							</div>
+						{% endif %}
+					{% endif %}
+				</div>
+				<div class="box-cart-bottom__promo">
+					{{ render(controller('ShopsysShopBundle:Front/PromoCode:index')) }}
+				</div>
+			</div>
+
+			<div class="in-action">
+				{% if cart.itemsCount > 0 %}
+					<div class="in-action__right">
+						{{ form_row(form.submit, { label: 'Order [verb]'|trans, attr: { class: 'btn btn--success in-action__btn in-action__btn--big'}}) }}
+					</div>
+				{% endif %}
+
+				<div class="in-action__left">
+					<a href="{{ url('front_homepage') }}" class="btn in-action__btn">
+						{{ 'Back to buying'|trans }}
+					</a>
+				</div>
+			</div>
+		{{ form_end(form) }}
+	{% else %}
+		<div class="box-cart-empty">
+			<div class="box-cart-empty__image">
+				<img src="{{ asset('assets/frontend/images/empty-cart.jpg') }}" alt="{{ 'Empty cart'|trans }}">
+			</div>
+			<div class="box-cart-empty__text">
+				{{ 'Your cart is unfortunately empty. To create order, you have to choose </a> some product <a href="%url%">first'|trans({ '%url%': url('front_homepage') })|raw }}
+			</div>
+		</div>
+
+		<div class="in-action">
+			<div class="in-action__left">
+				<a href="{{url('front_homepage') }}" class="btn in-action__btn">
+					{{ 'Back to buying'|trans }}
+				</a>
+			</div>
+		</div>
+	{% endif %}
+
+{% endblock %}

@@ -1,0 +1,3 @@
+generator_index:
+  pattern: /_generator/
+  defaults: { _controller: ShopsysGeneratorBundle:Generator:index}

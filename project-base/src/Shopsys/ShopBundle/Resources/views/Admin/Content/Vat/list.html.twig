@@ -1,0 +1,11 @@
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'VAT and rounding'|trans }}{% endblock %}
+{% block h1 %}{{ 'VAT and rounding'|trans }}{% endblock %}
+
+{% block main_content %}
+
+	{{ render(controller('ShopsysShopBundle:Admin/Vat:settings')) }}
+
+	{{ gridView.render() }}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Bestsellers of the category'|trans }} {{ categoryName }}{% endblock %}
+{% block h1 %}{{ 'Bestsellers of the category'|trans }} {{ categoryName }}{% endblock %}
+
+{% block main_content %}
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+
+		<div class="js-form-group">
+			{{ form_errors(form.bestsellingProducts) }}
+
+			<div id="{{ form.bestsellingProducts.vars.id }}">
+				{% for productForm in form.bestsellingProducts %}
+					<div class="form-line js-bestselling-product-container">
+						<label class="form-line__item form-line__item--text form-line__item--fixed-width">{{ loop.index }}</label>
+						{{ form_widget(productForm) }}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+
+		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				{{ form_widget(form.save, {label: 'Save'|trans}) }}
+				<a href="{{ url('admin_bestsellingproduct_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
+			{% endblock %}
+		{% endembed %}
+	{{ form_end(form) }}
+
+{% endblock %}

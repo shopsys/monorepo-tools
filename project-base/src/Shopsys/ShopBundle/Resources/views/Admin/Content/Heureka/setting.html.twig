@@ -1,0 +1,27 @@
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}{{ '- Heureka - Ověřeno zákazníky'|trans }}{% endblock %}
+{% block h1 %}{{ 'Heureka - Ověřeno zákazníky'|trans }}{% endblock %}
+
+{% block main_content %}
+	{{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
+
+	{% if form is not null %}
+		{{ form_start(form) }}
+			{{ form_row(form.heurekaApiKey, {label: 'Code of service Heureka - Ověřeno zákazníky'|trans, icon: {
+				title: 'Enter 32-digit code which will be sent to server %serverName%'|trans ({'%serverName%': serverName}) } }) }}
+			{{ form_row(form.heurekaWidgetCode, {label: 'Heureka Widget code'|trans, attr: {class: 'heureka-widget-input'} }) }}
+
+
+			{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+				{% block fixed_bar_content %}
+					{{ form_widget(form.save, { label: 'Save changes'|trans }) }}
+				{% endblock %}
+			{% endembed %}
+		{{ form_end(form) }}
+	{% else %}
+		<div class="in-message in-message--info">
+			{{ 'Servis Heuréka - Approved by customers doesn\'t support the language of this domain.'|trans }}
+		</div>
+	{% endif %}
+{% endblock %}

@@ -1,2 +1,0 @@
-- name: testEntity
-  class: SS6\ShopBundle\Tests\Unit\Component\UploadedFile\Dummy

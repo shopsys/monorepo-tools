@@ -1,0 +1,326 @@
+module.exports = function(grunt) {
+
+	require('es6-promise').polyfill();
+	require('jit-grunt')(grunt, {
+		sprite: 'grunt-spritesmith',
+		sprite: 'pngsmith',
+	});
+	require('time-grunt')(grunt);
+
+	grunt.initConfig({
+
+		pkg: grunt.file.readJSON('package.json'),
+
+		less: {
+			helpersAdmin: {
+				files: {
+					'{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less': '{{ rootStylesDirectory|raw }}/admin/helpers.less'
+				}
+			},
+			admin: {
+				files: {
+					'web/assets/admin/styles/index_{{ cssVersion }}.css': '{{ rootStylesDirectory|raw }}/admin/main.less'
+				},
+				options: {
+					compress: true,
+					sourceMap: true,
+					sourceMapFilename: 'web/assets/admin/styles/index_{{ cssVersion }}.css.map',
+					sourceMapBasepath: 'web',
+					sourceMapURL: 'index_{{ cssVersion }}.css.map',
+					sourceMapRootpath: '../../../'
+				}
+			},
+
+			{% for domain in domains -%}
+				helpers{{ domain.id }}: {
+					files: {
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less'
+					}
+				},
+				frontend{{ domain.id }}: {
+					files: {
+						'web/assets/frontend/styles/index{{ domain.id }}_{{ cssVersion }}.css': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/main.less'
+					},
+					options: {
+						compress: true,
+						sourceMap: true,
+						sourceMapFilename: 'web/assets/frontend/styles/index{{ domain.id }}_{{ cssVersion }}.css.map',
+						sourceMapBasepath: 'web',
+						sourceMapURL: 'index{{ domain.id }}_{{ cssVersion }}.css.map',
+						sourceMapRootpath: '../../../'
+					}
+				},
+			{% endfor -%}
+
+			{% for domain in domains -%}
+				wysiwyg{{ domain.id }}: {
+					files: {
+						'web/assets/admin/styles/wysiwyg_{{ cssVersion }}.css': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/wysiwyg.less'
+					},
+					options: {
+						compress: true
+					}
+				},
+			{% endfor -%}
+
+			{% for domain in domains -%}
+				wysiwygLocalized{{ domain.id }}: {
+					files: {
+						'web/assets/admin/styles/wysiwyg-localized_{{ cssVersion }}.css': '{{ (rootStylesDirectory ~ '/admin/')|raw }}/wysiwyg-localized.less'
+					},
+					options: {
+						compress: true
+					}
+				}{% if not loop.last %},{% endif %}
+			{% endfor -%}
+		},
+
+		postcss: {
+			options: {
+				processors: [
+					require('autoprefixer')({browsers: ['last 3 versions', 'ios 6', 'Safari 7', 'Safari 8', 'ie 7', 'ie 8', 'ie 9']})
+				]
+			},
+			dist: {
+				src: ['web/assets/frontend/styles/*.css', 'web/assets/admin/styles/*.css']
+			}
+		},
+
+		legacssy: {
+			admin: {
+				options: {
+					legacyWidth: 1200,
+					matchingOnly: false,
+					overridesOnly: false
+				},
+				files: {
+					'web/assets/admin/styles/index_{{ cssVersion }}-ie8.css': 'web/assets/admin/styles/index_{{ cssVersion }}.css'
+				}
+			},
+
+			{% for domain in domains -%}
+				frontend{{ domain.id }}: {
+					options: {
+						legacyWidth: 1200,
+						matchingOnly: false,
+						overridesOnly: false
+					},
+					files: {
+						'web/assets/frontend/styles/index{{ domain.id }}_{{ cssVersion }}-ie8.css': 'web/assets/frontend/styles/index{{ domain.id }}_{{ cssVersion }}.css'
+					}
+				}{% if not loop.last %},{% endif %}
+
+			{% endfor -%}
+		},
+
+		sprite: {
+			admin: {
+				src: 'web/assets/admin/images/icons/*.png',
+				dest: 'web/assets/admin/images/sprites/sprite.png',
+				destCss: '{{ rootStylesDirectory|raw }}/admin/libs/sprites.less',
+				imgPath: '../images/sprites/sprite.png?v=' + (new Date().getTime()),
+				algorithm: 'binary-tree',
+				padding: 50,
+				cssFormat: 'css',
+				cssVarMap: function (sprite) {
+					sprite.name = 'sprite.sprite-' + sprite.name;
+				},
+				engineOpts: {
+					imagemagick: true
+				},
+				imgOpts: {
+					format: 'png',
+					quality: 90,
+					timeout: 10000
+				},
+				cssOpts: {
+					functions: false,
+					cssClass: function (item) {
+						return '.' + item.name;
+					},
+					cssSelector: function (sprite) {
+						return '.' + sprite.name;
+					}
+				}
+			},
+
+			frontend: {
+				src: 'web/assets/frontend/images/icons/*.png',
+				dest: 'web/assets/frontend/images/sprites/sprite.png',
+				destCss: '{{ rootStylesDirectory|raw }}/front/common/libs/sprites.less',
+				imgPath: '../images/sprites/sprite.png?v=' + (new Date().getTime()),
+				algorithm: 'binary-tree',
+				padding: 50,
+				cssFormat: 'css',
+				cssVarMap: function (sprite) {
+					sprite.name = 'sprite.sprite-' + sprite.name;
+				},
+				engineOpts: {
+					imagemagick: true
+				},
+				imgOpts: {
+					format: 'png',
+					quality: 90,
+					timeout: 10000
+				},
+				cssOpts: {
+					functions: false,
+					cssClass: function (item) {
+						return '.' + item.name;
+					},
+					cssSelector: function (sprite) {
+						return '.' + sprite.name;
+					}
+				}
+			}
+		},
+
+		webfont: {
+			admin: {
+				src: 'src/Shopsys/ShopBundle/Resources/svg/admin/*.svg',
+				dest: 'web/assets/admin/fonts',
+				destCss: 'src/Shopsys/ShopBundle/Resources/styles/admin/libs/',
+				options: {
+					autoHint: false,
+					font: 'svg',
+					hashes: true,
+					types: 'eot,woff,ttf,svg',
+					engine: 'node',
+					stylesheet: 'less',
+					relativeFontPath: '../fonts',
+					fontHeight: '512',
+					descent: '0',
+					destHtml: 'docs/admin',
+					templateOptions: {
+						baseClass: 'svg',
+						classPrefix: 'svg-',
+						mixinPrefix: 'svg-'
+					}
+				}
+			},
+			frontend: {
+				src: 'src/Shopsys/ShopBundle/Resources/svg/front/*.svg',
+				dest: 'web/assets/frontend/fonts',
+				destCss: 'src/Shopsys/ShopBundle/Resources/styles/front/common/libs/',
+				options: {
+					autoHint: false,
+					font: 'svg',
+					hashes: true,
+					types: 'eot,woff,ttf,svg',
+					engine: 'node',
+					stylesheet: 'less',
+					relativeFontPath: '../fonts',
+					fontHeight: '512',
+					descent: '0',
+					destHtml: 'docs/frontend',
+					templateOptions: {
+						baseClass: 'svg',
+						classPrefix: 'svg-',
+						mixinPrefix: 'svg-'
+					}
+				}
+			}
+		},
+
+		watch: {
+			admin: {
+				files: [
+					'{{ rootStylesDirectory|raw }}/admin/**/*.less',
+					'!{{ rootStylesDirectory|raw }}/admin/helpers.less',
+					'!{{ rootStylesDirectory|raw }}/admin/helpers/*.less',
+					'{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less'
+				],
+				tasks: ['adminLess']
+			},
+			adminHelpers: {
+				files: [
+					'{{ rootStylesDirectory|raw }}/admin/helpers.less',
+					'{{ rootStylesDirectory|raw }}/admin/helpers/*.less',
+					'!{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less'
+				],
+				tasks: ['less:helpersAdmin']
+			},
+			adminSprite: {
+				files: ['web/assets/admin/images/icons/**/*.png'],
+				tasks: ['sprite:admin'],
+				options: {
+					livereload: true
+				}
+			},
+			adminWebfont: {
+				files: ['src/Shopsys/ShopBundle/Resources/svg/admin/*.svg'],
+				tasks: ['webfont:admin'],
+				options: {
+					livereload: true
+				}
+			},
+			frontendSprite: {
+				files: ['web/assets/frontend/images/icons/**/*.png'],
+				tasks: ['sprite:frontend'],
+				options: {
+					livereload: true
+				}
+			},
+			frontendWebfont: {
+				files: ['src/Shopsys/ShopBundle/Resources/svg/front/*.svg'],
+				tasks: ['webfont:frontend']
+			},
+			{% for domain in domains -%}
+				frontend{{ domain.id }}: {
+					files: [
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/**/*.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less',
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/*.less',
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/base.less'
+					],
+					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'frontendLess{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
+					{% else -%}
+						['frontendLess{{ domain.id }}']
+					{% endif -%}
+				},
+				helpers{{ domain.id }}: {
+					files: [
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less',
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less',
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/*.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/base.less'
+					],
+					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'less:helpers{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
+					{% else -%}
+						['frontendLess{{ domain.id }}']
+					{% endif -%}
+				},
+			{% endfor %}
+
+			livereload: {
+				options: {
+					livereload: true
+				},
+				files: ['web/assets/admin/styles/*.css', 'web/assets/frontent/styles/*.css']
+			},
+			twig: {
+				files: ['src/Shopsys/ShopBundle/Resources/views/**/*.twig'],
+				tasks: [],
+				options: {
+					livereload: true,
+				}
+			}
+		}
+	});
+	grunt.loadNpmTasks('grunt-spritesmith');
+
+	grunt.registerTask('default', ["sprite:admin", "sprite:frontend", "webfont", "less", "postcss", "legacssy"]);
+
+	{% for domain in domains -%}
+		grunt.registerTask('frontend{{ domain.id }}', ['webfont:frontend', 'sprite:frontend', 'less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}'], 'postcss');
+	{% endfor -%}
+	grunt.registerTask('admin', ['sprite:admin', 'webfont:admin', 'less:admin', 'legacssy:admin' ]);
+
+	{% for domain in domains -%}
+		grunt.registerTask('frontendLess{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
+	{% endfor -%}
+	grunt.registerTask('adminLess', ['less:admin', 'legacssy:admin' ]);
+};

@@ -1,2 +1,0 @@
-- name: mailTemplate
-  class: SS6\ShopBundle\Model\Mail\MailTemplate

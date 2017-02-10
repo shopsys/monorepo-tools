@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "168907dc803af2bf85f655682800ca76",
-    "content-hash": "e6ad71afa9a7948d116994401a41ed48",
+    "hash": "c45d9e6b3977ed92d200d3dbe335923a",
+    "content-hash": "5b856e0ec2ed30fb2005b98de4396a67",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -5748,16 +5748,16 @@
         },
         {
             "name": "shopsys/coding-standards",
-            "version": "v1.2.2",
+            "version": "v1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/coding-standards.git",
-                "reference": "1e00054500b95728692dd9e57e1b2d1e4d53baaf"
+                "reference": "ea6a5da29b02721fa5b65b4587f50d77e0d63d22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/coding-standards/zipball/1e00054500b95728692dd9e57e1b2d1e4d53baaf",
-                "reference": "1e00054500b95728692dd9e57e1b2d1e4d53baaf",
+                "url": "https://api.github.com/repos/shopsys/coding-standards/zipball/ea6a5da29b02721fa5b65b4587f50d77e0d63d22",
+                "reference": "ea6a5da29b02721fa5b65b4587f50d77e0d63d22",
                 "shasum": ""
             },
             "require": {
@@ -5783,10 +5783,10 @@
             ],
             "description": "Common coding standards for new ShopSys projects",
             "support": {
-                "source": "https://github.com/shopsys/coding-standards/tree/v1.2.2",
+                "source": "https://github.com/shopsys/coding-standards/tree/ms-loosen-line-length",
                 "issues": "https://github.com/shopsys/coding-standards/issues"
             },
-            "time": "2017-01-06 10:16:03"
+            "time": "2017-02-07 13:26:04"
         },
         {
             "name": "shopsys/phpstorm-inspect",

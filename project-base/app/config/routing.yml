@@ -1,5 +1,5 @@
-ss6_shop:
-  resource: "@SS6ShopBundle/Resources/config/routing.yml"
+shopsys_shop:
+  resource: "@ShopsysShopBundle/Resources/config/routing.yml"
   prefix: /
   
 elfinder:

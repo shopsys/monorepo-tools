@@ -1,6 +1,0 @@
-domains_urls:
-  - id: 1
-    url: http://shopsys6:8080
-
-  - id: 2
-    url: http://2.shopsys6:8080

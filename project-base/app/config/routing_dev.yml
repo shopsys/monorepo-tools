@@ -10,8 +10,8 @@ _configurator:
   resource: "@SensioDistributionBundle/Resources/config/routing/webconfigurator.xml"
   prefix: /_configurator
 
-ss6_generator:
-  resource: "@SS6GeneratorBundle/Resources/config/routing.yml"
+shopsys_generator:
+  resource: "@ShopsysGeneratorBundle/Resources/config/routing.yml"
   prefix: /
 
 _main:

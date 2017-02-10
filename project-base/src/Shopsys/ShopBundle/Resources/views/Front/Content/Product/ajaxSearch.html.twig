@@ -1,0 +1,20 @@
+{% import '@ShopsysShop/Front/Content/Product/filterFormMacro.html.twig' as productFilterForm %}
+
+<div class="box-filter js-product-filter">
+	{{ productFilterForm.filterForm(
+		filterForm,
+		url('front_product_search'),
+		url('front_product_search', { SEARCH_TEXT_PARAMETER : searchText }),
+		searchText,
+		'search',
+		productFilterCountData,
+		priceRange
+	) }}
+</div>
+
+<div class="js-product-list-ajax-filter-products-with-controls">
+	<div>
+		{{ render(controller('ShopsysShopBundle:Front/Product:selectOrderingModeForSearch')) }}
+	</div>
+	{% include '@ShopsysShop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited, searchText: searchText} %}
+</div>

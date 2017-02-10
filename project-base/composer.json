@@ -1,18 +1,17 @@
 {
 	"name": "shopsys/shopsys",
 	"type": "project",
-	"description": "Copyright by netdevelo s.r.o.",
-	"version": "6.0.0-dev",
+	"description": "ShopSys Framework",
 	"autoload": {
 		"psr-4": {
-			"SS6\\": [
+			"Shopsys\\": [
 				"app/",
-				"src/SS6/"
+				"src/Shopsys/"
 			]
 		},
 		"files": [
-			"src/SS6/ShopBundle/Component/Translation/functions.php",
-			"src/SS6/ShopBundle/Component/VarDumper/functions.php"
+			"src/Shopsys/ShopBundle/Component/Translation/functions.php",
+			"src/Shopsys/ShopBundle/Component/VarDumper/functions.php"
 		]
 	},
 	"repositories": [
@@ -102,7 +101,7 @@
 		"ext-pgsql": "*",
 		"ext-zip": "*",
 		"codeception/codeception": "2.2.3",
-		"shopsys/coding-standards": "1.2.2",
+		"shopsys/coding-standards": "1.2.3",
 		"shopsys/phpstorm-inspect": "1.0.4",
 		"symfony/web-profiler-bundle": "2.8.2"
 	},
@@ -110,12 +109,12 @@
 		"post-install-cmd": [
 			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
 			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-			"SS6\\Environment::checkEnvironment"
+			"Shopsys\\Environment::checkEnvironment"
 		],
 		"post-update-cmd": [
 			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
 			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-			"SS6\\Environment::checkEnvironment"
+			"Shopsys\\Environment::checkEnvironment"
 		]
 	},
 	"config": {

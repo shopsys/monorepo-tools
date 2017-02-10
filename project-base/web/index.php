@@ -4,7 +4,7 @@
 // read http://symfony.com/doc/current/book/installation.html#configuration-and-setup for more information
 umask(0002);
 
-use SS6\Bootstrap;
+use Shopsys\Bootstrap;
 
 if (file_exists(__DIR__ . '/../MAINTENANCE')) {
 	require __DIR__ . '/../app/maintenance.php';

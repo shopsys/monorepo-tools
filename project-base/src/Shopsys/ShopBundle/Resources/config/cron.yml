@@ -1,0 +1,55 @@
+- service: Shopsys\ShopBundle\Component\Error\Reporting\ErrorReportingFromLastHourCronModule
+  time:
+    hours: '*'
+    minutes: '55'
+
+- service: Shopsys\ShopBundle\Model\Pricing\Vat\VatDeletionCronModule
+  time:
+    hours: '*'
+    minutes: '*'
+
+- service: Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCronModule
+  time:
+    hours: '*'
+    minutes: '*'
+
+- service: Shopsys\ShopBundle\Model\Product\ProductVisibilityImmediateCronModule
+  time:
+    hours: '*'
+    minutes: '*'
+
+- service: Shopsys\ShopBundle\Model\Product\ProductVisibilityMidnightCronModule
+  time:
+    hours: '0'
+    minutes: '0'
+
+- service: Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCronModule
+  time:
+    hours: '*'
+    minutes: '*'
+
+- service: Shopsys\ShopBundle\Model\Feed\FeedCronModule
+  time:
+    hours: '*/6'
+    minutes: '0'
+
+- service: Shopsys\ShopBundle\Model\Feed\DeliveryFeedCronModule
+  time:
+    hours: '*'
+    minutes: '10'
+
+- service: Shopsys\ShopBundle\Component\Sitemap\SitemapCronModule
+  time:
+    hours: '4'
+    minutes: '0'
+
+- service: Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryCronModule
+  time:
+    hours: '3'
+    minutes: '0'
+
+# This module should run as last because it creates multiple kernels and fake requests.
+- service: Shopsys\ShopBundle\Component\Error\ErrorPageCronModule
+  time:
+    hours: '21'
+    minutes: '10'

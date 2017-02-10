@@ -19,35 +19,35 @@ doctrine:
     auto_generate_proxy_classes: false
     dql:
       string_functions:
-        collate: SS6\ShopBundle\Component\Doctrine\CollateFunction
-        normalize: SS6\ShopBundle\Component\Doctrine\NormalizeFunction
+        collate: Shopsys\ShopBundle\Component\Doctrine\CollateFunction
+        normalize: Shopsys\ShopBundle\Component\Doctrine\NormalizeFunction
     naming_strategy: doctrine.orm.naming_strategy.underscore
     metadata_cache_driver:
       type: service
-      id: ss6.doctrine.cache_driver.metadata_cache
+      id: shopsys.doctrine.cache_driver.metadata_cache
     query_cache_driver:
       type: service
-      id: ss6.doctrine.cache_driver.query_cache
+      id: shopsys.doctrine.cache_driver.query_cache
     auto_mapping: false
     mappings:
-      SS6ShopBundle:
+      ShopsysShopBundle:
         type: annotation
-        dir: %kernel.root_dir%/../src/SS6/ShopBundle/Model
-        alias: SS6ShopBundle
-        prefix: SS6\ShopBundle\Model
+        dir: %kernel.root_dir%/../src/Shopsys/ShopBundle/Model
+        alias: ShopsysShopBundle
+        prefix: Shopsys\ShopBundle\Model
         is_bundle: false
-      SS6ShopBundleComponent:
+      ShopsysShopBundleComponent:
         type: annotation
-        dir: %kernel.root_dir%/../src/SS6/ShopBundle/Component
-        alias: SS6ShopBundleComponent
-        prefix: SS6\ShopBundle\Component
+        dir: %kernel.root_dir%/../src/Shopsys/ShopBundle/Component
+        alias: ShopsysShopBundleComponent
+        prefix: Shopsys\ShopBundle\Component
         is_bundle: false
     hydrators:
-      GroupedScalarHydrator: \SS6\ShopBundle\Component\Doctrine\GroupedScalarHydrator
+      GroupedScalarHydrator: \Shopsys\ShopBundle\Component\Doctrine\GroupedScalarHydrator
 
 doctrine_migrations:
-    dir_name: "%kernel.root_dir%/../src/SS6/ShopBundle/Migrations"
-    namespace: SS6\ShopBundle\Migrations
+    dir_name: "%kernel.root_dir%/../src/Shopsys/ShopBundle/Migrations"
+    namespace: Shopsys\ShopBundle\Migrations
     table_name: migrations
     name: Migrations
 
@@ -126,12 +126,12 @@ prezent_doctrine_translatable:
   # (currentLocale of entities should be set by request or stay NULL)
   fallback_locale: ~
 
-ss6_shop:
+shopsys_shop:
   router:
     locale_router_filepaths:
-      cs: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_front_cs.yml
-      en: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_front_en.yml
-    friendly_url_router_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_friendly_url.yml
+      cs: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/routing_front_cs.yml
+      en: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/routing_front_en.yml
+    friendly_url_router_filepath: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/routing_friendly_url.yml
 
 stof_doctrine_extensions:
   orm:
@@ -151,15 +151,15 @@ swiftmailer:
 
 twig:
   debug: "%kernel.debug%"
-  exception_controller: 'SS6\ShopBundle\Controller\Front\ErrorController::showAction'
+  exception_controller: 'Shopsys\ShopBundle\Controller\Front\ErrorController::showAction'
   form:
     resources:
-      - '@SS6Shop/Common/Form/theme.html.twig'
-      - '@SS6Shop/Admin/Form/colorpickerFields.html.twig'
-      - '@SS6Shop/Admin/Form/fileuploadFields.html.twig'
+      - '@ShopsysShop/Common/Form/theme.html.twig'
+      - '@ShopsysShop/Admin/Form/colorpickerFields.html.twig'
+      - '@ShopsysShop/Admin/Form/fileuploadFields.html.twig'
   strict_variables: true
   globals:
-    globalMultipleFormSetting: @ss6.shop.component.form.multiple_form_setting
+    globalMultipleFormSetting: @shopsys.shop.component.form.multiple_form_setting
 
 imports:
     - { resource: wysiwyg.yml }

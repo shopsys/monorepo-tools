@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ShopSys6" default="build">
+<project name="ShopSys Framework" default="build">
 
 	<property file="${project.basedir}/build/build.local.properties" />
 
@@ -26,13 +26,13 @@
 	<property name="path.phpcs-fixer.executable" value="${path.bin}/php-cs-fixer"/>
 	<property name="path.phpcs-fixer.configuration" value="${path.build}/phpcs-fixer.php_cs"/>
 	<property name="path.phplint.executable" value="${path.bin}/parallel-lint"/>
-	<property name="path.phplint.ignored" value="${path.src}/SS6/ShopBundle/Tests/Test/Codeception/_generated"/>
+	<property name="path.phplint.ignored" value="${path.src}/Shopsys/ShopBundle/Tests/Test/Codeception/_generated"/>
 	<property name="path.phpmd.executable" value="${path.bin}/phpmd"/>
 	<property name="path.phpmd.ignored" value="_generated"/>
 	<property name="path.phpmd.ruleset" value="${path.vendor}/shopsys/coding-standards/rulesetMD.xml"/>
 	<property name="path.phpstorm.inspect.sh" value="/opt/PhpStorm-145.1616.3/bin/inspect.sh"/>
-	<property name="path.phpstorm.project" value="${path.build}/phpstorm/ShopSys6/"/>
-	<property name="path.phpstorm.project.inspection-profile" value="${path.build}/phpstorm/ShopSys6/.idea/inspectionProfiles/Project_Default.xml"/>
+	<property name="path.phpstorm.project" value="${path.build}/phpstorm/ShopSys/"/>
+	<property name="path.phpstorm.project.inspection-profile" value="${path.build}/phpstorm/ShopSys/.idea/inspectionProfiles/Project_Default.xml"/>
 	<property name="path.phpstorm.system" value="/home/jenkins/.PhpStorm2016.1/system"/>
 	<property name="path.phpstorm-inspect.executable" value="${path.bin}/phpstorm-inspect"/>
 	<property name="path.phpunit.configuration" value="${path.app}/phpunit.xml"/>
@@ -40,7 +40,7 @@
 	<property name="path.root" value="."/>
 	<property name="path.src" value="${path.root}/src"/>
 	<property name="path.test.database.dump" value="${path.app}/cache/test-db-dump.sql"/>
-	<property name="path.translations.custom" value="${path.root}/src/SS6/ShopBundle/Resources/translations/custom"/>
+	<property name="path.translations.custom" value="${path.root}/src/Shopsys/ShopBundle/Resources/translations/custom"/>
 	<property name="path.vendor" value="${path.root}/vendor"/>
 	<property name="path.web" value="${path.root}/web"/>
 	<property name="path.web.scripts" value="${path.web}/assets/scripts"/>
@@ -131,21 +131,21 @@
 	<target name="create-domains-data" description="Create domains data for new domains">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:domains-data:create" />
+			<arg value="shopsys:domains-data:create" />
 		</exec>
 	</target>
 
 	<target name="cron" description="Runs background jobs. Should be executed periodically by system CRON every 5 minutes.">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:cron" />
+			<arg value="shopsys:cron" />
 		</exec>
 	</target>
 
 	<target name="cron-list" description="List all background jobs.">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:cron" />
+			<arg value="shopsys:cron" />
 			<arg value="--list" />
 		</exec>
 	</target>
@@ -160,18 +160,18 @@
 	<target name="db-create" description="Create database public schema and import basic database structure (without migrations)">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:schema:create" />
+			<arg value="shopsys:schema:create" />
 		</exec>
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:schema:import-default" />
+			<arg value="shopsys:schema:import-default" />
 		</exec>
 	</target>
 
 	<target name="db-drop" description="Drop database public schema">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:schema:drop" />
+			<arg value="shopsys:schema:drop" />
 		</exec>
 	</target>
 
@@ -179,26 +179,26 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
+			<arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
 
-	<target name="db-fixtures-demo-multidomain" description="Load multidomain demo data fixtures excluding first domain, run ss6:recalculations">
+	<target name="db-fixtures-demo-multidomain" description="Load multidomain demo data fixtures excluding first domain, run shopsys:recalculations">
 		<if>
 			<istrue value="${is-multidomain}" />
 			<then>
 				<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 					<arg value="app/console" />
 					<arg value="doctrine:fixtures:load" />
-					<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/DemoMultidomain" />
+					<arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/DemoMultidomain" />
 					<arg value="--append" />
 					<arg value="--no-interaction" />
 				</exec>
 				<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 					<arg value="app/console" />
-					<arg value="ss6:recalculations" />
+					<arg value="shopsys:recalculations" />
 				</exec>
 			</then>
 			<else>
@@ -207,18 +207,18 @@
 		</if>
 	</target>
 
-	<target name="db-fixtures-demo-singledomain" description="Load base and demo data fixtures for first domain, run ss6:recalculations">
+	<target name="db-fixtures-demo-singledomain" description="Load base and demo data fixtures for first domain, run shopsys:recalculations">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
+			<arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
+			<arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Demo" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
 		</exec>
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:recalculations" />
+			<arg value="shopsys:recalculations" />
 		</exec>
 	</target>
 
@@ -260,7 +260,7 @@
 	<target name="dirs-create" description="creates application directories for locks, docs, content, images, uploaded files, etc.">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:create-directories" />
+			<arg value="shopsys:create-directories" />
 		</exec>
 	</target>
 
@@ -279,16 +279,16 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="translation:extract" />
-			<arg value="--bundle=SS6ShopBundle" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Component/Controller" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Component/Form" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Component/Grid" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Controller" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Form" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Model" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/views" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/scripts" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Twig" />
+			<arg value="--bundle=ShopsysShopBundle" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Controller" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Form" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Grid" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Controller" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Form" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Model" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/views" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/scripts" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Twig" />
 			<arg value="--exclude-dir=admin/plugins" />
 			<arg value="--exclude-dir=frontend/plugins" />
 			<arg value="--exclude-dir=admin" />
@@ -305,7 +305,7 @@
 	<target name="error-pages-generate" description="Generate all error pages for production">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:error-page:generate-all" />
+			<arg value="shopsys:error-page:generate-all" />
 		</exec>
 	</target>
 
@@ -316,14 +316,14 @@
 	<target name="gruntfile" description="Generate Gruntfile.js by domain settings">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:generate:gruntfile" />
+			<arg value="shopsys:generate:gruntfile" />
 		</exec>
 	</target>
 
 	<target name="img-demo" description="Install demo images">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:image:demo" />
+			<arg value="shopsys:image:demo" />
 		</exec>
 	</target>
 
@@ -358,7 +358,7 @@
 	<target name="replace-domains-urls" description="Replace domains urls in database by urls in domains config">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:domains-urls:replace" />
+			<arg value="shopsys:domains-urls:replace" />
 		</exec>
 	</target>
 
@@ -372,7 +372,7 @@
 	<target name="generate-friendly-urls" description="Generate friendly urls for supported entities">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:generate:friendly-url" />
+			<arg value="shopsys:generate:friendly-url" />
 		</exec>
 	</target>
 

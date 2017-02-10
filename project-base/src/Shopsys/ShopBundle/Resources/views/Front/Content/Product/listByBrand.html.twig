@@ -1,0 +1,35 @@
+{% extends '@ShopsysShop/Front/Layout/layoutWithPanel.html.twig' %}
+{% import '@ShopsysShop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
+{% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
+
+{% block meta_robots %}
+	{{ paginator.metaRobots(paginationResult) }}
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} - {{ 'Product catalogue - %brandName%'|trans({'%brandName%' : brand.name}) }}
+{% endblock %}
+
+{% block main_content %}
+	<div class="box-list">
+		<h1>{{ brand.name }}</h1>
+
+		<div class="box-list__producer">
+			<div class="box-list__producer__image">
+				{{ image(brand, { alt: brand.name }) }}
+			</div>
+			<div class="box-list__producer__text">
+				{% if brand.description is not null %}
+					{{ brand.description|raw }}
+				{% endif %}
+			</div>
+		</div>
+
+		<div>
+			{{ render(controller('ShopsysShopBundle:Front/Product:selectOrderingModeForListByBrand')) }}
+			{% include '@ShopsysShop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: false } %}
+		</div>
+
+	</div>
+
+{% endblock %}

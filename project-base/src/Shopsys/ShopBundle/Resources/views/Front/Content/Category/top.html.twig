@@ -1,0 +1,3 @@
+<h2>{{ 'Popular categories'|trans }}</h2>
+
+{{ render(controller('ShopsysShopBundle:Front/Category:categoryList', {categories: categories, showProductsCountByCategory: false})) }}

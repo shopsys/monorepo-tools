@@ -1,0 +1,14 @@
+{% extends '@ShopsysShop/Admin/Content/Customer/detail.html.twig' %}
+
+{% block title %}- {{ 'New customer'|trans }}{% endblock %}
+{% block h1 %}{{ 'New customer'|trans }}{% endblock %}
+
+{% block customer_domain %}
+	{{ form_row(form.userData.domainId, { label: 'Domain'|trans, attr: {class: 'js-change-price-categories'} }) }}
+{% endblock %}
+
+{% block customer_sendMail %}
+	{{ form_row(form.sendRegistrationMail, {
+		attr: { class: 'js-checkbox-toggle'},
+		label: 'Send confirmation e-mail about registration to customer'|trans }) }}
+{% endblock %}

@@ -1,0 +1,18 @@
+services:
+
+  shopsys.generator.generator_collection_factory:
+    class: Shopsys\GeneratorBundle\Model\GeneratorCollectionFactory
+    arguments:
+      - [%kernel.root_dir%/../src/Shopsys/GeneratorBundle/Resources/skeletons/]
+
+  shopsys.generator.generators_form_factory:
+    class: Shopsys\GeneratorBundle\Model\GeneratorsFormFactory
+    arguments:
+      - @kernel
+
+  shopsys.generator.generator_facade:
+    class: Shopsys\GeneratorBundle\Model\GeneratorFacade
+    arguments:
+      - @kernel
+
+

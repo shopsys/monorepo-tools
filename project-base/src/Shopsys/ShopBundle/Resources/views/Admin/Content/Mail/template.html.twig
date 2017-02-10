@@ -1,0 +1,146 @@
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'E-mail templates settings'|trans }}{% endblock %}
+{% block h1 %}{{ 'E-mail templates settings'|trans }}{% endblock %}
+
+{% block main_content %}
+
+	<div id="js-mail-templates">
+
+		{{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
+
+		{% macro mailTemplate(name, mailTemplate, templateForm,variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText) %}
+			<div class="js-mail-template-toggle-container js-toggle-container form-group wrap-border">
+				<h2 class ="form-group__title">
+						{{ name }}
+					<span class="form-group__title__click js-toggle-button">+</span>
+				</h2>
+				<div id="{{ templateForm.vars.id }}" class="js-mail-template js-toggle-content display-none box-expand__hidden">
+					{{ form_row(templateForm.subject, { label: 'Subject'|trans}) }}
+					{{ form_row(templateForm.bccEmail, { label: 'Hidden copy'|trans}) }}
+					{{ form_row(templateForm.body, { label: 'Content'|trans}) }}
+					{% if hasUploadedFile(mailTemplate) %}
+						<div class="form-line js-mail-template-attachment">
+							<label class="form-line__label">
+								{{ 'Attachment'|trans }}:
+							</label>
+							<div class="form-line__line">
+								<div class="list-images__item">
+									<div class="list-images__item__in">
+										<a href="{{ uploadedFileUrl(mailTemplate) }}" target="_blank" class="list-images__item__image">
+											{{ uploadedFilePreview(mailTemplate) }}
+											<div>{{ getUploadedFile(mailTemplate).filename }}</div>
+										</a>
+										<button class="js-mail-template-attachment-delete-button btn-no-style list-images__item__remove" type="button" title="{{ 'Delete'|trans }}">
+											<i class="svg svg-circle-cross"></i>
+										</button>
+										<button
+											class="btn-no-style js-mail-template-attachment-delete-revert-button list-images__item__revert js-mail-template-attachment-delete-revert"
+											type="button"
+											title="{{ 'Return back'|trans }}"
+										>
+											<i class="svg svg-arrow-back"></i>
+										</button>
+										<span class="list-images__item__overlay js-mail-template-attachment-delete-revert">{{ 'File will be deleted after saving.'|trans }}</span>
+										{{ form_widget(templateForm.deleteAttachment, {attr: {class: 'display-none js-mail-template-attachment-delete-checkbox'}}) }}
+									</div>
+								</div>
+							</div>
+						</div>
+					{% else %}
+						{% do templateForm.deleteAttachment.setRendered %}
+					{% endif %}
+					{{ form_row(templateForm.attachment, { label: 'Upload attachment'|trans}) }}
+					{% if sendMailText is not null %}
+						{{ form_row(templateForm.sendMail, { label: sendMailText, attr: {class: 'js-send-mail-checkbox'} }) }}
+					{% else %}
+						{{ form_widget(templateForm.sendMail, { 'attr': {'class': 'display-none'} }) }}
+					{% endif %}
+
+					<table class="table-main">
+						<thead>
+							<tr>
+								<th>
+									{{ 'Applicable variables'|trans }}
+									{% if variablesInfoText is not null %}
+										<i class="svg svg-info cursor-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
+									{% endif %}
+								</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for key in variables %}
+								<tr>
+									<td>
+										{{ key }}
+										{% if key in requiredVariables %}
+											<span class="form-input-required">*</span>
+										{% endif %}
+									</td>
+									<td>{{ variablesLabels[key] }}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		{% endmacro%}
+
+		{{ form_start(form) }}
+		{{ form_errors(form) }}
+			{% for orderStatusId, orderStatusTemplate in form.orderStatusTemplates %}
+				{% set orderStatus = orderStatusesIndexedById[orderStatusId] %}
+				{% if orderStatus.type == TYPE_NEW %}
+					{{ _self.mailTemplate(
+							orderStatus.name,
+							orderStatusMailTemplatesByOrderStatusId[orderStatusId],
+							orderStatusTemplate,
+							orderStatusVariables,
+							[],
+							orderStatusVariablesLabels,
+							'Only variables for order number and date and time of order creation can be used in the object.'|trans,
+							'Send confirmation of order receipt'|trans
+					) }}
+				{% else %}
+					{{ _self.mailTemplate(
+							orderStatus.name,
+							orderStatusMailTemplatesByOrderStatusId[orderStatusId],
+							orderStatusTemplate,
+							orderStatusVariables,
+							[],
+							orderStatusVariablesLabels,
+							'Only variables for order number and date and time of order creation can be used in the object.'|trans,
+							'Send e-mail about change to this status'|trans
+					) }}
+				{% endif %}
+			{% endfor %}
+
+			{{ _self.mailTemplate(
+				'Registration confirmation'|trans,
+				registrationMailTemplate,
+				form.registrationTemplate,
+				registrationVariables,
+				[],
+				registrationVariablesLabels
+			) }}
+
+			{{ _self.mailTemplate(
+				'Forgotten password sending'|trans,
+				resetPasswordMailTemplate,
+				form.resetPasswordTemplate,
+				resetPasswordVariables,
+				resetPasswordRequiredVariables,
+				resetPasswordVariablesLabels
+			) }}
+
+			{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+				{% block fixed_bar_content %}
+					{{ form_widget(form.save, { label: 'Save changes in all templates'|trans}) }}
+				{% endblock %}
+			{% endembed %}
+		{{ form_end(form) }}
+
+	</div>
+
+{% endblock %}

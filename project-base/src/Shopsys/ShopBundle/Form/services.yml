@@ -1,0 +1,105 @@
+services:
+  shopsys.shop.form.categories:
+    class: Shopsys\ShopBundle\Form\CategoriesType
+    tags:
+      - { name: form.type, alias: categories }
+
+  shopsys.shop.form.collection:
+    class: Shopsys\ShopBundle\Form\CollectionType
+    tags:
+      - { name: form.type_extension, alias: collection }
+
+  shopsys.shop.form.color_picker:
+    class: Shopsys\ShopBundle\Form\ColorPickerType
+    tags:
+      - { name: form.type, alias: color_picker }
+
+  shopsys.shop.form.currency:
+    class: Shopsys\ShopBundle\Form\CurrencyType
+    tags:
+      - { name: form.type, alias: currency }
+
+  shopsys.shop.form.date_picker:
+    class: Shopsys\ShopBundle\Form\DatePickerType
+    tags:
+      - { name: form.type, alias: date_picker }
+
+  shopsys.shop.form.domains:
+    class: Shopsys\ShopBundle\Form\DomainsType
+    tags:
+      - { name: form.type, alias: domains }
+
+  shopsys.shop.form.domain:
+    class: Shopsys\ShopBundle\Form\DomainType
+    tags:
+      - { name: form.type, alias: domain }
+
+  shopsys.shop.form.file_upload:
+    class: Shopsys\ShopBundle\Form\FileUploadType
+    tags:
+      - { name: form.type, alias: file_upload }
+
+  shopsys.shop.form.friendly_url:
+    class: Shopsys\ShopBundle\Form\FriendlyUrlType
+    tags:
+      - { name: form.type, alias: friendly_url }
+
+  shopsys.shop.form.honey_pot:
+    class: Shopsys\ShopBundle\Form\HoneyPotType
+    tags:
+      - { name: form.type, alias: honey_pot }
+
+  shopsys.shop.form.locale.text:
+    class: Shopsys\ShopBundle\Form\Locale\LocalizedType
+    tags:
+      - { name: form.type, alias: localized }
+
+  shopsys.shop.form.money:
+    class: Shopsys\ShopBundle\Form\MoneyType
+    tags:
+      - { name: form.type_extension, alias: money }
+
+  shopsys.shop.form.multidomain:
+    class: Shopsys\ShopBundle\Form\MultidomainType
+    tags:
+      - { name: form.type, alias: multidomain }
+
+  shopsys.shop.form.product:
+    class: Shopsys\ShopBundle\Form\ProductType
+    tags:
+      - { name: form.type, alias: product }
+
+  shopsys.shop.form.products:
+    class: Shopsys\ShopBundle\Form\ProductsType
+    tags:
+      - { name: form.type, alias: products }
+
+  shopsys.shop.form.single_checkbox_choice_type:
+    class: Shopsys\ShopBundle\Form\SingleCheckboxChoiceType
+    tags:
+      - { name: form.type, alias: single_checkbox_choice }
+
+  shopsys.shop.form.sortable_values_type:
+    class: Shopsys\ShopBundle\Form\SortableValuesType
+    tags:
+      - { name: form.type, alias: sortable_values }
+
+  shopsys.shop.form.timed_form:
+    class: Shopsys\ShopBundle\Form\TimedFormTypeExtension
+    tags:
+      - { name: form.type_extension, alias: form }
+
+  shopsys.shop.form.url_list:
+    class: Shopsys\ShopBundle\Form\UrlListType
+    tags:
+      - { name: form.type, alias: url_list }
+
+  shopsys.shop.form.wysiwyg:
+    class: Shopsys\ShopBundle\Form\WysiwygType
+    tags:
+      - { name: form.type_extension, alias: ckeditor }
+
+  shopsys.shop.form.yes_no:
+    class: Shopsys\ShopBundle\Form\YesNoType
+    tags:
+      - { name: form.type, alias: yes_no }

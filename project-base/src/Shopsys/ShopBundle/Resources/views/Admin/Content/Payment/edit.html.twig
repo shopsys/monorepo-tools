@@ -1,0 +1,50 @@
+{% extends '@ShopsysShop/Admin/Content/Payment/detail.html.twig' %}
+
+{% block title %}- {{ 'Editing payment'|trans }} - {{ paymentDetail.payment.name }}{% endblock %}
+{% block h1 %}{{ 'Editing payment'|trans }} - {{ paymentDetail.payment.name }}{% endblock %}
+
+{% block payment_base_prices %}
+	<div id="transport_prices">
+		<div class="form-price-heading">
+			<div class="form-price-heading__cell form-price-heading__cell--field">
+				{{ inputPriceLabel({ isSimple: true }) }}
+			</div>
+			<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price excluding VAT'|trans }}</div>
+			<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price including VAT'|trans }}</div>
+		</div>
+		{% for currencyId, currency in currencies %}
+			<div class="form-line">
+				<div class="form-line__label">
+					{{ form_label(form.prices[currencyId], 'Base price in %currencyCode%'|trans({'%currencyCode%': currency.code}), { isSimple: true } ) }}
+				</div>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						{{ form_widget(form.prices[currencyId], { symbolAfterInput: currencySymbolByCurrencyId(currencyId) }) }}
+					</div>
+					<div class="form-line__item--right">
+						<div class="form-line__item__price">
+							{{ paymentDetail.basePrices[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}
+						</div>
+						<div class="form-line__item__price">
+							<strong>{{ paymentDetail.basePrices[currencyId].priceWithVat|priceWithCurrencyByCurrencyId(currencyId) }}</strong>
+						</div>
+					</div>
+					{{ form_errors(form.prices[currencyId]) }}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
+
+{% block image %}
+	<div class="form-line">
+		<label class="form-line__label">
+			{{ 'Picture'|trans }}:
+		</label>
+		<div class="form-line__side">
+			<div class="form-line__item">
+				{{ image(paymentDetail.payment, { size: 'original', height: 100 }) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

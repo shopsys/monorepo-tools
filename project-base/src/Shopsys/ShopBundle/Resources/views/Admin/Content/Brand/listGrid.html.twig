@@ -1,0 +1,14 @@
+{% extends '@ShopsysShop/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_value_cell_id_name %}
+	<a href="{{ url('admin_brand_edit', { id: row.b.id }) }}">{{ value }}</a>
+{% endblock %}
+
+{% block grid_no_data %}
+	{{ 'No brands found. You have to create some first.'|trans }}
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+	{% set entityName = 'brands'|trans %}
+	{{ parent() }}
+{% endblock %}

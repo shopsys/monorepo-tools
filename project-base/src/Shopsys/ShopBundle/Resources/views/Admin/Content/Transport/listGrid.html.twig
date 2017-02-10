@@ -1,0 +1,13 @@
+{% extends '@ShopsysShop/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_value_cell_id_name %}
+	<a href="{{ url('admin_transport_edit', { id: row.t.id }) }}">{{ value }}</a>
+{% endblock %}
+
+{% block grid_value_cell_id_price %}
+	{{ value.basePrices[currencyIdForList].priceWithVat|priceWithCurrencyAdmin }}
+{% endblock %}
+
+{% block grid_no_data %}
+	{{ 'No shipping created so far.'|trans }}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Order statuses overview'|trans }}{% endblock %}
+{% block h1 %}{{ 'Order statuses overview'|trans }}{% endblock %}
+
+{% block main_content %}
+	<div id="js-order-status-delete-window"></div>
+
+	<div id="js-order-status-grid">
+		{{ gridView.render() }}
+	</div>
+{% endblock %}

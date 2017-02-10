@@ -1,3 +1,0 @@
-generator_index:
-  pattern: /_generator/
-  defaults: { _controller: SS6GeneratorBundle:Generator:index}

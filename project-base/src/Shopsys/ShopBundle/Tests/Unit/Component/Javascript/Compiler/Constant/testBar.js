@@ -1,0 +1,1 @@
+var x = Shopsys.constant('Shopsys\\ShopBundle\\Tests\\Unit\\Component\\Javascript\\Compiler\\Constant\\Testclass::BAR');

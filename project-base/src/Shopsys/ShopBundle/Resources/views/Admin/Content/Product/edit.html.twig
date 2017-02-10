@@ -1,0 +1,369 @@
+{% extends '@ShopsysShop/Admin/Content/Product/detail.html.twig' %}
+
+{% block title -%}
+	- {{ 'Editing product'|trans }} - {{ product|productDisplayName }}
+{% endblock %}
+
+{% block product_header_heading %}
+	<span>{{ 'Editing product'|trans }}: </span>{{ product.name }}
+{% endblock %}
+
+{% block menu_panel_visibilities %}
+	<div class="panel">
+		<div class="panel__in">
+			<div class="panel__in__title">
+				{{ 'Visibility'|trans }}
+			</div>
+			{% if productDetail.product.calculatedSellingDenied %}
+				<div class="in-message in-message--warning in-message--small in-message--block">
+					{{ 'Product excluded from sale.'|trans }}
+				</div>
+			{% endif %}
+			{% include '@ShopsysShop/Admin/Content/Product/visibilityItems.html.twig' with {productDetail: productDetail} only %}
+		</div>
+	</div>
+{% endblock %}
+
+{% block product_variants %}
+	{% if product.isVariant %}
+		<div class="wrap-border">
+			<div class="form-line">
+				<strong class="form-line__label">
+					{{ 'Product is variant'|trans }} :
+				</strong>
+				<div class="form-line__side">
+					<div class="form-line__item form-line__item--text">
+						<a href="{{ url('admin_product_edit', {id: product.mainVariant.id}) }}" target="_blank">
+							<i class="svg svg-forward-page in-icon in-icon--link ml5 mr5"></i>{{ product.mainVariant.name }}
+						</a>
+					</div>
+				</div>
+			</div>
+			{{ form_row(form.productData.variantAlias, { label: 'Variant alias'|trans }) }}
+		</div>
+	{% endif %}
+	{% if product.isMainVariant %}
+		<div class="wrap-border">
+			<strong>{{ 'Product is main variant.'|trans }}</strong>
+			{{ form_row(form.variants, { label: 'Variants'|trans, labelButtonAdd: 'Add variant'|trans }) }}
+		</div>
+	{% endif %}
+{% endblock %}
+
+{% block product_catnum %}
+	{% if product.isMainVariant %}
+		{{ form_row(form.productData.catnum, { label: 'Catalogue number'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
+{% block product_partno %}
+	{% if product.isMainVariant %}
+		{{ form_row(form.productData.partno, { label: 'PartNo (serial number)'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
+{% block product_ean %}
+	{% if product.isMainVariant %}
+		{{ form_row(form.productData.ean, { label: 'EAN'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
+{% block product_stock_and_availability %}
+	{% if product.isMainVariant %}
+		{{ form_row(form.productData.usingStock, { label: 'Use stocks'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
+		<div class="js-product-using-stock form-line__js">
+			{{ form_row(form.productData.stockQuantity, { label: 'Available in stock'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
+			{{ form_row(form.productData.outOfStockAction, { label: 'Action after sellout'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
+			<div class="js-product-using-stock-and-alternate-availability">
+				{{ form_row(form.productData.outOfStockAvailability, { label: 'Availability after sellout'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
+			</div>
+		</div>
+		<div class="js-product-not-using-stock form-line__js">
+			{{ form_row(form.productData.availability, { label: 'Availability'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
+		</div>
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
+{% block product_calculated_hidden_info %}
+	{% if product.isUsingStock and product.calculatedHidden and product.stockQuantity <= 0 %}
+		<div class="form-line">
+			<div class="form-line__line form-line__line--no-space">
+				<div class="in-message in-message--warning">
+					<span class="in-message__icon svg svg-warning"></span>
+					{{ 'Product is hidden due to sellout'|trans }}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}
+
+{% block product_calculated_selling_denied_info %}
+	{% if product.isUsingStock and product.calculatedSellingDenied and product.stockQuantity <= 0 %}
+		<div class="form-line">
+			<div class="form-line__line form-line__line--no-space">
+				<div class="in-message in-message--warning">
+					<span class="in-message__icon svg svg-warning"></span>
+					{{ 'Product is excluded from the sale due to sellout'|trans }}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}
+
+{% block product_main_categories %}
+	<div class="form-line">
+
+		{% if productMainCategoriesIndexedByDomainId|length > 1 %}
+			<label class="form-line__label">{{ 'Main category on domains:' |trans }}</label>
+		{% endif %}
+
+		{% for domainId, mainCategory in productMainCategoriesIndexedByDomainId %}
+			<div class="form-line__line">
+				{% if mainCategory is null %}
+					{% set mainCategoryName = '-' %}
+				{% else %}
+					{% set mainCategoryName = mainCategory.name %}
+				{% endif %}
+
+				<label class="form-line__label">
+					{% if productMainCategoriesIndexedByDomainId|length > 1 %}
+						{{ getDomainName(domainId) ~ ' :' }}
+					{% else %}
+						{{ 'Main category:' |trans }}
+					{% endif %}
+				</label>
+
+				<div class="form-line__side">
+					<div class="form-line__item wrap__input">
+						<input
+							type="text"
+							value="{{ mainCategoryName }}"
+							class="input{% if isMultidomain() %} input--domain{% endif %}"
+							readonly="readonly"
+						>
+						{% if isMultidomain() %}
+							<span class="input__domain">
+								{{ domainIcon(domainId) }}
+							</span>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+{% endblock %}
+
+{% block product_categories %}
+	{% if product.isVariant %}
+		{% do form.productData.categoriesByDomainId.setRendered %}
+		<div class="form-line">
+			{{ form_label(form.productData.categoriesByDomainId, 'Assign to category'|trans) }}
+			<div class="form-line__line">
+				<div class="form-line__item">
+					{{ 'You can set the categories on product detail of the main variant'|trans }}
+				</div>
+			</div>
+		</div>
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
+{% block product_pricing %}
+	{% if product.isMainVariant %}
+		<div class="form-line form-line--disabled">
+			<div class="form-line__item form-line__item--text">
+				<strong>{{ 'You can set the prices on product detail of specific variant.'|trans }}</strong>
+			</div>
+		</div>
+		{% do form.productData.priceCalculationType.setRendered %}
+		{% do form.productData.vat.setRendered %}
+		{% do form.productData.price.setRendered %}
+		{% do form.manualInputPrices.setRendered %}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
+{% block product_calculated_prices %}
+	<div class="form-price-heading">
+		<div class="form-price-heading__cell form-price-heading__cell--field">
+			{{ inputPriceLabel({ isSimple: true }) }}
+		</div>
+		<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price excluding VAT'|trans }}</div>
+		<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price including VAT'|trans }}</div>
+	</div>
+	<div class="form-line js-input-price-type-auto">
+		<div class="form-line__label">
+			{{ form_label(form.productData.price, 'Base price'|trans, { isSimple: true, compulsoryClass: 'form-line__compulsory' } ) }}
+		</div>
+		<div class="form-line__side">
+			<div class="form-line__item">
+				{{ form_widget(form.productData.price, { symbolAfterInput: currencySymbolDefault() }) }}
+			</div>
+			{% if productDetail.product.priceCalculationType == PRICE_CALCULATION_TYPE_AUTO %}
+				<div class="form-line__item--right">
+					<div class="form-line__item__price">{{ productDetail.basePriceForAutoPriceCalculationType.priceWithoutVat|priceWithCurrencyAdmin }}</div>
+					<div class="form-line__item__price"><strong>{{ productDetail.basePriceForAutoPriceCalculationType.priceWithVat|priceWithCurrencyAdmin }}</strong></div>
+				</div>
+			{% else %}
+				<div class="form-line__item--right">
+					<div class="form-line__item__price">-</div>
+					<div class="form-line__item__price"><strong>-</strong></div>
+				</div>
+			{% endif %}
+			{{ form_errors(form.productData.price) }}
+		</div>
+	</div>
+	{% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
+		{% if isMultidomain() %}
+			<div class="form-line form-line--no-padd">
+				<div class="form-line__line form-line__line--no-space">
+					<div class="form-line__group">
+						<span class="form-line__group__image">
+							{{ domainIcon(domainId, 'large') }}
+						</span>
+						<strong class="form-line__group__name">
+							{{ getDomainName(domainId) }}
+						</strong>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+		{% for productSellingPrice in productSellingPrices %}
+			<div class="form-line">
+				<div class="form-line__label">
+					{{ form_label(form.manualInputPrices[productSellingPrice.pricingGroup.id], productSellingPrice.pricingGroup.name, { isSimple: true, compulsoryClass: 'form-line__compulsory js-input-price-type-manual' }) }}
+				</div>
+				<div class="form-line__side">
+					<div class="form-line__item js-input-price-type-manual">
+						{{ form_widget(form.manualInputPrices[productSellingPrice.pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+					</div>
+					<div class="form-line__item form-line__item--input-size js-input-price-type-auto">&nbsp;</div>
+					<div class="form-line__item--right">
+						<div class="form-line__item__price">
+							{{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithCurrencyByDomainId(domainId) }}
+						</div>
+						<div class="form-line__item__price">
+							<strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithCurrencyByDomainId(domainId) }}</strong>
+						</div>
+					</div>
+					<div class="js-input-price-type-manual">
+						{{ form_errors(form.manualInputPrices[productSellingPrice.pricingGroup.id] ) }}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	{% endfor %}
+{% endblock %}
+
+{% block product_description %}
+	<div class="form-group__title">
+		{{ 'Description'|trans }}
+	</div>
+	{% if product.isVariant %}
+		<div class="form-line form-line--disabled">
+			<div class="form-line__item form-line__item--text">
+				<strong>{{ 'Description can be set on product detail of the main product.'|trans }}</strong>
+			</div>
+		</div>
+		{% do form.descriptions.setRendered %}
+	{% else %}
+		{% for domainId, descriptionForm in form.descriptions %}
+			{% if isMultidomain() %}
+				<div class="form-line form-line--no-padd">
+					<div class="form-line__group">
+						<span class="form-line__group__image">
+							{{ domainIcon(domainId, 'large') }}
+						</span>
+					<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+					</div>
+				</div>
+			{% endif %}
+			<div class="form-line">
+				<div class="form-line__line form-line__line--no-space">
+					{{ form_widget(descriptionForm) }}
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
+
+{% block product_short_description %}
+	<div class="form-group__title">
+		{{ 'Short description'|trans }}
+	</div>
+	{% if product.isVariant %}
+		<div class="form-line form-line--disabled">
+			<div class="form-line__item form-line__item--text">
+				<strong>{{ 'Short description can be set in the main variant.'|trans }}</strong>
+			</div>
+		</div>
+	{% else %}
+		{% for domainId, shortDescriptionForm in form.shortDescriptions %}
+			{% if isMultidomain() %}
+				<div class="form-line form-line--no-padd">
+					<div class="form-line__group">
+						<span class="form-line__group__image">
+							{{ domainIcon(domainId, 'large') }}
+						</span>
+						<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+					</div>
+				</div>
+			{% endif %}
+			<div class="form-line">
+				<div class="form-line__line form-line__line--no-space">
+					{{ form_widget(shortDescriptionForm, { attr: { class: 'input--textarea-big' } } ) }}
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
+
+{% block images %}
+	{% if form.imagePositions|length > 0 %}
+		<div class="list-images__wrap">
+			<ul class="list-images" id="js-product-images">
+				{% for imageForm in form.imagePositions %}
+					{% set image = productDetail.imagesIndexedById[imageForm.vars.value] %}
+					<li class="list-images__item js-product-images-image" data-id="{{ image.id }}">
+						<div class="list-images__item__in">
+							<div class="list-images__item__image js-product-images-preview">
+								{{ image(image, {size: 'original', height: '100'}) }}
+							</div>
+							<span class="list-images__item__main">
+								{{ 'Main picture'|trans }}
+							</span>
+							<button class="js-product-images-delete-button btn-no-style list-images__item__remove" type="button" title="{{ 'Delete'|trans }}">
+								<i class="svg svg-circle-cross"></i>
+							</button>
+							<span class="js-product-images-image-handle list-images__item__move" title="{{ 'Move'|trans }}">
+								<i class="svg svg-move"></i>
+							</span>
+							<button class="btn-no-style js-product-images-delete-revert-button display-none list-images__item__revert" type="button" title="{{ 'Return back'|trans }}">
+								<i class="svg svg-forward-page"></i>
+							</button>
+							<span class="list-images__item__overlay js-product-images-image-overlay">{{ 'Picture will be deleted after saving.'|trans }}</span>
+						</div>
+						{# Ignore indices from form definition. Let them reflect new positions. #}
+						{{ form_widget(imageForm, { full_name: form.imagePositions.vars.full_name ~ '[]'}) }}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+	{% do form.imagePositions.setRendered %}
+{% endblock %}
+
+{% block product_urls %}
+	{{ form_row(form.urls, { label: 'URL settings'|trans }) }}
+{% endblock %}

@@ -9,7 +9,7 @@ require_once __DIR__ . '/bootstrap.php.cache';
 require_once __DIR__ . '/AppKernel.php';
 require_once __DIR__ . '/Bootstrap.php';
 
-use SS6\Bootstrap;
+use Shopsys\Bootstrap;
 use Symfony\Component\Console\Input\ArgvInput;
 
 $input = new ArgvInput();

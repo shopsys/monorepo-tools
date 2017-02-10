@@ -47,7 +47,7 @@ fm_elfinder:
         roots:
           uploads:
             driver: LocalFileSystem
-            path: %ss6.filemanager_upload_web_dir%
+            path: %shopsys.filemanager_upload_web_dir%
             # show_hidden must be true if access_control is set
             show_hidden: true
-            access_control: 'SS6\ShopBundle\Model\Security\Filesystem\FilemanagerAccess::isPathAccessibleStatic'
+            access_control: 'Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess::isPathAccessibleStatic'

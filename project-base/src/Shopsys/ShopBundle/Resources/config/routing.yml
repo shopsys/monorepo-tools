@@ -1,0 +1,10 @@
+shopsys_shop_front:
+  resource: "@ShopsysShopBundle/Resources/config/routing_front.yml"
+  prefix: /
+
+shopsys_shop_admin:
+  resource: "@ShopsysShopBundle/Controller/Admin"
+  prefix: /admin
+  type: annotation
+  defaults:
+    _locale: cs

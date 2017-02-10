@@ -1,0 +1,1426 @@
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}{{ 'Superadmin - Coder documentation'|trans }}{% endblock %}
+{% block h1 %}{{ 'Superadmin - Coder documentation'|trans }}{% endblock %}
+
+{% block main_content %}
+
+	<div class="wrap-bar">
+		<h1 class="wrap-bar__heading">{{ 'CSS documentation'|trans }}</h1>
+	</div>
+
+	<div class="wrap-border">
+		<h2>{{ 'Schema'|trans }}</h2>
+		<ul class="list-main margin-bottom-0">
+			<li class="list-main__item">
+				<a href="#coding">{{ 'Type of coding used and rules'|trans }}</a>
+			</li>
+			<li class="list-main__item">
+				<a href="#wraps">{{ 'Wrapping/separating elements'|trans }}</a>
+			</li>
+			<li class="list-main__item">
+				<a href="#messages">{{ 'Messages'|trans }}</a>
+			</li>
+			<li class="list-main__item">
+				<a href="#buttons">{{ 'Buttons'|trans }}</a>
+			</li>
+			<li class="list-main__item">
+				<a href="#tables">{{ 'Tables'|trans }}</a>
+			</li>
+			<li class="list-main__item">
+				<a href="#forms">{{ 'Form structure'|trans }}</a>
+			</li>
+		</ul>
+	</div>
+
+
+	<div class="wrap-border in-article">
+		<h2 id="coding">{{ 'Type of coding used and rules'|trans }}</h2>
+		<p>
+			{{ 'As this is a system which will often use same or similar elements, it is suitable to use a type of coding that divides web to components and variously combines them with each other.'|trans }}
+		</p>
+
+		<h3>{{ 'Coding using BEM'|trans }}</h3>
+		<p>
+			{{ 'BEM is a style of writing, which defines the rules for writing css'|trans }}
+		</p>
+
+		<ul class="list-main">
+			<li class="list-main__item">
+				{{ 'two underscores "__" represent part of the component/element'|trans }}
+			</li>
+			<li class="list-main__item">
+				{{ 'two dash "--" represent modification of component'|trans }}
+			</li>
+			<li class="list-main__item">
+				{{ 'double signs are clear and developer will intuitively know senses of different classes given'|trans }}
+			</li>
+			<li class="list-main__item">
+				{{ 'one dash "-" represents separator in multi-word title'|trans }}
+			</li>
+		</ul>
+
+		<p class="in-message in-message--error">
+			{{ 'It is important that you don\'t use just parts of the components (elements), you have to use the parent component. '|trans }}
+		</p>
+
+
+		<h3>{{ 'Not using ID and !important for CSS'|trans }}</h3>
+		<p>
+			{{ 'ID is an element with the highest priority in the CSS and that\'s why we are going to avoid it. Once we tie something to ID, we can beat it only with ID again or with !important. In real usage of SSS there had to be multiple adjustments of the same parts but on different places. If we use only classes and components we won\'t have these problems.'|trans }}
+		</p>
+
+		<p>
+			{{ 'Important is good sometimes, but once we tie important to something, we can beat it only with more specific write with another important. That\'s why we use the important only in utmost and logically excusable cases.'|trans }}
+		</p>
+
+		<p>
+			{{ 'The basic premis for coding in admin is, that mostly programmers will work with the code. That\'s why there is a bigger emphasis on helpers - '|trans }}
+		</p>
+
+		<h3>{{ 'Writing of css characteristics according to priorities'|trans }}</h3>
+		<p>
+			{{ 'At first we write underlying characteristics for element (position, float, display, width, ... ), then stylistic ones (font, color, background, ... )'|trans }}
+		</p>
+
+		<h3>{{ 'Folders structure'|trans }}</h3>
+		<ul class="list-main">
+			<li class="list-main__item">
+				{{ 'core - basic settings for elements (css reset, variables, mixins, form elements, headings..)'|trans }}
+			</li>
+			<li class="list-main__item">
+				{{ 'layout - settings of layout, heading and footer'|trans }}
+			</li>
+			<li class="list-main__item">
+				{{ 'libs - third parties components'|trans }}
+			</li>
+			<li class="list-main__item">
+				{{ 'helpers - helpers, that have to be loaded last'|trans }}
+			</li>
+			<li class="list-main__item">
+				{{ 'components - components of content part, subfolders divide components logically apart'|trans }}
+				<ul class="list-main">
+					<li class="list-main__item">
+						{{ 'IN - small components (arrow by link, evaluation asterisks) small things that occur often on more places'|trans }}
+					</li>
+					<li class="list-main__item">
+						{{ 'WRAP - basic wraps, boxes, independent of content'|trans }}
+					</li>
+					<li class="list-main__item">
+						{{ 'LIST - DL, UL, OL'|trans }}
+					</li>
+					<li class="list-main__item">
+						{{ 'TABLE - tables'|trans }}
+					</li>
+					<li class="list-main__item">
+						{{ 'WINDOW - popup windows, floating windows etc.'|trans }}
+					</li>
+					<li class="list-main__item">
+						{{ 'FORM - form elements, form wraps, structures'|trans }}
+					</li>
+					<li class="list-main__item">
+						{{ 'BOX - complete parts of the site - NOT REUSABLE (e.g. product detail page layout)'|trans }}
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<p class="in-message in-message--info">
+			{{ 'For subfolders of folder components, the subfolder name is inserted into the component name for better search, but the component filename contains only the rest of the class name.'|trans }}
+		</p>
+	</div>
+
+	<div class="wrap-border in-article">
+		<h2 id="wraps">{{ 'Wrapping/separating elements'|trans }}</h2>
+
+		<p>{{ 'Wrapping elements are those which can add some features around the insides, e.g. framing, indentation, background, or it can set the heading of the whole block of information.'|trans }}</p>
+
+		<h3>{{ 'Wrap-bar'|trans }}</h3>
+		<p>
+			{{ 'Title component with possible button on the right, all separated by border from below'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="wrap-bar">
+				<h2 class="wrap-bar__heading">{{ 'Headline'|trans }}</h2>
+				<button class="btn wrap-bar__btn" type="button">{{ 'Button'|trans }}</button>
+			</div>
+		</div>
+
+		<h3>{{ 'Wrap-border'|trans }}</h3>
+		<p>
+			{{ 'Wrap, which will indent the entire block and add bottom border, suitable for indenting block of forms apart'|trans }}
+		</p>
+
+		<h4>{{ 'General wrap-border'|trans }}</h4>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="wrap-border">
+				<span>{{ 'Any content'|trans }}</span>
+			</div>
+		</div>
+
+		<h4>{{ 'Modification wrap-border--small'|trans }}</h4>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="wrap-border wrap-border--small">
+				<span>{{ 'Any content with smaller indent between content and line'|trans }}</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="wrap-border in-article">
+		<h2 id="messages">{{ 'Messages'|trans }}</h2>
+
+		<p>
+			{{ 'Various messages and flash messages, there is more type and colour modifications. Thanks to this it is possible to create even combinations of types and colours'|trans }}
+		</p>
+
+		<h3>{{ 'In-message'|trans }}</h3>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="in-message">
+				<span>{{ 'Base message text is without colours and outstretched only to the end of the text, therefore it needs at least to identify the colour type.'|trans }}</span>
+			</div>
+		</div>
+
+		<h4>{{ 'Colouring in-message'|trans }}</h4>
+		<p>
+			{{ 'Colours present event that happened.'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="in-message in-message--info">
+				{{ 'Information message'|trans }}
+			</div>
+			<div class="in-message in-message--success">
+				{{ 'Positive message'|trans }}
+			</div>
+			<div class="in-message in-message--warning">
+				{{ 'Warning message'|trans }}
+			</div>
+			<div class="in-message in-message--error">
+				{{ 'Error message'|trans }}
+			</div>
+			<div class="in-message in-message--danger">
+				{{ 'Second type of error message'|trans }}
+			</div>
+		</div>
+
+		<h4>{{ 'In-message types'|trans }}</h4>
+		<p>
+			{{ 'Types can be combined with each other and mixed with various colours'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="in-message in-message--info in-message--block">
+				{{ 'Information message - block'|trans }}
+			</div>
+			<div class="in-message in-message--error in-message--block">
+				{{ 'Error message - block with the close button, for closing, the close button can be used only with block error messages'|trans }}
+				<div class="in-message__close">x</div>
+			</div>
+			<div class="in-message in-message--success in-message--block in-message--small">
+				{{ 'Positive message - block with smaller space around text and smaller text'|trans }}
+				<div class="in-message__close">x</div>
+			</div>
+			<div class="in-message in-message--warning in-message--block">
+				<i class="in-message__icon svg svg-warning"></i>
+				{{ 'Warning message - block with icon'|trans }}
+			</div>
+			<div class="in-message in-message--error in-message--block in-message--small">
+				<i class="in-message__icon svg svg-warning"></i>
+				{{ 'Error message - block with icon, small'|trans }}
+			</div>
+		</div>
+	</div>
+
+	<div class="wrap-border in-article">
+		<h2 id="buttons">{{ 'Buttons'|trans }}</h2>
+		<p>{{ 'There are more types of buttons, each can have a lot of modifications. These modifications can be combined with each other (colour ones with type ones)'|trans }}</p>
+
+		<h3>{{ 'Btn'|trans }}</h3>
+
+		<h4>{{ 'Colour modification'|trans }}</h4>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<a href="#" class="btn">
+				{{ 'Conversion button to form validations etc.'|trans }}
+			</a>
+			<a href="#" class="btn btn--default">
+				{{ 'Default button'|trans }}
+			</a>
+			<a href="#" class="btn btn--light">
+				{{ 'Light button'|trans }}
+			</a>
+			<a href="#" class="btn btn--neutral">
+				{{ 'Neutral button'|trans }}
+			</a>
+		</div>
+
+		<h4>{{ 'Type modificatons'|trans }}</h4>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<a href="#" class="btn btn--large">
+				{{ 'Conversion button big'|trans }}
+			</a>
+			<a href="#" class="btn">
+				{{ 'Conversion button standard'|trans }}
+			</a>
+			<a href="#" class="btn btn--medium">
+				{{ 'Conversion button medium'|trans }}
+			</a>
+			<a href="#" class="btn btn--small">
+				{{ 'Small conversion button'|trans }}
+			</a>
+			<br><br>
+			<a href="#" class="btn btn--disabled">
+				{{ 'Disabled button without cursor'|trans }}
+			</a>
+			<br><br>
+			<a href="#" class="btn btn--block">
+				{{ 'Conversion button always over the entire width'|trans }}
+			</a>
+			<br><br>
+			<a href="#" class="btn btn--plus">
+				<i class="btn__icon">+</i>
+				{{ 'Conversion button to adding'|trans }}
+			</a>
+
+			<a href="#" class="btn btn--small btn--plus">
+				<i class="btn__icon">+</i>
+				{{ 'Conversion button to adding - small'|trans }}
+			</a>
+		</div>
+
+		<h3>{{ 'Btn-no-style'|trans }}</h3>
+
+		<p>
+			{{ 'In case we need the tag button to look like simple text.'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<button href="#" class="btn-no-style" type="button">
+				{{ 'Button that looks like text'|trans }}
+			</button>
+		</div>
+
+		<h3>{{ 'Btn-link-style'|trans }}</h3>
+
+		<p>
+			{{ 'In case we need the tag button to look like link. There is also modification for button with icon on left.'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<button href="#" class="btn-link-style" type="button">
+				{{ 'Button that looks like link'|trans }}
+			</button>
+			<br><br>
+			<button href="#" class="btn-link-style btn-link-style--iconic-l" type="button">
+				<i class="svg svg-pencil"></i>
+				<span>
+					{{ 'Button that looks like link with not underlined icon'|trans }}
+				</span>
+			</button>
+		</div>
+	</div>
+
+	<div class="wrap-border in-article">
+		<h2 id="tables">{{ 'Tables'|trans }}</h2>
+
+		<p class="in-message in-message--warning">
+			{{ 'There are several types of tables, but it is not necessary to write down those which are generated by system itself and nobody intervenes in them. That\'s why there are only those that you will probably want to use.'|trans }}
+		</p>
+
+		<h3>{{ 'Table-main'|trans }}</h3>
+		<p>
+			{{ 'Basic table with one class on table element. Basic look for showing simple data (not forms).'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<table class="table-main">
+				<thead>
+					<tr>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h3>{{ 'Table-col'|trans }}</h3>
+		<p>
+			{{ 'It is not about table, but about setting the widths of cells in table-main. They are simple classes that give the width percent, or pixels. It is very useful in grids.'|trans }}
+		</p>
+		<div class="in-message in-message--info">
+			{{ 'Sizes: 5, 10, 15, 20, 40, 45, 60, 80, 40px'|trans }}
+		</div>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<table class="table-main">
+				<thead>
+					<tr>
+						<td class="table-col-20">{{ 'Table text'|trans }}</td>
+						<td class="table-col-40">{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td class="table-col-40px">{{ 'Action'|trans }}</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Action'|trans }}</td>
+					</tr>
+					<tr>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Action'|trans }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h3>{{ 'Table-touch'|trans }}</h3>
+		<p>
+			{{ 'Special behavior for table for smaller devices, displaying scrollbar when the window is lessened. If we count with responsivity, this should be set around each table.'|trans }}
+		</p>
+
+		<div class="in-message in-message--info">
+			{{ 'It is possible to combine it with different contents inside, but the primary use is for tables.'|trans }}
+		</div>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="table-touch">
+				<div class="table-touch__in">
+					<table class="table-main">
+						<thead>
+							<tr>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<h3>{{ 'Table-touch-always'|trans }}</h3>
+		<p>
+			{{ 'Special behavior for big table, which can\'t fit even in the desktop version to the content part.'|trans }}
+		</p>
+
+		<div class="in-message in-message--info">
+			{{ 'It is possible to combine it with different contents inside, but the primary use is for tables.'|trans }}
+		</div>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="table-touch-always">
+				<div class="table-touch-always__in">
+					<table class="table-main">
+						<thead>
+							<tr>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<h3>{{ 'Table-form'|trans }}</h3>
+		<p>
+			{{ 'Special behavior of table, which was created for parameters, but could be used also differently.'|trans }}
+		</p>
+
+		<h4>{{ 'Simple view'|trans }}</h4>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<table class="table-form">
+				<thead>
+					<tr class="table-form__row">
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="table-form__row">
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+					</tr>
+					<tr class="table-form__row">
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h4>{{ 'Matching first and second cell of a row with the rest of form'|trans }}</h4>
+
+		<p>
+			{{ 'If you add modifier to first TD/TH --label, cell is given maximum width and is aligned with other form-structure. Other cells are expanded by the browser as needed.'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<table class="table-form">
+				<thead>
+					<tr class="table-form__row">
+						<th class="table-form__cell table-form__cell--label">
+							{{ 'Label or input is here'|trans }}
+						</th>
+						<th class="table-form__cell">
+							{{ 'Table text or input'|trans }}
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="table-form__row">
+						<td class="table-form__cell table-form__cell--label">
+							{{ 'Label is here'|trans }}
+						</td>
+						<td class="table-form__cell">
+							{{ 'Text behind label'|trans }}
+						</td>
+					</tr>
+					<tr class="table-form__row">
+						<td class="table-form__cell table-form__cell--label"><input type="text" class="input" value="{{ 'Input'|trans }}"></td>
+						<td class="table-form__cell">
+							{{ 'Text behind input. To generate the input correctly, it is necessary to write is like <strong class="in-article__visible">form_widget</strong> with parameter <strong class="in-article__visible">isSimple:true</strong>'|trans|raw }}
+						</td>
+					</tr>
+					<tr class="table-form__row">
+						<td class="table-form__cell table-form__cell--label">
+							<input type="text" class="input" value="{{ 'Input'|trans }}">
+						</td>
+						<td class="table-form__cell">
+							<input type="text" class="input" value="{{ 'Input'|trans }}">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h4>{{ 'Display input -> input'|trans }}</h4>
+
+		<p>
+			{{ 'To display same as with parameters, it is necessary to add separator with icon and make sure to remove paddings around the separator. This raises more classes in almost all surrounding TD/TH. You can also simply add and icon with an action at the end of the line.'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<table class="table-form">
+				<thead>
+					<tr class="table-form__row">
+						<th class="table-form__cell table-form__cell--label table-form__cell--del-before">{{ 'Input is here'|trans }}</th>
+						<th class="table-form__cell table-form__cell--del"></th>
+						<th class="table-form__cell table-form__cell--del-after">{{ 'Input after separator'|trans }}</th>
+						<th class="table-form__cell table-form__cell--actions">{{ 'Action'|trans }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="table-form__row">
+						<td class="table-form__cell table-form__cell--label table-form__cell--del-before">
+							<input type="text" class="input" value="{{ 'Input'|trans }}">
+						</td>
+						<td class="table-form__cell table-form__cell--del">
+							<i class="svg svg-arrow-right"></i>
+						</td>
+						<td class="table-form__cell table-form__cell--del-after">
+							<input type="text" class="input" value="{{ 'Input'|trans }}">
+						</td>
+						<th class="table-form__cell text-right">
+							<a href="#" class="table-form__action">
+								<i class="svg svg-circle-cross"></i>
+							</a>
+						</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h4>{{ 'Bolder line'|trans }}</h4>
+
+		<p>
+			{{ 'By using modifier on the line it is possible to bluish the whole line.'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<table class="table-form">
+				<thead>
+					<tr class="table-form__row">
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="table-form__row">
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+					</tr>
+					<tr class="table-form__row table-form__row--group">
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+					</tr>
+					<tr class="table-form__row">
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+					</tr>
+					<tr class="table-form__row">
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h4>{{ 'Row grouping'|trans }}</h4>
+
+		<p>
+			{{ 'By using modifier on the line it is possible to bluish the whole line and create a group of lines with headline and picture.'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<table class="table-form">
+				<thead>
+					<tr class="table-form__row">
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="table-form__row table-form__row--group">
+						<td class="table-form__cell" colspan="3">
+							<div class="table-form__cell__image">
+								<img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=46%C3%9726&w=46&h=26&txtpad=1" alt="{{ 'Domain 1'|trans }}">
+							</div>
+							<div class="table-form__cell__group-name">
+								{{ 'Domain 1'|trans }}
+							</div>
+						</td>
+					</tr>
+					<tr class="table-form__row">
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+					</tr>
+					<tr class="table-form__row">
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+					</tr>
+					<tr class="table-form__row table-form__row--group">
+						<td class="table-form__cell" colspan="3">
+							<div class="table-form__cell__image">
+								<img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=46%C3%9726&w=46&h=26&txtpad=1" alt="{{ 'Domain 2'|trans }}">
+							</div>
+							<div class="table-form__cell__group-name">
+								{{ 'Domain 2'|trans }}
+							</div>
+						</td>
+					</tr>
+					<tr class="table-form__row">
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h4>{{ 'Drag and drop on lines'|trans }}</h4>
+
+		<p>
+			{{ 'If we want to move the lines, we will insert the icon as shown below. Don\'t forget to connect it to JS.'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<table class="table-form">
+				<thead>
+					<tr class="table-form__row">
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="table-form__row">
+						<td class="table-form__cell">
+							<span class="table-form__cell__move">
+								<span class="in-icon in-icon--move svg svg-move"></span>
+							</span>
+							{{ 'Table text'|trans }}
+						</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+					</tr>
+					<tr class="table-form__row">
+						<td class="table-form__cell">
+							<span class="table-form__cell__move">
+								<span class="in-icon in-icon--move svg svg-move"></span>
+							</span>
+							{{ 'Table text'|trans }}
+						</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="wrap-border in-article">
+		<h2 id="forms">{{ 'Form structure'|trans }}</h2>
+		<p class="in-message in-message--warning">{{ 'It is important that buttons, inputs (text ones), selects and textarea have basic class, which means btn and input. Don\'t put it there and remove it only when you understand what you are doing.'|trans }}</p>
+
+		<h3>{{ 'Basic elements display'|trans }}</h3>
+
+		<h4>{{ 'Without any form structure and modification'|trans }}</h4>
+
+		<div class="in-message in-message--info">
+			{{ 'We will get the display by writing input as <strong class="in-article__visible">form_widget</strong> with parameter <strong class="in-article__visible">isSimple:true</strong>.'|trans|raw }}
+		</div>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<input type="text" class="input" value="{{ 'Input'|trans }}">
+			<select class="input">
+				<option>{{ 'Select'|trans }}</option>
+				<option>{{ 'Select'|trans }}</option>
+			</select>
+			<textarea class="input">{{ 'Textarea'|trans }}</textarea>
+		</div>
+
+		<h4>{{ 'Textarea size modification'|trans }}</h4>
+
+		<div class="in-message in-message--info">
+			{{ 'We will get the display either by adding class to element or via <strong class="in-article__visible">form_widget</strong> we add <strong class="in-article__visible">attr class</strong>'|trans|raw }}
+		</div>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<textarea class="input input--textarea-big">{{ '--textarea-big'|trans }}</textarea>
+			<br><br>
+			<textarea class="input input--seo">{{ '--seo'|trans }}</textarea>
+		</div>
+
+		<h4>{{ 'Multidomain, multilingual, inputs with ikon - basic'|trans }}</h4>
+
+		<div class="in-message in-message--warning">
+			{{ 'We will get the display by adding modifiers to input, but it is important to wrap input with dive with class <strong class="in-article__visible">input__wrap</strong>. Pictures are positioned to this class. This structure should be generated by the system itself. If manual writing needed it is important to pay attention and don\'t forget to add flag <strong class="in-article__visible">localeFlag(locale)</strong>, domain <strong class="in-article__visible">or icon.'|trans|raw }}
+		</div>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="input__wrap">
+				<input type="text" class="input input--flag" value="{{ 'Input with flag'|trans }}">
+				<div class="input__flag">
+					<img src="https://placehold.it/16x12" alt="{{ 'Domain 1'|trans }}">
+				</div>
+			</div>
+			<div class="input__wrap">
+				<input type="text" class="input input--domain" value="{{ 'Input with domain'|trans }}">
+				<div class="input__domain">
+					<span class="in-image in-image--normal">
+						<img src="https://placehold.it/40x18" alt="{{ 'Domain 1'|trans }}">
+					</span>
+				</div>
+			</div>
+			<div class="input__wrap">
+				<input type="text" class="input input--iconic" value="{{ 'Input with icon'|trans }}">
+				<div class="input__icon">
+					<i class="svg svg-phone"></i>
+				</div>
+			</div>
+		</div>
+
+		<h4>{{ 'Checkboxes and radio buttons'|trans }}</h4>
+		<div class="in-message in-message--info">
+			{{ 'Display of inputs like checkboxes and radio buttons is done via <strong class="in-article__visible">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class="in-article__visible">inList</strong> and they are displayed below each other on true.'|trans|raw }}
+		</div>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<label class="form-choice">
+				<input type="checkbox" class="form-choice__input">
+				<span class="form-choice__label">
+					{{ 'simple checkbox'|trans }}
+				</span>
+			</label>
+			<label class="form-choice">
+				<input type="checkbox" class="form-choice__input">
+				<span class="form-choice__label">
+					{{ 'simple checkbox can be ordered consecutively'|trans }}
+				</span>
+			</label>
+			<br><br>
+			<div class="form-choice-list">
+				<label class="form-choice-list__item">
+					<input type="checkbox" class="form-choice-list__input">
+					{{ 'checkbox in list'|trans }}
+				</label>
+				<label class="form-choice-list__item">
+					<input type="checkbox" class="form-choice-list__input">
+					{{ 'checkbox in list'|trans }}
+				</label>
+				<label class="form-choice-list__item">
+					<input type="checkbox" class="form-choice-list__input">
+					{{ 'checkbox in list'|trans }}
+				</label>
+			</div>
+			<br><br>
+			<div class="form-choice-list">
+				<label class="form-choice-list__item">
+					<span class="form-choice-list__icon">
+						<span class="in-image in-image--small">
+							<img src="https://placeholdit.imgix.net/~text?txtsize=5&txt=40%C3%9712&w=40&h=12&txtpad=1" alt="{{ 'Domain 1'|trans }}">
+						</span>
+					</span>
+					<input type="checkbox" class="form-choice-list__input">
+					{{ 'domain icon only in checkbox list, icon is inserted <strong class="in-article__visible">domainIcon(domainId, "small") </strong>'|trans|raw }}
+				</label>
+				<label class="form-choice-list__item">
+					<span class="form-choice-list__icon">
+						<span class="in-image in-image--small">
+							<img src="https://placeholdit.imgix.net/~text?txtsize=5&txt=40%C3%9712&w=40&h=12&txtpad=1" alt="{{ 'Domain 1'|trans }}">
+						</span>
+					</span>
+					<input type="checkbox" class="form-choice-list__input">
+					{{ 'domain icon only in checkbox list, it is possible to add action icon'|trans }}
+					<a href="#" class="form-choice-list__item__action form-choice-list__item__action--link text-no-decoration">
+						<i class="svg svg-forward-page"></i>
+					</a>
+				</label>
+			</div>
+		</div>
+
+		<h3>{{ 'Form-group'|trans }}</h3>
+		<p>
+			{{ 'Often useful part, it is heading for different information contents, mainly for forms, but can be used for more purposes'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="form-group">
+				<h2 class="form-group__title">
+					{{ 'Headline of information block'|trans }}
+				</h2>
+			</div>
+			<br><br>
+			<div class="form-group">
+				<h2 class="form-group__title">
+					{{ 'Headline of information block with possibility to expand, necessary to bind to existing JS'|trans }}
+					<span class="form-group__title__click">
+						+
+					</span>
+				</h2>
+			</div>
+			<br><br>
+			<div class="form-group">
+				<h2 class="form-group__title">
+					{{ 'Headline of information block with button possibility'|trans }}
+					<span class="form-group__title__buttons">
+						<button class="btn btn--small" type="button">{{ 'Button'|trans }}</button>
+					</span>
+				</h2>
+			</div>
+		</div>
+
+		<h4>{{ 'Suitable combination of components'|trans }}</h4>
+		<div class="in-message in-message--info">
+			{{ 'If we combine 3 components with each other, it will create nice forms design. We are talking about <strong class="in-article__visible">form-group</strong> for headline, <strong class="in-article__visible">form-line</strong> for form and <strong class="in-article__visible">wrap-border</strong> for separating blocks of information.'|trans|raw }}
+		</div>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="form-group wrap-border">
+				<h2 class="form-group__title">
+					{{ 'Headline of information block'|trans }}
+					<span class="form-group__title__click">
+						+
+					</span>
+				</h2>
+
+				<div class="form-line">
+					<label class="form-line__label">
+						{{ 'Input label'|trans }}
+					</label>
+					<div class="form-line__side">
+						<div class="form-line__item">
+							<input type="text" class="input">
+						</div>
+					</div>
+				</div>
+				<div class="form-line">
+					<label class="form-line__label">
+						{{ 'Input label'|trans }}
+					</label>
+					<div class="form-line__side">
+						<div class="form-line__item">
+							<input type="text" class="input">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<h2 class="form-group__title">
+					{{ 'Headline of information block'|trans }}
+					<span class="form-group__title__click">
+						+
+					</span>
+				</h2>
+
+				<div class="form-line">
+					<label class="form-line__label">
+						{{ 'Input label'|trans }}
+					</label>
+					<div class="form-line__side">
+						<div class="form-line__item">
+							<input type="text" class="input">
+						</div>
+					</div>
+				</div>
+				<div class="form-line">
+					<label class="form-line__label">
+						{{ 'Input label'|trans }}
+					</label>
+					<div class="form-line__side">
+						<div class="form-line__item">
+							<input type="text" class="input">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<h3>{{ 'Form-line'|trans }}</h3>
+
+		<p>
+			{{ 'Logic of creating the structure is based on the graphics and the fact that the structure should be responsive and there is a possibility of putting a lot of different things in a row'|trans }}
+		</p>
+
+		<p class="in-message in-message--error">
+			{{ 'Basic component for forms, extremely big and set in the default form generating. Use this for most cases.'|trans }}
+		</p>
+
+		<p class="in-message in-message--warning">
+			{{ 'This structure has no place in tables!'|trans }}
+		</p>
+
+		<h4>{{ 'Main structure logic'|trans }}</h4>
+		<p class="in-message in-message--error">
+			{{ 'This text will help you understand the logic of creating a form.'|trans }}
+		</p>
+		<p>
+			{{ 'Component consists of 5 main elements. First is wrap <strong class="in-article__visible">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class="in-article__visible">form-line__label</strong>. We don\'t have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class="in-article__visible">form-line__side</strong> and <strong class="in-article__visible">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class="in-article__visible">form-line__item</strong> which is wrap for anythin in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width.'|trans|raw }}
+		</p>
+		<strong class="in-article__visible"></strong>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input label'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--text">
+						{{ 'Elements can be ordered behind each other'|trans }}
+					</div>
+				</div>
+			</div>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input label'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+				</div>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--text">
+						{{ 'It is possible to put elements to multiple lines with one label'|trans }}
+					</div>
+				</div>
+			</div>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input label'|trans }}
+				</label>
+				<div class="form-line__line">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--text">
+						{{ 'Elements can be aligned under label'|trans }}
+					</div>
+				</div>
+				<div class="form-line__line">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--text">
+						{{ 'and also into more lines'|trans }}
+					</div>
+				</div>
+			</div>
+			<div class="form-line">
+				<label class="form-line__label form-line__label--input">
+					<input type="text" class="input">
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item form-line__item--text">
+						{{ 'Input can be instead of label'|trans }}
+					</div>
+				</div>
+			</div>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Textarea may be across the whole width'|trans }}
+				</label>
+				<div class="form-line__line">
+					<textarea class="input input--textarea-big">{{ 'Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width.'|trans }}</textarea>
+				</div>
+			</div>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Textarea may be across the whole width next to the label'|trans }}
+				</label>
+				<div class="form-line__side">
+					<textarea class="input input--textarea-big">{{ 'Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width.'|trans }}</textarea>
+				</div>
+			</div>
+		</div>
+
+		<h4>{{ 'Element alignment to side'|trans }}</h4>
+		<p>
+			{{ 'Sometimes it is necessary to align one of the elements to right/left side. You can do that using modifier <strong class="in-article__visible">form-line__item--right</strong> or <strong class="in-article__visible">form-line__item--left</strong>.'|trans|raw }}
+		</p>
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input with text on the right'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--text form-line__item--right">
+						{{ 'Any element on right'|trans }}
+					</div>
+				</div>
+			</div>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input with prices on the right side next to each other'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--right">
+						<div class="form-line__item__price">
+							{{ '1 254 CZK'|trans }}
+						</div>
+						<div class="form-line__item__price">
+							<strong>
+								{{ '1 254 CZK'|trans }}
+							</strong>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p>
+			{{ 'Element which is being aligned is usually icon.'|trans|raw }}
+		</p>
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input with icon simply'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--text">
+						<i class="svg svg-info in-icon in-icon--info"></i>
+					</div>
+				</div>
+			</div>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input with icon on the right side'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--right form-line__item--text">
+						<i class="svg svg-info in-icon in-icon--info"></i>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input with icon on the left side'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--left form-line__item--text">
+						<i class="svg svg-info in-icon in-icon--info"></i>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input with icon by label'|trans }}
+					<i class="svg svg-info in-icon in-icon--info"></i>
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<h4>{{ 'Short postscripts after input'|trans }}</h4>
+		<p>
+			{{ 'When we work for example with currencies, we need to state the currency after the input. Inputs have different text lengths and that\'s why we need to set a fixed width so that icons after text are aligned.'|trans|raw }}
+		</p>
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input with postscript what has fixed width'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--text form-line__item--fixed-width-left">
+						Kč
+					</div>
+					<div class="form-line__item form-line__item--text">
+						<i class="svg svg-info in-icon in-icon--info"></i>
+					</div>
+				</div>
+			</div>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input with postscript what has fixed width'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--text form-line__item--fixed-width-left">
+						Euro
+					</div>
+					<div class="form-line__item form-line__item--text">
+						<i class="svg svg-info in-icon in-icon--info"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<h4>{{ 'Button after input'|trans }}</h4>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input with button'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--btn">
+						<a href="#" class="btn">{{ 'Button'|trans }}</a>
+					</div>
+				</div>
+			</div>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input with button'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--right form-line__item--btn">
+						<a href="#" class="btn">{{ 'Right button'|trans }}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<h4>{{ 'Checkboxes or radiobuttons'|trans }}</h4>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Checkboxes'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<div class="form-choice-list">
+							<label class="form-choice-list__item">
+								<input type="checkbox" class="form-choice-list__input">
+								{{ 'checkbox in list'|trans }}
+							</label>
+							<label class="form-choice-list__item">
+								<input type="checkbox" class="form-choice-list__input">
+								{{ 'checkbox in list'|trans }}
+							</label>
+							<label class="form-choice-list__item">
+								<input type="checkbox" class="form-choice-list__input">
+								{{ 'checkbox in list'|trans }}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<h4>{{ 'If we need something about input size'|trans }}</h4>
+		<p>
+			{{ 'An example might be empty space with icon behind it, which we want to align with icon next to input.'|trans }}
+		</p>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--text">
+						<i class="svg svg-info in-icon in-icon--info"></i>
+					</div>
+				</div>
+			</div>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Place for input'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item form-line__item--text form-line__item--input-size">
+					</div>
+					<div class="form-line__item form-line__item--text">
+						<i class="svg svg-info in-icon in-icon--info"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<h4>{{ 'If we want information about number of characters'|trans }}</h4>
+		<div class="in-message in-message--warning">
+			{{ 'Attention, the second variant doesn\'t have js to work with yet!'|trans }}
+		</div>
+
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input with deduction'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item form-line__item--left">
+						<input type="text" class="input" value="{{ 'Input has to have class for left alignment'|trans }}">
+					</div>
+					<div class="form-line__count">
+						<div class="form-line__count__desc form-line__appendix" >
+							{{ 'Used: 45 characters. Recommended max. 155'|trans }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Input with major deduction'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item form-line__item--left">
+						<input type="text" class="input" value="{{ 'Input has to have class for left alignment'|trans }}">
+					</div>
+					<div class="form-line__count">
+						<div class="form-line__count__val">
+							<span>
+								54
+							</span>
+						</div>
+						<div class="form-line__count__desc" >
+							{{ 'characters out of 155 possible'|trans }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<h4>{{ 'Double border between elements prevention'|trans }}</h4>
+		<p>
+			{{ 'Sometimes there is thicker line between some elements than between others. It is mainly in cases when the form-line elements are not directly behind each other, but some of them are covered with some dive, e.g. because of JS, for hiding and revealing. To that kind of dive you need to add class <strong class="in-article__visible">form-line__js</strong>.'|trans|raw }}
+		</p>
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Thick line between'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="form-line">
+					<label class="form-line__label">
+						{{ 'This form-line is wrapped'|trans }}
+					</label>
+					<div class="form-line__side">
+						<div class="form-line__item">
+							<input type="text" class="input">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="in-article__preview">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Thick line between disappeared'|trans }}
+				</label>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+				</div>
+			</div>
+			<div class="form-line__js">
+				<div class="form-line">
+					<label class="form-line__label">
+						{{ 'This form-line is wrapped'|trans }}
+					</label>
+					<div class="form-line__side">
+						<div class="form-line__item">
+							<input type="text" class="input">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

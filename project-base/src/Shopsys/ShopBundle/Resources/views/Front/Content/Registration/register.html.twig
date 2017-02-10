@@ -1,0 +1,33 @@
+{% extends '@ShopsysShop/Front/Layout/layoutWithoutPanel.html.twig' %}
+
+{% block title %}
+	{{ 'Registration'|trans }}
+{% endblock %}
+
+{% block main_content %}
+	<h1>{{ 'Registration'|trans }}</h1>
+
+	{{ form_errors(form) }}
+
+	{{ form_start(form) }}
+
+		{{ form_row(form.firstName, { label: 'First name'|trans }) }}
+		{{ form_row(form.lastName, { label: 'Surname'|trans }) }}
+		{{ form_row(form.email, { label: 'E-mail'|trans }) }}
+		{{ form_row(form.password.first, {
+			label: 'Password'|trans,
+			icon: {
+				class: 'in-icon in-icon--info js-tooltip',
+				title: 'Password must be at least six characters and can\'t be the same as entered e-mail or its part before at sign.'|trans
+			}
+		}) }}
+		{{ form_row(form.password.second, { label: 'Password again'|trans }) }}
+
+		{{ form_widget(form.save, { label: 'Register'|trans }) }}
+
+	{{ form_end(form) }}
+
+	<br />
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+front_article_detail:
+  pattern: /
+  defaults: { _controller: ShopsysShopBundle:Front\Article:detail }
+
+front_product_detail:
+  pattern: /
+  defaults: { _controller: ShopsysShopBundle:Front\Product:detail }
+
+front_product_list:
+  pattern: /
+  defaults: { _controller: ShopsysShopBundle:Front\Product:listByCategory }
+
+front_brand_detail:
+  pattern: /
+  defaults: { _controller: ShopsysShopBundle:Front\Product:listByBrand }

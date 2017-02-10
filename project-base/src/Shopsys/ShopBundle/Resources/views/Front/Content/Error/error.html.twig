@@ -1,0 +1,46 @@
+{% extends '@ShopsysShop/Front/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}
+	{{ 'Error occurred'|trans }}: {{ status_text }}
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		{{ render(controller('ShopsysShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
+
+		<div class="box-error-page">
+			{% if status_code == 404 %}
+				<div class="box-error-page__text">
+					<h1>{{ 'Page not found!'|trans }}</h1>
+
+					<p class="box-error-page__text__main">
+						{{ 'Page you are looking for either no longer exists or you entered wrong address.'|trans }}
+					</p>
+
+					<h2>{{ 'Please follow the instructions'|trans }}:</h2>
+
+					<ul class="list-simple">
+						<li class="list-simple__item">{{ 'Check the address correctness'|trans }}</li>
+						<li class="list-simple__item">{{ 'Try using web search'|trans }}</li>
+					</ul>
+				</div>
+
+				<div class="box-error-page__image">
+					<img src="{{ asset('assets/frontend/images/404.jpg') }}" alt="{{ 'Page not found!'|trans }}">
+				</div>
+			{% else %}
+				<div class="box-error-page__text">
+					<h1>{{ 'Oops! Error occurred.'|trans }}</h1>
+
+					<p>
+						{{ 'Uh-oh, uh-oh. And specially <strong>"%status_code% %status_text%"</strong>, as if it was on purpose!'|trans({ '%status_code%': status_code, '%status_text%': status_text })|raw }}
+					</p>
+
+					<p>
+						{{ 'Please excuse this error, we are working on fixing it. If needed, contact us on %mail% or by phone %phone%.'|trans({ '%mail%': getShopInfoEmail(), '%phone%': getShopInfoPhoneNumber() }) }}
+					</p>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}
