@@ -332,7 +332,7 @@
         var $errorListUl = $errorList.find('ul:first');
         var $elementsToHighlight = Shopsys.validation.findElementsToHighlight($(this));
 
-        var elementErrorClass = 'js-' + sourceId;
+        var errorSourceClass = 'js-error-source-id-' + sourceId;
         $errorListUl.find('li').remove();
 
         if (errors.length > 0) {
@@ -341,7 +341,7 @@
                 $errorListUl.append(
                     $('<li/>')
                         .addClass('js-validation-errors-message')
-                        .addClass(elementErrorClass)
+                        .addClass(errorSourceClass)
                         .text(message)
                 );
             });
