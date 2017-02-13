@@ -327,12 +327,12 @@
         return FpJsFormValidator._isValueEmty(value);
     };
 
-    Shopsys.validation.showErrors = function (errors, elementName) {
-        var $errorList = Shopsys.validation.findOrCreateErrorList($(this), elementName);
+    Shopsys.validation.showErrors = function (errors, sourceId) {
+        var $errorList = Shopsys.validation.findOrCreateErrorList($(this), sourceId);
         var $errorListUl = $errorList.find('ul:first');
         var $elementsToHighlight = Shopsys.validation.findElementsToHighlight($(this));
 
-        var elementErrorClass = 'js-' + elementName;
+        var elementErrorClass = 'js-' + sourceId;
         $errorListUl.find('li').remove();
 
         if (errors.length > 0) {
