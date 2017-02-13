@@ -38,12 +38,12 @@ class TermsAndConditionsSettingFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('termsAndConditionsArticle', FormType::CHOICE, [
-                    'required' => false,
-                    'choice_list' => new ObjectChoiceList($this->articles, 'name', [], null, 'id'),
-                    'placeholder' => t('-- Choose article --'),
-                ])
-                ->add('save', FormType::SUBMIT);
+            ->add('termsAndConditionsArticle', FormType::CHOICE, [
+                'required' => false,
+                'choice_list' => new ObjectChoiceList($this->articles, 'name', [], null, 'id'),
+                'placeholder' => t('-- Choose article --'),
+            ])
+            ->add('save', FormType::SUBMIT);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

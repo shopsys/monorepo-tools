@@ -78,15 +78,15 @@ abstract class AbstractAdvancedSearchFormFactory
             'data_class' => AdvancedSearchRuleData::class,
         ])
             ->add('subject', 'choice', [
-                    'choices' => $this->getSubjectChoices(),
-                    'expanded' => false,
-                    'multiple' => false,
-                ])
+                'choices' => $this->getSubjectChoices(),
+                'expanded' => false,
+                'multiple' => false,
+            ])
             ->add('operator', 'choice', [
-                    'choices' => $this->getFilterOperatorChoices($ruleFilter),
-                    'expanded' => false,
-                    'multiple' => false,
-                ])
+                'choices' => $this->getFilterOperatorChoices($ruleFilter),
+                'expanded' => false,
+                'multiple' => false,
+            ])
             ->add('value', $ruleFilter->getValueFormType(), $ruleFilter->getValueFormOptions());
 
         return $filterFormBuilder;

@@ -91,8 +91,8 @@ class LoginController extends AdminBaseController
         }
 
         return $this->render('@ShopsysShop/Admin/Content/Login/loginForm.html.twig', [
-                'form' => $form->createView(),
-                'error' => $error,
+            'form' => $form->createView(),
+            'error' => $error,
         ]);
     }
 

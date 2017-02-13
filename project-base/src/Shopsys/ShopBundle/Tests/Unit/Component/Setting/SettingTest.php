@@ -129,7 +129,7 @@ class SettingTest extends PHPUnit_Framework_TestCase
             ->setMethods(['getAllByDomainId'])
             ->getMock();
         $settingValueRepositoryMock->expects($this->atLeastOnce())
-                ->method('getAllByDomainId')->willReturnMap($settingValueArrayByDomainIdMap);
+            ->method('getAllByDomainId')->willReturnMap($settingValueArrayByDomainIdMap);
 
         $setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
         $this->assertSame('valueCommon', $setting->get('key'));
@@ -157,7 +157,7 @@ class SettingTest extends PHPUnit_Framework_TestCase
             ->setMethods(['getAllByDomainId'])
             ->getMock();
         $settingValueRepositoryMock->expects($this->atLeastOnce())
-                ->method('getAllByDomainId')->willReturnMap($settingValueArrayByDomainIdMap);
+            ->method('getAllByDomainId')->willReturnMap($settingValueArrayByDomainIdMap);
 
         $setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 

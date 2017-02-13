@@ -103,12 +103,12 @@ class CategoryVisibilityRepository
         $this->em->getConnection()->executeUpdate(
             'UPDATE category_domains AS cd
                 SET visible = (
-                        cd.hidden = FALSE
-                        AND
-                        ct.name IS NOT NULL
-                        AND
-                        parent_cd.visible = TRUE
-                    )
+                    cd.hidden = FALSE
+                    AND
+                    ct.name IS NOT NULL
+                    AND
+                    parent_cd.visible = TRUE
+                )
 
             FROM categories AS c
             JOIN category_translations ct ON ct.translatable_id = c.id AND ct.locale = :locale
