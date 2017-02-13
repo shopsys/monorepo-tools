@@ -7,23 +7,23 @@ use {{ namespace }}\{{ entityName }};
 
 class {{ entityName }}Repository {
 
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
 
-	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 */
-	public function __construct(EntityManager $em) {
-		$this->em = $em;
-	}
+    /**
+     * @param \Doctrine\ORM\EntityManager $em
+     */
+    public function __construct(EntityManager $em) {
+        $this->em = $em;
+    }
 
-	/**
-	 * @return \Doctrine\ORM\EntityRepository
-	 */
-	private function get{{ entityName }}Repository() {
-		return $this->em->getRepository({{ entityName }}::class);
-	}
+    /**
+     * @return \Doctrine\ORM\EntityRepository
+     */
+    private function get{{ entityName }}Repository() {
+        return $this->em->getRepository({{ entityName }}::class);
+    }
 
 }

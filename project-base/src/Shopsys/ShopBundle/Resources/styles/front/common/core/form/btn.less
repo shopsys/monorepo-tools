@@ -8,169 +8,169 @@
 @btn-bg-hover: darken(@btn-bg, 5%);
 
 .btn {
-	width: auto;
-	min-height: @btn-height;
-	padding: @btn-padding-vertical @btn-padding-horizontal;
-	line-height: @btn-height - 2 * @btn-padding-vertical;
-	vertical-align:middle;
-	display: inline-block;
-	transition: @transition background, @transition color;
-	text-align: center;
+    width: auto;
+    min-height: @btn-height;
+    padding: @btn-padding-vertical @btn-padding-horizontal;
+    line-height: @btn-height - 2 * @btn-padding-vertical;
+    vertical-align:middle;
+    display: inline-block;
+    transition: @transition background, @transition color;
+    text-align: center;
 
-	border: 0;
-	color: @btn-color;
-	background: @btn-bg;
-	cursor: pointer;
-	font-weight: bold;
-	text-decoration: none;
-	font-size: 13px;
-	outline: 0;
+    border: 0;
+    color: @btn-color;
+    background: @btn-bg;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 13px;
+    outline: 0;
 
-	&:hover {
-		color: @btn-color-hover;
-		background: @btn-bg-hover;
-	}
+    &:hover {
+        color: @btn-color-hover;
+        background: @btn-bg-hover;
+    }
 }
 
 //// Modifications - color
 .btn {
-	// call to action button
-	@btn-success-color: @color-f;
-	@btn-success-color-hover: @color-f;
-	@btn-success-bg: @color-green;
-	@btn-success-bg-hover: darken(@btn-success-bg, 5%);
+    // call to action button
+    @btn-success-color: @color-f;
+    @btn-success-color-hover: @color-f;
+    @btn-success-bg: @color-green;
+    @btn-success-bg-hover: darken(@btn-success-bg, 5%);
 
-	&--success {
-		color: @btn-success-color;
-		background: @btn-success-bg;
+    &--success {
+        color: @btn-success-color;
+        background: @btn-success-bg;
 
-		&:hover {
-			color: @btn-success-color-hover;
-			background: @btn-success-bg-hover;
-		}
-	}
+        &:hover {
+            color: @btn-success-color-hover;
+            background: @btn-success-bg-hover;
+        }
+    }
 
-	// primary button
-	@btn-primary-color: @color-f;
-	@btn-primary-color-hover: @color-f;
-	@btn-primary-bg: @color-blue;
-	@btn-primary-bg-hover: darken(@btn-primary-bg, 5%);
+    // primary button
+    @btn-primary-color: @color-f;
+    @btn-primary-color-hover: @color-f;
+    @btn-primary-bg: @color-blue;
+    @btn-primary-bg-hover: darken(@btn-primary-bg, 5%);
 
-	&--primary {
-		color: @btn-primary-color;
-		background: @btn-primary-bg;
+    &--primary {
+        color: @btn-primary-color;
+        background: @btn-primary-bg;
 
-		&:hover {
-			color: @btn-primary-color-hover;
-			background: @btn-primary-bg-hover;
-		}
-	}
+        &:hover {
+            color: @btn-primary-color-hover;
+            background: @btn-primary-bg-hover;
+        }
+    }
 
-	&--disabled {
-		opacity: 0.5;
-		cursor: no-drop;
-	}
+    &--disabled {
+        opacity: 0.5;
+        cursor: no-drop;
+    }
 }
 
 //// Modifications - size
 .btn {
-	@btn-large-padding-horizontal: 25px;
+    @btn-large-padding-horizontal: 25px;
 
-	&--large {
-		padding-left: @btn-large-padding-horizontal;
-		padding-right: @btn-large-padding-horizontal;
+    &--large {
+        padding-left: @btn-large-padding-horizontal;
+        padding-right: @btn-large-padding-horizontal;
 
-		font-size: 16px;
-	}
+        font-size: 16px;
+    }
 
-	@btn-small-padding-vertical: 5px;
-	@btn-small-padding-horizontal: 10px;
-	@btn-small-height: @btn-height - 10;
+    @btn-small-padding-vertical: 5px;
+    @btn-small-padding-horizontal: 10px;
+    @btn-small-height: @btn-height - 10;
 
-	&--small {
-		padding: @btn-small-padding-vertical @btn-small-padding-horizontal;
-		min-height: @btn-small-height;
+    &--small {
+        padding: @btn-small-padding-vertical @btn-small-padding-horizontal;
+        min-height: @btn-small-height;
 
-		font-size: 11px;
-	}
+        font-size: 11px;
+    }
 }
 
 // Button with removed styles
 .btn-no-style {
-	padding: 0;
-	display: inline-block;
+    padding: 0;
+    display: inline-block;
 
-	border: 0;
-	background: none;
-	outline: 0;
+    border: 0;
+    background: none;
+    outline: 0;
 }
 
 // Button for mobile head
 .btn-tap {
-	display: inline-block;
-	min-width: 28px;
-	height: 28px;
-	line-height: 28px;
-	margin: 0 5px;
-	text-align: center;
+    display: inline-block;
+    min-width: 28px;
+    height: 28px;
+    line-height: 28px;
+    margin: 0 5px;
+    text-align: center;
 
-	outline: 0;
-	cursor: pointer;
+    outline: 0;
+    cursor: pointer;
 
-	&__in {
-		padding: 0 10px;
-		display: block;
-		position: relative;
-		transition: @transition color;
+    &__in {
+        padding: 0 10px;
+        display: block;
+        position: relative;
+        transition: @transition color;
 
-		color: @color-base;
-		text-decoration: none;
-		font-size: 16px;
+        color: @color-base;
+        text-decoration: none;
+        font-size: 16px;
 
-		.active & {
-			color: @color-primary;
-			text-decoration: none;
-		}
+        .active & {
+            color: @color-primary;
+            text-decoration: none;
+        }
 
-		&__info {
-			position: absolute;
-			top: -3px;
-			right: -3px;
-			width: 16px;
-			height: 16px;
-			line-height: 16px;
+        &__info {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
 
-			border-radius: 50%;
-			color: @color-f;
-			background: @color-red;
-			font-size: 12px;
-		}
-	}
+            border-radius: 50%;
+            color: @color-f;
+            background: @color-red;
+            font-size: 12px;
+        }
+    }
 }
 
 //// Modification - menu
 .btn-tap {
-	&--menu {
-		float: left;
-		margin-left: 0;
+    &--menu {
+        float: left;
+        margin-left: 0;
 
-		.svg {
-			margin-right: 5px;
-			vertical-align: baseline;
+        .svg {
+            margin-right: 5px;
+            vertical-align: baseline;
 
-			font-size: 11px;
-		}
-	}
+            font-size: 11px;
+        }
+    }
 
-	&__in {
-		.btn-tap--menu & {
-			background: @color-light;
-			font-size: 14px;
-		}
+    &__in {
+        .btn-tap--menu & {
+            background: @color-light;
+            font-size: 14px;
+        }
 
-		.btn-tap--menu.active &  {
-			color: @color-f;
-			background: @color-primary;
-		}
-	}
+        .btn-tap--menu.active &  {
+            color: @color-f;
+            background: @color-primary;
+        }
+    }
 }

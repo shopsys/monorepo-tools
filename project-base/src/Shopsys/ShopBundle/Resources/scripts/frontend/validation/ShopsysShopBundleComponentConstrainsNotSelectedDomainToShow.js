@@ -1,24 +1,24 @@
 (function ($) {
 
-	ShopsysShopBundleComponentConstraintsNotSelectedDomainToShow = function() {
-		this.message = '';
+    ShopsysShopBundleComponentConstraintsNotSelectedDomainToShow = function() {
+        this.message = '';
 
-		this.validate = function(value, ele) {
-			var anyDomainSelected = false;
+        this.validate = function(value, ele) {
+            var anyDomainSelected = false;
 
-			for (var i in value) {
-				if (value[i] === true) {
-					anyDomainSelected = true;
-					break;
-				}
-			}
+            for (var i in value) {
+                if (value[i] === true) {
+                    anyDomainSelected = true;
+                    break;
+                }
+            }
 
-			if (!anyDomainSelected) {
-				return this.message;
-			} else {
-				return [];
-			}
-		};
-	};
+            if (!anyDomainSelected) {
+                return this.message;
+            } else {
+                return [];
+            }
+        };
+    };
 
 })(jQuery);

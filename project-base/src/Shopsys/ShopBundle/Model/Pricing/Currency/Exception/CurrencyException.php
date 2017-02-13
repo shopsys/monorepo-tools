@@ -2,6 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Pricing\Currency\Exception;
 
-interface CurrencyException {
-
+interface CurrencyException
+{
 }

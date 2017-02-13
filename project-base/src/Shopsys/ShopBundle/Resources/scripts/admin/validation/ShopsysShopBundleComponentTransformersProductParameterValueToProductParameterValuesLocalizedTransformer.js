@@ -1,36 +1,36 @@
 (function ($) {
 
-	ShopsysShopBundleComponentTransformersProductParameterValueToProductParameterValuesLocalizedTransformer = function() {
+    ShopsysShopBundleComponentTransformersProductParameterValueToProductParameterValuesLocalizedTransformer = function() {
 
-		this.transform = function(normData) {
-			console.log('transform', normData);
+        this.transform = function(normData) {
+            console.log('transform', normData);
 
-			return normData;
-		};
+            return normData;
+        };
 
-		this.reverseTransform = function(viewData) {
-			var normData = [];
+        this.reverseTransform = function(viewData) {
+            var normData = [];
 
-			for (var i in viewData) {
-				var productParameterValuesLocalized = viewData[i];
+            for (var i in viewData) {
+                var productParameterValuesLocalized = viewData[i];
 
-				for (var locale in productParameterValuesLocalized.valueText) {
-					var valueText = productParameterValuesLocalized.valueText[locale];
+                for (var locale in productParameterValuesLocalized.valueText) {
+                    var valueText = productParameterValuesLocalized.valueText[locale];
 
-					if (valueText !== '') {
-						var productParameterValue = {
-							parameter: productParameterValuesLocalized.parameter,
-							locale: locale,
-							valueText: valueText
-						};
+                    if (valueText !== '') {
+                        var productParameterValue = {
+                            parameter: productParameterValuesLocalized.parameter,
+                            locale: locale,
+                            valueText: valueText
+                        };
 
-						normData.push(productParameterValue);
-					}
-				}
-			}
+                        normData.push(productParameterValue);
+                    }
+                }
+            }
 
-			return normData;
-		};
-	}
+            return normData;
+        };
+    }
 
 })(jQuery);

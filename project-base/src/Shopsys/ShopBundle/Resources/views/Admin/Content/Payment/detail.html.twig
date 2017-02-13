@@ -1,64 +1,64 @@
 {% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}
-	- {{ 'Payment'|trans }}
+    - {{ 'Payment'|trans }}
 {% endblock %}
 
 {% block h1 %}
-	{{ 'Payment'|trans }}
+    {{ 'Payment'|trans }}
 {% endblock %}
 
 {% block main_content %}
 
-	{{ form_start(form) }}
-		{{ form_errors(form) }}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
 
-		<div class="form-group wrap-border">
-			<div class="form-group__title">
-				{{ 'Default settings'|trans }}
-			</div>
-			{{ form_id(paymentDetail.payment|default(null)) }}
+        <div class="form-group wrap-border">
+            <div class="form-group__title">
+                {{ 'Default settings'|trans }}
+            </div>
+            {{ form_id(paymentDetail.payment|default(null)) }}
 
-			{{ form_row(form.paymentData.name, { label: 'Name'|trans}) }}
-			{{ form_row(form.paymentData.domains, { label: 'Display on'|trans }) }}
-			{{ form_row(form.paymentData.hidden, { label: 'Hidden'|trans, attr: {class: 'form-line--between'} }) }}
-		</div>
-		<div class="form-group wrap-border">
-			<div class="form-group__title">
-				{{ 'Prices'|trans }}
-			</div>
-			{{ form_row(form.paymentData.czkRounding, {
-				label: 'Order in CZK round to whole crowns'|trans,
-				attr: { class: 'form-line--between' },
-				icon: { title: 'Rounding item with 0 % VAT will be added to your order. It is used for payment in cash.'|trans }
-			}) }}
-			{{ form_row(form.paymentData.vat, { label: 'VAT'|trans}) }}
-			{% block payment_base_prices %}{% endblock %}
-		</div>
-		<div class="form-group wrap-border">
-			<div class="form-group__title">
-				{{ 'Additional information'|trans }}
-			</div>
-			{{ form_row(form.paymentData.transports, { label: 'Allowed for shipping types'|trans, empty_message: 'You have to create some shipping first.'|trans}) }}
-			{{ form_row(form.paymentData.description, { label: 'Description'|trans}) }}
-			{{ form_row(form.paymentData.instructions, { label: 'Instructions'|trans}) }}
-		</div>
+            {{ form_row(form.paymentData.name, { label: 'Name'|trans}) }}
+            {{ form_row(form.paymentData.domains, { label: 'Display on'|trans }) }}
+            {{ form_row(form.paymentData.hidden, { label: 'Hidden'|trans, attr: {class: 'form-line--between'} }) }}
+        </div>
+        <div class="form-group wrap-border">
+            <div class="form-group__title">
+                {{ 'Prices'|trans }}
+            </div>
+            {{ form_row(form.paymentData.czkRounding, {
+                label: 'Order in CZK round to whole crowns'|trans,
+                attr: { class: 'form-line--between' },
+                icon: { title: 'Rounding item with 0 % VAT will be added to your order. It is used for payment in cash.'|trans }
+            }) }}
+            {{ form_row(form.paymentData.vat, { label: 'VAT'|trans}) }}
+            {% block payment_base_prices %}{% endblock %}
+        </div>
+        <div class="form-group wrap-border">
+            <div class="form-group__title">
+                {{ 'Additional information'|trans }}
+            </div>
+            {{ form_row(form.paymentData.transports, { label: 'Allowed for shipping types'|trans, empty_message: 'You have to create some shipping first.'|trans}) }}
+            {{ form_row(form.paymentData.description, { label: 'Description'|trans}) }}
+            {{ form_row(form.paymentData.instructions, { label: 'Instructions'|trans}) }}
+        </div>
 
-		<div class="form-group">
-			<div class="form-group__title">
-				{{ 'Picture'|trans }}
-			</div>
+        <div class="form-group">
+            <div class="form-group__title">
+                {{ 'Picture'|trans }}
+            </div>
 
-			{% block image %}{% endblock %}
-			{{ form_row(form.paymentData.image, { label: 'Upload picture'|trans, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans }) }}
-		</div>
+            {% block image %}{% endblock %}
+            {{ form_row(form.paymentData.image, { label: 'Upload picture'|trans, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans }) }}
+        </div>
 
 
-		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
-			{% block fixed_bar_content %}
-				<a href="{{ url('admin_transportandpayment_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
-				{{ form_save(paymentDetail|default(null), form) }}
-			{% endblock %}
-		{% endembed %}
-	{{ form_end(form) }}
+        {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+            {% block fixed_bar_content %}
+                <a href="{{ url('admin_transportandpayment_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
+                {{ form_save(paymentDetail|default(null), form) }}
+            {% endblock %}
+        {% endembed %}
+    {{ form_end(form) }}
 {% endblock %}

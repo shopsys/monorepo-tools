@@ -2,6 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Grid\InlineEdit\Exception;
 
-interface InlineEditException {
-
+interface InlineEditException
+{
 }

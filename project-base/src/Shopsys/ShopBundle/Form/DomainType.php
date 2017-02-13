@@ -8,49 +8,53 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class DomainType extends AbstractType {
+class DomainType extends AbstractType
+{
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     */
+    private $domain;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
-	 */
-	private $domain;
+    /**
+     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     */
+    public function __construct(Domain $domain)
+    {
+        $this->domain = $domain;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
-	 */
-	public function __construct(Domain $domain) {
-		$this->domain = $domain;
-	}
+    /**
+     * @inheritdoc
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['domainConfigs'] = $this->domain->getAll();
+        $view->vars['displayUrl'] = $options['displayUrl'];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function buildView(FormView $view, FormInterface $form, array $options) {
-		$view->vars['domainConfigs'] = $this->domain->getAll();
-		$view->vars['displayUrl'] = $options['displayUrl'];
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults([
+            'displayUrl' => false,
+        ]);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults([
-			'displayUrl' => false,
-		]);
-	}
+    /**
+     * @return string
+     */
+    public function getParent()
+    {
+        return 'integer';
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getParent() {
-		return 'integer';
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return 'domain';
-	}
-
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'domain';
+    }
 }

@@ -2,11 +2,10 @@
 
 namespace Shopsys\ShopBundle\Component\Sitemap;
 
-class SitemapItem {
-
-	/**
-	 * @var string
-	 */
-	public $slug;
-
+class SitemapItem
+{
+    /**
+     * @var string
+     */
+    public $slug;
 }

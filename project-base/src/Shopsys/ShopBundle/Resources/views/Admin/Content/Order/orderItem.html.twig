@@ -1,71 +1,71 @@
 {% macro orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, currency, productItem) %}
-	<tr class="js-order-item" data-index="{{ orderItemId }}">
-		<td>
-			{% if productItem and productItem.product %}
-				{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
-				<a href="{{ path('admin_product_edit', { id: productItem.product.id }) }}" target="_blank">
-					<i class="svg svg-arrow-simple in-icon in-icon--detail"></i>
-				</a>
-			{% elseif productItem and not productItem.product %}
-				{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
-				<i class="svg svg-question js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Product not in e-shop.'|trans }}"></i>
-			{% else %}
-				{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
-			{% endif %}
-		</td>
-		<td>{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}</td>
-		<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
-		<td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right'}}) }}</td>
-		<td>{{ form_widget(orderItemForm.unitName, {attr: { class: 'text-right'}}) }}</td>
-		<td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-		<td class="text-right text-middle">
-			{% if orderItemTotalPricesById[orderItemId] is defined %}
-				{{ orderItemTotalPricesById[orderItemId].priceWithVat|priceWithCurrency(currency) }}
-			{% endif %}
-		</td>
-		<td class="text-right text-middle">
-			{% if orderItemTotalPricesById[orderItemId] is defined %}
-				{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|priceWithCurrency(currency) }}
-			{% endif %}
-		</td>
-		<td class="table-col-5 table-edit__body__cell text-center">
-			<a href="#" class="js-order-item-remove table-action"><i class="svg svg-trash"></i></a>
-		</td>
-	</tr>
+    <tr class="js-order-item" data-index="{{ orderItemId }}">
+        <td>
+            {% if productItem and productItem.product %}
+                {{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
+                <a href="{{ path('admin_product_edit', { id: productItem.product.id }) }}" target="_blank">
+                    <i class="svg svg-arrow-simple in-icon in-icon--detail"></i>
+                </a>
+            {% elseif productItem and not productItem.product %}
+                {{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
+                <i class="svg svg-question js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Product not in e-shop.'|trans }}"></i>
+            {% else %}
+                {{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
+            {% endif %}
+        </td>
+        <td>{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}</td>
+        <td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+        <td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right'}}) }}</td>
+        <td>{{ form_widget(orderItemForm.unitName, {attr: { class: 'text-right'}}) }}</td>
+        <td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+        <td class="text-right text-middle">
+            {% if orderItemTotalPricesById[orderItemId] is defined %}
+                {{ orderItemTotalPricesById[orderItemId].priceWithVat|priceWithCurrency(currency) }}
+            {% endif %}
+        </td>
+        <td class="text-right text-middle">
+            {% if orderItemTotalPricesById[orderItemId] is defined %}
+                {{ orderItemTotalPricesById[orderItemId].priceWithoutVat|priceWithCurrency(currency) }}
+            {% endif %}
+        </td>
+        <td class="table-col-5 table-edit__body__cell text-center">
+            <a href="#" class="js-order-item-remove table-action"><i class="svg svg-trash"></i></a>
+        </td>
+    </tr>
 {% endmacro %}
 
 {% macro orderTransport(orderTransportForm, order, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) %}
-	<tr
-			class="js-order-transport-row"
-			data-transport-prices-with-vat-by-transport-id="{{ transportPricesWithVatByTransportId|json_encode() }}"
-			data-transport-vat-percents-by-transport-id="{{ transportVatPercentsByTransportId|json_encode() }}"
-			>
-		<td>{{ form_widget(orderTransportForm.transport, {isSimple: true}) }}</td>
-		<td class="text-right">-</td>
-		<td>{{ form_widget(orderTransportForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
-		<td class="text-right">1</td>
-		<td class="text-right"></td>
-		<td class="text-right">{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-		<td class="text-right">{{ order.orderTransport.priceWithVat|priceWithCurrency(order.currency) }}</td>
-		<td class="text-right">{{ order.orderTransport.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
-		<td></td>
-	</tr>
+    <tr
+            class="js-order-transport-row"
+            data-transport-prices-with-vat-by-transport-id="{{ transportPricesWithVatByTransportId|json_encode() }}"
+            data-transport-vat-percents-by-transport-id="{{ transportVatPercentsByTransportId|json_encode() }}"
+            >
+        <td>{{ form_widget(orderTransportForm.transport, {isSimple: true}) }}</td>
+        <td class="text-right">-</td>
+        <td>{{ form_widget(orderTransportForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+        <td class="text-right">1</td>
+        <td class="text-right"></td>
+        <td class="text-right">{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+        <td class="text-right">{{ order.orderTransport.priceWithVat|priceWithCurrency(order.currency) }}</td>
+        <td class="text-right">{{ order.orderTransport.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+        <td></td>
+    </tr>
 {% endmacro %}
 
 {% macro orderPayment(orderPaymentForm, order, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) %}
-	<tr
-			class="js-order-payment-row"
-			data-payment-prices-with-vat-by-payment-id="{{ paymentPricesWithVatByPaymentId|json_encode() }}"
-			data-payment-vat-percents-by-payment-id="{{ paymentVatPercentsByPaymentId|json_encode() }}"
-			>
-		<td>{{ form_widget(orderPaymentForm.payment, {isSimple: true}) }}</td>
-		<td class="text-right">-</td>
-		<td>{{ form_widget(orderPaymentForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
-		<td class="text-right">1</td>
-		<td class="text-right"></td>
-		<td class="text-right">{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-		<td class="text-right">{{ order.orderPayment.priceWithVat|priceWithCurrency(order.currency) }}</td>
-		<td class="text-right">{{ order.orderPayment.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
-		<td></td>
-	</tr>
+    <tr
+            class="js-order-payment-row"
+            data-payment-prices-with-vat-by-payment-id="{{ paymentPricesWithVatByPaymentId|json_encode() }}"
+            data-payment-vat-percents-by-payment-id="{{ paymentVatPercentsByPaymentId|json_encode() }}"
+            >
+        <td>{{ form_widget(orderPaymentForm.payment, {isSimple: true}) }}</td>
+        <td class="text-right">-</td>
+        <td>{{ form_widget(orderPaymentForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+        <td class="text-right">1</td>
+        <td class="text-right"></td>
+        <td class="text-right">{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+        <td class="text-right">{{ order.orderPayment.priceWithVat|priceWithCurrency(order.currency) }}</td>
+        <td class="text-right">{{ order.orderPayment.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+        <td></td>
+    </tr>
 {% endmacro %}

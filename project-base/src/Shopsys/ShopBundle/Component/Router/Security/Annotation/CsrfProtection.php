@@ -8,6 +8,6 @@ use Doctrine\Common\Annotations\Annotation;
  * @Annotation
  * @Annotation\Target("METHOD")
  */
-class CsrfProtection extends Annotation {
-
+class CsrfProtection extends Annotation
+{
 }

@@ -2,16 +2,15 @@
 
 namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 
-class FriendlyUrlData {
+class FriendlyUrlData
+{
+    /**
+     * @var int
+     */
+    public $id;
 
-	/**
-	 * @var int
-	 */
-	public $id;
-
-	/**
-	 * @var string
-	 */
-	public $name;
-
+    /**
+     * @var string
+     */
+    public $name;
 }

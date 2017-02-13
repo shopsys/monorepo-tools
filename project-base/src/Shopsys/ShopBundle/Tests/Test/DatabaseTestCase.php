@@ -5,31 +5,35 @@ namespace Shopsys\ShopBundle\Tests\Test;
 use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-abstract class DatabaseTestCase extends FunctionalTestCase {
+abstract class DatabaseTestCase extends FunctionalTestCase
+{
+    /**
+     * @return \Doctrine\ORM\EntityManager
+     */
+    protected function getEntityManager()
+    {
+        return $this->getContainer()->get('doctrine.orm.entity_manager');
+    }
 
-	/**
-	 * @return \Doctrine\ORM\EntityManager
-	 */
-	protected function getEntityManager() {
-		return $this->getContainer()->get('doctrine.orm.entity_manager');
-	}
+    /**
+     * @return \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
+     */
+    protected function getEntityManagerFacade()
+    {
+        return $this->getContainer()->get(EntityManagerFacade::class);
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
-	 */
-	protected function getEntityManagerFacade() {
-		return $this->getContainer()->get(EntityManagerFacade::class);
-	}
+    protected function setUp()
+    {
+        parent::setUp();
 
-	protected function setUp() {
-		parent::setUp();
+        $this->getEntityManager()->beginTransaction();
+    }
 
-		$this->getEntityManager()->beginTransaction();
-	}
+    protected function tearDown()
+    {
+        $this->getEntityManager()->rollback();
 
-	protected function tearDown() {
-		$this->getEntityManager()->rollback();
-
-		parent::tearDown();
-	}
+        parent::tearDown();
+    }
 }

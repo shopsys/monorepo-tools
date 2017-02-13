@@ -1,31 +1,31 @@
 {% if remainingEntitiesChoiceList.choices|length > 0 %}
-	{{ message|nl2br }}
-	{# custom form rendering because of csrf token and input names - controllers delete actions expect "newId" parameter #}
-	<form action="{{ url(route, {id: entityId}) }}" method="get" class="js-confirm-delete-form margin-top-20">
-		<input
-			type="hidden"
-			name="{{ CSRF_TOKEN_REQUEST_PARAMETER }}"
-			value="{{ routeCsrfToken }}"
-		/>
-		<select name="newId" class="js-confirm-delete-select">
-			<option value="">-- {{ 'Select new value'|trans }} --</option>
-			{% for preferredView in remainingEntitiesChoiceList.preferredViews %}
-				<option value="{{ preferredView.value }}">{{ preferredView.label }}</option>
-			{% endfor %}
-			{% for remainingView in remainingEntitiesChoiceList.remainingViews %}
-				<option value="{{ remainingView.value }}">{{ remainingView.label }}</option>
-			{% endfor %}
-		</select>
+    {{ message|nl2br }}
+    {# custom form rendering because of csrf token and input names - controllers delete actions expect "newId" parameter #}
+    <form action="{{ url(route, {id: entityId}) }}" method="get" class="js-confirm-delete-form margin-top-20">
+        <input
+            type="hidden"
+            name="{{ CSRF_TOKEN_REQUEST_PARAMETER }}"
+            value="{{ routeCsrfToken }}"
+        />
+        <select name="newId" class="js-confirm-delete-select">
+            <option value="">-- {{ 'Select new value'|trans }} --</option>
+            {% for preferredView in remainingEntitiesChoiceList.preferredViews %}
+                <option value="{{ preferredView.value }}">{{ preferredView.label }}</option>
+            {% endfor %}
+            {% for remainingView in remainingEntitiesChoiceList.remainingViews %}
+                <option value="{{ remainingView.value }}">{{ remainingView.label }}</option>
+            {% endfor %}
+        </select>
 
-		<div class="window__actions">
-			<button type="submit" class="btn">
-				{{ 'Delete and set'|trans }}
-			</button>
-		</div>
-	</form>
+        <div class="window__actions">
+            <button type="submit" class="btn">
+                {{ 'Delete and set'|trans }}
+            </button>
+        </div>
+    </form>
 {% else %}
-	<p>
-		{{ 'To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one.'|trans }}
-	</p>
+    <p>
+        {{ 'To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one.'|trans }}
+    </p>
 {% endif %}
 

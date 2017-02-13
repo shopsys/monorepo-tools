@@ -8,29 +8,29 @@ use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class GroupedScalarHydratorTest extends DatabaseTestCase {
+class GroupedScalarHydratorTest extends DatabaseTestCase
+{
+    public function testHydrateAllData()
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder()
+            ->select('o, oi')
+            ->from(Order::class, 'o')
+            ->join(OrderItem::class, 'oi', Join::WITH, 'oi.order = o')
+            ->setMaxResults(1);
 
-	public function testHydrateAllData() {
-		$qb = $this->getEntityManager()->createQueryBuilder()
-			->select('o, oi')
-			->from(Order::class, 'o')
-			->join(OrderItem::class, 'oi', Join::WITH, 'oi.order = o')
-			->setMaxResults(1);
+        $rows = $qb->getQuery()->execute(null, GroupedScalarHydrator::HYDRATION_MODE);
+        $row = $rows[0];
 
-		$rows = $qb->getQuery()->execute(null, GroupedScalarHydrator::HYDRATION_MODE);
-		$row = $rows[0];
+        $this->assertInternalType('array', $row);
 
-		$this->assertInternalType('array', $row);
+        $this->assertCount(2, $row);
+        $this->assertArrayHasKey('o', $row);
+        $this->assertArrayHasKey('oi', $row);
 
-		$this->assertCount(2, $row);
-		$this->assertArrayHasKey('o', $row);
-		$this->assertArrayHasKey('oi', $row);
+        $this->assertInternalType('array', $row['o']);
+        $this->assertInternalType('array', $row['oi']);
 
-		$this->assertInternalType('array', $row['o']);
-		$this->assertInternalType('array', $row['oi']);
-
-		$this->assertArrayHasKey('id', $row['o']);
-		$this->assertArrayHasKey('id', $row['oi']);
-	}
-
+        $this->assertArrayHasKey('id', $row['o']);
+        $this->assertArrayHasKey('id', $row['oi']);
+    }
 }

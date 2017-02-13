@@ -2,31 +2,33 @@
 
 namespace Shopsys\ShopBundle\Model\Pricing\Group;
 
-class PricingGroupData {
+class PricingGroupData
+{
+    /**
+     * @var string|null
+     */
+    public $name;
 
-	/**
-	 * @var string|null
-	 */
-	public $name;
+    /**
+     * @var string
+     */
+    public $coefficient;
 
-	/**
-	 * @var string
-	 */
-	public $coefficient;
+    /**
+     * @param string|null $name
+     */
+    public function __construct($name = null, $coefficient = 1)
+    {
+        $this->name = $name;
+        $this->coefficient = $coefficient;
+    }
 
-	/**
-	 * @param string|null $name
-	 */
-	public function __construct($name = null, $coefficient = 1) {
-		$this->name = $name;
-		$this->coefficient = $coefficient;
-	}
-
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 */
-	public function setFromEntity(PricingGroup $pricingGroup) {
-		$this->name = $pricingGroup->getName();
-		$this->coefficient = $pricingGroup->getCoefficient();
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     */
+    public function setFromEntity(PricingGroup $pricingGroup)
+    {
+        $this->name = $pricingGroup->getName();
+        $this->coefficient = $pricingGroup->getCoefficient();
+    }
 }

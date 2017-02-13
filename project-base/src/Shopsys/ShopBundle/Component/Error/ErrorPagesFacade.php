@@ -12,136 +12,141 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 
-class ErrorPagesFacade {
+class ErrorPagesFacade
+{
+    const PAGE_STATUS_CODE_404 = Response::HTTP_NOT_FOUND;
+    const PAGE_STATUS_CODE_500 = Response::HTTP_INTERNAL_SERVER_ERROR;
 
-	const PAGE_STATUS_CODE_404 = Response::HTTP_NOT_FOUND;
-	const PAGE_STATUS_CODE_500 = Response::HTTP_INTERNAL_SERVER_ERROR;
+    /**
+     * @var string
+     */
+    private $errorPagesDir;
 
-	/**
-	 * @var string
-	 */
-	private $errorPagesDir;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     */
+    private $domain;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
-	 */
-	private $domain;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     */
+    private $domainRouterFactory;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
-	 */
-	private $domainRouterFactory;
+    /**
+     * @var \Symfony\Component\Filesystem\Filesystem
+     */
+    private $filesystem;
 
-	/**
-	 * @var \Symfony\Component\Filesystem\Filesystem
-	 */
-	private $filesystem;
+    /**
+     * @param string $errorPagesDir
+     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\ShopBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+     * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+     */
+    public function __construct(
+        $errorPagesDir,
+        Domain $domain,
+        DomainRouterFactory $domainRouterFactory,
+        Filesystem $filesystem
+    ) {
+        $this->errorPagesDir = $errorPagesDir;
+        $this->domain = $domain;
+        $this->domainRouterFactory = $domainRouterFactory;
+        $this->filesystem = $filesystem;
+    }
 
-	/**
-	 * @param string $errorPagesDir
-	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
-	 * @param \Shopsys\ShopBundle\Component\Router\DomainRouterFactory $domainRouterFactory
-	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
-	 */
-	public function __construct(
-		$errorPagesDir,
-		Domain $domain,
-		DomainRouterFactory $domainRouterFactory,
-		Filesystem $filesystem
-	) {
-		$this->errorPagesDir = $errorPagesDir;
-		$this->domain = $domain;
-		$this->domainRouterFactory = $domainRouterFactory;
-		$this->filesystem = $filesystem;
-	}
+    public function generateAllErrorPagesForProduction()
+    {
+        foreach ($this->domain->getAll() as $domainConfig) {
+            $this->generateAndSaveErrorPage($domainConfig->getId(), self::PAGE_STATUS_CODE_404);
+            $this->generateAndSaveErrorPage($domainConfig->getId(), self::PAGE_STATUS_CODE_500);
+        }
+    }
 
-	public function generateAllErrorPagesForProduction() {
-		foreach ($this->domain->getAll() as $domainConfig) {
-			$this->generateAndSaveErrorPage($domainConfig->getId(), self::PAGE_STATUS_CODE_404);
-			$this->generateAndSaveErrorPage($domainConfig->getId(), self::PAGE_STATUS_CODE_500);
-		}
-	}
+    /**
+     * @param int $domainId
+     * @param int $statusCode
+     * @return string
+     */
+    public function getErrorPageContentByDomainIdAndStatusCode($domainId, $statusCode)
+    {
+        $errorPageContent = file_get_contents($this->getErrorPageFilename($domainId, $statusCode));
+        if ($errorPageContent === false) {
+            throw new \ShopBundle\Component\Error\Exception\ErrorPageNotFoundException($domainId, $statusCode);
+        }
 
-	/**
-	 * @param int $domainId
-	 * @param int $statusCode
-	 * @return string
-	 */
-	public function getErrorPageContentByDomainIdAndStatusCode($domainId, $statusCode) {
-		$errorPageContent = file_get_contents($this->getErrorPageFilename($domainId, $statusCode));
-		if ($errorPageContent === false) {
-			throw new \ShopBundle\Component\Error\Exception\ErrorPageNotFoundException($domainId, $statusCode);
-		}
+        return $errorPageContent;
+    }
 
-		return $errorPageContent;
-	}
+    /**
+     * @param int $statusCode
+     * @return int
+     */
+    public function getErrorPageStatusCodeByStatusCode($statusCode)
+    {
+        if ($statusCode === Response::HTTP_NOT_FOUND || $statusCode === Response::HTTP_FORBIDDEN) {
+            return self::PAGE_STATUS_CODE_404;
+        } else {
+            return self::PAGE_STATUS_CODE_500;
+        }
+    }
 
-	/**
-	 * @param int $statusCode
-	 * @return int
-	 */
-	public function getErrorPageStatusCodeByStatusCode($statusCode) {
-		if ($statusCode === Response::HTTP_NOT_FOUND || $statusCode === Response::HTTP_FORBIDDEN) {
-			return self::PAGE_STATUS_CODE_404;
-		} else {
-			return self::PAGE_STATUS_CODE_500;
-		}
-	}
+    /**
+     * @param int $domainId
+     * @param int $statusCode
+     */
+    private function generateAndSaveErrorPage($domainId, $statusCode)
+    {
+        $domainRouter = $this->domainRouterFactory->getRouter($domainId);
+        $errorPageUrl = $domainRouter->generate(
+            'front_error_page_format',
+            [
+                '_format' => 'html',
+                'code' => $statusCode,
+            ],
+            RouterInterface::ABSOLUTE_URL
+        );
 
-	/**
-	 * @param int $domainId
-	 * @param int $statusCode
-	 */
-	private function generateAndSaveErrorPage($domainId, $statusCode) {
-		$domainRouter = $this->domainRouterFactory->getRouter($domainId);
-		$errorPageUrl = $domainRouter->generate(
-			'front_error_page_format',
-			[
-				'_format' => 'html',
-				'code' => $statusCode,
-			],
-			RouterInterface::ABSOLUTE_URL
-		);
+        $errorPageContent = $this->getUrlContent($errorPageUrl, $statusCode);
 
-		$errorPageContent = $this->getUrlContent($errorPageUrl, $statusCode);
+        $this->filesystem->dumpFile(
+            $this->getErrorPageFilename($domainId, $statusCode),
+            $errorPageContent
+        );
+    }
 
-		$this->filesystem->dumpFile(
-			$this->getErrorPageFilename($domainId, $statusCode),
-			$errorPageContent
-		);
-	}
+    /**
+     * @param int $domainId
+     * @param int $statusCode
+     * @return string
+     */
+    private function getErrorPageFilename($domainId, $statusCode)
+    {
+        return $this->errorPagesDir . $statusCode . '_ ' . $domainId . '.html';
+    }
 
-	/**
-	 * @param int $domainId
-	 * @param int $statusCode
-	 * @return string
-	 */
-	private function getErrorPageFilename($domainId, $statusCode) {
-		return $this->errorPagesDir . $statusCode . '_ ' . $domainId . '.html';
-	}
+    /**
+     * @param string $errorPageUrl
+     * @param int $expectedStatusCode
+     * @return string
+     */
+    private function getUrlContent($errorPageUrl, $expectedStatusCode)
+    {
+        $errorPageKernel = new AppKernel(Environment::ENVIRONMENT_PRODUCTION, false);
 
-	/**
-	 * @param string $errorPageUrl
-	 * @param int $expectedStatusCode
-	 * @return string
-	 */
-	private function getUrlContent($errorPageUrl, $expectedStatusCode) {
-		$errorPageKernel = new AppKernel(Environment::ENVIRONMENT_PRODUCTION, false);
+        $errorPageFakeRequest = Request::create($errorPageUrl);
 
-		$errorPageFakeRequest = Request::create($errorPageUrl);
+        $errorPageResponse = $errorPageKernel->handle($errorPageFakeRequest);
+        $errorPageKernel->terminate($errorPageFakeRequest, $errorPageResponse);
 
-		$errorPageResponse = $errorPageKernel->handle($errorPageFakeRequest);
-		$errorPageKernel->terminate($errorPageFakeRequest, $errorPageResponse);
+        if ($expectedStatusCode !== $errorPageResponse->getStatusCode()) {
+            throw new \ShopBundle\Component\Error\Exception\BadErrorPageStatusCodeException(
+                $errorPageUrl,
+                $expectedStatusCode,
+                $errorPageResponse->getStatusCode()
+            );
+        }
 
-		if ($expectedStatusCode !== $errorPageResponse->getStatusCode()) {
-			throw new \ShopBundle\Component\Error\Exception\BadErrorPageStatusCodeException(
-				$errorPageUrl,
-				$expectedStatusCode,
-				$errorPageResponse->getStatusCode()
-			);
-		}
-
-		return $errorPageResponse->getContent();
-	}
-
+        return $errorPageResponse->getContent();
+    }
 }

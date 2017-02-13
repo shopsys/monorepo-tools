@@ -9,33 +9,33 @@
 
 // base settings for button
 .btn {
-	width: auto;
-	height: @btn-height;
-	padding: @btn-padding-vertical @btn-padding-horizontal;
-	line-height: @btn-height - 10;
-	vertical-align:middle;
-	display: inline-block;
+    width: auto;
+    height: @btn-height;
+    padding: @btn-padding-vertical @btn-padding-horizontal;
+    line-height: @btn-height - 10;
+    vertical-align:middle;
+    display: inline-block;
 
-	border: 0;
-	color: @btn-color;
-	background: @btn-bg;
-	cursor: pointer;
-	font-weight: bold;
-	text-decoration: none;
-	font-size: 13px;
-	transition: @transition ~"background, color";
+    border: 0;
+    color: @btn-color;
+    background: @btn-bg;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 13px;
+    transition: @transition ~"background, color";
 
-	&:hover {
-		color: @btn-color-hover;
-		background: @btn-bg-hover;
-	}
+    &:hover {
+        color: @btn-color-hover;
+        background: @btn-bg-hover;
+    }
 
-	&__icon {
-		margin-right: 7px;
-		float: left;
-		position: relative;
-		top: 3px;
-	}
+    &__icon {
+        margin-right: 7px;
+        float: left;
+        position: relative;
+        top: 3px;
+    }
 }
 
 // Modification - colors
@@ -52,34 +52,34 @@
 @btn-neutral-bg-hover: darken(@color-blue, 10%);
 
 .btn {
-	&--default, &--disabled {
-		background: @btn-default-bg;
-		color: @btn-default-color;
+    &--default, &--disabled {
+        background: @btn-default-bg;
+        color: @btn-default-color;
 
-		&:hover {
-			background: @btn-default-bg;
-			color: @btn-default-color;
-		}
-	}
+        &:hover {
+            background: @btn-default-bg;
+            color: @btn-default-color;
+        }
+    }
 
-	&--light {
-		background: @btn-light-bg;
-		color: @btn-light-color;
-		border: 1px solid @btn-light-border;
+    &--light {
+        background: @btn-light-bg;
+        color: @btn-light-color;
+        border: 1px solid @btn-light-border;
 
-		&:hover {
-			background: @btn-light-bg-hover;
-			color: @btn-light-color-hover;
-		}
-	}
+        &:hover {
+            background: @btn-light-bg-hover;
+            color: @btn-light-color-hover;
+        }
+    }
 
-	&--neutral {
-		background-color: @btn-neutral-bg;
+    &--neutral {
+        background-color: @btn-neutral-bg;
 
-		&:hover {
-			background-color: @btn-neutral-bg-hover;
-		}
-	}
+        &:hover {
+            background-color: @btn-neutral-bg-hover;
+        }
+    }
 }
 
 //// Modification - types
@@ -98,126 +98,126 @@
 @btn-large-line-height: @btn-height - 2*@btn-padding-vertical + @btn-large-height-increase;
 
 .btn {
-	&--small {
-		height: @btn-small-height;
-		line-height: @btn-small-line-height;
-		padding-left: @btn-small-padding-horizontal;
-		padding-right: @btn-small-padding-horizontal;
+    &--small {
+        height: @btn-small-height;
+        line-height: @btn-small-line-height;
+        padding-left: @btn-small-padding-horizontal;
+        padding-right: @btn-small-padding-horizontal;
 
-		font-size: 11px;
+        font-size: 11px;
 
-		.btn__icon {
-			margin-right: 5px;
-			top: 1px;
+        .btn__icon {
+            margin-right: 5px;
+            top: 1px;
 
-			font-size: 10px;
-		}
-	}
+            font-size: 10px;
+        }
+    }
 
-	&--medium {
-		height: @btn-medium-height;
-		line-height: @btn-medium-line-height;
-		padding-left: @btn-medium-padding-horizontal;
-		padding-right: @btn-medium-padding-horizontal;
+    &--medium {
+        height: @btn-medium-height;
+        line-height: @btn-medium-line-height;
+        padding-left: @btn-medium-padding-horizontal;
+        padding-right: @btn-medium-padding-horizontal;
 
-		font-size: 13px;
-	}
+        font-size: 13px;
+    }
 
-	&--large {
-		height: @btn-large-height;
-		line-height: @btn-large-line-height;
-	}
+    &--large {
+        height: @btn-large-height;
+        line-height: @btn-large-line-height;
+    }
 
-	&--plus {
-		position: relative;
-		padding-left: 34px;
+    &--plus {
+        position: relative;
+        padding-left: 34px;
 
-		.btn__icon {
-			position: absolute;
-			top: 5px;
-			left: 6px;
-			width: 18px;
-			height: 18px;
+        .btn__icon {
+            position: absolute;
+            top: 5px;
+            left: 6px;
+            width: 18px;
+            height: 18px;
 
-			text-align: center;
-			line-height: 19px;
-			font-size: 20px;
-			font-weight: normal;
-		}
+            text-align: center;
+            line-height: 19px;
+            font-size: 20px;
+            font-weight: normal;
+        }
 
-		&.btn--small {
-			padding-left: 22px;
-			padding-right: 10px;
+        &.btn--small {
+            padding-left: 22px;
+            padding-right: 10px;
 
-			.btn__icon {
-				top: 2px;
-				left: 1px;
+            .btn__icon {
+                top: 2px;
+                left: 1px;
 
-				font-size: 20px;
-			}
-		}
-	}
+                font-size: 20px;
+            }
+        }
+    }
 
-	&--block {
-		width: 100%;
+    &--block {
+        width: 100%;
 
-		text-align: center;
-	}
+        text-align: center;
+    }
 
-	&--disabled {
-		cursor: default;
-	}
+    &--disabled {
+        cursor: default;
+    }
 }
 
 // settings for button in classic text style
 .btn-no-style {
-	padding: 0;
-	display: inline-block;
+    padding: 0;
+    display: inline-block;
 
-	border: 0;
-	background: none;
+    border: 0;
+    background: none;
 }
 
 // settings for button in link style
 .btn-link-style {
-	height: @btn-height;
-	padding: 5px;
-	line-height: @btn-height - 10;
-	display: inline-block;
+    height: @btn-height;
+    padding: 5px;
+    line-height: @btn-height - 10;
+    display: inline-block;
 
-	border: 0;
-	background: none;
-	text-decoration: underline;
-	color: @color-link;
-	font-size: 13px;
-	font-weight: normal;
+    border: 0;
+    background: none;
+    text-decoration: underline;
+    color: @color-link;
+    font-size: 13px;
+    font-weight: normal;
 
-	&:hover {
-		text-decoration: none;
-		color: @color-link-hover;
-	}
+    &:hover {
+        text-decoration: none;
+        color: @color-link-hover;
+    }
 
-	&--iconic-l {
-		text-decoration: none;
+    &--iconic-l {
+        text-decoration: none;
 
-		i {
-			margin-right: 3px;
-			position: relative;
-			top: -2px;
+        i {
+            margin-right: 3px;
+            position: relative;
+            top: -2px;
 
-			font-size: 16px;
-		}
+            font-size: 16px;
+        }
 
-		span {
-			display: inline-block;
+        span {
+            display: inline-block;
 
-			text-decoration: underline;
-		}
+            text-decoration: underline;
+        }
 
-		&:hover {
-			span {
-				text-decoration: none;
-			}
-		}
-	}
+        &:hover {
+            span {
+                text-decoration: none;
+            }
+        }
+    }
 }

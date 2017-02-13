@@ -10,79 +10,82 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class VatSettingsFormType extends AbstractType {
+class VatSettingsFormType extends AbstractType
+{
+    /**
+     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
+     */
+    private $vats;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
-	 */
-	private $vats;
+    /**
+     * @var array
+     */
+    private $roundingTypes;
 
-	/**
-	 * @var array
-	 */
-	private $roundingTypes;
+    /**
+     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[] $vats
+     * @param array $roundingTypes
+     */
+    public function __construct(
+        array $vats,
+        array $roundingTypes
+    ) {
+        $this->vats = $vats;
+        $this->roundingTypes = $roundingTypes;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[] $vats
-	 * @param array $roundingTypes
-	 */
-	public function __construct(
-		array $vats,
-		array $roundingTypes
-	) {
-		$this->vats = $vats;
-		$this->roundingTypes = $roundingTypes;
-	}
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'vat_settings_form';
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return 'vat_settings_form';
-	}
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $roundingTypesLabels = $this->getRoundingTypesLabels();
 
-	/**
-	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$roundingTypesLabels = $this->getRoundingTypesLabels();
+        $roundingTypesChoices = [];
+        foreach ($this->roundingTypes as $roundingType) {
+            $roundingTypesChoices[$roundingType] = $roundingTypesLabels[$roundingType];
+        }
 
-		$roundingTypesChoices = [];
-		foreach ($this->roundingTypes as $roundingType) {
-			$roundingTypesChoices[$roundingType] = $roundingTypesLabels[$roundingType];
-		}
+        $builder
+            ->add('defaultVat', FormType::CHOICE, [
+                'required' => true,
+                'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter default VAT']),
+                ],
+            ])
+            ->add('roundingType', FormType::CHOICE, [
+                'required' => true,
+                'choices' => $roundingTypesChoices,
+            ])
+            ->add('save', FormType::SUBMIT);
+    }
 
-		$builder
-			->add('defaultVat', FormType::CHOICE, [
-				'required' => true,
-				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
-				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Please enter default VAT']),
-				],
-			])
-			->add('roundingType', FormType::CHOICE, [
-				'required' => true,
-				'choices' => $roundingTypesChoices,
-			])
-			->add('save', FormType::SUBMIT);
-	}
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults([
+            'attr' => ['novalidate' => 'novalidate'],
+        ]);
+    }
 
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults([
-			'attr' => ['novalidate' => 'novalidate'],
-		]);
-	}
-
-	/**
-	 * @return array
-	 */
-	private function getRoundingTypesLabels() {
-		return [
-			PricingSetting::ROUNDING_TYPE_HUNDREDTHS => t('To hundredths (cents)'),
-			PricingSetting::ROUNDING_TYPE_FIFTIES => t('To fifty hundredths (halfs)'),
-			PricingSetting::ROUNDING_TYPE_INTEGER => t('To whole numbers'),
-		];
-	}
-
+    /**
+     * @return array
+     */
+    private function getRoundingTypesLabels()
+    {
+        return [
+            PricingSetting::ROUNDING_TYPE_HUNDREDTHS => t('To hundredths (cents)'),
+            PricingSetting::ROUNDING_TYPE_FIFTIES => t('To fifty hundredths (halfs)'),
+            PricingSetting::ROUNDING_TYPE_INTEGER => t('To whole numbers'),
+        ];
+    }
 }

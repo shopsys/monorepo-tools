@@ -7,8 +7,9 @@ use Symfony\Component\VarDumper\VarDumper;
  *
  * @SuppressWarnings(PHPMD.ShortMethodName)
  */
-function d($var) {
-	foreach (func_get_args() as $var) {
-		VarDumper::dump($var);
-	}
+function d($var)
+{
+    foreach (func_get_args() as $var) {
+        VarDumper::dump($var);
+    }
 }

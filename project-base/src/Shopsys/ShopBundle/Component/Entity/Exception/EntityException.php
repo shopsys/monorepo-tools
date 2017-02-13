@@ -2,6 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Entity\Exception;
 
-interface EntityException {
-
+interface EntityException
+{
 }

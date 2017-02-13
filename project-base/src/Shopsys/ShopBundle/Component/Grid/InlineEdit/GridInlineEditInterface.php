@@ -4,29 +4,28 @@ namespace Shopsys\ShopBundle\Component\Grid\InlineEdit;
 
 use Symfony\Component\HttpFoundation\Request;
 
-interface GridInlineEditInterface {
+interface GridInlineEditInterface
+{
+    /**
+     * @param mixed $rowId
+     * @return \Symfony\Component\Form\Form
+     */
+    public function getForm($rowId);
 
-	/**
-	 * @param mixed $rowId
-	 * @return \Symfony\Component\Form\Form
-	 */
-	public function getForm($rowId);
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param mixed $rowId
+     * @return mixed
+     */
+    public function saveForm(Request $request, $rowId);
 
-	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param mixed $rowId
-	 * @return mixed
-	 */
-	public function saveForm(Request $request, $rowId);
+    /**
+     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     */
+    public function getGrid();
 
-	/**
-	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
-	 */
-	public function getGrid();
-
-	/**
-	 * @return bool
-	 */
-	public function canAddNewRow();
-
+    /**
+     * @return bool
+     */
+    public function canAddNewRow();
 }

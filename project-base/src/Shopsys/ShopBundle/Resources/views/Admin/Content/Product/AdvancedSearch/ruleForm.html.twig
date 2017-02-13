@@ -1,27 +1,27 @@
 {% form_theme rulesForm getDefaultFormTheme() %}
 {% for key, ruleForm in rulesForm %}
-	{% set isTemplate = key is same as('__template__') %}
+    {% set isTemplate = key is same as('__template__') %}
 
-	<div
-		class="box-advanced-search__item js-advanced-search-rule{{ isTemplate ? ' display-none' : '' }}"
-		{{- isTemplate ? ' id="js-advanced-search-rule-template"' : '' -}}
-	>
-		<div class="box-advanced-search__item__content">
-			{{ form_widget(ruleForm.subject, { attr: { class: 'js-advanced-search-rule-subject' }, isSimple: true} ) }}
-		</div>
+    <div
+        class="box-advanced-search__item js-advanced-search-rule{{ isTemplate ? ' display-none' : '' }}"
+        {{- isTemplate ? ' id="js-advanced-search-rule-template"' : '' -}}
+    >
+        <div class="box-advanced-search__item__content">
+            {{ form_widget(ruleForm.subject, { attr: { class: 'js-advanced-search-rule-subject' }, isSimple: true} ) }}
+        </div>
 
-		<div class="box-advanced-search__item__content">
-			{{ form_widget(ruleForm.operator, { attr: { class: 'js-advanced-search-rule-operator' }, isSimple: true} ) }}
-		</div>
+        <div class="box-advanced-search__item__content">
+            {{ form_widget(ruleForm.operator, { attr: { class: 'js-advanced-search-rule-operator' }, isSimple: true} ) }}
+        </div>
 
-		<div class="box-advanced-search__item__content">
-			<span class="js-advanced-search-rule-value">
-				{{ form_widget(ruleForm.value, { isSimple: true }) }}
-			</span>
-		</div>
+        <div class="box-advanced-search__item__content">
+            <span class="js-advanced-search-rule-value">
+                {{ form_widget(ruleForm.value, { isSimple: true }) }}
+            </span>
+        </div>
 
-		<div class="box-advanced-search__item__content box-advanced-search__item__content--small">
-			<i class="svg svg-circle-cross cursor-pointer js-advanced-search-remove-rule-button in-icon in-icon--remove"></i>
-		</div>
-	</div>
+        <div class="box-advanced-search__item__content box-advanced-search__item__content--small">
+            <i class="svg svg-circle-cross cursor-pointer js-advanced-search-remove-rule-button in-icon in-icon--remove"></i>
+        </div>
+    </div>
 {% endfor %}

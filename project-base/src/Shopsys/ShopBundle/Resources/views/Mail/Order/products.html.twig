@@ -1,16 +1,16 @@
 <table>
-	<tr>
-		<th>{% trans into orderLocale %}Name{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Amount{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Unit price including VAT{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Total item price including VAT{% endtrans %}</th>
-	</tr>
-	{% for item in order.items %}
-		<tr>
-			<td style="font-weight: bold;">{{ item.name }}</td>
-			<td style="text-align: right;">{{ item.quantity|formatNumber }} {{ item.unitName }}</td>
-			<td style="text-align: right;">{{ item.priceWithVat|priceTextWithCurrencyByCurrencyIdAndLocale(order.currency.id, orderLocale) }}</td>
-			<td style="text-align: right;">{{ orderItemTotalPricesById[item.id].priceWithVat|priceTextWithCurrencyByCurrencyIdAndLocale(order.currency.id, orderLocale) }}</td>
-		</tr>
-	{% endfor %}
+    <tr>
+        <th>{% trans into orderLocale %}Name{% endtrans %}</th>
+        <th>{% trans into orderLocale %}Amount{% endtrans %}</th>
+        <th>{% trans into orderLocale %}Unit price including VAT{% endtrans %}</th>
+        <th>{% trans into orderLocale %}Total item price including VAT{% endtrans %}</th>
+    </tr>
+    {% for item in order.items %}
+        <tr>
+            <td style="font-weight: bold;">{{ item.name }}</td>
+            <td style="text-align: right;">{{ item.quantity|formatNumber }} {{ item.unitName }}</td>
+            <td style="text-align: right;">{{ item.priceWithVat|priceTextWithCurrencyByCurrencyIdAndLocale(order.currency.id, orderLocale) }}</td>
+            <td style="text-align: right;">{{ orderItemTotalPricesById[item.id].priceWithVat|priceTextWithCurrencyByCurrencyIdAndLocale(order.currency.id, orderLocale) }}</td>
+        </tr>
+    {% endfor %}
 </table>

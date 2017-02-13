@@ -1,9 +1,9 @@
 {% extends '@ShopsysShop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_no_data %}
-	{{ 'No page found.'|trans }}
+    {{ 'No page found.'|trans }}
 {% endblock %}
 
 {% block grid_value_cell_id_name %}
-	<a href="{{ url('admin_slider_edit', { id: row.s.id }) }}">{{ value }}</a>
+    <a href="{{ url('admin_slider_edit', { id: row.s.id }) }}">{{ value }}</a>
 {% endblock %}

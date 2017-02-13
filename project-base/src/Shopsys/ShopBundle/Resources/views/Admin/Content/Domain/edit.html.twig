@@ -1,25 +1,25 @@
 <div class="text-left">
-	<div id="js-domain-icon-errors" class="in-message in-message--danger js-domain-icon-errors display-none">
-		<ul class="in-message__list"></ul>
-	</div>
+    <div id="js-domain-icon-errors" class="in-message in-message--danger js-domain-icon-errors display-none">
+        <ul class="in-message__list"></ul>
+    </div>
 
-	{{ form_start(form) }}
-		{{ form_errors(form) }}
-		<div class="margin-bottom-10">
-			<div class="form-line">
-				<label class="form-line__label">
-					{{ 'Existing icon'|trans }}:
-				</label>
-				{{ domainIcon(domain.id) }}
-			</div>
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="margin-bottom-10">
+            <div class="form-line">
+                <label class="form-line__label">
+                    {{ 'Existing icon'|trans }}:
+                </label>
+                {{ domainIcon(domain.id) }}
+            </div>
 
-			{{ form_row(form.icon, { label: 'Upload icon'|trans}) }}
-		</div>
-		<div class="text-right">
-			{{ form_save(domain|default(null), form) }}
-		</div>
-	{{ form_end(form) }}
+            {{ form_row(form.icon, { label: 'Upload icon'|trans}) }}
+        </div>
+        <div class="text-right">
+            {{ form_save(domain|default(null), form) }}
+        </div>
+    {{ form_end(form) }}
 </div>
 <div class="js-overlay-spinner display-none text-center">
-	<i class="svg svg-gear" title="{{ 'Loading'|trans }}"></i>
+    <i class="svg svg-gear" title="{{ 'Loading'|trans }}"></i>
 </div>

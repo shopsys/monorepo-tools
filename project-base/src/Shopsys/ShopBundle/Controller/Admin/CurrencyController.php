@@ -13,142 +13,144 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CurrencyController extends AdminBaseController {
+class CurrencyController extends AdminBaseController
+{
+    /**
+     * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+     */
+    private $confirmDeleteResponseFactory;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
-	 */
-	private $confirmDeleteResponseFactory;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     */
+    private $domain;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
-	 */
-	private $domain;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+     */
+    private $currencyFacade;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
-	 */
-	private $currencyFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit
+     */
+    private $currencyInlineEdit;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit
-	 */
-	private $currencyInlineEdit;
+    public function __construct(
+        CurrencyFacade $currencyFacade,
+        CurrencyInlineEdit $currencyInlineEdit,
+        ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
+        Domain $domain
+    ) {
+        $this->currencyFacade = $currencyFacade;
+        $this->currencyInlineEdit = $currencyInlineEdit;
+        $this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
+        $this->domain = $domain;
+    }
 
-	public function __construct(
-		CurrencyFacade $currencyFacade,
-		CurrencyInlineEdit $currencyInlineEdit,
-		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
-		Domain $domain
-	) {
-		$this->currencyFacade = $currencyFacade;
-		$this->currencyInlineEdit = $currencyInlineEdit;
-		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
-		$this->domain = $domain;
-	}
+    /**
+     * @Route("/currency/list/")
+     */
+    public function listAction()
+    {
+        $grid = $this->currencyInlineEdit->getGrid();
 
-	/**
-	 * @Route("/currency/list/")
-	 */
-	public function listAction() {
-		$grid = $this->currencyInlineEdit->getGrid();
+        return $this->render('@ShopsysShop/Admin/Content/Currency/list.html.twig', [
+            'gridView' => $grid->createView(),
+        ]);
+    }
 
-		return $this->render('@ShopsysShop/Admin/Content/Currency/list.html.twig', [
-			'gridView' => $grid->createView(),
-		]);
-	}
+    /**
+     * @Route("/currency/delete-confirm/{id}", requirements={"id" = "\d+"})
+     * @param int $id
+     */
+    public function deleteConfirmAction($id)
+    {
+        try {
+            $currency = $this->currencyFacade->getById($id);
+            $message = t(
+                'Do you really want to remove currency "%name%" permanently?',
+                ['%name%' => $currency->getName()]
+            );
 
-	/**
-	 * @Route("/currency/delete-confirm/{id}", requirements={"id" = "\d+"})
-	 * @param int $id
-	 */
-	public function deleteConfirmAction($id) {
-		try {
-			$currency = $this->currencyFacade->getById($id);
-			$message = t(
-				'Do you really want to remove currency "%name%" permanently?',
-				['%name%' => $currency->getName()]
-			);
+            return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_currency_delete', $id);
+        } catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
+            return new Response(t('Selected currency doesn\'t exist.'));
+        }
+    }
 
-			return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_currency_delete', $id);
-		} catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
-			return new Response(t('Selected currency doesn\'t exist.'));
-		}
+    /**
+     * @Route("/currency/delete/{id}", requirements={"id" = "\d+"})
+     * @CsrfProtection
+     * @param int $id
+     */
+    public function deleteAction($id)
+    {
+        try {
+            $fullName = $this->currencyFacade->getById($id)->getName();
+            $this->currencyFacade->deleteById($id);
 
-	}
+            $this->getFlashMessageSender()->addSuccessFlashTwig(
+                t('Currency <strong>{{ name }}</strong> deleted'),
+                [
+                    'name' => $fullName,
+                ]
+            );
+        } catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException $ex) {
+            $this->getFlashMessageSender()->addErrorFlash(
+                t('This currency can\'t be deleted, it is set as default or is saved with order.')
+            );
+        } catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
+            $this->getFlashMessageSender()->addErrorFlash(t('Selected currency doesn\'t exist.'));
+        }
 
-	/**
-	 * @Route("/currency/delete/{id}", requirements={"id" = "\d+"})
-	 * @CsrfProtection
-	 * @param int $id
-	 */
-	public function deleteAction($id) {
-		try {
-			$fullName = $this->currencyFacade->getById($id)->getName();
-			$this->currencyFacade->deleteById($id);
+        return $this->redirectToRoute('admin_currency_list');
+    }
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Currency <strong>{{ name }}</strong> deleted'),
-				[
-					'name' => $fullName,
-				]
-			);
-		} catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(
-				t('This currency can\'t be deleted, it is set as default or is saved with order.')
-			);
-		} catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Selected currency doesn\'t exist.'));
-		}
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    public function settingsAction(Request $request)
+    {
+        $currencies = $this->currencyFacade->getAll();
+        $form = $this->createForm(new CurrencySettingsFormType($currencies));
 
-		return $this->redirectToRoute('admin_currency_list');
-	}
+        $domainNames = [];
 
-	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 */
-	public function settingsAction(Request $request) {
-		$currencies = $this->currencyFacade->getAll();
-		$form = $this->createForm(new CurrencySettingsFormType($currencies));
+        $currencySettingsFormData = [];
+        $currencySettingsFormData['defaultCurrency'] = $this->currencyFacade->getDefaultCurrency();
+        $currencySettingsFormData['domainDefaultCurrencies'] = [];
 
-		$domainNames = [];
+        foreach ($this->domain->getAll() as $domainConfig) {
+            $domainId = $domainConfig->getId();
+            $currencySettingsFormData['domainDefaultCurrencies'][$domainId] =
+                $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+            $domainNames[$domainId] = $domainConfig->getName();
+        }
 
-		$currencySettingsFormData = [];
-		$currencySettingsFormData['defaultCurrency'] = $this->currencyFacade->getDefaultCurrency();
-		$currencySettingsFormData['domainDefaultCurrencies'] = [];
+        $form->setData($currencySettingsFormData);
+        $form->handleRequest($request);
 
-		foreach ($this->domain->getAll() as $domainConfig) {
-			$domainId = $domainConfig->getId();
-			$currencySettingsFormData['domainDefaultCurrencies'][$domainId] =
-				$this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
-			$domainNames[$domainId] = $domainConfig->getName();
-		}
+        if ($form->isValid()) {
+            $currencySettingsFormData = $form->getData();
 
-		$form->setData($currencySettingsFormData);
-		$form->handleRequest($request);
+            $this->currencyFacade->setDefaultCurrency($currencySettingsFormData['defaultCurrency']);
 
-		if ($form->isValid()) {
-			$currencySettingsFormData = $form->getData();
+            foreach ($this->domain->getAll() as $domainConfig) {
+                $domainId = $domainConfig->getId();
+                $this->currencyFacade->setDomainDefaultCurrency(
+                    $currencySettingsFormData['domainDefaultCurrencies'][$domainId],
+                    $domainId
+                );
+            }
 
-			$this->currencyFacade->setDefaultCurrency($currencySettingsFormData['defaultCurrency']);
+            $this->getFlashMessageSender()->addSuccessFlashTwig(t('Currency settings modified'));
 
-			foreach ($this->domain->getAll() as $domainConfig) {
-				$domainId = $domainConfig->getId();
-				$this->currencyFacade->setDomainDefaultCurrency(
-					$currencySettingsFormData['domainDefaultCurrencies'][$domainId],
-					$domainId
-				);
-			}
+            return $this->redirectToRoute('admin_currency_list');
+        }
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Currency settings modified'));
-
-			return $this->redirectToRoute('admin_currency_list');
-		}
-
-		return $this->render('@ShopsysShop/Admin/Content/Currency/currencySettings.html.twig', [
-			'form' => $form->createView(),
-			'domainNames' => $domainNames,
-		]);
-	}
-
+        return $this->render('@ShopsysShop/Admin/Content/Currency/currencySettings.html.twig', [
+            'form' => $form->createView(),
+            'domainNames' => $domainNames,
+        ]);
+    }
 }

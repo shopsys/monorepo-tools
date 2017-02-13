@@ -13,192 +13,199 @@ use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Customer\UserData;
 use Shopsys\ShopBundle\Model\Order\Order;
 
-class CustomerService {
+class CustomerService
+{
+    /**
+     * @var \Shopsys\ShopBundle\Model\Customer\CustomerPasswordService
+     */
+    private $customerPasswordService;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Customer\CustomerPasswordService
-	 */
-	private $customerPasswordService;
+    public function __construct(CustomerPasswordService $customerPasswordService)
+    {
+        $this->customerPasswordService = $customerPasswordService;
+    }
 
-	public function __construct(CustomerPasswordService $customerPasswordService) {
-		$this->customerPasswordService = $customerPasswordService;
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
+     * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
+     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     * @param \Shopsys\ShopBundle\Model\Customer\User|null $userByEmail
+     * @return \Shopsys\ShopBundle\Model\Customer\User
+     */
+    public function create(
+        UserData $userData,
+        BillingAddress $billingAddress,
+        DeliveryAddress $deliveryAddress = null,
+        User $userByEmail = null
+    ) {
+        if ($userByEmail instanceof User) {
+            $isSameEmail = (mb_strtolower($userByEmail->getEmail()) === mb_strtolower($userData->email));
+            $isSameDomain = ($userByEmail->getDomainId() === $userData->domainId);
+            if ($isSameEmail && $isSameDomain) {
+                throw new \Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException($userData->email);
+            }
+        }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
-	 * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
-	 * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-	 * @param \Shopsys\ShopBundle\Model\Customer\User|null $userByEmail
-	 * @return \Shopsys\ShopBundle\Model\Customer\User
-	 */
-	public function create(
-		UserData $userData,
-		BillingAddress $billingAddress,
-		DeliveryAddress $deliveryAddress = null,
-		User $userByEmail = null
-	) {
-		if ($userByEmail instanceof User) {
-			$isSameEmail = (mb_strtolower($userByEmail->getEmail()) === mb_strtolower($userData->email));
-			$isSameDomain = ($userByEmail->getDomainId() === $userData->domainId);
-			if ($isSameEmail && $isSameDomain) {
-				throw new \Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException($userData->email);
-			}
-		}
+        $user = new User(
+            $userData,
+            $billingAddress,
+            $deliveryAddress
+        );
+        $this->customerPasswordService->changePassword($user, $userData->password);
 
-		$user = new User(
-			$userData,
-			$billingAddress,
-			$deliveryAddress
-		);
-		$this->customerPasswordService->changePassword($user, $userData->password);
+        return $user;
+    }
 
-		return $user;
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\ShopBundle\Model\Customer\UserData
+     */
+    public function edit(User $user, UserData $userData)
+    {
+        $user->edit($userData);
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
-	 * @param \Shopsys\ShopBundle\Model\Customer\UserData
-	 */
-	public function edit(User $user, UserData $userData) {
-		$user->edit($userData);
+        if ($userData->password !== null) {
+            $this->customerPasswordService->changePassword($user, $userData->password);
+        }
+    }
 
-		if ($userData->password !== null) {
-			$this->customerPasswordService->changePassword($user, $userData->password);
-		}
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData
+     * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
+     */
+    public function createDeliveryAddress(DeliveryAddressData $deliveryAddressData)
+    {
+        if ($deliveryAddressData->addressFilled) {
+            $deliveryAddress = new DeliveryAddress($deliveryAddressData);
+        } else {
+            $deliveryAddress = null;
+        }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData
-	 * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
-	 */
-	public function createDeliveryAddress(DeliveryAddressData $deliveryAddressData) {
+        return $deliveryAddress;
+    }
 
-		if ($deliveryAddressData->addressFilled) {
-			$deliveryAddress = new DeliveryAddress($deliveryAddressData);
-		} else {
-			$deliveryAddress = null;
-		}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
+     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
+     */
+    public function editDeliveryAddress(
+        User $user,
+        DeliveryAddressData $deliveryAddressData,
+        DeliveryAddress $deliveryAddress = null
+    ) {
+        if ($deliveryAddressData->addressFilled) {
+            if ($deliveryAddress instanceof DeliveryAddress) {
+                $deliveryAddress->edit($deliveryAddressData);
+            } else {
+                $deliveryAddress = new DeliveryAddress($deliveryAddressData);
+                $user->setDeliveryAddress($deliveryAddress);
+            }
+        } else {
+            $user->setDeliveryAddress(null);
+            $deliveryAddress = null;
+        }
 
-		return $deliveryAddress;
-	}
+        return $deliveryAddress;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
-	 * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
-	 * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-	 * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
-	 */
-	public function editDeliveryAddress(User $user, DeliveryAddressData $deliveryAddressData,
-		DeliveryAddress $deliveryAddress = null) {
+    /**
+     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param string $email
+     * @param \Shopsys\ShopBundle\Model\Customer\User|null $userByEmail
+     */
+    public function changeEmail(User $user, $email, User $userByEmail = null)
+    {
+        if ($email !== null) {
+            $email = mb_strtolower($email);
+        }
 
-		if ($deliveryAddressData->addressFilled) {
-			if ($deliveryAddress instanceof DeliveryAddress) {
-				$deliveryAddress->edit($deliveryAddressData);
-			} else {
-				$deliveryAddress = new DeliveryAddress($deliveryAddressData);
-				$user->setDeliveryAddress($deliveryAddress);
-			}
-		} else {
-			$user->setDeliveryAddress(null);
-			$deliveryAddress = null;
-		}
+        if ($userByEmail instanceof User) {
+            if (mb_strtolower($userByEmail->getEmail()) === $email && $user !== $userByEmail) {
+                throw new \Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException($email);
+            }
+        }
 
-		return $deliveryAddress;
-	}
+        $user->changeEmail($email);
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
-	 * @param string $email
-	 * @param \Shopsys\ShopBundle\Model\Customer\User|null $userByEmail
-	 */
-	public function changeEmail(User $user, $email, User $userByEmail = null) {
-		if ($email !== null) {
-			$email = mb_strtolower($email);
-		}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @return \Shopsys\ShopBundle\Model\Customer\CustomerData
+     */
+    public function getAmendedCustomerDataByOrder(User $user, Order $order)
+    {
+        $billingAddress = $user->getBillingAddress();
+        $deliveryAddress = $user->getDeliveryAddress();
 
-		if ($userByEmail instanceof User) {
-			if (mb_strtolower($userByEmail->getEmail()) === $email && $user !== $userByEmail) {
-				throw new \Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException($email);
-			}
-		}
+        $customerData = new CustomerData();
+        $customerData->setFromEntity($user);
 
-		$user->changeEmail($email);
-	}
+        $customerData->userData->firstName = Utils::ifNull($user->getFirstName(), $order->getFirstName());
+        $customerData->userData->lastName = Utils::ifNull($user->getLastName(), $order->getLastName());
+        $customerData->billingAddressData = $this->getAmendedBillingAddressDataByOrder($order, $billingAddress);
+        $customerData->deliveryAddressData = $this->getAmendedDeliveryAddressDataByOrder($order, $deliveryAddress);
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
-	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
-	 * @return \Shopsys\ShopBundle\Model\Customer\CustomerData
-	 */
-	public function getAmendedCustomerDataByOrder(User $user, Order $order) {
-		$billingAddress = $user->getBillingAddress();
-		$deliveryAddress = $user->getDeliveryAddress();
+        return $customerData;
+    }
 
-		$customerData = new CustomerData();
-		$customerData->setFromEntity($user);
+    /**
+     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
+     * @return \Shopsys\ShopBundle\Model\Customer\BillingAddressData
+     */
+    private function getAmendedBillingAddressDataByOrder(Order $order, BillingAddress $billingAddress)
+    {
+        $billingAddressData = new BillingAddressData();
+        $billingAddressData->setFromEntity($billingAddress);
 
-		$customerData->userData->firstName = Utils::ifNull($user->getFirstName(), $order->getFirstName());
-		$customerData->userData->lastName = Utils::ifNull($user->getLastName(), $order->getLastName());
-		$customerData->billingAddressData = $this->getAmendedBillingAddressDataByOrder($order, $billingAddress);
-		$customerData->deliveryAddressData = $this->getAmendedDeliveryAddressDataByOrder($order, $deliveryAddress);
+        if ($billingAddress->getStreet() === null) {
+            $billingAddressData->companyCustomer = $order->getCompanyNumber() !== null;
+            $billingAddressData->companyName = $order->getCompanyName();
+            $billingAddressData->companyNumber = $order->getCompanyNumber();
+            $billingAddressData->companyTaxNumber = $order->getCompanyTaxNumber();
+            $billingAddressData->street = $order->getStreet();
+            $billingAddressData->city = $order->getCity();
+            $billingAddressData->postcode = $order->getPostcode();
+            $billingAddressData->country = $order->getCountry();
+        }
 
-		return $customerData;
-	}
+        if ($billingAddress->getTelephone() === null) {
+            $billingAddressData->telephone = $order->getTelephone();
+        }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
-	 * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
-	 * @return \Shopsys\ShopBundle\Model\Customer\BillingAddressData
-	 */
-	private function getAmendedBillingAddressDataByOrder(Order $order, BillingAddress $billingAddress) {
-		$billingAddressData = new BillingAddressData();
-		$billingAddressData->setFromEntity($billingAddress);
+        return $billingAddressData;
+    }
 
-		if ($billingAddress->getStreet() === null) {
-			$billingAddressData->companyCustomer = $order->getCompanyNumber() !== null;
-			$billingAddressData->companyName = $order->getCompanyName();
-			$billingAddressData->companyNumber = $order->getCompanyNumber();
-			$billingAddressData->companyTaxNumber = $order->getCompanyTaxNumber();
-			$billingAddressData->street = $order->getStreet();
-			$billingAddressData->city = $order->getCity();
-			$billingAddressData->postcode = $order->getPostcode();
-			$billingAddressData->country = $order->getCountry();
-		}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData
+     */
+    private function getAmendedDeliveryAddressDataByOrder(Order $order, DeliveryAddress $deliveryAddress = null)
+    {
+        $deliveryAddressData = new DeliveryAddressData();
 
-		if ($billingAddress->getTelephone() === null) {
-			$billingAddressData->telephone = $order->getTelephone();
-		}
+        if ($deliveryAddress === null) {
+            $deliveryAddressData->addressFilled = !$order->isDeliveryAddressSameAsBillingAddress();
+            $deliveryAddressData->street = $order->getDeliveryStreet();
+            $deliveryAddressData->city = $order->getDeliveryCity();
+            $deliveryAddressData->postcode = $order->getDeliveryPostcode();
+            $deliveryAddressData->country = $order->getDeliveryCountry();
+            $deliveryAddressData->companyName = $order->getDeliveryCompanyName();
+            $deliveryAddressData->firstName = $order->getDeliveryFirstName();
+            $deliveryAddressData->lastName = $order->getDeliveryLastName();
+            $deliveryAddressData->telephone = $order->getDeliveryTelephone();
+        } else {
+            $deliveryAddressData->setFromEntity($deliveryAddress);
+        }
 
-		return $billingAddressData;
-	}
+        if ($deliveryAddress !== null && $deliveryAddress->getTelephone() === null) {
+            $deliveryAddressData->telephone = $order->getTelephone();
+        }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
-	 * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-	 * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData
-	 */
-	private function getAmendedDeliveryAddressDataByOrder(Order $order, DeliveryAddress $deliveryAddress = null) {
-		$deliveryAddressData = new DeliveryAddressData();
-
-		if ($deliveryAddress === null) {
-			$deliveryAddressData->addressFilled = !$order->isDeliveryAddressSameAsBillingAddress();
-			$deliveryAddressData->street = $order->getDeliveryStreet();
-			$deliveryAddressData->city = $order->getDeliveryCity();
-			$deliveryAddressData->postcode = $order->getDeliveryPostcode();
-			$deliveryAddressData->country = $order->getDeliveryCountry();
-			$deliveryAddressData->companyName = $order->getDeliveryCompanyName();
-			$deliveryAddressData->firstName = $order->getDeliveryFirstName();
-			$deliveryAddressData->lastName = $order->getDeliveryLastName();
-			$deliveryAddressData->telephone = $order->getDeliveryTelephone();
-		} else {
-			$deliveryAddressData->setFromEntity($deliveryAddress);
-		}
-
-		if ($deliveryAddress !== null && $deliveryAddress->getTelephone() === null) {
-			$deliveryAddressData->telephone = $order->getTelephone();
-		}
-
-		return $deliveryAddressData;
-	}
-
+        return $deliveryAddressData;
+    }
 }

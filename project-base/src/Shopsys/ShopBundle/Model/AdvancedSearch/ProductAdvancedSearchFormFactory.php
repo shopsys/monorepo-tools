@@ -7,20 +7,19 @@ use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTran
 use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class ProductAdvancedSearchFormFactory extends AbstractAdvancedSearchFormFactory {
-
-	public function __construct(
-		ProductAdvancedSearchConfig $productAdvancedSearchConfig,
-		AdvancedSearchProductFilterTranslation $advancedSearchProductFilterTranslation,
-		FormFactoryInterface $formFactory,
-		AdvancedSearchOperatorTranslation $advancedSearchOperatorTranslation
-	) {
-		parent::__construct(
-			$productAdvancedSearchConfig,
-			$advancedSearchProductFilterTranslation,
-			$formFactory,
-			$advancedSearchOperatorTranslation
-		);
-	}
-
+class ProductAdvancedSearchFormFactory extends AbstractAdvancedSearchFormFactory
+{
+    public function __construct(
+        ProductAdvancedSearchConfig $productAdvancedSearchConfig,
+        AdvancedSearchProductFilterTranslation $advancedSearchProductFilterTranslation,
+        FormFactoryInterface $formFactory,
+        AdvancedSearchOperatorTranslation $advancedSearchOperatorTranslation
+    ) {
+        parent::__construct(
+            $productAdvancedSearchConfig,
+            $advancedSearchProductFilterTranslation,
+            $formFactory,
+            $advancedSearchOperatorTranslation
+        );
+    }
 }

@@ -1,135 +1,135 @@
 body {
-	background: @bg-web;
+    background: @bg-web;
 }
 
 .web {
-	margin: 0 auto;
-	width: 100%;
-	min-width: 768px;
+    margin: 0 auto;
+    width: 100%;
+    min-width: 768px;
 
-	&__header {
-		height: @height-header;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 1100;
+    &__header {
+        height: @height-header;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1100;
 
-		&--small {
-			height: @height-header;
-		}
+        &--small {
+            height: @height-header;
+        }
 
-		.web--with-info & {
-			padding-top: @height-fixed-bar;
-		}
+        .web--with-info & {
+            padding-top: @height-fixed-bar;
+        }
 
-		.dump-mode & {
-			position: relative;
-		}
+        .dump-mode & {
+            position: relative;
+        }
 
-		&__in {
-			width: 100%;
-			margin: 0 auto;
-			min-width: 768px;
+        &__in {
+            width: 100%;
+            margin: 0 auto;
+            min-width: 768px;
 
-			background: @bg-primary;
-			color: @color-f;
-			border-bottom: 1px solid @color-border-blue;
-		}
-	}
+            background: @bg-primary;
+            color: @color-f;
+            border-bottom: 1px solid @color-border-blue;
+        }
+    }
 
-	&__container {
-		padding-top: @height-header;
-		padding-bottom: @height-fixed-bar;
-		position: relative;
-		min-height: 100vh;
-		padding-left: @width-panel;
+    &__container {
+        padding-top: @height-header;
+        padding-bottom: @height-fixed-bar;
+        position: relative;
+        min-height: 100vh;
+        padding-left: @width-panel;
 
-		background: @bg-page;
+        background: @bg-page;
 
-		.dump-mode & {
-			padding-top: 0;
-		}
+        .dump-mode & {
+            padding-top: 0;
+        }
 
-		.web--with-info & {
-			padding-top: @height-header + @height-fixed-bar;
-		}
+        .web--with-info & {
+            padding-top: @height-header + @height-fixed-bar;
+        }
 
-		&:after {
-			display: block;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: @width-panel;
-			width: 3px;
-			opacity: 0.3;
-			content: '';
+        &:after {
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: @width-panel;
+            width: 3px;
+            opacity: 0.3;
+            content: '';
 
-			background: @color-a;
-		}
+            background: @color-a;
+        }
 
-		&--blank {
-			padding-left: 0;
+        &--blank {
+            padding-left: 0;
 
-			&:after {
-				display: none;
-			}
-		}
-	}
+            &:after {
+                display: none;
+            }
+        }
+    }
 
-	&__panel {
-		position: fixed;
-		left: 0;
-		top: @height-header;
-		bottom: 0;
-		padding-bottom: @height-fixed-bar;
-		width: @width-panel;
+    &__panel {
+        position: fixed;
+        left: 0;
+        top: @height-header;
+        bottom: 0;
+        padding-bottom: @height-fixed-bar;
+        width: @width-panel;
 
-		background-color: @color-f;
+        background-color: @color-f;
 
-		.dump-mode & {
-			position: absolute;
-			top: 0;
-		}
+        .dump-mode & {
+            position: absolute;
+            top: 0;
+        }
 
-		.web--with-info & {
-			top: @height-header + @height-fixed-bar;
-		}
+        .web--with-info & {
+            top: @height-header + @height-fixed-bar;
+        }
 
-		&__in {
-			position: absolute;
-			top: 0;
-			right: 0;
-			left: 0;
-			bottom: @height-fixed-bar;
-			overflow: auto;
-		}
-	}
+        &__in {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: @height-fixed-bar;
+            overflow: auto;
+        }
+    }
 
-	&__content {
-		padding: 0 30px 30px;
-		position: relative;
+    &__content {
+        padding: 0 30px 30px;
+        position: relative;
 
-		&--padding-top {
-			padding-top: 20px;
-		}
-	}
+        &--padding-top {
+            padding-top: 20px;
+        }
+    }
 }
 
 @media @query-xl {
-	.web {
-		width: @width-web;
+    .web {
+        width: @width-web;
 
-		&__header {
-			&__in {
-				width: @width-web;
-			}
-		}
+        &__header {
+            &__in {
+                width: @width-web;
+            }
+        }
 
-		&__panel {
-			left: 50%;
-			margin-left: -@width-web / 2;
-			z-index: 1000;
-		}
-	}
+        &__panel {
+            left: 50%;
+            margin-left: -@width-web / 2;
+            z-index: 1000;
+        }
+    }
 }

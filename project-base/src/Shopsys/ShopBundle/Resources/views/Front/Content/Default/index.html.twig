@@ -5,38 +5,38 @@
 {% endblock %}
 
 {% block meta_description %}
-	{{- metaDescription -}}
+    {{- metaDescription -}}
 {% endblock %}
 
 {% block title %}
-	{{- title -}}
+    {{- title -}}
 {% endblock %}
 
 {% block logo %}
-	<h1 class="logo" href="{{ url('front_homepage') }}" title="{{ 'Online shop'|trans }}"></h1>
+    <h1 class="logo" href="{{ url('front_homepage') }}" title="{{ 'Online shop'|trans }}"></h1>
 {% endblock %}
 
 {% block main_content %}
 
-	{% if sliderItems is not empty %}
-		<div class="box-slider">
-			<div id="js-slider-homepage" class="box-slider__in">
-				{% for item in sliderItems %}
-					<div class="box-slider__item">
-						<a href = "{{ item.link }}">{{ image(item) }}</a>
-					</div>
-				{% endfor %}
-			</div>
-		</div>
-	{% endif %}
+    {% if sliderItems is not empty %}
+        <div class="box-slider">
+            <div id="js-slider-homepage" class="box-slider__in">
+                {% for item in sliderItems %}
+                    <div class="box-slider__item">
+                        <a href = "{{ item.link }}">{{ image(item) }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
 
-	{{ render(controller('ShopsysShopBundle:Front/Category:top')) }}
+    {{ render(controller('ShopsysShopBundle:Front/Category:top')) }}
 
-	{% if topProductsDetails is not empty %}
-		<div id="top-products">
-			<h1>{{ 'Special offers'|trans }}</h1>
-			{{ productList.list(topProductsDetails) }}
-		</div>
-	{% endif %}
+    {% if topProductsDetails is not empty %}
+        <div id="top-products">
+            <h1>{{ 'Special offers'|trans }}</h1>
+            {{ productList.list(topProductsDetails) }}
+        </div>
+    {% endif %}
 
 {% endblock %}

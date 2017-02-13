@@ -14,88 +14,89 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
-class LoginAsUserFacade {
+class LoginAsUserFacade
+{
+    const SESSION_LOGIN_AS = 'loginAsUser';
 
-	const SESSION_LOGIN_AS = 'loginAsUser';
+    /**
+     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+     */
+    private $tokenStorage;
 
-	/**
-	 * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
-	 */
-	private $tokenStorage;
+    /**
+     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     */
+    private $eventDispatcher;
 
-	/**
-	 * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
-	 */
-	private $eventDispatcher;
+    /**
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+     */
+    private $session;
 
-	/**
-	 * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
-	 */
-	private $session;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
+     */
+    private $userRepository;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
-	 */
-	private $userRepository;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
+     */
+    private $administratorFrontSecurityFacade;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
-	 */
-	private $administratorFrontSecurityFacade;
+    /**
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     * @param \Shopsys\ShopBundle\Model\Customer\UserRepository $userRepository
+     * @param \Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade $administratorFrontSecurityFacade
+     */
+    public function __construct(
+        TokenStorageInterface $tokenStorage,
+        EventDispatcherInterface $eventDispatcher,
+        SessionInterface $session,
+        UserRepository $userRepository,
+        AdministratorFrontSecurityFacade $administratorFrontSecurityFacade
+    ) {
+        $this->tokenStorage = $tokenStorage;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->session = $session;
+        $this->userRepository = $userRepository;
+        $this->administratorFrontSecurityFacade = $administratorFrontSecurityFacade;
+    }
 
-	/**
-	 * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
-	 * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-	 * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-	 * @param \Shopsys\ShopBundle\Model\Customer\UserRepository $userRepository
-	 * @param \Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade $administratorFrontSecurityFacade
-	 */
-	public function __construct(
-		TokenStorageInterface $tokenStorage,
-		EventDispatcherInterface $eventDispatcher,
-		SessionInterface $session,
-		UserRepository $userRepository,
-		AdministratorFrontSecurityFacade $administratorFrontSecurityFacade
-	) {
-		$this->tokenStorage = $tokenStorage;
-		$this->eventDispatcher = $eventDispatcher;
-		$this->session = $session;
-		$this->userRepository = $userRepository;
-		$this->administratorFrontSecurityFacade = $administratorFrontSecurityFacade;
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     */
+    public function rememberLoginAsUser(User $user)
+    {
+        $this->session->set(self::SESSION_LOGIN_AS, serialize($user));
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
-	 */
-	public function rememberLoginAsUser(User $user) {
-		$this->session->set(self::SESSION_LOGIN_AS, serialize($user));
-	}
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    public function loginAsRememberedUser(Request $request)
+    {
+        if (!$this->administratorFrontSecurityFacade->isAdministratorLogged()) {
+            throw new \Shopsys\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException('Access denied');
+        }
 
-	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 */
-	public function loginAsRememberedUser(Request $request) {
-		if (!$this->administratorFrontSecurityFacade->isAdministratorLogged()) {
-			throw new \Shopsys\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException('Access denied');
-		}
+        if (!$this->session->has(self::SESSION_LOGIN_AS)) {
+            throw new \Shopsys\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException('User not set.');
+        }
 
-		if (!$this->session->has(self::SESSION_LOGIN_AS)) {
-			throw new \Shopsys\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException('User not set.');
-		}
+        $unserializedUser = unserialize($this->session->get(self::SESSION_LOGIN_AS));
+        /* @var $unserializedUser \Shopsys\ShopBundle\Model\Customer\User */
+        $this->session->remove(self::SESSION_LOGIN_AS);
+        $freshUser = $this->userRepository->getUserById($unserializedUser->getId());
 
-		$unserializedUser = unserialize($this->session->get(self::SESSION_LOGIN_AS));
-		/* @var $unserializedUser \Shopsys\ShopBundle\Model\Customer\User */
-		$this->session->remove(self::SESSION_LOGIN_AS);
-		$freshUser = $this->userRepository->getUserById($unserializedUser->getId());
+        $password = '';
+        $firewallName = 'frontend';
+        $freshUserRoles = array_merge($freshUser->getRoles(), [Roles::ROLE_ADMIN_AS_CUSTOMER]);
+        $token = new UsernamePasswordToken($freshUser, $password, $firewallName, $freshUserRoles);
+        $this->tokenStorage->setToken($token);
 
-		$password = '';
-		$firewallName = 'frontend';
-		$freshUserRoles = array_merge($freshUser->getRoles(), [Roles::ROLE_ADMIN_AS_CUSTOMER]);
-		$token = new UsernamePasswordToken($freshUser, $password, $firewallName, $freshUserRoles);
-		$this->tokenStorage->setToken($token);
-
-		$event = new InteractiveLoginEvent($request, $token);
-		$this->eventDispatcher->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $event);
-	}
-
+        $event = new InteractiveLoginEvent($request, $token);
+        $this->eventDispatcher->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $event);
+    }
 }

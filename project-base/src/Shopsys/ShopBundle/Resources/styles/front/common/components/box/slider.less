@@ -2,59 +2,59 @@
 @box-slider-point-size: 8px;
 
 .box-slider {
-	display: none;
+    display: none;
 
-	@media @query-lg {
-		display: block;
-		position: relative;
-		margin-bottom: @margin-gap;
-		width: @box-slider-width;
-		max-width: 100%;
+    @media @query-lg {
+        display: block;
+        position: relative;
+        margin-bottom: @margin-gap;
+        width: @box-slider-width;
+        max-width: 100%;
 
-		&__in {
-			width: 100%;
-			overflow: hidden;
+        &__in {
+            width: 100%;
+            overflow: hidden;
 
-			border: 1px solid @color-border;
-		}
+            border: 1px solid @color-border;
+        }
 
-		&__item {
-			float: left;
-		}
+        &__item {
+            float: left;
+        }
 
-		.slick-dots {
-			.reset-ul();
-			position: absolute;
-			left: 10px;
-			bottom: 10px;
-			z-index: 2;
+        .slick-dots {
+            .reset-ul();
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            z-index: 2;
 
-			li {
-				display: inline-block;
+            li {
+                display: inline-block;
 
-				button {
-					display: block;
-					width: @box-slider-point-size;
-					height: @box-slider-point-size;
-					line-height: @box-slider-point-size;
-					padding: 0;
-					margin: 0 4px 0 0;
+                button {
+                    display: block;
+                    width: @box-slider-point-size;
+                    height: @box-slider-point-size;
+                    line-height: @box-slider-point-size;
+                    padding: 0;
+                    margin: 0 4px 0 0;
 
-					text-indent: -9999px;
-					font-size: 0;
-					background: @color-base;
-					cursor: pointer;
-					border: none;
+                    text-indent: -9999px;
+                    font-size: 0;
+                    background: @color-base;
+                    cursor: pointer;
+                    border: none;
 
-					border-radius: 50%;
-				}
+                    border-radius: 50%;
+                }
 
-				&.slick-active {
-					button {
-						background: @color-primary;
-					}
-				}
-			}
-		}
-	}
+                &.slick-active {
+                    button {
+                        background: @color-primary;
+                    }
+                }
+            }
+        }
+    }
 }

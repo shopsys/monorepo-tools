@@ -2,118 +2,118 @@
 @form-error-arrow-size: 6px;
 
 .form-error {
-	display: inline-block;
-	vertical-align: middle;
-	position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
 
-	cursor: default;
+    cursor: default;
 
-	&--line {
-		position: absolute;
-		top: 7px;
-		right: 5px;
+    &--line {
+        position: absolute;
+        top: 7px;
+        right: 5px;
 
-		@media @query-lg {
-			right: auto;
-			left: 295px;
-		}
-	}
+        @media @query-lg {
+            right: auto;
+            left: 295px;
+        }
+    }
 
-	&--inline {
-		display: flex;
-		align-items: baseline;
-		margin: 5px;
-		padding: 5px;
+    &--inline {
+        display: flex;
+        align-items: baseline;
+        margin: 5px;
+        padding: 5px;
 
-		background: @color-alert;
-	}
+        background: @color-alert;
+    }
 
-	&--choice {
-		right: auto;
-		top: -3px;
-		margin-bottom: -5px;
-	}
+    &--choice {
+        right: auto;
+        top: -3px;
+        margin-bottom: -5px;
+    }
 
-	&--line-block {
-		position: absolute;
-		top: 7px;
-		right: 5px;
+    &--line-block {
+        position: absolute;
+        top: 7px;
+        right: 5px;
 
-		z-index: 10;
-	}
+        z-index: 10;
+    }
 
-	&__icon {
-		display: inline-block;
-		vertical-align: middle;
-		width: @form-error-size;
-		height: @form-error-size;
-		text-align: center;
+    &__icon {
+        display: inline-block;
+        vertical-align: middle;
+        width: @form-error-size;
+        height: @form-error-size;
+        text-align: center;
 
-		color: @color-alert;
-		font-weight: bold;
-		font-size: 17px;
+        color: @color-alert;
+        font-weight: bold;
+        font-size: 17px;
 
-		.form-error--inline & {
-			width: auto;
-			margin-right: 5px;
+        .form-error--inline & {
+            width: auto;
+            margin-right: 5px;
 
-			color: @color-f;
-		}
-	}
+            color: @color-f;
+        }
+    }
 
-	&__list {
-		.reset-ul();
-		position: absolute;
-		top: 100%;
-		left: 50%;
-		width: 120px;
-		margin-left: -60px;
-		margin-top: 10px;
-		padding: 5px;
-		display: none;
-		z-index: 50;
-		text-align: center;
+    &__list {
+        .reset-ul();
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        width: 120px;
+        margin-left: -60px;
+        margin-top: 10px;
+        padding: 5px;
+        display: none;
+        z-index: 50;
+        text-align: center;
 
-		background: rgba(0,0,0, 0.7);
-		color: @color-f;
+        background: rgba(0,0,0, 0.7);
+        color: @color-f;
 
-		&:after {
-			position: absolute;
-			top: -@form-error-arrow-size;
-			left: 50%;
-			margin-left: -@form-error-arrow-size;
-			content: '';
+        &:after {
+            position: absolute;
+            top: -@form-error-arrow-size;
+            left: 50%;
+            margin-left: -@form-error-arrow-size;
+            content: '';
 
-			border-bottom: @form-error-arrow-size solid rgba(0,0,0, 0.7);
-			border-left: @form-error-arrow-size solid transparent;
-			border-right: @form-error-arrow-size solid transparent;
-		}
+            border-bottom: @form-error-arrow-size solid rgba(0,0,0, 0.7);
+            border-left: @form-error-arrow-size solid transparent;
+            border-right: @form-error-arrow-size solid transparent;
+        }
 
-		.form-error:hover & {
-			display: block;
-		}
+        .form-error:hover & {
+            display: block;
+        }
 
-		.form-error--inline:hover & {
-			display: inline-block;
-		}
+        .form-error--inline:hover & {
+            display: inline-block;
+        }
 
-		.form-error--inline & {
-			display: inline-block;
-			position: static;
-			width: auto;
-			padding: 0;
-			margin: 0;
+        .form-error--inline & {
+            display: inline-block;
+            position: static;
+            width: auto;
+            padding: 0;
+            margin: 0;
 
-			background: none;
+            background: none;
 
-			&:after {
-				display: none;
-			}
-		}
+            &:after {
+                display: none;
+            }
+        }
 
-		li {
-			font-size: 12px;
-			color: @color-f;
-		}
-	}
+        li {
+            font-size: 12px;
+            color: @color-f;
+        }
+    }
 }

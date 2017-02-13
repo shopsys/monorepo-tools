@@ -15,167 +15,170 @@ use Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class TransportController extends AdminBaseController {
+class TransportController extends AdminBaseController
+{
+    /**
+     * @var \Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory
+     */
+    private $transportEditFormTypeFactory;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory
-	 */
-	private $transportEditFormTypeFactory;
+    /**
+     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     */
+    private $breadcrumb;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
-	 */
-	private $breadcrumb;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+     */
+    private $currencyFacade;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
-	 */
-	private $currencyFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Transport\Detail\TransportDetailFactory
+     */
+    private $transportDetailFactory;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Transport\Detail\TransportDetailFactory
-	 */
-	private $transportDetailFactory;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Transport\Grid\TransportGridFactory
+     */
+    private $transportGridFactory;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Transport\Grid\TransportGridFactory
-	 */
-	private $transportGridFactory;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory
+     */
+    private $transportEditDataFactory;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory
-	 */
-	private $transportEditDataFactory;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
+     */
+    private $transportFacade;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
-	 */
-	private $transportFacade;
+    public function __construct(
+        TransportFacade $transportFacade,
+        TransportGridFactory $transportGridFactory,
+        TransportEditFormTypeFactory $transportEditFormTypeFactory,
+        TransportEditDataFactory $transportEditDataFactory,
+        CurrencyFacade $currencyFacade,
+        TransportDetailFactory $transportDetailFactory,
+        Breadcrumb $breadcrumb
+    ) {
+        $this->transportFacade = $transportFacade;
+        $this->transportGridFactory = $transportGridFactory;
+        $this->transportEditFormTypeFactory = $transportEditFormTypeFactory;
+        $this->transportEditDataFactory = $transportEditDataFactory;
+        $this->currencyFacade = $currencyFacade;
+        $this->transportDetailFactory = $transportDetailFactory;
+        $this->breadcrumb = $breadcrumb;
+    }
 
-	public function __construct(
-		TransportFacade $transportFacade,
-		TransportGridFactory $transportGridFactory,
-		TransportEditFormTypeFactory $transportEditFormTypeFactory,
-		TransportEditDataFactory $transportEditDataFactory,
-		CurrencyFacade $currencyFacade,
-		TransportDetailFactory $transportDetailFactory,
-		Breadcrumb $breadcrumb
-	) {
-		$this->transportFacade = $transportFacade;
-		$this->transportGridFactory = $transportGridFactory;
-		$this->transportEditFormTypeFactory = $transportEditFormTypeFactory;
-		$this->transportEditDataFactory = $transportEditDataFactory;
-		$this->currencyFacade = $currencyFacade;
-		$this->transportDetailFactory = $transportDetailFactory;
-		$this->breadcrumb = $breadcrumb;
-	}
+    /**
+     * @Route("/transport/new/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    public function newAction(Request $request)
+    {
+        $form = $this->createForm($this->transportEditFormTypeFactory->create());
 
-	/**
-	 * @Route("/transport/new/")
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 */
-	public function newAction(Request $request) {
-		$form = $this->createForm($this->transportEditFormTypeFactory->create());
+        $transportEditData = $this->transportEditDataFactory->createDefault();
 
-		$transportEditData = $this->transportEditDataFactory->createDefault();
+        $form->setData($transportEditData);
+        $form->handleRequest($request);
 
-		$form->setData($transportEditData);
-		$form->handleRequest($request);
+        if ($form->isValid()) {
+            $transport = $this->transportFacade->create($form->getData());
 
-		if ($form->isValid()) {
-			$transport = $this->transportFacade->create($form->getData());
+            $this->getFlashMessageSender()->addSuccessFlashTwig(
+                t('Shipping <strong><a href="{{ url }}">{{ name }}</a></strong> created'),
+                [
+                'name' => $transport->getName(),
+                'url' => $this->generateUrl('admin_transport_edit', ['id' => $transport->getId()]),
+                ]
+            );
+            return $this->redirectToRoute('admin_transportandpayment_list');
+        }
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Shipping <strong><a href="{{ url }}">{{ name }}</a></strong> created'),
-				[
-				'name' => $transport->getName(),
-				'url' => $this->generateUrl('admin_transport_edit', ['id' => $transport->getId()]),
-				]
-			);
-			return $this->redirectToRoute('admin_transportandpayment_list');
-		}
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
+        }
 
-		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
-		}
+        return $this->render('@ShopsysShop/Admin/Content/Transport/new.html.twig', [
+            'form' => $form->createView(),
+            'currencies' => $this->currencyFacade->getAllIndexedById(),
+        ]);
+    }
 
-		return $this->render('@ShopsysShop/Admin/Content/Transport/new.html.twig', [
-			'form' => $form->createView(),
-			'currencies' => $this->currencyFacade->getAllIndexedById(),
-		]);
-	}
+    /**
+     * @Route("/transport/edit/{id}", requirements={"id" = "\d+"})
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param int $id
+     */
+    public function editAction(Request $request, $id)
+    {
+        $transport = $this->transportFacade->getById($id);
+        /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
+        $form = $this->createForm($this->transportEditFormTypeFactory->create());
 
-	/**
-	 * @Route("/transport/edit/{id}", requirements={"id" = "\d+"})
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param int $id
-	 */
-	public function editAction(Request $request, $id) {
-		$transport = $this->transportFacade->getById($id);
-		/* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
-		$form = $this->createForm($this->transportEditFormTypeFactory->create());
+        $transportEditData = $this->transportEditDataFactory->createFromTransport($transport);
 
-		$transportEditData = $this->transportEditDataFactory->createFromTransport($transport);
+        $form->setData($transportEditData);
+        $form->handleRequest($request);
 
-		$form->setData($transportEditData);
-		$form->handleRequest($request);
+        if ($form->isValid()) {
+            $this->transportFacade->edit($transport, $transportEditData);
 
-		if ($form->isValid()) {
-			$this->transportFacade->edit($transport, $transportEditData);
+            $this->getFlashMessageSender()->addSuccessFlashTwig(
+                t('Shipping <strong><a href="{{ url }}">{{ name }}</a></strong> was modified'),
+                [
+                    'name' => $transport->getName(),
+                    'url' => $this->generateUrl('admin_transport_edit', ['id' => $transport->getId()]),
+                ]
+            );
+            return $this->redirectToRoute('admin_transportandpayment_list');
+        }
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Shipping <strong><a href="{{ url }}">{{ name }}</a></strong> was modified'),
-				[
-					'name' => $transport->getName(),
-					'url' => $this->generateUrl('admin_transport_edit', ['id' => $transport->getId()]),
-				]
-			);
-			return $this->redirectToRoute('admin_transportandpayment_list');
-		}
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
+        }
 
-		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
-		}
+        $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing shipping - %name%', ['%name%' => $transport->getName()])));
 
-		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editing shipping - %name%', ['%name%' => $transport->getName()])));
+        return $this->render('@ShopsysShop/Admin/Content/Transport/edit.html.twig', [
+            'form' => $form->createView(),
+            'transportDetail' => $this->transportDetailFactory->createDetailForTransportWithIndependentPrices($transport),
+            'currencies' => $this->currencyFacade->getAllIndexedById(),
+        ]);
+    }
 
-		return $this->render('@ShopsysShop/Admin/Content/Transport/edit.html.twig', [
-			'form' => $form->createView(),
-			'transportDetail' => $this->transportDetailFactory->createDetailForTransportWithIndependentPrices($transport),
-			'currencies' => $this->currencyFacade->getAllIndexedById(),
-		]);
-	}
+    /**
+     * @Route("/transport/delete/{id}", requirements={"id" = "\d+"})
+     * @CsrfProtection
+     * @param int $id
+     */
+    public function deleteAction($id)
+    {
+        try {
+            $transportName = $this->transportFacade->getById($id)->getName();
 
-	/**
-	 * @Route("/transport/delete/{id}", requirements={"id" = "\d+"})
-	 * @CsrfProtection
-	 * @param int $id
-	 */
-	public function deleteAction($id) {
-		try {
-			$transportName = $this->transportFacade->getById($id)->getName();
+            $this->transportFacade->deleteById($id);
 
-			$this->transportFacade->deleteById($id);
+            $this->getFlashMessageSender()->addSuccessFlashTwig(
+                t('Shipping <strong>{{ name }}</strong> deleted'),
+                [
+                    'name' => $transportName,
+                ]
+            );
+        } catch (\Shopsys\ShopBundle\Model\Transport\Exception\TransportNotFoundException $ex) {
+            $this->getFlashMessageSender()->addErrorFlash(t('Selected shipping doesn\'t exist.'));
+        }
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Shipping <strong>{{ name }}</strong> deleted'),
-				[
-					'name' => $transportName,
-				]
-			);
-		} catch (\Shopsys\ShopBundle\Model\Transport\Exception\TransportNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Selected shipping doesn\'t exist.'));
-		}
+        return $this->redirectToRoute('admin_transportandpayment_list');
+    }
 
-		return $this->redirectToRoute('admin_transportandpayment_list');
-	}
+    public function listAction()
+    {
+        $grid = $this->transportGridFactory->create();
 
-	public function listAction() {
-		$grid = $this->transportGridFactory->create();
-
-		return $this->render('@ShopsysShop/Admin/Content/Transport/list.html.twig', [
-			'gridView' => $grid->createView(),
-		]);
-	}
-
+        return $this->render('@ShopsysShop/Admin/Content/Transport/list.html.twig', [
+            'gridView' => $grid->createView(),
+        ]);
+    }
 }

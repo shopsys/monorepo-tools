@@ -2,6 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Cron\Exception;
 
-interface CronException {
-
+interface CronException
+{
 }

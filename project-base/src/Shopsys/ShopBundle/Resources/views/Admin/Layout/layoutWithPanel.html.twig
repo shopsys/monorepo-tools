@@ -1,40 +1,40 @@
 {% extends '@ShopsysShop/Admin/Layout/layout.html.twig' %}
 
 {% block content %}
-	<div class="web__container">
-		<div class="web__panel">
-			<div class="web__panel__in">
-				{% block menu_panel %}
-					{{ render(controller('ShopsysShopBundle:Admin/Menu:panel', {
-						route: app.request.get('_route'),
-						parameters: app.request.attributes.get('_route_params')
-					}	)) }}
-				{% endblock %}
-			</div>
-		</div>
+    <div class="web__container">
+        <div class="web__panel">
+            <div class="web__panel__in">
+                {% block menu_panel %}
+                    {{ render(controller('ShopsysShopBundle:Admin/Menu:panel', {
+                        route: app.request.get('_route'),
+                        parameters: app.request.attributes.get('_route_params')
+                    } )) }}
+                {% endblock %}
+            </div>
+        </div>
 
-		<div class="web__content">
-			{% block breadcrumb %}
-				{{ render(controller('ShopsysShopBundle:Admin/Breadcrumb:index', {
-					route: app.request.get('_route'),
-					parameters: app.request.attributes.get('_route_params')
-				} )) }}
-			{% endblock %}
+        <div class="web__content">
+            {% block breadcrumb %}
+                {{ render(controller('ShopsysShopBundle:Admin/Breadcrumb:index', {
+                    route: app.request.get('_route'),
+                    parameters: app.request.attributes.get('_route_params')
+                } )) }}
+            {% endblock %}
 
-			<div class="mt15">
-				{{ render(controller('ShopsysShopBundle:Admin/FlashMessage:index')) }}
-			</div>
+            <div class="mt15">
+                {{ render(controller('ShopsysShopBundle:Admin/FlashMessage:index')) }}
+            </div>
 
-			{% if showHeading is not defined or showHeading %}
-				<div class="wrap-bar">
-					<h1 class="wrap-bar__heading">
-						{% block h1 %}{{ 'Administration'|trans }}{% endblock %}
-					</h1>
-					{% block btn %}{% endblock %}
-				</div>
-			{% endif %}
+            {% if showHeading is not defined or showHeading %}
+                <div class="wrap-bar">
+                    <h1 class="wrap-bar__heading">
+                        {% block h1 %}{{ 'Administration'|trans }}{% endblock %}
+                    </h1>
+                    {% block btn %}{% endblock %}
+                </div>
+            {% endif %}
 
-			{% block main_content %}{% endblock %}
-		</div>
-	</div>
+            {% block main_content %}{% endblock %}
+        </div>
+    </div>
 {% endblock %}

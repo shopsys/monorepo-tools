@@ -11,8 +11,9 @@ use Shopsys\ShopBundle\Component\Translation\Translator;
  *
  * @SuppressWarnings(PHPMD.ShortMethodName)
  */
-function t($id, array $parameters = [], $domain = null, $locale = null) {
-	return Translator::staticTrans($id, $parameters, $domain, $locale);
+function t($id, array $parameters = [], $domain = null, $locale = null)
+{
+    return Translator::staticTrans($id, $parameters, $domain, $locale);
 }
 
 /**
@@ -25,6 +26,7 @@ function t($id, array $parameters = [], $domain = null, $locale = null) {
  *
  * @SuppressWarnings(PHPMD.ShortMethodName)
  */
-function tc($id, $number, array $parameters = [], $domain = null, $locale = null) {
-	return Translator::staticTransChoice($id, $number, $parameters, $domain, $locale);
+function tc($id, $number, array $parameters = [], $domain = null, $locale = null)
+{
+    return Translator::staticTransChoice($id, $number, $parameters, $domain, $locale);
 }

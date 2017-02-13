@@ -4,31 +4,32 @@ namespace Shopsys\ShopBundle\Component\DateTimeHelper;
 
 use DateTime;
 
-class DateTimeHelper {
+class DateTimeHelper
+{
+    /**
+     * @return \DateTime
+     */
+    public static function createTodayMidnightDateTime()
+    {
+        $todayMidnight = new DateTime();
+        $todayMidnight->setTime(0, 0, 0);
 
-	/**
-	 * @return \DateTime
-	 */
-	public static function createTodayMidnightDateTime() {
-		$todayMidnight = new DateTime();
-		$todayMidnight->setTime(0, 0, 0);
+        return $todayMidnight;
+    }
 
-		return $todayMidnight;
-	}
+    /*
+     * @param string $format
+     * @param string $time
+     * @return \DateTime
+     */
+    public static function createFromFormat($format, $time)
+    {
+        $dateTime = DateTime::createFromFormat($format, $time);
 
-	/*
-	 * @param string $format
-	 * @param string $time
-	 * @return \DateTime
-	 */
-	public static function createFromFormat($format, $time) {
-		$dateTime = DateTime::createFromFormat($format, $time);
+        if ($dateTime === false) {
+            throw new \Shopsys\ShopBundle\Component\DateTimeHelper\Exception\CannotParseDateTimeException($format, $time);
+        }
 
-		if ($dateTime === false) {
-			throw new \Shopsys\ShopBundle\Component\DateTimeHelper\Exception\CannotParseDateTimeException($format, $time);
-		}
-
-		return $dateTime;
-	}
-
+        return $dateTime;
+    }
 }

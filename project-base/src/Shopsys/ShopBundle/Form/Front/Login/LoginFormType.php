@@ -9,47 +9,47 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class LoginFormType extends AbstractType {
+class LoginFormType extends AbstractType
+{
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('email', FormType::TEXT, [
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter e-mail']),
+                    new Email(),
+                ],
+            ])
+            ->add('password', FormType::PASSWORD, [
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter password']),
+                ],
+            ])
+            ->add('rememberMe', FormType::CHECKBOX, [
+                'required' => false,
+            ])
+            ->add('login', FormType::SUBMIT);
+    }
 
-	/**
-	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder
-			->add('email', FormType::TEXT, [
-					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Please enter e-mail']),
-						new Email(),
-					],
-				]
-			)
-			->add('password', FormType::PASSWORD, [
-					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Please enter password']),
-					],
-				]
-			)
-			->add('rememberMe', FormType::CHECKBOX, [
-				'required' => false,
-			])
-			->add('login', FormType::SUBMIT);
-	}
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'front_login_form';
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return 'front_login_form';
-	}
-
-	/**
-	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults([
-			'attr' => ['novalidate' => 'novalidate'],
-		]);
-	}
-
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults([
+            'attr' => ['novalidate' => 'novalidate'],
+        ]);
+    }
 }

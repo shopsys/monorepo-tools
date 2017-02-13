@@ -3,59 +3,59 @@
 @in-action-button-big-padding-horizontal: 30px;
 
 .in-action {
-	@media @query-md {
-		width: 100%;
-		display: flex;
-		align-items: center;
+    @media @query-md {
+        width: 100%;
+        display: flex;
+        align-items: center;
 
-		.is-no-flex & {
-			display: block;
-			.clearfix();
-		}
-	}
+        .is-no-flex & {
+            display: block;
+            .clearfix();
+        }
+    }
 
-	&__left {
-		@media @query-md {
-			order: 1;
-			flex: 1;
+    &__left {
+        @media @query-md {
+            order: 1;
+            flex: 1;
 
-			.is-no-flex & {
-				float: left;
-				width: 100%/2;
-			}
-		}
-	}
+            .is-no-flex & {
+                float: left;
+                width: 100%/2;
+            }
+        }
+    }
 
-	&__right {
-		margin-bottom: 5px;
+    &__right {
+        margin-bottom: 5px;
 
-		@media @query-md {
-			order: 2;
-			flex: 1;
-			margin-bottom: 0;
-			text-align: right;
+        @media @query-md {
+            order: 2;
+            flex: 1;
+            margin-bottom: 0;
+            text-align: right;
 
-			.is-no-flex & {
-				float: right;
-				width: 100%/2;
-			}
-		}
-	}
+            .is-no-flex & {
+                float: right;
+                width: 100%/2;
+            }
+        }
+    }
 
-	&__btn {
-		width: 100%;
+    &__btn {
+        width: 100%;
 
-		@media @query-md {
-			width: auto;
-		}
+        @media @query-md {
+            width: auto;
+        }
 
-		&--big {
-			min-height: @in-action-button-big-height;
-			line-height: @in-action-button-big-height - 2 * @in-action-button-big-padding-vertical;
-			padding-left: @in-action-button-big-padding-horizontal;
-			padding-right: @in-action-button-big-padding-horizontal;
+        &--big {
+            min-height: @in-action-button-big-height;
+            line-height: @in-action-button-big-height - 2 * @in-action-button-big-padding-vertical;
+            padding-left: @in-action-button-big-padding-horizontal;
+            padding-right: @in-action-button-big-padding-horizontal;
 
-			font-size: 18px;
-		}
-	}
+            font-size: 18px;
+        }
+    }
 }

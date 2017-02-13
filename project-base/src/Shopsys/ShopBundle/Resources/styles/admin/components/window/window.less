@@ -1,82 +1,82 @@
 .window {
-	display: none;
-	width: @window-width;
-	min-height: @window-height;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin: -@window-height/2 0 0 -@window-width/2;
-	padding: 25px 50px 25px 50px;
-	z-index: 10002;
+    display: none;
+    width: @window-width;
+    min-height: @window-height;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -@window-height/2 0 0 -@window-width/2;
+    padding: 25px 50px 25px 50px;
+    z-index: 10002;
 
-	text-align: center;
-	border: 1px solid @color-border;
-	background: @bg-window;
+    text-align: center;
+    border: 1px solid @color-border;
+    background: @bg-window;
 
-	box-shadow: 0 0 20px rgba(0,0,0, 0.3);
+    box-shadow: 0 0 20px rgba(0,0,0, 0.3);
 
-	&--wide {
-		position: absolute;
-		top: 200px;
-		width: @window-wide-width;
-		height: @window-wide-height;
-		margin: 0 0 0 -@window-wide-width/2;
-	}
+    &--wide {
+        position: absolute;
+        top: 200px;
+        width: @window-wide-width;
+        height: @window-wide-height;
+        margin: 0 0 0 -@window-wide-width/2;
+    }
 
-	&--wide-float {
-		position: fixed;
-		top: 50%;
-		width: @window-wide-float-width;
-		min-height: @window-wide-float-height;
-		margin: -@window-wide-float-height/2 0 0 -@window-wide-float-width/2;
-	}
+    &--wide-float {
+        position: fixed;
+        top: 50%;
+        width: @window-wide-float-width;
+        min-height: @window-wide-float-height;
+        margin: -@window-wide-float-height/2 0 0 -@window-wide-float-width/2;
+    }
 
-	&--active {
-		display: block;
-	}
+    &--active {
+        display: block;
+    }
 
-	&__title {
-		font-weight: bold;
-		font-size: 18px;
-	}
+    &__title {
+        font-weight: bold;
+        font-size: 18px;
+    }
 
-	&__close {
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 48px;
-		height: 48px;
-		line-height: 48px;
+    &__close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 48px;
+        height: 48px;
+        line-height: 48px;
 
-		background: @bg-primary-dark;
-		color: @color-f;
-		text-decoration: none;
-		font-weight: bold;
-		text-align: center;
+        background: @bg-primary-dark;
+        color: @color-f;
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
 
-		&:hover {
-			background: @bg-primary-dark;
-			color: @color-f;
-			text-decoration: none;
-		}
-	}
+        &:hover {
+            background: @bg-primary-dark;
+            color: @color-f;
+            text-decoration: none;
+        }
+    }
 
-	&__title {
-		margin: -25px -30px 30px;
-		height: 48px;
-		line-height: 28px;
-		padding: 10px 68px 10px 20px;
+    &__title {
+        margin: -25px -30px 30px;
+        height: 48px;
+        line-height: 28px;
+        padding: 10px 68px 10px 20px;
 
-		background: @bg-primary;
-		color: @color-f;
-	}
+        background: @bg-primary;
+        color: @color-f;
+    }
 
-	&__actions {
-		margin-top: 20px;
+    &__actions {
+        margin-top: 20px;
 
-		&__btn {
-			min-width: 100px;
-			margin: 0 5px;
-		}
-	}
+        &__btn {
+            min-width: 100px;
+            margin: 0 5px;
+        }
+    }
 }

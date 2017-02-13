@@ -2,22 +2,21 @@
 
 namespace Shopsys\ShopBundle\Component\ConstantList;
 
-interface TranslatedConstantListInterface {
+interface TranslatedConstantListInterface
+{
+    /**
+     * @return string[]
+     */
+    public function getValues();
 
-	/**
-	 * @return string[]
-	 */
-	public function getValues();
+    /**
+     * @param string $constant
+     * @return string
+     */
+    public function getTranslation($constant);
 
-	/**
-	 * @param string $constant
-	 * @return string
-	 */
-	public function getTranslation($constant);
-
-	/**
-	 * @return string[string]
-	 */
-	public function getTranslationsIndexedByValue();
-
+    /**
+     * @return string[string]
+     */
+    public function getTranslationsIndexedByValue();
 }

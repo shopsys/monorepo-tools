@@ -2,6 +2,6 @@
 
 namespace Shopsys\ShopBundle\Command\Exception;
 
-interface CommandException {
-
+interface CommandException
+{
 }

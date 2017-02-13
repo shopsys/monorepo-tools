@@ -1,23 +1,23 @@
 {% extends '@ShopsysShop/Admin/Grid/Grid.html.twig' %}
 
 {% macro getName(row) %}
-	{{ row.feedName }} - {{ row.domainConfig.name }}
+    {{ row.feedName }} - {{ row.domainConfig.name }}
 {% endmacro %}
 
 {% block grid_value_cell_id_label %}
-	{% if row.created %}
-		<a href="{{ row.url }}" target="_blank">{{ _self.getName(row) }}</a>
-	{% else %}
-		{{ _self.getName(row) }}
-	{% endif %}
+    {% if row.created %}
+        <a href="{{ row.url }}" target="_blank">{{ _self.getName(row) }}</a>
+    {% else %}
+        {{ _self.getName(row) }}
+    {% endif %}
 {% endblock %}
 
 {% block grid_value_cell_id_actions %}
-	<a href="{{ url(
-		'admin_feed_generate', {
-			feedName: row.feedName,
-			domainId: row.domainConfig.id
-		}
-	) }}" class="btn">{{ 'Generate'|trans }}</a>
+    <a href="{{ url(
+        'admin_feed_generate', {
+            feedName: row.feedName,
+            domainId: row.domainConfig.id
+        }
+    ) }}" class="btn">{{ 'Generate'|trans }}</a>
 
 {% endblock %}

@@ -9,39 +9,40 @@ use Shopsys\ShopBundle\Model\Payment\Payment;
  * @ORM\Table(name="payment_domains")
  * @ORM\Entity
  */
-class PaymentDomain {
+class PaymentDomain
+{
+    /**
+     * @var \Shopsys\ShopBundle\Model\Payment\Payment
+     *
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Payment\Payment")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $payment;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Payment\Payment
-	 *
-	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Payment\Payment")
-	 * @ORM\JoinColumn(nullable=false)
-	 */
-	private $payment;
+    /**
+     * @var int
+     *
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    private $domainId;
 
-	/**
-	 * @var int
-	 *
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 */
-	private $domainId;
+    /**
+     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+     * @param int $domainId
+     */
+    public function __construct(Payment $payment, $domainId)
+    {
+        $this->payment = $payment;
+        $this->domainId = $domainId;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-	 * @param int $domainId
-	 */
-	public function __construct(Payment $payment, $domainId) {
-		$this->payment = $payment;
-		$this->domainId = $domainId;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getDomainId() {
-		return $this->domainId;
-	}
-
+    /**
+     * @return int
+     */
+    public function getDomainId()
+    {
+        return $this->domainId;
+    }
 }

@@ -13,162 +13,162 @@
 @input-width-with-domain: 408px;
 
 .input {
-	width: @input-width;
-	max-width: 100%;
-	height: @input-height;
-	line-height: @input-line-height;
-	padding: 0 @input-padding-horizontal;
+    width: @input-width;
+    max-width: 100%;
+    height: @input-height;
+    line-height: @input-line-height;
+    padding: 0 @input-padding-horizontal;
 
-	border: @input-border-size solid @color-border;
-	color: @color-base;
+    border: @input-border-size solid @color-border;
+    color: @color-base;
 
-	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
 
-	&--iconic {
-		padding-right: @input-space-for-icon;
-	}
+    &--iconic {
+        padding-right: @input-space-for-icon;
+    }
 
-	&--flag {
-		width: @input-width-with-flag;
-		padding-left: @input-space-for-icon;
-	}
+    &--flag {
+        width: @input-width-with-flag;
+        padding-left: @input-space-for-icon;
+    }
 
-	&--domain {
-		width: @input-width-with-domain;
-		padding-left: @input-space-for-domain;
-	}
+    &--domain {
+        width: @input-width-with-domain;
+        padding-left: @input-space-for-domain;
+    }
 
-	&--seo {
-		height: 52px;
-		line-height: 20px;
-		padding-top: 6px;
-		padding-bottom: 6px;
-	}
+    &--seo {
+        height: 52px;
+        line-height: 20px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
 
-	&--textarea-big {
-		width: 100%;
-		height: 80px;
-		line-height: 20px;
-		padding-top: 10px;
-		padding-bottom: 10px;
-	}
+    &--textarea-big {
+        width: 100%;
+        height: 80px;
+        line-height: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 
-	&__wysiwyg {
-		position: absolute;
-		top: 131px;
-		bottom: 37px;
-		width: 22px;
+    &__wysiwyg {
+        position: absolute;
+        top: 131px;
+        bottom: 37px;
+        width: 22px;
 
-		&:after {
-			position: absolute;
-			top: -18px;
-			bottom: -3px;
-			width: 1px;
-			right: -7px;
-			display: block;
-			content: '';
+        &:after {
+            position: absolute;
+            top: -18px;
+            bottom: -3px;
+            width: 1px;
+            right: -7px;
+            display: block;
+            content: '';
 
-			background: @color-border;
-		}
-	}
+            background: @color-border;
+        }
+    }
 
-	&__wrap {
-		position: relative;
-		display: block;
+    &__wrap {
+        position: relative;
+        display: block;
 
-		+ .input__wrap {
-			margin-top: 5px;
-		}
-	}
+        + .input__wrap {
+            margin-top: 5px;
+        }
+    }
 
-	&__icon {
-		position: absolute;
-		top: @input-icon-position;
-		bottom: @input-icon-position;
-		left: @input-width - @input-icon-size - @input-border-size;
-		width: @input-icon-size;
-		line-height: @input-icon-size;
+    &__icon {
+        position: absolute;
+        top: @input-icon-position;
+        bottom: @input-icon-position;
+        left: @input-width - @input-icon-size - @input-border-size;
+        width: @input-icon-size;
+        line-height: @input-icon-size;
 
-		text-align: center;
-		background: @bg-input-icon;
+        text-align: center;
+        background: @bg-input-icon;
 
-		i {
-			position: relative;
-			left: 1px;
-		}
-	}
+        i {
+            position: relative;
+            left: 1px;
+        }
+    }
 
-	&__flag {
-		position: absolute;
-		top: 10px;
-		left: 7px;
-		width: 22px;
-		height: 14px;
-		display: block;
+    &__flag {
+        position: absolute;
+        top: 10px;
+        left: 7px;
+        width: 22px;
+        height: 14px;
+        display: block;
 
-		&:after {
-			position: absolute;
-			top: -3px;
-			bottom: -3px;
-			width: 1px;
-			right: -7px;
-			display: block;
-			content: '';
+        &:after {
+            position: absolute;
+            top: -3px;
+            bottom: -3px;
+            width: 1px;
+            right: -7px;
+            display: block;
+            content: '';
 
-			background: @color-border;
-		}
+            background: @color-border;
+        }
 
-		&--wysiwyg {
-			position: relative;
-			top: 0;
-			left: 4px;
+        &--wysiwyg {
+            position: relative;
+            top: 0;
+            left: 4px;
 
-			&:after {
-				display: none;
-			}
-		}
+            &:after {
+                display: none;
+            }
+        }
 
-		img {
-			.center-image-sized();
-		}
-	}
+        img {
+            .center-image-sized();
+        }
+    }
 
-	&__domain {
-		position: absolute;
-		top: 7px;
-		left: 7px;
-		width: 40px;
-		height: 18px;
+    &__domain {
+        position: absolute;
+        top: 7px;
+        left: 7px;
+        width: 40px;
+        height: 18px;
 
-		&:after {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			width: 1px;
-			right: -7px;
-			display: block;
-			content: '';
+        &:after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            right: -7px;
+            display: block;
+            content: '';
 
-			background: @color-border;
-		}
+            background: @color-border;
+        }
 
-		img {
-			.center-image();
-		}
-	}
+        img {
+            .center-image();
+        }
+    }
 
 
-	.form-input-error & ,
-	&.form-input-error {
-		border-color: @color-red;
+    .form-input-error & ,
+    &.form-input-error {
+        border-color: @color-red;
 
-		box-shadow: none;
-	}
+        box-shadow: none;
+    }
 
-	.form-input-disabled &,
-	&.form-input-disabled {
-		background: #eff1f2;
-	}
+    .form-input-disabled &,
+    &.form-input-disabled {
+        background: #eff1f2;
+    }
 }
 
 

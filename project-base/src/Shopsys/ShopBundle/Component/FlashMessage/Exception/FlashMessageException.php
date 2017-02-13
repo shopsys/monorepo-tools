@@ -2,6 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\FlashMessage\Exception;
 
-interface FlashMessageException {
-
+interface FlashMessageException
+{
 }

@@ -2,38 +2,38 @@
 @form-input-spinbox-buttons-width: 24px;
 
 .form-input-spinbox {
-	display: inline-block;
-	vertical-align: middle;
-	position: relative;
-	padding: @form-input-spinbox-padding-vertical @form-input-spinbox-buttons-width @form-input-spinbox-padding-vertical 3px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    padding: @form-input-spinbox-padding-vertical @form-input-spinbox-buttons-width @form-input-spinbox-padding-vertical 3px;
 
-	border: 1px solid @color-border;
+    border: 1px solid @color-border;
 
-	&__input {
-		width: @form-input-spinbox-buttons-width + @form-input-spinbox-padding-vertical;
-		padding: 0;
-		height: @input-height - 2 * @form-input-spinbox-padding-vertical;
-		line-height: @input-height - 2 * @form-input-spinbox-padding-vertical;
-		text-align: center;
-	}
+    &__input {
+        width: @form-input-spinbox-buttons-width + @form-input-spinbox-padding-vertical;
+        padding: 0;
+        height: @input-height - 2 * @form-input-spinbox-padding-vertical;
+        line-height: @input-height - 2 * @form-input-spinbox-padding-vertical;
+        text-align: center;
+    }
 
-	&__btn {
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: @form-input-spinbox-buttons-width;
-		height: 50%;
+    &__btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: @form-input-spinbox-buttons-width;
+        height: 50%;
 
-		background: @color-light;
-		color: @color-base;
+        background: @color-light;
+        color: @color-base;
 
-		&--minus {
-			top: auto;
-			bottom: 0;
-		}
+        &--minus {
+            top: auto;
+            bottom: 0;
+        }
 
-		&:hover {
-			background: darken(@color-light, 5%);
-		}
-	}
+        &:hover {
+            background: darken(@color-light, 5%);
+        }
+    }
 }

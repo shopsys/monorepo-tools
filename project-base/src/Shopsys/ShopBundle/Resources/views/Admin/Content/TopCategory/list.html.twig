@@ -4,18 +4,18 @@
 {% block h1 %}{{ 'Category guidepost on main page'|trans }}{% endblock %}
 
 {% block main_content %}
-	{{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
+    {{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
 
-	{{ form_start(form) }}
+    {{ form_start(form) }}
 
-	{{ form_errors(form) }}
-	{{ form_row(form.categories, { label: 'Category'|trans }) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.categories, { label: 'Category'|trans }) }}
 
-	{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
-		{% block fixed_bar_content %}
-			{{ form_widget(form.save, { label: 'Save changes'|trans }) }}
-		{% endblock %}
-	{% endembed %}
+    {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+        {% block fixed_bar_content %}
+            {{ form_widget(form.save, { label: 'Save changes'|trans }) }}
+        {% endblock %}
+    {% endembed %}
 
-	{{ form_end(form) }}
+    {{ form_end(form) }}
 {% endblock %}

@@ -2,25 +2,26 @@
 
 namespace Shopsys\ShopBundle\Model\Country;
 
-class CountryData {
+class CountryData
+{
+    /**
+     * @var string
+     */
+    public $name;
 
-	/**
-	 * @var string
-	 */
-	public $name;
+    /**
+     * @param string $name
+     */
+    public function __construct($name = '')
+    {
+        $this->name = $name;
+    }
 
-	/**
-	 * @param string $name
-	 */
-	public function __construct($name = '') {
-		$this->name = $name;
-	}
-
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Country\Country $country
-	 */
-	public function setFromEntity(Country $country) {
-		$this->name = $country->getName();
-	}
-
+    /**
+     * @param \Shopsys\ShopBundle\Model\Country\Country $country
+     */
+    public function setFromEntity(Country $country)
+    {
+        $this->name = $country->getName();
+    }
 }

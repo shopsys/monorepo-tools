@@ -1,10 +1,10 @@
 {{ form_start(quickSearchForm) }}
-	<div class="box-quick-search">
-		{{ form_widget(quickSearchForm.text, { attr: { class: 'box-quick-search__input'}} ) }}
-		{{ form_widget(quickSearchForm.submit, { label: 'Search [verb]'|trans, attr: { class: 'box-quick-search__btn'}, full_name: '' }) }}
-		<i class="svg svg-info cursor-help js-tooltip box-quick-search__icon in-icon in-icon--info"
-		 data-toggle="tooltip" data-placement="left"
-		 title="{{ 'Searching searches in name, catalogue number or product part number. It is possible to use operators * a?.'|trans }}"
-		></i>
-	</div>
+    <div class="box-quick-search">
+        {{ form_widget(quickSearchForm.text, { attr: { class: 'box-quick-search__input'}} ) }}
+        {{ form_widget(quickSearchForm.submit, { label: 'Search [verb]'|trans, attr: { class: 'box-quick-search__btn'}, full_name: '' }) }}
+        <i class="svg svg-info cursor-help js-tooltip box-quick-search__icon in-icon in-icon--info"
+         data-toggle="tooltip" data-placement="left"
+         title="{{ 'Searching searches in name, catalogue number or product part number. It is possible to use operators * a?.'|trans }}"
+        ></i>
+    </div>
 {{ form_end(quickSearchForm) }}

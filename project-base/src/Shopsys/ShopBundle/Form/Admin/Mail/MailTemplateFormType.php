@@ -15,138 +15,143 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class MailTemplateFormType extends AbstractType {
+class MailTemplateFormType extends AbstractType
+{
+    const VALIDATION_GROUP_SEND_MAIL = 'sendMail';
 
-	const VALIDATION_GROUP_SEND_MAIL = 'sendMail';
+    /**
+     * @var \Shopsys\ShopBundle\Model\Mail\MailTypeInterface
+     */
+    private $mailType;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Mail\MailTypeInterface
-	 */
-	private $mailType;
+    /**
+     * @param \Shopsys\ShopBundle\Model\Mail\MailTypeInterface $mailType
+     */
+    public function __construct(MailTypeInterface $mailType)
+    {
+        $this->mailType = $mailType;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Mail\MailTypeInterface $mailType
-	 */
-	public function __construct(MailTypeInterface $mailType) {
-		$this->mailType = $mailType;
-	}
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('bccEmail', FormType::EMAIL, [
+                'required' => false,
+                'constraints' => [
+                    new Email(),
+                    new Constraints\Length(['max' => 255, 'maxMessage' => 'Email cannot be longer then {{ limit }} characters']),
+                ],
+            ])
+            ->add('subject', FormType::TEXT, [
+                'required' => true,
+                'constraints' => $this->getSubjectConstraints(),
+            ])
+            ->add(
+                $builder
+                    ->create('body', FormType::WYSIWYG, [
+                        'required' => true,
+                        'config_name' => 'email',
+                        'constraints' => $this->getBodyConstraints(),
+                    ])
+                    ->addModelTransformer(new EmptyWysiwygTransformer())
+            )
+            ->add('attachment', FormType::FILE_UPLOAD, [
+                'required' => false,
+                'multiple' => false,
+                'file_constraints' => [
+                    new Constraints\File([
+                        'maxSize' => '2M',
+                        'maxSizeMessage' => 'Uploaded file is to large ({{ size }} {{ suffix }}). '
+                            . 'Maximum size of an file is {{ limit }} {{ suffix }}.',
+                    ]),
+                ],
+            ])
+            ->add('deleteAttachment', FormType::CHECKBOX)
+            ->add('sendMail', FormType::CHECKBOX, ['required' => false]);
+    }
 
-	/**
-	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder
-			->add('bccEmail', FormType::EMAIL, [
-				'required' => false,
-				'constraints' => [
-					new Email(),
-					new Constraints\Length(['max' => 255, 'maxMessage' => 'Email cannot be longer then {{ limit }} characters']),
-				],
-			])
-			->add('subject', FormType::TEXT, [
-				'required' => true,
-				'constraints' => $this->getSubjectConstraints(),
-			])
-			->add(
-				$builder
-					->create('body', FormType::WYSIWYG, [
-						'required' => true,
-						'config_name' => 'email',
-						'constraints' => $this->getBodyConstraints(),
-					])
-					->addModelTransformer(new EmptyWysiwygTransformer())
-			)
-			->add('attachment', FormType::FILE_UPLOAD, [
-				'required' => false,
-				'multiple' => false,
-				'file_constraints' => [
-					new Constraints\File([
-						'maxSize' => '2M',
-						'maxSizeMessage' => 'Uploaded file is to large ({{ size }} {{ suffix }}). '
-							. 'Maximum size of an file is {{ limit }} {{ suffix }}.',
-					]),
-				],
-			])
-			->add('deleteAttachment', FormType::CHECKBOX)
-			->add('sendMail', FormType::CHECKBOX, ['required' => false]);
-	}
+    /**
+     * @return \Symfony\Component\Validator\Constraint[]
+     */
+    private function getSubjectConstraints()
+    {
+        $subjectConstraints = [];
 
-	/**
-	 * @return \Symfony\Component\Validator\Constraint[]
-	 */
-	private function getSubjectConstraints() {
-		$subjectConstraints = [];
+        $subjectConstraints[] = new Constraints\NotBlank([
+            'message' => 'Please enter subject',
+            'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
+        ]);
+        $subjectConstraints[] = new Constraints\Length([
+            'max' => 255,
+            'maxMessage' => 'E-mail subject cannot be longer than {{ limit }} characters',
+        ]);
 
-		$subjectConstraints[] = new Constraints\NotBlank([
-			'message' => 'Please enter subject',
-			'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
-		]);
-		$subjectConstraints[] = new Constraints\Length([
-			'max' => 255,
-			'maxMessage' => 'E-mail subject cannot be longer than {{ limit }} characters',
-		]);
+        foreach ($this->mailType->getRequiredSubjectVariables() as $variableName) {
+            $subjectConstraints[] = new Contains([
+                'needle' => $variableName,
+                'message' => 'Variable {{ needle }} is required',
+                'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
+            ]);
+        }
 
-		foreach ($this->mailType->getRequiredSubjectVariables() as $variableName) {
-			$subjectConstraints[] = new Contains([
-				'needle' => $variableName,
-				'message' => 'Variable {{ needle }} is required',
-				'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
-			]);
-		}
+        return $subjectConstraints;
+    }
 
-		return $subjectConstraints;
-	}
+    /**
+     * @return \Symfony\Component\Validator\Constraint[]
+     */
+    private function getBodyConstraints()
+    {
+        $bodyConstraints = [];
 
-	/**
-	 * @return \Symfony\Component\Validator\Constraint[]
-	 */
-	private function getBodyConstraints() {
-		$bodyConstraints = [];
+        $bodyConstraints[] = new Constraints\NotBlank([
+            'message' => 'Please enter e-mail content',
+            'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
+        ]);
 
-		$bodyConstraints[] = new Constraints\NotBlank([
-			'message' => 'Please enter e-mail content',
-			'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
-		]);
+        foreach ($this->mailType->getRequiredBodyVariables() as $variableName) {
+            $bodyConstraints[] = new Contains([
+                'needle' => $variableName,
+                'message' => 'Variable {{ needle }} is required',
+                'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
+            ]);
+        }
 
-		foreach ($this->mailType->getRequiredBodyVariables() as $variableName) {
-			$bodyConstraints[] = new Contains([
-				'needle' => $variableName,
-				'message' => 'Variable {{ needle }} is required',
-				'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
-			]);
-		}
+        return $bodyConstraints;
+    }
 
-		return $bodyConstraints;
-	}
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => MailTemplateData::class,
+            'attr' => ['novalidate' => 'novalidate'],
+            'validation_groups' => function (FormInterface $form) {
+                $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
-	/**
-	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults([
-			'data_class' => MailTemplateData::class,
-			'attr' => ['novalidate' => 'novalidate'],
-			'validation_groups' => function (FormInterface $form) {
-				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
+                $mailTemplateData = $form->getData();
+                /* @var $mailTemplateData \Shopsys\ShopBundle\Model\Mail\MailTemplateData */
 
-				$mailTemplateData = $form->getData();
-				/* @var $mailTemplateData \Shopsys\ShopBundle\Model\Mail\MailTemplateData */
+                if ($mailTemplateData->sendMail) {
+                    $validationGroups[] = self::VALIDATION_GROUP_SEND_MAIL;
+                }
 
-				if ($mailTemplateData->sendMail) {
-					$validationGroups[] = self::VALIDATION_GROUP_SEND_MAIL;
-				}
+                return $validationGroups;
+            },
+        ]);
+    }
 
-				return $validationGroups;
-			},
-		]);
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return 'mail_template_form';
-	}
-
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'mail_template_form';
+    }
 }

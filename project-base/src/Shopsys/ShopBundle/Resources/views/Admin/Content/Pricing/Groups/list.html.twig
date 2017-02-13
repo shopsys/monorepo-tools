@@ -4,9 +4,9 @@
 {% block h1 %}{{ 'Pricing groups'|trans }}{% endblock %}
 
 {% block main_content %}
-	{{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
+    {{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
 
-	{{ render(controller('ShopsysShopBundle:Admin/PricingGroup:settings')) }}
+    {{ render(controller('ShopsysShopBundle:Admin/PricingGroup:settings')) }}
 
-	{{ gridView.render() }}
+    {{ gridView.render() }}
 {% endblock %}

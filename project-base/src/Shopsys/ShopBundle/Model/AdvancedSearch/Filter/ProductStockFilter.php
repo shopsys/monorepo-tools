@@ -5,50 +5,54 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearch\Filter;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
-class ProductStockFilter implements AdvancedSearchFilterInterface {
+class ProductStockFilter implements AdvancedSearchFilterInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'productStock';
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getName() {
-		return 'productStock';
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllowedOperators()
+    {
+        return [
+            self::OPERATOR_IS_USED,
+            self::OPERATOR_IS_NOT_USED,
+        ];
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getAllowedOperators() {
-		return [
-			self::OPERATOR_IS_USED,
-			self::OPERATOR_IS_NOT_USED,
-		];
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getValueFormType()
+    {
+        return 'hidden';
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getValueFormType() {
-		return 'hidden';
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getValueFormOptions()
+    {
+        return [];
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getValueFormOptions() {
-		return [];
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData)
+    {
+        foreach ($rulesData as $index => $ruleData) {
+            $usingStock = $ruleData->operator === self::OPERATOR_IS_USED;
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
-		foreach ($rulesData as $index => $ruleData) {
-			$usingStock = $ruleData->operator === self::OPERATOR_IS_USED;
-
-			$parameterName = 'usingStock_' . $index;
-			$queryBuilder->andWhere('p.usingStock = :' . $parameterName)
-				->setParameter($parameterName, $usingStock);
-		}
-	}
-
+            $parameterName = 'usingStock_' . $index;
+            $queryBuilder->andWhere('p.usingStock = :' . $parameterName)
+                ->setParameter($parameterName, $usingStock);
+        }
+    }
 }

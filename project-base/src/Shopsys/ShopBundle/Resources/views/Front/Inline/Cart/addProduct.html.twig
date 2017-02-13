@@ -1,12 +1,12 @@
 {{ form_start(form, {attr: {class: 'js-add-product', 'data-ajax-url': url('front_cart_add_product_ajax'), 'multipleForm': true}}) }}
-	<span class="form-input-spinbox js-spinbox">
-		{{ form_widget(form.quantity, { attr: { class: 'form-input-spinbox__input input-no-style js-spinbox-input', 'data-spinbox-min': 1}}) }}
-		<button type="button" class="btn-no-style form-input-spinbox__btn js-spinbox-plus">+</button>
-		<button type="button" class="btn-no-style form-input-spinbox__btn form-input-spinbox__btn--minus js-spinbox-minus">-</button>
-	</span>
-	{% if type == 'large' %}
-		{{ form_widget(form.add, {label: 'Add to cart'|trans, attr: {class: 'btn--success  btn--large'}}) }}
-	{% else %}
-		{{ form_widget(form.add, {label: 'Add to cart'|trans, attr: {class: 'btn--success'}}) }}
-	{% endif %}
+    <span class="form-input-spinbox js-spinbox">
+        {{ form_widget(form.quantity, { attr: { class: 'form-input-spinbox__input input-no-style js-spinbox-input', 'data-spinbox-min': 1}}) }}
+        <button type="button" class="btn-no-style form-input-spinbox__btn js-spinbox-plus">+</button>
+        <button type="button" class="btn-no-style form-input-spinbox__btn form-input-spinbox__btn--minus js-spinbox-minus">-</button>
+    </span>
+    {% if type == 'large' %}
+        {{ form_widget(form.add, {label: 'Add to cart'|trans, attr: {class: 'btn--success  btn--large'}}) }}
+    {% else %}
+        {{ form_widget(form.add, {label: 'Add to cart'|trans, attr: {class: 'btn--success'}}) }}
+    {% endif %}
 {{ form_end(form) }}

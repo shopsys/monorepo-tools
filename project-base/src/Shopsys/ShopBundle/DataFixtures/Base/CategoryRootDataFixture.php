@@ -11,32 +11,33 @@ use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
 use Shopsys\ShopBundle\Model\Category\CategoryDomain;
 
-class CategoryRootDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class CategoryRootDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
+    const ROOT = 'category_root';
 
-	const ROOT = 'category_root';
+    /**
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
+    public function load(ObjectManager $manager)
+    {
+        $rootCategory = new Category(new CategoryData());
+        $manager->persist($rootCategory);
+        $manager->flush($rootCategory);
+        $this->addReference(self::ROOT, $rootCategory);
 
-	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 */
-	public function load(ObjectManager $manager) {
-		$rootCategory = new Category(new CategoryData());
-		$manager->persist($rootCategory);
-		$manager->flush($rootCategory);
-		$this->addReference(self::ROOT, $rootCategory);
+        $categoryDomain = new CategoryDomain($rootCategory, Domain::FIRST_DOMAIN_ID);
+        $manager->persist($categoryDomain);
 
-		$categoryDomain = new CategoryDomain($rootCategory, Domain::FIRST_DOMAIN_ID);
-		$manager->persist($categoryDomain);
+        $manager->flush();
+    }
 
-		$manager->flush();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getDependencies() {
-		return [
-			SettingValueDataFixture::class,
-		];
-	}
-
+    /**
+     * {@inheritDoc}
+     */
+    public function getDependencies()
+    {
+        return [
+            SettingValueDataFixture::class,
+        ];
+    }
 }

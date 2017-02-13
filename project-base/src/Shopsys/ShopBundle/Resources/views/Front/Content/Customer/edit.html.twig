@@ -1,96 +1,96 @@
 {% extends '@ShopsysShop/Front/Layout/layoutWithoutPanel.html.twig' %}
 
 {% block meta_robots -%}
-	<meta name="robots" content="noindex, follow">
+    <meta name="robots" content="noindex, follow">
 {% endblock %}
 
 {% block title %}{{ parent() }} - {{ 'Personal data'|trans }}{% endblock %}
 {% block h1 %}{% endblock %}
 
 {% block main_content %}
-	<h1>{{ 'Personal data'|trans }}</h1>
-	{{ form_start(form) }}
-		{{ form_errors(form) }}
+    <h1>{{ 'Personal data'|trans }}</h1>
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
 
-		<div id="{{ form.userData.vars.id }}">
-			<div class="wrap-box">
-				<h2 class="wrap-box__title">{{ 'Personal data'|trans }}</h2>
-				<div class="wrap-box__in">
-					{{ form_row(form.userData.firstName, { label: 'First name'|trans}) }}
-					{{ form_row(form.userData.lastName, { label: 'Surname'|trans}) }}
-					{{ form_row(form.billingAddressData.telephone, { label: 'Telephone'|trans}) }}
-					{{ form_row(form.userData.email, { label: 'E-mail'|trans}) }}
-					<p>
-						{{ 'To prevent the possibility of account theft, the change of the e-mail address must be dealt with individually. If your e-mail address has changed, please contact us.'|trans }}
-					</p>
-				</div>
-			</div>
+        <div id="{{ form.userData.vars.id }}">
+            <div class="wrap-box">
+                <h2 class="wrap-box__title">{{ 'Personal data'|trans }}</h2>
+                <div class="wrap-box__in">
+                    {{ form_row(form.userData.firstName, { label: 'First name'|trans}) }}
+                    {{ form_row(form.userData.lastName, { label: 'Surname'|trans}) }}
+                    {{ form_row(form.billingAddressData.telephone, { label: 'Telephone'|trans}) }}
+                    {{ form_row(form.userData.email, { label: 'E-mail'|trans}) }}
+                    <p>
+                        {{ 'To prevent the possibility of account theft, the change of the e-mail address must be dealt with individually. If your e-mail address has changed, please contact us.'|trans }}
+                    </p>
+                </div>
+            </div>
 
-			<div class="wrap-box">
-				<h2 class="wrap-box__title">{{ 'Changing password'|trans }}</h2>
-				<div class="wrap-box__in" id="{{ form.userData.password.vars.id }}">
-					{{ form_row(form.userData.password.first, { label: 'Password'|trans}) }}
-					<i class="svg svg-info in-icon in-icon--info form-line__info js-tooltip"
-						data-toggle="tooltip"
-						data-placement="right"
-						title=""
-						data-original-title="{{ 'Password must be at least six characters and can\'t be the same as entered e-mail or its part before at sign.'|trans }}">
-					 </i>
-					{{ form_row(form.userData.password.second, { label: 'Password again'|trans}) }}
-				</div>
-			</div>
-		</div>
+            <div class="wrap-box">
+                <h2 class="wrap-box__title">{{ 'Changing password'|trans }}</h2>
+                <div class="wrap-box__in" id="{{ form.userData.password.vars.id }}">
+                    {{ form_row(form.userData.password.first, { label: 'Password'|trans}) }}
+                    <i class="svg svg-info in-icon in-icon--info form-line__info js-tooltip"
+                        data-toggle="tooltip"
+                        data-placement="right"
+                        title=""
+                        data-original-title="{{ 'Password must be at least six characters and can\'t be the same as entered e-mail or its part before at sign.'|trans }}">
+                     </i>
+                    {{ form_row(form.userData.password.second, { label: 'Password again'|trans}) }}
+                </div>
+            </div>
+        </div>
 
 
-		<div id="{{ form.billingAddressData.vars.id }}">
-			<div class="wrap-box">
-				<h2 class="wrap-box__title">{{ 'Company data'|trans }}</h2>
-				<div class="wrap-box__in">
-					{{ form_row(form.billingAddressData.companyCustomer, {
-						attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
-						label: 'I buy on company behalf'|trans})
-					}}
-					<div id="js-company-fields">
-						{{ form_row(form.billingAddressData.companyName, { label: 'Company'|trans}) }}
-						{{ form_row(form.billingAddressData.companyNumber, { label: 'Company number'|trans}) }}
-						{{ form_row(form.billingAddressData.companyTaxNumber, { label: 'Tax number'|trans}) }}
-					</div>
-				</div>
-			</div>
+        <div id="{{ form.billingAddressData.vars.id }}">
+            <div class="wrap-box">
+                <h2 class="wrap-box__title">{{ 'Company data'|trans }}</h2>
+                <div class="wrap-box__in">
+                    {{ form_row(form.billingAddressData.companyCustomer, {
+                        attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
+                        label: 'I buy on company behalf'|trans})
+                    }}
+                    <div id="js-company-fields">
+                        {{ form_row(form.billingAddressData.companyName, { label: 'Company'|trans}) }}
+                        {{ form_row(form.billingAddressData.companyNumber, { label: 'Company number'|trans}) }}
+                        {{ form_row(form.billingAddressData.companyTaxNumber, { label: 'Tax number'|trans}) }}
+                    </div>
+                </div>
+            </div>
 
-			<div class="wrap-box">
-				<h2 class="wrap-box__title">{{ 'Address'|trans }}</h2>
+            <div class="wrap-box">
+                <h2 class="wrap-box__title">{{ 'Address'|trans }}</h2>
 
-				<div class="wrap-box__in">
-					{{ form_row(form.billingAddressData.street, { label: 'Street'|trans}) }}
-					{{ form_row(form.billingAddressData.city, { label: 'City'|trans}) }}
-					{{ form_row(form.billingAddressData.postcode, { label: 'Postcode'|trans}) }}
-					{{ form_row(form.billingAddressData.country, { label: 'Country'|trans}) }}
-				</div>
-			</div>
-		</div>
+                <div class="wrap-box__in">
+                    {{ form_row(form.billingAddressData.street, { label: 'Street'|trans}) }}
+                    {{ form_row(form.billingAddressData.city, { label: 'City'|trans}) }}
+                    {{ form_row(form.billingAddressData.postcode, { label: 'Postcode'|trans}) }}
+                    {{ form_row(form.billingAddressData.country, { label: 'Country'|trans}) }}
+                </div>
+            </div>
+        </div>
 
-		<div id="{{ form.deliveryAddressData.vars.id }}" class="wrap-box">
-			<h2 class="wrap-box__title">{{ 'Shipping address'|trans }}</h2>
-			<div class="wrap-box__in">
-				{{ form_row(form.deliveryAddressData.addressFilled, {
-					attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
-					label: 'I want to deliver products to different address than the billing one'|trans})
-				}}
-				<div id="js-delivery-address-fields">
-					{{ form_row(form.deliveryAddressData.companyName, { label: 'Company'|trans}) }}
-					{{ form_row(form.deliveryAddressData.firstName, { label: 'First name'|trans}) }}
-					{{ form_row(form.deliveryAddressData.lastName, { label: 'Surname'|trans}) }}
-					{{ form_row(form.deliveryAddressData.telephone, { label: 'Telephone'|trans}) }}
-					{{ form_row(form.deliveryAddressData.street, { label: 'Street'|trans}) }}
-					{{ form_row(form.deliveryAddressData.city, { label: 'City'|trans}) }}
-					{{ form_row(form.deliveryAddressData.postcode, { label: 'Postcode'|trans}) }}
-					{{ form_row(form.deliveryAddressData.country, { label: 'Country'|trans}) }}
-				</div>
-			</div>
-		</div>
+        <div id="{{ form.deliveryAddressData.vars.id }}" class="wrap-box">
+            <h2 class="wrap-box__title">{{ 'Shipping address'|trans }}</h2>
+            <div class="wrap-box__in">
+                {{ form_row(form.deliveryAddressData.addressFilled, {
+                    attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
+                    label: 'I want to deliver products to different address than the billing one'|trans})
+                }}
+                <div id="js-delivery-address-fields">
+                    {{ form_row(form.deliveryAddressData.companyName, { label: 'Company'|trans}) }}
+                    {{ form_row(form.deliveryAddressData.firstName, { label: 'First name'|trans}) }}
+                    {{ form_row(form.deliveryAddressData.lastName, { label: 'Surname'|trans}) }}
+                    {{ form_row(form.deliveryAddressData.telephone, { label: 'Telephone'|trans}) }}
+                    {{ form_row(form.deliveryAddressData.street, { label: 'Street'|trans}) }}
+                    {{ form_row(form.deliveryAddressData.city, { label: 'City'|trans}) }}
+                    {{ form_row(form.deliveryAddressData.postcode, { label: 'Postcode'|trans}) }}
+                    {{ form_row(form.deliveryAddressData.country, { label: 'Country'|trans}) }}
+                </div>
+            </div>
+        </div>
 
-		{{ form_widget(form.save, { label: 'Save changes'|trans}) }}
+        {{ form_widget(form.save, { label: 'Save changes'|trans}) }}
 
-	{{ form_end(form) }}
+    {{ form_end(form) }}
 {% endblock %}

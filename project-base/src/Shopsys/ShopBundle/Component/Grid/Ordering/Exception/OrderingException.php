@@ -2,6 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Grid\Ordering\Exception;
 
-interface OrderingException {
-
+interface OrderingException
+{
 }

@@ -13,7 +13,7 @@ msgstr ""
 msgid "%defaultCurrency% per unit"
 msgstr ""
 
-#: FeedConfigRepository.php:79
+#: FeedConfigRepository.php:82
 msgid "%feedName% - availability"
 msgstr ""
 
@@ -37,29 +37,29 @@ msgstr ""
 msgid "- Heureka - Ověřeno zákazníky"
 msgstr ""
 
-#: ProductFormType.php:184
+#: ProductFormType.php:186
 msgid "-- Choose action --"
 msgstr ""
 
-#: AdvertFormType.php:83
+#: AdvertFormType.php:86
 msgid "-- Choose area --"
 msgstr ""
 
-#: CookiesSettingFormType.php:41
-#: TermsAndConditionsSettingFormType.php:41
+#: CookiesSettingFormType.php:44
+#: TermsAndConditionsSettingFormType.php:44
 msgid "-- Choose article --"
 msgstr ""
 
-#: ArticleFormType.php:92
+#: ArticleFormType.php:94
 msgid "-- Choose article position --"
 msgstr ""
 
-#: ProductFormType.php:168
-#: ProductFormType.php:195
+#: ProductFormType.php:170
+#: ProductFormType.php:197
 msgid "-- Choose availability --"
 msgstr ""
 
-#: ProductFormType.php:143
+#: ProductFormType.php:145
 msgid "-- Choose brand --"
 msgstr ""
 
@@ -80,16 +80,16 @@ msgstr ""
 msgid "ATTENTION - inserting scripts on the page can seriously endanger the security, performance or design of the app."
 msgstr ""
 
-#: Content/Product/detail.html.twig:426
+#: Content/Product/detail.html.twig:432
 #: Content/Product/detail.html.twig:9
 msgid "Accessories"
 msgstr ""
 
-#: ModuleList.php:18
+#: ModuleList.php:19
 msgid "Accessories in purchase confirmation box"
 msgstr ""
 
-#: FeedController.php:108
+#: FeedController.php:109
 #: Content/Superadmin/cssDocumentation.html.twig:401
 #: Content/Superadmin/cssDocumentation.html.twig:409
 #: Content/Superadmin/cssDocumentation.html.twig:415
@@ -178,11 +178,11 @@ msgstr ""
 msgid "Administrator"
 msgstr ""
 
-#: AdministratorController.php:175
+#: AdministratorController.php:176
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: AdministratorController.php:106
+#: AdministratorController.php:108
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgstr ""
 msgid "Administrator activities history"
 msgstr ""
 
-#: AdministratorController.php:123
+#: AdministratorController.php:124
 #: AdministratorController.php:192
 msgid "Administrator with login name <strong>{{ name }}</strong> already exists"
 msgstr ""
@@ -219,21 +219,21 @@ msgstr ""
 msgid "Advanced search"
 msgstr ""
 
-#: ImageController.php:71
+#: ImageController.php:75
 #: Content/Advert/detail.html.twig:3
 #: Content/Advert/detail.html.twig:4
 msgid "Advertising"
 msgstr ""
 
-#: AdvertController.php:186
+#: AdvertController.php:189
 msgid "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
 msgstr ""
 
-#: AdvertController.php:96
+#: AdvertController.php:97
 msgid "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified"
 msgstr ""
 
-#: AdvertController.php:216
+#: AdvertController.php:220
 msgid "Advertising <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -260,7 +260,7 @@ msgstr ""
 msgid "All pages"
 msgstr ""
 
-#: ProductMassActionFormType.php:30
+#: ProductMassActionFormType.php:32
 msgid "All search results"
 msgstr ""
 
@@ -280,7 +280,7 @@ msgstr ""
 msgid "An example might be empty space with icon behind it, which we want to align with icon next to input."
 msgstr ""
 
-#: Content/Category/detail.html.twig:14
+#: Content/Category/detail.html.twig:20
 msgid "Ancestor category"
 msgstr ""
 
@@ -306,7 +306,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: AdvertController.php:147
+#: AdvertController.php:149
 #: Content/Advert/detail.html.twig:18
 msgid "Area"
 msgstr ""
@@ -316,23 +316,23 @@ msgstr ""
 msgid "Article"
 msgstr ""
 
-#: ArticleController.php:225
+#: ArticleController.php:230
 msgid "Article \"%name%\" set for displaying cookies information. This setting will be lost. Do you really want to delete it?"
 msgstr ""
 
-#: ArticleController.php:220
+#: ArticleController.php:225
 msgid "Article \"%name%\" set for displaying terms and conditions. This setting will be lost. Do you really want to delete it?"
 msgstr ""
 
-#: ArticleController.php:171
+#: ArticleController.php:174
 msgid "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: ArticleController.php:114
+#: ArticleController.php:115
 msgid "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: ArticleController.php:201
+#: ArticleController.php:205
 msgid "Article <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -383,11 +383,11 @@ msgstr ""
 msgid "Attention, the second variant doesn't have js to work with yet!"
 msgstr ""
 
-#: ModuleList.php:20
+#: ModuleList.php:21
 msgid "Automatic stock calculation"
 msgstr ""
 
-#: ProductFormType.php:251
+#: ProductFormType.php:253
 msgid "Automatically"
 msgstr ""
 
@@ -396,22 +396,22 @@ msgstr ""
 msgid "Availabilities overview"
 msgstr ""
 
-#: AdvancedSearchProductFilterTranslation.php:16
+#: AdvancedSearchProductFilterTranslation.php:17
 #: Resources/config/admin_menu.yml:
 #: Content/Product/detail.html.twig:151
 #: Content/Product/edit.html.twig:88
 msgid "Availability"
 msgstr ""
 
-#: AvailabilityController.php:103
+#: AvailabilityController.php:105
 msgid "Availability \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which availability you want to set instead?"
 msgstr ""
 
-#: AvailabilityController.php:70
+#: AvailabilityController.php:72
 msgid "Availability <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: AvailabilityController.php:78
+#: AvailabilityController.php:80
 msgid "Availability <strong>{{ oldName }}</strong> deleted and replaced by availability <strong>{{ newName }}</strong>"
 msgstr ""
 
@@ -451,7 +451,7 @@ msgstr ""
 #: Content/Article/detail.html.twig:75
 #: Content/BestsellingProduct/detail.html.twig:26
 #: Content/Brand/detail.html.twig:27
-#: Content/Category/detail.html.twig:53
+#: Content/Category/detail.html.twig:130
 #: Content/Customer/detail.html.twig:103
 #: Content/Order/edit.html.twig:218
 #: Content/Payment/detail.html.twig:59
@@ -505,15 +505,15 @@ msgstr ""
 msgid "Basic table with one class on table element. Basic look for showing simple data (not forms)."
 msgstr ""
 
-#: AvailabilityController.php:109
+#: AvailabilityController.php:111
 msgid "Because availability \"%name%\" is used with other products also, you have to choose a new availability which will replace the existing one. Which availability you want to set to these products?"
 msgstr ""
 
-#: OrderStatusController.php:105
+#: OrderStatusController.php:108
 msgid "Because status \"%name%\" is used with other orders also, you have to choose a new status which will replace the existing one. Which status you want to set to these orders? When changing this, there won't be emails sent to customers."
 msgstr ""
 
-#: BestsellingProductController.php:92
+#: BestsellingProductController.php:93
 msgid "Best-selling products of category <strong><a href=\"{{ url }}\">{{ name }}</a></strong> set."
 msgstr ""
 
@@ -534,7 +534,7 @@ msgstr ""
 msgid "Billing address"
 msgstr ""
 
-#: MailController.php:93
+#: MailController.php:94
 msgid "Billing address - name, surname, company, company number, tax number and billing address"
 msgstr ""
 
@@ -547,8 +547,8 @@ msgstr ""
 msgid "Bolder line"
 msgstr ""
 
-#: ImageController.php:72
-#: AdvancedSearchProductFilterTranslation.php:17
+#: ImageController.php:76
+#: AdvancedSearchProductFilterTranslation.php:18
 #: Content/Brand/detail.html.twig:3
 #: Content/Brand/detail.html.twig:4
 #: Content/Product/detail.html.twig:86
@@ -557,20 +557,20 @@ msgstr ""
 msgid "Brand"
 msgstr ""
 
-#: BrandController.php:161
+#: BrandController.php:164
 msgid "Brand <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: BrandController.php:88
+#: BrandController.php:89
 msgid "Brand <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: BrandController.php:192
+#: BrandController.php:196
 msgid "Brand <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:47
-#: BrandBreadcrumbGenerator.php:29
+#: FrontBreadcrumbGenerator.php:48
+#: BrandBreadcrumbGenerator.php:30
 #: Content/Brand/list.html.twig:3
 #: Content/Brand/list.html.twig:4
 #: Content/Brand/list.html.twig:9
@@ -601,7 +601,7 @@ msgstr ""
 msgid "Bulk edit"
 msgstr ""
 
-#: ProductController.php:258
+#: ProductController.php:261
 msgid "Bulk editing done"
 msgstr ""
 
@@ -649,8 +649,8 @@ msgstr ""
 msgid "Cart"
 msgstr ""
 
-#: ProductPickerController.php:138
-#: AdvancedSearchProductFilterTranslation.php:10
+#: ProductPickerController.php:141
+#: AdvancedSearchProductFilterTranslation.php:11
 #: Content/Order/edit.html.twig:163
 #: Content/Product/detail.html.twig:71
 #: Content/Product/edit.html.twig:55
@@ -658,7 +658,7 @@ msgstr ""
 msgid "Catalogue number"
 msgstr ""
 
-#: ImageController.php:66
+#: ImageController.php:70
 #: Resources/config/admin_menu.yml:
 #: Content/Category/detail.html.twig:3
 #: Content/Category/detail.html.twig:4
@@ -668,15 +668,15 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: CategoryController.php:124
+#: CategoryController.php:126
 msgid "Category <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: CategoryController.php:211
+#: CategoryController.php:216
 msgid "Category <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: Content/Category/detail.html.twig:16
+#: Content/Category/detail.html.twig:22
 msgid "Category Heureka.cz"
 msgstr ""
 
@@ -685,7 +685,7 @@ msgstr ""
 msgid "Category guidepost on main page"
 msgstr ""
 
-#: CategoryController.php:85
+#: CategoryController.php:86
 msgid "Category<strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modified"
 msgstr ""
 
@@ -729,7 +729,7 @@ msgstr ""
 msgid "Choose new value first"
 msgstr ""
 
-#: ProductType.php:72
+#: ProductType.php:77
 msgid "Choose product"
 msgstr ""
 
@@ -737,15 +737,15 @@ msgstr ""
 msgid "Choose variant"
 msgstr ""
 
-#: MailController.php:91
+#: MailController.php:92
 msgid "Chosen payment name"
 msgstr ""
 
-#: MailController.php:90
+#: MailController.php:91
 msgid "Chosen shipping name"
 msgstr ""
 
-#: CustomerController.php:201
+#: CustomerController.php:202
 #: Content/Customer/detail.html.twig:70
 #: Content/Customer/detail.html.twig:91
 #: Content/Order/edit.html.twig:113
@@ -780,12 +780,12 @@ msgstr ""
 msgid "Close (Esc)"
 msgstr ""
 
-#: Content/Product/detail.html.twig:430
+#: Content/Product/detail.html.twig:436
 msgid "Close without saving"
 msgstr ""
 
-#: PromoCodeGridFactory.php:43
-#: CurrencyGridFactory.php:56
+#: PromoCodeGridFactory.php:44
+#: CurrencyGridFactory.php:57
 #: Content/Advert/detail.html.twig:21
 #: Content/Script/detail.html.twig:15
 msgid "Code"
@@ -799,12 +799,12 @@ msgstr ""
 msgid "Coding using BEM"
 msgstr ""
 
-#: PricingGroupGridFactory.php:54
-#: VatGridFactory.php:69
+#: PricingGroupGridFactory.php:55
+#: VatGridFactory.php:70
 msgid "Coefficient"
 msgstr ""
 
-#: FlagGridFactory.php:55
+#: FlagGridFactory.php:56
 msgid "Colour"
 msgstr ""
 
@@ -870,7 +870,7 @@ msgstr ""
 msgid "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anythin in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
 msgstr ""
 
-#: ContactFormFacade.php:60
+#: ContactFormFacade.php:61
 msgid "Contact form"
 msgstr ""
 
@@ -928,7 +928,7 @@ msgstr ""
 msgid "Cookies information settings"
 msgstr ""
 
-#: CookiesController.php:62
+#: CookiesController.php:63
 msgid "Cookies information settings modified."
 msgstr ""
 
@@ -955,7 +955,7 @@ msgid "Country"
 msgstr ""
 
 #: Content/Product/createVariant.html.twig:10
-#: FormDetailExtension.php:76
+#: FormDetailExtension.php:81
 msgid "Create"
 msgstr ""
 
@@ -1050,7 +1050,7 @@ msgstr ""
 msgid "Create variant"
 msgstr ""
 
-#: OrderController.php:234
+#: OrderController.php:238
 msgid "Created"
 msgstr ""
 
@@ -1058,7 +1058,7 @@ msgstr ""
 msgid "Created by administrator"
 msgstr ""
 
-#: AdvancedSearchOrderFilterTranslation.php:11
+#: AdvancedSearchOrderFilterTranslation.php:12
 msgid "Created on"
 msgstr ""
 
@@ -1081,11 +1081,11 @@ msgstr ""
 msgid "Currencies"
 msgstr ""
 
-#: CurrencyController.php:91
+#: CurrencyController.php:93
 msgid "Currency <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: CurrencyController.php:143
+#: CurrencyController.php:146
 msgid "Currency settings modified"
 msgstr ""
 
@@ -1093,20 +1093,20 @@ msgstr ""
 msgid "Current status"
 msgstr ""
 
-#: OrderController.php:235
+#: OrderController.php:239
 #: Content/Order/edit.html.twig:43
 msgid "Customer"
 msgstr ""
 
-#: CustomerController.php:253
+#: CustomerController.php:255
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: CustomerController.php:145
+#: CustomerController.php:146
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: CustomerController.php:288
+#: CustomerController.php:291
 msgid "Customer <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -1123,8 +1123,8 @@ msgstr ""
 msgid "Customer orders"
 msgstr ""
 
-#: CustomerPasswordController.php:61
-#: CustomerPasswordController.php:100
+#: CustomerPasswordController.php:62
+#: CustomerPasswordController.php:102
 msgid "Customer with e-mail address <strong>{{ email }}</strong> doesn't exist. <a href=\"{{ registrationLink }}\"> Register</a>"
 msgstr ""
 
@@ -1143,7 +1143,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: MailController.php:88
+#: MailController.php:89
 msgid "Date and time of order creation"
 msgstr ""
 
@@ -1155,7 +1155,7 @@ msgstr ""
 msgid "Default administration currency"
 msgstr ""
 
-#: AvailabilityController.php:156
+#: AvailabilityController.php:159
 msgid "Default availability for the stock settings modified"
 msgstr ""
 
@@ -1167,7 +1167,7 @@ msgstr ""
 msgid "Default pricing group"
 msgstr ""
 
-#: PricingGroupController.php:167
+#: PricingGroupController.php:169
 msgid "Default pricing group settings modified"
 msgstr ""
 
@@ -1185,7 +1185,7 @@ msgstr ""
 msgid "Default unit"
 msgstr ""
 
-#: UnitController.php:164
+#: UnitController.php:168
 msgid "Default unit settings modified"
 msgstr ""
 
@@ -1193,7 +1193,7 @@ msgstr ""
 msgid "Default unit will be used when creating new product"
 msgstr ""
 
-#: Grid.php:277
+#: Grid.php:280
 #: Content/Mail/template.html.twig:34
 #: Content/Product/edit.html.twig:346
 #: Admin/Form/fileuploadFields.html.twig:23
@@ -1204,7 +1204,7 @@ msgstr ""
 msgid "Delete and set"
 msgstr ""
 
-#: MailController.php:96
+#: MailController.php:97
 msgid "Delivery address"
 msgstr ""
 
@@ -1213,7 +1213,7 @@ msgid "Delivery data"
 msgstr ""
 
 #: Content/Brand/detail.html.twig:13
-#: Content/Category/detail.html.twig:22
+#: Content/Category/detail.html.twig:99
 #: Content/Payment/detail.html.twig:43
 #: Content/Product/detail.html.twig:177
 #: Content/Product/edit.html.twig:271
@@ -1238,7 +1238,7 @@ msgstr ""
 msgid "Discard changes"
 msgstr ""
 
-#: PromoCodeGridFactory.php:44
+#: PromoCodeGridFactory.php:45
 #: Content/Cart/index.html.twig:55
 #: Content/Cart/index.html.twig:82
 msgid "Discount"
@@ -1248,24 +1248,24 @@ msgstr ""
 msgid "Discount code"
 msgstr ""
 
-#: PromoCodeController.php:52
+#: PromoCodeController.php:54
 msgid "Discount code added to order"
 msgstr ""
 
-#: PromoCodeController.php:49
+#: PromoCodeController.php:51
 msgid "Discount code invalid. Check it, please."
 msgstr ""
 
-#: PromoCodeController.php:59
+#: PromoCodeController.php:62
 msgid "Discount code removed from order"
 msgstr ""
 
-#: OrderCreationService.php:250
+#: OrderCreationService.php:259
 #: Content/Order/preview.html.twig:20
 msgid "Discount coupon"
 msgstr ""
 
-#: PromoCodeController.php:54
+#: PromoCodeController.php:56
 msgid "Discount coupon <strong>{{ code }}</strong> deleted."
 msgstr ""
 
@@ -1275,7 +1275,7 @@ msgstr ""
 msgid "Discount coupons"
 msgstr ""
 
-#: ProductMassActionFormType.php:49
+#: ProductMassActionFormType.php:51
 msgid "Display"
 msgstr ""
 
@@ -1291,7 +1291,7 @@ msgstr ""
 msgid "Display of inputs like checkboxes and radio buttons is done via <strong class=\"in-article__visible\">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class=\"in-article__visible\">inList</strong> and they are displayed below each other on true."
 msgstr ""
 
-#: Content/Category/detail.html.twig:15
+#: Content/Category/detail.html.twig:21
 #: Content/Payment/detail.html.twig:23
 #: Content/Transport/detail.html.twig:23
 msgid "Display on"
@@ -1314,11 +1314,11 @@ msgstr ""
 msgid "Do you really want to discard all changes?"
 msgstr ""
 
-#: AvailabilityController.php:124
+#: AvailabilityController.php:126
 msgid "Do you really want to remove availability \"%name%\" permanently? It is not used anywhere."
 msgstr ""
 
-#: CurrencyController.php:68
+#: CurrencyController.php:70
 msgid "Do you really want to remove currency \"%name%\" permanently?"
 msgstr ""
 
@@ -1326,75 +1326,75 @@ msgstr ""
 msgid "Do you really want to remove item \"<i>%itemName%</i>\" from the order?"
 msgstr ""
 
-#: PricingGroupController.php:134
+#: PricingGroupController.php:137
 msgid "Do you really want to remove pricing group \"%name%\" permanently? It is not used anywhere."
 msgstr ""
 
-#: VatController.php:85
+#: VatController.php:87
 msgid "Do you really want to remove rate \"%name%\" permanently? It is not used anywhere."
 msgstr ""
 
-#: OrderStatusController.php:120
+#: OrderStatusController.php:123
 msgid "Do you really want to remove status of orders \"%name%\" permanently? It is not used anywhere."
 msgstr ""
 
-#: OrderController.php:246
+#: OrderController.php:250
 msgid "Do you really want to remove the order?"
 msgstr ""
 
-#: AdministratorController.php:71
+#: AdministratorController.php:72
 msgid "Do you really want to remove this administrator?"
 msgstr ""
 
-#: AdvertController.php:152
+#: AdvertController.php:154
 msgid "Do you really want to remove this advert?"
 msgstr ""
 
-#: ArticleController.php:230
+#: ArticleController.php:235
 msgid "Do you really want to remove this article?"
 msgstr ""
 
-#: BrandController.php:130
+#: BrandController.php:132
 msgid "Do you really want to remove this brand? If it is used anywhere it will be unset."
 msgstr ""
 
-#: CustomerController.php:214
+#: CustomerController.php:215
 msgid "Do you really want to remove this customer?"
 msgstr ""
 
-#: PromoCodeGridFactory.php:47
+#: PromoCodeGridFactory.php:48
 msgid "Do you really want to remove this discount coupon?"
 msgstr ""
 
-#: FlagGridFactory.php:60
+#: FlagGridFactory.php:61
 msgid "Do you really want to remove this flag?"
 msgstr ""
 
-#: SliderController.php:80
+#: SliderController.php:81
 msgid "Do you really want to remove this page?"
 msgstr ""
 
-#: ParameterGridFactory.php:77
+#: ParameterGridFactory.php:78
 msgid "Do you really want to remove this parameter? By deleting this parameter you will remove this parameter from a product where the parameter is assigned. This step is irreversible!"
 msgstr ""
 
-#: PaymentGridFactory.php:84
+#: PaymentGridFactory.php:86
 msgid "Do you really want to remove this payment?"
 msgstr ""
 
-#: ProductController.php:372
+#: ProductController.php:379
 msgid "Do you really want to remove this product?"
 msgstr ""
 
-#: ScriptController.php:130
+#: ScriptController.php:133
 msgid "Do you really want to remove this script?"
 msgstr ""
 
-#: TransportGridFactory.php:84
+#: TransportGridFactory.php:86
 msgid "Do you really want to remove this shipping?"
 msgstr ""
 
-#: UnitController.php:94
+#: UnitController.php:96
 msgid "Do you really want to remove unit \"%name%\" permanently? It is not used anywhere."
 msgstr ""
 
@@ -1402,8 +1402,8 @@ msgstr ""
 msgid "Do you want to receive the newest information about our shop? Subscribe to our e-mail newsletter."
 msgstr ""
 
-#: OrderController.php:237
-#: AdvancedSearchOrderFilterTranslation.php:13
+#: OrderController.php:241
+#: AdvancedSearchOrderFilterTranslation.php:14
 #: Content/Advert/detail.html.twig:15
 #: Content/Article/detail.html.twig:18
 #: Content/Customer/edit.html.twig:47
@@ -1433,11 +1433,11 @@ msgstr ""
 msgid "Domain 2"
 msgstr ""
 
-#: DomainController.php:130
+#: DomainController.php:134
 msgid "Domain <strong>{{ name }}</strong> modified"
 msgstr ""
 
-#: DomainController.php:90
+#: DomainController.php:93
 msgid "Domain name"
 msgstr ""
 
@@ -1461,10 +1461,10 @@ msgstr ""
 msgid "Drag file here"
 msgstr ""
 
-#: AdministratorController.php:66
-#: CustomerController.php:203
-#: MailController.php:114
-#: MailController.php:125
+#: AdministratorController.php:67
+#: CustomerController.php:204
+#: MailController.php:116
+#: MailController.php:128
 #: Content/Administrator/detail.html.twig:18
 #: Content/Customer/detail.html.twig:32
 #: Content/Order/edit.html.twig:87
@@ -1496,7 +1496,7 @@ msgstr ""
 msgid "E-mail settings"
 msgstr ""
 
-#: MailController.php:186
+#: MailController.php:191
 msgid "E-mail settings modified."
 msgstr ""
 
@@ -1513,16 +1513,16 @@ msgstr ""
 msgid "E-mail templates settings"
 msgstr ""
 
-#: MailController.php:147
+#: MailController.php:151
 msgid "E-mail templates settings modified"
 msgstr ""
 
-#: MailController.php:89
-#: MailController.php:115
+#: MailController.php:90
+#: MailController.php:117
 msgid "E-shop URL address"
 msgstr ""
 
-#: ShopInfoController.php:62
+#: ShopInfoController.php:63
 msgid "E-shop attributes settings modified"
 msgstr ""
 
@@ -1541,13 +1541,13 @@ msgstr ""
 msgid "EAN"
 msgstr ""
 
-#: Grid.php:267
+#: Grid.php:269
 #: Content/Domain/listGrid.html.twig:14
 #: Admin/Grid/Grid.html.twig:172
 msgid "Edit"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:18
+#: FrontBreadcrumbGenerator.php:19
 msgid "Edit data"
 msgstr ""
 
@@ -1567,7 +1567,7 @@ msgstr ""
 msgid "Editing advertising"
 msgstr ""
 
-#: AdvertController.php:109
+#: AdvertController.php:110
 msgid "Editing advertising - %name%"
 msgstr ""
 
@@ -1577,7 +1577,7 @@ msgstr ""
 msgid "Editing article"
 msgstr ""
 
-#: ArticleController.php:127
+#: ArticleController.php:128
 msgid "Editing article - %name%"
 msgstr ""
 
@@ -1591,7 +1591,7 @@ msgstr ""
 msgid "Editing brand"
 msgstr ""
 
-#: BrandController.php:101
+#: BrandController.php:102
 msgid "Editing brand - %name%"
 msgstr ""
 
@@ -1601,7 +1601,7 @@ msgstr ""
 msgid "Editing category"
 msgstr ""
 
-#: CategoryController.php:98
+#: CategoryController.php:99
 msgid "Editing category - %name%"
 msgstr ""
 
@@ -1623,7 +1623,7 @@ msgstr ""
 msgid "Editing order"
 msgstr ""
 
-#: OrderController.php:151
+#: OrderController.php:152
 msgid "Editing order - Nr. %number%"
 msgstr ""
 
@@ -1641,7 +1641,7 @@ msgstr ""
 msgid "Editing payment"
 msgstr ""
 
-#: PaymentController.php:139
+#: PaymentController.php:141
 msgid "Editing payment - %name%"
 msgstr ""
 
@@ -1651,7 +1651,7 @@ msgstr ""
 msgid "Editing product"
 msgstr ""
 
-#: ProductController.php:166
+#: ProductController.php:167
 msgid "Editing product - %name%"
 msgstr ""
 
@@ -1667,7 +1667,7 @@ msgstr ""
 msgid "Editing shipping"
 msgstr ""
 
-#: TransportController.php:140
+#: TransportController.php:142
 msgid "Editing shipping - %name%"
 msgstr ""
 
@@ -1676,7 +1676,7 @@ msgstr ""
 msgid "Editing slider page"
 msgstr ""
 
-#: SliderController.php:161
+#: SliderController.php:163
 msgid "Editing slider page - %name%"
 msgstr ""
 
@@ -1708,7 +1708,7 @@ msgstr ""
 msgid "Enter e-mail"
 msgstr ""
 
-#: OrderController.php:140
+#: OrderController.php:141
 msgid "Entered customer not found, please check entered data."
 msgstr ""
 
@@ -1743,7 +1743,7 @@ msgstr ""
 msgid "Error occurred"
 msgstr ""
 
-#: ContactFormController.php:53
+#: ContactFormController.php:55
 msgid "Error occurred when sending e-mail."
 msgstr ""
 
@@ -1760,20 +1760,20 @@ msgstr ""
 msgid "Error occurred, try again please."
 msgstr ""
 
-#: CurrencyGridFactory.php:57
+#: CurrencyGridFactory.php:58
 msgid "Exchange rate"
 msgstr ""
 
-#: ProductFormType.php:182
+#: ProductFormType.php:184
 #: Content/Product/detail.html.twig:104
 msgid "Exclude from sale"
 msgstr ""
 
-#: AdvancedSearchProductFilterTranslation.php:15
+#: AdvancedSearchProductFilterTranslation.php:16
 msgid "Excluded from sale"
 msgstr ""
 
-#: InputPriceTypeFormType.php:54
+#: InputPriceTypeFormType.php:58
 msgid "Excluding VAT"
 msgstr ""
 
@@ -1793,7 +1793,7 @@ msgstr ""
 msgid "FORM - form elements, form wraps, structures"
 msgstr ""
 
-#: FeedController.php:104
+#: FeedController.php:105
 msgid "Feed"
 msgstr ""
 
@@ -1801,7 +1801,7 @@ msgstr ""
 msgid "Feed \"{{ feedName }}\" not found."
 msgstr ""
 
-#: FeedController.php:61
+#: FeedController.php:62
 msgid "Feed \"{{ feedName }}\" successfully generated."
 msgstr ""
 
@@ -1813,15 +1813,15 @@ msgstr ""
 msgid "File is too big"
 msgstr ""
 
-#: DomainController.php:136
+#: DomainController.php:140
 msgid "File type not supported."
 msgstr ""
 
-#: FileUploadType.php:138
+#: FileUploadType.php:146
 msgid "File upload failed"
 msgstr ""
 
-#: DomainController.php:138
+#: DomainController.php:142
 msgid "File upload failed, try again please."
 msgstr ""
 
@@ -1829,8 +1829,8 @@ msgstr ""
 msgid "File will be deleted after saving."
 msgstr ""
 
-#: FlagGridFactory.php:56
-#: ParameterGridFactory.php:73
+#: FlagGridFactory.php:57
+#: ParameterGridFactory.php:74
 msgid "Filter by"
 msgstr ""
 
@@ -1842,7 +1842,7 @@ msgstr ""
 msgid "Finish the order"
 msgstr ""
 
-#: MailController.php:112
+#: MailController.php:114
 #: Content/Customer/detail.html.twig:29
 #: Content/Customer/detail.html.twig:87
 #: Content/Order/edit.html.twig:85
@@ -1859,11 +1859,11 @@ msgstr ""
 msgid "First name"
 msgstr ""
 
-#: AdvancedSearchProductFilterTranslation.php:11
+#: AdvancedSearchProductFilterTranslation.php:12
 msgid "Flag"
 msgstr ""
 
-#: FlagController.php:56
+#: FlagController.php:58
 msgid "Flag <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -1886,15 +1886,15 @@ msgstr ""
 msgid "Following expressions are allowed in whitelist: %whitelist%."
 msgstr ""
 
-#: VatController.php:70
+#: VatController.php:72
 msgid "For deleting rate \"%name%\" you have to choose other one to be set everywhere where the existing one is used. After changing the VAT rate products prices will be recalculated - base price with VAT will remain same. Which unit you want to set instead?"
 msgstr ""
 
-#: UnitController.php:73
+#: UnitController.php:75
 msgid "For deleting unit \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which unit you want to set instead?"
 msgstr ""
 
-#: PricingGroupController.php:113
+#: PricingGroupController.php:116
 msgid "For removing pricing group \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
 msgstr ""
 
@@ -1907,7 +1907,7 @@ msgstr ""
 msgid "Forgot your password?"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:26
+#: FrontBreadcrumbGenerator.php:27
 #: Content/Registration/resetPassword.html.twig:8
 #: Content/Registration/resetPassword.html.twig:12
 msgid "Forgotten password"
@@ -1930,8 +1930,8 @@ msgstr ""
 msgid "Form-line"
 msgstr ""
 
-#: PriceExtension.php:145
-#: PriceExtension.php:159
+#: PriceExtension.php:149
+#: PriceExtension.php:164
 msgid "Free"
 msgstr ""
 
@@ -1941,61 +1941,61 @@ msgstr ""
 msgid "Free shipping and payment"
 msgstr ""
 
-#: TransportAndPaymentController.php:78
+#: TransportAndPaymentController.php:80
 msgid "Free shipping and payment settings saved"
 msgstr ""
 
-#: ImageController.php:149
+#: ImageController.php:155
 msgid "Front-end: Advertising above footer"
 msgstr ""
 
-#: ImageController.php:152
+#: ImageController.php:158
 msgid "Front-end: Advertising in category (above the category name)"
 msgstr ""
 
-#: ImageController.php:155
+#: ImageController.php:161
 msgid "Front-end: Advertising in the left panel under the category tree"
 msgstr ""
 
-#: ImageController.php:146
+#: ImageController.php:152
 msgid "Front-end: Advertising under heading"
 msgstr ""
 
-#: ImageController.php:160
+#: ImageController.php:166
 msgid "Front-end: Brand page"
 msgstr ""
 
-#: ImageController.php:141
+#: ImageController.php:147
 msgid "Front-end: Category guidepost"
 msgstr ""
 
-#: ImageController.php:123
+#: ImageController.php:129
 msgid "Front-end: Listing of products in section, listing of products on special offer"
 msgstr ""
 
-#: ImageController.php:117
+#: ImageController.php:123
 msgid "Front-end: Main image in product detail"
 msgstr ""
 
-#: ImageController.php:131
+#: ImageController.php:137
 msgid "Front-end: Main page slider"
 msgstr ""
 
-#: ImageController.php:112
-#: ImageController.php:136
+#: ImageController.php:118
+#: ImageController.php:142
 msgid "Front-end: Ordering process"
 msgstr ""
 
-#: ImageController.php:126
+#: ImageController.php:132
 msgid "Front-end: Preview in autocomplete for search, preview in cart during ordering process"
 msgstr ""
 
-#: ImageController.php:120
+#: ImageController.php:126
 msgid "Front-end: Thumbnail of images under the main picture in product detail"
 msgstr ""
 
-#: AdministratorController.php:65
-#: CustomerController.php:200
+#: AdministratorController.php:66
+#: CustomerController.php:201
 #: Content/Administrator/detail.html.twig:17
 #: Content/ContactForm/contactForm.html.twig:6
 #: Mail/ContactForm/mail.html.twig:1
@@ -2010,7 +2010,7 @@ msgstr ""
 msgid "Generate"
 msgstr ""
 
-#: FeedController.php:105
+#: FeedController.php:106
 msgid "Generated"
 msgstr ""
 
@@ -2032,16 +2032,17 @@ msgstr ""
 msgid "Google analytics"
 msgstr ""
 
-#: ScriptController.php:179
+#: ScriptController.php:184
 msgid "Google script code set"
 msgstr ""
 
-#: AdvertFormType.php:143
+#: AdvertFormType.php:148
 msgid "HTML code"
 msgstr ""
 
 #: Content/Article/detail.html.twig:34
-#: Content/Product/detail.html.twig:296
+#: Content/Category/detail.html.twig:32
+#: Content/Product/detail.html.twig:297
 #: Content/Seo/seoSetting.html.twig:15
 #: Content/Superadmin/cssDocumentation.html.twig:146
 msgid "Headline"
@@ -2074,7 +2075,7 @@ msgstr ""
 msgid "Heureka Widget code"
 msgstr ""
 
-#: Content/Product/detail.html.twig:362
+#: Content/Product/detail.html.twig:368
 msgid "Heureka.cz"
 msgstr ""
 
@@ -2087,7 +2088,7 @@ msgstr ""
 msgid "Hidden copy"
 msgstr ""
 
-#: ProductMassActionFormType.php:48
+#: ProductMassActionFormType.php:50
 #: Content/Article/detail.html.twig:23
 #: Content/Slider/detail.html.twig:26
 msgid "Hide"
@@ -2097,12 +2098,12 @@ msgstr ""
 msgid "Hide advertisement"
 msgstr ""
 
-#: ProductFormType.php:181
+#: ProductFormType.php:183
 #: Content/Product/detail.html.twig:96
 msgid "Hide product"
 msgstr ""
 
-#: ProductMassActionFormType.php:42
+#: ProductMassActionFormType.php:44
 msgid "Hiding product"
 msgstr ""
 
@@ -2130,7 +2131,7 @@ msgstr ""
 msgid "I want to subscribe to the newsletter"
 msgstr ""
 
-#: ProductExtension.php:60
+#: ProductExtension.php:65
 msgid "ID %productId%"
 msgstr ""
 
@@ -2146,7 +2147,7 @@ msgstr ""
 msgid "IP address"
 msgstr ""
 
-#: DomainController.php:92
+#: DomainController.php:95
 msgid "Icon"
 msgstr ""
 
@@ -2202,7 +2203,7 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
-#: InputPriceTypeFormType.php:55
+#: InputPriceTypeFormType.php:59
 msgid "Including VAT"
 msgstr ""
 
@@ -2251,11 +2252,11 @@ msgstr ""
 msgid "Input label"
 msgstr ""
 
-#: InputPriceLabelExtension.php:42
+#: InputPriceLabelExtension.php:44
 msgid "Input price with VAT"
 msgstr ""
 
-#: InputPriceLabelExtension.php:39
+#: InputPriceLabelExtension.php:41
 msgid "Input price without VAT"
 msgstr ""
 
@@ -2318,12 +2319,12 @@ msgstr ""
 msgid "Instructions"
 msgstr ""
 
-#: LoginController.php:33
+#: LoginController.php:35
 #: login.js:22
 msgid "Invalid login"
 msgstr ""
 
-#: VatController.php:164
+#: VatController.php:167
 msgid "Invalid rounding settings"
 msgstr ""
 
@@ -2352,11 +2353,11 @@ msgstr ""
 msgid "It is possible to use this when creating a link: mark the text you want to create the link from with mouse and push the Link button (top right, interconnected staples icon). In the popup menu select the protocol <different> and insert the text \"%orderDetailUrlConstant%\" in the URL field (Including the braces)"
 msgstr ""
 
-#: Content/Product/detail.html.twig:393
+#: Content/Product/detail.html.twig:399
 msgid "It is signed with MAX_CPC tags in feeds. If not mentioned, this information is not transmitted to the feed."
 msgstr ""
 
-#: Content/Product/detail.html.twig:406
+#: Content/Product/detail.html.twig:412
 msgid "It is signed with MAX_CPC_SEARCH tags in feeds. If not mentioned, this information is not transmitted to the feed."
 msgstr ""
 
@@ -2384,7 +2385,7 @@ msgstr ""
 msgid "Label or input is here"
 msgstr ""
 
-#: DomainController.php:91
+#: DomainController.php:94
 msgid "Language"
 msgstr ""
 
@@ -2396,7 +2397,7 @@ msgstr ""
 msgid "Last login"
 msgstr ""
 
-#: CustomerController.php:208
+#: CustomerController.php:209
 msgid "Last order"
 msgstr ""
 
@@ -2404,17 +2405,17 @@ msgstr ""
 msgid "Light button"
 msgstr ""
 
-#: SliderController.php:77
+#: SliderController.php:78
 #: Content/Advert/detail.html.twig:28
 #: Content/Slider/detail.html.twig:25
 msgid "Link"
 msgstr ""
 
-#: CustomerPasswordController.php:53
+#: CustomerPasswordController.php:54
 msgid "Link to password reset sent to e-mail <strong>{{ email }}</strong>."
 msgstr ""
 
-#: MailController.php:116
+#: MailController.php:118
 msgid "Link to the log in page"
 msgstr ""
 
@@ -2422,11 +2423,11 @@ msgstr ""
 msgid "Link to the overview of brands"
 msgstr ""
 
-#: MailController.php:98
+#: MailController.php:99
 msgid "List of products in order (name, quantity, price per unit including VAT, total price per item including VAT)"
 msgstr ""
 
-#: Content/Product/list.html.twig:19
+#: Content/Product/list.html.twig:23
 msgid "List of subcategories"
 msgstr ""
 
@@ -2477,7 +2478,7 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-#: ScriptController.php:127
+#: ScriptController.php:130
 #: Content/Article/new.html.twig:7
 msgid "Location"
 msgstr ""
@@ -2493,7 +2494,7 @@ msgstr ""
 msgid "Log in as user"
 msgstr ""
 
-#: LoginController.php:89
+#: LoginController.php:90
 msgid "Log in failed."
 msgstr ""
 
@@ -2507,7 +2508,7 @@ msgstr ""
 msgid "Logic of creating the structure is based on the graphics and the fact that the structure should be responsive and there is a possibility of putting a lot of different things in a row"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:35
+#: FrontBreadcrumbGenerator.php:36
 #: Content/Login/loginFailed.html.twig:4
 #: Content/Login/loginForm.html.twig:4
 #: Content/Login/loginForm.html.twig:8
@@ -2569,7 +2570,7 @@ msgstr ""
 msgid "Make modification"
 msgstr ""
 
-#: ProductFormType.php:252
+#: ProductFormType.php:254
 msgid "Manually"
 msgstr ""
 
@@ -2585,12 +2586,12 @@ msgstr ""
 msgid "Matching first and second cell of a row with the rest of form"
 msgstr ""
 
-#: Content/Product/detail.html.twig:365
-#: Content/Product/detail.html.twig:389
+#: Content/Product/detail.html.twig:371
+#: Content/Product/detail.html.twig:395
 msgid "Maximum price per click"
 msgstr ""
 
-#: Content/Product/detail.html.twig:402
+#: Content/Product/detail.html.twig:408
 msgid "Maximum price per click in offers"
 msgstr ""
 
@@ -2609,6 +2610,7 @@ msgid "Messages"
 msgstr ""
 
 #: Content/Article/detail.html.twig:53
+#: Content/Category/detail.html.twig:64
 #: Content/Product/detail.html.twig:329
 #: Content/Seo/seoSetting.html.twig:18
 msgid "Meta description"
@@ -2634,7 +2636,7 @@ msgstr ""
 msgid "Modules"
 msgstr ""
 
-#: SuperadminController.php:168
+#: SuperadminController.php:173
 msgid "Modules configuration modified"
 msgstr ""
 
@@ -2662,27 +2664,27 @@ msgstr ""
 msgid "My orders"
 msgstr ""
 
-#: AdvertController.php:145
-#: ArticleController.php:265
-#: BrandController.php:125
-#: ProductController.php:364
-#: ProductPickerController.php:137
-#: SliderController.php:76
-#: CountryGridFactory.php:53
-#: OrderStatusGridFactory.php:55
-#: PaymentGridFactory.php:78
-#: CurrencyGridFactory.php:55
-#: PricingGroupGridFactory.php:53
-#: VatGridFactory.php:67
-#: AvailabilityGridFactory.php:54
-#: FlagGridFactory.php:54
-#: ParameterGridFactory.php:69
-#: UnitGridFactory.php:54
-#: TransportGridFactory.php:78
+#: AdvertController.php:147
+#: ArticleController.php:272
+#: BrandController.php:127
+#: ProductController.php:371
+#: ProductPickerController.php:140
+#: SliderController.php:77
+#: CountryGridFactory.php:54
+#: OrderStatusGridFactory.php:56
+#: PaymentGridFactory.php:80
+#: CurrencyGridFactory.php:56
+#: PricingGroupGridFactory.php:54
+#: VatGridFactory.php:68
+#: AvailabilityGridFactory.php:55
+#: FlagGridFactory.php:55
+#: ParameterGridFactory.php:70
+#: UnitGridFactory.php:55
+#: TransportGridFactory.php:80
 #: Content/Advert/detail.html.twig:16
 #: Content/Article/detail.html.twig:22
 #: Content/Brand/detail.html.twig:12
-#: Content/Category/detail.html.twig:13
+#: Content/Category/detail.html.twig:19
 #: Content/Order/edit.html.twig:162
 #: Content/Payment/detail.html.twig:22
 #: Content/Product/detail.html.twig:45
@@ -2697,8 +2699,8 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ParameterGridFactory.php:52
-#: ParameterGridFactory.php:60
+#: ParameterGridFactory.php:53
+#: ParameterGridFactory.php:61
 msgid "Name %locale%"
 msgstr ""
 
@@ -2761,7 +2763,7 @@ msgstr ""
 msgid "New page"
 msgstr ""
 
-#: MailController.php:126
+#: MailController.php:129
 msgid "New password settings URL address"
 msgstr ""
 
@@ -2788,7 +2790,7 @@ msgstr ""
 msgid "New slider page"
 msgstr ""
 
-#: YesNoType.php:43
+#: YesNoType.php:45
 #: Content/Advert/listGrid.html.twig:18
 #: Content/ConfirmDelete/directDelete.html.twig:10
 #: Content/Image/overview.html.twig:45
@@ -2916,15 +2918,15 @@ msgstr ""
 msgid "Not possible to assign product to itself"
 msgstr ""
 
-#: ProductController.php:334
+#: ProductController.php:340
 msgid "Not possible to create variations of products that are already variant or main variant."
 msgstr ""
 
-#: ImageController.php:169
+#: ImageController.php:175
 msgid "Not specified for entity %entityName% and size %sizeName%"
 msgstr ""
 
-#: ImageController.php:211
+#: ImageController.php:219
 msgid "Not specified for entity %entityName%, type %typeName% and size %sizeName%"
 msgstr ""
 
@@ -2932,7 +2934,7 @@ msgstr ""
 msgid "Not using ID and !important for CSS"
 msgstr ""
 
-#: MailController.php:97
+#: MailController.php:98
 #: Content/Order/edit.html.twig:146
 #: Content/Order/step3.html.twig:59
 msgid "Note"
@@ -2949,7 +2951,7 @@ msgstr ""
 msgid "Nothing to choose from."
 msgstr ""
 
-#: AvailabilityGridFactory.php:55
+#: AvailabilityGridFactory.php:56
 msgid "Number of days to despatch"
 msgstr ""
 
@@ -2957,11 +2959,11 @@ msgstr ""
 msgid "Number of items"
 msgstr ""
 
-#: CustomerController.php:205
+#: CustomerController.php:206
 msgid "Number of orders"
 msgstr ""
 
-#: ModuleList.php:19
+#: ModuleList.php:20
 msgid "Number of products in filter"
 msgstr ""
 
@@ -2969,7 +2971,7 @@ msgstr ""
 msgid "Occurence"
 msgstr ""
 
-#: Content/Product/detail.html.twig:372
+#: Content/Product/detail.html.twig:378
 msgid "Offer in feed"
 msgstr ""
 
@@ -2982,7 +2984,7 @@ msgstr ""
 msgid "Online shop"
 msgstr ""
 
-#: ProductMassActionFormType.php:29
+#: ProductMassActionFormType.php:31
 msgid "Only checked products"
 msgstr ""
 
@@ -2991,7 +2993,7 @@ msgstr ""
 msgid "Only variables for order number and date and time of order creation can be used in the object."
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:80
+#: FrontBreadcrumbGenerator.php:83
 msgid "Oops! Error occurred"
 msgstr ""
 
@@ -3017,7 +3019,7 @@ msgstr ""
 msgid "Order - personal data"
 msgstr ""
 
-#: OrderController.php:233
+#: OrderController.php:237
 #: Content/Order/edit.html.twig:5
 #: Content/Order/edit.html.twig:6
 #: Content/Order/edit.html.twig:16
@@ -3029,11 +3031,11 @@ msgstr ""
 msgid "Order Nr. %orderNumber%"
 msgstr ""
 
-#: OrderController.php:131
+#: OrderController.php:132
 msgid "Order Nr. <strong><a href=\"{{ url }}\">{{ number }}</a></strong> modified"
 msgstr ""
 
-#: OrderController.php:282
+#: OrderController.php:288
 msgid "Order Nr. <strong>{{ number }}</strong> deleted"
 msgstr ""
 
@@ -3062,15 +3064,15 @@ msgstr ""
 msgid "Order confirmation page"
 msgstr ""
 
-#: CustomerCommunicationController.php:47
+#: CustomerCommunicationController.php:48
 msgid "Order confirmation page content modified"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:31
+#: FrontBreadcrumbGenerator.php:32
 msgid "Order detail"
 msgstr ""
 
-#: MailController.php:101
+#: MailController.php:102
 msgid "Order detail URL address"
 msgstr ""
 
@@ -3086,13 +3088,13 @@ msgstr ""
 msgid "Order must contain at least one item"
 msgstr ""
 
-#: CustomerController.php:144
+#: CustomerController.php:149
 msgid "Order not found"
 msgstr ""
 
-#: MailController.php:87
-#: ScriptController.php:192
-#: AdvancedSearchOrderFilterTranslation.php:10
+#: MailController.php:88
+#: ScriptController.php:198
+#: AdvancedSearchOrderFilterTranslation.php:11
 #: Content/Customer/orderList.html.twig:9
 #: Content/CustomerCommunication/orderSubmitted.html.twig:63
 #: Content/Order/edit.html.twig:40
@@ -3123,7 +3125,7 @@ msgstr ""
 msgid "Order statuses overview"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:22
+#: FrontBreadcrumbGenerator.php:23
 #: Resources/config/admin_menu.yml:
 msgid "Orders"
 msgstr ""
@@ -3134,7 +3136,7 @@ msgstr ""
 msgid "Orders overview"
 msgstr ""
 
-#: CustomerController.php:206
+#: CustomerController.php:207
 msgid "Orders value"
 msgstr ""
 
@@ -3142,11 +3144,11 @@ msgstr ""
 msgid "Our customers who bought this bought also"
 msgstr ""
 
-#: SliderController.php:182
+#: SliderController.php:185
 msgid "Page <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:82
+#: FrontBreadcrumbGenerator.php:85
 msgid "Page not found"
 msgstr ""
 
@@ -3163,7 +3165,7 @@ msgstr ""
 msgid "Parameter"
 msgstr ""
 
-#: ParameterController.php:54
+#: ParameterController.php:56
 msgid "Parameter <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -3178,7 +3180,7 @@ msgstr ""
 msgid "Parameters overview"
 msgstr ""
 
-#: AdvancedSearchProductFilterTranslation.php:13
+#: AdvancedSearchProductFilterTranslation.php:14
 #: Content/Product/detail.html.twig:75
 #: Content/Product/edit.html.twig:63
 msgid "PartNo (serial number)"
@@ -3212,11 +3214,11 @@ msgstr ""
 msgid "Password must be at least six characters and can't be the same as login name."
 msgstr ""
 
-#: CustomerPasswordController.php:111
+#: CustomerPasswordController.php:113
 msgid "Password successfully changed"
 msgstr ""
 
-#: ImageController.php:67
+#: ImageController.php:71
 #: Content/Order/preview.html.twig:19
 #: Content/Payment/detail.html.twig:4
 #: Content/Payment/detail.html.twig:8
@@ -3224,19 +3226,19 @@ msgstr ""
 msgid "Payment"
 msgstr ""
 
-#: PaymentController.php:88
+#: PaymentController.php:89
 msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: PaymentController.php:126
+#: PaymentController.php:128
 msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: PaymentController.php:160
+#: PaymentController.php:163
 msgid "Payment <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: MailController.php:103
+#: MailController.php:104
 #: Content/CustomerCommunication/orderSubmitted.html.twig:46
 msgid "Payment instructions"
 msgstr ""
@@ -3249,7 +3251,7 @@ msgstr ""
 msgid "Payment selection"
 msgstr ""
 
-#: VatGridFactory.php:68
+#: VatGridFactory.php:69
 msgid "Percent"
 msgstr ""
 
@@ -3270,7 +3272,7 @@ msgstr ""
 #: Content/Advert/detail.html.twig:26
 #: Content/Brand/detail.html.twig:19
 #: Content/Brand/edit.html.twig:13
-#: Content/Category/detail.html.twig:45
+#: Content/Category/detail.html.twig:122
 #: Content/Category/edit.html.twig:13
 #: Content/Payment/detail.html.twig:49
 #: Content/Payment/edit.html.twig:42
@@ -3292,11 +3294,11 @@ msgstr ""
 msgid "Picture will be deleted after saving."
 msgstr ""
 
-#: AdvertFormType.php:144
+#: AdvertFormType.php:149
 msgid "Picture with link"
 msgstr ""
 
-#: Content/Product/detail.html.twig:416
+#: Content/Product/detail.html.twig:422
 msgid "Pictures"
 msgstr ""
 
@@ -3309,36 +3311,36 @@ msgid "Please check following information:"
 msgstr ""
 
 #: AdministratorController.php:133
-#: AdministratorController.php:202
-#: AdvertController.php:106
-#: AdvertController.php:196
-#: ArticleController.php:124
-#: ArticleController.php:181
-#: BestsellingProductController.php:105
-#: BrandController.php:98
-#: BrandController.php:171
-#: CategoryController.php:95
-#: CategoryController.php:135
-#: CookiesController.php:67
+#: AdministratorController.php:201
+#: AdvertController.php:107
+#: AdvertController.php:199
+#: ArticleController.php:125
+#: ArticleController.php:184
+#: BestsellingProductController.php:106
+#: BrandController.php:99
+#: BrandController.php:174
+#: CategoryController.php:96
+#: CategoryController.php:137
+#: CookiesController.php:68
 #: CustomerController.php:160
-#: CustomerController.php:268
-#: MailController.php:153
-#: OrderController.php:148
-#: PaymentController.php:98
-#: PaymentController.php:136
-#: ProductController.php:162
-#: ProductController.php:211
-#: SeoController.php:67
-#: ShopInfoController.php:68
-#: SliderController.php:118
-#: SliderController.php:157
-#: TermsAndConditionsController.php:67
-#: TransportAndPaymentController.php:84
-#: TransportController.php:99
-#: TransportController.php:137
-#: CustomerController.php:91
-#: OrderController.php:234
-#: RegistrationController.php:74
+#: CustomerController.php:270
+#: MailController.php:157
+#: OrderController.php:149
+#: PaymentController.php:99
+#: PaymentController.php:138
+#: ProductController.php:163
+#: ProductController.php:213
+#: SeoController.php:68
+#: ShopInfoController.php:69
+#: SliderController.php:120
+#: SliderController.php:159
+#: TermsAndConditionsController.php:68
+#: TransportAndPaymentController.php:86
+#: TransportController.php:100
+#: TransportController.php:139
+#: CustomerController.php:92
+#: OrderController.php:235
+#: RegistrationController.php:75
 msgid "Please check the correctness of all data filled."
 msgstr ""
 
@@ -3350,8 +3352,8 @@ msgstr ""
 msgid "Please enter discount code."
 msgstr ""
 
-#: CartController.php:199
-#: CartController.php:257
+#: CartController.php:203
+#: CartController.php:262
 msgid "Please enter valid quantity you want to add to cart."
 msgstr ""
 
@@ -3363,7 +3365,7 @@ msgstr ""
 msgid "Please follow the instructions"
 msgstr ""
 
-#: CartController.php:126
+#: CartController.php:127
 msgid "Please make sure that you entered right quantity of all items in cart."
 msgstr ""
 
@@ -3399,14 +3401,14 @@ msgstr ""
 msgid "Postcode"
 msgstr ""
 
-#: AdvertController.php:146
-#: OrderController.php:232
+#: AdvertController.php:148
+#: OrderController.php:236
 msgid "Preview"
 msgstr ""
 
-#: ProductController.php:365
-#: PaymentGridFactory.php:79
-#: TransportGridFactory.php:79
+#: ProductController.php:372
+#: PaymentGridFactory.php:81
+#: TransportGridFactory.php:81
 msgid "Price"
 msgstr ""
 
@@ -3420,7 +3422,7 @@ msgstr ""
 msgid "Price from"
 msgstr ""
 
-#: AdvancedSearchOrderFilterTranslation.php:12
+#: AdvancedSearchOrderFilterTranslation.php:13
 #: Content/Order/preview.html.twig:9
 #: Content/Payment/edit.html.twig:13
 #: Content/Product/edit.html.twig:203
@@ -3449,20 +3451,20 @@ msgstr ""
 msgid "Pricing"
 msgstr ""
 
-#: CustomerController.php:204
+#: CustomerController.php:205
 #: Content/Customer/detail.html.twig:19
 msgid "Pricing group"
 msgstr ""
 
-#: PricingGroupController.php:120
+#: PricingGroupController.php:123
 msgid "Pricing group \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
 msgstr ""
 
-#: PricingGroupController.php:80
+#: PricingGroupController.php:82
 msgid "Pricing group <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: PricingGroupController.php:88
+#: PricingGroupController.php:90
 msgid "Pricing group <strong>{{ name }}</strong> deleted and replaced by group <strong>{{ newName }}</strong>."
 msgstr ""
 
@@ -3472,7 +3474,7 @@ msgstr ""
 msgid "Pricing groups"
 msgstr ""
 
-#: SuperadminController.php:99
+#: SuperadminController.php:101
 msgid "Pricing settings modified"
 msgstr ""
 
@@ -3480,40 +3482,32 @@ msgstr ""
 msgid "Print"
 msgstr ""
 
-#: ImageController.php:68
+#: ImageController.php:72
 msgid "Product"
 msgstr ""
 
-#: CartController.php:285
+#: CartController.php:290
 msgid "Product <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }}) added to the cart"
 msgstr ""
 
-#: CartController.php:294
+#: CartController.php:299
 msgid "Product <strong>{{ name }}</strong> added to the cart (total amount {{ quantity|formatNumber }} {{ unitName }})"
 msgstr ""
 
-#: CartWatcherFacade.php:63
+#: CartWatcherFacade.php:65
 msgid "Product <strong>{{ name }}</strong> you had in cart is no longer available. Please check your order."
 msgstr ""
 
-#: ProductController.php:202
+#: ProductController.php:204
 msgid "Product <strong>{{ product|productDisplayName }}</strong> created"
 msgstr ""
 
-#: ProductController.php:286
+#: ProductController.php:290
 msgid "Product <strong>{{ product|productDisplayName }}</strong> deleted"
 msgstr ""
 
-#: ProductController.php:153
+#: ProductController.php:154
 msgid "Product <strong>{{ product|productDisplayName }}</strong> modified"
-msgstr ""
-
-#: Content/Product/listByBrand.html.twig:10
-msgid "Product catalogue - %brandName%"
-msgstr ""
-
-#: Content/Product/list.html.twig:11
-msgid "Product catalogue - %categoryName%"
 msgstr ""
 
 #: Content/Product/detail.html.twig:4
@@ -3529,7 +3523,7 @@ msgstr ""
 msgid "Product excluded from sale."
 msgstr ""
 
-#: AdvancedSearchOrderFilterTranslation.php:15
+#: AdvancedSearchOrderFilterTranslation.php:16
 msgid "Product in order"
 msgstr ""
 
@@ -3553,11 +3547,11 @@ msgstr ""
 msgid "Product is variant"
 msgstr ""
 
-#: AdvancedSearchProductFilterTranslation.php:12
+#: AdvancedSearchProductFilterTranslation.php:13
 msgid "Product name"
 msgstr ""
 
-#: ProductExtension.php:74
+#: ProductExtension.php:80
 msgid "Product name in default language is not entered"
 msgstr ""
 
@@ -3573,16 +3567,16 @@ msgstr ""
 msgid "Product saved in order"
 msgstr ""
 
-#: TopCategoryController.php:57
-#: TopProductController.php:57
+#: TopCategoryController.php:58
+#: TopProductController.php:58
 msgid "Product settings on the main page successfully changed"
 msgstr ""
 
-#: CartWatcherFacade.php:84
+#: CartWatcherFacade.php:87
 msgid "Product you had in cart is no longer in available. Please check your order."
 msgstr ""
 
-#: CartController.php:319
+#: CartController.php:325
 msgid "Product {{ name }} removed from cart"
 msgstr ""
 
@@ -3609,7 +3603,7 @@ msgstr ""
 msgid "Products overview"
 msgstr ""
 
-#: Content/Product/detail.html.twig:358
+#: Content/Product/detail.html.twig:364
 msgid "Products search engines"
 msgstr ""
 
@@ -3639,7 +3633,7 @@ msgstr ""
 msgid "Registered customers"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:43
+#: FrontBreadcrumbGenerator.php:44
 #: Content/Registration/register.html.twig:4
 #: Content/Registration/register.html.twig:8
 #: Front/Layout/header.html.twig:105
@@ -3682,7 +3676,7 @@ msgstr ""
 msgid "Right button"
 msgstr ""
 
-#: OrderCreationService.php:231
+#: OrderCreationService.php:238
 #: Content/Order/preview.html.twig:54
 msgid "Rounding"
 msgstr ""
@@ -3697,6 +3691,7 @@ msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Article/detail.html.twig:29
+#: Content/Category/detail.html.twig:27
 #: Content/Product/detail.html.twig:292
 msgid "SEO"
 msgstr ""
@@ -3706,7 +3701,7 @@ msgstr ""
 msgid "SEO attributes settings"
 msgstr ""
 
-#: SeoController.php:61
+#: SeoController.php:62
 msgid "SEO attributes settings modified"
 msgstr ""
 
@@ -3744,7 +3739,7 @@ msgstr ""
 #: Content/Vat/vatSettings.html.twig:11
 #: Admin/Grid/Grid.html.twig:164
 #: Content/Customer/edit.html.twig:93
-#: FormDetailExtension.php:78
+#: FormDetailExtension.php:83
 msgid "Save changes"
 msgstr ""
 
@@ -3763,19 +3758,19 @@ msgstr ""
 msgid "Schema"
 msgstr ""
 
-#: ScriptController.php:63
+#: ScriptController.php:64
 msgid "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
 msgstr ""
 
-#: ScriptController.php:102
+#: ScriptController.php:104
 msgid "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified"
 msgstr ""
 
-#: ScriptController.php:153
+#: ScriptController.php:157
 msgid "Script <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: ScriptController.php:126
+#: ScriptController.php:129
 msgid "Script name"
 msgstr ""
 
@@ -3789,7 +3784,7 @@ msgstr ""
 msgid "Scripts overview"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:39
+#: FrontBreadcrumbGenerator.php:40
 msgid "Search [noun]"
 msgstr "Search"
 
@@ -3844,11 +3839,11 @@ msgstr ""
 msgid "Select new value"
 msgstr ""
 
-#: VatController.php:93
+#: VatController.php:95
 msgid "Selected VAT doesn't exist"
 msgstr ""
 
-#: VatController.php:130
+#: VatController.php:132
 msgid "Selected VAT doesn't exist."
 msgstr ""
 
@@ -3856,95 +3851,95 @@ msgstr ""
 msgid "Selected administrated doesn't exist."
 msgstr ""
 
-#: AdvertController.php:222
+#: AdvertController.php:226
 msgid "Selected advertisement doesn't exist."
 msgstr ""
 
-#: ArticleController.php:207
+#: ArticleController.php:211
 msgid "Selected article doesn't exist."
 msgstr ""
 
-#: AvailabilityController.php:132
+#: AvailabilityController.php:134
 msgid "Selected availability doesn't exist"
 msgstr ""
 
-#: AvailabilityController.php:87
+#: AvailabilityController.php:88
 msgid "Selected availatibily doesn't exist."
 msgstr ""
 
-#: BrandController.php:198
+#: BrandController.php:202
 msgid "Selected brand doesn't exist."
 msgstr ""
 
-#: CategoryController.php:217
+#: CategoryController.php:222
 msgid "Selected category doesn't exist."
 msgstr ""
 
-#: CurrencyController.php:75
-#: CurrencyController.php:101
+#: CurrencyController.php:77
+#: CurrencyController.php:103
 msgid "Selected currency doesn't exist."
 msgstr ""
 
-#: CustomerController.php:294
+#: CustomerController.php:297
 msgid "Selected customer doesn't exist."
 msgstr ""
 
-#: PromoCodeController.php:60
+#: PromoCodeController.php:62
 msgid "Selected discount coupon doesn't exist."
 msgstr ""
 
-#: FlagController.php:62
+#: FlagController.php:64
 msgid "Selected flag doesn't exist."
 msgstr ""
 
-#: OrderController.php:288
+#: OrderController.php:294
 msgid "Selected order doesn't exist."
 msgstr ""
 
-#: OrderStatusController.php:91
-#: OrderStatusController.php:128
+#: OrderStatusController.php:93
+#: OrderStatusController.php:131
 msgid "Selected order status doesn't exist."
 msgstr ""
 
-#: SliderController.php:188
+#: SliderController.php:191
 msgid "Selected page doesn't exist."
 msgstr ""
 
-#: ParameterController.php:60
+#: ParameterController.php:62
 msgid "Selected parameter doesn't exist."
 msgstr ""
 
-#: PaymentController.php:166
+#: PaymentController.php:169
 msgid "Selected payment doesn't exist."
 msgstr ""
 
-#: PricingGroupController.php:96
-#: PricingGroupController.php:142
+#: PricingGroupController.php:98
+#: PricingGroupController.php:144
 msgid "Selected pricing group doesn't exist."
 msgstr ""
 
-#: ProductController.php:292
+#: ProductController.php:296
 msgid "Selected product doesn't exist."
 msgstr ""
 
-#: CartController.php:197
-#: CartController.php:255
+#: CartController.php:201
+#: CartController.php:260
 msgid "Selected product no longer available or doesn't exist."
 msgstr ""
 
-#: ScriptController.php:159
+#: ScriptController.php:163
 msgid "Selected script doesn't exist."
 msgstr ""
 
-#: TransportController.php:167
+#: TransportController.php:170
 msgid "Selected shipping doesn't exist."
 msgstr ""
 
-#: UnitController.php:102
+#: UnitController.php:104
 msgid "Selected unit doesn't exist"
 msgstr ""
 
-#: UnitController.php:138
+#: UnitController.php:141
 msgid "Selected unit doesn't exist."
 msgstr ""
 
@@ -3984,11 +3979,11 @@ msgstr ""
 msgid "Servis Heuréka - Approved by customers doesn't support the language of this domain."
 msgstr ""
 
-#: ProductMassActionFormType.php:36
+#: ProductMassActionFormType.php:38
 msgid "Set"
 msgstr ""
 
-#: ProductFormType.php:180
+#: ProductFormType.php:182
 msgid "Set alternative availability"
 msgstr ""
 
@@ -4002,7 +3997,7 @@ msgstr ""
 #: Content/Administrator/detail.html.twig:12
 #: Content/Advert/detail.html.twig:12
 #: Content/Availability/setting.html.twig:4
-#: Content/Category/detail.html.twig:10
+#: Content/Category/detail.html.twig:16
 #: Content/Cookies/setting.html.twig:13
 #: Content/Currency/currencySettings.html.twig:4
 #: Content/CustomerCommunication/orderSubmitted.html.twig:13
@@ -4018,11 +4013,11 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: HeurekaController.php:67
+#: HeurekaController.php:69
 msgid "Settings modified."
 msgstr ""
 
-#: ImageController.php:70
+#: ImageController.php:74
 #: Content/Order/preview.html.twig:17
 #: Content/Transport/detail.html.twig:4
 #: Content/Transport/detail.html.twig:8
@@ -4030,15 +4025,15 @@ msgstr ""
 msgid "Shipping"
 msgstr ""
 
-#: TransportController.php:89
+#: TransportController.php:90
 msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: TransportController.php:127
+#: TransportController.php:129
 msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modified"
 msgstr ""
 
-#: TransportController.php:161
+#: TransportController.php:164
 msgid "Shipping <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -4069,7 +4064,7 @@ msgstr ""
 msgid "Shipping and payments"
 msgstr ""
 
-#: MailController.php:102
+#: MailController.php:103
 #: Content/CustomerCommunication/orderSubmitted.html.twig:40
 msgid "Shipping instructions"
 msgstr ""
@@ -4111,17 +4106,17 @@ msgstr ""
 msgid "Slider on main page."
 msgstr ""
 
-#: ImageController.php:69
+#: ImageController.php:73
 #: Content/Slider/detail.html.twig:4
 #: Content/Slider/detail.html.twig:8
 msgid "Slider page"
 msgstr ""
 
-#: SliderController.php:108
+#: SliderController.php:110
 msgid "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: SliderController.php:146
+#: SliderController.php:148
 msgid "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
@@ -4168,7 +4163,7 @@ msgstr ""
 msgid "Static texts translations"
 msgstr ""
 
-#: OrderController.php:239
+#: OrderController.php:243
 #: Content/Customer/orderList.html.twig:13
 #: Content/Order/edit.html.twig:41
 #: Admin/Form/fileuploadFields.html.twig:51
@@ -4176,7 +4171,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: AdvancedSearchOrderFilterTranslation.php:14
+#: AdvancedSearchOrderFilterTranslation.php:15
 msgid "Status of order"
 msgstr ""
 
@@ -4184,19 +4179,19 @@ msgstr ""
 msgid "Status of orders"
 msgstr ""
 
-#: OrderStatusController.php:68
+#: OrderStatusController.php:70
 msgid "Status of orders <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: OrderStatusController.php:85
+#: OrderStatusController.php:87
 msgid "Status of orders <strong>{{ name }}</strong> reserved and can't be deleted"
 msgstr ""
 
-#: OrderStatusController.php:76
+#: OrderStatusController.php:78
 msgid "Status of orders <strong>{{ oldName }}</strong> replaced by status <strong>{{ newName }}</strong> and deleted."
 msgstr ""
 
-#: AdvancedSearchProductFilterTranslation.php:14
+#: AdvancedSearchProductFilterTranslation.php:15
 msgid "Stocks"
 msgstr ""
 
@@ -4251,7 +4246,7 @@ msgstr ""
 msgid "Superadmin - URL addresses"
 msgstr ""
 
-#: MailController.php:113
+#: MailController.php:115
 #: Content/Customer/detail.html.twig:30
 #: Content/Customer/detail.html.twig:88
 #: Content/Order/edit.html.twig:86
@@ -4276,9 +4271,9 @@ msgstr ""
 msgid "TABLE - tables"
 msgstr ""
 
-#: ProductListOrderingModeForBrandFacade.php:27
-#: ProductListOrderingModeForListFacade.php:27
-#: ProductListOrderingModeForSearchFacade.php:28
+#: ProductListOrderingModeForBrandFacade.php:29
+#: ProductListOrderingModeForListFacade.php:29
+#: ProductListOrderingModeForSearchFacade.php:30
 msgid "TOP"
 msgstr ""
 
@@ -4420,7 +4415,7 @@ msgstr ""
 msgid "Technical parameters"
 msgstr ""
 
-#: CustomerController.php:202
+#: CustomerController.php:203
 #: Content/Customer/detail.html.twig:31
 #: Content/Customer/detail.html.twig:89
 #: Content/Order/edit.html.twig:88
@@ -4450,11 +4445,11 @@ msgstr ""
 msgid "Terms and conditions settings"
 msgstr ""
 
-#: TermsAndConditionsController.php:62
+#: TermsAndConditionsController.php:63
 msgid "Terms and conditions settings modified."
 msgstr ""
 
-#: TermsAndConditionsFacade.php:73
+#: TermsAndConditionsFacade.php:76
 msgid "Terms-and-conditions.html"
 msgstr ""
 
@@ -4487,7 +4482,7 @@ msgstr ""
 msgid "Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
 msgstr ""
 
-#: ContactFormController.php:51
+#: ContactFormController.php:53
 msgid "Thank you, your message has been sent."
 msgstr ""
 
@@ -4495,20 +4490,20 @@ msgstr ""
 msgid "The basic premis for coding in admin is, that mostly programmers will work with the code. That's why there is a bigger emphasis on helpers -"
 msgstr ""
 
-#: CustomerPasswordController.php:81
-#: CustomerPasswordController.php:108
+#: CustomerPasswordController.php:83
+#: CustomerPasswordController.php:110
 msgid "The link to change your password expired."
 msgstr ""
 
-#: OrderController.php:316
+#: OrderController.php:318
 msgid "The price of payment {{ transportName }} changed during ordering process. Check your order, please."
 msgstr ""
 
-#: OrderController.php:308
+#: OrderController.php:310
 msgid "The price of shipping {{ transportName }} changed during ordering process. Check your order, please."
 msgstr ""
 
-#: CartWatcherFacade.php:79
+#: CartWatcherFacade.php:82
 msgid "The price of the product <strong>{{ name }}</strong> you have in cart has changed. Please, check your order."
 msgstr ""
 
@@ -4520,9 +4515,9 @@ msgstr ""
 msgid "There are several types of tables, but it is not necessary to write down those which are generated by system itself and nobody intervenes in them. That's why there are only those that you will probably want to use."
 msgstr ""
 
-#: CustomerController.php:154
-#: CustomerController.php:262
-#: RegistrationController.php:69
+#: CustomerController.php:155
+#: CustomerController.php:264
+#: RegistrationController.php:70
 msgid "There is already a customer with this e-mail in the database"
 msgstr ""
 
@@ -4542,7 +4537,7 @@ msgstr ""
 msgid "This category contains no products."
 msgstr ""
 
-#: CurrencyController.php:98
+#: CurrencyController.php:100
 #: Content/Currency/listGrid.html.twig:6
 msgid "This currency can't be deleted, it is set as default or is saved with order."
 msgstr ""
@@ -4611,11 +4606,11 @@ msgstr ""
 msgid "To display same as with parameters, it is necessary to add separator with icon and make sure to remove paddings around the separator. This raises more classes in almost all surrounding TD/TH. You can also simply add and icon with an action at the end of the line."
 msgstr ""
 
-#: VatSettingsFormType.php:83
+#: VatSettingsFormType.php:87
 msgid "To fifty hundredths (halfs)"
 msgstr ""
 
-#: VatSettingsFormType.php:82
+#: VatSettingsFormType.php:86
 msgid "To hundredths (cents)"
 msgstr ""
 
@@ -4623,7 +4618,7 @@ msgstr ""
 msgid "To prevent the possibility of account theft, the change of the e-mail address must be dealt with individually. If your e-mail address has changed, please contact us."
 msgstr ""
 
-#: VatSettingsFormType.php:84
+#: VatSettingsFormType.php:88
 msgid "To whole numbers"
 msgstr ""
 
@@ -4650,15 +4645,15 @@ msgstr ""
 msgid "Total item price including VAT"
 msgstr ""
 
-#: MailController.php:92
+#: MailController.php:93
 msgid "Total order price (including VAT)"
 msgstr ""
 
-#: ScriptController.php:193
+#: ScriptController.php:199
 msgid "Total order price including VAT"
 msgstr ""
 
-#: OrderController.php:240
+#: OrderController.php:244
 msgid "Total price"
 msgstr ""
 
@@ -4732,33 +4727,33 @@ msgstr ""
 msgid "Unable to add product"
 msgstr ""
 
-#: CartController.php:201
-#: CartController.php:259
+#: CartController.php:205
+#: CartController.php:264
 msgid "Unable to add product to cart"
 msgstr ""
 
-#: CartController.php:209
-#: CartController.php:267
+#: CartController.php:213
+#: CartController.php:272
 msgid "Unable to add product to cart:<br/><ul><li>{{ errors|raw }}</li></ul>"
 msgstr ""
 
-#: CartController.php:323
+#: CartController.php:329
 msgid "Unable to remove item from cart. The item is probably already removed."
 msgstr ""
 
-#: CartController.php:327
+#: CartController.php:333
 msgid "Unable to remove item from cart. The link for removing it probably expired, try it again."
 msgstr ""
 
-#: OrderController.php:223
+#: OrderController.php:224
 msgid "Unable to send some e-mails, please contact us for order verification."
 msgstr ""
 
-#: OrderController.php:143
+#: OrderController.php:144
 msgid "Unable to send updating e-mail"
 msgstr ""
 
-#: FileUploadController.php:43
+#: FileUploadController.php:44
 msgid "Unexpected error occurred, file was not uploaded."
 msgstr ""
 
@@ -4767,15 +4762,15 @@ msgstr ""
 msgid "Unit"
 msgstr ""
 
-#: UnitController.php:67
+#: UnitController.php:69
 msgid "Unit \"%name%\" set as default. For deleting existing unit you have to choose new default unit. Which unit you want to set instead?"
 msgstr ""
 
-#: UnitController.php:122
+#: UnitController.php:125
 msgid "Unit <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: UnitController.php:130
+#: UnitController.php:133
 msgid "Unit <strong>{{ name }}</strong> deleted and replaced by unit <strong>{{ newName }}</strong>"
 msgstr ""
 
@@ -4808,7 +4803,7 @@ msgid "Upload new picture"
 msgstr ""
 
 #: Content/Brand/detail.html.twig:22
-#: Content/Category/detail.html.twig:48
+#: Content/Category/detail.html.twig:125
 #: Content/Payment/detail.html.twig:53
 #: Content/Slider/detail.html.twig:34
 #: Content/Transport/detail.html.twig:52
@@ -4824,7 +4819,7 @@ msgstr ""
 msgid "Uploading..."
 msgstr ""
 
-#: FeedController.php:106
+#: FeedController.php:107
 msgid "Url address"
 msgstr ""
 
@@ -4845,7 +4840,7 @@ msgstr ""
 msgid "Used: 45 characters. Recommended max. 155"
 msgstr ""
 
-#: CustomerController.php:171
+#: CustomerController.php:176
 msgid "User not found."
 msgstr ""
 
@@ -4859,11 +4854,11 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
-#: VatController.php:114
+#: VatController.php:116
 msgid "VAT <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: VatController.php:122
+#: VatController.php:124
 msgid "VAT <strong>{{ name }}</strong> deleted and replaced by <strong>{{ newName }}</strong>."
 msgstr ""
 
@@ -4895,7 +4890,7 @@ msgstr ""
 msgid "VAT rates"
 msgstr ""
 
-#: VatController.php:160
+#: VatController.php:163
 msgid "VAT settings modified"
 msgstr ""
 
@@ -4908,7 +4903,7 @@ msgstr ""
 msgid "Variant"
 msgstr ""
 
-#: ProductController.php:325
+#: ProductController.php:331
 msgid "Variant <strong>{{ productVariant|productDisplayName }}</strong> successfully created."
 msgstr ""
 
@@ -4929,7 +4924,7 @@ msgstr ""
 msgid "View all results"
 msgstr ""
 
-#: Content/Product/list.html.twig:54
+#: Content/Product/list.html.twig:58
 msgid "View more"
 msgstr ""
 
@@ -4937,9 +4932,9 @@ msgstr ""
 msgid "View results"
 msgstr ""
 
-#: AdvertController.php:144
-#: ProductController.php:366
-#: ProductPickerController.php:139
+#: AdvertController.php:146
+#: ProductController.php:373
+#: ProductPickerController.php:142
 #: Content/Product/edit.html.twig:15
 msgid "Visibility"
 msgstr ""
@@ -4964,7 +4959,7 @@ msgstr ""
 msgid "Warning message - block with icon"
 msgstr ""
 
-#: AdministratorController.php:116
+#: AdministratorController.php:117
 #: AdministratorController.php:185
 msgid "We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please."
 msgstr ""
@@ -5038,7 +5033,7 @@ msgstr ""
 msgid "XML availability feeds"
 msgstr ""
 
-#: YesNoType.php:42
+#: YesNoType.php:44
 #: Content/Advert/listGrid.html.twig:18
 #: Content/Category/list.html.twig:38
 #: Content/ConfirmDelete/directDelete.html.twig:4
@@ -5074,9 +5069,9 @@ msgstr ""
 
 #: Content/Advert/detail.html.twig:30
 #: Content/Brand/detail.html.twig:22
-#: Content/Category/detail.html.twig:48
+#: Content/Category/detail.html.twig:125
 #: Content/Payment/detail.html.twig:53
-#: Content/Product/detail.html.twig:421
+#: Content/Product/detail.html.twig:427
 #: Content/Slider/detail.html.twig:25
 #: Content/Transport/detail.html.twig:52
 msgid "You can upload following formats: PNG, JPG, GIF"
@@ -5094,7 +5089,7 @@ msgstr ""
 msgid "You cannot choose product that is variant"
 msgstr ""
 
-#: RegistrationController.php:65
+#: RegistrationController.php:66
 msgid "You have been successfully registered."
 msgstr ""
 
@@ -5106,9 +5101,9 @@ msgstr ""
 msgid "You have made changes, don't forget to save them!"
 msgstr ""
 
-#: CustomerController.php:67
-#: CustomerController.php:101
-#: CustomerController.php:135
+#: CustomerController.php:68
+#: CustomerController.php:103
+#: CustomerController.php:140
 msgid "You have to be logged in to enter this page"
 msgstr ""
 
@@ -5136,7 +5131,7 @@ msgstr ""
 msgid "Your cart is unfortunately empty. To create order, you have to choose </a> some product <a href=\"%url%\">first"
 msgstr ""
 
-#: CustomerController.php:86
+#: CustomerController.php:87
 msgid "Your data had been successfully updated"
 msgstr ""
 
@@ -5144,11 +5139,11 @@ msgstr ""
 msgid "Your discount"
 msgstr ""
 
-#: Content/Product/detail.html.twig:368
+#: Content/Product/detail.html.twig:374
 msgid "Zboží.cz"
 msgstr ""
 
-#: AdvertPositionList.php:20
+#: AdvertPositionList.php:21
 msgid "above footer"
 msgstr ""
 
@@ -5160,19 +5155,19 @@ msgstr ""
 msgid "advertisings"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:24
+#: AdvancedSearchOperatorTranslation.php:25
 msgid "after"
 msgstr ""
 
-#: ProductListOrderingModeForBrandFacade.php:28
-#: ProductListOrderingModeForListFacade.php:28
-#: ProductListOrderingModeForSearchFacade.php:29
+#: ProductListOrderingModeForBrandFacade.php:30
+#: ProductListOrderingModeForListFacade.php:30
+#: ProductListOrderingModeForSearchFacade.php:31
 msgid "alphabetically A -> Z"
 msgstr ""
 
-#: ProductListOrderingModeForBrandFacade.php:29
-#: ProductListOrderingModeForListFacade.php:29
-#: ProductListOrderingModeForSearchFacade.php:30
+#: ProductListOrderingModeForBrandFacade.php:31
+#: ProductListOrderingModeForListFacade.php:31
+#: ProductListOrderingModeForSearchFacade.php:32
 msgid "alphabetically Z -> A"
 msgstr ""
 
@@ -5188,7 +5183,7 @@ msgstr ""
 msgid "availability"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:23
+#: AdvancedSearchOperatorTranslation.php:24
 msgid "before"
 msgstr ""
 
@@ -5241,11 +5236,11 @@ msgstr ""
 msgid "discount coupons"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:17
+#: AdvancedSearchOperatorTranslation.php:18
 msgid "doesn't include"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:22
+#: AdvancedSearchOperatorTranslation.php:23
 msgid "doesn't use"
 msgstr ""
 
@@ -5280,15 +5275,15 @@ msgstr ""
 msgid "from %price%"
 msgstr ""
 
-#: ProductListOrderingModeForBrandFacade.php:31
-#: ProductListOrderingModeForListFacade.php:31
-#: ProductListOrderingModeForSearchFacade.php:32
+#: ProductListOrderingModeForBrandFacade.php:33
+#: ProductListOrderingModeForListFacade.php:33
+#: ProductListOrderingModeForSearchFacade.php:34
 msgid "from most expensive"
 msgstr ""
 
-#: ProductListOrderingModeForBrandFacade.php:30
-#: ProductListOrderingModeForListFacade.php:30
-#: ProductListOrderingModeForSearchFacade.php:31
+#: ProductListOrderingModeForBrandFacade.php:32
+#: ProductListOrderingModeForListFacade.php:32
+#: ProductListOrderingModeForSearchFacade.php:33
 msgid "from the cheapest"
 msgstr ""
 
@@ -5296,35 +5291,35 @@ msgstr ""
 msgid "helpers - helpers, that have to be loaded last"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:27
+#: AdvancedSearchOperatorTranslation.php:28
 msgid "higher or equal"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:25
+#: AdvancedSearchOperatorTranslation.php:26
 msgid "higher than"
 msgstr ""
 
-#: AdvertPositionList.php:21
+#: AdvertPositionList.php:22
 msgid "in category (above the category name)"
 msgstr ""
 
-#: ArticlePlacementList.php:19
+#: ArticlePlacementList.php:20
 msgid "in footer"
 msgstr ""
 
-#: AdvertPositionList.php:22
+#: AdvertPositionList.php:23
 msgid "in left panel (under category tree)"
 msgstr ""
 
-#: ArticlePlacementList.php:18
+#: ArticlePlacementList.php:19
 msgid "in upper menu"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:16
+#: AdvancedSearchOperatorTranslation.php:17
 msgid "include"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:19
+#: AdvancedSearchOperatorTranslation.php:20
 msgid "is"
 msgstr ""
 
@@ -5336,11 +5331,11 @@ msgstr ""
 msgid "libs - third parties components"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:28
+#: AdvancedSearchOperatorTranslation.php:29
 msgid "lower or equal"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:26
+#: AdvancedSearchOperatorTranslation.php:27
 msgid "lower than"
 msgstr ""
 
@@ -5348,11 +5343,11 @@ msgstr ""
 msgid "never"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:20
+#: AdvancedSearchOperatorTranslation.php:21
 msgid "not"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:18
+#: AdvancedSearchOperatorTranslation.php:19
 msgid "not entered"
 msgstr ""
 
@@ -5387,7 +5382,7 @@ msgstr ""
 msgid "records"
 msgstr ""
 
-#: ProductListOrderingModeForSearchFacade.php:27
+#: ProductListOrderingModeForSearchFacade.php:29
 msgid "relevance"
 msgstr ""
 
@@ -5407,7 +5402,7 @@ msgstr ""
 msgid "two underscores \"__\" represent part of the component/element"
 msgstr ""
 
-#: AdvertPositionList.php:19
+#: AdvertPositionList.php:20
 msgid "under heading"
 msgstr ""
 
@@ -5419,11 +5414,11 @@ msgstr ""
 msgid "unregistered customer"
 msgstr ""
 
-#: AdvancedSearchOperatorTranslation.php:21
+#: AdvancedSearchOperatorTranslation.php:22
 msgid "uses"
 msgstr ""
 
-#: ArticlePlacementList.php:20
+#: ArticlePlacementList.php:21
 msgid "without positoning"
 msgstr ""
 
@@ -5435,7 +5430,7 @@ msgstr ""
 msgid "{1} <strong class=\"cart__state\">%itemsCount%</strong> item for <strong class=\"cart__state\">%priceWithVat%</strong>|[2,Inf] <strong class=\"cart__state\">%itemsCount%</strong> items for <strong class=\"cart__state\">%priceWithVat%</strong>"
 msgstr ""
 
-#: TimedSpamValidationListener.php:42
+#: TimedSpamValidationListener.php:44
 msgid "{1} You must wait 1 second before submitting the form. |[2,Inf] You must wait %seconds% seconds before submitting the form."
 msgstr ""
 

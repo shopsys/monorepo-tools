@@ -6,36 +6,36 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductFilte
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListPage;
 use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
-class ProductFilterCest {
+class ProductFilterCest
+{
+    public function testAllProductFilters(
+        AcceptanceTester $me,
+        ProductFilterPage $productFilterPage,
+        ProductListPage $productListPage
+    ) {
+        $me->wantTo('test all product filters');
+        $me->amOnPage('/televize-audio/');
+        $productListPage->assertProductsTotalCount(28);
 
-	public function testAllProductFilters(
-		AcceptanceTester $me,
-		ProductFilterPage $productFilterPage,
-		ProductListPage $productListPage
-	) {
-		$me->wantTo('test all product filters');
-		$me->amOnPage('/televize-audio/');
-		$productListPage->assertProductsTotalCount(28);
+        $productFilterPage->setMinimalPrice(1000);
+        $productListPage->assertProductsTotalCount(22);
 
-		$productFilterPage->setMinimalPrice(1000);
-		$productListPage->assertProductsTotalCount(22);
+        $productFilterPage->setMaximalPrice(10000);
+        $productListPage->assertProductsTotalCount(16);
 
-		$productFilterPage->setMaximalPrice(10000);
-		$productListPage->assertProductsTotalCount(16);
+        $productFilterPage->filterByBrand('LG');
+        $productListPage->assertProductsTotalCount(3);
 
-		$productFilterPage->filterByBrand('LG');
-		$productListPage->assertProductsTotalCount(3);
+        $productFilterPage->filterByBrand('Hyundai');
+        $productListPage->assertProductsTotalCount(7);
 
-		$productFilterPage->filterByBrand('Hyundai');
-		$productListPage->assertProductsTotalCount(7);
+        $productFilterPage->filterByParameter('HDMI', 'Ano');
+        $productListPage->assertProductsTotalCount(6);
 
-		$productFilterPage->filterByParameter('HDMI', 'Ano');
-		$productListPage->assertProductsTotalCount(6);
+        $productFilterPage->filterByParameter('Úhlopříčka', '27"');
+        $productListPage->assertProductsTotalCount(2);
 
-		$productFilterPage->filterByParameter('Úhlopříčka', '27"');
-		$productListPage->assertProductsTotalCount(2);
-
-		$productFilterPage->filterByParameter('Úhlopříčka', '30"');
-		$productListPage->assertProductsTotalCount(4);
-	}
+        $productFilterPage->filterByParameter('Úhlopříčka', '30"');
+        $productListPage->assertProductsTotalCount(4);
+    }
 }

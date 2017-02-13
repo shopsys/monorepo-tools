@@ -2,6 +2,6 @@
 
 namespace Shopsys\AutoServicesBundle\Compiler\Exception;
 
-interface CompilerException {
-
+interface CompilerException
+{
 }

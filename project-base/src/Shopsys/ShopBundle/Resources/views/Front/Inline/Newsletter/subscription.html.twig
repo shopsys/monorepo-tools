@@ -1,20 +1,20 @@
 {{ form_start(form, { attr: { 'data-on-submit': 'ajaxSumbit', 'data-success': success ? 'true' : 'false' }}) }}
-	<div class="footer__newsletter">
-		<div class="footer__newsletter__text">
-			<p>
-				{{ 'Do you want to receive the newest information about our shop? Subscribe to our e-mail newsletter.'|trans }}
-			</p>
-		</div>
-		<div class="footer__newsletter__form">
-			<div class="footer__newsletter__form__wrap">
-				<div class="footer__newsletter__form__in">
-					{{ form_widget(form.email, { attr: {placeholder: 'Enter e-mail'|trans, class: 'footer__newsletter__input'} }) }}
-					{{ form_errors(form.email) }}
-				</div>
-				{{ form_widget(form.send, { label: 'Log in'|trans, attr: { class: "footer__newsletter__form__btn" }}) }}
-			</div>
-			{{ form_errors(form, { errors_attr: { class : 'in-message--alert' } }) }}
-		</div>
-	</div>
+    <div class="footer__newsletter">
+        <div class="footer__newsletter__text">
+            <p>
+                {{ 'Do you want to receive the newest information about our shop? Subscribe to our e-mail newsletter.'|trans }}
+            </p>
+        </div>
+        <div class="footer__newsletter__form">
+            <div class="footer__newsletter__form__wrap">
+                <div class="footer__newsletter__form__in">
+                    {{ form_widget(form.email, { attr: {placeholder: 'Enter e-mail'|trans, class: 'footer__newsletter__input'} }) }}
+                    {{ form_errors(form.email) }}
+                </div>
+                {{ form_widget(form.send, { label: 'Log in'|trans, attr: { class: "footer__newsletter__form__btn" }}) }}
+            </div>
+            {{ form_errors(form, { errors_attr: { class : 'in-message--alert' } }) }}
+        </div>
+    </div>
 {{ form_end(form) }}
 {{ init_js_validation(form, false) }}

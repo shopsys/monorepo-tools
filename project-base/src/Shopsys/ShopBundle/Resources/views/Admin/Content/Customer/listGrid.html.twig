@@ -1,26 +1,26 @@
 {% extends '@ShopsysShop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_value_cell_id_name %}
-	<a href="{{ url('admin_customer_edit', { id: row.id }) }}">{{ value }}</a>
+    <a href="{{ url('admin_customer_edit', { id: row.id }) }}">{{ value }}</a>
 {% endblock %}
 
 {% block grid_value_cell_id_orders_sum_price %}
-	{{ value|priceWithCurrencyAdmin }}
+    {{ value|priceWithCurrencyAdmin }}
 {% endblock %}
 
 {% block grid_value_cell_id_last_order_at %}
-	{% if value is empty %}
-		-
-	{% else %}
-		{{ value|formatDate }}
-	{% endif %}
+    {% if value is empty %}
+        -
+    {% else %}
+        {{ value|formatDate }}
+    {% endif %}
 {% endblock %}
 
 {% block grid_no_data %}
-	{{ 'No customers found.'|trans }}
+    {{ 'No customers found.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'customers'|trans %}
-	{{ parent() }}
+    {% set entityName = 'customers'|trans %}
+    {{ parent() }}
 {% endblock %}

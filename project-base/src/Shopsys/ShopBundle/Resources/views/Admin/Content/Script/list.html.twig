@@ -5,9 +5,9 @@
 
 {% block main_content %}
 
-	<div class="in-message in-message--block in-message--danger">{{ 'ATTENTION - inserting scripts on the page can seriously endanger the security, performance or design of the app.'|trans }}</div>
+    <div class="in-message in-message--block in-message--danger">{{ 'ATTENTION - inserting scripts on the page can seriously endanger the security, performance or design of the app.'|trans }}</div>
 
-	<a href="{{ url('admin_script_new') }}" class="btn">{{ 'Create new script'|trans }}</a>
+    <a href="{{ url('admin_script_new') }}" class="btn">{{ 'Create new script'|trans }}</a>
 
-	{{ gridView.render() }}
+    {{ gridView.render() }}
 {% endblock %}

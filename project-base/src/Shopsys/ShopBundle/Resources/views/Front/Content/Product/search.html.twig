@@ -4,39 +4,39 @@
 {% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% block title %}
-	{{ parent() }}
-	- {{ 'Search results for "%searchText%"'|trans({ '%searchText%': searchText }) }}
+    {{ parent() }}
+    - {{ 'Search results for "%searchText%"'|trans({ '%searchText%': searchText }) }}
 {% endblock %}
 
 {% block meta_robots %}
-	{{ paginator.metaRobots(paginationResult) }}
+    {{ paginator.metaRobots(paginationResult) }}
 {% endblock %}
 
 {% block main_content %}
-	<h1>{{ 'Search results for "%searchText%"'|trans({ '%searchText%': searchText }) }}</h1>
+    <h1>{{ 'Search results for "%searchText%"'|trans({ '%searchText%': searchText }) }}</h1>
 
-	{{ render(controller('ShopsysShopBundle:Front/Category:categoryList', {categories: foundCategories})) }}
+    {{ render(controller('ShopsysShopBundle:Front/Category:categoryList', {categories: foundCategories})) }}
 
-	<div class="js-product-list-with-filter">
-		{% if paginationResult.results|length > 0 or filterFormSubmited %}
-			<div class="box-filter js-product-filter">
-				{{ productFilterForm.filterForm(
-					filterForm,
-					url('front_product_search'),
-					url('front_product_search', { SEARCH_TEXT_PARAMETER : searchText }),
-					searchText,
-					'search',
-					productFilterCountData,
-					priceRange
-				) }}
-			</div>
-		{% endif %}
+    <div class="js-product-list-with-filter">
+        {% if paginationResult.results|length > 0 or filterFormSubmited %}
+            <div class="box-filter js-product-filter">
+                {{ productFilterForm.filterForm(
+                    filterForm,
+                    url('front_product_search'),
+                    url('front_product_search', { SEARCH_TEXT_PARAMETER : searchText }),
+                    searchText,
+                    'search',
+                    productFilterCountData,
+                    priceRange
+                ) }}
+            </div>
+        {% endif %}
 
-		<div class="js-product-list-ajax-filter-products-with-controls">
-			<div>
-				{{ render(controller('ShopsysShopBundle:Front/Product:selectOrderingModeForSearch')) }}
-			</div>
-			{% include '@ShopsysShop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited, searchText: searchText} %}
-		</div>
-	</div>
+        <div class="js-product-list-ajax-filter-products-with-controls">
+            <div>
+                {{ render(controller('ShopsysShopBundle:Front/Product:selectOrderingModeForSearch')) }}
+            </div>
+            {% include '@ShopsysShop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited, searchText: searchText} %}
+        </div>
+    </div>
 {% endblock %}

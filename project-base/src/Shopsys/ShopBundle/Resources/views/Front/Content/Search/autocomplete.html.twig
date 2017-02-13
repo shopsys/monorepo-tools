@@ -1,39 +1,39 @@
 <ul class="search__hint" id="js-search-autocomplete-list">
-	{% for category in categoriesPaginationResult.results %}
-		<li class="search__hint__item">
-			<a href="{{ url('front_product_list', { id: category.id }) }}" class="search__hint__item__link">
-				<span class="search__hint__image">
-					<i class="svg svg-folder"></i>
-				</span>
-				<span class="search__hint__name js-search-autocomplete-item-label">{{ category.name }}</span>
-			</a>
-		</li>
-	{% endfor %}
+    {% for category in categoriesPaginationResult.results %}
+        <li class="search__hint__item">
+            <a href="{{ url('front_product_list', { id: category.id }) }}" class="search__hint__item__link">
+                <span class="search__hint__image">
+                    <i class="svg svg-folder"></i>
+                </span>
+                <span class="search__hint__name js-search-autocomplete-item-label">{{ category.name }}</span>
+            </a>
+        </li>
+    {% endfor %}
 
-	{% for product in productsPaginationResult.results %}
-		<li class="search__hint__item">
-			<a href="{{ url('front_product_detail', { id: product.id }) }}" class="search__hint__item__link">
-				<span class="search__hint__image">
-					<img src="{{ imageUrl(product, 'thumbnail') }}" title="{{ product.name }}" width="30" />
-				</span>
-				<span class="search__hint__name js-search-autocomplete-item-label">{{ product.name }}</span>
-			</a>
-		</li>
-	{% endfor %}
+    {% for product in productsPaginationResult.results %}
+        <li class="search__hint__item">
+            <a href="{{ url('front_product_detail', { id: product.id }) }}" class="search__hint__item__link">
+                <span class="search__hint__image">
+                    <img src="{{ imageUrl(product, 'thumbnail') }}" title="{{ product.name }}" width="30" />
+                </span>
+                <span class="search__hint__name js-search-autocomplete-item-label">{{ product.name }}</span>
+            </a>
+        </li>
+    {% endfor %}
 
-	{% if productsPaginationResult.totalCount > 0 %}
-		<li class="search__hint__item search__hint__item--info">
-			{% transchoice productsPaginationResult.totalCount with {'%totalProductCount%': productsPaginationResult.totalCount} %}
-				{0} No product found | {1} 1 product found | [2,Inf] %totalProductCount% product found
-			{% endtranschoice %}
-		</li>
-	{% endif %}
+    {% if productsPaginationResult.totalCount > 0 %}
+        <li class="search__hint__item search__hint__item--info">
+            {% transchoice productsPaginationResult.totalCount with {'%totalProductCount%': productsPaginationResult.totalCount} %}
+                {0} No product found | {1} 1 product found | [2,Inf] %totalProductCount% product found
+            {% endtranschoice %}
+        </li>
+    {% endif %}
 
-	{% if categoriesPaginationResult.totalCount > 0 or productsPaginationResult.totalCount > 0 %}
-		<li class="search__hint__item search__hint__item--info">
-			<a href="{{ searchUrl }}">
-				{{ 'View all results'|trans }}
-			</a>
-		</li>
-	{% endif %}
+    {% if categoriesPaginationResult.totalCount > 0 or productsPaginationResult.totalCount > 0 %}
+        <li class="search__hint__item search__hint__item--info">
+            <a href="{{ searchUrl }}">
+                {{ 'View all results'|trans }}
+            </a>
+        </li>
+    {% endif %}
 </ul>

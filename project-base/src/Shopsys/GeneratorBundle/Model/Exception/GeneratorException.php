@@ -2,6 +2,6 @@
 
 namespace Shopsys\GeneratorBundle\Model\Exception;
 
-interface GeneratorException {
-
+interface GeneratorException
+{
 }

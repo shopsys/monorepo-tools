@@ -12,81 +12,83 @@ use Shopsys\ShopBundle\Component\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageDeleteDoctrineListener {
+class ImageDeleteDoctrineListener
+{
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    private $container;
 
-	/**
-	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
-	 */
-	private $container;
+    /**
+     * @var \Symfony\Component\Filesystem\Filesystem
+     */
+    private $filesystem;
 
-	/**
-	 * @var \Symfony\Component\Filesystem\Filesystem
-	 */
-	private $filesystem;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
+     */
+    private $imageConfig;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
-	 */
-	private $imageConfig;
+    /**
+     * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
+     */
+    private $fileUpload;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
-	 */
-	private $fileUpload;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Image\ImageLocator
+     */
+    private $imageLocator;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Image\ImageLocator
-	 */
-	private $imageLocator;
+    public function __construct(
+        ContainerInterface $container,
+        Filesystem $filesystem,
+        ImageConfig $imageConfig,
+        FileUpload $fileUpload,
+        ImageLocator $imageLocator
+    ) {
+        $this->container = $container;
+        $this->filesystem = $filesystem;
+        $this->imageConfig = $imageConfig;
+        $this->fileUpload = $fileUpload;
+        $this->imageLocator = $imageLocator;
+    }
 
-	public function __construct(
-		ContainerInterface $container,
-		Filesystem $filesystem,
-		ImageConfig $imageConfig,
-		FileUpload $fileUpload,
-		ImageLocator $imageLocator
-	) {
-		$this->container = $container;
-		$this->filesystem = $filesystem;
-		$this->imageConfig = $imageConfig;
-		$this->fileUpload = $fileUpload;
-		$this->imageLocator = $imageLocator;
-	}
+    /**
+     * Prevent ServiceCircularReferenceException (DoctrineListener cannot be dependent on the EntityManager)
+     *
+     * @return \Shopsys\ShopBundle\Component\Image\ImageFacade
+     */
+    private function getImageFacade()
+    {
+        return $this->container->get(ImageFacade::class);
+    }
 
-	/**
-	 * Prevent ServiceCircularReferenceException (DoctrineListener cannot be dependent on the EntityManager)
-	 *
-	 * @return \Shopsys\ShopBundle\Component\Image\ImageFacade
-	 */
-	private function getImageFacade() {
-		return $this->container->get(ImageFacade::class);
-	}
+    /**
+     * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
+     */
+    public function preRemove(LifecycleEventArgs $args)
+    {
+        $entity = $args->getEntity();
 
-	/**
-	 * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
-	 */
-	public function preRemove(LifecycleEventArgs $args) {
-		$entity = $args->getEntity();
+        if ($this->imageConfig->hasImageConfig($entity)) {
+            $this->deleteEntityImages($entity, $args->getEntityManager());
+        } elseif ($entity instanceof Image) {
+            $this->getImageFacade()->deleteImageFiles($entity);
+        }
+    }
 
-		if ($this->imageConfig->hasImageConfig($entity)) {
-			$this->deleteEntityImages($entity, $args->getEntityManager());
-		} elseif ($entity instanceof Image) {
-			$this->getImageFacade()->deleteImageFiles($entity);
-		}
-	}
-
-	/**
-	 * @param object $entity
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \Shopsys\ShopBundle\Component\Image\ImageFacade $imageFacade
-	 */
-	private function deleteEntityImages($entity, EntityManager $em) {
-		$images = $this->getImageFacade()->getAllImagesByEntity($entity);
-		if (count($images) > 0) {
-			foreach ($images as $entity) {
-				$em->remove($entity);
-			}
-		}
-	}
-
+    /**
+     * @param object $entity
+     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Shopsys\ShopBundle\Component\Image\ImageFacade $imageFacade
+     */
+    private function deleteEntityImages($entity, EntityManager $em)
+    {
+        $images = $this->getImageFacade()->getAllImagesByEntity($entity);
+        if (count($images) > 0) {
+            foreach ($images as $entity) {
+                $em->remove($entity);
+            }
+        }
+    }
 }

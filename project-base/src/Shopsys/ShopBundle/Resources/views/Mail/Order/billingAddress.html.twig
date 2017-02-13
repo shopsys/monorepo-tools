@@ -1,22 +1,22 @@
 <table>
-	<tr>
-		<th>{% trans into orderLocale %}First name{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Surname{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Company{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Company number{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Tax number{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Street{% endtrans %}</th>
-		<th>{% trans into orderLocale %}City{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Postcode{% endtrans %}</th>
-	</tr>
-	<tr>
-		<td>{{ order.firstName }}</td>
-		<td>{{ order.lastName }}</td>
-		<td>{{ order.companyName }}</td>
-		<td>{{ order.companyNumber }}</td>
-		<td>{{ order.companyTaxNumber }}</td>
-		<td>{{ order.street }}</td>
-		<td>{{ order.city }}</td>
-		<td>{{ order.postcode }}</td>
-	</tr>
+    <tr>
+        <th>{% trans into orderLocale %}First name{% endtrans %}</th>
+        <th>{% trans into orderLocale %}Surname{% endtrans %}</th>
+        <th>{% trans into orderLocale %}Company{% endtrans %}</th>
+        <th>{% trans into orderLocale %}Company number{% endtrans %}</th>
+        <th>{% trans into orderLocale %}Tax number{% endtrans %}</th>
+        <th>{% trans into orderLocale %}Street{% endtrans %}</th>
+        <th>{% trans into orderLocale %}City{% endtrans %}</th>
+        <th>{% trans into orderLocale %}Postcode{% endtrans %}</th>
+    </tr>
+    <tr>
+        <td>{{ order.firstName }}</td>
+        <td>{{ order.lastName }}</td>
+        <td>{{ order.companyName }}</td>
+        <td>{{ order.companyNumber }}</td>
+        <td>{{ order.companyTaxNumber }}</td>
+        <td>{{ order.street }}</td>
+        <td>{{ order.city }}</td>
+        <td>{{ order.postcode }}</td>
+    </tr>
 </table>

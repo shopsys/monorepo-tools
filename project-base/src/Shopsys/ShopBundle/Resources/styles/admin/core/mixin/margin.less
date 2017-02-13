@@ -1,23 +1,23 @@
 .margin-generator(@i, @step, @max, @postfix: ~'') when (@i <= @max) {
-	&-@{i}@{postfix} {
-		margin: ~'@{i}@{margin-unit}';
-	}
+    &-@{i}@{postfix} {
+        margin: ~'@{i}@{margin-unit}';
+    }
 
-	&-left-@{i}@{postfix} {
-		margin-left: ~'@{i}@{margin-unit}';
-	}
+    &-left-@{i}@{postfix} {
+        margin-left: ~'@{i}@{margin-unit}';
+    }
 
-	&-right-@{i}@{postfix} {
-		margin-right: ~'@{i}@{margin-unit}';
-	}
+    &-right-@{i}@{postfix} {
+        margin-right: ~'@{i}@{margin-unit}';
+    }
 
-	&-bottom-@{i}@{postfix} {
-		margin-bottom: ~'@{i}@{margin-unit}';
-	}
+    &-bottom-@{i}@{postfix} {
+        margin-bottom: ~'@{i}@{margin-unit}';
+    }
 
-	&-top-@{i}@{postfix} {
-		margin-top: ~'@{i}@{margin-unit}';
-	}
+    &-top-@{i}@{postfix} {
+        margin-top: ~'@{i}@{margin-unit}';
+    }
 
-	.margin-generator(@i + @step, @step, @max, @postfix);
+    .margin-generator(@i + @step, @step, @max, @postfix);
 }

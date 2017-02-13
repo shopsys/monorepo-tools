@@ -1,16 +1,16 @@
 <div class="in-breadcrumb">
-	{% for item in items %}
-		{% if loop.first %}
-			<a href="{{ url('admin_default_dashboard') }}" class="in-breadcrumb__item in-breadcrumb__item--home">
-				<i class="svg svg-house"></i>
-			</a>
-			<span class="in-breadcrumb__separator"> > </span>
-		{% endif %}
-		{% if loop.last %}
-			<span class="in-breadcrumb__item in-breadcrumb__item--actual">{{ item.label }}</span>
-		{% else %}
-			<span class="in-breadcrumb__item">{{ item.label }}</span>
-			<span class="in-breadcrumb__separator"> > </span>
-		{% endif %}
-	{% endfor %}
+    {% for item in items %}
+        {% if loop.first %}
+            <a href="{{ url('admin_default_dashboard') }}" class="in-breadcrumb__item in-breadcrumb__item--home">
+                <i class="svg svg-house"></i>
+            </a>
+            <span class="in-breadcrumb__separator"> > </span>
+        {% endif %}
+        {% if loop.last %}
+            <span class="in-breadcrumb__item in-breadcrumb__item--actual">{{ item.label }}</span>
+        {% else %}
+            <span class="in-breadcrumb__item">{{ item.label }}</span>
+            <span class="in-breadcrumb__separator"> > </span>
+        {% endif %}
+    {% endfor %}
 </div>

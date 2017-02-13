@@ -6,39 +6,39 @@
 
 // base message settings and elements
 .in-message {
-	display: inline-block;
-	padding: @in-message-padding-vertical @in-message-padding-horizontal;
+    display: inline-block;
+    padding: @in-message-padding-vertical @in-message-padding-horizontal;
 
-	font-style: italic;
-	font-size: 14px;
-	text-transform: none;
-	font-weight: normal;
+    font-style: italic;
+    font-size: 14px;
+    text-transform: none;
+    font-weight: normal;
 
-	&__icon {
-		margin-right: 2px;
-		position: relative;
-		top: -1px;
-	}
+    &__icon {
+        margin-right: 2px;
+        position: relative;
+        top: -1px;
+    }
 
-	&__close {
-		position: absolute;
-		top: @in-message-close-size;
-		right: @in-message-close-size;
-		padding: @in-message-close-size;
-		display: inline-block;
-		vertical-align: middle;
+    &__close {
+        position: absolute;
+        top: @in-message-close-size;
+        right: @in-message-close-size;
+        padding: @in-message-close-size;
+        display: inline-block;
+        vertical-align: middle;
 
-		color: @in-message-close-color;
-		cursor: pointer;
-		font-style: normal;
-		font-size: 14px;
-		text-align: center;
-		text-decoration: none;
-	}
+        color: @in-message-close-color;
+        cursor: pointer;
+        font-style: normal;
+        font-size: 14px;
+        text-align: center;
+        text-decoration: none;
+    }
 
-	&__list {
-		.reset-ul();
-	}
+    &__list {
+        .reset-ul();
+    }
 }
 
 // Modifications - types
@@ -49,53 +49,53 @@
 @in-message-block-padding-for-close: 20px;
 
 .in-message {
-	&--small {
-		padding: @in-message-small-padding-vertical @in-message-small-padding-horizontal;
+    &--small {
+        padding: @in-message-small-padding-vertical @in-message-small-padding-horizontal;
 
-		font-size: 12px;
-	}
+        font-size: 12px;
+    }
 
-	&--block {
-		display: block;
-		margin-bottom: @in-message-block-margin-bottom;
-		padding-right: @in-message-block-padding-for-close;
-		position: relative;
+    &--block {
+        display: block;
+        margin-bottom: @in-message-block-margin-bottom;
+        padding-right: @in-message-block-padding-for-close;
+        position: relative;
 
-		.in-message__close {
-			top: 0;
-		}
+        .in-message__close {
+            top: 0;
+        }
 
-		&.in-message--small .in-message__close {
-			top: -4px;
-		}
-	}
+        &.in-message--small .in-message__close {
+            top: -4px;
+        }
+    }
 }
 
 // Modifications - colors
 .in-message {
-	&--error {
-		color: @color-message-alert-text;
-		background: @color-message-alert;
-	}
+    &--error {
+        color: @color-message-alert-text;
+        background: @color-message-alert;
+    }
 
-	&--warning {
-		color: @color-message-warning-text;
-		background: @color-message-warning;
-	}
+    &--warning {
+        color: @color-message-warning-text;
+        background: @color-message-warning;
+    }
 
-	&--info {
-		color: @color-message-info-text;
-		background: @color-message-info;
-	}
+    &--info {
+        color: @color-message-info-text;
+        background: @color-message-info;
+    }
 
-	&--success {
-		color: @color-message-success-text;
-		background: @color-message-success;
-	}
+    &--success {
+        color: @color-message-success-text;
+        background: @color-message-success;
+    }
 
-	&--danger {
-		color: @color-message-alert-text;
-	}
+    &--danger {
+        color: @color-message-alert-text;
+    }
 }
 
 
@@ -107,36 +107,36 @@
 @in-message-pin-size: 8px;
 
 .in-message {
-	&--pin {
-		position: absolute;
-		top: 100%;
-		left: 0;
-		margin-top: @in-message-pin-position*2;
-		width: @in-message-pin-width;
-		z-index: 99;
-		padding: @in-message-pin-padding @in-message-pin-place-for-close @in-message-pin-padding @in-message-pin-padding;
+    &--pin {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: @in-message-pin-position*2;
+        width: @in-message-pin-width;
+        z-index: 99;
+        padding: @in-message-pin-padding @in-message-pin-place-for-close @in-message-pin-padding @in-message-pin-padding;
 
-		text-align: left;
-		border: 1px solid darken(@color-message-alert, 15%);
+        text-align: left;
+        border: 1px solid darken(@color-message-alert, 15%);
 
-		&:after {
-			display: block;
-			position: absolute;
-			top: -@in-message-pin-position;
-			left: @in-message-pin-position;
-			width: @in-message-pin-size;
-			height: @in-message-pin-size;
-			content: '';
+        &:after {
+            display: block;
+            position: absolute;
+            top: -@in-message-pin-position;
+            left: @in-message-pin-position;
+            width: @in-message-pin-size;
+            height: @in-message-pin-size;
+            content: '';
 
-			border-top: 1px solid darken(@color-message-alert, 15%);
-			border-left: 1px solid darken(@color-message-alert, 15%);
-			background: @color-message-alert;
+            border-top: 1px solid darken(@color-message-alert, 15%);
+            border-left: 1px solid darken(@color-message-alert, 15%);
+            background: @color-message-alert;
 
-			transform: rotate(45deg);
-		}
+            transform: rotate(45deg);
+        }
 
-		.box-login & {
-			left: 25px;
-		}
-	}
+        .box-login & {
+            left: 25px;
+        }
+    }
 }

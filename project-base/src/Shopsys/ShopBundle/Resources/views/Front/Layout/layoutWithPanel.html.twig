@@ -1,27 +1,27 @@
 {% extends '@ShopsysShop/Front/Layout/layout.html.twig' %}
 
 {% block content %}
-	<div class="web__main web__main--with-panel">
-		<div class="web__main__content js-main-content">
-			{% block breadcrumb %}
-				{{ render(controller('ShopsysShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
-			{% endblock %}
+    <div class="web__main web__main--with-panel">
+        <div class="web__main__content js-main-content">
+            {% block breadcrumb %}
+                {{ render(controller('ShopsysShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
+            {% endblock %}
 
-			{{ render(controller('ShopsysShopBundle:Front/FlashMessage:index')) }}
+            {{ render(controller('ShopsysShopBundle:Front/FlashMessage:index')) }}
 
-			{% block main_content %}{% endblock %}
-		</div>
+            {% block main_content %}{% endblock %}
+        </div>
 
-		<div class="web__main__panel">
-			{{ render(controller('ShopsysShopBundle:Front/Category:panel', { request: app.request } )) }}
+        <div class="web__main__panel">
+            {{ render(controller('ShopsysShopBundle:Front/Category:panel', { request: app.request } )) }}
 
-			{% block panel_content %}{% endblock %}
+            {% block panel_content %}{% endblock %}
 
-			<div id="js-contact-form-container">
-				{{ render(controller('ShopsysShopBundle:Front/ContactForm:index')) }}
-			</div>
+            <div id="js-contact-form-container">
+                {{ render(controller('ShopsysShopBundle:Front/ContactForm:index')) }}
+            </div>
 
-			{{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : constant('Shopsys\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_LEFT_SIDEBAR')})) }}
-		</div>
-	</div>
+            {{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : constant('Shopsys\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_LEFT_SIDEBAR')})) }}
+        </div>
+    </div>
 {% endblock %}

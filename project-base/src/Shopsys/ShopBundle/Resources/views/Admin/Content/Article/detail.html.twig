@@ -4,77 +4,77 @@
 {% block h1 %}{{ 'Article'|trans }}{% endblock %}
 
 {% block main_content %}
-	{{ form_start(form) }}
-		{{ form_errors(form) }}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
 
-		<div class="form-group wrap-border">
-			<div class="form-group__title">
-				{{ 'Article data'|trans }}
-			</div>
+        <div class="form-group wrap-border">
+            <div class="form-group__title">
+                {{ 'Article data'|trans }}
+            </div>
 
-			{{ form_id(article|default(null)) }}
+            {{ form_id(article|default(null)) }}
 
-			{% block article_domain %}
-				{{ form_row(form.domainId, { label: 'Domain'|trans }) }}
-			{% endblock %}
-			{% block article_placement %}{% endblock %}
+            {% block article_domain %}
+                {{ form_row(form.domainId, { label: 'Domain'|trans }) }}
+            {% endblock %}
+            {% block article_placement %}{% endblock %}
 
-			{{ form_row(form.name, { label: 'Name'|trans}) }}
-			{{ form_row(form.hidden, { label: 'Hide'|trans, newline: true}) }}
-			{{ form_row(form.text, { label: 'Content'|trans, newline: true}) }}
-		</div>
+            {{ form_row(form.name, { label: 'Name'|trans}) }}
+            {{ form_row(form.hidden, { label: 'Hide'|trans, newline: true}) }}
+            {{ form_row(form.text, { label: 'Content'|trans, newline: true}) }}
+        </div>
 
-		<div class="form-group">
-			<div class="form-group__title">
-				{{ 'SEO'|trans }}
-			</div>
+        <div class="form-group">
+            <div class="form-group__title">
+                {{ 'SEO'|trans }}
+            </div>
 
-			<div class="form-line">
-				<strong class="form-line__label">
-					{{ form_label(form.seoTitle, 'Headline'|trans) }}
-				</strong>
+            <div class="form-line">
+                <strong class="form-line__label">
+                    {{ form_label(form.seoTitle, 'Headline'|trans) }}
+                </strong>
 
-				<div class="form-line__side js-characters-counter">
-					<div class="form-line__item form-line__item--left">
-						<div class="input__wrap">
-							{{ form_widget(form.seoTitle, {attr: {class: 'js-dynamic-placeholder js-characters-counter-input', 'data-placeholder-source-input-id': 'article_form_name'}}) }}
-						</div>
-					</div>
+                <div class="form-line__side js-characters-counter">
+                    <div class="form-line__item form-line__item--left">
+                        <div class="input__wrap">
+                            {{ form_widget(form.seoTitle, {attr: {class: 'js-dynamic-placeholder js-characters-counter-input', 'data-placeholder-source-input-id': 'article_form_name'}}) }}
+                        </div>
+                    </div>
 
-					<div class="form-line__count">
-						<div class="form-line__count__desc js-characters-counter-info" data-recommended-length="60"></div>
-					</div>
-					{{ form_errors(form.seoTitle) }}
-				</div>
-			</div>
+                    <div class="form-line__count">
+                        <div class="form-line__count__desc js-characters-counter-info" data-recommended-length="60"></div>
+                    </div>
+                    {{ form_errors(form.seoTitle) }}
+                </div>
+            </div>
 
-			<div class="form-line">
-				<strong class="form-line__label">
-					{{ form_label(form.seoMetaDescription, 'Meta description'|trans) }}
-				</strong>
+            <div class="form-line">
+                <strong class="form-line__label">
+                    {{ form_label(form.seoMetaDescription, 'Meta description'|trans) }}
+                </strong>
 
-				<div class="form-line__side js-characters-counter">
-					<div class="form-line__item form-line__item--left">
-						<div class="input__wrap">
-							{{ form_widget(form.seoMetaDescription, {attr: {class: 'js-characters-counter-input input--seo'}}) }}
-						</div>
-					</div>
+                <div class="form-line__side js-characters-counter">
+                    <div class="form-line__item form-line__item--left">
+                        <div class="input__wrap">
+                            {{ form_widget(form.seoMetaDescription, {attr: {class: 'js-characters-counter-input input--seo'}}) }}
+                        </div>
+                    </div>
 
-					<div class="form-line__count">
-						<div class="form-line__count__desc js-characters-counter-info" data-recommended-length="155"></div>
-					</div>
-					{{ form_errors(form.seoMetaDescription) }}
-				</div>
-			</div>
+                    <div class="form-line__count">
+                        <div class="form-line__count__desc js-characters-counter-info" data-recommended-length="155"></div>
+                    </div>
+                    {{ form_errors(form.seoMetaDescription) }}
+                </div>
+            </div>
 
-			{% block article_urls %}{% endblock %}
-		</div>
+            {% block article_urls %}{% endblock %}
+        </div>
 
-		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
-			{% block fixed_bar_content %}
-				<a href="{{ url('admin_article_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
-				{{ form_save(article|default(null), form) }}
-			{% endblock %}
-		{% endembed %}
-	{{ form_end(form) }}
+        {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+            {% block fixed_bar_content %}
+                <a href="{{ url('admin_article_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
+                {{ form_save(article|default(null), form) }}
+            {% endblock %}
+        {% endembed %}
+    {{ form_end(form) }}
 {% endblock %}

@@ -8,51 +8,53 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListC
 use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
-class ProductListPage extends AbstractPage {
+class ProductListPage extends AbstractPage
+{
+    /**
+     * @var \Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListComponent
+     */
+    private $productListComponent;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListComponent
-	 */
-	private $productListComponent;
+    public function __construct(
+        StrictWebDriver $strictWebDriver,
+        AcceptanceTester $tester,
+        ProductListComponent $productListComponent
+    ) {
+        $this->productListComponent = $productListComponent;
+        parent::__construct($strictWebDriver, $tester);
+    }
 
-	public function __construct(
-		StrictWebDriver $strictWebDriver,
-		AcceptanceTester $tester,
-		ProductListComponent $productListComponent
-	) {
-		$this->productListComponent = $productListComponent;
-		parent::__construct($strictWebDriver, $tester);
-	}
+    /**
+     * @param string $productName
+     * @param int $quantity
+     */
+    public function addProductToCartByName($productName, $quantity = 1)
+    {
+        $context = $this->getProductListCompomentContext();
 
-	/**
-	 * @param string $productName
-	 * @param int $quantity
-	 */
-	public function addProductToCartByName($productName, $quantity = 1) {
-		$context = $this->getProductListCompomentContext();
+        $this->productListComponent->addProductToCartByName($productName, $quantity, $context);
+    }
 
-		$this->productListComponent->addProductToCartByName($productName, $quantity, $context);
-	}
+    /**
+     * @param int $expectedCount
+     */
+    public function assertProductsTotalCount($expectedCount)
+    {
+        $totalCountElement = $this->getProductListCompomentContext()
+            ->findElement(WebDriverBy::cssSelector('.js-paging-total-count'));
+        $actualCount = (int)trim($totalCountElement->getText());
 
-	/**
-	 * @param int $expectedCount
-	 */
-	public function assertProductsTotalCount($expectedCount) {
-		$totalCountElement = $this->getProductListCompomentContext()
-			->findElement(WebDriverBy::cssSelector('.js-paging-total-count'));
-		$actualCount = (int)trim($totalCountElement->getText());
+        if ($expectedCount !== $actualCount) {
+            $message = 'Product list expects ' . $expectedCount . ' products but contains ' . $actualCount . '.';
+            throw new \PHPUnit_Framework_ExpectationFailedException($message);
+        }
+    }
 
-		if ($expectedCount !== $actualCount) {
-			$message = 'Product list expects ' . $expectedCount . ' products but contains ' . $actualCount . '.';
-			throw new \PHPUnit_Framework_ExpectationFailedException($message);
-		}
-	}
-
-	/**
-	 * @return \Facebook\WebDriver\WebDriverElement
-	 */
-	private function getProductListCompomentContext() {
-		return $this->webDriver->findElement(WebDriverBy::cssSelector('.web__main__content'));
-	}
-
+    /**
+     * @return \Facebook\WebDriver\WebDriverElement
+     */
+    private function getProductListCompomentContext()
+    {
+        return $this->webDriver->findElement(WebDriverBy::cssSelector('.web__main__content'));
+    }
 }

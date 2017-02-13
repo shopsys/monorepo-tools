@@ -3,88 +3,88 @@
 @web-footer-background: @color-3;
 
 img {
-	max-width: 100%;
+    max-width: 100%;
 }
 
 .web {
-	display: flex;
-	flex-direction: column;
-	min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 
-	.is-no-flex &, .is-safari & {
-		display: block;
-	}
+    .is-no-flex &, .is-safari & {
+        display: block;
+    }
 
-	&--window-activated {
-		overflow: hidden;
-		margin-right: @web-scrollbar-size;
-	}
+    &--window-activated {
+        overflow: hidden;
+        margin-right: @web-scrollbar-size;
+    }
 
-	&__in {
-		flex: 1;
-		position: relative;
-	}
+    &__in {
+        flex: 1;
+        position: relative;
+    }
 
-	&__line {
-		&--grey {
-			background: @color-light;
-		}
-	}
+    &__line {
+        &--grey {
+            background: @color-light;
+        }
+    }
 
-	&__footer {
-		flex: 0;
-		will-change: padding;
+    &__footer {
+        flex: 0;
+        will-change: padding;
 
-		background: @web-footer-background;
-		transition: @transition padding;
+        background: @web-footer-background;
+        transition: @transition padding;
 
 
-		&--with-cookies {
-			padding-bottom: @web-footer-with-cookies-margin-bottom;
-		}
-	}
+        &--with-cookies {
+            padding-bottom: @web-footer-with-cookies-margin-bottom;
+        }
+    }
 
-	&__container {
-		padding: 0 @web-padding;
+    &__container {
+        padding: 0 @web-padding;
 
-		@media @query-xl {
-			width: @web-width;
-			margin: 0 auto;
-		}
-	}
+        @media @query-xl {
+            width: @web-width;
+            margin: 0 auto;
+        }
+    }
 
-	&__main {
-		padding-bottom: 20px;
+    &__main {
+        padding-bottom: 20px;
 
-		&--with-panel {
-			@media @query-lg {
-				display: flex;
-				width: 100%;
-			}
-		}
+        &--with-panel {
+            @media @query-lg {
+                display: flex;
+                width: 100%;
+            }
+        }
 
-		&__content {
-			.web__main--with-panel & {
-				margin-bottom: @margin-gap;
+        &__content {
+            .web__main--with-panel & {
+                margin-bottom: @margin-gap;
 
-				@media @query-lg {
-					order: 2;
-					width: 70%;
-					width: calc(~"100% - @{web-panel-width}");
-				}
-			}
-		}
+                @media @query-lg {
+                    order: 2;
+                    width: 70%;
+                    width: calc(~"100% - @{web-panel-width}");
+                }
+            }
+        }
 
-		&__panel {
-			width: 100%;
+        &__panel {
+            width: 100%;
 
-			@media @query-lg {
-				display: block;
-				order: 1;
-				flex-shrink: 0;
-				width: @web-panel-width;
-				padding-right: 20px;
-			}
-		}
-	}
+            @media @query-lg {
+                display: block;
+                order: 1;
+                flex-shrink: 0;
+                width: @web-panel-width;
+                padding-right: 20px;
+            }
+        }
+    }
 }

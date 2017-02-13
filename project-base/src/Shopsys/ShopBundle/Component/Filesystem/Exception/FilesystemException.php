@@ -2,6 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Filesystem\Exception;
 
-interface FilesystemException {
-
+interface FilesystemException
+{
 }

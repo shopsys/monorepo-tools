@@ -5,24 +5,24 @@
 
 {% block main_content %}
 
-	{{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
+    {{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
 
-	{{ form_start(form) }}
-		<div class="form-group">
-			<div class="form-group__title">
-				{{ 'Published data'|trans }}
-			</div>
-			{{ form_row(form.phoneNumber, { label: 'Telephone number'|trans }) }}
-			{{ form_row(form.email, { label: 'E-mail'|trans }) }}
-			{{ form_row(form.phoneHours, { label: 'Phone availability'|trans }) }}
-		</div>
+    {{ form_start(form) }}
+        <div class="form-group">
+            <div class="form-group__title">
+                {{ 'Published data'|trans }}
+            </div>
+            {{ form_row(form.phoneNumber, { label: 'Telephone number'|trans }) }}
+            {{ form_row(form.email, { label: 'E-mail'|trans }) }}
+            {{ form_row(form.phoneHours, { label: 'Phone availability'|trans }) }}
+        </div>
 
-		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
-			{% block fixed_bar_content %}
-				{{ form_widget(form.save, { label: 'Save changes'|trans}) }}
-			{% endblock %}
-		{% endembed %}
+        {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+            {% block fixed_bar_content %}
+                {{ form_widget(form.save, { label: 'Save changes'|trans}) }}
+            {% endblock %}
+        {% endembed %}
 
-	{{ form_end(form) }}
+    {{ form_end(form) }}
 
 {% endblock %}

@@ -7,110 +7,110 @@
 @list-products-line-item-title-width-mobile: ~"calc(100% - @{list-products-line-item-postion-width} - @{list-products-line-item-image-width})";
 
 .list-products-line {
-	margin-bottom: @margin-gap;
+    margin-bottom: @margin-gap;
 
-	&__list {
-		.reset-ul();
-	}
+    &__list {
+        .reset-ul();
+    }
 
-	&__item {
-		display: block;
-		margin-bottom: @list-products-line-item-gap;
+    &__item {
+        display: block;
+        margin-bottom: @list-products-line-item-gap;
 
-		border: 1px solid @color-border;
+        border: 1px solid @color-border;
 
-		&__block {
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			width: 100%;
-			padding: @list-products-line-item-gap;
+        &__block {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            width: 100%;
+            padding: @list-products-line-item-gap;
 
-			text-decoration: none;
-			color: @color-base;
+            text-decoration: none;
+            color: @color-base;
 
-			.is-no-flex & {
-				display: block;
-				.clearfix();
-			}
-		}
+            .is-no-flex & {
+                display: block;
+                .clearfix();
+            }
+        }
 
-		&__position {
-			flex: 0 @list-products-line-item-postion-width;
+        &__position {
+            flex: 0 @list-products-line-item-postion-width;
 
-			font-size: 14px;
+            font-size: 14px;
 
-			.is-no-flex & {
-				width: @list-products-line-item-postion-width;
-				float: left;
-			}
-		}
+            .is-no-flex & {
+                width: @list-products-line-item-postion-width;
+                float: left;
+            }
+        }
 
-		&__image {
-			flex: 0 @list-products-line-item-image-width;
-			padding-right: @list-products-line-item-gap;
-			text-align: center;
+        &__image {
+            flex: 0 @list-products-line-item-image-width;
+            padding-right: @list-products-line-item-gap;
+            text-align: center;
 
-			.is-no-flex & {
-				width: @list-products-line-item-image-width;
-				float: left;
-			}
+            .is-no-flex & {
+                width: @list-products-line-item-image-width;
+                float: left;
+            }
 
-			img {
-				display: block;
-			}
-		}
+            img {
+                display: block;
+            }
+        }
 
-		&__title {
-			flex: 1;
-			margin-bottom: 0;
-			padding-left: @list-products-line-item-gap;
+        &__title {
+            flex: 1;
+            margin-bottom: 0;
+            padding-left: @list-products-line-item-gap;
 
-			font-size: 14px;
-			font-weight: bold;
+            font-size: 14px;
+            font-weight: bold;
 
-			.is-no-flex & {
-				width: @list-products-line-item-title-width-mobile;
-				float: left;
+            .is-no-flex & {
+                width: @list-products-line-item-title-width-mobile;
+                float: left;
 
-				@media @query-md {
-					width: @list-products-line-item-title-width;
-				}
-			}
-		}
+                @media @query-md {
+                    width: @list-products-line-item-title-width;
+                }
+            }
+        }
 
-		&__price {
-			flex: 0 100%;
+        &__price {
+            flex: 0 100%;
 
-			.is-no-flex & {
-				width: 100%;
-				clear: both;
-			}
+            .is-no-flex & {
+                width: 100%;
+                clear: both;
+            }
 
-			@media @query-md {
-				flex: 0 @list-products-line-item-price-width;
+            @media @query-md {
+                flex: 0 @list-products-line-item-price-width;
 
-				.is-no-flex & {
-					float: left;
-					width: @list-products-line-item-price-width;
-					clear: none;
-				}
-			}
+                .is-no-flex & {
+                    float: left;
+                    width: @list-products-line-item-price-width;
+                    clear: none;
+                }
+            }
 
-			&__item {
-				font-size: 12px;
-				color: @color-price;
-				text-align: right;
+            &__item {
+                font-size: 12px;
+                color: @color-price;
+                text-align: right;
 
-				&--main {
-					font-weight: bold;
-					color: @color-price-main;
-				}
-			}
-		}
-	}
+                &--main {
+                    font-weight: bold;
+                    color: @color-price-main;
+                }
+            }
+        }
+    }
 
-	&__more {
-		text-align: center;
-	}
+    &__more {
+        text-align: center;
+    }
 }

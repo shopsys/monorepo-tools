@@ -4,13 +4,13 @@
 @margin-unit: 'px';
 
 .margin {
-	.margin-generator(@margin-minimum, @margin-stepper, @margin-maximum);
+    .margin-generator(@margin-minimum, @margin-stepper, @margin-maximum);
 
-	@media @query-tablet {
-		.margin-generator(@margin-minimum, @margin-stepper, @margin-maximum, extract(@postfixes, 1));
-	}
+    @media @query-tablet {
+        .margin-generator(@margin-minimum, @margin-stepper, @margin-maximum, extract(@postfixes, 1));
+    }
 
-	@media @query-mobile {
-		.margin-generator(@margin-minimum, @margin-stepper, @margin-maximum, extract(@postfixes, 2));
-	}
+    @media @query-mobile {
+        .margin-generator(@margin-minimum, @margin-stepper, @margin-maximum, extract(@postfixes, 2));
+    }
 }

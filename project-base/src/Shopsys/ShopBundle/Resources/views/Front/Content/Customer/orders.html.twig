@@ -1,43 +1,43 @@
 {% extends '@ShopsysShop/Front/Layout/layoutWithoutPanel.html.twig' %}
 
 {% block meta_robots -%}
-	<meta name="robots" content="noindex, follow">
+    <meta name="robots" content="noindex, follow">
 {% endblock %}
 
 {% block title %}{{ parent() }} - {{ 'My orders'|trans }}{% endblock %}
 
 {% block main_content %}
-	<h1>{{ 'My orders'|trans }}</h1>
-	{% if orders|length == 0 %}
-		{{ 'No order so far.'|trans }}
-	{% else %}
-		<div class="in-scroll box-orders">
-			<div class="in-scroll__in">
-				<table class="table-main box-orders__table">
-					<tr>
-						<th>{{ 'Order number'|trans }}</th>
-						<th>{{ 'Creation date'|trans }}</th>
-						<th>{{ 'Current status'|trans }}</th>
-						<th class="text-right">{{ 'Number of items'|trans }}</th>
-						<th>{{ 'Shipping'|trans }}</th>
-						<th>{{ 'Payment'|trans }}</th>
-						<th class="text-right">{{ 'Total price including VAT'|trans }}</th>
-						<th class="text-center">{{ 'Detail'|trans }}</th>
-					</tr>
-					{% for order in orders %}
-						<tr>
-							<td><a href="{{ url('front_customer_order_detail_registered', { orderNumber: order.number }) }}">{{ order.number }}</a></td>
-							<td>{{ order.createdAt|formatDate }}</td>
-							<td>{{ order.status.name }}</td>
-							<td class="text-right">{{ order.productItemsCount }}</td>
-							<td>{{ order.transportName }}</td>
-							<td>{{ order.paymentName }}</td>
-							<td class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
-							<td class="text-center"><a href="{{ url('front_customer_order_detail_registered', { orderNumber: order.number }) }}" class="in-icon in-icon--detail"><i class="svg svg-search"></i></a></td>
-						</tr>
-					{% endfor %}
-				</table>
-			</div>
-		</div>
-	{% endif %}
+    <h1>{{ 'My orders'|trans }}</h1>
+    {% if orders|length == 0 %}
+        {{ 'No order so far.'|trans }}
+    {% else %}
+        <div class="in-scroll box-orders">
+            <div class="in-scroll__in">
+                <table class="table-main box-orders__table">
+                    <tr>
+                        <th>{{ 'Order number'|trans }}</th>
+                        <th>{{ 'Creation date'|trans }}</th>
+                        <th>{{ 'Current status'|trans }}</th>
+                        <th class="text-right">{{ 'Number of items'|trans }}</th>
+                        <th>{{ 'Shipping'|trans }}</th>
+                        <th>{{ 'Payment'|trans }}</th>
+                        <th class="text-right">{{ 'Total price including VAT'|trans }}</th>
+                        <th class="text-center">{{ 'Detail'|trans }}</th>
+                    </tr>
+                    {% for order in orders %}
+                        <tr>
+                            <td><a href="{{ url('front_customer_order_detail_registered', { orderNumber: order.number }) }}">{{ order.number }}</a></td>
+                            <td>{{ order.createdAt|formatDate }}</td>
+                            <td>{{ order.status.name }}</td>
+                            <td class="text-right">{{ order.productItemsCount }}</td>
+                            <td>{{ order.transportName }}</td>
+                            <td>{{ order.paymentName }}</td>
+                            <td class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
+                            <td class="text-center"><a href="{{ url('front_customer_order_detail_registered', { orderNumber: order.number }) }}" class="in-icon in-icon--detail"><i class="svg svg-search"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

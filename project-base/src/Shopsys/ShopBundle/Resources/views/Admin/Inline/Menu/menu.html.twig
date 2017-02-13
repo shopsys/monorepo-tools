@@ -1,59 +1,59 @@
 <div class="position">
-	<div id="js-position-actual-container">
-		<span class="position__title">{{ 'You are in:'|trans }}</span>
-		<strong class="position__actual">{{ (activePath|first).label }}</strong>
-	</div>
-	<div id="js-position-go-to-container" class="display-none">
-		<span class="position__title">{{ 'Go to:'|trans }}</span>
-		<strong class="position__actual" id="js-position-go-to"></strong>
-	</div>
+    <div id="js-position-actual-container">
+        <span class="position__title">{{ 'You are in:'|trans }}</span>
+        <strong class="position__actual">{{ (activePath|first).label }}</strong>
+    </div>
+    <div id="js-position-go-to-container" class="display-none">
+        <span class="position__title">{{ 'Go to:'|trans }}</span>
+        <strong class="position__actual" id="js-position-go-to"></strong>
+    </div>
 </div>
 <div class="js-main-navigation">
-	<ul class="navig navig--side">
-		<li id="js-setting-menu" class="navig__item" >
-			<div class="navig__item__link navig__item__link--bordered {% if menu.settingsItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}" title="{{ 'Settings'|trans }}">
-				<i class="svg svg-gear"></i>
-			</div>
-			<ul id="js-setting-menu-links" class="display-none navig__item__sub">
-				{% for item in menu.getSettingsItems %}
-					{% if (item.visible) %}
-						<li class="navig__item__sub__item">
-							<a href="{{ url(item.route, item.routeParameters) }}" class="navig__item__sub__item__link" title="{{ item.label }}">{{ item.label }}</a>
-						</li>
-					{% endif %}
-				{% endfor %}
-			</ul>
-		</li>
-		<li class="navig__item">
-			<a href="{{ url('admin_logout', { _csrf_token: csrf_token('admin_logout')}) }}" class="navig__item__link" id="js-navig-item-logout" title="{{ 'Log out'|trans }}">
-				<i class="svg svg-forward-page"></i>
-			</a>
-		</li>
-	</ul>
+    <ul class="navig navig--side">
+        <li id="js-setting-menu" class="navig__item" >
+            <div class="navig__item__link navig__item__link--bordered {% if menu.settingsItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}" title="{{ 'Settings'|trans }}">
+                <i class="svg svg-gear"></i>
+            </div>
+            <ul id="js-setting-menu-links" class="display-none navig__item__sub">
+                {% for item in menu.getSettingsItems %}
+                    {% if (item.visible) %}
+                        <li class="navig__item__sub__item">
+                            <a href="{{ url(item.route, item.routeParameters) }}" class="navig__item__sub__item__link" title="{{ item.label }}">{{ item.label }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+        <li class="navig__item">
+            <a href="{{ url('admin_logout', { _csrf_token: csrf_token('admin_logout')}) }}" class="navig__item__link" id="js-navig-item-logout" title="{{ 'Log out'|trans }}">
+                <i class="svg svg-forward-page"></i>
+            </a>
+        </li>
+    </ul>
 
-	<nav>
-		<ul class="navig navig--main">
-			{% for item in menu.regularItems %}
-				{% if (item.visible) %}
-					<li class="navig__item" >
-						{% if item.route %}
-							<a href="{{ url(item.route, item.routeParameters) }}" class="navig__item__link {% if item in activePath %}navig__item__link--active{% endif %}" title="{{ item.label }}">
-								<div>
-									<i class="svg svg-{{ item.icon }}"></i>
-									<span>{{ item.label }}</span>
-								</div>
-							</a>
-						{% else %}
-							<a href="#" class="navig__item__link {% if item in activePath %}navig__item__link--active{% endif %}" title="{{ item.label }}">
-								<div>
-									<i class="svg svg-{{ item.icon }}"></i>
-									<span>{{ item.label }}</span>
-								</div>
-							</a>
-						{% endif %}
-					</li>
-				{% endif %}
-			{% endfor %}
-		</ul>
-	</nav>
+    <nav>
+        <ul class="navig navig--main">
+            {% for item in menu.regularItems %}
+                {% if (item.visible) %}
+                    <li class="navig__item" >
+                        {% if item.route %}
+                            <a href="{{ url(item.route, item.routeParameters) }}" class="navig__item__link {% if item in activePath %}navig__item__link--active{% endif %}" title="{{ item.label }}">
+                                <div>
+                                    <i class="svg svg-{{ item.icon }}"></i>
+                                    <span>{{ item.label }}</span>
+                                </div>
+                            </a>
+                        {% else %}
+                            <a href="#" class="navig__item__link {% if item in activePath %}navig__item__link--active{% endif %}" title="{{ item.label }}">
+                                <div>
+                                    <i class="svg svg-{{ item.icon }}"></i>
+                                    <span>{{ item.label }}</span>
+                                </div>
+                            </a>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
 </div>

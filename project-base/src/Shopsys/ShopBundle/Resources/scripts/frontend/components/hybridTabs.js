@@ -11,100 +11,100 @@
  *
  * == Examples ==
  * === HTML mark-up ===
- *	<div id="container">
- *		<a href="#" class="js-tab-button" data-tab-id="content-a"></a>
- *		<a href="#" class="js-tab-button" data-tab-id="content-b"></a>
+ * <div id="container">
+ *     <a href="#" class="js-tab-button" data-tab-id="content-a"></a>
+ *     <a href="#" class="js-tab-button" data-tab-id="content-b"></a>
  *
- *		<div class="js-tab-content" data-tab-id="content-a"></div>
- *		<div class="js-tab-content" data-tab-id="content-b"></div>
- *	</div>
+ *     <div class="js-tab-content" data-tab-id="content-a"></div>
+ *     <div class="js-tab-content" data-tab-id="content-b"></div>
+ * </div>
  *
  * === Single tab mode initialization ===
- *	var hybridTabs = new Shopsys.hybridTabs.HybridTabs($('#container'));
- *	hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_SINGLE);
+ * var hybridTabs = new Shopsys.hybridTabs.HybridTabs($('#container'));
+ * hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_SINGLE);
  *
  * === Multiple tabs mode initialization ===
- *	var hybridTabs = new Shopsys.hybridTabs.HybridTabs($('#container'));
- *	hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_MULTIPLE);
+ * var hybridTabs = new Shopsys.hybridTabs.HybridTabs($('#container'));
+ * hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_MULTIPLE);
  */
 
 (function ($) {
-	Shopsys = window.Shopsys || {};
-	Shopsys.hybridTabs = Shopsys.hybridTabs || {};
+    Shopsys = window.Shopsys || {};
+    Shopsys.hybridTabs = Shopsys.hybridTabs || {};
 
-	Shopsys.hybridTabs.TABS_MODE_SINGLE = 'single';
-	Shopsys.hybridTabs.TABS_MODE_MULTIPLE = 'multiple';
+    Shopsys.hybridTabs.TABS_MODE_SINGLE = 'single';
+    Shopsys.hybridTabs.TABS_MODE_MULTIPLE = 'multiple';
 
-	Shopsys.hybridTabs.HybridTabs = function ($container) {
-		var $tabButtons = $container.find('.js-tabs-button');
-		var $tabContents = $container.find('.js-tabs-content');
-		var tabsMode = null;
+    Shopsys.hybridTabs.HybridTabs = function ($container) {
+        var $tabButtons = $container.find('.js-tabs-button');
+        var $tabContents = $container.find('.js-tabs-content');
+        var tabsMode = null;
 
-		this.init = function (initialTabsMode) {
-			tabsMode = initialTabsMode;
+        this.init = function (initialTabsMode) {
+            tabsMode = initialTabsMode;
 
-			$tabButtons.click(onClickTabButton);
+            $tabButtons.click(onClickTabButton);
 
-			fixTabsState();
-		};
+            fixTabsState();
+        };
 
-		this.setTabsMode = function (newTabsMode) {
-			tabsMode = newTabsMode;
-			fixTabsState();
-		};
+        this.setTabsMode = function (newTabsMode) {
+            tabsMode = newTabsMode;
+            fixTabsState();
+        };
 
-		function fixTabsState() {
+        function fixTabsState() {
 
-			if (tabsMode === Shopsys.hybridTabs.TABS_MODE_SINGLE) {
-				var $activeButtons = $tabButtons.filter('.active');
-				if ($activeButtons.length > 0) {
-					activateOneTabAndDeactivateOther($activeButtons.last().data('tab-id'));
-				} else {
-					activateOneTabAndDeactivateOther($tabButtons.first().data('tab-id'));
-				}
-			} else if (tabsMode === Shopsys.hybridTabs.TABS_MODE_MULTIPLE) {
-				$tabContents.each(function () {
-					var tabId = $(this).data('tab-id');
-					var $tabButton = $tabButtons.filter('[data-tab-id="' + tabId + '"]');
-					var isTabActive = $tabButton.hasClass('active');
+            if (tabsMode === Shopsys.hybridTabs.TABS_MODE_SINGLE) {
+                var $activeButtons = $tabButtons.filter('.active');
+                if ($activeButtons.length > 0) {
+                    activateOneTabAndDeactivateOther($activeButtons.last().data('tab-id'));
+                } else {
+                    activateOneTabAndDeactivateOther($tabButtons.first().data('tab-id'));
+                }
+            } else if (tabsMode === Shopsys.hybridTabs.TABS_MODE_MULTIPLE) {
+                $tabContents.each(function () {
+                    var tabId = $(this).data('tab-id');
+                    var $tabButton = $tabButtons.filter('[data-tab-id="' + tabId + '"]');
+                    var isTabActive = $tabButton.hasClass('active');
 
-					toggleTab(tabId, isTabActive);
-				});
-			}
-		}
+                    toggleTab(tabId, isTabActive);
+                });
+            }
+        }
 
-		function onClickTabButton() {
-			var tabId = $(this).data('tab-id');
+        function onClickTabButton() {
+            var tabId = $(this).data('tab-id');
 
-			if (tabsMode === Shopsys.hybridTabs.TABS_MODE_SINGLE) {
-				activateOneTabAndDeactivateOther(tabId);
-			} else if (tabsMode === Shopsys.hybridTabs.TABS_MODE_MULTIPLE) {
-				var isTabActive = $(this).hasClass('active');
+            if (tabsMode === Shopsys.hybridTabs.TABS_MODE_SINGLE) {
+                activateOneTabAndDeactivateOther(tabId);
+            } else if (tabsMode === Shopsys.hybridTabs.TABS_MODE_MULTIPLE) {
+                var isTabActive = $(this).hasClass('active');
 
-				toggleTab(tabId, !isTabActive);
-			}
+                toggleTab(tabId, !isTabActive);
+            }
 
-			return false;
-		}
+            return false;
+        }
 
-		// activates exactly one tab (in "single" mode)
-		function activateOneTabAndDeactivateOther(tabId) {
-			$tabButtons.each(function () {
-				var currentTabId = $(this).data('tab-id');
-				var isCurrentTab = currentTabId === tabId;
+        // activates exactly one tab (in "single" mode)
+        function activateOneTabAndDeactivateOther(tabId) {
+            $tabButtons.each(function () {
+                var currentTabId = $(this).data('tab-id');
+                var isCurrentTab = currentTabId === tabId;
 
-				toggleTab(currentTabId, isCurrentTab);
-			});
-		}
+                toggleTab(currentTabId, isCurrentTab);
+            });
+        }
 
-		// use true to show the tab or false to hide it without checking single/multiple mode
-		function toggleTab(tabId, display) {
-			var $tabButton = $tabButtons.filter('[data-tab-id="' + tabId + '"]');
-			var $tabContent = $tabContents.filter('[data-tab-id="' + tabId + '"]');
+        // use true to show the tab or false to hide it without checking single/multiple mode
+        function toggleTab(tabId, display) {
+            var $tabButton = $tabButtons.filter('[data-tab-id="' + tabId + '"]');
+            var $tabContent = $tabContents.filter('[data-tab-id="' + tabId + '"]');
 
-			$tabButton.toggleClass('active', display);
-			$tabContent.toggleClass('active', display);
-		}
-	};
+            $tabButton.toggleClass('active', display);
+            $tabContent.toggleClass('active', display);
+        }
+    };
 
 })(jQuery);

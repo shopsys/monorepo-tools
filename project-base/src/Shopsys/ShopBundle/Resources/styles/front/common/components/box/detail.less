@@ -1,82 +1,82 @@
 .box-detail {
-	@media @query-lg {
-		.clearfix();
-	}
+    @media @query-lg {
+        .clearfix();
+    }
 
-	&__image {
-		position: relative;
-		margin-bottom: @margin-gap;
+    &__image {
+        position: relative;
+        margin-bottom: @margin-gap;
 
-		@media @query-lg {
-			width: 50%;
-			float: left;
-			padding-right: 20px;
-		}
+        @media @query-lg {
+            width: 50%;
+            float: left;
+            padding-right: 20px;
+        }
 
-		&__main {
-			padding: 10px;
-			margin-bottom: @margin-gap;
-			text-align: center;
+        &__main {
+            padding: 10px;
+            margin-bottom: @margin-gap;
+            text-align: center;
 
-			border: 1px solid @color-border;
-			font-size: 0;
+            border: 1px solid @color-border;
+            font-size: 0;
 
-			img {
-				width: auto;
-				height: auto;
-			}
-		}
-	}
+            img {
+                width: auto;
+                height: auto;
+            }
+        }
+    }
 
-	&__info {
-		margin-bottom: @margin-gap;
+    &__info {
+        margin-bottom: @margin-gap;
 
-		@media @query-lg {
-			width: 50%;
-			float: right;
-		}
+        @media @query-lg {
+            width: 50%;
+            float: right;
+        }
 
-		&__availability {
-			margin-bottom: @margin-gap;
+        &__availability {
+            margin-bottom: @margin-gap;
 
-			font-weight: bold;
-		}
+            font-weight: bold;
+        }
 
-		&__params {
-			margin: 0 0 @margin-gap;
-			padding: 10px 0;
+        &__params {
+            margin: 0 0 @margin-gap;
+            padding: 10px 0;
 
-			font-size: 0;
-			border-top: 1px solid @color-border;
-			border-bottom: 1px solid @color-border;
+            font-size: 0;
+            border-top: 1px solid @color-border;
+            border-bottom: 1px solid @color-border;
 
-			@media @query-md {
-				column-count: 2;
-			}
+            @media @query-md {
+                column-count: 2;
+            }
 
-			@media @query-lg {
-				column-count: 1;
-			}
+            @media @query-lg {
+                column-count: 1;
+            }
 
-			@media @query-vl {
-				column-count: 2;
-			}
+            @media @query-vl {
+                column-count: 2;
+            }
 
-			dt, dd {
-				margin: 0;
-				padding: 5px 0;
-				display: inline-block;
-				vertical-align: top;
-				width: 50%;
+            dt, dd {
+                margin: 0;
+                padding: 5px 0;
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
 
-				font-size: 12px;
-			}
+                font-size: 12px;
+            }
 
-			dt {
-				padding-right: 5px;
+            dt {
+                padding-right: 5px;
 
-				font-weight: bold;
-			}
-		}
-	}
+                font-weight: bold;
+            }
+        }
+    }
 }

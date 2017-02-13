@@ -1,103 +1,103 @@
 .side-menu {
-	.reset-ul();
+    .reset-ul();
 
-	&__item {
-		display: block;
+    &__item {
+        display: block;
 
-		border-bottom: 1px solid @color-border;
+        border-bottom: 1px solid @color-border;
 
-		&--superadmin {
-			background: lighten(@color-red, 53%);
-		}
+        &--superadmin {
+            background: lighten(@color-red, 53%);
+        }
 
-		&__link {
-			position: relative;
-			display: block;
-			padding: 15px;
+        &__link {
+            position: relative;
+            display: block;
+            padding: 15px;
 
-			text-decoration: none;
-			text-transform: uppercase;
-			color: @color-darklink;
-			font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: @color-darklink;
+            font-weight: bold;
 
-			&:hover {
-				color: @color-darklink-hover;
-			}
+            &:hover {
+                color: @color-darklink-hover;
+            }
 
-			.side-menu__item--active & {
-				padding-left: 11px;
+            .side-menu__item--active & {
+                padding-left: 11px;
 
-				color: @color-link;
-				border-left: 4px solid @color-blue;
+                color: @color-link;
+                border-left: 4px solid @color-blue;
 
-				&:hover {
-					color: @color-link-hover;
-				}
-			}
+                &:hover {
+                    color: @color-link-hover;
+                }
+            }
 
-			.side-menu__item--superadmin & {
-				border-left-color: @color-red;
-				color: @color-red;
-			}
+            .side-menu__item--superadmin & {
+                border-left-color: @color-red;
+                color: @color-red;
+            }
 
-			&__icon {
-				float: left;
-				margin-right: 5px;
-				position: relative;
-				top: -1px;
+            &__icon {
+                float: left;
+                margin-right: 5px;
+                position: relative;
+                top: -1px;
 
-				color: @color-move;
-				font-weight: normal;
-			}
-		}
-	}
+                color: @color-move;
+                font-weight: normal;
+            }
+        }
+    }
 
-	&__submenu {
-		.reset-ul();
+    &__submenu {
+        .reset-ul();
 
-		&__item {
-			display: block;
+        &__item {
+            display: block;
 
-			&--superadmin {
-				background: lighten(@color-red, 53%);
-			}
+            &--superadmin {
+                background: lighten(@color-red, 53%);
+            }
 
 
-			&__link {
-				display: block;
-				position: relative;
-				padding: 8px 15px;
+            &__link {
+                display: block;
+                position: relative;
+                padding: 8px 15px;
 
-				text-decoration: none;
-				color: @color-darklink;
+                text-decoration: none;
+                color: @color-darklink;
 
-				&:hover {
-					color: @color-darklink-hover;
-				}
+                &:hover {
+                    color: @color-darklink-hover;
+                }
 
-				.side-menu__item--active & {
-					padding-left: 11px;
+                .side-menu__item--active & {
+                    padding-left: 11px;
 
-					border-left: 4px solid @color-blue;
-				}
+                    border-left: 4px solid @color-blue;
+                }
 
-				.side-menu__item--superadmin & {
-					border-left-color: @color-red;
-				}
+                .side-menu__item--superadmin & {
+                    border-left-color: @color-red;
+                }
 
-				.side-menu__submenu__item--active & {
-					color: @color-link;
+                .side-menu__submenu__item--active & {
+                    color: @color-link;
 
-					&:hover {
-						color: @color-link-hover;
-					}
-				}
+                    &:hover {
+                        color: @color-link-hover;
+                    }
+                }
 
-				.side-menu__submenu__item--superadmin & {
-					color: @color-red;
-				}
+                .side-menu__submenu__item--superadmin & {
+                    color: @color-red;
+                }
 
-			}
-		}
-	}
+            }
+        }
+    }
 }

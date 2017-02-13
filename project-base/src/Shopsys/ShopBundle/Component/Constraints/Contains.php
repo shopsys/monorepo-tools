@@ -7,15 +7,15 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class Contains extends Constraint {
+class Contains extends Constraint
+{
+    public $message = 'Field must contain {{ needle }}.';
+    public $needle = null;
 
-	public $message = 'Field must contain {{ needle }}.';
-	public $needle = null;
-
-	public function getRequiredOptions() {
-		return [
-			'needle',
-		];
-	}
-
+    public function getRequiredOptions()
+    {
+        return [
+            'needle',
+        ];
+    }
 }

@@ -4,9 +4,9 @@
 {% block h1 %}{{ 'New article'|trans }}{% endblock %}
 
 {% block article_placement %}
-	{{ form_row(form.placement, { label: 'Location'|trans }) }}
+    {{ form_row(form.placement, { label: 'Location'|trans }) }}
 {% endblock %}
 
 {% block article_urls %}
-	{% do form.urls.setRendered %}
+    {% do form.urls.setRendered %}
 {% endblock %}

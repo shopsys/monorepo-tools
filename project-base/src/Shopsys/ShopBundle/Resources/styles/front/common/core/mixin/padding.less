@@ -1,23 +1,23 @@
 .padding-generator(@i, @step, @max, @postfix: ~'') when (@i <= @max) {
-	&-@{i}@{postfix} {
-		padding: ~'@{i}@{padding-unit}';
-	}
+    &-@{i}@{postfix} {
+        padding: ~'@{i}@{padding-unit}';
+    }
 
-	&-left-@{i}@{postfix} {
-		padding-left: ~'@{i}@{padding-unit}';
-	}
+    &-left-@{i}@{postfix} {
+        padding-left: ~'@{i}@{padding-unit}';
+    }
 
-	&-right-@{i}@{postfix} {
-		padding-right: ~'@{i}@{padding-unit}';
-	}
+    &-right-@{i}@{postfix} {
+        padding-right: ~'@{i}@{padding-unit}';
+    }
 
-	&-bottom-@{i}@{postfix} {
-		padding-bottom: ~'@{i}@{padding-unit}';
-	}
+    &-bottom-@{i}@{postfix} {
+        padding-bottom: ~'@{i}@{padding-unit}';
+    }
 
-	&-top-@{i}@{postfix} {
-		padding-top: ~'@{i}@{padding-unit}';
-	}
+    &-top-@{i}@{postfix} {
+        padding-top: ~'@{i}@{padding-unit}';
+    }
 
-	.padding-generator(@i + @step, @step, @max, @postfix);
+    .padding-generator(@i + @step, @step, @max, @postfix);
 }

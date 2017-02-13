@@ -1,38 +1,38 @@
 <h2>{{ 'Customer orders'|trans }}</h2>
 
 {% if orders|length == 0 %}
-	{{ 'Customer has no orders so far.'|trans }}
+    {{ 'Customer has no orders so far.'|trans }}
 {% else %}
-	<table class="table-main">
-		<thead>
-			<tr>
-				<th>{{ 'Order number'|trans }}</th>
-				<th>{{ 'Billing address'|trans }}</th>
-				<th>{{ 'Shipping address'|trans }}</th>
-				<th>{{ 'Total price including VAT'|trans }}</th>
-				<th>{{ 'Status'|trans }}</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for order in orders %}
-				<tr>
-					<td>
-						<a href="{{ url('admin_order_edit', { id: order.id }) }}" target="_blank">
-							{{ order.number }}<i class="svg svg-arrow-simple in-icon in-icon--detail margin-left-5"></i>
-						</a>
-					</td>
-					<td>
-						{{ order.street }}<br />
-						{{ order.city }}, {{ order.postcode }}
-					</td>
-					<td>
-						{{ order.deliveryStreet }}<br />
-						{{ order.deliveryCity }}, {{ order.deliveryPostcode }}
-					</td>
-					<td>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
-					<td>{{ order.status.name }}</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+    <table class="table-main">
+        <thead>
+            <tr>
+                <th>{{ 'Order number'|trans }}</th>
+                <th>{{ 'Billing address'|trans }}</th>
+                <th>{{ 'Shipping address'|trans }}</th>
+                <th>{{ 'Total price including VAT'|trans }}</th>
+                <th>{{ 'Status'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>
+                        <a href="{{ url('admin_order_edit', { id: order.id }) }}" target="_blank">
+                            {{ order.number }}<i class="svg svg-arrow-simple in-icon in-icon--detail margin-left-5"></i>
+                        </a>
+                    </td>
+                    <td>
+                        {{ order.street }}<br />
+                        {{ order.city }}, {{ order.postcode }}
+                    </td>
+                    <td>
+                        {{ order.deliveryStreet }}<br />
+                        {{ order.deliveryCity }}, {{ order.deliveryPostcode }}
+                    </td>
+                    <td>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
+                    <td>{{ order.status.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endif %}

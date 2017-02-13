@@ -12,88 +12,91 @@ use Shopsys\ShopBundle\Form\FriendlyUrlType;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 
-class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest {
+class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest
+{
+    /**
+     * @inheritdoc
+     */
+    protected function createValidator()
+    {
+        $domainConfigs = [
+            new DomainConfig(1, 'http://example.cz', 'name1', 'cs'),
+            new DomainConfig(2, 'http://example.com', 'name2', 'en'),
+        ];
+        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $domain = new Domain($domainConfigs, $settingMock);
 
-	/**
-	 * @inheritdoc
-	 */
-	protected function createValidator() {
-		$domainConfigs = [
-			new DomainConfig(1, 'http://example.cz', 'name1', 'cs'),
-			new DomainConfig(2, 'http://example.com', 'name2', 'en'),
-		];
-		$settingMock = $this->getMock(Setting::class, [], [], '', false);
-		$domain = new Domain($domainConfigs, $settingMock);
+        $routerMock = $this->getMockBuilder(RouterInterface::class)
+            ->setMethods(['match'])
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $routerMock->method('match')->willReturnCallback(function ($path) {
+            if ($path !== '/existing-url/') {
+                throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
+            }
+        });
 
-		$routerMock = $this->getMockBuilder(RouterInterface::class)
-			->setMethods(['match'])
-			->disableOriginalConstructor()
-			->getMockForAbstractClass();
-		$routerMock->method('match')->willReturnCallback(function ($path) {
-			if ($path !== '/existing-url/') {
-				throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
-			}
-		});
+        $domainRouterFactoryMock = $this->getMock(DomainRouterFactory::class, ['getRouter'], [], '', false);
+        $domainRouterFactoryMock->method('getRouter')->willReturn($routerMock);
 
-		$domainRouterFactoryMock = $this->getMock(DomainRouterFactory::class, ['getRouter'], [], '', false);
-		$domainRouterFactoryMock->method('getRouter')->willReturn($routerMock);
+        return new UniqueSlugsOnDomainsValidator($domain, $domainRouterFactoryMock);
+    }
 
-		return new UniqueSlugsOnDomainsValidator($domain, $domainRouterFactoryMock);
-	}
+    public function testValidateSameSlugsOnDifferentDomains()
+    {
+        $values = [
+            [
+                FriendlyUrlType::FIELD_DOMAIN => 1,
+                FriendlyUrlType::FIELD_SLUG => 'new-url/',
+            ],
+            [
+                FriendlyUrlType::FIELD_DOMAIN => 2,
+                FriendlyUrlType::FIELD_SLUG => 'new-url/',
+            ],
+        ];
+        $constraint = new UniqueSlugsOnDomains();
 
-	public function testValidateSameSlugsOnDifferentDomains() {
-		$values = [
-			[
-				FriendlyUrlType::FIELD_DOMAIN => 1,
-				FriendlyUrlType::FIELD_SLUG => 'new-url/',
-			],
-			[
-				FriendlyUrlType::FIELD_DOMAIN => 2,
-				FriendlyUrlType::FIELD_SLUG => 'new-url/',
-			],
-		];
-		$constraint = new UniqueSlugsOnDomains();
+        $this->validator->validate($values, $constraint);
+        $this->assertNoViolation();
+    }
 
-		$this->validator->validate($values, $constraint);
-		$this->assertNoViolation();
-	}
+    public function testValidateDuplicateSlugsOnSameDomain()
+    {
+        $values = [
+            [
+                FriendlyUrlType::FIELD_DOMAIN => 1,
+                FriendlyUrlType::FIELD_SLUG => 'new-url/',
+            ],
+            [
+                FriendlyUrlType::FIELD_DOMAIN => 1,
+                FriendlyUrlType::FIELD_SLUG => 'new-url/',
+            ],
+        ];
+        $constraint = new UniqueSlugsOnDomains();
+        $constraint->messageDuplicate = 'myMessage';
 
-	public function testValidateDuplicateSlugsOnSameDomain() {
-		$values = [
-			[
-				FriendlyUrlType::FIELD_DOMAIN => 1,
-				FriendlyUrlType::FIELD_SLUG => 'new-url/',
-			],
-			[
-				FriendlyUrlType::FIELD_DOMAIN => 1,
-				FriendlyUrlType::FIELD_SLUG => 'new-url/',
-			],
-		];
-		$constraint = new UniqueSlugsOnDomains();
-		$constraint->messageDuplicate = 'myMessage';
+        $this->validator->validate($values, $constraint);
 
-		$this->validator->validate($values, $constraint);
+        $this->buildViolation('myMessage')
+            ->setParameter('{{ url }}', 'http://example.cz/new-url/')
+            ->assertRaised();
+    }
 
-		$this->buildViolation('myMessage')
-			->setParameter('{{ url }}', 'http://example.cz/new-url/')
-			->assertRaised();
-	}
+    public function testValidateExistingSlug()
+    {
+        $values = [
+            [
+                FriendlyUrlType::FIELD_DOMAIN => 1,
+                FriendlyUrlType::FIELD_SLUG => 'existing-url/',
+            ],
+        ];
+        $constraint = new UniqueSlugsOnDomains();
+        $constraint->message = 'myMessage';
 
-	public function testValidateExistingSlug() {
-		$values = [
-			[
-				FriendlyUrlType::FIELD_DOMAIN => 1,
-				FriendlyUrlType::FIELD_SLUG => 'existing-url/',
-			],
-		];
-		$constraint = new UniqueSlugsOnDomains();
-		$constraint->message = 'myMessage';
+        $this->validator->validate($values, $constraint);
 
-		$this->validator->validate($values, $constraint);
-
-		$this->buildViolation('myMessage')
-			->setParameter('{{ url }}', 'http://example.cz/existing-url/')
-			->assertRaised();
-	}
-
+        $this->buildViolation('myMessage')
+            ->setParameter('{{ url }}', 'http://example.cz/existing-url/')
+            ->assertRaised();
+    }
 }
