@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormView;
 
 class MoneyType extends AbstractTypeExtension
 {
-     /**
+    /**
      * @var \Shopsys\ShopBundle\Model\Localization\Localization
      */
     private $localization;
