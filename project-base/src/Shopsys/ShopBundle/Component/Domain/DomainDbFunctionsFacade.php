@@ -47,16 +47,14 @@ class DomainDbFunctionsFacade
         }
 
         $query = $this->em->createNativeQuery(
-            '
-            CREATE OR REPLACE FUNCTION get_domain_ids_by_locale(locale text) RETURNS SETOF integer AS $$
+            'CREATE OR REPLACE FUNCTION get_domain_ids_by_locale(locale text) RETURNS SETOF integer AS $$
             BEGIN
                 CASE
                     ' . implode("\n", $domainIdsByLocaleSqlClauses) . '
                     ELSE RAISE EXCEPTION \'Locale % does not exists\', locale;
                 END CASE;
             END
-            $$ LANGUAGE plpgsql IMMUTABLE;
-            ',
+            $$ LANGUAGE plpgsql IMMUTABLE;',
             new ResultSetMapping()
         );
 
@@ -73,16 +71,14 @@ class DomainDbFunctionsFacade
         }
 
         $query = $this->em->createNativeQuery(
-            '
-            CREATE OR REPLACE FUNCTION get_domain_locale(domain_id integer) RETURNS text AS $$
+            'CREATE OR REPLACE FUNCTION get_domain_locale(domain_id integer) RETURNS text AS $$
             BEGIN
                 CASE
                     ' . implode("\n", $localeByDomainIdSqlClauses) . '
                     ELSE RAISE EXCEPTION \'Domain with ID % does not exists\', domain_id;
                 END CASE;
             END
-            $$ LANGUAGE plpgsql IMMUTABLE;
-            ',
+            $$ LANGUAGE plpgsql IMMUTABLE;',
             new ResultSetMapping()
         );
 

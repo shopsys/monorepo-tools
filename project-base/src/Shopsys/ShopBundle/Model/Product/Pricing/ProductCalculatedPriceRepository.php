@@ -59,8 +59,11 @@ class ProductCalculatedPriceRepository
      */
     public function createProductCalculatedPricesForPricingGroup(PricingGroup $pricingGroup)
     {
-        $query = $this->em->createNativeQuery('INSERT INTO product_calculated_prices (product_id, pricing_group_id, price_with_vat)
-            SELECT id, :pricingGroupId, :priceWithVat FROM products', new ResultSetMapping());
+        $query = $this->em->createNativeQuery(
+            'INSERT INTO product_calculated_prices (product_id, pricing_group_id, price_with_vat)
+            SELECT id, :pricingGroupId, :priceWithVat FROM products',
+            new ResultSetMapping()
+        );
         $query->execute([
             'pricingGroupId' => $pricingGroup->getId(),
             'priceWithVat' => null,

@@ -45,8 +45,7 @@ class SettingValueRepository
     public function copyAllMultidomainSettings($fromDomainId, $toDomainId)
     {
         $query = $this->em->createNativeQuery(
-            '
-            INSERT INTO setting_values (name, value, type, domain_id)
+            'INSERT INTO setting_values (name, value, type, domain_id)
             SELECT name, value, type, :toDomainId
             FROM setting_values
             WHERE domain_id = :fromDomainId
@@ -55,8 +54,7 @@ class SettingValueRepository
                     FROM setting_values
                     WHERE domain_id IS NOT NULL
                         AND domain_id != :commonDomainId
-                )
-            ',
+                )',
             new ResultSetMapping()
         );
         $query->execute([

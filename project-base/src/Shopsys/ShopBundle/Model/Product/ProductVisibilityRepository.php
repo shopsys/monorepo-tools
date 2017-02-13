@@ -95,8 +95,7 @@ class ProductVisibilityRepository
         }
 
         $query = $this->em->createNativeQuery(
-            '
-            UPDATE products AS p
+            'UPDATE products AS p
             SET calculated_visibility = (p.calculated_hidden = FALSE) AND EXISTS(
                     SELECT 1
                     FROM product_visibilities AS pv
@@ -115,8 +114,11 @@ class ProductVisibilityRepository
      */
     public function createAndRefreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup, $domainId)
     {
-        $query = $this->em->createNativeQuery('INSERT INTO product_visibilities (product_id, pricing_group_id, domain_id, visible)
-            SELECT id, :pricingGroupId, :domainId, :calculatedVisibility FROM products', new ResultSetMapping());
+        $query = $this->em->createNativeQuery(
+            'INSERT INTO product_visibilities (product_id, pricing_group_id, domain_id, visible)
+            SELECT id, :pricingGroupId, :domainId, :calculatedVisibility FROM products',
+            new ResultSetMapping()
+        );
         $query->execute([
             'pricingGroupId' => $pricingGroup->getId(),
             'domainId' => $domainId,
@@ -177,8 +179,8 @@ class ProductVisibilityRepository
             $onlyMarkedProductsCondition = '';
         }
 
-        $query = $this->em->createNativeQuery('
-            UPDATE product_visibilities AS pv
+        $query = $this->em->createNativeQuery(
+            'UPDATE product_visibilities AS pv
             SET visible = CASE
                     WHEN (
                         p.calculated_hidden = FALSE
@@ -223,8 +225,10 @@ class ProductVisibilityRepository
             WHERE p.id = pv.product_id
                 AND pv.domain_id = :domainId
                 AND pv.domain_id = pd.domain_id
-                AND pv.pricing_group_id = :pricingGroupId '
-            . $onlyMarkedProductsCondition, new ResultSetMapping());
+                AND pv.pricing_group_id = :pricingGroupId
+            ' . $onlyMarkedProductsCondition,
+            new ResultSetMapping()
+        );
 
         foreach ($this->pricingGroupRepository->getAll() as $pricingGroup) {
             $domain = $this->domain->getDomainConfigById($pricingGroup->getDomainId());
@@ -249,8 +253,8 @@ class ProductVisibilityRepository
             $onlyMarkedProductsCondition = '';
         }
 
-        $query = $this->em->createNativeQuery('
-            UPDATE product_visibilities AS pv
+        $query = $this->em->createNativeQuery(
+            'UPDATE product_visibilities AS pv
             SET visible = FALSE
             FROM products AS p
             WHERE p.id = pv.product_id
@@ -263,8 +267,10 @@ class ProductVisibilityRepository
                         AND mpv.domain_id = pv.domain_id
                         AND mpv.pricing_group_id = pv.pricing_group_id
                         AND mpv.visible = FALSE
-                ) '
-            . $onlyMarkedProductsCondition, new ResultSetMapping());
+                )
+            ' . $onlyMarkedProductsCondition,
+            new ResultSetMapping()
+        );
 
         $query->execute([
             'variantTypeVariant' => Product::VARIANT_TYPE_VARIANT,
@@ -282,7 +288,8 @@ class ProductVisibilityRepository
             $onlyMarkedProductsCondition = '';
         }
 
-        $query = $this->em->createNativeQuery('UPDATE product_visibilities AS pv
+        $query = $this->em->createNativeQuery(
+            'UPDATE product_visibilities AS pv
             SET visible = FALSE
             FROM products AS p
             WHERE p.id = pv.product_id
@@ -297,8 +304,10 @@ class ProductVisibilityRepository
                         AND vpv.pricing_group_id = pv.pricing_group_id
                     WHERE vp.main_variant_id = p.id
                         AND vpv.visible = TRUE
-                ) '
-            . $onlyMarkedProductsCondition, new ResultSetMapping());
+                )
+            ' . $onlyMarkedProductsCondition,
+            new ResultSetMapping()
+        );
 
         $query->execute([
             'variantTypeMain' => Product::VARIANT_TYPE_MAIN,
