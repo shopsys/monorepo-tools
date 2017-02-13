@@ -80,7 +80,7 @@ class UserDataFixture
         $isFirstUser = true;
 
         foreach ($this->domain->getAll() as $domainConfig) {
-            for ($i = 0; $i <  self::USERS_ON_EACH_DOMAIN; $i++) {
+            for ($i = 0; $i < self::USERS_ON_EACH_DOMAIN; $i++) {
                 $user = $this->createCustomerOnDomain($domainConfig->getId(), $i);
 
                 if ($isFirstUser) {

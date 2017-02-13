@@ -221,7 +221,7 @@ class Grid
     {
         if (array_key_exists($id, $this->columns)) {
             throw new \Shopsys\ShopBundle\Component\Grid\Exception\DuplicateColumnIdException(
-                'Duplicate column id "' . $id . '" in grid "' . $this->id .  '"'
+                'Duplicate column id "' . $id . '" in grid "' . $this->id . '"'
             );
         }
         $column = new Column($id, $sourceColumnName, $title, $sortable);
