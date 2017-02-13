@@ -1,39 +1,26 @@
 <?php
 
 $config = Symfony\CS\Config\Config::create()
-	->level(Symfony\CS\FixerInterface::NONE_LEVEL)
+	->level(Symfony\CS\FixerInterface::PSR2_LEVEL)
 	// list of all available fixers: https://github.com/FriendsOfPHP/PHP-CS-Fixer/
 	->fixers([
 		//'align_double_arrow', // opposite to unalign_double_arrow
 		//'align_equals', // opposite to unalign_equals
 		'blankline_after_open_tag',
-		//'braces', // do not want open braces at new line
 		'concat_with_spaces',
 		//'concat_without_spaces', // concatenation operator should be surrounded by single space
 		'double_arrow_multiline_whitespaces',
 		'duplicate_semicolon',
-		'elseif',
 		//'empty_return', // rewrites "return null;" to "return;"
-		'encoding',
-		'eof_ending',
 		'ereg_to_preg',
 		'extra_empty_lines',
-		'function_call_space',
-		'function_declaration',
 		// 'header_comment', // header comments does not matter
 		'include',
-		//'indentation', // uses spaces instead of tabs
 		'join_function',
-		'line_after_namespace',
-		'linefeed',
 		'list_commas',
 		//'long_array_syntax', // opposite to short_array_syntax
-		'lowercase_constants',
-		'lowercase_keywords',
-		'method_argument_space',
 		'multiline_array_trailing_comma',
 		'multiline_spaces_before_semicolon',
-		'multiple_use',
 		'namespace_no_leading_whitespace',
 		'newline_after_open_tag',
 		'new_with_braces',
@@ -43,8 +30,6 @@ $config = Symfony\CS\Config\Config::create()
 		'object_operator',
 		'operators_spaces',
 		'ordered_use',
-		'parenthesis',
-		'php_closing_tag',
 		'php4_constructor',
 		'phpdoc_indent',
 		'phpdoc_no_access',
@@ -66,22 +51,18 @@ $config = Symfony\CS\Config\Config::create()
 		//'return', // not every return looks good with empty line before it
 		'self_accessor',
 		'short_array_syntax',
-		'short_tag',
 		'single_array_no_trailing_comma',
 		'single_blank_line_before_namespace',
-		'single_line_after_imports',
 		'single_quote',
 		'spaces_before_semicolon',
 		//'spaces_cast', // cast and variable should not be separated by a space
 		'standardize_not_equal',
 		'ternary_spaces',
-		'trailing_spaces',
 		'trim_array_spaces',
 		'unalign_double_arrow',
 		'unalign_equals',
 		'unary_operators_spaces',
 		//'unused_use', // we use custom UnusedUseFixer
-		'visibility',
 		'whitespacy_lines',
 	])
 	->addCustomFixer(new ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer())
