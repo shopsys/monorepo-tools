@@ -17,12 +17,12 @@
 <button name="asdf"></button>
 
 <button
-	attr="asdf"
+    attr="asdf"
 />
 
 <button
-	attr="asdf"
-	type="submit"
+    attr="asdf"
+    type="submit"
 />
 
 <a href="asdf"/>
