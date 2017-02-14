@@ -1,24 +1,24 @@
 {
-	"name": "shopsys/coding-standards",
-	"description": "Common coding standards for new ShopSys projects",
-	"authors": [
-		{
-			"name": "Miroslav Sustek",
-			"email": "miroslav.sustek@shopsys.cz"
-		}
-	],
-	"autoload": {
-		"psr-4": {
-			"ShopSys\\": "src/ShopSys/"
-		}
-	},
-	"require": {
-		"friendsofphp/php-cs-fixer": "~1.11",
-		"jakub-onderka/php-parallel-lint": "~0.9",
-		"phpmd/phpmd": "~2.0",
-		"squizlabs/php_codesniffer": "~2.8"
-	},
-	"require-dev": {
-		"phpunit/phpunit": "~5.2.9"
-	}
+    "name": "shopsys/coding-standards",
+    "description": "Common coding standards for new ShopSys projects",
+    "authors": [
+        {
+            "name": "Miroslav Sustek",
+            "email": "miroslav.sustek@shopsys.cz"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ShopSys\\": "src/ShopSys/"
+        }
+    },
+    "require": {
+        "friendsofphp/php-cs-fixer": "~1.11",
+        "jakub-onderka/php-parallel-lint": "~0.9",
+        "phpmd/phpmd": "~2.0",
+        "squizlabs/php_codesniffer": "~2.8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.2.9"
+    }
 }

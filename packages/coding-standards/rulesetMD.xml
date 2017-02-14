@@ -1,119 +1,120 @@
 <?xml version="1.0"?>
 <ruleset name="ruleset"
-				 xmlns="http://pmd.sf.net/ruleset/1.0.0"
-				 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-				 xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0	http://pmd.sf.net/ruleset_xml_schema.xsd"
-				 xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
-	<description>ShopSys Coding Standards</description>
+    xmlns="http://pmd.sf.net/ruleset/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+    xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd"
+>
+    <description>ShopSys Coding Standards</description>
 
-	<!--
-		<rule ref="rulesets/cleancode.xml/ElseExpression" />
+    <!--
+        <rule ref="rulesets/cleancode.xml/ElseExpression" />
 
-		Too strict. Failing example:
-		if ($something) {
-			doA();
-		} else {
-			do();
-		}
-	-->
+        Too strict. Failing example:
+        if ($something) {
+            doA();
+        } else {
+            do();
+        }
+    -->
 
-	<!--
-		<rule ref="rulesets/cleancode.xml/BooleanArgumentFlag" />
+    <!--
+        <rule ref="rulesets/cleancode.xml/BooleanArgumentFlag" />
 
-		Too Strict. Failing example:
-		class MailTemplateData {
-			public function __construct($name = null, $subject = null, $body = null, $sendMail = false) {
-				...
-			}
-		}
-	-->
+        Too Strict. Failing example:
+        class MailTemplateData {
+            public function __construct($name = null, $subject = null, $body = null, $sendMail = false) {
+                ...
+            }
+        }
+    -->
 
-	<rule ref="rulesets/codesize.xml/CyclomaticComplexity">
-		<properties>
-			<property name="reportLevel" value="13"/>
-			<property name="showClassesComplexity" value="true"/>
-			<property name="showMethodsComplexity" value="true"/>
-		</properties>
-	</rule>
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
+        <properties>
+            <property name="reportLevel" value="13"/>
+            <property name="showClassesComplexity" value="true"/>
+            <property name="showMethodsComplexity" value="true"/>
+        </properties>
+    </rule>
 
-	<rule ref="rulesets/codesize.xml/ExcessiveMethodLength">
-		<properties>
-			<property name="minimum" value="51"/>
-			<property name="ignore-whitespace" value="true"/>
-		</properties>
-	</rule>
+    <rule ref="rulesets/codesize.xml/ExcessiveMethodLength">
+        <properties>
+            <property name="minimum" value="51"/>
+            <property name="ignore-whitespace" value="true"/>
+        </properties>
+    </rule>
 
-	<rule ref="rulesets/codesize.xml/ExcessiveClassLength">
-		<properties>
-			<property name="minimum"  value="501"/>
-			<property name="ignore-whitespace" value="true"/>
-		</properties>
-	</rule>
+    <rule ref="rulesets/codesize.xml/ExcessiveClassLength">
+        <properties>
+            <property name="minimum"  value="501"/>
+            <property name="ignore-whitespace" value="true"/>
+        </properties>
+    </rule>
 
-	<rule ref="rulesets/codesize.xml/ExcessivePublicCount">
-		<properties>
-			<property name="minimum" value="31"/>
-		</properties>
-	</rule>
+    <rule ref="rulesets/codesize.xml/ExcessivePublicCount">
+        <properties>
+            <property name="minimum" value="31"/>
+        </properties>
+    </rule>
 
-	<rule ref="rulesets/controversial.xml/Superglobals" />
-	<rule ref="rulesets/controversial.xml/CamelCaseClassName" />
+    <rule ref="rulesets/controversial.xml/Superglobals" />
+    <rule ref="rulesets/controversial.xml/CamelCaseClassName" />
 
-	<rule
-		name="CamelCasePropertyName"
-		class="ShopSys\CodingStandards\MessDetector\CamelCasePropertyName"
-		message="The property {0} is not named in camelCase."
-	>
-		<priority>1</priority>
-	</rule>
+    <rule
+        name="CamelCasePropertyName"
+        class="ShopSys\CodingStandards\MessDetector\CamelCasePropertyName"
+        message="The property {0} is not named in camelCase."
+    >
+        <priority>1</priority>
+    </rule>
 
-	<rule ref="rulesets/controversial.xml/CamelCaseMethodName" />
-	<rule ref="rulesets/controversial.xml/CamelCaseParameterName" />
-	<rule ref="rulesets/controversial.xml/CamelCaseVariableName" />
+    <rule ref="rulesets/controversial.xml/CamelCaseMethodName" />
+    <rule ref="rulesets/controversial.xml/CamelCaseParameterName" />
+    <rule ref="rulesets/controversial.xml/CamelCaseVariableName" />
 
-	<rule ref="rulesets/design.xml/ExitExpression" />
-	<rule ref="rulesets/design.xml/EvalExpression" />
-	<rule ref="rulesets/design.xml/GotoStatement" />
+    <rule ref="rulesets/design.xml/ExitExpression" />
+    <rule ref="rulesets/design.xml/EvalExpression" />
+    <rule ref="rulesets/design.xml/GotoStatement" />
 
-	<rule ref="rulesets/naming.xml/ShortVariable">
-		<properties>
-			<property name="minimum" value="2"/>
-		</properties>
-	</rule>
+    <rule ref="rulesets/naming.xml/ShortVariable">
+        <properties>
+            <property name="minimum" value="2"/>
+        </properties>
+    </rule>
 
-	<rule ref="rulesets/naming.xml/ShortMethodName">
-		<properties>
-			<property name="minimum" value="2"/>
-		</properties>
-	</rule>
+    <rule ref="rulesets/naming.xml/ShortMethodName">
+        <properties>
+            <property name="minimum" value="2"/>
+        </properties>
+    </rule>
 
-	<rule ref="rulesets/naming.xml/ConstantNamingConventions" />
+    <rule ref="rulesets/naming.xml/ConstantNamingConventions" />
 
-	<!--
-		<rule ref="rulesets/unusedcode.xml/UnusedPrivateField" />
+    <!--
+        <rule ref="rulesets/unusedcode.xml/UnusedPrivateField" />
 
-		Too strict. Failing examples:
-		- autoincrement $id in entities that are touched only by Doctrine
-		- auxiliary data object in tests
-	-->
+        Too strict. Failing examples:
+        - autoincrement $id in entities that are touched only by Doctrine
+        - auxiliary data object in tests
+    -->
 
-	<!--
-		<rule ref="rulesets/unusedcode.xml/UnusedLocalVariable" />
+    <!--
+        <rule ref="rulesets/unusedcode.xml/UnusedLocalVariable" />
 
-		Too strict. Failing example:
-		foreach ($array as $key => $item) {
-			doSomethingOnlyWithKey($key);
-		}
-	-->
+        Too strict. Failing example:
+        foreach ($array as $key => $item) {
+            doSomethingOnlyWithKey($key);
+        }
+    -->
 
-	<rule ref="rulesets/unusedcode.xml/UnusedPrivateMethod" />
+    <rule ref="rulesets/unusedcode.xml/UnusedPrivateMethod" />
 
-	<!--
-		<rule ref="rulesets/unusedcode.xml/UnusedFormalParameter" />
+    <!--
+        <rule ref="rulesets/unusedcode.xml/UnusedFormalParameter" />
 
-		Too strict. Failing example:
-		- unused parameters in overloaded methods (parameters must be present
-		  so that the inteface is complied)
-	-->
+        Too strict. Failing example:
+        - unused parameters in overloaded methods (parameters must be present
+          so that the inteface is complied)
+    -->
 
 </ruleset>
