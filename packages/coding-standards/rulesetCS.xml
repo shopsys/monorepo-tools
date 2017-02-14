@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="ruleset">
-	<description>ShopSys Coding Standards</description>
+    <description>ShopSys Coding Standards</description>
 
-	<!-- Include the whole PSR-2 standard -->
-	<rule ref="PSR2"/>
+    <!-- Include the whole PSR-2 standard -->
+    <rule ref="PSR2"/>
 
-	<!-- Fine-tuning of PSR-2 standard -->
-	<rule ref="Generic.Files.LineLength.TooLong">
-		<!--
-			Lower the severity so that this warning is ignored with default severity.
-			We can use this sniff for code-reviews but it does not block continuous integration.
-			Sometimes, there is no other way than have longer lines. For example when using
-			fully-qualified namespaces in type hinting comments.
-			Using @codingStandardsIgnoreLine to annotate comments would be absurd.
-		-->
-		<severity>3</severity>
-	</rule>
+    <!-- Fine-tuning of PSR-2 standard -->
+    <rule ref="Generic.Files.LineLength.TooLong">
+        <!--
+            Lower the severity so that this warning is ignored with default severity.
+            We can use this sniff for code-reviews but it does not block continuous integration.
+            Sometimes, there is no other way than have longer lines. For example when using
+            fully-qualified namespaces in type hinting comments.
+            Using @codingStandardsIgnoreLine to annotate comments would be absurd.
+        -->
+        <severity>3</severity>
+    </rule>
 
-	<!-- Custom ShopSys standards -->
-	<rule ref="Generic.CodeAnalysis.EmptyStatement">
-		<exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedCATCH"/>
-	</rule>
-	<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop"/>
-	<rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"/>
-	<rule ref="Generic.CodeAnalysis.JumbledIncrementer"/>
-	<rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
-	<rule ref="Generic.Commenting.Todo"/>
-	<rule ref="Generic.Commenting.Fixme"/>
-	<rule ref="Generic.Formatting.NoSpaceAfterCast"/>
-	<rule ref="Generic.Functions.CallTimePassByReference"/>
-	<rule ref="Generic.NamingConventions.ConstructorName"/>
-	<rule ref="Generic.NamingConventions.CamelCapsFunctionName"/>
-	<rule ref="Generic.PHP.NoSilencedErrors"/>
-	<rule ref="MySource.PHP.EvalObjectFactory"/>
-	<rule ref="MySource.PHP.GetRequestData"/>
-	<rule ref="PEAR.Commenting.InlineComment"/>
-	<rule ref="PEAR.NamingConventions.ValidClassName"/>
-	<rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
-	<rule ref="Squiz.PHP.DisallowMultipleAssignments"/>
-	<rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops"/>
-	<rule ref="Squiz.PHP.Eval"/>
-	<rule ref="Squiz.PHP.GlobalKeyword"/>
-	<rule ref="Squiz.PHP.InnerFunctions"/>
-	<rule ref="Squiz.PHP.LowercasePHPFunctions"/>
-	<rule ref="Squiz.PHP.NonExecutableCode"/>
-	<rule ref="Squiz.Scope.MemberVarScope"/>
-	<rule ref="Squiz.Scope.StaticThisUsage"/>
-	<rule ref="Squiz.Strings.DoubleQuoteUsage"/>
-	<rule ref="Squiz.WhiteSpace.CastSpacing"/>
-	<rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
-	<rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
-	<rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
-	<rule ref="Zend.Files.ClosingTag"/>
+    <!-- Custom ShopSys standards -->
+    <rule ref="Generic.CodeAnalysis.EmptyStatement">
+        <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedCATCH"/>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop"/>
+    <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"/>
+    <rule ref="Generic.CodeAnalysis.JumbledIncrementer"/>
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
+    <rule ref="Generic.Commenting.Todo"/>
+    <rule ref="Generic.Commenting.Fixme"/>
+    <rule ref="Generic.Formatting.NoSpaceAfterCast"/>
+    <rule ref="Generic.Functions.CallTimePassByReference"/>
+    <rule ref="Generic.NamingConventions.ConstructorName"/>
+    <rule ref="Generic.NamingConventions.CamelCapsFunctionName"/>
+    <rule ref="Generic.PHP.NoSilencedErrors"/>
+    <rule ref="MySource.PHP.EvalObjectFactory"/>
+    <rule ref="MySource.PHP.GetRequestData"/>
+    <rule ref="PEAR.Commenting.InlineComment"/>
+    <rule ref="PEAR.NamingConventions.ValidClassName"/>
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
+    <rule ref="Squiz.PHP.DisallowMultipleAssignments"/>
+    <rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops"/>
+    <rule ref="Squiz.PHP.Eval"/>
+    <rule ref="Squiz.PHP.GlobalKeyword"/>
+    <rule ref="Squiz.PHP.InnerFunctions"/>
+    <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
+    <rule ref="Squiz.PHP.NonExecutableCode"/>
+    <rule ref="Squiz.Scope.MemberVarScope"/>
+    <rule ref="Squiz.Scope.StaticThisUsage"/>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage"/>
+    <rule ref="Squiz.WhiteSpace.CastSpacing"/>
+    <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
+    <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
+    <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
+    <rule ref="Zend.Files.ClosingTag"/>
 </ruleset>
