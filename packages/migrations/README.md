@@ -10,15 +10,15 @@ This bundle uses [DoctrineMigrationsBundle](https://symfony.com/doc/current/bund
 ## To be able to use this bundle, you need to do following:
 1. In your applications `composer.json` add repository
 
-	```
-	"type": "vcs",
-	"url": "https://github.com/shopsys/migrations.git"
-	```
+    ```
+    "type": "vcs",
+    "url": "https://github.com/shopsys/migrations.git"
+    ```
 2. Require `shopsys/migrations` in `composer.json`
 3. Register bundles in your `AppKernel.php`:
 
-	```
-	new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-	new ShopSys\MigrationBundle\ShopSysMigrationBundle(),
-	```
+    ```
+    new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+    new ShopSys\MigrationBundle\ShopSysMigrationBundle(),
+    ```
 4. Configure `DoctrineMigrationsBundle` according to its documentation (see https://symfony.com/doc/current/bundles/DoctrineMigrationsBundle/index.html#configuration)
