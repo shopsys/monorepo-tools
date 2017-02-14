@@ -83,7 +83,7 @@
         "sensio/distribution-bundle": "4.0.1",
         "sensio/framework-extra-bundle": "3.0.10",
         "sensio/generator-bundle": "2.5.3",
-        "shopsys/migrations": "1.4.2",
+        "shopsys/migrations": "2.0.0",
         "stof/doctrine-extensions-bundle": "1.2.1",
         "symfony/assetic-bundle": "2.6.1",
         "symfony/finder": "2.7.3",
