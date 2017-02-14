@@ -9,6 +9,7 @@ class GenerateMigrationsService
 {
     const LINE_LENGTH_LIMIT = 100;
     const HIGHLIGHT_OFF = false;
+    const INDENT_CHARACTERS = '    ';
     const INDENT_TABULATOR_COUNT = 3;
 
     /**
@@ -99,7 +100,7 @@ class GenerateMigrationsService
     private function formatSqlQueryWithTabs($query)
     {
         $previousTab = SqlFormatter::$tab;
-        SqlFormatter::$tab = "\t";
+        SqlFormatter::$tab = self::INDENT_CHARACTERS;
 
         $formattedQuery = SqlFormatter::format($query, self::HIGHLIGHT_OFF);
 
@@ -115,7 +116,7 @@ class GenerateMigrationsService
     private function indentSqlCommandLines(array $queryLines)
     {
         return array_map(function ($queryLine) {
-            return str_repeat("\t", self::INDENT_TABULATOR_COUNT) . $queryLine;
+            return str_repeat(self::INDENT_CHARACTERS, self::INDENT_TABULATOR_COUNT) . $queryLine;
         }, $queryLines);
     }
 
