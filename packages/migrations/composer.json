@@ -25,6 +25,6 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~5.2",
-        "shopsys/coding-standards": "2.0.0"
+        "shopsys/coding-standards": "2.0.1"
     }
 }
