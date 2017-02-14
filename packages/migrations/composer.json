@@ -8,6 +8,12 @@
 			]
 		}
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/shopsys/coding-standards.git"
+		}
+	],
 	"require": {
 		"doctrine/dbal": "~2.5",
 		"doctrine/doctrine-migrations-bundle": "~1.1",
@@ -18,6 +24,7 @@
 		"symfony/templating": "~2.7.3 || ~3"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "~5.2"
+		"phpunit/phpunit": "~5.2",
+		"shopsys/coding-standards": "2.0.0"
 	}
 }
