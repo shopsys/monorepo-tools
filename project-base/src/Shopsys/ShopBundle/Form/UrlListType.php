@@ -91,7 +91,6 @@ class UrlListType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
                 'choice_list' => new ObjectChoiceList($friendlyUrls, 'slug', [], null, 'slug'),
-                'data_class' => FriendlyUrl::class,
                 'invalid_message' => 'Previously selected main URL dos not exist any more',
             ]);
         }
