@@ -86,7 +86,6 @@
         "shopsys/migrations": "2.0.0",
         "stof/doctrine-extensions-bundle": "1.2.1",
         "symfony/assetic-bundle": "2.6.1",
-        "symfony/finder": "2.7.3",
         "symfony/monolog-bundle": "2.7.1",
         "symfony/swiftmailer-bundle": "2.3.8",
         "symfony/symfony": "2.7.3",
