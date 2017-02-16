@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e6ce6fa177d41368d3131e79c42be80",
+    "content-hash": "17386c7358a9c2a67f03444550858cf4",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -2186,45 +2186,43 @@
         },
         {
             "name": "jms/translation-bundle",
-            "version": "dev-fix-external-translations",
+            "version": "dev-fix-external-translations-1-3-1",
             "target-dir": "JMS/TranslationBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/JMSTranslationBundle.git",
-                "reference": "527da12"
+                "reference": "02048b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/JMSTranslationBundle/zipball/527da12",
-                "reference": "527da12",
+                "url": "https://api.github.com/repos/shopsys/JMSTranslationBundle/zipball/02048b",
+                "reference": "02048b",
                 "shasum": ""
             },
             "require": {
-                "nikic/php-parser": "0.9.4",
-                "symfony/console": "*",
-                "symfony/framework-bundle": "~2.1"
+                "nikic/php-parser": "^1.4 || ^2.0",
+                "php": "^5.3.3 || ^7.0",
+                "symfony/console": "^2.3 || ^3.0",
+                "symfony/framework-bundle": "^2.3 || ^3.0"
             },
             "conflict": {
-                "twig/twig": "1.10.2"
+                "twig/twig": "<1.12"
             },
             "require-dev": {
-                "jms/di-extra-bundle": ">=1.1",
-                "sensio/framework-extra-bundle": "*",
-                "symfony/browser-kit": "*",
-                "symfony/class-loader": "*",
-                "symfony/css-selector": "*",
-                "symfony/finder": "*",
-                "symfony/form": "*",
-                "symfony/process": "*",
-                "symfony/security": "*",
-                "symfony/twig-bundle": "*",
-                "symfony/validator": "*",
-                "symfony/yaml": "*"
+                "jms/di-extra-bundle": "^1.1",
+                "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
+                "nyholm/nsa": "^1.0.1",
+                "phpunit/phpunit": "4.8.27",
+                "psr/log": "^1.0",
+                "sensio/framework-extra-bundle": "^2.3 || ^3.0",
+                "symfony/expression-language": "^2.6 || ^3.0",
+                "symfony/symfony": "^2.3 || ^3.0",
+                "twig/twig": "^1.12"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -2241,7 +2239,7 @@
                     "email": "schmittjoh@gmail.com"
                 }
             ],
-            "description": "Puts the Symfony2 Translation Component on steroids",
+            "description": "Puts the Symfony Translation Component on steroids",
             "homepage": "http://jmsyst.com/bundles/JMSTranslationBundle",
             "keywords": [
                 "extract",
@@ -2254,9 +2252,9 @@
                 "webinterface"
             ],
             "support": {
-                "source": "https://github.com/sustmi/JMSTranslationBundle/tree/fix-external-translations"
+                "source": "https://github.com/shopsys/JMSTranslationBundle/tree/fix-external-translations-rebased"
             },
-            "time": "2015-07-21T14:02:05+00:00"
+            "time": "2017-02-16T14:19:55+00:00"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2414,30 +2412,37 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v0.9.4",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "1e5e280ae88a27effa2ae4aa2bd088494ed8594f"
+                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/1e5e280ae88a27effa2ae4aa2bd088494ed8594f",
-                "reference": "1e5e280ae88a27effa2ae4aa2bd088494ed8594f",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4dd659edadffdc2143e4753df655d866dbfeedf0",
+                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2"
+                "ext-tokenizer": "*",
+                "php": ">=5.4"
             },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "bin": [
+                "bin/php-parse"
+            ],
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.9-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "PHPParser": "lib/"
+                "psr-4": {
+                    "PhpParser\\": "lib/PhpParser"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2454,7 +2459,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2013-08-25T17:11:40+00:00"
+            "time": "2016-09-16T12:04:44+00:00"
         },
         {
             "name": "ocramius/proxy-manager",
@@ -6527,6 +6532,12 @@
             "alias_normalized": "2.5.6.0",
             "version": "dev-v2.5.6-ddc1960-hotfix-and-ddc4005-hotfix",
             "package": "doctrine/orm"
+        },
+        {
+            "alias": "1.3.1",
+            "alias_normalized": "1.3.1.0",
+            "version": "dev-fix-external-translations-1-3-1",
+            "package": "jms/translation-bundle"
         }
     ],
     "minimum-stability": "stable",
