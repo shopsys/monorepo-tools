@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front;
 
+use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
 class RegistrationPage extends AbstractPage
@@ -20,7 +21,7 @@ class RegistrationPage extends AbstractPage
         $this->tester->fillFieldByName('registration_form[email]', $email);
         $this->tester->fillFieldByName('registration_form[password][first]', $firstPassword);
         $this->tester->fillFieldByName('registration_form[password][second]', $secondPassword);
-        $this->tester->wait(5);
+        $this->tester->wait(TimedFormTypeExtension::MINIMUM_FORM_FILLING_SECONDS);
         $this->tester->clickByName('registration_form[save]');
     }
 
@@ -29,8 +30,7 @@ class RegistrationPage extends AbstractPage
      */
     public function seeEmailError($text)
     {
-        $this->tester->moveMouseOverByCss('.js-validation-error-list-registration_form_email');
-        $this->tester->see($text);
+        $this->seeErrorForField('.js-validation-error-list-registration_form_email', $text);
     }
 
     /**
@@ -38,7 +38,20 @@ class RegistrationPage extends AbstractPage
      */
     public function seePasswordError($text)
     {
-        $this->tester->moveMouseOverByCss('.js-validation-error-list-registration_form_password_first');
+        $this->seeErrorForField('.js-validation-error-list-registration_form_password_first', $text);
+    }
+
+    /**
+     * @param $fieldClass $text
+     * @param string $text
+     */
+    private function seeErrorForField($fieldClass, $text)
+    {
+        // Error message might be in popup - wait for animation
+        $this->tester->wait(1);
+        // Error message might be in fancy title - hover over field
+        $this->tester->moveMouseOverByCss($fieldClass);
+
         $this->tester->see($text);
     }
 }

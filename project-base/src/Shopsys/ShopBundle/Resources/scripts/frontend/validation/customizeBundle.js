@@ -42,6 +42,24 @@
         });
     };
 
+    /**
+     * Delayed validation on blur event
+     *
+     * We customized JS validation to validate form elements on blur event.
+     * The standard validation that is done on submit event validates all form elements recursively (from root
+     * to children elements).
+     * On blur event, we want to validate the blurred element itself and all its ancestral elements (because
+     * constraints of ancestral elements can validate children data).
+     * However, if user leaves one element and focuses on a sibling element in short time we do not want to run
+     * validation on thier common ancestral elements because user presumably did not finish filling-in
+     * the ancestral form yet.
+     * Therefore we delay the validation on blur event and if user focuses another element in short time
+     * we suppress the validation of common ancestral elements. So the validation happens after user leaves
+     * the whole form (or sub-form).
+     *
+     * This prevents from showing "passwords are not the same" error when user fills-in the first password
+     * and focuses the second password field (before even starting to fill-in the second password field).
+     */
     Shopsys.validation.elementBind = function (element) {
         if (!element.domNode) {
             return;
@@ -57,29 +75,51 @@
 
         $domNode
             .bind('blur change', function (event) {
-                if (this.jsFormValidator && isJsFileUpload === true) {
+                if (this.jsFormValidator) {
                     event.preventDefault();
-                } else {
-                    $(this).jsFormValidator('validate');
 
-                    if (this.jsFormValidator) {
-                        event.preventDefault();
-
-                        var parent = this.jsFormValidator.parent;
-                        while (parent) {
-                            parent.validate();
-
-                            parent = parent.parent;
-                        }
+                    if (isJsFileUpload !== true) {
+                        Shopsys.validation.validateWithParentsDelayed(this.jsFormValidator);
                     }
                 }
             })
             .focus(function () {
+                if (this.jsFormValidator) {
+                    Shopsys.validation.removeDelayedValidationWithParents(this.jsFormValidator);
+                }
+
                 $(this).closest('.form-input-error').removeClass('form-input-error');
             })
             .jsFormValidator({
                 'showErrors': Shopsys.validation.showErrors
             });
+    };
+
+    var delayedValidators = {};
+
+    var executeDelayedValidators = function () {
+        var validators = delayedValidators;
+        delayedValidators = {};
+
+        $.each(validators, function() {
+            this.validate();
+        });
+    };
+
+    Shopsys.validation.validateWithParentsDelayed = function (jsFormValidator) {
+        do {
+            delayedValidators[jsFormValidator.id] = jsFormValidator;
+            jsFormValidator = jsFormValidator.parent;
+        } while (jsFormValidator);
+
+        Shopsys.timeout.setTimeoutAndClearPrevious('Shopsys.validation.validateWithParentsDelayed', executeDelayedValidators, 100);
+    };
+
+    Shopsys.validation.removeDelayedValidationWithParents = function (jsFormValidator) {
+        do {
+            delete delayedValidators[jsFormValidator.id];
+            jsFormValidator = jsFormValidator.parent;
+        } while (jsFormValidator);
     };
 
     FpJsFormValidator.customizeMethods._submitForm = FpJsFormValidator.customizeMethods.submitForm;
@@ -327,28 +367,26 @@
         return FpJsFormValidator._isValueEmty(value);
     };
 
-    Shopsys.validation.showErrors = function (errors, elementName) {
-        var $errorList = Shopsys.validation.findOrCreateErrorList($(this), elementName);
+    Shopsys.validation.showErrors = function (errors, sourceId) {
+        var $errorList = Shopsys.validation.findOrCreateErrorList($(this), sourceId);
         var $errorListUl = $errorList.find('ul:first');
         var $elementsToHighlight = Shopsys.validation.findElementsToHighlight($(this));
 
-        var elementErrorClass = 'js-' + elementName;
-        $errorListUl.find('li').remove();
+        var errorSourceClass = 'js-error-source-id-' + sourceId;
+        $errorListUl.find('li.' + errorSourceClass).remove();
 
-        if (errors.length > 0) {
-            $elementsToHighlight.addClass('form-input-error');
-            $.each(errors, function (key, message) {
-                $errorListUl
-                    .append($('<li/>')
+        $.each(errors, function (key, message) {
+            $errorListUl.append(
+                $('<li/>')
                     .addClass('js-validation-errors-message')
-                    .addClass(elementErrorClass)
-                    .text(message));
-            });
-            $errorList.show();
-        } else if ($errorListUl.find('li').length === 0) {
-            $elementsToHighlight.removeClass('form-input-error');
-            $errorList.hide();
-        }
+                    .addClass(errorSourceClass)
+                    .text(message)
+            );
+        });
+
+        var hasErrors = $errorListUl.find('li').length > 0;
+        $elementsToHighlight.toggleClass('form-input-error', hasErrors);
+        $errorList.toggle(hasErrors);
 
         Shopsys.validation.highlightSubmitButtons($(this).closest('form'));
     };
