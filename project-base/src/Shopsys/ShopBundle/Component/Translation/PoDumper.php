@@ -50,7 +50,9 @@ class PoDumper implements DumperInterface
         foreach ($message->getSources() as $source) {
             /* var $source \JMS\TranslationBundle\Model\SourceInterface */
             if ($source instanceof FileSource) {
-                $output .= sprintf('#: %s:%s' . "\n", $this->escape($source->getPath()), $this->escape($source->getLine()));
+                $sourcePath = $this->fixFileSourcePath($source);
+
+                $output .= sprintf('#: %s:%s' . "\n", $this->escape($sourcePath), $this->escape($source->getLine()));
             }
         }
 
@@ -64,5 +66,40 @@ class PoDumper implements DumperInterface
     private function escape($str)
     {
         return addcslashes($str, "\0..\37\42\134");
+    }
+
+    /**
+     * FileSource path may contain corrupted paths (especially when dumped on Windows machine):
+     * - Unix and Windows directory separators may mix
+     * - Path may end with a separator
+     * - A path may contain unresolved .. directories
+     * To fix this some level of path normalization is needed.
+     *
+     * Examples of method input / output:
+     * - directory/file.html/ => directory/file.html
+     * - directory\file.html => directory/file.html
+     * - directory/secondDirectory/..\file.html => directory/file.html
+     * - ../../directory///file.html => directory/file.html
+     * - ./directory/./file.html => directory/file.html
+     *
+     * @param \JMS\TranslationBundle\Model\FileSource $source
+     * @return string
+     */
+    private function fixFileSourcePath(FileSource $source)
+    {
+        $path = $source->getPath();
+        $pathWithNormalizedSeparators = str_replace(DIRECTORY_SEPARATOR, '/', $path);
+        $pathParts = explode('/', $pathWithNormalizedSeparators);
+
+        $fixedPathParts = [];
+        foreach ($pathParts as $pathPart) {
+            if ($pathPart === '..') {
+                array_pop($fixedPathParts);
+            } elseif ($pathPart !== '.' && $pathPart !== '') {
+                $fixedPathParts[] = $pathPart;
+            }
+        }
+
+        return implode('/', $fixedPathParts);
     }
 }
