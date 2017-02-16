@@ -11,11 +11,6 @@ class FormThemeExtension extends \Twig_Extension
     const FRONT_THEME = '@ShopsysShop/Front/Form/theme.html.twig';
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Request
-     */
-    protected $request;
-
-    /**
      * @var \Symfony\Component\HttpFoundation\RequestStack
      */
     protected $requestStack;
@@ -26,7 +21,6 @@ class FormThemeExtension extends \Twig_Extension
     public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
-        $this->request = $this->requestStack->getMasterRequest();
     }
 
     /**
@@ -44,7 +38,8 @@ class FormThemeExtension extends \Twig_Extension
      */
     public function getDefaultFormTheme()
     {
-        if (mb_stripos($this->request->get('_controller'), 'Shopsys\ShopBundle\Controller\Admin') === 0) {
+        $masterRequest = $this->requestStack->getMasterRequest();
+        if (mb_stripos($masterRequest->get('_controller'), 'Shopsys\ShopBundle\Controller\Admin') === 0) {
             return self::ADMIN_THEME;
         } else {
             return self::FRONT_THEME;
