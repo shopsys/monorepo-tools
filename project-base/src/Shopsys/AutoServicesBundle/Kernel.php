@@ -11,7 +11,13 @@ abstract class Kernel extends BaseKernel
      */
     public function getContainer()
     {
-        return parent::getContainer()->get('shopsys.auto_services.auto_container');
+        $parentContainer = parent::getContainer();
+
+        if ($parentContainer !== null) {
+            return $parentContainer->get('shopsys.auto_services.auto_container');
+        } else {
+            return null;
+        }
     }
 
     protected function initializeContainer()
