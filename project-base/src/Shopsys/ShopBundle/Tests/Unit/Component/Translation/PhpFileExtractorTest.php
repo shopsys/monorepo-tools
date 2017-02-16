@@ -6,7 +6,12 @@ use Doctrine\Common\Annotations\DocParser;
 use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
+use PhpParser\Lexer;
+use PhpParser\Parser\Multiple;
+use PhpParser\Parser\Php5;
+use PhpParser\Parser\Php7;
 use Shopsys\ShopBundle\Component\Translation\PhpFileExtractorFactory;
+use SplFileInfo;
 
 class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase
 {
@@ -64,12 +69,12 @@ class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase
         if (!is_file($filename)) {
             throw new \RuntimeException(sprintf('The file "%s" does not exist.', $filename));
         }
-        $file = new \SplFileInfo($filename);
+        $file = new SplFileInfo($filename);
 
         $extractor = $this->getExtractor();
 
-        $lexer = new \PHPParser_Lexer();
-        $parser = new \PHPParser_Parser($lexer);
+        $lexer = new Lexer();
+        $parser = new Multiple([new Php7($lexer), new Php5($lexer)]);
         $ast = $parser->parse(file_get_contents($file));
 
         $catalogue = new MessageCatalogue();

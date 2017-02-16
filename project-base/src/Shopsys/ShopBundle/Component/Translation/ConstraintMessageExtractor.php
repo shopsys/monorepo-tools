@@ -6,15 +6,15 @@ use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
-use PHPParser_Node;
-use PHPParser_Node_Expr_Array;
-use PHPParser_Node_Expr_ArrayItem;
-use PHPParser_Node_Expr_New;
-use PHPParser_Node_Name_FullyQualified;
-use PHPParser_Node_Scalar_String;
-use PHPParser_NodeTraverser;
-use PHPParser_NodeVisitor;
-use PHPParser_NodeVisitor_NameResolver;
+use PhpParser\Node;
+use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Expr\ArrayItem;
+use PhpParser\Node\Expr\New_;
+use PhpParser\Node\Name\FullyQualified;
+use PhpParser\Node\Scalar\String_;
+use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor;
+use PhpParser\NodeVisitor\NameResolver;
 use SplFileInfo;
 use Symfony\Component\Validator\Constraint;
 use Twig_Node;
@@ -31,12 +31,12 @@ use Twig_Node;
  *         'minMessage' => 'Actually, every option ending with "message" will be extracted',
  *     ])
  */
-class ConstraintMessageExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
+class ConstraintMessageExtractor implements FileVisitorInterface, NodeVisitor
 {
     const CONSTRAINT_MESSAGE_DOMAIN = 'validators';
 
     /**
-     * @var \PHPParser_NodeTraverser
+     * @var \PhpParser\NodeTraverser
      */
     private $traverser;
 
@@ -50,13 +50,10 @@ class ConstraintMessageExtractor implements FileVisitorInterface, PHPParser_Node
      */
     private $file;
 
-    /**
-     * @param \PHPParser_NodeVisitor_NameResolver $nameResolverVisitor
-     */
-    public function __construct(PHPParser_NodeVisitor_NameResolver $nameResolverVisitor)
+    public function __construct()
     {
-        $this->traverser = new PHPParser_NodeTraverser();
-        $this->traverser->addVisitor($nameResolverVisitor);
+        $this->traverser = new NodeTraverser();
+        $this->traverser->addVisitor(new NameResolver());
         $this->traverser->addVisitor($this);
     }
 
@@ -73,9 +70,9 @@ class ConstraintMessageExtractor implements FileVisitorInterface, PHPParser_Node
     /**
      * @inheritdoc
      */
-    public function enterNode(PHPParser_Node $node)
+    public function enterNode(Node $node)
     {
-        if ($node instanceof PHPParser_Node_Expr_New) {
+        if ($node instanceof New_) {
             if ($this->isConstraintClass($node->class) && count($node->args) > 0) {
                 $this->extractMessagesFromOptions($node->args[0]->value);
             }
@@ -83,20 +80,20 @@ class ConstraintMessageExtractor implements FileVisitorInterface, PHPParser_Node
     }
 
     /**
-     * @param \PHPParser_Node $node
+     * @param \PhpParser\Node $node
      * @return bool
      */
-    private function isConstraintClass(PHPParser_Node $node)
+    private function isConstraintClass(Node $node)
     {
-        return $node instanceof PHPParser_Node_Name_FullyQualified && is_subclass_of((string)$node, Constraint::class);
+        return $node instanceof FullyQualified && is_subclass_of((string)$node, Constraint::class);
     }
 
     /**
-     * @param \PHPParser_Node $optionsNode
+     * @param \PhpParser\Node $optionsNode
      */
-    private function extractMessagesFromOptions(PHPParser_Node $optionsNode)
+    private function extractMessagesFromOptions(Node $optionsNode)
     {
-        if ($optionsNode instanceof PHPParser_Node_Expr_Array) {
+        if ($optionsNode instanceof Array_) {
             foreach ($optionsNode->items as $optionItemNode) {
                 if ($this->isMessageOptionItem($optionItemNode)) {
                     $messageId = PhpParserNodeHelper::getConcatenatedStringValue($optionItemNode->value, $this->file);
@@ -111,12 +108,12 @@ class ConstraintMessageExtractor implements FileVisitorInterface, PHPParser_Node
     }
 
     /**
-     * @param \PHPParser_Node_Expr_ArrayItem $node
+     * @param \PhpParser\Node\Expr\ArrayItem $node
      * @return bool
      */
-    private function isMessageOptionItem(PHPParser_Node_Expr_ArrayItem $node)
+    private function isMessageOptionItem(ArrayItem $node)
     {
-        return $node->key instanceof PHPParser_Node_Scalar_String && strtolower(substr($node->key->value, -7)) === 'message';
+        return $node->key instanceof String_ && strtolower(substr($node->key->value, -7)) === 'message';
     }
 
     /**
@@ -130,7 +127,7 @@ class ConstraintMessageExtractor implements FileVisitorInterface, PHPParser_Node
     /**
      * @inheritdoc
      */
-    public function leaveNode(PHPParser_Node $node)
+    public function leaveNode(Node $node)
     {
         return null;
     }
