@@ -73,8 +73,8 @@ msgstr ""
 msgid "Email cannot be longer then {{ limit }} characters"
 msgstr ""
 
-#: Admin/Product/ProductFormType.php:234
-#: Admin/Product/ProductFormType.php:241
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:234
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:241
 #: ProductFormType.php:232
 #: ProductFormType.php:239
 msgid "Enter date in DD.MM.YYYY format"
@@ -149,7 +149,7 @@ msgstr ""
 msgid "Number of days to despatch must be greater or equal to {{ compared_value }}"
 msgstr ""
 
-#: Product/Availability/AvailabilityFormType.php:41
+#: src/Shopsys/ShopBundle/Form/Admin/Product/Availability/AvailabilityFormType.php:41
 msgid "Number of days to expedite must be whole number."
 msgstr ""
 
@@ -185,11 +185,11 @@ msgstr ""
 msgid "Password cannot be same as username"
 msgstr ""
 
-#: Admin/Administrator/AdministratorFormType.php:69
-#: Admin/Customer/UserFormType.php:94
-#: Customer/Password/NewPasswordFormType.php:31
-#: Front/Customer/UserFormType.php:59
-#: Front/Registration/RegistrationFormType.php:55
+#: src/Shopsys/ShopBundle/Form/Admin/Administrator/AdministratorFormType.php:69
+#: src/Shopsys/ShopBundle/Form/Admin/Customer/UserFormType.php:94
+#: src/Shopsys/ShopBundle/Form/Front/Customer/Password/NewPasswordFormType.php:31
+#: src/Shopsys/ShopBundle/Form/Front/Customer/UserFormType.php:59
+#: src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php:55
 msgid "Passwords do not match"
 msgstr ""
 
@@ -238,13 +238,13 @@ msgstr ""
 msgid "Please choose parameter"
 msgstr ""
 
-#: Front/Order/TransportAndPaymentFormType.php:59
-#: TransportAndPaymentFormType.php:57
+#: src/Shopsys/ShopBundle/Form/Front/Order/TransportAndPaymentFormType.php:57
+#: TransportAndPaymentFormType.php:55
 msgid "Please choose payment type"
 msgstr ""
 
-#: Front/Order/TransportAndPaymentFormType.php:51
-#: TransportAndPaymentFormType.php:49
+#: src/Shopsys/ShopBundle/Form/Front/Order/TransportAndPaymentFormType.php:50
+#: TransportAndPaymentFormType.php:48
 msgid "Please choose shipping type"
 msgstr ""
 
@@ -260,7 +260,7 @@ msgstr ""
 msgid "Please enter HTML code for advertisement area"
 msgstr ""
 
-#: Admin/Vat/VatFormType.php:57
+#: src/Shopsys/ShopBundle/Form/Admin/Vat/VatFormType.php:57
 msgid "Please enter VAT in correct format."
 msgstr ""
 
@@ -278,7 +278,7 @@ msgstr ""
 msgid "Please enter VAT rate"
 msgstr ""
 
-#: Admin/Product/ProductFormType.php:150
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:150
 msgid "Please enter a number"
 msgstr ""
 
@@ -450,12 +450,12 @@ msgstr ""
 msgid "Please enter price"
 msgstr ""
 
-#: Admin/Payment/PaymentEditFormType.php:69
-#: Admin/Product/ProductEditFormType.php:263
-#: Admin/Product/ProductFormType.php:209
-#: Admin/Transport/TransportEditFormType.php:69
-#: Front/Product/ProductFilterFormType.php:72
-#: Front/Product/ProductFilterFormType.php:85
+#: src/Shopsys/ShopBundle/Form/Admin/Payment/PaymentEditFormType.php:69
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductEditFormType.php:263
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:209
+#: src/Shopsys/ShopBundle/Form/Admin/Transport/TransportEditFormType.php:69
+#: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:72
+#: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:85
 msgid "Please enter price in correct format (positive number with decimal separator)"
 msgstr ""
 
@@ -472,7 +472,7 @@ msgstr ""
 msgid "Please enter quantity"
 msgstr ""
 
-#: Pricing/Group/PricingGroupFormType.php:38
+#: src/Shopsys/ShopBundle/Form/Admin/Pricing/Group/PricingGroupFormType.php:38
 msgid "Please enter ratio in correct format"
 msgstr ""
 
@@ -562,7 +562,7 @@ msgstr ""
 msgid "Please enter valid quantity"
 msgstr ""
 
-#: Admin/PromoCode/PromoCodeFormType.php:66
+#: src/Shopsys/ShopBundle/Form/Admin/PromoCode/PromoCodeFormType.php:66
 msgid "Please enter whole number."
 msgstr ""
 
@@ -575,7 +575,7 @@ msgstr ""
 msgid "Please enter zip code"
 msgstr ""
 
-#: ShopBundle/Form/UrlListType.php:95
+#: src/Shopsys/ShopBundle/Form/UrlListType.php:94
 msgid "Previously selected main URL dos not exist any more"
 msgstr ""
 
