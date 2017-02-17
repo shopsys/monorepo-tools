@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3076fd6c04270cca298c14416fea0fca",
+    "content-hash": "2f956a96fdba929c144c7a2d1c47cdcc",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -4471,32 +4471,33 @@
         },
         {
             "name": "symfony-cmf/routing",
-            "version": "dev-master",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/shopsys/Routing.git",
-                "reference": "bb25b51744"
+                "url": "https://github.com/symfony-cmf/Routing.git",
+                "reference": "b93704ca098334f56e9b317932f21a4362e620db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/Routing/zipball/bb25b51744",
-                "reference": "bb25b51744",
+                "url": "https://api.github.com/repos/symfony-cmf/Routing/zipball/b93704ca098334f56e9b317932f21a4362e620db",
+                "reference": "b93704ca098334f56e9b317932f21a4362e620db",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9",
+                "php": "^5.3.9|^7.0",
                 "psr/log": "1.*",
                 "symfony/http-kernel": "^2.2|3.*",
                 "symfony/routing": "^2.2|3.*"
             },
             "require-dev": {
+                "friendsofsymfony/jsrouting-bundle": "^1.1",
                 "symfony-cmf/testing": "^1.3",
                 "symfony/config": "^2.2|3.*",
                 "symfony/dependency-injection": "^2.0.5|3.*",
                 "symfony/event-dispatcher": "^2.1|3.*"
             },
             "suggest": {
-                "symfony/event-dispatcher": "DynamicRouter can optionally trigger an event at the start of matching. Minimal version ~2.1"
+                "symfony/event-dispatcher": "DynamicRouter can optionally trigger an event at the start of matching. Minimal version (~2.1)"
             },
             "type": "library",
             "extra": {
@@ -4509,6 +4510,7 @@
                     "Symfony\\Cmf\\Component\\Routing\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4524,10 +4526,7 @@
                 "database",
                 "routing"
             ],
-            "support": {
-                "source": "https://github.com/sustmi/Routing/tree/master"
-            },
-            "time": "2015-09-30T09:50:25+00:00"
+            "time": "2016-03-31T09:11:39+00:00"
         },
         {
             "name": "symfony-cmf/routing-bundle",
@@ -6553,7 +6552,6 @@
         "intaro/postgres-search-bundle": 20,
         "jms/translation-bundle": 20,
         "prezent/doctrine-translatable-bundle": 20,
-        "symfony-cmf/routing": 20,
         "timwhitlock/jparser": 20
     },
     "prefer-stable": false,
