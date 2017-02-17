@@ -85,7 +85,7 @@
         "sensio/generator-bundle": "2.5.3",
         "shopsys/migrations": "2.0.1",
         "stof/doctrine-extensions-bundle": "1.2.1",
-        "symfony/assetic-bundle": "2.6.1",
+        "symfony/assetic-bundle": "2.8.1",
         "symfony/monolog-bundle": "2.7.1",
         "symfony/swiftmailer-bundle": "2.3.8",
         "symfony/symfony": "2.8.17",
