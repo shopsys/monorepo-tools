@@ -44,7 +44,6 @@ class TransportAndPaymentFormType extends AbstractType
         $builder
             ->add('transport', FormType::SINGLE_CHECKBOX_CHOICE, [
                 'choice_list' => new ObjectChoiceList($this->transports, 'name', [], null, 'id'),
-                'data_class' => Transport::class,
                 'constraints' => [
                     new Constraints\NotNull(['message' => 'Please choose shipping type']),
                 ],
@@ -52,7 +51,6 @@ class TransportAndPaymentFormType extends AbstractType
             ])
             ->add('payment', FormType::SINGLE_CHECKBOX_CHOICE, [
                 'choice_list' => new ObjectChoiceList($this->payments, 'name', [], null, 'id'),
-                'data_class' => Payment::class,
                 'constraints' => [
                     new Constraints\NotNull(['message' => 'Please choose payment type']),
                 ],
