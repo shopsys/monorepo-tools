@@ -595,6 +595,6 @@ services:
       - %shopsys.javascript_url_prefix%
 
   twig.stringloader:
-    class: Twig_Loader_String
+    class: Twig_Loader_Array
     tags:
       - { name: twig.loader }
