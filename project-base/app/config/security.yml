@@ -32,7 +32,7 @@ security:
         path: admin_logout
         success_handler: shopsys.shop.security.admin_logout_handler
         csrf_parameter: _csrf_token
-        csrf_token_generator: form.csrf_provider
+        csrf_token_generator: security.csrf.token_manager
         csrf_token_id: admin_logout
         invalidate_session: false
 
@@ -59,7 +59,7 @@ security:
         path: front_logout
         success_handler: shopsys.shop.security.front_logout_handler
         csrf_parameter: _csrf_token
-        csrf_token_generator: form.csrf_provider
+        csrf_token_generator: security.csrf.token_manager
         csrf_token_id: frontend_logout
         invalidate_session: false
 
