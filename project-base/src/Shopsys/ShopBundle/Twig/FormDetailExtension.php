@@ -2,32 +2,22 @@
 
 namespace Shopsys\ShopBundle\Twig;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormView;
+use Twig_Environment;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class FormDetailExtension extends Twig_Extension
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
 
     /**
-     * Get service "templating" cannot be called in constructor - https://github.com/symfony/symfony/issues/2347
-     * because it causes circular dependency
-     *
-     * @return \Symfony\Bundle\TwigBundle\TwigEngine
+     * @var \Twig_Environment
      */
-    private function getTemplatingService()
+    private $twigEnvironment;
+
+    public function __construct(Twig_Environment $twigEnvironment)
     {
-        return $this->container->get('templating');
+        $this->twigEnvironment = $twigEnvironment;
     }
 
     /**
@@ -74,7 +64,7 @@ class FormDetailExtension extends Twig_Extension
      */
     public function formSave($object, FormView $formView, array $vars = [])
     {
-        $template = '{{ form_widget(form.save, vars) }}';
+        $template = $this->twigEnvironment->createTemplate('{{ form_widget(form.save, vars) }}');
 
         if (!array_keys($vars, 'label', true)) {
             if ($object === null) {
@@ -87,7 +77,7 @@ class FormDetailExtension extends Twig_Extension
         $parameters['form'] = $formView;
         $parameters['vars'] = $vars;
 
-        return $this->getTemplatingService()->render($template, $parameters);
+        return $template->render($parameters);
     }
 
     /**
