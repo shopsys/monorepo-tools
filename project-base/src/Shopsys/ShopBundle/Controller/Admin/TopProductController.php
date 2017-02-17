@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
-use Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType;
 use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,10 +15,6 @@ class TopProductController extends AdminBaseController
      * @var \Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade
      */
     private $topProductFacade;
-    /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormTypeFactory
-     */
-    private $topProductsFormTypeFactory;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
@@ -27,11 +23,9 @@ class TopProductController extends AdminBaseController
 
     public function __construct(
         TopProductFacade $topProductFacade,
-        TopProductsFormTypeFactory $topProductsFormTypeFactory,
         SelectedDomain $selectedDomain
     ) {
         $this->topProductFacade = $topProductFacade;
-        $this->topProductsFormTypeFactory = $topProductsFormTypeFactory;
         $this->selectedDomain = $selectedDomain;
     }
 
@@ -40,14 +34,12 @@ class TopProductController extends AdminBaseController
      */
     public function listAction(Request $request)
     {
-        $form = $this->createForm($this->topProductsFormTypeFactory->create());
-
         $domainId = $this->selectedDomain->getId();
         $formData = [
             'products' => $this->getProductsForDomain($domainId),
         ];
 
-        $form->setData($formData);
+        $form = $this->createForm(TopProductsFormType::class, $formData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

@@ -52,7 +52,7 @@ class LoginController extends FrontBaseController
      */
     private function getLoginForm()
     {
-        return $this->createForm(new LoginFormType(), null, [
+        return $this->createForm(LoginFormType::class, null, [
             'action' => $this->generateUrl('front_login_check'),
         ]);
     }

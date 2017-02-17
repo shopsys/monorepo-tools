@@ -2,11 +2,17 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product;
 
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\CategoriesType;
 use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,65 +28,49 @@ class ProductFormType extends AbstractType
     const VALIDATION_GROUP_NOT_USING_STOCK = 'notUsingStock';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
+     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
      */
-    private $vats;
+    private $vatFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
+     * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
      */
-    private $availabilities;
+    private $availabilityFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
+     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
      */
-    private $brands;
+    private $brandFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
+     * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
      */
-    private $flags;
+    private $flagFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
+     * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
      */
-    private $units;
+    private $unitFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product|null
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */
-    private $product;
+    private $domain;
 
-    /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
-     */
-    private $domainConfigs;
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[] $vats
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability[] $availabilities
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand[] $brands
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\Flag[] $flags
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit[] $units
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
-     * @param \Shopsys\ShopBundle\Model\Product\Product|null $product
-     */
     public function __construct(
-        array $vats,
-        array $availabilities,
-        array $brands,
-        array $flags,
-        array $units,
-        array $domainConfigs,
-        Product $product = null
+        VatFacade $vatFacade,
+        AvailabilityFacade $availabilityFacade,
+        BrandFacade $brandFacade,
+        FlagFacade $flagFacade,
+        UnitFacade $unitFacade,
+        Domain $domain
     ) {
-        $this->vats = $vats;
-        $this->availabilities = $availabilities;
-        $this->brands = $brands;
-        $this->flags = $flags;
-        $this->units = $units;
-        $this->domainConfigs = $domainConfigs;
-        $this->product = $product;
+        $this->vatFacade = $vatFacade;
+        $this->availabilityFacade = $availabilityFacade;
+        $this->brandFacade = $brandFacade;
+        $this->flagFacade = $flagFacade;
+        $this->unitFacade = $unitFacade;
+        $this->domain = $domain;
     }
 
     /**
@@ -90,7 +80,9 @@ class ProductFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($this->product !== null && $this->product->isVariant()) {
+        $vats = $this->vatFacade->getAllIncludingMarkedForDeletion();
+
+        if ($options['product'] !== null && $options['product']->isVariant()) {
             $builder->add('variantAlias', FormType::LOCALIZED, [
                 'required' => false,
                 'options' => [
@@ -100,6 +92,7 @@ class ProductFormType extends AbstractType
                 ],
             ]);
         }
+
         $builder
             ->add('name', FormType::LOCALIZED, [
                 'required' => false,
@@ -133,7 +126,7 @@ class ProductFormType extends AbstractType
             ])
             ->add('brand', FormType::CHOICE, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->brands, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->brandFacade->getAll(), 'name', [], null, 'id'),
                 'placeholder' => t('-- Choose brand --'),
             ])
             ->add('usingStock', FormType::YES_NO, ['required' => false])
@@ -149,7 +142,7 @@ class ProductFormType extends AbstractType
             ])
             ->add('unit', FormType::CHOICE, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->units, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->unitFacade->getAll(), 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank([
                         'message' => 'Please choose unit',
@@ -158,7 +151,7 @@ class ProductFormType extends AbstractType
             ])
             ->add('availability', FormType::CHOICE, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->availabilityFacade->getAll(), 'name', [], null, 'id'),
                 'placeholder' => t('-- Choose availability --'),
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -185,7 +178,7 @@ class ProductFormType extends AbstractType
             ])
             ->add('outOfStockAvailability', FormType::CHOICE, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->availabilityFacade->getAll(), 'name', [], null, 'id'),
                 'placeholder' => t('-- Choose availability --'),
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -213,7 +206,7 @@ class ProductFormType extends AbstractType
             ])
             ->add('vat', FormType::CHOICE, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($vats, 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],
@@ -234,7 +227,7 @@ class ProductFormType extends AbstractType
             ])
             ->add('flags', FormType::CHOICE, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->flags, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->flagFacade->getAll(), 'name', [], null, 'id'),
                 'multiple' => true,
                 'expanded' => true,
             ])
@@ -254,15 +247,15 @@ class ProductFormType extends AbstractType
             ]);
 
         $builder->add('categoriesByDomainId', FormType::FORM, ['required' => false]);
-        foreach ($this->domainConfigs as $domainConfig) {
-            $builder->get('categoriesByDomainId')->add($domainConfig->getId(), FormType::CATEGORIES, [
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $builder->get('categoriesByDomainId')->add($domainId, FormType::CATEGORIES, [
                 'required' => false,
-                CategoriesType::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID => $domainConfig->getId(),
+                CategoriesType::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID => $domainId,
             ]);
         }
 
-        if ($this->product !== null) {
-            $this->disableIrrelevantFields($builder, $this->product);
+        if ($options['product'] !== null) {
+            $this->disableIrrelevantFields($builder, $options['product']);
         }
     }
 
@@ -271,30 +264,33 @@ class ProductFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => ProductData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-            'validation_groups' => function (FormInterface $form) {
-                $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
-                $productData = $form->getData();
-                /* @var $productData \Shopsys\ShopBundle\Model\Product\ProductData */
+        $resolver
+            ->setRequired('product')
+            ->setAllowedTypes('product', [Product::class, 'null'])
+            ->setDefaults([
+                'data_class' => ProductData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+                'validation_groups' => function (FormInterface $form) {
+                    $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
+                    $productData = $form->getData();
+                    /* @var $productData \Shopsys\ShopBundle\Model\Product\ProductData */
 
-                if ($productData->usingStock) {
-                    $validationGroups[] = self::VALIDATION_GROUP_USING_STOCK;
-                    if ($productData->outOfStockAction === Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY) {
-                        $validationGroups[] = self::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY;
+                    if ($productData->usingStock) {
+                        $validationGroups[] = self::VALIDATION_GROUP_USING_STOCK;
+                        if ($productData->outOfStockAction === Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY) {
+                            $validationGroups[] = self::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY;
+                        }
+                    } else {
+                        $validationGroups[] = self::VALIDATION_GROUP_NOT_USING_STOCK;
                     }
-                } else {
-                    $validationGroups[] = self::VALIDATION_GROUP_NOT_USING_STOCK;
-                }
 
-                if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_AUTO) {
-                    $validationGroups[] = self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION;
-                }
+                    if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_AUTO) {
+                        $validationGroups[] = self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION;
+                    }
 
-                return $validationGroups;
-            },
-        ]);
+                    return $validationGroups;
+                },
+            ]);
     }
 
     /**

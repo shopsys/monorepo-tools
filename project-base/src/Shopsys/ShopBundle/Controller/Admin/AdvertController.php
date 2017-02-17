@@ -8,7 +8,7 @@ use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Advert\AdvertFormType;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -16,6 +16,7 @@ use Shopsys\ShopBundle\Model\Advert\Advert;
 use Shopsys\ShopBundle\Model\Advert\AdvertData;
 use Shopsys\ShopBundle\Model\Advert\AdvertFacade;
 use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
+use Shopsys\ShopBundle\Twig\ImageExtension;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvertController extends AdminBaseController
@@ -36,11 +37,6 @@ class AdvertController extends AdminBaseController
     private $advertFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory
-     */
-    private $advertFormTypeFactory;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Advert\AdvertPositionList
      */
     private $advertPositionList;
@@ -55,22 +51,27 @@ class AdvertController extends AdminBaseController
      */
     private $gridFactory;
 
+    /**
+     * @var \Shopsys\ShopBundle\Twig\ImageExtension
+     */
+    private $imageExtension;
+
     public function __construct(
         AdvertFacade $advertFacade,
         AdministratorGridFacade $administratorGridFacade,
         GridFactory $gridFactory,
         SelectedDomain $selectedDomain,
         Breadcrumb $breadcrumb,
-        AdvertFormTypeFactory $advertFormTypeFactory,
-        AdvertPositionList $advertPositionList
+        AdvertPositionList $advertPositionList,
+        ImageExtension $imageExtension
     ) {
         $this->advertFacade = $advertFacade;
         $this->administratorGridFacade = $administratorGridFacade;
         $this->gridFactory = $gridFactory;
         $this->selectedDomain = $selectedDomain;
         $this->breadcrumb = $breadcrumb;
-        $this->advertFormTypeFactory = $advertFormTypeFactory;
         $this->advertPositionList = $advertPositionList;
+        $this->imageExtension = $imageExtension;
     }
 
     /**
@@ -81,12 +82,13 @@ class AdvertController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $advert = $this->advertFacade->getById($id);
-        $form = $this->createForm($this->advertFormTypeFactory->create($advert));
 
         $advertData = new AdvertData();
         $advertData->setFromEntity($advert);
 
-        $form->setData($advertData);
+        $form = $this->createForm(AdvertFormType::class, $advertData, [
+            'image_exists' => $this->imageExtension->imageExists($advert),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -171,12 +173,10 @@ class AdvertController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm($this->advertFormTypeFactory->create());
-
         $advertData = new AdvertData();
         $advertData->domainId = $this->selectedDomain->getId();
 
-        $form->setData($advertData);
+        $form = $this->createForm(AdvertFormType::class, $advertData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

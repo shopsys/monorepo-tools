@@ -75,6 +75,14 @@ class VatFacade
     }
 
     /**
+     * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
+     */
+    public function getAllIncludingMarkedForDeletion()
+    {
+        return $this->vatRepository->getAllIncludingMarkedForDeletion();
+    }
+
+    /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
      * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
      */

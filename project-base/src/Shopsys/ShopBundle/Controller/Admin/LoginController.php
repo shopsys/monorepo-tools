@@ -79,7 +79,7 @@ class LoginController extends AdminBaseController
 
         $error = null;
 
-        $form = $this->createForm(new LoginFormType(), null, [
+        $form = $this->createForm(LoginFormType::class, null, [
             'action' => $this->generateUrl('admin_login_check'),
         ]);
 

@@ -96,15 +96,12 @@ class CartController extends FrontBaseController
             $this->cartFacade->cleanAdditionalData();
         }
 
-        $cartFormData = [
-            'quantities' => [],
-        ];
+        $cartFormData = ['quantities' => []];
         foreach ($cart->getItems() as $cartItem) {
             $cartFormData['quantities'][$cartItem->getId()] = $cartItem->getQuantity();
         }
 
-        $form = $this->createForm(new CartFormType($cart));
-        $form->setData($cartFormData);
+        $form = $this->createForm(CartFormType::class, $cartFormData);
         $form->handleRequest($request);
         $invalidCart = false;
 
@@ -167,8 +164,7 @@ class CartController extends FrontBaseController
      */
     public function addProductFormAction(Product $product, $type = 'normal')
     {
-        $formData = ['productId' => $product->getId()];
-        $form = $this->createForm(new AddProductFormType(), $formData, [
+        $form = $this->createForm(AddProductFormType::class, ['productId' => $product->getId()], [
             'action' => $this->generateUrl('front_cart_add_product'),
         ]);
 
@@ -184,7 +180,7 @@ class CartController extends FrontBaseController
      */
     public function addProductAction(Request $request)
     {
-        $form = $this->createForm(new AddProductFormType());
+        $form = $this->createForm(AddProductFormType::class);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -228,7 +224,7 @@ class CartController extends FrontBaseController
      */
     public function addProductAjaxAction(Request $request)
     {
-        $form = $this->createForm(new AddProductFormType());
+        $form = $this->createForm(AddProductFormType::class);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

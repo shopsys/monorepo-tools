@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Form\Admin\Product\Unit;
 
 use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,16 +13,13 @@ use Symfony\Component\Validator\Constraints;
 class UnitSettingFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
+     * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
      */
-    private $units;
+    private $unitFacade;
 
-    /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit[] $units
-     */
-    public function __construct(array $units)
+    public function __construct(UnitFacade $unitFacade)
     {
-        $this->units = $units;
+        $this->unitFacade = $unitFacade;
     }
 
     /**
@@ -33,7 +31,7 @@ class UnitSettingFormType extends AbstractType
         $builder
             ->add('defaultUnit', FormType::CHOICE, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->units, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->unitFacade->getAll(), 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose default unit']),
                 ],

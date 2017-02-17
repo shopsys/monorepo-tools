@@ -5,6 +5,8 @@ namespace Shopsys\ShopBundle\Form\Admin\Article;
 use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticleData;
+use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
+use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,33 +15,21 @@ use Symfony\Component\Validator\Constraints;
 class ArticleFormType extends AbstractType
 {
     /**
-     * @var string[]
+     * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade
      */
-    private $articlePlacementLocalizedNamesByName;
+    private $seoSettingFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\Article|null
+     * @var \Shopsys\ShopBundle\Model\Article\ArticlePlacementList
      */
-    private $article;
+    private $articlePlacementList;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Article\Article|null
-     */
-    private $defaultSeoMetaDescription;
-
-    /**
-     * @param string[]
-     * @param \Shopsys\ShopBundle\Model\Article\Article|null $article
-     * @param string|null $defaultSeoMetaDescription
-     */
     public function __construct(
-        $articlePlacementLocalizedNamesByName,
-        Article $article = null,
-        $defaultSeoMetaDescription = null
+        SeoSettingFacade $seoSettingFacade,
+        ArticlePlacementList $articlePlacementList
     ) {
-        $this->articlePlacementLocalizedNamesByName = $articlePlacementLocalizedNamesByName;
-        $this->article = $article;
-        $this->defaultSeoMetaDescription = $defaultSeoMetaDescription;
+        $this->seoSettingFacade = $seoSettingFacade;
+        $this->articlePlacementList = $articlePlacementList;
     }
 
     /**
@@ -68,21 +58,21 @@ class ArticleFormType extends AbstractType
             ->add('seoMetaDescription', FormType::TEXTAREA, [
                 'required' => false,
                 'attr' => [
-                    'placeholder' => $this->defaultSeoMetaDescription,
+                    'placeholder' => $this->seoSettingFacade->getDescriptionMainPage($options['domain_id']),
                 ],
             ])
             ->add('urls', FormType::URL_LIST, [
                 'route_name' => 'front_article_detail',
-                'entity_id' => $this->article === null ? null : $this->article->getId(),
+                'entity_id' => $options['article'] !== null ? $options['article']->getId() : null,
             ])
             ->add('save', FormType::SUBMIT);
 
-        if ($this->article === null) {
+        if ($options['article'] === null) {
             $builder
                 ->add('domainId', FormType::DOMAIN, ['required' => true])
                 ->add('placement', FormType::CHOICE, [
                     'required' => true,
-                    'choices' => $this->articlePlacementLocalizedNamesByName,
+                    'choices' => $this->articlePlacementList->getTranslationsIndexedByValue(),
                     'placeholder' => t('-- Choose article position --'),
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please choose article placement']),
@@ -96,9 +86,13 @@ class ArticleFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => ArticleData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired(['article', 'domain_id'])
+            ->setAllowedTypes('article', [Article::class, 'null'])
+            ->setAllowedTypes('domain_id', 'int')
+            ->setDefaults([
+                'data_class' => ArticleData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

@@ -11,18 +11,8 @@ use Symfony\Component\Validator\Constraints;
 
 class SliderItemFormType extends AbstractType
 {
-    /**
-     * @var bool
-     */
-    private $scenarioCreate;
-
-    /**
-     * @param bool $scenarioCreate
-     */
-    public function __construct($scenarioCreate = false)
-    {
-        $this->scenarioCreate = $scenarioCreate;
-    }
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_EDIT = 'edit';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
@@ -30,6 +20,11 @@ class SliderItemFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $imageConstraints = [];
+        if ($options['scenario'] === self::SCENARIO_CREATE) {
+            $imageConstraints[] = new Constraints\NotBlank(['message' => 'Please choose image']);
+        }
+
         $builder
             ->add('name', FormType::TEXT, [
                 'required' => true,
@@ -38,13 +33,8 @@ class SliderItemFormType extends AbstractType
                 ],
             ])
             ->add('image', FormType::FILE_UPLOAD, [
-                'required' => $this->scenarioCreate,
-                'constraints' => [
-                    new Constraints\NotBlank([
-                        'message' => 'Please choose image',
-                        'groups' => 'create',
-                    ]),
-                ],
+                'required' => $options['scenario'] === self::SCENARIO_CREATE,
+                'constraints' => $imageConstraints,
                 'file_constraints' => [
                     new Constraints\Image([
                         'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg'],
@@ -72,7 +62,7 @@ class SliderItemFormType extends AbstractType
             ])
             ->add('save', FormType::SUBMIT);
 
-        if ($this->scenarioCreate) {
+        if ($options['scenario'] === self::SCENARIO_CREATE) {
             $builder->add('domainId', FormType::DOMAIN, ['required' => true]);
         }
     }
@@ -82,12 +72,12 @@ class SliderItemFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $validationGroups = $this->scenarioCreate ? ['Default', 'create'] : ['Default'];
-
-        $resolver->setDefaults([
-            'data_class' => SliderItemData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-            'validation_groups' => $validationGroups,
-        ]);
+        $resolver
+            ->setRequired('scenario')
+            ->addAllowedValues('scenario', [self::SCENARIO_CREATE, self::SCENARIO_EDIT])
+            ->setDefaults([
+                'data_class' => SliderItemData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

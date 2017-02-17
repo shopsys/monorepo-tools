@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Form\Admin\Product\Parameter;
 
 use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -13,13 +14,13 @@ use Symfony\Component\Validator\Constraints;
 class ProductParameterValueFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter[]
+     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade
      */
-    private $parameters;
+    private $parameterFacade;
 
-    public function __construct(array $parameters)
+    public function __construct(ParameterFacade $parameterFacade)
     {
-        $this->parameters = $parameters;
+        $this->parameterFacade = $parameterFacade;
     }
 
     /**
@@ -31,7 +32,7 @@ class ProductParameterValueFormType extends AbstractType
         $builder
             ->add('parameter', FormType::CHOICE, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->parameters, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->parameterFacade->getAll(), 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose parameter']),
                 ],

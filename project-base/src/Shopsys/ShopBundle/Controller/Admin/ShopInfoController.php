@@ -6,17 +6,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
 use Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormType;
-use Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormTypeFactory;
 use Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class ShopInfoController extends AdminBaseController
 {
-    /**
-     * @var \Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormTypeFactory
-     */
-    private $shopInfoSettingFormTypeFactory;
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
      */
@@ -28,11 +22,9 @@ class ShopInfoController extends AdminBaseController
     private $shopInfoSettingFacade;
 
     public function __construct(
-        ShopInfoSettingFormTypeFactory $shopInfoSettingFormTypeFactory,
         ShopInfoSettingFacade $shopInfoSettingFacade,
         SelectedDomain $selectedDomain
     ) {
-        $this->shopInfoSettingFormTypeFactory = $shopInfoSettingFormTypeFactory;
         $this->shopInfoSettingFacade = $shopInfoSettingFacade;
         $this->selectedDomain = $selectedDomain;
     }
@@ -44,18 +36,18 @@ class ShopInfoController extends AdminBaseController
     {
         $selectedDomainId = $this->selectedDomain->getId();
 
-        $form = $this->createForm(new ShopInfoSettingFormType());
+        $shopInfoSettingData = [
+            'phoneNumber' => $this->shopInfoSettingFacade->getPhoneNumber($selectedDomainId),
+            'email' => $this->shopInfoSettingFacade->getEmail($selectedDomainId),
+            'phoneHours' => $this->shopInfoSettingFacade->getPhoneHours($selectedDomainId),
+        ];
 
-        $shopInfoSettingData = [];
-        $shopInfoSettingData['phoneNumber'] = $this->shopInfoSettingFacade->getPhoneNumber($selectedDomainId);
-        $shopInfoSettingData['email'] = $this->shopInfoSettingFacade->getEmail($selectedDomainId);
-        $shopInfoSettingData['phoneHours'] = $this->shopInfoSettingFacade->getPhoneHours($selectedDomainId);
-
-        $form->setData($shopInfoSettingData);
+        $form = $this->createForm(ShopInfoSettingFormType::class, $shopInfoSettingData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $shopInfoSettingData = $form->getData();
+
             $this->shopInfoSettingFacade->setPhoneNumber($shopInfoSettingData['phoneNumber'], $selectedDomainId);
             $this->shopInfoSettingFacade->setEmail($shopInfoSettingData['email'], $selectedDomainId);
             $this->shopInfoSettingFacade->setPhoneHours($shopInfoSettingData['phoneHours'], $selectedDomainId);

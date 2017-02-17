@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Form\Admin\Cookies;
 
 use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,16 +12,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CookiesSettingFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\Article[]
+     * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
      */
-    private $articles;
+    private $articleFacade;
 
-    /**
-     * @param \Shopsys\ShopBundle\Model\Article\Article[] $articles
-     */
-    public function __construct(array $articles)
+    public function __construct(ArticleFacade $articleFacade)
     {
-        $this->articles = $articles;
+        $this->articleFacade = $articleFacade;
     }
 
     /**
@@ -29,10 +27,12 @@ class CookiesSettingFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $articles = $this->articleFacade->getAllByDomainId($options['domain_id']);
+
         $builder
             ->add('cookiesArticle', FormType::CHOICE, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->articles, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($articles, 'name', [], null, 'id'),
                 'placeholder' => t('-- Choose article --'),
             ])
             ->add('save', FormType::SUBMIT);
@@ -43,8 +43,9 @@ class CookiesSettingFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('domain_id')
+            ->setAllowedTypes('domain_id', 'int')
+            ->setDefault('attr', ['novalidate' => 'novalidate']);
     }
 }

@@ -41,29 +41,27 @@ class HeurekaController extends AdminBaseController
      */
     public function settingAction(Request $request)
     {
-        $selectedDomainId = $this->selectedDomain->getId();
-        $selectedDomainConfig = $this->selectedDomain->getCurrentSelectedDomain();
-        $locale = $selectedDomainConfig->getLocale();
+        $domainId = $this->selectedDomain->getId();
+        $domainConfig = $this->selectedDomain->getCurrentSelectedDomain();
+        $locale = $domainConfig->getLocale();
         $formView = null;
 
         if ($this->heurekaFacade->isDomainLocaleSupported($locale)) {
-            $form = $this->createForm(new HeurekaShopCertificationFormType());
-            $heurekaShopCertificationData = [];
+            $heurekaShopCertificationData = [
+                'heurekaApiKey' => $this->heurekaSetting->getApiKeyByDomainId($domainId),
+                'heurekaWidgetCode' => $this->heurekaSetting->getHeurekaShopCertificationWidgetByDomainId($domainId),
+            ];
 
-            $heurekaShopCertificationData['heurekaApiKey'] = $this->heurekaSetting->getApiKeyByDomainId($selectedDomainId);
-            $heurekaShopCertificationData['heurekaWidgetCode'] = $this->heurekaSetting->getHeurekaShopCertificationWidgetByDomainId(
-                $selectedDomainId
-            );
-            $form->setData($heurekaShopCertificationData);
+            $form = $this->createForm(HeurekaShopCertificationFormType::class, $heurekaShopCertificationData);
             $form->handleRequest($request);
 
             if ($form->isValid()) {
                 $heurekaShopCertificationData = $form->getData();
 
-                $this->heurekaSetting->setApiKeyForDomain($heurekaShopCertificationData['heurekaApiKey'], $selectedDomainId);
+                $this->heurekaSetting->setApiKeyForDomain($heurekaShopCertificationData['heurekaApiKey'], $domainId);
                 $this->heurekaSetting->setHeurekaShopCertificationWidgetForDomain(
                     $heurekaShopCertificationData['heurekaWidgetCode'],
-                    $selectedDomainId
+                    $domainId
                 );
 
                 $this->getFlashMessageSender()->addSuccessFlash(t('Settings modified.'));
@@ -74,7 +72,7 @@ class HeurekaController extends AdminBaseController
         return $this->render('@ShopsysShop/Admin/Content/Heureka/setting.html.twig', [
             'form' => $formView,
             'serverName' => $this->heurekaFacade->getServerNameByLocale($locale),
-            'selectedDomainConfig' => $selectedDomainConfig,
+            'selectedDomainConfig' => $domainConfig,
         ]);
     }
 

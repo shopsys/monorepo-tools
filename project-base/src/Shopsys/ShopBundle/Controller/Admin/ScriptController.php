@@ -47,11 +47,7 @@ class ScriptController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm(new ScriptFormType());
-        $scriptData = new ScriptData();
-        $scriptVariables = $this->getOrderSentPageScriptVariableLabelsIndexedByVariables();
-
-        $form->setData($scriptData);
+        $form = $this->createForm(ScriptFormType::class, new ScriptData());
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -73,7 +69,7 @@ class ScriptController extends AdminBaseController
 
         return $this->render('@ShopsysShop/Admin/Content/Script/new.html.twig', [
             'form' => $form->createView(),
-            'scriptVariables' => $scriptVariables,
+            'scriptVariables' => $this->getOrderSentPageScriptVariableLabelsIndexedByVariables(),
         ]);
     }
 
@@ -85,13 +81,10 @@ class ScriptController extends AdminBaseController
     public function editAction(Request $request, $scriptId)
     {
         $script = $this->scriptFacade->getById($scriptId);
-        $scriptVariables = $this->getOrderSentPageScriptVariableLabelsIndexedByVariables();
-
-        $form = $this->createForm(new ScriptFormType());
         $scriptData = new ScriptData();
         $scriptData->setFromEntity($script);
 
-        $form->setData($scriptData);
+        $form = $this->createForm(ScriptFormType::class, $scriptData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -113,7 +106,7 @@ class ScriptController extends AdminBaseController
         return $this->render('@ShopsysShop/Admin/Content/Script/edit.html.twig', [
             'script' => $script,
             'form' => $form->createView(),
-            'scriptVariables' => $scriptVariables,
+            'scriptVariables' => $this->getOrderSentPageScriptVariableLabelsIndexedByVariables(),
         ]);
     }
 
@@ -173,10 +166,9 @@ class ScriptController extends AdminBaseController
     public function googleAnalyticsAction(Request $request)
     {
         $domainId = $this->selectedDomain->getId();
-        $form = $this->createForm(new GoogleAnalyticsScriptFormType());
         $formData = ['trackingId' => $this->scriptFacade->getGoogleAnalyticsTrackingId($domainId)];
 
-        $form->setData($formData);
+        $form = $this->createForm(GoogleAnalyticsScriptFormType::class, $formData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

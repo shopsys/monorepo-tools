@@ -3,7 +3,9 @@
 namespace Shopsys\ShopBundle\Form\Admin\Seo;
 
 use Shopsys\ShopBundle\Component\Constraints\NotInArray;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,33 +13,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class SeoSettingFormType extends AbstractType
 {
     /**
-     * @var string[]
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */
-    private $titlesOnOtherDomains;
+    private $domain;
 
     /**
-     * @var string[]
+     * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade
      */
-    private $titleAddOnsOnOtherDomains;
+    private $seoSettingFacade;
 
-    /**
-     * @var string[]
-     */
-    private $descriptionsOnOtherDomains;
-
-    /**
-     * @param string[] $titlesOnOtherDomains
-     * @param string[] $titleAddOnsOnOtherDomains
-     * @param string[] $descriptionsOnOtherDomains
-     */
     public function __construct(
-        array $titlesOnOtherDomains,
-        array $titleAddOnsOnOtherDomains,
-        array $descriptionsOnOtherDomains
+        Domain $domain,
+        SeoSettingFacade $seoSettingFacade
     ) {
-        $this->titlesOnOtherDomains = $titlesOnOtherDomains;
-        $this->titleAddOnsOnOtherDomains = $titleAddOnsOnOtherDomains;
-        $this->descriptionsOnOtherDomains = $descriptionsOnOtherDomains;
+        $this->domain = $domain;
+        $this->seoSettingFacade = $seoSettingFacade;
     }
 
     /**
@@ -46,12 +36,23 @@ class SeoSettingFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $titlesOnOtherDomains = [];
+        $titleAddOnsOnOtherDomains = [];
+        $descriptionsOnOtherDomains = [];
+        foreach ($this->domain->getAllIds() as $domainId) {
+            if ($domainId !== $options['domain_id']) {
+                $titlesOnOtherDomains[] = $this->seoSettingFacade->getTitleMainPage($domainId);
+                $titleAddOnsOnOtherDomains[] = $this->seoSettingFacade->getTitleAddOn($domainId);
+                $descriptionsOnOtherDomains[] = $this->seoSettingFacade->getDescriptionMainPage($domainId);
+            }
+        }
+
         $builder
             ->add('title', FormType::TEXT, [
                 'required' => false,
                 'constraints' => [
                     new NotInArray([
-                        'array' => $this->titlesOnOtherDomains,
+                        'array' => array_diff($titlesOnOtherDomains, [null]),
                         'message' => 'Same title is used on another domain',
                     ]),
                 ],
@@ -60,7 +61,7 @@ class SeoSettingFormType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new NotInArray([
-                        'array' => $this->titleAddOnsOnOtherDomains,
+                        'array' => array_diff($titleAddOnsOnOtherDomains, [null]),
                         'message' => 'Same title complement is used on another domain',
                     ]),
                 ],
@@ -69,7 +70,7 @@ class SeoSettingFormType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new NotInArray([
-                        'array' => $this->descriptionsOnOtherDomains,
+                        'array' => array_diff($descriptionsOnOtherDomains, [null]),
                         'message' => 'Same description is used on another domain',
                     ]),
                 ],
@@ -82,8 +83,9 @@ class SeoSettingFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('domain_id')
+            ->addAllowedTypes('domain_id', 'int')
+            ->setDefault('attr', ['novalidate' => 'novalidate']);
     }
 }

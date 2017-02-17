@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Form\Admin\Pricing\Currency;
 
 use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,16 +13,13 @@ use Symfony\Component\Validator\Constraints;
 class CurrencySettingsFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]
+     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
      */
-    private $currencies;
+    private $currencyFacade;
 
-    /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[] $currencies
-     */
-    public function __construct(array $currencies)
+    public function __construct(CurrencyFacade $currencyFacade)
     {
-        $this->currencies = $currencies;
+        $this->currencyFacade = $currencyFacade;
     }
 
     /**
@@ -33,7 +31,7 @@ class CurrencySettingsFormType extends AbstractType
         $builder
             ->add('defaultCurrency', FormType::CHOICE, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->currencies, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->currencyFacade->getAll(), 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter default currency']),
                 ],
@@ -43,7 +41,7 @@ class CurrencySettingsFormType extends AbstractType
                 'type' => 'choice',
                 'options' => [
                     'required' => true,
-                    'choice_list' => new ObjectChoiceList($this->currencies, 'name', [], null, 'id'),
+                    'choice_list' => new ObjectChoiceList($this->currencyFacade->getAll(), 'name', [], null, 'id'),
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter default currency']),
                     ],

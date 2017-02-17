@@ -152,6 +152,15 @@ class PricingGroupFacade
     }
 
     /**
+     * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
+     */
+    public function getByDomainId($domainId)
+    {
+        return $this->pricingGroupRepository->getPricingGroupsByDomainId($domainId);
+    }
+
+    /**
      * @param int $id
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]

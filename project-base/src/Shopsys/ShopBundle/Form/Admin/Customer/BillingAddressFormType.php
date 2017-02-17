@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Form\Admin\Customer;
 
 use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -17,16 +18,13 @@ class BillingAddressFormType extends AbstractType
     const VALIDATION_GROUP_COMPANY_CUSTOMER = 'companyCustomer';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\Country[]
+     * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
      */
-    private $countries;
+    private $countryFacade;
 
-    /**
-     * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
-     */
-    public function __construct(array $countries)
+    public function __construct(CountryFacade $countryFacade)
     {
-        $this->countries = $countries;
+        $this->countryFacade = $countryFacade;
     }
 
     /**
@@ -36,11 +34,16 @@ class BillingAddressFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $countries = $this->countryFacade->getAllByDomainId($options['domain_id']);
+
         $builder
             ->add('telephone', FormType::TEXT, [
                 'required' => false,
                 'constraints' => [
-                    new Constraints\Length(['max' => 30, 'maxMessage' => 'Telephone number cannot be longer than {{ limit }} characters']),
+                    new Constraints\Length([
+                        'max' => 30,
+                        'maxMessage' => 'Telephone number cannot be longer than {{ limit }} characters',
+                    ]),
                 ],
             ])
             ->add('companyCustomer', FormType::CHECKBOX, ['required' => false])
@@ -111,7 +114,7 @@ class BillingAddressFormType extends AbstractType
             ])
             ->add('country', FormType::CHOICE, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($countries, 'name', [], null, 'id'),
             ]);
     }
 
@@ -120,21 +123,24 @@ class BillingAddressFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => BillingAddressData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-            'validation_groups' => function (FormInterface $form) {
-                $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
+        $resolver
+            ->setRequired('domain_id')
+            ->addAllowedTypes('domain_id', 'int')
+            ->setDefaults([
+                'data_class' => BillingAddressData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+                'validation_groups' => function (FormInterface $form) {
+                    $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
-                $billingAddressData = $form->getData();
-                /* @var $billingAddressData \Shopsys\ShopBundle\Model\Customer\BillingAddressData */
+                    $billingAddressData = $form->getData();
+                    /* @var $billingAddressData \Shopsys\ShopBundle\Model\Customer\BillingAddressData */
 
-                if ($billingAddressData->companyCustomer) {
-                    $validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;
-                }
+                    if ($billingAddressData->companyCustomer) {
+                        $validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;
+                    }
 
-                return $validationGroups;
-            },
-        ]);
+                    return $validationGroups;
+                },
+            ]);
     }
 }

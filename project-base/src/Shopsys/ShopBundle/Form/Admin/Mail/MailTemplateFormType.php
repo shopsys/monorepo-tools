@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Transformers\EmptyWysiwygTransformer;
 use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
-use Shopsys\ShopBundle\Model\Mail\MailTypeInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -18,19 +17,6 @@ use Symfony\Component\Validator\Constraints;
 class MailTemplateFormType extends AbstractType
 {
     const VALIDATION_GROUP_SEND_MAIL = 'sendMail';
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailTypeInterface
-     */
-    private $mailType;
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Mail\MailTypeInterface $mailType
-     */
-    public function __construct(MailTypeInterface $mailType)
-    {
-        $this->mailType = $mailType;
-    }
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
@@ -48,14 +34,14 @@ class MailTemplateFormType extends AbstractType
             ])
             ->add('subject', FormType::TEXT, [
                 'required' => true,
-                'constraints' => $this->getSubjectConstraints(),
+                'constraints' => $this->getSubjectConstraints($options),
             ])
             ->add(
                 $builder
                     ->create('body', FormType::WYSIWYG, [
                         'required' => true,
                         'config_name' => 'email',
-                        'constraints' => $this->getBodyConstraints(),
+                        'constraints' => $this->getBodyConstraints($options),
                     ])
                     ->addModelTransformer(new EmptyWysiwygTransformer())
             )
@@ -75,9 +61,10 @@ class MailTemplateFormType extends AbstractType
     }
 
     /**
+     * @param array $options
      * @return \Symfony\Component\Validator\Constraint[]
      */
-    private function getSubjectConstraints()
+    private function getSubjectConstraints(array $options)
     {
         $subjectConstraints = [];
 
@@ -90,7 +77,7 @@ class MailTemplateFormType extends AbstractType
             'maxMessage' => 'E-mail subject cannot be longer than {{ limit }} characters',
         ]);
 
-        foreach ($this->mailType->getRequiredSubjectVariables() as $variableName) {
+        foreach ($options['required_subject_variables'] as $variableName) {
             $subjectConstraints[] = new Contains([
                 'needle' => $variableName,
                 'message' => 'Variable {{ needle }} is required',
@@ -102,9 +89,10 @@ class MailTemplateFormType extends AbstractType
     }
 
     /**
+     * @param array $options
      * @return \Symfony\Component\Validator\Constraint[]
      */
-    private function getBodyConstraints()
+    private function getBodyConstraints(array $options)
     {
         $bodyConstraints = [];
 
@@ -113,7 +101,7 @@ class MailTemplateFormType extends AbstractType
             'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
         ]);
 
-        foreach ($this->mailType->getRequiredBodyVariables() as $variableName) {
+        foreach ($options['required_body_variables'] as $variableName) {
             $bodyConstraints[] = new Contains([
                 'needle' => $variableName,
                 'message' => 'Variable {{ needle }} is required',
@@ -129,21 +117,26 @@ class MailTemplateFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => MailTemplateData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-            'validation_groups' => function (FormInterface $form) {
-                $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
+        $resolver
+            ->setRequired(['required_subject_variables', 'required_body_variables'])
+            ->setAllowedTypes('required_subject_variables', 'array')
+            ->setAllowedTypes('required_body_variables', 'array')
+            ->setDefaults([
+                'required_subject_variables' => [],
+                'required_body_variables' => [],
+                'data_class' => MailTemplateData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+                'validation_groups' => function (FormInterface $form) {
+                    $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
+                    $mailTemplateData = $form->getData();
+                    /* @var $mailTemplateData \Shopsys\ShopBundle\Model\Mail\MailTemplateData */
 
-                $mailTemplateData = $form->getData();
-                /* @var $mailTemplateData \Shopsys\ShopBundle\Model\Mail\MailTemplateData */
+                    if ($mailTemplateData->sendMail) {
+                        $validationGroups[] = self::VALIDATION_GROUP_SEND_MAIL;
+                    }
 
-                if ($mailTemplateData->sendMail) {
-                    $validationGroups[] = self::VALIDATION_GROUP_SEND_MAIL;
-                }
-
-                return $validationGroups;
-            },
-        ]);
+                    return $validationGroups;
+                },
+            ]);
     }
 }

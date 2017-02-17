@@ -13,19 +13,6 @@ use Symfony\Component\Validator\Constraints;
 class BrandFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand|null
-     */
-    private $brand;
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand|null $brand
-     */
-    public function __construct(Brand $brand = null)
-    {
-        $this->brand = $brand;
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
@@ -45,7 +32,7 @@ class BrandFormType extends AbstractType
             ])
             ->add('urls', FormType::URL_LIST, [
                 'route_name' => 'front_brand_detail',
-                'entity_id' => $this->brand === null ? null : $this->brand->getId(),
+                'entity_id' => $options['brand'] !== null ? $options['brand']->getId() : null,
             ])
             ->add('image', FormType::FILE_UPLOAD, [
                 'required' => false,
@@ -67,9 +54,12 @@ class BrandFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => BrandData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('brand')
+            ->setAllowedTypes('brand', [Brand::class, 'null'])
+            ->setDefaults([
+                'data_class' => BrandData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

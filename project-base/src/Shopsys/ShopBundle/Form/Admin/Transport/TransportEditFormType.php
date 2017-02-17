@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Form\Admin\Transport;
 
 use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportEditData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,23 +13,13 @@ use Symfony\Component\Validator\Constraints;
 class TransportEditFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory
+     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
      */
-    private $transportFormTypeFactory;
+    private $currencyFacade;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]
-     */
-    private $currencies;
-
-    /**
-     * @param \Shopsys\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory $transportFormTypeFactory
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[] $currencies
-     */
-    public function __construct(TransportFormTypeFactory $transportFormTypeFactory, array $currencies)
+    public function __construct(CurrencyFacade $currencyFacade)
     {
-        $this->transportFormTypeFactory = $transportFormTypeFactory;
-        $this->currencies = $currencies;
+        $this->currencyFacade = $currencyFacade;
     }
 
     /**
@@ -38,7 +29,7 @@ class TransportEditFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('transportData', $this->transportFormTypeFactory->create())
+            ->add('transportData', TransportFormType::class)
             ->add($this->getPricesBuilder($builder))
             ->add('save', FormType::SUBMIT);
     }
@@ -52,7 +43,7 @@ class TransportEditFormType extends AbstractType
         $pricesBuilder = $builder->create('prices', null, [
             'compound' => true,
         ]);
-        foreach ($this->currencies as $currency) {
+        foreach ($this->currencyFacade->getAll() as $currency) {
             $pricesBuilder
                 ->add($currency->getId(), FormType::MONEY, [
                     'currency' => false,

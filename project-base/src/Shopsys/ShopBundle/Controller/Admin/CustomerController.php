@@ -12,9 +12,9 @@ use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Controller\Admin\LoginController;
 use Shopsys\ShopBundle\Form\Admin\Customer\CustomerFormType;
-use Shopsys\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory;
 use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
+use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -50,11 +50,6 @@ class CustomerController extends AdminBaseController
     private $customerFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory
-     */
-    private $customerFormTypeFactory;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
@@ -85,11 +80,6 @@ class CustomerController extends AdminBaseController
     private $loginAsUserFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
-     */
-    private $domain;
-
-    /**
      * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
@@ -98,27 +88,23 @@ class CustomerController extends AdminBaseController
         PricingGroupSettingFacade $pricingGroupSettingFacade,
         CustomerListAdminFacade $customerListAdminFacade,
         CustomerFacade $customerFacade,
-        CustomerFormTypeFactory $customerFormTypeFactory,
         Breadcrumb $breadcrumb,
         AdministratorGridFacade $administratorGridFacade,
         GridFactory $gridFactory,
         SelectedDomain $selectedDomain,
         OrderFacade $orderFacade,
         LoginAsUserFacade $loginAsUserFacade,
-        Domain $domain,
         DomainRouterFactory $domainRouterFactory
     ) {
         $this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
         $this->customerListAdminFacade = $customerListAdminFacade;
         $this->customerFacade = $customerFacade;
-        $this->customerFormTypeFactory = $customerFormTypeFactory;
         $this->breadcrumb = $breadcrumb;
         $this->administratorGridFacade = $administratorGridFacade;
         $this->gridFactory = $gridFactory;
         $this->selectedDomain = $selectedDomain;
         $this->orderFacade = $orderFacade;
         $this->loginAsUserFacade = $loginAsUserFacade;
-        $this->domain = $domain;
         $this->domainRouterFactory = $domainRouterFactory;
     }
 
@@ -130,12 +116,13 @@ class CustomerController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $user = $this->customerFacade->getUserById($id);
-        $form = $this->createForm($this->customerFormTypeFactory->create(CustomerFormType::SCENARIO_EDIT, $user));
-
         $customerData = new CustomerData();
         $customerData->setFromEntity($user);
 
-        $form->setData($customerData);
+        $form = $this->createForm(CustomerFormType::class, $customerData, [
+            'scenario' => CustomerFormType::SCENARIO_EDIT,
+            'domain_id' => $this->selectedDomain->getId(),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -182,8 +169,7 @@ class CustomerController extends AdminBaseController
         $administrator = $this->getUser();
         /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
 
-        $quickSearchForm = $this->createForm(new QuickSearchFormType());
-        $quickSearchForm->setData(new QuickSearchFormData());
+        $quickSearchForm = $this->createForm(QuickSearchFormType::class, new QuickSearchFormData());
         $quickSearchForm->handleRequest($request);
         $quickSearchData = $quickSearchForm->getData();
 
@@ -230,19 +216,20 @@ class CustomerController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm(
-            $this->customerFormTypeFactory->create(CustomerFormType::SCENARIO_CREATE),
-            null,
-            ['validation_groups' => ['Default', CustomerFormType::SCENARIO_CREATE]]
-        );
-
         $customerData = new CustomerData();
         $userData = new UserData();
         $defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupBySelectedDomain();
         $userData->pricingGroup = $defaultPricingGroup;
         $customerData->userData = $userData;
 
-        $form->setData($customerData);
+        $form = $this->createForm(CustomerFormType::class, $customerData, [
+            'scenario' => CustomerFormType::SCENARIO_CREATE,
+            'domain_id' => $this->selectedDomain->getId(),
+            'validation_groups' => [
+                ValidationGroup::VALIDATION_GROUP_DEFAULT,
+                CustomerFormType::SCENARIO_CREATE,
+            ],
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

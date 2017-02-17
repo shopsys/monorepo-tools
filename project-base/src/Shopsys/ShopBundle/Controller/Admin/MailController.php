@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
-use Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType;
 use Shopsys\ShopBundle\Form\Admin\Mail\MailSettingFormType;
 use Shopsys\ShopBundle\Model\Customer\Mail\RegistrationMailService;
 use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
@@ -19,11 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MailController extends AdminBaseController
 {
-    /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory
-     */
-    private $allMailTemplatesFormTypeFactory;
-
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\Mail\RegistrationMailService
      */
@@ -60,7 +55,6 @@ class MailController extends AdminBaseController
     private $orderStatusFacade;
 
     public function __construct(
-        AllMailTemplatesFormTypeFactory $allMailTemplatesFormTypeFactory,
         ResetPasswordMail $resetPasswordMail,
         OrderMailService $orderMailService,
         RegistrationMailService $registrationMailService,
@@ -69,7 +63,6 @@ class MailController extends AdminBaseController
         MailSettingFacade $mailSettingFacade,
         OrderStatusFacade $orderStatusFacade
     ) {
-        $this->allMailTemplatesFormTypeFactory = $allMailTemplatesFormTypeFactory;
         $this->resetPasswordMail = $resetPasswordMail;
         $this->orderMailService = $orderMailService;
         $this->registrationMailService = $registrationMailService;
@@ -135,7 +128,7 @@ class MailController extends AdminBaseController
      */
     public function templateAction(Request $request)
     {
-        $form = $this->createForm($this->allMailTemplatesFormTypeFactory->create());
+        $form = $this->createForm(AllMailTemplatesFormType::class);
 
         $allMailTemplatesData = $this->mailTemplateFacade->getAllMailTemplatesDataByDomainId($this->selectedDomain->getId());
 
@@ -170,16 +163,12 @@ class MailController extends AdminBaseController
     {
         $selectedDomainId = $this->selectedDomain->getId();
 
-        $form = $this->createForm(new MailSettingFormType());
+        $mailSettingData = [
+            'email' => $this->mailSettingFacade->getMainAdminMail($selectedDomainId),
+            'name' => $this->mailSettingFacade->getMainAdminMailName($selectedDomainId),
+        ];
 
-        $mailSettingData = [];
-
-        if (!$form->isSubmitted()) {
-            $mailSettingData['email'] = $this->mailSettingFacade->getMainAdminMail($selectedDomainId);
-            $mailSettingData['name'] = $this->mailSettingFacade->getMainAdminMailName($selectedDomainId);
-        }
-
-        $form->setData($mailSettingData);
+        $form = $this->createForm(MailSettingFormType::class, $mailSettingData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

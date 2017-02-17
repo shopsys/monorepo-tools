@@ -8,6 +8,7 @@ use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Form\Admin\Administrator\AdministratorFormType;
+use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorFacade;
@@ -92,12 +93,12 @@ class AdministratorController extends AdminBaseController
             throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException($message);
         }
 
-        $form = $this->createForm(new AdministratorFormType(AdministratorFormType::SCENARIO_EDIT));
-
         $administratorData = new AdministratorData();
         $administratorData->setFromEntity($administrator);
 
-        $form->setData($administratorData);
+        $form = $this->createForm(AdministratorFormType::class, $administratorData, [
+            'scenario' => AdministratorFormType::SCENARIO_EDIT,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -155,15 +156,13 @@ class AdministratorController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm(
-            new AdministratorFormType(AdministratorFormType::SCENARIO_CREATE),
-            null,
-            ['validation_groups' => ['Default', AdministratorFormType::SCENARIO_CREATE]]
-        );
-
-        $administratorData = new AdministratorData();
-
-        $form->setData($administratorData);
+        $form = $this->createForm(AdministratorFormType::class, new AdministratorData(), [
+            'scenario' => AdministratorFormType::SCENARIO_CREATE,
+            'validation_groups' => [
+                ValidationGroup::VALIDATION_GROUP_DEFAULT,
+                AdministratorFormType::SCENARIO_CREATE,
+            ],
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

@@ -12,16 +12,6 @@ use Symfony\Component\Validator\Constraints;
 class CartFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Cart\Cart
-     */
-    private $cart;
-
-    public function __construct(\Shopsys\ShopBundle\Model\Cart\Cart $cart)
-    {
-        $this->cart = $cart;
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

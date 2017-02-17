@@ -70,8 +70,6 @@ class BestsellingProductController extends AdminBaseController
      */
     public function detailAction(Request $request)
     {
-        $form = $this->createForm(new BestsellingProductFormType());
-
         $category = $this->categoryFacade->getById($request->get('categoryId'));
         $domainId = $request->get('domainId');
 
@@ -80,7 +78,7 @@ class BestsellingProductController extends AdminBaseController
             $domainId
         );
 
-        $form->setData(['products' => $products]);
+        $form = $this->createForm(BestsellingProductFormType::class, ['products' => $products]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

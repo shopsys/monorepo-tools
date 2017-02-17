@@ -74,11 +74,9 @@ class BrandController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $brand = $this->brandFacade->getById($id);
-        $form = $this->createForm(new BrandFormType($brand));
-
         $brandData = $this->brandDataFactory->createFromBrand($brand);
 
-        $form->setData($brandData);
+        $form = $this->createForm(BrandFormType::class, $brandData, ['brand' => $brand]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -147,11 +145,7 @@ class BrandController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm(new BrandFormType());
-
-        $brandData = new BrandData();
-
-        $form->setData($brandData);
+        $form = $this->createForm(BrandFormType::class, new BrandData(), ['brand' => null]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

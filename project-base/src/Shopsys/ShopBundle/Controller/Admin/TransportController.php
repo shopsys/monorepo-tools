@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormType;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
@@ -17,11 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TransportController extends AdminBaseController
 {
-    /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory
-     */
-    private $transportEditFormTypeFactory;
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
      */
@@ -55,7 +50,6 @@ class TransportController extends AdminBaseController
     public function __construct(
         TransportFacade $transportFacade,
         TransportGridFactory $transportGridFactory,
-        TransportEditFormTypeFactory $transportEditFormTypeFactory,
         TransportEditDataFactory $transportEditDataFactory,
         CurrencyFacade $currencyFacade,
         TransportDetailFactory $transportDetailFactory,
@@ -63,7 +57,6 @@ class TransportController extends AdminBaseController
     ) {
         $this->transportFacade = $transportFacade;
         $this->transportGridFactory = $transportGridFactory;
-        $this->transportEditFormTypeFactory = $transportEditFormTypeFactory;
         $this->transportEditDataFactory = $transportEditDataFactory;
         $this->currencyFacade = $currencyFacade;
         $this->transportDetailFactory = $transportDetailFactory;
@@ -76,11 +69,9 @@ class TransportController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm($this->transportEditFormTypeFactory->create());
-
         $transportEditData = $this->transportEditDataFactory->createDefault();
 
-        $form->setData($transportEditData);
+        $form = $this->createForm(TransportEditFormType::class, $transportEditData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -114,12 +105,9 @@ class TransportController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $transport = $this->transportFacade->getById($id);
-        /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
-        $form = $this->createForm($this->transportEditFormTypeFactory->create());
-
         $transportEditData = $this->transportEditDataFactory->createFromTransport($transport);
 
-        $form->setData($transportEditData);
+        $form = $this->createForm(TransportEditFormType::class, $transportEditData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

@@ -22,14 +22,6 @@ class PricingGroupSettingFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
-     */
-    public function getPricingGroupsBySelectedDomainId()
-    {
-        return $this->pricingGroupRepository->getPricingGroupsByDomainId($this->selectedDomain->getId());
-    }
-
-    /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return bool
      */

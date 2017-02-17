@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Form\Admin\Transport;
 
 use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -13,16 +14,13 @@ use Symfony\Component\Validator\Constraints;
 class TransportFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
+     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
      */
-    private $vats;
+    private $vatFacade;
 
-    /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[] $vats
-     */
-    public function __construct(array $vats)
+    public function __construct(VatFacade $vatFacade)
     {
-        $this->vats = $vats;
+        $this->vatFacade = $vatFacade;
     }
 
     /**
@@ -50,7 +48,7 @@ class TransportFormType extends AbstractType
             ->add('hidden', FormType::YES_NO, ['required' => false])
             ->add('vat', FormType::CHOICE, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->vatFacade->getAll(), 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],

@@ -6,6 +6,7 @@ use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Advert\Advert;
 use Shopsys\ShopBundle\Model\Advert\AdvertData;
+use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -18,23 +19,12 @@ class AdvertFormType extends AbstractType
     const VALIDATION_GROUP_TYPE_CODE = 'typeCode';
 
     /**
-     * @var array
+     * @var \Shopsys\ShopBundle\Model\Advert\AdvertPositionList
      */
-    private $advertPositionsLocalizedNamesByName;
+    private $advertPositionList;
 
-    /**
-     * @var bool
-     */
-    private $imageUploaded;
-
-    /**
-     * @param bool $imageUploaded
-     * @param array $advertPositionsLocalizedNamesByName
-     */
-    public function __construct($imageUploaded, array $advertPositionsLocalizedNamesByName)
-    {
-        $this->imageUploaded = $imageUploaded;
-        $this->advertPositionsLocalizedNamesByName = $advertPositionsLocalizedNamesByName;
+    public function __construct(AdvertPositionList $advertPositionList) {
+        $this->advertPositionList = $advertPositionList;
     }
 
     /**
@@ -74,7 +64,7 @@ class AdvertFormType extends AbstractType
             ])
             ->add('positionName', FormType::CHOICE, [
                 'required' => true,
-                'choices' => $this->advertPositionsLocalizedNamesByName,
+                'choices' => $this->advertPositionList->getTranslationsIndexedByValue(),
                 'placeholder' => t('-- Choose area --'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose advertisement area']),
@@ -102,7 +92,7 @@ class AdvertFormType extends AbstractType
                             . 'Maximum size of an image is {{ limit }} {{ suffix }}.',
                     ]),
                 ],
-                'constraints' => ($this->imageUploaded ? [] : $imageConstraints),
+                'constraints' => ($options['image_exists'] ? [] : $imageConstraints),
             ])
             ->add('save', FormType::SUBMIT);
     }
@@ -112,23 +102,27 @@ class AdvertFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => AdvertData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-            'validation_groups' => function (FormInterface $form) {
-                $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
+        $resolver
+            ->setRequired('image_exists')
+            ->setAllowedTypes('image_exists', 'bool')
+            ->setDefaults([
+                'image_exists' => false,
+                'data_class' => AdvertData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+                'validation_groups' => function (FormInterface $form) {
+                    $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
-                $advertData = $form->getData();
-                /* @var $advertData \Shopsys\ShopBundle\Model\Advert\AdvertData */
+                    $advertData = $form->getData();
+                    /* @var $advertData \Shopsys\ShopBundle\Model\Advert\AdvertData */
 
-                if ($advertData->type === Advert::TYPE_CODE) {
-                    $validationGroups[] = self::VALIDATION_GROUP_TYPE_CODE;
-                } elseif ($advertData->type === Advert::TYPE_IMAGE) {
-                    $validationGroups[] = self::VALIDATION_GROUP_TYPE_IMAGE;
-                }
-                return $validationGroups;
-            },
-        ]);
+                    if ($advertData->type === Advert::TYPE_CODE) {
+                        $validationGroups[] = self::VALIDATION_GROUP_TYPE_CODE;
+                    } elseif ($advertData->type === Advert::TYPE_IMAGE) {
+                        $validationGroups[] = self::VALIDATION_GROUP_TYPE_IMAGE;
+                    }
+                    return $validationGroups;
+                },
+            ]);
     }
 
     /**

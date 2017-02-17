@@ -9,7 +9,7 @@ use Shopsys\ShopBundle\Component\Grid\DataSourceInterface;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Order\OrderFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Order\OrderFormType;
 use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
@@ -57,11 +57,6 @@ class OrderController extends AdminBaseController
     private $orderFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Order\OrderFormTypeFactory
-     */
-    private $orderFormTypeFactory;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemFacade
      */
     private $orderItemFacade;
@@ -87,7 +82,6 @@ class OrderController extends AdminBaseController
         OrderItemPriceCalculation $orderItemPriceCalculation,
         AdministratorGridFacade $administratorGridFacade,
         GridFactory $gridFactory,
-        OrderFormTypeFactory $orderFormTypeFactory,
         Breadcrumb $breadcrumb,
         OrderItemFacade $orderItemFacade,
         TransportFacade $transportFacade,
@@ -99,7 +93,6 @@ class OrderController extends AdminBaseController
         $this->orderItemPriceCalculation = $orderItemPriceCalculation;
         $this->administratorGridFacade = $administratorGridFacade;
         $this->gridFactory = $gridFactory;
-        $this->orderFormTypeFactory = $orderFormTypeFactory;
         $this->breadcrumb = $breadcrumb;
         $this->orderItemFacade = $orderItemFacade;
         $this->transportFacade = $transportFacade;
@@ -116,12 +109,11 @@ class OrderController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $order = $this->orderFacade->getById($id);
-        $form = $this->createForm($this->orderFormTypeFactory->createForOrder($order));
 
         $orderData = new OrderData();
         $orderData->setFromEntity($order);
 
-        $form->setData($orderData);
+        $form = $this->createForm(OrderFormType::class, $orderData, ['order' => $order]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -176,7 +168,6 @@ class OrderController extends AdminBaseController
     public function addProductAction(Request $request, $orderId)
     {
         $productId = $request->get('productId');
-
         $orderItem = $this->orderItemFacade->createOrderProductInOrder($orderId, $productId);
 
         $order = $this->orderFacade->getById($orderId);
@@ -184,7 +175,7 @@ class OrderController extends AdminBaseController
         $orderData = new OrderData();
         $orderData->setFromEntity($order);
 
-        $form = $this->createForm($this->orderFormTypeFactory->createForOrder($order));
+        $form = $this->createForm(OrderFormType::class, $orderData, ['order' => $order]);
         $form->setData($orderData);
 
         $orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
@@ -209,8 +200,7 @@ class OrderController extends AdminBaseController
         $advancedSearchForm = $this->advancedSearchOrderFacade->createAdvancedSearchOrderForm($request);
         $advancedSearchData = $advancedSearchForm->getData();
 
-        $quickSearchForm = $this->createForm(new QuickSearchFormType());
-        $quickSearchForm->setData(new QuickSearchFormData());
+        $quickSearchForm = $this->createForm(QuickSearchFormType::class, new QuickSearchFormData());
         $quickSearchForm->handleRequest($request);
         $quickSearchData = $quickSearchForm->getData();
 
