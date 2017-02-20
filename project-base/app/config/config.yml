@@ -152,11 +152,10 @@ swiftmailer:
 twig:
   debug: "%kernel.debug%"
   exception_controller: 'Shopsys\ShopBundle\Controller\Front\ErrorController::showAction'
-  form:
-    resources:
-      - '@ShopsysShop/Common/Form/theme.html.twig'
-      - '@ShopsysShop/Admin/Form/colorpickerFields.html.twig'
-      - '@ShopsysShop/Admin/Form/fileuploadFields.html.twig'
+  form_themes:
+    - '@ShopsysShop/Common/Form/theme.html.twig'
+    - '@ShopsysShop/Admin/Form/colorpickerFields.html.twig'
+    - '@ShopsysShop/Admin/Form/fileuploadFields.html.twig'
   strict_variables: true
   globals:
     globalMultipleFormSetting: '@shopsys.shop.component.form.multiple_form_setting'
