@@ -34,14 +34,6 @@ class AddProductFormType extends AbstractType
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'add_product_form';
-    }
-
-    /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)

@@ -12,14 +12,6 @@ use Symfony\Component\Validator\Constraints;
 class CountryFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'country_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

@@ -11,14 +11,6 @@ use Symfony\Component\Validator\Constraints;
 class HeurekaShopCertificationFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'heureka_shop_certification_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

@@ -13,14 +13,6 @@ class DomainFormType extends AbstractType
     const DOMAIN_ICON = 'icon';
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'domain_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

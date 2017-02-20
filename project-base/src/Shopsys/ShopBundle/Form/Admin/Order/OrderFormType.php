@@ -55,14 +55,6 @@ class OrderFormType extends AbstractType
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'order_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)

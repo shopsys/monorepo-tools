@@ -11,14 +11,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class BestsellingProductFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'bestselling_product_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

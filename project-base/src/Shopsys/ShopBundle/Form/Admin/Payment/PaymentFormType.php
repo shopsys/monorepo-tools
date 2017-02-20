@@ -33,14 +33,6 @@ class PaymentFormType extends AbstractType
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'payment_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)

@@ -12,14 +12,6 @@ use Symfony\Component\Validator\Constraints;
 class MailSettingFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'mail_setting_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

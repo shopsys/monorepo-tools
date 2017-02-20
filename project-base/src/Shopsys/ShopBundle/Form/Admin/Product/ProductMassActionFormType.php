@@ -11,14 +11,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProductMassActionFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'mass_action_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

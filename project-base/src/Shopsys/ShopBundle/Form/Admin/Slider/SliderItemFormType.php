@@ -24,11 +24,6 @@ class SliderItemFormType extends AbstractType
         $this->scenarioCreate = $scenarioCreate;
     }
 
-    public function getName()
-    {
-        return 'slider_item_form';
-    }
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options

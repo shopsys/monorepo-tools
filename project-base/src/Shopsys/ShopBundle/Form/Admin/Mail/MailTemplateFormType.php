@@ -146,12 +146,4 @@ class MailTemplateFormType extends AbstractType
             },
         ]);
     }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'mail_template_form';
-    }
 }

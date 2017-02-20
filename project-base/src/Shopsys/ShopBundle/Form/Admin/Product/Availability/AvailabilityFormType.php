@@ -12,14 +12,6 @@ use Symfony\Component\Validator\Constraints;
 class AvailabilityFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'availability_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

@@ -38,14 +38,6 @@ class AdvertFormType extends AbstractType
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'advert_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)

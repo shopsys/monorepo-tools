@@ -103,14 +103,6 @@ class ProductEditFormType extends AbstractType
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'product_edit_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)

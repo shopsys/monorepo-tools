@@ -13,14 +13,6 @@ use Symfony\Component\Validator\Constraints;
 class SubscriptionFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'newsletter_subscription_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

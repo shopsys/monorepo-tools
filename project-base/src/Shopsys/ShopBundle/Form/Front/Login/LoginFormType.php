@@ -38,7 +38,7 @@ class LoginFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'front_login_form';
     }

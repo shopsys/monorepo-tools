@@ -14,8 +14,6 @@ use Symfony\Component\Validator\Constraints;
 
 class ProductFilterFormType extends AbstractType
 {
-    const NAME = 'product_filter_form';
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
      */
@@ -107,14 +105,6 @@ class ProductFilterFormType extends AbstractType
                 'choice_list' => new IndexedObjectChoiceList($this->brandFilterChoices, 'id', 'name', [], null, 'id'),
             ])
             ->add('search', FormType::SUBMIT);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return self::NAME;
     }
 
     /**

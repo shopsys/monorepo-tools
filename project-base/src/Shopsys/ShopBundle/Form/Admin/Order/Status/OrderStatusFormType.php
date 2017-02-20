@@ -12,14 +12,6 @@ use Symfony\Component\Validator\Constraints;
 class OrderStatusFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'order_status_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

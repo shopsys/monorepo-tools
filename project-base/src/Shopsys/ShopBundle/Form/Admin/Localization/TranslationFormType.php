@@ -48,14 +48,6 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'translation_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

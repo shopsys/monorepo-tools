@@ -23,11 +23,6 @@ class AdministratorFormType extends AbstractType
         $this->scenario = $scenario;
     }
 
-    public function getName()
-    {
-        return 'administrator_form';
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

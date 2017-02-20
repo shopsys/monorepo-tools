@@ -15,14 +15,6 @@ class VariantFormType extends AbstractType
     const VARIANTS = 'variants';
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'variant_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

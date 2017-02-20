@@ -12,14 +12,6 @@ use Symfony\Component\Validator\Constraints;
 class OrderItemFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'order_item_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

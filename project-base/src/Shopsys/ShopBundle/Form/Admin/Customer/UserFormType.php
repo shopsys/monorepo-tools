@@ -42,14 +42,6 @@ class UserFormType extends AbstractType
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'user_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)

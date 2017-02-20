@@ -10,14 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class GoogleAnalyticsScriptFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'google_analytics_script_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

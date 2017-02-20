@@ -55,14 +55,6 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'parameter_filter_form';
-    }
-
-    /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)

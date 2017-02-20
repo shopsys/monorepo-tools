@@ -31,14 +31,6 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'free_transport_and_payment_price_limits_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

@@ -12,14 +12,6 @@ use Symfony\Component\Validator\Constraints;
 class InputPriceTypeFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'input_price_type_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

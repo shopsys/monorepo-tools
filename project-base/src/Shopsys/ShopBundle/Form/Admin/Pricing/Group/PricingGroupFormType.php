@@ -12,14 +12,6 @@ use Symfony\Component\Validator\Constraints;
 class PricingGroupFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'pricing_group_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

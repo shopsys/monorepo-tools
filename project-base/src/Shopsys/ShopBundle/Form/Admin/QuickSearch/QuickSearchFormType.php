@@ -10,14 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class QuickSearchFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'quick_search_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

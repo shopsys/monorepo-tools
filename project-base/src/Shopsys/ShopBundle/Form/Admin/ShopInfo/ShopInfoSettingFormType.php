@@ -10,14 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ShopInfoSettingFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'shop_info_setting_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
