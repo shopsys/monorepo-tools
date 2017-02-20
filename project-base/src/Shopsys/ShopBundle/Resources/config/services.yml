@@ -19,8 +19,7 @@ services:
 
   doctrine.orm.default_entity_manager:
     class: %doctrine.orm.entity_manager.class%
-    factory_class: %doctrine.orm.entity_manager.class%
-    factory_method: create
+    factory: [%doctrine.orm.entity_manager.class%, create]
     arguments:
       - '@doctrine.dbal.default_connection'
       - '@doctrine.orm.default_configuration'
@@ -30,8 +29,7 @@ services:
 
   faker.generator:
     class: Faker\Generator
-    factory_class: Faker\Factory
-    factory_method: create
+    factory: [Faker\Factory, create]
     calls:
       - [seed, [%faker.seed%]]
 
@@ -82,8 +80,7 @@ services:
 
   shopsys.shop.breadcrumb.front_breadcrumb_resolver:
     class: Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
-    factory_service: shopsys.shop.breadcrumb.front_breadcrumb_resolver_factory
-    factory_method: create
+    factory: ['@shopsys.shop.breadcrumb.front_breadcrumb_resolver_factory', create]
 
   shopsys.shop.breadcrumb.front_breadcrumb_resolver_factory:
     class: Shopsys\ShopBundle\Model\Breadcrumb\FrontBreadcrumbResolverFactory
@@ -114,8 +111,7 @@ services:
 
   shopsys.shop.component.cron.config.cron_config:
     class: Shopsys\ShopBundle\Component\Cron\Config\CronConfig
-    factory_service: shopsys.shop.component.cron.config.cron_config_factory
-    factory_method: create
+    factory: ['@shopsys.shop.component.cron.config.cron_config_factory', create]
     arguments:
       - %shopsys.cron_config_filepath%
 
@@ -149,8 +145,7 @@ services:
 
   shopsys.shop.component.domain:
     class: Shopsys\ShopBundle\Component\Domain\Domain
-    factory_service: shopsys.shop.component.domain.domain_factory
-    factory_method: create
+    factory: ['@shopsys.shop.component.domain.domain_factory', create]
     arguments:
       - %shopsys.domain_config_filepath%
       - %shopsys.domain_urls_config_filepath%
@@ -239,8 +234,7 @@ services:
 
   shopsys.shop.component.image.image_config:
     class: Shopsys\ShopBundle\Component\Image\Config\ImageConfig
-    factory_service: shopsys.shop.component.image.image_config_loader
-    factory_method: loadFromYaml
+    factory: ['@shopsys.shop.component.image.image_config_loader', loadFromYaml]
     arguments:
       - %shopsys.image_config_filepath%
 
@@ -280,8 +274,7 @@ services:
 
   shopsys.shop.component.javascript.parser.translator.js_translator_call_parser:
     class: Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
-    factory_service: shopsys.shop.component.javascript.parser.translator.js_translator_call_parser_factory
-    factory_method: create
+    factory: ['@shopsys.shop.component.javascript.parser.translator.js_translator_call_parser_factory', create]
 
   shopsys.shop.component.javascript.parser.translator.js_translator_call_parser_factory:
     class: Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory
@@ -330,8 +323,7 @@ services:
 
   shopsys.shop.component.translation.php_file_extractor:
     class: Shopsys\ShopBundle\Component\Translation\PhpFileExtractor
-    factory_service: shopsys.shop.component.translation.php_file_extractor_factory
-    factory_method: create
+    factory: ['@shopsys.shop.component.translation.php_file_extractor_factory', create]
     tags:
       - { name: jms_translation.file_visitor }
 
@@ -368,8 +360,7 @@ services:
 
   shopsys.shop.component.uploaded_file.config.uploaded_file_config:
     class: Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
-    factory_service: shopsys.shop.component.uploaded_file.config.uploaded_file_config_loader
-    factory_method: loadFromYaml
+    factory: ['@shopsys.shop.component.uploaded_file.config.uploaded_file_config_loader', loadFromYaml]
     arguments:
       - %shopsys.uploaded_file_config_filepath%
 
@@ -456,8 +447,7 @@ services:
 
   shopsys.shop.localization.custom_date_time_formatter:
     class: Shopsys\ShopBundle\Component\Localization\DateTimeFormatter
-    factory_service: shopsys.shop.localization.custom_date_time_formatter_factory
-    factory_method: create
+    factory: ['@shopsys.shop.localization.custom_date_time_formatter_factory', create]
 
   shopsys.shop.localization.custom_date_time_formatter_factory:
     class: Shopsys\ShopBundle\Model\Localization\CustomDateTimeFormatterFactory
