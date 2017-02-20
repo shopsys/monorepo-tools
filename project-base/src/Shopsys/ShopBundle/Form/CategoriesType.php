@@ -58,7 +58,7 @@ class CategoriesType extends AbstractType
             'expanded' => true,
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID,
         ]);
 
