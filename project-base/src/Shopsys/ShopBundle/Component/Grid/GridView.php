@@ -31,9 +31,9 @@ class GridView
     private $theme;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Request
+     * @var \Symfony\Component\HttpFoundation\RequestStack
      */
-    private $request;
+    private $requestStack;
 
     /**
      * @var \Symfony\Component\Routing\Router
@@ -50,6 +50,8 @@ class GridView
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
      * @param \Symfony\Component\Routing\Router $router
      * @param \Twig_Environment $twig
+     * @param string|string[] $theme
+     * @param array $templateParameters
      */
     public function __construct(
         Grid $grid,
@@ -60,7 +62,7 @@ class GridView
         array $templateParameters = []
     ) {
         $this->grid = $grid;
-        $this->request = $requestStack->getMasterRequest();
+        $this->requestStack = $requestStack;
         $this->router = $router;
         $this->twig = $twig;
 
@@ -196,9 +198,10 @@ class GridView
      */
     public function getUrl(array $parameters = null, $removeParameters = null)
     {
+        $masterRequest = $this->requestStack->getMasterRequest();
         $routeParameters = $this->grid->getUrlParameters($parameters, $removeParameters);
 
-        return $this->router->generate($this->request->attributes->get('_route'), $routeParameters, true);
+        return $this->router->generate($masterRequest->attributes->get('_route'), $routeParameters, true);
     }
 
     /**

@@ -2,26 +2,26 @@
 
 namespace Shopsys\ShopBundle\Component\Translation;
 
-use PHPParser_Node;
-use PHPParser_Node_Expr_Concat;
-use PHPParser_Node_Scalar_String;
+use PhpParser\Node;
+use PhpParser\Node\Expr\BinaryOp\Concat;
+use PhpParser\Node\Scalar\String_;
 use Shopsys\ShopBundle\Component\Translation\Exception\StringValueUnextractableException;
 use SplFileInfo;
 
 class PhpParserNodeHelper
 {
     /**
-     * @param \PHPParser_Node $node
+     * @param \PhpParser\Node $node
      * @param \SplFileInfo $fileInfo
      * @return string
      */
-    public static function getConcatenatedStringValue(PHPParser_Node $node, SplFileInfo $fileInfo)
+    public static function getConcatenatedStringValue(Node $node, SplFileInfo $fileInfo)
     {
-        if ($node instanceof PHPParser_Node_Scalar_String) {
+        if ($node instanceof String_) {
             return $node->value;
         }
 
-        if ($node instanceof PHPParser_Node_Expr_Concat) {
+        if ($node instanceof Concat) {
             return self::getConcatenatedStringValue($node->left, $fileInfo) . self::getConcatenatedStringValue($node->right, $fileInfo);
         }
 

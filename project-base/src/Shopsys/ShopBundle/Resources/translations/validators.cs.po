@@ -73,8 +73,8 @@ msgstr "Každý parametr může být nastaven pouze jednou"
 msgid "Email cannot be longer then {{ limit }} characters"
 msgstr "E-mail nesmí být delší než {{ limit }} znaků"
 
-#: Admin/Product/ProductFormType.php:234
-#: Admin/Product/ProductFormType.php:241
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:234
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:241
 #: ProductFormType.php:232
 #: ProductFormType.php:239
 msgid "Enter date in DD.MM.YYYY format"
@@ -149,7 +149,7 @@ msgstr "Název nesmí být delší než {{ limit }} znaků"
 msgid "Number of days to despatch must be greater or equal to {{ compared_value }}"
 msgstr "Počet dní k expedici musí být větší nebo roven {{ compared_value }}"
 
-#: Product/Availability/AvailabilityFormType.php:41
+#: src/Shopsys/ShopBundle/Form/Admin/Product/Availability/AvailabilityFormType.php:41
 msgid "Number of days to expedite must be whole number."
 msgstr "Počet dní k expedici musí být celé číslo"
 
@@ -185,11 +185,11 @@ msgstr "Heslo nesmí být stejné jako část e-mailu před zavináčem."
 msgid "Password cannot be same as username"
 msgstr "Heslo nesmí být stejné jako přihlašovací jméno"
 
-#: Admin/Administrator/AdministratorFormType.php:69
-#: Admin/Customer/UserFormType.php:94
-#: Customer/Password/NewPasswordFormType.php:31
-#: Front/Customer/UserFormType.php:59
-#: Front/Registration/RegistrationFormType.php:55
+#: src/Shopsys/ShopBundle/Form/Admin/Administrator/AdministratorFormType.php:69
+#: src/Shopsys/ShopBundle/Form/Admin/Customer/UserFormType.php:94
+#: src/Shopsys/ShopBundle/Form/Front/Customer/Password/NewPasswordFormType.php:31
+#: src/Shopsys/ShopBundle/Form/Front/Customer/UserFormType.php:59
+#: src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php:55
 msgid "Passwords do not match"
 msgstr "Hesla se neshodují"
 
@@ -238,13 +238,13 @@ msgstr "Prosím vyberte obrázek"
 msgid "Please choose parameter"
 msgstr "Prosím vyberte parametr"
 
-#: Front/Order/TransportAndPaymentFormType.php:59
-#: TransportAndPaymentFormType.php:57
+#: src/Shopsys/ShopBundle/Form/Front/Order/TransportAndPaymentFormType.php:57
+#: TransportAndPaymentFormType.php:55
 msgid "Please choose payment type"
 msgstr "Vyberte prosím platbu"
 
-#: Front/Order/TransportAndPaymentFormType.php:51
-#: TransportAndPaymentFormType.php:49
+#: src/Shopsys/ShopBundle/Form/Front/Order/TransportAndPaymentFormType.php:50
+#: TransportAndPaymentFormType.php:48
 msgid "Please choose shipping type"
 msgstr "Vyberte prosím dopravu"
 
@@ -260,7 +260,7 @@ msgstr "Prosím vyberte viditelnost."
 msgid "Please enter HTML code for advertisement area"
 msgstr "Vyplňte prosím HTML kód pro reklamní plochu"
 
-#: Admin/Vat/VatFormType.php:57
+#: src/Shopsys/ShopBundle/Form/Admin/Vat/VatFormType.php:57
 msgid "Please enter VAT in correct format."
 msgstr "Prosím zadejte DPH v platném formátu"
 
@@ -278,7 +278,7 @@ msgstr "Vyplňte prosím název dph"
 msgid "Please enter VAT rate"
 msgstr "Vyplňte prosím výši DPH"
 
-#: Admin/Product/ProductFormType.php:150
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:150
 msgid "Please enter a number"
 msgstr "Prosím zadejte číslo"
 
@@ -450,12 +450,12 @@ msgstr "Vyplňte prosím heslo"
 msgid "Please enter price"
 msgstr "Prosím vyplňte cenu"
 
-#: Admin/Payment/PaymentEditFormType.php:69
-#: Admin/Product/ProductEditFormType.php:263
-#: Admin/Product/ProductFormType.php:209
-#: Admin/Transport/TransportEditFormType.php:69
-#: Front/Product/ProductFilterFormType.php:72
-#: Front/Product/ProductFilterFormType.php:85
+#: src/Shopsys/ShopBundle/Form/Admin/Payment/PaymentEditFormType.php:69
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductEditFormType.php:263
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:209
+#: src/Shopsys/ShopBundle/Form/Admin/Transport/TransportEditFormType.php:69
+#: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:72
+#: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:85
 msgid "Please enter price in correct format (positive number with decimal separator)"
 msgstr "Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)"
 
@@ -472,7 +472,7 @@ msgstr "Vyplňte prosím název cenové skupiny"
 msgid "Please enter quantity"
 msgstr "Vyplňte prosím množství"
 
-#: Pricing/Group/PricingGroupFormType.php:38
+#: src/Shopsys/ShopBundle/Form/Admin/Pricing/Group/PricingGroupFormType.php:38
 msgid "Please enter ratio in correct format"
 msgstr "Prosím zadejte koeficient v platném formátu"
 
@@ -562,7 +562,7 @@ msgstr "Vyplňte prosím platný e-mail"
 msgid "Please enter valid quantity"
 msgstr "Zadejte prosím platné množství"
 
-#: Admin/PromoCode/PromoCodeFormType.php:66
+#: src/Shopsys/ShopBundle/Form/Admin/PromoCode/PromoCodeFormType.php:66
 msgid "Please enter whole number."
 msgstr "Zadejte prosím celé číslo."
 
@@ -575,7 +575,7 @@ msgstr "Zadejte prosím celé číslo."
 msgid "Please enter zip code"
 msgstr "Vyplňte prosím PSČ"
 
-#: ShopBundle/Form/UrlListType.php:95
+#: src/Shopsys/ShopBundle/Form/UrlListType.php:94
 msgid "Previously selected main URL dos not exist any more"
 msgstr "Původně vybraná hlavní URL již neexistuje"
 

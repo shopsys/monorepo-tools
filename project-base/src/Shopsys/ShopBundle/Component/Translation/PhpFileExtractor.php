@@ -8,22 +8,22 @@ use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
-use PHPParser_Node;
-use PHPParser_Node_Expr_FuncCall;
-use PHPParser_Node_Expr_MethodCall;
-use PHPParser_Node_Name;
-use PHPParser_NodeTraverser;
-use PHPParser_NodeVisitor;
+use PhpParser\Node;
+use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Name;
+use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor;
 use Shopsys\ShopBundle\Component\Translation\PhpParserNodeHelper;
 use SplFileInfo;
 use Twig_Node;
 
-class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
+class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
 {
     const DEFAULT_MESSAGE_DOMAIN = 'messages';
 
     /**
-     * @var \PHPParser_NodeTraverser
+     * @var \PhpParser\NodeTraverser
      */
     private $traverser;
 
@@ -48,7 +48,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     private $transMethodSpecifications;
 
     /**
-     * @var \PHPParser_Node|null
+     * @var \PhpParser\Node|null
      */
     private $previousNode;
 
@@ -59,7 +59,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     public function __construct(DocParser $docParser, array $transMethodSpecifications)
     {
         $this->docParser = $docParser;
-        $this->traverser = new PHPParser_NodeTraverser();
+        $this->traverser = new NodeTraverser();
         $this->traverser->addVisitor($this);
 
         $this->transMethodSpecifications = [];
@@ -82,13 +82,13 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     }
 
     /**
-     * @param \PHPParser_Node $node
+     * @param \PhpParser\Node $node
      */
-    public function enterNode(PHPParser_Node $node)
+    public function enterNode(Node $node)
     {
         if ($this->isTransMethodOrFuncCall($node)) {
             if (!$this->isIgnored($node)) {
-                /* @var $node \PHPParser_Node_Expr */
+                /* @var $node \PhpParser\Node\Expr */
                 $messageId = $this->getMessageId($node);
                 $domain = $this->getDomain($node);
 
@@ -103,7 +103,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     }
 
     /**
-     * @param \PHPParser_Node_Expr_MethodCall|\PHPParser_Node_Expr_FuncCall $node
+     * @param \PhpParser\Node\Expr\MethodCall|\PhpParser\Node\Expr\FuncCall $node
      * @return string
      */
     private function getMessageId($node)
@@ -119,7 +119,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     }
 
     /**
-     * @param \PHPParser_Node_Expr_MethodCall|\PHPParser_Node_Expr_FuncCall $node
+     * @param \PhpParser\Node\Expr\MethodCall|\PhpParser\Node\Expr\FuncCall $node
      * @return string
      */
     private function getDomain($node)
@@ -135,12 +135,12 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     }
 
     /**
-     * @param \PHPParser_Node $node
+     * @param \PhpParser\Node $node
      * @return bool
      */
-    private function isTransMethodOrFuncCall(PHPParser_Node $node)
+    private function isTransMethodOrFuncCall(Node $node)
     {
-        if ($node instanceof PHPParser_Node_Expr_MethodCall || $node instanceof PHPParser_Node_Expr_FuncCall) {
+        if ($node instanceof MethodCall || $node instanceof FuncCall) {
             try {
                 $methodName = $this->getNormalizedMethodName($this->getNodeName($node));
             } catch (\Shopsys\ShopBundle\Component\Translation\Exception\ExtractionException $ex) {
@@ -156,10 +156,10 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     }
 
     /**
-     * @param \PHPParser_Node $node
+     * @param \PhpParser\Node $node
      * @return bool
      */
-    private function isIgnored(PHPParser_Node $node)
+    private function isIgnored(Node $node)
     {
         foreach ($this->getAnnotations($node) as $annotation) {
             if ($annotation instanceof Ignore) {
@@ -171,10 +171,10 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     }
 
     /**
-     * @param \PHPParser_Node $node
+     * @param \PhpParser\Node $node
      * @return \Doctrine\Common\Annotations\Annotation[]
      */
-    private function getAnnotations(PHPParser_Node $node)
+    private function getAnnotations(Node $node)
     {
         $docComment = $this->getDocComment($node);
 
@@ -186,10 +186,10 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     }
 
     /**
-     * @param \PHPParser_Node $node
-     * @return \PHPParser_Comment_Doc|null
+     * @param \PhpParser\Node $node
+     * @return \PhpParser\Comment\Doc|null
      */
-    private function getDocComment(PHPParser_Node $node)
+    private function getDocComment(Node $node)
     {
         $docComment = $node->getDocComment();
 
@@ -212,14 +212,14 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     }
 
     /**
-     * @param \PHPParser_Node $node
+     * @param \PhpParser\Node $node
      * @return string
      */
-    private function getNodeName(PHPParser_Node $node)
+    private function getNodeName(Node $node)
     {
-        if ($node instanceof PHPParser_Node_Expr_MethodCall) {
+        if ($node instanceof MethodCall) {
             return $node->name;
-        } elseif ($node instanceof PHPParser_Node_Expr_FuncCall && $node->name instanceof PHPParser_Node_Name) {
+        } elseif ($node instanceof FuncCall && $node->name instanceof Name) {
             return (string)$node->name;
         } else {
             throw new \Shopsys\ShopBundle\Component\Translation\Exception\ExtractionException('Unable to resolve node name');
@@ -235,9 +235,9 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     }
 
     /**
-     * @param \PHPParser_Node $node
+     * @param \PhpParser\Node $node
      */
-    public function leaveNode(PHPParser_Node $node)
+    public function leaveNode(Node $node)
     {
         return null;
     }
