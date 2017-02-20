@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Form;
 use Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository;
 use Shopsys\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class CurrencyType extends AbstractType
@@ -29,9 +29,9 @@ class CurrencyType extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $intlCurrencies = $this->intlCurrencyRepository->getAll($this->localization->getLocale());
 
