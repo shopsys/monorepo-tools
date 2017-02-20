@@ -31,7 +31,6 @@ class ContactFormController extends FrontBaseController
             new ContactFormData(),
             [
                 'action' => $this->generateUrl('front_contact_form_send'),
-                'method' => 'POST',
             ]
         );
         $form->handleRequest($request);
@@ -47,7 +46,6 @@ class ContactFormController extends FrontBaseController
                     new ContactFormData(),
                     [
                         'action' => $this->generateUrl('front_contact_form_send'),
-                        'method' => 'POST',
                     ]
                 );
                 $message = t('Thank you, your message has been sent.');
@@ -73,7 +71,6 @@ class ContactFormController extends FrontBaseController
             new ContactFormData(),
             [
                 'action' => $this->generateUrl('front_contact_form_send'),
-                'method' => 'POST',
             ]
         );
 

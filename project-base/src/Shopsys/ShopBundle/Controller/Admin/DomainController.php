@@ -115,7 +115,6 @@ class DomainController extends AdminBaseController
             new DomainFormType(),
             null,
             [
-                'method' => 'POST',
                 'action' => $this->generateUrl('admin_domain_edit', ['id' => $id]),
             ]
         );

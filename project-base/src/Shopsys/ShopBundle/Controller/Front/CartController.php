@@ -170,7 +170,6 @@ class CartController extends FrontBaseController
         $formData = ['productId' => $product->getId()];
         $form = $this->createForm(new AddProductFormType(), $formData, [
             'action' => $this->generateUrl('front_cart_add_product'),
-            'method' => 'POST',
         ]);
 
         return $this->render('@ShopsysShop/Front/Inline/Cart/addProduct.html.twig', [
@@ -185,9 +184,7 @@ class CartController extends FrontBaseController
      */
     public function addProductAction(Request $request)
     {
-        $form = $this->createForm(new AddProductFormType(), null, [
-            'method' => 'POST',
-        ]);
+        $form = $this->createForm(new AddProductFormType());
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -231,9 +228,7 @@ class CartController extends FrontBaseController
      */
     public function addProductAjaxAction(Request $request)
     {
-        $form = $this->createForm(new AddProductFormType(), null, [
-            'method' => 'POST',
-        ]);
+        $form = $this->createForm(new AddProductFormType());
         $form->handleRequest($request);
 
         if ($form->isValid()) {
