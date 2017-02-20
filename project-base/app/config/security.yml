@@ -50,7 +50,7 @@ security:
         failure_handler: shopsys.shop.security.customer_login_handler
         remember_me: true
       remember_me:
-        key: "%secret%"
+        secret: "%secret%"
         lifetime: 2592000 # 30 days
         path: /
         domain: ~
