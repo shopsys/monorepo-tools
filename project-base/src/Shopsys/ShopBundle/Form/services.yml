@@ -7,7 +7,7 @@ services:
   shopsys.shop.form.collection:
     class: Shopsys\ShopBundle\Form\CollectionType
     tags:
-      - { name: form.type_extension, alias: collection }
+      - { name: form.type_extension, extended_type: collection }
 
   shopsys.shop.form.color_picker:
     class: Shopsys\ShopBundle\Form\ColorPickerType
@@ -57,7 +57,7 @@ services:
   shopsys.shop.form.money:
     class: Shopsys\ShopBundle\Form\MoneyType
     tags:
-      - { name: form.type_extension, alias: money }
+      - { name: form.type_extension, extended_type: money }
 
   shopsys.shop.form.multidomain:
     class: Shopsys\ShopBundle\Form\MultidomainType
@@ -87,7 +87,7 @@ services:
   shopsys.shop.form.timed_form:
     class: Shopsys\ShopBundle\Form\TimedFormTypeExtension
     tags:
-      - { name: form.type_extension, alias: form }
+      - { name: form.type_extension, extended_type: form }
 
   shopsys.shop.form.url_list:
     class: Shopsys\ShopBundle\Form\UrlListType
@@ -97,7 +97,7 @@ services:
   shopsys.shop.form.wysiwyg:
     class: Shopsys\ShopBundle\Form\WysiwygType
     tags:
-      - { name: form.type_extension, alias: ckeditor }
+      - { name: form.type_extension, extended_type: ckeditor }
 
   shopsys.shop.form.yes_no:
     class: Shopsys\ShopBundle\Form\YesNoType
