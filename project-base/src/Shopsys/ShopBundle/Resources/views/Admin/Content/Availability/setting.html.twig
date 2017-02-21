@@ -3,7 +3,12 @@
         <div class="form-group__title">
             {{ 'Settings'|trans }}
         </div>
-        {{ form_row(form.defaultInStockAvailability, { 'label': 'Default product in stock availability'|trans }) }}
+        {{ form_row(form.defaultInStockAvailability, {
+            label: 'Default product in stock availability'|trans,
+            icon: {
+                title: 'The change will be applied to products in 10 minutes'|trans
+            }
+        }) }}
     </div>
 
     {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}

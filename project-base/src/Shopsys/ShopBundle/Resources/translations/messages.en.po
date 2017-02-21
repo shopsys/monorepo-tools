@@ -1172,7 +1172,7 @@ msgstr ""
 msgid "Default pricing group settings modified"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Availability/setting.html.twig:6
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Availability/setting.html.twig:7
 msgid "Default product in stock availability"
 msgstr ""
 
@@ -3722,7 +3722,7 @@ msgid "Save"
 msgstr ""
 
 #: FormDetailExtension.php:83
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Availability/setting.html.twig:11
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Availability/setting.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Cookies/setting.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Currency/currencySettings.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:18
@@ -4490,6 +4490,10 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:78
 msgid "The basic premis for coding in admin is, that mostly programmers will work with the code. That's why there is a bigger emphasis on helpers -"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Availability/setting.html.twig:9
+msgid "The change will be applied to products in 10 minutes"
 msgstr ""
 
 #: CustomerPasswordController.php:83
