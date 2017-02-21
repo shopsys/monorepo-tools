@@ -7,7 +7,7 @@ use Shopsys\ShopBundle\Component\ConstantList\TranslatedConstantListInterface;
 abstract class AbstractTranslatedConstantList implements TranslatedConstantListInterface
 {
     /**
-     * @return string
+     * @return string[]
      */
     public function getValues()
     {
@@ -28,7 +28,7 @@ abstract class AbstractTranslatedConstantList implements TranslatedConstantListI
     }
 
     /**
-     * @return string[string]
+     * @return string[value]
      */
     abstract public function getTranslationsIndexedByValue();
 }
