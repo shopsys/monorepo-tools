@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Component\Translation;
 use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
+use JMS\TranslationBundle\Model\SourceInterface;
 use JMS\TranslationBundle\Translation\Dumper\DumperInterface;
 
 class PoDumper implements DumperInterface
@@ -23,7 +24,10 @@ class PoDumper implements DumperInterface
         $output .= '"Language: ' . $catalogue->getLocale() . '\n"' . "\n";
         $output .= "\n";
 
-        foreach ($catalogue->getDomain($domain)->all() as $message) {
+        $messages = $catalogue->getDomain($domain)->all();
+        $sortedMessages = $this->sortMessagesByMessageId($messages);
+
+        foreach ($sortedMessages as $message) {
             /* @var $message \JMS\TranslationBundle\Model\Message */
             $output .= $this->getReferences($message);
             $output .= sprintf('msgid "%s"' . "\n", $this->escape($message->getId()));
@@ -47,7 +51,10 @@ class PoDumper implements DumperInterface
     {
         $output = '';
 
-        foreach ($message->getSources() as $source) {
+        $sources = $message->getSources();
+        $sortedSources = $this->sortSourcesByFixedSourcePathAndLineNumber($sources);
+
+        foreach ($sortedSources as $source) {
             /* var $source \JMS\TranslationBundle\Model\SourceInterface */
             if ($source instanceof FileSource) {
                 $sourcePath = $this->fixFileSourcePath($source);
@@ -101,5 +108,44 @@ class PoDumper implements DumperInterface
         }
 
         return implode('/', $fixedPathParts);
+    }
+
+    /**
+     * @param \JMS\TranslationBundle\Model\Message[] $messages
+     * @return \JMS\TranslationBundle\Model\Message[]
+     */
+    private function sortMessagesByMessageId(array $messages)
+    {
+        usort($messages, function (Message $messageA, Message $messageB) {
+            return strcmp($messageA->getId(), $messageB->getId());
+        });
+
+        return $messages;
+    }
+
+    /**
+     * @param \JMS\TranslationBundle\Model\SourceInterface[] $sources
+     * @return \JMS\TranslationBundle\Model\SourceInterface[]
+     */
+    private function sortSourcesByFixedSourcePathAndLineNumber(array $sources)
+    {
+        usort($sources, function (SourceInterface $sourceA, SourceInterface $sourceB) {
+            if ($sourceA instanceof FileSource && $sourceB instanceof FileSource) {
+                $pathsComparisonResult = strcmp(
+                    $this->fixFileSourcePath($sourceA),
+                    $this->fixFileSourcePath($sourceB)
+                );
+
+                if ($pathsComparisonResult !== 0) {
+                    return $pathsComparisonResult;
+                } else {
+                    return $sourceA->getLine() - $sourceB->getLine();
+                }
+            }
+
+            return 0;
+        });
+
+        return $sources;
     }
 }

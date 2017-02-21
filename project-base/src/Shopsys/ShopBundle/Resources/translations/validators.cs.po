@@ -16,12 +16,12 @@ msgstr "Katalogové číslo nesmí být delší než {{ limit }} znaků"
 msgid "Choose image"
 msgstr "Vyberte obrázek"
 
+#: BillingAddressFormType.php:102
 #: BillingAddressFormType.php:107
 #: DeliveryAddressFormType.php:116
+#: DeliveryAddressFormType.php:120
 #: OrderFormType.php:132
 #: OrderFormType.php:218
-#: BillingAddressFormType.php:102
-#: DeliveryAddressFormType.php:120
 #: PersonalInfoFormType.php:116
 #: PersonalInfoFormType.php:208
 msgid "City name cannot be longer than {{ limit }} characters"
@@ -64,33 +64,33 @@ msgid "Each parameter can be used only once"
 msgstr "Každý parametr může být nastaven pouze jednou"
 
 #: AdministratorFormType.php:51
-#: UserFormType.php:75
 #: MailTemplateFormType.php:46
 #: OrderFormType.php:96
-#: ResetPasswordFormType.php:25
 #: PersonalInfoFormType.php:60
 #: RegistrationFormType.php:41
+#: ResetPasswordFormType.php:25
+#: UserFormType.php:75
 msgid "Email cannot be longer then {{ limit }} characters"
 msgstr "E-mail nesmí být delší než {{ limit }} znaků"
 
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:234
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:241
 #: ProductFormType.php:232
 #: ProductFormType.php:239
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:234
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:241
 msgid "Enter date in DD.MM.YYYY format"
 msgstr "Datum zadávejte ve formátu dd.mm.rrrr"
 
-#: UserFormType.php:63
 #: OrderFormType.php:83
-#: UserFormType.php:34
 #: PersonalInfoFormType.php:47
 #: RegistrationFormType.php:28
+#: UserFormType.php:34
+#: UserFormType.php:63
 msgid "First name cannot be longer then {{ limit }} characters"
 msgstr "Jméno nesmí být delší než {{ limit }} znaků"
 
 #: DeliveryAddressFormType.php:67
-#: OrderFormType.php:157
 #: DeliveryAddressFormType.php:68
+#: OrderFormType.php:157
 #: PersonalInfoFormType.php:146
 msgid "First name of contact person cannot be longer then {{ limit }} characters"
 msgstr "Jméno kontaktní osoby nesmí být delší než {{ limit }} znaků"
@@ -122,10 +122,10 @@ msgid "Image can be only in JPG or PNG format"
 msgstr "Obrázek může být pouze ve formátech jpg nebo png"
 
 #: AdvertFormType.php:107
+#: BrandFormType.php:63
 #: CategoryFormType.php:143
 #: DomainFormType.php:35
 #: PaymentFormType.php:92
-#: BrandFormType.php:63
 #: ProductEditFormType.php:143
 #: TransportFormType.php:79
 msgid "Image can be only in JPG, GIF or PNG format"
@@ -135,11 +135,11 @@ msgstr "Obrázek může být pouze ve formátech jpg, png nebo gif"
 msgid "Link must be valid URL address"
 msgstr "Odkaz musí být validní URL adresa"
 
+#: BrandFormType.php:47
 #: CategoryFormType.php:102
+#: CurrencyFormType.php:49
 #: OrderFormType.php:181
 #: PaymentFormType.php:57
-#: CurrencyFormType.php:49
-#: BrandFormType.php:47
 #: ProductParameterValueFormType.php:54
 #: TransportFormType.php:51
 msgid "Name cannot be longer than {{ limit }} characters"
@@ -162,22 +162,22 @@ msgid "Part number cannot be longer than {{ limit }} characters"
 msgstr "Výrobní číslo nesmí být delší než {{ limit }} znaků"
 
 #: AdministratorFormType.php:66
-#: UserFormType.php:91
 #: NewPasswordFormType.php:28
-#: UserFormType.php:55
 #: RegistrationFormType.php:52
+#: UserFormType.php:55
+#: UserFormType.php:91
 msgid "Password cannot be longer then {{ limit }} characters"
 msgstr "Heslo musí mít minimálně {{ limit }} znaků"
 
-#: UserFormType.php:126
-#: UserFormType.php:76
 #: RegistrationFormType.php:83
+#: UserFormType.php:76
+#: UserFormType.php:126
 msgid "Password cannot be same as e-mail"
 msgstr "Heslo nesmí být stejné jako přihlašovací e-mail."
 
-#: UserFormType.php:132
-#: UserFormType.php:82
 #: RegistrationFormType.php:89
+#: UserFormType.php:82
+#: UserFormType.php:132
 msgid "Password cannot be same as part of e-mail before at sign"
 msgstr "Heslo nesmí být stejné jako část e-mailu před zavináčem."
 
@@ -238,13 +238,13 @@ msgstr "Prosím vyberte obrázek"
 msgid "Please choose parameter"
 msgstr "Prosím vyberte parametr"
 
-#: src/Shopsys/ShopBundle/Form/Front/Order/TransportAndPaymentFormType.php:57
 #: TransportAndPaymentFormType.php:55
+#: src/Shopsys/ShopBundle/Form/Front/Order/TransportAndPaymentFormType.php:57
 msgid "Please choose payment type"
 msgstr "Vyberte prosím platbu"
 
-#: src/Shopsys/ShopBundle/Form/Front/Order/TransportAndPaymentFormType.php:50
 #: TransportAndPaymentFormType.php:48
+#: src/Shopsys/ShopBundle/Form/Front/Order/TransportAndPaymentFormType.php:50
 msgid "Please choose shipping type"
 msgstr "Vyberte prosím dopravu"
 
@@ -299,9 +299,9 @@ msgid "Please enter availability name in all languages"
 msgstr "Vyplňte prosím název dostupnosti ve všech jazycích"
 
 #: DeliveryAddressFormType.php:111
+#: DeliveryAddressFormType.php:115
 #: OrderFormType.php:131
 #: OrderFormType.php:214
-#: DeliveryAddressFormType.php:115
 #: PersonalInfoFormType.php:115
 #: PersonalInfoFormType.php:203
 msgid "Please enter city"
@@ -350,14 +350,14 @@ msgid "Please enter discount percentage"
 msgstr "Vyplňte prosím procento slevy."
 
 #: AdministratorFormType.php:50
-#: UserFormType.php:74
+#: ContactFormType.php:45
+#: LoginFormType.php:23
 #: MailSettingFormType.php:31
 #: OrderFormType.php:94
-#: ContactFormType.php:45
-#: ResetPasswordFormType.php:23
-#: LoginFormType.php:23
 #: PersonalInfoFormType.php:58
 #: RegistrationFormType.php:39
+#: ResetPasswordFormType.php:23
+#: UserFormType.php:74
 msgid "Please enter e-mail"
 msgstr "Vyplňte prosím e-mail"
 
@@ -365,17 +365,17 @@ msgstr "Vyplňte prosím e-mail"
 msgid "Please enter e-mail content"
 msgstr "Vyplňte prosím text emailu"
 
-#: UserFormType.php:62
 #: OrderFormType.php:82
-#: UserFormType.php:33
 #: PersonalInfoFormType.php:46
 #: RegistrationFormType.php:27
+#: UserFormType.php:33
+#: UserFormType.php:62
 msgid "Please enter first name"
 msgstr "Vyplňte prosím jméno"
 
 #: DeliveryAddressFormType.php:62
-#: OrderFormType.php:152
 #: DeliveryAddressFormType.php:63
+#: OrderFormType.php:152
 #: PersonalInfoFormType.php:141
 msgid "Please enter first name of contact person"
 msgstr "Vyplňte prosím jméno kontaktní osoby"
@@ -389,8 +389,8 @@ msgid "Please enter flag name in all languages"
 msgstr "Vyplňte prosím název příznaku ve všech jazycích"
 
 #: AdministratorFormType.php:42
-#: MailSettingFormType.php:37
 #: ContactFormType.php:34
+#: MailSettingFormType.php:37
 msgid "Please enter full name"
 msgstr "Vyplňte prosím celé jméno"
 
@@ -411,11 +411,11 @@ msgstr "Prosím vyplňte odkaz"
 msgid "Please enter login"
 msgstr "Vyplňte prosím login"
 
+#: BrandFormType.php:46
 #: CategoryFormType.php:97
+#: CurrencyFormType.php:48
 #: OrderItemFormType.php:31
 #: PaymentFormType.php:53
-#: CurrencyFormType.php:48
-#: BrandFormType.php:46
 #: SliderItemFormType.php:42
 #: TransportFormType.php:46
 msgid "Please enter name"
@@ -434,19 +434,19 @@ msgid "Please enter parameter value"
 msgstr "Prosím vyplňte hodnotu parametru"
 
 #: AdministratorFormType.php:63
-#: UserFormType.php:88
 #: LoginFormType.php:28
-#: NewPasswordFormType.php:27
 #: LoginFormType.php:29
+#: NewPasswordFormType.php:27
 #: RegistrationFormType.php:51
+#: UserFormType.php:88
 msgid "Please enter password"
 msgstr "Vyplňte prosím heslo"
 
+#: FreeTransportAndPaymentPriceLimitsFormType.php:92
 #: PaymentEditFormType.php:71
 #: ProductEditFormType.php:266
 #: ProductFormType.php:212
 #: TransportEditFormType.php:71
-#: FreeTransportAndPaymentPriceLimitsFormType.php:92
 msgid "Please enter price"
 msgstr "Prosím vyplňte cenu"
 
@@ -467,8 +467,8 @@ msgstr "Vyplňte prosím koeficient cenové skupiny"
 msgid "Please enter pricing group name"
 msgstr "Vyplňte prosím název cenové skupiny"
 
-#: OrderItemFormType.php:57
 #: CartFormType.php:38
+#: OrderItemFormType.php:57
 msgid "Please enter quantity"
 msgstr "Vyplňte prosím množství"
 
@@ -493,9 +493,9 @@ msgid "Please enter stock quantity"
 msgstr "Prosím zadejte množství skladem"
 
 #: DeliveryAddressFormType.php:97
+#: DeliveryAddressFormType.php:101
 #: OrderFormType.php:125
 #: OrderFormType.php:200
-#: DeliveryAddressFormType.php:101
 #: PersonalInfoFormType.php:109
 #: PersonalInfoFormType.php:189
 msgid "Please enter street"
@@ -505,17 +505,17 @@ msgstr "Vyplňte prosím ulici"
 msgid "Please enter subject"
 msgstr "Vyplňte prosím předmět"
 
-#: UserFormType.php:68
 #: OrderFormType.php:88
-#: UserFormType.php:39
 #: PersonalInfoFormType.php:52
 #: RegistrationFormType.php:33
+#: UserFormType.php:39
+#: UserFormType.php:68
 msgid "Please enter surname"
 msgstr "Vyplňte prosím příjmení"
 
 #: DeliveryAddressFormType.php:75
-#: OrderFormType.php:166
 #: DeliveryAddressFormType.php:77
+#: OrderFormType.php:166
 #: PersonalInfoFormType.php:155
 msgid "Please enter surname of contact person"
 msgstr "Vyplňte prosím příjmení kontaktní osoby"
@@ -548,13 +548,13 @@ msgid "Please enter valid 3-digit currency code according to ISO 4217 standard (
 msgstr "Prosím zadejte platný třímístný kód měny podle standardu ISO 4217 (velkými písmeny)"
 
 #: AdministratorFormType.php:49
-#: UserFormType.php:76
+#: ContactFormType.php:46
 #: MailSettingFormType.php:32
 #: OrderFormType.php:95
-#: ContactFormType.php:46
-#: ResetPasswordFormType.php:24
 #: PersonalInfoFormType.php:59
 #: RegistrationFormType.php:40
+#: ResetPasswordFormType.php:24
+#: UserFormType.php:76
 msgid "Please enter valid e-mail"
 msgstr "Vyplňte prosím platný e-mail"
 
@@ -567,9 +567,9 @@ msgid "Please enter whole number."
 msgstr "Zadejte prosím celé číslo."
 
 #: DeliveryAddressFormType.php:125
+#: DeliveryAddressFormType.php:129
 #: OrderFormType.php:137
 #: OrderFormType.php:227
-#: DeliveryAddressFormType.php:129
 #: PersonalInfoFormType.php:121
 #: PersonalInfoFormType.php:217
 msgid "Please enter zip code"
@@ -579,13 +579,13 @@ msgstr "Vyplňte prosím PSČ"
 msgid "Previously selected main URL dos not exist any more"
 msgstr "Původně vybraná hlavní URL již neexistuje"
 
+#: FreeTransportAndPaymentPriceLimitsFormType.php:88
 #: PaymentEditFormType.php:74
 #: ProductEditFormType.php:271
-#: ProductFormType.php:217
-#: TransportEditFormType.php:74
-#: FreeTransportAndPaymentPriceLimitsFormType.php:88
 #: ProductFilterFormType.php:76
 #: ProductFilterFormType.php:89
+#: ProductFormType.php:217
+#: TransportEditFormType.php:74
 msgid "Price must be greater or equal to {{ compared_value }}"
 msgstr "Cena musí být větší nebo rovna {{ compared_value }}"
 
@@ -593,8 +593,8 @@ msgstr "Cena musí být větší nebo rovna {{ compared_value }}"
 msgid "Product name cannot be longer than {{ limit }} characters"
 msgstr "Název produktu nesmí být delší než {{ limit }} znaků"
 
-#: OrderItemFormType.php:58
 #: CartFormType.php:39
+#: OrderItemFormType.php:58
 msgid "Quantity must be greater than {{ compared_value }}"
 msgstr "Množství musí být větší než {{ compared_value }}"
 
@@ -614,28 +614,28 @@ msgstr "Stejný titulek už je používán na jiné doméně"
 msgid "Status name cannot be longer than {{ limit }} characters"
 msgstr "Název stavu nesmí být delší než {{ limit }} znaků"
 
+#: BillingAddressFormType.php:96
 #: BillingAddressFormType.php:98
 #: DeliveryAddressFormType.php:102
+#: DeliveryAddressFormType.php:106
 #: OrderFormType.php:126
 #: OrderFormType.php:205
-#: BillingAddressFormType.php:96
-#: DeliveryAddressFormType.php:106
 #: PersonalInfoFormType.php:110
 #: PersonalInfoFormType.php:194
 msgid "Street name cannot be longer than {{ limit }} characters"
 msgstr "Název ulice nesmí být delší než {{ limit }} znaků"
 
-#: UserFormType.php:69
 #: OrderFormType.php:89
-#: UserFormType.php:40
 #: PersonalInfoFormType.php:53
 #: RegistrationFormType.php:34
+#: UserFormType.php:40
+#: UserFormType.php:69
 msgid "Surname cannot be longer than {{ limit }} characters"
 msgstr "Příjmení nesmí být delší než {{ limit }} znaků"
 
 #: DeliveryAddressFormType.php:80
-#: OrderFormType.php:171
 #: DeliveryAddressFormType.php:82
+#: OrderFormType.php:171
 #: PersonalInfoFormType.php:160
 msgid "Surname of contact person cannot be longer than {{ limit }} characters"
 msgstr "Příjmení kontaktní osoby nesmí být delší než {{ limit }} znaků"
@@ -648,9 +648,9 @@ msgstr "DIČ nesmí být delší než {{ limit }} znaků"
 
 #: BillingAddressFormType.php:51
 #: DeliveryAddressFormType.php:89
+#: DeliveryAddressFormType.php:92
 #: OrderFormType.php:102
 #: OrderFormType.php:191
-#: DeliveryAddressFormType.php:92
 #: PersonalInfoFormType.php:66
 #: PersonalInfoFormType.php:180
 msgid "Telephone number cannot be longer than {{ limit }} characters"
@@ -669,10 +669,10 @@ msgid "Uploaded file is to large ({{ size }} {{ suffix }}). Maximum size of an f
 msgstr "Nahraný soubor je příliš velký ({{ size }} {{ suffix }}). Maximální velikost souboru je {{ limit }} {{ suffix }}."
 
 #: AdvertFormType.php:109
+#: BrandFormType.php:65
 #: CategoryFormType.php:145
 #: DomainFormType.php:37
 #: PaymentFormType.php:94
-#: BrandFormType.php:65
 #: ProductEditFormType.php:145
 #: SliderItemFormType.php:58
 #: TransportFormType.php:81
@@ -704,12 +704,12 @@ msgstr "Zadali jste duplicitní zboží. V seznamu nejprodávanějšího zboží
 msgid "You have to agree with terms and conditions"
 msgstr "Musíte souhlasit s obchodními podmínkami."
 
+#: BillingAddressFormType.php:108
 #: BillingAddressFormType.php:116
 #: DeliveryAddressFormType.php:130
+#: DeliveryAddressFormType.php:134
 #: OrderFormType.php:138
 #: OrderFormType.php:232
-#: BillingAddressFormType.php:108
-#: DeliveryAddressFormType.php:134
 #: PersonalInfoFormType.php:122
 #: PersonalInfoFormType.php:222
 msgid "Zip code cannot be longer than {{ limit }} characters"

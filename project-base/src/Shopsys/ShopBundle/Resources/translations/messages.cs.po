@@ -547,8 +547,8 @@ msgstr "Fakturační údaje"
 msgid "Bolder line"
 msgstr "Výraznější řádek"
 
-#: ImageController.php:76
 #: AdvancedSearchProductFilterTranslation.php:18
+#: ImageController.php:76
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:86
@@ -569,8 +569,8 @@ msgstr "Byla upravena značka <strong><a href=\"{{ url }}\">{{ name }}</a></stro
 msgid "Brand <strong>{{ name }}</strong> deleted"
 msgstr "Značka <strong>{{ name }}</strong> byl smazána"
 
-#: FrontBreadcrumbGenerator.php:48
 #: BrandBreadcrumbGenerator.php:30
+#: FrontBreadcrumbGenerator.php:48
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/list.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/list.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Brand/list.html.twig:4
@@ -650,8 +650,8 @@ msgstr "CSS dokumentace"
 msgid "Cart"
 msgstr "Košík"
 
-#: ProductPickerController.php:141
 #: AdvancedSearchProductFilterTranslation.php:11
+#: ProductPickerController.php:141
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:163
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:71
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:55
@@ -770,9 +770,9 @@ msgstr "Vynulovat filtr"
 msgid "Click to go to product section"
 msgstr "Kliknutím přejdete k výběru produktu"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Inline/FlashMessage/messages.html.twig:3
-#: newsletterSubscriptionForm.js:37
 #: addProduct.js:48
+#: newsletterSubscriptionForm.js:37
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Inline/FlashMessage/messages.html.twig:3
 msgid "Close"
 msgstr "Zavřít"
 
@@ -785,8 +785,8 @@ msgstr "Zavřít (Esc)"
 msgid "Close without saving"
 msgstr "Zavřít bez uložení"
 
-#: PromoCodeGridFactory.php:44
 #: CurrencyGridFactory.php:57
+#: PromoCodeGridFactory.php:44
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:21
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Script/detail.html.twig:15
 msgid "Code"
@@ -955,8 +955,8 @@ msgstr "Přehled států"
 msgid "Country"
 msgstr "Stát"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/createVariant.html.twig:10
 #: FormDetailExtension.php:81
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/createVariant.html.twig:10
 msgid "Create"
 msgstr "Vytvořit"
 
@@ -1403,8 +1403,8 @@ msgstr "Opravdu si přejete trvale odstranit jednotku \"%name%\"? Nikde není po
 msgid "Do you want to receive the newest information about our shop? Subscribe to our e-mail newsletter."
 msgstr "Chcete dostávat nejnovější informace z našeho obchodu? Přihlašte se do našeho e-mailového zpravodaje."
 
-#: OrderController.php:241
 #: AdvancedSearchOrderFilterTranslation.php:14
+#: OrderController.php:241
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:15
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/edit.html.twig:47
@@ -1756,8 +1756,8 @@ msgstr "Při nahrávání souboru došlo k chybě."
 msgid "Error occurred while uploading file: %message%"
 msgstr "Při nahrávání souboru došlo k chybě: %message%"
 
-#: grid.inlineEdit.js:91
 #: ajax.js:42
+#: grid.inlineEdit.js:91
 msgid "Error occurred, try again please."
 msgstr "Nastala chyba, zkuste to, prosím, znovu."
 
@@ -2668,21 +2668,21 @@ msgstr "Mé objednávky"
 
 #: AdvertController.php:147
 #: ArticleController.php:272
+#: AvailabilityGridFactory.php:55
 #: BrandController.php:127
+#: CountryGridFactory.php:54
+#: CurrencyGridFactory.php:56
+#: FlagGridFactory.php:55
+#: OrderStatusGridFactory.php:56
+#: ParameterGridFactory.php:70
+#: PaymentGridFactory.php:80
+#: PricingGroupGridFactory.php:54
 #: ProductController.php:371
 #: ProductPickerController.php:140
 #: SliderController.php:77
-#: CountryGridFactory.php:54
-#: OrderStatusGridFactory.php:56
-#: PaymentGridFactory.php:80
-#: CurrencyGridFactory.php:56
-#: PricingGroupGridFactory.php:54
-#: VatGridFactory.php:68
-#: AvailabilityGridFactory.php:55
-#: FlagGridFactory.php:55
-#: ParameterGridFactory.php:70
-#: UnitGridFactory.php:55
 #: TransportGridFactory.php:80
+#: UnitGridFactory.php:55
+#: VatGridFactory.php:68
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:22
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:12
@@ -3094,9 +3094,9 @@ msgstr "Objednávka musí obsahovat alespoň jednu položku"
 msgid "Order not found"
 msgstr "Objednávka nebyla nalezena"
 
+#: AdvancedSearchOrderFilterTranslation.php:11
 #: MailController.php:88
 #: ScriptController.php:198
-#: AdvancedSearchOrderFilterTranslation.php:11
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:9
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:63
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:40
@@ -3324,14 +3324,17 @@ msgstr "Prosím překontrolujte následující informace:"
 #: CategoryController.php:96
 #: CategoryController.php:137
 #: CookiesController.php:68
+#: CustomerController.php:92
 #: CustomerController.php:160
 #: CustomerController.php:270
 #: MailController.php:157
 #: OrderController.php:149
+#: OrderController.php:235
 #: PaymentController.php:99
 #: PaymentController.php:138
 #: ProductController.php:163
 #: ProductController.php:213
+#: RegistrationController.php:75
 #: SeoController.php:68
 #: ShopInfoController.php:69
 #: SliderController.php:120
@@ -3340,9 +3343,6 @@ msgstr "Prosím překontrolujte následující informace:"
 #: TransportAndPaymentController.php:86
 #: TransportController.php:100
 #: TransportController.php:139
-#: CustomerController.php:92
-#: OrderController.php:235
-#: RegistrationController.php:75
 msgid "Please check the correctness of all data filled."
 msgstr "Prosím zkontrolujte si správnost vyplnění všech údajů"
 
@@ -3408,8 +3408,8 @@ msgstr "PSČ"
 msgid "Preview"
 msgstr "Náhled"
 
-#: ProductController.php:372
 #: PaymentGridFactory.php:81
+#: ProductController.php:372
 #: TransportGridFactory.php:81
 msgid "Price"
 msgstr "Cena"
@@ -3721,6 +3721,7 @@ msgstr "Nastavení prodeje s/bez DPH"
 msgid "Save"
 msgstr "Uložit"
 
+#: FormDetailExtension.php:83
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Availability/setting.html.twig:11
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Cookies/setting.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Currency/currencySettings.html.twig:14
@@ -3741,7 +3742,6 @@ msgstr "Uložit"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Vat/vatSettings.html.twig:11
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:164
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:93
-#: FormDetailExtension.php:83
 msgid "Save changes"
 msgstr "Uložit změny"
 
@@ -4216,8 +4216,8 @@ msgstr "Ulice"
 msgid "Subject"
 msgstr "Předmět"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/fileuploadFields.html.twig:51
 #: fileUpload.js:116
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/fileuploadFields.html.twig:51
 msgid "Successfully uploaded"
 msgstr "Úspěšně nahráno"
 
@@ -5025,8 +5025,8 @@ msgid "Writing of css characteristics according to priorities"
 msgstr "Zápis css vlastností podle priorit"
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Feed/list.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Feed/list.html.twig:3
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Feed/list.html.twig:4
 msgid "XML Feeds"
 msgstr "XML Feedy"
 
@@ -5036,6 +5036,7 @@ msgid "XML availability feeds"
 msgstr "XML dostupnostní feedy"
 
 #: YesNoType.php:44
+#: grid.inlineEdit.js:36
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/listGrid.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/list.html.twig:38
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/directDelete.html.twig:4
@@ -5045,7 +5046,6 @@ msgstr "XML dostupnostní feedy"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:209
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:334
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:343
-#: grid.inlineEdit.js:36
 msgid "Yes"
 msgstr "Ano"
 
