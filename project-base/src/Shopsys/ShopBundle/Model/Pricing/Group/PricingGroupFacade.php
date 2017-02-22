@@ -135,8 +135,8 @@ class PricingGroupFacade
             $newPricingGroup = null;
         }
 
-        if ($newPricingGroup !== null && $this->pricingGroupSettingFacade->isPricingGroupDefault($oldPricingGroup)) {
-            $this->pricingGroupSettingFacade->setDefaultPricingGroup($newPricingGroup);
+        if ($newPricingGroup !== null && $this->pricingGroupSettingFacade->isPricingGroupDefaultOnSelectedDomain($oldPricingGroup)) {
+            $this->pricingGroupSettingFacade->setDefaultPricingGroupForSelectedDomain($newPricingGroup);
         }
 
         $this->em->remove($oldPricingGroup);

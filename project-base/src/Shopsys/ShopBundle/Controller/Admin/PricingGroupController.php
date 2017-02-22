@@ -112,14 +112,14 @@ class PricingGroupController extends AdminBaseController
             $remainingPricingGroups = $this->pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId());
             $remainingPricingGroupsList = new ObjectChoiceList($remainingPricingGroups, 'name', [], null, 'id');
 
-            if ($this->pricingGroupSettingFacade->isPricingGroupUsed($pricingGroup)) {
+            if ($this->pricingGroupSettingFacade->isPricingGroupUsedOnSelectedDomain($pricingGroup)) {
                 $message = t(
                     'For removing pricing group "%name%" you have to choose other one to be set everywhere where the existing one is used. '
                     . 'Which pricing group you want to set instead?',
                     ['%name%' => $pricingGroup->getName()]
                 );
 
-                if ($this->pricingGroupSettingFacade->isPricingGroupDefault($pricingGroup)) {
+                if ($this->pricingGroupSettingFacade->isPricingGroupDefaultOnSelectedDomain($pricingGroup)) {
                     $message = t(
                         'Pricing group "%name%" set as default. For deleting it you have to choose other one to be set everywhere '
                         . 'where the existing one is used. Which pricing group you want to set instead?',
@@ -164,7 +164,7 @@ class PricingGroupController extends AdminBaseController
         if ($form->isValid()) {
             $pricingGroupSettingsFormData = $form->getData();
 
-            $this->pricingGroupSettingFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
+            $this->pricingGroupSettingFacade->setDefaultPricingGroupForSelectedDomain($pricingGroupSettingsFormData['defaultPricingGroup']);
 
             $this->getFlashMessageSender()->addSuccessFlash(t('Default pricing group settings modified'));
 
