@@ -28,7 +28,6 @@ class PoDumper implements DumperInterface
         $sortedMessages = $this->sortMessagesByMessageId($messages);
 
         foreach ($sortedMessages as $message) {
-            /* @var $message \JMS\TranslationBundle\Model\Message */
             $output .= $this->getReferences($message);
             $output .= sprintf('msgid "%s"' . "\n", $this->escape($message->getId()));
             if ($message->isNew()) {
@@ -55,7 +54,6 @@ class PoDumper implements DumperInterface
         $sortedSources = $this->sortSourcesByFixedSourcePathAndLineNumber($sources);
 
         foreach ($sortedSources as $source) {
-            /* var $source \JMS\TranslationBundle\Model\SourceInterface */
             if ($source instanceof FileSource) {
                 $sourcePath = $this->fixFileSourcePath($source);
 
