@@ -248,7 +248,7 @@
             <fileset dir="${path.app}/lock/">
                 <exclude name="/" />
             </fileset>
-            <fileset dir="${path.root}/docs/">
+            <fileset dir="${path.root}/docs/generated/">
                 <exclude name="/" />
             </fileset>
             <fileset dir="${path.web}/content/">

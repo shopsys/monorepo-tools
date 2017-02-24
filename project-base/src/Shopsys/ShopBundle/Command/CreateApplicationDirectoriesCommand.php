@@ -34,8 +34,7 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
         $directories = [];
         $directories[] = $this->getContainer()->getParameter('kernel.root_dir') . '/lock';
         $directories[] = $this->getContainer()->getParameter('kernel.root_dir') . '/errorPages';
-        $directories[] = $this->getContainer()->getParameter('shopsys.root_dir') . '/docs/admin';
-        $directories[] = $this->getContainer()->getParameter('shopsys.root_dir') . '/docs/frontend';
+        $directories[] = $this->getContainer()->getParameter('shopsys.root_dir') . '/docs/generated';
         $directories[] = $this->getContainer()->getParameter('shopsys.web_dir') . '/assets/admin/styles';
         $directories[] = $this->getContainer()->getParameter('shopsys.web_dir') . '/assets/frontend/styles';
         $directories[] = $this->getContainer()->getParameter('shopsys.web_dir') . '/assets/scripts';

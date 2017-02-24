@@ -46,12 +46,6 @@
         </exec>
     </target>
 
-    <target name="docs" description="Grunt: deprecated">
-        <exec executable="${path.grunt.executable}" passthru="true" checkreturn="true">
-            <arg value="docs" />
-        </exec>
-    </target>
-
     <target name="dump-translations" description="Extracts translation messages from whole project including back-end">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="app/console" />
