@@ -16,12 +16,6 @@
             ]
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/shopsys/coding-standards.git"
-        }
-    ],
     "require": {
         "doctrine/dbal": "~2.5",
         "doctrine/doctrine-migrations-bundle": "~1.1",
