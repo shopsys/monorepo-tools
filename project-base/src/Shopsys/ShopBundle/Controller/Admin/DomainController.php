@@ -111,15 +111,9 @@ class DomainController extends AdminBaseController
         $id = (int)$id;
         $domain = $this->domain->getDomainConfigById($id);
 
-        $form = $this->createForm(
-            new DomainFormType(),
-            null,
-            [
-                'method' => 'POST',
-                'action' => $this->generateUrl('admin_domain_edit', ['id' => $id]),
-            ]
-        );
-
+        $form = $this->createForm(DomainFormType::class, null, [
+            'action' => $this->generateUrl('admin_domain_edit', ['id' => $id]),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

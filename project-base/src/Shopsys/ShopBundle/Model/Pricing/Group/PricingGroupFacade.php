@@ -135,8 +135,8 @@ class PricingGroupFacade
             $newPricingGroup = null;
         }
 
-        if ($newPricingGroup !== null && $this->pricingGroupSettingFacade->isPricingGroupDefault($oldPricingGroup)) {
-            $this->pricingGroupSettingFacade->setDefaultPricingGroup($newPricingGroup);
+        if ($newPricingGroup !== null && $this->pricingGroupSettingFacade->isPricingGroupDefaultOnSelectedDomain($oldPricingGroup)) {
+            $this->pricingGroupSettingFacade->setDefaultPricingGroupForSelectedDomain($newPricingGroup);
         }
 
         $this->em->remove($oldPricingGroup);
@@ -149,6 +149,15 @@ class PricingGroupFacade
     public function getAll()
     {
         return $this->pricingGroupRepository->getAll();
+    }
+
+    /**
+     * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
+     */
+    public function getByDomainId($domainId)
+    {
+        return $this->pricingGroupRepository->getPricingGroupsByDomainId($domainId);
     }
 
     /**

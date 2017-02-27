@@ -111,9 +111,8 @@ class ProductPickerController extends AdminBaseController
         $advancedSearchForm = $this->advancedSearchFacade->createAdvancedSearchForm($request);
         $advancedSearchData = $advancedSearchForm->getData();
 
-        $quickSearchForm = $this->createForm(new QuickSearchFormType());
         $quickSearchData = new QuickSearchFormData();
-        $quickSearchForm->setData($quickSearchData);
+        $quickSearchForm = $this->createForm(QuickSearchFormType::class, $quickSearchData);
         $quickSearchForm->handleRequest($request);
 
         $isAdvancedSearchFormSubmitted = $this->advancedSearchFacade->isAdvancedSearchFormSubmitted($request);

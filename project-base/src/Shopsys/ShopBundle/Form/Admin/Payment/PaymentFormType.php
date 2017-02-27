@@ -4,40 +4,30 @@ namespace Shopsys\ShopBundle\Form\Admin\Payment;
 
 use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Payment\PaymentData;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class PaymentFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Transport[]
+     * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
      */
-    private $allTransports;
+    private $transportFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
+     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
      */
-    private $vats;
+    private $vatFacade;
 
-    /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $allTransports
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[] $vats
-     */
-    public function __construct(array $allTransports, array $vats)
+    public function __construct(TransportFacade $transportFacade, VatFacade $vatFacade)
     {
-        $this->allTransports = $allTransports;
-        $this->vats = $vats;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'payment_form';
+        $this->transportFacade = $transportFacade;
+        $this->vatFacade = $vatFacade;
     }
 
     /**
@@ -64,14 +54,14 @@ class PaymentFormType extends AbstractType
             ->add('hidden', FormType::YES_NO, ['required' => false])
             ->add('czkRounding', FormType::YES_NO, ['required' => false])
             ->add('transports', FormType::CHOICE, [
-                'choice_list' => new ObjectChoiceList($this->allTransports, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->transportFacade->getAll(), 'name', [], null, 'id'),
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false,
             ])
             ->add('vat', FormType::CHOICE, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->vatFacade->getAll(), 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],
@@ -99,9 +89,9 @@ class PaymentFormType extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => PaymentData::class,

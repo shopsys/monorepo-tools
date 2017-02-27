@@ -5,18 +5,10 @@ namespace Shopsys\ShopBundle\Form\Admin\QuickSearch;
 use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class QuickSearchFormType extends AbstractType
 {
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'quick_search_form';
-    }
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -31,7 +23,10 @@ class QuickSearchFormType extends AbstractType
             ->add('submit', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],

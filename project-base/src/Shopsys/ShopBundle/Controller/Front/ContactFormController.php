@@ -26,14 +26,9 @@ class ContactFormController extends FrontBaseController
      */
     public function sendAction(Request $request)
     {
-        $form = $this->createForm(
-            new ContactFormType(),
-            new ContactFormData(),
-            [
-                'action' => $this->generateUrl('front_contact_form_send'),
-                'method' => 'POST',
-            ]
-        );
+        $form = $this->createForm(ContactFormType::class, new ContactFormData(), [
+            'action' => $this->generateUrl('front_contact_form_send'),
+        ]);
         $form->handleRequest($request);
 
         $message = '';
@@ -42,14 +37,9 @@ class ContactFormController extends FrontBaseController
 
             try {
                 $this->contactFormFacade->sendMail($contactFormData);
-                $form = $this->createForm(
-                    new ContactFormType(),
-                    new ContactFormData(),
-                    [
-                        'action' => $this->generateUrl('front_contact_form_send'),
-                        'method' => 'POST',
-                    ]
-                );
+                $form = $this->createForm(ContactFormType::class, new ContactFormData(), [
+                    'action' => $this->generateUrl('front_contact_form_send'),
+                ]);
                 $message = t('Thank you, your message has been sent.');
             } catch (\Shopsys\ShopBundle\Model\Mail\Exception\SendMailFailedException $ex) {
                 $message = t('Error occurred when sending e-mail.');
@@ -68,14 +58,9 @@ class ContactFormController extends FrontBaseController
 
     public function indexAction()
     {
-        $form = $this->createForm(
-            new ContactFormType(),
-            new ContactFormData(),
-            [
-                'action' => $this->generateUrl('front_contact_form_send'),
-                'method' => 'POST',
-            ]
-        );
+        $form = $this->createForm(ContactFormType::class, new ContactFormData(), [
+            'action' => $this->generateUrl('front_contact_form_send'),
+        ]);
 
         return $this->render('@ShopsysShop/Front/Content/ContactForm/contactForm.html.twig', [
             'form' => $form->createView(),

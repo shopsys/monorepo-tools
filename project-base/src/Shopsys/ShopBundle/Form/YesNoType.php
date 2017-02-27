@@ -6,7 +6,7 @@ use Shopsys\ShopBundle\Component\Transformers\NoopDataTransformer;
 use Shopsys\ShopBundle\Form\Extension\IndexedChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class YesNoType extends AbstractType
 {
@@ -33,9 +33,9 @@ class YesNoType extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'choice_list' => new IndexedChoiceList(

@@ -3,33 +3,23 @@
 namespace Shopsys\ShopBundle\Form\Admin\Product\Availability;
 
 use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class AvailabilitySettingFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
+     * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
      */
-    private $availabilities;
+    private $availabilityFacade;
 
-    /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability[] $availabilities
-     */
-    public function __construct(array $availabilities)
+    public function __construct(AvailabilityFacade $availabilityFacade)
     {
-        $this->availabilities = $availabilities;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'availability_setting_form';
+        $this->availabilityFacade = $availabilityFacade;
     }
 
     /**
@@ -41,7 +31,7 @@ class AvailabilitySettingFormType extends AbstractType
         $builder
             ->add('defaultInStockAvailability', FormType::CHOICE, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->availabilityFacade->getAll(), 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose availability for stock products']),
                 ],
@@ -49,7 +39,10 @@ class AvailabilitySettingFormType extends AbstractType
             ->add('save', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],

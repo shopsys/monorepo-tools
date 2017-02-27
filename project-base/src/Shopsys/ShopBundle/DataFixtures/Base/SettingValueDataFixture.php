@@ -58,7 +58,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         $manager->persist(new SettingValue(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON));
         $manager->persist(new SettingValue(PricingSetting::ROUNDING_TYPE, PricingSetting::ROUNDING_TYPE_INTEGER, SettingValue::DOMAIN_ID_COMMON));
         $manager->persist(new SettingValue(Vat::SETTING_DEFAULT_VAT, $vat->getId(), SettingValue::DOMAIN_ID_COMMON));
-        $manager->persist(new SettingValue(Setting::ORDER_SUBMITTED_SETTING_NAME, $orderSentTextCs, Domain::FIRST_DOMAIN_ID));
+        $manager->persist(new SettingValue(Setting::ORDER_SENT_PAGE_CONTENT, $orderSentTextCs, Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL, 'no-reply@netdevelo.cz', Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL_NAME, 'Shopsys', Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(Setting::DEFAULT_PRICING_GROUP, $pricingGroup1->getId(), Domain::FIRST_DOMAIN_ID));

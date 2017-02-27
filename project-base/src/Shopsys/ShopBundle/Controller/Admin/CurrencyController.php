@@ -111,9 +111,6 @@ class CurrencyController extends AdminBaseController
      */
     public function settingsAction(Request $request)
     {
-        $currencies = $this->currencyFacade->getAll();
-        $form = $this->createForm(new CurrencySettingsFormType($currencies));
-
         $domainNames = [];
 
         $currencySettingsFormData = [];
@@ -127,7 +124,7 @@ class CurrencyController extends AdminBaseController
             $domainNames[$domainId] = $domainConfig->getName();
         }
 
-        $form->setData($currencySettingsFormData);
+        $form = $this->createForm(CurrencySettingsFormType::class, $currencySettingsFormData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

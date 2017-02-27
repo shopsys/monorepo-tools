@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Form;
 
 use Shopsys\ShopBundle\Component\Css\CssFacade;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WysiwygType extends AbstractTypeExtension
 {
@@ -19,9 +19,9 @@ class WysiwygType extends AbstractTypeExtension
     }
 
     /**
-     * @inheritdoc
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $cssVersion = $this->cssFacade->getCssVersion();
 

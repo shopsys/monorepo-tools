@@ -6,21 +6,11 @@ use Shopsys\ShopBundle\Component\Constraints\ConstraintValue;
 use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class CartFormType extends AbstractType
 {
-    /**
-     * @var \Shopsys\ShopBundle\Model\Cart\Cart
-     */
-    private $cart;
-
-    public function __construct(\Shopsys\ShopBundle\Model\Cart\Cart $cart)
-    {
-        $this->cart = $cart;
-    }
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -49,17 +39,9 @@ class CartFormType extends AbstractType
     }
 
     /**
-     * @return string
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function getName()
-    {
-        return 'cart_form';
-    }
-
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],

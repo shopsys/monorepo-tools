@@ -8,7 +8,7 @@ use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Product\ProductEditFormType;
 use Shopsys\ShopBundle\Form\Admin\Product\ProductMassActionFormType;
 use Shopsys\ShopBundle\Form\Admin\Product\VariantFormType;
 use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
@@ -57,11 +57,6 @@ class ProductController extends AdminBaseController
     private $productDetailFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory
-     */
-    private $productEditFormTypeFactory;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory
      */
     private $productEditDataFactory;
@@ -107,7 +102,6 @@ class ProductController extends AdminBaseController
         GridFactory $gridFactory,
         ProductFacade $productFacade,
         ProductDetailFactory $productDetailFactory,
-        ProductEditFormTypeFactory $productEditFormTypeFactory,
         ProductEditDataFactory $productEditDataFactory,
         Breadcrumb $breadcrumb,
         PricingGroupFacade $pricingGroupFacade,
@@ -122,7 +116,6 @@ class ProductController extends AdminBaseController
         $this->gridFactory = $gridFactory;
         $this->productFacade = $productFacade;
         $this->productDetailFactory = $productDetailFactory;
-        $this->productEditFormTypeFactory = $productEditFormTypeFactory;
         $this->productEditDataFactory = $productEditDataFactory;
         $this->breadcrumb = $breadcrumb;
         $this->pricingGroupFacade = $pricingGroupFacade;
@@ -141,10 +134,8 @@ class ProductController extends AdminBaseController
     {
         $product = $this->productFacade->getById($id);
 
-        $form = $this->createForm($this->productEditFormTypeFactory->create($product));
         $productEditData = $this->productEditDataFactory->createFromProduct($product);
-
-        $form->setData($productEditData);
+        $form = $this->createForm(ProductEditFormType::class, $productEditData, ['product' => $product]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -190,11 +181,8 @@ class ProductController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm($this->productEditFormTypeFactory->create());
-
         $productEditData = $this->productEditDataFactory->createDefault();
-
-        $form->setData($productEditData);
+        $form = $this->createForm(ProductEditFormType::class, $productEditData, ['product' => null]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -231,15 +219,14 @@ class ProductController extends AdminBaseController
         $advancedSearchForm = $this->advancedSearchFacade->createAdvancedSearchForm($request);
         $advancedSearchData = $advancedSearchForm->getData();
 
-        $quickSearchForm = $this->createForm(new QuickSearchFormType());
         $quickSearchData = new QuickSearchFormData();
-        $quickSearchForm->setData($quickSearchData);
+        $quickSearchForm = $this->createForm(QuickSearchFormType::class, $quickSearchData);
 
         // Cannot call $form->handleRequest() because the GET forms are not handled in POST request.
         // See: https://github.com/symfony/symfony/issues/12244
         $quickSearchForm->submit($request->query->get($quickSearchForm->getName()));
 
-        $massActionForm = $this->createForm(new ProductMassActionFormType());
+        $massActionForm = $this->createForm(ProductMassActionFormType::class);
         $massActionForm->handleRequest($request);
 
         $isAdvancedSearchFormSubmitted = $this->advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
@@ -318,9 +305,9 @@ class ProductController extends AdminBaseController
      */
     public function createVariantAction(Request $request)
     {
-        $form = $this->createForm(new VariantFormType());
-
+        $form = $this->createForm(VariantFormType::class);
         $form->handleRequest($request);
+
         if ($form->isValid()) {
             $formData = $form->getData();
             $mainVariant = $formData[VariantFormType::MAIN_VARIANT];

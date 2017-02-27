@@ -7,7 +7,7 @@ use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;
 
 class Setting
 {
-    const ORDER_SUBMITTED_SETTING_NAME = 'orderSubmittedText';
+    const ORDER_SENT_PAGE_CONTENT = 'orderSubmittedText';
     const DEFAULT_PRICING_GROUP = 'defaultPricingGroupId';
     const DEFAULT_AVAILABILITY_IN_STOCK = 'defaultAvailabilityInStockId';
     const TERMS_AND_CONDITIONS_ARTICLE_ID = 'termsAndConditionsArticleId';

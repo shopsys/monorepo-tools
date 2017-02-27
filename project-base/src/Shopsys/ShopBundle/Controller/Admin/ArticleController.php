@@ -9,7 +9,7 @@ use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Article\ArticleFormType;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\ShopBundle\Model\Article\ArticleDataFactory;
@@ -36,11 +36,6 @@ class ArticleController extends AdminBaseController
      * @var \Shopsys\ShopBundle\Model\Article\ArticleDataFactory
      */
     private $articleDataFactory;
-
-    /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory
-     */
-    private $articleFormTypeFactory;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
@@ -70,7 +65,6 @@ class ArticleController extends AdminBaseController
     public function __construct(
         ArticleFacade $articleFacade,
         ArticleDataFactory $articleDataFactory,
-        ArticleFormTypeFactory $articleFormTypeFactory,
         GridFactory $gridFactory,
         SelectedDomain $selectedDomain,
         Breadcrumb $breadcrumb,
@@ -80,7 +74,6 @@ class ArticleController extends AdminBaseController
     ) {
         $this->articleFacade = $articleFacade;
         $this->articleDataFactory = $articleDataFactory;
-        $this->articleFormTypeFactory = $articleFormTypeFactory;
         $this->gridFactory = $gridFactory;
         $this->selectedDomain = $selectedDomain;
         $this->breadcrumb = $breadcrumb;
@@ -97,14 +90,12 @@ class ArticleController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $article = $this->articleFacade->getById($id);
-        $form = $this->createForm($this->articleFormTypeFactory->create(
-            $this->selectedDomain->getId(),
-            $article
-        ));
-
         $articleData = $this->articleDataFactory->createFromArticle($article);
 
-        $form->setData($articleData);
+        $form = $this->createForm(ArticleFormType::class, $articleData, [
+            'article' => $article,
+            'domain_id' => $this->selectedDomain->getId(),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -157,11 +148,12 @@ class ArticleController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm($this->articleFormTypeFactory->create($this->selectedDomain->getId()));
-
         $articleData = $this->articleDataFactory->createDefault();
 
-        $form->setData($articleData);
+        $form = $this->createForm(ArticleFormType::class, $articleData, [
+            'article' => null,
+            'domain_id' => $this->selectedDomain->getId(),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

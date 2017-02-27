@@ -1,4 +1,144 @@
 services:
+  shopsys.shop.form.admin.advert.advert_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Advert\AdvertFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.article.article_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Article\ArticleFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.category.category_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Category\CategoryFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.category.top_category.top_categories_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.cookies.cookies_setting_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Cookies\CookiesSettingFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.customer.billing_address_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Customer\BillingAddressFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.customer.delivery_address_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Customer\DeliveryAddressFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.customer.user_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Customer\UserFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.order.order_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Order\OrderFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.mail.all_mail_templates_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.payment.payment_edit_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Payment\PaymentEditFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.payment.payment_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.pricing.currency.currency_setting_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.pricing.group.pricing_group_setting_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.product.availability.availabilty_setting_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Product\Availability\AvailabilitySettingFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.product.parameter.product_parameter_value_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.product.product_edit_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Product\ProductEditFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.product.product_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Product\ProductFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.product.top_product.top_products_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.product.unit.unit_setting_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Product\Unit\UnitSettingFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.seo.seo_setting_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Seo\SeoSettingFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.terms_and_conditions.terms_and_conditions_settings_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\TermsAndConditions\TermsAndConditionsSettingFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.transport.transport_edit_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.transport.transport_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Transport\TransportFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.transport_and_payment.free_transport_and_payment_price_limits_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\TransportAndPayment\FreeTransportAndPaymentPriceLimitsFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.admin.vat.vat_setting_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Vat\VatSettingsFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.front.customer.billing_address_form_type:
+    class: Shopsys\ShopBundle\Form\Front\Customer\BillingAddressFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.front.customer.delivery_address_form_type:
+    class: Shopsys\ShopBundle\Form\Front\Customer\DeliveryAddressFormType
+    tags:
+      - { name: form.type }
+
   shopsys.shop.form.categories:
     class: Shopsys\ShopBundle\Form\CategoriesType
     tags:
@@ -7,7 +147,7 @@ services:
   shopsys.shop.form.collection:
     class: Shopsys\ShopBundle\Form\CollectionType
     tags:
-      - { name: form.type_extension, alias: collection }
+      - { name: form.type_extension, extended_type: collection }
 
   shopsys.shop.form.color_picker:
     class: Shopsys\ShopBundle\Form\ColorPickerType
@@ -57,7 +197,7 @@ services:
   shopsys.shop.form.money:
     class: Shopsys\ShopBundle\Form\MoneyType
     tags:
-      - { name: form.type_extension, alias: money }
+      - { name: form.type_extension, extended_type: money }
 
   shopsys.shop.form.multidomain:
     class: Shopsys\ShopBundle\Form\MultidomainType
@@ -87,7 +227,7 @@ services:
   shopsys.shop.form.timed_form:
     class: Shopsys\ShopBundle\Form\TimedFormTypeExtension
     tags:
-      - { name: form.type_extension, alias: form }
+      - { name: form.type_extension, extended_type: form }
 
   shopsys.shop.form.url_list:
     class: Shopsys\ShopBundle\Form\UrlListType
@@ -97,7 +237,7 @@ services:
   shopsys.shop.form.wysiwyg:
     class: Shopsys\ShopBundle\Form\WysiwygType
     tags:
-      - { name: form.type_extension, alias: ckeditor }
+      - { name: form.type_extension, extended_type: ckeditor }
 
   shopsys.shop.form.yes_no:
     class: Shopsys\ShopBundle\Form\YesNoType

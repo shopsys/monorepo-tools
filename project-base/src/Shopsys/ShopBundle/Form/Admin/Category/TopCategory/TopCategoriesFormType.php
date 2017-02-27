@@ -5,21 +5,22 @@ namespace Shopsys\ShopBundle\Form\Admin\Category\TopCategory;
 use Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer;
 use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TopCategoriesFormType extends AbstractType
 {
     /**
+     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
+     */
+    private $categoryFacade;
+
+    /**
      * @var \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
      */
     private $removeDuplicatesTransformer;
-
-    /**
-     * @var string[]
-     */
-    private $categoryPaths;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer
@@ -27,26 +28,18 @@ class TopCategoriesFormType extends AbstractType
     private $categoriesIdsToCategoriesTransformer;
 
     /**
-     * @param string[] $categoryPaths
+     * @param \Shopsys\ShopBundle\Model\Category\CategoryFacade $categoryFacade
      * @param \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
      * @param \Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer $categoriesIdsToCategoriesTransformer
      */
     public function __construct(
-        array $categoryPaths,
+        CategoryFacade $categoryFacade,
         RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer,
         CategoriesIdsToCategoriesTransformer $categoriesIdsToCategoriesTransformer
     ) {
-        $this->categoryPaths = $categoryPaths;
+        $this->categoryFacade = $categoryFacade;
         $this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
         $this->categoriesIdsToCategoriesTransformer = $categoriesIdsToCategoriesTransformer;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'top_categories_form';
     }
 
     /**
@@ -55,11 +48,16 @@ class TopCategoriesFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $categoryPaths = $this->categoryFacade->getFullPathsIndexedByIdsForDomain(
+            $options['domain_id'],
+            $options['locale']
+        );
+
         $builder
             ->add(
                 $builder
                     ->create('categories', FormType::SORTABLE_VALUES, [
-                        'labels_by_value' => $this->categoryPaths,
+                        'labels_by_value' => $categoryPaths,
                         'required' => false,
                     ])
                     ->addViewTransformer($this->removeDuplicatesTransformer)
@@ -69,12 +67,14 @@ class TopCategoriesFormType extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired(['domain_id', 'locale'])
+            ->setAllowedTypes('domain_id', 'int')
+            ->setAllowedTypes('locale', 'string')
+            ->setDefault('attr', ['novalidate' => 'novalidate']);
     }
 }

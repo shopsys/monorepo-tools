@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
 use Shopsys\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit;
@@ -36,16 +37,23 @@ class PricingGroupController extends AdminBaseController
      */
     private $confirmDeleteResponseFactory;
 
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     */
+    private $selectedDomain;
+
     public function __construct(
         PricingGroupSettingFacade $pricingGroupSettingFacade,
         PricingGroupFacade $pricingGroupFacade,
         PricingGroupInlineEdit $pricingGroupInlineEdit,
-        ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
+        ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
+        SelectedDomain $selectedDomain
     ) {
         $this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->pricingGroupInlineEdit = $pricingGroupInlineEdit;
         $this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
+        $this->selectedDomain = $selectedDomain;
     }
 
     /**
@@ -112,14 +120,14 @@ class PricingGroupController extends AdminBaseController
             $remainingPricingGroups = $this->pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId());
             $remainingPricingGroupsList = new ObjectChoiceList($remainingPricingGroups, 'name', [], null, 'id');
 
-            if ($this->pricingGroupSettingFacade->isPricingGroupUsed($pricingGroup)) {
+            if ($this->pricingGroupSettingFacade->isPricingGroupUsedOnSelectedDomain($pricingGroup)) {
                 $message = t(
                     'For removing pricing group "%name%" you have to choose other one to be set everywhere where the existing one is used. '
                     . 'Which pricing group you want to set instead?',
                     ['%name%' => $pricingGroup->getName()]
                 );
 
-                if ($this->pricingGroupSettingFacade->isPricingGroupDefault($pricingGroup)) {
+                if ($this->pricingGroupSettingFacade->isPricingGroupDefaultOnSelectedDomain($pricingGroup)) {
                     $message = t(
                         'Pricing group "%name%" set as default. For deleting it you have to choose other one to be set everywhere '
                         . 'where the existing one is used. Which pricing group you want to set instead?',
@@ -150,21 +158,20 @@ class PricingGroupController extends AdminBaseController
      */
     public function settingsAction(Request $request)
     {
-        $pricingGroups = $this->pricingGroupSettingFacade->getPricingGroupsBySelectedDomainId();
-        $form = $this->createForm(new PricingGroupSettingsFormType($pricingGroups));
+        $domainId = $this->selectedDomain->getId();
+        $pricingGroupSettingsFormData = [
+            'defaultPricingGroup' => $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainId),
+        ];
 
-        $pricingGroupSettingsFormData = [];
-        $pricingGroupSettingsFormData['defaultPricingGroup'] = $this->pricingGroupSettingFacade
-            ->getDefaultPricingGroupBySelectedDomain();
-
-        $form->setData($pricingGroupSettingsFormData);
-
+        $form = $this->createForm(PricingGroupSettingsFormType::class, $pricingGroupSettingsFormData, [
+            'domain_id' => $domainId,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $pricingGroupSettingsFormData = $form->getData();
 
-            $this->pricingGroupSettingFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
+            $this->pricingGroupSettingFacade->setDefaultPricingGroupForSelectedDomain($pricingGroupSettingsFormData['defaultPricingGroup']);
 
             $this->getFlashMessageSender()->addSuccessFlash(t('Default pricing group settings modified'));
 

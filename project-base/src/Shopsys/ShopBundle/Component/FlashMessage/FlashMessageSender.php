@@ -30,7 +30,7 @@ class FlashMessageSender
      */
     public function addErrorFlashTwig($template, $parameters = [])
     {
-        $message = $this->twigEnvironment->render($template, $parameters);
+        $message = $this->renderStringTwigTemplate($template, $parameters);
         $this->flashMessageBag->addError($message, false);
     }
 
@@ -40,7 +40,7 @@ class FlashMessageSender
      */
     public function addInfoFlashTwig($template, $parameters = [])
     {
-        $message = $this->twigEnvironment->render($template, $parameters);
+        $message = $this->renderStringTwigTemplate($template, $parameters);
         $this->flashMessageBag->addInfo($message, false);
     }
 
@@ -50,9 +50,20 @@ class FlashMessageSender
      */
     public function addSuccessFlashTwig($template, $parameters = [])
     {
-        /** @Ignore */
-        $message = $this->twigEnvironment->render($template, $parameters);
+        $message = $this->renderStringTwigTemplate($template, $parameters);
         $this->flashMessageBag->addSuccess($message, false);
+    }
+
+    /**
+     * @param string $template
+     * @param array $parameters
+     * @return string
+     */
+    private function renderStringTwigTemplate($template, array $parameters)
+    {
+        $twigTemplate = $this->twigEnvironment->createTemplate($template);
+
+        return $twigTemplate->render($parameters);
     }
 
     /**

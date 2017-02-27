@@ -3,31 +3,24 @@
 namespace Shopsys\ShopBundle\Form\Admin\Product\Parameter;
 
 use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class ProductParameterValueFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter[]
+     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade
      */
-    private $parameters;
+    private $parameterFacade;
 
-    public function __construct(array $parameters)
+    public function __construct(ParameterFacade $parameterFacade)
     {
-        $this->parameters = $parameters;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'product_parameter_value_form';
+        $this->parameterFacade = $parameterFacade;
     }
 
     /**
@@ -39,7 +32,7 @@ class ProductParameterValueFormType extends AbstractType
         $builder
             ->add('parameter', FormType::CHOICE, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->parameters, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->parameterFacade->getAll(), 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose parameter']),
                 ],
@@ -58,9 +51,9 @@ class ProductParameterValueFormType extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],

@@ -2,12 +2,13 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\TransportAndPayment;
 
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
@@ -18,24 +19,13 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
     const VALIDATION_GROUP_PRICE_LIMIT_ENABLED = 'priceLimitEnabled';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */
-    private $domains;
+    private $domain;
 
-    /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
-     */
-    public function __construct(array $domains)
+    public function __construct(Domain $domain)
     {
-        $this->domains = $domains;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'free_transport_and_payment_price_limits_form';
+        $this->domain = $domain;
     }
 
     /**
@@ -57,11 +47,8 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
     {
         $formBuilderForDomains = $builder->create(self::DOMAINS_SUBFORM_NAME, null, ['compound' => true]);
 
-        foreach ($this->domains as $domainConfig) {
-            $formBuilderForDomain = $builder->create(
-                $domainConfig->getId(),
-                null,
-                [
+        foreach ($this->domain->getAll() as $domainConfig) {
+            $formBuilderForDomain = $builder->create($domainConfig->getId(), null, [
                     'compound' => true,
                     'validation_groups' => function (FormInterface $form) {
                         $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
@@ -72,10 +59,7 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
 
                         return $validationGroups;
                     },
-                ]
-            );
-
-            $formBuilderForDomain
+                ])
                 ->add(self::FIELD_ENABLED, FormType::CHECKBOX, [
                     'required' => false,
                 ])
@@ -101,7 +85,10 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
         return $formBuilderForDomains;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],

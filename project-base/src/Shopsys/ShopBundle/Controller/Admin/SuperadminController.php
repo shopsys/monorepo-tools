@@ -85,12 +85,11 @@ class SuperadminController extends AdminBaseController
      */
     public function pricingAction(Request $request)
     {
-        $form = $this->createForm(new InputPriceTypeFormType());
+        $pricingSettingData = [
+            'type' => $this->pricingSetting->getInputPriceType(),
+        ];
 
-        $pricingSettingData = [];
-        $pricingSettingData['type'] = $this->pricingSetting->getInputPriceType();
-
-        $form->setData($pricingSettingData);
+        $form = $this->createForm(InputPriceTypeFormType::class, $pricingSettingData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -153,20 +152,18 @@ class SuperadminController extends AdminBaseController
      */
     public function modulesAction(Request $request)
     {
-        $form = $this->createForm(new ModulesFormType($this->moduleList));
-
         $formData = [];
         foreach ($this->moduleList->getValues() as $moduleName) {
             $formData['modules'][$moduleName] = $this->moduleFacade->isEnabled($moduleName);
         }
 
-        $form->setData($formData);
+        $form = $this->createForm(ModulesFormType::class, $formData, ['module_list' => $this->moduleList]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $formData = $form->getData();
 
-            foreach ($formData[ModulesFormType::MODULES_SUBFORM_NAME] as $moduleName => $isEnabled) {
+            foreach ($formData['modules'] as $moduleName => $isEnabled) {
                 $this->moduleFacade->setEnabled($moduleName, $isEnabled);
             }
 

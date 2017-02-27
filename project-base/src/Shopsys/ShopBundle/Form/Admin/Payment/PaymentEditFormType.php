@@ -4,39 +4,22 @@ namespace Shopsys\ShopBundle\Form\Admin\Payment;
 
 use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Payment\PaymentEditData;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class PaymentEditFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory
+     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
      */
-    private $paymentFormTypeFactory;
+    private $currencyFacade;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]
-     */
-    private $currencies;
-
-    /**
-     * @param \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory $paymentFormTypeFactory
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[] $currencies
-     */
-    public function __construct(PaymentFormTypeFactory $paymentFormTypeFactory, array $currencies)
+    public function __construct(CurrencyFacade $currencyFacade)
     {
-        $this->paymentFormTypeFactory = $paymentFormTypeFactory;
-        $this->currencies = $currencies;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'payment_edit_form';
+        $this->currencyFacade = $currencyFacade;
     }
 
     /**
@@ -46,7 +29,7 @@ class PaymentEditFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('paymentData', $this->paymentFormTypeFactory->create())
+            ->add('paymentData', PaymentFormType::class)
             ->add($this->getPricesBuilder($builder))
             ->add('save', FormType::SUBMIT);
     }
@@ -60,7 +43,7 @@ class PaymentEditFormType extends AbstractType
         $pricesBuilder = $builder->create('prices', null, [
             'compound' => true,
         ]);
-        foreach ($this->currencies as $currency) {
+        foreach ($this->currencyFacade->getAll() as $currency) {
             $pricesBuilder
                 ->add($currency->getId(), FormType::MONEY, [
                     'currency' => false,
@@ -82,9 +65,9 @@ class PaymentEditFormType extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => PaymentEditData::class,

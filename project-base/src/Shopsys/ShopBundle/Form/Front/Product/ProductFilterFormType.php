@@ -9,13 +9,11 @@ use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class ProductFilterFormType extends AbstractType
 {
-    const NAME = 'product_filter_form';
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
      */
@@ -110,17 +108,9 @@ class ProductFilterFormType extends AbstractType
     }
 
     /**
-     * @return string
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function getName()
-    {
-        return self::NAME;
-    }
-
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],

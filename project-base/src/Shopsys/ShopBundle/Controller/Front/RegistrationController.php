@@ -47,11 +47,9 @@ class RegistrationController extends FrontBaseController
 
     public function registerAction(Request $request)
     {
-        $form = $this->createForm(new RegistrationFormType());
-
         $userData = $this->userDataFactory->createDefault($this->domain->getId());
 
-        $form->setData($userData);
+        $form = $this->createForm(RegistrationFormType::class, $userData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

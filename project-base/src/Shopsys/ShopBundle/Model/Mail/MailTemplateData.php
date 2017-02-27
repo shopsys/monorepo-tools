@@ -47,7 +47,7 @@ class MailTemplateData
      * @param string|null $body
      * @param bool $sendMail
      * @param string|null $bccEmail
-     * @param string|null $attachment
+     * @param string[] $attachment
      */
     public function __construct(
         $name = null,

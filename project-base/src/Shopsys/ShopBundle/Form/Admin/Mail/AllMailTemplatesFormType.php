@@ -6,10 +6,9 @@ use Shopsys\ShopBundle\Form\Admin\Mail\MailTemplateFormType;
 use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
 use Shopsys\ShopBundle\Model\Mail\AllMailTemplatesData;
-use Shopsys\ShopBundle\Model\Mail\DummyMailType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AllMailTemplatesFormType extends AbstractType
 {
@@ -18,18 +17,9 @@ class AllMailTemplatesFormType extends AbstractType
      */
     private $resetPasswordMail;
 
-    public function __construct(
-        ResetPasswordMail $resetPasswordMail
-    ) {
-        $this->resetPasswordMail = $resetPasswordMail;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
+    public function __construct(ResetPasswordMail $resetPasswordMail)
     {
-        return 'all_mail_templates_form';
+        $this->resetPasswordMail = $resetPasswordMail;
     }
 
     /**
@@ -39,19 +29,22 @@ class AllMailTemplatesFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('registrationTemplate', new MailTemplateFormType(new DummyMailType()))
-            ->add('resetPasswordTemplate', new MailTemplateFormType($this->resetPasswordMail))
+            ->add('registrationTemplate', MailTemplateFormType::class)
+            ->add('resetPasswordTemplate', MailTemplateFormType::class, [
+                'required_subject_variables' => $this->resetPasswordMail->getRequiredSubjectVariables(),
+                'required_body_variables' => $this->resetPasswordMail->getRequiredBodyVariables(),
+            ])
             ->add('orderStatusTemplates', FormType::COLLECTION, [
-                'type' => new MailTemplateFormType(new DummyMailType()),
+                'type' => MailTemplateFormType::class,
             ])
             ->add('domainId', FormType::HIDDEN)
             ->add('save', FormType::SUBMIT);
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],

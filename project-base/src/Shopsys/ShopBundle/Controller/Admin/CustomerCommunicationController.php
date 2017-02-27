@@ -35,15 +35,15 @@ class CustomerCommunicationController extends AdminBaseController
      */
     public function orderSubmittedAction(Request $request)
     {
-        $data = $this->setting->getForDomain(Setting::ORDER_SUBMITTED_SETTING_NAME, $this->selectedDomain->getId());
-        $form = $this->createForm(new CustomerCommunicationFormType());
+        $domainId = $this->selectedDomain->getId();
+        $orderSentPageContent = $this->setting->getForDomain(Setting::ORDER_SENT_PAGE_CONTENT, $domainId);
 
-        $form->setData(['content' => $data]);
+        $form = $this->createForm(CustomerCommunicationFormType::class, ['content' => $orderSentPageContent]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $formData = $form->getData();
-            $this->setting->setForDomain(Setting::ORDER_SUBMITTED_SETTING_NAME, $formData['content'], $this->selectedDomain->getId());
+            $this->setting->setForDomain(Setting::ORDER_SENT_PAGE_CONTENT, $formData['content'], $domainId);
 
             $this->getFlashMessageSender()->addSuccessFlash(t('Order confirmation page content modified'));
 

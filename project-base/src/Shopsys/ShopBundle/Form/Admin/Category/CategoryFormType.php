@@ -3,70 +3,52 @@
 namespace Shopsys\ShopBundle\Form\Admin\Category;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension;
 use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
+use Shopsys\ShopBundle\Model\Category\CategoryRepository;
+use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository;
+use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class CategoryFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\Category[]
+     * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
      */
-    private $categories;
+    private $categoryRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory[]
+     * @var \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository
      */
-    private $heurekaCzFeedCategories;
+    private $feedCategoryRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */
-    private $domains;
+    private $domain;
 
     /**
-     * @var string[]
+     * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade
      */
-    private $metaDescriptionsIndexedByDomainId;
+    private $seoSettingFacade;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Category\Category|null
-     */
-    private $category;
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
-     * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory[] $heurekaCzFeedCategories
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
-     * @param string[] $metaDescriptionsIndexedByDomainId
-     * @param \Shopsys\ShopBundle\Model\Category\Category|null $category
-     */
     public function __construct(
-        array $categories,
-        array $heurekaCzFeedCategories,
-        array $domains,
-        array $metaDescriptionsIndexedByDomainId,
-        Category $category = null
+        CategoryRepository $categoryRepository,
+        FeedCategoryRepository $feedCategoryRepository,
+        Domain $domain,
+        SeoSettingFacade $seoSettingFacade
     ) {
-        $this->categories = $categories;
-        $this->heurekaCzFeedCategories = $heurekaCzFeedCategories;
-        $this->domains = $domains;
-        $this->metaDescriptionsIndexedByDomainId = $metaDescriptionsIndexedByDomainId;
-        $this->category = $category;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'category_form';
+        $this->categoryRepository = $categoryRepository;
+        $this->feedCategoryRepository = $feedCategoryRepository;
+        $this->domain = $domain;
+        $this->seoSettingFacade = $seoSettingFacade;
     }
 
     /**
@@ -78,15 +60,17 @@ class CategoryFormType extends AbstractType
     {
         $seoTitlesOptionsByDomainId = [];
         $seoMetaDescriptionsOptionsByDomainId = [];
-        foreach ($this->domains as $domainConfig) {
-            $seoTitlesOptionsByDomainId[$domainConfig->getId()] = [
+        foreach ($this->domain->getAll() as $domainConfig) {
+            $domainId = $domainConfig->getId();
+
+            $seoTitlesOptionsByDomainId[$domainId] = [
                 'attr' => [
-                    'placeholder' => $this->getTitlePlaceholder($domainConfig),
+                    'placeholder' => $this->getTitlePlaceholder($domainConfig, $options['category']),
                 ],
             ];
-            $seoMetaDescriptionsOptionsByDomainId[$domainConfig->getId()] = [
+            $seoMetaDescriptionsOptionsByDomainId[$domainId] = [
                 'attr' => [
-                    'placeholder' => $this->getMetaDescriptionPlaceholder($domainConfig),
+                    'placeholder' => $this->seoSettingFacade->getDescriptionMainPage($domainId),
                 ],
             ];
         }
@@ -119,7 +103,7 @@ class CategoryFormType extends AbstractType
             ])
             ->add('parent', FormType::CHOICE, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->categories, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->categoryRepository->getAll(), 'name', [], null, 'id'),
             ])
             ->add($builder
                 ->create('showOnDomains', FormType::DOMAINS, [
@@ -129,11 +113,11 @@ class CategoryFormType extends AbstractType
                 ]))
             ->add('heurekaCzFeedCategory', FormType::CHOICE, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->heurekaCzFeedCategories, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($this->feedCategoryRepository->getAllHeurekaCz(), 'name', [], null, 'id'),
             ])
             ->add('urls', FormType::URL_LIST, [
                 'route_name' => 'front_product_list',
-                'entity_id' => $this->category === null ? null : $this->category->getId(),
+                'entity_id' => $options['category'] !== null ? $options['category']->getId() : null,
             ])
             ->add('image', FormType::FILE_UPLOAD, [
                 'required' => false,
@@ -151,35 +135,28 @@ class CategoryFormType extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => CategoryData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('category')
+            ->setAllowedTypes('category', [Category::class, 'null'])
+            ->setDefaults([
+                'data_class' => CategoryData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 
     /**
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\ShopBundle\Model\Category\Category|null $category
      * @return string
      */
-    private function getTitlePlaceholder(DomainConfig $domainConfig)
+    private function getTitlePlaceholder(DomainConfig $domainConfig, Category $category = null)
     {
-        if ($this->category === null) {
-            return '';
-        } else {
-            return $this->category->getName($domainConfig->getLocale());
-        }
-    }
+        $domainLocale = $domainConfig->getLocale();
 
-    /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return string
-     */
-    private function getMetaDescriptionPlaceholder(DomainConfig $domainConfig)
-    {
-        return $this->metaDescriptionsIndexedByDomainId[$domainConfig->getId()];
+        return $category === null ? '' : $category->getName($domainLocale);
     }
 }

@@ -3,32 +3,22 @@
 namespace Shopsys\ShopBundle\Form\Admin\TermsAndConditions;
 
 use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TermsAndConditionsSettingFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\Article[]
+     * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
      */
-    private $articles;
+    private $articleFacade;
 
-    /**
-     * @param \Shopsys\ShopBundle\Model\Article\Article[] $articles
-     */
-    public function __construct(array $articles)
+    public function __construct(ArticleFacade $articleFacade)
     {
-        $this->articles = $articles;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'terms_and_conditions_setting_form';
+        $this->articleFacade = $articleFacade;
     }
 
     /**
@@ -37,19 +27,25 @@ class TermsAndConditionsSettingFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $articles = $this->articleFacade->getAllByDomainId($options['domain_id']);
+
         $builder
             ->add('termsAndConditionsArticle', FormType::CHOICE, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->articles, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($articles, 'name', [], null, 'id'),
                 'placeholder' => t('-- Choose article --'),
             ])
             ->add('save', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('domain_id')
+            ->setAllowedTypes('domain_id', 'int')
+            ->setDefault('attr', ['novalidate' => 'novalidate']);
     }
 }

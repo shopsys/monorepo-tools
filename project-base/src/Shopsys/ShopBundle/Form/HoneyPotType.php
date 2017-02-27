@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class HoneyPotType extends AbstractType
@@ -24,7 +24,10 @@ class HoneyPotType extends AbstractType
         return 'honey_pot';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'mapped' => false,

@@ -536,7 +536,9 @@
                 <ul class="in-message__list">
                     {% if errors|length > 0 %}
                         {% for error in errors %}
-                            <li>{{ error.message }}</li>
+                            <li class="js-validation-errors-message js-error-source-id-{{ getFormErrorSourceId(error) }} }}">
+                                {{ error.message }}
+                            </li>
                         {% endfor %}
                     {% endif %}
                 </ul>

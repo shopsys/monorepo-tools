@@ -7,31 +7,10 @@ use Shopsys\ShopBundle\Form\Front\Customer\UserFormType;
 use Shopsys\ShopBundle\Model\Customer\CustomerData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CustomerFormType extends AbstractType
 {
-    /**
-     * @var \Shopsys\ShopBundle\Model\Country\Country[]
-     */
-    private $countries;
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
-     */
-    public function __construct(array $countries)
-    {
-        $this->countries = $countries;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'customer_form';
-    }
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -39,17 +18,27 @@ class CustomerFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('userData', new UserFormType())
-            ->add('billingAddressData', new BillingAddressFormType($this->countries))
-            ->add('deliveryAddressData', new DeliveryAddressFormType($this->countries))
+            ->add('userData', UserFormType::class)
+            ->add('billingAddressData', BillingAddressFormType::class, [
+                'domain_id' => $options['domain_id'],
+            ])
+            ->add('deliveryAddressData', DeliveryAddressFormType::class, [
+                'domain_id' => $options['domain_id'],
+            ])
             ->add('save', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => CustomerData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('domain_id')
+            ->addAllowedTypes('domain_id', 'int')
+            ->setDefaults([
+                'data_class' => CustomerData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

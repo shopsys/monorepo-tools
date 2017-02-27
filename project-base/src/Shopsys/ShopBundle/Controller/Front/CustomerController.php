@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Controller\Front;
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\Front\Customer\CustomerFormType;
-use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Customer\CustomerData;
 use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
@@ -41,25 +40,18 @@ class CustomerController extends FrontBaseController
      */
     private $loginAsUserFacade;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
-     */
-    private $countryFacade;
-
     public function __construct(
         CustomerFacade $customerFacade,
         OrderFacade $orderFacade,
         Domain $domain,
         OrderItemPriceCalculation $orderItemPriceCalculation,
-        LoginAsUserFacade $loginAsUserFacade,
-        CountryFacade $countryFacade
+        LoginAsUserFacade $loginAsUserFacade
     ) {
         $this->customerFacade = $customerFacade;
         $this->orderFacade = $orderFacade;
         $this->domain = $domain;
         $this->orderItemPriceCalculation = $orderItemPriceCalculation;
         $this->loginAsUserFacade = $loginAsUserFacade;
-        $this->countryFacade = $countryFacade;
     }
 
     public function editAction(Request $request)
@@ -70,13 +62,12 @@ class CustomerController extends FrontBaseController
         }
 
         $user = $this->getUser();
-
-        $form = $this->createForm(new CustomerFormType($this->countryFacade->getAllOnCurrentDomain()));
-
         $customerData = new CustomerData();
         $customerData->setFromEntity($user);
 
-        $form->setData($customerData);
+        $form = $this->createForm(CustomerFormType::class, $customerData, [
+            'domain_id' => $this->domain->getId(),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

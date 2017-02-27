@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
-use Shopsys\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType;
 use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,10 +15,6 @@ class TopCategoryController extends AdminBaseController
      * @var \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade
      */
     private $topCategoryFacade;
-    /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormTypeFactory
-     */
-    private $topCategoriesFormTypeFactory;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
@@ -27,11 +23,9 @@ class TopCategoryController extends AdminBaseController
 
     public function __construct(
         TopCategoryFacade $topCategoryFacade,
-        TopCategoriesFormTypeFactory $topCategoriesFormTypeFactory,
         SelectedDomain $selectedDomain
     ) {
         $this->topCategoryFacade = $topCategoryFacade;
-        $this->topCategoriesFormTypeFactory = $topCategoriesFormTypeFactory;
         $this->selectedDomain = $selectedDomain;
     }
 
@@ -41,13 +35,14 @@ class TopCategoryController extends AdminBaseController
     public function listAction(Request $request)
     {
         $domainId = $this->selectedDomain->getId();
-
-        $form = $this->createForm($this->topCategoriesFormTypeFactory->create($domainId, $request->getLocale()));
         $formData = [
             'categories' => $this->topCategoryFacade->getCategoriesForAll($domainId),
         ];
 
-        $form->setData($formData);
+        $form = $this->createForm(TopCategoriesFormType::class, $formData, [
+            'domain_id' => $domainId,
+            'locale' => $request->getLocale(),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

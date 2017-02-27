@@ -47,6 +47,11 @@ services:
     tags:
       -  { name: twig.extension }
 
+  shopsys.twig.form_extension:
+    class: Shopsys\ShopBundle\Twig\FormExtension
+    tags:
+      -  { name: twig.extension }
+
   shopsys.twig.form_theme_extension:
     class: Shopsys\ShopBundle\Twig\FormThemeExtension
     tags:

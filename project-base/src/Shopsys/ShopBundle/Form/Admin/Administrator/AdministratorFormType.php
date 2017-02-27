@@ -8,25 +8,13 @@ use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class AdministratorFormType extends AbstractType
 {
     const SCENARIO_CREATE = 'create';
     const SCENARIO_EDIT = 'edit';
-
-    private $scenario;
-
-    public function __construct($scenario)
-    {
-        $this->scenario = $scenario;
-    }
-
-    public function getName()
-    {
-        return 'administrator_form';
-    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -53,7 +41,7 @@ class AdministratorFormType extends AbstractType
             ])
             ->add('password', FormType::REPEATED, [
                 'type' => FormType::PASSWORD,
-                'required' => $this->scenario === self::SCENARIO_CREATE,
+                'required' => $options['scenario'] === self::SCENARIO_CREATE,
                 'options' => [
                     'attr' => ['autocomplete' => 'off'],
                 ],
@@ -71,19 +59,25 @@ class AdministratorFormType extends AbstractType
             ->add('save', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => AdministratorData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-            'constraints' => [
-                new FieldsAreNotIdentical([
-                    'field1' => 'username',
-                    'field2' => 'password',
-                    'errorPath' => 'password',
-                    'message' => 'Password cannot be same as username',
-                ]),
-            ],
-        ]);
+        $resolver
+            ->setRequired('scenario')
+            ->setAllowedValues('scenario', [self::SCENARIO_CREATE, self::SCENARIO_EDIT])
+            ->setDefaults([
+                'data_class' => AdministratorData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+                'constraints' => [
+                    new FieldsAreNotIdentical([
+                        'field1' => 'username',
+                        'field2' => 'password',
+                        'errorPath' => 'password',
+                        'message' => 'Password cannot be same as username',
+                    ]),
+                ],
+            ]);
     }
 }

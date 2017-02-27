@@ -6,30 +6,10 @@ use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Module\ModuleList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ModulesFormType extends AbstractType
 {
-    const MODULES_SUBFORM_NAME = 'modules';
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Module\ModuleList
-     */
-    private $moduleList;
-
-    public function __construct(ModuleList $moduleList)
-    {
-        $this->moduleList = $moduleList;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'modules_form';
-    }
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -37,21 +17,25 @@ class ModulesFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(self::MODULES_SUBFORM_NAME, FormType::FORM)
+            ->add('modules', FormType::FORM)
             ->add('save', FormType::SUBMIT);
 
-        foreach ($this->moduleList->getTranslationsIndexedByValue() as $moduleName => $moduleTranslation) {
-            $builder->get(self::MODULES_SUBFORM_NAME)
+        foreach ($options['module_list']->getTranslationsIndexedByValue() as $moduleName => $moduleTranslation) {
+            $builder->get('modules')
                 ->add($moduleName, FormType::YES_NO, [
                     'label' => $moduleTranslation,
                 ]);
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('module_list')
+            ->setAllowedTypes('module_list', ModuleList::class)
+            ->setDefault('attr', ['novalidate' => 'novalidate']);
     }
 }

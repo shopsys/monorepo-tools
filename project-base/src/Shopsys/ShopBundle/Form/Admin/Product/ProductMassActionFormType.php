@@ -6,18 +6,10 @@ use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Product\MassAction\ProductMassActionData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductMassActionFormType extends AbstractType
 {
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'mass_action_form';
-    }
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -55,9 +47,9 @@ class ProductMassActionFormType extends AbstractType
     }
 
     /**
-     * {@inheritDoc}
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],

@@ -9,14 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 class CustomerCommunicationFormType extends AbstractType
 {
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'customer_communication_form';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */

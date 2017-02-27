@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Category\CategoryFormType;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\ShopBundle\Model\Category\CategoryDataFactory;
@@ -40,25 +40,18 @@ class CategoryController extends AdminBaseController
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory
-     */
-    private $categoryFormTypeFactory;
-
-    /**
      * @var \Symfony\Component\HttpFoundation\Session\Session
      */
     private $session;
 
     public function __construct(
         CategoryFacade $categoryFacade,
-        CategoryFormTypeFactory $categoryFormTypeFactory,
         CategoryDataFactory $categoryDataFactory,
         Session $session,
         Domain $domain,
         Breadcrumb $breadcrumb
     ) {
         $this->categoryFacade = $categoryFacade;
-        $this->categoryFormTypeFactory = $categoryFormTypeFactory;
         $this->categoryDataFactory = $categoryDataFactory;
         $this->session = $session;
         $this->domain = $domain;
@@ -72,11 +65,11 @@ class CategoryController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $category = $this->categoryFacade->getById($id);
-        $form = $this->createForm($this->categoryFormTypeFactory->createForCategory($category));
-
         $categoryData = $this->categoryDataFactory->createFromCategory($category);
 
-        $form->setData($categoryData);
+        $form = $this->createForm(CategoryFormType::class, $categoryData, [
+            'category' => $category,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -110,11 +103,11 @@ class CategoryController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm($this->categoryFormTypeFactory->create());
-
         $categoryData = $this->categoryDataFactory->createDefault();
 
-        $form->setData($categoryData);
+        $form = $this->createForm(CategoryFormType::class, $categoryData, [
+            'category' => null,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

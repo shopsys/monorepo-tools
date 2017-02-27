@@ -74,8 +74,7 @@ class AutowiringCompilerPass implements CompilerPassInterface
             if ($definition->isAbstract()
                 || !$definition->isPublic()
                 || $definition->getClass() === null
-                || $definition->getFactoryClass()
-                || $definition->getFactoryMethod()
+                || $definition->getFactory()
             ) {
                 continue;
             }

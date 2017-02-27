@@ -98,7 +98,7 @@ class FriendlyUrlFacade
 
             $domainRouter = $this->domainRouterFactory->getRouter($friendlyUrl->getDomainId());
             try {
-                $matchedRouteData = $domainRouter->match($friendlyUrl->getSlug());
+                $matchedRouteData = $domainRouter->match('/' . $friendlyUrl->getSlug());
             } catch (\Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
                 $matchedRouteData = null;
             }

@@ -3,14 +3,17 @@
 namespace Shopsys\ShopBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DatePickerType extends AbstractType
 {
     const FORMAT_PHP = 'dd.MM.yyyy';
     const FORMAT_JS = 'dd.mm.yy';
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'widget' => 'single_text',

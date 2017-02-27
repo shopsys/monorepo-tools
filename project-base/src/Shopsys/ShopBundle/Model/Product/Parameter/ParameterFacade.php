@@ -49,6 +49,14 @@ class ParameterFacade
     }
 
     /**
+     * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter[]
+     */
+    public function getAll()
+    {
+        return $this->parameterRepository->getAll();
+    }
+
+    /**
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */

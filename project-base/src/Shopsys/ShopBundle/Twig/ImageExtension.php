@@ -95,7 +95,7 @@ class ImageExtension extends Twig_Extension
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Image\Image|Object $imageOrEntity
+     * @param \Shopsys\ShopBundle\Component\Image\Image|object $imageOrEntity
      * @param string|null $type
      * @return bool
      */

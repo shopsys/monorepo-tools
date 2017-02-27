@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
-use Shopsys\ShopBundle\Form\Admin\TermsAndConditions\TermsAndConditionsSettingFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\TermsAndConditions\TermsAndConditionsSettingFormType;
 use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,22 +17,15 @@ class TermsAndConditionsController extends AdminBaseController
     private $selectedDomain;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\Admin\TermsAndConditions\TermsAndConditionsSettingFormTypeFactory
-     */
-    private $termsAndConditionsSettingFormTypeFactory;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
      */
     private $termsAndConditionsFacade;
 
     public function __construct(
         SelectedDomain $selectedDomain,
-        TermsAndConditionsSettingFormTypeFactory $termsAndConditionsSettingFormTypeFactory,
         TermsAndConditionsFacade $termsAndConditionsFacade
     ) {
         $this->selectedDomain = $selectedDomain;
-        $this->termsAndConditionsSettingFormTypeFactory = $termsAndConditionsSettingFormTypeFactory;
         $this->termsAndConditionsFacade = $termsAndConditionsFacade;
     }
 
@@ -41,15 +34,16 @@ class TermsAndConditionsController extends AdminBaseController
      */
     public function settingAction(Request $request)
     {
-        $selectedDomainId = $this->selectedDomain->getId();
-        $termsAndConditionsArticle = $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId($selectedDomainId);
+        $domainId = $this->selectedDomain->getId();
+        $termsAndConditionsArticle = $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId($domainId);
 
         $termsAndConditionsSettingData = [
             'termsAndConditionsArticle' => $termsAndConditionsArticle,
         ];
 
-        $form = $this->createForm($this->termsAndConditionsSettingFormTypeFactory->createForDomain($selectedDomainId));
-        $form->setData($termsAndConditionsSettingData);
+        $form = $this->createForm(TermsAndConditionsSettingFormType::class, $termsAndConditionsSettingData, [
+            'domain_id' => $domainId,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -57,7 +51,7 @@ class TermsAndConditionsController extends AdminBaseController
 
             $this->termsAndConditionsFacade->setTermsAndConditionsArticleOnDomain(
                 $termsAndConditionsArticle,
-                $selectedDomainId
+                $domainId
             );
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(t('Terms and conditions settings modified.'));

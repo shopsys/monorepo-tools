@@ -19,19 +19,17 @@ services:
 
   doctrine.orm.default_entity_manager:
     class: %doctrine.orm.entity_manager.class%
-    factory_class: %doctrine.orm.entity_manager.class%
-    factory_method: create
+    factory: [%doctrine.orm.entity_manager.class%, create]
     arguments:
-      - @doctrine.dbal.default_connection
-      - @doctrine.orm.default_configuration
+      - '@doctrine.dbal.default_connection'
+      - '@doctrine.orm.default_configuration'
 
   doctrine.orm.entity_manager.abstract:
     synthetic: true
 
   faker.generator:
     class: Faker\Generator
-    factory_class: Faker\Factory
-    factory_method: create
+    factory: [Faker\Factory, create]
     calls:
       - [seed, [%faker.seed%]]
 
@@ -52,8 +50,8 @@ services:
     class: Doctrine\Common\Cache\ChainCache
     arguments:
       -
-        - @shopsys.doctrine.cache_driver.query_cache.array
-        - @shopsys.shop.component.doctrine.cache.query.permanent_php_file_cache
+        - '@shopsys.doctrine.cache_driver.query_cache.array'
+        - '@shopsys.shop.component.doctrine.cache.query.permanent_php_file_cache'
 
   shopsys.doctrine.cache_driver.query_cache.array:
     class: Doctrine\Common\Cache\ArrayCache
@@ -62,8 +60,8 @@ services:
     class: Doctrine\Common\Cache\ChainCache
     arguments:
       -
-        - @shopsys.doctrine.cache_driver.metadata_cache.array
-        - @shopsys.shop.component.doctrine.cache.metadata.permanent_php_file_cache
+        - '@shopsys.doctrine.cache_driver.metadata_cache.array'
+        - '@shopsys.shop.component.doctrine.cache.metadata.permanent_php_file_cache'
 
   shopsys.doctrine.cache_driver.metadata_cache.array:
     class: Doctrine\Common\Cache\ArrayCache
@@ -72,7 +70,7 @@ services:
     class: Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory
     arguments:
       - %shopsys.admin_navigation.config_filepath%
-      - @security.authorization_checker
+      - '@security.authorization_checker'
 
   shopsys.shop.admin_navigation.menu_loader:
     class: Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader
@@ -82,8 +80,7 @@ services:
 
   shopsys.shop.breadcrumb.front_breadcrumb_resolver:
     class: Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
-    factory_service: shopsys.shop.breadcrumb.front_breadcrumb_resolver_factory
-    factory_method: create
+    factory: ['@shopsys.shop.breadcrumb.front_breadcrumb_resolver_factory', create]
 
   shopsys.shop.breadcrumb.front_breadcrumb_resolver_factory:
     class: Shopsys\ShopBundle\Model\Breadcrumb\FrontBreadcrumbResolverFactory
@@ -96,7 +93,7 @@ services:
   shopsys.shop.cart.cart_watcher_facade:
     class: Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade
     arguments:
-      - @shopsys.shop.component.flash_message.sender.front
+      - '@shopsys.shop.component.flash_message.sender.front'
 
   shopsys.shop.category.category_visibility_repository:
     class: Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository
@@ -107,15 +104,14 @@ services:
   shopsys.shop.component.form.invert_choice_type_extension:
     class: Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension
     tags:
-      - { name: form.type_extension, alias: choice }
+      - { name: form.type_extension, extended_type: choice }
 
   shopsys.shop.component.controller.controller_resolver:
     class: Shopsys\ShopBundle\Component\Controller\ControllerResolver
 
   shopsys.shop.component.cron.config.cron_config:
     class: Shopsys\ShopBundle\Component\Cron\Config\CronConfig
-    factory_service: shopsys.shop.component.cron.config.cron_config_factory
-    factory_method: create
+    factory: ['@shopsys.shop.component.cron.config.cron_config_factory', create]
     arguments:
       - %shopsys.cron_config_filepath%
 
@@ -125,7 +121,7 @@ services:
   shopsys.shop.component.cron.cron_facade:
     class: Shopsys\ShopBundle\Component\Cron\CronFacade
     arguments:
-      - @monolog.logger.cron
+      - '@monolog.logger.cron'
 
   shopsys.shop.component.css.css_facade:
       class: Shopsys\ShopBundle\Component\Css\CssFacade
@@ -149,8 +145,7 @@ services:
 
   shopsys.shop.component.domain:
     class: Shopsys\ShopBundle\Component\Domain\Domain
-    factory_service: shopsys.shop.component.domain.domain_factory
-    factory_method: create
+    factory: ['@shopsys.shop.component.domain.domain_factory', create]
     arguments:
       - %shopsys.domain_config_filepath%
       - %shopsys.domain_urls_config_filepath%
@@ -176,7 +171,7 @@ services:
   shopsys.shop.component.domain.domain_service:
     class: Shopsys\ShopBundle\Component\Domain\DomainService
     arguments:
-      - @monolog.logger
+      - '@monolog.logger'
 
   shopsys.shop.component.error.error_pages_facade:
     class: Shopsys\ShopBundle\Component\Error\ErrorPagesFacade
@@ -221,12 +216,12 @@ services:
   shopsys.shop.component.flash_message.sender.admin:
     class: Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender
     arguments:
-      - @shopsys.shop.component.flash_message.bag.admin
+      - '@shopsys.shop.component.flash_message.bag.admin'
 
   shopsys.shop.component.flash_message.sender.front:
     class: Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender
     arguments:
-      - @shopsys.shop.component.flash_message.bag.front
+      - '@shopsys.shop.component.flash_message.bag.front'
 
   shopsys.shop.component.form.multiple_form_setting:
     class: Shopsys\ShopBundle\Component\Form\MultipleFormSetting
@@ -239,8 +234,7 @@ services:
 
   shopsys.shop.component.image.image_config:
     class: Shopsys\ShopBundle\Component\Image\Config\ImageConfig
-    factory_service: shopsys.shop.component.image.image_config_loader
-    factory_method: loadFromYaml
+    factory: ['@shopsys.shop.component.image.image_config_loader', loadFromYaml]
     arguments:
       - %shopsys.image_config_filepath%
 
@@ -272,16 +266,15 @@ services:
     class: Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler
     arguments:
       -
-        - @shopsys.shop.component.javascript.compiler.translator.js_translator_compiler_pass
-        - @shopsys.shop.component.javascript.compiler.constant.js_constant_compiler_pass
+        - '@shopsys.shop.component.javascript.compiler.translator.js_translator_compiler_pass'
+        - '@shopsys.shop.component.javascript.compiler.constant.js_constant_compiler_pass'
 
   shopsys.shop.component.javascript.compiler.translator.js_translator_compiler_pass:
     class: Shopsys\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass
 
   shopsys.shop.component.javascript.parser.translator.js_translator_call_parser:
     class: Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
-    factory_service: shopsys.shop.component.javascript.parser.translator.js_translator_call_parser_factory
-    factory_method: create
+    factory: ['@shopsys.shop.component.javascript.parser.translator.js_translator_call_parser_factory', create]
 
   shopsys.shop.component.javascript.parser.translator.js_translator_call_parser_factory:
     class: Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory
@@ -289,7 +282,7 @@ services:
   shopsys.shop.component.log.slow_log_facade:
     class: Shopsys\ShopBundle\Component\Log\SlowLogFacade
     arguments:
-      - @monolog.logger.slow
+      - '@monolog.logger.slow'
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
       - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
@@ -304,7 +297,7 @@ services:
   shopsys.shop.component.sitemap.sitemap_dumper_factory:
     class: Shopsys\ShopBundle\Component\Sitemap\SitemapDumperFactory
     arguments:
-      - @event_dispatcher
+      - '@event_dispatcher'
 
   shopsys.shop.component.sitemap.sitemap_facade:
     class: Shopsys\ShopBundle\Component\Sitemap\SitemapFacade
@@ -320,8 +313,8 @@ services:
   shopsys.shop.component.translation.normalizing_extractor_manager:
     class: Shopsys\ShopBundle\Component\Translation\NormalizingExtractorManager
     arguments:
-      - @jms_translation.extractor.file_extractor
-      - @logger
+      - '@jms_translation.extractor.file_extractor'
+      - '@logger'
 
   shopsys.shop.component.translation.js_file_extractor:
     class: Shopsys\ShopBundle\Component\Translation\JsFileExtractor
@@ -330,8 +323,7 @@ services:
 
   shopsys.shop.component.translation.php_file_extractor:
     class: Shopsys\ShopBundle\Component\Translation\PhpFileExtractor
-    factory_service: shopsys.shop.component.translation.php_file_extractor_factory
-    factory_method: create
+    factory: ['@shopsys.shop.component.translation.php_file_extractor_factory', create]
     tags:
       - { name: jms_translation.file_visitor }
 
@@ -359,17 +351,16 @@ services:
     class: Shopsys\ShopBundle\Component\Translation\Translator
     decorates: translator
     arguments:
-      - @shopsys.shop.component.translation.translator.inner
-      - @shopsys.shop.component.translation.translator.inner
-      - @shopsys.shop.component.translation.identity_translator
+      - '@shopsys.shop.component.translation.translator.inner'
+      - '@shopsys.shop.component.translation.translator.inner'
+      - '@shopsys.shop.component.translation.identity_translator'
 
   shopsys.shop.component.translation.identity_translator:
     class: Symfony\Component\Translation\IdentityTranslator
 
   shopsys.shop.component.uploaded_file.config.uploaded_file_config:
     class: Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
-    factory_service: shopsys.shop.component.uploaded_file.config.uploaded_file_config_loader
-    factory_method: loadFromYaml
+    factory: ['@shopsys.shop.component.uploaded_file.config.uploaded_file_config_loader', loadFromYaml]
     arguments:
       - %shopsys.uploaded_file_config_filepath%
 
@@ -430,9 +421,9 @@ services:
   shopsys.shop.feed.feed_config_repository:
     class: Shopsys\ShopBundle\Model\Feed\FeedConfigRepository
     arguments:
-      - @shopsys.shop.feed.heureka.heureka_item_repository
-      - @shopsys.shop.feed.heureka.heureka_delivery_item_repository
-      - @shopsys.shop.feed.zbozi.zbozi_item_repository
+      - '@shopsys.shop.feed.heureka.heureka_item_repository'
+      - '@shopsys.shop.feed.heureka.heureka_delivery_item_repository'
+      - '@shopsys.shop.feed.zbozi.zbozi_item_repository'
 
   shopsys.shop.feed.heureka.heureka_item_repository:
     class: Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItemRepository
@@ -456,8 +447,7 @@ services:
 
   shopsys.shop.localization.custom_date_time_formatter:
     class: Shopsys\ShopBundle\Component\Localization\DateTimeFormatter
-    factory_service: shopsys.shop.localization.custom_date_time_formatter_factory
-    factory_method: create
+    factory: ['@shopsys.shop.localization.custom_date_time_formatter_factory', create]
 
   shopsys.shop.localization.custom_date_time_formatter_factory:
     class: Shopsys\ShopBundle\Model\Localization\CustomDateTimeFormatterFactory
@@ -476,7 +466,7 @@ services:
 
   shopsys.shop.mail.mailer_service:
     class: Shopsys\ShopBundle\Model\Mail\MailerService
-    arguments: [@mailer]
+    arguments: ['@mailer']
 
   shopsys.shop.order.flow:
     class: Shopsys\ShopBundle\Form\Front\Order\OrderFlow
@@ -485,12 +475,12 @@ services:
   shopsys.shop.heureka.heureka_facade:
     class: Shopsys\ShopBundle\Model\Heureka\HeurekaFacade
     arguments:
-      - @logger
+      - '@logger'
 
   shopsys.shop.order.order_transport_and_payment_watcher_service:
     class: Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
     arguments:
-      - @shopsys.shop.component.flash_message.bag.front
+      - '@shopsys.shop.component.flash_message.bag.front'
 
   shopsys.shop.pricing.input_price_recalculation_scheduler:
     class: Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler
@@ -510,7 +500,7 @@ services:
   shopsys.shop.product.bestselling_product.cached_bestselling_product_facade:
     class: Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
     arguments:
-      - @shopsys.shop.product.bestselling_product.cache_provider
+      - '@shopsys.shop.product.bestselling_product.cache_provider'
 
   shopsys.shop.product.pricing.product_price_recalculator:
     class: Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
@@ -529,7 +519,7 @@ services:
   shopsys.shop.redirect_controller:
     class: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
     calls:
-      - [setContainer, [@service_container]]
+      - [setContainer, ['@service_container']]
 
   shopsys.shop.router.current_domain_router:
     class: Shopsys\ShopBundle\Component\Router\CurrentDomainRouter
@@ -551,7 +541,7 @@ services:
   shopsys.shop.router.security.route_csrf_protector:
     class: Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector
     arguments:
-      - @annotations.reader
+      - '@annotations.reader'
     tags:
       - { name: kernel.event_subscriber }
 
@@ -561,8 +551,8 @@ services:
   shopsys.shop.security.administrator_login_facade:
     class: Shopsys\ShopBundle\Model\Security\AdministratorLoginFacade
     arguments:
-      - @security.token_storage
-      - @event_dispatcher
+      - '@security.token_storage'
+      - '@event_dispatcher'
 
   shopsys.shop.security.customer_login_handler:
     class: Shopsys\ShopBundle\Model\Security\CustomerLoginHandler
@@ -578,8 +568,8 @@ services:
   shopsys.shop.security.login_as_user_facade:
     class: Shopsys\ShopBundle\Model\Security\LoginAsUserFacade
     arguments:
-      - @security.token_storage
-      - @event_dispatcher
+      - '@security.token_storage'
+      - '@event_dispatcher'
 
   shopsys.shop.security.login_listener:
     class: Shopsys\ShopBundle\Model\Security\LoginListener
@@ -595,6 +585,6 @@ services:
       - %shopsys.javascript_url_prefix%
 
   twig.stringloader:
-    class: Twig_Loader_String
+    class: Twig_Loader_Array
     tags:
       - { name: twig.loader }

@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\OrderDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
-use Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -421,7 +420,7 @@ class UrlsProvider
     {
         $routeData = $this->getProductListInCategoryWith500ProductsRouteData();
 
-        $routeData[self::ROUTE_PARAMETERS_KEY][ProductFilterFormType::NAME] = [
+        $routeData[self::ROUTE_PARAMETERS_KEY]['product_filter_form'] = [
             'inStock' => '1',
             'parameters' => [
                 41 => [58],
@@ -454,7 +453,7 @@ class UrlsProvider
     {
         $routeData = $this->getProductListInCategoryWith7600ProductsRouteData();
 
-        $routeData[self::ROUTE_PARAMETERS_KEY][ProductFilterFormType::NAME] = [
+        $routeData[self::ROUTE_PARAMETERS_KEY]['product_filter_form'] = [
             'minimalPrice' => '100',
             'inStock' => '1',
             'parameters' => [
@@ -488,7 +487,7 @@ class UrlsProvider
     {
         $routeData = $this->getProductListInCategoryWith13600ProductsRouteData();
 
-        $routeData[self::ROUTE_PARAMETERS_KEY][ProductFilterFormType::NAME] = [
+        $routeData[self::ROUTE_PARAMETERS_KEY]['product_filter_form'] = [
             'minimalPrice' => '100',
             'inStock' => '1',
         ];
@@ -508,7 +507,7 @@ class UrlsProvider
         ];
         $productSearchParameters = [
             ProductController::SEARCH_TEXT_PARAMETER => self::SEARCH_KEYWORD,
-            ProductFilterFormType::NAME => $productSearchFilterData,
+            'product_filter_form' => $productSearchFilterData,
         ];
 
         return [

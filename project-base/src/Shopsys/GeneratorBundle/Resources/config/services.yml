@@ -8,11 +8,11 @@ services:
   shopsys.generator.generators_form_factory:
     class: Shopsys\GeneratorBundle\Model\GeneratorsFormFactory
     arguments:
-      - @kernel
+      - '@kernel'
 
   shopsys.generator.generator_facade:
     class: Shopsys\GeneratorBundle\Model\GeneratorFacade
     arguments:
-      - @kernel
+      - '@kernel'
 
 

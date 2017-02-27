@@ -140,17 +140,12 @@ class VatController extends AdminBaseController
      */
     public function settingsAction(Request $request)
     {
-        $vats = $this->vatFacade->getAll();
-        $form = $this->createForm(new VatSettingsFormType(
-            $vats,
-            PricingSetting::getRoundingTypes()
-        ));
+        $vatSettingsFormData = [
+            'defaultVat' => $this->vatFacade->getDefaultVat(),
+            'roundingType' => $this->pricingSetting->getRoundingType(),
+        ];
 
-        $vatSettingsFormData = [];
-        $vatSettingsFormData['defaultVat'] = $this->vatFacade->getDefaultVat();
-        $vatSettingsFormData['roundingType'] = $this->pricingSetting->getRoundingType();
-
-        $form->setData($vatSettingsFormData);
+        $form = $this->createForm(VatSettingsFormType::class, $vatSettingsFormData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

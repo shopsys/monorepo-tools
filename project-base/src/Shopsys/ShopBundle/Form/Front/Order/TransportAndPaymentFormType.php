@@ -9,7 +9,7 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
@@ -60,17 +60,9 @@ class TransportAndPaymentFormType extends AbstractType
     }
 
     /**
-     * @return string
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function getName()
-    {
-        return 'transport_and_payment_form';
-    }
-
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],

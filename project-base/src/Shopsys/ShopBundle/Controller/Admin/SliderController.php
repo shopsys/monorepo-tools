@@ -8,7 +8,7 @@ use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Slider\SliderItemFormType;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\ShopBundle\Model\Slider\SliderItem;
@@ -18,11 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SliderController extends AdminBaseController
 {
-    /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory
-     */
-    private $sliderItemFormTypeFactory;
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
      */
@@ -47,13 +42,11 @@ class SliderController extends AdminBaseController
         SliderItemFacade $sliderItemFacade,
         GridFactory $gridFactory,
         SelectedDomain $selectedDomain,
-        SliderItemFormTypeFactory $sliderItemFormTypeFactory,
         Breadcrumb $breadcrumb
     ) {
         $this->sliderItemFacade = $sliderItemFacade;
         $this->gridFactory = $gridFactory;
         $this->selectedDomain = $selectedDomain;
-        $this->sliderItemFormTypeFactory = $sliderItemFormTypeFactory;
         $this->breadcrumb = $breadcrumb;
     }
 
@@ -93,11 +86,12 @@ class SliderController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm($this->sliderItemFormTypeFactory->create(true));
         $sliderItemData = new SliderItemData();
         $sliderItemData->domainId = $this->selectedDomain->getId();
 
-        $form->setData($sliderItemData);
+        $form = $this->createForm(SliderItemFormType::class, $sliderItemData, [
+            'scenario' => SliderItemFormType::SCENARIO_CREATE,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -134,11 +128,12 @@ class SliderController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $sliderItem = $this->sliderItemFacade->getById($id);
-        $form = $this->createForm($this->sliderItemFormTypeFactory->create());
         $sliderItemData = new SliderItemData();
         $sliderItemData->setFromEntity($sliderItem);
 
-        $form->setData($sliderItemData);
+        $form = $this->createForm(SliderItemFormType::class, $sliderItemData, [
+            'scenario' => SliderItemFormType::SCENARIO_EDIT,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

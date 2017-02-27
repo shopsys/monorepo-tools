@@ -44,10 +44,7 @@ class TransportAndPaymentController extends AdminBaseController
      */
     public function freeTransportAndPaymentLimitAction(Request $request)
     {
-        $form = $this->createForm(new FreeTransportAndPaymentPriceLimitsFormType($this->domain->getAll()));
-
         $formData = [];
-
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainId = $domainConfig->getId();
             $freeTransportAndPaymentPriceLimit = $this->pricingSetting->getFreeTransportAndPaymentPriceLimit($domainId);
@@ -58,7 +55,7 @@ class TransportAndPaymentController extends AdminBaseController
             ];
         }
 
-        $form->setData($formData);
+        $form = $this->createForm(FreeTransportAndPaymentPriceLimitsFormType::class, $formData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
-use Shopsys\ShopBundle\Form\Admin\Cookies\CookiesSettingFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Cookies\CookiesSettingFormType;
 use Shopsys\ShopBundle\Model\Cookies\CookiesFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,22 +17,15 @@ class CookiesController extends AdminBaseController
     private $selectedDomain;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Cookies\CookiesSettingFormTypeFactory
-     */
-    private $cookiesSettingFormTypeFactory;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Cookies\CookiesFacade
      */
     private $cookiesFacade;
 
     public function __construct(
         SelectedDomain $selectedDomain,
-        CookiesSettingFormTypeFactory $cookiesSettingFormTypeFactory,
         CookiesFacade $cookiesFacade
     ) {
         $this->selectedDomain = $selectedDomain;
-        $this->cookiesSettingFormTypeFactory = $cookiesSettingFormTypeFactory;
         $this->cookiesFacade = $cookiesFacade;
     }
 
@@ -44,12 +37,9 @@ class CookiesController extends AdminBaseController
         $selectedDomainId = $this->selectedDomain->getId();
         $cookiesArticle = $this->cookiesFacade->findCookiesArticleByDomainId($selectedDomainId);
 
-        $cookiesSettingData = [
-            'cookiesArticle' => $cookiesArticle,
-        ];
-
-        $form = $this->createForm($this->cookiesSettingFormTypeFactory->createForDomain($selectedDomainId));
-        $form->setData($cookiesSettingData);
+        $form = $this->createForm(CookiesSettingFormType::class, ['cookiesArticle' => $cookiesArticle], [
+            'domain_id' => $selectedDomainId,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Payment\PaymentEditFormType;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
@@ -17,11 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PaymentController extends AdminBaseController
 {
-    /**
-     * @var \Shopsys\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory
-     */
-    private $paymentEditFormTypeFactory;
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
      */
@@ -53,7 +48,6 @@ class PaymentController extends AdminBaseController
     private $currencyFacade;
 
     public function __construct(
-        PaymentEditFormTypeFactory $paymentEditFormTypeFactory,
         PaymentEditDataFactory $paymentEditDataFactory,
         CurrencyFacade $currencyFacade,
         PaymentFacade $paymentFacade,
@@ -61,7 +55,6 @@ class PaymentController extends AdminBaseController
         PaymentGridFactory $paymentGridFactory,
         Breadcrumb $breadcrumb
     ) {
-        $this->paymentEditFormTypeFactory = $paymentEditFormTypeFactory;
         $this->paymentEditDataFactory = $paymentEditDataFactory;
         $this->currencyFacade = $currencyFacade;
         $this->paymentFacade = $paymentFacade;
@@ -76,10 +69,9 @@ class PaymentController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm($this->paymentEditFormTypeFactory->create());
         $paymentEditData = $this->paymentEditDataFactory->createDefault();
 
-        $form->setData($paymentEditData);
+        $form = $this->createForm(PaymentEditFormType::class, $paymentEditData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -113,12 +105,9 @@ class PaymentController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $payment = $this->paymentFacade->getByIdWithTransports($id);
-
-        $form = $this->createForm($this->paymentEditFormTypeFactory->create());
-
         $paymentEditData = $this->paymentEditDataFactory->createFromPayment($payment);
 
-        $form->setData($paymentEditData);
+        $form = $this->createForm(PaymentEditFormType::class, $paymentEditData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
