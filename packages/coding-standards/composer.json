@@ -1,10 +1,12 @@
 {
     "name": "shopsys/coding-standards",
-    "description": "Common coding standards for new ShopSys projects",
+    "description": "Coding standards definition compatible with PSR-2",
+    "keywords": ["code style","coding standards","PSR-2","code quality"],
+    "license": "MIT",
     "authors": [
         {
-            "name": "Miroslav Sustek",
-            "email": "miroslav.sustek@shopsys.cz"
+            "name": "ShopSys",
+            "homepage": "https://www.shopsys.com/"
         }
     ],
     "autoload": {
