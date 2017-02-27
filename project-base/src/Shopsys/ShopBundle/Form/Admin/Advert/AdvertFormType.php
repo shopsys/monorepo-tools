@@ -23,7 +23,8 @@ class AdvertFormType extends AbstractType
      */
     private $advertPositionList;
 
-    public function __construct(AdvertPositionList $advertPositionList) {
+    public function __construct(AdvertPositionList $advertPositionList)
+    {
         $this->advertPositionList = $advertPositionList;
     }
 

@@ -44,7 +44,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
                 {payment_instructions} <br />
             </p>
         ';
-        $setting->setForDomain(Setting::ORDER_SUBMITTED_SETTING_NAME, $orderSentTextEn, 2);
+        $setting->setForDomain(Setting::ORDER_SENT_PAGE_CONTENT, $orderSentTextEn, 2);
 
         /* @var $defaultCurrency \Shopsys\ShopBundle\Model\Pricing\Currency\Currency */
         $domain2DefaultCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);

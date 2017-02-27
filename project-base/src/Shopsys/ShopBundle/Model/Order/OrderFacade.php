@@ -291,15 +291,14 @@ class OrderFacade
     }
 
     /**
-     * @param string $confirmTextTemplate
      * @param int $orderId
      * @return string
      */
-    public function getOrderConfirmText($orderId)
+    public function getOrderSentPageContent($orderId)
     {
         $order = $this->getById($orderId);
         $orderDetailUrl = $this->orderService->getOrderDetailUrl($order);
-        $confirmTextTemplate = $this->setting->getForDomain(Setting::ORDER_SUBMITTED_SETTING_NAME, $order->getDomainId());
+        $orderSentPageContent = $this->setting->getForDomain(Setting::ORDER_SENT_PAGE_CONTENT, $order->getDomainId());
 
         $variables = [
             self::VARIABLE_TRANSPORT_INSTRUCTIONS => $order->getTransport()->getInstructions(),
@@ -308,7 +307,7 @@ class OrderFacade
             self::VARIABLE_NUMBER => $order->getNumber(),
         ];
 
-        return strtr($confirmTextTemplate, $variables);
+        return strtr($orderSentPageContent, $variables);
     }
 
     /**
