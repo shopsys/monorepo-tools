@@ -7,7 +7,10 @@ use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Product\Product;
 
 /**
- * @ORM\Table(name="product_category_domains")
+ * @ORM\Table(
+ *     name="product_category_domains",
+ *     indexes={@ORM\Index(columns={"category_id", "domain_id"})}
+ * )
  * @ORM\Entity
  */
 class ProductCategoryDomain
