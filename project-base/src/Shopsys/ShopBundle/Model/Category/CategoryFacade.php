@@ -412,6 +412,7 @@ class CategoryFacade
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $domainId
+     * @return int
      */
     public function getListableProductsCountByCategory($category, $pricingGroup, $domainId)
     {
