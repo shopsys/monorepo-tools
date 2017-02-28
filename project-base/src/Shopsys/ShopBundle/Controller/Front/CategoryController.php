@@ -112,20 +112,19 @@ class CategoryController extends FrontBaseController
      */
     public function categoryListAction(array $categories, $showProductsCountByCategory = true)
     {
-        $pricingGroup = $this->currentCustomer->getPricingGroup();
-        $domainId = $this->domain->getId();
-        $countOfProductsByCategoryId = [];
-
         if ($showProductsCountByCategory === true) {
-            foreach ($categories as $category) {
-                $countOfProductsByCategoryId[$category->getId()] = $this->categoryFacade
-                    ->getListableProductsCountByCategory($category, $pricingGroup, $domainId);
-            }
+            $pricingGroup = $this->currentCustomer->getPricingGroup();
+            $domainId = $this->domain->getId();
+
+            $listableProductCountsIndexedByCategoryId = $this->categoryFacade
+                ->getListableProductCountsIndexedByCategoryId($categories, $pricingGroup, $domainId);
+        } else {
+            $listableProductCountsIndexedByCategoryId = [];
         }
 
         return $this->render('@ShopsysShop/Front/Content/Category/categoryList.html.twig', [
             'categories' => $categories,
-            'countOfProductsByCategoryId' => $countOfProductsByCategoryId,
+            'listableProductCountsIndexedByCategoryId' => $listableProductCountsIndexedByCategoryId,
         ]);
     }
 }

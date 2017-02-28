@@ -14,6 +14,7 @@ use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Shopsys\ShopBundle\Model\Category\CategoryService;
 use Shopsys\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Category\Detail\CategoryDetailFactory;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\Product;
 
 class CategoryFacade
@@ -409,13 +410,20 @@ class CategoryFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $domainId
-     * @return int
+     * @return int[categoryId]
      */
-    public function getListableProductsCountByCategory($category, $pricingGroup, $domainId)
-    {
-        return $this->categoryRepository->getListableProductsCountByCategory($category, $pricingGroup, $domainId);
+    public function getListableProductCountsIndexedByCategoryId(
+        array $categories,
+        PricingGroup $pricingGroup,
+        $domainId
+    ) {
+        return $this->categoryRepository->getListableProductCountsIndexedByCategoryId(
+            $categories,
+            $pricingGroup,
+            $domainId
+        );
     }
 }

@@ -10,6 +10,7 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Paginator\QueryPaginator;
 use Shopsys\ShopBundle\Component\String\DatabaseSearching;
 use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductCategoryDomain;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
@@ -350,30 +351,45 @@ class CategoryRepository extends NestedTreeRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $domainId
-     * @return int
+     * @return int[categoryId]
      */
-    public function getListableProductsCountByCategory($category, $pricingGroup, $domainId)
-    {
-        $queryBuilder = $this->productRepository->getAllListableQueryBuilder($domainId, $pricingGroup);
+    public function getListableProductCountsIndexedByCategoryId(
+        array $categories,
+        PricingGroup $pricingGroup,
+        $domainId
+    ) {
+        if (count($categories) === 0) {
+            return [];
+        }
+        $listableProductCountsIndexedByCategoryId = [];
+        foreach ($categories as $category) {
+            // Initialize array with zeros as categories without found products will not be represented in result rows
+            $listableProductCountsIndexedByCategoryId[$category->getId()] = 0;
+        }
 
-        $queryBuilder->join(
-            ProductCategoryDomain::class,
-            'pcd',
-            Join::WITH,
-            'pcd.product = p
-             AND pcd.category = :category
-             AND pcd.domainId = :domainId'
-        )
-        ->select('COUNT(p)')
-        ->resetDQLPart('orderBy');
+        $queryBuilder = $this->productRepository->getAllListableQueryBuilder($domainId, $pricingGroup)
+            ->join(
+                ProductCategoryDomain::class,
+                'pcd',
+                Join::WITH,
+                'pcd.product = p
+                 AND pcd.category IN (:categories)
+                 AND pcd.domainId = :domainId'
+            )
+            ->select('IDENTITY(pcd.category) AS categoryId, COUNT(p) AS productCount')
+            ->setParameter('categories', $categories)
+            ->setParameter('domainId', $domainId)
+            ->groupBy('pcd.category')
+            ->resetDQLPart('orderBy');
 
-        $queryBuilder->setParameter('category', $category);
-        $queryBuilder->setParameter('domainId', $domainId);
+        foreach ($queryBuilder->getQuery()->getArrayResult() as $result) {
+            $listableProductCountsIndexedByCategoryId[$result['categoryId']] = $result['productCount'];
+        }
 
-        return $queryBuilder->getQuery()->getSingleScalarResult();
+        return $listableProductCountsIndexedByCategoryId;
     }
 
     /**
