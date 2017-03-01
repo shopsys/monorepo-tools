@@ -133,8 +133,8 @@ class ProductController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $product = $this->productFacade->getById($id);
-
         $productEditData = $this->productEditDataFactory->createFromProduct($product);
+
         $form = $this->createForm(ProductEditFormType::class, $productEditData, ['product' => $product]);
         $form->handleRequest($request);
 
@@ -182,6 +182,7 @@ class ProductController extends AdminBaseController
     public function newAction(Request $request)
     {
         $productEditData = $this->productEditDataFactory->createDefault();
+
         $form = $this->createForm(ProductEditFormType::class, $productEditData, ['product' => null]);
         $form->handleRequest($request);
 
@@ -218,8 +219,8 @@ class ProductController extends AdminBaseController
 
         $advancedSearchForm = $this->advancedSearchFacade->createAdvancedSearchForm($request);
         $advancedSearchData = $advancedSearchForm->getData();
-
         $quickSearchData = new QuickSearchFormData();
+
         $quickSearchForm = $this->createForm(QuickSearchFormType::class, $quickSearchData);
 
         // Cannot call $form->handleRequest() because the GET forms are not handled in POST request.
