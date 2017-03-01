@@ -19,10 +19,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UrlListType extends AbstractType
 {
-    const TO_DELETE = 'toDelete';
-    const MAIN_ON_DOMAINS = 'mainOnDomains';
-    const NEW_URLS = 'newUrls';
-
     /**
      * @var \Symfony\Component\Form\FormFactoryInterface
      */
@@ -65,9 +61,9 @@ class UrlListType extends AbstractType
             throw new \Shopsys\ShopBundle\Form\Exception\MissingRouteNameException();
         }
 
-        $builder->add(self::TO_DELETE, FormType::FORM);
-        $builder->add(self::MAIN_ON_DOMAINS, FormType::FORM);
-        $builder->add(self::NEW_URLS, FormType::COLLECTION, [
+        $builder->add('toDelete', FormType::FORM);
+        $builder->add('mainOnDomains', FormType::FORM);
+        $builder->add('newUrls', FormType::COLLECTION, [
             'type' => FormType::FRIENDLY_URL,
             'required' => false,
             'allow_add' => true,
@@ -80,13 +76,13 @@ class UrlListType extends AbstractType
         $friendlyUrlsByDomain = $this->getFriendlyUrlsIndexedByDomain($options['route_name'], $options['entity_id']);
 
         foreach ($friendlyUrlsByDomain as $domainId => $friendlyUrls) {
-            $builder->get(self::TO_DELETE)->add($domainId, FormType::CHOICE, [
+            $builder->get('toDelete')->add($domainId, FormType::CHOICE, [
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
                 'choice_list' => new ObjectChoiceList($friendlyUrls, 'slug', [], null, 'slug'),
             ]);
-            $builder->get(self::MAIN_ON_DOMAINS)->add($domainId, FormType::CHOICE, [
+            $builder->get('mainOnDomains')->add($domainId, FormType::CHOICE, [
                 'required' => true,
                 'multiple' => false,
                 'expanded' => true,

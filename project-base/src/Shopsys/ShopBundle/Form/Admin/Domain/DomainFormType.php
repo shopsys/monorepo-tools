@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints;
 
 class DomainFormType extends AbstractType
 {
-    const DOMAIN_ICON = 'icon';
+    const FIELD_ICON = 'icon';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
@@ -19,7 +19,7 @@ class DomainFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(self::DOMAIN_ICON, FormType::FILE_UPLOAD, [
+            ->add(self::FIELD_ICON, FormType::FILE_UPLOAD, [
                 'required' => false,
                 'file_constraints' => [
                     new Constraints\Image([
