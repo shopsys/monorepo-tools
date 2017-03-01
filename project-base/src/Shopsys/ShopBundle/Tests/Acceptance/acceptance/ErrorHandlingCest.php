@@ -10,7 +10,7 @@ class ErrorHandlingCest
     {
         $me->wantTo('display notice error page');
         $me->amOnPage('/test/error-handler/notice');
-        $me->see('Jejda');
+        $me->see('Oops! Error occurred');
         $me->dontSee('Notice');
     }
 }

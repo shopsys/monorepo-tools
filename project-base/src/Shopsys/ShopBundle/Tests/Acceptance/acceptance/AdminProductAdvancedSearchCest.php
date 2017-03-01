@@ -18,7 +18,7 @@ class AdminProductAdvancedSearchCest
 
         $productAdvancedSearchPage->search(ProductAdvancedSearchPage::SEARCH_SUBJECT_CATNUM, '9176544MG');
 
-        $productAdvancedSearchPage->assertFoundProductByName('Aquila Aquagym Pramenitá voda neperlivá');
+        $productAdvancedSearchPage->assertFoundProductByName('Aquila Aquagym non-carbonated spring water');
         $productAdvancedSearchPage->assertFoundProductCount(1);
     }
 }

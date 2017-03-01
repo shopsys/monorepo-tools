@@ -12,7 +12,7 @@ class LayoutPage extends AbstractPage
      */
     public function openLoginPopup()
     {
-        $this->tester->clickByText('Přihlásit se');
+        $this->tester->clickByText('Log in');
         $this->tester->wait(1); // wait for Shopsys.window to show
     }
 }

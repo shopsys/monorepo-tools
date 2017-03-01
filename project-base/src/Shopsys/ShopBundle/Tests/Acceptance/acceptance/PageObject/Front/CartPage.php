@@ -34,7 +34,7 @@ class CartPage extends AbstractPage
     public function assertTotalPriceWithVat($formattedPriceWithCurrency)
     {
         $orderPriceCell = $this->getTotalProductsPriceCell();
-        $this->tester->seeInElement('Celková cena s DPH: ' . $formattedPriceWithCurrency, $orderPriceCell);
+        $this->tester->seeInElement('Total price including VAT: ' . $formattedPriceWithCurrency, $orderPriceCell);
     }
 
     /**
