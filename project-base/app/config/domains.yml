@@ -1,9 +1,9 @@
 domains:
   - id: 1
     name: shopsys
-    locale: cs
+    locale: en
 
   - id: 2
     name: 2.shopsys
-    locale: en
+    locale: cs
     styles_directory: domain2
