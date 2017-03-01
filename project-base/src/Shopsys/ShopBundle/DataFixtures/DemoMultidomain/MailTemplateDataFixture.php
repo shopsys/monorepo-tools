@@ -17,21 +17,21 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
         $mailTemplateData = new MailTemplateData();
         $mailTemplateData->name = 'order_status_1';
         $mailTemplateData->sendMail = true;
-        $mailTemplateData->subject = 'Thank you for your order no. {number} placed at {date}';
-        $mailTemplateData->body = 'Dear customer,<br /><br />'
-            . 'Your order has been placed successfully.<br /><br />'
-            . 'You will be contacted when the order state changes.<br />'
-            . 'Order number: {number} <br />'
-            . 'Date and time of creation: {date} <br />'
-            . 'E-shop link: {url} <br />'
-            . 'Order detail link: {order_detail_url} <br />'
-            . 'Shipping: {transport} <br />'
-            . 'Payment: {payment} <br />'
-            . 'Total price including VAT: {total_price} <br />'
-            . 'Billing address:<br /> {billing_address} <br />'
-            . 'Delivery address: {delivery_address} <br />'
-            . 'Note: {note} <br />'
-            . 'Products: {products} <br />'
+        $mailTemplateData->subject = 'Děkujeme za objednávku č. {number} ze dne {date}';
+        $mailTemplateData->body = 'Dobrý den,<br /><br />'
+            . 'Vaše objednávka byla úspěšně vytvořena.<br /><br />'
+            . 'O dalších stavech objednávky Vás budeme informovat.<br />'
+            . 'Čislo objednávky: {number} <br />'
+            . 'Datum a čas vytvoření: {date} <br />'
+            . 'URL adresa eshopu: {url} <br />'
+            . 'URL adresa na detail objednávky: {order_detail_url} <br />'
+            . 'Doprava: {transport} <br />'
+            . 'Platba: {payment} <br />'
+            . 'Celková cena s DPH: {total_price} <br />'
+            . 'Fakturační adresa:<br /> {billing_address} <br />'
+            . 'Doručovací adresa: {delivery_address} <br />'
+            . 'Poznámka: {note} <br />'
+            . 'Produkty: {products} <br />'
             . '{transport_instructions} <br />'
             . '{payment_instructions}';
 

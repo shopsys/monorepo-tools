@@ -35,16 +35,16 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         $pricingGroup2 = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_2);
         $setting->setForDomain(Setting::DEFAULT_PRICING_GROUP, $pricingGroup2->getId(), 2);
 
-        $orderSentTextEn = '
+        $orderSentText = '
             <p>
-                Order number {number} has been sent, thank you for your purchase.
-                We will contact you about next order status. <br /><br />
-                <a href="{order_detail_url}">Track</a> the status of your order. <br />
+                Objednávka číslo {number} byla odeslána, děkujeme za Váš nákup.
+                Budeme Vás kontaktovat o dalším průběhu vyřizování. <br /><br />
+                Uschovejte si permanentní <a href="{order_detail_url}">odkaz na detail objednávky</a>. <br />
                 {transport_instructions} <br />
                 {payment_instructions} <br />
             </p>
         ';
-        $setting->setForDomain(Setting::ORDER_SENT_PAGE_CONTENT, $orderSentTextEn, 2);
+        $setting->setForDomain(Setting::ORDER_SENT_PAGE_CONTENT, $orderSentText, 2);
 
         /* @var $defaultCurrency \Shopsys\ShopBundle\Model\Pricing\Currency\Currency */
         $domain2DefaultCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
@@ -52,11 +52,11 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 
         $setting->setForDomain(
             SeoSettingFacade::SEO_META_DESCRIPTION_MAIN_PAGE,
-            'ShopSys Framework - the best solution for your eshop.',
+            'ShopSys Framework - nejlepší řešení pro váš internetový obchod.',
             2
         );
-        $setting->setForDomain(SeoSettingFacade::SEO_TITLE_MAIN_PAGE, 'ShopSys Framework - Title page', 2);
-        $setting->setForDomain(SeoSettingFacade::SEO_TITLE_ADD_ON, '| Demo eshop', 2);
+        $setting->setForDomain(SeoSettingFacade::SEO_TITLE_MAIN_PAGE, 'ShopSys Framework - Titulní strana', 2);
+        $setting->setForDomain(SeoSettingFacade::SEO_TITLE_ADD_ON, '| Demo obchod', 2);
     }
 
     /**
