@@ -12,9 +12,7 @@ use Shopsys\ShopBundle\DataFixtures\Demo\PaymentDataFixture as DemoPaymentDataFi
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture as DemoProductDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\TransportDataFixture as DemoTransportDataFixture;
 use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\CountryDataFixture;
-use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\PaymentDataFixture;
 use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\SettingValueDataFixture;
-use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\TransportDataFixture;
 use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Customer\UserRepository;
 use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
@@ -188,8 +186,6 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
     {
         return [
             CountryDataFixture::class,
-            PaymentDataFixture::class,
-            TransportDataFixture::class,
             SettingValueDataFixture::class,
         ];
     }

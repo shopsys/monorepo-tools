@@ -34,7 +34,10 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
     {
         $categoryData = new CategoryData();
 
-        $categoryData->name = ['cs' => 'Elektro'];
+        $categoryData->name = [
+            'cs' => 'Elektro',
+            'en' => 'Electronics',
+        ];
         $categoryData->descriptions = [
             Domain::FIRST_DOMAIN_ID => 'Spotřební elektronika zahrnuje elektronická zařízení každodenního (nebo alespoň častého)'
                 . ' použití pro komunikaci, v kanceláři i doma.',
@@ -42,7 +45,10 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
         $categoryData->parent = $this->getReference(CategoryRootDataFixture::ROOT);
         $electronicsCategory = $this->createCategory($categoryData, self::ELECTRONICS);
 
-        $categoryData->name = ['cs' => 'Televize, audio'];
+        $categoryData->name = [
+            'cs' => 'Televize, audio',
+            'en' => 'TV, audio',
+        ];
         $categoryData->descriptions = [
             Domain::FIRST_DOMAIN_ID => 'Televize (z řeckého tele – daleko a latinského vize – vidět) je široce používané'
                 . ' jednosměrné dálkové plošné vysílání (tzv. broadcasting) a individuální přijímání televizního vysílání'
@@ -51,7 +57,10 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
         $categoryData->parent = $electronicsCategory;
         $this->createCategory($categoryData, self::TV);
 
-        $categoryData->name = ['cs' => 'Fotoaparáty'];
+        $categoryData->name = [
+            'cs' => 'Fotoaparáty',
+            'en' => 'Cameras & Photo',
+        ];
         $categoryData->descriptions = [
             Domain::FIRST_DOMAIN_ID => 'Fotoaparát je zařízení sloužící k pořizování a zaznamenání fotografií. Každý fotoaparát'
                 . ' je v principu světlotěsně uzavřená komora s malým otvorem (nebo nějakou složitější optickou soustavou –'
@@ -60,7 +69,10 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
         ];
         $this->createCategory($categoryData, self::PHOTO);
 
-        $categoryData->name = ['cs' => 'Tiskárny'];
+        $categoryData->name = [
+            'cs' => 'Tiskárny',
+            'en' => 'Printers',
+        ];
         $categoryData->descriptions = [
             Domain::FIRST_DOMAIN_ID => 'Tiskárna je periferní výstupní zařízení, které slouží k přenosu dat uložených v'
                 . ' elektronické podobě na papír nebo jiné médium (fotopapír, kompaktní disk apod.). Tiskárnu připojujeme'
@@ -68,7 +80,10 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
         ];
         $this->createCategory($categoryData, self::PRINTERS);
 
-        $categoryData->name = ['cs' => 'Počítače & příslušenství'];
+        $categoryData->name = [
+            'cs' => 'Počítače & příslušenství',
+            'en' => 'Personal Computers & accessories',
+        ];
         $categoryData->descriptions = [
             Domain::FIRST_DOMAIN_ID => 'Počítač je zařízení a výpočetní technika, která zpracovává data pomocí předem'
                 . ' vytvořeného programu. Současný počítač je elektronický a skládá se z hardwaru, který představuje fyzické'
@@ -79,7 +94,10 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
         ];
         $this->createCategory($categoryData, self::PC);
 
-        $categoryData->name = ['cs' => 'Mobilní telefony'];
+        $categoryData->name = [
+            'cs' => 'Mobilní telefony',
+            'en' => 'Mobile Phones',
+        ];
         $categoryData->descriptions = [
             Domain::FIRST_DOMAIN_ID => 'Mobilní telefony umožňují nejen komunikaci v rámci mobilní sítě, ale i spojení s pevnou'
                 . ' telefonní sítí přímo volbou telefonního čísla na vestavěné klávesnici a poskytují širokou škálu dalších'
@@ -88,7 +106,10 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
         ];
         $this->createCategory($categoryData, self::PHONES);
 
-        $categoryData->name = ['cs' => 'Kávovary'];
+        $categoryData->name = [
+            'cs' => 'Kávovary',
+            'en' => 'Coffee Machines',
+        ];
         $categoryData->descriptions = [
             Domain::FIRST_DOMAIN_ID => 'Kávovar je stroj určený pro výrobu kávy takovým způsobem, aby se voda nemusela vařit'
                 . ' v oddělené nádobě. Existuje obrovské množství kávovarů, nicméně princip přípravy kávy je vždy stejný: do'
@@ -97,7 +118,10 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
         ];
         $this->createCategory($categoryData, self::COFFEE);
 
-        $categoryData->name = ['cs' => 'Knihy'];
+        $categoryData->name = [
+            'cs' => 'Knihy',
+            'en' => 'Books',
+        ];
         $categoryData->descriptions = [
             Domain::FIRST_DOMAIN_ID => 'Kniha je sešitý nebo slepený svazek listů nebo skládaný arch papíru, kartonu, pergamenu'
                 . ' nebo jiného materiálu, popsaný, potištěný nebo prázdný s vazbou a opatřený přebalem.',
@@ -105,7 +129,10 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
         $categoryData->parent = $this->getReference(CategoryRootDataFixture::ROOT);
         $this->createCategory($categoryData, self::BOOKS);
 
-        $categoryData->name = ['cs' => 'Hračky a další'];
+        $categoryData->name = [
+            'cs' => 'Hračky a další',
+            'en' => 'Toys',
+        ];
         $categoryData->descriptions = [
             Domain::FIRST_DOMAIN_ID => 'Hračka je předmět používaný ke hře dětí, ale někdy i dospělých. Slouží k upoutání'
                 . ' pozornosti dítěte, jeho zabavení, ale také k rozvíjení jeho motorických a psychických schopností. Hračky'
@@ -114,7 +141,10 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
         ];
         $this->createCategory($categoryData, self::TOYS);
 
-        $categoryData->name = ['cs' => 'Zahradní náčiní'];
+        $categoryData->name = [
+            'cs' => 'Zahradní náčiní',
+            'en' => 'Gargen tools',
+        ];
         $categoryData->descriptions = [
             Domain::FIRST_DOMAIN_ID => 'Oddělení zahradního náčiní je jedno z největších oddělení v naší nabídce. Za pozornost'
                 . ' stojí zejména naše filtry různých druhů nečistot, avšak doporučujeme popatřit zrakem i na naše boční držáky'
@@ -122,7 +152,10 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
         ];
         $this->createCategory($categoryData, self::GARDEN_TOOLS);
 
-        $categoryData->name = ['cs' => 'Jídlo'];
+        $categoryData->name = [
+            'cs' => 'Jídlo',
+            'en' => 'Food',
+        ];
         $categoryData->descriptions = [
             Domain::FIRST_DOMAIN_ID => 'Potravina je výrobek nebo látka určená pro výživu lidí a konzumovaná ústy v nezměněném'
                 . ' nebo upraveném stavu. Potraviny se dělí na poživatiny a pochutiny. Potraviny mohou být rostlinného, živočišného'
