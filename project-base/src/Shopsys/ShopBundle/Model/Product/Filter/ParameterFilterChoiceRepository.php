@@ -64,7 +64,7 @@ class ParameterFilterChoiceRepository
         $rows = $productsQueryBuilder->getQuery()->execute(null, GroupedScalarHydrator::HYDRATION_MODE);
 
         $visibleParametersIndexedById = $this->getVisibleParametersIndexedByIdOrderedByName($rows, $locale);
-        $parameterValuesIndexedByParameterId = $this->getParameterValuesIndexedByParameterIdOrderedByValueText($rows);
+        $parameterValuesIndexedByParameterId = $this->getParameterValuesIndexedByParameterIdOrderedByValueText($rows, $locale);
         $parameterFilterChoices = [];
 
         foreach ($visibleParametersIndexedById as $parameterId => $parameter) {
@@ -113,9 +113,10 @@ class ParameterFilterChoiceRepository
 
     /**
      * @param array $rows
+     * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[][]
      */
-    private function getParameterValuesIndexedByParameterIdOrderedByValueText(array $rows)
+    private function getParameterValuesIndexedByParameterIdOrderedByValueText(array $rows, $locale)
     {
         $parameterIdsByValueId = [];
         foreach ($rows as $row) {
@@ -124,7 +125,7 @@ class ParameterFilterChoiceRepository
             $parameterIdsByValueId[$valueId][] = $parameterId;
         }
 
-        $valuesIndexedById = $this->getParameterValuesIndexedByIdOrderedByText($rows);
+        $valuesIndexedById = $this->getParameterValuesIndexedByIdOrderedByText($rows, $locale);
 
         $valuesIndexedByParameterId = [];
         foreach ($valuesIndexedById as $valueId => $value) {
@@ -138,9 +139,10 @@ class ParameterFilterChoiceRepository
 
     /**
      * @param array $rows
+     * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[]
      */
-    private function getParameterValuesIndexedByIdOrderedByText(array $rows)
+    private function getParameterValuesIndexedByIdOrderedByText(array $rows, $locale)
     {
         $valueIds = [];
         foreach ($rows as $row) {
@@ -155,7 +157,7 @@ class ParameterFilterChoiceRepository
             ->andWhere('pv.locale = :locale')
             ->orderBy('pv.text', 'asc');
         $valuesQueryBuilder->setParameter('valueIds', $valueIds);
-        $valuesQueryBuilder->setParameter('locale', 'cs');
+        $valuesQueryBuilder->setParameter('locale', $locale);
         $values = $valuesQueryBuilder->getQuery()->execute();
 
         $valuesIndexedById = [];
