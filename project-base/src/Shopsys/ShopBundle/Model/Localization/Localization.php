@@ -63,7 +63,7 @@ class Localization
      */
     public function getAdminLocale()
     {
-        return $this->domain->getDomainConfigById(Domain::MAIN_ADMIN_DOMAIN_ID)->getLocale();
+        return 'cs';
     }
 
     /**
