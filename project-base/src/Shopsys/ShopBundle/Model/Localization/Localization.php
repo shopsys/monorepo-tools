@@ -63,7 +63,7 @@ class Localization
      */
     public function getAdminLocale()
     {
-        return 'cs';
+        return 'en';
     }
 
     /**
