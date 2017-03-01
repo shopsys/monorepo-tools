@@ -44,7 +44,9 @@ class InvertChoiceTypeExtension extends AbstractTypeExtension
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefault(self::INVERT_OPTION, false);
+        $resolver->setDefaults([
+            self::INVERT_OPTION => false,
+        ]);
         $resolver->addAllowedTypes([
             self::INVERT_OPTION => 'bool',
         ]);

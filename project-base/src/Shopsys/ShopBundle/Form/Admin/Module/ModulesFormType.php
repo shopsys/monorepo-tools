@@ -36,6 +36,8 @@ class ModulesFormType extends AbstractType
         $resolver
             ->setRequired('module_list')
             ->setAllowedTypes('module_list', ModuleList::class)
-            ->setDefault('attr', ['novalidate' => 'novalidate']);
+            ->setDefaults([
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

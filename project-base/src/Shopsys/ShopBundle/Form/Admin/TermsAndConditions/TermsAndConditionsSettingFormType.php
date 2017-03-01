@@ -46,6 +46,8 @@ class TermsAndConditionsSettingFormType extends AbstractType
         $resolver
             ->setRequired('domain_id')
             ->setAllowedTypes('domain_id', 'int')
-            ->setDefault('attr', ['novalidate' => 'novalidate']);
+            ->setDefaults([
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }
