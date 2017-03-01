@@ -10,7 +10,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class LocalizationListenerTest extends DatabaseTestCase
 {
-    public function testProductDetailLocaleCs()
+    public function testProductDetailOnFirstDomainHasCzechLocale()
     {
         $router = $this->getContainer()->get(CurrentDomainRouter::class);
         /* @var $router \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter */
@@ -28,7 +28,7 @@ class LocalizationListenerTest extends DatabaseTestCase
     /**
      * @group multidomain
      */
-    public function testProductDetailLocaleEn()
+    public function testProductDetailOnSecondDomainHasEnglishLocale()
     {
         $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
