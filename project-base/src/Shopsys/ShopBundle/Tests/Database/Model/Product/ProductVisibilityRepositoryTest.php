@@ -34,7 +34,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $em->persist($vat);
 
         $productEditData = new ProductEditData();
-        $productEditData->productData->name = ['cs' => 'Name'];
+        $productEditData->productData->name = ['cs' => 'Name', 'en' => 'Name'];
         $productEditData->productData->vat = $vat;
         $productEditData->productData->price = 100;
         $productEditData->productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
@@ -259,7 +259,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         /* @var $productPriceRecalculator \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
         $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->name = ['cs' => 'Name'];
+        $productEditData->productData->name = ['cs' => 'Name', 'en' => 'Name'];
         $product = $productFacade->create($productEditData);
         $productPriceRecalculator->runImmediateRecalculations();
 
@@ -290,7 +290,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         /* @var $productPriceRecalculator \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
         $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->name = ['cs' => null];
+        $productEditData->productData->name = ['cs' => null, 'en' => null];
         $product = $productFacade->create($productEditData);
         $productPriceRecalculator->runImmediateRecalculations();
 

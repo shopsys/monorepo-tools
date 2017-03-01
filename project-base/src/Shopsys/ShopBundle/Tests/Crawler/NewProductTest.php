@@ -54,6 +54,7 @@ class NewProductTest extends FunctionalTestCase
     private function fillForm(Form $form)
     {
         $form['product_edit_form[productData][name][cs]'] = 'testProduct';
+        $form['product_edit_form[productData][name][en]'] = 'testProduct';
         $form['product_edit_form[productData][catnum]'] = '123456';
         $form['product_edit_form[productData][partno]'] = '123456';
         $form['product_edit_form[productData][ean]'] = '123456';
