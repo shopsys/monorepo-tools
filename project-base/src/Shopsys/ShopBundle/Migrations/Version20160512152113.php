@@ -46,21 +46,28 @@ class Version20160512152113 extends AbstractMigration
         );
         $this->sql('CREATE INDEX IDX_E52FFDEEF92F3E70 ON orders (country_id)');
         foreach ($this->getAllDomainIds() as $domainId) {
-            $this->sql(
-                'INSERT INTO countries (name, domain_id) VALUES (:countryName, :domainId)',
-                [
-                    'countryName' => $this->getDefaultCountryNameByDomainId($domainId),
-                    'domainId' => $domainId,
-                ]
-            );
-            $countryId = $this->connection->lastInsertId(self::COUNTRIES_SEQUENCE_NAME);
-            $this->sql(
-                'UPDATE orders SET country_id = :countryId WHERE domain_id = :domainId',
-                [
-                    'countryId' => $countryId,
-                    'domainId' => $domainId,
-                ]
-            );
+            $countOfOrdersOnDomain = $this->sql(
+                'SELECT COUNT(*) FROM orders WHERE domain_id = :domainId;',
+                ['domainId' => $domainId]
+            )->fetchColumn(0);
+
+            if ($countOfOrdersOnDomain > 0) {
+                $this->sql(
+                    'INSERT INTO countries (name, domain_id) VALUES (:countryName, :domainId)',
+                    [
+                        'countryName' => '-',
+                        'domainId' => $domainId,
+                    ]
+                );
+                $countryId = $this->connection->lastInsertId(self::COUNTRIES_SEQUENCE_NAME);
+                $this->sql(
+                    'UPDATE orders SET country_id = :countryId WHERE domain_id = :domainId',
+                    [
+                        'countryId' => $countryId,
+                        'domainId' => $domainId,
+                    ]
+                );
+            }
         }
         $this->sql('ALTER TABLE orders ALTER country_id SET NOT NULL');
 
@@ -70,17 +77,6 @@ class Version20160512152113 extends AbstractMigration
             REFERENCES countries (id) NOT DEFERRABLE INITIALLY IMMEDIATE'
         );
         $this->sql('CREATE INDEX IDX_E52FFDEEE76AA954 ON orders (delivery_country_id)');
-    }
-
-    /**
-     * @param int $domainId
-     * @return string
-     */
-    private function getDefaultCountryNameByDomainId($domainId)
-    {
-        $domainLocale = $this->getDomainLocale($domainId);
-
-        return $domainLocale === 'en' ? 'Czech republic' : 'Česká republika';
     }
 
     /**
