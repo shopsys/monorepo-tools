@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Model\Localization;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -15,11 +16,19 @@ class LocalizationListener implements EventSubscriberInterface
     private $domain;
 
     /**
+     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     */
+    private $localization;
+
+    /**
      * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
      */
-    public function __construct(Domain $domain)
-    {
+    public function __construct(
+        Domain $domain,
+        Localization $localization
+    ) {
         $this->domain = $domain;
+        $this->localization = $localization;
     }
 
     /**
@@ -29,8 +38,22 @@ class LocalizationListener implements EventSubscriberInterface
     {
         if ($event->isMasterRequest()) {
             $request = $event->getRequest();
-            $request->setLocale($this->domain->getLocale());
+
+            if ($this->isAdminRequest($request)) {
+                $request->setLocale($this->localization->getAdminLocale());
+            } else {
+                $request->setLocale($this->domain->getLocale());
+            }
         }
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return bool
+     */
+    private function isAdminRequest(Request $request)
+    {
+        return preg_match('/^admin_/', $request->attributes->get('_route')) === 1;
     }
 
     public static function getSubscribedEvents()
