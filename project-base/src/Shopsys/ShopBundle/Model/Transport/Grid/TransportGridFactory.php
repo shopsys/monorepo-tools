@@ -63,7 +63,7 @@ class TransportGridFactory implements GridFactoryInterface
         $queryBuilder = $this->transportRepository->getQueryBuilderForAll()
             ->addSelect('tt')
             ->join('t.translations', 'tt', Join::WITH, 'tt.locale = :locale')
-            ->setParameter('locale', $this->localization->getDefaultLocale());
+            ->setParameter('locale', $this->localization->getAdminLocale());
         $dataSource = new QueryBuilderWithRowManipulatorDataSource(
             $queryBuilder,
             't.id',

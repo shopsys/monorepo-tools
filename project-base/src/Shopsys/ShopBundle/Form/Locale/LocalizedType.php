@@ -44,7 +44,7 @@ class LocalizedType extends AbstractType
         $otherLocaleOptions['required'] = $options['required'] && $otherLocaleOptions['required'];
 
         foreach ($this->localization->getAllLocales() as $locale) {
-            if ($locale === $this->localization->getDefaultLocale()) {
+            if ($locale === $this->localization->getAdminLocale()) {
                 $builder->add($locale, $options['type'], $defaultLocaleOptions);
             } else {
                 $builder->add($locale, $options['type'], $otherLocaleOptions);
