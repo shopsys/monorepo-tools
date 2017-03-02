@@ -51,35 +51,4 @@ $config = PhpCsFixer\Config::create()
         new ShopSys\CodingStandards\CsFixer\NoUnusedImportsFixer(),
     ]);
 
-// variable $path is available from include from FixCommand::execute()
-if (!is_dir($path) && !is_file($path)) {
-    $realpaths = [];
-
-    foreach (explode(' ', trim($path)) as $filepath) {
-        $splFileInfo = new \SplFileInfo($filepath);
-        $realpaths[] = $splFileInfo->getRealPath();
-    }
-
-    $config->getFinder()
-        ->filter(
-            function (\SplFileInfo $file) use ($realpaths) {
-                return in_array($file->getRealPath(), $realpaths, true);
-            }
-        );
-
-    // to ensure only relevant directories are searched let's find common directory of all file paths and use it as $path
-    $commonRealpathParts = explode(DIRECTORY_SEPARATOR, $realpaths[0]);
-    foreach ($realpaths as $realpath) {
-        $realpathParts = explode(DIRECTORY_SEPARATOR, $realpath);
-        foreach ($commonRealpathParts as $i => $commonRealpathPart) {
-            if (!array_key_exists($i, $realpathParts) || $commonRealpathPart !== $realpathParts[$i]) {
-                $commonRealpathParts = array_slice($commonRealpathParts, 0, $i);
-                break;
-            }
-        }
-    }
-
-    $path = implode(DIRECTORY_SEPARATOR, $commonRealpathParts);
-}
-
 return $config;
