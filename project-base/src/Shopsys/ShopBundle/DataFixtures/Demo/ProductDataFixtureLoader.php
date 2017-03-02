@@ -201,8 +201,7 @@ class ProductDataFixtureLoader
                 break;
         }
         $productEditData->parameters = $this->productParametersFixtureLoader->getProductParameterValuesDataFromString(
-            $row[self::COLUMN_PARAMETERS],
-            $domainId
+            $row[self::COLUMN_PARAMETERS]
         );
         $productEditData->productData->categoriesByDomainId[$domainId] =
             $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_1], $this->categories);
@@ -235,10 +234,6 @@ class ProductDataFixtureLoader
         $productEditData->shortDescriptions[$domainId] = $row[self::COLUMN_SHORT_DESCRIPTION_EN];
         $productEditData->showInZboziFeed[$domainId] = true;
         $this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
-        $productEditData->parameters = $this->productParametersFixtureLoader->getProductParameterValuesDataFromString(
-            $row[self::COLUMN_PARAMETERS],
-            $domainId
-        );
         $productEditData->productData->categoriesByDomainId[$domainId] =
             $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_2], $this->categories);
     }
