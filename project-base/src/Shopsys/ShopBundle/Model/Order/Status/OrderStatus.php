@@ -107,7 +107,7 @@ class OrderStatus extends AbstractTranslatableEntity
             self::TYPE_IN_PROGRESS,
             self::TYPE_DONE,
             self::TYPE_CANCELED,
-        ])) {
+        ], true)) {
             $this->type = $type;
         } else {
             throw new \Shopsys\ShopBundle\Model\Order\Status\Exception\InvalidOrderStatusTypeException($type);

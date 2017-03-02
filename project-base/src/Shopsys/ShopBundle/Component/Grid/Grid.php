@@ -470,7 +470,7 @@ class Grid
     public function isRowSelected(array $row)
     {
         $rowId = $this->getRowId($row);
-        return in_array($rowId, $this->selectedRowIds);
+        return in_array($rowId, $this->selectedRowIds, true);
     }
 
     /**
@@ -494,7 +494,7 @@ class Grid
      */
     private function setLimit($limit)
     {
-        if (in_array($limit, $this->allowedLimits)) {
+        if (in_array($limit, $this->allowedLimits, true)) {
             $this->limit = $limit;
         }
     }

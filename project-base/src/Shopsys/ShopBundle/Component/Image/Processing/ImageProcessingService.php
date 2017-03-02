@@ -52,7 +52,7 @@ class ImageProcessingService
     public function createInterventionImage($filepath)
     {
         $extension = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
-        if (!in_array($extension, $this->supportedImageExtensions)) {
+        if (!in_array($extension, $this->supportedImageExtensions, true)) {
             throw new \Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
         }
         try {
@@ -73,7 +73,7 @@ class ImageProcessingService
 
         if ($extension === self::EXTENSION_PNG) {
             $newFilepath .= self::EXTENSION_PNG;
-        } elseif (in_array($extension, $this->supportedImageExtensions)) {
+        } elseif (in_array($extension, $this->supportedImageExtensions, true)) {
             $newFilepath .= self::EXTENSION_JPG;
         } else {
             throw new \Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);

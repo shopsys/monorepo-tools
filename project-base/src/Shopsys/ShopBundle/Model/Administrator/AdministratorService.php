@@ -68,7 +68,7 @@ class AdministratorService
         array $superadminUsernames,
         Administrator $administratorByUserName = null
     ) {
-        if (in_array($administratorData->username, $superadminUsernames)) {
+        if (in_array($administratorData->username, $superadminUsernames, true)) {
             throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException($administratorData->username);
         }
         if ($administratorByUserName !== null

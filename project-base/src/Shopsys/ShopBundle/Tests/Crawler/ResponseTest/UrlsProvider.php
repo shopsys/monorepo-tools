@@ -237,7 +237,7 @@ class UrlsProvider
                 $routeName,
                 $this->router->generate($routeName, $routeParameters, RouterInterface::RELATIVE_PATH),
                 $frontTestableRouteData[self::EXPECTED_STATUS_CODE_KEY],
-                in_array($routeName, $this->frontAsLoggedRouteNames),
+                in_array($routeName, $this->frontAsLoggedRouteNames, true),
             ];
         }
 
@@ -369,8 +369,8 @@ class UrlsProvider
      */
     private function isTestableRoute(Route $route, $routeName)
     {
-        if (in_array($routeName, $this->ignoredRouteNames)
-            || count($route->getMethods()) > 0 && !in_array('GET', $route->getMethods())
+        if (in_array($routeName, $this->ignoredRouteNames, true)
+            || count($route->getMethods()) > 0 && !in_array('GET', $route->getMethods(), true)
             || strpos($route->getPath(), '/_') === 0
             || strpos($route->getPath(), '/admin/_') === 0
             || $route->getCondition() === 'request.isXmlHttpRequest()'
@@ -378,7 +378,7 @@ class UrlsProvider
             return false;
         }
 
-        return !in_array($routeName, $this->ignoredRouteNamesForSingledomain);
+        return !in_array($routeName, $this->ignoredRouteNamesForSingledomain, true);
     }
 
     /**

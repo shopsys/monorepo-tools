@@ -53,7 +53,7 @@ class InverseMultipleChoiceTransformer implements DataTransformerInterface
         $outputValues = [];
 
         foreach ($allChoices as $choice) {
-            if (!in_array($choice, $inputValues)) {
+            if (!in_array($choice, $inputValues, true)) {
                 $outputValues[] = $choice;
             }
         }

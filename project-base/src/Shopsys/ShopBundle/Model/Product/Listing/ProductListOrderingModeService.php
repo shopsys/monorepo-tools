@@ -25,7 +25,7 @@ class ProductListOrderingModeService
     ) {
         $orderingMode = $request->cookies->get($productListOrderingConfig->getCookieName());
 
-        if (!in_array($orderingMode, $this->getSupportedOrderingModes($productListOrderingConfig))) {
+        if (!in_array($orderingMode, $this->getSupportedOrderingModes($productListOrderingConfig), true)) {
             $orderingMode = $productListOrderingConfig->getDefaultOrderingMode();
         }
 
