@@ -18,9 +18,11 @@ $config = PhpCsFixer\Config::create()
         'no_extra_consecutive_blank_lines' => ['use', 'extra'],
         'no_leading_import_slash' => true,
         'no_leading_namespace_whitespace' => true,
+        'no_mixed_echo_print' => ['use' => 'echo'],
         'no_multiline_whitespace_around_double_arrow' => true,
         'no_multiline_whitespace_before_semicolons' => true,
         'no_php4_constructor' => true,
+        'no_short_bool_cast' => true,
         'no_singleline_whitespace_before_semicolons' => true,
         'no_trailing_comma_in_list_call' => true,
         'no_trailing_comma_in_singleline_array' => true,
@@ -37,13 +39,16 @@ $config = PhpCsFixer\Config::create()
         'phpdoc_trim' => true,
         'phpdoc_var_without_name' => true,
         'self_accessor' => true,
+        'single_blank_line_at_eof' => true,
         'single_blank_line_before_namespace' => true,
         'single_quote' => true,
         'standardize_not_equals' => true,
+        'strict_param' => true,
         'ternary_operator_spaces' => true,
         'trailing_comma_in_multiline_array' => true,
         'trim_array_spaces' => true,
         'unary_operator_spaces' => true,
+        'visibility_required' => true,
     ])
     ->setRiskyAllowed(true)
     ->registerCustomFixers([
