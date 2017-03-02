@@ -6,5 +6,3 @@ shopsys_shop_admin:
   resource: "@ShopsysShopBundle/Controller/Admin"
   prefix: /admin
   type: annotation
-  defaults:
-    _locale: cs

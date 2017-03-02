@@ -42,7 +42,7 @@ class ParameterGridFactory implements GridFactoryInterface
     public function create()
     {
         $locales = $this->localization->getAllLocales();
-        $defaultLocale = $this->localization->getDefaultLocale();
+        $adminLocale = $this->localization->getAdminLocale();
         $grid = $this->gridFactory->create('parameterList', $this->getParametersDataSource());
         $grid->setDefaultOrder('pt.name');
 
@@ -50,11 +50,11 @@ class ParameterGridFactory implements GridFactoryInterface
             $grid->addColumn(
                 'name',
                 'pt.name',
-                t('Name %locale%', ['%locale%' => $this->localization->getLanguageName($defaultLocale)]),
+                t('Name %locale%', ['%locale%' => $this->localization->getLanguageName($adminLocale)]),
                 true
             );
             foreach ($locales as $locale) {
-                if ($locale !== $defaultLocale) {
+                if ($locale !== $adminLocale) {
                     $grid->addColumn(
                         'name_' . $locale,
                         'pt_' . $locale . '.name',
@@ -95,10 +95,10 @@ class ParameterGridFactory implements GridFactoryInterface
             ->select('p, pt')
             ->from(Parameter::class, 'p')
             ->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale')
-            ->setParameter('locale', $this->localization->getDefaultLocale());
+            ->setParameter('locale', $this->localization->getAdminLocale());
 
         foreach ($locales as $locale) {
-            if ($locale !== $this->localization->getDefaultLocale()) {
+            if ($locale !== $this->localization->getAdminLocale()) {
                 $queryBuilder
                     ->addSelect('pt_' . $locale)
                     ->leftJoin('p.translations', 'pt_' . $locale, Join::WITH, 'pt_' . $locale . '.locale = :locale_' . $locale)

@@ -153,8 +153,8 @@ class ProductDataFixtureLoader
     private function updateProductEditDataFromCsvRowForFirstDomain(ProductEditData $productEditData, array $row)
     {
         $domainId = 1;
-        $locale = 'cs';
-        $productEditData->productData->name[$locale] = $row[self::COLUMN_NAME_CS];
+        $productEditData->productData->name['cs'] = $row[self::COLUMN_NAME_CS];
+        $productEditData->productData->name['en'] = $row[self::COLUMN_NAME_EN];
         $productEditData->productData->catnum = $row[self::COLUMN_CATNUM];
         $productEditData->productData->partno = $row[self::COLUMN_PARTNO];
         $productEditData->productData->ean = $row[self::COLUMN_EAN];
@@ -231,8 +231,6 @@ class ProductDataFixtureLoader
     public function updateProductEditDataFromCsvRowForSecondDomain(ProductEditData $productEditData, array $row)
     {
         $domainId = 2;
-        $locale = 'en';
-        $productEditData->productData->name[$locale] = $row[self::COLUMN_NAME_EN];
         $productEditData->descriptions[$domainId] = $row[self::COLUMN_DESCRIPTION_EN];
         $productEditData->shortDescriptions[$domainId] = $row[self::COLUMN_SHORT_DESCRIPTION_EN];
         $productEditData->showInZboziFeed[$domainId] = true;

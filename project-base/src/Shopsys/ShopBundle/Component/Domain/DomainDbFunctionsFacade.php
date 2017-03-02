@@ -51,7 +51,7 @@ class DomainDbFunctionsFacade
             BEGIN
                 CASE
                     ' . implode("\n", $domainIdsByLocaleSqlClauses) . '
-                    ELSE RAISE EXCEPTION \'Locale % does not exists\', locale;
+                    ELSE RETURN;
                 END CASE;
             END
             $$ LANGUAGE plpgsql IMMUTABLE;',

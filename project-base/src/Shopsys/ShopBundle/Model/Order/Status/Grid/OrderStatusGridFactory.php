@@ -47,7 +47,7 @@ class OrderStatusGridFactory implements GridFactoryInterface
             ->select('os, ost')
             ->from(OrderStatus::class, 'os')
             ->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
-            ->setParameter('locale', $this->localization->getDefaultLocale());
+            ->setParameter('locale', $this->localization->getAdminLocale());
         $dataSource = new QueryBuilderDataSource($queryBuilder, 'os.id');
 
         $grid = $this->gridFactory->create('orderStatusList', $dataSource);

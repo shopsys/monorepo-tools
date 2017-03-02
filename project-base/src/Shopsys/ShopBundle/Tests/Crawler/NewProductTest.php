@@ -53,7 +53,11 @@ class NewProductTest extends FunctionalTestCase
      */
     private function fillForm(Form $form)
     {
-        $form['product_edit_form[productData][name][cs]'] = 'testProduct';
+        $nameForms = $form->get('product_edit_form[productData][name]');
+        /* @var $nameForms \Symfony\Component\DomCrawler\Field\InputFormField[] */
+        foreach ($nameForms as $nameForm) {
+            $nameForm->setValue('testProduct');
+        }
         $form['product_edit_form[productData][catnum]'] = '123456';
         $form['product_edit_form[productData][partno]'] = '123456';
         $form['product_edit_form[productData][ean]'] = '123456';
