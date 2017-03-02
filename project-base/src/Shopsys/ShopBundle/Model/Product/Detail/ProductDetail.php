@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Detail;
 
-use Shopsys\ShopBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice;
 use Shopsys\ShopBundle\Model\Product\Product;
@@ -18,11 +17,6 @@ class ProductDetail
      * @var \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory
      */
     private $productDetailFactory;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Price|null
-     */
-    private $basePriceForAutoPriceCalculationType;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice|null
@@ -52,7 +46,6 @@ class ProductDetail
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $basePriceForAutoPriceCalculationType
      * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
      * @param \Shopsys\ShopBundle\Model\Product\ProductDomain[]|null $productDomainsIndexedByDomainId
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null $parameters
@@ -61,7 +54,6 @@ class ProductDetail
     public function __construct(
         Product $product,
         ProductDetailFactory $productDetailFactory,
-        Price $basePriceForAutoPriceCalculationType = null,
         ProductPrice $sellingPrice = null,
         array $productDomainsIndexedByDomainId = null,
         array $parameters = null,
@@ -69,7 +61,6 @@ class ProductDetail
     ) {
         $this->product = $product;
         $this->productDetailFactory = $productDetailFactory;
-        $this->basePriceForAutoPriceCalculationType = $basePriceForAutoPriceCalculationType;
         $this->sellingPrice = $sellingPrice;
         $this->productDomainsIndexedByDomainId = $productDomainsIndexedByDomainId;
         $this->parameters = $parameters;
@@ -83,19 +74,6 @@ class ProductDetail
     public function getProduct()
     {
         return $this->product;
-    }
-
-    /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
-     */
-    public function getBasePriceForAutoPriceCalculationType()
-    {
-        if ($this->basePriceForAutoPriceCalculationType === null) {
-            $this->basePriceForAutoPriceCalculationType = $this->productDetailFactory
-                ->getBasePriceForAutoPriceCalculationType($this->product);
-        }
-
-        return $this->basePriceForAutoPriceCalculationType;
     }
 
     /**

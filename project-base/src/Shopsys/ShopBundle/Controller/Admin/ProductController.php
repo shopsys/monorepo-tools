@@ -22,6 +22,7 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use Shopsys\ShopBundle\Model\Product\MassAction\ProductMassActionFacade;
+use Shopsys\ShopBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
@@ -60,6 +61,11 @@ class ProductController extends AdminBaseController
      * @var \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory
      */
     private $productEditDataFactory;
+
+    /**
+     * @var \Shopsys\ShopBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade
+     */
+    private $adminProductPriceCalculationFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
@@ -103,6 +109,7 @@ class ProductController extends AdminBaseController
         ProductFacade $productFacade,
         ProductDetailFactory $productDetailFactory,
         ProductEditDataFactory $productEditDataFactory,
+        AdminProductPriceCalculationFacade $adminProductPriceCalculationFacade,
         Breadcrumb $breadcrumb,
         PricingGroupFacade $pricingGroupFacade,
         AdministratorGridFacade $administratorGridFacade,
@@ -117,6 +124,7 @@ class ProductController extends AdminBaseController
         $this->productFacade = $productFacade;
         $this->productDetailFactory = $productDetailFactory;
         $this->productEditDataFactory = $productEditDataFactory;
+        $this->adminProductPriceCalculationFacade = $adminProductPriceCalculationFacade;
         $this->breadcrumb = $breadcrumb;
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->administratorGridFacade = $administratorGridFacade;
@@ -163,8 +171,10 @@ class ProductController extends AdminBaseController
             'product' => $product,
             'productDetail' => $this->productDetailFactory->getDetailForProduct($product),
             'productMainCategoriesIndexedByDomainId' => $this->categoryFacade->getProductMainCategoriesIndexedByDomainId($product),
-            'PRICE_CALCULATION_TYPE_AUTO' => Product::PRICE_CALCULATION_TYPE_AUTO,
         ];
+        if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
+            $viewParameters['productBasePrice'] = $this->adminProductPriceCalculationFacade->calculateProductBasePrice($product);
+        }
 
         try {
             $productSellingPricesIndexedByDomainId = $this->productFacade->getAllProductSellingPricesIndexedByDomainId($product);

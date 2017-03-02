@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Detail;
 
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Shopsys\ShopBundle\Model\Localization\Localization;
-use Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\ShopBundle\Model\Product\Product;
@@ -17,11 +15,6 @@ class ProductDetailFactory
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
     private $productPriceCalculationForUser;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation
-     */
-    private $basePriceCalculation;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
@@ -43,27 +36,18 @@ class ProductDetailFactory
      */
     private $localization;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
-     */
-    private $pricingSetting;
-
     public function __construct(
         ProductPriceCalculationForUser $productPriceCalculationForUser,
-        BasePriceCalculation $basePriceCalculation,
         ProductRepository $productRepository,
         ParameterRepository $parameterRepository,
         ImageFacade $imageFacade,
-        Localization $localization,
-        PricingSetting $pricingSetting
+        Localization $localization
     ) {
         $this->productPriceCalculationForUser = $productPriceCalculationForUser;
-        $this->basePriceCalculation = $basePriceCalculation;
         $this->productRepository = $productRepository;
         $this->parameterRepository = $parameterRepository;
         $this->imageFacade = $imageFacade;
         $this->localization = $localization;
-        $this->pricingSetting = $pricingSetting;
     }
 
     /**
@@ -88,19 +72,6 @@ class ProductDetailFactory
         }
 
         return $details;
-    }
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
-     */
-    public function getBasePriceForAutoPriceCalculationType(Product $product)
-    {
-        return $this->basePriceCalculation->calculateBasePrice(
-            $product->getPrice(),
-            $this->pricingSetting->getInputPriceType(),
-            $product->getVat()
-        );
     }
 
     /**

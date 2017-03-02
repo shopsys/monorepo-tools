@@ -210,10 +210,10 @@
             <div class="form-line__item">
                 {{ form_widget(form.productData.price, { symbolAfterInput: currencySymbolDefault() }) }}
             </div>
-            {% if productDetail.product.priceCalculationType == PRICE_CALCULATION_TYPE_AUTO %}
+            {% if productBasePrice is defined %}
                 <div class="form-line__item--right">
-                    <div class="form-line__item__price">{{ productDetail.basePriceForAutoPriceCalculationType.priceWithoutVat|priceWithCurrencyAdmin }}</div>
-                    <div class="form-line__item__price"><strong>{{ productDetail.basePriceForAutoPriceCalculationType.priceWithVat|priceWithCurrencyAdmin }}</strong></div>
+                    <div class="form-line__item__price">{{ productBasePrice.priceWithoutVat|priceWithCurrencyAdmin }}</div>
+                    <div class="form-line__item__price"><strong>{{ productBasePrice.priceWithVat|priceWithCurrencyAdmin }}</strong></div>
                 </div>
             {% else %}
                 <div class="form-line__item--right">
