@@ -14,7 +14,7 @@ class ProductFilterCest
         ProductListPage $productListPage
     ) {
         $me->wantTo('test all product filters');
-        $me->amOnPage('/televize-audio/');
+        $me->amOnPage('/tv-audio/');
         $productListPage->assertProductsTotalCount(28);
 
         $productFilterPage->setMinimalPrice(1000);
@@ -29,13 +29,13 @@ class ProductFilterCest
         $productFilterPage->filterByBrand('Hyundai');
         $productListPage->assertProductsTotalCount(7);
 
-        $productFilterPage->filterByParameter('HDMI', 'Ano');
+        $productFilterPage->filterByParameter('HDMI', 'Yes');
         $productListPage->assertProductsTotalCount(6);
 
-        $productFilterPage->filterByParameter('Úhlopříčka', '27"');
+        $productFilterPage->filterByParameter('Screen size', '27"');
         $productListPage->assertProductsTotalCount(2);
 
-        $productFilterPage->filterByParameter('Úhlopříčka', '30"');
+        $productFilterPage->filterByParameter('Screen size', '30"');
         $productListPage->assertProductsTotalCount(4);
     }
 }

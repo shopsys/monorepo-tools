@@ -18,8 +18,8 @@ class CustomerLoginCest
         $layoutPage->openLoginPopup();
         $loginPage->login('no-reply@netdevelo.cz', 'user123');
         $me->see('Jaromír Jágr');
-        $me->clickByText('Odhlásit se');
-        $me->see('Přihlásit se');
+        $me->clickByText('Log out');
+        $me->see('Log in');
         $me->seeCurrentPageEquals('/');
     }
 
@@ -29,23 +29,23 @@ class CustomerLoginCest
         LayoutPage $layoutPage
     ) {
         $me->wantTo('login as a customer from category page');
-        $me->amOnPage('/pocitace-prislusenstvi/');
+        $me->amOnPage('/personal-computers-accessories/');
         $layoutPage->openLoginPopup();
         $loginPage->login('no-reply@netdevelo.cz', 'user123');
         $me->see('Jaromír Jágr');
-        $me->clickByText('Odhlásit se');
-        $me->see('Přihlásit se');
+        $me->clickByText('Log out');
+        $me->see('Log in');
         $me->seeCurrentPageEquals('/');
     }
 
     public function testLoginAsCustomerFromLoginPage(LoginPage $loginPage, AcceptanceTester $me)
     {
         $me->wantTo('login as a customer from login page');
-        $me->amOnPage('/prihlaseni/');
+        $me->amOnPage('/login/');
         $loginPage->login('no-reply@netdevelo.cz', 'user123');
         $me->see('Jaromír Jágr');
-        $me->clickByText('Odhlásit se');
-        $me->see('Přihlásit se');
+        $me->clickByText('Log out');
+        $me->see('Log in');
         $me->seeCurrentPageEquals('/');
     }
 }

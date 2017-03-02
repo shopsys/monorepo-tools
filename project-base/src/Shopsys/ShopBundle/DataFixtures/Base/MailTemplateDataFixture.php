@@ -19,57 +19,57 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
         $mailTemplateData = new MailTemplateData();
         $mailTemplateData->sendMail = true;
 
-        $mailTemplateData->subject = 'Děkujeme za objednávku č. {number} ze dne {date}';
-        $mailTemplateData->body = 'Dobrý den,<br /><br />'
-            . 'Vaše objednávka byla úspěšně vytvořena.<br /><br />'
-            . 'O dalších stavech objednávky Vás budeme informovat.<br />'
-            . 'Čislo objednávky: {number} <br />'
-            . 'Datum a čas vytvoření: {date} <br />'
-            . 'URL adresa eshopu: {url} <br />'
-            . 'URL adresa na detail objednávky: {order_detail_url} <br />'
-            . 'Doprava: {transport} <br />'
-            . 'Platba: {payment} <br />'
-            . 'Celková cena s DPH: {total_price} <br />'
-            . 'Fakturační adresa:<br /> {billing_address} <br />'
-            . 'Doručovací adresa: {delivery_address} <br />'
-            . 'Poznámka: {note} <br />'
-            . 'Produkty: {products} <br />'
+        $mailTemplateData->subject = 'Thank you for your order no. {number} placed at {date}';
+        $mailTemplateData->body = 'Dear customer,<br /><br />'
+            . 'Your order has been placed successfully.<br /><br />'
+            . 'You will be contacted when the order state changes.<br />'
+            . 'Order number: {number} <br />'
+            . 'Date and time of creation: {date} <br />'
+            . 'E-shop link: {url} <br />'
+            . 'Order detail link: {order_detail_url} <br />'
+            . 'Shipping: {transport} <br />'
+            . 'Payment: {payment} <br />'
+            . 'Total price including VAT: {total_price} <br />'
+            . 'Billing address:<br /> {billing_address} <br />'
+            . 'Delivery address: {delivery_address} <br />'
+            . 'Note: {note} <br />'
+            . 'Products: {products} <br />'
             . '{transport_instructions} <br />'
             . '{payment_instructions}';
 
         $this->createMailTemplate($manager, 'order_status_1', $mailTemplateData);
 
-        $mailTemplateData->subject = 'Změna stavu vaší objednávky';
-        $mailTemplateData->body = 'Dobrý den, <br /><br />'
-            . 'Vaši objednávku již vyřizujeme.';
+        $mailTemplateData->subject = 'Order status has changed';
+        $mailTemplateData->body = 'Dear customer, <br /><br />'
+            . 'Your order is being processed.';
 
         $this->createMailTemplate($manager, 'order_status_2', $mailTemplateData);
 
-        $mailTemplateData->subject = 'Změna stavu vaší objednávky';
-        $mailTemplateData->body = 'Dobrý den, <br /><br />'
-            . 'Vaše objednávka je vyřízena.';
+        $mailTemplateData->subject = 'Order status has changed';
+        $mailTemplateData->body = 'Dear customer, <br /><br />'
+            . 'Processing your order has been finished.';
 
         $this->createMailTemplate($manager, 'order_status_3', $mailTemplateData);
 
-        $mailTemplateData->subject = 'Změna stavu vaší objednávky';
-        $mailTemplateData->body = 'Dobrý den, <br /><br />'
-            . 'Vaše objednávka byla stornována.';
+        $mailTemplateData->subject = 'Order status has changed';
+        $mailTemplateData->body = 'Dear customer, <br /><br />'
+            . 'Your order has been cancelled.';
 
         $this->createMailTemplate($manager, 'order_status_4', $mailTemplateData);
 
-        $mailTemplateData->subject = 'Žádost o nové heslo';
-        $mailTemplateData->body = 'Dobrý den.<br /><br />'
-            . 'Nové heslo nastavíte zde: <a href="{new_password_url}">{new_password_url}</a>';
+        $mailTemplateData->subject = 'Reset password request';
+        $mailTemplateData->body = 'Dear customer.<br /><br />'
+            . 'You can set a new password following this link: <a href="{new_password_url}">{new_password_url}</a>';
 
         $this->createMailTemplate($manager, MailTemplate::RESET_PASSWORD_NAME, $mailTemplateData);
 
-        $mailTemplateData->subject = 'Potvrzení registrace';
-        $mailTemplateData->body = 'Dobrý den, <br /><br />'
-            . 'potvrzujeme Vaši registraci v eshopu. <br />'
-            . 'Jméno: {first_name} {last_name}<br />'
+        $mailTemplateData->subject = 'Registration completed';
+        $mailTemplateData->body = 'Dear customer, <br /><br />'
+            . 'your registration is completed. <br />'
+            . 'Name: {first_name} {last_name}<br />'
             . 'Email: {email}<br />'
-            . 'URL adresa eshopu: {url}<br />'
-            . 'Přihlašovací stránka: {login_page}';
+            . 'E-shop link: {url}<br />'
+            . 'Log in page: {login_page}';
 
         $this->createMailTemplate($manager, MailTemplate::REGISTRATION_CONFIRM_NAME, $mailTemplateData);
     }

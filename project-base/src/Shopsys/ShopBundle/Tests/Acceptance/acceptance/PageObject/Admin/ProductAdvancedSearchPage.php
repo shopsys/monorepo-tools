@@ -17,12 +17,12 @@ class ProductAdvancedSearchPage extends AbstractPage
     {
         $this->tester->amOnPage('/admin/product/list/');
 
-        $this->tester->clickByText('Rozšířené hledání');
+        $this->tester->clickByText('Advanced search');
         $this->tester->selectOptionByCssAndValue('.js-advanced-search-rule-subject', $searchSubject);
         $this->tester->waitForAjax();
         $this->tester->fillFieldByCss('.js-advanced-search-rule-value input', $value);
 
-        $this->tester->clickByText('Vyhledat', WebDriverBy::cssSelector('#js-advanced-search-rules-box'));
+        $this->tester->clickByText('Search', WebDriverBy::cssSelector('#js-advanced-search-rules-box'));
     }
 
     /**

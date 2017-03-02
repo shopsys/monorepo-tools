@@ -11,7 +11,7 @@ class AdministratorLoginCest
     {
         $me->wantTo('login on admin with valid data');
         $loginPage->login(LoginPage::ADMIN_USERNAME, LoginPage::ADMIN_PASSWORD);
-        $me->see('Nástěnka');
+        $me->see('Dashboard');
     }
 
     public function testLoginWithInvalidUsername(AcceptanceTester $me, LoginPage $loginPage)

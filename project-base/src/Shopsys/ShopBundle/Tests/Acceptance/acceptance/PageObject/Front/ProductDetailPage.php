@@ -19,7 +19,7 @@ class ProductDetailPage extends AbstractPage
             self::PRODUCT_DETAIL_QUANTITY_INPUT,
             $quantity
         );
-        $this->tester->clickByText('Vložit do košíku', WebDriverBy::cssSelector(self::PRODUCT_DETAIL_MAIN_WRAPPER));
+        $this->tester->clickByText('Add to cart', WebDriverBy::cssSelector(self::PRODUCT_DETAIL_MAIN_WRAPPER));
         $this->tester->waitForAjax();
         $this->tester->wait(1); // animation of popup window
     }

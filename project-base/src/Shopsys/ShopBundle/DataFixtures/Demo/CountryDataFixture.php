@@ -20,11 +20,11 @@ class CountryDataFixture extends AbstractReferenceFixture
     {
         $domainId = 1;
         $countryData = new CountryData();
-        $countryData->name = 'Česká republika';
+        $countryData->name = 'Czech republic';
         $this->createCountry($countryData, $domainId, self::COUNTRY_CZECH_REPUBLIC_1);
 
         $countryData = new CountryData();
-        $countryData->name = 'Slovenská republika';
+        $countryData->name = 'Slovakia';
         $this->createCountry($countryData, $domainId, self::COUNTRY_SLOVAKIA_1);
     }
 
