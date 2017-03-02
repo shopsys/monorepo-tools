@@ -2,6 +2,7 @@
 
 namespace ShopSys\Tests\Unit\CodingStandards\CsFixer;
 
+use PhpCsFixer\Tokenizer\Tokens;
 use PHPUnit_Framework_TestCase;
 use ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer;
 use SplFileInfo;
@@ -10,13 +11,15 @@ class MissingButtonTypeFixerTest extends PHPUnit_Framework_TestCase
 {
     public function testFix()
     {
+        $missingButtonTypeFixer = new MissingButtonTypeFixer();
+
         $file = new SplFileInfo(__DIR__ . '/missingButtonTypeFixerTestcase.txt');
         $expectedResult = file_get_contents(__DIR__ . '/missingButtonTypeFixerExpectedResult.txt');
+        $tokens = Tokens::fromCode(file_get_contents($file->getRealPath()));
 
-        $missingButtonTypeFixer = new MissingButtonTypeFixer();
-        $result = $missingButtonTypeFixer->fix($file, file_get_contents($file->getRealPath()));
+        $missingButtonTypeFixer->fix($file, $tokens);
 
-        $this->assertSame($expectedResult, $result);
+        $this->assertSame($expectedResult, $tokens->generateCode());
     }
 
     /**
@@ -29,15 +32,14 @@ class MissingButtonTypeFixerTest extends PHPUnit_Framework_TestCase
     {
         $missingButtonTypeFixer = new MissingButtonTypeFixer();
 
-        $splFileInfoMock = $this->getMockBuilder(SplFileInfo::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getFilename'])
-            ->getMock();
-        $splFileInfoMock->expects($this->any())->method('getFilename')->willReturn($filename);
+        $splFileInfoMock = $this->mockSplFileInfoWithFilename($filename);
 
         $this->assertSame($expected, $missingButtonTypeFixer->supports($splFileInfoMock));
     }
 
+    /**
+     * @return array
+     */
     public function supportsDataProvider()
     {
         return [
@@ -48,5 +50,20 @@ class MissingButtonTypeFixerTest extends PHPUnit_Framework_TestCase
             ['test.html.twig', true],
             ['test.html.xxx', false],
         ];
+    }
+
+    /**
+     * @param $filename
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SplFileInfo
+     */
+    private function mockSplFileInfoWithFilename($filename)
+    {
+        $splFileInfoMock = $this->getMockBuilder(SplFileInfo::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getFilename'])
+            ->getMock();
+        $splFileInfoMock->expects($this->any())->method('getFilename')->willReturn($filename);
+
+        return $splFileInfoMock;
     }
 }

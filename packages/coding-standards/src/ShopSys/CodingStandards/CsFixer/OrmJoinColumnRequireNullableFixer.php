@@ -2,22 +2,55 @@
 
 namespace ShopSys\CodingStandards\CsFixer;
 
+use PhpCsFixer\DocBlock\Annotation;
+use PhpCsFixer\DocBlock\DocBlock;
+use PhpCsFixer\Fixer\DefinedFixerInterface;
+use PhpCsFixer\Fixer\FixerInterface;
+use PhpCsFixer\FixerDefinition\CodeSample;
+use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\Tokenizer\Token;
+use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
-use Symfony\CS\AbstractFixer;
-use Symfony\CS\DocBlock\Annotation;
-use Symfony\CS\DocBlock\DocBlock;
-use Symfony\CS\FixerInterface;
-use Symfony\CS\Tokenizer\Tokens;
 
-class OrmJoinColumnRequireNullableFixer extends AbstractFixer
+class OrmJoinColumnRequireNullableFixer implements FixerInterface, DefinedFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function fix(SplFileInfo $file, $content)
+    public function getDefinition()
     {
-        $tokens = Tokens::fromCode($content);
+        return new FixerDefinition(
+            'Annotations @ORM\ManyToOne and @ORM\OneToOne must have defined nullable option in @ORM\JoinColumn',
+            [
+                new CodeSample("/**\n * @var \\StdObject\n * @ORM\\ManyToOne(targetEntity=\\\"StdObject\\\")\n */\nprivate \$foo;"),
+                new CodeSample("/**\n * @var \\StdObject\n * @ORM\\OneToOne(targetEntity=\\\"StdObject\\\")\n */\nprivate \$foo;"),
+            ]
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isCandidate(Tokens $tokens)
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isRisky()
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fix(SplFileInfo $file, Tokens $tokens)
+    {
         foreach ($tokens->findGivenKind(T_DOC_COMMENT) as $token) {
+            /** @var Token $token */
             $doc = new DocBlock($token->getContent());
             foreach ($doc->getAnnotations() as $annotation) {
                 if ($this->isRelationAnnotation($annotation)) {
@@ -26,8 +59,6 @@ class OrmJoinColumnRequireNullableFixer extends AbstractFixer
                 }
             }
         }
-
-        return $tokens->generateCode();
     }
 
     /**
@@ -41,9 +72,17 @@ class OrmJoinColumnRequireNullableFixer extends AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getLevel()
+    public function getName()
     {
-        return FixerInterface::NONE_LEVEL;
+        return 'Shopsys/orm_join_column_require_nullable';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPriority()
+    {
+        return 0;
     }
 
     /**
@@ -55,18 +94,17 @@ class OrmJoinColumnRequireNullableFixer extends AbstractFixer
     }
 
     /**
-     * @param \Symfony\CS\DocBlock\Annotation $annotation
-     *
+     * @param \PhpCsFixer\DocBlock\Annotation $annotation
      * @return bool
      */
-    private function isRelationAnnotation($annotation)
+    private function isRelationAnnotation(Annotation $annotation)
     {
         return preg_match('~@ORM\\\(ManyToOne|OneToOne)\\(~', $annotation->getContent()) === 1;
     }
 
     /**
-     * @param \Symfony\CS\DocBlock\DocBlock   $doc
-     * @param \Symfony\CS\DocBlock\Annotation $relationAnnotation
+     * @param \PhpCsFixer\DocBlock\DocBlock $doc
+     * @param \PhpCsFixer\DocBlock\Annotation $relationAnnotation
      */
     private function fixRelationAnnotation(DocBlock $doc, Annotation $relationAnnotation)
     {
@@ -79,9 +117,8 @@ class OrmJoinColumnRequireNullableFixer extends AbstractFixer
     }
 
     /**
-     * @param \Symfony\CS\DocBlock\DocBlock $doc
-     *
-     * @return \Symfony\CS\DocBlock\Annotation|null
+     * @param \PhpCsFixer\DocBlock\DocBlock $doc
+     * @return \PhpCsFixer\DocBlock\Annotation|null
      */
     private function findJoinColumnAnnotation(DocBlock $doc)
     {
@@ -95,8 +132,8 @@ class OrmJoinColumnRequireNullableFixer extends AbstractFixer
     }
 
     /**
-     * @param \Symfony\CS\DocBlock\DocBlock   $doc
-     * @param \Symfony\CS\DocBlock\Annotation $relationAnnotation
+     * @param \PhpCsFixer\DocBlock\DocBlock $doc
+     * @param \PhpCsFixer\DocBlock\Annotation $relationAnnotation
      */
     private function addJoinColumnAnnotation(DocBlock $doc, Annotation $relationAnnotation)
     {
@@ -107,8 +144,8 @@ class OrmJoinColumnRequireNullableFixer extends AbstractFixer
     }
 
     /**
-     * @param \Symfony\CS\DocBlock\DocBlock   $doc
-     * @param \Symfony\CS\DocBlock\Annotation $joinColumnAnnotation
+     * @param \PhpCsFixer\DocBlock\DocBlock $doc
+     * @param \PhpCsFixer\DocBlock\Annotation $joinColumnAnnotation
      */
     private function extendJoinColumnAnnotation(DocBlock $doc, Annotation $joinColumnAnnotation)
     {

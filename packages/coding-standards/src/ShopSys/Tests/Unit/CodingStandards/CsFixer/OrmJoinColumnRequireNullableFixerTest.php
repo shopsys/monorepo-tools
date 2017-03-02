@@ -2,6 +2,7 @@
 
 namespace ShopSys\Tests\Unit\CodingStandards\CsFixer;
 
+use PhpCsFixer\Tokenizer\Tokens;
 use PHPUnit_Framework_TestCase;
 use ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer;
 use SplFileInfo;
@@ -10,13 +11,15 @@ class OrmJoinColumnRequireNullableFixerTest extends PHPUnit_Framework_TestCase
 {
     public function testFix()
     {
+        $ormJoinColumnRequireNullableFixer = new OrmJoinColumnRequireNullableFixer();
+
         $file = new SplFileInfo(__DIR__ . '/ormJoinColumnRequireNullableFixerTestcase.txt');
         $expectedResult = file_get_contents(__DIR__ . '/ormJoinColumnRequireNullableFixerExpectedResult.txt');
+        $tokens = Tokens::fromCode(file_get_contents($file->getRealPath()));
 
-        $ormJoinColumnRequireNullableFixer = new OrmJoinColumnRequireNullableFixer();
-        $result = $ormJoinColumnRequireNullableFixer->fix($file, file_get_contents($file->getRealPath()));
+        $ormJoinColumnRequireNullableFixer->fix($file, $tokens);
 
-        $this->assertSame($expectedResult, $result);
+        $this->assertSame($expectedResult, $tokens->generateCode());
     }
 
     /**
@@ -29,15 +32,14 @@ class OrmJoinColumnRequireNullableFixerTest extends PHPUnit_Framework_TestCase
     {
         $ormJoinColumnRequireNullableFixer = new OrmJoinColumnRequireNullableFixer();
 
-        $splFileInfoMock = $this->getMockBuilder(SplFileInfo::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getFilename'])
-            ->getMock();
-        $splFileInfoMock->expects($this->any())->method('getFilename')->willReturn($filename);
+        $splFileInfoMock = $this->mockSplFileInfoWithFilename($filename);
 
         $this->assertSame($expected, $ormJoinColumnRequireNullableFixer->supports($splFileInfoMock));
     }
 
+    /**
+     * @return array
+     */
     public function supportsDataProvider()
     {
         return [
@@ -48,5 +50,20 @@ class OrmJoinColumnRequireNullableFixerTest extends PHPUnit_Framework_TestCase
             ['test.html.twig', false],
             ['test.php.xxx', false],
         ];
+    }
+
+    /**
+     * @param $filename
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SplFileInfo
+     */
+    private function mockSplFileInfoWithFilename($filename)
+    {
+        $splFileInfoMock = $this->getMockBuilder(SplFileInfo::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getFilename'])
+            ->getMock();
+        $splFileInfoMock->expects($this->any())->method('getFilename')->willReturn($filename);
+
+        return $splFileInfoMock;
     }
 }

@@ -48,7 +48,7 @@ $config = PhpCsFixer\Config::create()
     ->registerCustomFixers([
         new ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer(),
         new ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer(),
-        new ShopSys\CodingStandards\CsFixer\UnusedUseFixer(),
+        new ShopSys\CodingStandards\CsFixer\NoUnusedImportsFixer(),
     ]);
 
 // variable $path is available from include from FixCommand::execute()
