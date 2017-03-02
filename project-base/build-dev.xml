@@ -263,7 +263,7 @@
                     <arg value="--dry-run" />
                     <arg value="--verbose" />
                     <arg value="--diff" />
-                    <arg path="${diff.files.phpcs-fixer}"/>
+                    <arg line="${diff.files.phpcs-fixer}"/>
                 </exec>
             </then>
         </if>
@@ -293,7 +293,7 @@
                     <arg value="--config=${path.phpcs-fixer.configuration}" />
                     <arg value="--verbose" />
                     <arg value="--diff" />
-                    <arg path="${diff.files.phpcs-fixer}"/>
+                    <arg line="${diff.files.phpcs-fixer}"/>
                 </exec>
             </then>
         </if>
