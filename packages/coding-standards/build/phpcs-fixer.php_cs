@@ -45,6 +45,7 @@ $config = PhpCsFixer\Config::create()
         'trim_array_spaces' => true,
         'unary_operator_spaces' => true,
     ])
+    ->setRiskyAllowed(true)
     ->registerCustomFixers([
         new ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer(),
         new ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer(),
