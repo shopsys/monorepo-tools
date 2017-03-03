@@ -144,8 +144,7 @@ class ProductController extends FrontBaseController
         $productFilterData = new ProductFilterData();
 
         $productFilterFormType = $this->createProductFilterFormTypeForCategory($category);
-        $filterForm = $this->createForm($productFilterFormType);
-        $filterForm->setData($productFilterData);
+        $filterForm = $this->createForm($productFilterFormType, $productFilterData);
         $filterForm->handleRequest($request);
 
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsInCategory(
@@ -240,8 +239,7 @@ class ProductController extends FrontBaseController
         $productFilterData = new ProductFilterData();
 
         $productFilterFormType = $this->createProductFilterFormTypeForSearch($searchText);
-        $filterForm = $this->createForm($productFilterFormType);
-        $filterForm->setData($productFilterData);
+        $filterForm = $this->createForm($productFilterFormType, $productFilterData);
         $filterForm->handleRequest($request);
 
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsForSearch(

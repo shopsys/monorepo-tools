@@ -75,6 +75,8 @@ class TopCategoriesFormType extends AbstractType
             ->setRequired(['domain_id', 'locale'])
             ->setAllowedTypes('domain_id', 'int')
             ->setAllowedTypes('locale', 'string')
-            ->setDefault('attr', ['novalidate' => 'novalidate']);
+            ->setDefaults([
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

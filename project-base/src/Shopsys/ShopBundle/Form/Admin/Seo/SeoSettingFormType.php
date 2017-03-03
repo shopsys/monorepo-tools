@@ -86,6 +86,8 @@ class SeoSettingFormType extends AbstractType
         $resolver
             ->setRequired('domain_id')
             ->addAllowedTypes('domain_id', 'int')
-            ->setDefault('attr', ['novalidate' => 'novalidate']);
+            ->setDefaults([
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

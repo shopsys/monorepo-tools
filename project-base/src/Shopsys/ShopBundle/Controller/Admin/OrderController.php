@@ -176,7 +176,6 @@ class OrderController extends AdminBaseController
         $orderData->setFromEntity($order);
 
         $form = $this->createForm(OrderFormType::class, $orderData, ['order' => $order]);
-        $form->setData($orderData);
 
         $orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
@@ -202,13 +201,12 @@ class OrderController extends AdminBaseController
 
         $quickSearchForm = $this->createForm(QuickSearchFormType::class, new QuickSearchFormData());
         $quickSearchForm->handleRequest($request);
-        $quickSearchData = $quickSearchForm->getData();
 
         $isAdvancedSearchFormSubmitted = $this->advancedSearchOrderFacade->isAdvancedSearchOrderFormSubmitted($request);
         if ($isAdvancedSearchFormSubmitted) {
             $queryBuilder = $this->advancedSearchOrderFacade->getQueryBuilderByAdvancedSearchOrderData($advancedSearchData);
         } else {
-            $queryBuilder = $this->orderFacade->getOrderListQueryBuilderByQuickSearchData($quickSearchData);
+            $queryBuilder = $this->orderFacade->getOrderListQueryBuilderByQuickSearchData($quickSearchForm->getData());
         }
 
         $dataSource = new QueryBuilderWithRowManipulatorDataSource(

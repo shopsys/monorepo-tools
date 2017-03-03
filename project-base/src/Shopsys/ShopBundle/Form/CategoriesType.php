@@ -52,19 +52,14 @@ class CategoriesType extends AbstractType
     {
         $categories = $this->categoryFacade->getAll();
 
-        $resolver->setDefaults([
-            'choice_list' => new IndexedObjectChoiceList($categories, 'id', 'name', [], null, 'id'),
-            'multiple' => true,
-            'expanded' => true,
-        ]);
-
-        $resolver->setDefined([
-            self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID,
-        ]);
-
-        $resolver->setAllowedTypes([
-            self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID => 'int',
-        ]);
+        $resolver
+            ->setDefined(self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID)
+            ->setAllowedTypes(self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID, 'int')
+            ->setDefaults([
+                'choice_list' => new IndexedObjectChoiceList($categories, 'id', 'name', [], null, 'id'),
+                'multiple' => true,
+                'expanded' => true,
+            ]);
     }
 
     /**

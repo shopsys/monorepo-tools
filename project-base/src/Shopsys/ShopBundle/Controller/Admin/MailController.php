@@ -128,11 +128,11 @@ class MailController extends AdminBaseController
      */
     public function templateAction(Request $request)
     {
-        $form = $this->createForm(AllMailTemplatesFormType::class);
+        $allMailTemplatesData = $this->mailTemplateFacade->getAllMailTemplatesDataByDomainId(
+            $this->selectedDomain->getId()
+        );
 
-        $allMailTemplatesData = $this->mailTemplateFacade->getAllMailTemplatesDataByDomainId($this->selectedDomain->getId());
-
-        $form->setData($allMailTemplatesData);
+        $form = $this->createForm(AllMailTemplatesFormType::class, $allMailTemplatesData);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

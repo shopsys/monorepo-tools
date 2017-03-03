@@ -171,11 +171,10 @@ class CustomerController extends AdminBaseController
 
         $quickSearchForm = $this->createForm(QuickSearchFormType::class, new QuickSearchFormData());
         $quickSearchForm->handleRequest($request);
-        $quickSearchData = $quickSearchForm->getData();
 
         $queryBuilder = $this->customerListAdminFacade->getCustomerListQueryBuilderByQuickSearchData(
             $this->selectedDomain->getId(),
-            $quickSearchData
+            $quickSearchForm->getData()
         );
 
         $dataSource = new QueryBuilderDataSource($queryBuilder, 'u.id');

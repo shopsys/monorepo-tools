@@ -103,8 +103,8 @@ class CartController extends FrontBaseController
 
         $form = $this->createForm(CartFormType::class, $cartFormData);
         $form->handleRequest($request);
-        $invalidCart = false;
 
+        $invalidCart = false;
         if ($form->isValid()) {
             try {
                 $this->cartFacade->changeQuantities($form->getData()['quantities']);
