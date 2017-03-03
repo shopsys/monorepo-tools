@@ -81,7 +81,11 @@ class LogErrorReportingFacade
             return false;
         }
 
-        return $this->stripFirstLine($fileTail); // first line can be incomplete
+        if (filesize($filepath) > self::MAX_FILE_TAIL_LENGTH) {
+            $fileTail = '...' . $fileTail;
+        }
+
+        return $fileTail;
     }
 
     /**
@@ -97,14 +101,5 @@ class LogErrorReportingFacade
             . '-'
             . $date->format('Y-m-d')
             . '.log';
-    }
-
-    /**
-     * @param string $string
-     * @return string
-     */
-    private function stripFirstLine($string)
-    {
-        return substr($string, strpos($string, "\n") + 1);
     }
 }

@@ -103,7 +103,7 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface
         $subject = 'Error reporting from ' . $this->getEshopIdentifier();
         $body =
             '<h2>Error reporting from eshop \'' . htmlspecialchars($this->getEshopIdentifier()) . '\'</h2>'
-            . '<h3>Last logs entries (may not contain all):</h3>'
+            . '<h3>Last logs entries (may not be complete):</h3>'
             . '<code>' . nl2br(htmlspecialchars($logsTail)) . '</code>';
 
         return new MessageData(
