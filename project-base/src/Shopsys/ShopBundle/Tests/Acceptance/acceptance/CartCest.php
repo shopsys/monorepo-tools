@@ -108,19 +108,19 @@ class CartCest
     ) {
         $me->wantTo('add some items to cart and remove them');
 
-        $me->amOnPage('/kniha-bodovy-system-a-pravidla-silnicniho-provozu/');
+        $me->amOnPage('/panasonic-dmc-ft5ep/');
         $productDetailPage->addProductIntoCart();
         $me->amOnPage('/jura-impressa-j9-tft-carbon/');
         $productDetailPage->addProductIntoCart();
 
         $me->amOnPage('/cart/');
         $cartPage->assertProductIsInCartByName('JURA Impressa J9 TFT Carbon');
-        $cartPage->assertProductIsInCartByName('Kniha Bodový systém a pravidla silničního provozu');
+        $cartPage->assertProductIsInCartByName('PANASONIC DMC FT5EP');
 
         $cartPage->removeProductFromCart('JURA Impressa J9 TFT Carbon');
         $cartPage->assertProductIsNotInCartByName('JURA Impressa J9 TFT Carbon');
 
-        $cartPage->removeProductFromCart('Kniha Bodový systém a pravidla silničního provozu');
+        $cartPage->removeProductFromCart('PANASONIC DMC FT5EP');
         $me->see('Your cart is unfortunately empty.');
     }
 
