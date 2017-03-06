@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use DateTime;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditData;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
@@ -81,12 +82,19 @@ class ProductDataFixtureLoader
      */
     private $productEditDataFactory;
 
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     */
+    private $domain;
+
     public function __construct(
         ProductParametersFixtureLoader $productParametersFixtureLoader,
-        ProductEditDataFactory $productEditDataFactory
+        ProductEditDataFactory $productEditDataFactory,
+        Domain $domain
     ) {
         $this->productParametersFixtureLoader = $productParametersFixtureLoader;
         $this->productEditDataFactory = $productEditDataFactory;
+        $this->domain = $domain;
     }
 
     /**
@@ -158,8 +166,8 @@ class ProductDataFixtureLoader
         $productEditData->productData->catnum = $row[self::COLUMN_CATNUM];
         $productEditData->productData->partno = $row[self::COLUMN_PARTNO];
         $productEditData->productData->ean = $row[self::COLUMN_EAN];
-        $productEditData->descriptions[$domainId] = $row[self::COLUMN_DESCRIPTION_CS];
-        $productEditData->shortDescriptions[$domainId] = $row[self::COLUMN_SHORT_DESCRIPTION_CS];
+        $productEditData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
+        $productEditData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
         $productEditData->showInZboziFeed[$domainId] = true;
         $productEditData->productData->priceCalculationType = $row[self::COLUMN_PRICE_CALCULATION_TYPE];
         $this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
@@ -230,12 +238,48 @@ class ProductDataFixtureLoader
     public function updateProductEditDataFromCsvRowForSecondDomain(ProductEditData $productEditData, array $row)
     {
         $domainId = 2;
-        $productEditData->descriptions[$domainId] = $row[self::COLUMN_DESCRIPTION_EN];
-        $productEditData->shortDescriptions[$domainId] = $row[self::COLUMN_SHORT_DESCRIPTION_EN];
+        $productEditData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
+        $productEditData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
         $productEditData->showInZboziFeed[$domainId] = true;
         $this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
         $productEditData->productData->categoriesByDomainId[$domainId] =
             $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_2], $this->categories);
+    }
+
+    /**
+     * @param int $domainId
+     * @return int
+     */
+    private function getShortDescriptionColumnForDomain($domainId)
+    {
+        $locale = $this->domain->getDomainConfigById($domainId)->getLocale();
+
+        switch ($locale) {
+            case 'cs':
+                return self::COLUMN_SHORT_DESCRIPTION_CS;
+            case 'en':
+                return self::COLUMN_SHORT_DESCRIPTION_EN;
+            default:
+                throw new \Shopsys\ShopBundle\Component\DataFixture\Exception\UnsupportedLocaleException($locale);
+        }
+    }
+
+    /**
+     * @param int $domainId
+     * @return int
+     */
+    private function getDescriptionColumnForDomain($domainId)
+    {
+        $locale = $this->domain->getDomainConfigById($domainId)->getLocale();
+
+        switch ($locale) {
+            case 'cs':
+                return self::COLUMN_DESCRIPTION_CS;
+            case 'en':
+                return self::COLUMN_DESCRIPTION_EN;
+            default:
+                throw new \Shopsys\ShopBundle\Component\DataFixture\Exception\UnsupportedLocaleException($locale);
+        }
     }
 
     /**
