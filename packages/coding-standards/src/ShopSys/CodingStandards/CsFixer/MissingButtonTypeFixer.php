@@ -2,19 +2,52 @@
 
 namespace ShopSys\CodingStandards\CsFixer;
 
+use PhpCsFixer\Fixer\DefinedFixerInterface;
+use PhpCsFixer\Fixer\FixerInterface;
+use PhpCsFixer\FixerDefinition\CodeSample;
+use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
-use Symfony\CS\AbstractFixer;
-use Symfony\CS\FixerInterface;
 
-class MissingButtonTypeFixer extends AbstractFixer
+class MissingButtonTypeFixer implements FixerInterface, DefinedFixerInterface
 {
     /**
-     * @param \SplFileInfo $file
-     * @param string       $content
+     * {@inheritdoc}
      */
-    public function fix(SplFileInfo $file, $content)
+    public function getDefinition()
     {
-        return preg_replace_callback(
+        return new FixerDefinition(
+            'Adds mandatory type attribute to <button> HTML tag.',
+            [
+                new CodeSample('<button/>'),
+                new CodeSample('<button>label</button>'),
+                new CodeSample("<button\n    class=\"btn\"\n/>"),
+            ]
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isCandidate(Tokens $tokens)
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isRisky()
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fix(SplFileInfo $file, Tokens $tokens)
+    {
+        $code = preg_replace_callback(
             '@(<button\b)(.*?)(\s*/?>)@imsu',
             function ($matches) {
                 $beginning = $matches[1];
@@ -27,24 +60,26 @@ class MissingButtonTypeFixer extends AbstractFixer
 
                 return $beginning . $attributes . $end;
             },
-            $content
+            $tokens->generateCode()
         );
+
+        $tokens->setCode($code);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getName()
     {
-        return 'Adds mandatory type attribute to <button> HTML tag';
+        return 'Shopsys/missing_button_type';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getLevel()
+    public function getPriority()
     {
-        return FixerInterface::NONE_LEVEL;
+        return 0;
     }
 
     /**
