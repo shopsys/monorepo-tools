@@ -188,7 +188,7 @@ class MenuItem
      */
     private function setType($type)
     {
-        if (!in_array($type, $this->getTypes())) {
+        if (!in_array($type, $this->getTypes(), true)) {
             throw new \Shopsys\ShopBundle\Model\AdminNavigation\Exception\InvalidItemTypeException(
                 $type . ' is not a valid item type. Supported types are: ' . implode(', ', $this->getTypes()) . '.'
             );

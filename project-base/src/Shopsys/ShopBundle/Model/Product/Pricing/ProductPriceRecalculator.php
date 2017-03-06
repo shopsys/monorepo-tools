@@ -111,7 +111,7 @@ class ProductPriceRecalculator
         $this->productRowsIterator = null;
         // @codingStandardsIgnoreStart
         while ($this->runBatchOfScheduledDelayedRecalculations()) {
-        };
+        }
         // @codingStandardsIgnoreEnd
     }
 

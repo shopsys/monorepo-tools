@@ -40,6 +40,6 @@ class MultidomainEntityClassFinder
     {
         $identifierFieldNames = $classMetadata->getIdentifierFieldNames();
 
-        return count($identifierFieldNames) > 1 && in_array('domainId', $identifierFieldNames);
+        return count($identifierFieldNames) > 1 && in_array('domainId', $identifierFieldNames, true);
     }
 }

@@ -45,7 +45,7 @@ class AdministratorFacade
      */
     public function create(AdministratorData $administratorData)
     {
-        if (in_array($administratorData->username, $this->getSuperadminUsernames())) {
+        if (in_array($administratorData->username, $this->getSuperadminUsernames(), true)) {
             throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException($administratorData->username);
         }
         $administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);

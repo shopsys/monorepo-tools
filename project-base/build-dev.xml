@@ -216,7 +216,7 @@
             checkreturn="true"
         >
             <arg value="fix" />
-            <arg value="--config-file=${path.phpcs-fixer.configuration}" />
+            <arg value="--config=${path.phpcs-fixer.configuration}" />
             <arg value="--dry-run" />
             <arg value="--verbose" />
             <arg value="--diff" />
@@ -232,7 +232,7 @@
             checkreturn="false"
         >
             <arg value="fix" />
-            <arg value="--config-file=${path.phpcs-fixer.configuration}" />
+            <arg value="--config=${path.phpcs-fixer.configuration}" />
             <arg value="--verbose" />
             <arg path="${path.src}" />
         </exec>
@@ -259,11 +259,11 @@
                     checkreturn="true"
                 >
                     <arg value="fix" />
-                    <arg value="--config-file=${path.phpcs-fixer.configuration}" />
+                    <arg value="--config=${path.phpcs-fixer.configuration}" />
                     <arg value="--dry-run" />
                     <arg value="--verbose" />
                     <arg value="--diff" />
-                    <arg path="${diff.files.phpcs-fixer}"/>
+                    <arg line="${diff.files.phpcs-fixer}"/>
                 </exec>
             </then>
         </if>
@@ -290,10 +290,10 @@
                     checkreturn="true"
                 >
                     <arg value="fix" />
-                    <arg value="--config-file=${path.phpcs-fixer.configuration}" />
+                    <arg value="--config=${path.phpcs-fixer.configuration}" />
                     <arg value="--verbose" />
                     <arg value="--diff" />
-                    <arg path="${diff.files.phpcs-fixer}"/>
+                    <arg line="${diff.files.phpcs-fixer}"/>
                 </exec>
             </then>
         </if>

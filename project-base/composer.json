@@ -101,7 +101,7 @@
         "ext-pgsql": "*",
         "ext-zip": "*",
         "codeception/codeception": "2.2.3",
-        "shopsys/coding-standards": "2.0.1",
+        "shopsys/coding-standards": "3.0.1",
         "shopsys/phpstorm-inspect": "1.0.4",
         "symfony/web-profiler-bundle": "2.8.2"
     },

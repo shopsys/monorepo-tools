@@ -129,7 +129,7 @@ class CurrencyFacade
     {
         $currency = $this->currencyRepository->getById($currencyId);
 
-        if (in_array($currency->getId(), $this->getNotAllowedToDeleteCurrencyIds())) {
+        if (in_array($currency->getId(), $this->getNotAllowedToDeleteCurrencyIds(), true)) {
             throw new \Shopsys\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException();
         }
         $this->em->remove($currency);
