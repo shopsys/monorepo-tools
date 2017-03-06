@@ -90,7 +90,7 @@ class OrmJoinColumnRequireNullableFixer implements FixerInterface, DefinedFixerI
      */
     public function supports(SplFileInfo $file)
     {
-        return preg_match('/\.php(?:\.twig)?$/ui', $file->getFilename()) === 1;
+        return preg_match('/\.php$/ui', $file->getFilename()) === 1;
     }
 
     /**

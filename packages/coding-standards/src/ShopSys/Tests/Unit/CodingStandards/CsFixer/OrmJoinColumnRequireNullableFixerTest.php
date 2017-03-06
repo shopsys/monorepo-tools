@@ -46,7 +46,7 @@ class OrmJoinColumnRequireNullableFixerTest extends PHPUnit_Framework_TestCase
             ['test.php', true],
             ['test.html', false],
             ['test.twig', false],
-            ['test.php.twig', true],
+            ['test.php.twig', false],
             ['test.html.twig', false],
             ['test.php.xxx', false],
         ];

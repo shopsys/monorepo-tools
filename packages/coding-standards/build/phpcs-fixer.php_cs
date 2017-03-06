@@ -57,4 +57,7 @@ $config = PhpCsFixer\Config::create()
         new ShopSys\CodingStandards\CsFixer\NoUnusedImportsFixer(),
     ]);
 
+// Twig templates of PHP scripts cannot be linted and cause php-cs-fixer to fail
+$config->getFinder()->notName('*.php.twig');
+
 return $config;
