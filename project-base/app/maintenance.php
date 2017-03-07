@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Probíhá údržba</title>
+        <title>Site Maintenance</title>
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <style>
             body {
@@ -46,11 +46,10 @@
 
     <body>
         <div class="web">
-            <h1>Probíhá údržba</h1>
-            <img src="/assets/frontend/images/maintenance.png" alt="Probíhá údržba">
-            <p>
-                Zkuste to prosím znovu za pár minut.
-            </p>
+            <h1>Site Maintenance</h1>
+            <img src="/assets/frontend/images/maintenance.png" alt="Site Maintenance">
+            <p>Sorry for the inconvenience but we’re performing site maintenance at the moment.</p>
+            <p>We’ll be back shortly. Please try again in a few minutes.</p>
         </div>
     </body>
 </html>
