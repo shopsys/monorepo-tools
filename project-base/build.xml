@@ -70,7 +70,7 @@
 
     <target name="assetic" description="Symfony: Dumps all assets to the filesystem">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="assetic:dump" />
         </exec>
     </target>
@@ -82,7 +82,7 @@
             </fileset>
         </delete>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="assets:install" />
             <arg value="${path.root}/web/" />
         </exec>
@@ -127,21 +127,21 @@
 
     <target name="create-domains-data" description="Create domains data for new domains">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:domains-data:create" />
         </exec>
     </target>
 
     <target name="cron" description="Runs background jobs. Should be executed periodically by system CRON every 5 minutes.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:cron" />
         </exec>
     </target>
 
     <target name="cron-list" description="List all background jobs.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:cron" />
             <arg value="--list" />
         </exec>
@@ -149,32 +149,32 @@
 
     <target name="db-check-schema" description="Check if database schema is satisfying ORM and return a list of suggestions for repair schema">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:migrations:check-schema" />
         </exec>
     </target>
 
     <target name="db-create" description="Create database public schema and import basic database structure (without migrations)">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:schema:create" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:schema:import-default" />
         </exec>
     </target>
 
     <target name="db-drop" description="Drop database public schema">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:schema:drop" />
         </exec>
     </target>
 
     <target name="db-fixtures-base-settings" description="Load base data fixtures">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="doctrine:fixtures:load" />
             <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
             <arg value="--append" />
@@ -187,14 +187,14 @@
             <istrue value="${is-multidomain}" />
             <then>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="app/console" />
+                    <arg value="bin/console" />
                     <arg value="doctrine:fixtures:load" />
                     <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/DemoMultidomain" />
                     <arg value="--append" />
                     <arg value="--no-interaction" />
                 </exec>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="app/console" />
+                    <arg value="bin/console" />
                     <arg value="shopsys:recalculations" />
                 </exec>
             </then>
@@ -206,7 +206,7 @@
 
     <target name="db-fixtures-demo-singledomain" description="Load base and demo data fixtures for first domain, run shopsys:recalculations">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="doctrine:fixtures:load" />
             <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
             <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Demo" />
@@ -214,28 +214,28 @@
             <arg value="--no-interaction" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:recalculations" />
         </exec>
     </target>
 
     <target name="db-migrations" description="Execute database migrations and check schema">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:migrations:migrate" />
         </exec>
     </target>
 
     <target name="db-migrations-count" description="Get count of migrations to execute">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:migrations:count" />
         </exec>
     </target>
 
     <target name="db-migrations-generate" description="Generate migration file if need it">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:migrations:generate" />
         </exec>
     </target>
@@ -256,7 +256,7 @@
 
     <target name="dirs-create" description="creates application directories for locks, docs, content, images, uploaded files, etc.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:create-directories" />
         </exec>
     </target>
@@ -274,7 +274,7 @@
 
     <target name="dump-translations-front-and-common" description="Extracts translation messages from front-end and common code. Keep old translations for translated messages in administrations.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="translation:extract" />
             <arg value="--bundle=ShopsysShopBundle" />
             <arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Controller" />
@@ -301,7 +301,7 @@
 
     <target name="error-pages-generate" description="Generate all error pages for production">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:error-page:generate-all" />
         </exec>
     </target>
@@ -312,14 +312,14 @@
 
     <target name="gruntfile" description="Generate Gruntfile.js by domain settings">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:generate:gruntfile" />
         </exec>
     </target>
 
     <target name="img-demo" description="Install demo images">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:image:demo" />
         </exec>
     </target>
@@ -354,21 +354,21 @@
 
     <target name="replace-domains-urls" description="Replace domains urls in database by urls in domains config">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:domains-urls:replace" />
         </exec>
     </target>
 
     <target name="warmup" description="Symfony: Warms up an empty cache">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="cache:warmup" />
         </exec>
     </target>
 
     <target name="generate-friendly-urls" description="Generate friendly urls for supported entities">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:generate:friendly-url" />
         </exec>
     </target>

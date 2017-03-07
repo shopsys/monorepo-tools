@@ -48,7 +48,7 @@
 
     <target name="dump-translations" description="Extracts translation messages from whole project including back-end">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="translation:extract" />
             <arg value="--bundle=ShopsysShopBundle" />
             <arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Controller" />
@@ -624,7 +624,7 @@
 
     <target name="test-create-domains-data" description="Create domains data for new domains in tests database">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:domains-data:create" />
             <arg value="--env=test" />
         </exec>
@@ -632,7 +632,7 @@
 
     <target name="test-db-check-schema" description="Check if test database schema is satisfying ORM and return a list of suggestions for repair schema">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:migrations:check-schema" />
         </exec>
@@ -640,12 +640,12 @@
 
     <target name="test-db-create" description="Create test database public schema and import basic database structure (without migrations)">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:schema:create" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:schema:import-default" />
         </exec>
@@ -653,7 +653,7 @@
 
     <target name="test-db-drop" description="Drop test database public schema">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:schema:drop" />
         </exec>
@@ -661,7 +661,7 @@
 
     <target name="test-db-dump" description="Dump test database">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:database:dump" />
             <arg value="--pgdump-bin=${path.pg_dump.executable}" />
@@ -671,7 +671,7 @@
 
     <target name="test-db-fixtures-base-settings" description="Load base data fixtures for tests">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="doctrine:fixtures:load" />
             <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
@@ -685,7 +685,7 @@
             <istrue value="${is-multidomain}" />
             <then>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="app/console" />
+                    <arg value="bin/console" />
                     <arg value="--env=test" />
                     <arg value="doctrine:fixtures:load" />
                     <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/DemoMultidomain" />
@@ -693,7 +693,7 @@
                     <arg value="--no-interaction" />
                 </exec>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="app/console" />
+                    <arg value="bin/console" />
                     <arg value="shopsys:recalculations" />
                     <arg value="--env=test" />
                 </exec>
@@ -706,7 +706,7 @@
 
     <target name="test-db-fixtures-demo-singledomain" description="Load base and demo data fixtures to test database for first domain, run shopsys:recalculations">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="doctrine:fixtures:load" />
             <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
@@ -715,7 +715,7 @@
             <arg value="--no-interaction" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:recalculations" />
             <arg value="--env=test" />
         </exec>
@@ -723,12 +723,12 @@
 
     <target name="test-db-fixtures-performance" description="Import performance data to test db. Demo and base data fixtures must be imported first, run shopsys:recalculations">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:performance-data" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:recalculations" />
         </exec>
@@ -736,7 +736,7 @@
 
     <target name="test-db-migrations" description="Database migrations on test database">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:migrations:migrate" />
         </exec>
@@ -744,7 +744,7 @@
 
     <target name="test-generate-friendly-urls" description="Generate friendly urls for supported entities in test database">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:generate:friendly-url" />
         </exec>
@@ -752,7 +752,7 @@
 
     <target name="test-replace-domains-urls" description="Replace domains urls in test database">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:domains-urls:replace" />
         </exec>
@@ -760,7 +760,7 @@
 
     <target name="twig-lint" description="Lint: Check syntax of twig templates">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="lint:twig" />
             <arg value="@ShopsysShopBundle" />
         </exec>
@@ -773,7 +773,7 @@
             </not>
             <then>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="app/console" />
+                    <arg value="bin/console" />
                     <arg value="lint:twig" />
                     <arg line="${diff.files.twig}"/>
                 </exec>
@@ -783,12 +783,12 @@
 
     <target name="yaml-lint" description="Lint: Check syntax of yml files">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="lint:yaml" />
             <arg value="@ShopsysShopBundle" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="lint:yaml" />
             <arg value="${path.app}/config" />
         </exec>

@@ -58,7 +58,7 @@ class CronCommand extends ContainerAwareCommand
         });
 
         foreach ($cronModuleConfigs as $cronModuleConfig) {
-            $output->writeln(sprintf('php app/console shopsys:cron --module="%s"', $cronModuleConfig->getModuleId()));
+            $output->writeln(sprintf('php bin/console shopsys:cron --module="%s"', $cronModuleConfig->getModuleId()));
         }
     }
 
