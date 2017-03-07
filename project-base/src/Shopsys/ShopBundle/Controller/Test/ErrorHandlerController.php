@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Tests\Controller;
+namespace Shopsys\ShopBundle\Controller\Test;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;

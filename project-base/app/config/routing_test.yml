@@ -1,5 +1,5 @@
 shopsys_shop_tests:
-  resource: "@ShopsysShopBundle/Tests/Controller"
+  resource: "@ShopsysShopBundle/Controller/Test"
   prefix: /test
   type: annotation
 
