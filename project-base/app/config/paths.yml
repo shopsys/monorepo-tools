@@ -1,11 +1,11 @@
 parameters:
-  shopsys.admin_navigation.config_filepath: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/admin_menu.yml
+  shopsys.admin_navigation.config_filepath: %shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/admin_menu.yml
   shopsys.bestselling_product.cache_directory_path: %kernel.cache_dir%/bestselling_product
-  shopsys.cron_config_filepath: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/cron.yml
+  shopsys.cron_config_filepath: %shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/cron.yml
   shopsys.css_version_filepath: %shopsys.web_dir%/assets/cssVersion
   shopsys.data_fixtures.resource_customers_filepath: %shopsys.data_fixtures.resources_dir%/demo-data-customers.csv
   shopsys.data_fixtures.resource_products_filepath: %shopsys.data_fixtures.resources_dir%/demo-data-products.csv
-  shopsys.data_fixtures.resources_dir: %kernel.root_dir%/../src/Shopsys/ShopBundle/DataFixtures/resources
+  shopsys.data_fixtures.resources_dir: %shopsys.root_dir%/src/Shopsys/ShopBundle/DataFixtures/resources
   shopsys.default_db_schema_filepath: %shopsys.resources_dir%/database/schema.sql
   shopsys.demo_images_archive_url: https://images.shopsysdemo.com/demoImages.v9.zip
   shopsys.demo_images_dql_url: https://images.shopsysdemo.com/demoImagesSql.v7.sql
@@ -23,17 +23,17 @@ parameters:
   shopsys.front_design_image_url_prefix: /assets/frontend/images/
   shopsys.heureka_category_feed_backup_filepath: %shopsys.resources_dir%/feeds/heureka-category-feed-backup.xml
   shopsys.heureka_category_feed_url: http://www.heureka.cz/direct/xml-export/shops/heureka-sekce.xml
-  shopsys.image_config_filepath: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/images.yml
+  shopsys.image_config_filepath: %shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/images.yml
   shopsys.image_dir: %shopsys.web_dir%%shopsys.image_url_prefix%
   shopsys.image_url_prefix: /content/images/
   shopsys.javascript_sources_dir: %shopsys.resources_dir%/scripts
   shopsys.javascript_url_prefix: /assets/scripts/
-  shopsys.resources_dir: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources
+  shopsys.resources_dir: %shopsys.root_dir%/src/Shopsys/ShopBundle/Resources
   shopsys.root_dir: %kernel.root_dir%/..
   shopsys.sitemaps_dir: %shopsys.web_dir%%shopsys.sitemaps_url_prefix%
   shopsys.sitemaps_url_prefix: /content/sitemaps
   shopsys.styles_dir: src/Shopsys/ShopBundle/Resources/styles
-  shopsys.uploaded_file_config_filepath: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/uploaded_files.yml
+  shopsys.uploaded_file_config_filepath: %shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/uploaded_files.yml
   shopsys.uploaded_file_dir: %shopsys.web_dir%%shopsys.uploaded_file_url_prefix%
   shopsys.uploaded_file_url_prefix: /content/uploadedFiles/
-  shopsys.web_dir: %kernel.root_dir%/../web
+  shopsys.web_dir: %shopsys.root_dir%/web
