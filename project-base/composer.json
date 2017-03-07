@@ -9,6 +9,12 @@
                 "src/Shopsys/"
             ]
         },
+        "classmap": [
+            "app/AppCache.php",
+            "app/AppKernel.php",
+            "app/Bootstrap.php",
+            "app/Environment.php"
+        ],
         "files": [
             "src/Shopsys/ShopBundle/Component/Translation/functions.php",
             "src/Shopsys/ShopBundle/Component/VarDumper/functions.php"

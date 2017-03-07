@@ -1,16 +1,14 @@
 #!/usr/bin/env php
 <?php
 
+use Shopsys\Bootstrap;
+use Symfony\Component\Console\Input\ArgvInput;
+
 // if you don't want to setup permissions the proper way, just uncomment the following PHP line
 // read http://symfony.com/doc/current/book/installation.html#configuration-and-setup for more information
 umask(0002);
 
-require_once __DIR__ . '/bootstrap.php.cache';
-require_once __DIR__ . '/AppKernel.php';
-require_once __DIR__ . '/Bootstrap.php';
-
-use Shopsys\Bootstrap;
-use Symfony\Component\Console\Input\ArgvInput;
+require_once __DIR__ . '/autoload.php';
 
 $input = new ArgvInput();
 $environment = $input->getParameterOption(array('--env', '-e'), null);

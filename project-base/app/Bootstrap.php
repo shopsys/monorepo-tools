@@ -10,10 +10,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\Debug\ErrorHandler;
 
-require_once __DIR__ . '/../app/bootstrap.php.cache';
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../app/AppKernel.php';
-require_once __DIR__ . '/../app/Environment.php';
+require_once __DIR__ . '/bootstrap.php.cache';
 
 setlocale(LC_CTYPE, 'en_US.utf8');
 
