@@ -240,9 +240,9 @@
         </exec>
     </target>
 
-    <target name="dirs-clean" description="Clean up lock, docs and content directories">
+    <target name="dirs-clean" description="Clean up var directory (cache, logs, locks, etc.), generated docs and content directories">
         <delete failonerror="false" includeemptydirs="true">
-            <fileset dir="${path.var}/lock/">
+            <fileset dir="${path.var}/">
                 <exclude name="/" />
             </fileset>
             <fileset dir="${path.root}/docs/generated/">
