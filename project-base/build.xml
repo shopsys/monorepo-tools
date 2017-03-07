@@ -87,7 +87,7 @@
         </exec>
     </target>
 
-    <target name="clean" description="Clean up directories with cache, logs, stats and scripts">
+    <target name="clean" description="Clean up directories with cache, stats and scripts">
         <mkdir dir="${path.app}/cache" />
         <mkdir dir="${path.app}/logs" />
         <mkdir dir="${path.build.stats}" />
