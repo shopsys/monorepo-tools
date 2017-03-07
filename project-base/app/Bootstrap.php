@@ -12,7 +12,7 @@ use Symfony\Component\Debug\Debug;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\HttpFoundation\Request;
 
-require_once __DIR__ . '/bootstrap.php.cache';
+require_once __DIR__ . '/autoload.php';
 
 setlocale(LC_CTYPE, 'en_US.utf8');
 
@@ -33,6 +33,10 @@ class Bootstrap
 
     public function run()
     {
+        if ($this->environment !== Environment::ENVIRONMENT_DEVELOPMENT) {
+            include_once __DIR__ . '/../var/bootstrap.php.cache';
+        }
+
         $this->configurePhp();
 
         if (Environment::isEnvironmentDebug($this->environment)) {
