@@ -15,28 +15,29 @@
 
     <testsuites>
         <testsuite name="Unit">
-            <directory>../src/*/*Bundle/Tests/Unit</directory>
+            <directory>../tests/*Bundle/Unit</directory>
         </testsuite>
         <testsuite name="Database">
-            <directory>../src/*/*Bundle/Tests/Database</directory>
+            <directory>../tests/*Bundle/Database</directory>
         </testsuite>
         <testsuite name="Crawler">
-            <directory>../src/*/*Bundle/Tests/Crawler</directory>
+            <directory>../tests/*Bundle/Crawler</directory>
         </testsuite>
         <testsuite name="Performance">
-            <directory>../src/*/*Bundle/Tests/Performance</directory>
+            <directory>../tests/*Bundle/Performance</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
             <directory>../src</directory>
+            <directory>../tests</directory>
             <exclude>
                 <directory>../src/*/*Bundle/Resources</directory>
-                <directory>../src/*/*Bundle/Tests/Unit</directory>
-                <directory>../src/*/*Bundle/Tests/Database</directory>
-                <directory>../src/*/*Bundle/Tests/Crawler</directory>
-                <directory>../src/*/*Bundle/Tests/Performance</directory>
+                <directory>../tests/*Bundle/Unit</directory>
+                <directory>../tests/*Bundle/Database</directory>
+                <directory>../tests/*Bundle/Crawler</directory>
+                <directory>../tests/*Bundle/Performance</directory>
             </exclude>
         </whitelist>
     </filter>

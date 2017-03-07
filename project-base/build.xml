@@ -39,6 +39,7 @@
     <property name="path.root" value="."/>
     <property name="path.src" value="${path.root}/src"/>
     <property name="path.test.database.dump" value="${path.var}/cache/test-db-dump.sql"/>
+    <property name="path.tests" value="${path.root}/tests"/>
     <property name="path.translations.custom" value="${path.root}/src/Shopsys/ShopBundle/Resources/translations/custom"/>
     <property name="path.var" value="${path.root}/var"/>
     <property name="path.vendor" value="${path.root}/vendor"/>

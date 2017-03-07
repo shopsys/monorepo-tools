@@ -77,12 +77,12 @@
         />
 
         <exec
-            command="git diff --name-only --diff-filter=ACMR ${git.merge.base} ${path.src}"
+            command="git diff --name-only --diff-filter=ACMR ${git.merge.base} ${path.src} ${path.tests}"
             outputProperty="git.files.changed"
         />
 
         <exec
-            command="git ls-files --others --exclude-standard ${path.src}"
+            command="git ls-files --others --exclude-standard ${path.src} ${path.tests}"
             outputProperty="git.files.unstaged"
         />
 
@@ -90,7 +90,7 @@
             <filterchain>
                 <!-- ignore Codeception generated class for running acceptance tests -->
                 <linecontainsregexp>
-                    <regexp pattern="^(?!src/Shopsys/ShopBundle/Tests/Test/Codeception/_generated/AcceptanceTesterActions.php).+$" />
+                    <regexp pattern="^(?!tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php).+$" />
                 </linecontainsregexp>
             </filterchain>
         </property>
@@ -161,6 +161,7 @@
             <arg value="--ignore=${path.phpcs.ignored}"/>
             <arg value="--no-patch"/>
             <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
         </exec>
     </target>
 
@@ -202,6 +203,7 @@
             <arg value="-sp"/>
             <arg value="--ignore=${path.phpcs.ignored}"/>
             <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
         </exec>
     </target>
 
@@ -242,6 +244,7 @@
             <arg value="--verbose" />
             <arg value="--diff" />
             <arg path="${path.src}" />
+            <arg path="${path.tests}" />
         </exec>
     </target>
 
@@ -256,6 +259,7 @@
             <arg value="--config=${path.phpcs-fixer.configuration}" />
             <arg value="--verbose" />
             <arg path="${path.src}" />
+            <arg path="${path.tests}" />
         </exec>
     </target>
 
@@ -312,6 +316,7 @@
             checkreturn="true"
         >
             <arg path="${path.src}"/>
+            <arg path="${path.tests}" />
         </exec>
     </target>
 
@@ -340,7 +345,7 @@
             passthru="true"
             checkreturn="true"
         >
-            <arg value="${path.src}"/>
+            <arg value="${path.src},${path.tests}"/>
             <arg value="text"/>
             <arg value="${path.phpmd.ruleset}"/>
             <arg value="--extensions=php"/>
@@ -374,16 +379,28 @@
 
     <target name="phpstorm-inspect" description="Run phpstorm inspections">
         <exec
-            executable="${path.phpstorm-inspect.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
+                executable="${path.phpstorm-inspect.executable}"
+                logoutput="true"
+                passthru="true"
+                checkreturn="true"
         >
             <arg path="${path.phpstorm.inspect.sh}"/>
             <arg path="${path.phpstorm.system}"/>
             <arg path="${path.phpstorm.project}"/>
             <arg path="${path.phpstorm.project.inspection-profile}"/>
             <arg path="${path.src}"/>
+        </exec>
+        <exec
+                executable="${path.phpstorm-inspect.executable}"
+                logoutput="true"
+                passthru="true"
+                checkreturn="true"
+        >
+            <arg path="${path.phpstorm.inspect.sh}"/>
+            <arg path="${path.phpstorm.system}"/>
+            <arg path="${path.phpstorm.project}"/>
+            <arg path="${path.phpstorm.project.inspection-profile}"/>
+            <arg path="${path.tests}"/>
         </exec>
     </target>
 

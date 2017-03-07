@@ -20,6 +20,11 @@
             "src/Shopsys/ShopBundle/Component/VarDumper/functions.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "repositories": [
         {
             "type": "vcs",
