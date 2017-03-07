@@ -112,7 +112,6 @@
         ]
     },
     "config": {
-        "bin-dir": "bin",
         "preferred-install": "dist"
     },
     "extra": {

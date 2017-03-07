@@ -6,7 +6,7 @@
     <import file="build-dev.xml" />
 
     <property name="path.app" value="${path.root}/app"/>
-    <property name="path.bin" value="${path.root}/bin"/>
+    <property name="path.bin" value="${path.root}/vendor/bin"/>
     <property name="path.build" value="${path.root}/build"/>
     <property name="path.build.properties.local" value="${path.build}/build.local.properties"/>
     <property name="path.build.stats" value="${path.build}/stats"/>
