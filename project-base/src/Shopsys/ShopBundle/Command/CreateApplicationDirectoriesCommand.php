@@ -31,16 +31,21 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
 
     private function createMiscellaneousDirectories(OutputInterface $output)
     {
-        $directories = [];
-        $directories[] = $this->getContainer()->getParameter('kernel.root_dir') . '/lock';
-        $directories[] = $this->getContainer()->getParameter('kernel.root_dir') . '/errorPages';
-        $directories[] = $this->getContainer()->getParameter('shopsys.root_dir') . '/docs/generated';
-        $directories[] = $this->getContainer()->getParameter('shopsys.web_dir') . '/assets/admin/styles';
-        $directories[] = $this->getContainer()->getParameter('shopsys.web_dir') . '/assets/frontend/styles';
-        $directories[] = $this->getContainer()->getParameter('shopsys.web_dir') . '/assets/scripts';
-        $directories[] = $this->getContainer()->getParameter('shopsys.web_dir') . '/content/feeds';
-        $directories[] = $this->getContainer()->getParameter('shopsys.web_dir') . '/content/sitemaps';
-        $directories[] = $this->getContainer()->getParameter('shopsys.web_dir') . '/content/wysiwyg';
+        $kernelDirectory = $this->getContainer()->getParameter('kernel.root_dir');
+        $rootDirectory = $this->getContainer()->getParameter('shopsys.root_dir');
+        $webDirectory = $this->getContainer()->getParameter('shopsys.web_dir');
+
+        $directories = [
+            $kernelDirectory . '/lock',
+            $kernelDirectory . '/errorPages',
+            $rootDirectory . '/docs/generated',
+            $webDirectory . '/assets/admin/styles',
+            $webDirectory . '/assets/frontend/styles',
+            $webDirectory . '/assets/scripts',
+            $webDirectory . '/content/feeds',
+            $webDirectory . '/content/sitemaps',
+            $webDirectory . '/content/wysiwyg',
+        ];
 
         $filesystem = $this->getContainer()->get(Filesystem::class);
         /* @var $filesystem \Symfony\Component\Filesystem\Filesystem */
