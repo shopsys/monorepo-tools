@@ -15,7 +15,7 @@ parameters:
   shopsys.domain_images_dir: %shopsys.web_dir%%shopsys.domain_images_url_prefix%
   shopsys.domain_images_url_prefix: /content/admin/images/domain
   shopsys.domain_urls_config_filepath: %kernel.root_dir%/config/domains_urls.yml
-  shopsys.error_pages_dir: %kernel.root_dir%/errorPages/
+  shopsys.error_pages_dir: %shopsys.root_dir%/var/errorPages/
   shopsys.feed_dir: %shopsys.web_dir%%shopsys.feed_url_prefix%
   shopsys.feed_url_prefix: /content/feeds/
   shopsys.filemanager_upload_dir: %shopsys.web_dir%/%shopsys.filemanager_upload_web_dir%

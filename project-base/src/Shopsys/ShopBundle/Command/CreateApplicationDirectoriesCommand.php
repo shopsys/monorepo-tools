@@ -31,16 +31,15 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
 
     private function createMiscellaneousDirectories(OutputInterface $output)
     {
-        $kernelDirectory = $this->getContainer()->getParameter('kernel.root_dir');
         $rootDirectory = $this->getContainer()->getParameter('shopsys.root_dir');
         $webDirectory = $this->getContainer()->getParameter('shopsys.web_dir');
 
         $directories = [
-            $kernelDirectory . '/cache',
-            $kernelDirectory . '/lock',
-            $kernelDirectory . '/logs',
-            $kernelDirectory . '/errorPages',
             $rootDirectory . '/docs/generated',
+            $rootDirectory . '/var/cache',
+            $rootDirectory . '/var/lock',
+            $rootDirectory . '/var/logs',
+            $rootDirectory . '/var/errorPages',
             $webDirectory . '/assets/admin/styles',
             $webDirectory . '/assets/frontend/styles',
             $webDirectory . '/assets/scripts',

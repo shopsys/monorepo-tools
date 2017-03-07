@@ -26,7 +26,7 @@ modules:
       dsn: ~
       user: ~
       password: ~
-      dump: ../app/cache/test-db-dump.sql
+      dump: ../var/cache/test-db-dump.sql
       populate: false
       cleanup: true
     Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver:

@@ -3,6 +3,7 @@
 /docs/generated
 /nbproject
 /node_modules
+/var
 /vendor
 /DEVELOPMENT
 /PRODUCTION

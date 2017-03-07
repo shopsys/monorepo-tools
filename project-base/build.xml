@@ -39,8 +39,9 @@
     <property name="path.phpunit.executable" value="${path.bin}/phpunit"/>
     <property name="path.root" value="."/>
     <property name="path.src" value="${path.root}/src"/>
-    <property name="path.test.database.dump" value="${path.app}/cache/test-db-dump.sql"/>
+    <property name="path.test.database.dump" value="${path.var}/cache/test-db-dump.sql"/>
     <property name="path.translations.custom" value="${path.root}/src/Shopsys/ShopBundle/Resources/translations/custom"/>
+    <property name="path.var" value="${path.root}/var"/>
     <property name="path.vendor" value="${path.root}/vendor"/>
     <property name="path.web" value="${path.root}/web"/>
     <property name="path.web.scripts" value="${path.web}/assets/scripts"/>
@@ -89,7 +90,7 @@
 
     <target name="clean" description="Clean up directories with cache, stats and scripts">
         <delete failonerror="false" includeemptydirs="true">
-            <fileset dir="${path.app}/cache/">
+            <fileset dir="${path.var}/cache/">
                 <exclude name="/" />
             </fileset>
             <fileset dir="${path.build.stats}/">
@@ -241,7 +242,7 @@
 
     <target name="dirs-clean" description="Clean up lock, docs and content directories">
         <delete failonerror="false" includeemptydirs="true">
-            <fileset dir="${path.app}/lock/">
+            <fileset dir="${path.var}/lock/">
                 <exclude name="/" />
             </fileset>
             <fileset dir="${path.root}/docs/generated/">
