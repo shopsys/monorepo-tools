@@ -108,19 +108,38 @@
                     <!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
                     <regexp pattern="\.twig\s*$" />
                 </linecontainsregexp>
+            </filterchain>
+        </property>
 
+        <property name="diff.files.all.spaces" value="${diff.files.all}">
+            <filterchain>
                 <replaceregexp>
                     <regexp pattern="[\r\n]+" replace=" " />
                 </replaceregexp>
             </filterchain>
         </property>
-    </target>
 
-    <target name="diff-files-phpcs" depends="diff-files" description="Find modified files for phpcs">
-        <property name="diff.files.phpcs" value="${diff.files.php}">
+        <property name="diff.files.php.spaces" value="${diff.files.php}">
             <filterchain>
                 <replaceregexp>
                     <regexp pattern="[\r\n]+" replace=" " />
+                </replaceregexp>
+            </filterchain>
+        </property>
+
+        <property name="diff.files.twig.spaces" value="${diff.files.twig}">
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="[\r\n]+" replace=" " />
+                </replaceregexp>
+            </filterchain>
+        </property>
+
+        <property name="diff.files.php.commas" value="${diff.files.php}">
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="[\r\n]+" replace="," />
+                    <regexp pattern="^,|,$" replace="" />
                 </replaceregexp>
             </filterchain>
         </property>
@@ -143,10 +162,10 @@
         </exec>
     </target>
 
-    <target name="phpcbf-diff" depends="diff-files-phpcs" description="Fix php coding standards by PHP Code Beautifier only on modified files">
+    <target name="phpcbf-diff" depends="diff-files" description="Fix php coding standards by PHP Code Beautifier (only on modified files)">
         <if>
             <not>
-                <equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
+                <equals arg1="${diff.files.php.spaces}" arg2="" trim="true" />
             </not>
             <then>
                 <exec
@@ -161,7 +180,7 @@
                     <arg value="--tab-width=4"/>
                     <arg value="--ignore=${path.phpcs.ignored}"/>
                     <arg value="--no-patch"/>
-                    <arg line="${diff.files.phpcs}"/>
+                    <arg line="${diff.files.php.spaces}"/>
                 </exec>
             </then>
         </if>
@@ -184,10 +203,10 @@
         </exec>
     </target>
 
-    <target name="phpcs-diff" depends="diff-files-phpcs" description="Check coding standards (only on modified files)">
+    <target name="phpcs-diff" depends="diff-files" description="Check coding standards (only on modified files)">
         <if>
             <not>
-                <equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
+                <equals arg1="${diff.files.php.spaces}" arg2="" trim="true" />
             </not>
             <then>
                 <exec
@@ -202,7 +221,7 @@
                     <arg value="--tab-width=4"/>
                     <arg value="-sp"/>
                     <arg value="--ignore=${path.phpcs.ignored}"/>
-                    <arg line="${diff.files.phpcs}"/>
+                    <arg line="${diff.files.php.spaces}"/>
                 </exec>
             </then>
         </if>
@@ -238,18 +257,10 @@
         </exec>
     </target>
 
-    <target name="phpcs-fixer-diff" depends="diff-files" description="PHP CS Fixer dry (only on modified files)">
-        <property name="diff.files.phpcs-fixer" value="${diff.files.all}">
-            <filterchain>
-                <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace=" " />
-                </replaceregexp>
-            </filterchain>
-        </property>
-
+    <target name="phpcs-fixer-diff" depends="diff-files" description="PHP CS Fixer dry run (only on modified files)">
         <if>
             <not>
-                <equals arg1="${diff.files.phpcs-fixer}" arg2="" trim="true" />
+                <equals arg1="${diff.files.all.spaces}" arg2="" trim="true" />
             </not>
             <then>
                 <exec
@@ -263,24 +274,16 @@
                     <arg value="--dry-run" />
                     <arg value="--verbose" />
                     <arg value="--diff" />
-                    <arg line="${diff.files.phpcs-fixer}"/>
+                    <arg line="${diff.files.all.spaces}"/>
                 </exec>
             </then>
         </if>
     </target>
 
     <target name="phpcs-fixer-fix-diff" depends="diff-files" description="Fix coding standards by PHP CS Fixer (only on modified files)">
-        <property name="diff.files.phpcs-fixer" value="${diff.files.all}">
-            <filterchain>
-                <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace=" " />
-                </replaceregexp>
-            </filterchain>
-        </property>
-
         <if>
             <not>
-                <equals arg1="${diff.files.phpcs-fixer}" arg2="" trim="true" />
+                <equals arg1="${diff.files.all.spaces}" arg2="" trim="true" />
             </not>
             <then>
                 <exec
@@ -293,7 +296,7 @@
                     <arg value="--config=${path.phpcs-fixer.configuration}" />
                     <arg value="--verbose" />
                     <arg value="--diff" />
-                    <arg line="${diff.files.phpcs-fixer}"/>
+                    <arg line="${diff.files.all.spaces}"/>
                 </exec>
             </then>
         </if>
@@ -313,17 +316,9 @@
     </target>
 
     <target name="phplint-diff" depends="diff-files" description="Check syntax of php files (only on modified files)">
-        <property name="diff.files.phplint" value="${diff.files.php}">
-            <filterchain>
-                <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace=" " />
-                </replaceregexp>
-            </filterchain>
-        </property>
-
         <if>
             <not>
-                <equals arg1="${diff.files.phplint}" arg2="" trim="true" />
+                <equals arg1="${diff.files.php.spaces}" arg2="" trim="true" />
             </not>
             <then>
                 <exec
@@ -332,7 +327,7 @@
                     passthru="true"
                     checkreturn="true"
                 >
-                    <arg line="${diff.files.phplint}" />
+                    <arg line="${diff.files.php.spaces}" />
                 </exec>
             </then>
         </if>
@@ -355,18 +350,9 @@
     </target>
 
     <target name="phpmd-diff" depends="diff-files" description="Check coding standards by PHP Mess Detector (only on modified files)">
-        <property name="diff.files.phpmd" value="${diff.files.php}">
-            <filterchain>
-                <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace="," />
-                    <regexp pattern=",$" replace="" />
-                </replaceregexp>
-            </filterchain>
-        </property>
-
         <if>
             <not>
-                <equals arg1="${diff.files.phpmd}" arg2="" trim="true" />
+                <equals arg1="${diff.files.php.commas}" arg2="" trim="true" />
             </not>
             <then>
                 <exec
@@ -375,7 +361,7 @@
                     passthru="true"
                     checkreturn="true"
                 >
-                    <arg value="${diff.files.phpmd}"/>
+                    <arg value="${diff.files.php.commas}"/>
                     <arg value="text"/>
                     <arg value="${path.phpmd.ruleset}"/>
                     <arg value="--extensions=php"/>
