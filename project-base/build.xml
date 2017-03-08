@@ -26,7 +26,6 @@
     <property name="path.phpcs-fixer.executable" value="${path.bin}/php-cs-fixer"/>
     <property name="path.phpcs-fixer.configuration" value="${path.build}/phpcs-fixer.php_cs"/>
     <property name="path.phplint.executable" value="${path.bin}/parallel-lint"/>
-    <property name="path.phplint.ignored" value="${path.src}/Shopsys/ShopBundle/Tests/Test/Codeception/_generated"/>
     <property name="path.phpmd.executable" value="${path.bin}/phpmd"/>
     <property name="path.phpmd.ignored" value="_generated"/>
     <property name="path.phpmd.ruleset" value="${path.vendor}/shopsys/coding-standards/rulesetMD.xml"/>

@@ -310,8 +310,6 @@
             checkreturn="true"
         >
             <arg path="${path.src}"/>
-            <arg value="--exclude"/>
-            <arg value="${path.phplint.ignored}"/>
         </exec>
     </target>
 
