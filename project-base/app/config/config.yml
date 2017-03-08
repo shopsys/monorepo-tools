@@ -76,6 +76,7 @@ framework:
   profiler:
     enabled: false
     collect: false
+  assets: ~
 
 monolog:
   channels: ["cron", "slow"]
