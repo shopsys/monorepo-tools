@@ -25,7 +25,7 @@ class CronModuleExecutor
 
     //@codingStandardsIgnoreStart
     /**
-     * @param \Shopsys\ShopBundle\Component\Cron\CronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
+     * @param \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
      * @param bool $suspended
      * @return string
      */
@@ -36,7 +36,7 @@ class CronModuleExecutor
             return self::RUN_STATUS_TIMEOUT;
         }
 
-        if ($cronModuleService instanceof CronModuleInterface) {
+        if ($cronModuleService instanceof SimpleCronModuleInterface) {
             $cronModuleService->run();
 
             return self::RUN_STATUS_OK;

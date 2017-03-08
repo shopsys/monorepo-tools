@@ -9,9 +9,9 @@ use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use Shopsys\ShopBundle\Component\Cron\CronFacade;
 use Shopsys\ShopBundle\Component\Cron\CronModuleExecutorFactory;
 use Shopsys\ShopBundle\Component\Cron\CronModuleFacade;
-use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
 use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
 use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
+use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
 
 class CronFacadeTest extends PHPUnit_Framework_TestCase
@@ -19,7 +19,7 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
     public function testRunModuleByModuleId()
     {
         $moduleId = 'moduleId';
-        $cronModuleServiceMock = $this->getMockForAbstractClass(CronModuleInterface::class);
+        $cronModuleServiceMock = $this->getMockForAbstractClass(SimpleCronModuleInterface::class);
         $cronModuleServiceMock->expects($this->once())->method('run');
         $cronModuleConfig = new CronModuleConfig($cronModuleServiceMock, $moduleId, '', '');
         $cronTimeResolver = new CronTimeResolver();
@@ -65,10 +65,10 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
 
     public function testScheduleModulesByTime()
     {
-        $scheduledCronModuleServiceMock = $this->getMockForAbstractClass(CronModuleInterface::class);
+        $scheduledCronModuleServiceMock = $this->getMockForAbstractClass(SimpleCronModuleInterface::class);
         $scheduledCronModuleConfig = new CronModuleConfig($scheduledCronModuleServiceMock, 'scheduled', '', '');
 
-        $skippedCronModuleServiceMock = $this->getMockForAbstractClass(CronModuleInterface::class);
+        $skippedCronModuleServiceMock = $this->getMockForAbstractClass(SimpleCronModuleInterface::class);
         $skippedCronModuleConfig = new CronModuleConfig($skippedCronModuleServiceMock, 'skipped', '', '');
 
         $cronTimeResolverMock = $this->getMock(CronTimeResolver::class);
@@ -96,11 +96,11 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
 
     public function testRunScheduledModules()
     {
-        $scheduledCronModuleServiceMock = $this->getMockForAbstractClass(CronModuleInterface::class);
+        $scheduledCronModuleServiceMock = $this->getMockForAbstractClass(SimpleCronModuleInterface::class);
         $scheduledCronModuleServiceMock->expects($this->once())->method('run');
         $scheduledCronModuleConfig = new CronModuleConfig($scheduledCronModuleServiceMock, 'scheduled', '', '');
 
-        $skippedCronModuleServiceMock = $this->getMockForAbstractClass(CronModuleInterface::class);
+        $skippedCronModuleServiceMock = $this->getMockForAbstractClass(SimpleCronModuleInterface::class);
         $skippedCronModuleServiceMock->expects($this->never())->method('run');
         $skippedCronModuleConfig = new CronModuleConfig($skippedCronModuleServiceMock, 'skipped', '', '');
 

@@ -2,11 +2,11 @@
 
 namespace Shopsys\ShopBundle\Component\Error;
 
-use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
+use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
 use Shopsys\ShopBundle\Component\Error\ErrorPagesFacade;
 use Symfony\Bridge\Monolog\Logger;
 
-class ErrorPageCronModule implements CronModuleInterface
+class ErrorPageCronModule implements SimpleCronModuleInterface
 {
     /**
      * @var \Shopsys\ShopBundle\Component\Error\ErrorPagesFacade

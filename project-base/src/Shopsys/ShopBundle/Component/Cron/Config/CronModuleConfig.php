@@ -2,14 +2,14 @@
 
 namespace Shopsys\ShopBundle\Component\Cron\Config;
 
-use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
 use Shopsys\ShopBundle\Component\Cron\CronTimeInterface;
 use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
+use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
 
 class CronModuleConfig implements CronTimeInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Cron\CronModuleInterface
+     * @var \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface
      */
     private $cronModuleService;
 
@@ -30,7 +30,7 @@ class CronModuleConfig implements CronTimeInterface
 
     // @codingStandardsIgnoreStart
     /**
-     * @param \Shopsys\ShopBundle\Component\Cron\CronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
+     * @param \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
      * @param string $moduleId
      * @param string $timeHours
      * @param string $timeMinutes
@@ -38,7 +38,7 @@ class CronModuleConfig implements CronTimeInterface
     public function __construct($cronModuleService, $moduleId, $timeHours, $timeMinutes)
     {
         // @codingStandardsIgnoreEnd
-        if (!$cronModuleService instanceof CronModuleInterface
+        if (!$cronModuleService instanceof SimpleCronModuleInterface
             && !$cronModuleService instanceof IteratedCronModuleInterface
         ) {
             throw new \Shopsys\ShopBundle\Component\Cron\Exception\InvalidCronModuleException($moduleId);
@@ -50,7 +50,7 @@ class CronModuleConfig implements CronTimeInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Cron\CronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface
+     * @return \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface
      */
     public function getCronModuleService()
     {

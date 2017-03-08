@@ -2,11 +2,11 @@
 
 namespace Shopsys\ShopBundle\Model\Feed\Category;
 
-use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
+use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
 use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade;
 use Symfony\Bridge\Monolog\Logger;
 
-class FeedCategoryCronModule implements CronModuleInterface
+class FeedCategoryCronModule implements SimpleCronModuleInterface
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade
