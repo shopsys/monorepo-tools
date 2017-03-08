@@ -86,18 +86,20 @@
             outputProperty="git.files.unstaged"
         />
 
-        <property name="diff.files.all" value="${git.files.changed}${line.separator}${git.files.unstaged}" />
+        <property name="diff.files.all" value="${git.files.changed}${line.separator}${git.files.unstaged}">
+            <filterchain>
+                <!-- ignore Codeception generated class for running acceptance tests -->
+                <linecontainsregexp>
+                    <regexp pattern="^(?!src/Shopsys/ShopBundle/Tests/Test/Codeception/_generated/AcceptanceTesterActions.php).+$" />
+                </linecontainsregexp>
+            </filterchain>
+        </property>
 
         <property name="diff.files.php" value="${diff.files.all}">
             <filterchain>
                 <linecontainsregexp>
                     <!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
                     <regexp pattern="\.php\s*$" />
-                </linecontainsregexp>
-
-                <!-- ignore Codeception generated class for running acceptance tests -->
-                <linecontainsregexp>
-                    <regexp pattern="^(?!src/Shopsys/ShopBundle/Tests/Test/Codeception/_generated/AcceptanceTesterActions.php).+$" />
                 </linecontainsregexp>
             </filterchain>
         </property>
