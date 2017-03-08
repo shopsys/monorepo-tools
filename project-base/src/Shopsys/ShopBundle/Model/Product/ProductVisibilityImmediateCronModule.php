@@ -2,11 +2,11 @@
 
 namespace Shopsys\ShopBundle\Model\Product;
 
-use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
+use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 use Symfony\Bridge\Monolog\Logger;
 
-class ProductVisibilityImmediateCronModule implements CronModuleInterface
+class ProductVisibilityImmediateCronModule implements SimpleCronModuleInterface
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade

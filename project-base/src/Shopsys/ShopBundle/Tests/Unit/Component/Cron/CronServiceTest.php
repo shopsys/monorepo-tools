@@ -4,14 +4,14 @@ namespace Shopsys\ShopBundle\Tests\Unit\Component\Cron;
 
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
 use Shopsys\ShopBundle\Component\Cron\CronService;
+use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
 
 class CronServiceTest extends PHPUnit_Framework_TestCase
 {
     public function testFilterScheduledCronModuleConfigs()
     {
-        $cronModuleMock = $this->getMockForAbstractClass(CronModuleInterface::class);
+        $cronModuleMock = $this->getMockForAbstractClass(SimpleCronModuleInterface::class);
 
         $scheduledCronModuleConfig1 = new CronModuleConfig($cronModuleMock, 'scheduled1', '', '');
         $skippedCronModuleConfig = new CronModuleConfig($cronModuleMock, 'skipped', '', '');

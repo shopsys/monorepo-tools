@@ -4,14 +4,14 @@ namespace Shopsys\ShopBundle\Component\Error\Reporting;
 
 use DateTime;
 use Shopsys\Environment;
-use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
+use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
 use Shopsys\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Mail\MailerService;
 use Shopsys\ShopBundle\Model\Mail\MessageData;
 use Symfony\Bridge\Monolog\Logger;
 
-class ErrorReportingFromLastHourCronModule implements CronModuleInterface
+class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
 {
     const REPORT_ERRORS_FOR_LAST_SECONDS = 3600 + 300;
     const ROTATED_LOG_NAME = Environment::ENVIRONMENT_PRODUCTION;
