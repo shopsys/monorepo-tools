@@ -7,9 +7,9 @@ use Shopsys\ShopBundle\Model\AdminNavigation\Menu;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader;
-use Tests\ShopBundle\Test\FunctionalTestCase;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class AdminNavigationTest extends FunctionalTestCase
 {

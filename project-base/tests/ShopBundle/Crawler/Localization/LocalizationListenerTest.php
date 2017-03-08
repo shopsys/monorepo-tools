@@ -5,8 +5,8 @@ namespace Tests\ShopBundle\Crawler\Localization;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
 use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
-use Tests\ShopBundle\Test\DatabaseTestCase;
 use Symfony\Component\Routing\RouterInterface;
+use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class LocalizationListenerTest extends DatabaseTestCase
 {

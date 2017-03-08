@@ -8,11 +8,11 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
 use Shopsys\ShopBundle\Model\Feed\FeedConfig;
 use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Routing\RouterInterface;
 use Tests\ShopBundle\Performance\Feed\PerformanceResultsCsvExporter;
 use Tests\ShopBundle\Performance\Feed\PerformanceTestSample;
 use Tests\ShopBundle\Test\FunctionalTestCase;
-use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Routing\RouterInterface;
 
 class AllFeedsTest extends FunctionalTestCase
 {

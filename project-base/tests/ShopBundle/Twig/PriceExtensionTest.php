@@ -7,8 +7,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository;
 use Shopsys\ShopBundle\Model\Localization\Localization;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use Tests\ShopBundle\Test\FunctionalTestCase;
 use Shopsys\ShopBundle\Twig\PriceExtension;
+use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class PriceExtensionTest extends FunctionalTestCase
 {

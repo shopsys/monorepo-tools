@@ -4,8 +4,8 @@ namespace Tests\ShopBundle\Unit\Form\Front;
 
 use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType;
-use Tests\ShopBundle\Test\DatabaseTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
+use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class PersonalInfoFormTypeTest extends DatabaseTestCase
 {

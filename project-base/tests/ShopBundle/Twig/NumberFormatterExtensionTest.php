@@ -4,8 +4,8 @@ namespace Tests\ShopBundle\Twig;
 
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
 use Shopsys\ShopBundle\Model\Localization\Localization;
-use Tests\ShopBundle\Test\FunctionalTestCase;
 use Shopsys\ShopBundle\Twig\NumberFormatterExtension;
+use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class NumberFormatterExtensionTest extends FunctionalTestCase
 {

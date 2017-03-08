@@ -19,8 +19,8 @@ use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportEditData;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
-use Tests\ShopBundle\Test\DatabaseTestCase;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
 {

@@ -5,8 +5,8 @@ namespace Tests\ShopBundle\Twig;
 use DateTime;
 use Shopsys\ShopBundle\Component\Localization\DateTimeFormatter;
 use Shopsys\ShopBundle\Model\Localization\Localization;
-use Tests\ShopBundle\Test\FunctionalTestCase;
 use Shopsys\ShopBundle\Twig\DateTimeFormatterExtension;
+use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class DateTimeFormatterExtensionTest extends FunctionalTestCase
 {

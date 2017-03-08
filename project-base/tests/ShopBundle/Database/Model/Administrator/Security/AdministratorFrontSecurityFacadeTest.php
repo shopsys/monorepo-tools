@@ -5,9 +5,9 @@ namespace Tests\ShopBundle\Database\Model\Administrator\Security;
 use Shopsys\ShopBundle\DataFixtures\Base\AdministratorDataFixture;
 use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
 use Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
-use Tests\ShopBundle\Test\DatabaseTestCase;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class AdministratorFrontSecurityFacadeTest extends DatabaseTestCase
 {

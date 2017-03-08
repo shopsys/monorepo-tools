@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Performance\Page;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider;
 use Tests\ShopBundle\Performance\Page\PerformanceResultsCsvExporter;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSample;
@@ -10,7 +11,6 @@ use Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSamplesAggregator;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSummaryPrinter;
 use Tests\ShopBundle\Test\FunctionalTestCase;
-use Symfony\Component\Console\Output\ConsoleOutput;
 
 class AllPagesTest extends FunctionalTestCase
 {

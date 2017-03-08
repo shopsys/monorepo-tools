@@ -6,8 +6,8 @@ use Shopsys\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\ShopBundle\Form\Admin\Product\ProductEditFormType;
-use Tests\ShopBundle\Test\FunctionalTestCase;
 use Symfony\Component\DomCrawler\Form;
+use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class NewProductTest extends FunctionalTestCase
 {

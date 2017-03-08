@@ -4,8 +4,8 @@ namespace Tests\ShopBundle\Unit\Component\UploadedFile;
 
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfigLoader;
-use Tests\ShopBundle\Unit\Component\UploadedFile\Dummy;
 use Symfony\Component\Filesystem\Filesystem;
+use Tests\ShopBundle\Unit\Component\UploadedFile\Dummy;
 
 class UploadedFileConfigLoaderTest extends PHPUnit_Framework_TestCase
 {

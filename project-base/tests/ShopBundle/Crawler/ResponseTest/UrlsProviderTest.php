@@ -8,9 +8,9 @@ use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
 use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
-use Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider;
 
 class UrlsProviderTest extends PHPUnit_Framework_TestCase
 {

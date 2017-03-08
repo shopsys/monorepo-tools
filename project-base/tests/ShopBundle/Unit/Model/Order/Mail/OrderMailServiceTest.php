@@ -13,10 +13,10 @@ use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\ShopBundle\Model\Order\Mail\OrderMailService;
 use Shopsys\ShopBundle\Model\Order\OrderService;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
-use Tests\ShopBundle\Test\FunctionalTestCase;
 use Shopsys\ShopBundle\Twig\DateTimeFormatterExtension;
 use Shopsys\ShopBundle\Twig\PriceExtension;
 use Symfony\Component\Routing\RouterInterface;
+use Tests\ShopBundle\Test\FunctionalTestCase;
 use Twig_Environment;
 
 class OrderMailServiceTest extends FunctionalTestCase

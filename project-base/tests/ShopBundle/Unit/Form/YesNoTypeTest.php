@@ -3,8 +3,8 @@
 namespace Tests\ShopBundle\Unit\Form;
 
 use Shopsys\ShopBundle\Form\FormType;
-use Tests\ShopBundle\Test\FunctionalTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
+use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class YesNoTypeTest extends FunctionalTestCase
 {
