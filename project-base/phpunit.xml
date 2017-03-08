@@ -3,7 +3,7 @@
 <phpunit
     backupGlobals="false"
     backupStaticAttributes="false"
-    bootstrap="autoload.php"
+    bootstrap="app/autoload.php"
     colors="true"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
@@ -12,32 +12,35 @@
     stopOnFailure="false"
     syntaxCheck="false"
 >
+    <php>
+        <server name="KERNEL_DIR" value="app/" />
+    </php>
 
     <testsuites>
         <testsuite name="Unit">
-            <directory>../tests/*Bundle/Unit</directory>
+            <directory>tests/*Bundle/Unit</directory>
         </testsuite>
         <testsuite name="Database">
-            <directory>../tests/*Bundle/Database</directory>
+            <directory>tests/*Bundle/Database</directory>
         </testsuite>
         <testsuite name="Crawler">
-            <directory>../tests/*Bundle/Crawler</directory>
+            <directory>tests/*Bundle/Crawler</directory>
         </testsuite>
         <testsuite name="Performance">
-            <directory>../tests/*Bundle/Performance</directory>
+            <directory>tests/*Bundle/Performance</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>../src</directory>
-            <directory>../tests</directory>
+            <directory>src</directory>
+            <directory>tests</directory>
             <exclude>
-                <directory>../src/*/*Bundle/Resources</directory>
-                <directory>../tests/*Bundle/Unit</directory>
-                <directory>../tests/*Bundle/Database</directory>
-                <directory>../tests/*Bundle/Crawler</directory>
-                <directory>../tests/*Bundle/Performance</directory>
+                <directory>src/*/*Bundle/Resources</directory>
+                <directory>tests/*Bundle/Unit</directory>
+                <directory>tests/*Bundle/Database</directory>
+                <directory>tests/*Bundle/Crawler</directory>
+                <directory>tests/*Bundle/Performance</directory>
             </exclude>
         </whitelist>
     </filter>

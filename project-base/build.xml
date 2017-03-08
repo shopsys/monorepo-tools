@@ -34,7 +34,6 @@
     <property name="path.phpstorm.project.inspection-profile" value="${path.build}/phpstorm/ShopSys/.idea/inspectionProfiles/Project_Default.xml"/>
     <property name="path.phpstorm.system" value="/home/jenkins/.PhpStorm2016.1/system"/>
     <property name="path.phpstorm-inspect.executable" value="${path.bin}/phpstorm-inspect"/>
-    <property name="path.phpunit.configuration" value="${path.app}/phpunit.xml"/>
     <property name="path.phpunit.executable" value="${path.bin}/phpunit"/>
     <property name="path.root" value="."/>
     <property name="path.src" value="${path.root}/src"/>
