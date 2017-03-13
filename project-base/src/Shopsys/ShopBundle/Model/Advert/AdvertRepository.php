@@ -58,16 +58,18 @@ class AdvertRepository
      */
     public function findRandomAdvertByPosition($positionName, $domainId)
     {
-        $countQb = $this->getAdvertByPositionQueryBuider($positionName, $domainId);
-
-        $count = $countQb
+        $count = $this->getAdvertByPositionQueryBuider($positionName, $domainId)
             ->select('COUNT(a)')
             ->getQuery()->getSingleScalarResult();
 
-        $qb = $this->getAdvertByPositionQueryBuider($positionName, $domainId);
-        return $qb->setFirstResult(rand(0, intval($count) - 1))
+        if ($count === 0) {
+            return null;
+        }
+
+        return $this->getAdvertByPositionQueryBuider($positionName, $domainId)
+            ->setFirstResult(rand(0, $count - 1))
             ->setMaxResults(1)
-            ->getQuery()->getOneOrNullResult();
+            ->getQuery()->getSingleResult();
     }
 
     /**
