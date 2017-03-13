@@ -71,7 +71,10 @@ class PaymentRepository
      */
     public function findById($id)
     {
-        return $this->getPaymentRepository()->find($id);
+        return $this->getQueryBuilderForAll()
+            ->andWhere('p.id = :paymentId')->setParameter('paymentId', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     /**

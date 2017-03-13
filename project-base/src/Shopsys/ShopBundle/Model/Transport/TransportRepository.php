@@ -63,10 +63,9 @@ class TransportRepository
      */
     public function getAllByIds(array $transportIds)
     {
-        $dql = sprintf('SELECT t FROM %s t WHERE t.deleted = :deleted AND t.id IN (:trasportIds)', Transport::class);
-        return $this->em->createQuery($dql)
-            ->setParameter('deleted', false)
-            ->setParameter('trasportIds', $transportIds)
+        return $this->getQueryBuilderForAll()
+            ->andWhere('t.id IN (:transportIds)')->setParameter('transportIds', $transportIds)
+            ->getQuery()
             ->getResult();
     }
 
@@ -97,7 +96,10 @@ class TransportRepository
      */
     public function findById($id)
     {
-        return $this->getTransportRepository()->find($id);
+        return $this->getQueryBuilderForAll()
+            ->andWhere('t.id = :transportId')->setParameter('transportId', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     /**
