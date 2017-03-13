@@ -117,15 +117,6 @@ class PaymentFacade
     }
 
     /**
-     * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
-     */
-    public function getByIdWithTransports($id)
-    {
-        return $this->paymentRepository->getByIdWithTransports($id);
-    }
-
-    /**
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @return \Shopsys\ShopBundle\Model\Payment\PaymentDomain[]
      */
@@ -171,7 +162,7 @@ class PaymentFacade
      */
     public function getVisibleByDomainId($domainId)
     {
-        $allPayments = $this->paymentRepository->getAllWithTransports();
+        $allPayments = $this->paymentRepository->getAll();
 
         return $this->paymentVisibilityCalculation->filterVisible($allPayments, $domainId);
     }

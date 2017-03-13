@@ -88,33 +88,6 @@ class PaymentRepository
     }
 
     /**
-     * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
-     */
-    public function getByIdWithTransports($id)
-    {
-        try {
-            return $this->em
-                ->createQuery('SELECT p, t FROM ' . Payment::class . ' p LEFT JOIN p.transports t WHERE p.id = :id')
-                ->setParameter('id', $id)
-                ->getSingleResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
-            throw new \Shopsys\ShopBundle\Model\Payment\Exception\PaymentNotFoundException('Payment with ID ' . $id . ' not found.', $e);
-        }
-    }
-
-    /**
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
-     */
-    public function getAllWithTransports()
-    {
-        return $this->getQueryBuilderForAll()
-            ->leftJoin('p.transports', 't')
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
      */
