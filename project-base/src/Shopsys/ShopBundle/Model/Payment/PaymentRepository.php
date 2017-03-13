@@ -109,7 +109,7 @@ class PaymentRepository
     public function getAllWithTransports()
     {
         return $this->getQueryBuilderForAll()
-            ->leftJoin(Transport::class, 't')
+            ->leftJoin('p.transports', 't')
             ->getQuery()
             ->getResult();
     }
@@ -121,7 +121,7 @@ class PaymentRepository
     public function getAllByTransport(Transport $transport)
     {
         return $this->getQueryBuilderForAll()
-            ->join(Transport::class, 't')
+            ->join('p.transports', 't')
             ->andWhere('t.id = :transportId')
             ->setParameter('transportId', $transport->getId())
             ->getQuery()
