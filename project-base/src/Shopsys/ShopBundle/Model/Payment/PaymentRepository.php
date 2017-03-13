@@ -95,8 +95,7 @@ class PaymentRepository
     {
         return $this->getQueryBuilderForAll()
             ->join('p.transports', 't')
-            ->andWhere('t.id = :transportId')
-            ->setParameter('transportId', $transport->getId())
+            ->andWhere('t = :transport')->setParameter('transport', $transport)
             ->getQuery()
             ->getResult();
     }
