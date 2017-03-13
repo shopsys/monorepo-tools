@@ -125,7 +125,6 @@ class TransportFacade
         $transport->markAsDeleted();
         $paymentsByTransport = $this->paymentRepository->getAllByTransport($transport);
         foreach ($paymentsByTransport as $payment) {
-            /* @var $payment \Shopsys\ShopBundle\Model\Payment\Payment */
             $payment->getTransports()->removeElement($transport);
         }
         $this->deleteTransportDomainsByTransport($transport);

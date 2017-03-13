@@ -104,7 +104,7 @@ class PaymentRepository
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
      */
     public function getAllWithTransports()
     {
