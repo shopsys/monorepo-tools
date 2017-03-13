@@ -63,6 +63,10 @@ class TransportRepository
      */
     public function getAllByIds(array $transportIds)
     {
+        if (count($transportIds) === 0) {
+            return [];
+        }
+
         return $this->getQueryBuilderForAll()
             ->andWhere('t.id IN (:transportIds)')->setParameter('transportIds', $transportIds)
             ->getQuery()
