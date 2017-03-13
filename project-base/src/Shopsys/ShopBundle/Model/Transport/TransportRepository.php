@@ -42,11 +42,10 @@ class TransportRepository
      */
     public function getQueryBuilderForAll()
     {
-        $qb = $this->getTransportRepository()->createQueryBuilder('t')
+        return $this->getTransportRepository()->createQueryBuilder('t')
             ->where('t.deleted = :deleted')->setParameter('deleted', false)
             ->orderBy('t.position')
             ->addOrderBy('t.id');
-        return $qb;
     }
 
     /**
@@ -79,11 +78,11 @@ class TransportRepository
      */
     public function getAllByDomainId($domainId)
     {
-        $qb = $this->getQueryBuilderForAll()
+        return $this->getQueryBuilderForAll()
             ->join(TransportDomain::class, 'td', Join::WITH, 't.id = td.transport AND td.domainId = :domainId')
-            ->setParameter('domainId', $domainId);
-
-        return $qb->getQuery()->getResult();
+            ->setParameter('domainId', $domainId)
+            ->getQuery()
+            ->getResult();
     }
 
     /**
@@ -114,8 +113,11 @@ class TransportRepository
     {
         $transport = $this->findById($id);
         if ($transport === null) {
-            throw new \Shopsys\ShopBundle\Model\Transport\Exception\TransportNotFoundException('Transport with ID ' . $id . ' not found.');
+            throw new \Shopsys\ShopBundle\Model\Transport\Exception\TransportNotFoundException(
+                'Transport with ID ' . $id . ' not found.'
+            );
         }
+
         return $transport;
     }
 

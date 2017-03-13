@@ -42,11 +42,10 @@ class PaymentRepository
      */
     public function getQueryBuilderForAll()
     {
-        $qb = $this->getPaymentRepository()->createQueryBuilder('p')
+        return $this->getPaymentRepository()->createQueryBuilder('p')
             ->where('p.deleted = :deleted')->setParameter('deleted', false)
             ->orderBy('p.position')
             ->addOrderBy('p.id');
-        return $qb;
     }
 
     /**
@@ -85,8 +84,11 @@ class PaymentRepository
     {
         $payment = $this->findById($id);
         if ($payment === null) {
-            throw new \Shopsys\ShopBundle\Model\Payment\Exception\PaymentNotFoundException('Payment with ID ' . $id . ' not found.');
+            throw new \Shopsys\ShopBundle\Model\Payment\Exception\PaymentNotFoundException(
+                'Payment with ID ' . $id . ' not found.'
+            );
         }
+
         return $payment;
     }
 
