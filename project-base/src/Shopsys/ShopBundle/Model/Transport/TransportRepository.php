@@ -38,6 +38,18 @@ class TransportRepository
     }
 
     /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getQueryBuilderForAll()
+    {
+        $qb = $this->getTransportRepository()->createQueryBuilder('t')
+            ->where('t.deleted = :deleted')->setParameter('deleted', false)
+            ->orderBy('t.position')
+            ->addOrderBy('t.id');
+        return $qb;
+    }
+
+    /**
      * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
      */
     public function getAll()
@@ -69,18 +81,6 @@ class TransportRepository
             ->setParameter('domainId', $domainId);
 
         return $qb->getQuery()->getResult();
-    }
-
-    /**
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    public function getQueryBuilderForAll()
-    {
-        $qb = $this->getTransportRepository()->createQueryBuilder('t')
-            ->where('t.deleted = :deleted')->setParameter('deleted', false)
-            ->orderBy('t.position')
-            ->addOrderBy('t.id');
-        return $qb;
     }
 
     /**
