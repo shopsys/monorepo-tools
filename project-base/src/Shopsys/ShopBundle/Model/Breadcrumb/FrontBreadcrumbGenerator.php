@@ -11,6 +11,12 @@ use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
  */
 class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
+    /**
+     * @param string $routeName
+     * @param array $routeParameters
+     * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     */
     public function getBreadcrumbItems($routeName, array $routeParameters = [])
     {
         switch ($routeName) {
@@ -76,7 +82,7 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 
     /**
      * @param string $code
-     * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem
+     * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
      */
     private function getBreacrumbItemForErrorPage($code)
     {
