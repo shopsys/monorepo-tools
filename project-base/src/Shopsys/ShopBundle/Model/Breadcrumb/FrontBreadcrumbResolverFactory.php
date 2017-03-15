@@ -21,7 +21,8 @@ class FrontBreadcrumbResolverFactory
         CategoryBreadcrumbGenerator $categoryBreadcrumbGenerator,
         ProductBreadcrumbGenerator $productBreadcrumbGenerator,
         FrontBreadcrumbGenerator $frontBreadcrumbGenerator,
-        BrandBreadcrumbGenerator $brandBreadcrumbGenerator
+        BrandBreadcrumbGenerator $brandBreadcrumbGenerator,
+        ErrorPageBreadcrumbGenerator $errorPageBreadcrumbGenerator
     ) {
         $this->breadcrumbGenerators = [
             $articleBreadcrumbGenerator,
@@ -29,6 +30,7 @@ class FrontBreadcrumbResolverFactory
             $productBreadcrumbGenerator,
             $frontBreadcrumbGenerator,
             $brandBreadcrumbGenerator,
+            $errorPageBreadcrumbGenerator,
         ];
     }
 

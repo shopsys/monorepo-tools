@@ -52,24 +52,7 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
                 return [
                     new BreadcrumbItem(t('Brand overview')),
                 ];
-            case 'front_error_page':
-            case 'front_error_page_format':
-                return $this->getBreadcrumbItemForErrorPage($routeParameters['code']);
         }
-    }
-
-    /**
-     * @param string $code
-     * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
-     */
-    private function getBreadcrumbItemForErrorPage($code)
-    {
-        $isPageNotFound = $code === '404';
-        $breadcrumbName = $isPageNotFound ? t('Page not found') : t('Oops! Error occurred');
-
-        return [
-            new BreadcrumbItem($breadcrumbName),
-        ];
     }
 
     /**
@@ -88,8 +71,6 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
             'front_registration_register',
             'front_brand_list',
             'front_customer_edit',
-            'front_error_page',
-            'front_error_page_format',
         ];
     }
 }
