@@ -2,9 +2,11 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Login;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Administrator\Administrator;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -18,17 +20,17 @@ class LoginFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', FormType::TEXT, [
+            ->add('username', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter login']),
                 ],
             ])
-            ->add('password', FormType::PASSWORD, [
+            ->add('password', PasswordType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter password']),
                 ],
             ])
-            ->add('login', FormType::SUBMIT);
+            ->add('login', SubmitType::class);
     }
 
     /**

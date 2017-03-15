@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Form\Admin\Order;
 use Shopsys\ShopBundle\Component\Constraints\Email;
 use Shopsys\ShopBundle\Form\Admin\Order\OrderItemFormType;
 use Shopsys\ShopBundle\Form\Admin\Order\OrderTransportFormType;
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Country\Country;
 use Shopsys\ShopBundle\Model\Country\CountryFacade;
@@ -16,6 +15,13 @@ use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -78,14 +84,14 @@ class OrderFormType extends AbstractType
         }
 
         $builder
-            ->add('orderNumber', FormType::TEXT, ['read_only' => true])
-            ->add('status', FormType::CHOICE, [
+            ->add('orderNumber', TextType::class, ['read_only' => true])
+            ->add('status', ChoiceType::class, [
                 'choice_list' => new ObjectChoiceList($this->orderStatusFacade->getAll(), 'name', [], null, 'id'),
                 'multiple' => false,
                 'expanded' => false,
                 'required' => true,
             ])
-            ->add('firstName', FormType::TEXT, [
+            ->add('firstName', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter first name']),
                     new Constraints\Length([
@@ -94,7 +100,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('lastName', FormType::TEXT, [
+            ->add('lastName', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter surname']),
                     new Constraints\Length([
@@ -103,7 +109,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('email', FormType::EMAIL, [
+            ->add('email', EmailType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter e-mail']),
                     new Email(['message' => 'Please enter valid e-mail']),
@@ -113,7 +119,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('telephone', FormType::TEXT, [
+            ->add('telephone', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter telephone number']),
                     new Constraints\Length([
@@ -122,7 +128,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('companyName', FormType::TEXT, [
+            ->add('companyName', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -131,7 +137,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('companyNumber', FormType::TEXT, [
+            ->add('companyNumber', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -140,7 +146,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('companyTaxNumber', FormType::TEXT, [
+            ->add('companyTaxNumber', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -149,7 +155,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('street', FormType::TEXT, [
+            ->add('street', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter street']),
                     new Constraints\Length([
@@ -158,7 +164,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('city', FormType::TEXT, [
+            ->add('city', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter city']),
                     new Constraints\Length([
@@ -167,7 +173,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('postcode', FormType::TEXT, [
+            ->add('postcode', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter zip code']),
                     new Constraints\Length([
@@ -176,14 +182,14 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('country', FormType::CHOICE, [
+            ->add('country', ChoiceType::class, [
                 'choice_list' => new ObjectChoiceList($countries, 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose country']),
                 ],
             ])
-            ->add('deliveryAddressSameAsBillingAddress', FormType::CHECKBOX, ['required' => false])
-            ->add('deliveryFirstName', FormType::TEXT, [
+            ->add('deliveryAddressSameAsBillingAddress', CheckboxType::class, ['required' => false])
+            ->add('deliveryFirstName', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -197,7 +203,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('deliveryLastName', FormType::TEXT, [
+            ->add('deliveryLastName', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -211,7 +217,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('deliveryCompanyName', FormType::TEXT, [
+            ->add('deliveryCompanyName', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -221,7 +227,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('deliveryTelephone', FormType::TEXT, [
+            ->add('deliveryTelephone', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -231,7 +237,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('deliveryStreet', FormType::TEXT, [
+            ->add('deliveryStreet', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -245,7 +251,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('deliveryCity', FormType::TEXT, [
+            ->add('deliveryCity', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -258,7 +264,7 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('deliveryPostcode', FormType::TEXT, [
+            ->add('deliveryPostcode', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -272,15 +278,15 @@ class OrderFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('deliveryCountry', FormType::CHOICE, [
+            ->add('deliveryCountry', ChoiceType::class, [
                 'required' => true,
                 'choice_list' => new ObjectChoiceList($countries, 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose country']),
                 ],
             ])
-            ->add('note', FormType::TEXTAREA, ['required' => false])
-            ->add('itemsWithoutTransportAndPayment', FormType::COLLECTION, [
+            ->add('note', TextareaType::class, ['required' => false])
+            ->add('itemsWithoutTransportAndPayment', CollectionType::class, [
                 'type' => new OrderItemFormType(),
                 'error_bubbling' => false,
                 'allow_add' => true,
@@ -288,7 +294,7 @@ class OrderFormType extends AbstractType
             ])
             ->add('orderPayment', new OrderPaymentFormType($payments))
             ->add('orderTransport', new OrderTransportFormType($transports))
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

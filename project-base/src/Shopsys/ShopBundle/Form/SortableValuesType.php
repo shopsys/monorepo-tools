@@ -3,6 +3,8 @@
 namespace Shopsys\ShopBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,7 +17,7 @@ class SortableValuesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'type' => FormType::HIDDEN,
+            'type' => HiddenType::class,
             'allow_add' => true,
             'allow_delete' => true,
             'delete_empty' => true,
@@ -29,15 +31,7 @@ class SortableValuesType extends AbstractType
      */
     public function getParent()
     {
-        return 'collection';
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'sortable_values';
+        return CollectionType::class;
     }
 
     /**

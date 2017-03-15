@@ -2,12 +2,13 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Vat;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Shopsys\ShopBundle\Model\Pricing\Rounding;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -43,18 +44,18 @@ class VatSettingsFormType extends AbstractType
         }
 
         $builder
-            ->add('defaultVat', FormType::CHOICE, [
+            ->add('defaultVat', ChoiceType::class, [
                 'required' => true,
                 'choice_list' => new ObjectChoiceList($this->vatFacade->getAll(), 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter default VAT']),
                 ],
             ])
-            ->add('roundingType', FormType::CHOICE, [
+            ->add('roundingType', ChoiceType::class, [
                 'required' => true,
                 'choices' => $roundingTypeChoices,
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

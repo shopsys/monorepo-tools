@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\ShopBundle\Component\Constraints\UniqueProductParameters;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
@@ -10,14 +11,26 @@ use Shopsys\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
 use Shopsys\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\FileUploadType;
+use Shopsys\ShopBundle\Form\MultidomainType;
+use Shopsys\ShopBundle\Form\ProductsType;
+use Shopsys\ShopBundle\Form\UrlListType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditData;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -107,7 +120,7 @@ class ProductEditFormType extends AbstractType
 
         $builder
             ->add('productData', ProductFormType::class, ['product' => $editedProduct])
-            ->add('imagesToUpload', FormType::FILE_UPLOAD, [
+            ->add('imagesToUpload', FileUploadType::class, [
                 'required' => false,
                 'multiple' => true,
                 'file_constraints' => [
@@ -121,18 +134,18 @@ class ProductEditFormType extends AbstractType
                 ],
             ])
             ->add(
-                $builder->create('imagePositions', FormType::COLLECTION, [
+                $builder->create('imagePositions', CollectionType::class, [
                     'required' => false,
-                    'type' => FormType::HIDDEN,
+                    'type' => HiddenType::class,
                 ])->addModelTransformer($this->imagesIdsToImagesTransformer)
             )
-            ->add('imagesToDelete', FormType::CHOICE, [
+            ->add('imagesToDelete', ChoiceType::class, [
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
                 'choice_list' => new ObjectChoiceList($existingImages, 'filename', [], null, 'id'),
             ])
-            ->add($builder->create('parameters', FormType::COLLECTION, [
+            ->add($builder->create('parameters', CollectionType::class, [
                     'required' => false,
                     'allow_add' => true,
                     'allow_delete' => true,
@@ -145,42 +158,42 @@ class ProductEditFormType extends AbstractType
                     'error_bubbling' => false,
                 ])
                 ->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer()))
-            ->add('manualInputPrices', FormType::FORM, [
+            ->add('manualInputPrices', FormType::class, [
                 'compound' => true,
             ])
-            ->add('seoTitles', FormType::MULTIDOMAIN, [
-                'type' => FormType::TEXT,
+            ->add('seoTitles', MultidomainType::class, [
+                'type' => TextType::class,
                 'required' => false,
                 'optionsByDomainId' => $seoTitlesOptionsByDomainId,
             ])
-            ->add('seoMetaDescriptions', FormType::MULTIDOMAIN, [
-                'type' => FormType::TEXTAREA,
+            ->add('seoMetaDescriptions', MultidomainType::class, [
+                'type' => TextareaType::class,
                 'required' => false,
                 'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
             ])
-            ->add('descriptions', FormType::MULTIDOMAIN, [
-                'type' => FormType::WYSIWYG,
+            ->add('descriptions', MultidomainType::class, [
+                'type' => CKEditorType::class,
                 'required' => false,
             ])
-            ->add('shortDescriptions', FormType::MULTIDOMAIN, [
-                'type' => FormType::TEXTAREA,
+            ->add('shortDescriptions', MultidomainType::class, [
+                'type' => TextareaType::class,
                 'required' => false,
             ])
-            ->add('urls', FormType::URL_LIST, [
+            ->add('urls', UrlListType::class, [
                 'route_name' => 'front_product_detail',
                 'entity_id' => $editedProduct !== null ? $editedProduct->getId() : null,
             ])
             ->add(
                 $builder
-                    ->create('accessories', FormType::PRODUCTS, [
+                    ->create('accessories', ProductsType::class, [
                         'required' => false,
                         'main_product' => $editedProduct,
                         'sortable' => true,
                     ])
                     ->addViewTransformer($this->removeDuplicatesTransformer)
             )
-            ->add('heurekaCpcValues', FormType::MULTIDOMAIN, [
-                'type' => FormType::MONEY,
+            ->add('heurekaCpcValues', MultidomainType::class, [
+                'type' => MoneyType::class,
                 'required' => false,
                 'options' => [
                     'currency' => 'CZK',
@@ -193,26 +206,12 @@ class ProductEditFormType extends AbstractType
                     ],
                 ],
             ])
-            ->add('showInZboziFeed', FormType::MULTIDOMAIN, [
-                'type' => FormType::YES_NO,
+            ->add('showInZboziFeed', MultidomainType::class, [
+                'type' => YesNoType::class,
                 'required' => false,
             ])
-            ->add('zboziCpcValues', FormType::MULTIDOMAIN, [
-                'type' => FormType::MONEY,
-                'required' => false,
-                'options' => [
-                    'currency' => 'CZK',
-                    'precision' => 2,
-                    'constraints' => [
-                        new Constraints\Range([
-                            'min' => 1,
-                            'max' => 500,
-                        ]),
-                    ],
-                ],
-            ])
-            ->add('zboziCpcSearchValues', FormType::MULTIDOMAIN, [
-                'type' => FormType::MONEY,
+            ->add('zboziCpcValues', MultidomainType::class, [
+                'type' => MoneyType::class,
                 'required' => false,
                 'options' => [
                     'currency' => 'CZK',
@@ -225,11 +224,25 @@ class ProductEditFormType extends AbstractType
                     ],
                 ],
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('zboziCpcSearchValues', MultidomainType::class, [
+                'type' => MoneyType::class,
+                'required' => false,
+                'options' => [
+                    'currency' => 'CZK',
+                    'precision' => 2,
+                    'constraints' => [
+                        new Constraints\Range([
+                            'min' => 1,
+                            'max' => 500,
+                        ]),
+                    ],
+                ],
+            ])
+            ->add('save', SubmitType::class);
 
         foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
             $builder->get('manualInputPrices')
-                ->add($pricingGroup->getId(), FormType::MONEY, [
+                ->add($pricingGroup->getId(), MoneyType::class, [
                     'currency' => false,
                     'precision' => 6,
                     'required' => true,
@@ -249,7 +262,7 @@ class ProductEditFormType extends AbstractType
         }
 
         if ($editedProduct !== null && $editedProduct->isMainVariant()) {
-            $builder->add('variants', FormType::PRODUCTS, [
+            $builder->add('variants', ProductsType::class, [
                 'required' => false,
                 'main_product' => $editedProduct,
                 'allow_main_variants' => false,

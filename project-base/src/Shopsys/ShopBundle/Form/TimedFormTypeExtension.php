@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Form;
 use Shopsys\ShopBundle\Component\Form\FormTimeProvider;
 use Shopsys\ShopBundle\Component\Form\TimedSpamValidationListener;
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -72,6 +73,6 @@ class TimedFormTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'form';
+        return FormType::class;
     }
 }

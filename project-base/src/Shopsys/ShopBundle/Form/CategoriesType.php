@@ -6,6 +6,7 @@ use Shopsys\ShopBundle\Form\Extension\IndexedObjectChoiceList;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 use Shopsys\ShopBundle\Model\Category\Detail\CategoryDetailFactory;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -67,14 +68,6 @@ class CategoriesType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'categories';
+        return ChoiceType::class;
     }
 }

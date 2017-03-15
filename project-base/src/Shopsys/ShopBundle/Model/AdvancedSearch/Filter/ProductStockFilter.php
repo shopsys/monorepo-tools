@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearch\Filter;
 
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ProductStockFilter implements AdvancedSearchFilterInterface
 {
@@ -31,7 +32,7 @@ class ProductStockFilter implements AdvancedSearchFilterInterface
      */
     public function getValueFormType()
     {
-        return 'hidden';
+        return HiddenType::class;
     }
 
     /**

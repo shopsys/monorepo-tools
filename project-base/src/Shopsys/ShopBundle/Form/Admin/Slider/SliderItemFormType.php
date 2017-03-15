@@ -2,9 +2,14 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Slider;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\DomainType;
+use Shopsys\ShopBundle\Form\FileUploadType;
+use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Slider\SliderItemData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -26,13 +31,13 @@ class SliderItemFormType extends AbstractType
         }
 
         $builder
-            ->add('name', FormType::TEXT, [
+            ->add('name', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name']),
                 ],
             ])
-            ->add('image', FormType::FILE_UPLOAD, [
+            ->add('image', FileUploadType::class, [
                 'required' => $options['scenario'] === self::SCENARIO_CREATE,
                 'constraints' => $imageConstraints,
                 'file_constraints' => [
@@ -45,14 +50,14 @@ class SliderItemFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('link', FormType::URL, [
+            ->add('link', UrlType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter link']),
                     new Constraints\Url(['message' => 'Link must be valid URL address']),
                 ],
             ])
-            ->add('hidden', FormType::YES_NO, [
+            ->add('hidden', YesNoType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\NotNull([
@@ -60,10 +65,10 @@ class SliderItemFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
 
         if ($options['scenario'] === self::SCENARIO_CREATE) {
-            $builder->add('domainId', FormType::DOMAIN, ['required' => true]);
+            $builder->add('domainId', DomainType::class, ['required' => true]);
         }
     }
 

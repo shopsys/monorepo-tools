@@ -11,6 +11,9 @@ use Shopsys\ShopBundle\Form\UrlListData;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -61,10 +64,10 @@ class UrlListType extends AbstractType
             throw new \Shopsys\ShopBundle\Form\Exception\MissingRouteNameException();
         }
 
-        $builder->add('toDelete', FormType::FORM);
-        $builder->add('mainOnDomains', FormType::FORM);
-        $builder->add('newUrls', FormType::COLLECTION, [
-            'type' => FormType::FRIENDLY_URL,
+        $builder->add('toDelete', FormType::class);
+        $builder->add('mainOnDomains', FormType::class);
+        $builder->add('newUrls', CollectionType::class, [
+            'type' => FriendlyUrlType::class,
             'required' => false,
             'allow_add' => true,
             'error_bubbling' => false,
@@ -76,13 +79,13 @@ class UrlListType extends AbstractType
         $friendlyUrlsByDomain = $this->getFriendlyUrlsIndexedByDomain($options['route_name'], $options['entity_id']);
 
         foreach ($friendlyUrlsByDomain as $domainId => $friendlyUrls) {
-            $builder->get('toDelete')->add($domainId, FormType::CHOICE, [
+            $builder->get('toDelete')->add($domainId, ChoiceType::class, [
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
                 'choice_list' => new ObjectChoiceList($friendlyUrls, 'slug', [], null, 'slug'),
             ]);
-            $builder->get('mainOnDomains')->add($domainId, FormType::CHOICE, [
+            $builder->get('mainOnDomains')->add($domainId, ChoiceType::class, [
                 'required' => true,
                 'multiple' => false,
                 'expanded' => true,
@@ -126,22 +129,6 @@ class UrlListType extends AbstractType
             'route_name' => null,
             'entity_id' => null,
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getParent()
-    {
-        return 'form';
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'url_list';
     }
 
     /**

@@ -2,9 +2,11 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Order;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -18,40 +20,40 @@ class OrderItemFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', FormType::TEXT, [
+            ->add('name', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name']),
                 ],
                 'error_bubbling' => true,
             ])
-            ->add('catnum', FormType::TEXT, [
+            ->add('catnum', TextType::class, [
                 'constraints' => [
                     new Constraints\Length(['max' => '255']),
                 ],
                 'error_bubbling' => true,
             ])
-            ->add('priceWithVat', FormType::MONEY, [
+            ->add('priceWithVat', MoneyType::class, [
                 'currency' => false,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter unit price with VAT']),
                 ],
                 'error_bubbling' => true,
             ])
-            ->add('vatPercent', FormType::MONEY, [
+            ->add('vatPercent', MoneyType::class, [
                 'currency' => false,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],
                 'error_bubbling' => true,
             ])
-            ->add('quantity', FormType::INTEGER, [
+            ->add('quantity', IntegerType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter quantity']),
                     new Constraints\GreaterThan(['value' => 0, 'message' => 'Quantity must be greater than {{ compared_value }}']),
                 ],
                 'error_bubbling' => true,
             ])
-            ->add('unitName', FormType::TEXT, [
+            ->add('unitName', TextType::class, [
                 'constraints' => [
                     new Constraints\Length(['max' => 10]),
                 ],

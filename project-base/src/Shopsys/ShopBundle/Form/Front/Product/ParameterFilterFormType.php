@@ -3,10 +3,10 @@
 namespace Shopsys\ShopBundle\Form\Front\Product;
 
 use Shopsys\ShopBundle\Form\Extension\IndexedObjectChoiceList;
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -36,7 +36,7 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
     {
         foreach ($this->parameterChoicesIndexedByParameterId as $parameterId => $parameterFilterChoice) {
             $builder
-                ->add($parameterId, FormType::CHOICE, [
+                ->add($parameterId, ChoiceType::class, [
                     'label' => $parameterFilterChoice->getParameter()->getName(),
                     'expanded' => true,
                     'multiple' => true,

@@ -5,10 +5,15 @@ namespace Shopsys\ShopBundle\Form\Admin\Customer;
 use Shopsys\ShopBundle\Component\Constraints\Email;
 use Shopsys\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
 use Shopsys\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\DomainType;
 use Shopsys\ShopBundle\Model\Customer\UserData;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -33,7 +38,7 @@ class UserFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', FormType::TEXT, [
+            ->add('firstName', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter first name']),
                     new Constraints\Length([
@@ -42,7 +47,7 @@ class UserFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('lastName', FormType::TEXT, [
+            ->add('lastName', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter surname']),
                     new Constraints\Length([
@@ -51,7 +56,7 @@ class UserFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('email', FormType::EMAIL, [
+            ->add('email', EmailType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter e-mail']),
                     new Constraints\Length([
@@ -61,8 +66,8 @@ class UserFormType extends AbstractType
                     new Email(['message' => 'Please enter valid e-mail']),
                 ],
             ])
-            ->add('password', FormType::REPEATED, [
-                'type' => FormType::PASSWORD,
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'required' => $options['scenario'] === CustomerFormType::SCENARIO_CREATE,
                 'options' => [
                     'attr' => ['autocomplete' => 'off'],
@@ -84,7 +89,7 @@ class UserFormType extends AbstractType
 
         if ($options['scenario'] === CustomerFormType::SCENARIO_CREATE) {
             $builder
-                ->add('domainId', FormType::DOMAIN, [
+                ->add('domainId', DomainType::class, [
                     'required' => true,
                     'data' => $options['domain_id'],
                 ]);
@@ -96,7 +101,7 @@ class UserFormType extends AbstractType
         }
 
         $builder
-            ->add('pricingGroup', FormType::CHOICE, [
+            ->add('pricingGroup', ChoiceType::class, [
                 'required' => true,
                 'choices' => $pricingGroups,
                 'choices_as_values' => true,

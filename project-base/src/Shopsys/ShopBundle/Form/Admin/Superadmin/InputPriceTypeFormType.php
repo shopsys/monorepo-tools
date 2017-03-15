@@ -2,9 +2,10 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Superadmin;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -25,13 +26,13 @@ class InputPriceTypeFormType extends AbstractType
         }
 
         $builder
-            ->add('type', FormType::CHOICE, [
+            ->add('type', ChoiceType::class, [
                 'choices' => $choices,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter input prices']),
                 ],
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

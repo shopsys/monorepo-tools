@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\DomainType;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class OrderDomainFilter implements AdvancedSearchFilterInterface
@@ -32,7 +32,7 @@ class OrderDomainFilter implements AdvancedSearchFilterInterface
      */
     public function getValueFormType()
     {
-        return FormType::DOMAIN;
+        return DomainType::class;
     }
 
     /**

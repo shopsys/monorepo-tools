@@ -2,9 +2,11 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product\Flag;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ColorPickerType;
+use Shopsys\ShopBundle\Form\Locale\LocalizedType;
 use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -18,7 +20,7 @@ class FlagFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', FormType::LOCALIZED, [
+            ->add('name', LocalizedType::class, [
                 'required' => true,
                 'options' => [
                     'constraints' => [
@@ -27,7 +29,7 @@ class FlagFormType extends AbstractType
                     ],
                 ],
             ])
-            ->add('rgbColor', FormType::COLOR_PICKER, [
+            ->add('rgbColor', ColorPickerType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter flag color']),
                     new Constraints\Length([
@@ -36,7 +38,7 @@ class FlagFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('visible', FormType::CHECKBOX, ['required' => false]);
+            ->add('visible', CheckboxType::class, ['required' => false]);
     }
 
     /**

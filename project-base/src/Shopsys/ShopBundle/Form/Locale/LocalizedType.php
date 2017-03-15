@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Form\Locale;
 use Shopsys\ShopBundle\Component\Utils;
 use Shopsys\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -61,15 +62,7 @@ class LocalizedType extends AbstractType
             'compound' => true,
             'options' => [],
             'main_constraints' => [],
-            'type' => 'text',
+            'type' => TextType::class,
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'localized';
     }
 }

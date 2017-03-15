@@ -3,8 +3,10 @@
 namespace Shopsys\ShopBundle\Form\Admin\Product;
 
 use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ProductsType;
+use Shopsys\ShopBundle\Form\ProductType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -21,7 +23,7 @@ class VariantFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(self::MAIN_VARIANT, FormType::PRODUCT, [
+            ->add(self::MAIN_VARIANT, ProductType::class, [
                 'allow_main_variants' => false,
                 'allow_variants' => false,
                 'constraints' => [
@@ -30,7 +32,7 @@ class VariantFormType extends AbstractType
             ])
             ->add(
                 $builder
-                    ->create(self::VARIANTS, FormType::PRODUCTS, [
+                    ->create(self::VARIANTS, ProductsType::class, [
                         'allow_main_variants' => false,
                         'allow_variants' => false,
                         'constraints' => [
@@ -39,7 +41,7 @@ class VariantFormType extends AbstractType
                     ])
                     ->addModelTransformer(new RemoveDuplicatesFromArrayTransformer())
             )
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

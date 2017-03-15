@@ -3,9 +3,9 @@
 namespace Shopsys\ShopBundle\Form\Admin\Localization;
 
 use Shopsys\ShopBundle\Component\Translation\Translator;
-use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -56,7 +56,7 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
         foreach ($this->locales as $locale) {
             $builder->add(
                 $builder
-                    ->create($locale, FormType::TEXTAREA, [
+                    ->create($locale, TextareaType::class, [
                         'required' => true,
                         'constraints' => new Constraints\NotBlank(['message' => 'Please enter translation']),
                     ])

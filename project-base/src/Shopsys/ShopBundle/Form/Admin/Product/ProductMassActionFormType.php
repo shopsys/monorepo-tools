@@ -2,9 +2,10 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Product\MassAction\ProductMassActionData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,33 +18,33 @@ class ProductMassActionFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('selectType', FormType::CHOICE, [
+            ->add('selectType', ChoiceType::class, [
                 'required' => true,
                 'choices' => [
                     ProductMassActionData::SELECT_TYPE_CHECKED => t('Only checked products'),
                     ProductMassActionData::SELECT_TYPE_ALL_RESULTS => t('All search results'),
                 ],
             ])
-            ->add('action', FormType::CHOICE, [
+            ->add('action', ChoiceType::class, [
                 'required' => true,
                 'choices' => [
                     ProductMassActionData::ACTION_SET => t('Set'),
                 ],
             ])
-            ->add('subject', FormType::CHOICE, [
+            ->add('subject', ChoiceType::class, [
                 'required' => true,
                 'choices' => [
                     ProductMassActionData::SUBJECT_PRODUCT_HIDDEN => t('Hiding product'),
                 ],
             ])
-            ->add('value', FormType::CHOICE, [
+            ->add('value', ChoiceType::class, [
                 'required' => true,
                 'choices' => [
                     ProductMassActionData::VALUE_PRODUCT_HIDE => t('Hide'),
                     ProductMassActionData::VALUE_PRODUCT_SHOW => t('Display'),
                 ],
             ])
-            ->add('submit', FormType::SUBMIT);
+            ->add('submit', SubmitType::class);
     }
 
     /**

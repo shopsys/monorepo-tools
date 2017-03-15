@@ -3,9 +3,11 @@
 namespace Shopsys\ShopBundle\Form\Admin\TransportAndPayment;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -36,7 +38,7 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
     {
         $builder
             ->add($this->getPriceLimitsBuilder($builder))
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**
@@ -60,10 +62,10 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
                         return $validationGroups;
                     },
                 ])
-                ->add(self::FIELD_ENABLED, FormType::CHECKBOX, [
+                ->add(self::FIELD_ENABLED, CheckboxType::class, [
                     'required' => false,
                 ])
-                ->add(self::FIELD_PRICE_LIMIT, FormType::MONEY, [
+                ->add(self::FIELD_PRICE_LIMIT, MoneyType::class, [
                     'required' => true,
                     'currency' => false,
                     'constraints' => [

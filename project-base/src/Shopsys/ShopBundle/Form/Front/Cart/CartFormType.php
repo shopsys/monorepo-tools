@@ -3,8 +3,10 @@
 namespace Shopsys\ShopBundle\Form\Front\Cart;
 
 use Shopsys\ShopBundle\Component\Constraints\ConstraintValue;
-use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -18,10 +20,10 @@ class CartFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantities', FormType::COLLECTION, [
+            ->add('quantities', CollectionType::class, [
                 'allow_add' => true,
                 'allow_delete' => true,
-                'type' => FormType::TEXT,
+                'type' => TextType::class,
                 'constraints' => [
                     new Constraints\All([
                         'constraints' => [
@@ -35,7 +37,7 @@ class CartFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('submit', FormType::SUBMIT);
+            ->add('submit', SubmitType::class);
     }
 
     /**

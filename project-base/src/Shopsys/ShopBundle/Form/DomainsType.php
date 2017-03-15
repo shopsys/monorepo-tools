@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Form;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\Extension\IndexedChoiceList;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DomainsType extends AbstractType
@@ -48,14 +49,6 @@ class DomainsType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'domains';
+        return ChoiceType::class;
     }
 }

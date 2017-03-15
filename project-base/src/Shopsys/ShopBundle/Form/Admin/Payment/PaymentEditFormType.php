@@ -2,10 +2,11 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Payment;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Payment\PaymentEditData;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -31,7 +32,7 @@ class PaymentEditFormType extends AbstractType
         $builder
             ->add('paymentData', PaymentFormType::class)
             ->add($this->getPricesBuilder($builder))
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**
@@ -45,7 +46,7 @@ class PaymentEditFormType extends AbstractType
         ]);
         foreach ($this->currencyFacade->getAll() as $currency) {
             $pricesBuilder
-                ->add($currency->getId(), FormType::MONEY, [
+                ->add($currency->getId(), MoneyType::class, [
                     'currency' => false,
                     'precision' => 6,
                     'required' => true,

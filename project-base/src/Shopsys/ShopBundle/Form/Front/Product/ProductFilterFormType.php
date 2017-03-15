@@ -3,11 +3,14 @@
 namespace Shopsys\ShopBundle\Form\Front\Product;
 
 use Shopsys\ShopBundle\Form\Extension\IndexedObjectChoiceList;
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Product\Filter\PriceRange;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -62,7 +65,7 @@ class ProductFilterFormType extends AbstractType
         $priceTransformer = new MoneyToLocalizedStringTransformer($priceScale, false);
 
         $builder
-            ->add('minimalPrice', FormType::MONEY, [
+            ->add('minimalPrice', MoneyType::class, [
                 'currency' => false,
                 'scale' => $priceScale,
                 'required' => false,
@@ -75,7 +78,7 @@ class ProductFilterFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('maximalPrice', FormType::MONEY, [
+            ->add('maximalPrice', MoneyType::class, [
                 'currency' => false,
                 'scale' => $priceScale,
                 'required' => false,
@@ -91,20 +94,20 @@ class ProductFilterFormType extends AbstractType
             ->add('parameters', new ParameterFilterFormType($this->parameterFilterChoices), [
                 'required' => false,
             ])
-            ->add('inStock', FormType::CHECKBOX, ['required' => false])
-            ->add('flags', FormType::CHOICE, [
+            ->add('inStock', CheckboxType::class, ['required' => false])
+            ->add('flags', ChoiceType::class, [
                 'required' => false,
                 'expanded' => true,
                 'multiple' => true,
                 'choice_list' => new IndexedObjectChoiceList($this->flagFilterChoices, 'id', 'name', [], null, 'id'),
             ])
-            ->add('brands', FormType::CHOICE, [
+            ->add('brands', ChoiceType::class, [
                 'required' => false,
                 'expanded' => true,
                 'multiple' => true,
                 'choice_list' => new IndexedObjectChoiceList($this->brandFilterChoices, 'id', 'name', [], null, 'id'),
             ])
-            ->add('search', FormType::SUBMIT);
+            ->add('search', SubmitType::class);
     }
 
     /**

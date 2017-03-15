@@ -2,12 +2,13 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Order;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\SingleCheckboxChoiceType;
 use Shopsys\ShopBundle\Model\Order\OrderData;
 use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -42,21 +43,21 @@ class TransportAndPaymentFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('transport', FormType::SINGLE_CHECKBOX_CHOICE, [
+            ->add('transport', SingleCheckboxChoiceType::class, [
                 'choice_list' => new ObjectChoiceList($this->transports, 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotNull(['message' => 'Please choose shipping type']),
                 ],
                 'invalid_message' => 'Please choose shipping type',
             ])
-            ->add('payment', FormType::SINGLE_CHECKBOX_CHOICE, [
+            ->add('payment', SingleCheckboxChoiceType::class, [
                 'choice_list' => new ObjectChoiceList($this->payments, 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotNull(['message' => 'Please choose payment type']),
                 ],
                 'invalid_message' => 'Please choose payment type',
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

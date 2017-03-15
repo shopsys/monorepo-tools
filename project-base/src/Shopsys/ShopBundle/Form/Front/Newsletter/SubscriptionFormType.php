@@ -3,9 +3,11 @@
 namespace Shopsys\ShopBundle\Form\Front\Newsletter;
 
 use Shopsys\ShopBundle\Component\Constraints\Email;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\HoneyPotType;
 use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -19,15 +21,15 @@ class SubscriptionFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', FormType::EMAIL, [
+            ->add('email', EmailType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(),
                     new Email(),
                 ],
             ])
-            ->add('email2', FormType::HONEY_POT)
-            ->add('send', FormType::SUBMIT);
+            ->add('email2', HoneyPotType::class)
+            ->add('send', SubmitType::class);
     }
 
     /**

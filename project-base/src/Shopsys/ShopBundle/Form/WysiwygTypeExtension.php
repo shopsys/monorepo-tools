@@ -2,11 +2,12 @@
 
 namespace Shopsys\ShopBundle\Form;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\ShopBundle\Component\Css\CssFacade;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class WysiwygType extends AbstractTypeExtension
+class WysiwygTypeExtension extends AbstractTypeExtension
 {
     /**
      * @var \Shopsys\ShopBundle\Component\Css\CssFacade
@@ -39,6 +40,6 @@ class WysiwygType extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'ckeditor';
+        return CKEditorType::class;
     }
 }

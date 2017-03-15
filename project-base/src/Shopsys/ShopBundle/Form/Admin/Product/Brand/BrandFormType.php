@@ -2,10 +2,15 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product\Brand;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Shopsys\ShopBundle\Form\FileUploadType;
+use Shopsys\ShopBundle\Form\Locale\LocalizedType;
+use Shopsys\ShopBundle\Form\UrlListType;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -19,22 +24,22 @@ class BrandFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', FormType::TEXT, [
+            ->add('name', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name']),
                     new Constraints\Length(['max' => 255, 'maxMessage' => 'Name cannot be longer than {{ limit }} characters']),
                 ],
             ])
-            ->add('descriptions', FormType::LOCALIZED, [
-                'type' => FormType::WYSIWYG,
+            ->add('descriptions', LocalizedType::class, [
+                'type' => CKEditorType::class,
                 'required' => false,
             ])
-            ->add('urls', FormType::URL_LIST, [
+            ->add('urls', UrlListType::class, [
                 'route_name' => 'front_brand_detail',
                 'entity_id' => $options['brand'] !== null ? $options['brand']->getId() : null,
             ])
-            ->add('image', FormType::FILE_UPLOAD, [
+            ->add('image', FileUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
                     new Constraints\Image([
@@ -46,7 +51,7 @@ class BrandFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

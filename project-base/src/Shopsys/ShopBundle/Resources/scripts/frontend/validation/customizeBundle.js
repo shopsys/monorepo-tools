@@ -31,7 +31,7 @@
 
     Shopsys.validation.ckeditorValidationInit = function (element) {
         $.each(element.children, function(index, childElement) {
-            if (childElement.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FormType::WYSIWYG')) {
+            if (childElement.type === Shopsys.constant('\\Ivory\\CKEditorBundle\\Form\\Type\\CKEditorType::class')) {
                 CKEDITOR.instances[childElement.id].on('change', function() {
                     $(childElement.domNode).jsFormValidator('validate');
                 });
@@ -170,8 +170,8 @@
         if (i && undefined === value) {
             value = this.getMappedValue(element);
         } else if (
-            element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FormType::COLLECTION')
-            || (Object.keys(element.children).length > 0 && element.type !== Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FormType::FILE_UPLOAD'))
+            element.type === Shopsys.constant('\\Symfony\\Component\\Form\\Extension\\Core\\Type\\CollectionType::class')
+            || (Object.keys(element.children).length > 0 && element.type !== Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FileUploadType::class'))
         ) {
             value = {};
             for (var childName in element.children) {
@@ -190,13 +190,13 @@
 
     FpJsFormValidator._getInputValue = FpJsFormValidator.getInputValue;
     FpJsFormValidator.getInputValue = function (element) {
-        if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FormType::WYSIWYG')) {
+        if (element.type === Shopsys.constant('\\Ivory\\CKEditorBundle\\Form\\Type\\CKEditorType::class')) {
             return CKEDITOR.instances[element.id].getData();
         }
-        if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FormType::FILE_UPLOAD')) {
+        if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FileUploadType::class')) {
             return $(element.domNode).find('.js-file-upload-uploaded-file').toArray();
         }
-        if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FormType::PRODUCTS')) {
+        if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\ProductsType::class')) {
             var value = [];
             $(element.domNode).find('.js-products-picker-item-input').each(function () {
                 value.push($(this).val());
@@ -340,7 +340,7 @@
     };
 
     Shopsys.validation.isExpandedChoiceFormType = function(element, value) {
-        return element.type === Shopsys.constant('Shopsys\\ShopBundle\\Form\\FormType::CHOICE') && !$.isArray(value);
+        return element.type === Shopsys.constant('\\Symfony\\Component\\Form\\Extension\\Core\\Type\\ChoiceType::class') && !$.isArray(value);
     };
 
     Shopsys.validation.isExpandedChoiceEmpty = function(value) {

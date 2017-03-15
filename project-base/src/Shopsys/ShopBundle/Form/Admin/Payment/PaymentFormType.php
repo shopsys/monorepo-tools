@@ -2,12 +2,18 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Payment;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Shopsys\ShopBundle\Form\DomainsType;
+use Shopsys\ShopBundle\Form\FileUploadType;
+use Shopsys\ShopBundle\Form\Locale\LocalizedType;
+use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Payment\PaymentData;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -38,7 +44,7 @@ class PaymentFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', FormType::LOCALIZED, [
+            ->add('name', LocalizedType::class, [
                 'main_constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name']),
                 ],
@@ -48,33 +54,33 @@ class PaymentFormType extends AbstractType
                     ],
                 ],
             ])
-            ->add('domains', FormType::DOMAINS, [
+            ->add('domains', DomainsType::class, [
                 'required' => false,
             ])
-            ->add('hidden', FormType::YES_NO, ['required' => false])
-            ->add('czkRounding', FormType::YES_NO, ['required' => false])
-            ->add('transports', FormType::CHOICE, [
+            ->add('hidden', YesNoType::class, ['required' => false])
+            ->add('czkRounding', YesNoType::class, ['required' => false])
+            ->add('transports', ChoiceType::class, [
                 'choice_list' => new ObjectChoiceList($this->transportFacade->getAll(), 'name', [], null, 'id'),
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false,
             ])
-            ->add('vat', FormType::CHOICE, [
+            ->add('vat', ChoiceType::class, [
                 'required' => true,
                 'choice_list' => new ObjectChoiceList($this->vatFacade->getAll(), 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],
             ])
-            ->add('description', FormType::LOCALIZED, [
+            ->add('description', LocalizedType::class, [
                 'required' => false,
-                'type' => 'textarea',
+                'type' => TextareaType::class,
             ])
-            ->add('instructions', FormType::LOCALIZED, [
+            ->add('instructions', LocalizedType::class, [
                 'required' => false,
-                'type' => 'ckeditor',
+                'type' => CKEditorType::class,
             ])
-            ->add('image', FormType::FILE_UPLOAD, [
+            ->add('image', FileUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
                     new Constraints\Image([

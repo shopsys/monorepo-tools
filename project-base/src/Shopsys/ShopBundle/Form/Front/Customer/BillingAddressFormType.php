@@ -2,12 +2,14 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Customer;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,7 +39,7 @@ class BillingAddressFormType extends AbstractType
         $countries = $this->countryFacade->getAllByDomainId($options['domain_id']);
 
         $builder
-            ->add('telephone', FormType::TEXT, [
+            ->add('telephone', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -46,8 +48,8 @@ class BillingAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('companyCustomer', FormType::CHECKBOX, ['required' => false])
-            ->add('companyName', FormType::TEXT, [
+            ->add('companyCustomer', CheckboxType::class, ['required' => false])
+            ->add('companyName', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -61,7 +63,7 @@ class BillingAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('companyNumber', FormType::TEXT, [
+            ->add('companyNumber', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -75,7 +77,7 @@ class BillingAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('companyTaxNumber', FormType::TEXT, [
+            ->add('companyTaxNumber', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -85,7 +87,7 @@ class BillingAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('street', FormType::TEXT, [
+            ->add('street', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -94,7 +96,7 @@ class BillingAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('city', FormType::TEXT, [
+            ->add('city', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -103,7 +105,7 @@ class BillingAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('postcode', FormType::TEXT, [
+            ->add('postcode', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -112,7 +114,7 @@ class BillingAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('country', FormType::CHOICE, [
+            ->add('country', ChoiceType::class, [
                 'required' => false,
                 'choice_list' => new ObjectChoiceList($countries, 'name', [], null, 'id'),
             ]);

@@ -3,8 +3,11 @@
 namespace Shopsys\GeneratorBundle\Model;
 
 use Shopsys\GeneratorBundle\Model\GeneratorCollectionFactory;
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -45,7 +48,7 @@ class GeneratorsFormFactory
     {
         $formBuilder = $this->formFactory->createNamedBuilder(
             'generators',
-            FormType::FORM,
+            FormType::class,
             null,
             [
                 'attr' => ['novalidate' => 'novalidate'],
@@ -55,7 +58,7 @@ class GeneratorsFormFactory
         foreach ($this->generatorCollection->getGenerators() as $generator) {
             $generatorFormBuilder = $this->formFactory->createNamedBuilder(
                 $generator->getName(),
-                FormType::FORM,
+                FormType::class,
                 null,
                 [
                     'validation_groups' => function (FormInterface $form) use ($generator) {
@@ -70,15 +73,15 @@ class GeneratorsFormFactory
             );
             $generator->buildForm($generatorFormBuilder);
             $formBuilder
-                ->add($generator->getName() . self::GENERATOR_FORM_ENABLE_POSTFIX, FormType::CHECKBOX)
+                ->add($generator->getName() . self::GENERATOR_FORM_ENABLE_POSTFIX, CheckboxType::class)
                 ->add($generatorFormBuilder);
         }
 
-        $formBuilder->add('bundle', FormType::CHOICE, [
+        $formBuilder->add('bundle', ChoiceType::class, [
             'choices' => $this->getBundleChoices(),
             'data' => 'ShopsysShopBundle',
         ]);
-        $formBuilder->add('submit', FormType::SUBMIT);
+        $formBuilder->add('submit', SubmitType::class);
 
         $form = $formBuilder->getForm();
 

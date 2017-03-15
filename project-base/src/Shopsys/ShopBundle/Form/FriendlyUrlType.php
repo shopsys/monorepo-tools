@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
@@ -19,32 +20,16 @@ class FriendlyUrlType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(self::FIELD_DOMAIN, FormType::DOMAIN, [
+        $builder->add(self::FIELD_DOMAIN, DomainType::class, [
             'displayUrl' => true,
             'required' => true,
         ]);
-        $builder->add(self::FIELD_SLUG, FormType::TEXT, [
+        $builder->add(self::FIELD_SLUG, TextType::class, [
             'required' => true,
             'constraints' => [
                 new Constraints\NotBlank(),
                 new Constraints\Regex(self::SLUG_REGEX),
             ],
         ]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getParent()
-    {
-        return FormType::FORM;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return FormType::FRIENDLY_URL;
     }
 }

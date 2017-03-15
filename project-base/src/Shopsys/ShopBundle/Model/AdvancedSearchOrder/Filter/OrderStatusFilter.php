@@ -3,9 +3,9 @@
 namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class OrderStatusFilter implements AdvancedSearchFilterInterface
 {
@@ -40,7 +40,7 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
      */
     public function getValueFormType()
     {
-        return FormType::CHOICE;
+        return ChoiceType::class;
     }
 
     /**

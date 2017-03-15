@@ -9,9 +9,9 @@
 
             var isValueNull;
 
-            if (element.type === Shopsys.constant('Shopsys\\ShopBundle\\Form\\FormType::CHECKBOX')) {
+            if (element.type === Shopsys.constant('\\Symfony\\Component\\Form\\Extension\\Core\\Type\\CheckboxType::class')) {
                 isValueNull = value === null;
-            } else if (element.type === Shopsys.constant('Shopsys\\ShopBundle\\Form\\FormType::SINGLE_CHECKBOX_CHOICE')) {
+            } else if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\SingleCheckboxChoiceType::class')) {
                 isValueNull = true;
                 for(var i in value) {
                     if (value.hasOwnProperty(i) && value[i] === true) {

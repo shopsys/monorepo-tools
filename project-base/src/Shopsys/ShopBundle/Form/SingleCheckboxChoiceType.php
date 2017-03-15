@@ -2,8 +2,9 @@
 
 namespace Shopsys\ShopBundle\Form;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -11,12 +12,7 @@ class SingleCheckboxChoiceType extends AbstractType
 {
     public function getParent()
     {
-        return 'choice';
-    }
-
-    public function getName()
-    {
-        return 'single_checkbox_choice';
+        return ChoiceType::class;
     }
 
     /**
@@ -43,7 +39,7 @@ class SingleCheckboxChoiceType extends AbstractType
             $options = $child->getOptions();
             $builder->remove($i);
             $options['required'] = false;
-            $builder->add($i, FormType::CHECKBOX, $options);
+            $builder->add($i, CheckboxType::class, $options);
         }
     }
 }

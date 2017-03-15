@@ -2,9 +2,11 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Pricing\Currency;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\CurrencyType;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -34,21 +36,21 @@ class CurrencyFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', FormType::TEXT, [
+            ->add('name', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name']),
                     new Constraints\Length(['max' => 50, 'maxMessage' => 'Name cannot be longer than {{ limit }} characters']),
                 ],
             ])
-            ->add('code', FormType::CURRENCY, [
+            ->add('code', CurrencyType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter currency code']),
                     new Constraints\Length(['max' => 3, 'maxMessage' => 'Currency code cannot be longer than {{ limit }} characters']),
                 ],
             ])
-            ->add('exchangeRate', FormType::NUMBER, [
+            ->add('exchangeRate', NumberType::class, [
                 'required' => true,
                 'precision' => 6,
                 'read_only' => $this->isRateReadOnly,

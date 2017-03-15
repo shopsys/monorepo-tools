@@ -3,9 +3,10 @@
 namespace Shopsys\ShopBundle\Form\Admin\PromoCode;
 
 use Shopsys\ShopBundle\Component\Constraints\NotInArray;
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -32,7 +33,7 @@ class PromoCodeFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', FormType::TEXT, [
+            ->add('code', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -44,7 +45,7 @@ class PromoCodeFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('percent', FormType::INTEGER, [
+            ->add('percent', IntegerType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([

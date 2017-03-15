@@ -6,11 +6,12 @@ use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
 use Shopsys\ShopBundle\Component\Transformers\RemoveWhitespacesTransformer;
 use Shopsys\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
-class MoneyType extends AbstractTypeExtension
+class MoneyTypeExtension extends AbstractTypeExtension
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Localization\Localization
@@ -49,7 +50,7 @@ class MoneyType extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'money';
+        return MoneyType::class;
     }
 
     /**

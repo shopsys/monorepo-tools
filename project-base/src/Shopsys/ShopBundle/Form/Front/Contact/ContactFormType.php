@@ -3,10 +3,14 @@
 namespace Shopsys\ShopBundle\Form\Front\Contact;
 
 use Shopsys\ShopBundle\Component\Constraints\Email;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\HoneyPotType;
 use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
 use Shopsys\ShopBundle\Model\ContactForm\ContactFormData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -20,26 +24,26 @@ class ContactFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', FormType::TEXT, [
+            ->add('name', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter full name']),
                 ],
             ])
-            ->add('message', FormType::TEXTAREA, [
+            ->add('message', TextareaType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter content']),
                 ],
             ])
-            ->add('email', FormType::EMAIL, [
+            ->add('email', EmailType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter e-mail']),
                     new Email(['message' => 'Please enter valid e-mail']),
                 ],
             ])
-            ->add('email2', FormType::HONEY_POT)
-            ->add('send', FormType::SUBMIT);
+            ->add('email2', HoneyPotType::class)
+            ->add('send', SubmitType::class);
     }
 
     /**

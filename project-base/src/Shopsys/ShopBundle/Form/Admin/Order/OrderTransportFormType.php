@@ -2,10 +2,11 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Order;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Order\Item\OrderTransportData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -32,19 +33,19 @@ class OrderTransportFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('transport', FormType::CHOICE, [
+            ->add('transport', ChoiceType::class, [
                 'required' => true,
                 'choice_list' => new ObjectChoiceList($this->transports, 'name', [], null, 'id'),
                 'error_bubbling' => true,
             ])
-            ->add('priceWithVat', FormType::MONEY, [
+            ->add('priceWithVat', MoneyType::class, [
                 'currency' => false,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter unit price with VAT']),
                 ],
                 'error_bubbling' => true,
             ])
-            ->add('vatPercent', FormType::MONEY, [
+            ->add('vatPercent', MoneyType::class, [
                 'currency' => false,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),

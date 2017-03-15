@@ -2,13 +2,17 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Mail;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\ShopBundle\Component\Constraints\Contains;
 use Shopsys\ShopBundle\Component\Constraints\Email;
 use Shopsys\ShopBundle\Component\Transformers\EmptyWysiwygTransformer;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\FileUploadType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,27 +29,27 @@ class MailTemplateFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('bccEmail', FormType::EMAIL, [
+            ->add('bccEmail', EmailType::class, [
                 'required' => false,
                 'constraints' => [
                     new Email(),
                     new Constraints\Length(['max' => 255, 'maxMessage' => 'Email cannot be longer then {{ limit }} characters']),
                 ],
             ])
-            ->add('subject', FormType::TEXT, [
+            ->add('subject', TextType::class, [
                 'required' => true,
                 'constraints' => $this->getSubjectConstraints($options),
             ])
             ->add(
                 $builder
-                    ->create('body', FormType::WYSIWYG, [
+                    ->create('body', CKEditorType::class, [
                         'required' => true,
                         'config_name' => 'email',
                         'constraints' => $this->getBodyConstraints($options),
                     ])
                     ->addModelTransformer(new EmptyWysiwygTransformer())
             )
-            ->add('attachment', FormType::FILE_UPLOAD, [
+            ->add('attachment', FileUploadType::class, [
                 'required' => false,
                 'multiple' => false,
                 'file_constraints' => [
@@ -56,8 +60,8 @@ class MailTemplateFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('deleteAttachment', FormType::CHECKBOX)
-            ->add('sendMail', FormType::CHECKBOX, ['required' => false]);
+            ->add('deleteAttachment', CheckboxType::class)
+            ->add('sendMail', CheckboxType::class, ['required' => false]);
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Order\Status;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\Locale\LocalizedType;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +18,7 @@ class OrderStatusFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', FormType::LOCALIZED, [
+            ->add('name', LocalizedType::class, [
                 'options' => [
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter all country names']),
