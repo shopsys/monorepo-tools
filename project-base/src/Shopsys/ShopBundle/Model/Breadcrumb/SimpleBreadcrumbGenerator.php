@@ -5,9 +5,6 @@ namespace Shopsys\ShopBundle\Model\Breadcrumb;
 use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
 use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
 
-/**
- * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem
- */
 class SimpleBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
     /**
