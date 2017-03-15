@@ -21,6 +21,19 @@ EOD;
         $this->assertSame($expectedResult, $result);
     }
 
+    public function testJsCompilerReplacesClassNames()
+    {
+        $content = file_get_contents(__DIR__ . '/testClassName.js');
+        $result = $this->getJsCompiler()->compile($content);
+
+        $expectedResult = <<<EOD
+var noLeadingBackslash = "Tests\\\\ShopBundle\\\\Unit\\\\Component\\\\Javascript\\\\Compiler\\\\Constant\\\\Testclass";
+var leadingBackslash = "Tests\\\\ShopBundle\\\\Unit\\\\Component\\\\Javascript\\\\Compiler\\\\Constant\\\\Testclass";
+EOD;
+
+        $this->assertSame($expectedResult, $result);
+    }
+
     public function testJsCompilerFailsOnUndefinedConstant()
     {
         $content = file_get_contents(__DIR__ . '/testUndefinedConstant.js');

@@ -30,22 +30,42 @@ class JsConstantCompilerPass implements JsCompilerPassInterface
             $callExprNode = $jsConstantCall->getCallExprNode();
             $constantName = $jsConstantCall->getConstantName();
 
-            if (!defined($constantName)) {
-                throw new \Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException(
-                    'Constant ' . $constantName . ' not defined in PHP code'
-                );
-            }
-
-            $constantValue = constant($jsConstantCall->getConstantName());
+            $constantValue = $this->getConstantValue($constantName);
             $constantValueJson = json_encode($constantValue);
 
             if ($constantValueJson === false) {
                 throw new \Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\CannotConvertToJsonException(
-                    'Constant ' . $constantName . ' cannot be converted to JSON'
+                    'Constant "' . $constantName . '" cannot be converted to JSON'
                 );
             }
 
             $callExprNode->terminate(json_encode($constantValue));
         }
+    }
+
+    /**
+     * @param string $constantName
+     * @return mixed
+     */
+    private function getConstantValue($constantName)
+    {
+        // Normal defined constant (either class or global)
+        if (defined($constantName)) {
+            return constant($constantName);
+        }
+
+        // Special ::class constant
+        $constantNameParts = explode('::', $constantName);
+        if (count($constantNameParts) === 2 && $constantNameParts[1] === 'class') {
+            $className = $constantNameParts[0];
+
+            if (class_exists($className)) {
+                return ltrim($className, '\\');
+            }
+        }
+
+        throw new \Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException(
+            'Constant "' . $constantName . '" not defined in PHP code'
+        );
     }
 }
