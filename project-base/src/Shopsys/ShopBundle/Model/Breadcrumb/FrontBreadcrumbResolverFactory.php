@@ -34,7 +34,7 @@ class FrontBreadcrumbResolverFactory
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandBreadcrumbGenerator
      */
-    private $brandBreadcrumbGenearator;
+    private $brandBreadcrumbGenerator;
 
     public function __construct(
         ArticleBreadcrumbGenerator $articleBreadcrumbGenerator,
@@ -47,7 +47,7 @@ class FrontBreadcrumbResolverFactory
         $this->categoryBreadcrumbGenerator = $categoryBreadcrumbGenerator;
         $this->productBreadcrumbGenerator = $productBreadcrumbGenerator;
         $this->frontBreadcrumbGenerator = $frontBreadcrumbGenerator;
-        $this->brandBreadcrumbGenearator = $brandBreadcrumbGenerator;
+        $this->brandBreadcrumbGenerator = $brandBreadcrumbGenerator;
     }
 
     /**
@@ -59,7 +59,7 @@ class FrontBreadcrumbResolverFactory
         $frontBreadcrumbResolver->registerGenerator('front_article_detail', $this->articleBreadcrumbGenerator);
         $frontBreadcrumbResolver->registerGenerator('front_product_list', $this->categoryBreadcrumbGenerator);
         $frontBreadcrumbResolver->registerGenerator('front_product_detail', $this->productBreadcrumbGenerator);
-        $frontBreadcrumbResolver->registerGenerator('front_brand_detail', $this->brandBreadcrumbGenearator);
+        $frontBreadcrumbResolver->registerGenerator('front_brand_detail', $this->brandBreadcrumbGenerator);
 
         $this->frontBreadcrumbGenerator->registerAll($frontBreadcrumbResolver);
 

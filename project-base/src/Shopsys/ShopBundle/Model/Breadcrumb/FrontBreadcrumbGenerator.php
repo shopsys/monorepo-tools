@@ -54,10 +54,10 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
                     new BreadcrumbItem(t('Brand overview')),
                 ];
             case 'front_error_page':
-                return $this->getBreacrumbItemForErrorPage($routeParameters['code']);
+                return $this->getBreadcrumbItemForErrorPage($routeParameters['code']);
 
             case 'front_error_page_format':
-                return $this->getBreacrumbItemForErrorPage($routeParameters['code']);
+                return $this->getBreadcrumbItemForErrorPage($routeParameters['code']);
         }
     }
 
@@ -84,7 +84,7 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      * @param string $code
      * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
      */
-    private function getBreacrumbItemForErrorPage($code)
+    private function getBreadcrumbItemForErrorPage($code)
     {
         $breadcrumbName = t('Oops! Error occurred');
         if ($code === '404') {
