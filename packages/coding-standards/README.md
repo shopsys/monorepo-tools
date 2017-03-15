@@ -12,7 +12,7 @@ Project includes following tools:
 For further information see official documentation of particular project.
 ### PHP-CS-Fixer
 ```
-vendor/bin/php-cs-fixer fix /path/to/project --config-file=vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs
+vendor/bin/php-cs-fixer fix /path/to/project --config=vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs
 ```
 ### PHP_CodeSniffer
 ```
