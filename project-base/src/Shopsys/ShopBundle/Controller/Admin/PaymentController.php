@@ -104,7 +104,7 @@ class PaymentController extends AdminBaseController
      */
     public function editAction(Request $request, $id)
     {
-        $payment = $this->paymentFacade->getByIdWithTransports($id);
+        $payment = $this->paymentFacade->getById($id);
         $paymentEditData = $this->paymentEditDataFactory->createFromPayment($payment);
 
         $form = $this->createForm(PaymentEditFormType::class, $paymentEditData);

@@ -89,7 +89,7 @@ class PaymentFacade
         $this->em->flush();
         $this->updatePaymentPrices($payment, $paymentEditData->prices);
         $this->createPaymentDomains($payment, $paymentEditData->paymentData->domains);
-        $this->setAddionalDataAndFlush($payment, $paymentEditData->paymentData);
+        $this->setAdditionalDataAndFlush($payment, $paymentEditData->paymentData);
 
         return $payment;
     }
@@ -104,7 +104,7 @@ class PaymentFacade
         $this->updatePaymentPrices($payment, $paymentEditData->prices);
         $this->deletePaymentDomainsByPayment($payment);
         $this->createPaymentDomains($payment, $paymentEditData->paymentData->domains);
-        $this->setAddionalDataAndFlush($payment, $paymentEditData->paymentData);
+        $this->setAdditionalDataAndFlush($payment, $paymentEditData->paymentData);
     }
 
     /**
@@ -114,15 +114,6 @@ class PaymentFacade
     public function getById($id)
     {
         return $this->paymentRepository->getById($id);
-    }
-
-    /**
-     * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
-     */
-    public function getByIdWithTransports($id)
-    {
-        return $this->paymentRepository->getByIdWithTransports($id);
     }
 
     /**
@@ -149,7 +140,7 @@ class PaymentFacade
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
      */
-    private function setAddionalDataAndFlush(Payment $payment, PaymentData $paymentData)
+    private function setAdditionalDataAndFlush(Payment $payment, PaymentData $paymentData)
     {
         $transports = $this->transportRepository->getAllByIds($paymentData->transports);
         $payment->setTransports($transports);
@@ -171,7 +162,7 @@ class PaymentFacade
      */
     public function getVisibleByDomainId($domainId)
     {
-        $allPayments = $this->paymentRepository->getAllWithTransports();
+        $allPayments = $this->paymentRepository->getAll();
 
         return $this->paymentVisibilityCalculation->filterVisible($allPayments, $domainId);
     }

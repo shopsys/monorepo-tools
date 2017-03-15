@@ -42,11 +42,10 @@ class PaymentRepository
      */
     public function getQueryBuilderForAll()
     {
-        $qb = $this->getPaymentRepository()->createQueryBuilder('p')
+        return $this->getPaymentRepository()->createQueryBuilder('p')
             ->where('p.deleted = :deleted')->setParameter('deleted', false)
             ->orderBy('p.position')
             ->addOrderBy('p.id');
-        return $qb;
     }
 
     /**
@@ -71,7 +70,10 @@ class PaymentRepository
      */
     public function findById($id)
     {
-        return $this->getPaymentRepository()->find($id);
+        return $this->getQueryBuilderForAll()
+            ->andWhere('p.id = :paymentId')->setParameter('paymentId', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     /**
@@ -82,36 +84,12 @@ class PaymentRepository
     {
         $payment = $this->findById($id);
         if ($payment === null) {
-            throw new \Shopsys\ShopBundle\Model\Payment\Exception\PaymentNotFoundException('Payment with ID ' . $id . ' not found.');
+            throw new \Shopsys\ShopBundle\Model\Payment\Exception\PaymentNotFoundException(
+                'Payment with ID ' . $id . ' not found.'
+            );
         }
+
         return $payment;
-    }
-
-    /**
-     * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
-     */
-    public function getByIdWithTransports($id)
-    {
-        try {
-            return $this->em
-                ->createQuery('SELECT p, t FROM ' . Payment::class . ' p LEFT JOIN p.transports t WHERE p.id = :id')
-                ->setParameter('id', $id)
-                ->getSingleResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
-            throw new \Shopsys\ShopBundle\Model\Payment\Exception\PaymentNotFoundException('Payment with ID ' . $id . ' not found.', $e);
-        }
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAllWithTransports()
-    {
-        return $this->getQueryBuilderForAll()
-            ->leftJoin(Transport::class, 't')
-            ->getQuery()
-            ->getResult();
     }
 
     /**
@@ -121,9 +99,8 @@ class PaymentRepository
     public function getAllByTransport(Transport $transport)
     {
         return $this->getQueryBuilderForAll()
-            ->join(Transport::class, 't')
-            ->andWhere('t.id = :transportId')
-            ->setParameter('transportId', $transport->getId())
+            ->join('p.transports', 't')
+            ->andWhere('t = :transport')->setParameter('transport', $transport)
             ->getQuery()
             ->getResult();
     }
