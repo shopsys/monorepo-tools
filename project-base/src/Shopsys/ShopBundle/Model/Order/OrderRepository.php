@@ -8,6 +8,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\ShopBundle\Component\String\DatabaseSearching;
 use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminRepository;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
@@ -20,11 +21,16 @@ class OrderRepository
     private $em;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @var \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminRepository
      */
-    public function __construct(EntityManager $em)
-    {
+    private $orderListAdminRepository;
+
+    public function __construct(
+        EntityManager $em,
+        OrderListAdminRepository $orderListAdminRepository
+    ) {
         $this->em = $em;
+        $this->orderListAdminRepository = $orderListAdminRepository;
     }
 
     /**
@@ -123,22 +129,7 @@ class OrderRepository
         $locale,
         QuickSearchFormData $quickSearchData
     ) {
-        $queryBuilder = $this->createOrderQueryBuilder()
-            ->select('
-                o.id,
-                o.number,
-                o.domainId,
-                o.createdAt,
-                MAX(ost.name) AS statusName,
-                o.totalPriceWithVat,
-                (CASE WHEN o.companyName IS NOT NULL
-                            THEN o.companyName
-                            ELSE CONCAT(o.lastName, \' \', o.firstName)
-                        END) AS customerName')
-            ->join('o.status', 'os')
-            ->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
-            ->groupBy('o.id')
-            ->setParameter('locale', $locale);
+        $queryBuilder = $this->orderListAdminRepository->getOrderListQueryBuilder($locale);
 
         if ($quickSearchData->text !== null && $quickSearchData->text !== '') {
             $queryBuilder

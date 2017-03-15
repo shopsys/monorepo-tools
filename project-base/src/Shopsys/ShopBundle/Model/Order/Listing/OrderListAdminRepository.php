@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Order\Listing;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Model\Localization\Localization;
 use Shopsys\ShopBundle\Model\Order\Order;
 
 class OrderListAdminRepository
@@ -15,21 +14,16 @@ class OrderListAdminRepository
      */
     private $em;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
-     */
-    private $localization;
-
-    public function __construct(EntityManager $em, Localization $localization)
+    public function __construct(EntityManager $em)
     {
         $this->em = $em;
-        $this->localization = $localization;
     }
 
     /**
+     * @param $locale
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getOrderListQueryBuilder()
+    public function getOrderListQueryBuilder($locale)
     {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('
@@ -41,7 +35,7 @@ class OrderListAdminRepository
                 o.totalPriceWithVat,
                 (CASE WHEN o.companyName IS NOT NULL
                     THEN o.companyName
-                    ELSE CONCAT(o.firstName, \' \', o.lastName)
+                    ELSE CONCAT(o.lastName, \' \', o.firstName)
                 END) AS customerName')
             ->from(Order::class, 'o')
             ->where('o.deleted = :deleted')
@@ -49,7 +43,7 @@ class OrderListAdminRepository
             ->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
             ->groupBy('o.id')
             ->setParameter('deleted', false)
-            ->setParameter('locale', $this->localization->getLocale());
+            ->setParameter('locale', $locale);
 
         return $queryBuilder;
     }
