@@ -54,8 +54,6 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
                     new BreadcrumbItem(t('Brand overview')),
                 ];
             case 'front_error_page':
-                return $this->getBreadcrumbItemForErrorPage($routeParameters['code']);
-
             case 'front_error_page_format':
                 return $this->getBreadcrumbItemForErrorPage($routeParameters['code']);
         }
@@ -86,10 +84,8 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      */
     private function getBreadcrumbItemForErrorPage($code)
     {
-        $breadcrumbName = t('Oops! Error occurred');
-        if ($code === '404') {
-            $breadcrumbName = t('Page not found');
-        }
+        $isPageNotFound = $code === '404';
+        $breadcrumbName = $isPageNotFound ? t('Page not found') : t('Oops! Error occurred');
 
         return [
             new BreadcrumbItem($breadcrumbName),
