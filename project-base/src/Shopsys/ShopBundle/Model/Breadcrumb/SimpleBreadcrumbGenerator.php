@@ -8,7 +8,7 @@ use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
 /**
  * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem
  */
-class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
+class SimpleBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
     /**
      * @param string $routeName
