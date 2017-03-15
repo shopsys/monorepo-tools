@@ -39,9 +39,7 @@ class FrontBreadcrumbResolverFactory
     {
         $frontBreadcrumbResolver = new BreadcrumbResolver();
         foreach ($this->breadcrumbGenerators as $breadcrumbGenerator) {
-            foreach ($breadcrumbGenerator->getRouteNames() as $routeName) {
-                $frontBreadcrumbResolver->registerGenerator($routeName, $breadcrumbGenerator);
-            }
+            $frontBreadcrumbResolver->registerGenerator($breadcrumbGenerator);
         }
 
         return $frontBreadcrumbResolver;
