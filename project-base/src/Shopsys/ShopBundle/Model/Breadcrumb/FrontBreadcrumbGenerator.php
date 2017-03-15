@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Breadcrumb;
 
 use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
 use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
-use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
 
 /**
  * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem
@@ -60,25 +59,6 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver $frontBreadcrumbResolver
-     */
-    public function registerAll(BreadcrumbResolver $frontBreadcrumbResolver)
-    {
-        $frontBreadcrumbResolver->registerGenerator('front_customer_edit', $this);
-        $frontBreadcrumbResolver->registerGenerator('front_customer_orders', $this);
-        $frontBreadcrumbResolver->registerGenerator('front_registration_reset_password', $this);
-        $frontBreadcrumbResolver->registerGenerator('front_customer_order_detail_registered', $this);
-        $frontBreadcrumbResolver->registerGenerator('front_customer_order_detail_unregistered', $this);
-        $frontBreadcrumbResolver->registerGenerator('front_login', $this);
-        $frontBreadcrumbResolver->registerGenerator('front_product_search', $this);
-        $frontBreadcrumbResolver->registerGenerator('front_registration_register', $this);
-        $frontBreadcrumbResolver->registerGenerator('front_brand_list', $this);
-        $frontBreadcrumbResolver->registerGenerator('front_customer_edit', $this);
-        $frontBreadcrumbResolver->registerGenerator('front_error_page', $this);
-        $frontBreadcrumbResolver->registerGenerator('front_error_page_format', $this);
-    }
-
-    /**
      * @param string $code
      * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
      */
@@ -89,6 +69,27 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 
         return [
             new BreadcrumbItem($breadcrumbName),
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getRouteNames()
+    {
+        return [
+            'front_customer_edit',
+            'front_customer_orders',
+            'front_registration_reset_password',
+            'front_customer_order_detail_registered',
+            'front_customer_order_detail_unregistered',
+            'front_login',
+            'front_product_search',
+            'front_registration_register',
+            'front_brand_list',
+            'front_customer_edit',
+            'front_error_page',
+            'front_error_page_format',
         ];
     }
 }

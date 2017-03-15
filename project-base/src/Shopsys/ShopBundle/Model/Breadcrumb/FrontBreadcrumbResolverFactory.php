@@ -12,29 +12,9 @@ use Shopsys\ShopBundle\Model\Product\ProductBreadcrumbGenerator;
 class FrontBreadcrumbResolverFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Breadcrumb\FrontBreadcrumbGenerator
+     * @var \Shopsys\ShopBundle\Model\Breadcrumb\FrontBreadcrumbGenerator[]
      */
-    private $frontBreadcrumbGenerator;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticleBreadcrumbGenerator;
-     */
-    private $articleBreadcrumbGenerator;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryBreadcrumbGenerator;
-     */
-    private $categoryBreadcrumbGenerator;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductBreadcrumbGenerator
-     */
-    private $productBreadcrumbGenerator;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandBreadcrumbGenerator
-     */
-    private $brandBreadcrumbGenerator;
+    private $breadcrumbGenerators;
 
     public function __construct(
         ArticleBreadcrumbGenerator $articleBreadcrumbGenerator,
@@ -43,11 +23,13 @@ class FrontBreadcrumbResolverFactory
         FrontBreadcrumbGenerator $frontBreadcrumbGenerator,
         BrandBreadcrumbGenerator $brandBreadcrumbGenerator
     ) {
-        $this->articleBreadcrumbGenerator = $articleBreadcrumbGenerator;
-        $this->categoryBreadcrumbGenerator = $categoryBreadcrumbGenerator;
-        $this->productBreadcrumbGenerator = $productBreadcrumbGenerator;
-        $this->frontBreadcrumbGenerator = $frontBreadcrumbGenerator;
-        $this->brandBreadcrumbGenerator = $brandBreadcrumbGenerator;
+        $this->breadcrumbGenerators = [
+            $articleBreadcrumbGenerator,
+            $categoryBreadcrumbGenerator,
+            $productBreadcrumbGenerator,
+            $frontBreadcrumbGenerator,
+            $brandBreadcrumbGenerator,
+        ];
     }
 
     /**
@@ -56,12 +38,11 @@ class FrontBreadcrumbResolverFactory
     public function create()
     {
         $frontBreadcrumbResolver = new BreadcrumbResolver();
-        $frontBreadcrumbResolver->registerGenerator('front_article_detail', $this->articleBreadcrumbGenerator);
-        $frontBreadcrumbResolver->registerGenerator('front_product_list', $this->categoryBreadcrumbGenerator);
-        $frontBreadcrumbResolver->registerGenerator('front_product_detail', $this->productBreadcrumbGenerator);
-        $frontBreadcrumbResolver->registerGenerator('front_brand_detail', $this->brandBreadcrumbGenerator);
-
-        $this->frontBreadcrumbGenerator->registerAll($frontBreadcrumbResolver);
+        foreach ($this->breadcrumbGenerators as $breadcrumbGenerator) {
+            foreach ($breadcrumbGenerator->getRouteNames() as $routeName) {
+                $frontBreadcrumbResolver->registerGenerator($routeName, $breadcrumbGenerator);
+            }
+        }
 
         return $frontBreadcrumbResolver;
     }
