@@ -34,18 +34,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/shopsys/Routing.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/shopsys/coding-standards.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/shopsys/phpstorm-inspect.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/shopsys/migrations.git"
         }
     ],
     "require": {
