@@ -28,4 +28,12 @@ class ArticleBreadcrumbGenerator implements BreadcrumbGeneratorInterface
             new BreadcrumbItem($article->getName()),
         ];
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRouteNames()
+    {
+        return ['front_article_detail'];
+    }
 }

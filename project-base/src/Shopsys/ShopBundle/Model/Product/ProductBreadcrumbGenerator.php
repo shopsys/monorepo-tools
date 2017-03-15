@@ -86,4 +86,12 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 
         return $breadcrumbItems;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRouteNames()
+    {
+        return ['front_product_detail'];
+    }
 }

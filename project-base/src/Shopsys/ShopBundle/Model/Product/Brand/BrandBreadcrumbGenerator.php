@@ -40,4 +40,12 @@ class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 
         return $breadcrumbItems;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRouteNames()
+    {
+        return ['front_brand_detail'];
+    }
 }
