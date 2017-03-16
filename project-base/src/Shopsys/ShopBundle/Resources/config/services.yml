@@ -44,7 +44,7 @@ services:
   ninja_mutex.adapter:
     class: NinjaMutex\Lock\FlockLock
     arguments:
-      - %kernel.root_dir%/lock
+      - %shopsys.root_dir%/var/lock
 
   shopsys.doctrine.cache_driver.query_cache:
     class: Doctrine\Common\Cache\ChainCache

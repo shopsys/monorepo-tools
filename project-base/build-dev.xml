@@ -48,7 +48,7 @@
 
     <target name="dump-translations" description="Extracts translation messages from whole project including back-end">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="translation:extract" />
             <arg value="--bundle=ShopsysShopBundle" />
             <arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Controller" />
@@ -77,27 +77,29 @@
         />
 
         <exec
-            command="git diff --name-only --diff-filter=ACMR ${git.merge.base} ${path.src}"
+            command="git diff --name-only --diff-filter=ACMR ${git.merge.base} ${path.src} ${path.tests}"
             outputProperty="git.files.changed"
         />
 
         <exec
-            command="git ls-files --others --exclude-standard ${path.src}"
+            command="git ls-files --others --exclude-standard ${path.src} ${path.tests}"
             outputProperty="git.files.unstaged"
         />
 
-        <property name="diff.files.all" value="${git.files.changed}${line.separator}${git.files.unstaged}" />
+        <property name="diff.files.all" value="${git.files.changed}${line.separator}${git.files.unstaged}">
+            <filterchain>
+                <!-- ignore Codeception generated class for running acceptance tests -->
+                <linecontainsregexp>
+                    <regexp pattern="^(?!tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php).+$" />
+                </linecontainsregexp>
+            </filterchain>
+        </property>
 
         <property name="diff.files.php" value="${diff.files.all}">
             <filterchain>
                 <linecontainsregexp>
                     <!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
                     <regexp pattern="\.php\s*$" />
-                </linecontainsregexp>
-
-                <!-- ignore Codeception generated class for running acceptance tests -->
-                <linecontainsregexp>
-                    <regexp pattern="^(?!src/Shopsys/ShopBundle/Tests/Test/Codeception/_generated/AcceptanceTesterActions.php).+$" />
                 </linecontainsregexp>
             </filterchain>
         </property>
@@ -108,19 +110,38 @@
                     <!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
                     <regexp pattern="\.twig\s*$" />
                 </linecontainsregexp>
+            </filterchain>
+        </property>
 
+        <property name="diff.files.all.spaces" value="${diff.files.all}">
+            <filterchain>
                 <replaceregexp>
                     <regexp pattern="[\r\n]+" replace=" " />
                 </replaceregexp>
             </filterchain>
         </property>
-    </target>
 
-    <target name="diff-files-phpcs" depends="diff-files" description="Find modified files for phpcs">
-        <property name="diff.files.phpcs" value="${diff.files.php}">
+        <property name="diff.files.php.spaces" value="${diff.files.php}">
             <filterchain>
                 <replaceregexp>
                     <regexp pattern="[\r\n]+" replace=" " />
+                </replaceregexp>
+            </filterchain>
+        </property>
+
+        <property name="diff.files.twig.spaces" value="${diff.files.twig}">
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="[\r\n]+" replace=" " />
+                </replaceregexp>
+            </filterchain>
+        </property>
+
+        <property name="diff.files.php.commas" value="${diff.files.php}">
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="[\r\n]+" replace="," />
+                    <regexp pattern="^,|,$" replace="" />
                 </replaceregexp>
             </filterchain>
         </property>
@@ -140,13 +161,14 @@
             <arg value="--ignore=${path.phpcs.ignored}"/>
             <arg value="--no-patch"/>
             <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
         </exec>
     </target>
 
-    <target name="phpcbf-diff" depends="diff-files-phpcs" description="Fix php coding standards by PHP Code Beautifier only on modified files">
+    <target name="phpcbf-diff" depends="diff-files" description="Fix php coding standards by PHP Code Beautifier (only on modified files)">
         <if>
             <not>
-                <equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
+                <equals arg1="${diff.files.php.spaces}" arg2="" trim="true" />
             </not>
             <then>
                 <exec
@@ -161,7 +183,7 @@
                     <arg value="--tab-width=4"/>
                     <arg value="--ignore=${path.phpcs.ignored}"/>
                     <arg value="--no-patch"/>
-                    <arg line="${diff.files.phpcs}"/>
+                    <arg line="${diff.files.php.spaces}"/>
                 </exec>
             </then>
         </if>
@@ -181,13 +203,14 @@
             <arg value="-sp"/>
             <arg value="--ignore=${path.phpcs.ignored}"/>
             <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
         </exec>
     </target>
 
-    <target name="phpcs-diff" depends="diff-files-phpcs" description="Check coding standards (only on modified files)">
+    <target name="phpcs-diff" depends="diff-files" description="Check coding standards (only on modified files)">
         <if>
             <not>
-                <equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
+                <equals arg1="${diff.files.php.spaces}" arg2="" trim="true" />
             </not>
             <then>
                 <exec
@@ -202,7 +225,7 @@
                     <arg value="--tab-width=4"/>
                     <arg value="-sp"/>
                     <arg value="--ignore=${path.phpcs.ignored}"/>
-                    <arg line="${diff.files.phpcs}"/>
+                    <arg line="${diff.files.php.spaces}"/>
                 </exec>
             </then>
         </if>
@@ -221,6 +244,7 @@
             <arg value="--verbose" />
             <arg value="--diff" />
             <arg path="${path.src}" />
+            <arg path="${path.tests}" />
         </exec>
     </target>
 
@@ -235,21 +259,14 @@
             <arg value="--config=${path.phpcs-fixer.configuration}" />
             <arg value="--verbose" />
             <arg path="${path.src}" />
+            <arg path="${path.tests}" />
         </exec>
     </target>
 
-    <target name="phpcs-fixer-diff" depends="diff-files" description="PHP CS Fixer dry (only on modified files)">
-        <property name="diff.files.phpcs-fixer" value="${diff.files.all}">
-            <filterchain>
-                <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace=" " />
-                </replaceregexp>
-            </filterchain>
-        </property>
-
+    <target name="phpcs-fixer-diff" depends="diff-files" description="PHP CS Fixer dry run (only on modified files)">
         <if>
             <not>
-                <equals arg1="${diff.files.phpcs-fixer}" arg2="" trim="true" />
+                <equals arg1="${diff.files.all.spaces}" arg2="" trim="true" />
             </not>
             <then>
                 <exec
@@ -263,24 +280,16 @@
                     <arg value="--dry-run" />
                     <arg value="--verbose" />
                     <arg value="--diff" />
-                    <arg line="${diff.files.phpcs-fixer}"/>
+                    <arg line="${diff.files.all.spaces}"/>
                 </exec>
             </then>
         </if>
     </target>
 
     <target name="phpcs-fixer-fix-diff" depends="diff-files" description="Fix coding standards by PHP CS Fixer (only on modified files)">
-        <property name="diff.files.phpcs-fixer" value="${diff.files.all}">
-            <filterchain>
-                <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace=" " />
-                </replaceregexp>
-            </filterchain>
-        </property>
-
         <if>
             <not>
-                <equals arg1="${diff.files.phpcs-fixer}" arg2="" trim="true" />
+                <equals arg1="${diff.files.all.spaces}" arg2="" trim="true" />
             </not>
             <then>
                 <exec
@@ -293,7 +302,7 @@
                     <arg value="--config=${path.phpcs-fixer.configuration}" />
                     <arg value="--verbose" />
                     <arg value="--diff" />
-                    <arg line="${diff.files.phpcs-fixer}"/>
+                    <arg line="${diff.files.all.spaces}"/>
                 </exec>
             </then>
         </if>
@@ -307,23 +316,14 @@
             checkreturn="true"
         >
             <arg path="${path.src}"/>
-            <arg value="--exclude"/>
-            <arg value="${path.phplint.ignored}"/>
+            <arg path="${path.tests}" />
         </exec>
     </target>
 
     <target name="phplint-diff" depends="diff-files" description="Check syntax of php files (only on modified files)">
-        <property name="diff.files.phplint" value="${diff.files.php}">
-            <filterchain>
-                <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace=" " />
-                </replaceregexp>
-            </filterchain>
-        </property>
-
         <if>
             <not>
-                <equals arg1="${diff.files.phplint}" arg2="" trim="true" />
+                <equals arg1="${diff.files.php.spaces}" arg2="" trim="true" />
             </not>
             <then>
                 <exec
@@ -332,7 +332,7 @@
                     passthru="true"
                     checkreturn="true"
                 >
-                    <arg line="${diff.files.phplint}" />
+                    <arg line="${diff.files.php.spaces}" />
                 </exec>
             </then>
         </if>
@@ -345,7 +345,7 @@
             passthru="true"
             checkreturn="true"
         >
-            <arg value="${path.src}"/>
+            <arg value="${path.src},${path.tests}"/>
             <arg value="text"/>
             <arg value="${path.phpmd.ruleset}"/>
             <arg value="--extensions=php"/>
@@ -355,18 +355,9 @@
     </target>
 
     <target name="phpmd-diff" depends="diff-files" description="Check coding standards by PHP Mess Detector (only on modified files)">
-        <property name="diff.files.phpmd" value="${diff.files.php}">
-            <filterchain>
-                <replaceregexp>
-                    <regexp pattern="[\r\n]+" replace="," />
-                    <regexp pattern=",$" replace="" />
-                </replaceregexp>
-            </filterchain>
-        </property>
-
         <if>
             <not>
-                <equals arg1="${diff.files.phpmd}" arg2="" trim="true" />
+                <equals arg1="${diff.files.php.commas}" arg2="" trim="true" />
             </not>
             <then>
                 <exec
@@ -375,7 +366,7 @@
                     passthru="true"
                     checkreturn="true"
                 >
-                    <arg value="${diff.files.phpmd}"/>
+                    <arg value="${diff.files.php.commas}"/>
                     <arg value="text"/>
                     <arg value="${path.phpmd.ruleset}"/>
                     <arg value="--extensions=php"/>
@@ -388,16 +379,28 @@
 
     <target name="phpstorm-inspect" description="Run phpstorm inspections">
         <exec
-            executable="${path.phpstorm-inspect.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
+                executable="${path.phpstorm-inspect.executable}"
+                logoutput="true"
+                passthru="true"
+                checkreturn="true"
         >
             <arg path="${path.phpstorm.inspect.sh}"/>
             <arg path="${path.phpstorm.system}"/>
             <arg path="${path.phpstorm.project}"/>
             <arg path="${path.phpstorm.project.inspection-profile}"/>
             <arg path="${path.src}"/>
+        </exec>
+        <exec
+                executable="${path.phpstorm-inspect.executable}"
+                logoutput="true"
+                passthru="true"
+                checkreturn="true"
+        >
+            <arg path="${path.phpstorm.inspect.sh}"/>
+            <arg path="${path.phpstorm.system}"/>
+            <arg path="${path.phpstorm.project}"/>
+            <arg path="${path.phpstorm.project.inspection-profile}"/>
+            <arg path="${path.tests}"/>
         </exec>
     </target>
 
@@ -484,8 +487,6 @@
                     checkreturn="true"
                 >
                     <arg value="--colors=always"/>
-                    <arg value="--configuration"/>
-                    <arg value="${path.phpunit.configuration}"/>
                     <arg value="--testsuite"/>
                     <arg value="Crawler"/>
                     <arg value="--exclude-group"/>
@@ -501,8 +502,6 @@
                     checkreturn="true"
                 >
                     <arg value="--colors=always"/>
-                    <arg value="--configuration"/>
-                    <arg value="${path.phpunit.configuration}"/>
                     <arg value="--testsuite"/>
                     <arg value="Crawler"/>
                     <arg value="--exclude-group"/>
@@ -523,8 +522,6 @@
                     checkreturn="true"
                 >
                     <arg value="--colors=always"/>
-                    <arg value="--configuration"/>
-                    <arg value="${path.phpunit.configuration}"/>
                     <arg value="--testsuite"/>
                     <arg value="Database"/>
                     <arg value="--exclude-group"/>
@@ -539,8 +536,6 @@
                     checkreturn="true"
                 >
                     <arg value="--colors=always"/>
-                    <arg value="--configuration"/>
-                    <arg value="${path.phpunit.configuration}"/>
                     <arg value="--testsuite"/>
                     <arg value="Database"/>
                     <arg value="--exclude-group"/>
@@ -558,8 +553,6 @@
             checkreturn="true"
         >
             <arg value="--colors=always"/>
-            <arg value="--configuration"/>
-            <arg value="${path.phpunit.configuration}"/>
             <arg value="--testsuite"/>
             <arg value="Performance"/>
             <arg value="--exclude-group"/>
@@ -575,8 +568,6 @@
             checkreturn="true"
         >
             <arg value="--colors=always"/>
-            <arg value="--configuration"/>
-            <arg value="${path.phpunit.configuration}"/>
             <arg value="--testsuite"/>
             <arg value="Performance"/>
             <arg value="--group"/>
@@ -595,8 +586,6 @@
                     checkreturn="true"
                 >
                     <arg value="--colors=always"/>
-                    <arg value="--configuration"/>
-                    <arg value="${path.phpunit.configuration}"/>
                     <arg value="--testsuite"/>
                     <arg value="Unit"/>
                     <arg value="--exclude-group"/>
@@ -611,8 +600,6 @@
                     checkreturn="true"
                 >
                     <arg value="--colors=always"/>
-                    <arg value="--configuration"/>
-                    <arg value="${path.phpunit.configuration}"/>
                     <arg value="--testsuite"/>
                     <arg value="Unit"/>
                     <arg value="--exclude-group"/>
@@ -624,7 +611,7 @@
 
     <target name="test-create-domains-data" description="Create domains data for new domains in tests database">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:domains-data:create" />
             <arg value="--env=test" />
         </exec>
@@ -632,7 +619,7 @@
 
     <target name="test-db-check-schema" description="Check if test database schema is satisfying ORM and return a list of suggestions for repair schema">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:migrations:check-schema" />
         </exec>
@@ -640,12 +627,12 @@
 
     <target name="test-db-create" description="Create test database public schema and import basic database structure (without migrations)">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:schema:create" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:schema:import-default" />
         </exec>
@@ -653,7 +640,7 @@
 
     <target name="test-db-drop" description="Drop test database public schema">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:schema:drop" />
         </exec>
@@ -661,7 +648,7 @@
 
     <target name="test-db-dump" description="Dump test database">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:database:dump" />
             <arg value="--pgdump-bin=${path.pg_dump.executable}" />
@@ -671,7 +658,7 @@
 
     <target name="test-db-fixtures-base-settings" description="Load base data fixtures for tests">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="doctrine:fixtures:load" />
             <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
@@ -685,7 +672,7 @@
             <istrue value="${is-multidomain}" />
             <then>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="app/console" />
+                    <arg value="bin/console" />
                     <arg value="--env=test" />
                     <arg value="doctrine:fixtures:load" />
                     <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/DemoMultidomain" />
@@ -693,7 +680,7 @@
                     <arg value="--no-interaction" />
                 </exec>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="app/console" />
+                    <arg value="bin/console" />
                     <arg value="shopsys:recalculations" />
                     <arg value="--env=test" />
                 </exec>
@@ -706,7 +693,7 @@
 
     <target name="test-db-fixtures-demo-singledomain" description="Load base and demo data fixtures to test database for first domain, run shopsys:recalculations">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="doctrine:fixtures:load" />
             <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
@@ -715,7 +702,7 @@
             <arg value="--no-interaction" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="shopsys:recalculations" />
             <arg value="--env=test" />
         </exec>
@@ -723,12 +710,12 @@
 
     <target name="test-db-fixtures-performance" description="Import performance data to test db. Demo and base data fixtures must be imported first, run shopsys:recalculations">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:performance-data" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:recalculations" />
         </exec>
@@ -736,7 +723,7 @@
 
     <target name="test-db-migrations" description="Database migrations on test database">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:migrations:migrate" />
         </exec>
@@ -744,7 +731,7 @@
 
     <target name="test-generate-friendly-urls" description="Generate friendly urls for supported entities in test database">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:generate:friendly-url" />
         </exec>
@@ -752,7 +739,7 @@
 
     <target name="test-replace-domains-urls" description="Replace domains urls in test database">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:domains-urls:replace" />
         </exec>
@@ -760,7 +747,7 @@
 
     <target name="twig-lint" description="Lint: Check syntax of twig templates">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="lint:twig" />
             <arg value="@ShopsysShopBundle" />
         </exec>
@@ -773,7 +760,7 @@
             </not>
             <then>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="app/console" />
+                    <arg value="bin/console" />
                     <arg value="lint:twig" />
                     <arg line="${diff.files.twig}"/>
                 </exec>
@@ -783,12 +770,12 @@
 
     <target name="yaml-lint" description="Lint: Check syntax of yml files">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="lint:yaml" />
             <arg value="@ShopsysShopBundle" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="app/console" />
+            <arg value="bin/console" />
             <arg value="lint:yaml" />
             <arg value="${path.app}/config" />
         </exec>

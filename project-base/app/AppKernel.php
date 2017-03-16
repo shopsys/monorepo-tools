@@ -6,9 +6,12 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+    /**
+     * @{inheritdoc}
+     */
     public function registerBundles()
     {
-        $bundles = array(
+        $bundles = [
             new Bmatzner\JQueryBundle\BmatznerJQueryBundle(),
             new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),
             new Craue\FormFlowBundle\CraueFormFlowBundle(),
@@ -36,9 +39,9 @@ class AppKernel extends Kernel
             new VasekPurchart\ConsoleErrorsBundle\ConsoleErrorsBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(), // has to be loaded after FrameworkBundle and TwigBundle
             new Shopsys\ShopBundle\ShopsysShopBundle(), // must be loaded as last, because translations must overwrite other bundles
-        );
+        ];
 
-        if (in_array($this->getEnvironment(), array(Environment::ENVIRONMENT_DEVELOPMENT))) {
+        if ($this->getEnvironment() === Environment::ENVIRONMENT_DEVELOPMENT) {
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new Shopsys\GeneratorBundle\ShopsysGeneratorBundle();
@@ -49,6 +52,9 @@ class AppKernel extends Kernel
         return $bundles;
     }
 
+    /**
+     * @{inheritdoc}
+     */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         foreach ($this->getConfigs() as $filename) {
@@ -81,5 +87,29 @@ class AppKernel extends Kernel
         }
 
         return $configs;
+    }
+
+    /**
+     * @{inheritdoc}
+     */
+    public function getRootDir()
+    {
+        return __DIR__;
+    }
+
+    /**
+     * @{inheritdoc}
+     */
+    public function getCacheDir()
+    {
+        return dirname(__DIR__) . '/var/cache/' . $this->getEnvironment();
+    }
+
+    /**
+     * @{inheritdoc}
+     */
+    public function getLogDir()
+    {
+        return dirname(__DIR__) . '/var/logs';
     }
 }

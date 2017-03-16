@@ -2,18 +2,17 @@
 
 namespace Shopsys;
 
+use AppKernel;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Shopsys\Environment;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\Debug\ErrorHandler;
+use Symfony\Component\HttpFoundation\Request;
 
-require_once __DIR__ . '/../app/bootstrap.php.cache';
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../app/AppKernel.php';
-require_once __DIR__ . '/../app/Environment.php';
+require_once __DIR__ . '/autoload.php';
 
 setlocale(LC_CTYPE, 'en_US.utf8');
 
@@ -34,6 +33,12 @@ class Bootstrap
 
     public function run()
     {
+        if ($this->environment !== Environment::ENVIRONMENT_DEVELOPMENT) {
+            // Speed-up loading in production using bootstrap file that combines multiple PHP files to reduce disk IO.
+            // See http://symfony.com/doc/3.0/performance.html#use-bootstrap-files
+            include_once __DIR__ . '/../var/bootstrap.php.cache';
+        }
+
         $this->configurePhp();
 
         if (Environment::isEnvironmentDebug($this->environment)) {
@@ -42,7 +47,7 @@ class Bootstrap
             ErrorHandler::register();
         }
 
-        $kernel = new \AppKernel($this->environment, Environment::isEnvironmentDebug($this->environment));
+        $kernel = new AppKernel($this->environment, Environment::isEnvironmentDebug($this->environment));
         $kernel->loadClassCache();
         if ($this->console) {
             $input = new ArgvInput();
@@ -70,8 +75,8 @@ class Bootstrap
     private function initDoctrine()
     {
         if ($this->environment === Environment::ENVIRONMENT_DEVELOPMENT) {
-            $dirs = array(__DIR__ . '/../vendor/doctrine/orm/lib/');
-            \Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace('Doctrine\ORM', $dirs);
+            $dirs = [__DIR__ . '/../vendor/doctrine/orm/lib/'];
+            AnnotationRegistry::registerAutoloadNamespace('Doctrine\ORM', $dirs);
         }
     }
 }

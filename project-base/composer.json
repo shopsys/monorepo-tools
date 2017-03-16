@@ -9,10 +9,21 @@
                 "src/Shopsys/"
             ]
         },
+        "classmap": [
+            "app/AppCache.php",
+            "app/AppKernel.php",
+            "app/Bootstrap.php",
+            "app/Environment.php"
+        ],
         "files": [
             "src/Shopsys/ShopBundle/Component/Translation/functions.php",
             "src/Shopsys/ShopBundle/Component/VarDumper/functions.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "repositories": [
         {
@@ -106,11 +117,13 @@
         ]
     },
     "config": {
-        "bin-dir": "bin",
         "preferred-install": "dist"
     },
     "extra": {
         "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
+        "symfony-tests-dir": "tests",
         "symfony-web-dir": "web",
         "incenteev-parameters": [
             {

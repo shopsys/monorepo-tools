@@ -32,13 +32,13 @@ doctrine:
     mappings:
       ShopsysShopBundle:
         type: annotation
-        dir: %kernel.root_dir%/../src/Shopsys/ShopBundle/Model
+        dir: %shopsys.root_dir%/src/Shopsys/ShopBundle/Model
         alias: ShopsysShopBundle
         prefix: Shopsys\ShopBundle\Model
         is_bundle: false
       ShopsysShopBundleComponent:
         type: annotation
-        dir: %kernel.root_dir%/../src/Shopsys/ShopBundle/Component
+        dir: %shopsys.root_dir%/src/Shopsys/ShopBundle/Component
         alias: ShopsysShopBundleComponent
         prefix: Shopsys\ShopBundle\Component
         is_bundle: false
@@ -46,7 +46,7 @@ doctrine:
       GroupedScalarHydrator: \Shopsys\ShopBundle\Component\Doctrine\GroupedScalarHydrator
 
 doctrine_migrations:
-    dir_name: "%kernel.root_dir%/../src/Shopsys/ShopBundle/Migrations"
+    dir_name: "%shopsys.root_dir%/src/Shopsys/ShopBundle/Migrations"
     namespace: Shopsys\ShopBundle\Migrations
     table_name: migrations
     name: Migrations
@@ -76,6 +76,7 @@ framework:
   profiler:
     enabled: false
     collect: false
+  assets: ~
 
 monolog:
   channels: ["cron", "slow"]
@@ -129,9 +130,9 @@ prezent_doctrine_translatable:
 shopsys_shop:
   router:
     locale_router_filepaths:
-      cs: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/routing_front_cs.yml
-      en: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/routing_front_en.yml
-    friendly_url_router_filepath: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/routing_friendly_url.yml
+      cs: %shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/routing_front_cs.yml
+      en: %shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/routing_front_en.yml
+    friendly_url_router_filepath: %shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/routing_friendly_url.yml
 
 stof_doctrine_extensions:
   orm:
