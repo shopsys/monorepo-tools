@@ -3,9 +3,9 @@
 
     <target name="build-dev" depends="clean,composer-dev,npm,dirs-create,domains-urls-check,assetic,assets,dump-translations-front-and-common,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,checks-diff" description="Build application for development"/>
     <target name="build-dev-quick" depends="clean,composer-dev,npm,dirs-create,domains-urls-check,assetic,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt" description="Quick build application for development"/>
-    <target name="build-demo-dev" depends="clean,composer-dev,npm,dirs-clean,dirs-create,domains-urls-check,assetic,assets,dump-translations-front-and-common,db-demo,grunt,error-pages-generate,checks-diff" description="Build application for development with demo data"/>
-    <target name="build-demo-ci" depends="clean,composer-dev,npm,dirs-clean,dirs-create,domains-urls-check,assetic,assets,dump-translations-front-and-common,db-demo,grunt,img-demo,error-pages-generate,checks-ci" description="Build application for development with demo data checked by checks-ci"/>
-    <target name="build-demo-ci-diff" depends="clean,composer-dev,npm,dirs-clean,dirs-create,domains-urls-check,assetic,assets,dump-translations-front-and-common,db-demo,grunt,img-demo,error-pages-generate,checks-ci-diff" description="Build application for development with demo data checked by checks-ci-diff"/>
+    <target name="build-demo-dev" depends="wipe-excluding-logs,composer-dev,npm,dirs-create,domains-urls-check,assetic,assets,dump-translations-front-and-common,db-demo,grunt,error-pages-generate,checks-diff" description="Build application for development with demo data"/>
+    <target name="build-demo-ci" depends="wipe-excluding-logs,composer-dev,npm,dirs-create,domains-urls-check,assetic,assets,dump-translations-front-and-common,db-demo,grunt,img-demo,error-pages-generate,checks-ci" description="Build application for development with demo data checked by checks-ci"/>
+    <target name="build-demo-ci-diff" depends="wipe-excluding-logs,composer-dev,npm,dirs-create,domains-urls-check,assetic,assets,dump-translations-front-and-common,db-demo,grunt,img-demo,error-pages-generate,checks-ci-diff" description="Build application for development with demo data checked by checks-ci-diff"/>
 
     <target name="checks" depends="standards,tests" description="Run standards and tests"/>
     <target name="checks-diff" depends="standards-diff,tests" description="Run standards and tests, runs only on modified files"/>
