@@ -34,6 +34,8 @@ class Bootstrap
     public function run()
     {
         if ($this->environment !== Environment::ENVIRONMENT_DEVELOPMENT) {
+            // Speed-up loading in production using bootstrap file that combines multiple PHP files to reduce disk IO.
+            // See http://symfony.com/doc/3.0/performance.html#use-bootstrap-files
             include_once __DIR__ . '/../var/bootstrap.php.cache';
         }
 
