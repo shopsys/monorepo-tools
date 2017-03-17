@@ -35,6 +35,7 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
         $webDirectory = $this->getContainer()->getParameter('shopsys.web_dir');
 
         $directories = [
+            $rootDirectory . '/build/stats',
             $rootDirectory . '/docs/generated',
             $rootDirectory . '/var/cache',
             $rootDirectory . '/var/lock',
