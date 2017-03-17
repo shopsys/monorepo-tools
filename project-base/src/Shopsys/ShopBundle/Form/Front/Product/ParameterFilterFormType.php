@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Form\Front\Product;
 
 use Shopsys\ShopBundle\Form\Extension\IndexedObjectChoiceList;
 use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData;
+use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -18,37 +19,27 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
     private $parameterChoicesIndexedByParameterId;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
-     */
-    public function __construct(array $parameterFilterChoices)
-    {
-        $this->parameterChoicesIndexedByParameterId = [];
-        foreach ($parameterFilterChoices as $parameterChoice) {
-            $this->parameterChoicesIndexedByParameterId[$parameterChoice->getParameter()->getId()] = $parameterChoice;
-        }
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        foreach ($this->parameterChoicesIndexedByParameterId as $parameterId => $parameterFilterChoice) {
-            $builder
-                ->add($parameterId, ChoiceType::class, [
-                    'label' => $parameterFilterChoice->getParameter()->getName(),
-                    'expanded' => true,
-                    'multiple' => true,
-                    'choice_list' => new IndexedObjectChoiceList(
-                        $parameterFilterChoice->getValues(),
-                        'id',
-                        'text',
-                        [],
-                        null,
-                        'id'
-                    ),
-                ]);
+        $config = $options['product_filter_config'];
+        /* @var $config \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig */
+
+        $this->parameterChoicesIndexedByParameterId = [];
+        foreach ($config->getParameterChoices() as $parameterChoice) {
+            $parameter = $parameterChoice->getParameter();
+            $parameterValues = $parameterChoice->getValues();
+
+            $this->parameterChoicesIndexedByParameterId[$parameter->getId()] = $parameterChoice;
+
+            $builder->add($parameter->getId(), ChoiceType::class, [
+                'label' => $parameter->getName(),
+                'expanded' => true,
+                'multiple' => true,
+                'choice_list' => new IndexedObjectChoiceList($parameterValues, 'id', 'text', [], null, 'id'),
+            ]);
         }
 
         $builder->addViewTransformer($this);
@@ -59,9 +50,12 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('product_filter_config')
+            ->setAllowedTypes('product_filter_config', ProductFilterConfig::class)
+            ->setDefaults([
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 
     /**

@@ -5,8 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\Filter;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountData;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterRepository;
@@ -44,7 +44,7 @@ class ProductFilterCountRepository
     /**
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
      * @param string $locale
-     * @param \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType $productFilterFormType
+     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountData
@@ -52,7 +52,7 @@ class ProductFilterCountRepository
     public function getProductFilterCountData(
         QueryBuilder $productsQueryBuilder,
         $locale,
-        ProductFilterFormType $productFilterFormType,
+        ProductFilterConfig $productFilterConfig,
         ProductFilterData $productFilterData,
         PricingGroup $pricingGroup
     ) {
@@ -64,19 +64,19 @@ class ProductFilterCountRepository
         );
         $productFilterCountData->countByBrandId = $this->getCountByBrandId(
             $productsQueryBuilder,
-            $productFilterFormType->getBrandFilterChoices(),
+            $productFilterConfig->getBrandChoices(),
             $productFilterData,
             $pricingGroup
         );
         $productFilterCountData->countByFlagId = $this->getCountByFlagId(
             $productsQueryBuilder,
-            $productFilterFormType->getFlagFilterChoices(),
+            $productFilterConfig->getFlagChoices(),
             $productFilterData,
             $pricingGroup
         );
         $productFilterCountData->countByParameterIdAndValueId = $this->getCountByParameterIdAndValueId(
             $productsQueryBuilder,
-            $productFilterFormType->getParameterFilterChoices(),
+            $productFilterConfig->getParameterChoices(),
             $productFilterData,
             $pricingGroup,
             $locale
