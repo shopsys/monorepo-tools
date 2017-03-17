@@ -30,12 +30,10 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase
         $formFactory = $this->getContainer()->get(FormFactoryInterface::class);
         /* @var $formFactory \Symfony\Component\Form\FormFactoryInterface */
 
-        $countries = [
-            $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1),
-            $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1),
-        ];
-
-        $personalInfoForm = $formFactory->create(new PersonalInfoFormType($countries), null, ['csrf_protection' => false]);
+        $personalInfoForm = $formFactory->create(PersonalInfoFormType::class, null, [
+            'domain_id' => 1,
+            'csrf_protection' => false,
+        ]);
 
         $personalInfoForm->submit($personalInfoFormData);
 

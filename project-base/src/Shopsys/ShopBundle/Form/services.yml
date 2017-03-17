@@ -139,6 +139,16 @@ services:
     tags:
       - { name: form.type }
 
+  shopsys.shop.form.front.order.personal_info_form_type:
+    class: Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.shop.form.front.order.transport_and_payment_form_type:
+    class: Shopsys\ShopBundle\Form\Front\Order\TransportAndPaymentFormType
+    tags:
+      - { name: form.type }
+
   shopsys.shop.component.form.invert_choice_type_extension:
     class: Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension
     tags:

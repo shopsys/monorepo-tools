@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Form\Front\Order;
 use Shopsys\ShopBundle\Component\Constraints\Email;
 use Shopsys\ShopBundle\Component\Transformers\InverseTransformer;
 use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Model\Country\Country;
+use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Order\FrontOrderData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -26,16 +26,16 @@ class PersonalInfoFormType extends AbstractType
     const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\Country[]
+     * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
      */
-    private $countries;
+    private $countryFacade;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
+     * @param \Shopsys\ShopBundle\Model\Country\CountryFacade $countryFacade
      */
-    public function __construct(array $countries)
+    public function __construct(CountryFacade $countryFacade)
     {
-        $this->countries = $countries;
+        $this->countryFacade = $countryFacade;
     }
 
     /**
@@ -45,6 +45,8 @@ class PersonalInfoFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $countries = $this->countryFacade->getAllByDomainId($options['domain_id']);
+
         $builder
             ->add('firstName', TextType::class, [
                 'constraints' => [
@@ -128,7 +130,7 @@ class PersonalInfoFormType extends AbstractType
                 ],
             ])
             ->add('country', ChoiceType::class, [
-                'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($countries, 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose country']),
                 ],
@@ -231,7 +233,7 @@ class PersonalInfoFormType extends AbstractType
             ])
             ->add('deliveryCountry', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($countries, 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotBlank([
                         'message' => 'Please choose country',
@@ -268,24 +270,27 @@ class PersonalInfoFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => FrontOrderData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-            'validation_groups' => function (FormInterface $form) {
-                $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
+        $resolver
+            ->setRequired('domain_id')
+            ->setAllowedTypes('domain_id', 'int')
+            ->setDefaults([
+                'data_class' => FrontOrderData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+                'validation_groups' => function (FormInterface $form) {
+                    $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
-                $orderData = $form->getData();
-                /* @var $data \Shopsys\ShopBundle\Model\Order\OrderData */
+                    $orderData = $form->getData();
+                    /* @var $data \Shopsys\ShopBundle\Model\Order\OrderData */
 
-                if ($orderData->companyCustomer) {
-                    $validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;
-                }
-                if (!$orderData->deliveryAddressSameAsBillingAddress) {
-                    $validationGroups[] = self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS;
-                }
+                    if ($orderData->companyCustomer) {
+                        $validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;
+                    }
+                    if (!$orderData->deliveryAddressSameAsBillingAddress) {
+                        $validationGroups[] = self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS;
+                    }
 
-                return $validationGroups;
-            },
-        ]);
+                    return $validationGroups;
+                },
+            ]);
     }
 }

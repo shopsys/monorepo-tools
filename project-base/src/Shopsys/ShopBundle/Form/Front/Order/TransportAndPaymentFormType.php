@@ -5,7 +5,9 @@ namespace Shopsys\ShopBundle\Form\Front\Order;
 use Shopsys\ShopBundle\Form\SingleCheckboxChoiceType;
 use Shopsys\ShopBundle\Model\Order\OrderData;
 use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -17,23 +19,23 @@ use Symfony\Component\Validator\ExecutionContextInterface;
 class TransportAndPaymentFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Transport[]
+     * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
      */
-    private $transports;
+    private $transportFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Payment[]
+     * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
      */
-    private $payments;
+    private $paymentFacade;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport[]$transports
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
+     * @param \Shopsys\ShopBundle\Model\Transport\TransportFacade $transportFacade
+     * @param \Shopsys\ShopBundle\Model\Payment\PaymentFacade $paymentFacade
      */
-    public function __construct(array $transports, array $payments)
+    public function __construct(TransportFacade $transportFacade, PaymentFacade $paymentFacade)
     {
-        $this->transports = $transports;
-        $this->payments = $payments;
+        $this->transportFacade = $transportFacade;
+        $this->paymentFacade = $paymentFacade;
     }
 
     /**
@@ -42,16 +44,19 @@ class TransportAndPaymentFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $payments = $this->paymentFacade->getVisibleByDomainId($options['domain_id']);
+        $transports = $this->transportFacade->getVisibleByDomainId($options['domain_id'], $payments);
+
         $builder
             ->add('transport', SingleCheckboxChoiceType::class, [
-                'choice_list' => new ObjectChoiceList($this->transports, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($transports, 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotNull(['message' => 'Please choose shipping type']),
                 ],
                 'invalid_message' => 'Please choose shipping type',
             ])
             ->add('payment', SingleCheckboxChoiceType::class, [
-                'choice_list' => new ObjectChoiceList($this->payments, 'name', [], null, 'id'),
+                'choice_list' => new ObjectChoiceList($payments, 'name', [], null, 'id'),
                 'constraints' => [
                     new Constraints\NotNull(['message' => 'Please choose payment type']),
                 ],
@@ -65,12 +70,15 @@ class TransportAndPaymentFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'attr' => ['novalidate' => 'novalidate'],
-            'constraints' => [
-                new Constraints\Callback([$this, 'validateTransportPaymentRelation']),
-            ],
-        ]);
+        $resolver
+            ->setRequired('domain_id')
+            ->setAllowedTypes('domain_id', 'int')
+            ->setDefaults([
+                'attr' => ['novalidate' => 'novalidate'],
+                'constraints' => [
+                    new Constraints\Callback([$this, 'validateTransportPaymentRelation']),
+                ],
+            ]);
     }
 
     /**
