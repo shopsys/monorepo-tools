@@ -16,18 +16,18 @@ class CurrencyInlineEdit extends AbstractGridInlineEdit
     private $currencyFacade;
 
     /**
-     * @param \Symfony\Component\Form\FormFactory $formFactory
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Grid\CurrencyGridFactory $currencyGridFactory
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
+     * @var \Symfony\Component\Form\FormFactory
      */
-    public function __construct(
-        FormFactory $formFactory,
-        CurrencyGridFactory $currencyGridFactory,
-        CurrencyFacade $currencyFacade
-    ) {
-        $this->currencyFacade = $currencyFacade;
+    private $formFactory;
 
-        parent::__construct($formFactory, $currencyGridFactory);
+    public function __construct(
+        CurrencyGridFactory $currencyGridFactory,
+        CurrencyFacade $currencyFacade,
+        FormFactory $formFactory
+    ) {
+        parent::__construct($currencyGridFactory);
+        $this->currencyFacade = $currencyFacade;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -51,37 +51,36 @@ class CurrencyInlineEdit extends AbstractGridInlineEdit
     }
 
     /**
-     * @param int $currencyId
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData
+     * @param int|null $currencyId
+     * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getFormDataObject($currencyId = null)
+    public function getForm($currencyId)
     {
         $currencyData = new CurrencyData();
 
         if ($currencyId !== null) {
-            $currencyId = (int)$currencyId;
-            $currency = $this->currencyFacade->getById($currencyId);
+            $currency = $this->currencyFacade->getById((int)$currencyId);
             $currencyData->setFromEntity($currency);
         }
 
-        return $currencyData;
+        return $this->formFactory->create(CurrencyFormType::class, $currencyData, [
+            'is_default_currency' => $this->isDefaultCurrencyId($currencyId),
+        ]);
     }
 
     /**
-     * @param int $currencyId
-     * @return \Shopsys\ShopBundle\Form\Admin\Pricing\Currency\CurrencyFormType
+     * @param int|null $currencyId
+     * @return bool
      */
-    protected function getFormType($currencyId)
+    protected function isDefaultCurrencyId($currencyId)
     {
         if ($currencyId !== null) {
             $currency = $this->currencyFacade->getById($currencyId);
             if ($this->currencyFacade->isDefaultCurrency($currency)) {
-                return new CurrencyFormType(CurrencyFormType::EXCHANGE_RATE_IS_READ_ONLY);
-            } else {
-                return new CurrencyFormType(CurrencyFormType::EXCHANGE_RATE_IS_NOT_READ_ONLY);
+                return true;
             }
-        } else {
-            return new CurrencyFormType(CurrencyFormType::EXCHANGE_RATE_IS_NOT_READ_ONLY);
         }
+
+        return false;
     }
 }

@@ -13,22 +13,6 @@ use Symfony\Component\Validator\Constraints;
 
 class CurrencyFormType extends AbstractType
 {
-    const EXCHANGE_RATE_IS_READ_ONLY = true;
-    const EXCHANGE_RATE_IS_NOT_READ_ONLY = false;
-
-    /**
-     * @var bool
-     */
-    private $isRateReadOnly;
-
-    /**
-     * @param bool $isRateReadOnly
-     */
-    public function __construct($isRateReadOnly)
-    {
-        $this->isRateReadOnly = $isRateReadOnly;
-    }
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -53,7 +37,7 @@ class CurrencyFormType extends AbstractType
             ->add('exchangeRate', NumberType::class, [
                 'required' => true,
                 'precision' => 6,
-                'read_only' => $this->isRateReadOnly,
+                'read_only' => $options['is_default_currency'],
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter currency exchange rate']),
                     new Constraints\GreaterThan(0),
@@ -66,9 +50,12 @@ class CurrencyFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => CurrencyData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('is_default_currency')
+            ->setAllowedTypes('is_default_currency', 'bool')
+            ->setDefaults([
+                'data_class' => CurrencyData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

@@ -17,18 +17,23 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit
     private $availabilityFacade;
 
     /**
-     * @param \Symfony\Component\Form\FormFactory $formFactory
+     * @var \Symfony\Component\Form\FormFactory
+     */
+    private $formFactory;
+
+    /**
      * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityGridFactory $availabilityGridFactory
      * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
+     * @param \Symfony\Component\Form\FormFactory $formFactory
      */
     public function __construct(
-        FormFactory $formFactory,
         AvailabilityGridFactory $availabilityGridFactory,
-        AvailabilityFacade $availabilityFacade
+        AvailabilityFacade $availabilityFacade,
+        FormFactory $formFactory
     ) {
+        parent::__construct($availabilityGridFactory);
         $this->availabilityFacade = $availabilityFacade;
-
-        parent::__construct($formFactory, $availabilityGridFactory);
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -53,27 +58,17 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int|null $availabilityId
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData
+     * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getFormDataObject($availabilityId = null)
+    public function getForm($availabilityId)
     {
         $availabilityData = new AvailabilityData();
 
         if ($availabilityId !== null) {
-            $availabilityId = (int)$availabilityId;
-            $availability = $this->availabilityFacade->getById($availabilityId);
+            $availability = $this->availabilityFacade->getById((int)$availabilityId);
             $availabilityData->setFromEntity($availability);
         }
 
-        return $availabilityData;
-    }
-
-    /**
-     * @param int $rowId
-     * @return \Shopsys\ShopBundle\Form\Admin\Product\Availability\AvailabilityFormType
-     */
-    protected function getFormType($rowId)
-    {
-        return new AvailabilityFormType();
+        return $this->formFactory->create(AvailabilityFormType::class, $availabilityData);
     }
 }

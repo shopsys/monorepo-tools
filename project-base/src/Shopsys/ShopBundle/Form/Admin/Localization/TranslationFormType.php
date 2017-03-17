@@ -13,19 +13,6 @@ use Symfony\Component\Validator\Constraints;
 class TranslationFormType extends AbstractType implements DataTransformerInterface
 {
     /**
-     * @var string[]
-     */
-    private $locales;
-
-    /**
-     * @param string[] $locales
-     */
-    public function __construct(array $locales)
-    {
-        $this->locales = $locales;
-    }
-
-    /**
      * @param string $value
      * @return string
      */
@@ -53,7 +40,7 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        foreach ($this->locales as $locale) {
+        foreach ($options['locales'] as $locale) {
             $builder->add(
                 $builder
                     ->create($locale, TextareaType::class, [
@@ -70,8 +57,11 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('locales')
+            ->setAllowedTypes('locales', 'array')
+            ->setDefaults([
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

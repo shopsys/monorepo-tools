@@ -99,6 +99,11 @@ services:
     tags:
       - { name: form.type }
 
+  shopsys.shop.form.admin.promo_code.promo_code_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType
+    tags:
+      - { name: form.type }
+
   shopsys.shop.form.admin.seo.seo_setting_form_type:
     class: Shopsys\ShopBundle\Form\Admin\Seo\SeoSettingFormType
     tags:

@@ -17,18 +17,18 @@ class VatInlineEdit extends AbstractGridInlineEdit
     private $vatFacade;
 
     /**
-     * @param \Symfony\Component\Form\FormFactory $formFactory
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatGridFactory $vatGridFactory
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade $vatFacade
+     * @var \Symfony\Component\Form\FormFactory
      */
-    public function __construct(
-        FormFactory $formFactory,
-        VatGridFactory $vatGridFactory,
-        VatFacade $vatFacade
-    ) {
-        $this->vatFacade = $vatFacade;
+    private $formFactory;
 
-        parent::__construct($formFactory, $vatGridFactory);
+    public function __construct(
+        VatGridFactory $vatGridFactory,
+        VatFacade $vatFacade,
+        FormFactory $formFactory
+    ) {
+        parent::__construct($vatGridFactory);
+        $this->vatFacade = $vatFacade;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -53,27 +53,19 @@ class VatInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int|null $vatId
-     * @return \Shopsys\ShopBundle\Model\Pricing\Vat\VatData
+     * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getFormDataObject($vatId = null)
+    public function getForm($vatId)
     {
         $vatData = new VatData();
 
         if ($vatId !== null) {
-            $vatId = (int)$vatId;
-            $vat = $this->vatFacade->getById($vatId);
+            $vat = $this->vatFacade->getById((int)$vatId);
             $vatData->setFromEntity($vat);
         }
 
-        return $vatData;
-    }
-
-    /**
-     * @param int $rowId
-     * @return \Shopsys\ShopBundle\Form\Admin\Vat\VatFormType
-     */
-    protected function getFormType($rowId)
-    {
-        return new VatFormType($rowId === null ? VatFormType::SCENARIO_CREATE : VatFormType::SCENARIO_EDIT);
+        return $this->formFactory->create(VatFormType::class, $vatData, [
+            'scenario' => ($vatId === null ? VatFormType::SCENARIO_CREATE : VatFormType::SCENARIO_EDIT),
+        ]);
     }
 }

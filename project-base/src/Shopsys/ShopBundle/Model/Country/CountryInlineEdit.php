@@ -22,16 +22,21 @@ class CountryInlineEdit extends AbstractGridInlineEdit
      */
     private $selectedDomain;
 
+    /**
+     * @var \Symfony\Component\Form\FormFactory
+     */
+    private $formFactory;
+
     public function __construct(
-        FormFactory $formFactory,
         CountryGridFactory $countryGridFactory,
         CountryFacade $countryFacade,
-        SelectedDomain $selectedDomain
+        SelectedDomain $selectedDomain,
+        FormFactory $formFactory
     ) {
+        parent::__construct($countryGridFactory);
         $this->countryFacade = $countryFacade;
         $this->selectedDomain = $selectedDomain;
-
-        parent::__construct($formFactory, $countryGridFactory);
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -56,27 +61,17 @@ class CountryInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int|null $countryId
-     * @return \Shopsys\ShopBundle\Model\Country\CountryData
+     * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getFormDataObject($countryId = null)
+    public function getForm($countryId)
     {
         $countryData = new CountryData();
 
         if ($countryId !== null) {
-            $countryId = (int)$countryId;
-            $country = $this->countryFacade->getById($countryId);
+            $country = $this->countryFacade->getById((int)$countryId);
             $countryData->setFromEntity($country);
         }
 
-        return $countryData;
-    }
-
-    /**
-     * @param int $rowId
-     * @return \Shopsys\ShopBundle\Form\Admin\Country\CountryFormType
-     */
-    protected function getFormType($rowId)
-    {
-        return new CountryFormType();
+        return $this->formFactory->create(CountryFormType::class, $countryData);
     }
 }

@@ -77,4 +77,12 @@ class PromoCodeFacade
     {
         return $this->promoCodeRepository->findByCode($code);
     }
+
+    /**
+     * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode[]
+     */
+    public function getAll()
+    {
+        return $this->promoCodeRepository->getAll();
+    }
 }

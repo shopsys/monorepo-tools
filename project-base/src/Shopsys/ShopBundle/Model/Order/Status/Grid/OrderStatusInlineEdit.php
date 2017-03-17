@@ -17,18 +17,18 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit
     private $orderStatusFacade;
 
     /**
-     * @param \Symfony\Component\Form\FormFactory $formFactory
-     * @param \Shopsys\ShopBundle\Model\Order\Status\Grid\OrderStatusGridFactory $orderStatusGridFactory
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade $orderStatusFacade
+     * @var \Symfony\Component\Form\FormFactory
      */
-    public function __construct(
-        FormFactory $formFactory,
-        OrderStatusGridFactory $orderStatusGridFactory,
-        OrderStatusFacade $orderStatusFacade
-    ) {
-        $this->orderStatusFacade = $orderStatusFacade;
+    private $formFactory;
 
-        parent::__construct($formFactory, $orderStatusGridFactory);
+    public function __construct(
+        OrderStatusGridFactory $orderStatusGridFactory,
+        OrderStatusFacade $orderStatusFacade,
+        FormFactory $formFactory
+    ) {
+        parent::__construct($orderStatusGridFactory);
+        $this->orderStatusFacade = $orderStatusFacade;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -52,28 +52,18 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit
     }
 
     /**
-     * @param int $orderStatusId
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData
+     * @param int|null $orderStatusId
+     * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getFormDataObject($orderStatusId = null)
+    public function getForm($orderStatusId)
     {
         $orderStatusData = new OrderStatusData();
 
         if ($orderStatusId !== null) {
-            $orderStatusId = (int)$orderStatusId;
-            $orderStatus = $this->orderStatusFacade->getById($orderStatusId);
+            $orderStatus = $this->orderStatusFacade->getById((int)$orderStatusId);
             $orderStatusData->setFromEntity($orderStatus);
         }
 
-        return $orderStatusData;
-    }
-
-    /**
-     * @param int $rowId
-     * @return \Shopsys\ShopBundle\Form\Admin\Order\Status\OrderStatusFormType
-     */
-    protected function getFormType($rowId)
-    {
-        return new OrderStatusFormType();
+        return $this->formFactory->create(OrderStatusFormType::class, $orderStatusData);
     }
 }

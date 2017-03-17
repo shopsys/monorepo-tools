@@ -10,41 +10,19 @@ use Symfony\Component\HttpFoundation\Request;
 abstract class AbstractGridInlineEdit implements GridInlineEditInterface
 {
     /**
-     * @var \Symfony\Component\Form\FormFactory
-     */
-    private $formFactory;
-
-    /**
      * @var \Shopsys\ShopBundle\Component\Grid\GridFactoryInterface
      */
     private $gridFactory;
 
-    /**
-     * @param \Symfony\Component\Form\FormFactory $formFactory
-     * @param \Shopsys\ShopBundle\Component\Grid\GridFactoryInterface $gridFactory
-     */
-    public function __construct(FormFactory $formFactory, GridFactoryInterface $gridFactory)
+    public function __construct(GridFactoryInterface $gridFactory)
     {
-        $this->formFactory = $formFactory;
         $this->gridFactory = $gridFactory;
     }
 
     /**
-     * @param mixed $rowId
-     * @return \Symfony\Component\Form\Form
-     */
-    public function getForm($rowId)
-    {
-        return $this->formFactory->create(
-            $this->getFormType($rowId),
-            $this->getFormDataObject($rowId)
-        );
-    }
-
-    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param mixed $rowId
-     * @return int
+     * @param int|string|null $rowId
+     * @return int|string
      */
     public function saveForm(Request $request, $rowId)
     {
@@ -98,26 +76,20 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface
     }
 
     /**
-     * @param int $rowId
-     * @return \Symfony\Component\Form\AbstractType
+     * @param int|string|null $rowId
+     * @return \Symfony\Component\Form\FormInterface
      */
-    abstract protected function getFormType($rowId);
+    abstract public function getForm($rowId);
 
     /**
-     * @param mixed $rowId
-     * @return object
+     * @param int|string $rowId
+     * @param mixed $formData
      */
-    abstract protected function getFormDataObject($rowId = null);
+    abstract protected function editEntity($rowId, $formData);
 
     /**
-     * @param mixed $rowId
-     * @param object $formDataObject
+     * @param mixed $formData
+     * @return int|string
      */
-    abstract protected function editEntity($rowId, $formDataObject);
-
-    /**
-     * @param object $formDataObject
-     * @return mixed
-     */
-    abstract protected function createEntityAndGetId($formDataObject);
+    abstract protected function createEntityAndGetId($formData);
 }

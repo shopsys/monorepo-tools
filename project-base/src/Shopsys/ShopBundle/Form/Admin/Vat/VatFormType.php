@@ -12,21 +12,8 @@ use Symfony\Component\Validator\Constraints;
 
 class VatFormType extends AbstractType
 {
-    const SCENARIO_CREATE = 1;
-    const SCENARIO_EDIT = 2;
-
-    /**
-     * @var bool
-     */
-    private $scenario;
-
-    /**
-     * @param int $scenario
-     */
-    public function __construct($scenario)
-    {
-        $this->scenario = $scenario;
-    }
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_EDIT = 'edit';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
@@ -45,8 +32,8 @@ class VatFormType extends AbstractType
             ->add('percent', NumberType::class, [
                 'required' => false,
                 'precision' => 4,
-                'disabled' => $this->scenario === self::SCENARIO_EDIT,
-                'read_only' => $this->scenario === self::SCENARIO_EDIT,
+                'disabled' => $options['scenario'] === self::SCENARIO_EDIT,
+                'read_only' => $options['scenario'] === self::SCENARIO_EDIT,
                 'invalid_message' => 'Please enter VAT in correct format.',
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
@@ -59,9 +46,12 @@ class VatFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => VatData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('scenario')
+            ->setAllowedValues('scenario', [self::SCENARIO_CREATE, self::SCENARIO_EDIT])
+            ->setDefaults([
+                'data_class' => VatData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }
