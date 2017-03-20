@@ -27,7 +27,7 @@ class PricingGroupFormType extends AbstractType
             ])
             ->add('coefficient', NumberType::class, [
                 'required' => true,
-                'precision' => 4,
+                'scale' => 4,
                 'invalid_message' => 'Please enter ratio in correct format',
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter pricing group coefficient']),

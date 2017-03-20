@@ -31,7 +31,7 @@ class VatFormType extends AbstractType
             ])
             ->add('percent', NumberType::class, [
                 'required' => false,
-                'precision' => 4,
+                'scale' => 4,
                 'disabled' => $options['scenario'] === self::SCENARIO_EDIT,
                 'read_only' => $options['scenario'] === self::SCENARIO_EDIT,
                 'invalid_message' => 'Please enter VAT in correct format.',

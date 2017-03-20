@@ -48,7 +48,7 @@ class TransportEditFormType extends AbstractType
             $pricesBuilder
                 ->add($currency->getId(), MoneyType::class, [
                     'currency' => false,
-                    'precision' => 6,
+                    'scale' => 6,
                     'required' => true,
                     'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
                     'constraints' => [

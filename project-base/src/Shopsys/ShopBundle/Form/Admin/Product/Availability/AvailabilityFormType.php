@@ -29,7 +29,7 @@ class AvailabilityFormType extends AbstractType
                 ],
             ])
             ->add('dispatchTime', NumberType::class, [
-                'precision' => 0,
+                'scale' => 0,
                 'required' => false,
                 'invalid_message' => 'Number of days to expedite must be whole number.',
                 'constraints' => [

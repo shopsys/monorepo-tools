@@ -197,7 +197,7 @@ class ProductEditFormType extends AbstractType
                 'required' => false,
                 'options' => [
                     'currency' => 'CZK',
-                    'precision' => 2,
+                    'scale' => 2,
                     'constraints' => [
                         new Constraints\Range([
                             'min' => 0,
@@ -215,7 +215,7 @@ class ProductEditFormType extends AbstractType
                 'required' => false,
                 'options' => [
                     'currency' => 'CZK',
-                    'precision' => 2,
+                    'scale' => 2,
                     'constraints' => [
                         new Constraints\Range([
                             'min' => 1,
@@ -229,7 +229,7 @@ class ProductEditFormType extends AbstractType
                 'required' => false,
                 'options' => [
                     'currency' => 'CZK',
-                    'precision' => 2,
+                    'scale' => 2,
                     'constraints' => [
                         new Constraints\Range([
                             'min' => 1,
@@ -244,7 +244,7 @@ class ProductEditFormType extends AbstractType
             $builder->get('manualInputPrices')
                 ->add($pricingGroup->getId(), MoneyType::class, [
                     'currency' => false,
-                    'precision' => 6,
+                    'scale' => 6,
                     'required' => true,
                     'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
                     'constraints' => [
