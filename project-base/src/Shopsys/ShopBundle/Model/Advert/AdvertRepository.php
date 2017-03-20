@@ -62,7 +62,8 @@ class AdvertRepository
             ->select('COUNT(a)')
             ->getQuery()->getSingleScalarResult();
 
-        if ($count === 0) {
+        // COUNT() returns BIGINT which is hydrated into string on 32-bit architecture
+        if ((int)$count === 0) {
             return null;
         }
 

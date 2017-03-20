@@ -105,6 +105,7 @@ class QueryPaginator implements PaginatorInterface
             []
         );
 
+        // COUNT() returns BIGINT which is hydrated into string on 32-bit architecture
         $sql = 'SELECT COUNT(*)::INTEGER AS total_count FROM (' . $query->getSQL() . ') ORIGINAL_QUERY';
 
         $rsm = new ResultSetMapping();
