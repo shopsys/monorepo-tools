@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Form;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Form\Extension\IndexedChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,17 +27,17 @@ class DomainsType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $ids = [];
-        $labels = [];
-        $values = [];
+        $choices = [];
         foreach ($this->domain->getAll() as $domainConfig) {
-            $ids[] = $domainConfig->getId();
-            $labels[] = $domainConfig->getName();
-            $values[] = (string)$domainConfig->getId();
+            $choices[$domainConfig->getName()] = $domainConfig->getId();
         }
 
         $resolver->setDefaults([
-            'choice_list' => new IndexedChoiceList($ids, $labels, $ids, $values),
+            'choices' => $choices,
+            'choice_name' => function ($choice) {
+                return $choice; // Domain ID
+            },
+            'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             'multiple' => true,
             'expanded' => true,
         ]);
