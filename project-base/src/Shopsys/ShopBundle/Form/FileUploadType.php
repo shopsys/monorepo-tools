@@ -95,7 +95,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
         $builder->addModelTransformer($this);
         $builder
             ->add('uploadedFiles', CollectionType::class, [
-                'type' => HiddenType::class,
+                'entry_type' => HiddenType::class,
                 'allow_add' => true,
                 'constraints' => [
                     new Constraints\Callback([$this, 'validateUploadedFiles']),

@@ -52,7 +52,7 @@ class ProductsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'type' => HiddenType::class,
+            'entry_type' => HiddenType::class,
             'allow_add' => true,
             'allow_delete' => true,
             'delete_empty' => true,

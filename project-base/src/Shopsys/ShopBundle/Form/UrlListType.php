@@ -67,7 +67,7 @@ class UrlListType extends AbstractType
         $builder->add('toDelete', FormType::class);
         $builder->add('mainOnDomains', FormType::class);
         $builder->add('newUrls', CollectionType::class, [
-            'type' => FriendlyUrlType::class,
+            'entry_type' => FriendlyUrlType::class,
             'required' => false,
             'allow_add' => true,
             'error_bubbling' => false,

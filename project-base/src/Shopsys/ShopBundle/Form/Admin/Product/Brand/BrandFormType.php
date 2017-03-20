@@ -32,7 +32,7 @@ class BrandFormType extends AbstractType
                 ],
             ])
             ->add('descriptions', LocalizedType::class, [
-                'type' => CKEditorType::class,
+                'entry_type' => CKEditorType::class,
                 'required' => false,
             ])
             ->add('urls', UrlListType::class, [

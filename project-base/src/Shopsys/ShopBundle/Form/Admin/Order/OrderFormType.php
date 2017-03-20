@@ -287,7 +287,7 @@ class OrderFormType extends AbstractType
             ])
             ->add('note', TextareaType::class, ['required' => false])
             ->add('itemsWithoutTransportAndPayment', CollectionType::class, [
-                'type' => new OrderItemFormType(),
+                'entry_type' => new OrderItemFormType(),
                 'error_bubbling' => false,
                 'allow_add' => true,
                 'allow_delete' => true,

@@ -37,7 +37,7 @@ class AllMailTemplatesFormType extends AbstractType
                 'required_body_variables' => $this->resetPasswordMail->getRequiredBodyVariables(),
             ])
             ->add('orderStatusTemplates', CollectionType::class, [
-                'type' => MailTemplateFormType::class,
+                'entry_type' => MailTemplateFormType::class,
             ])
             ->add('domainId', HiddenType::class)
             ->add('save', SubmitType::class);

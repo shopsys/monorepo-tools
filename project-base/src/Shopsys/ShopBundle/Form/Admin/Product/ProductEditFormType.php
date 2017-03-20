@@ -136,7 +136,7 @@ class ProductEditFormType extends AbstractType
             ->add(
                 $builder->create('imagePositions', CollectionType::class, [
                     'required' => false,
-                    'type' => HiddenType::class,
+                    'entry_type' => HiddenType::class,
                 ])->addModelTransformer($this->imagesIdsToImagesTransformer)
             )
             ->add('imagesToDelete', ChoiceType::class, [
@@ -149,7 +149,7 @@ class ProductEditFormType extends AbstractType
                     'required' => false,
                     'allow_add' => true,
                     'allow_delete' => true,
-                    'type' => ProductParameterValueFormType::class,
+                    'entry_type' => ProductParameterValueFormType::class,
                     'constraints' => [
                         new UniqueProductParameters([
                             'message' => 'Each parameter can be used only once',
@@ -162,21 +162,21 @@ class ProductEditFormType extends AbstractType
                 'compound' => true,
             ])
             ->add('seoTitles', MultidomainType::class, [
-                'type' => TextType::class,
+                'entry_type' => TextType::class,
                 'required' => false,
                 'optionsByDomainId' => $seoTitlesOptionsByDomainId,
             ])
             ->add('seoMetaDescriptions', MultidomainType::class, [
-                'type' => TextareaType::class,
+                'entry_type' => TextareaType::class,
                 'required' => false,
                 'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
             ])
             ->add('descriptions', MultidomainType::class, [
-                'type' => CKEditorType::class,
+                'entry_type' => CKEditorType::class,
                 'required' => false,
             ])
             ->add('shortDescriptions', MultidomainType::class, [
-                'type' => TextareaType::class,
+                'entry_type' => TextareaType::class,
                 'required' => false,
             ])
             ->add('urls', UrlListType::class, [
@@ -193,7 +193,7 @@ class ProductEditFormType extends AbstractType
                     ->addViewTransformer($this->removeDuplicatesTransformer)
             )
             ->add('heurekaCpcValues', MultidomainType::class, [
-                'type' => MoneyType::class,
+                'entry_type' => MoneyType::class,
                 'required' => false,
                 'options' => [
                     'currency' => 'CZK',
@@ -207,11 +207,11 @@ class ProductEditFormType extends AbstractType
                 ],
             ])
             ->add('showInZboziFeed', MultidomainType::class, [
-                'type' => YesNoType::class,
+                'entry_type' => YesNoType::class,
                 'required' => false,
             ])
             ->add('zboziCpcValues', MultidomainType::class, [
-                'type' => MoneyType::class,
+                'entry_type' => MoneyType::class,
                 'required' => false,
                 'options' => [
                     'currency' => 'CZK',
@@ -225,7 +225,7 @@ class ProductEditFormType extends AbstractType
                 ],
             ])
             ->add('zboziCpcSearchValues', MultidomainType::class, [
-                'type' => MoneyType::class,
+                'entry_type' => MoneyType::class,
                 'required' => false,
                 'options' => [
                     'currency' => 'CZK',

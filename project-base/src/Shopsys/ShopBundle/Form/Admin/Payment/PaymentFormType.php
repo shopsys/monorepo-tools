@@ -74,11 +74,11 @@ class PaymentFormType extends AbstractType
             ])
             ->add('description', LocalizedType::class, [
                 'required' => false,
-                'type' => TextareaType::class,
+                'entry_type' => TextareaType::class,
             ])
             ->add('instructions', LocalizedType::class, [
                 'required' => false,
-                'type' => CKEditorType::class,
+                'entry_type' => CKEditorType::class,
             ])
             ->add('image', FileUploadType::class, [
                 'required' => false,

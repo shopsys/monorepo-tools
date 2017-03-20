@@ -97,17 +97,17 @@ class CategoryFormType extends AbstractType
                 ],
             ])
             ->add('seoTitles', MultidomainType::class, [
-                'type' => TextType::class,
+                'entry_type' => TextType::class,
                 'required' => false,
                 'optionsByDomainId' => $seoTitlesOptionsByDomainId,
             ])
             ->add('seoMetaDescriptions', MultidomainType::class, [
-                'type' => TextareaType::class,
+                'entry_type' => TextareaType::class,
                 'required' => false,
                 'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
             ])
             ->add('descriptions', MultidomainType::class, [
-                'type' => CKEditorType::class,
+                'entry_type' => CKEditorType::class,
                 'required' => false,
             ])
             ->add('parent', ChoiceType::class, [

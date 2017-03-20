@@ -40,7 +40,7 @@ class CurrencySettingsFormType extends AbstractType
             ])
             ->add('domainDefaultCurrencies', CollectionType::class, [
                 'required' => true,
-                'type' => ChoiceType::class,
+                'entry_type' => ChoiceType::class,
                 'options' => [
                     'required' => true,
                     'choice_list' => new ObjectChoiceList($this->currencyFacade->getAll(), 'name', [], null, 'id'),

@@ -45,7 +45,7 @@ class MultidomainType extends AbstractType
                 $domainOptions = $subOptions;
             }
 
-            $builder->add($domainConfig->getId(), $options['type'], $domainOptions);
+            $builder->add($domainConfig->getId(), $options['entry_type'], $domainOptions);
         }
     }
 
@@ -58,7 +58,7 @@ class MultidomainType extends AbstractType
             'compound' => true,
             'options' => [],
             'optionsByDomainId' => [],
-            'type' => TextType::class,
+            'entry_type' => TextType::class,
         ]);
     }
 

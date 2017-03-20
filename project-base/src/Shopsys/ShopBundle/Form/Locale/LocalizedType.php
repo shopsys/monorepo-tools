@@ -46,9 +46,9 @@ class LocalizedType extends AbstractType
 
         foreach ($this->localization->getAllLocales() as $locale) {
             if ($locale === $this->localization->getAdminLocale()) {
-                $builder->add($locale, $options['type'], $defaultLocaleOptions);
+                $builder->add($locale, $options['entry_type'], $defaultLocaleOptions);
             } else {
-                $builder->add($locale, $options['type'], $otherLocaleOptions);
+                $builder->add($locale, $options['entry_type'], $otherLocaleOptions);
             }
         }
     }
@@ -62,7 +62,7 @@ class LocalizedType extends AbstractType
             'compound' => true,
             'options' => [],
             'main_constraints' => [],
-            'type' => TextType::class,
+            'entry_type' => TextType::class,
         ]);
     }
 }

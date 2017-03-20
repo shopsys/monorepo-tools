@@ -23,7 +23,7 @@ class CollectionTypeExtension extends AbstractTypeExtension
         $this->removeOriginalResizeFormListener($builder->getEventDispatcher());
 
         $resizeListener = new ResizeFormListener(
-            $options['type'],
+            $options['entry_type'],
             $options['options'],
             $options['allow_add'],
             $options['allow_delete'],
