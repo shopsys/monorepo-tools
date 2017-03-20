@@ -33,7 +33,7 @@ class NewProductTest extends FunctionalTestCase
 
         $em2->beginTransaction();
 
-        $csrfToken = $client2->getContainer()->get('form.csrf_provider')->generateCsrfToken(ProductEditFormType::INTENTION);
+        $csrfToken = $client2->getContainer()->get('form.csrf_provider')->generateCsrfToken(ProductEditFormType::CSRF_TOKEN_ID);
         $this->setFormCsrfToken($form, $csrfToken);
 
         $client2->submit($form);

@@ -38,7 +38,7 @@ use Symfony\Component\Validator\Constraints;
 
 class ProductEditFormType extends AbstractType
 {
-    const INTENTION = 'product_edit_type';
+    const CSRF_TOKEN_ID = 'product_edit_type';
     const VALIDATION_GROUP_MANUAL_PRICE_CALCULATION = 'manualPriceCalculation';
 
     /**
@@ -286,7 +286,7 @@ class ProductEditFormType extends AbstractType
             ->setDefaults([
                 'data_class' => ProductEditData::class,
                 'attr' => ['novalidate' => 'novalidate'],
-                'intention' => self::INTENTION,
+                'csrf_token_id' => self::CSRF_TOKEN_ID,
                 'validation_groups' => function (FormInterface $form) {
                     $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
                     $productData = $form->getData()->productData;
