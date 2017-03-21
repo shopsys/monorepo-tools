@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Component\Grid;
 
 use Shopsys\ShopBundle\Component\Grid\Grid;
 use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 
 class ActionColumn
@@ -176,6 +177,6 @@ class ActionColumn
             $parameters[RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER] = $this->routeCsrfProtector->getCsrfTokenByRoute($this->route);
         }
 
-        return $this->router->generate($this->route, $parameters, Router::ABSOLUTE_URL);
+        return $this->router->generate($this->route, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
     }
 }

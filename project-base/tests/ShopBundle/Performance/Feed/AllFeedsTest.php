@@ -9,7 +9,7 @@ use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
 use Shopsys\ShopBundle\Model\Feed\FeedConfig;
 use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Tests\ShopBundle\Performance\Feed\PerformanceResultsCsvExporter;
 use Tests\ShopBundle\Performance\Feed\PerformanceTestSample;
 use Tests\ShopBundle\Test\FunctionalTestCase;
@@ -162,7 +162,11 @@ class AllFeedsTest extends FunctionalTestCase
             'feedName' => $feedConfig->getFeedName(),
             'domainId' => $domainConfig->getId(),
         ];
-        $uri = $router->generate(self::ROUTE_NAME_GENERATE_FEED, $feedGenerationParameters, RouterInterface::RELATIVE_PATH);
+        $uri = $router->generate(
+            self::ROUTE_NAME_GENERATE_FEED,
+            $feedGenerationParameters,
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
 
         $clientEntityManager->beginTransaction();
 

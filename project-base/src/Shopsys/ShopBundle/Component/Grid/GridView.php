@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Component\Grid;
 use Shopsys\ShopBundle\Component\Grid\Grid;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
 
@@ -201,7 +202,11 @@ class GridView
         $masterRequest = $this->requestStack->getMasterRequest();
         $routeParameters = $this->grid->getUrlParameters($parameters, $removeParameters);
 
-        return $this->router->generate($masterRequest->attributes->get('_route'), $routeParameters, true);
+        return $this->router->generate(
+            $masterRequest->attributes->get('_route'),
+            $routeParameters,
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 
     /**

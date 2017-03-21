@@ -5,7 +5,7 @@ namespace Tests\ShopBundle\Crawler\Localization;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
 use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class LocalizationListenerTest extends DatabaseTestCase
@@ -14,7 +14,7 @@ class LocalizationListenerTest extends DatabaseTestCase
     {
         $router = $this->getContainer()->get(CurrentDomainRouter::class);
         /* @var $router \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter */
-        $productUrl = $router->generate('front_product_detail', ['id' => 3], RouterInterface::RELATIVE_PATH);
+        $productUrl = $router->generate('front_product_detail', ['id' => 3], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $crawler = $this->getClient()->request('GET', $productUrl);
 
@@ -37,7 +37,7 @@ class LocalizationListenerTest extends DatabaseTestCase
 
         $router = $this->getContainer()->get(DomainRouterFactory::class)->getRouter(2);
         /* @var $router \Symfony\Component\Routing\RouterInterface */
-        $productUrl = $router->generate('front_product_detail', ['id' => 3], RouterInterface::RELATIVE_PATH);
+        $productUrl = $router->generate('front_product_detail', ['id' => 3], UrlGeneratorInterface::ABSOLUTE_URL);
         $crawler = $this->getClient()->request('GET', $productUrl);
 
         $this->assertSame(200, $this->getClient()->getResponse()->getStatusCode());

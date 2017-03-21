@@ -10,7 +10,7 @@ use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ErrorPagesFacade
 {
@@ -104,7 +104,7 @@ class ErrorPagesFacade
                 '_format' => 'html',
                 'code' => $statusCode,
             ],
-            RouterInterface::ABSOLUTE_URL
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $errorPageContent = $this->getUrlContent($errorPageUrl, $statusCode);

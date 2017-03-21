@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Twig;
 
 use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
@@ -38,15 +39,14 @@ class RouterExtension extends Twig_Extension
      * @param string $route
      * @param array $routeParams
      * @param int $domainId
-     * @param bool $absolute
      * @return string|null
      */
-    public function findUrlByDomainId($route, array $routeParams, $domainId, $absolute = true)
+    public function findUrlByDomainId($route, array $routeParams, $domainId)
     {
         $domainRouter = $this->domainRouterFactory->getRouter($domainId);
 
         try {
-            return $domainRouter->generate($route, $routeParams, $absolute);
+            return $domainRouter->generate($route, $routeParams, UrlGeneratorInterface::ABSOLUTE_URL);
         } catch (\Symfony\Component\Routing\Exception\RouteNotFoundException $e) {
             return null;
         }
