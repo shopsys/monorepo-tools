@@ -756,13 +756,13 @@
     <target name="twig-lint-diff" depends="diff-files" description="Lint: Check syntax of twig templates (only on modified files)">
         <if>
             <not>
-                <equals arg1="${diff.files.twig}" arg2="" trim="true" />
+                <equals arg1="${diff.files.twig.spaces}" arg2="" trim="true" />
             </not>
             <then>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
                     <arg value="bin/console" />
                     <arg value="lint:twig" />
-                    <arg line="${diff.files.twig}"/>
+                    <arg line="${diff.files.twig.spaces}"/>
                 </exec>
             </then>
         </if>
