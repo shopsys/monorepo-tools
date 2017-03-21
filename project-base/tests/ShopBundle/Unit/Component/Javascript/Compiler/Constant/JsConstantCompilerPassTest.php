@@ -16,7 +16,7 @@ class JsConstantCompilerPassTest extends FunctionalTestCase
             $jsConstantCompilerPass,
         ]);
 
-        $content = file_get_contents(__DIR__ . '/testFoo.js');
+        $content = file_get_contents(__DIR__ . '/testDefinedConstant.js');
         $result = $jsCompiler->compile($content);
 
         $expectedResult = <<<EOD
@@ -37,7 +37,7 @@ EOD;
             $jsConstantCompilerPass,
         ]);
 
-        $content = file_get_contents(__DIR__ . '/testBar.js');
+        $content = file_get_contents(__DIR__ . '/testUndefinedConstant.js');
         $jsCompiler->compile($content);
     }
 }
