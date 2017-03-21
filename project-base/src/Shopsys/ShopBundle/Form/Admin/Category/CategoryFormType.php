@@ -116,12 +116,11 @@ class CategoryFormType extends AbstractType
                 'choice_value' => 'id',
                 'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
-            ->add($builder
-                ->create('showOnDomains', DomainsType::class, [
-                    InvertChoiceTypeExtension::INVERT_OPTION => true,
-                    'property_path' => 'hiddenOnDomains',
-                    'required' => false,
-                ]))
+            ->add('showOnDomains', DomainsType::class, [
+                InvertChoiceTypeExtension::INVERT_OPTION => true,
+                'property_path' => 'hiddenOnDomains',
+                'required' => false,
+            ])
             ->add('heurekaCzFeedCategory', ChoiceType::class, [
                 'required' => false,
                 'choices' => $this->feedCategoryRepository->getAllHeurekaCz(),
