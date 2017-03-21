@@ -13,10 +13,7 @@ class JsConstantCompilerPassTest extends FunctionalTestCase
         $content = file_get_contents(__DIR__ . '/testDefinedConstant.js');
         $result = $this->getJsCompiler()->compile($content);
 
-        $expectedResult = <<<EOD
-var noLeadingBackslash = "bar";
-var leadingBackslash = "bar2";
-EOD;
+        $expectedResult = file_get_contents(__DIR__ . '/testDefinedConstant.expected.js');
 
         $this->assertSame($expectedResult, $result);
     }
@@ -26,10 +23,7 @@ EOD;
         $content = file_get_contents(__DIR__ . '/testClassName.js');
         $result = $this->getJsCompiler()->compile($content);
 
-        $expectedResult = <<<EOD
-var noLeadingBackslash = "Tests\\\\ShopBundle\\\\Unit\\\\Component\\\\Javascript\\\\Compiler\\\\Constant\\\\Testclass";
-var leadingBackslash = "Tests\\\\ShopBundle\\\\Unit\\\\Component\\\\Javascript\\\\Compiler\\\\Constant\\\\Testclass";
-EOD;
+        $expectedResult = file_get_contents(__DIR__ . '/testClassName.expected.js');
 
         $this->assertSame($expectedResult, $result);
     }
