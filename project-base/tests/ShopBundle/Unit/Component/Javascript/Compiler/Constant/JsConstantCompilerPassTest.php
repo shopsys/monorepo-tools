@@ -20,8 +20,8 @@ class JsConstantCompilerPassTest extends FunctionalTestCase
         $result = $jsCompiler->compile($content);
 
         $expectedResult = <<<EOD
-var x = "bar";
-var y = "bar2";
+var noLeadingBackslash = "bar";
+var leadingBackslash = "bar2";
 EOD;
 
         $this->assertSame($expectedResult, $result);

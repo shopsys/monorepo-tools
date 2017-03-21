@@ -1,2 +1,2 @@
-var x = Shopsys.constant('Tests\\ShopBundle\\Unit\\Component\\Javascript\\Compiler\\Constant\\Testclass::FOO');
-var y = Shopsys.constant('\\Tests\\ShopBundle\\Unit\\Component\\Javascript\\Compiler\\Constant\\Testclass::FOO2');
+var noLeadingBackslash = Shopsys.constant('Tests\\ShopBundle\\Unit\\Component\\Javascript\\Compiler\\Constant\\Testclass::FOO');
+var leadingBackslash = Shopsys.constant('\\Tests\\ShopBundle\\Unit\\Component\\Javascript\\Compiler\\Constant\\Testclass::FOO2');
