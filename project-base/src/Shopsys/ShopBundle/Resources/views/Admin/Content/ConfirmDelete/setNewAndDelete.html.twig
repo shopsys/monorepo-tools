@@ -1,4 +1,4 @@
-{% if remainingEntitiesChoiceList.choices|length > 0 %}
+{% if possibleReplacements|length > 0 %}
     {{ message|nl2br }}
     {# custom form rendering because of csrf token and input names - controllers delete actions expect "newId" parameter #}
     <form action="{{ url(route, {id: entityId}) }}" method="get" class="js-confirm-delete-form margin-top-20">
@@ -9,11 +9,8 @@
         />
         <select name="newId" class="js-confirm-delete-select">
             <option value="">-- {{ 'Select new value'|trans }} --</option>
-            {% for preferredView in remainingEntitiesChoiceList.preferredViews %}
-                <option value="{{ preferredView.value }}">{{ preferredView.label }}</option>
-            {% endfor %}
-            {% for remainingView in remainingEntitiesChoiceList.remainingViews %}
-                <option value="{{ remainingView.value }}">{{ remainingView.label }}</option>
+            {% for possibleReplacement in possibleReplacements %}
+                <option value="{{ possibleReplacement.id }}">{{ possibleReplacement.name }}</option>
             {% endfor %}
         </select>
 

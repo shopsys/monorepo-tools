@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Model\Order\Status\Grid\OrderStatusInlineEdit;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -111,13 +110,12 @@ class OrderStatusController extends AdminBaseController
                     . 'sent to customers.',
                     ['%name%' => $orderStatus->getName()]
                 );
-                $remainingOrderStatusesList = new ObjectChoiceList($this->orderStatusFacade->getAllExceptId($id), 'name', [], null, 'id');
 
                 return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
                     $message,
                     'admin_orderstatus_delete',
                     $id,
-                    $remainingOrderStatusesList
+                    $this->orderStatusFacade->getAllExceptId($id)
                 );
             } else {
                 $message = t(
