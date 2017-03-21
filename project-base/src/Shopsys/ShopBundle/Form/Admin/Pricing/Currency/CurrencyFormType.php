@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Pricing\Currency;
 
-use Shopsys\ShopBundle\Form\CurrencyType;
+use Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository;
+use Shopsys\ShopBundle\Model\Localization\Localization;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -14,11 +15,35 @@ use Symfony\Component\Validator\Constraints;
 class CurrencyFormType extends AbstractType
 {
     /**
+     * @var \Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository
+     */
+    private $intlCurrencyRepository;
+
+    /**
+     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     */
+    private $localization;
+
+    public function __construct(
+        IntlCurrencyRepository $intlCurrencyRepository,
+        Localization $localization
+    ) {
+        $this->intlCurrencyRepository = $intlCurrencyRepository;
+        $this->localization = $localization;
+    }
+
+    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $intlCurrencies = $this->intlCurrencyRepository->getAll($this->localization->getLocale());
+        $possibleCurrencyCodes = [];
+        foreach ($intlCurrencies as $intlCurrency) {
+            $possibleCurrencyCodes[] = $intlCurrency->getCurrencyCode();
+        }
+
         $builder
             ->add('name', TextType::class, [
                 'required' => true,
@@ -27,11 +52,14 @@ class CurrencyFormType extends AbstractType
                     new Constraints\Length(['max' => 50, 'maxMessage' => 'Name cannot be longer than {{ limit }} characters']),
                 ],
             ])
-            ->add('code', CurrencyType::class, [
+            ->add('code', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter currency code']),
-                    new Constraints\Length(['max' => 3, 'maxMessage' => 'Currency code cannot be longer than {{ limit }} characters']),
+                    new Constraints\Choice([
+                        'choices' => $possibleCurrencyCodes,
+                        'message' => 'Please enter valid 3-digit currency code according to ISO 4217 standard (uppercase)',
+                    ]),
                 ],
             ])
             ->add('exchangeRate', NumberType::class, [

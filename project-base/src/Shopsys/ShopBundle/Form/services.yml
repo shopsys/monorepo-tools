@@ -59,6 +59,11 @@ services:
     tags:
       - { name: form.type }
 
+  shopsys.shop.form.admin.pricing.currency.currency_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Pricing\Currency\CurrencyFormType
+    tags:
+      - { name: form.type }
+
   shopsys.shop.form.admin.pricing.currency.currency_setting_form_type:
     class: Shopsys\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType
     tags:
@@ -171,11 +176,6 @@ services:
 
   shopsys.shop.form.color_picker:
     class: Shopsys\ShopBundle\Form\ColorPickerType
-    tags:
-      - { name: form.type }
-
-  shopsys.shop.form.currency:
-    class: Shopsys\ShopBundle\Form\CurrencyType
     tags:
       - { name: form.type }
 
