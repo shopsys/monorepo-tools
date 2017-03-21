@@ -39,7 +39,7 @@ class CategoriesType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['categoryDetails'] = $this->categoryDetailFactory->createDetailsHierarchy($options['choice_list']->getChoices());
+        $view->vars['categoryDetails'] = $this->categoryDetailFactory->createDetailsHierarchy($options['choices']);
         if (isset($options[self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID])) {
             $view->vars['mutedNotVisibleOnDomainId'] = $options[self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID];
         }

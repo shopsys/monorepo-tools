@@ -34,7 +34,7 @@ class InvertChoiceTypeExtension extends AbstractTypeExtension
         }
 
         if ($options[self::INVERT_OPTION]) {
-            $builder->addModelTransformer(new InverseMultipleChoiceTransformer($options['choice_list']));
+            $builder->addModelTransformer(new InverseMultipleChoiceTransformer($options['choices']));
         }
     }
 
