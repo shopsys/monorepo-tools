@@ -60,6 +60,7 @@ class JsConstantCompilerPass implements JsCompilerPassInterface
             $className = $constantNameParts[0];
 
             if (class_exists($className)) {
+                // remove leading backslash to be consistent with behavior of ::class in PHP
                 return ltrim($className, '\\');
             }
         }
