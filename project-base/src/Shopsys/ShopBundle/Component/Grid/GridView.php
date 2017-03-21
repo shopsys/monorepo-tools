@@ -270,6 +270,8 @@ class GridView
         $templates = [];
 
         $template = $this->twig->loadTemplate($theme);
+        /* @var $template \Twig_Template */
+
         while ($template != null) {
             $templates[] = $template;
             $template = $template->getParent([]);
