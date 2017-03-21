@@ -18,16 +18,13 @@ class InputPriceTypeFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $inputPriceTypesLabels = $this->getInputPriceTypesLabels();
-
-        $choices = [];
-        foreach (PricingSetting::getInputPriceTypes() as $inputPriceType) {
-            $choices[$inputPriceType] = $inputPriceTypesLabels[$inputPriceType];
-        }
-
         $builder
             ->add('type', ChoiceType::class, [
-                'choices' => $choices,
+                'choices' => [
+                    t('Excluding VAT') => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
+                    t('Including VAT') => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
+                ],
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter input prices']),
                 ],
@@ -43,16 +40,5 @@ class InputPriceTypeFormType extends AbstractType
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);
-    }
-
-    /**
-     * @return array
-     */
-    private function getInputPriceTypesLabels()
-    {
-        return [
-            PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT => t('Excluding VAT'),
-            PricingSetting::INPUT_PRICE_TYPE_WITH_VAT => t('Including VAT'),
-        ];
     }
 }

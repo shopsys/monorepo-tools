@@ -13,6 +13,11 @@ class Advert
     const TYPE_IMAGE = 'image';
     const TYPE_CODE = 'code';
 
+    const POSITION_HEADER = 'header';
+    const POSITION_FOOTER = 'footer';
+    const POSITION_PRODUCT_LIST = 'productList';
+    const POSITION_LEFT_SIDEBAR = 'leftSidebar';
+
     /**
      * @var int
      *

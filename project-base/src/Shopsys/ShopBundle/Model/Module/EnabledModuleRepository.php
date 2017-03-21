@@ -39,7 +39,7 @@ class EnabledModuleRepository
      */
     public function findByName($moduleName)
     {
-        if (!in_array($moduleName, $this->moduleList->getValues(), true)) {
+        if (!in_array($moduleName, $this->moduleList->getModuleNamesIndexedByLabel(), true)) {
             throw new \Shopsys\ShopBundle\Model\Module\Exception\UnsupportedModuleException($moduleName);
         }
 

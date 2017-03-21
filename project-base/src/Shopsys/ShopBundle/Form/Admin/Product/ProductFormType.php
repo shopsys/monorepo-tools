@@ -179,10 +179,11 @@ class ProductFormType extends AbstractType
                 'required' => true,
                 'expanded' => false,
                 'choices' => [
-                    Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY => t('Set alternative availability'),
-                    Product::OUT_OF_STOCK_ACTION_HIDE => t('Hide product'),
-                    Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE => t('Exclude from sale'),
+                    t('Set alternative availability') => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
+                    t('Hide product') => Product::OUT_OF_STOCK_ACTION_HIDE,
+                    t('Exclude from sale') => Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE,
                 ],
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose action --'),
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -259,9 +260,10 @@ class ProductFormType extends AbstractType
                 'required' => true,
                 'expanded' => true,
                 'choices' => [
-                    Product::PRICE_CALCULATION_TYPE_AUTO => t('Automatically'),
-                    Product::PRICE_CALCULATION_TYPE_MANUAL => t('Manually'),
+                    t('Automatically') => Product::PRICE_CALCULATION_TYPE_AUTO,
+                    t('Manually') => Product::PRICE_CALCULATION_TYPE_MANUAL,
                 ],
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add('orderingPriority', IntegerType::class, [
                 'required' => true,

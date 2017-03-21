@@ -30,18 +30,6 @@ class VatSettingsFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $roundingTypeChoices = [
-            PricingSetting::ROUNDING_TYPE_HUNDREDTHS => t('To hundredths (cents)'),
-            PricingSetting::ROUNDING_TYPE_FIFTIES => t('To fifty hundredths (halfs)'),
-            PricingSetting::ROUNDING_TYPE_INTEGER => t('To whole numbers'),
-        ];
-
-        if (array_keys($roundingTypeChoices) !== PricingSetting::getRoundingTypes()) {
-            throw new \Shopsys\ShopBundle\Form\Exception\InconsistentChoicesException(
-                'Rounding type choices in ' . __CLASS__ . ' are not consistent with PricingSetting::getRoundingTypes().'
-            );
-        }
-
         $builder
             ->add('defaultVat', ChoiceType::class, [
                 'required' => true,
@@ -55,7 +43,12 @@ class VatSettingsFormType extends AbstractType
             ])
             ->add('roundingType', ChoiceType::class, [
                 'required' => true,
-                'choices' => $roundingTypeChoices,
+                'choices' => [
+                    t('To hundredths (cents)') => PricingSetting::ROUNDING_TYPE_HUNDREDTHS,
+                    t('To fifty hundredths (halfs)') => PricingSetting::ROUNDING_TYPE_FIFTIES,
+                    t('To whole numbers') => PricingSetting::ROUNDING_TYPE_INTEGER,
+                ],
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add('save', SubmitType::class);
     }

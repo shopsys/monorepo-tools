@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Front;
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType;
-use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
+use Shopsys\ShopBundle\Model\Advert\Advert;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 use Shopsys\ShopBundle\Model\Module\ModuleFacade;
@@ -181,7 +181,7 @@ class ProductController extends FrontBaseController
         if ($request->isXmlHttpRequest()) {
             return $this->render('@ShopsysShop/Front/Content/Product/ajaxList.html.twig', $viewParameters);
         } else {
-            $viewParameters['POSITION_PRODUCT_LIST'] = AdvertPositionList::POSITION_PRODUCT_LIST;
+            $viewParameters['POSITION_PRODUCT_LIST'] = Advert::POSITION_PRODUCT_LIST;
 
             return $this->render('@ShopsysShop/Front/Content/Product/list.html.twig', $viewParameters);
         }

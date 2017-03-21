@@ -47,7 +47,7 @@ abstract class AbstractAdvancedSearchFormFactory
     /**
      * @param string $name
      * @param array $rulesViewData
-     * @return \Symfony\Component\Form\Form
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createRulesForm($name, $rulesViewData)
     {
@@ -72,7 +72,7 @@ abstract class AbstractAdvancedSearchFormFactory
     /**
      * @param string $name
      * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $ruleFilter
-     * @return \Symfony\Component\Form\Form
+     * @return \Symfony\Component\Form\FormBuilderInterface
      */
     private function createRuleFormBuilder($name, AdvancedSearchFilterInterface $ruleFilter)
     {
@@ -81,11 +81,13 @@ abstract class AbstractAdvancedSearchFormFactory
         ])
             ->add('subject', ChoiceType::class, [
                 'choices' => $this->getSubjectChoices(),
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'expanded' => false,
                 'multiple' => false,
             ])
             ->add('operator', ChoiceType::class, [
                 'choices' => $this->getFilterOperatorChoices($ruleFilter),
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'expanded' => false,
                 'multiple' => false,
             ])
@@ -102,7 +104,7 @@ abstract class AbstractAdvancedSearchFormFactory
     {
         $choices = [];
         foreach ($filter->getAllowedOperators() as $operator) {
-            $choices[$operator] = $this->advancedSearchOperatorTranslation->translateOperator($operator);
+            $choices[$this->advancedSearchOperatorTranslation->translateOperator($operator)] = $operator;
         }
 
         return $choices;
@@ -115,7 +117,7 @@ abstract class AbstractAdvancedSearchFormFactory
     {
         $choices = [];
         foreach ($this->advancedSearchConfig->getAllFilters() as $filter) {
-            $choices[$filter->getName()] = $this->advancedSearchFilterTranslation->translateFilterName($filter->getName());
+            $choices[$this->advancedSearchFilterTranslation->translateFilterName($filter->getName())] = $filter->getName();
         }
 
         return $choices;

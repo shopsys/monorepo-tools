@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Form\UrlListType;
 use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticleData;
-use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -26,17 +25,10 @@ class ArticleFormType extends AbstractType
      */
     private $seoSettingFacade;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticlePlacementList
-     */
-    private $articlePlacementList;
-
     public function __construct(
-        SeoSettingFacade $seoSettingFacade,
-        ArticlePlacementList $articlePlacementList
+        SeoSettingFacade $seoSettingFacade
     ) {
         $this->seoSettingFacade = $seoSettingFacade;
-        $this->articlePlacementList = $articlePlacementList;
     }
 
     /**
@@ -79,7 +71,12 @@ class ArticleFormType extends AbstractType
                 ->add('domainId', DomainType::class, ['required' => true])
                 ->add('placement', ChoiceType::class, [
                     'required' => true,
-                    'choices' => $this->articlePlacementList->getTranslationsIndexedByValue(),
+                    'choices' => [
+                        t('in upper menu') => Article::PLACEMENT_TOP_MENU,
+                        t('in footer') => Article::PLACEMENT_FOOTER,
+                        t('without positoning') => Article::PLACEMENT_NONE,
+                    ],
+                    'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                     'placeholder' => t('-- Choose article position --'),
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please choose article placement']),

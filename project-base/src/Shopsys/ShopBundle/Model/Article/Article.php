@@ -13,6 +13,10 @@ use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
  */
 class Article implements OrderableEntityInterface
 {
+    const PLACEMENT_TOP_MENU = 'topMenu';
+    const PLACEMENT_FOOTER = 'footer';
+    const PLACEMENT_NONE = 'none';
+
     /**
      * @var int
      *

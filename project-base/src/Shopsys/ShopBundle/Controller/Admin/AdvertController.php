@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\ShopBundle\Model\Advert\Advert;
 use Shopsys\ShopBundle\Model\Advert\AdvertData;
 use Shopsys\ShopBundle\Model\Advert\AdvertFacade;
-use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 use Shopsys\ShopBundle\Twig\ImageExtension;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -35,11 +34,6 @@ class AdvertController extends AdminBaseController
      * @var \Shopsys\ShopBundle\Model\Advert\AdvertFacade
      */
     private $advertFacade;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Advert\AdvertPositionList
-     */
-    private $advertPositionList;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
@@ -62,7 +56,6 @@ class AdvertController extends AdminBaseController
         GridFactory $gridFactory,
         SelectedDomain $selectedDomain,
         Breadcrumb $breadcrumb,
-        AdvertPositionList $advertPositionList,
         ImageExtension $imageExtension
     ) {
         $this->advertFacade = $advertFacade;
@@ -70,7 +63,6 @@ class AdvertController extends AdminBaseController
         $this->gridFactory = $gridFactory;
         $this->selectedDomain = $selectedDomain;
         $this->breadcrumb = $breadcrumb;
-        $this->advertPositionList = $advertPositionList;
         $this->imageExtension = $imageExtension;
     }
 
@@ -156,7 +148,12 @@ class AdvertController extends AdminBaseController
             ->setConfirmMessage(t('Do you really want to remove this advert?'));
 
         $grid->setTheme('@ShopsysShop/Admin/Content/Advert/listGrid.html.twig', [
-            'advertPositionsByName' => $this->advertPositionList->getTranslationsIndexedByValue(),
+            'advertPositionsByName' => [
+                Advert::POSITION_HEADER => t('under heading'),
+                Advert::POSITION_FOOTER => t('above footer'),
+                Advert::POSITION_PRODUCT_LIST => t('in category (above the category name)'),
+                Advert::POSITION_LEFT_SIDEBAR => t('in left panel (under category tree)'),
+            ],
             'TYPE_IMAGE' => Advert::TYPE_IMAGE,
         ]);
 
