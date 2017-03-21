@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Product;
 
-use Shopsys\ShopBundle\Form\Extension\IndexedObjectChoiceList;
 use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
 use Symfony\Component\Form\AbstractType;
@@ -36,9 +35,13 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
 
             $builder->add($parameter->getId(), ChoiceType::class, [
                 'label' => $parameter->getName(),
-                'expanded' => true,
+                'choices' => $parameterValues,
+                'choice_label' => 'text',
+                'choice_value' => 'id',
+                'choice_name' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => true,
-                'choice_list' => new IndexedObjectChoiceList($parameterValues, 'id', 'text', [], null, 'id'),
+                'expanded' => true,
             ]);
         }
 

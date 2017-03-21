@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Product;
 
-use Shopsys\ShopBundle\Form\Extension\IndexedObjectChoiceList;
 use Shopsys\ShopBundle\Model\Product\Filter\PriceRange;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
@@ -21,6 +20,7 @@ class ProductFilterFormType extends AbstractType
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -63,15 +63,23 @@ class ProductFilterFormType extends AbstractType
             ->add('inStock', CheckboxType::class, ['required' => false])
             ->add('flags', ChoiceType::class, [
                 'required' => false,
-                'expanded' => true,
+                'choices' => $config->getFlagChoices(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choice_name' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => true,
-                'choice_list' => new IndexedObjectChoiceList($config->getFlagChoices(), 'id', 'name', [], null, 'id'),
+                'expanded' => true,
             ])
             ->add('brands', ChoiceType::class, [
                 'required' => false,
-                'expanded' => true,
+                'choices' => $config->getBrandChoices(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choice_name' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => true,
-                'choice_list' => new IndexedObjectChoiceList($config->getBrandChoices(), 'id', 'name', [], null, 'id'),
+                'expanded' => true,
             ])
             ->add('search', SubmitType::class);
     }

@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Form;
 
-use Shopsys\ShopBundle\Form\Extension\IndexedObjectChoiceList;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 use Shopsys\ShopBundle\Model\Category\Detail\CategoryDetailFactory;
 use Symfony\Component\Form\AbstractType;
@@ -57,7 +56,11 @@ class CategoriesType extends AbstractType
             ->setDefined(self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID)
             ->setAllowedTypes(self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID, 'int')
             ->setDefaults([
-                'choice_list' => new IndexedObjectChoiceList($categories, 'id', 'name', [], null, 'id'),
+                'choices' => $categories,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choice_name' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => true,
                 'expanded' => true,
             ]);
