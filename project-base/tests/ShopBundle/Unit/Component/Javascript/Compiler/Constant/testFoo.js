@@ -1,2 +1,0 @@
-var x = Shopsys.constant('Tests\\ShopBundle\\Unit\\Component\\Javascript\\Compiler\\Constant\\Testclass::FOO');
-var y = Shopsys.constant('\\Tests\\ShopBundle\\Unit\\Component\\Javascript\\Compiler\\Constant\\Testclass::FOO2');

@@ -2,9 +2,10 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product\Parameter;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\Locale\LocalizedType;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -18,7 +19,7 @@ class ParameterFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', FormType::LOCALIZED, [
+            ->add('name', LocalizedType::class, [
                 'required' => false,
                 'options' => [
                     'constraints' => [
@@ -27,7 +28,7 @@ class ParameterFormType extends AbstractType
                     ],
                 ],
             ])
-            ->add('visible', FormType::CHECKBOX, ['required' => false]);
+            ->add('visible', CheckboxType::class, ['required' => false]);
     }
 
     /**

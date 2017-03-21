@@ -3,8 +3,8 @@
 namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
-use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 
 class ArticleController extends FrontBaseController
 {
@@ -32,7 +32,7 @@ class ArticleController extends FrontBaseController
 
     public function menuAction()
     {
-        $articles = $this->articleFacade->getVisibleArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_TOP_MENU);
+        $articles = $this->articleFacade->getVisibleArticlesForPlacementOnCurrentDomain(Article::PLACEMENT_TOP_MENU);
 
         return $this->render('@ShopsysShop/Front/Content/Article/menu.html.twig', [
             'articles' => $articles,
@@ -41,7 +41,7 @@ class ArticleController extends FrontBaseController
 
     public function footerAction()
     {
-        $articles = $this->articleFacade->getVisibleArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_FOOTER);
+        $articles = $this->articleFacade->getVisibleArticlesForPlacementOnCurrentDomain(Article::PLACEMENT_FOOTER);
 
         return $this->render('@ShopsysShop/Front/Content/Article/menu.html.twig', [
             'articles' => $articles,

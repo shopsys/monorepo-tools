@@ -4,13 +4,14 @@ namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory;
-use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
+use Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType;
+use Shopsys\ShopBundle\Model\Advert\Advert;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 use Shopsys\ShopBundle\Model\Module\ModuleFacade;
 use Shopsys\ShopBundle\Model\Module\ModuleList;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
+use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfigFactory;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeForBrandFacade;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeForListFacade;
@@ -26,9 +27,9 @@ class ProductController extends FrontBaseController
     const PRODUCTS_PER_PAGE = 12;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory
+     * @var \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfigFactory
      */
-    private $productFilterFormTypeFactory;
+    private $productFilterConfigFactory;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
@@ -80,7 +81,7 @@ class ProductController extends FrontBaseController
         CategoryFacade $categoryFacade,
         Domain $domain,
         ProductOnCurrentDomainFacade $productOnCurrentDomainFacade,
-        ProductFilterFormTypeFactory $productFilterFormTypeFactory,
+        ProductFilterConfigFactory $productFilterConfigFactory,
         ProductListOrderingModeForListFacade $productListOrderingModeForListFacade,
         ProductListOrderingModeForBrandFacade $productListOrderingModeForBrandFacade,
         ProductListOrderingModeForSearchFacade $productListOrderingModeForSearchFacade,
@@ -91,7 +92,7 @@ class ProductController extends FrontBaseController
         $this->categoryFacade = $categoryFacade;
         $this->domain = $domain;
         $this->productOnCurrentDomainFacade = $productOnCurrentDomainFacade;
-        $this->productFilterFormTypeFactory = $productFilterFormTypeFactory;
+        $this->productFilterConfigFactory = $productFilterConfigFactory;
         $this->productListOrderingModeForListFacade = $productListOrderingModeForListFacade;
         $this->productListOrderingModeForBrandFacade = $productListOrderingModeForBrandFacade;
         $this->productListOrderingModeForSearchFacade = $productListOrderingModeForSearchFacade;
@@ -143,8 +144,10 @@ class ProductController extends FrontBaseController
 
         $productFilterData = new ProductFilterData();
 
-        $productFilterFormType = $this->createProductFilterFormTypeForCategory($category);
-        $filterForm = $this->createForm($productFilterFormType, $productFilterData);
+        $productFilterConfig = $this->createProductFilterConfigForCategory($category);
+        $filterForm = $this->createForm(ProductFilterFormType::class, $productFilterData, [
+            'product_filter_config' => $productFilterConfig,
+        ]);
         $filterForm->handleRequest($request);
 
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsInCategory(
@@ -159,7 +162,7 @@ class ProductController extends FrontBaseController
         if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_FILTER_COUNTS)) {
             $productFilterCountData = $this->productOnCurrentDomainFacade->getProductFilterCountDataInCategory(
                 $id,
-                $productFilterFormType,
+                $productFilterConfig,
                 $productFilterData
             );
         }
@@ -172,13 +175,13 @@ class ProductController extends FrontBaseController
             'filterForm' => $filterForm->createView(),
             'filterFormSubmited' => $filterForm->isSubmitted(),
             'visibleChildren' => $this->categoryFacade->getAllVisibleChildrenByCategoryAndDomainId($category, $this->domain->getId()),
-            'priceRange' => $productFilterFormType->getPriceRange(),
+            'priceRange' => $productFilterConfig->getPriceRange(),
         ];
 
         if ($request->isXmlHttpRequest()) {
             return $this->render('@ShopsysShop/Front/Content/Product/ajaxList.html.twig', $viewParameters);
         } else {
-            $viewParameters['POSITION_PRODUCT_LIST'] = AdvertPositionList::POSITION_PRODUCT_LIST;
+            $viewParameters['POSITION_PRODUCT_LIST'] = Advert::POSITION_PRODUCT_LIST;
 
             return $this->render('@ShopsysShop/Front/Content/Product/list.html.twig', $viewParameters);
         }
@@ -238,8 +241,10 @@ class ProductController extends FrontBaseController
 
         $productFilterData = new ProductFilterData();
 
-        $productFilterFormType = $this->createProductFilterFormTypeForSearch($searchText);
-        $filterForm = $this->createForm($productFilterFormType, $productFilterData);
+        $productFilterConfig = $this->createProductFilterConfigForSearch($searchText);
+        $filterForm = $this->createForm(ProductFilterFormType::class, $productFilterData, [
+            'product_filter_config' => $productFilterConfig,
+        ]);
         $filterForm->handleRequest($request);
 
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsForSearch(
@@ -254,7 +259,7 @@ class ProductController extends FrontBaseController
         if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_FILTER_COUNTS)) {
             $productFilterCountData = $this->productOnCurrentDomainFacade->getProductFilterCountDataForSearch(
                 $searchText,
-                $productFilterFormType,
+                $productFilterConfig,
                 $productFilterData
             );
         }
@@ -266,7 +271,7 @@ class ProductController extends FrontBaseController
             'filterFormSubmited' => $filterForm->isSubmitted(),
             'searchText' => $searchText,
             'SEARCH_TEXT_PARAMETER' => self::SEARCH_TEXT_PARAMETER,
-            'priceRange' => $productFilterFormType->getPriceRange(),
+            'priceRange' => $productFilterConfig->getPriceRange(),
         ];
 
         if ($request->isXmlHttpRequest()) {
@@ -279,11 +284,11 @@ class ProductController extends FrontBaseController
 
     /**
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @return \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType
+     * @return \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig
      */
-    private function createProductFilterFormTypeForCategory(Category $category)
+    private function createProductFilterConfigForCategory(Category $category)
     {
-        return $this->productFilterFormTypeFactory->createForCategory(
+        return $this->productFilterConfigFactory->createForCategory(
             $this->domain->getId(),
             $this->domain->getLocale(),
             $category
@@ -292,11 +297,11 @@ class ProductController extends FrontBaseController
 
     /**
      * @param string|null $searchText
-     * @return \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType
+     * @return \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig
      */
-    private function createProductFilterFormTypeForSearch($searchText)
+    private function createProductFilterConfigForSearch($searchText)
     {
-        return $this->productFilterFormTypeFactory->createForSearch(
+        return $this->productFilterConfigFactory->createForSearch(
             $this->domain->getId(),
             $this->domain->getLocale(),
             $searchText

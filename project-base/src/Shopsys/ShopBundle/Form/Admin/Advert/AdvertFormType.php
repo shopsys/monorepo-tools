@@ -2,12 +2,17 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Advert;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\DomainType;
+use Shopsys\ShopBundle\Form\FileUploadType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Advert\Advert;
 use Shopsys\ShopBundle\Model\Advert\AdvertData;
-use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,16 +22,6 @@ class AdvertFormType extends AbstractType
 {
     const VALIDATION_GROUP_TYPE_IMAGE = 'typeImage';
     const VALIDATION_GROUP_TYPE_CODE = 'typeCode';
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Advert\AdvertPositionList
-     */
-    private $advertPositionList;
-
-    public function __construct(AdvertPositionList $advertPositionList)
-    {
-        $this->advertPositionList = $advertPositionList;
-    }
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
@@ -42,36 +37,46 @@ class AdvertFormType extends AbstractType
             ]),
         ];
         $builder
-            ->add('domainId', FormType::DOMAIN, [
+            ->add('domainId', DomainType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(),
                 ],
             ])
-            ->add('name', FormType::TEXT, [
+            ->add('name', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name of advertisment area']),
                 ],
             ])
-            ->add('type', FormType::CHOICE, [
+            ->add('type', ChoiceType::class, [
                 'required' => true,
-                'choices' => $this->getTypeChoices(),
+                'choices' => [
+                    t('HTML code') => Advert::TYPE_CODE,
+                    t('Picture with link') => Advert::TYPE_IMAGE,
+                ],
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'expanded' => true,
                 'multiple' => false,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose advertisement type']),
                 ],
             ])
-            ->add('positionName', FormType::CHOICE, [
+            ->add('positionName', ChoiceType::class, [
                 'required' => true,
-                'choices' => $this->advertPositionList->getTranslationsIndexedByValue(),
+                'choices' => [
+                    t('under heading') => Advert::POSITION_HEADER,
+                    t('above footer') => Advert::POSITION_FOOTER,
+                    t('in category (above the category name)') => Advert::POSITION_PRODUCT_LIST,
+                    t('in left panel (under category tree)') => Advert::POSITION_LEFT_SIDEBAR,
+                ],
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose area --'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose advertisement area']),
                 ],
             ])
-            ->add('code', FormType::TEXTAREA, [
+            ->add('code', TextareaType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -80,9 +85,9 @@ class AdvertFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('hidden', FormType::YES_NO, ['required' => false])
-            ->add('link', FormType::TEXT, ['required' => false])
-            ->add('image', FormType::FILE_UPLOAD, [
+            ->add('hidden', YesNoType::class, ['required' => false])
+            ->add('link', TextType::class, ['required' => false])
+            ->add('image', FileUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
                     new Constraints\Image([
@@ -95,7 +100,7 @@ class AdvertFormType extends AbstractType
                 ],
                 'constraints' => ($options['image_exists'] ? [] : $imageConstraints),
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**
@@ -124,16 +129,5 @@ class AdvertFormType extends AbstractType
                     return $validationGroups;
                 },
             ]);
-    }
-
-    /**
-     * @return string[]
-     */
-    private function getTypeChoices()
-    {
-        return [
-            Advert::TYPE_CODE => t('HTML code'),
-            Advert::TYPE_IMAGE => t('Picture with link'),
-        ];
     }
 }

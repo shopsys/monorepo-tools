@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Form;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -47,14 +48,6 @@ class DomainType extends AbstractType
      */
     public function getParent()
     {
-        return 'integer';
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'domain';
+        return IntegerType::class;
     }
 }

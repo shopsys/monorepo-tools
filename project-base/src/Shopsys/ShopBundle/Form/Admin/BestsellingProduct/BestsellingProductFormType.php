@@ -3,8 +3,10 @@
 namespace Shopsys\ShopBundle\Form\Admin\BestsellingProduct;
 
 use Shopsys\ShopBundle\Component\Constraints;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ProductType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +19,7 @@ class BestsellingProductFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('products', FormType::FORM, [
+            ->add('products', FormType::class, [
                 'error_bubbling' => true,
                 'constraints' => [
                     new Constraints\UniqueCollection([
@@ -27,11 +29,11 @@ class BestsellingProductFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
 
         for ($i = 0; $i < 10; $i++) {
             $builder->get('products')
-                ->add($i, FormType::PRODUCT, [
+                ->add($i, ProductType::class, [
                     'required' => false,
                     'placeholder' => null,
                     'enableRemove' => true,

@@ -8,6 +8,7 @@ use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Mail\MailTemplate;
 use Shopsys\ShopBundle\Model\Mail\MessageData;
 use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RegistrationMailService
 {
@@ -63,8 +64,8 @@ class RegistrationMailService
             self::VARIABLE_FIRST_NAME => $user->getFirstName(),
             self::VARIABLE_LAST_NAME => $user->getLastName(),
             self::VARIABLE_EMAIL => $user->getEmail(),
-            self::VARIABLE_URL => $router->generate('front_homepage', [], true),
-            self::VARIABLE_LOGIN_PAGE => $router->generate('front_login', [], true),
+            self::VARIABLE_URL => $router->generate('front_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            self::VARIABLE_LOGIN_PAGE => $router->generate('front_login', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ];
     }
 

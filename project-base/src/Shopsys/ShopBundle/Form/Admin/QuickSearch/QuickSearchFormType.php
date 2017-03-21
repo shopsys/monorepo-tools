@@ -2,8 +2,9 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\QuickSearch;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,10 +18,10 @@ class QuickSearchFormType extends AbstractType
     {
         $builder
             ->setMethod('GET')
-            ->add('text', FormType::TEXT, [
+            ->add('text', TextType::class, [
                 'required' => false,
             ])
-            ->add('submit', FormType::SUBMIT);
+            ->add('submit', SubmitType::class);
     }
 
     /**

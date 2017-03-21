@@ -2,12 +2,13 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Customer;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Customer\DeliveryAddressData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,8 +38,8 @@ class DeliveryAddressFormType extends AbstractType
         $countries = $this->countryFacade->getAllByDomainId($options['domain_id']);
 
         $builder
-            ->add('addressFilled', FormType::CHECKBOX, ['required' => false])
-            ->add('companyName', FormType::TEXT, [
+            ->add('addressFilled', CheckboxType::class, ['required' => false])
+            ->add('companyName', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -48,7 +49,7 @@ class DeliveryAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('firstName', FormType::TEXT, [
+            ->add('firstName', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -62,7 +63,7 @@ class DeliveryAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('lastName', FormType::TEXT, [
+            ->add('lastName', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -76,7 +77,7 @@ class DeliveryAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('telephone', FormType::TEXT, [
+            ->add('telephone', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -86,7 +87,7 @@ class DeliveryAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('street', FormType::TEXT, [
+            ->add('street', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -100,7 +101,7 @@ class DeliveryAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('city', FormType::TEXT, [
+            ->add('city', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -114,7 +115,7 @@ class DeliveryAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('postcode', FormType::TEXT, [
+            ->add('postcode', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -128,9 +129,12 @@ class DeliveryAddressFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('country', FormType::CHOICE, [
+            ->add('country', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($countries, 'name', [], null, 'id'),
+                'choices' => $countries,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ]);
     }
 

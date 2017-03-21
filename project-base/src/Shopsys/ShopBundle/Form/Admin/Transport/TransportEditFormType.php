@@ -2,10 +2,11 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Transport;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportEditData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -31,7 +32,7 @@ class TransportEditFormType extends AbstractType
         $builder
             ->add('transportData', TransportFormType::class)
             ->add($this->getPricesBuilder($builder))
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**
@@ -45,9 +46,9 @@ class TransportEditFormType extends AbstractType
         ]);
         foreach ($this->currencyFacade->getAll() as $currency) {
             $pricesBuilder
-                ->add($currency->getId(), FormType::MONEY, [
+                ->add($currency->getId(), MoneyType::class, [
                     'currency' => false,
-                    'precision' => 6,
+                    'scale' => 6,
                     'required' => true,
                     'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
                     'constraints' => [

@@ -6,12 +6,13 @@ use Shopsys\ShopBundle\Component\Form\ResizeFormListener;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener as SymfonyResizerFormListener;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Make CollectionType use custom ResizeFormListener
  */
-class CollectionType extends AbstractTypeExtension
+class CollectionTypeExtension extends AbstractTypeExtension
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,7 +23,7 @@ class CollectionType extends AbstractTypeExtension
         $this->removeOriginalResizeFormListener($builder->getEventDispatcher());
 
         $resizeListener = new ResizeFormListener(
-            $options['type'],
+            $options['entry_type'],
             $options['options'],
             $options['allow_add'],
             $options['allow_delete'],
@@ -37,7 +38,7 @@ class CollectionType extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'collection';
+        return CollectionType::class;
     }
 
     /**

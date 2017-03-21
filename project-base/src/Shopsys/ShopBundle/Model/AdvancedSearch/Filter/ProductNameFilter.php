@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearch\Filter;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Component\String\DatabaseSearching;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProductNameFilter implements AdvancedSearchFilterInterface
 {
@@ -32,7 +33,7 @@ class ProductNameFilter implements AdvancedSearchFilterInterface
      */
     public function getValueFormType()
     {
-        return 'text';
+        return TextType::class;
     }
 
     /**

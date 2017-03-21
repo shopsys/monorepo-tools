@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
 use Shopsys\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -117,8 +116,6 @@ class PricingGroupController extends AdminBaseController
     {
         try {
             $pricingGroup = $this->pricingGroupFacade->getById($id);
-            $remainingPricingGroups = $this->pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId());
-            $remainingPricingGroupsList = new ObjectChoiceList($remainingPricingGroups, 'name', [], null, 'id');
 
             if ($this->pricingGroupSettingFacade->isPricingGroupUsedOnSelectedDomain($pricingGroup)) {
                 $message = t(
@@ -139,7 +136,7 @@ class PricingGroupController extends AdminBaseController
                     $message,
                     'admin_pricinggroup_delete',
                     $id,
-                    $remainingPricingGroupsList
+                    $this->pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId())
                 );
             } else {
                 $message = t(

@@ -4,9 +4,10 @@ namespace Shopsys\ShopBundle\Form\Admin\Category\TopCategory;
 
 use Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer;
 use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\SortableValuesType;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -56,14 +57,14 @@ class TopCategoriesFormType extends AbstractType
         $builder
             ->add(
                 $builder
-                    ->create('categories', FormType::SORTABLE_VALUES, [
+                    ->create('categories', SortableValuesType::class, [
                         'labels_by_value' => $categoryPaths,
                         'required' => false,
                     ])
                     ->addViewTransformer($this->removeDuplicatesTransformer)
                     ->addModelTransformer($this->categoriesIdsToCategoriesTransformer)
             )
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

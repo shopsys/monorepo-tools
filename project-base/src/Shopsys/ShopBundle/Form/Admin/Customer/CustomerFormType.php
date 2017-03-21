@@ -2,9 +2,10 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Customer;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Customer\CustomerData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,10 +31,10 @@ class CustomerFormType extends AbstractType
             ->add('deliveryAddressData', DeliveryAddressFormType::class, [
                 'domain_id' => $options['domain_id'],
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
 
         if ($options['scenario'] === self::SCENARIO_CREATE) {
-            $builder->add('sendRegistrationMail', FormType::CHECKBOX, ['required' => false]);
+            $builder->add('sendRegistrationMail', CheckboxType::class, ['required' => false]);
         }
     }
 

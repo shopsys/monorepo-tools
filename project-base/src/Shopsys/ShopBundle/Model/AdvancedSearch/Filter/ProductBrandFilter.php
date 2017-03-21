@@ -4,11 +4,10 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearch\Filter;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProductBrandFilter implements AdvancedSearchFilterInterface
 {
@@ -50,7 +49,10 @@ class ProductBrandFilter implements AdvancedSearchFilterInterface
         return [
             'expanded' => false,
             'multiple' => false,
-            'choice_list' => new ObjectChoiceList($this->brandFacade->getAll(), 'name', [], null, 'id'),
+            'choices' => $this->brandFacade->getAll(),
+            'choice_label' => 'name',
+            'choice_value' => 'id',
+            'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
         ];
     }
 
@@ -59,7 +61,7 @@ class ProductBrandFilter implements AdvancedSearchFilterInterface
      */
     public function getValueFormType()
     {
-        return FormType::CHOICE;
+        return ChoiceType::class;
     }
 
     /**

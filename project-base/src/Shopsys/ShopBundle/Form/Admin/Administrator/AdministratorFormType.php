@@ -4,9 +4,13 @@ namespace Shopsys\ShopBundle\Form\Admin\Administrator;
 
 use Shopsys\ShopBundle\Component\Constraints\Email;
 use Shopsys\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -19,19 +23,19 @@ class AdministratorFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', FormType::TEXT, [
+            ->add('username', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter username']),
                     new Constraints\Length(['max' => 100, 'maxMessage' => 'Username cannot be longer then {{ limit }} characters']),
                 ],
             ])
-            ->add('realName', FormType::TEXT, [
+            ->add('realName', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter full name']),
                     new Constraints\Length(['max' => 100, 'maxMessage' => 'Full name cannot be longer then {{ limit }} characters']),
                 ],
             ])
-            ->add('email', FormType::EMAIL, [
+            ->add('email', EmailType::class, [
                 'required' => true,
                 'constraints' => [
                     new Email(['message' => 'Please enter valid e-mail']),
@@ -39,8 +43,8 @@ class AdministratorFormType extends AbstractType
                     new Constraints\Length(['max' => 255, 'maxMessage' => 'Email cannot be longer then {{ limit }} characters']),
                 ],
             ])
-            ->add('password', FormType::REPEATED, [
-                'type' => FormType::PASSWORD,
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'required' => $options['scenario'] === self::SCENARIO_CREATE,
                 'options' => [
                     'attr' => ['autocomplete' => 'off'],
@@ -56,7 +60,7 @@ class AdministratorFormType extends AbstractType
                 ],
                 'invalid_message' => 'Passwords do not match',
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

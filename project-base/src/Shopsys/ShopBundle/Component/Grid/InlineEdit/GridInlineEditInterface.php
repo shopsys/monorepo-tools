@@ -8,7 +8,7 @@ interface GridInlineEditInterface
 {
     /**
      * @param mixed $rowId
-     * @return \Symfony\Component\Form\Form
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function getForm($rowId);
 

@@ -3,8 +3,9 @@
 namespace Shopsys\ShopBundle\Form\Admin\Product\TopProduct;
 
 use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ProductsType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,13 +33,13 @@ class TopProductsFormType extends AbstractType
         $builder
             ->add(
                 $builder
-                    ->create('products', FormType::PRODUCTS, [
+                    ->create('products', ProductsType::class, [
                         'required' => false,
                         'sortable' => true,
                     ])
                     ->addViewTransformer($this->removeDuplicatesTransformer)
             )
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

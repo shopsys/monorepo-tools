@@ -17,18 +17,18 @@ class UnitInlineEdit extends AbstractGridInlineEdit
     private $unitFacade;
 
     /**
-     * @param \Symfony\Component\Form\FormFactory $formFactory
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitGridFactory $unitGridFactory
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade $unitFacade
+     * @var \Symfony\Component\Form\FormFactory
      */
-    public function __construct(
-        FormFactory $formFactory,
-        UnitGridFactory $unitGridFactory,
-        UnitFacade $unitFacade
-    ) {
-        $this->unitFacade = $unitFacade;
+    private $formFactory;
 
-        parent::__construct($formFactory, $unitGridFactory);
+    public function __construct(
+        UnitGridFactory $unitGridFactory,
+        UnitFacade $unitFacade,
+        FormFactory $formFactory
+    ) {
+        parent::__construct($unitGridFactory);
+        $this->unitFacade = $unitFacade;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -53,27 +53,17 @@ class UnitInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int|null $unitId
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\UnitData
+     * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getFormDataObject($unitId = null)
+    public function getForm($unitId)
     {
         $unitData = new UnitData();
 
         if ($unitId !== null) {
-            $unitId = (int)$unitId;
-            $unit = $this->unitFacade->getById($unitId);
+            $unit = $this->unitFacade->getById((int)$unitId);
             $unitData->setFromEntity($unit);
         }
 
-        return $unitData;
-    }
-
-    /**
-     * @param int $rowId
-     * @return \Shopsys\ShopBundle\Form\Admin\Product\Unit\UnitFormType
-     */
-    protected function getFormType($rowId)
-    {
-        return new UnitFormType();
+        return $this->formFactory->create(UnitFormType::class, $unitData);
     }
 }

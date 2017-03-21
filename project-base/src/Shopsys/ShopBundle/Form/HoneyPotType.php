@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
@@ -13,15 +14,7 @@ class HoneyPotType extends AbstractType
      */
     public function getParent()
     {
-        return 'text';
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'honey_pot';
+        return TextType::class;
     }
 
     /**

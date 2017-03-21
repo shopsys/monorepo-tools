@@ -8,16 +8,16 @@ use Symfony\Component\Form\DataTransformerInterface;
 class InverseMultipleChoiceTransformer implements DataTransformerInterface
 {
     /**
-     * @var \Symfony\Component\Form\ChoiceList\ChoiceListInterface
+     * @var array
      */
-    private $choiceList;
+    private $allChoices;
 
     /**
-     * @param \Symfony\Component\Form\ChoiceList\ChoiceListInterface $choiceList
+     * @param array $allChoices Choices from ChoiceType options
      */
-    public function __construct(ChoiceListInterface $choiceList)
+    public function __construct(array $allChoices)
     {
-        $this->choiceList = $choiceList;
+        $this->allChoices = $allChoices;
     }
 
     /**
@@ -29,7 +29,7 @@ class InverseMultipleChoiceTransformer implements DataTransformerInterface
             return null;
         }
 
-        return $this->getInvertedValues($value, $this->choiceList->getChoices());
+        return $this->getInvertedValues($value);
     }
 
     /**
@@ -41,18 +41,18 @@ class InverseMultipleChoiceTransformer implements DataTransformerInterface
             return null;
         }
 
-        return $this->getInvertedValues($value, $this->choiceList->getChoices());
+        return $this->getInvertedValues($value);
     }
 
     /**
      * @param array $inputValues
-     * @param array $allChoices
+     * @return array
      */
-    private function getInvertedValues(array $inputValues, array $allChoices)
+    private function getInvertedValues(array $inputValues)
     {
         $outputValues = [];
 
-        foreach ($allChoices as $choice) {
+        foreach ($this->allChoices as $choice) {
             if (!in_array($choice, $inputValues, true)) {
                 $outputValues[] = $choice;
             }

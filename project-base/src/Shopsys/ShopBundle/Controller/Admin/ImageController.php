@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
-use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
+use Shopsys\ShopBundle\Model\Advert\Advert;
 
 class ImageController extends AdminBaseController
 {
@@ -149,16 +149,16 @@ class ImageController extends AdminBaseController
                 ),
             ],
             self::ENTITY_NAME_ADVERT => [
-                AdvertPositionList::POSITION_HEADER => t(
+                Advert::POSITION_HEADER => t(
                     'Front-end: Advertising under heading'
                 ),
-                AdvertPositionList::POSITION_FOOTER => t(
+                Advert::POSITION_FOOTER => t(
                     'Front-end: Advertising above footer'
                 ),
-                AdvertPositionList::POSITION_PRODUCT_LIST => t(
+                Advert::POSITION_PRODUCT_LIST => t(
                     'Front-end: Advertising in category (above the category name)'
                 ),
-                AdvertPositionList::POSITION_LEFT_SIDEBAR => t(
+                Advert::POSITION_LEFT_SIDEBAR => t(
                     'Front-end: Advertising in the left panel under the category tree'
                 ),
             ],

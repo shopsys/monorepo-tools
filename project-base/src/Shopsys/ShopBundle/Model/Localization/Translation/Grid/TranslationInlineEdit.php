@@ -15,18 +15,24 @@ class TranslationInlineEdit extends AbstractGridInlineEdit
      */
     private $translationEditFacade;
 
-    public function __construct(
-        FormFactory $formFactory,
-        TranslationGridFactory $translationGridFactory,
-        TranslationEditFacade $translationEditFacade
-    ) {
-        $this->translationEditFacade = $translationEditFacade;
+    /**
+     * @var \Symfony\Component\Form\FormFactory
+     */
+    private $formFactory;
 
-        parent::__construct($formFactory, $translationGridFactory);
+    public function __construct(
+        TranslationGridFactory $translationGridFactory,
+        TranslationEditFacade $translationEditFacade,
+        FormFactory $formFactory
+    ) {
+        parent::__construct($translationGridFactory);
+        $this->translationEditFacade = $translationEditFacade;
+        $this->formFactory = $formFactory;
     }
 
     /**
      * @param array $translationData
+     * @return string
      */
     protected function createEntityAndGetId($translationData)
     {
@@ -45,25 +51,18 @@ class TranslationInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param string $translationId
-     * @return array
+     * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getFormDataObject($translationId = null)
+    public function getForm($translationId)
     {
         if ($translationId === null) {
             $message = 'Method "getFormDataObject" for new translation is not supported in translations.';
             throw new \Shopsys\ShopBundle\Model\Localization\Grid\Exception\NotImplementedException($message);
         }
+        $translation = $this->translationEditFacade->getTranslationById($translationId);
+        $locales = $this->translationEditFacade->getTranslatableLocales();
 
-        return $this->translationEditFacade->getTranslationById($translationId);
-    }
-
-    /**
-     * @param int $rowId
-     * @return \Shopsys\ShopBundle\Form\Admin\Localization\TranslationFormType
-     */
-    protected function getFormType($rowId)
-    {
-        return new TranslationFormType($this->translationEditFacade->getTranslatableLocales());
+        return $this->formFactory->create(TranslationFormType::class, $translation, ['locales' => $locales]);
     }
 
     /**

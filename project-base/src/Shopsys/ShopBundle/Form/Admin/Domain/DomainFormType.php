@@ -2,8 +2,9 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Domain;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\FileUploadType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -19,7 +20,7 @@ class DomainFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(self::FIELD_ICON, FormType::FILE_UPLOAD, [
+            ->add(self::FIELD_ICON, FileUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
                     new Constraints\Image([
@@ -31,7 +32,7 @@ class DomainFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

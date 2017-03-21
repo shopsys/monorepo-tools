@@ -4,12 +4,12 @@ namespace Shopsys\ShopBundle\Model\Product;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
-use Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType;
 use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandRepository;
 use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountRepository;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
@@ -255,13 +255,13 @@ class ProductOnCurrentDomainFacade
 
     /**
      * @param int $categoryId
-     * @param \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType $productFilterFormType
+     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @return \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountData
      */
     public function getProductFilterCountDataInCategory(
         $categoryId,
-        ProductFilterFormType $productFilterFormType,
+        ProductFilterConfig $productFilterConfig,
         ProductFilterData $productFilterData
     ) {
         $productsQueryBuilder = $this->productRepository->getListableInCategoryQueryBuilder(
@@ -273,7 +273,7 @@ class ProductOnCurrentDomainFacade
         return $this->productFilterCountRepository->getProductFilterCountData(
             $productsQueryBuilder,
             $this->domain->getLocale(),
-            $productFilterFormType,
+            $productFilterConfig,
             $productFilterData,
             $this->currentCustomer->getPricingGroup()
         );
@@ -281,13 +281,13 @@ class ProductOnCurrentDomainFacade
 
     /**
      * @param string|null $searchText
-     * @param \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType $productFilterFormType
+     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @return \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountData
      */
     public function getProductFilterCountDataForSearch(
         $searchText,
-        ProductFilterFormType $productFilterFormType,
+        ProductFilterConfig $productFilterConfig,
         ProductFilterData $productFilterData
     ) {
         $productsQueryBuilder = $this->productRepository->getListableBySearchTextQueryBuilder(
@@ -300,7 +300,7 @@ class ProductOnCurrentDomainFacade
         return $this->productFilterCountRepository->getProductFilterCountData(
             $productsQueryBuilder,
             $this->domain->getLocale(),
-            $productFilterFormType,
+            $productFilterConfig,
             $productFilterData,
             $this->currentCustomer->getPricingGroup()
         );

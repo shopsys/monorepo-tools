@@ -2,10 +2,10 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product\Availability;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -29,14 +29,17 @@ class AvailabilitySettingFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('defaultInStockAvailability', FormType::CHOICE, [
+            ->add('defaultInStockAvailability', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->availabilityFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->availabilityFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose availability for stock products']),
                 ],
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

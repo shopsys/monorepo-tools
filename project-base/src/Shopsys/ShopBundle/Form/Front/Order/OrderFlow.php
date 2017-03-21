@@ -15,30 +15,16 @@ class OrderFlow extends FormFlow
     protected $allowDynamicStepNavigation = true;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Transport[]
+     * @var int
      */
-    private $transports;
+    private $domainId;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Payment[]
+     * @param int $domainId
      */
-    private $payments;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Country\Country[]
-     */
-    private $countries;
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
-     * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
-     */
-    public function setFormTypesData(array $transports, array $payments, array $countries)
+    public function setDomainId($domainId)
     {
-        $this->transports = $transports;
-        $this->payments = $payments;
-        $this->countries = $countries;
+        $this->domainId = $domainId;
     }
 
     /**
@@ -59,10 +45,12 @@ class OrderFlow extends FormFlow
                 'skip' => true, // the 1st step is the shopping cart
             ],
             [
-                'type' => new TransportAndPaymentFormType($this->transports, $this->payments),
+                'form_type' => TransportAndPaymentFormType::class,
+                'form_options' => ['domain_id' => $this->domainId],
             ],
             [
-                'type' => new PersonalInfoFormType($this->countries),
+                'form_type' => PersonalInfoFormType::class ,
+                'form_options' => ['domain_id' => $this->domainId],
             ],
         ];
     }

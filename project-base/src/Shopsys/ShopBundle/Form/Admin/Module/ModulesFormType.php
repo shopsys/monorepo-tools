@@ -2,9 +2,11 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Module;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Module\ModuleList;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,13 +19,15 @@ class ModulesFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('modules', FormType::FORM)
-            ->add('save', FormType::SUBMIT);
+            ->add('modules', FormType::class)
+            ->add('save', SubmitType::class);
 
-        foreach ($options['module_list']->getTranslationsIndexedByValue() as $moduleName => $moduleTranslation) {
+        $moduleList = $options['module_list'];
+        /** @var \Shopsys\ShopBundle\Model\Module\ModuleList $moduleList */
+        foreach ($moduleList->getModuleNamesIndexedByLabel() as $moduleLabel => $moduleName) {
             $builder->get('modules')
-                ->add($moduleName, FormType::YES_NO, [
-                    'label' => $moduleTranslation,
+                ->add($moduleName, YesNoType::class, [
+                    'label' => $moduleLabel,
                 ]);
         }
     }

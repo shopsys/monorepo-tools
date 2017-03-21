@@ -14,6 +14,7 @@ use Shopsys\ShopBundle\Model\Order\OrderService;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 use Shopsys\ShopBundle\Twig\DateTimeFormatterExtension;
 use Shopsys\ShopBundle\Twig\PriceExtension;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig_Environment;
 
 class OrderMailService
@@ -139,7 +140,7 @@ class OrderMailService
         return [
             self::VARIABLE_NUMBER => $order->getNumber(),
             self::VARIABLE_DATE => $this->getFormattedDateTime($order),
-            self::VARIABLE_URL => $router->generate('front_homepage', [], true),
+            self::VARIABLE_URL => $router->generate('front_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
             self::VARIABLE_TRANSPORT => $order->getTransportName(),
             self::VARIABLE_PAYMENT => $order->getPaymentName(),
             self::VARIABLE_TOTAL_PRICE => $this->getFormattedPrice($order),

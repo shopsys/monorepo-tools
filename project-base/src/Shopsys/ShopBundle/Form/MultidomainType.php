@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Form;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Utils;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -44,7 +45,7 @@ class MultidomainType extends AbstractType
                 $domainOptions = $subOptions;
             }
 
-            $builder->add($domainConfig->getId(), $options['type'], $domainOptions);
+            $builder->add($domainConfig->getId(), $options['entry_type'], $domainOptions);
         }
     }
 
@@ -57,16 +58,8 @@ class MultidomainType extends AbstractType
             'compound' => true,
             'options' => [],
             'optionsByDomainId' => [],
-            'type' => 'text',
+            'entry_type' => TextType::class,
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'multidomain';
     }
 
     /**

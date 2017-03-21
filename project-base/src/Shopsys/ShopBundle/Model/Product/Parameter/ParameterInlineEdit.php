@@ -17,18 +17,18 @@ class ParameterInlineEdit extends AbstractGridInlineEdit
     private $parameterFacade;
 
     /**
-     * @param \Symfony\Component\Form\FormFactory $formFactory
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterGridFactory $parameterGridFactory
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
+     * @var \Symfony\Component\Form\FormFactory
      */
-    public function __construct(
-        FormFactory $formFactory,
-        ParameterGridFactory $parameterGridFactory,
-        ParameterFacade $parameterFacade
-    ) {
-        $this->parameterFacade = $parameterFacade;
+    private $formFactory;
 
-        parent::__construct($formFactory, $parameterGridFactory);
+    public function __construct(
+        ParameterGridFactory $parameterGridFactory,
+        ParameterFacade $parameterFacade,
+        FormFactory $formFactory
+    ) {
+        parent::__construct($parameterGridFactory);
+        $this->parameterFacade = $parameterFacade;
+        $this->formFactory = $formFactory;
     }
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
@@ -52,27 +52,17 @@ class ParameterInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int|null $parameterId
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData
+     * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getFormDataObject($parameterId = null)
+    public function getForm($parameterId)
     {
         $parameterData = new ParameterData();
 
         if ($parameterId !== null) {
-            $parameterId = (int)$parameterId;
-            $parameter = $this->parameterFacade->getById($parameterId);
+            $parameter = $this->parameterFacade->getById((int)$parameterId);
             $parameterData->setFromEntity($parameter);
         }
 
-        return $parameterData;
-    }
-
-    /**
-     * @param int $rowId
-     * @return \Shopsys\ShopBundle\Form\Admin\Product\Parameter\ParameterFormType
-     */
-    protected function getFormType($rowId)
-    {
-        return new ParameterFormType();
+        return $this->formFactory->create(ParameterFormType::class, $parameterData);
     }
 }

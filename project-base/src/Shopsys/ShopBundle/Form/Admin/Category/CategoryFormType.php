@@ -2,17 +2,25 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Category;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\DomainsType;
+use Shopsys\ShopBundle\Form\FileUploadType;
+use Shopsys\ShopBundle\Form\Locale\LocalizedType;
+use Shopsys\ShopBundle\Form\MultidomainType;
+use Shopsys\ShopBundle\Form\UrlListType;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
 use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -76,7 +84,7 @@ class CategoryFormType extends AbstractType
         }
 
         $builder
-            ->add('name', FormType::LOCALIZED, [
+            ->add('name', LocalizedType::class, [
                 'main_constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name']),
                 ],
@@ -87,39 +95,44 @@ class CategoryFormType extends AbstractType
                     ],
                 ],
             ])
-            ->add('seoTitles', FormType::MULTIDOMAIN, [
-                'type' => FormType::TEXT,
+            ->add('seoTitles', MultidomainType::class, [
+                'entry_type' => TextType::class,
                 'required' => false,
                 'optionsByDomainId' => $seoTitlesOptionsByDomainId,
             ])
-            ->add('seoMetaDescriptions', FormType::MULTIDOMAIN, [
-                'type' => FormType::TEXTAREA,
+            ->add('seoMetaDescriptions', MultidomainType::class, [
+                'entry_type' => TextareaType::class,
                 'required' => false,
                 'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
             ])
-            ->add('descriptions', FormType::MULTIDOMAIN, [
-                'type' => FormType::WYSIWYG,
+            ->add('descriptions', MultidomainType::class, [
+                'entry_type' => CKEditorType::class,
                 'required' => false,
             ])
-            ->add('parent', FormType::CHOICE, [
+            ->add('parent', ChoiceType::class, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->categoryRepository->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->categoryRepository->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
-            ->add($builder
-                ->create('showOnDomains', FormType::DOMAINS, [
-                    InvertChoiceTypeExtension::INVERT_OPTION => true,
-                    'property_path' => 'hiddenOnDomains',
-                    'required' => false,
-                ]))
-            ->add('heurekaCzFeedCategory', FormType::CHOICE, [
+            ->add('showOnDomains', DomainsType::class, [
+                InvertChoiceTypeExtension::INVERT_OPTION => true,
+                'property_path' => 'hiddenOnDomains',
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->feedCategoryRepository->getAllHeurekaCz(), 'name', [], null, 'id'),
             ])
-            ->add('urls', FormType::URL_LIST, [
+            ->add('heurekaCzFeedCategory', ChoiceType::class, [
+                'required' => false,
+                'choices' => $this->feedCategoryRepository->getAllHeurekaCz(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
+            ])
+            ->add('urls', UrlListType::class, [
                 'route_name' => 'front_product_list',
                 'entity_id' => $options['category'] !== null ? $options['category']->getId() : null,
             ])
-            ->add('image', FormType::FILE_UPLOAD, [
+            ->add('image', FileUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
                     new Constraints\Image([
@@ -131,7 +144,7 @@ class CategoryFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

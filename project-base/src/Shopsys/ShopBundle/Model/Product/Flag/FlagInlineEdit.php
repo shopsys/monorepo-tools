@@ -17,18 +17,18 @@ class FlagInlineEdit extends AbstractGridInlineEdit
     private $flagFacade;
 
     /**
-     * @param \Symfony\Component\Form\FormFactory $formFactory
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagGridFactory $flagGridFactory
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade $flagFacade
+     * @var \Symfony\Component\Form\FormFactory
      */
-    public function __construct(
-        FormFactory $formFactory,
-        FlagGridFactory $flagGridFactory,
-        FlagFacade $flagFacade
-    ) {
-        $this->flagFacade = $flagFacade;
+    private $formFactory;
 
-        parent::__construct($formFactory, $flagGridFactory);
+    public function __construct(
+        FlagGridFactory $flagGridFactory,
+        FlagFacade $flagFacade,
+        FormFactory $formFactory
+    ) {
+        parent::__construct($flagGridFactory);
+        $this->flagFacade = $flagFacade;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -53,27 +53,17 @@ class FlagInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int|null $flagId
-     * @return \Shopsys\ShopBundle\Model\Product\Flag\FlagData
+     * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getFormDataObject($flagId = null)
+    public function getForm($flagId)
     {
         $flagData = new FlagData();
 
         if ($flagId !== null) {
-            $flagId = (int)$flagId;
-            $flag = $this->flagFacade->getById($flagId);
+            $flag = $this->flagFacade->getById((int)$flagId);
             $flagData->setFromEntity($flag);
         }
 
-        return $flagData;
-    }
-
-    /**
-     * @param int $rowId
-     * @return \Shopsys\ShopBundle\Form\Admin\Product\Flag\FlagFormType
-     */
-    protected function getFormType($rowId)
-    {
-        return new FlagFormType();
+        return $this->formFactory->create(FlagFormType::class, $flagData);
     }
 }

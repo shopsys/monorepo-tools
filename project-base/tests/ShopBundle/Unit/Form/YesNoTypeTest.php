@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Form;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\YesNoType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
@@ -48,6 +48,6 @@ class YesNoTypeTest extends FunctionalTestCase
         $formFactory = $this->getContainer()->get(FormFactoryInterface::class);
         /* @var $formFactory \Symfony\Component\Form\FormFactoryInterface */
 
-        return $formFactory->create(FormType::YES_NO);
+        return $formFactory->create(YesNoType::class);
     }
 }

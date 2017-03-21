@@ -3,8 +3,9 @@
 namespace Shopsys\ShopBundle\Form;
 
 use Shopsys\ShopBundle\Component\Transformers\ProductsIdsToProductsTransformer;
-use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -51,7 +52,7 @@ class ProductsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'type' => FormType::HIDDEN,
+            'entry_type' => HiddenType::class,
             'allow_add' => true,
             'allow_delete' => true,
             'delete_empty' => true,
@@ -68,14 +69,6 @@ class ProductsType extends AbstractType
      */
     public function getParent()
     {
-        return 'collection';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'products';
+        return CollectionType::class;
     }
 }

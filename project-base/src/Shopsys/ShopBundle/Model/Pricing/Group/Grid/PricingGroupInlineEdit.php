@@ -21,16 +21,21 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
      */
     private $selectedDomain;
 
+    /**
+     * @var \Symfony\Component\Form\FormFactory
+     */
+    private $formFactory;
+
     public function __construct(
-        FormFactory $formFactory,
         PricingGroupGridFactory $pricingGroupGridFactory,
         PricingGroupFacade $pricingGroupFacade,
-        SelectedDomain $selectedDomain
+        SelectedDomain $selectedDomain,
+        FormFactory $formFactory
     ) {
+        parent::__construct($pricingGroupGridFactory);
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->selectedDomain = $selectedDomain;
-
-        parent::__construct($formFactory, $pricingGroupGridFactory);
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -55,9 +60,9 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int|null $pricingGroupId
-     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData
+     * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getFormDataObject($pricingGroupId = null)
+    public function getForm($pricingGroupId)
     {
         $pricingGroupData = new PricingGroupData();
 
@@ -67,15 +72,6 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
             $pricingGroupData->setFromEntity($pricingGroup);
         }
 
-        return $pricingGroupData;
-    }
-
-    /**
-     * @param int $rowId
-     * @return \Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupFormType
-     */
-    protected function getFormType($rowId)
-    {
-        return new PricingGroupFormType();
+        return $this->formFactory->create(PricingGroupFormType::class, $pricingGroupData);
     }
 }

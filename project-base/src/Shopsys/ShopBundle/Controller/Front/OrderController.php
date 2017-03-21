@@ -113,11 +113,6 @@ class OrderController extends FrontBaseController
      */
     private $newsletterFacade;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
-     */
-    private $countryFacade;
-
     public function __construct(
         OrderFacade $orderFacade,
         CartFacade $cartFacade,
@@ -134,8 +129,7 @@ class OrderController extends FrontBaseController
         TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
         OrderMailFacade $orderMailFacade,
         TermsAndConditionsFacade $termsAndConditionsFacade,
-        NewsletterFacade $newsletterFacade,
-        CountryFacade $countryFacade
+        NewsletterFacade $newsletterFacade
     ) {
         $this->orderFacade = $orderFacade;
         $this->cartFacade = $cartFacade;
@@ -153,7 +147,6 @@ class OrderController extends FrontBaseController
         $this->orderMailFacade = $orderMailFacade;
         $this->termsAndConditionsFacade = $termsAndConditionsFacade;
         $this->newsletterFacade = $newsletterFacade;
-        $this->countryFacade = $countryFacade;
     }
 
     /**
@@ -169,8 +162,6 @@ class OrderController extends FrontBaseController
             return $this->redirectToRoute('front_cart');
         }
 
-        $payments = $this->paymentFacade->getVisibleOnCurrentDomain();
-        $transports = $this->transportFacade->getVisibleOnCurrentDomain($payments);
         $user = $this->getUser();
 
         $frontOrderFormData = new FrontOrderData();
@@ -186,9 +177,8 @@ class OrderController extends FrontBaseController
         if ($this->flow->isBackToCartTransition()) {
             return $this->redirectToRoute('front_cart');
         }
-        $countries = $this->countryFacade->getAllOnCurrentDomain();
 
-        $this->flow->setFormTypesData($transports, $payments, $countries);
+        $this->flow->setDomainId($this->domain->getId());
         $this->flow->bind($frontOrderFormData);
         $this->flow->saveSentStepData();
 
@@ -203,6 +193,8 @@ class OrderController extends FrontBaseController
         // FormData are filled during isValid() call
         $orderData = $this->orderDataMapper->getOrderDataFromFrontOrderData($frontOrderFormData);
 
+        $payments = $this->paymentFacade->getVisibleOnCurrentDomain();
+        $transports = $this->transportFacade->getVisibleOnCurrentDomain($payments);
         $this->checkTransportAndPaymentChanges($orderData, $orderPreview, $transports, $payments);
 
         if ($isValid) {
@@ -325,11 +317,7 @@ class OrderController extends FrontBaseController
 
     public function saveOrderFormAction()
     {
-        $payments = $this->paymentFacade->getVisibleOnCurrentDomain();
-        $transports = $this->transportFacade->getVisibleOnCurrentDomain($payments);
-        $countries = $this->countryFacade->getAllOnCurrentDomain();
-
-        $this->flow->setFormTypesData($transports, $payments, $countries);
+        $this->flow->setDomainId($this->domain->getId());
         $this->flow->bind(new FrontOrderData());
         $form = $this->flow->createForm();
         $this->flow->saveCurrentStepData($form);

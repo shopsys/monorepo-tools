@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ProductType;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
 
@@ -33,7 +33,7 @@ class OrderProductFilter implements AdvancedSearchFilterInterface
      */
     public function getValueFormType()
     {
-        return FormType::PRODUCT;
+        return ProductType::class;
     }
 
     /**

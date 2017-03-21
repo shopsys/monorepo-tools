@@ -3,28 +3,15 @@
 namespace Shopsys\ShopBundle\Form\Admin\Localization;
 
 use Shopsys\ShopBundle\Component\Translation\Translator;
-use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class TranslationFormType extends AbstractType implements DataTransformerInterface
 {
-    /**
-     * @var string[]
-     */
-    private $locales;
-
-    /**
-     * @param string[] $locales
-     */
-    public function __construct(array $locales)
-    {
-        $this->locales = $locales;
-    }
-
     /**
      * @param string $value
      * @return string
@@ -53,10 +40,10 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        foreach ($this->locales as $locale) {
+        foreach ($options['locales'] as $locale) {
             $builder->add(
                 $builder
-                    ->create($locale, FormType::TEXTAREA, [
+                    ->create($locale, TextareaType::class, [
                         'required' => true,
                         'constraints' => new Constraints\NotBlank(['message' => 'Please enter translation']),
                     ])
@@ -70,8 +57,11 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('locales')
+            ->setAllowedTypes('locales', 'array')
+            ->setDefaults([
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

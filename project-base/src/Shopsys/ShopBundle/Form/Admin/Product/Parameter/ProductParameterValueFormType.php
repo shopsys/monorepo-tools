@@ -2,11 +2,11 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product\Parameter;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\Locale\LocalizedType;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -30,14 +30,17 @@ class ProductParameterValueFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('parameter', FormType::CHOICE, [
+            ->add('parameter', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->parameterFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->parameterFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose parameter']),
                 ],
             ])
-            ->add('valueText', FormType::LOCALIZED, [
+            ->add('valueText', LocalizedType::class, [
                 'required' => true,
                 'main_constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter parameter value']),

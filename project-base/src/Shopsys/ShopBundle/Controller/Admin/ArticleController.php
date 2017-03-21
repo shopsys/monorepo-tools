@@ -12,9 +12,9 @@ use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Form\Admin\Article\ArticleFormType;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticleDataFactory;
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
-use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 use Shopsys\ShopBundle\Model\Cookies\CookiesFacade;
 use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -129,9 +129,9 @@ class ArticleController extends AdminBaseController
      */
     public function listAction()
     {
-        $gridTop = $this->getGrid(ArticlePlacementList::PLACEMENT_TOP_MENU);
-        $gridFooter = $this->getGrid(ArticlePlacementList::PLACEMENT_FOOTER);
-        $gridNone = $this->getGrid(ArticlePlacementList::PLACEMENT_NONE);
+        $gridTop = $this->getGrid(Article::PLACEMENT_TOP_MENU);
+        $gridFooter = $this->getGrid(Article::PLACEMENT_FOOTER);
+        $gridNone = $this->getGrid(Article::PLACEMENT_NONE);
         $articlesCountOnSelectedDomain = $this->articleFacade->getAllArticlesCountByDomainId($this->selectedDomain->getId());
 
         return $this->render('@ShopsysShop/Admin/Content/Article/list.html.twig', [

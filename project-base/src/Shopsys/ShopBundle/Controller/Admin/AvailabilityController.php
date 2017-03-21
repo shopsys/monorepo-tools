@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Form\Admin\Product\Availability\AvailabilitySettingFormType;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -114,13 +113,12 @@ class AvailabilityController extends AdminBaseController
                         ['%name%' => $availability->getName()]
                     );
                 }
-                $remainingAvailabilitiesList = new ObjectChoiceList($this->availabilityFacade->getAllExceptId($id), 'name', [], null, 'id');
 
                 return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
                     $message,
                     'admin_availability_delete',
                     $id,
-                    $remainingAvailabilitiesList
+                    $this->availabilityFacade->getAllExceptId($id)
                 );
             } else {
                 $message = t(

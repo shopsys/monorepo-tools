@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Form\Admin\Vat\VatSettingsFormType;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatInlineEdit;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -75,13 +74,12 @@ class VatController extends AdminBaseController
                     . 'Which unit you want to set instead?',
                     ['%name%' => $vat->getName()]
                 );
-                $remainingVatsList = new ObjectChoiceList($this->vatFacade->getAllExceptId($id), 'name', [], null, 'id');
 
                 return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
                     $message,
                     'admin_vat_delete',
                     $id,
-                    $remainingVatsList
+                    $this->vatFacade->getAllExceptId($id)
                 );
             } else {
                 $message = t(

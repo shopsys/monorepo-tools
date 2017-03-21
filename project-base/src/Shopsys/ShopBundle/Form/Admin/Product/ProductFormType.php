@@ -4,8 +4,10 @@ namespace Shopsys\ShopBundle\Form\Admin\Product;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\CategoriesType;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\DatePickerType;
+use Shopsys\ShopBundle\Form\Locale\LocalizedType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
@@ -14,7 +16,11 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -83,7 +89,7 @@ class ProductFormType extends AbstractType
         $vats = $this->vatFacade->getAllIncludingMarkedForDeletion();
 
         if ($options['product'] !== null && $options['product']->isVariant()) {
-            $builder->add('variantAlias', FormType::LOCALIZED, [
+            $builder->add('variantAlias', LocalizedType::class, [
                 'required' => false,
                 'options' => [
                     'constraints' => [
@@ -94,7 +100,7 @@ class ProductFormType extends AbstractType
         }
 
         $builder
-            ->add('name', FormType::LOCALIZED, [
+            ->add('name', LocalizedType::class, [
                 'required' => false,
                 'options' => [
                     'constraints' => [
@@ -102,35 +108,38 @@ class ProductFormType extends AbstractType
                     ],
                 ],
             ])
-            ->add('hidden', FormType::YES_NO, ['required' => false])
-            ->add('sellingDenied', FormType::YES_NO, [
+            ->add('hidden', YesNoType::class, ['required' => false])
+            ->add('sellingDenied', YesNoType::class, [
                 'required' => false,
             ])
-            ->add('catnum', FormType::TEXT, [
+            ->add('catnum', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length(['max' => 100, 'maxMessage' => 'Catalogue number cannot be longer then {{ limit }} characters']),
                 ],
             ])
-            ->add('partno', FormType::TEXT, [
+            ->add('partno', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length(['max' => 100, 'maxMessage' => 'Part number cannot be longer than {{ limit }} characters']),
                 ],
             ])
-            ->add('ean', FormType::TEXT, [
+            ->add('ean', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length(['max' => 100, 'maxMessage' => 'EAN cannot be longer then {{ limit }} characters']),
                 ],
             ])
-            ->add('brand', FormType::CHOICE, [
+            ->add('brand', ChoiceType::class, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->brandFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->brandFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose brand --'),
             ])
-            ->add('usingStock', FormType::YES_NO, ['required' => false])
-            ->add('stockQuantity', FormType::INTEGER, [
+            ->add('usingStock', YesNoType::class, ['required' => false])
+            ->add('stockQuantity', IntegerType::class, [
                 'required' => true,
                 'invalid_message' => 'Please enter a number',
                 'constraints' => [
@@ -140,18 +149,24 @@ class ProductFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('unit', FormType::CHOICE, [
+            ->add('unit', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->unitFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->unitFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank([
                         'message' => 'Please choose unit',
                     ]),
                 ],
             ])
-            ->add('availability', FormType::CHOICE, [
+            ->add('availability', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->availabilityFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->availabilityFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose availability --'),
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -160,14 +175,15 @@ class ProductFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('outOfStockAction', FormType::CHOICE, [
+            ->add('outOfStockAction', ChoiceType::class, [
                 'required' => true,
                 'expanded' => false,
                 'choices' => [
-                    Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY => t('Set alternative availability'),
-                    Product::OUT_OF_STOCK_ACTION_HIDE => t('Hide product'),
-                    Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE => t('Exclude from sale'),
+                    t('Set alternative availability') => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
+                    t('Hide product') => Product::OUT_OF_STOCK_ACTION_HIDE,
+                    t('Exclude from sale') => Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE,
                 ],
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose action --'),
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -176,9 +192,12 @@ class ProductFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('outOfStockAvailability', FormType::CHOICE, [
+            ->add('outOfStockAvailability', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->availabilityFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->availabilityFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose availability --'),
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -187,9 +206,9 @@ class ProductFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('price', FormType::MONEY, [
+            ->add('price', MoneyType::class, [
                 'currency' => false,
-                'precision' => 6,
+                'scale' => 6,
                 'required' => true,
                 'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
                 'constraints' => [
@@ -204,51 +223,58 @@ class ProductFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('vat', FormType::CHOICE, [
+            ->add('vat', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($vats, 'name', [], null, 'id'),
+                'choices' => $vats,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],
             ])
-            ->add('sellingFrom', FormType::DATE_PICKER, [
+            ->add('sellingFrom', DatePickerType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Date(['message' => 'Enter date in DD.MM.YYYY format']),
                 ],
                 'invalid_message' => 'Enter date in DD.MM.YYYY format',
             ])
-            ->add('sellingTo', FormType::DATE_PICKER, [
+            ->add('sellingTo', DatePickerType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Date(['message' => 'Enter date in DD.MM.YYYY format']),
                 ],
                 'invalid_message' => 'Enter date in DD.MM.YYYY format',
             ])
-            ->add('flags', FormType::CHOICE, [
+            ->add('flags', ChoiceType::class, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->flagFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->flagFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => true,
                 'expanded' => true,
             ])
-            ->add('priceCalculationType', FormType::CHOICE, [
+            ->add('priceCalculationType', ChoiceType::class, [
                 'required' => true,
                 'expanded' => true,
                 'choices' => [
-                    Product::PRICE_CALCULATION_TYPE_AUTO => t('Automatically'),
-                    Product::PRICE_CALCULATION_TYPE_MANUAL => t('Manually'),
+                    t('Automatically') => Product::PRICE_CALCULATION_TYPE_AUTO,
+                    t('Manually') => Product::PRICE_CALCULATION_TYPE_MANUAL,
                 ],
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
-            ->add('orderingPriority', FormType::INTEGER, [
+            ->add('orderingPriority', IntegerType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter sorting priority']),
                 ],
             ]);
 
-        $builder->add('categoriesByDomainId', FormType::FORM, ['required' => false]);
+        $builder->add('categoriesByDomainId', FormType::class, ['required' => false]);
         foreach ($this->domain->getAllIds() as $domainId) {
-            $builder->get('categoriesByDomainId')->add($domainId, FormType::CATEGORIES, [
+            $builder->get('categoriesByDomainId')->add($domainId, CategoriesType::class, [
                 'required' => false,
                 CategoriesType::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID => $domainId,
             ]);

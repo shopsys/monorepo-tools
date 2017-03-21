@@ -48,17 +48,25 @@ class ConfirmDeleteResponseFactory
      * @param string $message
      * @param string $route
      * @param mixed $entityId
-     * @param \Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface $remainingEntitiesChoiceList
+     * @param object[] $possibleReplacements
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function createSetNewAndDeleteResponse($message, $route, $entityId, ChoiceListInterface $remainingEntitiesChoiceList)
+    public function createSetNewAndDeleteResponse($message, $route, $entityId, array $possibleReplacements)
     {
+        foreach ($possibleReplacements as $object) {
+            if (!is_object($object) || !method_exists($object, 'getName') || !method_exists($object, 'getId')) {
+                $message = 'All items in argument 4 passed to ' . __METHOD__ . ' must be objects with methods getId and getName.';
+
+                throw new \Shopsys\ShopBundle\Component\ConfirmDelete\Exception\InvalidEntityPassedException($message);
+            }
+        }
+
         return $this->templating->renderResponse('@ShopsysShop/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig', [
             'message' => $message,
             'route' => $route,
             'entityId' => $entityId,
             'routeCsrfToken' => $this->routeCsrfProtector->getCsrfTokenByRoute($route),
-            'remainingEntitiesChoiceList' => $remainingEntitiesChoiceList,
+            'possibleReplacements' => $possibleReplacements,
             'CSRF_TOKEN_REQUEST_PARAMETER' => RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER,
         ]);
     }

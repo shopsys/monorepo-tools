@@ -41,7 +41,7 @@
     Shopsys.cartRecalculator.reload = function () {
         var formData = $('.js-cart-form').serializeArray();
         formData.push({
-            name: Shopsys.constant('Shopsys\\ShopBundle\\Controller\\Front\\CartController::RECALCULATE_ONLY_PARAMETER_NAME'),
+            name: Shopsys.constant('\\Shopsys\\ShopBundle\\Controller\\Front\\CartController::RECALCULATE_ONLY_PARAMETER_NAME'),
             value: 1
         });
 

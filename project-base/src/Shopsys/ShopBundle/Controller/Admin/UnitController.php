@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Form\Admin\Product\Unit\UnitSettingFormType;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitInlineEdit;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -78,19 +77,12 @@ class UnitController extends AdminBaseController
                         ['%name%' => $unit->getName()]
                     );
                 }
-                $remainingUnitsList = new ObjectChoiceList(
-                    $this->unitFacade->getAllExceptId($id),
-                    'name',
-                    [],
-                    null,
-                    'id'
-                );
 
                 return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
                     $message,
                     'admin_unit_delete',
                     $id,
-                    $remainingUnitsList
+                    $this->unitFacade->getAllExceptId($id)
                 );
             } else {
                 $message = t(

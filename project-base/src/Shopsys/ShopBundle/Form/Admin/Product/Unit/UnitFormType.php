@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product\Unit;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\Locale\LocalizedType;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +18,7 @@ class UnitFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', FormType::LOCALIZED, [
+            ->add('name', LocalizedType::class, [
                 'required' => true,
                 'options' => [
                     'constraints' => [

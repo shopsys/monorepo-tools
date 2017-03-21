@@ -2,8 +2,10 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Cart;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -17,20 +19,20 @@ class AddProductFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('productId', FormType::HIDDEN, [
+            ->add('productId', HiddenType::class, [
                 'constraints' => [
                     new Constraints\GreaterThan(0),
                     new Constraints\Regex(['pattern' => '/^\d+$/']),
                 ],
             ])
-            ->add('quantity', FormType::TEXT, [
+            ->add('quantity', TextType::class, [
                 'data' => 1,
                 'constraints' => [
                     new Constraints\GreaterThan(0),
                     new Constraints\Regex(['pattern' => '/^\d+$/']),
                 ],
             ])
-            ->add('add', FormType::SUBMIT);
+            ->add('add', SubmitType::class);
     }
 
     /**

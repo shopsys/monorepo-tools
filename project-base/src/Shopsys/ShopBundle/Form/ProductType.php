@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Form;
 
 use Shopsys\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -57,15 +58,7 @@ class ProductType extends AbstractType
      */
     public function getParent()
     {
-        return 'hidden';
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'product';
+        return HiddenType::class;
     }
 
     /**

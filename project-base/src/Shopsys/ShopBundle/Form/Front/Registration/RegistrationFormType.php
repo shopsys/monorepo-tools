@@ -5,10 +5,15 @@ namespace Shopsys\ShopBundle\Form\Front\Registration;
 use Shopsys\ShopBundle\Component\Constraints\Email;
 use Shopsys\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
 use Shopsys\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\HoneyPotType;
 use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
 use Shopsys\ShopBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -22,27 +27,27 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', FormType::TEXT, [
+            ->add('firstName', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter first name']),
                     new Constraints\Length(['max' => 100, 'maxMessage' => 'First name cannot be longer then {{ limit }} characters']),
                 ],
             ])
-            ->add('lastName', FormType::TEXT, [
+            ->add('lastName', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter surname']),
                     new Constraints\Length(['max' => 100, 'maxMessage' => 'Surname cannot be longer than {{ limit }} characters']),
                 ],
             ])
-            ->add('email', FormType::EMAIL, [
+            ->add('email', EmailType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter e-mail']),
                     new Email(['message' => 'Please enter valid e-mail']),
                     new Constraints\Length(['max' => 255, 'maxMessage' => 'Email cannot be longer then {{ limit }} characters']),
                 ],
             ])
-            ->add('password', FormType::REPEATED, [
-                'type' => FormType::PASSWORD,
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'options' => [
                     'attr' => ['autocomplete' => 'off'],
                 ],
@@ -54,8 +59,8 @@ class RegistrationFormType extends AbstractType
                 ],
                 'invalid_message' => 'Passwords do not match',
             ])
-            ->add('email2', FormType::HONEY_POT)
-            ->add('save', FormType::SUBMIT);
+            ->add('email2', HoneyPotType::class)
+            ->add('save', SubmitType::class);
     }
 
     /**

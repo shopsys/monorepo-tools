@@ -2,12 +2,18 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Article;
 
-use Shopsys\ShopBundle\Form\FormType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Shopsys\ShopBundle\Form\DomainType;
+use Shopsys\ShopBundle\Form\UrlListType;
+use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticleData;
-use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -19,17 +25,10 @@ class ArticleFormType extends AbstractType
      */
     private $seoSettingFacade;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticlePlacementList
-     */
-    private $articlePlacementList;
-
     public function __construct(
-        SeoSettingFacade $seoSettingFacade,
-        ArticlePlacementList $articlePlacementList
+        SeoSettingFacade $seoSettingFacade
     ) {
         $this->seoSettingFacade = $seoSettingFacade;
-        $this->articlePlacementList = $articlePlacementList;
     }
 
     /**
@@ -39,40 +38,45 @@ class ArticleFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', FormType::TEXT, [
+            ->add('name', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter article name']),
                 ],
             ])
-            ->add('hidden', FormType::YES_NO, ['required' => false])
-            ->add('text', FormType::WYSIWYG, [
+            ->add('hidden', YesNoType::class, ['required' => false])
+            ->add('text', CKEditorType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter article content']),
                 ],
             ])
-            ->add('seoTitle', FormType::TEXT, [
+            ->add('seoTitle', TextType::class, [
                 'required' => false,
             ])
-            ->add('seoMetaDescription', FormType::TEXTAREA, [
+            ->add('seoMetaDescription', TextareaType::class, [
                 'required' => false,
                 'attr' => [
                     'placeholder' => $this->seoSettingFacade->getDescriptionMainPage($options['domain_id']),
                 ],
             ])
-            ->add('urls', FormType::URL_LIST, [
+            ->add('urls', UrlListType::class, [
                 'route_name' => 'front_article_detail',
                 'entity_id' => $options['article'] !== null ? $options['article']->getId() : null,
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
 
         if ($options['article'] === null) {
             $builder
-                ->add('domainId', FormType::DOMAIN, ['required' => true])
-                ->add('placement', FormType::CHOICE, [
+                ->add('domainId', DomainType::class, ['required' => true])
+                ->add('placement', ChoiceType::class, [
                     'required' => true,
-                    'choices' => $this->articlePlacementList->getTranslationsIndexedByValue(),
+                    'choices' => [
+                        t('in upper menu') => Article::PLACEMENT_TOP_MENU,
+                        t('in footer') => Article::PLACEMENT_FOOTER,
+                        t('without positoning') => Article::PLACEMENT_NONE,
+                    ],
+                    'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                     'placeholder' => t('-- Choose article position --'),
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please choose article placement']),

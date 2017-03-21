@@ -10,6 +10,7 @@ use Shopsys\ShopBundle\Model\Mail\MailTypeInterface;
 use Shopsys\ShopBundle\Model\Mail\MessageData;
 use Shopsys\ShopBundle\Model\Mail\MessageFactoryInterface;
 use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
 {
@@ -115,7 +116,11 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
             'hash' => $user->getResetPasswordHash(),
         ];
 
-        return $router->generate('front_registration_set_new_password', $routeParameters, true);
+        return $router->generate(
+            'front_registration_set_new_password',
+            $routeParameters,
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 
     /**

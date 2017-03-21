@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Order;
 
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\Front\Order\OrderFlow;
 use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
@@ -15,44 +16,25 @@ class OrderFlowFacade
     private $orderFlow;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */
-    private $transportFacade;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
-     */
-    private $paymentFacade;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
-     */
-    private $countryFacade;
+    private $domain;
 
     /**
      * @param \Shopsys\ShopBundle\Form\Front\Order\OrderFlow $orderFlow
-     * @param \Shopsys\ShopBundle\Model\Payment\PaymentFacade $paymentFacade
-     * @param \Shopsys\ShopBundle\Model\Transport\TransportFacade $transportFacade
-     * @param \Shopsys\ShopBundle\Model\Country\CountryFacade $countryFacade
+     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         OrderFlow $orderFlow,
-        PaymentFacade $paymentFacade,
-        TransportFacade $transportFacade,
-        CountryFacade $countryFacade
+        Domain $domain
     ) {
         $this->orderFlow = $orderFlow;
-        $this->paymentFacade = $paymentFacade;
-        $this->transportFacade = $transportFacade;
-        $this->countryFacade = $countryFacade;
+        $this->domain = $domain;
     }
 
     public function resetOrderForm()
     {
-        $payments = $this->paymentFacade->getVisibleOnCurrentDomain();
-        $transports = $this->transportFacade->getVisibleOnCurrentDomain($payments);
-        $countries = $this->countryFacade->getAllOnCurrentDomain();
-        $this->orderFlow->setFormTypesData($transports, $payments, $countries);
+        $this->orderFlow->setDomainId($this->domain->getId());
         $this->orderFlow->reset();
     }
 }

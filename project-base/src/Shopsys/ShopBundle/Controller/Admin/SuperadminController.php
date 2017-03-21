@@ -153,7 +153,7 @@ class SuperadminController extends AdminBaseController
     public function modulesAction(Request $request)
     {
         $formData = [];
-        foreach ($this->moduleList->getValues() as $moduleName) {
+        foreach ($this->moduleList->getModuleNamesIndexedByLabel() as $moduleName) {
             $formData['modules'][$moduleName] = $this->moduleFacade->isEnabled($moduleName);
         }
 

@@ -2,9 +2,10 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Superadmin;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -17,21 +18,18 @@ class InputPriceTypeFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $inputPriceTypesLabels = $this->getInputPriceTypesLabels();
-
-        $choices = [];
-        foreach (PricingSetting::getInputPriceTypes() as $inputPriceType) {
-            $choices[$inputPriceType] = $inputPriceTypesLabels[$inputPriceType];
-        }
-
         $builder
-            ->add('type', FormType::CHOICE, [
-                'choices' => $choices,
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    t('Excluding VAT') => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
+                    t('Including VAT') => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
+                ],
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter input prices']),
                 ],
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**
@@ -42,16 +40,5 @@ class InputPriceTypeFormType extends AbstractType
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);
-    }
-
-    /**
-     * @return array
-     */
-    private function getInputPriceTypesLabels()
-    {
-        return [
-            PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT => t('Excluding VAT'),
-            PricingSetting::INPUT_PRICE_TYPE_WITH_VAT => t('Including VAT'),
-        ];
     }
 }

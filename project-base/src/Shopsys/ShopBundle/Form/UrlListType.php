@@ -8,14 +8,16 @@ use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\ShopBundle\Form\UrlListData;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class UrlListType extends AbstractType
 {
@@ -61,10 +63,10 @@ class UrlListType extends AbstractType
             throw new \Shopsys\ShopBundle\Form\Exception\MissingRouteNameException();
         }
 
-        $builder->add('toDelete', FormType::FORM);
-        $builder->add('mainOnDomains', FormType::FORM);
-        $builder->add('newUrls', FormType::COLLECTION, [
-            'type' => FormType::FRIENDLY_URL,
+        $builder->add('toDelete', FormType::class);
+        $builder->add('mainOnDomains', FormType::class);
+        $builder->add('newUrls', CollectionType::class, [
+            'entry_type' => FriendlyUrlType::class,
             'required' => false,
             'allow_add' => true,
             'error_bubbling' => false,
@@ -76,17 +78,23 @@ class UrlListType extends AbstractType
         $friendlyUrlsByDomain = $this->getFriendlyUrlsIndexedByDomain($options['route_name'], $options['entity_id']);
 
         foreach ($friendlyUrlsByDomain as $domainId => $friendlyUrls) {
-            $builder->get('toDelete')->add($domainId, FormType::CHOICE, [
+            $builder->get('toDelete')->add($domainId, ChoiceType::class, [
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
-                'choice_list' => new ObjectChoiceList($friendlyUrls, 'slug', [], null, 'slug'),
+                'choices' => $friendlyUrls,
+                'choice_label' => 'slug',
+                'choice_value' => 'slug',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ]);
-            $builder->get('mainOnDomains')->add($domainId, FormType::CHOICE, [
+            $builder->get('mainOnDomains')->add($domainId, ChoiceType::class, [
                 'required' => true,
                 'multiple' => false,
                 'expanded' => true,
-                'choice_list' => new ObjectChoiceList($friendlyUrls, 'slug', [], null, 'slug'),
+                'choices' => $friendlyUrls,
+                'choice_label' => 'slug',
+                'choice_value' => 'slug',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'invalid_message' => 'Previously selected main URL dos not exist any more',
             ]);
         }
@@ -129,22 +137,6 @@ class UrlListType extends AbstractType
     }
 
     /**
-     * @return string
-     */
-    public function getParent()
-    {
-        return 'form';
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'url_list';
-    }
-
-    /**
      * @param string $routeName
      * @param string $entityId
      * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[domainId][]
@@ -179,7 +171,7 @@ class UrlListType extends AbstractType
                     $domainRouter->generateByFriendlyUrl(
                         $friendlyUrl,
                         [],
-                        Router::ABSOLUTE_URL
+                        UrlGeneratorInterface::ABSOLUTE_URL
                     );
             }
         }

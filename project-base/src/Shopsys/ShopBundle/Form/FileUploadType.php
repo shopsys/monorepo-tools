@@ -4,9 +4,11 @@ namespace Shopsys\ShopBundle\Form;
 
 use Shopsys\ShopBundle\Component\Constraints\FileExtensionMaxLength;
 use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
-use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
@@ -40,14 +42,6 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
     public function __construct(FileUpload $fileUpload)
     {
         $this->fileUpload = $fileUpload;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'file_upload';
     }
 
     /**
@@ -100,14 +94,14 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
 
         $builder->addModelTransformer($this);
         $builder
-            ->add('uploadedFiles', FormType::COLLECTION, [
-                'type' => 'hidden',
+            ->add('uploadedFiles', CollectionType::class, [
+                'entry_type' => HiddenType::class,
                 'allow_add' => true,
                 'constraints' => [
                     new Constraints\Callback([$this, 'validateUploadedFiles']),
                 ],
             ])
-            ->add('file', FormType::FILE, [
+            ->add('file', FileType::class, [
                 'multiple' => $options['multiple'],
             ]);
 

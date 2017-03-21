@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Front\Product;
+namespace Shopsys\ShopBundle\Model\Product\Filter;
 
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
@@ -8,8 +8,9 @@ use Shopsys\ShopBundle\Model\Product\Filter\BrandFilterChoiceRepository;
 use Shopsys\ShopBundle\Model\Product\Filter\FlagFilterChoiceRepository;
 use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository;
 use Shopsys\ShopBundle\Model\Product\Filter\PriceRangeRepository;
+use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
 
-class ProductFilterFormTypeFactory
+class ProductFilterConfigFactory
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository
@@ -54,7 +55,7 @@ class ProductFilterFormTypeFactory
      * @param int $domainId
      * @param string $locale
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @return \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType
+     * @return \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig
      */
     public function createForCategory($domainId, $locale, Category $category)
     {
@@ -67,14 +68,14 @@ class ProductFilterFormTypeFactory
             ->getBrandFilterChoicesInCategory($domainId, $pricingGroup, $category);
         $priceRange = $this->priceRangeRepository->getPriceRangeInCategory($domainId, $pricingGroup, $category);
 
-        return new ProductFilterFormType($parameterFilterChoices, $flagFilterChoices, $brandFilterChoices, $priceRange);
+        return new ProductFilterConfig($parameterFilterChoices, $flagFilterChoices, $brandFilterChoices, $priceRange);
     }
 
     /**
      * @param int $domainId
      * @param string $locale
      * @param string|null $searchText
-     * @return \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType
+     * @return \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig
      */
     public function createForSearch($domainId, $locale, $searchText)
     {
@@ -86,6 +87,6 @@ class ProductFilterFormTypeFactory
             ->getBrandFilterChoicesForSearch($domainId, $pricingGroup, $locale, $searchText);
         $priceRange = $this->priceRangeRepository->getPriceRangeForSearch($domainId, $pricingGroup, $locale, $searchText);
 
-        return new ProductFilterFormType($parameterFilterChoices, $flagFilterChoices, $brandFilterChoices, $priceRange);
+        return new ProductFilterConfig($parameterFilterChoices, $flagFilterChoices, $brandFilterChoices, $priceRange);
     }
 }

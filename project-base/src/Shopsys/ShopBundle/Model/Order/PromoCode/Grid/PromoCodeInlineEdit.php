@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Model\Order\PromoCode\Grid;
 
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType;
 use Shopsys\ShopBundle\Model\Order\PromoCode\Grid\PromoCodeGridFactory;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
@@ -17,25 +17,18 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
     private $promoCodeFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormTypeFactory
+     * @var \Symfony\Component\Form\FormFactory
      */
-    private $promoCodeFormTypeFactory;
+    private $formFactory;
 
-    /**
-     * @param \Symfony\Component\Form\FormFactory $formFactory
-     * @param \Shopsys\ShopBundle\Model\Order\PromoCode\Grid\PromoCodeGridFactory $promoCodeGridFactory
-     * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade $promoCodeFacade
-     */
     public function __construct(
-        FormFactory $formFactory,
         PromoCodeGridFactory $promoCodeGridFactory,
         PromoCodeFacade $promoCodeFacade,
-        PromoCodeFormTypeFactory $promoCodeFormTypeFactory
+        FormFactory $formFactory
     ) {
+        parent::__construct($promoCodeGridFactory);
         $this->promoCodeFacade = $promoCodeFacade;
-        $this->promoCodeFormTypeFactory = $promoCodeFormTypeFactory;
-
-        parent::__construct($formFactory, $promoCodeGridFactory);
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -60,33 +53,18 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int|null $promoCodeId
-     * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData
+     * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getFormDataObject($promoCodeId = null)
+    public function getForm($promoCodeId)
     {
+        $promoCode = null;
         $promoCodeData = new PromoCodeData();
 
         if ($promoCodeId !== null) {
-            $promoCodeId = (int)$promoCodeId;
-            $promoCode = $this->promoCodeFacade->getById($promoCodeId);
+            $promoCode = $this->promoCodeFacade->getById((int)$promoCodeId);
             $promoCodeData->setFromEntity($promoCode);
         }
 
-        return $promoCodeData;
-    }
-
-    /**
-     * @param int $promoCodeId
-     * @return \Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType
-     */
-    protected function getFormType($promoCodeId)
-    {
-        if ($promoCodeId !== null) {
-            $promoCode = $this->promoCodeFacade->getById($promoCodeId);
-
-            return $this->promoCodeFormTypeFactory->createForPromoCode($promoCode);
-        }
-
-        return $this->promoCodeFormTypeFactory->create();
+        return $this->formFactory->create(PromoCodeFormType::class, $promoCodeData, ['promo_code' => $promoCode]);
     }
 }

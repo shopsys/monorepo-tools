@@ -3,7 +3,7 @@
 namespace Shopsys\GeneratorBundle\Model\Generator;
 
 use Shopsys\GeneratorBundle\Model\AbstractGenerator;
-use Shopsys\ShopBundle\Form\FormType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\Validator\Constraints;
@@ -16,12 +16,12 @@ class RepositoryGenerator extends AbstractGenerator
     public function buildForm(FormBuilderInterface $builder)
     {
         $builder
-            ->add('entityNamespace', FormType::TEXT, [
+            ->add('entityNamespace', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please insert entity namespace']),
                 ],
             ])
-            ->add('entityName', FormType::TEXT, [
+            ->add('entityName', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please insert entity name']),
                 ],

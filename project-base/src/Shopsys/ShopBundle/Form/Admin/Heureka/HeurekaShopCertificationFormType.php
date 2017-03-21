@@ -2,8 +2,10 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Heureka;
 
-use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -17,7 +19,7 @@ class HeurekaShopCertificationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('heurekaApiKey', FormType::TEXT, [
+            ->add('heurekaApiKey', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length([
@@ -27,10 +29,10 @@ class HeurekaShopCertificationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('heurekaWidgetCode', FormType::TEXTAREA, [
+            ->add('heurekaWidgetCode', TextareaType::class, [
                 'required' => false,
             ])
-            ->add('save', FormType::SUBMIT);
+            ->add('save', SubmitType::class);
     }
 
     /**

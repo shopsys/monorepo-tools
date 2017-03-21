@@ -3,10 +3,12 @@
 namespace Shopsys\ShopBundle\Form\Admin\Mail;
 
 use Shopsys\ShopBundle\Form\Admin\Mail\MailTemplateFormType;
-use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
 use Shopsys\ShopBundle\Model\Mail\AllMailTemplatesData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -34,11 +36,11 @@ class AllMailTemplatesFormType extends AbstractType
                 'required_subject_variables' => $this->resetPasswordMail->getRequiredSubjectVariables(),
                 'required_body_variables' => $this->resetPasswordMail->getRequiredBodyVariables(),
             ])
-            ->add('orderStatusTemplates', FormType::COLLECTION, [
-                'type' => MailTemplateFormType::class,
+            ->add('orderStatusTemplates', CollectionType::class, [
+                'entry_type' => MailTemplateFormType::class,
             ])
-            ->add('domainId', FormType::HIDDEN)
-            ->add('save', FormType::SUBMIT);
+            ->add('domainId', HiddenType::class)
+            ->add('save', SubmitType::class);
     }
 
     /**

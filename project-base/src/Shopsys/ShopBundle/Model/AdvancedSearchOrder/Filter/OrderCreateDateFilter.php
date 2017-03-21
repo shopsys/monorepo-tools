@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\DatePickerType;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class OrderCreateDateFilter implements AdvancedSearchFilterInterface
@@ -33,7 +33,7 @@ class OrderCreateDateFilter implements AdvancedSearchFilterInterface
      */
     public function getValueFormType()
     {
-        return FormType::DATE_PICKER;
+        return DatePickerType::class;
     }
 
     /**

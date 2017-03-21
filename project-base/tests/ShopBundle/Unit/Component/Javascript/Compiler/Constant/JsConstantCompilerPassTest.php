@@ -8,36 +8,49 @@ use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class JsConstantCompilerPassTest extends FunctionalTestCase
 {
-    public function testProcess()
+    public function testJsCompilerReplacesDefinedConstants()
     {
-        $jsConstantCompilerPass = $this->getContainer()->get(JsConstantCompilerPass::class);
-
-        $jsCompiler = new JsCompiler([
-            $jsConstantCompilerPass,
-        ]);
-
-        $content = file_get_contents(__DIR__ . '/testFoo.js');
-        $result = $jsCompiler->compile($content);
+        $content = file_get_contents(__DIR__ . '/testDefinedConstant.js');
+        $result = $this->getJsCompiler()->compile($content);
 
         $expectedResult = <<<EOD
-var x = "bar";
-var y = "bar2";
+var noLeadingBackslash = "bar";
+var leadingBackslash = "bar2";
 EOD;
 
         $this->assertSame($expectedResult, $result);
     }
 
-    public function testProcessConstantNotFoundException()
+    public function testJsCompilerReplacesClassNames()
     {
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException::class);
+        $content = file_get_contents(__DIR__ . '/testClassName.js');
+        $result = $this->getJsCompiler()->compile($content);
 
+        $expectedResult = <<<EOD
+var noLeadingBackslash = "Tests\\\\ShopBundle\\\\Unit\\\\Component\\\\Javascript\\\\Compiler\\\\Constant\\\\Testclass";
+var leadingBackslash = "Tests\\\\ShopBundle\\\\Unit\\\\Component\\\\Javascript\\\\Compiler\\\\Constant\\\\Testclass";
+EOD;
+
+        $this->assertSame($expectedResult, $result);
+    }
+
+    public function testJsCompilerFailsOnUndefinedConstant()
+    {
+        $content = file_get_contents(__DIR__ . '/testUndefinedConstant.js');
+
+        $this->setExpectedException(\Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException::class);
+        $this->getJsCompiler()->compile($content);
+    }
+
+    /**
+     * @return \Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler
+     */
+    private function getJsCompiler()
+    {
         $jsConstantCompilerPass = $this->getContainer()->get(JsConstantCompilerPass::class);
 
-        $jsCompiler = new JsCompiler([
+        return new JsCompiler([
             $jsConstantCompilerPass,
         ]);
-
-        $content = file_get_contents(__DIR__ . '/testBar.js');
-        $jsCompiler->compile($content);
     }
 }
