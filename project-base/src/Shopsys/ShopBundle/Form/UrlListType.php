@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\ShopBundle\Form\UrlListData;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -83,13 +82,19 @@ class UrlListType extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
-                'choice_list' => new ObjectChoiceList($friendlyUrls, 'slug', [], null, 'slug'),
+                'choices' => $friendlyUrls,
+                'choice_label' => 'slug',
+                'choice_value' => 'slug',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ]);
             $builder->get('mainOnDomains')->add($domainId, ChoiceType::class, [
                 'required' => true,
                 'multiple' => false,
                 'expanded' => true,
-                'choice_list' => new ObjectChoiceList($friendlyUrls, 'slug', [], null, 'slug'),
+                'choices' => $friendlyUrls,
+                'choice_label' => 'slug',
+                'choice_value' => 'slug',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'invalid_message' => 'Previously selected main URL dos not exist any more',
             ]);
         }

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Form\Admin\Pricing\Currency;
 
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -33,7 +32,10 @@ class CurrencySettingsFormType extends AbstractType
         $builder
             ->add('defaultCurrency', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->currencyFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->currencyFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter default currency']),
                 ],
@@ -43,7 +45,10 @@ class CurrencySettingsFormType extends AbstractType
                 'entry_type' => ChoiceType::class,
                 'options' => [
                     'required' => true,
-                    'choice_list' => new ObjectChoiceList($this->currencyFacade->getAll(), 'name', [], null, 'id'),
+                    'choices' => $this->currencyFacade->getAll(),
+                    'choice_label' => 'name',
+                    'choice_value' => 'id',
+                    'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter default currency']),
                     ],

@@ -104,9 +104,9 @@ class UserFormType extends AbstractType
             ->add('pricingGroup', ChoiceType::class, [
                 'required' => true,
                 'choices' => $pricingGroups,
-                'choices_as_values' => true,
                 'choice_label' => 'name',
                 'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'group_by' => $groupPricingGroupsBy,
             ]);
     }

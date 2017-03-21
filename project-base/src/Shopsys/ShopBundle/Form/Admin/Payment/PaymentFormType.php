@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Payment\PaymentData;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -60,14 +59,20 @@ class PaymentFormType extends AbstractType
             ->add('hidden', YesNoType::class, ['required' => false])
             ->add('czkRounding', YesNoType::class, ['required' => false])
             ->add('transports', ChoiceType::class, [
-                'choice_list' => new ObjectChoiceList($this->transportFacade->getAll(), 'name', [], null, 'id'),
+                'required' => false,
+                'choices' => $this->transportFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => true,
                 'expanded' => true,
-                'required' => false,
             ])
             ->add('vat', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->vatFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->vatFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],

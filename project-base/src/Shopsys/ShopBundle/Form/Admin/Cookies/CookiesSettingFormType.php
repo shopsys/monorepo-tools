@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Form\Admin\Cookies;
 
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -33,7 +32,10 @@ class CookiesSettingFormType extends AbstractType
         $builder
             ->add('cookiesArticle', ChoiceType::class, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($articles, 'name', [], null, 'id'),
+                'choices' => $articles,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose article --'),
             ])
             ->add('save', SubmitType::class);

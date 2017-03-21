@@ -22,7 +22,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditData;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -143,7 +142,10 @@ class ProductEditFormType extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
-                'choice_list' => new ObjectChoiceList($existingImages, 'filename', [], null, 'id'),
+                'choices' => $existingImages,
+                'choice_label' => 'filename',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add($builder->create('parameters', CollectionType::class, [
                     'required' => false,

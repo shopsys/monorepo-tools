@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -49,14 +48,20 @@ class TransportAndPaymentFormType extends AbstractType
 
         $builder
             ->add('transport', SingleCheckboxChoiceType::class, [
-                'choice_list' => new ObjectChoiceList($transports, 'name', [], null, 'id'),
+                'choices' => $transports,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotNull(['message' => 'Please choose shipping type']),
                 ],
                 'invalid_message' => 'Please choose shipping type',
             ])
             ->add('payment', SingleCheckboxChoiceType::class, [
-                'choice_list' => new ObjectChoiceList($payments, 'name', [], null, 'id'),
+                'choices' => $payments,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotNull(['message' => 'Please choose payment type']),
                 ],

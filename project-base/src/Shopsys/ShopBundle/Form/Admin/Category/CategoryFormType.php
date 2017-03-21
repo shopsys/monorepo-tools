@@ -17,7 +17,6 @@ use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -112,7 +111,10 @@ class CategoryFormType extends AbstractType
             ])
             ->add('parent', ChoiceType::class, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->categoryRepository->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->categoryRepository->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add($builder
                 ->create('showOnDomains', DomainsType::class, [
@@ -122,7 +124,10 @@ class CategoryFormType extends AbstractType
                 ]))
             ->add('heurekaCzFeedCategory', ChoiceType::class, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->feedCategoryRepository->getAllHeurekaCz(), 'name', [], null, 'id'),
+                'choices' => $this->feedCategoryRepository->getAllHeurekaCz(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add('urls', UrlListType::class, [
                 'route_name' => 'front_product_list',

@@ -16,7 +16,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -133,7 +132,10 @@ class ProductFormType extends AbstractType
             ])
             ->add('brand', ChoiceType::class, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->brandFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->brandFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose brand --'),
             ])
             ->add('usingStock', YesNoType::class, ['required' => false])
@@ -149,7 +151,10 @@ class ProductFormType extends AbstractType
             ])
             ->add('unit', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->unitFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->unitFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank([
                         'message' => 'Please choose unit',
@@ -158,7 +163,10 @@ class ProductFormType extends AbstractType
             ])
             ->add('availability', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->availabilityFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->availabilityFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose availability --'),
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -185,7 +193,10 @@ class ProductFormType extends AbstractType
             ])
             ->add('outOfStockAvailability', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->availabilityFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->availabilityFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose availability --'),
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -213,7 +224,10 @@ class ProductFormType extends AbstractType
             ])
             ->add('vat', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($vats, 'name', [], null, 'id'),
+                'choices' => $vats,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],
@@ -234,7 +248,10 @@ class ProductFormType extends AbstractType
             ])
             ->add('flags', ChoiceType::class, [
                 'required' => false,
-                'choice_list' => new ObjectChoiceList($this->flagFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->flagFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => true,
                 'expanded' => true,
             ])

@@ -14,7 +14,6 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -86,10 +85,13 @@ class OrderFormType extends AbstractType
         $builder
             ->add('orderNumber', TextType::class, ['read_only' => true])
             ->add('status', ChoiceType::class, [
-                'choice_list' => new ObjectChoiceList($this->orderStatusFacade->getAll(), 'name', [], null, 'id'),
+                'required' => true,
+                'choices' => $this->orderStatusFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => false,
                 'expanded' => false,
-                'required' => true,
             ])
             ->add('firstName', TextType::class, [
                 'constraints' => [
@@ -183,7 +185,10 @@ class OrderFormType extends AbstractType
                 ],
             ])
             ->add('country', ChoiceType::class, [
-                'choice_list' => new ObjectChoiceList($countries, 'name', [], null, 'id'),
+                'choices' => $countries,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose country']),
                 ],
@@ -280,7 +285,10 @@ class OrderFormType extends AbstractType
             ])
             ->add('deliveryCountry', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($countries, 'name', [], null, 'id'),
+                'choices' => $countries,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose country']),
                 ],

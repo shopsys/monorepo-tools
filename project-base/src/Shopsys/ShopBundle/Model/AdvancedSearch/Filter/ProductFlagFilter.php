@@ -7,7 +7,6 @@ use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProductFlagFilter implements AdvancedSearchFilterInterface
@@ -57,7 +56,10 @@ class ProductFlagFilter implements AdvancedSearchFilterInterface
         return [
             'expanded' => false,
             'multiple' => false,
-            'choice_list' => new ObjectChoiceList($this->flagFacade->getAll(), 'name', [], null, 'id'),
+            'choices' => $this->flagFacade->getAll(),
+            'choice_label' => 'name',
+            'choice_value' => 'id',
+            'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
         ];
     }
 

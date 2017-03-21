@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Form\Admin\Product\Unit;
 
 use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,7 +31,10 @@ class UnitSettingFormType extends AbstractType
         $builder
             ->add('defaultUnit', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($this->unitFacade->getAll(), 'name', [], null, 'id'),
+                'choices' => $this->unitFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose default unit']),
                 ],

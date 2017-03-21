@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Order\FrontOrderData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -130,7 +129,10 @@ class PersonalInfoFormType extends AbstractType
                 ],
             ])
             ->add('country', ChoiceType::class, [
-                'choice_list' => new ObjectChoiceList($countries, 'name', [], null, 'id'),
+                'choices' => $countries,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose country']),
                 ],
@@ -233,7 +235,10 @@ class PersonalInfoFormType extends AbstractType
             ])
             ->add('deliveryCountry', ChoiceType::class, [
                 'required' => true,
-                'choice_list' => new ObjectChoiceList($countries, 'name', [], null, 'id'),
+                'choices' => $countries,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank([
                         'message' => 'Please choose country',
