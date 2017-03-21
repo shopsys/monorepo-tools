@@ -148,7 +148,7 @@ class AdvertController extends AdminBaseController
             ->setConfirmMessage(t('Do you really want to remove this advert?'));
 
         $grid->setTheme('@ShopsysShop/Admin/Content/Advert/listGrid.html.twig', [
-            'advertPositionsByName' => [
+            'advertPositionNames' => [
                 Advert::POSITION_HEADER => t('under heading'),
                 Advert::POSITION_FOOTER => t('above footer'),
                 Advert::POSITION_PRODUCT_LIST => t('in category (above the category name)'),
