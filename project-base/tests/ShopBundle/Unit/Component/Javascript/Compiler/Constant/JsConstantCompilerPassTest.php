@@ -8,7 +8,7 @@ use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class JsConstantCompilerPassTest extends FunctionalTestCase
 {
-    public function testProcess()
+    public function testJsCompilerReplacesDefinedConstants()
     {
         $content = file_get_contents(__DIR__ . '/testDefinedConstant.js');
         $result = $this->getJsCompiler()->compile($content);
@@ -21,7 +21,7 @@ EOD;
         $this->assertSame($expectedResult, $result);
     }
 
-    public function testProcessConstantNotFoundException()
+    public function testJsCompilerFailsOnUndefinedConstant()
     {
         $content = file_get_contents(__DIR__ . '/testUndefinedConstant.js');
 
