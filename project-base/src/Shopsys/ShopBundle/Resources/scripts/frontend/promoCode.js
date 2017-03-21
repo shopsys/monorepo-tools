@@ -22,7 +22,7 @@
             var code = $promoCodeInput.val();
             if (code !== '') {
                 var data = {};
-                data[Shopsys.constant('Shopsys\\ShopBundle\\Controller\\Front\\PromoCodeController::PROMO_CODE_PARAMETER')] = code;
+                data[Shopsys.constant('\\Shopsys\\ShopBundle\\Controller\\Front\\PromoCodeController::PROMO_CODE_PARAMETER')] = code;
                 Shopsys.ajax({
                     loaderElement: '#js-promo-code-submit-button',
                     url: $promoCodeInput.data('apply-code-url'),

@@ -249,7 +249,7 @@
     FpJsFormValidator._checkValidationGroups = FpJsFormValidator.checkValidationGroups;
     FpJsFormValidator.checkValidationGroups = function (needle, haystack) {
         if (typeof haystack === 'undefined') {
-            haystack = [Shopsys.constant('Symfony\\Component\\Validator\\Constraint::DEFAULT_GROUP')];
+            haystack = [Shopsys.constant('\\Symfony\\Component\\Validator\\Constraint::DEFAULT_GROUP')];
         }
         return FpJsFormValidator._checkValidationGroups(needle, haystack);
     };
