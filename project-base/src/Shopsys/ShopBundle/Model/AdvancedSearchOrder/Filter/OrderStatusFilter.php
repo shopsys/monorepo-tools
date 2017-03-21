@@ -4,16 +4,19 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class OrderStatusFilter implements AdvancedSearchFilterInterface
 {
-    private $orderStatusRepository;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade
+     */
+    private $orderStatusFacade;
 
-    public function __construct(OrderStatusRepository $orderStatusRepository)
+    public function __construct(OrderStatusFacade $orderStatusFacade)
     {
-        $this->orderStatusRepository = $orderStatusRepository;
+        $this->orderStatusFacade = $orderStatusFacade;
     }
 
     /**
@@ -48,14 +51,11 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
      */
     public function getValueFormOptions()
     {
-        $orderStatusChoices = [];
-        foreach ($this->orderStatusRepository->getAll() as $orderStatus) {
-            /* @var $orderStatus \Shopsys\ShopBundle\Model\Order\Status\OrderStatus */
-            $orderStatusChoices[$orderStatus->getId()] = $orderStatus->getName();
-        }
-
         return [
-            'choices' => $orderStatusChoices,
+            'choices' => $this->orderStatusFacade->getAll(),
+            'choice_name' => 'name',
+            'choice_value' => 'id',
+            'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             'expanded' => false,
             'multiple' => false,
         ];
