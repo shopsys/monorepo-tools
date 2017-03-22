@@ -39,6 +39,7 @@ ivory_ck_editor:
         - ['TextColor']
 
 fm_elfinder:
+  assets_path: /components
   instances:
     default:
       editor: ckeditor

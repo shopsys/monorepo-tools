@@ -373,6 +373,9 @@
             <fileset dir="${path.root}/docs/generated/">
                 <exclude name="/" />
             </fileset>
+            <fileset dir="${path.web}/components/">
+                <exclude name="/" />
+            </fileset>
             <fileset dir="${path.web}/content/">
                 <exclude name="/" />
             </fileset>

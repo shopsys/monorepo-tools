@@ -118,7 +118,8 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "component-dir": "web/components"
     },
     "extra": {
         "symfony-app-dir": "app",
