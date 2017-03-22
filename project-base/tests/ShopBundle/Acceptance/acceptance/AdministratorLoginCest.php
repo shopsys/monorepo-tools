@@ -10,8 +10,7 @@ class AdministratorLoginCest
     public function testSuccessfulLogin(AcceptanceTester $me, LoginPage $loginPage)
     {
         $me->wantTo('login on admin with valid data');
-        $loginPage->login(LoginPage::ADMIN_USERNAME, LoginPage::ADMIN_PASSWORD);
-        $me->see('Dashboard');
+        $loginPage->loginAsAdmin();
     }
 
     public function testLoginWithInvalidUsername(AcceptanceTester $me, LoginPage $loginPage)

@@ -14,7 +14,7 @@ class AdminProductAdvancedSearchCest
         ProductAdvancedSearchPage $productAdvancedSearchPage
     ) {
         $me->wantTo('search for product by catnum');
-        $loginPage->login(LoginPage::ADMIN_USERNAME, LoginPage::ADMIN_PASSWORD);
+        $loginPage->loginAsAdmin();
 
         $productAdvancedSearchPage->search(ProductAdvancedSearchPage::SEARCH_SUBJECT_CATNUM, '9176544MG');
 

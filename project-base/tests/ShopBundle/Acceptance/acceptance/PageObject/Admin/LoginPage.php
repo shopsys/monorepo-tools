@@ -21,6 +21,12 @@ class LoginPage extends AbstractPage
         $this->tester->clickByText('Log in');
     }
 
+    public function loginAsAdmin()
+    {
+        $this->login(self::ADMIN_USERNAME, self::ADMIN_PASSWORD);
+        $this->tester->see('Dashboard');
+    }
+
     public function assertLoginFailed()
     {
         $this->tester->see('Log in failed.');
