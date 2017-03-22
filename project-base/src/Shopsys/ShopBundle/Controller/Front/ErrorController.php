@@ -69,11 +69,10 @@ class ErrorController extends FrontBaseController
     public function showAction(
         Request $request,
         FlattenException $exception,
-        DebugLoggerInterface $logger = null,
-        $format = 'html'
+        DebugLoggerInterface $logger = null
     ) {
         if ($this->exceptionController->isShownErrorPagePrototype()) {
-            return $this->createErrorPagePrototypeResponse($exception, $logger, $format);
+            return $this->createErrorPagePrototypeResponse($request, $exception, $logger);
         } elseif ($this->exceptionController->getDebug()) {
             return $this->createExceptionResponse($request, $exception, $logger);
         } else {
@@ -82,13 +81,19 @@ class ErrorController extends FrontBaseController
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Debug\Exception\FlattenException $exception
      * @param \Symfony\Component\HttpKernel\Log\DebugLoggerInterface $logger
-     * @param string $format
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    private function createErrorPagePrototypeResponse(FlattenException $exception, DebugLoggerInterface $logger, $format)
-    {
+    private function createErrorPagePrototypeResponse(
+        Request $request,
+        FlattenException $exception,
+        DebugLoggerInterface $logger
+    ) {
+        // Same as in \Symfony\Bundle\TwigBundle\Controller\PreviewErrorController
+        $format = $request->getRequestFormat();
+
         $code = $exception->getStatusCode();
 
         return $this->render('@ShopsysShop/Front/Content/Error/error.' . $format . '.twig', [
