@@ -26,10 +26,11 @@ class ShopsysShopBundle extends Bundle
 
         $autoContainer = $this->container->get('shopsys.auto_services.auto_container');
         /* @var $autoContainer \Shopsys\AutoServicesBundle\Compiler\AutoContainer */
-        $filemanagerAccess = $autoContainer->get(FilemanagerAccess::class);
+
+        $filemanagerAccess = $autoContainer->get('shopsys.shop.security.filesystem.filemanager_access');
         FilemanagerAccess::injectSelf($filemanagerAccess);
 
-        $translator = $autoContainer->get(Translator::class);
+        $translator = $autoContainer->get('translator');
         Translator::injectSelf($translator);
     }
 }
