@@ -482,6 +482,9 @@ services:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
+  shopsys.shop.localization:
+    class: Shopsys\ShopBundle\Model\Localization\Localization
+
   shopsys.shop.localization.custom_date_time_formatter:
     class: Shopsys\ShopBundle\Component\Localization\DateTimeFormatter
     factory: ['@shopsys.shop.localization.custom_date_time_formatter_factory', create]

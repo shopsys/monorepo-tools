@@ -31,7 +31,7 @@ class LocalizationExtension extends \Twig_Extension
 
         // Twig extensions are loaded during assetic:dump command,
         // so they cannot be dependent on Domain service (dependency of Localization)
-        $this->localization = $container->get(Localization::class);
+        $this->localization = $container->get('shopsys.shop.localization');
     }
 
     /**

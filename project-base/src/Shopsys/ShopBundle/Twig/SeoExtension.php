@@ -49,7 +49,7 @@ class SeoExtension extends \Twig_Extension
     {
         // Twig extensions are loaded during assetic:dump command,
         // so they cannot be dependent on Domain service
-        return $this->container->get(Domain::class);
+        return $this->container->get('shopsys.shop.component.domain');
     }
 
     /**

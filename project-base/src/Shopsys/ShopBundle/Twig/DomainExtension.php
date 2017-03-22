@@ -52,7 +52,7 @@ class DomainExtension extends \Twig_Extension
     {
         // Twig extensions are loaded during assetic:dump command,
         // so they cannot be dependent on Domain service
-        return $this->container->get(Domain::class);
+        return $this->container->get('shopsys.shop.component.domain');
     }
 
     /**
@@ -62,7 +62,7 @@ class DomainExtension extends \Twig_Extension
     {
         // Twig extensions are loaded during assetic:dump command,
         // so they cannot be dependent on DomainFacade service
-        return $this->container->get(DomainFacade::class);
+        return $this->container->get('shopsys.shop.component.domain.domain_facade');
     }
 
     /**
