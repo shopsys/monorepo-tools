@@ -49,6 +49,3 @@ fm_elfinder:
           uploads:
             driver: LocalFileSystem
             path: %shopsys.filemanager_upload_web_dir%
-            # show_hidden must be true if access_control is set
-            show_hidden: true
-            access_control: 'Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess::isPathAccessibleStatic'
