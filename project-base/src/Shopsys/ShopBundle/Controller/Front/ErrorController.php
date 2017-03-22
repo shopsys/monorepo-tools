@@ -8,9 +8,9 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Error\ErrorPagesFacade;
 use Shopsys\ShopBundle\Component\Error\ExceptionController;
 use Shopsys\ShopBundle\Component\Error\ExceptionListener;
+use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\FlattenException;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 use Tracy\BlueScreen;
 use Tracy\Debugger;
@@ -62,7 +62,7 @@ class ErrorController extends FrontBaseController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Symfony\Component\HttpKernel\Exception\FlattenException $exception
+     * @param \Symfony\Component\Debug\Exception\FlattenException $exception
      * @param \Symfony\Component\HttpKernel\Log\DebugLoggerInterface $logger
      * @param string $format
      */
@@ -82,7 +82,7 @@ class ErrorController extends FrontBaseController
     }
 
     /**
-     * @param \Symfony\Component\HttpKernel\Exception\FlattenException $exception
+     * @param \Symfony\Component\Debug\Exception\FlattenException $exception
      * @param \Symfony\Component\HttpKernel\Log\DebugLoggerInterface $logger
      * @param string $format
      * @return \Symfony\Component\HttpFoundation\Response
@@ -116,7 +116,7 @@ class ErrorController extends FrontBaseController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Symfony\Component\HttpKernel\Exception\FlattenException $exception
+     * @param \Symfony\Component\Debug\Exception\FlattenException $exception
      * @param \Symfony\Component\HttpKernel\Log\DebugLoggerInterface $logger
      * @return \Symfony\Component\HttpFoundation\Response
      */
