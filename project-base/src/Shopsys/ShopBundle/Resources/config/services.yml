@@ -126,6 +126,9 @@ services:
       arguments:
         - %shopsys.css_version_filepath%
 
+  shopsys.shop.component.data_fixture.persistent_reference_facade:
+    class: Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade
+
   shopsys.shop.component.doctrine.cache.metadata.permanent_php_file_cache:
       class: Shopsys\ShopBundle\Component\Doctrine\Cache\PermanentPhpFileCache
       arguments:
