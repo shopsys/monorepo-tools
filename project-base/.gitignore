@@ -2,7 +2,8 @@
 /docs/generated
 /nbproject
 /node_modules
-/var
+/var/*
+!/var/.gitkeep
 /vendor
 /DEVELOPMENT
 /PRODUCTION
