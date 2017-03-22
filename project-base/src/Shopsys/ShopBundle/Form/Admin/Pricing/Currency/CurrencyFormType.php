@@ -65,7 +65,9 @@ class CurrencyFormType extends AbstractType
             ->add('exchangeRate', NumberType::class, [
                 'required' => true,
                 'scale' => 6,
-                'read_only' => $options['is_default_currency'],
+                'attr' => [
+                    'readonly' => $options['is_default_currency'],
+                ],
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter currency exchange rate']),
                     new Constraints\GreaterThan(0),

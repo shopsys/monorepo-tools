@@ -36,7 +36,7 @@ class UserFormType extends AbstractType
                 ],
             ])
             ->add('email', EmailType::class, [
-                'read_only' => true,
+                'attr' => ['readonly' => true],
                 'required' => false,
             ])
             ->add('password', RepeatedType::class, [
