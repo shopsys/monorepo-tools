@@ -197,7 +197,7 @@ class ProductEditFormType extends AbstractType
             ->add('heurekaCpcValues', MultidomainType::class, [
                 'entry_type' => MoneyType::class,
                 'required' => false,
-                'options' => [
+                'entry_options' => [
                     'currency' => 'CZK',
                     'scale' => 2,
                     'constraints' => [
@@ -215,7 +215,7 @@ class ProductEditFormType extends AbstractType
             ->add('zboziCpcValues', MultidomainType::class, [
                 'entry_type' => MoneyType::class,
                 'required' => false,
-                'options' => [
+                'entry_options' => [
                     'currency' => 'CZK',
                     'scale' => 2,
                     'constraints' => [
@@ -229,7 +229,7 @@ class ProductEditFormType extends AbstractType
             ->add('zboziCpcSearchValues', MultidomainType::class, [
                 'entry_type' => MoneyType::class,
                 'required' => false,
-                'options' => [
+                'entry_options' => [
                     'currency' => 'CZK',
                     'scale' => 2,
                     'constraints' => [

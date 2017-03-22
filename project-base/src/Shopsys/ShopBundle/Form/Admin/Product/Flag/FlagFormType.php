@@ -22,7 +22,7 @@ class FlagFormType extends AbstractType
         $builder
             ->add('name', LocalizedType::class, [
                 'required' => true,
-                'options' => [
+                'entry_options' => [
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter flag name in all languages']),
                         new Constraints\Length(['max' => 100, 'maxMessage' => 'Flag name cannot be longer than {{ limit }} characters']),

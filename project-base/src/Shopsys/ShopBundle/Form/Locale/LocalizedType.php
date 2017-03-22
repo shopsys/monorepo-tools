@@ -30,11 +30,11 @@ class LocalizedType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        Utils::setArrayDefaultValue($options['options'], 'required', $options['required']);
-        Utils::setArrayDefaultValue($options['options'], 'constraints', []);
+        Utils::setArrayDefaultValue($options['entry_options'], 'required', $options['required']);
+        Utils::setArrayDefaultValue($options['entry_options'], 'constraints', []);
 
-        $defaultLocaleOptions = $options['options'];
-        $otherLocaleOptions = $options['options'];
+        $defaultLocaleOptions = $options['entry_options'];
+        $otherLocaleOptions = $options['entry_options'];
 
         $defaultLocaleOptions['constraints'] = array_merge(
             $defaultLocaleOptions['constraints'],
@@ -60,9 +60,9 @@ class LocalizedType extends AbstractType
     {
         $resolver->setDefaults([
             'compound' => true,
-            'options' => [],
-            'main_constraints' => [],
             'entry_type' => TextType::class,
+            'entry_options' => [],
+            'main_constraints' => [],
         ]);
     }
 }

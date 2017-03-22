@@ -32,10 +32,10 @@ class MultidomainType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        Utils::setArrayDefaultValue($options['options'], 'required', $options['required']);
-        Utils::setArrayDefaultValue($options['options'], 'constraints', []);
+        Utils::setArrayDefaultValue($options['entry_options'], 'required', $options['required']);
+        Utils::setArrayDefaultValue($options['entry_options'], 'constraints', []);
 
-        $subOptions = $options['options'];
+        $subOptions = $options['entry_options'];
         $subOptions['required'] = $options['required'] && $subOptions['required'];
 
         foreach ($this->domain->getAll() as $domainConfig) {
@@ -56,9 +56,9 @@ class MultidomainType extends AbstractType
     {
         $resolver->setDefaults([
             'compound' => true,
-            'options' => [],
-            'optionsByDomainId' => [],
             'entry_type' => TextType::class,
+            'entry_options' => [],
+            'optionsByDomainId' => [],
         ]);
     }
 

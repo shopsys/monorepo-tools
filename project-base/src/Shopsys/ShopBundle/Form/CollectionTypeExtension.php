@@ -24,7 +24,7 @@ class CollectionTypeExtension extends AbstractTypeExtension
 
         $resizeListener = new ResizeFormListener(
             $options['entry_type'],
-            $options['options'],
+            $options['entry_options'],
             $options['allow_add'],
             $options['allow_delete'],
             $options['delete_empty']
