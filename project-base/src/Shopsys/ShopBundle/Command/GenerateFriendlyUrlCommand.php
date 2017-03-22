@@ -18,7 +18,8 @@ class GenerateFriendlyUrlCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $friendlyUrlGeneratorFacade = $this->getContainer()->get(FriendlyUrlGeneratorFacade::class);
+        $friendlyUrlGeneratorFacade = $this->getContainer()
+            ->get('shopsys.shop.component.router.friendly_url.friendly_url_generator_facade');
         /* @var $friendlyUrlGeneratorFacade \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade */
 
         $output->writeln('<fg=green>Start of generating missing friendly urls from routing_friendly_url.yml file.</fg=green>');

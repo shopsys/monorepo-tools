@@ -153,6 +153,12 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
+  shopsys.shop.component.domain.domain_data_creator:
+    class: Shopsys\ShopBundle\Component\Domain\DomainDataCreator
+
+  shopsys.shop.component.domain.domain_db_functions_facade:
+    class: Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade
+
   shopsys.shop.component.domain.domain_facade:
     class: Shopsys\ShopBundle\Component\Domain\DomainFacade
     arguments:
@@ -170,6 +176,12 @@ services:
     class: Shopsys\ShopBundle\Component\Domain\DomainService
     arguments:
       - '@monolog.logger'
+
+  shopsys.shop.component.domain.domain_url_service:
+    class: Shopsys\ShopBundle\Component\Domain\DomainUrlService
+
+  shopsys.shop.component.domain.multidomain.multidomain_entity_class_finder_facade:
+    class: Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade
 
   shopsys.shop.component.error.error_pages_facade:
     class: Shopsys\ShopBundle\Component\Error\ErrorPagesFacade
@@ -285,12 +297,21 @@ services:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
       - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
 
+  shopsys.shop.component.mutex.mutex_factory:
+    class: Shopsys\ShopBundle\Component\Mutex\MutexFactory
+
   shopsys.shop.component.request.transactional_master_request_service:
     class: Shopsys\ShopBundle\Component\Request\TransactionalMasterRequestService
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+  shopsys.shop.component.router.friendly_url.friendly_url_generator_facade:
+    class: Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade
+
+  shopsys.shop.component.setting:
+    class: Shopsys\ShopBundle\Component\Setting\Setting
 
   shopsys.shop.component.sitemap.sitemap_dumper_factory:
     class: Shopsys\ShopBundle\Component\Sitemap\SitemapDumperFactory
@@ -365,6 +386,9 @@ services:
   shopsys.shop.component.uploaded_file.config.uploaded_file_config_loader:
     class: Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfigLoader
 
+  shopsys.shop.component.uploaded_file.directory_structure_creator:
+    class: Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator
+
   shopsys.shop.component.uploaded_file.uploaded_file_delete_doctrine_listener:
     class: Shopsys\ShopBundle\Component\UploadedFile\UploadedFileDeleteDoctrineListener
     tags:
@@ -393,6 +417,18 @@ services:
 
   shopsys.shop.customer.frontend_user_provider:
     class: Shopsys\ShopBundle\Model\Customer\FrontendUserProvider
+
+  shopsys.shop.data_fixtures.performance.category_data_fixture:
+    class: Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture
+
+  shopsys.shop.data_fixtures.performance.order_data_fixture:
+    class: Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture
+
+  shopsys.shop.data_fixtures.performance.product_data_fixture:
+    class: Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture
+
+  shopsys.shop.data_fixtures.performance.user_data_fixture:
+    class: Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture
 
   shopsys.shop.data_fixtures.product_data_fixture_csv_reader:
     class: Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader
@@ -505,6 +541,12 @@ services:
     tags:
       # must be run before ProductVisibilityFacade
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
+
+  shopsys.shop.product.product_hidden_recalculator:
+    class: Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator
+
+  shopsys.shop.product.product_selling_denied_recalculator:
+    class: Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator
 
   shopsys.shop.product.product_visibility_facade:
     class: Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade

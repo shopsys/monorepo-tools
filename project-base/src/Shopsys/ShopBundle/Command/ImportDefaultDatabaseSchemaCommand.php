@@ -22,7 +22,7 @@ class ImportDefaultDatabaseSchemaCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $databaseSchemaFacade = $this->getContainer()->get(DatabaseSchemaFacade::class);
+        $databaseSchemaFacade = $this->getContainer()->get('shopsys.shop.component.doctrine.database_schema_facade');
         /* @var $databaseSchemaFacade \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
 
         $output->writeln('Importing default database schema...');

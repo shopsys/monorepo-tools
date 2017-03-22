@@ -22,7 +22,7 @@ class GenerateErrorPagesCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $errorPagesFacade = $this->getContainer()->get(ErrorPagesFacade::class);
+        $errorPagesFacade = $this->getContainer()->get('shopsys.shop.component.error.error_pages_facade');
         /* @var $errorPagesFacade \Shopsys\ShopBundle\Component\Error\ErrorPagesFacade */
 
         $errorPagesFacade->generateAllErrorPagesForProduction();
