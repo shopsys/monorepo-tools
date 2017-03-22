@@ -35,7 +35,7 @@ class UploadedFileDeleteDoctrineListener
      */
     private function getUploadedFileFacade()
     {
-        return $this->container->get(UploadedFileFacade::class);
+        return $this->container->get('shopsys.shop.component.uploaded_file.uploaded_file_facade');
     }
 
     /**

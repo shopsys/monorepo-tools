@@ -394,6 +394,9 @@ services:
     tags:
       - { name: doctrine.event_listener, event: preRemove }
 
+  shopsys.shop.component.uploaded_file.uploaded_file_facade:
+    class: Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade
+
   shopsys.shop.component.uploaded_file.uploaded_file_locator:
     class: Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator
     arguments:
