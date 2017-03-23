@@ -6,10 +6,6 @@ parameters:
   fp_js_form_validator.factory.class: Shopsys\ShopBundle\Component\Validator\JsFormValidatorFactory
   fragment.handler.class: Shopsys\ShopBundle\Component\HttpFoundation\FragmentHandler
   prezent_doctrine_translatable.listener.class: Shopsys\ShopBundle\Model\Localization\TranslatableListener
-  sensio_framework_extra.routing.loader.annot_class.class: Shopsys\ShopBundle\Component\AnnotatedRouteControllerLoader
-  translation.loader.po.class: Shopsys\ShopBundle\Component\Translation\PoFileLoader
-  twig.controller.exception.class: Shopsys\ShopBundle\Component\Error\ExceptionController
-  twig.exception_listener.class: Shopsys\ShopBundle\Component\Error\NotLogFakeHttpExceptionsExceptionListener
   faker.seed: 1234
 
 services:
@@ -45,6 +41,13 @@ services:
     class: NinjaMutex\Lock\FlockLock
     arguments:
       - %shopsys.root_dir%/var/lock
+
+  sensio_framework_extra.routing.loader.annot_class:
+    class: Shopsys\ShopBundle\Component\AnnotatedRouteControllerLoader
+    tags:
+      - { name: 'routing.loader' }
+    arguments:
+      - '@annotation_reader'
 
   shopsys.doctrine.cache_driver.query_cache:
     class: Doctrine\Common\Cache\ChainCache
@@ -578,6 +581,26 @@ services:
       - %shopsys.web_dir%
       - %shopsys.javascript_sources_dir%
       - %shopsys.javascript_url_prefix%
+
+  translation.loader.po:
+    class: Shopsys\ShopBundle\Component\Translation\PoFileLoader
+    tags:
+      - { name: 'translation.loader', alias: 'po' }
+
+  twig.controller.exception:
+    class: Shopsys\ShopBundle\Component\Error\ExceptionController
+    arguments:
+      - '@twig'
+      - '%kernel.debug%'
+
+  twig.exception_listener:
+    class: Shopsys\ShopBundle\Component\Error\NotLogFakeHttpExceptionsExceptionListener
+    tags:
+      - { name: 'kernel.event_subscriber' }
+      - { name: 'monolog.logger', channel: 'request' }
+    arguments:
+      - '%twig.exception_listener.controller%'
+      - '@?logger'
 
   twig.stringloader:
     class: Twig_Loader_Array
