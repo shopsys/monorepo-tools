@@ -47,7 +47,7 @@ class PaymentFormType extends AbstractType
                 'main_constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name']),
                 ],
-                'options' => [
+                'entry_options' => [
                     'constraints' => [
                         new Constraints\Length(['max' => 255, 'maxMessage' => 'Name cannot be longer than {{ limit }} characters']),
                     ],

@@ -33,7 +33,9 @@ class VatFormType extends AbstractType
                 'required' => false,
                 'scale' => 4,
                 'disabled' => $options['scenario'] === self::SCENARIO_EDIT,
-                'read_only' => $options['scenario'] === self::SCENARIO_EDIT,
+                'attr' => [
+                    'readonly' => $options['scenario'] === self::SCENARIO_EDIT,
+                ],
                 'invalid_message' => 'Please enter VAT in correct format.',
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),

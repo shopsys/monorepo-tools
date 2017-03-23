@@ -83,7 +83,9 @@ class OrderFormType extends AbstractType
         }
 
         $builder
-            ->add('orderNumber', TextType::class, ['read_only' => true])
+            ->add('orderNumber', TextType::class, [
+                'attr' => ['readonly' => true],
+            ])
             ->add('status', ChoiceType::class, [
                 'required' => true,
                 'choices' => $this->orderStatusFacade->getAll(),

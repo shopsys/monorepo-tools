@@ -21,7 +21,7 @@ class AvailabilityFormType extends AbstractType
         $builder
             ->add('name', LocalizedType::class, [
                 'required' => true,
-                'options' => [
+                'entry_options' => [
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter availability name in all languages']),
                         new Constraints\Length(['max' => 100, 'maxMessage' => 'Availability name cannot be longer than {{ limit }} characters']),

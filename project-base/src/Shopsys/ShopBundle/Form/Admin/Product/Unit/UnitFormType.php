@@ -20,7 +20,7 @@ class UnitFormType extends AbstractType
         $builder
             ->add('name', LocalizedType::class, [
                 'required' => true,
-                'options' => [
+                'entry_options' => [
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter unit name in all languages']),
                         new Constraints\Length(['max' => 10, 'maxMessage' => 'Unit name cannot be longer than {{ limit }} characters']),

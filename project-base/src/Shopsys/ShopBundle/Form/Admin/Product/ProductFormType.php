@@ -91,7 +91,7 @@ class ProductFormType extends AbstractType
         if ($options['product'] !== null && $options['product']->isVariant()) {
             $builder->add('variantAlias', LocalizedType::class, [
                 'required' => false,
-                'options' => [
+                'entry_options' => [
                     'constraints' => [
                         new Constraints\Length(['max' => 255, 'maxMessage' => 'Variant alias cannot be longer then {{ limit }} characters']),
                     ],
@@ -102,7 +102,7 @@ class ProductFormType extends AbstractType
         $builder
             ->add('name', LocalizedType::class, [
                 'required' => false,
-                'options' => [
+                'entry_options' => [
                     'constraints' => [
                         new Constraints\Length(['max' => 255, 'maxMessage' => 'Product name cannot be longer than {{ limit }} characters']),
                     ],

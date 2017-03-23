@@ -36,7 +36,7 @@ class UserFormType extends AbstractType
                 ],
             ])
             ->add('email', EmailType::class, [
-                'read_only' => true,
+                'attr' => ['readonly' => true],
                 'required' => false,
             ])
             ->add('password', RepeatedType::class, [
@@ -49,7 +49,6 @@ class UserFormType extends AbstractType
                     'constraints' => [
                         new Constraints\Length(['min' => 6, 'minMessage' => 'Password cannot be longer then {{ limit }} characters']),
                     ],
-                    'attr' => ['autocomplete' => 'off'],
                 ],
                 'invalid_message' => 'Passwords do not match',
             ]);

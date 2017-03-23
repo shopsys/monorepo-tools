@@ -19,7 +19,7 @@ class OrderStatusFormType extends AbstractType
     {
         $builder
             ->add('name', LocalizedType::class, [
-                'options' => [
+                'entry_options' => [
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter all country names']),
                         new Constraints\Length(['max' => 255, 'maxMessage' => 'Status name cannot be longer than {{ limit }} characters']),

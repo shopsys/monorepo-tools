@@ -21,7 +21,7 @@ class ParameterFormType extends AbstractType
         $builder
             ->add('name', LocalizedType::class, [
                 'required' => false,
-                'options' => [
+                'entry_options' => [
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter parameter name']),
                         new Constraints\Length(['max' => 100, 'maxMessage' => 'Parameter name cannot be longer than {{ limit }} characters']),
