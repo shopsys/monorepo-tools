@@ -17,6 +17,7 @@ use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Csrf\CsrfToken;
 
 class CartController extends FrontBaseController
 {
@@ -304,9 +305,9 @@ class CartController extends FrontBaseController
     public function deleteAction(Request $request, $cartItemId)
     {
         $cartItemId = (int)$cartItemId;
-        $token = $request->query->get('_token');
+        $token = new CsrfToken('front_cart_delete_' . $cartItemId, $request->query->get('_token'));
 
-        if ($this->get('form.csrf_provider')->isCsrfTokenValid('front_cart_delete_' . $cartItemId, $token)) {
+        if ($this->get('security.csrf.token_manager')->isTokenValid($token)) {
             try {
                 $productName = $this->cartFacade->getProductByCartItemId($cartItemId)->getName();
 
