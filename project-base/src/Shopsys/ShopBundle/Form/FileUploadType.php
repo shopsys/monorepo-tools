@@ -29,7 +29,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
     /**
      * @var \Symfony\Component\Validator\Constraint[]
      */
-    private $constraints;
+    private $fileConstraints;
 
     /**
      * @var bool
@@ -85,7 +85,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->required = $options['required'];
-        $this->constraints = array_merge(
+        $this->fileConstraints = array_merge(
             [
                 new FileExtensionMaxLength(['limit' => 5]),
             ],
@@ -110,22 +110,20 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
     }
 
     /**
-     * @param string|null $uploadedFiles
+     * @param string[]|null $uploadedFiles
      * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
      */
     public function validateUploadedFiles($uploadedFiles, ExecutionContextInterface $context)
     {
-        if ($this->required || count($uploadedFiles) > 0) {
-            foreach ($uploadedFiles as $uploadedFile) {
-                $filepath = $this->fileUpload->getTemporaryFilepath($uploadedFile);
-                $file = new File($filepath, false);
+        foreach ($uploadedFiles as $uploadedFile) {
+            $filepath = $this->fileUpload->getTemporaryFilepath($uploadedFile);
+            $file = new File($filepath, false);
 
-                $validator = $context->getValidator();
-                $violations = $validator->validate($file, $this->constraints);
-                foreach ($violations as $violation) {
-                    /* @var $violation \Symfony\Component\Validator\ConstraintViolationInterface */
-                    $context->addViolation($violation->getMessageTemplate(), $violation->getParameters());
-                }
+            $validator = $context->getValidator();
+            $violations = $validator->validate($file, $this->fileConstraints);
+            foreach ($violations as $violation) {
+                /* @var $violation \Symfony\Component\Validator\ConstraintViolationInterface */
+                $context->addViolation($violation->getMessageTemplate(), $violation->getParameters());
             }
         }
     }
