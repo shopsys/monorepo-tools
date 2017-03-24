@@ -4,6 +4,17 @@ assetic:
   bundles: [FMElfinderBundle]
   filters:
     cssrewrite: ~
+  assets:
+    js_form_validation:
+      # Missing file with compiled JS is a known bug of the package - https://github.com/formapro/JsFormValidatorBundle/issues/109
+      inputs:
+        - "%shopsys.root_dir%/vendor/fp/jsformvalidator-bundle/Fp/JsFormValidatorBundle/Resources/public/js/FpJsFormValidator.js"
+        - "%shopsys.root_dir%/vendor/fp/jsformvalidator-bundle/Fp/JsFormValidatorBundle/Resources/public/js/constraints/*"
+        - "%shopsys.root_dir%/vendor/fp/jsformvalidator-bundle/Fp/JsFormValidatorBundle/Resources/public/js/transformers/*"
+        - "%shopsys.root_dir%/vendor/fp/jsformvalidator-bundle/Fp/JsFormValidatorBundle/Resources/public/js/jquery.fpjsformvalidator.js"
+      # Output is located in vendor (instead of /web/bundles/fpjsformvalidator/js/fp_js_validator.js)
+      # because "phing assets" command cleans the /web/bundles directory and would remove the compiled script
+      output: "../vendor/fp/jsformvalidator-bundle/Fp/JsFormValidatorBundle/Resources/public/js/fp_js_validator.js"
 
 doctrine:
   dbal:
