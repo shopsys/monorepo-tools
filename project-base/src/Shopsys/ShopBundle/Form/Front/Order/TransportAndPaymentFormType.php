@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class TransportAndPaymentFormType extends AbstractType
 {
@@ -88,7 +88,7 @@ class TransportAndPaymentFormType extends AbstractType
 
     /**
      * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
-     * @param \Symfony\Component\Validator\ExecutionContextInterface $context
+     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
      */
     public function validateTransportPaymentRelation(OrderData $orderData, ExecutionContextInterface $context)
     {

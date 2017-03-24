@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class FileUploadType extends AbstractType implements DataTransformerInterface
 {
@@ -111,7 +111,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
 
     /**
      * @param string|null $uploadedFiles
-     * @param \Symfony\Component\Validator\ExecutionContextInterface $context
+     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
      */
     public function validateUploadedFiles($uploadedFiles, ExecutionContextInterface $context)
     {
@@ -119,7 +119,13 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
             foreach ($uploadedFiles as $uploadedFile) {
                 $filepath = $this->fileUpload->getTemporaryFilepath($uploadedFile);
                 $file = new File($filepath, false);
-                $context->validateValue($file, $this->constraints);
+
+                $validator = $context->getValidator();
+                $violations = $validator->validate($file, $this->constraints);
+                foreach ($violations as $violation) {
+                    /* @var $violation \Symfony\Component\Validator\ConstraintViolationInterface */
+                    $context->addViolation($violation->getMessageTemplate(), $violation->getParameters());
+                }
             }
         }
     }
