@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Component\Translation;
 
 use JMS\TranslationBundle\Translation\Extractor\FileExtractor;
 use JMS\TranslationBundle\Translation\ExtractorManager;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 class NormalizingExtractorManager extends ExtractorManager
 {
@@ -15,7 +15,7 @@ class NormalizingExtractorManager extends ExtractorManager
 
     /**
      * @param \JMS\TranslationBundle\Translation\Extractor\FileExtractor $extractor
-     * @param \Symfony\Component\HttpKernel\Log\LoggerInterface $logger
+     * @param \Psr\Log\LoggerInterface $logger
      * @param \Shopsys\ShopBundle\Component\Translation\MessageIdNormalizer $messageIdNormalizer
      */
     public function __construct(FileExtractor $extractor, LoggerInterface $logger, MessageIdNormalizer $messageIdNormalizer)
