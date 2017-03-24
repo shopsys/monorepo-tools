@@ -3,9 +3,8 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/../../..">
       <sourceFolder url="file://$MODULE_DIR$/../../../src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../src/Shopsys/ShopBundle/Tests" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../app/cache" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../app/logs" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../tests" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../var" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
