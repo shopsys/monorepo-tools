@@ -150,6 +150,16 @@ swiftmailer:
   delivery_address: "%mailer_master_email_address%"
   delivery_whitelist: "%mailer_delivery_whitelist%"
 
+symplify_default_autowire:
+  autowire_types:
+    Doctrine\ORM\EntityManager: 'doctrine.orm.default_entity_manager'
+    Doctrine\ORM\EntityManagerInterface: 'doctrine.orm.default_entity_manager'
+    Doctrine\Portability\Connection: 'database_connection'
+    Symfony\Component\EventDispatcher\EventDispatcher: 'event_dispatcher'
+    Symfony\Component\EventDispatcher\EventDispatcherInterface: 'event_dispatcher'
+    Symfony\Component\Translation\TranslatorInterface: 'translator'
+    Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface: 'security.access.decision_manager'
+
 twig:
   debug: "%kernel.debug%"
   exception_controller: 'Shopsys\ShopBundle\Controller\Front\ErrorController::showAction'
