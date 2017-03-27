@@ -150,6 +150,10 @@ swiftmailer:
   delivery_address: "%mailer_master_email_address%"
   delivery_whitelist: "%mailer_delivery_whitelist%"
 
+symplify_controller_autowire:
+  controller_dirs:
+    - "%kernel.root_dir%/../src/Shopsys/ShopBundle/Controller"
+
 symplify_default_autowire:
   autowire_types:
     Doctrine\ORM\EntityManager: 'doctrine.orm.default_entity_manager'

@@ -10,9 +10,6 @@ parameters:
 
 services:
 
-  controller_resolver:
-    alias: shopsys.shop.component.controller.controller_resolver
-
   doctrine.orm.default_entity_manager:
     class: %doctrine.orm.entity_manager.class%
     factory: [%doctrine.orm.entity_manager.class%, create]
@@ -121,9 +118,6 @@ services:
 
   shopsys.shop.category.top_category.top_category_facade:
     class: Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade
-
-  shopsys.shop.component.controller.controller_resolver:
-    class: Shopsys\ShopBundle\Component\Controller\ControllerResolver
 
   shopsys.shop.component.cron.config.cron_config:
     class: Shopsys\ShopBundle\Component\Cron\Config\CronConfig
