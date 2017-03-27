@@ -78,8 +78,17 @@ services:
   shopsys.shop.admin_navigation.menu_loader:
     class: Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader
 
+  shopsys.shop.administrator.administrator_facade:
+    class: Shopsys\ShopBundle\Model\Administrator\AdministratorFacade
+
   shopsys.shop.administrator.security.administrator_user_provider:
     class: Shopsys\ShopBundle\Model\Administrator\Security\AdministratorUserProvider
+
+  shopsys.shop.advert.advert_facade:
+    class: Shopsys\ShopBundle\Model\Advert\AdvertFacade
+
+  shopsys.shop.article.article_facade:
+    class: Shopsys\ShopBundle\Model\Article\ArticleFacade
 
   shopsys.shop.breadcrumb.front_breadcrumb_resolver:
     class: Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
@@ -98,11 +107,20 @@ services:
     arguments:
       - '@shopsys.shop.component.flash_message.sender.front'
 
+  shopsys.shop.category.category_data_factory:
+    class: Shopsys\ShopBundle\Model\Category\CategoryDataFactory
+
+  shopsys.shop.category.category_facade:
+    class: Shopsys\ShopBundle\Model\Category\CategoryFacade
+
   shopsys.shop.category.category_visibility_repository:
     class: Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository
     tags:
       # must be ran before ProductVisibilityFacade
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
+
+  shopsys.shop.category.top_category.top_category_facade:
+    class: Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade
 
   shopsys.shop.component.controller.controller_resolver:
     class: Shopsys\ShopBundle\Component\Controller\ControllerResolver
@@ -128,6 +146,9 @@ services:
 
   shopsys.shop.component.data_fixture.persistent_reference_facade:
     class: Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade
+
+  shopsys.shop.component.data_fixture.product_data_fixture_reference_injector:
+    class: Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector
 
   shopsys.shop.component.doctrine.cache.metadata.permanent_php_file_cache:
       class: Shopsys\ShopBundle\Component\Doctrine\Cache\PermanentPhpFileCache
@@ -332,6 +353,12 @@ services:
     tags:
       - { name: presta.sitemap.listener }
 
+  shopsys.shop.component.string.hash_generator:
+    class: Shopsys\ShopBundle\Component\String\HashGenerator
+
+  shopsys.shop.component.system:
+    class: Shopsys\ShopBundle\Component\System\System
+
   shopsys.shop.component.translation.normalizing_extractor_manager:
     class: Shopsys\ShopBundle\Component\Translation\NormalizingExtractorManager
     arguments:
@@ -421,8 +448,20 @@ services:
     arguments:
       - %kernel.environment%
 
+  shopsys.shop.country.country_facade:
+    class: Shopsys\ShopBundle\Model\Country\CountryFacade
+
+  shopsys.shop.customer.customer_facade:
+    class: Shopsys\ShopBundle\Model\Customer\CustomerFacade
+
   shopsys.shop.customer.frontend_user_provider:
     class: Shopsys\ShopBundle\Model\Customer\FrontendUserProvider
+
+  shopsys.shop.customer.user_repository:
+    class: Shopsys\ShopBundle\Model\Customer\UserRepository
+
+  shopsys.shop.data_fixtures.demo.product_data_fixture_loader:
+    class: Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader
 
   shopsys.shop.data_fixtures.performance.category_data_fixture:
     class: Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture
@@ -507,13 +546,25 @@ services:
     class: Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade
     arguments: [%kernel.root_dir%, %kernel.cache_dir%]
 
+  shopsys.shop.mail.mail_template_facade:
+    class: Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
+
   shopsys.shop.mail.mailer_service:
     class: Shopsys\ShopBundle\Model\Mail\MailerService
     arguments: ['@mailer']
 
+  shopsys.shop.module.module_facade:
+    class: Shopsys\ShopBundle\Model\Module\ModuleFacade
+
   shopsys.shop.order.flow:
     class: Shopsys\ShopBundle\Form\Front\Order\OrderFlow
     parent: craue.form.flow
+
+  shopsys.shop.order.order_facade:
+    class: Shopsys\ShopBundle\Model\Order\OrderFacade
+
+  shopsys.shop.order.preview.order_preview_factory:
+    class: Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory
 
   shopsys.shop.heureka.heureka_facade:
     class: Shopsys\ShopBundle\Model\Heureka\HeurekaFacade
@@ -525,10 +576,28 @@ services:
     arguments:
       - '@shopsys.shop.component.flash_message.bag.front'
 
+  shopsys.shop.order.promo_code.promo_code_facade:
+    class: Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
+
+  shopsys.shop.payment.payment_facade:
+    class: Shopsys\ShopBundle\Model\Payment\PaymentFacade
+
+  shopsys.shop.pricing.currency.currency_facade:
+    class: Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+
+  shopsys.shop.pricing.group.pricing_group_facade:
+    class: Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+
   shopsys.shop.pricing.input_price_recalculation_scheduler:
     class: Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
+  shopsys.shop.pricing.vat.vat_facade:
+    class: Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
+
+  shopsys.shop.product.availability.availability_facade:
+    class: Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
 
   shopsys.shop.product.availability.product_availability_recalculator:
     class: Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator
@@ -545,11 +614,26 @@ services:
     arguments:
       - '@shopsys.shop.product.bestselling_product.cache_provider'
 
+  shopsys.shop.product.bestselling_product.manual_bestselling_product_facade:
+    class: Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade
+
+  shopsys.shop.product.brand.brand_facade:
+    class: Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
+
+  shopsys.shop.product.flag.flag_facade:
+    class: Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
+
   shopsys.shop.product.pricing.product_price_recalculator:
     class: Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
     tags:
       # must be run before ProductVisibilityFacade
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
+
+  shopsys.shop.product.product_edit_data_factory:
+    class: Shopsys\ShopBundle\Model\Product\ProductEditDataFactory
+
+  shopsys.shop.product.product_facade:
+    class: Shopsys\ShopBundle\Model\Product\ProductFacade
 
   shopsys.shop.product.product_hidden_recalculator:
     class: Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator
@@ -557,11 +641,20 @@ services:
   shopsys.shop.product.product_selling_denied_recalculator:
     class: Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator
 
+  shopsys.shop.product.product_variant_facade:
+    class: Shopsys\ShopBundle\Model\Product\ProductVariantFacade
+
   shopsys.shop.product.product_visibility_facade:
     class: Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
     tags:
       # must be ran after CategoryVisibilityRepository and ProductPriceRecalculator
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 10 }
+
+  shopsys.shop.product.top_product.top_product_facade:
+    class: Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade
+
+  shopsys.shop.product.unit.unit_facade:
+    class: Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
 
   # Define RedicrectController explicitly to prevent creating it on-the-fly
   # when redirecting (it causes unnecessary container rebuild).
@@ -594,6 +687,9 @@ services:
     tags:
       - { name: kernel.event_subscriber }
 
+  shopsys.shop.script.script_facade:
+    class: Shopsys\ShopBundle\Model\Script\ScriptFacade
+
   shopsys.shop.security.admin_logout_handler:
     class: Shopsys\ShopBundle\Model\Security\AdminLogoutHandler
 
@@ -624,6 +720,12 @@ services:
     class: Shopsys\ShopBundle\Model\Security\LoginListener
     tags:
       - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+
+  shopsys.shop.slider.slider_item_facade:
+    class: Shopsys\ShopBundle\Model\Slider\SliderItemFacade
+
+  shopsys.shop.transport.transport_facade:
+    class: Shopsys\ShopBundle\Model\Transport\TransportFacade
 
   shopsys.shop.twig.javascript.javascript_compiler_service:
     class: Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService

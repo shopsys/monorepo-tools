@@ -30,7 +30,7 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
      */
     private function createTopProducts(array $productReferenceNames)
     {
-        $topProductFacade = $this->get(TopProductFacade::class);
+        $topProductFacade = $this->get('shopsys.shop.product.top_product.top_product_facade');
         /* @var $topProductFacade \Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade */
 
         $products = [];

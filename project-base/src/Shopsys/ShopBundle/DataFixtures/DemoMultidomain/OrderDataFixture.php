@@ -32,7 +32,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
      */
     public function load(ObjectManager $manager)
     {
-        $userRepository = $this->get(UserRepository::class);
+        $userRepository = $this->get('shopsys.shop.customer.user_repository');
         /* @var $userRepository \Shopsys\ShopBundle\Model\Customer\UserRepository */
 
         $orderData = new OrderData();
@@ -152,9 +152,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         array $products,
         User $user = null
     ) {
-        $orderFacade = $this->get(OrderFacade::class);
+        $orderFacade = $this->get('shopsys.shop.order.order_facade');
         /* @var $orderFacade \Shopsys\ShopBundle\Model\Order\OrderFacade */
-        $orderPreviewFactory = $this->get(OrderPreviewFactory::class);
+        $orderPreviewFactory = $this->get('shopsys.shop.order.preview.order_preview_factory');
         /* @var $orderPreviewFactory \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory */
 
         $quantifiedProducts = [];

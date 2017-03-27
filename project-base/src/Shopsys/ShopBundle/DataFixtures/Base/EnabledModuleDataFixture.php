@@ -14,7 +14,7 @@ class EnabledModuleDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $moduleFacade = $this->get(ModuleFacade::class);
+        $moduleFacade = $this->get('shopsys.shop.module.module_facade');
         /* @var $moduleFacade \Shopsys\ShopBundle\Model\Module\ModuleFacade */
         $moduleFacade->setEnabled(ModuleList::PRODUCT_FILTER_COUNTS, true);
         $moduleFacade->setEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS, true);

@@ -82,7 +82,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
      */
     private function createTransport($referenceName, TransportEditData $transportEditData)
     {
-        $transportFacade = $this->get(TransportFacade::class);
+        $transportFacade = $this->get('shopsys.shop.transport.transport_facade');
         /* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
 
         $transport = $transportFacade->create($transportEditData);

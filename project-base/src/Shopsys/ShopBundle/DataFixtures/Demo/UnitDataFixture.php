@@ -28,7 +28,7 @@ class UnitDataFixture extends AbstractReferenceFixture
      */
     private function createUnit(UnitData $unitData, $referenceName = null)
     {
-        $unitFacade = $this->get(UnitFacade::class);
+        $unitFacade = $this->get('shopsys.shop.product.unit.unit_facade');
         /* @var $unitFacade \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade */
 
         $unit = $unitFacade->create($unitData);

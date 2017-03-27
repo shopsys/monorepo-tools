@@ -106,9 +106,9 @@ class CategoryDataFixture extends AbstractReferenceFixture
      */
     private function editCategoryOnDomain2($referenceName, $descriptionDomain2)
     {
-        $categoryFacade = $this->get(CategoryFacade::class);
+        $categoryFacade = $this->get('shopsys.shop.category.category_facade');
         /* @var $categoryFacade \Shopsys\ShopBundle\Model\Category\CategoryFacade */
-        $categoryDataFactory = $this->get(CategoryDataFactory::class);
+        $categoryDataFactory = $this->get('shopsys.shop.category.category_data_factory');
         /* @var $categoryDataFactory \Shopsys\ShopBundle\Model\Category\CategoryDataFactory */
 
         $category = $this->getReference(DemoCategoryDataFixture::PREFIX . $referenceName);

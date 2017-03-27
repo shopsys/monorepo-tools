@@ -22,13 +22,13 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     public function load(ObjectManager $manager)
     {
-        $productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
+        $productDataFixtureLoader = $this->get('shopsys.shop.data_fixtures.demo.product_data_fixture_loader');
         /* @var $productDataFixtureLoader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
-        $referenceInjector = $this->get(ProductDataFixtureReferenceInjector::class);
+        $referenceInjector = $this->get('shopsys.shop.component.data_fixture.product_data_fixture_reference_injector');
         /* @var $referenceInjector \Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector */
-        $persistentReferenceFacade = $this->get(PersistentReferenceFacade::class);
+        $persistentReferenceFacade = $this->get('shopsys.shop.component.data_fixture.persistent_reference_facade');
         /* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
-        $productDataFixtureCsvReader = $this->get(ProductDataFixtureCsvReader::class);
+        $productDataFixtureCsvReader = $this->get('shopsys.shop.data_fixtures.product_data_fixture_csv_reader');
         /* @var $productDataFixtureCsvReader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
 
         $onlyForFirstDomain = true;
@@ -57,7 +57,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     private function createProduct($referenceName, ProductEditData $productEditData)
     {
-        $productFacade = $this->get(ProductFacade::class);
+        $productFacade = $this->get('shopsys.shop.product.product_facade');
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
         $product = $productFacade->create($productEditData);
@@ -73,11 +73,11 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     private function createVariants(array $productsByCatnum, $productNo)
     {
-        $loaderService = $this->get(ProductDataFixtureLoader::class);
+        $loaderService = $this->get('shopsys.shop.data_fixtures.demo.product_data_fixture_loader');
         /* @var $loaderService \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
-        $productVariantFacade = $this->get(ProductVariantFacade::class);
+        $productVariantFacade = $this->get('shopsys.shop.product.product_variant_facade');
         /* @var $productVariantFacade \Shopsys\ShopBundle\Model\Product\ProductVariantFacade */
-        $productDataFixtureCsvReader = $this->get(ProductDataFixtureCsvReader::class);
+        $productDataFixtureCsvReader = $this->get('shopsys.shop.data_fixtures.product_data_fixture_csv_reader');
         /* @var $productDataFixtureCsvReader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
 
         $csvRows = $productDataFixtureCsvReader->getProductDataFixtureCsvRows();

@@ -168,7 +168,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
      */
     private function createCategory(CategoryData $categoryData, $referenceName = null)
     {
-        $categoryFacade = $this->get(CategoryFacade::class);
+        $categoryFacade = $this->get('shopsys.shop.category.category_facade');
         /* @var $categoryFacade \Shopsys\ShopBundle\Model\Category\CategoryFacade */
 
         $category = $categoryFacade->create($categoryData);

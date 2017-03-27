@@ -43,7 +43,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
      */
     private function updateMailTemplate(MailTemplateData $mailTemplateData)
     {
-        $mailTemplateFacade = $this->get(MailTemplateFacade::class);
+        $mailTemplateFacade = $this->get('shopsys.shop.mail.mail_template_facade');
         /* @var $mailTemplateFacade \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade */
 
         $domainId = 2;

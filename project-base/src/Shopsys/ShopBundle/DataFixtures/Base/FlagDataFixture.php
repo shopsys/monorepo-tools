@@ -42,7 +42,7 @@ class FlagDataFixture extends AbstractReferenceFixture
      */
     private function createFlag(FlagData $flagData, $referenceName = null)
     {
-        $flagFacade = $this->get(FlagFacade::class);
+        $flagFacade = $this->get('shopsys.shop.product.flag.flag_facade');
         /* @var $flagFacade \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade */
 
         $flag = $flagFacade->create($flagData);

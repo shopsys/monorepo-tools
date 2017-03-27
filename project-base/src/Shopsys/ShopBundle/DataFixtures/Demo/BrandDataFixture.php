@@ -41,7 +41,7 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
      */
     public function load(ObjectManager $manager)
     {
-        $brandFacade = $this->get(BrandFacade::class);
+        $brandFacade = $this->get('shopsys.shop.product.brand.brand_facade');
         /* @var $brandFacade \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade */
 
         $brandData = new BrandData();

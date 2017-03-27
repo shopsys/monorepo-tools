@@ -21,15 +21,15 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     public function load(ObjectManager $manager)
     {
-        $productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
+        $productDataFixtureLoader = $this->get('shopsys.shop.data_fixtures.demo.product_data_fixture_loader');
         /* @var $productDataFixtureLoader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
-        $referenceInjector = $this->get(ProductDataFixtureReferenceInjector::class);
+        $referenceInjector = $this->get('shopsys.shop.component.data_fixture.product_data_fixture_reference_injector');
         /* @var $referenceInjector \Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector */
-        $persistentReferenceFacade = $this->get(PersistentReferenceFacade::class);
+        $persistentReferenceFacade = $this->get('shopsys.shop.component.data_fixture.persistent_reference_facade');
         /* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
-        $productDataFixtureCsvReader = $this->get(ProductDataFixtureCsvReader::class);
+        $productDataFixtureCsvReader = $this->get('shopsys.shop.data_fixtures.product_data_fixture_csv_reader');
         /* @var $productDataFixtureCsvReader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
-        $productFacade = $this->get(ProductFacade::class);
+        $productFacade = $this->get('shopsys.shop.product.product_facade');
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
         $onlyForFirstDomain = false;
@@ -53,11 +53,11 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     private function editProduct(Product $product, array $row)
     {
-        $productEditDataFactory = $this->get(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->get('shopsys.shop.product.product_edit_data_factory');
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $this->get(ProductFacade::class);
+        $productFacade = $this->get('shopsys.shop.product.product_facade');
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
-        $productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
+        $productDataFixtureLoader = $this->get('shopsys.shop.data_fixtures.demo.product_data_fixture_loader');
         /* @var $productDataFixtureLoader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
 
         $productEditData = $productEditDataFactory->createFromProduct($product);

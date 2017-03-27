@@ -14,7 +14,7 @@ class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFix
      */
     public function load(ObjectManager $manager)
     {
-        $localization = $this->get(Localization::class);
+        $localization = $this->get('shopsys.shop.localization');
         /* @var $localization \Shopsys\ShopBundle\Model\Localization\Localization */
         foreach ($localization->getAllLocales() as $locale) {
             $domainCollation = $localization->getCollationByLocale($locale);

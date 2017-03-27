@@ -14,7 +14,7 @@ class PromoCodeDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $promoCodeFacade = $this->get(PromoCodeFacade::class);
+        $promoCodeFacade = $this->get('shopsys.shop.order.promo_code.promo_code_facade');
         /* @var $promoCodeFacade \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade */
         $promoCodeFacade->create(new PromoCodeData('test', 10.0));
     }

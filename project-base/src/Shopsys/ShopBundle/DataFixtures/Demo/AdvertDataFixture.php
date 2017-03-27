@@ -32,7 +32,7 @@ class AdvertDataFixture extends AbstractReferenceFixture
      */
     private function createAdvert(AdvertData $advertData)
     {
-        $advertFacade = $this->get(AdvertFacade::class);
+        $advertFacade = $this->get('shopsys.shop.advert.advert_facade');
         /* @var $advertFacade \Shopsys\ShopBundle\Model\Advert\AdvertFacade */
         $advertFacade->create($advertData);
     }

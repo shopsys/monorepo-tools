@@ -13,7 +13,7 @@ class DomainDbFunctionsDataFixture extends AbstractNativeFixture
      */
     public function load(ObjectManager $manager)
     {
-        $domainDbFunctionsFacade = $this->get(DomainDbFunctionsFacade::class);
+        $domainDbFunctionsFacade = $this->get('shopsys.shop.component.domain.domain_db_functions_facade');
         /* @var $domainDbFunctionsFacade \Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade */
         $domainDbFunctionsFacade->createDomainDbFunctions();
     }
