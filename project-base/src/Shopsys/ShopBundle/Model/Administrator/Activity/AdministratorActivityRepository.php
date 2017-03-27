@@ -54,7 +54,7 @@ class AdministratorActivityRepository
     {
         $currentAdministratorActvity = $this->getLastActivitiesQueryBuilder($administrator, 1)->getQuery()->getSingleResult();
         if ($currentAdministratorActvity === null) {
-            throw new \Shopsys\ShopBundle\Model\Administrator\Security\Exception\CurrentAdministratorActivityNotFoundException();
+            throw new \Shopsys\ShopBundle\Model\Administrator\Activity\Exception\CurrentAdministratorActivityNotFoundException();
         }
 
         return $currentAdministratorActvity;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Form\Front;
+namespace Tests\ShopBundle\Database\Form\Front;
 
 use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType;

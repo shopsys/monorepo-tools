@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Model\Order;
+namespace Tests\ShopBundle\Unit\Model\AdvancedSearch;
 
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit_Framework_TestCase;

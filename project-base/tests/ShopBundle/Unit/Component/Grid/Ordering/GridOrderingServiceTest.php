@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Grid\Ordering;
+namespace Tests\ShopBundle\Unit\Component\Grid\Ordering;
 
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService;

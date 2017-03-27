@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Twig;
+namespace Tests\ShopBundle\Unit\Twig\FileThumbnail;
 
 use Intervention\Image\Image;
 use PHPUnit_Framework_TestCase;

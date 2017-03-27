@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Localization\Grid\Exception;
+namespace Shopsys\ShopBundle\Model\Localization\Translation\Grid\Exception;
 
 use Exception;
 use Shopsys\ShopBundle\Model\Localization\Translation\Grid\Exception\TranslationGridException;

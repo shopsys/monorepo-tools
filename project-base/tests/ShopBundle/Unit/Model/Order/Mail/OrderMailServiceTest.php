@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Component\Form;
+namespace Tests\ShopBundle\Unit\Model\Order\Mail;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;

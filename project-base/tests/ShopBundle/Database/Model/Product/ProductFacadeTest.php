@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Model\Product;
+namespace Tests\ShopBundle\Database\Model\Product;
 
 use ReflectionClass;
 use Shopsys\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;

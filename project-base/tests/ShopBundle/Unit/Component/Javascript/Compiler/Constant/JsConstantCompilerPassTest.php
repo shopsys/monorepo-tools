@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Javascript\Compiler\Constant;
+namespace Tests\ShopBundle\Unit\Component\Javascript\Compiler\Constant;
 
 use Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass;
 use Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler;

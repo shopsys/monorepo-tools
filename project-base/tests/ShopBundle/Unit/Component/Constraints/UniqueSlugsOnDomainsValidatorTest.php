@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Component\Cron;
+namespace Tests\ShopBundle\Unit\Component\Constraints;
 
 use Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
 use Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomainsValidator;

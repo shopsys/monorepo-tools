@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Javascript\Compiler\Translator;
+namespace Tests\ShopBundle\Unit\Component\Javascript\Compiler\Translator;
 
 use Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler;
 use Shopsys\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass;

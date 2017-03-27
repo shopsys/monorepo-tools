@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Model\Order;
+namespace Tests\ShopBundle\Unit\Model\Order\Preview;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice;

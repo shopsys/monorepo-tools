@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Database\Model\Order;
+namespace Tests\ShopBundle\Database\Model\Administrator;
 
 use DateTime;
 use Shopsys\ShopBundle\DataFixtures\Base\AdministratorDataFixture;
