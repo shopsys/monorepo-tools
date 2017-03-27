@@ -1,8 +1,8 @@
 <?php
 
-use Shopsys\AutoServicesBundle\Kernel;
 use Shopsys\Environment;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
@@ -27,7 +27,6 @@ class AppKernel extends Kernel
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new ShopSys\MigrationBundle\ShopSysMigrationBundle(),
-            new Shopsys\AutoServicesBundle\ShopsysAutoServicesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),

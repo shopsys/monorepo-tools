@@ -69,7 +69,7 @@ abstract class FunctionalTestCase extends WebTestCase
      */
     protected function getContainer()
     {
-        return $this->getClient()->getContainer()->get('shopsys.auto_services.auto_container');
+        return $this->getClient()->getContainer();
     }
 
     /**
