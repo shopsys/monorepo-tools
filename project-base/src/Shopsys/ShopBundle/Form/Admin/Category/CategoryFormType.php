@@ -114,7 +114,6 @@ class CategoryFormType extends AbstractType
                 'choices' => $this->categoryRepository->getAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add('showOnDomains', DomainsType::class, [
                 InvertChoiceTypeExtension::INVERT_OPTION => true,
@@ -126,7 +125,6 @@ class CategoryFormType extends AbstractType
                 'choices' => $this->feedCategoryRepository->getAllHeurekaCz(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add('urls', UrlListType::class, [
                 'route_name' => 'front_product_list',

@@ -76,7 +76,6 @@ class ArticleFormType extends AbstractType
                         t('in footer') => Article::PLACEMENT_FOOTER,
                         t('without positoning') => Article::PLACEMENT_NONE,
                     ],
-                    'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                     'placeholder' => t('-- Choose article position --'),
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please choose article placement']),

@@ -35,7 +35,6 @@ class TermsAndConditionsSettingFormType extends AbstractType
                 'choices' => $articles,
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose article --'),
             ])
             ->add('save', SubmitType::class);

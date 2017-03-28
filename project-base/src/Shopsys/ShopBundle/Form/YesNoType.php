@@ -21,7 +21,6 @@ class YesNoType extends AbstractType
             'choice_name' => function ($choice) {
                 return $choice ? 'yes' : 'no';
             },
-            'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             'multiple' => false,
             'expanded' => true,
             'placeholder' => false,
