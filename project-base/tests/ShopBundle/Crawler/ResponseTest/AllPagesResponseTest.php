@@ -10,12 +10,12 @@ class AllPagesResponseTest extends DatabaseTestCase
 {
     public function adminTestableUrlsProvider()
     {
-        $domain = $this->getContainer()->get(Domain::class);
+        $domain = $this->getServiceByType(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         // DataProvider is called before setUp() - domain is not set
         $domain->switchDomainById(1);
 
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
         /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
 
         return $urlsProvider->getAdminTestableUrlsProviderData();
@@ -29,7 +29,7 @@ class AllPagesResponseTest extends DatabaseTestCase
      */
     public function testAdminPages($testedRouteName, $url, $expectedStatusCode)
     {
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
         /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
         $url = $urlsProvider->replaceCsrfTokensInUrl($url);
 
@@ -51,12 +51,12 @@ class AllPagesResponseTest extends DatabaseTestCase
 
     public function frontTestableUrlsProvider()
     {
-        $domain = $this->getContainer()->get(Domain::class);
+        $domain = $this->getServiceByType(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         // DataProvider is called before setUp() - domain is not set
         $domain->switchDomainById(1);
 
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
         /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
 
         return $urlsProvider->getFrontTestableUrlsProviderData();
@@ -71,7 +71,7 @@ class AllPagesResponseTest extends DatabaseTestCase
      */
     public function testFrontPages($testedRouteName, $url, $expectedStatusCode, $asLogged)
     {
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
         /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
         $url = $urlsProvider->replaceCsrfTokensInUrl($url);
 

@@ -57,8 +57,8 @@ class AdminNavigationTest extends FunctionalTestCase
         $menuFactory = new MenuFactory(
             $this->getContainer()->getParameter('shopsys.admin_navigation.config_filepath'),
             $authorizationChecker,
-            $this->getContainer()->get(MenuLoader::class),
-            $this->getContainer()->get(Domain::class)
+            $this->getServiceByType(MenuLoader::class),
+            $this->getServiceByType(Domain::class)
         );
 
         return $menuFactory->createMenuWithVisibleItems();

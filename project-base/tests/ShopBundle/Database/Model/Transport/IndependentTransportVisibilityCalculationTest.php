@@ -29,7 +29,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
         $em->flush();
 
         $independentTransportVisibilityCalculation =
-            $this->getContainer()->get(IndependentTransportVisibilityCalculation::class);
+            $this->getServiceByType(IndependentTransportVisibilityCalculation::class);
         /* @var $independentTransportVisibilityCalculation \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
         $this->assertTrue($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
@@ -52,7 +52,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
         $em->flush();
 
         $independentTransportVisibilityCalculation =
-            $this->getContainer()->get(IndependentTransportVisibilityCalculation::class);
+            $this->getServiceByType(IndependentTransportVisibilityCalculation::class);
         /* @var $independentTransportVisibilityCalculation \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
         $this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
@@ -71,7 +71,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
         $em->flush();
 
         $independentTransportVisibilityCalculation =
-            $this->getContainer()->get(IndependentTransportVisibilityCalculation::class);
+            $this->getServiceByType(IndependentTransportVisibilityCalculation::class);
         /* @var $independentTransportVisibilityCalculation \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
         $this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
@@ -94,7 +94,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
         $em->flush();
 
         $independentTransportVisibilityCalculation =
-            $this->getContainer()->get(IndependentTransportVisibilityCalculation::class);
+            $this->getServiceByType(IndependentTransportVisibilityCalculation::class);
         /* @var $independentTransportVisibilityCalculation \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
         $this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));

@@ -15,11 +15,11 @@ class UnitFacadeTest extends DatabaseTestCase
     public function testDeleteByIdAndReplace()
     {
         $em = $this->getEntityManager();
-        $unitFacade = $this->getContainer()->get(UnitFacade::class);
+        $unitFacade = $this->getServiceByType(UnitFacade::class);
         /* @var $unitFacade \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $this->getContainer()->get(ProductFacade::class);
+        $productFacade = $this->getServiceByType(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
         $unitToDelete = $unitFacade->create(new UnitData(['cs' => 'name']));

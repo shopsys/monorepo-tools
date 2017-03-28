@@ -12,7 +12,7 @@ class DomainsConfigLoaderTest extends FunctionalTestCase
     {
         $domainsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_config_filepath');
         $domainsUrlsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_urls_config_filepath');
-        $domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
+        $domainsConfigLoader = $this->getServiceByType(DomainsConfigLoader::class);
         /* @var $domainsConfigLoader \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
 
         $domainConfigs = $domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath);
@@ -26,7 +26,7 @@ class DomainsConfigLoaderTest extends FunctionalTestCase
 
     public function testLoadDomainConfigsFromYamlConfigFileNotFound()
     {
-        $domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
+        $domainsConfigLoader = $this->getServiceByType(DomainsConfigLoader::class);
         /* @var $domainsConfigLoader \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
         $domainsUrlsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_urls_config_filepath');
 
@@ -36,7 +36,7 @@ class DomainsConfigLoaderTest extends FunctionalTestCase
 
     public function testLoadDomainConfigsFromYamlUrlsConfigFileNotFound()
     {
-        $domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
+        $domainsConfigLoader = $this->getServiceByType(DomainsConfigLoader::class);
         /* @var $domainsConfigLoader \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
         $domainsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_config_filepath');
 
@@ -46,7 +46,7 @@ class DomainsConfigLoaderTest extends FunctionalTestCase
 
     public function testLoadDomainConfigsFromYamlDomainConfigsDoNotMatchException()
     {
-        $domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
+        $domainsConfigLoader = $this->getServiceByType(DomainsConfigLoader::class);
         /* @var $domainsConfigLoader \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
         $domainsConfigFilepath = __DIR__ . '/test_domains.yml';
         $domainsUrlsConfigFilepath = __DIR__ . '/test_domains_urls.yml';

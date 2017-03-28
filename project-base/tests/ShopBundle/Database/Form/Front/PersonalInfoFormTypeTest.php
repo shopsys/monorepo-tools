@@ -27,7 +27,7 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase
      */
     public function testTermsAndConditionsAgreementIsMandatory(array $personalInfoFormData, $isExpectedValid)
     {
-        $formFactory = $this->getContainer()->get(FormFactoryInterface::class);
+        $formFactory = $this->getServiceByType(FormFactoryInterface::class);
         /* @var $formFactory \Symfony\Component\Form\FormFactoryInterface */
 
         $personalInfoForm = $formFactory->create(PersonalInfoFormType::class, null, [

@@ -12,7 +12,7 @@ class MultidomainEntityDataCreatorTest extends DatabaseTestCase
 {
     public function testCopyAllMultidomainDataForNewDomainCopiesTestRow()
     {
-        $em = $this->getContainer()->get(EntityManager::class);
+        $em = $this->getServiceByType(EntityManager::class);
         /* @var $em \Doctrine\ORM\EntityManager */
 
         $em->getConnection()->executeQuery('
@@ -69,7 +69,7 @@ class MultidomainEntityDataCreatorTest extends DatabaseTestCase
 
     public function testCopyAllMultidomainDataForNewDomainWithDomainIdDoesNotThrowDriverException()
     {
-        $em = $this->getContainer()->get(EntityManager::class);
+        $em = $this->getServiceByType(EntityManager::class);
         /* @var $em \Doctrine\ORM\EntityManager */
 
         $em->getConnection()->executeQuery('

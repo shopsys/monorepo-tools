@@ -36,9 +36,9 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $em->persist($paymentDomain);
         $em->flush();
 
-        $transportFacade = $this->getContainer()->get(TransportFacade::class);
+        $transportFacade = $this->getServiceByType(TransportFacade::class);
         /* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
-        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $visiblePayments = $paymentFacade->getVisibleOnCurrentDomain();
@@ -67,9 +67,9 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $em->persist($paymentDomain);
         $em->flush();
 
-        $transportFacade = $this->getContainer()->get(TransportFacade::class);
+        $transportFacade = $this->getServiceByType(TransportFacade::class);
         /* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
-        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $visiblePayments = $paymentFacade->getVisibleOnCurrentDomain();
@@ -98,9 +98,9 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $em->persist($paymentDomain);
         $em->flush();
 
-        $transportFacade = $this->getContainer()->get(TransportFacade::class);
+        $transportFacade = $this->getServiceByType(TransportFacade::class);
         /* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
-        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $visiblePayments = $paymentFacade->getVisibleOnCurrentDomain();
@@ -123,9 +123,9 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $em->persist($transportDomain);
         $em->flush();
 
-        $transportFacade = $this->getContainer()->get(TransportFacade::class);
+        $transportFacade = $this->getServiceByType(TransportFacade::class);
         /* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
-        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $visiblePayments = $paymentFacade->getVisibleOnCurrentDomain();
@@ -154,9 +154,9 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $em->persist($paymentDomain);
         $em->flush();
 
-        $transportFacade = $this->getContainer()->get(TransportFacade::class);
+        $transportFacade = $this->getServiceByType(TransportFacade::class);
         /* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
-        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $visiblePayments = $paymentFacade->getVisibleOnCurrentDomain();
@@ -185,9 +185,9 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $em->persist($paymentDomain);
         $em->flush();
 
-        $transportFacade = $this->getContainer()->get(TransportFacade::class);
+        $transportFacade = $this->getServiceByType(TransportFacade::class);
         /* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
-        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $visiblePayments = $paymentFacade->getVisibleOnCurrentDomain();
@@ -216,7 +216,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $em->persist($paymentDomain);
         $em->flush();
 
-        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $visiblePayments = $paymentFacade->getVisibleOnCurrentDomain();
@@ -244,7 +244,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $em->persist($paymentDomain);
         $em->flush();
 
-        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $visiblePayments = $paymentFacade->getVisibleOnCurrentDomain();
@@ -272,7 +272,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $em->persist($paymentDomain);
         $em->flush();
 
-        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $visiblePayments = $paymentFacade->getVisibleOnCurrentDomain();
@@ -295,7 +295,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $em->persist($paymentDomain);
         $em->flush();
 
-        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $visiblePayments = $paymentFacade->getVisibleOnCurrentDomain();
@@ -323,7 +323,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $em->persist($paymentDomain);
         $em->flush();
 
-        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $visiblePayments = $paymentFacade->getVisibleOnCurrentDomain();
@@ -351,7 +351,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $em->persist($paymentDomain);
         $em->flush();
 
-        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $visiblePayments = $paymentFacade->getVisibleOnCurrentDomain();

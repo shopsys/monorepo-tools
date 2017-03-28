@@ -27,7 +27,7 @@ class AllPagesTest extends FunctionalTestCase
      */
     public function testAdminPagesWarmup()
     {
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
         /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
 
         $this->doWarmupPagesWithProgress(
@@ -42,7 +42,7 @@ class AllPagesTest extends FunctionalTestCase
      */
     public function testFrontPagesWarmup()
     {
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
         /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
 
         $this->doWarmupPagesWithProgress(
@@ -54,7 +54,7 @@ class AllPagesTest extends FunctionalTestCase
 
     public function testAdminPages()
     {
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
         /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
 
         $this->doTestPagesWithProgress(
@@ -67,7 +67,7 @@ class AllPagesTest extends FunctionalTestCase
 
     public function testFrontPages()
     {
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
         /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
 
         $this->doTestPagesWithProgress(
@@ -127,11 +127,11 @@ class AllPagesTest extends FunctionalTestCase
         $password,
         $jmeterOutputFilename
     ) {
-        $performanceTestSummaryPrinter = $this->getContainer()->get(PerformanceTestSummaryPrinter::class);
+        $performanceTestSummaryPrinter = $this->getServiceByType(PerformanceTestSummaryPrinter::class);
         /* @var $performanceTestSummaryPrinter \Tests\ShopBundle\Performance\Page\PerformanceTestSummaryPrinter */
-        $performanceResultsCsvExporter = $this->getContainer()->get(PerformanceResultsCsvExporter::class);
+        $performanceResultsCsvExporter = $this->getServiceByType(PerformanceResultsCsvExporter::class);
         /* @var $performanceResultsCsvExporter \Tests\ShopBundle\Performance\Page\PerformanceResultsCsvExporter */
-        $performanceTestSamplesAggregator = $this->getContainer()->get(PerformanceTestSamplesAggregator::class);
+        $performanceTestSamplesAggregator = $this->getServiceByType(PerformanceTestSamplesAggregator::class);
         /* @var $performanceTestSamplesAggregator \Tests\ShopBundle\Performance\Page\PerformanceTestSamplesAggregator */
 
         $consoleOutput = new ConsoleOutput();
@@ -199,7 +199,7 @@ class AllPagesTest extends FunctionalTestCase
         }
         $clientEntityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $clientEntityManager \Doctrine\ORM\EntityManager */
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
         /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
         $urlWithCsrfToken = $urlsProvider->replaceCsrfTokensInUrl($url);
 
@@ -229,7 +229,7 @@ class AllPagesTest extends FunctionalTestCase
     private function doAssert(
         array $performanceTestSamples
     ) {
-        $performanceTestSampleQualifier = $this->getContainer()->get(PerformanceTestSampleQualifier::class);
+        $performanceTestSampleQualifier = $this->getServiceByType(PerformanceTestSampleQualifier::class);
         /* @var $performanceTestSampleQualifier \Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier */
 
         $overallStatus = $performanceTestSampleQualifier->getOverallStatus($performanceTestSamples);

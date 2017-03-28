@@ -10,9 +10,9 @@ class AdvancedSearchOrderFilterTranslationTest extends FunctionalTestCase
 {
     public function testTranslateFilterName()
     {
-        $advancedSearchConfig = $this->getContainer()->get(OrderAdvancedSearchConfig::class);
+        $advancedSearchConfig = $this->getServiceByType(OrderAdvancedSearchConfig::class);
         /* @var $advancedSearchConfig \Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig */
-        $advancedSearchOrderFilterTranslation = $this->getContainer()->get(AdvancedSearchOrderFilterTranslation::class);
+        $advancedSearchOrderFilterTranslation = $this->getServiceByType(AdvancedSearchOrderFilterTranslation::class);
         // @codingStandardsIgnoreStart
         /* @var $advancedSearchOrderFilterTranslation \Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation */
         // @codingStandardsIgnoreEnd

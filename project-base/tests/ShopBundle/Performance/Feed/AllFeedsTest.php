@@ -26,7 +26,7 @@ class AllFeedsTest extends FunctionalTestCase
 
     public function testAllFeedsGeneration()
     {
-        $performanceResultsCsvExporter = $this->getContainer()->get(PerformanceResultsCsvExporter::class);
+        $performanceResultsCsvExporter = $this->getServiceByType(PerformanceResultsCsvExporter::class);
         /* @var $performanceResultsCsvExporter \Tests\ShopBundle\Performance\Feed\PerformanceResultsCsvExporter */
         $consoleOutput = new ConsoleOutput();
 
@@ -83,9 +83,9 @@ class AllFeedsTest extends FunctionalTestCase
      */
     public function getAllFeedGenerationData()
     {
-        $feedConfigFacade = $this->getContainer()->get(FeedConfigFacade::class);
+        $feedConfigFacade = $this->getServiceByType(FeedConfigFacade::class);
         /* @var $feedConfigFacade \Shopsys\ShopBundle\Model\Feed\FeedConfigFacade */
-        $domain = $this->getContainer()->get(Domain::class);
+        $domain = $this->getServiceByType(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
         $feedGenerationData = $this->getFeedGenerationData(
@@ -153,7 +153,7 @@ class AllFeedsTest extends FunctionalTestCase
     {
         $client = $this->getClient(true, self::ADMIN_USERNAME, self::ADMIN_PASSWORD);
 
-        $router = $this->getContainer()->get(CurrentDomainRouter::class);
+        $router = $this->getServiceByType(CurrentDomainRouter::class);
         /* @var $router \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter */
         $clientEntityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $clientEntityManager \Doctrine\ORM\EntityManager */

@@ -57,7 +57,7 @@ class CustomerPasswordServiceTest extends FunctionalTestCase
         $isExpectedValid
     ) {
         $encoderFactory = $this->getContainer()->get('security.encoder_factory');
-        $hashGenerator = $this->getContainer()->get(HashGenerator::class);
+        $hashGenerator = $this->getServiceByType(HashGenerator::class);
 
         $registrationService = new CustomerPasswordService(
             $encoderFactory,

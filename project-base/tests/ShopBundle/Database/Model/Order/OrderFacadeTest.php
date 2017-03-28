@@ -26,23 +26,23 @@ class OrderFacadeTest extends DatabaseTestCase
      */
     public function testCreate()
     {
-        $cartFacade = $this->getContainer()->get(CartFacade::class);
+        $cartFacade = $this->getServiceByType(CartFacade::class);
         /* @var $cartFacade \Shopsys\ShopBundle\Model\Cart\CartFacade */
-        $cartService = $this->getContainer()->get(CartService::class);
+        $cartService = $this->getServiceByType(CartService::class);
         /* @var $cartService \Shopsys\ShopBundle\Model\Cart\CartService */
-        $orderFacade = $this->getContainer()->get(OrderFacade::class);
+        $orderFacade = $this->getServiceByType(OrderFacade::class);
         /* @var $orderFacade \Shopsys\ShopBundle\Model\Order\OrderFacade */
-        $orderPreviewFactory = $this->getContainer()->get(OrderPreviewFactory::class);
+        $orderPreviewFactory = $this->getServiceByType(OrderPreviewFactory::class);
         /* @var $orderPreviewFactory \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory */
-        $orderRepository = $this->getContainer()->get(OrderRepository::class);
+        $orderRepository = $this->getServiceByType(OrderRepository::class);
         /* @var $orderRepository \Shopsys\ShopBundle\Model\Order\OrderRepository */
-        $productRepository = $this->getContainer()->get(ProductRepository::class);
+        $productRepository = $this->getServiceByType(ProductRepository::class);
         /* @var $productRepository \Shopsys\ShopBundle\Model\Product\ProductRepository */
-        $transportRepository = $this->getContainer()->get(TransportRepository::class);
+        $transportRepository = $this->getServiceByType(TransportRepository::class);
         /* @var $transportRepository \Shopsys\ShopBundle\Model\Transport\TransportRepository */
-        $paymentRepository = $this->getContainer()->get(PaymentRepository::class);
+        $paymentRepository = $this->getServiceByType(PaymentRepository::class);
         /* @var $paymentRepository \Shopsys\ShopBundle\Model\Payment\PaymentRepository */
-        $persistentReferenceFacade = $this->getContainer()->get(PersistentReferenceFacade::class);
+        $persistentReferenceFacade = $this->getServiceByType(PersistentReferenceFacade::class);
         /* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
 
         $cart = $cartFacade->getCartOfCurrentCustomer();
@@ -118,9 +118,9 @@ class OrderFacadeTest extends DatabaseTestCase
 
     public function testEdit()
     {
-        $orderFacade = $this->getContainer()->get(OrderFacade::class);
+        $orderFacade = $this->getServiceByType(OrderFacade::class);
         /* @var $orderFacade \Shopsys\ShopBundle\Model\Order\OrderFacade */
-        $orderRepository = $this->getContainer()->get(OrderRepository::class);
+        $orderRepository = $this->getServiceByType(OrderRepository::class);
         /* @var $orderRepository \Shopsys\ShopBundle\Model\Order\OrderRepository */
 
         $order = $this->getReference('order_1');
