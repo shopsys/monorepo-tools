@@ -155,7 +155,7 @@ class AllFeedsTest extends FunctionalTestCase
 
         $router = $this->getContainer()->get(CurrentDomainRouter::class);
         /* @var $router \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter */
-        $clientEntityManager = $client->getContainer()->get(EntityManager::class);
+        $clientEntityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $clientEntityManager \Doctrine\ORM\EntityManager */
 
         $feedGenerationParameters = [

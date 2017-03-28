@@ -197,7 +197,7 @@ class AllPagesTest extends FunctionalTestCase
         } else {
             $client = $this->getClient(true);
         }
-        $clientEntityManager = $client->getContainer()->get(EntityManager::class);
+        $clientEntityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $clientEntityManager \Doctrine\ORM\EntityManager */
         $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
         /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
