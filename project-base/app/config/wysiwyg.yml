@@ -54,3 +54,10 @@ fm_elfinder:
               thumbnails:
                 pattern: '/^\/_thumbnails$/'
                 hidden: true
+            disabled_commands:
+              - 'archive'
+              - 'extract'
+              - 'edit'
+              - 'mkfile'
+              - 'netmount'
+              - 'zipdl'
