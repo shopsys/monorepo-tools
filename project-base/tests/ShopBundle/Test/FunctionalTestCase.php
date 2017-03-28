@@ -16,7 +16,7 @@ abstract class FunctionalTestCase extends WebTestCase
 
     protected function setUpDomain()
     {
-        $domain = $this->getContainer()->get(Domain::class);
+        $domain = $this->getContainer()->get('shopsys.shop.component.domain');
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         $domain->switchDomainById(1);
     }
@@ -78,7 +78,8 @@ abstract class FunctionalTestCase extends WebTestCase
      */
     protected function getReference($referenceName)
     {
-        $persistentReferenceFacade = $this->getContainer()->get(PersistentReferenceFacade::class);
+        $persistentReferenceFacade = $this->getContainer()
+            ->get('shopsys.shop.component.data_fixture.persistent_reference_facade');
         /* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
 
         return $persistentReferenceFacade->getReference($referenceName);
