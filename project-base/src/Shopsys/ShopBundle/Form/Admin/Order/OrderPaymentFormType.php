@@ -13,19 +13,6 @@ use Symfony\Component\Validator\Constraints;
 class OrderPaymentFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Payment[]
-     */
-    private $payments;
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $payments
-     */
-    public function __construct(array $payments)
-    {
-        $this->payments = $payments;
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
@@ -34,7 +21,7 @@ class OrderPaymentFormType extends AbstractType
         $builder
             ->add('payment', ChoiceType::class, [
                 'required' => true,
-                'choices' => $this->payments,
+                'choices' => $options['payments'],
                 'choice_label' => 'name',
                 'choice_value' => 'id',
                 'error_bubbling' => true,
@@ -60,9 +47,12 @@ class OrderPaymentFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => OrderPaymentData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('payments')
+            ->setAllowedTypes('payments', 'array')
+            ->setDefaults([
+                'data_class' => OrderPaymentData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

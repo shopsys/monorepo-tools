@@ -294,13 +294,17 @@ class OrderFormType extends AbstractType
             ])
             ->add('note', TextareaType::class, ['required' => false])
             ->add('itemsWithoutTransportAndPayment', CollectionType::class, [
-                'entry_type' => new OrderItemFormType(),
+                'entry_type' => OrderItemFormType::class,
                 'error_bubbling' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
             ])
-            ->add('orderPayment', new OrderPaymentFormType($payments))
-            ->add('orderTransport', new OrderTransportFormType($transports))
+            ->add('orderPayment', OrderPaymentFormType::class, [
+                'payments' => $payments,
+            ])
+            ->add('orderTransport', OrderTransportFormType::class, [
+                'transports' => $transports,
+            ])
             ->add('save', SubmitType::class);
     }
 
