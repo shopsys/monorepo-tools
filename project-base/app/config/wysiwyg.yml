@@ -49,3 +49,8 @@ fm_elfinder:
           uploads:
             driver: LocalFileSystem
             path: %shopsys.filemanager_upload_web_dir%
+            tmb_path: '_thumbnails'
+            attributes:
+              thumbnails:
+                pattern: '/^\/_thumbnails$/'
+                hidden: true
