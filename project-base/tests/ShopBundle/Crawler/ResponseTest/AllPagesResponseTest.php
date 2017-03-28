@@ -4,9 +4,9 @@ namespace Tests\ShopBundle\Crawler\ResponseTest;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\CrawlerTestCase;
 
-class AllPagesResponseTest extends DatabaseTestCase
+class AllPagesResponseTest extends CrawlerTestCase
 {
     public function adminTestableUrlsProvider()
     {
@@ -15,10 +15,7 @@ class AllPagesResponseTest extends DatabaseTestCase
         // DataProvider is called before setUp() - domain is not set
         $domain->switchDomainById(1);
 
-        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-
-        return $urlsProvider->getAdminTestableUrlsProviderData();
+        return $this->createUrlsProvider()->getAdminTestableUrlsProviderData();
     }
 
     /**
@@ -29,9 +26,7 @@ class AllPagesResponseTest extends DatabaseTestCase
      */
     public function testAdminPages($testedRouteName, $url, $expectedStatusCode)
     {
-        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-        $url = $urlsProvider->replaceCsrfTokensInUrl($url);
+        $url = $this->createUrlsProvider()->replaceCsrfTokensInUrl($url);
 
         $this->getClient(false, 'superadmin', 'admin123')->request('GET', $url);
 
@@ -56,10 +51,7 @@ class AllPagesResponseTest extends DatabaseTestCase
         // DataProvider is called before setUp() - domain is not set
         $domain->switchDomainById(1);
 
-        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-
-        return $urlsProvider->getFrontTestableUrlsProviderData();
+        return $this->createUrlsProvider()->getFrontTestableUrlsProviderData();
     }
 
     /**
@@ -71,9 +63,7 @@ class AllPagesResponseTest extends DatabaseTestCase
      */
     public function testFrontPages($testedRouteName, $url, $expectedStatusCode, $asLogged)
     {
-        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-        $url = $urlsProvider->replaceCsrfTokensInUrl($url);
+        $url = $this->createUrlsProvider()->replaceCsrfTokensInUrl($url);
 
         if ($asLogged) {
             $this->getClient(false, 'no-reply@netdevelo.cz', 'user123')->request('GET', $url);

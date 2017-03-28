@@ -10,9 +10,9 @@ use Tests\ShopBundle\Performance\Page\PerformanceTestSample;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSamplesAggregator;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSummaryPrinter;
-use Tests\ShopBundle\Test\FunctionalTestCase;
+use Tests\ShopBundle\Test\CrawlerTestCase;
 
-class AllPagesTest extends FunctionalTestCase
+class AllPagesTest extends CrawlerTestCase
 {
     const PASSES = 5;
 
@@ -27,11 +27,8 @@ class AllPagesTest extends FunctionalTestCase
      */
     public function testAdminPagesWarmup()
     {
-        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-
         $this->doWarmupPagesWithProgress(
-            $urlsProvider->getAdminTestableUrlsProviderData(),
+            $this->createUrlsProvider()->getAdminTestableUrlsProviderData(),
             self::ADMIN_USERNAME,
             self::ADMIN_PASSWORD
         );
@@ -42,11 +39,8 @@ class AllPagesTest extends FunctionalTestCase
      */
     public function testFrontPagesWarmup()
     {
-        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-
         $this->doWarmupPagesWithProgress(
-            $urlsProvider->getFrontTestableUrlsProviderData(),
+            $this->createUrlsProvider()->getFrontTestableUrlsProviderData(),
             self::FRONT_USERNAME,
             self::FRONT_PASSWORD
         );
@@ -54,11 +48,8 @@ class AllPagesTest extends FunctionalTestCase
 
     public function testAdminPages()
     {
-        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-
         $this->doTestPagesWithProgress(
-            $urlsProvider->getAdminTestableUrlsProviderData(),
+            $this->createUrlsProvider()->getAdminTestableUrlsProviderData(),
             self::ADMIN_USERNAME,
             self::ADMIN_PASSWORD,
             $this->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-admin.csv'
@@ -67,11 +58,8 @@ class AllPagesTest extends FunctionalTestCase
 
     public function testFrontPages()
     {
-        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-
         $this->doTestPagesWithProgress(
-            $urlsProvider->getFrontTestableUrlsProviderData(),
+            $this->createUrlsProvider()->getFrontTestableUrlsProviderData(),
             self::FRONT_USERNAME,
             self::FRONT_PASSWORD,
             $this->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-front.csv'
@@ -199,9 +187,8 @@ class AllPagesTest extends FunctionalTestCase
         }
         $clientEntityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $clientEntityManager \Doctrine\ORM\EntityManager */
-        $urlsProvider = $this->getServiceByType(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-        $urlWithCsrfToken = $urlsProvider->replaceCsrfTokensInUrl($url);
+
+        $urlWithCsrfToken = $this->createUrlsProvider()->replaceCsrfTokensInUrl($url);
 
         $clientEntityManager->beginTransaction();
 
