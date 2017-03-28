@@ -84,4 +84,15 @@ abstract class FunctionalTestCase extends WebTestCase
 
         return $persistentReferenceFacade->getReference($referenceName);
     }
+
+    /**
+     * @param string $className
+     * @return object
+     */
+    protected function getServiceByType($className)
+    {
+        $serviceByTypeLocator = $this->getContainer()->get('shopsys_integration_testing.service_by_type_locator');
+
+        return $serviceByTypeLocator->getByType($className);
+    }
 }
