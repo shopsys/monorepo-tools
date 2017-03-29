@@ -26,14 +26,14 @@ class CronModuleRepository
     }
 
     /**
-     * @param string $moduleId
+     * @param string $serviceId
      * @return \Shopsys\ShopBundle\Component\Cron\CronModule
      */
-    public function getCronModuleByCronModuleId($moduleId)
+    public function getCronModuleByServiceId($serviceId)
     {
-        $cronModule = $this->getCronModuleRepository()->find($moduleId);
+        $cronModule = $this->getCronModuleRepository()->find($serviceId);
         if ($cronModule === null) {
-            $cronModule = new CronModule($moduleId);
+            $cronModule = new CronModule($serviceId);
             $this->em->persist($cronModule);
             $this->em->flush($cronModule);
         }
@@ -44,9 +44,9 @@ class CronModuleRepository
     /**
      * @return string[]
      */
-    public function getAllScheduledCronModuleIds()
+    public function getAllScheduledCronModuleServiceIds()
     {
-        $query = $this->em->createQuery('SELECT cm.moduleId FROM ' . CronModule::class . ' cm WHERE cm.scheduled = TRUE');
+        $query = $this->em->createQuery('SELECT cm.serviceId FROM ' . CronModule::class . ' cm WHERE cm.scheduled = TRUE');
 
         return array_map('array_pop', $query->getScalarResult());
     }

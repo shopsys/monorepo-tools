@@ -23,7 +23,6 @@ class CronModuleExecutor
         $this->canRunTo = new DateTimeImmutable('+' . $secondsTimeout . ' sec');
     }
 
-    //@codingStandardsIgnoreStart
     /**
      * @param \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
      * @param bool $suspended
@@ -31,7 +30,6 @@ class CronModuleExecutor
      */
     public function runModule($cronModuleService, $suspended)
     {
-        //@codingStandardsIgnoreStop
         if (!$this->canRun()) {
             return self::RUN_STATUS_TIMEOUT;
         }

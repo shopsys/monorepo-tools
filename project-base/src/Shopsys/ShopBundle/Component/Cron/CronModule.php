@@ -16,7 +16,7 @@ class CronModule
      * @ORM\Column(type="string", length=255)
      * @ORM\Id
      */
-    private $moduleId;
+    private $serviceId;
 
     /**
      * @var bool
@@ -33,11 +33,11 @@ class CronModule
     private $suspended;
 
     /**
-     * @param string $moduleId
+     * @param string $serviceId
      */
-    public function __construct($moduleId)
+    public function __construct($serviceId)
     {
-        $this->moduleId = $moduleId;
+        $this->serviceId = $serviceId;
         $this->scheduled = false;
         $this->suspended = false;
     }
@@ -45,9 +45,9 @@ class CronModule
     /**
      * @return string
      */
-    public function getModuleId()
+    public function getServiceId()
     {
-        return $this->moduleId;
+        return $this->serviceId;
     }
 
     /**

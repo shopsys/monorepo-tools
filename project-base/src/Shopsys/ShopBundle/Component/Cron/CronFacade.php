@@ -6,7 +6,6 @@ use DateTimeInterface;
 use Shopsys\ShopBundle\Component\Cron\Config\CronConfig;
 use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use Shopsys\ShopBundle\Component\Cron\CronModuleExecutor;
-use Shopsys\ShopBundle\Component\Cron\CronModuleExecutorFactory;
 use Shopsys\ShopBundle\Component\Cron\CronModuleFacade;
 use Symfony\Bridge\Monolog\Logger;
 
@@ -29,21 +28,14 @@ class CronFacade
      */
     private $cronModuleFacade;
 
-    /**
-     * @var \Shopsys\ShopBundle\Component\Cron\CronModuleExecutorFactory
-     */
-    private $cronModuleExecutorFactory;
-
     public function __construct(
         Logger $logger,
         CronConfig $cronConfig,
-        CronModuleFacade $cronModuleFacade,
-        CronModuleExecutorFactory $cronModuleExecutorFactory
+        CronModuleFacade $cronModuleFacade
     ) {
         $this->logger = $logger;
         $this->cronConfig = $cronConfig;
         $this->cronModuleFacade = $cronModuleFacade;
-        $this->cronModuleExecutorFactory = $cronModuleExecutorFactory;
     }
 
     /**
@@ -51,15 +43,15 @@ class CronFacade
      */
     public function scheduleModulesByTime(DateTimeInterface $roundedTime)
     {
-        $cronModulesConfigsToSchedule = $this->cronConfig->getCronModuleConfigsByTime($roundedTime);
-        $this->cronModuleFacade->scheduleModules($cronModulesConfigsToSchedule);
+        $cronModuleConfigsToSchedule = $this->cronConfig->getCronModuleConfigsByTime($roundedTime);
+        $this->cronModuleFacade->scheduleModules($cronModuleConfigsToSchedule);
     }
 
     public function runScheduledModules()
     {
-        $cronModuleExecutor = $this->cronModuleExecutorFactory->create(self::TIMEOUT_SECONDS);
+        $cronModuleExecutor = new CronModuleExecutor(self::TIMEOUT_SECONDS);
 
-        $cronModuleConfigs = $this->cronConfig->getAll();
+        $cronModuleConfigs = $this->cronConfig->getAllCronModuleConfigs();
         $scheduledCronModuleConfigs = $this->cronModuleFacade->getOnlyScheduledCronModuleConfigs($cronModuleConfigs);
         $this->runModules($cronModuleExecutor, $scheduledCronModuleConfigs);
     }
@@ -83,13 +75,13 @@ class CronFacade
     }
 
     /**
-     * @param string $moduleId
+     * @param string $serviceId
      */
-    public function runModuleByModuleId($moduleId)
+    public function runModuleByServiceId($serviceId)
     {
-        $cronModuleConfig = $this->cronConfig->getCronModuleConfigByModuleId($moduleId);
+        $cronModuleConfig = $this->cronConfig->getCronModuleConfigByServiceId($serviceId);
 
-        $cronModuleExecutor = $this->cronModuleExecutorFactory->create(self::TIMEOUT_SECONDS);
+        $cronModuleExecutor = new CronModuleExecutor(self::TIMEOUT_SECONDS);
         $this->runModule($cronModuleExecutor, $cronModuleConfig);
     }
 
@@ -99,8 +91,8 @@ class CronFacade
      */
     private function runModule(CronModuleExecutor $cronModuleExecutor, CronModuleConfig $cronModuleConfig)
     {
-        $this->logger->addInfo('Start of ' . $cronModuleConfig->getModuleId());
-        $cronModuleService = $cronModuleConfig->getCronModuleService();
+        $this->logger->addInfo('Start of ' . $cronModuleConfig->getServiceId());
+        $cronModuleService = $cronModuleConfig->getService();
         $cronModuleService->setLogger($this->logger);
         $status = $cronModuleExecutor->runModule(
             $cronModuleService,
@@ -109,10 +101,10 @@ class CronFacade
 
         if ($status === CronModuleExecutor::RUN_STATUS_OK) {
             $this->cronModuleFacade->unscheduleModule($cronModuleConfig);
-            $this->logger->addInfo('End of ' . $cronModuleConfig->getModuleId());
+            $this->logger->addInfo('End of ' . $cronModuleConfig->getServiceId());
         } elseif ($status === CronModuleExecutor::RUN_STATUS_SUSPENDED) {
             $this->cronModuleFacade->suspendModule($cronModuleConfig);
-            $this->logger->addInfo('Suspend ' . $cronModuleConfig->getModuleId());
+            $this->logger->addInfo('Suspend ' . $cronModuleConfig->getServiceId());
         } elseif ($status === CronModuleExecutor::RUN_STATUS_TIMEOUT) {
             $this->logger->info('Cron reached timeout.');
         }
@@ -123,6 +115,6 @@ class CronFacade
      */
     public function getAll()
     {
-        return $this->cronConfig->getAll();
+        return $this->cronConfig->getAllCronModuleConfigs();
     }
 }
