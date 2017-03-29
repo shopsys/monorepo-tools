@@ -25,7 +25,7 @@ class Db extends BaseDb
     {
         $symfonyHelper = $this->getModule(SymfonyHelper::class);
         /* @var $symfonyHelper \Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper */
-        $databaseSchemaFacade = $symfonyHelper->grabServiceFromContainer(DatabaseSchemaFacade::class);
+        $databaseSchemaFacade = $symfonyHelper->grabServiceFromContainer('shopsys.shop.component.doctrine.database_schema_facade');
         /* @var $databaseSchemaFacade \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
         $databaseSchemaFacade->dropSchemaIfExists('public');
         $databaseSchemaFacade->createSchema('public');
