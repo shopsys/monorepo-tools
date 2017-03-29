@@ -17,16 +17,24 @@ class CronConfig
      */
     private $cronModuleConfigs;
 
-    /**
-     * @param \Shopsys\ShopBundle\Component\Cron\CronTimeResolver $cronTimeResolver
-     * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
-     */
-    public function __construct(
-        CronTimeResolver $cronTimeResolver,
-        array $cronModuleConfigs
-    ) {
-        $this->cronModuleConfigs = $cronModuleConfigs;
+    public function __construct(CronTimeResolver $cronTimeResolver)
+    {
         $this->cronTimeResolver = $cronTimeResolver;
+        $this->cronModuleConfigs = [];
+    }
+
+    /**
+     * @param \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
+     * @param string $moduleId
+     * @param string $timeHours
+     * @param string $timeMinutes
+     */
+    public function registerCronModule($cronModuleService, $moduleId, $timeHours, $timeMinutes)
+    {
+        $this->cronTimeResolver->validateTimeString($timeHours, 23, 1);
+        $this->cronTimeResolver->validateTimeString($timeMinutes, 55, 5);
+
+        $this->cronModuleConfigs[] = new CronModuleConfig($cronModuleService, $moduleId, $timeHours, $timeMinutes);
     }
 
     /**

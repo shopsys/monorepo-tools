@@ -1,0 +1,58 @@
+services:
+  Shopsys\ShopBundle\Component\Error\Reporting\ErrorReportingFromLastHourCronModule:
+    class: Shopsys\ShopBundle\Component\Error\Reporting\ErrorReportingFromLastHourCronModule
+    arguments:
+      - %email_for_error_reporting%
+    tags:
+      - { name: shopsys.cron, hours: '*', minutes: '55' }
+
+  Shopsys\ShopBundle\Model\Pricing\Vat\VatDeletionCronModule:
+    class: Shopsys\ShopBundle\Model\Pricing\Vat\VatDeletionCronModule
+    tags:
+      - { name: shopsys.cron, hours: '*', minutes: '*' }
+
+  Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCronModule:
+    class: Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCronModule
+    tags:
+      - { name: shopsys.cron, hours: '*', minutes: '*' }
+
+  Shopsys\ShopBundle\Model\Product\ProductVisibilityImmediateCronModule:
+    class: Shopsys\ShopBundle\Model\Product\ProductVisibilityImmediateCronModule
+    tags:
+      - { name: shopsys.cron, hours: '*', minutes: '*' }
+
+  Shopsys\ShopBundle\Model\Product\ProductVisibilityMidnightCronModule:
+    class: Shopsys\ShopBundle\Model\Product\ProductVisibilityMidnightCronModule
+    tags:
+      - { name: shopsys.cron, hours: '0', minutes: '0' }
+
+  Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCronModule:
+    class: Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCronModule
+    tags:
+      - { name: shopsys.cron, hours: '*', minutes: '*' }
+
+  Shopsys\ShopBundle\Model\Feed\FeedCronModule:
+    class: Shopsys\ShopBundle\Model\Feed\FeedCronModule
+    tags:
+      - { name: shopsys.cron, hours: '*/6', minutes: '0' }
+
+  Shopsys\ShopBundle\Model\Feed\DeliveryFeedCronModule:
+    class: Shopsys\ShopBundle\Model\Feed\DeliveryFeedCronModule
+    tags:
+      - { name: shopsys.cron, hours: '*', minutes: '10' }
+
+  Shopsys\ShopBundle\Component\Sitemap\SitemapCronModule:
+    class: Shopsys\ShopBundle\Component\Sitemap\SitemapCronModule
+    tags:
+      - { name: shopsys.cron, hours: '4', minutes: '0' }
+
+  Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryCronModule:
+    class: Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryCronModule
+    tags:
+      - { name: shopsys.cron, hours: '3', minutes: '0' }
+
+  # This module should run as last because it creates multiple kernels and fake requests.
+  Shopsys\ShopBundle\Component\Error\ErrorPageCronModule:
+    class: Shopsys\ShopBundle\Component\Error\ErrorPageCronModule
+    tags:
+      - { name: shopsys.cron, hours: '21', minutes: '10' }

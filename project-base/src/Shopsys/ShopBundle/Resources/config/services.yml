@@ -1,4 +1,5 @@
 imports:
+  - { resource: services_cron.yml }
   - { resource: ../../Form/services.yml }
   - { resource: ../../Twig/services.yml }
 
@@ -121,12 +122,6 @@ services:
 
   shopsys.shop.component.cron.config.cron_config:
     class: Shopsys\ShopBundle\Component\Cron\Config\CronConfig
-    factory: ['@shopsys.shop.component.cron.config.cron_config_factory', create]
-    arguments:
-      - %shopsys.cron_config_filepath%
-
-  shopsys.shop.component.cron.config.cron_config_factory:
-    class: Shopsys\ShopBundle\Component\Cron\Config\CronConfigFactory
 
   shopsys.shop.component.cron.cron_facade:
     class: Shopsys\ShopBundle\Component\Cron\CronFacade
@@ -210,11 +205,6 @@ services:
     class: Shopsys\ShopBundle\Component\Error\ExceptionListener
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
-
-  shopsys.shop.component.error.reporting.error_reporting_from_last_hour_cron_module:
-    class: Shopsys\ShopBundle\Component\Error\Reporting\ErrorReportingFromLastHourCronModule
-    arguments:
-      - %email_for_error_reporting%
 
   shopsys.shop.component.error.reporting.log_error_reporting_facade:
     class: Shopsys\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade

@@ -1,7 +1,6 @@
 parameters:
   shopsys.admin_navigation.config_filepath: %shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/admin_menu.yml
   shopsys.bestselling_product.cache_directory_path: %kernel.cache_dir%/bestselling_product
-  shopsys.cron_config_filepath: %shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/cron.yml
   shopsys.css_version_filepath: %shopsys.web_dir%/assets/cssVersion
   shopsys.data_fixtures.resource_customers_filepath: %shopsys.data_fixtures.resources_dir%/demo-data-customers.csv
   shopsys.data_fixtures.resource_products_filepath: %shopsys.data_fixtures.resources_dir%/demo-data-products.csv
