@@ -315,6 +315,11 @@ services:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
+  shopsys.shop.component.request.vary_response_by_x_requested_with_header_listener:
+    class: Shopsys\ShopBundle\Component\Request\VaryResponseByXRequestedWithHeaderListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
   shopsys.shop.component.router.friendly_url.friendly_url_generator_facade:
     class: Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade
 
