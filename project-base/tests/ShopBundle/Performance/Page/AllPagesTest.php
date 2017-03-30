@@ -2,9 +2,8 @@
 
 namespace Tests\ShopBundle\Performance\Page;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider;
+use Tests\ShopBundle\Performance\JmeterCsvReporter;
 use Tests\ShopBundle\Performance\Page\PerformanceResultsCsvExporter;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSample;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier;
@@ -115,13 +114,6 @@ class AllPagesTest extends CrawlerTestCase
         $password,
         $jmeterOutputFilename
     ) {
-        $performanceTestSummaryPrinter = $this->getServiceByType(PerformanceTestSummaryPrinter::class);
-        /* @var $performanceTestSummaryPrinter \Tests\ShopBundle\Performance\Page\PerformanceTestSummaryPrinter */
-        $performanceResultsCsvExporter = $this->getServiceByType(PerformanceResultsCsvExporter::class);
-        /* @var $performanceResultsCsvExporter \Tests\ShopBundle\Performance\Page\PerformanceResultsCsvExporter */
-        $performanceTestSamplesAggregator = $this->getServiceByType(PerformanceTestSamplesAggregator::class);
-        /* @var $performanceTestSamplesAggregator \Tests\ShopBundle\Performance\Page\PerformanceTestSamplesAggregator */
-
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->writeln('');
 
@@ -153,12 +145,9 @@ class AllPagesTest extends CrawlerTestCase
             }
         }
 
-        $performanceResultsCsvExporter->exportJmeterCsvReport($performanceTestSamples, $jmeterOutputFilename);
-
-        $performanceTestSamplesAggregatedByUrl = $performanceTestSamplesAggregator
-            ->getPerformanceTestSamplesAggregatedByUrl($performanceTestSamples);
-
-        $performanceTestSummaryPrinter->printSummary($performanceTestSamplesAggregatedByUrl, $consoleOutput);
+        $performanceTestSamplesAggregatedByUrl = $this->aggregatePerformanceTestSamplesByUrl($performanceTestSamples);
+        $this->exportJmeterCsvReport($performanceTestSamples, $jmeterOutputFilename);
+        $this->printPerformanceTestsSummary($performanceTestSamplesAggregatedByUrl, $consoleOutput);
 
         $this->doAssert($performanceTestSamplesAggregatedByUrl);
     }
@@ -185,18 +174,12 @@ class AllPagesTest extends CrawlerTestCase
         } else {
             $client = $this->getClient(true);
         }
-        $clientEntityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $clientEntityManager \Doctrine\ORM\EntityManager */
 
         $urlWithCsrfToken = $this->createUrlsProvider()->replaceCsrfTokensInUrl($url);
 
-        $clientEntityManager->beginTransaction();
-
         $startTime = microtime(true);
-        $client->request('GET', $urlWithCsrfToken);
+        $this->makeRequestInTransaction($client, $urlWithCsrfToken);
         $endTime = microtime(true);
-
-        $clientEntityManager->rollback();
 
         $statusCode = $client->getResponse()->getStatusCode();
 
@@ -216,8 +199,7 @@ class AllPagesTest extends CrawlerTestCase
     private function doAssert(
         array $performanceTestSamples
     ) {
-        $performanceTestSampleQualifier = $this->getServiceByType(PerformanceTestSampleQualifier::class);
-        /* @var $performanceTestSampleQualifier \Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier */
+        $performanceTestSampleQualifier = new PerformanceTestSampleQualifier();
 
         $overallStatus = $performanceTestSampleQualifier->getOverallStatus($performanceTestSamples);
 
@@ -231,5 +213,40 @@ class AllPagesTest extends CrawlerTestCase
                 $this->fail('Values are above critical threshold');
                 return;
         }
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Performance\Page\PerformanceTestSample[] $performanceTestSamples
+     * @param string $jmeterOutputFilename
+     */
+    private function exportJmeterCsvReport(array $performanceTestSamples, $jmeterOutputFilename)
+    {
+        $jmeterCsvReporter = new JmeterCsvReporter();
+        $performanceResultsCsvExporter = new PerformanceResultsCsvExporter($jmeterCsvReporter);
+
+        $performanceResultsCsvExporter->exportJmeterCsvReport($performanceTestSamples, $jmeterOutputFilename);
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Performance\Page\PerformanceTestSample[] $performanceTestSamples
+     * @return \Tests\ShopBundle\Performance\Page\PerformanceTestSample[]
+     */
+    private function aggregatePerformanceTestSamplesByUrl(array $performanceTestSamples)
+    {
+        $performanceTestSamplesAggregator = new PerformanceTestSamplesAggregator();
+
+        return $performanceTestSamplesAggregator->getPerformanceTestSamplesAggregatedByUrl($performanceTestSamples);
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Performance\Page\PerformanceTestSample[] $performanceTestSamples
+     * @param \Symfony\Component\Console\Output\ConsoleOutput $consoleOutput
+     */
+    private function printPerformanceTestsSummary(array $performanceTestSamples, ConsoleOutput $consoleOutput)
+    {
+        $performanceTestSampleQualifier = new PerformanceTestSampleQualifier();
+        $performanceTestSummaryPrinter = new PerformanceTestSummaryPrinter($performanceTestSampleQualifier);
+
+        $performanceTestSummaryPrinter->printSummary($performanceTestSamples, $consoleOutput);
     }
 }

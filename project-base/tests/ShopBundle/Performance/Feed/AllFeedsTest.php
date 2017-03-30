@@ -2,7 +2,6 @@
 
 namespace Tests\ShopBundle\Performance\Feed;
 
-use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
@@ -12,9 +11,10 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Tests\ShopBundle\Performance\Feed\PerformanceResultsCsvExporter;
 use Tests\ShopBundle\Performance\Feed\PerformanceTestSample;
-use Tests\ShopBundle\Test\FunctionalTestCase;
+use Tests\ShopBundle\Performance\JmeterCsvReporter;
+use Tests\ShopBundle\Test\CrawlerTestCase;
 
-class AllFeedsTest extends FunctionalTestCase
+class AllFeedsTest extends CrawlerTestCase
 {
     const MAX_DURATION_FEED_SECONDS = 180;
     const MAX_DURATION_DELIVERY_FEED_SECONDS = 20;
@@ -26,8 +26,6 @@ class AllFeedsTest extends FunctionalTestCase
 
     public function testAllFeedsGeneration()
     {
-        $performanceResultsCsvExporter = $this->getServiceByType(PerformanceResultsCsvExporter::class);
-        /* @var $performanceResultsCsvExporter \Tests\ShopBundle\Performance\Feed\PerformanceResultsCsvExporter */
         $consoleOutput = new ConsoleOutput();
 
         $consoleOutput->writeln('');
@@ -56,10 +54,8 @@ class AllFeedsTest extends FunctionalTestCase
             $performanceTestSamples[] = $performanceTestSample;
         }
 
-        $performanceResultsCsvExporter->exportJmeterCsvReport(
-            $performanceTestSamples,
-            $this->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-feeds.csv'
-        );
+        $jmeterOutputFilename = $this->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-feeds.csv';
+        $this->exportJmeterCsvReport($performanceTestSamples, $jmeterOutputFilename);
 
         $this->assertSamplesAreSuccessful($performanceTestSamples);
     }
@@ -155,8 +151,6 @@ class AllFeedsTest extends FunctionalTestCase
 
         $router = $this->getServiceByType(CurrentDomainRouter::class);
         /* @var $router \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter */
-        $clientEntityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $clientEntityManager \Doctrine\ORM\EntityManager */
 
         $feedGenerationParameters = [
             'feedName' => $feedConfig->getFeedName(),
@@ -168,13 +162,9 @@ class AllFeedsTest extends FunctionalTestCase
             UrlGeneratorInterface::ABSOLUTE_URL
         );
 
-        $clientEntityManager->beginTransaction();
-
         $startTime = microtime(true);
-        $client->request('GET', $uri);
+        $this->makeRequestInTransaction($client, $uri);
         $endTime = microtime(true);
-
-        $clientEntityManager->rollback();
 
         $duration = $endTime - $startTime;
         $statusCode = $client->getResponse()->getStatusCode();
@@ -212,5 +202,17 @@ class AllFeedsTest extends FunctionalTestCase
         if (count($failMessages) > 0) {
             $this->fail(implode("\n", $failMessages));
         }
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Performance\Feed\PerformanceTestSample[] $performanceTestSamples
+     * @param string $jmeterOutputFilename
+     */
+    private function exportJmeterCsvReport(array $performanceTestSamples, $jmeterOutputFilename)
+    {
+        $jmeterCsvReporter = new JmeterCsvReporter();
+        $performanceResultsCsvExporter = new PerformanceResultsCsvExporter($jmeterCsvReporter);
+
+        $performanceResultsCsvExporter->exportJmeterCsvReport($performanceTestSamples, $jmeterOutputFilename);
     }
 }

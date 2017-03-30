@@ -3,7 +3,6 @@
 namespace Tests\ShopBundle\Crawler\ResponseTest;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider;
 use Tests\ShopBundle\Test\CrawlerTestCase;
 
 class AllPagesResponseTest extends CrawlerTestCase
@@ -28,9 +27,11 @@ class AllPagesResponseTest extends CrawlerTestCase
     {
         $url = $this->createUrlsProvider()->replaceCsrfTokensInUrl($url);
 
-        $this->getClient(false, 'superadmin', 'admin123')->request('GET', $url);
+        $client = $this->getClient(false, 'superadmin', 'admin123');
 
-        $statusCode = $this->getClient()->getResponse()->getStatusCode();
+        $this->makeRequestInTransaction($client, $url);
+
+        $statusCode = $client->getResponse()->getStatusCode();
 
         $this->assertSame(
             $expectedStatusCode,
@@ -66,12 +67,14 @@ class AllPagesResponseTest extends CrawlerTestCase
         $url = $this->createUrlsProvider()->replaceCsrfTokensInUrl($url);
 
         if ($asLogged) {
-            $this->getClient(false, 'no-reply@netdevelo.cz', 'user123')->request('GET', $url);
+            $client = $this->getClient(false, 'no-reply@netdevelo.cz', 'user123');
         } else {
-            $this->getClient()->request('GET', $url);
+            $client = $this->getClient();
         }
 
-        $statusCode = $this->getClient()->getResponse()->getStatusCode();
+        $this->makeRequestInTransaction($client, $url);
+
+        $statusCode = $client->getResponse()->getStatusCode();
 
         $this->assertSame(
             $expectedStatusCode,
