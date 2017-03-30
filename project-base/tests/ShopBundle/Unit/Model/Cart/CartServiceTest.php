@@ -192,6 +192,6 @@ class CartServiceTest extends FunctionalTestCase
      */
     private function getCartService()
     {
-        return $this->getContainer()->get(CartService::class);
+        return $this->getServiceByType(CartService::class);
     }
 }

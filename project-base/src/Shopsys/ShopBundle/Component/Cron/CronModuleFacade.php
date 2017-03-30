@@ -35,26 +35,26 @@ class CronModuleFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModulesConfigs
+     * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
      */
-    public function scheduleModules(array $cronModulesConfigs)
+    public function scheduleModules(array $cronModuleConfigs)
     {
-        foreach ($cronModulesConfigs as $cronModuleConfig) {
-            $cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
+        foreach ($cronModuleConfigs as $cronModuleConfig) {
+            $cronModule = $this->cronModuleRepository->getCronModuleByServiceId($cronModuleConfig->getServiceId());
             $cronModule->schedule();
             $this->em->flush($cronModule);
         }
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModulesConfigs
+     * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
      * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
      */
-    public function getOnlyScheduledCronModuleConfigs(array $cronModulesConfigs)
+    public function getOnlyScheduledCronModuleConfigs(array $cronModuleConfigs)
     {
-        $scheduledCronModuleIds = $this->cronModuleRepository->getAllScheduledCronModuleIds();
+        $scheduledServiceIds = $this->cronModuleRepository->getAllScheduledCronModuleServiceIds();
 
-        return $this->cronService->filterScheduledCronModuleConfigs($cronModulesConfigs, $scheduledCronModuleIds);
+        return $this->cronService->filterScheduledCronModuleConfigs($cronModuleConfigs, $scheduledServiceIds);
     }
 
     /**
@@ -62,7 +62,7 @@ class CronModuleFacade
      */
     public function unscheduleModule(CronModuleConfig $cronModuleConfig)
     {
-        $cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
+        $cronModule = $this->cronModuleRepository->getCronModuleByServiceId($cronModuleConfig->getServiceId());
         $cronModule->unschedule();
         $this->em->flush($cronModule);
     }
@@ -72,7 +72,7 @@ class CronModuleFacade
      */
     public function suspendModule(CronModuleConfig $cronModuleConfig)
     {
-        $cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
+        $cronModule = $this->cronModuleRepository->getCronModuleByServiceId($cronModuleConfig->getServiceId());
         $cronModule->suspend();
         $this->em->flush($cronModule);
     }
@@ -83,7 +83,7 @@ class CronModuleFacade
      */
     public function isModuleSuspended(CronModuleConfig $cronModuleConfig)
     {
-        $cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
+        $cronModule = $this->cronModuleRepository->getCronModuleByServiceId($cronModuleConfig->getServiceId());
 
         return $cronModule->isSuspended();
     }

@@ -11,12 +11,34 @@ class ModuleList
     /**
      * @return string[]
      */
-    public function getModuleNamesIndexedByLabel()
+    public function getNames()
+    {
+        return array_keys($this->getLabelsIndexedByName());
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getNamesIndexedByLabel()
+    {
+        $labelsIndexedByNames = $this->getLabelsIndexedByName();
+        $namesIndexedByLabel = array_flip($labelsIndexedByNames);
+        if (count($labelsIndexedByNames) !== count($namesIndexedByLabel)) {
+            throw new \Shopsys\ShopBundle\Model\Module\Exception\NotUniqueModuleLabelException($labelsIndexedByNames);
+        }
+
+        return $namesIndexedByLabel;
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getLabelsIndexedByName()
     {
         return [
-            t('Accessories in purchase confirmation box') => self::ACCESSORIES_ON_BUY,
-            t('Number of products in filter') => self::PRODUCT_FILTER_COUNTS,
-            t('Automatic stock calculation') => self::PRODUCT_STOCK_CALCULATIONS,
+            self::ACCESSORIES_ON_BUY => t('Accessories in purchase confirmation box'),
+            self::PRODUCT_FILTER_COUNTS => t('Number of products in filter'),
+            self::PRODUCT_STOCK_CALCULATIONS => t('Automatic stock calculation'),
         ];
     }
 }

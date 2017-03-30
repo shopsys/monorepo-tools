@@ -38,7 +38,7 @@ class AdministratorDataFixture extends AbstractReferenceFixture
      */
     private function createAdministrator(AdministratorData $administratorData, $referenceName = null)
     {
-        $administratorFacade = $this->get(AdministratorFacade::class);
+        $administratorFacade = $this->get('shopsys.shop.administrator.administrator_facade');
         /* @var $administratorFacade \Shopsys\ShopBundle\Model\Administrator\AdministratorFacade */
 
         $administrator = $administratorFacade->create($administratorData);

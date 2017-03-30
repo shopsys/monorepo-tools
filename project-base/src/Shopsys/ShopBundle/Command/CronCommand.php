@@ -32,14 +32,14 @@ class CronCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $cronFacade = $this->getContainer()->get(CronFacade::class);
+        $cronFacade = $this->getContainer()->get('shopsys.shop.component.cron.cron_facade');
         /* @var $cronFacade \Shopsys\ShopBundle\Component\Cron\CronFacade */
-        $mutexFactory = $this->getContainer()->get(MutexFactory::class);
+        $mutexFactory = $this->getContainer()->get('shopsys.shop.component.mutex.mutex_factory');
         /* @var $mutexFactory \Shopsys\ShopBundle\Component\Mutex\MutexFactory */
 
         $optionList = $input->getOption(self::OPTION_LIST);
         if ($optionList === true) {
-            $this->listAllCronModulesSortedByModuleId($output, $cronFacade);
+            $this->listAllCronModulesSortedByServiceId($output, $cronFacade);
         } else {
             $this->runCron($input, $cronFacade, $mutexFactory);
         }
@@ -49,16 +49,16 @@ class CronCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @param \Shopsys\ShopBundle\Component\Cron\CronFacade $cronFacade
      */
-    private function listAllCronModulesSortedByModuleId(OutputInterface $output, CronFacade $cronFacade)
+    private function listAllCronModulesSortedByServiceId(OutputInterface $output, CronFacade $cronFacade)
     {
         $cronModuleConfigs = $cronFacade->getAll();
 
         uasort($cronModuleConfigs, function (CronModuleConfig $cronModuleConfigA, CronModuleConfig $cronModuleConfigB) {
-            return $cronModuleConfigA->getModuleId() > $cronModuleConfigB->getModuleId();
+            return $cronModuleConfigA->getServiceId() > $cronModuleConfigB->getServiceId();
         });
 
         foreach ($cronModuleConfigs as $cronModuleConfig) {
-            $output->writeln(sprintf('php bin/console shopsys:cron --module="%s"', $cronModuleConfig->getModuleId()));
+            $output->writeln(sprintf('php bin/console shopsys:cron --module="%s"', $cronModuleConfig->getServiceId()));
         }
     }
 
@@ -69,17 +69,20 @@ class CronCommand extends ContainerAwareCommand
      */
     private function runCron(InputInterface $input, CronFacade $cronFacade, MutexFactory $mutexFactory)
     {
-        $moduleArgument = $input->getOption(self::OPTION_MODULE);
-        if ($moduleArgument === null) {
+        $requestedModuleServiceId = $input->getOption(self::OPTION_MODULE);
+        $runAllModules = $requestedModuleServiceId === null;
+        if ($runAllModules) {
             $cronFacade->scheduleModulesByTime($this->getCurrentRoundedTime());
         }
 
         $mutex = $mutexFactory->getCronMutex();
         if ($mutex->acquireLock(0)) {
-            if ($moduleArgument === null) {
+            if ($runAllModules) {
                 $cronFacade->runScheduledModules();
             } else {
-                $cronFacade->runModuleByModuleId($moduleArgument);
+                // Service IDs in DIC are converted to lower case by Symfony
+                $requestedModuleServiceId = strtolower($requestedModuleServiceId);
+                $cronFacade->runModuleByServiceId($requestedModuleServiceId);
             }
             $mutex->releaseLock();
         } else {

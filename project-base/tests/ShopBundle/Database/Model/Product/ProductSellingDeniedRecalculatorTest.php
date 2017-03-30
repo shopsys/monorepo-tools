@@ -13,11 +13,11 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
     public function testCalculateSellingDeniedForProductSellableVariant()
     {
         $em = $this->getEntityManager();
-        $productSellingDeniedRecalculator = $this->getContainer()->get(ProductSellingDeniedRecalculator::class);
+        $productSellingDeniedRecalculator = $this->getServiceByType(ProductSellingDeniedRecalculator::class);
         /* @var $productSellingDeniedRecalculator \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator */
-        $productFacade = $this->getContainer()->get(ProductFacade::class);
+        $productFacade = $this->getServiceByType(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
@@ -49,11 +49,11 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
     public function testCalculateSellingDeniedForProductNotSellableVariants()
     {
         $em = $this->getEntityManager();
-        $productSellingDeniedRecalculator = $this->getContainer()->get(ProductSellingDeniedRecalculator::class);
+        $productSellingDeniedRecalculator = $this->getServiceByType(ProductSellingDeniedRecalculator::class);
         /* @var $productSellingDeniedRecalculator \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator */
-        $productFacade = $this->getContainer()->get(ProductFacade::class);
+        $productFacade = $this->getServiceByType(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
@@ -91,11 +91,11 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
     public function testCalculateSellingDeniedForProductNotSellableMainVariant()
     {
         $em = $this->getEntityManager();
-        $productSellingDeniedRecalculator = $this->getContainer()->get(ProductSellingDeniedRecalculator::class);
+        $productSellingDeniedRecalculator = $this->getServiceByType(ProductSellingDeniedRecalculator::class);
         /* @var $productSellingDeniedRecalculator \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator */
-        $productFacade = $this->getContainer()->get(ProductFacade::class);
+        $productFacade = $this->getServiceByType(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');

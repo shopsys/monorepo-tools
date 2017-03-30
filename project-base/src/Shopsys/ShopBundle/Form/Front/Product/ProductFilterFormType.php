@@ -67,7 +67,6 @@ class ProductFilterFormType extends AbstractType
                 'choice_label' => 'name',
                 'choice_value' => 'id',
                 'choice_name' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => true,
                 'expanded' => true,
             ])
@@ -77,7 +76,6 @@ class ProductFilterFormType extends AbstractType
                 'choice_label' => 'name',
                 'choice_value' => 'id',
                 'choice_name' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => true,
                 'expanded' => true,
             ])

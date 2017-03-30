@@ -13,19 +13,6 @@ use Symfony\Component\Validator\Constraints;
 class OrderTransportFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Transport[]
-     */
-    private $transports;
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
-     */
-    public function __construct(array $transports)
-    {
-        $this->transports = $transports;
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
@@ -34,10 +21,9 @@ class OrderTransportFormType extends AbstractType
         $builder
             ->add('transport', ChoiceType::class, [
                 'required' => true,
-                'choices' => $this->transports,
+                'choices' => $options['transports'],
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'error_bubbling' => true,
             ])
             ->add('priceWithVat', MoneyType::class, [
@@ -61,9 +47,12 @@ class OrderTransportFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => OrderTransportData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver
+            ->setRequired('transports')
+            ->setAllowedTypes('transports', 'array')
+            ->setDefaults([
+                'data_class' => OrderTransportData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

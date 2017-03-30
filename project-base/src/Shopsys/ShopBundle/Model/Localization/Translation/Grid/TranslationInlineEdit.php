@@ -37,7 +37,7 @@ class TranslationInlineEdit extends AbstractGridInlineEdit
     protected function createEntityAndGetId($translationData)
     {
         $message = 'Method "createEntityAndGetId" is not supported in translations.';
-        throw new \Shopsys\ShopBundle\Model\Localization\Grid\Exception\NotImplementedException($message);
+        throw new \Shopsys\ShopBundle\Model\Localization\Translation\Grid\Exception\NotImplementedException($message);
     }
 
     /**
@@ -57,7 +57,7 @@ class TranslationInlineEdit extends AbstractGridInlineEdit
     {
         if ($translationId === null) {
             $message = 'Method "getFormDataObject" for new translation is not supported in translations.';
-            throw new \Shopsys\ShopBundle\Model\Localization\Grid\Exception\NotImplementedException($message);
+            throw new \Shopsys\ShopBundle\Model\Localization\Translation\Grid\Exception\NotImplementedException($message);
         }
         $translation = $this->translationEditFacade->getTranslationById($translationId);
         $locales = $this->translationEditFacade->getTranslatableLocales();

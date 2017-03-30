@@ -55,7 +55,6 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
             'choices' => $this->orderStatusFacade->getAll(),
             'choice_name' => 'name',
             'choice_value' => 'id',
-            'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             'expanded' => false,
             'multiple' => false,
         ];

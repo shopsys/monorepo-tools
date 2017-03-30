@@ -27,7 +27,7 @@ class PaymentTest extends DatabaseTestCase
         $em->persist($payment);
         $em->flush();
 
-        $transportFacade = $this->getContainer()->get(TransportFacade::class);
+        $transportFacade = $this->getServiceByType(TransportFacade::class);
         /* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
         $transportFacade->deleteById($transport->getId());
 

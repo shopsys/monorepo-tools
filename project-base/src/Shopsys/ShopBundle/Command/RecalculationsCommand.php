@@ -27,17 +27,23 @@ class RecalculationsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $categoryVisibilityRepository = $this->getContainer()->get(CategoryVisibilityRepository::class);
+        $categoryVisibilityRepository = $this->getContainer()
+            ->get('shopsys.shop.category.category_visibility_repository');
         /* @var $categoryVisibilityRepository \Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository */
-        $productHiddenRecalculator = $this->getContainer()->get(ProductHiddenRecalculator::class);
+        $productHiddenRecalculator = $this->getContainer()
+            ->get('shopsys.shop.product.product_hidden_recalculator');
         /* @var $productHiddenRecalculator \Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator */
-        $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
+        $productPriceRecalculator = $this->getContainer()
+            ->get('shopsys.shop.product.pricing.product_price_recalculator');
         /* @var $productPriceRecalculator \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
-        $productVisibilityFacade = $this->getContainer()->get(ProductVisibilityFacade::class);
+        $productVisibilityFacade = $this->getContainer()
+            ->get('shopsys.shop.product.product_visibility_facade');
         /* @var $productVisibilityFacade \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade */
-        $productAvailabilityRecalculator = $this->getContainer()->get(ProductAvailabilityRecalculator::class);
+        $productAvailabilityRecalculator = $this->getContainer()
+            ->get('shopsys.shop.product.availability.product_availability_recalculator');
         /* @var $productAvailabilityRecalculator \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
-        $productSellingDeniedRecalculator = $this->getContainer()->get(ProductSellingDeniedRecalculator::class);
+        $productSellingDeniedRecalculator = $this->getContainer()
+            ->get('shopsys.shop.product.product_selling_denied_recalculator');
         /* @var $productSellingDeniedRecalculator \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator */
 
         $output->writeln('Running recalculations:');

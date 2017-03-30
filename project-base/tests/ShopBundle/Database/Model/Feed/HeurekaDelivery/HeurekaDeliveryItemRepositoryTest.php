@@ -4,6 +4,7 @@ namespace Tests\ShopBundle\Database\Model\Feed\HeurekaDelivery;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
@@ -12,12 +13,11 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
 {
     public function testGetItemsWithProductInStock()
     {
-        $container = $this->getContainer();
-        $productEditDataFactory = $container->get(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $container->get(ProductFacade::class);
+        $productFacade = $this->getServiceByType(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
-        $domain = $container->get(Domain::class);
+        $domain = $this->getServiceByType(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
@@ -28,7 +28,7 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
         $productEditData->productData->stockQuantity = 1;
         $productFacade->edit($product->getId(), $productEditData);
 
-        $heurekaDeliveryItemRepository = $container->get('shopsys.shop.feed.heureka.heureka_delivery_item_repository');
+        $heurekaDeliveryItemRepository = $this->getServiceByType(HeurekaDeliveryItemRepository::class);
         /* @var $heurekaDeliveryItemRepository \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
         $seekItemId = null;
         $maxResults = PHP_INT_MAX;
@@ -46,12 +46,11 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
 
     public function testGetItemsWithProductOutOfStock()
     {
-        $container = $this->getContainer();
-        $productEditDataFactory = $container->get(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $container->get(ProductFacade::class);
+        $productFacade = $this->getServiceByType(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
-        $domain = $container->get(Domain::class);
+        $domain = $this->getServiceByType(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
@@ -62,7 +61,7 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
         $productEditData->productData->stockQuantity = 0;
         $productFacade->edit($product->getId(), $productEditData);
 
-        $heurekaDeliveryItemRepository = $container->get('shopsys.shop.feed.heureka.heureka_delivery_item_repository');
+        $heurekaDeliveryItemRepository = $this->getServiceByType(HeurekaDeliveryItemRepository::class);
         /* @var $heurekaDeliveryItemRepository \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
         $seekItemId = null;
         $maxResults = PHP_INT_MAX;
@@ -78,12 +77,11 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
 
     public function testGetItemsWithProductWithoutStock()
     {
-        $container = $this->getContainer();
-        $productEditDataFactory = $container->get(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $container->get(ProductFacade::class);
+        $productFacade = $this->getServiceByType(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
-        $domain = $container->get(Domain::class);
+        $domain = $this->getServiceByType(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
@@ -94,7 +92,7 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
         $productEditData->productData->stockQuantity = null;
         $productFacade->edit($product->getId(), $productEditData);
 
-        $heurekaDeliveryItemRepository = $container->get('shopsys.shop.feed.heureka.heureka_delivery_item_repository');
+        $heurekaDeliveryItemRepository = $this->getServiceByType(HeurekaDeliveryItemRepository::class);
         /* @var $heurekaDeliveryItemRepository \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
         $seekItemId = null;
         $maxResults = PHP_INT_MAX;

@@ -63,7 +63,6 @@ class PaymentFormType extends AbstractType
                 'choices' => $this->transportFacade->getAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => true,
                 'expanded' => true,
             ])
@@ -72,7 +71,6 @@ class PaymentFormType extends AbstractType
                 'choices' => $this->vatFacade->getAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],

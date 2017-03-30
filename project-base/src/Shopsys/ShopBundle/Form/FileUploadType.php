@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class FileUploadType extends AbstractType implements DataTransformerInterface
 {
@@ -29,7 +29,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
     /**
      * @var \Symfony\Component\Validator\Constraint[]
      */
-    private $constraints;
+    private $fileConstraints;
 
     /**
      * @var bool
@@ -85,7 +85,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->required = $options['required'];
-        $this->constraints = array_merge(
+        $this->fileConstraints = array_merge(
             [
                 new FileExtensionMaxLength(['limit' => 5]),
             ],
@@ -110,16 +110,20 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
     }
 
     /**
-     * @param string|null $uploadedFiles
-     * @param \Symfony\Component\Validator\ExecutionContextInterface $context
+     * @param string[]|null $uploadedFiles
+     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
      */
     public function validateUploadedFiles($uploadedFiles, ExecutionContextInterface $context)
     {
-        if ($this->required || count($uploadedFiles) > 0) {
-            foreach ($uploadedFiles as $uploadedFile) {
-                $filepath = $this->fileUpload->getTemporaryFilepath($uploadedFile);
-                $file = new File($filepath, false);
-                $context->validateValue($file, $this->constraints);
+        foreach ($uploadedFiles as $uploadedFile) {
+            $filepath = $this->fileUpload->getTemporaryFilepath($uploadedFile);
+            $file = new File($filepath, false);
+
+            $validator = $context->getValidator();
+            $violations = $validator->validate($file, $this->fileConstraints);
+            foreach ($violations as $violation) {
+                /* @var $violation \Symfony\Component\Validator\ConstraintViolationInterface */
+                $context->addViolation($violation->getMessageTemplate(), $violation->getParameters());
             }
         }
     }

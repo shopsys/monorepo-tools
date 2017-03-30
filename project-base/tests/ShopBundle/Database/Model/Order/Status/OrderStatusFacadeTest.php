@@ -15,9 +15,9 @@ class OrderStatusFacadeTest extends DatabaseTestCase
     public function testDeleteByIdAndReplace()
     {
         $em = $this->getEntityManager();
-        $orderStatusFacade = $this->getContainer()->get(OrderStatusFacade::class);
+        $orderStatusFacade = $this->getServiceByType(OrderStatusFacade::class);
         /* @var $orderStatusFacade \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade */
-        $orderFacade = $this->getContainer()->get(OrderFacade::class);
+        $orderFacade = $this->getServiceByType(OrderFacade::class);
         /* @var $orderFacade \Shopsys\ShopBundle\Model\Order\OrderFacade */
 
         $orderStatusToDelete = $orderStatusFacade->create(new OrderStatusData(['cs' => 'name']));

@@ -44,7 +44,7 @@ class VatDataFixture extends AbstractReferenceFixture
      */
     private function createVat(VatData $vatData, $referenceName = null)
     {
-        $vatFacade = $this->get(VatFacade::class);
+        $vatFacade = $this->get('shopsys.shop.pricing.vat.vat_facade');
         /* @var $vatFacade \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade */
 
         $vat = $vatFacade->create($vatData);

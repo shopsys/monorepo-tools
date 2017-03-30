@@ -24,11 +24,11 @@ class GenerateGruntfileCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $domain = $this->getContainer()->get(Domain::class);
+        $domain = $this->getContainer()->get('shopsys.shop.component.domain');
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
-        $twig = $this->getContainer()->get(Twig_Environment::class);
+        $twig = $this->getContainer()->get('twig');
         /* @var $twig \Twig_Environment */
-        $cssFacade = $this->getContainer()->get(CssFacade::class);
+        $cssFacade = $this->getContainer()->get('shopsys.shop.component.css.css_facade');
         /* @var $cssFacade \Shopsys\ShopBundle\Component\Css\CssFacade */
 
         $cssVersion = time();

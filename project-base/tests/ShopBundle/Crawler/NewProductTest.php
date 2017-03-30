@@ -7,6 +7,7 @@ use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\ShopBundle\Form\Admin\Product\ProductEditFormType;
 use Symfony\Component\DomCrawler\Form;
+use Symfony\Component\Security\Csrf\CsrfToken;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class NewProductTest extends FunctionalTestCase
@@ -33,8 +34,10 @@ class NewProductTest extends FunctionalTestCase
 
         $em2->beginTransaction();
 
-        $csrfToken = $client2->getContainer()->get('form.csrf_provider')->generateCsrfToken(ProductEditFormType::CSRF_TOKEN_ID);
-        $this->setFormCsrfToken($form, $csrfToken);
+        $tokenManager = $client2->getContainer()->get('security.csrf.token_manager');
+        /* @var $tokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
+        $token = $tokenManager->getToken(ProductEditFormType::CSRF_TOKEN_ID);
+        $this->setFormCsrfToken($form, $token);
 
         $client2->submit($form);
 
@@ -73,10 +76,10 @@ class NewProductTest extends FunctionalTestCase
 
     /**
      * @param \Symfony\Component\DomCrawler\Form $form
-     * @param string $csrfToken
+     * @param \Symfony\Component\Security\Csrf\CsrfToken $token
      */
-    private function setFormCsrfToken(Form $form, $csrfToken)
+    private function setFormCsrfToken(Form $form, CsrfToken $token)
     {
-        $form['product_edit_form[_token]'] = $csrfToken;
+        $form['product_edit_form[_token]'] = $token->getValue();
     }
 }

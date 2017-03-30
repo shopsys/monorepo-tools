@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Form\Front;
+namespace Tests\ShopBundle\Database\Form\Front;
 
 use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType;
@@ -27,7 +27,7 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase
      */
     public function testTermsAndConditionsAgreementIsMandatory(array $personalInfoFormData, $isExpectedValid)
     {
-        $formFactory = $this->getContainer()->get(FormFactoryInterface::class);
+        $formFactory = $this->getServiceByType(FormFactoryInterface::class);
         /* @var $formFactory \Symfony\Component\Form\FormFactoryInterface */
 
         $personalInfoForm = $formFactory->create(PersonalInfoFormType::class, null, [

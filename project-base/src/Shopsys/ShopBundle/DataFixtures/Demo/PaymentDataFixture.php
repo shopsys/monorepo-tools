@@ -87,7 +87,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
         PaymentEditData $paymentEditData,
         array $transportsReferenceNames
     ) {
-        $paymentFacade = $this->get(PaymentFacade::class);
+        $paymentFacade = $this->get('shopsys.shop.payment.payment_facade');
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $paymentEditData->paymentData->transports = [];

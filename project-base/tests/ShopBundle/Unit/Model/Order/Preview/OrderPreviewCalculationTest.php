@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Model\Order;
+namespace Tests\ShopBundle\Unit\Model\Order\Preview;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
@@ -27,7 +27,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
      */
     public function testCalculatePreviewWithTransportAndPayment()
     {
-        $domain = $this->getContainer()->get(Domain::class);
+        $domain = $this->getServiceByType(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         $vat = new Vat(new VatData('vatName', 20));
 
@@ -111,7 +111,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
      */
     public function testCalculatePreviewWithoutTransportAndPayment()
     {
-        $domain = $this->getContainer()->get(Domain::class);
+        $domain = $this->getServiceByType(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         $vat = new Vat(new VatData('vatName', 20));
 

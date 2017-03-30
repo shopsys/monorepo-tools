@@ -37,7 +37,7 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
         PricingGroupData $pricingGroupData,
         $referenceName
     ) {
-        $pricingGroupFacade = $this->get(PricingGroupFacade::class);
+        $pricingGroupFacade = $this->get('shopsys.shop.pricing.group.pricing_group_facade');
         /* @var $pricingGroupFacade \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 
         $pricingGroup = $pricingGroupFacade->create($pricingGroupData, Domain::FIRST_DOMAIN_ID);

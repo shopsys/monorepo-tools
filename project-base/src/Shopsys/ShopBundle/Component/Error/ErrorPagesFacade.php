@@ -72,7 +72,7 @@ class ErrorPagesFacade
     {
         $errorPageContent = file_get_contents($this->getErrorPageFilename($domainId, $statusCode));
         if ($errorPageContent === false) {
-            throw new \ShopBundle\Component\Error\Exception\ErrorPageNotFoundException($domainId, $statusCode);
+            throw new \Shopsys\ShopBundle\Component\Error\Exception\ErrorPageNotFoundException($domainId, $statusCode);
         }
 
         return $errorPageContent;
@@ -140,7 +140,7 @@ class ErrorPagesFacade
         $errorPageKernel->terminate($errorPageFakeRequest, $errorPageResponse);
 
         if ($expectedStatusCode !== $errorPageResponse->getStatusCode()) {
-            throw new \ShopBundle\Component\Error\Exception\BadErrorPageStatusCodeException(
+            throw new \Shopsys\ShopBundle\Component\Error\Exception\BadErrorPageStatusCodeException(
                 $errorPageUrl,
                 $expectedStatusCode,
                 $errorPageResponse->getStatusCode()

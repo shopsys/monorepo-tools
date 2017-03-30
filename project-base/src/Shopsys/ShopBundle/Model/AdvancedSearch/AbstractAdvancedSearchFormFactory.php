@@ -81,13 +81,11 @@ abstract class AbstractAdvancedSearchFormFactory
         ])
             ->add('subject', ChoiceType::class, [
                 'choices' => $this->getSubjectChoices(),
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'expanded' => false,
                 'multiple' => false,
             ])
             ->add('operator', ChoiceType::class, [
                 'choices' => $this->getFilterOperatorChoices($ruleFilter),
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'expanded' => false,
                 'multiple' => false,
             ])

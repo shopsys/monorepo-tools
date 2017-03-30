@@ -11,12 +11,12 @@ class CronModuleConfig implements CronTimeInterface
     /**
      * @var \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface
      */
-    private $cronModuleService;
+    private $service;
 
     /**
      * @var string
      */
-    private $moduleId;
+    private $serviceId;
 
     /**
      * @var string
@@ -28,23 +28,16 @@ class CronModuleConfig implements CronTimeInterface
      */
     private $timeHours;
 
-    // @codingStandardsIgnoreStart
     /**
-     * @param \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
-     * @param string $moduleId
+     * @param \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $service
+     * @param string $serviceId
      * @param string $timeHours
      * @param string $timeMinutes
      */
-    public function __construct($cronModuleService, $moduleId, $timeHours, $timeMinutes)
+    public function __construct($service, $serviceId, $timeHours, $timeMinutes)
     {
-        // @codingStandardsIgnoreEnd
-        if (!$cronModuleService instanceof SimpleCronModuleInterface
-            && !$cronModuleService instanceof IteratedCronModuleInterface
-        ) {
-            throw new \Shopsys\ShopBundle\Component\Cron\Exception\InvalidCronModuleException($moduleId);
-        }
-        $this->cronModuleService = $cronModuleService;
-        $this->moduleId = $moduleId;
+        $this->service = $service;
+        $this->serviceId = $serviceId;
         $this->timeHours = $timeHours;
         $this->timeMinutes = $timeMinutes;
     }
@@ -52,17 +45,17 @@ class CronModuleConfig implements CronTimeInterface
     /**
      * @return \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface
      */
-    public function getCronModuleService()
+    public function getService()
     {
-        return $this->cronModuleService;
+        return $this->service;
     }
 
     /**
      * @return string
      */
-    public function getModuleId()
+    public function getServiceId()
     {
-        return $this->moduleId;
+        return $this->serviceId;
     }
 
     /**

@@ -35,7 +35,6 @@ class CurrencySettingsFormType extends AbstractType
                 'choices' => $this->currencyFacade->getAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter default currency']),
                 ],
@@ -48,7 +47,6 @@ class CurrencySettingsFormType extends AbstractType
                     'choices' => $this->currencyFacade->getAll(),
                     'choice_label' => 'name',
                     'choice_value' => 'id',
-                    'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter default currency']),
                     ],

@@ -46,16 +46,16 @@ class PriceExtensionTest extends FunctionalTestCase
      */
     public function testPriceFilter($input, $domainId, $result)
     {
-        $currencyFacade = $this->getContainer()->get(CurrencyFacade::class);
+        $currencyFacade = $this->getServiceByType(CurrencyFacade::class);
         /* @var $currencyFacade \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
-        $domain = $this->getContainer()->get(Domain::class);
+        $domain = $this->getServiceByType(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
-        $localization = $this->getContainer()->get(Localization::class);
+        $localization = $this->getServiceByType(Localization::class);
         /* @var $localization \Shopsys\ShopBundle\Model\Localization\Localization */
-        $intlCurrencyRepository = $this->getContainer()->get(IntlCurrencyRepository::class);
+        $intlCurrencyRepository = $this->getServiceByType(IntlCurrencyRepository::class);
         /* @var $intlCurrencyRepository \Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository */
 
-        $numberFormatRepository = $this->getContainer()->get(NumberFormatRepositoryInterface::class);
+        $numberFormatRepository = $this->getServiceByType(NumberFormatRepositoryInterface::class);
         /* @var $numberFormatRepository \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface */
 
         $domain->switchDomainById($domainId);

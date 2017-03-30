@@ -55,7 +55,6 @@ class AdvertFormType extends AbstractType
                     t('HTML code') => Advert::TYPE_CODE,
                     t('Picture with link') => Advert::TYPE_IMAGE,
                 ],
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'expanded' => true,
                 'multiple' => false,
                 'constraints' => [
@@ -70,7 +69,6 @@ class AdvertFormType extends AbstractType
                     t('in category (above the category name)') => Advert::POSITION_PRODUCT_LIST,
                     t('in left panel (under category tree)') => Advert::POSITION_LEFT_SIDEBAR,
                 ],
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose area --'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose advertisement area']),

@@ -24,7 +24,6 @@ class InputPriceTypeFormType extends AbstractType
                     t('Excluding VAT') => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
                     t('Including VAT') => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
                 ],
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter input prices']),
                 ],

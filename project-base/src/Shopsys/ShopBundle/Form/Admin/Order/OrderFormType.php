@@ -91,7 +91,6 @@ class OrderFormType extends AbstractType
                 'choices' => $this->orderStatusFacade->getAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => false,
                 'expanded' => false,
             ])
@@ -190,7 +189,6 @@ class OrderFormType extends AbstractType
                 'choices' => $countries,
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose country']),
                 ],
@@ -290,20 +288,23 @@ class OrderFormType extends AbstractType
                 'choices' => $countries,
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose country']),
                 ],
             ])
             ->add('note', TextareaType::class, ['required' => false])
             ->add('itemsWithoutTransportAndPayment', CollectionType::class, [
-                'entry_type' => new OrderItemFormType(),
+                'entry_type' => OrderItemFormType::class,
                 'error_bubbling' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
             ])
-            ->add('orderPayment', new OrderPaymentFormType($payments))
-            ->add('orderTransport', new OrderTransportFormType($transports))
+            ->add('orderPayment', OrderPaymentFormType::class, [
+                'payments' => $payments,
+            ])
+            ->add('orderTransport', OrderTransportFormType::class, [
+                'transports' => $transports,
+            ])
             ->add('save', SubmitType::class);
     }
 

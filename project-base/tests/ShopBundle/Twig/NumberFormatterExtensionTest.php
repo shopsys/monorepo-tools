@@ -44,7 +44,7 @@ class NumberFormatterExtensionTest extends FunctionalTestCase
         $localizationMock->expects($this->any())->method('getLocale')
             ->willReturn($locale);
 
-        $numberFormatRepository = $this->getContainer()->get(NumberFormatRepositoryInterface::class);
+        $numberFormatRepository = $this->getServiceByType(NumberFormatRepositoryInterface::class);
         /* @var $numberFormatRepository \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface */
 
         $numberFormatterExtension = new NumberFormatterExtension($localizationMock, $numberFormatRepository);

@@ -34,7 +34,6 @@ class AvailabilitySettingFormType extends AbstractType
                 'choices' => $this->availabilityFacade->getAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose availability for stock products']),
                 ],

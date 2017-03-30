@@ -135,7 +135,6 @@ class ProductFormType extends AbstractType
                 'choices' => $this->brandFacade->getAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose brand --'),
             ])
             ->add('usingStock', YesNoType::class, ['required' => false])
@@ -154,7 +153,6 @@ class ProductFormType extends AbstractType
                 'choices' => $this->unitFacade->getAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank([
                         'message' => 'Please choose unit',
@@ -166,7 +164,6 @@ class ProductFormType extends AbstractType
                 'choices' => $this->availabilityFacade->getAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose availability --'),
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -183,7 +180,6 @@ class ProductFormType extends AbstractType
                     t('Hide product') => Product::OUT_OF_STOCK_ACTION_HIDE,
                     t('Exclude from sale') => Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE,
                 ],
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose action --'),
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -197,7 +193,6 @@ class ProductFormType extends AbstractType
                 'choices' => $this->availabilityFacade->getAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'placeholder' => t('-- Choose availability --'),
                 'constraints' => [
                     new Constraints\NotBlank([
@@ -228,7 +223,6 @@ class ProductFormType extends AbstractType
                 'choices' => $vats,
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],
@@ -252,7 +246,6 @@ class ProductFormType extends AbstractType
                 'choices' => $this->flagFacade->getAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'multiple' => true,
                 'expanded' => true,
             ])
@@ -263,7 +256,6 @@ class ProductFormType extends AbstractType
                     t('Automatically') => Product::PRICE_CALCULATION_TYPE_AUTO,
                     t('Manually') => Product::PRICE_CALCULATION_TYPE_MANUAL,
                 ],
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add('orderingPriority', IntegerType::class, [
                 'required' => true,

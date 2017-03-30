@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class TransportAndPaymentFormType extends AbstractType
 {
@@ -51,7 +51,6 @@ class TransportAndPaymentFormType extends AbstractType
                 'choices' => $transports,
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotNull(['message' => 'Please choose shipping type']),
                 ],
@@ -61,7 +60,6 @@ class TransportAndPaymentFormType extends AbstractType
                 'choices' => $payments,
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotNull(['message' => 'Please choose payment type']),
                 ],
@@ -88,7 +86,7 @@ class TransportAndPaymentFormType extends AbstractType
 
     /**
      * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
-     * @param \Symfony\Component\Validator\ExecutionContextInterface $context
+     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
      */
     public function validateTransportPaymentRelation(OrderData $orderData, ExecutionContextInterface $context)
     {

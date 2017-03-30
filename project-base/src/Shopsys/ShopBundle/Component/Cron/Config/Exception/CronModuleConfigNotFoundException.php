@@ -8,11 +8,11 @@ use Shopsys\ShopBundle\Component\Cron\Config\Exception\CronConfigException;
 class CronModuleConfigNotFoundException extends Exception implements CronConfigException
 {
     /**
-     * @param string $moduleId
+     * @param string $serviceId
      * @param \Exception $previous
      */
-    public function __construct($moduleId, Exception $previous = null)
+    public function __construct($serviceId, Exception $previous = null)
     {
-        parent::__construct('Cron module config with module ID "' . $moduleId . '" not found.', 0, $previous);
+        parent::__construct('Cron module config with service ID "' . $serviceId . '" not found.', 0, $previous);
     }
 }

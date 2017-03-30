@@ -39,7 +39,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 
         $cookies = $this->getReference(ArticleDataFixture::COOKIES);
         /* @var $cookies \Shopsys\ShopBundle\Model\Article\Article */
-        $hashGenerator = $this->get(HashGenerator::class);
+        $hashGenerator = $this->get('shopsys.shop.component.string.hash_generator');
         /* @var $hashGenerator \Shopsys\ShopBundle\Component\String\HashGenerator */
         $defaultUnit = $this->getReference(UnitDataFixture::PCS);
         /* @var $defaultUnit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
@@ -83,7 +83,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 
     private function clearSettingCache()
     {
-        $setting = $this->get(Setting::class);
+        $setting = $this->get('shopsys.shop.component.setting');
         /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 
         $setting->clearCache();

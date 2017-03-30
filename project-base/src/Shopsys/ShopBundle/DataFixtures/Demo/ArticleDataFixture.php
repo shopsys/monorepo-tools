@@ -57,7 +57,7 @@ class ArticleDataFixture extends AbstractReferenceFixture
      */
     private function createArticle(ArticleData $articleData, $referenceName = null)
     {
-        $articleFacade = $this->get(ArticleFacade::class);
+        $articleFacade = $this->get('shopsys.shop.article.article_facade');
         /* @var $articleFacade \Shopsys\ShopBundle\Model\Article\ArticleFacade */
 
         $article = $articleFacade->create($articleData);

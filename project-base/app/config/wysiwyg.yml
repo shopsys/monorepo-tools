@@ -39,6 +39,7 @@ ivory_ck_editor:
         - ['TextColor']
 
 fm_elfinder:
+  assets_path: /components
   instances:
     default:
       editor: ckeditor
@@ -48,6 +49,15 @@ fm_elfinder:
           uploads:
             driver: LocalFileSystem
             path: %shopsys.filemanager_upload_web_dir%
-            # show_hidden must be true if access_control is set
-            show_hidden: true
-            access_control: 'Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess::isPathAccessibleStatic'
+            tmb_path: '_thumbnails'
+            attributes:
+              thumbnails:
+                pattern: '/^\/_thumbnails$/'
+                hidden: true
+            disabled_commands:
+              - 'archive'
+              - 'extract'
+              - 'edit'
+              - 'mkfile'
+              - 'netmount'
+              - 'zipdl'

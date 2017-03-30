@@ -11,9 +11,9 @@ class GeneratorController extends Controller
 {
     public function indexAction(Request $request)
     {
-        $generatorsFormFactory = $this->get(GeneratorsFormFactory::class);
+        $generatorsFormFactory = $this->get('shopsys.generator.generators_form_factory');
         /* @var $generatorsFormFactory \Shopsys\GeneratorBundle\Model\GeneratorsFormFactory */
-        $generatorFacade = $this->get(GeneratorFacade::class);
+        $generatorFacade = $this->get('shopsys.generator.generator_facade');
         /* @var $generatorFacade \Shopsys\GeneratorBundle\Model\GeneratorFacade */
 
         $form = $generatorsFormFactory->createForm();

@@ -24,11 +24,11 @@ class ReplaceDomainsUrlsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $domain = $this->getContainer()->get(Domain::class);
+        $domain = $this->getContainer()->get('shopsys.shop.component.domain');
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
-        $domainUrlService = $this->getContainer()->get(DomainUrlService::class);
+        $domainUrlService = $this->getContainer()->get('shopsys.shop.component.domain.domain_url_service');
         /* @var $domainUrlService \Shopsys\ShopBundle\Component\Domain\DomainUrlService */
-        $setting = $this->getContainer()->get(Setting::class);
+        $setting = $this->getContainer()->get('shopsys.shop.component.setting');
         /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 
         foreach ($domain->getAll() as $domainConfig) {

@@ -13,7 +13,7 @@ class DbCollationsDataFixture extends AbstractNativeFixture
      */
     public function load(ObjectManager $manager)
     {
-        $system = $this->get(System::class);
+        $system = $this->get('shopsys.shop.component.system');
         /* @var $system \Shopsys\ShopBundle\Component\System\System */
 
         if ($system->isWindows()) {

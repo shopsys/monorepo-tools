@@ -2,17 +2,16 @@
 
 namespace Tests\ShopBundle\Performance\Page;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider;
+use Tests\ShopBundle\Performance\JmeterCsvReporter;
 use Tests\ShopBundle\Performance\Page\PerformanceResultsCsvExporter;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSample;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSamplesAggregator;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSummaryPrinter;
-use Tests\ShopBundle\Test\FunctionalTestCase;
+use Tests\ShopBundle\Test\CrawlerTestCase;
 
-class AllPagesTest extends FunctionalTestCase
+class AllPagesTest extends CrawlerTestCase
 {
     const PASSES = 5;
 
@@ -27,11 +26,8 @@ class AllPagesTest extends FunctionalTestCase
      */
     public function testAdminPagesWarmup()
     {
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-
         $this->doWarmupPagesWithProgress(
-            $urlsProvider->getAdminTestableUrlsProviderData(),
+            $this->createUrlsProvider()->getAdminTestableUrlsProviderData(),
             self::ADMIN_USERNAME,
             self::ADMIN_PASSWORD
         );
@@ -42,11 +38,8 @@ class AllPagesTest extends FunctionalTestCase
      */
     public function testFrontPagesWarmup()
     {
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-
         $this->doWarmupPagesWithProgress(
-            $urlsProvider->getFrontTestableUrlsProviderData(),
+            $this->createUrlsProvider()->getFrontTestableUrlsProviderData(),
             self::FRONT_USERNAME,
             self::FRONT_PASSWORD
         );
@@ -54,11 +47,8 @@ class AllPagesTest extends FunctionalTestCase
 
     public function testAdminPages()
     {
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-
         $this->doTestPagesWithProgress(
-            $urlsProvider->getAdminTestableUrlsProviderData(),
+            $this->createUrlsProvider()->getAdminTestableUrlsProviderData(),
             self::ADMIN_USERNAME,
             self::ADMIN_PASSWORD,
             $this->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-admin.csv'
@@ -67,11 +57,8 @@ class AllPagesTest extends FunctionalTestCase
 
     public function testFrontPages()
     {
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-
         $this->doTestPagesWithProgress(
-            $urlsProvider->getFrontTestableUrlsProviderData(),
+            $this->createUrlsProvider()->getFrontTestableUrlsProviderData(),
             self::FRONT_USERNAME,
             self::FRONT_PASSWORD,
             $this->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-front.csv'
@@ -127,13 +114,6 @@ class AllPagesTest extends FunctionalTestCase
         $password,
         $jmeterOutputFilename
     ) {
-        $performanceTestSummaryPrinter = $this->getContainer()->get(PerformanceTestSummaryPrinter::class);
-        /* @var $performanceTestSummaryPrinter \Tests\ShopBundle\Performance\Page\PerformanceTestSummaryPrinter */
-        $performanceResultsCsvExporter = $this->getContainer()->get(PerformanceResultsCsvExporter::class);
-        /* @var $performanceResultsCsvExporter \Tests\ShopBundle\Performance\Page\PerformanceResultsCsvExporter */
-        $performanceTestSamplesAggregator = $this->getContainer()->get(PerformanceTestSamplesAggregator::class);
-        /* @var $performanceTestSamplesAggregator \Tests\ShopBundle\Performance\Page\PerformanceTestSamplesAggregator */
-
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->writeln('');
 
@@ -165,12 +145,9 @@ class AllPagesTest extends FunctionalTestCase
             }
         }
 
-        $performanceResultsCsvExporter->exportJmeterCsvReport($performanceTestSamples, $jmeterOutputFilename);
-
-        $performanceTestSamplesAggregatedByUrl = $performanceTestSamplesAggregator
-            ->getPerformanceTestSamplesAggregatedByUrl($performanceTestSamples);
-
-        $performanceTestSummaryPrinter->printSummary($performanceTestSamplesAggregatedByUrl, $consoleOutput);
+        $performanceTestSamplesAggregatedByUrl = $this->aggregatePerformanceTestSamplesByUrl($performanceTestSamples);
+        $this->exportJmeterCsvReport($performanceTestSamples, $jmeterOutputFilename);
+        $this->printPerformanceTestsSummary($performanceTestSamplesAggregatedByUrl, $consoleOutput);
 
         $this->doAssert($performanceTestSamplesAggregatedByUrl);
     }
@@ -197,19 +174,12 @@ class AllPagesTest extends FunctionalTestCase
         } else {
             $client = $this->getClient(true);
         }
-        $clientEntityManager = $client->getContainer()->get(EntityManager::class);
-        /* @var $clientEntityManager \Doctrine\ORM\EntityManager */
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-        $urlWithCsrfToken = $urlsProvider->replaceCsrfTokensInUrl($url);
 
-        $clientEntityManager->beginTransaction();
+        $urlWithCsrfToken = $this->createUrlsProvider()->replaceCsrfTokensInUrl($url);
 
         $startTime = microtime(true);
-        $client->request('GET', $urlWithCsrfToken);
+        $this->makeRequestInTransaction($client, $urlWithCsrfToken);
         $endTime = microtime(true);
-
-        $clientEntityManager->rollback();
 
         $statusCode = $client->getResponse()->getStatusCode();
 
@@ -229,8 +199,7 @@ class AllPagesTest extends FunctionalTestCase
     private function doAssert(
         array $performanceTestSamples
     ) {
-        $performanceTestSampleQualifier = $this->getContainer()->get(PerformanceTestSampleQualifier::class);
-        /* @var $performanceTestSampleQualifier \Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier */
+        $performanceTestSampleQualifier = new PerformanceTestSampleQualifier();
 
         $overallStatus = $performanceTestSampleQualifier->getOverallStatus($performanceTestSamples);
 
@@ -244,5 +213,40 @@ class AllPagesTest extends FunctionalTestCase
                 $this->fail('Values are above critical threshold');
                 return;
         }
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Performance\Page\PerformanceTestSample[] $performanceTestSamples
+     * @param string $jmeterOutputFilename
+     */
+    private function exportJmeterCsvReport(array $performanceTestSamples, $jmeterOutputFilename)
+    {
+        $jmeterCsvReporter = new JmeterCsvReporter();
+        $performanceResultsCsvExporter = new PerformanceResultsCsvExporter($jmeterCsvReporter);
+
+        $performanceResultsCsvExporter->exportJmeterCsvReport($performanceTestSamples, $jmeterOutputFilename);
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Performance\Page\PerformanceTestSample[] $performanceTestSamples
+     * @return \Tests\ShopBundle\Performance\Page\PerformanceTestSample[]
+     */
+    private function aggregatePerformanceTestSamplesByUrl(array $performanceTestSamples)
+    {
+        $performanceTestSamplesAggregator = new PerformanceTestSamplesAggregator();
+
+        return $performanceTestSamplesAggregator->getPerformanceTestSamplesAggregatedByUrl($performanceTestSamples);
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Performance\Page\PerformanceTestSample[] $performanceTestSamples
+     * @param \Symfony\Component\Console\Output\ConsoleOutput $consoleOutput
+     */
+    private function printPerformanceTestsSummary(array $performanceTestSamples, ConsoleOutput $consoleOutput)
+    {
+        $performanceTestSampleQualifier = new PerformanceTestSampleQualifier();
+        $performanceTestSummaryPrinter = new PerformanceTestSummaryPrinter($performanceTestSampleQualifier);
+
+        $performanceTestSummaryPrinter->printSummary($performanceTestSamples, $consoleOutput);
     }
 }

@@ -16,9 +16,9 @@ class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements 
      */
     public function load(ObjectManager $manager)
     {
-        $productEditDataFactory = $this->get(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->get('shopsys.shop.product.product_edit_data_factory');
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $this->get(ProductFacade::class);
+        $productFacade = $this->get('shopsys.shop.product.product_facade');
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\ShopBundle\Model\Product\Product */

@@ -28,6 +28,10 @@
     "repositories": [
         {
             "type": "vcs",
+            "url": "https://github.com/molaux/PostgreSearchBundle.git"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/shopsys/doctrine2.git"
         },
         {
@@ -41,10 +45,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/shopsys/JMSTranslationBundle.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/shopsys/Routing.git"
         }
     ],
     "require": {
@@ -66,30 +66,32 @@
         "doctrine/doctrine-fixtures-bundle": "2.3.0",
         "doctrine/orm": "dev-v2.5.6-ddc1960-hotfix-and-ddc4005-hotfix as 2.5.6",
         "egeloen/ckeditor-bundle": "4.0.1",
-        "fp/jsformvalidator-bundle": "dev-master#4a12964",
+        "fp/jsformvalidator-bundle": "1.5.0",
         "fzaninotto/faker": "1.5.0",
-        "helios-ag/fm-elfinder-bundle": "4.0.2",
+        "helios-ag/fm-elfinder-bundle": "6.2.1",
         "heureka/overeno-zakazniky": "2.0.4",
         "incenteev/composer-parameter-handler": "2.1.2",
-        "intaro/postgres-search-bundle": "dev-master#0eb26e0812",
+        "intaro/postgres-search-bundle": "dev-master#06625bdc1d",
         "intervention/image": "2.3.5",
         "jms/translation-bundle": "dev-fix-external-translations-1-3-1#02048b as 1.3.1",
         "phing/phing": "2.13.0",
-        "phpunit/phpunit": "4.8.27",
+        "phpunit/phpunit": "4.8.35",
         "presta/sitemap-bundle": "1.4.2",
         "prezent/doctrine-translatable-bundle": "dev-rise-locale-listener-priority#09863c2",
         "raulfraile/ladybug-bundle": "1.0.6",
-        "sensio/distribution-bundle": "4.0.1",
-        "sensio/framework-extra-bundle": "3.0.10",
-        "sensio/generator-bundle": "2.5.3",
+        "sensio/distribution-bundle": "5.0.18",
+        "sensio/framework-extra-bundle": "3.0.24",
+        "sensio/generator-bundle": "3.1.4",
         "shopsys/migrations": "2.0.1",
-        "stof/doctrine-extensions-bundle": "1.2.1",
+        "stof/doctrine-extensions-bundle": "1.2.2",
         "symfony/assetic-bundle": "2.8.1",
-        "symfony/monolog-bundle": "2.7.1",
+        "symfony/monolog-bundle": "2.12.1",
         "symfony/swiftmailer-bundle": "2.3.8",
-        "symfony/symfony": "2.8.17",
-        "symfony-cmf/routing": "1.4.0",
-        "symfony-cmf/routing-bundle": "1.3.3",
+        "symfony/symfony": "3.2.6",
+        "symfony-cmf/routing": "2.0.0",
+        "symfony-cmf/routing-bundle": "2.0.0",
+        "symplify/controller-autowire": "1.3.3",
+        "symplify/default-autowire": "1.3.3",
         "timwhitlock/jparser": "dev-get-rid-of-import#c37f4c6",
         "tracy/tracy": "2.3.8",
         "twig/extensions": "1.3.0",
@@ -101,8 +103,7 @@
         "ext-zip": "*",
         "codeception/codeception": "2.2.3",
         "shopsys/coding-standards": "3.0.1",
-        "shopsys/phpstorm-inspect": "1.0.4",
-        "symfony/web-profiler-bundle": "2.8.2"
+        "shopsys/phpstorm-inspect": "1.0.4"
     },
     "scripts": {
         "post-install-cmd": [
@@ -117,7 +118,8 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "component-dir": "web/components"
     },
     "extra": {
         "symfony-app-dir": "app",

@@ -1,8 +1,8 @@
 <?php
 
-use Shopsys\AutoServicesBundle\Kernel;
 use Shopsys\Environment;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
@@ -27,7 +27,6 @@ class AppKernel extends Kernel
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new ShopSys\MigrationBundle\ShopSysMigrationBundle(),
-            new Shopsys\AutoServicesBundle\ShopsysAutoServicesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -36,6 +35,8 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            new Symplify\ControllerAutowire\SymplifyControllerAutowireBundle(),
+            new Symplify\DefaultAutowire\SymplifyDefaultAutowireBundle(),
             new VasekPurchart\ConsoleErrorsBundle\ConsoleErrorsBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(), // has to be loaded after FrameworkBundle and TwigBundle
             new Shopsys\ShopBundle\ShopsysShopBundle(), // must be loaded as last, because translations must overwrite other bundles
@@ -47,6 +48,10 @@ class AppKernel extends Kernel
             $bundles[] = new Shopsys\GeneratorBundle\ShopsysGeneratorBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
+        }
+
+        if ($this->getEnvironment() === Environment::ENVIRONMENT_TEST) {
+            $bundles[] = new Shopsys\IntegrationTestingBundle\ShopsysIntegrationTestingBundle();
         }
 
         return $bundles;

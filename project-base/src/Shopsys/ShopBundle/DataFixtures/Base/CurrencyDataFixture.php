@@ -36,7 +36,7 @@ class CurrencyDataFixture extends AbstractReferenceFixture
      */
     private function createCurrency(CurrencyData $currencyData, $referenceName = null)
     {
-        $currencyFacade = $this->get(CurrencyFacade::class);
+        $currencyFacade = $this->get('shopsys.shop.pricing.currency.currency_facade');
         /* @var $currencyFacade \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 
         $currency = $currencyFacade->create($currencyData);

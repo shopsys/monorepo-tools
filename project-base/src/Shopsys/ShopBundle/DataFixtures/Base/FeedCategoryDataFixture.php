@@ -13,7 +13,7 @@ class FeedCategoryDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $feedCategoryLoaderFacade = $this->get(FeedCategoryLoaderFacade::class);
+        $feedCategoryLoaderFacade = $this->get('shopsys.shop.feed.category.feed_category_loader_facade');
         /* @var $feedCategoryLoaderFacade \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade */
 
         try {

@@ -49,7 +49,7 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
             $webDirectory . '/content/wysiwyg',
         ];
 
-        $filesystem = $this->getContainer()->get(Filesystem::class);
+        $filesystem = $this->getContainer()->get('filesystem');
         /* @var $filesystem \Symfony\Component\Filesystem\Filesystem */
 
         $filesystem->mkdir($directories);
@@ -62,7 +62,8 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
      */
     private function createImageDirectories(OutputInterface $output)
     {
-        $imageDirectoryStructureCreator = $this->getContainer()->get(ImageDirectoryStructureCreator::class);
+        $imageDirectoryStructureCreator = $this->getContainer()
+            ->get('shopsys.shop.component.image.directory_structure_creator');
         /* @var $imageDirectoryStructureCreator \Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator */
         $imageDirectoryStructureCreator->makeImageDirectories();
 
@@ -74,7 +75,8 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
      */
     private function createUploadedFileDirectories(OutputInterface $output)
     {
-        $uploadedFileDirectoryStructureCreator = $this->getContainer()->get(UploadedFileDirectoryStructureCreator::class);
+        $uploadedFileDirectoryStructureCreator = $this->getContainer()
+            ->get('shopsys.shop.component.uploaded_file.directory_structure_creator');
         /* @var $uploadedFileDirectoryStructureCreator \Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator */
         $uploadedFileDirectoryStructureCreator->makeUploadedFileDirectories();
 

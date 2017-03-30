@@ -34,7 +34,7 @@ class ScriptDataFixture extends AbstractReferenceFixture
      */
     private function createScript(ScriptData $scriptData)
     {
-        $scriptFacade = $this->get(ScriptFacade::class);
+        $scriptFacade = $this->get('shopsys.shop.script.script_facade');
         /* @var $scriptFacade \Shopsys\ShopBundle\Model\Script\ScriptFacade */
         $scriptFacade->create($scriptData);
     }

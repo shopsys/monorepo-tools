@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Javascript\Compiler\Constant;
+namespace Tests\ShopBundle\Unit\Component\Javascript\Compiler\Constant;
 
 use Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass;
 use Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler;
@@ -41,7 +41,7 @@ class JsConstantCompilerPassTest extends FunctionalTestCase
      */
     private function getJsCompiler()
     {
-        $jsConstantCompilerPass = $this->getContainer()->get(JsConstantCompilerPass::class);
+        $jsConstantCompilerPass = $this->getServiceByType(JsConstantCompilerPass::class);
 
         return new JsCompiler([
             $jsConstantCompilerPass,

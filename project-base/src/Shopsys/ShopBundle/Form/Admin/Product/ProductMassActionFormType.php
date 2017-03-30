@@ -24,21 +24,18 @@ class ProductMassActionFormType extends AbstractType
                     t('Only checked products') => ProductMassActionData::SELECT_TYPE_CHECKED,
                     t('All search results') => ProductMassActionData::SELECT_TYPE_ALL_RESULTS,
                 ],
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add('action', ChoiceType::class, [
                 'required' => true,
                 'choices' => [
                     t('Set') => ProductMassActionData::ACTION_SET,
                 ],
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add('subject', ChoiceType::class, [
                 'required' => true,
                 'choices' => [
                     t('Hiding product') => ProductMassActionData::SUBJECT_PRODUCT_HIDDEN,
                 ],
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add('value', ChoiceType::class, [
                 'required' => true,
@@ -46,7 +43,6 @@ class ProductMassActionFormType extends AbstractType
                     t('Hide') => ProductMassActionData::VALUE_PRODUCT_HIDE,
                     t('Display') => ProductMassActionData::VALUE_PRODUCT_SHOW,
                 ],
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add('submit', SubmitType::class);
     }

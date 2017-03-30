@@ -36,7 +36,6 @@ class VatSettingsFormType extends AbstractType
                 'choices' => $this->vatFacade->getAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter default VAT']),
                 ],
@@ -48,7 +47,6 @@ class VatSettingsFormType extends AbstractType
                     t('To fifty hundredths (halfs)') => PricingSetting::ROUNDING_TYPE_FIFTIES,
                     t('To whole numbers') => PricingSetting::ROUNDING_TYPE_INTEGER,
                 ],
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add('save', SubmitType::class);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Component\UploadedFile;
+namespace Tests\ShopBundle\Unit\Component\UploadedFile\Config;
 
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfigLoader;

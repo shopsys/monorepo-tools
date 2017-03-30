@@ -36,7 +36,7 @@ class CountryDataFixture extends AbstractReferenceFixture
      */
     private function createCountry(CountryData $countryData, $domainId, $referenceName)
     {
-        $countryFacade = $this->get(CountryFacade::class);
+        $countryFacade = $this->get('shopsys.shop.country.country_facade');
         /* @var $countryFacade \Shopsys\ShopBundle\Model\Country\CountryFacade */
 
         $country = $countryFacade->create($countryData, $domainId);

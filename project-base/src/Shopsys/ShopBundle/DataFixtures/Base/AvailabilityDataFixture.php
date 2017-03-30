@@ -44,7 +44,7 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
      */
     private function createAvailability(AvailabilityData $availabilityData, $referenceName = null)
     {
-        $availabilityFacade = $this->get(AvailabilityFacade::class);
+        $availabilityFacade = $this->get('shopsys.shop.product.availability.availability_facade');
         /* @var $availabilityFacade \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade */
 
         $availability = $availabilityFacade->create($availabilityData);

@@ -34,7 +34,7 @@ class FragmentHandlerTest extends PHPUnit_Framework_TestCase
         $containerMock->expects($this->once())->method('get')->will($this->returnValue($rendererMock));
 
         $debug = false;
-        $fragmentHandler = new FragmentHandler($containerMock, $debug, $requestStackMock);
+        $fragmentHandler = new FragmentHandler($containerMock, $requestStackMock, $debug);
         $fragmentHandler->addRendererService('rendererName', 'rendererName');
 
         $this->setExpectedException(\Exception::class);
@@ -55,7 +55,7 @@ class FragmentHandlerTest extends PHPUnit_Framework_TestCase
         $containerMock = $this->getMock(ContainerInterface::class);
         $containerMock->expects($this->once())->method('get')->will($this->returnValue($rendererMock));
 
-        $fragmentHandler = new FragmentHandler($containerMock, false, $requestStackMock);
+        $fragmentHandler = new FragmentHandler($containerMock, $requestStackMock, false);
         $fragmentHandler->addRendererService('rendererName', 'rendererName');
 
         $this->assertSame('', $fragmentHandler->render('uri', 'rendererName', []));
@@ -75,7 +75,7 @@ class FragmentHandlerTest extends PHPUnit_Framework_TestCase
         $containerMock = $this->getMock(ContainerInterface::class);
         $containerMock->expects($this->once())->method('get')->will($this->returnValue($rendererMock));
 
-        $fragmentHandler = new FragmentHandler($containerMock, false, $requestStackMock);
+        $fragmentHandler = new FragmentHandler($containerMock, $requestStackMock, false);
         $fragmentHandler->addRendererService('rendererName', 'rendererName');
 
         $this->setExpectedException(\RuntimeException::class);

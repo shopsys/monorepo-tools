@@ -15,7 +15,8 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $manualBestsellingProductFacade = $this->get(ManualBestsellingProductFacade::class);
+        $manualBestsellingProductFacade = $this
+            ->get('shopsys.shop.product.bestselling_product.manual_bestselling_product_facade');
         /* @var $manualBestsellingProductFacade \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade */
 
         $domainId = 2;

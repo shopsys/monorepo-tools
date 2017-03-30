@@ -37,7 +37,6 @@ class DomainsType extends AbstractType
             'choice_name' => function ($choice) {
                 return $choice; // Domain ID
             },
-            'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             'multiple' => true,
             'expanded' => true,
         ]);

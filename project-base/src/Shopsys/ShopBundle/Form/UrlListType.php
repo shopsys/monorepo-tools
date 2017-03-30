@@ -85,7 +85,6 @@ class UrlListType extends AbstractType
                 'choices' => $friendlyUrls,
                 'choice_label' => 'slug',
                 'choice_value' => 'slug',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ]);
             $builder->get('mainOnDomains')->add($domainId, ChoiceType::class, [
                 'required' => true,
@@ -94,7 +93,6 @@ class UrlListType extends AbstractType
                 'choices' => $friendlyUrls,
                 'choice_label' => 'slug',
                 'choice_value' => 'slug',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
                 'invalid_message' => 'Previously selected main URL dos not exist any more',
             ]);
         }

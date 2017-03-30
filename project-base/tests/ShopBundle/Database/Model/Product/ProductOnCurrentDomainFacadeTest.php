@@ -160,7 +160,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
      */
     private function createParameterFilterData(array $namesByLocale, array $valuesTextsByLocales)
     {
-        $parameterRepository = $this->getContainer()->get(ParameterRepository::class);
+        $parameterRepository = $this->getServiceByType(ParameterRepository::class);
         /* @var $parameterRepository \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository */
 
         $parameter = $parameterRepository->findParameterByNames($namesByLocale);
@@ -179,7 +179,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
      */
     private function getParameterValuesByLocalesAndTexts(array $valuesTextsByLocales)
     {
-        $em = $this->getContainer()->get(EntityManager::class);
+        $em = $this->getServiceByType(EntityManager::class);
         /* @var $em \Doctrine\ORM\EntityManager */
         $parameterValues = [];
 
@@ -202,7 +202,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
      */
     private function getPaginationResultInCategory(ProductFilterData $productFilterData, Category $category)
     {
-        $productOnCurrentDomainFacade = $this->getContainer()->get(ProductOnCurrentDomainFacade::class);
+        $productOnCurrentDomainFacade = $this->getServiceByType(ProductOnCurrentDomainFacade::class);
         /* @var $productOnCurrentDomainFacade \Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
         $page = 1;
         $limit = PHP_INT_MAX;

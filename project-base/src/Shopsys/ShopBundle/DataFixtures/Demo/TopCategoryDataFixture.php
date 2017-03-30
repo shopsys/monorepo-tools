@@ -15,7 +15,7 @@ class TopCategoryDataFixture extends AbstractReferenceFixture implements Depende
      */
     public function load(ObjectManager $manager)
     {
-        $topCategoryFacade = $this->get(TopCategoryFacade::class);
+        $topCategoryFacade = $this->get('shopsys.shop.category.top_category.top_category_facade');
         /* @var $topCategoryFacade \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade */
 
         $categories = [

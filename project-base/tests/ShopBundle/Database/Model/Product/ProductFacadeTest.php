@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Unit\Model\Product;
+namespace Tests\ShopBundle\Database\Model\Product;
 
 use ReflectionClass;
 use Shopsys\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
@@ -40,7 +40,7 @@ class ProductFacadeTest extends DatabaseTestCase
 
         $productEditData = new ProductEditData($productData);
 
-        $productFacade = $this->getContainer()->get(ProductFacade::class);
+        $productFacade = $this->getServiceByType(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
         $product = $productFacade->create($productEditData);
@@ -117,9 +117,9 @@ class ProductFacadeTest extends DatabaseTestCase
     {
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\ShopBundle\Model\Product\Product */
-        $productFacade = $this->getContainer()->get(ProductFacade::class);
+        $productFacade = $this->getServiceByType(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
 
         $reflectionClass = new ReflectionClass(Product::class);

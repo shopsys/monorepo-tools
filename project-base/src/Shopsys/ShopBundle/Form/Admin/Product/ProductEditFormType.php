@@ -145,7 +145,6 @@ class ProductEditFormType extends AbstractType
                 'choices' => $existingImages,
                 'choice_label' => 'filename',
                 'choice_value' => 'id',
-                'choices_as_values' => true, // Switches to Symfony 3 choice mode, remove after upgrade from 2.8
             ])
             ->add($builder->create('parameters', CollectionType::class, [
                     'required' => false,

@@ -45,7 +45,7 @@ class YesNoTypeTest extends FunctionalTestCase
      */
     private function getForm()
     {
-        $formFactory = $this->getContainer()->get(FormFactoryInterface::class);
+        $formFactory = $this->getServiceByType(FormFactoryInterface::class);
         /* @var $formFactory \Symfony\Component\Form\FormFactoryInterface */
 
         return $formFactory->create(YesNoType::class);

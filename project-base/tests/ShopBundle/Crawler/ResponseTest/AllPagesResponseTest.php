@@ -3,22 +3,18 @@
 namespace Tests\ShopBundle\Crawler\ResponseTest;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Tests\ShopBundle\Test\CrawlerTestCase;
 
-class AllPagesResponseTest extends DatabaseTestCase
+class AllPagesResponseTest extends CrawlerTestCase
 {
     public function adminTestableUrlsProvider()
     {
-        $domain = $this->getContainer()->get(Domain::class);
+        $domain = $this->getServiceByType(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         // DataProvider is called before setUp() - domain is not set
         $domain->switchDomainById(1);
 
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-
-        return $urlsProvider->getAdminTestableUrlsProviderData();
+        return $this->createUrlsProvider()->getAdminTestableUrlsProviderData();
     }
 
     /**
@@ -29,37 +25,25 @@ class AllPagesResponseTest extends DatabaseTestCase
      */
     public function testAdminPages($testedRouteName, $url, $expectedStatusCode)
     {
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-        $url = $urlsProvider->replaceCsrfTokensInUrl($url);
+        $url = $this->createUrlsProvider()->replaceCsrfTokensInUrl($url);
 
-        $this->getClient(false, 'superadmin', 'admin123')->request('GET', $url);
+        $client = $this->getClient(false, 'superadmin', 'admin123');
 
-        $statusCode = $this->getClient()->getResponse()->getStatusCode();
+        $this->makeRequestInTransaction($client, $url);
 
-        $this->assertSame(
-            $expectedStatusCode,
-            $statusCode,
-            sprintf(
-                'Failed asserting that status code %d for route "%s" is identical to expected %d',
-                $testedRouteName,
-                $statusCode,
-                $expectedStatusCode
-            )
-        );
+        $statusCode = $client->getResponse()->getStatusCode();
+
+        $this->assertRouteStatusCode($expectedStatusCode, $statusCode, $testedRouteName);
     }
 
     public function frontTestableUrlsProvider()
     {
-        $domain = $this->getContainer()->get(Domain::class);
+        $domain = $this->getServiceByType(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         // DataProvider is called before setUp() - domain is not set
         $domain->switchDomainById(1);
 
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-
-        return $urlsProvider->getFrontTestableUrlsProviderData();
+        return $this->createUrlsProvider()->getFrontTestableUrlsProviderData();
     }
 
     /**
@@ -71,25 +55,35 @@ class AllPagesResponseTest extends DatabaseTestCase
      */
     public function testFrontPages($testedRouteName, $url, $expectedStatusCode, $asLogged)
     {
-        $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-        /* @var $urlsProvider \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider */
-        $url = $urlsProvider->replaceCsrfTokensInUrl($url);
+        $url = $this->createUrlsProvider()->replaceCsrfTokensInUrl($url);
 
         if ($asLogged) {
-            $this->getClient(false, 'no-reply@netdevelo.cz', 'user123')->request('GET', $url);
+            $client = $this->getClient(false, 'no-reply@netdevelo.cz', 'user123');
         } else {
-            $this->getClient()->request('GET', $url);
+            $client = $this->getClient();
         }
 
-        $statusCode = $this->getClient()->getResponse()->getStatusCode();
+        $this->makeRequestInTransaction($client, $url);
 
+        $statusCode = $client->getResponse()->getStatusCode();
+
+        $this->assertRouteStatusCode($expectedStatusCode, $statusCode, $testedRouteName);
+    }
+
+    /**
+     * @param int $expectedStatusCode
+     * @param int $statusCode
+     * @param string $testedRouteName
+     */
+    private function assertRouteStatusCode($expectedStatusCode, $statusCode, $testedRouteName)
+    {
         $this->assertSame(
             $expectedStatusCode,
             $statusCode,
             sprintf(
                 'Failed asserting that status code %d for route "%s" is identical to expected %d',
-                $testedRouteName,
                 $statusCode,
+                $testedRouteName,
                 $expectedStatusCode
             )
         );
