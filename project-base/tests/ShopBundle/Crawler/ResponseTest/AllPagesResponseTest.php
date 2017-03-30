@@ -33,16 +33,7 @@ class AllPagesResponseTest extends CrawlerTestCase
 
         $statusCode = $client->getResponse()->getStatusCode();
 
-        $this->assertSame(
-            $expectedStatusCode,
-            $statusCode,
-            sprintf(
-                'Failed asserting that status code %d for route "%s" is identical to expected %d',
-                $testedRouteName,
-                $statusCode,
-                $expectedStatusCode
-            )
-        );
+        $this->assertRouteStatusCode($expectedStatusCode, $statusCode, $testedRouteName);
     }
 
     public function frontTestableUrlsProvider()
@@ -76,13 +67,23 @@ class AllPagesResponseTest extends CrawlerTestCase
 
         $statusCode = $client->getResponse()->getStatusCode();
 
+        $this->assertRouteStatusCode($expectedStatusCode, $statusCode, $testedRouteName);
+    }
+
+    /**
+     * @param int $expectedStatusCode
+     * @param int $statusCode
+     * @param string $testedRouteName
+     */
+    private function assertRouteStatusCode($expectedStatusCode, $statusCode, $testedRouteName)
+    {
         $this->assertSame(
             $expectedStatusCode,
             $statusCode,
             sprintf(
                 'Failed asserting that status code %d for route "%s" is identical to expected %d',
-                $testedRouteName,
                 $statusCode,
+                $testedRouteName,
                 $expectedStatusCode
             )
         );
