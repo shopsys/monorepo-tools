@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Form;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\ShopBundle\Component\Css\CssFacade;
+use Shopsys\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,9 +15,15 @@ class WysiwygTypeExtension extends AbstractTypeExtension
      */
     private $cssFacade;
 
-    public function __construct(CssFacade $cssFacade)
+    /**
+     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     */
+    private $localization;
+
+    public function __construct(CssFacade $cssFacade, Localization $localization)
     {
         $this->cssFacade = $cssFacade;
+        $this->localization = $localization;
     }
 
     /**
@@ -31,6 +38,7 @@ class WysiwygTypeExtension extends AbstractTypeExtension
                 'contentsCss' => [
                     'assets/admin/styles/wysiwyg_' . $cssVersion . '.css',
                 ],
+                'language' => $this->localization->getLocale(),
             ],
         ]);
     }
