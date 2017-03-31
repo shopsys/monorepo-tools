@@ -72,4 +72,12 @@ class TranslationInlineEdit extends AbstractGridInlineEdit
     {
         return false;
     }
+
+    /**
+     * @return string
+     */
+    public function getServiceName()
+    {
+        return 'shopsys.shop.localization.translation.grid.translation_inline_edit';
+    }
 }

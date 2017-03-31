@@ -71,4 +71,12 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit
 
         return $this->formFactory->create(AvailabilityFormType::class, $availabilityData);
     }
+
+    /**
+     * @return string
+     */
+    public function getServiceName()
+    {
+        return 'shopsys.shop.product.availability.availability_inline_edit';
+    }
 }

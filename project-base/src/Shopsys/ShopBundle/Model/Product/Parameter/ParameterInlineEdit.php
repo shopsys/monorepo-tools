@@ -65,4 +65,12 @@ class ParameterInlineEdit extends AbstractGridInlineEdit
 
         return $this->formFactory->create(ParameterFormType::class, $parameterData);
     }
+
+    /**
+     * @return string
+     */
+    public function getServiceName()
+    {
+        return 'shopsys.shop.product.parameter.parameter.parameter_inline_edit';
+    }
 }

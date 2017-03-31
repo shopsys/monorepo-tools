@@ -66,4 +66,12 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit
 
         return $this->formFactory->create(OrderStatusFormType::class, $orderStatusData);
     }
+
+    /**
+     * @return string
+     */
+    public function getServiceName()
+    {
+        return 'shopsys.shop.order.status.grid.order_status_inline_edit';
+    }
 }

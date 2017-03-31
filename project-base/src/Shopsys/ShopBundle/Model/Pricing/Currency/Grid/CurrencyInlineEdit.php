@@ -83,4 +83,12 @@ class CurrencyInlineEdit extends AbstractGridInlineEdit
 
         return false;
     }
+
+    /**
+     * @return string
+     */
+    public function getServiceName()
+    {
+        return 'shopsys.shop.pricing.currency.grid.currency_inline_edit';
+    }
 }

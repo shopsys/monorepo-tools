@@ -67,4 +67,12 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
 
         return $this->formFactory->create(PromoCodeFormType::class, $promoCodeData, ['promo_code' => $promoCode]);
     }
+
+    /**
+     * @return string
+     */
+    public function getServiceName()
+    {
+        return 'shopsys.shop.order.promo_code.grid.promo_code_inline_edit';
+    }
 }

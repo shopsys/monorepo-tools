@@ -427,6 +427,9 @@ services:
     tags:
       - { name: validator.constraint_validator, alias: Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomainsValidator }
 
+  shopsys.shop.country.country_inline_edit:
+    class: Shopsys\ShopBundle\Model\Country\CountryInlineEdit
+
   shopsys.shop.cookies.cookies_facade:
     class: Shopsys\ShopBundle\Model\Cookies\CookiesFacade
     arguments:
@@ -526,6 +529,9 @@ services:
   shopsys.shop.localization.number_format_repository:
     class: CommerceGuys\Intl\NumberFormat\NumberFormatRepository
 
+  shopsys.shop.localization.translation.grid.translation_inline_edit:
+    class: Shopsys\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit
+
   shopsys.shop.localization.translation.translation_edit_facade:
     class: Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade
     arguments: [%kernel.root_dir%, %kernel.cache_dir%]
@@ -560,14 +566,26 @@ services:
     arguments:
       - '@shopsys.shop.component.flash_message.bag.front'
 
+  shopsys.shop.order.promo_code.grid.promo_code_inline_edit:
+    class: Shopsys\ShopBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit
+
   shopsys.shop.order.promo_code.promo_code_facade:
     class: Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
+
+  shopsys.shop.order.status.grid.order_status_inline_edit:
+    class: Shopsys\ShopBundle\Model\Order\Status\Grid\OrderStatusInlineEdit
 
   shopsys.shop.payment.payment_facade:
     class: Shopsys\ShopBundle\Model\Payment\PaymentFacade
 
   shopsys.shop.pricing.currency.currency_facade:
     class: Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+
+  shopsys.shop.pricing.currency.grid.currency_inline_edit:
+    class: Shopsys\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit
+
+  shopsys.shop.pricing.group.grid.pricing_group_inline_edit:
+    class: Shopsys\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit
 
   shopsys.shop.pricing.group.pricing_group_facade:
     class: Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
@@ -580,8 +598,14 @@ services:
   shopsys.shop.pricing.vat.vat_facade:
     class: Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
 
+  shopsys.shop.pricing.vat.vat_inline_edit:
+    class: Shopsys\ShopBundle\Model\Pricing\Vat\VatInlineEdit
+
   shopsys.shop.product.availability.availability_facade:
     class: Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
+
+  shopsys.shop.product.availability.availability_inline_edit:
+    class: Shopsys\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit
 
   shopsys.shop.product.availability.product_availability_recalculator:
     class: Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator
@@ -606,6 +630,12 @@ services:
 
   shopsys.shop.product.flag.flag_facade:
     class: Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
+
+  shopsys.shop.product.flag.flag_inline_edit:
+    class: Shopsys\ShopBundle\Model\Product\Flag\FlagInlineEdit
+
+  shopsys.shop.product.parameter.parameter.parameter_inline_edit:
+    class: Shopsys\ShopBundle\Model\Product\Parameter\ParameterInlineEdit
 
   shopsys.shop.product.pricing.product_price_recalculator:
     class: Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
@@ -639,6 +669,9 @@ services:
 
   shopsys.shop.product.unit.unit_facade:
     class: Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
+
+  shopsys.shop.product.unit.unit_inline_edit:
+    class: Shopsys\ShopBundle\Model\Product\Unit\UnitInlineEdit
 
   # Define RedicrectController explicitly to prevent creating it on-the-fly
   # when redirecting (it causes unnecessary container rebuild).

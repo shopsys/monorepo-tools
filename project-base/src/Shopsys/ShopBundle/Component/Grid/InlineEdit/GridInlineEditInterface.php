@@ -28,4 +28,9 @@ interface GridInlineEditInterface
      * @return bool
      */
     public function canAddNewRow();
+
+    /**
+     * @return string
+     */
+    public function getServiceName();
 }
