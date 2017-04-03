@@ -5,7 +5,6 @@ imports:
 
 parameters:
   fp_js_form_validator.factory.class: Shopsys\ShopBundle\Component\Validator\JsFormValidatorFactory
-  fragment.handler.class: Shopsys\ShopBundle\Component\HttpFoundation\FragmentHandler
   prezent_doctrine_translatable.listener.class: Shopsys\ShopBundle\Model\Localization\TranslatableListener
   faker.seed: 1234
 
@@ -26,6 +25,13 @@ services:
     factory: [Faker\Factory, create]
     calls:
       - [seed, [%faker.seed%]]
+
+  fragment.handler:
+    class: Shopsys\ShopBundle\Component\HttpFoundation\FragmentHandler
+    arguments:
+      - '@service_container'
+      - '@request_stack'
+      - %kernel.debug%
 
   # disable original DefaultPhpFileExtractor
   jms_translation.extractor.file.default_php_extractor:

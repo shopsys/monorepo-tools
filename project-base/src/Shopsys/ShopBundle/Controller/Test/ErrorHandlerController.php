@@ -17,4 +17,12 @@ class ErrorHandlerController extends FrontBaseController
 
         return new Response('');
     }
+
+    /**
+     * @Route("/error-handler/exception")
+     */
+    public function exceptionAction()
+    {
+        throw new \Shopsys\ShopBundle\Controller\Test\ExpectedTestException('Expected exception');
+    }
 }
