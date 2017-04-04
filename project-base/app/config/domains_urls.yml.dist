@@ -1,6 +1,6 @@
 domains_urls:
   - id: 1
-    url: http://localhost:8080
+    url: http://127.0.0.1:8000
 
   - id: 2
-    url: http://2.localhost:8080
+    url: http://127.0.0.1:8001
