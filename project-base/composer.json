@@ -55,6 +55,7 @@
         "ext-mbstring": "*",
         "ext-mcrypt": "*",
         "ext-pdo": "*",
+        "ext-pdo_pgsql": "*",
         "ext-xml": "*",
         "arvenil/ninja-mutex": "0.4.1",
         "bmatzner/jquery-bundle": "2.2.2",
