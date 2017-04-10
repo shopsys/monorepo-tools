@@ -50,7 +50,7 @@ class SettingValueTest extends PHPUnit_Framework_TestCase
 
     public function testStoreDatetime()
     {
-        $value = new DateTime();
+        $value = new DateTime('2017-01-01 12:34:56');
         $settingValue = new SettingValue('name', $value, 1);
         $this->assertEquals($value, $settingValue->getValue());
     }
