@@ -51,6 +51,7 @@
         "php": "^7.0",
         "ext-bcmath": "*",
         "ext-curl": "*",
+        "ext-ctype": "*",
         "ext-gd": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
