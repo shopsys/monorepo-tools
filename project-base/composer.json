@@ -55,6 +55,7 @@
         "ext-gd": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
+        "ext-json": "*",
         "ext-mbstring": "*",
         "ext-mcrypt": "*",
         "ext-openssl": "*",
