@@ -404,7 +404,7 @@
         </exec>
     </target>
 
-    <target name="selenium-start" description="Start the selenium server">
+    <target name="selenium-run" description="Run the Selenium server">
         <exec
             executable="${path.chromedriver.executable}"
             logoutput="true"
@@ -413,6 +413,13 @@
         >
             <arg value="--port=4444" />
             <arg value="--url-base=wd/hub" />
+        </exec>
+    </target>
+
+    <target name="server-run" description="Runs PHP built-in web server for a chosen domain.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="bin/console" />
+            <arg value="shopsys:server:run" />
         </exec>
     </target>
 

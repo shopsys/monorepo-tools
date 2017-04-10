@@ -31,10 +31,11 @@ class ServerStartWithCustomRouterCommand extends ServerStartCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if ($input->hasParameterOption(['--env', '-e'])) {
-            $message = 'Environment passed in --env option is not supported. '
-                . 'Environment can be set by file named DEVELOPMENT, PRODUCTION or TEST in project root.';
             $io = new SymfonyStyle($input, $output);
-            $io->error($message);
+            $io->error([
+                'Environment passed in --env option is not supported.',
+                'Environment can be set by file named DEVELOPMENT, PRODUCTION or TEST in project root.',
+            ]);
 
             return 1;
         }
