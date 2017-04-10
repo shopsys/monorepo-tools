@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce308535a6d6ed7f0e604fc9c6995544",
+    "content-hash": "efe0e13d606a200a1466286e382d0c63",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -7398,6 +7398,7 @@
         "ext-bcmath": "*",
         "ext-curl": "*",
         "ext-gd": "*",
+        "ext-iconv": "*",
         "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-mcrypt": "*",
