@@ -49,6 +49,7 @@
     ],
     "require": {
         "php": "^7.0",
+        "ext-bcmath": "*",
         "ext-curl": "*",
         "ext-gd": "*",
         "ext-intl": "*",
