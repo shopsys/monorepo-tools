@@ -54,6 +54,7 @@
         "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-mcrypt": "*",
+        "ext-openssl": "*",
         "ext-pdo": "*",
         "ext-pdo_pgsql": "*",
         "ext-xml": "*",
