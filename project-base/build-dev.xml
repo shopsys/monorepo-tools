@@ -423,6 +423,18 @@
         </exec>
     </target>
 
+    <target name="standards-fix" description="Automatically fixes some coding standards violations in all files.">
+        <phingcall target="phpcs-fixer-fix" />
+        <trycatch>
+            <try>
+                <phingcall target="phpcs" />
+            </try>
+            <catch>
+                <phingcall target="phpcbf" />
+            </catch>
+        </trycatch>
+    </target>
+
     <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files.">
         <phingcall target="phpcs-fixer-fix-diff" />
         <trycatch>
