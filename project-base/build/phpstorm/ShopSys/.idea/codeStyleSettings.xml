@@ -3,16 +3,26 @@
   <component name="ProjectCodeStyleSettingsManager">
     <option name="PER_PROJECT_SETTINGS">
       <value>
-        <XML>
-          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
-        </XML>
-        <codeStyleSettings language="PHP">
+        <PHPCodeStyleSettings>
+          <option name="COMMA_AFTER_LAST_ARRAY_ELEMENT" value="true" />
+          <option name="LOWER_CASE_BOOLEAN_CONST" value="true" />
+          <option name="LOWER_CASE_NULL_CONST" value="true" />
+          <option name="VARIABLE_NAMING_STYLE" value="CAMEL_CASE" />
+          <option name="BLANK_LINE_BEFORE_RETURN_STATEMENT" value="true" />
+          <option name="FORCE_SHORT_DECLARATION_ARRAY_STYLE" value="true" />
+          <option name="PHPDOC_USE_FQCN" value="true" />
+        </PHPCodeStyleSettings>
+        <codeStyleSettings language="JSON">
           <indentOptions>
-            <option name="INDENT_SIZE" value="2" />
-            <option name="CONTINUATION_INDENT_SIZE" value="2" />
-            <option name="TAB_SIZE" value="2" />
-            <option name="USE_TAB_CHARACTER" value="true" />
+            <option name="INDENT_SIZE" value="4" />
           </indentOptions>
+        </codeStyleSettings>
+        <codeStyleSettings language="PHP">
+          <option name="KEEP_BLANK_LINES_IN_DECLARATIONS" value="0" />
+          <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
+          <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="0" />
+          <option name="BLANK_LINES_AFTER_PACKAGE" value="1" />
+          <option name="BLANK_LINES_AROUND_FIELD" value="1" />
         </codeStyleSettings>
       </value>
     </option>

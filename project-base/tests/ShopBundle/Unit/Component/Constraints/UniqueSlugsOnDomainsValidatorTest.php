@@ -10,9 +10,9 @@ use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Form\FriendlyUrlType;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
+use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
-class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest
+class UniqueSlugsOnDomainsValidatorTest extends ConstraintValidatorTestCase
 {
     /**
      * @inheritdoc
