@@ -50,8 +50,8 @@
     "require": {
         "php": "^7.0",
         "ext-bcmath": "*",
-        "ext-curl": "*",
         "ext-ctype": "*",
+        "ext-curl": "*",
         "ext-gd": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
@@ -130,8 +130,8 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-bin-dir": "bin",
-        "symfony-var-dir": "var",
         "symfony-tests-dir": "tests",
+        "symfony-var-dir": "var",
         "symfony-web-dir": "web",
         "incenteev-parameters": [
             {
