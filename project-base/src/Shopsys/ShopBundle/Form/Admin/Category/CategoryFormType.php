@@ -13,7 +13,7 @@ use Shopsys\ShopBundle\Form\MultidomainType;
 use Shopsys\ShopBundle\Form\UrlListType;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
-use Shopsys\ShopBundle\Model\Category\CategoryRepository;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
@@ -28,9 +28,9 @@ use Symfony\Component\Validator\Constraints;
 class CategoryFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
+     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
      */
-    private $categoryRepository;
+    private $categoryFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository
@@ -48,12 +48,12 @@ class CategoryFormType extends AbstractType
     private $seoSettingFacade;
 
     public function __construct(
-        CategoryRepository $categoryRepository,
+        CategoryFacade $categoryFacade,
         FeedCategoryRepository $feedCategoryRepository,
         Domain $domain,
         SeoSettingFacade $seoSettingFacade
     ) {
-        $this->categoryRepository = $categoryRepository;
+        $this->categoryFacade = $categoryFacade;
         $this->feedCategoryRepository = $feedCategoryRepository;
         $this->domain = $domain;
         $this->seoSettingFacade = $seoSettingFacade;
@@ -81,6 +81,12 @@ class CategoryFormType extends AbstractType
                     'placeholder' => $this->seoSettingFacade->getDescriptionMainPage($domainId),
                 ],
             ];
+        }
+
+        if ($options['category'] !== null) {
+            $parentChoices = $this->categoryFacade->getAllWithoutBranch($options['category']);
+        } else {
+            $parentChoices = $this->categoryFacade->getAll();
         }
 
         $builder
@@ -111,8 +117,11 @@ class CategoryFormType extends AbstractType
             ])
             ->add('parent', ChoiceType::class, [
                 'required' => false,
-                'choices' => $this->categoryRepository->getAll(),
-                'choice_label' => 'name',
+                'choices' => $parentChoices,
+                'choice_label' => function (Category $category) {
+                    $padding = str_repeat("\u{00a0}", ($category->getLevel() - 1) * 2);
+                    return $padding . $category->getName();
+                },
                 'choice_value' => 'id',
             ])
             ->add('showOnDomains', DomainsType::class, [
