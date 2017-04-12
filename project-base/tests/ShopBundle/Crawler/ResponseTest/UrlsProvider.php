@@ -186,7 +186,7 @@ class UrlsProvider
 
     /**
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
-     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter $router
      * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $tokenManager
      * @param \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
      * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
@@ -293,7 +293,7 @@ class UrlsProvider
         $routesData[] = $this->getProductListWithFilteringInCategoryWith7600ProductsRouteData();
         $routesData[] = $this->getProductWithListFilteringInCategoryWith13600ProductsRouteData();
         $routesData[] = $this->getSearchFilteringRouteData();
-        $routesData[] = $this->getMainVarinatDetailRouteData();
+        $routesData[] = $this->getMainVariantDetailRouteData();
         $routesData[] = $this->getNewPasswordWithValidHashRouteData();
 
         return $routesData;
@@ -534,7 +534,7 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getMainVarinatDetailRouteData()
+    private function getMainVariantDetailRouteData()
     {
         return [
             self::ROUTE_NAME_KEY => 'front_product_detail',
