@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Form\Front\Customer\Password\NewPasswordFormType;
 use Shopsys\ShopBundle\Form\Front\Customer\Password\ResetPasswordFormType;
 use Shopsys\ShopBundle\Model\Customer\CustomerPasswordFacade;
 use Shopsys\ShopBundle\Model\Security\LoginService;
@@ -82,7 +83,7 @@ class CustomerPasswordController extends FrontBaseController
             return $this->redirectToRoute('front_homepage');
         }
 
-        $form = $this->createForm(ResetPasswordFormType::class);
+        $form = $this->createForm(NewPasswordFormType::class);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
