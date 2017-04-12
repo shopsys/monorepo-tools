@@ -24,8 +24,11 @@ This is a recommended configuration of PHP for project development using Shopsys
 ## Recommended `php.ini` settings
 ```
 # for better performance of Symfony applications especially on Windows
-realpath_cache_size = 512k
+# source: http://symfony.com/doc/3.2/performance.html
+realpath_cache_size = 4096k
+realpath_cache_ttl = 600
 opcache.enable = 1
+opcache.max_accelerated_files = 20000
 
 # some development CLI commands can be memory consuming
 memory_limit = 512M
