@@ -12,6 +12,7 @@ use Shopsys\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\OrderDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixture;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -293,6 +294,7 @@ class UrlsProvider
         $routesData[] = $this->getProductWithListFilteringInCategoryWith13600ProductsRouteData();
         $routesData[] = $this->getSearchFilteringRouteData();
         $routesData[] = $this->getMainVarinatDetailRouteData();
+        $routesData[] = $this->getNewPasswordWithValidHashRouteData();
 
         return $routesData;
     }
@@ -537,6 +539,24 @@ class UrlsProvider
         return [
             self::ROUTE_NAME_KEY => 'front_product_detail',
             self::ROUTE_PARAMETERS_KEY => ['id' => 150],
+            self::EXPECTED_STATUS_CODE_KEY => 200,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getNewPasswordWithValidHashRouteData()
+    {
+        $customer = $this->persistentReferenceFacade->getReference(UserDataFixture::USER_WITH_RESET_PASSWORD_HASH);
+        /** @var $customer \Shopsys\ShopBundle\Model\Customer\User */
+
+        return [
+            self::ROUTE_NAME_KEY => 'front_registration_set_new_password',
+            self::ROUTE_PARAMETERS_KEY => [
+                'email' => $customer->getEmail(),
+                'hash' => $customer->getResetPasswordHash(),
+            ],
             self::EXPECTED_STATUS_CODE_KEY => 200,
         ];
     }
