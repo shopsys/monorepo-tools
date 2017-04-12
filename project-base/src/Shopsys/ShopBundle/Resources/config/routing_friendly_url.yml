@@ -1,15 +1,18 @@
+# Friendly URL routing ignores required "path" attribute.
+# see \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter
+
 front_article_detail:
-  path: /
+  path: friendly-url
   defaults: { _controller: ShopsysShopBundle:Front\Article:detail }
 
 front_product_detail:
-  path: /
+  path: friendly-url
   defaults: { _controller: ShopsysShopBundle:Front\Product:detail }
 
 front_product_list:
-  path: /
+  path: friendly-url
   defaults: { _controller: ShopsysShopBundle:Front\Product:listByCategory }
 
 front_brand_detail:
-  path: /
+  path: friendly-url
   defaults: { _controller: ShopsysShopBundle:Front\Product:listByBrand }
