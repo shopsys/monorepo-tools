@@ -28,20 +28,20 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
     {
         $vat = $this->getReference(VatDataFixture::VAT_HIGH);
         /* @var $vat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
-        $pricingGroup1 = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+        $pricingGroup1 = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup2 \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
         $defaultCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
         /* @var $defaultCurrency \Shopsys\ShopBundle\Model\Pricing\Currency\Currency */
-        $defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
+        $defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
         /* @var $defaultInStockAvailability \Shopsys\ShopBundle\Model\Product\Availability\Availability */
-        $termsAndConditions = $this->getReference(ArticleDataFixture::TERMS_AND_CONDITIONS);
+        $termsAndConditions = $this->getReference(ArticleDataFixture::ARTICLE_TERMS_AND_CONDITIONS_1);
         /* @var $termsAndConditions \Shopsys\ShopBundle\Model\Article\Article */
 
-        $cookies = $this->getReference(ArticleDataFixture::COOKIES);
+        $cookies = $this->getReference(ArticleDataFixture::ARTICLE_COOKIES_1);
         /* @var $cookies \Shopsys\ShopBundle\Model\Article\Article */
         $hashGenerator = $this->get('shopsys.shop.component.string.hash_generator');
         /* @var $hashGenerator \Shopsys\ShopBundle\Component\String\HashGenerator */
-        $defaultUnit = $this->getReference(UnitDataFixture::PCS);
+        $defaultUnit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         /* @var $defaultUnit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
 
         $orderSentText = '

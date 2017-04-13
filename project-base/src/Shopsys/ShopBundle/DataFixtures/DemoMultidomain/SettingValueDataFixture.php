@@ -23,16 +23,16 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
         $setting->clearCache();
 
-        $termsAndConditionsDomain2 = $this->getReference(ArticleDataFixture::TERMS_AND_CONDITIONS_2);
+        $termsAndConditionsDomain2 = $this->getReference(ArticleDataFixture::ARTICLE_TERMS_AND_CONDITIONS_2);
         /* @var $termsAndConditionsDomain2 \Shopsys\ShopBundle\Model\Article\Article */
         $setting->setForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditionsDomain2->getId(), 2);
 
-        $cookiesDomain2 = $this->getReference(ArticleDataFixture::COOKIES_2);
+        $cookiesDomain2 = $this->getReference(ArticleDataFixture::ARTICLE_COOKIES_2);
         /* @var $cookiesDomain2 \Shopsys\ShopBundle\Model\Article\Article */
         $setting->setForDomain(Setting::COOKIES_ARTICLE_ID, $cookiesDomain2->getId(), 2);
 
         /* @var $pricingGroup2 \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
-        $pricingGroup2 = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_2);
+        $pricingGroup2 = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_2);
         $setting->setForDomain(Setting::DEFAULT_PRICING_GROUP, $pricingGroup2->getId(), 2);
 
         $orderSentText = '

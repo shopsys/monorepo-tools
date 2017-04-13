@@ -69,46 +69,46 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
                 'usingStock' => false,
                 'stockQuantity' => null,
                 'outOfStockAction' => null,
-                'availability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
+                'availability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK),
                 'outOfStockAvailability' => null,
-                'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
-                'calculatedAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
+                'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK),
+                'calculatedAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK),
             ],
             [
                 'usingStock' => true,
                 'stockQuantity' => null,
                 'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_HIDE,
-                'availability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
+                'availability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK),
                 'outOfStockAvailability' => null,
-                'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
-                'calculatedAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
+                'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK),
+                'calculatedAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK),
             ],
             [
                 'usingStock' => true,
                 'stockQuantity' => 5,
                 'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
                 'availability' => null,
-                'outOfStockAvailability' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
-                'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
-                'calculatedAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
+                'outOfStockAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_OUT_OF_STOCK),
+                'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK),
+                'calculatedAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK),
             ],
             [
                 'usingStock' => true,
                 'stockQuantity' => 0,
                 'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
                 'availability' => null,
-                'outOfStockAvailability' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
-                'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
-                'calculatedAvailability' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
+                'outOfStockAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_OUT_OF_STOCK),
+                'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK),
+                'calculatedAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_OUT_OF_STOCK),
             ],
             [
                 'usingStock' => true,
                 'stockQuantity' => -1,
                 'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
                 'availability' => null,
-                'outOfStockAvailability' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
-                'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
-                'calculatedAvailability' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
+                'outOfStockAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_OUT_OF_STOCK),
+                'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK),
+                'calculatedAvailability' => $this->getReference(AvailabilityDataFixture::AVAILABILITY_OUT_OF_STOCK),
             ],
         ];
     }
@@ -117,16 +117,16 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
     {
         $productData = new ProductData();
 
-        $productData->availability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
+        $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
         $variant1 = Product::create($productData);
 
-        $productData->availability = $this->getReference(AvailabilityDataFixture::ON_REQUEST);
+        $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_ON_REQUEST);
         $variant2 = Product::create($productData);
 
-        $productData->availability = $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK);
+        $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_OUT_OF_STOCK);
         $variant3 = Product::create($productData);
 
-        $productData->availability = $this->getReference(AvailabilityDataFixture::PREPARING);
+        $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_PREPARING);
         $variant4 = Product::create($productData);
 
         $variants = [$variant1, $variant2, $variant3, $variant4];
@@ -165,13 +165,13 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
     public function testCalculateAvailabilityMainVariantWithNoSellableVariants()
     {
         $productData = new ProductData();
-        $productData->availability = $this->getReference(AvailabilityDataFixture::ON_REQUEST);
+        $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_ON_REQUEST);
         $variant = Product::create($productData);
 
         $mainVariant = Product::createMainVariant(new ProductData(), [$variant]);
 
         $availabilityFacadeMock = $this->getMock(AvailabilityFacade::class, ['getDefaultInStockAvailability'], [], '', false);
-        $defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
+        $defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
         $availabilityFacadeMock
             ->expects($this->any())
             ->method('getDefaultInStockAvailability')

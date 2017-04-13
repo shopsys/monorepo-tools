@@ -41,7 +41,7 @@ class ProductRepositoryTest extends DatabaseTestCase
     {
         $productRepository = $this->getServiceByType(ProductRepository::class);
         /* @var $productRepository \Shopsys\ShopBundle\Model\Product\ProductRepository */
-        $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+        $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
 
         $domain = $this->getServiceByType(Domain::class);
@@ -82,7 +82,7 @@ class ProductRepositoryTest extends DatabaseTestCase
     {
         $productRepository = $this->getServiceByType(ProductRepository::class);
         /* @var $productRepository \Shopsys\ShopBundle\Model\Product\ProductRepository */
-        $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+        $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
 
         $domain = $this->getServiceByType(Domain::class);
@@ -123,7 +123,7 @@ class ProductRepositoryTest extends DatabaseTestCase
     {
         $productRepository = $this->getServiceByType(ProductRepository::class);
         /* @var $productRepository \Shopsys\ShopBundle\Model\Product\ProductRepository */
-        $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+        $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
 
         $domain = $this->getServiceByType(Domain::class);
@@ -142,7 +142,7 @@ class ProductRepositoryTest extends DatabaseTestCase
 
     public function testOrderingByProductPriorityInCategory()
     {
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::FOOD);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_FOOD);
         /* @var $category \Shopsys\ShopBundle\DataFixtures\Demo\CategoryDataFixture */
         $product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . 70);
         $product2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . 71);
@@ -204,7 +204,7 @@ class ProductRepositoryTest extends DatabaseTestCase
     {
         $productRepository = $this->getServiceByType(ProductRepository::class);
         /* @var $productRepository \Shopsys\ShopBundle\Model\Product\ProductRepository */
-        $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+        $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
 
         $paginationResult = $productRepository->getPaginationResultForSearchListable(
@@ -229,7 +229,7 @@ class ProductRepositoryTest extends DatabaseTestCase
     {
         $productRepository = $this->getServiceByType(ProductRepository::class);
         /* @var $productRepository \Shopsys\ShopBundle\Model\Product\ProductRepository */
-        $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+        $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
 
         $paginationResult = $productRepository->getPaginationResultForListableInCategory(

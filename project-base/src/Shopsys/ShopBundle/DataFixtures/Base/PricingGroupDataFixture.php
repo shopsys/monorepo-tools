@@ -11,22 +11,22 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 
 class PricingGroupDataFixture extends AbstractReferenceFixture
 {
-    const ORDINARY_DOMAIN_1 = 'pricing_group_ordinary_domain_1';
-    const PARTNER_DOMAIN_1 = 'pricing_group_partner_domain_1';
-    const VIP_DOMAIN_1 = 'pricing_group_vip_domain_1';
+    const PRICING_GROUP_ORDINARY_DOMAIN_1 = 'pricing_group_ordinary_domain_1';
+    const PRICING_GROUP_PARTNER_DOMAIN_1 = 'pricing_group_partner_domain_1';
+    const PRICING_GROUP_VIP_DOMAIN_1 = 'pricing_group_vip_domain_1';
 
     public function load(ObjectManager $manager)
     {
         $pricingGroupData = new PricingGroupData();
 
         $pricingGroupData->name = 'Ordinary customer';
-        $this->createPricingGroup($pricingGroupData, self::ORDINARY_DOMAIN_1);
+        $this->createPricingGroup($pricingGroupData, self::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
         $pricingGroupData->name = 'Partner';
-        $this->createPricingGroup($pricingGroupData, self::PARTNER_DOMAIN_1);
+        $this->createPricingGroup($pricingGroupData, self::PRICING_GROUP_PARTNER_DOMAIN_1);
 
         $pricingGroupData->name = 'VIP customer';
-        $this->createPricingGroup($pricingGroupData, self::VIP_DOMAIN_1);
+        $this->createPricingGroup($pricingGroupData, self::PRICING_GROUP_VIP_DOMAIN_1);
     }
 
     /**

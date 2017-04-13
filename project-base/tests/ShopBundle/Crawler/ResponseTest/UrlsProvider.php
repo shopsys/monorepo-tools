@@ -129,12 +129,12 @@ class UrlsProvider
                 return ['icon' => 'delete'];
 
             case 'admin_pricinggroup_delete':
-                return ['id' => $this->persistentReferenceFacade->getReference(PricingGroupDataFixture::PARTNER_DOMAIN_1)->getId()];
+                return ['id' => $this->persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1)->getId()];
 
             case 'admin_unit_delete':
                 return [
-                    'id' => $this->persistentReferenceFacade->getReference(BaseUnitDataFixture::PCS)->getId(),
-                    'newId' => $this->persistentReferenceFacade->getReference(DemoUnitDataFixture::M3)->getId(),
+                    'id' => $this->persistentReferenceFacade->getReference(BaseUnitDataFixture::UNIT_PIECES)->getId(),
+                    'newId' => $this->persistentReferenceFacade->getReference(DemoUnitDataFixture::UNIT_CUBIC_METERS)->getId(),
                 ];
 
             case 'admin_vat_delete':

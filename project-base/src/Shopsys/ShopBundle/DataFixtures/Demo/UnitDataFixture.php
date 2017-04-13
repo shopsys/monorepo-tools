@@ -9,7 +9,7 @@ use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class UnitDataFixture extends AbstractReferenceFixture
 {
-    const M3 = 'unit_m3';
+    const UNIT_CUBIC_METERS = 'unit_m3';
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -19,7 +19,7 @@ class UnitDataFixture extends AbstractReferenceFixture
         $unitData = new UnitData();
 
         $unitData->name = ['cs' => 'm³', 'en' => 'm³'];
-        $this->createUnit($unitData, self::M3);
+        $this->createUnit($unitData, self::UNIT_CUBIC_METERS);
     }
 
     /**

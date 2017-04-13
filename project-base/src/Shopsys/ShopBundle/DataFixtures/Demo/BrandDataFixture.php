@@ -11,30 +11,30 @@ use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 
 class BrandDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    const APPLE = 'brand_apple';
-    const CANON = 'brand_canon';
-    const LG = 'brand_lg';
-    const PHILIPS = 'brand_philips';
-    const SENCOR = 'brand_sencor';
-    const A4TECH = 'brand_a4tech';
-    const BROTHER = 'brand_brother';
-    const VERBATIM = 'brand_verbatim';
-    const DLINK = 'brand_dlink';
-    const DEFENDER = 'brand_defender';
-    const DELONGHI = 'brand_delonghi';
-    const GENIUS = 'brand_genius';
-    const GIGABYTE = 'brand_gigabyte';
-    const HP = 'brand_hp';
-    const HTC = 'brand_htc';
-    const JURA = 'brand_jura';
-    const LOGITECH = 'brand_logitech';
-    const MICROSOFT = 'brand_microsoft';
-    const SAMSUNG = 'brand_samsung';
-    const SONY = 'brand_sony';
-    const ORAVA = 'brand_orava';
-    const OLYMPUS = 'brand_olympus';
-    const HYUNDAI = 'brand_hyundai';
-    const NIKON = 'brand_nikon';
+    const BRAND_APPLE = 'brand_apple';
+    const BRAND_CANON = 'brand_canon';
+    const BRAND_LG = 'brand_lg';
+    const BRAND_PHILIPS = 'brand_philips';
+    const BRAND_SENCOR = 'brand_sencor';
+    const BRAND_A4TECH = 'brand_a4tech';
+    const BRAND_BROTHER = 'brand_brother';
+    const BRAND_VERBATIM = 'brand_verbatim';
+    const BRAND_DLINK = 'brand_dlink';
+    const BRAND_DEFENDER = 'brand_defender';
+    const BRAND_DELONGHI = 'brand_delonghi';
+    const BRAND_GENIUS = 'brand_genius';
+    const BRAND_GIGABYTE = 'brand_gigabyte';
+    const BRAND_HP = 'brand_hp';
+    const BRAND_HTC = 'brand_htc';
+    const BRAND_JURA = 'brand_jura';
+    const BRAND_LOGITECH = 'brand_logitech';
+    const BRAND_MICROSOFT = 'brand_microsoft';
+    const BRAND_SAMSUNG = 'brand_samsung';
+    const BRAND_SONY = 'brand_sony';
+    const BRAND_ORAVA = 'brand_orava';
+    const BRAND_OLYMPUS = 'brand_olympus';
+    const BRAND_HYUNDAI = 'brand_hyundai';
+    const BRAND_NIKON = 'brand_nikon';
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -63,30 +63,30 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
     private function getBrandNamesIndexedByBrandConstants()
     {
         return [
-            self::APPLE => 'Apple',
-            self::CANON => 'Canon',
-            self::LG => 'LG',
-            self::PHILIPS => 'Philips',
-            self::SENCOR => 'Sencor',
-            self::A4TECH => 'A4tech',
-            self::BROTHER => 'Brother',
-            self::VERBATIM => 'Verbatim',
-            self::DLINK => 'Dlink',
-            self::DEFENDER => 'Defender',
-            self::DELONGHI => 'DeLonghi',
-            self::GENIUS => 'Genius',
-            self::GIGABYTE => 'Gigabyte',
-            self::HP => 'HP',
-            self::HTC => 'HTC',
-            self::JURA => 'JURA',
-            self::LOGITECH => 'Logitech',
-            self::MICROSOFT => 'Microsoft',
-            self::SAMSUNG => 'Samsung',
-            self::SONY => 'SONY',
-            self::ORAVA => 'Orava',
-            self::OLYMPUS => 'Olympus',
-            self::HYUNDAI => 'Hyundai',
-            self::NIKON => 'Nikon',
+            self::BRAND_APPLE => 'Apple',
+            self::BRAND_CANON => 'Canon',
+            self::BRAND_LG => 'LG',
+            self::BRAND_PHILIPS => 'Philips',
+            self::BRAND_SENCOR => 'Sencor',
+            self::BRAND_A4TECH => 'A4tech',
+            self::BRAND_BROTHER => 'Brother',
+            self::BRAND_VERBATIM => 'Verbatim',
+            self::BRAND_DLINK => 'Dlink',
+            self::BRAND_DEFENDER => 'Defender',
+            self::BRAND_DELONGHI => 'DeLonghi',
+            self::BRAND_GENIUS => 'Genius',
+            self::BRAND_GIGABYTE => 'Gigabyte',
+            self::BRAND_HP => 'HP',
+            self::BRAND_HTC => 'HTC',
+            self::BRAND_JURA => 'JURA',
+            self::BRAND_LOGITECH => 'Logitech',
+            self::BRAND_MICROSOFT => 'Microsoft',
+            self::BRAND_SAMSUNG => 'Samsung',
+            self::BRAND_SONY => 'SONY',
+            self::BRAND_ORAVA => 'Orava',
+            self::BRAND_OLYMPUS => 'Olympus',
+            self::BRAND_HYUNDAI => 'Hyundai',
+            self::BRAND_NIKON => 'Nikon',
         ];
     }
 

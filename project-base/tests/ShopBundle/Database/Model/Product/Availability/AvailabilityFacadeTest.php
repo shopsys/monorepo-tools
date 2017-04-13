@@ -23,7 +23,7 @@ class AvailabilityFacadeTest extends DatabaseTestCase
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
         $availabilityToDelete = $availabilityFacade->create(new AvailabilityData(['cs' => 'name']));
-        $availabilityToReplaceWith = $this->getReference(AvailabilityDataFixture::IN_STOCK);
+        $availabilityToReplaceWith = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
         /* @var $availabilityToReplaceWith \Shopsys\ShopBundle\Model\Product\Availability\Availability */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\ShopBundle\Model\Product\Product */

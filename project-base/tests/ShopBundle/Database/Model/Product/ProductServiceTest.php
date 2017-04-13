@@ -28,12 +28,12 @@ class ProductServiceTest extends DatabaseTestCase
         $vatData = new VatData('vat', 21);
         $vat = new Vat($vatData);
 
-        $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+        $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
         $productData = new ProductData();
         $productData->price = 1000;
         $productData->vat = $vat;
-        $productData->unit = $this->getReference(UnitDataFixture::PCS);
+        $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         $product = Product::create($productData);
 
         $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, 1000);
@@ -56,12 +56,12 @@ class ProductServiceTest extends DatabaseTestCase
         $vatData = new VatData('vat', 21);
         $vat = new Vat($vatData);
 
-        $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+        $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
         $productData = new ProductData();
         $productData->price = 1000;
         $productData->vat = $vat;
-        $productData->unit = $this->getReference(UnitDataFixture::PCS);
+        $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         $product = Product::create($productData);
 
         $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, 1000);

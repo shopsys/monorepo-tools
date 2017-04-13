@@ -9,8 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 
 class PricingGroupDataFixture extends AbstractReferenceFixture
 {
-    const ORDINARY_DOMAIN_2 = 'pricing_group_ordinary_domain_2';
-    const VIP_DOMAIN_2 = 'pricing_group_vip_domain_2';
+    const PRICING_GROUP_ORDINARY_DOMAIN_2 = 'pricing_group_ordinary_domain_2';
+    const PRICING_GROUP_VIP_DOMAIN_2 = 'pricing_group_vip_domain_2';
 
     public function load(ObjectManager $manager)
     {
@@ -18,11 +18,11 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
 
         $pricingGroupData->name = 'Obyčejný zákazník';
         $domainId = 2;
-        $this->createPricingGroup($pricingGroupData, $domainId, self::ORDINARY_DOMAIN_2);
+        $this->createPricingGroup($pricingGroupData, $domainId, self::PRICING_GROUP_ORDINARY_DOMAIN_2);
 
         $pricingGroupData->name = 'VIP zákazník';
         $domainId1 = 2;
-        $this->createPricingGroup($pricingGroupData, $domainId1, self::VIP_DOMAIN_2);
+        $this->createPricingGroup($pricingGroupData, $domainId1, self::PRICING_GROUP_VIP_DOMAIN_2);
     }
 
     /**

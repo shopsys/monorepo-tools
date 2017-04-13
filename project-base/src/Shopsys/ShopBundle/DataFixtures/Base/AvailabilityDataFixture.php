@@ -10,10 +10,10 @@ use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 
 class AvailabilityDataFixture extends AbstractReferenceFixture
 {
-    const IN_STOCK = 'availability_in_stock';
-    const ON_REQUEST = 'availability_on_request';
-    const OUT_OF_STOCK = 'availability_out_of_stock';
-    const PREPARING = 'availability_preparing';
+    const AVAILABILITY_IN_STOCK = 'availability_in_stock';
+    const AVAILABILITY_ON_REQUEST = 'availability_on_request';
+    const AVAILABILITY_OUT_OF_STOCK = 'availability_out_of_stock';
+    const AVAILABILITY_PREPARING = 'availability_preparing';
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -23,19 +23,19 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
         $availabilityData = new AvailabilityData();
         $availabilityData->name = ['cs' => 'Připravujeme', 'en' => 'Preparing'];
         $availabilityData->dispatchTime = 14;
-        $this->createAvailability($availabilityData, self::PREPARING);
+        $this->createAvailability($availabilityData, self::AVAILABILITY_PREPARING);
 
         $availabilityData->name = ['cs' => 'Skladem', 'en' => 'In stock'];
         $availabilityData->dispatchTime = 0;
-        $this->createAvailability($availabilityData, self::IN_STOCK);
+        $this->createAvailability($availabilityData, self::AVAILABILITY_IN_STOCK);
 
         $availabilityData->name = ['cs' => 'Na dotaz', 'en' => 'On request'];
         $availabilityData->dispatchTime = 7;
-        $this->createAvailability($availabilityData, self::ON_REQUEST);
+        $this->createAvailability($availabilityData, self::AVAILABILITY_ON_REQUEST);
 
         $availabilityData->name = ['cs' => 'Nedostupné', 'en' => 'Out of stock'];
         $availabilityData->dispatchTime = null;
-        $this->createAvailability($availabilityData, self::OUT_OF_STOCK);
+        $this->createAvailability($availabilityData, self::AVAILABILITY_OUT_OF_STOCK);
     }
 
     /**

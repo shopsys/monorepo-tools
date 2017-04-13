@@ -65,7 +65,7 @@ class CartWatcherServiceTest extends FunctionalTestCase
             ->setMethods(null)
             ->getMock();
 
-        $expectedPricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+        $expectedPricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         $currentCustomerMock = $this->getMockBuilder(CurrentCustomer::class)
             ->disableOriginalConstructor()
             ->setMethods(['getPricingGroup'])
@@ -102,7 +102,7 @@ class CartWatcherServiceTest extends FunctionalTestCase
             ->method('getProduct')
             ->willReturn($product);
 
-        $expectedPricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+        $expectedPricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         $currentCustomerMock = $this->getMockBuilder(CurrentCustomer::class)
             ->disableOriginalConstructor()
             ->setMethods(['getPricingGroup'])

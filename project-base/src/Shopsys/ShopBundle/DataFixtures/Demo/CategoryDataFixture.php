@@ -12,19 +12,17 @@ use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    const PREFIX = 'category_';
-
-    const ELECTRONICS = 'electronics';
-    const TV = 'tv';
-    const PHOTO = 'photo';
-    const PRINTERS = 'printers';
-    const PC = 'pc';
-    const PHONES = 'phones';
-    const COFFEE = 'coffee';
-    const BOOKS = 'books';
-    const TOYS = 'toys';
-    const GARDEN_TOOLS = 'garden_tools';
-    const FOOD = 'food';
+    const CATEGORY_ELECTRONICS = 'category_electronics';
+    const CATEGORY_TV = 'category_tv';
+    const CATEGORY_PHOTO = 'category_photo';
+    const CATEGORY_PRINTERS = 'category_printers';
+    const CATEGORY_PC = 'category_pc';
+    const CATEGORY_PHONES = 'category_phones';
+    const CATEGORY_COFFEE = 'category_coffee';
+    const CATEGORY_BOOKS = 'category_books';
+    const CATEGORY_TOYS = 'category_toys';
+    const CATEGORY_GARDEN_TOOLS = 'category_garden_tools';
+    const CATEGORY_FOOD = 'category_food';
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -43,8 +41,8 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
                 . 'video games, remote control cars, etc.), communications (telephones, cell phones, e-mail-capable laptops, etc.) '
                 . 'and home office activities (e.g., desktop computers, printers, paper shredders, etc.).',
         ];
-        $categoryData->parent = $this->getReference(CategoryRootDataFixture::ROOT);
-        $electronicsCategory = $this->createCategory($categoryData, self::ELECTRONICS);
+        $categoryData->parent = $this->getReference(CategoryRootDataFixture::CATEGORY_ROOT);
+        $electronicsCategory = $this->createCategory($categoryData, self::CATEGORY_ELECTRONICS);
 
         $categoryData->name = [
             'cs' => 'Televize, audio',
@@ -55,7 +53,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
                 . '(black-and-white), or in color, and in two or three dimensions',
         ];
         $categoryData->parent = $electronicsCategory;
-        $this->createCategory($categoryData, self::TV);
+        $this->createCategory($categoryData, self::CATEGORY_TV);
 
         $categoryData->name = [
             'cs' => 'Fotoaparáty',
@@ -65,7 +63,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
             Domain::FIRST_DOMAIN_ID => 'A camera is an optical instrument for recording or capturing images, which may be stored locally, '
                 . 'transmitted to another location, or both.',
         ];
-        $this->createCategory($categoryData, self::PHOTO);
+        $this->createCategory($categoryData, self::CATEGORY_PHOTO);
 
         $categoryData->name = [
             'cs' => 'Tiskárny',
@@ -75,7 +73,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
             Domain::FIRST_DOMAIN_ID => 'A printer is a peripheral which makes a persistent human readable representation of graphics or text on paper '
                 . 'or similar physical media.',
         ];
-        $this->createCategory($categoryData, self::PRINTERS);
+        $this->createCategory($categoryData, self::CATEGORY_PRINTERS);
 
         $categoryData->name = [
             'cs' => 'Počítače & příslušenství',
@@ -87,7 +85,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
                 . 'time-sharing models that allowed larger, more expensive minicomputer and mainframe systems to be used by many people, '
                 . 'usually at the same time.',
         ];
-        $this->createCategory($categoryData, self::PC);
+        $this->createCategory($categoryData, self::CATEGORY_PC);
 
         $categoryData->name = [
             'cs' => 'Mobilní telefony',
@@ -99,7 +97,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
                 . 'into electronic signals suitable for transmission via cables or other transmission media over long distances, '
                 . 'and replays such signals simultaneously in audible form to its user.',
         ];
-        $this->createCategory($categoryData, self::PHONES);
+        $this->createCategory($categoryData, self::CATEGORY_PHONES);
 
         $categoryData->name = [
             'cs' => 'Kávovary',
@@ -112,7 +110,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
                 . 'a cooking pot in the kettle family. Cold water is poured into a separate chamber, which is then heated up to the '
                 . 'boiling point, and directed into the funnel.',
         ];
-        $this->createCategory($categoryData, self::COFFEE);
+        $this->createCategory($categoryData, self::CATEGORY_COFFEE);
 
         $categoryData->name = [
             'cs' => 'Knihy',
@@ -124,8 +122,8 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
                 . 'is a page. A set of text-filled or illustrated pages produced in electronic format is known as an electronic book, '
                 . 'or e-book.',
         ];
-        $categoryData->parent = $this->getReference(CategoryRootDataFixture::ROOT);
-        $this->createCategory($categoryData, self::BOOKS);
+        $categoryData->parent = $this->getReference(CategoryRootDataFixture::CATEGORY_ROOT);
+        $this->createCategory($categoryData, self::CATEGORY_BOOKS);
 
         $categoryData->name = [
             'cs' => 'Hračky a další',
@@ -136,7 +134,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
                 . 'Playing with toys is an enjoyable means of training young children for life in society. Different materials are '
                 . 'used to make toys enjoyable to all ages. ',
         ];
-        $this->createCategory($categoryData, self::TOYS);
+        $this->createCategory($categoryData, self::CATEGORY_TOYS);
 
         $categoryData->name = [
             'cs' => 'Zahradní náčiní',
@@ -146,7 +144,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
             Domain::FIRST_DOMAIN_ID => 'A garden tool is any one of many tools made for gardens and gardening and overlaps with the range of tools '
                 . 'made for agriculture and horticulture. Garden tools can also be hand tools and power tools.',
         ];
-        $this->createCategory($categoryData, self::GARDEN_TOOLS);
+        $this->createCategory($categoryData, self::CATEGORY_GARDEN_TOOLS);
 
         $categoryData->name = [
             'cs' => 'Jídlo',
@@ -158,7 +156,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
                 . 'is ingested by an organism and assimilated by the organism\'s cells to provide energy, maintain life, '
                 . 'or stimulate growth.',
         ];
-        $this->createCategory($categoryData, self::FOOD);
+        $this->createCategory($categoryData, self::CATEGORY_FOOD);
     }
 
     /**
@@ -173,7 +171,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 
         $category = $categoryFacade->create($categoryData);
         if ($referenceName !== null) {
-            $this->addReference(self::PREFIX . $referenceName, $category);
+            $this->addReference($referenceName, $category);
         }
 
         return $category;

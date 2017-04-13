@@ -19,7 +19,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 {
     public function testFilterByMinimalPrice()
     {
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::TV);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_TV);
 
         $productFilterData = new ProductFilterData();
         $productFilterData->minimalPrice = 1000;
@@ -30,7 +30,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 
     public function testFilterByMaximalPrice()
     {
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::TV);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_TV);
 
         $productFilterData = new ProductFilterData();
         $productFilterData->maximalPrice = 10000;
@@ -41,7 +41,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 
     public function testFilterByStockAvailability()
     {
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHONES);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_PHONES);
 
         $productFilterData = new ProductFilterData();
         $productFilterData->inStock = true;
@@ -52,9 +52,9 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 
     public function testFilterByFlag()
     {
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
-        $flagTopProduct = $this->getReference(FlagDataFixture::TOP_PRODUCT);
+        $flagTopProduct = $this->getReference(FlagDataFixture::FLAG_TOP_PRODUCT);
         $productFilterData = new ProductFilterData();
         $productFilterData->flags = [$flagTopProduct];
         $paginationResult = $this->getPaginationResultInCategory($productFilterData, $category);
@@ -64,10 +64,10 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 
     public function testFilterByFlagsReturnsProductsWithAnyOfUsedFlags()
     {
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::BOOKS);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_BOOKS);
 
-        $flagTopProduct = $this->getReference(FlagDataFixture::TOP_PRODUCT);
-        $flagActionProduct = $this->getReference(FlagDataFixture::ACTION_PRODUCT);
+        $flagTopProduct = $this->getReference(FlagDataFixture::FLAG_TOP_PRODUCT);
+        $flagActionProduct = $this->getReference(FlagDataFixture::FLAG_ACTION_PRODUCT);
         $productFilterData = new ProductFilterData();
         $productFilterData->flags = [$flagTopProduct, $flagActionProduct];
         $paginationResult = $this->getPaginationResultInCategory($productFilterData, $category);
@@ -77,9 +77,9 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 
     public function testFilterByBrand()
     {
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
-        $brandCanon = $this->getReference(BrandDataFixture::CANON);
+        $brandCanon = $this->getReference(BrandDataFixture::BRAND_CANON);
         $productFilterData = new ProductFilterData();
         $productFilterData->brands = [$brandCanon];
         $paginationResult = $this->getPaginationResultInCategory($productFilterData, $category);
@@ -89,10 +89,10 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 
     public function testFilterByBrandsReturnsProductsWithAnyOfUsedBrands()
     {
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
-        $brandHp = $this->getReference(BrandDataFixture::HP);
-        $brandCanon = $this->getReference(BrandDataFixture::CANON);
+        $brandHp = $this->getReference(BrandDataFixture::BRAND_HP);
+        $brandCanon = $this->getReference(BrandDataFixture::BRAND_CANON);
         $productFilterData = new ProductFilterData();
         $productFilterData->brands = [$brandCanon, $brandHp];
         $paginationResult = $this->getPaginationResultInCategory($productFilterData, $category);
@@ -102,7 +102,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 
     public function testFilterByParameter()
     {
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
         $parameterFilterData = $this->createParameterFilterData(
             ['cs' => 'Rozlišení tisku'],
@@ -118,7 +118,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 
     public function testFilterByParametersUsesOrWithinTheSameParameter()
     {
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
         $parameterFilterData = $this->createParameterFilterData(
             ['cs' => 'Rozlišení tisku'],
@@ -136,7 +136,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 
     public function testFilterByParametersUsesAndWithinDistinctParameters()
     {
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
         $parameterFilterData1 = $this->createParameterFilterData(
             ['cs' => 'Rozlišení tisku'],

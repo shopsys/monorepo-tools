@@ -22,7 +22,7 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
         /* @var $manualBestsellingProductFacade \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade */
 
         $manualBestsellingProductFacade->edit(
-            $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
+            $this->getReference(CategoryDataFixture::CATEGORY_PHOTO),
             Domain::FIRST_DOMAIN_ID,
             [
                 0 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '7'),
