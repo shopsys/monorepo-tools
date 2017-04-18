@@ -24,7 +24,7 @@ class AdministratorActivity
     /**
      * @var \Shopsys\ShopBundle\Model\Administrator\Administrator
      *
-     * @ORM\ManyToOne(targetEntity="\Shopsys\ShopBundle\Model\Administrator\Administrator")
+     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Administrator\Administrator")
      * @ORM\JoinColumn(nullable=false, name="administrator_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $administrator;

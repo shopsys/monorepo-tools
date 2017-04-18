@@ -78,7 +78,7 @@ class Order
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
      *
-     * @ORM\ManyToOne(targetEntity="\Shopsys\ShopBundle\Model\Order\Status\OrderStatus")
+     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Order\Status\OrderStatus")
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
@@ -275,7 +275,7 @@ class Order
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
      *
-     * @ORM\ManyToOne(targetEntity="\Shopsys\ShopBundle\Model\Pricing\Currency\Currency")
+     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Currency\Currency")
      * @ORM\JoinColumn(nullable=false)
      */
     private $currency;
@@ -283,7 +283,7 @@ class Order
     /**
      * @var \Shopsys\ShopBundle\Model\Administrator\Administrator|null
      *
-     * @ORM\ManyToOne(targetEntity="\Shopsys\ShopBundle\Model\Administrator\Administrator")
+     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Administrator\Administrator")
      * @ORM\JoinColumn(nullable=true, name="administrator_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $createdAsAdministrator;

@@ -71,7 +71,7 @@ class DeliveryAddress
 
     /**
      * @var \Shopsys\ShopBundle\Model\Country\Country|null
-     * @ORM\ManyToOne(targetEntity="\Shopsys\ShopBundle\Model\Country\Country")
+     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Country\Country")
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=true)
      */
     private $country;
