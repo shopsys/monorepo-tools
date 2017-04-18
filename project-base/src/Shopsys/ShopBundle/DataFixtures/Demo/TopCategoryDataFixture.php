@@ -19,9 +19,9 @@ class TopCategoryDataFixture extends AbstractReferenceFixture implements Depende
         /* @var $topCategoryFacade \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade */
 
         $categories = [
-            $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::ELECTRONICS),
-            $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::BOOKS),
-            $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::TOYS),
+            $this->getReference(CategoryDataFixture::CATEGORY_ELECTRONICS),
+            $this->getReference(CategoryDataFixture::CATEGORY_BOOKS),
+            $this->getReference(CategoryDataFixture::CATEGORY_TOYS),
         ];
 
         $topCategoryFacade->saveTopCategoriesForDomain(Domain::FIRST_DOMAIN_ID, $categories);

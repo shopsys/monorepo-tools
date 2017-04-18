@@ -10,9 +10,12 @@ use Shopsys\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader;
 use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
+use Shopsys\ShopBundle\Model\Customer\User;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
+    const USER_WITH_RESET_PASSWORD_HASH = 'user_with_reset_password_hash';
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
@@ -32,7 +35,12 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
         $customersData = $loaderService->getCustomersDataByDomainId(Domain::FIRST_DOMAIN_ID);
 
         foreach ($customersData as $customerData) {
-            $customerFacade->create($customerData);
+            $customer = $customerFacade->create($customerData);
+
+            if ($customer->getId() === 1) {
+                $this->resetPassword($customer);
+                $this->addReference(self::USER_WITH_RESET_PASSWORD_HASH, $customer);
+            }
         }
     }
 
@@ -45,5 +53,19 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
             SettingValueDataFixture::class,
             CountryDataFixture::class,
         ];
+    }
+
+    /**
+     * @param \Shopsys\ShopBundle\Model\Customer\User $customer
+     */
+    private function resetPassword(User $customer)
+    {
+        $customerPasswordService = $this->get('shopsys.shop.customer.customer_password_service');
+        /* @var $customerPasswordService \Shopsys\ShopBundle\Model\Customer\CustomerPasswordService */
+        $em = $this->get('doctrine.orm.entity_manager');
+        /* @var $em \Doctrine\ORM\EntityManager */
+
+        $customerPasswordService->resetPassword($customer);
+        $em->flush($customer);
     }
 }

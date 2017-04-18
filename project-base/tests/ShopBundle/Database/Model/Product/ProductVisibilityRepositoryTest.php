@@ -27,7 +27,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
      */
     private function getDefaultProductEditData()
     {
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::ELECTRONICS);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_ELECTRONICS);
 
         $em = $this->getEntityManager();
         $vat = new Vat(new VatData('vat', 21));
@@ -41,8 +41,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productEditData->productData->hidden = false;
         $productEditData->productData->sellingDenied = false;
         $productEditData->productData->categoriesByDomainId = [1 => [$category]];
-        $productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
-        $productEditData->productData->unit = $this->getReference(UnitDataFixture::PCS);
+        $productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
+        $productEditData->productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
 
         return $productEditData;
     }
@@ -74,7 +74,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $productAgain,
-            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
+            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
             'domainId' => 1,
         ]);
         /* @var $productVisibility1 \Shopsys\ShopBundle\Model\Product\ProductVisibility */
@@ -109,7 +109,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $productAgain->getId(),
-            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
+            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
             'domainId' => 1,
         ]);
         /* @var $productVisibility1 \Shopsys\ShopBundle\Model\Product\ProductVisibility */
@@ -271,7 +271,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $product,
-            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
+            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
             'domainId' => 1,
         ]);
         /* @var $productVisibility \Shopsys\ShopBundle\Model\Product\ProductVisibility */
@@ -302,7 +302,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $product,
-            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
+            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
             'domainId' => 1,
         ]);
         /* @var $productVisibility \Shopsys\ShopBundle\Model\Product\ProductVisibility */
@@ -320,7 +320,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productPriceRecalculator = $this->getServiceByType(ProductPriceRecalculator::class);
         /* @var $productPriceRecalculator \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
-        $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::TOYS);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_TOYS);
 
         $productEditData = $this->getDefaultProductEditData();
         $productEditData->productData->categoriesByDomainId = [1 => [$category]];
@@ -335,7 +335,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $product,
-            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
+            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
             'domainId' => 1,
         ]);
         /* @var $productVisibility \Shopsys\ShopBundle\Model\Product\ProductVisibility */
@@ -366,7 +366,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $product,
-            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
+            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
             'domainId' => 1,
         ]);
 
@@ -393,7 +393,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
             $productEditData->manualInputPrices[$pricingGroup->getId()] = 10;
         }
 
-        $pricingGroupWithZeroPriceId = $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId();
+        $pricingGroupWithZeroPriceId = $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId();
 
         $productEditData->manualInputPrices[$pricingGroupWithZeroPriceId] = 0;
 
@@ -436,7 +436,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
             $productEditData->manualInputPrices[$pricingGroup->getId()] = 10;
         }
 
-        $pricingGroupWithNullPriceId = $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId();
+        $pricingGroupWithNullPriceId = $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId();
         $productEditData->manualInputPrices[$pricingGroupWithNullPriceId] = null;
 
         $product = $productFacade->create($productEditData);

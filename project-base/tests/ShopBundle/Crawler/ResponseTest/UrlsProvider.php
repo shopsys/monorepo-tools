@@ -12,6 +12,7 @@ use Shopsys\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\OrderDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixture;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -129,12 +130,12 @@ class UrlsProvider
                 return ['icon' => 'delete'];
 
             case 'admin_pricinggroup_delete':
-                return ['id' => $this->persistentReferenceFacade->getReference(PricingGroupDataFixture::PARTNER_DOMAIN_1)->getId()];
+                return ['id' => $this->persistentReferenceFacade->getReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1)->getId()];
 
             case 'admin_unit_delete':
                 return [
-                    'id' => $this->persistentReferenceFacade->getReference(BaseUnitDataFixture::PCS)->getId(),
-                    'newId' => $this->persistentReferenceFacade->getReference(DemoUnitDataFixture::M3)->getId(),
+                    'id' => $this->persistentReferenceFacade->getReference(BaseUnitDataFixture::UNIT_PIECES)->getId(),
+                    'newId' => $this->persistentReferenceFacade->getReference(DemoUnitDataFixture::UNIT_CUBIC_METERS)->getId(),
                 ];
 
             case 'admin_vat_delete':
@@ -185,7 +186,7 @@ class UrlsProvider
 
     /**
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
-     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter $router
      * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $tokenManager
      * @param \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
      * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
@@ -292,7 +293,8 @@ class UrlsProvider
         $routesData[] = $this->getProductListWithFilteringInCategoryWith7600ProductsRouteData();
         $routesData[] = $this->getProductWithListFilteringInCategoryWith13600ProductsRouteData();
         $routesData[] = $this->getSearchFilteringRouteData();
-        $routesData[] = $this->getMainVarinatDetailRouteData();
+        $routesData[] = $this->getMainVariantDetailRouteData();
+        $routesData[] = $this->getNewPasswordWithValidHashRouteData();
 
         return $routesData;
     }
@@ -532,11 +534,29 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getMainVarinatDetailRouteData()
+    private function getMainVariantDetailRouteData()
     {
         return [
             self::ROUTE_NAME_KEY => 'front_product_detail',
             self::ROUTE_PARAMETERS_KEY => ['id' => 150],
+            self::EXPECTED_STATUS_CODE_KEY => 200,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getNewPasswordWithValidHashRouteData()
+    {
+        $customer = $this->persistentReferenceFacade->getReference(UserDataFixture::USER_WITH_RESET_PASSWORD_HASH);
+        /** @var $customer \Shopsys\ShopBundle\Model\Customer\User */
+
+        return [
+            self::ROUTE_NAME_KEY => 'front_registration_set_new_password',
+            self::ROUTE_PARAMETERS_KEY => [
+                'email' => $customer->getEmail(),
+                'hash' => $customer->getResetPasswordHash(),
+            ],
             self::EXPECTED_STATUS_CODE_KEY => 200,
         ];
     }

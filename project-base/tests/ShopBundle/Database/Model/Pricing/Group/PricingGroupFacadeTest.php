@@ -42,7 +42,7 @@ class PricingGroupFacadeTest extends DatabaseTestCase
         $em = $this->getEntityManager();
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $prodcu \Shopsys\ShopBundle\Model\Product\Product */
-        $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+        $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
         $pricingGroupFacade = $this->getServiceByType(PricingGroupFacade::class);
         /* @var $pricingGroupFacade \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
@@ -83,7 +83,7 @@ class PricingGroupFacadeTest extends DatabaseTestCase
 
         $domainId = 1;
         $pricingGroupToDelete = $pricingGroupFacade->create(new PricingGroupData('name'), $domainId);
-        $pricingGroupToReplaceWith = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+        $pricingGroupToReplaceWith = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
         $user = $customerFacade->getUserById(1);
         /* @var $user \Shopsys\ShopBundle\Model\Customer\User */

@@ -21,7 +21,7 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture
 
         $domainId = 2;
         $manualBestsellingProductFacade->edit(
-            $this->getReference(DemoCategoryDataFixture::PREFIX . DemoCategoryDataFixture::PHOTO),
+            $this->getReference(DemoCategoryDataFixture::CATEGORY_PHOTO),
             $domainId,
             [$this->getReference(DemoProductDataFixture::PRODUCT_PREFIX . '7')]
         );

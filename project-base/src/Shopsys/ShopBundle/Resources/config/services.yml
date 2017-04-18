@@ -452,6 +452,9 @@ services:
   shopsys.shop.customer.customer_facade:
     class: Shopsys\ShopBundle\Model\Customer\CustomerFacade
 
+  shopsys.shop.customer.customer_password_service:
+    class: Shopsys\ShopBundle\Model\Customer\CustomerPasswordService
+
   shopsys.shop.customer.frontend_user_provider:
     class: Shopsys\ShopBundle\Model\Customer\FrontendUserProvider
 

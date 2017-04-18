@@ -9,7 +9,7 @@ use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class UnitDataFixture extends AbstractReferenceFixture
 {
-    const PCS = 'unit_pcs';
+    const UNIT_PIECES = 'unit_pcs';
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -19,7 +19,7 @@ class UnitDataFixture extends AbstractReferenceFixture
         $unitData = new UnitData();
 
         $unitData->name = ['cs' => 'ks', 'en' => 'pcs'];
-        $this->createUnit($unitData, self::PCS);
+        $this->createUnit($unitData, self::UNIT_PIECES);
     }
 
     /**

@@ -13,7 +13,7 @@ use Shopsys\ShopBundle\Model\Category\CategoryDomain;
 
 class CategoryRootDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    const ROOT = 'category_root';
+    const CATEGORY_ROOT = 'category_root';
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -23,7 +23,7 @@ class CategoryRootDataFixture extends AbstractReferenceFixture implements Depend
         $rootCategory = new Category(new CategoryData());
         $manager->persist($rootCategory);
         $manager->flush($rootCategory);
-        $this->addReference(self::ROOT, $rootCategory);
+        $this->addReference(self::CATEGORY_ROOT, $rootCategory);
 
         $categoryDomain = new CategoryDomain($rootCategory, Domain::FIRST_DOMAIN_ID);
         $manager->persist($categoryDomain);

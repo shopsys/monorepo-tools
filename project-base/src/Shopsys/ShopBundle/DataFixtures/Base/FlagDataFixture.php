@@ -9,9 +9,9 @@ use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
 
 class FlagDataFixture extends AbstractReferenceFixture
 {
-    const NEW_PRODUCT = 'flag_new_product';
-    const TOP_PRODUCT = 'flag_top_product';
-    const ACTION_PRODUCT = 'flag_action';
+    const FLAG_NEW_PRODUCT = 'flag_new_product';
+    const FLAG_TOP_PRODUCT = 'flag_top_product';
+    const FLAG_ACTION_PRODUCT = 'flag_action';
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -23,17 +23,17 @@ class FlagDataFixture extends AbstractReferenceFixture
         $flagData->name = ['cs' => 'Novinka', 'en' => 'New'];
         $flagData->rgbColor = '#efd6ff';
         $flagData->visible = true;
-        $this->createFlag($flagData, self::NEW_PRODUCT);
+        $this->createFlag($flagData, self::FLAG_NEW_PRODUCT);
 
         $flagData->name = ['cs' => 'Nejprodávanější', 'en' => 'TOP'];
         $flagData->rgbColor = '#d6fffa';
         $flagData->visible = true;
-        $this->createFlag($flagData, self::TOP_PRODUCT);
+        $this->createFlag($flagData, self::FLAG_TOP_PRODUCT);
 
         $flagData->name = ['cs' => 'Akce', 'en' => 'Action'];
         $flagData->rgbColor = '#f9ffd6';
         $flagData->visible = true;
-        $this->createFlag($flagData, self::ACTION_PRODUCT);
+        $this->createFlag($flagData, self::FLAG_ACTION_PRODUCT);
     }
 
     /**

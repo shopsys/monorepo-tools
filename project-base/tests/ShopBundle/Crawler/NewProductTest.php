@@ -70,8 +70,8 @@ class NewProductTest extends FunctionalTestCase
         $form['product_edit_form[productData][sellingFrom]'] = '1.1.1990';
         $form['product_edit_form[productData][sellingTo]'] = '1.1.2000';
         $form['product_edit_form[productData][stockQuantity]'] = '10';
-        $form['product_edit_form[productData][unit]']->select($this->getReference(UnitDataFixture::M3)->getId());
-        $form['product_edit_form[productData][availability]']->select($this->getReference(AvailabilityDataFixture::IN_STOCK)->getId());
+        $form['product_edit_form[productData][unit]']->select($this->getReference(UnitDataFixture::UNIT_CUBIC_METERS)->getId());
+        $form['product_edit_form[productData][availability]']->select($this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK)->getId());
     }
 
     /**

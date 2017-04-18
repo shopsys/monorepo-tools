@@ -23,7 +23,7 @@ class UnitFacadeTest extends DatabaseTestCase
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
         $unitToDelete = $unitFacade->create(new UnitData(['cs' => 'name']));
-        $unitToReplaceWith = $this->getReference(UnitDataFixture::PCS);
+        $unitToReplaceWith = $this->getReference(UnitDataFixture::UNIT_PIECES);
         /* @var $newUnit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\ShopBundle\Model\Product\Product */
