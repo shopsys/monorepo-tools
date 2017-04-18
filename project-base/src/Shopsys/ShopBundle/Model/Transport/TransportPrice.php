@@ -26,7 +26,7 @@ class TransportPrice
      *
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Currency\Currency")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $currency;
 
