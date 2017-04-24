@@ -23,20 +23,23 @@ This is a recommended configuration of PHP for project development using Shopsys
 
 ## Recommended `php.ini` settings
 ```
-# for better performance of Symfony applications especially on Windows
-# source: http://symfony.com/doc/3.2/performance.html
+; do not recognize code between <? and ?> tags as PHP source 
+short_open_tag = Off
+
+; for better performance of Symfony applications especially on Windows
+; source: http://symfony.com/doc/3.2/performance.html
 realpath_cache_size = 4096k
 realpath_cache_ttl = 600
 opcache.enable = 1
 opcache.max_accelerated_files = 20000
 
-# some development CLI commands can be memory consuming
+; some development CLI commands can be memory consuming
 memory_limit = 512M
 
-# enables upload of files up to 32 MB
+; enables upload of files up to 32 MB
 post_max_size = 32M
 upload_max_filesize = 32M
 
-# report all errors in development environment
+; report all errors in development environment
 error_reporting = E_ALL
 ```
