@@ -1,9 +1,9 @@
 parameters:
-    shopsys_integration_testing.class_name_by_service_id_map_filename: %kernel.cache_dir%/classNameByServiceId.json
+    shopsys_integration_testing.class_name_by_service_id_map_filename: '%kernel.cache_dir%/classNameByServiceId.json'
 
 services:
     shopsys_integration_testing.service_by_type_locator:
         class: Shopsys\IntegrationTestingBundle\ServiceLocator\ServiceByTypeLocator
         arguments:
-          - %shopsys_integration_testing.class_name_by_service_id_map_filename%
+          - '%shopsys_integration_testing.class_name_by_service_id_map_filename%'
           - '@service_container'

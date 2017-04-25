@@ -23,7 +23,7 @@ services:
   shopsys.twig.domain_extension:
     class: Shopsys\ShopBundle\Twig\DomainExtension
     arguments:
-     - %shopsys.domain_images_url_prefix%
+     - '%shopsys.domain_images_url_prefix%'
     tags:
       - { name: twig.extension }
 
@@ -64,7 +64,7 @@ services:
 
   shopsys.twig.image_extension:
     class: Shopsys\ShopBundle\Twig\ImageExtension
-    arguments: [%shopsys.front_design_image_url_prefix%]
+    arguments: ['%shopsys.front_design_image_url_prefix%']
     tags:
       - { name: twig.extension }
 
