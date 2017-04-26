@@ -2,7 +2,7 @@ services:
   Shopsys\ShopBundle\Component\Error\Reporting\ErrorReportingFromLastHourCronModule:
     class: Shopsys\ShopBundle\Component\Error\Reporting\ErrorReportingFromLastHourCronModule
     arguments:
-      - %email_for_error_reporting%
+      - '%email_for_error_reporting%'
     tags:
       - { name: shopsys.cron, hours: '*', minutes: '55' }
 

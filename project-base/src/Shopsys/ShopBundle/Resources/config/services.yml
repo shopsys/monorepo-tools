@@ -11,8 +11,8 @@ parameters:
 services:
 
   doctrine.orm.default_entity_manager:
-    class: %doctrine.orm.entity_manager.class%
-    factory: [%doctrine.orm.entity_manager.class%, create]
+    class: '%doctrine.orm.entity_manager.class%'
+    factory: ['%doctrine.orm.entity_manager.class%', create]
     arguments:
       - '@doctrine.dbal.default_connection'
       - '@doctrine.orm.default_configuration'
@@ -24,14 +24,14 @@ services:
     class: Faker\Generator
     factory: [Faker\Factory, create]
     calls:
-      - [seed, [%faker.seed%]]
+      - [seed, ['%faker.seed%']]
 
   fragment.handler:
     class: Shopsys\ShopBundle\Component\HttpFoundation\FragmentHandler
     arguments:
       - '@service_container'
       - '@request_stack'
-      - %kernel.debug%
+      - '%kernel.debug%'
 
   # disable original DefaultPhpFileExtractor
   jms_translation.extractor.file.default_php_extractor:
@@ -44,7 +44,7 @@ services:
   ninja_mutex.adapter:
     class: NinjaMutex\Lock\FlockLock
     arguments:
-      - %shopsys.root_dir%/var/lock
+      - '%shopsys.root_dir%/var/lock'
 
   sensio_framework_extra.routing.loader.annot_class:
     class: Shopsys\ShopBundle\Component\AnnotatedRouteControllerLoader
@@ -76,7 +76,7 @@ services:
   shopsys.shop.admin_navigation.menu_factory:
     class: Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory
     arguments:
-      - %shopsys.admin_navigation.config_filepath%
+      - '%shopsys.admin_navigation.config_filepath%'
       - '@security.authorization_checker'
 
   shopsys.shop.admin_navigation.menu_loader:
@@ -137,7 +137,7 @@ services:
   shopsys.shop.component.css.css_facade:
       class: Shopsys\ShopBundle\Component\Css\CssFacade
       arguments:
-        - %shopsys.css_version_filepath%
+        - '%shopsys.css_version_filepath%'
 
   shopsys.shop.component.data_fixture.persistent_reference_facade:
     class: Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade
@@ -148,24 +148,24 @@ services:
   shopsys.shop.component.doctrine.cache.metadata.permanent_php_file_cache:
       class: Shopsys\ShopBundle\Component\Doctrine\Cache\PermanentPhpFileCache
       arguments:
-        - %shopsys.doctrine.metadata_cache_directory_path%
+        - '%shopsys.doctrine.metadata_cache_directory_path%'
 
   shopsys.shop.component.doctrine.cache.query.permanent_php_file_cache:
       class: Shopsys\ShopBundle\Component\Doctrine\Cache\PermanentPhpFileCache
       arguments:
-        - %shopsys.doctrine.query_cache_directory_path%
+        - '%shopsys.doctrine.query_cache_directory_path%'
 
   shopsys.shop.component.doctrine.database_schema_facade:
       class: Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade
       arguments:
-        - %shopsys.default_db_schema_filepath%
+        - '%shopsys.default_db_schema_filepath%'
 
   shopsys.shop.component.domain:
     class: Shopsys\ShopBundle\Component\Domain\Domain
     factory: ['@shopsys.shop.component.domain.domain_factory', create]
     arguments:
-      - %shopsys.domain_config_filepath%
-      - %shopsys.domain_urls_config_filepath%
+      - '%shopsys.domain_config_filepath%'
+      - '%shopsys.domain_urls_config_filepath%'
 
   shopsys.shop.component.domain.domain_aware_security_headers_setter:
     class: Shopsys\ShopBundle\Component\Domain\DomainAwareSecurityHeadersSetter
@@ -181,7 +181,7 @@ services:
   shopsys.shop.component.domain.domain_facade:
     class: Shopsys\ShopBundle\Component\Domain\DomainFacade
     arguments:
-      - %shopsys.domain_images_dir%
+      - '%shopsys.domain_images_dir%'
 
   shopsys.shop.component.domain.domain_factory:
     class: Shopsys\ShopBundle\Component\Domain\DomainFactory
@@ -205,7 +205,7 @@ services:
   shopsys.shop.component.error.error_pages_facade:
     class: Shopsys\ShopBundle\Component\Error\ErrorPagesFacade
     arguments:
-      - %shopsys.error_pages_dir%
+      - '%shopsys.error_pages_dir%'
 
   shopsys.shop.component.error.exception_listener:
     class: Shopsys\ShopBundle\Component\Error\ExceptionListener
@@ -215,11 +215,11 @@ services:
   shopsys.shop.component.error.reporting.log_error_reporting_facade:
     class: Shopsys\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade
     arguments:
-      - %kernel.logs_dir%
+      - '%kernel.logs_dir%'
 
   shopsys.shop.component.file_upload:
     class: Shopsys\ShopBundle\Component\FileUpload\FileUpload
-    arguments: [%kernel.cache_dir%, %shopsys.uploaded_file_dir%, %shopsys.image_dir%]
+    arguments: ['%kernel.cache_dir%', '%shopsys.uploaded_file_dir%', '%shopsys.image_dir%']
 
   shopsys.shop.component.file_upload.doctrine_listener:
     class: Shopsys\ShopBundle\Component\FileUpload\DoctrineListener
@@ -253,14 +253,14 @@ services:
   shopsys.shop.component.image.directory_structure_creator:
     class: Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator
     arguments:
-      - %shopsys.image_dir%
-      - %shopsys.domain_images_dir%
+      - '%shopsys.image_dir%'
+      - '%shopsys.domain_images_dir%'
 
   shopsys.shop.component.image.image_config:
     class: Shopsys\ShopBundle\Component\Image\Config\ImageConfig
     factory: ['@shopsys.shop.component.image.image_config_loader', loadFromYaml]
     arguments:
-      - %shopsys.image_config_filepath%
+      - '%shopsys.image_config_filepath%'
 
   shopsys.shop.component.image.image_config_loader:
     class: Shopsys\ShopBundle\Component\Image\Config\ImageConfigLoader
@@ -272,11 +272,11 @@ services:
 
   shopsys.shop.component.image.image_facade:
     class: Shopsys\ShopBundle\Component\Image\ImageFacade
-    arguments: [%shopsys.image_url_prefix%]
+    arguments: ['%shopsys.image_url_prefix%']
 
   shopsys.shop.component.image.image_locator:
     class: Shopsys\ShopBundle\Component\Image\ImageLocator
-    arguments: [%shopsys.image_dir%]
+    arguments: ['%shopsys.image_dir%']
 
   shopsys.shop.component.image.processing.image_manager:
     class: Intervention\Image\ImageManager
@@ -340,8 +340,8 @@ services:
   shopsys.shop.component.sitemap.sitemap_facade:
     class: Shopsys\ShopBundle\Component\Sitemap\SitemapFacade
     arguments:
-      - %shopsys.sitemaps_dir%
-      - %shopsys.sitemaps_url_prefix%
+      - '%shopsys.sitemaps_dir%'
+      - '%shopsys.sitemaps_url_prefix%'
 
   shopsys.shop.component.sitemap.sitemap_listener:
     class: Shopsys\ShopBundle\Component\Sitemap\SitemapListener
@@ -382,7 +382,7 @@ services:
   shopsys.shop.component.translation.admin_menu_yaml_file_extractor:
     class: Shopsys\ShopBundle\Component\Translation\AdminMenuYamlFileExtractor
     arguments:
-      - %shopsys.admin_navigation.config_filepath%
+      - '%shopsys.admin_navigation.config_filepath%'
     tags:
       - { name: jms_translation.file_visitor }
 
@@ -406,7 +406,7 @@ services:
     class: Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
     factory: ['@shopsys.shop.component.uploaded_file.config.uploaded_file_config_loader', loadFromYaml]
     arguments:
-      - %shopsys.uploaded_file_config_filepath%
+      - '%shopsys.uploaded_file_config_filepath%'
 
   shopsys.shop.component.uploaded_file.config.uploaded_file_config_loader:
     class: Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfigLoader
@@ -425,8 +425,8 @@ services:
   shopsys.shop.component.uploaded_file.uploaded_file_locator:
     class: Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator
     arguments:
-      - %shopsys.uploaded_file_dir%
-      - %shopsys.uploaded_file_url_prefix%
+      - '%shopsys.uploaded_file_dir%'
+      - '%shopsys.uploaded_file_url_prefix%'
 
   shopsys.shop.component.validator.constraints.not_selected_domain_to_show:
     class: Shopsys\ShopBundle\Component\Constraints\NotSelectedDomainToShowValidator
@@ -444,7 +444,7 @@ services:
   shopsys.shop.cookies.cookies_facade:
     class: Shopsys\ShopBundle\Model\Cookies\CookiesFacade
     arguments:
-      - %kernel.environment%
+      - '%kernel.environment%'
 
   shopsys.shop.country.country_facade:
     class: Shopsys\ShopBundle\Model\Country\CountryFacade
@@ -479,24 +479,24 @@ services:
   shopsys.shop.data_fixtures.product_data_fixture_csv_reader:
     class: Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader
     arguments:
-      - %shopsys.data_fixtures.resource_products_filepath%
+      - '%shopsys.data_fixtures.resource_products_filepath%'
 
   shopsys.shop.data_fixtures.user_data_fixture_loader:
     class: Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader
     arguments:
-      - %shopsys.data_fixtures.resource_customers_filepath%
+      - '%shopsys.data_fixtures.resource_customers_filepath%'
 
   shopsys.shop.feed.category.feed_category_loader_facade:
     class: Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade
     arguments:
-      - %shopsys.heureka_category_feed_url%
-      - %shopsys.heureka_category_feed_backup_filepath%
+      - '%shopsys.heureka_category_feed_url%'
+      - '%shopsys.heureka_category_feed_backup_filepath%'
 
   shopsys.shop.feed.feed_config_facade:
     class: Shopsys\ShopBundle\Model\Feed\FeedConfigFacade
     arguments:
-      - %shopsys.feed_url_prefix%
-      - %shopsys.feed_dir%
+      - '%shopsys.feed_url_prefix%'
+      - '%shopsys.feed_dir%'
 
   shopsys.shop.feed.feed_config_repository:
     class: Shopsys\ShopBundle\Model\Feed\FeedConfigRepository
@@ -548,7 +548,7 @@ services:
 
   shopsys.shop.localization.translation.translation_edit_facade:
     class: Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade
-    arguments: [%kernel.root_dir%, %kernel.cache_dir%]
+    arguments: ['%kernel.root_dir%', '%kernel.cache_dir%']
 
   shopsys.shop.mail.mail_template_facade:
     class: Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
@@ -629,7 +629,7 @@ services:
   shopsys.shop.product.bestselling_product.cache_provider:
     class: Doctrine\Common\Cache\FilesystemCache
     arguments:
-      - %shopsys.bestselling_product.cache_directory_path%
+      - '%shopsys.bestselling_product.cache_directory_path%'
 
   shopsys.shop.product.bestselling_product.cached_bestselling_product_facade:
     class: Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
@@ -701,15 +701,15 @@ services:
 
   shopsys.shop.router.domain_router_factory:
     class: Shopsys\ShopBundle\Component\Router\DomainRouterFactory
-    arguments: [%router.resource%]
+    arguments: ['%router.resource%']
 
   shopsys.shop.router.friendly_url.friendly_url_router_factory:
     class: Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory
-    arguments: [%shopsys.router.friendly_url_router_filepath%]
+    arguments: ['%shopsys.router.friendly_url_router_filepath%']
 
   shopsys.shop.router.localized_router_factory:
     class: Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory
-    arguments: [%shopsys.router.locale_router_filepaths%]
+    arguments: ['%shopsys.router.locale_router_filepaths%']
 
   shopsys.shop.router.security.route_csrf_protector:
     class: Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector
@@ -736,7 +736,7 @@ services:
   shopsys.shop.security.filesystem.filemanager_access:
     class: Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess
     arguments:
-      - %shopsys.filemanager_upload_dir%
+      - '%shopsys.filemanager_upload_dir%'
 
   shopsys.shop.security.front_logout_handler:
     class: Shopsys\ShopBundle\Model\Security\FrontLogoutHandler
@@ -761,10 +761,10 @@ services:
   shopsys.shop.twig.javascript.javascript_compiler_service:
     class: Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService
     arguments:
-      - %shopsys.root_dir%
-      - %shopsys.web_dir%
-      - %shopsys.javascript_sources_dir%
-      - %shopsys.javascript_url_prefix%
+      - '%shopsys.root_dir%'
+      - '%shopsys.web_dir%'
+      - '%shopsys.javascript_sources_dir%'
+      - '%shopsys.javascript_url_prefix%'
 
   translation.loader.po:
     class: Shopsys\ShopBundle\Component\Translation\PoFileLoader
