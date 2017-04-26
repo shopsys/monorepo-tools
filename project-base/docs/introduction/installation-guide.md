@@ -166,3 +166,6 @@ Timezone for PHP can be set in your `php.ini` (usually located in `/etc/php.ini`
 ```
 date.timezone = "UTC"
 ```
+
+### Still struggling with installation?
+If you encountered any other problem during the installation please [file an issue](https://git.shopsys-framework.com/shopsys/shopsys-framework/issues/new) and we will help you.
