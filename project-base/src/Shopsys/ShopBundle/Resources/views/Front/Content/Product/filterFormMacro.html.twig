@@ -46,67 +46,59 @@
         {% if filterForm.flags is empty %}
             {% do filterForm.flags.setRendered %}
         {% else %}
-            <div class="box-filter__choice">
+            <div class="box-filter__choice" id="{{ filterForm.flags.vars.id }}">
                 <span class="box-filter__choice__title">
                     {{ 'Flags'|trans }}:
                 </span>
-                <div class="box-filter__choice__inputs">
-                    <div id="product_filter_form_flags">
-                        {% for flagForm in filterForm.flags %}
-                            <label class="form-choice">
-                                <span class="form-choice__input">
-                                    {{ form_widget(flagForm) }}
-                                </span>
-                                <span class="form-choice__label">
-                                    {{ flagForm.vars.label }}
-                                    {% if productFilterCountData is not null %}
-                                        <span
-                                            class="js-product-filter-count"
-                                            data-form-id="{{ flagForm.vars.id }}"
-                                        >
-                                            {% if not flagForm.vars.checked %}
-                                                ({% if filterForm.flags.vars.data is not empty %}+{% endif %}{{ productFilterCountData.countByFlagId[flagForm.vars.value]|default(0) }})
-                                            {% endif %}
-                                        </span>
+                {% for flagForm in filterForm.flags %}
+                    <label class="form-choice">
+                        <span class="form-choice__input">
+                            {{ form_widget(flagForm) }}
+                        </span>
+                        <span class="form-choice__label">
+                            {{ flagForm.vars.label }}
+                            {% if productFilterCountData is not null %}
+                                <span
+                                    class="js-product-filter-count"
+                                    data-form-id="{{ flagForm.vars.id }}"
+                                >
+                                    {% if not flagForm.vars.checked %}
+                                        ({% if filterForm.flags.vars.data is not empty %}+{% endif %}{{ productFilterCountData.countByFlagId[flagForm.vars.value]|default(0) }})
                                     {% endif %}
                                 </span>
-                            </label>
-                        {% endfor %}
-                    </div>
-                </div>
+                            {% endif %}
+                        </span>
+                    </label>
+                {% endfor %}
             </div>
         {% endif %}
 
         {% if filterForm.brands is empty %}
             {% do filterForm.brands.setRendered %}
         {% else %}
-            <div class="box-filter__choice">
+            <div class="box-filter__choice" id="{{ filterForm.brands.vars.id }}">
                 <span class="box-filter__choice__title">
                     {{ 'Brand'|trans }}:
                 </span>
-                <div class="box-filter__choice__inputs">
-                    <div id="product_filter_form_brands">
-                        {% for brandForm in filterForm.brands %}
-                            <label class="form-choice">
-                                {{ form_widget(brandForm, { attr: { class: 'form-choice__input'} }) }}
-                                <span class="form-choice__label">
-                                    {{ brandForm.vars.label }}
-                                    {% if productFilterCountData is not null %}
-                                        <span
-                                            class="js-product-filter-count"
-                                            data-form-id="{{ brandForm.vars.id }}"
-                                        >
-                                            {% set brandCount = productFilterCountData.countByBrandId[brandForm.vars.value]|default(0) %}
-                                            {% if not brandForm.vars.checked %}
-                                                ({% if filterForm.brands.vars.data is not empty and brandCount > 0 %}+{% endif %}{{ brandCount }})
-                                            {% endif %}
-                                        </span>
+                {% for brandForm in filterForm.brands %}
+                    <label class="form-choice">
+                        {{ form_widget(brandForm, { attr: { class: 'form-choice__input'} }) }}
+                        <span class="form-choice__label">
+                            {{ brandForm.vars.label }}
+                            {% if productFilterCountData is not null %}
+                                <span
+                                    class="js-product-filter-count"
+                                    data-form-id="{{ brandForm.vars.id }}"
+                                >
+                                    {% set brandCount = productFilterCountData.countByBrandId[brandForm.vars.value]|default(0) %}
+                                    {% if not brandForm.vars.checked %}
+                                        ({% if filterForm.brands.vars.data is not empty and brandCount > 0 %}+{% endif %}{{ brandCount }})
                                     {% endif %}
                                 </span>
-                            </label>
-                        {% endfor %}
-                    </div>
-                </div>
+                            {% endif %}
+                        </span>
+                    </label>
+                {% endfor %}
             </div>
         {% endif %}
 
@@ -120,35 +112,33 @@
                 <div id="{{ filterForm.parameters.vars.id }}">
                     {% for parameterId, parameterForm in filterForm.parameters %}
                         <div class="js-product-filter-parameter">
-                            <div class="box-filter__choice">
+                            <div class="box-filter__choice" id="{{ parameterForm.vars.id }}">
                                 <span class="box-filter__choice__title js-product-filter-parameter-label">
                                     {{ parameterForm.vars.label }}:
                                 </span>
-                                <div id="{{ parameterForm.vars.id }}" class="box-filter__choice__inputs">
-                                    {% for parameterValueForm in parameterForm %}
-                                        <label class="form-choice js-product-filter-parameter-value">
-                                            <span class="form-choice__input">
-                                                {{ form_widget(parameterValueForm) }}
-                                            </span>
-                                            <span class="form-choice__label">
-                                                {{ parameterValueForm.vars.label }}
-                                                {% if productFilterCountData is not null %}
-                                                    <span
-                                                        class="js-product-filter-count"
-                                                        data-form-id="{{ parameterValueForm.vars.id }}"
-                                                    >
-                                                        {% if not parameterValueForm.vars.checked %}
-                                                            (
-                                                                {%- if parameterForm.vars.data is not empty %}+{% endif -%}
-                                                                {{- productFilterCountData.countByParameterIdAndValueId[parameterId][parameterValueForm.vars.value]|default(0) -}}
-                                                            )
-                                                        {% endif %}
-                                                    </span>
-                                                {% endif %}
-                                            </span>
-                                        </label>
-                                    {% endfor %}
-                                </div>
+                                {% for parameterValueForm in parameterForm %}
+                                    <label class="form-choice js-product-filter-parameter-value">
+                                        <span class="form-choice__input">
+                                            {{ form_widget(parameterValueForm) }}
+                                        </span>
+                                        <span class="form-choice__label">
+                                            {{ parameterValueForm.vars.label }}
+                                            {% if productFilterCountData is not null %}
+                                                <span
+                                                    class="js-product-filter-count"
+                                                    data-form-id="{{ parameterValueForm.vars.id }}"
+                                                >
+                                                    {% if not parameterValueForm.vars.checked %}
+                                                        (
+                                                            {%- if parameterForm.vars.data is not empty %}+{% endif -%}
+                                                            {{- productFilterCountData.countByParameterIdAndValueId[parameterId][parameterValueForm.vars.value]|default(0) -}}
+                                                        )
+                                                    {% endif %}
+                                                </span>
+                                            {% endif %}
+                                        </span>
+                                    </label>
+                                {% endfor %}
                             </div>
                         </div>
                     {% endfor %}
