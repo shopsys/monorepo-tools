@@ -483,7 +483,7 @@
         </trycatch>
     </target>
 
-    <target name="tests-acceptance-build" description="Generates AcceptanceTesterActions.php (should run after change of Codeceptions modules or StrictWebdriver).">
+    <target name="tests-acceptance-build" description="Generates AcceptanceTesterActions.php (execute after change of Codeception modules, eg. StrictWebDriver).">
         <exec
             executable="${path.codeception.executable}"
             logoutput="true"
