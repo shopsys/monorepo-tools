@@ -3,7 +3,7 @@
 ## Requirements
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [PostgreSQL 9.4](https://wiki.postgresql.org/wiki/Detailed_installation_guides)
-* [PHP 7.x](http://php.net/manual/en/install.php) (see [Recommended PHP Configuration](recommended-php-configuration.md))
+* [PHP 7.x](http://php.net/manual/en/install.php) (see [Required PHP Configuration](required-php-configuration.md))
 * [Composer](https://getcomposer.org/doc/00-intro.md#globally)
 * [Node.js 4.x](https://nodejs.org/en/download/)
 * [npm 2.x](https://nodejs.org/en/download/)
@@ -76,7 +76,7 @@ cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
 php phing build-demo-dev
 php phing img-demo
 ```
-**For solutions to commonly encountered problems during build see section [Troubleshooting](#troubleshooting) below.**
+**For solutions to commonly encountered problems during build see section [Troubleshooting](#troubleshooting) below or you might want to check [Required PHP Configuration](required-php-configuration.md).**
 
 *Tip: See introduction into [Phing Targets](phing-targets.md) to learn how can you easily accomplish some common tasks.*
 

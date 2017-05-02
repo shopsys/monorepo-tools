@@ -1,5 +1,28 @@
-# Recommended PHP Configuration
+# Required PHP Configuration
 This is a recommended configuration of PHP for project development using Shopsys Framework.
+
+## Recommended `php.ini` settings
+```
+; do not recognize code between <? and ?> tags as PHP source 
+short_open_tag = Off
+
+; some development CLI commands can be memory consuming
+memory_limit = 512M
+
+; enables upload of files up to 32 MB
+post_max_size = 32M
+upload_max_filesize = 32M
+
+; report all errors in development environment
+error_reporting = E_ALL
+
+; for better performance of Symfony applications especially on Windows
+; source: http://symfony.com/doc/3.2/performance.html
+realpath_cache_size = 4096k
+realpath_cache_ttl = 600
+opcache.enable = 1
+opcache.max_accelerated_files = 20000
+```
 
 ## Required PHP extensions
 | Extension name | Reason                                                                                                                                                        |
@@ -20,26 +43,3 @@ This is a recommended configuration of PHP for project development using Shopsys
 | simplexml      | used by `Shopsys\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader`                                                                                    |
 | xml            | used by Phing for XML parsing                                                                                                                                 |
 | zip            | used by `Shopsys\ShopBundle\Command\ImageDemoCommand` to extract demo images                                                                                  |
-
-## Recommended `php.ini` settings
-```
-; do not recognize code between <? and ?> tags as PHP source 
-short_open_tag = Off
-
-; for better performance of Symfony applications especially on Windows
-; source: http://symfony.com/doc/3.2/performance.html
-realpath_cache_size = 4096k
-realpath_cache_ttl = 600
-opcache.enable = 1
-opcache.max_accelerated_files = 20000
-
-; some development CLI commands can be memory consuming
-memory_limit = 512M
-
-; enables upload of files up to 32 MB
-post_max_size = 32M
-upload_max_filesize = 32M
-
-; report all errors in development environment
-error_reporting = E_ALL
-```
