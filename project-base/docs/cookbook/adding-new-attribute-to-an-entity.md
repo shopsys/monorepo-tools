@@ -2,7 +2,7 @@
 
 In the following example we will add `code` field to the `Product`  entity.
 
-1. Open `\Shopsys\ShopBundle\Model\Product\Product` class and add new private field with mapping:
+1. Open [`\Shopsys\ShopBundle\Model\Product\Product`](../../src/Shopsys/ShopBundle/Model/Product/Product.php) class and add new private field with mapping:
     ```php
     class Product
     {
@@ -49,7 +49,7 @@ In the following example we will add `code` field to the `Product`  entity.
     ```
 
 ## Enable administrator to edit the `code` field
-1. Open `\Shopsys\ShopBundle\Model\Product\ProductData` data object and add public field named `code`:
+1. Open [`\Shopsys\ShopBundle\Model\Product\ProductData`](../../src/Shopsys/ShopBundle/Model/Product/ProductData.php) data object and add public field named `code`:
     ```php
     class ProductData {
         
@@ -66,8 +66,8 @@ In the following example we will add `code` field to the `Product`  entity.
     class Product {
         
         /**
-         * @param \SS6\ShopBundle\Model\Product\ProductData $productData
-         * @param \SS6\ShopBundle\Model\Product\Product[]|null $variants
+         * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
+         * @param \Shopsys\ShopBundle\Model\Product\Product[]|null $variants
          */
         private function __construct(ProductData $productData, array $variants = null) {
             // ...
@@ -75,7 +75,7 @@ In the following example we will add `code` field to the `Product`  entity.
         }
         
         /**
-         * @param \SS6\ShopBundle\Model\Product\ProductData
+         * @param \Shopsys\ShopBundle\Model\Product\ProductData
          */
         public function edit(ProductData $productData) {
             // ...
@@ -85,13 +85,13 @@ In the following example we will add `code` field to the `Product`  entity.
     }
     ```
 
-3. Also, open `\Shopsys\ShopBundle\Model\Product\ProductDataFactory` and edit `createFromProduct()` method that fills `ProductData` from `Product` entity:
+3. Also, open [`\Shopsys\ShopBundle\Model\Product\ProductDataFactory`](../../src/Shopsys/ShopBundle/Model/Product/ProductDataFactory.php) and edit `createFromProduct()` method that fills `ProductData` from `Product` entity:
     ```php
     class ProductDataFactory
     {
         /**
-         * @param \SS6\ShopBundle\Model\Product\Product $product
-         * @return \SS6\ShopBundle\Model\Product\ProductData
+         * @param \Shopsys\ShopBundle\Model\Product\Product $product
+         * @return \Shopsys\ShopBundle\Model\Product\ProductData
          */
         public function createFromProduct(Product $product)
         {
@@ -101,7 +101,7 @@ In the following example we will add `code` field to the `Product`  entity.
     }
     ```
 
-4. Next, to add the `code` field to the form in administration edit `\Shopsys\ShopBundle\Form\Admin\Product\ProductFormType`:
+4. Next, to add the `code` field to the form in administration edit [`\Shopsys\ShopBundle\Form\Admin\Product\ProductFormType`](../../src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php):
     ```php
     class ProductFormType 
     {
@@ -124,7 +124,7 @@ In the following example we will add `code` field to the `Product`  entity.
     }
     ```
 
-5. Finally, you need to render the new field in the form template `src/SS6/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig`:
+5. Finally, you need to render the new field in the form template [`src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig`](../../src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig):
     ```twig
         ...
         {% block product_partno %}
