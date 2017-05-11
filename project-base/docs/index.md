@@ -1,4 +1,4 @@
-# ShopSys Framework Knowledge Base
+# Shopsys Framework Knowledge Base
 
 ## Introduction
 * [Installation Guide](introduction/installation-guide.md)

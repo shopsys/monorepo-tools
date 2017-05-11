@@ -2,7 +2,7 @@
 
 In the following example we will add `code` field to the `Product`  entity.
 
-1. Open `\ShopSys\ShopBundle\Model\Product\Product` class and add new private field with mapping:
+1. Open `\Shopsys\ShopBundle\Model\Product\Product` class and add new private field with mapping:
     ```php
     class Product
     {
@@ -49,7 +49,7 @@ In the following example we will add `code` field to the `Product`  entity.
     ```
 
 ## Enable administrator to edit the `code` field
-1. Open `\ShopSys\ShopBundle\Model\Product\ProductData` data object and add public field named `code`:
+1. Open `\Shopsys\ShopBundle\Model\Product\ProductData` data object and add public field named `code`:
     ```php
     class ProductData {
         
@@ -85,7 +85,7 @@ In the following example we will add `code` field to the `Product`  entity.
     }
     ```
 
-3. Also, open `\ShopSys\ShopBundle\Model\Product\ProductDataFactory` and edit `createFromProduct()` method that fills `ProductData` from `Product` entity:
+3. Also, open `\Shopsys\ShopBundle\Model\Product\ProductDataFactory` and edit `createFromProduct()` method that fills `ProductData` from `Product` entity:
     ```php
     class ProductDataFactory
     {
@@ -101,7 +101,7 @@ In the following example we will add `code` field to the `Product`  entity.
     }
     ```
 
-4. Next, to add the `code` field to the form in administration edit `\ShopSys\ShopBundle\Form\Admin\Product\ProductFormType`:
+4. Next, to add the `code` field to the form in administration edit `\Shopsys\ShopBundle\Form\Admin\Product\ProductFormType`:
     ```php
     class ProductFormType 
     {
