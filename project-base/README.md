@@ -1,7 +1,7 @@
-# ShopSys Framework
+# Shopsys Framework
 
 ## Documentation
-[ShopSys Framework Documentation](docs/index.md)
+For documentation see [Shopsys Framework Knowledge Base](docs/index.md).
 
 ## Installation
 ```
