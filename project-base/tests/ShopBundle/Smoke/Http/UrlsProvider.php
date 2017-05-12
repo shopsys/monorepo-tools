@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Crawler\ResponseTest;
+namespace Tests\ShopBundle\Smoke\Http;
 
 use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\ShopBundle\Component\Domain\Domain;

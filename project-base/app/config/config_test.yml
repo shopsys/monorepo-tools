@@ -34,7 +34,7 @@ monolog:
       type: "null"
 
 security:
-  # simple login for crawler tests
+  # simple login for smoke tests
   firewalls:
     administration:
       http_basic: ~

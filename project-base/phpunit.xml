@@ -23,8 +23,8 @@
         <testsuite name="Database">
             <directory>tests/*Bundle/Database</directory>
         </testsuite>
-        <testsuite name="Crawler">
-            <directory>tests/*Bundle/Crawler</directory>
+        <testsuite name="Smoke">
+            <directory>tests/*Bundle/Smoke</directory>
         </testsuite>
         <testsuite name="Performance">
             <directory>tests/*Bundle/Performance</directory>
@@ -39,7 +39,7 @@
                 <directory>src/*/*Bundle/Resources</directory>
                 <directory>tests/*Bundle/Unit</directory>
                 <directory>tests/*Bundle/Database</directory>
-                <directory>tests/*Bundle/Crawler</directory>
+                <directory>tests/*Bundle/Smoke</directory>
                 <directory>tests/*Bundle/Performance</directory>
             </exclude>
         </whitelist>

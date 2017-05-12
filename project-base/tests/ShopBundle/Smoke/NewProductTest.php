@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Crawler;
+namespace Tests\ShopBundle\Smoke;
 
 use Shopsys\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;

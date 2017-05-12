@@ -4,7 +4,7 @@ Testing is a crucial part in development and maintenance of reliable software.
 For this reason Shopsys Framework comes with 5 types of automated tests:
 * [Unit tests](#unit-tests)
 * [Database tests](#database-tests-aka-integration-tests)
-* [Crawler tests](#crawler-tests-aka-http-smoke-tests)
+* [HTTP smoke tests](#http-smoke-tests)
 * [Acceptance tests](#acceptance-tests-aka-functional-tests-or-selenium-tests)
 * [Performance tests](#performance-tests)
 
@@ -100,7 +100,7 @@ All tests are isolated from each other thanks to database transactions. This mea
 #### Example:
 See test class [`\Tests\ShopBundle\Database\Model\Cart\CartFacadeTest`](../../tests/ShopBundle/Database/Model/Cart/CartFacadeTest.php). Notice usage of demo data instead of preparing own entities.
   
-### Crawler tests (a.k.a. HTTP smoke tests)
+### HTTP smoke tests
 Test HTTP codes returned by individual controller actions provided by the routing (e.g. product detail page should return *200 OK* for a visible product and *404 Not Found* for a hidden one).
 
 They help you prevent breaking your application by checking very wide scope of the application.
@@ -116,7 +116,7 @@ You will no longer cause *500 Server Error* on some random page by a seemingly u
 * protection from unhandled exceptions in controller actions
 
 #### Example:
-See configuration of crawler (and [performance](#performance-tests)) tests in [`\Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider`](../../tests/ShopBundle/Crawler/ResponseTest/UrlsProvider.php).
+See configuration of HTTP smoke (and [performance](#performance-tests)) tests in [`\Tests\ShopBundle\Smoke\Http\UrlsProvider`](../../tests/ShopBundle/Smoke/Http/UrlsProvider.php).
 
 ### Acceptance tests (a.k.a. functional tests or Selenium tests)
 Provide a way of fully end-to-end testing your application as if a real human used it.
@@ -142,7 +142,7 @@ Built on [Selenium](http://www.seleniumhq.org/) and [Codeception](http://codecep
 See acceptance test for product filter in administration in [`\Tests\ShopBundle\Acceptance\acceptance\AdminProductAdvancedSearchCest`](../../tests/ShopBundle/Acceptance/acceptance/AdminProductAdvancedSearchCest.php). Notice the usage of auto-wired Page objects [`LoginPage`](../../tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/LoginPage.php) and [`ProductAdvancedSearchPage`](../../tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/ProductAdvancedSearchPage.php). They provide a way to reuse code that interacts with user interface.
 
 ### Performance tests
-These tests assert that key actions do not take too long. They are similar to [crawler tests](#crawler-tests-aka-http-smoke-tests) but they measure response time as well. In addition to routes tested by crawler tests these tests also request and measure regeneration of all product feeds.
+These tests assert that key actions do not take too long. They are similar to [HTTP smoke tests]() but they measure response time as well. In addition to routes tested by HTTP smoke tests these tests also request and measure regeneration of all product feeds.
 
 Before execution of the test suite the testing database is filled with large amount of data simulating production environment of a big e-commerce project. You will no longer unknowingly slow down a page because you are developing with only a small data set.
 
@@ -160,7 +160,7 @@ It is advised to run these tests on a separate server that is not under load at 
 * preventing application collapse on production data load
 
 #### Example:
-See configuration of performance (and [crawler](#crawler-tests-aka-http-smoke-tests)) tests in [`\Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider`](../../tests/ShopBundle/Crawler/ResponseTest/UrlsProvider.php).
+See configuration of performance (and [HTTP smoke](#http-smoke-tests)) tests in [`\Tests\ShopBundle\Smoke\Http\UrlsProvider`](../../tests/ShopBundle/Smoke/Http/UrlsProvider.php).
 
 For testing performance of something else than controller actions see implementation of feed performance test in [`\Tests\ShopBundle\Performance\Feed\AllFeedsTest`](../../tests/ShopBundle/Performance/Feed/AllFeedsTest.php).
 

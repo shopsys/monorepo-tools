@@ -1,14 +1,15 @@
 <?php
 
-namespace Tests\ShopBundle\Test;
+namespace Tests\ShopBundle\Smoke\Http;
 
 use Symfony\Bundle\FrameworkBundle\Client;
-use Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider;
+use Tests\ShopBundle\Smoke\Http\UrlsProvider;
+use Tests\ShopBundle\Test\FunctionalTestCase;
 
-abstract class CrawlerTestCase extends FunctionalTestCase
+abstract class HttpSmokeTestCase extends FunctionalTestCase
 {
     /**
-     * @return \Tests\ShopBundle\Crawler\ResponseTest\UrlsProvider
+     * @return \Tests\ShopBundle\Smoke\Http\UrlsProvider
      */
     protected function createUrlsProvider()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Crawler\Localization;
+namespace Tests\ShopBundle\Smoke;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;

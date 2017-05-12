@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\ShopBundle\Crawler\ResponseTest;
+namespace Tests\ShopBundle\Smoke\Http;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Tests\ShopBundle\Test\CrawlerTestCase;
+use Tests\ShopBundle\Smoke\Http\HttpSmokeTestCase;
 
-class AllPagesResponseTest extends CrawlerTestCase
+class AllRoutesResponseTest extends HttpSmokeTestCase
 {
     public function adminTestableUrlsProvider()
     {

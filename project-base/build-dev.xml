@@ -7,10 +7,10 @@
     <target name="build-demo-ci" depends="wipe-excluding-logs,composer-dev,npm,dirs-create,domains-urls-check,assets,dump-translations-front-and-common,db-demo,grunt,img-demo,error-pages-generate,tests-acceptance-build,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
     <target name="build-demo-ci-diff" depends="wipe-excluding-logs,composer-dev,npm,dirs-create,domains-urls-check,assets,dump-translations-front-and-common,db-demo,grunt,img-demo,error-pages-generate,tests-acceptance-build,checks-ci-diff" description="Builds application for development with clean demo DB and runs CI checks on changed files."/>
 
-    <target name="checks" depends="standards,tests" description="Checks coding standards and runs unit, DB and crawler tests."/>
-    <target name="checks-diff" depends="standards-diff,tests" description="Checks coding standards on changed files and runs unit, DB and crawler tests."/>
-    <target name="checks-ci" depends="standards-ci,tests,tests-acceptance" description="Checks coding standards (incl. PhpStorm inspection) and runs unit, DB, crawler and acceptance tests."/>
-    <target name="checks-ci-diff" depends="standards-ci-diff,tests,tests-acceptance" description="Checks coding standards on changed files (incl. PhpStorm inspection) and runs unit, DB, crawler and acceptance tests."/>
+    <target name="checks" depends="standards,tests" description="Checks coding standards and runs unit, DB and smoke tests."/>
+    <target name="checks-diff" depends="standards-diff,tests" description="Checks coding standards on changed files and runs unit, DB and smoke tests."/>
+    <target name="checks-ci" depends="standards-ci,tests,tests-acceptance" description="Checks coding standards (incl. PhpStorm inspection) and runs unit, DB, smoke and acceptance tests."/>
+    <target name="checks-ci-diff" depends="standards-ci-diff,tests,tests-acceptance" description="Checks coding standards on changed files (incl. PhpStorm inspection) and runs unit, DB, smoke and acceptance tests."/>
 
     <target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint,yaml-lint" description="Checks coding standards."/>
     <target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint-diff,yaml-lint" description="Checks coding standards on changed files."/>
@@ -19,7 +19,7 @@
 
     <target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-migrations,test-db-fixtures-demo-singledomain,test-create-domains-data,test-generate-friendly-urls,test-db-fixtures-demo-multidomain,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
     <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
-    <target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-crawler" description="Runs unit, database and crawler tests on a newly built test database."/>
+    <target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-smoke" description="Runs unit, database and smoke tests on a newly built test database."/>
 
     <target name="tests-performance-run" depends="clean,test-db-performance,tests-performance-warmup,tests-performance" description="Runs performance tests on a newly built test database with performance data."/>
 
@@ -495,7 +495,7 @@
         </exec>
     </target>
 
-    <target name="tests-crawler" description="Runs crawler/smoke tests.">
+    <target name="tests-smoke" description="Runs smoke tests.">
         <if>
             <istrue value="${is-multidomain}" />
             <then>
@@ -507,7 +507,7 @@
                 >
                     <arg value="--colors=always"/>
                     <arg value="--testsuite"/>
-                    <arg value="Crawler"/>
+                    <arg value="Smoke"/>
                     <arg value="--exclude-group"/>
                     <arg value="singledomain"/>
                 </exec>
@@ -522,7 +522,7 @@
                 >
                     <arg value="--colors=always"/>
                     <arg value="--testsuite"/>
-                    <arg value="Crawler"/>
+                    <arg value="Smoke"/>
                     <arg value="--exclude-group"/>
                     <arg value="multidomain"/>
                 </exec>

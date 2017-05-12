@@ -12,9 +12,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Tests\ShopBundle\Performance\Feed\PerformanceResultsCsvExporter;
 use Tests\ShopBundle\Performance\Feed\PerformanceTestSample;
 use Tests\ShopBundle\Performance\JmeterCsvReporter;
-use Tests\ShopBundle\Test\CrawlerTestCase;
+use Tests\ShopBundle\Smoke\Http\HttpSmokeTestCase;
 
-class AllFeedsTest extends CrawlerTestCase
+class AllFeedsTest extends HttpSmokeTestCase
 {
     const MAX_DURATION_FEED_SECONDS = 180;
     const MAX_DURATION_DELIVERY_FEED_SECONDS = 20;
