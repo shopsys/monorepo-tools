@@ -3,7 +3,7 @@
     Shopsys = window.Shopsys || {};
     Shopsys.newsletterSubscriptionForm = Shopsys.newsletterSubscriptionForm || {};
 
-    var subscriptionFormSelector = 'form[name="newsletter_subscription_form"]';
+    var subscriptionFormSelector = 'form[name="subscription_form"]';
 
     Shopsys.register.registerCallback(function ($container) {
         $container.filterAllNodes(subscriptionFormSelector)
@@ -25,7 +25,7 @@
 
         // We must select again from modified DOM, because replaceWith() does not change previous jQuery collection.
         var $newContent = $(subscriptionFormSelector);
-        var $emailInput = $newContent.find('input[name="newsletter_subscription_form[email]"]');
+        var $emailInput = $newContent.find('input[name="subscription_form[email]"]');
 
         Shopsys.register.registerNewContent($newContent);
         if ($newContent.data('success')) {
