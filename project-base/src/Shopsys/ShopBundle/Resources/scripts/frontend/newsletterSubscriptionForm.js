@@ -7,10 +7,10 @@
 
     Shopsys.register.registerCallback(function ($container) {
         $container.filterAllNodes(subscriptionFormSelector)
-            .bind('ajaxSumbit', Shopsys.newsletterSubscriptionForm.ajaxSumbit);
+            .bind('ajaxSubmit', Shopsys.newsletterSubscriptionForm.ajaxSubmit);
     });
 
-    Shopsys.newsletterSubscriptionForm.ajaxSumbit = function () {
+    Shopsys.newsletterSubscriptionForm.ajaxSubmit = function () {
         Shopsys.ajax({
             loaderElement: 'body',
             url: $(this).attr('action'),

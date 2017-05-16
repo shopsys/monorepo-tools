@@ -4,10 +4,10 @@
     Shopsys.contactForm = Shopsys.contactForm || {};
 
     Shopsys.register.registerCallback(function ($container) {
-        $container.filterAllNodes('form[name="contact_form"]').bind('contactFormAjaxSumbit', Shopsys.contactForm.ajaxSumbit);
+        $container.filterAllNodes('form[name="contact_form"]').bind('contactFormAjaxSubmit', Shopsys.contactForm.ajaxSubmit);
     });
 
-    Shopsys.contactForm.ajaxSumbit = function (event) {
+    Shopsys.contactForm.ajaxSubmit = function (event) {
         Shopsys.ajax({
             loaderElement: '#js-contact-form-container',
             url: $(this).attr('action'),
