@@ -9,9 +9,9 @@ use Tests\ShopBundle\Performance\Page\PerformanceTestSample;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSamplesAggregator;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSummaryPrinter;
-use Tests\ShopBundle\Smoke\Http\HttpSmokeTestCase;
+use Tests\ShopBundle\Performance\PerformanceTestCase;
 
-class AllPagesTest extends HttpSmokeTestCase
+class AllPagesTest extends PerformanceTestCase
 {
     const PASSES = 5;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Database\Tests\Smoke\Http;
+namespace Tests\ShopBundle\Database\Tests\Performance;
 
 use ReflectionClass;
 use Shopsys\ShopBundle\Component\Domain\Domain;
@@ -8,7 +8,7 @@ use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
 use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Tests\ShopBundle\Smoke\Http\UrlsProvider;
+use Tests\ShopBundle\Performance\UrlsProvider;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class UrlsProviderTest extends FunctionalTestCase

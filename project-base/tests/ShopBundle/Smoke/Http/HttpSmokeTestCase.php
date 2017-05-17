@@ -2,41 +2,120 @@
 
 namespace Tests\ShopBundle\Smoke\Http;
 
-use Symfony\Bundle\FrameworkBundle\Client;
-use Tests\ShopBundle\Smoke\Http\UrlsProvider;
-use Tests\ShopBundle\Test\FunctionalTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-abstract class HttpSmokeTestCase extends FunctionalTestCase
+abstract class HttpSmokeTestCase extends KernelTestCase
 {
     /**
-     * @return \Tests\ShopBundle\Smoke\Http\UrlsProvider
+     * Sets up the fixture, for example, open a network connection.
+     * This method is called before data provider is executed and before each test.
      */
-    protected function createUrlsProvider()
+    protected function setUp()
     {
-        $container = $this->getContainer();
+        parent::setUp();
 
-        return new UrlsProvider(
-            $container->get('shopsys.shop.component.data_fixture.persistent_reference_facade'),
-            $container->get('shopsys.shop.router.current_domain_router'),
-            $container->get('security.csrf.token_manager'),
-            $container->get('shopsys.shop.router.security.route_csrf_protector'),
-            $container->get('shopsys.shop.component.domain')
+        static::bootKernel([
+            'environment' => 'test',
+            'debug' => false,
+        ]);
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Smoke\Http\TestCaseConfig $config
+     * @dataProvider httpResponseTestDataProvider
+     */
+    final public function testHttpResponse(TestCaseConfig $config)
+    {
+        $request = $this->createRequest($config);
+
+        $response = $this->handleRequest($request);
+
+        $this->assertResponse($response, $config);
+    }
+
+    /**
+     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig[][]
+     */
+    final public function httpResponseTestDataProvider()
+    {
+        static::setUp();
+
+        $router = $this->getRouter();
+        $routeConfigsBuilder = new RouteConfigsBuilder($router);
+
+        $this->customizeRouteConfigs($routeConfigsBuilder);
+        return array_map(
+            function (TestCaseConfig $config) {
+                return [$config];
+            },
+            $routeConfigsBuilder->getTestCaseConfigs()
         );
     }
 
     /**
-     * @param \Symfony\Bundle\FrameworkBundle\Client $client
-     * @param string $url
+     * @return \Symfony\Component\Routing\RouterInterface
      */
-    protected function makeRequestInTransaction(Client $client, $url)
+    protected function getRouter()
     {
-        $clientEntityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $clientEntityManager \Doctrine\ORM\EntityManager */
+        return static::$kernel->getContainer()->get('router');
+    }
 
-        $clientEntityManager->beginTransaction();
+    /**
+     * This method should be implemented to customize and configure the test cases for individual routes
+     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigsBuilder $routeConfigsBuilder
+     */
+    abstract protected function customizeRouteConfigs(RouteConfigsBuilder $routeConfigsBuilder);
 
-        $client->request('GET', $url);
+    /**
+     * @param \Tests\ShopBundle\Smoke\Http\TestCaseConfig $config
+     * @return \Symfony\Component\HttpFoundation\Request
+     */
+    protected function createRequest(TestCaseConfig $config)
+    {
+        $router = $this->getRouter();
+        $uri = $router->generate($config->getRouteName(), $config->getParameters());
 
-        $clientEntityManager->rollback();
+        $request = Request::create($uri);
+
+        if ($config->getUsername() !== null) {
+            $request->server->set('PHP_AUTH_USER', $config->getUsername());
+            $request->headers->set('PHP_AUTH_USER', $config->getUsername());
+
+            if ($config->getPassword() !== null) {
+                $request->server->set('PHP_AUTH_PW', $config->getPassword());
+            }
+            $request->headers->add($request->server->getHeaders());
+        }
+
+        return $request;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function handleRequest(Request $request)
+    {
+        return static::$kernel->handle($request);
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Response $response
+     * @param \Tests\ShopBundle\Smoke\Http\TestCaseConfig $config
+     */
+    protected function assertResponse(Response $response, TestCaseConfig $config)
+    {
+        $this->assertSame(
+            $config->getExpectedStatusCode(),
+            $response->getStatusCode(),
+            sprintf(
+                'Failed asserting that status code %d for route "%s" is identical to expected %d',
+                $response->getStatusCode(),
+                $config->getRouteName(),
+                $config->getExpectedStatusCode()
+            )
+        );
     }
 }
