@@ -16,29 +16,6 @@ class HttpSmokeTest extends HttpSmokeTestCase
 {
     const DEFAULT_ID_VALUE = 1;
 
-    const IGNORED_ROUTE_NAMES = [
-        // protected by csrf token
-        'admin_customer_loginasuser',
-        // used only for internal setting of selected domain by tab control in admin
-        'admin_domain_selectdomain',
-        // do not rewrite XML feed by test products
-        'admin_feed_generate',
-        // used by firewall to catch login requests
-        // http://symfony.com/doc/current/reference/configuration/security.html#check-path
-        'admin_login_check',
-        // when tests are processed, there are no images in the shop
-        'front_image',
-        // when tests are processed, there are no images in the shop
-        'front_image_without_type',
-        // used by firewall to catch login requests
-        // http://symfony.com/doc/current/reference/configuration/security.html#check-path
-        'front_login_check',
-        // in TEST environment is different security configuration
-        'admin_logout',
-        // temporarily not tested until it will be optimized at US-1517
-        'admin_unit_delete',
-    ];
-
     protected function setUp()
     {
         parent::setUp();
@@ -66,32 +43,74 @@ class HttpSmokeTest extends HttpSmokeTestCase
         $routeConfigsBuilder
             ->customize(function (RouteConfig $config) {
                 if (!$config->isMethodAllowed('GET')) {
-                    $config->ignore();
+                    $config->addNote('Only routes supporting GET method are tested.')
+                        ->ignore();
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if (preg_match('~^(/admin)?/_~', $config->getRoutePath())) {
-                    $config->ignore();
+                    $config->addNote('Internal routes (prefixed with "/_") are not tested.')
+                        ->ignore();
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteCondition() === 'request.isXmlHttpRequest()') {
-                    $config->ignore();
-                }
-            })
-            ->customize(function (RouteConfig $config) {
-                if (in_array($config->getRouteName(), self::IGNORED_ROUTE_NAMES, true)) {
-                    $config->ignore();
+                    $config->addNote('AJAX-only routes are not tested.')
+                        ->ignore();
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if (!preg_match('~^(admin|front)_~', $config->getRouteName())) {
-                    $config->ignore();
+                    $config->addNote('Only routes for front-end and administration are tested.')
+                        ->ignore();
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if (in_array($config->getRouteName(), ['admin_login_check', 'front_login_check'], true)) {
+                    $config->addNote('Used by firewall to catch login requests.')
+                        ->addNote('http://symfony.com/doc/current/reference/configuration/security.html#check-path')
+                        ->ignore();
+                }
+            })->customize(function (RouteConfig $config) {
+                if (in_array($config->getRouteName(), ['front_image', 'front_image_without_type'], true)) {
+                    $config->addNote('There are no images in the shop when the tests are processed.')
+                        ->ignore();
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'admin_customer_loginasuser') {
+                    $config->addNote('Protected by CSRF token.')
+                        ->ignore();
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'admin_domain_selectdomain') {
+                    $config->addNote('Used only for internal setting of selected domain by tab control in admin.')
+                        ->ignore();
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'admin_feed_generate') {
+                    $config->addNote('Do not rewrite XML feed by test products.')
+                        ->ignore();
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'admin_logout') {
+                    $config->addNote('There is different security configuration in TEST environment.')
+                        ->ignore();
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'admin_unit_delete') {
+                    $config->addNote('temporarily not tested until it will be optimized in US-1517.')
+                        ->ignore();
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'admin_domain_list' && $this->isSingleDomain()) {
-                    $config->ignore();
+                    $config->addNote('Domain list in administration is not available when only 1 domain exists.')
+                        ->ignore();
                 }
             });
     }
