@@ -39,16 +39,6 @@ class HttpSmokeTest extends HttpSmokeTestCase
         'admin_unit_delete',
     ];
 
-    const EXPECT_REDIRECT_ROUTE_NAMES = [
-        'admin_login',
-        'admin_login_sso',
-        'front_customer_login_as_remembered_user',
-        'front_logout',
-        'front_order_index',
-        'front_order_sent',
-        'front_promo_code_remove',
-    ];
-
     protected function setUp()
     {
         parent::setUp();
@@ -115,10 +105,27 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 }
             })
             ->customize(function (RouteConfig $config) {
-                if (preg_match('~/delete/~', $config->getRoutePath())
-                    || in_array($config->getRouteName(), self::EXPECT_REDIRECT_ROUTE_NAMES, true)
-                ) {
-                    $config->addNote('Route expects redirect by 302.')
+                if (preg_match('~_delete$~', $config->getRouteName())) {
+                    $config->addNote('Expect redirect by 302 for any delete action.')
+                        ->expectStatusCode(302);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'admin_login') {
+                    $config->addNote('Admin login should redirect by 302.')
+                        ->expectStatusCode(302);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                $routeNames = ['admin_login_sso', 'front_customer_login_as_remembered_user', 'front_promo_code_remove'];
+                if (in_array($config->getRouteName(), $routeNames, true)) {
+                    $config->addNote(sprintf('Route "%s" should always just redirect.', $config->getRouteName()))
+                        ->expectStatusCode(302);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if (in_array($config->getRouteName(), ['front_order_index', 'front_order_sent'], true)) {
+                    $config->addNote('Order page should redirect by 302 as the cart is empty by default.')
                         ->expectStatusCode(302);
                 }
             })
@@ -157,6 +164,8 @@ class HttpSmokeTest extends HttpSmokeTestCase
                         $config->addNote('Add CSRF token for logout action (configured in app/security.yml).')
                             ->setParameter('_csrf_token', $token->getValue());
                     });
+                    $config->addNote('Logout action should redirect by 302')
+                        ->expectStatusCode(302);
                 }
             })
             ->customize(function (RouteConfig $config) {
@@ -285,7 +294,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 }
             })
             ->customize(function (RouteConfig $config) {
-                if (preg_match('@_delete$@', $config->getRouteName())) {
+                if (preg_match('~_delete$~', $config->getRouteName())) {
                     $config->delayCustomizationUntilTestExecution(function (TestCaseConfig $config) {
                         $routeCsrfProtector = self::$kernel->getContainer()
                             ->get('shopsys.shop.router.security.route_csrf_protector');
