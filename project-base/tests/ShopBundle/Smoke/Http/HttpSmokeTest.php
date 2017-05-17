@@ -114,6 +114,9 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if ($config->getRouteName() === 'admin_login') {
                     $config->addNote('Admin login should redirect by 302.')
                         ->expectStatusCode(302);
+                    $config->addTestCase('Admin login should not redirect for users that are not logged in yet.')
+                        ->setCredentials(null, null)
+                        ->expectStatusCode(200);
                 }
             })
             ->customize(function (RouteConfig $config) {

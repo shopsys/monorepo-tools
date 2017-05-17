@@ -109,7 +109,7 @@ class RouteConfig
             $testCaseConfigs[] = $this->defaultTestCaseConfig;
             foreach ($this->additionalTestCaseConfigs as $additionalTestCaseConfig) {
                 $testCaseConfig = clone $this->defaultTestCaseConfig;
-                if ($additionalTestCaseConfig->getUsername() !== null) {
+                if ($additionalTestCaseConfig->hasCredentialsChanged()) {
                     $testCaseConfig->setCredentials(
                         $additionalTestCaseConfig->getUsername(),
                         $additionalTestCaseConfig->getPassword()
@@ -142,8 +142,8 @@ class RouteConfig
     }
 
     /**
-     * @param $username
-     * @param $password
+     * @param string|null $username
+     * @param string|null $password
      * @return \Tests\ShopBundle\Smoke\Http\RouteConfig
      */
     public function setCredentials($username, $password)

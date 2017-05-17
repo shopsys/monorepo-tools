@@ -40,6 +40,11 @@ class TestCaseConfig
     private $delayedCustomizations;
 
     /**
+     * @var bool
+     */
+    private $credentialsChanged;
+
+    /**
      * @param string $routeName
      * @param int|null $expectedStatusCode
      */
@@ -50,6 +55,7 @@ class TestCaseConfig
         $this->parameters = [];
         $this->notes = [];
         $this->delayedCustomizations = [];
+        $this->credentialsChanged = false;
     }
 
     /**
@@ -113,12 +119,20 @@ class TestCaseConfig
     }
 
     /**
-     * @param string|null $username
+     * @return bool
+     */
+    public function hasCredentialsChanged()
+    {
+        return $this->credentialsChanged;
+    }
+
+    /**
      * @param string|null $password
      * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
      */
     public function setCredentials($username, $password)
     {
+        $this->credentialsChanged = true;
         $this->username = $username;
         $this->password = $password;
 
