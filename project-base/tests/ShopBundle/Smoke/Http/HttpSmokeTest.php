@@ -132,9 +132,6 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     case 'front_logout':
                         $config->setParameter(self::CSRF_TOKEN_LOGOUT_NAME, 'frontend_logout');
                         break;
-                    case 'admin_superadmin_icondetail':
-                        $config->setParameter('icon', 'delete');
-                        break;
                     case 'admin_pricinggroup_delete':
                         $pricingGroup = $this->getPersistentReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1);
                         /** @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
