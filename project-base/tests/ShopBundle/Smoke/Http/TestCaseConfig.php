@@ -35,6 +35,11 @@ class TestCaseConfig
     private $notes;
 
     /**
+     * @var callable[]
+     */
+    private $delayedCustomizations;
+
+    /**
      * @param string $routeName
      * @param int|null $expectedStatusCode
      */
@@ -44,6 +49,7 @@ class TestCaseConfig
         $this->expectedStatusCode = $expectedStatusCode;
         $this->parameters = [];
         $this->notes = [];
+        $this->delayedCustomizations = [];
     }
 
     /**
@@ -95,6 +101,18 @@ class TestCaseConfig
     }
 
     /**
+     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     */
+    public function executeAllCustomizationsDelayedUntilTestExecution()
+    {
+        foreach ($this->delayedCustomizations as $customization) {
+            $customization($this);
+        }
+
+        return $this;
+    }
+
+    /**
      * @param string|null $username
      * @param string|null $password
      * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
@@ -137,6 +155,17 @@ class TestCaseConfig
     public function addNote($note)
     {
         $this->notes[] = $note;
+
+        return $this;
+    }
+
+    /**
+     * @param callable $callback
+     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     */
+    public function delayCustomizationUntilTestExecution($callback)
+    {
+        $this->delayedCustomizations[] = $callback;
 
         return $this;
     }

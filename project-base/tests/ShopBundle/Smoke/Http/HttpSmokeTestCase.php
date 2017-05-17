@@ -28,6 +28,8 @@ abstract class HttpSmokeTestCase extends KernelTestCase
      */
     final public function testHttpResponse(TestCaseConfig $config)
     {
+        $config->executeAllCustomizationsDelayedUntilTestExecution();
+
         $request = $this->createRequest($config);
 
         $response = $this->handleRequest($request);

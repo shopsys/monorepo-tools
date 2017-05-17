@@ -202,4 +202,15 @@ class RouteConfig
 
         return $testCaseConfig;
     }
+
+    /**
+     * @param callable $callback
+     * @return \Tests\ShopBundle\Smoke\Http\RouteConfig
+     */
+    public function delayCustomizationUntilTestExecution($callback)
+    {
+        $this->defaultTestCaseConfig->delayCustomizationUntilTestExecution($callback);
+
+        return $this;
+    }
 }

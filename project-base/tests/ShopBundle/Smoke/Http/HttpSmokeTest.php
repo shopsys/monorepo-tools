@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 class HttpSmokeTest extends HttpSmokeTestCase
 {
     const DEFAULT_ID_VALUE = 1;
-    const CSRF_TOKEN_LOGOUT_NAME = '_csrf_token';
 
     const IGNORED_ROUTE_NAMES = [
         // protected by csrf token
@@ -135,8 +134,15 @@ class HttpSmokeTest extends HttpSmokeTestCase
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'front_logout') {
-                    $config->addNote('Add CSRF token for logout action (configured in app/security.yml).')
-                        ->setParameter(self::CSRF_TOKEN_LOGOUT_NAME, 'frontend_logout');
+                    $config->delayCustomizationUntilTestExecution(function (TestCaseConfig $config) {
+                        $csrfTokenManager = self::$kernel->getContainer()->get('security.csrf.token_manager');
+                        /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
+
+                        $token = $csrfTokenManager->getToken('frontend_logout');
+
+                        $config->addNote('Add CSRF token for logout action (configured in app/security.yml).')
+                            ->setParameter('_csrf_token', $token->getValue());
+                    });
                 }
             })
             ->customize(function (RouteConfig $config) {
@@ -266,14 +272,19 @@ class HttpSmokeTest extends HttpSmokeTestCase
             })
             ->customize(function (RouteConfig $config) {
                 if (preg_match('@_delete$@', $config->getRouteName())) {
-                    $routeCsrfProtector = self::$kernel->getContainer()
-                        ->get('shopsys.shop.router.security.route_csrf_protector');
-                    /* @var $routeCsrfProtector \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector */
+                    $config->delayCustomizationUntilTestExecution(function (TestCaseConfig $config) {
+                        $routeCsrfProtector = self::$kernel->getContainer()
+                            ->get('shopsys.shop.router.security.route_csrf_protector');
+                        /* @var $routeCsrfProtector \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector */
+                        $csrfTokenManager = self::$kernel->getContainer()->get('security.csrf.token_manager');
+                        /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
 
-                    $tokenId = $routeCsrfProtector->getCsrfTokenId($config->getRouteName());
+                        $tokenId = $routeCsrfProtector->getCsrfTokenId($config->getRouteName());
+                        $token = $csrfTokenManager->getToken($tokenId);
 
-                    $config->addNote('Add CSRF token for any delete action (protected by RouteCsrfProtector).')
-                        ->setParameter(RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER, $tokenId);
+                        $config->addNote('Add CSRF token for any delete action (protected by RouteCsrfProtector).')
+                            ->setParameter(RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER, $token->getValue());
+                    });
                 }
             });
     }
@@ -289,26 +300,6 @@ class HttpSmokeTest extends HttpSmokeTestCase
         /* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade*/
 
         return $persistentReferenceFacade->getReference($name);
-    }
-
-    /**
-     * @param \Tests\ShopBundle\Smoke\Http\TestCaseConfig $config
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
-    protected function createRequest(TestCaseConfig $config)
-    {
-        $parameters = $config->getParameters();
-        foreach ($parameters as $name => $value) {
-            if (in_array($name, [RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER, self::CSRF_TOKEN_LOGOUT_NAME], true)) {
-                $csrfTokenManager = self::$kernel->getContainer()->get('security.csrf.token_manager');
-                /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
-
-                $config->addNote('Replace CSRF token ID in parameter by real value provided by token manager.')
-                    ->setParameter($name, $csrfTokenManager->getToken($value)->getValue());
-            }
-        }
-
-        return parent::createRequest($config);
     }
 
     /**
