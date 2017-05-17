@@ -54,7 +54,6 @@ class HttpSmokeTest extends HttpSmokeTestCase
         'front_order_index',
         'front_order_sent',
         'front_promo_code_remove',
-        'front_registration_set_new_password',
     ];
 
     protected function setUp()
@@ -234,12 +233,11 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     case 'front_registration_set_new_password':
                         $customer = $this->getPersistentReference(UserDataFixture::USER_WITH_RESET_PASSWORD_HASH);
                         /** @var $customer \Shopsys\ShopBundle\Model\Customer\User */
-                        $config->setParameter('email', 'no-reply@netdevelo.cz');
-                        $config->setParameter('hash', 'invalidHash');
+                        $config->setParameter('email', $customer->getEmail());
+                        $config->setParameter('hash', $customer->getResetPasswordHash());
                         $config->addTestCase()
-                            ->setParameter('email', $customer->getEmail())
-                            ->setParameter('hash', $customer->getResetPasswordHash())
-                            ->expectStatusCode(200);
+                            ->setParameter('hash', 'invalidHash')
+                            ->expectStatusCode(302);
                         break;
                 }
             })
