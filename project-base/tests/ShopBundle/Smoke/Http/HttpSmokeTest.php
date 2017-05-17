@@ -40,11 +40,6 @@ class HttpSmokeTest extends HttpSmokeTestCase
         'admin_unit_delete',
     ];
 
-    const FRONT_AS_LOGGED_ROUTE_NAMES = [
-        'front_customer_edit',
-        'front_customer_orders',
-    ];
-
     const EXPECT_REDIRECT_ROUTE_NAMES = [
         'admin_login',
         'admin_login_sso',
@@ -92,8 +87,8 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 }
             })
             ->customize(function (RouteConfig $config) {
-                if (in_array($config->getRouteName(), self::FRONT_AS_LOGGED_ROUTE_NAMES, true)) {
-                    $config->addNote('Log as demo user "Jaromír Jágr" on front-end.')
+                if (in_array($config->getRouteName(), ['front_customer_edit', 'front_customer_orders'], true)) {
+                    $config->addNote('Log as demo user "Jaromír Jágr" on pages in client section.')
                         ->setCredentials('no-reply@netdevelo.cz', 'user123');
                 }
             })
