@@ -52,6 +52,17 @@ class HttpSmokeTest extends HttpSmokeTestCase
      */
     protected function customizeRouteConfigs(RouteConfigsBuilder $routeConfigsBuilder)
     {
+        $this->filterRoutesForTesting($routeConfigsBuilder);
+        $this->configureGeneralRules($routeConfigsBuilder);
+        $this->configureAdminRoutes($routeConfigsBuilder);
+        $this->configureFrontendRoutes($routeConfigsBuilder);
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigsBuilder $routeConfigsBuilder
+     */
+    public function filterRoutesForTesting(RouteConfigsBuilder $routeConfigsBuilder)
+    {
         $routeConfigsBuilder
             ->customize(function (RouteConfig $config) {
                 if (!$config->isMethodAllowed('GET')) {
@@ -82,19 +93,15 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if ($config->getRouteName() === 'admin_domain_list' && $this->isSingleDomain()) {
                     $config->ignore();
                 }
-            })
-            ->customize(function (RouteConfig $config) {
-                if (preg_match('~^admin_~', $config->getRouteName())) {
-                    $config->addNote('Log as "superadmin" to administration.')
-                        ->setCredentials('superadmin', 'admin123');
-                }
-            })
-            ->customize(function (RouteConfig $config) {
-                if (in_array($config->getRouteName(), ['front_customer_edit', 'front_customer_orders'], true)) {
-                    $config->addNote('Log as demo user "Jaromír Jágr" on pages in client section.')
-                        ->setCredentials('no-reply@netdevelo.cz', 'user123');
-                }
-            })
+            });
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigsBuilder $routeConfigsBuilder
+     */
+    public function configureGeneralRules(RouteConfigsBuilder $routeConfigsBuilder)
+    {
+        $routeConfigsBuilder
             ->customize(function (RouteConfig $config) {
                 foreach ($config->getRoutePathParameters() as $name) {
                     if ($config->isParameterRequired($name) && preg_match('~^(id|.+Id)$~', $name)) {
@@ -107,7 +114,34 @@ class HttpSmokeTest extends HttpSmokeTestCase
             ->customize(function (RouteConfig $config) {
                 if (preg_match('~_delete$~', $config->getRouteName())) {
                     $config->addNote('Expect redirect by 302 for any delete action.')
-                        ->expectStatusCode(302);
+                        ->expectStatusCode(302)
+                        ->delayCustomizationUntilTestExecution(function (TestCaseConfig $config) {
+                            $routeCsrfProtector = self::$kernel->getContainer()
+                                ->get('shopsys.shop.router.security.route_csrf_protector');
+                            /* @var $routeCsrfProtector \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector */
+                            $csrfTokenManager = self::$kernel->getContainer()->get('security.csrf.token_manager');
+                            /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
+
+                            $tokenId = $routeCsrfProtector->getCsrfTokenId($config->getRouteName());
+                            $token = $csrfTokenManager->getToken($tokenId);
+
+                            $config->addNote('Add CSRF token for any delete action (protected by RouteCsrfProtector).')
+                                ->setParameter(RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER, $token->getValue());
+                        });
+                }
+            });
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigsBuilder $routeConfigsBuilder
+     */
+    public function configureAdminRoutes(RouteConfigsBuilder $routeConfigsBuilder)
+    {
+        $routeConfigsBuilder
+            ->customize(function (RouteConfig $config) {
+                if (preg_match('~^admin_~', $config->getRouteName())) {
+                    $config->addNote('Log as "superadmin" to administration.')
+                        ->setCredentials('superadmin', 'admin123');
                 }
             })
             ->customize(function (RouteConfig $config) {
@@ -120,15 +154,8 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 }
             })
             ->customize(function (RouteConfig $config) {
-                $routeNames = ['admin_login_sso', 'front_customer_login_as_remembered_user', 'front_promo_code_remove'];
-                if (in_array($config->getRouteName(), $routeNames, true)) {
-                    $config->addNote(sprintf('Route "%s" should always just redirect.', $config->getRouteName()))
-                        ->expectStatusCode(302);
-                }
-            })
-            ->customize(function (RouteConfig $config) {
-                if (in_array($config->getRouteName(), ['front_order_index', 'front_order_sent'], true)) {
-                    $config->addNote('Order page should redirect by 302 as the cart is empty by default.')
+                if ($config->getRouteName() === 'admin_login_sso') {
+                    $config->addNote('Admin login SSO should always just redirect.')
                         ->expectStatusCode(302);
                 }
             })
@@ -154,21 +181,6 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if ($config->getRouteName() === 'admin_bestsellingproduct_detail') {
                     $config->addNote('Category with ID 1 is the root, use ID 2 instead.')
                         ->setParameter('categoryId', 2);
-                }
-            })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'front_logout') {
-                    $config->delayCustomizationUntilTestExecution(function (TestCaseConfig $config) {
-                        $csrfTokenManager = self::$kernel->getContainer()->get('security.csrf.token_manager');
-                        /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
-
-                        $token = $csrfTokenManager->getToken('frontend_logout');
-
-                        $config->addNote('Add CSRF token for logout action (configured in app/security.yml).')
-                            ->setParameter('_csrf_token', $token->getValue());
-                    });
-                    $config->addNote('Logout action should redirect by 302')
-                        ->expectStatusCode(302);
                 }
             })
             ->customize(function (RouteConfig $config) {
@@ -199,6 +211,48 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     $config->addNote(sprintf('Delete VAT "%s" and replace it by "%s".', $vat->getName(), $newVat->getName()))
                         ->setParameter('id', $vat->getId())
                         ->setParameter('newId', $newVat->getId());
+                }
+            });
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigsBuilder $routeConfigsBuilder
+     */
+    public function configureFrontendRoutes(RouteConfigsBuilder $routeConfigsBuilder)
+    {
+        $routeConfigsBuilder
+            ->customize(function (RouteConfig $config) {
+                if (in_array($config->getRouteName(), ['front_customer_edit', 'front_customer_orders'], true)) {
+                    $config->addNote('Log as demo user "Jaromír Jágr" on pages in client section.')
+                        ->setCredentials('no-reply@netdevelo.cz', 'user123');
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                $routeNames = ['front_customer_login_as_remembered_user', 'front_promo_code_remove'];
+                if (in_array($config->getRouteName(), $routeNames, true)) {
+                    $config->addNote(sprintf('Route "%s" should always just redirect.', $config->getRouteName()))
+                        ->expectStatusCode(302);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if (in_array($config->getRouteName(), ['front_order_index', 'front_order_sent'], true)) {
+                    $config->addNote('Order page should redirect by 302 as the cart is empty by default.')
+                        ->expectStatusCode(302);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'front_logout') {
+                    $config->delayCustomizationUntilTestExecution(function (TestCaseConfig $config) {
+                        $csrfTokenManager = self::$kernel->getContainer()->get('security.csrf.token_manager');
+                        /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
+
+                        $token = $csrfTokenManager->getToken('frontend_logout');
+
+                        $config->addNote('Add CSRF token for logout action (configured in app/security.yml).')
+                            ->setParameter('_csrf_token', $token->getValue());
+                    });
+                    $config->addNote('Logout action should redirect by 302')
+                        ->expectStatusCode(302);
                 }
             })
             ->customize(function (RouteConfig $config) {
@@ -294,23 +348,6 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     $config->addTestCase('Expect redirect when the hash is invalid.')
                         ->setParameter('hash', 'invalidHash')
                         ->expectStatusCode(302);
-                }
-            })
-            ->customize(function (RouteConfig $config) {
-                if (preg_match('~_delete$~', $config->getRouteName())) {
-                    $config->delayCustomizationUntilTestExecution(function (TestCaseConfig $config) {
-                        $routeCsrfProtector = self::$kernel->getContainer()
-                            ->get('shopsys.shop.router.security.route_csrf_protector');
-                        /* @var $routeCsrfProtector \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector */
-                        $csrfTokenManager = self::$kernel->getContainer()->get('security.csrf.token_manager');
-                        /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
-
-                        $tokenId = $routeCsrfProtector->getCsrfTokenId($config->getRouteName());
-                        $token = $csrfTokenManager->getToken($tokenId);
-
-                        $config->addNote('Add CSRF token for any delete action (protected by RouteCsrfProtector).')
-                            ->setParameter(RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER, $token->getValue());
-                    });
                 }
             });
     }
