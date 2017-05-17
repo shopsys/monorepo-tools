@@ -110,132 +110,158 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 }
             })
             ->customize(function (RouteConfig $config) {
-                switch ($config->getRouteName()) {
-                    case 'admin_administrator_edit':
-                        $config->addNote('It is forbidden to edit administrator with ID 1 as it is the superadmin.')
-                            ->expectStatusCode(404);
-                        $config->addTestCase('Editing normal administrator should be OK.')
-                            ->setParameter('id', 2)
-                            ->expectStatusCode(200);
-                        break;
-                    case 'admin_category_edit':
-                        $config->addNote('It is forbidden to edit category with ID 1 as it is the root.')
-                            ->expectStatusCode(404);
-                        $config->addTestCase('Editing normal category should be OK.')
-                            ->setParameter('id', 2)
-                            ->expectStatusCode(200);
-                        break;
-                    case 'admin_bestsellingproduct_detail':
-                        $config->addNote('Category with ID 1 is the root, use ID 2 instead.')
-                            ->setParameter('categoryId', 2);
-                        break;
-                    case 'front_logout':
-                        $config->addNote('Add CSRF token for logout action (configured in app/security.yml).')
-                            ->setParameter(self::CSRF_TOKEN_LOGOUT_NAME, 'frontend_logout');
-                        break;
-                    case 'admin_pricinggroup_delete':
-                        $pricingGroup = $this->getPersistentReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1);
-                        /** @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
-                        $config->addNote(sprintf('Delete pricing group "%s".', $pricingGroup->getName()))
-                            ->setParameter('id', $pricingGroup->getId());
-                        break;
-                    case 'admin_unit_delete':
-                        $unit = $this->getPersistentReference(BaseUnitDataFixture::UNIT_PIECES);
-                        /** @var $unit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
-                        $newUnit = $this->getPersistentReference(DemoUnitDataFixture::UNIT_CUBIC_METERS);
-                        /** @var $newUnit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
-                        $config->addNote(sprintf('Delete unit "%s" and replace it by "%s".', $unit->getName('en'), $newUnit->getName('en')))
-                            ->setParameter('id', $unit->getId())
-                            ->setParameter('newId', $newUnit->getId());
-                        break;
-                    case 'admin_vat_delete':
-                        $vat = $this->getPersistentReference(VatDataFixture::VAT_SECOND_LOW);
-                        /** @var $vat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
-                        $newVat = $this->getPersistentReference(VatDataFixture::VAT_LOW);
-                        /** @var $newVat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
-                        $config->addNote(sprintf('Delete VAT "%s" and replace it by "%s".', $vat->getName(), $newVat->getName()))
-                            ->setParameter('id', $vat->getId())
-                            ->setParameter('newId', $newVat->getId());
-                        break;
-                    case 'front_article_detail':
-                        $config->addNote('Use ID 1 as default article.')
-                            ->setParameter('id', 1);
-                        break;
-                    case 'front_brand_detail':
-                        $config->addNote('Use ID 1 as default brand.')
-                            ->setParameter('id', 1);
-                        break;
-                    case 'front_customer_order_detail_unregistered':
-                        $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
-                        /** @var $order \Shopsys\ShopBundle\Model\Order\Order */
-                        $config->addNote(sprintf('Use hash of order n. %s for unregistered access.', $order->getNumber()))
-                            ->setParameter('urlHash', $order->getUrlHash());
-                        break;
-                    case 'front_customer_order_detail_registered':
-                        $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
-                        /** @var $order \Shopsys\ShopBundle\Model\Order\Order */
-                        $config->addNote(sprintf('Log as demo user "Jaromír Jágr" on front-end to access order n. %s.', $order->getNumber()))
-                            ->setCredentials('no-reply@netdevelo.cz', 'user123')
-                            ->setParameter('orderNumber', $order->getNumber());
-                        break;
-                    case 'front_product_detail':
-                        $config->addNote('Use ID 1 as default product.')
-                            ->setParameter('id', 1);
-                        $config->addTestCase('See detail of a product that is main variant')
-                            ->setParameter('id', 150);
-                        break;
-                    case 'front_product_list':
-                        $config->addNote('Use ID 2 as default category (ID 1 is the root).')
-                            ->setParameter('id', 2);
-                        $config->addTestCase('See category that has 500 products in performance data')
-                            ->setParameter('id', 8);
-                        $config->addTestCase('See and filter category that has 500 products in performance data')
-                            ->setParameter('id', 8)
-                            ->setParameter('product_filter_form', [
-                                'inStock' => '1',
-                                'parameters' => [
-                                    41 => [58],
-                                ],
-                            ]);
-                        $config->addTestCase('See category that has 7600 products in performance data')
-                            ->setParameter('id', 3);
-                        $config->addTestCase('See and filter category that has 7600 products in performance data')
-                            ->setParameter('id', 3)
-                            ->setParameter('product_filter_form', [
-                                'minimalPrice' => '100',
-                                'inStock' => '1',
-                                'parameters' => [
-                                    1 => ['1'],
-                                ],
-                            ]);
-                        $config->addTestCase('See category that has 3600 products in performance data')
-                            ->setParameter('id', 11);
-                        $config->addTestCase('See and filter category that has 3600 products in performance data')
-                            ->setParameter('id', 11)
-                            ->setParameter('product_filter_form', [
-                                'minimalPrice' => '100',
-                                'inStock' => '1',
-                            ]);
-                        break;
-                    case 'front_product_search':
-                        $config->addTestCase('Search for "a" and filter the results')
-                            ->setParameter(ProductController::SEARCH_TEXT_PARAMETER, 'a')
-                            ->setParameter('product_filter_form', [
-                                'inStock' => '1',
-                                'flags' => ['2'],
-                                'brands' => ['2', '19'],
-                            ]);
-                        break;
-                    case 'front_registration_set_new_password':
-                        $customer = $this->getPersistentReference(UserDataFixture::USER_WITH_RESET_PASSWORD_HASH);
-                        /** @var $customer \Shopsys\ShopBundle\Model\Customer\User */
-                        $config->addNote('See new password page for customer with reset password hash.')
-                            ->setParameter('email', $customer->getEmail())
-                            ->setParameter('hash', $customer->getResetPasswordHash());
-                        $config->addTestCase('Expect redirect when the hash is invalid.')
-                            ->setParameter('hash', 'invalidHash')
-                            ->expectStatusCode(302);
-                        break;
+                if ($config->getRouteName() === 'admin_administrator_edit') {
+                    $config->addNote('It is forbidden to edit administrator with ID 1 as it is the superadmin.')
+                        ->expectStatusCode(404);
+                    $config->addTestCase('Editing normal administrator should be OK.')
+                        ->setParameter('id', 2)
+                        ->expectStatusCode(200);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'admin_category_edit') {
+                    $config->addNote('It is forbidden to edit category with ID 1 as it is the root.')
+                        ->expectStatusCode(404);
+                    $config->addTestCase('Editing normal category should be OK.')
+                        ->setParameter('id', 2)
+                        ->expectStatusCode(200);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'admin_bestsellingproduct_detail') {
+                    $config->addNote('Category with ID 1 is the root, use ID 2 instead.')
+                        ->setParameter('categoryId', 2);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'front_logout') {
+                    $config->addNote('Add CSRF token for logout action (configured in app/security.yml).')
+                        ->setParameter(self::CSRF_TOKEN_LOGOUT_NAME, 'frontend_logout');
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'admin_pricinggroup_delete') {
+                    $pricingGroup = $this->getPersistentReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1);
+                    /** @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
+                    $config->addNote(sprintf('Delete pricing group "%s".', $pricingGroup->getName()))
+                        ->setParameter('id', $pricingGroup->getId());
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'admin_unit_delete') {
+                    $unit = $this->getPersistentReference(BaseUnitDataFixture::UNIT_PIECES);
+                    /** @var $unit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
+                    $newUnit = $this->getPersistentReference(DemoUnitDataFixture::UNIT_CUBIC_METERS);
+                    /** @var $newUnit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
+                    $config->addNote(sprintf('Delete unit "%s" and replace it by "%s".', $unit->getName('en'), $newUnit->getName('en')))
+                        ->setParameter('id', $unit->getId())
+                        ->setParameter('newId', $newUnit->getId());
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'admin_vat_delete') {
+                    $vat = $this->getPersistentReference(VatDataFixture::VAT_SECOND_LOW);
+                    /** @var $vat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
+                    $newVat = $this->getPersistentReference(VatDataFixture::VAT_LOW);
+                    /** @var $newVat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
+                    $config->addNote(sprintf('Delete VAT "%s" and replace it by "%s".', $vat->getName(), $newVat->getName()))
+                        ->setParameter('id', $vat->getId())
+                        ->setParameter('newId', $newVat->getId());
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'front_article_detail') {
+                    $config->addNote('Use ID 1 as default article.')
+                        ->setParameter('id', 1);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'front_brand_detail') {
+                    $config->addNote('Use ID 1 as default brand.')
+                        ->setParameter('id', 1);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'front_customer_order_detail_unregistered') {
+                    $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
+                    /** @var $order \Shopsys\ShopBundle\Model\Order\Order */
+                    $config->addNote(sprintf('Use hash of order n. %s for unregistered access.', $order->getNumber()))
+                        ->setParameter('urlHash', $order->getUrlHash());
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'front_customer_order_detail_registered') {
+                    $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
+                    /** @var $order \Shopsys\ShopBundle\Model\Order\Order */
+                    $config->addNote(sprintf('Log as demo user "Jaromír Jágr" on front-end to access order n. %s.', $order->getNumber()))
+                        ->setCredentials('no-reply@netdevelo.cz', 'user123')
+                        ->setParameter('orderNumber', $order->getNumber());
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'front_product_detail') {
+                    $config->addNote('Use ID 1 as default product.')
+                        ->setParameter('id', 1);
+                    $config->addTestCase('See detail of a product that is main variant')
+                        ->setParameter('id', 150);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'front_product_list') {
+                    $config->addNote('Use ID 2 as default category (ID 1 is the root).')
+                        ->setParameter('id', 2);
+                    $config->addTestCase('See category that has 500 products in performance data')
+                        ->setParameter('id', 8);
+                    $config->addTestCase('See and filter category that has 500 products in performance data')
+                        ->setParameter('id', 8)
+                        ->setParameter('product_filter_form', [
+                            'inStock' => '1',
+                            'parameters' => [
+                                41 => [58],
+                            ],
+                        ]);
+                    $config->addTestCase('See category that has 7600 products in performance data')
+                        ->setParameter('id', 3);
+                    $config->addTestCase('See and filter category that has 7600 products in performance data')
+                        ->setParameter('id', 3)
+                        ->setParameter('product_filter_form', [
+                            'minimalPrice' => '100',
+                            'inStock' => '1',
+                            'parameters' => [
+                                1 => ['1'],
+                            ],
+                        ]);
+                    $config->addTestCase('See category that has 3600 products in performance data')
+                        ->setParameter('id', 11);
+                    $config->addTestCase('See and filter category that has 3600 products in performance data')
+                        ->setParameter('id', 11)
+                        ->setParameter('product_filter_form', [
+                            'minimalPrice' => '100',
+                            'inStock' => '1',
+                        ]);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'front_product_search') {
+                    $config->addTestCase('Search for "a" and filter the results')
+                        ->setParameter(ProductController::SEARCH_TEXT_PARAMETER, 'a')
+                        ->setParameter('product_filter_form', [
+                            'inStock' => '1',
+                            'flags' => ['2'],
+                            'brands' => ['2', '19'],
+                        ]);
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteName() === 'front_registration_set_new_password') {
+                    $customer = $this->getPersistentReference(UserDataFixture::USER_WITH_RESET_PASSWORD_HASH);
+                    /** @var $customer \Shopsys\ShopBundle\Model\Customer\User */
+                    $config->addNote('See new password page for customer with reset password hash.')
+                        ->setParameter('email', $customer->getEmail())
+                        ->setParameter('hash', $customer->getResetPasswordHash());
+                    $config->addTestCase('Expect redirect when the hash is invalid.')
+                        ->setParameter('hash', 'invalidHash')
+                        ->expectStatusCode(302);
                 }
             })
             ->customize(function (RouteConfig $config) {
