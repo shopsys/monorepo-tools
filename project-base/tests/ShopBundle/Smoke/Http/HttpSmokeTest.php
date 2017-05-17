@@ -78,12 +78,6 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 }
             })
             ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_customer_loginasuser') {
-                    $config->addNote('Protected by CSRF token.')
-                        ->ignore();
-                }
-            })
-            ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'admin_domain_selectdomain') {
                     $config->addNote('Used only for internal setting of selected domain by tab control in admin.')
                         ->ignore();
@@ -173,8 +167,9 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 }
             })
             ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_login_sso') {
-                    $config->addNote('Admin login SSO should always just redirect.')
+                $routeNames = ['admin_login_sso', 'admin_customer_loginasuser'];
+                if (in_array($config->getRouteName(), $routeNames, true)) {
+                    $config->addNote(sprintf('Route "%s" should always just redirect.', $config->getRouteName()))
                         ->expectStatusCode(302);
                 }
             })
