@@ -170,11 +170,6 @@ class HttpSmokeTest extends HttpSmokeTestCase
                         $config->setCredentials('no-reply@netdevelo.cz', 'user123');
                         $config->setParameter('orderNumber', $order->getNumber());
                         break;
-                    case 'front_error_page':
-                    case 'front_error_page_format':
-                        $config->setParameter('code', 404);
-                        $config->setParameter('_format', 'html');
-                        break;
                     case 'front_product_detail':
                         $config->setParameter('id', 1);
                         // getMainVariantDetailRouteData
