@@ -113,6 +113,13 @@ class HttpSmokeTest extends HttpSmokeTestCase
             })
             ->customize(function (RouteConfig $config) {
                 switch ($config->getRouteName()) {
+                    case 'admin_administrator_edit':
+                        // admin ID 1 is reserved for superadmin, which is not editable
+                        $config->expectStatusCode(404);
+                        $config->addTestCase()
+                            ->setParameter('id', 2)
+                            ->expectStatusCode(200);
+                        break;
                     case 'admin_category_edit':
                         // category ID 1 is special root category, therefore we use ID 2
                         $config->setParameter('id', 2);
@@ -172,23 +179,12 @@ class HttpSmokeTest extends HttpSmokeTestCase
                         break;
                     case 'front_product_detail':
                         $config->setParameter('id', 1);
+                        // getMainVariantDetailRouteData
+                        $config->addTestCase()
+                            ->setParameter('id', 150);
                         break;
                     case 'front_product_list':
                         $config->setParameter('id', 2);
-                        break;
-                    case 'front_registration_set_new_password':
-                        $config->setParameter('email', 'no-reply@netdevelo.cz');
-                        $config->setParameter('hash', 'invalidHash');
-                        break;
-                    case 'admin_administrator_edit':
-                        // admin ID 1 is reserved for superadmin, which is not editable
-                        $config->setParameter('id', 2);
-                        break;
-                }
-            })
-            ->customize(function (RouteConfig $config) {
-                switch ($config->getRouteName()) {
-                    case 'front_product_list':
                         // getProductListInCategoryWith500ProductsRouteData
                         $config->addTestCase()
                             ->setParameter('id', 8);
@@ -235,21 +231,11 @@ class HttpSmokeTest extends HttpSmokeTestCase
                                 'brands' => ['2', '19'],
                             ]);
                         break;
-                    case 'admin_administrator_edit':
-                        // getSuperadminEditRouteData
-                        $config->addTestCase()
-                            ->setParameter('id', 1)
-                            ->expectStatusCode(404);
-                        break;
-                    case 'front_product_detail':
-                        // getMainVariantDetailRouteData
-                        $config->addTestCase()
-                            ->setParameter('id', 150);
-                        break;
                     case 'front_registration_set_new_password':
-                        // getNewPasswordWithValidHashRouteData
                         $customer = $this->getPersistentReference(UserDataFixture::USER_WITH_RESET_PASSWORD_HASH);
                         /** @var $customer \Shopsys\ShopBundle\Model\Customer\User */
+                        $config->setParameter('email', 'no-reply@netdevelo.cz');
+                        $config->setParameter('hash', 'invalidHash');
                         $config->addTestCase()
                             ->setParameter('email', $customer->getEmail())
                             ->setParameter('hash', $customer->getResetPasswordHash())
