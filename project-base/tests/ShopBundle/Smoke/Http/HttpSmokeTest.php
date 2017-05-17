@@ -43,7 +43,6 @@ class HttpSmokeTest extends HttpSmokeTestCase
     const FRONT_AS_LOGGED_ROUTE_NAMES = [
         'front_customer_edit',
         'front_customer_orders',
-        'front_customer_order_detail_registered',
     ];
 
     const EXPECT_REDIRECT_ROUTE_NAMES = [
@@ -169,6 +168,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     case 'front_customer_order_detail_registered':
                         $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
                         /** @var $order \Shopsys\ShopBundle\Model\Order\Order */
+                        $config->setCredentials('no-reply@netdevelo.cz', 'user123');
                         $config->setParameter('orderNumber', $order->getNumber());
                         break;
                     case 'front_error_page':
