@@ -67,6 +67,7 @@ security:
     # same pattern must be in routing_front.yml
     - { path: ^/login-as-remembered-user/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin/superadmin/, roles: ROLE_SUPER_ADMIN }
+    - { path: ^/admin/translation/list/$, roles: ROLE_SUPER_ADMIN }
     - { path: ^/admin/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin/authorization/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin/, roles: ROLE_ADMIN }

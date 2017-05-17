@@ -153,8 +153,17 @@ class HttpSmokeTest extends HttpSmokeTestCase
         $routeConfigsBuilder
             ->customize(function (RouteConfig $config) {
                 if (preg_match('~^admin_~', $config->getRouteName())) {
-                    $config->addNote('Log as "superadmin" to administration.')
-                        ->setCredentials('superadmin', 'admin123');
+                    $config->addNote('Log as "admin" to administration.')
+                        ->setCredentials('admin', 'admin123');
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if (preg_match('~^admin_(superadmin_|translation_list$)~', $config->getRouteName())) {
+                    $config->addNote('Only superadmin should be able to see this route.')
+                        ->expectStatusCode(404);
+                    $config->addTestCase('Should be OK when logged in as "superadmin".')
+                        ->setCredentials('superadmin', 'admin123')
+                        ->expectStatusCode(200);
                 }
             })
             ->customize(function (RouteConfig $config) {
