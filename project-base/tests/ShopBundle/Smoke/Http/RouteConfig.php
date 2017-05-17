@@ -17,11 +17,6 @@ class RouteConfig
     private $route;
 
     /**
-     * @var bool
-     */
-    private $ignored;
-
-    /**
      * @var \Tests\ShopBundle\Smoke\Http\TestCaseConfig
      */
     private $defaultTestCaseConfig;
@@ -39,7 +34,6 @@ class RouteConfig
     {
         $this->routeName = $routeName;
         $this->route = $route;
-        $this->ignored = false;
         $this->defaultTestCaseConfig = new TestCaseConfig($this->routeName, 200);
         $this->additionalTestCaseConfigs = [];
     }
@@ -104,28 +98,25 @@ class RouteConfig
      */
     public function getTestCaseConfigs()
     {
-        $testCaseConfigs = [];
-        if (!$this->ignored) {
-            $testCaseConfigs[] = $this->defaultTestCaseConfig;
-            foreach ($this->additionalTestCaseConfigs as $additionalTestCaseConfig) {
-                $testCaseConfig = clone $this->defaultTestCaseConfig;
-                if ($additionalTestCaseConfig->hasCredentialsChanged()) {
-                    $testCaseConfig->setCredentials(
-                        $additionalTestCaseConfig->getUsername(),
-                        $additionalTestCaseConfig->getPassword()
-                    );
-                }
-                if ($additionalTestCaseConfig->getExpectedStatusCode() !== null) {
-                    $testCaseConfig->expectStatusCode($additionalTestCaseConfig->getExpectedStatusCode());
-                }
-                foreach ($additionalTestCaseConfig->getParameters() as $name => $value) {
-                    $testCaseConfig->setParameter($name, $value);
-                }
-                foreach ($additionalTestCaseConfig->getNotes() as $note) {
-                    $testCaseConfig->addNote($note);
-                }
-                $testCaseConfigs[] = $testCaseConfig;
+        $testCaseConfigs = [$this->defaultTestCaseConfig];
+        foreach ($this->additionalTestCaseConfigs as $additionalTestCaseConfig) {
+            $testCaseConfig = clone $this->defaultTestCaseConfig;
+            if ($additionalTestCaseConfig->hasCredentialsChanged()) {
+                $testCaseConfig->setCredentials(
+                    $additionalTestCaseConfig->getUsername(),
+                    $additionalTestCaseConfig->getPassword()
+                );
             }
+            if ($additionalTestCaseConfig->getExpectedStatusCode() !== null) {
+                $testCaseConfig->expectStatusCode($additionalTestCaseConfig->getExpectedStatusCode());
+            }
+            foreach ($additionalTestCaseConfig->getParameters() as $name => $value) {
+                $testCaseConfig->setParameter($name, $value);
+            }
+            foreach ($additionalTestCaseConfig->getNotes() as $note) {
+                $testCaseConfig->addNote($note);
+            }
+            $testCaseConfigs[] = $testCaseConfig;
         }
 
         return $testCaseConfigs;
@@ -136,7 +127,7 @@ class RouteConfig
      */
     public function ignore()
     {
-        $this->ignored = true;
+        $this->defaultTestCaseConfig->ignore();
 
         return $this;
     }

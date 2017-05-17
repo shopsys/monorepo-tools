@@ -30,6 +30,11 @@ abstract class HttpSmokeTestCase extends KernelTestCase
     {
         $config->executeAllCustomizationsDelayedUntilTestExecution();
 
+        if ($config->isIgnored()) {
+            $ignoreMessage = sprintf('Test for route "%s" was ignored.', $config->getRouteName());
+            $this->markTestSkipped($this->getMessageWithNotes($config, $ignoreMessage));
+        }
+
         $request = $this->createRequest($config);
 
         $response = $this->handleRequest($request);
@@ -115,17 +120,27 @@ abstract class HttpSmokeTestCase extends KernelTestCase
             $config->getRouteName(),
             $config->getExpectedStatusCode()
         );
+        $this->assertSame(
+            $config->getExpectedStatusCode(),
+            $response->getStatusCode(),
+            $this->getMessageWithNotes($config, $failMessage)
+        );
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Smoke\Http\TestCaseConfig $config
+     * @param string $message
+     * @return string
+     */
+    protected function getMessageWithNotes(TestCaseConfig $config, $message)
+    {
         if (count($config->getNotes()) > 0) {
             $indentedNotes = array_map(function ($note) {
                 return "\n" . '  - ' . $note;
             }, $config->getNotes());
-            $failMessage .= "\n" . 'Notes for this data set:' . implode($indentedNotes);
+            $message .= "\n" . 'Notes for this data set:' . implode($indentedNotes);
         }
 
-        $this->assertSame(
-            $config->getExpectedStatusCode(),
-            $response->getStatusCode(),
-            $failMessage
-        );
+        return $message;
     }
 }

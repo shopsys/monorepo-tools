@@ -10,6 +10,11 @@ class TestCaseConfig
     private $routeName;
 
     /**
+     * @var bool
+     */
+    private $ignored;
+
+    /**
      * @var string|null
      */
     private $username;
@@ -52,6 +57,7 @@ class TestCaseConfig
     {
         $this->routeName = $routeName;
         $this->expectedStatusCode = $expectedStatusCode;
+        $this->ignored = false;
         $this->parameters = [];
         $this->notes = [];
         $this->delayedCustomizations = [];
@@ -64,6 +70,14 @@ class TestCaseConfig
     public function getRouteName()
     {
         return $this->routeName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isIgnored()
+    {
+        return $this->ignored;
     }
 
     /**
@@ -124,6 +138,16 @@ class TestCaseConfig
     public function hasCredentialsChanged()
     {
         return $this->credentialsChanged;
+    }
+
+    /**
+     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     */
+    public function ignore()
+    {
+        $this->ignored = true;
+
+        return $this;
     }
 
     /**
