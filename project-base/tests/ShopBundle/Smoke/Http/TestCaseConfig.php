@@ -30,6 +30,11 @@ class TestCaseConfig
     private $parameters;
 
     /**
+     * @var string[]
+     */
+    private $notes;
+
+    /**
      * @param string $routeName
      * @param int|null $expectedStatusCode
      */
@@ -38,6 +43,7 @@ class TestCaseConfig
         $this->routeName = $routeName;
         $this->expectedStatusCode = $expectedStatusCode;
         $this->parameters = [];
+        $this->notes = [];
     }
 
     /**
@@ -81,6 +87,14 @@ class TestCaseConfig
     }
 
     /**
+     * @return string[]
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
      * @param string|null $username
      * @param string|null $password
      * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
@@ -112,6 +126,17 @@ class TestCaseConfig
     public function setParameter($name, $value)
     {
         $this->parameters[$name] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $note
+     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     */
+    public function addNote($note)
+    {
+        $this->notes[] = $note;
 
         return $this;
     }

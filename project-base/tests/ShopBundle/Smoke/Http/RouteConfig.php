@@ -121,6 +121,9 @@ class RouteConfig
                 foreach ($additionalTestCaseConfig->getParameters() as $name => $value) {
                     $testCaseConfig->setParameter($name, $value);
                 }
+                foreach ($additionalTestCaseConfig->getNotes() as $note) {
+                    $testCaseConfig->addNote($note);
+                }
                 $testCaseConfigs[] = $testCaseConfig;
             }
         }
@@ -174,12 +177,28 @@ class RouteConfig
     }
 
     /**
+     * @param string $note
+     * @return \Tests\ShopBundle\Smoke\Http\RouteConfig
+     */
+    public function addNote($note)
+    {
+        $this->defaultTestCaseConfig->addNote($note);
+
+        return $this;
+    }
+
+    /**
+     * @param string $note
      * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
      */
-    public function addTestCase()
+    public function addTestCase($note = '')
     {
         $testCaseConfig = new TestCaseConfig($this->routeName);
         $this->additionalTestCaseConfigs[] = $testCaseConfig;
+
+        if ($note !== '') {
+            $testCaseConfig->addNote('Special test case: ' . $note);
+        }
 
         return $testCaseConfig;
     }

@@ -107,15 +107,23 @@ abstract class HttpSmokeTestCase extends KernelTestCase
      */
     protected function assertResponse(Response $response, TestCaseConfig $config)
     {
+        $failMessage = sprintf(
+            'Failed asserting that status code %d for route "%s" is identical to expected %d',
+            $response->getStatusCode(),
+            $config->getRouteName(),
+            $config->getExpectedStatusCode()
+        );
+        if (count($config->getNotes()) > 0) {
+            $indentedNotes = array_map(function ($note) {
+                return "\n" . '  - ' . $note;
+            }, $config->getNotes());
+            $failMessage .= "\n" . 'Notes for this data set:' . implode($indentedNotes);
+        }
+
         $this->assertSame(
             $config->getExpectedStatusCode(),
             $response->getStatusCode(),
-            sprintf(
-                'Failed asserting that status code %d for route "%s" is identical to expected %d',
-                $response->getStatusCode(),
-                $config->getRouteName(),
-                $config->getExpectedStatusCode()
-            )
+            $failMessage
         );
     }
 }

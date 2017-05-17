@@ -87,18 +87,22 @@ class HttpSmokeTest extends HttpSmokeTestCase
             })
             ->customize(function (RouteConfig $config) {
                 if (preg_match('~^admin_~', $config->getRouteName())) {
-                    $config->setCredentials('superadmin', 'admin123');
+                    $config->addNote('Log as "superadmin" to administration.')
+                        ->setCredentials('superadmin', 'admin123');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if (in_array($config->getRouteName(), self::FRONT_AS_LOGGED_ROUTE_NAMES, true)) {
-                    $config->setCredentials('no-reply@netdevelo.cz', 'user123');
+                    $config->addNote('Log as demo user "Jaromír Jágr" on front-end.')
+                        ->setCredentials('no-reply@netdevelo.cz', 'user123');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 foreach ($config->getRoutePathParameters() as $name) {
                     if ($config->isParameterRequired($name) && preg_match('~^(id|.+Id)$~', $name)) {
-                        $config->setParameter($name, self::DEFAULT_ID_VALUE);
+                        $note = 'Route requires ID parameter "%s" in its path, try using %d by default.';
+                        $config->addNote(sprintf($note, $name, self::DEFAULT_ID_VALUE))
+                            ->setParameter($name, self::DEFAULT_ID_VALUE);
                     }
                 }
             })
@@ -106,83 +110,91 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if (preg_match('~/delete/~', $config->getRoutePath())
                     || in_array($config->getRouteName(), self::EXPECT_REDIRECT_ROUTE_NAMES, true)
                 ) {
-                    $config->expectStatusCode(302);
+                    $config->addNote('Route expects redirect by 302.')
+                        ->expectStatusCode(302);
                 }
             })
             ->customize(function (RouteConfig $config) {
                 switch ($config->getRouteName()) {
                     case 'admin_administrator_edit':
-                        // admin ID 1 is reserved for superadmin, which is not editable
-                        $config->expectStatusCode(404);
-                        $config->addTestCase()
+                        $config->addNote('It is forbidden to edit administrator with ID 1 as it is the superadmin.')
+                            ->expectStatusCode(404);
+                        $config->addTestCase('Editing normal administrator should be OK.')
                             ->setParameter('id', 2)
                             ->expectStatusCode(200);
                         break;
                     case 'admin_category_edit':
-                        // category ID 1 is special root category, cannot be edited
-                        $config->expectStatusCode(404);
-                        $config->addTestCase()
+                        $config->addNote('It is forbidden to edit category with ID 1 as it is the root.')
+                            ->expectStatusCode(404);
+                        $config->addTestCase('Editing normal category should be OK.')
                             ->setParameter('id', 2)
                             ->expectStatusCode(200);
                         break;
                     case 'admin_bestsellingproduct_detail':
-                        // category ID 1 is special root category, therefore we use ID 2
-                        $config->setParameter('categoryId', 2);
+                        $config->addNote('Category with ID 1 is the root, use ID 2 instead.')
+                            ->setParameter('categoryId', 2);
                         break;
                     case 'front_logout':
-                        $config->setParameter(self::CSRF_TOKEN_LOGOUT_NAME, 'frontend_logout');
+                        $config->addNote('Add CSRF token for logout action (configured in app/security.yml).')
+                            ->setParameter(self::CSRF_TOKEN_LOGOUT_NAME, 'frontend_logout');
                         break;
                     case 'admin_pricinggroup_delete':
                         $pricingGroup = $this->getPersistentReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1);
                         /** @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
-                        $config->setParameter('id', $pricingGroup->getId());
+                        $config->addNote(sprintf('Delete pricing group "%s".', $pricingGroup->getName()))
+                            ->setParameter('id', $pricingGroup->getId());
                         break;
                     case 'admin_unit_delete':
                         $unit = $this->getPersistentReference(BaseUnitDataFixture::UNIT_PIECES);
                         /** @var $unit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
                         $newUnit = $this->getPersistentReference(DemoUnitDataFixture::UNIT_CUBIC_METERS);
                         /** @var $newUnit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
-                        $config->setParameter('id', $unit->getId());
-                        $config->setParameter('newId', $newUnit->getId());
+                        $config->addNote(sprintf('Delete unit "%s" and replace it by "%s".', $unit->getName('en'), $newUnit->getName('en')))
+                            ->setParameter('id', $unit->getId())
+                            ->setParameter('newId', $newUnit->getId());
                         break;
                     case 'admin_vat_delete':
                         $vat = $this->getPersistentReference(VatDataFixture::VAT_SECOND_LOW);
                         /** @var $vat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
                         $newVat = $this->getPersistentReference(VatDataFixture::VAT_LOW);
                         /** @var $newVat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
-                        $config->setParameter('id', $vat->getId());
-                        $config->setParameter('newId', $newVat->getId());
+                        $config->addNote(sprintf('Delete VAT "%s" and replace it by "%s".', $vat->getName(), $newVat->getName()))
+                            ->setParameter('id', $vat->getId())
+                            ->setParameter('newId', $newVat->getId());
                         break;
                     case 'front_article_detail':
-                        $config->setParameter('id', 1);
+                        $config->addNote('Use ID 1 as default article.')
+                            ->setParameter('id', 1);
                         break;
                     case 'front_brand_detail':
-                        $config->setParameter('id', 1);
+                        $config->addNote('Use ID 1 as default brand.')
+                            ->setParameter('id', 1);
                         break;
                     case 'front_customer_order_detail_unregistered':
                         $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
                         /** @var $order \Shopsys\ShopBundle\Model\Order\Order */
-                        $config->setParameter('urlHash', $order->getUrlHash());
+                        $config->addNote(sprintf('Use hash of order n. %s for unregistered access.', $order->getNumber()))
+                            ->setParameter('urlHash', $order->getUrlHash());
                         break;
                     case 'front_customer_order_detail_registered':
                         $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
                         /** @var $order \Shopsys\ShopBundle\Model\Order\Order */
-                        $config->setCredentials('no-reply@netdevelo.cz', 'user123');
-                        $config->setParameter('orderNumber', $order->getNumber());
+                        $config->addNote(sprintf('Log as demo user "Jaromír Jágr" on front-end to access order n. %s.', $order->getNumber()))
+                            ->setCredentials('no-reply@netdevelo.cz', 'user123')
+                            ->setParameter('orderNumber', $order->getNumber());
                         break;
                     case 'front_product_detail':
-                        $config->setParameter('id', 1);
-                        // getMainVariantDetailRouteData
-                        $config->addTestCase()
+                        $config->addNote('Use ID 1 as default product.')
+                            ->setParameter('id', 1);
+                        $config->addTestCase('See detail of a product that is main variant')
                             ->setParameter('id', 150);
                         break;
                     case 'front_product_list':
-                        $config->setParameter('id', 2);
-                        // getProductListInCategoryWith500ProductsRouteData
-                        $config->addTestCase()
+                        $config->addNote('Use ID 2 as default category (ID 1 is the root).')
+                            ->setParameter('id', 2);
+                        $config->addTestCase('See category that has 500 products in performance data')
                             ->setParameter('id', 8);
-                        // getProductListWithFilteringInCategoryWith500ProductsRouteData
-                        $config->addTestCase()
+                        $config->addTestCase('See and filter category that has 500 products in performance data')
                             ->setParameter('id', 8)
                             ->setParameter('product_filter_form', [
                                 'inStock' => '1',
@@ -190,11 +202,9 @@ class HttpSmokeTest extends HttpSmokeTestCase
                                     41 => [58],
                                 ],
                             ]);
-                        // getProductListInCategoryWith7600ProductsRouteData
-                        $config->addTestCase()
+                        $config->addTestCase('See category that has 7600 products in performance data')
                             ->setParameter('id', 3);
-                        // getProductListWithFilteringInCategoryWith7600ProductsRouteData
-                        $config->addTestCase()
+                        $config->addTestCase('See and filter category that has 7600 products in performance data')
                             ->setParameter('id', 3)
                             ->setParameter('product_filter_form', [
                                 'minimalPrice' => '100',
@@ -203,11 +213,9 @@ class HttpSmokeTest extends HttpSmokeTestCase
                                     1 => ['1'],
                                 ],
                             ]);
-                        // getProductListInCategoryWith13600ProductsRouteData
-                        $config->addTestCase()
+                        $config->addTestCase('See category that has 3600 products in performance data')
                             ->setParameter('id', 11);
-                        // getProductWithListFilteringInCategoryWith13600ProductsRouteData
-                        $config->addTestCase()
+                        $config->addTestCase('See and filter category that has 3600 products in performance data')
                             ->setParameter('id', 11)
                             ->setParameter('product_filter_form', [
                                 'minimalPrice' => '100',
@@ -215,8 +223,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                             ]);
                         break;
                     case 'front_product_search':
-                        // getSearchFilteringRouteData
-                        $config->addTestCase()
+                        $config->addTestCase('Search for "a" and filter the results')
                             ->setParameter(ProductController::SEARCH_TEXT_PARAMETER, 'a')
                             ->setParameter('product_filter_form', [
                                 'inStock' => '1',
@@ -227,9 +234,10 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     case 'front_registration_set_new_password':
                         $customer = $this->getPersistentReference(UserDataFixture::USER_WITH_RESET_PASSWORD_HASH);
                         /** @var $customer \Shopsys\ShopBundle\Model\Customer\User */
-                        $config->setParameter('email', $customer->getEmail());
-                        $config->setParameter('hash', $customer->getResetPasswordHash());
-                        $config->addTestCase()
+                        $config->addNote('See new password page for customer with reset password hash.')
+                            ->setParameter('email', $customer->getEmail())
+                            ->setParameter('hash', $customer->getResetPasswordHash());
+                        $config->addTestCase('Expect redirect when the hash is invalid.')
                             ->setParameter('hash', 'invalidHash')
                             ->expectStatusCode(302);
                         break;
@@ -243,7 +251,8 @@ class HttpSmokeTest extends HttpSmokeTestCase
 
                     $tokenId = $routeCsrfProtector->getCsrfTokenId($config->getRouteName());
 
-                    $config->setParameter(RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER, $tokenId);
+                    $config->addNote('Add CSRF token for any delete action (protected by RouteCsrfProtector).')
+                        ->setParameter(RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER, $tokenId);
                 }
             });
     }
@@ -273,7 +282,8 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 $csrfTokenManager = self::$kernel->getContainer()->get('security.csrf.token_manager');
                 /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
 
-                $config->setParameter($name, $csrfTokenManager->getToken($value)->getValue());
+                $config->addNote('Replace CSRF token ID in parameter by real value provided by token manager.')
+                    ->setParameter($name, $csrfTokenManager->getToken($value)->getValue());
             }
         }
 
