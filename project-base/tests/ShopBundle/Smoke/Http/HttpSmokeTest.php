@@ -128,7 +128,6 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     case 'admin_bestsellingproduct_detail':
                         // category ID 1 is special root category, therefore we use ID 2
                         $config->setParameter('categoryId', 2);
-                        $config->setParameter('domainId', 1);
                         break;
                     case 'front_logout':
                         $config->setParameter(self::CSRF_TOKEN_LOGOUT_NAME, 'frontend_logout');
