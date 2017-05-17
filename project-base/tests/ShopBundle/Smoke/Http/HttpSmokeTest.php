@@ -119,8 +119,11 @@ class HttpSmokeTest extends HttpSmokeTestCase
                             ->expectStatusCode(200);
                         break;
                     case 'admin_category_edit':
-                        // category ID 1 is special root category, therefore we use ID 2
-                        $config->setParameter('id', 2);
+                        // category ID 1 is special root category, cannot be edited
+                        $config->expectStatusCode(404);
+                        $config->addTestCase()
+                            ->setParameter('id', 2)
+                            ->expectStatusCode(200);
                         break;
                     case 'admin_bestsellingproduct_detail':
                         // category ID 1 is special root category, therefore we use ID 2
