@@ -64,13 +64,27 @@ class HttpSmokeTest extends HttpSmokeTestCase
     {
         $routeConfigsBuilder
             ->customize(function (RouteConfig $config) {
-                if (!$config->isMethodAllowed('GET')
-                    || strpos($config->getRoutePath(), '/_') === 0
-                    || strpos($config->getRoutePath(), '/admin/_') === 0
-                    || $config->getRouteCondition() === 'request.isXmlHttpRequest()'
-                    || in_array($config->getRouteName(), self::IGNORED_ROUTE_NAMES, true)
-                    || !preg_match('~^(admin|front)_~', $config->getRouteName())
-                ) {
+                if (!$config->isMethodAllowed('GET')) {
+                    $config->ignore();
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if (preg_match('~^(/admin)?/_~', $config->getRoutePath())) {
+                    $config->ignore();
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if ($config->getRouteCondition() === 'request.isXmlHttpRequest()') {
+                    $config->ignore();
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if (in_array($config->getRouteName(), self::IGNORED_ROUTE_NAMES, true)) {
+                    $config->ignore();
+                }
+            })
+            ->customize(function (RouteConfig $config) {
+                if (!preg_match('~^(admin|front)_~', $config->getRouteName())) {
                     $config->ignore();
                 }
             })
