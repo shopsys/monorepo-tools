@@ -66,7 +66,7 @@ class RouteConfig
      * @param string $method
      * @return bool
      */
-    public function isMethodAllowed($method)
+    public function isHttpMethodAllowed($method)
     {
         $methods = $this->route->getMethods();
 

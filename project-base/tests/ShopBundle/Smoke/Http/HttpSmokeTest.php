@@ -42,7 +42,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
     {
         $routeConfigsBuilder
             ->customize(function (RouteConfig $config) {
-                if (!$config->isMethodAllowed('GET')) {
+                if (!$config->isHttpMethodAllowed('GET')) {
                     $config->addNote('Only routes supporting GET method are tested.')
                         ->ignore();
                 }
