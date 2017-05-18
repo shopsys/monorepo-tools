@@ -95,9 +95,9 @@ class RouteConfig
     /**
      * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig[]
      */
-    public function getTestCaseConfigs()
+    public function generateTestCaseConfigs()
     {
-        $testCaseConfigs = [$this->defaultTestCaseConfig];
+        $testCaseConfigs = [clone $this->defaultTestCaseConfig];
         foreach ($this->additionalTestCaseConfigs as $additionalTestCaseConfig) {
             $testCaseConfig = clone $this->defaultTestCaseConfig;
             if ($additionalTestCaseConfig->hasCredentialsChanged()) {

@@ -57,7 +57,7 @@ class RouteConfigsBuilder
     {
         $testCaseConfigs = [];
         foreach ($this->getRouteConfigs() as $routeConfig) {
-            $testCaseConfigs = array_merge($testCaseConfigs, $routeConfig->getTestCaseConfigs());
+            $testCaseConfigs = array_merge($testCaseConfigs, $routeConfig->generateTestCaseConfigs());
         }
 
         return $testCaseConfigs;
