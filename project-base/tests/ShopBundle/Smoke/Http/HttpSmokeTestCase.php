@@ -70,7 +70,7 @@ abstract class HttpSmokeTestCase extends KernelTestCase
     }
 
     /**
-     * This method should be implemented to customize and configure the test cases for individual routes
+     * This method must be implemented to customize and configure the test cases for individual routes
      * @param \Tests\ShopBundle\Smoke\Http\RouteConfigsBuilder $routeConfigsBuilder
      */
     abstract protected function customizeRouteConfigs(RouteConfigsBuilder $routeConfigsBuilder);
