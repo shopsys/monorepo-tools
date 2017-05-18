@@ -152,7 +152,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if (preg_match('~^admin_(superadmin_|translation_list$)~', $config->getRouteName())) {
                     $config->changeDefaultRequestDataSet('Only superadmin should be able to see this route.')
                         ->expectStatusCode(404);
-                    $config->addRequestDataSet('Should be OK when logged in as "superadmin".')
+                    $config->addExtraRequestDataSet('Should be OK when logged in as "superadmin".')
                         ->setCredentials('superadmin', 'admin123')
                         ->expectStatusCode(200);
                 }
@@ -161,7 +161,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if ($config->getRouteName() === 'admin_login') {
                     $config->changeDefaultRequestDataSet('Admin login should redirect by 302.')
                         ->expectStatusCode(302);
-                    $config->addRequestDataSet('Admin login should not redirect for users that are not logged in yet.')
+                    $config->addExtraRequestDataSet('Admin login should not redirect for users that are not logged in yet.')
                         ->setCredentials(null, null)
                         ->expectStatusCode(200);
                 }
@@ -177,7 +177,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if ($config->getRouteName() === 'admin_administrator_edit') {
                     $config->changeDefaultRequestDataSet('It is forbidden to edit administrator with ID 1 as it is the superadmin.')
                         ->expectStatusCode(404);
-                    $config->addRequestDataSet('Editing normal administrator should be OK.')
+                    $config->addExtraRequestDataSet('Editing normal administrator should be OK.')
                         ->setParameter('id', 2)
                         ->expectStatusCode(200);
                 }
@@ -186,7 +186,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if ($config->getRouteName() === 'admin_category_edit') {
                     $config->changeDefaultRequestDataSet('It is forbidden to edit category with ID 1 as it is the root.')
                         ->expectStatusCode(404);
-                    $config->addRequestDataSet('Editing normal category should be OK.')
+                    $config->addExtraRequestDataSet('Editing normal category should be OK.')
                         ->setParameter('id', 2)
                         ->expectStatusCode(200);
                 }
@@ -302,7 +302,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if ($config->getRouteName() === 'front_product_detail') {
                     $config->changeDefaultRequestDataSet('Use ID 1 as default product.')
                         ->setParameter('id', 1);
-                    $config->addRequestDataSet('See detail of a product that is main variant')
+                    $config->addExtraRequestDataSet('See detail of a product that is main variant')
                         ->setParameter('id', 150);
                 }
             })
@@ -310,9 +310,9 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if ($config->getRouteName() === 'front_product_list') {
                     $config->changeDefaultRequestDataSet('Use ID 2 as default category (ID 1 is the root).')
                         ->setParameter('id', 2);
-                    $config->addRequestDataSet('See category that has 500 products in performance data')
+                    $config->addExtraRequestDataSet('See category that has 500 products in performance data')
                         ->setParameter('id', 8);
-                    $config->addRequestDataSet('See and filter category that has 500 products in performance data')
+                    $config->addExtraRequestDataSet('See and filter category that has 500 products in performance data')
                         ->setParameter('id', 8)
                         ->setParameter('product_filter_form', [
                             'inStock' => '1',
@@ -320,9 +320,9 @@ class HttpSmokeTest extends HttpSmokeTestCase
                                 41 => [58],
                             ],
                         ]);
-                    $config->addRequestDataSet('See category that has 7600 products in performance data')
+                    $config->addExtraRequestDataSet('See category that has 7600 products in performance data')
                         ->setParameter('id', 3);
-                    $config->addRequestDataSet('See and filter category that has 7600 products in performance data')
+                    $config->addExtraRequestDataSet('See and filter category that has 7600 products in performance data')
                         ->setParameter('id', 3)
                         ->setParameter('product_filter_form', [
                             'minimalPrice' => '100',
@@ -331,9 +331,9 @@ class HttpSmokeTest extends HttpSmokeTestCase
                                 1 => ['1'],
                             ],
                         ]);
-                    $config->addRequestDataSet('See category that has 3600 products in performance data')
+                    $config->addExtraRequestDataSet('See category that has 3600 products in performance data')
                         ->setParameter('id', 11);
-                    $config->addRequestDataSet('See and filter category that has 3600 products in performance data')
+                    $config->addExtraRequestDataSet('See and filter category that has 3600 products in performance data')
                         ->setParameter('id', 11)
                         ->setParameter('product_filter_form', [
                             'minimalPrice' => '100',
@@ -343,7 +343,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'front_product_search') {
-                    $config->addRequestDataSet('Search for "a" and filter the results')
+                    $config->addExtraRequestDataSet('Search for "a" and filter the results')
                         ->setParameter(ProductController::SEARCH_TEXT_PARAMETER, 'a')
                         ->setParameter('product_filter_form', [
                             'inStock' => '1',
@@ -359,7 +359,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     $config->changeDefaultRequestDataSet('See new password page for customer with reset password hash.')
                         ->setParameter('email', $customer->getEmail())
                         ->setParameter('hash', $customer->getResetPasswordHash());
-                    $config->addRequestDataSet('Expect redirect when the hash is invalid.')
+                    $config->addExtraRequestDataSet('Expect redirect when the hash is invalid.')
                         ->setParameter('hash', 'invalidHash')
                         ->expectStatusCode(302);
                 }

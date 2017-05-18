@@ -24,7 +24,7 @@ class RouteConfig
     /**
      * @var \Tests\ShopBundle\Smoke\Http\RequestDataSet[]
      */
-    private $additionalRequestDataSets;
+    private $extraRequestDataSets;
 
     /**
      * @param string $routeName
@@ -35,7 +35,7 @@ class RouteConfig
         $this->routeName = $routeName;
         $this->route = $route;
         $this->defaultRequestDataSet = new RequestDataSet($this->routeName, 200);
-        $this->additionalRequestDataSets = [];
+        $this->extraRequestDataSets = [];
     }
 
     /**
@@ -98,21 +98,21 @@ class RouteConfig
     public function generateRequestDataSets()
     {
         $requestDataSets = [clone $this->defaultRequestDataSet];
-        foreach ($this->additionalRequestDataSets as $additionalRequestDataSet) {
+        foreach ($this->extraRequestDataSets as $extraRequestDataSet) {
             $requestDataSet = clone $this->defaultRequestDataSet;
-            if ($additionalRequestDataSet->hasCredentialsChanged()) {
+            if ($extraRequestDataSet->hasCredentialsChanged()) {
                 $requestDataSet->setCredentials(
-                    $additionalRequestDataSet->getUsername(),
-                    $additionalRequestDataSet->getPassword()
+                    $extraRequestDataSet->getUsername(),
+                    $extraRequestDataSet->getPassword()
                 );
             }
-            if ($additionalRequestDataSet->getExpectedStatusCode() !== null) {
-                $requestDataSet->expectStatusCode($additionalRequestDataSet->getExpectedStatusCode());
+            if ($extraRequestDataSet->getExpectedStatusCode() !== null) {
+                $requestDataSet->expectStatusCode($extraRequestDataSet->getExpectedStatusCode());
             }
-            foreach ($additionalRequestDataSet->getParameters() as $name => $value) {
+            foreach ($extraRequestDataSet->getParameters() as $name => $value) {
                 $requestDataSet->setParameter($name, $value);
             }
-            foreach ($additionalRequestDataSet->getDebugNotes() as $debugNote) {
+            foreach ($extraRequestDataSet->getDebugNotes() as $debugNote) {
                 $requestDataSet->addDebugNote($debugNote);
             }
             $requestDataSets[] = $requestDataSet;
@@ -155,13 +155,13 @@ class RouteConfig
      * @param string|null $debugNote
      * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
-    public function addRequestDataSet($debugNote = null)
+    public function addExtraRequestDataSet($debugNote = null)
     {
         $requestDataSet = new RequestDataSet($this->routeName);
-        $this->additionalRequestDataSets[] = $requestDataSet;
+        $this->extraRequestDataSets[] = $requestDataSet;
 
         if ($debugNote !== null) {
-            $requestDataSet->addDebugNote('Special test case: ' . $debugNote);
+            $requestDataSet->addDebugNote('Extra test case: ' . $debugNote);
         }
 
         return $requestDataSet;
