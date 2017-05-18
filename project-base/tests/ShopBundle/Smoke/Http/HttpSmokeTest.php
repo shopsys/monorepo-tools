@@ -119,14 +119,14 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 foreach ($config->getRouteParameterNames() as $name) {
                     if ($config->isRouteParameterRequired($name) && preg_match('~^(id|.+Id)$~', $name)) {
                         $note = 'Route requires ID parameter "%s" in its path, try using %d by default.';
-                        $config->addNote(sprintf($note, $name, self::DEFAULT_ID_VALUE))
+                        $config->changeDefaultTestCase(sprintf($note, $name, self::DEFAULT_ID_VALUE))
                             ->setParameter($name, self::DEFAULT_ID_VALUE);
                     }
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if (preg_match('~_delete$~', $config->getRouteName())) {
-                    $config->addNote('Expect redirect by 302 for any delete action.')
+                    $config->changeDefaultTestCase('Expect redirect by 302 for any delete action.')
                         ->expectStatusCode(302)
                         ->delayCustomizationUntilTestExecution(function (TestCaseConfig $config) {
                             $routeCsrfProtector = self::$kernel->getContainer()
@@ -153,13 +153,13 @@ class HttpSmokeTest extends HttpSmokeTestCase
         $routeConfigsBuilder
             ->customize(function (RouteConfig $config) {
                 if (preg_match('~^admin_~', $config->getRouteName())) {
-                    $config->addNote('Log as "admin" to administration.')
+                    $config->changeDefaultTestCase('Log as "admin" to administration.')
                         ->setCredentials('admin', 'admin123');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if (preg_match('~^admin_(superadmin_|translation_list$)~', $config->getRouteName())) {
-                    $config->addNote('Only superadmin should be able to see this route.')
+                    $config->changeDefaultTestCase('Only superadmin should be able to see this route.')
                         ->expectStatusCode(404);
                     $config->addTestCase('Should be OK when logged in as "superadmin".')
                         ->setCredentials('superadmin', 'admin123')
@@ -168,7 +168,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'admin_login') {
-                    $config->addNote('Admin login should redirect by 302.')
+                    $config->changeDefaultTestCase('Admin login should redirect by 302.')
                         ->expectStatusCode(302);
                     $config->addTestCase('Admin login should not redirect for users that are not logged in yet.')
                         ->setCredentials(null, null)
@@ -178,13 +178,13 @@ class HttpSmokeTest extends HttpSmokeTestCase
             ->customize(function (RouteConfig $config) {
                 $routeNames = ['admin_login_sso', 'admin_customer_loginasuser'];
                 if (in_array($config->getRouteName(), $routeNames, true)) {
-                    $config->addNote(sprintf('Route "%s" should always just redirect.', $config->getRouteName()))
+                    $config->changeDefaultTestCase(sprintf('Route "%s" should always just redirect.', $config->getRouteName()))
                         ->expectStatusCode(302);
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'admin_administrator_edit') {
-                    $config->addNote('It is forbidden to edit administrator with ID 1 as it is the superadmin.')
+                    $config->changeDefaultTestCase('It is forbidden to edit administrator with ID 1 as it is the superadmin.')
                         ->expectStatusCode(404);
                     $config->addTestCase('Editing normal administrator should be OK.')
                         ->setParameter('id', 2)
@@ -193,7 +193,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'admin_category_edit') {
-                    $config->addNote('It is forbidden to edit category with ID 1 as it is the root.')
+                    $config->changeDefaultTestCase('It is forbidden to edit category with ID 1 as it is the root.')
                         ->expectStatusCode(404);
                     $config->addTestCase('Editing normal category should be OK.')
                         ->setParameter('id', 2)
@@ -202,7 +202,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'admin_bestsellingproduct_detail') {
-                    $config->addNote('Category with ID 1 is the root, use ID 2 instead.')
+                    $config->changeDefaultTestCase('Category with ID 1 is the root, use ID 2 instead.')
                         ->setParameter('categoryId', 2);
                 }
             })
@@ -210,7 +210,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if ($config->getRouteName() === 'admin_pricinggroup_delete') {
                     $pricingGroup = $this->getPersistentReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1);
                     /** @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
-                    $config->addNote(sprintf('Delete pricing group "%s".', $pricingGroup->getName()))
+                    $config->changeDefaultTestCase(sprintf('Delete pricing group "%s".', $pricingGroup->getName()))
                         ->setParameter('id', $pricingGroup->getId());
                 }
             })
@@ -220,7 +220,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     /** @var $unit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
                     $newUnit = $this->getPersistentReference(DemoUnitDataFixture::UNIT_CUBIC_METERS);
                     /** @var $newUnit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
-                    $config->addNote(sprintf('Delete unit "%s" and replace it by "%s".', $unit->getName('en'), $newUnit->getName('en')))
+                    $config->changeDefaultTestCase(sprintf('Delete unit "%s" and replace it by "%s".', $unit->getName('en'), $newUnit->getName('en')))
                         ->setParameter('id', $unit->getId())
                         ->setParameter('newId', $newUnit->getId());
                 }
@@ -231,7 +231,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     /** @var $vat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
                     $newVat = $this->getPersistentReference(VatDataFixture::VAT_LOW);
                     /** @var $newVat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
-                    $config->addNote(sprintf('Delete VAT "%s" and replace it by "%s".', $vat->getName(), $newVat->getName()))
+                    $config->changeDefaultTestCase(sprintf('Delete VAT "%s" and replace it by "%s".', $vat->getName(), $newVat->getName()))
                         ->setParameter('id', $vat->getId())
                         ->setParameter('newId', $newVat->getId());
                 }
@@ -246,20 +246,20 @@ class HttpSmokeTest extends HttpSmokeTestCase
         $routeConfigsBuilder
             ->customize(function (RouteConfig $config) {
                 if (in_array($config->getRouteName(), ['front_customer_edit', 'front_customer_orders'], true)) {
-                    $config->addNote('Log as demo user "Jaromír Jágr" on pages in client section.')
+                    $config->changeDefaultTestCase('Log as demo user "Jaromír Jágr" on pages in client section.')
                         ->setCredentials('no-reply@netdevelo.cz', 'user123');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 $routeNames = ['front_customer_login_as_remembered_user', 'front_promo_code_remove'];
                 if (in_array($config->getRouteName(), $routeNames, true)) {
-                    $config->addNote(sprintf('Route "%s" should always just redirect.', $config->getRouteName()))
+                    $config->changeDefaultTestCase(sprintf('Route "%s" should always just redirect.', $config->getRouteName()))
                         ->expectStatusCode(302);
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if (in_array($config->getRouteName(), ['front_order_index', 'front_order_sent'], true)) {
-                    $config->addNote('Order page should redirect by 302 as the cart is empty by default.')
+                    $config->changeDefaultTestCase('Order page should redirect by 302 as the cart is empty by default.')
                         ->expectStatusCode(302);
                 }
             })
@@ -274,19 +274,19 @@ class HttpSmokeTest extends HttpSmokeTestCase
                         $config->addNote('Add CSRF token for logout action (configured in app/security.yml).')
                             ->setParameter('_csrf_token', $token->getValue());
                     });
-                    $config->addNote('Logout action should redirect by 302')
+                    $config->changeDefaultTestCase('Logout action should redirect by 302')
                         ->expectStatusCode(302);
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'front_article_detail') {
-                    $config->addNote('Use ID 1 as default article.')
+                    $config->changeDefaultTestCase('Use ID 1 as default article.')
                         ->setParameter('id', 1);
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'front_brand_detail') {
-                    $config->addNote('Use ID 1 as default brand.')
+                    $config->changeDefaultTestCase('Use ID 1 as default brand.')
                         ->setParameter('id', 1);
                 }
             })
@@ -294,7 +294,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if ($config->getRouteName() === 'front_customer_order_detail_unregistered') {
                     $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
                     /** @var $order \Shopsys\ShopBundle\Model\Order\Order */
-                    $config->addNote(sprintf('Use hash of order n. %s for unregistered access.', $order->getNumber()))
+                    $config->changeDefaultTestCase(sprintf('Use hash of order n. %s for unregistered access.', $order->getNumber()))
                         ->setParameter('urlHash', $order->getUrlHash());
                 }
             })
@@ -302,14 +302,14 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if ($config->getRouteName() === 'front_customer_order_detail_registered') {
                     $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
                     /** @var $order \Shopsys\ShopBundle\Model\Order\Order */
-                    $config->addNote(sprintf('Log as demo user "Jaromír Jágr" on front-end to access order n. %s.', $order->getNumber()))
+                    $config->changeDefaultTestCase(sprintf('Log as demo user "Jaromír Jágr" on front-end to access order n. %s.', $order->getNumber()))
                         ->setCredentials('no-reply@netdevelo.cz', 'user123')
                         ->setParameter('orderNumber', $order->getNumber());
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'front_product_detail') {
-                    $config->addNote('Use ID 1 as default product.')
+                    $config->changeDefaultTestCase('Use ID 1 as default product.')
                         ->setParameter('id', 1);
                     $config->addTestCase('See detail of a product that is main variant')
                         ->setParameter('id', 150);
@@ -317,7 +317,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'front_product_list') {
-                    $config->addNote('Use ID 2 as default category (ID 1 is the root).')
+                    $config->changeDefaultTestCase('Use ID 2 as default category (ID 1 is the root).')
                         ->setParameter('id', 2);
                     $config->addTestCase('See category that has 500 products in performance data')
                         ->setParameter('id', 8);
@@ -365,7 +365,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if ($config->getRouteName() === 'front_registration_set_new_password') {
                     $customer = $this->getPersistentReference(UserDataFixture::USER_WITH_RESET_PASSWORD_HASH);
                     /** @var $customer \Shopsys\ShopBundle\Model\Customer\User */
-                    $config->addNote('See new password page for customer with reset password hash.')
+                    $config->changeDefaultTestCase('See new password page for customer with reset password hash.')
                         ->setParameter('email', $customer->getEmail())
                         ->setParameter('hash', $customer->getResetPasswordHash());
                     $config->addTestCase('Expect redirect when the hash is invalid.')

@@ -132,41 +132,6 @@ class RouteConfig
     }
 
     /**
-     * @param string|null $username
-     * @param string|null $password
-     * @return \Tests\ShopBundle\Smoke\Http\RouteConfig
-     */
-    public function setCredentials($username, $password)
-    {
-        $this->defaultTestCaseConfig->setCredentials($username, $password);
-
-        return $this;
-    }
-
-    /**
-     * @param int $code
-     * @return \Tests\ShopBundle\Smoke\Http\RouteConfig
-     */
-    public function expectStatusCode($code)
-    {
-        $this->defaultTestCaseConfig->expectStatusCode($code);
-
-        return $this;
-    }
-
-    /**
-     * @param string $name
-     * @param mixed $value
-     * @return \Tests\ShopBundle\Smoke\Http\RouteConfig
-     */
-    public function setParameter($name, $value)
-    {
-        $this->defaultTestCaseConfig->setParameter($name, $value);
-
-        return $this;
-    }
-
-    /**
      * @param string $note
      * @return \Tests\ShopBundle\Smoke\Http\RouteConfig
      */
@@ -175,6 +140,21 @@ class RouteConfig
         $this->defaultTestCaseConfig->addNote($note);
 
         return $this;
+    }
+
+    /**
+     * @param string $note
+     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     */
+    public function changeDefaultTestCase($note = '')
+    {
+        $testCaseConfig = $this->defaultTestCaseConfig;
+
+        if ($note !== '') {
+            $testCaseConfig->addNote($note);
+        }
+
+        return $testCaseConfig;
     }
 
     /**
