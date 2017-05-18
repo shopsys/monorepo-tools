@@ -133,14 +133,6 @@ class RequestDataSet
     }
 
     /**
-     * @return bool
-     */
-    public function hasCredentialsChanged()
-    {
-        return $this->credentialsChanged;
-    }
-
-    /**
      * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
     public function skip()
@@ -210,6 +202,36 @@ class RequestDataSet
     public function addCallDuringTestExecution($callback)
     {
         $this->callsDuringTestExecution[] = $callback;
+
+        return $this;
+    }
+
+    /**
+     * Merges values from specified $requestDataSet into this instance.
+     *
+     * It is used to merge extra RequestDataSet into default RequestDataSet.
+     * Values that were not specified in $requestDataSet have no effect on result.
+     *
+     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet $requestDataSet
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
+     */
+    public function mergeExtraValuesFrom(RequestDataSet $requestDataSet)
+    {
+        if ($requestDataSet->credentialsChanged) {
+            $this->setCredentials(
+                $requestDataSet->getUsername(),
+                $requestDataSet->getPassword()
+            );
+        }
+        if ($requestDataSet->getExpectedStatusCode() !== null) {
+            $this->expectStatusCode($requestDataSet->getExpectedStatusCode());
+        }
+        foreach ($requestDataSet->getParameters() as $name => $value) {
+            $this->setParameter($name, $value);
+        }
+        foreach ($requestDataSet->getDebugNotes() as $debugNote) {
+            $this->addDebugNote($debugNote);
+        }
 
         return $this;
     }

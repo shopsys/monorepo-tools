@@ -99,23 +99,8 @@ class RouteConfig
     {
         $requestDataSets = [clone $this->defaultRequestDataSet];
         foreach ($this->extraRequestDataSets as $extraRequestDataSet) {
-            $requestDataSet = clone $this->defaultRequestDataSet;
-            if ($extraRequestDataSet->hasCredentialsChanged()) {
-                $requestDataSet->setCredentials(
-                    $extraRequestDataSet->getUsername(),
-                    $extraRequestDataSet->getPassword()
-                );
-            }
-            if ($extraRequestDataSet->getExpectedStatusCode() !== null) {
-                $requestDataSet->expectStatusCode($extraRequestDataSet->getExpectedStatusCode());
-            }
-            foreach ($extraRequestDataSet->getParameters() as $name => $value) {
-                $requestDataSet->setParameter($name, $value);
-            }
-            foreach ($extraRequestDataSet->getDebugNotes() as $debugNote) {
-                $requestDataSet->addDebugNote($debugNote);
-            }
-            $requestDataSets[] = $requestDataSet;
+            $defaultRequestDataSetClone = clone $this->defaultRequestDataSet;
+            $requestDataSets[] = $defaultRequestDataSetClone->mergeExtraValuesFrom($extraRequestDataSet);
         }
 
         return $requestDataSets;
