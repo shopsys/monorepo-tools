@@ -122,14 +122,14 @@ class RouteConfig
     }
 
     /**
-     * @param string $note
+     * @param string|null $note
      * @return \Tests\ShopBundle\Smoke\Http\RouteConfig
      */
-    public function skipRoute($note = '')
+    public function skipRoute($note = null)
     {
         $this->defaultTestCaseConfig->skip();
 
-        if ($note !== '') {
+        if ($note !== null) {
             $this->defaultTestCaseConfig->addNote('Skipped test case: ' . $note);
         }
 
@@ -137,14 +137,14 @@ class RouteConfig
     }
 
     /**
-     * @param string $note
+     * @param string|null $note
      * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
      */
-    public function changeDefaultTestCase($note = '')
+    public function changeDefaultTestCase($note = null)
     {
         $testCaseConfig = $this->defaultTestCaseConfig;
 
-        if ($note !== '') {
+        if ($note !== null) {
             $testCaseConfig->addNote($note);
         }
 
@@ -152,15 +152,15 @@ class RouteConfig
     }
 
     /**
-     * @param string $note
+     * @param string|null $note
      * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
      */
-    public function addTestCase($note = '')
+    public function addTestCase($note = null)
     {
         $testCaseConfig = new TestCaseConfig($this->routeName);
         $this->additionalTestCaseConfigs[] = $testCaseConfig;
 
-        if ($note !== '') {
+        if ($note !== null) {
             $testCaseConfig->addNote('Special test case: ' . $note);
         }
 
