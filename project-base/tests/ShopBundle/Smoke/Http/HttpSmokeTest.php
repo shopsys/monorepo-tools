@@ -119,7 +119,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 if (preg_match('~_delete$~', $config->getRouteName())) {
                     $config->changeDefaultRequestDataSet('Expect redirect by 302 for any delete action.')
                         ->expectStatusCode(302)
-                        ->delayCustomizationUntilTestExecution(function (RequestDataSet $requestDataSet) {
+                        ->addCallDuringTestExecution(function (RequestDataSet $requestDataSet) {
                             $routeCsrfProtector = self::$kernel->getContainer()
                                 ->get('shopsys.shop.router.security.route_csrf_protector');
                             /* @var $routeCsrfProtector \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector */
@@ -256,7 +256,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'front_logout') {
-                    $config->delayCustomizationUntilTestExecution(function (RequestDataSet $requestDataSet) {
+                    $config->addCallDuringTestExecution(function (RequestDataSet $requestDataSet) {
                         $csrfTokenManager = self::$kernel->getContainer()->get('security.csrf.token_manager');
                         /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
 

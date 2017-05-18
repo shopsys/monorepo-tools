@@ -29,7 +29,7 @@ abstract class HttpSmokeTestCase extends KernelTestCase
      */
     final public function testHttpResponse(RequestDataSet $requestDataSet)
     {
-        $requestDataSet->executeAllCustomizationsDelayedUntilTestExecution();
+        $requestDataSet->executeCallsDuringTestExecution();
 
         if ($requestDataSet->isSkipped()) {
             $message = sprintf('Test for route "%s" was skipped.', $requestDataSet->getRouteName());

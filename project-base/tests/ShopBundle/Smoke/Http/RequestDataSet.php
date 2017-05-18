@@ -42,7 +42,7 @@ class RequestDataSet
     /**
      * @var callable[]
      */
-    private $delayedCustomizations;
+    private $callsDuringTestExecution;
 
     /**
      * @var bool
@@ -60,7 +60,7 @@ class RequestDataSet
         $this->skipped = false;
         $this->parameters = [];
         $this->debugNotes = [];
-        $this->delayedCustomizations = [];
+        $this->callsDuringTestExecution = [];
         $this->credentialsChanged = false;
     }
 
@@ -123,9 +123,9 @@ class RequestDataSet
     /**
      * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
-    public function executeAllCustomizationsDelayedUntilTestExecution()
+    public function executeCallsDuringTestExecution()
     {
-        foreach ($this->delayedCustomizations as $customization) {
+        foreach ($this->callsDuringTestExecution as $customization) {
             $customization($this);
         }
 
@@ -198,12 +198,18 @@ class RequestDataSet
     }
 
     /**
+     * Provided $callback will be called with this instance as a single argument
+     *
+     * Useful for code that need to access the same instance of kernel as the test method.
+     *
+     * @see \Symfony\Bundle\FrameworkBundle\Test\KernelTestCase::$kernel
+     *
      * @param callable $callback
      * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
-    public function delayCustomizationUntilTestExecution($callback)
+    public function addCallDuringTestExecution($callback)
     {
-        $this->delayedCustomizations[] = $callback;
+        $this->callsDuringTestExecution[] = $callback;
 
         return $this;
     }
