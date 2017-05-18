@@ -37,7 +37,7 @@ class TestCaseConfig
     /**
      * @var string[]
      */
-    private $notes;
+    private $debugNotes;
 
     /**
      * @var callable[]
@@ -59,7 +59,7 @@ class TestCaseConfig
         $this->expectedStatusCode = $expectedStatusCode;
         $this->skipped = false;
         $this->parameters = [];
-        $this->notes = [];
+        $this->debugNotes = [];
         $this->delayedCustomizations = [];
         $this->credentialsChanged = false;
     }
@@ -115,9 +115,9 @@ class TestCaseConfig
     /**
      * @return string[]
      */
-    public function getNotes()
+    public function getDebugNotes()
     {
-        return $this->notes;
+        return $this->debugNotes;
     }
 
     /**
@@ -187,12 +187,12 @@ class TestCaseConfig
     }
 
     /**
-     * @param string $note
+     * @param string $debugNote
      * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
      */
-    public function addNote($note)
+    public function addDebugNote($debugNote)
     {
-        $this->notes[] = $note;
+        $this->debugNotes[] = $debugNote;
 
         return $this;
     }

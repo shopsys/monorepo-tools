@@ -109,8 +109,8 @@ class HttpSmokeTest extends HttpSmokeTestCase
             ->customize(function (RouteConfig $config) {
                 foreach ($config->getRouteParameterNames() as $name) {
                     if ($config->isRouteParameterRequired($name) && preg_match('~^(id|.+Id)$~', $name)) {
-                        $note = 'Route requires ID parameter "%s". Using %d by default.';
-                        $config->changeDefaultTestCase(sprintf($note, $name, self::DEFAULT_ID_VALUE))
+                        $debugNote = 'Route requires ID parameter "%s". Using %d by default.';
+                        $config->changeDefaultTestCase(sprintf($debugNote, $name, self::DEFAULT_ID_VALUE))
                             ->setParameter($name, self::DEFAULT_ID_VALUE);
                     }
                 }
@@ -129,7 +129,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                             $tokenId = $routeCsrfProtector->getCsrfTokenId($config->getRouteName());
                             $token = $csrfTokenManager->getToken($tokenId);
 
-                            $config->addNote('Add CSRF token for any delete action (protected by RouteCsrfProtector).')
+                            $config->addDebugNote('Add CSRF token for any delete action (protected by RouteCsrfProtector).')
                                 ->setParameter(RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER, $token->getValue());
                         });
                 }
@@ -262,7 +262,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
 
                         $token = $csrfTokenManager->getToken('frontend_logout');
 
-                        $config->addNote('Add CSRF token for logout action (configured in app/security.yml).')
+                        $config->addDebugNote('Add CSRF token for logout action (configured in app/security.yml).')
                             ->setParameter('_csrf_token', $token->getValue());
                     });
                     $config->changeDefaultTestCase('Logout action should redirect by 302')

@@ -32,8 +32,8 @@ abstract class HttpSmokeTestCase extends KernelTestCase
         $config->executeAllCustomizationsDelayedUntilTestExecution();
 
         if ($config->isSkipped()) {
-            $ignoreMessage = sprintf('Test for route "%s" was skipped.', $config->getRouteName());
-            $this->markTestSkipped($this->getMessageWithNotes($config, $ignoreMessage));
+            $message = sprintf('Test for route "%s" was skipped.', $config->getRouteName());
+            $this->markTestSkipped($this->getMessageWithDebugNotes($config, $message));
         }
 
         $request = $this->createRequest($config);
@@ -133,7 +133,7 @@ abstract class HttpSmokeTestCase extends KernelTestCase
         $this->assertSame(
             $config->getExpectedStatusCode(),
             $response->getStatusCode(),
-            $this->getMessageWithNotes($config, $failMessage)
+            $this->getMessageWithDebugNotes($config, $failMessage)
         );
     }
 
@@ -142,13 +142,13 @@ abstract class HttpSmokeTestCase extends KernelTestCase
      * @param string $message
      * @return string
      */
-    protected function getMessageWithNotes(TestCaseConfig $config, $message)
+    protected function getMessageWithDebugNotes(TestCaseConfig $config, $message)
     {
-        if (count($config->getNotes()) > 0) {
-            $indentedNotes = array_map(function ($note) {
-                return "\n" . '  - ' . $note;
-            }, $config->getNotes());
-            $message .= "\n" . 'Notes for this data set:' . implode($indentedNotes);
+        if (count($config->getDebugNotes()) > 0) {
+            $indentedDebugNotes = array_map(function ($debugNote) {
+                return "\n" . '  - ' . $debugNote;
+            }, $config->getDebugNotes());
+            $message .= "\n" . 'Notes for this data set:' . implode($indentedDebugNotes);
         }
 
         return $message;

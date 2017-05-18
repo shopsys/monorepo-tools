@@ -112,8 +112,8 @@ class RouteConfig
             foreach ($additionalTestCaseConfig->getParameters() as $name => $value) {
                 $testCaseConfig->setParameter($name, $value);
             }
-            foreach ($additionalTestCaseConfig->getNotes() as $note) {
-                $testCaseConfig->addNote($note);
+            foreach ($additionalTestCaseConfig->getDebugNotes() as $debugNote) {
+                $testCaseConfig->addDebugNote($debugNote);
             }
             $testCaseConfigs[] = $testCaseConfig;
         }
@@ -122,46 +122,46 @@ class RouteConfig
     }
 
     /**
-     * @param string|null $note
+     * @param string|null $debugNote
      * @return \Tests\ShopBundle\Smoke\Http\RouteConfig
      */
-    public function skipRoute($note = null)
+    public function skipRoute($debugNote = null)
     {
         $this->defaultTestCaseConfig->skip();
 
-        if ($note !== null) {
-            $this->defaultTestCaseConfig->addNote('Skipped test case: ' . $note);
+        if ($debugNote !== null) {
+            $this->defaultTestCaseConfig->addDebugNote('Skipped test case: ' . $debugNote);
         }
 
         return $this;
     }
 
     /**
-     * @param string|null $note
+     * @param string|null $debugNote
      * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
      */
-    public function changeDefaultTestCase($note = null)
+    public function changeDefaultTestCase($debugNote = null)
     {
         $testCaseConfig = $this->defaultTestCaseConfig;
 
-        if ($note !== null) {
-            $testCaseConfig->addNote($note);
+        if ($debugNote !== null) {
+            $testCaseConfig->addDebugNote($debugNote);
         }
 
         return $testCaseConfig;
     }
 
     /**
-     * @param string|null $note
+     * @param string|null $debugNote
      * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
      */
-    public function addTestCase($note = null)
+    public function addTestCase($debugNote = null)
     {
         $testCaseConfig = new TestCaseConfig($this->routeName);
         $this->additionalTestCaseConfigs[] = $testCaseConfig;
 
-        if ($note !== null) {
-            $testCaseConfig->addNote('Special test case: ' . $note);
+        if ($debugNote !== null) {
+            $testCaseConfig->addDebugNote('Special test case: ' . $debugNote);
         }
 
         return $testCaseConfig;
