@@ -5,6 +5,7 @@ namespace Tests\ShopBundle\Smoke\Http;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\ShopBundle\Smoke\Http\SymfonyRouterAdapter;
 
 abstract class HttpSmokeTestCase extends KernelTestCase
 {
@@ -49,8 +50,9 @@ abstract class HttpSmokeTestCase extends KernelTestCase
     {
         static::setUp();
 
-        $router = $this->getRouter();
-        $routeConfigsBuilder = new RouteConfigsBuilder($router);
+        $routeConfigs = $this->getRouterAdapter()->getRouteConfigs();
+
+        $routeConfigsBuilder = new RouteConfigsBuilder($routeConfigs);
 
         $this->customizeRouteConfigs($routeConfigsBuilder);
         return array_map(
@@ -62,11 +64,13 @@ abstract class HttpSmokeTestCase extends KernelTestCase
     }
 
     /**
-     * @return \Symfony\Component\Routing\RouterInterface
+     * @return \Tests\ShopBundle\Smoke\Http\RouterAdapterInterface
      */
-    protected function getRouter()
+    protected function getRouterAdapter()
     {
-        return static::$kernel->getContainer()->get('router');
+        $router = static::$kernel->getContainer()->get('router');
+
+        return new SymfonyRouterAdapter($router);
     }
 
     /**
@@ -81,8 +85,7 @@ abstract class HttpSmokeTestCase extends KernelTestCase
      */
     protected function createRequest(TestCaseConfig $config)
     {
-        $router = $this->getRouter();
-        $uri = $router->generate($config->getRouteName(), $config->getParameters());
+        $uri = $this->getRouterAdapter()->generateUri($config);
 
         $request = Request::create($uri);
 
