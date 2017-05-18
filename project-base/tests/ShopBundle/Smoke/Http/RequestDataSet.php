@@ -143,10 +143,11 @@ class RequestDataSet
     }
 
     /**
+     * @param string|null $username
      * @param string|null $password
      * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
-    public function setCredentials($username, $password)
+    public function setCredentials($username, $password = null)
     {
         $this->credentialsChanged = true;
         $this->username = $username;

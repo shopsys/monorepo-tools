@@ -162,7 +162,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     $config->changeDefaultRequestDataSet('Admin login should redirect by 302.')
                         ->expectStatusCode(302);
                     $config->addExtraRequestDataSet('Admin login should not redirect for users that are not logged in yet.')
-                        ->setCredentials(null, null)
+                        ->setCredentials(null)
                         ->expectStatusCode(200);
                 }
             })
