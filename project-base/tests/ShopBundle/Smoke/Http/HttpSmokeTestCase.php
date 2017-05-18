@@ -31,8 +31,8 @@ abstract class HttpSmokeTestCase extends KernelTestCase
     {
         $config->executeAllCustomizationsDelayedUntilTestExecution();
 
-        if ($config->isIgnored()) {
-            $ignoreMessage = sprintf('Test for route "%s" was ignored.', $config->getRouteName());
+        if ($config->isSkipped()) {
+            $ignoreMessage = sprintf('Test for route "%s" was skipped.', $config->getRouteName());
             $this->markTestSkipped($this->getMessageWithNotes($config, $ignoreMessage));
         }
 

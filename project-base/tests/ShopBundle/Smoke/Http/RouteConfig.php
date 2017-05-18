@@ -122,22 +122,16 @@ class RouteConfig
     }
 
     /**
-     * @return \Tests\ShopBundle\Smoke\Http\RouteConfig
-     */
-    public function ignore()
-    {
-        $this->defaultTestCaseConfig->ignore();
-
-        return $this;
-    }
-
-    /**
      * @param string $note
      * @return \Tests\ShopBundle\Smoke\Http\RouteConfig
      */
-    public function addNote($note)
+    public function skipRoute($note = '')
     {
-        $this->defaultTestCaseConfig->addNote($note);
+        $this->defaultTestCaseConfig->skip();
+
+        if ($note !== '') {
+            $this->defaultTestCaseConfig->addNote('Skipped test case: ' . $note);
+        }
 
         return $this;
     }

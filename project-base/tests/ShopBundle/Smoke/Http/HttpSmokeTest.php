@@ -43,68 +43,59 @@ class HttpSmokeTest extends HttpSmokeTestCase
         $routeConfigCustomizer
             ->customize(function (RouteConfig $config) {
                 if (!$config->isHttpMethodAllowed('GET')) {
-                    $config->addNote('Only routes supporting GET method are tested.')
-                        ->ignore();
+                    $config->skipRoute('Only routes supporting GET method are tested.');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if (preg_match('~^(/admin)?/_~', $config->getRoutePath())) {
-                    $config->addNote('Internal routes (prefixed with "/_") are not tested.')
-                        ->ignore();
+                    $config->skipRoute('Internal routes (prefixed with "/_") are not tested.');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteCondition() === 'request.isXmlHttpRequest()') {
-                    $config->addNote('AJAX-only routes are not tested.')
-                        ->ignore();
+                    $config->skipRoute('AJAX-only routes are not tested.');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if (!preg_match('~^(admin|front)_~', $config->getRouteName())) {
-                    $config->addNote('Only routes for front-end and administration are tested.')
-                        ->ignore();
+                    $config->skipRoute('Only routes for front-end and administration are tested.');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if (in_array($config->getRouteName(), ['admin_login_check', 'front_login_check'], true)) {
-                    $config->addNote('Used by firewall to catch login requests.')
-                        ->addNote('http://symfony.com/doc/current/reference/configuration/security.html#check-path')
-                        ->ignore();
+                    $config->skipRoute(
+                        'Used by firewall to catch login requests. '
+                            . 'See http://symfony.com/doc/current/reference/configuration/security.html#check-path'
+                    );
                 }
             })->customize(function (RouteConfig $config) {
                 if (in_array($config->getRouteName(), ['front_image', 'front_image_without_type'], true)) {
-                    $config->addNote('There are no images in the shop when the tests are processed.')
-                        ->ignore();
+                    $config->skipRoute('There are no images in the shop when the tests are processed.');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'admin_domain_selectdomain') {
-                    $config->addNote('Used only for internal setting of selected domain by tab control in admin.')
-                        ->ignore();
+                    $config->skipRoute('Used only for internal setting of selected domain by tab control in admin.');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'admin_feed_generate') {
-                    $config->addNote('Do not rewrite XML feed by test products.')
-                        ->ignore();
+                    $config->skipRoute('Do not rewrite XML feed by test products.');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'admin_logout') {
-                    $config->addNote('There is different security configuration in TEST environment.')
-                        ->ignore();
+                    $config->skipRoute('There is different security configuration in TEST environment.');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'admin_unit_delete') {
-                    $config->addNote('temporarily not tested until it will be optimized in US-1517.')
-                        ->ignore();
+                    $config->skipRoute('temporarily not tested until it will be optimized in US-1517.');
                 }
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'admin_domain_list' && $this->isSingleDomain()) {
-                    $config->addNote('Domain list in administration is not available when only 1 domain exists.')
-                        ->ignore();
+                    $config->skipRoute('Domain list in administration is not available when only 1 domain exists.');
                 }
             });
     }

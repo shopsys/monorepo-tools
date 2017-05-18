@@ -12,7 +12,7 @@ class TestCaseConfig
     /**
      * @var bool
      */
-    private $ignored;
+    private $skipped;
 
     /**
      * @var string|null
@@ -57,7 +57,7 @@ class TestCaseConfig
     {
         $this->routeName = $routeName;
         $this->expectedStatusCode = $expectedStatusCode;
-        $this->ignored = false;
+        $this->skipped = false;
         $this->parameters = [];
         $this->notes = [];
         $this->delayedCustomizations = [];
@@ -75,9 +75,9 @@ class TestCaseConfig
     /**
      * @return bool
      */
-    public function isIgnored()
+    public function isSkipped()
     {
-        return $this->ignored;
+        return $this->skipped;
     }
 
     /**
@@ -143,9 +143,9 @@ class TestCaseConfig
     /**
      * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
      */
-    public function ignore()
+    public function skip()
     {
-        $this->ignored = true;
+        $this->skipped = true;
 
         return $this;
     }
