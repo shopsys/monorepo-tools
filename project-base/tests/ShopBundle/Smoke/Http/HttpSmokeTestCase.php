@@ -52,9 +52,9 @@ abstract class HttpSmokeTestCase extends KernelTestCase
 
         $routeConfigs = $this->getRouterAdapter()->getRouteConfigs();
 
-        $routeConfigsBuilder = new RouteConfigCustomizer($routeConfigs);
+        $routeConfigCustomizer = new RouteConfigCustomizer($routeConfigs);
 
-        $this->customizeRouteConfigs($routeConfigsBuilder);
+        $this->customizeRouteConfigs($routeConfigCustomizer);
 
         $requestDataSets = [];
         foreach ($routeConfigs as $routeConfig) {

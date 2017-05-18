@@ -61,40 +61,29 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     $config->skipRoute('Only routes for front-end and administration are tested.');
                 }
             })
-            ->customize(function (RouteConfig $config) {
-                if (in_array($config->getRouteName(), ['admin_login_check', 'front_login_check'], true)) {
-                    $config->skipRoute(
-                        'Used by firewall to catch login requests. '
+            ->customizeByRouteName(['admin_login_check', 'front_login_check'], function (RouteConfig $config) {
+                $config->skipRoute(
+                    'Used by firewall to catch login requests. '
                             . 'See http://symfony.com/doc/current/reference/configuration/security.html#check-path'
-                    );
-                }
-            })->customize(function (RouteConfig $config) {
-                if (in_array($config->getRouteName(), ['front_image', 'front_image_without_type'], true)) {
-                    $config->skipRoute('There are no images in the shop when the tests are processed.');
-                }
+                );
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_domain_selectdomain') {
-                    $config->skipRoute('Used only for internal setting of selected domain by tab control in admin.');
-                }
+            ->customizeByRouteName(['front_image', 'front_image_without_type'], function (RouteConfig $config) {
+                $config->skipRoute('There are no images in the shop when the tests are processed.');
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_feed_generate') {
-                    $config->skipRoute('Do not rewrite XML feed by test products.');
-                }
+            ->customizeByRouteName('admin_domain_selectdomain', function (RouteConfig $config) {
+                $config->skipRoute('Used only for internal setting of selected domain by tab control in admin.');
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_logout') {
-                    $config->skipRoute('There is different security configuration in TEST environment.');
-                }
+            ->customizeByRouteName('admin_feed_generate', function (RouteConfig $config) {
+                $config->skipRoute('Do not rewrite XML feed by test products.');
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_unit_delete') {
-                    $config->skipRoute('temporarily not tested until it will be optimized in US-1517.');
-                }
+            ->customizeByRouteName('admin_logout', function (RouteConfig $config) {
+                $config->skipRoute('There is different security configuration in TEST environment.');
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_domain_list' && $this->isSingleDomain()) {
+            ->customizeByRouteName('admin_unit_delete', function (RouteConfig $config) {
+                $config->skipRoute('temporarily not tested until it will be optimized in US-1517.');
+            })
+            ->customizeByRouteName('admin_domain_list', function (RouteConfig $config) {
+                if ($this->isSingleDomain()) {
                     $config->skipRoute('Domain list in administration is not available when only 1 domain exists.');
                 }
             });
@@ -157,75 +146,58 @@ class HttpSmokeTest extends HttpSmokeTestCase
                         ->expectStatusCode(200);
                 }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_login') {
-                    $config->changeDefaultRequestDataSet('Admin login should redirect by 302.')
+            ->customizeByRouteName('admin_login', function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet('Admin login should redirect by 302.')
                         ->expectStatusCode(302);
-                    $config->addExtraRequestDataSet('Admin login should not redirect for users that are not logged in yet.')
+                $config->addExtraRequestDataSet('Admin login should not redirect for users that are not logged in yet.')
                         ->setCredentials(null)
                         ->expectStatusCode(200);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                $routeNames = ['admin_login_sso', 'admin_customer_loginasuser'];
-                if (in_array($config->getRouteName(), $routeNames, true)) {
-                    $config->changeDefaultRequestDataSet(sprintf('Route "%s" should always just redirect.', $config->getRouteName()))
+            ->customizeByRouteName(['admin_login_sso', 'admin_customer_loginasuser'], function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet(sprintf('Route "%s" should always just redirect.', $config->getRouteName()))
                         ->expectStatusCode(302);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_administrator_edit') {
-                    $config->changeDefaultRequestDataSet('It is forbidden to edit administrator with ID 1 as it is the superadmin.')
+            ->customizeByRouteName('admin_administrator_edit', function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet('It is forbidden to edit administrator with ID 1 as it is the superadmin.')
                         ->expectStatusCode(404);
-                    $config->addExtraRequestDataSet('Editing normal administrator should be OK.')
+                $config->addExtraRequestDataSet('Editing normal administrator should be OK.')
                         ->setParameter('id', 2)
                         ->expectStatusCode(200);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_category_edit') {
-                    $config->changeDefaultRequestDataSet('It is forbidden to edit category with ID 1 as it is the root.')
+            ->customizeByRouteName('admin_category_edit', function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet('It is forbidden to edit category with ID 1 as it is the root.')
                         ->expectStatusCode(404);
-                    $config->addExtraRequestDataSet('Editing normal category should be OK.')
+                $config->addExtraRequestDataSet('Editing normal category should be OK.')
                         ->setParameter('id', 2)
                         ->expectStatusCode(200);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_bestsellingproduct_detail') {
-                    $config->changeDefaultRequestDataSet('Category with ID 1 is the root, use ID 2 instead.')
+            ->customizeByRouteName('admin_bestsellingproduct_detail', function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet('Category with ID 1 is the root, use ID 2 instead.')
                         ->setParameter('categoryId', 2);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_pricinggroup_delete') {
-                    $pricingGroup = $this->getPersistentReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1);
+            ->customizeByRouteName('admin_pricinggroup_delete', function (RouteConfig $config) {
+                $pricingGroup = $this->getPersistentReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1);
                     /** @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
                     $config->changeDefaultRequestDataSet(sprintf('Delete pricing group "%s".', $pricingGroup->getName()))
                         ->setParameter('id', $pricingGroup->getId());
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_unit_delete') {
-                    $unit = $this->getPersistentReference(BaseUnitDataFixture::UNIT_PIECES);
+            ->customizeByRouteName('admin_unit_delete', function (RouteConfig $config) {
+                $unit = $this->getPersistentReference(BaseUnitDataFixture::UNIT_PIECES);
                     /** @var $unit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
                     $newUnit = $this->getPersistentReference(DemoUnitDataFixture::UNIT_CUBIC_METERS);
                     /** @var $newUnit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
                     $config->changeDefaultRequestDataSet(sprintf('Delete unit "%s" and replace it by "%s".', $unit->getName('en'), $newUnit->getName('en')))
                         ->setParameter('id', $unit->getId())
                         ->setParameter('newId', $newUnit->getId());
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'admin_vat_delete') {
-                    $vat = $this->getPersistentReference(VatDataFixture::VAT_SECOND_LOW);
+            ->customizeByRouteName('admin_vat_delete', function (RouteConfig $config) {
+                $vat = $this->getPersistentReference(VatDataFixture::VAT_SECOND_LOW);
                     /** @var $vat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
                     $newVat = $this->getPersistentReference(VatDataFixture::VAT_LOW);
                     /** @var $newVat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
                     $config->changeDefaultRequestDataSet(sprintf('Delete VAT "%s" and replace it by "%s".', $vat->getName(), $newVat->getName()))
                         ->setParameter('id', $vat->getId())
                         ->setParameter('newId', $newVat->getId());
-                }
             });
     }
 
@@ -235,84 +207,64 @@ class HttpSmokeTest extends HttpSmokeTestCase
     public function configureFrontendRoutes(RouteConfigCustomizer $routeConfigCustomizer)
     {
         $routeConfigCustomizer
-            ->customize(function (RouteConfig $config) {
-                if (in_array($config->getRouteName(), ['front_customer_edit', 'front_customer_orders'], true)) {
-                    $config->changeDefaultRequestDataSet('Log as demo user "Jaromír Jágr" on pages in client section.')
+            ->customizeByRouteName(['front_customer_edit', 'front_customer_orders'], function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet('Log as demo user "Jaromír Jágr" on pages in client section.')
                         ->setCredentials('no-reply@netdevelo.cz', 'user123');
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                $routeNames = ['front_customer_login_as_remembered_user', 'front_promo_code_remove'];
-                if (in_array($config->getRouteName(), $routeNames, true)) {
-                    $config->changeDefaultRequestDataSet(sprintf('Route "%s" should always just redirect.', $config->getRouteName()))
+            ->customizeByRouteName(['front_customer_login_as_remembered_user', 'front_promo_code_remove'], function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet(sprintf('Route "%s" should always just redirect.', $config->getRouteName()))
                         ->expectStatusCode(302);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if (in_array($config->getRouteName(), ['front_order_index', 'front_order_sent'], true)) {
-                    $config->changeDefaultRequestDataSet('Order page should redirect by 302 as the cart is empty by default.')
+            ->customizeByRouteName(['front_order_index', 'front_order_sent'], function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet('Order page should redirect by 302 as the cart is empty by default.')
                         ->expectStatusCode(302);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'front_logout') {
-                    $config->changeDefaultRequestDataSet('Add CSRF token for logout action (configured in app/security.yml) during test execution.')
+            ->customizeByRouteName('front_logout', function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet('Add CSRF token for logout action (configured in app/security.yml) during test execution.')
                         ->addCallDuringTestExecution(function (RequestDataSet $requestDataSet) {
                             $csrfTokenManager = self::$kernel->getContainer()->get('security.csrf.token_manager');
-                            /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
+                        /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
 
                             $token = $csrfTokenManager->getToken('frontend_logout');
 
                             $requestDataSet->setParameter('_csrf_token', $token->getValue());
                         });
-                    $config->changeDefaultRequestDataSet('Logout action should redirect by 302')
+                $config->changeDefaultRequestDataSet('Logout action should redirect by 302')
                         ->expectStatusCode(302);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'front_article_detail') {
-                    $config->changeDefaultRequestDataSet('Use ID 1 as default article.')
+            ->customizeByRouteName('front_article_detail', function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet('Use ID 1 as default article.')
                         ->setParameter('id', 1);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'front_brand_detail') {
-                    $config->changeDefaultRequestDataSet('Use ID 1 as default brand.')
+            ->customizeByRouteName('front_brand_detail', function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet('Use ID 1 as default brand.')
                         ->setParameter('id', 1);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'front_customer_order_detail_unregistered') {
-                    $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
+            ->customizeByRouteName('front_customer_order_detail_unregistered', function (RouteConfig $config) {
+                $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
                     /** @var $order \Shopsys\ShopBundle\Model\Order\Order */
                     $config->changeDefaultRequestDataSet(sprintf('Use hash of order n. %s for unregistered access.', $order->getNumber()))
                         ->setParameter('urlHash', $order->getUrlHash());
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'front_customer_order_detail_registered') {
-                    $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
+            ->customizeByRouteName('front_customer_order_detail_registered', function (RouteConfig $config) {
+                $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
                     /** @var $order \Shopsys\ShopBundle\Model\Order\Order */
                     $config->changeDefaultRequestDataSet(sprintf('Log as demo user "Jaromír Jágr" on front-end to access order n. %s.', $order->getNumber()))
                         ->setCredentials('no-reply@netdevelo.cz', 'user123')
                         ->setParameter('orderNumber', $order->getNumber());
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'front_product_detail') {
-                    $config->changeDefaultRequestDataSet('Use ID 1 as default product.')
+            ->customizeByRouteName('front_product_detail', function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet('Use ID 1 as default product.')
                         ->setParameter('id', 1);
-                    $config->addExtraRequestDataSet('See detail of a product that is main variant')
+                $config->addExtraRequestDataSet('See detail of a product that is main variant')
                         ->setParameter('id', 150);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'front_product_list') {
-                    $config->changeDefaultRequestDataSet('Use ID 2 as default category (ID 1 is the root).')
+            ->customizeByRouteName('front_product_list', function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet('Use ID 2 as default category (ID 1 is the root).')
                         ->setParameter('id', 2);
-                    $config->addExtraRequestDataSet('See category that has 500 products in performance data')
+                $config->addExtraRequestDataSet('See category that has 500 products in performance data')
                         ->setParameter('id', 8);
-                    $config->addExtraRequestDataSet('See and filter category that has 500 products in performance data')
+                $config->addExtraRequestDataSet('See and filter category that has 500 products in performance data')
                         ->setParameter('id', 8)
                         ->setParameter('product_filter_form', [
                             'inStock' => '1',
@@ -320,9 +272,9 @@ class HttpSmokeTest extends HttpSmokeTestCase
                                 41 => [58],
                             ],
                         ]);
-                    $config->addExtraRequestDataSet('See category that has 7600 products in performance data')
+                $config->addExtraRequestDataSet('See category that has 7600 products in performance data')
                         ->setParameter('id', 3);
-                    $config->addExtraRequestDataSet('See and filter category that has 7600 products in performance data')
+                $config->addExtraRequestDataSet('See and filter category that has 7600 products in performance data')
                         ->setParameter('id', 3)
                         ->setParameter('product_filter_form', [
                             'minimalPrice' => '100',
@@ -331,38 +283,33 @@ class HttpSmokeTest extends HttpSmokeTestCase
                                 1 => ['1'],
                             ],
                         ]);
-                    $config->addExtraRequestDataSet('See category that has 3600 products in performance data')
+                $config->addExtraRequestDataSet('See category that has 3600 products in performance data')
                         ->setParameter('id', 11);
-                    $config->addExtraRequestDataSet('See and filter category that has 3600 products in performance data')
+                $config->addExtraRequestDataSet('See and filter category that has 3600 products in performance data')
                         ->setParameter('id', 11)
                         ->setParameter('product_filter_form', [
                             'minimalPrice' => '100',
                             'inStock' => '1',
                         ]);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'front_product_search') {
-                    $config->addExtraRequestDataSet('Search for "a" and filter the results')
+            ->customizeByRouteName('front_product_search', function (RouteConfig $config) {
+                $config->addExtraRequestDataSet('Search for "a" and filter the results')
                         ->setParameter(ProductController::SEARCH_TEXT_PARAMETER, 'a')
                         ->setParameter('product_filter_form', [
                             'inStock' => '1',
                             'flags' => ['2'],
                             'brands' => ['2', '19'],
                         ]);
-                }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteName() === 'front_registration_set_new_password') {
-                    $customer = $this->getPersistentReference(UserDataFixture::USER_WITH_RESET_PASSWORD_HASH);
+            ->customizeByRouteName('front_registration_set_new_password', function (RouteConfig $config) {
+                $customer = $this->getPersistentReference(UserDataFixture::USER_WITH_RESET_PASSWORD_HASH);
                     /** @var $customer \Shopsys\ShopBundle\Model\Customer\User */
                     $config->changeDefaultRequestDataSet('See new password page for customer with reset password hash.')
                         ->setParameter('email', $customer->getEmail())
                         ->setParameter('hash', $customer->getResetPasswordHash());
-                    $config->addExtraRequestDataSet('Expect redirect when the hash is invalid.')
+                $config->addExtraRequestDataSet('Expect redirect when the hash is invalid.')
                         ->setParameter('hash', 'invalidHash')
                         ->expectStatusCode(302);
-                }
             });
     }
 
