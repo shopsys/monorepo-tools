@@ -126,6 +126,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
     }
 
     /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
      */
     public function configureAdminRoutes(RouteConfigCustomizer $routeConfigCustomizer)
@@ -202,6 +203,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
     }
 
     /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
      */
     public function configureFrontendRoutes(RouteConfigCustomizer $routeConfigCustomizer)
