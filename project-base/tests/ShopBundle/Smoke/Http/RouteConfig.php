@@ -77,20 +77,19 @@ class RouteConfig
      * @param string $name
      * @return bool
      */
-    public function isParameterRequired($name)
+    public function isRouteParameterRequired($name)
     {
-        return !$this->route->hasDefault($name) && in_array($name, $this->getRoutePathParameters(), true);
+        return !$this->route->hasDefault($name) && in_array($name, $this->getRouteParameterNames(), true);
     }
 
     /**
      * @return string[]
      */
-    public function getRoutePathParameters()
+    public function getRouteParameterNames()
     {
-        $matches = [];
-        preg_match_all('~\{([^}]+)\}~', $this->route->getPath(), $matches);
+        $compiledRoute = $this->route->compile();
 
-        return $matches[1];
+        return $compiledRoute->getVariables();
     }
 
     /**
