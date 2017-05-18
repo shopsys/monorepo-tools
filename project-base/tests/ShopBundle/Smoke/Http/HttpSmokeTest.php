@@ -109,7 +109,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
             ->customize(function (RouteConfig $config) {
                 foreach ($config->getRouteParameterNames() as $name) {
                     if ($config->isRouteParameterRequired($name) && preg_match('~^(id|.+Id)$~', $name)) {
-                        $note = 'Route requires ID parameter "%s" in its path, try using %d by default.';
+                        $note = 'Route requires ID parameter "%s". Using %d by default.';
                         $config->changeDefaultTestCase(sprintf($note, $name, self::DEFAULT_ID_VALUE))
                             ->setParameter($name, self::DEFAULT_ID_VALUE);
                     }
