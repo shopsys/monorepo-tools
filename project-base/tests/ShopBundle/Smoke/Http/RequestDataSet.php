@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Smoke\Http;
 
-class TestCaseConfig
+class RequestDataSet
 {
     /**
      * @var string
@@ -121,7 +121,7 @@ class TestCaseConfig
     }
 
     /**
-     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
     public function executeAllCustomizationsDelayedUntilTestExecution()
     {
@@ -141,7 +141,7 @@ class TestCaseConfig
     }
 
     /**
-     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
     public function skip()
     {
@@ -152,7 +152,7 @@ class TestCaseConfig
 
     /**
      * @param string|null $password
-     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
     public function setCredentials($username, $password)
     {
@@ -165,7 +165,7 @@ class TestCaseConfig
 
     /**
      * @param int $code
-     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
     public function expectStatusCode($code)
     {
@@ -177,7 +177,7 @@ class TestCaseConfig
     /**
      * @param string $name
      * @param mixed $value
-     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
     public function setParameter($name, $value)
     {
@@ -188,7 +188,7 @@ class TestCaseConfig
 
     /**
      * @param string $debugNote
-     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
     public function addDebugNote($debugNote)
     {
@@ -199,7 +199,7 @@ class TestCaseConfig
 
     /**
      * @param callable $callback
-     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
     public function delayCustomizationUntilTestExecution($callback)
     {

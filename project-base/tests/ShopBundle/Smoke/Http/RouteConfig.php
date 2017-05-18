@@ -17,14 +17,14 @@ class RouteConfig
     private $route;
 
     /**
-     * @var \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     * @var \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
-    private $defaultTestCaseConfig;
+    private $defaultRequestDataSet;
 
     /**
-     * @var \Tests\ShopBundle\Smoke\Http\TestCaseConfig[]
+     * @var \Tests\ShopBundle\Smoke\Http\RequestDataSet[]
      */
-    private $additionalTestCaseConfigs;
+    private $additionalRequestDataSets;
 
     /**
      * @param string $routeName
@@ -34,8 +34,8 @@ class RouteConfig
     {
         $this->routeName = $routeName;
         $this->route = $route;
-        $this->defaultTestCaseConfig = new TestCaseConfig($this->routeName, 200);
-        $this->additionalTestCaseConfigs = [];
+        $this->defaultRequestDataSet = new RequestDataSet($this->routeName, 200);
+        $this->additionalRequestDataSets = [];
     }
 
     /**
@@ -93,32 +93,32 @@ class RouteConfig
     }
 
     /**
-     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig[]
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet[]
      */
-    public function generateTestCaseConfigs()
+    public function generateRequestDataSets()
     {
-        $testCaseConfigs = [clone $this->defaultTestCaseConfig];
-        foreach ($this->additionalTestCaseConfigs as $additionalTestCaseConfig) {
-            $testCaseConfig = clone $this->defaultTestCaseConfig;
-            if ($additionalTestCaseConfig->hasCredentialsChanged()) {
-                $testCaseConfig->setCredentials(
-                    $additionalTestCaseConfig->getUsername(),
-                    $additionalTestCaseConfig->getPassword()
+        $requestDataSets = [clone $this->defaultRequestDataSet];
+        foreach ($this->additionalRequestDataSets as $additionalRequestDataSet) {
+            $requestDataSet = clone $this->defaultRequestDataSet;
+            if ($additionalRequestDataSet->hasCredentialsChanged()) {
+                $requestDataSet->setCredentials(
+                    $additionalRequestDataSet->getUsername(),
+                    $additionalRequestDataSet->getPassword()
                 );
             }
-            if ($additionalTestCaseConfig->getExpectedStatusCode() !== null) {
-                $testCaseConfig->expectStatusCode($additionalTestCaseConfig->getExpectedStatusCode());
+            if ($additionalRequestDataSet->getExpectedStatusCode() !== null) {
+                $requestDataSet->expectStatusCode($additionalRequestDataSet->getExpectedStatusCode());
             }
-            foreach ($additionalTestCaseConfig->getParameters() as $name => $value) {
-                $testCaseConfig->setParameter($name, $value);
+            foreach ($additionalRequestDataSet->getParameters() as $name => $value) {
+                $requestDataSet->setParameter($name, $value);
             }
-            foreach ($additionalTestCaseConfig->getDebugNotes() as $debugNote) {
-                $testCaseConfig->addDebugNote($debugNote);
+            foreach ($additionalRequestDataSet->getDebugNotes() as $debugNote) {
+                $requestDataSet->addDebugNote($debugNote);
             }
-            $testCaseConfigs[] = $testCaseConfig;
+            $requestDataSets[] = $requestDataSet;
         }
 
-        return $testCaseConfigs;
+        return $requestDataSets;
     }
 
     /**
@@ -127,10 +127,10 @@ class RouteConfig
      */
     public function skipRoute($debugNote = null)
     {
-        $this->defaultTestCaseConfig->skip();
+        $this->defaultRequestDataSet->skip();
 
         if ($debugNote !== null) {
-            $this->defaultTestCaseConfig->addDebugNote('Skipped test case: ' . $debugNote);
+            $this->defaultRequestDataSet->addDebugNote('Skipped test case: ' . $debugNote);
         }
 
         return $this;
@@ -138,33 +138,33 @@ class RouteConfig
 
     /**
      * @param string|null $debugNote
-     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
-    public function changeDefaultTestCase($debugNote = null)
+    public function changeDefaultRequestDataSet($debugNote = null)
     {
-        $testCaseConfig = $this->defaultTestCaseConfig;
+        $requestDataSet = $this->defaultRequestDataSet;
 
         if ($debugNote !== null) {
-            $testCaseConfig->addDebugNote($debugNote);
+            $requestDataSet->addDebugNote($debugNote);
         }
 
-        return $testCaseConfig;
+        return $requestDataSet;
     }
 
     /**
      * @param string|null $debugNote
-     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
-    public function addTestCase($debugNote = null)
+    public function addRequestDataSet($debugNote = null)
     {
-        $testCaseConfig = new TestCaseConfig($this->routeName);
-        $this->additionalTestCaseConfigs[] = $testCaseConfig;
+        $requestDataSet = new RequestDataSet($this->routeName);
+        $this->additionalRequestDataSets[] = $requestDataSet;
 
         if ($debugNote !== null) {
-            $testCaseConfig->addDebugNote('Special test case: ' . $debugNote);
+            $requestDataSet->addDebugNote('Special test case: ' . $debugNote);
         }
 
-        return $testCaseConfig;
+        return $requestDataSet;
     }
 
     /**
@@ -173,7 +173,7 @@ class RouteConfig
      */
     public function delayCustomizationUntilTestExecution($callback)
     {
-        $this->defaultTestCaseConfig->delayCustomizationUntilTestExecution($callback);
+        $this->defaultRequestDataSet->delayCustomizationUntilTestExecution($callback);
 
         return $this;
     }

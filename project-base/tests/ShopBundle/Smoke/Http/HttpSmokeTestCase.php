@@ -24,27 +24,27 @@ abstract class HttpSmokeTestCase extends KernelTestCase
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\TestCaseConfig $config
+     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet $requestDataSet
      * @dataProvider httpResponseTestDataProvider
      */
-    final public function testHttpResponse(TestCaseConfig $config)
+    final public function testHttpResponse(RequestDataSet $requestDataSet)
     {
-        $config->executeAllCustomizationsDelayedUntilTestExecution();
+        $requestDataSet->executeAllCustomizationsDelayedUntilTestExecution();
 
-        if ($config->isSkipped()) {
-            $message = sprintf('Test for route "%s" was skipped.', $config->getRouteName());
-            $this->markTestSkipped($this->getMessageWithDebugNotes($config, $message));
+        if ($requestDataSet->isSkipped()) {
+            $message = sprintf('Test for route "%s" was skipped.', $requestDataSet->getRouteName());
+            $this->markTestSkipped($this->getMessageWithDebugNotes($requestDataSet, $message));
         }
 
-        $request = $this->createRequest($config);
+        $request = $this->createRequest($requestDataSet);
 
         $response = $this->handleRequest($request);
 
-        $this->assertResponse($response, $config);
+        $this->assertResponse($response, $requestDataSet);
     }
 
     /**
-     * @return \Tests\ShopBundle\Smoke\Http\TestCaseConfig[][]
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet[][]
      */
     final public function httpResponseTestDataProvider()
     {
@@ -56,16 +56,16 @@ abstract class HttpSmokeTestCase extends KernelTestCase
 
         $this->customizeRouteConfigs($routeConfigsBuilder);
 
-        $testCaseConfigs = [];
+        $requestDataSets = [];
         foreach ($routeConfigs as $routeConfig) {
-            $testCaseConfigs = array_merge($testCaseConfigs, $routeConfig->generateTestCaseConfigs());
+            $requestDataSets = array_merge($requestDataSets, $routeConfig->generateRequestDataSets());
         }
 
         return array_map(
-            function (TestCaseConfig $config) {
-                return [$config];
+            function (RequestDataSet $requestDataSet) {
+                return [$requestDataSet];
             },
-            $testCaseConfigs
+            $requestDataSets
         );
     }
 
@@ -87,21 +87,21 @@ abstract class HttpSmokeTestCase extends KernelTestCase
     abstract protected function customizeRouteConfigs(RouteConfigCustomizer $routeConfigCustomizer);
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\TestCaseConfig $config
+     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet $requestDataSet
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    protected function createRequest(TestCaseConfig $config)
+    protected function createRequest(RequestDataSet $requestDataSet)
     {
-        $uri = $this->getRouterAdapter()->generateUri($config);
+        $uri = $this->getRouterAdapter()->generateUri($requestDataSet);
 
         $request = Request::create($uri);
 
-        if ($config->getUsername() !== null) {
-            $request->server->set('PHP_AUTH_USER', $config->getUsername());
-            $request->headers->set('PHP_AUTH_USER', $config->getUsername());
+        if ($requestDataSet->getUsername() !== null) {
+            $request->server->set('PHP_AUTH_USER', $requestDataSet->getUsername());
+            $request->headers->set('PHP_AUTH_USER', $requestDataSet->getUsername());
 
-            if ($config->getPassword() !== null) {
-                $request->server->set('PHP_AUTH_PW', $config->getPassword());
+            if ($requestDataSet->getPassword() !== null) {
+                $request->server->set('PHP_AUTH_PW', $requestDataSet->getPassword());
             }
             $request->headers->add($request->server->getHeaders());
         }
@@ -120,34 +120,34 @@ abstract class HttpSmokeTestCase extends KernelTestCase
 
     /**
      * @param \Symfony\Component\HttpFoundation\Response $response
-     * @param \Tests\ShopBundle\Smoke\Http\TestCaseConfig $config
+     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet $requestDataSet
      */
-    protected function assertResponse(Response $response, TestCaseConfig $config)
+    protected function assertResponse(Response $response, RequestDataSet $requestDataSet)
     {
         $failMessage = sprintf(
             'Failed asserting that status code %d for route "%s" is identical to expected %d',
             $response->getStatusCode(),
-            $config->getRouteName(),
-            $config->getExpectedStatusCode()
+            $requestDataSet->getRouteName(),
+            $requestDataSet->getExpectedStatusCode()
         );
         $this->assertSame(
-            $config->getExpectedStatusCode(),
+            $requestDataSet->getExpectedStatusCode(),
             $response->getStatusCode(),
-            $this->getMessageWithDebugNotes($config, $failMessage)
+            $this->getMessageWithDebugNotes($requestDataSet, $failMessage)
         );
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\TestCaseConfig $config
+     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet $requestDataSet
      * @param string $message
      * @return string
      */
-    protected function getMessageWithDebugNotes(TestCaseConfig $config, $message)
+    protected function getMessageWithDebugNotes(RequestDataSet $requestDataSet, $message)
     {
-        if (count($config->getDebugNotes()) > 0) {
+        if (count($requestDataSet->getDebugNotes()) > 0) {
             $indentedDebugNotes = array_map(function ($debugNote) {
                 return "\n" . '  - ' . $debugNote;
-            }, $config->getDebugNotes());
+            }, $requestDataSet->getDebugNotes());
             $message .= "\n" . 'Notes for this data set:' . implode($indentedDebugNotes);
         }
 

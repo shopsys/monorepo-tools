@@ -34,10 +34,10 @@ class SymfonyRouterAdapter implements RouterAdapterInterface
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\TestCaseConfig $config
+     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet $requestDataSet
      */
-    public function generateUri(TestCaseConfig $config)
+    public function generateUri(RequestDataSet $requestDataSet)
     {
-        return $this->router->generate($config->getRouteName(), $config->getParameters());
+        return $this->router->generate($requestDataSet->getRouteName(), $requestDataSet->getParameters());
     }
 }

@@ -10,8 +10,8 @@ interface RouterAdapterInterface
     public function getRouteConfigs();
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\TestCaseConfig $config
+     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet $requestDataSet
      * @return string
      */
-    public function generateUri(TestCaseConfig $config);
+    public function generateUri(RequestDataSet $requestDataSet);
 }
