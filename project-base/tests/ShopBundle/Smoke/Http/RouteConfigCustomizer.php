@@ -39,10 +39,17 @@ class RouteConfigCustomizer
     public function customizeByRouteName($routeName, $callback)
     {
         $routeNames = (array)$routeName;
+        $foundRouteNames = [];
         foreach ($this->routeConfigs as $config) {
             if (in_array($config->getRouteName(), $routeNames, true)) {
                 $callback($config);
+                $foundRouteNames[] = $config->getRouteName();
             }
+        }
+
+        $notFoundRouteNames = array_diff($routeNames, $foundRouteNames);
+        if (count($notFoundRouteNames) > 0) {
+            throw new RouteNameNotFoundException($notFoundRouteNames);
         }
 
         return $this;
