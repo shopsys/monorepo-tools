@@ -166,22 +166,4 @@ class RouteConfig
 
         return $requestDataSet;
     }
-
-    /**
-     * Provided $callback will be called with RequestDataSet as a single argument
-     *
-     * Useful for code that need to access the same instance of kernel as the test method.
-     *
-     * @see \Tests\ShopBundle\Smoke\Http\RequestDataSet
-     * @see \Symfony\Bundle\FrameworkBundle\Test\KernelTestCase::$kernel
-     *
-     * @param callable $callback
-     * @return \Tests\ShopBundle\Smoke\Http\RouteConfig
-     */
-    public function addCallDuringTestExecution($callback)
-    {
-        $this->defaultRequestDataSet->addCallDuringTestExecution($callback);
-
-        return $this;
-    }
 }

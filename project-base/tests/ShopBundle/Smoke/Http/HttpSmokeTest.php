@@ -117,8 +117,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
             })
             ->customize(function (RouteConfig $config) {
                 if (preg_match('~_delete$~', $config->getRouteName())) {
-                    $config->changeDefaultRequestDataSet('Expect redirect by 302 for any delete action.')
-                        ->expectStatusCode(302)
+                    $config->changeDefaultRequestDataSet('Add CSRF token for any delete action (protected by RouteCsrfProtector) during test execution.')
                         ->addCallDuringTestExecution(function (RequestDataSet $requestDataSet) {
                             $routeCsrfProtector = self::$kernel->getContainer()
                                 ->get('shopsys.shop.router.security.route_csrf_protector');
@@ -129,9 +128,10 @@ class HttpSmokeTest extends HttpSmokeTestCase
                             $tokenId = $routeCsrfProtector->getCsrfTokenId($requestDataSet->getRouteName());
                             $token = $csrfTokenManager->getToken($tokenId);
 
-                            $requestDataSet->addDebugNote('Add CSRF token for any delete action (protected by RouteCsrfProtector).')
-                                ->setParameter(RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER, $token->getValue());
+                            $requestDataSet->setParameter(RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER, $token->getValue());
                         });
+                    $config->changeDefaultRequestDataSet('Expect redirect by 302 for any delete action.')
+                        ->expectStatusCode(302);
                 }
             });
     }
@@ -256,15 +256,15 @@ class HttpSmokeTest extends HttpSmokeTestCase
             })
             ->customize(function (RouteConfig $config) {
                 if ($config->getRouteName() === 'front_logout') {
-                    $config->addCallDuringTestExecution(function (RequestDataSet $requestDataSet) {
-                        $csrfTokenManager = self::$kernel->getContainer()->get('security.csrf.token_manager');
-                        /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
+                    $config->changeDefaultRequestDataSet('Add CSRF token for logout action (configured in app/security.yml) during test execution.')
+                        ->addCallDuringTestExecution(function (RequestDataSet $requestDataSet) {
+                            $csrfTokenManager = self::$kernel->getContainer()->get('security.csrf.token_manager');
+                            /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
 
-                        $token = $csrfTokenManager->getToken('frontend_logout');
+                            $token = $csrfTokenManager->getToken('frontend_logout');
 
-                        $requestDataSet->addDebugNote('Add CSRF token for logout action (configured in app/security.yml).')
-                            ->setParameter('_csrf_token', $token->getValue());
-                    });
+                            $requestDataSet->setParameter('_csrf_token', $token->getValue());
+                        });
                     $config->changeDefaultRequestDataSet('Logout action should redirect by 302')
                         ->expectStatusCode(302);
                 }
