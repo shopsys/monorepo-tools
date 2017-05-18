@@ -52,14 +52,20 @@ abstract class HttpSmokeTestCase extends KernelTestCase
 
         $routeConfigs = $this->getRouterAdapter()->getRouteConfigs();
 
-        $routeConfigsBuilder = new RouteConfigsBuilder($routeConfigs);
+        $routeConfigsBuilder = new RouteConfigCustomizer($routeConfigs);
 
         $this->customizeRouteConfigs($routeConfigsBuilder);
+
+        $testCaseConfigs = [];
+        foreach ($routeConfigs as $routeConfig) {
+            $testCaseConfigs = array_merge($testCaseConfigs, $routeConfig->generateTestCaseConfigs());
+        }
+
         return array_map(
             function (TestCaseConfig $config) {
                 return [$config];
             },
-            $routeConfigsBuilder->getTestCaseConfigs()
+            $testCaseConfigs
         );
     }
 
@@ -75,9 +81,9 @@ abstract class HttpSmokeTestCase extends KernelTestCase
 
     /**
      * This method must be implemented to customize and configure the test cases for individual routes
-     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigsBuilder $routeConfigsBuilder
+     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
      */
-    abstract protected function customizeRouteConfigs(RouteConfigsBuilder $routeConfigsBuilder);
+    abstract protected function customizeRouteConfigs(RouteConfigCustomizer $routeConfigCustomizer);
 
     /**
      * @param \Tests\ShopBundle\Smoke\Http\TestCaseConfig $config

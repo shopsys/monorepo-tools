@@ -25,22 +25,22 @@ class HttpSmokeTest extends HttpSmokeTestCase
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigsBuilder $routeConfigsBuilder
+     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
      */
-    protected function customizeRouteConfigs(RouteConfigsBuilder $routeConfigsBuilder)
+    protected function customizeRouteConfigs(RouteConfigCustomizer $routeConfigCustomizer)
     {
-        $this->filterRoutesForTesting($routeConfigsBuilder);
-        $this->configureGeneralRules($routeConfigsBuilder);
-        $this->configureAdminRoutes($routeConfigsBuilder);
-        $this->configureFrontendRoutes($routeConfigsBuilder);
+        $this->filterRoutesForTesting($routeConfigCustomizer);
+        $this->configureGeneralRules($routeConfigCustomizer);
+        $this->configureAdminRoutes($routeConfigCustomizer);
+        $this->configureFrontendRoutes($routeConfigCustomizer);
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigsBuilder $routeConfigsBuilder
+     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
      */
-    public function filterRoutesForTesting(RouteConfigsBuilder $routeConfigsBuilder)
+    public function filterRoutesForTesting(RouteConfigCustomizer $routeConfigCustomizer)
     {
-        $routeConfigsBuilder
+        $routeConfigCustomizer
             ->customize(function (RouteConfig $config) {
                 if (!$config->isHttpMethodAllowed('GET')) {
                     $config->addNote('Only routes supporting GET method are tested.')
@@ -110,11 +110,11 @@ class HttpSmokeTest extends HttpSmokeTestCase
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigsBuilder $routeConfigsBuilder
+     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
      */
-    public function configureGeneralRules(RouteConfigsBuilder $routeConfigsBuilder)
+    public function configureGeneralRules(RouteConfigCustomizer $routeConfigCustomizer)
     {
-        $routeConfigsBuilder
+        $routeConfigCustomizer
             ->customize(function (RouteConfig $config) {
                 foreach ($config->getRouteParameterNames() as $name) {
                     if ($config->isRouteParameterRequired($name) && preg_match('~^(id|.+Id)$~', $name)) {
@@ -146,11 +146,11 @@ class HttpSmokeTest extends HttpSmokeTestCase
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigsBuilder $routeConfigsBuilder
+     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
      */
-    public function configureAdminRoutes(RouteConfigsBuilder $routeConfigsBuilder)
+    public function configureAdminRoutes(RouteConfigCustomizer $routeConfigCustomizer)
     {
-        $routeConfigsBuilder
+        $routeConfigCustomizer
             ->customize(function (RouteConfig $config) {
                 if (preg_match('~^admin_~', $config->getRouteName())) {
                     $config->changeDefaultTestCase('Log as "admin" to administration.')
@@ -239,11 +239,11 @@ class HttpSmokeTest extends HttpSmokeTestCase
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigsBuilder $routeConfigsBuilder
+     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
      */
-    public function configureFrontendRoutes(RouteConfigsBuilder $routeConfigsBuilder)
+    public function configureFrontendRoutes(RouteConfigCustomizer $routeConfigCustomizer)
     {
-        $routeConfigsBuilder
+        $routeConfigCustomizer
             ->customize(function (RouteConfig $config) {
                 if (in_array($config->getRouteName(), ['front_customer_edit', 'front_customer_orders'], true)) {
                     $config->changeDefaultTestCase('Log as demo user "Jaromír Jágr" on pages in client section.')
