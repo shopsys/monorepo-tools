@@ -2,6 +2,9 @@
 
 namespace Tests\ShopBundle\Smoke\Http;
 
+use Tests\ShopBundle\Smoke\Http\Auth\AuthInterface;
+use Tests\ShopBundle\Smoke\Http\Auth\NoAuth;
+
 class RequestDataSet
 {
     /**
@@ -15,14 +18,9 @@ class RequestDataSet
     private $skipped;
 
     /**
-     * @var string|null
+     * @var \Tests\ShopBundle\Smoke\Http\Auth\AuthInterface|null
      */
-    private $username;
-
-    /**
-     * @var string|null
-     */
-    private $password;
+    private $auth;
 
     /**
      * @var int|null
@@ -45,11 +43,6 @@ class RequestDataSet
     private $callsDuringTestExecution;
 
     /**
-     * @var bool
-     */
-    private $credentialsChanged;
-
-    /**
      * @param string $routeName
      * @param int|null $expectedStatusCode
      */
@@ -61,7 +54,6 @@ class RequestDataSet
         $this->parameters = [];
         $this->debugNotes = [];
         $this->callsDuringTestExecution = [];
-        $this->credentialsChanged = false;
     }
 
     /**
@@ -81,19 +73,15 @@ class RequestDataSet
     }
 
     /**
-     * @return string|null
+     * @return \Tests\ShopBundle\Smoke\Http\Auth\AuthInterface
      */
-    public function getUsername()
+    public function getAuth()
     {
-        return $this->username;
-    }
+        if ($this->auth === null) {
+            return new NoAuth();
+        }
 
-    /**
-     * @return string|null
-     */
-    public function getPassword()
-    {
-        return $this->password;
+        return $this->auth;
     }
 
     /**
@@ -143,15 +131,12 @@ class RequestDataSet
     }
 
     /**
-     * @param string|null $username
-     * @param string|null $password
+     * @param \Tests\ShopBundle\Smoke\Http\Auth\AuthInterface $auth
      * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
-    public function setCredentials($username, $password = null)
+    public function setAuth(AuthInterface $auth)
     {
-        $this->credentialsChanged = true;
-        $this->username = $username;
-        $this->password = $password;
+        $this->auth = $auth;
 
         return $this;
     }
@@ -218,11 +203,8 @@ class RequestDataSet
      */
     public function mergeExtraValuesFrom(RequestDataSet $requestDataSet)
     {
-        if ($requestDataSet->credentialsChanged) {
-            $this->setCredentials(
-                $requestDataSet->getUsername(),
-                $requestDataSet->getPassword()
-            );
+        if ($requestDataSet->auth !== null) {
+            $this->setAuth($requestDataSet->getAuth());
         }
         if ($requestDataSet->getExpectedStatusCode() !== null) {
             $this->expectStatusCode($requestDataSet->getExpectedStatusCode());

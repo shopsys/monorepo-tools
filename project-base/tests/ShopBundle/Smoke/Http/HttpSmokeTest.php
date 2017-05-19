@@ -11,6 +11,8 @@ use Shopsys\ShopBundle\DataFixtures\Demo\OrderDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixture;
 use Symfony\Component\HttpFoundation\Request;
+use Tests\ShopBundle\Smoke\Http\Auth\BasicHttpAuth;
+use Tests\ShopBundle\Smoke\Http\Auth\NoAuth;
 
 class HttpSmokeTest extends HttpSmokeTestCase
 {
@@ -138,7 +140,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
             ->customize(function (RouteConfig $config) {
                 if (preg_match('~^admin_~', $config->getRouteName())) {
                     $config->changeDefaultRequestDataSet('Log as "admin" to administration.')
-                        ->setCredentials('admin', 'admin123');
+                        ->setAuth(new BasicHttpAuth('admin', 'admin123'));
                 }
             })
             ->customize(function (RouteConfig $config) {
@@ -146,7 +148,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                     $config->changeDefaultRequestDataSet('Only superadmin should be able to see this route.')
                         ->expectStatusCode(404);
                     $config->addExtraRequestDataSet('Should be OK when logged in as "superadmin".')
-                        ->setCredentials('superadmin', 'admin123')
+                        ->setAuth(new BasicHttpAuth('superadmin', 'admin123'))
                         ->expectStatusCode(200);
                 }
             })
@@ -154,7 +156,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
                 $config->changeDefaultRequestDataSet('Admin login should redirect by 302.')
                     ->expectStatusCode(302);
                 $config->addExtraRequestDataSet('Admin login should not redirect for users that are not logged in yet.')
-                    ->setCredentials(null)
+                    ->setAuth(new NoAuth())
                     ->expectStatusCode(200);
             })
             ->customizeByRouteName(['admin_login_sso', 'admin_customer_loginasuser'], function (RouteConfig $config) {
@@ -222,7 +224,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
         $routeConfigCustomizer
             ->customizeByRouteName(['front_customer_edit', 'front_customer_orders'], function (RouteConfig $config) {
                 $config->changeDefaultRequestDataSet('Log as demo user "Jaromír Jágr" on pages in client section.')
-                    ->setCredentials('no-reply@netdevelo.cz', 'user123');
+                    ->setAuth(new BasicHttpAuth('no-reply@netdevelo.cz', 'user123'));
             })
             ->customizeByRouteName(['front_customer_login_as_remembered_user', 'front_promo_code_remove'], function (RouteConfig $config) {
                 $debugNote = sprintf('Route "%s" should always just redirect.', $config->getRouteName());
@@ -270,7 +272,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
 
                 $debugNote = sprintf('Log as demo user "Jaromír Jágr" on front-end to access order n. %s.', $order->getNumber());
                 $config->changeDefaultRequestDataSet($debugNote)
-                    ->setCredentials('no-reply@netdevelo.cz', 'user123')
+                    ->setAuth(new BasicHttpAuth('no-reply@netdevelo.cz', 'user123'))
                     ->setParameter('orderNumber', $order->getNumber());
             })
             ->customizeByRouteName('front_product_detail', function (RouteConfig $config) {

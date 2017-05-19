@@ -96,15 +96,8 @@ abstract class HttpSmokeTestCase extends KernelTestCase
 
         $request = Request::create($uri);
 
-        if ($requestDataSet->getUsername() !== null) {
-            $request->server->set('PHP_AUTH_USER', $requestDataSet->getUsername());
-            $request->headers->set('PHP_AUTH_USER', $requestDataSet->getUsername());
-
-            if ($requestDataSet->getPassword() !== null) {
-                $request->server->set('PHP_AUTH_PW', $requestDataSet->getPassword());
-            }
-            $request->headers->add($request->server->getHeaders());
-        }
+        $requestDataSet->getAuth()
+            ->authenticateRequest($request);
 
         return $request;
     }
