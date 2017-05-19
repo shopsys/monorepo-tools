@@ -34,7 +34,7 @@ class RouteConfig
     {
         $this->routeName = $routeName;
         $this->route = $route;
-        $this->defaultRequestDataSet = new RequestDataSet($this->routeName, 200);
+        $this->defaultRequestDataSet = new RequestDataSet($this->routeName);
         $this->extraRequestDataSets = [];
     }
 

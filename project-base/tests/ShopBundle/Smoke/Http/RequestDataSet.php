@@ -7,6 +7,8 @@ use Tests\ShopBundle\Smoke\Http\Auth\NoAuth;
 
 class RequestDataSet
 {
+    const DEFAULT_EXPECTED_STATUS_CODE = 200;
+
     /**
      * @var string
      */
@@ -44,12 +46,10 @@ class RequestDataSet
 
     /**
      * @param string $routeName
-     * @param int|null $expectedStatusCode
      */
-    public function __construct($routeName, $expectedStatusCode = null)
+    public function __construct($routeName)
     {
         $this->routeName = $routeName;
-        $this->expectedStatusCode = $expectedStatusCode;
         $this->skipped = false;
         $this->parameters = [];
         $this->debugNotes = [];
@@ -85,10 +85,14 @@ class RequestDataSet
     }
 
     /**
-     * @return int|null
+     * @return int
      */
     public function getExpectedStatusCode()
     {
+        if ($this->expectedStatusCode === null) {
+            return self::DEFAULT_EXPECTED_STATUS_CODE;
+        }
+
         return $this->expectedStatusCode;
     }
 
@@ -206,7 +210,7 @@ class RequestDataSet
         if ($requestDataSet->auth !== null) {
             $this->setAuth($requestDataSet->getAuth());
         }
-        if ($requestDataSet->getExpectedStatusCode() !== null) {
+        if ($requestDataSet->expectedStatusCode !== null) {
             $this->expectStatusCode($requestDataSet->getExpectedStatusCode());
         }
         foreach ($requestDataSet->getParameters() as $name => $value) {
