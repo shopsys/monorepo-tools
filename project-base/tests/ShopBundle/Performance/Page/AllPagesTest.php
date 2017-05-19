@@ -2,24 +2,37 @@
 
 namespace Tests\ShopBundle\Performance\Page;
 
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\HttpFoundation\Request;
 use Tests\ShopBundle\Performance\JmeterCsvReporter;
 use Tests\ShopBundle\Performance\Page\PerformanceResultsCsvExporter;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSample;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSamplesAggregator;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSummaryPrinter;
-use Tests\ShopBundle\Performance\PerformanceTestCase;
+use Tests\ShopBundle\Smoke\Http\RequestDataSet;
+use Tests\ShopBundle\Smoke\Http\RouteConfig;
+use Tests\ShopBundle\Smoke\Http\RouteConfigCustomization;
+use Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer;
+use Tests\ShopBundle\Smoke\Http\SymfonyRouterAdapter;
 
-class AllPagesTest extends PerformanceTestCase
+class AllPagesTest extends KernelTestCase
 {
     const PASSES = 5;
 
-    const ADMIN_USERNAME = 'superadmin';
-    const ADMIN_PASSWORD = 'admin123';
+    protected function setUp()
+    {
+        parent::setUp();
 
-    const FRONT_USERNAME = 'no-reply@netdevelo.cz';
-    const FRONT_PASSWORD = 'user123';
+        static::bootKernel([
+            'environment' => 'test',
+            'debug' => false,
+        ]);
+
+        self::$kernel->getContainer()->get('shopsys.shop.component.domain')
+            ->switchDomainById(1);
+    }
 
     /**
      * @group warmup
@@ -27,9 +40,7 @@ class AllPagesTest extends PerformanceTestCase
     public function testAdminPagesWarmup()
     {
         $this->doWarmupPagesWithProgress(
-            $this->createUrlsProvider()->getAdminTestableUrlsProviderData(),
-            self::ADMIN_USERNAME,
-            self::ADMIN_PASSWORD
+            $this->getRequestDataSets('~^admin_~')
         );
     }
 
@@ -39,109 +50,108 @@ class AllPagesTest extends PerformanceTestCase
     public function testFrontPagesWarmup()
     {
         $this->doWarmupPagesWithProgress(
-            $this->createUrlsProvider()->getFrontTestableUrlsProviderData(),
-            self::FRONT_USERNAME,
-            self::FRONT_PASSWORD
+            $this->getRequestDataSets('~^front~')
         );
     }
 
     public function testAdminPages()
     {
         $this->doTestPagesWithProgress(
-            $this->createUrlsProvider()->getAdminTestableUrlsProviderData(),
-            self::ADMIN_USERNAME,
-            self::ADMIN_PASSWORD,
-            $this->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-admin.csv'
+            $this->getRequestDataSets('~^admin_~'),
+            self::$kernel->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-admin.csv'
         );
     }
 
     public function testFrontPages()
     {
         $this->doTestPagesWithProgress(
-            $this->createUrlsProvider()->getFrontTestableUrlsProviderData(),
-            self::FRONT_USERNAME,
-            self::FRONT_PASSWORD,
-            $this->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-front.csv'
+            $this->getRequestDataSets('~^front~'),
+            self::$kernel->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-front.csv'
         );
     }
 
     /**
-     * @param array $testableUrlsDataProviderData
-     * @param string $username
-     * @param string $password
+     * @param string $routeNamePattern
+     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet[]
      */
-    private function doWarmupPagesWithProgress(
-        array $testableUrlsDataProviderData,
-        $username,
-        $password
-    ) {
+    private function getRequestDataSets($routeNamePattern)
+    {
+        $routeConfigs = $this->getRouterAdapter()->getRouteConfigs();
+
+        $routeConfigCustomizer = new RouteConfigCustomizer($routeConfigs);
+        $routeConfigCustomization = new RouteConfigCustomization(self::$kernel->getContainer());
+        $routeConfigCustomization->customizeRouteConfigs($routeConfigCustomizer);
+
+        $routeConfigCustomizer->customize(function (RouteConfig $config) use ($routeNamePattern) {
+            if (!preg_match($routeNamePattern, $config->getRouteName())) {
+                $config->skipRoute('Route name does not match pattern "' . $routeNamePattern . '".');
+            }
+        });
+
+        $allRequestDataSets = [];
+        foreach ($routeConfigs as $routeConfig) {
+            $requestDataSets = $routeConfig->generateRequestDataSets();
+
+            $nonSkippedRequestDataSets = array_filter($requestDataSets, function (RequestDataSet $requestDataSet) {
+                return !$requestDataSet->isSkipped();
+            });
+
+            $allRequestDataSets = array_merge($allRequestDataSets, $nonSkippedRequestDataSets);
+        }
+
+        return $allRequestDataSets;
+    }
+
+    /**
+     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet[] $requestDataSets
+     */
+    private function doWarmupPagesWithProgress(array $requestDataSets)
+    {
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->writeln('');
 
-        $countTestedUrls = count($testableUrlsDataProviderData);
-        $pageIndex = 0;
-        foreach ($testableUrlsDataProviderData as $testUrlData) {
-            $pageIndex++;
-            list($routeName, $url, $expectedStatusCode, $asLogged) = $testUrlData;
+        $requestDataSetCount = count($requestDataSets);
+        $requestDataSetIndex = 0;
+        foreach ($requestDataSets as $requestDataSet) {
+            $requestDataSetIndex++;
 
             $progressLine = sprintf(
                 'Warmup: %3d%% (%s)',
-                round($pageIndex / $countTestedUrls * 100),
-                $routeName
+                round($requestDataSetIndex / $requestDataSetCount * 100),
+                $requestDataSet->getRouteName()
             );
             $consoleOutput->write(str_pad($progressLine, 80) . "\r");
 
-            $this->doTestUrl(
-                $routeName,
-                $url,
-                $expectedStatusCode,
-                $asLogged,
-                $username,
-                $password
-            );
+            $this->doTestRequestDataSet($requestDataSet);
         }
     }
 
     /**
-     * @param array $testableUrlsDataProviderData
-     * @param string $username
-     * @param string $password
+     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet[] $requestDataSets
      * @param string $jmeterOutputFilename
      */
-    private function doTestPagesWithProgress(
-        array $testableUrlsDataProviderData,
-        $username,
-        $password,
-        $jmeterOutputFilename
-    ) {
+    private function doTestPagesWithProgress(array $requestDataSets, $jmeterOutputFilename)
+    {
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->writeln('');
 
         $performanceTestSamples = [];
 
-        $countTestedUrls = count($testableUrlsDataProviderData);
+        $requestDataSetCount = count($requestDataSets);
         for ($pass = 1; $pass <= self::PASSES; $pass++) {
-            $pageIndex = 0;
-            foreach ($testableUrlsDataProviderData as $testUrlData) {
-                $pageIndex++;
-                list($routeName, $url, $expectedStatusCode, $asLogged) = $testUrlData;
+            $requestDataSetIndex = 0;
+            foreach ($requestDataSets as $requestDataSet) {
+                $requestDataSetIndex++;
 
                 $progressLine = sprintf(
                     '%s: %3d%% (%s)',
                     'Pass ' . $pass . '/' . self::PASSES,
-                    round($pageIndex / $countTestedUrls * 100),
-                    $url
+                    round($requestDataSetIndex / $requestDataSetCount * 100),
+                    $requestDataSet->getRouteName()
                 );
                 $consoleOutput->write(str_pad($progressLine, 80) . "\r");
 
-                $performanceTestSamples[] = $this->doTestUrl(
-                    $routeName,
-                    $url,
-                    $expectedStatusCode,
-                    $asLogged,
-                    $username,
-                    $password
-                );
+                $performanceTestSamples[] = $this->doTestRequestDataSet($requestDataSet);
             }
         }
 
@@ -153,43 +163,38 @@ class AllPagesTest extends PerformanceTestCase
     }
 
     /**
-     * @param string $routeName
-     * @param string $url
-     * @param int $expectedStatusCode
-     * @param bool $asLogged
-     * @param string $username
-     * @param string $password
+     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet $requestDataSet
      * @return \Tests\ShopBundle\Performance\Page\PerformanceTestSample
      */
-    private function doTestUrl(
-        $routeName,
-        $url,
-        $expectedStatusCode,
-        $asLogged,
-        $username,
-        $password
-    ) {
-        if ($asLogged) {
-            $client = $this->getClient(true, $username, $password);
-        } else {
-            $client = $this->getClient(true);
-        }
+    private function doTestRequestDataSet(RequestDataSet $requestDataSet)
+    {
+        $this->setUp();
 
-        $urlWithCsrfToken = $this->createUrlsProvider()->replaceCsrfTokensInUrl($url);
+        $requestDataSet->executeCallsDuringTestExecution(static::$kernel->getContainer());
+
+        $uri = $this->getRouterAdapter()->generateUri($requestDataSet);
+
+        $request = Request::create($uri);
+        $requestDataSet->getAuth()->authenticateRequest($request);
+
+        $entityManager = self::$kernel->getContainer()->get('doctrine.orm.entity_manager');
+        /* @var $entityManager \Doctrine\ORM\EntityManager */
 
         $startTime = microtime(true);
-        $this->makeRequestInTransaction($client, $urlWithCsrfToken);
+        $entityManager->beginTransaction();
+        $response = static::$kernel->handle($request);
+        $entityManager->rollback();
         $endTime = microtime(true);
 
-        $statusCode = $client->getResponse()->getStatusCode();
+        $statusCode = $response->getStatusCode();
 
         return new PerformanceTestSample(
-            $routeName,
-            $url,
+            $requestDataSet->getRouteName(),
+            $uri,
             ($endTime - $startTime) * 1000,
             0, // Currently, we are not able to measure query count
             $statusCode,
-            $statusCode === $expectedStatusCode
+            $statusCode === $requestDataSet->getExpectedStatusCode()
         );
     }
 
@@ -248,5 +253,16 @@ class AllPagesTest extends PerformanceTestCase
         $performanceTestSummaryPrinter = new PerformanceTestSummaryPrinter($performanceTestSampleQualifier);
 
         $performanceTestSummaryPrinter->printSummary($performanceTestSamples, $consoleOutput);
+    }
+
+    /**
+     * @return \Tests\ShopBundle\Smoke\Http\SymfonyRouterAdapter
+     */
+    private function getRouterAdapter()
+    {
+        $router = static::$kernel->getContainer()->get('router');
+        $routerAdapter = new SymfonyRouterAdapter($router);
+
+        return $routerAdapter;
     }
 }
