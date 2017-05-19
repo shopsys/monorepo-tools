@@ -3,18 +3,16 @@
 namespace Tests\ShopBundle\Performance\Feed;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
 use Shopsys\ShopBundle\Model\Feed\FeedConfig;
-use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Tests\ShopBundle\Performance\Feed\PerformanceResultsCsvExporter;
 use Tests\ShopBundle\Performance\Feed\PerformanceTestSample;
 use Tests\ShopBundle\Performance\JmeterCsvReporter;
-use Tests\ShopBundle\Test\CrawlerTestCase;
+use Tests\ShopBundle\Smoke\Http\Auth\BasicHttpAuth;
 
-class AllFeedsTest extends CrawlerTestCase
+class AllFeedsTest extends KernelTestCase
 {
     const MAX_DURATION_FEED_SECONDS = 180;
     const MAX_DURATION_DELIVERY_FEED_SECONDS = 20;
@@ -23,6 +21,19 @@ class AllFeedsTest extends CrawlerTestCase
     const ROUTE_NAME_GENERATE_FEED = 'admin_feed_generate';
     const ADMIN_USERNAME = 'admin';
     const ADMIN_PASSWORD = 'admin123';
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        static::bootKernel([
+            'environment' => 'test',
+            'debug' => false,
+        ]);
+
+        self::$kernel->getContainer()->get('shopsys.shop.component.domain')
+            ->switchDomainById(1);
+    }
 
     public function testAllFeedsGeneration()
     {
@@ -54,8 +65,10 @@ class AllFeedsTest extends CrawlerTestCase
             $performanceTestSamples[] = $performanceTestSample;
         }
 
-        $jmeterOutputFilename = $this->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-feeds.csv';
-        $this->exportJmeterCsvReport($performanceTestSamples, $jmeterOutputFilename);
+        $this->exportJmeterCsvReport(
+            $performanceTestSamples,
+            self::$kernel->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-feeds.csv'
+        );
 
         $this->assertSamplesAreSuccessful($performanceTestSamples);
     }
@@ -79,9 +92,9 @@ class AllFeedsTest extends CrawlerTestCase
      */
     public function getAllFeedGenerationData()
     {
-        $feedConfigFacade = $this->getServiceByType(FeedConfigFacade::class);
+        $feedConfigFacade = self::$kernel->getContainer()->get('shopsys.shop.feed.feed_config_facade');
         /* @var $feedConfigFacade \Shopsys\ShopBundle\Model\Feed\FeedConfigFacade */
-        $domain = $this->getServiceByType(Domain::class);
+        $domain = self::$kernel->getContainer()->get('shopsys.shop.component.domain');
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
         $feedGenerationData = $this->getFeedGenerationData(
@@ -147,27 +160,33 @@ class AllFeedsTest extends CrawlerTestCase
      */
     private function generateFeed(FeedConfig $feedConfig, DomainConfig $domainConfig)
     {
-        $client = $this->getClient(true, self::ADMIN_USERNAME, self::ADMIN_PASSWORD);
+        $this->setUp();
 
-        $router = $this->getServiceByType(CurrentDomainRouter::class);
-        /* @var $router \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter */
+        $router = self::$kernel->getContainer()->get('router');
+        /* @var $router \Symfony\Component\Routing\RouterInterface */
 
-        $feedGenerationParameters = [
-            'feedName' => $feedConfig->getFeedName(),
-            'domainId' => $domainConfig->getId(),
-        ];
         $uri = $router->generate(
             self::ROUTE_NAME_GENERATE_FEED,
-            $feedGenerationParameters,
-            UrlGeneratorInterface::ABSOLUTE_URL
+            [
+                'feedName' => $feedConfig->getFeedName(),
+                'domainId' => $domainConfig->getId(),
+            ]
         );
+        $request = Request::create($uri);
+        $auth = new BasicHttpAuth(self::ADMIN_USERNAME, self::ADMIN_PASSWORD);
+        $auth->authenticateRequest($request);
+
+        $entityManager = self::$kernel->getContainer()->get('doctrine.orm.entity_manager');
+        /* @var $entityManager \Doctrine\ORM\EntityManager */
 
         $startTime = microtime(true);
-        $this->makeRequestInTransaction($client, $uri);
+        $entityManager->beginTransaction();
+        $response = static::$kernel->handle($request);
+        $entityManager->rollback();
         $endTime = microtime(true);
 
         $duration = $endTime - $startTime;
-        $statusCode = $client->getResponse()->getStatusCode();
+        $statusCode = $response->getStatusCode();
 
         $performanceTestSample = new PerformanceTestSample($feedConfig, $domainConfig, $uri, $duration, $statusCode);
 

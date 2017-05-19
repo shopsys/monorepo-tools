@@ -19,7 +19,7 @@ Every Phing target is a task that can be executed simply by `php phing <target-n
 #### build-demo-dev
 Builds application for development with clean demo DB and runs checks on changed files.
 
-Most important build command for development. Wipes the application data, installs missing dependencies via Composer, creates clean DB and fills it with demo data, prepares assets, builds LESS into CSS, prepares error pages check coding standards in changed files (with changes against `origin/master`) and runs unit, database and crawler tests.
+Most important build command for development. Wipes the application data, installs missing dependencies via Composer, creates clean DB and fills it with demo data, prepares assets, builds LESS into CSS, prepares error pages check coding standards in changed files (with changes against `origin/master`) and runs unit, database and smoke tests.
 
 #### build-dev-quick
 Builds application for development preserving your DB while skipping nonessential steps.
@@ -66,7 +66,7 @@ Automatically fixes some coding standards violations in all or only changed file
 ### Tests
 
 #### tests
-Runs unit, database and crawler tests on a newly built test database.
+Runs unit, database and smoke tests on a newly built test database.
 
 Creates a new test database with demo data and runs all tests except acceptance and performance (they are more time consuming).
 
