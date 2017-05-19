@@ -109,6 +109,7 @@
         "ext-zip": "*",
         "codeception/codeception": "2.2.3",
         "shopsys/coding-standards": "3.0.1",
+        "shopsys/http-smoke-testing": "1.0.0",
         "shopsys/phpstorm-inspect": "1.0.4"
     },
     "scripts": {

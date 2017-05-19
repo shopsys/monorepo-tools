@@ -2,6 +2,7 @@
 
 namespace Tests\ShopBundle\Performance\Feed;
 
+use Shopsys\HttpSmokeTesting\Auth\BasicHttpAuth;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Model\Feed\FeedConfig;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -10,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Tests\ShopBundle\Performance\Feed\PerformanceResultsCsvExporter;
 use Tests\ShopBundle\Performance\Feed\PerformanceTestSample;
 use Tests\ShopBundle\Performance\JmeterCsvReporter;
-use Tests\ShopBundle\Smoke\Http\Auth\BasicHttpAuth;
 
 class AllFeedsTest extends KernelTestCase
 {

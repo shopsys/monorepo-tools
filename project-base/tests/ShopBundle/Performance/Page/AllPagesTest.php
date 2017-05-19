@@ -2,6 +2,12 @@
 
 namespace Tests\ShopBundle\Performance\Page;
 
+use Shopsys\HttpSmokeTesting\RequestDataSet;
+use Shopsys\HttpSmokeTesting\RequestDataSetGenerator;
+use Shopsys\HttpSmokeTesting\RouteConfig;
+use Shopsys\HttpSmokeTesting\RouteConfigCustomizer;
+use Shopsys\HttpSmokeTesting\RouteInfo;
+use Shopsys\HttpSmokeTesting\RouterAdapter\SymfonyRouterAdapter;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,11 +17,7 @@ use Tests\ShopBundle\Performance\Page\PerformanceTestSample;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSamplesAggregator;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSummaryPrinter;
-use Tests\ShopBundle\Smoke\Http\RequestDataSet;
-use Tests\ShopBundle\Smoke\Http\RouteConfig;
 use Tests\ShopBundle\Smoke\Http\RouteConfigCustomization;
-use Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer;
-use Tests\ShopBundle\Smoke\Http\SymfonyRouterAdapter;
 
 class AllPagesTest extends KernelTestCase
 {
@@ -72,25 +74,29 @@ class AllPagesTest extends KernelTestCase
 
     /**
      * @param string $routeNamePattern
-     * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet[]
+     * @return \Shopsys\HttpSmokeTesting\RequestDataSet[]
      */
     private function getRequestDataSets($routeNamePattern)
     {
-        $routeConfigs = $this->getRouterAdapter()->getRouteConfigs();
+        $requestDataSetGenerators = [];
+        $allRouteInfo = $this->getRouterAdapter()->getAllRouteInfo();
+        foreach ($allRouteInfo as $routeInfo) {
+            $requestDataSetGenerators[] = new RequestDataSetGenerator($routeInfo);
+        }
 
-        $routeConfigCustomizer = new RouteConfigCustomizer($routeConfigs);
+        $routeConfigCustomizer = new RouteConfigCustomizer($requestDataSetGenerators);
         $routeConfigCustomization = new RouteConfigCustomization(self::$kernel->getContainer());
         $routeConfigCustomization->customizeRouteConfigs($routeConfigCustomizer);
 
-        $routeConfigCustomizer->customize(function (RouteConfig $config) use ($routeNamePattern) {
-            if (!preg_match($routeNamePattern, $config->getRouteName())) {
+        $routeConfigCustomizer->customize(function (RouteConfig $config, RouteInfo $info) use ($routeNamePattern) {
+            if (!preg_match($routeNamePattern, $info->getRouteName())) {
                 $config->skipRoute('Route name does not match pattern "' . $routeNamePattern . '".');
             }
         });
 
         $allRequestDataSets = [];
-        foreach ($routeConfigs as $routeConfig) {
-            $requestDataSets = $routeConfig->generateRequestDataSets();
+        foreach ($requestDataSetGenerators as $requestDataSetGenerator) {
+            $requestDataSets = $requestDataSetGenerator->generateRequestDataSets();
 
             $nonSkippedRequestDataSets = array_filter($requestDataSets, function (RequestDataSet $requestDataSet) {
                 return !$requestDataSet->isSkipped();
@@ -103,7 +109,7 @@ class AllPagesTest extends KernelTestCase
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet[] $requestDataSets
+     * @param \Shopsys\HttpSmokeTesting\RequestDataSet[] $requestDataSets
      */
     private function doWarmupPagesWithProgress(array $requestDataSets)
     {
@@ -127,7 +133,7 @@ class AllPagesTest extends KernelTestCase
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet[] $requestDataSets
+     * @param \Shopsys\HttpSmokeTesting\RequestDataSet[] $requestDataSets
      * @param string $jmeterOutputFilename
      */
     private function doTestPagesWithProgress(array $requestDataSets, $jmeterOutputFilename)
@@ -163,7 +169,7 @@ class AllPagesTest extends KernelTestCase
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\RequestDataSet $requestDataSet
+     * @param \Shopsys\HttpSmokeTesting\RequestDataSet $requestDataSet
      * @return \Tests\ShopBundle\Performance\Page\PerformanceTestSample
      */
     private function doTestRequestDataSet(RequestDataSet $requestDataSet)
@@ -256,7 +262,7 @@ class AllPagesTest extends KernelTestCase
     }
 
     /**
-     * @return \Tests\ShopBundle\Smoke\Http\SymfonyRouterAdapter
+     * @return \Shopsys\HttpSmokeTesting\RouterAdapter\SymfonyRouterAdapter
      */
     private function getRouterAdapter()
     {

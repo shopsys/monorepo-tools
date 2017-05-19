@@ -2,6 +2,12 @@
 
 namespace Tests\ShopBundle\Smoke\Http;
 
+use Shopsys\HttpSmokeTesting\Auth\BasicHttpAuth;
+use Shopsys\HttpSmokeTesting\Auth\NoAuth;
+use Shopsys\HttpSmokeTesting\RequestDataSet;
+use Shopsys\HttpSmokeTesting\RouteConfig;
+use Shopsys\HttpSmokeTesting\RouteConfigCustomizer;
+use Shopsys\HttpSmokeTesting\RouteInfo;
 use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Shopsys\ShopBundle\Controller\Front\ProductController;
 use Shopsys\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
@@ -11,8 +17,6 @@ use Shopsys\ShopBundle\DataFixtures\Demo\OrderDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixture;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Tests\ShopBundle\Smoke\Http\Auth\BasicHttpAuth;
-use Tests\ShopBundle\Smoke\Http\Auth\NoAuth;
 
 class RouteConfigCustomization
 {
@@ -32,7 +36,7 @@ class RouteConfigCustomization
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
+     * @param \Shopsys\HttpSmokeTesting\RouteConfigCustomizer $routeConfigCustomizer
      */
     public function customizeRouteConfigs(RouteConfigCustomizer $routeConfigCustomizer)
     {
@@ -43,28 +47,28 @@ class RouteConfigCustomization
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
+     * @param \Shopsys\HttpSmokeTesting\RouteConfigCustomizer $routeConfigCustomizer
      */
     private function filterRoutesForTesting(RouteConfigCustomizer $routeConfigCustomizer)
     {
         $routeConfigCustomizer
-            ->customize(function (RouteConfig $config) {
-                if (!$config->isHttpMethodAllowed('GET')) {
+            ->customize(function (RouteConfig $config, RouteInfo $info) {
+                if (!$info->isHttpMethodAllowed('GET')) {
                     $config->skipRoute('Only routes supporting GET method are tested.');
                 }
             })
-            ->customize(function (RouteConfig $config) {
-                if (preg_match('~^(/admin)?/_~', $config->getRoutePath())) {
+            ->customize(function (RouteConfig $config, RouteInfo $info) {
+                if (preg_match('~^(/admin)?/_~', $info->getRoutePath())) {
                     $config->skipRoute('Internal routes (prefixed with "/_") are not tested.');
                 }
             })
-            ->customize(function (RouteConfig $config) {
-                if ($config->getRouteCondition() === 'request.isXmlHttpRequest()') {
+            ->customize(function (RouteConfig $config, RouteInfo $info) {
+                if ($info->getRouteCondition() === 'request.isXmlHttpRequest()') {
                     $config->skipRoute('AJAX-only routes are not tested.');
                 }
             })
-            ->customize(function (RouteConfig $config) {
-                if (!preg_match('~^(admin|front)_~', $config->getRouteName())) {
+            ->customize(function (RouteConfig $config, RouteInfo $info) {
+                if (!preg_match('~^(admin|front)_~', $info->getRouteName())) {
                     $config->skipRoute('Only routes for front-end and administration are tested.');
                 }
             })
@@ -97,22 +101,22 @@ class RouteConfigCustomization
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
+     * @param \Shopsys\HttpSmokeTesting\RouteConfigCustomizer $routeConfigCustomizer
      */
     private function configureGeneralRules(RouteConfigCustomizer $routeConfigCustomizer)
     {
         $routeConfigCustomizer
-            ->customize(function (RouteConfig $config) {
-                foreach ($config->getRouteParameterNames() as $name) {
-                    if ($config->isRouteParameterRequired($name) && preg_match('~^(id|.+Id)$~', $name)) {
+            ->customize(function (RouteConfig $config, RouteInfo $info) {
+                foreach ($info->getRouteParameterNames() as $name) {
+                    if ($info->isRouteParameterRequired($name) && preg_match('~^(id|.+Id)$~', $name)) {
                         $debugNote = 'Route requires ID parameter "%s". Using %d by default.';
                         $config->changeDefaultRequestDataSet(sprintf($debugNote, $name, self::DEFAULT_ID_VALUE))
                             ->setParameter($name, self::DEFAULT_ID_VALUE);
                     }
                 }
             })
-            ->customize(function (RouteConfig $config) {
-                if (preg_match('~_delete$~', $config->getRouteName())) {
+            ->customize(function (RouteConfig $config, RouteInfo $info) {
+                if (preg_match('~_delete$~', $info->getRouteName())) {
                     $debugNote = 'Add CSRF token for any delete action during test execution. '
                         . '(Routes are protected by RouteCsrfProtector.)';
                     $config->changeDefaultRequestDataSet($debugNote)
@@ -129,59 +133,59 @@ class RouteConfigCustomization
                             $requestDataSet->setParameter($parameterName, $token->getValue());
                         });
                     $config->changeDefaultRequestDataSet('Expect redirect by 302 for any delete action.')
-                        ->expectStatusCode(302);
+                        ->setExpectedStatusCode(302);
                 }
             });
     }
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
+     * @param \Shopsys\HttpSmokeTesting\RouteConfigCustomizer $routeConfigCustomizer
      */
     private function configureAdminRoutes(RouteConfigCustomizer $routeConfigCustomizer)
     {
         $routeConfigCustomizer
-            ->customize(function (RouteConfig $config) {
-                if (preg_match('~^admin_~', $config->getRouteName())) {
+            ->customize(function (RouteConfig $config, RouteInfo $info) {
+                if (preg_match('~^admin_~', $info->getRouteName())) {
                     $config->changeDefaultRequestDataSet('Log as "admin" to administration.')
                         ->setAuth(new BasicHttpAuth('admin', 'admin123'));
                 }
             })
-            ->customize(function (RouteConfig $config) {
-                if (preg_match('~^admin_(superadmin_|translation_list$)~', $config->getRouteName())) {
+            ->customize(function (RouteConfig $config, RouteInfo $info) {
+                if (preg_match('~^admin_(superadmin_|translation_list$)~', $info->getRouteName())) {
                     $config->changeDefaultRequestDataSet('Only superadmin should be able to see this route.')
-                        ->expectStatusCode(404);
+                        ->setExpectedStatusCode(404);
                     $config->addExtraRequestDataSet('Should be OK when logged in as "superadmin".')
                         ->setAuth(new BasicHttpAuth('superadmin', 'admin123'))
-                        ->expectStatusCode(200);
+                        ->setExpectedStatusCode(200);
                 }
             })
             ->customizeByRouteName('admin_login', function (RouteConfig $config) {
                 $config->changeDefaultRequestDataSet('Admin login should redirect by 302.')
-                    ->expectStatusCode(302);
+                    ->setExpectedStatusCode(302);
                 $config->addExtraRequestDataSet('Admin login should not redirect for users that are not logged in yet.')
                     ->setAuth(new NoAuth())
-                    ->expectStatusCode(200);
+                    ->setExpectedStatusCode(200);
             })
-            ->customizeByRouteName(['admin_login_sso', 'admin_customer_loginasuser'], function (RouteConfig $config) {
-                $debugNote = sprintf('Route "%s" should always just redirect.', $config->getRouteName());
+            ->customizeByRouteName(['admin_login_sso', 'admin_customer_loginasuser'], function (RouteConfig $config, RouteInfo $info) {
+                $debugNote = sprintf('Route "%s" should always just redirect.', $info->getRouteName());
                 $config->changeDefaultRequestDataSet($debugNote)
-                    ->expectStatusCode(302);
+                    ->setExpectedStatusCode(302);
             })
             ->customizeByRouteName('admin_administrator_edit', function (RouteConfig $config) {
                 $debugNote = 'It is forbidden to edit administrator with ID 1 as it is the superadmin.';
                 $config->changeDefaultRequestDataSet($debugNote)
-                    ->expectStatusCode(404);
+                    ->setExpectedStatusCode(404);
                 $config->addExtraRequestDataSet('Editing normal administrator should be OK.')
                     ->setParameter('id', 2)
-                    ->expectStatusCode(200);
+                    ->setExpectedStatusCode(200);
             })
             ->customizeByRouteName('admin_category_edit', function (RouteConfig $config) {
                 $config->changeDefaultRequestDataSet('It is forbidden to edit category with ID 1 as it is the root.')
-                    ->expectStatusCode(404);
+                    ->setExpectedStatusCode(404);
                 $config->addExtraRequestDataSet('Editing normal category should be OK.')
                     ->setParameter('id', 2)
-                    ->expectStatusCode(200);
+                    ->setExpectedStatusCode(200);
             })
             ->customizeByRouteName('admin_bestsellingproduct_detail', function (RouteConfig $config) {
                 $config->changeDefaultRequestDataSet('Category with ID 1 is the root, use ID 2 instead.')
@@ -221,7 +225,7 @@ class RouteConfigCustomization
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
+     * @param \Shopsys\HttpSmokeTesting\RouteConfigCustomizer $routeConfigCustomizer
      */
     private function configureFrontendRoutes(RouteConfigCustomizer $routeConfigCustomizer)
     {
@@ -230,15 +234,15 @@ class RouteConfigCustomization
                 $config->changeDefaultRequestDataSet('Log as demo user "Jaromír Jágr" on pages in client section.')
                     ->setAuth(new BasicHttpAuth('no-reply@netdevelo.cz', 'user123'));
             })
-            ->customizeByRouteName(['front_customer_login_as_remembered_user', 'front_promo_code_remove'], function (RouteConfig $config) {
-                $debugNote = sprintf('Route "%s" should always just redirect.', $config->getRouteName());
+            ->customizeByRouteName(['front_customer_login_as_remembered_user', 'front_promo_code_remove'], function (RouteConfig $config, RouteInfo $info) {
+                $debugNote = sprintf('Route "%s" should always just redirect.', $info->getRouteName());
                 $config->changeDefaultRequestDataSet($debugNote)
-                    ->expectStatusCode(302);
+                    ->setExpectedStatusCode(302);
             })
             ->customizeByRouteName(['front_order_index', 'front_order_sent'], function (RouteConfig $config) {
                 $debugNote = 'Order page should redirect by 302 as the cart is empty by default.';
                 $config->changeDefaultRequestDataSet($debugNote)
-                    ->expectStatusCode(302);
+                    ->setExpectedStatusCode(302);
             })
             ->customizeByRouteName('front_logout', function (RouteConfig $config) {
                 $debugNote = 'Add CSRF token for logout action (configured in app/security.yml) during test execution.';
@@ -252,7 +256,7 @@ class RouteConfigCustomization
                         $requestDataSet->setParameter('_csrf_token', $token->getValue());
                     });
                 $config->changeDefaultRequestDataSet('Logout action should redirect by 302')
-                    ->expectStatusCode(302);
+                    ->setExpectedStatusCode(302);
             })
             ->customizeByRouteName('front_article_detail', function (RouteConfig $config) {
                 $config->changeDefaultRequestDataSet('Use ID 1 as default article.')
@@ -336,7 +340,7 @@ class RouteConfigCustomization
                     ->setParameter('hash', $customer->getResetPasswordHash());
                 $config->addExtraRequestDataSet('Expect redirect when the hash is invalid.')
                     ->setParameter('hash', 'invalidHash')
-                    ->expectStatusCode(302);
+                    ->setExpectedStatusCode(302);
             });
     }
 

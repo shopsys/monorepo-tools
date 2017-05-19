@@ -2,7 +2,11 @@
 
 namespace Tests\ShopBundle\Smoke\Http;
 
+use Shopsys\HttpSmokeTesting\HttpSmokeTestCase;
+use Shopsys\HttpSmokeTesting\RequestDataSet;
+use Shopsys\HttpSmokeTesting\RouteConfigCustomizer;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class HttpSmokeTest extends HttpSmokeTestCase
 {
@@ -15,7 +19,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
     }
 
     /**
-     * @param \Tests\ShopBundle\Smoke\Http\RouteConfigCustomizer $routeConfigCustomizer
+     * @param \Shopsys\HttpSmokeTesting\RouteConfigCustomizer $routeConfigCustomizer
      */
     protected function customizeRouteConfigs(RouteConfigCustomizer $routeConfigCustomizer)
     {

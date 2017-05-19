@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "49fc15b6f8822e8663c18d839d11eef8",
+    "content-hash": "e61713e18a39a748810efd72d292b584",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -6047,6 +6047,7 @@
                 "MIT"
             ],
             "description": "Adds support to autowire controller constructor without pain.",
+            "abandoned": "symfony/dependency-injection",
             "time": "2017-01-01T16:33:09+00:00"
         },
         {
@@ -6090,6 +6091,7 @@
                 "MIT"
             ],
             "description": "Adds autowire to services when needed.",
+            "abandoned": "symfony/dependency-injection",
             "time": "2017-01-01T16:33:09+00:00"
         },
         {
@@ -7145,6 +7147,56 @@
                 "issues": "https://github.com/shopsys/coding-standards/issues"
             },
             "time": "2017-03-06T14:02:47+00:00"
+        },
+        {
+            "name": "shopsys/http-smoke-testing",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shopsys/http-smoke-testing.git",
+                "reference": "c58695aa4009221aa3dee6cfb4b95105807be14b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shopsys/http-smoke-testing/zipball/c58695aa4009221aa3dee6cfb4b95105807be14b",
+                "reference": "c58695aa4009221aa3dee6cfb4b95105807be14b",
+                "shasum": ""
+            },
+            "require": {
+                "phpunit/phpunit": "^3.7.15|^4.0|^5.0",
+                "symfony/framework-bundle": "^2.5|^3.0",
+                "symfony/http-foundation": "^2.5|^3.0"
+            },
+            "require-dev": {
+                "shopsys/coding-standards": "3.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Shopsys\\HttpSmokeTesting\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shopsys",
+                    "homepage": "https://www.shopsys.com/"
+                }
+            ],
+            "description": "HTTP smoke test case for testing all configured routes in your Symfony project",
+            "keywords": [
+                "phpunit",
+                "routing",
+                "smoke testing",
+                "symfony",
+                "testing"
+            ],
+            "time": "2017-05-23T15:07:16+00:00"
         },
         {
             "name": "shopsys/phpstorm-inspect",
