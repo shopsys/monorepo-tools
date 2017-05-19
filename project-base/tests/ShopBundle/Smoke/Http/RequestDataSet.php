@@ -2,6 +2,7 @@
 
 namespace Tests\ShopBundle\Smoke\Http;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tests\ShopBundle\Smoke\Http\Auth\AuthInterface;
 use Tests\ShopBundle\Smoke\Http\Auth\NoAuth;
 
@@ -113,12 +114,13 @@ class RequestDataSet
     }
 
     /**
+     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
      */
-    public function executeCallsDuringTestExecution()
+    public function executeCallsDuringTestExecution(ContainerInterface $container)
     {
         foreach ($this->callsDuringTestExecution as $customization) {
-            $customization($this);
+            $customization($this, $container);
         }
 
         return $this;
@@ -180,11 +182,9 @@ class RequestDataSet
     }
 
     /**
-     * Provided $callback will be called with this instance as a single argument
+     * Provided $callback will be called with instance of this and ContainerInterface as arguments
      *
-     * Useful for code that need to access the same instance of kernel as the test method.
-     *
-     * @see \Symfony\Bundle\FrameworkBundle\Test\KernelTestCase::$kernel
+     * Useful for code that needs to access the same instance of container as the test method.
      *
      * @param callable $callback
      * @return \Tests\ShopBundle\Smoke\Http\RequestDataSet
