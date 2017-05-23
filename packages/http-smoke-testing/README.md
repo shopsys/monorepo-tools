@@ -1,5 +1,7 @@
 # Shopsys HTTP Smoke Testing
 
+[![Build Status](https://travis-ci.org/shopsys/http-smoke-testing.svg?branch=master)](https://travis-ci.org/shopsys/http-smoke-testing)
+
 This package enables you to do simple HTTP smoke testing of your Symfony application.
 
 Basically, it generates a HTTP request for every page (controller action) provided by the application router and then asserts that the returned HTTP response code is correct.
