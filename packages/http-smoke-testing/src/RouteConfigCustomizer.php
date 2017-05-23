@@ -11,6 +11,9 @@ class RouteConfigCustomizer
      */
     private $requestDataSetGenerators;
 
+    /**
+     * @param \Shopsys\HttpSmokeTesting\RequestDataSetGenerator[] $requestDataSetGenerators
+     */
     public function __construct(array $requestDataSetGenerators)
     {
         $this->requestDataSetGenerators = $requestDataSetGenerators;
