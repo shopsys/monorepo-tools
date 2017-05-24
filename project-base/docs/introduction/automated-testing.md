@@ -83,7 +83,7 @@ When a test fails it provides detailed feedback to the developer.
 ### Database tests (a.k.a. integration tests)
 Even when all parts are working it is not guaranteed they work well together. Mocking can still be used for isolation when appropriate.
 
-These tests use a separate database to not affect your application data so you can still use the application in *DEVELOPMENT* mode. It is still **not recommended** to run tests on production server because things like filesystem are shared among all kernel environments.
+These tests use a separate database to not affect your application data so you can still use the application in *DEVELOPMENT* environment. It is still **not recommended** to run tests on production server because things like filesystem are shared among all kernel environments.
 
 All tests are isolated from each other thanks to database transactions. This means they can be executed in any order as each have the same starting conditions.
 
@@ -123,6 +123,8 @@ Provide a way of fully end-to-end testing your application as if a real human us
 
 Built on [Selenium](http://www.seleniumhq.org/) and [Codeception](http://codeception.com/), running in [Google Chrome](https://www.google.com/chrome/) browser.
 
+More information can be found in [Running Acceptance Tests](running-acceptance-tests.md).
+
 #### Advantages:
 * end-to-end testing
 * cover errors that occur only in the browser
@@ -131,7 +133,7 @@ Built on [Selenium](http://www.seleniumhq.org/) and [Codeception](http://codecep
 
 #### Disadvantages:
 * take a while to execute
-* whole application is switched to *TEST* mode
+* whole application is switched to *TEST* environment
 * occasional false negative reports (due to WebDriver brittleness)
 * requires installation of [Google Chrome](https://www.google.com/chrome/browser/desktop/) and [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/)
 

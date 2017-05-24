@@ -12,7 +12,7 @@ php phing -l
 ## Targets
 Every Phing target is a task that can be executed simply by `php phing <target-name>` command.
 
-*Tip: You can use shorthand command `./phing <target-name>` on Unix system or `phing <target-name>` on Windows instead of `php phing <target-name>`.*
+*Tip: You can use shorthand command `./phing <target-name>` on Unix system or `phing <target-name>` in Windows CMD instead of `php phing <target-name>`.*
 
 ### Basic
 
@@ -73,7 +73,7 @@ Creates a new test database with demo data and runs all tests except acceptance 
 #### tests-acceptance
 Runs acceptance tests. Running Selenium server is required.
 
-*Note: If you interrupt running acceptance tests you may need to delete root file named `TEST` that is temporarily created to switch application to `TEST` environment.*
+More on this topic can be found in [Running Acceptance Tests](running-acceptance-tests.md).
 
 #### selenium-run
 Runs the Selenium server for acceptance testing. [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) is required.
