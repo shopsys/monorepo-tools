@@ -116,7 +116,9 @@ You will no longer cause *500 Server Error* on some random page by a seemingly u
 * protection from unhandled exceptions in controller actions
 
 #### Example:
-See configuration of HTTP smoke (and [performance](#performance-tests)) tests in [`\Tests\ShopBundle\Smoke\Http\UrlsProvider`](../../tests/ShopBundle/Smoke/Http/UrlsProvider.php).
+See configuration of HTTP smoke (and [performance](#performance-tests)) tests in [`\Tests\ShopBundle\Smoke\Http\RouteConfigCustomization`](../../tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php).
+
+*Note: you can read more about customization of HTTP smoke tests in their [own documentation on GitHub](https://github.com/shopsys/http-smoke-testing).*
 
 ### Acceptance tests (a.k.a. functional tests or Selenium tests)
 Provide a way of fully end-to-end testing your application as if a real human used it.
