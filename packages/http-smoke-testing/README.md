@@ -24,7 +24,7 @@ Renaming the `phpunit.xml.dist` in your project root (or `app/phpunit.xml.dist` 
 *Note: If you did not find the file in your project check out the example in [Symfony Standard Edition](https://github.com/symfony/symfony-standard).*
 
 ## Usage
-Create [new PHPUnit test](https://phpunit.de/manual/current/en/writing-tests-for-phpunit.html) extending [\Shopsys\HttpSmokeTesting\HttpSmokeTestCase](src/HttpSmokeTestCase.php) class and implement `customizeRouteConfigs` method.
+Create [new PHPUnit test](https://phpunit.de/manual/current/en/writing-tests-for-phpunit.html) extending [`\Shopsys\HttpSmokeTesting\HttpSmokeTestCase`](src/HttpSmokeTestCase.php) class and implement `customizeRouteConfigs` method.
 
 You can run your new test by:
 
@@ -118,7 +118,7 @@ It returns [`RequestDataSet`](src/RequestDataSet.php) object offering the setter
   (Useful for code that needs to access the same instance of container as the test method, eg. adding CSRF token as a route parameter)
 * `addExtraRequestDataSet` can be used to test more requests on the same route (eg. test a secured route as both logged in and anonymous user).
 Returns [`RequestDataSet`](src/RequestDataSet.php) that you can use the same way as the result from `changeDefaultRequestDataSet`.
-All configured options will extend the values from default request data set (even when you change the default `RequestDataSet` after you add the extra `RequestDataSet`).
+All configured options will extend the values from default request data set (even when you change the default [`RequestDataSet`](src/RequestDataSet.php) after you add the extra [`RequestDataSet`](src/RequestDataSet.php)).
 
 *Note: All three methods of [`RouteConfigCustomizer`](src/RouteConfigCustomizer.php) accept `string $debugNote` as an argument.*
 *It is useful for describing the reasons of your configuration change because it may help you with debugging when the test fails.*
