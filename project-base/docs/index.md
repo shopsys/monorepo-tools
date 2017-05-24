@@ -7,3 +7,4 @@
 
 ## Cookbook
 * [Adding new attribute to an entity](cookbook/adding-new-attribute-to-an-entity.md)
+* [Adding new page with recently bought products](cookbook/adding-new-page-with-recently-bought-products.md)
