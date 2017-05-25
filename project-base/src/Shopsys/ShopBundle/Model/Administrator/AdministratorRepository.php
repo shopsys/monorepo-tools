@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Model\Administrator;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Administrator\Administrator;
+use Shopsys\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException;
 
 class AdministratorRepository
 {
@@ -79,6 +80,22 @@ class AdministratorRepository
     public function findByUserName($administratorUserName)
     {
         return $this->getAdministratorRepository()->findOneBy(['username' => $administratorUserName]);
+    }
+
+    /**
+     * @param string $administratorUserName
+     * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
+     */
+    public function getByUserName($administratorUserName)
+    {
+        $administrator = $this->findByUserName($administratorUserName);
+        if ($administrator === null) {
+            throw new \Shopsys\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException(
+                'Administrator with username "' . $administratorUserName . '" not found.'
+            );
+        }
+
+        return $administrator;
     }
 
     /**

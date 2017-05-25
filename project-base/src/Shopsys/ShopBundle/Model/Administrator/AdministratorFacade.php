@@ -53,7 +53,7 @@ class AdministratorFacade
             throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administratorByUserName->getUsername());
         }
         $administrator = new Administrator($administratorData);
-        $administrator->setPassword($this->administratorService->getPasswordHash($administrator, $administratorData->password));
+        $this->administratorService->setPassword($administrator, $administratorData->password);
 
         $this->em->persist($administrator);
         $this->em->flush();
@@ -93,6 +93,17 @@ class AdministratorFacade
         $this->administratorService->delete($administrator, $adminCountExcludingSuperadmin);
         $this->em->remove($administrator);
         $this->em->flush();
+    }
+
+    /**
+     * @param string $administratorUsername
+     * @param string $newPassword
+     */
+    public function changePassword($administratorUsername, $newPassword)
+    {
+        $administrator = $this->administratorRepository->getByUserName($administratorUsername);
+        $this->administratorService->setPassword($administrator, $newPassword);
+        $this->em->flush($administrator);
     }
 
     /**

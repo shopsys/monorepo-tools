@@ -28,14 +28,12 @@ class AdministratorService
     /**
      * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
      * @param string $password
-     * @return string
      */
-    public function getPasswordHash(Administrator $administrator, $password)
+    public function setPassword(Administrator $administrator, $password)
     {
         $encoder = $this->encoderFactory->getEncoder($administrator);
         $passwordHash = $encoder->encodePassword($password, $administrator->getSalt());
-
-        return $passwordHash;
+        $administrator->setPassword($passwordHash);
     }
 
     /**
@@ -82,7 +80,7 @@ class AdministratorService
         }
         $administrator->edit($administratorData);
         if ($administratorData->password !== null) {
-            $administrator->setPassword($this->getPasswordHash($administrator, $administratorData->password));
+            $this->setPassword($administrator, $administratorData->password);
         }
 
         return $administrator;
