@@ -34,7 +34,7 @@ class ProductFilterFormType extends AbstractType
                 'currency' => false,
                 'scale' => $priceScale,
                 'required' => false,
-                'attr' => ['placeholder' => $priceTransformer->transform($config->getPriceRange()->getMaximalPrice())],
+                'attr' => ['placeholder' => $priceTransformer->transform($config->getPriceRange()->getMinimalPrice())],
                 'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
                 'constraints' => [
                     new Constraints\GreaterThanOrEqual([
