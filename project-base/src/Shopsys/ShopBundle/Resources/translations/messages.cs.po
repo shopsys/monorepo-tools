@@ -1783,7 +1783,7 @@ msgid "Existing icon"
 msgstr "Současná ikona"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/index.html.twig:8
-msgid "Export email list inCSV format"
+msgid "Export email list in CSV format"
 msgstr "Exportovat seznam emailů jako CSV"
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
