@@ -1,12 +1,18 @@
 {{ message }}
 
+{# buttons should be consistent with the result of Shopsys.window JS function in Resources/scripts/admin/window.js #}
 <div class="window__actions">
-    <a href="{{ url(route, routeParams) }}" class="window-button-continue button btn js-confirm-delete-direct-link">{{ 'Yes'|trans }}</a>
     <a
-        class="window-button-close btn"
         href="#"
+        class="window__actions__btn window-button-cancel btn btn--default"
         onclick="$(this).closest('.window').trigger('windowClose'); return false;"
     >
         {{ 'No'|trans }}
+    </a>
+    <a
+        href="{{ url(route, routeParams) }}"
+        class="window__actions__btn window-button-continue btn js-confirm-delete-direct-link"
+    >
+        {{ 'Yes'|trans }}
     </a>
 </div>

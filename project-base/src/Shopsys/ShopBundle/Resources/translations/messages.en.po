@@ -5046,7 +5046,7 @@ msgstr ""
 #: grid.inlineEdit.js:36
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/listGrid.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/list.html.twig:38
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/directDelete.html.twig:4
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/directDelete.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:43
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/visibilityItems.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ProductPicker/listGrid.html.twig:19
