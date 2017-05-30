@@ -1,4 +1,9 @@
 {% block header %}
+
+    {% set shopInfoPhoneNumber = getShopInfoPhoneNumber() %}
+    {% set shopInfoPhoneHours = getShopInfoPhoneHours() %}
+    {% set shopInfoEmail = getShopInfoEmail() %}
+
     <header class="header">
         <div class="header__logo">
             {% block logo %}
@@ -8,18 +13,26 @@
 
         <div class="header__middle">
             {{ render(controller('ShopsysShopBundle:Front/Search:box')) }}
-            <div class="contact-us">
-                <span class="contact-us__phone">
-                    <i class="svg svg-phone"></i>
-                    {{ getShopInfoPhoneNumber() }}
-                </span>
-                <span class="contact-us__days">
-                    {{ getShopInfoPhoneHours() }}
-                </span>
-                <span class="contact-us__email">
-                    {{ getShopInfoEmail() }}
-                </span>
-            </div>
+            {% if shopInfoPhoneNumber is not null or shopInfoPhoneHours is not null or shopInfoEmail is not null %}
+                <div class="contact-us">
+                    {% if shopInfoPhoneNumber is not null %}
+                        <span class="contact-us__phone">
+                            <i class="svg svg-phone"></i>
+                            {{ shopInfoPhoneNumber }}
+                        </span>
+                    {% endif %}
+                    {% if shopInfoPhoneHours is not null %}
+                        <span class="contact-us__days">
+                            {{ shopInfoPhoneHours }}
+                        </span>
+                    {% endif %}
+                    {% if shopInfoEmail is not null %}
+                        <span class="contact-us__email">
+                            {{ shopInfoEmail }}
+                        </span>
+                    {% endif %}
+                </div>
+            {% endif %}
         </div>
 
         <div class="header__mobile">
@@ -30,11 +43,13 @@
                 </span>
             </span>
 
-            <span class="btn-tap">
-                <a href="tel:{{ getShopInfoPhoneNumber() }}" class="btn-tap__in">
-                    <i class="svg svg-phone"></i>
-                </a>
-            </span>
+            {% if shopInfoPhoneNumber is not null %}
+                <span class="btn-tap">
+                    <a href="tel:{{ shopInfoPhoneNumber }}" class="btn-tap__in">
+                        <i class="svg svg-phone"></i>
+                    </a>
+                </span>
+            {% endif %}
 
             <span class="btn-tap">
                 {% if is_granted('ROLE_CUSTOMER') %}
