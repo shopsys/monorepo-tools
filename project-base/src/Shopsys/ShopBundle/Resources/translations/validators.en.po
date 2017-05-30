@@ -277,10 +277,6 @@ msgstr ""
 msgid "Please enter a number"
 msgstr ""
 
-#: OrderStatusFormType.php:24
-msgid "Please enter all country names"
-msgstr ""
-
 #: ArticleFormType.php:51
 msgid "Please enter article content"
 msgstr ""
@@ -418,6 +414,10 @@ msgstr ""
 
 #: AdvertFormType.php:49
 msgid "Please enter name of advertisment area"
+msgstr ""
+
+#: OrderStatusFormType.php:24
+msgid "Please enter order status name in all languages"
 msgstr ""
 
 #: ParameterFormType.php:26
