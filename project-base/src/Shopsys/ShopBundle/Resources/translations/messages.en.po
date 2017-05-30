@@ -4108,7 +4108,7 @@ msgid "Sizes: 5, 10, 15, 20, 40, 45, 60, 80, 40px"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-msgid "Slider on main page."
+msgid "Slider on main page"
 msgstr ""
 
 #: ImageController.php:73

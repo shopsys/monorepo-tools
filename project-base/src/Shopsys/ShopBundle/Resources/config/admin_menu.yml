@@ -81,7 +81,7 @@
         - label: 'Editing article'
           route: admin_article_edit
           visible: false
-    - label: 'Slider on main page.'
+    - label: 'Slider on main page'
       route: admin_slider_list
       items:
         - label: 'New page'
