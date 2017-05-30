@@ -37,29 +37,29 @@ msgstr "- Nastavení emailů"
 msgid "- Heureka - Ověřeno zákazníky"
 msgstr "- Heureka - Ověřeno zákazníky"
 
-#: ProductFormType.php:186
+#: ProductFormType.php:183
 msgid "-- Choose action --"
 msgstr "-- Vyberte akci --"
 
-#: AdvertFormType.php:86
+#: AdvertFormType.php:72
 msgid "-- Choose area --"
 msgstr "-- Vyberte plochu --"
 
-#: CookiesSettingFormType.php:44
-#: TermsAndConditionsSettingFormType.php:44
+#: CookiesSettingFormType.php:38
+#: TermsAndConditionsSettingFormType.php:38
 msgid "-- Choose article --"
 msgstr "-- Vyberte článek --"
 
-#: ArticleFormType.php:94
+#: ArticleFormType.php:79
 msgid "-- Choose article position --"
 msgstr "-- Vyberte umístění článku --"
 
-#: ProductFormType.php:170
-#: ProductFormType.php:197
+#: ProductFormType.php:167
+#: ProductFormType.php:196
 msgid "-- Choose availability --"
 msgstr "-- Vyberte dostupnost --"
 
-#: ProductFormType.php:145
+#: ProductFormType.php:138
 msgid "-- Choose brand --"
 msgstr "-- Vyberte značku --"
 
@@ -85,7 +85,7 @@ msgstr "POZOR - vkládání skriptů na stránky může vážně ohrozit bezpeč
 msgid "Accessories"
 msgstr "Příslušenství"
 
-#: ModuleList.php:19
+#: ModuleList.php:39
 msgid "Accessories in purchase confirmation box"
 msgstr "Příslušenství v mezikošíku"
 
@@ -107,7 +107,7 @@ msgid "Active"
 msgstr "Aktivní"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ProductPicker/listGrid.html.twig:47
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:695
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:697
 msgid "Add"
 msgstr "Přidat"
 
@@ -178,19 +178,19 @@ msgstr "Administrace"
 msgid "Administrator"
 msgstr "Administrátor"
 
-#: AdministratorController.php:176
+#: AdministratorController.php:175
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byl vytvořen administrátor <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: AdministratorController.php:108
+#: AdministratorController.php:109
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr "Byl upraven administrátor <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: AdministratorController.php:221
+#: AdministratorController.php:220
 msgid "Administrator <strong>{{ name }}</strong> deleted."
 msgstr "Administrátor <strong>{{ name }}</strong> byl smazán."
 
-#: AdministratorController.php:230
+#: AdministratorController.php:229
 msgid "Administrator <strong>{{ name }}</strong> is the only one and can't be deleted."
 msgstr "Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán."
 
@@ -198,8 +198,8 @@ msgstr "Administrátor <strong>{{ name }}</strong> je jediný a nemůže být sm
 msgid "Administrator activities history"
 msgstr "Historie aktivit administrátora"
 
-#: AdministratorController.php:124
-#: AdministratorController.php:192
+#: AdministratorController.php:125
+#: AdministratorController.php:191
 msgid "Administrator with login name <strong>{{ name }}</strong> already exists"
 msgstr "Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje"
 
@@ -225,15 +225,15 @@ msgstr "Rozšířené hledání"
 msgid "Advertising"
 msgstr "Reklama"
 
-#: AdvertController.php:189
+#: AdvertController.php:186
 msgid "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
 msgstr "Reklama <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> byla vytvořena"
 
-#: AdvertController.php:97
+#: AdvertController.php:91
 msgid "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified"
 msgstr "Reklama <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> byla upravena"
 
-#: AdvertController.php:220
+#: AdvertController.php:217
 msgid "Advertising <strong>{{ name }}</strong> deleted"
 msgstr "Reklama <strong>{{ name }}</strong> byla smazána"
 
@@ -260,7 +260,7 @@ msgstr "Všechny maily budou doručeny pouze na uvedené adresy."
 msgid "All pages"
 msgstr "Všechny stránky"
 
-#: ProductMassActionFormType.php:32
+#: ProductMassActionFormType.php:25
 msgid "All search results"
 msgstr "Všechny výsledky hledání"
 
@@ -306,7 +306,7 @@ msgstr "Použitelné proměnné"
 msgid "Apply"
 msgstr "Uplatnit"
 
-#: AdvertController.php:149
+#: AdvertController.php:143
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:18
 msgid "Area"
 msgstr "Plocha"
@@ -316,23 +316,23 @@ msgstr "Plocha"
 msgid "Article"
 msgstr "Článek"
 
-#: ArticleController.php:230
+#: ArticleController.php:222
 msgid "Article \"%name%\" set for displaying cookies information. This setting will be lost. Do you really want to delete it?"
 msgstr "Článek \"%name%\" je nastaven pro zobrazení informací o cookies. Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
 
-#: ArticleController.php:225
+#: ArticleController.php:217
 msgid "Article \"%name%\" set for displaying terms and conditions. This setting will be lost. Do you really want to delete it?"
 msgstr "Článek \"%name%\" je nastaven pro zobrazení obchodních podmínek. Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
 
-#: ArticleController.php:174
+#: ArticleController.php:166
 msgid "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byl vytvořen článek <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: ArticleController.php:115
+#: ArticleController.php:106
 msgid "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr "Byl upraven článek <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: ArticleController.php:205
+#: ArticleController.php:197
 msgid "Article <strong>{{ name }}</strong> deleted"
 msgstr "Článek <strong>{{ name }}</strong> byl smazán"
 
@@ -383,11 +383,11 @@ msgstr "Pozor! Jste jako administrátor přihlášen za zákazníka."
 msgid "Attention, the second variant doesn't have js to work with yet!"
 msgstr "Pozor, druhá varianta prozatím nemá js, které by s ní pracovalo!"
 
-#: ModuleList.php:21
+#: ModuleList.php:41
 msgid "Automatic stock calculation"
 msgstr "Automatické výpočty skladových zásob"
 
-#: ProductFormType.php:253
+#: ProductFormType.php:256
 msgid "Automatically"
 msgstr "Automaticky"
 
@@ -403,15 +403,15 @@ msgstr "Přehled dostupností"
 msgid "Availability"
 msgstr "Dostupnost"
 
-#: AvailabilityController.php:105
+#: AvailabilityController.php:104
 msgid "Availability \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which availability you want to set instead?"
 msgstr "Dostupnost \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou dostupnost místo ní chcete nastavit?"
 
-#: AvailabilityController.php:72
+#: AvailabilityController.php:71
 msgid "Availability <strong>{{ name }}</strong> deleted"
 msgstr "Dostupnost <strong>{{ name }}</strong> byla smazána"
 
-#: AvailabilityController.php:80
+#: AvailabilityController.php:79
 msgid "Availability <strong>{{ oldName }}</strong> deleted and replaced by availability <strong>{{ newName }}</strong>"
 msgstr "Dostupnost <strong>{{ oldName }}</strong> byla nahrazena dostupností <strong>{{ newName }}</strong> a byla smazána."
 
@@ -505,15 +505,15 @@ msgstr "Základní informace"
 msgid "Basic table with one class on table element. Basic look for showing simple data (not forms)."
 msgstr "Obyčejná tabulka s jednou třídou na table elementu. Jednoduchý vzhled pro zobrazení jednoduchých dat (nikoliv formulářů)."
 
-#: AvailabilityController.php:111
+#: AvailabilityController.php:110
 msgid "Because availability \"%name%\" is used with other products also, you have to choose a new availability which will replace the existing one. Which availability you want to set to these products?"
 msgstr "Jelikož dostupnost \"%name%\" je používána ještě u některých produktů, musíte zvolit, jaká dostupnost bude použita místo ní. Jakou dostupnost chcete těmto produktům nastavit?"
 
-#: OrderStatusController.php:108
+#: OrderStatusController.php:107
 msgid "Because status \"%name%\" is used with other orders also, you have to choose a new status which will replace the existing one. Which status you want to set to these orders? When changing this, there won't be emails sent to customers."
 msgstr "Jelikož stav \"%name%\" je používán ještě u některých objednávek, musíte zvolit, jaký stav bude použit místo něj. Jaký stav chcete těmto objednávkám nastavit? Při této změně stavu nebude odeslán email zákazníkům."
 
-#: BestsellingProductController.php:93
+#: BestsellingProductController.php:91
 msgid "Best-selling products of category <strong><a href=\"{{ url }}\">{{ name }}</a></strong> set."
 msgstr "Bylo nastaveno nejprodávanější zboží kategorie <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
@@ -534,7 +534,7 @@ msgstr "Nejprodávanější zboží kategorie"
 msgid "Billing address"
 msgstr "Fakturační adresa"
 
-#: MailController.php:94
+#: MailController.php:87
 msgid "Billing address - name, surname, company, company number, tax number and billing address"
 msgstr "Fakturační adresa - jméno, příjmení, firma, ič, dič a fakt. adresa"
 
@@ -553,24 +553,24 @@ msgstr "Výraznější řádek"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:86
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:104
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:85
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:81
 msgid "Brand"
 msgstr "Značka"
 
-#: BrandController.php:164
+#: BrandController.php:158
 msgid "Brand <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byla vytvořena značka <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: BrandController.php:89
+#: BrandController.php:87
 msgid "Brand <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr "Byla upravena značka <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: BrandController.php:196
+#: BrandController.php:190
 msgid "Brand <strong>{{ name }}</strong> deleted"
 msgstr "Značka <strong>{{ name }}</strong> byl smazána"
 
 #: BrandBreadcrumbGenerator.php:30
-#: FrontBreadcrumbGenerator.php:48
+#: SimpleBreadcrumbGenerator.php:53
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/list.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/list.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Brand/list.html.twig:4
@@ -602,7 +602,7 @@ msgstr "Btn-no-style"
 msgid "Bulk edit"
 msgstr "Hromadné úpravy"
 
-#: ProductController.php:261
+#: ProductController.php:259
 msgid "Bulk editing done"
 msgstr "Hromadná úprava byla provedena"
 
@@ -651,7 +651,7 @@ msgid "Cart"
 msgstr "Košík"
 
 #: AdvancedSearchProductFilterTranslation.php:11
-#: ProductPickerController.php:141
+#: ProductPickerController.php:140
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:163
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:71
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:55
@@ -669,11 +669,11 @@ msgstr "Katalogové číslo"
 msgid "Category"
 msgstr "Kategorie"
 
-#: CategoryController.php:126
+#: CategoryController.php:119
 msgid "Category <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byla vytvořena kategorie <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: CategoryController.php:216
+#: CategoryController.php:209
 msgid "Category <strong>{{ name }}</strong> deleted"
 msgstr "Kategorie <strong>{{ name }}</strong> byla smazána"
 
@@ -686,7 +686,7 @@ msgstr "Kategorie Heureka.cz"
 msgid "Category guidepost on main page"
 msgstr "Rozcestník kategorií na titulní stránce"
 
-#: CategoryController.php:86
+#: CategoryController.php:79
 msgid "Category<strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modified"
 msgstr "Byla upravena kategorie <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
@@ -730,7 +730,7 @@ msgstr "Vyberte článek, který bude sloužit jako obchodní podmínky, se kter
 msgid "Choose new value first"
 msgstr "Nejprve vyberte novou hodnotu"
 
-#: ProductType.php:77
+#: ProductType.php:70
 msgid "Choose product"
 msgstr "Vyberte produkt"
 
@@ -738,15 +738,15 @@ msgstr "Vyberte produkt"
 msgid "Choose variant"
 msgstr "Vybrat variantu"
 
-#: MailController.php:92
+#: MailController.php:85
 msgid "Chosen payment name"
 msgstr "Název zvolené platby"
 
-#: MailController.php:91
+#: MailController.php:84
 msgid "Chosen shipping name"
 msgstr "Název zvolené dopravy"
 
-#: CustomerController.php:202
+#: CustomerController.php:187
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:70
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:91
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:113
@@ -762,7 +762,7 @@ msgstr "Název zvolené dopravy"
 msgid "City"
 msgstr "Město"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:161
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:151
 msgid "Clear filter"
 msgstr "Vynulovat filtr"
 
@@ -929,7 +929,7 @@ msgstr "Informace o cookies"
 msgid "Cookies information settings"
 msgstr "Nastavení informací o cookies"
 
-#: CookiesController.php:63
+#: CookiesController.php:53
 msgid "Cookies information settings modified."
 msgstr "Bylo upraveno nastavení informací o cookies."
 
@@ -955,7 +955,7 @@ msgstr "Přehled států"
 msgid "Country"
 msgstr "Stát"
 
-#: FormDetailExtension.php:81
+#: FormDetailExtension.php:71
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/createVariant.html.twig:10
 msgid "Create"
 msgstr "Vytvořit"
@@ -1032,7 +1032,7 @@ msgstr "Vytvořit platbu"
 msgid "Create pricing group"
 msgstr "Vytvořit cenovou skupinu"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:379
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:378
 msgid "Create record"
 msgstr "Vytvořit záznam"
 
@@ -1051,7 +1051,7 @@ msgstr "Vytvořit jednotku"
 msgid "Create variant"
 msgstr "Vytvořit variantu"
 
-#: OrderController.php:238
+#: OrderController.php:226
 msgid "Created"
 msgstr "Vytvořena"
 
@@ -1086,7 +1086,7 @@ msgstr "Měny"
 msgid "Currency <strong>{{ name }}</strong> deleted"
 msgstr "Měna <strong>{{ name }}</strong> byla smazána"
 
-#: CurrencyController.php:146
+#: CurrencyController.php:143
 msgid "Currency settings modified"
 msgstr "Nastavení měn bylo upraveno"
 
@@ -1094,20 +1094,20 @@ msgstr "Nastavení měn bylo upraveno"
 msgid "Current status"
 msgstr "Aktuální stav"
 
-#: OrderController.php:239
+#: OrderController.php:227
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:43
 msgid "Customer"
 msgstr "Zákazník"
 
-#: CustomerController.php:255
+#: CustomerController.php:241
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byl vytvořen zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: CustomerController.php:146
+#: CustomerController.php:133
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr "Byl upraven zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: CustomerController.php:291
+#: CustomerController.php:277
 msgid "Customer <strong>{{ name }}</strong> deleted"
 msgstr "Zákazník <strong>{{ name }}</strong> byl smazán"
 
@@ -1124,8 +1124,8 @@ msgstr "Zákazník prozatím nemá žádné objednávky."
 msgid "Customer orders"
 msgstr "Objednávky zákazníka"
 
-#: CustomerPasswordController.php:62
-#: CustomerPasswordController.php:102
+#: CustomerPasswordController.php:61
+#: CustomerPasswordController.php:100
 msgid "Customer with e-mail address <strong>{{ email }}</strong> doesn't exist. <a href=\"{{ registrationLink }}\"> Register</a>"
 msgstr "Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje. <a href=\"{{ registrationLink }}\">Zaregistrovat</a>"
 
@@ -1144,7 +1144,7 @@ msgstr "Přehled zákazníků"
 msgid "Dashboard"
 msgstr "Nástěnka"
 
-#: MailController.php:89
+#: MailController.php:82
 msgid "Date and time of order creation"
 msgstr "Datum a čas vytvoření objednávky"
 
@@ -1156,7 +1156,7 @@ msgstr "Výchozí sazba DPH"
 msgid "Default administration currency"
 msgstr "Výchozí měna administrace"
 
-#: AvailabilityController.php:159
+#: AvailabilityController.php:153
 msgid "Default availability for the stock settings modified"
 msgstr "Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno"
 
@@ -1168,7 +1168,7 @@ msgstr "Defaultní tlačítko"
 msgid "Default pricing group"
 msgstr "Výchozí cenová skupina"
 
-#: PricingGroupController.php:169
+#: PricingGroupController.php:173
 msgid "Default pricing group settings modified"
 msgstr "Nastavení výchozí cenové skupiny bylo upraveno"
 
@@ -1186,7 +1186,7 @@ msgstr "Základní nastavení"
 msgid "Default unit"
 msgstr "Výchozí jednotka"
 
-#: UnitController.php:168
+#: UnitController.php:155
 msgid "Default unit settings modified"
 msgstr "Nastavení výchozí jednotky bylo upraveno"
 
@@ -1201,11 +1201,11 @@ msgstr "Výchozí jednotka bude použita při vytvoření nového produktu"
 msgid "Delete"
 msgstr "Smazat"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig:22
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig:19
 msgid "Delete and set"
 msgstr "Smazat a nastavit"
 
-#: MailController.php:97
+#: MailController.php:90
 msgid "Delivery address"
 msgstr "Dodací adresa"
 
@@ -1276,7 +1276,7 @@ msgstr "Slevový kupón <strong>{{ code }}</strong> byl smazán"
 msgid "Discount coupons"
 msgstr "Slevové kupóny"
 
-#: ProductMassActionFormType.php:51
+#: ProductMassActionFormType.php:44
 msgid "Display"
 msgstr "Zobrazit"
 
@@ -1298,7 +1298,7 @@ msgstr "Zobrazení inputů, jako jsou chekcboxy a radio buttony, se dělá skrze
 msgid "Display on"
 msgstr "Zobrazovat na"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:220
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:219
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Paginator/paginator.html.twig:7
 msgid "Displaying"
 msgstr "Zobrazuji"
@@ -1315,7 +1315,7 @@ msgstr "Opravdu chcete smazat tuto kategorii?"
 msgid "Do you really want to discard all changes?"
 msgstr "Opravdu chcete zahodit všechny změny?"
 
-#: AvailabilityController.php:126
+#: AvailabilityController.php:124
 msgid "Do you really want to remove availability \"%name%\" permanently? It is not used anywhere."
 msgstr "Opravdu si přejete trvale odstranit dostupnost \"%name%\"? Nikde není použitá."
 
@@ -1327,39 +1327,39 @@ msgstr "Opravdu si přejete trvale odstranit měnu \"%name%\"?"
 msgid "Do you really want to remove item \"<i>%itemName%</i>\" from the order?"
 msgstr "Opravdu chcete odebrat z objednávky položku \"<i>%itemName%</i>\"?"
 
-#: PricingGroupController.php:137
+#: PricingGroupController.php:142
 msgid "Do you really want to remove pricing group \"%name%\" permanently? It is not used anywhere."
 msgstr "Opravdu si přejete trvale odstranit cenovou skupinu \"%name%\"? Nikde není použita."
 
-#: VatController.php:87
+#: VatController.php:85
 msgid "Do you really want to remove rate \"%name%\" permanently? It is not used anywhere."
 msgstr "Opravdu si přejete trvale odstranit sazbu \"%name%\"? Nikde není použita."
 
-#: OrderStatusController.php:123
+#: OrderStatusController.php:121
 msgid "Do you really want to remove status of orders \"%name%\" permanently? It is not used anywhere."
 msgstr "Opravdu si přejete trvale odstranit stav objednávek \"%name%\"? Nikde není použitý."
 
-#: OrderController.php:250
+#: OrderController.php:238
 msgid "Do you really want to remove the order?"
 msgstr "Opravdu si přejete objednávku smazat?"
 
-#: AdministratorController.php:72
+#: AdministratorController.php:73
 msgid "Do you really want to remove this administrator?"
 msgstr "Opravdu chcete odstranit tohoto administrátora?"
 
-#: AdvertController.php:154
+#: AdvertController.php:148
 msgid "Do you really want to remove this advert?"
 msgstr "Opravdu chcete odstranit tuto reklamu?"
 
-#: ArticleController.php:235
+#: ArticleController.php:227
 msgid "Do you really want to remove this article?"
 msgstr "Opravdu chcete odstranit tento článek?"
 
-#: BrandController.php:132
+#: BrandController.php:130
 msgid "Do you really want to remove this brand? If it is used anywhere it will be unset."
 msgstr "Opravdu chcete odstranit tuto značku? Pokud je někde použita, bude odnastavena."
 
-#: CustomerController.php:215
+#: CustomerController.php:200
 msgid "Do you really want to remove this customer?"
 msgstr "Opravdu chcete odstranit tohoto zákazníka?"
 
@@ -1371,7 +1371,7 @@ msgstr "Opravdu chcete odstranit tento slevový kupón?"
 msgid "Do you really want to remove this flag?"
 msgstr "Opravdu chcete odstranit tento příznak?"
 
-#: SliderController.php:81
+#: SliderController.php:74
 msgid "Do you really want to remove this page?"
 msgstr "Opravdu chcete odstranit tuto stránku?"
 
@@ -1383,11 +1383,11 @@ msgstr "Opravdu chcete odstranit tento parametr? Smazáním parametru dojde k od
 msgid "Do you really want to remove this payment?"
 msgstr "Opravdu chcete odstranit tuto platbu?"
 
-#: ProductController.php:379
+#: ProductController.php:377
 msgid "Do you really want to remove this product?"
 msgstr "Opravdu chcete odstranit toto zboží?"
 
-#: ScriptController.php:133
+#: ScriptController.php:126
 msgid "Do you really want to remove this script?"
 msgstr "Opravdu chcete odstranit tento skript?"
 
@@ -1395,7 +1395,7 @@ msgstr "Opravdu chcete odstranit tento skript?"
 msgid "Do you really want to remove this shipping?"
 msgstr "Opravdu chcete odstranit tuto dopravu?"
 
-#: UnitController.php:96
+#: UnitController.php:88
 msgid "Do you really want to remove unit \"%name%\" permanently? It is not used anywhere."
 msgstr "Opravdu si přejete trvale odstranit jednotku \"%name%\"? Nikde není použita."
 
@@ -1404,7 +1404,7 @@ msgid "Do you want to receive the newest information about our shop? Subscribe t
 msgstr "Chcete dostávat nejnovější informace z našeho obchodu? Přihlašte se do našeho e-mailového zpravodaje."
 
 #: AdvancedSearchOrderFilterTranslation.php:14
-#: OrderController.php:241
+#: OrderController.php:229
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:15
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/edit.html.twig:47
@@ -1434,7 +1434,7 @@ msgstr "Doména 1"
 msgid "Domain 2"
 msgstr "Doména 2"
 
-#: DomainController.php:134
+#: DomainController.php:128
 msgid "Domain <strong>{{ name }}</strong> modified"
 msgstr "Byla upravena doména <strong>{{ name }}</strong>"
 
@@ -1462,10 +1462,10 @@ msgstr "Drag and drop na řádky"
 msgid "Drag file here"
 msgstr "Zde přetáhněte soubor"
 
-#: AdministratorController.php:67
-#: CustomerController.php:204
-#: MailController.php:116
-#: MailController.php:128
+#: AdministratorController.php:68
+#: CustomerController.php:189
+#: MailController.php:109
+#: MailController.php:121
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:32
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:87
@@ -1497,7 +1497,7 @@ msgstr "Emaily zpravodaje"
 msgid "E-mail settings"
 msgstr "Nastavení emailů"
 
-#: MailController.php:191
+#: MailController.php:180
 msgid "E-mail settings modified."
 msgstr "Nastavení emailů bylo upraveno."
 
@@ -1514,16 +1514,16 @@ msgstr "Šablony emailů"
 msgid "E-mail templates settings"
 msgstr "Nastavení šablon e-mailů"
 
-#: MailController.php:151
+#: MailController.php:144
 msgid "E-mail templates settings modified"
 msgstr "Nastavení šablony e-mailu bylo upraveno"
 
-#: MailController.php:90
-#: MailController.php:117
+#: MailController.php:83
+#: MailController.php:110
 msgid "E-shop URL address"
 msgstr "URL adresa e-shopu"
 
-#: ShopInfoController.php:63
+#: ShopInfoController.php:55
 msgid "E-shop attributes settings modified"
 msgstr "Nastavení e-shopu atributů bylo upraveno"
 
@@ -1548,7 +1548,7 @@ msgstr "EAN"
 msgid "Edit"
 msgstr "Upravit"
 
-#: FrontBreadcrumbGenerator.php:19
+#: SimpleBreadcrumbGenerator.php:45
 msgid "Edit data"
 msgstr "Upravit údaje"
 
@@ -1558,7 +1558,7 @@ msgstr "Upravit údaje"
 msgid "Editing administrator"
 msgstr "Editace administrátora"
 
-#: AdministratorController.php:137
+#: AdministratorController.php:138
 msgid "Editing administrator - %name%"
 msgstr "Editace administrátora - %name%"
 
@@ -1568,7 +1568,7 @@ msgstr "Editace administrátora - %name%"
 msgid "Editing advertising"
 msgstr "Editace reklamy"
 
-#: AdvertController.php:110
+#: AdvertController.php:104
 msgid "Editing advertising - %name%"
 msgstr "Editace reklamy - %name%"
 
@@ -1578,7 +1578,7 @@ msgstr "Editace reklamy - %name%"
 msgid "Editing article"
 msgstr "Editace článku"
 
-#: ArticleController.php:128
+#: ArticleController.php:119
 msgid "Editing article - %name%"
 msgstr "Editace článku - %name%"
 
@@ -1592,7 +1592,7 @@ msgstr "Editace nejprodávanějšího zboží"
 msgid "Editing brand"
 msgstr "Editace značky"
 
-#: BrandController.php:102
+#: BrandController.php:100
 msgid "Editing brand - %name%"
 msgstr "Editace značky - %name%"
 
@@ -1602,7 +1602,7 @@ msgstr "Editace značky - %name%"
 msgid "Editing category"
 msgstr "Editace kategorie"
 
-#: CategoryController.php:99
+#: CategoryController.php:92
 msgid "Editing category - %name%"
 msgstr "Editace kategorie - %name%"
 
@@ -1612,7 +1612,7 @@ msgstr "Editace kategorie - %name%"
 msgid "Editing customer"
 msgstr "Editace zákazníka"
 
-#: CustomerController.php:163
+#: CustomerController.php:150
 msgid "Editing customer - %name%"
 msgstr "Editace zákazníka - %name%"
 
@@ -1624,7 +1624,7 @@ msgstr "Editace domény"
 msgid "Editing order"
 msgstr "Editace objednávky"
 
-#: OrderController.php:152
+#: OrderController.php:144
 msgid "Editing order - Nr. %number%"
 msgstr "Editace objednávky - č. %number%"
 
@@ -1642,7 +1642,7 @@ msgstr "Editace stránky"
 msgid "Editing payment"
 msgstr "Editace platby"
 
-#: PaymentController.php:141
+#: PaymentController.php:130
 msgid "Editing payment - %name%"
 msgstr "Editace platby - %name%"
 
@@ -1652,7 +1652,7 @@ msgstr "Editace platby - %name%"
 msgid "Editing product"
 msgstr "Editace zboží"
 
-#: ProductController.php:167
+#: ProductController.php:166
 msgid "Editing product - %name%"
 msgstr "Editace zboží - %name%"
 
@@ -1668,7 +1668,7 @@ msgstr "Editace skriptu"
 msgid "Editing shipping"
 msgstr "Editace dopravy"
 
-#: TransportController.php:142
+#: TransportController.php:130
 msgid "Editing shipping - %name%"
 msgstr "Editace dopravy - %name%"
 
@@ -1677,7 +1677,7 @@ msgstr "Editace dopravy - %name%"
 msgid "Editing slider page"
 msgstr "Editace stránky slideru"
 
-#: SliderController.php:163
+#: SliderController.php:158
 msgid "Editing slider page - %name%"
 msgstr "Editace stránky slideru - %name%"
 
@@ -1709,7 +1709,7 @@ msgstr "Zadejte 32-místný kód, který bude odeslán na server %serverName%"
 msgid "Enter e-mail"
 msgstr "Zadejte e-mail"
 
-#: OrderController.php:141
+#: OrderController.php:133
 msgid "Entered customer not found, please check entered data."
 msgstr "Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje"
 
@@ -1744,7 +1744,7 @@ msgstr "Chybové hlášky"
 msgid "Error occurred"
 msgstr "Nastala chyba"
 
-#: ContactFormController.php:55
+#: ContactFormController.php:45
 msgid "Error occurred when sending e-mail."
 msgstr "Nastala chyba při odesílání mailu."
 
@@ -1765,7 +1765,7 @@ msgstr "Nastala chyba, zkuste to, prosím, znovu."
 msgid "Exchange rate"
 msgstr "Kurz"
 
-#: ProductFormType.php:184
+#: ProductFormType.php:181
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:104
 msgid "Exclude from sale"
 msgstr "Vyřadit z prodeje"
@@ -1774,7 +1774,7 @@ msgstr "Vyřadit z prodeje"
 msgid "Excluded from sale"
 msgstr "Vyřazeno z prodeje"
 
-#: InputPriceTypeFormType.php:58
+#: InputPriceTypeFormType.php:24
 msgid "Excluding VAT"
 msgstr "Bez DPH"
 
@@ -1814,15 +1814,15 @@ msgstr "Soubor je v nepodporovaném formátu"
 msgid "File is too big"
 msgstr "Soubor je příliš velký"
 
-#: DomainController.php:140
+#: DomainController.php:134
 msgid "File type not supported."
 msgstr "Typ souboru není podporován."
 
-#: FileUploadType.php:146
+#: FileUploadType.php:144
 msgid "File upload failed"
 msgstr "Nahrání souboru se nezdařilo."
 
-#: DomainController.php:142
+#: DomainController.php:136
 msgid "File upload failed, try again please."
 msgstr "Nahrání souboru selhalo, zkuste to, prosím, znovu."
 
@@ -1843,7 +1843,7 @@ msgstr "Dokončit přiřazování"
 msgid "Finish the order"
 msgstr "Dokončit objednávku"
 
-#: MailController.php:114
+#: MailController.php:107
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:29
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:87
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:85
@@ -1887,15 +1887,15 @@ msgstr "Struktura složek"
 msgid "Following expressions are allowed in whitelist: %whitelist%."
 msgstr "Ve whitelistu jsou povoleny následující výrazy: %whitelist%."
 
-#: VatController.php:72
+#: VatController.php:71
 msgid "For deleting rate \"%name%\" you have to choose other one to be set everywhere where the existing one is used. After changing the VAT rate products prices will be recalculated - base price with VAT will remain same. Which unit you want to set instead?"
 msgstr "Pro odstranění sazby \"%name% musíte zvolit, která se má všude, kde je aktuálně používaná nastavit. Po změně sazby DPH dojde k přepočtu cen zboží - základní cena s DPH zůstane zachována. Jakou sazbu místo ní chcete nastavit?"
 
-#: UnitController.php:75
+#: UnitController.php:74
 msgid "For deleting unit \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which unit you want to set instead?"
 msgstr "Pro odstranění jednotky \"%name% musíte zvolit, která se má všude, kde je aktuálně používaná nastavit. Jakou jednotku místo ní chcete nastavit?"
 
-#: PricingGroupController.php:116
+#: PricingGroupController.php:121
 msgid "For removing pricing group \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
 msgstr "Pro odstranění cenové skupiny \"%name%\" musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
 
@@ -1908,7 +1908,7 @@ msgstr "Pro podsložky složky components platí, že název podsložky se vklá
 msgid "Forgot your password?"
 msgstr "Zapomněli jste své heslo?"
 
-#: FrontBreadcrumbGenerator.php:27
+#: SimpleBreadcrumbGenerator.php:47
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/resetPassword.html.twig:8
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/resetPassword.html.twig:12
 msgid "Forgotten password"
@@ -1942,7 +1942,7 @@ msgstr "Zdarma"
 msgid "Free shipping and payment"
 msgstr "Doprava a platba zdarma"
 
-#: TransportAndPaymentController.php:80
+#: TransportAndPaymentController.php:77
 msgid "Free shipping and payment settings saved"
 msgstr "Nastavení dopravy a platby zdarma bylo uloženo"
 
@@ -1995,8 +1995,8 @@ msgstr "Front-end: Náhled v našeptávači pro vyhledávání, náhled v koší
 msgid "Front-end: Thumbnail of images under the main picture in product detail"
 msgstr "Front-end: Náhledy dalších obrázků pod hlavním obrázkem na detailu produktu"
 
-#: AdministratorController.php:66
-#: CustomerController.php:201
+#: AdministratorController.php:67
+#: CustomerController.php:186
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:6
 #: src/Shopsys/ShopBundle/Resources/views/Mail/ContactForm/mail.html.twig:1
@@ -2019,7 +2019,7 @@ msgstr "Vygenerováno"
 msgid "Go to cart"
 msgstr "Přejít do košíku"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:302
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:301
 msgid "Go to page:"
 msgstr "Přejít na stránku:"
 
@@ -2033,11 +2033,11 @@ msgstr "Přejít na:"
 msgid "Google analytics"
 msgstr "Google analytics"
 
-#: ScriptController.php:184
+#: ScriptController.php:176
 msgid "Google script code set"
 msgstr "Kód skriptu Google analytics byl nastaven"
 
-#: AdvertFormType.php:148
+#: AdvertFormType.php:55
 msgid "HTML code"
 msgstr "HTML kód"
 
@@ -2089,7 +2089,7 @@ msgstr "Skryté"
 msgid "Hidden copy"
 msgstr "Skrytá kopie"
 
-#: ProductMassActionFormType.php:50
+#: ProductMassActionFormType.php:43
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:23
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:26
 msgid "Hide"
@@ -2099,12 +2099,12 @@ msgstr "Skrýt"
 msgid "Hide advertisement"
 msgstr "Skrýt reklamu"
 
-#: ProductFormType.php:183
+#: ProductFormType.php:180
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:96
 msgid "Hide product"
 msgstr "Skrýt zboží"
 
-#: ProductMassActionFormType.php:44
+#: ProductMassActionFormType.php:37
 msgid "Hiding product"
 msgstr "Skrývání zboží"
 
@@ -2204,7 +2204,7 @@ msgstr "Typy in-message"
 msgid "Inactive"
 msgstr "Neaktivní"
 
-#: InputPriceTypeFormType.php:59
+#: InputPriceTypeFormType.php:25
 msgid "Including VAT"
 msgstr "S DPH"
 
@@ -2325,7 +2325,7 @@ msgstr "Pokyny"
 msgid "Invalid login"
 msgstr "Byly zadány neplatné přihlašovací údaje"
 
-#: VatController.php:167
+#: VatController.php:160
 msgid "Invalid rounding settings"
 msgstr "Neplatné nastavení zaokrouhlování"
 
@@ -2370,7 +2370,7 @@ msgstr "Název položky"
 msgid "Items"
 msgstr "Položky"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:291
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:290
 msgid "Items per page:"
 msgstr "Položek na stránku:"
 
@@ -2398,7 +2398,7 @@ msgstr "Čas poslední akce"
 msgid "Last login"
 msgstr "Poslední přihlášení"
 
-#: CustomerController.php:209
+#: CustomerController.php:194
 msgid "Last order"
 msgstr "Poslední objednávka"
 
@@ -2406,17 +2406,17 @@ msgstr "Poslední objednávka"
 msgid "Light button"
 msgstr "Světlé tlačítko"
 
-#: SliderController.php:78
+#: SliderController.php:71
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:28
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:25
 msgid "Link"
 msgstr "Odkaz"
 
-#: CustomerPasswordController.php:54
+#: CustomerPasswordController.php:53
 msgid "Link to password reset sent to e-mail <strong>{{ email }}</strong>."
 msgstr "Odkaz pro vyresetování hesla byl zaslán na email <strong>{{ email }}</strong>."
 
-#: MailController.php:118
+#: MailController.php:111
 msgid "Link to the log in page"
 msgstr "Odkaz na stránku s přihlášením"
 
@@ -2424,7 +2424,7 @@ msgstr "Odkaz na stránku s přihlášením"
 msgid "Link to the overview of brands"
 msgstr "Odkaz na přehled značek"
 
-#: MailController.php:99
+#: MailController.php:92
 msgid "List of products in order (name, quantity, price per unit including VAT, total price per item including VAT)"
 msgstr "Seznam zboží v objednávce (název, množství, cena za jednotku s DPH, celková cena za položku s DPH)"
 
@@ -2479,7 +2479,7 @@ msgstr "Živý náhled na komponentu v bílém okně"
 msgid "Loading"
 msgstr "Načítám"
 
-#: ScriptController.php:130
+#: ScriptController.php:123
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/new.html.twig:7
 msgid "Location"
 msgstr "Umístění"
@@ -2496,7 +2496,7 @@ msgstr "Přihlásit se"
 msgid "Log in as user"
 msgstr "Přihlásit za uživatele"
 
-#: LoginController.php:90
+#: LoginController.php:89
 msgid "Log in failed."
 msgstr "Přihlášení se nepodařilo."
 
@@ -2510,7 +2510,7 @@ msgstr "Odhlásit se"
 msgid "Logic of creating the structure is based on the graphics and the fact that the structure should be responsive and there is a possibility of putting a lot of different things in a row"
 msgstr "Logika tvoření struktury vychází z grafiky a z toho, že měla být struktura responsivní a mohlo se tam poskládat za sebe mnoho různých věcí."
 
-#: FrontBreadcrumbGenerator.php:36
+#: SimpleBreadcrumbGenerator.php:50
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Login/loginFailed.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Login/loginForm.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:8
@@ -2572,7 +2572,7 @@ msgstr "Hlavní varianta"
 msgid "Make modification"
 msgstr "Provést úpravu"
 
-#: ProductFormType.php:254
+#: ProductFormType.php:257
 msgid "Manually"
 msgstr "Ručně"
 
@@ -2638,7 +2638,7 @@ msgstr "Název modulu"
 msgid "Modules"
 msgstr "Zapínací moduly"
 
-#: SuperadminController.php:173
+#: SuperadminController.php:170
 msgid "Modules configuration modified"
 msgstr "Nastavení zapínacích modulů bylo upraveno"
 
@@ -2651,7 +2651,7 @@ msgid "More information"
 msgstr "Více informací"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:349
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:716
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:718
 msgid "Move"
 msgstr "Přesunout"
 
@@ -2666,10 +2666,10 @@ msgstr "Multidoménové, multijazyčné, inputy s ikonou - základní"
 msgid "My orders"
 msgstr "Mé objednávky"
 
-#: AdvertController.php:147
-#: ArticleController.php:272
+#: AdvertController.php:141
+#: ArticleController.php:264
 #: AvailabilityGridFactory.php:55
-#: BrandController.php:127
+#: BrandController.php:125
 #: CountryGridFactory.php:54
 #: CurrencyGridFactory.php:56
 #: FlagGridFactory.php:55
@@ -2677,9 +2677,9 @@ msgstr "Mé objednávky"
 #: ParameterGridFactory.php:70
 #: PaymentGridFactory.php:80
 #: PricingGroupGridFactory.php:54
-#: ProductController.php:371
-#: ProductPickerController.php:140
-#: SliderController.php:77
+#: ProductController.php:369
+#: ProductPickerController.php:139
+#: SliderController.php:70
 #: TransportGridFactory.php:80
 #: UnitGridFactory.php:55
 #: VatGridFactory.php:68
@@ -2765,7 +2765,7 @@ msgstr "Nový stav objednávek"
 msgid "New page"
 msgstr "Nová stránka"
 
-#: MailController.php:129
+#: MailController.php:122
 msgid "New password settings URL address"
 msgstr "URL adresa pro nastavení nového hesla"
 
@@ -2792,14 +2792,16 @@ msgstr "Nová doprava"
 msgid "New slider page"
 msgstr "Nová stránka slideru"
 
-#: YesNoType.php:45
+#: YesNoType.php:19
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/listGrid.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/directDelete.html.twig:10
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:45
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/visibilityItems.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ProductPicker/listGrid.html.twig:19
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:336
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:343
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:335
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:342
+#: window.js:55
+#: window.js:68
 msgid "No"
 msgstr "Ne"
 
@@ -2920,7 +2922,7 @@ msgstr "Nebyly nalezeny žádné jednotky. Nejprve musíte nějaké vytvořit."
 msgid "Not possible to assign product to itself"
 msgstr "Nelze přiřadit produkt sám sobě"
 
-#: ProductController.php:340
+#: ProductController.php:338
 msgid "Not possible to create variations of products that are already variant or main variant."
 msgstr "Nelze vytvářet varianty ze zboží, které jsou již variantou nebo hlavní variantou."
 
@@ -2936,7 +2938,7 @@ msgstr "Není zadáno pro entitu %entityName%, typ %typeName% a rozměr %sizeNam
 msgid "Not using ID and !important for CSS"
 msgstr "Nevyužívání ID a !important pro CSS"
 
-#: MailController.php:98
+#: MailController.php:91
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:146
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:59
 msgid "Note"
@@ -2947,7 +2949,7 @@ msgstr "Poznámka"
 msgid "Nothing to choose from"
 msgstr "Není z čeho vybírat"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:658
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:660
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormTheme.html.twig:32
 #: src/Shopsys/ShopBundle/Resources/views/Front/Form/theme.html.twig:203
 msgid "Nothing to choose from."
@@ -2961,11 +2963,11 @@ msgstr "Počet dní k expedici"
 msgid "Number of items"
 msgstr "Počet položek"
 
-#: CustomerController.php:206
+#: CustomerController.php:191
 msgid "Number of orders"
 msgstr "Počet objednávek"
 
-#: ModuleList.php:20
+#: ModuleList.php:40
 msgid "Number of products in filter"
 msgstr "Počty zboží ve filtru"
 
@@ -2986,7 +2988,7 @@ msgstr "Často užitečná část, je to hlavička pro různé obsahy informací
 msgid "Online shop"
 msgstr "Internetový obchod"
 
-#: ProductMassActionFormType.php:31
+#: ProductMassActionFormType.php:24
 msgid "Only checked products"
 msgstr "Pouze zaškrtnuté zboží"
 
@@ -2995,7 +2997,7 @@ msgstr "Pouze zaškrtnuté zboží"
 msgid "Only variables for order number and date and time of order creation can be used in the object."
 msgstr "V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky"
 
-#: FrontBreadcrumbGenerator.php:83
+#: ErrorPageBreadcrumbGenerator.php:21
 msgid "Oops! Error occurred"
 msgstr "Jejda! Nastala chyba"
 
@@ -3021,7 +3023,7 @@ msgstr "Informace o provozovateli"
 msgid "Order - personal data"
 msgstr "Objednávka - osobní údaje"
 
-#: OrderController.php:237
+#: OrderController.php:225
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:5
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:6
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:16
@@ -3033,11 +3035,11 @@ msgstr "Objednávka č."
 msgid "Order Nr. %orderNumber%"
 msgstr "Objednávka č. %orderNumber%"
 
-#: OrderController.php:132
+#: OrderController.php:124
 msgid "Order Nr. <strong><a href=\"{{ url }}\">{{ number }}</a></strong> modified"
 msgstr "Byla upravena objednávka č. <strong><a href=\"{{ url }}\">{{ number }}</a></strong>"
 
-#: OrderController.php:288
+#: OrderController.php:276
 msgid "Order Nr. <strong>{{ number }}</strong> deleted"
 msgstr "Objednávka č. <strong>{{ number }}</strong> byla smazána"
 
@@ -3070,11 +3072,12 @@ msgstr "Stránka s potvrzením objednávky"
 msgid "Order confirmation page content modified"
 msgstr "Nastavení obsahu stránky s potvrzením objednávky bylo upraveno"
 
-#: FrontBreadcrumbGenerator.php:32
+#: SimpleBreadcrumbGenerator.php:48
+#: SimpleBreadcrumbGenerator.php:49
 msgid "Order detail"
 msgstr "Detail objednávky"
 
-#: MailController.php:102
+#: MailController.php:95
 msgid "Order detail URL address"
 msgstr "URL adresa detailu objednávky"
 
@@ -3090,13 +3093,13 @@ msgstr "Položky objednávky"
 msgid "Order must contain at least one item"
 msgstr "Objednávka musí obsahovat alespoň jednu položku"
 
-#: CustomerController.php:149
+#: CustomerController.php:140
 msgid "Order not found"
 msgstr "Objednávka nebyla nalezena"
 
 #: AdvancedSearchOrderFilterTranslation.php:11
-#: MailController.php:88
-#: ScriptController.php:198
+#: MailController.php:81
+#: ScriptController.php:190
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:9
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:63
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:40
@@ -3127,7 +3130,7 @@ msgstr "Objednávka byla odeslána"
 msgid "Order statuses overview"
 msgstr "Přehled stavů objednávek"
 
-#: FrontBreadcrumbGenerator.php:23
+#: SimpleBreadcrumbGenerator.php:46
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 msgid "Orders"
 msgstr "Objednávky"
@@ -3138,7 +3141,7 @@ msgstr "Objednávky"
 msgid "Orders overview"
 msgstr "Přehled objednávek"
 
-#: CustomerController.php:207
+#: CustomerController.php:192
 msgid "Orders value"
 msgstr "Hodnota objednávek"
 
@@ -3146,11 +3149,11 @@ msgstr "Hodnota objednávek"
 msgid "Our customers who bought this bought also"
 msgstr "Naši zákaznící k tomuto produktu nejčastěji nakupují"
 
-#: SliderController.php:185
+#: SliderController.php:180
 msgid "Page <strong>{{ name }}</strong> deleted"
 msgstr "Stránka <strong>{{ name }}</strong> byla smazána"
 
-#: FrontBreadcrumbGenerator.php:85
+#: ErrorPageBreadcrumbGenerator.php:21
 msgid "Page not found"
 msgstr "Stránka nenalezena"
 
@@ -3173,7 +3176,7 @@ msgstr "Parametr <strong>{{ name }}</strong> byl smazán"
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:229
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:118
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:110
 msgid "Parameters"
 msgstr "Parametry"
 
@@ -3216,7 +3219,7 @@ msgstr "Heslo musí mít alespoň šest znaků a nesmí být shodné se zadaným
 msgid "Password must be at least six characters and can't be the same as login name."
 msgstr "Heslo musí mít minimálně 6 znaků a nesmí být stejné jako přihlašovací jméno."
 
-#: CustomerPasswordController.php:113
+#: CustomerPasswordController.php:111
 msgid "Password successfully changed"
 msgstr "Heslo bylo úspěšně změněno"
 
@@ -3228,19 +3231,19 @@ msgstr "Heslo bylo úspěšně změněno"
 msgid "Payment"
 msgstr "Platba"
 
-#: PaymentController.php:89
+#: PaymentController.php:81
 msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byla vytvořena platba <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: PaymentController.php:128
+#: PaymentController.php:117
 msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr "Byla upravena platba <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: PaymentController.php:163
+#: PaymentController.php:152
 msgid "Payment <strong>{{ name }}</strong> deleted"
 msgstr "Platba <strong>{{ name }}</strong> byla smazána"
 
-#: MailController.php:104
+#: MailController.php:97
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:46
 msgid "Payment instructions"
 msgstr "Pokyny k platbě"
@@ -3296,7 +3299,7 @@ msgstr "Rozměry obrázků"
 msgid "Picture will be deleted after saving."
 msgstr "Po uložení bude obrázek smazán"
 
-#: AdvertFormType.php:149
+#: AdvertFormType.php:56
 msgid "Picture with link"
 msgstr "Obrázek s odkazem"
 
@@ -3312,37 +3315,37 @@ msgstr "Místo pro input"
 msgid "Please check following information:"
 msgstr "Prosím překontrolujte následující informace:"
 
-#: AdministratorController.php:133
-#: AdministratorController.php:201
-#: AdvertController.php:107
-#: AdvertController.php:199
-#: ArticleController.php:125
-#: ArticleController.php:184
-#: BestsellingProductController.php:106
-#: BrandController.php:99
-#: BrandController.php:174
-#: CategoryController.php:96
-#: CategoryController.php:137
-#: CookiesController.php:68
-#: CustomerController.php:92
-#: CustomerController.php:160
-#: CustomerController.php:270
-#: MailController.php:157
-#: OrderController.php:149
-#: OrderController.php:235
-#: PaymentController.php:99
-#: PaymentController.php:138
-#: ProductController.php:163
-#: ProductController.php:213
-#: RegistrationController.php:75
-#: SeoController.php:68
-#: ShopInfoController.php:69
-#: SliderController.php:120
-#: SliderController.php:159
-#: TermsAndConditionsController.php:68
-#: TransportAndPaymentController.php:86
-#: TransportController.php:100
-#: TransportController.php:139
+#: AdministratorController.php:134
+#: AdministratorController.php:200
+#: AdvertController.php:101
+#: AdvertController.php:196
+#: ArticleController.php:116
+#: ArticleController.php:176
+#: BestsellingProductController.php:104
+#: BrandController.php:97
+#: BrandController.php:168
+#: CategoryController.php:89
+#: CategoryController.php:130
+#: CookiesController.php:58
+#: CustomerController.php:83
+#: CustomerController.php:147
+#: CustomerController.php:256
+#: MailController.php:150
+#: OrderController.php:141
+#: OrderController.php:227
+#: PaymentController.php:91
+#: PaymentController.php:127
+#: ProductController.php:162
+#: ProductController.php:212
+#: RegistrationController.php:73
+#: SeoController.php:61
+#: ShopInfoController.php:61
+#: SliderController.php:114
+#: SliderController.php:154
+#: TermsAndConditionsController.php:62
+#: TransportAndPaymentController.php:83
+#: TransportController.php:91
+#: TransportController.php:127
 msgid "Please check the correctness of all data filled."
 msgstr "Prosím zkontrolujte si správnost vyplnění všech údajů"
 
@@ -3354,8 +3357,8 @@ msgstr "Překontrolujte prosím zadané hodnoty.<br><br>"
 msgid "Please enter discount code."
 msgstr "Zadejte, prosím, slevový kód."
 
-#: CartController.php:203
-#: CartController.php:262
+#: CartController.php:197
+#: CartController.php:254
 msgid "Please enter valid quantity you want to add to cart."
 msgstr "Zadejte prosím platné množství, které chcete vložit do košíku."
 
@@ -3367,7 +3370,7 @@ msgstr "Omluvte tuto chybu, pracujeme na tom, aby se chyba opravila co nejdřív
 msgid "Please follow the instructions"
 msgstr "Prosím, pokračujte podle pokynů"
 
-#: CartController.php:127
+#: CartController.php:125
 msgid "Please make sure that you entered right quantity of all items in cart."
 msgstr "Prosím zkontrolujte, zda jste správně zadali množství veškerých položek v košíku."
 
@@ -3403,13 +3406,13 @@ msgstr "Pozitivní hláška - bloková s menším prostorem okolo textu a menš�
 msgid "Postcode"
 msgstr "PSČ"
 
-#: AdvertController.php:148
-#: OrderController.php:236
+#: AdvertController.php:142
+#: OrderController.php:224
 msgid "Preview"
 msgstr "Náhled"
 
 #: PaymentGridFactory.php:81
-#: ProductController.php:372
+#: ProductController.php:370
 #: TransportGridFactory.php:81
 msgid "Price"
 msgstr "Cena"
@@ -3453,20 +3456,20 @@ msgstr "Ceny"
 msgid "Pricing"
 msgstr "Cenotvorba"
 
-#: CustomerController.php:205
+#: CustomerController.php:190
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:19
 msgid "Pricing group"
 msgstr "Cenová skupina"
 
-#: PricingGroupController.php:123
+#: PricingGroupController.php:128
 msgid "Pricing group \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
 msgstr "Cenová skupina \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
 
-#: PricingGroupController.php:82
+#: PricingGroupController.php:89
 msgid "Pricing group <strong>{{ name }}</strong> deleted"
 msgstr "Cenová skupina <strong>{{ name }}</strong> byla smazána"
 
-#: PricingGroupController.php:90
+#: PricingGroupController.php:97
 msgid "Pricing group <strong>{{ name }}</strong> deleted and replaced by group <strong>{{ newName }}</strong>."
 msgstr "Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahrazena skupinou <strong>{{ newName }}</strong>."
 
@@ -3476,7 +3479,7 @@ msgstr "Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahraze
 msgid "Pricing groups"
 msgstr "Cenové skupiny"
 
-#: SuperadminController.php:101
+#: SuperadminController.php:100
 msgid "Pricing settings modified"
 msgstr "Nastavení cenotvorby bylo upraveno"
 
@@ -3488,11 +3491,11 @@ msgstr "Vytisknout"
 msgid "Product"
 msgstr "Produkt"
 
-#: CartController.php:290
+#: CartController.php:282
 msgid "Product <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }}) added to the cart"
 msgstr "Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }})"
 
-#: CartController.php:299
+#: CartController.php:291
 msgid "Product <strong>{{ name }}</strong> added to the cart (total amount {{ quantity|formatNumber }} {{ unitName }})"
 msgstr "Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity|formatNumber }} {{ unitName }})"
 
@@ -3500,15 +3503,15 @@ msgstr "Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem ji
 msgid "Product <strong>{{ name }}</strong> you had in cart is no longer available. Please check your order."
 msgstr "Zboží <strong>{{ name }}</strong>, které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku."
 
-#: ProductController.php:204
+#: ProductController.php:203
 msgid "Product <strong>{{ product|productDisplayName }}</strong> created"
 msgstr "Bylo vytvořeno zboží <strong>{{ product|productDisplayName }}</strong>"
 
-#: ProductController.php:290
+#: ProductController.php:288
 msgid "Product <strong>{{ product|productDisplayName }}</strong> deleted"
 msgstr "Produkt <strong>{{ product|productDisplayName }}</strong> byl smazán"
 
-#: ProductController.php:154
+#: ProductController.php:153
 msgid "Product <strong>{{ product|productDisplayName }}</strong> modified"
 msgstr "Bylo upraveno zboží <strong>{{ product|productDisplayName }}</strong>"
 
@@ -3569,8 +3572,8 @@ msgstr "Zboží se nenachází v eshopu."
 msgid "Product saved in order"
 msgstr "Zboží bylo uloženo do objednávky"
 
-#: TopCategoryController.php:58
-#: TopProductController.php:58
+#: TopCategoryController.php:53
+#: TopProductController.php:50
 msgid "Product settings on the main page successfully changed"
 msgstr "Nastavení zboží na titulce bylo úspěšně změněno."
 
@@ -3578,7 +3581,7 @@ msgstr "Nastavení zboží na titulce bylo úspěšně změněno."
 msgid "Product you had in cart is no longer in available. Please check your order."
 msgstr "Zboží, které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku."
 
-#: CartController.php:325
+#: CartController.php:317
 msgid "Product {{ name }} removed from cart"
 msgstr "Z košíku bylo odstraněno zboží {{ name }}"
 
@@ -3635,7 +3638,7 @@ msgstr "Registrovaní zák."
 msgid "Registered customers"
 msgstr "Registrovaní zákazníci"
 
-#: FrontBreadcrumbGenerator.php:44
+#: SimpleBreadcrumbGenerator.php:52
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:8
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:105
@@ -3703,7 +3706,7 @@ msgstr "SEO"
 msgid "SEO attributes settings"
 msgstr "Nastavení SEO atributů"
 
-#: SeoController.php:62
+#: SeoController.php:55
 msgid "SEO attributes settings modified"
 msgstr "Natavení SEO atributů bylo upraveno"
 
@@ -3721,7 +3724,7 @@ msgstr "Nastavení prodeje s/bez DPH"
 msgid "Save"
 msgstr "Uložit"
 
-#: FormDetailExtension.php:83
+#: FormDetailExtension.php:73
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Availability/setting.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Cookies/setting.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Currency/currencySettings.html.twig:14
@@ -3760,19 +3763,19 @@ msgstr "Uložit změny v pořadí"
 msgid "Schema"
 msgstr "Osnova"
 
-#: ScriptController.php:64
+#: ScriptController.php:60
 msgid "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
 msgstr "Byl vytvořen skript <a href=\"{{ url }}\"><strong>{{ name }}</strong></a>"
 
-#: ScriptController.php:104
+#: ScriptController.php:97
 msgid "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified"
 msgstr "Byl upraven skript <a href=\"{{ url }}\"><strong>{{ name }}</strong></a>"
 
-#: ScriptController.php:157
+#: ScriptController.php:150
 msgid "Script <strong>{{ name }}</strong> deleted"
 msgstr "Skript <strong>{{ name }}</strong> byl smazán"
 
-#: ScriptController.php:129
+#: ScriptController.php:122
 msgid "Script name"
 msgstr "Název skriptu"
 
@@ -3786,7 +3789,7 @@ msgstr "Skript bude vložen na začátek stránky, za tag <body>."
 msgid "Scripts overview"
 msgstr "Přehled skriptů"
 
-#: FrontBreadcrumbGenerator.php:40
+#: SimpleBreadcrumbGenerator.php:51
 msgid "Search [noun]"
 msgstr "Hledání"
 
@@ -3841,39 +3844,39 @@ msgstr "Select"
 msgid "Select new value"
 msgstr "Zvolte novou hodnotu"
 
-#: VatController.php:95
+#: VatController.php:93
 msgid "Selected VAT doesn't exist"
 msgstr "Zvolené DPH neexistuje"
 
-#: VatController.php:132
+#: VatController.php:130
 msgid "Selected VAT doesn't exist."
 msgstr "Zvolené DPH neexistuje."
 
-#: AdministratorController.php:236
+#: AdministratorController.php:235
 msgid "Selected administrated doesn't exist."
 msgstr "Zvolený administrátor neexistuje."
 
-#: AdvertController.php:226
+#: AdvertController.php:223
 msgid "Selected advertisement doesn't exist."
 msgstr "Zvolená reklama neexistuje."
 
-#: ArticleController.php:211
+#: ArticleController.php:203
 msgid "Selected article doesn't exist."
 msgstr "Zvolený článek neexistuje."
 
-#: AvailabilityController.php:134
+#: AvailabilityController.php:132
 msgid "Selected availability doesn't exist"
 msgstr "Zvolená dostupnost neexistuje"
 
-#: AvailabilityController.php:88
+#: AvailabilityController.php:87
 msgid "Selected availatibily doesn't exist."
 msgstr "Zvolená dostupnost neexistuje."
 
-#: BrandController.php:202
+#: BrandController.php:196
 msgid "Selected brand doesn't exist."
 msgstr "Zvolená značka neexistuje."
 
-#: CategoryController.php:222
+#: CategoryController.php:215
 msgid "Selected category doesn't exist."
 msgstr "Zvolená kategorie neexistuje"
 
@@ -3882,7 +3885,7 @@ msgstr "Zvolená kategorie neexistuje"
 msgid "Selected currency doesn't exist."
 msgstr "Zvolená měna neexistuje."
 
-#: CustomerController.php:297
+#: CustomerController.php:283
 msgid "Selected customer doesn't exist."
 msgstr "Zvolený zákazník neexistuje"
 
@@ -3894,16 +3897,16 @@ msgstr "Zvolený slevový kupón neexistuje."
 msgid "Selected flag doesn't exist."
 msgstr "Zvolený příznak neexistuje."
 
-#: OrderController.php:294
+#: OrderController.php:282
 msgid "Selected order doesn't exist."
 msgstr "Zvolená objednávka neexistuje"
 
-#: OrderStatusController.php:93
-#: OrderStatusController.php:131
+#: OrderStatusController.php:92
+#: OrderStatusController.php:129
 msgid "Selected order status doesn't exist."
 msgstr "Zvolený stav objednávek neexistuje"
 
-#: SliderController.php:191
+#: SliderController.php:186
 msgid "Selected page doesn't exist."
 msgstr "Zvolená stránka neexistuje."
 
@@ -3911,37 +3914,37 @@ msgstr "Zvolená stránka neexistuje."
 msgid "Selected parameter doesn't exist."
 msgstr "Zvolený parametr neexistuje."
 
-#: PaymentController.php:169
+#: PaymentController.php:158
 msgid "Selected payment doesn't exist."
 msgstr "Zvolená platba neexistuje."
 
-#: PricingGroupController.php:98
-#: PricingGroupController.php:144
+#: PricingGroupController.php:105
+#: PricingGroupController.php:149
 msgid "Selected pricing group doesn't exist."
 msgstr "Zvolená cenová skupina neexistuje."
 
-#: ProductController.php:296
+#: ProductController.php:294
 msgid "Selected product doesn't exist."
 msgstr "Zvolený produkt neexistuje."
 
-#: CartController.php:201
-#: CartController.php:260
+#: CartController.php:195
+#: CartController.php:252
 msgid "Selected product no longer available or doesn't exist."
 msgstr "Zvolené zboží již není v nabídce nebo neexistuje."
 
-#: ScriptController.php:163
+#: ScriptController.php:156
 msgid "Selected script doesn't exist."
 msgstr "Zvolený skript neexistuje"
 
-#: TransportController.php:170
+#: TransportController.php:158
 msgid "Selected shipping doesn't exist."
 msgstr "Zvolená doprava neexistuje."
 
-#: UnitController.php:104
+#: UnitController.php:96
 msgid "Selected unit doesn't exist"
 msgstr "Zvolená jednotka neexistuje"
 
-#: UnitController.php:141
+#: UnitController.php:133
 msgid "Selected unit doesn't exist."
 msgstr "Zvolená jednotka neexistuje."
 
@@ -3981,11 +3984,11 @@ msgstr "Výrobní číslo"
 msgid "Servis Heuréka - Approved by customers doesn't support the language of this domain."
 msgstr "Služba Heureka - Ověřeno zákazníky nepodporuje jazyk této domény."
 
-#: ProductMassActionFormType.php:38
+#: ProductMassActionFormType.php:31
 msgid "Set"
 msgstr "Nastavit"
 
-#: ProductFormType.php:182
+#: ProductFormType.php:179
 msgid "Set alternative availability"
 msgstr "Nastavit alternativní dostupnost"
 
@@ -4015,7 +4018,7 @@ msgstr "Nastavit nové heslo"
 msgid "Settings"
 msgstr "Nastavení"
 
-#: HeurekaController.php:69
+#: HeurekaController.php:67
 msgid "Settings modified."
 msgstr "Nastavení bylo upraveno."
 
@@ -4027,15 +4030,15 @@ msgstr "Nastavení bylo upraveno."
 msgid "Shipping"
 msgstr "Doprava"
 
-#: TransportController.php:90
+#: TransportController.php:81
 msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byla vytvořena doprava <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: TransportController.php:129
+#: TransportController.php:117
 msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modified"
 msgstr "Byla upravena doprava <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: TransportController.php:164
+#: TransportController.php:152
 msgid "Shipping <strong>{{ name }}</strong> deleted"
 msgstr "Doprava <strong>{{ name }}</strong> byla smazána"
 
@@ -4066,7 +4069,7 @@ msgstr "Dopravu i platbu máte <strong>zdarma!</strong>"
 msgid "Shipping and payments"
 msgstr "Dopravy a platby"
 
-#: MailController.php:103
+#: MailController.php:96
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:40
 msgid "Shipping instructions"
 msgstr "Pokyny k dopravě"
@@ -4114,11 +4117,11 @@ msgstr "Slider na titulce"
 msgid "Slider page"
 msgstr "Stránka slideru"
 
-#: SliderController.php:110
+#: SliderController.php:104
 msgid "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byla vytvořena stránka slideru <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: SliderController.php:148
+#: SliderController.php:143
 msgid "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr "Byla upravena stránka slideru <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
@@ -4165,7 +4168,7 @@ msgstr "Akční zboží"
 msgid "Static texts translations"
 msgstr "Překlady konstant"
 
-#: OrderController.php:243
+#: OrderController.php:231
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:41
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Form/fileuploadFields.html.twig:51
@@ -4181,15 +4184,15 @@ msgstr "Stav objednávky"
 msgid "Status of orders"
 msgstr "Stavy objednávek"
 
-#: OrderStatusController.php:70
+#: OrderStatusController.php:69
 msgid "Status of orders <strong>{{ name }}</strong> deleted"
 msgstr "Stav objednávek <strong>{{ name }}</strong> byl smazán"
 
-#: OrderStatusController.php:87
+#: OrderStatusController.php:86
 msgid "Status of orders <strong>{{ name }}</strong> reserved and can't be deleted"
 msgstr "Stav objednávek <strong>{{ name }}</strong> je rezervovaný a nelze jej smazat"
 
-#: OrderStatusController.php:78
+#: OrderStatusController.php:77
 msgid "Status of orders <strong>{{ oldName }}</strong> replaced by status <strong>{{ newName }}</strong> and deleted."
 msgstr "Stav objednávek <strong>{{ oldName }}</strong> byl nahrazen stavem <strong>{{ newName }}</strong> a byl smazán."
 
@@ -4248,7 +4251,7 @@ msgstr "Superadmin - Nastavení prodeje s/bez DPH"
 msgid "Superadmin - URL addresses"
 msgstr "Superadmin - URL adresy"
 
-#: MailController.php:115
+#: MailController.php:108
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:30
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:88
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:86
@@ -4417,7 +4420,7 @@ msgstr "DIČ"
 msgid "Technical parameters"
 msgstr "Technické parametry"
 
-#: CustomerController.php:203
+#: CustomerController.php:188
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:31
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:89
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:88
@@ -4447,7 +4450,7 @@ msgstr "Obchodní podmínky"
 msgid "Terms and conditions settings"
 msgstr "Nastavení obchodních podmínek"
 
-#: TermsAndConditionsController.php:63
+#: TermsAndConditionsController.php:57
 msgid "Terms and conditions settings modified."
 msgstr "Bylo upraveno nastavení obchodních podmínek."
 
@@ -4484,7 +4487,7 @@ msgstr "Modifikace velikostí textarea"
 msgid "Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
 msgstr "Textarea roztáhnutá na celou šířku. V tomhletom případě nemusíme použít form-line__item, protože je prvek na 100% šířku."
 
-#: ContactFormController.php:53
+#: ContactFormController.php:43
 msgid "Thank you, your message has been sent."
 msgstr "Děkujeme, váš vzkaz byl odeslán."
 
@@ -4496,16 +4499,16 @@ msgstr "Základní premisou kódování v adminu je, že z velmi velké části 
 msgid "The change will be applied to products in 10 minutes"
 msgstr "Změna se u zboží projeví do 10 minut"
 
-#: CustomerPasswordController.php:83
-#: CustomerPasswordController.php:110
+#: CustomerPasswordController.php:82
+#: CustomerPasswordController.php:108
 msgid "The link to change your password expired."
 msgstr "Platnost odkazu pro změnu hesla vypršela."
 
-#: OrderController.php:318
+#: OrderController.php:310
 msgid "The price of payment {{ transportName }} changed during ordering process. Check your order, please."
 msgstr "V průběhu objednávkového procesu byla změněna cena platby {{ paymentName }}. Prosím, překontrolujte si objednávku."
 
-#: OrderController.php:310
+#: OrderController.php:302
 msgid "The price of shipping {{ transportName }} changed during ordering process. Check your order, please."
 msgstr "V průběhu objednávkového procesu byla změněna cena dopravy {{ transportName }}. Prosím, překontrolujte si objednávku."
 
@@ -4521,9 +4524,9 @@ msgstr "Tlačítek je více druhů, každý z nich může mít další spoustu m
 msgid "There are several types of tables, but it is not necessary to write down those which are generated by system itself and nobody intervenes in them. That's why there are only those that you will probably want to use."
 msgstr "Tabulek je více druhů, není ale důvod vypisovat ty, co systém generuje sám, a nikdo do nich nezasahuje. Proto jsou zde jen ty, co pravděpodobně budete chtít použít."
 
-#: CustomerController.php:155
-#: CustomerController.php:264
-#: RegistrationController.php:70
+#: CustomerController.php:142
+#: CustomerController.php:250
+#: RegistrationController.php:68
 msgid "There is already a customer with this e-mail in the database"
 msgstr "V databázi se již nachází zákazník s tímto e-mailem"
 
@@ -4604,7 +4607,7 @@ msgstr "Tento text vám objasní logiku tvoření formuláře."
 msgid "Title component with possible button on the right, all separated by border from below"
 msgstr "Komponenta na titulek s možností tlačítka napravo, celé zespodu odděleno borderem"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig:28
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig:25
 msgid "To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one."
 msgstr "Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která se použije místo ní. Bohužel není za co nahrazovat, před smazáním musíte nějdřív vytvořit novou."
 
@@ -4612,11 +4615,11 @@ msgstr "Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která s
 msgid "To display same as with parameters, it is necessary to add separator with icon and make sure to remove paddings around the separator. This raises more classes in almost all surrounding TD/TH. You can also simply add and icon with an action at the end of the line."
 msgstr "Pro zobrazení jako u parametrů je třeba přidat oddělovač s ikonkou a zaručit, aby se zrušily v okolí oddělovače paddingy. Vzniká zde více tříd skoro ve všech okolních TD/TH. Lze také jednoduše přidat ikonku s akcí na konec řádku."
 
-#: VatSettingsFormType.php:87
+#: VatSettingsFormType.php:47
 msgid "To fifty hundredths (halfs)"
 msgstr "Na padesátníky"
 
-#: VatSettingsFormType.php:86
+#: VatSettingsFormType.php:46
 msgid "To hundredths (cents)"
 msgstr "Na setiny (haléře)"
 
@@ -4624,7 +4627,7 @@ msgstr "Na setiny (haléře)"
 msgid "To prevent the possibility of account theft, the change of the e-mail address must be dealt with individually. If your e-mail address has changed, please contact us."
 msgstr "Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně. Pokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte."
 
-#: VatSettingsFormType.php:88
+#: VatSettingsFormType.php:48
 msgid "To whole numbers"
 msgstr "Na celá čísla (koruny)"
 
@@ -4651,15 +4654,15 @@ msgstr "Celkem s DPH"
 msgid "Total item price including VAT"
 msgstr "Celková cena za položku s DPH"
 
-#: MailController.php:93
+#: MailController.php:86
 msgid "Total order price (including VAT)"
 msgstr "Celková cena za objednávku (s DPH)"
 
-#: ScriptController.php:199
+#: ScriptController.php:191
 msgid "Total order price including VAT"
 msgstr "Celková cena objednávky s DPH"
 
-#: OrderController.php:244
+#: OrderController.php:232
 msgid "Total price"
 msgstr "Celková cena"
 
@@ -4733,29 +4736,29 @@ msgstr "Nelze přidat"
 msgid "Unable to add product"
 msgstr "Zboží se nepodařilo vložit"
 
-#: CartController.php:205
-#: CartController.php:264
+#: CartController.php:199
+#: CartController.php:256
 msgid "Unable to add product to cart"
 msgstr "Zboží se nepodařilo vložit do košíku."
 
-#: CartController.php:213
-#: CartController.php:272
+#: CartController.php:207
+#: CartController.php:264
 msgid "Unable to add product to cart:<br/><ul><li>{{ errors|raw }}</li></ul>"
 msgstr "Zboží se nepodařilo vložit do košíku:<br/><ul><li>{{ errors|raw }}</li></ul>"
 
-#: CartController.php:329
+#: CartController.php:321
 msgid "Unable to remove item from cart. The item is probably already removed."
 msgstr "Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno"
 
-#: CartController.php:333
+#: CartController.php:325
 msgid "Unable to remove item from cart. The link for removing it probably expired, try it again."
 msgstr "Nepodařilo se odstranit položku z košíku. Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou."
 
-#: OrderController.php:224
+#: OrderController.php:216
 msgid "Unable to send some e-mails, please contact us for order verification."
 msgstr "Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte."
 
-#: OrderController.php:144
+#: OrderController.php:136
 msgid "Unable to send updating e-mail"
 msgstr "Nepodařilo se odeslat aktualizační email"
 
@@ -4768,15 +4771,15 @@ msgstr "Došlo k neočekávané chybě, soubor nebyl nahrán."
 msgid "Unit"
 msgstr "Jednotka"
 
-#: UnitController.php:69
+#: UnitController.php:68
 msgid "Unit \"%name%\" set as default. For deleting existing unit you have to choose new default unit. Which unit you want to set instead?"
 msgstr "Jednotka \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit novou výchozí jednotku. Jakou jednotku místo ní chcete nastavit?"
 
-#: UnitController.php:125
+#: UnitController.php:117
 msgid "Unit <strong>{{ name }}</strong> deleted"
 msgstr "Jednotka <strong>{{ name }}</strong> byla smazána"
 
-#: UnitController.php:133
+#: UnitController.php:125
 msgid "Unit <strong>{{ name }}</strong> deleted and replaced by unit <strong>{{ newName }}</strong>"
 msgstr "Jednotka <strong>{{ name }}</strong> byla smazána a byla nahrazena jednotkou <strong>{{ newName }}</strong>."
 
@@ -4846,7 +4849,7 @@ msgstr "Využito: %currentLength% znaků. Doporučeno max. %recommendedLength%"
 msgid "Used: 45 characters. Recommended max. 155"
 msgstr "Využito: 45 znaků. Doporučeno max. 155"
 
-#: CustomerController.php:176
+#: CustomerController.php:167
 msgid "User not found."
 msgstr "Uživatel nebyl nalezen."
 
@@ -4860,11 +4863,11 @@ msgstr "Uživatelské jméno"
 msgid "VAT"
 msgstr "DPH"
 
-#: VatController.php:116
+#: VatController.php:114
 msgid "VAT <strong>{{ name }}</strong> deleted"
 msgstr "DPH <strong>{{ name }}</strong> bylo smazáno"
 
-#: VatController.php:124
+#: VatController.php:122
 msgid "VAT <strong>{{ name }}</strong> deleted and replaced by <strong>{{ newName }}</strong>."
 msgstr "DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>."
 
@@ -4896,7 +4899,7 @@ msgstr "Sazba DPH je označena pro smazání a brzy bude automaticky odstraněna
 msgid "VAT rates"
 msgstr "sazby DPH"
 
-#: VatController.php:163
+#: VatController.php:156
 msgid "VAT settings modified"
 msgstr "Nastavení DPH bylo upraveno"
 
@@ -4909,7 +4912,7 @@ msgstr "Hodnota"
 msgid "Variant"
 msgstr "Varianta"
 
-#: ProductController.php:331
+#: ProductController.php:329
 msgid "Variant <strong>{{ productVariant|productDisplayName }}</strong> successfully created."
 msgstr "Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena."
 
@@ -4934,13 +4937,13 @@ msgstr "Zobrazit všechny výsledky"
 msgid "View more"
 msgstr "Zobrazit více"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:162
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:152
 msgid "View results"
 msgstr "Zobrazit výsledky"
 
-#: AdvertController.php:146
-#: ProductController.php:373
-#: ProductPickerController.php:142
+#: AdvertController.php:140
+#: ProductController.php:371
+#: ProductPickerController.php:141
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:15
 msgid "Visibility"
 msgstr "Viditelnost"
@@ -4965,8 +4968,8 @@ msgstr "Upozorňující hláška"
 msgid "Warning message - block with icon"
 msgstr "Upozorňující hláška - bloková s ikonkou"
 
-#: AdministratorController.php:117
-#: AdministratorController.php:185
+#: AdministratorController.php:118
+#: AdministratorController.php:184
 msgid "We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please."
 msgstr "Omlouváme se, ale jméno <strong>{{ name }}</strong> je vyhrazeno pro systémovou funkci. Použijte prosím jiné"
 
@@ -5039,7 +5042,7 @@ msgstr "XML Feedy"
 msgid "XML availability feeds"
 msgstr "XML dostupnostní feedy"
 
-#: YesNoType.php:44
+#: YesNoType.php:18
 #: grid.inlineEdit.js:36
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/listGrid.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/list.html.twig:38
@@ -5047,9 +5050,10 @@ msgstr "XML dostupnostní feedy"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:43
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/visibilityItems.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ProductPicker/listGrid.html.twig:19
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:209
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:334
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:343
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:333
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:342
+#: window.js:54
+#: window.js:67
 msgid "Yes"
 msgstr "Ano"
 
@@ -5083,7 +5087,7 @@ msgstr "Ceny můžete nastavit na kartě konkrétní varianty."
 msgid "You can upload following formats: PNG, JPG, GIF"
 msgstr "Můžete nahrávat formáty: PNG, JPG a GIF"
 
-#: AdministratorController.php:227
+#: AdministratorController.php:226
 msgid "You can't delete yourself."
 msgstr "Nemůžete smazat sami sebe."
 
@@ -5095,7 +5099,7 @@ msgstr "Nelze vybrat zboží, které je hlavní variantou"
 msgid "You cannot choose product that is variant"
 msgstr "Nelze vybrat zboží, které je variantou"
 
-#: RegistrationController.php:66
+#: RegistrationController.php:64
 msgid "You have been successfully registered."
 msgstr "Byli jste úspěšně zaregistrováni"
 
@@ -5107,9 +5111,9 @@ msgstr "Byli jste úspěšně přihlášeni k odběru našeho newsletteru."
 msgid "You have made changes, don't forget to save them!"
 msgstr "Provedli jste změny, nezapomeňte je uložit!"
 
-#: CustomerController.php:68
-#: CustomerController.php:103
-#: CustomerController.php:140
+#: CustomerController.php:60
+#: CustomerController.php:94
+#: CustomerController.php:131
 msgid "You have to be logged in to enter this page"
 msgstr "Pro přístup na tuto stránku musíte být přihlášeni"
 
@@ -5137,7 +5141,7 @@ msgstr "Váš nákupní košík je prázdný"
 msgid "Your cart is unfortunately empty. To create order, you have to choose </a> some product <a href=\"%url%\">first"
 msgstr "Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href=\"%url%\">vybrat</a>."
 
-#: CustomerController.php:87
+#: CustomerController.php:78
 msgid "Your data had been successfully updated"
 msgstr "Vaše údaje byly úspěšně zaktualizovány"
 
@@ -5149,7 +5153,8 @@ msgstr "Vaše sleva"
 msgid "Zboží.cz"
 msgstr "Zboží.cz"
 
-#: AdvertPositionList.php:21
+#: AdvertController.php:153
+#: AdvertFormType.php:68
 msgid "above footer"
 msgstr "nad patičkou"
 
@@ -5271,7 +5276,7 @@ msgstr "bez DPH"
 msgid "flags"
 msgstr "příznaky"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:221
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:220
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Paginator/paginator.html.twig:9
 msgid "from"
 msgstr "z"
@@ -5305,19 +5310,21 @@ msgstr "větší nebo rovno"
 msgid "higher than"
 msgstr "větší než"
 
-#: AdvertPositionList.php:22
+#: AdvertController.php:154
+#: AdvertFormType.php:69
 msgid "in category (above the category name)"
 msgstr "v kategorii (nad názvem kategorie)"
 
-#: ArticlePlacementList.php:20
+#: ArticleFormType.php:76
 msgid "in footer"
 msgstr "v patičce"
 
-#: AdvertPositionList.php:23
+#: AdvertController.php:155
+#: AdvertFormType.php:70
 msgid "in left panel (under category tree)"
 msgstr "v levém panelu (pod stromem kategorií)"
 
-#: ArticlePlacementList.php:19
+#: ArticleFormType.php:75
 msgid "in upper menu"
 msgstr "v horním menu"
 
@@ -5383,7 +5390,7 @@ msgstr "parametry"
 msgid "products"
 msgstr "zboží"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:220
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:219
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Paginator/paginator.html.twig:7
 msgid "records"
 msgstr "záznamů"
@@ -5408,7 +5415,8 @@ msgstr "dvě pomlčky \"--\" značí modifikaci komponenty"
 msgid "two underscores \"__\" represent part of the component/element"
 msgstr "dva podtržítka \"__\" značí část komponenty/element"
 
-#: AdvertPositionList.php:20
+#: AdvertController.php:152
+#: AdvertFormType.php:67
 msgid "under heading"
 msgstr "pod hlavičkou"
 
@@ -5424,7 +5432,7 @@ msgstr "neregistrovaný zákazník"
 msgid "uses"
 msgstr "používá"
 
-#: ArticlePlacementList.php:21
+#: ArticleFormType.php:77
 msgid "without positoning"
 msgstr "bez umístění"
 

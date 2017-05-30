@@ -37,29 +37,29 @@ msgstr ""
 msgid "- Heureka - Ověřeno zákazníky"
 msgstr ""
 
-#: ProductFormType.php:186
+#: ProductFormType.php:183
 msgid "-- Choose action --"
 msgstr ""
 
-#: AdvertFormType.php:86
+#: AdvertFormType.php:72
 msgid "-- Choose area --"
 msgstr ""
 
-#: CookiesSettingFormType.php:44
-#: TermsAndConditionsSettingFormType.php:44
+#: CookiesSettingFormType.php:38
+#: TermsAndConditionsSettingFormType.php:38
 msgid "-- Choose article --"
 msgstr ""
 
-#: ArticleFormType.php:94
+#: ArticleFormType.php:79
 msgid "-- Choose article position --"
 msgstr ""
 
-#: ProductFormType.php:170
-#: ProductFormType.php:197
+#: ProductFormType.php:167
+#: ProductFormType.php:196
 msgid "-- Choose availability --"
 msgstr ""
 
-#: ProductFormType.php:145
+#: ProductFormType.php:138
 msgid "-- Choose brand --"
 msgstr ""
 
@@ -85,7 +85,7 @@ msgstr ""
 msgid "Accessories"
 msgstr ""
 
-#: ModuleList.php:19
+#: ModuleList.php:39
 msgid "Accessories in purchase confirmation box"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgid "Active"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ProductPicker/listGrid.html.twig:47
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:695
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:697
 msgid "Add"
 msgstr ""
 
@@ -178,19 +178,19 @@ msgstr ""
 msgid "Administrator"
 msgstr ""
 
-#: AdministratorController.php:176
+#: AdministratorController.php:175
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: AdministratorController.php:108
+#: AdministratorController.php:109
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: AdministratorController.php:221
+#: AdministratorController.php:220
 msgid "Administrator <strong>{{ name }}</strong> deleted."
 msgstr ""
 
-#: AdministratorController.php:230
+#: AdministratorController.php:229
 msgid "Administrator <strong>{{ name }}</strong> is the only one and can't be deleted."
 msgstr ""
 
@@ -198,8 +198,8 @@ msgstr ""
 msgid "Administrator activities history"
 msgstr ""
 
-#: AdministratorController.php:124
-#: AdministratorController.php:192
+#: AdministratorController.php:125
+#: AdministratorController.php:191
 msgid "Administrator with login name <strong>{{ name }}</strong> already exists"
 msgstr ""
 
@@ -225,15 +225,15 @@ msgstr ""
 msgid "Advertising"
 msgstr ""
 
-#: AdvertController.php:189
+#: AdvertController.php:186
 msgid "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
 msgstr ""
 
-#: AdvertController.php:97
+#: AdvertController.php:91
 msgid "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified"
 msgstr ""
 
-#: AdvertController.php:220
+#: AdvertController.php:217
 msgid "Advertising <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -260,7 +260,7 @@ msgstr ""
 msgid "All pages"
 msgstr ""
 
-#: ProductMassActionFormType.php:32
+#: ProductMassActionFormType.php:25
 msgid "All search results"
 msgstr ""
 
@@ -306,7 +306,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: AdvertController.php:149
+#: AdvertController.php:143
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:18
 msgid "Area"
 msgstr ""
@@ -316,23 +316,23 @@ msgstr ""
 msgid "Article"
 msgstr ""
 
-#: ArticleController.php:230
+#: ArticleController.php:222
 msgid "Article \"%name%\" set for displaying cookies information. This setting will be lost. Do you really want to delete it?"
 msgstr ""
 
-#: ArticleController.php:225
+#: ArticleController.php:217
 msgid "Article \"%name%\" set for displaying terms and conditions. This setting will be lost. Do you really want to delete it?"
 msgstr ""
 
-#: ArticleController.php:174
+#: ArticleController.php:166
 msgid "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: ArticleController.php:115
+#: ArticleController.php:106
 msgid "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: ArticleController.php:205
+#: ArticleController.php:197
 msgid "Article <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -383,11 +383,11 @@ msgstr ""
 msgid "Attention, the second variant doesn't have js to work with yet!"
 msgstr ""
 
-#: ModuleList.php:21
+#: ModuleList.php:41
 msgid "Automatic stock calculation"
 msgstr ""
 
-#: ProductFormType.php:253
+#: ProductFormType.php:256
 msgid "Automatically"
 msgstr ""
 
@@ -403,15 +403,15 @@ msgstr ""
 msgid "Availability"
 msgstr ""
 
-#: AvailabilityController.php:105
+#: AvailabilityController.php:104
 msgid "Availability \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which availability you want to set instead?"
 msgstr ""
 
-#: AvailabilityController.php:72
+#: AvailabilityController.php:71
 msgid "Availability <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: AvailabilityController.php:80
+#: AvailabilityController.php:79
 msgid "Availability <strong>{{ oldName }}</strong> deleted and replaced by availability <strong>{{ newName }}</strong>"
 msgstr ""
 
@@ -505,15 +505,15 @@ msgstr ""
 msgid "Basic table with one class on table element. Basic look for showing simple data (not forms)."
 msgstr ""
 
-#: AvailabilityController.php:111
+#: AvailabilityController.php:110
 msgid "Because availability \"%name%\" is used with other products also, you have to choose a new availability which will replace the existing one. Which availability you want to set to these products?"
 msgstr ""
 
-#: OrderStatusController.php:108
+#: OrderStatusController.php:107
 msgid "Because status \"%name%\" is used with other orders also, you have to choose a new status which will replace the existing one. Which status you want to set to these orders? When changing this, there won't be emails sent to customers."
 msgstr ""
 
-#: BestsellingProductController.php:93
+#: BestsellingProductController.php:91
 msgid "Best-selling products of category <strong><a href=\"{{ url }}\">{{ name }}</a></strong> set."
 msgstr ""
 
@@ -534,7 +534,7 @@ msgstr ""
 msgid "Billing address"
 msgstr ""
 
-#: MailController.php:94
+#: MailController.php:87
 msgid "Billing address - name, surname, company, company number, tax number and billing address"
 msgstr ""
 
@@ -553,24 +553,24 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:86
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:104
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:85
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:81
 msgid "Brand"
 msgstr ""
 
-#: BrandController.php:164
+#: BrandController.php:158
 msgid "Brand <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: BrandController.php:89
+#: BrandController.php:87
 msgid "Brand <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: BrandController.php:196
+#: BrandController.php:190
 msgid "Brand <strong>{{ name }}</strong> deleted"
 msgstr ""
 
 #: BrandBreadcrumbGenerator.php:30
-#: FrontBreadcrumbGenerator.php:48
+#: SimpleBreadcrumbGenerator.php:53
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/list.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/list.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Brand/list.html.twig:4
@@ -602,7 +602,7 @@ msgstr ""
 msgid "Bulk edit"
 msgstr ""
 
-#: ProductController.php:261
+#: ProductController.php:259
 msgid "Bulk editing done"
 msgstr ""
 
@@ -651,7 +651,7 @@ msgid "Cart"
 msgstr ""
 
 #: AdvancedSearchProductFilterTranslation.php:11
-#: ProductPickerController.php:141
+#: ProductPickerController.php:140
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:163
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:71
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:55
@@ -669,11 +669,11 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: CategoryController.php:126
+#: CategoryController.php:119
 msgid "Category <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: CategoryController.php:216
+#: CategoryController.php:209
 msgid "Category <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -686,7 +686,7 @@ msgstr ""
 msgid "Category guidepost on main page"
 msgstr ""
 
-#: CategoryController.php:86
+#: CategoryController.php:79
 msgid "Category<strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modified"
 msgstr ""
 
@@ -730,7 +730,7 @@ msgstr ""
 msgid "Choose new value first"
 msgstr ""
 
-#: ProductType.php:77
+#: ProductType.php:70
 msgid "Choose product"
 msgstr ""
 
@@ -738,15 +738,15 @@ msgstr ""
 msgid "Choose variant"
 msgstr ""
 
-#: MailController.php:92
+#: MailController.php:85
 msgid "Chosen payment name"
 msgstr ""
 
-#: MailController.php:91
+#: MailController.php:84
 msgid "Chosen shipping name"
 msgstr ""
 
-#: CustomerController.php:202
+#: CustomerController.php:187
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:70
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:91
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:113
@@ -762,7 +762,7 @@ msgstr ""
 msgid "City"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:161
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:151
 msgid "Clear filter"
 msgstr ""
 
@@ -929,7 +929,7 @@ msgstr ""
 msgid "Cookies information settings"
 msgstr ""
 
-#: CookiesController.php:63
+#: CookiesController.php:53
 msgid "Cookies information settings modified."
 msgstr ""
 
@@ -955,7 +955,7 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: FormDetailExtension.php:81
+#: FormDetailExtension.php:71
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/createVariant.html.twig:10
 msgid "Create"
 msgstr ""
@@ -1032,7 +1032,7 @@ msgstr ""
 msgid "Create pricing group"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:379
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:378
 msgid "Create record"
 msgstr ""
 
@@ -1051,7 +1051,7 @@ msgstr ""
 msgid "Create variant"
 msgstr ""
 
-#: OrderController.php:238
+#: OrderController.php:226
 msgid "Created"
 msgstr ""
 
@@ -1086,7 +1086,7 @@ msgstr ""
 msgid "Currency <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: CurrencyController.php:146
+#: CurrencyController.php:143
 msgid "Currency settings modified"
 msgstr ""
 
@@ -1094,20 +1094,20 @@ msgstr ""
 msgid "Current status"
 msgstr ""
 
-#: OrderController.php:239
+#: OrderController.php:227
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:43
 msgid "Customer"
 msgstr ""
 
-#: CustomerController.php:255
+#: CustomerController.php:241
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: CustomerController.php:146
+#: CustomerController.php:133
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: CustomerController.php:291
+#: CustomerController.php:277
 msgid "Customer <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -1124,8 +1124,8 @@ msgstr ""
 msgid "Customer orders"
 msgstr ""
 
-#: CustomerPasswordController.php:62
-#: CustomerPasswordController.php:102
+#: CustomerPasswordController.php:61
+#: CustomerPasswordController.php:100
 msgid "Customer with e-mail address <strong>{{ email }}</strong> doesn't exist. <a href=\"{{ registrationLink }}\"> Register</a>"
 msgstr ""
 
@@ -1144,7 +1144,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: MailController.php:89
+#: MailController.php:82
 msgid "Date and time of order creation"
 msgstr ""
 
@@ -1156,7 +1156,7 @@ msgstr ""
 msgid "Default administration currency"
 msgstr ""
 
-#: AvailabilityController.php:159
+#: AvailabilityController.php:153
 msgid "Default availability for the stock settings modified"
 msgstr ""
 
@@ -1168,7 +1168,7 @@ msgstr ""
 msgid "Default pricing group"
 msgstr ""
 
-#: PricingGroupController.php:169
+#: PricingGroupController.php:173
 msgid "Default pricing group settings modified"
 msgstr ""
 
@@ -1186,7 +1186,7 @@ msgstr ""
 msgid "Default unit"
 msgstr ""
 
-#: UnitController.php:168
+#: UnitController.php:155
 msgid "Default unit settings modified"
 msgstr ""
 
@@ -1201,11 +1201,11 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig:22
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig:19
 msgid "Delete and set"
 msgstr ""
 
-#: MailController.php:97
+#: MailController.php:90
 msgid "Delivery address"
 msgstr ""
 
@@ -1276,7 +1276,7 @@ msgstr ""
 msgid "Discount coupons"
 msgstr ""
 
-#: ProductMassActionFormType.php:51
+#: ProductMassActionFormType.php:44
 msgid "Display"
 msgstr ""
 
@@ -1298,7 +1298,7 @@ msgstr ""
 msgid "Display on"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:220
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:219
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Paginator/paginator.html.twig:7
 msgid "Displaying"
 msgstr ""
@@ -1315,7 +1315,7 @@ msgstr ""
 msgid "Do you really want to discard all changes?"
 msgstr ""
 
-#: AvailabilityController.php:126
+#: AvailabilityController.php:124
 msgid "Do you really want to remove availability \"%name%\" permanently? It is not used anywhere."
 msgstr ""
 
@@ -1327,39 +1327,39 @@ msgstr ""
 msgid "Do you really want to remove item \"<i>%itemName%</i>\" from the order?"
 msgstr ""
 
-#: PricingGroupController.php:137
+#: PricingGroupController.php:142
 msgid "Do you really want to remove pricing group \"%name%\" permanently? It is not used anywhere."
 msgstr ""
 
-#: VatController.php:87
+#: VatController.php:85
 msgid "Do you really want to remove rate \"%name%\" permanently? It is not used anywhere."
 msgstr ""
 
-#: OrderStatusController.php:123
+#: OrderStatusController.php:121
 msgid "Do you really want to remove status of orders \"%name%\" permanently? It is not used anywhere."
 msgstr ""
 
-#: OrderController.php:250
+#: OrderController.php:238
 msgid "Do you really want to remove the order?"
 msgstr ""
 
-#: AdministratorController.php:72
+#: AdministratorController.php:73
 msgid "Do you really want to remove this administrator?"
 msgstr ""
 
-#: AdvertController.php:154
+#: AdvertController.php:148
 msgid "Do you really want to remove this advert?"
 msgstr ""
 
-#: ArticleController.php:235
+#: ArticleController.php:227
 msgid "Do you really want to remove this article?"
 msgstr ""
 
-#: BrandController.php:132
+#: BrandController.php:130
 msgid "Do you really want to remove this brand? If it is used anywhere it will be unset."
 msgstr ""
 
-#: CustomerController.php:215
+#: CustomerController.php:200
 msgid "Do you really want to remove this customer?"
 msgstr ""
 
@@ -1371,7 +1371,7 @@ msgstr ""
 msgid "Do you really want to remove this flag?"
 msgstr ""
 
-#: SliderController.php:81
+#: SliderController.php:74
 msgid "Do you really want to remove this page?"
 msgstr ""
 
@@ -1383,11 +1383,11 @@ msgstr ""
 msgid "Do you really want to remove this payment?"
 msgstr ""
 
-#: ProductController.php:379
+#: ProductController.php:377
 msgid "Do you really want to remove this product?"
 msgstr ""
 
-#: ScriptController.php:133
+#: ScriptController.php:126
 msgid "Do you really want to remove this script?"
 msgstr ""
 
@@ -1395,7 +1395,7 @@ msgstr ""
 msgid "Do you really want to remove this shipping?"
 msgstr ""
 
-#: UnitController.php:96
+#: UnitController.php:88
 msgid "Do you really want to remove unit \"%name%\" permanently? It is not used anywhere."
 msgstr ""
 
@@ -1404,7 +1404,7 @@ msgid "Do you want to receive the newest information about our shop? Subscribe t
 msgstr ""
 
 #: AdvancedSearchOrderFilterTranslation.php:14
-#: OrderController.php:241
+#: OrderController.php:229
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:15
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/edit.html.twig:47
@@ -1434,7 +1434,7 @@ msgstr ""
 msgid "Domain 2"
 msgstr ""
 
-#: DomainController.php:134
+#: DomainController.php:128
 msgid "Domain <strong>{{ name }}</strong> modified"
 msgstr ""
 
@@ -1462,10 +1462,10 @@ msgstr ""
 msgid "Drag file here"
 msgstr ""
 
-#: AdministratorController.php:67
-#: CustomerController.php:204
-#: MailController.php:116
-#: MailController.php:128
+#: AdministratorController.php:68
+#: CustomerController.php:189
+#: MailController.php:109
+#: MailController.php:121
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:32
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:87
@@ -1497,7 +1497,7 @@ msgstr ""
 msgid "E-mail settings"
 msgstr ""
 
-#: MailController.php:191
+#: MailController.php:180
 msgid "E-mail settings modified."
 msgstr ""
 
@@ -1514,16 +1514,16 @@ msgstr ""
 msgid "E-mail templates settings"
 msgstr ""
 
-#: MailController.php:151
+#: MailController.php:144
 msgid "E-mail templates settings modified"
 msgstr ""
 
-#: MailController.php:90
-#: MailController.php:117
+#: MailController.php:83
+#: MailController.php:110
 msgid "E-shop URL address"
 msgstr ""
 
-#: ShopInfoController.php:63
+#: ShopInfoController.php:55
 msgid "E-shop attributes settings modified"
 msgstr ""
 
@@ -1548,7 +1548,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:19
+#: SimpleBreadcrumbGenerator.php:45
 msgid "Edit data"
 msgstr ""
 
@@ -1558,7 +1558,7 @@ msgstr ""
 msgid "Editing administrator"
 msgstr ""
 
-#: AdministratorController.php:137
+#: AdministratorController.php:138
 msgid "Editing administrator - %name%"
 msgstr ""
 
@@ -1568,7 +1568,7 @@ msgstr ""
 msgid "Editing advertising"
 msgstr ""
 
-#: AdvertController.php:110
+#: AdvertController.php:104
 msgid "Editing advertising - %name%"
 msgstr ""
 
@@ -1578,7 +1578,7 @@ msgstr ""
 msgid "Editing article"
 msgstr ""
 
-#: ArticleController.php:128
+#: ArticleController.php:119
 msgid "Editing article - %name%"
 msgstr ""
 
@@ -1592,7 +1592,7 @@ msgstr ""
 msgid "Editing brand"
 msgstr ""
 
-#: BrandController.php:102
+#: BrandController.php:100
 msgid "Editing brand - %name%"
 msgstr ""
 
@@ -1602,7 +1602,7 @@ msgstr ""
 msgid "Editing category"
 msgstr ""
 
-#: CategoryController.php:99
+#: CategoryController.php:92
 msgid "Editing category - %name%"
 msgstr ""
 
@@ -1612,7 +1612,7 @@ msgstr ""
 msgid "Editing customer"
 msgstr ""
 
-#: CustomerController.php:163
+#: CustomerController.php:150
 msgid "Editing customer - %name%"
 msgstr ""
 
@@ -1624,7 +1624,7 @@ msgstr ""
 msgid "Editing order"
 msgstr ""
 
-#: OrderController.php:152
+#: OrderController.php:144
 msgid "Editing order - Nr. %number%"
 msgstr ""
 
@@ -1642,7 +1642,7 @@ msgstr ""
 msgid "Editing payment"
 msgstr ""
 
-#: PaymentController.php:141
+#: PaymentController.php:130
 msgid "Editing payment - %name%"
 msgstr ""
 
@@ -1652,7 +1652,7 @@ msgstr ""
 msgid "Editing product"
 msgstr ""
 
-#: ProductController.php:167
+#: ProductController.php:166
 msgid "Editing product - %name%"
 msgstr ""
 
@@ -1668,7 +1668,7 @@ msgstr ""
 msgid "Editing shipping"
 msgstr ""
 
-#: TransportController.php:142
+#: TransportController.php:130
 msgid "Editing shipping - %name%"
 msgstr ""
 
@@ -1677,7 +1677,7 @@ msgstr ""
 msgid "Editing slider page"
 msgstr ""
 
-#: SliderController.php:163
+#: SliderController.php:158
 msgid "Editing slider page - %name%"
 msgstr ""
 
@@ -1709,7 +1709,7 @@ msgstr ""
 msgid "Enter e-mail"
 msgstr ""
 
-#: OrderController.php:141
+#: OrderController.php:133
 msgid "Entered customer not found, please check entered data."
 msgstr ""
 
@@ -1744,7 +1744,7 @@ msgstr ""
 msgid "Error occurred"
 msgstr ""
 
-#: ContactFormController.php:55
+#: ContactFormController.php:45
 msgid "Error occurred when sending e-mail."
 msgstr ""
 
@@ -1765,7 +1765,7 @@ msgstr ""
 msgid "Exchange rate"
 msgstr ""
 
-#: ProductFormType.php:184
+#: ProductFormType.php:181
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:104
 msgid "Exclude from sale"
 msgstr ""
@@ -1774,7 +1774,7 @@ msgstr ""
 msgid "Excluded from sale"
 msgstr ""
 
-#: InputPriceTypeFormType.php:58
+#: InputPriceTypeFormType.php:24
 msgid "Excluding VAT"
 msgstr ""
 
@@ -1814,15 +1814,15 @@ msgstr ""
 msgid "File is too big"
 msgstr ""
 
-#: DomainController.php:140
+#: DomainController.php:134
 msgid "File type not supported."
 msgstr ""
 
-#: FileUploadType.php:146
+#: FileUploadType.php:144
 msgid "File upload failed"
 msgstr ""
 
-#: DomainController.php:142
+#: DomainController.php:136
 msgid "File upload failed, try again please."
 msgstr ""
 
@@ -1843,7 +1843,7 @@ msgstr ""
 msgid "Finish the order"
 msgstr ""
 
-#: MailController.php:114
+#: MailController.php:107
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:29
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:87
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:85
@@ -1887,15 +1887,15 @@ msgstr ""
 msgid "Following expressions are allowed in whitelist: %whitelist%."
 msgstr ""
 
-#: VatController.php:72
+#: VatController.php:71
 msgid "For deleting rate \"%name%\" you have to choose other one to be set everywhere where the existing one is used. After changing the VAT rate products prices will be recalculated - base price with VAT will remain same. Which unit you want to set instead?"
 msgstr ""
 
-#: UnitController.php:75
+#: UnitController.php:74
 msgid "For deleting unit \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which unit you want to set instead?"
 msgstr ""
 
-#: PricingGroupController.php:116
+#: PricingGroupController.php:121
 msgid "For removing pricing group \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
 msgstr ""
 
@@ -1908,7 +1908,7 @@ msgstr ""
 msgid "Forgot your password?"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:27
+#: SimpleBreadcrumbGenerator.php:47
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/resetPassword.html.twig:8
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/resetPassword.html.twig:12
 msgid "Forgotten password"
@@ -1942,7 +1942,7 @@ msgstr ""
 msgid "Free shipping and payment"
 msgstr ""
 
-#: TransportAndPaymentController.php:80
+#: TransportAndPaymentController.php:77
 msgid "Free shipping and payment settings saved"
 msgstr ""
 
@@ -1995,8 +1995,8 @@ msgstr ""
 msgid "Front-end: Thumbnail of images under the main picture in product detail"
 msgstr ""
 
-#: AdministratorController.php:66
-#: CustomerController.php:201
+#: AdministratorController.php:67
+#: CustomerController.php:186
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:6
 #: src/Shopsys/ShopBundle/Resources/views/Mail/ContactForm/mail.html.twig:1
@@ -2019,7 +2019,7 @@ msgstr ""
 msgid "Go to cart"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:302
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:301
 msgid "Go to page:"
 msgstr ""
 
@@ -2033,11 +2033,11 @@ msgstr ""
 msgid "Google analytics"
 msgstr ""
 
-#: ScriptController.php:184
+#: ScriptController.php:176
 msgid "Google script code set"
 msgstr ""
 
-#: AdvertFormType.php:148
+#: AdvertFormType.php:55
 msgid "HTML code"
 msgstr ""
 
@@ -2089,7 +2089,7 @@ msgstr ""
 msgid "Hidden copy"
 msgstr ""
 
-#: ProductMassActionFormType.php:50
+#: ProductMassActionFormType.php:43
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:23
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:26
 msgid "Hide"
@@ -2099,12 +2099,12 @@ msgstr ""
 msgid "Hide advertisement"
 msgstr ""
 
-#: ProductFormType.php:183
+#: ProductFormType.php:180
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:96
 msgid "Hide product"
 msgstr ""
 
-#: ProductMassActionFormType.php:44
+#: ProductMassActionFormType.php:37
 msgid "Hiding product"
 msgstr ""
 
@@ -2204,7 +2204,7 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
-#: InputPriceTypeFormType.php:59
+#: InputPriceTypeFormType.php:25
 msgid "Including VAT"
 msgstr ""
 
@@ -2325,7 +2325,7 @@ msgstr ""
 msgid "Invalid login"
 msgstr ""
 
-#: VatController.php:167
+#: VatController.php:160
 msgid "Invalid rounding settings"
 msgstr ""
 
@@ -2370,7 +2370,7 @@ msgstr ""
 msgid "Items"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:291
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:290
 msgid "Items per page:"
 msgstr ""
 
@@ -2398,7 +2398,7 @@ msgstr ""
 msgid "Last login"
 msgstr ""
 
-#: CustomerController.php:209
+#: CustomerController.php:194
 msgid "Last order"
 msgstr ""
 
@@ -2406,17 +2406,17 @@ msgstr ""
 msgid "Light button"
 msgstr ""
 
-#: SliderController.php:78
+#: SliderController.php:71
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:28
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:25
 msgid "Link"
 msgstr ""
 
-#: CustomerPasswordController.php:54
+#: CustomerPasswordController.php:53
 msgid "Link to password reset sent to e-mail <strong>{{ email }}</strong>."
 msgstr ""
 
-#: MailController.php:118
+#: MailController.php:111
 msgid "Link to the log in page"
 msgstr ""
 
@@ -2424,7 +2424,7 @@ msgstr ""
 msgid "Link to the overview of brands"
 msgstr ""
 
-#: MailController.php:99
+#: MailController.php:92
 msgid "List of products in order (name, quantity, price per unit including VAT, total price per item including VAT)"
 msgstr ""
 
@@ -2479,7 +2479,7 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-#: ScriptController.php:130
+#: ScriptController.php:123
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/new.html.twig:7
 msgid "Location"
 msgstr ""
@@ -2496,7 +2496,7 @@ msgstr ""
 msgid "Log in as user"
 msgstr ""
 
-#: LoginController.php:90
+#: LoginController.php:89
 msgid "Log in failed."
 msgstr ""
 
@@ -2510,7 +2510,7 @@ msgstr ""
 msgid "Logic of creating the structure is based on the graphics and the fact that the structure should be responsive and there is a possibility of putting a lot of different things in a row"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:36
+#: SimpleBreadcrumbGenerator.php:50
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Login/loginFailed.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Login/loginForm.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:8
@@ -2572,7 +2572,7 @@ msgstr ""
 msgid "Make modification"
 msgstr ""
 
-#: ProductFormType.php:254
+#: ProductFormType.php:257
 msgid "Manually"
 msgstr ""
 
@@ -2638,7 +2638,7 @@ msgstr ""
 msgid "Modules"
 msgstr ""
 
-#: SuperadminController.php:173
+#: SuperadminController.php:170
 msgid "Modules configuration modified"
 msgstr ""
 
@@ -2651,7 +2651,7 @@ msgid "More information"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:349
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:716
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:718
 msgid "Move"
 msgstr ""
 
@@ -2666,10 +2666,10 @@ msgstr ""
 msgid "My orders"
 msgstr ""
 
-#: AdvertController.php:147
-#: ArticleController.php:272
+#: AdvertController.php:141
+#: ArticleController.php:264
 #: AvailabilityGridFactory.php:55
-#: BrandController.php:127
+#: BrandController.php:125
 #: CountryGridFactory.php:54
 #: CurrencyGridFactory.php:56
 #: FlagGridFactory.php:55
@@ -2677,9 +2677,9 @@ msgstr ""
 #: ParameterGridFactory.php:70
 #: PaymentGridFactory.php:80
 #: PricingGroupGridFactory.php:54
-#: ProductController.php:371
-#: ProductPickerController.php:140
-#: SliderController.php:77
+#: ProductController.php:369
+#: ProductPickerController.php:139
+#: SliderController.php:70
 #: TransportGridFactory.php:80
 #: UnitGridFactory.php:55
 #: VatGridFactory.php:68
@@ -2765,7 +2765,7 @@ msgstr ""
 msgid "New page"
 msgstr ""
 
-#: MailController.php:129
+#: MailController.php:122
 msgid "New password settings URL address"
 msgstr ""
 
@@ -2792,14 +2792,16 @@ msgstr ""
 msgid "New slider page"
 msgstr ""
 
-#: YesNoType.php:45
+#: YesNoType.php:19
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/listGrid.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/directDelete.html.twig:10
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:45
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/visibilityItems.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ProductPicker/listGrid.html.twig:19
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:336
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:343
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:335
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:342
+#: window.js:55
+#: window.js:68
 msgid "No"
 msgstr ""
 
@@ -2920,7 +2922,7 @@ msgstr ""
 msgid "Not possible to assign product to itself"
 msgstr ""
 
-#: ProductController.php:340
+#: ProductController.php:338
 msgid "Not possible to create variations of products that are already variant or main variant."
 msgstr ""
 
@@ -2936,7 +2938,7 @@ msgstr ""
 msgid "Not using ID and !important for CSS"
 msgstr ""
 
-#: MailController.php:98
+#: MailController.php:91
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:146
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:59
 msgid "Note"
@@ -2947,7 +2949,7 @@ msgstr ""
 msgid "Nothing to choose from"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:658
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:660
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormTheme.html.twig:32
 #: src/Shopsys/ShopBundle/Resources/views/Front/Form/theme.html.twig:203
 msgid "Nothing to choose from."
@@ -2961,11 +2963,11 @@ msgstr ""
 msgid "Number of items"
 msgstr ""
 
-#: CustomerController.php:206
+#: CustomerController.php:191
 msgid "Number of orders"
 msgstr ""
 
-#: ModuleList.php:20
+#: ModuleList.php:40
 msgid "Number of products in filter"
 msgstr ""
 
@@ -2986,7 +2988,7 @@ msgstr ""
 msgid "Online shop"
 msgstr ""
 
-#: ProductMassActionFormType.php:31
+#: ProductMassActionFormType.php:24
 msgid "Only checked products"
 msgstr ""
 
@@ -2995,7 +2997,7 @@ msgstr ""
 msgid "Only variables for order number and date and time of order creation can be used in the object."
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:83
+#: ErrorPageBreadcrumbGenerator.php:21
 msgid "Oops! Error occurred"
 msgstr ""
 
@@ -3021,7 +3023,7 @@ msgstr ""
 msgid "Order - personal data"
 msgstr ""
 
-#: OrderController.php:237
+#: OrderController.php:225
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:5
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:6
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:16
@@ -3033,11 +3035,11 @@ msgstr ""
 msgid "Order Nr. %orderNumber%"
 msgstr ""
 
-#: OrderController.php:132
+#: OrderController.php:124
 msgid "Order Nr. <strong><a href=\"{{ url }}\">{{ number }}</a></strong> modified"
 msgstr ""
 
-#: OrderController.php:288
+#: OrderController.php:276
 msgid "Order Nr. <strong>{{ number }}</strong> deleted"
 msgstr ""
 
@@ -3070,11 +3072,12 @@ msgstr ""
 msgid "Order confirmation page content modified"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:32
+#: SimpleBreadcrumbGenerator.php:48
+#: SimpleBreadcrumbGenerator.php:49
 msgid "Order detail"
 msgstr ""
 
-#: MailController.php:102
+#: MailController.php:95
 msgid "Order detail URL address"
 msgstr ""
 
@@ -3090,13 +3093,13 @@ msgstr ""
 msgid "Order must contain at least one item"
 msgstr ""
 
-#: CustomerController.php:149
+#: CustomerController.php:140
 msgid "Order not found"
 msgstr ""
 
 #: AdvancedSearchOrderFilterTranslation.php:11
-#: MailController.php:88
-#: ScriptController.php:198
+#: MailController.php:81
+#: ScriptController.php:190
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:9
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:63
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:40
@@ -3127,7 +3130,7 @@ msgstr ""
 msgid "Order statuses overview"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:23
+#: SimpleBreadcrumbGenerator.php:46
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 msgid "Orders"
 msgstr ""
@@ -3138,7 +3141,7 @@ msgstr ""
 msgid "Orders overview"
 msgstr ""
 
-#: CustomerController.php:207
+#: CustomerController.php:192
 msgid "Orders value"
 msgstr ""
 
@@ -3146,11 +3149,11 @@ msgstr ""
 msgid "Our customers who bought this bought also"
 msgstr ""
 
-#: SliderController.php:185
+#: SliderController.php:180
 msgid "Page <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:85
+#: ErrorPageBreadcrumbGenerator.php:21
 msgid "Page not found"
 msgstr ""
 
@@ -3173,7 +3176,7 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:229
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:118
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:110
 msgid "Parameters"
 msgstr ""
 
@@ -3216,7 +3219,7 @@ msgstr ""
 msgid "Password must be at least six characters and can't be the same as login name."
 msgstr ""
 
-#: CustomerPasswordController.php:113
+#: CustomerPasswordController.php:111
 msgid "Password successfully changed"
 msgstr ""
 
@@ -3228,19 +3231,19 @@ msgstr ""
 msgid "Payment"
 msgstr ""
 
-#: PaymentController.php:89
+#: PaymentController.php:81
 msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: PaymentController.php:128
+#: PaymentController.php:117
 msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: PaymentController.php:163
+#: PaymentController.php:152
 msgid "Payment <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: MailController.php:104
+#: MailController.php:97
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:46
 msgid "Payment instructions"
 msgstr ""
@@ -3296,7 +3299,7 @@ msgstr ""
 msgid "Picture will be deleted after saving."
 msgstr ""
 
-#: AdvertFormType.php:149
+#: AdvertFormType.php:56
 msgid "Picture with link"
 msgstr ""
 
@@ -3312,37 +3315,37 @@ msgstr ""
 msgid "Please check following information:"
 msgstr ""
 
-#: AdministratorController.php:133
-#: AdministratorController.php:201
-#: AdvertController.php:107
-#: AdvertController.php:199
-#: ArticleController.php:125
-#: ArticleController.php:184
-#: BestsellingProductController.php:106
-#: BrandController.php:99
-#: BrandController.php:174
-#: CategoryController.php:96
-#: CategoryController.php:137
-#: CookiesController.php:68
-#: CustomerController.php:92
-#: CustomerController.php:160
-#: CustomerController.php:270
-#: MailController.php:157
-#: OrderController.php:149
-#: OrderController.php:235
-#: PaymentController.php:99
-#: PaymentController.php:138
-#: ProductController.php:163
-#: ProductController.php:213
-#: RegistrationController.php:75
-#: SeoController.php:68
-#: ShopInfoController.php:69
-#: SliderController.php:120
-#: SliderController.php:159
-#: TermsAndConditionsController.php:68
-#: TransportAndPaymentController.php:86
-#: TransportController.php:100
-#: TransportController.php:139
+#: AdministratorController.php:134
+#: AdministratorController.php:200
+#: AdvertController.php:101
+#: AdvertController.php:196
+#: ArticleController.php:116
+#: ArticleController.php:176
+#: BestsellingProductController.php:104
+#: BrandController.php:97
+#: BrandController.php:168
+#: CategoryController.php:89
+#: CategoryController.php:130
+#: CookiesController.php:58
+#: CustomerController.php:83
+#: CustomerController.php:147
+#: CustomerController.php:256
+#: MailController.php:150
+#: OrderController.php:141
+#: OrderController.php:227
+#: PaymentController.php:91
+#: PaymentController.php:127
+#: ProductController.php:162
+#: ProductController.php:212
+#: RegistrationController.php:73
+#: SeoController.php:61
+#: ShopInfoController.php:61
+#: SliderController.php:114
+#: SliderController.php:154
+#: TermsAndConditionsController.php:62
+#: TransportAndPaymentController.php:83
+#: TransportController.php:91
+#: TransportController.php:127
 msgid "Please check the correctness of all data filled."
 msgstr ""
 
@@ -3354,8 +3357,8 @@ msgstr ""
 msgid "Please enter discount code."
 msgstr ""
 
-#: CartController.php:203
-#: CartController.php:262
+#: CartController.php:197
+#: CartController.php:254
 msgid "Please enter valid quantity you want to add to cart."
 msgstr ""
 
@@ -3367,7 +3370,7 @@ msgstr ""
 msgid "Please follow the instructions"
 msgstr ""
 
-#: CartController.php:127
+#: CartController.php:125
 msgid "Please make sure that you entered right quantity of all items in cart."
 msgstr ""
 
@@ -3403,13 +3406,13 @@ msgstr ""
 msgid "Postcode"
 msgstr ""
 
-#: AdvertController.php:148
-#: OrderController.php:236
+#: AdvertController.php:142
+#: OrderController.php:224
 msgid "Preview"
 msgstr ""
 
 #: PaymentGridFactory.php:81
-#: ProductController.php:372
+#: ProductController.php:370
 #: TransportGridFactory.php:81
 msgid "Price"
 msgstr ""
@@ -3453,20 +3456,20 @@ msgstr ""
 msgid "Pricing"
 msgstr ""
 
-#: CustomerController.php:205
+#: CustomerController.php:190
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:19
 msgid "Pricing group"
 msgstr ""
 
-#: PricingGroupController.php:123
+#: PricingGroupController.php:128
 msgid "Pricing group \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
 msgstr ""
 
-#: PricingGroupController.php:82
+#: PricingGroupController.php:89
 msgid "Pricing group <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: PricingGroupController.php:90
+#: PricingGroupController.php:97
 msgid "Pricing group <strong>{{ name }}</strong> deleted and replaced by group <strong>{{ newName }}</strong>."
 msgstr ""
 
@@ -3476,7 +3479,7 @@ msgstr ""
 msgid "Pricing groups"
 msgstr ""
 
-#: SuperadminController.php:101
+#: SuperadminController.php:100
 msgid "Pricing settings modified"
 msgstr ""
 
@@ -3488,11 +3491,11 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: CartController.php:290
+#: CartController.php:282
 msgid "Product <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }}) added to the cart"
 msgstr ""
 
-#: CartController.php:299
+#: CartController.php:291
 msgid "Product <strong>{{ name }}</strong> added to the cart (total amount {{ quantity|formatNumber }} {{ unitName }})"
 msgstr ""
 
@@ -3500,15 +3503,15 @@ msgstr ""
 msgid "Product <strong>{{ name }}</strong> you had in cart is no longer available. Please check your order."
 msgstr ""
 
-#: ProductController.php:204
+#: ProductController.php:203
 msgid "Product <strong>{{ product|productDisplayName }}</strong> created"
 msgstr ""
 
-#: ProductController.php:290
+#: ProductController.php:288
 msgid "Product <strong>{{ product|productDisplayName }}</strong> deleted"
 msgstr ""
 
-#: ProductController.php:154
+#: ProductController.php:153
 msgid "Product <strong>{{ product|productDisplayName }}</strong> modified"
 msgstr ""
 
@@ -3569,8 +3572,8 @@ msgstr ""
 msgid "Product saved in order"
 msgstr ""
 
-#: TopCategoryController.php:58
-#: TopProductController.php:58
+#: TopCategoryController.php:53
+#: TopProductController.php:50
 msgid "Product settings on the main page successfully changed"
 msgstr ""
 
@@ -3578,7 +3581,7 @@ msgstr ""
 msgid "Product you had in cart is no longer in available. Please check your order."
 msgstr ""
 
-#: CartController.php:325
+#: CartController.php:317
 msgid "Product {{ name }} removed from cart"
 msgstr ""
 
@@ -3635,7 +3638,7 @@ msgstr ""
 msgid "Registered customers"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:44
+#: SimpleBreadcrumbGenerator.php:52
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:8
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:105
@@ -3703,7 +3706,7 @@ msgstr ""
 msgid "SEO attributes settings"
 msgstr ""
 
-#: SeoController.php:62
+#: SeoController.php:55
 msgid "SEO attributes settings modified"
 msgstr ""
 
@@ -3721,7 +3724,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: FormDetailExtension.php:83
+#: FormDetailExtension.php:73
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Availability/setting.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Cookies/setting.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Currency/currencySettings.html.twig:14
@@ -3760,19 +3763,19 @@ msgstr ""
 msgid "Schema"
 msgstr ""
 
-#: ScriptController.php:64
+#: ScriptController.php:60
 msgid "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
 msgstr ""
 
-#: ScriptController.php:104
+#: ScriptController.php:97
 msgid "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified"
 msgstr ""
 
-#: ScriptController.php:157
+#: ScriptController.php:150
 msgid "Script <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: ScriptController.php:129
+#: ScriptController.php:122
 msgid "Script name"
 msgstr ""
 
@@ -3786,7 +3789,7 @@ msgstr ""
 msgid "Scripts overview"
 msgstr ""
 
-#: FrontBreadcrumbGenerator.php:40
+#: SimpleBreadcrumbGenerator.php:51
 msgid "Search [noun]"
 msgstr "Search"
 
@@ -3841,39 +3844,39 @@ msgstr ""
 msgid "Select new value"
 msgstr ""
 
-#: VatController.php:95
+#: VatController.php:93
 msgid "Selected VAT doesn't exist"
 msgstr ""
 
-#: VatController.php:132
+#: VatController.php:130
 msgid "Selected VAT doesn't exist."
 msgstr ""
 
-#: AdministratorController.php:236
+#: AdministratorController.php:235
 msgid "Selected administrated doesn't exist."
 msgstr ""
 
-#: AdvertController.php:226
+#: AdvertController.php:223
 msgid "Selected advertisement doesn't exist."
 msgstr ""
 
-#: ArticleController.php:211
+#: ArticleController.php:203
 msgid "Selected article doesn't exist."
 msgstr ""
 
-#: AvailabilityController.php:134
+#: AvailabilityController.php:132
 msgid "Selected availability doesn't exist"
 msgstr ""
 
-#: AvailabilityController.php:88
+#: AvailabilityController.php:87
 msgid "Selected availatibily doesn't exist."
 msgstr ""
 
-#: BrandController.php:202
+#: BrandController.php:196
 msgid "Selected brand doesn't exist."
 msgstr ""
 
-#: CategoryController.php:222
+#: CategoryController.php:215
 msgid "Selected category doesn't exist."
 msgstr ""
 
@@ -3882,7 +3885,7 @@ msgstr ""
 msgid "Selected currency doesn't exist."
 msgstr ""
 
-#: CustomerController.php:297
+#: CustomerController.php:283
 msgid "Selected customer doesn't exist."
 msgstr ""
 
@@ -3894,16 +3897,16 @@ msgstr ""
 msgid "Selected flag doesn't exist."
 msgstr ""
 
-#: OrderController.php:294
+#: OrderController.php:282
 msgid "Selected order doesn't exist."
 msgstr ""
 
-#: OrderStatusController.php:93
-#: OrderStatusController.php:131
+#: OrderStatusController.php:92
+#: OrderStatusController.php:129
 msgid "Selected order status doesn't exist."
 msgstr ""
 
-#: SliderController.php:191
+#: SliderController.php:186
 msgid "Selected page doesn't exist."
 msgstr ""
 
@@ -3911,37 +3914,37 @@ msgstr ""
 msgid "Selected parameter doesn't exist."
 msgstr ""
 
-#: PaymentController.php:169
+#: PaymentController.php:158
 msgid "Selected payment doesn't exist."
 msgstr ""
 
-#: PricingGroupController.php:98
-#: PricingGroupController.php:144
+#: PricingGroupController.php:105
+#: PricingGroupController.php:149
 msgid "Selected pricing group doesn't exist."
 msgstr ""
 
-#: ProductController.php:296
+#: ProductController.php:294
 msgid "Selected product doesn't exist."
 msgstr ""
 
-#: CartController.php:201
-#: CartController.php:260
+#: CartController.php:195
+#: CartController.php:252
 msgid "Selected product no longer available or doesn't exist."
 msgstr ""
 
-#: ScriptController.php:163
+#: ScriptController.php:156
 msgid "Selected script doesn't exist."
 msgstr ""
 
-#: TransportController.php:170
+#: TransportController.php:158
 msgid "Selected shipping doesn't exist."
 msgstr ""
 
-#: UnitController.php:104
+#: UnitController.php:96
 msgid "Selected unit doesn't exist"
 msgstr ""
 
-#: UnitController.php:141
+#: UnitController.php:133
 msgid "Selected unit doesn't exist."
 msgstr ""
 
@@ -3981,11 +3984,11 @@ msgstr ""
 msgid "Servis Heuréka - Approved by customers doesn't support the language of this domain."
 msgstr ""
 
-#: ProductMassActionFormType.php:38
+#: ProductMassActionFormType.php:31
 msgid "Set"
 msgstr ""
 
-#: ProductFormType.php:182
+#: ProductFormType.php:179
 msgid "Set alternative availability"
 msgstr ""
 
@@ -4015,7 +4018,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: HeurekaController.php:69
+#: HeurekaController.php:67
 msgid "Settings modified."
 msgstr ""
 
@@ -4027,15 +4030,15 @@ msgstr ""
 msgid "Shipping"
 msgstr ""
 
-#: TransportController.php:90
+#: TransportController.php:81
 msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: TransportController.php:129
+#: TransportController.php:117
 msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modified"
 msgstr ""
 
-#: TransportController.php:164
+#: TransportController.php:152
 msgid "Shipping <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -4066,7 +4069,7 @@ msgstr ""
 msgid "Shipping and payments"
 msgstr ""
 
-#: MailController.php:103
+#: MailController.php:96
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:40
 msgid "Shipping instructions"
 msgstr ""
@@ -4114,11 +4117,11 @@ msgstr ""
 msgid "Slider page"
 msgstr ""
 
-#: SliderController.php:110
+#: SliderController.php:104
 msgid "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: SliderController.php:148
+#: SliderController.php:143
 msgid "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
@@ -4165,7 +4168,7 @@ msgstr ""
 msgid "Static texts translations"
 msgstr ""
 
-#: OrderController.php:243
+#: OrderController.php:231
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:41
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Form/fileuploadFields.html.twig:51
@@ -4181,15 +4184,15 @@ msgstr ""
 msgid "Status of orders"
 msgstr ""
 
-#: OrderStatusController.php:70
+#: OrderStatusController.php:69
 msgid "Status of orders <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: OrderStatusController.php:87
+#: OrderStatusController.php:86
 msgid "Status of orders <strong>{{ name }}</strong> reserved and can't be deleted"
 msgstr ""
 
-#: OrderStatusController.php:78
+#: OrderStatusController.php:77
 msgid "Status of orders <strong>{{ oldName }}</strong> replaced by status <strong>{{ newName }}</strong> and deleted."
 msgstr ""
 
@@ -4248,7 +4251,7 @@ msgstr ""
 msgid "Superadmin - URL addresses"
 msgstr ""
 
-#: MailController.php:115
+#: MailController.php:108
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:30
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:88
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:86
@@ -4417,7 +4420,7 @@ msgstr ""
 msgid "Technical parameters"
 msgstr ""
 
-#: CustomerController.php:203
+#: CustomerController.php:188
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:31
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:89
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:88
@@ -4447,7 +4450,7 @@ msgstr ""
 msgid "Terms and conditions settings"
 msgstr ""
 
-#: TermsAndConditionsController.php:63
+#: TermsAndConditionsController.php:57
 msgid "Terms and conditions settings modified."
 msgstr ""
 
@@ -4484,7 +4487,7 @@ msgstr ""
 msgid "Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
 msgstr ""
 
-#: ContactFormController.php:53
+#: ContactFormController.php:43
 msgid "Thank you, your message has been sent."
 msgstr ""
 
@@ -4496,16 +4499,16 @@ msgstr ""
 msgid "The change will be applied to products in 10 minutes"
 msgstr ""
 
-#: CustomerPasswordController.php:83
-#: CustomerPasswordController.php:110
+#: CustomerPasswordController.php:82
+#: CustomerPasswordController.php:108
 msgid "The link to change your password expired."
 msgstr ""
 
-#: OrderController.php:318
+#: OrderController.php:310
 msgid "The price of payment {{ transportName }} changed during ordering process. Check your order, please."
 msgstr ""
 
-#: OrderController.php:310
+#: OrderController.php:302
 msgid "The price of shipping {{ transportName }} changed during ordering process. Check your order, please."
 msgstr ""
 
@@ -4521,9 +4524,9 @@ msgstr ""
 msgid "There are several types of tables, but it is not necessary to write down those which are generated by system itself and nobody intervenes in them. That's why there are only those that you will probably want to use."
 msgstr ""
 
-#: CustomerController.php:155
-#: CustomerController.php:264
-#: RegistrationController.php:70
+#: CustomerController.php:142
+#: CustomerController.php:250
+#: RegistrationController.php:68
 msgid "There is already a customer with this e-mail in the database"
 msgstr ""
 
@@ -4604,7 +4607,7 @@ msgstr ""
 msgid "Title component with possible button on the right, all separated by border from below"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig:28
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig:25
 msgid "To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one."
 msgstr ""
 
@@ -4612,11 +4615,11 @@ msgstr ""
 msgid "To display same as with parameters, it is necessary to add separator with icon and make sure to remove paddings around the separator. This raises more classes in almost all surrounding TD/TH. You can also simply add and icon with an action at the end of the line."
 msgstr ""
 
-#: VatSettingsFormType.php:87
+#: VatSettingsFormType.php:47
 msgid "To fifty hundredths (halfs)"
 msgstr ""
 
-#: VatSettingsFormType.php:86
+#: VatSettingsFormType.php:46
 msgid "To hundredths (cents)"
 msgstr ""
 
@@ -4624,7 +4627,7 @@ msgstr ""
 msgid "To prevent the possibility of account theft, the change of the e-mail address must be dealt with individually. If your e-mail address has changed, please contact us."
 msgstr ""
 
-#: VatSettingsFormType.php:88
+#: VatSettingsFormType.php:48
 msgid "To whole numbers"
 msgstr ""
 
@@ -4651,15 +4654,15 @@ msgstr ""
 msgid "Total item price including VAT"
 msgstr ""
 
-#: MailController.php:93
+#: MailController.php:86
 msgid "Total order price (including VAT)"
 msgstr ""
 
-#: ScriptController.php:199
+#: ScriptController.php:191
 msgid "Total order price including VAT"
 msgstr ""
 
-#: OrderController.php:244
+#: OrderController.php:232
 msgid "Total price"
 msgstr ""
 
@@ -4733,29 +4736,29 @@ msgstr ""
 msgid "Unable to add product"
 msgstr ""
 
-#: CartController.php:205
-#: CartController.php:264
+#: CartController.php:199
+#: CartController.php:256
 msgid "Unable to add product to cart"
 msgstr ""
 
-#: CartController.php:213
-#: CartController.php:272
+#: CartController.php:207
+#: CartController.php:264
 msgid "Unable to add product to cart:<br/><ul><li>{{ errors|raw }}</li></ul>"
 msgstr ""
 
-#: CartController.php:329
+#: CartController.php:321
 msgid "Unable to remove item from cart. The item is probably already removed."
 msgstr ""
 
-#: CartController.php:333
+#: CartController.php:325
 msgid "Unable to remove item from cart. The link for removing it probably expired, try it again."
 msgstr ""
 
-#: OrderController.php:224
+#: OrderController.php:216
 msgid "Unable to send some e-mails, please contact us for order verification."
 msgstr ""
 
-#: OrderController.php:144
+#: OrderController.php:136
 msgid "Unable to send updating e-mail"
 msgstr ""
 
@@ -4768,15 +4771,15 @@ msgstr ""
 msgid "Unit"
 msgstr ""
 
-#: UnitController.php:69
+#: UnitController.php:68
 msgid "Unit \"%name%\" set as default. For deleting existing unit you have to choose new default unit. Which unit you want to set instead?"
 msgstr ""
 
-#: UnitController.php:125
+#: UnitController.php:117
 msgid "Unit <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: UnitController.php:133
+#: UnitController.php:125
 msgid "Unit <strong>{{ name }}</strong> deleted and replaced by unit <strong>{{ newName }}</strong>"
 msgstr ""
 
@@ -4846,7 +4849,7 @@ msgstr ""
 msgid "Used: 45 characters. Recommended max. 155"
 msgstr ""
 
-#: CustomerController.php:176
+#: CustomerController.php:167
 msgid "User not found."
 msgstr ""
 
@@ -4860,11 +4863,11 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
-#: VatController.php:116
+#: VatController.php:114
 msgid "VAT <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: VatController.php:124
+#: VatController.php:122
 msgid "VAT <strong>{{ name }}</strong> deleted and replaced by <strong>{{ newName }}</strong>."
 msgstr ""
 
@@ -4896,7 +4899,7 @@ msgstr ""
 msgid "VAT rates"
 msgstr ""
 
-#: VatController.php:163
+#: VatController.php:156
 msgid "VAT settings modified"
 msgstr ""
 
@@ -4909,7 +4912,7 @@ msgstr ""
 msgid "Variant"
 msgstr ""
 
-#: ProductController.php:331
+#: ProductController.php:329
 msgid "Variant <strong>{{ productVariant|productDisplayName }}</strong> successfully created."
 msgstr ""
 
@@ -4934,13 +4937,13 @@ msgstr ""
 msgid "View more"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:162
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:152
 msgid "View results"
 msgstr ""
 
-#: AdvertController.php:146
-#: ProductController.php:373
-#: ProductPickerController.php:142
+#: AdvertController.php:140
+#: ProductController.php:371
+#: ProductPickerController.php:141
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:15
 msgid "Visibility"
 msgstr ""
@@ -4965,8 +4968,8 @@ msgstr ""
 msgid "Warning message - block with icon"
 msgstr ""
 
-#: AdministratorController.php:117
-#: AdministratorController.php:185
+#: AdministratorController.php:118
+#: AdministratorController.php:184
 msgid "We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please."
 msgstr ""
 
@@ -5039,7 +5042,7 @@ msgstr ""
 msgid "XML availability feeds"
 msgstr ""
 
-#: YesNoType.php:44
+#: YesNoType.php:18
 #: grid.inlineEdit.js:36
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/listGrid.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/list.html.twig:38
@@ -5047,9 +5050,10 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:43
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/visibilityItems.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ProductPicker/listGrid.html.twig:19
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:209
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:334
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:343
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:333
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:342
+#: window.js:54
+#: window.js:67
 msgid "Yes"
 msgstr ""
 
@@ -5083,7 +5087,7 @@ msgstr ""
 msgid "You can upload following formats: PNG, JPG, GIF"
 msgstr ""
 
-#: AdministratorController.php:227
+#: AdministratorController.php:226
 msgid "You can't delete yourself."
 msgstr ""
 
@@ -5095,7 +5099,7 @@ msgstr ""
 msgid "You cannot choose product that is variant"
 msgstr ""
 
-#: RegistrationController.php:66
+#: RegistrationController.php:64
 msgid "You have been successfully registered."
 msgstr ""
 
@@ -5107,9 +5111,9 @@ msgstr ""
 msgid "You have made changes, don't forget to save them!"
 msgstr ""
 
-#: CustomerController.php:68
-#: CustomerController.php:103
-#: CustomerController.php:140
+#: CustomerController.php:60
+#: CustomerController.php:94
+#: CustomerController.php:131
 msgid "You have to be logged in to enter this page"
 msgstr ""
 
@@ -5137,7 +5141,7 @@ msgstr ""
 msgid "Your cart is unfortunately empty. To create order, you have to choose </a> some product <a href=\"%url%\">first"
 msgstr ""
 
-#: CustomerController.php:87
+#: CustomerController.php:78
 msgid "Your data had been successfully updated"
 msgstr ""
 
@@ -5149,7 +5153,8 @@ msgstr ""
 msgid "Zboží.cz"
 msgstr ""
 
-#: AdvertPositionList.php:21
+#: AdvertController.php:153
+#: AdvertFormType.php:68
 msgid "above footer"
 msgstr ""
 
@@ -5271,7 +5276,7 @@ msgstr ""
 msgid "flags"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:221
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:220
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Paginator/paginator.html.twig:9
 msgid "from"
 msgstr ""
@@ -5305,19 +5310,21 @@ msgstr ""
 msgid "higher than"
 msgstr ""
 
-#: AdvertPositionList.php:22
+#: AdvertController.php:154
+#: AdvertFormType.php:69
 msgid "in category (above the category name)"
 msgstr ""
 
-#: ArticlePlacementList.php:20
+#: ArticleFormType.php:76
 msgid "in footer"
 msgstr ""
 
-#: AdvertPositionList.php:23
+#: AdvertController.php:155
+#: AdvertFormType.php:70
 msgid "in left panel (under category tree)"
 msgstr ""
 
-#: ArticlePlacementList.php:19
+#: ArticleFormType.php:75
 msgid "in upper menu"
 msgstr ""
 
@@ -5383,7 +5390,7 @@ msgstr ""
 msgid "products"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:220
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:219
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Paginator/paginator.html.twig:7
 msgid "records"
 msgstr ""
@@ -5408,7 +5415,8 @@ msgstr ""
 msgid "two underscores \"__\" represent part of the component/element"
 msgstr ""
 
-#: AdvertPositionList.php:20
+#: AdvertController.php:152
+#: AdvertFormType.php:67
 msgid "under heading"
 msgstr ""
 
@@ -5424,7 +5432,7 @@ msgstr ""
 msgid "uses"
 msgstr ""
 
-#: ArticlePlacementList.php:21
+#: ArticleFormType.php:77
 msgid "without positoning"
 msgstr ""
 
