@@ -11,6 +11,9 @@ use ZipArchive;
 
 class ImageDemoCommand extends ContainerAwareCommand
 {
+    const EXIT_CODE_OK = 0;
+    const EXIT_CODE_ERROR = 1;
+
     /**
      * @var \Doctrine\ORM\EntityManager
      */
@@ -45,14 +48,18 @@ class ImageDemoCommand extends ContainerAwareCommand
         $domainImagesPath = $this->getContainer()->getParameter('shopsys.domain_images_dir');
         $unpackedDomainImagesPath = $imagesPath . 'domain';
 
+        $isCompleted = false;
         if ($this->downloadImages($output, $archiveUrl, $localArchiveFilepath)) {
             if ($this->unpackImages($output, $imagesPath, $localArchiveFilepath)) {
                 $this->moveFiles($unpackedDomainImagesPath, $domainImagesPath);
                 $this->loadDbChanges($output, $dqlUrl);
+                $isCompleted = true;
             }
         }
 
         $this->cleanUp($output, [$localArchiveFilepath, $unpackedDomainImagesPath]);
+
+        return $isCompleted ? self::EXIT_CODE_OK : self::EXIT_CODE_ERROR;
     }
 
     /**
