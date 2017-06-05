@@ -25,7 +25,7 @@ class EntityManagerFacade
 
     /**
      * This method should be called instead of EntityManager::clear()
-     * because it clears entites cached in application too.
+     * because it clears entities cached in application too.
      */
     public function clear()
     {
