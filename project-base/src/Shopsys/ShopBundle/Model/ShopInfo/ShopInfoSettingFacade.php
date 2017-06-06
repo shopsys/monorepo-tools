@@ -15,6 +15,9 @@ class ShopInfoSettingFacade
      */
     private $setting;
 
+    /**
+     * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
+     */
     public function __construct(Setting $setting)
     {
         $this->setting = $setting;
@@ -22,7 +25,7 @@ class ShopInfoSettingFacade
 
     /**
      * @param int $domainId
-     * @return string
+     * @return string|null
      */
     public function getPhoneNumber($domainId)
     {
@@ -31,7 +34,7 @@ class ShopInfoSettingFacade
 
     /**
      * @param int $domainId
-     * @return string
+     * @return string|null
      */
     public function getEmail($domainId)
     {
@@ -40,7 +43,7 @@ class ShopInfoSettingFacade
 
     /**
      * @param int $domainId
-     * @return string
+     * @return string|null
      */
     public function getPhoneHours($domainId)
     {
@@ -48,7 +51,7 @@ class ShopInfoSettingFacade
     }
 
     /**
-     * @param string $value
+     * @param string|null $value
      * @param int $domainId
      */
     public function setPhoneNumber($value, $domainId)
@@ -57,7 +60,7 @@ class ShopInfoSettingFacade
     }
 
     /**
-     * @param string $value
+     * @param string|null $value
      * @param int $domainId
      */
     public function setEmail($value, $domainId)
@@ -66,7 +69,7 @@ class ShopInfoSettingFacade
     }
 
     /**
-     * @param string $value
+     * @param string|null $value
      * @param int $domainId
      */
     public function setPhoneHours($value, $domainId)
