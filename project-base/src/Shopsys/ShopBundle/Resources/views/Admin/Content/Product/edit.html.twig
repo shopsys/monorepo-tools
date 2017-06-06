@@ -330,10 +330,10 @@
 {% endblock %}
 
 {% block images %}
-    {% if form.imagePositions|length > 0 %}
+    {% if form.orderedImages|length > 0 %}
         <div class="list-images__wrap">
             <ul class="list-images" id="js-product-images">
-                {% for imageForm in form.imagePositions %}
+                {% for imageForm in form.orderedImages %}
                     {% set image = productDetail.imagesIndexedById[imageForm.vars.value] %}
                     <li class="list-images__item js-product-images-image" data-id="{{ image.id }}">
                         <div class="list-images__item__in">
@@ -355,13 +355,13 @@
                             <span class="list-images__item__overlay js-product-images-image-overlay">{{ 'Picture will be deleted after saving.'|trans }}</span>
                         </div>
                         {# Ignore indices from form definition. Let them reflect new positions. #}
-                        {{ form_widget(imageForm, { full_name: form.imagePositions.vars.full_name ~ '[]'}) }}
+                        {{ form_widget(imageForm, { full_name: form.orderedImages.vars.full_name ~ '[]'}) }}
                     </li>
                 {% endfor %}
             </ul>
         </div>
     {% endif %}
-    {% do form.imagePositions.setRendered %}
+    {% do form.orderedImages.setRendered %}
 {% endblock %}
 
 {% block product_urls %}

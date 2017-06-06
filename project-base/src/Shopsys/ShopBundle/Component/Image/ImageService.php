@@ -110,12 +110,14 @@ class ImageService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Image\Image[] $imagesByPosition
+     * @param \Shopsys\ShopBundle\Component\Image\Image[] $orderedImages
      */
-    public function setImagePositions($imagesByPosition)
+    public function setImagePositionsByOrder($orderedImages)
     {
-        foreach ($imagesByPosition as $position => $image) {
+        $position = 0;
+        foreach ($orderedImages as $image) {
             $image->setPosition($position);
+            $position++;
         }
     }
 }

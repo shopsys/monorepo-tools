@@ -106,12 +106,12 @@ class ImageFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Image\Image[] $imagesByPosition
+     * @param \Shopsys\ShopBundle\Component\Image\Image[] $orderedImages
      */
-    public function saveImagePositions($imagesByPosition)
+    public function saveImageOrdering($orderedImages)
     {
-        $this->imageService->setImagePositions($imagesByPosition);
-        $this->em->flush($imagesByPosition);
+        $this->imageService->setImagePositionsByOrder($orderedImages);
+        $this->em->flush($orderedImages);
     }
 
     /**

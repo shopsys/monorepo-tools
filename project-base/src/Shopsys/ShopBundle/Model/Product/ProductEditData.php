@@ -30,7 +30,7 @@ class ProductEditData
     /**
      * @var \Shopsys\ShopBundle\Component\Image\Image[imageId]
      */
-    public $imagePositions;
+    public $orderedImages;
 
     /**
      * @var string[pricingGroupId]
@@ -97,7 +97,7 @@ class ProductEditData
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
      * @param string[] $imagesToUpload
      * @param \Shopsys\ShopBundle\Component\Image\Image[] $imagesToDelete
-     * @param \Shopsys\ShopBundle\Component\Image\Image[] $imagePositions
+     * @param \Shopsys\ShopBundle\Component\Image\Image[] $orderedImages
      * @param string[] $manualInputPrices
      * @param string[]|null[] $seoTitles
      * @param string[]|null[] $seoMetaDescriptions
@@ -115,7 +115,7 @@ class ProductEditData
         array $parameters = [],
         array $imagesToUpload = [],
         array $imagesToDelete = [],
-        array $imagePositions = [],
+        array $orderedImages = [],
         array $manualInputPrices = [],
         array $seoTitles = [],
         array $seoMetaDescriptions = [],
@@ -136,7 +136,7 @@ class ProductEditData
         $this->parameters = $parameters;
         $this->imagesToUpload = $imagesToUpload;
         $this->imagesToDelete = $imagesToDelete;
-        $this->imagePositions = $imagePositions;
+        $this->orderedImages = $orderedImages;
         $this->manualInputPrices = $manualInputPrices;
         $this->seoTitles = $seoTitles;
         $this->seoMetaDescriptions = $seoMetaDescriptions;

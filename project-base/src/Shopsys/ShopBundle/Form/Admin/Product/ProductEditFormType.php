@@ -133,7 +133,7 @@ class ProductEditFormType extends AbstractType
                 ],
             ])
             ->add(
-                $builder->create('imagePositions', CollectionType::class, [
+                $builder->create('orderedImages', CollectionType::class, [
                     'required' => false,
                     'entry_type' => HiddenType::class,
                 ])->addModelTransformer($this->imagesIdsToImagesTransformer)
