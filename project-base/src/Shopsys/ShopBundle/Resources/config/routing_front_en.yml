@@ -15,7 +15,7 @@ front_customer_order_detail_registered:
   defaults: { _controller: ShopsysShopBundle:Front\Customer:orderDetailRegistered }
 
 front_customer_order_detail_unregistered:
-  path: /detail-objednavky/{urlHash}
+  path: /order-detail/{urlHash}
   defaults: { _controller: ShopsysShopBundle:Front\Customer:orderDetailUnregistered }
 
 front_login:
