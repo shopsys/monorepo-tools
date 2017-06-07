@@ -13,7 +13,9 @@
 {% endblock %}
 
 {% block logo %}
-    <h1 class="logo" href="{{ url('front_homepage') }}" title="{{ 'Online shop'|trans }}"></h1>
+    <h1 class="logo">
+        <img src="{{ asset('assets/frontend/images/logo.png') }}" alt="{{ 'Online shop'|trans }}">
+    </h1>
 {% endblock %}
 
 {% block main_content %}
