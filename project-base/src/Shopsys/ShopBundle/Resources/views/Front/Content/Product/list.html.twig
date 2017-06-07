@@ -20,9 +20,11 @@
         {{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
         <h1>{{ category.name }}</h1>
 
-        <h2>{{ 'List of subcategories'|trans }}</h2>
+        {% if visibleChildren is not empty %}
+            <h2>{{ 'List of subcategories'|trans }}</h2>
 
-        {{ render(controller('ShopsysShopBundle:Front/Category:categoryList', {categories: visibleChildren})) }}
+            {{ render(controller('ShopsysShopBundle:Front/Category:categoryList', {categories: visibleChildren})) }}
+        {% endif %}
 
         {{ render(controller('ShopsysShopBundle:Front/BestsellingProduct:list', { category: category })) }}
 
