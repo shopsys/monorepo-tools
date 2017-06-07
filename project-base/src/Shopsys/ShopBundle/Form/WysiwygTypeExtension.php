@@ -10,6 +10,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WysiwygTypeExtension extends AbstractTypeExtension
 {
+    const ALLOWED_FORMAT_TAGS = 'p;h2;h3;h4;h5;h6;pre;div;address';
+
     /**
      * @var \Shopsys\ShopBundle\Component\Css\CssFacade
      */
@@ -39,6 +41,7 @@ class WysiwygTypeExtension extends AbstractTypeExtension
                     'assets/admin/styles/wysiwyg_' . $cssVersion . '.css',
                 ],
                 'language' => $this->localization->getLocale(),
+                'format_tags' => self::ALLOWED_FORMAT_TAGS,
             ],
         ]);
     }
