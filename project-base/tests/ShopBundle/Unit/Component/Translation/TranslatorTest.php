@@ -22,7 +22,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
             ->getMock();
 
         $originalTranslatorBagMock->expects($this->any())->method('getCatalogue')
-            ->willReturn(new MessageCatalogue('nonSourceLocale', []));
+            ->willReturn(new MessageCatalogue(Translator::SOURCE_LOCALE, []));
 
         $identityTranslator = new IdentityTranslator(new MessageSelector());
 
@@ -113,7 +113,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
             ->getMock();
 
         $originalTranslatorBagMock->expects($this->any())->method('getCatalogue')
-            ->willReturn(new MessageCatalogue('nonSourceLocale', []));
+            ->willReturn(new MessageCatalogue(Translator::SOURCE_LOCALE, []));
 
         $identityTranslator = new IdentityTranslator(new MessageSelector());
 
@@ -337,7 +337,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
             ->getMock();
 
         $originalTranslatorBagMock->expects($this->any())->method('getCatalogue')
-            ->willReturn(new MessageCatalogue('nonSourceLocale', []));
+            ->willReturn(new MessageCatalogue(Translator::SOURCE_LOCALE, []));
 
         $identityTranslator = new IdentityTranslator(new MessageSelector());
 
