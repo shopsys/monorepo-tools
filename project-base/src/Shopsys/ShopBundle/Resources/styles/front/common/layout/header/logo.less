@@ -3,13 +3,14 @@
     width: 100%;
     height: 35px;
     margin: 0 auto;
-
-    background: url("@{path-design}/logo.png@{timestamp}") 50% 50% no-repeat;
-    background-size: contain;
+    text-align: center;
 
     @media @query-lg {
         max-width: 200px;
+        text-align: left;
+    }
 
-        background-position: 0 50%;
+    img {
+        max-height: 100%;
     }
 }

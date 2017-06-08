@@ -7,7 +7,9 @@
     <header class="header">
         <div class="header__logo">
             {% block logo %}
-                <a class="logo" href="{{ url('front_homepage') }}" title="{{ 'Online shop'|trans }}"></a>
+                <a class="logo" href="{{ url('front_homepage') }}">
+                    <img src="{{ asset('assets/frontend/images/logo.png') }}" alt="{{ 'Online shop'|trans }}">
+                </a>
             {% endblock %}
         </div>
 
