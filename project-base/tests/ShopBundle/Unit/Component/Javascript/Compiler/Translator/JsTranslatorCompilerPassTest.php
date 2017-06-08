@@ -15,20 +15,32 @@ class JsTranslatorCompilerPassTest extends FunctionalTestCase
         $jsTranslatorCompilerPass = $this->getServiceByType(JsTranslatorCompilerPass::class);
         /* @var $jsTranslatorCompilerPass \Shopsys\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass */
 
-        // set undefined locale to make Translator add '##' prefix
-        $translator->setLocale('undefinedLocale');
+        $translator->setLocale('testLocale');
+        $translator->getCatalogue()->add([
+            'source value' => 'translated value',
+            'source %param%' => 'translated %param%',
+        ]);
 
         $jsCompiler = new JsCompiler([
             $jsTranslatorCompilerPass,
         ]);
 
-        $content = file_get_contents(__DIR__ . '/testFoo.js');
+        $content = <<<EOD
+var trans = Shopsys.translator.trans('source value');
+var transParam = Shopsys.translator.trans('source' + ' ' + '%param%', { '%param%' : 'value' }, 'domain');
+var transChoice = Shopsys.translator.transChoice('source value' );
+var transUntranslated = Shopsys.translator.trans('untranslated source value');
+var transChoiceUntranslated = Shopsys.translator.transChoice('untranslated source value');
+EOD;
+
         $result = $jsCompiler->compile($content);
 
         $expectedResult = <<<EOD
-var x = Shopsys.translator.trans ( "##foo" );
-var y = Shopsys.translator.trans ( "##foo2", { 'param' : 'value' }, 'asdf' );
-var z = Shopsys.translator.transChoice ( "##foo3" );
+var trans = Shopsys.translator.trans ( "translated value" );
+var transParam = Shopsys.translator.trans ( "translated %param%", { '%param%' : 'value' }, 'domain' );
+var transChoice = Shopsys.translator.transChoice ( "translated value" );
+var transUntranslated = Shopsys.translator.trans ( "##untranslated source value" );
+var transChoiceUntranslated = Shopsys.translator.transChoice ( "##untranslated source value" );
 EOD;
 
         $this->assertSame($expectedResult, $result);
