@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle;
 
 use Shopsys\ShopBundle\Component\Translation\Translator;
-use Shopsys\ShopBundle\DependencyInjection\Compiler\CustomTranslationsCompilerPass;
 use Shopsys\ShopBundle\DependencyInjection\Compiler\RegisterCronModulesCompilerPass;
 use Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -18,7 +17,6 @@ class ShopsysShopBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new CustomTranslationsCompilerPass());
         $container->addCompilerPass(new RegisterCronModulesCompilerPass());
     }
 
