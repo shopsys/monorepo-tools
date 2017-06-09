@@ -229,18 +229,6 @@
         - label: 'Countries'
           route: admin_country_list
 
-    - label: 'Translations'
-      route: admin_translation_list
-      superadmin: true
-      items:
-        - label: 'Static texts translations'
-          route: admin_translation_list
-          superadmin: true
-
-        - label: 'URL addresses'
-          route: admin_superadmin_urls
-          superadmin: true
-
     - label: 'Picture size'
       route: admin_image_overview
       items:
@@ -265,7 +253,8 @@
           route: admin_superadmin_pricing
         - label: 'Css documentation'
           route: admin_superadmin_cssdocumentation
-
+        - label: 'URL addresses'
+          route: admin_superadmin_urls
     - label: 'External scripts'
       route: admin_script_list
       items:
