@@ -1,6 +1,6 @@
 # Adding new attribute to an entity
 
-In the following example we will add `code` field to the `Product`  entity.
+In the following example, we will add `code` field to the `Product`  entity.
 
 1. Open [`\Shopsys\ShopBundle\Model\Product\Product`](../../src/Shopsys/ShopBundle/Model/Product/Product.php) class and add new private field with mapping:
     ```php

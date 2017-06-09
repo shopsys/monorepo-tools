@@ -63,7 +63,7 @@ Composer will then prompt you to set parameters for testing environment (`app/co
 #### Choose environment type
 For development choose `n` when asked `Build in production environment? (Y/n)`.
 
-It will set environment in your application to `dev` (this will for example show Symfony Web Debug Toolbar).
+It will set the environment in your application to `dev` (this will, for example, show Symfony Web Debug Toolbar).
 
 ### 4. Configure domains
 Create `domains_urls.yml` from `domains_urls.yml.dist`.
@@ -123,7 +123,7 @@ HINT:  Must be superuser to create this extension.
 
 In order to create database extensions in PostgreSQL, one needs `superuser` role. By default, only `postgres` database user has this role.
 
-You may not want to run the application under database user with such escalated privileges. Fortunately it is sufficient to run the following the following commands with `superuser` role and then `DbFunctionsDataFixture` will no longer try to create the extension during application build:
+You may not want to run the application under database user with such escalated privileges. Fortunately, it is sufficient to run the following the following commands with `superuser` role and then `DbFunctionsDataFixture` will no longer try to create the extension during application build:
 ```
 psql --username postgres --dbname <database_name> --command "CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA pg_catalog"
 psql --username postgres --dbname <test_database_name> --command "CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA pg_catalog"
@@ -138,7 +138,7 @@ SQLSTATE[22023]: Invalid parameter value: 7 ERROR:  could not create locale "cs_
 DETAIL:  The operating system could not find any locale data for the locale name "cs_CZ.utf8".
 ```
 
-Some features like sorting products by name in the catalogue require your operating system to support different locales in order to be able to sort by locale-specific rules.
+Some features like sorting products by name in the catalog require your operating system to support different locales in order to be able to sort by locale-specific rules.
 `Shopsys\ShopBundle\DataFixtures\Base\DbCollationsDataFixture` class normalizes the names of locales present in different systems by creating new collations in the database.
 
 However, if your system does not provide the locales mentioned in `DbCollationsDataFixture` you need to either install additional locales to your system (eg. on Debian Linux this can be done by installing [locales-all](https://packages.debian.org/cs/stable/locales-all) package) or change `DbCollationsDataFixture` to use locales present in your system.
@@ -155,7 +155,7 @@ Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException:
 
 The problem is that your `timezone` setting in PostgreSQL and `date.timezone` in `php.ini` are different.
 
-Currently, some features are dependent on the fact that timezones in database and PHP are the same. Please set them both to the same timezone.
+Currently, some features are dependent on the fact that time zones in database and PHP are the same. Please set them both to the same timezone.
 
 Timezone used in PostgreSQL can be determined by running the following command:
 ```

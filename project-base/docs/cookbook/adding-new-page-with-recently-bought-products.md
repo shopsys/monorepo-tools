@@ -1,21 +1,21 @@
 # Adding new page with recently bought products
 
-This cookbook will guide you though creating a new page in Shopsys Framework listing products that were recently bought by the user.
-Because this page is useful only for returning customers with history of purchases it will be available for registered users only.
+This cookbook will guide you through creating a new page in Shopsys Framework listing products that were recently bought by the user.
+Because this page is useful only for returning customers with a history of purchases it will be available for registered users only.
 All texts will be fully translated to another language.
 
-This functionality is typical for online stores selling consumables (e.g. pet food, diapers, ...) where big part of the revenue comes from repeated orders.
+This functionality is typical for online stores selling consumables (e.g. pet food, diapers, ...) where a big part of the revenue comes from repeated orders.
 
 After completing this cookbook you should be able to:
 - create a new page
 - define static routes
-- access data of currently logged customer
+- access data of the currently logged customer
 - add new functionality to the model
-- list products on page using Twig macro
+- list products on a page using Twig macro
 - add new translations of static texts
 
 ## Creating a blank page
-First step will be to add a new blank page to the front-end of your store.
+The first step will be to add a new blank page to the front-end of your store.
 
 ### Controller action
 Every page has its own controller action.
@@ -45,7 +45,7 @@ By extending the template [`@ShopsysShop/Front/Layout/layoutWithPanel.html.twig`
 
 The content of `{% block title %}` will be pasted into the `<title>` tag of the resulting HTML page.
 The `{% block main_content %}` should contain the actual content of your new page.
-Simple static heading should be enough at the moment as there are no data to display yet.
+The simple static heading should be enough at the moment as there are no data to display yet.
 
 To allow for future translation into other languages wrap all static texts in `|trans` Twig filter.
 
@@ -64,7 +64,7 @@ To allow for future translation into other languages wrap all static texts in `|
 ### Route
 For the page to be reachable it needs to have a route.
 The page should be fully localized, including the URL.
-Front-end routes that are dependant on current locale are configured in `routing_front_{locale}.yml` files.
+Front-end routes that are dependent on current locale are configured in `routing_front_{locale}.yml` files.
 
 Add a new route `front_product_recently_bought` in [`src/Shopsys/ShopBundle/Resources/config/routing_front_en.yml`](../../src/Shopsys/ShopBundle/Resources/config/routing_front_en.yml) in English.
 
@@ -227,7 +227,7 @@ It is probably best to order the products chronologically so that those bought m
 ### Facade method
 Facades are classes that represent a single point of access to the model.
 Controllers should not access the repositories directly, they should access them via facade methods only.
-This means you need to implement a new facade method that will be user from your controller.
+This means you need to implement a new facade method that will be used from your controller.
 
 The easiest way to fetch products for the currently logged [`user`](../../src/Shopsys/ShopBundle/Model/Customer/User.php) on the current [`domain`](../../src/Shopsys/ShopBundle/Component/Domain/Config/DomainConfig.php) is via [`\Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade`](../../src/Shopsys/ShopBundle/Model/Product/ProductOnCurrentDomainFacade.php).
 You should add your new method there.
@@ -268,7 +268,7 @@ This `null` cannot be passed into [`ProductRepository`](../../src/Shopsys/ShopBu
 As there are no products to be fetched the method can return an empty array.
 
 *Note: Getter methods that may return `null` are always named `findSomething` in repositories and facades.*
-*When the method never returns `null` it is named `getSomething` (they typically return either an entity of giver type or an array of entities) or `isSomething` / `hasSomething` if it returns `bool`.*
+*When the method never returns `null` it is named `getSomething` (they typically return either an entity of given type or an array of entities) or `isSomething` / `hasSomething` if it returns `bool`.*
 
 ### Controller usage
 [`ProductController`](../../src/Shopsys/ShopBundle/Controller/Front/ProductController.php) already has the [`ProductOnCurrentDomainFacade`](../../src/Shopsys/ShopBundle/Model/Product/ProductOnCurrentDomainFacade.php) as a dependency so it is ready to use.
@@ -322,7 +322,7 @@ Macros let you reuse parts of template for consistent look and ease of developme
 ```
 
 ## Adding translations
-In the last chapter you will see how translation of static texts works in Shopsys Framework.
+In the last chapter, you will see how the translation of static texts works in Shopsys Framework.
 
 ### Extraction of translated messages
 [Phing target `dump-translations`](../introduction/phing-targets.md#dump-translations) can help you by extraction of all translatable messages.
@@ -369,7 +369,7 @@ msgstr "Vaše nedávno nakoupené zboží"
 ```
 
 After providing the translations you should be able to see you new translated page on all configured domains.
-You should be able to see it on [http://127.0.0.2:8000/nedavno-nakoupeno/](http://127.0.0.2:8000/nedavno-nakoupeno/) in Czech language.
+You should be able to see it on [http://127.0.0.2:8000/nedavno-nakoupeno/](http://127.0.0.2:8000/nedavno-nakoupeno/) in the Czech language.
 
 ## Conclusion
 Now you know how to add new localized custom pages to your online store and how to create links to these pages using routes.

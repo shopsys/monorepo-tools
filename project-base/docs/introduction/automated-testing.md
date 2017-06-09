@@ -1,6 +1,6 @@
 # Automated Testing
 
-Testing is a crucial part in development and maintenance of reliable software.
+Testing is a crucial part of development and maintenance of reliable software.
 For this reason Shopsys Framework comes with 5 types of automated tests:
 * [Unit tests](#unit-tests)
 * [Database tests](#database-tests-aka-integration-tests)
@@ -8,8 +8,8 @@ For this reason Shopsys Framework comes with 5 types of automated tests:
 * [Acceptance tests](#acceptance-tests-aka-functional-tests-or-selenium-tests)
 * [Performance tests](#performance-tests)
 
-Software testing in general is very broad topic and requires learning and practice.
-The following paragraphs should help you in your path to answering questions like: *"What should I test?"*, *"Which type of tests should I use for this particular functionality?"* or *"How many tests is enough?"* 
+Software testing, in general, is a very broad topic and requires learning and practice.
+The following paragraphs should help you in your path to answering questions like *"What should I test?"*, *"Which type of tests should I use for this particular functionality?"* or *"How many tests is enough?"* 
 
 ## The purpose(s) of automated tests
 
@@ -35,11 +35,11 @@ We could write just unit tests for calculation of the discount for both of these
 But if working promo codes are really important for us we should also write an end-to-end acceptance test that will verify that user can add a promo code to the order and that the discount is really applied in a created order.
 
 ### Does some part of the application break often?
-You may have already encountered a situation when some feature of a software used to work properly but is broken in current release.
+You may have already encountered a situation when some feature of a software used to work properly but is broken in the current release.
 This type of issue is so common that it even has its own name - *a regression bug*.
 
-In ideal world every feature is tested from the beginning so regression bugs do not arise.
-But in reality it is very hard (and costly) to test every aspect of your application.
+In an ideal world, every feature is tested from the beginning so regression bugs do not arise.
+But in reality, it is very hard (and costly) to test every aspect of your application.
 
 However, if you run into a bug in a feature that used to work before it is a good sign that the code implementing the feature is brittle and should be verified by tests.
 Also, nobody wants angry users to repeatedly report the same bug that was already fixed once.
@@ -51,14 +51,14 @@ Refactoring is a process of enhancing code quality without changing its function
 If you want to refactor some part of your application you should have automatic tests beforehand in order to be sure that you did not break the application during the refactoring.
 
 ### Does your code depend on undocumented features?
-When your application depends on some specific feature in 3rd party system that is not documented you can write tests to verify the expected behavior.
+When your application depends on some specific feature in a 3rd party system that is not documented you can write tests to verify the expected behavior.
 
 The fact that the feature is not documented may indicate that the authors did not consider the behavior a real feature and may change in future versions. If it does you will be notified by your tests.
 
 ## Types of automated tests available in Shopsys Framework
 
 ### Unit tests
-Used to test the smallest possible amount of code (the "unit", i.e. class / method). To isolate tested unit it is useful to mock other objects - create a dummy object mimicking the real implementation of collaborating classes.
+Used to test the smallest possible amount of code (the "unit", i.e. class/method). To isolate tested unit it is useful to mock other objects - create a dummy object mimicking the real implementation of collaborating classes.
 
 Unit tests in Shopsys Framework are built on [PHPUnit testing framework](https://phpunit.de/).
 
@@ -77,15 +77,15 @@ Unit tests in Shopsys Framework are built on [PHPUnit testing framework](https:/
 
 #### Example:
 See test class [`\Tests\ShopBundle\Unit\Model\Cart\CartServiceTest`](../../tests/ShopBundle/Unit/Model/Cart/CartServiceTest.php).
-Notice that test method names describe the tested scenario. Also notice that each test case focuses just on one specific behavior of the class.
+Notice that test method names describe the tested scenario. Also, notice that each test case focuses just on one specific behavior of the class.
 When a test fails it provides detailed feedback to the developer.
 
 ### Database tests (a.k.a. integration tests)
 Even when all parts are working it is not guaranteed they work well together. Mocking can still be used for isolation when appropriate.
 
-These tests use a separate database to not affect your application data so you can still use the application in *DEVELOPMENT* environment. It is still **not recommended** to run tests on production server because things like filesystem are shared among all kernel environments.
+These tests use a separate database to not affect your application data so you can still use the application in *DEVELOPMENT* environment. It is still **not recommended** to run tests on a production server because things like filesystem are shared among all kernel environments.
 
-All tests are isolated from each other thanks to database transactions. This means they can be executed in any order as each have the same starting conditions.
+All tests are isolated from each other thanks to database transactions. This means they can be executed in any order as each has the same starting conditions.
 
 #### Advantages:
 * demo data can be used for testing with [`PersistentReferenceFacade`](../../src/Shopsys/ShopBundle/Component/DataFixture/PersistentReferenceFacade.php)
@@ -95,7 +95,7 @@ All tests are isolated from each other thanks to database transactions. This mea
 
 #### Great for:
 * higher level testing of collaboration of units
-* low level testing of components that are hard to unit-test
+* low-level testing of components that are hard to unit-test
 
 #### Example:
 See test class [`\Tests\ShopBundle\Database\Model\Cart\CartFacadeTest`](../../tests/ShopBundle/Database/Model/Cart/CartFacadeTest.php). Notice usage of demo data instead of preparing own entities.
@@ -103,7 +103,7 @@ See test class [`\Tests\ShopBundle\Database\Model\Cart\CartFacadeTest`](../../te
 ### HTTP smoke tests
 Test HTTP codes returned by individual controller actions provided by the routing (e.g. product detail page should return *200 OK* for a visible product and *404 Not Found* for a hidden one).
 
-They help you prevent breaking your application by checking very wide scope of the application.
+They help you prevent breaking your application by checking a very wide scope of the application.
 You will no longer cause *500 Server Error* on some random page by a seemingly unrelated change.
 
 #### Advantages:
@@ -146,9 +146,9 @@ More information can be found in [Running Acceptance Tests](running-acceptance-t
 See acceptance test for product filter in administration in [`\Tests\ShopBundle\Acceptance\acceptance\AdminProductAdvancedSearchCest`](../../tests/ShopBundle/Acceptance/acceptance/AdminProductAdvancedSearchCest.php). Notice the usage of auto-wired Page objects [`LoginPage`](../../tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/LoginPage.php) and [`ProductAdvancedSearchPage`](../../tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/ProductAdvancedSearchPage.php). They provide a way to reuse code that interacts with user interface.
 
 ### Performance tests
-These tests assert that key actions do not take too long. They are similar to [HTTP smoke tests]() but they measure response time as well. In addition to routes tested by HTTP smoke tests these tests also request and measure regeneration of all product feeds.
+These tests assert that key actions do not take too long. They are similar to [HTTP smoke tests]() but they measure response time as well. In addition to routes tested by HTTP smoke tests, these tests also request and measure regeneration of all product feeds.
 
-Before execution of the test suite the testing database is filled with large amount of data simulating production environment of a big e-commerce project. You will no longer unknowingly slow down a page because you are developing with only a small data set.
+Before execution of the test suite, the testing database is filled with a large amount of data simulating production environment of a big e-commerce project. You will no longer unknowingly slow down a page because you are developing with only a small data set.
 
 It is advised to run these tests on a separate server that is not under load at the time for consistent results (eg. only in nighttime).
 
@@ -157,7 +157,7 @@ It is advised to run these tests on a separate server that is not under load at 
 
 #### Disadvantages:
 * take really long time to execute (approx. 1.5 hours including import of performance data)
-* must be ran on a server without load for consistent results
+* must be running on a server without load for consistent results
 
 #### Great for:
 * discovering performance impact of code modifications

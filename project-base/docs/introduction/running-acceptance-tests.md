@@ -7,7 +7,7 @@ You must choose compatible versions of Google Chrome and ChromeDriver.
 As Chrome browser has auto-update enabled by default this may require you to update ChromeDriver from time to time.
 
 ### Installing Google Chrome browser
-Download and install Google Chrome browser from: https://www.google.com/chrome/browser/desktop/
+Download and install Google Chrome browser from https://www.google.com/chrome/browser/desktop/
 
 ### Setting-up ChromeDriver (Selenium WebDriver)
 ChromeDriver can be downloaded from: https://sites.google.com/a/chromium.org/chromedriver/downloads
@@ -64,7 +64,7 @@ Do not forget to run both PHP web server and Selenium server. See [Running the w
 
 *Note: In Windows CMD you have to use backslashes in the path of the executable: `vendor\bin\codecept run ...`*
 
-### Do not forget to restore your original environment afterwards
+### Do not forget to restore your original environment afterward
 ```
 # on Unix systems (Linux, Mac OSX)
 rm TEST
