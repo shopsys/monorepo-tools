@@ -369,7 +369,7 @@ msgstr "Vaše nedávno nakoupené zboží"
 ```
 
 After providing the translations you should be able to see you new translated page on all configured domains.
-You should be able to see it on [http://127.0.0.1:8001/nedavno-nakoupeno/](http://127.0.0.1:8001/nedavno-nakoupeno/) in Czech language.
+You should be able to see it on [http://127.0.0.2:8000/nedavno-nakoupeno/](http://127.0.0.2:8000/nedavno-nakoupeno/) in Czech language.
 
 ## Conclusion
 Now you know how to add new localized custom pages to your online store and how to create links to these pages using routes.

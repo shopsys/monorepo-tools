@@ -3,4 +3,4 @@ domains_urls:
     url: http://127.0.0.1:8000
 
   - id: 2
-    url: http://127.0.0.1:8001
+    url: http://127.0.0.2:8000
