@@ -535,6 +535,9 @@ services:
   shopsys.shop.localization.custom_date_time_formatter_factory:
     class: Shopsys\ShopBundle\Model\Localization\CustomDateTimeFormatterFactory
 
+  shopsys.shop.localization.intl_currency_repository:
+    class: Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository
+
   shopsys.shop.localization.locale_listener:
     class: Shopsys\ShopBundle\Model\Localization\LocalizationListener
     tags:
