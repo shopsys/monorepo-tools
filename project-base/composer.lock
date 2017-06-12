@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e61713e18a39a748810efd72d292b584",
+    "content-hash": "44b6f4321b2b7614e496b5914d7b4189",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -5862,16 +5862,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.2.6",
+            "version": "v3.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "b0f8a7fa4b8baadf9db299cb6ac87c96a8977dbe"
+                "reference": "78c08f2faa42210db4fe6f4ece73891ca546a9a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/b0f8a7fa4b8baadf9db299cb6ac87c96a8977dbe",
-                "reference": "b0f8a7fa4b8baadf9db299cb6ac87c96a8977dbe",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/78c08f2faa42210db4fe6f4ece73891ca546a9a0",
+                "reference": "78c08f2faa42210db4fe6f4ece73891ca546a9a0",
                 "shasum": ""
             },
             "require": {
@@ -6002,7 +6002,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-03-10T18:35:48+00:00"
+            "time": "2017-05-29T19:32:17+00:00"
         },
         {
             "name": "symplify/controller-autowire",
