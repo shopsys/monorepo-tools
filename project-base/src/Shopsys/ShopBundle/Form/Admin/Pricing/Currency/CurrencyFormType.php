@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Pricing\Currency;
 
-use Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository;
+use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
 use Shopsys\ShopBundle\Model\Localization\Localization;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use Symfony\Component\Form\AbstractType;
@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints;
 class CurrencyFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository
+     * @var \CommerceGuys\Intl\Currency\CurrencyRepositoryInterface
      */
     private $intlCurrencyRepository;
 
@@ -25,7 +25,7 @@ class CurrencyFormType extends AbstractType
     private $localization;
 
     public function __construct(
-        IntlCurrencyRepository $intlCurrencyRepository,
+        CurrencyRepositoryInterface $intlCurrencyRepository,
         Localization $localization
     ) {
         $this->intlCurrencyRepository = $intlCurrencyRepository;
@@ -39,6 +39,8 @@ class CurrencyFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $intlCurrencies = $this->intlCurrencyRepository->getAll($this->localization->getLocale());
+        /* @var $intlCurrencies \CommerceGuys\Intl\Currency\CurrencyInterface[] */
+
         $possibleCurrencyCodes = [];
         foreach ($intlCurrencies as $intlCurrency) {
             $possibleCurrencyCodes[] = $intlCurrency->getCurrencyCode();
