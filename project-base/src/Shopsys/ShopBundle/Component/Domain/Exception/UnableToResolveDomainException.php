@@ -12,7 +12,10 @@ class UnableToResolveDomainException extends Exception implements DomainExceptio
      */
     public function __construct($url, $previous = null)
     {
-        $message = sprintf('Unable to resolve domain for URL: %s', $url);
+        $message = sprintf(
+            'Unable to resolve domain for URL "%s". Check your configuration in "app/config/domains_urls.yml".',
+            $url
+        );
 
         parent::__construct($message, 0, $previous);
     }
