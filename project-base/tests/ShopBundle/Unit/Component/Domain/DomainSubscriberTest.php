@@ -4,12 +4,12 @@ namespace Tests\ShopBundle\Unit\Component\Domain;
 
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Domain\DomainListener;
+use Shopsys\ShopBundle\Component\Domain\DomainSubscriber;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
-class DomainListenerTest extends PHPUnit_Framework_TestCase
+class DomainSubscriberTest extends PHPUnit_Framework_TestCase
 {
     public function testOnKernelRequestWithoutMasterRequest()
     {
@@ -22,8 +22,8 @@ class DomainListenerTest extends PHPUnit_Framework_TestCase
 
         $domain = new Domain([], $settingMock);
 
-        $domainListener = new DomainListener($domain);
-        $domainListener->onKernelRequest($eventMock);
+        $domainSubscriber = new DomainSubscriber($domain);
+        $domainSubscriber->onKernelRequest($eventMock);
     }
 
     public function testOnKernelRequestWithMasterRequestAndSetDomain()
@@ -40,8 +40,8 @@ class DomainListenerTest extends PHPUnit_Framework_TestCase
             ->getMock();
         $domainMock->expects($this->once())->method('getId');
 
-        $domainListener = new DomainListener($domainMock);
-        $domainListener->onKernelRequest($eventMock);
+        $domainSubscriber = new DomainSubscriber($domainMock);
+        $domainSubscriber->onKernelRequest($eventMock);
     }
 
     public function testOnKernelRequestWithMasterRequest()
@@ -62,7 +62,7 @@ class DomainListenerTest extends PHPUnit_Framework_TestCase
         $domainMock->expects($this->once())->method('getId')->willThrowException($exception);
         $domainMock->expects($this->once())->method('switchDomainByRequest')->with($this->equalTo($getRequestResult));
 
-        $domainListener = new DomainListener($domainMock);
-        $domainListener->onKernelRequest($eventMock);
+        $domainSubscriber = new DomainSubscriber($domainMock);
+        $domainSubscriber->onKernelRequest($eventMock);
     }
 }

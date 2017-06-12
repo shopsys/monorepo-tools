@@ -186,8 +186,8 @@ services:
   shopsys.shop.component.domain.domain_factory:
     class: Shopsys\ShopBundle\Component\Domain\DomainFactory
 
-  shopsys.shop.component.domain.domain_listener:
-    class: Shopsys\ShopBundle\Component\Domain\DomainListener
+  shopsys.shop.component.domain.domain_subscriber:
+    class: Shopsys\ShopBundle\Component\Domain\DomainSubscriber
     tags:
       - { name: kernel.event_subscriber }
 
