@@ -10,30 +10,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
-class TranslationFormType extends AbstractType implements DataTransformerInterface
+class TranslationFormType extends AbstractType
 {
-    /**
-     * @param string $value
-     * @return string
-     */
-    public function transform($value)
-    {
-        if (preg_match('/^' . preg_quote(Translator::NOT_TRANSLATED_PREFIX) . '/u', $value)) {
-            return '';
-        }
-
-        return $value;
-    }
-
-    /**
-     * @param string $value
-     * @return string
-     */
-    public function reverseTransform($value)
-    {
-        return $value;
-    }
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -47,7 +25,6 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
                         'required' => true,
                         'constraints' => new Constraints\NotBlank(['message' => 'Please enter translation']),
                     ])
-                    ->addModelTransformer($this)
             );
         }
     }

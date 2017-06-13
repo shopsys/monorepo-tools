@@ -63,34 +63,8 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface
 
         if ($catalogue->defines($messageId, $domain)) {
             return $catalogue->get((string)$messageId, $domain);
-        } elseif ($locale === Translator::SOURCE_LOCALE) {
-            return $messageId;
         } else {
-            return $this->markAsNotTranslated((string)$messageId);
+            return (string)$messageId;
         }
-    }
-
-    /**
-     * @param string $messageId
-     * @return string
-     */
-    private function markAsNotTranslated($messageId)
-    {
-        $pluralizationParts = explode('|', $messageId);
-        $markedMessages = [];
-        foreach ($pluralizationParts as $part) {
-            $endBracePosition = strpos($part, '}');
-            $endBracketPosition = strpos($part, ']');
-            if ($endBracePosition !== false) {
-                $notTranslatedPrefixPosition = $endBracePosition + 1;
-            } elseif ($endBracketPosition !== false) {
-                $notTranslatedPrefixPosition = $endBracketPosition + 1;
-            } else {
-                $notTranslatedPrefixPosition = 0;
-            }
-            $markedMessages[] = substr_replace($part, Translator::NOT_TRANSLATED_PREFIX, $notTranslatedPrefixPosition, 0);
-        }
-
-        return implode('|', $markedMessages);
     }
 }

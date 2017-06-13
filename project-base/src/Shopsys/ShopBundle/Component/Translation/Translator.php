@@ -8,7 +8,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 class Translator implements TranslatorInterface, TranslatorBagInterface
 {
     const DEFAULT_DOMAIN = 'messages';
-    const NOT_TRANSLATED_PREFIX = '##';
     const SOURCE_LOCALE = 'en';
 
     /**
@@ -49,9 +48,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     }
 
     /**
-     * Adds self::NOT_TRANSLATED_PREFIX to messages that are not translated and $locale
-     * is not self::SOURCE_LOCALE. Passes trans() call to original translator
-     * for logging purposes.
+     * Passes trans() call to original translator for logging purposes.
      * {@inheritdoc}
      */
     public function trans($id, array $parameters = [], $domain = null, $locale = null)
@@ -70,19 +67,13 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
             }
         } else {
             $message = $this->originalTranslator->trans($normalizedId, $parameters, $resolvedDomain, $resolvedLocale);
-
-            if (!$catalogue->has($normalizedId, $resolvedDomain)) {
-                $message = self::NOT_TRANSLATED_PREFIX . $message;
-            }
         }
 
         return $message;
     }
 
     /**
-     * Adds self::NOT_TRANSLATED_PREFIX to messages that are not translated and $locale
-     * is not self::SOURCE_LOCALE. Passes transChoice() call to original translator
-     * for logging purposes.
+     * Passes transChoice() call to original translator for logging purposes.
      * {@inheritdoc}
      */
     public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null)
@@ -101,10 +92,6 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
             }
         } else {
             $message = $this->originalTranslator->transChoice($normalizedId, $number, $parameters, $resolvedDomain, $resolvedLocale);
-
-            if (!$catalogue->has($normalizedId, $resolvedDomain)) {
-                $message = self::NOT_TRANSLATED_PREFIX . $message;
-            }
         }
 
         return $message;
