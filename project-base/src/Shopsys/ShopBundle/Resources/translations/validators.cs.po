@@ -132,7 +132,7 @@ msgstr "Odkaz musí být validní URL adresa"
 
 #: BrandFormType.php:31
 #: CategoryFormType.php:100
-#: CurrencyFormType.php:52
+#: CurrencyFormType.php:54
 #: OrderFormType.php:230
 #: PaymentFormType.php:52
 #: ProductParameterValueFormType.php:49
@@ -315,11 +315,11 @@ msgstr "Vyplňte prosím text"
 msgid "Please enter country name"
 msgstr "Vyplňte prosím název státu"
 
-#: CurrencyFormType.php:58
+#: CurrencyFormType.php:60
 msgid "Please enter currency code"
 msgstr "Vyplňte prosím kód měny"
 
-#: CurrencyFormType.php:72
+#: CurrencyFormType.php:74
 msgid "Please enter currency exchange rate"
 msgstr "Vyplňte prosím kurz měny"
 
@@ -404,7 +404,7 @@ msgstr "Vyplňte prosím login"
 
 #: BrandFormType.php:30
 #: CategoryFormType.php:95
-#: CurrencyFormType.php:51
+#: CurrencyFormType.php:53
 #: OrderItemFormType.php:25
 #: PaymentFormType.php:48
 #: SliderItemFormType.php:37
@@ -520,10 +520,6 @@ msgstr "Vyplňte prosím příjmení kontaktní osoby"
 msgid "Please enter telephone number"
 msgstr "Vyplňte prosím telefon"
 
-#: TranslationFormType.php:48
-msgid "Please enter translation"
-msgstr "Vyplňte prosím překlad"
-
 #: UnitFormType.php:25
 msgid "Please enter unit name in all languages"
 msgstr "Vyplňte prosím název jednotky ve všech jazycích"
@@ -538,7 +534,7 @@ msgstr "Vyplňte prosím jednotkovou cenu s DPH"
 msgid "Please enter username"
 msgstr "Vyplňte prosím přihlašovací jméno"
 
-#: CurrencyFormType.php:61
+#: CurrencyFormType.php:63
 msgid "Please enter valid 3-digit currency code according to ISO 4217 standard (uppercase)"
 msgstr "Prosím zadejte platný třímístný kód měny podle standardu ISO 4217 (velkými písmeny)"
 
