@@ -39,7 +39,6 @@
     <property name="path.src" value="${path.root}/src"/>
     <property name="path.test.database.dump" value="${path.var}/cache/test-db-dump.sql"/>
     <property name="path.tests" value="${path.root}/tests"/>
-    <property name="path.translations.custom" value="${path.root}/src/Shopsys/ShopBundle/Resources/translations/custom"/>
     <property name="path.var" value="${path.root}/var"/>
     <property name="path.vendor" value="${path.root}/vendor"/>
     <property name="path.web" value="${path.root}/web"/>
@@ -60,10 +59,10 @@
     </if>
 
     <target name="build" depends="build-deploy-part-1-db-independent, build-deploy-part-2-db-dependent" description="Builds application for production preserving your DB."/>
-    <target name="build-deploy-part-1-db-independent" depends="clean,composer,npm,dirs-create,domains-urls-check,assets,dump-translations-front-and-common" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
+    <target name="build-deploy-part-1-db-independent" depends="clean,composer,npm,dirs-create,domains-urls-check,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
     <target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,warmup" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
-    <target name="build-new" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,dump-translations-front-and-common,db-rebuild,grunt,error-pages-generate,warmup" description="Builds application for production preserving your DB."/>
-    <target name="build-demo" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,dump-translations-front-and-common,db-demo,grunt,error-pages-generate,warmup" description="Builds application for production with clean DB."/>
+    <target name="build-new" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-rebuild,grunt,error-pages-generate,warmup" description="Builds application for production preserving your DB."/>
+    <target name="build-demo" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-demo,grunt,error-pages-generate,warmup" description="Builds application for production with clean DB."/>
     <target name="db-demo" depends="db-drop,db-create,db-migrations,db-fixtures-demo-singledomain,create-domains-data,db-fixtures-demo-multidomain,generate-friendly-urls,replace-domains-urls" description="Builds application for production with clean demo DB."/>
     <target name="db-rebuild" depends="db-drop,db-create,db-migrations,db-fixtures-base-settings,create-domains-data,generate-friendly-urls,replace-domains-urls" description="Drops all data in database and creates a new one with base data only."/>
 
@@ -250,33 +249,6 @@
                 <fail message = "File domains_urls.yml does not exist. You should create it using domains_urls.yml.dist as a template."/>
             </then>
         </if>
-    </target>
-
-    <target name="dump-translations-front-and-common" description="Extracts new translatable messages from front-end and common source files into custom translations directory.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
-            <arg value="translation:extract" />
-            <arg value="--bundle=ShopsysShopBundle" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Controller" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Form" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Grid" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Controller" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Form" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Model" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/views" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/scripts" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Twig" />
-            <arg value="--exclude-dir=admin/plugins" />
-            <arg value="--exclude-dir=frontend/plugins" />
-            <arg value="--exclude-dir=admin" />
-            <arg value="--exclude-dir=Admin" />
-            <arg value="--keep" />
-            <arg value="--output-format=po" />
-            <arg value="--output-dir=${path.translations.custom}" />
-
-            <arg value="cs" />
-            <arg value="en" />
-        </exec>
     </target>
 
     <target name="error-pages-generate" description="Generates error pages displayed in production environment.">
