@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Image;
 
 use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
 use Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig;
-use Shopsys\ShopBundle\Component\Image\Image;
 use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
 
 class ImageService
@@ -33,7 +32,7 @@ class ImageService
      * @param int $entityId
      * @param array $temporaryFilenames
      * @param string|null $type
-     * @return
+     * @return \Shopsys\ShopBundle\Component\Image\Image[]
      */
     public function getUploadedImages(ImageEntityConfig $imageEntityConfig, $entityId, array $temporaryFilenames, $type)
     {
@@ -45,7 +44,7 @@ class ImageService
 
         $images = [];
         foreach ($temporaryFilenames as $temporaryFilename) {
-            $images[] = $this->createImage($imageEntityConfig, $entityId, $temporaryFilename, $type, null);
+            $images[] = $this->createImage($imageEntityConfig, $entityId, $temporaryFilename, $type);
         }
 
         return $images;

@@ -70,7 +70,6 @@ class ProductFlagFilter implements AdvancedSearchFilterInterface
         $isNotFlags = [];
 
         foreach ($rulesData as $index => $ruleData) {
-            /* @var $ruleData \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData */
             if ($ruleData->operator === self::OPERATOR_IS) {
                 $tableAlias = 'f' . $index;
                 $flagParameter = 'flag' . $index;

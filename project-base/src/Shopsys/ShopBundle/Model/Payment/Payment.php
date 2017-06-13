@@ -115,13 +115,12 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     }
 
     /**
-     * @param array $transports
+     * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
      */
     public function setTransports(array $transports)
     {
         $this->transports->clear();
         foreach ($transports as $transport) {
-            /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
             $this->addTransport($transport);
         }
     }

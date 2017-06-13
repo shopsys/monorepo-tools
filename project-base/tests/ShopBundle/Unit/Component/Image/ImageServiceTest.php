@@ -46,7 +46,6 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase
 
         $this->assertCount(2, $images);
         foreach ($images as $image) {
-            /* @var $image \Shopsys\ShopBundle\Component\Image\Image */
             $temporaryFiles = $image->getTemporaryFilesForUpload();
             $this->assertSame(1, $image->getEntityId());
             $this->assertSame('entityName', $image->getEntityName());

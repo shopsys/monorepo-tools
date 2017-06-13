@@ -205,7 +205,6 @@ class OrderPreviewCalculation
         $finalPrice = new Price(0, 0);
 
         foreach ($quantifiedItemsPrices as $quantifiedItemPrice) {
-            /* @var $quantifiedItemPrice \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice */
             $finalPrice = $finalPrice->add($quantifiedItemPrice->getTotalPrice());
         }
 
