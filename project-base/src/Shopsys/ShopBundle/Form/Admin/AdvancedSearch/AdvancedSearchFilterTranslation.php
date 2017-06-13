@@ -5,13 +5,13 @@ namespace Shopsys\ShopBundle\Form\Admin\AdvancedSearch;
 class AdvancedSearchFilterTranslation
 {
     /**
-     * @var string[filterName]
+     * @var string[]
      */
-    private $filtersTranslations;
+    private $filtersTranslationsByFilterName;
 
     public function __construct()
     {
-        $this->filtersTranslations = [];
+        $this->filtersTranslationsByFilterName = [];
     }
 
     /**
@@ -20,7 +20,7 @@ class AdvancedSearchFilterTranslation
      */
     public function addFilterTranslation($filterName, $filterTranslation)
     {
-        $this->filtersTranslations[$filterName] = $filterTranslation;
+        $this->filtersTranslationsByFilterName[$filterName] = $filterTranslation;
     }
 
     /**
@@ -29,8 +29,8 @@ class AdvancedSearchFilterTranslation
      */
     public function translateFilterName($filterName)
     {
-        if (array_key_exists($filterName, $this->filtersTranslations)) {
-            return $this->filtersTranslations[$filterName];
+        if (array_key_exists($filterName, $this->filtersTranslationsByFilterName)) {
+            return $this->filtersTranslationsByFilterName[$filterName];
         }
 
         $message = 'Filter "' . $filterName . '" translation not found.';
