@@ -9,18 +9,18 @@ class ProductFilterCountData
      */
     public $countInStock;
 
-    /*
-     * @var int[brandId]
+    /**
+     * @var int[]
      */
     public $countByBrandId;
 
     /**
-     * @var int[flagId]
+     * @var int[]
      */
     public $countByFlagId;
 
     /**
-     * @var int[parameterId][parameterValueId]
+     * @var int[][]
      */
     public $countByParameterIdAndValueId;
 }

@@ -79,7 +79,7 @@ class ProductCollectionFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param string|null $sizeName
-     * @return string[productId]
+     * @return string[]
      */
     public function getImagesUrlsIndexedByProductId(array $products, DomainConfig $domainConfig, $sizeName = null)
     {

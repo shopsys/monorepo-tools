@@ -67,7 +67,7 @@ class CategoryDetailFactory
 
     /**
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @param \Shopsys\ShopBundle\Model\Category\Category[parentId] $categoriesByParentId
+     * @param \Shopsys\ShopBundle\Model\Category\Category[] $categoriesByParentId
      * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
      */
     private function getChildrenDetails(Category $category, array $categoriesByParentId)
@@ -107,7 +107,7 @@ class CategoryDetailFactory
 
     /**
      * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
-     * @return \Shopsys\ShopBundle\Model\Category\Category[parentId][]
+     * @return \Shopsys\ShopBundle\Model\Category\Category[][]
      */
     private function getCategoriesIndexedByParentId(array $categories)
     {

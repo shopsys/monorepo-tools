@@ -70,7 +70,7 @@ class ParameterFacade
     }
 
     /**
-     * @param string[locale] $namesByLocale
+     * @param string[] $namesByLocale
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter|null
      */
     public function findParameterByNames(array $namesByLocale)

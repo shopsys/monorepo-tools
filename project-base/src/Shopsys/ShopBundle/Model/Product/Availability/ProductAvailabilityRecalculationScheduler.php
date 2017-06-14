@@ -47,7 +47,7 @@ class ProductAvailabilityRecalculationScheduler
     }
 
     /**
-     * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\ShopBundle\Model\Product\Product[][0]
+     * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\ShopBundle\Model\Product\Product[][]
      */
     public function getProductsIteratorForDelayedRecalculation()
     {

@@ -139,7 +139,7 @@ class ProductDataFixtureLoader
 
     /**
      * @param array $rows
-     * @return string[mainVariantRowId][]
+     * @return string[][]
      */
     public function getVariantCatnumsIndexedByMainVariantCatnum($rows)
     {

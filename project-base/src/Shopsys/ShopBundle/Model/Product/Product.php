@@ -683,7 +683,7 @@ class Product extends AbstractTranslatableEntity
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Product\ProductCategoryDomain[categoryId]
+     * @return \Shopsys\ShopBundle\Model\Product\ProductCategoryDomain[]
      */
     private function getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId)
     {
@@ -707,7 +707,7 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\Category[domainId][]
+     * @return \Shopsys\ShopBundle\Model\Category\Category[][]
      */
     public function getCategoriesIndexedByDomainId()
     {

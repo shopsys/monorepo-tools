@@ -165,7 +165,7 @@ class ParameterRepository
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      * @param string $locale
-     * @return string[productId][paramName]
+     * @return string[][]
      */
     public function getParameterValuesIndexedByProductIdAndParameterNameForProducts(array $products, $locale)
     {
@@ -200,7 +200,7 @@ class ParameterRepository
     }
 
     /**
-     * @param string[locale] $namesByLocale
+     * @param string[] $namesByLocale
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter|null
      */
     public function findParameterByNames(array $namesByLocale)
@@ -229,7 +229,7 @@ class ParameterRepository
 
     /**
      * @param array $productIdsAndParameterNamesAndValues
-     * @return string[productId][paramName]
+     * @return string[][]
      */
     private function getParameterValuesIndexedByProductIdAndParameterName(array $productIdsAndParameterNamesAndValues)
     {

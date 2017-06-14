@@ -90,7 +90,7 @@ class ProductDataFixture
     private $batchStartMicrotime;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product[catnum]
+     * @var \Shopsys\ShopBundle\Model\Product\Product[]
      */
     private $productsByCatnum;
 
@@ -208,7 +208,7 @@ class ProductDataFixture
     }
 
     /**
-     * @param string[catnum][] $variantCatnumsByMainVariantCatnum
+     * @param string[][] $variantCatnumsByMainVariantCatnum
      */
     private function createVariants(array $variantCatnumsByMainVariantCatnum)
     {

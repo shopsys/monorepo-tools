@@ -55,7 +55,7 @@ class FriendlyUrlFacade
     /**
      * @param string $routeName
      * @param int $entityId
-     * @param string[locale] $namesByLocale
+     * @param string[] $namesByLocale
      */
     public function createFriendlyUrls($routeName, $entityId, array $namesByLocale)
     {

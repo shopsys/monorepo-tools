@@ -51,7 +51,7 @@ class FeedCategoryRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory[extId]
+     * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory[]
      */
     public function getAllIndexedByExtId()
     {

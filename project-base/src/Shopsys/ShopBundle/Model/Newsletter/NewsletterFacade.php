@@ -39,7 +39,7 @@ class NewsletterFacade
     }
 
     /**
-     * @return \Doctrine\ORM\Internal\Hydration\IterableResult|string[][0]['email']
+     * @return \Doctrine\ORM\Internal\Hydration\IterableResult
      */
     public function getAllEmailsDataIterator()
     {

@@ -49,7 +49,7 @@ class ProductDetail
      * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
      * @param \Shopsys\ShopBundle\Model\Product\ProductDomain[]|null $productDomainsIndexedByDomainId
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null $parameters
-     * @param \Shopsys\ShopBundle\Component\Image\Image[imageId]|null $imagesById
+     * @param \Shopsys\ShopBundle\Component\Image\Image[]|null $imagesById
      */
     public function __construct(
         Product $product,

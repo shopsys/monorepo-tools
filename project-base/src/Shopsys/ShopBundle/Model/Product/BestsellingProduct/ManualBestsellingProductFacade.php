@@ -76,7 +76,7 @@ class ManualBestsellingProductFacade
 
     /**
      * @param int $domainId
-     * @return int[categoryId]
+     * @return int[]
      */
     public function getCountsIndexedByCategoryId($domainId)
     {

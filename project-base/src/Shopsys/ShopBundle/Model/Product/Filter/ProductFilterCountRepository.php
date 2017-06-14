@@ -119,7 +119,7 @@ class ProductFilterCountRepository
      * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return int[brandId]
+     * @return int[]
      */
     private function getCountByBrandId(
         QueryBuilder $productsQueryBuilder,

@@ -213,7 +213,7 @@ class TransportFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @return string [transportId]
+     * @return string[]
      */
     public function getTransportPricesWithVatIndexedByTransportId(Currency $currency)
     {
@@ -228,7 +228,7 @@ class TransportFacade
     }
 
     /**
-     * @return string[transportId]
+     * @return string[]
      */
     public function getTransportVatPercentsIndexedByTransportId()
     {

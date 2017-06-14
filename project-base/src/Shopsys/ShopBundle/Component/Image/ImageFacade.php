@@ -167,7 +167,7 @@ class ImageFacade
     /**
      * @param object $entity
      * @param string|null $type
-     * @return \Shopsys\ShopBundle\Component\Image\Image[imageId]
+     * @return \Shopsys\ShopBundle\Component\Image\Image[]
      */
     public function getImagesByEntityIndexedById($entity, $type)
     {

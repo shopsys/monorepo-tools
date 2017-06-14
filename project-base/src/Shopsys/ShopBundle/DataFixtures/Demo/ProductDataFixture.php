@@ -68,7 +68,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[catnum] $productsByCatnum
+     * @param \Shopsys\ShopBundle\Model\Product\Product[] $productsByCatnum
      * @param int $productNo
      */
     private function createVariants(array $productsByCatnum, $productNo)

@@ -8,7 +8,7 @@ class EntityNotNullableColumnsFinder
 {
     /**
      * @param \Doctrine\ORM\Mapping\ClassMetadata[] $classesMetadata
-     * @return string[tableName][]
+     * @return string[][]
      */
     public function getAllNotNullableColumnNamesIndexedByTableName(array $classesMetadata)
     {

@@ -49,7 +49,7 @@ class MultidomainEntityClassFinderFacade
     }
 
     /**
-     * @return string[tableName][]
+     * @return string[][]
      */
     public function getAllNotNullableColumnNamesIndexedByTableName()
     {

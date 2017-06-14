@@ -8,7 +8,7 @@ class EntityStringColumnsFinder
 {
     /**
      * @param \Doctrine\ORM\Mapping\ClassMetadata[] $classesMetadata
-     * @return string[tableName][]
+     * @return string[][]
      */
     public function getAllStringColumnNamesIndexedByTableName(array $classesMetadata)
     {

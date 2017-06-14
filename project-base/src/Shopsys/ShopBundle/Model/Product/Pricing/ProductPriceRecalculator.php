@@ -57,7 +57,7 @@ class ProductPriceRecalculator
     private $productService;
 
     /**
-     * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\ShopBundle\Model\Product\Product[][0]|null
+     * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\ShopBundle\Model\Product\Product[][]|null
      */
     private $productRowsIterator;
 

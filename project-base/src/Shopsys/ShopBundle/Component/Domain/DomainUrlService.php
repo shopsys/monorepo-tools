@@ -49,7 +49,7 @@ class DomainUrlService
     }
 
     /**
-     * @return string[tableName][]
+     * @return string[][]
      */
     private function getAllStringColumnNamesIndexedByTableName()
     {

@@ -124,7 +124,7 @@ class ImageConfig
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[class]
+     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[]
      */
     public function getAllImageEntityConfigsByClass()
     {

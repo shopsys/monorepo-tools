@@ -111,7 +111,7 @@ class ProductDetailFactory
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Component\Image\Image[imageId]
+     * @return \Shopsys\ShopBundle\Component\Image\Image[]
      */
     public function getImagesIndexedById(Product $product)
     {

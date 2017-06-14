@@ -214,7 +214,7 @@ class PaymentFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @return string [paymentId]
+     * @return string[]
      */
     public function getPaymentPricesWithVatIndexedByPaymentId(Currency $currency)
     {
@@ -229,7 +229,7 @@ class PaymentFacade
     }
 
     /**
-     * @return string[paymentId]
+     * @return string[]
      */
     public function getPaymentVatPercentsIndexedByPaymentId()
     {
