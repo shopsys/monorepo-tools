@@ -86,17 +86,19 @@ class PaymentPriceCalculation
     /**
      * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price[paymentId]
+     * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
+     * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
-    public function calculatePricesById(
+    public function getCalculatedPricesIndexedByPaymentId(
         array $payments,
         Currency $currency,
         Price $productsPrice,
         $domainId
     ) {
-        $paymentsPrices = [];
+        $paymentsPricesByPaymentId = [];
         foreach ($payments as $payment) {
-            $paymentsPrices[$payment->getId()] = $this->calculatePrice(
+            $paymentsPricesByPaymentId[$payment->getId()] = $this->calculatePrice(
                 $payment,
                 $currency,
                 $productsPrice,
@@ -104,6 +106,6 @@ class PaymentPriceCalculation
             );
         }
 
-        return $paymentsPrices;
+        return $paymentsPricesByPaymentId;
     }
 }

@@ -90,7 +90,7 @@ class TransportPriceCalculation
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
-    public function calculatePricesById(
+    public function getCalculatedPricesIndexedByTransportId(
         array $transports,
         Currency $currency,
         Price $productsPrice,
