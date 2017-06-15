@@ -48,8 +48,8 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator
      */
     private function validateDuplication(array $values, UniqueSlugsOnDomains $constraint)
     {
-        $slugCountsOnDomain = $this->getSlugCountsOnDomain($values);
-        foreach ($slugCountsOnDomain as $domainId => $countBySlug) {
+        $slugsCountByDomainId = $this->getSlugsCountIndexedByDomainId($values);
+        foreach ($slugsCountByDomainId as $domainId => $countBySlug) {
             $domainConfig = $this->domain->getDomainConfigById($domainId);
             foreach ($countBySlug as $slug => $count) {
                 if ($count > 1) {
@@ -93,24 +93,24 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator
 
     /**
      * @param array $values
-     * @return int[domainId][slug]
+     * @return int[][]
      */
-    private function getSlugCountsOnDomain(array $values)
+    private function getSlugsCountIndexedByDomainId(array $values)
     {
-        $slugCountsOnDomain = [];
+        $slugsCountByDomainId = [];
         foreach ($values as $urlData) {
             $domainId = $urlData[FriendlyUrlType::FIELD_DOMAIN];
             $slug = $urlData[FriendlyUrlType::FIELD_SLUG];
-            if (!array_key_exists($domainId, $slugCountsOnDomain)) {
-                $slugCountsOnDomain[$domainId] = [];
+            if (!array_key_exists($domainId, $slugsCountByDomainId)) {
+                $slugsCountByDomainId[$domainId] = [];
             }
-            if (!array_key_exists($slug, $slugCountsOnDomain[$domainId])) {
-                $slugCountsOnDomain[$domainId][$slug] = 0;
+            if (!array_key_exists($slug, $slugsCountByDomainId[$domainId])) {
+                $slugsCountByDomainId[$domainId][$slug] = 0;
             }
 
-            $slugCountsOnDomain[$domainId][$slug]++;
+            $slugsCountByDomainId[$domainId][$slug]++;
         }
 
-        return $slugCountsOnDomain;
+        return $slugsCountByDomainId;
     }
 }
