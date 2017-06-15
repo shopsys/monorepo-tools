@@ -195,7 +195,7 @@ class ProductFacade
         $this->createProductDomains($product, $this->domain->getAll());
         $this->createProductVisibilities($product);
         $this->refreshProductDomains($product, $productEditData);
-        $this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
+        $this->refreshProductManualInputPrices($product, $productEditData->manualInputPricesByPricingGroupId);
         $this->refreshProductAccessories($product, $productEditData->accessories);
         $this->productHiddenRecalculator->calculateHiddenForProduct($product);
         $this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($product);
@@ -222,7 +222,7 @@ class ProductFacade
         $this->saveParameters($product, $productEditData->parameters);
         $this->refreshProductDomains($product, $productEditData);
         if (!$product->isMainVariant()) {
-            $this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
+            $this->refreshProductManualInputPrices($product, $productEditData->manualInputPricesByPricingGroupId);
         } else {
             $this->productVariantService->refreshProductVariants($product, $productEditData->variants);
         }

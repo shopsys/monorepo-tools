@@ -115,15 +115,15 @@ class ProductInputPriceFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return string[pricingGroupId]
+     * @return string[]
      */
-    public function getManualInputPricesData(Product $product)
+    public function getManualInputPricesDataIndexedByPricingGroupId(Product $product)
     {
         $pricingGroups = $this->pricingGroupFacade->getAll();
         $inputPriceType = $this->pricingSetting->getInputPriceType();
         $manualInputPrices = $this->productManualInputPriceRepository->getByProduct($product);
 
-        return $this->productInputPriceService->getManualInputPricesData(
+        return $this->productInputPriceService->getManualInputPricesDataIndexedByPricingGroupId(
             $product,
             $inputPriceType,
             $pricingGroups,

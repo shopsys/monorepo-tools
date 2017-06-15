@@ -284,18 +284,18 @@ class ProductDataFixtureLoader
 
     /**
      * @param string $string
-     * @return string[pricingGroup]
+     * @return string[]
      */
     private function getProductManualPricesIndexedByPricingGroupFromString($string)
     {
-        $productManualPrices = [];
+        $productManualPricesByPricingGroup = [];
         $rowData = explode(';', $string);
         foreach ($rowData as $pricingGroupAndPrice) {
             list($pricingGroup, $price) = explode('=', $pricingGroupAndPrice);
-            $productManualPrices[$pricingGroup] = $price;
+            $productManualPricesByPricingGroup[$pricingGroup] = $price;
         }
 
-        return $productManualPrices;
+        return $productManualPricesByPricingGroup;
     }
 
     /**
@@ -337,7 +337,7 @@ class ProductDataFixtureLoader
                 $this->createDefaultManualPriceForAllPricingGroups($productEditData);
                 foreach ($manualPrices as $pricingGroup => $manualPrice) {
                     $pricingGroup = $this->pricingGroups[$pricingGroup];
-                    $productEditData->manualInputPrices[$pricingGroup->getId()] = $manualPrice;
+                    $productEditData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = $manualPrice;
                 }
                 break;
             default:
@@ -353,8 +353,8 @@ class ProductDataFixtureLoader
     private function createDefaultManualPriceForAllPricingGroups(ProductEditData $productEditData)
     {
         foreach ($this->pricingGroups as $pricingGroupReferenceName => $pricingGroup) {
-            if (!array_key_exists($pricingGroup->getId(), $productEditData->manualInputPrices)) {
-                $productEditData->manualInputPrices[$pricingGroup->getId()] = null;
+            if (!array_key_exists($pricingGroup->getId(), $productEditData->manualInputPricesByPricingGroupId)) {
+                $productEditData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = null;
             }
         }
     }

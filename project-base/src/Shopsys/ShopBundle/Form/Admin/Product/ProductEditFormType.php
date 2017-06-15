@@ -159,7 +159,7 @@ class ProductEditFormType extends AbstractType
                     'error_bubbling' => false,
                 ])
                 ->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer()))
-            ->add('manualInputPrices', FormType::class, [
+            ->add('manualInputPricesByPricingGroupId', FormType::class, [
                 'compound' => true,
             ])
             ->add('seoTitles', MultidomainType::class, [
@@ -242,7 +242,7 @@ class ProductEditFormType extends AbstractType
             ->add('save', SubmitType::class);
 
         foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
-            $builder->get('manualInputPrices')
+            $builder->get('manualInputPricesByPricingGroupId')
                 ->add($pricingGroup->getId(), MoneyType::class, [
                     'currency' => false,
                     'scale' => 6,

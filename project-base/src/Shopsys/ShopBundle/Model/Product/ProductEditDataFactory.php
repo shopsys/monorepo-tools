@@ -87,7 +87,7 @@ class ProductEditDataFactory
 
         $nullForAllDomains = $this->getNullForAllDomains();
 
-        $productEditData->manualInputPrices = [];
+        $productEditData->manualInputPricesByPricingGroupId = [];
         $productEditData->seoTitles = $nullForAllDomains;
         $productEditData->seoMetaDescriptions = $nullForAllDomains;
         $productEditData->descriptions = $nullForAllDomains;
@@ -114,9 +114,9 @@ class ProductEditDataFactory
         $productEditData->productData = $this->productDataFactory->createFromProduct($product);
         $productEditData->parameters = $this->getParametersData($product);
         try {
-            $productEditData->manualInputPrices = $this->productInputPriceFacade->getManualInputPricesData($product);
+            $productEditData->manualInputPricesByPricingGroupId = $this->productInputPriceFacade->getManualInputPricesDataIndexedByPricingGroupId($product);
         } catch (\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
-            $productEditData->manualInputPrices = null;
+            $productEditData->manualInputPricesByPricingGroupId = null;
         }
         $productEditData->accessories = $this->getAccessoriesData($product);
         $productEditData->orderedImages = $this->imageFacade->getImagesByEntityIndexedById($product, null);

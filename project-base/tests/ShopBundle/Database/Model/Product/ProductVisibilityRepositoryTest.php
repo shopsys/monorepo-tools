@@ -390,12 +390,12 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $allPricingGroups = $pricingGroupFacade->getAll();
         foreach ($allPricingGroups as $pricingGroup) {
-            $productEditData->manualInputPrices[$pricingGroup->getId()] = 10;
+            $productEditData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = 10;
         }
 
         $pricingGroupWithZeroPriceId = $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId();
 
-        $productEditData->manualInputPrices[$pricingGroupWithZeroPriceId] = 0;
+        $productEditData->manualInputPricesByPricingGroupId[$pricingGroupWithZeroPriceId] = 0;
 
         $product = $productFacade->create($productEditData);
         $productPriceRecalculator->runImmediateRecalculations();
@@ -433,11 +433,11 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $allPricingGroups = $pricingGroupFacade->getAll();
         foreach ($allPricingGroups as $pricingGroup) {
-            $productEditData->manualInputPrices[$pricingGroup->getId()] = 10;
+            $productEditData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = 10;
         }
 
         $pricingGroupWithNullPriceId = $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId();
-        $productEditData->manualInputPrices[$pricingGroupWithNullPriceId] = null;
+        $productEditData->manualInputPricesByPricingGroupId[$pricingGroupWithNullPriceId] = null;
 
         $product = $productFacade->create($productEditData);
         $productPriceRecalculator->runImmediateRecalculations();

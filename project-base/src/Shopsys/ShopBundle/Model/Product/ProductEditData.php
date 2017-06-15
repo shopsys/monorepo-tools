@@ -33,9 +33,9 @@ class ProductEditData
     public $orderedImages;
 
     /**
-     * @var string[pricingGroupId]
+     * @var string[]
      */
-    public $manualInputPrices;
+    public $manualInputPricesByPricingGroupId;
 
     /**
      * @var string[]|null[]
@@ -98,7 +98,7 @@ class ProductEditData
      * @param string[] $imagesToUpload
      * @param \Shopsys\ShopBundle\Component\Image\Image[] $imagesToDelete
      * @param \Shopsys\ShopBundle\Component\Image\Image[] $orderedImages
-     * @param string[] $manualInputPrices
+     * @param string[] $manualInputPricesByPricingGroupId
      * @param string[]|null[] $seoTitles
      * @param string[]|null[] $seoMetaDescriptions
      * @param string[]|null[] $descriptions
@@ -116,7 +116,7 @@ class ProductEditData
         array $imagesToUpload = [],
         array $imagesToDelete = [],
         array $orderedImages = [],
-        array $manualInputPrices = [],
+        array $manualInputPricesByPricingGroupId = [],
         array $seoTitles = [],
         array $seoMetaDescriptions = [],
         array $descriptions = [],
@@ -137,7 +137,7 @@ class ProductEditData
         $this->imagesToUpload = $imagesToUpload;
         $this->imagesToDelete = $imagesToDelete;
         $this->orderedImages = $orderedImages;
-        $this->manualInputPrices = $manualInputPrices;
+        $this->manualInputPricesByPricingGroupId = $manualInputPricesByPricingGroupId;
         $this->seoTitles = $seoTitles;
         $this->seoMetaDescriptions = $seoMetaDescriptions;
         $this->descriptions = $descriptions;
