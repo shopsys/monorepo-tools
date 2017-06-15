@@ -207,7 +207,7 @@ class ProductEditFormType extends AbstractType
                     ],
                 ],
             ])
-            ->add('showInZboziFeed', MultidomainType::class, [
+            ->add('showInZboziFeedIndexedByDomainId', MultidomainType::class, [
                 'entry_type' => YesNoType::class,
                 'required' => false,
             ])

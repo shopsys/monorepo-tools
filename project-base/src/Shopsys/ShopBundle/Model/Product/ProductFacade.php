@@ -321,7 +321,7 @@ class ProductFacade
             $shortDescriptions = $productEditData->shortDescriptions;
         }
         $heurekaCpcValues = $productEditData->heurekaCpcValues;
-        $showInZboziFeed = $productEditData->showInZboziFeed;
+        $showInZboziFeed = $productEditData->showInZboziFeedIndexedByDomainId;
         $zboziCpcValues = $productEditData->zboziCpcValues;
         $zboziCpcSearchValues = $productEditData->zboziCpcSearchValues;
 

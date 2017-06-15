@@ -95,7 +95,7 @@ class ProductEditDataFactory
         $productEditData->accessories = [];
         $productEditData->heurekaCpcValues = $nullForAllDomains;
         foreach ($this->domain->getAllIds() as $domainId) {
-            $productEditData->showInZboziFeed[$domainId] = true;
+            $productEditData->showInZboziFeedIndexedByDomainId[$domainId] = true;
         }
         $productEditData->zboziCpcValues = $nullForAllDomains;
         $productEditData->zboziCpcSearchValues = $nullForAllDomains;
@@ -176,7 +176,7 @@ class ProductEditDataFactory
             $productEditData->urls->mainFriendlyUrlsByDomainId[$domainId] =
                 $this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
             $productEditData->heurekaCpcValues[$domainId] = $productDomain->getHeurekaCpc();
-            $productEditData->showInZboziFeed[$domainId] = $productDomain->getShowInZboziFeed();
+            $productEditData->showInZboziFeedIndexedByDomainId[$domainId] = $productDomain->getShowInZboziFeed();
             $productEditData->zboziCpcValues[$domainId] = $productDomain->getZboziCpc();
             $productEditData->zboziCpcSearchValues[$domainId] = $productDomain->getZboziCpcSearch();
         }

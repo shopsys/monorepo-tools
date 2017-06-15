@@ -78,9 +78,9 @@ class ProductEditData
     public $variants;
 
     /**
-     * @var bool[domainId]
+     * @var bool[]
      */
-    public $showInZboziFeed;
+    public $showInZboziFeedIndexedByDomainId;
 
     /**
      * @var string[]|null[]
@@ -106,7 +106,7 @@ class ProductEditData
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $accessories
      * @param string[]|null[] $heurekaCpcValues
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
-     * @param bool[domainId] $showInZboziFeed
+     * @param bool[] $showInZboziFeedIndexedByDomainId
      * @param string[]|null[] $zboziCpcValues
      * @param string[]|null[] $zboziCpcSearchValues
      */
@@ -124,7 +124,7 @@ class ProductEditData
         array $accessories = [],
         array $heurekaCpcValues = [],
         array $variants = [],
-        array $showInZboziFeed = [],
+        array $showInZboziFeedIndexedByDomainId = [],
         array $zboziCpcValues = [],
         array $zboziCpcSearchValues = []
     ) {
@@ -146,7 +146,7 @@ class ProductEditData
         $this->accessories = $accessories;
         $this->heurekaCpcValues = $heurekaCpcValues;
         $this->variants = $variants;
-        $this->showInZboziFeed = $showInZboziFeed;
+        $this->showInZboziFeedIndexedByDomainId = $showInZboziFeedIndexedByDomainId;
         $this->zboziCpcValues = $zboziCpcValues;
         $this->zboziCpcSearchValues = $zboziCpcSearchValues;
     }

@@ -168,7 +168,7 @@ class ProductDataFixtureLoader
         $productEditData->productData->ean = $row[self::COLUMN_EAN];
         $productEditData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
         $productEditData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
-        $productEditData->showInZboziFeed[$domainId] = true;
+        $productEditData->showInZboziFeedIndexedByDomainId[$domainId] = true;
         $productEditData->productData->priceCalculationType = $row[self::COLUMN_PRICE_CALCULATION_TYPE];
         $this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
         switch ($row[self::COLUMN_VAT]) {
@@ -240,7 +240,7 @@ class ProductDataFixtureLoader
         $domainId = 2;
         $productEditData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
         $productEditData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
-        $productEditData->showInZboziFeed[$domainId] = true;
+        $productEditData->showInZboziFeedIndexedByDomainId[$domainId] = true;
         $this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
         $productEditData->productData->categoriesByDomainId[$domainId] =
             $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_2], $this->categories);
