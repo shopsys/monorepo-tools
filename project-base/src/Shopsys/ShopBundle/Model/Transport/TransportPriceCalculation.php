@@ -88,7 +88,7 @@ class TransportPriceCalculation
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
      * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price[transportId]
+     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
     public function calculatePricesById(
         array $transports,
@@ -96,9 +96,9 @@ class TransportPriceCalculation
         Price $productsPrice,
         $domainId
     ) {
-        $transportsPrices = [];
+        $transportsPricesByTransportId = [];
         foreach ($transports as $transport) {
-            $transportsPrices[$transport->getId()] = $this->calculatePrice(
+            $transportsPricesByTransportId[$transport->getId()] = $this->calculatePrice(
                 $transport,
                 $currency,
                 $productsPrice,
@@ -106,6 +106,6 @@ class TransportPriceCalculation
             );
         }
 
-        return $transportsPrices;
+        return $transportsPricesByTransportId;
     }
 }
