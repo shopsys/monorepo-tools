@@ -2428,7 +2428,7 @@ msgstr "Odkaz na přehled značek"
 msgid "List of products in order (name, quantity, price per unit including VAT, total price per item including VAT)"
 msgstr "Seznam zboží v objednávce (název, množství, cena za jednotku s DPH, celková cena za položku s DPH)"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/list.html.twig:23
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/list.html.twig:24
 msgid "List of subcategories"
 msgstr "Seznam podkategorií"
 
@@ -2488,7 +2488,7 @@ msgstr "Umístění"
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:33
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:35
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Newsletter/subscription.html.twig:14
-#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:98
+#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:115
 msgid "Log in"
 msgstr "Přihlásit se"
 
@@ -2501,7 +2501,7 @@ msgid "Log in failed."
 msgstr "Přihlášení se nepodařilo."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Inline/Menu/menu.html.twig:28
-#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:85
+#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:102
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/layout.html.twig:11
 msgid "Log out"
 msgstr "Odhlásit se"
@@ -2597,7 +2597,7 @@ msgstr "Maximální cena za proklik"
 msgid "Maximum price per click in offers"
 msgstr "Maximální cena za proklik v nabídkách"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:29
+#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:44
 msgid "Menu"
 msgstr "Menu"
 
@@ -2662,7 +2662,7 @@ msgstr "Multidoménové, multijazyčné, inputy s ikonou - základní"
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:7
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orders.html.twig:7
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orders.html.twig:10
-#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:78
+#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:95
 msgid "My orders"
 msgstr "Mé objednávky"
 
@@ -2910,10 +2910,6 @@ msgstr "Doposud nejsou žádné skripty."
 msgid "No shipping created so far."
 msgstr "Doposud nebyly vytvořeny žádné dopravy."
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Translation/listGrid.html.twig:8
-msgid "No translation created so far."
-msgstr "Doposud nebyly vytvořeny žádné překlady."
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Unit/listGrid.html.twig:4
 msgid "No units found. You have to create some first."
 msgstr "Nebyly nalezeny žádné jednotky. Nejprve musíte nějaké vytvořit."
@@ -2983,8 +2979,8 @@ msgstr "Nabízet ve feedu"
 msgid "Often useful part, it is heading for different information contents, mainly for forms, but can be used for more purposes"
 msgstr "Často užitečná část, je to hlavička pro různé obsahy informací, hlavně pro formuláře, ale lze použít pro více účelů."
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Default/index.html.twig:16
-#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:5
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Default/index.html.twig:17
+#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:11
 msgid "Online shop"
 msgstr "Internetový obchod"
 
@@ -3266,7 +3262,7 @@ msgstr "Procent"
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:11
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:10
-#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:75
+#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:92
 msgid "Personal data"
 msgstr "Osobní údaje"
 
@@ -3641,7 +3637,7 @@ msgstr "Registrovaní zákazníci"
 #: SimpleBreadcrumbGenerator.php:52
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:8
-#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:105
+#: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:122
 msgid "Registration"
 msgstr "Registrace"
 
@@ -4158,15 +4154,9 @@ msgstr "Speciální chování pro tabulku pro menší zařízení, kdy při zmen
 msgid "Special behavior of table, which was created for parameters, but could be used also differently."
 msgstr "Speciální chování tabulky, která byla vytvořena pro parametry, nicméně, dá se využít i dalšími způsoby."
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Default/index.html.twig:37
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Default/index.html.twig:39
 msgid "Special offers"
 msgstr "Akční zboží"
-
-#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Translation/list.html.twig:3
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Translation/list.html.twig:4
-msgid "Static texts translations"
-msgstr "Překlady konstant"
 
 #: OrderController.php:231
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:13
@@ -4683,10 +4673,6 @@ msgstr "Celková cena s DPH"
 msgid "Tracking ID"
 msgstr "Číslo pro měření"
 
-#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-msgid "Translations"
-msgstr "Překlady"
-
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Error/error.html.twig:24
 msgid "Try using web search"
 msgstr "Zkuste použít vyhledávání na webu"
@@ -4933,7 +4919,7 @@ msgstr "Různé zprávy a flash zprávy, je zde více typových a barevných mod
 msgid "View all results"
 msgstr "Zobrazit všechny výsledky"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/list.html.twig:58
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/list.html.twig:60
 msgid "View more"
 msgstr "Zobrazit více"
 

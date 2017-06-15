@@ -41,10 +41,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/shopsys/jparser.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/shopsys/JMSTranslationBundle.git"
         }
     ],
     "require": {
@@ -79,7 +75,7 @@
         "incenteev/composer-parameter-handler": "2.1.2",
         "intaro/postgres-search-bundle": "dev-master#06625bdc1d",
         "intervention/image": "2.3.5",
-        "jms/translation-bundle": "dev-fix-external-translations-1-3-1#02048b as 1.3.1",
+        "jms/translation-bundle": "1.3.2",
         "phing/phing": "2.16.0",
         "phpunit/phpunit": "4.8.35",
         "presta/sitemap-bundle": "1.4.2",
