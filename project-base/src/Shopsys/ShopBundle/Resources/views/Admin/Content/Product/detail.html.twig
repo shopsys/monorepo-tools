@@ -249,7 +249,7 @@
                                 <span class="svg svg-arrow-right"></span>
                             </td>
                             <td class="table-form__cell  table-form__cell--del-after">
-                                {% for locale, valueTextLocaleForm in parameter.valueText %}
+                                {% for locale, valueTextLocaleForm in parameter.valueTextsByLocale %}
                                     <div class="input__wrap">
                                         {{ form_widget(valueTextLocaleForm, { attr: { class: 'input--flag'} })  }}
                                         <span class="input__flag">

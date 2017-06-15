@@ -32,14 +32,14 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
             if (!array_key_exists($parameterId, $normValue)) {
                 $normValue[$parameterId] = new ProductParameterValuesLocalizedData();
                 $normValue[$parameterId]->parameter = $productParameterValueData->parameter;
-                $normValue[$parameterId]->valueText = [];
+                $normValue[$parameterId]->valueTextsByLocale = [];
             }
 
-            if (array_key_exists($locale, $normValue[$parameterId]->valueText)) {
+            if (array_key_exists($locale, $normValue[$parameterId]->valueTextsByLocale)) {
                 throw new \Symfony\Component\Form\Exception\TransformationFailedException('Duplicate parameter');
             }
 
-            $normValue[$parameterId]->valueText[$locale] = $productParameterValueData->parameterValueData->text;
+            $normValue[$parameterId]->valueTextsByLocale[$locale] = $productParameterValueData->parameterValueData->text;
         }
 
         return array_values($normValue);
@@ -57,7 +57,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
             foreach ($viewData as $productParameterValuesLocalizedData) {
                 /* @var $productParameterValuesLocalizedData \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData */
 
-                foreach ($productParameterValuesLocalizedData->valueText as $locale => $valueText) {
+                foreach ($productParameterValuesLocalizedData->valueTextsByLocale as $locale => $valueText) {
                     if ($valueText !== null) {
                         $productParameterValueData = new ProductParameterValueData();
                         $productParameterValueData->parameter = $productParameterValuesLocalizedData->parameter;
