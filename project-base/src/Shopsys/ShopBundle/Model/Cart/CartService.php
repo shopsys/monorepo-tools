@@ -127,15 +127,15 @@ class CartService
 
     /**
      * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
-     * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[cartItemId]
+     * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[]
      */
-    public function getQuantifiedProducts(Cart $cart)
+    public function getQuantifiedProductsIndexedByCartItemId(Cart $cart)
     {
-        $quantifiedProducts = [];
+        $quantifiedProductsByCartItemId = [];
         foreach ($cart->getItems() as $cartItem) {
-            $quantifiedProducts[$cartItem->getId()] = new QuantifiedProduct($cartItem->getProduct(), $cartItem->getQuantity());
+            $quantifiedProductsByCartItemId[$cartItem->getId()] = new QuantifiedProduct($cartItem->getProduct(), $cartItem->getQuantity());
         }
 
-        return $quantifiedProducts;
+        return $quantifiedProductsByCartItemId;
     }
 }

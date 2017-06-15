@@ -78,7 +78,7 @@ class OrderPreviewFactory
         return $this->create(
             $currency,
             $this->domain->getId(),
-            $this->cartFacade->getQuantifiedProductsOfCurrentCustomer(),
+            $this->cartFacade->getQuantifiedProductsOfCurrentCustomerIndexedByCartItemId(),
             $transport,
             $payment,
             $this->currentCustomer->findCurrentUser(),
