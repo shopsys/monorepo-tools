@@ -119,7 +119,7 @@ class ProductEditDataFactory
             $productEditData->manualInputPricesByPricingGroupId = null;
         }
         $productEditData->accessories = $this->getAccessoriesData($product);
-        $productEditData->orderedImages = $this->imageFacade->getImagesByEntityIndexedById($product, null);
+        $productEditData->orderedImagesById = $this->imageFacade->getImagesByEntityIndexedById($product, null);
         $productEditData->variants = $product->getVariants();
 
         $this->setMultidomainData($product, $productEditData);

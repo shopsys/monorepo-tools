@@ -230,7 +230,7 @@ class ProductFacade
         $this->em->flush();
         $this->productHiddenRecalculator->calculateHiddenForProduct($product);
         $this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($product);
-        $this->imageFacade->saveImageOrdering($productEditData->orderedImages);
+        $this->imageFacade->saveImageOrdering($productEditData->orderedImagesById);
         $this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
         $this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
         $this->friendlyUrlFacade->saveUrlListFormData('front_product_detail', $product->getId(), $productEditData->urls);
