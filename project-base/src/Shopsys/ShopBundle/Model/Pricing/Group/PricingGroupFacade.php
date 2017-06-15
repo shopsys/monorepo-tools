@@ -171,15 +171,16 @@ class PricingGroupFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[domainId][]
+     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[][]
      */
     public function getAllIndexedByDomainId()
     {
+        $pricingGroupsByDomainId = [];
         foreach ($this->domain->getAll() as $domain) {
             $domainId = $domain->getId();
-            $pricingGroupsIndexedByDomainId[$domainId] = $this->pricingGroupRepository->getPricingGroupsByDomainId($domainId);
+            $pricingGroupsByDomainId[$domainId] = $this->pricingGroupRepository->getPricingGroupsByDomainId($domainId);
         }
 
-        return $pricingGroupsIndexedByDomainId;
+        return $pricingGroupsByDomainId;
     }
 }
