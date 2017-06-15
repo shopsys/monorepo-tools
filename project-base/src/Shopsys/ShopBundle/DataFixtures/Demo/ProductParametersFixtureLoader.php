@@ -101,22 +101,22 @@ class ProductParametersFixtureLoader
     }
 
     /**
-     * @param string[locale] $parameterNames
+     * @param string[] $parameterNamesByLocale
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */
-    private function findParameterByNamesOrCreateNew(array $parameterNames)
+    private function findParameterByNamesOrCreateNew(array $parameterNamesByLocale)
     {
-        $cacheId = json_encode($parameterNames);
+        $cacheId = json_encode($parameterNamesByLocale);
 
         if (isset($this->parameters[$cacheId])) {
             return $this->parameters[$cacheId];
         }
 
-        $parameter = $this->parameterFacade->findParameterByNames($parameterNames);
+        $parameter = $this->parameterFacade->findParameterByNames($parameterNamesByLocale);
 
         if ($parameter === null) {
             $visible = true;
-            $parameterData = new ParameterData($parameterNames, $visible);
+            $parameterData = new ParameterData($parameterNamesByLocale, $visible);
             $parameter = $this->parameterFacade->create($parameterData);
         }
 
