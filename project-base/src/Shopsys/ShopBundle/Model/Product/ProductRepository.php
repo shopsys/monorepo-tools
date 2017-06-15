@@ -290,7 +290,7 @@ class ProductRepository
      * @param int $domainId
      * @param string $locale
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-     * @param string $orderingMode
+     * @param string $orderingModeId
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $page
      * @param int $limit
@@ -301,7 +301,7 @@ class ProductRepository
         $domainId,
         $locale,
         ProductFilterData $productFilterData,
-        $orderingMode,
+        $orderingModeId,
         PricingGroup $pricingGroup,
         $page,
         $limit
@@ -314,7 +314,7 @@ class ProductRepository
             $pricingGroup
         );
 
-        $this->applyOrdering($queryBuilder, $orderingMode, $pricingGroup, $locale);
+        $this->applyOrdering($queryBuilder, $orderingModeId, $pricingGroup, $locale);
 
         $queryPaginator = new QueryPaginator($queryBuilder);
 
@@ -324,7 +324,7 @@ class ProductRepository
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
      * @param int $domainId
-     * @param string $orderingMode
+     * @param string $orderingModeId
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $page
      * @param int $limit
@@ -334,7 +334,7 @@ class ProductRepository
         Brand $brand,
         $domainId,
         $locale,
-        $orderingMode,
+        $orderingModeId,
         PricingGroup $pricingGroup,
         $page,
         $limit
@@ -346,7 +346,7 @@ class ProductRepository
         );
 
         $this->addTranslation($queryBuilder, $locale);
-        $this->applyOrdering($queryBuilder, $orderingMode, $pricingGroup, $locale);
+        $this->applyOrdering($queryBuilder, $orderingModeId, $pricingGroup, $locale);
 
         $queryPaginator = new QueryPaginator($queryBuilder);
 
@@ -389,7 +389,7 @@ class ProductRepository
      * @param int $domainId
      * @param string $locale
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-     * @param string $orderingMode
+     * @param string $orderingModeId
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $page
      * @param int $limit
@@ -400,7 +400,7 @@ class ProductRepository
         $domainId,
         $locale,
         ProductFilterData $productFilterData,
-        $orderingMode,
+        $orderingModeId,
         PricingGroup $pricingGroup,
         $page,
         $limit
@@ -414,7 +414,7 @@ class ProductRepository
         );
 
         $this->productSearchRepository->addRelevance($queryBuilder, $searchText);
-        $this->applyOrdering($queryBuilder, $orderingMode, $pricingGroup, $locale);
+        $this->applyOrdering($queryBuilder, $orderingModeId, $pricingGroup, $locale);
 
         $queryPaginator = new QueryPaginator($queryBuilder);
 
@@ -454,17 +454,17 @@ class ProductRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-     * @param string $orderingMode
+     * @param string $orderingModeId
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string $locale
      */
     private function applyOrdering(
         QueryBuilder $queryBuilder,
-        $orderingMode,
+        $orderingModeId,
         PricingGroup $pricingGroup,
         $locale
     ) {
-        switch ($orderingMode) {
+        switch ($orderingModeId) {
             case ProductListOrderingModeService::ORDER_BY_NAME_ASC:
                 $collation = $this->localization->getCollationByLocale($locale);
                 $queryBuilder->orderBy("COLLATE(pt.name, '" . $collation . "')", 'asc');
@@ -508,7 +508,7 @@ class ProductRepository
                 break;
 
             default:
-                $message = 'Product list ordering mode "' . $orderingMode . '" is not supported.';
+                $message = 'Product list ordering mode "' . $orderingModeId . '" is not supported.';
                 throw new \Shopsys\ShopBundle\Model\Product\Exception\InvalidOrderingModeException($message);
         }
 

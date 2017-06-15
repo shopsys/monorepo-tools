@@ -41,9 +41,9 @@ class ProductListOrderingModeForBrandFacade
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return string
      */
-    public function getOrderingModeFromRequest(Request $request)
+    public function getOrderingModeIdFromRequest(Request $request)
     {
-        return $this->productListOrderingModeService->getOrderingModeFromRequest(
+        return $this->productListOrderingModeService->getOrderingModeIdFromRequest(
             $request,
             $this->getProductListOrderingConfig()
         );

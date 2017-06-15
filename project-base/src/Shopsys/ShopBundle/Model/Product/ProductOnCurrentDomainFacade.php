@@ -124,7 +124,7 @@ class ProductOnCurrentDomainFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-     * @param string $orderingMode
+     * @param string $orderingModeId
      * @param int $page
      * @param int $limit
      * @param int $categoryId
@@ -132,7 +132,7 @@ class ProductOnCurrentDomainFacade
      */
     public function getPaginatedProductDetailsInCategory(
         ProductFilterData $productFilterData,
-        $orderingMode,
+        $orderingModeId,
         $page,
         $limit,
         $categoryId
@@ -144,7 +144,7 @@ class ProductOnCurrentDomainFacade
             $this->domain->getId(),
             $this->domain->getLocale(),
             $productFilterData,
-            $orderingMode,
+            $orderingModeId,
             $this->currentCustomer->getPricingGroup(),
             $page,
             $limit
@@ -160,14 +160,14 @@ class ProductOnCurrentDomainFacade
     }
 
     /**
-     * @param string $orderingMode
+     * @param string $orderingModeId
      * @param int $page
      * @param int $limit
      * @param int $brandId
      * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
      */
     public function getPaginatedProductDetailsForBrand(
-        $orderingMode,
+        $orderingModeId,
         $page,
         $limit,
         $brandId
@@ -178,7 +178,7 @@ class ProductOnCurrentDomainFacade
             $brand,
             $this->domain->getId(),
             $this->domain->getLocale(),
-            $orderingMode,
+            $orderingModeId,
             $this->currentCustomer->getPricingGroup(),
             $page,
             $limit
@@ -196,7 +196,7 @@ class ProductOnCurrentDomainFacade
     /**
      * @param string|null $searchText
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-     * @param string $orderingMode
+     * @param string $orderingModeId
      * @param int $page
      * @param int $limit
      * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
@@ -204,7 +204,7 @@ class ProductOnCurrentDomainFacade
     public function getPaginatedProductDetailsForSearch(
         $searchText,
         ProductFilterData $productFilterData,
-        $orderingMode,
+        $orderingModeId,
         $page,
         $limit
     ) {
@@ -213,7 +213,7 @@ class ProductOnCurrentDomainFacade
             $this->domain->getId(),
             $this->domain->getLocale(),
             $productFilterData,
-            $orderingMode,
+            $orderingModeId,
             $this->currentCustomer->getPricingGroup(),
             $page,
             $limit
