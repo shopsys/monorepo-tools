@@ -12,18 +12,18 @@ class PaymentDetail
     private $payment;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Price[currencyId]
+     * @var \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
-    private $basePrices;
+    private $basePricesByCurrencyId;
 
     /**
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price[currencyId] $basePrices
+     * @param \Shopsys\ShopBundle\Model\Pricing\Price[] $basePricesByCurrencyId
      */
-    public function __construct(Payment $payment, array $basePrices)
+    public function __construct(Payment $payment, array $basePricesByCurrencyId)
     {
         $this->payment = $payment;
-        $this->basePrices = $basePrices;
+        $this->basePricesByCurrencyId = $basePricesByCurrencyId;
     }
 
     /**
@@ -35,10 +35,10 @@ class PaymentDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price[currencyId]
+     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
-    public function getBasePrices()
+    public function getBasePricesByCurrencyId()
     {
-        return $this->basePrices;
+        return $this->basePricesByCurrencyId;
     }
 }

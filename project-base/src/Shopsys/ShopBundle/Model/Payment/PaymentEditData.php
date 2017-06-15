@@ -12,21 +12,21 @@ class PaymentEditData
     public $paymentData;
 
     /**
-     * @var string[currencyId]
+     * @var string[]
      */
-    public $prices;
+    public $pricesByCurrencyId;
 
     /**
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
-     * @param array $prices
+     * @param array $pricesByCurrencyId
      */
-    public function __construct(PaymentData $paymentData = null, array $prices = [])
+    public function __construct(PaymentData $paymentData = null, array $pricesByCurrencyId = [])
     {
         if ($paymentData !== null) {
             $this->paymentData = $paymentData;
         } else {
             $this->paymentData = new PaymentData();
         }
-        $this->prices = $prices;
+        $this->pricesByCurrencyId = $pricesByCurrencyId;
     }
 }

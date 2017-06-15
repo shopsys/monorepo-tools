@@ -41,7 +41,7 @@ class TransportEditFormType extends AbstractType
      */
     private function getPricesBuilder(FormBuilderInterface $builder)
     {
-        $pricesBuilder = $builder->create('prices', null, [
+        $pricesBuilder = $builder->create('pricesByCurrencyId', null, [
             'compound' => true,
         ]);
         foreach ($this->currencyFacade->getAll() as $currency) {

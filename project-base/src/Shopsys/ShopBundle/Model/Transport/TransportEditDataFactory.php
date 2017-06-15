@@ -49,7 +49,7 @@ class TransportEditDataFactory
         $transportEditData->transportData = $transportData;
 
         foreach ($transport->getPrices() as $transportPrice) {
-            $transportEditData->prices[$transportPrice->getCurrency()->getId()] = $transportPrice->getPrice();
+            $transportEditData->pricesByCurrencyId[$transportPrice->getCurrency()->getId()] = $transportPrice->getPrice();
         }
 
         return $transportEditData;

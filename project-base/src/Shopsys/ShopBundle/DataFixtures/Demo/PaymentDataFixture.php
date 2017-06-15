@@ -29,7 +29,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             'en' => 'Credit card',
         ];
         $paymentEditData->paymentData->czkRounding = false;
-        $paymentEditData->prices = [
+        $paymentEditData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 99.95,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 2.95,
         ];
@@ -54,7 +54,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             'en' => 'Personal collection',
         ];
         $paymentEditData->paymentData->czkRounding = false;
-        $paymentEditData->prices = [
+        $paymentEditData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 49.90,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 1.95,
         ];
@@ -68,7 +68,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             'en' => 'Cash',
         ];
         $paymentEditData->paymentData->czkRounding = true;
-        $paymentEditData->prices = [
+        $paymentEditData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 0,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 0,
         ];

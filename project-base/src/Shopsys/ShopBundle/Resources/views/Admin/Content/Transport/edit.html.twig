@@ -15,21 +15,21 @@
         {% for currencyId, currency in currencies %}
             <div class="form-line">
                 <div class="form-line__label">
-                    {{ form_label(form.prices[currencyId], 'Base price in %currencyCode%'|trans({'%currencyCode%': currency.code}), { isSimple: true } ) }}
+                    {{ form_label(form.pricesByCurrencyId[currencyId], 'Base price in %currencyCode%'|trans({'%currencyCode%': currency.code}), { isSimple: true } ) }}
                 </div>
                 <div class="form-line__side">
                     <div class="form-line__item">
-                        {{ form_widget(form.prices[currencyId], { symbolAfterInput: currencySymbolByCurrencyId(currencyId) }) }}
+                        {{ form_widget(form.pricesByCurrencyId[currencyId], { symbolAfterInput: currencySymbolByCurrencyId(currencyId) }) }}
                     </div>
                     <div class="form-line__item--right">
                         <div class="form-line__item__price">
-                            {{ transportDetail.basePrices[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}
+                            {{ transportDetail.basePricesByCurrencyId[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}
                         </div>
                         <div class="form-line__item__price">
-                            <strong>{{ transportDetail.basePrices[currencyId].priceWithVat|priceWithCurrencyByCurrencyId(currencyId) }}</strong>
+                            <strong>{{ transportDetail.basePricesByCurrencyId[currencyId].priceWithVat|priceWithCurrencyByCurrencyId(currencyId) }}</strong>
                         </div>
                     </div>
-                    {{ form_errors(form.prices[currencyId]) }}
+                    {{ form_errors(form.pricesByCurrencyId[currencyId]) }}
                 </div>
             </div>
         {% endfor %}

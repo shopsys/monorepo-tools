@@ -28,7 +28,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             'cs' => 'Česká pošta - balík do ruky',
             'en' => 'Czech post',
         ];
-        $transportEditData->prices = [
+        $transportEditData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 99.95,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 3.95,
         ];
@@ -49,7 +49,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             'cs' => 'PPL',
             'en' => 'PPL',
         ];
-        $transportEditData->prices = [
+        $transportEditData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 199.95,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 6.95,
         ];
@@ -64,7 +64,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             'cs' => 'Osobní převzetí',
             'en' => 'Personal takeover',
         ];
-        $transportEditData->prices = [
+        $transportEditData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 0,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 0,
         ];

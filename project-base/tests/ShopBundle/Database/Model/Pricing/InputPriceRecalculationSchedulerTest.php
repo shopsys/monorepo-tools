@@ -119,7 +119,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
 
         $paymentEditData = new PaymentEditData();
         $paymentEditData->paymentData->name = ['cs' => 'name'];
-        $paymentEditData->prices = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
+        $paymentEditData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
         $paymentEditData->paymentData->vat = $vat;
         $payment = $paymentFacade->create($paymentEditData);
         /* @var $payment \Shopsys\ShopBundle\Model\Payment\Payment */
@@ -127,7 +127,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $transportEditData = new \Shopsys\ShopBundle\Model\Transport\TransportEditData();
         $transportEditData->transportData->name = ['cs' => 'name'];
         $transportEditData->transportData->description = ['cs' => 'desc'];
-        $transportEditData->prices = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
+        $transportEditData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
         $transportEditData->transportData->vat = $vat;
         $transport = $transportFacade->create($transportEditData);
         /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
@@ -188,14 +188,14 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
 
         $paymentEditData = new PaymentEditData();
         $paymentEditData->paymentData->name = ['cs' => 'name'];
-        $paymentEditData->prices = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
+        $paymentEditData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
         $paymentEditData->paymentData->vat = $vat;
         $payment = $paymentFacade->create($paymentEditData);
         /* @var $payment \Shopsys\ShopBundle\Model\Payment\Payment */
 
         $transportEditData = new TransportEditData();
         $transportEditData->transportData->name = ['cs' => 'name'];
-        $transportEditData->prices = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
+        $transportEditData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
         $transportEditData->transportData->vat = $vat;
         $transport = $transportFacade->create($transportEditData);
         /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */

@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Transport;
 
-use Shopsys\ShopBundle\Model\Transport\TransportData;
-
 class TransportEditData
 {
     /**
@@ -12,21 +10,21 @@ class TransportEditData
     public $transportData;
 
     /**
-     * @var string[currencyId]
+     * @var string[]
      */
-    public $prices;
+    public $pricesByCurrencyId;
 
     /**
      * @param \Shopsys\ShopBundle\Model\Transport\TransportData $transportData
-     * @param array $prices
+     * @param array $pricesByCurrencyId
      */
-    public function __construct(TransportData $transportData = null, array $prices = [])
+    public function __construct(TransportData $transportData = null, array $pricesByCurrencyId = [])
     {
         if ($transportData !== null) {
             $this->transportData = $transportData;
         } else {
             $this->transportData = new TransportData();
         }
-        $this->prices = $prices;
+        $this->pricesByCurrencyId = $pricesByCurrencyId;
     }
 }
