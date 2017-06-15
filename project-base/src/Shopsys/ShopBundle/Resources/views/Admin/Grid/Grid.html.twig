@@ -71,7 +71,7 @@
             {% if grid.enabledSelecting %}
                 <th class="table-grid__cell table-grid__cell--choice"><input type="checkbox" class="js-grid-mass-action-select-all" /></th>
             {% endif %}
-            {% for column in grid.columns %}
+            {% for column in grid.columnsById %}
                 <th class="table-grid__cell {% if column.classAttribute %} {{ column.classAttribute }}{% endif %}">
                     {{ gridView.renderTitleCell(column) }}
                 </th>
@@ -152,7 +152,7 @@
                 />
             </td>
         {% endif %}
-        {% for column in grid.columns %}
+        {% for column in grid.columnsById %}
             <td class="table-grid__cell js-grid-column-{{ column.id }}{% if column.classAttribute %} {{ column.classAttribute }}{% endif %}">
                 {{ gridView.renderCell(column, row, form|default(null)) }}
             </td>

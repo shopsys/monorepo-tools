@@ -78,7 +78,7 @@ class GridTest extends PHPUnit_Framework_TestCase
         );
         $grid->addColumn('columnId1', 'sourceColumnName1', 'title1', true)->setClassAttribute('classAttribute');
         $grid->addColumn('columnId2', 'sourceColumnName2', 'title2', false);
-        $columns = $grid->getColumns();
+        $columns = $grid->getColumnsById();
 
         $this->assertCount(2, $columns);
         $column2 = array_pop($columns);
