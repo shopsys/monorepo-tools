@@ -70,8 +70,8 @@ class ProductParametersFixtureLoader
         $serializedParameterNames,
         $serializedValueTexts
     ) {
-        $parameterNames = $this->deserializeLocalizedValues($serializedParameterNames);
-        $parameterValues = $this->deserializeLocalizedValues($serializedValueTexts);
+        $parameterNames = $this->getDeserializedValuesIndexedByLocale($serializedParameterNames);
+        $parameterValues = $this->getDeserializedValuesIndexedByLocale($serializedValueTexts);
 
         $parameter = $this->findParameterByNamesOrCreateNew($parameterNames);
 
@@ -86,9 +86,9 @@ class ProductParametersFixtureLoader
 
     /**
      * @param string $serializedString
-     * @return string[locale]
+     * @return string[]
      */
-    private function deserializeLocalizedValues($serializedString)
+    private function getDeserializedValuesIndexedByLocale($serializedString)
     {
         $values = [];
         $items = explode(',', $serializedString);
