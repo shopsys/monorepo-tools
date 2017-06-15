@@ -149,7 +149,7 @@ class FriendlyUrlFacade
     {
         $toFlush = [];
 
-        foreach ($urlListData->mainOnDomains as $friendlyUrl) {
+        foreach ($urlListData->mainFriendlyUrlsByDomainId as $friendlyUrl) {
             if ($friendlyUrl !== null) {
                 $this->setFriendlyUrlAsMain($friendlyUrl);
                 $toFlush[] = $friendlyUrl;

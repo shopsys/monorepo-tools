@@ -173,7 +173,7 @@ class ProductEditDataFactory
             $productEditData->descriptions[$domainId] = $productDomain->getDescription();
             $productEditData->shortDescriptions[$domainId] = $productDomain->getShortDescription();
 
-            $productEditData->urls->mainOnDomains[$domainId] =
+            $productEditData->urls->mainFriendlyUrlsByDomainId[$domainId] =
                 $this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
             $productEditData->heurekaCpcValues[$domainId] = $productDomain->getHeurekaCpc();
             $productEditData->showInZboziFeed[$domainId] = $productDomain->getShowInZboziFeed();
