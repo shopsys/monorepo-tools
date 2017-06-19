@@ -64,7 +64,7 @@ class TopCategoryFacade
     }
 
     /**
-     * @param $domainId
+     * @param int $domainId
      * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
      */
     public function saveTopCategoriesForDomain($domainId, array $categories)
