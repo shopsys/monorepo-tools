@@ -69,11 +69,11 @@ class DateTimeFormatterExtension extends Twig_Extension
      */
     public function formatDate($dateTime, $locale = null)
     {
-        return $this->dateTimeFormatter->format(
-            $this->convertToDateTime($dateTime),
+        return $this->format(
+            $dateTime,
             IntlDateFormatter::MEDIUM,
             IntlDateFormatter::NONE,
-            $this->getLocale($locale)
+            $locale
         );
     }
 
@@ -84,11 +84,11 @@ class DateTimeFormatterExtension extends Twig_Extension
      */
     public function formatTime($dateTime, $locale = null)
     {
-        return $this->dateTimeFormatter->format(
-            $this->convertToDateTime($dateTime),
+        return $this->format(
+            $dateTime,
             IntlDateFormatter::NONE,
             IntlDateFormatter::MEDIUM,
-            $this->getLocale($locale)
+            $locale
         );
     }
 
@@ -99,10 +99,30 @@ class DateTimeFormatterExtension extends Twig_Extension
      */
     public function formatDateTime($dateTime, $locale = null)
     {
+        return $this->format(
+            $dateTime,
+            IntlDateFormatter::MEDIUM,
+            IntlDateFormatter::MEDIUM,
+            $locale
+        );
+    }
+
+    /**
+     * @param mixed $dateTime
+     * @param int $dateType {@link http://php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants}
+     * @param int $timeType {@link http://php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants}
+     * @param string|null $locale
+     */
+    private function format($dateTime, $dateType, $timeType, $locale = null)
+    {
+        if ($dateTime === null) {
+            return '-';
+        }
+
         return $this->dateTimeFormatter->format(
             $this->convertToDateTime($dateTime),
-            IntlDateFormatter::MEDIUM,
-            IntlDateFormatter::MEDIUM,
+            $dateType,
+            $timeType,
             $this->getLocale($locale)
         );
     }
