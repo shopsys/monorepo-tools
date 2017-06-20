@@ -129,16 +129,16 @@ class ProductEditDataFactory
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\Product[position]
+     * @return \Shopsys\ShopBundle\Model\Product\Product[]
      */
     private function getAccessoriesData(Product $product)
     {
-        $productAccessories = [];
+        $productAccessoriesByPosition = [];
         foreach ($this->productAccessoryRepository->getAllByProduct($product) as $productAccessory) {
-            $productAccessories[$productAccessory->getPosition()] = $productAccessory->getAccessory();
+            $productAccessoriesByPosition[$productAccessory->getPosition()] = $productAccessory->getAccessory();
         }
 
-        return $productAccessories;
+        return $productAccessoriesByPosition;
     }
 
     /**
