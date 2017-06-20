@@ -606,7 +606,7 @@ class ProductRepository
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[productId]
+     * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[]
      */
     public function getProductDomainsByProductsAndDomainConfigIndexedByProductId(array $products, DomainConfig $domainConfig)
     {
