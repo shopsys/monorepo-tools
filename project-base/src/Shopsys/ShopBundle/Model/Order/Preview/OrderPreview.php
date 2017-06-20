@@ -64,9 +64,9 @@ class OrderPreview
     private $promoCodeDiscountPercent;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex] $quantifiedProducts
-     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price[quantifiedItemIndex] $quantifiedItemsDiscounts
+     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[] $quantifiedProductsByIndex
+     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[] $quantifiedItemsPricesByIndex
+     * @param \Shopsys\ShopBundle\Model\Pricing\Price[] $quantifiedItemsDiscountsByIndex
      * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
      * @param \Shopsys\ShopBundle\Model\Pricing\Price $totalPrice
      * @param \Shopsys\ShopBundle\Model\Transport\Transport|null $transport
@@ -77,9 +77,9 @@ class OrderPreview
      * @param float|null $promoCodeDiscountPercent
      */
     public function __construct(
-        array $quantifiedProducts,
-        array $quantifiedItemsPrices,
-        array $quantifiedItemsDiscounts,
+        array $quantifiedProductsByIndex,
+        array $quantifiedItemsPricesByIndex,
+        array $quantifiedItemsDiscountsByIndex,
         Price $productsPrice,
         Price $totalPrice,
         Transport $transport = null,
@@ -89,9 +89,9 @@ class OrderPreview
         Price $roundingPrice = null,
         $promoCodeDiscountPercent = null
     ) {
-        $this->quantifiedProductsByIndex = $quantifiedProducts;
-        $this->quantifiedItemsPricesByIndex = $quantifiedItemsPrices;
-        $this->quantifiedItemsDiscountsByIndex = $quantifiedItemsDiscounts;
+        $this->quantifiedProductsByIndex = $quantifiedProductsByIndex;
+        $this->quantifiedItemsPricesByIndex = $quantifiedItemsPricesByIndex;
+        $this->quantifiedItemsDiscountsByIndex = $quantifiedItemsDiscountsByIndex;
         $this->productsPrice = $productsPrice;
         $this->totalPrice = $totalPrice;
         $this->transport = $transport;
