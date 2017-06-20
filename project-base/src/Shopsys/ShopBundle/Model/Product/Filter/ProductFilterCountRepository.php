@@ -62,19 +62,19 @@ class ProductFilterCountRepository
             $productFilterData,
             $pricingGroup
         );
-        $productFilterCountData->countByBrandId = $this->getCountByBrandId(
+        $productFilterCountData->countByBrandId = $this->getCountIndexedByBrandId(
             $productsQueryBuilder,
             $productFilterConfig->getBrandChoices(),
             $productFilterData,
             $pricingGroup
         );
-        $productFilterCountData->countByFlagId = $this->getCountByFlagId(
+        $productFilterCountData->countByFlagId = $this->getCountIndexedByFlagId(
             $productsQueryBuilder,
             $productFilterConfig->getFlagChoices(),
             $productFilterData,
             $pricingGroup
         );
-        $productFilterCountData->countByParameterIdAndValueId = $this->getCountByParameterIdAndValueId(
+        $productFilterCountData->countByParameterIdAndValueId = $this->getCountIndexedByParameterIdAndValueId(
             $productsQueryBuilder,
             $productFilterConfig->getParameterChoices(),
             $productFilterData,
@@ -121,7 +121,7 @@ class ProductFilterCountRepository
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return int[]
      */
-    private function getCountByBrandId(
+    private function getCountIndexedByBrandId(
         QueryBuilder $productsQueryBuilder,
         array $brandFilterChoices,
         ProductFilterData $productFilterData,
@@ -172,9 +172,9 @@ class ProductFilterCountRepository
      * @param \Shopsys\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return int[flagId]
+     * @return int[]
      */
-    private function getCountByFlagId(
+    private function getCountIndexedByFlagId(
         QueryBuilder $productsQueryBuilder,
         array $flagFilterChoices,
         ProductFilterData $productFilterData,
@@ -236,9 +236,9 @@ class ProductFilterCountRepository
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string $locale
-     * @return int[parameterId][valueId]
+     * @return int[][]
      */
-    private function getCountByParameterIdAndValueId(
+    private function getCountIndexedByParameterIdAndValueId(
         QueryBuilder $productsQueryBuilder,
         array $parameterFilterChoices,
         ProductFilterData $productFilterData,
