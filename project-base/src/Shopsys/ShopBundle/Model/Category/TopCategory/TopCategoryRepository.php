@@ -37,7 +37,7 @@ class TopCategoryRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[]
      */
-    public function getAll($domainId)
+    public function getAllByDomainId($domainId)
     {
         return $this->getTopCategoryRepository()->findBy(['domainId' => $domainId], ['position' => 'ASC']);
     }
