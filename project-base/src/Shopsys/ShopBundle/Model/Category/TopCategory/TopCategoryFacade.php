@@ -28,20 +28,11 @@ class TopCategoryFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[]
-     */
-    public function getAll($domainId)
-    {
-        return $this->topCategoryRepository->getAllByDomainId($domainId);
-    }
-
-    /**
-     * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
     public function getAllCategoriesByDomainId($domainId)
     {
-        $topCategories = $this->getAll($domainId);
+        $topCategories = $this->topCategoryRepository->getAllByDomainId($domainId);
         $categories = [];
 
         foreach ($topCategories as $topCategory) {
