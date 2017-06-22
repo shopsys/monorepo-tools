@@ -9,19 +9,19 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
 class OrderPreview
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex]
+     * @var \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[]
      */
-    private $quantifiedProducts;
+    private $quantifiedProductsByIndex;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
+     * @var \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[]
      */
-    private $quantifiedItemsPrices;
+    private $quantifiedItemsPricesByIndex;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
+     * @var \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
-    private $quantifiedItemsDiscounts;
+    private $quantifiedItemsDiscountsByIndex;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport|null
@@ -64,9 +64,9 @@ class OrderPreview
     private $promoCodeDiscountPercent;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex] $quantifiedProducts
-     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price[quantifiedItemIndex] $quantifiedItemsDiscounts
+     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[] $quantifiedProductsByIndex
+     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[] $quantifiedItemsPricesByIndex
+     * @param \Shopsys\ShopBundle\Model\Pricing\Price[] $quantifiedItemsDiscountsByIndex
      * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
      * @param \Shopsys\ShopBundle\Model\Pricing\Price $totalPrice
      * @param \Shopsys\ShopBundle\Model\Transport\Transport|null $transport
@@ -77,9 +77,9 @@ class OrderPreview
      * @param float|null $promoCodeDiscountPercent
      */
     public function __construct(
-        array $quantifiedProducts,
-        array $quantifiedItemsPrices,
-        array $quantifiedItemsDiscounts,
+        array $quantifiedProductsByIndex,
+        array $quantifiedItemsPricesByIndex,
+        array $quantifiedItemsDiscountsByIndex,
         Price $productsPrice,
         Price $totalPrice,
         Transport $transport = null,
@@ -89,9 +89,9 @@ class OrderPreview
         Price $roundingPrice = null,
         $promoCodeDiscountPercent = null
     ) {
-        $this->quantifiedProducts = $quantifiedProducts;
-        $this->quantifiedItemsPrices = $quantifiedItemsPrices;
-        $this->quantifiedItemsDiscounts = $quantifiedItemsDiscounts;
+        $this->quantifiedProductsByIndex = $quantifiedProductsByIndex;
+        $this->quantifiedItemsPricesByIndex = $quantifiedItemsPricesByIndex;
+        $this->quantifiedItemsDiscountsByIndex = $quantifiedItemsDiscountsByIndex;
         $this->productsPrice = $productsPrice;
         $this->totalPrice = $totalPrice;
         $this->transport = $transport;
@@ -103,27 +103,27 @@ class OrderPreview
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex]
+     * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[]
      */
     public function getQuantifiedProducts()
     {
-        return $this->quantifiedProducts;
+        return $this->quantifiedProductsByIndex;
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
+     * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[]
      */
     public function getQuantifiedItemsPrices()
     {
-        return $this->quantifiedItemsPrices;
+        return $this->quantifiedItemsPricesByIndex;
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
+     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
     public function getQuantifiedItemsDiscounts()
     {
-        return $this->quantifiedItemsDiscounts;
+        return $this->quantifiedItemsDiscountsByIndex;
     }
 
     /**

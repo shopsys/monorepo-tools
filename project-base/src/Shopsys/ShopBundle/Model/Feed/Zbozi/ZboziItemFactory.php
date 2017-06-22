@@ -54,7 +54,7 @@ class ZboziItemFactory implements FeedItemFactoryInterface
         );
         $imagesByProductId = $this->productCollectionFacade->getImagesUrlsIndexedByProductId($products, $domainConfig);
         $urlsByProductId = $this->productCollectionFacade->getAbsoluteUrlsIndexedByProductId($products, $domainConfig);
-        $paramsByProductId = $this->productCollectionFacade->getProductParameterValuesIndexedByProductIdAndParameterName(
+        $paramsByProductIdAndName = $this->productCollectionFacade->getProductParameterValuesIndexedByProductIdAndParameterName(
             $products,
             $domainConfig
         );
@@ -74,7 +74,7 @@ class ZboziItemFactory implements FeedItemFactoryInterface
                 $this->getProductDeliveryDate($product),
                 $this->getProductManufacturer($product),
                 $this->getProductCategoryText($product, $domainConfig),
-                $this->getProductParams($product, $paramsByProductId),
+                $this->getProductParamsIndexedByParamName($product, $paramsByProductIdAndName),
                 $product->getPartno(),
                 $productDomain->getZboziCpc(),
                 $productDomain->getZboziCpcSearch()
@@ -115,18 +115,18 @@ class ZboziItemFactory implements FeedItemFactoryInterface
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return string[productId][paramName] $paramsByProductId
-     * @return string[paramName]
+     * @param string[][] $paramsByProductIdAndName
+     * @return string[]
      */
-    private function getProductParams(Product $product, $paramsByProductId)
+    private function getProductParamsIndexedByParamName(Product $product, $paramsByProductIdAndName)
     {
-        if (array_key_exists($product->getId(), $paramsByProductId)) {
-            $params = $paramsByProductId[$product->getId()];
+        if (array_key_exists($product->getId(), $paramsByProductIdAndName)) {
+            $paramsByName = $paramsByProductIdAndName[$product->getId()];
         } else {
-            $params = [];
+            $paramsByName = [];
         }
 
-        return $params;
+        return $paramsByName;
     }
 
     /**

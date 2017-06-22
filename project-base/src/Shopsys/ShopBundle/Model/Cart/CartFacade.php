@@ -167,12 +167,12 @@ class CartFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[cartItemId]
+     * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[]
      */
-    public function getQuantifiedProductsOfCurrentCustomer()
+    public function getQuantifiedProductsOfCurrentCustomerIndexedByCartItemId()
     {
         $cart = $this->getCartOfCurrentCustomer();
 
-        return $this->cartService->getQuantifiedProducts($cart);
+        return $this->cartService->getQuantifiedProductsIndexedByCartItemId($cart);
     }
 }

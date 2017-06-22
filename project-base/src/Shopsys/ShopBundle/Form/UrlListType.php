@@ -64,7 +64,7 @@ class UrlListType extends AbstractType
         }
 
         $builder->add('toDelete', FormType::class);
-        $builder->add('mainOnDomains', FormType::class);
+        $builder->add('mainFriendlyUrlsByDomainId', FormType::class);
         $builder->add('newUrls', CollectionType::class, [
             'entry_type' => FriendlyUrlType::class,
             'required' => false,
@@ -86,7 +86,7 @@ class UrlListType extends AbstractType
                 'choice_label' => 'slug',
                 'choice_value' => 'slug',
             ]);
-            $builder->get('mainOnDomains')->add($domainId, ChoiceType::class, [
+            $builder->get('mainFriendlyUrlsByDomainId')->add($domainId, ChoiceType::class, [
                 'required' => true,
                 'multiple' => false,
                 'expanded' => true,
@@ -109,7 +109,7 @@ class UrlListType extends AbstractType
             $options['route_name'],
             $options['entity_id']
         );
-        $mainUrlsSlugsOnDomains = $this->getMainFriendlyUrlSlugsByDomainId(
+        $mainUrlsSlugsOnDomains = $this->getMainFriendlyUrlSlugsIndexedByDomainId(
             $options['route_name'],
             $options['entity_id']
         );
@@ -137,7 +137,7 @@ class UrlListType extends AbstractType
     /**
      * @param string $routeName
      * @param string $entityId
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[domainId][]
+     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
      */
     private function getFriendlyUrlsIndexedByDomain($routeName, $entityId)
     {
@@ -155,7 +155,7 @@ class UrlListType extends AbstractType
     /**
      * @param string $routeName
      * @param string $entityId
-     * @return string[domainId][slug]
+     * @return string[][]
      */
     private function getAbsoluteUrlsIndexedByDomainIdAndSlug($routeName, $entityId)
     {
@@ -180,11 +180,11 @@ class UrlListType extends AbstractType
     /**
      * @param string $routeName
      * @param int $entityId
-     * @return string[domainId]
+     * @return string[]
      */
-    private function getMainFriendlyUrlSlugsByDomainId($routeName, $entityId)
+    private function getMainFriendlyUrlSlugsIndexedByDomainId($routeName, $entityId)
     {
-        $mainFriendlyUrlsSlugsOnDomains = [];
+        $mainFriendlyUrlsSlugsByDomainId = [];
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainId = $domainConfig->getId();
             $mainFriendlyUrl = $this->friendlyUrlFacade->findMainFriendlyUrl(
@@ -193,17 +193,17 @@ class UrlListType extends AbstractType
                 $entityId
             );
             if ($mainFriendlyUrl !== null) {
-                $mainFriendlyUrlsSlugsOnDomains[$domainId] = $mainFriendlyUrl->getSlug();
+                $mainFriendlyUrlsSlugsByDomainId[$domainId] = $mainFriendlyUrl->getSlug();
             } else {
-                $mainFriendlyUrlsSlugsOnDomains[$domainId] = null;
+                $mainFriendlyUrlsSlugsByDomainId[$domainId] = null;
             }
         }
 
-        return $mainFriendlyUrlsSlugsOnDomains;
+        return $mainFriendlyUrlsSlugsByDomainId;
     }
 
     /**
-     * @return string[domainId]
+     * @return string[]
      */
     private function getDomainUrlsIndexedById()
     {

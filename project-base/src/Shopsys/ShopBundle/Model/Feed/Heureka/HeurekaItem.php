@@ -57,9 +57,9 @@ class HeurekaItem implements FeedItemInterface
     private $categoryText;
 
     /**
-     * @var string[paramName]
+     * @var string[]
      */
-    private $params;
+    private $parametersByName;
 
     /**
      * @var string|null
@@ -82,7 +82,7 @@ class HeurekaItem implements FeedItemInterface
      * @param int|null $deliveryDate
      * @param string|null $manufacturer
      * @param string|null $categoryText
-     * @param string[paramName] $params
+     * @param string[] $parametersByName
      * @param string|null $cpc
      * @param int|null $groupId
      */
@@ -97,7 +97,7 @@ class HeurekaItem implements FeedItemInterface
         $deliveryDate,
         $manufacturer,
         $categoryText,
-        $params,
+        $parametersByName,
         $cpc,
         $groupId
     ) {
@@ -111,7 +111,7 @@ class HeurekaItem implements FeedItemInterface
         $this->deliveryDate = $deliveryDate;
         $this->manufacturer = $manufacturer;
         $this->categoryText = $categoryText;
-        $this->params = $params;
+        $this->parametersByName = $parametersByName;
         $this->cpc = $cpc;
         $this->groupId = $groupId;
     }
@@ -197,11 +197,11 @@ class HeurekaItem implements FeedItemInterface
     }
 
     /**
-     * @return string[paramName]
+     * @return string[]
      */
-    public function getParams()
+    public function getParametersByName()
     {
-        return $this->params;
+        return $this->parametersByName;
     }
 
     /**

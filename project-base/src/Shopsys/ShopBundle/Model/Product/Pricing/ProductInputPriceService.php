@@ -31,15 +31,15 @@ class ProductInputPriceService
      * @param int $inputPriceType
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
      * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[] $manualInputPrices
-     * @return string[pricingGroupId]
+     * @return string[]
      */
-    public function getManualInputPricesData(
+    public function getManualInputPricesDataIndexedByPricingGroupId(
         Product $product,
         $inputPriceType,
         array $pricingGroups,
         array $manualInputPrices
     ) {
-        $manualInputPricesData = [];
+        $manualInputPricesDataByPricingGroupId = [];
 
         if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
             foreach ($pricingGroups as $pricingGroup) {
@@ -50,7 +50,7 @@ class ProductInputPriceService
                     $pricingGroup
                 );
 
-                $manualInputPricesData[$pricingGroupId] = $this->inputPriceCalculation->getInputPrice(
+                $manualInputPricesDataByPricingGroupId[$pricingGroupId] = $this->inputPriceCalculation->getInputPrice(
                     $inputPriceType,
                     $productPrice->getPriceWithVat(),
                     $product->getVat()->getPercent()
@@ -59,11 +59,11 @@ class ProductInputPriceService
         } elseif ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_MANUAL) {
             foreach ($manualInputPrices as $manualInputPrice) {
                 $pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
-                $manualInputPricesData[$pricingGroupId] = $manualInputPrice->getInputPrice();
+                $manualInputPricesDataByPricingGroupId[$pricingGroupId] = $manualInputPrice->getInputPrice();
             }
         }
 
-        return $manualInputPricesData;
+        return $manualInputPricesDataByPricingGroupId;
     }
 
     /**

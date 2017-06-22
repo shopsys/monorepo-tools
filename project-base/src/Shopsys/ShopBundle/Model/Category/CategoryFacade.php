@@ -339,7 +339,7 @@ class CategoryFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Category\Category[domainId]
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
     public function getProductMainCategoriesIndexedByDomainId(Product $product)
     {
@@ -413,7 +413,7 @@ class CategoryFacade
      * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $domainId
-     * @return int[categoryId]
+     * @return int[]
      */
     public function getListableProductCountsIndexedByCategoryId(
         array $categories,

@@ -57,9 +57,9 @@ class ZboziItem implements FeedItemInterface
     private $categoryText;
 
     /**
-     * @var string[paramName]
+     * @var string[]
      */
-    private $params;
+    private $parametersByName;
 
     /**
      * @var string|null
@@ -87,7 +87,7 @@ class ZboziItem implements FeedItemInterface
      * @param int $deliveryDate
      * @param string|null $manufacturer
      * @param string|null $categoryText
-     * @param string[paramName] $params
+     * @param string[] $parametersByName
      * @param string|null $partno
      */
     public function __construct(
@@ -101,7 +101,7 @@ class ZboziItem implements FeedItemInterface
         $deliveryDate,
         $manufacturer,
         $categoryText,
-        $params,
+        $parametersByName,
         $partno,
         $cpc,
         $cpcSearch
@@ -116,7 +116,7 @@ class ZboziItem implements FeedItemInterface
         $this->deliveryDate = $deliveryDate;
         $this->manufacturer = $manufacturer;
         $this->categoryText = $categoryText;
-        $this->params = $params;
+        $this->parametersByName = $parametersByName;
         $this->partno = $partno;
         $this->cpc = $cpc;
         $this->cpcSearch = $cpcSearch;
@@ -203,11 +203,11 @@ class ZboziItem implements FeedItemInterface
     }
 
     /**
-     * @return string[paramName]
+     * @return string[]
      */
-    public function getParams()
+    public function getParametersByName()
     {
-        return $this->params;
+        return $this->parametersByName;
     }
 
     /**

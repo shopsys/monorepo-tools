@@ -249,7 +249,7 @@
                                 <span class="svg svg-arrow-right"></span>
                             </td>
                             <td class="table-form__cell  table-form__cell--del-after">
-                                {% for locale, valueTextLocaleForm in parameter.valueText %}
+                                {% for locale, valueTextLocaleForm in parameter.valueTextsByLocale %}
                                     <div class="input__wrap">
                                         {{ form_widget(valueTextLocaleForm, { attr: { class: 'input--flag'} })  }}
                                         <span class="input__flag">
@@ -375,8 +375,8 @@
                 </div>
             </div>
             <div class="form-line">
-                {{ form_label(form.showInZboziFeed, 'Offer in feed'|trans) }}
-                {% for domainId, showInZboziFeedForm in form.showInZboziFeed %}
+                {{ form_label(form.showInZboziFeedIndexedByDomainId, 'Offer in feed'|trans) }}
+                {% for domainId, showInZboziFeedForm in form.showInZboziFeedIndexedByDomainId %}
                     <div class="form-line__side">
                         {% if isMultidomain() %}
                             <div class="form-line__item">

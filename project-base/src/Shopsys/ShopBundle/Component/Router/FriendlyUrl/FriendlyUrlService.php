@@ -22,7 +22,7 @@ class FriendlyUrlService
     /**
      * @param string $routeName
      * @param int $entityId
-     * @param string[locale] $namesByLocale
+     * @param string[] $namesByLocale
      * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
      */
     public function createFriendlyUrls($routeName, $entityId, $namesByLocale)

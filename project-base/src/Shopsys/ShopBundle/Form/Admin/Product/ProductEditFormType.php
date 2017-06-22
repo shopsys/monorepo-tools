@@ -133,7 +133,7 @@ class ProductEditFormType extends AbstractType
                 ],
             ])
             ->add(
-                $builder->create('orderedImages', CollectionType::class, [
+                $builder->create('orderedImagesById', CollectionType::class, [
                     'required' => false,
                     'entry_type' => HiddenType::class,
                 ])->addModelTransformer($this->imagesIdsToImagesTransformer)
@@ -159,7 +159,7 @@ class ProductEditFormType extends AbstractType
                     'error_bubbling' => false,
                 ])
                 ->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer()))
-            ->add('manualInputPrices', FormType::class, [
+            ->add('manualInputPricesByPricingGroupId', FormType::class, [
                 'compound' => true,
             ])
             ->add('seoTitles', MultidomainType::class, [
@@ -207,7 +207,7 @@ class ProductEditFormType extends AbstractType
                     ],
                 ],
             ])
-            ->add('showInZboziFeed', MultidomainType::class, [
+            ->add('showInZboziFeedIndexedByDomainId', MultidomainType::class, [
                 'entry_type' => YesNoType::class,
                 'required' => false,
             ])
@@ -242,7 +242,7 @@ class ProductEditFormType extends AbstractType
             ->add('save', SubmitType::class);
 
         foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
-            $builder->get('manualInputPrices')
+            $builder->get('manualInputPricesByPricingGroupId')
                 ->add($pricingGroup->getId(), MoneyType::class, [
                     'currency' => false,
                     'scale' => 6,

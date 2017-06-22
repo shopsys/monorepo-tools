@@ -159,7 +159,6 @@ class FileUpload
     {
         $filesForUpload = $entity->getTemporaryFilesForUpload();
         foreach ($filesForUpload as $key => $fileForUpload) {
-            /* @var $fileForUpload FileForUpload */
             $originalFilename = $this->getOriginalFilenameByTemporary($fileForUpload->getTemporaryFilename());
             $entity->setFileAsUploaded($key, $originalFilename);
         }

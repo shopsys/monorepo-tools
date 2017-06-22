@@ -15,7 +15,7 @@
                     <tr>
                         <td>
                             {{ form_row(
-                                form.prices[currencyId], {
+                                form.pricesByCurrencyId[currencyId], {
                                     label: 'Base price in %currencyCode%'|trans({'%currencyCode%': currency.code}),
                                     symbolAfterInput: currencySymbolByCurrencyId(currencyId)
                                 }

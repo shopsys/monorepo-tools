@@ -55,7 +55,7 @@ class FriendlyUrlFacade
     /**
      * @param string $routeName
      * @param int $entityId
-     * @param string[locale] $namesByLocale
+     * @param string[] $namesByLocale
      */
     public function createFriendlyUrls($routeName, $entityId, array $namesByLocale)
     {
@@ -149,7 +149,7 @@ class FriendlyUrlFacade
     {
         $toFlush = [];
 
-        foreach ($urlListData->mainOnDomains as $friendlyUrl) {
+        foreach ($urlListData->mainFriendlyUrlsByDomainId as $friendlyUrl) {
             if ($friendlyUrl !== null) {
                 $this->setFriendlyUrlAsMain($friendlyUrl);
                 $toFlush[] = $friendlyUrl;

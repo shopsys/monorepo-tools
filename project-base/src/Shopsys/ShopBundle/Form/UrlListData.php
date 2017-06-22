@@ -10,9 +10,9 @@ class UrlListData
     public $toDelete;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[domainId]
+     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
      */
-    public $mainOnDomains;
+    public $mainFriendlyUrlsByDomainId;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
@@ -22,7 +22,7 @@ class UrlListData
     public function __construct()
     {
         $this->toDelete = [];
-        $this->mainOnDomains = [];
+        $this->mainFriendlyUrlsByDomainId = [];
         $this->newUrls = [];
     }
 }

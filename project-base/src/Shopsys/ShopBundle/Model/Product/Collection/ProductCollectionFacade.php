@@ -79,7 +79,7 @@ class ProductCollectionFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param string|null $sizeName
-     * @return string[productId]
+     * @return string[]
      */
     public function getImagesUrlsIndexedByProductId(array $products, DomainConfig $domainConfig, $sizeName = null)
     {
@@ -101,7 +101,7 @@ class ProductCollectionFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
-     * @return \Shopsys\ShopBundle\Component\Image\Image[productId]
+     * @return \Shopsys\ShopBundle\Component\Image\Image[]
      */
     private function getMainImagesIndexedByProductId(array $products)
     {
@@ -114,7 +114,7 @@ class ProductCollectionFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\ShopBundle\Component\Image\Image[productId]
+     * @return string[]
      */
     public function getAbsoluteUrlsIndexedByProductId(array $products, DomainConfig $domainConfig)
     {
@@ -135,7 +135,7 @@ class ProductCollectionFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[productId]
+     * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[]
      */
     public function getProductDomainsIndexedByProductId(array $products, DomainConfig $domainConfig)
     {
@@ -148,7 +148,7 @@ class ProductCollectionFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return string[productId][paramName]
+     * @return string[][]
      */
     public function getProductParameterValuesIndexedByProductIdAndParameterName(array $products, DomainConfig $domainConfig)
     {

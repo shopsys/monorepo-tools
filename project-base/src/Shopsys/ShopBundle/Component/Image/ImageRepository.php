@@ -69,7 +69,7 @@ class ImageRepository
      * @param string $entityName
      * @param int $entityId
      * @param string|null $type
-     * @return \Shopsys\ShopBundle\Component\Image\Image[imageId]
+     * @return \Shopsys\ShopBundle\Component\Image\Image[]
      */
     public function getImagesByEntityIndexedById($entityName, $entityId, $type)
     {
@@ -121,7 +121,7 @@ class ImageRepository
     /**
      * @param array $entities
      * @param string $entityName
-     * @return \Shopsys\ShopBundle\Component\Image\Image[entityId]
+     * @return \Shopsys\ShopBundle\Component\Image\Image[]
      */
     public function getMainImagesByEntitiesIndexedByEntityId(array $entities, $entityName)
     {

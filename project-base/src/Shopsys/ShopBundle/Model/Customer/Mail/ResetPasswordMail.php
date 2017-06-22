@@ -86,16 +86,16 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
             $template->getSubject(),
             $this->setting->getForDomain(MailSetting::MAIN_ADMIN_MAIL, $user->getDomainId()),
             $this->setting->getForDomain(MailSetting::MAIN_ADMIN_MAIL_NAME, $user->getDomainId()),
-            $this->getBodyVariablesValues($user),
-            $this->getSubjectVariablesValues($user)
+            $this->getBodyValuesIndexedByVariableName($user),
+            $this->getSubjectValuesIndexedByVariableName($user)
         );
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @return string[variableName]
+     * @return string[]
      */
-    private function getBodyVariablesValues(User $user)
+    private function getBodyValuesIndexedByVariableName(User $user)
     {
         return [
             self::VARIABLE_EMAIL => $user->getEmail(),
@@ -125,10 +125,10 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
 
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @return string[variableName]
+     * @return string[]
      */
-    private function getSubjectVariablesValues(User $user)
+    private function getSubjectValuesIndexedByVariableName(User $user)
     {
-        return $this->getBodyVariablesValues($user);
+        return $this->getBodyValuesIndexedByVariableName($user);
     }
 }

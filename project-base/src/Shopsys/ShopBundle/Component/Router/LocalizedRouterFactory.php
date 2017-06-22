@@ -19,7 +19,7 @@ class LocalizedRouterFactory
     private $localeRoutersResourcesFilepaths;
 
     /**
-     * @var \Symfony\Component\Routing\Router[locale][host]
+     * @var \Symfony\Component\Routing\Router[][]
      */
     private $routersByLocaleAndHost;
 

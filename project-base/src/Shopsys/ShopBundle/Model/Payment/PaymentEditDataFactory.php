@@ -49,7 +49,7 @@ class PaymentEditDataFactory
         $paymentEditData->paymentData = $paymentData;
 
         foreach ($payment->getPrices() as $paymentPrice) {
-            $paymentEditData->prices[$paymentPrice->getCurrency()->getId()] = $paymentPrice->getPrice();
+            $paymentEditData->pricesByCurrencyId[$paymentPrice->getCurrency()->getId()] = $paymentPrice->getPrice();
         }
 
         return $paymentEditData;

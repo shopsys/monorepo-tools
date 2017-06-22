@@ -31,7 +31,7 @@ class Setting
     private $settingValueRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\SettingValue[]
+     * @var \Shopsys\ShopBundle\Component\Setting\SettingValue[][]
      */
     private $values;
 
@@ -135,7 +135,6 @@ class Setting
         if (!array_key_exists($domainId, $this->values)) {
             $this->values[$domainId] = [];
             foreach ($this->settingValueRepository->getAllByDomainId($domainId) as $settingValue) {
-                /* @var $settingValue SettingValue */
                 $this->values[$domainId][$settingValue->getName()] = $settingValue;
             }
         }

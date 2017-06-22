@@ -84,7 +84,7 @@ class TransportFacade
         $transport = new Transport($transportEditData->transportData);
         $this->em->persist($transport);
         $this->em->flush();
-        $this->updateTransportPrices($transport, $transportEditData->prices);
+        $this->updateTransportPrices($transport, $transportEditData->pricesByCurrencyId);
         $this->createTransportDomains($transport, $transportEditData->transportData->domains);
         $this->imageFacade->uploadImage($transport, $transportEditData->transportData->image, null);
         $this->em->flush();
@@ -100,7 +100,7 @@ class TransportFacade
     {
         $transport->edit($transportEditData->transportData);
 
-        $this->updateTransportPrices($transport, $transportEditData->prices);
+        $this->updateTransportPrices($transport, $transportEditData->pricesByCurrencyId);
         $this->deleteTransportDomainsByTransport($transport);
         $this->createTransportDomains($transport, $transportEditData->transportData->domains);
         $this->imageFacade->uploadImage($transport, $transportEditData->transportData->image, null);
@@ -188,12 +188,12 @@ class TransportFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @param string[currencyId] $prices
+     * @param string[] $pricesByCurrencyId
      */
-    private function updateTransportPrices(Transport $transport, $prices)
+    private function updateTransportPrices(Transport $transport, $pricesByCurrencyId)
     {
         foreach ($this->currencyFacade->getAll() as $currency) {
-            $price = $prices[$currency->getId()];
+            $price = $pricesByCurrencyId[$currency->getId()];
             $transport->setPrice($currency, $price);
         }
     }
@@ -213,7 +213,7 @@ class TransportFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @return string [transportId]
+     * @return string[]
      */
     public function getTransportPricesWithVatIndexedByTransportId(Currency $currency)
     {
@@ -228,7 +228,7 @@ class TransportFacade
     }
 
     /**
-     * @return string[transportId]
+     * @return string[]
      */
     public function getTransportVatPercentsIndexedByTransportId()
     {

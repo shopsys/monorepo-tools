@@ -39,7 +39,7 @@ class ProductParameterValueFormType extends AbstractType
                     new Constraints\NotBlank(['message' => 'Please choose parameter']),
                 ],
             ])
-            ->add('valueText', LocalizedType::class, [
+            ->add('valueTextsByLocale', LocalizedType::class, [
                 'required' => true,
                 'main_constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter parameter value']),

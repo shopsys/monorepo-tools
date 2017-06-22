@@ -37,7 +37,7 @@ class BrandDataFactory
         $brandData->setFromEntity($brand);
 
         foreach ($this->domain->getAll() as $domainConfig) {
-            $brandData->urls->mainOnDomains[$domainConfig->getId()] =
+            $brandData->urls->mainFriendlyUrlsByDomainId[$domainConfig->getId()] =
                 $this->friendlyUrlFacade->findMainFriendlyUrl(
                     $domainConfig->getId(),
                     'front_brand_detail',

@@ -233,13 +233,13 @@ class OrderController extends FrontBaseController
             'transport' => $transport,
             'payment' => $payment,
             'payments' => $payments,
-            'transportsPrices' => $this->transportPriceCalculation->calculatePricesById(
+            'transportsPrices' => $this->transportPriceCalculation->getCalculatedPricesIndexedByTransportId(
                 $transports,
                 $currency,
                 $orderPreview->getProductsPrice(),
                 $domainId
             ),
-            'paymentsPrices' => $this->paymentPriceCalculation->calculatePricesById(
+            'paymentsPrices' => $this->paymentPriceCalculation->getCalculatedPricesIndexedByPaymentId(
                 $payments,
                 $currency,
                 $orderPreview->getProductsPrice(),

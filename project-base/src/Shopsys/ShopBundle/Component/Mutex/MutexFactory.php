@@ -15,7 +15,7 @@ class MutexFactory
     private $lock;
 
     /**
-     * @var \NinjaMutex\Mutex[string]
+     * @var \NinjaMutex\Mutex[]
      */
     private $mutexesByName;
 

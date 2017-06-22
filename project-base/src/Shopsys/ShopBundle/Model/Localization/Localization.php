@@ -9,7 +9,7 @@ class Localization
     const DEFAULT_COLLATION = 'en_US';
 
     /**
-     * @var string[locale]
+     * @var string[]
      */
     private $languageNamesByLocale = [
         'cs' => 'Čeština',
@@ -21,7 +21,7 @@ class Localization
     ];
 
     /**
-     * @var string[locale]
+     * @var string[]
      */
     private $collationsByLocale = [
         'cs' => 'cs_CZ',

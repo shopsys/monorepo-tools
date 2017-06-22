@@ -70,7 +70,6 @@ class ProductAvailabilityFilter implements AdvancedSearchFilterInterface
         $isNotAvailabilities = [];
 
         foreach ($rulesData as $index => $ruleData) {
-            /* @var $ruleData \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData */
             if ($ruleData->operator === self::OPERATOR_IS) {
                 $tableAlias = 'a' . $index;
                 $availabilityParameter = 'availability' . $index;

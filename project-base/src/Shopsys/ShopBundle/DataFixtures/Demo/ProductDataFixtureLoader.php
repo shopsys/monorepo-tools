@@ -139,7 +139,7 @@ class ProductDataFixtureLoader
 
     /**
      * @param array $rows
-     * @return string[mainVariantRowId][]
+     * @return string[][]
      */
     public function getVariantCatnumsIndexedByMainVariantCatnum($rows)
     {
@@ -168,7 +168,7 @@ class ProductDataFixtureLoader
         $productEditData->productData->ean = $row[self::COLUMN_EAN];
         $productEditData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
         $productEditData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
-        $productEditData->showInZboziFeed[$domainId] = true;
+        $productEditData->showInZboziFeedIndexedByDomainId[$domainId] = true;
         $productEditData->productData->priceCalculationType = $row[self::COLUMN_PRICE_CALCULATION_TYPE];
         $this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
         switch ($row[self::COLUMN_VAT]) {
@@ -240,7 +240,7 @@ class ProductDataFixtureLoader
         $domainId = 2;
         $productEditData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
         $productEditData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
-        $productEditData->showInZboziFeed[$domainId] = true;
+        $productEditData->showInZboziFeedIndexedByDomainId[$domainId] = true;
         $this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
         $productEditData->productData->categoriesByDomainId[$domainId] =
             $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_2], $this->categories);
@@ -284,18 +284,18 @@ class ProductDataFixtureLoader
 
     /**
      * @param string $string
-     * @return string[pricingGroup]
+     * @return string[]
      */
     private function getProductManualPricesIndexedByPricingGroupFromString($string)
     {
-        $productManualPrices = [];
+        $productManualPricesByPricingGroup = [];
         $rowData = explode(';', $string);
         foreach ($rowData as $pricingGroupAndPrice) {
             list($pricingGroup, $price) = explode('=', $pricingGroupAndPrice);
-            $productManualPrices[$pricingGroup] = $price;
+            $productManualPricesByPricingGroup[$pricingGroup] = $price;
         }
 
-        return $productManualPrices;
+        return $productManualPricesByPricingGroup;
     }
 
     /**
@@ -337,7 +337,7 @@ class ProductDataFixtureLoader
                 $this->createDefaultManualPriceForAllPricingGroups($productEditData);
                 foreach ($manualPrices as $pricingGroup => $manualPrice) {
                     $pricingGroup = $this->pricingGroups[$pricingGroup];
-                    $productEditData->manualInputPrices[$pricingGroup->getId()] = $manualPrice;
+                    $productEditData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = $manualPrice;
                 }
                 break;
             default:
@@ -353,8 +353,8 @@ class ProductDataFixtureLoader
     private function createDefaultManualPriceForAllPricingGroups(ProductEditData $productEditData)
     {
         foreach ($this->pricingGroups as $pricingGroupReferenceName => $pricingGroup) {
-            if (!array_key_exists($pricingGroup->getId(), $productEditData->manualInputPrices)) {
-                $productEditData->manualInputPrices[$pricingGroup->getId()] = null;
+            if (!array_key_exists($pricingGroup->getId(), $productEditData->manualInputPricesByPricingGroupId)) {
+                $productEditData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = null;
             }
         }
     }

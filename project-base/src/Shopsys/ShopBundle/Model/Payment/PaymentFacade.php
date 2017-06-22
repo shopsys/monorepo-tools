@@ -87,7 +87,7 @@ class PaymentFacade
         $payment = new Payment($paymentEditData->paymentData);
         $this->em->persist($payment);
         $this->em->flush();
-        $this->updatePaymentPrices($payment, $paymentEditData->prices);
+        $this->updatePaymentPrices($payment, $paymentEditData->pricesByCurrencyId);
         $this->createPaymentDomains($payment, $paymentEditData->paymentData->domains);
         $this->setAdditionalDataAndFlush($payment, $paymentEditData->paymentData);
 
@@ -101,7 +101,7 @@ class PaymentFacade
     public function edit(Payment $payment, PaymentEditData $paymentEditData)
     {
         $payment->edit($paymentEditData->paymentData);
-        $this->updatePaymentPrices($payment, $paymentEditData->prices);
+        $this->updatePaymentPrices($payment, $paymentEditData->pricesByCurrencyId);
         $this->deletePaymentDomainsByPayment($payment);
         $this->createPaymentDomains($payment, $paymentEditData->paymentData->domains);
         $this->setAdditionalDataAndFlush($payment, $paymentEditData->paymentData);
@@ -194,12 +194,12 @@ class PaymentFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @param string[currencyId] $prices
+     * @param string[] $pricesByCurrencyId
      */
-    private function updatePaymentPrices(Payment $payment, $prices)
+    private function updatePaymentPrices(Payment $payment, $pricesByCurrencyId)
     {
         foreach ($this->currencyFacade->getAll() as $currency) {
-            $price = $prices[$currency->getId()];
+            $price = $pricesByCurrencyId[$currency->getId()];
             $payment->setPrice($currency, $price);
         }
     }
@@ -214,7 +214,7 @@ class PaymentFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @return string [paymentId]
+     * @return string[]
      */
     public function getPaymentPricesWithVatIndexedByPaymentId(Currency $currency)
     {
@@ -229,7 +229,7 @@ class PaymentFacade
     }
 
     /**
-     * @return string[paymentId]
+     * @return string[]
      */
     public function getPaymentVatPercentsIndexedByPaymentId()
     {

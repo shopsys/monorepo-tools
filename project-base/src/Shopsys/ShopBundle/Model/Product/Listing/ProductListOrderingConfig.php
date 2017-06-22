@@ -5,14 +5,14 @@ namespace Shopsys\ShopBundle\Model\Product\Listing;
 class ProductListOrderingConfig
 {
     /**
-     * @var string[orderingMode]
+     * @var string[]
      */
-    private $supportedOrderingModesNames;
+    private $supportedOrderingModesNamesById;
 
     /**
      * @var string
      */
-    private $defaultOrderingMode;
+    private $defaultOrderingModeId;
 
     /**
      * @var string
@@ -20,23 +20,23 @@ class ProductListOrderingConfig
     private $cookieName;
 
     /**
-     * @param string[orderingMode] $supportedOrderingModesNames
-     * @param string $defaultOrderingMode
+     * @param string[] $supportedOrderingModesNamesById
+     * @param string $defaultOrderingModeId
      * @param string $cookieName
      */
-    public function __construct($supportedOrderingModesNames, $defaultOrderingMode, $cookieName)
+    public function __construct($supportedOrderingModesNamesById, $defaultOrderingModeId, $cookieName)
     {
-        $this->supportedOrderingModesNames = $supportedOrderingModesNames;
-        $this->defaultOrderingMode = $defaultOrderingMode;
+        $this->supportedOrderingModesNamesById = $supportedOrderingModesNamesById;
+        $this->defaultOrderingModeId = $defaultOrderingModeId;
         $this->cookieName = $cookieName;
     }
 
     /**
-     * @return string[orderingMode]
+     * @return string[]
      */
-    public function getSupportedOrderingModesNames()
+    public function getSupportedOrderingModesNamesIndexedById()
     {
-        return $this->supportedOrderingModesNames;
+        return $this->supportedOrderingModesNamesById;
     }
 
     /**
@@ -50,8 +50,8 @@ class ProductListOrderingConfig
     /**
      * @return string
      */
-    public function getDefaultOrderingMode()
+    public function getDefaultOrderingModeId()
     {
-        return $this->defaultOrderingMode;
+        return $this->defaultOrderingModeId;
     }
 }

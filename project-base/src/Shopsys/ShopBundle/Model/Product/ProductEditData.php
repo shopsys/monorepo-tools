@@ -28,14 +28,14 @@ class ProductEditData
     public $imagesToDelete;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Image[imageId]
+     * @var \Shopsys\ShopBundle\Component\Image\Image[]
      */
-    public $orderedImages;
+    public $orderedImagesById;
 
     /**
-     * @var string[pricingGroupId]
+     * @var string[]
      */
-    public $manualInputPrices;
+    public $manualInputPricesByPricingGroupId;
 
     /**
      * @var string[]|null[]
@@ -78,9 +78,9 @@ class ProductEditData
     public $variants;
 
     /**
-     * @var bool[domainId]
+     * @var bool[]
      */
-    public $showInZboziFeed;
+    public $showInZboziFeedIndexedByDomainId;
 
     /**
      * @var string[]|null[]
@@ -97,8 +97,8 @@ class ProductEditData
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
      * @param string[] $imagesToUpload
      * @param \Shopsys\ShopBundle\Component\Image\Image[] $imagesToDelete
-     * @param \Shopsys\ShopBundle\Component\Image\Image[] $orderedImages
-     * @param string[] $manualInputPrices
+     * @param \Shopsys\ShopBundle\Component\Image\Image[] $orderedImagesById
+     * @param string[] $manualInputPricesByPricingGroupId
      * @param string[]|null[] $seoTitles
      * @param string[]|null[] $seoMetaDescriptions
      * @param string[]|null[] $descriptions
@@ -106,7 +106,7 @@ class ProductEditData
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $accessories
      * @param string[]|null[] $heurekaCpcValues
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
-     * @param bool[domainId] $showInZboziFeed
+     * @param bool[] $showInZboziFeedIndexedByDomainId
      * @param string[]|null[] $zboziCpcValues
      * @param string[]|null[] $zboziCpcSearchValues
      */
@@ -115,8 +115,8 @@ class ProductEditData
         array $parameters = [],
         array $imagesToUpload = [],
         array $imagesToDelete = [],
-        array $orderedImages = [],
-        array $manualInputPrices = [],
+        array $orderedImagesById = [],
+        array $manualInputPricesByPricingGroupId = [],
         array $seoTitles = [],
         array $seoMetaDescriptions = [],
         array $descriptions = [],
@@ -124,7 +124,7 @@ class ProductEditData
         array $accessories = [],
         array $heurekaCpcValues = [],
         array $variants = [],
-        array $showInZboziFeed = [],
+        array $showInZboziFeedIndexedByDomainId = [],
         array $zboziCpcValues = [],
         array $zboziCpcSearchValues = []
     ) {
@@ -136,8 +136,8 @@ class ProductEditData
         $this->parameters = $parameters;
         $this->imagesToUpload = $imagesToUpload;
         $this->imagesToDelete = $imagesToDelete;
-        $this->orderedImages = $orderedImages;
-        $this->manualInputPrices = $manualInputPrices;
+        $this->orderedImagesById = $orderedImagesById;
+        $this->manualInputPricesByPricingGroupId = $manualInputPricesByPricingGroupId;
         $this->seoTitles = $seoTitles;
         $this->seoMetaDescriptions = $seoMetaDescriptions;
         $this->descriptions = $descriptions;
@@ -146,7 +146,7 @@ class ProductEditData
         $this->accessories = $accessories;
         $this->heurekaCpcValues = $heurekaCpcValues;
         $this->variants = $variants;
-        $this->showInZboziFeed = $showInZboziFeed;
+        $this->showInZboziFeedIndexedByDomainId = $showInZboziFeedIndexedByDomainId;
         $this->zboziCpcValues = $zboziCpcValues;
         $this->zboziCpcSearchValues = $zboziCpcSearchValues;
     }

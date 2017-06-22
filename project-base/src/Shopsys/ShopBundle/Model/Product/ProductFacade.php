@@ -195,7 +195,7 @@ class ProductFacade
         $this->createProductDomains($product, $this->domain->getAll());
         $this->createProductVisibilities($product);
         $this->refreshProductDomains($product, $productEditData);
-        $this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
+        $this->refreshProductManualInputPrices($product, $productEditData->manualInputPricesByPricingGroupId);
         $this->refreshProductAccessories($product, $productEditData->accessories);
         $this->productHiddenRecalculator->calculateHiddenForProduct($product);
         $this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($product);
@@ -222,7 +222,7 @@ class ProductFacade
         $this->saveParameters($product, $productEditData->parameters);
         $this->refreshProductDomains($product, $productEditData);
         if (!$product->isMainVariant()) {
-            $this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
+            $this->refreshProductManualInputPrices($product, $productEditData->manualInputPricesByPricingGroupId);
         } else {
             $this->productVariantService->refreshProductVariants($product, $productEditData->variants);
         }
@@ -230,7 +230,7 @@ class ProductFacade
         $this->em->flush();
         $this->productHiddenRecalculator->calculateHiddenForProduct($product);
         $this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($product);
-        $this->imageFacade->saveImageOrdering($productEditData->orderedImages);
+        $this->imageFacade->saveImageOrdering($productEditData->orderedImagesById);
         $this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
         $this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
         $this->friendlyUrlFacade->saveUrlListFormData('front_product_detail', $product->getId(), $productEditData->urls);
@@ -321,7 +321,7 @@ class ProductFacade
             $shortDescriptions = $productEditData->shortDescriptions;
         }
         $heurekaCpcValues = $productEditData->heurekaCpcValues;
-        $showInZboziFeed = $productEditData->showInZboziFeed;
+        $showInZboziFeed = $productEditData->showInZboziFeedIndexedByDomainId;
         $zboziCpcValues = $productEditData->zboziCpcValues;
         $zboziCpcSearchValues = $productEditData->zboziCpcSearchValues;
 

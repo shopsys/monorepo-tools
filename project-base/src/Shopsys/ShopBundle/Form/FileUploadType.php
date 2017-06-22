@@ -122,7 +122,6 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
             $validator = $context->getValidator();
             $violations = $validator->validate($file, $this->fileConstraints);
             foreach ($violations as $violation) {
-                /* @var $violation \Symfony\Component\Validator\ConstraintViolationInterface */
                 $context->addViolation($violation->getMessageTemplate(), $violation->getParameters());
             }
         }

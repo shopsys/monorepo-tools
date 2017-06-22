@@ -188,7 +188,7 @@
         {% do form.productData.priceCalculationType.setRendered %}
         {% do form.productData.vat.setRendered %}
         {% do form.productData.price.setRendered %}
-        {% do form.manualInputPrices.setRendered %}
+        {% do form.manualInputPricesByPricingGroupId.setRendered %}
     {% else %}
         {{ parent() }}
     {% endif %}
@@ -242,11 +242,11 @@
         {% for productSellingPrice in productSellingPrices %}
             <div class="form-line">
                 <div class="form-line__label">
-                    {{ form_label(form.manualInputPrices[productSellingPrice.pricingGroup.id], productSellingPrice.pricingGroup.name, { isSimple: true, compulsoryClass: 'form-line__compulsory js-input-price-type-manual' }) }}
+                    {{ form_label(form.manualInputPricesByPricingGroupId[productSellingPrice.pricingGroup.id], productSellingPrice.pricingGroup.name, { isSimple: true, compulsoryClass: 'form-line__compulsory js-input-price-type-manual' }) }}
                 </div>
                 <div class="form-line__side">
                     <div class="form-line__item js-input-price-type-manual">
-                        {{ form_widget(form.manualInputPrices[productSellingPrice.pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+                        {{ form_widget(form.manualInputPricesByPricingGroupId[productSellingPrice.pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
                     </div>
                     <div class="form-line__item form-line__item--input-size js-input-price-type-auto">&nbsp;</div>
                     <div class="form-line__item--right">
@@ -258,7 +258,7 @@
                         </div>
                     </div>
                     <div class="js-input-price-type-manual">
-                        {{ form_errors(form.manualInputPrices[productSellingPrice.pricingGroup.id] ) }}
+                        {{ form_errors(form.manualInputPricesByPricingGroupId[productSellingPrice.pricingGroup.id] ) }}
                     </div>
                 </div>
             </div>
@@ -330,10 +330,10 @@
 {% endblock %}
 
 {% block images %}
-    {% if form.orderedImages|length > 0 %}
+    {% if form.orderedImagesById|length > 0 %}
         <div class="list-images__wrap">
             <ul class="list-images" id="js-product-images">
-                {% for imageForm in form.orderedImages %}
+                {% for imageForm in form.orderedImagesById %}
                     {% set image = productDetail.imagesIndexedById[imageForm.vars.value] %}
                     <li class="list-images__item js-product-images-image" data-id="{{ image.id }}">
                         <div class="list-images__item__in">
@@ -355,13 +355,13 @@
                             <span class="list-images__item__overlay js-product-images-image-overlay">{{ 'Picture will be deleted after saving.'|trans }}</span>
                         </div>
                         {# Ignore indices from form definition. Let them reflect new positions. #}
-                        {{ form_widget(imageForm, { full_name: form.orderedImages.vars.full_name ~ '[]'}) }}
+                        {{ form_widget(imageForm, { full_name: form.orderedImagesById.vars.full_name ~ '[]'}) }}
                     </li>
                 {% endfor %}
             </ul>
         </div>
     {% endif %}
-    {% do form.orderedImages.setRendered %}
+    {% do form.orderedImagesById.setRendered %}
 {% endblock %}
 
 {% block product_urls %}

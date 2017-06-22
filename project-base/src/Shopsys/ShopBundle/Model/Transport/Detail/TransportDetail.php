@@ -12,20 +12,20 @@ class TransportDetail
     private $transport;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Price[currencyId]
+     * @var \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
-    private $basePrices;
+    private $basePricesByCurrencyId;
 
     /**
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price[currencyId] $basePrices
+     * @param \Shopsys\ShopBundle\Model\Pricing\Price[] $basePricesByCurrencyId
      */
     public function __construct(
         Transport $transport,
-        array $basePrices
+        array $basePricesByCurrencyId
     ) {
         $this->transport = $transport;
-        $this->basePrices = $basePrices;
+        $this->basePricesByCurrencyId = $basePricesByCurrencyId;
     }
 
     /**
@@ -37,10 +37,10 @@ class TransportDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price[currencyId]
+     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
-    public function getBasePrices()
+    public function getBasePricesByCurrencyId()
     {
-        return $this->basePrices;
+        return $this->basePricesByCurrencyId;
     }
 }

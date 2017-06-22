@@ -28,12 +28,12 @@ class Grid
     private $id;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\Column[columnId]
+     * @var \Shopsys\ShopBundle\Component\Grid\Column[]
      */
-    private $columns = [];
+    private $columnsById = [];
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\ActionColumn[actionColumnId]
+     * @var \Shopsys\ShopBundle\Component\Grid\ActionColumn[]
      */
     private $actionColumns = [];
 
@@ -219,13 +219,13 @@ class Grid
      */
     public function addColumn($id, $sourceColumnName, $title, $sortable = false)
     {
-        if (array_key_exists($id, $this->columns)) {
+        if (array_key_exists($id, $this->columnsById)) {
             throw new \Shopsys\ShopBundle\Component\Grid\Exception\DuplicateColumnIdException(
                 'Duplicate column id "' . $id . '" in grid "' . $this->id . '"'
             );
         }
         $column = new Column($id, $sourceColumnName, $title, $sortable);
-        $this->columns[$id] = $column;
+        $this->columnsById[$id] = $column;
         return $column;
     }
 
@@ -418,9 +418,9 @@ class Grid
     /**
      * @return \Shopsys\ShopBundle\Component\Grid\Column[]
      */
-    public function getColumns()
+    public function getColumnsById()
     {
-        return $this->columns;
+        return $this->columnsById;
     }
 
     /**
@@ -428,7 +428,7 @@ class Grid
      */
     public function existsColumn($columntId)
     {
-        return array_key_exists($columntId, $this->columns);
+        return array_key_exists($columntId, $this->columnsById);
     }
 
     /**
@@ -672,10 +672,10 @@ class Grid
 
     private function loadRows()
     {
-        if (array_key_exists($this->orderSourceColumnName, $this->columns)
-            && $this->columns[$this->orderSourceColumnName]->isSortable()
+        if (array_key_exists($this->orderSourceColumnName, $this->columnsById)
+            && $this->columnsById[$this->orderSourceColumnName]->isSortable()
         ) {
-            $orderSourceColumnName = $this->columns[$this->orderSourceColumnName]->getOrderSourceColumnName();
+            $orderSourceColumnName = $this->columnsById[$this->orderSourceColumnName]->getOrderSourceColumnName();
         } else {
             $orderSourceColumnName = null;
         }

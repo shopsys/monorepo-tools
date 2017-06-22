@@ -45,18 +45,18 @@ class QuantifiedProductDiscountCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
+     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[] $quantifiedItemsPrices
      * @param float|null $discountPercent
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
+     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
     public function calculateDiscounts(array $quantifiedItemsPrices, $discountPercent)
     {
         $quantifiedItemsDiscounts = [];
-        foreach ($quantifiedItemsPrices as $index => $quantifiedItemPrice) {
+        foreach ($quantifiedItemsPrices as $quantifiedItemIndex => $quantifiedItemPrice) {
             if ($discountPercent === 0.0 || $discountPercent === null) {
-                $quantifiedItemsDiscounts[$index] = null;
+                $quantifiedItemsDiscounts[$quantifiedItemIndex] = null;
             } else {
-                $quantifiedItemsDiscounts[$index] = $this->calculateDiscount($quantifiedItemPrice, $discountPercent);
+                $quantifiedItemsDiscounts[$quantifiedItemIndex] = $this->calculateDiscount($quantifiedItemPrice, $discountPercent);
             }
         }
 

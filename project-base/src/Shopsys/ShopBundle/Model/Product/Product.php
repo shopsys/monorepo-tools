@@ -447,16 +447,17 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
-     * @return string[locale]
+     * @return string[]
      */
     public function getNames()
     {
-        $names = [];
+        $namesByLocale = [];
+
         foreach ($this->translations as $translation) {
-            $names[$translation->getLocale()] = $translation->getName();
+            $namesByLocale[$translation->getLocale()] = $translation->getName();
         }
 
-        return $names;
+        return $namesByLocale;
     }
 
     /**
@@ -683,7 +684,7 @@ class Product extends AbstractTranslatableEntity
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Product\ProductCategoryDomain[categoryId]
+     * @return \Shopsys\ShopBundle\Model\Product\ProductCategoryDomain[]
      */
     private function getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId)
     {
@@ -707,7 +708,7 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\Category[domainId][]
+     * @return \Shopsys\ShopBundle\Model\Category\Category[][]
      */
     public function getCategoriesIndexedByDomainId()
     {

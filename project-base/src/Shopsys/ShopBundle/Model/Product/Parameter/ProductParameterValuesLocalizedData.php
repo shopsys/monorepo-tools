@@ -10,7 +10,7 @@ class ProductParameterValuesLocalizedData
     public $parameter;
 
     /**
-     * @var string[locale]
+     * @var string[]
      */
-    public $valueText;
+    public $valueTextsByLocale;
 }

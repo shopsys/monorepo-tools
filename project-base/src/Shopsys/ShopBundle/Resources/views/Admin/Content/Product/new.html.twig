@@ -42,15 +42,15 @@
             {% for pricingGroup in pricingGroups %}
                 <div class="form-line">
                     <div class="form-line__label">
-                        {{ form_label(form.manualInputPrices[pricingGroup.id], pricingGroup.name, { isSimple: true, compulsoryClass: 'form-line__compulsory' }) }}
+                        {{ form_label(form.manualInputPricesByPricingGroupId[pricingGroup.id], pricingGroup.name, { isSimple: true, compulsoryClass: 'form-line__compulsory' }) }}
                     </div>
                     <div class="form-line__side">
                         <div class="form-line__item js-input-price-type-manual">
-                            {{ form_widget(form.manualInputPrices[pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+                            {{ form_widget(form.manualInputPricesByPricingGroupId[pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
                         </div>
                         <div class="form-line__item form-line__item--input-size js-input-price-type-auto">&nbsp;</div>
                     </div>
-                    {{ form_errors(form.manualInputPrices[pricingGroup.id]) }}
+                    {{ form_errors(form.manualInputPricesByPricingGroupId[pricingGroup.id]) }}
                 </div>
             {% endfor %}
         </div>
@@ -62,5 +62,5 @@
 {% endblock %}
 
 {% block images %}
-    {% do form.orderedImages.setRendered %}
+    {% do form.orderedImagesById.setRendered %}
 {% endblock %}

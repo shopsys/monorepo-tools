@@ -95,7 +95,7 @@ class ProductData
     public $flags;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\Category[domainId][]
+     * @var \Shopsys\ShopBundle\Model\Category\Category[][]
      */
     public $categoriesByDomainId;
 

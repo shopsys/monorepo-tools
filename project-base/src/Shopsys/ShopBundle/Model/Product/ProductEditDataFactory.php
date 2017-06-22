@@ -87,7 +87,7 @@ class ProductEditDataFactory
 
         $nullForAllDomains = $this->getNullForAllDomains();
 
-        $productEditData->manualInputPrices = [];
+        $productEditData->manualInputPricesByPricingGroupId = [];
         $productEditData->seoTitles = $nullForAllDomains;
         $productEditData->seoMetaDescriptions = $nullForAllDomains;
         $productEditData->descriptions = $nullForAllDomains;
@@ -95,7 +95,7 @@ class ProductEditDataFactory
         $productEditData->accessories = [];
         $productEditData->heurekaCpcValues = $nullForAllDomains;
         foreach ($this->domain->getAllIds() as $domainId) {
-            $productEditData->showInZboziFeed[$domainId] = true;
+            $productEditData->showInZboziFeedIndexedByDomainId[$domainId] = true;
         }
         $productEditData->zboziCpcValues = $nullForAllDomains;
         $productEditData->zboziCpcSearchValues = $nullForAllDomains;
@@ -114,12 +114,12 @@ class ProductEditDataFactory
         $productEditData->productData = $this->productDataFactory->createFromProduct($product);
         $productEditData->parameters = $this->getParametersData($product);
         try {
-            $productEditData->manualInputPrices = $this->productInputPriceFacade->getManualInputPricesData($product);
+            $productEditData->manualInputPricesByPricingGroupId = $this->productInputPriceFacade->getManualInputPricesDataIndexedByPricingGroupId($product);
         } catch (\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
-            $productEditData->manualInputPrices = null;
+            $productEditData->manualInputPricesByPricingGroupId = null;
         }
         $productEditData->accessories = $this->getAccessoriesData($product);
-        $productEditData->orderedImages = $this->imageFacade->getImagesByEntityIndexedById($product, null);
+        $productEditData->orderedImagesById = $this->imageFacade->getImagesByEntityIndexedById($product, null);
         $productEditData->variants = $product->getVariants();
 
         $this->setMultidomainData($product, $productEditData);
@@ -129,16 +129,16 @@ class ProductEditDataFactory
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\Product[position]
+     * @return \Shopsys\ShopBundle\Model\Product\Product[]
      */
     private function getAccessoriesData(Product $product)
     {
-        $productAccessories = [];
+        $productAccessoriesByPosition = [];
         foreach ($this->productAccessoryRepository->getAllByProduct($product) as $productAccessory) {
-            $productAccessories[$productAccessory->getPosition()] = $productAccessory->getAccessory();
+            $productAccessoriesByPosition[$productAccessory->getPosition()] = $productAccessory->getAccessory();
         }
 
-        return $productAccessories;
+        return $productAccessoriesByPosition;
     }
 
     /**
@@ -173,10 +173,10 @@ class ProductEditDataFactory
             $productEditData->descriptions[$domainId] = $productDomain->getDescription();
             $productEditData->shortDescriptions[$domainId] = $productDomain->getShortDescription();
 
-            $productEditData->urls->mainOnDomains[$domainId] =
+            $productEditData->urls->mainFriendlyUrlsByDomainId[$domainId] =
                 $this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
             $productEditData->heurekaCpcValues[$domainId] = $productDomain->getHeurekaCpc();
-            $productEditData->showInZboziFeed[$domainId] = $productDomain->getShowInZboziFeed();
+            $productEditData->showInZboziFeedIndexedByDomainId[$domainId] = $productDomain->getShowInZboziFeed();
             $productEditData->zboziCpcValues[$domainId] = $productDomain->getZboziCpc();
             $productEditData->zboziCpcSearchValues[$domainId] = $productDomain->getZboziCpcSearch();
         }

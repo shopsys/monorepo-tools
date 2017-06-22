@@ -16,12 +16,12 @@ class UploadedFileConfigLoader
     private $filesystem;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[class]
+     * @var \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
      */
     private $uploadedFileEntityConfigsByClass;
 
     /**
-     * @var string[entityName]
+     * @var string[]
      */
     private $entityNamesByEntityNames;
 

@@ -19,24 +19,25 @@ class ProductListOrderingModeService
      * @param \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingConfig $productListOrderingConfig
      * @return string
      */
-    public function getOrderingModeFromRequest(
+    public function getOrderingModeIdFromRequest(
         Request $request,
         ProductListOrderingConfig $productListOrderingConfig
     ) {
-        $orderingMode = $request->cookies->get($productListOrderingConfig->getCookieName());
+        $orderingModeId = $request->cookies->get($productListOrderingConfig->getCookieName());
 
-        if (!in_array($orderingMode, $this->getSupportedOrderingModes($productListOrderingConfig), true)) {
-            $orderingMode = $productListOrderingConfig->getDefaultOrderingMode();
+        if (!in_array($orderingModeId, $this->getSupportedOrderingModeIds($productListOrderingConfig), true)) {
+            $orderingModeId = $productListOrderingConfig->getDefaultOrderingModeId();
         }
 
-        return $orderingMode;
+        return $orderingModeId;
     }
 
     /**
+     * @param \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingConfig $productListOrderingConfig
      * @return string[]
      */
-    private function getSupportedOrderingModes(ProductListOrderingConfig $productListOrderingConfig)
+    private function getSupportedOrderingModeIds(ProductListOrderingConfig $productListOrderingConfig)
     {
-        return array_keys($productListOrderingConfig->getSupportedOrderingModesNames());
+        return array_keys($productListOrderingConfig->getSupportedOrderingModesNamesIndexedById());
     }
 }

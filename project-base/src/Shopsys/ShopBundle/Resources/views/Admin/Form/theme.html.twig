@@ -246,7 +246,7 @@
                         <strong class="form-line__box__title__name">
                             {{ 'Domain %domainName%'|trans({'%domainName%' : getDomainName(domainId)}) }}
                         </strong>
-                        {{ form_errors(form.mainOnDomains[domainId]) }}
+                        {{ form_errors(form.mainFriendlyUrlsByDomainId[domainId]) }}
                     </div>
                 {% endif %}
                 <div{% if isMultidomain() %} class="form-line__box__content"{% endif %}>
@@ -254,7 +254,7 @@
                         {% set mainUrl = findUrlByDomainId(form.vars.routeName, { id: entityId }, domainId) %}
                         {% for slug, friendlyUrlForm in friendlyUrlForms %}
                             <label class="form-choice-list__item js-entity-url-list-friendly-url">
-                                {% set mainUrlRadioButton = form.mainOnDomains[domainId][slug] %}
+                                {% set mainUrlRadioButton = form.mainFriendlyUrlsByDomainId[domainId][slug] %}
                                 {{ form_widget(mainUrlRadioButton, { attr: { class: 'js-entity-url-list-select-main form-choice-list__input' } }) }}
 
                                 <span class="js-entity-url-list-row-label">

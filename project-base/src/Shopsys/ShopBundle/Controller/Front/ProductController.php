@@ -138,7 +138,7 @@ class ProductController extends FrontBaseController
         }
         $page = $requestPage === null ? 1 : (int)$requestPage;
 
-        $orderingMode = $this->productListOrderingModeForListFacade->getOrderingModeFromRequest(
+        $orderingModeId = $this->productListOrderingModeForListFacade->getOrderingModeIdFromRequest(
             $request
         );
 
@@ -152,7 +152,7 @@ class ProductController extends FrontBaseController
 
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsInCategory(
             $productFilterData,
-            $orderingMode,
+            $orderingModeId,
             $page,
             self::PRODUCTS_PER_PAGE,
             $id
@@ -199,12 +199,12 @@ class ProductController extends FrontBaseController
         }
         $page = $requestPage === null ? 1 : (int)$requestPage;
 
-        $orderingMode = $this->productListOrderingModeForBrandFacade->getOrderingModeFromRequest(
+        $orderingModeId = $this->productListOrderingModeForBrandFacade->getOrderingModeIdFromRequest(
             $request
         );
 
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsForBrand(
-            $orderingMode,
+            $orderingModeId,
             $page,
             self::PRODUCTS_PER_PAGE,
             $id
@@ -235,7 +235,7 @@ class ProductController extends FrontBaseController
         }
         $page = $requestPage === null ? 1 : (int)$requestPage;
 
-        $orderingMode = $this->productListOrderingModeForSearchFacade->getOrderingModeFromRequest(
+        $orderingModeId = $this->productListOrderingModeForSearchFacade->getOrderingModeIdFromRequest(
             $request
         );
 
@@ -250,7 +250,7 @@ class ProductController extends FrontBaseController
         $paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsForSearch(
             $searchText,
             $productFilterData,
-            $orderingMode,
+            $orderingModeId,
             $page,
             self::PRODUCTS_PER_PAGE
         );
@@ -325,13 +325,13 @@ class ProductController extends FrontBaseController
     {
         $productListOrderingConfig = $this->productListOrderingModeForListFacade->getProductListOrderingConfig();
 
-        $orderingMode = $this->productListOrderingModeForListFacade->getOrderingModeFromRequest(
+        $orderingModeId = $this->productListOrderingModeForListFacade->getOrderingModeIdFromRequest(
             $request
         );
 
         return $this->render('@ShopsysShop/Front/Content/Product/orderingSetting.html.twig', [
-            'orderingModesNames' => $productListOrderingConfig->getSupportedOrderingModesNames(),
-            'activeOrderingMode' => $orderingMode,
+            'orderingModesNames' => $productListOrderingConfig->getSupportedOrderingModesNamesIndexedById(),
+            'activeOrderingModeId' => $orderingModeId,
             'cookieName' => $productListOrderingConfig->getCookieName(),
         ]);
     }
@@ -340,13 +340,13 @@ class ProductController extends FrontBaseController
     {
         $productListOrderingConfig = $this->productListOrderingModeForBrandFacade->getProductListOrderingConfig();
 
-        $orderingMode = $this->productListOrderingModeForBrandFacade->getOrderingModeFromRequest(
+        $orderingModeId = $this->productListOrderingModeForBrandFacade->getOrderingModeIdFromRequest(
             $request
         );
 
         return $this->render('@ShopsysShop/Front/Content/Product/orderingSetting.html.twig', [
-            'orderingModesNames' => $productListOrderingConfig->getSupportedOrderingModesNames(),
-            'activeOrderingMode' => $orderingMode,
+            'orderingModesNames' => $productListOrderingConfig->getSupportedOrderingModesNamesIndexedById(),
+            'activeOrderingModeId' => $orderingModeId,
             'cookieName' => $productListOrderingConfig->getCookieName(),
         ]);
     }
@@ -355,13 +355,13 @@ class ProductController extends FrontBaseController
     {
         $productListOrderingConfig = $this->productListOrderingModeForSearchFacade->getProductListOrderingConfig();
 
-        $orderingMode = $this->productListOrderingModeForSearchFacade->getOrderingModeFromRequest(
+        $orderingModeId = $this->productListOrderingModeForSearchFacade->getOrderingModeIdFromRequest(
             $request
         );
 
         return $this->render('@ShopsysShop/Front/Content/Product/orderingSetting.html.twig', [
-            'orderingModesNames' => $productListOrderingConfig->getSupportedOrderingModesNames(),
-            'activeOrderingMode' => $orderingMode,
+            'orderingModesNames' => $productListOrderingConfig->getSupportedOrderingModesNamesIndexedById(),
+            'activeOrderingModeId' => $orderingModeId,
             'cookieName' => $productListOrderingConfig->getCookieName(),
         ]);
     }

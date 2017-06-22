@@ -43,7 +43,7 @@ class ArticleDataFactory
         $articleData->setFromEntity($article);
 
         foreach ($this->domain->getAll() as $domainConfig) {
-            $articleData->urls->mainOnDomains[$domainConfig->getId()] =
+            $articleData->urls->mainFriendlyUrlsByDomainId[$domainConfig->getId()] =
                 $this->friendlyUrlFacade->findMainFriendlyUrl(
                     $domainConfig->getId(),
                     'front_article_detail',

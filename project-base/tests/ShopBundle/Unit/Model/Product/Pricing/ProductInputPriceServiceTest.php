@@ -43,7 +43,7 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
         ];
 
         $productInputPriceService = new ProductInputPriceService($inputPriceCalculation, $productPriceCalculationMock);
-        $manualInputPricesData = $productInputPriceService->getManualInputPricesData(
+        $manualInputPricesData = $productInputPriceService->getManualInputPricesDataIndexedByPricingGroupId(
             $product,
             $inputPriceType,
             $pricingGroups,
@@ -88,7 +88,7 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
         ];
 
         $productInputPriceService = new ProductInputPriceService($inputPriceCalculation, $productPriceCalculationMock);
-        $manualInputPricesData = $productInputPriceService->getManualInputPricesData(
+        $manualInputPricesData = $productInputPriceService->getManualInputPricesDataIndexedByPricingGroupId(
             $product,
             $inputPriceType,
             $pricingGroups,

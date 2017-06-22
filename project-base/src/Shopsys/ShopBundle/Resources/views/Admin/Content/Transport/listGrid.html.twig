@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block grid_value_cell_id_price %}
-    {{ value.basePrices[currencyIdForList].priceWithVat|priceWithCurrencyAdmin }}
+    {{ value.basePricesByCurrencyId[currencyIdForList].priceWithVat|priceWithCurrencyAdmin }}
 {% endblock %}
 
 {% block grid_no_data %}

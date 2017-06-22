@@ -71,7 +71,6 @@ class ProductBrandFilter implements AdvancedSearchFilterInterface
         $isNotBrand = [];
 
         foreach ($rulesData as $index => $ruleData) {
-            /* @var $ruleData \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData */
             if ($ruleData->operator === self::OPERATOR_NOT_SET) {
                 $queryBuilder->andWhere('p.brand IS NULL');
             } elseif ($ruleData->operator === self::OPERATOR_IS) {

@@ -40,7 +40,7 @@ class CategoryDataFactory
         foreach ($categoryDomains as $categoryDomain) {
             $domainId = $categoryDomain->getDomainId();
 
-            $categoryData->urls->mainOnDomains[$domainId] =
+            $categoryData->urls->mainFriendlyUrlsByDomainId[$domainId] =
                 $this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_list', $category->getId());
         }
 

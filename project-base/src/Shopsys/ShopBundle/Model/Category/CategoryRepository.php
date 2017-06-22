@@ -354,7 +354,7 @@ class CategoryRepository extends NestedTreeRepository
      * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $domainId
-     * @return int[categoryId]
+     * @return int[]
      */
     public function getListableProductCountsIndexedByCategoryId(
         array $categories,
