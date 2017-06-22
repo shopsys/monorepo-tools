@@ -33,6 +33,27 @@ class TopCategoryFacade
     public function getAllCategoriesByDomainId($domainId)
     {
         $topCategories = $this->topCategoryRepository->getAllByDomainId($domainId);
+
+        return $this->getCategoriesFromTopCategories($topCategories);
+    }
+
+    /**
+     * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     */
+    public function getVisibleCategoriesByDomainId($domainId)
+    {
+        $topCategories = $this->topCategoryRepository->getVisibleByDomainId($domainId);
+
+        return $this->getCategoriesFromTopCategories($topCategories);
+    }
+
+    /**
+     * @param \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[] $topCategories
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     */
+    private function getCategoriesFromTopCategories($topCategories)
+    {
         $categories = [];
 
         foreach ($topCategories as $topCategory) {
