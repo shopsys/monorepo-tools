@@ -28,20 +28,32 @@ class TopCategoryFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[]
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getAll($domainId)
+    public function getAllCategoriesByDomainId($domainId)
     {
-        return $this->topCategoryRepository->getAll($domainId);
+        $topCategories = $this->topCategoryRepository->getAllByDomainId($domainId);
+
+        return $this->getCategoriesFromTopCategories($topCategories);
     }
 
     /**
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getCategoriesForAll($domainId)
+    public function getVisibleCategoriesByDomainId($domainId)
     {
-        $topCategories = $this->getAll($domainId);
+        $topCategories = $this->topCategoryRepository->getVisibleByDomainId($domainId);
+
+        return $this->getCategoriesFromTopCategories($topCategories);
+    }
+
+    /**
+     * @param \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[] $topCategories
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     */
+    private function getCategoriesFromTopCategories($topCategories)
+    {
         $categories = [];
 
         foreach ($topCategories as $topCategory) {
@@ -52,12 +64,12 @@ class TopCategoryFacade
     }
 
     /**
-     * @param $domainId
+     * @param int $domainId
      * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
      */
     public function saveTopCategoriesForDomain($domainId, array $categories)
     {
-        $oldTopCategories = $this->topCategoryRepository->getAll($domainId);
+        $oldTopCategories = $this->topCategoryRepository->getAllByDomainId($domainId);
         foreach ($oldTopCategories as $oldTopCategory) {
             $this->em->remove($oldTopCategory);
         }

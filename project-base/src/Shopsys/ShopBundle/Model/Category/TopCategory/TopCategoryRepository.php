@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Model\Category\TopCategory;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory;
@@ -37,8 +38,22 @@ class TopCategoryRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[]
      */
-    public function getAll($domainId)
+    public function getAllByDomainId($domainId)
     {
         return $this->getTopCategoryRepository()->findBy(['domainId' => $domainId], ['position' => 'ASC']);
+    }
+
+    /**
+     * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[]
+     */
+    public function getVisibleByDomainId($domainId)
+    {
+        return $this->categoryRepository->getAllVisibleByDomainIdQueryBuilder($domainId)
+            ->select('tc')
+            ->join(TopCategory::class, 'tc', Join::WITH, 'tc.category = c AND tc.domainId = cd.domainId')
+            ->orderBy('tc.position')
+            ->getQuery()
+            ->getResult();
     }
 }

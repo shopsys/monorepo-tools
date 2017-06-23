@@ -36,7 +36,7 @@ class TopCategoryController extends AdminBaseController
     {
         $domainId = $this->selectedDomain->getId();
         $formData = [
-            'categories' => $this->topCategoryFacade->getCategoriesForAll($domainId),
+            'categories' => $this->topCategoryFacade->getAllCategoriesByDomainId($domainId),
         ];
 
         $form = $this->createForm(TopCategoriesFormType::class, $formData, [

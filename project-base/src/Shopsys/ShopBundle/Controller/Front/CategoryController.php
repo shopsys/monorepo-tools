@@ -102,7 +102,7 @@ class CategoryController extends FrontBaseController
     public function topAction()
     {
         return $this->render('@ShopsysShop/Front/Content/Category/top.html.twig', [
-            'categories' => $this->topCategoryFacade->getCategoriesForAll($this->domain->getId()),
+            'categories' => $this->topCategoryFacade->getVisibleCategoriesByDomainId($this->domain->getId()),
         ]);
     }
 
