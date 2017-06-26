@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\PromoCode;
 
-use Shopsys\ShopBundle\Component\Constraints\NotInArray;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use Symfony\Component\Form\AbstractType;
@@ -11,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class PromoCodeFormType extends AbstractType
 {
@@ -18,6 +18,11 @@ class PromoCodeFormType extends AbstractType
      * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
      */
     private $promoCodeFacade;
+
+    /**
+     * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode|null
+     */
+    private $promoCode;
 
     public function __construct(PromoCodeFacade $promoCodeFacade)
     {
@@ -30,12 +35,7 @@ class PromoCodeFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $prohibitedCodes = [];
-        foreach ($this->promoCodeFacade->getAll() as $promoCode) {
-            if ($promoCode !== $options['promo_code']) {
-                $prohibitedCodes[] = $promoCode->getCode();
-            }
-        }
+        $this->promoCode = $options['promo_code'];
 
         $builder
             ->add('code', TextType::class, [
@@ -44,10 +44,7 @@ class PromoCodeFormType extends AbstractType
                     new Constraints\NotBlank([
                         'message' => 'Please enter code',
                     ]),
-                    new NotInArray([
-                        'array' => $prohibitedCodes,
-                        'message' => 'Discount coupon with this code already exists',
-                    ]),
+                    new Constraints\Callback([$this, 'validateUniquePromoCode']),
                 ],
             ])
             ->add('percent', IntegerType::class, [
@@ -76,5 +73,20 @@ class PromoCodeFormType extends AbstractType
             ->setDefaults([
                 'attr' => ['novalidate' => 'novalidate'],
             ]);
+    }
+
+    /**
+     * @param string $promoCodeValue
+     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
+     */
+    public function validateUniquePromoCode($promoCodeValue, ExecutionContextInterface $context)
+    {
+        if ($this->promoCode === null || $promoCodeValue !== $this->promoCode->getCode()) {
+            $promoCode = $this->promoCodeFacade->findPromoCodeByCode($promoCodeValue);
+
+            if ($promoCode !== null) {
+                $context->addViolation('Discount coupon with this code already exists');
+            }
+        }
     }
 }
