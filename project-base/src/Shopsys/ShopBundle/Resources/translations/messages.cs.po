@@ -2810,6 +2810,10 @@ msgstr "URL adresa pro nastavení nového hesla"
 msgid "New product"
 msgstr "Nové zboží"
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Default/index.html.twig:11
+msgid "New registered customers"
+msgstr "Nově registrovaní zákazníci"
+
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Script/new.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Script/new.html.twig:4
