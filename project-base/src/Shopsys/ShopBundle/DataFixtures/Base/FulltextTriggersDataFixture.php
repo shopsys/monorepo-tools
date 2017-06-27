@@ -119,6 +119,8 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
                                 to_tsvector(COALESCE(NEW.partno, \'\'))
                                 ||
                                 to_tsvector(COALESCE(pd.description, \'\'))
+                                ||
+                                to_tsvector(COALESCE(pd.short_description, \'\'))
                             )
                     FROM product_translations pt
                     WHERE pt.translatable_id = NEW.id
@@ -153,6 +155,8 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
                                 to_tsvector(COALESCE(p.partno, \'\'))
                                 ||
                                 to_tsvector(COALESCE(pd.description, \'\'))
+                                ||
+                                to_tsvector(COALESCE(pd.short_description, \'\'))
                             )
                     FROM products p
                     WHERE p.id = NEW.translatable_id
@@ -187,6 +191,8 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
                                 to_tsvector(COALESCE(p.partno, \'\'))
                                 ||
                                 to_tsvector(COALESCE(NEW.description, \'\'))
+                                ||
+                                to_tsvector(COALESCE(NEW.short_description, \'\'))
                             FROM products p
                             LEFT JOIN product_translations pt ON pt.translatable_id = p.id
                                 AND pt.locale = get_domain_locale(NEW.domain_id)
@@ -199,8 +205,11 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
 
         $this->executeNativeQuery('
+            DROP TRIGGER IF EXISTS recalc_product_domain_fulltext_tsvector on product_domains;
+        ');
+        $this->executeNativeQuery('
             CREATE TRIGGER recalc_product_domain_fulltext_tsvector
-            BEFORE INSERT OR UPDATE OF description
+            BEFORE INSERT OR UPDATE OF description, short_description
             ON product_domains
             FOR EACH ROW
             EXECUTE PROCEDURE set_product_domain_fulltext_tsvector();
