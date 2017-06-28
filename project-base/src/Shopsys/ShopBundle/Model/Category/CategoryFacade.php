@@ -118,7 +118,7 @@ class CategoryFacade
         $rootCategory = $this->getRootCategory();
         $category = $this->categoryRepository->getById($categoryId);
         $this->categoryService->edit($category, $categoryData, $rootCategory);
-        $this->em->flush($category);
+        $this->em->flush();
         $this->refreshCategoryDomains($category, $categoryData);
         $this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
