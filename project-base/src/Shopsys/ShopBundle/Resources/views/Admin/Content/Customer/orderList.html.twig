@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 <th>{{ 'Order number'|trans }}</th>
+                <th>{{ 'Created on'|trans }}</th>
                 <th>{{ 'Billing address'|trans }}</th>
                 <th>{{ 'Shipping address'|trans }}</th>
                 <th>{{ 'Total price including VAT'|trans }}</th>
@@ -20,6 +21,9 @@
                         <a href="{{ url('admin_order_edit', { id: order.id }) }}" target="_blank">
                             {{ order.number }}<i class="svg svg-arrow-simple in-icon in-icon--detail margin-left-5"></i>
                         </a>
+                    </td>
+                    <td>
+                        {{ order.createdAt|formatDateTime }}
                     </td>
                     <td>
                         {{ order.street }}<br />
