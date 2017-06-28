@@ -77,7 +77,8 @@ class ZboziItemFactory implements FeedItemFactoryInterface
                 $this->getProductParamsIndexedByParamName($product, $paramsByProductIdAndName),
                 $product->getPartno(),
                 $productDomain->getZboziCpc(),
-                $productDomain->getZboziCpcSearch()
+                $productDomain->getZboziCpcSearch(),
+                $this->findProductMainVariantId($product)
             );
         }
 
@@ -156,5 +157,19 @@ class ZboziItemFactory implements FeedItemFactoryInterface
             $domainId,
             null
         );
+    }
+
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @return int|null
+     */
+    private function findProductMainVariantId(Product $product)
+    {
+        if ($product->isVariant()) {
+            $mainVariant = $product->getMainVariant();
+            return $mainVariant->getId();
+        }
+
+        return null;
     }
 }

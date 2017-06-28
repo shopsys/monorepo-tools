@@ -20,6 +20,9 @@
         {% if item.partno is not null -%}
         <PRODUCTNO>{{ item.partno }}</PRODUCTNO>
         {% endif -%}
+        {% if item.mainVariantId is not null %}
+            <ITEMGROUP_ID>{{ item.mainVariantId }}</ITEMGROUP_ID>
+        {% endif -%}
         {% if item.manufacturer is not null -%}
             <MANUFACTURER>{{ item.manufacturer }}</MANUFACTURER>
         {% endif -%}

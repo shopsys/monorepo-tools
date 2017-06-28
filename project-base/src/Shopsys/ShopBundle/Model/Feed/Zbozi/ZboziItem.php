@@ -77,6 +77,11 @@ class ZboziItem implements FeedItemInterface
     private $cpcSearch;
 
     /**
+     * @var int|null
+     */
+    private $mainVariantId;
+
+    /**
      * @param int $itemId
      * @param string $productName
      * @param string $description
@@ -89,6 +94,7 @@ class ZboziItem implements FeedItemInterface
      * @param string|null $categoryText
      * @param string[] $parametersByName
      * @param string|null $partno
+     * @param int|null $mainVariantId
      */
     public function __construct(
         $itemId,
@@ -104,7 +110,8 @@ class ZboziItem implements FeedItemInterface
         $parametersByName,
         $partno,
         $cpc,
-        $cpcSearch
+        $cpcSearch,
+        $mainVariantId
     ) {
         $this->itemId = $itemId;
         $this->productName = $productName;
@@ -120,6 +127,7 @@ class ZboziItem implements FeedItemInterface
         $this->partno = $partno;
         $this->cpc = $cpc;
         $this->cpcSearch = $cpcSearch;
+        $this->mainVariantId = $mainVariantId;
     }
 
     /**
@@ -232,5 +240,13 @@ class ZboziItem implements FeedItemInterface
     public function getCpcSearch()
     {
         return $this->cpcSearch;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMainVariantId()
+    {
+        return $this->mainVariantId;
     }
 }
