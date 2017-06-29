@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Command;
 
+use Shopsys\ShopBundle\Command\Exception\NoDomainSetCommandException;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -49,6 +50,10 @@ class ServerRunForDomainCommand extends ContainerAwareCommand
         $domain = $this->getContainer()->get('shopsys.shop.component.domain');
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         $domainConfigs = $domain->getAll();
+
+        if (count($domainConfigs) === 0) {
+            throw new \Shopsys\ShopBundle\Command\Exception\NoDomainSetCommandException();
+        }
 
         $firstDomainConfig = reset($domainConfigs);
 
