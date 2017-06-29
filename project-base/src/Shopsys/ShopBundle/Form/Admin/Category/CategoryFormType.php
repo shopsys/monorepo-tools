@@ -68,17 +68,23 @@ class CategoryFormType extends AbstractType
     {
         $seoTitlesOptionsByDomainId = [];
         $seoMetaDescriptionsOptionsByDomainId = [];
+        $seoH1OptionsByDomainId = [];
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainId = $domainConfig->getId();
 
             $seoTitlesOptionsByDomainId[$domainId] = [
                 'attr' => [
-                    'placeholder' => $this->getTitlePlaceholder($domainConfig, $options['category']),
+                    'placeholder' => $this->getCategoryNameForPlaceholder($domainConfig, $options['category']),
                 ],
             ];
             $seoMetaDescriptionsOptionsByDomainId[$domainId] = [
                 'attr' => [
                     'placeholder' => $this->seoSettingFacade->getDescriptionMainPage($domainId),
+                ],
+            ];
+            $seoH1OptionsByDomainId[$domainId] = [
+                'attr' => [
+                    'placeholder' => $this->getCategoryNameForPlaceholder($domainConfig, $options['category']),
                 ],
             ];
         }
@@ -110,6 +116,15 @@ class CategoryFormType extends AbstractType
                 'entry_type' => TextareaType::class,
                 'required' => false,
                 'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
+            ])
+            ->add('seoH1s', MultidomainType::class, [
+                'required' => false,
+                'entry_options' => [
+                    'constraints' => [
+                        new Constraints\Length(['max' => 255, 'maxMessage' => 'SEO H1 cannot be longer than {{ limit }} characters']),
+                    ],
+                ],
+                'optionsByDomainId' => $seoH1OptionsByDomainId,
             ])
             ->add('descriptions', MultidomainType::class, [
                 'entry_type' => CKEditorType::class,
@@ -173,7 +188,7 @@ class CategoryFormType extends AbstractType
      * @param \Shopsys\ShopBundle\Model\Category\Category|null $category
      * @return string
      */
-    private function getTitlePlaceholder(DomainConfig $domainConfig, Category $category = null)
+    private function getCategoryNameForPlaceholder(DomainConfig $domainConfig, Category $category = null)
     {
         $domainLocale = $domainConfig->getLocale();
 

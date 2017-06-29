@@ -29,7 +29,7 @@
 
             <div class="form-line">
                 <strong class="form-line__label">
-                    {{ 'Headline'|trans }}:
+                    {{ 'Page title'|trans }}:
                 </strong>
                 {% for domainId, seoTitleForm in form.seoTitles %}
                     <div class="form-line__side {% if not loop.first %}mt5{% endif %} js-characters-counter">
@@ -88,6 +88,38 @@
                         </div>
                     </div>
                     {{ form_errors(seoMetaDescriptionForm) }}
+                {% endfor %}
+            </div>
+
+            <div class="form-line">
+                <strong class="form-line__label">
+                    {{ 'Heading (H1)'|trans }}:
+                </strong>
+                {% for domainId, seoH1Form in form.seoH1s %}
+                    <div class="form-line__side {% if not loop.first %}mt5{% endif %} js-characters-counter">
+                        <div class="form-line__item form-line__item--left">
+                            <div class="input__wrap">
+                                {{ form_widget(seoH1Form, {
+                                    multidomain: true,
+                                    domainId: domainId,
+                                    attr: {
+                                        class: 'js-dynamic-placeholder js-characters-counter-input ' ~ cssClassOnMultidomainInputs,
+                                        'data-placeholder-source-input-id': 'category_form_name_' ~ seoH1Form.vars.domainConfig.locale
+                                    }
+                                }) }}
+                                {% if isMultidomain() %}
+                                    <span class="input__domain">
+                                        {{ domainIcon(domainId) }}
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-line__count">
+                            <span class="form-line__count__desc js-characters-counter-info" data-recommended-length="60"></span>
+                        </div>
+                        {{ form_errors(seoH1Form) }}
+                    </div>
                 {% endfor %}
             </div>
 

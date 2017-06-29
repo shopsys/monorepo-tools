@@ -43,6 +43,13 @@ class CategoryDomain
     private $seoMetaDescription;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $seoH1;
+
+    /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
@@ -100,6 +107,14 @@ class CategoryDomain
     }
 
     /**
+     * @return null|string
+     */
+    public function getSeoH1()
+    {
+        return $this->seoH1;
+    }
+
+    /**
      * @return string|null
      */
     public function getDescription()
@@ -129,6 +144,14 @@ class CategoryDomain
     public function setSeoMetaDescription($seoMetaDescription)
     {
         $this->seoMetaDescription = $seoMetaDescription;
+    }
+
+    /**
+     * @param string|null $seoH1
+     */
+    public function setSeoH1($seoH1)
+    {
+        $this->seoH1 = $seoH1;
     }
 
     /**
