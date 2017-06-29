@@ -53,7 +53,13 @@
                 {% endif %}
             </div>
             <div class="box-detail__info">
-                <h1 itemprop="name">{{ productDetail.product.name }}</h1>
+                <h1 itemprop="name">
+                    {% if productDomain.seoH1 is not null %}
+                        {{ productDomain.seoH1 }}
+                    {% else %}
+                        {{ productDetail.product.name }}
+                    {% endif %}
+                </h1>
 
                 {% if productDetail.product.calculatedAvailability %}
                     <div class="box-detail__info__availability">
