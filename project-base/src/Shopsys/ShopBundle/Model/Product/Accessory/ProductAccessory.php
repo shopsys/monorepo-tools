@@ -30,7 +30,7 @@ class ProductAccessory
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $position;
 
