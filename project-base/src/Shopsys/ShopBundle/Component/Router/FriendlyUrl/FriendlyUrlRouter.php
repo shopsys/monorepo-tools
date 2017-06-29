@@ -121,9 +121,19 @@ class FriendlyUrlRouter implements RouterInterface
      */
     public function generateByFriendlyUrl(FriendlyUrl $friendlyUrl, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
     {
+        $routeName = $friendlyUrl->getRouteName();
+        $route = $this->getRouteCollection()->get($routeName);
+
+        if ($route === null) {
+            throw new \Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlRouteNotFoundException(
+                $routeName,
+                $this->friendlyUrlRouterResourceFilepath
+            );
+        }
+
         return $this->friendlyUrlGenerator->getGeneratedUrl(
-            $friendlyUrl->getRouteName(),
-            $this->getRouteCollection()->get($friendlyUrl->getRouteName()),
+            $routeName,
+            $route,
             $friendlyUrl,
             $parameters,
             $referenceType
