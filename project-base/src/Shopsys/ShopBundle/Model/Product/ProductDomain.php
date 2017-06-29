@@ -98,6 +98,13 @@ class ProductDomain
     private $zboziCpcSearch;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $seoH1;
+
+    /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param int $domainId
      * @param bool $showInZboziFeed
@@ -134,6 +141,14 @@ class ProductDomain
     }
 
     /**
+     * @return string|null
+     */
+    public function getSeoH1()
+    {
+        return $this->seoH1;
+    }
+
+    /**
      * @param string|null $seoTitle
      */
     public function setSeoTitle($seoTitle)
@@ -147,6 +162,14 @@ class ProductDomain
     public function setSeoMetaDescription($seoMetaDescription)
     {
         $this->seoMetaDescription = $seoMetaDescription;
+    }
+
+    /**
+     * @param string $seoH1
+     */
+    public function setSeoH1($seoH1)
+    {
+        $this->seoH1 = $seoH1;
     }
 
     /**

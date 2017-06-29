@@ -89,6 +89,7 @@ class ProductEditDataFactory
 
         $productEditData->manualInputPricesByPricingGroupId = [];
         $productEditData->seoTitles = $nullForAllDomains;
+        $productEditData->seoH1s = $nullForAllDomains;
         $productEditData->seoMetaDescriptions = $nullForAllDomains;
         $productEditData->descriptions = $nullForAllDomains;
         $productEditData->shortDescriptions = $nullForAllDomains;
@@ -170,6 +171,7 @@ class ProductEditDataFactory
 
             $productEditData->seoTitles[$domainId] = $productDomain->getSeoTitle();
             $productEditData->seoMetaDescriptions[$domainId] = $productDomain->getSeoMetaDescription();
+            $productEditData->seoH1s[$domainId] = $productDomain->getSeoH1();
             $productEditData->descriptions[$domainId] = $productDomain->getDescription();
             $productEditData->shortDescriptions[$domainId] = $productDomain->getShortDescription();
 

@@ -96,6 +96,7 @@ class ProductEditFormType extends AbstractType
         $editedProduct = $options['product'];
         $seoTitlesOptionsByDomainId = [];
         $seoMetaDescriptionsOptionsByDomainId = [];
+        $seoH1OptionsByDomainId = [];
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainId = $domainConfig->getId();
 
@@ -107,6 +108,11 @@ class ProductEditFormType extends AbstractType
             $seoMetaDescriptionsOptionsByDomainId[$domainId] = [
                 'attr' => [
                     'placeholder' => $this->seoSettingFacade->getDescriptionMainPage($domainId),
+                ],
+            ];
+            $seoH1OptionsByDomainId[$domainId] = [
+                'attr' => [
+                    'placeholder' => $this->getTitlePlaceholder($domainConfig, $editedProduct),
                 ],
             ];
         }
@@ -171,6 +177,11 @@ class ProductEditFormType extends AbstractType
                 'entry_type' => TextareaType::class,
                 'required' => false,
                 'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
+            ])
+            ->add('seoH1s', MultidomainType::class, [
+                'entry_type' => TextType::class,
+                'required' => false,
+                'optionsByDomainId' => $seoH1OptionsByDomainId,
             ])
             ->add('descriptions', MultidomainType::class, [
                 'entry_type' => CKEditorType::class,
