@@ -166,9 +166,7 @@ class ProductEditDataFactory
     private function setMultidomainData(Product $product, ProductEditData $productEditData)
     {
         $productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
-        foreach ($productDomains as $productDomain) {
-            $domainId = $productDomain->getDomainId();
-
+        foreach ($productDomains as $domainId => $productDomain) {
             $productEditData->seoTitles[$domainId] = $productDomain->getSeoTitle();
             $productEditData->seoMetaDescriptions[$domainId] = $productDomain->getSeoMetaDescription();
             $productEditData->seoH1s[$domainId] = $productDomain->getSeoH1();
