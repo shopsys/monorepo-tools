@@ -18,7 +18,17 @@
                     <th>{{ 'Domain'|trans }}</th>
                 {% endif %}
                 <th>{{ 'Use'|trans }}</th>
-                <th>{{ 'Minimum product price'|trans }}</th>
+                <th>
+                    {{ 'Free from order value with VAT'|trans }}
+                    <span
+                        title="{{ 'Value of bought products with VAT after application of all discounts and promo codes without price of shipping and payment'|trans }}"
+                        class="js-tooltip cursor-help"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                    >
+                        <i class="svg svg-question"></i>
+                    </span>
+                </th>
             </thead>
             <tbody>
                 {% for domainId, priceLimitForm in form.priceLimits %}

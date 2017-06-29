@@ -1266,7 +1266,7 @@ msgstr "Slevový kód byl odebrán z objednávky."
 msgid "Discount coupon"
 msgstr "Slevový kupón"
 
-#: PromoCodeController.php:56
+#: PromoCodeController.php:71
 msgid "Discount coupon <strong>{{ code }}</strong> deleted."
 msgstr "Slevový kupón <strong>{{ code }}</strong> byl smazán"
 
@@ -1818,7 +1818,7 @@ msgstr "Soubor je příliš velký"
 msgid "File type not supported."
 msgstr "Typ souboru není podporován."
 
-#: FileUploadType.php:144
+#: FileUploadType.php:143
 msgid "File upload failed"
 msgstr "Nahrání souboru se nezdařilo."
 
@@ -1935,6 +1935,10 @@ msgstr "Form-line"
 #: PriceExtension.php:164
 msgid "Free"
 msgstr "Zdarma"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:22
+msgid "Free from order value with VAT"
+msgstr "Zdarma od hodnoty objednávky s DPH"
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:4
@@ -2617,10 +2621,6 @@ msgstr "Hlášky/zprávy"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Seo/seoSetting.html.twig:18
 msgid "Meta description"
 msgstr "Meta description"
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:21
-msgid "Minimum product price"
-msgstr "Minimální cena zboží"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:165
 msgid "Modification wrap-border--small"
@@ -3735,7 +3735,7 @@ msgstr "Uložit"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TermsAndConditions/setting.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopCategory/list.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopProduct/list.html.twig:16
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:43
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:48
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Unit/setting.html.twig:11
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Vat/roundingSetting.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Vat/vatSettings.html.twig:11
@@ -3885,7 +3885,7 @@ msgstr "Zvolená měna neexistuje."
 msgid "Selected customer doesn't exist."
 msgstr "Zvolený zákazník neexistuje"
 
-#: PromoCodeController.php:62
+#: PromoCodeController.php:77
 msgid "Selected discount coupon doesn't exist."
 msgstr "Zvolený slevový kupón neexistuje."
 
@@ -4892,6 +4892,10 @@ msgstr "Nastavení DPH bylo upraveno"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:238
 msgid "Value"
 msgstr "Hodnota"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:23
+msgid "Value of bought products with VAT after application of all discounts and promo codes without price of shipping and payment"
+msgstr "Jde o hodnotu nakoupeného zboží s DPH po uplatnění všech slev a kupónů bez hodnoty dopravy a platby"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/listGrid.html.twig:21
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ProductPicker/listGrid.html.twig:12

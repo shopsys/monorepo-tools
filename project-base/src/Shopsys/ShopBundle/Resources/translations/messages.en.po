@@ -1266,7 +1266,7 @@ msgstr ""
 msgid "Discount coupon"
 msgstr ""
 
-#: PromoCodeController.php:56
+#: PromoCodeController.php:71
 msgid "Discount coupon <strong>{{ code }}</strong> deleted."
 msgstr ""
 
@@ -1818,7 +1818,7 @@ msgstr ""
 msgid "File type not supported."
 msgstr ""
 
-#: FileUploadType.php:144
+#: FileUploadType.php:143
 msgid "File upload failed"
 msgstr ""
 
@@ -1934,6 +1934,10 @@ msgstr ""
 #: PriceExtension.php:149
 #: PriceExtension.php:164
 msgid "Free"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:22
+msgid "Free from order value with VAT"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
@@ -2616,10 +2620,6 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:329
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Seo/seoSetting.html.twig:18
 msgid "Meta description"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:21
-msgid "Minimum product price"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:165
@@ -3735,7 +3735,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TermsAndConditions/setting.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopCategory/list.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopProduct/list.html.twig:16
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:43
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:48
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Unit/setting.html.twig:11
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Vat/roundingSetting.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Vat/vatSettings.html.twig:11
@@ -3885,7 +3885,7 @@ msgstr ""
 msgid "Selected customer doesn't exist."
 msgstr ""
 
-#: PromoCodeController.php:62
+#: PromoCodeController.php:77
 msgid "Selected discount coupon doesn't exist."
 msgstr ""
 
@@ -4891,6 +4891,10 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:238
 msgid "Value"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:23
+msgid "Value of bought products with VAT after application of all discounts and promo codes without price of shipping and payment"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/listGrid.html.twig:21
