@@ -142,7 +142,8 @@ class Domain
      */
     public function switchDomainByRequest(Request $request)
     {
-        $url = $request->getUriForPath('');
+        // Request::getBasePath() never contains script file name (/index.php)
+        $url = $request->getSchemeAndHttpHost() . $request->getBasePath();
 
         foreach ($this->domainConfigs as $domainConfig) {
             if ($domainConfig->getUrl() === $url) {

@@ -314,6 +314,11 @@ services:
   shopsys.shop.component.mutex.mutex_factory:
     class: Shopsys\ShopBundle\Component\Mutex\MutexFactory
 
+  shopsys.shop.component.request.deny_script_name_in_request_path_listener:
+    class: Shopsys\ShopBundle\Component\Request\DenyScriptNameInRequestPathListener
+    tags:
+      - { name: kernel.event_subscriber }
+
   shopsys.shop.component.request.transactional_master_request_service:
     class: Shopsys\ShopBundle\Component\Request\TransactionalMasterRequestService
     tags:
