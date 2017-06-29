@@ -9,7 +9,13 @@
 {% endblock %}
 
 {% block main_content %}
-    <h1>{{ article.name }}</h1>
+    <h1>
+        {% if article.seoH1 is not null %}
+            {{ article.seoH1 }}
+        {% else %}
+            {{ article.name }}
+        {% endif %}
+    </h1>
 
     <div class="in-user-text">
         {{ article.text|raw }}

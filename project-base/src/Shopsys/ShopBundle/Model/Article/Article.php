@@ -71,6 +71,13 @@ class Article implements OrderableEntityInterface
     private $seoMetaDescription;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $seoH1;
+
+    /**
      * @var string
      *
      * @Gedmo\SortableGroup
@@ -95,6 +102,7 @@ class Article implements OrderableEntityInterface
         $this->text = $articleData->text;
         $this->seoTitle = $articleData->seoTitle;
         $this->seoMetaDescription = $articleData->seoMetaDescription;
+        $this->seoH1 = $articleData->seoH1;
         $this->placement = $articleData->placement;
         $this->position = SortablePosition::LAST_POSITION;
         $this->hidden = $articleData->hidden;
@@ -109,6 +117,7 @@ class Article implements OrderableEntityInterface
         $this->text = $articleData->text;
         $this->seoTitle = $articleData->seoTitle;
         $this->seoMetaDescription = $articleData->seoMetaDescription;
+        $this->seoH1 = $articleData->seoH1;
         $this->placement = $articleData->placement;
         $this->hidden = $articleData->hidden;
     }
@@ -159,6 +168,14 @@ class Article implements OrderableEntityInterface
     public function getSeoMetaDescription()
     {
         return $this->seoMetaDescription;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSeoH1()
+    {
+        return $this->seoH1;
     }
 
     /**

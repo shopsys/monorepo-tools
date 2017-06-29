@@ -31,7 +31,7 @@
 
             <div class="form-line">
                 <strong class="form-line__label">
-                    {{ form_label(form.seoTitle, 'Headline'|trans) }}
+                    {{ form_label(form.seoTitle, 'Page title'|trans) }}
                 </strong>
 
                 <div class="form-line__side js-characters-counter">
@@ -64,6 +64,25 @@
                         <div class="form-line__count__desc js-characters-counter-info" data-recommended-length="155"></div>
                     </div>
                     {{ form_errors(form.seoMetaDescription) }}
+                </div>
+            </div>
+
+            <div class="form-line">
+                <strong class="form-line__label">
+                    {{ form_label(form.seoH1, 'Heading (H1)'|trans) }}
+                </strong>
+
+                <div class="form-line__side js-characters-counter">
+                    <div class="form-line__item form-line__item--left">
+                        <div class="input__wrap">
+                            {{ form_widget(form.seoH1, {attr: {class: 'js-dynamic-placeholder js-characters-counter-input', 'data-placeholder-source-input-id': 'article_form_name'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-line__count">
+                        <div class="form-line__count__desc js-characters-counter-info" data-recommended-length="60"></div>
+                    </div>
+                    {{ form_errors(form.seoH1) }}
                 </div>
             </div>
 

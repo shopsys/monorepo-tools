@@ -68,6 +68,9 @@ class ArticleFormType extends AbstractType
                 'required' => false,
                 'attr' => $seoMetaDescriptionAttributes,
             ])
+            ->add('seoH1', TextType::class, [
+                'required' => false,
+            ])
             ->add('urls', UrlListType::class, [
                 'route_name' => 'front_article_detail',
                 'entity_id' => $options['article'] !== null ? $options['article']->getId() : null,
