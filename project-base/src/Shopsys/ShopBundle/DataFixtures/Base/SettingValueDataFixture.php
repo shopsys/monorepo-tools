@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Component\String\HashGenerator;
 use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\ArticleDataFixture;
 use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
@@ -34,11 +33,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         /* @var $defaultCurrency \Shopsys\ShopBundle\Model\Pricing\Currency\Currency */
         $defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
         /* @var $defaultInStockAvailability \Shopsys\ShopBundle\Model\Product\Availability\Availability */
-        $termsAndConditions = $this->getReference(ArticleDataFixture::ARTICLE_TERMS_AND_CONDITIONS_1);
-        /* @var $termsAndConditions \Shopsys\ShopBundle\Model\Article\Article */
-
-        $cookies = $this->getReference(ArticleDataFixture::ARTICLE_COOKIES_1);
-        /* @var $cookies \Shopsys\ShopBundle\Model\Article\Article */
         $hashGenerator = $this->get('shopsys.shop.component.string.hash_generator');
         /* @var $hashGenerator \Shopsys\ShopBundle\Component\String\HashGenerator */
         $defaultUnit = $this->getReference(UnitDataFixture::UNIT_PIECES);
@@ -69,8 +63,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         $manager->persist(new SettingValue(SeoSettingFacade::SEO_META_DESCRIPTION_MAIN_PAGE, 'ShopSys Framework - the best solution for your eshop.', Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(SeoSettingFacade::SEO_TITLE_MAIN_PAGE, 'ShopSys Framework - Title page', Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(SeoSettingFacade::SEO_TITLE_ADD_ON, '| Demo eshop', Domain::FIRST_DOMAIN_ID));
-        $manager->persist(new SettingValue(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditions->getId(), Domain::FIRST_DOMAIN_ID));
-        $manager->persist(new SettingValue(Setting::COOKIES_ARTICLE_ID, $cookies->getId(), Domain::FIRST_DOMAIN_ID));
+        $manager->persist(new SettingValue(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, null, Domain::FIRST_DOMAIN_ID));
+        $manager->persist(new SettingValue(Setting::COOKIES_ARTICLE_ID, null, Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(Setting::DOMAIN_DATA_CREATED, true, Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(Setting::FEED_HASH, $hashGenerator->generateHash(10), SettingValue::DOMAIN_ID_COMMON));
         $manager->persist(new SettingValue(Setting::DEFAULT_UNIT, $defaultUnit->getId(), SettingValue::DOMAIN_ID_COMMON));
@@ -95,7 +89,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
     public function getDependencies()
     {
         return [
-            ArticleDataFixture::class,
             AvailabilityDataFixture::class,
             VatDataFixture::class,
         ];
