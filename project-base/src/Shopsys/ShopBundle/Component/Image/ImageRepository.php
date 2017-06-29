@@ -129,8 +129,8 @@ class ImageRepository
             ->createQueryBuilder('i')
             ->andWhere('i.entityName = :entityName')->setParameter('entityName', $entityName)
             ->andWhere('i.entityId IN (:entities)')->setParameter('entities', $entities)
-            ->addOrderBy('i.position', 'asc')
-            ->addOrderBy('i.id', 'asc');
+            ->addOrderBy('i.position', 'desc')
+            ->addOrderBy('i.id', 'desc');
 
         $imagesByEntityId = [];
         foreach ($queryBuilder->getQuery()->execute() as $image) {
