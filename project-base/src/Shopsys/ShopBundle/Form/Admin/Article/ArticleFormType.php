@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Form\Admin\Article;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\DomainType;
 use Shopsys\ShopBundle\Form\UrlListType;
 use Shopsys\ShopBundle\Form\YesNoType;
@@ -25,10 +26,17 @@ class ArticleFormType extends AbstractType
      */
     private $seoSettingFacade;
 
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     */
+    private $domain;
+
     public function __construct(
-        SeoSettingFacade $seoSettingFacade
+        SeoSettingFacade $seoSettingFacade,
+        Domain $domain
     ) {
         $this->seoSettingFacade = $seoSettingFacade;
+        $this->domain = $domain;
     }
 
     /**
@@ -37,6 +45,8 @@ class ArticleFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $seoMetaDescriptionAttributes = $this->getSeoMetaDescriptionAttributes($options);
+
         $builder
             ->add('name', TextType::class, [
                 'required' => true,
@@ -56,9 +66,7 @@ class ArticleFormType extends AbstractType
             ])
             ->add('seoMetaDescription', TextareaType::class, [
                 'required' => false,
-                'attr' => [
-                    'placeholder' => $this->seoSettingFacade->getDescriptionMainPage($options['domain_id']),
-                ],
+                'attr' => $seoMetaDescriptionAttributes,
             ])
             ->add('urls', UrlListType::class, [
                 'route_name' => 'front_article_detail',
@@ -97,5 +105,24 @@ class ArticleFormType extends AbstractType
                 'data_class' => ArticleData::class,
                 'attr' => ['novalidate' => 'novalidate'],
             ]);
+    }
+
+    /**
+     * @param array $options
+     * @return string[]
+     */
+    private function getSeoMetaDescriptionAttributes(array $options)
+    {
+        $seoMetaDescriptionAttributes = [];
+
+        $descriptionsMainPageByDomainIds = $this->seoSettingFacade
+            ->getDescriptionsMainPageIndexedByDomainIds($this->domain->getAll());
+        $seoMetaDescriptionAttributes['placeholder'] = $this->seoSettingFacade->getDescriptionMainPage($options['domain_id']);
+
+        foreach ($descriptionsMainPageByDomainIds as $domainId => $description) {
+            $seoMetaDescriptionAttributes['data-placeholder-domain' . $domainId] = $description;
+        }
+
+        return $seoMetaDescriptionAttributes;
     }
 }

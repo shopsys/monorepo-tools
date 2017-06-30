@@ -39,14 +39,14 @@ class SeoSettingFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
+     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
      * @return string[]
      */
-    public function getDescriptionsMainPageIndexedByDomainIds(array $domains)
+    public function getDescriptionsMainPageIndexedByDomainIds(array $domainConfigs)
     {
         $descriptionsMainPageByDomainIds = [];
-        foreach ($domains as $domain) {
-            $descriptionsMainPageByDomainIds[$domain->getId()] = $this->getDescriptionMainPage($domain->getId());
+        foreach ($domainConfigs as $domainConfig) {
+            $descriptionsMainPageByDomainIds[$domainConfig->getId()] = $this->getDescriptionMainPage($domainConfig->getId());
         }
 
         return $descriptionsMainPageByDomainIds;
