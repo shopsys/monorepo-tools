@@ -6,7 +6,7 @@
 
 {% block grid_value_cell_id_label %}
     {% if row.created %}
-        <a href="{{ row.url }}" target="_blank">{{ _self.getName(row) }}</a>
+        <a href="{{ row.url }}" target="_blank">{{ _self.getLabel(row) }}</a>
     {% else %}
         {{ _self.getLabel(row) }}
     {% endif %}
