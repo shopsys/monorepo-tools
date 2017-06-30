@@ -54,7 +54,7 @@ msgstr ""
 msgid "EAN cannot be longer then {{ limit }} characters"
 msgstr ""
 
-#: ProductEditFormType.php:162
+#: ProductEditFormType.php:166
 msgid "Each parameter can be used only once"
 msgstr ""
 
@@ -118,10 +118,10 @@ msgstr ""
 
 #: AdvertFormType.php:93
 #: BrandFormType.php:47
-#: CategoryFormType.php:147
+#: CategoryFormType.php:162
 #: DomainFormType.php:28
 #: PaymentFormType.php:91
-#: ProductEditFormType.php:134
+#: ProductEditFormType.php:138
 #: TransportFormType.php:76
 msgid "Image can be only in JPG, GIF or PNG format"
 msgstr ""
@@ -131,7 +131,7 @@ msgid "Link must be valid URL address"
 msgstr ""
 
 #: BrandFormType.php:31
-#: CategoryFormType.php:100
+#: CategoryFormType.php:106
 #: CurrencyFormType.php:54
 #: OrderFormType.php:230
 #: PaymentFormType.php:52
@@ -200,7 +200,7 @@ msgstr ""
 msgid "Please choose advertisement type"
 msgstr ""
 
-#: ArticleFormType.php:89
+#: ArticleFormType.php:92
 msgid "Please choose article placement"
 msgstr ""
 
@@ -403,7 +403,7 @@ msgid "Please enter login"
 msgstr ""
 
 #: BrandFormType.php:30
-#: CategoryFormType.php:95
+#: CategoryFormType.php:101
 #: CurrencyFormType.php:53
 #: OrderItemFormType.php:25
 #: PaymentFormType.php:48
@@ -439,14 +439,14 @@ msgstr ""
 
 #: FreeTransportAndPaymentPriceLimitsFormType.php:78
 #: PaymentEditFormType.php:55
-#: ProductEditFormType.php:264
+#: ProductEditFormType.php:268
 #: ProductFormType.php:211
 #: TransportEditFormType.php:55
 msgid "Please enter price"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Form/Admin/Payment/PaymentEditFormType.php:53
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductEditFormType.php:261
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductEditFormType.php:265
 #: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:208
 #: src/Shopsys/ShopBundle/Form/Admin/Transport/TransportEditFormType.php:53
 #: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:38
@@ -572,7 +572,7 @@ msgstr ""
 
 #: FreeTransportAndPaymentPriceLimitsFormType.php:74
 #: PaymentEditFormType.php:58
-#: ProductEditFormType.php:269
+#: ProductEditFormType.php:273
 #: ProductFilterFormType.php:42
 #: ProductFilterFormType.php:55
 #: ProductFormType.php:216
@@ -587,6 +587,10 @@ msgstr ""
 #: CartFormType.php:31
 #: OrderItemFormType.php:52
 msgid "Quantity must be greater than {{ compared_value }}"
+msgstr ""
+
+#: CategoryFormType.php:124
+msgid "SEO H1 cannot be longer than {{ limit }} characters"
 msgstr ""
 
 #: SeoSettingFormType.php:76
@@ -660,10 +664,10 @@ msgstr ""
 
 #: AdvertFormType.php:95
 #: BrandFormType.php:49
-#: CategoryFormType.php:149
+#: CategoryFormType.php:164
 #: DomainFormType.php:30
 #: PaymentFormType.php:93
-#: ProductEditFormType.php:136
+#: ProductEditFormType.php:140
 #: SliderItemFormType.php:48
 #: TransportFormType.php:78
 msgid "Uploaded image is to large ({{ size }} {{ suffix }}). Maximum size of an image is {{ limit }} {{ suffix }}."
