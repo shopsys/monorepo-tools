@@ -367,7 +367,7 @@ class ProductController extends AdminBaseController
         $grid->setDefaultOrder('name');
 
         $grid->addColumn('name', 'pt.name', t('Name'), true);
-        $grid->addColumn('price', 'p.price', t('Price'), true)->setClassAttribute('text-right');
+        $grid->addColumn('price', 'priceForProductList', t('Price'), true)->setClassAttribute('text-right');
         $grid->addColumn('calculatedVisibility', 'p.calculatedVisibility', t('Visibility'))
             ->setClassAttribute('text-center table-col table-col-10');
 
