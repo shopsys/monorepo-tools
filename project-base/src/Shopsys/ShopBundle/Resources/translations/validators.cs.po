@@ -54,7 +54,7 @@ msgstr "Předmět e-mailu nesmí být delší než {{ limit }} znaků"
 msgid "EAN cannot be longer then {{ limit }} characters"
 msgstr "EAN nesmí být delší než {{ limit }} znaků"
 
-#: ProductEditFormType.php:156
+#: ProductEditFormType.php:162
 msgid "Each parameter can be used only once"
 msgstr "Každý parametr může být nastaven pouze jednou"
 
@@ -121,7 +121,7 @@ msgstr "Obrázek může být pouze ve formátech jpg nebo png"
 #: CategoryFormType.php:147
 #: DomainFormType.php:28
 #: PaymentFormType.php:91
-#: ProductEditFormType.php:128
+#: ProductEditFormType.php:134
 #: TransportFormType.php:76
 msgid "Image can be only in JPG, GIF or PNG format"
 msgstr "Obrázek může být pouze ve formátech jpg, png nebo gif"
@@ -200,7 +200,7 @@ msgstr "Prosím vyberte reklamní plochu"
 msgid "Please choose advertisement type"
 msgstr "Prosím vyberte typ reklamy"
 
-#: ArticleFormType.php:81
+#: ArticleFormType.php:89
 msgid "Please choose article placement"
 msgstr "Prosím vyberte umístění článku"
 
@@ -277,11 +277,11 @@ msgstr "Vyplňte prosím výši DPH"
 msgid "Please enter a number"
 msgstr "Prosím zadejte číslo"
 
-#: ArticleFormType.php:51
+#: ArticleFormType.php:61
 msgid "Please enter article content"
 msgstr "Vyplňte prosím text článku"
 
-#: ArticleFormType.php:44
+#: ArticleFormType.php:54
 msgid "Please enter article name"
 msgstr "Vyplňte prosím název článku"
 
@@ -336,7 +336,7 @@ msgstr "Prosím zadejte výchozí měnu"
 msgid "Please enter default pricing group"
 msgstr "Prosím zadejte výchozí cenovou skupinu"
 
-#: PromoCodeFormType.php:57
+#: PromoCodeFormType.php:54
 msgid "Please enter discount percentage"
 msgstr "Vyplňte prosím procento slevy."
 
@@ -439,14 +439,14 @@ msgstr "Vyplňte prosím heslo"
 
 #: FreeTransportAndPaymentPriceLimitsFormType.php:78
 #: PaymentEditFormType.php:55
-#: ProductEditFormType.php:253
+#: ProductEditFormType.php:264
 #: ProductFormType.php:211
 #: TransportEditFormType.php:55
 msgid "Please enter price"
 msgstr "Prosím vyplňte cenu"
 
 #: src/Shopsys/ShopBundle/Form/Admin/Payment/PaymentEditFormType.php:53
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductEditFormType.php:250
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductEditFormType.php:261
 #: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:208
 #: src/Shopsys/ShopBundle/Form/Admin/Transport/TransportEditFormType.php:53
 #: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:38
@@ -553,7 +553,7 @@ msgstr "Vyplňte prosím platný e-mail"
 msgid "Please enter valid quantity"
 msgstr "Zadejte prosím platné množství"
 
-#: src/Shopsys/ShopBundle/Form/Admin/PromoCode/PromoCodeFormType.php:64
+#: src/Shopsys/ShopBundle/Form/Admin/PromoCode/PromoCodeFormType.php:61
 msgid "Please enter whole number."
 msgstr "Zadejte prosím celé číslo."
 
@@ -572,7 +572,7 @@ msgstr "Původně vybraná hlavní URL již neexistuje"
 
 #: FreeTransportAndPaymentPriceLimitsFormType.php:74
 #: PaymentEditFormType.php:58
-#: ProductEditFormType.php:258
+#: ProductEditFormType.php:269
 #: ProductFilterFormType.php:42
 #: ProductFilterFormType.php:55
 #: ProductFormType.php:216
@@ -663,7 +663,7 @@ msgstr "Nahraný soubor je příliš velký ({{ size }} {{ suffix }}). Maximáln
 #: CategoryFormType.php:149
 #: DomainFormType.php:30
 #: PaymentFormType.php:93
-#: ProductEditFormType.php:130
+#: ProductEditFormType.php:136
 #: SliderItemFormType.php:48
 #: TransportFormType.php:78
 msgid "Uploaded image is to large ({{ size }} {{ suffix }}). Maximum size of an image is {{ limit }} {{ suffix }}."

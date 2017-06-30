@@ -50,7 +50,7 @@ msgstr ""
 msgid "-- Choose article --"
 msgstr ""
 
-#: ArticleFormType.php:79
+#: ArticleFormType.php:87
 msgid "-- Choose article position --"
 msgstr ""
 
@@ -80,7 +80,7 @@ msgstr ""
 msgid "ATTENTION - inserting scripts on the page can seriously endanger the security, performance or design of the app."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:432
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:464
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:9
 msgid "Accessories"
 msgstr ""
@@ -123,7 +123,7 @@ msgstr ""
 msgid "Add country"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:196
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:204
 msgid "Add item"
 msgstr ""
 
@@ -131,7 +131,7 @@ msgstr ""
 msgid "Add only to order confirmation page"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:200
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:208
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:495
 msgid "Add product"
 msgstr ""
@@ -268,7 +268,7 @@ msgstr ""
 msgid "Allowed for shipping types"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:165
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:173
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/preview.html.twig:8
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:30
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:147
@@ -453,7 +453,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:27
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:130
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:103
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:218
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:226
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:59
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Script/detail.html.twig:19
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:39
@@ -529,7 +529,7 @@ msgstr ""
 msgid "Bestsellers of the category"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:10
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:11
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:31
 msgid "Billing address"
 msgstr ""
@@ -538,7 +538,7 @@ msgstr ""
 msgid "Billing address - name, surname, company, company number, tax number and billing address"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:108
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:116
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:32
 msgid "Billing data"
 msgstr ""
@@ -552,7 +552,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:86
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:104
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:106
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:81
 msgid "Brand"
 msgstr ""
@@ -652,10 +652,10 @@ msgstr ""
 
 #: AdvancedSearchProductFilterTranslation.php:11
 #: ProductPickerController.php:140
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:163
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:171
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:71
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:55
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:116
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:118
 msgid "Catalogue number"
 msgstr ""
 
@@ -749,8 +749,8 @@ msgstr ""
 #: CustomerController.php:187
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:70
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:91
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:113
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:136
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:121
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:144
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:66
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:86
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:73
@@ -781,7 +781,7 @@ msgstr ""
 msgid "Close (Esc)"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:436
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:468
 msgid "Close without saving"
 msgstr ""
 
@@ -827,7 +827,7 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:57
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:86
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:133
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:141
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:54
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:81
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:107
@@ -838,20 +838,20 @@ msgid "Company"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:49
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:95
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:103
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:47
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:19
 msgid "Company data"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:99
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:107
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:52
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:26
 msgid "Company name"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:58
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:100
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:108
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:55
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:58
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:27
@@ -875,7 +875,7 @@ msgstr ""
 msgid "Contact form"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:150
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:158
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:2
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:62
 msgid "Contact us"
@@ -944,8 +944,8 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:72
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:93
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:115
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:138
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:123
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:146
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:68
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:88
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:81
@@ -1055,11 +1055,13 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:63
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:71
 msgid "Created by administrator"
 msgstr ""
 
 #: AdvancedSearchOrderFilterTranslation.php:12
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:10
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:42
 msgid "Created on"
 msgstr ""
 
@@ -1095,7 +1097,7 @@ msgid "Current status"
 msgstr ""
 
 #: OrderController.php:227
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:43
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:51
 msgid "Customer"
 msgstr ""
 
@@ -1468,7 +1470,7 @@ msgstr ""
 #: MailController.php:121
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:32
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:87
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:95
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ShopInfo/shopInfo.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:7
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:22
@@ -1538,7 +1540,7 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:79
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:71
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:134
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:136
 msgid "EAN"
 msgstr ""
 
@@ -1846,8 +1848,8 @@ msgstr ""
 #: MailController.php:107
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:29
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:87
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:85
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:131
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:93
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:139
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:19
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:82
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:35
@@ -2045,9 +2047,12 @@ msgstr ""
 msgid "HTML code"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:361
+msgid "Heading (H1)"
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:34
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:32
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:297
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Seo/seoSetting.html.twig:15
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:146
 msgid "Headline"
@@ -2080,7 +2085,7 @@ msgstr ""
 msgid "Heureka Widget code"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:368
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:400
 msgid "Heureka.cz"
 msgstr ""
 
@@ -2358,11 +2363,11 @@ msgstr ""
 msgid "It is possible to use this when creating a link: mark the text you want to create the link from with mouse and push the Link button (top right, interconnected staples icon). In the popup menu select the protocol <different> and insert the text \"%orderDetailUrlConstant%\" in the URL field (Including the braces)"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:399
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:431
 msgid "It is signed with MAX_CPC tags in feeds. If not mentioned, this information is not transmitted to the feed."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:412
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:444
 msgid "It is signed with MAX_CPC_SEARCH tags in feeds. If not mentioned, this information is not transmitted to the feed."
 msgstr ""
 
@@ -2592,12 +2597,12 @@ msgstr ""
 msgid "Matching first and second cell of a row with the rest of form"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:371
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:395
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:403
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:427
 msgid "Maximum price per click"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:408
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:440
 msgid "Maximum price per click in offers"
 msgstr ""
 
@@ -2687,7 +2692,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:22
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:12
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:19
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:162
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:170
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:22
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:45
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Script/detail.html.twig:14
@@ -2696,7 +2701,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:480
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:27
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:145
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:155
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:157
 #: src/Shopsys/ShopBundle/Resources/views/Mail/Order/products.html.twig:3
 msgid "Name"
 msgstr ""
@@ -2935,7 +2940,7 @@ msgid "Not using ID and !important for CSS"
 msgstr ""
 
 #: MailController.php:91
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:146
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:154
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:59
 msgid "Note"
 msgstr ""
@@ -2971,7 +2976,7 @@ msgstr ""
 msgid "Occurence"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:378
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:410
 msgid "Offer in feed"
 msgstr ""
 
@@ -3081,7 +3086,7 @@ msgstr ""
 msgid "Order in CZK round to whole crowns"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:154
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:162
 msgid "Order items"
 msgstr ""
 
@@ -3156,6 +3161,10 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Error/error.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Error/error.html.twig:29
 msgid "Page not found!"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:297
+msgid "Page title"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Error/error.html.twig:17
@@ -3257,7 +3266,7 @@ msgid "Percent"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:26
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:81
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:89
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:7
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:11
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:17
@@ -3299,7 +3308,7 @@ msgstr ""
 msgid "Picture with link"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:422
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:454
 msgid "Pictures"
 msgstr ""
 
@@ -3389,8 +3398,8 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:71
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:92
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:114
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:137
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:122
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:145
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:67
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:87
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:77
@@ -3429,7 +3438,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:203
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/edit.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:31
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:157
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:159
 msgid "Price including VAT"
 msgstr ""
 
@@ -3556,7 +3565,7 @@ msgstr ""
 msgid "Product name in default language is not entered"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:61
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:63
 msgid "Product no longer on sale"
 msgstr ""
 
@@ -3604,7 +3613,7 @@ msgstr ""
 msgid "Products overview"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:364
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:396
 msgid "Products search engines"
 msgstr ""
 
@@ -3726,7 +3735,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Currency/currencySettings.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Mail/setting.html.twig:20
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:219
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:227
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/pricingGroupSettings.html.twig:11
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Seo/seoSetting.html.twig:23
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ShopInfo/shopInfo.html.twig:22
@@ -3735,7 +3744,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TermsAndConditions/setting.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopCategory/list.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopProduct/list.html.twig:16
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:48
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:53
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Unit/setting.html.twig:11
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Vat/roundingSetting.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Vat/vatSettings.html.twig:11
@@ -3972,7 +3981,7 @@ msgstr ""
 msgid "Sending e-mails off, no e-mail will be sent from the app."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:125
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:127
 msgid "Serial number"
 msgstr ""
 
@@ -4039,15 +4048,15 @@ msgid "Shipping <strong>{{ name }}</strong> deleted"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:78
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:11
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:122
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:12
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:130
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:74
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:90
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:41
 msgid "Shipping address"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:128
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:136
 msgid "Shipping address is the same as billing address"
 msgstr ""
 
@@ -4159,8 +4168,8 @@ msgid "Special offers"
 msgstr ""
 
 #: OrderController.php:231
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:13
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:41
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:14
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:49
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Form/fileuploadFields.html.twig:51
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:18
 msgid "Status"
@@ -4192,8 +4201,8 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:69
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:90
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:112
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:135
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:120
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:143
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:65
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:85
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:69
@@ -4244,8 +4253,8 @@ msgstr ""
 #: MailController.php:108
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:30
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:88
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:86
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:132
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:94
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:140
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:83
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:39
@@ -4398,7 +4407,7 @@ msgid "Tables"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:59
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:101
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:109
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:56
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:64
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:28
@@ -4413,8 +4422,8 @@ msgstr ""
 #: CustomerController.php:188
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:31
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:89
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:88
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:134
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:96
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:142
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:21
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:84
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:47
@@ -4561,7 +4570,7 @@ msgstr ""
 msgid "This item can be set in product detail of a specific variant"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:94
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:96
 msgid "This product is no longer available for purchase. Have a look at similar products <a href=\"%url%\">here</a>."
 msgstr ""
 
@@ -4621,7 +4630,7 @@ msgstr ""
 msgid "To whole numbers"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:205
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:213
 msgid "Total"
 msgstr ""
 
@@ -4629,12 +4638,12 @@ msgstr ""
 msgid "Total amount of VAT"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:169
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:177
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:150
 msgid "Total excluding VAT"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:168
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:176
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/preview.html.twig:30
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:149
 msgid "Total including VAT"
@@ -4661,7 +4670,7 @@ msgstr ""
 msgid "Total price excluding VAT"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:12
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:106
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:168
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orders.html.twig:24
@@ -4752,7 +4761,7 @@ msgstr ""
 msgid "Unexpected error occurred, file was not uploaded."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:166
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:174
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:139
 msgid "Unit"
 msgstr ""
@@ -4769,7 +4778,7 @@ msgstr ""
 msgid "Unit <strong>{{ name }}</strong> deleted and replaced by unit <strong>{{ newName }}</strong>"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:164
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:172
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:28
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:146
 #: src/Shopsys/ShopBundle/Resources/views/Mail/Order/products.html.twig:5
@@ -4868,7 +4877,7 @@ msgstr ""
 msgid "VAT rate"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:167
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:175
 msgid "VAT rate (%)"
 msgstr ""
 
@@ -4893,7 +4902,7 @@ msgstr ""
 msgid "Value"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:23
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:24
 msgid "Value of bought products with VAT after application of all discounts and promo codes without price of shipping and payment"
 msgstr ""
 
@@ -5071,7 +5080,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:22
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:125
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:53
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:427
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:459
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:25
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:52
 msgid "You can upload following formats: PNG, JPG, GIF"
@@ -5139,7 +5148,7 @@ msgstr ""
 msgid "Your discount"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:374
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:406
 msgid "Zboží.cz"
 msgstr ""
 
@@ -5258,7 +5267,7 @@ msgid "double signs are clear and developer will intuitively know senses of diff
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/bestsellingProductsList.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:79
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:81
 msgid "excluding VAT"
 msgstr ""
 
@@ -5305,7 +5314,7 @@ msgstr ""
 msgid "in category (above the category name)"
 msgstr ""
 
-#: ArticleFormType.php:76
+#: ArticleFormType.php:84
 msgid "in footer"
 msgstr ""
 
@@ -5314,7 +5323,7 @@ msgstr ""
 msgid "in left panel (under category tree)"
 msgstr ""
 
-#: ArticleFormType.php:75
+#: ArticleFormType.php:83
 msgid "in upper menu"
 msgstr ""
 
@@ -5414,7 +5423,7 @@ msgstr ""
 msgid "units"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:47
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:55
 msgid "unregistered customer"
 msgstr ""
 
@@ -5422,7 +5431,7 @@ msgstr ""
 msgid "uses"
 msgstr ""
 
-#: ArticleFormType.php:77
+#: ArticleFormType.php:85
 msgid "without positoning"
 msgstr ""
 
