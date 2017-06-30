@@ -258,7 +258,7 @@ class ProductController extends AdminBaseController
 
             $this->getFlashMessageSender()->addSuccessFlash(t('Bulk editing done'));
 
-            return $this->redirect($this->getRequest()->headers->get('referer', $this->generateUrl('admin_product_list')));
+            return $this->redirect($request->headers->get('referer', $this->generateUrl('admin_product_list')));
         }
 
         $this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
