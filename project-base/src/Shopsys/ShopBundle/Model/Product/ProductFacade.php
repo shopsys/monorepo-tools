@@ -400,6 +400,7 @@ class ProductFacade
     }
 
     /**
+     * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $accessories
      */
     private function refreshProductAccessories(Product $product, array $accessories)
