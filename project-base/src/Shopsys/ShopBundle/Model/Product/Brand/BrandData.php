@@ -34,20 +34,4 @@ class BrandData
         $this->descriptions = [];
         $this->urls = new UrlListData();
     }
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
-     */
-    public function setFromEntity(Brand $brand)
-    {
-        $this->name = $brand->getName();
-
-        $translations = $brand->getTranslations();
-        /* @var $translations \Shopsys\ShopBundle\Model\Product\Brand\BrandTranslation[]  */
-
-        $this->descriptions = [];
-        foreach ($translations as $translate) {
-            $this->descriptions[$translate->getLocale()] = $translate->getDescription();
-        }
-    }
 }

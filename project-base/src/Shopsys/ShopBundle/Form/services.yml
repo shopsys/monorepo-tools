@@ -9,6 +9,11 @@ services:
     tags:
       - { name: form.type }
 
+  shopsys.shop.form.admin.product.brand.brand_edit_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\Product\Brand\BrandEditFormType
+    tags:
+      - { name: form.type }
+
   shopsys.shop.form.admin.category.category_form_type:
     class: Shopsys\ShopBundle\Form\Admin\Category\CategoryFormType
     tags:

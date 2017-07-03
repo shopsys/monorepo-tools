@@ -637,6 +637,9 @@ services:
   shopsys.shop.product.brand.brand_facade:
     class: Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
 
+  shopsys.shop.product.brand.brand_edit_data_factory:
+    class: Shopsys\ShopBundle\Model\Product\Brand\BrandEditDataFactory
+
   shopsys.shop.product.flag.flag_facade:
     class: Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
 

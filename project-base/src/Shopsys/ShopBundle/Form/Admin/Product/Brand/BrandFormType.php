@@ -50,8 +50,7 @@ class BrandFormType extends AbstractType
                             . 'Maximum size of an image is {{ limit }} {{ suffix }}.',
                     ]),
                 ],
-            ])
-            ->add('save', SubmitType::class);
+            ]);
     }
 
     /**
