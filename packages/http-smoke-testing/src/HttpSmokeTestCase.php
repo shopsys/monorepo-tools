@@ -62,6 +62,8 @@ abstract class HttpSmokeTestCase extends KernelTestCase
         $this->setUp();
 
         $requestDataSetGenerators = [];
+        /* @var $requestDataSetGenerators \Shopsys\HttpSmokeTesting\RequestDataSetGenerator[] */
+
         $allRouteInfo = $this->getRouterAdapter()->getAllRouteInfo();
         foreach ($allRouteInfo as $routeInfo) {
             $requestDataSetGenerators[] = new RequestDataSetGenerator($routeInfo);
@@ -72,8 +74,8 @@ abstract class HttpSmokeTestCase extends KernelTestCase
         $this->customizeRouteConfigs($routeConfigCustomizer);
 
         $requestDataSets = [];
-        foreach ($requestDataSetGenerators as $routeConfig) {
-            $requestDataSets = array_merge($requestDataSets, $routeConfig->generateRequestDataSets());
+        foreach ($requestDataSetGenerators as $requestDataSetGenerator) {
+            $requestDataSets = array_merge($requestDataSets, $requestDataSetGenerator->generateRequestDataSets());
         }
 
         return array_map(

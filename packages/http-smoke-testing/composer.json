@@ -23,6 +23,7 @@
         "phpunit/phpunit": "^3.7.15|^4.0|^5.0"
     },
     "require-dev": {
-        "shopsys/coding-standards": "3.0.2"
+        "shopsys/coding-standards": "3.0.2",
+        "phpunit/phpunit": "^5.4.3"
     }
 }
