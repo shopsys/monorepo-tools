@@ -6,6 +6,7 @@ class MenuItem
 {
     const TYPE_REGULAR = 'regular';
     const TYPE_SETTINGS = 'settings';
+    const TYPE_ACCOUNT = 'account';
 
     /**
      * @var string
@@ -204,6 +205,7 @@ class MenuItem
         return [
             self::TYPE_REGULAR,
             self::TYPE_SETTINGS,
+            self::TYPE_ACCOUNT,
         ];
     }
 }

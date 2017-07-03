@@ -22,6 +22,11 @@ class Menu
     private $settingsItem;
 
     /**
+     * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
+     */
+    private $accountItem;
+
+    /**
      * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $items
      */
     public function __construct(array $items)
@@ -35,6 +40,8 @@ class Menu
                 $this->regularItems[] = $item;
             } elseif ($item->getType() === MenuItem::TYPE_SETTINGS) {
                 $this->settingsItem = $item;
+            } elseif ($item->getType() === MenuItem::TYPE_ACCOUNT) {
+                $this->accountItem = $item;
             }
         }
 
@@ -75,6 +82,14 @@ class Menu
     public function getSettingsItems()
     {
         return $this->settingsItem->getItems();
+    }
+
+    /**
+     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
+     */
+    public function getAccountItem()
+    {
+        return $this->accountItem;
     }
 
     /**
