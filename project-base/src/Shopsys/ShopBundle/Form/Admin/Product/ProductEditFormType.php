@@ -103,6 +103,8 @@ class ProductEditFormType extends AbstractType
             $seoTitlesOptionsByDomainId[$domainId] = [
                 'attr' => [
                     'placeholder' => $this->getTitlePlaceholder($domainConfig, $editedProduct),
+                    'class' => 'js-dynamic-placeholder',
+                    'data-placeholder-source-input-id' => 'product_edit_form_productData_name_' . $domainConfig->getLocale(),
                 ],
             ];
             $seoMetaDescriptionsOptionsByDomainId[$domainId] = [
@@ -113,6 +115,8 @@ class ProductEditFormType extends AbstractType
             $seoH1OptionsByDomainId[$domainId] = [
                 'attr' => [
                     'placeholder' => $this->getTitlePlaceholder($domainConfig, $editedProduct),
+                    'class' => 'js-dynamic-placeholder',
+                    'data-placeholder-source-input-id' => 'product_edit_form_productData_name_' . $domainConfig->getLocale(),
                 ],
             ];
         }
