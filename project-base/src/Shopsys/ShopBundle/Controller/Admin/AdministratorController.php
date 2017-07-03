@@ -10,6 +10,7 @@ use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Form\Admin\Administrator\AdministratorFormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
+use Shopsys\ShopBundle\Model\Administrator\Administrator;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorFacade;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
@@ -148,6 +149,17 @@ class AdministratorController extends AdminBaseController
             'administrator' => $administrator,
             'lastAdminActivities' => $lastAdminActivities,
         ]);
+    }
+
+    /**
+     * @Route("/administrator/my-account/")
+     */
+    public function myAccountAction(Request $request)
+    {
+        $loggedUser = $this->getUser();
+        /* @var $loggedUser \Shopsys\ShopBundle\Model\Administrator\Administrator */
+
+        return $this->editAction($request, $loggedUser->getId());
     }
 
     /**

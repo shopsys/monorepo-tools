@@ -274,3 +274,11 @@
       items:
       - label: 'Heureka - Ověřeno zákazníky'
         route: admin_heureka_setting
+
+- label: 'Account'
+  route: admin_domain_list
+  type: account
+  icon: person-man
+  items:
+  - label: 'My account'
+    route: admin_administrator_myaccount

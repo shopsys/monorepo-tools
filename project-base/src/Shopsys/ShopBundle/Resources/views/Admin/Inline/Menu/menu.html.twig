@@ -11,11 +11,14 @@
 <div class="js-main-navigation">
     <ul class="navig navig--side">
         <li id="js-setting-menu" class="navig__item" >
-            <div class="navig__item__link navig__item__link--bordered {% if menu.settingsItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}" title="{{ 'Settings'|trans }}">
+            <div
+                class="navig__item__link navig__item__link--bordered {% if menu.settingsItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}"
+                title="{{ menu.settingsItem.label|trans }}"
+            >
                 <i class="svg svg-gear"></i>
             </div>
             <ul id="js-setting-menu-links" class="display-none navig__item__sub">
-                {% for item in menu.getSettingsItems %}
+                {% for item in menu.getSettingsItem.items %}
                     {% if (item.visible) %}
                         <li class="navig__item__sub__item">
                             <a href="{{ url(item.route, item.routeParameters) }}" class="navig__item__sub__item__link" title="{{ item.label }}">{{ item.label }}</a>
@@ -24,10 +27,28 @@
                 {% endfor %}
             </ul>
         </li>
-        <li class="navig__item">
-            <a href="{{ url('admin_logout', { _csrf_token: csrf_token('admin_logout')}) }}" class="navig__item__link" id="js-navig-item-logout" title="{{ 'Log out'|trans }}">
-                <i class="svg svg-forward-page"></i>
-            </a>
+
+        <li id="js-account-menu" class="navig__item" >
+            <div
+                class="navig__item__link navig__item__link--bordered {% if menu.accountItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}"
+                title="{{ menu.accountItem.label|trans }}"
+            >
+                <i class="svg svg-person-man"></i>
+            </div>
+            <ul id="js-account-menu-links" class="display-none navig__item__sub">
+                {% for item in menu.accountItem.items %}
+                    {% if (item.visible) %}
+                        <li class="navig__item__sub__item">
+                            <a href="{{ url(item.route, item.routeParameters) }}" class="navig__item__sub__item__link" title="{{ item.label }}">{{ item.label }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <li class="navig__item__sub__item">
+                    <a href="{{ url('admin_logout', { _csrf_token: csrf_token('admin_logout')}) }}" class="navig__item__sub__item__link" id="js-navig-item-logout" title="{{ 'Log out'|trans }}">
+                        {{ 'Log out'|trans }}
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
 
