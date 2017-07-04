@@ -60,14 +60,14 @@ audio:not([controls]) {
 /*
  * 1. Corrects text resizing oddly in IE6/7 when body font-size is set using em units
  *    http://clagnut.com/blog/348/#c790
- * 2. Keeps page centred in all browsers regardless of content height (zakomentovano kvuli scrollbaru ve fancyboxu)
+ * 2. Keeps page centred in all browsers regardless of content height
  * 3. Prevents iOS text size adjust after orientation change, without disabling user zoom
  *    www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/
  */
 
 html {
     font-size: 100%; /* 1 */
-    //overflow-y: scroll; /* 2 */
+    overflow-y: scroll; /* 2 */
     -webkit-text-size-adjust: 100%; /* 3 */
     -ms-text-size-adjust: 100%; /* 3 */
     margin: 0;
@@ -362,14 +362,10 @@ input[type="radio"] {
 
 /*
  * 1. Addresses appearance set to searchfield in S5, Chrome
- * 2. Addresses box-sizing set to border-box in S5, Chrome (include -moz to future-proof) (zakomentováno kvůli přepisování nastavení BEM)
  */
 
 input[type="search"] {
     -webkit-appearance: textfield; /* 1 */
-    //-moz-box-sizing: content-box;
-    //-webkit-box-sizing: content-box; /* 2 */
-    //box-sizing: content-box;
 }
 
 /*
@@ -404,7 +400,7 @@ textarea {
 }
 
 /*************************************************************************************
-*  NETDEVELO SETTINGS
+*  OTHER SETTINGS
 **************************************************************************************/
 
 html {
