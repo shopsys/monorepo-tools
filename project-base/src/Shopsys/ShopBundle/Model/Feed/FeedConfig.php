@@ -62,17 +62,6 @@ class FeedConfig
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @param string $feedHash
-     *
-     * @return string
-     */
-    public function getFeedFilename(DomainConfig $domainConfig, $feedHash)
-    {
-        return $feedHash . '_' . $this->name . '_' . $domainConfig->getId() . '.xml';
-    }
-
-    /**
      * @return string
      */
     public function getTemplateFilepath()

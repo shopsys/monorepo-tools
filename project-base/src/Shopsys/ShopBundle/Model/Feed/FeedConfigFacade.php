@@ -87,8 +87,7 @@ class FeedConfigFacade
      */
     public function getFeedUrl(FeedConfig $feedConfig, DomainConfig $domainConfig)
     {
-        $feedHash = $this->setting->get(Setting::FEED_HASH);
-        return $domainConfig->getUrl() . $this->feedUrlPrefix . $feedConfig->getFeedFilename($domainConfig, $feedHash);
+        return $domainConfig->getUrl() . $this->feedUrlPrefix . $this->getFeedFilename($feedConfig, $domainConfig);
     }
 
     /**
@@ -98,7 +97,18 @@ class FeedConfigFacade
      */
     public function getFeedFilepath(FeedConfig $feedConfig, DomainConfig $domainConfig)
     {
+        return $this->feedDir . $this->getFeedFilename($feedConfig, $domainConfig);
+    }
+
+    /**
+     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return string
+     */
+    private function getFeedFilename(FeedConfig $feedConfig, DomainConfig $domainConfig)
+    {
         $feedHash = $this->setting->get(Setting::FEED_HASH);
-        return $this->feedDir . $feedConfig->getFeedFilename($domainConfig, $feedHash);
+
+        return $feedHash . '_' . $feedConfig->getFeedName() . '_' . $domainConfig->getId() . '.xml';
     }
 }
