@@ -321,7 +321,7 @@ class ProductEditFormType extends AbstractType
     private function disableIrrelevantFields(FormBuilderInterface $builder, Product $product)
     {
         if ($product->isMainVariant()) {
-            $builder->get('manualInputPrices')->setDisabled(true);
+            $builder->get('manualInputPricesByPricingGroupId')->setDisabled(true);
         }
         if ($product->isVariant()) {
             $builder->get('descriptions')->setDisabled(true);
