@@ -199,6 +199,12 @@ class RouteConfigCustomization
                 $config->changeDefaultRequestDataSet($debugNote)
                     ->setParameter('id', $pricingGroup->getId());
             })
+            ->customizeByRouteName('admin_product_edit', function (RouteConfig $config) {
+                $config->addExtraRequestDataSet('Edit product that is a main variant (ID 149).')
+                    ->setParameter('id', 149);
+                $config->addExtraRequestDataSet('Edit product that is a variant (ID 75).')
+                    ->setParameter('id', 75);
+            })
             ->customizeByRouteName('admin_unit_delete', function (RouteConfig $config) {
                 $unit = $this->getPersistentReference(BaseUnitDataFixture::UNIT_PIECES);
                 /* @var $unit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
