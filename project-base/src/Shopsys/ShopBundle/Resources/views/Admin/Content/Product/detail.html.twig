@@ -1,44 +1,6 @@
 {% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 {% set showHeading = false %}
-
-{% macro seoMultidomainFormRow(multidomainForm, label, recommendedLength, cssClass = '') %}
-    {% if isMultidomain() %}
-        {% set cssClassOnMultidomainInputs = 'input--domain' %}
-    {% else %}
-        {% set cssClassOnMultidomainInputs = '' %}
-    {% endif %}
-
-    <div class="form-line">
-        <strong class="form-line__label">
-            {{ label }}:
-        </strong>
-        {% for domainId, domainForm in multidomainForm %}
-            <div class="form-line__side {% if not loop.first %}margin-top-5{% endif %} js-characters-counter">
-                <div class="form-line__item form-line__item--left">
-                    <div class="input__wrap">
-                        {% set attr = domainForm.vars.attr|merge({class: 'js-characters-counter-input ' ~ cssClass ~ ' ' ~ cssClassOnMultidomainInputs}) %}
-
-                        {{ form_widget(domainForm, {
-                            multidomain: true,
-                            domainId: domainId,
-                            attr: attr
-                        }) }}
-                        {% if isMultidomain() %}
-                            <span class="input__domain">
-                                {{ domainIcon(domainId) }}
-                            </span>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="form-line__count">
-                    <span class="form-line__count__desc js-characters-counter-info" data-recommended-length="{{ recommendedLength }}"></span>
-                </div>
-                {{ form_errors(domainForm) }}
-            </div>
-        {% endfor %}
-    </div>
-{% endmacro %}
+{% import '@ShopsysShop/Admin/Form/seoMultiDomainRowMacro.html.twig' as seoMultiDomainFormRowMacro %}
 
 {% block title %}- {{ 'Product detail'|trans }}{% endblock %}
 {% block h1 %}{% endblock %}
@@ -331,11 +293,11 @@
                 {{ 'SEO'|trans }}
             </div>
 
-            {{ _self.seoMultidomainFormRow(form.seoTitles, 'Page title'|trans, 60) }}
+            {{ seoMultiDomainFormRowMacro.rows(form.seoTitles, 'Page title'|trans, 60) }}
 
-            {{ _self.seoMultidomainFormRow(form.seoMetaDescriptions, 'Meta description'|trans, 155, 'input--seo') }}
+            {{ seoMultiDomainFormRowMacro.rows(form.seoMetaDescriptions, 'Meta description'|trans, 155, 'input--seo') }}
 
-            {{ _self.seoMultidomainFormRow(form.seoH1s, 'Heading (H1)'|trans, 60) }}
+            {{ seoMultiDomainFormRowMacro.rows(form.seoH1s, 'Heading (H1)'|trans, 60) }}
 
             {% block product_urls %}{% endblock %}
         </div>
