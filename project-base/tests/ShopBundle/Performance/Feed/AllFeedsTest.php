@@ -4,7 +4,7 @@ namespace Tests\ShopBundle\Performance\Feed;
 
 use Shopsys\HttpSmokeTesting\Auth\BasicHttpAuth;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Model\Feed\FeedConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedConfigInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +46,7 @@ class AllFeedsTest extends KernelTestCase
         $allFeedGenerationData = $this->getAllFeedGenerationData();
         foreach ($allFeedGenerationData as $feedGenerationData) {
             list($feedConfig, $domainConfig, $maxDuration) = $feedGenerationData;
-            /* @var $feedConfig \Shopsys\ShopBundle\Model\Feed\FeedConfig */
+            /* @var $feedConfig \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface */
             /* @var $domainConfig \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig */
 
             $consoleOutput->writeln(
@@ -74,12 +74,12 @@ class AllFeedsTest extends KernelTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param int $maxDuration
      * @return \Tests\ShopBundle\Performance\Feed\PerformanceTestSample
      */
-    private function doTestFeedGeneration(FeedConfig $feedConfig, DomainConfig $domainConfig, $maxDuration)
+    private function doTestFeedGeneration(FeedConfigInterface $feedConfig, DomainConfig $domainConfig, $maxDuration)
     {
         $performanceTestSample = $this->generateFeed($feedConfig, $domainConfig);
         $this->setPerformanceTestSampleMessage($performanceTestSample, $maxDuration, $performanceTestSample->getDuration());
@@ -112,7 +112,7 @@ class AllFeedsTest extends KernelTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig[] $feedConfigs
+     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface[] $feedConfigs
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
      * @param int $maxDuration
      * @return array[]
@@ -154,11 +154,11 @@ class AllFeedsTest extends KernelTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Tests\ShopBundle\Performance\Feed\PerformanceTestSample
      */
-    private function generateFeed(FeedConfig $feedConfig, DomainConfig $domainConfig)
+    private function generateFeed(FeedConfigInterface $feedConfig, DomainConfig $domainConfig)
     {
         $this->setUp();
 

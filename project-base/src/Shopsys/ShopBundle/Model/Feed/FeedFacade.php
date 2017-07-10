@@ -5,8 +5,8 @@ namespace Shopsys\ShopBundle\Model\Feed;
 use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Feed\FeedConfig;
 use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
+use Shopsys\ShopBundle\Model\Feed\FeedConfigInterface;
 use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
 use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfigFactory;
 use Shopsys\ShopBundle\Model\Feed\FeedXmlWriter;
@@ -113,11 +113,11 @@ class FeedFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      */
     public function generateFeed(
-        FeedConfig $feedConfig,
+        FeedConfigInterface $feedConfig,
         DomainConfig $domainConfig
     ) {
         $seekItemId = null;
@@ -132,13 +132,13 @@ class FeedFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param int|null $seekItemId
      * @return \Shopsys\ShopBundle\Model\Feed\FeedItemInterface|null
      */
     private function generateFeedBatch(
-        FeedConfig $feedConfig,
+        FeedConfigInterface $feedConfig,
         DomainConfig $domainConfig,
         $seekItemId
     ) {

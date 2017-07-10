@@ -505,19 +505,21 @@ services:
 
   shopsys.shop.feed.feed_config_repository:
     class: Shopsys\ShopBundle\Model\Feed\FeedConfigRepository
-    arguments:
-      - '@shopsys.shop.feed.heureka.heureka_item_repository'
-      - '@shopsys.shop.feed.heureka.heureka_delivery_item_repository'
-      - '@shopsys.shop.feed.zbozi.zbozi_item_repository'
 
-  shopsys.shop.feed.heureka.heureka_item_repository:
-    class: Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItemRepository
+  shopsys.shop.feed.heureka.heureka_feed_config:
+    class: Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaFeedConfig
+    tags:
+      - { name: shopsys.product_feed }
 
-  shopsys.shop.feed.heureka.heureka_delivery_item_repository:
-    class: Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository
+  shopsys.shop.feed.heureka.heureka_delivery_feed_config:
+    class: Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryFeedConfig
+    tags:
+      - { name: shopsys.product_feed, type: delivery }
 
-  shopsys.shop.feed.zbozi.zbozi_item_repository:
-    class: Shopsys\ShopBundle\Model\Feed\Zbozi\ZboziItemRepository
+  shopsys.shop.feed.zbozi.zbozi_feed_config:
+    class: Shopsys\ShopBundle\Model\Feed\Zbozi\ZboziFeedConfig
+    tags:
+      - { name: shopsys.product_feed }
 
   shopsys.shop.http_foundation.response_listener:
     class: Shopsys\ShopBundle\Component\HttpFoundation\ResponseListener

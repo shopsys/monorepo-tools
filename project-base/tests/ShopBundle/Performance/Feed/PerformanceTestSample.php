@@ -3,12 +3,12 @@
 namespace Tests\ShopBundle\Performance\Feed;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Model\Feed\FeedConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedConfigInterface;
 
 class PerformanceTestSample
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedConfig
+     * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface
      */
     private $feedConfig;
 
@@ -43,14 +43,14 @@ class PerformanceTestSample
     private $failMessages = [];
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param $generationUri
      * @param $duration
      * @param $statusCode
      */
     public function __construct(
-        FeedConfig $feedConfig,
+        FeedConfigInterface $feedConfig,
         DomainConfig $domainConfig,
         $generationUri,
         $duration,
@@ -80,7 +80,7 @@ class PerformanceTestSample
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig
+     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface
      */
     public function getFeedConfig()
     {
