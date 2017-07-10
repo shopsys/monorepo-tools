@@ -1,20 +1,19 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\Zbozi;
+namespace Shopsys\ProductFeed\ZboziBundle;
 
 use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ProductFeed\FeedItemRepositoryInterface;
-use Shopsys\ShopBundle\Model\Feed\Zbozi\ZboziItemRepository;
 
 class ZboziFeedConfig implements FeedConfigInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\Zbozi\ZboziItemRepository
+     * @var \Shopsys\ProductFeed\ZboziBundle\ZboziItemRepository
      */
     private $feedItemRepository;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\Zbozi\ZboziItemRepository $feedItemRepository
+     * @param \Shopsys\ProductFeed\ZboziBundle\ZboziItemRepository $feedItemRepository
      */
     public function __construct(ZboziItemRepository $feedItemRepository)
     {
@@ -42,7 +41,7 @@ class ZboziFeedConfig implements FeedConfigInterface
      */
     public function getTemplateFilepath()
     {
-        return '@ShopsysShop/Feed/zbozi.xml.twig';
+        return '@ShopsysProductFeedZbozi/feed.xml.twig';
     }
 
     /**

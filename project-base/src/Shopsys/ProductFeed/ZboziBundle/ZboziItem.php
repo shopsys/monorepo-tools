@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\Zbozi;
+namespace Shopsys\ProductFeed\ZboziBundle;
 
 use Shopsys\ProductFeed\FeedItemInterface;
 

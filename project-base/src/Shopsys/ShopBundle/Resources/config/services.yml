@@ -516,11 +516,6 @@ services:
     tags:
       - { name: shopsys.product_feed, type: delivery }
 
-  shopsys.shop.feed.zbozi.zbozi_feed_config:
-    class: Shopsys\ShopBundle\Model\Feed\Zbozi\ZboziFeedConfig
-    tags:
-      - { name: shopsys.product_feed }
-
   shopsys.shop.http_foundation.response_listener:
     class: Shopsys\ShopBundle\Component\HttpFoundation\ResponseListener
     tags:
