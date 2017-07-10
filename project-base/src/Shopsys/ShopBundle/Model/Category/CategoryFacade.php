@@ -286,7 +286,7 @@ class CategoryFacade
      * @param int $domainId
      * @param string $locale
      * @param string $searchText
-     * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
     public function getVisibleByDomainAndSearchText($domainId, $locale, $searchText)
     {

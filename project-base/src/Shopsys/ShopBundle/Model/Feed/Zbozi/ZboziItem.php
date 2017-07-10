@@ -94,6 +94,8 @@ class ZboziItem implements FeedItemInterface
      * @param string|null $categoryText
      * @param string[] $parametersByName
      * @param string|null $partno
+     * @param string|null $cpc
+     * @param string|null $cpcSearch
      * @param int|null $mainVariantId
      */
     public function __construct(
