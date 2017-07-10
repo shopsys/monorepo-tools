@@ -551,13 +551,6 @@ services:
   shopsys.shop.localization.number_format_repository:
     class: CommerceGuys\Intl\NumberFormat\NumberFormatRepository
 
-  shopsys.shop.localization.translation.grid.translation_inline_edit:
-    class: Shopsys\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit
-
-  shopsys.shop.localization.translation.translation_edit_facade:
-    class: Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade
-    arguments: ['%kernel.root_dir%', '%kernel.cache_dir%']
-
   shopsys.shop.mail.mail_template_facade:
     class: Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
 
