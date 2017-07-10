@@ -3,8 +3,8 @@
 namespace Tests\ShopBundle\Performance\Feed;
 
 use Shopsys\HttpSmokeTesting\Auth\BasicHttpAuth;
+use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Model\Feed\FeedConfigInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +46,7 @@ class AllFeedsTest extends KernelTestCase
         $allFeedGenerationData = $this->getAllFeedGenerationData();
         foreach ($allFeedGenerationData as $feedGenerationData) {
             list($feedConfig, $domainConfig, $maxDuration) = $feedGenerationData;
-            /* @var $feedConfig \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface */
+            /* @var $feedConfig \Shopsys\ProductFeed\FeedConfigInterface */
             /* @var $domainConfig \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig */
 
             $consoleOutput->writeln(
@@ -74,7 +74,7 @@ class AllFeedsTest extends KernelTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface $feedConfig
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param int $maxDuration
      * @return \Tests\ShopBundle\Performance\Feed\PerformanceTestSample
@@ -112,7 +112,7 @@ class AllFeedsTest extends KernelTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface[] $feedConfigs
+     * @param \Shopsys\ProductFeed\FeedConfigInterface[] $feedConfigs
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
      * @param int $maxDuration
      * @return array[]
@@ -154,7 +154,7 @@ class AllFeedsTest extends KernelTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface $feedConfig
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Tests\ShopBundle\Performance\Feed\PerformanceTestSample
      */

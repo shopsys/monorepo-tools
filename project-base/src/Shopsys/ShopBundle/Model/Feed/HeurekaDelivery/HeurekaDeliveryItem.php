@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Feed\HeurekaDelivery;
 
-use Shopsys\ShopBundle\Model\Feed\FeedItemInterface;
+use Shopsys\ProductFeed\FeedItemInterface;
 
 class HeurekaDeliveryItem implements FeedItemInterface
 {

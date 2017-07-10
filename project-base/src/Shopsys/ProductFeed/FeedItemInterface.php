@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed;
+namespace Shopsys\ProductFeed;
 
 interface FeedItemInterface
 {

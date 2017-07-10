@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Model\Feed\Zbozi;
 
+use Shopsys\ProductFeed\FeedConfigInterface;
+use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ShopBundle\Model\Feed\Zbozi\ZboziItemRepository;
-use Shopsys\ShopBundle\Model\Feed\FeedConfigInterface;
-use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
 
 class ZboziFeedConfig implements FeedConfigInterface
 {
@@ -46,7 +46,7 @@ class ZboziFeedConfig implements FeedConfigInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
+     * @return \Shopsys\ProductFeed\FeedItemRepositoryInterface
      */
     public function getFeedItemRepository()
     {

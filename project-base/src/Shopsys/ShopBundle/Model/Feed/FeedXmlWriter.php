@@ -43,7 +43,7 @@ class FeedXmlWriter
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedItemInterface[] $items
+     * @param \Shopsys\ProductFeed\FeedItemInterface[] $items
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param string $feedTemplatePath
      * @param string $targetFilepath

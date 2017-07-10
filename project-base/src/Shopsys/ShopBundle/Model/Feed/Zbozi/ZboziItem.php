@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Feed\Zbozi;
 
-use Shopsys\ShopBundle\Model\Feed\FeedItemInterface;
+use Shopsys\ProductFeed\FeedItemInterface;
 
 class ZboziItem implements FeedItemInterface
 {

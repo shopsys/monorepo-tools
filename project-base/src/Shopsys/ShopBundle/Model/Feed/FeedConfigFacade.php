@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Model\Feed;
 
+use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Feed\FeedConfigInterface;
 use Shopsys\ShopBundle\Model\Feed\FeedConfigRepository;
 
 class FeedConfigFacade
@@ -48,7 +48,7 @@ class FeedConfigFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface[]
+     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     public function getFeedConfigs()
     {
@@ -57,7 +57,7 @@ class FeedConfigFacade
 
     /**
      * @param string $feedName
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface
+     * @return \Shopsys\ProductFeed\FeedConfigInterface
      */
     public function getFeedConfigByName($feedName)
     {
@@ -65,7 +65,7 @@ class FeedConfigFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface[]
+     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     public function getDeliveryFeedConfigs()
     {
@@ -73,7 +73,7 @@ class FeedConfigFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface[]
+     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     public function getAllFeedConfigs()
     {
@@ -81,7 +81,7 @@ class FeedConfigFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface $feedConfig
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */
@@ -91,7 +91,7 @@ class FeedConfigFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface $feedConfig
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */
@@ -101,7 +101,7 @@ class FeedConfigFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface $feedConfig
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */

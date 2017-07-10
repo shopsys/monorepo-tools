@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Model\Feed\Heureka;
 
+use Shopsys\ProductFeed\FeedItemFactoryInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Feed\FeedItemFactoryInterface;
 use Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItem;
 use Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;

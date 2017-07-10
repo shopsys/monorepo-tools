@@ -2,8 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Feed\HeurekaDelivery;
 
+use Shopsys\ProductFeed\FeedItemFactoryInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Model\Feed\FeedItemFactoryInterface;
 use Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem;
 
 class HeurekaDeliveryItemFactory implements FeedItemFactoryInterface

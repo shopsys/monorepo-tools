@@ -2,8 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Feed\HeurekaDelivery;
 
+use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
 use Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemFactory;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;

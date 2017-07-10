@@ -2,17 +2,17 @@
 
 namespace Shopsys\ShopBundle\Model\Feed;
 
-use Shopsys\ShopBundle\Model\Feed\FeedConfigInterface;
+use Shopsys\ProductFeed\FeedConfigInterface;
 
 class FeedConfigRepository
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface[]
+     * @var \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     private $feedConfigs;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface[]
+     * @var \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     private $deliveryFeedConfigs;
 
@@ -23,7 +23,7 @@ class FeedConfigRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface $feedConfig
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
      */
     public function registerFeedConfig(FeedConfigInterface $feedConfig)
     {
@@ -31,7 +31,7 @@ class FeedConfigRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface $feedConfig
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
      */
     public function registerDeliveryFeedConfig(FeedConfigInterface $feedConfig)
     {
@@ -39,7 +39,7 @@ class FeedConfigRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface[]
+     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     public function getFeedConfigs()
     {
@@ -47,7 +47,7 @@ class FeedConfigRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface[]
+     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     public function getDeliveryFeedConfigs()
     {
@@ -56,7 +56,7 @@ class FeedConfigRepository
 
     /**
      * @param string $feedName
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface
+     * @return \Shopsys\ProductFeed\FeedConfigInterface
      */
     public function getFeedConfigByName($feedName)
     {
@@ -71,7 +71,7 @@ class FeedConfigRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfigInterface[]
+     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     public function getAllFeedConfigs()
     {

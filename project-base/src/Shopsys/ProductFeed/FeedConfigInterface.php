@@ -1,9 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed;
+namespace Shopsys\ProductFeed;
 
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
+use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 
 interface FeedConfigInterface
 {
@@ -23,7 +22,7 @@ interface FeedConfigInterface
     public function getTemplateFilepath();
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
+     * @return \Shopsys\ProductFeed\FeedItemRepositoryInterface
      */
     public function getFeedItemRepository();
 }
