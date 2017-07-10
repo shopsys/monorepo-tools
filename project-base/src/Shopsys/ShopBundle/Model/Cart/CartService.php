@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Cart;
 
+use DateTime;
 use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
@@ -39,6 +40,7 @@ class CartService
         foreach ($cart->getItems() as $cartItem) {
             if ($cartItem->getProduct() === $product) {
                 $cartItem->changeQuantity($cartItem->getQuantity() + $quantity);
+                $cartItem->changeAddedAt(new DateTime());
                 return new AddProductResult($cartItem, false, $quantity);
             }
         }
