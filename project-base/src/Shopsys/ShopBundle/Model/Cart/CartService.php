@@ -53,13 +53,13 @@ class CartService
 
     /**
      * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
-     * @param array $quantities CartItem.id => quantity
+     * @param array $quantitiesByCartItemId
      */
-    public function changeQuantities(Cart $cart, array $quantities)
+    public function changeQuantities(Cart $cart, array $quantitiesByCartItemId)
     {
         foreach ($cart->getItems() as $cartItem) {
-            if (array_key_exists($cartItem->getId(), $quantities)) {
-                $cartItem->changeQuantity($quantities[$cartItem->getId()]);
+            if (array_key_exists($cartItem->getId(), $quantitiesByCartItemId)) {
+                $cartItem->changeQuantity($quantitiesByCartItemId[$cartItem->getId()]);
             }
         }
     }
