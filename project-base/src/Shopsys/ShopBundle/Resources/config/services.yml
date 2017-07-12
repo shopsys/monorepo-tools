@@ -506,11 +506,6 @@ services:
   shopsys.shop.feed.feed_config_repository:
     class: Shopsys\ShopBundle\Model\Feed\FeedConfigRepository
 
-  shopsys.shop.feed.heureka.heureka_feed_config:
-    class: Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaFeedConfig
-    tags:
-      - { name: shopsys.product_feed }
-
   shopsys.shop.feed.heureka.heureka_delivery_feed_config:
     class: Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryFeedConfig
     tags:

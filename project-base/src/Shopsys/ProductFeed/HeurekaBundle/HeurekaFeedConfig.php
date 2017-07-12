@@ -1,20 +1,19 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\Heureka;
+namespace Shopsys\ProductFeed\HeurekaBundle;
 
 use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ProductFeed\FeedItemRepositoryInterface;
-use Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItemRepository;
 
 class HeurekaFeedConfig implements FeedConfigInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItemRepository
+     * @var \Shopsys\ProductFeed\HeurekaBundle\HeurekaItemRepository
      */
     private $feedItemRepository;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItemRepository $feedItemRepository
+     * @param \Shopsys\ProductFeed\HeurekaBundle\HeurekaItemRepository $feedItemRepository
      */
     public function __construct(HeurekaItemRepository $feedItemRepository)
     {
@@ -42,7 +41,7 @@ class HeurekaFeedConfig implements FeedConfigInterface
      */
     public function getTemplateFilepath()
     {
-        return '@ShopsysShop/Feed/heureka.xml.twig';
+        return '@ShopsysProductFeedHeureka/feed.xml.twig';
     }
 
     /**

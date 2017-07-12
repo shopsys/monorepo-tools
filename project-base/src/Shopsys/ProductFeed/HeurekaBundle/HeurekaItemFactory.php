@@ -1,11 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\Heureka;
+namespace Shopsys\ProductFeed\HeurekaBundle;
 
 use Shopsys\ProductFeed\FeedItemFactoryInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItem;
 use Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\ShopBundle\Model\Product\Product;
@@ -45,7 +44,7 @@ class HeurekaItemFactory implements FeedItemFactoryInterface
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItem[]
+     * @return \Shopsys\ProductFeed\HeurekaBundle\HeurekaItem[]
      */
     public function createItems(array $products, DomainConfig $domainConfig)
     {

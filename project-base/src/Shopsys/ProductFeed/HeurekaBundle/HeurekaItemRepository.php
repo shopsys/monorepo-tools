@@ -1,10 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\Heureka;
+namespace Shopsys\ProductFeed\HeurekaBundle;
 
 use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItemFactory;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
@@ -21,7 +20,7 @@ class HeurekaItemRepository implements FeedItemRepositoryInterface
     private $pricingGroupSettingFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItemFactory
+     * @var \Shopsys\ProductFeed\HeurekaBundle\HeurekaItemFactory
      */
     private $heurekaItemFactory;
 
