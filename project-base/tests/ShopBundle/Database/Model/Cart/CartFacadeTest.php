@@ -9,6 +9,7 @@ use Shopsys\ShopBundle\Model\Cart\CartFacade;
 use Shopsys\ShopBundle\Model\Cart\CartFactory;
 use Shopsys\ShopBundle\Model\Cart\CartService;
 use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
+use Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository;
 use Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
@@ -144,7 +145,8 @@ class CartFacadeTest extends DatabaseTestCase
             $this->getCustomerIdentifierFactoryMock($customerIdentifier),
             $this->getServiceByType(Domain::class),
             $this->getServiceByType(CurrentCustomer::class),
-            $this->getServiceByType(CurrentPromoCodeFacade::class)
+            $this->getServiceByType(CurrentPromoCodeFacade::class),
+            $this->getServiceByType(CartItemRepository::class)
         );
     }
 

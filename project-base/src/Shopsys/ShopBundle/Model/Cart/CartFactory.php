@@ -60,4 +60,9 @@ class CartFactory
 
         return new Cart($cartItems);
     }
+
+    public function clearCache()
+    {
+        $this->carts = [];
+    }
 }

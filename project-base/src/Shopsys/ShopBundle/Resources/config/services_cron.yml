@@ -26,6 +26,11 @@ services:
     tags:
       - { name: shopsys.cron, hours: '0', minutes: '0' }
 
+  Shopsys\ShopBundle\Model\Cart\Item\DeleteOldCartsCronModule:
+      class: Shopsys\ShopBundle\Model\Cart\Item\DeleteOldCartsCronModule
+      tags:
+        - { name: shopsys.cron, hours: '0', minutes: '0' }
+
   Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCronModule:
     class: Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCronModule
     tags:
