@@ -6,8 +6,8 @@
 {% block item %}
     <SHOPITEM>
         <ITEM_ID>{{ item.itemId }}</ITEM_ID>
-        {% if item.groupId is not null -%}
-            <ITEMGROUP_ID>{{ item.groupId }}</ITEMGROUP_ID>
+        {% if item.mainVariantId is not null -%}
+            <ITEMGROUP_ID>{{ item.mainVariantId }}</ITEMGROUP_ID>
         {% endif -%}
         <PRODUCTNAME>{{ item.productName }}</PRODUCTNAME>
         <DESCRIPTION>{{ item.description|striptags|replace("\n", ' ')|trim }}</DESCRIPTION>
@@ -25,8 +25,8 @@
         {% if item.manufacturer is not null -%}
             <MANUFACTURER>{{ item.manufacturer }}</MANUFACTURER>
         {% endif -%}
-        {% if item.categoryText is not null -%}
-            <CATEGORYTEXT>{{ item.categoryText }}</CATEGORYTEXT>
+        {% if item.getCustomValue('category_name') is not null -%}
+            <CATEGORYTEXT>{{ item.getCustomValue('category_name') }}</CATEGORYTEXT>
         {% endif -%}
         {% for paramName, paramVal in item.parametersByName -%}
             <PARAM>
@@ -34,8 +34,8 @@
                 <VAL>{{ paramVal }}</VAL>
             </PARAM>
         {% endfor -%}
-        {% if item.cpc is not null -%}
-            <HEUREKA_CPC>{{ item.cpc|number_format(2, ',', '') }}</HEUREKA_CPC>
+        {% if item.getCustomValue('cpc') is not null -%}
+            <HEUREKA_CPC>{{ item.getCustomValue('cpc')|number_format(2, ',', '') }}</HEUREKA_CPC>
         {% endif -%}
     </SHOPITEM>
 {% endblock %}

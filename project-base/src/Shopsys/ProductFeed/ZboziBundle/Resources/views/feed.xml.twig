@@ -10,7 +10,7 @@
         <DESCRIPTION>{{ item.description|striptags|replace("\n", ' ')|trim }}</DESCRIPTION>
         <URL>{{ item.url }}</URL>
         <PRICE_VAT>{{ item.priceVat|number_format(2, ',', '') }}</PRICE_VAT>
-        <DELIVERY_DATE>{{ item.deliveryDate }}</DELIVERY_DATE>
+        <DELIVERY_DATE>{{ item.deliveryDate|default(-1) }}</DELIVERY_DATE>
         {% if item.imgUrl -%}
             <IMGURL>{{ item.imgUrl }}</IMGURL>
         {% endif -%}
@@ -35,11 +35,11 @@
                 <VAL>{{ paramVal }}</VAL>
             </PARAM>
         {% endfor -%}
-        {% if item.cpc is not null -%}
-            <MAX_CPC>{{ item.cpc }}</MAX_CPC>
+        {% if item.getCustomValue('cpc') is not null -%}
+            <MAX_CPC>{{ item.getCustomValue('cpc') }}</MAX_CPC>
         {% endif %}
-        {% if item.cpcSearch is not null -%}
-            <MAX_CPC_SEARCH>{{ item.cpcSearch }}</MAX_CPC_SEARCH>
+        {% if item.getCustomValue('cpc_search') is not null -%}
+            <MAX_CPC_SEARCH>{{ item.getCustomValue('cpc_search') }}</MAX_CPC_SEARCH>
         {% endif %}
     </SHOPITEM>
 {% endblock %}
@@ -47,5 +47,3 @@
 {% block end %}
 </SHOP>
 {% endblock %}
-
-

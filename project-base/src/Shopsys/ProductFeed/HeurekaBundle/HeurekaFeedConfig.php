@@ -2,22 +2,30 @@
 
 namespace Shopsys\ProductFeed\HeurekaBundle;
 
+use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
+use Shopsys\ProductFeed\FeedItemCustomValuesProviderInterface;
 use Shopsys\ProductFeed\FeedItemRepositoryInterface;
+use Shopsys\ProductFeed\StandardFeedItemInterface;
 
 class HeurekaFeedConfig implements FeedConfigInterface
 {
     /**
-     * @var \Shopsys\ProductFeed\HeurekaBundle\HeurekaItemRepository
+     * @var \Shopsys\ProductFeed\FeedItemRepositoryInterface
      */
     private $feedItemRepository;
 
     /**
-     * @param \Shopsys\ProductFeed\HeurekaBundle\HeurekaItemRepository $feedItemRepository
+     * @var \Shopsys\ProductFeed\FeedItemCustomValuesProviderInterface
      */
-    public function __construct(HeurekaItemRepository $feedItemRepository)
-    {
+    private $feedItemCustomValuesProvider;
+
+    public function __construct(
+        FeedItemRepositoryInterface $feedItemRepository,
+        FeedItemCustomValuesProviderInterface $feedItemCustomValuesProvider
+    ) {
         $this->feedItemRepository = $feedItemRepository;
+        $this->feedItemCustomValuesProvider = $feedItemCustomValuesProvider;
     }
 
     /**
@@ -50,5 +58,27 @@ class HeurekaFeedConfig implements FeedConfigInterface
     public function getFeedItemRepository()
     {
         return $this->feedItemRepository;
+    }
+
+    /**
+     * @param \Shopsys\ProductFeed\FeedItemInterface[] $items
+     * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
+     * @return \Shopsys\ProductFeed\FeedItemInterface[]
+     */
+    public function processItems(array $items, DomainConfigInterface $domainConfig)
+    {
+        $allCustomValues = $this->feedItemCustomValuesProvider->getCustomValuesForItems($items, $domainConfig);
+
+        foreach ($items as $key => $item) {
+            if ($item instanceof StandardFeedItemInterface) {
+                $customValues = $allCustomValues[$item->getItemId()];
+                $item->setCustomValue('cpc', $customValues->getHeurekaCpc());
+
+                $categoryName = $this->feedItemCustomValuesProvider->getHeurekaCategoryNameForItem($item, $domainConfig);
+                $item->setCustomValue('category_name', $categoryName);
+            }
+        }
+
+        return $items;
     }
 }

@@ -1,15 +1,17 @@
 <?php
 
-namespace Shopsys\ProductFeed\ZboziBundle;
+namespace Shopsys\ShopBundle\Model\Feed\Standard;
 
 use Doctrine\ORM\Query\Expr\Join;
+use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemFactory;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\ShopBundle\Model\Product\ProductDomain;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ZboziItemRepository implements FeedItemRepositoryInterface
+class StandardFeedItemRepository implements FeedItemRepositoryInterface
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
@@ -22,25 +24,26 @@ class ZboziItemRepository implements FeedItemRepositoryInterface
     private $pricingGroupSettingFacade;
 
     /**
-     * @var \Shopsys\ProductFeed\ZboziBundle\ZboziItemFactory
+     * @var \Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemFactory
      */
-    private $zboziItemFactory;
+    private $feedItemFactory;
 
     public function __construct(
         ProductRepository $productRepository,
         PricingGroupSettingFacade $pricingGroupSettingFacade,
-        ZboziItemFactory $zboziItemFactory
+        StandardFeedItemFactory $feedItemFactory
     ) {
         $this->productRepository = $productRepository;
         $this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
-        $this->zboziItemFactory = $zboziItemFactory;
+        $this->feedItemFactory = $feedItemFactory;
     }
 
     /**
      * @inheritdoc
      */
-    public function getItems(DomainConfig $domainConfig, $seekItemId, $maxResults)
+    public function getItems(DomainConfigInterface $domainConfig, $seekItemId, $maxResults)
     {
+        /* @var $domainConfig \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig */
         $defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
         $queryBuilder = $this->productRepository->getAllSellableQueryBuilder($domainConfig->getId(), $defaultPricingGroup);
         $this->productRepository->addTranslation($queryBuilder, $domainConfig->getLocale());
@@ -49,7 +52,6 @@ class ZboziItemRepository implements FeedItemRepositoryInterface
             ->addSelect('a')->join('p.calculatedAvailability', 'a')
             ->addSelect('b')->leftJoin('p.brand', 'b')
             ->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p.id AND pd.domainId = :domainId')
-            ->andWhere('pd.showInZboziFeed = true')
             ->orderBy('p.id', 'asc')
             ->setMaxResults($maxResults);
 
@@ -59,6 +61,6 @@ class ZboziItemRepository implements FeedItemRepositoryInterface
 
         $products = $queryBuilder->getQuery()->execute();
 
-        return $this->zboziItemFactory->createItems($products, $domainConfig);
+        return $this->feedItemFactory->createItems($products, $domainConfig);
     }
 }

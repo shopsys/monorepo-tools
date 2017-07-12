@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Model\Product;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shopsys\ProductFeed\FeedItemCustomValuesInterface;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Product\Product;
 
@@ -10,7 +11,7 @@ use Shopsys\ShopBundle\Model\Product\Product;
  * @ORM\Table(name="product_domains")
  * @ORM\Entity
  */
-class ProductDomain
+class ProductDomain implements FeedItemCustomValuesInterface
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product

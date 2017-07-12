@@ -506,6 +506,12 @@ services:
   shopsys.shop.feed.feed_config_repository:
     class: Shopsys\ShopBundle\Model\Feed\FeedConfigRepository
 
+  shopsys.shop.feed.feed_item_custom_values_provider:
+    class: Shopsys\ShopBundle\Model\Feed\FeedItemCustomValuesProvider
+
+  shopsys.shop.feed.feed_item_repository:
+    class: Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemRepository
+
   shopsys.shop.feed.heureka.heureka_delivery_feed_config:
     class: Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryFeedConfig
     tags:

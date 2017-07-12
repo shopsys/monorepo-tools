@@ -144,7 +144,7 @@ class FeedFacade
         $filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
         $temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SUFFIX;
 
-        $items = $feedConfig->getFeedItemRepository()->getItems($domainConfig, $seekItemId, self::BATCH_SIZE);
+        $itemsInBatch = $feedConfig->getFeedItemRepository()->getItems($domainConfig, $seekItemId, self::BATCH_SIZE);
 
         if ($seekItemId === null) {
             $this->feedXmlWriter->writeBegin(
@@ -154,6 +154,7 @@ class FeedFacade
             );
         }
 
+        $items = $feedConfig->processItems($itemsInBatch, $domainConfig);
         $this->feedXmlWriter->writeItems(
             $items,
             $domainConfig,
@@ -163,8 +164,8 @@ class FeedFacade
 
         $this->entityManagerFacade->clear();
 
-        if (count($items) === self::BATCH_SIZE) {
-            return array_pop($items);
+        if (count($itemsInBatch) === self::BATCH_SIZE) {
+            return array_pop($itemsInBatch);
         } else {
             $this->feedXmlWriter->writeEnd(
                 $domainConfig,

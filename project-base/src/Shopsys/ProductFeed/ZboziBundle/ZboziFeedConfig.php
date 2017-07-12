@@ -2,22 +2,30 @@
 
 namespace Shopsys\ProductFeed\ZboziBundle;
 
+use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
+use Shopsys\ProductFeed\FeedItemCustomValuesProviderInterface;
 use Shopsys\ProductFeed\FeedItemRepositoryInterface;
+use Shopsys\ProductFeed\StandardFeedItemInterface;
 
 class ZboziFeedConfig implements FeedConfigInterface
 {
     /**
-     * @var \Shopsys\ProductFeed\ZboziBundle\ZboziItemRepository
+     * @var \Shopsys\ProductFeed\FeedItemRepositoryInterface
      */
     private $feedItemRepository;
 
     /**
-     * @param \Shopsys\ProductFeed\ZboziBundle\ZboziItemRepository $feedItemRepository
+     * @var \Shopsys\ProductFeed\FeedItemCustomValuesProviderInterface
      */
-    public function __construct(ZboziItemRepository $feedItemRepository)
-    {
+    private $feedItemCustomValuesProvider;
+
+    public function __construct(
+        FeedItemRepositoryInterface $feedItemRepository,
+        FeedItemCustomValuesProviderInterface $feedItemCustomValuesProvider
+    ) {
         $this->feedItemRepository = $feedItemRepository;
+        $this->feedItemCustomValuesProvider = $feedItemCustomValuesProvider;
     }
 
     /**
@@ -50,5 +58,31 @@ class ZboziFeedConfig implements FeedConfigInterface
     public function getFeedItemRepository()
     {
         return $this->feedItemRepository;
+    }
+
+    /**
+     * @param \Shopsys\ProductFeed\FeedItemInterface[] $items
+     * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
+     * @return \Shopsys\ProductFeed\FeedItemInterface[]
+     */
+    public function processItems(array $items, DomainConfigInterface $domainConfig)
+    {
+        $allCustomValues = $this->feedItemCustomValuesProvider->getCustomValuesForItems($items, $domainConfig);
+
+        foreach ($items as $key => $item) {
+            $customValues = $allCustomValues[$item->getItemId()];
+
+            if (!$customValues->getShowInZboziFeed()) {
+                unset($items[$key]);
+                continue;
+            }
+
+            if ($item instanceof StandardFeedItemInterface) {
+                $item->setCustomValue('cpc', $customValues->getZboziCpc());
+                $item->setCustomValue('cpc_search', $customValues->getZboziCpcSearch());
+            }
+        }
+
+        return $items;
     }
 }

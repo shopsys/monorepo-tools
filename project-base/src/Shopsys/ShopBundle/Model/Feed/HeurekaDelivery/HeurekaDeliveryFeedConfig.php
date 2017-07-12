@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Feed\HeurekaDelivery;
 
+use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository;
@@ -51,5 +52,15 @@ class HeurekaDeliveryFeedConfig implements FeedConfigInterface
     public function getFeedItemRepository()
     {
         return $this->feedItemRepository;
+    }
+
+    /**
+     * @param \Shopsys\ProductFeed\FeedItemInterface[] $items
+     * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
+     * @return \Shopsys\ProductFeed\FeedItemInterface[]
+     */
+    public function processItems(array $items, DomainConfigInterface $domainConfig)
+    {
+        return $items;
     }
 }
