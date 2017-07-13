@@ -1,0 +1,28 @@
+{
+    "name": "shopsys/product-feed-zbozi",
+    "description": "Shopsys Framework plugin interface for Zboží XML product feed generation",
+    "keywords": ["Zboží", "product feed", "XML feed", "plugin", "Shopsys Framework", "SSFW"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shopsys",
+            "homepage": "https://www.shopsys.com/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shopsys\\ProductFeed\\ZboziBundle\\": [
+                "src/"
+            ]
+        }
+    },
+    "require": {
+        "php": "^7.0",
+        "shopsys/product-feed-interface": "~0.1.0",
+        "symfony/framework-bundle": "^3.0"
+    },
+    "require-dev": {
+        "shopsys/coding-standards": "3.0.2"
+    }
+}
