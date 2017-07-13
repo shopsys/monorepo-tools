@@ -1,5 +1,0 @@
-services:
-  shopsys.product_feed.heureka_bundle.feed_config:
-    class: Shopsys\ProductFeed\HeurekaBundle\HeurekaFeedConfig
-    tags:
-      - { name: shopsys.product_feed }
