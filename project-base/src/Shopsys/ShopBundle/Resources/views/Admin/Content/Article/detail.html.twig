@@ -1,28 +1,6 @@
 {% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% macro seoFormRow(form, label, recommendedLength = null, cssClass = '') %}
-    <div class="form-line">
-        <strong class="form-line__label">
-            {{ form_label(form, label) }}
-        </strong>
-
-        <div class="form-line__side js-characters-counter">
-            <div class="form-line__item form-line__item--left">
-                <div class="input__wrap">
-                    {% set attr = form.vars.attr|merge({class: form.vars.attr.class|default('') ~ ' js-characters-counter-input ' ~ cssClass}) %}
-                    {{ form_widget(form, {attr: attr}) }}
-                </div>
-            </div>
-
-            <div class="form-line__count">
-                {% if recommendedLength is not null %}
-                    <div class="form-line__count__desc js-characters-counter-info" data-recommended-length="{{ recommendedLength }}"></div>
-                {% endif %}
-            </div>
-            {{ form_errors(form) }}
-        </div>
-    </div>
-{% endmacro %}
+{% import '@ShopsysShop/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
 
 {% block title %}- {{ 'Article'|trans }}{% endblock %}
 {% block h1 %}{{ 'Article'|trans }}{% endblock %}
@@ -53,9 +31,9 @@
                 {{ 'SEO'|trans }}
             </div>
 
-            {{ _self.seoFormRow(form.seoTitle, 'Page title'|trans, 60) }}
-            {{ _self.seoFormRow(form.seoMetaDescription, 'Meta description'|trans, 155, 'input--seo') }}
-            {{ _self.seoFormRow(form.seoH1, 'Heading (H1)'|trans) }}
+            {{ seoFormRowMacros.row(form.seoTitle, 'Page title'|trans, 60) }}
+            {{ seoFormRowMacros.row(form.seoMetaDescription, 'Meta description'|trans, 155, 'input--seo') }}
+            {{ seoFormRowMacros.row(form.seoH1, 'Heading (H1)'|trans) }}
 
             {% block article_urls %}{% endblock %}
         </div>

@@ -1,3 +1,27 @@
+{% macro row(form, label, recommendedLength = null, cssClass = '') %}
+    <div class="form-line">
+        <strong class="form-line__label">
+            {{ form_label(form, label) }}
+        </strong>
+
+        <div class="form-line__side js-characters-counter">
+            <div class="form-line__item form-line__item--left">
+                <div class="input__wrap">
+                    {% set attr = form.vars.attr|merge({class: form.vars.attr.class|default('') ~ ' js-characters-counter-input ' ~ cssClass}) %}
+                    {{ form_widget(form, {attr: attr}) }}
+                </div>
+            </div>
+
+            <div class="form-line__count">
+                {% if recommendedLength is not null %}
+                    <div class="form-line__count__desc js-characters-counter-info" data-recommended-length="{{ recommendedLength }}"></div>
+                {% endif %}
+            </div>
+            {{ form_errors(form) }}
+        </div>
+    </div>
+{% endmacro %}
+
 {% macro multidomainRow(multidomainForm, label, recommendedLength = null, cssClass = '') %}
     {% if isMultidomain() %}
         {% set cssClassOnMultidomainInputs = 'input--domain' %}
