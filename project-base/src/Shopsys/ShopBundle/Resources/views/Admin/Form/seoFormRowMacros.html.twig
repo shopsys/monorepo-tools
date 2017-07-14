@@ -1,4 +1,4 @@
-{% macro rows(multidomainForm, label, recommendedLength = null, cssClass = '') %}
+{% macro multidomainRow(multidomainForm, label, recommendedLength = null, cssClass = '') %}
     {% if isMultidomain() %}
         {% set cssClassOnMultidomainInputs = 'input--domain' %}
     {% else %}

@@ -1,5 +1,5 @@
 {% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
-{% import '@ShopsysShop/Admin/Form/seoMultiDomainRowMacro.html.twig' as seoMultiDomainFormRowMacro %}
+{% import '@ShopsysShop/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
 
 {% block title %}- {{ 'Category'|trans }}{% endblock %}
 {% block h1 %}{{ 'Category'|trans }}{% endblock %}
@@ -28,11 +28,11 @@
                 {{ 'SEO'|trans }}
             </div>
 
-            {{ seoMultiDomainFormRowMacro.rows(form.seoTitles, 'Page title'|trans, 60) }}
+            {{ seoFormRowMacros.multidomainRow(form.seoTitles, 'Page title'|trans, 60) }}
 
-            {{ seoMultiDomainFormRowMacro.rows(form.seoMetaDescriptions, 'Meta description'|trans, 155) }}
+            {{ seoFormRowMacros.multidomainRow(form.seoMetaDescriptions, 'Meta description'|trans, 155) }}
 
-            {{ seoMultiDomainFormRowMacro.rows(form.seoH1s, 'Heading (H1)'|trans) }}
+            {{ seoFormRowMacros.multidomainRow(form.seoH1s, 'Heading (H1)'|trans) }}
 
         <div class="form-group wrap-border">
             <div class="form-group__title">
