@@ -568,10 +568,6 @@ services:
   shopsys.shop.module.module_facade:
     class: Shopsys\ShopBundle\Model\Module\ModuleFacade
 
-  shopsys.shop.order.flow:
-    class: Shopsys\ShopBundle\Form\Front\Order\OrderFlow
-    parent: craue.form.flow
-
   shopsys.shop.order.order_facade:
     class: Shopsys\ShopBundle\Model\Order\OrderFacade
 

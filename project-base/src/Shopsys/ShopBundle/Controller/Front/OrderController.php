@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Front;
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\HttpFoundation\DownloadFileResponse;
-use Shopsys\ShopBundle\Form\Front\Order\OrderFlow;
+use Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory;
 use Shopsys\ShopBundle\Model\Cart\CartFacade;
 use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Customer\User;
@@ -34,9 +34,9 @@ class OrderController extends FrontBaseController
     const SESSION_CREATED_ORDER = 'created_order_id';
 
     /**
-     * @var \Shopsys\ShopBundle\Form\Front\Order\OrderFlow
+     * @var \Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory
      */
-    private $flow;
+    private $domainAwareOrderFlowFactory;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Cart\CartFacade
@@ -124,7 +124,7 @@ class OrderController extends FrontBaseController
         PaymentFacade $paymentFacade,
         CurrencyFacade $currencyFacade,
         OrderDataMapper $orderDataMapper,
-        OrderFlow $flow,
+        DomainAwareOrderFlowFactory $domainAwareOrderFlowFactory,
         Session $session,
         TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
         OrderMailFacade $orderMailFacade,
@@ -141,7 +141,7 @@ class OrderController extends FrontBaseController
         $this->paymentFacade = $paymentFacade;
         $this->currencyFacade = $currencyFacade;
         $this->orderDataMapper = $orderDataMapper;
-        $this->flow = $flow;
+        $this->domainAwareOrderFlowFactory = $domainAwareOrderFlowFactory;
         $this->session = $session;
         $this->transportAndPaymentWatcherService = $transportAndPaymentWatcherService;
         $this->orderMailFacade = $orderMailFacade;
@@ -174,22 +174,22 @@ class OrderController extends FrontBaseController
         $currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
         $frontOrderFormData->currency = $currency;
 
-        if ($this->flow->isBackToCartTransition()) {
+        $orderFlow = $this->domainAwareOrderFlowFactory->create();
+        if ($orderFlow->isBackToCartTransition()) {
             return $this->redirectToRoute('front_cart');
         }
 
-        $this->flow->setDomainId($this->domain->getId());
-        $this->flow->bind($frontOrderFormData);
-        $this->flow->saveSentStepData();
+        $orderFlow->bind($frontOrderFormData);
+        $orderFlow->saveSentStepData();
 
-        $form = $this->flow->createForm();
+        $form = $orderFlow->createForm();
 
         $payment = $frontOrderFormData->payment;
         $transport = $frontOrderFormData->transport;
 
         $orderPreview = $this->orderPreviewFactory->createForCurrentUser($transport, $payment);
 
-        $isValid = $this->flow->isValid($form);
+        $isValid = $orderFlow->isValid($form);
         // FormData are filled during isValid() call
         $orderData = $this->orderDataMapper->getOrderDataFromFrontOrderData($frontOrderFormData);
 
@@ -198,8 +198,8 @@ class OrderController extends FrontBaseController
         $this->checkTransportAndPaymentChanges($orderData, $orderPreview, $transports, $payments);
 
         if ($isValid) {
-            if ($this->flow->nextStep()) {
-                $form = $this->flow->createForm();
+            if ($orderFlow->nextStep()) {
+                $form = $orderFlow->createForm();
             } elseif ($flashMessageBag->isEmpty()) {
                 $order = $this->orderFacade->createOrderFromFront($orderData);
 
@@ -207,7 +207,7 @@ class OrderController extends FrontBaseController
                     $this->newsletterFacade->addSubscribedEmail($frontOrderFormData->email);
                 }
 
-                $this->flow->reset();
+                $orderFlow->reset();
 
                 try {
                     $this->sendMail($order);
@@ -229,7 +229,7 @@ class OrderController extends FrontBaseController
 
         return $this->render('@ShopsysShop/Front/Content/Order/index.html.twig', [
             'form' => $form->createView(),
-            'flow' => $this->flow,
+            'flow' => $orderFlow,
             'transport' => $transport,
             'payment' => $payment,
             'payments' => $payments,
@@ -317,10 +317,10 @@ class OrderController extends FrontBaseController
 
     public function saveOrderFormAction()
     {
-        $this->flow->setDomainId($this->domain->getId());
-        $this->flow->bind(new FrontOrderData());
-        $form = $this->flow->createForm();
-        $this->flow->saveCurrentStepData($form);
+        $flow = $this->domainAwareOrderFlowFactory->create();
+        $flow->bind(new FrontOrderData());
+        $form = $flow->createForm();
+        $flow->saveCurrentStepData($form);
 
         return new Response();
     }
