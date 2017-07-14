@@ -1,4 +1,4 @@
-{% macro rows(multidomainForm, label, recommendedLength, cssClass = '') %}
+{% macro rows(multidomainForm, label, recommendedLength = null, cssClass = '') %}
     {% if isMultidomain() %}
         {% set cssClassOnMultidomainInputs = 'input--domain' %}
     {% else %}
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="form-line__count">
-                    {% if recommendedLength %}
+                    {% if recommendedLength is not null %}
                         <span class="form-line__count__desc js-characters-counter-info" data-recommended-length="{{ recommendedLength }}"></span>
                     {% endif %}
                 </div>
