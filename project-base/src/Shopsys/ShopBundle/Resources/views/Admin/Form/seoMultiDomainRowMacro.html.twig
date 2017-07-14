@@ -29,7 +29,9 @@
                 </div>
 
                 <div class="form-line__count">
-                    <span class="form-line__count__desc js-characters-counter-info" data-recommended-length="{{ recommendedLength }}"></span>
+                    {% if recommendedLength %}
+                        <span class="form-line__count__desc js-characters-counter-info" data-recommended-length="{{ recommendedLength }}"></span>
+                    {% endif %}
                 </div>
                 {{ form_errors(domainForm) }}
             </div>
