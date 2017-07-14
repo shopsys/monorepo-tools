@@ -316,6 +316,7 @@ class ProductFacade
         $productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
         $seoTitles = $productEditData->seoTitles;
         $seoMetaDescriptions = $productEditData->seoMetaDescriptions;
+        $seoH1s = $productEditData->seoH1s;
         if (!$product->isVariant()) {
             $descriptions = $productEditData->descriptions;
             $shortDescriptions = $productEditData->shortDescriptions;
@@ -349,6 +350,9 @@ class ProductFacade
             }
             if (!empty($zboziCpcSearchValues)) {
                 $productDomain->setZboziCpcSearch($zboziCpcSearchValues[$domainId]);
+            }
+            if (!empty($seoH1s)) {
+                $productDomain->setSeoH1($seoH1s[$domainId]);
             }
         }
 

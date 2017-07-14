@@ -162,6 +162,7 @@ class CategoryFacade
 
             $categoryDomain->setSeoTitle(Utils::getArrayValue($categoryData->seoTitles, $domainId));
             $categoryDomain->setSeoMetaDescription(Utils::getArrayValue($categoryData->seoMetaDescriptions, $domainId));
+            $categoryDomain->setSeoH1(Utils::getArrayValue($categoryData->seoH1s, $domainId));
             $categoryDomain->setDescription(Utils::getArrayValue($categoryData->descriptions, $domainId));
             $categoryDomain->setHidden(in_array($domainId, $categoryData->hiddenOnDomains, true));
 

@@ -93,6 +93,11 @@ class ProductEditData
     public $zboziCpcSearchValues;
 
     /**
+     * @var string[]|null[]
+     */
+    public $seoH1s;
+
+    /**
      * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
      * @param string[] $imagesToUpload
@@ -109,6 +114,7 @@ class ProductEditData
      * @param bool[] $showInZboziFeedIndexedByDomainId
      * @param string[]|null[] $zboziCpcValues
      * @param string[]|null[] $zboziCpcSearchValues
+     * @param string[]|null[] $seoH1s
      */
     public function __construct(
         ProductData $productData = null,
@@ -126,7 +132,8 @@ class ProductEditData
         array $variants = [],
         array $showInZboziFeedIndexedByDomainId = [],
         array $zboziCpcValues = [],
-        array $zboziCpcSearchValues = []
+        array $zboziCpcSearchValues = [],
+        array $seoH1s = []
     ) {
         if ($productData !== null) {
             $this->productData = $productData;
@@ -149,5 +156,6 @@ class ProductEditData
         $this->showInZboziFeedIndexedByDomainId = $showInZboziFeedIndexedByDomainId;
         $this->zboziCpcValues = $zboziCpcValues;
         $this->zboziCpcSearchValues = $zboziCpcSearchValues;
+        $this->seoH1s = $seoH1s;
     }
 }

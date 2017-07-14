@@ -18,8 +18,13 @@
 {% block main_content %}
     <div class="box-list">
         {{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
-        <h1>{{ category.name }}</h1>
-
+        <h1>
+            {% if categoryDomain.seoH1 is not null %}
+                {{ categoryDomain.seoH1 }}
+            {% else %}
+                {{ category.name }}
+            {% endif %}
+        </h1>
         {% if visibleChildren is not empty %}
             <h2>{{ 'List of subcategories'|trans }}</h2>
 

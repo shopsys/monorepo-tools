@@ -1,5 +1,6 @@
 {% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 {% set showHeading = false %}
+{% import '@ShopsysShop/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
 
 {% block title %}- {{ 'Product detail'|trans }}{% endblock %}
 {% block h1 %}{% endblock %}
@@ -292,69 +293,11 @@
                 {{ 'SEO'|trans }}
             </div>
 
-            <div class="form-line">
-                <strong class="form-line__label">
-                    {{ 'Headline'|trans }}:
-                </strong>
-                {% for domainId, seoTitleForm in form.seoTitles %}
-                    <div class="form-line__side {% if not loop.first %}mt5{% endif %} js-characters-counter">
-                        <div class="form-line__item form-line__item--left">
-                            <div class="input__wrap">
-                                {{ form_widget(seoTitleForm, {
-                                    multidomain: true,
-                                    domainId: domainId,
-                                    attr: {
-                                        class: 'js-dynamic-placeholder js-characters-counter-input ' ~ cssClassOnMultidomainInputs,
-                                        'data-placeholder-source-input-id': 'product_edit_form_productData_name_' ~ seoTitleForm.vars.domainConfig.locale
-                                    }
-                                }) }}
-                                {% if isMultidomain() %}
-                                    <span class="input__domain">
-                                        {{ domainIcon(domainId) }}
-                                    </span>
-                                {% endif %}
-                            </div>
-                        </div>
+            {{ seoFormRowMacros.multidomainRow(form.seoTitles, 'Page title'|trans, 60) }}
 
-                        <div class="form-line__count">
-                            <span class="form-line__count__desc js-characters-counter-info" data-recommended-length="60"></span>
-                        </div>
-                        {{ form_errors(seoTitleForm) }}
-                    </div>
-                {% endfor %}
-            </div>
+            {{ seoFormRowMacros.multidomainRow(form.seoMetaDescriptions, 'Meta description'|trans, 155, 'input--seo') }}
 
-            <div class="form-line">
-                <strong class="form-line__label">
-                    {{ 'Meta description'|trans }}:
-                </strong>
-
-                {% for domainId, seoMetaDescriptionForm in form.seoMetaDescriptions %}
-                    <div class="form-line__side {% if not loop.first %}margin-top-5{% endif %} js-characters-counter">
-                        <div class="form-line__item form-line__item--left">
-                            <span class="input__wrap">
-                                {{ form_widget(seoMetaDescriptionForm, {
-                                    multidomain: true, 
-                                    domainId: domainId,
-                                    attr: {
-                                        class: 'js-characters-counter-input input--seo ' ~ cssClassOnMultidomainInputs
-                                    }
-                                }) }}
-                                {% if isMultidomain() %}
-                                    <span class="input__domain">
-                                        {{ domainIcon(domainId) }}
-                                    </span>
-                                {% endif %}
-                            </span>
-                        </div>
-
-                        <div class="form-line__count">
-                            <div class="form-line__count__desc js-characters-counter-info" data-recommended-length="155"></div>
-                        </div>
-                    </div>
-                    {{ form_errors(seoMetaDescriptionForm) }}
-                {% endfor %}
-            </div>
+            {{ seoFormRowMacros.multidomainRow(form.seoH1s, 'Heading (H1)'|trans) }}
 
             {% block product_urls %}{% endblock %}
         </div>

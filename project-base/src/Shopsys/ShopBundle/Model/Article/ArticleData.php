@@ -47,6 +47,11 @@ class ArticleData
      */
     public $hidden;
 
+    /**
+     * @var string|null
+     */
+    public $seoH1;
+
     public function __construct()
     {
         $this->urls = new UrlListData();
@@ -65,5 +70,6 @@ class ArticleData
         $this->domainId = $article->getDomainId();
         $this->placement = $article->getPlacement();
         $this->hidden = $article->isHidden();
+        $this->seoH1 = $article->getSeoH1();
     }
 }

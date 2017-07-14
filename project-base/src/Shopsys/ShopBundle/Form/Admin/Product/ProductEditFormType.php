@@ -96,17 +96,27 @@ class ProductEditFormType extends AbstractType
         $editedProduct = $options['product'];
         $seoTitlesOptionsByDomainId = [];
         $seoMetaDescriptionsOptionsByDomainId = [];
+        $seoH1OptionsByDomainId = [];
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainId = $domainConfig->getId();
 
             $seoTitlesOptionsByDomainId[$domainId] = [
                 'attr' => [
                     'placeholder' => $this->getTitlePlaceholder($domainConfig, $editedProduct),
+                    'class' => 'js-dynamic-placeholder',
+                    'data-placeholder-source-input-id' => 'product_edit_form_productData_name_' . $domainConfig->getLocale(),
                 ],
             ];
             $seoMetaDescriptionsOptionsByDomainId[$domainId] = [
                 'attr' => [
                     'placeholder' => $this->seoSettingFacade->getDescriptionMainPage($domainId),
+                ],
+            ];
+            $seoH1OptionsByDomainId[$domainId] = [
+                'attr' => [
+                    'placeholder' => $this->getTitlePlaceholder($domainConfig, $editedProduct),
+                    'class' => 'js-dynamic-placeholder',
+                    'data-placeholder-source-input-id' => 'product_edit_form_productData_name_' . $domainConfig->getLocale(),
                 ],
             ];
         }
@@ -171,6 +181,11 @@ class ProductEditFormType extends AbstractType
                 'entry_type' => TextareaType::class,
                 'required' => false,
                 'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
+            ])
+            ->add('seoH1s', MultidomainType::class, [
+                'entry_type' => TextType::class,
+                'required' => false,
+                'optionsByDomainId' => $seoH1OptionsByDomainId,
             ])
             ->add('descriptions', MultidomainType::class, [
                 'entry_type' => CKEditorType::class,

@@ -42,6 +42,7 @@ class ArticleFormType extends AbstractType
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -63,10 +64,21 @@ class ArticleFormType extends AbstractType
             ])
             ->add('seoTitle', TextType::class, [
                 'required' => false,
+                'attr' => [
+                    'class' => 'js-dynamic-placeholder',
+                    'data-placeholder-source-input-id' => 'article_form_name',
+                ],
             ])
             ->add('seoMetaDescription', TextareaType::class, [
                 'required' => false,
                 'attr' => $seoMetaDescriptionAttributes,
+            ])
+            ->add('seoH1', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'js-dynamic-placeholder',
+                    'data-placeholder-source-input-id' => 'article_form_name',
+                ],
             ])
             ->add('urls', UrlListType::class, [
                 'route_name' => 'front_article_detail',
