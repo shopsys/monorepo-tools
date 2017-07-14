@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -38,9 +38,9 @@ class ArticleController extends AdminBaseController
     private $articleDataFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
@@ -66,7 +66,7 @@ class ArticleController extends AdminBaseController
         ArticleFacade $articleFacade,
         ArticleDataFactory $articleDataFactory,
         GridFactory $gridFactory,
-        SelectedDomain $selectedDomain,
+        AdminDomainTabsFacade $adminDomainTabsFacade,
         Breadcrumb $breadcrumb,
         ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
         TermsAndConditionsFacade $termsAndConditionsFacade,
@@ -75,7 +75,7 @@ class ArticleController extends AdminBaseController
         $this->articleFacade = $articleFacade;
         $this->articleDataFactory = $articleDataFactory;
         $this->gridFactory = $gridFactory;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->breadcrumb = $breadcrumb;
         $this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
         $this->termsAndConditionsFacade = $termsAndConditionsFacade;
@@ -94,7 +94,7 @@ class ArticleController extends AdminBaseController
 
         $form = $this->createForm(ArticleFormType::class, $articleData, [
             'article' => $article,
-            'domain_id' => $this->selectedDomain->getId(),
+            'domain_id' => $this->adminDomainTabsFacade->getId(),
         ]);
         $form->handleRequest($request);
 
@@ -132,7 +132,7 @@ class ArticleController extends AdminBaseController
         $gridTop = $this->getGrid(Article::PLACEMENT_TOP_MENU);
         $gridFooter = $this->getGrid(Article::PLACEMENT_FOOTER);
         $gridNone = $this->getGrid(Article::PLACEMENT_NONE);
-        $articlesCountOnSelectedDomain = $this->articleFacade->getAllArticlesCountByDomainId($this->selectedDomain->getId());
+        $articlesCountOnSelectedDomain = $this->articleFacade->getAllArticlesCountByDomainId($this->adminDomainTabsFacade->getId());
 
         return $this->render('@ShopsysShop/Admin/Content/Article/list.html.twig', [
             'gridViewTop' => $gridTop->createView(),
@@ -152,7 +152,7 @@ class ArticleController extends AdminBaseController
 
         $form = $this->createForm(ArticleFormType::class, $articleData, [
             'article' => null,
-            'domain_id' => $this->selectedDomain->getId(),
+            'domain_id' => $this->adminDomainTabsFacade->getId(),
         ]);
         $form->handleRequest($request);
 
@@ -251,7 +251,7 @@ class ArticleController extends AdminBaseController
     private function getGrid($articlePlacement)
     {
         $queryBuilder = $this->articleFacade->getOrderedArticlesByDomainIdAndPlacementQueryBuilder(
-            $this->selectedDomain->getId(),
+            $this->adminDomainTabsFacade->getId(),
             $articlePlacement
         );
 

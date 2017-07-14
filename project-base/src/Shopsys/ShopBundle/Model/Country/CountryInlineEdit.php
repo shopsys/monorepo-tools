@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Country;
 
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\ShopBundle\Form\Admin\Country\CountryFormType;
 use Shopsys\ShopBundle\Model\Country\CountryData;
@@ -18,9 +18,9 @@ class CountryInlineEdit extends AbstractGridInlineEdit
     private $countryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Symfony\Component\Form\FormFactory
@@ -30,12 +30,12 @@ class CountryInlineEdit extends AbstractGridInlineEdit
     public function __construct(
         CountryGridFactory $countryGridFactory,
         CountryFacade $countryFacade,
-        SelectedDomain $selectedDomain,
+        AdminDomainTabsFacade $adminDomainTabsFacade,
         FormFactory $formFactory
     ) {
         parent::__construct($countryGridFactory);
         $this->countryFacade = $countryFacade;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->formFactory = $formFactory;
     }
 
@@ -45,7 +45,7 @@ class CountryInlineEdit extends AbstractGridInlineEdit
      */
     protected function createEntityAndGetId($countryData)
     {
-        $country = $this->countryFacade->create($countryData, $this->selectedDomain->getId());
+        $country = $this->countryFacade->create($countryData, $this->adminDomainTabsFacade->getId());
 
         return $country->getId();
     }

@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Form\Admin\Heureka\HeurekaShopCertificationFormType;
 use Shopsys\ShopBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\ShopBundle\Model\Heureka\HeurekaSetting;
@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 class HeurekaController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaSetting
@@ -28,9 +28,9 @@ class HeurekaController extends AdminBaseController
      */
     private $heurekaFacade;
 
-    public function __construct(SelectedDomain $selectedDomain, HeurekaSetting $heurekaSetting, HeurekaFacade $heurekaFacade)
+    public function __construct(AdminDomainTabsFacade $adminDomainTabsFacade, HeurekaSetting $heurekaSetting, HeurekaFacade $heurekaFacade)
     {
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->heurekaSetting = $heurekaSetting;
         $this->heurekaFacade = $heurekaFacade;
     }
@@ -41,8 +41,8 @@ class HeurekaController extends AdminBaseController
      */
     public function settingAction(Request $request)
     {
-        $domainId = $this->selectedDomain->getId();
-        $domainConfig = $this->selectedDomain->getCurrentSelectedDomain();
+        $domainId = $this->adminDomainTabsFacade->getId();
+        $domainConfig = $this->adminDomainTabsFacade->getCurrentSelectedDomain();
         $locale = $domainConfig->getLocale();
         $formView = null;
 
@@ -78,7 +78,7 @@ class HeurekaController extends AdminBaseController
 
     public function embedWidgetAction()
     {
-        $domainId = $this->selectedDomain->getId();
+        $domainId = $this->adminDomainTabsFacade->getId();
 
         if (!$this->heurekaFacade->isHeurekaWidgetActivated($domainId)) {
             return new Response('');

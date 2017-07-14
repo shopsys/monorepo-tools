@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Form\Admin\Script\GoogleAnalyticsScriptFormType;
@@ -27,18 +27,18 @@ class ScriptController extends AdminBaseController
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     public function __construct(
         ScriptFacade $scriptFacade,
         GridFactory $gridFactory,
-        SelectedDomain $selectedDomain
+        AdminDomainTabsFacade $adminDomainTabsFacade
     ) {
         $this->scriptFacade = $scriptFacade;
         $this->gridFactory = $gridFactory;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
     }
 
     /**
@@ -165,7 +165,7 @@ class ScriptController extends AdminBaseController
      */
     public function googleAnalyticsAction(Request $request)
     {
-        $domainId = $this->selectedDomain->getId();
+        $domainId = $this->adminDomainTabsFacade->getId();
         $formData = ['trackingId' => $this->scriptFacade->getGoogleAnalyticsTrackingId($domainId)];
 
         $form = $this->createForm(GoogleAnalyticsScriptFormType::class, $formData);

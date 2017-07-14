@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Form\Admin\BestsellingProduct\BestsellingProductFormType;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -25,9 +25,9 @@ class BestsellingProductController extends AdminBaseController
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade
@@ -37,12 +37,12 @@ class BestsellingProductController extends AdminBaseController
     public function __construct(
         ManualBestsellingProductFacade $manualBestsellingProductFacade,
         CategoryFacade $categoryFacade,
-        SelectedDomain $selectedDomain,
+        AdminDomainTabsFacade $adminDomainTabsFacade,
         Breadcrumb $breadcrumb
     ) {
         $this->manualBestsellingProductFacade = $manualBestsellingProductFacade;
         $this->categoryFacade = $categoryFacade;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->breadcrumb = $breadcrumb;
     }
 
@@ -52,7 +52,7 @@ class BestsellingProductController extends AdminBaseController
      */
     public function listAction(Request $request)
     {
-        $domainId = $this->selectedDomain->getId();
+        $domainId = $this->adminDomainTabsFacade->getId();
 
         $categoryDetails = $this->categoryFacade->getVisibleCategoryDetailsForDomain($domainId, $request->getLocale());
 

@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Form\Admin\CustomerCommunication\CustomerCommunicationFormType;
 use Shopsys\ShopBundle\Model\Order\OrderFacade;
@@ -13,9 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 class CustomerCommunicationController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Setting\Setting
@@ -24,10 +24,10 @@ class CustomerCommunicationController extends AdminBaseController
 
     public function __construct(
         Setting $setting,
-        SelectedDomain $selectedDomain
+        AdminDomainTabsFacade $adminDomainTabsFacade
     ) {
         $this->setting = $setting;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
     }
 
     /**
@@ -35,7 +35,7 @@ class CustomerCommunicationController extends AdminBaseController
      */
     public function orderSubmittedAction(Request $request)
     {
-        $domainId = $this->selectedDomain->getId();
+        $domainId = $this->adminDomainTabsFacade->getId();
         $orderSentPageContent = $this->setting->getForDomain(Setting::ORDER_SENT_PAGE_CONTENT, $domainId);
 
         $form = $this->createForm(CustomerCommunicationFormType::class, ['content' => $orderSentPageContent]);

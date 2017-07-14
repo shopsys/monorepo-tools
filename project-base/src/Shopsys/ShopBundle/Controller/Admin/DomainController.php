@@ -5,9 +5,9 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Controller\ErrorService;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Domain\DomainFacade;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
 use Shopsys\ShopBundle\Component\Grid\ArrayDataSource;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Form\Admin\Domain\DomainFormType;
@@ -22,9 +22,9 @@ class DomainController extends AdminBaseController
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
@@ -43,13 +43,13 @@ class DomainController extends AdminBaseController
 
     public function __construct(
         Domain $domain,
-        SelectedDomain $selectedDomain,
+        AdminDomainTabsFacade $adminDomainTabsFacade,
         GridFactory $gridFactory,
         DomainFacade $domainFacade,
         ErrorService $errorService
     ) {
         $this->domain = $domain;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->gridFactory = $gridFactory;
         $this->domainFacade = $domainFacade;
         $this->errorService = $errorService;
@@ -59,7 +59,7 @@ class DomainController extends AdminBaseController
     {
         return $this->render('@ShopsysShop/Admin/Inline/Domain/tabs.html.twig', [
             'domainConfigs' => $this->domain->getAll(),
-            'selectedDomainId' => $this->selectedDomain->getId(),
+            'selectedDomainId' => $this->adminDomainTabsFacade->getId(),
         ]);
     }
 
@@ -71,7 +71,7 @@ class DomainController extends AdminBaseController
     {
         $id = (int)$id;
 
-        $this->selectedDomain->setId($id);
+        $this->adminDomainTabsFacade->setId($id);
 
         $referer = $request->server->get('HTTP_REFERER');
         if ($referer === null) {

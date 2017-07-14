@@ -2,8 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Pricing\Group;
 
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 
@@ -12,12 +12,12 @@ class PricingGroupSettingFacade
     public function __construct(
         PricingGroupRepository $pricingGroupRepository,
         Domain $domain,
-        SelectedDomain $selectedDomain,
+        AdminDomainTabsFacade $adminDomainTabsFacade,
         Setting $setting
     ) {
         $this->pricingGroupRepository = $pricingGroupRepository;
         $this->domain = $domain;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->setting = $setting;
     }
 
@@ -55,7 +55,7 @@ class PricingGroupSettingFacade
      */
     public function getDefaultPricingGroupBySelectedDomain()
     {
-        return $this->getDefaultPricingGroupByDomainId($this->selectedDomain->getId());
+        return $this->getDefaultPricingGroupByDomainId($this->adminDomainTabsFacade->getId());
     }
 
     /**
@@ -63,7 +63,7 @@ class PricingGroupSettingFacade
      */
     public function setDefaultPricingGroupForSelectedDomain(PricingGroup $pricingGroup)
     {
-        $this->setting->setForDomain(Setting::DEFAULT_PRICING_GROUP, $pricingGroup->getId(), $this->selectedDomain->getId());
+        $this->setting->setForDomain(Setting::DEFAULT_PRICING_GROUP, $pricingGroup->getId(), $this->adminDomainTabsFacade->getId());
     }
 
     /**

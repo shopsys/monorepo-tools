@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Form\Admin\Cookies\CookiesSettingFormType;
 use Shopsys\ShopBundle\Model\Cookies\CookiesFacade;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 class CookiesController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Cookies\CookiesFacade
@@ -22,10 +22,10 @@ class CookiesController extends AdminBaseController
     private $cookiesFacade;
 
     public function __construct(
-        SelectedDomain $selectedDomain,
+        AdminDomainTabsFacade $adminDomainTabsFacade,
         CookiesFacade $cookiesFacade
     ) {
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->cookiesFacade = $cookiesFacade;
     }
 
@@ -34,7 +34,7 @@ class CookiesController extends AdminBaseController
      */
     public function settingAction(Request $request)
     {
-        $selectedDomainId = $this->selectedDomain->getId();
+        $selectedDomainId = $this->adminDomainTabsFacade->getId();
         $cookiesArticle = $this->cookiesFacade->findCookiesArticleByDomainId($selectedDomainId);
 
         $form = $this->createForm(CookiesSettingFormType::class, ['cookiesArticle' => $cookiesArticle], [

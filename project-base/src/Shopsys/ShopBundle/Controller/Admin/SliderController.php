@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -24,9 +24,9 @@ class SliderController extends AdminBaseController
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
@@ -41,12 +41,12 @@ class SliderController extends AdminBaseController
     public function __construct(
         SliderItemFacade $sliderItemFacade,
         GridFactory $gridFactory,
-        SelectedDomain $selectedDomain,
+        AdminDomainTabsFacade $adminDomainTabsFacade,
         Breadcrumb $breadcrumb
     ) {
         $this->sliderItemFacade = $sliderItemFacade;
         $this->gridFactory = $gridFactory;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->breadcrumb = $breadcrumb;
     }
 
@@ -61,7 +61,7 @@ class SliderController extends AdminBaseController
             ->select('s')
             ->from(SliderItem::class, 's')
             ->where('s.domainId = :selectedDomainId')
-            ->setParameter('selectedDomainId', $this->selectedDomain->getId());
+            ->setParameter('selectedDomainId', $this->adminDomainTabsFacade->getId());
         $dataSource = new QueryBuilderDataSource($queryBuilder, 's.id');
 
         $grid = $this->gridFactory->create('sliderItemList', $dataSource);
@@ -87,7 +87,7 @@ class SliderController extends AdminBaseController
     public function newAction(Request $request)
     {
         $sliderItemData = new SliderItemData();
-        $sliderItemData->domainId = $this->selectedDomain->getId();
+        $sliderItemData->domainId = $this->adminDomainTabsFacade->getId();
 
         $form = $this->createForm(SliderItemFormType::class, $sliderItemData, [
             'scenario' => SliderItemFormType::SCENARIO_CREATE,
@@ -97,7 +97,7 @@ class SliderController extends AdminBaseController
         if ($form->isValid()) {
             $sliderItem = $this->sliderItemFacade->create(
                 $form->getData(),
-                $this->selectedDomain->getId()
+                $this->adminDomainTabsFacade->getId()
             );
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -116,7 +116,7 @@ class SliderController extends AdminBaseController
 
         return $this->render('@ShopsysShop/Admin/Content/Slider/new.html.twig', [
             'form' => $form->createView(),
-            'selectedDomainId' => $this->selectedDomain->getId(),
+            'selectedDomainId' => $this->adminDomainTabsFacade->getId(),
         ]);
     }
 

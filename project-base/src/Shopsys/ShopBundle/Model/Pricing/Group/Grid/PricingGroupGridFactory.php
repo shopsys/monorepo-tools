@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Model\Pricing\Group\Grid;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
@@ -22,18 +22,18 @@ class PricingGroupGridFactory implements GridFactoryInterface
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     public function __construct(
         EntityManager $em,
         GridFactory $gridFactory,
-        SelectedDomain $selectedDomain
+        AdminDomainTabsFacade $adminDomainTabsFacade
     ) {
         $this->em = $em;
         $this->gridFactory = $gridFactory;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
     }
 
     /**
@@ -46,7 +46,7 @@ class PricingGroupGridFactory implements GridFactoryInterface
             ->select('pg')
             ->from(PricingGroup::class, 'pg')
             ->where('pg.domainId = :selectedDomainId')
-            ->setParameter('selectedDomainId', $this->selectedDomain->getId());
+            ->setParameter('selectedDomainId', $this->adminDomainTabsFacade->getId());
         $dataSource = new QueryBuilderDataSource($queryBuilder, 'pg.id');
 
         $grid = $this->gridFactory->create('pricingGroupList', $dataSource);

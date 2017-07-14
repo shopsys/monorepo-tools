@@ -2,8 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Article;
 
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
 class ArticleDataFactory
@@ -19,18 +19,18 @@ class ArticleDataFactory
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     public function __construct(
         FriendlyUrlFacade $friendlyUrlFacade,
         Domain $domain,
-        SelectedDomain $selectedDomain
+        AdminDomainTabsFacade $adminDomainTabsFacade
     ) {
         $this->friendlyUrlFacade = $friendlyUrlFacade;
         $this->domain = $domain;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
     }
 
     /**
@@ -60,7 +60,7 @@ class ArticleDataFactory
     public function createDefault()
     {
         $articleData = new ArticleData();
-        $articleData->domainId = $this->selectedDomain->getId();
+        $articleData->domainId = $this->adminDomainTabsFacade->getId();
 
         return $articleData;
     }

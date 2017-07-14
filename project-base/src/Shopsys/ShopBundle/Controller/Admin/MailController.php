@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType;
 use Shopsys\ShopBundle\Form\Admin\Mail\MailSettingFormType;
 use Shopsys\ShopBundle\Model\Customer\Mail\RegistrationMailService;
@@ -30,9 +30,9 @@ class MailController extends AdminBaseController
     private $resetPasswordMail;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
@@ -58,7 +58,7 @@ class MailController extends AdminBaseController
         ResetPasswordMail $resetPasswordMail,
         OrderMailService $orderMailService,
         RegistrationMailService $registrationMailService,
-        SelectedDomain $selectedDomain,
+        AdminDomainTabsFacade $adminDomainTabsFacade,
         MailTemplateFacade $mailTemplateFacade,
         MailSettingFacade $mailSettingFacade,
         OrderStatusFacade $orderStatusFacade
@@ -66,7 +66,7 @@ class MailController extends AdminBaseController
         $this->resetPasswordMail = $resetPasswordMail;
         $this->orderMailService = $orderMailService;
         $this->registrationMailService = $registrationMailService;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->mailTemplateFacade = $mailTemplateFacade;
         $this->mailSettingFacade = $mailSettingFacade;
         $this->orderStatusFacade = $orderStatusFacade;
@@ -129,7 +129,7 @@ class MailController extends AdminBaseController
     public function templateAction(Request $request)
     {
         $allMailTemplatesData = $this->mailTemplateFacade->getAllMailTemplatesDataByDomainId(
-            $this->selectedDomain->getId()
+            $this->adminDomainTabsFacade->getId()
         );
 
         $form = $this->createForm(AllMailTemplatesFormType::class, $allMailTemplatesData);
@@ -161,7 +161,7 @@ class MailController extends AdminBaseController
      */
     public function settingAction(Request $request)
     {
-        $selectedDomainId = $this->selectedDomain->getId();
+        $selectedDomainId = $this->adminDomainTabsFacade->getId();
 
         $mailSettingData = [
             'email' => $this->mailSettingFacade->getMainAdminMail($selectedDomainId),
@@ -201,7 +201,7 @@ class MailController extends AdminBaseController
             $this->resetPasswordMail->getRequiredSubjectVariables()
         ));
 
-        $selectedDomainId = $this->selectedDomain->getId();
+        $selectedDomainId = $this->adminDomainTabsFacade->getId();
         $orderStatusMailTemplatesByOrderStatusId = $this->mailTemplateFacade->getOrderStatusMailTemplatesIndexedByOrderStatusId(
             $selectedDomainId
         );

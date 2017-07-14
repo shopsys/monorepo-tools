@@ -4,8 +4,8 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
@@ -65,9 +65,9 @@ class CustomerController extends AdminBaseController
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\OrderFacade
@@ -91,7 +91,7 @@ class CustomerController extends AdminBaseController
         Breadcrumb $breadcrumb,
         AdministratorGridFacade $administratorGridFacade,
         GridFactory $gridFactory,
-        SelectedDomain $selectedDomain,
+        AdminDomainTabsFacade $adminDomainTabsFacade,
         OrderFacade $orderFacade,
         LoginAsUserFacade $loginAsUserFacade,
         DomainRouterFactory $domainRouterFactory
@@ -102,7 +102,7 @@ class CustomerController extends AdminBaseController
         $this->breadcrumb = $breadcrumb;
         $this->administratorGridFacade = $administratorGridFacade;
         $this->gridFactory = $gridFactory;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->orderFacade = $orderFacade;
         $this->loginAsUserFacade = $loginAsUserFacade;
         $this->domainRouterFactory = $domainRouterFactory;
@@ -121,7 +121,7 @@ class CustomerController extends AdminBaseController
 
         $form = $this->createForm(CustomerFormType::class, $customerData, [
             'scenario' => CustomerFormType::SCENARIO_EDIT,
-            'domain_id' => $this->selectedDomain->getId(),
+            'domain_id' => $this->adminDomainTabsFacade->getId(),
         ]);
         $form->handleRequest($request);
 
@@ -173,7 +173,7 @@ class CustomerController extends AdminBaseController
         $quickSearchForm->handleRequest($request);
 
         $queryBuilder = $this->customerListAdminFacade->getCustomerListQueryBuilderByQuickSearchData(
-            $this->selectedDomain->getId(),
+            $this->adminDomainTabsFacade->getId(),
             $quickSearchForm->getData()
         );
 
@@ -223,7 +223,7 @@ class CustomerController extends AdminBaseController
 
         $form = $this->createForm(CustomerFormType::class, $customerData, [
             'scenario' => CustomerFormType::SCENARIO_CREATE,
-            'domain_id' => $this->selectedDomain->getId(),
+            'domain_id' => $this->adminDomainTabsFacade->getId(),
         ]);
         $form->handleRequest($request);
 

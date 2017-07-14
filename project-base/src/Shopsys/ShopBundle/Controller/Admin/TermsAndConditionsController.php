@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Form\Admin\TermsAndConditions\TermsAndConditionsSettingFormType;
 use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 class TermsAndConditionsController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
@@ -22,10 +22,10 @@ class TermsAndConditionsController extends AdminBaseController
     private $termsAndConditionsFacade;
 
     public function __construct(
-        SelectedDomain $selectedDomain,
+        AdminDomainTabsFacade $adminDomainTabsFacade,
         TermsAndConditionsFacade $termsAndConditionsFacade
     ) {
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->termsAndConditionsFacade = $termsAndConditionsFacade;
     }
 
@@ -34,7 +34,7 @@ class TermsAndConditionsController extends AdminBaseController
      */
     public function settingAction(Request $request)
     {
-        $domainId = $this->selectedDomain->getId();
+        $domainId = $this->adminDomainTabsFacade->getId();
         $termsAndConditionsArticle = $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId($domainId);
 
         $termsAndConditionsSettingData = [
