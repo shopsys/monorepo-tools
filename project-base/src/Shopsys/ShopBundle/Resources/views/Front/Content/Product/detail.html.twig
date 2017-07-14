@@ -221,12 +221,6 @@
                         </a>
                     {% endif %}
 
-                    {% if productDetail.parameters %}
-                        <a href="#" class="in-tab__head__item js-tabs-button" data-tab-id="parameters">
-                            {{ parametersHeadline }}
-                        </a>
-                    {% endif %}
-
                     {% if accesoriesDetails|length > 0 %}
                         <a href="#" class="in-tab__head__item js-tabs-button" data-tab-id="accesories">
                             {{ accessoriesHeadline }}
@@ -234,38 +228,36 @@
                     {% endif %}
                 </div>
                 <div class="in-tab__content">
-                    {% if productDomain.description %}
+                    {% if productDomain.description or productDetail.parameters %}
                         <a href="#" class="in-tab__content__title js-tabs-button active" data-tab-id="description">
                             {{ descriptionHeadline }}
                             <i class="svg svg-arrow"></i>
                         </a>
                         <div class="in-tab__content__item js-tabs-content active" data-tab-id="description">
                             <div class="in-user-text" itemprop="description">
-                                {{ productDomain.description|raw }}
+                                {% if productDomain.description %}
+                                    <p>
+                                        {{ productDomain.description|raw }}
+                                    </p>
+                                {% endif %}
+                                {% if productDetail.parameters %}
+                                    <div class="h3">{{ parametersHeadline }}</div>
+                                    <table class="table-params{% if productDomain.description %} margin-top-20{% endif %}">
+                                        <tbody>
+                                            {% for productParameterValue in productDetail.parameters %}
+                                                <tr>
+                                                    <th>
+                                                        {{ productParameterValue.parameter.name }}
+                                                    </th>
+                                                    <td>
+                                                        {{ productParameterValue.value.text }}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% endif %}
                             </div>
-                        </div>
-                    {% endif %}
-
-                    {% if productDetail.parameters %}
-                        <a href="#" class="in-tab__content__title js-tabs-button" data-tab-id="parameters">
-                            {{ parametersHeadline }}
-                            <i class="svg svg-arrow"></i>
-                        </a>
-                        <div class="in-tab__content__item js-tabs-content" data-tab-id="parameters">
-                            <table class="table-params">
-                                <tbody>
-                                    {% for productParameterValue in productDetail.parameters %}
-                                        <tr>
-                                            <th>
-                                                {{ productParameterValue.parameter.name }}
-                                            </th>
-                                            <td>
-                                                {{ productParameterValue.value.text }}
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
                         </div>
                     {% endif %}
 
