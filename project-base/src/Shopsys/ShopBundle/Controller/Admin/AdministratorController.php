@@ -158,10 +158,6 @@ class AdministratorController extends AdminBaseController
     {
         $form = $this->createForm(AdministratorFormType::class, new AdministratorData(), [
             'scenario' => AdministratorFormType::SCENARIO_CREATE,
-            'validation_groups' => [
-                ValidationGroup::VALIDATION_GROUP_DEFAULT,
-                AdministratorFormType::SCENARIO_CREATE,
-            ],
         ]);
         $form->handleRequest($request);
 
