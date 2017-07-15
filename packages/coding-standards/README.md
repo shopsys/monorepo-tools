@@ -3,10 +3,10 @@
 ## About
 This project provides common coding standards for new ShopSys projects.
 Project includes following tools:
-* [PHP-CS-Fixer] (https://github.com/FriendsOfPHP/PHP-CS-Fixer)
-* [PHP_CodeSniffer] (https://github.com/squizlabs/PHP_CodeSniffer)
-* [PHPMD] (https://github.com/phpmd/phpmd)
-* [PHP-Parallel-Lint] (https://github.com/JakubOnderka/PHP-Parallel-Lint)
+* [PHP-CS-Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
+* [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
+* [PHPMD](https://github.com/phpmd/phpmd)
+* [PHP-Parallel-Lint](https://github.com/JakubOnderka/PHP-Parallel-Lint)
 
 ## Usage examples
 For further information see official documentation of particular project.
