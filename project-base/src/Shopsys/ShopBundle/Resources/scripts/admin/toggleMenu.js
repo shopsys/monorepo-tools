@@ -26,6 +26,8 @@
         settingMenuToggler.init();
         var adminMenuToggler = new Shopsys.toggleMenu.Toggler($('#js-account-menu'), $('#js-account-menu-links'));
         adminMenuToggler.init();
+        var domainMenuToggler = new Shopsys.toggleMenu.Toggler($('#js-domains-menu'), $('#js-domains-menu-links'));
+        domainMenuToggler.init();
     });
 
 })(jQuery);

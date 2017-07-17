@@ -75,6 +75,14 @@ class DomainFacade
     }
 
     /**
+     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
+     */
+    public function getAllDomainConfigs()
+    {
+        return $this->domain->getAll();
+    }
+
+    /**
      * @param int $domainId
      * @param string $iconName
      */
