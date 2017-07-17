@@ -27,6 +27,11 @@ class Menu
     private $accountItem;
 
     /**
+     * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
+     */
+    private $domainsItem;
+
+    /**
      * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $items
      */
     public function __construct(array $items)
@@ -42,6 +47,8 @@ class Menu
                 $this->settingsItem = $item;
             } elseif ($item->getType() === MenuItem::TYPE_ACCOUNT) {
                 $this->accountItem = $item;
+            } elseif ($item->getType() === MenuItem::TYPE_DOMAINS) {
+                $this->domainsItem = $item;
             }
         }
 
@@ -90,6 +97,14 @@ class Menu
     public function getAccountItem()
     {
         return $this->accountItem;
+    }
+
+    /**
+     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
+     */
+    public function getDomainsItem()
+    {
+        return $this->domainsItem;
     }
 
     /**

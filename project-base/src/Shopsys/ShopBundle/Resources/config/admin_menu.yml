@@ -282,3 +282,7 @@
   items:
   - label: 'My account'
     route: admin_administrator_myaccount
+
+- label: 'Domains'
+  type: domains
+  icon: forward-page
