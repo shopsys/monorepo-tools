@@ -224,10 +224,6 @@ class CustomerController extends AdminBaseController
         $form = $this->createForm(CustomerFormType::class, $customerData, [
             'scenario' => CustomerFormType::SCENARIO_CREATE,
             'domain_id' => $this->selectedDomain->getId(),
-            'validation_groups' => [
-                ValidationGroup::VALIDATION_GROUP_DEFAULT,
-                CustomerFormType::SCENARIO_CREATE,
-            ],
         ]);
         $form->handleRequest($request);
 

@@ -73,16 +73,7 @@ class UserFormType extends AbstractType
                     'attr' => ['autocomplete' => 'off'],
                 ],
                 'first_options' => [
-                    'constraints' => [
-                        new Constraints\NotBlank([
-                            'message' => 'Please enter password',
-                            'groups' => [CustomerFormType::SCENARIO_CREATE],
-                        ]),
-                        new Constraints\Length([
-                            'min' => 6,
-                            'minMessage' => 'Password cannot be longer then {{ limit }} characters',
-                        ]),
-                    ],
+                    'constraints' => $this->getFirstPasswordConstraints($options['scenario']),
                 ],
                 'invalid_message' => 'Passwords do not match',
             ]);
@@ -108,6 +99,25 @@ class UserFormType extends AbstractType
                 'choice_value' => 'id',
                 'group_by' => $groupPricingGroupsBy,
             ]);
+    }
+
+    /**
+     * @param string $scenario
+     * @return \Symfony\Component\Validator\Constraint[]
+     */
+    private function getFirstPasswordConstraints($scenario)
+    {
+        $constraints = [
+            new Constraints\Length(['min' => 6, 'minMessage' => 'Password cannot be longer then {{ limit }} characters']),
+        ];
+
+        if ($scenario === CustomerFormType::SCENARIO_CREATE) {
+            $constraints[] = new Constraints\NotBlank([
+                'message' => 'Please enter password',
+            ]);
+        }
+
+        return $constraints;
     }
 
     /**

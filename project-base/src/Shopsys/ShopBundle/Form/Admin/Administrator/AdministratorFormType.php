@@ -50,17 +50,30 @@ class AdministratorFormType extends AbstractType
                     'attr' => ['autocomplete' => 'off'],
                 ],
                 'first_options' => [
-                    'constraints' => [
-                        new Constraints\NotBlank([
-                            'message' => 'Please enter password',
-                            'groups' => [self::SCENARIO_CREATE],
-                        ]),
-                        new Constraints\Length(['min' => 6, 'minMessage' => 'Password cannot be longer then {{ limit }} characters']),
-                    ],
+                    'constraints' => $this->getFirstPasswordConstraints($options['scenario']),
                 ],
                 'invalid_message' => 'Passwords do not match',
             ])
             ->add('save', SubmitType::class);
+    }
+
+    /**
+     * @param string $scenario
+     * @return \Symfony\Component\Validator\Constraint[]
+     */
+    private function getFirstPasswordConstraints($scenario)
+    {
+        $constraints = [
+            new Constraints\Length(['min' => 6, 'minMessage' => 'Password cannot be longer then {{ limit }} characters']),
+        ];
+
+        if ($scenario === self::SCENARIO_CREATE) {
+            $constraints[] = new Constraints\NotBlank([
+                'message' => 'Please enter password',
+            ]);
+        }
+
+        return $constraints;
     }
 
     /**
