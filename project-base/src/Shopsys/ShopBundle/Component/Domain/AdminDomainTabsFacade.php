@@ -31,7 +31,7 @@ class AdminDomainTabsFacade
 
     public function getSelectedDomainId()
     {
-        return $this->getCurrentSelectedDomain()->getId();
+        return $this->getSelectedDomainConfig()->getId();
     }
 
     /**
@@ -44,9 +44,9 @@ class AdminDomainTabsFacade
     }
 
     /**
-     * @return Config\DomainConfig
+     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
      */
-    public function getCurrentSelectedDomain()
+    public function getSelectedDomainConfig()
     {
         try {
             $domainId = $this->session->get(self::SESSION_SELECTED_DOMAIN);

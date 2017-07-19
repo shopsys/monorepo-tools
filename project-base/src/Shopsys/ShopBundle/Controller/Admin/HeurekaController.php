@@ -42,7 +42,7 @@ class HeurekaController extends AdminBaseController
     public function settingAction(Request $request)
     {
         $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
-        $domainConfig = $this->adminDomainTabsFacade->getCurrentSelectedDomain();
+        $domainConfig = $this->adminDomainTabsFacade->getSelectedDomainConfig();
         $locale = $domainConfig->getLocale();
         $formView = null;
 
