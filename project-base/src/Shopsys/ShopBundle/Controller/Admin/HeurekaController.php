@@ -41,7 +41,7 @@ class HeurekaController extends AdminBaseController
      */
     public function settingAction(Request $request)
     {
-        $domainId = $this->adminDomainTabsFacade->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $domainConfig = $this->adminDomainTabsFacade->getCurrentSelectedDomain();
         $locale = $domainConfig->getLocale();
         $formView = null;
@@ -78,7 +78,7 @@ class HeurekaController extends AdminBaseController
 
     public function embedWidgetAction()
     {
-        $domainId = $this->adminDomainTabsFacade->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
 
         if (!$this->heurekaFacade->isHeurekaWidgetActivated($domainId)) {
             return new Response('');

@@ -129,7 +129,7 @@ class MailController extends AdminBaseController
     public function templateAction(Request $request)
     {
         $allMailTemplatesData = $this->mailTemplateFacade->getAllMailTemplatesDataByDomainId(
-            $this->adminDomainTabsFacade->getId()
+            $this->adminDomainTabsFacade->getSelectedDomainId()
         );
 
         $form = $this->createForm(AllMailTemplatesFormType::class, $allMailTemplatesData);
@@ -161,7 +161,7 @@ class MailController extends AdminBaseController
      */
     public function settingAction(Request $request)
     {
-        $selectedDomainId = $this->adminDomainTabsFacade->getId();
+        $selectedDomainId = $this->adminDomainTabsFacade->getSelectedDomainId();
 
         $mailSettingData = [
             'email' => $this->mailSettingFacade->getMainAdminMail($selectedDomainId),
@@ -201,7 +201,7 @@ class MailController extends AdminBaseController
             $this->resetPasswordMail->getRequiredSubjectVariables()
         ));
 
-        $selectedDomainId = $this->adminDomainTabsFacade->getId();
+        $selectedDomainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $orderStatusMailTemplatesByOrderStatusId = $this->mailTemplateFacade->getOrderStatusMailTemplatesIndexedByOrderStatusId(
             $selectedDomainId
         );

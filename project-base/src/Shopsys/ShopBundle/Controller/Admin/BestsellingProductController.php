@@ -52,7 +52,7 @@ class BestsellingProductController extends AdminBaseController
      */
     public function listAction(Request $request)
     {
-        $domainId = $this->adminDomainTabsFacade->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
 
         $categoryDetails = $this->categoryFacade->getVisibleCategoryDetailsForDomain($domainId, $request->getLocale());
 

@@ -35,7 +35,7 @@ class CustomerCommunicationController extends AdminBaseController
      */
     public function orderSubmittedAction(Request $request)
     {
-        $domainId = $this->adminDomainTabsFacade->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $orderSentPageContent = $this->setting->getForDomain(Setting::ORDER_SENT_PAGE_CONTENT, $domainId);
 
         $form = $this->createForm(CustomerCommunicationFormType::class, ['content' => $orderSentPageContent]);

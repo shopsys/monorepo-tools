@@ -165,7 +165,7 @@ class ScriptController extends AdminBaseController
      */
     public function googleAnalyticsAction(Request $request)
     {
-        $domainId = $this->adminDomainTabsFacade->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $formData = ['trackingId' => $this->scriptFacade->getGoogleAnalyticsTrackingId($domainId)];
 
         $form = $this->createForm(GoogleAnalyticsScriptFormType::class, $formData);

@@ -59,7 +59,7 @@ class DomainController extends AdminBaseController
     {
         return $this->render('@ShopsysShop/Admin/Inline/Domain/tabs.html.twig', [
             'domainConfigs' => $this->domain->getAll(),
-            'selectedDomainId' => $this->adminDomainTabsFacade->getId(),
+            'selectedDomainId' => $this->adminDomainTabsFacade->getSelectedDomainId(),
         ]);
     }
 
@@ -71,7 +71,7 @@ class DomainController extends AdminBaseController
     {
         $id = (int)$id;
 
-        $this->adminDomainTabsFacade->setId($id);
+        $this->adminDomainTabsFacade->setSelectedDomainId($id);
 
         $referer = $request->server->get('HTTP_REFERER');
         if ($referer === null) {

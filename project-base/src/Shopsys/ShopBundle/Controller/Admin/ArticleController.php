@@ -94,7 +94,7 @@ class ArticleController extends AdminBaseController
 
         $form = $this->createForm(ArticleFormType::class, $articleData, [
             'article' => $article,
-            'domain_id' => $this->adminDomainTabsFacade->getId(),
+            'domain_id' => $this->adminDomainTabsFacade->getSelectedDomainId(),
         ]);
         $form->handleRequest($request);
 
@@ -132,7 +132,7 @@ class ArticleController extends AdminBaseController
         $gridTop = $this->getGrid(Article::PLACEMENT_TOP_MENU);
         $gridFooter = $this->getGrid(Article::PLACEMENT_FOOTER);
         $gridNone = $this->getGrid(Article::PLACEMENT_NONE);
-        $articlesCountOnSelectedDomain = $this->articleFacade->getAllArticlesCountByDomainId($this->adminDomainTabsFacade->getId());
+        $articlesCountOnSelectedDomain = $this->articleFacade->getAllArticlesCountByDomainId($this->adminDomainTabsFacade->getSelectedDomainId());
 
         return $this->render('@ShopsysShop/Admin/Content/Article/list.html.twig', [
             'gridViewTop' => $gridTop->createView(),
@@ -152,7 +152,7 @@ class ArticleController extends AdminBaseController
 
         $form = $this->createForm(ArticleFormType::class, $articleData, [
             'article' => null,
-            'domain_id' => $this->adminDomainTabsFacade->getId(),
+            'domain_id' => $this->adminDomainTabsFacade->getSelectedDomainId(),
         ]);
         $form->handleRequest($request);
 
@@ -251,7 +251,7 @@ class ArticleController extends AdminBaseController
     private function getGrid($articlePlacement)
     {
         $queryBuilder = $this->articleFacade->getOrderedArticlesByDomainIdAndPlacementQueryBuilder(
-            $this->adminDomainTabsFacade->getId(),
+            $this->adminDomainTabsFacade->getSelectedDomainId(),
             $articlePlacement
         );
 

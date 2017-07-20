@@ -45,7 +45,7 @@ class CountryInlineEdit extends AbstractGridInlineEdit
      */
     protected function createEntityAndGetId($countryData)
     {
-        $country = $this->countryFacade->create($countryData, $this->adminDomainTabsFacade->getId());
+        $country = $this->countryFacade->create($countryData, $this->adminDomainTabsFacade->getSelectedDomainId());
 
         return $country->getId();
     }

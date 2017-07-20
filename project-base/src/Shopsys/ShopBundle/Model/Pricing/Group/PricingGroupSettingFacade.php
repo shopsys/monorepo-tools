@@ -55,7 +55,7 @@ class PricingGroupSettingFacade
      */
     public function getDefaultPricingGroupBySelectedDomain()
     {
-        return $this->getDefaultPricingGroupByDomainId($this->adminDomainTabsFacade->getId());
+        return $this->getDefaultPricingGroupByDomainId($this->adminDomainTabsFacade->getSelectedDomainId());
     }
 
     /**
@@ -63,7 +63,7 @@ class PricingGroupSettingFacade
      */
     public function setDefaultPricingGroupForSelectedDomain(PricingGroup $pricingGroup)
     {
-        $this->setting->setForDomain(Setting::DEFAULT_PRICING_GROUP, $pricingGroup->getId(), $this->adminDomainTabsFacade->getId());
+        $this->setting->setForDomain(Setting::DEFAULT_PRICING_GROUP, $pricingGroup->getId(), $this->adminDomainTabsFacade->getSelectedDomainId());
     }
 
     /**

@@ -34,7 +34,7 @@ class TopProductController extends AdminBaseController
      */
     public function listAction(Request $request)
     {
-        $domainId = $this->adminDomainTabsFacade->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $formData = [
             'products' => $this->getProductsForDomain($domainId),
         ];

@@ -34,7 +34,7 @@ class TermsAndConditionsController extends AdminBaseController
      */
     public function settingAction(Request $request)
     {
-        $domainId = $this->adminDomainTabsFacade->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $termsAndConditionsArticle = $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId($domainId);
 
         $termsAndConditionsSettingData = [

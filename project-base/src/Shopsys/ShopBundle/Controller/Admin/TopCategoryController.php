@@ -34,7 +34,7 @@ class TopCategoryController extends AdminBaseController
      */
     public function listAction(Request $request)
     {
-        $domainId = $this->adminDomainTabsFacade->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $formData = [
             'categories' => $this->topCategoryFacade->getAllCategoriesByDomainId($domainId),
         ];

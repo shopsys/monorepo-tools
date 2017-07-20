@@ -46,7 +46,7 @@ class PricingGroupGridFactory implements GridFactoryInterface
             ->select('pg')
             ->from(PricingGroup::class, 'pg')
             ->where('pg.domainId = :selectedDomainId')
-            ->setParameter('selectedDomainId', $this->adminDomainTabsFacade->getId());
+            ->setParameter('selectedDomainId', $this->adminDomainTabsFacade->getSelectedDomainId());
         $dataSource = new QueryBuilderDataSource($queryBuilder, 'pg.id');
 
         $grid = $this->gridFactory->create('pricingGroupList', $dataSource);

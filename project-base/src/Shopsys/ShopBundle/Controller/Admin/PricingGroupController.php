@@ -155,7 +155,7 @@ class PricingGroupController extends AdminBaseController
      */
     public function settingsAction(Request $request)
     {
-        $domainId = $this->adminDomainTabsFacade->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $pricingGroupSettingsFormData = [
             'defaultPricingGroup' => $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainId),
         ];

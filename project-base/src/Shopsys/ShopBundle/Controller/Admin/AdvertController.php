@@ -122,7 +122,7 @@ class AdvertController extends AdminBaseController
             ->select('a')
             ->from(Advert::class, 'a')
             ->where('a.domainId = :selectedDomainId')
-            ->setParameter('selectedDomainId', $this->adminDomainTabsFacade->getId());
+            ->setParameter('selectedDomainId', $this->adminDomainTabsFacade->getSelectedDomainId());
         $dataSource = new QueryBuilderWithRowManipulatorDataSource(
             $queryBuilder,
             'a.id',
@@ -171,7 +171,7 @@ class AdvertController extends AdminBaseController
     public function newAction(Request $request)
     {
         $advertData = new AdvertData();
-        $advertData->domainId = $this->adminDomainTabsFacade->getId();
+        $advertData->domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
 
         $form = $this->createForm(AdvertFormType::class, $advertData);
         $form->handleRequest($request);

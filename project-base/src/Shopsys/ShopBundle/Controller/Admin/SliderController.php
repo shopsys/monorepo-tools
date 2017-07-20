@@ -61,7 +61,7 @@ class SliderController extends AdminBaseController
             ->select('s')
             ->from(SliderItem::class, 's')
             ->where('s.domainId = :selectedDomainId')
-            ->setParameter('selectedDomainId', $this->adminDomainTabsFacade->getId());
+            ->setParameter('selectedDomainId', $this->adminDomainTabsFacade->getSelectedDomainId());
         $dataSource = new QueryBuilderDataSource($queryBuilder, 's.id');
 
         $grid = $this->gridFactory->create('sliderItemList', $dataSource);
@@ -87,7 +87,7 @@ class SliderController extends AdminBaseController
     public function newAction(Request $request)
     {
         $sliderItemData = new SliderItemData();
-        $sliderItemData->domainId = $this->adminDomainTabsFacade->getId();
+        $sliderItemData->domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
 
         $form = $this->createForm(SliderItemFormType::class, $sliderItemData, [
             'scenario' => SliderItemFormType::SCENARIO_CREATE,
@@ -97,7 +97,7 @@ class SliderController extends AdminBaseController
         if ($form->isValid()) {
             $sliderItem = $this->sliderItemFacade->create(
                 $form->getData(),
-                $this->adminDomainTabsFacade->getId()
+                $this->adminDomainTabsFacade->getSelectedDomainId()
             );
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -116,7 +116,7 @@ class SliderController extends AdminBaseController
 
         return $this->render('@ShopsysShop/Admin/Content/Slider/new.html.twig', [
             'form' => $form->createView(),
-            'selectedDomainId' => $this->adminDomainTabsFacade->getId(),
+            'selectedDomainId' => $this->adminDomainTabsFacade->getSelectedDomainId(),
         ]);
     }
 

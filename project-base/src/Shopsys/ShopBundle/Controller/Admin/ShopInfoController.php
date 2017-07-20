@@ -34,7 +34,7 @@ class ShopInfoController extends AdminBaseController
      */
     public function settingAction(Request $request)
     {
-        $selectedDomainId = $this->adminDomainTabsFacade->getId();
+        $selectedDomainId = $this->adminDomainTabsFacade->getSelectedDomainId();
 
         $shopInfoSettingData = [
             'phoneNumber' => $this->shopInfoSettingFacade->getPhoneNumber($selectedDomainId),

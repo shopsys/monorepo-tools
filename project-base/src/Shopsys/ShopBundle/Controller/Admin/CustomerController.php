@@ -121,7 +121,7 @@ class CustomerController extends AdminBaseController
 
         $form = $this->createForm(CustomerFormType::class, $customerData, [
             'scenario' => CustomerFormType::SCENARIO_EDIT,
-            'domain_id' => $this->adminDomainTabsFacade->getId(),
+            'domain_id' => $this->adminDomainTabsFacade->getSelectedDomainId(),
         ]);
         $form->handleRequest($request);
 
@@ -173,7 +173,7 @@ class CustomerController extends AdminBaseController
         $quickSearchForm->handleRequest($request);
 
         $queryBuilder = $this->customerListAdminFacade->getCustomerListQueryBuilderByQuickSearchData(
-            $this->adminDomainTabsFacade->getId(),
+            $this->adminDomainTabsFacade->getSelectedDomainId(),
             $quickSearchForm->getData()
         );
 
@@ -223,7 +223,7 @@ class CustomerController extends AdminBaseController
 
         $form = $this->createForm(CustomerFormType::class, $customerData, [
             'scenario' => CustomerFormType::SCENARIO_CREATE,
-            'domain_id' => $this->adminDomainTabsFacade->getId(),
+            'domain_id' => $this->adminDomainTabsFacade->getSelectedDomainId(),
         ]);
         $form->handleRequest($request);
 

@@ -60,7 +60,7 @@ class ArticleDataFactory
     public function createDefault()
     {
         $articleData = new ArticleData();
-        $articleData->domainId = $this->adminDomainTabsFacade->getId();
+        $articleData->domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
 
         return $articleData;
     }

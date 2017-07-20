@@ -34,7 +34,7 @@ class CookiesController extends AdminBaseController
      */
     public function settingAction(Request $request)
     {
-        $selectedDomainId = $this->adminDomainTabsFacade->getId();
+        $selectedDomainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $cookiesArticle = $this->cookiesFacade->findCookiesArticleByDomainId($selectedDomainId);
 
         $form = $this->createForm(CookiesSettingFormType::class, ['cookiesArticle' => $cookiesArticle], [

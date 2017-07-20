@@ -35,7 +35,7 @@ class SeoController extends AdminBaseController
      */
     public function indexAction(Request $request)
     {
-        $domainId = $this->adminDomainTabsFacade->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $seoSettingData = [
             'title' => $this->seoSettingFacade->getTitleMainPage($domainId),
             'metaDescription' => $this->seoSettingFacade->getDescriptionMainPage($domainId),

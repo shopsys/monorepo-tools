@@ -45,7 +45,7 @@ class CountryGridFactory implements GridFactoryInterface
             ->select('s')
             ->from(Country::class, 's')
             ->andWhere('s.domainId = :domainId')
-            ->setParameter('domainId', $this->adminDomainTabsFacade->getId());
+            ->setParameter('domainId', $this->adminDomainTabsFacade->getSelectedDomainId());
         $dataSource = new QueryBuilderDataSource($queryBuilder, 's.id');
 
         $grid = $this->gridFactory->create('CountryList', $dataSource);
