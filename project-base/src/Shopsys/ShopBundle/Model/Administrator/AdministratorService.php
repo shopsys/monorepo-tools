@@ -56,27 +56,19 @@ class AdministratorService
     /**
      * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
      * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
-     * @param string[] $superadminUsernames
      * @param \Shopsys\ShopBundle\Model\Administrator\Administrator|null $administratorByUserName
      * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
      */
     public function edit(
         AdministratorData $administratorData,
         Administrator $administrator,
-        array $superadminUsernames,
         Administrator $administratorByUserName = null
     ) {
-        if (in_array($administratorData->username, $superadminUsernames, true)) {
-            throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException($administratorData->username);
-        }
         if ($administratorByUserName !== null
             && $administratorByUserName !== $administrator
             && $administratorByUserName->getUsername() === $administratorData->username
         ) {
             throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administrator->getUsername());
-        }
-        if ($administrator->isSuperadmin()) {
-            throw new \Shopsys\ShopBundle\Model\Administrator\Exception\EditingSuperadminException();
         }
         $administrator->edit($administratorData);
         if ($administratorData->password !== null) {
