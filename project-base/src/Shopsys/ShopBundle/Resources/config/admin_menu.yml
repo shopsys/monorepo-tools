@@ -275,7 +275,7 @@
       - label: 'Heureka - Ověřeno zákazníky'
         route: admin_heureka_setting
 
-- label: 'Domains'
+- label: 'Frontend'
   type: domains
   icon: forward-page
 
