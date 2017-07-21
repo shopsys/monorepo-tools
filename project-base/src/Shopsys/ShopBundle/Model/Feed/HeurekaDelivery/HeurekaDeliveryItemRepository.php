@@ -2,8 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Feed\HeurekaDelivery;
 
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
+use Shopsys\ProductFeed\DomainConfigInterface;
+use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemFactory;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
@@ -38,8 +38,9 @@ class HeurekaDeliveryItemRepository implements FeedItemRepositoryInterface
     /**
      * @inheritdoc
      */
-    public function getItems(DomainConfig $domainConfig, $seekItemId, $maxResults)
+    public function getItems(DomainConfigInterface $domainConfig, $seekItemId, $maxResults)
     {
+        /* @var $domainConfig \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig */
         $defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
         $queryBuilder = $this->productRepository->getAllSellableUsingStockInStockQueryBuilder(
             $domainConfig->getId(),
@@ -55,6 +56,6 @@ class HeurekaDeliveryItemRepository implements FeedItemRepositoryInterface
 
         $products = $queryBuilder->getQuery()->execute();
 
-        return $this->heurekaDeliveryItemFactory->createItems($products, $domainConfig);
+        return $this->heurekaDeliveryItemFactory->createItems($products);
     }
 }

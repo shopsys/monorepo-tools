@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Model\Feed;
 
+use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Feed\FeedConfig;
 use Shopsys\ShopBundle\Model\Feed\FeedConfigRepository;
 
 class FeedConfigFacade
@@ -48,7 +48,7 @@ class FeedConfigFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
+     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     public function getFeedConfigs()
     {
@@ -57,7 +57,7 @@ class FeedConfigFacade
 
     /**
      * @param string $feedName
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig
+     * @return \Shopsys\ProductFeed\FeedConfigInterface
      */
     public function getFeedConfigByName($feedName)
     {
@@ -65,7 +65,7 @@ class FeedConfigFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
+     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     public function getDeliveryFeedConfigs()
     {
@@ -73,7 +73,7 @@ class FeedConfigFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
+     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     public function getAllFeedConfigs()
     {
@@ -81,24 +81,34 @@ class FeedConfigFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */
-    public function getFeedUrl(FeedConfig $feedConfig, DomainConfig $domainConfig)
+    public function getFeedUrl(FeedConfigInterface $feedConfig, DomainConfig $domainConfig)
     {
-        $feedHash = $this->setting->get(Setting::FEED_HASH);
-        return $domainConfig->getUrl() . $this->feedUrlPrefix . $feedConfig->getFeedFilename($domainConfig, $feedHash);
+        return $domainConfig->getUrl() . $this->feedUrlPrefix . $this->getFeedFilename($feedConfig, $domainConfig);
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */
-    public function getFeedFilepath(FeedConfig $feedConfig, DomainConfig $domainConfig)
+    public function getFeedFilepath(FeedConfigInterface $feedConfig, DomainConfig $domainConfig)
+    {
+        return $this->feedDir . $this->getFeedFilename($feedConfig, $domainConfig);
+    }
+
+    /**
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
+     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return string
+     */
+    private function getFeedFilename(FeedConfigInterface $feedConfig, DomainConfig $domainConfig)
     {
         $feedHash = $this->setting->get(Setting::FEED_HASH);
-        return $this->feedDir . $feedConfig->getFeedFilename($domainConfig, $feedHash);
+
+        return $feedHash . '_' . $feedConfig->getFeedName() . '_' . $domainConfig->getId() . '.xml';
     }
 }

@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\Zbozi;
+namespace Shopsys\ShopBundle\Model\Feed\Standard;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Feed\FeedItemFactoryInterface;
+use Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItem;
 use Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ZboziItemFactory implements FeedItemFactoryInterface
+class StandardFeedItemFactory
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
@@ -44,7 +44,7 @@ class ZboziItemFactory implements FeedItemFactoryInterface
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItem[]
+     * @return \Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItem[]
      */
     public function createItems(array $products, DomainConfig $domainConfig)
     {
@@ -63,7 +63,7 @@ class ZboziItemFactory implements FeedItemFactoryInterface
         foreach ($products as $product) {
             $productDomain = $productDomainsByProductId[$product->getId()];
 
-            $items[] = new ZboziItem(
+            $items[] = new StandardFeedItem(
                 $product->getId(),
                 $product->getName($domainConfig->getLocale()),
                 $productDomain->getDescription(),
@@ -71,13 +71,11 @@ class ZboziItemFactory implements FeedItemFactoryInterface
                 $imagesByProductId[$product->getId()],
                 $this->getProductPrice($product, $domainConfig->getId())->getPriceWithVat(),
                 $product->getEan(),
-                $this->getProductDeliveryDate($product),
+                $product->getCalculatedAvailability()->getDispatchTime(),
                 $this->getProductManufacturer($product),
                 $this->getProductCategoryText($product, $domainConfig),
                 $this->getProductParamsIndexedByParamName($product, $paramsByProductIdAndName),
                 $product->getPartno(),
-                $productDomain->getZboziCpc(),
-                $productDomain->getZboziCpcSearch(),
                 $this->findProductMainVariantId($product)
             );
         }
@@ -128,21 +126,6 @@ class ZboziItemFactory implements FeedItemFactoryInterface
         }
 
         return $paramsByName;
-    }
-
-    /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return int
-     */
-    private function getProductDeliveryDate(Product $product)
-    {
-        if ($product->getCalculatedAvailability()->getDispatchTime() === null) {
-            $deliveryDate = -1;
-        } else {
-            $deliveryDate = $product->getCalculatedAvailability()->getDispatchTime();
-        }
-
-        return $deliveryDate;
     }
 
     /**

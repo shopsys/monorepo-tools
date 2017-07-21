@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle;
 
 use Shopsys\ShopBundle\Component\Translation\Translator;
 use Shopsys\ShopBundle\DependencyInjection\Compiler\RegisterCronModulesCompilerPass;
+use Shopsys\ShopBundle\DependencyInjection\Compiler\RegisterProductFeedConfigsCompilerPass;
 use Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -18,6 +19,7 @@ class ShopsysShopBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterCronModulesCompilerPass());
+        $container->addCompilerPass(new RegisterProductFeedConfigsCompilerPass());
     }
 
     public function boot()

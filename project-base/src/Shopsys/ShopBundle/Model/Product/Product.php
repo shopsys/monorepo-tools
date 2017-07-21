@@ -730,7 +730,7 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
+     * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand|null
      */
     public function getBrand()
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\Heureka;
+namespace Shopsys\ShopBundle\Model\Feed\Standard;
 
-use Shopsys\ShopBundle\Model\Feed\FeedItemInterface;
+use Shopsys\ProductFeed\StandardFeedItemInterface;
 
-class HeurekaItem implements FeedItemInterface
+class StandardFeedItem implements StandardFeedItemInterface
 {
     /**
      * @var int
@@ -64,12 +64,17 @@ class HeurekaItem implements FeedItemInterface
     /**
      * @var string|null
      */
-    private $cpc;
+    private $partno;
 
     /**
      * @var int|null
      */
-    private $groupId;
+    private $mainVariantId;
+
+    /**
+     * @var array
+     */
+    private $customValues;
 
     /**
      * @param int $itemId
@@ -83,8 +88,8 @@ class HeurekaItem implements FeedItemInterface
      * @param string|null $manufacturer
      * @param string|null $categoryText
      * @param string[] $parametersByName
-     * @param string|null $cpc
-     * @param int|null $groupId
+     * @param string|null $partno
+     * @param int|null $mainVariantId
      */
     public function __construct(
         $itemId,
@@ -98,8 +103,8 @@ class HeurekaItem implements FeedItemInterface
         $manufacturer,
         $categoryText,
         $parametersByName,
-        $cpc,
-        $groupId
+        $partno,
+        $mainVariantId
     ) {
         $this->itemId = $itemId;
         $this->productName = $productName;
@@ -112,8 +117,9 @@ class HeurekaItem implements FeedItemInterface
         $this->manufacturer = $manufacturer;
         $this->categoryText = $categoryText;
         $this->parametersByName = $parametersByName;
-        $this->cpc = $cpc;
-        $this->groupId = $groupId;
+        $this->partno = $partno;
+        $this->mainVariantId = $mainVariantId;
+        $this->customValues = [];
     }
 
     /**
@@ -207,16 +213,34 @@ class HeurekaItem implements FeedItemInterface
     /**
      * @return string|null
      */
-    public function getCpc()
+    public function getPartno()
     {
-        return $this->cpc;
+        return $this->partno;
     }
 
     /**
      * @return int|null
      */
-    public function getGroupId()
+    public function getMainVariantId()
     {
-        return $this->groupId;
+        return $this->mainVariantId;
+    }
+
+    /**
+     * @param string $name
+     * @return mixed
+     */
+    public function getCustomValue($name)
+    {
+        return $this->customValues[$name];
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public function setCustomValue($name, $value)
+    {
+        $this->customValues[$name] = $value;
     }
 }

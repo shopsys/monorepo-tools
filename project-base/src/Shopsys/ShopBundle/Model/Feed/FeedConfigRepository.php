@@ -2,62 +2,61 @@
 
 namespace Shopsys\ShopBundle\Model\Feed;
 
-use Shopsys\ShopBundle\Model\Feed\FeedConfig;
-use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
+use Shopsys\ProductFeed\FeedConfigInterface;
 
 class FeedConfigRepository
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
+     * @var \Shopsys\ProductFeed\FeedConfigInterface[]
      */
-    private $heurekaItemRepository;
+    private $feedConfigs;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
+     * @var \Shopsys\ProductFeed\FeedConfigInterface[]
      */
-    private $heurekaDeliveryItemRepository;
+    private $deliveryFeedConfigs;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
-     */
-    private $zboziItemRepository;
-
-    public function __construct(
-        FeedItemRepositoryInterface $heurekaItemRepository,
-        FeedItemRepositoryInterface $heurekaDeliveryItemRepository,
-        FeedItemRepositoryInterface $zboziItemRepository
-    ) {
-        $this->heurekaItemRepository = $heurekaItemRepository;
-        $this->heurekaDeliveryItemRepository = $heurekaDeliveryItemRepository;
-        $this->zboziItemRepository = $zboziItemRepository;
+    public function __construct()
+    {
+        $this->feedConfigs = [];
+        $this->deliveryFeedConfigs = [];
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
+     */
+    public function registerFeedConfig(FeedConfigInterface $feedConfig)
+    {
+        $this->feedConfigs[] = $feedConfig;
+    }
+
+    /**
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
+     */
+    public function registerDeliveryFeedConfig(FeedConfigInterface $feedConfig)
+    {
+        $this->deliveryFeedConfigs[] = $feedConfig;
+    }
+
+    /**
+     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     public function getFeedConfigs()
     {
-        $feedConfigs = [];
+        return $this->feedConfigs;
+    }
 
-        $feedConfigs[] = new FeedConfig(
-            'Heureka',
-            'heureka',
-            '@ShopsysShop/Feed/heureka.xml.twig',
-            $this->heurekaItemRepository
-        );
-        $feedConfigs[] = new FeedConfig(
-            'Zboží.cz',
-            'zbozi',
-            '@ShopsysShop/Feed/zbozi.xml.twig',
-            $this->zboziItemRepository
-        );
-
-        return $feedConfigs;
+    /**
+     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
+     */
+    public function getDeliveryFeedConfigs()
+    {
+        return $this->deliveryFeedConfigs;
     }
 
     /**
      * @param string $feedName
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig
+     * @return \Shopsys\ProductFeed\FeedConfigInterface
      */
     public function getFeedConfigByName($feedName)
     {
@@ -72,24 +71,7 @@ class FeedConfigRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
-     */
-    public function getDeliveryFeedConfigs()
-    {
-        $feedConfigs = [];
-
-        $feedConfigs[] = new FeedConfig(
-            t('%feedName% - availability', ['%feedName%' => 'Heureka']),
-            'heureka_delivery',
-            '@ShopsysShop/Feed/heurekaDelivery.xml.twig',
-            $this->heurekaDeliveryItemRepository
-        );
-
-        return $feedConfigs;
-    }
-
-    /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
+     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
     public function getAllFeedConfigs()
     {

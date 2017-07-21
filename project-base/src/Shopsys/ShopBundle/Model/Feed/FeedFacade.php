@@ -2,11 +2,10 @@
 
 namespace Shopsys\ShopBundle\Model\Feed;
 
+use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Feed\FeedConfig;
-use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
 use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
 use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfigFactory;
 use Shopsys\ShopBundle\Model\Feed\FeedXmlWriter;
@@ -113,11 +112,11 @@ class FeedFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      */
     public function generateFeed(
-        FeedConfig $feedConfig,
+        FeedConfigInterface $feedConfig,
         DomainConfig $domainConfig
     ) {
         $seekItemId = null;
@@ -132,20 +131,20 @@ class FeedFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param int|null $seekItemId
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedItemInterface|null
+     * @return \Shopsys\ProductFeed\FeedItemInterface|null
      */
     private function generateFeedBatch(
-        FeedConfig $feedConfig,
+        FeedConfigInterface $feedConfig,
         DomainConfig $domainConfig,
         $seekItemId
     ) {
         $filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
         $temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SUFFIX;
 
-        $items = $feedConfig->getFeedItemRepository()->getItems($domainConfig, $seekItemId, self::BATCH_SIZE);
+        $itemsInBatch = $feedConfig->getFeedItemRepository()->getItems($domainConfig, $seekItemId, self::BATCH_SIZE);
 
         if ($seekItemId === null) {
             $this->feedXmlWriter->writeBegin(
@@ -155,6 +154,7 @@ class FeedFacade
             );
         }
 
+        $items = $feedConfig->processItems($itemsInBatch, $domainConfig);
         $this->feedXmlWriter->writeItems(
             $items,
             $domainConfig,
@@ -164,8 +164,8 @@ class FeedFacade
 
         $this->entityManagerFacade->clear();
 
-        if (count($items) === self::BATCH_SIZE) {
-            return array_pop($items);
+        if (count($itemsInBatch) === self::BATCH_SIZE) {
+            return array_pop($itemsInBatch);
         } else {
             $this->feedXmlWriter->writeEnd(
                 $domainConfig,

@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Model\Product;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Paginator\QueryPaginator;
@@ -531,6 +532,15 @@ class ProductRepository
     }
 
     /**
+     * @param int[] $ids
+     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     */
+    public function getAllByIds($ids)
+    {
+        return $this->getProductRepository()->findBy(['id' => $ids]);
+    }
+
+    /**
      * @param int $id
      * @param int $domainId
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
@@ -605,16 +615,16 @@ class ProductRepository
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[]
      */
-    public function getProductDomainsByProductsAndDomainConfigIndexedByProductId(array $products, DomainConfig $domainConfig)
+    public function getProductDomainsByProductsAndDomainIdIndexedByProductId(array $products, $domainId)
     {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('pd')
             ->from(ProductDomain::class, 'pd')
             ->where('pd.product IN (:products)')->setParameter('products', $products)
-            ->andWhere('pd.domainId = :domainId')->setParameter('domainId', $domainConfig->getId());
+            ->andWhere('pd.domainId = :domainId')->setParameter('domainId', $domainId);
 
         $productDomainByProductId = [];
         foreach ($queryBuilder->getQuery()->execute() as $productDomain) {

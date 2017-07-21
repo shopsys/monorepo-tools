@@ -44,7 +44,6 @@ class ProductPriceCalculationForUser
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice
      */
     public function calculatePriceForCurrentUser(Product $product)

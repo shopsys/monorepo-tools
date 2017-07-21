@@ -1,14 +1,17 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\Heureka;
+namespace Shopsys\ShopBundle\Model\Feed\Standard;
 
+use Doctrine\ORM\Query\Expr\Join;
+use Shopsys\ProductFeed\DomainConfigInterface;
+use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
-use Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItemFactory;
+use Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemFactory;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\ShopBundle\Model\Product\ProductDomain;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class HeurekaItemRepository implements FeedItemRepositoryInterface
+class StandardFeedItemRepository implements FeedItemRepositoryInterface
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
@@ -21,25 +24,26 @@ class HeurekaItemRepository implements FeedItemRepositoryInterface
     private $pricingGroupSettingFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItemFactory
+     * @var \Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemFactory
      */
-    private $heurekaItemFactory;
+    private $feedItemFactory;
 
     public function __construct(
         ProductRepository $productRepository,
         PricingGroupSettingFacade $pricingGroupSettingFacade,
-        HeurekaItemFactory $heurekaItemFactory
+        StandardFeedItemFactory $feedItemFactory
     ) {
         $this->productRepository = $productRepository;
         $this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
-        $this->heurekaItemFactory = $heurekaItemFactory;
+        $this->feedItemFactory = $feedItemFactory;
     }
 
     /**
      * @inheritdoc
      */
-    public function getItems(DomainConfig $domainConfig, $seekItemId, $maxResults)
+    public function getItems(DomainConfigInterface $domainConfig, $seekItemId, $maxResults)
     {
+        /* @var $domainConfig \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig */
         $defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
         $queryBuilder = $this->productRepository->getAllSellableQueryBuilder($domainConfig->getId(), $defaultPricingGroup);
         $this->productRepository->addTranslation($queryBuilder, $domainConfig->getLocale());
@@ -47,6 +51,7 @@ class HeurekaItemRepository implements FeedItemRepositoryInterface
             ->addSelect('v')->join('p.vat', 'v')
             ->addSelect('a')->join('p.calculatedAvailability', 'a')
             ->addSelect('b')->leftJoin('p.brand', 'b')
+            ->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p.id AND pd.domainId = :domainId')
             ->orderBy('p.id', 'asc')
             ->setMaxResults($maxResults);
 
@@ -56,6 +61,6 @@ class HeurekaItemRepository implements FeedItemRepositoryInterface
 
         $products = $queryBuilder->getQuery()->execute();
 
-        return $this->heurekaItemFactory->createItems($products, $domainConfig);
+        return $this->feedItemFactory->createItems($products, $domainConfig);
     }
 }

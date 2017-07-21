@@ -139,9 +139,9 @@ class ProductCollectionFacade
      */
     public function getProductDomainsIndexedByProductId(array $products, DomainConfig $domainConfig)
     {
-        return $this->productRepository->getProductDomainsByProductsAndDomainConfigIndexedByProductId(
+        return $this->productRepository->getProductDomainsByProductsAndDomainIdIndexedByProductId(
             $products,
-            $domainConfig
+            $domainConfig->getId()
         );
     }
 
