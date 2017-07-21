@@ -173,12 +173,18 @@ class RouteConfigCustomization
                     ->setExpectedStatusCode(302);
             })
             ->customizeByRouteName('admin_administrator_edit', function (RouteConfig $config) {
-                $debugNote = 'It is forbidden to edit administrator with ID 1 as it is the superadmin.';
-                $config->changeDefaultRequestDataSet($debugNote)
+                $config->changeDefaultRequestDataSet('Standard admin is not allowed to edit superadmin (with ID 1)')
                     ->setExpectedStatusCode(404);
-                $config->addExtraRequestDataSet('Editing normal administrator should be OK.')
+                $config->addExtraRequestDataSet('Superadmin can edit superadmin')
+                    ->setAuth(new BasicHttpAuth('superadmin', 'admin123'))
+                    ->setExpectedStatusCode(200);
+                $config->addExtraRequestDataSet('Editing normal administrator (with ID 2) should be OK.')
                     ->setParameter('id', 2)
                     ->setExpectedStatusCode(200);
+            })
+            ->customizeByRouteName('admin_administrator_myaccount', function (RouteConfig $config) {
+                $config->changeDefaultRequestDataSet('My account redirects to edit page')
+                    ->setExpectedStatusCode(302);
             })
             ->customizeByRouteName('admin_category_edit', function (RouteConfig $config) {
                 $config->changeDefaultRequestDataSet('It is forbidden to edit category with ID 1 as it is the root.')
