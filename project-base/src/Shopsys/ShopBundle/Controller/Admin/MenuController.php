@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\DomainFacade;
 use Shopsys\ShopBundle\Model\AdminNavigation\Menu;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory;
 
@@ -13,9 +14,15 @@ class MenuController extends AdminBaseController
      */
     private $menuFactory;
 
-    public function __construct(MenuFactory $menuFactory)
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\DomainFacade
+     */
+    private $domainFacade;
+
+    public function __construct(MenuFactory $menuFactory, DomainFacade $domainFacade)
     {
         $this->menuFactory = $menuFactory;
+        $this->domainFacade = $domainFacade;
     }
 
     public function menuAction($route, array $parameters = null)
@@ -26,6 +33,7 @@ class MenuController extends AdminBaseController
         return $this->render('@ShopsysShop/Admin/Inline/Menu/menu.html.twig', [
             'menu' => $menu,
             'activePath' => $activePath,
+            'domainConfigs' => $this->domainFacade->getAllDomainConfigs(),
         ]);
     }
 

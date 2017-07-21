@@ -45,9 +45,6 @@ class AdministratorFacade
      */
     public function create(AdministratorData $administratorData)
     {
-        if (in_array($administratorData->username, $this->getSuperadminUsernames(), true)) {
-            throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException($administratorData->username);
-        }
         $administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);
         if ($administratorByUserName !== null) {
             throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administratorByUserName->getUsername());
@@ -70,11 +67,9 @@ class AdministratorFacade
     {
         $administrator = $this->administratorRepository->getById($administratorId);
         $administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);
-        $superadminUsernames = $this->getSuperadminUsernames();
         $administratorEdited = $this->administratorService->edit(
             $administratorData,
             $administrator,
-            $superadminUsernames,
             $administratorByUserName
         );
 
@@ -121,19 +116,5 @@ class AdministratorFacade
     public function getAllListableQueryBuilder()
     {
         return $this->administratorRepository->getAllListableQueryBuilder();
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getSuperadminUsernames()
-    {
-        $superadmins = $this->administratorRepository->getAllSuperadmins();
-        $superadminUsernames = [];
-        foreach ($superadmins as $superadmin) {
-            $superadminUsernames[] = $superadmin->getUsername();
-        }
-
-        return $superadminUsernames;
     }
 }

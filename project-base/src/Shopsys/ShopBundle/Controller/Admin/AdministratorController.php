@@ -10,6 +10,7 @@ use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Form\Admin\Administrator\AdministratorFormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
+use Shopsys\ShopBundle\Model\Administrator\Administrator;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorFacade;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
@@ -88,8 +89,17 @@ class AdministratorController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $administrator = $this->administratorFacade->getById($id);
-        if ($administrator->isSuperadmin()) {
-            $message = 'Superadmin cannot be edited.';
+
+        $loggedUser = $this->getUser();
+        if (!$loggedUser instanceof Administrator) {
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException(sprintf(
+                'Logged user is not instance of "%s". That should not happen due to security.yml configuration.',
+                Administrator::class
+            ));
+        }
+
+        if ($administrator->isSuperadmin() && !$loggedUser->isSuperadmin()) {
+            $message = 'Superadmin can only be edited by superadmin.';
             throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException($message);
         }
 
@@ -113,16 +123,9 @@ class AdministratorController extends AdminBaseController
                     ]
                 );
                 return $this->redirectToRoute('admin_administrator_list');
-            } catch (\Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
-                $this->getFlashMessageSender()->addErrorFlashTwig(
-                    t('We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please.'),
-                    [
-                        'name' => $administratorData->username,
-                    ]
-                );
             } catch (\Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
                 $this->getFlashMessageSender()->addErrorFlashTwig(
-                    t('Administrator with login name <strong>{{ name }}</strong> already exists'),
+                    t('Login name <strong>{{ name }}</strong> is already used'),
                     [
                         'name' => $administratorData->username,
                     ]
@@ -151,6 +154,19 @@ class AdministratorController extends AdminBaseController
     }
 
     /**
+     * @Route("/administrator/my-account/")
+     */
+    public function myAccountAction()
+    {
+        $loggedUser = $this->getUser();
+        /* @var $loggedUser \Shopsys\ShopBundle\Model\Administrator\Administrator */
+
+        return $this->redirectToRoute('admin_administrator_edit', [
+            'id' => $loggedUser->getId(),
+        ]);
+    }
+
+    /**
      * @Route("/administrator/new/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
@@ -175,16 +191,9 @@ class AdministratorController extends AdminBaseController
                     ]
                 );
                 return $this->redirectToRoute('admin_administrator_list');
-            } catch (\Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
-                $this->getFlashMessageSender()->addErrorFlashTwig(
-                    t('We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please.'),
-                    [
-                        'name' => $administratorData->username,
-                    ]
-                );
             } catch (\Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
                 $this->getFlashMessageSender()->addErrorFlashTwig(
-                    t('Administrator with login name <strong>{{ name }}</strong> already exists'),
+                    t('Login name <strong>{{ name }}</strong> is already used'),
                     [
                         'name' => $administratorData->username,
                     ]

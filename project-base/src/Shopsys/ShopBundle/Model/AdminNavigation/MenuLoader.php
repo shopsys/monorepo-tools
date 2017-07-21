@@ -56,27 +56,27 @@ class MenuLoader
     }
 
     /**
-     * @param array $array
+     * @param array $menuItemsData
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\Menu
      */
-    public function loadFromArray(array $array)
+    public function loadFromArray(array $menuItemsData)
     {
-        $items = $this->loadItems($array);
+        $items = $this->loadItems($menuItemsData);
         $menu = new Menu($items);
 
         return $menu;
     }
 
     /**
-     * @param array $array
+     * @param array $menuItemsData
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
      */
-    private function loadItems(array $array)
+    private function loadItems(array $menuItemsData)
     {
         $items = [];
 
-        foreach ($array as $arrayItem) {
-            $item = $this->loadItem($arrayItem);
+        foreach ($menuItemsData as $menuItemData) {
+            $item = $this->loadItem($menuItemData);
             $items[] = $item;
         }
 
@@ -84,27 +84,27 @@ class MenuLoader
     }
 
     /**
-     * @param array $array
+     * @param array $menuItemData
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
      */
-    private function loadItem(array $array)
+    private function loadItem(array $menuItemData)
     {
-        if (isset($array['items'])) {
-            $items = $this->loadItems($array['items']);
+        if (isset($menuItemData['items'])) {
+            $items = $this->loadItems($menuItemData['items']);
         } else {
             $items = [];
         }
 
         $item = new MenuItem(
             /** @Ignore Extraction of labels in YAML file is done by \Shopsys\ShopBundle\Component\Translation\AdminMenuYamlFileExtractor */
-            $this->translator->trans($array['label']),
-            isset($array['type']) ? $array['type'] : null,
-            isset($array['route']) ? $array['route'] : null,
-            isset($array['route_parameters']) ? $array['route_parameters'] : null,
-            isset($array['visible']) ? $array['visible'] : null,
-            isset($array['superadmin']) ? $array['superadmin'] : null,
-            isset($array['icon']) ? $array['icon'] : null,
-            isset($array['multidomain_only']) ? $array['multidomain_only'] : null,
+            $this->translator->trans($menuItemData['label']),
+            isset($menuItemData['type']) ? $menuItemData['type'] : null,
+            isset($menuItemData['route']) ? $menuItemData['route'] : null,
+            isset($menuItemData['route_parameters']) ? $menuItemData['route_parameters'] : null,
+            isset($menuItemData['visible']) ? $menuItemData['visible'] : null,
+            isset($menuItemData['superadmin']) ? $menuItemData['superadmin'] : null,
+            isset($menuItemData['icon']) ? $menuItemData['icon'] : null,
+            isset($menuItemData['multidomain_only']) ? $menuItemData['multidomain_only'] : null,
             $items
         );
 
