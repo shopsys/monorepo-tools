@@ -28,6 +28,22 @@
             </ul>
         </li>
 
+        <li id="js-domains-menu" class="navig__item" >
+            <div
+                class="navig__item__link navig__item__link--bordered"
+                title="{{ menu.domainsItem.label|trans }}"
+            >
+                <i class="svg svg-forward-page"></i>
+            </div>
+            <ul id="js-domains-menu-links" class="display-none navig__item__sub">
+                {% for domainConfig in domainConfigs %}
+                    <li class="navig__item__sub__item">
+                        <a href="{{ domainConfig.url }}" target="_blank" class="navig__item__sub__item__link" title="{{ domainConfig.name }}">{{ domainConfig.url }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+
         <li id="js-account-menu" class="navig__item" >
             <div
                 class="navig__item__link navig__item__link--bordered {% if menu.accountItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}"
@@ -48,22 +64,6 @@
                         {{ 'Log out'|trans }}
                     </a>
                 </li>
-            </ul>
-        </li>
-
-        <li id="js-domains-menu" class="navig__item" >
-            <div
-                class="navig__item__link navig__item__link--bordered"
-                title="{{ menu.domainsItem.label|trans }}"
-            >
-                <i class="svg svg-forward-page"></i>
-            </div>
-            <ul id="js-domains-menu-links" class="display-none navig__item__sub">
-                {% for domainConfig in domainConfigs %}
-                    <li class="navig__item__sub__item">
-                        <a href="{{ domainConfig.url }}" target="_blank" class="navig__item__sub__item__link" title="{{ domainConfig.name }}">{{ domainConfig.url }}</a>
-                    </li>
-                {% endfor %}
             </ul>
         </li>
     </ul>
