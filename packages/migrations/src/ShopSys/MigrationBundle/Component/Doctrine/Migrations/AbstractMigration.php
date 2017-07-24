@@ -32,9 +32,13 @@ abstract class AbstractMigration extends DoctrineAbstractMigration
 
     /**
      * {@inheritDoc}
+     *
+     * @see \ShopSys\MigrationBundle\Command\MigrateCommand::execute()
      */
     public function isTransactional()
     {
+        // We do not want every migration to be executed in a separate transaction
+        // because MigrateCommand wraps all migrations in a single transaction.
         return false;
     }
 }
