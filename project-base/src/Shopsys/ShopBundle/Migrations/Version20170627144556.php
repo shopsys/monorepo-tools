@@ -30,7 +30,7 @@ class Version20170627144556 extends AbstractMigration
     private function replaceProductDomainFulltextTriggerOnProduct()
     {
         $this->sql('
-            REPLACE FUNCTION update_product_domain_fulltext_tsvector_by_product() RETURNS trigger AS $$
+            CREATE OR REPLACE FUNCTION update_product_domain_fulltext_tsvector_by_product() RETURNS trigger AS $$
                 BEGIN
                     UPDATE product_domains pd
                         SET fulltext_tsvector =
@@ -58,7 +58,7 @@ class Version20170627144556 extends AbstractMigration
     private function replaceProductDomainFulltextTriggerOnProductTranslation()
     {
         $this->sql('
-            REPLACE FUNCTION update_product_domain_fulltext_tsvector_by_product_translation() RETURNS trigger AS $$
+            CREATE OR REPLACE FUNCTION update_product_domain_fulltext_tsvector_by_product_translation() RETURNS trigger AS $$
                 BEGIN
                     UPDATE product_domains pd
                         SET fulltext_tsvector =
@@ -86,7 +86,7 @@ class Version20170627144556 extends AbstractMigration
     private function replaceProductDomainFulltextTriggerOnProductDomain()
     {
         $this->sql('
-            REPLACE FUNCTION set_product_domain_fulltext_tsvector() RETURNS trigger AS $$
+            CREATE OR REPLACE FUNCTION set_product_domain_fulltext_tsvector() RETURNS trigger AS $$
                 BEGIN
                     NEW.fulltext_tsvector :=
                         (
