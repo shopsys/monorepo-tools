@@ -5139,7 +5139,7 @@ msgid "Your cart is empty"
 msgstr "Váš nákupní košík je prázdný"
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:160
-msgid "Your cart is unfortunately empty. To create order, you have to choose </a> some product <a href=\"%url%\">first"
+msgid "Your cart is unfortunately empty. To create order, you have to <a href=\"%url%\">choose</a> some product first"
 msgstr "Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href=\"%url%\">vybrat</a>."
 
 #: CustomerController.php:78
