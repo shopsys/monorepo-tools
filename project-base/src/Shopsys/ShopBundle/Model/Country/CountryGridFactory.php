@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Model\Country;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
@@ -21,18 +21,18 @@ class CountryGridFactory implements GridFactoryInterface
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     public function __construct(
         EntityManager $em,
         GridFactory $gridFactory,
-        SelectedDomain $selectedDomain
+        AdminDomainTabsFacade $adminDomainTabsFacade
     ) {
         $this->em = $em;
         $this->gridFactory = $gridFactory;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
     }
 
     /**
@@ -45,7 +45,7 @@ class CountryGridFactory implements GridFactoryInterface
             ->select('s')
             ->from(Country::class, 's')
             ->andWhere('s.domainId = :domainId')
-            ->setParameter('domainId', $this->selectedDomain->getId());
+            ->setParameter('domainId', $this->adminDomainTabsFacade->getSelectedDomainId());
         $dataSource = new QueryBuilderDataSource($queryBuilder, 's.id');
 
         $grid = $this->gridFactory->create('CountryList', $dataSource);

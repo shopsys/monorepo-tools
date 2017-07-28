@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormType;
 use Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 class ShopInfoController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade
@@ -23,10 +23,10 @@ class ShopInfoController extends AdminBaseController
 
     public function __construct(
         ShopInfoSettingFacade $shopInfoSettingFacade,
-        SelectedDomain $selectedDomain
+        AdminDomainTabsFacade $adminDomainTabsFacade
     ) {
         $this->shopInfoSettingFacade = $shopInfoSettingFacade;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
     }
 
     /**
@@ -34,7 +34,7 @@ class ShopInfoController extends AdminBaseController
      */
     public function settingAction(Request $request)
     {
-        $selectedDomainId = $this->selectedDomain->getId();
+        $selectedDomainId = $this->adminDomainTabsFacade->getSelectedDomainId();
 
         $shopInfoSettingData = [
             'phoneNumber' => $this->shopInfoSettingFacade->getPhoneNumber($selectedDomainId),

@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -36,9 +36,9 @@ class AdvertController extends AdminBaseController
     private $advertFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
@@ -54,14 +54,14 @@ class AdvertController extends AdminBaseController
         AdvertFacade $advertFacade,
         AdministratorGridFacade $administratorGridFacade,
         GridFactory $gridFactory,
-        SelectedDomain $selectedDomain,
+        AdminDomainTabsFacade $adminDomainTabsFacade,
         Breadcrumb $breadcrumb,
         ImageExtension $imageExtension
     ) {
         $this->advertFacade = $advertFacade;
         $this->administratorGridFacade = $administratorGridFacade;
         $this->gridFactory = $gridFactory;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->breadcrumb = $breadcrumb;
         $this->imageExtension = $imageExtension;
     }
@@ -122,7 +122,7 @@ class AdvertController extends AdminBaseController
             ->select('a')
             ->from(Advert::class, 'a')
             ->where('a.domainId = :selectedDomainId')
-            ->setParameter('selectedDomainId', $this->selectedDomain->getId());
+            ->setParameter('selectedDomainId', $this->adminDomainTabsFacade->getSelectedDomainId());
         $dataSource = new QueryBuilderWithRowManipulatorDataSource(
             $queryBuilder,
             'a.id',
@@ -171,7 +171,7 @@ class AdvertController extends AdminBaseController
     public function newAction(Request $request)
     {
         $advertData = new AdvertData();
-        $advertData->domainId = $this->selectedDomain->getId();
+        $advertData->domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
 
         $form = $this->createForm(AdvertFormType::class, $advertData);
         $form->handleRequest($request);

@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Pricing\Group\Grid;
 
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupFormType;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
@@ -17,9 +17,9 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
     private $pricingGroupFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Symfony\Component\Form\FormFactory
@@ -29,12 +29,12 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
     public function __construct(
         PricingGroupGridFactory $pricingGroupGridFactory,
         PricingGroupFacade $pricingGroupFacade,
-        SelectedDomain $selectedDomain,
+        AdminDomainTabsFacade $adminDomainTabsFacade,
         FormFactory $formFactory
     ) {
         parent::__construct($pricingGroupGridFactory);
         $this->pricingGroupFacade = $pricingGroupFacade;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->formFactory = $formFactory;
     }
 
@@ -44,7 +44,7 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
      */
     protected function createEntityAndGetId($pricingGroupData)
     {
-        $pricingGroup = $this->pricingGroupFacade->create($pricingGroupData, $this->selectedDomain->getId());
+        $pricingGroup = $this->pricingGroupFacade->create($pricingGroupData, $this->adminDomainTabsFacade->getSelectedDomainId());
 
         return $pricingGroup->getId();
     }

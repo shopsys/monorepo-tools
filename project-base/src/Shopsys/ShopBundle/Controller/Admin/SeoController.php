@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Form\Admin\Seo\SeoSettingFormType;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,9 +13,9 @@ class SeoController extends AdminBaseController
 {
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade
@@ -24,10 +24,10 @@ class SeoController extends AdminBaseController
 
     public function __construct(
         SeoSettingFacade $seoSettingFacade,
-        SelectedDomain $selectedDomain
+        AdminDomainTabsFacade $adminDomainTabsFacade
     ) {
         $this->seoSettingFacade = $seoSettingFacade;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
     }
 
     /**
@@ -35,7 +35,7 @@ class SeoController extends AdminBaseController
      */
     public function indexAction(Request $request)
     {
-        $domainId = $this->selectedDomain->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $seoSettingData = [
             'title' => $this->seoSettingFacade->getTitleMainPage($domainId),
             'metaDescription' => $this->seoSettingFacade->getDescriptionMainPage($domainId),

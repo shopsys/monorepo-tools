@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
 use Shopsys\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit;
@@ -37,22 +37,22 @@ class PricingGroupController extends AdminBaseController
     private $confirmDeleteResponseFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     public function __construct(
         PricingGroupSettingFacade $pricingGroupSettingFacade,
         PricingGroupFacade $pricingGroupFacade,
         PricingGroupInlineEdit $pricingGroupInlineEdit,
         ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
-        SelectedDomain $selectedDomain
+        AdminDomainTabsFacade $adminDomainTabsFacade
     ) {
         $this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->pricingGroupInlineEdit = $pricingGroupInlineEdit;
         $this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
     }
 
     /**
@@ -155,7 +155,7 @@ class PricingGroupController extends AdminBaseController
      */
     public function settingsAction(Request $request)
     {
-        $domainId = $this->selectedDomain->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $pricingGroupSettingsFormData = [
             'defaultPricingGroup' => $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainId),
         ];

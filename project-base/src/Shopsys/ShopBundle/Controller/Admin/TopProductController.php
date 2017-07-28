@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType;
 use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,16 +17,16 @@ class TopProductController extends AdminBaseController
     private $topProductFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $selectedDomain;
+    private $adminDomainTabsFacade;
 
     public function __construct(
         TopProductFacade $topProductFacade,
-        SelectedDomain $selectedDomain
+        AdminDomainTabsFacade $adminDomainTabsFacade
     ) {
         $this->topProductFacade = $topProductFacade;
-        $this->selectedDomain = $selectedDomain;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
     }
 
     /**
@@ -34,7 +34,7 @@ class TopProductController extends AdminBaseController
      */
     public function listAction(Request $request)
     {
-        $domainId = $this->selectedDomain->getId();
+        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $formData = [
             'products' => $this->getProductsForDomain($domainId),
         ];

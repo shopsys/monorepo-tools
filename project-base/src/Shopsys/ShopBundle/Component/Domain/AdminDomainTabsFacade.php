@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Component\Domain;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class SelectedDomain
+class AdminDomainTabsFacade
 {
     const SESSION_SELECTED_DOMAIN = 'selected_domain_id';
 
@@ -29,24 +29,24 @@ class SelectedDomain
         $this->session = $session;
     }
 
-    public function getId()
+    public function getSelectedDomainId()
     {
-        return $this->getCurrentSelectedDomain()->getId();
+        return $this->getSelectedDomainConfig()->getId();
     }
 
     /**
      * @param int $domainId
      */
-    public function setId($domainId)
+    public function setSelectedDomainId($domainId)
     {
         $domainConfig = $this->domain->getDomainConfigById($domainId);
         $this->session->set(self::SESSION_SELECTED_DOMAIN, $domainConfig->getId());
     }
 
     /**
-     * @return Config\DomainConfig
+     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
      */
-    public function getCurrentSelectedDomain()
+    public function getSelectedDomainConfig()
     {
         try {
             $domainId = $this->session->get(self::SESSION_SELECTED_DOMAIN);
