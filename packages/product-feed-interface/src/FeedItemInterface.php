@@ -7,5 +7,5 @@ interface FeedItemInterface
     /**
      * @return int
      */
-    public function getItemId();
+    public function getId();
 }
