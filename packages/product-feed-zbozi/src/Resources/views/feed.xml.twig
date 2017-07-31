@@ -5,7 +5,7 @@
 
 {% block item %}
     <SHOPITEM>
-        <ITEM_ID>{{ item.itemId }}</ITEM_ID>
+        <ITEM_ID>{{ item.id }}</ITEM_ID>
         <PRODUCTNAME>{{ item.productName }}</PRODUCTNAME>
         <DESCRIPTION>{{ item.description|striptags|replace("\n", ' ')|trim }}</DESCRIPTION>
         <URL>{{ item.url }}</URL>

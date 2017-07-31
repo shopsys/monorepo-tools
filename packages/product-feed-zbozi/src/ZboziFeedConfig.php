@@ -70,7 +70,7 @@ class ZboziFeedConfig implements FeedConfigInterface
         $allCustomValues = $this->feedItemCustomValuesProvider->getCustomValuesForItems($items, $domainConfig);
 
         foreach ($items as $key => $item) {
-            $customValues = $allCustomValues[$item->getItemId()];
+            $customValues = $allCustomValues[$item->getId()];
 
             if (!$customValues->getShowInZboziFeed()) {
                 unset($items[$key]);
