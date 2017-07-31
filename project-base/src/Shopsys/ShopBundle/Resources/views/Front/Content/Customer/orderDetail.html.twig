@@ -4,7 +4,9 @@
     <meta name="robots" content="noindex, follow">
 {% endblock %}
 
-{% block title %}{{ parent() }} - {{ 'My orders'|trans }}{% endblock %}
+{% block title %}
+    {{ 'My orders'|trans }}
+{% endblock %}
 
 {% block main_content %}
     <h1>{{ 'Order Nr.'|trans }} {{order.number}}</h1>
