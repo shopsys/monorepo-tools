@@ -9,7 +9,7 @@ class StandardFeedItem implements StandardFeedItemInterface
     /**
      * @var int
      */
-    private $itemId;
+    private $id;
 
     /**
      * @var string
@@ -77,7 +77,7 @@ class StandardFeedItem implements StandardFeedItemInterface
     private $customValues;
 
     /**
-     * @param int $itemId
+     * @param int $id
      * @param string $productName
      * @param string $description
      * @param string $url
@@ -92,7 +92,7 @@ class StandardFeedItem implements StandardFeedItemInterface
      * @param int|null $mainVariantId
      */
     public function __construct(
-        $itemId,
+        $id,
         $productName,
         $description,
         $url,
@@ -106,7 +106,7 @@ class StandardFeedItem implements StandardFeedItemInterface
         $partno,
         $mainVariantId
     ) {
-        $this->itemId = $itemId;
+        $this->id = $id;
         $this->productName = $productName;
         $this->description = $description;
         $this->url = $url;
@@ -125,9 +125,9 @@ class StandardFeedItem implements StandardFeedItemInterface
     /**
      * @return int
      */
-    public function getItemId()
+    public function getId()
     {
-        return $this->itemId;
+        return $this->id;
     }
 
     /**

@@ -35,7 +35,7 @@ class FeedItemCustomValuesProvider implements FeedItemCustomValuesProviderInterf
     {
         $productIds = array_map(
             function (FeedItemInterface $feedItem) {
-                return $feedItem->getItemId();
+                return $feedItem->getId();
             },
             $items
         );
@@ -54,7 +54,7 @@ class FeedItemCustomValuesProvider implements FeedItemCustomValuesProviderInterf
      */
     public function getHeurekaCategoryNameForItem(FeedItemInterface $item, DomainConfigInterface $domainConfig)
     {
-        $product = $this->productRepository->getById($item->getItemId());
+        $product = $this->productRepository->getById($item->getId());
         $category = $this->categoryRepository->findProductMainCategoryOnDomain($product, $domainConfig->getId());
         $feedCategory = $category !== null ? $category->getHeurekaCzFeedCategory() : null;
 
