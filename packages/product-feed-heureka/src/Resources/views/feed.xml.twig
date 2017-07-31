@@ -5,7 +5,7 @@
 
 {% block item %}
     <SHOPITEM>
-        <ITEM_ID>{{ item.itemId }}</ITEM_ID>
+        <ITEM_ID>{{ item.id }}</ITEM_ID>
         {% if item.mainVariantId is not null -%}
             <ITEMGROUP_ID>{{ item.mainVariantId }}</ITEMGROUP_ID>
         {% endif -%}

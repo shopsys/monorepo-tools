@@ -71,7 +71,7 @@ class HeurekaFeedConfig implements FeedConfigInterface
 
         foreach ($items as $key => $item) {
             if ($item instanceof StandardFeedItemInterface) {
-                $customValues = $allCustomValues[$item->getItemId()];
+                $customValues = $allCustomValues[$item->getId()];
                 $item->setCustomValue('cpc', $customValues->getHeurekaCpc());
 
                 $categoryName = $this->feedItemCustomValuesProvider->getHeurekaCategoryNameForItem($item, $domainConfig);
