@@ -2,10 +2,11 @@
 
 namespace Shopsys\ProductFeed\HeurekaBundle;
 
+use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
-use Shopsys\ProductFeed\FeedItemCustomValuesProviderInterface;
 use Shopsys\ProductFeed\FeedItemRepositoryInterface;
+use Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface;
 use Shopsys\ProductFeed\StandardFeedItemInterface;
 
 class HeurekaFeedConfig implements FeedConfigInterface
@@ -16,16 +17,23 @@ class HeurekaFeedConfig implements FeedConfigInterface
     private $feedItemRepository;
 
     /**
-     * @var \Shopsys\ProductFeed\FeedItemCustomValuesProviderInterface
+     * @var \Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface
      */
-    private $feedItemCustomValuesProvider;
+    private $heurekaCategoryNameProvider;
+
+    /**
+     * @var \Shopsys\Plugin\PluginDataStorageProviderInterface
+     */
+    private $pluginDataStorageProvider;
 
     public function __construct(
         FeedItemRepositoryInterface $feedItemRepository,
-        FeedItemCustomValuesProviderInterface $feedItemCustomValuesProvider
+        HeurekaCategoryNameProviderInterface $heurekaCategoryNameProvider,
+        PluginDataStorageProviderInterface $pluginDataStorageProvider
     ) {
         $this->feedItemRepository = $feedItemRepository;
-        $this->feedItemCustomValuesProvider = $feedItemCustomValuesProvider;
+        $this->heurekaCategoryNameProvider = $heurekaCategoryNameProvider;
+        $this->pluginDataStorageProvider = $pluginDataStorageProvider;
     }
 
     /**
@@ -67,18 +75,35 @@ class HeurekaFeedConfig implements FeedConfigInterface
      */
     public function processItems(array $items, DomainConfigInterface $domainConfig)
     {
-        $allCustomValues = $this->feedItemCustomValuesProvider->getCustomValuesForItems($items, $domainConfig);
+        $productsDataById = $this->getProductsDataById($items);
 
         foreach ($items as $key => $item) {
             if ($item instanceof StandardFeedItemInterface) {
-                $customValues = $allCustomValues[$item->getId()];
-                $item->setCustomValue('cpc', $customValues->getHeurekaCpc());
+                $cpc = $productsDataById[$item->getId()]['cpc'][$domainConfig->getId()] ?? null;
+                $item->setCustomValue('cpc', $cpc);
 
-                $categoryName = $this->feedItemCustomValuesProvider->getHeurekaCategoryNameForItem($item, $domainConfig);
+                $categoryName = $this->heurekaCategoryNameProvider->getHeurekaCategoryNameForItem($item, $domainConfig);
                 $item->setCustomValue('category_name', $categoryName);
             }
         }
 
         return $items;
+    }
+
+    /**
+     * @param array $items
+     * @return array
+     */
+    private function getProductsDataById(array $items)
+    {
+        $productIds = [];
+        foreach ($items as $item) {
+            $productIds[] = $item->getId();
+        }
+
+        $productDataStorage = $this->pluginDataStorageProvider
+            ->getDataStorage(ShopsysProductFeedHeurekaBundle::class, 'product');
+
+        return $productDataStorage->getMultiple($productIds);
     }
 }
