@@ -10,7 +10,7 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterTranslation;
 
 /**
- * @ORM\Table(name="parameter_titles")
+ * @ORM\Table(name="parameters")
  * @ORM\Entity
  */
 class Parameter extends AbstractTranslatableEntity
