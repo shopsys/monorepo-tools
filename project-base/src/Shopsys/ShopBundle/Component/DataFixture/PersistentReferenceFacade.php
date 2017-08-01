@@ -18,11 +18,6 @@ class PersistentReferenceFacade
     private $persistentReferenceRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\DataFixture\PersistentReference
-     */
-    private $persistentReferencesByName = [];
-
-    /**
      * @param \Doctrine\ORM\EntityManager $em
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceRepository $persistentReferenceRepository
      */
@@ -67,11 +62,11 @@ class PersistentReferenceFacade
                 throw new \Shopsys\ShopBundle\Component\DataFixture\Exception\EntityIdIsNotSetException($name, $object);
             }
 
-            if (array_key_exists($name, $this->persistentReferencesByName)) {
-                $this->persistentReferencesByName[$name]->replace($entityName, $objectId);
-            } else {
+            try {
+                $persistentReference = $this->persistentReferenceRepository->getByReferenceName($name);
+                $persistentReference->replace($entityName, $objectId);
+            } catch (\Shopsys\ShopBundle\Component\DataFixture\Exception\PersistentReferenceNotFoundException $ex) {
                 $persistentReference = new PersistentReference($name, $entityName, $objectId);
-                $this->persistentReferencesByName[$name] = $persistentReference;
                 $this->em->persist($persistentReference);
             }
             $this->em->flush($persistentReference);

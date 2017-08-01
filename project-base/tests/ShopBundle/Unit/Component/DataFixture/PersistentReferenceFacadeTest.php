@@ -42,9 +42,12 @@ class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
         $emMock->expects($this->atLeastOnce())->method('flush');
 
         $persistentReferenceRepositoryMock = $this->getMockBuilder(PersistentReferenceRepository::class)
-            ->setMethods(['__construct'])
+            ->setMethods(['__construct', 'getByReferenceName'])
             ->disableOriginalConstructor()
             ->getMock();
+
+        $expectedException = new \Shopsys\ShopBundle\Component\DataFixture\Exception\PersistentReferenceNotFoundException('dummyReferenceName');
+        $persistentReferenceRepositoryMock->method('getByReferenceName')->willThrowException($expectedException);
 
         $productMock = $this->getMockBuilder(Product::class)
             ->setMethods(['getId'])
