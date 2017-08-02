@@ -3,12 +3,12 @@
 namespace Shopsys\ShopBundle\Model\Feed;
 
 use Shopsys\ProductFeed\DomainConfigInterface;
-use Shopsys\ProductFeed\FeedItemCustomValuesProviderInterface;
 use Shopsys\ProductFeed\FeedItemInterface;
+use Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface;
 use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class FeedItemCustomValuesProvider implements FeedItemCustomValuesProviderInterface
+class HeurekaCategoryNameProvider implements HeurekaCategoryNameProviderInterface
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
@@ -24,27 +24,6 @@ class FeedItemCustomValuesProvider implements FeedItemCustomValuesProviderInterf
     {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
-    }
-
-    /**
-     * @param \Shopsys\ProductFeed\FeedItemInterface[] $items
-     * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
-     * @return \Shopsys\ProductFeed\FeedItemCustomValuesInterface[]
-     */
-    public function getCustomValuesForItems(array $items, DomainConfigInterface $domainConfig)
-    {
-        $productIds = array_map(
-            function (FeedItemInterface $feedItem) {
-                return $feedItem->getId();
-            },
-            $items
-        );
-        $products = $this->productRepository->getAllByIds($productIds);
-
-        return $this->productRepository->getProductDomainsByProductsAndDomainIdIndexedByProductId(
-            $products,
-            $domainConfig->getId()
-        );
     }
 
     /**
