@@ -1,7 +1,9 @@
 # Shopsys Framework
 
 ## Documentation
-For documentation see [Shopsys Framework Knowledge Base](docs/index.md).
+For documentation of Shopsys Framework itself see [Shopsys Framework Knowledge Base](docs/index.md).
+
+Documentation of the specific project built on Shopsys Framework should be in [Project Documentation](docs/project/index.md).
 
 ## Installation
 ```
