@@ -587,6 +587,9 @@ services:
   shopsys.shop.payment.payment_facade:
     class: Shopsys\ShopBundle\Model\Payment\PaymentFacade
 
+  shopsys.shop.plugin_data.plugin_data_storage_provider:
+    class: Shopsys\ShopBundle\Model\PluginData\DoctrinePluginDataStorageProvider
+
   shopsys.shop.pricing.currency.currency_facade:
     class: Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
 
