@@ -3,3 +3,13 @@ services:
     class: Shopsys\ProductFeed\HeurekaBundle\HeurekaFeedConfig
     tags:
       - { name: shopsys.product_feed }
+
+  shopsys.product_feed.heureka_bundle.product_crud_extension:
+    class: Shopsys\ProductFeed\HeurekaBundle\HeurekaProductCrudExtension
+    tags:
+      - { name: shopsys.crud_extension, type: product }
+
+  shopsys.product_feed.heureka_bundle.product_form_type:
+    class: Shopsys\ProductFeed\HeurekaBundle\HeurekaProductFormType
+    tags:
+      - { name: form.type }
