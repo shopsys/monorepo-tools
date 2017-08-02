@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e2dfcf2ba1a82893addc5f55d57f2ff",
+    "content-hash": "734dd06bacb1b23b4f95cbbca5bccd06",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -5142,6 +5142,52 @@
                 "issues": "https://github.com/shopsys/migrations/issues"
             },
             "time": "2017-02-15T11:20:43+00:00"
+        },
+        {
+            "name": "shopsys/plugin-interface",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shopsys/plugin-interface.git",
+                "reference": "f72c6081c2b16a6ce9f4f0255f56556938b76234"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shopsys/plugin-interface/zipball/f72c6081c2b16a6ce9f4f0255f56556938b76234",
+                "reference": "f72c6081c2b16a6ce9f4f0255f56556938b76234",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "shopsys/coding-standards": "3.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Shopsys\\Plugin\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shopsys",
+                    "homepage": "https://www.shopsys.com/"
+                }
+            ],
+            "description": "General Shopsys Framework plugin interface",
+            "keywords": [
+                "SSFW",
+                "Shopsys Framework",
+                "plugin"
+            ],
+            "time": "2017-08-17T13:55:17+00:00"
         },
         {
             "name": "shopsys/product-feed-heureka",
