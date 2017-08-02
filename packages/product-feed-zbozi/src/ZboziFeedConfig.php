@@ -2,9 +2,9 @@
 
 namespace Shopsys\ProductFeed\ZboziBundle;
 
+use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
-use Shopsys\ProductFeed\FeedItemCustomValuesProviderInterface;
 use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ProductFeed\StandardFeedItemInterface;
 
@@ -16,16 +16,16 @@ class ZboziFeedConfig implements FeedConfigInterface
     private $feedItemRepository;
 
     /**
-     * @var \Shopsys\ProductFeed\FeedItemCustomValuesProviderInterface
+     * @var \Shopsys\Plugin\PluginDataStorageProviderInterface
      */
-    private $feedItemCustomValuesProvider;
+    private $pluginDataStorageProvider;
 
     public function __construct(
         FeedItemRepositoryInterface $feedItemRepository,
-        FeedItemCustomValuesProviderInterface $feedItemCustomValuesProvider
+        PluginDataStorageProviderInterface $pluginDataStorageProvider
     ) {
         $this->feedItemRepository = $feedItemRepository;
-        $this->feedItemCustomValuesProvider = $feedItemCustomValuesProvider;
+        $this->pluginDataStorageProvider = $pluginDataStorageProvider;
     }
 
     /**
@@ -67,22 +67,41 @@ class ZboziFeedConfig implements FeedConfigInterface
      */
     public function processItems(array $items, DomainConfigInterface $domainConfig)
     {
-        $allCustomValues = $this->feedItemCustomValuesProvider->getCustomValuesForItems($items, $domainConfig);
+        $domainId = $domainConfig->getId();
+        $productsDataById = $this->getProductsDataById($items);
 
         foreach ($items as $key => $item) {
-            $customValues = $allCustomValues[$item->getId()];
+            $productData = $productsDataById[$item->getId()] ?? [];
 
-            if (!$customValues->getShowInZboziFeed()) {
+            $showInFeed = $productData['show'][$domainId] ?? true;
+            if (!$showInFeed) {
                 unset($items[$key]);
                 continue;
             }
 
             if ($item instanceof StandardFeedItemInterface) {
-                $item->setCustomValue('cpc', $customValues->getZboziCpc());
-                $item->setCustomValue('cpc_search', $customValues->getZboziCpcSearch());
+                $item->setCustomValue('cpc', $productData['cpc'][$domainId] ?? null);
+                $item->setCustomValue('cpc_search', $productData['cpc_search'][$domainId] ?? null);
             }
         }
 
         return $items;
+    }
+
+    /**
+     * @param array $items
+     * @return array
+     */
+    private function getProductsDataById(array $items)
+    {
+        $productIds = [];
+        foreach ($items as $item) {
+            $productIds[] = $item->getId();
+        }
+
+        $productDataStorage = $this->pluginDataStorageProvider
+            ->getDataStorage(ShopsysProductFeedZboziBundle::class, 'product');
+
+        return $productDataStorage->getMultiple($productIds);
     }
 }
