@@ -19,7 +19,8 @@
     },
     "require": {
         "php": "^7.0",
-        "shopsys/product-feed-interface": "~0.1.0",
+        "shopsys/plugin-interface": "~0.1.0",
+        "shopsys/product-feed-interface": "~0.2.0",
         "symfony/framework-bundle": "^3.0"
     },
     "require-dev": {

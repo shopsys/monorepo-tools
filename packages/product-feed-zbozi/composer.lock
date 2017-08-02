@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c78bb11a236210ebf1392e7787976443",
+    "content-hash": "c29f102a9195a287099d5601484e26a3",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -267,17 +267,63 @@
             "time": "2017-01-02T13:31:39+00:00"
         },
         {
-            "name": "shopsys/product-feed-interface",
+            "name": "shopsys/plugin-interface",
             "version": "v0.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/shopsys/product-feed-interface.git",
-                "reference": "d44ff19392f241fba73b332ac52c32ee6114d79b"
+                "url": "https://github.com/shopsys/plugin-interface.git",
+                "reference": "f72c6081c2b16a6ce9f4f0255f56556938b76234"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-interface/zipball/d44ff19392f241fba73b332ac52c32ee6114d79b",
-                "reference": "d44ff19392f241fba73b332ac52c32ee6114d79b",
+                "url": "https://api.github.com/repos/shopsys/plugin-interface/zipball/f72c6081c2b16a6ce9f4f0255f56556938b76234",
+                "reference": "f72c6081c2b16a6ce9f4f0255f56556938b76234",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "shopsys/coding-standards": "3.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Shopsys\\Plugin\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shopsys",
+                    "homepage": "https://www.shopsys.com/"
+                }
+            ],
+            "description": "General Shopsys Framework plugin interface",
+            "keywords": [
+                "SSFW",
+                "Shopsys Framework",
+                "plugin"
+            ],
+            "time": "2017-08-17T13:55:17+00:00"
+        },
+        {
+            "name": "shopsys/product-feed-interface",
+            "version": "v0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shopsys/product-feed-interface.git",
+                "reference": "ac197e91b618c8fd46f9c8825cb8215b6db0276c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shopsys/product-feed-interface/zipball/ac197e91b618c8fd46f9c8825cb8215b6db0276c",
+                "reference": "ac197e91b618c8fd46f9c8825cb8215b6db0276c",
                 "shasum": ""
             },
             "require": {
@@ -294,6 +340,7 @@
                     ]
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -310,11 +357,7 @@
                 "plugin",
                 "product feed"
             ],
-            "support": {
-                "source": "https://github.com/shopsys/product-feed-interface/tree/v0.1.0",
-                "issues": "https://github.com/shopsys/product-feed-interface/issues"
-            },
-            "time": "2017-07-14T12:48:47+00:00"
+            "time": "2017-08-15T05:55:37+00:00"
         },
         {
             "name": "symfony/cache",
