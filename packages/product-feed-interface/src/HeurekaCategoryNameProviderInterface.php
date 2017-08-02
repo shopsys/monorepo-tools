@@ -2,7 +2,7 @@
 
 namespace Shopsys\ProductFeed;
 
-interface FeedItemCustomValuesProviderInterface
+interface HeurekaCategoryNameProviderInterface
 {
     /**
      * @param \Shopsys\ProductFeed\FeedItemInterface $item
