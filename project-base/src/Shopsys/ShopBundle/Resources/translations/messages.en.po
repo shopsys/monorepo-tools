@@ -449,7 +449,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:35
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:43
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/BestsellingProduct/detail.html.twig:26
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:27
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:30
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:70
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:103
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:226
@@ -496,6 +496,10 @@ msgstr ""
 msgid "Basic frontend currency %domainName%"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:12
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:18
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:68
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:14
 msgid "Basic information"
 msgstr ""
@@ -1173,12 +1177,6 @@ msgstr ""
 msgid "Default product in stock availability"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:18
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:68
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:18
-msgid "Default settings"
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Unit/setting.html.twig:6
 msgid "Default unit"
 msgstr ""
@@ -1210,7 +1208,7 @@ msgstr ""
 msgid "Delivery data"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:13
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:39
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:43
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:178
@@ -2691,7 +2689,7 @@ msgstr ""
 #: VatGridFactory.php:68
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:24
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:12
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:15
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:170
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:22
@@ -3283,7 +3281,7 @@ msgid "Phone availability"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:26
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:19
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:22
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/edit.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:62
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/edit.html.twig:13
@@ -4788,7 +4786,7 @@ msgstr ""
 msgid "Upload new picture"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:22
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:25
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:65
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:53
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:34
@@ -5042,7 +5040,7 @@ msgid "You can set the prices on product detail of specific variant."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:30
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:22
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:25
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:65
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:53
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:370

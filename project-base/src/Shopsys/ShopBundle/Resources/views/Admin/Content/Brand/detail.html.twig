@@ -8,6 +8,9 @@
         {{ form_errors(form) }}
 
         <div class="wrap-border">
+            <div class="form-group__title">
+                {{ 'Basic information'|trans }}
+            </div>
             {{ form_id(brand|default(null)) }}
             {{ form_row(form.name, { label: 'Name'|trans}) }}
             {{ form_row(form.descriptions, { label: 'Description'|trans}) }}
