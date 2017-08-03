@@ -48,7 +48,7 @@ class GenerateMigrationCommand extends ContainerAwareCommand
             return self::RETURN_CODE_ERROR;
         }
 
-        $output->writeln('<info>Database schema is not satisfying ORM, it was generated a new migration!</info>');
+        $output->writeln('<info>Database schema is not satisfying ORM, a new migration was generated!</info>');
         $output->writeln(sprintf(
             '<info>Migration file "%s" was saved (%d B).</info>',
             $generatorResult->getMigrationFilePath(),
