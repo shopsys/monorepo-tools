@@ -644,6 +644,14 @@
         </exec>
     </target>
 
+    <target name="test-db-create" description="Creates test database for application with required configuration.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="bin/console" />
+            <arg value="shopsys:database:create" />
+            <arg value="--env=test" />
+        </exec>
+    </target>
+
     <target name="test-db-dump" description="Dumps current test database into a file to be used in acceptance tests.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="bin/console" />

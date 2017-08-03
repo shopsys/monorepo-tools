@@ -82,6 +82,14 @@ class Localization
     }
 
     /**
+     * @return string[]
+     */
+    public function getAllDefinedCollations()
+    {
+        return $this->collationsByLocale;
+    }
+
+    /**
      * @param string $locale
      * @return string
      */

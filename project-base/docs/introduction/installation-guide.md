@@ -2,7 +2,7 @@
 
 ## Requirements
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-* [PostgreSQL 9.4](https://wiki.postgresql.org/wiki/Detailed_installation_guides)
+* [PostgreSQL 9.4](https://wiki.postgresql.org/wiki/Detailed_installation_guides) (On Windows OS, we recommend to use [EnterpriseDB PostgreSQL distribution](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows))
 * [PHP 7.x](http://php.net/manual/en/install.php) (see [Required PHP Configuration](required-php-configuration.md))
 * [Composer](https://getcomposer.org/doc/00-intro.md#globally)
 * [Node.js 4.x](https://nodejs.org/en/download/)
@@ -15,13 +15,7 @@ git clone https://git.shopsys-framework.com/shopsys/shopsys-framework.git
 cd shopsys-framework
 ```
 
-### 2. Create databases
-```
-createdb <database-name>
-createdb <test-database-name>
-```
-
-### 3. Install dependencies and configure parameters
+### 2. Install dependencies and configure parameters
 ```
 composer install
 ```
@@ -65,12 +59,16 @@ For development choose `n` when asked `Build in production environment? (Y/n)`.
 
 It will set the environment in your application to `dev` (this will, for example, show Symfony Web Debug Toolbar).
 
-### 4. Configure domains
+### 3. Configure domains
 Create `domains_urls.yml` from `domains_urls.yml.dist`.
 ```
 cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
 ```
-
+### 4. Create databases
+```
+php phing db-create
+php phing test-db-create
+```
 ### 5. Build application
 ```
 php phing build-demo-dev
@@ -129,19 +127,27 @@ psql --username postgres --dbname <database_name> --command "CREATE EXTENSION IF
 psql --username postgres --dbname <test_database_name> --command "CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA pg_catalog"
 ```
 
-### Phing target db-fixtures-demo-singledomain fails because DbCollationsDataFixture cannot create locale
+### Phing target db-create fails on MissingLocaleException
 Error message:
 ```
-[Doctrine\DBAL\Exception\DriverException]
-An exception occurred while executing 'CREATE COLLATION "cs_CZ" (LOCALE="cs_CZ.utf8")':
-SQLSTATE[22023]: Invalid parameter value: 7 ERROR:  could not create locale "cs_CZ.utf8": No such file or directory
+[Shopsys\ShopBundle\Command\Exception\MissingLocaleException]                                                                                    
+It looks like your operating system does not support locale "cs_CZ.utf8". Please visit docs/introduction/installation-guide.md for more details.
+
+[Doctrine\DBAL\Exception\DriverException]                                                                           
+An exception occurred while executing 'CREATE COLLATION pg_catalog."cs_CZ" (LOCALE="cs_CZ"."utf8")':                  
+SQLSTATE[22023]: Invalid parameter value: 7 ERROR:  could not create locale "cs_CZ.utf8": No such file or directory  
 DETAIL:  The operating system could not find any locale data for the locale name "cs_CZ.utf8".
 ```
 
-Some features like sorting products by name in the catalog require your operating system to support different locales in order to be able to sort by locale-specific rules.
-`Shopsys\ShopBundle\DataFixtures\Base\DbCollationsDataFixture` class normalizes the names of locales present in different systems by creating new collations in the database.
+Some features like sorting products by name in the products catalog require your database to contain specific collations in order to be able to sort by locale-specific rules.
+Unfortunately, in PostgreSQL locales are operating system dependent, which means that they can be different on each system.
+Shopsys Framework normalizes the names of locales present in different systems by creating new collations in the database.
 
-However, if your system does not provide the locales mentioned in `DbCollationsDataFixture` you need to either install additional locales to your system (eg. on Debian Linux this can be done by installing [locales-all](https://packages.debian.org/cs/stable/locales-all) package) or change `DbCollationsDataFixture` to use locales present in your system.
+However, if your operating system does not provide the required locales you can try:
+* On Linux: Install additional locales to your system (eg. on Debian Linux this can be done by installing [locales-all](https://packages.debian.org/cs/stable/locales-all) package) and restart the database server.
+* On Windows: Make sure you use PostgreSQL distribution that supports multiple locales. We recommend to use [EnterpriseDB PostgreSQL distribution](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows).
+* Otherwise: The only other option is to create the database collation mentioned in the exception manually using a locale that your OS supports.
+(Note: every OS should support special locale `"C"` or `"POSIX"`.)
 
 ### Phing target tests-db fails on test AdministratorRepositoryTest::testGetByValidMultidomainLogin
 Error message:

@@ -147,6 +147,13 @@
         </exec>
     </target>
 
+    <target name="db-create" description="Creates database for application with required configuration.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="bin/console" />
+            <arg value="shopsys:database:create" />
+        </exec>
+    </target>
+
     <target name="db-check-schema" depends="db-check-mapping" description="Checks if database schema is satisfying ORM and returns a list of suggestions to fix it.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="bin/console" />
