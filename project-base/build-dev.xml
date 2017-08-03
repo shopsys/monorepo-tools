@@ -17,7 +17,7 @@
     <target name="standards-ci" depends="standards,phpstorm-inspect" description="Checks coding standards (incl. PhpStorm inspection)."/>
     <target name="standards-ci-diff" depends="standards-diff,phpstorm-inspect" description="Checks coding standards on changed files (incl. PhpStorm inspection)."/>
 
-    <target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-migrations,test-db-fixtures-demo-singledomain,test-create-domains-data,test-generate-friendly-urls,test-db-fixtures-demo-multidomain,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
+    <target name="test-db-demo" depends="test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-db-fixtures-demo-singledomain,test-create-domains-data,test-generate-friendly-urls,test-db-fixtures-demo-multidomain,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
     <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
     <target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-smoke" description="Runs unit, database and smoke tests on a newly built test database."/>
 
@@ -644,27 +644,6 @@
         </exec>
     </target>
 
-    <target name="test-db-create" description="Creates test database public schema and imports basic database structure (without migrations).">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
-            <arg value="--env=test" />
-            <arg value="shopsys:schema:create" />
-        </exec>
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
-            <arg value="--env=test" />
-            <arg value="shopsys:schema:import-default" />
-        </exec>
-    </target>
-
-    <target name="test-db-drop" description="Drops test database public schema.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
-            <arg value="--env=test" />
-            <arg value="shopsys:schema:drop" />
-        </exec>
-    </target>
-
     <target name="test-db-dump" description="Dumps current test database into a file to be used in acceptance tests.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="bin/console" />
@@ -740,11 +719,32 @@
         </exec>
     </target>
 
+    <target name="test-db-import-basic-structure" description="Imports basic database structure (without migrations) into test database.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="bin/console" />
+            <arg value="--env=test" />
+            <arg value="shopsys:schema:import-default" />
+        </exec>
+    </target>
+
     <target name="test-db-migrations" description="Executes test database migrations and checks schema.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="bin/console" />
             <arg value="--env=test" />
             <arg value="shopsys:migrations:migrate" />
+        </exec>
+    </target>
+
+    <target name="test-db-wipe-public-schema" description="Drops and creates public database schema in test database.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="bin/console" />
+            <arg value="--env=test" />
+            <arg value="shopsys:schema:drop" />
+        </exec>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="bin/console" />
+            <arg value="--env=test" />
+            <arg value="shopsys:schema:create" />
         </exec>
     </target>
 
