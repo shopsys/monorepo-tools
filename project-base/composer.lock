@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "192b85cf7fe3bed0317162a2ed3c5890",
+    "content-hash": "7e2dfcf2ba1a82893addc5f55d57f2ff",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -4185,6 +4185,7 @@
                 "print_r",
                 "var_dump"
             ],
+            "abandoned": "symfony/var-dumper",
             "time": "2015-12-23T08:33:11+00:00"
         },
         {
@@ -4240,6 +4241,7 @@
                 "tree",
                 "twig"
             ],
+            "abandoned": "symfony/var-dumper",
             "time": "2014-10-10T06:09:15+00:00"
         },
         {
@@ -5051,6 +5053,56 @@
             "time": "2017-03-31T14:50:32+00:00"
         },
         {
+            "name": "shopsys/form-types-bundle",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shopsys/form-types-bundle.git",
+                "reference": "30185a5cff844c4d35908eff93f64dae4ce3cefd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shopsys/form-types-bundle/zipball/30185a5cff844c4d35908eff93f64dae4ce3cefd",
+                "reference": "30185a5cff844c4d35908eff93f64dae4ce3cefd",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "symfony/form": "^3.0",
+                "symfony/framework-bundle": "^3.0",
+                "symfony/translation": "^3.0"
+            },
+            "require-dev": {
+                "shopsys/coding-standards": "3.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Shopsys\\FormTypesBundle\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shopsys",
+                    "homepage": "https://www.shopsys.com/"
+                }
+            ],
+            "description": "Shopsys Framework custom Symfony form types",
+            "keywords": [
+                "Form Type",
+                "SSFW",
+                "Shopsys Framework",
+                "form"
+            ],
+            "time": "2017-08-17T11:00:19+00:00"
+        },
+        {
             "name": "shopsys/migrations",
             "version": "v2.0.1",
             "source": {
@@ -5235,7 +5287,8 @@
                 "Shopsys Framework",
                 "XML feed",
                 "plugin",
-                "product feed"
+                "product feed",
+                "zbozi"
             ],
             "time": "2017-07-14T13:09:16+00:00"
         },

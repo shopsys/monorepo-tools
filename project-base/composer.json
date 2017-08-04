@@ -85,6 +85,7 @@
         "sensio/framework-extra-bundle": "3.0.24",
         "sensio/generator-bundle": "3.1.4",
         "shopsys/migrations": "2.0.1",
+        "shopsys/form-types-bundle": "0.1.0",
         "shopsys/product-feed-heureka": "0.1.0",
         "shopsys/product-feed-interface": "0.1.0",
         "shopsys/product-feed-zbozi": "0.1.0",
