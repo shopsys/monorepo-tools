@@ -51,7 +51,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 
         $paymentEditData->paymentData->name = [
             'cs' => 'Dobírka',
-            'en' => 'Personal collection',
+            'en' => 'Cash on delivery',
         ];
         $paymentEditData->paymentData->czkRounding = false;
         $paymentEditData->pricesByCurrencyId = [
