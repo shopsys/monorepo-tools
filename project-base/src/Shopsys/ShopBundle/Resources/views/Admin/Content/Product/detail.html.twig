@@ -315,22 +315,7 @@
                     <strong class="form-line__group__name">{{ 'Zboží.cz'|trans }}</strong>
                 </div>
             </div>
-            <div class="form-line">
-                {{ form_label(form.showInZboziFeedIndexedByDomainId, 'Offer in feed'|trans) }}
-                {% for domainId, showInZboziFeedForm in form.showInZboziFeedIndexedByDomainId %}
-                    <div class="form-line__side">
-                        {% if isMultidomain() %}
-                            <div class="form-line__item">
-                                {{ domainIcon(domainId, 'long-bordered') }}
-                            </div>
-                        {% endif %}
-                        <div class="form-line__item">
-                            {{ form_widget(showInZboziFeedForm, { isSimple: true }) }}
-                            {{ form_errors(showInZboziFeedForm) }}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+            {{ form_row(form.showInZboziFeedIndexedByDomainId, { label: 'Offer in feed'|trans }) }}
             <div class="form-line">
                 <div class="form-line__label">
                     {{ 'Maximum price per click'|trans }}:
