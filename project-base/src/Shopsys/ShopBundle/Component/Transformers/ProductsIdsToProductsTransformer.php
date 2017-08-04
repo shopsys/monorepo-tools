@@ -27,8 +27,8 @@ class ProductsIdsToProductsTransformer implements DataTransformerInterface
         $productsIds = [];
 
         if (is_array($products) || $products instanceof IteratorAggregate) {
-            foreach ($products as $product) {
-                $productsIds[] = $product->getId();
+            foreach ($products as $key => $product) {
+                $productsIds[$key] = $product->getId();
             }
         }
 
@@ -44,9 +44,9 @@ class ProductsIdsToProductsTransformer implements DataTransformerInterface
         $products = [];
 
         if (is_array($productsIds)) {
-            foreach ($productsIds as $productId) {
+            foreach ($productsIds as $key => $productId) {
                 try {
-                    $products[] = $this->productRepository->getById($productId);
+                    $products[$key] = $this->productRepository->getById($productId);
                 } catch (\Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
                     throw new \Symfony\Component\Form\Exception\TransformationFailedException('Product not found', null, $e);
                 }
