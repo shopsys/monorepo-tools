@@ -15,6 +15,73 @@ To get the instance of the data storage you can call `getDataStorage()` method o
 
 See [`\Shopsys\Plugin\DataStorageInterface`](./src/DataStorageInterface.php) and [`\Shopsys\Plugin\PluginDataStorageProviderInterface`](./src/PluginDataStorageProviderInterface.php) for details.
 
+#### Example
+For example usage see the `AcmeProductCrudExtension` in the CRUD extension section below.
+
+### CRUD extension
+Sometimes your plugin needs some extra information to be included in an entity, for example, you need to track the weight of products.
+This can be solved by extending the entity CRUD model with your custom sub-form.
+
+To do so you should implement [`PluginCrudExtensionInterface`](./src/PluginCrudExtensionInterface.php) and [tag the service in a DI container](http://symfony.com/doc/current/service_container/tags.html) with `shopsys.crud_extension` tag.
+The tag should have a `type` attribute defining which CRUD model should be extended (eg. `"product"`).
+
+Each form extension has its label, form type and methods for managing the form data.
+
+#### Example
+```yaml
+services:
+  acme.acme_product_crud_extension:
+    class: AcmePlugin\AcmeProductCrudExtension
+    tags:
+      - { name: shopsys.crud_extension, type: product }
+
+  acme.acme_data_form_type:
+    class: AcmePlugin\AcmeProductFormType
+    tags:
+      - { name: form.type }
+```
+
+```php
+<?php
+
+// ...
+class AcmeProductCrudExtension implements PluginCrudExtensionInterface
+{
+    private $pluginDataStorage;
+
+    public function __construct(PluginDataStorageProviderInterface $pluginDataStorageProvider) {
+        $this->pluginDataStorage = $pluginDataStorageProvider->getDataStorage(AcmePluginBundle::class, 'product');
+    }
+
+    public function getFormTypeClass()
+    {
+        return AcmeProductFormType::class;
+    }
+
+    public function getFormLabel()
+    {
+        return 'ACME data';
+    }
+
+    public function getData($productId)
+    {
+        return $this->pluginDataStorage->get($productId);
+    }
+
+    public function saveData($productId, $data)
+    {
+        $this->pluginDataStorage->set($productId, $data);
+    }
+
+    public function removeData($productId)
+    {
+        $this->pluginDataStorage->remove($productId);
+    }
+}
+```
+
+![ACME CRUD extension example](./docs/images/crud_extension_example.png)
+
 ## How to implement a plugin
 Plugins are implemented in a form of a [Symfony bundle](http://symfony.com/doc/current/bundles.html).
 For tips on how to write a new bundle see [Best Practices for Reusable Bundles](https://symfony.com/doc/current/bundles/best_practices.html).
