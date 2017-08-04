@@ -9,6 +9,7 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
 use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfigFactory;
 use Shopsys\ShopBundle\Model\Feed\FeedXmlWriter;
+use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 use Symfony\Component\Filesystem\Filesystem;
 
 class FeedFacade
@@ -51,13 +52,19 @@ class FeedFacade
      */
     private $entityManagerFacade;
 
+    /**
+     * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
+     */
+    private $productVisibilityFacade;
+
     public function __construct(
         FeedXmlWriter $feedXmlWriter,
         Domain $domain,
         Filesystem $filesystem,
         FeedConfigFacade $feedConfigFacade,
         FeedGenerationConfigFactory $feedGenerationConfigFactory,
-        EntityManagerFacade $entityManagerFacade
+        EntityManagerFacade $entityManagerFacade,
+        ProductVisibilityFacade $productVisibilityFacade
     ) {
         $this->feedXmlWriter = $feedXmlWriter;
         $this->domain = $domain;
@@ -66,6 +73,7 @@ class FeedFacade
         $this->feedGenerationConfigFactory = $feedGenerationConfigFactory;
         $this->feedGenerationConfigs = $this->feedGenerationConfigFactory->createAll();
         $this->entityManagerFacade = $entityManagerFacade;
+        $this->productVisibilityFacade = $productVisibilityFacade;
     }
 
     /**
@@ -144,6 +152,12 @@ class FeedFacade
         $filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
         $temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SUFFIX;
 
+        /*
+         * Product is visible, when it has at least one visible category.
+         * Hiding a category therefore could cause change of product's visibility but the visibility recalculation is not invoked immediately,
+         * so we need to recalculate product's visibility here in order to get consistent data for feed generation.
+         */
+        $this->productVisibilityFacade->refreshProductsVisibilityForMarked();
         $itemsInBatch = $feedConfig->getFeedItemRepository()->getItems($domainConfig, $seekItemId, self::BATCH_SIZE);
 
         if ($seekItemId === null) {
