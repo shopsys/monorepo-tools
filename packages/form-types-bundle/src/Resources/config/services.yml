@@ -1,0 +1,5 @@
+services:
+  shopsys.form_types.multidomain:
+    class: Shopsys\FormTypesBundle\MultidomainType
+    tags:
+      - { name: form.type }

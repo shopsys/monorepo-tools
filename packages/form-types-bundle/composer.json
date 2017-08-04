@@ -1,5 +1,5 @@
 {
-    "name": "shopsys/form-types",
+    "name": "shopsys/form-types-bundle",
     "description": "Shopsys Framework custom Symfony form types",
     "keywords": ["form", "form type", "Shopsys Framework", "SSFW"],
     "type": "library",
@@ -12,13 +12,15 @@
     ],
     "autoload": {
         "psr-4": {
-            "Shopsys\\Plugin\\": [
+            "Shopsys\\FormTypesBundle\\": [
                 "src/"
             ]
         }
     },
     "require": {
-        "php": "^7.0"
+        "php": "^7.0",
+        "symfony/form": "^3.0",
+        "symfony/framework-bundle": "^3.0"
     },
     "require-dev": {
         "shopsys/coding-standards": "3.0.2"
