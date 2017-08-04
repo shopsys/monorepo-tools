@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form;
+namespace Shopsys\FormTypesBundle;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Utils;

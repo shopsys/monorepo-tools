@@ -3,13 +3,13 @@
 namespace Shopsys\ShopBundle\Form\Admin\Category;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension;
 use Shopsys\ShopBundle\Form\DomainsType;
 use Shopsys\ShopBundle\Form\FileUploadType;
 use Shopsys\ShopBundle\Form\Locale\LocalizedType;
-use Shopsys\ShopBundle\Form\MultidomainType;
 use Shopsys\ShopBundle\Form\UrlListType;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryData;

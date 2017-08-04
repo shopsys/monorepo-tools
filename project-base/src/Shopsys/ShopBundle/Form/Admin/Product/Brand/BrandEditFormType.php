@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product\Brand;
 
+use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Form\MultidomainType;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandEditData;

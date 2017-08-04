@@ -225,7 +225,7 @@ services:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\MoneyType }
 
   shopsys.shop.form.multidomain:
-    class: Shopsys\ShopBundle\Form\MultidomainType
+    class: Shopsys\FormTypesBundle\MultidomainType
     tags:
       - { name: form.type }
 
