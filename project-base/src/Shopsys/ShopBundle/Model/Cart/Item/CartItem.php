@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Cart\Item;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\ShopBundle\Model\Product\Product;
@@ -59,6 +60,13 @@ class CartItem
     private $watchedPrice;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $addedAt;
+
+    /**
      * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param int $quantity
@@ -75,6 +83,7 @@ class CartItem
         $this->product = $product;
         $this->watchedPrice = $watchedPrice;
         $this->changeQuantity($quantity);
+        $this->addedAt = new DateTime();
     }
 
     /**
@@ -157,5 +166,21 @@ class CartItem
     public function getCartIdentifier()
     {
         return $this->cartIdentifier;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getAddedAt()
+    {
+        return $this->addedAt;
+    }
+
+    /**
+     * @param \DateTime $addedAt
+     */
+    public function changeAddedAt(DateTime $addedAt)
+    {
+        $this->addedAt = $addedAt;
     }
 }

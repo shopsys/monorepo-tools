@@ -6,14 +6,17 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Cart\CartFactory;
 use Shopsys\ShopBundle\Model\Cart\CartService;
+use Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository;
 use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory;
 use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class CartFacade
 {
+    const DAYS_LIMIT_FOR_UNREGISTERED = 60;
+    const DAYS_LIMIT_FOR_REGISTERED = 120;
+
     /**
      * @var \Doctrine\ORM\EntityManager
      */
@@ -51,15 +54,13 @@ class CartFacade
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
-     * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Model\Cart\CartService $cartService
-     * @param \Shopsys\ShopBundle\Model\Cart\CartFactory $cartFactory
-     * @param \Shopsys\ShopBundle\Model\Product\ProductRepository $productRepository
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory $customerIdentifierFactory
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\ShopBundle\Model\Customer\CurrentCustomer $currentCustomer
      */
     private $currentPromoCodeFacade;
+
+    /**
+     * @var \Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository
+     */
+    private $cartItemRepository;
 
     public function __construct(
         EntityManager $em,
@@ -69,7 +70,8 @@ class CartFacade
         CustomerIdentifierFactory $customerIdentifierFactory,
         Domain $domain,
         CurrentCustomer $currentCustomer,
-        CurrentPromoCodeFacade $currentPromoCodeFacade
+        CurrentPromoCodeFacade $currentPromoCodeFacade,
+        CartItemRepository $cartItemRepository
     ) {
         $this->em = $em;
         $this->cartService = $cartService;
@@ -79,6 +81,7 @@ class CartFacade
         $this->domain = $domain;
         $this->currentCustomer = $currentCustomer;
         $this->currentPromoCodeFacade = $currentPromoCodeFacade;
+        $this->cartItemRepository = $cartItemRepository;
     }
 
     /**
@@ -105,12 +108,12 @@ class CartFacade
     }
 
     /**
-     * @param array $quantities CartItem.id => quantity
+     * @param array $quantitiesByCartItemId
      */
-    public function changeQuantities(array $quantities)
+    public function changeQuantities(array $quantitiesByCartItemId)
     {
         $cart = $this->getCartOfCurrentCustomer();
-        $this->cartService->changeQuantities($cart, $quantities);
+        $this->cartService->changeQuantities($cart, $quantitiesByCartItemId);
         $this->em->flush();
     }
 
@@ -174,5 +177,12 @@ class CartFacade
         $cart = $this->getCartOfCurrentCustomer();
 
         return $this->cartService->getQuantifiedProductsIndexedByCartItemId($cart);
+    }
+
+    public function deleteOldCarts()
+    {
+        $this->cartItemRepository->deleteOldCartsForUnregisteredCustomers(self::DAYS_LIMIT_FOR_UNREGISTERED);
+        $this->cartItemRepository->deleteOldCartsForRegisteredCustomers(self::DAYS_LIMIT_FOR_REGISTERED);
+        $this->cartFactory->clearCache();
     }
 }
