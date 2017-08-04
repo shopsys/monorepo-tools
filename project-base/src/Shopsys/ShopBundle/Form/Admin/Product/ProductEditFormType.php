@@ -9,6 +9,7 @@ use Shopsys\ShopBundle\Component\Constraints\UniqueProductParameters;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
 use Shopsys\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
@@ -70,13 +71,19 @@ class ProductEditFormType extends AbstractType
      */
     private $seoSettingFacade;
 
+    /**
+     * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade
+     */
+    private $pluginDataFormExtensionFacade;
+
     public function __construct(
         RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer,
         ImagesIdsToImagesTransformer $imagesIdsToImagesTransformer,
         ImageFacade $imageFacade,
         PricingGroupFacade $pricingGroupFacade,
         Domain $domain,
-        SeoSettingFacade $seoSettingFacade
+        SeoSettingFacade $seoSettingFacade,
+        PluginCrudExtensionFacade $pluginDataFormExtensionFacade
     ) {
         $this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
         $this->imagesIdsToImagesTransformer = $imagesIdsToImagesTransformer;
@@ -84,6 +91,7 @@ class ProductEditFormType extends AbstractType
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->domain = $domain;
         $this->seoSettingFacade = $seoSettingFacade;
+        $this->pluginDataFormExtensionFacade = $pluginDataFormExtensionFacade;
     }
 
     /**
@@ -255,6 +263,8 @@ class ProductEditFormType extends AbstractType
                 ],
             ])
             ->add('save', SubmitType::class);
+
+        $this->pluginDataFormExtensionFacade->extendForm($builder, 'product', 'pluginData');
 
         foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
             $builder->get('manualInputPricesByPricingGroupId')

@@ -372,6 +372,21 @@
 
         {{ form_row(form.accessories, { label: 'Accessories'|trans }) }}
 
+        {% if form.pluginData is empty %}
+            {% do form.pluginData.setRendered %}
+        {% else %}
+            {% for pluginForm in form.pluginData %}
+                <div class="form-group {% if not loop.last %}wrap-border{% endif %}">
+                    <div class="form-group__title">
+                        {{ pluginForm.vars.label }}
+                    </div>
+
+                    {{ form_widget(pluginForm) }}
+                    {{ form_errors(pluginForm) }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
         {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 <button id="js-close-without-saving" type="button" class="btn-link-style">{{ 'Close without saving'|trans }}</button>

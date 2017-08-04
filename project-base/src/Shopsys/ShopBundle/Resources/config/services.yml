@@ -314,6 +314,9 @@ services:
   shopsys.shop.component.mutex.mutex_factory:
     class: Shopsys\ShopBundle\Component\Mutex\MutexFactory
 
+  shopsys.shop.component.plugin.plugin_crud_extension_registry:
+    class: Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionRegistry
+
   shopsys.shop.component.request.deny_script_name_in_request_path_listener:
     class: Shopsys\ShopBundle\Component\Request\DenyScriptNameInRequestPathListener
     tags:

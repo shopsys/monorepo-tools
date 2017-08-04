@@ -98,6 +98,11 @@ class ProductEditData
     public $seoH1s;
 
     /**
+     * @var array
+     */
+    public $pluginData;
+
+    /**
      * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
      * @param string[] $imagesToUpload
@@ -157,5 +162,6 @@ class ProductEditData
         $this->zboziCpcValues = $zboziCpcValues;
         $this->zboziCpcSearchValues = $zboziCpcSearchValues;
         $this->seoH1s = $seoH1s;
+        $this->pluginData = [];
     }
 }
