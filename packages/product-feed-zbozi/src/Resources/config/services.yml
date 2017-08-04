@@ -3,3 +3,13 @@ services:
     class: Shopsys\ProductFeed\ZboziBundle\ZboziFeedConfig
     tags:
       - { name: shopsys.product_feed }
+
+  shopsys.product_feed.zbozi_bundle.product_crud_extension:
+    class: Shopsys\ProductFeed\ZboziBundle\ZboziProductCrudExtension
+    tags:
+      - { name: shopsys.crud_extension, type: product }
+
+  shopsys.product_feed.zbozi_bundle.product_form_type:
+    class: Shopsys\ProductFeed\ZboziBundle\ZboziProductFormType
+    tags:
+      - { name: form.type }
