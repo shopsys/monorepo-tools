@@ -538,7 +538,7 @@ msgid "Billing address"
 msgstr "Fakturační adresa"
 
 #: MailController.php:87
-msgid "Billing address - name, surname, company, company number, tax number and billing address"
+msgid "Billing address - name, last name, company, company number, tax number and billing address"
 msgstr "Fakturační adresa - jméno, příjmení, firma, ič, dič a fakt. adresa"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:116
@@ -2436,6 +2436,23 @@ msgstr "Čas poslední akce"
 msgid "Last login"
 msgstr "Poslední přihlášení"
 
+#: MailController.php:108
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:30
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:88
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:94
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:140
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:20
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:83
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:39
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:101
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:14
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:49
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:15
+#: src/Shopsys/ShopBundle/Resources/views/Mail/Order/billingAddress.html.twig:4
+#: src/Shopsys/ShopBundle/Resources/views/Mail/Order/deliveryAddress.html.twig:4
+msgid "Last name"
+msgstr "Příjmení"
+
 #: CustomerController.php:194
 msgid "Last order"
 msgstr "Poslední objednávka"
@@ -3832,17 +3849,17 @@ msgstr "Vyhledávání"
 msgid "Searching in all currecies"
 msgstr "Vyhledává se ve všech měnách"
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/list.html.twig:22
+msgid "Searching searches in last name, company name, email, telephone. It is possible to use operators * a?."
+msgstr "Vyhledávání hledá v příjmení, názvu firmy, emailu a telefonu. Je možné používat operátory * a ?."
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/quickSearchFormContent.html.twig:7
 msgid "Searching searches in name, catalogue number or product part number. It is possible to use operators * a?."
 msgstr "Vyhledávání hledá v názvu, katalogovém číslu nebo partno produktu. Je možné používat operátory * a ?."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/quickSearchFormContent.html.twig:7
-msgid "Searching searches in order number, registered customer email, customer's email in order, customer's surname and company name. It is possible to use operators * a?."
+msgid "Searching searches in order number, registered customer email, customer's email in order, customer's last name and company name. It is possible to use operators * a?."
 msgstr "Vyhledávání hledá v číslu objednávky, emailu registrovaného zákazníka, emailu zákazníka v objednávce, příjmení zákazníka a názvu firmy. Je možné používat operátory * a ?."
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/list.html.twig:22
-msgid "Searching searches in surname, company name, email, telephone. It is possible to use operators * a?."
-msgstr "Vyhledávání hledá v příjmení, názvu firmy, emailu a telefonu. Je možné používat operátory * a ?."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:211
 msgid "Second type of error message"
@@ -4244,23 +4261,6 @@ msgstr "Superadmin - Nastavení prodeje s/bez DPH"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/urlsListGrid.html.twig:3
 msgid "Superadmin - URL addresses"
 msgstr "Superadmin - URL adresy"
-
-#: MailController.php:108
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:30
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:88
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:94
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:140
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:20
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:83
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:39
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:101
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:14
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:49
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:15
-#: src/Shopsys/ShopBundle/Resources/views/Mail/Order/billingAddress.html.twig:4
-#: src/Shopsys/ShopBundle/Resources/views/Mail/Order/deliveryAddress.html.twig:4
-msgid "Surname"
-msgstr "Příjmení"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:14
 msgid "System data"

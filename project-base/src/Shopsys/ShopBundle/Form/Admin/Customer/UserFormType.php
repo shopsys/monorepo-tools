@@ -49,10 +49,10 @@ class UserFormType extends AbstractType
             ])
             ->add('lastName', TextType::class, [
                 'constraints' => [
-                    new Constraints\NotBlank(['message' => 'Please enter surname']),
+                    new Constraints\NotBlank(['message' => 'Please enter last name']),
                     new Constraints\Length([
                         'max' => 100,
-                        'maxMessage' => 'Surname cannot be longer than {{ limit }} characters',
+                        'maxMessage' => 'Last name cannot be longer than {{ limit }} characters',
                     ]),
                 ],
             ])

@@ -55,8 +55,8 @@ class PersonalInfoFormType extends AbstractType
             ])
             ->add('lastName', TextType::class, [
                 'constraints' => [
-                    new Constraints\NotBlank(['message' => 'Please enter surname']),
-                    new Constraints\Length(['max' => 100, 'maxMessage' => 'Surname cannot be longer than {{ limit }} characters']),
+                    new Constraints\NotBlank(['message' => 'Please enter last name']),
+                    new Constraints\Length(['max' => 100, 'maxMessage' => 'Last name cannot be longer than {{ limit }} characters']),
                 ],
             ])
             ->add('email', EmailType::class, [
@@ -160,12 +160,12 @@ class PersonalInfoFormType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
-                        'message' => 'Please enter surname of contact person',
+                        'message' => 'Please enter last name of contact person',
                         'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
                     ]),
                     new Constraints\Length([
                         'max' => 100,
-                        'maxMessage' => 'Surname of contact person cannot be longer than {{ limit }} characters',
+                        'maxMessage' => 'Last name of contact person cannot be longer than {{ limit }} characters',
                         'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
                     ]),
                 ],

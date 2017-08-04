@@ -85,7 +85,7 @@ class MailController extends AdminBaseController
             OrderMailService::VARIABLE_PAYMENT => t('Chosen payment name'),
             OrderMailService::VARIABLE_TOTAL_PRICE => t('Total order price (including VAT)'),
             OrderMailService::VARIABLE_BILLING_ADDRESS => t(
-                'Billing address - name, surname, company, company number, tax number and billing address'
+                'Billing address - name, last name, company, company number, tax number and billing address'
             ),
             OrderMailService::VARIABLE_DELIVERY_ADDRESS => t('Delivery address'),
             OrderMailService::VARIABLE_NOTE => t('Note'),
@@ -105,7 +105,7 @@ class MailController extends AdminBaseController
     {
         return [
             RegistrationMailService::VARIABLE_FIRST_NAME => t('First name'),
-            RegistrationMailService::VARIABLE_LAST_NAME => t('Surname'),
+            RegistrationMailService::VARIABLE_LAST_NAME => t('Last name'),
             RegistrationMailService::VARIABLE_EMAIL => t('E-mail'),
             RegistrationMailService::VARIABLE_URL => t('E-shop URL address'),
             RegistrationMailService::VARIABLE_LOGIN_PAGE => t('Link to the log in page'),

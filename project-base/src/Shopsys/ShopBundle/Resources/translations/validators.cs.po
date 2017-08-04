@@ -126,6 +126,21 @@ msgstr "Obrázek může být pouze ve formátech jpg nebo png"
 msgid "Image can be only in JPG, GIF or PNG format"
 msgstr "Obrázek může být pouze ve formátech jpg, png nebo gif"
 
+#: OrderFormType.php:111
+#: PersonalInfoFormType.php:59
+#: RegistrationFormType.php:39
+#: UserFormType.php:35
+#: UserFormType.php:55
+msgid "Last name cannot be longer than {{ limit }} characters"
+msgstr "Příjmení nesmí být delší než {{ limit }} znaků"
+
+#: DeliveryAddressFormType.php:73
+#: DeliveryAddressFormType.php:75
+#: OrderFormType.php:220
+#: PersonalInfoFormType.php:168
+msgid "Last name of contact person cannot be longer than {{ limit }} characters"
+msgstr "Příjmení kontaktní osoby nesmí být delší než {{ limit }} znaků"
+
 #: SliderItemFormType.php:57
 msgid "Link must be valid URL address"
 msgstr "Odkaz musí být validní URL adresa"
@@ -394,6 +409,21 @@ msgstr "Vyplňte prosím IČ"
 msgid "Please enter input prices"
 msgstr "Prosím vyplňte typ vstupní ceny"
 
+#: OrderFormType.php:108
+#: PersonalInfoFormType.php:58
+#: RegistrationFormType.php:38
+#: UserFormType.php:34
+#: UserFormType.php:52
+msgid "Please enter last name"
+msgstr "Vyplňte prosím příjmení"
+
+#: DeliveryAddressFormType.php:68
+#: DeliveryAddressFormType.php:70
+#: OrderFormType.php:215
+#: PersonalInfoFormType.php:163
+msgid "Please enter last name of contact person"
+msgstr "Vyplňte prosím příjmení kontaktní osoby"
+
 #: SliderItemFormType.php:56
 msgid "Please enter link"
 msgstr "Prosím vyplňte odkaz"
@@ -500,21 +530,6 @@ msgstr "Vyplňte prosím ulici"
 msgid "Please enter subject"
 msgstr "Vyplňte prosím předmět"
 
-#: OrderFormType.php:108
-#: PersonalInfoFormType.php:58
-#: RegistrationFormType.php:38
-#: UserFormType.php:34
-#: UserFormType.php:52
-msgid "Please enter surname"
-msgstr "Vyplňte prosím příjmení"
-
-#: DeliveryAddressFormType.php:68
-#: DeliveryAddressFormType.php:70
-#: OrderFormType.php:215
-#: PersonalInfoFormType.php:163
-msgid "Please enter surname of contact person"
-msgstr "Vyplňte prosím příjmení kontaktní osoby"
-
 #: OrderFormType.php:127
 #: PersonalInfoFormType.php:71
 msgid "Please enter telephone number"
@@ -614,21 +629,6 @@ msgstr "Název stavu nesmí být delší než {{ limit }} znaků"
 #: PersonalInfoFormType.php:202
 msgid "Street name cannot be longer than {{ limit }} characters"
 msgstr "Název ulice nesmí být delší než {{ limit }} znaků"
-
-#: OrderFormType.php:111
-#: PersonalInfoFormType.php:59
-#: RegistrationFormType.php:39
-#: UserFormType.php:35
-#: UserFormType.php:55
-msgid "Surname cannot be longer than {{ limit }} characters"
-msgstr "Příjmení nesmí být delší než {{ limit }} znaků"
-
-#: DeliveryAddressFormType.php:73
-#: DeliveryAddressFormType.php:75
-#: OrderFormType.php:220
-#: PersonalInfoFormType.php:168
-msgid "Surname of contact person cannot be longer than {{ limit }} characters"
-msgstr "Příjmení kontaktní osoby nesmí být delší než {{ limit }} znaků"
 
 #: BillingAddressFormType.php:84
 #: OrderFormType.php:157
