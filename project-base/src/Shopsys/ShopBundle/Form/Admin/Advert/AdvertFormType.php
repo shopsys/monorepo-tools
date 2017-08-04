@@ -2,10 +2,10 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Advert;
 
+use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\ShopBundle\Form\DomainType;
 use Shopsys\ShopBundle\Form\FileUploadType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Advert\Advert;
 use Shopsys\ShopBundle\Model\Advert\AdvertData;
 use Symfony\Component\Form\AbstractType;

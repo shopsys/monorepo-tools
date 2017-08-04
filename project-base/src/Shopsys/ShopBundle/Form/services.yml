@@ -265,6 +265,6 @@ services:
       - { name: form.type_extension, extended_type: Ivory\CKEditorBundle\Form\Type\CKEditorType }
 
   shopsys.shop.form.yes_no:
-    class: Shopsys\ShopBundle\Form\YesNoType
+    class: Shopsys\FormTypesBundle\YesNoType
     tags:
       - { name: form.type }

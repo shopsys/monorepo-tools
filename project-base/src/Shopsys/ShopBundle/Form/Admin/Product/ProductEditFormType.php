@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Form\Admin\Product;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FormTypesBundle\MultidomainType;
+use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\ShopBundle\Component\Constraints\UniqueProductParameters;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
@@ -16,7 +17,6 @@ use Shopsys\ShopBundle\Form\FileUploadType;
 use Shopsys\ShopBundle\Form\ProductsType;
 use Shopsys\ShopBundle\Form\UrlListType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditData;

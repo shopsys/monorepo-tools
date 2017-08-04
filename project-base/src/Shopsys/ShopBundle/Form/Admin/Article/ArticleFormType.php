@@ -3,10 +3,10 @@
 namespace Shopsys\ShopBundle\Form\Admin\Article;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\DomainType;
 use Shopsys\ShopBundle\Form\UrlListType;
-use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticleData;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;

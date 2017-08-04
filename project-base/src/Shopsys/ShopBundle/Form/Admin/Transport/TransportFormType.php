@@ -3,10 +3,10 @@
 namespace Shopsys\ShopBundle\Form\Admin\Transport;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\ShopBundle\Form\DomainsType;
 use Shopsys\ShopBundle\Form\FileUploadType;
 use Shopsys\ShopBundle\Form\Locale\LocalizedType;
-use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportData;
 use Symfony\Component\Form\AbstractType;
