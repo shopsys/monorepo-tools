@@ -3850,15 +3850,15 @@ msgid "Searching in all currecies"
 msgstr "Vyhledává se ve všech měnách"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/list.html.twig:22
-msgid "Searching searches in last name, company name, email, telephone. It is possible to use operators * a?."
+msgid "Searching searches in last name, company name, email, telephone. It is possible to use wildcards * and ?."
 msgstr "Vyhledávání hledá v příjmení, názvu firmy, emailu a telefonu. Je možné používat operátory * a ?."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/quickSearchFormContent.html.twig:7
-msgid "Searching searches in name, catalogue number or product part number. It is possible to use operators * a?."
+msgid "Searching searches in name, catalogue number or product part number. It is possible to use wildcards * and ?."
 msgstr "Vyhledávání hledá v názvu, katalogovém číslu nebo partno produktu. Je možné používat operátory * a ?."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/quickSearchFormContent.html.twig:7
-msgid "Searching searches in order number, registered customer email, customer's email in order, customer's last name and company name. It is possible to use operators * a?."
+msgid "Searching searches in order number, registered customer email, customer's email in order, customer's last name and company name. It is possible to use wildcards * and ?."
 msgstr "Vyhledávání hledá v číslu objednávky, emailu registrovaného zákazníka, emailu zákazníka v objednávce, příjmení zákazníka a názvu firmy. Je možné používat operátory * a ?."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:211
