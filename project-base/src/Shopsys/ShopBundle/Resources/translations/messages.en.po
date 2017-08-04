@@ -4937,6 +4937,10 @@ msgstr ""
 msgid "When we work for example with currencies, we need to state the currency after the input. Inputs have different text lengths and that's why we need to set a fixed width so that icons after text are aligned."
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/list.html.twig:15
+msgid "While creating a new pricing group, please be patient. The application needs to recalculate price for every product on e-shop. Products without recalculated price will not be displayed on e-shop. For instance, it takes about an hour to recalculate 2000 products."
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:27
 msgid "Width [px]"
 msgstr ""
