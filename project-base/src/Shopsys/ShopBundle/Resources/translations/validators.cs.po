@@ -98,6 +98,10 @@ msgstr "Název příznaku nesmí být delší než {{ limit }} znaků"
 msgid "Full name cannot be longer then {{ limit }} characters"
 msgstr "Celé jméno nesmí být delší než {{ limit }} znaků"
 
+#: CategoryFormType.php:124
+msgid "Heading (H1) cannot be longer than {{ limit }} characters"
+msgstr "Nadpis H1 nesmí být delší než {{ limit }} znaků"
+
 #: HeurekaShopCertificationFormType.php:28
 msgid "Heureka API must be {{ limit }} characters"
 msgstr "Heureka API klíč musí mít právě {{ limit }} znaků"
@@ -584,10 +588,6 @@ msgstr "Název produktu nesmí být delší než {{ limit }} znaků"
 #: OrderItemFormType.php:52
 msgid "Quantity must be greater than {{ compared_value }}"
 msgstr "Množství musí být větší než {{ compared_value }}"
-
-#: CategoryFormType.php:124
-msgid "SEO H1 cannot be longer than {{ limit }} characters"
-msgstr "Nadpis H1 nesmí být delší než {{ limit }} znaků"
 
 #: SeoSettingFormType.php:76
 msgid "Same description is used on another domain"

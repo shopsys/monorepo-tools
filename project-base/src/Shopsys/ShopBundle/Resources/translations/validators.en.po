@@ -98,6 +98,10 @@ msgstr ""
 msgid "Full name cannot be longer then {{ limit }} characters"
 msgstr ""
 
+#: CategoryFormType.php:124
+msgid "Heading (H1) cannot be longer than {{ limit }} characters"
+msgstr ""
+
 #: HeurekaShopCertificationFormType.php:28
 msgid "Heureka API must be {{ limit }} characters"
 msgstr ""
@@ -583,10 +587,6 @@ msgstr ""
 #: CartFormType.php:31
 #: OrderItemFormType.php:52
 msgid "Quantity must be greater than {{ compared_value }}"
-msgstr ""
-
-#: CategoryFormType.php:124
-msgid "SEO H1 cannot be longer than {{ limit }} characters"
 msgstr ""
 
 #: SeoSettingFormType.php:76
