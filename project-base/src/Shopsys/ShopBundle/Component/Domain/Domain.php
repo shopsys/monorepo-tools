@@ -2,10 +2,11 @@
 
 namespace Shopsys\ShopBundle\Component\Domain;
 
+use Shopsys\FormTypesBundle\Domain\DomainIdsProviderInterface;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 
-class Domain
+class Domain implements DomainIdsProviderInterface
 {
     const FIRST_DOMAIN_ID = 1;
     const MAIN_ADMIN_DOMAIN_ID = 1;

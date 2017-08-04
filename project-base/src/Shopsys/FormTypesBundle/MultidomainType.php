@@ -2,28 +2,25 @@
 
 namespace Shopsys\FormTypesBundle;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Utils;
+use Shopsys\FormTypesBundle\Domain\DomainIdsProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MultidomainType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FormTypesBundle\Domain\DomainIdsProviderInterface
      */
-    private $domain;
+    private $domainIdsProvider;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FormTypesBundle\Domain\DomainIdsProviderInterface $domainIdsProvider
      */
-    public function __construct(Domain $domain)
+    public function __construct(DomainIdsProviderInterface $domainIdsProvider)
     {
-        $this->domain = $domain;
+        $this->domainIdsProvider = $domainIdsProvider;
     }
 
     /**
@@ -32,20 +29,19 @@ class MultidomainType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        Utils::setArrayDefaultValue($options['entry_options'], 'required', $options['required']);
-        Utils::setArrayDefaultValue($options['entry_options'], 'constraints', []);
+        $entryOptions = $options['entry_options'];
+        $entryOptions['required'] = $options['required'] && $entryOptions['required'] ?? false;
+        $entryOptions['constraints'] = $entryOptions['constraints'] ?? [];
 
-        $subOptions = $options['entry_options'];
-        $subOptions['required'] = $options['required'] && $subOptions['required'];
-
-        foreach ($this->domain->getAll() as $domainConfig) {
-            if (array_key_exists($domainConfig->getId(), $options['optionsByDomainId'])) {
-                $domainOptions = array_merge($subOptions, $options['optionsByDomainId'][$domainConfig->getId()]);
+        $domainIds = $this->domainIdsProvider->getAllIds();
+        foreach ($domainIds as $domainId) {
+            if (array_key_exists($domainId, $options['optionsByDomainId'])) {
+                $domainOptions = array_merge($entryOptions, $options['optionsByDomainId'][$domainId]);
             } else {
-                $domainOptions = $subOptions;
+                $domainOptions = $entryOptions;
             }
 
-            $builder->add($domainConfig->getId(), $options['entry_type'], $domainOptions);
+            $builder->add($domainId, $options['entry_type'], $domainOptions);
         }
     }
 
@@ -60,19 +56,5 @@ class MultidomainType extends AbstractType
             'entry_options' => [],
             'optionsByDomainId' => [],
         ]);
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormView $view
-     * @param \Symfony\Component\Form\FormInterface $form
-     * @param array $options
-     */
-    public function finishView(FormView $view, FormInterface $form, array $options)
-    {
-        parent::finishView($view, $form, $options);
-
-        foreach ($view->children as $domainId => $child) {
-            $child->vars['domainConfig'] = $this->domain->getDomainConfigById($domainId);
-        }
     }
 }
