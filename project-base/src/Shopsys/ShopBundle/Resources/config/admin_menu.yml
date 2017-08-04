@@ -269,10 +269,10 @@
       - label: 'Google analytics'
         route: admin_script_googleanalytics
 
-    - label: 'Heureka - Ověřeno zákazníky'
+    - label: 'Heureka - Verified by Customer'
       route: admin_heureka_setting
       items:
-      - label: 'Heureka - Ověřeno zákazníky'
+      - label: 'Heureka - Verified by Customer'
         route: admin_heureka_setting
 
 - label: 'Frontend'

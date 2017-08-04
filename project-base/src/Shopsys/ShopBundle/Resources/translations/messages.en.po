@@ -34,7 +34,7 @@ msgid "- Email settings"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:3
-msgid "- Heureka - Ověřeno zákazníky"
+msgid "- Heureka - Verified by Customer"
 msgstr ""
 
 #: ProductFormType.php:183
@@ -796,7 +796,7 @@ msgid "Code"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:11
-msgid "Code of service Heureka - Ověřeno zákazníky"
+msgid "Code of service Heureka - Verified by Customer"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:43
@@ -2071,7 +2071,11 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:4
-msgid "Heureka - Ověřeno zákazníky"
+msgid "Heureka - Verified by Customer"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:24
+msgid "Heureka - Verified by Customer service does not support the language of this domain."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:13
@@ -3984,10 +3988,6 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:131
 msgid "Serial number"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:24
-msgid "Servis Heuréka - Approved by customers doesn't support the language of this domain."
 msgstr ""
 
 #: ProductMassActionFormType.php:31

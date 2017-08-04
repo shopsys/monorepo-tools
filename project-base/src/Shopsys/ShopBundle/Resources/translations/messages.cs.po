@@ -34,7 +34,7 @@ msgid "- Email settings"
 msgstr "- Nastavení emailů"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:3
-msgid "- Heureka - Ověřeno zákazníky"
+msgid "- Heureka - Verified by Customer"
 msgstr "- Heureka - Ověřeno zákazníky"
 
 #: ProductFormType.php:183
@@ -796,7 +796,7 @@ msgid "Code"
 msgstr "Kód"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:11
-msgid "Code of service Heureka - Ověřeno zákazníky"
+msgid "Code of service Heureka - Verified by Customer"
 msgstr "Kód služby Ověřeno zákazníky"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:43
@@ -2071,8 +2071,12 @@ msgstr "Výška [px]"
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:4
-msgid "Heureka - Ověřeno zákazníky"
+msgid "Heureka - Verified by Customer"
 msgstr "Heureka - Ověřeno zákazníky"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:24
+msgid "Heureka - Verified by Customer service does not support the language of this domain."
+msgstr "Služba Heureka - Ověřeno zákazníky nepodporuje jazyk této domény."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:13
 msgid "Heureka Widget code"
@@ -3985,10 +3989,6 @@ msgstr "Odesílání mailů je vypnuto, z aplikace nebude odeslán žádný mail
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:131
 msgid "Serial number"
 msgstr "Výrobní číslo"
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:24
-msgid "Servis Heuréka - Approved by customers doesn't support the language of this domain."
-msgstr "Služba Heureka - Ověřeno zákazníky nepodporuje jazyk této domény."
 
 #: ProductMassActionFormType.php:31
 msgid "Set"
