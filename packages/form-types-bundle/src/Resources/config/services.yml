@@ -3,3 +3,8 @@ services:
     class: Shopsys\FormTypesBundle\MultidomainType
     tags:
       - { name: form.type }
+
+  shopsys.form_types.yes_no:
+    class: Shopsys\FormTypesBundle\YesNoType
+    tags:
+      - { name: form.type }

@@ -56,3 +56,13 @@ Defaults to `[]`.
 The data of the inner forms are returned as an array indexed by the domain ID.
 
 ![MultidomainType usage example](./docs/images/multidomain_type_example.png)
+
+### [YesNoType](./src/YesNoType.php)
+Natural looking choice type for boolean value inputs.
+
+It has no notable options.
+
+A boolean value is accepted/returned as data.
+A null value can be accepted/returned when no radio button is checked.
+
+![YesNoType usage example](./docs/images/yes_no_type_example.png)
