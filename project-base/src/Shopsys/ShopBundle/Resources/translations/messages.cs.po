@@ -13,7 +13,7 @@ msgstr "%defaultCurrency% za 1 %currentCurrency%"
 msgid "%defaultCurrency% per unit"
 msgstr "%defaultCurrency% za 1 jednotku"
 
-#: FeedConfigRepository.php:82
+#: HeurekaDeliveryFeedConfig.php:30
 msgid "%feedName% - availability"
 msgstr "%feedName% - dostupnostní"
 
@@ -50,7 +50,7 @@ msgstr "-- Vyberte plochu --"
 msgid "-- Choose article --"
 msgstr "-- Vyberte článek --"
 
-#: ArticleFormType.php:90
+#: ArticleFormType.php:99
 msgid "-- Choose article position --"
 msgstr "-- Vyberte umístění článku --"
 
@@ -80,7 +80,7 @@ msgstr "1 254 Kč"
 msgid "ATTENTION - inserting scripts on the page can seriously endanger the security, performance or design of the app."
 msgstr "POZOR - vkládání skriptů na stránky může vážně ohrozit bezpečnost, výkonnost nebo vzhled aplikace!"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:413
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:375
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:9
 msgid "Accessories"
 msgstr "Příslušenství"
@@ -88,6 +88,10 @@ msgstr "Příslušenství"
 #: ModuleList.php:39
 msgid "Accessories in purchase confirmation box"
 msgstr "Příslušenství v mezikošíku"
+
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+msgid "Account"
+msgstr "Účet"
 
 #: FeedController.php:109
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:401
@@ -97,7 +101,7 @@ msgstr "Příslušenství v mezikošíku"
 msgid "Action"
 msgstr "Akce"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:184
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:146
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:82
 msgid "Action after sellout"
 msgstr "Akce při vyprodání"
@@ -115,7 +119,7 @@ msgstr "Přidat"
 msgid "Add URL"
 msgstr "Přidat URL"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:323
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:285
 msgid "Add another parameter"
 msgstr "Přidat další parametr"
 
@@ -141,7 +145,7 @@ msgstr "Přidat zboží"
 msgid "Add requirement"
 msgstr "Přidat podmínku"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:314
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:276
 msgid "Add some parameters"
 msgstr "Přidejte nějaké parametry"
 
@@ -178,30 +182,25 @@ msgstr "Administrace"
 msgid "Administrator"
 msgstr "Administrátor"
 
-#: AdministratorController.php:175
+#: AdministratorController.php:187
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byl vytvořen administrátor <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: AdministratorController.php:109
+#: AdministratorController.php:119
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr "Byl upraven administrátor <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: AdministratorController.php:220
+#: AdministratorController.php:225
 msgid "Administrator <strong>{{ name }}</strong> deleted."
 msgstr "Administrátor <strong>{{ name }}</strong> byl smazán."
 
-#: AdministratorController.php:229
+#: AdministratorController.php:234
 msgid "Administrator <strong>{{ name }}</strong> is the only one and can't be deleted."
 msgstr "Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/edit.html.twig:8
 msgid "Administrator activities history"
 msgstr "Historie aktivit administrátora"
-
-#: AdministratorController.php:125
-#: AdministratorController.php:191
-msgid "Administrator with login name <strong>{{ name }}</strong> already exists"
-msgstr "Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje"
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 msgid "Administrators"
@@ -280,7 +279,7 @@ msgstr "Množství"
 msgid "An example might be empty space with icon behind it, which we want to align with icon next to input."
 msgstr "Příkladem může být prázdný prostor a za ním ikonka, kterou chceme lícovat s ikonkou vedle inputu."
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:20
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:21
 msgid "Ancestor category"
 msgstr "Nadřazená kategorie"
 
@@ -311,8 +310,8 @@ msgstr "Uplatnit"
 msgid "Area"
 msgstr "Plocha"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:3
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:4
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:5
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:6
 msgid "Article"
 msgstr "Článek"
 
@@ -336,7 +335,7 @@ msgstr "Byl upraven článek <strong><a href=\"{{ url }}\">{{ name }}</a></stron
 msgid "Article <strong>{{ name }}</strong> deleted"
 msgstr "Článek <strong>{{ name }}</strong> byl smazán"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:12
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:14
 msgid "Article data"
 msgstr "Údaje článku"
 
@@ -362,7 +361,7 @@ msgstr "Články bez umístění"
 msgid "As this is a system which will often use same or similar elements, it is suitable to use a type of coding that divides web to components and variously combines them with each other."
 msgstr "Jelikož se jedná o systém, který bude často používat stejné či podobné prvky, je vhodné využít typ kódování, který dělí web na komponenty a různě je kombinuje mezi sebou."
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:154
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:116
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:169
 msgid "Assign to category"
 msgstr "Přiřazení do kategorie"
@@ -398,7 +397,7 @@ msgstr "Přehled dostupností"
 
 #: AdvancedSearchProductFilterTranslation.php:17
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:190
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:152
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:88
 msgid "Availability"
 msgstr "Dostupnost"
@@ -415,12 +414,12 @@ msgstr "Dostupnost <strong>{{ name }}</strong> byla smazána"
 msgid "Availability <strong>{{ oldName }}</strong> deleted and replaced by availability <strong>{{ newName }}</strong>"
 msgstr "Dostupnost <strong>{{ oldName }}</strong> byla nahrazena dostupností <strong>{{ newName }}</strong> a byla smazána."
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:186
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:148
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:84
 msgid "Availability after sellout"
 msgstr "Dostupnost při vyprodání"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:183
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:145
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:81
 msgid "Available in stock"
 msgstr "Skladem"
@@ -448,10 +447,10 @@ msgstr "Zpět na přehled objednávek"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:29
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:35
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:94
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:43
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/BestsellingProduct/detail.html.twig:26
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:27
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:162
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:70
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:103
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:226
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:59
@@ -551,8 +550,8 @@ msgstr "Výraznější řádek"
 #: ImageController.php:76
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:4
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:125
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:106
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:87
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:110
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:81
 msgid "Brand"
 msgstr "Značka"
@@ -653,16 +652,16 @@ msgstr "Košík"
 #: AdvancedSearchProductFilterTranslation.php:11
 #: ProductPickerController.php:140
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:171
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:110
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:72
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:55
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:118
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:122
 msgid "Catalogue number"
 msgstr "Katalogové číslo"
 
 #: ImageController.php:70
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:4
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:5
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/list.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/list.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopCategory/list.html.twig:12
@@ -677,7 +676,7 @@ msgstr "Byla vytvořena kategorie <strong><a href=\"{{ url }}\">{{ name }}</a></
 msgid "Category <strong>{{ name }}</strong> deleted"
 msgstr "Kategorie <strong>{{ name }}</strong> byla smazána"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:22
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:23
 msgid "Category Heureka.cz"
 msgstr "Kategorie Heureka.cz"
 
@@ -781,7 +780,7 @@ msgstr "Zavřít"
 msgid "Close (Esc)"
 msgstr "Zavřít (Esc)"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:417
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:379
 msgid "Close without saving"
 msgstr "Zavřít bez uložení"
 
@@ -867,10 +866,6 @@ msgstr "Doplněk k titulku"
 msgid "Complement to title will be set as suffix to all titles e.g. if complement is set “ | My shop” and product name is “iPhone S7” the result title for this products page will be “iPhone S7 | My shop”."
 msgstr "Doplněk k titulku bude připojen za všechny titulky na eshopu. Např. pokud nastavíte doplněk na \"| Můj obchod\" a název zboží je \"D-Link\", bude výsledný titulek u tohoto zboží \"D-Link | Můj obchod\""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:998
-msgid "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anythin in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
-msgstr "Komponenta se skládá z 5 hlavních prvků. Prvním je obal <strong class=\"in-article__visible\">form-line</strong>, který dodává formuláři pozadí, odsazení a bordery. Je to vlastně jeden řárek této struktury. V něm je další důležitý prvek, a to <strong class=\"in-article__visible\">form-line__label</strong>. Nemusíme to nutně brát jako label, jedná se hlavně o buďto titulek nebo důležitou část pro celý malý formulářový blok. Nejčastěji je to však label. Další 2 prvky jsou pro zarovnání obsahové části. Je to <strong class=\"in-article__visible\">form-line__side</strong> a <strong class=\"in-article__visible\">form-line__line</strong>. Nachází se za labelem a první z nich zarovnává obsah vedle labelu a nikdy se nedostane pod label. Druhý zabírá celou šířku pod labelem. A to nejdůležitější je <strong class=\"in-article__visible\">form-line__item</strong> což je obal pro cokoliv v obsahové části. Obalit to potřebujeme proto, že prvky by měly být od sebe vždy odsazeny a správně zarovnány. Teprve do těchto prvků se strkají inputy, texty, ikonky a podobně! Tento obal nepotřebují jen prvky, které zabírají 100% šířku."
-
 #: ContactFormFacade.php:61
 msgid "Contact form"
 msgstr "Kontaktní formulář"
@@ -881,7 +876,7 @@ msgstr "Kontaktní formulář"
 msgid "Contact us"
 msgstr "Napište nám"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:24
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:26
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:15
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Mail/template.html.twig:21
 msgid "Content"
@@ -1101,7 +1096,7 @@ msgstr "Aktuální stav"
 msgid "Customer"
 msgstr "Zákazník"
 
-#: CustomerController.php:241
+#: CustomerController.php:237
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byl vytvořen zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
@@ -1109,7 +1104,7 @@ msgstr "Byl vytvořen zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></s
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr "Byl upraven zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: CustomerController.php:277
+#: CustomerController.php:273
 msgid "Customer <strong>{{ name }}</strong> deleted"
 msgstr "Zákazník <strong>{{ name }}</strong> byl smazán"
 
@@ -1179,7 +1174,7 @@ msgid "Default product in stock availability"
 msgstr "Výchozí dostupnost pro zboží skladem"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:18
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:106
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:68
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:18
 msgid "Default settings"
 msgstr "Základní nastavení"
@@ -1216,9 +1211,9 @@ msgid "Delivery data"
 msgstr "Dodací údaje"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:13
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:131
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:39
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:43
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:216
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:178
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:271
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:39
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:41
@@ -1282,7 +1277,7 @@ msgstr "Slevové kupóny"
 msgid "Display"
 msgstr "Zobrazit"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:132
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:94
 msgid "Display and availability"
 msgstr "Zobrazení a dostupnost"
 
@@ -1290,11 +1285,7 @@ msgstr "Zobrazení a dostupnost"
 msgid "Display input -> input"
 msgstr "Zobrazení input -> input"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:821
-msgid "Display of inputs like checkboxes and radio buttons is done via <strong class=\"in-article__visible\">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class=\"in-article__visible\">inList</strong> and they are displayed below each other on true."
-msgstr "Zobrazení inputů, jako jsou chekcboxy a radio buttony, se dělá skrze <strong class=\"in-article__visible\">form_widget</strong>. Jaký typ se zobrazí - jestli inputy za sebou, nebo pod sebou - určí attr. Pokud není vyplněn, jsou za sebou, při nastavení <strong class=\"in-article__visible\">inList</strong> na true, se zobrazí pod sebou."
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:21
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:22
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:23
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:23
 msgid "Display on"
@@ -1345,7 +1336,7 @@ msgstr "Opravdu si přejete trvale odstranit stav objednávek \"%name%\"? Nikde 
 msgid "Do you really want to remove the order?"
 msgstr "Opravdu si přejete objednávku smazat?"
 
-#: AdministratorController.php:73
+#: AdministratorController.php:74
 msgid "Do you really want to remove this administrator?"
 msgstr "Opravdu chcete odstranit tohoto administrátora?"
 
@@ -1408,7 +1399,7 @@ msgstr "Chcete dostávat nejnovější informace z našeho obchodu? Přihlašte 
 #: AdvancedSearchOrderFilterTranslation.php:14
 #: OrderController.php:229
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:15
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:18
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/edit.html.twig:47
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/new.html.twig:7
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:32
@@ -1464,7 +1455,7 @@ msgstr "Drag and drop na řádky"
 msgid "Drag file here"
 msgstr "Zde přetáhněte soubor"
 
-#: AdministratorController.php:68
+#: AdministratorController.php:69
 #: CustomerController.php:189
 #: MailController.php:109
 #: MailController.php:121
@@ -1538,9 +1529,9 @@ msgstr "Domény eshopu"
 msgid "E-shop identification"
 msgstr "Identifikace e-shopu"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:118
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:80
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:71
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:136
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:140
 msgid "EAN"
 msgstr "EAN"
 
@@ -1560,7 +1551,7 @@ msgstr "Upravit údaje"
 msgid "Editing administrator"
 msgstr "Editace administrátora"
 
-#: AdministratorController.php:138
+#: AdministratorController.php:141
 msgid "Editing administrator - %name%"
 msgstr "Editace administrátora - %name%"
 
@@ -1768,7 +1759,7 @@ msgid "Exchange rate"
 msgstr "Kurz"
 
 #: ProductFormType.php:181
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:143
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:105
 msgid "Exclude from sale"
 msgstr "Vyřadit z prodeje"
 
@@ -1871,7 +1862,7 @@ msgid "Flag <strong>{{ name }}</strong> deleted"
 msgstr "Příznak <strong>{{ name }}</strong> byl smazán"
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:123
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:85
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:51
 msgid "Flags"
 msgstr "Příznaky"
@@ -2001,7 +1992,11 @@ msgstr "Front-end: Náhled v našeptávači pro vyhledávání, náhled v koší
 msgid "Front-end: Thumbnail of images under the main picture in product detail"
 msgstr "Front-end: Náhledy dalších obrázků pod hlavním obrázkem na detailu produktu"
 
-#: AdministratorController.php:67
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+msgid "Frontend"
+msgstr "Frontend"
+
+#: AdministratorController.php:68
 #: CustomerController.php:186
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:6
@@ -2047,9 +2042,9 @@ msgstr "Kód skriptu Google analytics byl nastaven"
 msgid "HTML code"
 msgstr "HTML kód"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:72
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:96
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:338
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:36
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:35
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:300
 msgid "Heading (H1)"
 msgstr "Nadpis H1"
 
@@ -2085,7 +2080,7 @@ msgstr "Heureka - Ověřeno zákazníky"
 msgid "Heureka Widget code"
 msgstr "Kód Heureka Widgetu"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:349
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:311
 msgid "Heureka.cz"
 msgstr "Heureka.cz"
 
@@ -2099,7 +2094,7 @@ msgid "Hidden copy"
 msgstr "Skrytá kopie"
 
 #: ProductMassActionFormType.php:43
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:23
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:25
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:26
 msgid "Hide"
 msgstr "Skrýt"
@@ -2109,7 +2104,7 @@ msgid "Hide advertisement"
 msgstr "Skrýt reklamu"
 
 #: ProductFormType.php:180
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:135
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:97
 msgid "Hide product"
 msgstr "Skrýt zboží"
 
@@ -2160,10 +2155,6 @@ msgstr "IP adresa"
 #: DomainController.php:95
 msgid "Icon"
 msgstr "Ikona"
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:913
-msgid "If we combine 3 components with each other, it will create nice forms design. We are talking about <strong class=\"in-article__visible\">form-group</strong> for headline, <strong class=\"in-article__visible\">form-line</strong> for form and <strong class=\"in-article__visible\">wrap-border</strong> for separating blocks of information."
-msgstr "Pokud pěkně nakombinujeme 3 komponenty do sebe, získáme skvělý vzhled formulářů. Jedná se o <strong class=\"in-article__visible\">form-group</strong> na titulek, <strong class=\"in-article__visible\">form-line</strong> na formulář a <strong class=\"in-article__visible\">wrap-border</strong> na oddělení bloků informací od sebe."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1290
 msgid "If we need something about input size"
@@ -2363,11 +2354,11 @@ msgstr "Prvky lze dávat i do více řádků k jednomu labelu"
 msgid "It is possible to use this when creating a link: mark the text you want to create the link from with mouse and push the Link button (top right, interconnected staples icon). In the popup menu select the protocol <different> and insert the text \"%orderDetailUrlConstant%\" in the URL field (Including the braces)"
 msgstr "Lze použít při vytváření odkazu takto: myší označíte text, ze kterého chcete vytvořit odkaz, a klepnete na tlačítko Odkaz (vpravo nahoře, ikonka propojených sponek). Ve vyskakovacím menu vyberete protokol <jiný> a do políčka URL vložíte text \"%orderDetailUrlConstant%\" (včetně složených závorek)."
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:380
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:342
 msgid "It is signed with MAX_CPC tags in feeds. If not mentioned, this information is not transmitted to the feed."
 msgstr "Ve feedech se označuje pomocí tagů MAX_CPC. Pokud není uvedeno, tato informace se do feedu nepřenáší."
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:393
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:355
 msgid "It is signed with MAX_CPC_SEARCH tags in feeds. If not mentioned, this information is not transmitted to the feed."
 msgstr "Ve feedech se označuje pomocí tagů MAX_CPC_SEARCH. Pokud není uvedeno, tato informace se do feedu nepřenáší."
 
@@ -2509,7 +2500,8 @@ msgstr "Přihlásit za uživatele"
 msgid "Log in failed."
 msgstr "Přihlášení se nepodařilo."
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Inline/Menu/menu.html.twig:28
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Inline/Menu/menu.html.twig:63
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Inline/Menu/menu.html.twig:64
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:102
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/layout.html.twig:11
 msgid "Log out"
@@ -2535,6 +2527,11 @@ msgstr "Přihlášení se nepodařilo."
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:16
 msgid "Login name"
 msgstr "Přihlašovací jméno"
+
+#: AdministratorController.php:128
+#: AdministratorController.php:196
+msgid "Login name <strong>{{ name }}</strong> is already used"
+msgstr "Přihlašovací jméno <strong>{{ name }}</strong> je již použito"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/edit.html.twig:13
 msgid "Login time"
@@ -2597,12 +2594,12 @@ msgstr "Je nastaven master e-mail %masterMail%."
 msgid "Matching first and second cell of a row with the rest of form"
 msgstr "Lícovaná první a druhá buňka řádku se zbytkem formulářů"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:352
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:376
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:314
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:338
 msgid "Maximum price per click"
 msgstr "Maximální cena za proklik"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:389
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:351
 msgid "Maximum price per click in offers"
 msgstr "Maximální cena za proklik v nabídkách"
 
@@ -2620,9 +2617,9 @@ msgstr "Vzkaz"
 msgid "Messages"
 msgstr "Hlášky/zprávy"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:53
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:64
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:336
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:35
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:33
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:298
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Seo/seoSetting.html.twig:18
 msgid "Meta description"
 msgstr "Meta description"
@@ -2664,6 +2661,10 @@ msgstr "Přesunout"
 msgid "Multidomain, multilingual, inputs with ikon - basic"
 msgstr "Multidoménové, multijazyčné, inputy s ikonou - základní"
 
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+msgid "My account"
+msgstr "Můj účet"
+
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:7
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orders.html.twig:7
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orders.html.twig:10
@@ -2689,19 +2690,19 @@ msgstr "Mé objednávky"
 #: UnitGridFactory.php:55
 #: VatGridFactory.php:68
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:16
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:22
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:24
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:12
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:19
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:170
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:84
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:46
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Script/detail.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:24
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:22
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:480
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:27
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:145
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:157
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:161
 #: src/Shopsys/ShopBundle/Resources/views/Mail/Order/products.html.twig:3
 msgid "Name"
 msgstr "Název"
@@ -2976,7 +2977,7 @@ msgstr "Počty zboží ve filtru"
 msgid "Occurence"
 msgstr "Výskyt"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:359
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:321
 msgid "Offer in feed"
 msgstr "Nabízet ve feedu"
 
@@ -3164,8 +3165,8 @@ msgid "Page not found!"
 msgstr "Stránka nenalezena!"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:34
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:32
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:334
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:31
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:296
 msgid "Page title"
 msgstr "Titulek stránky"
 
@@ -3173,7 +3174,7 @@ msgstr "Titulek stránky"
 msgid "Page you are looking for either no longer exists or you entered wrong address."
 msgstr "Stránka, kterou hledáte buďto již neexistuje, nebo jste zadali špatnou adresu."
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:275
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:237
 msgid "Parameter"
 msgstr "Parametr"
 
@@ -3182,7 +3183,7 @@ msgid "Parameter <strong>{{ name }}</strong> deleted"
 msgstr "Parametr <strong>{{ name }}</strong> byl smazán"
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:268
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:230
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:110
 msgid "Parameters"
 msgstr "Parametry"
@@ -3193,7 +3194,7 @@ msgid "Parameters overview"
 msgstr "Přehled parametrů"
 
 #: AdvancedSearchProductFilterTranslation.php:14
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:114
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:76
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:63
 msgid "PartNo (serial number)"
 msgstr "PartNo (výrobní číslo)"
@@ -3284,7 +3285,7 @@ msgstr "Dostupnost telefonu"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:26
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:19
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/edit.html.twig:13
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:154
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:62
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/edit.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:49
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/edit.html.twig:42
@@ -3310,7 +3311,7 @@ msgstr "Po uložení bude obrázek smazán"
 msgid "Picture with link"
 msgstr "Obrázek s odkazem"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:403
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:365
 msgid "Pictures"
 msgstr "Obrázky"
 
@@ -3322,8 +3323,8 @@ msgstr "Místo pro input"
 msgid "Please check following information:"
 msgstr "Prosím překontrolujte následující informace:"
 
-#: AdministratorController.php:134
-#: AdministratorController.php:200
+#: AdministratorController.php:137
+#: AdministratorController.php:205
 #: AdvertController.php:101
 #: AdvertController.php:196
 #: ArticleController.php:116
@@ -3336,7 +3337,7 @@ msgstr "Prosím překontrolujte následující informace:"
 #: CookiesController.php:58
 #: CustomerController.php:83
 #: CustomerController.php:147
-#: CustomerController.php:256
+#: CustomerController.php:252
 #: MailController.php:150
 #: OrderController.php:141
 #: OrderController.php:227
@@ -3440,7 +3441,7 @@ msgstr "Cena od"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:203
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/edit.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:31
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:159
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:163
 msgid "Price including VAT"
 msgstr "Cena s DPH"
 
@@ -3454,7 +3455,7 @@ msgid "Price to"
 msgstr "Cena do"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:28
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:201
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:163
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:30
 msgid "Prices"
 msgstr "Ceny"
@@ -3522,7 +3523,7 @@ msgstr "Produkt <strong>{{ product|productDisplayName }}</strong> byl smazán"
 msgid "Product <strong>{{ product|productDisplayName }}</strong> modified"
 msgstr "Bylo upraveno zboží <strong>{{ product|productDisplayName }}</strong>"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:43
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:5
 msgid "Product detail"
 msgstr "Karta zboží"
 
@@ -3567,7 +3568,7 @@ msgstr "Název produktu"
 msgid "Product name in default language is not entered"
 msgstr "Název zboží ve výchozím jazyce není vyplněn"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:63
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:67
 msgid "Product no longer on sale"
 msgstr "Zboží se již neprodává"
 
@@ -3597,7 +3598,7 @@ msgstr "Z košíku bylo odstraněno zboží {{ name }}"
 msgid "Products"
 msgstr "Zboží"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:145
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:107
 msgid "Products excluded from sale can't be displayed on lists and can't be searched. Product detail is available by direct access from the URL, but it is not possible to add product to cart."
 msgstr "Zboží vyřazené z prodeje se nezobrazuje ve výpisech ani nelze vyhledat. Detail tohoto zboží je dostupný přímým přístupem z URL, zboží ale nelze vložit do košíku."
 
@@ -3615,7 +3616,7 @@ msgstr "Jen zboží skladem"
 msgid "Products overview"
 msgstr "Přehled zboží"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:345
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:307
 msgid "Products search engines"
 msgstr "Zbožové vyhledávače"
 
@@ -3702,9 +3703,9 @@ msgid "Row grouping"
 msgstr "Pseudo groupování řádků"
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:29
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:27
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:331
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:31
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:28
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:293
 msgid "SEO"
 msgstr "SEO"
 
@@ -3717,7 +3718,7 @@ msgstr "Nastavení SEO atributů"
 msgid "SEO attributes settings modified"
 msgstr "Natavení SEO atributů bylo upraveno"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:205
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:167
 msgid "Sale prices calculation"
 msgstr "Výpočet prodejních cen"
 
@@ -3859,7 +3860,7 @@ msgstr "Zvolené DPH neexistuje"
 msgid "Selected VAT doesn't exist."
 msgstr "Zvolené DPH neexistuje."
 
-#: AdministratorController.php:235
+#: AdministratorController.php:240
 msgid "Selected administrated doesn't exist."
 msgstr "Zvolený administrátor neexistuje."
 
@@ -3892,7 +3893,7 @@ msgstr "Zvolená kategorie neexistuje"
 msgid "Selected currency doesn't exist."
 msgstr "Zvolená měna neexistuje."
 
-#: CustomerController.php:283
+#: CustomerController.php:279
 msgid "Selected customer doesn't exist."
 msgstr "Zvolený zákazník neexistuje"
 
@@ -3955,11 +3956,11 @@ msgstr "Zvolená jednotka neexistuje"
 msgid "Selected unit doesn't exist."
 msgstr "Zvolená jednotka neexistuje."
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:141
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:103
 msgid "Selling end date"
 msgstr "Datum stažení"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:139
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:101
 msgid "Selling start date"
 msgstr "Datum vložení"
 
@@ -3983,7 +3984,7 @@ msgstr "Zasílat e-mail o změně na tento stav"
 msgid "Sending e-mails off, no e-mail will be sent from the app."
 msgstr "Odesílání mailů je vypnuto, z aplikace nebude odeslán žádný mail."
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:127
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:131
 msgid "Serial number"
 msgstr "Výrobní číslo"
 
@@ -4009,7 +4010,7 @@ msgstr "Nastavit nové heslo"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:12
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:12
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Availability/setting.html.twig:4
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:16
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Cookies/setting.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Currency/currencySettings.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:13
@@ -4021,7 +4022,6 @@ msgstr "Nastavit nové heslo"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TermsAndConditions/setting.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Unit/setting.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Vat/vatSettings.html.twig:4
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Inline/Menu/menu.html.twig:14
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -4089,7 +4089,7 @@ msgstr "Způsob dopravy"
 msgid "Shipping selection"
 msgstr "Výběr dopravy"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:243
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:205
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:303
 msgid "Short description"
 msgstr "Krátký popis"
@@ -4141,15 +4141,7 @@ msgstr "Stránky slideru"
 msgid "Small conversion button"
 msgstr "Konverzní tlačítko malé"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1092
-msgid "Sometimes it is necessary to align one of the elements to right/left side. You can do that using modifier <strong class=\"in-article__visible\">form-line__item--right</strong> or <strong class=\"in-article__visible\">form-line__item--left</strong>."
-msgstr "Někdy je potřčeba jeden z prvků zarovnat na pravou/levou stranu. To jde udělat pomocí modifikátoru <strong class=\"in-article__visible\">form-line__item--right</strong> případně <strong class=\"in-article__visible\">form-line__item--left</strong>."
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1372
-msgid "Sometimes there is thicker line between some elements than between others. It is mainly in cases when the form-line elements are not directly behind each other, but some of them are covered with some dive, e.g. because of JS, for hiding and revealing. To that kind of dive you need to add class <strong class=\"in-article__visible\">form-line__js</strong>."
-msgstr "Někdy se stává, že se mezi prvky objevuje tlustčí čára než jinde. Je to zásadně v případech, kdy nejsou prvky form-line přímo za sebou, ale nějaký z nich je obalen nějakým divem např. kvůli nějakému JS, na skrývání a odkrývání. Takovému divu je třeba přidat třídu <strong class=\"in-article__visible\">form-line__js</strong>."
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:194
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:156
 msgid "Sorting priority"
 msgstr "Priorita řazení"
 
@@ -4459,10 +4451,6 @@ msgstr "Bylo upraveno nastavení obchodních podmínek."
 msgid "Terms-and-conditions.html"
 msgstr "Obchodní-podmínky.html"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:562
-msgid "Text behind input. To generate the input correctly, it is necessary to write is like <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>"
-msgstr "Text za inputem. Aby se generoval input správně, je třeba jej vepsat jako <strong class=\"in-article__visible\">form_widget</strong> s parametrem <strong class=\"in-article__visible\">isSimple:true</strong>"
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:556
 msgid "Text behind label"
 msgstr "Text za labelem"
@@ -4526,7 +4514,7 @@ msgid "There are several types of tables, but it is not necessary to write down 
 msgstr "Tabulek je více druhů, není ale důvod vypisovat ty, co systém generuje sám, a nikdo do nich nezasahuje. Proto jsou zde jen ty, co pravděpodobně budete chtít použít."
 
 #: CustomerController.php:142
-#: CustomerController.php:250
+#: CustomerController.php:246
 #: RegistrationController.php:68
 msgid "There is already a customer with this e-mail in the database"
 msgstr "V databázi se již nachází zákazník s tímto e-mailem"
@@ -4571,10 +4559,6 @@ msgstr "Tento form-line je obalen"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:88
 msgid "This item can be set in product detail of a specific variant"
 msgstr "Tuto položku můžete nastavit na kartě konkrétní varianty"
-
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:96
-msgid "This product is no longer available for purchase. Have a look at similar products <a href=\"%url%\">here</a>."
-msgstr "Toto zboží nadále není možné koupit. Prohlédněte si podobné produkty <a href=\"%url%\">zde</a>."
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/layout.html.twig:45
 msgid "This site uses cookies."
@@ -4721,10 +4705,6 @@ msgstr "Nastavení URL"
 msgid "URL will be deleted after saving."
 msgstr "Po uložení bude url smazána"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Error/error.html.twig:36
-msgid "Uh-oh, uh-oh. And specially <strong>\"%status_code% %status_text%\"</strong>, as if it was on purpose!"
-msgstr "To je nemilé, to je nemilé. A zrovna <strong>\"%status_code% %status_text%\"</strong>, to je jak naschvál!"
-
 #: productsPicker.window.js:80
 msgid "Unable to add"
 msgstr "Nelze přidat"
@@ -4764,7 +4744,7 @@ msgid "Unexpected error occurred, file was not uploaded."
 msgstr "Došlo k neočekávané chybě, soubor nebyl nahrán."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:174
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:178
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:140
 msgid "Unit"
 msgstr "Jednotka"
 
@@ -4809,7 +4789,7 @@ msgid "Upload new picture"
 msgstr "Nahrát nový obrázek"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:157
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:65
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:53
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:34
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:52
@@ -4833,7 +4813,7 @@ msgstr "Url adresa"
 msgid "Use"
 msgstr "Používat"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:181
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:143
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:79
 msgid "Use stocks"
 msgstr "Používat skladové zásoby"
@@ -4855,7 +4835,7 @@ msgid "Username"
 msgstr "Uživatelské jméno"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:35
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:206
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:168
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:32
 msgid "VAT"
 msgstr "DPH"
@@ -4900,7 +4880,7 @@ msgstr "sazby DPH"
 msgid "VAT settings modified"
 msgstr "Nastavení DPH bylo upraveno"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:277
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:239
 msgid "Value"
 msgstr "Hodnota"
 
@@ -4968,23 +4948,6 @@ msgstr "Upozorňující hláška"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:235
 msgid "Warning message - block with icon"
 msgstr "Upozorňující hláška - bloková s ikonkou"
-
-#: AdministratorController.php:118
-#: AdministratorController.php:184
-msgid "We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please."
-msgstr "Omlouváme se, ale jméno <strong>{{ name }}</strong> je vyhrazeno pro systémovou funkci. Použijte prosím jiné"
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:792
-msgid "We will get the display by adding modifiers to input, but it is important to wrap input with dive with class <strong class=\"in-article__visible\">input__wrap</strong>. Pictures are positioned to this class. This structure should be generated by the system itself. If manual writing needed it is important to pay attention and don't forget to add flag <strong class=\"in-article__visible\">localeFlag(locale)</strong>, domain <strong class=\"in-article__visible\">or icon."
-msgstr "Zobrazení dosáhnem přidáním modifikátorů k inputu, ale důležité je obalit input divem s třídou <strong class=\"in-article__visible\">input__wrap</strong>. K této třídě se totiž pozicují obrázky. Tadyta struktura by se měla generovat ze systému sama. V případě nutnosti psaní této struktury ručně je třeba si dávat pozor a nezapomenout dodat i vlajku <strong class=\"in-article__visible\">localeFlag(locale)</strong>, doménu <strong class=\"in-article__visible\">domainIcon(domainId)</strong> nebo ikonku."
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:763
-msgid "We will get the display by writing input as <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>."
-msgstr "Zobrazeni dosáhnete tak, že input vypíšete jako <strong class=\"in-article__visible\">form_widget</strong> s parametrem <strong class=\"in-article__visible\">isSimple:true</strong>."
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:779
-msgid "We will get the display either by adding class to element or via <strong class=\"in-article__visible\">form_widget</strong> we add <strong class=\"in-article__visible\">attr class</strong>"
-msgstr "Zobrazení dosáhnem buďto přídáním classy k prvku nebo přes <strong class=\"in-article__visible\">form_widget</strong> přidáme <strong class=\"in-article__visible\">attr class</strong>"
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:26
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:28
@@ -5080,15 +5043,15 @@ msgstr "Ceny můžete nastavit na kartě konkrétní varianty."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:30
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:157
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:65
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:53
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:408
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:370
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:25
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:52
 msgid "You can upload following formats: PNG, JPG, GIF"
 msgstr "Můžete nahrávat formáty: PNG, JPG a GIF"
 
-#: AdministratorController.php:226
+#: AdministratorController.php:231
 msgid "You can't delete yourself."
 msgstr "Nemůžete smazat sami sebe."
 
@@ -5138,10 +5101,6 @@ msgstr "Váš košík"
 msgid "Your cart is empty"
 msgstr "Váš nákupní košík je prázdný"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:160
-msgid "Your cart is unfortunately empty. To create order, you have to <a href=\"%url%\">choose</a> some product first"
-msgstr "Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href=\"%url%\">vybrat</a>."
-
 #: CustomerController.php:78
 msgid "Your data had been successfully updated"
 msgstr "Vaše údaje byly úspěšně zaktualizovány"
@@ -5150,7 +5109,7 @@ msgstr "Vaše údaje byly úspěšně zaktualizovány"
 msgid "Your discount"
 msgstr "Vaše sleva"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:355
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:317
 msgid "Zboží.cz"
 msgstr "Zboží.cz"
 
@@ -5256,10 +5215,6 @@ msgstr "neobsahuje"
 msgid "doesn't use"
 msgstr "nepoužívá"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:862
-msgid "domain icon only in checkbox list, icon is inserted <strong class=\"in-article__visible\">domainIcon(domainId, \"small\") </strong>"
-msgstr "ikona domény pouze v checkbox seznamu, ikona se vkládá <strong class=\"in-article__visible\">domainIcon(domainId, \"small\") </strong>"
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:871
 msgid "domain icon only in checkbox list, it is possible to add action icon"
 msgstr "ikona domény pouze v checkbox seznamu, je možno přidat akční ikonu"
@@ -5269,7 +5224,7 @@ msgid "double signs are clear and developer will intuitively know senses of diff
 msgstr "dvojté značky jsou přehledné a developerovi intuitivně dojde, jaký smysl má daná třída"
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/bestsellingProductsList.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:81
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:85
 msgid "excluding VAT"
 msgstr "bez DPH"
 
@@ -5316,7 +5271,7 @@ msgstr "větší než"
 msgid "in category (above the category name)"
 msgstr "v kategorii (nad názvem kategorie)"
 
-#: ArticleFormType.php:87
+#: ArticleFormType.php:96
 msgid "in footer"
 msgstr "v patičce"
 
@@ -5325,7 +5280,7 @@ msgstr "v patičce"
 msgid "in left panel (under category tree)"
 msgstr "v levém panelu (pod stromem kategorií)"
 
-#: ArticleFormType.php:86
+#: ArticleFormType.php:95
 msgid "in upper menu"
 msgstr "v horním menu"
 
@@ -5433,7 +5388,7 @@ msgstr "neregistrovaný zákazník"
 msgid "uses"
 msgstr "používá"
 
-#: ArticleFormType.php:88
+#: ArticleFormType.php:97
 msgid "without positoning"
 msgstr "bez umístění"
 

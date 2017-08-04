@@ -42,10 +42,6 @@ msgstr ""
 msgid "Country name cannot be longer than {{ limit }} characters"
 msgstr ""
 
-#: PromoCodeFormType.php:49
-msgid "Discount coupon with this code already exists"
-msgstr ""
-
 #: MailTemplateFormType.php:81
 msgid "E-mail subject cannot be longer than {{ limit }} characters"
 msgstr ""
@@ -156,32 +152,32 @@ msgstr ""
 msgid "Part number cannot be longer than {{ limit }} characters"
 msgstr ""
 
-#: AdministratorFormType.php:58
+#: AdministratorFormType.php:67
 #: NewPasswordFormType.php:30
 #: RegistrationFormType.php:57
 #: UserFormType.php:50
-#: UserFormType.php:83
+#: UserFormType.php:111
 msgid "Password cannot be longer then {{ limit }} characters"
 msgstr ""
 
 #: RegistrationFormType.php:80
 #: UserFormType.php:70
-#: UserFormType.php:130
+#: UserFormType.php:140
 msgid "Password cannot be same as e-mail"
 msgstr ""
 
 #: RegistrationFormType.php:86
 #: UserFormType.php:76
-#: UserFormType.php:136
+#: UserFormType.php:146
 msgid "Password cannot be same as part of e-mail before at sign"
 msgstr ""
 
-#: AdministratorFormType.php:82
+#: AdministratorFormType.php:95
 msgid "Password cannot be same as username"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Form/Admin/Administrator/AdministratorFormType.php:61
-#: src/Shopsys/ShopBundle/Form/Admin/Customer/UserFormType.php:87
+#: src/Shopsys/ShopBundle/Form/Admin/Administrator/AdministratorFormType.php:55
+#: src/Shopsys/ShopBundle/Form/Admin/Customer/UserFormType.php:78
 #: src/Shopsys/ShopBundle/Form/Front/Customer/Password/NewPasswordFormType.php:33
 #: src/Shopsys/ShopBundle/Form/Front/Customer/UserFormType.php:53
 #: src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php:60
@@ -200,7 +196,7 @@ msgstr ""
 msgid "Please choose advertisement type"
 msgstr ""
 
-#: ArticleFormType.php:92
+#: ArticleFormType.php:101
 msgid "Please choose article placement"
 msgstr ""
 
@@ -277,11 +273,11 @@ msgstr ""
 msgid "Please enter a number"
 msgstr ""
 
-#: ArticleFormType.php:61
+#: ArticleFormType.php:62
 msgid "Please enter article content"
 msgstr ""
 
-#: ArticleFormType.php:54
+#: ArticleFormType.php:55
 msgid "Please enter article name"
 msgstr ""
 
@@ -428,12 +424,12 @@ msgstr ""
 msgid "Please enter parameter value"
 msgstr ""
 
-#: AdministratorFormType.php:55
+#: AdministratorFormType.php:72
 #: LoginFormType.php:30
 #: LoginFormType.php:32
 #: NewPasswordFormType.php:29
 #: RegistrationFormType.php:56
-#: UserFormType.php:78
+#: UserFormType.php:116
 msgid "Please enter password"
 msgstr ""
 

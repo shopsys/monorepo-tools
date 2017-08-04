@@ -42,10 +42,6 @@ msgstr "Název firmy nesmí být delší než {{ limit }} znaků"
 msgid "Country name cannot be longer than {{ limit }} characters"
 msgstr "Název státu nesmí být delší než {{ limit }} znaků"
 
-#: PromoCodeFormType.php:49
-msgid "Discount coupon with this code already exists"
-msgstr "Slevový kupón s tímto kódem již existuje."
-
 #: MailTemplateFormType.php:81
 msgid "E-mail subject cannot be longer than {{ limit }} characters"
 msgstr "Předmět e-mailu nesmí být delší než {{ limit }} znaků"
@@ -156,32 +152,32 @@ msgstr "Název parametru nesmí být delší než {{ limit }} znaků"
 msgid "Part number cannot be longer than {{ limit }} characters"
 msgstr "Výrobní číslo nesmí být delší než {{ limit }} znaků"
 
-#: AdministratorFormType.php:58
+#: AdministratorFormType.php:67
 #: NewPasswordFormType.php:30
 #: RegistrationFormType.php:57
 #: UserFormType.php:50
-#: UserFormType.php:83
+#: UserFormType.php:111
 msgid "Password cannot be longer then {{ limit }} characters"
 msgstr "Heslo musí mít minimálně {{ limit }} znaků"
 
 #: RegistrationFormType.php:80
 #: UserFormType.php:70
-#: UserFormType.php:130
+#: UserFormType.php:140
 msgid "Password cannot be same as e-mail"
 msgstr "Heslo nesmí být stejné jako přihlašovací e-mail."
 
 #: RegistrationFormType.php:86
 #: UserFormType.php:76
-#: UserFormType.php:136
+#: UserFormType.php:146
 msgid "Password cannot be same as part of e-mail before at sign"
 msgstr "Heslo nesmí být stejné jako část e-mailu před zavináčem."
 
-#: AdministratorFormType.php:82
+#: AdministratorFormType.php:95
 msgid "Password cannot be same as username"
 msgstr "Heslo nesmí být stejné jako přihlašovací jméno"
 
-#: src/Shopsys/ShopBundle/Form/Admin/Administrator/AdministratorFormType.php:61
-#: src/Shopsys/ShopBundle/Form/Admin/Customer/UserFormType.php:87
+#: src/Shopsys/ShopBundle/Form/Admin/Administrator/AdministratorFormType.php:55
+#: src/Shopsys/ShopBundle/Form/Admin/Customer/UserFormType.php:78
 #: src/Shopsys/ShopBundle/Form/Front/Customer/Password/NewPasswordFormType.php:33
 #: src/Shopsys/ShopBundle/Form/Front/Customer/UserFormType.php:53
 #: src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php:60
@@ -200,7 +196,7 @@ msgstr "Prosím vyberte reklamní plochu"
 msgid "Please choose advertisement type"
 msgstr "Prosím vyberte typ reklamy"
 
-#: ArticleFormType.php:92
+#: ArticleFormType.php:101
 msgid "Please choose article placement"
 msgstr "Prosím vyberte umístění článku"
 
@@ -277,11 +273,11 @@ msgstr "Vyplňte prosím výši DPH"
 msgid "Please enter a number"
 msgstr "Prosím zadejte číslo"
 
-#: ArticleFormType.php:61
+#: ArticleFormType.php:62
 msgid "Please enter article content"
 msgstr "Vyplňte prosím text článku"
 
-#: ArticleFormType.php:54
+#: ArticleFormType.php:55
 msgid "Please enter article name"
 msgstr "Vyplňte prosím název článku"
 
@@ -428,12 +424,12 @@ msgstr "Vyplňte prosím název parametru"
 msgid "Please enter parameter value"
 msgstr "Prosím vyplňte hodnotu parametru"
 
-#: AdministratorFormType.php:55
+#: AdministratorFormType.php:72
 #: LoginFormType.php:30
 #: LoginFormType.php:32
 #: NewPasswordFormType.php:29
 #: RegistrationFormType.php:56
-#: UserFormType.php:78
+#: UserFormType.php:116
 msgid "Please enter password"
 msgstr "Vyplňte prosím heslo"
 
@@ -591,7 +587,7 @@ msgstr "Množství musí být větší než {{ compared_value }}"
 
 #: CategoryFormType.php:124
 msgid "SEO H1 cannot be longer than {{ limit }} characters"
-msgstr ""
+msgstr "Nadpis H1 nesmí být delší než {{ limit }} znaků"
 
 #: SeoSettingFormType.php:76
 msgid "Same description is used on another domain"
