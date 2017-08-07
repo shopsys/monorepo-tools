@@ -102,12 +102,6 @@ class ProductEditDataFactory
         $productEditData->descriptions = $nullForAllDomains;
         $productEditData->shortDescriptions = $nullForAllDomains;
         $productEditData->accessories = [];
-        $productEditData->heurekaCpcValues = $nullForAllDomains;
-        foreach ($this->domain->getAllIds() as $domainId) {
-            $productEditData->showInZboziFeedIndexedByDomainId[$domainId] = true;
-        }
-        $productEditData->zboziCpcValues = $nullForAllDomains;
-        $productEditData->zboziCpcSearchValues = $nullForAllDomains;
 
         return $productEditData;
     }
@@ -185,10 +179,6 @@ class ProductEditDataFactory
 
             $productEditData->urls->mainFriendlyUrlsByDomainId[$domainId] =
                 $this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
-            $productEditData->heurekaCpcValues[$domainId] = $productDomain->getHeurekaCpc();
-            $productEditData->showInZboziFeedIndexedByDomainId[$domainId] = $productDomain->getShowInZboziFeed();
-            $productEditData->zboziCpcValues[$domainId] = $productDomain->getZboziCpc();
-            $productEditData->zboziCpcSearchValues[$domainId] = $productDomain->getZboziCpcSearch();
         }
     }
 

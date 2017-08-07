@@ -335,10 +335,6 @@ class ProductFacade
             $descriptions = $productEditData->descriptions;
             $shortDescriptions = $productEditData->shortDescriptions;
         }
-        $heurekaCpcValues = $productEditData->heurekaCpcValues;
-        $showInZboziFeed = $productEditData->showInZboziFeedIndexedByDomainId;
-        $zboziCpcValues = $productEditData->zboziCpcValues;
-        $zboziCpcSearchValues = $productEditData->zboziCpcSearchValues;
 
         foreach ($productDomains as $domainId => $productDomain) {
             if (!empty($seoTitles)) {
@@ -352,18 +348,6 @@ class ProductFacade
             }
             if (!empty($shortDescriptions)) {
                 $productDomain->setShortDescription($shortDescriptions[$domainId]);
-            }
-            if (!empty($heurekaCpcValues)) {
-                $productDomain->setHeurekaCpc($heurekaCpcValues[$domainId]);
-            }
-            if (!empty($showInZboziFeed)) {
-                $productDomain->setShowInZboziFeed($showInZboziFeed[$domainId]);
-            }
-            if (!empty($zboziCpcValues)) {
-                $productDomain->setZboziCpc($zboziCpcValues[$domainId]);
-            }
-            if (!empty($zboziCpcSearchValues)) {
-                $productDomain->setZboziCpcSearch($zboziCpcSearchValues[$domainId]);
             }
             if (!empty($seoH1s)) {
                 $productDomain->setSeoH1($seoH1s[$domainId]);

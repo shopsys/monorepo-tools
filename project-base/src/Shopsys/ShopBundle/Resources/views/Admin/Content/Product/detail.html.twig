@@ -302,49 +302,6 @@
 
         <div class="form-group wrap-border">
             <div class="form-group__title">
-                {{ 'Products search engines'|trans }}
-            </div>
-            <div class="form-line form-line--no-padd">
-                <div class="form-line__group">
-                    <strong class="form-line__group__name">{{ 'Heureka.cz'|trans }}</strong>
-                </div>
-            </div>
-            {{ form_row(form.heurekaCpcValues, { label: 'Maximum price per click'|trans }) }}
-            <div class="form-line form-line--no-padd">
-                <div class="form-line__group">
-                    <strong class="form-line__group__name">{{ 'Zboží.cz'|trans }}</strong>
-                </div>
-            </div>
-            {{ form_row(form.showInZboziFeedIndexedByDomainId, { label: 'Offer in feed'|trans }) }}
-            <div class="form-line">
-                <div class="form-line__label">
-                    {{ 'Maximum price per click'|trans }}:
-                    <i
-                        class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
-                        data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
-                        title="{{ 'It is signed with MAX_CPC tags in feeds. If not mentioned, this information is not transmitted to the feed.'|trans }}"
-                    ></i>
-                </div>
-                {{ form_widget(form.zboziCpcValues) }}
-                {{ form_errors(form.zboziCpcValues) }}
-            </div>
-
-            <div class="form-line">
-                <div class="form-line__label">
-                    {{ 'Maximum price per click in offers'|trans }}:
-                    <i
-                        class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
-                        data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
-                        title="{{ 'It is signed with MAX_CPC_SEARCH tags in feeds. If not mentioned, this information is not transmitted to the feed.'|trans }}"
-                    ></i>
-                </div>
-                {{ form_widget(form.zboziCpcSearchValues) }}
-                {{ form_errors(form.zboziCpcSearchValues) }}
-            </div>
-        </div>
-
-        <div class="form-group wrap-border">
-            <div class="form-group__title">
                 {{ 'Images'|trans }}
             </div>
 

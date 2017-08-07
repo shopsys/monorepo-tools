@@ -72,34 +72,6 @@ class ProductDomain
     /**
      * @var string|null
      *
-     * @ORM\Column(type="decimal", precision=16, scale=2, nullable=true)
-     */
-    private $heurekaCpc;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", nullable=false)
-     */
-    private $showInZboziFeed;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="decimal", precision=16, scale=2, nullable=true)
-     */
-    private $zboziCpc;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="decimal", precision=16, scale=2, nullable=true)
-     */
-    private $zboziCpcSearch;
-
-    /**
-     * @var string|null
-     *
      * @ORM\Column(type="text", nullable=true)
      */
     private $seoH1;
@@ -107,13 +79,11 @@ class ProductDomain
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param int $domainId
-     * @param bool $showInZboziFeed
      */
-    public function __construct(Product $product, $domainId, $showInZboziFeed = true)
+    public function __construct(Product $product, $domainId)
     {
         $this->product = $product;
         $this->domainId = $domainId;
-        $this->showInZboziFeed = $showInZboziFeed;
     }
 
     /**
@@ -224,69 +194,5 @@ class ProductDomain
     public function getProduct()
     {
         return $this->product;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getHeurekaCpc()
-    {
-        return $this->heurekaCpc;
-    }
-
-    /**
-     * @param string|null $heurekaCpc
-     */
-    public function setHeurekaCpc($heurekaCpc)
-    {
-        $this->heurekaCpc = $heurekaCpc;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getShowInZboziFeed()
-    {
-        return $this->showInZboziFeed;
-    }
-
-    /**
-     * @param bool $showInZboziFeed
-     */
-    public function setShowInZboziFeed($showInZboziFeed)
-    {
-        $this->showInZboziFeed = $showInZboziFeed;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getZboziCpc()
-    {
-        return $this->zboziCpc;
-    }
-
-    /**
-     * @param string|null $zboziCpc
-     */
-    public function setZboziCpc($zboziCpc)
-    {
-        $this->zboziCpc = $zboziCpc;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getZboziCpcSearch()
-    {
-        return $this->zboziCpcSearch;
-    }
-
-    /**
-     * @param string|null $zboziCpcSearch
-     */
-    public function setZboziCpcSearch($zboziCpcSearch)
-    {
-        $this->zboziCpcSearch = $zboziCpcSearch;
     }
 }
