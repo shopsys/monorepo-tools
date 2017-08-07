@@ -662,12 +662,15 @@ msgstr ""
 msgid "Catalogue number"
 msgstr ""
 
-#: ImageController.php:70
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:4
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:5
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/list.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/list.html.twig:4
+msgid "Categories"
+msgstr ""
+
+#: ImageController.php:70
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:4
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:5
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopCategory/list.html.twig:12
 msgid "Category"
 msgstr ""

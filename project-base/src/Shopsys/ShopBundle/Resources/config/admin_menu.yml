@@ -43,7 +43,7 @@
         - label: 'Create variant'
           route: admin_product_createvariant
           visible: false
-    - label: 'Category'
+    - label: 'Categories'
       route: admin_category_list
       items:
         - label: 'New category'
