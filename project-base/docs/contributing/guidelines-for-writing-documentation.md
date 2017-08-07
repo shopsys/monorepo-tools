@@ -1,4 +1,4 @@
-# Contributing to documentation
+# Guidelines for Writing Documentation
 
 Documentation is distributed with the source code of Shopsys Framework inside [docs](../../docs/) directory in the project root.
 
