@@ -14,6 +14,8 @@ Optionally, the tag can have a `type` attribute:
 
 The methods to be implemented are described in the [FeedConfigInterface](./src/FeedConfigInterface.php) itself.
 
+For general information on plugin creation see the documentation of the [General Shopsys Framework Plugin Interface repository](https://github.com/shopsys/plugin-interface). 
+
 ### Example
 You can take a look at the package [shopsys/product-feed-zbozi](https://github.com/shopsys/product-feed-zbozi/)
 for implementation of [Zboží.cz](https://www.zbozi.cz) product feed plugin.
