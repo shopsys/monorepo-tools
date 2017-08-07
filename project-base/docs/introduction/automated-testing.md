@@ -146,7 +146,7 @@ More information can be found in [Running Acceptance Tests](running-acceptance-t
 See acceptance test for product filter in administration in [`\Tests\ShopBundle\Acceptance\acceptance\AdminProductAdvancedSearchCest`](../../tests/ShopBundle/Acceptance/acceptance/AdminProductAdvancedSearchCest.php). Notice the usage of auto-wired Page objects [`LoginPage`](../../tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/LoginPage.php) and [`ProductAdvancedSearchPage`](../../tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/ProductAdvancedSearchPage.php). They provide a way to reuse code that interacts with user interface.
 
 ### Performance tests
-These tests assert that key actions do not take too long. They are similar to [HTTP smoke tests]() but they measure response time as well. In addition to routes tested by HTTP smoke tests, these tests also request and measure regeneration of all product feeds.
+These tests assert that key actions do not take too long. They are similar to [HTTP smoke tests](#http-smoke-tests) but they measure response time as well. In addition to routes tested by HTTP smoke tests, these tests also request and measure regeneration of all product feeds.
 
 Before execution of the test suite, the testing database is filled with a large amount of data simulating production environment of a big e-commerce project. You will no longer unknowingly slow down a page because you are developing with only a small data set.
 
