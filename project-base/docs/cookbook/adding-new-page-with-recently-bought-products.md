@@ -1,4 +1,4 @@
-# Adding new page with recently bought products
+# Adding New Page With Recently Bought Products
 
 This cookbook will guide you through creating a new page in Shopsys Framework listing products that were recently bought by the user.
 Because this page is useful only for returning customers with a history of purchases it will be available for registered users only.

@@ -6,5 +6,5 @@
 * [Automated Testing](introduction/automated-testing.md)
 
 ## Cookbook
-* [Adding new attribute to an entity](cookbook/adding-new-attribute-to-an-entity.md)
-* [Adding new page with recently bought products](cookbook/adding-new-page-with-recently-bought-products.md)
+* [Adding New Attribute to an Entity](cookbook/adding-new-attribute-to-an-entity.md)
+* [Adding New Page With Recently Bought Products](cookbook/adding-new-page-with-recently-bought-products.md)
