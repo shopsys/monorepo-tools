@@ -1,4 +1,4 @@
-# Adding new attribute to an entity
+# Adding New Attribute to an Entity
 
 In the following example, we will add `code` field to the `Product`  entity.
 

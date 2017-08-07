@@ -55,7 +55,7 @@ Drops all data in the test database and creates a new one with demo data.
 #### img-demo
 Installs demo images.
 
-### Coding Standards
+### Coding standards
 
 #### standards / standards-diff
 Checks coding standards in source files. Checking all files may take a few minutes, `standards-diff` is much quicker as it checks only files changed against `origin/master`.
