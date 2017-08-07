@@ -355,7 +355,15 @@
             {{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
         </div>
 
-        {{ form_row(form.accessories, { label: 'Accessories'|trans }) }}
+        <div class="form-group {% if form.pluginData is not empty %}wrap-border{% endif %}">
+            <div class="form-group__title">
+                {{ 'Accessories'|trans }}
+                <div class="form-group__error">
+                    {{- form_errors(form.accessories) -}}
+                </div>
+            </div>
+            {{- form_widget(form.accessories) -}}
+        </div>
 
         {% if form.pluginData is empty %}
             {% do form.pluginData.setRendered %}
