@@ -69,7 +69,7 @@ class Localization
     /**
      * @return array
      */
-    public function getAllLocales()
+    public function getLocalesOfAllDomains()
     {
         if ($this->allLocales === null) {
             $this->allLocales = [];
