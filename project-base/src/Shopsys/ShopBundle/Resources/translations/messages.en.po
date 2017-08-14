@@ -13,7 +13,7 @@ msgstr ""
 msgid "%defaultCurrency% per unit"
 msgstr ""
 
-#: FeedConfigRepository.php:82
+#: HeurekaDeliveryFeedConfig.php:30
 msgid "%feedName% - availability"
 msgstr ""
 
@@ -34,7 +34,7 @@ msgid "- Email settings"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:3
-msgid "- Heureka - Ověřeno zákazníky"
+msgid "- Heureka - Verified by Customer"
 msgstr ""
 
 #: ProductFormType.php:183
@@ -50,7 +50,7 @@ msgstr ""
 msgid "-- Choose article --"
 msgstr ""
 
-#: ArticleFormType.php:90
+#: ArticleFormType.php:99
 msgid "-- Choose article position --"
 msgstr ""
 
@@ -80,13 +80,17 @@ msgstr ""
 msgid "ATTENTION - inserting scripts on the page can seriously endanger the security, performance or design of the app."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:413
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:375
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:9
 msgid "Accessories"
 msgstr ""
 
 #: ModuleList.php:39
 msgid "Accessories in purchase confirmation box"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+msgid "Account"
 msgstr ""
 
 #: FeedController.php:109
@@ -97,7 +101,7 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:184
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:146
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:82
 msgid "Action after sellout"
 msgstr ""
@@ -115,7 +119,7 @@ msgstr ""
 msgid "Add URL"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:323
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:285
 msgid "Add another parameter"
 msgstr ""
 
@@ -141,7 +145,7 @@ msgstr ""
 msgid "Add requirement"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:314
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:276
 msgid "Add some parameters"
 msgstr ""
 
@@ -178,29 +182,24 @@ msgstr ""
 msgid "Administrator"
 msgstr ""
 
-#: AdministratorController.php:175
+#: AdministratorController.php:187
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: AdministratorController.php:109
+#: AdministratorController.php:119
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: AdministratorController.php:220
+#: AdministratorController.php:225
 msgid "Administrator <strong>{{ name }}</strong> deleted."
 msgstr ""
 
-#: AdministratorController.php:229
+#: AdministratorController.php:234
 msgid "Administrator <strong>{{ name }}</strong> is the only one and can't be deleted."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/edit.html.twig:8
 msgid "Administrator activities history"
-msgstr ""
-
-#: AdministratorController.php:125
-#: AdministratorController.php:191
-msgid "Administrator with login name <strong>{{ name }}</strong> already exists"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
@@ -280,7 +279,7 @@ msgstr ""
 msgid "An example might be empty space with icon behind it, which we want to align with icon next to input."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:20
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:21
 msgid "Ancestor category"
 msgstr ""
 
@@ -311,8 +310,8 @@ msgstr ""
 msgid "Area"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:3
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:4
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:5
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:6
 msgid "Article"
 msgstr ""
 
@@ -336,7 +335,7 @@ msgstr ""
 msgid "Article <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:12
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:14
 msgid "Article data"
 msgstr ""
 
@@ -362,7 +361,7 @@ msgstr ""
 msgid "As this is a system which will often use same or similar elements, it is suitable to use a type of coding that divides web to components and variously combines them with each other."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:154
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:116
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:169
 msgid "Assign to category"
 msgstr ""
@@ -398,7 +397,7 @@ msgstr ""
 
 #: AdvancedSearchProductFilterTranslation.php:17
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:190
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:152
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:88
 msgid "Availability"
 msgstr ""
@@ -415,12 +414,12 @@ msgstr ""
 msgid "Availability <strong>{{ oldName }}</strong> deleted and replaced by availability <strong>{{ newName }}</strong>"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:186
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:148
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:84
 msgid "Availability after sellout"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:183
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:145
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:81
 msgid "Available in stock"
 msgstr ""
@@ -448,10 +447,10 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:29
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:35
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:94
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:43
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/BestsellingProduct/detail.html.twig:26
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:27
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:162
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:30
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:70
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:103
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:226
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:59
@@ -497,6 +496,10 @@ msgstr ""
 msgid "Basic frontend currency %domainName%"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:12
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:18
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:68
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:14
 msgid "Basic information"
 msgstr ""
@@ -535,7 +538,7 @@ msgid "Billing address"
 msgstr ""
 
 #: MailController.php:87
-msgid "Billing address - name, surname, company, company number, tax number and billing address"
+msgid "Billing address - name, last name, company, company number, tax number and billing address"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:116
@@ -551,8 +554,8 @@ msgstr ""
 #: ImageController.php:76
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:4
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:125
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:106
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:87
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:110
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:81
 msgid "Brand"
 msgstr ""
@@ -634,7 +637,7 @@ msgid "Buttons"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:659
-msgid "By using modifier on the line it is possible to bluish the whole line and create a group of lines with headline and picture."
+msgid "By using modifier on the line it is possible to bluish the whole line and create a group of lines with headline and image."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:618
@@ -653,18 +656,21 @@ msgstr ""
 #: AdvancedSearchProductFilterTranslation.php:11
 #: ProductPickerController.php:140
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:171
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:110
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:72
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:55
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:118
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:122
 msgid "Catalogue number"
 msgstr ""
 
-#: ImageController.php:70
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:3
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/list.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/list.html.twig:4
+msgid "Categories"
+msgstr ""
+
+#: ImageController.php:70
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:4
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:5
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopCategory/list.html.twig:12
 msgid "Category"
 msgstr ""
@@ -677,7 +683,7 @@ msgstr ""
 msgid "Category <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:22
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:23
 msgid "Category Heureka.cz"
 msgstr ""
 
@@ -781,7 +787,7 @@ msgstr ""
 msgid "Close (Esc)"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:417
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:379
 msgid "Close without saving"
 msgstr ""
 
@@ -793,7 +799,7 @@ msgid "Code"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:11
-msgid "Code of service Heureka - Ověřeno zákazníky"
+msgid "Code of service Heureka - Verified by Customer"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:43
@@ -867,10 +873,6 @@ msgstr ""
 msgid "Complement to title will be set as suffix to all titles e.g. if complement is set “ | My shop” and product name is “iPhone S7” the result title for this products page will be “iPhone S7 | My shop”."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:998
-msgid "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anythin in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
-msgstr ""
-
 #: ContactFormFacade.php:61
 msgid "Contact form"
 msgstr ""
@@ -881,7 +883,7 @@ msgstr ""
 msgid "Contact us"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:24
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:26
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:15
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Mail/template.html.twig:21
 msgid "Content"
@@ -972,10 +974,6 @@ msgstr ""
 msgid "Create currency"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:24
-msgid "Create discount coupon"
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Flag/listGrid.html.twig:13
 msgid "Create flag"
 msgstr ""
@@ -1030,6 +1028,10 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/listGrid.html.twig:12
 msgid "Create pricing group"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:24
+msgid "Create promo code"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:378
@@ -1101,7 +1103,7 @@ msgstr ""
 msgid "Customer"
 msgstr ""
 
-#: CustomerController.php:241
+#: CustomerController.php:237
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
@@ -1109,7 +1111,7 @@ msgstr ""
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: CustomerController.php:277
+#: CustomerController.php:273
 msgid "Customer <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -1178,12 +1180,6 @@ msgstr ""
 msgid "Default product in stock availability"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:18
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:106
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:18
-msgid "Default settings"
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Unit/setting.html.twig:6
 msgid "Default unit"
 msgstr ""
@@ -1215,10 +1211,10 @@ msgstr ""
 msgid "Delivery data"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:13
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:131
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:16
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:39
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:43
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:216
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:178
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:271
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:39
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:41
@@ -1263,26 +1259,11 @@ msgstr ""
 msgid "Discount code removed from order"
 msgstr ""
 
-#: OrderCreationService.php:259
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/preview.html.twig:20
-msgid "Discount coupon"
-msgstr ""
-
-#: PromoCodeController.php:71
-msgid "Discount coupon <strong>{{ code }}</strong> deleted."
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/list.html.twig:3
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/list.html.twig:4
-msgid "Discount coupons"
-msgstr ""
-
 #: ProductMassActionFormType.php:44
 msgid "Display"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:132
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:94
 msgid "Display and availability"
 msgstr ""
 
@@ -1290,11 +1271,7 @@ msgstr ""
 msgid "Display input -> input"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:821
-msgid "Display of inputs like checkboxes and radio buttons is done via <strong class=\"in-article__visible\">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class=\"in-article__visible\">inList</strong> and they are displayed below each other on true."
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:21
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:22
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:23
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:23
 msgid "Display on"
@@ -1345,7 +1322,7 @@ msgstr ""
 msgid "Do you really want to remove the order?"
 msgstr ""
 
-#: AdministratorController.php:73
+#: AdministratorController.php:74
 msgid "Do you really want to remove this administrator?"
 msgstr ""
 
@@ -1363,10 +1340,6 @@ msgstr ""
 
 #: CustomerController.php:200
 msgid "Do you really want to remove this customer?"
-msgstr ""
-
-#: PromoCodeGridFactory.php:48
-msgid "Do you really want to remove this discount coupon?"
 msgstr ""
 
 #: FlagGridFactory.php:61
@@ -1389,6 +1362,10 @@ msgstr ""
 msgid "Do you really want to remove this product?"
 msgstr ""
 
+#: PromoCodeGridFactory.php:48
+msgid "Do you really want to remove this promo code?"
+msgstr ""
+
 #: ScriptController.php:126
 msgid "Do you really want to remove this script?"
 msgstr ""
@@ -1408,7 +1385,7 @@ msgstr ""
 #: AdvancedSearchOrderFilterTranslation.php:14
 #: OrderController.php:229
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:15
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:18
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/edit.html.twig:47
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/new.html.twig:7
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:32
@@ -1464,7 +1441,7 @@ msgstr ""
 msgid "Drag file here"
 msgstr ""
 
-#: AdministratorController.php:68
+#: AdministratorController.php:69
 #: CustomerController.php:189
 #: MailController.php:109
 #: MailController.php:121
@@ -1538,9 +1515,9 @@ msgstr ""
 msgid "E-shop identification"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:118
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:80
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:71
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:136
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:140
 msgid "EAN"
 msgstr ""
 
@@ -1560,7 +1537,7 @@ msgstr ""
 msgid "Editing administrator"
 msgstr ""
 
-#: AdministratorController.php:138
+#: AdministratorController.php:141
 msgid "Editing administrator - %name%"
 msgstr ""
 
@@ -1768,7 +1745,7 @@ msgid "Exchange rate"
 msgstr ""
 
 #: ProductFormType.php:181
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:143
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:105
 msgid "Exclude from sale"
 msgstr ""
 
@@ -1871,7 +1848,7 @@ msgid "Flag <strong>{{ name }}</strong> deleted"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:123
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:85
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:51
 msgid "Flags"
 msgstr ""
@@ -1998,10 +1975,14 @@ msgid "Front-end: Preview in autocomplete for search, preview in cart during ord
 msgstr ""
 
 #: ImageController.php:126
-msgid "Front-end: Thumbnail of images under the main picture in product detail"
+msgid "Front-end: Thumbnail of images under the main image in product detail"
 msgstr ""
 
-#: AdministratorController.php:67
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+msgid "Frontend"
+msgstr ""
+
+#: AdministratorController.php:68
 #: CustomerController.php:186
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:6
@@ -2047,9 +2028,9 @@ msgstr ""
 msgid "HTML code"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:72
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:96
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:338
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:36
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:35
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:300
 msgid "Heading (H1)"
 msgstr ""
 
@@ -2078,14 +2059,18 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:4
-msgid "Heureka - Ověřeno zákazníky"
+msgid "Heureka - Verified by Customer"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:24
+msgid "Heureka - Verified by Customer service does not support the language of this domain."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:13
 msgid "Heureka Widget code"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:349
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:311
 msgid "Heureka.cz"
 msgstr ""
 
@@ -2099,7 +2084,7 @@ msgid "Hidden copy"
 msgstr ""
 
 #: ProductMassActionFormType.php:43
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:23
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:25
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:26
 msgid "Hide"
 msgstr ""
@@ -2109,7 +2094,7 @@ msgid "Hide advertisement"
 msgstr ""
 
 #: ProductFormType.php:180
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:135
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:97
 msgid "Hide product"
 msgstr ""
 
@@ -2161,10 +2146,6 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:913
-msgid "If we combine 3 components with each other, it will create nice forms design. We are talking about <strong class=\"in-article__visible\">form-group</strong> for headline, <strong class=\"in-article__visible\">form-line</strong> for form and <strong class=\"in-article__visible\">wrap-border</strong> for separating blocks of information."
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1290
 msgid "If we need something about input size"
 msgstr ""
@@ -2183,6 +2164,39 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/modules.html.twig:8
 msgid "If you want for these changes to manifest everywhere (on production, devel, localhost etc.) instruct a programmer to commit the changes into GIT!"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:26
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:22
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/edit.html.twig:13
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:62
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/edit.html.twig:13
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:49
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/edit.html.twig:42
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:31
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/edit.html.twig:22
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:48
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/edit.html.twig:42
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:26
+msgid "Image"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:3
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:4
+msgid "Image size"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:355
+msgid "Image will be deleted after saving."
+msgstr ""
+
+#: AdvertFormType.php:56
+msgid "Image with link"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:365
+msgid "Images"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:74
@@ -2363,11 +2377,11 @@ msgstr ""
 msgid "It is possible to use this when creating a link: mark the text you want to create the link from with mouse and push the Link button (top right, interconnected staples icon). In the popup menu select the protocol <different> and insert the text \"%orderDetailUrlConstant%\" in the URL field (Including the braces)"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:380
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:342
 msgid "It is signed with MAX_CPC tags in feeds. If not mentioned, this information is not transmitted to the feed."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:393
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:355
 msgid "It is signed with MAX_CPC_SEARCH tags in feeds. If not mentioned, this information is not transmitted to the feed."
 msgstr ""
 
@@ -2405,6 +2419,23 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/edit.html.twig:30
 msgid "Last login"
+msgstr ""
+
+#: MailController.php:108
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:30
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:88
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:94
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:140
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:20
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:83
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:39
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:101
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:14
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:49
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:15
+#: src/Shopsys/ShopBundle/Resources/views/Mail/Order/billingAddress.html.twig:4
+#: src/Shopsys/ShopBundle/Resources/views/Mail/Order/deliveryAddress.html.twig:4
+msgid "Last name"
 msgstr ""
 
 #: CustomerController.php:194
@@ -2509,7 +2540,8 @@ msgstr ""
 msgid "Log in failed."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Inline/Menu/menu.html.twig:28
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Inline/Menu/menu.html.twig:63
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Inline/Menu/menu.html.twig:64
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:102
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/layout.html.twig:11
 msgid "Log out"
@@ -2536,6 +2568,11 @@ msgstr ""
 msgid "Login name"
 msgstr ""
 
+#: AdministratorController.php:128
+#: AdministratorController.php:196
+msgid "Login name <strong>{{ name }}</strong> is already used"
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/edit.html.twig:13
 msgid "Login time"
 msgstr ""
@@ -2556,14 +2593,14 @@ msgstr ""
 msgid "Main category:"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:344
+msgid "Main image"
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopProduct/list.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopProduct/list.html.twig:4
 msgid "Main page products"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:344
-msgid "Main picture"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:993
@@ -2597,12 +2634,12 @@ msgstr ""
 msgid "Matching first and second cell of a row with the rest of form"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:352
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:376
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:314
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:338
 msgid "Maximum price per click"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:389
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:351
 msgid "Maximum price per click in offers"
 msgstr ""
 
@@ -2620,9 +2657,9 @@ msgstr ""
 msgid "Messages"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:53
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:64
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:336
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:35
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:33
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:298
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Seo/seoSetting.html.twig:18
 msgid "Meta description"
 msgstr ""
@@ -2664,6 +2701,10 @@ msgstr ""
 msgid "Multidomain, multilingual, inputs with ikon - basic"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+msgid "My account"
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:7
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orders.html.twig:7
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orders.html.twig:10
@@ -2689,19 +2730,19 @@ msgstr ""
 #: UnitGridFactory.php:55
 #: VatGridFactory.php:68
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:16
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:12
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:19
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:24
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:15
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:170
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:84
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:46
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Script/detail.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:24
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:22
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:480
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:27
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:145
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:157
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:161
 #: src/Shopsys/ShopBundle/Resources/views/Mail/Order/products.html.twig:3
 msgid "Name"
 msgstr ""
@@ -2850,10 +2891,6 @@ msgstr ""
 msgid "No customers found."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:4
-msgid "No discount coupons found. You have to create some first."
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Domain/listGrid.html.twig:4
 msgid "No domains so far."
 msgstr ""
@@ -2897,6 +2934,10 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/productsWithControls.html.twig:31
 msgid "No products found for this brand"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:4
+msgid "No promo codes found. You have to create some first."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:51
@@ -2976,7 +3017,7 @@ msgstr ""
 msgid "Occurence"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:359
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:321
 msgid "Offer in feed"
 msgstr ""
 
@@ -3164,8 +3205,8 @@ msgid "Page not found!"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:34
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:32
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:334
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:31
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:296
 msgid "Page title"
 msgstr ""
 
@@ -3173,7 +3214,7 @@ msgstr ""
 msgid "Page you are looking for either no longer exists or you entered wrong address."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:275
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:237
 msgid "Parameter"
 msgstr ""
 
@@ -3182,7 +3223,7 @@ msgid "Parameter <strong>{{ name }}</strong> deleted"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:268
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:230
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormMacro.html.twig:110
 msgid "Parameters"
 msgstr ""
@@ -3193,7 +3234,7 @@ msgid "Parameters overview"
 msgstr ""
 
 #: AdvancedSearchProductFilterTranslation.php:14
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:114
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:76
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:63
 msgid "PartNo (serial number)"
 msgstr ""
@@ -3281,39 +3322,6 @@ msgstr ""
 msgid "Phone availability"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:26
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:19
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/edit.html.twig:13
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:154
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/edit.html.twig:13
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:49
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/edit.html.twig:42
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:31
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/edit.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:48
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/edit.html.twig:42
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:26
-msgid "Picture"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:3
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:4
-msgid "Picture size"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:355
-msgid "Picture will be deleted after saving."
-msgstr ""
-
-#: AdvertFormType.php:56
-msgid "Picture with link"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:403
-msgid "Pictures"
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1312
 msgid "Place for input"
 msgstr ""
@@ -3322,8 +3330,8 @@ msgstr ""
 msgid "Please check following information:"
 msgstr ""
 
-#: AdministratorController.php:134
-#: AdministratorController.php:200
+#: AdministratorController.php:137
+#: AdministratorController.php:205
 #: AdvertController.php:101
 #: AdvertController.php:196
 #: ArticleController.php:116
@@ -3336,7 +3344,7 @@ msgstr ""
 #: CookiesController.php:58
 #: CustomerController.php:83
 #: CustomerController.php:147
-#: CustomerController.php:256
+#: CustomerController.php:252
 #: MailController.php:150
 #: OrderController.php:141
 #: OrderController.php:227
@@ -3440,7 +3448,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:203
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/edit.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:31
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:159
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:163
 msgid "Price including VAT"
 msgstr ""
 
@@ -3454,7 +3462,7 @@ msgid "Price to"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:28
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:201
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:163
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:30
 msgid "Prices"
 msgstr ""
@@ -3522,7 +3530,7 @@ msgstr ""
 msgid "Product <strong>{{ product|productDisplayName }}</strong> modified"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:43
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:5
 msgid "Product detail"
 msgstr ""
 
@@ -3567,7 +3575,7 @@ msgstr ""
 msgid "Product name in default language is not entered"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:63
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:67
 msgid "Product no longer on sale"
 msgstr ""
 
@@ -3597,7 +3605,7 @@ msgstr ""
 msgid "Products"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:145
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:107
 msgid "Products excluded from sale can't be displayed on lists and can't be searched. Product detail is available by direct access from the URL, but it is not possible to add product to cart."
 msgstr ""
 
@@ -3615,8 +3623,23 @@ msgstr ""
 msgid "Products overview"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:345
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:307
 msgid "Products search engines"
+msgstr ""
+
+#: OrderCreationService.php:259
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/preview.html.twig:20
+msgid "Promo code"
+msgstr ""
+
+#: PromoCodeController.php:71
+msgid "Promo code <strong>{{ code }}</strong> deleted."
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/list.html.twig:3
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/list.html.twig:4
+msgid "Promo codes"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ShopInfo/shopInfo.html.twig:13
@@ -3702,9 +3725,9 @@ msgid "Row grouping"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:29
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:27
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:331
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:31
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:28
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:293
 msgid "SEO"
 msgstr ""
 
@@ -3717,7 +3740,7 @@ msgstr ""
 msgid "SEO attributes settings modified"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:205
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:167
 msgid "Sale prices calculation"
 msgstr ""
 
@@ -3826,16 +3849,16 @@ msgstr ""
 msgid "Searching in all currecies"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/list.html.twig:22
+msgid "Searching searches in last name, company name, email, telephone. It is possible to use wildcards * and ?."
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/quickSearchFormContent.html.twig:7
-msgid "Searching searches in name, catalogue number or product part number. It is possible to use operators * a?."
+msgid "Searching searches in name, catalogue number or product part number. It is possible to use wildcards * and ?."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/quickSearchFormContent.html.twig:7
-msgid "Searching searches in order number, registered customer email, customer's email in order, customer's surname and company name. It is possible to use operators * a?."
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/list.html.twig:22
-msgid "Searching searches in surname, company name, email, telephone. It is possible to use operators * a?."
+msgid "Searching searches in order number, registered customer email, customer's email in order, customer's last name and company name. It is possible to use wildcards * and ?."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:211
@@ -3859,7 +3882,7 @@ msgstr ""
 msgid "Selected VAT doesn't exist."
 msgstr ""
 
-#: AdministratorController.php:235
+#: AdministratorController.php:240
 msgid "Selected administrated doesn't exist."
 msgstr ""
 
@@ -3892,12 +3915,8 @@ msgstr ""
 msgid "Selected currency doesn't exist."
 msgstr ""
 
-#: CustomerController.php:283
+#: CustomerController.php:279
 msgid "Selected customer doesn't exist."
-msgstr ""
-
-#: PromoCodeController.php:77
-msgid "Selected discount coupon doesn't exist."
 msgstr ""
 
 #: FlagController.php:64
@@ -3939,6 +3958,10 @@ msgstr ""
 msgid "Selected product no longer available or doesn't exist."
 msgstr ""
 
+#: PromoCodeController.php:77
+msgid "Selected promo code doesn't exist."
+msgstr ""
+
 #: ScriptController.php:156
 msgid "Selected script doesn't exist."
 msgstr ""
@@ -3955,11 +3978,11 @@ msgstr ""
 msgid "Selected unit doesn't exist."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:141
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:103
 msgid "Selling end date"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:139
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:101
 msgid "Selling start date"
 msgstr ""
 
@@ -3983,12 +4006,8 @@ msgstr ""
 msgid "Sending e-mails off, no e-mail will be sent from the app."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:127
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:131
 msgid "Serial number"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:24
-msgid "Servis Heuréka - Approved by customers doesn't support the language of this domain."
 msgstr ""
 
 #: ProductMassActionFormType.php:31
@@ -4009,7 +4028,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:12
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:12
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Availability/setting.html.twig:4
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:16
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Cookies/setting.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Currency/currencySettings.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:13
@@ -4021,7 +4040,6 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TermsAndConditions/setting.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Unit/setting.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Vat/vatSettings.html.twig:4
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Inline/Menu/menu.html.twig:14
 msgid "Settings"
 msgstr ""
 
@@ -4089,7 +4107,7 @@ msgstr ""
 msgid "Shipping selection"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:243
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:205
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:303
 msgid "Short description"
 msgstr ""
@@ -4141,15 +4159,7 @@ msgstr ""
 msgid "Small conversion button"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1092
-msgid "Sometimes it is necessary to align one of the elements to right/left side. You can do that using modifier <strong class=\"in-article__visible\">form-line__item--right</strong> or <strong class=\"in-article__visible\">form-line__item--left</strong>."
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1372
-msgid "Sometimes there is thicker line between some elements than between others. It is mainly in cases when the form-line elements are not directly behind each other, but some of them are covered with some dive, e.g. because of JS, for hiding and revealing. To that kind of dive you need to add class <strong class=\"in-article__visible\">form-line__js</strong>."
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:194
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:156
 msgid "Sorting priority"
 msgstr ""
 
@@ -4250,23 +4260,6 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/urlsListGrid.html.twig:3
 msgid "Superadmin - URL addresses"
-msgstr ""
-
-#: MailController.php:108
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:30
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:88
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:94
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:140
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:20
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:83
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:39
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:101
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:14
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:49
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:15
-#: src/Shopsys/ShopBundle/Resources/views/Mail/Order/billingAddress.html.twig:4
-#: src/Shopsys/ShopBundle/Resources/views/Mail/Order/deliveryAddress.html.twig:4
-msgid "Surname"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:14
@@ -4459,10 +4452,6 @@ msgstr ""
 msgid "Terms-and-conditions.html"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:562
-msgid "Text behind input. To generate the input correctly, it is necessary to write is like <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>"
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:556
 msgid "Text behind label"
 msgstr ""
@@ -4526,7 +4515,7 @@ msgid "There are several types of tables, but it is not necessary to write down 
 msgstr ""
 
 #: CustomerController.php:142
-#: CustomerController.php:250
+#: CustomerController.php:246
 #: RegistrationController.php:68
 msgid "There is already a customer with this e-mail in the database"
 msgstr ""
@@ -4570,10 +4559,6 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:84
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:88
 msgid "This item can be set in product detail of a specific variant"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:96
-msgid "This product is no longer available for purchase. Have a look at similar products <a href=\"%url%\">here</a>."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/layout.html.twig:45
@@ -4721,10 +4706,6 @@ msgstr ""
 msgid "URL will be deleted after saving."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Error/error.html.twig:36
-msgid "Uh-oh, uh-oh. And specially <strong>\"%status_code% %status_text%\"</strong>, as if it was on purpose!"
-msgstr ""
-
 #: productsPicker.window.js:80
 msgid "Unable to add"
 msgstr ""
@@ -4764,7 +4745,7 @@ msgid "Unexpected error occurred, file was not uploaded."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:174
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:178
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:140
 msgid "Unit"
 msgstr ""
 
@@ -4804,20 +4785,20 @@ msgstr ""
 msgid "Upload icon"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:30
-msgid "Upload new picture"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:157
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:25
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:65
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:53
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:34
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:52
-msgid "Upload picture"
+msgid "Upload image"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:30
+msgid "Upload new image"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/edit.html.twig:8
-msgid "Uploaded picture"
+msgid "Uploaded image"
 msgstr ""
 
 #: fileUpload.js:87
@@ -4833,7 +4814,7 @@ msgstr ""
 msgid "Use"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:181
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:143
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:79
 msgid "Use stocks"
 msgstr ""
@@ -4855,7 +4836,7 @@ msgid "Username"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:35
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:206
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:168
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:32
 msgid "VAT"
 msgstr ""
@@ -4900,7 +4881,7 @@ msgstr ""
 msgid "VAT settings modified"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:277
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:239
 msgid "Value"
 msgstr ""
 
@@ -4967,23 +4948,6 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:235
 msgid "Warning message - block with icon"
-msgstr ""
-
-#: AdministratorController.php:118
-#: AdministratorController.php:184
-msgid "We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please."
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:792
-msgid "We will get the display by adding modifiers to input, but it is important to wrap input with dive with class <strong class=\"in-article__visible\">input__wrap</strong>. Pictures are positioned to this class. This structure should be generated by the system itself. If manual writing needed it is important to pay attention and don't forget to add flag <strong class=\"in-article__visible\">localeFlag(locale)</strong>, domain <strong class=\"in-article__visible\">or icon."
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:763
-msgid "We will get the display by writing input as <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>."
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:779
-msgid "We will get the display either by adding class to element or via <strong class=\"in-article__visible\">form_widget</strong> we add <strong class=\"in-article__visible\">attr class</strong>"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:26
@@ -5079,16 +5043,16 @@ msgid "You can set the prices on product detail of specific variant."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:30
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:157
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:25
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:65
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:53
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:408
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:370
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:25
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:52
 msgid "You can upload following formats: PNG, JPG, GIF"
 msgstr ""
 
-#: AdministratorController.php:226
+#: AdministratorController.php:231
 msgid "You can't delete yourself."
 msgstr ""
 
@@ -5138,10 +5102,6 @@ msgstr ""
 msgid "Your cart is empty"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:160
-msgid "Your cart is unfortunately empty. To create order, you have to <a href=\"%url%\">choose</a> some product first"
-msgstr ""
-
 #: CustomerController.php:78
 msgid "Your data had been successfully updated"
 msgstr ""
@@ -5150,7 +5110,7 @@ msgstr ""
 msgid "Your discount"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:355
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:317
 msgid "Zboží.cz"
 msgstr ""
 
@@ -5244,20 +5204,12 @@ msgstr ""
 msgid "default"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:19
-msgid "discount coupons"
-msgstr ""
-
 #: AdvancedSearchOperatorTranslation.php:18
 msgid "doesn't include"
 msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:23
 msgid "doesn't use"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:862
-msgid "domain icon only in checkbox list, icon is inserted <strong class=\"in-article__visible\">domainIcon(domainId, \"small\") </strong>"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:871
@@ -5269,7 +5221,7 @@ msgid "double signs are clear and developer will intuitively know senses of diff
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/bestsellingProductsList.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:81
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:85
 msgid "excluding VAT"
 msgstr ""
 
@@ -5316,7 +5268,7 @@ msgstr ""
 msgid "in category (above the category name)"
 msgstr ""
 
-#: ArticleFormType.php:87
+#: ArticleFormType.php:96
 msgid "in footer"
 msgstr ""
 
@@ -5325,7 +5277,7 @@ msgstr ""
 msgid "in left panel (under category tree)"
 msgstr ""
 
-#: ArticleFormType.php:86
+#: ArticleFormType.php:95
 msgid "in upper menu"
 msgstr ""
 
@@ -5391,6 +5343,10 @@ msgstr ""
 msgid "products"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:19
+msgid "promo codes"
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:219
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Paginator/paginator.html.twig:7
 msgid "records"
@@ -5433,7 +5389,7 @@ msgstr ""
 msgid "uses"
 msgstr ""
 
-#: ArticleFormType.php:88
+#: ArticleFormType.php:97
 msgid "without positoning"
 msgstr ""
 

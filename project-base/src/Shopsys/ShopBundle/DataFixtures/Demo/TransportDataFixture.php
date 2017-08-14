@@ -62,7 +62,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 
         $transportEditData->transportData->name = [
             'cs' => 'Osobní převzetí',
-            'en' => 'Personal takeover',
+            'en' => 'Personal collection',
         ];
         $transportEditData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 0,

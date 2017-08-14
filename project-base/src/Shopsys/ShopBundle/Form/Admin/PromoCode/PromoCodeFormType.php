@@ -85,7 +85,7 @@ class PromoCodeFormType extends AbstractType
             $promoCode = $this->promoCodeFacade->findPromoCodeByCode($promoCodeValue);
 
             if ($promoCode !== null) {
-                $context->addViolation('Discount coupon with this code already exists');
+                $context->addViolation('Promo code with this code already exists');
             }
         }
     }

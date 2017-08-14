@@ -53,7 +53,7 @@ class AdvertFormType extends AbstractType
                 'required' => true,
                 'choices' => [
                     t('HTML code') => Advert::TYPE_CODE,
-                    t('Picture with link') => Advert::TYPE_IMAGE,
+                    t('Image with link') => Advert::TYPE_IMAGE,
                 ],
                 'expanded' => true,
                 'multiple' => false,

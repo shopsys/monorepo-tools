@@ -28,10 +28,10 @@
 
         <div class="form-group">
             <div class="form-group__title">
-                {{ 'Picture'|trans }}
+                {{ 'Image'|trans }}
             </div>
             {% block image %}{% endblock %}
-            {{ form_row(form.image, { label: 'Upload picture'|trans}) }}
+            {{ form_row(form.image, { label: 'Upload image'|trans}) }}
         </div>
 
         {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}

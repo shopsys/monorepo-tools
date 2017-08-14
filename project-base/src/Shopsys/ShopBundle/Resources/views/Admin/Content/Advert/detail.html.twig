@@ -23,11 +23,11 @@
         </div>
         <div class="form-group js-advert-type-content" data-type="image">
             <div class="form-group__title">
-                {{ 'Picture'|trans }}
+                {{ 'Image'|trans }}
             </div>
             {{ form_row(form.link, { label: 'Link'|trans}) }}
             {% block image %}{% endblock %}
-            {{ form_row(form.image, { label: 'Upload new picture'|trans, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans}) }}
+            {{ form_row(form.image, { label: 'Upload new image'|trans, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans}) }}
         </div>
 
         {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}

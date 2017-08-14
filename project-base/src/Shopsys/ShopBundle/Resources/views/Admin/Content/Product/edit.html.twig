@@ -341,7 +341,7 @@
                                 {{ image(image, {size: 'original', height: '100'}) }}
                             </div>
                             <span class="list-images__item__main">
-                                {{ 'Main picture'|trans }}
+                                {{ 'Main image'|trans }}
                             </span>
                             <button class="js-product-images-delete-button btn-no-style list-images__item__remove" type="button" title="{{ 'Delete'|trans }}">
                                 <i class="svg svg-circle-cross"></i>
@@ -352,7 +352,7 @@
                             <button class="btn-no-style js-product-images-delete-revert-button display-none list-images__item__revert" type="button" title="{{ 'Return back'|trans }}">
                                 <i class="svg svg-forward-page"></i>
                             </button>
-                            <span class="list-images__item__overlay js-product-images-image-overlay">{{ 'Picture will be deleted after saving.'|trans }}</span>
+                            <span class="list-images__item__overlay js-product-images-image-overlay">{{ 'Image will be deleted after saving.'|trans }}</span>
                         </div>
                         {# Ignore indices from form definition. Let them reflect new positions. #}
                         {{ form_widget(imageForm, { full_name: form.orderedImagesById.vars.full_name ~ '[]'}) }}

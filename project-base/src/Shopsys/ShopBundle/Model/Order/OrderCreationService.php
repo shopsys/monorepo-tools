@@ -256,7 +256,7 @@ class OrderCreationService
     {
         $name = sprintf(
             '%s %s - %s',
-            t('Discount coupon', [], 'messages', $locale),
+            t('Promo code', [], 'messages', $locale),
             $this->numberFormatterExtension->formatPercent(-$discountPercent, $locale),
             $orderItem->getName()
         );

@@ -25,14 +25,14 @@ class OrderCest
 
         $orderPage->assertTransportIsNotSelected('Czech post');
         $orderPage->selectTransport('Czech post');
-        $orderPage->assertPaymentIsNotSelected('Personal collection');
-        $orderPage->selectPayment('Personal collection');
+        $orderPage->assertPaymentIsNotSelected('Cash on delivery');
+        $orderPage->selectPayment('Cash on delivery');
         $me->waitForAjax();
         $me->clickByText('Continue in order');
         $me->clickByText('Back to shipping and payment selection');
 
         $orderPage->assertTransportIsSelected('Czech post');
-        $orderPage->assertPaymentIsSelected('Personal collection');
+        $orderPage->assertPaymentIsSelected('Cash on delivery');
     }
 
     public function testFormRemembersPaymentAndTransportWhenGoingDirectlyToUrl(
@@ -49,14 +49,14 @@ class OrderCest
 
         $orderPage->assertTransportIsNotSelected('Czech post');
         $orderPage->selectTransport('Czech post');
-        $orderPage->assertPaymentIsNotSelected('Personal collection');
-        $orderPage->selectPayment('Personal collection');
+        $orderPage->assertPaymentIsNotSelected('Cash on delivery');
+        $orderPage->selectPayment('Cash on delivery');
         $me->waitForAjax();
         $me->clickByText('Continue in order');
         $me->amOnPage('/order/');
 
         $orderPage->assertTransportIsSelected('Czech post');
-        $orderPage->assertPaymentIsSelected('Personal collection');
+        $orderPage->assertPaymentIsSelected('Cash on delivery');
     }
 
     public function testFormRemembersFirstName(ProductListPage $productListPage, OrderPage $orderPage, AcceptanceTester $me)
@@ -68,7 +68,7 @@ class OrderCest
         $me->clickByText('Go to cart');
         $me->clickByText('Order');
         $orderPage->selectTransport('Czech post');
-        $orderPage->selectPayment('Personal collection');
+        $orderPage->selectPayment('Cash on delivery');
         $me->waitForAjax();
         $me->clickByText('Continue in order');
 
@@ -114,7 +114,7 @@ class OrderCest
         $me->clickByText('Order');
 
         $orderPage->selectTransport('Czech post');
-        $orderPage->selectPayment('Personal collection');
+        $orderPage->selectPayment('Cash on delivery');
         $me->waitForAjax();
         $me->clickByText('Continue in order');
 

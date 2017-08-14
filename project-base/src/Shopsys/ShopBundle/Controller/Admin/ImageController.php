@@ -124,7 +124,7 @@ class ImageController extends AdminBaseController
                     'Front-end: Main image in product detail'
                 ),
                 self::SIZE_NAME_GALLERY_THUMBNAIL => t(
-                    'Front-end: Thumbnail of images under the main picture in product detail'
+                    'Front-end: Thumbnail of images under the main image in product detail'
                 ),
                 self::SIZE_NAME_LIST => t(
                     'Front-end: Listing of products in section, listing of products on special offer'

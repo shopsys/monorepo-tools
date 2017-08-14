@@ -105,10 +105,10 @@ class OrderFormType extends AbstractType
             ])
             ->add('lastName', TextType::class, [
                 'constraints' => [
-                    new Constraints\NotBlank(['message' => 'Please enter surname']),
+                    new Constraints\NotBlank(['message' => 'Please enter last name']),
                     new Constraints\Length([
                         'max' => 100,
-                        'maxMessage' => 'Surname cannot be longer than {{ limit }} characters',
+                        'maxMessage' => 'Last name cannot be longer than {{ limit }} characters',
                     ]),
                 ],
             ])
@@ -212,12 +212,12 @@ class OrderFormType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank([
-                        'message' => 'Please enter surname of contact person',
+                        'message' => 'Please enter last name of contact person',
                         'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                     ]),
                     new Constraints\Length([
                         'max' => 100,
-                        'maxMessage' => 'Surname of contact person cannot be longer than {{ limit }} characters',
+                        'maxMessage' => 'Last name of contact person cannot be longer than {{ limit }} characters',
                         'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
                     ]),
                 ],

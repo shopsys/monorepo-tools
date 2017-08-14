@@ -17,7 +17,7 @@
             {% if quantifiedProductDiscount is not null %}
                 <tr>
                     <td class="table-cart-preview__cell">
-                        {{ 'Discount coupon'|trans }} {{ (-orderPreview.promoCodeDiscountPercent)|formatPercent }}
+                        {{ 'Promo code'|trans }} {{ (-orderPreview.promoCodeDiscountPercent)|formatPercent }}
                     </td>
                     <td class="table-cart-preview__cell table-cart-preview__cell--price">
                         {{ (-quantifiedProductDiscount.priceWithVat)|price }}

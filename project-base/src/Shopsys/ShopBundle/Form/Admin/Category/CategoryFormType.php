@@ -121,7 +121,7 @@ class CategoryFormType extends AbstractType
                 'required' => false,
                 'entry_options' => [
                     'constraints' => [
-                        new Constraints\Length(['max' => 255, 'maxMessage' => 'SEO H1 cannot be longer than {{ limit }} characters']),
+                        new Constraints\Length(['max' => 255, 'maxMessage' => 'Heading (H1) cannot be longer than {{ limit }} characters']),
                     ],
                 ],
                 'optionsByDomainId' => $seoH1OptionsByDomainId,
