@@ -24,9 +24,7 @@
 
 {% macro multidomainRow(multidomainForm, label, recommendedLength = null, cssClass = '') %}
     {% if isMultidomain() %}
-        {% set cssClassOnMultidomainInputs = 'input--domain' %}
-    {% else %}
-        {% set cssClassOnMultidomainInputs = '' %}
+        {% set cssClass = cssClass ~ ' input--domain' %}
     {% endif %}
 
     <div class="form-line">
@@ -37,7 +35,7 @@
             <div class="form-line__side {% if not loop.first %}margin-top-5{% endif %} js-characters-counter">
                 <div class="form-line__item form-line__item--left">
                     <div class="input__wrap">
-                        {% set attr = domainForm.vars.attr|merge({class: 'js-characters-counter-input ' ~ cssClass ~ ' ' ~ cssClassOnMultidomainInputs}) %}
+                        {% set attr = domainForm.vars.attr|merge({class: domainForm.vars.attr.class|default('') ~ ' js-characters-counter-input ' ~ cssClass}) %}
 
                         {{ form_widget(domainForm, {
                             multidomain: true,
