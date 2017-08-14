@@ -637,7 +637,7 @@ msgid "Buttons"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:659
-msgid "By using modifier on the line it is possible to bluish the whole line and create a group of lines with headline and picture."
+msgid "By using modifier on the line it is possible to bluish the whole line and create a group of lines with headline and image."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:618
@@ -1990,7 +1990,7 @@ msgid "Front-end: Preview in autocomplete for search, preview in cart during ord
 msgstr ""
 
 #: ImageController.php:126
-msgid "Front-end: Thumbnail of images under the main picture in product detail"
+msgid "Front-end: Thumbnail of images under the main image in product detail"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
@@ -2179,6 +2179,39 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/modules.html.twig:8
 msgid "If you want for these changes to manifest everywhere (on production, devel, localhost etc.) instruct a programmer to commit the changes into GIT!"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:26
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:22
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/edit.html.twig:13
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:62
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/edit.html.twig:13
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:49
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/edit.html.twig:42
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:31
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/edit.html.twig:22
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:48
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/edit.html.twig:42
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:26
+msgid "Image"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:3
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:4
+msgid "Image size"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:355
+msgid "Image will be deleted after saving."
+msgstr ""
+
+#: AdvertFormType.php:56
+msgid "Image with link"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:365
+msgid "Images"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:74
@@ -2558,14 +2591,14 @@ msgstr ""
 msgid "Main category:"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:344
+msgid "Main image"
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopProduct/list.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopProduct/list.html.twig:4
 msgid "Main page products"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:344
-msgid "Main picture"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:993
@@ -3285,39 +3318,6 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ShopInfo/shopInfo.html.twig:17
 msgid "Phone availability"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:26
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/edit.html.twig:13
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:62
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/edit.html.twig:13
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:49
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/edit.html.twig:42
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:31
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/edit.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:48
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/edit.html.twig:42
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:26
-msgid "Picture"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:3
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:4
-msgid "Picture size"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:355
-msgid "Picture will be deleted after saving."
-msgstr ""
-
-#: AdvertFormType.php:56
-msgid "Picture with link"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:365
-msgid "Pictures"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1312
@@ -4785,20 +4785,20 @@ msgstr ""
 msgid "Upload icon"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:30
-msgid "Upload new picture"
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:25
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:65
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:53
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:34
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:52
-msgid "Upload picture"
+msgid "Upload image"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:30
+msgid "Upload new image"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/edit.html.twig:8
-msgid "Uploaded picture"
+msgid "Uploaded image"
 msgstr ""
 
 #: fileUpload.js:87
