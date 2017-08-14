@@ -2,17 +2,35 @@
 {% import '@ShopsysShop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
 {% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
+{% set domain = getDomain() %}
+{% set brand = brandDetail.brand %}
+{% set brandDomain = brandDetail.brandDomainsIndexedByDomainId[domain.id] %}
+
 {% block meta_robots %}
     {{ paginator.metaRobots(paginationResult) }}
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ brand.name }}
+    {% if brandDomain.seoTitle is not null %}
+        {{ brandDomain.seoTitle }}
+    {% else %}
+        {{ brand.name }}
+    {% endif %}
+{% endblock %}
+
+{% block meta_description %}
+    {{ brandDomain.seoMetaDescription|default(getSeoMetaDescription()) }}
 {% endblock %}
 
 {% block main_content %}
     <div class="box-list">
-        <h1>{{ brand.name }}</h1>
+        <h1>
+            {% if brandDomain.seoH1 is not null %}
+                {{ brandDomain.seoH1 }}
+            {% else %}
+                {{ brand.name }}
+            {% endif %}
+        </h1>
 
         <div class="box-list__producer">
             <div class="box-list__producer__image">

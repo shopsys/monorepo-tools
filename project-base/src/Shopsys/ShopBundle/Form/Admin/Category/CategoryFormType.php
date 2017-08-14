@@ -75,6 +75,8 @@ class CategoryFormType extends AbstractType
             $seoTitlesOptionsByDomainId[$domainId] = [
                 'attr' => [
                     'placeholder' => $this->getCategoryNameForPlaceholder($domainConfig, $options['category']),
+                    'class' => 'js-dynamic-placeholder',
+                    'data-placeholder-source-input-id' => 'category_form_name_' . $domainConfig->getLocale(),
                 ],
             ];
             $seoMetaDescriptionsOptionsByDomainId[$domainId] = [
@@ -85,6 +87,8 @@ class CategoryFormType extends AbstractType
             $seoH1OptionsByDomainId[$domainId] = [
                 'attr' => [
                     'placeholder' => $this->getCategoryNameForPlaceholder($domainConfig, $options['category']),
+                    'class' => 'js-dynamic-placeholder',
+                    'data-placeholder-source-input-id' => 'category_form_name_' . $domainConfig->getLocale(),
                 ],
             ];
         }

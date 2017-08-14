@@ -8,13 +8,13 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Product\Brand\BrandFormType;
+use Shopsys\ShopBundle\Form\Admin\Product\Brand\BrandEditFormType;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandDataFactory;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandEditData;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandEditDataFactory;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -46,9 +46,9 @@ class BrandController extends AdminBaseController
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandDataFactory
+     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandEditDataFactory
      */
-    private $brandDataFactory;
+    private $brandEditDataFactory;
 
     public function __construct(
         BrandFacade $brandFacade,
@@ -56,14 +56,14 @@ class BrandController extends AdminBaseController
         GridFactory $gridFactory,
         Breadcrumb $breadcrumb,
         Domain $domain,
-        BrandDataFactory $brandDataFactory
+        BrandEditDataFactory $brandEditDataFactory
     ) {
         $this->brandFacade = $brandFacade;
         $this->administratorGridFacade = $administratorGridFacade;
         $this->gridFactory = $gridFactory;
         $this->breadcrumb = $breadcrumb;
         $this->domain = $domain;
-        $this->brandDataFactory = $brandDataFactory;
+        $this->brandEditDataFactory = $brandEditDataFactory;
     }
 
     /**
@@ -74,13 +74,13 @@ class BrandController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $brand = $this->brandFacade->getById($id);
-        $brandData = $this->brandDataFactory->createFromBrand($brand);
+        $brandEditData = $this->brandEditDataFactory->createFromBrand($brand);
 
-        $form = $this->createForm(BrandFormType::class, $brandData, ['brand' => $brand]);
+        $form = $this->createForm(BrandEditFormType::class, $brandEditData, ['brand' => $brand]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->brandFacade->edit($id, $brandData);
+            $this->brandFacade->edit($id, $brandEditData);
 
             $this->getFlashMessageSender()
                 ->addSuccessFlashTwig(
@@ -145,7 +145,7 @@ class BrandController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm(BrandFormType::class, new BrandData(), ['brand' => null]);
+        $form = $this->createForm(BrandEditFormType::class, new BrandEditData(), ['brand' => null]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

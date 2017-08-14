@@ -44,7 +44,11 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
         $brandFacade = $this->get('shopsys.shop.product.brand.brand_facade');
         /* @var $brandFacade \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade */
 
-        $brandData = new BrandData();
+        $brandEditDataFactory = $this->get('shopsys.shop.product.brand.brand_edit_data_factory');
+        /* @var $brandEditDataFactory \Shopsys\ShopBundle\Model\Product\Brand\BrandEditDataFactory */
+
+        $brandEditData = $brandEditDataFactory->createDefault();
+        $brandData = $brandEditData->getBrandData();
 
         foreach ($this->getBrandNamesIndexedByBrandConstants() as $brandConstant => $brandName) {
             $brandData->name = $brandName;
@@ -52,7 +56,7 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
                 'cs' => 'Toto je popis značky ' . $brandData->name . '.',
                 'en' => 'This is description of brand ' . $brandData->name . '.',
             ];
-            $brand = $brandFacade->create($brandData);
+            $brand = $brandFacade->create($brandEditData);
             $this->addReference($brandConstant, $brand);
         }
     }

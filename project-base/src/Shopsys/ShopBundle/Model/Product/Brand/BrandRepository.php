@@ -29,6 +29,25 @@ class BrandRepository
     }
 
     /**
+     * @return \Doctrine\ORM\EntityRepository
+     */
+    private function getBrandDomainRepository()
+    {
+        return $this->em->getRepository(BrandDomain::class);
+    }
+
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
+     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandDomain[]
+     */
+    public function getBrandDomainsByBrand(Brand $brand)
+    {
+        return $this->getBrandDomainRepository()->findBy([
+            'brand' => $brand,
+        ]);
+    }
+
+    /**
      * @param int $brandId
      * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
      */
@@ -50,5 +69,20 @@ class BrandRepository
     public function getAll()
     {
         return $this->getBrandRepository()->findBy([], ['name' => 'asc']);
+    }
+
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
+     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandDomain[]
+     */
+    public function getBrandDomainsIndexedByDomain($brand)
+    {
+        $queryBuilder = $this->em->createQueryBuilder()
+            ->select('bd')
+            ->from(BrandDomain::class, 'bd', 'bd.domainId')
+            ->where('bd.brand = :brand')->setParameter('brand', $brand)
+            ->orderBy('bd.domainId', 'ASC');
+
+        return $queryBuilder->getQuery()->execute();
     }
 }

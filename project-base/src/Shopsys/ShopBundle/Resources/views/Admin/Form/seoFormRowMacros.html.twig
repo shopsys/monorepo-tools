@@ -1,4 +1,8 @@
 {% macro row(form, label, recommendedLength = null, cssClass = '') %}
+    {% if recommendedLength is not null %}
+        {% set cssClass = cssClass ~ ' js-characters-counter-input' %}
+    {% endif %}
+
     <div class="form-line">
         <strong class="form-line__label">
             {{ form_label(form, label) }}
@@ -7,16 +11,16 @@
         <div class="form-line__side js-characters-counter">
             <div class="form-line__item form-line__item--left">
                 <div class="input__wrap">
-                    {% set attr = form.vars.attr|merge({class: form.vars.attr.class|default('') ~ ' js-characters-counter-input ' ~ cssClass}) %}
+                    {% set attr = form.vars.attr|merge({class: form.vars.attr.class|default('') ~ ' ' ~ cssClass}) %}
                     {{ form_widget(form, {attr: attr}) }}
                 </div>
             </div>
 
-            <div class="form-line__count">
-                {% if recommendedLength is not null %}
+            {% if recommendedLength is not null %}
+                <div class="form-line__count">
                     <div class="form-line__count__desc js-characters-counter-info" data-recommended-length="{{ recommendedLength }}"></div>
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
             {{ form_errors(form) }}
         </div>
     </div>
@@ -24,9 +28,10 @@
 
 {% macro multidomainRow(multidomainForm, label, recommendedLength = null, cssClass = '') %}
     {% if isMultidomain() %}
-        {% set cssClassOnMultidomainInputs = 'input--domain' %}
-    {% else %}
-        {% set cssClassOnMultidomainInputs = '' %}
+        {% set cssClass = cssClass ~ ' input--domain' %}
+    {% endif %}
+    {% if recommendedLength is not null %}
+        {% set cssClass = cssClass ~ ' js-characters-counter-input' %}
     {% endif %}
 
     <div class="form-line">
@@ -37,7 +42,7 @@
             <div class="form-line__side {% if not loop.first %}margin-top-5{% endif %} js-characters-counter">
                 <div class="form-line__item form-line__item--left">
                     <div class="input__wrap">
-                        {% set attr = domainForm.vars.attr|merge({class: 'js-characters-counter-input ' ~ cssClass ~ ' ' ~ cssClassOnMultidomainInputs}) %}
+                        {% set attr = domainForm.vars.attr|merge({class: cssClass ~ ' ' ~ domainForm.vars.attr.class|default('') }) %}
 
                         {{ form_widget(domainForm, {
                             multidomain: true,
@@ -52,11 +57,11 @@
                     </div>
                 </div>
 
-                <div class="form-line__count">
-                    {% if recommendedLength is not null %}
+                {% if recommendedLength is not null %}
+                    <div class="form-line__count">
                         <span class="form-line__count__desc js-characters-counter-info" data-recommended-length="{{ recommendedLength }}"></span>
-                    {% endif %}
-                </div>
+                    </div>
+                {% endif %}
                 {{ form_errors(domainForm) }}
             </div>
         {% endfor %}

@@ -19,12 +19,27 @@ class BrandDataFactory
      */
     private $domain;
 
+    /**
+     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
+     */
+    private $brandFacade;
+
     public function __construct(
         FriendlyUrlFacade $friendlyUrlFacade,
-        Domain $domain
+        Domain $domain,
+        BrandFacade $brandFacade
     ) {
         $this->friendlyUrlFacade = $friendlyUrlFacade;
         $this->domain = $domain;
+        $this->brandFacade = $brandFacade;
+    }
+
+    /**
+     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandData
+     */
+    public function createDefault()
+    {
+        return new BrandData();
     }
 
     /**
@@ -33,13 +48,25 @@ class BrandDataFactory
      */
     public function createFromBrand(Brand $brand)
     {
-        $brandData = new BrandData();
-        $brandData->setFromEntity($brand);
+        $brandDomains = $this->brandFacade->getBrandDomainsByBrand($brand);
 
-        foreach ($this->domain->getAll() as $domainConfig) {
-            $brandData->urls->mainFriendlyUrlsByDomainId[$domainConfig->getId()] =
+        $brandData = new BrandData();
+        $brandData->name = $brand->getName();
+
+        $translations = $brand->getTranslations();
+        /* @var $translations \Shopsys\ShopBundle\Model\Product\Brand\BrandTranslation[]  */
+
+        $brandData->descriptions = [];
+        foreach ($translations as $translation) {
+            $brandData->descriptions[$translation->getLocale()] = $translation->getDescription();
+        }
+
+        foreach ($brandDomains as $brandDomain) {
+            $domainId = $brandDomain->getDomainId();
+
+            $brandData->urls->mainFriendlyUrlsByDomainId[$domainId] =
                 $this->friendlyUrlFacade->findMainFriendlyUrl(
-                    $domainConfig->getId(),
+                    $domainId,
                     'front_brand_detail',
                     $brand->getId()
                 );
