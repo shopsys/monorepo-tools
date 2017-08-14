@@ -45,7 +45,7 @@ class PromoCodeGridFactory implements GridFactoryInterface
         $grid->addColumn('percent', 'pc.percent', t('Discount'), true);
         $grid->setActionColumnClassAttribute('table-col table-col-10');
         $grid->addDeleteActionColumn('admin_promocode_delete', ['id' => 'pc.id'])
-            ->setConfirmMessage(t('Do you really want to remove this discount coupon?'));
+            ->setConfirmMessage(t('Do you really want to remove this promo code?'));
 
         $grid->setTheme('@ShopsysShop/Admin/Content/PromoCode/listGrid.html.twig');
 

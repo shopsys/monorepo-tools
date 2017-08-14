@@ -974,10 +974,6 @@ msgstr ""
 msgid "Create currency"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:24
-msgid "Create discount coupon"
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Flag/listGrid.html.twig:13
 msgid "Create flag"
 msgstr ""
@@ -1032,6 +1028,10 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/listGrid.html.twig:12
 msgid "Create pricing group"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:24
+msgid "Create promo code"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:378
@@ -1259,21 +1259,6 @@ msgstr ""
 msgid "Discount code removed from order"
 msgstr ""
 
-#: OrderCreationService.php:259
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/preview.html.twig:20
-msgid "Discount coupon"
-msgstr ""
-
-#: PromoCodeController.php:71
-msgid "Discount coupon <strong>{{ code }}</strong> deleted."
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/list.html.twig:3
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/list.html.twig:4
-msgid "Discount coupons"
-msgstr ""
-
 #: ProductMassActionFormType.php:44
 msgid "Display"
 msgstr ""
@@ -1357,10 +1342,6 @@ msgstr ""
 msgid "Do you really want to remove this customer?"
 msgstr ""
 
-#: PromoCodeGridFactory.php:48
-msgid "Do you really want to remove this discount coupon?"
-msgstr ""
-
 #: FlagGridFactory.php:61
 msgid "Do you really want to remove this flag?"
 msgstr ""
@@ -1379,6 +1360,10 @@ msgstr ""
 
 #: ProductController.php:377
 msgid "Do you really want to remove this product?"
+msgstr ""
+
+#: PromoCodeGridFactory.php:48
+msgid "Do you really want to remove this promo code?"
 msgstr ""
 
 #: ScriptController.php:126
@@ -2906,10 +2891,6 @@ msgstr ""
 msgid "No customers found."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:4
-msgid "No discount coupons found. You have to create some first."
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Domain/listGrid.html.twig:4
 msgid "No domains so far."
 msgstr ""
@@ -2953,6 +2934,10 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/productsWithControls.html.twig:31
 msgid "No products found for this brand"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:4
+msgid "No promo codes found. You have to create some first."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:51
@@ -3642,6 +3627,21 @@ msgstr ""
 msgid "Products search engines"
 msgstr ""
 
+#: OrderCreationService.php:259
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/preview.html.twig:20
+msgid "Promo code"
+msgstr ""
+
+#: PromoCodeController.php:71
+msgid "Promo code <strong>{{ code }}</strong> deleted."
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/list.html.twig:3
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/list.html.twig:4
+msgid "Promo codes"
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ShopInfo/shopInfo.html.twig:13
 msgid "Published data"
 msgstr ""
@@ -3919,10 +3919,6 @@ msgstr ""
 msgid "Selected customer doesn't exist."
 msgstr ""
 
-#: PromoCodeController.php:77
-msgid "Selected discount coupon doesn't exist."
-msgstr ""
-
 #: FlagController.php:64
 msgid "Selected flag doesn't exist."
 msgstr ""
@@ -3960,6 +3956,10 @@ msgstr ""
 #: CartController.php:195
 #: CartController.php:252
 msgid "Selected product no longer available or doesn't exist."
+msgstr ""
+
+#: PromoCodeController.php:77
+msgid "Selected promo code doesn't exist."
 msgstr ""
 
 #: ScriptController.php:156
@@ -5204,10 +5204,6 @@ msgstr ""
 msgid "default"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:19
-msgid "discount coupons"
-msgstr ""
-
 #: AdvancedSearchOperatorTranslation.php:18
 msgid "doesn't include"
 msgstr ""
@@ -5345,6 +5341,10 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ProductPicker/listGrid.html.twig:65
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/productsWithControls.html.twig:6
 msgid "products"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:19
+msgid "promo codes"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:219

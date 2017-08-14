@@ -1,7 +1,7 @@
 {% extends '@ShopsysShop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_no_data %}
-    {{ 'No discount coupons found. You have to create some first.'|trans }}
+    {{ 'No promo codes found. You have to create some first.'|trans }}
 {% endblock %}
 
 {% block grid_value_cell_edit_id_percent %}
@@ -16,11 +16,11 @@
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-    {% set entityName = 'discount coupons'|trans %}
+    {% set entityName = 'promo codes'|trans %}
     {{ parent() }}
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-    {% set addEntity = 'Create discount coupon'|trans %}
+    {% set addEntity = 'Create promo code'|trans %}
     {{ parent() }}
 {% endblock %}

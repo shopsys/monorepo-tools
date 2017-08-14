@@ -974,10 +974,6 @@ msgstr "Vytvořit dostupnost"
 msgid "Create currency"
 msgstr "Vytvořit měnu"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:24
-msgid "Create discount coupon"
-msgstr "Vytvořit slevový kupón"
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Flag/listGrid.html.twig:13
 msgid "Create flag"
 msgstr "Vytvořit příznak"
@@ -1033,6 +1029,10 @@ msgstr "Vytvořit platbu"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/listGrid.html.twig:12
 msgid "Create pricing group"
 msgstr "Vytvořit cenovou skupinu"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:24
+msgid "Create promo code"
+msgstr "Vytvořit slevový kupón"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:378
 msgid "Create record"
@@ -1259,21 +1259,6 @@ msgstr "Slevový kód není platný. Prosím, zkontrolujte ho."
 msgid "Discount code removed from order"
 msgstr "Slevový kód byl odebrán z objednávky."
 
-#: OrderCreationService.php:259
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/preview.html.twig:20
-msgid "Discount coupon"
-msgstr "Slevový kupón"
-
-#: PromoCodeController.php:71
-msgid "Discount coupon <strong>{{ code }}</strong> deleted."
-msgstr "Slevový kupón <strong>{{ code }}</strong> byl smazán"
-
-#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/list.html.twig:3
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/list.html.twig:4
-msgid "Discount coupons"
-msgstr "Slevové kupóny"
-
 #: ProductMassActionFormType.php:44
 msgid "Display"
 msgstr "Zobrazit"
@@ -1357,10 +1342,6 @@ msgstr "Opravdu chcete odstranit tuto značku? Pokud je někde použita, bude od
 msgid "Do you really want to remove this customer?"
 msgstr "Opravdu chcete odstranit tohoto zákazníka?"
 
-#: PromoCodeGridFactory.php:48
-msgid "Do you really want to remove this discount coupon?"
-msgstr "Opravdu chcete odstranit tento slevový kupón?"
-
 #: FlagGridFactory.php:61
 msgid "Do you really want to remove this flag?"
 msgstr "Opravdu chcete odstranit tento příznak?"
@@ -1380,6 +1361,10 @@ msgstr "Opravdu chcete odstranit tuto platbu?"
 #: ProductController.php:377
 msgid "Do you really want to remove this product?"
 msgstr "Opravdu chcete odstranit toto zboží?"
+
+#: PromoCodeGridFactory.php:48
+msgid "Do you really want to remove this promo code?"
+msgstr "Opravdu chcete odstranit tento slevový kupón?"
 
 #: ScriptController.php:126
 msgid "Do you really want to remove this script?"
@@ -2906,10 +2891,6 @@ msgstr "Nebyly nalezeny žádné měny. Nejprve musíte nějakou vytvořit."
 msgid "No customers found."
 msgstr "Nebyli nalezeni žádní zákazníci."
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:4
-msgid "No discount coupons found. You have to create some first."
-msgstr "Nebyly nalezeny žádné slevové kupóny. Nejprve musíte nějaký vytvořit."
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Domain/listGrid.html.twig:4
 msgid "No domains so far."
 msgstr "Doposud nejsou žádné domény."
@@ -2954,6 +2935,10 @@ msgstr "Nebylo nalezeno žádné zboží."
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/productsWithControls.html.twig:31
 msgid "No products found for this brand"
 msgstr "Pro tuto značku nebyly nalezeny žádné produkty"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:4
+msgid "No promo codes found. You have to create some first."
+msgstr "Nebyly nalezeny žádné slevové kupóny. Nejprve musíte nějaký vytvořit."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:51
 msgid "No records found."
@@ -3642,6 +3627,21 @@ msgstr "Přehled zboží"
 msgid "Products search engines"
 msgstr "Zbožové vyhledávače"
 
+#: OrderCreationService.php:259
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/preview.html.twig:20
+msgid "Promo code"
+msgstr "Slevový kupón"
+
+#: PromoCodeController.php:71
+msgid "Promo code <strong>{{ code }}</strong> deleted."
+msgstr "Slevový kupón <strong>{{ code }}</strong> byl smazán"
+
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/list.html.twig:3
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/list.html.twig:4
+msgid "Promo codes"
+msgstr "Slevové kupóny"
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ShopInfo/shopInfo.html.twig:13
 msgid "Published data"
 msgstr "Zveřejněné údaje"
@@ -3919,10 +3919,6 @@ msgstr "Zvolená měna neexistuje."
 msgid "Selected customer doesn't exist."
 msgstr "Zvolený zákazník neexistuje"
 
-#: PromoCodeController.php:77
-msgid "Selected discount coupon doesn't exist."
-msgstr "Zvolený slevový kupón neexistuje."
-
 #: FlagController.php:64
 msgid "Selected flag doesn't exist."
 msgstr "Zvolený příznak neexistuje."
@@ -3961,6 +3957,10 @@ msgstr "Zvolený produkt neexistuje."
 #: CartController.php:252
 msgid "Selected product no longer available or doesn't exist."
 msgstr "Zvolené zboží již není v nabídce nebo neexistuje."
+
+#: PromoCodeController.php:77
+msgid "Selected promo code doesn't exist."
+msgstr "Zvolený slevový kupón neexistuje."
 
 #: ScriptController.php:156
 msgid "Selected script doesn't exist."
@@ -5204,10 +5204,6 @@ msgstr "zákazníků"
 msgid "default"
 msgstr "default"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:19
-msgid "discount coupons"
-msgstr "slevové kupóny"
-
 #: AdvancedSearchOperatorTranslation.php:18
 msgid "doesn't include"
 msgstr "neobsahuje"
@@ -5346,6 +5342,10 @@ msgstr "parametry"
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/productsWithControls.html.twig:6
 msgid "products"
 msgstr "zboží"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/PromoCode/listGrid.html.twig:19
+msgid "promo codes"
+msgstr "slevové kupóny"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Grid/Grid.html.twig:219
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Paginator/paginator.html.twig:7

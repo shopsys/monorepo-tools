@@ -65,7 +65,7 @@
       route: admin_transportandpayment_freetransportandpaymentlimit
     - label: Currencies
       route: admin_currency_list
-    - label: Discount coupons
+    - label: Promo codes
       route: admin_promocode_list
 
 - label: 'Marketing'
