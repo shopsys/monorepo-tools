@@ -33,7 +33,7 @@
                     <h1>{{ 'Oops! Error occurred.'|trans }}</h1>
 
                     <p>
-                        {{ 'Uh-oh, uh-oh. And specially <strong>"%status_code% %status_text%"</strong>, as if it was on purpose!'|trans({ '%status_code%': status_code, '%status_text%': status_text })|raw }}
+                        {{ 'Uh-oh, uh-oh. And specially <strong>"%status_code% %status_text%"</strong>, as if it was on purpose!'|transHtml({ '%status_code%': status_code, '%status_text%': status_text }) }}
                     </p>
 
                     <p>

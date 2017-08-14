@@ -97,7 +97,7 @@
                             {{ render(controller('ShopsysShopBundle:Front/Cart:addProductForm', {product: productDetail.product, type: 'large'})) }}
                         {% else %}
                             <div>
-                                {{ 'This product is no longer available for purchase. Have a look at similar products <a href="%url%">here</a>.'|trans({"%url%": url('front_product_list', { id: productMainCategory })})|raw }}
+                                {{ 'This product is no longer available for purchase. Have a look at similar products <a href="%url%">here</a>.'|transHtml({"%url%": url('front_product_list', { id: productMainCategory })}) }}
                             </div>
                         {% endif %}
                     </div>
