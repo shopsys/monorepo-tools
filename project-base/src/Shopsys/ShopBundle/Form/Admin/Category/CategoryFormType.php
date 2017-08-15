@@ -114,12 +114,12 @@ class CategoryFormType extends AbstractType
             ->add('seoTitles', MultidomainType::class, [
                 'entry_type' => TextType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoTitlesOptionsByDomainId,
+                'options_by_domain_id' => $seoTitlesOptionsByDomainId,
             ])
             ->add('seoMetaDescriptions', MultidomainType::class, [
                 'entry_type' => TextareaType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
+                'options_by_domain_id' => $seoMetaDescriptionsOptionsByDomainId,
             ])
             ->add('seoH1s', MultidomainType::class, [
                 'required' => false,
@@ -128,7 +128,7 @@ class CategoryFormType extends AbstractType
                         new Constraints\Length(['max' => 255, 'maxMessage' => 'Heading (H1) cannot be longer than {{ limit }} characters']),
                     ],
                 ],
-                'optionsByDomainId' => $seoH1OptionsByDomainId,
+                'options_by_domain_id' => $seoH1OptionsByDomainId,
             ])
             ->add('descriptions', MultidomainType::class, [
                 'entry_type' => CKEditorType::class,

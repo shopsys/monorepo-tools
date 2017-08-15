@@ -77,17 +77,17 @@ class BrandEditFormType extends AbstractType
             ->add('seoTitles', MultidomainType::class, [
                 'entry_type' => TextType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoTitlesOptionsByDomainId,
+                'options_by_domain_id' => $seoTitlesOptionsByDomainId,
             ])
             ->add('seoMetaDescriptions', MultidomainType::class, [
                 'entry_type' => TextareaType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
+                'options_by_domain_id' => $seoMetaDescriptionsOptionsByDomainId,
             ])
             ->add('seoH1s', MultidomainType::class, [
                 'entry_type' => TextType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoH1sOptionsByDomainId,
+                'options_by_domain_id' => $seoH1sOptionsByDomainId,
             ])
             ->add('save', SubmitType::class);
     }

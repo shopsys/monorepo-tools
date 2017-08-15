@@ -35,8 +35,8 @@ class MultidomainType extends AbstractType
 
         $domainIds = $this->domainIdsProvider->getAllIds();
         foreach ($domainIds as $domainId) {
-            if (array_key_exists($domainId, $options['optionsByDomainId'])) {
-                $domainOptions = array_merge($entryOptions, $options['optionsByDomainId'][$domainId]);
+            if (array_key_exists($domainId, $options['options_by_domain_id'])) {
+                $domainOptions = array_merge($entryOptions, $options['options_by_domain_id'][$domainId]);
             } else {
                 $domainOptions = $entryOptions;
             }
@@ -54,7 +54,7 @@ class MultidomainType extends AbstractType
             'compound' => true,
             'entry_type' => TextType::class,
             'entry_options' => [],
-            'optionsByDomainId' => [],
+            'options_by_domain_id' => [],
         ]);
     }
 }
