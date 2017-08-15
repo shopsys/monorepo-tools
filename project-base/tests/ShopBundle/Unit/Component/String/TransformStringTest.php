@@ -94,4 +94,54 @@ class TransformStringTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame($expected, TransformString::stringToFriendlyUrlSlug($actual));
     }
+
+    public function stringToCamelCaseProvider()
+    {
+        return [
+            [
+                'actual' => 'ěščřžýáíé foo',
+                'expected' => 'escrzyaieFoo',
+            ],
+            [
+                'actual' => 'ĚŠČŘŽÝÁÍÉ   ',
+                'expected' => 'escrzyaie',
+            ],
+            [
+                'actual' => 'Foo     Bar-Baz',
+                'expected' => 'fooBarBaz',
+            ],
+            [
+                'actual' => 'foo-bar_baz',
+                'expected' => 'fooBarBaz',
+            ],
+            [
+                'actual' => '$€@!?<>=;~%^&',
+                'expected' => '',
+            ],
+            [
+                'actual' => 'Příliš žluťoučký kůň úpěl ďábelské ódy',
+                'expected' => 'prilisZlutouckyKunUpelDabelskeOdy',
+            ],
+            [
+                'actual' => 'BG-747 is fixedˇ',
+                'expected' => 'bg747IsFixed',
+            ],
+            [
+                'actual' => 'camelCase-camelCase',
+                'expected' => 'camelCaseCamelCase',
+            ],
+            [
+                'actual' => 'camelCaseACRONYM ACRONYM',
+                'expected' => 'camelCaseAcronymAcronym',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider stringToCamelCaseProvider
+     */
+    public function testStringToCamelCase($actual, $expected)
+    {
+        $this->assertSame($expected, TransformString::stringToCamelCase($actual));
+    }
 }
