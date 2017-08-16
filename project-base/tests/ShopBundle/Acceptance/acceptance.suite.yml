@@ -37,5 +37,5 @@ modules:
       capabilities:
         # accept untrusted (eg. self-signed) HTTPS certificates
         acceptSslCerts: true
-      window_size: 1024x786
+      window_size: 1366x768
       wait: 1
