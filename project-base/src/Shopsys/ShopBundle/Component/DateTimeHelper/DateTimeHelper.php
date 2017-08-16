@@ -17,7 +17,7 @@ class DateTimeHelper
         return $todayMidnight;
     }
 
-    /*
+    /**
      * @param string $format
      * @param string $time
      * @return \DateTime

@@ -146,7 +146,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
         return $this->translation($locale)->getInstructions();
     }
 
-    /*
+    /**
      * @return \Shopsys\ShopBundle\Model\Transport\TransportPrice[]
      */
     public function getPrices()
@@ -154,7 +154,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
         return $this->prices;
     }
 
-    /*
+    /**
      * @return \Shopsys\ShopBundle\Model\Transport\TransportPrice
      */
     public function getPrice(Currency $currency)

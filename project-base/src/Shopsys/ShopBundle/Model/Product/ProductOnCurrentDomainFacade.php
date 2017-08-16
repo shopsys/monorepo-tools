@@ -47,7 +47,7 @@ class ProductOnCurrentDomainFacade
      */
     private $productFilterCountRepository;
 
-    /*
+    /**
      * @var \Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
      */
     private $productAccessoryRepository;

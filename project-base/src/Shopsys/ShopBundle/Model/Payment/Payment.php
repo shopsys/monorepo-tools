@@ -193,7 +193,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
         return $this->translation($locale)->getName();
     }
 
-    /*
+    /**
      * @return \Shopsys\ShopBundle\Model\Payment\PaymentPrice[]
      */
     public function getPrices()
@@ -201,7 +201,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
         return $this->prices;
     }
 
-    /*
+    /**
      * @return \Shopsys\ShopBundle\Model\Payment\PaymentPrice
      */
     public function getPrice(Currency $currency)
