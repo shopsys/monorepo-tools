@@ -120,9 +120,7 @@
                                 {% if isMultidomain() %}
                                     <div class="form-line__group form-line__box__title">
                                         <span class="form-line__group__image">
-                                            <span class="in-image in-image--large">
-                                                <span class="in-image__in in-image__in--{{ domainId }}" title="{{ getDomainName(domainId) }}">{{ domainId }}</span>
-                                            </span>
+                                            {{ domainIcon(domainId, 'large') }}
                                         </span>
                                         <strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
                                     </div>
