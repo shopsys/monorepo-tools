@@ -50,7 +50,7 @@ msgstr ""
 msgid "EAN cannot be longer then {{ limit }} characters"
 msgstr ""
 
-#: ProductEditFormType.php:166
+#: ProductEditFormType.php:174
 msgid "Each parameter can be used only once"
 msgstr ""
 
@@ -98,7 +98,7 @@ msgstr ""
 msgid "Full name cannot be longer then {{ limit }} characters"
 msgstr ""
 
-#: CategoryFormType.php:124
+#: CategoryFormType.php:128
 msgid "Heading (H1) cannot be longer than {{ limit }} characters"
 msgstr ""
 
@@ -118,10 +118,10 @@ msgstr ""
 
 #: AdvertFormType.php:93
 #: BrandFormType.php:47
-#: CategoryFormType.php:162
+#: CategoryFormType.php:166
 #: DomainFormType.php:28
 #: PaymentFormType.php:91
-#: ProductEditFormType.php:138
+#: ProductEditFormType.php:146
 #: TransportFormType.php:76
 msgid "Image can be only in JPG, GIF or PNG format"
 msgstr ""
@@ -146,7 +146,7 @@ msgid "Link must be valid URL address"
 msgstr ""
 
 #: BrandFormType.php:31
-#: CategoryFormType.php:106
+#: CategoryFormType.php:110
 #: CurrencyFormType.php:54
 #: OrderFormType.php:230
 #: PaymentFormType.php:52
@@ -433,7 +433,7 @@ msgid "Please enter login"
 msgstr ""
 
 #: BrandFormType.php:30
-#: CategoryFormType.php:101
+#: CategoryFormType.php:105
 #: CurrencyFormType.php:53
 #: OrderItemFormType.php:25
 #: PaymentFormType.php:48
@@ -469,14 +469,14 @@ msgstr ""
 
 #: FreeTransportAndPaymentPriceLimitsFormType.php:78
 #: PaymentEditFormType.php:55
-#: ProductEditFormType.php:268
+#: ProductEditFormType.php:232
 #: ProductFormType.php:211
 #: TransportEditFormType.php:55
 msgid "Please enter price"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Form/Admin/Payment/PaymentEditFormType.php:53
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductEditFormType.php:265
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductEditFormType.php:229
 #: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:208
 #: src/Shopsys/ShopBundle/Form/Admin/Transport/TransportEditFormType.php:53
 #: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:38
@@ -587,7 +587,7 @@ msgstr ""
 
 #: FreeTransportAndPaymentPriceLimitsFormType.php:74
 #: PaymentEditFormType.php:58
-#: ProductEditFormType.php:273
+#: ProductEditFormType.php:237
 #: ProductFilterFormType.php:42
 #: ProductFilterFormType.php:55
 #: ProductFormType.php:216
@@ -660,10 +660,10 @@ msgstr ""
 
 #: AdvertFormType.php:95
 #: BrandFormType.php:49
-#: CategoryFormType.php:164
+#: CategoryFormType.php:168
 #: DomainFormType.php:30
 #: PaymentFormType.php:93
-#: ProductEditFormType.php:140
+#: ProductEditFormType.php:148
 #: SliderItemFormType.php:48
 #: TransportFormType.php:78
 msgid "Uploaded image is to large ({{ size }} {{ suffix }}). Maximum size of an image is {{ limit }} {{ suffix }}."

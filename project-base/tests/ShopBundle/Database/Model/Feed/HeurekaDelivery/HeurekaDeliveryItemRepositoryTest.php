@@ -36,7 +36,7 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
 
         foreach ($heurekaDeliveryItems as $heurekaDeliveryItem) {
             /* @var $heurekaDeliveryItem \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem*/
-            if ($heurekaDeliveryItem->getItemId() == $product->getId()) {
+            if ($heurekaDeliveryItem->getId() == $product->getId()) {
                 return;
             }
         }
@@ -69,7 +69,7 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
 
         foreach ($heurekaDeliveryItems as $heurekaDeliveryItem) {
             /* @var $heurekaDeliveryItem \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem*/
-            if ($heurekaDeliveryItem->getItemId() == $product->getId()) {
+            if ($heurekaDeliveryItem->getId() == $product->getId()) {
                 $this->fail('Sellable product out of stock can not be in XML heureka delivery feed.');
             }
         }
@@ -100,7 +100,7 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
 
         foreach ($heurekaDeliveryItems as $heurekaDeliveryItem) {
             /* @var $heurekaDeliveryItem \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem*/
-            if ($heurekaDeliveryItem->getItemId() == $product->getId()) {
+            if ($heurekaDeliveryItem->getId() == $product->getId()) {
                 $this->fail('Sellable product without stock can not be in XML heureka delivery feed.');
             }
         }

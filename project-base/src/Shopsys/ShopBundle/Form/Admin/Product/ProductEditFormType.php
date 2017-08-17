@@ -3,20 +3,21 @@
 namespace Shopsys\ShopBundle\Form\Admin\Product;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Shopsys\FormTypesBundle\MultidomainType;
+use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\ShopBundle\Component\Constraints\UniqueProductParameters;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
 use Shopsys\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType;
 use Shopsys\ShopBundle\Form\FileUploadType;
-use Shopsys\ShopBundle\Form\MultidomainType;
 use Shopsys\ShopBundle\Form\ProductsType;
 use Shopsys\ShopBundle\Form\UrlListType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditData;
@@ -70,13 +71,19 @@ class ProductEditFormType extends AbstractType
      */
     private $seoSettingFacade;
 
+    /**
+     * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade
+     */
+    private $pluginDataFormExtensionFacade;
+
     public function __construct(
         RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer,
         ImagesIdsToImagesTransformer $imagesIdsToImagesTransformer,
         ImageFacade $imageFacade,
         PricingGroupFacade $pricingGroupFacade,
         Domain $domain,
-        SeoSettingFacade $seoSettingFacade
+        SeoSettingFacade $seoSettingFacade,
+        PluginCrudExtensionFacade $pluginDataFormExtensionFacade
     ) {
         $this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
         $this->imagesIdsToImagesTransformer = $imagesIdsToImagesTransformer;
@@ -84,6 +91,7 @@ class ProductEditFormType extends AbstractType
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->domain = $domain;
         $this->seoSettingFacade = $seoSettingFacade;
+        $this->pluginDataFormExtensionFacade = $pluginDataFormExtensionFacade;
     }
 
     /**
@@ -175,17 +183,17 @@ class ProductEditFormType extends AbstractType
             ->add('seoTitles', MultidomainType::class, [
                 'entry_type' => TextType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoTitlesOptionsByDomainId,
+                'options_by_domain_id' => $seoTitlesOptionsByDomainId,
             ])
             ->add('seoMetaDescriptions', MultidomainType::class, [
                 'entry_type' => TextareaType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
+                'options_by_domain_id' => $seoMetaDescriptionsOptionsByDomainId,
             ])
             ->add('seoH1s', MultidomainType::class, [
                 'entry_type' => TextType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoH1OptionsByDomainId,
+                'options_by_domain_id' => $seoH1OptionsByDomainId,
             ])
             ->add('descriptions', MultidomainType::class, [
                 'entry_type' => CKEditorType::class,
@@ -208,53 +216,9 @@ class ProductEditFormType extends AbstractType
                     ])
                     ->addViewTransformer($this->removeDuplicatesTransformer)
             )
-            ->add('heurekaCpcValues', MultidomainType::class, [
-                'entry_type' => MoneyType::class,
-                'required' => false,
-                'entry_options' => [
-                    'currency' => 'CZK',
-                    'scale' => 2,
-                    'constraints' => [
-                        new Constraints\Range([
-                            'min' => 0,
-                            'max' => 100,
-                        ]),
-                    ],
-                ],
-            ])
-            ->add('showInZboziFeedIndexedByDomainId', MultidomainType::class, [
-                'entry_type' => YesNoType::class,
-                'required' => false,
-            ])
-            ->add('zboziCpcValues', MultidomainType::class, [
-                'entry_type' => MoneyType::class,
-                'required' => false,
-                'entry_options' => [
-                    'currency' => 'CZK',
-                    'scale' => 2,
-                    'constraints' => [
-                        new Constraints\Range([
-                            'min' => 1,
-                            'max' => 500,
-                        ]),
-                    ],
-                ],
-            ])
-            ->add('zboziCpcSearchValues', MultidomainType::class, [
-                'entry_type' => MoneyType::class,
-                'required' => false,
-                'entry_options' => [
-                    'currency' => 'CZK',
-                    'scale' => 2,
-                    'constraints' => [
-                        new Constraints\Range([
-                            'min' => 1,
-                            'max' => 500,
-                        ]),
-                    ],
-                ],
-            ])
             ->add('save', SubmitType::class);
+
+        $this->pluginDataFormExtensionFacade->extendForm($builder, 'product', 'pluginData');
 
         foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
             $builder->get('manualInputPricesByPricingGroupId')

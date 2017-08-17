@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Slider;
 
+use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\ShopBundle\Form\DomainType;
 use Shopsys\ShopBundle\Form\FileUploadType;
-use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Slider\SliderItemData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

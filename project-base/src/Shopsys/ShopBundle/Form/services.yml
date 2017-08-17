@@ -224,11 +224,6 @@ services:
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\MoneyType }
 
-  shopsys.shop.form.multidomain:
-    class: Shopsys\ShopBundle\Form\MultidomainType
-    tags:
-      - { name: form.type }
-
   shopsys.shop.form.product:
     class: Shopsys\ShopBundle\Form\ProductType
     tags:
@@ -265,6 +260,6 @@ services:
       - { name: form.type_extension, extended_type: Ivory\CKEditorBundle\Form\Type\CKEditorType }
 
   shopsys.shop.form.yes_no:
-    class: Shopsys\ShopBundle\Form\YesNoType
+    class: Shopsys\FormTypesBundle\YesNoType
     tags:
       - { name: form.type }

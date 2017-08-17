@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Form;
 
-use Shopsys\ShopBundle\Form\YesNoType;
+use Shopsys\FormTypesBundle\YesNoType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 

@@ -2,12 +2,12 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product;
 
+use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\CategoriesType;
 use Shopsys\ShopBundle\Form\DatePickerType;
 use Shopsys\ShopBundle\Form\Locale\LocalizedType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Form\YesNoType;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;

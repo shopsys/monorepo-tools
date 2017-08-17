@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Module;
 
-use Shopsys\ShopBundle\Form\YesNoType;
+use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\ShopBundle\Model\Module\ModuleList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;

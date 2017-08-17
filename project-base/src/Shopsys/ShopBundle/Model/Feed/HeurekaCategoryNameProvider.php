@@ -3,12 +3,12 @@
 namespace Shopsys\ShopBundle\Model\Feed;
 
 use Shopsys\ProductFeed\DomainConfigInterface;
-use Shopsys\ProductFeed\FeedItemCustomValuesProviderInterface;
 use Shopsys\ProductFeed\FeedItemInterface;
+use Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface;
 use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class FeedItemCustomValuesProvider implements FeedItemCustomValuesProviderInterface
+class HeurekaCategoryNameProvider implements HeurekaCategoryNameProviderInterface
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
@@ -27,34 +27,13 @@ class FeedItemCustomValuesProvider implements FeedItemCustomValuesProviderInterf
     }
 
     /**
-     * @param \Shopsys\ProductFeed\FeedItemInterface[] $items
-     * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
-     * @return \Shopsys\ProductFeed\FeedItemCustomValuesInterface[]
-     */
-    public function getCustomValuesForItems(array $items, DomainConfigInterface $domainConfig)
-    {
-        $productIds = array_map(
-            function (FeedItemInterface $feedItem) {
-                return $feedItem->getItemId();
-            },
-            $items
-        );
-        $products = $this->productRepository->getAllByIds($productIds);
-
-        return $this->productRepository->getProductDomainsByProductsAndDomainIdIndexedByProductId(
-            $products,
-            $domainConfig->getId()
-        );
-    }
-
-    /**
      * @param \Shopsys\ProductFeed\FeedItemInterface $item
      * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
      * @return string|null
      */
     public function getHeurekaCategoryNameForItem(FeedItemInterface $item, DomainConfigInterface $domainConfig)
     {
-        $product = $this->productRepository->getById($item->getItemId());
+        $product = $this->productRepository->getById($item->getId());
         $category = $this->categoryRepository->findProductMainCategoryOnDomain($product, $domainConfig->getId());
         $feedCategory = $category !== null ? $category->getHeurekaCzFeedCategory() : null;
 

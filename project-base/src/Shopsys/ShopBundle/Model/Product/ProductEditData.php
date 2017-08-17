@@ -68,34 +68,19 @@ class ProductEditData
     public $accessories;
 
     /**
-     * @var string[]|null[]
-     */
-    public $heurekaCpcValues;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Product\Product[]
      */
     public $variants;
 
     /**
-     * @var bool[]
-     */
-    public $showInZboziFeedIndexedByDomainId;
-
-    /**
-     * @var string[]|null[]
-     */
-    public $zboziCpcValues;
-
-    /**
-     * @var string[]|null[]
-     */
-    public $zboziCpcSearchValues;
-
-    /**
      * @var string[]|null[]
      */
     public $seoH1s;
+
+    /**
+     * @var array
+     */
+    public $pluginData;
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
@@ -109,11 +94,7 @@ class ProductEditData
      * @param string[]|null[] $descriptions
      * @param string[]|null[] $shortDescriptions
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $accessories
-     * @param string[]|null[] $heurekaCpcValues
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
-     * @param bool[] $showInZboziFeedIndexedByDomainId
-     * @param string[]|null[] $zboziCpcValues
-     * @param string[]|null[] $zboziCpcSearchValues
      * @param string[]|null[] $seoH1s
      */
     public function __construct(
@@ -128,11 +109,7 @@ class ProductEditData
         array $descriptions = [],
         array $shortDescriptions = [],
         array $accessories = [],
-        array $heurekaCpcValues = [],
         array $variants = [],
-        array $showInZboziFeedIndexedByDomainId = [],
-        array $zboziCpcValues = [],
-        array $zboziCpcSearchValues = [],
         array $seoH1s = []
     ) {
         if ($productData !== null) {
@@ -151,11 +128,8 @@ class ProductEditData
         $this->shortDescriptions = $shortDescriptions;
         $this->urls = new UrlListData();
         $this->accessories = $accessories;
-        $this->heurekaCpcValues = $heurekaCpcValues;
         $this->variants = $variants;
-        $this->showInZboziFeedIndexedByDomainId = $showInZboziFeedIndexedByDomainId;
-        $this->zboziCpcValues = $zboziCpcValues;
-        $this->zboziCpcSearchValues = $zboziCpcSearchValues;
         $this->seoH1s = $seoH1s;
+        $this->pluginData = [];
     }
 }

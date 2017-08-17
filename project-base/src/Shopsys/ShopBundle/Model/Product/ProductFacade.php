@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Model\Product;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessory;
@@ -112,6 +113,11 @@ class ProductFacade
      */
     private $availabilityFacade;
 
+    /**
+     * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade
+     */
+    private $pluginDataFormExtensionFacade;
+
     public function __construct(
         EntityManager $em,
         ProductRepository $productRepository,
@@ -129,7 +135,8 @@ class ProductFacade
         ProductSellingDeniedRecalculator $productSellingDeniedRecalculator,
         ProductAccessoryRepository $productAccessoryRepository,
         ProductVariantService $productVariantService,
-        AvailabilityFacade $availabilityFacade
+        AvailabilityFacade $availabilityFacade,
+        PluginCrudExtensionFacade $pluginDataFormExtensionFacade
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -148,6 +155,7 @@ class ProductFacade
         $this->productAccessoryRepository = $productAccessoryRepository;
         $this->productVariantService = $productVariantService;
         $this->availabilityFacade = $availabilityFacade;
+        $this->pluginDataFormExtensionFacade = $pluginDataFormExtensionFacade;
     }
 
     /**
@@ -176,6 +184,8 @@ class ProductFacade
         $this->em->persist($product);
         $this->em->flush($product);
         $this->setAdditionalDataAfterCreate($product, $productEditData);
+
+        $this->pluginDataFormExtensionFacade->saveAllData('product', $product->getId(), $productEditData->pluginData);
 
         return $product;
     }
@@ -236,6 +246,8 @@ class ProductFacade
         $this->friendlyUrlFacade->saveUrlListFormData('front_product_detail', $product->getId(), $productEditData->urls);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 
+        $this->pluginDataFormExtensionFacade->saveAllData('product', $product->getId(), $productEditData->pluginData);
+
         $this->productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
         $this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
         $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
@@ -258,6 +270,8 @@ class ProductFacade
         }
         $this->em->remove($product);
         $this->em->flush();
+
+        $this->pluginDataFormExtensionFacade->removeAllData('product', $product->getId());
     }
 
     /**
@@ -321,10 +335,6 @@ class ProductFacade
             $descriptions = $productEditData->descriptions;
             $shortDescriptions = $productEditData->shortDescriptions;
         }
-        $heurekaCpcValues = $productEditData->heurekaCpcValues;
-        $showInZboziFeed = $productEditData->showInZboziFeedIndexedByDomainId;
-        $zboziCpcValues = $productEditData->zboziCpcValues;
-        $zboziCpcSearchValues = $productEditData->zboziCpcSearchValues;
 
         foreach ($productDomains as $domainId => $productDomain) {
             if (!empty($seoTitles)) {
@@ -338,18 +348,6 @@ class ProductFacade
             }
             if (!empty($shortDescriptions)) {
                 $productDomain->setShortDescription($shortDescriptions[$domainId]);
-            }
-            if (!empty($heurekaCpcValues)) {
-                $productDomain->setHeurekaCpc($heurekaCpcValues[$domainId]);
-            }
-            if (!empty($showInZboziFeed)) {
-                $productDomain->setShowInZboziFeed($showInZboziFeed[$domainId]);
-            }
-            if (!empty($zboziCpcValues)) {
-                $productDomain->setZboziCpc($zboziCpcValues[$domainId]);
-            }
-            if (!empty($zboziCpcSearchValues)) {
-                $productDomain->setZboziCpcSearch($zboziCpcSearchValues[$domainId]);
             }
             if (!empty($seoH1s)) {
                 $productDomain->setSeoH1($seoH1s[$domainId]);

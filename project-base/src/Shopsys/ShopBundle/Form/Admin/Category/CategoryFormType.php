@@ -3,13 +3,13 @@
 namespace Shopsys\ShopBundle\Form\Admin\Category;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension;
 use Shopsys\ShopBundle\Form\DomainsType;
 use Shopsys\ShopBundle\Form\FileUploadType;
 use Shopsys\ShopBundle\Form\Locale\LocalizedType;
-use Shopsys\ShopBundle\Form\MultidomainType;
 use Shopsys\ShopBundle\Form\UrlListType;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
@@ -114,12 +114,12 @@ class CategoryFormType extends AbstractType
             ->add('seoTitles', MultidomainType::class, [
                 'entry_type' => TextType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoTitlesOptionsByDomainId,
+                'options_by_domain_id' => $seoTitlesOptionsByDomainId,
             ])
             ->add('seoMetaDescriptions', MultidomainType::class, [
                 'entry_type' => TextareaType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
+                'options_by_domain_id' => $seoMetaDescriptionsOptionsByDomainId,
             ])
             ->add('seoH1s', MultidomainType::class, [
                 'required' => false,
@@ -128,7 +128,7 @@ class CategoryFormType extends AbstractType
                         new Constraints\Length(['max' => 255, 'maxMessage' => 'Heading (H1) cannot be longer than {{ limit }} characters']),
                     ],
                 ],
-                'optionsByDomainId' => $seoH1OptionsByDomainId,
+                'options_by_domain_id' => $seoH1OptionsByDomainId,
             ])
             ->add('descriptions', MultidomainType::class, [
                 'entry_type' => CKEditorType::class,

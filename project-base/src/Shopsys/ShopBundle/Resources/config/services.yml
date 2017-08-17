@@ -314,6 +314,9 @@ services:
   shopsys.shop.component.mutex.mutex_factory:
     class: Shopsys\ShopBundle\Component\Mutex\MutexFactory
 
+  shopsys.shop.component.plugin.plugin_crud_extension_registry:
+    class: Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionRegistry
+
   shopsys.shop.component.request.deny_script_name_in_request_path_listener:
     class: Shopsys\ShopBundle\Component\Request\DenyScriptNameInRequestPathListener
     tags:
@@ -506,9 +509,6 @@ services:
   shopsys.shop.feed.feed_config_repository:
     class: Shopsys\ShopBundle\Model\Feed\FeedConfigRepository
 
-  shopsys.shop.feed.feed_item_custom_values_provider:
-    class: Shopsys\ShopBundle\Model\Feed\FeedItemCustomValuesProvider
-
   shopsys.shop.feed.feed_item_repository:
     class: Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemRepository
 
@@ -516,6 +516,9 @@ services:
     class: Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryFeedConfig
     tags:
       - { name: shopsys.product_feed, type: delivery }
+
+  shopsys.shop.feed.heureka_category_name_provider:
+    class: Shopsys\ShopBundle\Model\Feed\HeurekaCategoryNameProvider
 
   shopsys.shop.http_foundation.response_listener:
     class: Shopsys\ShopBundle\Component\HttpFoundation\ResponseListener
@@ -586,6 +589,9 @@ services:
 
   shopsys.shop.payment.payment_facade:
     class: Shopsys\ShopBundle\Model\Payment\PaymentFacade
+
+  shopsys.shop.plugin_data.plugin_data_storage_provider:
+    class: Shopsys\ShopBundle\Model\PluginData\DoctrinePluginDataStorageProvider
 
   shopsys.shop.pricing.currency.currency_facade:
     class: Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade

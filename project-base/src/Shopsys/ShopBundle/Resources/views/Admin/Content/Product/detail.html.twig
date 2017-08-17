@@ -302,64 +302,6 @@
 
         <div class="form-group wrap-border">
             <div class="form-group__title">
-                {{ 'Products search engines'|trans }}
-            </div>
-            <div class="form-line form-line--no-padd">
-                <div class="form-line__group">
-                    <strong class="form-line__group__name">{{ 'Heureka.cz'|trans }}</strong>
-                </div>
-            </div>
-            {{ form_row(form.heurekaCpcValues, { label: 'Maximum price per click'|trans }) }}
-            <div class="form-line form-line--no-padd">
-                <div class="form-line__group">
-                    <strong class="form-line__group__name">{{ 'Zboží.cz'|trans }}</strong>
-                </div>
-            </div>
-            <div class="form-line">
-                {{ form_label(form.showInZboziFeedIndexedByDomainId, 'Offer in feed'|trans) }}
-                {% for domainId, showInZboziFeedForm in form.showInZboziFeedIndexedByDomainId %}
-                    <div class="form-line__side">
-                        {% if isMultidomain() %}
-                            <div class="form-line__item">
-                                {{ domainIcon(domainId, 'long-bordered') }}
-                            </div>
-                        {% endif %}
-                        <div class="form-line__item">
-                            {{ form_widget(showInZboziFeedForm, { isSimple: true }) }}
-                            {{ form_errors(showInZboziFeedForm) }}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="form-line">
-                <div class="form-line__label">
-                    {{ 'Maximum price per click'|trans }}:
-                    <i
-                        class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
-                        data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
-                        title="{{ 'It is signed with MAX_CPC tags in feeds. If not mentioned, this information is not transmitted to the feed.'|trans }}"
-                    ></i>
-                </div>
-                {{ form_widget(form.zboziCpcValues) }}
-                {{ form_errors(form.zboziCpcValues) }}
-            </div>
-
-            <div class="form-line">
-                <div class="form-line__label">
-                    {{ 'Maximum price per click in offers'|trans }}:
-                    <i
-                        class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
-                        data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
-                        title="{{ 'It is signed with MAX_CPC_SEARCH tags in feeds. If not mentioned, this information is not transmitted to the feed.'|trans }}"
-                    ></i>
-                </div>
-                {{ form_widget(form.zboziCpcSearchValues) }}
-                {{ form_errors(form.zboziCpcSearchValues) }}
-            </div>
-        </div>
-
-        <div class="form-group wrap-border">
-            <div class="form-group__title">
                 {{ 'Images'|trans }}
             </div>
 
@@ -370,7 +312,30 @@
             {{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
         </div>
 
-        {{ form_row(form.accessories, { label: 'Accessories'|trans }) }}
+        <div class="form-group {% if form.pluginData is not empty %}wrap-border{% endif %}">
+            <div class="form-group__title">
+                {{ 'Accessories'|trans }}
+                <div class="form-group__error">
+                    {{- form_errors(form.accessories) -}}
+                </div>
+            </div>
+            {{- form_widget(form.accessories) -}}
+        </div>
+
+        {% if form.pluginData is empty %}
+            {% do form.pluginData.setRendered %}
+        {% else %}
+            {% for pluginForm in form.pluginData %}
+                <div class="form-group {% if not loop.last %}wrap-border{% endif %}">
+                    <div class="form-group__title">
+                        {{ pluginForm.vars.label }}
+                    </div>
+
+                    {{ form_widget(pluginForm) }}
+                    {{ form_errors(pluginForm) }}
+                </div>
+            {% endfor %}
+        {% endif %}
 
         {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}

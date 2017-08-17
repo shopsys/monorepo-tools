@@ -87,7 +87,7 @@ class FeedFacade
                     return new FeedGenerationConfig(
                         $feedConfig->getFeedName(),
                         $domainConfig->getId(),
-                        $feedItemToContinue->getItemId()
+                        $feedItemToContinue->getId()
                     );
                 } else {
                     if (array_key_exists($key + 1, $this->feedGenerationConfigs)) {
@@ -125,7 +125,7 @@ class FeedFacade
             if ($lastFeedItem === null) {
                 $seekItemId = null;
             } else {
-                $seekItemId = $lastFeedItem->getItemId();
+                $seekItemId = $lastFeedItem->getId();
             }
         } while ($seekItemId !== null);
     }

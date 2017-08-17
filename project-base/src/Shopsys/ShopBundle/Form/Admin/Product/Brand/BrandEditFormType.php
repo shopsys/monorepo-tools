@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product\Brand;
 
+use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Form\MultidomainType;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandEditData;
@@ -77,17 +77,17 @@ class BrandEditFormType extends AbstractType
             ->add('seoTitles', MultidomainType::class, [
                 'entry_type' => TextType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoTitlesOptionsByDomainId,
+                'options_by_domain_id' => $seoTitlesOptionsByDomainId,
             ])
             ->add('seoMetaDescriptions', MultidomainType::class, [
                 'entry_type' => TextareaType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
+                'options_by_domain_id' => $seoMetaDescriptionsOptionsByDomainId,
             ])
             ->add('seoH1s', MultidomainType::class, [
                 'entry_type' => TextType::class,
                 'required' => false,
-                'optionsByDomainId' => $seoH1sOptionsByDomainId,
+                'options_by_domain_id' => $seoH1sOptionsByDomainId,
             ])
             ->add('save', SubmitType::class);
     }

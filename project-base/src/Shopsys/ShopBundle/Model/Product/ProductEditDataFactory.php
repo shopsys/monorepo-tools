@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Model\Product;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
@@ -54,6 +55,11 @@ class ProductEditDataFactory
      */
     private $imageFacade;
 
+    /**
+     * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade
+     */
+    private $pluginDataFormExtensionFacade;
+
     public function __construct(
         Domain $domain,
         ProductRepository $productRepository,
@@ -62,7 +68,8 @@ class ProductEditDataFactory
         ProductInputPriceFacade $productInputPriceFacade,
         FriendlyUrlFacade $friendlyUrlFacade,
         ProductAccessoryRepository $productAccessoryRepository,
-        ImageFacade $imageFacade
+        ImageFacade $imageFacade,
+        PluginCrudExtensionFacade $pluginDataFormExtensionFacade
     ) {
         $this->domain = $domain;
         $this->productRepository = $productRepository;
@@ -72,6 +79,7 @@ class ProductEditDataFactory
         $this->friendlyUrlFacade = $friendlyUrlFacade;
         $this->productAccessoryRepository = $productAccessoryRepository;
         $this->imageFacade = $imageFacade;
+        $this->pluginDataFormExtensionFacade = $pluginDataFormExtensionFacade;
     }
 
     /**
@@ -94,12 +102,6 @@ class ProductEditDataFactory
         $productEditData->descriptions = $nullForAllDomains;
         $productEditData->shortDescriptions = $nullForAllDomains;
         $productEditData->accessories = [];
-        $productEditData->heurekaCpcValues = $nullForAllDomains;
-        foreach ($this->domain->getAllIds() as $domainId) {
-            $productEditData->showInZboziFeedIndexedByDomainId[$domainId] = true;
-        }
-        $productEditData->zboziCpcValues = $nullForAllDomains;
-        $productEditData->zboziCpcSearchValues = $nullForAllDomains;
 
         return $productEditData;
     }
@@ -124,6 +126,8 @@ class ProductEditDataFactory
         $productEditData->variants = $product->getVariants();
 
         $this->setMultidomainData($product, $productEditData);
+
+        $productEditData->pluginData = $this->pluginDataFormExtensionFacade->getAllData('product', $product->getId());
 
         return $productEditData;
     }
@@ -175,10 +179,6 @@ class ProductEditDataFactory
 
             $productEditData->urls->mainFriendlyUrlsByDomainId[$domainId] =
                 $this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
-            $productEditData->heurekaCpcValues[$domainId] = $productDomain->getHeurekaCpc();
-            $productEditData->showInZboziFeedIndexedByDomainId[$domainId] = $productDomain->getShowInZboziFeed();
-            $productEditData->zboziCpcValues[$domainId] = $productDomain->getZboziCpc();
-            $productEditData->zboziCpcSearchValues[$domainId] = $productDomain->getZboziCpcSearch();
         }
     }
 

@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Prezent\Doctrine\TranslatableBundle\PrezentDoctrineTranslatableBundle(),
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Shopsys\FormTypesBundle\ShopsysFormTypesBundle(),
             new ShopSys\MigrationBundle\ShopSysMigrationBundle(),
             new Shopsys\ProductFeed\HeurekaBundle\ShopsysProductFeedHeurekaBundle(),
             new Shopsys\ProductFeed\ZboziBundle\ShopsysProductFeedZboziBundle(),

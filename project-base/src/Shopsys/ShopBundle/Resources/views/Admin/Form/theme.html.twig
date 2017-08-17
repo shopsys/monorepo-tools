@@ -726,6 +726,24 @@
     </div>
 {% endmacro %}
 
+{% block yes_no_row %}
+    {% if multidomain is defined %}
+        <div class="form-line__side">
+            {% if isMultidomain() %}
+                <div class="form-line__item">
+                    {{ domainIcon(domainId, 'long-bordered') }}
+                </div>
+            {% endif %}
+            <div class="form-line__item">
+                {{ form_widget(form, { isSimple: isSimple|default(isMultidomain()) }) }}
+                {{ form_errors(form) }}
+            </div>
+        </div>
+    {% else %}
+        {{ block('form_row') }}
+    {% endif %}
+{% endblock yes_no_row %}
+
 {% block yes_no_widget %}
     {% if isSimple|default(false) == false %}
         <div class="form-line__side">

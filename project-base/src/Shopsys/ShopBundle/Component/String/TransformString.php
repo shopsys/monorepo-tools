@@ -47,6 +47,34 @@ class TransformString
     }
 
     /**
+     * Transforms arbitrary string (natural sentence, under_score, PascalCase, ...) into one ascii camelCase string
+     *
+     * @see \Tests\ShopBundle\Unit\Component\String\TransformStringTest::stringToCamelCaseProvider() for example usages
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function stringToCamelCase($string)
+    {
+        // convert everything apart from letters and numbers into spaces
+        $string = preg_replace('~[^\\pL0-9]+~u', ' ', $string);
+        // transliterate into ascii
+        $string = self::toAscii($string);
+        // remove special characters after transliteration
+        $string = preg_replace('~[^a-zA-Z0-9 ]~', '', $string);
+        // preserve camel case by splitting words with spaces
+        $string = preg_replace('~([a-z])([A-Z])~', '$1 $2', $string);
+        // capitalize only first letter of every word
+        $string = ucwords(strtolower($string), ' ');
+        // squash words
+        $string = str_replace(' ', '', $string);
+        // lowercase first letter
+        $string = lcfirst($string);
+
+        return $string;
+    }
+
+    /**
      * @param string $string
      * @return string
      */
