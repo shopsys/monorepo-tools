@@ -41,7 +41,7 @@ class ImageDemoCommand extends ContainerAwareCommand
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         $archiveUrl = $this->getContainer()->getParameter('shopsys.demo_images_archive_url');
-        $dqlUrl = $this->getContainer()->getParameter('shopsys.demo_images_dql_url');
+        $demoImagesSqlUrl = $this->getContainer()->getParameter('shopsys.demo_images_sql_url');
         $cachePath = $this->getContainer()->getParameter('kernel.cache_dir');
         $localArchiveFilepath = $cachePath . '/' . 'demoImages.zip';
         $imagesPath = $this->getContainer()->getParameter('shopsys.image_dir');
@@ -52,7 +52,7 @@ class ImageDemoCommand extends ContainerAwareCommand
         if ($this->downloadImages($output, $archiveUrl, $localArchiveFilepath)) {
             if ($this->unpackImages($output, $imagesPath, $localArchiveFilepath)) {
                 $this->moveFiles($unpackedDomainImagesPath, $domainImagesPath);
-                $this->loadDbChanges($output, $dqlUrl);
+                $this->loadDbChanges($output, $demoImagesSqlUrl);
                 $isCompleted = true;
             }
         }
@@ -87,11 +87,11 @@ class ImageDemoCommand extends ContainerAwareCommand
 
     /**
      * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @param string $dqlUrl
+     * @param string $sqlUrl
      */
-    private function loadDbChanges(OutputInterface $output, $dqlUrl)
+    private function loadDbChanges(OutputInterface $output, $sqlUrl)
     {
-        $fileContents = file_get_contents($dqlUrl);
+        $fileContents = file_get_contents($sqlUrl);
         if ($fileContents === false) {
             $output->writeln('<fg=red>Download of DB changes failed</fg=red>');
             return;
