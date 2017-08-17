@@ -11,13 +11,13 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="512"
    height="512"
-   viewBox="0 0 512.00001 512"
-   id="svg3794"
+   viewBox="0 0 512.00001 512.00001"
+   id="svg3350"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="arrow-down.svg">
+   sodipodi:docname="arrow.svg">
   <defs
-     id="defs3796" />
+     id="defs3352" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,24 +25,20 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="215.80551"
-     inkscape:cy="248.2034"
+     inkscape:zoom="0.35"
+     inkscape:cx="6.4285714"
+     inkscape:cy="520"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
      units="px"
-     inkscape:window-width="1920"
-     inkscape:window-height="1027"
-     inkscape:window-x="1358"
-     inkscape:window-y="22"
+     inkscape:window-width="1536"
+     inkscape:window-height="801"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
-     id="metadata3799">
+     id="metadata3355">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -57,10 +53,15 @@
      inkscape:label="Vrstva 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-528.57111,31.066)">
-    <polyline
-       transform="matrix(44.619423,0,0,44.794401,-26920.154,-948.15399)"
-       id="polyline3403"
-       points="626.627,24.294 620.912,30.009 615.197,24.294 " />
+     transform="translate(0,-540.36216)">
+    <g
+       style="fill:#000000;stroke:none"
+       transform="matrix(0.07836991,0,0,-0.07836991,5.216288,948.79163)"
+       id="g6">
+      <path
+         inkscape:connector-curvature="0"
+         d="m 10,3785 c 0,-10 3182,-3685 3190,-3685 8,0 3190,3675 3190,3685 0,3 -1435,5 -3190,5 -1754,0 -3190,-2 -3190,-5 z"
+         id="path8" />
+    </g>
   </g>
 </svg>
