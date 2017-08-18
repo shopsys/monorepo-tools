@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "27cf5b49851a0f68ed5dc6af2ce861ee",
+    "content-hash": "dd006143ac9b541b5c30689c9205cf42",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -5104,16 +5104,16 @@
         },
         {
             "name": "shopsys/migrations",
-            "version": "v2.0.1",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/migrations.git",
-                "reference": "888fd89f39abfb05cd40a6a8fda43f874fb84f4f"
+                "reference": "74d50a04fe37e652870b8d255682147484219332"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/migrations/zipball/888fd89f39abfb05cd40a6a8fda43f874fb84f4f",
-                "reference": "888fd89f39abfb05cd40a6a8fda43f874fb84f4f",
+                "url": "https://api.github.com/repos/shopsys/migrations/zipball/74d50a04fe37e652870b8d255682147484219332",
+                "reference": "74d50a04fe37e652870b8d255682147484219332",
                 "shasum": ""
             },
             "require": {
@@ -5127,9 +5127,9 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "~5.2",
-                "shopsys/coding-standards": "2.0.1"
+                "shopsys/coding-standards": "3.0.1"
             },
-            "type": "project",
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "ShopSys\\": [
@@ -5137,11 +5137,26 @@
                     ]
                 }
             },
-            "support": {
-                "source": "https://github.com/shopsys/migrations/tree/v2.0.1",
-                "issues": "https://github.com/shopsys/migrations/issues"
-            },
-            "time": "2017-02-15T11:20:43+00:00"
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ShopSys",
+                    "homepage": "https://www.shopsys.com/"
+                }
+            ],
+            "description": "Symfony bundle providing commands for transactional Doctrine database migrations",
+            "keywords": [
+                "database",
+                "doctrine",
+                "migrate",
+                "migrations",
+                "orm",
+                "schema"
+            ],
+            "time": "2017-08-18T13:08:57+00:00"
         },
         {
             "name": "shopsys/plugin-interface",

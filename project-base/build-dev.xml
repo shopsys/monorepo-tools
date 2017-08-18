@@ -7,10 +7,10 @@
     <target name="build-demo-ci" depends="wipe-excluding-logs,composer-dev,npm,dirs-create,domains-urls-check,assets,db-demo,grunt,img-demo,error-pages-generate,tests-acceptance-build,checks-ci" description="Builds application for development with clean demo DB and runs CI checks."/>
     <target name="build-demo-ci-diff" depends="wipe-excluding-logs,composer-dev,npm,dirs-create,domains-urls-check,assets,db-demo,grunt,img-demo,error-pages-generate,tests-acceptance-build,checks-ci-diff" description="Builds application for development with clean demo DB and runs CI checks on changed files."/>
 
-    <target name="checks" depends="standards,tests" description="Checks coding standards and runs unit, DB and smoke tests."/>
-    <target name="checks-diff" depends="standards-diff,tests" description="Checks coding standards on changed files and runs unit, DB and smoke tests."/>
-    <target name="checks-ci" depends="standards-ci,tests,tests-acceptance" description="Checks coding standards (incl. PhpStorm inspection) and runs unit, DB, smoke and acceptance tests."/>
-    <target name="checks-ci-diff" depends="standards-ci-diff,tests,tests-acceptance" description="Checks coding standards on changed files (incl. PhpStorm inspection) and runs unit, DB, smoke and acceptance tests."/>
+    <target name="checks" depends="db-check-mapping,standards,tests" description="Checks ORM mapping, coding standards and runs unit, DB and smoke tests."/>
+    <target name="checks-diff" depends="db-check-mapping,standards-diff,tests" description="Checks ORM mapping, coding standards on changed files and runs unit, DB and smoke tests."/>
+    <target name="checks-ci" depends="db-check-mapping,standards-ci,tests,tests-acceptance" description="Checks ORM mapping, coding standards (incl. PhpStorm inspection) and runs unit, DB, smoke and acceptance tests."/>
+    <target name="checks-ci-diff" depends="db-check-mapping,standards-ci-diff,tests,tests-acceptance" description="Checks ORM mapping, coding standards on changed files (incl. PhpStorm inspection) and runs unit, DB, smoke and acceptance tests."/>
 
     <target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint,yaml-lint" description="Checks coding standards."/>
     <target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint-diff,yaml-lint" description="Checks coding standards on changed files."/>
@@ -636,7 +636,7 @@
         </exec>
     </target>
 
-    <target name="test-db-check-schema" description="Checks if test database schema is satisfying ORM and returns a list of suggestions to fix it.">
+    <target name="test-db-check-schema" depends="db-check-mapping" description="Checks if test database schema is satisfying ORM and returns a list of suggestions to fix it.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="bin/console" />
             <arg value="--env=test" />
