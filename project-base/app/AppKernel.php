@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new Shopsys\FormTypesBundle\ShopsysFormTypesBundle(),
             new ShopSys\MigrationBundle\ShopSysMigrationBundle(),
             new Shopsys\ProductFeed\HeurekaBundle\ShopsysProductFeedHeurekaBundle(),
+            new Shopsys\ProductFeed\HeurekaDeliveryBundle\ShopsysProductFeedHeurekaDeliveryBundle(),
             new Shopsys\ProductFeed\ZboziBundle\ShopsysProductFeedZboziBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),

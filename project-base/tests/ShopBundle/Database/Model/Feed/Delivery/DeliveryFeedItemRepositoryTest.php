@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\ShopBundle\Database\Model\Feed\HeurekaDelivery;
+namespace Tests\ShopBundle\Database\Model\Feed\Delivery;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository;
+use Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
-class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
+class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
 {
     public function testGetItemsWithProductInStock()
     {
@@ -28,20 +28,20 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
         $productEditData->productData->stockQuantity = 1;
         $productFacade->edit($product->getId(), $productEditData);
 
-        $heurekaDeliveryItemRepository = $this->getServiceByType(HeurekaDeliveryItemRepository::class);
-        /* @var $heurekaDeliveryItemRepository \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
+        $deliveryFeedItemRepository = $this->getServiceByType(DeliveryFeedItemRepository::class);
+        /* @var $deliveryFeedItemRepository \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository */
         $seekItemId = null;
         $maxResults = PHP_INT_MAX;
-        $heurekaDeliveryItems = $heurekaDeliveryItemRepository->getItems($domain->getCurrentDomainConfig(), $seekItemId, $maxResults);
+        $deliveryFeedItems = $deliveryFeedItemRepository->getItems($domain->getCurrentDomainConfig(), $seekItemId, $maxResults);
 
-        foreach ($heurekaDeliveryItems as $heurekaDeliveryItem) {
-            /* @var $heurekaDeliveryItem \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem*/
-            if ($heurekaDeliveryItem->getId() == $product->getId()) {
+        foreach ($deliveryFeedItems as $deliveryFeedItem) {
+            /* @var $deliveryFeedItem \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItem*/
+            if ($deliveryFeedItem->getId() == $product->getId()) {
                 return;
             }
         }
 
-        $this->fail('Sellable product using stock in stock must be in XML heureka delivery feed.');
+        $this->fail('Sellable product using stock in stock must be in XML delivery feed.');
     }
 
     public function testGetItemsWithProductOutOfStock()
@@ -61,16 +61,16 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
         $productEditData->productData->stockQuantity = 0;
         $productFacade->edit($product->getId(), $productEditData);
 
-        $heurekaDeliveryItemRepository = $this->getServiceByType(HeurekaDeliveryItemRepository::class);
-        /* @var $heurekaDeliveryItemRepository \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
+        $deliveryFeedItemRepository = $this->getServiceByType(DeliveryFeedItemRepository::class);
+        /* @var $deliveryFeedItemRepository \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository */
         $seekItemId = null;
         $maxResults = PHP_INT_MAX;
-        $heurekaDeliveryItems = $heurekaDeliveryItemRepository->getItems($domain->getCurrentDomainConfig(), $seekItemId, $maxResults);
+        $deliveryFeedItems = $deliveryFeedItemRepository->getItems($domain->getCurrentDomainConfig(), $seekItemId, $maxResults);
 
-        foreach ($heurekaDeliveryItems as $heurekaDeliveryItem) {
-            /* @var $heurekaDeliveryItem \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem*/
-            if ($heurekaDeliveryItem->getId() == $product->getId()) {
-                $this->fail('Sellable product out of stock can not be in XML heureka delivery feed.');
+        foreach ($deliveryFeedItems as $deliveryFeedItem) {
+            /* @var $deliveryFeedItem \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItem*/
+            if ($deliveryFeedItem->getId() == $product->getId()) {
+                $this->fail('Sellable product out of stock can not be in XML delivery feed.');
             }
         }
     }
@@ -92,16 +92,16 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
         $productEditData->productData->stockQuantity = null;
         $productFacade->edit($product->getId(), $productEditData);
 
-        $heurekaDeliveryItemRepository = $this->getServiceByType(HeurekaDeliveryItemRepository::class);
-        /* @var $heurekaDeliveryItemRepository \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
+        $deliveryFeedItemRepository = $this->getServiceByType(DeliveryFeedItemRepository::class);
+        /* @var $deliveryFeedItemRepository \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository */
         $seekItemId = null;
         $maxResults = PHP_INT_MAX;
-        $heurekaDeliveryItems = $heurekaDeliveryItemRepository->getItems($domain->getCurrentDomainConfig(), $seekItemId, $maxResults);
+        $deliveryFeedItems = $deliveryFeedItemRepository->getItems($domain->getCurrentDomainConfig(), $seekItemId, $maxResults);
 
-        foreach ($heurekaDeliveryItems as $heurekaDeliveryItem) {
-            /* @var $heurekaDeliveryItem \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem*/
-            if ($heurekaDeliveryItem->getId() == $product->getId()) {
-                $this->fail('Sellable product without stock can not be in XML heureka delivery feed.');
+        foreach ($deliveryFeedItems as $deliveryFeedItem) {
+            /* @var $deliveryFeedItem \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItem*/
+            if ($deliveryFeedItem->getId() == $product->getId()) {
+                $this->fail('Sellable product without stock can not be in XML delivery feed.');
             }
         }
     }

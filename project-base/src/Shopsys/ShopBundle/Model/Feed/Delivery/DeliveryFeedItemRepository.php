@@ -1,14 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\HeurekaDelivery;
+namespace Shopsys\ShopBundle\Model\Feed\Delivery;
 
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedItemRepositoryInterface;
-use Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemFactory;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class HeurekaDeliveryItemRepository implements FeedItemRepositoryInterface
+class DeliveryFeedItemRepository implements FeedItemRepositoryInterface
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
@@ -21,18 +20,18 @@ class HeurekaDeliveryItemRepository implements FeedItemRepositoryInterface
     private $pricingGroupSettingFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemFactory
+     * @var \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemFactory
      */
-    private $heurekaDeliveryItemFactory;
+    private $deliveryFeedItemFactory;
 
     public function __construct(
         ProductRepository $productRepository,
         PricingGroupSettingFacade $pricingGroupSettingFacade,
-        HeurekaDeliveryItemFactory $heurekaDeliveryItemFactory
+        DeliveryFeedItemFactory $deliveryFeedItemFactory
     ) {
         $this->productRepository = $productRepository;
         $this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
-        $this->heurekaDeliveryItemFactory = $heurekaDeliveryItemFactory;
+        $this->deliveryFeedItemFactory = $deliveryFeedItemFactory;
     }
 
     /**
@@ -56,6 +55,6 @@ class HeurekaDeliveryItemRepository implements FeedItemRepositoryInterface
 
         $products = $queryBuilder->getQuery()->execute();
 
-        return $this->heurekaDeliveryItemFactory->createItems($products);
+        return $this->deliveryFeedItemFactory->createItems($products);
     }
 }

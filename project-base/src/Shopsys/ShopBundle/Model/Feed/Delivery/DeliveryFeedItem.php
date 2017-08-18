@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\HeurekaDelivery;
+namespace Shopsys\ShopBundle\Model\Feed\Delivery;
 
-use Shopsys\ProductFeed\FeedItemInterface;
+use Shopsys\ProductFeed\DeliveryFeedItemInterface;
 
-class HeurekaDeliveryItem implements FeedItemInterface
+class DeliveryFeedItem implements DeliveryFeedItemInterface
 {
     /**
      * @var int

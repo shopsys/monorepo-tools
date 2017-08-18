@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "41bb1b9833e5d1eddad6271d3584c97f",
+    "content-hash": "27cf5b49851a0f68ed5dc6af2ce861ee",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -5246,17 +5246,68 @@
             "time": "2017-08-17T14:19:11+00:00"
         },
         {
-            "name": "shopsys/product-feed-interface",
-            "version": "v0.2.0",
+            "name": "shopsys/product-feed-heureka-delivery",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/shopsys/product-feed-interface.git",
-                "reference": "ac197e91b618c8fd46f9c8825cb8215b6db0276c"
+                "url": "https://github.com/shopsys/product-feed-heureka-delivery.git",
+                "reference": "c0d79b675db13dc8810739aabffceaa594cb5148"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-interface/zipball/ac197e91b618c8fd46f9c8825cb8215b6db0276c",
-                "reference": "ac197e91b618c8fd46f9c8825cb8215b6db0276c",
+                "url": "https://api.github.com/repos/shopsys/product-feed-heureka-delivery/zipball/c0d79b675db13dc8810739aabffceaa594cb5148",
+                "reference": "c0d79b675db13dc8810739aabffceaa594cb5148",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "shopsys/product-feed-interface": "~0.2.1",
+                "symfony/framework-bundle": "^3.0"
+            },
+            "require-dev": {
+                "shopsys/coding-standards": "3.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Shopsys\\ProductFeed\\HeurekaDeliveryBundle\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shopsys",
+                    "homepage": "https://www.shopsys.com/"
+                }
+            ],
+            "description": "Shopsys Framework plugin interface for Heureka delivery XML product feed generation",
+            "keywords": [
+                "SSFW",
+                "Shopsys Framework",
+                "XML feed",
+                "heureka",
+                "plugin",
+                "product delivery feed"
+            ],
+            "time": "2017-08-18T07:16:00+00:00"
+        },
+        {
+            "name": "shopsys/product-feed-interface",
+            "version": "v0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shopsys/product-feed-interface.git",
+                "reference": "ea0a352e72982c47726d235a90f9ec144bf3244d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shopsys/product-feed-interface/zipball/ea0a352e72982c47726d235a90f9ec144bf3244d",
+                "reference": "ea0a352e72982c47726d235a90f9ec144bf3244d",
                 "shasum": ""
             },
             "require": {
@@ -5290,7 +5341,7 @@
                 "plugin",
                 "product feed"
             ],
-            "time": "2017-08-15T05:55:37+00:00"
+            "time": "2017-08-18T06:34:09+00:00"
         },
         {
             "name": "shopsys/product-feed-zbozi",
