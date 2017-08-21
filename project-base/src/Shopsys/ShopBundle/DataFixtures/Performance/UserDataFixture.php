@@ -124,6 +124,8 @@ class UserDataFixture
         $userData->email = $userNumber . '.' . $this->faker->safeEmail;
         $userData->password = $this->faker->password;
         $userData->domainId = $domainId;
+        $userData->createdAt = $this->faker->dateTimeBetween('-1 year', 'now');
+
         $customerData->userData = $userData;
 
         $billingAddressData = new BillingAddressData();
