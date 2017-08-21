@@ -12,7 +12,7 @@ use stdClass;
 
 class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
 {
-    public function testPersistReferenceWrongEntity()
+    public function testCannotPersistReferenceToEntityWithoutGetIdMethod()
     {
         $emMock = $this->getMockBuilder(EntityManager::class)
             ->setMethods(['__construct', 'persist', 'flush'])
@@ -32,7 +32,7 @@ class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
         $persistentReferenceFacade->persistReference('referenceName', new stdClass());
     }
 
-    public function testPersistReference()
+    public function testCanPersistNewReference()
     {
         $emMock = $this->getMockBuilder(EntityManager::class)
             ->setMethods(['__construct', 'persist', 'flush'])
@@ -46,7 +46,7 @@ class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $expectedException = new \Shopsys\ShopBundle\Component\DataFixture\Exception\PersistentReferenceNotFoundException('dummyReferenceName');
+        $expectedException = new \Shopsys\ShopBundle\Component\DataFixture\Exception\PersistentReferenceNotFoundException('newReferenceName');
         $persistentReferenceRepositoryMock->method('getByReferenceName')->willThrowException($expectedException);
 
         $productMock = $this->getMockBuilder(Product::class)
@@ -57,7 +57,7 @@ class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
         $productMock->expects($this->any())->method('getId')->willReturn(1);
 
         $persistentReferenceFacade = new PersistentReferenceFacade($emMock, $persistentReferenceRepositoryMock);
-        $persistentReferenceFacade->persistReference('referenceName', $productMock);
+        $persistentReferenceFacade->persistReference('newReferenceName', $productMock);
     }
 
     public function testGetReference()
