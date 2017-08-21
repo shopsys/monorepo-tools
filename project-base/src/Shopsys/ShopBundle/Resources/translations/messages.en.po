@@ -13,10 +13,6 @@ msgstr ""
 msgid "%defaultCurrency% per unit"
 msgstr ""
 
-#: HeurekaDeliveryFeedConfig.php:30
-msgid "%feedName% - availability"
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:19
 msgid "(If I buy on the company behalf)"
 msgstr ""
@@ -1026,7 +1022,7 @@ msgstr ""
 msgid "Create payment"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/listGrid.html.twig:12
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/listGrid.html.twig:28
 msgid "Create pricing group"
 msgstr ""
 
@@ -4937,7 +4933,7 @@ msgstr ""
 msgid "When we work for example with currencies, we need to state the currency after the input. Inputs have different text lengths and that's why we need to set a fixed width so that icons after text are aligned."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/list.html.twig:15
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/listGrid.html.twig:18
 msgid "While creating a new pricing group, please be patient. The application needs to recalculate price for every product on e-shop. Products without recalculated price will not be displayed on e-shop. For instance, it takes about an hour to recalculate 2000 products."
 msgstr ""
 

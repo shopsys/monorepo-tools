@@ -13,10 +13,6 @@ msgstr "%defaultCurrency% za 1 %currentCurrency%"
 msgid "%defaultCurrency% per unit"
 msgstr "%defaultCurrency% za 1 jednotku"
 
-#: HeurekaDeliveryFeedConfig.php:30
-msgid "%feedName% - availability"
-msgstr "%feedName% - dostupnostní"
-
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:19
 msgid "(If I buy on the company behalf)"
 msgstr "(Pokud nakupuji na firmu)"
@@ -1026,7 +1022,7 @@ msgstr "Vytvořit parametr"
 msgid "Create payment"
 msgstr "Vytvořit platbu"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/listGrid.html.twig:12
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/listGrid.html.twig:28
 msgid "Create pricing group"
 msgstr "Vytvořit cenovou skupinu"
 
@@ -4937,7 +4933,7 @@ msgstr "Při změně výchozí měny nedochází k žádnému přepočtu cen"
 msgid "When we work for example with currencies, we need to state the currency after the input. Inputs have different text lengths and that's why we need to set a fixed width so that icons after text are aligned."
 msgstr "Když se např. pracuje s cenami, je třeba za inputem uvést měnu. Ty ale mívají různé délky textu, proto je třeba jim vyhradit pevnou šířku, aby v případě ikonky za textem, byly ikony zarovnány."
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/list.html.twig:15
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/listGrid.html.twig:18
 msgid "While creating a new pricing group, please be patient. The application needs to recalculate price for every product on e-shop. Products without recalculated price will not be displayed on e-shop. For instance, it takes about an hour to recalculate 2000 products."
 msgstr "Mějte na paměti, že při vytváření cenové skupiny je nutné, aby aplikace přepočítala nové ceny pro všechny produkty. Produkty bez přepočtené ceny nebudou na e-shopu zobrazeny. Pro 2000 položek přepočet trvá asi hodinu."
 
