@@ -434,6 +434,12 @@ services:
   shopsys.shop.component.translation.identity_translator:
     class: Symfony\Component\Translation\IdentityTranslator
 
+  shopsys.shop.component.translation.twig_file_extractor:
+      class: Shopsys\ShopBundle\Component\Translation\TwigFileExtractor
+      decorates: 'jms_translation.extractor.file.twig_extractor'
+      arguments:
+        - '@shopsys.shop.component.translation.twig_file_extractor.inner'
+
   shopsys.shop.component.uploaded_file.config.uploaded_file_config:
     class: Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
     factory: ['@shopsys.shop.component.uploaded_file.config.uploaded_file_config_loader', loadFromYaml]
