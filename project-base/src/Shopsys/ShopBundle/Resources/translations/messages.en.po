@@ -869,6 +869,10 @@ msgstr ""
 msgid "Complement to title will be set as suffix to all titles e.g. if complement is set “ | My shop” and product name is “iPhone S7” the result title for this products page will be “iPhone S7 | My shop”."
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:998
+msgid "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anythin in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
+msgstr ""
+
 #: ContactFormFacade.php:61
 msgid "Contact form"
 msgstr ""
@@ -1265,6 +1269,10 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:577
 msgid "Display input -> input"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:821
+msgid "Display of inputs like checkboxes and radio buttons is done via <strong class=\"in-article__visible\">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class=\"in-article__visible\">inList</strong> and they are displayed below each other on true."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:22
@@ -2137,6 +2145,10 @@ msgstr ""
 
 #: DomainController.php:95
 msgid "Icon"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:913
+msgid "If we combine 3 components with each other, it will create nice forms design. We are talking about <strong class=\"in-article__visible\">form-group</strong> for headline, <strong class=\"in-article__visible\">form-line</strong> for form and <strong class=\"in-article__visible\">wrap-border</strong> for separating blocks of information."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1290
@@ -4129,6 +4141,14 @@ msgstr ""
 msgid "Small conversion button"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1092
+msgid "Sometimes it is necessary to align one of the elements to right/left side. You can do that using modifier <strong class=\"in-article__visible\">form-line__item--right</strong> or <strong class=\"in-article__visible\">form-line__item--left</strong>."
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1372
+msgid "Sometimes there is thicker line between some elements than between others. It is mainly in cases when the form-line elements are not directly behind each other, but some of them are covered with some dive, e.g. because of JS, for hiding and revealing. To that kind of dive you need to add class <strong class=\"in-article__visible\">form-line__js</strong>."
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:154
 msgid "Sorting priority"
 msgstr ""
@@ -4422,6 +4442,10 @@ msgstr ""
 msgid "Terms-and-conditions.html"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:562
+msgid "Text behind input. To generate the input correctly, it is necessary to write is like <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>"
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:556
 msgid "Text behind label"
 msgstr ""
@@ -4529,6 +4553,10 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:84
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:88
 msgid "This item can be set in product detail of a specific variant"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:100
+msgid "This product is no longer available for purchase. Have a look at similar products <a href=\"%url%\">here</a>."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/layout.html.twig:45
@@ -4674,6 +4702,10 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:285
 msgid "URL will be deleted after saving."
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Error/error.html.twig:36
+msgid "Uh-oh, uh-oh. And specially <strong>\"%status_code% %status_text%\"</strong>, as if it was on purpose!"
 msgstr ""
 
 #: productsPicker.window.js:80
@@ -4920,6 +4952,18 @@ msgstr ""
 msgid "Warning message - block with icon"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:792
+msgid "We will get the display by adding modifiers to input, but it is important to wrap input with dive with class <strong class=\"in-article__visible\">input__wrap</strong>. Images are positioned to this class. This structure should be generated by the system itself. If manual writing needed it is important to pay attention and don't forget to add flag <strong class=\"in-article__visible\">localeFlag(locale)</strong>, domain <strong class=\"in-article__visible\">or icon."
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:763
+msgid "We will get the display by writing input as <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>."
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:779
+msgid "We will get the display either by adding class to element or via <strong class=\"in-article__visible\">form_widget</strong> we add <strong class=\"in-article__visible\">attr class</strong>"
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:26
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:28
 msgid "We will remember your login on this computer for 30 days."
@@ -5075,6 +5119,10 @@ msgstr ""
 msgid "Your cart is empty"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:160
+msgid "Your cart is unfortunately empty. To create order, you have to <a href=\"%url%\">choose</a> some product first"
+msgstr ""
+
 #: CustomerController.php:78
 msgid "Your data had been successfully updated"
 msgstr ""
@@ -5179,6 +5227,10 @@ msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:23
 msgid "doesn't use"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:862
+msgid "domain icon only in checkbox list, icon is inserted <strong class=\"in-article__visible\">domainIcon(domainId, \"small\") </strong>"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:871

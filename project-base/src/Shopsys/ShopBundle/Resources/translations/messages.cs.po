@@ -869,6 +869,10 @@ msgstr "Doplněk k titulku"
 msgid "Complement to title will be set as suffix to all titles e.g. if complement is set “ | My shop” and product name is “iPhone S7” the result title for this products page will be “iPhone S7 | My shop”."
 msgstr "Doplněk k titulku bude připojen za všechny titulky na eshopu. Např. pokud nastavíte doplněk na \"| Můj obchod\" a název zboží je \"D-Link\", bude výsledný titulek u tohoto zboží \"D-Link | Můj obchod\""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:998
+msgid "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anythin in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
+msgstr "Komponenta se skládá z 5 hlavních prvků. Prvním je obal <strong class=\"in-article__visible\">form-line</strong>, který dodává formuláři pozadí, odsazení a bordery. Je to vlastně jeden řárek této struktury. V něm je další důležitý prvek, a to <strong class=\"in-article__visible\">form-line__label</strong>. Nemusíme to nutně brát jako label, jedná se hlavně o buďto titulek nebo důležitou část pro celý malý formulářový blok. Nejčastěji je to však label. Další 2 prvky jsou pro zarovnání obsahové části. Je to <strong class=\"in-article__visible\">form-line__side</strong> a <strong class=\"in-article__visible\">form-line__line</strong>. Nachází se za labelem a první z nich zarovnává obsah vedle labelu a nikdy se nedostane pod label. Druhý zabírá celou šířku pod labelem. A to nejdůležitější je <strong class=\"in-article__visible\">form-line__item</strong> což je obal pro cokoliv v obsahové části. Obalit to potřebujeme proto, že prvky by měly být od sebe vždy odsazeny a správně zarovnány. Teprve do těchto prvků se strkají inputy, texty, ikonky a podobně! Tento obal nepotřebují jen prvky, které zabírají 100% šířku."
+
 #: ContactFormFacade.php:61
 msgid "Contact form"
 msgstr "Kontaktní formulář"
@@ -1266,6 +1270,10 @@ msgstr "Zobrazení a dostupnost"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:577
 msgid "Display input -> input"
 msgstr "Zobrazení input -> input"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:821
+msgid "Display of inputs like checkboxes and radio buttons is done via <strong class=\"in-article__visible\">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class=\"in-article__visible\">inList</strong> and they are displayed below each other on true."
+msgstr "Zobrazení inputů, jako jsou chekcboxy a radio buttony, se dělá skrze <strong class=\"in-article__visible\">form_widget</strong>. Jaký typ se zobrazí - jestli inputy za sebou, nebo pod sebou - určí attr. Pokud není vyplněn, jsou za sebou, při nastavení <strong class=\"in-article__visible\">inList</strong> na true, se zobrazí pod sebou."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:22
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:23
@@ -2138,6 +2146,10 @@ msgstr "IP adresa"
 #: DomainController.php:95
 msgid "Icon"
 msgstr "Ikona"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:913
+msgid "If we combine 3 components with each other, it will create nice forms design. We are talking about <strong class=\"in-article__visible\">form-group</strong> for headline, <strong class=\"in-article__visible\">form-line</strong> for form and <strong class=\"in-article__visible\">wrap-border</strong> for separating blocks of information."
+msgstr "Pokud pěkně nakombinujeme 3 komponenty do sebe, získáme skvělý vzhled formulářů. Jedná se o <strong class=\"in-article__visible\">form-group</strong> na titulek, <strong class=\"in-article__visible\">form-line</strong> na formulář a <strong class=\"in-article__visible\">wrap-border</strong> na oddělení bloků informací od sebe."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1290
 msgid "If we need something about input size"
@@ -4129,6 +4141,14 @@ msgstr "Stránky slideru"
 msgid "Small conversion button"
 msgstr "Konverzní tlačítko malé"
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1092
+msgid "Sometimes it is necessary to align one of the elements to right/left side. You can do that using modifier <strong class=\"in-article__visible\">form-line__item--right</strong> or <strong class=\"in-article__visible\">form-line__item--left</strong>."
+msgstr "Někdy je potřčeba jeden z prvků zarovnat na pravou/levou stranu. To jde udělat pomocí modifikátoru <strong class=\"in-article__visible\">form-line__item--right</strong> případně <strong class=\"in-article__visible\">form-line__item--left</strong>."
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1372
+msgid "Sometimes there is thicker line between some elements than between others. It is mainly in cases when the form-line elements are not directly behind each other, but some of them are covered with some dive, e.g. because of JS, for hiding and revealing. To that kind of dive you need to add class <strong class=\"in-article__visible\">form-line__js</strong>."
+msgstr "Někdy se stává, že se mezi prvky objevuje tlustčí čára než jinde. Je to zásadně v případech, kdy nejsou prvky form-line přímo za sebou, ale nějaký z nich je obalen nějakým divem např. kvůli nějakému JS, na skrývání a odkrývání. Takovému divu je třeba přidat třídu <strong class=\"in-article__visible\">form-line__js</strong>."
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:154
 msgid "Sorting priority"
 msgstr "Priorita řazení"
@@ -4422,6 +4442,10 @@ msgstr "Bylo upraveno nastavení obchodních podmínek."
 msgid "Terms-and-conditions.html"
 msgstr "Obchodní-podmínky.html"
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:562
+msgid "Text behind input. To generate the input correctly, it is necessary to write is like <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>"
+msgstr "Text za inputem. Aby se generoval input správně, je třeba jej vepsat jako <strong class=\"in-article__visible\">form_widget</strong> s parametrem <strong class=\"in-article__visible\">isSimple:true</strong>"
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:556
 msgid "Text behind label"
 msgstr "Text za labelem"
@@ -4530,6 +4554,10 @@ msgstr "Tento form-line je obalen"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:88
 msgid "This item can be set in product detail of a specific variant"
 msgstr "Tuto položku můžete nastavit na kartě konkrétní varianty"
+
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:100
+msgid "This product is no longer available for purchase. Have a look at similar products <a href=\"%url%\">here</a>."
+msgstr "Toto zboží nadále není možné koupit. Prohlédněte si podobné produkty <a href=\"%url%\">zde</a>."
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/layout.html.twig:45
 msgid "This site uses cookies."
@@ -4675,6 +4703,10 @@ msgstr "Nastavení URL"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:285
 msgid "URL will be deleted after saving."
 msgstr "Po uložení bude url smazána"
+
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Error/error.html.twig:36
+msgid "Uh-oh, uh-oh. And specially <strong>\"%status_code% %status_text%\"</strong>, as if it was on purpose!"
+msgstr "To je nemilé, to je nemilé. A zrovna <strong>\"%status_code% %status_text%\"</strong>, to je jak naschvál!"
 
 #: productsPicker.window.js:80
 msgid "Unable to add"
@@ -4920,6 +4952,18 @@ msgstr "Upozorňující hláška"
 msgid "Warning message - block with icon"
 msgstr "Upozorňující hláška - bloková s ikonkou"
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:792
+msgid "We will get the display by adding modifiers to input, but it is important to wrap input with dive with class <strong class=\"in-article__visible\">input__wrap</strong>. Images are positioned to this class. This structure should be generated by the system itself. If manual writing needed it is important to pay attention and don't forget to add flag <strong class=\"in-article__visible\">localeFlag(locale)</strong>, domain <strong class=\"in-article__visible\">or icon."
+msgstr "Zobrazení dosáhnem přidáním modifikátorů k inputu, ale důležité je obalit input divem s třídou <strong class=\"in-article__visible\">input__wrap</strong>. K této třídě se totiž pozicují obrázky. Tadyta struktura by se měla generovat ze systému sama. V případě nutnosti psaní této struktury ručně je třeba si dávat pozor a nezapomenout dodat i vlajku <strong class=\"in-article__visible\">localeFlag(locale)</strong>, doménu <strong class=\"in-article__visible\">domainIcon(domainId)</strong> nebo ikonku."
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:763
+msgid "We will get the display by writing input as <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>."
+msgstr "Zobrazeni dosáhnete tak, že input vypíšete jako <strong class=\"in-article__visible\">form_widget</strong> s parametrem <strong class=\"in-article__visible\">isSimple:true</strong>."
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:779
+msgid "We will get the display either by adding class to element or via <strong class=\"in-article__visible\">form_widget</strong> we add <strong class=\"in-article__visible\">attr class</strong>"
+msgstr "Zobrazení dosáhnem buďto přídáním classy k prvku nebo přes <strong class=\"in-article__visible\">form_widget</strong> přidáme <strong class=\"in-article__visible\">attr class</strong>"
+
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:26
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:28
 msgid "We will remember your login on this computer for 30 days."
@@ -5075,6 +5119,10 @@ msgstr "Váš košík"
 msgid "Your cart is empty"
 msgstr "Váš nákupní košík je prázdný"
 
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:160
+msgid "Your cart is unfortunately empty. To create order, you have to <a href=\"%url%\">choose</a> some product first"
+msgstr "Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href=\"%url%\">vybrat</a>."
+
 #: CustomerController.php:78
 msgid "Your data had been successfully updated"
 msgstr "Vaše údaje byly úspěšně zaktualizovány"
@@ -5180,6 +5228,10 @@ msgstr "neobsahuje"
 #: AdvancedSearchOperatorTranslation.php:23
 msgid "doesn't use"
 msgstr "nepoužívá"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:862
+msgid "domain icon only in checkbox list, icon is inserted <strong class=\"in-article__visible\">domainIcon(domainId, \"small\") </strong>"
+msgstr "ikona domény pouze v checkbox seznamu, ikona se vkládá <strong class=\"in-article__visible\">domainIcon(domainId, \"small\") </strong>"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:871
 msgid "domain icon only in checkbox list, it is possible to add action icon"
