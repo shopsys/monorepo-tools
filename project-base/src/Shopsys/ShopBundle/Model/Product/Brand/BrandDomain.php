@@ -15,7 +15,7 @@ class BrandDomain
      * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Brand\Brand", inversedBy="domains")
+     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Brand\Brand")
      * @ORM\JoinColumn(nullable=false, name="brand_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $brand;
