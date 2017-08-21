@@ -124,7 +124,11 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
         $this->email = mb_strtolower($userData->email);
         $this->billingAddress = $billingAddress;
         $this->deliveryAddress = $deliveryAddress;
-        $this->createdAt = new DateTime();
+        if ($userData->createdAt !== null) {
+            $this->createdAt = $userData->createdAt;
+        } else {
+            $this->createdAt = new \DateTime();
+        }
         $this->domainId = $userData->domainId;
         $this->pricingGroup = $userData->pricingGroup;
     }

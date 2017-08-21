@@ -2,6 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Model\Customer;
 
+use DateTime;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Model\Country\Country;
 use Shopsys\ShopBundle\Model\Country\CountryData;
@@ -171,6 +172,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
         $userData = new UserData();
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';
+        $userData->createdAt = new DateTime();
         $billingCountry = new Country(new CountryData('Česká republika'), self::DOMAIN_ID);
         $billingAddressData = new BillingAddressData(
             'street',
@@ -255,6 +257,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
         $userData = new UserData();
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';
+        $userData->createdAt = new DateTime();
 
         $billingAddress = $this->createBillingAddress();
         $user = new User($userData, $billingAddress, null);
