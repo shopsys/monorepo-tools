@@ -17,6 +17,11 @@
             ]
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
         "php": "^7.0",
         "shopsys/form-types-bundle": "~0.1.0",
