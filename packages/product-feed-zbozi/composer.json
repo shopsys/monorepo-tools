@@ -17,6 +17,11 @@
             ]
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
         "shopsys/form-types-bundle": "~0.1.0",
         "shopsys/plugin-interface": "~0.2.0",
