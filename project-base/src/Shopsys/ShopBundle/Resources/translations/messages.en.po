@@ -4074,12 +4074,6 @@ msgstr ""
 msgid "Shipping and payment <strong>for free!</strong>"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/list.html.twig:4
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/list.html.twig:8
-msgid "Shipping and payments"
-msgstr ""
-
 #: MailController.php:96
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:40
 msgid "Shipping instructions"
@@ -4095,6 +4089,12 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/list.html.twig:2
 msgid "Shippings"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/list.html.twig:4
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/list.html.twig:8
+msgid "Shippings and payments"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:203
