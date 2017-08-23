@@ -9,10 +9,10 @@ Documentation of the specific project built on Shopsys Framework should be in [P
 ```
 git clone https://git.shopsys-framework.com/shopsys/shopsys-framework.git
 cd shopsys-framework
-createdb <database_name>
-createdb <test_database_name>
 composer install
 cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
+php phing db-create
+php phing test-db-create
 php phing build-demo-dev
 php phing img-demo
 php bin/console server:run

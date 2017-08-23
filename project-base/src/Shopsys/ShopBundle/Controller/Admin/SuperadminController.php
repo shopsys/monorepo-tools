@@ -111,7 +111,7 @@ class SuperadminController extends AdminBaseController
      */
     public function urlsAction()
     {
-        $allLocales = $this->localization->getAllLocales();
+        $allLocales = $this->localization->getLocalesOfAllDomains();
         $dataSource = new ArrayDataSource($this->loadDataForUrls($allLocales));
 
         $grid = $this->gridFactory->create('urlsList', $dataSource);

@@ -25,6 +25,10 @@ doctrine:
     user: "%database_user%"
     password: "%database_password%"
     charset: UTF8
+    # Explicitly define server version to overcome the need to connect to the database in early
+    # initialization phase (during DIC service creation) for auto-detecting version from the server.
+    # See \Doctrine\DBAL\Connection::getDatabasePlatformVersion().
+    server_version: "%database_server_version%"
 
   orm:
     auto_generate_proxy_classes: false

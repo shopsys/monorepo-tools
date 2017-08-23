@@ -16,7 +16,7 @@ class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFix
     {
         $localization = $this->get('shopsys.shop.localization');
         /* @var $localization \Shopsys\ShopBundle\Model\Localization\Localization */
-        foreach ($localization->getAllLocales() as $locale) {
+        foreach ($localization->getLocalesOfAllDomains() as $locale) {
             $domainCollation = $localization->getCollationByLocale($locale);
             $this->executeNativeQuery('CREATE INDEX product_translations_name_' . $locale . '_idx
                 ON product_translations (name COLLATE "' . $domainCollation . '") WHERE locale = \'' . $locale . '\'');

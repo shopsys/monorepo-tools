@@ -63,8 +63,8 @@
     <target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,warmup" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
     <target name="build-new" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-rebuild,grunt,error-pages-generate,warmup" description="Builds application for production preserving your DB."/>
     <target name="build-demo" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-demo,grunt,error-pages-generate,warmup" description="Builds application for production with clean DB."/>
-    <target name="db-demo" depends="db-drop,db-create,db-migrations,db-fixtures-demo-singledomain,create-domains-data,db-fixtures-demo-multidomain,generate-friendly-urls,replace-domains-urls" description="Builds application for production with clean demo DB."/>
-    <target name="db-rebuild" depends="db-drop,db-create,db-migrations,db-fixtures-base-settings,create-domains-data,generate-friendly-urls,replace-domains-urls" description="Drops all data in database and creates a new one with base data only."/>
+    <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,db-fixtures-demo-singledomain,create-domains-data,db-fixtures-demo-multidomain,generate-friendly-urls,replace-domains-urls" description="Builds application for production with clean demo DB."/>
+    <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,db-fixtures-base-settings,create-domains-data,generate-friendly-urls,replace-domains-urls" description="Drops all data in database and creates a new one with base data only."/>
 
     <target name="assets" description="Installs web assets from external bundles into a public web directory.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
@@ -147,28 +147,17 @@
         </exec>
     </target>
 
+    <target name="db-create" description="Creates database for application with required configuration.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="bin/console" />
+            <arg value="shopsys:database:create" />
+        </exec>
+    </target>
+
     <target name="db-check-schema" depends="db-check-mapping" description="Checks if database schema is satisfying ORM and returns a list of suggestions to fix it.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="bin/console" />
             <arg value="shopsys:migrations:check-schema" />
-        </exec>
-    </target>
-
-    <target name="db-create" description="Creates database public schema and imports basic database structure (without migrations).">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
-            <arg value="shopsys:schema:create" />
-        </exec>
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
-            <arg value="shopsys:schema:import-default" />
-        </exec>
-    </target>
-
-    <target name="db-drop" description="Drops database public schema.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
-            <arg value="shopsys:schema:drop" />
         </exec>
     </target>
 
@@ -219,6 +208,13 @@
         </exec>
     </target>
 
+    <target name="db-import-basic-structure" description="Imports basic database structure (without migrations).">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="bin/console" />
+            <arg value="shopsys:schema:import-default" />
+        </exec>
+    </target>
+
     <target name="db-migrations" description="Executes database migrations and checks schema.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="bin/console" />
@@ -237,6 +233,17 @@
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="bin/console" />
             <arg value="shopsys:migrations:generate" />
+        </exec>
+    </target>
+
+    <target name="db-wipe-public-schema" description="Drops and creates public database schema.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="bin/console" />
+            <arg value="shopsys:schema:drop" />
+        </exec>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="bin/console" />
+            <arg value="shopsys:schema:create" />
         </exec>
     </target>
 

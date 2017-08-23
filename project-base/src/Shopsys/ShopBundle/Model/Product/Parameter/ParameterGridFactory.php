@@ -41,7 +41,7 @@ class ParameterGridFactory implements GridFactoryInterface
      */
     public function create()
     {
-        $locales = $this->localization->getAllLocales();
+        $locales = $this->localization->getLocalesOfAllDomains();
         $adminLocale = $this->localization->getAdminLocale();
         $grid = $this->gridFactory->create('parameterList', $this->getParametersDataSource());
         $grid->setDefaultOrder('pt.name');
@@ -89,7 +89,7 @@ class ParameterGridFactory implements GridFactoryInterface
      */
     private function getParametersDataSource()
     {
-        $locales = $this->localization->getAllLocales();
+        $locales = $this->localization->getLocalesOfAllDomains();
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('p, pt')

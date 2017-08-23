@@ -383,6 +383,9 @@ services:
   shopsys.shop.component.system:
     class: Shopsys\ShopBundle\Component\System\System
 
+  shopsys.shop.component.system.postgresql_locale_mapper:
+    class: Shopsys\ShopBundle\Component\System\PostgresqlLocaleMapper
+
   shopsys.shop.component.translation.normalizing_extractor_manager:
     class: Shopsys\ShopBundle\Component\Translation\NormalizingExtractorManager
     arguments:

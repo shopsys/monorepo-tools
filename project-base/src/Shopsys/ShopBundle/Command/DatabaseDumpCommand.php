@@ -34,8 +34,10 @@ class DatabaseDumpCommand extends ContainerAwareCommand
         $connection = $this->getContainer()->get('doctrine.dbal.default_connection');
         /* @var $connection \Doctrine\DBAL\Connection */
 
+        // --schema=public option is used in order to dump only "public" schema which contains the application data
+        // --no-owner option ensures that the dump can be imported on system with different database username
         $command = sprintf(
-            '%s --dbname=%s --username=%s --no-password',
+            '%s --dbname=%s --no-owner --schema=public --username=%s --no-password',
             escapeshellcmd($input->getOption(self::OPT_PGDUMP_BIN)),
             escapeshellarg($connection->getDatabase()),
             escapeshellarg($connection->getUsername()),

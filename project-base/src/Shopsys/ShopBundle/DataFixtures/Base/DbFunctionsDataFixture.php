@@ -12,7 +12,6 @@ class DbFunctionsDataFixture extends AbstractNativeFixture
      */
     public function load(ObjectManager $manager)
     {
-        $this->executeNativeQuery('CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA pg_catalog');
         $this->executeNativeQuery('DROP FUNCTION IF EXISTS immutable_unaccent(text)');
         $this->executeNativeQuery('CREATE FUNCTION immutable_unaccent(text)
             RETURNS text AS
