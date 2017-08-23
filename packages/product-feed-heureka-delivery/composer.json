@@ -17,6 +17,11 @@
             ]
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
         "php": "^7.0",
         "shopsys/product-feed-interface": "~0.2.1",
