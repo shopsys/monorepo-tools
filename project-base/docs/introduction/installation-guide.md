@@ -110,23 +110,6 @@ psql --username postgres --dbname <database_name> --command "ALTER SCHEMA public
 psql --username postgres --dbname <test_database_name> --command "ALTER SCHEMA public OWNER TO <database_user>"
 ```
 
-### Phing target db-fixtures-demo-singledomain fails because DbFunctionsDataFixture cannot create extension "unaccent"
-Error message:
-```
-[Doctrine\DBAL\Exception\DriverException]
-An exception occurred while executing 'CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA pg_catalog':
-SQLSTATE[42501]: Insufficient privilege: 7 ERROR:  permission denied to create extension "unaccent"
-HINT:  Must be superuser to create this extension.
-```
-
-In order to create database extensions in PostgreSQL, one needs `superuser` role. By default, only `postgres` database user has this role.
-
-You may not want to run the application under database user with such escalated privileges. Fortunately, it is sufficient to run the following the following commands with `superuser` role and then `DbFunctionsDataFixture` will no longer try to create the extension during application build:
-```
-psql --username postgres --dbname <database_name> --command "CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA pg_catalog"
-psql --username postgres --dbname <test_database_name> --command "CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA pg_catalog"
-```
-
 ### Phing target db-create fails on MissingLocaleException
 Error message:
 ```
