@@ -3289,6 +3289,10 @@ msgstr "Způsob platby"
 msgid "Payment selection"
 msgstr "Výběr platby"
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/list.html.twig:2
+msgid "Payments"
+msgstr "Platby"
+
 #: VatGridFactory.php:69
 msgid "Percent"
 msgstr "Procent"
@@ -4070,12 +4074,6 @@ msgstr "Doprava a platba"
 msgid "Shipping and payment <strong>for free!</strong>"
 msgstr "Dopravu i platbu máte <strong>zdarma!</strong>"
 
-#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/list.html.twig:4
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/list.html.twig:8
-msgid "Shipping and payments"
-msgstr "Dopravy a platby"
-
 #: MailController.php:96
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:40
 msgid "Shipping instructions"
@@ -4088,6 +4086,16 @@ msgstr "Způsob dopravy"
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step2.html.twig:15
 msgid "Shipping selection"
 msgstr "Výběr dopravy"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/list.html.twig:2
+msgid "Shippings"
+msgstr "Dopravy"
+
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/list.html.twig:4
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/list.html.twig:8
+msgid "Shippings and payments"
+msgstr "Dopravy a platby"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:203
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:303

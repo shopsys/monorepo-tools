@@ -161,10 +161,10 @@
         - label: 'Cookies information'
           route: admin_cookies_setting
 
-    - label: 'Shipping and payments'
+    - label: 'Shippings and payments'
       route: admin_transportandpayment_list
       items:
-        - label: 'Shipping and payments'
+        - label: 'Shippings and payments'
           route: admin_transportandpayment_list
         - label: 'New shipping'
           route: admin_transport_new
