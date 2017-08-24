@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- new command `shopsys:plugin-data-fixtures:load` for loading demo data from plugins (@MattCzerner)
+  - called during build of demo database
+### Changed
+- Dependency shopsys/plugin-interface upgraded from 0.1.0 to 0.2.0 (@MattCzerner)
+- Dependency shopsys/product-feed-heureka upgraded from 0.2.0 to 0.3.0 (@MattCzerner)
+- Dependency shopsys/product-feed-zbozi upgraded from 0.2.0 to 0.3.0 (@MattCzerner)
 
 ## 2.0.0-beta.15.0 - 2017-08-31
 - previous beta versions released only internally (mentioned changes since 1.0.0)

@@ -338,6 +338,12 @@ services:
   shopsys.shop.component.plugin.plugin_crud_extension_registry:
     class: Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionRegistry
 
+  shopsys.shop.component.plugin.plugin_data_fixture_facade:
+      class: Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureFacade
+
+  shopsys.shop.component.plugin.plugin_data_fixture_registry:
+      class: Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureRegistry
+
   shopsys.shop.component.request.deny_script_name_in_request_path_listener:
     class: Shopsys\ShopBundle\Component\Request\DenyScriptNameInRequestPathListener
     tags:

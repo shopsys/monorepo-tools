@@ -63,7 +63,7 @@
     <target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,warmup" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
     <target name="build-new" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-rebuild,grunt,error-pages-generate,warmup" description="Builds application for production preserving your DB."/>
     <target name="build-demo" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-demo,grunt,error-pages-generate,warmup" description="Builds application for production with clean DB."/>
-    <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,db-fixtures-demo-singledomain,create-domains-data,db-fixtures-demo-multidomain,generate-friendly-urls,replace-domains-urls" description="Builds application for production with clean demo DB."/>
+    <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,db-fixtures-demo-singledomain,create-domains-data,db-fixtures-demo-multidomain,load-plugin-demo-data,generate-friendly-urls,replace-domains-urls" description="Builds application for production with clean demo DB."/>
     <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,db-fixtures-base-settings,create-domains-data,generate-friendly-urls,replace-domains-urls" description="Drops all data in database and creates a new one with base data only."/>
 
     <target name="assets" description="Installs web assets from external bundles into a public web directory.">
@@ -329,6 +329,13 @@
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="bin/console" />
             <arg value="shopsys:domains-urls:replace" />
+        </exec>
+    </target>
+
+    <target name="load-plugin-demo-data" description="Loads data fixtures of all registered plugins.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="bin/console" />
+            <arg value="shopsys:plugin-data-fixtures:load" />
         </exec>
     </target>
 
