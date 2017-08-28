@@ -11,5 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Unit test for RequestDataSetGenerator class (@MattCzerner)
 - This Changelog (@PetrHeinz)
 
+## 1.0.0 - 2017-05-23
+### Added
+- Extracted HTTP smoke testing functionality from [Shopsys Framework](http://www.shopsys-framework.com/) (@PetrHeinz)
+- `.travis.yml` file with Travis CI configuration (@PetrHeinz)
+
 [Unreleased]: https://github.com/shopsys/http-smoke-testing/compare/v1.0.1...HEAD
 [1.0.1]: https://github.com/shopsys/http-smoke-testing/compare/v1.0.0...v1.0.1
