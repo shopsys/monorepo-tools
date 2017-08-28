@@ -52,4 +52,35 @@ class StatisticsRepository
             $query->getResult()
         );
     }
+
+    /**
+     * @param DateTime $start
+     * @param DateTime $end
+     * @return \Shopsys\ShopBundle\Model\Statistics\ValueByDateTimeDataPoint[]
+     */
+    public function getNewOrdersCountByDayBetweenTwoDateTimes(DateTime $start, DateTime $end)
+    {
+        $resultSetMapping = new ResultSetMapping();
+        $resultSetMapping->addScalarResult('count', 'count');
+        $resultSetMapping->addScalarResult('date', 'date', Type::DATE);
+
+        $query = $this->em->createNativeQuery(
+            'SELECT DATE(o.created_at) AS date, COUNT(o.created_at) AS count
+            FROM orders o
+            WHERE o.created_at BETWEEN :start_date AND :end_date
+            GROUP BY date
+            ORDER BY date ASC',
+            $resultSetMapping
+        );
+
+        $query->setParameter('start_date', $start);
+        $query->setParameter('end_date', $end);
+
+        return array_map(
+            function (array $item) {
+                return new ValueByDateTimeDataPoint($item['count'], $item['date']);
+            },
+            $query->getResult()
+        );
+    }
 }

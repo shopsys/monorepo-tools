@@ -36,12 +36,17 @@ class DefaultController extends AdminBaseController
         $registeredInLastTwoWeeks = $this->statisticsFacade->getCustomersRegistrationsCountByDayInLastTwoWeeks();
         $registeredInLastTwoWeeksDates = $this->statisticsProcessingFacade->getDateTimesFormattedToLocaleFormat($registeredInLastTwoWeeks);
         $registeredInLastTwoWeeksCounts = $this->statisticsProcessingFacade->getCounts($registeredInLastTwoWeeks);
+        $newOrdersCountByDayInLastTwoWeeks = $this->statisticsFacade->getNewOrdersCountByDayInLastTwoWeeks();
+        $newOrdersInLastTwoWeeksDates = $this->statisticsProcessingFacade->getDateTimesFormattedToLocaleFormat($newOrdersCountByDayInLastTwoWeeks);
+        $newOrdersInLastTwoWeeksCounts = $this->statisticsProcessingFacade->getCounts($newOrdersCountByDayInLastTwoWeeks);
 
         return $this->render(
             '@ShopsysShop/Admin/Content/Default/index.html.twig',
             [
                 'registeredInLastTwoWeeksLabels' => $registeredInLastTwoWeeksDates,
                 'registeredInLastTwoWeeksValues' => $registeredInLastTwoWeeksCounts,
+                'newOrdersInLastTwoWeeksLabels' => $newOrdersInLastTwoWeeksDates,
+                'newOrdersInLastTwoWeeksValues' => $newOrdersInLastTwoWeeksCounts,
             ]
         );
     }

@@ -51,4 +51,27 @@ class StatisticsFacade
 
         return $valueByDateTimeDataPoints;
     }
+
+    /**
+     * @return \Shopsys\ShopBundle\Model\Statistics\ValueByDateTimeDataPoint[]
+     */
+    public function getNewOrdersCountByDayInLastTwoWeeks()
+    {
+        $startDataTime = new DateTime('- 2 weeks midnight');
+        $tomorrowDateTime = new DateTime('tomorrow');
+
+        $valueByDateTimeDataPoints = $this->statisticsRepository->getNewOrdersCountByDayBetweenTwoDateTimes(
+            $startDataTime,
+            $tomorrowDateTime
+        );
+
+        $valueByDateTimeDataPoints = $this->statisticsService->normalizeDataPointsByDateTimeIntervals(
+            $valueByDateTimeDataPoints,
+            $startDataTime,
+            $tomorrowDateTime,
+            DateInterval::createFromDateString('+ 1 day')
+        );
+
+        return $valueByDateTimeDataPoints;
+    }
 }

@@ -2792,6 +2792,10 @@ msgstr ""
 msgid "New customer"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Default/index.html.twig:12
+msgid "New orders"
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 msgid "New orders status"
 msgstr ""
@@ -2810,7 +2814,7 @@ msgstr ""
 msgid "New product"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Default/index.html.twig:11
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Default/index.html.twig:20
 msgid "New registered customers"
 msgstr ""
 

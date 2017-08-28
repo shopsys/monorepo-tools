@@ -2792,6 +2792,10 @@ msgstr "Nová kategorie"
 msgid "New customer"
 msgstr "Nový zákazník"
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Default/index.html.twig:12
+msgid "New orders"
+msgstr "Nové objednávky"
+
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 msgid "New orders status"
 msgstr "Nový stav objednávek"
@@ -2810,7 +2814,7 @@ msgstr "URL adresa pro nastavení nového hesla"
 msgid "New product"
 msgstr "Nové zboží"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Default/index.html.twig:11
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Default/index.html.twig:20
 msgid "New registered customers"
 msgstr "Nově registrovaní zákazníci"
 
