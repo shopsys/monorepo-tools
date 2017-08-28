@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - This Changelog (@vitek-rostislav)
 - UPGRADE.md (@vitek-rostislav)
+- Plugin demo data (cpc, cpc_search and show for 2 domains) (@MattCzerner)
+### Changed
+- Dependency [plugin-interface](shopsys/plugin-interface) upgraded from ~0.1.0 to ~0.2.0 (@MattCzerner)
 
 ## [0.2.0] - 2017-08-08
 ### Added

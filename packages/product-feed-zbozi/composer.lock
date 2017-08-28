@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1b9c108f1e59d4e0fa40ec786382223",
+    "content-hash": "6c3a16906215c4027e8e7dad3f0edb54",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -366,16 +366,16 @@
         },
         {
             "name": "shopsys/plugin-interface",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/plugin-interface.git",
-                "reference": "f72c6081c2b16a6ce9f4f0255f56556938b76234"
+                "reference": "2cfd6b4343ca5dce1931df59706392aec298ca26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/plugin-interface/zipball/f72c6081c2b16a6ce9f4f0255f56556938b76234",
-                "reference": "f72c6081c2b16a6ce9f4f0255f56556938b76234",
+                "url": "https://api.github.com/repos/shopsys/plugin-interface/zipball/2cfd6b4343ca5dce1931df59706392aec298ca26",
+                "reference": "2cfd6b4343ca5dce1931df59706392aec298ca26",
                 "shasum": ""
             },
             "require": {
@@ -408,7 +408,7 @@
                 "Shopsys Framework",
                 "plugin"
             ],
-            "time": "2017-08-17T13:55:17+00:00"
+            "time": "2017-09-06T07:39:46+00:00"
         },
         {
             "name": "shopsys/product-feed-interface",

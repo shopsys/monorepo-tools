@@ -13,3 +13,8 @@ services:
     class: Shopsys\ProductFeed\ZboziBundle\ZboziProductFormType
     tags:
       - { name: form.type }
+
+  shopsys.product_feed.zbozi_bundle.data_fixture:
+    class: Shopsys\ProductFeed\ZboziBundle\ZboziPluginDataFixture
+    tags:
+      - { name: shopsys.data_fixture}
