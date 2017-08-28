@@ -13,3 +13,8 @@ services:
     class: Shopsys\ProductFeed\HeurekaBundle\HeurekaProductFormType
     tags:
       - { name: form.type }
+
+  shopsys.product_feed.heureka_bundle.data_fixture:
+    class: Shopsys\ProductFeed\HeurekaBundle\HeurekaDataFixture
+    tags:
+      - { name: shopsys.data_fixture }
