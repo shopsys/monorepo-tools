@@ -25,6 +25,8 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
         /* @var $customerFacade \Shopsys\ShopBundle\Model\Customer\CustomerFacade */
         $loaderService = $this->get('shopsys.shop.data_fixtures.user_data_fixture_loader');
         /* @var $loaderService \Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader */
+        $faker = $this->get('faker.generator');
+        /* @var $faker \Faker\Generator */
 
         $countries = [
             $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1),
@@ -35,6 +37,8 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
         $customersData = $loaderService->getCustomersDataByDomainId(Domain::FIRST_DOMAIN_ID);
 
         foreach ($customersData as $customerData) {
+            $customerData->userData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
+
             $customer = $customerFacade->create($customerData);
 
             if ($customer->getId() === 1) {

@@ -34,6 +34,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
     {
         $userRepository = $this->get('shopsys.shop.customer.user_repository');
         /* @var $userRepository \Shopsys\ShopBundle\Model\Customer\UserRepository */
+        $faker = $this->get('faker.generator');
+        /* @var $faker \Faker\Generator */
 
         $orderData = new OrderData();
         $orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_CZECH_POST);
@@ -50,6 +52,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = 2;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
+        $orderData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -85,6 +88,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->note = 'Prosím o dodání do pátku. Děkuji.';
         $orderData->domainId = 2;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
+        $orderData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -110,6 +114,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = 2;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
+        $orderData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -134,6 +139,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = 2;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
+        $orderData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
         $this->createOrder(
             $orderData,
             [

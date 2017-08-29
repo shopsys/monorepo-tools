@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Customer;
 
+use DateTime;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 
 class UserData
@@ -37,12 +38,18 @@ class UserData
     public $pricingGroup;
 
     /**
+     * @var \DateTime|null
+     */
+    public $createdAt;
+
+    /**
      * @param int $domainId
      * @param string|null $firstName
      * @param string|null $lastName
      * @param string|null $email
      * @param string|null $password
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup|null $pricingGroup
+     * @param \DateTime|null $createdAt
      */
     public function __construct(
         $domainId = 1,
@@ -50,7 +57,8 @@ class UserData
         $lastName = null,
         $email = null,
         $password = null,
-        PricingGroup $pricingGroup = null
+        PricingGroup $pricingGroup = null,
+        DateTime $createdAt = null
     ) {
         $this->domainId = $domainId;
         $this->firstName = $firstName;
@@ -58,6 +66,7 @@ class UserData
         $this->email = $email;
         $this->password = $password;
         $this->pricingGroup = $pricingGroup;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -70,5 +79,6 @@ class UserData
         $this->lastName = $user->getLastName();
         $this->email = $user->getEmail();
         $this->pricingGroup = $user->getPricingGroup();
+        $this->createdAt = $user->getCreatedAt();
     }
 }
