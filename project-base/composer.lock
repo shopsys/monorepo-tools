@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ecad2f321a872cc8c8a4ccf8068ec383",
+    "content-hash": "1a627927584f5546951adce2ce3e0ac6",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -1707,21 +1707,22 @@
         },
         {
             "name": "fp/jsformvalidator-bundle",
-            "version": "1.5",
+            "version": "1.5.1",
             "target-dir": "Fp/JsFormValidatorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/formapro/JsFormValidatorBundle.git",
-                "reference": "ff22da484cd8e2132a27f91f0b08db306949ea77"
+                "reference": "c5cf9e58533589fffa6a47bb6c1b7fab8807ff95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/formapro/JsFormValidatorBundle/zipball/ff22da484cd8e2132a27f91f0b08db306949ea77",
-                "reference": "ff22da484cd8e2132a27f91f0b08db306949ea77",
+                "url": "https://api.github.com/repos/formapro/JsFormValidatorBundle/zipball/c5cf9e58533589fffa6a47bb6c1b7fab8807ff95",
+                "reference": "c5cf9e58533589fffa6a47bb6c1b7fab8807ff95",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9",
+                "symfony/assetic-bundle": ">=2.5",
                 "symfony/form": "^2.7|^3.0",
                 "symfony/validator": "^2.7|^3.0"
             },
@@ -1734,7 +1735,6 @@
                 "ptcong/php-image-uploader": "^6.0",
                 "satooshi/php-coveralls": "1.0.*",
                 "se/selenium-server-standalone": "2.*",
-                "symfony/assetic-bundle": ">=2.5",
                 "symfony/symfony": "^3.1"
             },
             "suggest": {
@@ -1776,7 +1776,7 @@
                 "symfony",
                 "validation"
             ],
-            "time": "2017-02-14T10:53:12+00:00"
+            "time": "2017-07-07T14:04:39+00:00"
         },
         {
             "name": "fzaninotto/faker",
