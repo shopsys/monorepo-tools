@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a627927584f5546951adce2ce3e0ac6",
+    "content-hash": "5630b048afcbc751dd89c9beb242080f",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -2099,16 +2099,16 @@
         },
         {
             "name": "heureka/overeno-zakazniky",
-            "version": "v2.0.4",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heureka/overeno-zakazniky.git",
-                "reference": "f3ed058116e7a4cca5bf314f59f2856ba6cd2b76"
+                "reference": "7c0bd504bcbedb84ef36b1b4333ac9691b26669f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heureka/overeno-zakazniky/zipball/f3ed058116e7a4cca5bf314f59f2856ba6cd2b76",
-                "reference": "f3ed058116e7a4cca5bf314f59f2856ba6cd2b76",
+                "url": "https://api.github.com/repos/heureka/overeno-zakazniky/zipball/7c0bd504bcbedb84ef36b1b4333ac9691b26669f",
+                "reference": "7c0bd504bcbedb84ef36b1b4333ac9691b26669f",
                 "shasum": ""
             },
             "require": {
@@ -2141,7 +2141,7 @@
                 }
             ],
             "description": "Heureka 'Ověřeno zákazníky' (ShopCertification) service API implementation",
-            "time": "2016-06-29T10:59:50+00:00"
+            "time": "2016-10-20T08:12:30+00:00"
         },
         {
             "name": "incenteev/composer-parameter-handler",

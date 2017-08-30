@@ -71,7 +71,7 @@
         "fp/jsformvalidator-bundle": "1.5.1",
         "fzaninotto/faker": "1.5.0",
         "helios-ag/fm-elfinder-bundle": "6.2.1",
-        "heureka/overeno-zakazniky": "2.0.4",
+        "heureka/overeno-zakazniky": "2.0.6",
         "incenteev/composer-parameter-handler": "2.1.2",
         "intaro/postgres-search-bundle": "dev-master#06625bdc1d",
         "intervention/image": "2.3.5",
