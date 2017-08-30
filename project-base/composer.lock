@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9599df88d4203403412ee7ab4681ed24",
+    "content-hash": "aa124bf9bba8b211f0c6cb97c02fc9ae",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -5538,16 +5538,16 @@
         },
         {
             "name": "symfony-cmf/routing",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/routing.git",
-                "reference": "4f8a5fcdc5ac6b9e580b7923b09f8a1ad3035765"
+                "reference": "97def24f83063ab3c96872c5e4b83ccc19e8f240"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/routing/zipball/4f8a5fcdc5ac6b9e580b7923b09f8a1ad3035765",
-                "reference": "4f8a5fcdc5ac6b9e580b7923b09f8a1ad3035765",
+                "url": "https://api.github.com/repos/symfony-cmf/routing/zipball/97def24f83063ab3c96872c5e4b83ccc19e8f240",
+                "reference": "97def24f83063ab3c96872c5e4b83ccc19e8f240",
                 "shasum": ""
             },
             "require": {
@@ -5594,7 +5594,7 @@
                 "database",
                 "routing"
             ],
-            "time": "2017-02-24T17:02:07+00:00"
+            "time": "2017-05-09T08:14:24+00:00"
         },
         {
             "name": "symfony-cmf/routing-bundle",
