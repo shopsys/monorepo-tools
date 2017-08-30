@@ -82,7 +82,7 @@
         "prezent/doctrine-translatable-bundle": "dev-rise-locale-listener-priority#09863c2",
         "raulfraile/ladybug-bundle": "1.0.6",
         "sensio/distribution-bundle": "5.0.21",
-        "sensio/framework-extra-bundle": "3.0.24",
+        "sensio/framework-extra-bundle": "3.0.27",
         "sensio/generator-bundle": "3.1.4",
         "shopsys/migrations": "2.2.0",
         "shopsys/form-types-bundle": "0.1.0",
