@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa124bf9bba8b211f0c6cb97c02fc9ae",
+    "content-hash": "188c0e3f002670260bd0789cd732bf5e",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -6407,16 +6407,16 @@
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.3.8",
+            "version": "v2.3.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "9aa0ade4444def3178aa808255ea326b9e3da9f2"
+                "reference": "80731c9eb4ee9b297cd23958644d21cfa53428b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/9aa0ade4444def3178aa808255ea326b9e3da9f2",
-                "reference": "9aa0ade4444def3178aa808255ea326b9e3da9f2",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/80731c9eb4ee9b297cd23958644d21cfa53428b4",
+                "reference": "80731c9eb4ee9b297cd23958644d21cfa53428b4",
                 "shasum": ""
             },
             "require": {
@@ -6458,7 +6458,7 @@
                 "debugger",
                 "nette"
             ],
-            "time": "2016-01-20T03:14:47+00:00"
+            "time": "2017-01-18T14:14:42+00:00"
         },
         {
             "name": "twig/extensions",
