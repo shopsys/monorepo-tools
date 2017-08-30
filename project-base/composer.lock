@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "20c5dbb31193fca5780ebab708b1dd1a",
+    "content-hash": "9599df88d4203403412ee7ab4681ed24",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -6076,82 +6076,29 @@
             "time": "2016-11-14T01:06:16+00:00"
         },
         {
-            "name": "symfony/swiftmailer-bridge",
-            "version": "v2.8.18",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/swiftmailer-bridge.git",
-                "reference": "94fda200a30154045a80dbbda9cb53fceb55c76f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/swiftmailer-bridge/zipball/94fda200a30154045a80dbbda9cb53fceb55c76f",
-                "reference": "94fda200a30154045a80dbbda9cb53fceb55c76f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9",
-                "swiftmailer/swiftmailer": ">=4.2.0,<6.0-dev"
-            },
-            "suggest": {
-                "symfony/http-kernel": ""
-            },
-            "type": "symfony-bridge",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Bridge\\Swiftmailer\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Swiftmailer Bridge",
-            "homepage": "https://symfony.com",
-            "time": "2017-01-02T20:30:24+00:00"
-        },
-        {
             "name": "symfony/swiftmailer-bundle",
-            "version": "v2.3.8",
+            "version": "v2.3.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/swiftmailer-bundle.git",
-                "reference": "970b13d01871207e81d17b17ddda025e7e21e797"
+                "reference": "0081f7fbf3ff7a1d684081fada6f36e8ba86e528"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/970b13d01871207e81d17b17ddda025e7e21e797",
-                "reference": "970b13d01871207e81d17b17ddda025e7e21e797",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/0081f7fbf3ff7a1d684081fada6f36e8ba86e528",
+                "reference": "0081f7fbf3ff7a1d684081fada6f36e8ba86e528",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "swiftmailer/swiftmailer": ">=4.2.0,~5.0",
-                "symfony/swiftmailer-bridge": "~2.1"
+                "swiftmailer/swiftmailer": "~4.2|~5.0",
+                "symfony/config": "~2.3|~3.0",
+                "symfony/dependency-injection": "~2.3|~3.0",
+                "symfony/http-kernel": "~2.3|~3.0",
+                "symfony/yaml": "~2.3|~3.0"
             },
             "require-dev": {
-                "symfony/config": "~2.1",
-                "symfony/dependency-injection": "~2.1",
-                "symfony/http-kernel": "~2.1",
-                "symfony/yaml": "~2.1"
+                "symfony/phpunit-bridge": "~2.7|~3.0"
             },
             "suggest": {
                 "psr/log": "Allows logging"
@@ -6183,7 +6130,7 @@
             ],
             "description": "Symfony SwiftmailerBundle",
             "homepage": "http://symfony.com",
-            "time": "2014-12-01T17:44:50+00:00"
+            "time": "2017-05-22T05:03:21+00:00"
         },
         {
             "name": "symfony/symfony",
@@ -7806,6 +7753,59 @@
                 "shim"
             ],
             "time": "2016-11-14T01:06:16+00:00"
+        },
+        {
+            "name": "symfony/swiftmailer-bridge",
+            "version": "v2.8.18",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/swiftmailer-bridge.git",
+                "reference": "94fda200a30154045a80dbbda9cb53fceb55c76f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bridge/zipball/94fda200a30154045a80dbbda9cb53fceb55c76f",
+                "reference": "94fda200a30154045a80dbbda9cb53fceb55c76f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "swiftmailer/swiftmailer": ">=4.2.0,<6.0-dev"
+            },
+            "suggest": {
+                "symfony/http-kernel": ""
+            },
+            "type": "symfony-bridge",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bridge\\Swiftmailer\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Swiftmailer Bridge",
+            "homepage": "https://symfony.com",
+            "time": "2017-01-02T20:30:24+00:00"
         }
     ],
     "aliases": [

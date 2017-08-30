@@ -94,7 +94,7 @@
         "stof/doctrine-extensions-bundle": "1.2.2",
         "symfony/assetic-bundle": "2.8.2",
         "symfony/monolog-bundle": "2.12.1",
-        "symfony/swiftmailer-bundle": "2.3.8",
+        "symfony/swiftmailer-bundle": "2.3.12",
         "symfony/symfony": "3.2.9",
         "symfony-cmf/routing": "2.0.0",
         "symfony-cmf/routing-bundle": "2.0.0",
