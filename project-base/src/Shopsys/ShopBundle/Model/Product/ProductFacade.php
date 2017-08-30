@@ -116,7 +116,7 @@ class ProductFacade
     /**
      * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade
      */
-    private $pluginDataFormExtensionFacade;
+    private $pluginCrudExtensionFacade;
 
     public function __construct(
         EntityManager $em,
@@ -136,7 +136,7 @@ class ProductFacade
         ProductAccessoryRepository $productAccessoryRepository,
         ProductVariantService $productVariantService,
         AvailabilityFacade $availabilityFacade,
-        PluginCrudExtensionFacade $pluginDataFormExtensionFacade
+        PluginCrudExtensionFacade $pluginCrudExtensionFacade
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -155,7 +155,7 @@ class ProductFacade
         $this->productAccessoryRepository = $productAccessoryRepository;
         $this->productVariantService = $productVariantService;
         $this->availabilityFacade = $availabilityFacade;
-        $this->pluginDataFormExtensionFacade = $pluginDataFormExtensionFacade;
+        $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
     }
 
     /**
@@ -185,7 +185,7 @@ class ProductFacade
         $this->em->flush($product);
         $this->setAdditionalDataAfterCreate($product, $productEditData);
 
-        $this->pluginDataFormExtensionFacade->saveAllData('product', $product->getId(), $productEditData->pluginData);
+        $this->pluginCrudExtensionFacade->saveAllData('product', $product->getId(), $productEditData->pluginData);
 
         return $product;
     }
@@ -246,7 +246,7 @@ class ProductFacade
         $this->friendlyUrlFacade->saveUrlListFormData('front_product_detail', $product->getId(), $productEditData->urls);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 
-        $this->pluginDataFormExtensionFacade->saveAllData('product', $product->getId(), $productEditData->pluginData);
+        $this->pluginCrudExtensionFacade->saveAllData('product', $product->getId(), $productEditData->pluginData);
 
         $this->productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
         $this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
@@ -271,7 +271,7 @@ class ProductFacade
         $this->em->remove($product);
         $this->em->flush();
 
-        $this->pluginDataFormExtensionFacade->removeAllData('product', $product->getId());
+        $this->pluginCrudExtensionFacade->removeAllData('product', $product->getId());
     }
 
     /**
