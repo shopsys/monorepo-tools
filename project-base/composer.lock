@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "188c0e3f002670260bd0789cd732bf5e",
+    "content-hash": "6c5c237ca310c741378be98d6b4b46cc",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -6575,16 +6575,16 @@
         },
         {
             "name": "vasek-purchart/console-errors-bundle",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VasekPurchart/Console-Errors-Bundle.git",
-                "reference": "e4ec6729d18749fccd746b28c62303d8fd99e822"
+                "reference": "bdb3092ffaefa7f0b4ee0bbf13a94b09ece0a438"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VasekPurchart/Console-Errors-Bundle/zipball/e4ec6729d18749fccd746b28c62303d8fd99e822",
-                "reference": "e4ec6729d18749fccd746b28c62303d8fd99e822",
+                "url": "https://api.github.com/repos/VasekPurchart/Console-Errors-Bundle/zipball/bdb3092ffaefa7f0b4ee0bbf13a94b09ece0a438",
+                "reference": "bdb3092ffaefa7f0b4ee0bbf13a94b09ece0a438",
                 "shasum": ""
             },
             "require": {
@@ -6631,7 +6631,7 @@
                 "logging",
                 "symfony"
             ],
-            "time": "2016-08-14T12:04:07+00:00"
+            "time": "2017-05-25T18:25:53+00:00"
         },
         {
             "name": "webmozart/assert",
