@@ -61,7 +61,7 @@
         "arvenil/ninja-mutex": "0.4.1",
         "bmatzner/jquery-bundle": "2.2.2",
         "bmatzner/jquery-ui-bundle": "1.10.3",
-        "commerceguys/intl": "0.7",
+        "commerceguys/intl": "0.7.4",
         "craue/formflow-bundle": "dev-master#d14fcb1",
         "doctrine/common": "2.6.2",
         "doctrine/doctrine-bundle": "1.6.6",

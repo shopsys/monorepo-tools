@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd006143ac9b541b5c30689c9205cf42",
+    "content-hash": "53bd7b8f9e7a43091249a1ed9d66739d",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -202,20 +202,19 @@
         },
         {
             "name": "commerceguys/intl",
-            "version": "v0.7",
+            "version": "v0.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/commerceguys/intl.git",
-                "reference": "d975da224440180cfb97c9db135b53ec3ed52079"
+                "reference": "edfcfc26ed8505c4f6fcf862eb36dfda1af74b00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/commerceguys/intl/zipball/d975da224440180cfb97c9db135b53ec3ed52079",
-                "reference": "d975da224440180cfb97c9db135b53ec3ed52079",
+                "url": "https://api.github.com/repos/commerceguys/intl/zipball/edfcfc26ed8505c4f6fcf862eb36dfda1af74b00",
+                "reference": "edfcfc26ed8505c4f6fcf862eb36dfda1af74b00",
                 "shasum": ""
             },
             "require": {
-                "ext-bcmath": "*",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -243,7 +242,7 @@
                 }
             ],
             "description": "Internationalization library powered by CLDR data.",
-            "time": "2015-10-05T14:01:23+00:00"
+            "time": "2016-12-13T12:33:19+00:00"
         },
         {
             "name": "components/elfinder",
