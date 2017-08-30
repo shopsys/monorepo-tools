@@ -25,14 +25,23 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
         $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
         $product = Product::create($productData);
 
-        $pricingGroupMock1 = $this->getMock(PricingGroup::class, ['getId'], [], '', false);
+        $pricingGroupMock1 = $this->getMockBuilder(PricingGroup::class)
+            ->setMethods(['getId'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $pricingGroupMock1->expects($this->any())->method('getId')->willReturn(1);
-        $pricingGroupMock2 = $this->getMock(PricingGroup::class, ['getId'], [], '', false);
+        $pricingGroupMock2 = $this->getMockBuilder(PricingGroup::class)
+            ->setMethods(['getId'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $pricingGroupMock2->expects($this->any())->method('getId')->willReturn(2);
         $pricingGroups = [$pricingGroupMock1, $pricingGroupMock2];
 
         $inputPriceCalculation = new InputPriceCalculation();
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->setMethods(['calculatePrice'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $productPriceCalculationMock->expects($this->never())->method('calculatePrice');
 
         $inputPriceType = PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT;
@@ -62,16 +71,25 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
         $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
         $product = Product::create($productData);
 
-        $pricingGroupMock1 = $this->getMock(PricingGroup::class, ['getId', 'getDomainId'], [], '', false);
+        $pricingGroupMock1 = $this->getMockBuilder(PricingGroup::class)
+            ->setMethods(['getId', 'getDomainId'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $pricingGroupMock1->expects($this->any())->method('getId')->willReturn(1);
         $pricingGroupMock1->expects($this->any())->method('getDomainId')->willReturn(1);
-        $pricingGroupMock2 = $this->getMock(PricingGroup::class, ['getId', 'getDomainId'], [], '', false);
+        $pricingGroupMock2 = $this->getMockBuilder(PricingGroup::class)
+            ->setMethods(['getId', 'getDomainId'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $pricingGroupMock2->expects($this->any())->method('getId')->willReturn(2);
         $pricingGroupMock2->expects($this->any())->method('getDomainId')->willReturn(1);
         $pricingGroups = [$pricingGroupMock1, $pricingGroupMock2];
 
         $inputPriceCalculation = new InputPriceCalculation();
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->setMethods(['calculatePrice'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $productPriceCalculationMock
             ->expects($this->any())
             ->method('calculatePrice')
@@ -107,16 +125,25 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
         $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
         $product = Product::create($productData);
 
-        $pricingGroupMock1 = $this->getMock(PricingGroup::class, ['getId', 'getDomainId'], [], '', false);
+        $pricingGroupMock1 = $this->getMockBuilder(PricingGroup::class)
+            ->setMethods(['getId', 'getDomainId'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $pricingGroupMock1->expects($this->any())->method('getId')->willReturn(1);
         $pricingGroupMock1->expects($this->any())->method('getDomainId')->willReturn(1);
-        $pricingGroupMock2 = $this->getMock(PricingGroup::class, ['getId', 'getDomainId'], [], '', false);
+        $pricingGroupMock2 = $this->getMockBuilder(PricingGroup::class)
+            ->setMethods(['getId', 'getDomainId'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $pricingGroupMock2->expects($this->any())->method('getId')->willReturn(2);
         $pricingGroupMock2->expects($this->any())->method('getDomainId')->willReturn(1);
         $pricingGroups = [$pricingGroupMock1, $pricingGroupMock2];
 
         $inputPriceCalculation = new InputPriceCalculation();
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->setMethods(['calculatePrice'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $productPriceCalculationMock
             ->expects($this->any())
             ->method('calculatePrice')
@@ -151,7 +178,10 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
         $product = Product::create($productData);
 
         $inputPriceCalculation = new InputPriceCalculation();
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->setMethods(['calculatePrice'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $productPriceCalculationMock->expects($this->never())->method('calculatePrice');
 
         $inputPriceType = PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT;

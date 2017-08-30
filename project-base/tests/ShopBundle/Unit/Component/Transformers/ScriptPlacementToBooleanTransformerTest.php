@@ -36,7 +36,7 @@ class ScriptPlacementToBooleanTransformerTest extends PHPUnit_Framework_TestCase
     {
         $transformer = new ScriptPlacementToBooleanTransformer();
 
-        $this->setExpectedException(\Symfony\Component\Form\Exception\TransformationFailedException::class);
+        $this->expectException(\Symfony\Component\Form\Exception\TransformationFailedException::class);
         $transformer->reverseTransform($param);
     }
 

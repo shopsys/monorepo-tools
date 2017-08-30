@@ -30,7 +30,7 @@ class DomainsConfigLoaderTest extends FunctionalTestCase
         /* @var $domainsConfigLoader \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
         $domainsUrlsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_urls_config_filepath');
 
-        $this->setExpectedException(\Symfony\Component\Filesystem\Exception\FileNotFoundException::class);
+        $this->expectException(\Symfony\Component\Filesystem\Exception\FileNotFoundException::class);
         $domainsConfigLoader->loadDomainConfigsFromYaml('nonexistentFilename', $domainsUrlsConfigFilepath);
     }
 
@@ -40,7 +40,7 @@ class DomainsConfigLoaderTest extends FunctionalTestCase
         /* @var $domainsConfigLoader \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
         $domainsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_config_filepath');
 
-        $this->setExpectedException(\Symfony\Component\Filesystem\Exception\FileNotFoundException::class);
+        $this->expectException(\Symfony\Component\Filesystem\Exception\FileNotFoundException::class);
         $domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, 'nonexistentFilename');
     }
 
@@ -51,7 +51,7 @@ class DomainsConfigLoaderTest extends FunctionalTestCase
         $domainsConfigFilepath = __DIR__ . '/test_domains.yml';
         $domainsUrlsConfigFilepath = __DIR__ . '/test_domains_urls.yml';
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Domain\Config\Exception\DomainConfigsDoNotMatchException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Domain\Config\Exception\DomainConfigsDoNotMatchException::class);
 
         $domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath);
     }

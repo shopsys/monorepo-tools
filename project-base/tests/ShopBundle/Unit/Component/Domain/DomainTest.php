@@ -16,10 +16,10 @@ class DomainTest extends PHPUnit_Framework_TestCase
             new DomainConfig(1, 'http://example.com:8080', 'example', 'cs'),
             new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en'),
         ];
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
 
         $domain = new Domain($domainConfigs, $settingMock);
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Domain\Exception\NoDomainSelectedException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Domain\Exception\NoDomainSelectedException::class);
         $domain->getId();
     }
 
@@ -29,7 +29,7 @@ class DomainTest extends PHPUnit_Framework_TestCase
             new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs'),
             new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en'),
         ];
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
 
         $domain = new Domain($domainConfigs, $settingMock);
 
@@ -53,7 +53,7 @@ class DomainTest extends PHPUnit_Framework_TestCase
             new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs'),
             new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en'),
         ];
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
 
         $domain = new Domain($domainConfigs, $settingMock);
 
@@ -68,7 +68,7 @@ class DomainTest extends PHPUnit_Framework_TestCase
             $domainConfigWithDataCreated,
             $domainConfigWithoutDataCreated,
         ];
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
         $settingMock
             ->expects($this->exactly(count($domainConfigs)))
             ->method('getForDomain')
@@ -91,14 +91,14 @@ class DomainTest extends PHPUnit_Framework_TestCase
             new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs'),
             new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en'),
         ];
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
 
         $domain = new Domain($domainConfigs, $settingMock);
 
         $this->assertSame($domainConfigs[0], $domain->getDomainConfigById(1));
         $this->assertSame($domainConfigs[1], $domain->getDomainConfigById(2));
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Domain\Exception\InvalidDomainIdException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Domain\Exception\InvalidDomainIdException::class);
         $domain->getDomainConfigById(3);
     }
 }

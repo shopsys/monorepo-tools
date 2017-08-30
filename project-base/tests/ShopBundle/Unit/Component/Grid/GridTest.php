@@ -32,11 +32,11 @@ class GridTest extends PHPUnit_Framework_TestCase
         $requestStack = new RequestStack();
         $requestStack->push($request);
 
-        $twigMock = $this->getMock(Twig_Environment::class);
-        $routerMock = $this->getMock(Router::class, [], [], '', false);
-        $routeCsrfProtectorMock = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
-        $dataSourceMock = $this->getMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
+        $twigMock = $this->createMock(Twig_Environment::class);
+        $routerMock = $this->createMock(Router::class);
+        $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
+        $dataSourceMock = $this->createMock(DataSourceInterface::class);
+        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -61,11 +61,11 @@ class GridTest extends PHPUnit_Framework_TestCase
         $requestStack = new RequestStack();
         $requestStack->push($request);
 
-        $twigMock = $this->getMock(Twig_Environment::class);
-        $routerMock = $this->getMock(Router::class, [], [], '', false);
-        $routeCsrfProtectorMock = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
-        $dataSourceMock = $this->getMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
+        $twigMock = $this->createMock(Twig_Environment::class);
+        $routerMock = $this->createMock(Router::class);
+        $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
+        $dataSourceMock = $this->createMock(DataSourceInterface::class);
+        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -105,11 +105,11 @@ class GridTest extends PHPUnit_Framework_TestCase
         $requestStack = new RequestStack();
         $requestStack->push($request);
 
-        $twigMock = $this->getMock(Twig_Environment::class);
-        $routerMock = $this->getMock(Router::class, [], [], '', false);
-        $routeCsrfProtectorMock = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
-        $dataSourceMock = $this->getMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
+        $twigMock = $this->createMock(Twig_Environment::class);
+        $routerMock = $this->createMock(Router::class);
+        $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
+        $dataSourceMock = $this->createMock(DataSourceInterface::class);
+        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -122,7 +122,7 @@ class GridTest extends PHPUnit_Framework_TestCase
         );
         $grid->addColumn('columnId1', 'sourceColumnName1', 'title1');
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Grid\Exception\DuplicateColumnIdException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Grid\Exception\DuplicateColumnIdException::class);
         $grid->addColumn('columnId1', 'sourceColumnName2', 'title2');
     }
 
@@ -132,11 +132,11 @@ class GridTest extends PHPUnit_Framework_TestCase
         $requestStack = new RequestStack();
         $requestStack->push($request);
 
-        $twigMock = $this->getMock(Twig_Environment::class);
-        $routerMock = $this->getMock(Router::class, [], [], '', false);
-        $routeCsrfProtectorMock = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
-        $dataSourceMock = $this->getMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
+        $twigMock = $this->createMock(Twig_Environment::class);
+        $routerMock = $this->createMock(Router::class);
+        $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
+        $dataSourceMock = $this->createMock(DataSourceInterface::class);
+        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -157,11 +157,11 @@ class GridTest extends PHPUnit_Framework_TestCase
         $requestStack = new RequestStack();
         $requestStack->push($request);
 
-        $twigMock = $this->getMock(Twig_Environment::class);
-        $routerMock = $this->getMock(Router::class, [], [], '', false);
-        $routeCsrfProtectorMock = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
-        $dataSourceMock = $this->getMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
+        $twigMock = $this->createMock(Twig_Environment::class);
+        $routerMock = $this->createMock(Router::class);
+        $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
+        $dataSourceMock = $this->createMock(DataSourceInterface::class);
+        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -181,11 +181,11 @@ class GridTest extends PHPUnit_Framework_TestCase
         $requestStack = new RequestStack();
         $requestStack->push($request);
 
-        $twigMock = $this->getMock(Twig_Environment::class);
-        $routerMock = $this->getMock(Router::class, [], [], '', false);
-        $routeCsrfProtectorMock = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
-        $dataSourceMock = $this->getMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
+        $twigMock = $this->createMock(Twig_Environment::class);
+        $routerMock = $this->createMock(Router::class);
+        $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
+        $dataSourceMock = $this->createMock(DataSourceInterface::class);
+        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -218,11 +218,11 @@ class GridTest extends PHPUnit_Framework_TestCase
         $requestStack = new RequestStack();
         $requestStack->push($request);
 
-        $twigMock = $this->getMock(Twig_Environment::class);
-        $routerMock = $this->getMock(Router::class, [], [], '', false);
-        $routeCsrfProtectorMock = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
-        $dataSourceMock = $this->getMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
+        $twigMock = $this->createMock(Twig_Environment::class);
+        $routerMock = $this->createMock(Router::class);
+        $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
+        $dataSourceMock = $this->createMock(DataSourceInterface::class);
+        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -244,10 +244,10 @@ class GridTest extends PHPUnit_Framework_TestCase
         $requestStack = new RequestStack();
         $requestStack->push($request);
 
-        $twigMock = $this->getMock(Twig_Environment::class);
-        $routerMock = $this->getMock(Router::class, [], [], '', false);
-        $routeCsrfProtectorMock = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
-        $gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
+        $twigMock = $this->createMock(Twig_Environment::class);
+        $routerMock = $this->createMock(Router::class);
+        $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
+        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
         $dataSourceMock = $this->getMockBuilder(DataSourceInterface::class)
             ->setMethods(['getTotalRowsCount', 'getPaginatedRows'])
             ->getMockForAbstractClass();
@@ -275,10 +275,10 @@ class GridTest extends PHPUnit_Framework_TestCase
         $requestStack = new RequestStack();
         $requestStack->push($request);
 
-        $twigMock = $this->getMock(Twig_Environment::class);
-        $routerMock = $this->getMock(Router::class, [], [], '', false);
-        $routeCsrfProtectorMock = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
-        $gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
+        $twigMock = $this->createMock(Twig_Environment::class);
+        $routerMock = $this->createMock(Router::class);
+        $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
+        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
         $dataSourceMock = $this->getMockBuilder(DataSourceInterface::class)
             ->setMethods(['getTotalRowsCount', 'getPaginatedRows'])
             ->getMockForAbstractClass();
@@ -309,11 +309,11 @@ class GridTest extends PHPUnit_Framework_TestCase
         $requestStack = new RequestStack();
         $requestStack->push($request);
 
-        $twigMock = $this->getMock(Twig_Environment::class);
-        $routerMock = $this->getMock(Router::class, [], [], '', false);
-        $routeCsrfProtectorMock = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
-        $dataSourceMock = $this->getMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
+        $twigMock = $this->createMock(Twig_Environment::class);
+        $routerMock = $this->createMock(Router::class);
+        $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
+        $dataSourceMock = $this->createMock(DataSourceInterface::class);
+        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',

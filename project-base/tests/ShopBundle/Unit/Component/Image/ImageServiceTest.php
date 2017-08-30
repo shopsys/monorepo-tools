@@ -23,7 +23,7 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase
 
         $imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload());
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Image\Exception\EntityMultipleImageException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Image\Exception\EntityMultipleImageException::class);
         $imageService->getUploadedImages($imageEntityConfig, 1, [], 'type');
     }
 

@@ -17,7 +17,7 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase
     public function testGetDefaultVat()
     {
         $expected = new stdClass();
-        $emMock = $this->getMock(EntityManager::class, [], [], '', false);
+        $emMock = $this->createMock(EntityManager::class);
         $vatService = new VatService();
 
         $settingMock = $this->getMockBuilder(Setting::class)
@@ -57,9 +57,9 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase
 
     public function testSetDefaultVat()
     {
-        $emMock = $this->getMock(EntityManager::class, [], [], '', false);
+        $emMock = $this->createMock(EntityManager::class);
         $vatService = new VatService();
-        $vatRepositoryMock = $this->getMock(VatRepository::class, [], [], '', false);
+        $vatRepositoryMock = $this->createMock(VatRepository::class);
 
         $vatMock = $this->getMockBuilder(Vat::class)
             ->setMethods(['getId', '__construct'])

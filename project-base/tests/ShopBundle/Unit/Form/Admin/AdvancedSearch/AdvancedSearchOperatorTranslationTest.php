@@ -35,7 +35,7 @@ class AdvancedSearchOperatorTranslationTest extends FunctionalTestCase
     {
         $advancedSearchTranslator = new AdvancedSearchOperatorTranslation();
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
+        $this->expectException(\Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
         $advancedSearchTranslator->translateOperator('nonexistingOperator');
     }
 }

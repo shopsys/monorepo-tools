@@ -50,7 +50,7 @@ class CartFacadeTest extends DatabaseTestCase
         $customerIdentifier = new CustomerIdentifier('secretSessionHash');
         $cartFacade = $this->createCartFacade($customerIdentifier);
 
-        $this->setExpectedException('\Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException');
+        $this->expectException('\Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException');
         $cartFacade->addProductToCart($productId, $quantity);
 
         $cart = $this->getCartByCustomerIdentifier($customerIdentifier);
@@ -101,7 +101,7 @@ class CartFacadeTest extends DatabaseTestCase
         $cartItems = $cart->getItems();
         $cartItem = array_pop($cartItems);
 
-        $this->setExpectedException('\Shopsys\ShopBundle\Model\Cart\Exception\InvalidCartItemException');
+        $this->expectException('\Shopsys\ShopBundle\Model\Cart\Exception\InvalidCartItemException');
         $cartFacade->deleteCartItem($cartItem->getId() + 1);
     }
 

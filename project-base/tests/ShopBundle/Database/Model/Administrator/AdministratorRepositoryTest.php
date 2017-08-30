@@ -41,7 +41,7 @@ class AdministratorRepositoryTest extends DatabaseTestCase
         $administrator->setMultidomainLoginTokenWithExpiration($validMultidomainLoginToken, $multidomainLoginTokenExpiration);
         $this->getEntityManager()->flush($administrator);
 
-        $this->setExpectedException('\Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException');
+        $this->expectException('\Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException');
 
         $administratorRepository->getByValidMultidomainLoginToken($invalidMultidomainLoginToken);
     }
@@ -59,7 +59,7 @@ class AdministratorRepositoryTest extends DatabaseTestCase
         $administrator->setMultidomainLoginTokenWithExpiration($validMultidomainLoginToken, $multidomainLoginTokenExpiration);
         $this->getEntityManager()->flush($administrator);
 
-        $this->setExpectedException('\Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException');
+        $this->expectException('\Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException');
 
         $administratorRepository->getByValidMultidomainLoginToken($validMultidomainLoginToken);
     }

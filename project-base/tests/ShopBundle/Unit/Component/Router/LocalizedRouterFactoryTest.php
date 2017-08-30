@@ -13,18 +13,18 @@ class LocalizedRouterFactoryTest extends PHPUnit_Framework_TestCase
     public function testGetRouterRouterNotResolvedException()
     {
         $localeRoutersConfiguration = [];
-        $delegatingLoaderMock = $this->getMock(DelegatingLoader::class, [], [], '', false);
+        $delegatingLoaderMock = $this->createMock(DelegatingLoader::class);
         $context = new RequestContext();
 
         $localizedRouterFactory = new LocalizedRouterFactory($localeRoutersConfiguration, $delegatingLoaderMock);
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Router\Exception\LocalizedRoutingConfigFileNotFoundException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Router\Exception\LocalizedRoutingConfigFileNotFoundException::class);
         $localizedRouterFactory->getRouter('en', $context);
     }
 
     public function testGetRouter()
     {
         $localeRoutersConfiguration = ['en' => 'pathToResource', 'cs' => 'pathToAnotherResource'];
-        $delegatingLoaderMock = $this->getMock(DelegatingLoader::class, [], [], '', false);
+        $delegatingLoaderMock = $this->createMock(DelegatingLoader::class);
         $context1 = new RequestContext();
         $context1->setHost('host1');
         $context2 = new RequestContext();

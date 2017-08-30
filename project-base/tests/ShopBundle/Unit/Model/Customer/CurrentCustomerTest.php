@@ -19,7 +19,7 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
     {
         $expectedPricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
 
-        $tokenStorageMock = $this->getMock(TokenStorage::class, [], [], '', false);
+        $tokenStorageMock = $this->createMock(TokenStorage::class);
         $pricingGroupSettingFacadeMock = $this->getPricingGroupSettingFacadeMockReturningDefaultPricingGroup($expectedPricingGroup);
 
         $currentCustomer = new CurrentCustomer($tokenStorageMock, $pricingGroupSettingFacadeMock);
@@ -34,7 +34,7 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
         $user = $this->getUserWithPricingGroup($expectedPricingGroup);
 
         $tokenStorageMock = $this->getTokenStorageMockForUser($user);
-        $pricingGroupFacadeMock = $this->getMock(PricingGroupSettingFacade::class, [], [], '', false);
+        $pricingGroupFacadeMock = $this->createMock(PricingGroupSettingFacade::class);
 
         $currentCustomer = new CurrentCustomer($tokenStorageMock, $pricingGroupFacadeMock);
 
@@ -66,7 +66,7 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
      */
     private function getUserWithPricingGroup(PricingGroup $pricingGroup)
     {
-        $billingAddress = $this->getMock(BillingAddress::class, [], [], '', false);
+        $billingAddress = $this->createMock(BillingAddress::class);
         $userData = new UserData();
         $userData->pricingGroup = $pricingGroup;
 
@@ -84,7 +84,10 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
             ->getMockForAbstractClass();
         $tokenMock->method('getUser')->willReturn($user);
 
-        $tokenStorageMock = $this->getMock(TokenStorage::class, ['getToken'], [], '', false);
+        $tokenStorageMock = $this->getMockBuilder(TokenStorage::class)
+            ->setMethods(['getToken'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $tokenStorageMock->method('getToken')->willReturn($tokenMock);
 
         return $tokenStorageMock;

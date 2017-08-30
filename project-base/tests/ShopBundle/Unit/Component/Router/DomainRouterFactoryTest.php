@@ -19,7 +19,7 @@ class DomainRouterFactoryTest extends PHPUnit_Framework_TestCase
     public function testGetRouter()
     {
         $domainConfig = new DomainConfig(3, 'http://example.com:8080', 'example', 'en');
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
         $domain = new Domain([$domainConfig], $settingMock);
 
         $localizedRouterMock = $this->getMockBuilder(RouterInterface::class)->getMockForAbstractClass();
@@ -56,7 +56,7 @@ class DomainRouterFactoryTest extends PHPUnit_Framework_TestCase
                 }
             );
 
-        $delegatingLoaderMock = $this->getMock(DelegatingLoader::class, [], [], '', false);
+        $delegatingLoaderMock = $this->createMock(DelegatingLoader::class);
 
         $domainRouterFactory = new DomainRouterFactory(
             'routerConfiguration',

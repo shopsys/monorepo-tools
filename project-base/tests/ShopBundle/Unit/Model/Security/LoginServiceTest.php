@@ -14,15 +14,15 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase
     {
         $loginService = $this->getLoginService();
 
-        $requestMock = $this->getMock('\Symfony\Component\HttpFoundation\Request');
+        $requestMock = $this->createMock('\Symfony\Component\HttpFoundation\Request');
         /* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
         $requestMock->expects($this->never())->method('getSession');
 
-        $requestMock->attributes = $this->getMock('\Symfony\Component\HttpFoundation\ParameterBag');
+        $requestMock->attributes = $this->createMock('\Symfony\Component\HttpFoundation\ParameterBag');
         $requestMock->attributes->expects($this->once())->method('has')->will($this->returnValue(true));
         $requestMock->attributes->expects($this->once())->method('get')->will($this->returnValue(new StdClass()));
 
-        $this->setExpectedException('Shopsys\ShopBundle\Model\Security\Exception\LoginFailedException');
+        $this->expectException('Shopsys\ShopBundle\Model\Security\Exception\LoginFailedException');
         $loginService->checkLoginProcess($requestMock);
     }
 
@@ -30,19 +30,19 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase
     {
         $loginService = $this->getLoginService();
 
-        $sessionMock = $this->getMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
+        $sessionMock = $this->createMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
         $sessionMock->expects($this->atLeastOnce())->method('get')->will($this->returnValue(new StdClass()));
         $sessionMock->expects($this->atLeastOnce())->method('remove');
 
-        $requestMock = $this->getMock('\Symfony\Component\HttpFoundation\Request');
+        $requestMock = $this->createMock('\Symfony\Component\HttpFoundation\Request');
         /* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
         $requestMock->expects($this->once())->method('getSession')->will($this->returnValue($sessionMock));
 
-        $requestMock->attributes = $this->getMock('\Symfony\Component\HttpFoundation\ParameterBag');
+        $requestMock->attributes = $this->createMock('\Symfony\Component\HttpFoundation\ParameterBag');
         $requestMock->attributes->expects($this->once())->method('has')->will($this->returnValue(false));
         $requestMock->attributes->expects($this->never())->method('get');
 
-        $this->setExpectedException('Shopsys\ShopBundle\Model\Security\Exception\LoginFailedException');
+        $this->expectException('Shopsys\ShopBundle\Model\Security\Exception\LoginFailedException');
         $loginService->checkLoginProcess($requestMock);
     }
 
@@ -50,15 +50,15 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase
     {
         $loginService = $this->getLoginService();
 
-        $sessionMock = $this->getMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
+        $sessionMock = $this->createMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
         $sessionMock->expects($this->once())->method('get')->will($this->returnValue(null));
         $sessionMock->expects($this->once())->method('remove');
 
-        $requestMock = $this->getMock('\Symfony\Component\HttpFoundation\Request');
+        $requestMock = $this->createMock('\Symfony\Component\HttpFoundation\Request');
         /* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
         $requestMock->expects($this->once())->method('getSession')->will($this->returnValue($sessionMock));
 
-        $requestMock->attributes = $this->getMock('\Symfony\Component\HttpFoundation\ParameterBag');
+        $requestMock->attributes = $this->createMock('\Symfony\Component\HttpFoundation\ParameterBag');
         $requestMock->attributes->expects($this->once())->method('has')->will($this->returnValue(false));
         $requestMock->attributes->expects($this->never())->method('get');
 
@@ -70,8 +70,8 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase
      */
     private function getLoginService()
     {
-        $tokenStorageMock = $this->getMock(TokenStorage::class, [], [], '', false);
-        $traceableEventDispatcherMock = $this->getMock(TraceableEventDispatcher::class, [], [], '', false);
+        $tokenStorageMock = $this->createMock(TokenStorage::class);
+        $traceableEventDispatcherMock = $this->createMock(TraceableEventDispatcher::class);
 
         return new LoginService($tokenStorageMock, $traceableEventDispatcherMock);
     }

@@ -31,7 +31,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase
             $statusType
         );
         if ($expectedException !== null) {
-            $this->setExpectedException($expectedException);
+            $this->expectException($expectedException);
         }
         $orderStatusService->checkForDelete($orderStatus);
     }

@@ -120,11 +120,26 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
 
     public function testDeleteNotVariant()
     {
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
-        $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
-        $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
-        $pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
-        $productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $inputPriceCalculationMock = $this->getMockBuilder(InputPriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $basePriceCalculationMock = $this->getMockBuilder(BasePriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $productService = new ProductService(
             $productPriceCalculationMock,
@@ -142,11 +157,26 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
 
     public function testDeleteVariant()
     {
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
-        $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
-        $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
-        $pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
-        $productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $inputPriceCalculationMock = $this->getMockBuilder(InputPriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $basePriceCalculationMock = $this->getMockBuilder(BasePriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $productService = new ProductService(
             $productPriceCalculationMock,
@@ -165,11 +195,26 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
 
     public function testDeleteMainVariant()
     {
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
-        $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
-        $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
-        $pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
-        $productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $inputPriceCalculationMock = $this->getMockBuilder(InputPriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $basePriceCalculationMock = $this->getMockBuilder(BasePriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $productService = new ProductService(
             $productPriceCalculationMock,
@@ -189,11 +234,26 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
 
     public function testMarkProductForVisibilityRecalculation()
     {
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
-        $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
-        $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
-        $pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
-        $productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $inputPriceCalculationMock = $this->getMockBuilder(InputPriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $basePriceCalculationMock = $this->getMockBuilder(BasePriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $productService = new ProductService(
             $productPriceCalculationMock,
@@ -203,13 +263,10 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
             $productPriceRecalculationSchedulerMock
         );
 
-        $productMock = $this->getMock(
-            Product::class,
-            ['markForVisibilityRecalculation', 'isMainVariant', 'isVariant'],
-            [],
-            '',
-            false
-        );
+        $productMock = $this->getMockBuilder(Product::class)
+            ->setMethods(['markForVisibilityRecalculation', 'isMainVariant', 'isVariant'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $productMock->expects($this->atLeastOnce())->method('markForVisibilityRecalculation');
         $productMock->expects($this->any())->method('isMainVariant')->willReturn(false);
         $productMock->expects($this->atLeastOnce())->method('isVariant')->willReturn(false);
@@ -219,11 +276,26 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
 
     public function testMarkProductForVisibilityRecalculationMainVariant()
     {
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
-        $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
-        $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
-        $pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
-        $productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $inputPriceCalculationMock = $this->getMockBuilder(InputPriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $basePriceCalculationMock = $this->getMockBuilder(BasePriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $productService = new ProductService(
             $productPriceCalculationMock,
@@ -233,16 +305,16 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
             $productPriceRecalculationSchedulerMock
         );
 
-        $variantMock = $this->getMock(Product::class, ['markForVisibilityRecalculation'], [], '', false);
+        $variantMock = $this->getMockBuilder(Product::class)
+            ->setMethods(['markForVisibilityRecalculation'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $variantMock->expects($this->atLeastOnce())->method('markForVisibilityRecalculation');
 
-        $mainVariantMock = $this->getMock(
-            Product::class,
-            ['markForVisibilityRecalculation', 'isMainVariant', 'isVariant', 'getVariants'],
-            [],
-            '',
-            false
-        );
+        $mainVariantMock = $this->getMockBuilder(Product::class)
+            ->setMethods(['markForVisibilityRecalculation', 'isMainVariant', 'isVariant', 'getVariants'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mainVariantMock->expects($this->atLeastOnce())->method('markForVisibilityRecalculation');
         $mainVariantMock->expects($this->atLeastOnce())->method('isMainVariant')->willReturn(true);
         $mainVariantMock->expects($this->any())->method('isVariant')->willReturn(false);
@@ -253,11 +325,26 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
 
     public function testMarkProductForVisibilityRecalculationVariant()
     {
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
-        $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
-        $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
-        $pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
-        $productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $inputPriceCalculationMock = $this->getMockBuilder(InputPriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $basePriceCalculationMock = $this->getMockBuilder(BasePriceCalculation::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $productService = new ProductService(
             $productPriceCalculationMock,
@@ -267,16 +354,16 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
             $productPriceRecalculationSchedulerMock
         );
 
-        $mainVariantMock = $this->getMock(Product::class, ['markForVisibilityRecalculation'], [], '', false);
+        $mainVariantMock = $this->getMockBuilder(Product::class)
+            ->setMethods(['markForVisibilityRecalculation'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mainVariantMock->expects($this->once())->method('markForVisibilityRecalculation');
 
-        $variantMock = $this->getMock(
-            Product::class,
-            ['markForVisibilityRecalculation', 'isMainVariant', 'isVariant', 'getMainVariant'],
-            [],
-            '',
-            false
-        );
+        $variantMock = $this->getMockBuilder(Product::class)
+            ->setMethods(['markForVisibilityRecalculation', 'isMainVariant', 'isVariant', 'getMainVariant'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $variantMock->expects($this->atLeastOnce())->method('markForVisibilityRecalculation');
         $variantMock->expects($this->any())->method('isMainVariant')->willReturn(false);
         $variantMock->expects($this->atLeastOnce())->method('isVariant')->willReturn(true);
@@ -287,16 +374,22 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
 
     public function testSortingProducts()
     {
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
-        $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
-        $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
-        $pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
-        $productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+        $productPriceCalculationMock = $this->createMock(ProductPriceCalculation::class);
+        $inputPriceCalculationMock = $this->createMock(InputPriceCalculation::class);
+        $basePriceCalculationMock = $this->createMock(BasePriceCalculation::class);
+        $pricingSettingMock = $this->createMock(PricingSetting::class);
+        $productPriceRecalculationSchedulerMock = $this->createMock(ProductPriceRecalculationScheduler::class);
 
-        $productMock1 = $this->getMock(Product::class, ['getId'], [], '', false);
+        $productMock1 = $this->getMockBuilder(Product::class)
+            ->setMethods(['getId'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $productMock1->method('getId')->willReturn(1);
 
-        $productMock2 = $this->getMock(Product::class, ['getId'], [], '', false);
+        $productMock2 = $this->getMockBuilder(Product::class)
+            ->setMethods(['getId'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $productMock2->method('getId')->willReturn(2);
 
         $products = [$productMock1, $productMock2];

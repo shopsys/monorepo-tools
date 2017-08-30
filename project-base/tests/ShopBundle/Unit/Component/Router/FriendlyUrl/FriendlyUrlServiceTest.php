@@ -17,7 +17,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
             new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs'),
             new DomainConfig(2, 'http://example.com', 'example.com', 'en'),
         ];
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
         $friendlyUrlService = new FriendlyUrlService($domain);
@@ -47,7 +47,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com', 'example.com', 'en'),
         ];
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
         $friendlyUrlService = new FriendlyUrlService($domain);
@@ -71,7 +71,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com', 'example.com', 'en'),
         ];
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
         $friendlyUrlService = new FriendlyUrlService($domain);
@@ -98,7 +98,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com', 'example.com', 'en'),
         ];
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
         $friendlyUrlService = new FriendlyUrlService($domain);
@@ -129,7 +129,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
         $domainConfigs = [
             new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs'),
         ];
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
         $friendlyUrlService = new FriendlyUrlService($domain);

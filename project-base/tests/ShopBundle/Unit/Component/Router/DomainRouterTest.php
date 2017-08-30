@@ -20,7 +20,7 @@ class DomainRouterTest extends PHPUnit_Framework_TestCase
             ->getMock();
 
         $domainRouter = new DomainRouter($context, $basicRouterMock, $localizedRouterMock, $friendlyUrlRouterMock);
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Router\Exception\NotSupportedException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Router\Exception\NotSupportedException::class);
         $domainRouter->setContext($context);
     }
 }

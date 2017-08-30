@@ -17,7 +17,7 @@ class ProductVariantServiceTest extends PHPUnit_Framework_TestCase
         $variant = Product::create($productData);
         $mainVariant = Product::createMainVariant($productData, [$variant]);
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Model\Product\Exception\ProductIsAlreadyMainVariantException::class);
+        $this->expectException(\Shopsys\ShopBundle\Model\Product\Exception\ProductIsAlreadyMainVariantException::class);
         $productVariantService->checkProductIsNotMainVariant($mainVariant);
     }
 

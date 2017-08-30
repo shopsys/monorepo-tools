@@ -15,10 +15,12 @@ class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
     public function testIsVisibleWhenIndepentlyInvisible()
     {
         $domainId = 1;
-        $transportMock = $this->getMock(Transport::class, [], [], '', false);
+        $transportMock = $this->createMock(Transport::class);
 
-        $independentTransportVisibilityCalculationMock = $this
-            ->getMock(IndependentTransportVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+        $independentTransportVisibilityCalculationMock = $this->getMockBuilder(IndependentTransportVisibilityCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['isIndependentlyVisible'])
+            ->getMock();
         $independentTransportVisibilityCalculationMock
             ->expects($this->atLeastOnce())
             ->method('isIndependentlyVisible')
@@ -26,7 +28,7 @@ class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
             ->willReturn(false);
 
         $independentPaymentVisibilityCalculationMock = $this
-            ->getMock(IndependentPaymentVisibilityCalculation::class, [], [], '', false);
+            ->createMock(IndependentPaymentVisibilityCalculation::class);
 
         $transportVisibilityCalculation = new TransportVisibilityCalculation(
             $independentTransportVisibilityCalculationMock,
@@ -39,19 +41,23 @@ class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
     public function testIsVisibleWithHiddenPayment()
     {
         $domainId = 1;
-        $transportMock = $this->getMock(Transport::class, [], [], '', false);
-        $paymentMock = $this->getMock(Payment::class, [], [], '', false);
+        $transportMock = $this->createMock(Transport::class);
+        $paymentMock = $this->createMock(Payment::class);
 
-        $independentTransportVisibilityCalculationMock = $this
-            ->getMock(IndependentTransportVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+        $independentTransportVisibilityCalculationMock = $this->getMockBuilder(IndependentTransportVisibilityCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['isIndependentlyVisible'])
+            ->getMock();
         $independentTransportVisibilityCalculationMock
             ->expects($this->atLeastOnce())
             ->method('isIndependentlyVisible')
             ->with($this->equalTo($transportMock), $this->equalTo($domainId))
             ->willReturn(true);
 
-        $independentPaymentVisibilityCalculationMock = $this
-            ->getMock(IndependentPaymentVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+        $independentPaymentVisibilityCalculationMock = $this->getMockBuilder(IndependentPaymentVisibilityCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['isIndependentlyVisible'])
+            ->getMock();
         $independentPaymentVisibilityCalculationMock
             ->expects($this->atLeastOnce())
             ->method('isIndependentlyVisible')
@@ -69,20 +75,27 @@ class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
     public function testIsVisibleWithoutPayment()
     {
         $domainId = 1;
-        $transportMock = $this->getMock(Transport::class, [], [], '', false);
-        $paymentMock = $this->getMock(Payment::class, ['getTransports'], [], '', false);
+        $transportMock = $this->createMock(Transport::class);
+        $paymentMock = $this->getMockBuilder(Payment::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getTransports'])
+            ->getMock();
         $paymentMock->expects($this->atLeastOnce())->method('getTransports')->willReturn(new ArrayCollection([]));
 
-        $independentTransportVisibilityCalculationMock = $this
-            ->getMock(IndependentTransportVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+        $independentTransportVisibilityCalculationMock = $this->getMockBuilder(IndependentTransportVisibilityCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['isIndependentlyVisible'])
+            ->getMock();
         $independentTransportVisibilityCalculationMock
             ->expects($this->atLeastOnce())
             ->method('isIndependentlyVisible')
             ->with($this->equalTo($transportMock), $this->equalTo($domainId))
             ->willReturn(true);
 
-        $independentPaymentVisibilityCalculationMock = $this
-            ->getMock(IndependentPaymentVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+        $independentPaymentVisibilityCalculationMock = $this->getMockBuilder(IndependentPaymentVisibilityCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['isIndependentlyVisible'])
+            ->getMock();
         $independentPaymentVisibilityCalculationMock
             ->expects($this->atLeastOnce())
             ->method('isIndependentlyVisible')
@@ -100,20 +113,27 @@ class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
     public function testIsVisibleWithVisiblePayment()
     {
         $domainId = 1;
-        $transportMock = $this->getMock(Transport::class, [], [], '', false);
-        $paymentMock = $this->getMock(Payment::class, ['getTransports'], [], '', false);
+        $transportMock = $this->createMock(Transport::class);
+        $paymentMock = $this->getMockBuilder(Payment::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getTransports'])
+            ->getMock();
         $paymentMock->expects($this->atLeastOnce())->method('getTransports')->willReturn(new ArrayCollection([$transportMock]));
 
-        $independentTransportVisibilityCalculationMock = $this
-            ->getMock(IndependentTransportVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+        $independentTransportVisibilityCalculationMock = $this->getMockBuilder(IndependentTransportVisibilityCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['isIndependentlyVisible'])
+            ->getMock();
         $independentTransportVisibilityCalculationMock
             ->expects($this->atLeastOnce())
             ->method('isIndependentlyVisible')
             ->with($this->equalTo($transportMock), $this->equalTo($domainId))
             ->willReturn(true);
 
-        $independentPaymentVisibilityCalculationMock = $this
-            ->getMock(IndependentPaymentVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+        $independentPaymentVisibilityCalculationMock = $this->getMockBuilder(IndependentPaymentVisibilityCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['isIndependentlyVisible'])
+            ->getMock();
         $independentPaymentVisibilityCalculationMock
             ->expects($this->atLeastOnce())
             ->method('isIndependentlyVisible')
@@ -131,21 +151,28 @@ class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
     public function testFilterVisible()
     {
         $domainId = 1;
-        $transportHiddenMock = $this->getMock(Transport::class, [], [], '', false);
-        $transportVisibleMock = $this->getMock(Transport::class, [], [], '', false);
-        $paymentMock = $this->getMock(Payment::class, ['getTransports'], [], '', false);
+        $transportHiddenMock = $this->createMock(Transport::class);
+        $transportVisibleMock = $this->createMock(Transport::class);
+        $paymentMock = $this->getMockBuilder(Payment::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getTransports'])
+            ->getMock();
         $paymentMock->expects($this->atLeastOnce())->method('getTransports')->willReturn(new ArrayCollection([$transportVisibleMock]));
 
-        $independentTransportVisibilityCalculationMock = $this
-            ->getMock(IndependentTransportVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+        $independentTransportVisibilityCalculationMock = $this->getMockBuilder(IndependentTransportVisibilityCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['isIndependentlyVisible'])
+            ->getMock();
         $independentTransportVisibilityCalculationMock
             ->expects($this->atLeastOnce())
             ->method('isIndependentlyVisible')
             ->with($this->equalTo($transportVisibleMock), $this->equalTo($domainId))
             ->willReturn(true);
 
-        $independentPaymentVisibilityCalculationMock = $this
-            ->getMock(IndependentPaymentVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+        $independentPaymentVisibilityCalculationMock = $this->getMockBuilder(IndependentPaymentVisibilityCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['isIndependentlyVisible'])
+            ->getMock();
         $independentPaymentVisibilityCalculationMock
             ->expects($this->atLeastOnce())
             ->method('isIndependentlyVisible')

@@ -26,7 +26,7 @@ class UploadedFileConfigTest extends PHPUnit_Framework_TestCase
         $fileEntityConfigsByClass = [];
         $uploadedFileConfig = new UploadedFileConfig($fileEntityConfigsByClass);
 
-        $this->setExpectedException(
+        $this->expectException(
             \Shopsys\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileEntityConfigNotFoundException::class
         );
         $uploadedFileConfig->getEntityName($entity);
@@ -48,7 +48,7 @@ class UploadedFileConfigTest extends PHPUnit_Framework_TestCase
         $fileEntityConfigsByClass = [];
         $uploadedFileConfig = new UploadedFileConfig($fileEntityConfigsByClass);
 
-        $this->setExpectedException(
+        $this->expectException(
             \Shopsys\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileEntityConfigNotFoundException::class
         );
         $uploadedFileConfig->getUploadedFileEntityConfig($entity);

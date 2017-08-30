@@ -14,11 +14,17 @@ class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase
     {
         $temporaryFilename = 'filename.jpg';
 
-        $fileUploadMock = $this->getMock(FileUpload::class, ['getTemporaryFilepath'], [], '', false);
+        $fileUploadMock = $this->getMockBuilder(FileUpload::class)
+            ->setMethods(['getTemporaryFilepath'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $fileUploadMock->expects($this->any())->method('getTemporaryFilepath')->willReturn('dir/' . $temporaryFilename);
 
         $exception = new \Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($temporaryFilename);
-        $imageThumbnailFactoryMock = $this->getMock(ImageThumbnailFactory::class, ['getImageThumbnail'], [], '', false);
+        $imageThumbnailFactoryMock = $this->getMockBuilder(ImageThumbnailFactory::class)
+            ->setMethods(['getImageThumbnail'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $imageThumbnailFactoryMock->expects($this->once())->method('getImageThumbnail')->willThrowException($exception);
 
         $fileThumbnailExtension = new FileThumbnailExtension($fileUploadMock, $imageThumbnailFactoryMock);
@@ -33,14 +39,23 @@ class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase
         $temporaryFilename = 'filename.jpg';
         $encodedData = 'encodedData';
 
-        $fileUploadMock = $this->getMock(FileUpload::class, ['getTemporaryFilepath'], [], '', false);
+        $fileUploadMock = $this->getMockBuilder(FileUpload::class)
+            ->setMethods(['getTemporaryFilepath'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $fileUploadMock->expects($this->any())->method('getTemporaryFilepath')->willReturn('dir/' . $temporaryFilename);
 
-        $imageMock = $this->getMock(Image::class, ['encode']);
+        $imageMock = $this->getMockBuilder(Image::class)
+            ->setMethods(['encode'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $imageMock->expects($this->once())->method('encode')->willReturnSelf();
         $imageMock->setEncoded($encodedData);
 
-        $imageThumbnailMock = $this->getMock(ImageThumbnailFactory::class, ['getImageThumbnail'], [], '', false);
+        $imageThumbnailMock = $this->getMockBuilder(ImageThumbnailFactory::class)
+            ->setMethods(['getImageThumbnail'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $imageThumbnailMock->expects($this->once())->method('getImageThumbnail')->willReturn($imageMock);
 
         $fileThumbnailExtension = new FileThumbnailExtension($fileUploadMock, $imageThumbnailMock);
@@ -54,11 +69,17 @@ class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase
     {
         $temporaryFilename = 'filename.doc';
 
-        $fileUploadMock = $this->getMock(FileUpload::class, ['getTemporaryFilepath'], [], '', false);
+        $fileUploadMock = $this->getMockBuilder(FileUpload::class)
+            ->setMethods(['getTemporaryFilepath'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $fileUploadMock->expects($this->any())->method('getTemporaryFilepath')->willReturn('dir/' . $temporaryFilename);
 
         $exception = new \Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($temporaryFilename);
-        $imageThumbnailFactoryMock = $this->getMock(ImageThumbnailFactory::class, ['getImageThumbnail'], [], '', false);
+        $imageThumbnailFactoryMock = $this->getMockBuilder(ImageThumbnailFactory::class)
+            ->setMethods(['getImageThumbnail'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $imageThumbnailFactoryMock->expects($this->once())->method('getImageThumbnail')->willThrowException($exception);
 
         $fileThumbnailExtension = new FileThumbnailExtension($fileUploadMock, $imageThumbnailFactoryMock);

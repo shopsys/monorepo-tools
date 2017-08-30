@@ -21,7 +21,10 @@ class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase
 
         $uploadedFileConfig = new UploadedFileConfig([]);
 
-        $uploadedFileFacadeMock = $this->getMock(UploadedFileFacade::class, ['deleteFileFromFilesystem'], [], '', false);
+        $uploadedFileFacadeMock = $this->getMockBuilder(UploadedFileFacade::class)
+            ->setMethods(['deleteFileFromFilesystem'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $uploadedFileFacadeMock->expects($this->once())->method('deleteFileFromFilesystem')->with($this->equalTo($uploadedFile));
 
         $containerMock = $this->getMockBuilder(ContainerInterface::class)
@@ -30,7 +33,10 @@ class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase
             ->getMockForAbstractClass();
         $containerMock->expects($this->once())->method('get')->willReturn($uploadedFileFacadeMock);
 
-        $args = $this->getMock(LifecycleEventArgs::class, ['getEntity'], [], '', false);
+        $args = $this->getMockBuilder(LifecycleEventArgs::class)
+            ->setMethods(['getEntity'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $args->method('getEntity')->willReturn($uploadedFile);
 
         $doctrineListener = new UploadedFileDeleteDoctrineListener($containerMock, $uploadedFileConfig);
@@ -47,7 +53,10 @@ class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase
             Dummy::class => $uploadedFileEntityConfig,
         ]);
 
-        $uploadedFileFacadeMock = $this->getMock(UploadedFileFacade::class, ['getUploadedFileByEntity'], [], '', false);
+        $uploadedFileFacadeMock = $this->getMockBuilder(UploadedFileFacade::class)
+            ->setMethods(['getUploadedFileByEntity'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $uploadedFileFacadeMock
             ->expects($this->once())
             ->method('getUploadedFileByEntity')
@@ -60,10 +69,16 @@ class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase
             ->getMockForAbstractClass();
         $containerMock->expects($this->once())->method('get')->willReturn($uploadedFileFacadeMock);
 
-        $emMock = $this->getMock(EntityManager::class, ['remove'], [], '', false);
+        $emMock = $this->getMockBuilder(EntityManager::class)
+            ->setMethods(['remove'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $emMock->expects($this->once())->method('remove')->with($uploadedFile);
 
-        $args = $this->getMock(LifecycleEventArgs::class, ['getEntity', 'getEntityManager'], [], '', false);
+        $args = $this->getMockBuilder(LifecycleEventArgs::class)
+            ->setMethods(['getEntity', 'getEntityManager'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $args->method('getEntity')->willReturn($entity);
         $args->method('getEntityManager')->willReturn($emMock);
 

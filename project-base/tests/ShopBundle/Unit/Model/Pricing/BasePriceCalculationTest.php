@@ -108,13 +108,10 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase
         $resultPriceWithoutVat,
         $resultVatAmount
     ) {
-        $rounding = $this->getMock(
-            Rounding::class,
-            ['roundPriceWithVat', 'roundPriceWithoutVat', 'roundVatAmount'],
-            [],
-            '',
-            false
-        );
+        $rounding = $this->getMockBuilder(Rounding::class)
+            ->setMethods(['roundPriceWithVat', 'roundPriceWithoutVat', 'roundVatAmount'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $rounding->expects($this->any())->method('roundPriceWithVat')->willReturnCallback(function ($value) {
             return round($value);
         });

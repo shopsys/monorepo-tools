@@ -21,21 +21,24 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase
 {
     public function testCalculatePriceByUserAndDomainIdWithUser()
     {
-        $product = $this->getMock(Product::class, [], [], '', false);
+        $product = $this->createMock(Product::class);
         $pricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
-        $billingAddress = $this->getMock(BillingAddress::class, [], [], '', false);
+        $billingAddress = $this->createMock(BillingAddress::class);
         $userData = new UserData();
         $userData->pricingGroup = $pricingGroup;
         $user = new User($userData, $billingAddress, null);
         $expectedProductPrice = new ProductPrice(new Price(1, 1), false);
 
-        $currentCustomerMock = $this->getMock(CurrentCustomer::class, [], [], '', false);
-        $pricingGroupSettingFacadeMock = $this->getMock(PricingGroupSettingFacade::class, [], [], '', false);
+        $currentCustomerMock = $this->createMock(CurrentCustomer::class);
+        $pricingGroupSettingFacadeMock = $this->createMock(PricingGroupSettingFacade::class);
 
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->setMethods(['calculatePrice'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn($expectedProductPrice);
 
-        $domainMock = $this->getMock(Domain::class, [], [], '', false);
+        $domainMock = $this->createMock(Domain::class);
 
         $productPriceCalculationForUser = new ProductPriceCalculationForUser(
             $productPriceCalculationMock,
@@ -51,23 +54,29 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase
     public function testCalculatePriceByUserAndDomainIdWithoutUser()
     {
         $domainId = 1;
-        $product = $this->getMock(Product::class, [], [], '', false);
+        $product = $this->createMock(Product::class);
         $pricingGroup = new PricingGroup(new PricingGroupData('name', 1), $domainId);
         $expectedProductPrice = new ProductPrice(new Price(1, 1), false);
 
-        $currentCustomerMock = $this->getMock(CurrentCustomer::class, [], [], '', false);
+        $currentCustomerMock = $this->createMock(CurrentCustomer::class);
 
-        $pricingGroupFacadeMock = $this->getMock(PricingGroupSettingFacade::class, ['getDefaultPricingGroupByDomainId'], [], '', false);
+        $pricingGroupFacadeMock = $this->getMockBuilder(PricingGroupSettingFacade::class)
+            ->setMethods(['getDefaultPricingGroupByDomainId'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $pricingGroupFacadeMock
             ->expects($this->once())
             ->method('getDefaultPricingGroupByDomainId')
             ->with($this->equalTo($domainId))
             ->willReturn($pricingGroup);
 
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->setMethods(['calculatePrice'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn($expectedProductPrice);
 
-        $domainMock = $this->getMock(Domain::class, [], [], '', false);
+        $domainMock = $this->createMock(Domain::class);
 
         $productPriceCalculationForUser = new ProductPriceCalculationForUser(
             $productPriceCalculationMock,

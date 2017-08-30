@@ -18,8 +18,11 @@ class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
         $validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));
         $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
         $sessionMock->expects($this->atLeastOnce())->method('get')->willReturn($validPromoCode->getCode());
-        $emMock = $this->getMock(EntityManager::class, [], [], '', false);
-        $promoCodeRepositoryMock = $this->getMock(PromoCodeRepository::class, ['findByCode'], [], '', false);
+        $emMock = $this->createMock(EntityManager::class);
+        $promoCodeRepositoryMock = $this->getMockBuilder(PromoCodeRepository::class)
+            ->setMethods(['findByCode'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $promoCodeRepositoryMock->expects($this->atLeastOnce())->method('findByCode')->willReturn($validPromoCode);
 
         $promoCodeFacade = new PromoCodeFacade($emMock, $promoCodeRepositoryMock);
@@ -33,8 +36,11 @@ class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
         $validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));
         $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
         $sessionMock->expects($this->atLeastOnce())->method('get')->willReturn($validPromoCode->getCode());
-        $emMock = $this->getMock(EntityManager::class, [], [], '', false);
-        $promoCodeRepositoryMock = $this->getMock(PromoCodeRepository::class, ['findByCode'], [], '', false);
+        $emMock = $this->createMock(EntityManager::class);
+        $promoCodeRepositoryMock = $this->getMockBuilder(PromoCodeRepository::class)
+            ->setMethods(['findByCode'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $promoCodeRepositoryMock->expects($this->atLeastOnce())->method('findByCode')->willReturn(null);
 
         $promoCodeFacade = new PromoCodeFacade($emMock, $promoCodeRepositoryMock);
@@ -53,8 +59,11 @@ class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
             $this->equalTo($enteredCode)
         );
 
-        $emMock = $this->getMock(EntityManager::class, [], [], '', false);
-        $promoCodeRepositoryMock = $this->getMock(PromoCodeRepository::class, ['findByCode'], [], '', false);
+        $emMock = $this->createMock(EntityManager::class);
+        $promoCodeRepositoryMock = $this->getMockBuilder(PromoCodeRepository::class)
+            ->setMethods(['findByCode'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $promoCodeRepositoryMock->expects($this->atLeastOnce())->method('findByCode')->willReturn($validPromoCode);
 
         $promoCodeFacade = new PromoCodeFacade($emMock, $promoCodeRepositoryMock);
@@ -68,13 +77,16 @@ class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
         $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
         $sessionMock->expects($this->never())->method('set');
 
-        $emMock = $this->getMock(EntityManager::class, [], [], '', false);
-        $promoCodeRepositoryMock = $this->getMock(PromoCodeRepository::class, ['findByCode'], [], '', false);
+        $emMock = $this->createMock(EntityManager::class);
+        $promoCodeRepositoryMock = $this->getMockBuilder(PromoCodeRepository::class)
+            ->setMethods(['findByCode'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $promoCodeRepositoryMock->expects($this->atLeastOnce())->method('findByCode')->willReturn(null);
 
         $promoCodeFacade = new PromoCodeFacade($emMock, $promoCodeRepositoryMock);
         $currentPromoCodeFacade = new CurrentPromoCodeFacade($promoCodeFacade, $sessionMock);
-        $this->setExpectedException(\Shopsys\ShopBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException::class);
+        $this->expectException(\Shopsys\ShopBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException::class);
         $currentPromoCodeFacade->setEnteredPromoCode($enteredCode);
     }
 }

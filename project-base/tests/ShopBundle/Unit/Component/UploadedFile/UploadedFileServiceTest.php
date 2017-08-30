@@ -19,7 +19,10 @@ class UploadedFileServiceTest extends PHPUnit_Framework_TestCase
         $entityName = 'entityName';
         $entityClass = 'entityClass';
 
-        $fileUploadMock = $this->getMock(FileUpload::class, ['getTemporaryFilePath'], [], '', false);
+        $fileUploadMock = $this->getMockBuilder(FileUpload::class)
+            ->setMethods(['getTemporaryFilePath'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $fileUploadMock
             ->expects($this->once())
             ->method('getTemporaryFilePath')

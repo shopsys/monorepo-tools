@@ -66,7 +66,7 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase
         $subRequestListener->onKernelResponse($eventMock1);
         $subRequestListener->onKernelResponse($eventMock2);
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\HttpFoundation\Exception\TooManyRedirectResponsesException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\HttpFoundation\Exception\TooManyRedirectResponsesException::class);
         $subRequestListener->onKernelResponse($eventMock3);
     }
 

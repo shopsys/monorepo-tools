@@ -62,7 +62,10 @@ class FilemanagerAccessTest extends PHPUnit_Framework_TestCase
      */
     public function testIsPathAccessible($fileuploadDir, $testPath, $attr, $isAccessible)
     {
-        $elFinderConfigurationReaderMock = $this->getMock(ElFinderConfigurationReader::class, null, [], '', false);
+        $elFinderConfigurationReaderMock = $this->getMockBuilder(ElFinderConfigurationReader::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
         $filemanagerAccess = new FilemanagerAccess(
             $fileuploadDir,
             $elFinderConfigurationReaderMock,
@@ -77,7 +80,10 @@ class FilemanagerAccessTest extends PHPUnit_Framework_TestCase
      */
     public function testIsPathAccessibleStatic($fileuploadDir, $testPath, $attr, $isAccessible)
     {
-        $elFinderConfigurationReaderMock = $this->getMock(ElFinderConfigurationReader::class, null, [], '', false);
+        $elFinderConfigurationReaderMock = $this->getMockBuilder(ElFinderConfigurationReader::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
         $filemanagerAccess = new FilemanagerAccess(
             $fileuploadDir,
             $elFinderConfigurationReaderMock,
@@ -91,7 +97,7 @@ class FilemanagerAccessTest extends PHPUnit_Framework_TestCase
     public function testIsPathAccessibleStaticException()
     {
         FilemanagerAccess::detachSelf();
-        $this->setExpectedException(\Shopsys\ShopBundle\Model\Security\Filesystem\Exception\InstanceNotInjectedException::class);
+        $this->expectException(\Shopsys\ShopBundle\Model\Security\Filesystem\Exception\InstanceNotInjectedException::class);
         FilemanagerAccess::isPathAccessibleStatic('read', __DIR__, null, null);
     }
 }

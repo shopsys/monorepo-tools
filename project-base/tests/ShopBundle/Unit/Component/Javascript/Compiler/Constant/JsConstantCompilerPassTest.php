@@ -32,7 +32,7 @@ class JsConstantCompilerPassTest extends FunctionalTestCase
     {
         $content = file_get_contents(__DIR__ . '/testUndefinedConstant.js');
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException::class);
         $this->getJsCompiler()->compile($content);
     }
 

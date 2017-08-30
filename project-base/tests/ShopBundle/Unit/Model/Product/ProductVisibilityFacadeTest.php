@@ -11,7 +11,7 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase
 {
     public function testOnKernelResponseRecalc()
     {
-        $productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
+        $productVisibilityRepositoryMock = $this->createMock(ProductVisibilityRepository::class);
         $productVisibilityRepositoryMock
             ->expects($this->once())
             ->method('refreshProductsVisibility')
@@ -32,7 +32,7 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase
 
     public function testOnKernelResponseNoRecalc()
     {
-        $productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
+        $productVisibilityRepositoryMock = $this->createMock(ProductVisibilityRepository::class);
         $productVisibilityRepositoryMock->expects($this->never())->method('refreshProductsVisibility');
 
         $productVisibilityFacade = new ProductVisibilityFacade($productVisibilityRepositoryMock);
@@ -49,7 +49,7 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase
 
     public function testRefreshProductsVisibility()
     {
-        $productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
+        $productVisibilityRepositoryMock = $this->createMock(ProductVisibilityRepository::class);
         $productVisibilityRepositoryMock->expects($this->once())->method('refreshProductsVisibility');
 
         $productVisibilityFacade = new ProductVisibilityFacade($productVisibilityRepositoryMock);
@@ -58,7 +58,7 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase
 
     public function testRefreshProductsVisibilityForMarked()
     {
-        $productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
+        $productVisibilityRepositoryMock = $this->createMock(ProductVisibilityRepository::class);
         $productVisibilityRepositoryMock
             ->expects($this->once())
             ->method('refreshProductsVisibility')
