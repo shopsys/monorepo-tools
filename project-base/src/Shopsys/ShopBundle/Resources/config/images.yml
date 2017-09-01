@@ -21,7 +21,7 @@
 - name: category
   class: Shopsys\ShopBundle\Model\Category\Category
   sizes:
-    - { name: ~, width: 30, height: 30, crop: true }
+    - { name: ~, width: 30, height: 30, crop: false }
 
 - name: product
   class: Shopsys\ShopBundle\Model\Product\Product

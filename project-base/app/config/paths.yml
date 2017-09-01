@@ -6,8 +6,8 @@ parameters:
   shopsys.data_fixtures.resource_products_filepath: '%shopsys.data_fixtures.resources_dir%/demo-data-products.csv'
   shopsys.data_fixtures.resources_dir: '%shopsys.root_dir%/src/Shopsys/ShopBundle/DataFixtures/resources'
   shopsys.default_db_schema_filepath: '%shopsys.resources_dir%/database/schema.sql'
-  shopsys.demo_images_archive_url: https://images.shopsysdemo.com/demoImages.v9.zip
-  shopsys.demo_images_dql_url: https://images.shopsysdemo.com/demoImagesSql.v7.sql
+  shopsys.demo_images_archive_url: https://images.shopsysdemo.com/demoImages.v10.zip
+  shopsys.demo_images_sql_url: https://images.shopsysdemo.com/demoImagesSql.v8.sql
   shopsys.doctrine.metadata_cache_directory_path: '%kernel.cache_dir%/doctrine_metadata'
   shopsys.doctrine.query_cache_directory_path: '%kernel.cache_dir%/doctrine_query'
   shopsys.domain_config_filepath: '%kernel.root_dir%/config/domains.yml'

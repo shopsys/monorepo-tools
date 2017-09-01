@@ -11,13 +11,13 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="512"
    height="512"
-   viewBox="0 0 511.99999 511.99999"
-   id="svg4906"
+   viewBox="0 0 512.00001 512.00001"
+   id="svg3350"
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="burger-menu.svg">
   <defs
-     id="defs4908" />
+     id="defs3352" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,20 +25,20 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="299.9196"
-     inkscape:cy="329.93461"
+     inkscape:zoom="0.35"
+     inkscape:cx="6.4285714"
+     inkscape:cy="520"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
-     inkscape:window-width="1920"
-     inkscape:window-height="1027"
-     inkscape:window-x="1358"
-     inkscape:window-y="22"
+     inkscape:window-width="1536"
+     inkscape:window-height="801"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
-     id="metadata4911">
+     id="metadata3355">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -53,24 +53,39 @@
      inkscape:label="Vrstva 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-540.36219)">
+     transform="translate(0,-540.36216)">
+    <circle
+       cx="52.300816"
+       cy="639.76624"
+       r="45.184387"
+       id="circle4" />
     <rect
-       x="3.3581562"
-       y="618.69891"
-       width="505"
-       height="49.840775"
-       id="rect166" />
+       x="150.43155"
+       y="607.71063"
+       width="356.68484"
+       height="64.111015"
+       id="rect6" />
+    <circle
+       cx="52.300816"
+       cy="796.10901"
+       r="45.184387"
+       id="circle8" />
     <rect
-       x="3.3581562"
-       y="779.81018"
-       width="505"
-       height="49.840775"
-       id="rect168" />
+       x="150.43155"
+       y="764.04718"
+       width="356.68484"
+       height="64.111015"
+       id="rect10" />
+    <circle
+       cx="52.300816"
+       cy="953.3385"
+       r="45.184387"
+       id="circle12" />
     <rect
-       x="3.3581562"
-       y="940.94904"
-       width="505"
-       height="49.840775"
-       id="rect170" />
+       x="150.43155"
+       y="921.28943"
+       width="356.68484"
+       height="64.104675"
+       id="rect14" />
   </g>
 </svg>
