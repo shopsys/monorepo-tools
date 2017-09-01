@@ -37,7 +37,7 @@ class SettingTest extends PHPUnit_Framework_TestCase
         $setting->setForDomain('key', 'newValue', 1);
         $this->assertSame('newValue', $setting->getForDomain('key', 1));
 
-        $this->setExpectedException(SettingValueNotFoundException::class);
+        $this->expectException(SettingValueNotFoundException::class);
         $setting->setForDomain('key2', 'value', 1);
     }
 
@@ -63,7 +63,7 @@ class SettingTest extends PHPUnit_Framework_TestCase
 
         $setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 
-        $this->setExpectedException(SettingValueNotFoundException::class);
+        $this->expectException(SettingValueNotFoundException::class);
         $setting->setForDomain('key2', 'value', 1);
     }
 
@@ -82,7 +82,7 @@ class SettingTest extends PHPUnit_Framework_TestCase
 
         $setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $setting->setForDomain('key2', 'value', null);
     }
 
@@ -105,7 +105,7 @@ class SettingTest extends PHPUnit_Framework_TestCase
 
         $setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 
-        $this->setExpectedException(SettingValueNotFoundException::class);
+        $this->expectException(SettingValueNotFoundException::class);
         $setting->getForDomain('key2', 1);
     }
 
@@ -168,12 +168,12 @@ class SettingTest extends PHPUnit_Framework_TestCase
     {
         $entityManagerMock = $this->createDummyEntityManagerMock();
 
-        $settingValueRepositoryMock = $this->getMock(SettingValueRepository::class, [], [], '', false);
+        $settingValueRepositoryMock = $this->createMock(SettingValueRepository::class);
         $settingValueRepositoryMock->expects($this->any())->method('getAllByDomainId')->willReturn([]);
 
         $setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 
-        $this->setExpectedException(
+        $this->expectException(
             SettingValueNotFoundException::class,
             'Common setting value with name "nonexistentKey" not found.'
         );
@@ -184,12 +184,12 @@ class SettingTest extends PHPUnit_Framework_TestCase
     {
         $entityManagerMock = $this->createDummyEntityManagerMock();
 
-        $settingValueRepositoryMock = $this->getMock(SettingValueRepository::class, [], [], '', false);
+        $settingValueRepositoryMock = $this->createMock(SettingValueRepository::class);
         $settingValueRepositoryMock->expects($this->any())->method('getAllByDomainId')->willReturn([]);
 
         $setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 
-        $this->setExpectedException(
+        $this->expectException(
             SettingValueNotFoundException::class,
             'Setting value with name "nonexistentKey" for domain ID "1" not found.'
         );

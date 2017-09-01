@@ -11,7 +11,7 @@ class EntityStringColumnsFinderTest extends PHPUnit_Framework_TestCase
 {
     public function testGetAllStringColumnNamesIndexedByTableName()
     {
-        $classMetadataInfoMock = $this->getMock(ClassMetadataInfo::class, [], [], '', false);
+        $classMetadataInfoMock = $this->createMock(ClassMetadataInfo::class);
         $classMetadataInfoMock
             ->method('getTableName')
             ->willReturn('EntityName');
@@ -53,8 +53,8 @@ class EntityStringColumnsFinderTest extends PHPUnit_Framework_TestCase
 
     public function testGetAllStringColumnNamesIndexedByTableNameException()
     {
-        $classMetadataMock = $this->getMock(ClassMetadata::class);
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Entity\Exception\UnexpectedTypeException::class);
+        $classMetadataMock = $this->createMock(ClassMetadata::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Entity\Exception\UnexpectedTypeException::class);
 
         $entityNotNullableColumnsFinder = new EntityStringColumnsFinder();
         $entityNotNullableColumnsFinder->getAllStringColumnNamesIndexedByTableName([$classMetadataMock]);

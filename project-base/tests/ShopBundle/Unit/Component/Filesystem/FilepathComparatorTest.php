@@ -15,7 +15,7 @@ class FilepathComparatorTest extends PHPUnit_Framework_TestCase
         $path = 'anyPath';
         $nonExistentPath = 'nonExistentPath';
 
-        $this->setExpectedException(DirectoryDoesNotExistException::class);
+        $this->expectException(DirectoryDoesNotExistException::class);
         $filepathComparator->isPathWithinDirectory($path, $nonExistentPath);
     }
 

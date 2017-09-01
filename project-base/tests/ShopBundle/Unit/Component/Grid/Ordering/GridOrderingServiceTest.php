@@ -13,7 +13,7 @@ class GridOrderingServiceTest extends PHPUnit_Framework_TestCase
         $gridOrderingService = new GridOrderingService();
         $entity = null;
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException::class);
         $gridOrderingService->setPosition($entity, 0);
     }
 
@@ -22,7 +22,7 @@ class GridOrderingServiceTest extends PHPUnit_Framework_TestCase
         $gridOrderingService = new GridOrderingService();
         $entity = new \StdClass();
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException::class);
         $gridOrderingService->setPosition($entity, 0);
     }
 

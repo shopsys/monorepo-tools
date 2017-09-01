@@ -18,7 +18,7 @@ class DomainSubscriberTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $eventMock->expects($this->once())->method('isMasterRequest')->will($this->returnValue(false));
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
 
         $domain = new Domain([], $settingMock);
 

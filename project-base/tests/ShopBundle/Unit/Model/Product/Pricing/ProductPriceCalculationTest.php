@@ -220,7 +220,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
         $variant = Product::create(new ProductData());
         $product = Product::createMainVariant(new ProductData(), [$variant]);
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException::class);
+        $this->expectException(\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException::class);
 
         $productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
     }

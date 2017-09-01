@@ -25,10 +25,10 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase
             ->getMock();
         $emMock->expects($this->once())->method('flush');
 
-        $userMock = $this->getMock(UniqueLoginInterface::class);
+        $userMock = $this->createMock(UniqueLoginInterface::class);
         $userMock->expects($this->once())->method('setLoginToken');
 
-        $tokenMock = $this->getMock(TokenInterface::class);
+        $tokenMock = $this->createMock(TokenInterface::class);
         $tokenMock->expects($this->once())->method('getUser')->will($this->returnValue($userMock));
 
         $eventMock = $this->getMockBuilder(InteractiveLoginEvent::class)
@@ -42,7 +42,7 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $administratorActivityFacadeMock = $this->getMock(AdministratorActivityFacade::class, [], [], '', false);
+        $administratorActivityFacadeMock = $this->createMock(AdministratorActivityFacade::class);
 
         $loginListener = new LoginListener($emMock, $orderFlowFacadeMock, $administratorActivityFacadeMock);
         $loginListener->onSecurityInteractiveLogin($eventMock);
@@ -56,10 +56,10 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase
             ->getMock();
         $emMock->expects($this->any())->method('flush');
 
-        $userMock = $this->getMock(TimelimitLoginInterface::class);
+        $userMock = $this->createMock(TimelimitLoginInterface::class);
         $userMock->expects($this->once())->method('setLastActivity');
 
-        $tokenMock = $this->getMock(TokenInterface::class);
+        $tokenMock = $this->createMock(TokenInterface::class);
         $tokenMock->expects($this->once())->method('getUser')->will($this->returnValue($userMock));
 
         $eventMock = $this->getMockBuilder(InteractiveLoginEvent::class)
@@ -73,7 +73,7 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $administratorActivityFacadeMock = $this->getMock(AdministratorActivityFacade::class, [], [], '', false);
+        $administratorActivityFacadeMock = $this->createMock(AdministratorActivityFacade::class);
 
         $loginListener = new LoginListener($emMock, $orderFlowFacadeMock, $administratorActivityFacadeMock);
         $loginListener->onSecurityInteractiveLogin($eventMock);
@@ -92,7 +92,7 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $tokenMock = $this->getMock(TokenInterface::class);
+        $tokenMock = $this->createMock(TokenInterface::class);
         $tokenMock->expects($this->once())->method('getUser')->will($this->returnValue($userMock));
 
         $eventMock = $this->getMockBuilder(InteractiveLoginEvent::class)
@@ -107,7 +107,7 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase
             ->getMock();
         $orderFlowFacadeMock->expects($this->once())->method('resetOrderForm');
 
-        $administratorActivityFacadeMock = $this->getMock(AdministratorActivityFacade::class, [], [], '', false);
+        $administratorActivityFacadeMock = $this->createMock(AdministratorActivityFacade::class);
 
         $loginListener = new LoginListener($emMock, $orderFlowFacadeMock, $administratorActivityFacadeMock);
         $loginListener->onSecurityInteractiveLogin($eventMock);
@@ -121,10 +121,10 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase
             ->getMock();
         $emMock->expects($this->once())->method('flush');
 
-        $administratorMock = $this->getMock(Administrator::class, [], [], '', false);
+        $administratorMock = $this->createMock(Administrator::class);
         $administratorMock->expects($this->once())->method('setLoginToken');
 
-        $tokenMock = $this->getMock(TokenInterface::class);
+        $tokenMock = $this->createMock(TokenInterface::class);
         $tokenMock->expects($this->once())->method('getUser')->will($this->returnValue($administratorMock));
 
         $eventMock = $this->getMockBuilder(InteractiveLoginEvent::class)

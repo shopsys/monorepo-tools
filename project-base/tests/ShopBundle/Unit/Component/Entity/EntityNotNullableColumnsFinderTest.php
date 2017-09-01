@@ -11,7 +11,7 @@ class EntityNotNullableColumnsFinderTest extends PHPUnit_Framework_TestCase
 {
     public function testGetAllNotNullableColumnNamesIndexedByTableName()
     {
-        $classMetadataInfoMock = $this->getMock(ClassMetadataInfo::class, [], [], '', false);
+        $classMetadataInfoMock = $this->createMock(ClassMetadataInfo::class);
         $classMetadataInfoMock
             ->method('getTableName')
             ->willReturn('EntityName');
@@ -65,8 +65,8 @@ class EntityNotNullableColumnsFinderTest extends PHPUnit_Framework_TestCase
 
     public function testGetAllNotNullableColumnNamesIndexedByTableNameException()
     {
-        $classMetadataMock = $this->getMock(ClassMetadata::class);
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Entity\Exception\UnexpectedTypeException::class);
+        $classMetadataMock = $this->createMock(ClassMetadata::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Entity\Exception\UnexpectedTypeException::class);
 
         $entityNotNullableColumnsFinder = new EntityNotNullableColumnsFinder();
         $entityNotNullableColumnsFinder->getAllNotNullableColumnNamesIndexedByTableName([$classMetadataMock]);

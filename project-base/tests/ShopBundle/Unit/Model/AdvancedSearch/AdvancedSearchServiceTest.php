@@ -13,7 +13,10 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase
 {
     public function testCreateDefaultRuleFormData()
     {
-        $advancedSearchConfigMock = $this->getMock(ProductAdvancedSearchConfig::class, null, [], '', false);
+        $advancedSearchConfigMock = $this->getMockBuilder(ProductAdvancedSearchConfig::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
         $filterName = 'filterName';
 
         $advancedSearchService = new AdvancedSearchService($advancedSearchConfigMock);
@@ -27,7 +30,10 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase
 
     public function testGetRulesFormDataByRequestDataDefault()
     {
-        $advancedSearchConfigMock = $this->getMock(ProductAdvancedSearchConfig::class, null, [], '', false);
+        $advancedSearchConfigMock = $this->getMockBuilder(ProductAdvancedSearchConfig::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $advancedSearchService = new AdvancedSearchService($advancedSearchConfigMock);
         $rulesFormViewData = $advancedSearchService->getRulesFormViewDataByRequestData(null);
@@ -43,7 +49,10 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase
 
     public function testGetRulesFormDataByRequestData()
     {
-        $advancedSearchConfigMock = $this->getMock(ProductAdvancedSearchConfig::class, null, [], '', false);
+        $advancedSearchConfigMock = $this->getMockBuilder(ProductAdvancedSearchConfig::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $requestData = [
             [
@@ -78,14 +87,20 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase
             ->setMethods(['extendQueryBuilder'])
             ->getMockForAbstractClass();
 
-        $advancedSearchConfigMock = $this->getMock(ProductAdvancedSearchConfig::class, ['getFilter'], [], '', false);
+        $advancedSearchConfigMock = $this->getMockBuilder(ProductAdvancedSearchConfig::class)
+            ->setMethods(['getFilter'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $advancedSearchConfigMock
             ->expects($this->once())
             ->method('getFilter')
             ->with($this->equalTo($ruleData->subject))
             ->willReturn($advancedSearchFilterMock);
 
-        $queryBuilderMock = $this->getMock(QueryBuilder::class, null, [], '', false);
+        $queryBuilderMock = $this->getMockBuilder(QueryBuilder::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $advancedSearchService = new AdvancedSearchService($advancedSearchConfigMock);
 

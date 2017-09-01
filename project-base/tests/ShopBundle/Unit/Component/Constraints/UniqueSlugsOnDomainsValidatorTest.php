@@ -23,7 +23,7 @@ class UniqueSlugsOnDomainsValidatorTest extends ConstraintValidatorTestCase
             new DomainConfig(1, 'http://example.cz', 'name1', 'cs'),
             new DomainConfig(2, 'http://example.com', 'name2', 'en'),
         ];
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
         $routerMock = $this->getMockBuilder(RouterInterface::class)
@@ -36,7 +36,10 @@ class UniqueSlugsOnDomainsValidatorTest extends ConstraintValidatorTestCase
             }
         });
 
-        $domainRouterFactoryMock = $this->getMock(DomainRouterFactory::class, ['getRouter'], [], '', false);
+        $domainRouterFactoryMock = $this->getMockBuilder(DomainRouterFactory::class)
+            ->setMethods(['getRouter'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $domainRouterFactoryMock->method('getRouter')->willReturn($routerMock);
 
         return new UniqueSlugsOnDomainsValidator($domain, $domainRouterFactoryMock);

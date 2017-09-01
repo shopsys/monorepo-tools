@@ -18,7 +18,7 @@ class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase
             ->getMock();
         $product->expects($this->atLeastOnce())->method('getId')->willReturn($productId);
 
-        $productRepository = $this->getMock(ProductRepository::class, [], [], '', false);
+        $productRepository = $this->createMock(ProductRepository::class);
         $productIdToProductTransformer = new ProductIdToProductTransformer($productRepository);
 
         $this->assertSame($productId, $productIdToProductTransformer->transform($product));
@@ -28,7 +28,7 @@ class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase
     public function testReverseTransform()
     {
         $productId = 1;
-        $product = $this->getMockBuilder(Product::class, [], [], '', false);
+        $product = $this->getMockBuilder(Product::class);
 
         $productsRepositoryGetByIdValues = [
             [$productId, $product],

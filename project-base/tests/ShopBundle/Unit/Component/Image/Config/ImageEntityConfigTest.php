@@ -43,7 +43,7 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase
 
         $imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
 
-        $this->setExpectedException(ImageTypeNotFoundException::class);
+        $this->expectException(ImageTypeNotFoundException::class);
         $imageEntityConfig->getSizeConfigsByType('TypeName_3');
     }
 

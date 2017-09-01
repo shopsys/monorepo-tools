@@ -49,7 +49,7 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase
     {
         $pricingService = new PricingService();
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);
+        $this->expectException(\Shopsys\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);
         $pricingService->getMinimumPriceByPriceWithoutVat([]);
     }
 
@@ -100,7 +100,7 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase
     {
         $pricingService = new PricingService();
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);
+        $this->expectException(\Shopsys\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);
         $pricingService->arePricesDifferent([]);
     }
 }

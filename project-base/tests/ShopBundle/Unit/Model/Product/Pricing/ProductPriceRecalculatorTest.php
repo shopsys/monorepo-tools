@@ -20,25 +20,33 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase
 {
     public function testRunImmediatelyRecalculations()
     {
-        $productMock = $this->getMock(Product::class, null, [], '', false);
-        $pricingGroupMock = $this->getMock(PricingGroup::class, null, [], '', false);
-        $productServiceMock = $this->getMock(ProductService::class, null, [], '', false);
-
-        $emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
-        $entityManagerFacadeMock = $this->getMock(EntityManagerFacade::class, [], [], '', false);
-        $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
+        $productMock = $this->getMockBuilder(Product::class)->setMethods(null)->disableOriginalConstructor()->getMock();
+        $pricingGroupMock = $this->getMockBuilder(PricingGroup::class)->setMethods(null)->disableOriginalConstructor()->getMock();
+        $productServiceMock = $this->getMockBuilder(ProductService::class)->setMethods(null)->disableOriginalConstructor()->getMock();
+        $emMock = $this->getMockBuilder(EntityManager::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['clear', 'flush'])
+            ->getMock();
+        $entityManagerFacadeMock = $this->createMock(EntityManagerFacade::class);
+        $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['calculatePrice'])
+            ->getMock();
         $productPrice = new ProductPrice(new Price(0, 0), false);
         $productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn($productPrice);
-        $productCalculatedPriceRepositoryMock = $this->getMock(
-            ProductCalculatedPriceRepository::class,
-            ['saveCalculatedPrice'],
-            [],
-            '',
-            false
-        );
-        $productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
-        $productPriceRecalculationSchedulerMock->scheduleProductForImmediateRecalculation($productMock);
-        $pricingGroupFacadeMock = $this->getMock(PricingGroupFacade::class, ['getAll'], [], '', false);
+        $productCalculatedPriceRepositoryMock = $this->getMockBuilder(ProductCalculatedPriceRepository::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['saveCalculatedPrice'])
+            ->getMock();
+        $productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getProductsForImmediateRecalculation'])
+            ->getMock();
+        $productPriceRecalculationSchedulerMock->expects($this->once())->method('getProductsForImmediateRecalculation')->will($this->returnValue([$productMock]));
+        $pricingGroupFacadeMock = $this->getMockBuilder(PricingGroupFacade::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getAll'])
+            ->getMock();
         $pricingGroupFacadeMock->expects($this->once())->method('getAll')->willReturn([$pricingGroupMock]);
 
         $productPriceRecalculator = new ProductPriceRecalculator(

@@ -20,7 +20,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
             new DomainConfig(1, 'http://example.com:8080', 'example', 'cs'),
         ];
 
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
         $settingMock
             ->expects($this->once())
             ->method('getForDomain')
@@ -29,11 +29,11 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
 
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $emMock = $this->getMock(EntityManager::class, [], [], '', false);
+        $emMock = $this->createMock(EntityManager::class);
 
-        $settingValueRepositoryMock = $this->getMock(SettingValueRepository::class, [], [], '', false);
-        $multidomainEntityDataCreatorMock = $this->getMock(MultidomainEntityDataCreator::class, [], [], '', false);
-        $translatableEntityDataCreatorMock = $this->getMock(TranslatableEntityDataCreator::class, [], [], '', false);
+        $settingValueRepositoryMock = $this->createMock(SettingValueRepository::class);
+        $multidomainEntityDataCreatorMock = $this->createMock(MultidomainEntityDataCreator::class);
+        $translatableEntityDataCreatorMock = $this->createMock(TranslatableEntityDataCreator::class);
 
         $domainDataCreator = new DomainDataCreator(
             $domain,
@@ -55,7 +55,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
             new DomainConfig(2, 'http://example.com:8080', 'example', 'cs'),
         ];
 
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
         $settingMock
             ->method('getForDomain')
             ->willReturnCallback(function ($key, $domainId) {
@@ -68,20 +68,20 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
 
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $emMock = $this->getMock(EntityManager::class, [], [], '', false);
+        $emMock = $this->createMock(EntityManager::class);
 
-        $settingValueRepositoryMock = $this->getMock(SettingValueRepository::class, [], [], '', false);
+        $settingValueRepositoryMock = $this->createMock(SettingValueRepository::class);
         $settingValueRepositoryMock
             ->expects($this->any())
             ->method('copyAllMultidomainSettings')
             ->with($this->equalTo(DomainDataCreator::TEMPLATE_DOMAIN_ID), $this->equalTo(2));
 
-        $multidomainEntityDataCreatorMock = $this->getMock(MultidomainEntityDataCreator::class, [], [], '', false);
+        $multidomainEntityDataCreatorMock = $this->createMock(MultidomainEntityDataCreator::class);
         $multidomainEntityDataCreatorMock
             ->method('copyAllMultidomainDataForNewDomain')
             ->with($this->equalTo(DomainDataCreator::TEMPLATE_DOMAIN_ID), $this->equalTo(2));
 
-        $translatableEntityDataCreatorMock = $this->getMock(TranslatableEntityDataCreator::class, [], [], '', false);
+        $translatableEntityDataCreatorMock = $this->createMock(TranslatableEntityDataCreator::class);
 
         $domainDataCreator = new DomainDataCreator(
             $domain,
@@ -105,7 +105,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
             $domainConfigWithNewLocale,
         ];
 
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
         $settingMock
             ->method('get')
             ->willReturnCallback(function ($key, $domainId) {
@@ -116,7 +116,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
                 throw new \Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException();
             });
 
-        $domainMock = $this->getMock(Domain::class, [], [], '', false);
+        $domainMock = $this->createMock(Domain::class);
         $domainMock
             ->expects($this->any())
             ->method('getAllIncludingDomainConfigsWithoutDataCreated')
@@ -130,10 +130,10 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
             ->method('getDomainConfigById')
             ->willReturn($domainConfigWithDataCreated);
 
-        $emMock = $this->getMock(EntityManager::class, [], [], '', false);
-        $settingValueRepositoryMock = $this->getMock(SettingValueRepository::class, [], [], '', false);
-        $multidomainEntityDataCreatorMock = $this->getMock(MultidomainEntityDataCreator::class, [], [], '', false);
-        $translatableEntityDataCreatorMock = $this->getMock(TranslatableEntityDataCreator::class, [], [], '', false);
+        $emMock = $this->createMock(EntityManager::class);
+        $settingValueRepositoryMock = $this->createMock(SettingValueRepository::class);
+        $multidomainEntityDataCreatorMock = $this->createMock(MultidomainEntityDataCreator::class);
+        $translatableEntityDataCreatorMock = $this->createMock(TranslatableEntityDataCreator::class);
         $translatableEntityDataCreatorMock
             ->expects($this->any())
             ->method('copyAllTranslatableDataForNewLocale')

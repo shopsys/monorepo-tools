@@ -60,7 +60,7 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
         $invalidCronModuleServiceMock = $this->getMockForAbstractClass(SimpleCronModuleInterface::class);
         $cronModuleFacadeMock = $this->mockCronModuleFacade();
 
-        $cronTimeResolverMock = $this->getMock(CronTimeResolver::class);
+        $cronTimeResolverMock = $this->createMock(CronTimeResolver::class);
         $cronTimeResolverMock->method('isValidAtTime')->willReturnCallback(
             function (CronModuleConfig $cronModuleConfig) use ($validServiceId) {
                 return $cronModuleConfig->getServiceId() === $validServiceId;
@@ -112,7 +112,7 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
      */
     private function createCronFacade(CronConfig $cronConfig, CronModuleFacade $cronModuleFacade)
     {
-        $loggerMock = $this->getMock(Logger::class, [], [], '', false);
+        $loggerMock = $this->createMock(Logger::class);
         /* @var $loggerMock \Symfony\Bridge\Monolog\Logger */
 
         return new CronFacade($loggerMock, $cronConfig, $cronModuleFacade);
@@ -123,7 +123,7 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
      */
     private function mockCronModuleFacade()
     {
-        return $this->getMock(CronModuleFacade::class, [], [], '', false);
+        return $this->createMock(CronModuleFacade::class);
     }
 
     /**

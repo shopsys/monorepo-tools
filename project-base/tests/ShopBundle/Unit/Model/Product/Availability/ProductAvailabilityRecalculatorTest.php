@@ -11,34 +11,38 @@ use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation
 use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase
 {
     public function testRunImmediatelyRecalculations()
     {
-        $productMock = $this->getMock(Product::class, null, [], '', false);
+        $productMock = $this->getMockBuilder(Product::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
-        $entityManagerFacadeMock = $this->getMock(EntityManagerFacade::class, [], [], '', false);
-        $productAvailabilityCalculationMock = $this->getMock(
-            ProductAvailabilityCalculation::class,
-            ['calculateAvailability'],
-            [],
-            '',
-            false
-        );
+        $emMock = $this->getMockBuilder(EntityManager::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['clear', 'flush'])
+            ->getMock();
+        $entityManagerFacadeMock = $this->createMock(EntityManagerFacade::class);
+        $productAvailabilityCalculationMock = $this->getMockBuilder(ProductAvailabilityCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['calculateAvailability'])
+            ->getMock();
         $productAvailabilityCalculationMock
             ->expects($this->once())
             ->method('calculateAvailability')
             ->willReturn(new Availability(new AvailabilityData([])));
-        $productAvailabilityRecalculationSchedulerMock = $this->getMock(
-            ProductAvailabilityRecalculationScheduler::class,
-            null,
-            [],
-            '',
-            false
-        );
-        $productAvailabilityRecalculationSchedulerMock->scheduleProductForImmediateRecalculation($productMock);
+        $productAvailabilityRecalculationSchedulerMock = $this->getMockBuilder(ProductAvailabilityRecalculationScheduler::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $productAvailabilityRecalculationSchedulerMock
+            ->expects($this->once())
+            ->method('getProductsForImmediateRecalculation')
+            ->will($this->returnValue([$productMock]));
 
         $productAvailabilityRecalculator = new ProductAvailabilityRecalculator(
             $emMock,
@@ -52,40 +56,36 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase
 
     public function testRecalculateAvailabilityForVariant()
     {
-        $variantMock = $this->getMock(Product::class, ['isVariant', 'getMainVariant', 'setCalculatedAvailability'], [], '', false);
-        $mainVariantMock = $this->getMock(Product::class, ['setCalculatedAvailability'], [], '', false);
-        $variantMock
-            ->expects($this->once())
-            ->method('isVariant')
-            ->willReturn(true);
-        $variantMock
-            ->expects($this->once())
-            ->method('getMainVariant')
-            ->willReturn($mainVariantMock);
-        $mainVariantMock
-            ->expects($this->once())
-            ->method('setCalculatedAvailability');
+        $variantMock = $this->getMockBuilder(Product::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['isVariant', 'getMainVariant', 'setCalculatedAvailability'])
+            ->getMock();
+        $mainVariantMock = $this->getMockBuilder(Product::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['setCalculatedAvailability'])
+            ->getMock();
 
-        $emMock = $this->getMock(EntityManager::class, ['flush'], [], '', false);
-        $entityManagerFacadeMock = $this->getMock(EntityManagerFacade::class, [], [], '', false);
-        $productAvailabilityRecalculationSchedulerMock = $this->getMock(
-            ProductAvailabilityRecalculationScheduler::class,
-            ['getProductsForImmediateRecalculation'],
-            [],
-            '',
-            false
-        );
+        $variantMock->expects($this->once())->method('isVariant')->willReturn(true);
+        $variantMock->expects($this->once())->method('getMainVariant')->willReturn($mainVariantMock);
+        $mainVariantMock->expects($this->once())->method('setCalculatedAvailability');
+
+        $emMock = $this->getMockBuilder(EntityManager::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['flush'])
+            ->getMock();
+        $entityManagerFacadeMock = $this->createMock(EntityManagerFacade::class);
+        $productAvailabilityRecalculationSchedulerMock = $this->getMockBuilder(ProductAvailabilityRecalculationScheduler::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getProductsForImmediateRecalculation'])
+            ->getMock();
         $productAvailabilityRecalculationSchedulerMock
             ->expects($this->once())
             ->method('getProductsForImmediateRecalculation')
             ->willReturn([$variantMock]);
-        $productAvailabilityCalculationMock = $this->getMock(
-            ProductAvailabilityCalculation::class,
-            ['calculateAvailability'],
-            [],
-            '',
-            false
-        );
+        $productAvailabilityCalculationMock = $this->getMockBuilder(ProductAvailabilityCalculation::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['calculateAvailability'])
+            ->getMock();
         $productAvailabilityCalculationMock
             ->expects($this->exactly(2))
             ->method('calculateAvailability')

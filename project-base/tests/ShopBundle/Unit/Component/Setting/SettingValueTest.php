@@ -44,7 +44,7 @@ class SettingValueTest extends PHPUnit_Framework_TestCase
      */
     public function testEditException($value)
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         new SettingValue('name', $value, 1);
     }
 

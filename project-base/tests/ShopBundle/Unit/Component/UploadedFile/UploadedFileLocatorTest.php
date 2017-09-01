@@ -14,7 +14,10 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
         $uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';
         $uploadedFileUrlPrefix = '';
 
-        $uploadedFileMock = $this->getMock(UploadedFile::class, ['getFilename', 'getEntityName'], [], '', false);
+        $uploadedFileMock = $this->getMockBuilder(UploadedFile::class)
+            ->setMethods(['getFilename', 'getEntityName'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $uploadedFileMock->method('getFilename')->willReturn('dummy.txt');
         $uploadedFileMock->method('getEntityName')->willReturn('entityName');
 
@@ -27,7 +30,10 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
         $uploadedFileDir = __DIR__ . '/UploadedFileLocatorData';
         $uploadedFileUrlPrefix = '';
 
-        $uploadedFileMock = $this->getMock(UploadedFile::class, ['getFilename', 'getEntityName'], [], '', false);
+        $uploadedFileMock = $this->getMockBuilder(UploadedFile::class)
+            ->setMethods(['getFilename', 'getEntityName'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $uploadedFileMock->method('getFilename')->willReturn('non-existent.txt');
         $uploadedFileMock->method('getEntityName')->willReturn('entityName');
 
@@ -52,7 +58,10 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
         $uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';
         $uploadedFileUrlPrefix = '';
 
-        $uploadedFileMock = $this->getMock(UploadedFile::class, ['getFilename', 'getEntityName'], [], '', false);
+        $uploadedFileMock = $this->getMockBuilder(UploadedFile::class)
+            ->setMethods(['getFilename', 'getEntityName'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $uploadedFileMock->method('getFilename')->willReturn('dummy.txt');
         $uploadedFileMock->method('getEntityName')->willReturn('entityName');
 
@@ -68,7 +77,10 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
         $uploadedFileDir = __DIR__ . '/UploadedFileLocatorData';
         $uploadedFileUrlPrefix = '';
 
-        $uploadedFileMock = $this->getMock(UploadedFile::class, ['getFilename', 'getEntityName'], [], '', false);
+        $uploadedFileMock = $this->getMockBuilder(UploadedFile::class)
+            ->setMethods(['getFilename', 'getEntityName'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $uploadedFileMock->method('getFilename')->willReturn('dummy.txt');
         $uploadedFileMock->method('getEntityName')->willReturn('entityName');
 
@@ -86,7 +98,10 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
 
         $domainConfig = new DomainConfig(1, 'http://www.example.com', 'example domain', 'en');
 
-        $uploadedFileMock = $this->getMock(UploadedFile::class, ['getFilename', 'getEntityName'], [], '', false);
+        $uploadedFileMock = $this->getMockBuilder(UploadedFile::class)
+            ->setMethods(['getFilename', 'getEntityName'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $uploadedFileMock->method('getFilename')->willReturn('dummy.txt');
         $uploadedFileMock->method('getEntityName')->willReturn('entityName');
 

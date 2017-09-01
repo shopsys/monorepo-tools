@@ -76,7 +76,7 @@ class MenuLoaderTest extends FunctionalTestCase
 
         $menuLoader = $this->getMenuLoaderWithMockedTranslator();
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Model\AdminNavigation\Exception\MissingSettingsItemException::class);
+        $this->expectException(\Shopsys\ShopBundle\Model\AdminNavigation\Exception\MissingSettingsItemException::class);
         $menuLoader->loadFromArray($testMenu);
     }
 

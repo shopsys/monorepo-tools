@@ -18,7 +18,7 @@ class Db extends BaseDb
     {
         // @codingStandardsIgnoreEnd
         $this->cleanup();
-        $this->loadDump();
+        $this->_loadDump();
     }
 
     public function cleanup()

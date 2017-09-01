@@ -66,7 +66,10 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
             ->getMock();
         $transportPriceCalculationMock->expects($this->once())->method('calculatePrice')->will($this->returnValue($transportPrice));
 
-        $orderPriceCalculationMock = $this->getMock(OrderPriceCalculation::class, ['calculateOrderRoundingPrice'], [], '', false);
+        $orderPriceCalculationMock = $this->getMockBuilder(OrderPriceCalculation::class)
+            ->setMethods(['calculateOrderRoundingPrice'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $orderPriceCalculationMock->expects($this->any())->method('calculateOrderRoundingPrice')->willReturn(null);
 
         $previewCalculation = new OrderPreviewCalculation(
@@ -77,14 +80,14 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
             $orderPriceCalculationMock
         );
 
-        $quantifiedProductMock = $this->getMock(QuantifiedProduct::class, [], [], '', false);
+        $quantifiedProductMock = $this->createMock(QuantifiedProduct::class);
         $quantifiedProducts = [
             $quantifiedProductMock,
             $quantifiedProductMock,
         ];
 
-        $transport = $this->getMock(Transport::class, [], [], '', false);
-        $payment = $this->getMock(Payment::class, [], [], '', false);
+        $transport = $this->createMock(Transport::class);
+        $payment = $this->createMock(Payment::class);
 
         $orderPreview = $previewCalculation->calculatePreview(
             $currency,
@@ -148,7 +151,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
             ->getMock();
         $transportPriceCalculationMock->expects($this->never())->method('calculatePrice');
 
-        $orderPriceCalculationMock = $this->getMock(OrderPriceCalculation::class, [], [], '', false);
+        $orderPriceCalculationMock = $this->createMock(OrderPriceCalculation::class);
 
         $previewCalculation = new OrderPreviewCalculation(
             $quantifiedProductPriceCalculationMock,
@@ -158,7 +161,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
             $orderPriceCalculationMock
         );
 
-        $quantifiedProductMock = $this->getMock(QuantifiedProduct::class, [], [], '', false);
+        $quantifiedProductMock = $this->createMock(QuantifiedProduct::class);
         $quantifiedProducts = [
             $quantifiedProductMock,
             $quantifiedProductMock,

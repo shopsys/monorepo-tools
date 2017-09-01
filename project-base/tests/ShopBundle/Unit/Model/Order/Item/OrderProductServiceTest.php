@@ -17,7 +17,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase
         $productStockQuantity = 15;
         $orderProductQuantity = 10;
 
-        $orderMock = $this->getMock(Order::class, [], [], '', false);
+        $orderMock = $this->createMock(Order::class);
 
         $productData = new ProductData();
         $productData->usingStock = true;
@@ -38,7 +38,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase
         $productStockQuantity = 15;
         $orderProductQuantity = 10;
 
-        $orderMock = $this->getMock(Order::class, [], [], '', false);
+        $orderMock = $this->createMock(Order::class);
 
         $productData = new ProductData();
         $productData->usingStock = false;
@@ -59,7 +59,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase
         $productStockQuantity = 15;
         $orderProductQuantity = 10;
 
-        $orderMock = $this->getMock(Order::class, [], [], '', false);
+        $orderMock = $this->createMock(Order::class);
 
         $productData = new ProductData();
         $productData->usingStock = true;
@@ -80,7 +80,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase
         $productStockQuantity = 15;
         $orderProductQuantity = 10;
 
-        $orderMock = $this->getMock(Order::class, [], [], '', false);
+        $orderMock = $this->createMock(Order::class);
 
         $productData = new ProductData();
         $productData->usingStock = false;

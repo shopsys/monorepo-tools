@@ -50,7 +50,7 @@ class CronTimeResolverTest extends PHPUnit_Framework_TestCase
     public function testValidateTimeStringInvalidTimeFormatException($invalidTimeString, $maxValue, $divisibleBy)
     {
         $cronTimeResolver = new CronTimeResolver();
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\Cron\Config\Exception\InvalidTimeFormatException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\Cron\Config\Exception\InvalidTimeFormatException::class);
         $cronTimeResolver->validateTimeString($invalidTimeString, $maxValue, $divisibleBy);
     }
 

@@ -28,7 +28,7 @@ class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
         $persistentReferenceRepositoryMock->expects($this->never())->method('deleteAll');
 
         $persistentReferenceFacade = new PersistentReferenceFacade($emMock, $persistentReferenceRepositoryMock);
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException::class);
         $persistentReferenceFacade->persistReference('referenceName', new stdClass());
     }
 
@@ -106,7 +106,7 @@ class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
 
         $persistentReferenceFacade = new PersistentReferenceFacade($emMock, $persistentReferenceRepositoryMock);
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Component\DataFixture\Exception\EntityNotFoundException::class);
+        $this->expectException(\Shopsys\ShopBundle\Component\DataFixture\Exception\EntityNotFoundException::class);
         $persistentReferenceFacade->getReference('referenceName');
     }
 }

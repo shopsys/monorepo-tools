@@ -143,7 +143,7 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase
     {
         $imageLocator = new ImageLocator('imageDir', $this->getBaseImageConfig());
 
-        $this->setExpectedException($exceptionClass);
+        $this->expectException($exceptionClass);
         $imageLocator->getRelativeImagePath($entityName, $type, $sizeName);
     }
 }

@@ -22,13 +22,19 @@ class DomainFacadeTest extends PHPUnit_Framework_TestCase
             2 => new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en'),
             3 => new DomainConfig(3, 'http://example.edu:8080', 'example.edu', 'en'),
         ];
-        $settingMock = $this->getMock(Setting::class, [], [], '', false);
+        $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($testDomainConfigs, $settingMock);
 
-        $currencyMock = $this->getMock(Currency::class, ['getId'], [], '', false);
+        $currencyMock = $this->getMockBuilder(Currency::class)
+            ->setMethods(['getId'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $currencyMock->expects($this->any())->method('getId')->willReturn(1);
 
-        $pricingSettingMock = $this->getMock(PricingSetting::class, ['getDomainDefaultCurrencyIdByDomainId'], [], '', false);
+        $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+            ->setMethods(['getDomainDefaultCurrencyIdByDomainId'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $pricingSettingMock
             ->expects($this->any())
             ->method('getDomainDefaultCurrencyIdByDomainId')
@@ -38,9 +44,9 @@ class DomainFacadeTest extends PHPUnit_Framework_TestCase
                 [3, 1],
             ]);
 
-        $domainServiceMock = $this->getMock(DomainService::class, [], [], '', false);
-        $filesystemMock = $this->getMock(Filesystem::class, [], [], '', false);
-        $fileUploadMock = $this->getMock(FileUpload::class, [], [], '', false);
+        $domainServiceMock = $this->createMock(DomainService::class);
+        $filesystemMock = $this->createMock(Filesystem::class);
+        $fileUploadMock = $this->createMock(FileUpload::class);
 
         $domainFacade = new DomainFacade(
             'domainImagesDirectory',

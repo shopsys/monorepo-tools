@@ -11,8 +11,14 @@ class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_Te
 {
     public function testScheduleRecalculateAvailabilityForProduct()
     {
-        $productRepositoryMock = $this->getMock(ProductRepository::class, null, [], '', false);
-        $productMock = $this->getMock(Product::class, null, [], '', false);
+        $productRepositoryMock = $this->getMockBuilder(ProductRepository::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $productMock = $this->getMockBuilder(Product::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $productAvailabilityRecalculationScheduler = new ProductAvailabilityRecalculationScheduler($productRepositoryMock);
         $productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($productMock);
@@ -24,8 +30,14 @@ class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_Te
 
     public function testCleanImmediatelyRecalculationSchedule()
     {
-        $productRepositoryMock = $this->getMock(ProductRepository::class, null, [], '', false);
-        $productMock = $this->getMock(Product::class, null, [], '', false);
+        $productRepositoryMock = $this->getMockBuilder(ProductRepository::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $productMock = $this->getMockBuilder(Product::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $productAvailabilityRecalculationScheduler = new ProductAvailabilityRecalculationScheduler($productRepositoryMock);
         $productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($productMock);
@@ -37,15 +49,15 @@ class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_Te
 
     public function testScheduleRecalculateAvailabilityForAllProducts()
     {
-        $productMock = $this->getMock(Product::class, null, [], '', false);
+        $productMock = $this->getMockBuilder(Product::class)
+            ->setMethods(null)
+            ->disableOriginalConstructor()
+            ->getMock();
         $productsIterator = [$productMock];
-        $productRepositoryMock = $this->getMock(
-            ProductRepository::class,
-            ['markAllProductsForAvailabilityRecalculation', 'getProductsForAvailabilityRecalculationIterator'],
-            [],
-            '',
-            false
-        );
+        $productRepositoryMock = $this->getMockBuilder(ProductRepository::class)
+            ->setMethods(['markAllProductsForAvailabilityRecalculation', 'getProductsForAvailabilityRecalculationIterator'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $productRepositoryMock->expects($this->once())->method('markAllProductsForAvailabilityRecalculation');
         $productRepositoryMock
             ->expects($this->once())

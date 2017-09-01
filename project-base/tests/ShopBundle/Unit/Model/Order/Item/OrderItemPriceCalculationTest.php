@@ -12,7 +12,10 @@ class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase
 {
     public function testCalculatePriceWithoutVat()
     {
-        $priceCalculationMock = $this->getMock(PriceCalculation::class, ['getVatAmountByPriceWithVat'], [], '', false);
+        $priceCalculationMock = $this->getMockBuilder(PriceCalculation::class)
+            ->setMethods(['getVatAmountByPriceWithVat'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(100);
 
         $orderItemData = new OrderItemData();
@@ -27,7 +30,10 @@ class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase
 
     public function testCalculateTotalPrice()
     {
-        $priceCalculationMock = $this->getMock(PriceCalculation::class, ['getVatAmountByPriceWithVat'], [], '', false);
+        $priceCalculationMock = $this->getMockBuilder(PriceCalculation::class)
+            ->setMethods(['getVatAmountByPriceWithVat'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(10);
 
         $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock);

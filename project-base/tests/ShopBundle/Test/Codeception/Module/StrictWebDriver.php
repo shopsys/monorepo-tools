@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Test\Codeception\Module;
 
 use Codeception\Module\WebDriver;
+use Codeception\TestInterface;
 use Codeception\Util\Locator;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverElement;
@@ -415,5 +416,31 @@ class StrictWebDriver extends WebDriver
     public function pressKeysByElement(WebDriverElement $element, $keys)
     {
         $element->sendKeys($keys);
+    }
+
+    /**
+     * Print out latest Selenium Logs in debug mode
+     *
+     * @param \Codeception\TestInterface $test
+     */
+    public function debugWebDriverLogs(TestInterface $test = null)
+    {
+        // Method overridden because of @param annotation triggering "Undefined class TestInterface"
+        // during PhpStorm inspect when FQCN is not provided
+        parent::debugWebDriverLogs($test);
+    }
+
+    /**
+     * Grabs current page source code.
+     *
+     * @throws \Codeception\Exception\ModuleException if no page was opened.
+     *
+     * @return string Current page source code.
+     */
+    public function grabPageSource()
+    {
+        // Method overridden because of @return annotation triggering "Undefined class ModuleException"
+        // during PhpStorm inspect when FQCN is not provided
+        return parent::grabPageSource();
     }
 }

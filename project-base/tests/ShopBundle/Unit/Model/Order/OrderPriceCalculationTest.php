@@ -21,10 +21,10 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
     public function testGetOrderTotalPrice()
     {
         $orderItems = [
-            $this->getMock(OrderProduct::class, [], [], '', false),
-            $this->getMock(OrderProduct::class, [], [], '', false),
-            $this->getMock(OrderPayment::class, [], [], '', false),
-            $this->getMock(OrderTransport::class, [], [], '', false),
+            $this->createMock(OrderProduct::class),
+            $this->createMock(OrderProduct::class),
+            $this->createMock(OrderPayment::class),
+            $this->createMock(OrderTransport::class),
         ];
 
         $pricesMap = [
@@ -34,7 +34,7 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
             [$orderItems[3], new Price(0, 0)],
         ];
 
-        $roundingMock = $this->getMock(Rounding::class, [], [], '', false);
+        $roundingMock = $this->createMock(Rounding::class);
 
         $orderItemPriceCalculationMock = $this->getMockBuilder(OrderItemPriceCalculation::class)
             ->setMethods(['__construct', 'calculateTotalPrice'])
@@ -47,7 +47,10 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
 
         $priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
 
-        $orderMock = $this->getMock(Order::class, ['__construct', 'getItems'], [], '', false);
+        $orderMock = $this->getMockBuilder(Order::class)
+            ->setMethods(['__construct', 'getItems'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $orderMock->expects($this->once())->method('getItems')->willReturn($orderItems);
 
         $orderTotalPrice = $priceCalculation->getOrderTotalPrice($orderMock);
@@ -66,8 +69,8 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
         $currency = new Currency(new CurrencyData('currencyName', Currency::CODE_EUR, 1.0));
         $orderTotalPrice = new Price(100, 120);
 
-        $roundingMock = $this->getMock(Rounding::class, [], [], '', false);
-        $orderItemPriceCalculationMock = $this->getMock(OrderItemPriceCalculation::class, [], [], '', false);
+        $roundingMock = $this->createMock(Rounding::class);
+        $orderItemPriceCalculationMock = $this->createMock(OrderItemPriceCalculation::class);
 
         $priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
         $roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice);
@@ -84,8 +87,8 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
         $currency = new Currency(new CurrencyData('currencyName', Currency::CODE_CZK, 1.0));
         $orderTotalPrice = new Price(100, 120);
 
-        $roundingMock = $this->getMock(Rounding::class, [], [], '', false);
-        $orderItemPriceCalculationMock = $this->getMock(OrderItemPriceCalculation::class, [], [], '', false);
+        $roundingMock = $this->createMock(Rounding::class);
+        $orderItemPriceCalculationMock = $this->createMock(OrderItemPriceCalculation::class);
 
         $priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
         $roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice);
@@ -102,12 +105,15 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
         $currency = new Currency(new CurrencyData('currencyName', Currency::CODE_CZK, 1.0));
         $orderTotalPrice = new Price(100, 120.3);
 
-        $roundingMock = $this->getMock(Rounding::class, ['roundPriceWithVat'], [], '', false);
+        $roundingMock = $this->getMockBuilder(Rounding::class)
+            ->setMethods(['roundPriceWithVat'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $roundingMock->expects($this->any())->method('roundPriceWithVat')->willReturnCallback(function ($value) {
             return round($value, 2);
         });
 
-        $orderItemPriceCalculationMock = $this->getMock(OrderItemPriceCalculation::class, [], [], '', false);
+        $orderItemPriceCalculationMock = $this->createMock(OrderItemPriceCalculation::class);
 
         $priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
         $roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice)->getPriceWithVat();
@@ -124,12 +130,15 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
         $currency = new Currency(new CurrencyData('currencyName', Currency::CODE_CZK, 1.0));
         $orderTotalPrice = new Price(100, 120.9);
 
-        $roundingMock = $this->getMock(Rounding::class, ['roundPriceWithVat'], [], '', false);
+        $roundingMock = $this->getMockBuilder(Rounding::class)
+            ->setMethods(['roundPriceWithVat'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $roundingMock->expects($this->any())->method('roundPriceWithVat')->willReturnCallback(function ($value) {
             return round($value, 2);
         });
 
-        $orderItemPriceCalculationMock = $this->getMock(OrderItemPriceCalculation::class, [], [], '', false);
+        $orderItemPriceCalculationMock = $this->createMock(OrderItemPriceCalculation::class);
 
         $priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
         $roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice)->getPriceWithVat();

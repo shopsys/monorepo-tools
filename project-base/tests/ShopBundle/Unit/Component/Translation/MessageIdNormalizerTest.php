@@ -81,7 +81,7 @@ class MessageIdNormalizerTest extends PHPUnit_Framework_TestCase
 
         $normalizedCatalogue = $messageIdNormalizer->getNormalizedCatalogue($catalogue);
 
-        $this->setExpectedException(\JMS\TranslationBundle\Exception\InvalidArgumentException::class);
+        $this->expectException(\JMS\TranslationBundle\Exception\InvalidArgumentException::class);
         $normalizedCatalogue->get($message->getId(), $message->getDomain());
     }
 }

@@ -114,7 +114,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
         $userData2->email = 'no-reply@netdevelo.cz';
         $userData2->password = 'pa55w0rd';
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException::class);
+        $this->expectException(\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException::class);
         $customerService->create(
             $userData2,
             $billingAddress2,
@@ -151,7 +151,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
         $userData2->email = 'NO-reply@netdevelo.cz';
         $userData2->password = 'pa55w0rd';
 
-        $this->setExpectedException(\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException::class);
+        $this->expectException(\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException::class);
         $customerService->create(
             $userData2,
             $billingAddress2,
@@ -330,7 +330,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
      */
     private function getCustomerService()
     {
-        $customerPasswordServiceMock = $this->getMock(CustomerPasswordService::class, [], [], '', false);
+        $customerPasswordServiceMock = $this->createMock(CustomerPasswordService::class);
 
         return new CustomerService($customerPasswordServiceMock);
     }
