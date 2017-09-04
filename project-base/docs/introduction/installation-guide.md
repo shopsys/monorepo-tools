@@ -29,6 +29,7 @@ Composer will prompt you to set main parameters (`app/config/parameters.yml`):
 | `database_name`                   | ...                                                                           |
 | `database_user`                   | ...                                                                           |
 | `database_password`               | ...                                                                           |
+| `database_server_version`         | version of your PostgreSQL server                                             |
 | `mailer_transport`                | access data of your mail server                                               |
 | `mailer_host`                     | ...                                                                           |
 | `mailer_user`                     | ...                                                                           |
