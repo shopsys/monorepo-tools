@@ -198,7 +198,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="8">
+                                <td colspan="9">
                                     <a id="js-order-item-add" href="#" class="btn btn--plus">
                                         <i class="btn__icon">+</i>
                                         {{ 'Add item'|trans }}
@@ -210,7 +210,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th colspan="5">{{ 'Total'|trans }}:</th>
+                                <th colspan="6">{{ 'Total'|trans }}:</th>
                                 <th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
                                 <th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
                                 <th></th>
