@@ -77,7 +77,7 @@
                 </th>
             {% endfor %}
             {% if grid.actionColumns is not empty or grid.inlineEdit %}
-                <th class="table-grid__cell table-grid__cell--actions {{ grid.actionColumnClassAttribute }}" colspan="{{ grid.actionColumns|length }}">{{ 'Modifications'|trans }}</ht>
+                <th class="table-grid__cell table-grid__cell--actions {{ grid.actionColumnClassAttribute }}" >{{ 'Modifications'|trans }}</th>
             {% endif  %}
         </tr>
     </thead>
