@@ -7,8 +7,8 @@ use Symfony\Bridge\Monolog\Logger;
 /**
  * IteratedCronModuleInterface is the interface that all long-running CRON modules must implmement.
  *
- * In order for your CRON module to be run you must register it in cron.yml config file.
- * Module is started every time the current system time matches the mask specified in cron.yml.
+ * In order for your CRON module to be run you must register it in services_cron.yml config file.
+ * Module is started every time the current system time matches the mask specified in services_cron.yml.
  * If the module takes too long to run it will be suspended by sleep() method and will be woken up
  * and re-run next time regardless of the current system time.
  * If you want to process a short task that does not take more than one minute use
