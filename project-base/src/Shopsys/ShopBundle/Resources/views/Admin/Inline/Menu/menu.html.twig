@@ -9,15 +9,15 @@
     </div>
 </div>
 <div class="js-main-navigation">
-    <ul class="navig navig--side">
-        <li id="js-setting-menu" class="navig__item" >
+    <ul class="js-toggle-menu navig navig--side">
+        <li class="js-toggle-menu-item navig__item" >
             <div
                 class="navig__item__link navig__item__link--bordered {% if menu.settingsItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}"
                 title="{{ menu.settingsItem.label|trans }}"
             >
                 <i class="svg svg-{{ menu.settingsItem.icon }}"></i>
             </div>
-            <ul id="js-setting-menu-links" class="display-none navig__item__sub">
+            <ul class="js-toggle-menu-submenu display-none navig__item__sub">
                 {% for item in menu.getSettingsItem.items %}
                     {% if (item.visible) %}
                         <li class="navig__item__sub__item">
@@ -28,14 +28,14 @@
             </ul>
         </li>
 
-        <li id="js-domains-menu" class="navig__item" >
+        <li class="js-toggle-menu-item navig__item" >
             <div
                 class="navig__item__link navig__item__link--bordered"
                 title="{{ menu.domainsItem.label|trans }}"
             >
                 <i class="svg svg-{{ menu.domainsItem.icon }}"></i>
             </div>
-            <ul id="js-domains-menu-links" class="display-none navig__item__sub">
+            <ul class="js-toggle-menu-submenu display-none navig__item__sub">
                 {% for domainConfig in domainConfigs %}
                     <li class="navig__item__sub__item">
                         <a href="{{ domainConfig.url }}" target="_blank" class="navig__item__sub__item__link" title="{{ domainConfig.name }}">{{ domainConfig.url }}</a>
@@ -44,14 +44,14 @@
             </ul>
         </li>
 
-        <li id="js-account-menu" class="navig__item" >
+        <li class="js-toggle-menu-item navig__item" >
             <div
                 class="navig__item__link navig__item__link--bordered {% if menu.accountItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}"
                 title="{{ menu.accountItem.label|trans }}"
             >
                 <i class="svg svg-{{ menu.accountItem.icon }}"></i>
             </div>
-            <ul id="js-account-menu-links" class="display-none navig__item__sub">
+            <ul class="js-toggle-menu-submenu display-none navig__item__sub">
                 {% for item in menu.accountItem.items %}
                     {% if (item.visible) %}
                         <li class="navig__item__sub__item">

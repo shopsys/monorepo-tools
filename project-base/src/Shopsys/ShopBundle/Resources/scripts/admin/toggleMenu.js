@@ -3,31 +3,35 @@
     Shopsys = window.Shopsys || {};
     Shopsys.toggleMenu = Shopsys.toggleMenu || {};
 
-    Shopsys.toggleMenu.Toggler = function ($toggleMenu, $links) {
+    Shopsys.toggleMenu.ToggleMenu = function ($toggleMenu) {
         this.init = function () {
-            $toggleMenu.click(function (event) {
-                var $activeToggleMenus = $('.navig__item__sub:visible');
-                $activeToggleMenus.hide();
-                $links.toggle();
-                event.stopPropagation();
-            });
-            $links.click(function (event) {
-                event.stopPropagation();
-            });
-        };
+            var $items = $toggleMenu.filterAllNodes('.js-toggle-menu-item');
 
-        $(document).on('click', function () {
-            $links.hide();
-        });
+            $items.click(function (event) {
+                hideAllSubmenus();
+
+                $(this).filterAllNodes('.js-toggle-menu-submenu').show();
+                $(this).addClass('open');
+
+                event.stopPropagation();
+            });
+
+            $(document).on('click', function () {
+                hideAllSubmenus()
+            });
+
+            var hideAllSubmenus = function () {
+                $items.filterAllNodes('.js-toggle-menu-submenu').hide();
+                $items.removeClass('open');
+            }
+        };
     };
 
-    $(document).ready(function () {
-        var settingMenuToggler = new Shopsys.toggleMenu.Toggler($('#js-setting-menu'), $('#js-setting-menu-links'));
-        settingMenuToggler.init();
-        var adminMenuToggler = new Shopsys.toggleMenu.Toggler($('#js-account-menu'), $('#js-account-menu-links'));
-        adminMenuToggler.init();
-        var domainMenuToggler = new Shopsys.toggleMenu.Toggler($('#js-domains-menu'), $('#js-domains-menu-links'));
-        domainMenuToggler.init();
+    Shopsys.register.registerCallback(function ($container) {
+        $container.filterAllNodes('.js-toggle-menu').each(function () {
+            var toggleMenu = new Shopsys.toggleMenu.ToggleMenu($(this));
+            toggleMenu.init();
+        });
     });
 
 })(jQuery);
