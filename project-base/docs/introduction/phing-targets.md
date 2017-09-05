@@ -46,6 +46,15 @@ When you make changes to ORM entities you should run this command that will gene
 #### db-migrations
 Executes database migrations and checks schema.
 
+#### db-create
+Creates database with required db extensions and collations (that are operating system specific, unfortunately).
+
+The target interactively asks for DB superuser credentials in order to perform all the actions so it is not needed to put superuser credentials into `app/config/parameters.yml`.
+
+When a locale is not supported by the operating system the command explains the situation and links to the documentation.
+
+The command is designed to be run only during the first creation of the database but as it uses `IF NOT EXISTS` commands, it can be manually run on existing database in order to create new DB extensions or collations, too.
+
 #### db-demo
 Drops all data in the database and creates a new one with demo data.
 
