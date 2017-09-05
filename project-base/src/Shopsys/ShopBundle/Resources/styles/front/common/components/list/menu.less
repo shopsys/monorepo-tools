@@ -38,6 +38,7 @@
 @media @query-tablet {
     @list-menu-mobile-bg: @color-primary;
     @list-menu-mobile-border-color: lighten(@list-menu-mobile-bg, 5%);
+    @list-menu-mobile-position: @web-header-mobile-dropdown-position;
 
     .list-menu {
         .reset-ul();
@@ -47,7 +48,7 @@
         &--root {
             display: none;
             position: absolute;
-            top: 95px;
+            top: @list-menu-mobile-position;
             left: 0;
             right: 0;
             z-index: 5000;

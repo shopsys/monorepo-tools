@@ -1,4 +1,7 @@
 @header-cart-width: 38px;
+@header-mobile-button-size: 28px;
+@header-mobile-button-info-size: 16px;
+@header-mobile-button-dropdown-position: @web-header-mobile-dropdown-position;
 
 .header {
     padding-bottom: 10px;
@@ -10,73 +13,163 @@
     @media @query-lg {
         padding-bottom: 20px;
     }
+}
 
-    &__logo {
-        width: 100%;
-        padding: 10px;
+// Left part of header with logo
+.header__logo {
+    width: 100%;
+    padding: 10px;
 
-        @media @query-lg {
-            flex: 1;
-            order: 1;
-            width: auto;
-            padding-right: 20px;
-        }
+    @media @query-lg {
+        flex: 1;
+        order: 1;
+        width: auto;
+        padding-right: 20px;
     }
+}
 
-    &__middle {
-        width: 100%;
-        margin: 10px 0;
+// Middle part of header with search input and info
+.header__middle {
+    width: 100%;
+    margin: 10px 0;
+    order: 2;
+
+    @media @query-lg {
         order: 2;
-
-        @media @query-lg {
-            order: 2;
-            width: 280px;
-            margin: 0;
-        }
-
-        @media @query-vl {
-            width: 440px;
-        }
+        width: 280px;
+        margin: 0;
     }
 
-    &__cart {
-        width: @header-cart-width;
-
-        @media @query-lg {
-            padding-left: 20px;
-            flex: 1;
-            order: 3;
-            text-align: right;
-        }
+    @media @query-vl {
+        width: 440px;
     }
+}
 
-    &__top {
-        display: none;
+// Right part of header with cart info
+.header__cart {
+    width: @header-cart-width;
 
-        @media @query-lg {
-            order: -1;
-            display: flex;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 10px;
-
-            &__left {
-                flex: 1;
-            }
-
-            &__right {
-                flex: 1;
-            }
-        }
-    }
-
-    &__mobile {
-        width: 80%;
-        width: calc(~"100% - @{header-cart-width}");
+    @media @query-lg {
+        padding-left: 20px;
+        flex: 1;
+        order: 3;
         text-align: right;
+    }
+}
 
-        @media @query-lg {
-            display: none;
+// Top line of header
+.header__top {
+    display: none;
+
+    @media @query-lg {
+        order: -1;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 10px;
+
+        &__left {
+            flex: 1;
+        }
+
+        &__right {
+            flex: 1;
+        }
+    }
+}
+
+// Mobile part of header visible on small resolution
+.header__mobile {
+    width: 80%;
+    width: calc(~"100% - @{header-cart-width}");
+    text-align: right;
+
+    @media @query-lg {
+        display: none;
+    }
+}
+
+// Mobile buttons from header with dropdowns
+.header__mobile-button {
+    display: inline-block;
+    min-width: @header-mobile-button-size;
+    height: @header-mobile-button-size;
+    line-height: @header-mobile-button-size;
+    margin: 0 5px;
+    text-align: center;
+
+    outline: 0;
+    cursor: pointer;
+
+    &--menu {
+        float: left;
+        margin-left: 0;
+
+        .svg {
+            margin-right: 5px;
+            vertical-align: baseline;
+
+            font-size: 11px;
+        }
+    }
+
+    &__in {
+        padding: 0 10px;
+        display: block;
+        position: relative;
+        transition: @transition color;
+
+        color: @color-base;
+        text-decoration: none;
+        font-size: 16px;
+
+        .header__mobile-button--menu & {
+            background: @color-light;
+            font-size: 14px;
+        }
+
+        &.active {
+            color: @color-primary;
+            text-decoration: none;
+
+            .header__mobile-button--menu & {
+                color: @color-f;
+                background: @color-primary;
+            }
+        }
+
+        &__info {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            width: @header-mobile-button-info-size;
+            height: @header-mobile-button-info-size;
+            line-height: @header-mobile-button-info-size;
+
+            border-radius: 50%;
+            color: @color-f;
+            background: @color-red;
+            font-size: 12px;
+        }
+    }
+
+    &__menu {
+        display: none;
+        position: absolute;
+        top: @header-mobile-button-dropdown-position;
+        left: -@web-padding;
+        right: -@web-padding;
+
+        background: @color-f;
+        border-top: 1px solid @color-border;
+        box-shadow: 0 10px 15px rgba(0,0,0, 0.2);
+
+        a {
+            display: block;
+            padding: 3px 10px;
+
+            border-bottom: 1px solid @color-border;
+            text-decoration: none;
         }
     }
 }

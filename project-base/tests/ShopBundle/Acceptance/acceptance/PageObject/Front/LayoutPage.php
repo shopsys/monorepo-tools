@@ -6,13 +6,19 @@ use Tests\ShopBundle\Acceptance\acceptance\PageObject\AbstractPage;
 
 class LayoutPage extends AbstractPage
 {
-    /**
-     * @param string $email
-     * @param string $password
-     */
     public function openLoginPopup()
     {
-        $this->tester->clickByText('Log in');
+        $this->tester->clickByCss('.js-login-link-desktop');
         $this->tester->wait(1); // wait for Shopsys.window to show
+    }
+
+    public function clickOnRegistration()
+    {
+        $this->tester->clickByCss('.js-registration-link-desktop');
+    }
+
+    public function logout()
+    {
+        $this->tester->clickByCss('.js-logout-link-desktop');
     }
 }

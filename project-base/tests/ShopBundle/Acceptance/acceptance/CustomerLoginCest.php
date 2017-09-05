@@ -18,7 +18,7 @@ class CustomerLoginCest
         $layoutPage->openLoginPopup();
         $loginPage->login('no-reply@netdevelo.cz', 'user123');
         $me->see('Jaromír Jágr');
-        $me->clickByText('Log out');
+        $layoutPage->logout();
         $me->see('Log in');
         $me->seeCurrentPageEquals('/');
     }
@@ -33,18 +33,21 @@ class CustomerLoginCest
         $layoutPage->openLoginPopup();
         $loginPage->login('no-reply@netdevelo.cz', 'user123');
         $me->see('Jaromír Jágr');
-        $me->clickByText('Log out');
+        $layoutPage->logout();
         $me->see('Log in');
         $me->seeCurrentPageEquals('/');
     }
 
-    public function testLoginAsCustomerFromLoginPage(LoginPage $loginPage, AcceptanceTester $me)
-    {
+    public function testLoginAsCustomerFromLoginPage(
+        LoginPage $loginPage,
+        AcceptanceTester $me,
+        LayoutPage $layoutPage
+    ) {
         $me->wantTo('login as a customer from login page');
         $me->amOnPage('/login/');
         $loginPage->login('no-reply@netdevelo.cz', 'user123');
         $me->see('Jaromír Jágr');
-        $me->clickByText('Log out');
+        $layoutPage->logout();
         $me->see('Log in');
         $me->seeCurrentPageEquals('/');
     }

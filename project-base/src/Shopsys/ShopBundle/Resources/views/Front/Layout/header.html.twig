@@ -38,34 +38,47 @@
         </div>
 
         <div class="header__mobile">
-            <span class="btn-tap btn-tap--menu js-responsive-toggle" data-element="js-categories" data-hide-on-click-out="true">
-                <span class="btn-tap__in">
+            <div class="header__mobile-button header__mobile-button--menu">
+                <span class="header__mobile-button__in js-responsive-toggle" data-element="js-categories" data-hide-on-click-out="true">
                     <i class="svg svg-burger-menu"></i>
                     {{ 'Menu'|trans }}
                 </span>
-            </span>
+            </div>
 
             {% if shopInfoPhoneNumber is not null %}
-                <span class="btn-tap">
-                    <a href="tel:{{ shopInfoPhoneNumber }}" class="btn-tap__in">
+                <div class="header__mobile-button">
+                    <a href="tel:{{ shopInfoPhoneNumber }}" class="header__mobile-button__in">
                         <i class="svg svg-phone"></i>
                     </a>
-                </span>
+                </div>
             {% endif %}
 
-            <span class="btn-tap">
-                {% if is_granted('ROLE_CUSTOMER') %}
-                    <a href="{{ url('front_customer_edit') }}" class="btn-tap__in">
-                        <i class="svg svg-user"></i>
-                    </a>
-                {% else %}
-                    <a href="{{ url('front_login') }}"
-                        onclick="Shopsys.window({ content: '{{ render(controller('ShopsysShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
-                        class="btn-tap__in">
-                        <i class="svg svg-user"></i>
-                    </a>
-                {% endif %}
-            </span>
+            <div class="header__mobile-button">
+                <span class="header__mobile-button__in js-responsive-toggle" data-element="js-user-menu" data-hide-on-click-out="true">
+                    <i class="svg svg-user"></i>
+                </span>
+                <div class="header__mobile-button__menu" id="js-user-menu">
+                    {% if is_granted('ROLE_CUSTOMER') %}
+                        <a href="{{ url('front_customer_edit') }}">
+                            {{ 'Personal data'|trans }}
+                        </a>
+                        <a href="{{ url('front_customer_orders') }}">
+                            {{ 'Orders'|trans }}
+                        </a>
+                        <a href="{{ url('front_logout', { _csrf_token: csrf_token('frontend_logout')}) }}">
+                            {{ 'Log out'|trans }}
+                        </a>
+                    {% else %}
+                        <a href="{{ url('front_login') }}"
+                            onclick="Shopsys.window({ content: '{{ render(controller('ShopsysShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;">
+                            {{ 'Log in'|trans }}
+                        </a>
+                        <a href="{{ url('front_registration_register') }}">
+                            {{ 'Registration'|trans }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
 
         <div class="header__cart">
@@ -97,7 +110,7 @@
                             </ul>
                         </li>
                         <li class="menu-iconic__item">
-                            <a href="{{ url('front_logout', { _csrf_token: csrf_token('frontend_logout')}) }}" class="menu-iconic__item__link">
+                            <a href="{{ url('front_logout', { _csrf_token: csrf_token('frontend_logout')}) }}" class="js-logout-link-desktop menu-iconic__item__link">
                                 <span>
                                     {{ 'Log out'|trans }}
                                 </span>
@@ -108,7 +121,7 @@
                             <a
                                 href="{{ url('front_login') }}"
                                 onclick="Shopsys.window({ content: '{{ render(controller('ShopsysShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
-                                class="menu-iconic__item__link"
+                                class="js-login-link-desktop menu-iconic__item__link"
                             >
                                 <i class="svg svg-user"></i>
                                 <span>
@@ -117,7 +130,7 @@
                             </a>
                         </li>
                         <li class="menu-iconic__item">
-                            <a href="{{ url('front_registration_register') }}" class="menu-iconic__item__link">
+                            <a href="{{ url('front_registration_register') }}" class="js-registration-link-desktop menu-iconic__item__link">
                                 <span>
                                     {{ 'Registration'|trans }}
                                 </span>

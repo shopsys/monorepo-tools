@@ -16,11 +16,11 @@
         </a>
     </div>
 
-    <div class="cart-mobile btn-tap">
-        <a href="{{ url('front_cart') }}" class="btn-tap__in">
+    <div class="cart-mobile header__mobile-button">
+        <a href="{{ url('front_cart') }}" class="header__mobile-button__in">
             <i class="svg svg-cart"></i>
             {% if not cart.isEmpty %}
-                <span class="btn-tap__in__info">
+                <span class="header__mobile-button__in__info">
                     {{ cart.itemsCount }}
                 </span>
             {% endif %}

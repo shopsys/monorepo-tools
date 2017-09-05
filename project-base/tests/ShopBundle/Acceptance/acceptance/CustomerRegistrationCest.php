@@ -2,16 +2,20 @@
 
 namespace Tests\ShopBundle\Acceptance\acceptance;
 
+use Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\LayoutPage;
 use Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\RegistrationPage;
 use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class CustomerRegistrationCest
 {
-    public function testSuccessfulRegistration(RegistrationPage $registrationPage, AcceptanceTester $me)
-    {
+    public function testSuccessfulRegistration(
+        RegistrationPage $registrationPage,
+        AcceptanceTester $me,
+        LayoutPage $layoutPage
+    ) {
         $me->wantTo('successfully register new customer');
         $me->amOnPage('/');
-        $me->clickByText('Registration');
+        $layoutPage->clickOnRegistration();
         $registrationPage->register('Roman', 'Štěpánek', 'no-reply.16@netdevelo.cz', 'user123', 'user123');
         $me->see('You have been successfully registered');
         $me->see('Roman Štěpánek');
