@@ -61,6 +61,8 @@ Drops all data in the database and creates a new one with demo data.
 #### test-db-demo
 Drops all data in the test database and creates a new one with demo data.
 
+*Note: All database related targets `db-*` have their `test-db-*` variant for the test database.*
+
 #### img-demo
 Installs demo images.
 
