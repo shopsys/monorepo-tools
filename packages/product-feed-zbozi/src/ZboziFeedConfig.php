@@ -5,26 +5,18 @@ namespace Shopsys\ProductFeed\ZboziBundle;
 use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
-use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ProductFeed\StandardFeedItemInterface;
 
 class ZboziFeedConfig implements FeedConfigInterface
 {
-    /**
-     * @var \Shopsys\ProductFeed\FeedItemRepositoryInterface
-     */
-    private $feedItemRepository;
-
     /**
      * @var \Shopsys\Plugin\PluginDataStorageProviderInterface
      */
     private $pluginDataStorageProvider;
 
     public function __construct(
-        FeedItemRepositoryInterface $feedItemRepository,
         PluginDataStorageProviderInterface $pluginDataStorageProvider
     ) {
-        $this->feedItemRepository = $feedItemRepository;
         $this->pluginDataStorageProvider = $pluginDataStorageProvider;
     }
 
@@ -50,14 +42,6 @@ class ZboziFeedConfig implements FeedConfigInterface
     public function getTemplateFilepath()
     {
         return '@ShopsysProductFeedZbozi/feed.xml.twig';
-    }
-
-    /**
-     * @return \Shopsys\ProductFeed\FeedItemRepositoryInterface
-     */
-    public function getFeedItemRepository()
-    {
-        return $this->feedItemRepository;
     }
 
     /**

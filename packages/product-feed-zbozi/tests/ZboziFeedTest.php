@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use Shopsys\Plugin\DataStorageInterface;
 use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
-use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ProductFeed\ZboziBundle\ShopsysProductFeedZboziBundle;
 use Shopsys\ProductFeed\ZboziBundle\ZboziFeedConfig;
 use Twig_Environment;
@@ -38,15 +37,13 @@ class ZboziFeedConfigTest extends TestCase
 
     public function setUp() {
         $this->productDataStorageMock = $this->createMock(DataStorageInterface::class);
-
-        $feedItemRepositoryMock = $this->createMock(FeedItemRepositoryInterface::class);
         $pluginDataStorageProviderMock = $this->createMock(PluginDataStorageProviderInterface::class);
 
         $pluginDataStorageProviderMock->method('getDataStorage')
             ->with(ShopsysProductFeedZboziBundle::class, 'product')
             ->willReturn($this->productDataStorageMock);
 
-        $this->zboziFeedConfig = new ZboziFeedConfig($feedItemRepositoryMock, $pluginDataStorageProviderMock);
+        $this->zboziFeedConfig = new ZboziFeedConfig($pluginDataStorageProviderMock);
 
         $twigLoader = new Twig_Loader_Filesystem([__DIR__ . '/../src/Resources/views']);
         $this->twig = new Twig_Environment($twigLoader);
