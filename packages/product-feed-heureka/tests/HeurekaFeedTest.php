@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use Shopsys\Plugin\DataStorageInterface;
 use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
-use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ProductFeed\HeurekaBundle\ShopsysProductFeedHeurekaBundle;
 use Shopsys\ProductFeed\HeurekaBundle\HeurekaFeedConfig;
 use Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface;
@@ -41,7 +40,6 @@ class HeurekaFeedTest extends TestCase
     public function setUp()
     {
         $this->productDataStorageMock = $this->createMock(DataStorageInterface::class);
-        $feedItemRepositoryMock = $this->createMock(FeedItemRepositoryInterface::class);
         $pluginDataStorageProviderMock = $this->createMock(PluginDataStorageProviderInterface::class);
         $heurekaCategoryNameProviderMock = $this->createMock(HeurekaCategoryNameProviderInterface::class);
 
@@ -51,7 +49,7 @@ class HeurekaFeedTest extends TestCase
         $heurekaCategoryNameProviderMock->method('getHeurekaCategoryNameForItem')
             ->willReturn('categoryName');
 
-        $this->heurekaFeedConfig = new HeurekaFeedConfig($feedItemRepositoryMock, $heurekaCategoryNameProviderMock, $pluginDataStorageProviderMock);
+        $this->heurekaFeedConfig = new HeurekaFeedConfig($heurekaCategoryNameProviderMock, $pluginDataStorageProviderMock);
 
         $twigLoader = new Twig_Loader_Filesystem([__DIR__ . '/../src/Resources/views']);
         $this->twig = new Twig_Environment($twigLoader);

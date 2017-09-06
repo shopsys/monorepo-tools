@@ -5,16 +5,11 @@ namespace Shopsys\ProductFeed\HeurekaBundle;
 use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
-use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface;
 use Shopsys\ProductFeed\StandardFeedItemInterface;
 
 class HeurekaFeedConfig implements FeedConfigInterface
 {
-    /**
-     * @var \Shopsys\ProductFeed\FeedItemRepositoryInterface
-     */
-    private $feedItemRepository;
 
     /**
      * @var \Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface
@@ -27,11 +22,9 @@ class HeurekaFeedConfig implements FeedConfigInterface
     private $pluginDataStorageProvider;
 
     public function __construct(
-        FeedItemRepositoryInterface $feedItemRepository,
         HeurekaCategoryNameProviderInterface $heurekaCategoryNameProvider,
         PluginDataStorageProviderInterface $pluginDataStorageProvider
     ) {
-        $this->feedItemRepository = $feedItemRepository;
         $this->heurekaCategoryNameProvider = $heurekaCategoryNameProvider;
         $this->pluginDataStorageProvider = $pluginDataStorageProvider;
     }
@@ -58,14 +51,6 @@ class HeurekaFeedConfig implements FeedConfigInterface
     public function getTemplateFilepath()
     {
         return '@ShopsysProductFeedHeureka/feed.xml.twig';
-    }
-
-    /**
-     * @return \Shopsys\ProductFeed\FeedItemRepositoryInterface
-     */
-    public function getFeedItemRepository()
-    {
-        return $this->feedItemRepository;
     }
 
     /**
