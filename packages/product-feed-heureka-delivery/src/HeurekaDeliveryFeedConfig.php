@@ -2,10 +2,8 @@
 
 namespace Shopsys\ProductFeed\HeurekaDeliveryBundle;
 
-use Shopsys\ProductFeed\DeliveryFeedItemInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
-use Shopsys\ProductFeed\FeedItemInterface;
 
 class HeurekaDeliveryFeedConfig implements FeedConfigInterface
 {
@@ -34,14 +32,12 @@ class HeurekaDeliveryFeedConfig implements FeedConfigInterface
     }
 
     /**
-     * @param \Shopsys\ProductFeed\FeedItemInterface[] $items
+     * @param \Shopsys\ProductFeed\DeliveryFeedItemInterface[] $items
      * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
-     * @return \Shopsys\ProductFeed\FeedItemInterface[]
+     * @return \Shopsys\ProductFeed\DeliveryFeedItemInterface[]
      */
     public function processItems(array $items, DomainConfigInterface $domainConfig)
     {
-        return array_filter($items, function (FeedItemInterface $item) {
-            return $item instanceof DeliveryFeedItemInterface;
-        });
+        return $items;
     }
 }
