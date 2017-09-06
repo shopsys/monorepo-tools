@@ -5,7 +5,6 @@ namespace Shopsys\ProductFeed\ZboziBundle;
 use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
-use Shopsys\ProductFeed\StandardFeedItemInterface;
 
 class ZboziFeedConfig implements FeedConfigInterface
 {
@@ -45,9 +44,9 @@ class ZboziFeedConfig implements FeedConfigInterface
     }
 
     /**
-     * @param \Shopsys\ProductFeed\FeedItemInterface[] $items
+     * @param \Shopsys\ProductFeed\StandardFeedItemInterface[] $items
      * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
-     * @return \Shopsys\ProductFeed\FeedItemInterface[]
+     * @return \Shopsys\ProductFeed\StandardFeedItemInterface[]
      */
     public function processItems(array $items, DomainConfigInterface $domainConfig)
     {
@@ -63,10 +62,8 @@ class ZboziFeedConfig implements FeedConfigInterface
                 continue;
             }
 
-            if ($item instanceof StandardFeedItemInterface) {
-                $item->setCustomValue('cpc', $productData['cpc'][$domainId] ?? null);
-                $item->setCustomValue('cpc_search', $productData['cpc_search'][$domainId] ?? null);
-            }
+            $item->setCustomValue('cpc', $productData['cpc'][$domainId] ?? null);
+            $item->setCustomValue('cpc_search', $productData['cpc_search'][$domainId] ?? null);
         }
 
         return $items;
