@@ -6,23 +6,9 @@ use Shopsys\ProductFeed\DeliveryFeedItemInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ProductFeed\FeedItemInterface;
-use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 
 class HeurekaDeliveryFeedConfig implements FeedConfigInterface
 {
-    /**
-     * @var \Shopsys\ProductFeed\DeliveryFeedItemRepositoryInterface
-     */
-    private $feedItemRepository;
-
-    /**
-     * @param \Shopsys\ProductFeed\FeedItemRepositoryInterface $feedItemRepository
-     */
-    public function __construct(FeedItemRepositoryInterface $feedItemRepository)
-    {
-        $this->feedItemRepository = $feedItemRepository;
-    }
-
     /**
      * @return string
      */
@@ -45,14 +31,6 @@ class HeurekaDeliveryFeedConfig implements FeedConfigInterface
     public function getTemplateFilepath()
     {
         return '@ShopsysProductFeedHeurekaDelivery/feed.xml.twig';
-    }
-
-    /**
-     * @return \Shopsys\ProductFeed\FeedItemRepositoryInterface
-     */
-    public function getFeedItemRepository()
-    {
-        return $this->feedItemRepository;
     }
 
     /**

@@ -5,7 +5,6 @@ namespace Tests;
 use DOMDocument;
 use PHPUnit\Framework\TestCase;
 use Shopsys\ProductFeed\DomainConfigInterface;
-use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ProductFeed\HeurekaDeliveryBundle\HeurekaDeliveryFeedConfig;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
@@ -29,8 +28,7 @@ class HeurekaDeliveryFeedTest extends TestCase
 
     public function setUp()
     {
-        $feedItemRepositoryMock = $this->createMock(FeedItemRepositoryInterface::class);
-        $this->heurekaDeliveryFeedConfig = new HeurekaDeliveryFeedConfig($feedItemRepositoryMock);
+        $this->heurekaDeliveryFeedConfig = new HeurekaDeliveryFeedConfig();
 
         $twigLoader = new Twig_Loader_Filesystem([__DIR__ . '/../src/Resources/views']);
         $this->twig = new Twig_Environment($twigLoader);
