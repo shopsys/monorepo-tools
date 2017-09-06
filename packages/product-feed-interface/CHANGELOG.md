@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - This Changelog (@vitek-rostislav)
 - UPGRADE.md (@vitek-rostislav)
+### Removed
+- `FeedItemRepositoryInterface` (@vitek-rostislav)
+- `FeedConfigInterface::getFeedItemRepository()` (@vitek-rostislav)
 
 ## [0.2.1] - 2017-08-17
 ### Added

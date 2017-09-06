@@ -34,17 +34,6 @@ interface FeedConfigInterface
     public function getTemplateFilepath();
 
     /**
-     * Returns feed item repository that is to be used.
-     *
-     * If you do not need to load feed items with a specific repository, you can just return an implementation
-     * injected in your constructor. Just type hint a constructor argument with the interface and an implementation
-     * will by provided by autowiring or manual choice of a service by the user.
-     *
-     * @return \Shopsys\ProductFeed\FeedItemRepositoryInterface
-     */
-    public function getFeedItemRepository();
-
-    /**
      * Filters or modifies a batch of feed items before passing it into the template.
      *
      * @param \Shopsys\ProductFeed\FeedItemInterface[] $items
