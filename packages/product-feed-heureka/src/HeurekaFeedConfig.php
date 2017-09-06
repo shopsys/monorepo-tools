@@ -6,7 +6,6 @@ use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface;
-use Shopsys\ProductFeed\StandardFeedItemInterface;
 
 class HeurekaFeedConfig implements FeedConfigInterface
 {
@@ -54,22 +53,20 @@ class HeurekaFeedConfig implements FeedConfigInterface
     }
 
     /**
-     * @param \Shopsys\ProductFeed\FeedItemInterface[] $items
+     * @param \Shopsys\ProductFeed\StandardFeedItemInterface[] $items
      * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
-     * @return \Shopsys\ProductFeed\FeedItemInterface[]
+     * @return \Shopsys\ProductFeed\StandardFeedItemInterface[]
      */
     public function processItems(array $items, DomainConfigInterface $domainConfig)
     {
         $productsDataById = $this->getProductsDataById($items);
 
         foreach ($items as $key => $item) {
-            if ($item instanceof StandardFeedItemInterface) {
-                $cpc = $productsDataById[$item->getId()]['cpc'][$domainConfig->getId()] ?? null;
-                $item->setCustomValue('cpc', $cpc);
+            $cpc = $productsDataById[$item->getId()]['cpc'][$domainConfig->getId()] ?? null;
+            $item->setCustomValue('cpc', $cpc);
 
-                $categoryName = $this->heurekaCategoryNameProvider->getHeurekaCategoryNameForItem($item, $domainConfig);
-                $item->setCustomValue('category_name', $categoryName);
-            }
+            $categoryName = $this->heurekaCategoryNameProvider->getHeurekaCategoryNameForItem($item, $domainConfig);
+            $item->setCustomValue('category_name', $categoryName);
         }
 
         return $items;
