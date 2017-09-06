@@ -1,5 +1,6 @@
 ## About
 This bundle provides commands which can be useful for database migrations:
+* `shopsys:migrations:check-mapping` checks if ORM mapping is valid.
 * `shopsys:migrations:check-schema` checks if database schema is satisfying ORM.
 * `shopsys:migrations:count` returns count of migrations to execute.
 * `shopsys:migrations:migrate` executes all database migrations in one transaction.
