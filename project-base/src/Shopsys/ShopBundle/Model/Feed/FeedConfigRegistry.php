@@ -3,55 +3,46 @@
 namespace Shopsys\ShopBundle\Model\Feed;
 
 use Shopsys\ProductFeed\FeedConfigInterface;
+use Shopsys\ShopBundle\Model\Feed\Exception\UnknownFeedConfigTypeException;
 
 class FeedConfigRegistry
 {
-    /**
-     * @var \Shopsys\ProductFeed\FeedConfigInterface[]
-     */
-    private $feedConfigs;
+    const TYPE_DEFAULT = 'default';
+    const TYPE_DELIVERY = 'delivery';
+
+    const KNOWN_TYPES = [
+        self::TYPE_DEFAULT,
+        self::TYPE_DELIVERY,
+    ];
 
     /**
-     * @var \Shopsys\ProductFeed\FeedConfigInterface[]
+     * @var \Shopsys\ProductFeed\FeedConfigInterface[][]
      */
-    private $deliveryFeedConfigs;
+    private $feedConfigsByType;
 
     public function __construct()
     {
-        $this->feedConfigs = [];
-        $this->deliveryFeedConfigs = [];
+        $this->feedConfigsByType = [];
     }
 
     /**
      * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
+     * @param string $type
      */
-    public function registerFeedConfig(FeedConfigInterface $feedConfig)
+    public function registerFeedConfig(FeedConfigInterface $feedConfig, $type = self::TYPE_DEFAULT)
     {
-        $this->feedConfigs[] = $feedConfig;
+        self::assertTypeIsKnown($type);
+
+        $this->feedConfigsByType[$type][] = $feedConfig;
     }
 
     /**
-     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
-     */
-    public function registerDeliveryFeedConfig(FeedConfigInterface $feedConfig)
-    {
-        $this->deliveryFeedConfigs[] = $feedConfig;
-    }
-
-    /**
+     * @param string $type
      * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
-    public function getFeedConfigs()
+    public function getFeedConfigsByType($type)
     {
-        return $this->feedConfigs;
-    }
-
-    /**
-     * @return \Shopsys\ProductFeed\FeedConfigInterface[]
-     */
-    public function getDeliveryFeedConfigs()
-    {
-        return $this->deliveryFeedConfigs;
+        return $this->feedConfigsByType[$type] ?: [];
     }
 
     /**
@@ -75,6 +66,21 @@ class FeedConfigRegistry
      */
     public function getAllFeedConfigs()
     {
-        return array_merge($this->getFeedConfigs(), $this->getDeliveryFeedConfigs());
+        $allFeedConfigs = [];
+        foreach ($this->feedConfigsByType as $feedConfigs) {
+            $allFeedConfigs = array_merge($allFeedConfigs, $feedConfigs);
+        }
+
+        return $allFeedConfigs;
+    }
+
+    /**
+     * @param string $type
+     */
+    public static function assertTypeIsKnown($type)
+    {
+        if (!in_array($type, self::KNOWN_TYPES, true)) {
+            throw new \Shopsys\ShopBundle\Model\Feed\Exception\UnknownFeedConfigTypeException($type, self::KNOWN_TYPES);
+        }
     }
 }

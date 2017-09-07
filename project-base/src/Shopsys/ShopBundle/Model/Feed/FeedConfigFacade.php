@@ -70,7 +70,7 @@ class FeedConfigFacade
      */
     public function getFeedConfigs()
     {
-        return $this->feedConfigRegistry->getFeedConfigs();
+        return $this->feedConfigRegistry->getFeedConfigsByType(FeedConfigRegistry::TYPE_DEFAULT);
     }
 
     /**
@@ -87,7 +87,7 @@ class FeedConfigFacade
      */
     public function getDeliveryFeedConfigs()
     {
-        return $this->feedConfigRegistry->getDeliveryFeedConfigs();
+        return $this->feedConfigRegistry->getFeedConfigsByType(FeedConfigRegistry::TYPE_DELIVERY);
     }
 
     /**
