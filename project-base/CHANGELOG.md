@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - new command `shopsys:plugin-data-fixtures:load` for loading demo data from plugins (@MattCzerner)
-  - called during build of demo database
+    - called during build of demo database
 - new documentation abuout Shopsys Framework model architecture (@TomasLudvik)
 
 ### Changed
