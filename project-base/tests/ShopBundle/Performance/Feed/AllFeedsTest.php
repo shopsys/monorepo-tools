@@ -98,7 +98,7 @@ class AllFeedsTest extends KernelTestCase
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
         $feedGenerationData = $this->getFeedGenerationData(
-            $feedConfigFacade->getFeedConfigs(),
+            $feedConfigFacade->getStandardFeedConfigs(),
             $domain->getAll(),
             self::MAX_DURATION_FEED_SECONDS
         );

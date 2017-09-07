@@ -27,6 +27,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [`FeedConfigRegistry`](src/Shopsys/ShopBundle/Model/Feed/FeedConfigRegistry.php) now contains all FeedConfigs in one array (indexed by type) (@vitek-rostislav)
     - definition and assertion of known feed configs types moved from [`RegisterProductFeedConfigsCompilerPass`](src/Shopsys/ShopBundle/DependencyInjection/Compiler/RegisterProductFeedConfigsCompilerPass.php) to [`FeedConfigRegistry`](src/Shopsys/ShopBundle/Model/Feed/FeedConfigRegistry.php)
     - changed message and arguments of [`UnknownFeedConfigTypeException`](src/Shopsys/ShopBundle/Model/Feed/Exception/UnknownFeedConfigTypeException.php)
+- renamed methods working with standard feeds only to be more expressive (@PetrHeinz)
+    - renamed `FeedConfigFacade::getFeedConfigs()` to `getStandardFeedConfigs()`
+    - renamed `FeedFacade::generateFeedsIteratively()` to `generateStandardFeedsIteratively()`
+    - renamed `FeedGenerationConfigFactory::createAll()` to `createAllForStandardFeeds()`
 
 ## 2.0.0-beta.15.0 - 2017-08-31
 - previous beta versions released only internally (mentioned changes since 1.0.0)

@@ -68,7 +68,7 @@ class FeedConfigFacade
     /**
      * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
-    public function getFeedConfigs()
+    public function getStandardFeedConfigs()
     {
         return $this->feedConfigRegistry->getFeedConfigsByType(FeedConfigRegistry::TYPE_STANDARD);
     }
@@ -136,7 +136,7 @@ class FeedConfigFacade
      */
     public function getFeedItemRepositoryByFeedConfig(FeedConfigInterface $feedConfig)
     {
-        if (in_array($feedConfig, $this->getFeedConfigs(), true)) {
+        if (in_array($feedConfig, $this->getStandardFeedConfigs(), true)) {
             return $this->standardFeedItemRepository;
         } elseif (in_array($feedConfig, $this->getDeliveryFeedConfigs(), true)) {
             return $this->deliveryFeedItemRepository;

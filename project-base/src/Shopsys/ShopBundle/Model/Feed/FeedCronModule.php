@@ -45,7 +45,9 @@ class FeedCronModule implements IteratedCronModuleInterface
         if ($this->feedGenerationConfigToContinue === null) {
             $this->feedGenerationConfigToContinue = $this->feedFacade->getFirstFeedGenerationConfig();
         }
-        $this->feedGenerationConfigToContinue = $this->feedFacade->generateFeedsIteratively($this->feedGenerationConfigToContinue);
+        $this->feedGenerationConfigToContinue = $this->feedFacade->generateStandardFeedsIteratively(
+            $this->feedGenerationConfigToContinue
+        );
 
         return $this->feedGenerationConfigToContinue !== null;
     }

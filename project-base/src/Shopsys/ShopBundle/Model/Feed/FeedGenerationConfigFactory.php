@@ -27,10 +27,10 @@ class FeedGenerationConfigFactory
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig[]
      */
-    public function createAll()
+    public function createAllForStandardFeeds()
     {
         $feedGenerationConfigs = [];
-        foreach ($this->feedConfigFacade->getFeedConfigs() as $feedConfig) {
+        foreach ($this->feedConfigFacade->getStandardFeedConfigs() as $feedConfig) {
             foreach ($this->domain->getAll() as $domainConfig) {
                 $feedGenerationConfigs[] = new FeedGenerationConfig(
                     $feedConfig->getFeedName(),
