@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - dependency [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface/) upgraded from 0.2.1 to 0.3.0 (@vitek-rostislav)
 - it is no longer needed to redeclare feed plugin's implementations of `FeedConfigInterface` in `services.yml` (@vitek-rostislav)
     - decision about providing proper instance of `FeedItemRepositoryInterface` is made in `FeedConfigFacade`
+- FeedConfigRepository renamed to [`FeedConfigRegistry`](src/Shopsys/ShopBundle/Model/Feed/FeedConfigRegistry.php) (@MattCzerner)
+    - it is not fetching data from Doctrine as other repositories, it only serves as a container for registering services of specific type
+    - similar to [`PluginDataFixtureRegistry`](src/Shopsys/ShopBundle/Component/Plugin/PluginDataFixtureRegistry.php) or [`PluginCrudExtensionRegistry`](src/Shopsys/ShopBundle/Component/Plugin/PluginCrudExtensionRegistry.php)
 
 ## 2.0.0-beta.15.0 - 2017-08-31
 - previous beta versions released only internally (mentioned changes since 1.0.0)

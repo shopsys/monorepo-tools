@@ -6,7 +6,7 @@ use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository;
-use Shopsys\ShopBundle\Model\Feed\FeedConfigRepository;
+use Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry;
 use Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemRepository;
 
 class FeedConfigFacade
@@ -22,9 +22,9 @@ class FeedConfigFacade
     private $feedDir;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigRepository
+     * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry
      */
-    private $feedConfigRepository;
+    private $feedConfigRegistry;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Setting\Setting
@@ -44,7 +44,7 @@ class FeedConfigFacade
     /**
      * @param string $feedUrlPrefix
      * @param string $feedDir
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigRepository $feedConfigRepository
+     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry $feedConfigRegistry
      * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
      * @param \Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemRepository $standardFeedItemRepository
      * @param \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository $deliveryFeedItemRepository
@@ -52,14 +52,14 @@ class FeedConfigFacade
     public function __construct(
         $feedUrlPrefix,
         $feedDir,
-        FeedConfigRepository $feedConfigRepository,
+        FeedConfigRegistry $feedConfigRegistry,
         Setting $setting,
         StandardFeedItemRepository $standardFeedItemRepository,
         DeliveryFeedItemRepository $deliveryFeedItemRepository
     ) {
         $this->feedUrlPrefix = $feedUrlPrefix;
         $this->feedDir = $feedDir;
-        $this->feedConfigRepository = $feedConfigRepository;
+        $this->feedConfigRegistry = $feedConfigRegistry;
         $this->setting = $setting;
         $this->standardFeedItemRepository = $standardFeedItemRepository;
         $this->deliveryFeedItemRepository = $deliveryFeedItemRepository;
@@ -70,7 +70,7 @@ class FeedConfigFacade
      */
     public function getFeedConfigs()
     {
-        return $this->feedConfigRepository->getFeedConfigs();
+        return $this->feedConfigRegistry->getFeedConfigs();
     }
 
     /**
@@ -79,7 +79,7 @@ class FeedConfigFacade
      */
     public function getFeedConfigByName($feedName)
     {
-        return $this->feedConfigRepository->getFeedConfigByName($feedName);
+        return $this->feedConfigRegistry->getFeedConfigByName($feedName);
     }
 
     /**
@@ -87,7 +87,7 @@ class FeedConfigFacade
      */
     public function getDeliveryFeedConfigs()
     {
-        return $this->feedConfigRepository->getDeliveryFeedConfigs();
+        return $this->feedConfigRegistry->getDeliveryFeedConfigs();
     }
 
     /**
@@ -95,7 +95,7 @@ class FeedConfigFacade
      */
     public function getAllFeedConfigs()
     {
-        return $this->feedConfigRepository->getAllFeedConfigs();
+        return $this->feedConfigRegistry->getAllFeedConfigs();
     }
 
     /**

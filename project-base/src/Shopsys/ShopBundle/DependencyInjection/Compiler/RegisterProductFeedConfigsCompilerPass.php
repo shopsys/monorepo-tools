@@ -22,24 +22,24 @@ class RegisterProductFeedConfigsCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $feedConfigRepositoryDefinition = $container->findDefinition('shopsys.shop.feed.feed_config_repository');
+        $feedConfigRegistryDefinition = $container->findDefinition('shopsys.shop.feed.feed_config_registry');
 
         $taggedServiceIds = $container->findTaggedServiceIds('shopsys.product_feed');
         foreach ($taggedServiceIds as $serviceId => $tags) {
             foreach ($tags as $tag) {
                 $type = array_key_exists('type', $tag) ? $tag['type'] : self::TYPE_DEFAULT;
 
-                $this->registerFeedConfig($feedConfigRepositoryDefinition, $serviceId, $type);
+                $this->registerFeedConfig($feedConfigRegistryDefinition, $serviceId, $type);
             }
         }
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\Definition $feedConfigRepositoryDefinition
+     * @param \Symfony\Component\DependencyInjection\Definition $feedConfigRegistryDefinition
      * @param string $serviceId
      * @param string $type
      */
-    private function registerFeedConfig(Definition $feedConfigRepositoryDefinition, $serviceId, $type)
+    private function registerFeedConfig(Definition $feedConfigRegistryDefinition, $serviceId, $type)
     {
         if (!array_key_exists($type, self::REGISTER_METHOD_BY_TYPE)) {
             throw new \Shopsys\ShopBundle\Model\Feed\Exception\UnknownFeedConfigTypeException(
@@ -52,6 +52,6 @@ class RegisterProductFeedConfigsCompilerPass implements CompilerPassInterface
         $registerMethod = self::REGISTER_METHOD_BY_TYPE[$type];
         $serviceReference = new Reference($serviceId);
 
-        $feedConfigRepositoryDefinition->addMethodCall($registerMethod, [$serviceReference]);
+        $feedConfigRegistryDefinition->addMethodCall($registerMethod, [$serviceReference]);
     }
 }

@@ -521,8 +521,8 @@ services:
       - '%shopsys.feed_url_prefix%'
       - '%shopsys.feed_dir%'
 
-  shopsys.shop.feed.feed_config_repository:
-    class: Shopsys\ShopBundle\Model\Feed\FeedConfigRepository
+  shopsys.shop.feed.feed_config_registry:
+    class: Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry
 
   shopsys.shop.feed.heureka_category_name_provider:
     class: Shopsys\ShopBundle\Model\Feed\HeurekaCategoryNameProvider

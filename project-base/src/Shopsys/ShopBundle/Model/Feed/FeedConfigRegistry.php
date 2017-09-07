@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Model\Feed;
 
 use Shopsys\ProductFeed\FeedConfigInterface;
 
-class FeedConfigRepository
+class FeedConfigRegistry
 {
     /**
      * @var \Shopsys\ProductFeed\FeedConfigInterface[]
