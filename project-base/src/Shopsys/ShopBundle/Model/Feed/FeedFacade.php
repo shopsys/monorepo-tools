@@ -158,7 +158,8 @@ class FeedFacade
          * so we need to recalculate product's visibility here in order to get consistent data for feed generation.
          */
         $this->productVisibilityFacade->refreshProductsVisibilityForMarked();
-        $itemsInBatch = $feedConfig->getFeedItemRepository()->getItems($domainConfig, $seekItemId, self::BATCH_SIZE);
+        $feedItemRepository = $this->feedConfigFacade->getFeedItemRepositoryByFeedConfig($feedConfig);
+        $itemsInBatch = $feedItemRepository->getItems($domainConfig, $seekItemId, self::BATCH_SIZE);
 
         if ($seekItemId === null) {
             $this->feedXmlWriter->writeBegin(

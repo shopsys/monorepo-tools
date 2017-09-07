@@ -73,27 +73,6 @@ services:
   shopsys.doctrine.cache_driver.metadata_cache.array:
     class: Doctrine\Common\Cache\ArrayCache
 
-  shopsys.product_feed.heureka_bundle.feed_config:
-    class: Shopsys\ProductFeed\HeurekaBundle\HeurekaFeedConfig
-    tags:
-      - { name: shopsys.product_feed }
-    arguments:
-      - '@shopsys.shop.feed.standard.standard_feed_item_repository'
-
-  shopsys.product_feed.heureka_delivery_bundle.feed_config:
-    class: Shopsys\ProductFeed\HeurekaDeliveryBundle\HeurekaDeliveryFeedConfig
-    tags:
-      - { name: shopsys.product_feed, type: delivery }
-    arguments:
-      - '@shopsys.shop.feed.delivery.delivery_feed_item_repository'
-
-  shopsys.product_feed.zbozi_bundle.feed_config:
-    class: Shopsys\ProductFeed\ZboziBundle\ZboziFeedConfig
-    tags:
-      - { name: shopsys.product_feed }
-    arguments:
-      - '@shopsys.shop.feed.standard.standard_feed_item_repository'
-
   shopsys.shop.admin_navigation.menu_factory:
     class: Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory
     arguments:
@@ -536,9 +515,6 @@ services:
       - '%shopsys.heureka_category_feed_url%'
       - '%shopsys.heureka_category_feed_backup_filepath%'
 
-  shopsys.shop.feed.delivery.delivery_feed_item_repository:
-    class: Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository
-
   shopsys.shop.feed.feed_config_facade:
     class: Shopsys\ShopBundle\Model\Feed\FeedConfigFacade
     arguments:
@@ -550,9 +526,6 @@ services:
 
   shopsys.shop.feed.heureka_category_name_provider:
     class: Shopsys\ShopBundle\Model\Feed\HeurekaCategoryNameProvider
-
-  shopsys.shop.feed.standard.standard_feed_item_repository:
-    class: Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemRepository
 
   shopsys.shop.http_foundation.response_listener:
     class: Shopsys\ShopBundle\Component\HttpFoundation\ResponseListener

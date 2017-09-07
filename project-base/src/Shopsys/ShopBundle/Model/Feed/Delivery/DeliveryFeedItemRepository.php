@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Model\Feed\Delivery;
 
 use Shopsys\ProductFeed\DomainConfigInterface;
-use Shopsys\ProductFeed\FeedItemRepositoryInterface;
+use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 

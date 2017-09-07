@@ -9,11 +9,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - new command `shopsys:plugin-data-fixtures:load` for loading demo data from plugins (@MattCzerner)
     - called during build of demo database
 - new documentation abuout Shopsys Framework model architecture (@TomasLudvik)
+- `FeedItemRepositoryInterface` (@vitek-rostislav)
+    - moved from [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface/)
 
 ### Changed
-- Dependency shopsys/plugin-interface upgraded from 0.1.0 to 0.2.0 (@MattCzerner)
-- Dependency shopsys/product-feed-heureka upgraded from 0.2.0 to 0.3.0 (@MattCzerner)
-- Dependency shopsys/product-feed-zbozi upgraded from 0.2.0 to 0.3.0 (@MattCzerner)
+- dependency [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface/) upgraded from 0.1.0 to 0.2.0 (@MattCzerner)
+- dependency [shopsys/product-feed-heureka](https://github.com/shopsys/product-feed-heureka/) upgraded from 0.2.0 to 0.4.0 (@MattCzerner)
+- dependency [shopsys/product-feed-zbozi](https://github.com/shopsys/product-feed-zbozi/) upgraded from 0.2.0 to 0.4.0 (@MattCzerner)
+- dependency [shopsys/product-feed-heureka-delivery](https://github.com/shopsys/product-feed-heureka-delivery/) upgraded from 0.1.1 to 0.2.0 (@vitek-rostislav)
+- dependency [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface/) upgraded from 0.2.1 to 0.3.0 (@vitek-rostislav)
+- it is no longer needed to redeclare feed plugin's implementations of `FeedConfigInterface` in `services.yml` (@vitek-rostislav)
+    - decision about providing proper instance of `FeedItemRepositoryInterface` is made in `FeedConfigFacade`
 
 ## 2.0.0-beta.15.0 - 2017-08-31
 - previous beta versions released only internally (mentioned changes since 1.0.0)
