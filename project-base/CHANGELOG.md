@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - FeedConfigRepository renamed to [`FeedConfigRegistry`](src/Shopsys/ShopBundle/Model/Feed/FeedConfigRegistry.php) (@MattCzerner)
     - it is not fetching data from Doctrine as other repositories, it only serves as a container for registering services of specific type
     - similar to [`PluginDataFixtureRegistry`](src/Shopsys/ShopBundle/Component/Plugin/PluginDataFixtureRegistry.php) or [`PluginCrudExtensionRegistry`](src/Shopsys/ShopBundle/Component/Plugin/PluginCrudExtensionRegistry.php)
+- `UknownPluginDataFixtureException` renamed to [`UnknownPluginCrudExtensionTypeException`](src/Shopsys/ShopBundle/Component/Plugin/Exception/UnknownPluginCrudExtensionTypeException.php) because of a typo (@MattCzerner)
 
 ## 2.0.0-beta.15.0 - 2017-08-31
 - previous beta versions released only internally (mentioned changes since 1.0.0)
