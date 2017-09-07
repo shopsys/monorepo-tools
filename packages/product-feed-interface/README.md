@@ -10,8 +10,8 @@ that is [tagged in a DI container](http://symfony.com/doc/current/service_contai
 
 Optionally, the tag can have a `type` attribute:
 
-### `default`
-- if the tag `type` is omitted, the `default` is used as a default value
+### `standard`
+- if the tag `type` is omitted, the `standard` is used as a default value
 - feed usually contains most of the product parameters and information (eg. parameters, description, ean)
 - items passed to FeedConfigInterface::processItems() are instances of [StandardFeedItemInterface](./src/StandardFeedItemInterface.php)
 
