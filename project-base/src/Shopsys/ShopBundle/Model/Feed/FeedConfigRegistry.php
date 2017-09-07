@@ -7,11 +7,11 @@ use Shopsys\ShopBundle\Model\Feed\Exception\UnknownFeedConfigTypeException;
 
 class FeedConfigRegistry
 {
-    const TYPE_DEFAULT = 'default';
+    const TYPE_STANDARD = 'standard';
     const TYPE_DELIVERY = 'delivery';
 
     const KNOWN_TYPES = [
-        self::TYPE_DEFAULT,
+        self::TYPE_STANDARD,
         self::TYPE_DELIVERY,
     ];
 
@@ -29,7 +29,7 @@ class FeedConfigRegistry
      * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
      * @param string $type
      */
-    public function registerFeedConfig(FeedConfigInterface $feedConfig, $type = self::TYPE_DEFAULT)
+    public function registerFeedConfig(FeedConfigInterface $feedConfig, $type = self::TYPE_STANDARD)
     {
         self::assertTypeIsKnown($type);
 
