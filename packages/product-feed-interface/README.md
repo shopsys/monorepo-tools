@@ -9,8 +9,16 @@ The heart of a product feed plugin is a service implementing [FeedConfigInterfac
 that is [tagged in a DI container](http://symfony.com/doc/current/service_container/tags.html) with `shopsys.product_feed` tag.
 
 Optionally, the tag can have a `type` attribute:
-* `default` for standard product feeds
-* `delivery` for feeds that need a frequent generation
+
+### `default`
+- if the tag `type` is omitted, the `default` is used as a default value
+- feed usually contains most of the product parameters and information (eg. parameters, description, ean)
+- items passed to FeedConfigInterface::processItems() are instances of [StandardFeedItemInterface](./src/StandardFeedItemInterface.php)
+
+### `delivery`
+- feed usually contains only information about stock quantity or time of delivery
+- items for feed generation are instances of [DeliveryFeedItemInterface](./src/DeliveryFeedItemInterface.php)
+- used for feeds that need a frequent generation
 
 The methods to be implemented are described in the [FeedConfigInterface](./src/FeedConfigInterface.php) itself.
 
