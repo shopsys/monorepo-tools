@@ -45,7 +45,7 @@ The source is mocked with [apiari.io service](http://docs.ssfwbasicdataimportdem
 ]
 ```
 
-### Step 1 - Add `$externalId` to [Product](../../src/Shopsys/ShopBundle/Model/Product/Product.php) entity
+### Step 1 - Add `$externalId` to [Product](../../src/Shopsys/ShopBundle/Model/Product/Product.php) [entity](../introduction/basics-about-model-architecture.md#entity)
 We need to store the relation between your application database and the external source of data because later, in data transfer processing,
 we will be deciding whether to create a new product or update existing one, based on the `$externalId` attribute.
 If you do not know how to add an attribute to an entity, take a look at [the cookbook](adding-new-attribute-to-an-entity.md).
@@ -152,8 +152,8 @@ private function importExternalProductsData(array $externalProductsData)
 ```
 
 *Note: We need to know whether the product with given `$externalId` exists.
-For that purpose, we use [`ProductFacade`](../../src/Shopsys/ShopBundle/Model/Product/ProductFacade.php)
-which uses [`ProductRepository`](../../src/Shopsys/ShopBundle/Model/Product/ProductRepository.php)
+For that purpose, we use [`ProductFacade`](../../src/Shopsys/ShopBundle/Model/Product/ProductFacade.php) ([more about facades](../introduction/basics-about-model-architecture.md#facade))
+which uses [`ProductRepository`](../../src/Shopsys/ShopBundle/Model/Product/ProductRepository.php) ([more about repositories](../introduction/basics-about-model-architecture.md#repository))
 that can talk to the persistence layer. So we will implement new methods in these classes in next two steps.*
 
 #### 3.2 - Implement method `findByExternalId()` in [`ProductRepository`](../../src/Shopsys/ShopBundle/Model/Product/ProductRepository.php) in order to be able find a [`Product`](../../src/Shopsys/ShopBundle/Model/Product/Product.php) by an external ID

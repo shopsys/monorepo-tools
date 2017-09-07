@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - new command `shopsys:plugin-data-fixtures:load` for loading demo data from plugins (@MattCzerner)
   - called during build of demo database
+- new documentation abuout Shopsys Framework model architecture (@TomasLudvik)
+
 ### Changed
 - Dependency shopsys/plugin-interface upgraded from 0.1.0 to 0.2.0 (@MattCzerner)
 - Dependency shopsys/product-feed-heureka upgraded from 0.2.0 to 0.3.0 (@MattCzerner)

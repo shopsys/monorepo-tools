@@ -172,10 +172,8 @@ Use `url()` Twig function to get the URL for the link by route name.
 When you have your blank page prepared you can work on displaying the right products on it.
 
 ### Repository method
-Repositories are generally responsible for fetching the model data.
-More specifically, [`\Shopsys\ShopBundle\Model\Product\ProductRepository`](../../src/Shopsys/ShopBundle/Model/Product/ProductRepository.php) is responsible for fetching products.
 
-Add a new method `getRecentlyBoughtProducts` that will return an array of [`Product`](../../src/Shopsys/ShopBundle/Model/Product/Product.php) entities by provided [`User`](../../src/Shopsys/ShopBundle/Model/Customer/User.php) and `DateTime`.
+Add a new method `getRecentlyBoughtProducts` to [repository](../introduction/basics-about-model-architecture.md#repository) speciffically to [`\Shopsys\ShopBundle\Model\Product\ProductRepository`](../../src/Shopsys/ShopBundle/Model/Product/ProductRepository.php) that will return an array of [`Product`](../../src/Shopsys/ShopBundle/Model/Product/Product.php) entities by provided [`User`](../../src/Shopsys/ShopBundle/Model/Customer/User.php) and `DateTime`.
 
 Repositories use query builders for specifying the data to be fetched.
 Use the `getAllListableQueryBuilder` method to apply all the rules for listable products (e.g. not hidden and without selling denied).
@@ -225,9 +223,7 @@ It is probably best to order the products chronologically so that those bought m
 *Note: For more information about the query builder usage consult [Doctrine's QueryBuilder documentation](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/query-builder.html).*
 
 ### Facade method
-Facades are classes that represent a single point of access to the model.
-Controllers should not access the repositories directly, they should access them via facade methods only.
-This means you need to implement a new facade method that will be used from your controller.
+You need to implement a new [facade](../introduction/basics-about-model-architecture.md#facade) method that will be used from your controller.
 
 The easiest way to fetch products for the currently logged [`user`](../../src/Shopsys/ShopBundle/Model/Customer/User.php) on the current [`domain`](../../src/Shopsys/ShopBundle/Component/Domain/Config/DomainConfig.php) is via [`\Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade`](../../src/Shopsys/ShopBundle/Model/Product/ProductOnCurrentDomainFacade.php).
 You should add your new method there.
@@ -268,7 +264,7 @@ This `null` cannot be passed into [`ProductRepository`](../../src/Shopsys/ShopBu
 As there are no products to be fetched the method can return an empty array.
 
 *Note: Getter methods that may return `null` are always named `findSomething` in repositories and facades.*
-*When the method never returns `null` it is named `getSomething` (they typically return either an entity of given type or an array of entities) or `isSomething` / `hasSomething` if it returns `bool`.*
+*When the method never returns `null` it is named `getSomething` (they typically return either an [entity](../introduction/basics-about-model-architecture.md#entity) of given type or an array of entities) or `isSomething` / `hasSomething` if it returns `bool`.*
 
 ### Controller usage
 [`ProductController`](../../src/Shopsys/ShopBundle/Controller/Front/ProductController.php) already has the [`ProductOnCurrentDomainFacade`](../../src/Shopsys/ShopBundle/Model/Product/ProductOnCurrentDomainFacade.php) as a dependency so it is ready to use.
