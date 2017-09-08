@@ -1,4 +1,7 @@
 # Shopsys Framework Heureka Product Delivery Feed Plugin
+
+[![Build Status](https://travis-ci.org/shopsys/product-feed-heureka-delivery.svg?branch=master)](https://travis-ci.org/shopsys/product-feed-heureka-delivery)
+
 Plugin for [Shopsys Framework](https://www.shopsys-framework.com) responsible for generating XML product delivery feed for [Heureka](https://www.heureka.cz).
 
 For detailed information about the feed see [official documentation](https://sluzby.heureka.cz/napoveda/dostupnostni-feed/).
