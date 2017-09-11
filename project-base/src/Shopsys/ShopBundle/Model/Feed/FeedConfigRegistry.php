@@ -57,8 +57,7 @@ class FeedConfigRegistry
             }
         }
 
-        $message = 'Feed config with name "' . $feedName . ' not found.';
-        throw new \Shopsys\ShopBundle\Model\Feed\Exception\FeedConfigNotFoundException($message);
+        throw new \Shopsys\ShopBundle\Model\Feed\Exception\FeedConfigNotFoundException($feedName);
     }
 
     /**
