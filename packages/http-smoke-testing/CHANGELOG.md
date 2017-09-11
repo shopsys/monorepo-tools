@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
+- [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
 
 ## [1.0.1] - 2017-07-03
 ### Added
