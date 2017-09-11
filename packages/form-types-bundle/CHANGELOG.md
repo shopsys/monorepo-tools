@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - This Changelog (@vitek-rostislav)
+- [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
 
 ## 0.1.0 - 2017-08-04
 ### Added
