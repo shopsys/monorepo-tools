@@ -1,5 +1,5 @@
 # Upgrading
-## From 0.2.0 to Unreleased
+## From 0.2.0 to 0.3.0
 - remove method `getFeedItemRepository()` from all implementations and usages of `FeedConfigInterface`.
 
 ## From 0.1.0 to 0.2.0
