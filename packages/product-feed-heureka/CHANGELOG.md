@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.4.0] - 2017-09-12
 ###Added
 - New dependencies for dev(@MattCzerner)
     - phpunit/phpunit 5.7.21
@@ -46,5 +48,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `.travis.yml` file with Travis CI configuration (@PetrHeinz)
 
 [Unreleased]: https://github.com/shopsys/product-feed-heureka/compare/v0.3.0...HEAD
+[0.4.0]: https://github.com/shopsys/product-feed-heureka/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/shopsys/product-feed-heureka/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/shopsys/product-feed-heureka/compare/v0.1.0...v0.2.0
