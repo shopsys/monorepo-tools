@@ -13,6 +13,6 @@ and the code must pass coding standards checks and tests:
 php phing standards tests tests-acceptance
 ```
 
-*Tip: You read more about automatic checks in [Phing Targets](docs/introduction/phing-targets.md) and [Running Acceptance Tests](docs/introduction/running-acceptance-tests.md).*
+*Tip: Read more about automatic checks in [Phing Targets](docs/introduction/phing-targets.md) and [Running Acceptance Tests](docs/introduction/running-acceptance-tests.md).*
 
 **Warning: It is necessary to put information about your code being provided under MIT license in the description of your pull request.**
