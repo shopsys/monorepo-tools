@@ -1,0 +1,16 @@
+{
+    "name": "shopsys/product-feed-google",
+    "description": "Shopsys Framework plugin interface for Google XML product feed generation",
+    "keywords": ["Google", "product feed", "XML feed", "plugin", "Shopsys Framework", "SSFW"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shopsys",
+            "homepage": "https://www.shopsys.com/"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    }
+}
