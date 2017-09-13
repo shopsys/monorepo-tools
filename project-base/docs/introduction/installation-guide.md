@@ -53,7 +53,6 @@ Composer will then prompt you to set parameters for testing environment (`app/co
 | `test_mailer_host`                | ...                                                                           |
 | `test_mailer_user`                | ...                                                                           |
 | `test_mailer_password`            | ...                                                                           |
-| `email_for_error_reporting`       | e-mail address that will be used for error reports during tests               |
 
 #### Choose environment type
 For development choose `n` when asked `Build in production environment? (Y/n)`.

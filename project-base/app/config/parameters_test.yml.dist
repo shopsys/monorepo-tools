@@ -9,5 +9,3 @@ parameters:
   test_mailer_host: 127.0.0.1
   test_mailer_user: ~
   test_mailer_password: ~
-
-  email_for_error_reporting: ~

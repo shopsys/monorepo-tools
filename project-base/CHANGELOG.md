@@ -33,6 +33,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - renamed `FeedFacade::generateFeedsIteratively()` to `generateStandardFeedsIteratively()`
     - renamed `FeedGenerationConfigFactory::createAll()` to `createAllForStandardFeeds()`
 
+### Removed
+- email for error reporting removed from [`parameters_test.yml.dist`](app/config/parameters_test.yml.dist) (@vitek-rostislav)
+
 ## 2.0.0-beta.15.0 - 2017-08-31
 - previous beta versions released only internally (mentioned changes since 1.0.0)
 
