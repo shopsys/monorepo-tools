@@ -268,7 +268,7 @@ class ProductFormType extends AbstractType
         foreach ($this->domain->getAllIds() as $domainId) {
             $builder->get('categoriesByDomainId')->add($domainId, CategoriesType::class, [
                 'required' => false,
-                CategoriesType::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID => $domainId,
+                'domain_id' => $domainId,
             ]);
         }
 

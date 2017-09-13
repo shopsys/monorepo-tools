@@ -163,6 +163,16 @@ class Category extends AbstractTranslatableEntity
     }
 
     /**
+     * Method does not lazy load children
+     *
+     * @return bool
+     */
+    public function hasChildren()
+    {
+        return $this->getRgt() - $this->getLft() > 1;
+    }
+
+    /**
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
     public function getChildren()

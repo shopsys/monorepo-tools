@@ -34,6 +34,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - renamed `FeedGenerationConfigFactory::createAll()` to `createAllForStandardFeeds()`
 - [`parameters.yml.dist`](app/config/parameters.yml.dist): renamed parameter `email_for_error_reporting` to `error_reporting_email_to` (@vitek-rostislav)
 - sender email for error reporting is now configured in [`parameters.yml.dist`](app/config/parameters.yml.dist) (@vitek-rostislav)
+- reimplemented [`CategoriesType`](src/Shopsys/ShopBundle/Form/CategoriesType.php) (@Petr Heinz)
+    - it now extends `CollectionType` instead of `ChoiceType`
 
 ### Removed
 - email for error reporting removed from [`parameters_test.yml.dist`](app/config/parameters_test.yml.dist) (@vitek-rostislav)
