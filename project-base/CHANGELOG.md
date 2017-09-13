@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - new documentation abuout Shopsys Framework model architecture (@TomasLudvik)
 - `FeedItemRepositoryInterface` (@vitek-rostislav)
     - moved from [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface/)
+- [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
 
 ### Changed
 - dependency [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface/) upgraded from 0.1.0 to 0.2.0 (@MattCzerner)
