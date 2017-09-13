@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Product;
 
+use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\CategoriesType;
@@ -17,7 +18,6 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -97,6 +97,13 @@ class ProductFormType extends AbstractType
                     ],
                 ],
             ]);
+        }
+
+        $categoriesOptionsByDomainId = [];
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $categoriesOptionsByDomainId[$domainId] = [
+                'domain_id' => $domainId,
+            ];
         }
 
         $builder
@@ -262,15 +269,12 @@ class ProductFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter sorting priority']),
                 ],
-            ]);
-
-        $builder->add('categoriesByDomainId', FormType::class, ['required' => false]);
-        foreach ($this->domain->getAllIds() as $domainId) {
-            $builder->get('categoriesByDomainId')->add($domainId, CategoriesType::class, [
+            ])
+            ->add('categoriesByDomainId', MultidomainType::class, [
                 'required' => false,
-                'domain_id' => $domainId,
+                'entry_type' => CategoriesType::class,
+                'options_by_domain_id' => $categoriesOptionsByDomainId,
             ]);
-        }
 
         if ($options['product'] !== null) {
             $this->disableIrrelevantFields($builder, $options['product']);
