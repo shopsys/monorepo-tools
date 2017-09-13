@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.2.0]
 ### Added
+- This Changelog (@vitek-rostislav)
 - New dependencies for dev(@MattCzerner)
     - phpunit/phpunit >=5.0.0,<6.0
     - twig/twig 1.34.0
@@ -21,9 +22,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Dependency [plugin-interface](shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0 (@MattCzerner)
 ### Removed
 - `HeurekaDeliveryFeedConfig::getFeedItemRepository()` (@MattCzerner)
-
-### Added
-- This Changelog (@vitek-rostislav)
 
 ## [0.1.1] - 2017-08-18
 ### Fixed
