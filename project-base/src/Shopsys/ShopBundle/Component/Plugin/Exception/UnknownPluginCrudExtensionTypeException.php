@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Component\Plugin\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\Plugin\Exception\PluginException;
 
-class UknownPluginCrudExtensionTypeException extends Exception implements PluginException
+class UnknownPluginCrudExtensionTypeException extends Exception implements PluginException
 {
     /**
      * @param string $unknownType

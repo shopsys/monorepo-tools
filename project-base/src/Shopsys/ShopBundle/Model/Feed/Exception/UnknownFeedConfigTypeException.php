@@ -9,16 +9,14 @@ use Shopsys\ShopBundle\Model\Feed\Exception\FeedException;
 class UnknownFeedConfigTypeException extends Exception implements FeedException
 {
     /**
-     * @param string $serviceId
      * @param int $type
      * @param string[] $knownTypes
      * @param \Exception|null $previous
      */
-    public function __construct($serviceId, $type, array $knownTypes, Exception $previous = null)
+    public function __construct($type, array $knownTypes, Exception $previous = null)
     {
         $message = sprintf(
-            'Tried to register "%s" as a product feed of an unknown type "%s". Allowed types are: %s.',
-            $serviceId,
+            'Trying to register feed config of an unknown type "%s". Allowed types are: %s.',
             $type,
             implode(', ', $knownTypes)
         );

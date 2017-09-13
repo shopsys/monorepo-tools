@@ -4,8 +4,8 @@ namespace Shopsys\ShopBundle\Model\Feed\Standard;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\ProductFeed\DomainConfigInterface;
-use Shopsys\ProductFeed\FeedItemRepositoryInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
 use Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemFactory;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\ShopBundle\Model\Product\ProductDomain;

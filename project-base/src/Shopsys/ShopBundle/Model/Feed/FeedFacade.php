@@ -45,7 +45,7 @@ class FeedFacade
     /**
      * @var \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig[]
      */
-    private $feedGenerationConfigs;
+    private $standardFeedGenerationConfigs;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
@@ -71,7 +71,7 @@ class FeedFacade
         $this->filesystem = $filesystem;
         $this->feedConfigFacade = $feedConfigFacade;
         $this->feedGenerationConfigFactory = $feedGenerationConfigFactory;
-        $this->feedGenerationConfigs = $this->feedGenerationConfigFactory->createAll();
+        $this->standardFeedGenerationConfigs = $this->feedGenerationConfigFactory->createAllForStandardFeeds();
         $this->entityManagerFacade = $entityManagerFacade;
         $this->productVisibilityFacade = $productVisibilityFacade;
     }
@@ -80,9 +80,9 @@ class FeedFacade
      * @param \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig $feedGenerationConfigToContinue
      * @return \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig|null
      */
-    public function generateFeedsIteratively(FeedGenerationConfig $feedGenerationConfigToContinue)
+    public function generateStandardFeedsIteratively(FeedGenerationConfig $feedGenerationConfigToContinue)
     {
-        foreach ($this->feedGenerationConfigs as $key => $feedGenerationConfig) {
+        foreach ($this->standardFeedGenerationConfigs as $key => $feedGenerationConfig) {
             if ($feedGenerationConfig->isSameFeedAndDomain($feedGenerationConfigToContinue)) {
                 $feedConfig = $this->feedConfigFacade->getFeedConfigByName($feedGenerationConfig->getFeedName());
                 $domainConfig = $this->domain->getDomainConfigById($feedGenerationConfig->getDomainId());
@@ -98,8 +98,8 @@ class FeedFacade
                         $feedItemToContinue->getId()
                     );
                 } else {
-                    if (array_key_exists($key + 1, $this->feedGenerationConfigs)) {
-                        return $this->feedGenerationConfigs[$key + 1];
+                    if (array_key_exists($key + 1, $this->standardFeedGenerationConfigs)) {
+                        return $this->standardFeedGenerationConfigs[$key + 1];
                     } else {
                         return null;
                     }
@@ -158,7 +158,8 @@ class FeedFacade
          * so we need to recalculate product's visibility here in order to get consistent data for feed generation.
          */
         $this->productVisibilityFacade->refreshProductsVisibilityForMarked();
-        $itemsInBatch = $feedConfig->getFeedItemRepository()->getItems($domainConfig, $seekItemId, self::BATCH_SIZE);
+        $feedItemRepository = $this->feedConfigFacade->getFeedItemRepositoryByFeedConfig($feedConfig);
+        $itemsInBatch = $feedItemRepository->getItems($domainConfig, $seekItemId, self::BATCH_SIZE);
 
         if ($seekItemId === null) {
             $this->feedXmlWriter->writeBegin(
@@ -197,6 +198,6 @@ class FeedFacade
      */
     public function getFirstFeedGenerationConfig()
     {
-        return reset($this->feedGenerationConfigs);
+        return reset($this->standardFeedGenerationConfigs);
     }
 }

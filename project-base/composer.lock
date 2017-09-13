@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff944234fcf854fc07655601971af6be",
+    "content-hash": "1a938e0558fe445b584fbb24fb5cc7ad",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -5411,30 +5411,33 @@
         },
         {
             "name": "shopsys/product-feed-heureka",
-            "version": "v0.3.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/product-feed-heureka.git",
-                "reference": "abc2ce95926aeb2d92a6c34f84e226f791f0f7aa"
+                "reference": "54c59dc12f4a225eb7539022bf45affcc2ac84f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-heureka/zipball/abc2ce95926aeb2d92a6c34f84e226f791f0f7aa",
-                "reference": "abc2ce95926aeb2d92a6c34f84e226f791f0f7aa",
+                "url": "https://api.github.com/repos/shopsys/product-feed-heureka/zipball/54c59dc12f4a225eb7539022bf45affcc2ac84f0",
+                "reference": "54c59dc12f4a225eb7539022bf45affcc2ac84f0",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0",
                 "shopsys/form-types-bundle": "~0.1.0",
                 "shopsys/plugin-interface": "~0.2.0",
-                "shopsys/product-feed-interface": "~0.2.0",
+                "shopsys/product-feed-interface": "~0.3.0",
                 "symfony/form": "^3.0",
                 "symfony/framework-bundle": "^3.0",
                 "symfony/translation": "^3.0",
                 "symfony/validator": "^3.0"
             },
             "require-dev": {
-                "shopsys/coding-standards": "3.0.2"
+                "phpunit/phpunit": "6.0.13",
+                "shopsys/coding-standards": "3.0.2",
+                "twig/extensions": "1.3.0",
+                "twig/twig": "1.34.0"
             },
             "type": "library",
             "autoload": {
@@ -5463,29 +5466,32 @@
                 "plugin",
                 "product feed"
             ],
-            "time": "2017-09-06T09:41:52+00:00"
+            "time": "2017-09-12T11:53:05+00:00"
         },
         {
             "name": "shopsys/product-feed-heureka-delivery",
-            "version": "v0.1.1",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/product-feed-heureka-delivery.git",
-                "reference": "c0d79b675db13dc8810739aabffceaa594cb5148"
+                "reference": "6183bdbb17fdcc5372bbb3f7936d217f94749040"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-heureka-delivery/zipball/c0d79b675db13dc8810739aabffceaa594cb5148",
-                "reference": "c0d79b675db13dc8810739aabffceaa594cb5148",
+                "url": "https://api.github.com/repos/shopsys/product-feed-heureka-delivery/zipball/6183bdbb17fdcc5372bbb3f7936d217f94749040",
+                "reference": "6183bdbb17fdcc5372bbb3f7936d217f94749040",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0",
-                "shopsys/product-feed-interface": "~0.2.1",
+                "shopsys/product-feed-interface": "~0.3.0",
                 "symfony/framework-bundle": "^3.0"
             },
             "require-dev": {
-                "shopsys/coding-standards": "3.0.2"
+                "phpunit/phpunit": "6.0.13",
+                "shopsys/coding-standards": "3.0.2",
+                "twig/extensions": "1.3.0",
+                "twig/twig": "1.34.0"
             },
             "type": "library",
             "autoload": {
@@ -5514,20 +5520,20 @@
                 "plugin",
                 "product delivery feed"
             ],
-            "time": "2017-08-18T07:16:00+00:00"
+            "time": "2017-09-12T12:21:32+00:00"
         },
         {
             "name": "shopsys/product-feed-interface",
-            "version": "v0.2.1",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/product-feed-interface.git",
-                "reference": "ea0a352e72982c47726d235a90f9ec144bf3244d"
+                "reference": "aa3a2c7c6da36b257cbdbf05112ef84386d3e4be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-interface/zipball/ea0a352e72982c47726d235a90f9ec144bf3244d",
-                "reference": "ea0a352e72982c47726d235a90f9ec144bf3244d",
+                "url": "https://api.github.com/repos/shopsys/product-feed-interface/zipball/aa3a2c7c6da36b257cbdbf05112ef84386d3e4be",
+                "reference": "aa3a2c7c6da36b257cbdbf05112ef84386d3e4be",
                 "shasum": ""
             },
             "require": {
@@ -5561,33 +5567,36 @@
                 "plugin",
                 "product feed"
             ],
-            "time": "2017-08-18T06:34:09+00:00"
+            "time": "2017-09-12T11:36:12+00:00"
         },
         {
             "name": "shopsys/product-feed-zbozi",
-            "version": "v0.3.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/product-feed-zbozi.git",
-                "reference": "9f7d6cc42b49f278625c2a8d1298a934eae0aec2"
+                "reference": "9b5457fc88de4489a8f2105de585dbca58f619a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-zbozi/zipball/9f7d6cc42b49f278625c2a8d1298a934eae0aec2",
-                "reference": "9f7d6cc42b49f278625c2a8d1298a934eae0aec2",
+                "url": "https://api.github.com/repos/shopsys/product-feed-zbozi/zipball/9b5457fc88de4489a8f2105de585dbca58f619a3",
+                "reference": "9b5457fc88de4489a8f2105de585dbca58f619a3",
                 "shasum": ""
             },
             "require": {
                 "shopsys/form-types-bundle": "~0.1.0",
                 "shopsys/plugin-interface": "~0.2.0",
-                "shopsys/product-feed-interface": "~0.2.0",
+                "shopsys/product-feed-interface": "~0.3.0",
                 "symfony/form": "^3.0",
                 "symfony/framework-bundle": "^3.0",
                 "symfony/translation": "^3.0",
                 "symfony/validator": "^3.0"
             },
             "require-dev": {
-                "shopsys/coding-standards": "3.0.2"
+                "phpunit/phpunit": "6.0.13",
+                "shopsys/coding-standards": "3.0.2",
+                "twig/extensions": "1.3.0",
+                "twig/twig": "1.34.0"
             },
             "type": "library",
             "autoload": {
@@ -5616,7 +5625,7 @@
                 "product feed",
                 "zbozi"
             ],
-            "time": "2017-09-06T09:33:09+00:00"
+            "time": "2017-09-12T12:08:50+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",

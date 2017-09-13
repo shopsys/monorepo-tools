@@ -5,7 +5,9 @@ namespace Shopsys\ShopBundle\Model\Feed;
 use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Feed\FeedConfigRepository;
+use Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository;
+use Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry;
+use Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemRepository;
 
 class FeedConfigFacade
 {
@@ -20,9 +22,9 @@ class FeedConfigFacade
     private $feedDir;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigRepository
+     * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry
      */
-    private $feedConfigRepository;
+    private $feedConfigRegistry;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Setting\Setting
@@ -30,29 +32,45 @@ class FeedConfigFacade
     private $setting;
 
     /**
+     * @var \Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemRepository
+     */
+    private $standardFeedItemRepository;
+
+    /**
+     * @var \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository
+     */
+    private $deliveryFeedItemRepository;
+
+    /**
      * @param string $feedUrlPrefix
      * @param string $feedDir
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigRepository $feedConfigRepository
+     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry $feedConfigRegistry
      * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemRepository $standardFeedItemRepository
+     * @param \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository $deliveryFeedItemRepository
      */
     public function __construct(
         $feedUrlPrefix,
         $feedDir,
-        FeedConfigRepository $feedConfigRepository,
-        Setting $setting
+        FeedConfigRegistry $feedConfigRegistry,
+        Setting $setting,
+        StandardFeedItemRepository $standardFeedItemRepository,
+        DeliveryFeedItemRepository $deliveryFeedItemRepository
     ) {
         $this->feedUrlPrefix = $feedUrlPrefix;
         $this->feedDir = $feedDir;
-        $this->feedConfigRepository = $feedConfigRepository;
+        $this->feedConfigRegistry = $feedConfigRegistry;
         $this->setting = $setting;
+        $this->standardFeedItemRepository = $standardFeedItemRepository;
+        $this->deliveryFeedItemRepository = $deliveryFeedItemRepository;
     }
 
     /**
      * @return \Shopsys\ProductFeed\FeedConfigInterface[]
      */
-    public function getFeedConfigs()
+    public function getStandardFeedConfigs()
     {
-        return $this->feedConfigRepository->getFeedConfigs();
+        return $this->feedConfigRegistry->getFeedConfigsByType(FeedConfigRegistry::TYPE_STANDARD);
     }
 
     /**
@@ -61,7 +79,7 @@ class FeedConfigFacade
      */
     public function getFeedConfigByName($feedName)
     {
-        return $this->feedConfigRepository->getFeedConfigByName($feedName);
+        return $this->feedConfigRegistry->getFeedConfigByName($feedName);
     }
 
     /**
@@ -69,7 +87,7 @@ class FeedConfigFacade
      */
     public function getDeliveryFeedConfigs()
     {
-        return $this->feedConfigRepository->getDeliveryFeedConfigs();
+        return $this->feedConfigRegistry->getFeedConfigsByType(FeedConfigRegistry::TYPE_DELIVERY);
     }
 
     /**
@@ -77,7 +95,7 @@ class FeedConfigFacade
      */
     public function getAllFeedConfigs()
     {
-        return $this->feedConfigRepository->getAllFeedConfigs();
+        return $this->feedConfigRegistry->getAllFeedConfigs();
     }
 
     /**
@@ -110,5 +128,20 @@ class FeedConfigFacade
         $feedHash = $this->setting->get(Setting::FEED_HASH);
 
         return $feedHash . '_' . $feedConfig->getFeedName() . '_' . $domainConfig->getId() . '.xml';
+    }
+
+    /**
+     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
+     * @return \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
+     */
+    public function getFeedItemRepositoryByFeedConfig(FeedConfigInterface $feedConfig)
+    {
+        if (in_array($feedConfig, $this->getStandardFeedConfigs(), true)) {
+            return $this->standardFeedItemRepository;
+        } elseif (in_array($feedConfig, $this->getDeliveryFeedConfigs(), true)) {
+            return $this->deliveryFeedItemRepository;
+        }
+
+        throw new \Shopsys\ShopBundle\Model\Feed\Exception\FeedItemRepositoryForFeedConfigNotFoundException($feedConfig);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\DependencyInjection\Compiler;
 
+use Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -9,49 +10,34 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class RegisterProductFeedConfigsCompilerPass implements CompilerPassInterface
 {
-    const TYPE_DEFAULT = 'default';
-    const TYPE_DELIVERY = 'delivery';
-
-    const REGISTER_METHOD_BY_TYPE = [
-        self::TYPE_DEFAULT => 'registerFeedConfig',
-        self::TYPE_DELIVERY => 'registerDeliveryFeedConfig',
-    ];
-
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     public function process(ContainerBuilder $container)
     {
-        $feedConfigRepositoryDefinition = $container->findDefinition('shopsys.shop.feed.feed_config_repository');
+        $feedConfigRegistryDefinition = $container->findDefinition('shopsys.shop.feed.feed_config_registry');
 
         $taggedServiceIds = $container->findTaggedServiceIds('shopsys.product_feed');
         foreach ($taggedServiceIds as $serviceId => $tags) {
             foreach ($tags as $tag) {
-                $type = array_key_exists('type', $tag) ? $tag['type'] : self::TYPE_DEFAULT;
-
-                $this->registerFeedConfig($feedConfigRepositoryDefinition, $serviceId, $type);
+                $this->registerFeedConfig($feedConfigRegistryDefinition, $serviceId, $tag['type'] ?? null);
             }
         }
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\Definition $feedConfigRepositoryDefinition
+     * @param \Symfony\Component\DependencyInjection\Definition $feedConfigRegistryDefinition
      * @param string $serviceId
-     * @param string $type
+     * @param string|null $type
      */
-    private function registerFeedConfig(Definition $feedConfigRepositoryDefinition, $serviceId, $type)
+    private function registerFeedConfig(Definition $feedConfigRegistryDefinition, $serviceId, $type)
     {
-        if (!array_key_exists($type, self::REGISTER_METHOD_BY_TYPE)) {
-            throw new \Shopsys\ShopBundle\Model\Feed\Exception\UnknownFeedConfigTypeException(
-                $serviceId,
-                $type,
-                array_keys(self::REGISTER_METHOD_BY_TYPE)
-            );
+        $arguments = [new Reference($serviceId)];
+        if ($type !== null) {
+            FeedConfigRegistry::assertTypeIsKnown($type);
+            $arguments[] = $type;
         }
 
-        $registerMethod = self::REGISTER_METHOD_BY_TYPE[$type];
-        $serviceReference = new Reference($serviceId);
-
-        $feedConfigRepositoryDefinition->addMethodCall($registerMethod, [$serviceReference]);
+        $feedConfigRegistryDefinition->addMethodCall('registerFeedConfig', $arguments);
     }
 }

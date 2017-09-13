@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Component\Plugin;
 
 use Shopsys\Plugin\PluginCrudExtensionInterface;
 use Shopsys\ShopBundle\Component\Plugin\Exception\PluginCrudExtensionAlreadyRegisteredException;
-use Shopsys\ShopBundle\Component\Plugin\Exception\UknownPluginCrudExtensionTypeException;
+use Shopsys\ShopBundle\Component\Plugin\Exception\UnknownPluginCrudExtensionTypeException;
 use Shopsys\ShopBundle\Component\String\TransformString;
 
 class PluginCrudExtensionRegistry
@@ -50,7 +50,7 @@ class PluginCrudExtensionRegistry
     public static function assertTypeIsKnown($type)
     {
         if (!in_array($type, self::KNOWN_TYPES, true)) {
-            throw new UknownPluginCrudExtensionTypeException($type, self::KNOWN_TYPES);
+            throw new UnknownPluginCrudExtensionTypeException($type, self::KNOWN_TYPES);
         }
     }
 }
