@@ -38,6 +38,7 @@ Composer will prompt you to set main parameters (`app/config/parameters.yml`):
 | `mailer_master_email_address`     | set if you want to send all e-mails to one address (useful for development)   |
 | `mailer_delivery_whitelist`       | set if you want to have master e-mail but allow sending to specific addresses |
 | `error_reporting_email_to`        | e-mail address that will be used as recipient for error reports               |
+| `error_reporting_email_from`      | e-mail address that will be used as sender for error reports                  |
 | `secret`                          | randomly generated secret token                                               |
 
 Composer will then prompt you to set parameters for testing environment (`app/config/parameters_test.yml`):

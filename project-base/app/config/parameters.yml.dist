@@ -15,5 +15,6 @@ parameters:
   mailer_delivery_whitelist: [/@shopsys\.com$/]
 
   error_reporting_email_to: ~
+  error_reporting_email_from: ~
 
   secret: ThisTokenIsNotSoSecretChangeIt
