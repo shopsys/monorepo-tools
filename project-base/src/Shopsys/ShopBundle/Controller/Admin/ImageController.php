@@ -169,7 +169,7 @@ class ImageController extends AdminBaseController
             ],
         ];
 
-        if (array_key_exists($sizeName, $imageSizeUsagesTranslations[$entityName])) {
+        if (isset($imageSizeUsagesTranslations[$entityName][$sizeName])) {
             return $imageSizeUsagesTranslations[$entityName][$sizeName];
         } else {
             return t('Not specified for entity %entityName% and size %sizeName%', [
