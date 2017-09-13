@@ -1,0 +1,15 @@
+services:
+  shopsys.product_feed.google_bundle.feed_config:
+    class: Shopsys\ProductFeed\GoogleBundle\GoogleFeedConfig
+    tags:
+      - { name: shopsys.product_feed }
+
+  shopsys.product_feed.google_bundle.product_crud_extension:
+    class: Shopsys\ProductFeed\GoogleBundle\GoogleProductCrudExtension
+    tags:
+      - { name: shopsys.crud_extension, type: product }
+
+  shopsys.product_feed.google_bundle.product_form_type:
+    class: Shopsys\ProductFeed\GoogleBundle\GoogleProductFormType
+    tags:
+      - { name: form.type }
