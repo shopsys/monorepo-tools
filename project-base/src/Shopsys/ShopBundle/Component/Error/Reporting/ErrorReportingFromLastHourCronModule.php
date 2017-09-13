@@ -27,7 +27,7 @@ class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
     /**
      * @var string|null
      */
-    private $emailForErrorReporting;
+    private $errorReportingEmailTo;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade
@@ -45,18 +45,18 @@ class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
     private $setting;
 
     /**
-     * @param string|null $emailForErrorReporting
+     * @param string|null $errorReportingEmailTo
      * @param \Shopsys\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade $logErrorReportingFacade
      * @param \Shopsys\ShopBundle\Model\Mail\MailerService $mailerService
      * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
      */
     public function __construct(
-        $emailForErrorReporting,
+        $errorReportingEmailTo,
         LogErrorReportingFacade $logErrorReportingFacade,
         MailerService $mailerService,
         Setting $setting
     ) {
-        $this->emailForErrorReporting = $emailForErrorReporting;
+        $this->errorReportingEmailTo = $errorReportingEmailTo;
         $this->logErrorReportingFacade = $logErrorReportingFacade;
         $this->mailerService = $mailerService;
         $this->setting = $setting;
@@ -72,7 +72,7 @@ class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
 
     public function run()
     {
-        if ($this->emailForErrorReporting === null) {
+        if ($this->errorReportingEmailTo === null) {
             $this->logger->addInfo('Email for error reporting is not set');
             return;
         }
@@ -107,7 +107,7 @@ class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
             . '<code>' . nl2br(htmlspecialchars($logsTail)) . '</code>';
 
         return new MessageData(
-            $this->emailForErrorReporting,
+            $this->errorReportingEmailTo,
             null,
             $body,
             $subject,

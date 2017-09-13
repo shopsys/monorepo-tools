@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - renamed `FeedConfigFacade::getFeedConfigs()` to `getStandardFeedConfigs()`
     - renamed `FeedFacade::generateFeedsIteratively()` to `generateStandardFeedsIteratively()`
     - renamed `FeedGenerationConfigFactory::createAll()` to `createAllForStandardFeeds()`
+- [`parameters.yml.dist`](app/config/parameters.yml.dist): renamed parameter `email_for_error_reporting` to `error_reporting_email_to` (@vitek-rostislav)
 
 ### Removed
 - email for error reporting removed from [`parameters_test.yml.dist`](app/config/parameters_test.yml.dist) (@vitek-rostislav)
