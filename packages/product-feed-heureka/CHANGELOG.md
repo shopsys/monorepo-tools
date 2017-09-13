@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
 
 ## [0.4.0] - 2017-09-12
-###Added
+### Added
 - New dependencies for dev(@MattCzerner)
     - phpunit/phpunit 5.7.21
     - twig/twig 1.34.0
