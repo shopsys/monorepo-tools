@@ -79,6 +79,34 @@ class CategoryRepository extends NestedTreeRepository
     }
 
     /**
+     * @param \Shopsys\ShopBundle\Model\Category\Category[] $selectedCategories
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     */
+    public function getAllCategoriesOfCollapsedTree(array $selectedCategories)
+    {
+        $openedParentsQueryBuilder = $this->getCategoryRepository()
+            ->createQueryBuilder('c')
+            ->select('c.id')
+            ->where('c.parent IS NULL');
+
+        foreach ($selectedCategories as $selectedCategory) {
+            $where = sprintf('c.lft < %d AND c.rgt > %d', $selectedCategory->getLft(), $selectedCategory->getRgt());
+            $openedParentsQueryBuilder->orWhere($where);
+        }
+
+        $openedParentIds = array_column($openedParentsQueryBuilder->getQuery()->getScalarResult(), 'id');
+
+        return $this->getAllQueryBuilder()
+            ->select('c, cd, ct')
+            ->join('c.domains', 'cd')
+            ->join('c.translations', 'ct')
+            ->where('c.parent IN (:openedParentIds)')
+            ->setParameter('openedParentIds', $openedParentIds)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param int $domainId
      * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Category\Category[]

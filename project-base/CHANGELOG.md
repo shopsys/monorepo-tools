@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - sender email for error reporting is now configured in [`parameters.yml.dist`](app/config/parameters.yml.dist) (@vitek-rostislav)
 - reimplemented [`CategoriesType`](src/Shopsys/ShopBundle/Form/CategoriesType.php) (@Petr Heinz)
     - it now extends `CollectionType` instead of `ChoiceType`
+    - it loads only those categories that are needed to show all selected categories in a tree, not all of them
 
 ### Removed
 - email for error reporting removed from [`parameters_test.yml.dist`](app/config/parameters_test.yml.dist) (@vitek-rostislav)

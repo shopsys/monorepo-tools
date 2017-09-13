@@ -34,7 +34,7 @@ class CategoriesTypeTransformer implements DataTransformerInterface
     public function transform($categories)
     {
         $categories = $categories ?? [];
-        $allCategories = $this->categoryFacade->getAll();
+        $allCategories = $this->categoryFacade->getAllCategoriesOfCollapsedTree($categories);
 
         $isCheckedIndexedByCategoryId = [];
         foreach ($allCategories as $category) {
