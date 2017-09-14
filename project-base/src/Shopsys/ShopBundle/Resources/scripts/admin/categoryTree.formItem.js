@@ -36,7 +36,7 @@
         var initStatus = function () {
             // status could be set to "opened" by children
             if (status === null) {
-                if (self.children.length > 0) {
+                if ($item.data('has-children')) {
                     self.close(false);
                 } else {
                     setStatus(self.STATUS_NONE);
@@ -81,13 +81,13 @@
         };
 
         var updateStatusIcon = function () {
-            $statusIcon.removeClass('svg svg-circle-plus svg-circle-remove sprite sprite-level form-tree__item__icon--level');
+            $statusIcon.removeClass('svg svg-circle-plus svg-circle-remove sprite sprite-level cursor-pointer form-tree__item__icon--level');
             switch (status) {
                 case self.STATUS_OPENED:
-                    $statusIcon.addClass('svg svg-circle-remove');
+                    $statusIcon.addClass('svg svg-circle-remove cursor-pointer');
                     break;
                 case self.STATUS_CLOSED:
-                    $statusIcon.addClass('svg svg-circle-plus');
+                    $statusIcon.addClass('svg svg-circle-plus cursor-pointer');
                     break;
                 case self.STATUS_NONE:
                     $statusIcon.addClass('sprite sprite-level form-tree__item__icon--level');

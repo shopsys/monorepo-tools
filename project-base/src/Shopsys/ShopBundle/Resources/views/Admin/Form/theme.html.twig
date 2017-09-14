@@ -513,7 +513,10 @@
                         {% endif %}
                     {% endif %}
 
-                    <li class="form-tree__item {% if not child.vars.visible %}form-tree__item--muted{% endif %} js-category-tree-form-item">
+                    <li
+                        class="form-tree__item {% if not child.vars.visible %}form-tree__item--muted{% endif %} js-category-tree-form-item"
+                        data-has-children="{{ child.vars.has_children ? 'true' : 'false' }}"
+                    >
                         {{ form_widget(child) }}
                         <ul class="js-category-tree-form-children-container">
 
@@ -531,7 +534,7 @@
 {% block category_checkbox_widget %}
     {% set attr = attr|merge({'class': attr.class|default('') ~ ' js-category-tree-form-item-checkbox'}) %}
     <div class="form-tree__item__click">
-        <span class="form-tree__item__icon js-category-tree-form-item-icon {{ has_children ? 'cursor-pointer' : ''}}"></span>
+        <span class="form-tree__item__icon js-category-tree-form-item-icon"></span>
         <span class="form-tree__item__name">
             <label>
                 {{ block('checkbox_widget') }} {{ category_name }}
