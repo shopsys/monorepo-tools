@@ -16,7 +16,6 @@ class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
     const REPORT_ERRORS_FOR_LAST_SECONDS = 3600 + 300;
     const ROTATED_LOG_NAME = Environment::ENVIRONMENT_PRODUCTION;
 
-    const FROM_EMAIL = 'errors@shopsys.cz';
     const FROM_NAME = 'Error reporting';
 
     /**
@@ -27,7 +26,12 @@ class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
     /**
      * @var string|null
      */
-    private $emailForErrorReporting;
+    private $errorReportingEmailTo;
+
+    /**
+     * @var string|null
+     */
+    private $errorReportingEmailFrom;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade
@@ -45,18 +49,21 @@ class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
     private $setting;
 
     /**
-     * @param string|null $emailForErrorReporting
+     * @param string|null $errorReportingEmailTo
+     * @param string|null $errorReportingEmailFrom
      * @param \Shopsys\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade $logErrorReportingFacade
      * @param \Shopsys\ShopBundle\Model\Mail\MailerService $mailerService
      * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
      */
     public function __construct(
-        $emailForErrorReporting,
+        $errorReportingEmailTo,
+        $errorReportingEmailFrom,
         LogErrorReportingFacade $logErrorReportingFacade,
         MailerService $mailerService,
         Setting $setting
     ) {
-        $this->emailForErrorReporting = $emailForErrorReporting;
+        $this->errorReportingEmailTo = $errorReportingEmailTo;
+        $this->errorReportingEmailFrom = $errorReportingEmailFrom;
         $this->logErrorReportingFacade = $logErrorReportingFacade;
         $this->mailerService = $mailerService;
         $this->setting = $setting;
@@ -72,8 +79,15 @@ class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
 
     public function run()
     {
-        if ($this->emailForErrorReporting === null) {
-            $this->logger->addInfo('Email for error reporting is not set');
+        $missingEmails = [];
+        if ($this->errorReportingEmailTo === null) {
+            $missingEmails[] = 'recipient e-mail';
+        }
+        if ($this->errorReportingEmailFrom === null) {
+            $missingEmails[] = 'sender e-mail';
+        }
+        if (count($missingEmails) > 0) {
+            $this->logger->addInfo('Error reporting was not sent, ' . implode(' and ', $missingEmails) . ' is not set');
             return;
         }
 
@@ -107,11 +121,11 @@ class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
             . '<code>' . nl2br(htmlspecialchars($logsTail)) . '</code>';
 
         return new MessageData(
-            $this->emailForErrorReporting,
+            $this->errorReportingEmailTo,
             null,
             $body,
             $subject,
-            self::FROM_EMAIL,
+            $this->errorReportingEmailFrom,
             self::FROM_NAME
         );
     }

@@ -14,6 +14,7 @@ parameters:
   mailer_master_email_address: no-reply@shopsys.com
   mailer_delivery_whitelist: [/@shopsys\.com$/]
 
-  email_for_error_reporting: ~
+  error_reporting_email_to: ~
+  error_reporting_email_from: ~
 
   secret: ThisTokenIsNotSoSecretChangeIt
