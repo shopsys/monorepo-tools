@@ -5,53 +5,106 @@
 #    - name: gallery
 #      multiple: true
 #      sizes:
-#        - { name: original, width: ~, height: ~, crop: false }
-#        - { name: detail, width: 200, height: 300, crop: false }
-#        - { name: list, width: 100, height: 100, crop: true }
+#        - name: original
+#          width: ~
+#          height: ~
+#          crop: false
+#        - name: detail
+#          width: 200
+#          height: 300
+#          crop: false
+#        - name: list
+#          width: 100
+#          height: 100
+#          crop: true
 #    - name: main
 #      sizes:
-#        - { name: original, width: ~, height: ~, crop: false }
-#        - { name: detail, width: 200, height: 300, crop: false }
+#        - name: original
+#          width: ~
+#          height: ~
+#          crop: false
+#        - name: detail
+#          width: 200
+#          height: 300
+#          crop: false
 
 - name: payment
   class: Shopsys\ShopBundle\Model\Payment\Payment
   sizes:
-    - { name: ~, width: ~, height: 20, crop: false }
+    - name: ~
+      width: ~
+      height: 20
+      crop: false
 
 - name: category
   class: Shopsys\ShopBundle\Model\Category\Category
   sizes:
-    - { name: ~, width: 30, height: 30, crop: false }
+    - name: ~
+      width: 30
+      height: 30
+      crop: false
 
 - name: product
   class: Shopsys\ShopBundle\Model\Product\Product
   multiple: true
   sizes:
-    - { name: ~, width: 550, height: ~, crop: false }
-    - { name: galleryThumbnail, width: ~, height: 35, crop: false }
-    - { name: list, width: 300, height: 200, crop: false }
-    - { name: thumbnail, width: 50, height: 40, crop: false }
+    - name: ~
+      width: 550
+      height: ~
+      crop: false
+    - name: galleryThumbnail
+      width: ~
+      height: 35
+      crop: false
+    - name: list
+      width: 300
+      height: 200
+      crop: false
+    - name: thumbnail
+      width: 50
+      height: 40
+      crop: false
 
 - name: sliderItem
   class: Shopsys\ShopBundle\Model\Slider\SliderItem
   sizes:
-    - { name: ~, width: 918, height: 230, crop: true }
+    - name: ~
+      width: 918
+      height: 230
+      crop: true
 
 - name: transport
   class: Shopsys\ShopBundle\Model\Transport\Transport
   sizes:
-    - { name: ~, width: ~, height: 20, crop: false }
+    - name: ~
+      width: ~
+      height: 20
+      crop: false
 
 - name: noticer
   class: Shopsys\ShopBundle\Model\Advert\Advert
   sizes:
-    - { name: header, width: 1160, height: ~, crop: false }
-    - { name: footer, width: 1160, height: ~, crop: false }
-    - { name: productList, width: 920, height: ~, crop: false }
-    - { name: leftSidebar, width: 220, height: ~, crop: false }
+    - name: header
+      width: 1160
+      height: ~
+      crop: false
+    - name: footer
+      width: 1160
+      height: ~
+      crop: false
+    - name: productList
+      width: 920
+      height: ~
+      crop: false
+    - name: leftSidebar
+      width: 220
+      height: ~
+      crop: false
 
 - name: brand
   class: Shopsys\ShopBundle\Model\Product\Brand\Brand
   sizes:
-    - { name: ~, width: 300, height: 200, crop: false }
-
+    - name: ~
+      width: 300
+      height: 200
+      crop: false
