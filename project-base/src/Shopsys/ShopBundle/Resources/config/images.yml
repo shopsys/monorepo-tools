@@ -15,7 +15,7 @@
 #          crop: true
 #    - name: main
 #      sizes:
-#        - name: detail
+#        - name: ~
 #          width: 200
 #          height: 300
 #          crop: false
