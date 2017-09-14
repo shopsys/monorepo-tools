@@ -29,6 +29,7 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase
                         ImageConfigDefinition::CONFIG_SIZE_WIDTH => null,
                         ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
                         ImageConfigDefinition::CONFIG_SIZE_CROP => false,
+                        ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
                     ],
                 ],
                 ImageConfigDefinition::CONFIG_TYPES => [
@@ -41,12 +42,14 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase
                                 ImageConfigDefinition::CONFIG_SIZE_WIDTH => null,
                                 ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
                                 ImageConfigDefinition::CONFIG_SIZE_CROP => false,
+                                ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
                             ],
                             [
                                 ImageConfigDefinition::CONFIG_SIZE_NAME => null,
                                 ImageConfigDefinition::CONFIG_SIZE_WIDTH => 200,
                                 ImageConfigDefinition::CONFIG_SIZE_HEIGHT => 100,
                                 ImageConfigDefinition::CONFIG_SIZE_CROP => true,
+                                ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE => null,
                             ],
                         ],
                     ],

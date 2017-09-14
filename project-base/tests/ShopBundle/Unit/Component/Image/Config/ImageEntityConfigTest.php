@@ -13,11 +13,11 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase
     {
         $types = [
             'TypeName_1' => [
-                'SizeName_1_1' => new ImageSizeConfig('SizeName_1_1', null, null, false),
-                'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false),
+                'SizeName_1_1' => $this->createImageSizeConfig('SizeName_1_1'),
+                'SizeName_1_2' => $this->createImageSizeConfig('SizeName_1_2'),
             ],
             'TypeName_2' => [
-                'SizeName_2_1' => new ImageSizeConfig('SizeName_2_1', null, null, false),
+                'SizeName_2_1' => $this->createImageSizeConfig('SizeName_2_1'),
             ],
         ];
         $sizes = [];
@@ -32,11 +32,11 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase
     {
         $types = [
             'TypeName_1' => [
-                'SizeName_1_1' => new ImageSizeConfig('SizeName_1_1', null, null, false),
-                'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false),
+                'SizeName_1_1' => $this->createImageSizeConfig('SizeName_1_1'),
+                'SizeName_1_2' => $this->createImageSizeConfig('SizeName_1_2'),
             ],
             'TypeName_2' => [
-                'SizeName_2_1' => new ImageSizeConfig('SizeName_2_1', null, null, false),
+                'SizeName_2_1' => $this->createImageSizeConfig('SizeName_2_1'),
             ],
         ];
         $sizes = [];
@@ -51,15 +51,15 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase
     {
         $types = [
             'TypeName_1' => [
-                'SizeName_1_1' => new ImageSizeConfig('SizeName_1_1', null, null, false),
-                'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false),
+                'SizeName_1_1' => $this->createImageSizeConfig('SizeName_1_1'),
+                'SizeName_1_2' => $this->createImageSizeConfig('SizeName_1_2'),
             ],
             'TypeName_2' => [
-                ImageEntityConfig::WITHOUT_NAME_KEY => new ImageSizeConfig(null, null, null, false),
+                ImageEntityConfig::WITHOUT_NAME_KEY => $this->createImageSizeConfig(null),
             ],
         ];
         $sizes = [
-            ImageEntityConfig::WITHOUT_NAME_KEY => new ImageSizeConfig(null, null, null, false),
+            ImageEntityConfig::WITHOUT_NAME_KEY => $this->createImageSizeConfig(null),
         ];
 
         $imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
@@ -72,5 +72,14 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase
 
         $type2Size1 = $imageEntityConfig->getSizeConfigByType('TypeName_2', null);
         $this->assertSame($types['TypeName_2'][ImageEntityConfig::WITHOUT_NAME_KEY], $type2Size1);
+    }
+
+    /**
+     * @param string $name
+     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig
+     */
+    private function createImageSizeConfig($name)
+    {
+        return new ImageSizeConfig($name, null, null, false, null);
     }
 }

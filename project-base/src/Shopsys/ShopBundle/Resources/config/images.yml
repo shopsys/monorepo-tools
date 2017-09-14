@@ -9,16 +9,19 @@
 #          width: 200
 #          height: 300
 #          crop: false
+#          occurrence: 'Front-end: Product detail, when selected'
 #        - name: list
 #          width: 100
 #          height: 100
 #          crop: true
+#          occurrence: 'Front-end: Product detail'
 #    - name: main
 #      sizes:
 #        - name: ~
 #          width: 200
 #          height: 300
 #          crop: false
+#          occurrence: 'Front-end: Product detail, Product list'
 
 - name: payment
   class: Shopsys\ShopBundle\Model\Payment\Payment
@@ -27,6 +30,7 @@
       width: ~
       height: 20
       crop: false
+      occurrence: 'Front-end: Ordering process'
 
 - name: category
   class: Shopsys\ShopBundle\Model\Category\Category
@@ -35,6 +39,7 @@
       width: 30
       height: 30
       crop: false
+      occurrence: 'Front-end: Product list by category'
 
 - name: product
   class: Shopsys\ShopBundle\Model\Product\Product
@@ -44,18 +49,22 @@
       width: 550
       height: ~
       crop: false
+      occurrence: 'Front-end: Main image in product detail'
     - name: galleryThumbnail
       width: ~
       height: 35
       crop: false
+      occurrence: 'Front-end: Thumbnail of images under the main image in product detail'
     - name: list
       width: 300
       height: 200
       crop: false
+      occurrence: 'Front-end: Listing of products in section, listing of products on special offer'
     - name: thumbnail
       width: 50
       height: 40
       crop: false
+      occurrence: 'Front-end: Preview in autocomplete for search, preview in cart during ordering process'
 
 - name: sliderItem
   class: Shopsys\ShopBundle\Model\Slider\SliderItem
@@ -64,6 +73,7 @@
       width: 918
       height: 230
       crop: true
+      occurrence: 'Front-end: Main page slider'
 
 - name: transport
   class: Shopsys\ShopBundle\Model\Transport\Transport
@@ -72,6 +82,7 @@
       width: ~
       height: 20
       crop: false
+      occurrence: 'Front-end: Ordering process'
 
 - name: noticer
   class: Shopsys\ShopBundle\Model\Advert\Advert
@@ -80,18 +91,22 @@
       width: 1160
       height: ~
       crop: false
+      occurrence: 'Front-end: Advertising under heading'
     - name: footer
       width: 1160
       height: ~
       crop: false
+      occurrence: 'Front-end: Advertising above footer'
     - name: productList
       width: 920
       height: ~
       crop: false
+      occurrence: 'Front-end: Advertising in category (above the category name)'
     - name: leftSidebar
       width: 220
       height: ~
       crop: false
+      occurrence: 'Front-end: Advertising in the left panel under the category tree'
 
 - name: brand
   class: Shopsys\ShopBundle\Model\Product\Brand\Brand
@@ -100,3 +115,4 @@
       width: 300
       height: 200
       crop: false
+      occurrence: 'Front-end: Brand page'

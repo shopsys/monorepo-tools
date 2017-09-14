@@ -122,14 +122,15 @@ class ImageConfigLoader
                     $sizeName,
                     $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_WIDTH],
                     $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_HEIGHT],
-                    $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_CROP]
+                    $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_CROP],
+                    $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE]
                 );
             } else {
                 throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\DuplicateSizeNameException($sizeName);
             }
         }
         if (!array_key_exists(ImageConfig::ORIGINAL_SIZE_NAME, $result)) {
-            $result[ImageConfig::ORIGINAL_SIZE_NAME] = new ImageSizeConfig(ImageConfig::ORIGINAL_SIZE_NAME, null, null, false);
+            $result[ImageConfig::ORIGINAL_SIZE_NAME] = new ImageSizeConfig(ImageConfig::ORIGINAL_SIZE_NAME, null, null, false, null);
         }
 
         return $result;
