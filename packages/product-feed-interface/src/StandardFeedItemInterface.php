@@ -65,6 +65,11 @@ interface StandardFeedItemInterface extends FeedItemInterface
     public function getMainVariantId();
 
     /**
+     * @return bool
+     */
+    public function isSellingDenied();
+
+    /**
      * @param string $name
      * @return mixed
      */
