@@ -7,11 +7,11 @@
     {% for imageEntityConfig in imageEntityConfigs %}
         {% set entityName = imageEntityConfig.entityName %}
         {% if imageEntityConfig.sizeConfigs is not empty %}
-            {{ _self.entitySizes(entityNames[entityName], imageEntityConfig.sizeConfigs, usagesByEntityAndSizeName[entityName]) }}
+            {{ _self.entitySizes(entityName, imageEntityConfig.sizeConfigs, usagesByEntityAndSizeName[entityName]) }}
         {% endif %}
         {% if imageEntityConfig.sizeConfigsByTypes is not empty %}
             {% for typeName, sizeConfigs in imageEntityConfig.sizeConfigsByTypes %}
-                {{ _self.entitySizes(entityNames[entityName] ~ ' - ' ~ typeName, sizeConfigs, usagesByEntityAndTypeAndSizeName[entityName][typeName]) }}
+                {{ _self.entitySizes(entityName ~ ' - ' ~ typeName, sizeConfigs, usagesByEntityAndTypeAndSizeName[entityName][typeName]) }}
             {% endfor %}
         {% endif %}
     {% endfor %}
@@ -19,7 +19,7 @@
 
 {% macro entitySizes(name, sizeConfigs, usages) %}
     <div class="wrap-border">
-        <h2>{{ name }}</h2>
+        <h2>{{ name|humanize }}</h2>
         <table class="table-main">
             <thead>
                 <tr>

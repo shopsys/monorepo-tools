@@ -40,47 +40,9 @@ class ImageController extends AdminBaseController
 
         return $this->render('@ShopsysShop/Admin/Content/Image/overview.html.twig', [
             'imageEntityConfigs' => $imageEntityConfigs,
-            'entityNames' => $this->getEntityNamesTranslations($imageEntityConfigs),
             'usagesByEntityAndSizeName' => $this->getImageSizeUsagesTranslations($imageEntityConfigs),
             'usagesByEntityAndTypeAndSizeName' => $this->getImageSizeWithTypeUsagesTranslations($imageEntityConfigs),
         ]);
-    }
-
-    /**
-     * @param \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigs
-     * @return string[]
-     */
-    private function getEntityNamesTranslations(array $imageEntityConfigs)
-    {
-        $names = [];
-        foreach ($imageEntityConfigs as $imageEntityConfig) {
-            /* @var $imageEntityConfig \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig */
-            $names[$imageEntityConfig->getEntityName()] = $this->getEntityNameTranslation($imageEntityConfig->getEntityName());
-        }
-        return $names;
-    }
-
-    /**
-     * @param string $entityName
-     * @return string
-     */
-    private function getEntityNameTranslation($entityName)
-    {
-        $entityNamesTranslations = [
-            self::ENTITY_NAME_CATEGORY => t('Category'),
-            self::ENTITY_NAME_PAYMENT => t('Payment'),
-            self::ENTITY_NAME_PRODUCT => t('Product'),
-            self::ENTITY_NAME_SLIDER_ITEM => t('Slider page'),
-            self::ENTITY_NAME_TRANSPORT => t('Shipping'),
-            self::ENTITY_NAME_ADVERT => t('Advertising'),
-            self::ENTITY_NAME_BRAND => t('Brand'),
-        ];
-
-        if (array_key_exists($entityName, $entityNamesTranslations)) {
-            return $entityNamesTranslations[$entityName];
-        } else {
-            return $entityName;
-        }
     }
 
     /**
