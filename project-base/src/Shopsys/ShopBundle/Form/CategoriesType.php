@@ -6,6 +6,8 @@ use Shopsys\ShopBundle\Component\Transformers\CategoriesTypeTransformerFactory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,6 +21,16 @@ class CategoriesType extends AbstractType
     public function __construct(CategoriesTypeTransformerFactory $categoryTransformerFactory)
     {
         $this->categoriesTypeTransformerFactory = $categoryTransformerFactory;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormView $view
+     * @param \Symfony\Component\Form\FormInterface $form
+     * @param array $options
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['domain_id'] = $options['domain_id'];
     }
 
     /**
@@ -51,6 +63,7 @@ class CategoriesType extends AbstractType
                 'entry_type' => CategoryCheckboxType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
+                'prototype' => true,
             ]);
 
         $resolver->setNormalizer('entry_options', $entryOptionsNormalizer);

@@ -500,7 +500,16 @@
 
 {% block categories_widget %}
     <div class="form-line__line">
-        <div class="form-tree form-tree--open js-category-tree-form">
+        <div
+            class="form-tree form-tree--open js-category-tree-form"
+            data-prototype="{{
+                '<li class="form-tree__item js-category-tree-form-item">' ~
+                form_widget(form.vars.prototype) ~
+                '<ul class="js-category-tree-form-children-container">' ~
+                '</ul></li>'|e
+            }}"
+            data-hidden-item-class="form-tree__item--muted"
+        >
             <ul class="js-category-tree-form-children-container form-tree__content">
                 {% set level = 1 %}
 
@@ -515,6 +524,7 @@
 
                     <li
                         class="form-tree__item {% if not child.vars.visible %}form-tree__item--muted{% endif %} js-category-tree-form-item"
+                        data-load-url="{{ url('admin_category_loadbranchjson', {id: child.vars.name, domainId: domain_id}) }}"
                         data-has-children="{{ child.vars.has_children ? 'true' : 'false' }}"
                     >
                         {{ form_widget(child) }}

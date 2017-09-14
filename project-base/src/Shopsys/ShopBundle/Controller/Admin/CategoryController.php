@@ -227,4 +227,34 @@ class CategoryController extends AdminBaseController
             'selectedDomainId' => $domainId,
         ]);
     }
+
+    /**
+     * @Route("/category/branch/{domainId}/{id}", requirements={"domainId" = "\d+", "id" = "\d+"}, condition="request.isXmlHttpRequest()")
+     * @param int $domainId
+     * @param int $id
+     */
+    public function loadBranchJsonAction($domainId, $id)
+    {
+        $domainId = (int)$domainId;
+        $id = (int)$id;
+
+        $parentCategory = $this->categoryFacade->getById($id);
+        $categories = $parentCategory->getChildren();
+
+        $categoriesData = [];
+        foreach ($categories as $category) {
+            $categoriesData[] = [
+                'id' => $category->getId(),
+                'categoryName' => $category->getName(),
+                'isVisible' => $category->getCategoryDomain($domainId)->isVisible(),
+                'hasChildren' => $category->hasChildren(),
+                'loadUrl' => $this->generateUrl('admin_category_loadbranchjson', [
+                    'domainId' => $domainId,
+                    'id' => $category->getId(),
+                ]),
+            ];
+        }
+
+        return $this->json($categoriesData);
+    }
 }

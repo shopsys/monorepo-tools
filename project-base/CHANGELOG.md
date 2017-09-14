@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - reimplemented [`CategoriesType`](src/Shopsys/ShopBundle/Form/CategoriesType.php) (@Petr Heinz)
     - it now extends `CollectionType` instead of `ChoiceType`
     - it loads only those categories that are needed to show all selected categories in a tree, not all of them
+    - collapsed categories can be loaded via AJAX
 
 ### Removed
 - email for error reporting removed from [`parameters_test.yml.dist`](app/config/parameters_test.yml.dist) (@vitek-rostislav)
