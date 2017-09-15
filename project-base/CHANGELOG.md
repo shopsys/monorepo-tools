@@ -34,6 +34,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - renamed `FeedGenerationConfigFactory::createAll()` to `createAllForStandardFeeds()`
 - [`parameters.yml.dist`](app/config/parameters.yml.dist): renamed parameter `email_for_error_reporting` to `error_reporting_email_to` (@vitek-rostislav)
 - sender email for error reporting is now configured in [`parameters.yml.dist`](app/config/parameters.yml.dist) (@vitek-rostislav)
+- reimplemented [`CategoriesType`](src/Shopsys/ShopBundle/Form/CategoriesType.php) (@Petr Heinz)
+    - it now extends `CollectionType` instead of `ChoiceType`
+    - it loads only those categories that are needed to show all selected categories in a tree, not all of them
+    - collapsed categories can be loaded via AJAX
+- [`CategoryRepository::findById()`](src/Shopsys/ShopBundle/Model/Category/CategoryRepository.php) now uses `find()` method of Doctrine repository instead of query builder so it can use cached results (@PetrHeinz)
 
 ### Removed
 - email for error reporting removed from [`parameters_test.yml.dist`](app/config/parameters_test.yml.dist) (@vitek-rostislav)

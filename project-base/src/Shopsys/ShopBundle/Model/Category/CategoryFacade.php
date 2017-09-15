@@ -223,6 +223,17 @@ class CategoryFacade
     }
 
     /**
+     * @param \Shopsys\ShopBundle\Model\Category\Category[] $selectedCategories
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     */
+    public function getAllCategoriesOfCollapsedTree(array $selectedCategories)
+    {
+        $categories = $this->categoryRepository->getAllCategoriesOfCollapsedTree($selectedCategories);
+
+        return $categories;
+    }
+
+    /**
      * @param int $domainId
      * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Category\Category[]

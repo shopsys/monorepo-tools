@@ -2,34 +2,25 @@
 
 namespace Shopsys\ShopBundle\Form;
 
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Category\Detail\CategoryDetailFactory;
+use Shopsys\ShopBundle\Component\Transformers\CategoriesTypeTransformerFactory;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CategoriesType extends AbstractType
 {
-    const OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID = 'muted_not_visible_on_domain_id';
-
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
+     * @var \Shopsys\ShopBundle\Component\Transformers\CategoriesTypeTransformerFactory
      */
-    private $categoryFacade;
+    private $categoriesTypeTransformerFactory;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetailFactory
-     */
-    private $categoryDetailFactory;
-
-    public function __construct(
-        CategoryFacade $categoryFacade,
-        CategoryDetailFactory $categoryDetailFactory
-    ) {
-        $this->categoryFacade = $categoryFacade;
-        $this->categoryDetailFactory = $categoryDetailFactory;
+    public function __construct(CategoriesTypeTransformerFactory $categoryTransformerFactory)
+    {
+        $this->categoriesTypeTransformerFactory = $categoryTransformerFactory;
     }
 
     /**
@@ -39,10 +30,18 @@ class CategoriesType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['categoryDetails'] = $this->categoryDetailFactory->createDetailsHierarchy($options['choices']);
-        if (isset($options[self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID])) {
-            $view->vars['mutedNotVisibleOnDomainId'] = $options[self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID];
-        }
+        $view->vars['domain_id'] = $options['domain_id'];
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $categoriesTypeTransformer = $this->categoriesTypeTransformerFactory->create($options['domain_id']);
+
+        $builder->addViewTransformer($categoriesTypeTransformer);
     }
 
     /**
@@ -50,19 +49,24 @@ class CategoriesType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $categories = $this->categoryFacade->getAll();
+        $entryOptionsNormalizer = function (Options $options, $value) {
+            $value['domain_id'] = $value['domain_id'] ?? $options['domain_id'];
+
+            return $value;
+        };
 
         $resolver
-            ->setDefined(self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID)
-            ->setAllowedTypes(self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID, 'int')
+            ->setRequired('domain_id')
+            ->setAllowedTypes('domain_id', 'int')
             ->setDefaults([
-                'choices' => $categories,
-                'choice_label' => 'name',
-                'choice_value' => 'id',
-                'choice_name' => 'id',
-                'multiple' => true,
-                'expanded' => true,
+                'required' => false,
+                'entry_type' => CategoryCheckboxType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
             ]);
+
+        $resolver->setNormalizer('entry_options', $entryOptionsNormalizer);
     }
 
     /**
@@ -70,6 +74,6 @@ class CategoriesType extends AbstractType
      */
     public function getParent()
     {
-        return ChoiceType::class;
+        return CollectionType::class;
     }
 }
