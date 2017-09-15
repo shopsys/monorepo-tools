@@ -6,6 +6,7 @@ use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface;
+use Shopsys\ProductFeed\StandardFeedItemInterface;
 
 class HeurekaFeedConfig implements FeedConfigInterface
 {
@@ -53,15 +54,24 @@ class HeurekaFeedConfig implements FeedConfigInterface
     }
 
     /**
+     * @return string|null
+     */
+    public function getAdditionalInformation()
+    {
+        return null;
+    }
+
+    /**
      * @param \Shopsys\ProductFeed\StandardFeedItemInterface[] $items
      * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
      * @return \Shopsys\ProductFeed\StandardFeedItemInterface[]
      */
     public function processItems(array $items, DomainConfigInterface $domainConfig)
     {
-        $productsDataById = $this->getProductsDataById($items);
+        $sellableItems = array_filter($items, [$this, 'isItemSellable']);
+        $productsDataById = $this->getProductsDataById($sellableItems);
 
-        foreach ($items as $key => $item) {
+        foreach ($sellableItems as $key => $item) {
             $cpc = $productsDataById[$item->getId()]['cpc'][$domainConfig->getId()] ?? null;
             $item->setCustomValue('cpc', $cpc);
 
@@ -69,7 +79,7 @@ class HeurekaFeedConfig implements FeedConfigInterface
             $item->setCustomValue('category_name', $categoryName);
         }
 
-        return $items;
+        return $sellableItems;
     }
 
     /**
@@ -87,5 +97,15 @@ class HeurekaFeedConfig implements FeedConfigInterface
             ->getDataStorage(ShopsysProductFeedHeurekaBundle::class, 'product');
 
         return $productDataStorage->getMultiple($productIds);
+    }
+
+    /**
+     * @param \Shopsys\ProductFeed\StandardFeedItemInterface $item
+     * @return bool
+     * @SuppressWarnings(PHPMD.UnusedPrivateMethod) method is used through array_filter
+     */
+    private function isItemSellable(StandardFeedItemInterface $item)
+    {
+        return !$item->isSellingDenied();
     }
 }
