@@ -18,6 +18,7 @@ class InlineEditPage extends AbstractPage
     public function createNewRow()
     {
         $this->tester->clickByCss('.js-inline-edit-add');
+        $this->tester->waitForAjax();
     }
 
     /**

@@ -43,6 +43,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Removed
 - email for error reporting removed from [`parameters_test.yml.dist`](app/config/parameters_test.yml.dist) (@vitek-rostislav)
 
+### Fixed
+- [`InlineEditPage::createNewRow()`](tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/InlineEditPage.php) now waits for AJAX to complete (@PetrHeinz)
+    - fixes false negatives of acceptance test [`PromoCodeInlineEditCest::testPromoCodeCreate()`](tests/ShopBundle/Acceptance/acceptance/PromoCodeInlineEditCest.php)
+
 ## 2.0.0-beta.15.0 - 2017-08-31
 - previous beta versions released only internally (mentioned changes since 1.0.0)
 
