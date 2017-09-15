@@ -14,6 +14,17 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfigLoader
+     */
+    private $imageConfigLoader;
+
+    public function setUp()
+    {
+        $filesystem = new Filesystem();
+        $this->imageConfigLoader = new ImageConfigLoader($filesystem);
+    }
+
     public function testLoadFromArrayDuplicateEntityName()
     {
         $inputConfig = [
@@ -33,12 +44,9 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
             ],
         ];
 
-        $filesystem = new Filesystem();
-        $imageConfigLoader = new ImageConfigLoader($filesystem);
-
         $previousException = null;
         try {
-            $imageConfigLoader->loadFromArray($inputConfig);
+            $this->imageConfigLoader->loadFromArray($inputConfig);
         } catch (\Shopsys\ShopBundle\Component\Image\Config\Exception\EntityParseException $exception) {
             $previousException = $exception->getPrevious();
         }
@@ -65,12 +73,9 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
             ],
         ];
 
-        $filesystem = new Filesystem();
-        $imageConfigLoader = new ImageConfigLoader($filesystem);
-
         $previousException = null;
         try {
-            $imageConfigLoader->loadFromArray($inputConfig);
+            $this->imageConfigLoader->loadFromArray($inputConfig);
         } catch (\Shopsys\ShopBundle\Component\Image\Config\Exception\EntityParseException $exception) {
             $previousException = $exception->getPrevious();
         }
@@ -105,12 +110,9 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
             ],
         ];
 
-        $filesystem = new Filesystem();
-        $imageConfigLoader = new ImageConfigLoader($filesystem);
-
         $previousException = null;
         try {
-            $imageConfigLoader->loadFromArray($inputConfig);
+            $this->imageConfigLoader->loadFromArray($inputConfig);
         } catch (\Shopsys\ShopBundle\Component\Image\Config\Exception\EntityParseException $exception) {
             $previousException = $exception->getPrevious();
         }
@@ -140,12 +142,9 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
             ],
         ];
 
-        $filesystem = new Filesystem();
-        $imageConfigLoader = new ImageConfigLoader($filesystem);
-
         $previousException = null;
         try {
-            $imageConfigLoader->loadFromArray($inputConfig);
+            $this->imageConfigLoader->loadFromArray($inputConfig);
         } catch (\Shopsys\ShopBundle\Component\Image\Config\Exception\EntityParseException $exception) {
             $previousException = $exception->getPrevious();
         }
@@ -191,10 +190,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
             ],
         ];
 
-        $filesystem = new Filesystem();
-        $imageConfigLoader = new ImageConfigLoader($filesystem);
-
-        $preparedConfig = $imageConfigLoader->loadFromArray($inputConfig);
+        $preparedConfig = $this->imageConfigLoader->loadFromArray($inputConfig);
 
         $imageEntityConfig = $preparedConfig[$inputConfig[0][ImageConfigDefinition::CONFIG_CLASS]];
         $this->assertSame('Class_1', $imageEntityConfig->getEntityClass());
@@ -223,10 +219,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
             ],
         ];
 
-        $filesystem = new Filesystem();
-        $imageConfigLoader = new ImageConfigLoader($filesystem);
-
-        $preparedConfig = $imageConfigLoader->loadFromArray($inputConfig);
+        $preparedConfig = $this->imageConfigLoader->loadFromArray($inputConfig);
 
         $imageEntityConfig = $preparedConfig[$inputConfig[0][ImageConfigDefinition::CONFIG_CLASS]];
         $imageSize = $imageEntityConfig->getSizeConfigByType(null, ImageConfig::ORIGINAL_SIZE_NAME);
@@ -257,10 +250,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
             ],
         ];
 
-        $filesystem = new Filesystem();
-        $imageConfigLoader = new ImageConfigLoader($filesystem);
-
-        $preparedConfig = $imageConfigLoader->loadFromArray($inputConfig);
+        $preparedConfig = $this->imageConfigLoader->loadFromArray($inputConfig);
 
         $imageEntityConfig = $preparedConfig[$inputConfig[0][ImageConfigDefinition::CONFIG_CLASS]];
         $this->assertCount(1, $imageEntityConfig->getSizeConfigs());
