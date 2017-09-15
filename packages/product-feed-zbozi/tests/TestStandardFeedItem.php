@@ -37,6 +37,11 @@ class TestStandardFeedItem implements StandardFeedItemInterface
     private $priceVat;
 
     /**
+     * @var string
+     */
+    private $currencyCode;
+
+    /**
      * @var string|null
      */
     private $ean;
@@ -77,12 +82,18 @@ class TestStandardFeedItem implements StandardFeedItemInterface
     private $customValues;
 
     /**
+     * @var bool
+     */
+    private $sellingDenied;
+
+    /**
      * @param int $id
      * @param string $productName
      * @param string $description
      * @param string $url
      * @param string|null $imgUrl
      * @param string $priceVat
+     * @param string $currencyCode
      * @param string|null $ean
      * @param int|null $deliveryDate
      * @param string|null $manufacturer
@@ -90,6 +101,7 @@ class TestStandardFeedItem implements StandardFeedItemInterface
      * @param string[] $parametersByName
      * @param string|null $partno
      * @param int|null $mainVariantId
+     * @param bool $sellingDenied
      */
     public function __construct(
         $id,
@@ -98,13 +110,15 @@ class TestStandardFeedItem implements StandardFeedItemInterface
         $url,
         $imgUrl,
         $priceVat,
+        $currencyCode,
         $ean,
         $deliveryDate,
         $manufacturer,
         $categoryText,
         $parametersByName,
         $partno,
-        $mainVariantId
+        $mainVariantId,
+        $sellingDenied
     ) {
         $this->id = $id;
         $this->productName = $productName;
@@ -112,6 +126,7 @@ class TestStandardFeedItem implements StandardFeedItemInterface
         $this->url = $url;
         $this->imgUrl = $imgUrl;
         $this->priceVat = $priceVat;
+        $this->currencyCode = $currencyCode;
         $this->ean = $ean;
         $this->deliveryDate = $deliveryDate;
         $this->manufacturer = $manufacturer;
@@ -120,6 +135,7 @@ class TestStandardFeedItem implements StandardFeedItemInterface
         $this->partno = $partno;
         $this->mainVariantId = $mainVariantId;
         $this->customValues = [];
+        $this->sellingDenied = $sellingDenied;
     }
 
     /**
@@ -168,6 +184,14 @@ class TestStandardFeedItem implements StandardFeedItemInterface
     public function getPriceVat()
     {
         return $this->priceVat;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrencyCode()
+    {
+        return $this->currencyCode;
     }
 
     /**
@@ -224,6 +248,14 @@ class TestStandardFeedItem implements StandardFeedItemInterface
     public function getMainVariantId()
     {
         return $this->mainVariantId;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSellingDenied()
+    {
+        return $this->sellingDenied;
     }
 
     /**

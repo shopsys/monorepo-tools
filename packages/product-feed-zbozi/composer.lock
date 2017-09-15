@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2eb1727eddbcf48f57bf4c6ff51df9c2",
+    "content-hash": "3b865359574f2c8135321b551700776f",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -412,16 +412,16 @@
         },
         {
             "name": "shopsys/product-feed-interface",
-            "version": "v0.3.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/product-feed-interface.git",
-                "reference": "aa3a2c7c6da36b257cbdbf05112ef84386d3e4be"
+                "reference": "147ac218104a6b0417b92b6f15c84c132f4cb496"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-interface/zipball/aa3a2c7c6da36b257cbdbf05112ef84386d3e4be",
-                "reference": "aa3a2c7c6da36b257cbdbf05112ef84386d3e4be",
+                "url": "https://api.github.com/repos/shopsys/product-feed-interface/zipball/147ac218104a6b0417b92b6f15c84c132f4cb496",
+                "reference": "147ac218104a6b0417b92b6f15c84c132f4cb496",
                 "shasum": ""
             },
             "require": {
@@ -455,7 +455,7 @@
                 "plugin",
                 "product feed"
             ],
-            "time": "2017-09-12T11:36:12+00:00"
+            "time": "2017-09-25T13:24:51+00:00"
         },
         {
             "name": "symfony/cache",

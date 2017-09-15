@@ -18,6 +18,7 @@ class ZboziFeedTest extends TestCase
     const PRODUCT_ID_FIRST = 1;
     const PRODUCT_ID_SECOND = 2;
     const PRODUCT_ID_THIRD = 3;
+    const PRODUCT_ID_FOURTH = 4;
     const DOMAIN_ID_FIRST = 1;
     const DOMAIN_ID_SECOND = 2;
 
@@ -119,13 +120,15 @@ class ZboziFeedTest extends TestCase
             'http://www.example.com/product/1',
             'http://www.example.com/product/img/1.jpg',
             '127.90',
+            'CZK',
             '79846532EQER',
             5,
             'Best Manufacturer',
             'Electronics | Sub-category',
             ['Param #1' => 'Value #1', 'Param #2' => 'Value #2'],
             '132465798',
-            null
+            null,
+            false
         );
 
         $feedItems[] = new TestStandardFeedItem(
@@ -135,13 +138,15 @@ class ZboziFeedTest extends TestCase
             'http://www.example.com/product/2',
             null,
             '10',
+            'CZK',
             null,
             '',
             null,
             null,
             [],
             null,
-            12
+            12,
+            false
         );
 
         $feedItems[] = new TestStandardFeedItem(
@@ -151,13 +156,33 @@ class ZboziFeedTest extends TestCase
             'http://www.example.com/product/3',
             'http://www.example.com/product/img/3.jpg',
             '256.65789',
+            'CZK',
             '6459879887AE',
             '',
             'Manufacturer',
             'Lorem category ipsum...',
             [],
             '132465798',
-            null
+            null,
+            false
+        );
+
+        $feedItems[] = new TestStandardFeedItem(
+            self::PRODUCT_ID_FOURTH,
+            'Product with denied selling',
+            'Lorem ipsum...',
+            'http://www.example.com/product/4',
+            'http://www.example.com/product/img/4.jpg',
+            '987.65789',
+            'EUR',
+            '13E45RT8A',
+            '',
+            'Manufacturer',
+            'Lorem category ipsum...',
+            [],
+            '132465798',
+            null,
+            true
         );
 
         return $feedItems;

@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
 - [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
+### Changed
+- Dependency [product-feed-interface](shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0 (@MattCzerner)
+- [`ZboziFeedConfig`](src/ZboziFeedConfig.php) now filters not sellable products (@MattCzerner)
+- [`ZboziFeedConfig`](src/ZboziFeedConfig.php) implemented method `getAdditionalData()` (@MattCzerner)
+- [`TestStandardFeedItem`](tests/TestStandardFeedItem.php) implemented method `getCurrencyCode()` (@MattCzerner)
 
 ## [0.4.0] - 2017-09-12
 ### Added

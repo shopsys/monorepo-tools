@@ -5,6 +5,7 @@ namespace Shopsys\ProductFeed\ZboziBundle;
 use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
+use Shopsys\ProductFeed\StandardFeedItemInterface;
 
 class ZboziFeedConfig implements FeedConfigInterface
 {
@@ -44,6 +45,14 @@ class ZboziFeedConfig implements FeedConfigInterface
     }
 
     /**
+     * @return string|null
+     */
+    public function getAdditionalInformation()
+    {
+        return null;
+    }
+
+    /**
      * @param \Shopsys\ProductFeed\StandardFeedItemInterface[] $items
      * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
      * @return \Shopsys\ProductFeed\StandardFeedItemInterface[]
@@ -51,14 +60,16 @@ class ZboziFeedConfig implements FeedConfigInterface
     public function processItems(array $items, DomainConfigInterface $domainConfig)
     {
         $domainId = $domainConfig->getId();
-        $productsDataById = $this->getProductsDataById($items);
+        $sellableItems = array_filter($items, [$this, 'isItemSellable']);
+        $productsDataById = $this->getProductsDataIndexedByItemId($sellableItems);
 
-        foreach ($items as $key => $item) {
-            $productData = $productsDataById[$item->getId()] ?? [];
-
+        foreach ($sellableItems as $key => $item) {
+            $itemId = $item->getId();
+            $productData = $productsDataById[$itemId] ?? [];
             $showInFeed = $productData['show'][$domainId] ?? true;
+
             if (!$showInFeed) {
-                unset($items[$key]);
+                unset($sellableItems[$key]);
                 continue;
             }
 
@@ -66,14 +77,14 @@ class ZboziFeedConfig implements FeedConfigInterface
             $item->setCustomValue('cpc_search', $productData['cpc_search'][$domainId] ?? null);
         }
 
-        return $items;
+        return $sellableItems;
     }
 
     /**
-     * @param array $items
+     * @param \Shopsys\ProductFeed\StandardFeedItemInterface[] $items
      * @return array
      */
-    private function getProductsDataById(array $items)
+    private function getProductsDataIndexedByItemId(array $items)
     {
         $productIds = [];
         foreach ($items as $item) {
@@ -84,5 +95,15 @@ class ZboziFeedConfig implements FeedConfigInterface
             ->getDataStorage(ShopsysProductFeedZboziBundle::class, 'product');
 
         return $productDataStorage->getMultiple($productIds);
+    }
+
+    /**
+     * @param \Shopsys\ProductFeed\StandardFeedItemInterface $item
+     * @return bool
+     * @SuppressWarnings(PHPMD.UnusedPrivateMethod) method is used through array_filter
+     */
+    private function isItemSellable(StandardFeedItemInterface $item)
+    {
+        return !$item->isSellingDenied();
     }
 }
