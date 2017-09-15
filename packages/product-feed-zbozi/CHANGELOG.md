@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - New automatic test that is controlling right behaviour of plugin (@MattCzerner)
 - Added travis build icon into [README.md](README.md) (@MattCzerner)
 ### Changed
-- Dependency [plugin-interface](shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0 (@MattCzerner)
+- Dependency [product-feed-interface](shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0 (@MattCzerner)
 ### Removed
 - `ZboziFeedConfig::getFeedItemRepository()` (@MattCzerner)
 
