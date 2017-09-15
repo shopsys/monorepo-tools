@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
 - [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
 
+### Changed
+- Dependency [product-feed-interface](shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0 (@MattCzerner)
+
 ## [0.2.0]
 ### Added
 - This Changelog (@vitek-rostislav)

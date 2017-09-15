@@ -32,6 +32,14 @@ class HeurekaDeliveryFeedConfig implements FeedConfigInterface
     }
 
     /**
+     * @return string|null
+     */
+    public function getAdditionalInformation()
+    {
+        return null;
+    }
+
+    /**
      * @param \Shopsys\ProductFeed\DeliveryFeedItemInterface[] $items
      * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
      * @return \Shopsys\ProductFeed\DeliveryFeedItemInterface[]
