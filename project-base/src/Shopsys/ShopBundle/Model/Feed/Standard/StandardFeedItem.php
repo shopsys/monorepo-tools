@@ -77,12 +77,23 @@ class StandardFeedItem implements StandardFeedItemInterface
     private $customValues;
 
     /**
+     * @var bool
+     */
+    private $sellingDenied;
+
+    /**
+     * @var string
+     */
+    private $currencyCode;
+
+    /**
      * @param int $id
      * @param string $productName
      * @param string $description
      * @param string $url
      * @param string|null $imgUrl
      * @param string $priceVat
+     * @param string $currencyCode
      * @param string|null $ean
      * @param int|null $deliveryDate
      * @param string|null $manufacturer
@@ -90,6 +101,7 @@ class StandardFeedItem implements StandardFeedItemInterface
      * @param string[] $parametersByName
      * @param string|null $partno
      * @param int|null $mainVariantId
+     * @param bool $sellingDenied
      */
     public function __construct(
         $id,
@@ -98,13 +110,15 @@ class StandardFeedItem implements StandardFeedItemInterface
         $url,
         $imgUrl,
         $priceVat,
+        $currencyCode,
         $ean,
         $deliveryDate,
         $manufacturer,
         $categoryText,
         $parametersByName,
         $partno,
-        $mainVariantId
+        $mainVariantId,
+        $sellingDenied
     ) {
         $this->id = $id;
         $this->productName = $productName;
@@ -120,6 +134,8 @@ class StandardFeedItem implements StandardFeedItemInterface
         $this->partno = $partno;
         $this->mainVariantId = $mainVariantId;
         $this->customValues = [];
+        $this->sellingDenied = $sellingDenied;
+        $this->currencyCode = $currencyCode;
     }
 
     /**
@@ -168,6 +184,14 @@ class StandardFeedItem implements StandardFeedItemInterface
     public function getPriceVat()
     {
         return $this->priceVat;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrencyCode()
+    {
+        return $this->currencyCode;
     }
 
     /**
@@ -224,6 +248,14 @@ class StandardFeedItem implements StandardFeedItemInterface
     public function getMainVariantId()
     {
         return $this->mainVariantId;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSellingDenied()
+    {
+        return $this->sellingDenied;
     }
 
     /**

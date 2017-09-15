@@ -94,6 +94,7 @@ class FeedController extends AdminBaseController
                     'url' => $this->feedConfigFacade->getFeedUrl($feedConfig, $domainConfig),
                     'created' => file_exists($filepath) ? new DateTime('@' . filemtime($filepath)) : null,
                     'actions' => null,
+                    'additionalInformation' => $feedConfig->getAdditionalInformation(),
                 ];
             }
         }

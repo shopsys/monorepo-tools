@@ -4,6 +4,8 @@ namespace Shopsys\ShopBundle\Model\Feed\Standard;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\ShopBundle\Model\Product\Product;
@@ -26,18 +28,26 @@ class StandardFeedItemFactory
     private $categoryFacade;
 
     /**
+     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+     */
+    private $currencyFacade;
+
+    /**
      * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
      * @param \Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionFacade $productCollectionFacade
      * @param \Shopsys\ShopBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
      */
     public function __construct(
         ProductPriceCalculationForUser $productPriceCalculationForUser,
         ProductCollectionFacade $productCollectionFacade,
-        CategoryFacade $categoryFacade
+        CategoryFacade $categoryFacade,
+        CurrencyFacade $currencyFacade
     ) {
         $this->productPriceCalculationForUser = $productPriceCalculationForUser;
         $this->productCollectionFacade = $productCollectionFacade;
         $this->categoryFacade = $categoryFacade;
+        $this->currencyFacade = $currencyFacade;
     }
 
     /**
@@ -57,6 +67,7 @@ class StandardFeedItemFactory
             $products,
             $domainConfig
         );
+        $currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainConfig->getId());
 
         $items = [];
         foreach ($products as $product) {
@@ -69,13 +80,15 @@ class StandardFeedItemFactory
                 $urlsByProductId[$product->getId()],
                 $imagesByProductId[$product->getId()],
                 $this->getProductPrice($product, $domainConfig->getId())->getPriceWithVat(),
+                $currency->getCode(),
                 $product->getEan(),
                 $product->getCalculatedAvailability()->getDispatchTime(),
                 $this->getProductManufacturer($product),
                 $this->getProductCategoryText($product, $domainConfig),
                 $this->getProductParamsIndexedByParamName($product, $paramsByProductIdAndName),
                 $product->getPartno(),
-                $this->findProductMainVariantId($product)
+                $this->findProductMainVariantId($product),
+                $product->isSellingDenied()
             );
         }
 

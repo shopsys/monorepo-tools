@@ -2,6 +2,16 @@
 
 {% macro getLabel(row) %}
     {{ row.feedLabel }} - {{ row.domainConfig.name }}
+    {% if row.additionalInformation is not null %}
+        <span
+            title="{{ row.additionalInformation }}"
+            class="js-tooltip cursor-help"
+            data-toggle="tooltip"
+            data-placement="right"
+        >
+            <i class="svg svg-question"></i>
+        </span>
+    {% endif %}
 {% endmacro %}
 
 {% block grid_value_cell_id_label %}

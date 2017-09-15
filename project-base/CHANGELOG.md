@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - phing targets `eslint-check`, `eslint-check-diff`, `eslint-fix` and `eslint-fix-diff` to check and fix coding standards in JS files (@sspooky13)
     - executed as a part of targets `standards`, `standards-diff`, `standards-fix` and `standards-fix-diff`
 
+### Changed
+- [`StandardFeedItemRepository`](src/Shopsys/ShopBundle/Model/Feed/Standard/StandardFeedItemRepository.php): now selects available products instead of sellable, filtering of not sellable products is made in product plugins (@MattCzerner)
+- implementations of `StandardFeedItemInterface` now must have implemented methods `isSellingDenied()` and `getCurrencyCode()`(@MattCzerner)
+- implementations of `FeedConfigInterface` now must have implemented method `getAdditionalInformation()` (@MattCzerner)
+
 ## [2.0.0-beta.16.0] - 2017-09-19
 ### Added
 - new command `shopsys:plugin-data-fixtures:load` for loading demo data from plugins (@MattCzerner)
