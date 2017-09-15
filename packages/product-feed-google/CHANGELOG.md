@@ -7,3 +7,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## Unreleased
 ### Added
 - added basic logic of product feed for Google (@MattCzerner)
+- composer.json: added shopsys/coding-standards into require-dev (@MattCzerner)

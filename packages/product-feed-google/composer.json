@@ -26,5 +26,8 @@
         "symfony/framework-bundle": "^3.0",
         "symfony/translation": "^3.0",
         "symfony/validator": "^3.0"
+    },
+    "require-dev": {
+        "shopsys/coding-standards": "3.0.2"
     }
 }
