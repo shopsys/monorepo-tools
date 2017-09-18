@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.0.0-beta.16.0] - 2017-09-19
 ### Added
 - new command `shopsys:plugin-data-fixtures:load` for loading demo data from plugins (@MattCzerner)
     - called during build of demo database
@@ -103,4 +105,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - full friendly URL for main entities
 - customizable SEO attributes for main entities
 
-[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.15.0...HEAD
+[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.16.0...HEAD
+[2.0.0-beta.16.0]:https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.15.0...v2.0.0-beta.16.0 
