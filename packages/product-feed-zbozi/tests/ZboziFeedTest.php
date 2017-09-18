@@ -35,7 +35,8 @@ class ZboziFeedConfigTest extends TestCase
      */
     private $twig;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->productDataStorageMock = $this->createMock(DataStorageInterface::class);
         $pluginDataStorageProviderMock = $this->createMock(PluginDataStorageProviderInterface::class);
 
@@ -49,7 +50,8 @@ class ZboziFeedConfigTest extends TestCase
         $this->twig = new Twig_Environment($twigLoader);
     }
 
-    public function testGeneratingOfFeed() {
+    public function testGeneratingOfFeed()
+    {
         $feedItems = $this->getFeedItemsData();
         $pluginData = $this->getPluginData();
 
@@ -79,7 +81,8 @@ class ZboziFeedConfigTest extends TestCase
      * @param DomainConfigInterface $domainConfig
      * @return string
      */
-    private function getFeedOutputByFeedItems($feedItems, $domainConfig) {
+    private function getFeedOutputByFeedItems($feedItems, $domainConfig)
+    {
         $feedContent = '';
 
         $feedTemplate = $this->twig->load('feed.xml.twig');
@@ -102,9 +105,10 @@ class ZboziFeedConfigTest extends TestCase
     }
 
     /**
-    * @return array
-    */
-    private function getFeedItemsData() {
+     * @return array
+     */
+    private function getFeedItemsData()
+    {
         $feedItems = [];
 
         $feedItems[] = new TestStandardFeedItem(
@@ -161,7 +165,8 @@ class ZboziFeedConfigTest extends TestCase
     /**
      * @return array
      */
-    private function getPluginData() {
+    private function getPluginData()
+    {
         $pluginData = [];
 
         $pluginData[self::PRODUCT_ID_FIRST] = [
@@ -216,7 +221,8 @@ class ZboziFeedConfigTest extends TestCase
      * @param $feedContent
      * @return string
      */
-    private function normalizeXml($feedContent) {
+    private function normalizeXml($feedContent)
+    {
         $document = new DOMDocument('1.0');
         $document->preserveWhiteSpace = false;
         $document->formatOutput = true;
