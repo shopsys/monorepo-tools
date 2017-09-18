@@ -17,6 +17,11 @@
             ]
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
         "php": "^7.0",
         "shopsys/form-types-bundle": "^0.1.0",
@@ -28,6 +33,8 @@
         "symfony/validator": "^3.0"
     },
     "require-dev": {
-        "shopsys/coding-standards": "3.0.2"
+        "phpunit/phpunit": "^6.0",
+        "shopsys/coding-standards": "3.0.2",
+        "twig/twig": "^1.34.0"
     }
 }

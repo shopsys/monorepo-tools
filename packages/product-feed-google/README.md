@@ -1,4 +1,7 @@
 # Shopsys Framework Google Product Feed Plugin
+
+[![Build Status](https://travis-ci.org/shopsys/product-feed-google.svg?branch=master)](https://travis-ci.org/shopsys/product-feed-google)
+
 Plugin for [Shopsys Framework](https://www.shopsys-framework.com) responsible for generating XML product feed for [Google](https://www.google.com).
 
 For detailed information about the feed see [official documentation](https://support.google.com/merchants/answer/7052112?hl=en).
