@@ -8,7 +8,7 @@ msgstr ""
 msgid "Availability name cannot be longer than {{ limit }} characters"
 msgstr "Název dostupnosti nesmí být delší než {{ limit }} znaků"
 
-#: ProductFormType.php:118
+#: ProductFormType.php:125
 msgid "Catalogue number cannot be longer then {{ limit }} characters"
 msgstr "Katalogové číslo nesmí být delší než {{ limit }} znaků"
 
@@ -46,7 +46,7 @@ msgstr "Název státu nesmí být delší než {{ limit }} znaků"
 msgid "E-mail subject cannot be longer than {{ limit }} characters"
 msgstr "Předmět e-mailu nesmí být delší než {{ limit }} znaků"
 
-#: ProductFormType.php:130
+#: ProductFormType.php:137
 msgid "EAN cannot be longer then {{ limit }} characters"
 msgstr "EAN nesmí být delší než {{ limit }} znaků"
 
@@ -64,10 +64,10 @@ msgstr "Každý parametr může být nastaven pouze jednou"
 msgid "Email cannot be longer then {{ limit }} characters"
 msgstr "E-mail nesmí být delší než {{ limit }} znaků"
 
-#: ProductFormType.php:233
 #: ProductFormType.php:240
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:235
+#: ProductFormType.php:247
 #: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:242
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:249
 msgid "Enter date in DD.MM.YYYY format"
 msgstr "Datum zadávejte ve formátu dd.mm.rrrr"
 
@@ -167,7 +167,7 @@ msgstr "Počet dní k expedici musí být celé číslo"
 msgid "Parameter name cannot be longer than {{ limit }} characters"
 msgstr "Název parametru nesmí být delší než {{ limit }} znaků"
 
-#: ProductFormType.php:124
+#: ProductFormType.php:131
 msgid "Part number cannot be longer than {{ limit }} characters"
 msgstr "Výrobní číslo nesmí být delší než {{ limit }} znaků"
 
@@ -203,7 +203,7 @@ msgstr "Heslo nesmí být stejné jako přihlašovací jméno"
 msgid "Passwords do not match"
 msgstr "Hesla se neshodují"
 
-#: ProductFormType.php:186
+#: ProductFormType.php:193
 msgid "Please choose action"
 msgstr "Prosím vyberte akci"
 
@@ -219,8 +219,8 @@ msgstr "Prosím vyberte typ reklamy"
 msgid "Please choose article placement"
 msgstr "Prosím vyberte umístění článku"
 
-#: ProductFormType.php:170
-#: ProductFormType.php:199
+#: ProductFormType.php:177
+#: ProductFormType.php:206
 msgid "Please choose availability"
 msgstr "Prosím vyberte dostupnost"
 
@@ -258,7 +258,7 @@ msgstr "Vyberte prosím platbu"
 msgid "Please choose shipping type"
 msgstr "Vyberte prosím dopravu"
 
-#: ProductFormType.php:158
+#: ProductFormType.php:165
 msgid "Please choose unit"
 msgstr "Prosím vyberte jednotku"
 
@@ -282,13 +282,13 @@ msgstr "Vyplňte prosím název dph"
 #: OrderPaymentFormType.php:39
 #: OrderTransportFormType.php:39
 #: PaymentFormType.php:75
-#: ProductFormType.php:227
+#: ProductFormType.php:234
 #: TransportFormType.php:60
 #: VatFormType.php:41
 msgid "Please enter VAT rate"
 msgstr "Vyplňte prosím výši DPH"
 
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:143
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:150
 msgid "Please enter a number"
 msgstr "Prosím zadejte číslo"
 
@@ -470,14 +470,14 @@ msgstr "Vyplňte prosím heslo"
 #: FreeTransportAndPaymentPriceLimitsFormType.php:78
 #: PaymentEditFormType.php:55
 #: ProductEditFormType.php:232
-#: ProductFormType.php:211
+#: ProductFormType.php:218
 #: TransportEditFormType.php:55
 msgid "Please enter price"
 msgstr "Prosím vyplňte cenu"
 
 #: src/Shopsys/ShopBundle/Form/Admin/Payment/PaymentEditFormType.php:53
 #: src/Shopsys/ShopBundle/Form/Admin/Product/ProductEditFormType.php:229
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:208
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:215
 #: src/Shopsys/ShopBundle/Form/Admin/Transport/TransportEditFormType.php:53
 #: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:38
 #: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:51
@@ -509,11 +509,11 @@ msgstr "Vyplňte prosím kód skriptu"
 msgid "Please enter script name"
 msgstr "Vyplňte prosím název skriptu"
 
-#: ProductFormType.php:263
+#: ProductFormType.php:270
 msgid "Please enter sorting priority"
 msgstr "Prosím vyplňte prioritu řazení zboží"
 
-#: ProductFormType.php:146
+#: ProductFormType.php:153
 msgid "Please enter stock quantity"
 msgstr "Prosím zadejte množství skladem"
 
@@ -590,12 +590,12 @@ msgstr "Původně vybraná hlavní URL již neexistuje"
 #: ProductEditFormType.php:237
 #: ProductFilterFormType.php:42
 #: ProductFilterFormType.php:55
-#: ProductFormType.php:216
+#: ProductFormType.php:223
 #: TransportEditFormType.php:58
 msgid "Price must be greater or equal to {{ compared_value }}"
 msgstr "Cena musí být větší nebo rovna {{ compared_value }}"
 
-#: ProductFormType.php:107
+#: ProductFormType.php:114
 msgid "Product name cannot be longer than {{ limit }} characters"
 msgstr "Název produktu nesmí být delší než {{ limit }} znaků"
 

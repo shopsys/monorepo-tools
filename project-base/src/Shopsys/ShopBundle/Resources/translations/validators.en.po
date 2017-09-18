@@ -8,7 +8,7 @@ msgstr ""
 msgid "Availability name cannot be longer than {{ limit }} characters"
 msgstr ""
 
-#: ProductFormType.php:118
+#: ProductFormType.php:125
 msgid "Catalogue number cannot be longer then {{ limit }} characters"
 msgstr ""
 
@@ -46,7 +46,7 @@ msgstr ""
 msgid "E-mail subject cannot be longer than {{ limit }} characters"
 msgstr ""
 
-#: ProductFormType.php:130
+#: ProductFormType.php:137
 msgid "EAN cannot be longer then {{ limit }} characters"
 msgstr ""
 
@@ -64,10 +64,10 @@ msgstr ""
 msgid "Email cannot be longer then {{ limit }} characters"
 msgstr ""
 
-#: ProductFormType.php:233
 #: ProductFormType.php:240
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:235
+#: ProductFormType.php:247
 #: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:242
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:249
 msgid "Enter date in DD.MM.YYYY format"
 msgstr ""
 
@@ -167,7 +167,7 @@ msgstr ""
 msgid "Parameter name cannot be longer than {{ limit }} characters"
 msgstr ""
 
-#: ProductFormType.php:124
+#: ProductFormType.php:131
 msgid "Part number cannot be longer than {{ limit }} characters"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Passwords do not match"
 msgstr ""
 
-#: ProductFormType.php:186
+#: ProductFormType.php:193
 msgid "Please choose action"
 msgstr ""
 
@@ -219,8 +219,8 @@ msgstr ""
 msgid "Please choose article placement"
 msgstr ""
 
-#: ProductFormType.php:170
-#: ProductFormType.php:199
+#: ProductFormType.php:177
+#: ProductFormType.php:206
 msgid "Please choose availability"
 msgstr ""
 
@@ -258,7 +258,7 @@ msgstr ""
 msgid "Please choose shipping type"
 msgstr ""
 
-#: ProductFormType.php:158
+#: ProductFormType.php:165
 msgid "Please choose unit"
 msgstr ""
 
@@ -282,13 +282,13 @@ msgstr ""
 #: OrderPaymentFormType.php:39
 #: OrderTransportFormType.php:39
 #: PaymentFormType.php:75
-#: ProductFormType.php:227
+#: ProductFormType.php:234
 #: TransportFormType.php:60
 #: VatFormType.php:41
 msgid "Please enter VAT rate"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:143
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:150
 msgid "Please enter a number"
 msgstr ""
 
@@ -470,14 +470,14 @@ msgstr ""
 #: FreeTransportAndPaymentPriceLimitsFormType.php:78
 #: PaymentEditFormType.php:55
 #: ProductEditFormType.php:232
-#: ProductFormType.php:211
+#: ProductFormType.php:218
 #: TransportEditFormType.php:55
 msgid "Please enter price"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Form/Admin/Payment/PaymentEditFormType.php:53
 #: src/Shopsys/ShopBundle/Form/Admin/Product/ProductEditFormType.php:229
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:208
+#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:215
 #: src/Shopsys/ShopBundle/Form/Admin/Transport/TransportEditFormType.php:53
 #: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:38
 #: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:51
@@ -509,11 +509,11 @@ msgstr ""
 msgid "Please enter script name"
 msgstr ""
 
-#: ProductFormType.php:263
+#: ProductFormType.php:270
 msgid "Please enter sorting priority"
 msgstr ""
 
-#: ProductFormType.php:146
+#: ProductFormType.php:153
 msgid "Please enter stock quantity"
 msgstr ""
 
@@ -590,12 +590,12 @@ msgstr ""
 #: ProductEditFormType.php:237
 #: ProductFilterFormType.php:42
 #: ProductFilterFormType.php:55
-#: ProductFormType.php:216
+#: ProductFormType.php:223
 #: TransportEditFormType.php:58
 msgid "Price must be greater or equal to {{ compared_value }}"
 msgstr ""
 
-#: ProductFormType.php:107
+#: ProductFormType.php:114
 msgid "Product name cannot be longer than {{ limit }} characters"
 msgstr ""
 
