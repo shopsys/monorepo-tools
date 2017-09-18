@@ -7,26 +7,26 @@
     {% for imageEntityConfig in imageEntityConfigs %}
         {% set entityName = imageEntityConfig.entityName %}
         {% if imageEntityConfig.sizeConfigs is not empty %}
-            {{ _self.entitySizes(entityNames[entityName], imageEntityConfig.sizeConfigs, usagesByEntityAndSizeName[entityName]) }}
+            {{ _self.entitySizes(entityName, imageEntityConfig.sizeConfigs) }}
         {% endif %}
         {% if imageEntityConfig.sizeConfigsByTypes is not empty %}
             {% for typeName, sizeConfigs in imageEntityConfig.sizeConfigsByTypes %}
-                {{ _self.entitySizes(entityNames[entityName] ~ ' - ' ~ typeName, sizeConfigs, usagesByEntityAndTypeAndSizeName[entityName][typeName]) }}
+                {{ _self.entitySizes(entityName ~ ' - ' ~ typeName, sizeConfigs) }}
             {% endfor %}
         {% endif %}
     {% endfor %}
 {% endblock %}
 
-{% macro entitySizes(name, sizeConfigs, usages) %}
+{% macro entitySizes(name, sizeConfigs) %}
     <div class="wrap-border">
-        <h2>{{ name }}</h2>
+        <h2>{{ name|humanize }}</h2>
         <table class="table-main">
             <thead>
                 <tr>
                     <th class="table-col-20">{{ 'Size name'|trans }}</th>
                     <th class="table-col-10">{{ 'Width [px]'|trans }}</th>
                     <th class="table-col-10">{{ 'Height [px]'|trans }}</th>
-                    <th class="table-col-50">{{ 'Occurence'|trans }}</th>
+                    <th class="table-col-50">{{ 'Occurrence'|trans }}</th>
                     <th class="table-col-10 text-right">{{ 'Cropping'|trans }}</th>
                 </tr>
             </thead>
@@ -37,7 +37,7 @@
                             <td>{{ sizeConfig.name|default('default'|trans)|humanize }}</td>
                             <td>{{ sizeConfig.width|default('-')}}</td>
                             <td>{{ sizeConfig.height|default('-') }}</td>
-                            <td>{{ usages[sizeConfig.name|default('default')] }}</td>
+                            <td>{{ sizeConfig.occurrence|default('-') }}</td>
                             <td class ="text-right">
                                 {% if sizeConfig.crop == true %}
                                     {{ 'Yes'|trans }}

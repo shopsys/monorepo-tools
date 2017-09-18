@@ -18,6 +18,7 @@ class ImageConfigDefinition implements ConfigurationInterface
     const CONFIG_SIZE_WIDTH = 'width';
     const CONFIG_SIZE_HEIGHT = 'height';
     const CONFIG_SIZE_CROP = 'crop';
+    const CONFIG_SIZE_OCCURRENCE = 'occurrence';
 
     /**
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
@@ -49,9 +50,10 @@ class ImageConfigDefinition implements ConfigurationInterface
                     ->prototype('array')
                     ->children()
                         ->scalarNode(self::CONFIG_SIZE_NAME)->isRequired()->end()
-                        ->scalarNode(self::CONFIG_SIZE_WIDTH)->end()
-                        ->scalarNode(self::CONFIG_SIZE_HEIGHT)->end()
+                        ->scalarNode(self::CONFIG_SIZE_WIDTH)->defaultNull()->end()
+                        ->scalarNode(self::CONFIG_SIZE_HEIGHT)->defaultNull()->end()
                         ->scalarNode(self::CONFIG_SIZE_CROP)->defaultFalse()->end()
+                        ->scalarNode(self::CONFIG_SIZE_OCCURRENCE)->defaultNull()->end()
                     ->end()
                 ->end()
                 ->end()
@@ -66,9 +68,10 @@ class ImageConfigDefinition implements ConfigurationInterface
                             ->prototype('array')
                             ->children()
                                 ->scalarNode(self::CONFIG_SIZE_NAME)->isRequired()->end()
-                                ->scalarNode(self::CONFIG_SIZE_WIDTH)->end()
-                                ->scalarNode(self::CONFIG_SIZE_HEIGHT)->end()
+                                ->scalarNode(self::CONFIG_SIZE_WIDTH)->defaultNull()->end()
+                                ->scalarNode(self::CONFIG_SIZE_HEIGHT)->defaultNull()->end()
                                 ->scalarNode(self::CONFIG_SIZE_CROP)->defaultFalse()->end()
+                                ->scalarNode(self::CONFIG_SIZE_OCCURRENCE)->defaultNull()->end()
                             ->end()
                         ->end()
                     ->end()

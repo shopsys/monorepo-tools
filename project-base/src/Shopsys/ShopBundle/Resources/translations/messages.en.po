@@ -3010,7 +3010,7 @@ msgid "Number of products in filter"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Image/overview.html.twig:29
-msgid "Occurence"
+msgid "Occurrence"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:881

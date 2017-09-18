@@ -21,13 +21,13 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase
                 'entityName1',
                 'entityClass1',
                 [],
-                ['sizeName1_1' => new ImageSizeConfig('sizeName1_1', null, null, false)],
+                ['sizeName1_1' => new ImageSizeConfig('sizeName1_1', null, null, false, null)],
                 []
             ),
             new ImageEntityConfig(
                 'entityName2',
                 'entityClass2',
-                ['type' => ['sizeName2_1' => new ImageSizeConfig('sizeName2_1', null, null, false)]],
+                ['type' => ['sizeName2_1' => new ImageSizeConfig('sizeName2_1', null, null, false, null)]],
                 [],
                 []
             ),

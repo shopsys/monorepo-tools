@@ -39,6 +39,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - it loads only those categories that are needed to show all selected categories in a tree, not all of them
     - collapsed categories can be loaded via AJAX
 - [`CategoryRepository::findById()`](src/Shopsys/ShopBundle/Model/Category/CategoryRepository.php) now uses `find()` method of Doctrine repository instead of query builder so it can use cached results (@PetrHeinz)
+- it is possible to mention occurrences of an image size in [`images.yml`](src/Shopsys/ShopBundle/Resources/config/images.yml) (@PetrHeinz)
+    - previously they were directly in [`ImageController`](src/Shopsys/ShopBundle/Controller/Admin/ImageController.php)
+    - they are not translatable anymore (too hard to maintain)
 
 ### Removed
 - email for error reporting removed from [`parameters_test.yml.dist`](app/config/parameters_test.yml.dist) (@vitek-rostislav)
