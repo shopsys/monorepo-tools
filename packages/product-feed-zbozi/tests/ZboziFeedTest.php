@@ -12,7 +12,7 @@ use Shopsys\ProductFeed\ZboziBundle\ZboziFeedConfig;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
-class ZboziFeedConfigTest extends TestCase
+class ZboziFeedTest extends TestCase
 {
     const EXPECTED_XML_FILE_NAME = 'test.xml';
     const PRODUCT_ID_FIRST = 1;
