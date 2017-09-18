@@ -20,6 +20,7 @@ class ZboziFeedTest extends TestCase
     const PRODUCT_ID_THIRD = 3;
     const DOMAIN_ID_FIRST = 1;
     const DOMAIN_ID_SECOND = 2;
+
     /**
      * @var \Shopsys\ProductFeed\ZboziBundle\ZboziFeedConfig
      */
@@ -218,7 +219,7 @@ class ZboziFeedTest extends TestCase
     }
 
     /**
-     * @param $feedContent
+     * @param string $feedContent
      * @return string
      */
     private function normalizeXml($feedContent)
