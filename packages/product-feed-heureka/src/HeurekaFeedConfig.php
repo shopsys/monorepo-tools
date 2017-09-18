@@ -69,7 +69,7 @@ class HeurekaFeedConfig implements FeedConfigInterface
     public function processItems(array $items, DomainConfigInterface $domainConfig)
     {
         $sellableItems = array_filter($items, [$this, 'isItemSellable']);
-        $productsDataById = $this->getProductsDataById($sellableItems);
+        $productsDataById = $this->getProductsDataIndexedByItemId($sellableItems);
 
         foreach ($sellableItems as $key => $item) {
             $cpc = $productsDataById[$item->getId()]['cpc'][$domainConfig->getId()] ?? null;
@@ -83,10 +83,10 @@ class HeurekaFeedConfig implements FeedConfigInterface
     }
 
     /**
-     * @param array $items
+     * @param \Shopsys\ProductFeed\StandardFeedItemInterface[] $items
      * @return array
      */
-    private function getProductsDataById(array $items)
+    private function getProductsDataIndexedByItemId(array $items)
     {
         $productIds = [];
         foreach ($items as $item) {
