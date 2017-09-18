@@ -110,9 +110,9 @@
         "ext-pgsql": "*",
         "ext-zip": "*",
         "codeception/codeception": "2.3.5",
-        "shopsys/coding-standards": "3.0.1",
-        "shopsys/http-smoke-testing": "1.0.0",
-        "shopsys/phpstorm-inspect": "1.0.4"
+        "shopsys/coding-standards": "3.0.2",
+        "shopsys/http-smoke-testing": "1.0.1",
+        "shopsys/phpstorm-inspect": "1.0.6"
     },
     "scripts": {
         "post-install-cmd": [
