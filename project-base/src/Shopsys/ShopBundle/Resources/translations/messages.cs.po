@@ -33,7 +33,7 @@ msgstr "- Nastavení emailů"
 msgid "- Heureka - Verified by Customer"
 msgstr "- Heureka - Ověřeno zákazníky"
 
-#: ProductFormType.php:183
+#: ProductFormType.php:190
 msgid "-- Choose action --"
 msgstr "-- Vyberte akci --"
 
@@ -50,12 +50,12 @@ msgstr "-- Vyberte článek --"
 msgid "-- Choose article position --"
 msgstr "-- Vyberte umístění článku --"
 
-#: ProductFormType.php:167
-#: ProductFormType.php:196
+#: ProductFormType.php:174
+#: ProductFormType.php:203
 msgid "-- Choose availability --"
 msgstr "-- Vyberte dostupnost --"
 
-#: ProductFormType.php:138
+#: ProductFormType.php:145
 msgid "-- Choose brand --"
 msgstr "-- Vyberte značku --"
 
@@ -107,7 +107,7 @@ msgid "Active"
 msgstr "Aktivní"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ProductPicker/listGrid.html.twig:47
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:697
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:723
 msgid "Add"
 msgstr "Přidat"
 
@@ -214,7 +214,6 @@ msgstr "Přehled administrátorů"
 msgid "Advanced search"
 msgstr "Rozšířené hledání"
 
-#: ImageController.php:75
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:4
 msgid "Advertising"
@@ -382,7 +381,7 @@ msgstr "Pozor, druhá varianta prozatím nemá js, které by s ní pracovalo!"
 msgid "Automatic stock calculation"
 msgstr "Automatické výpočty skladových zásob"
 
-#: ProductFormType.php:256
+#: ProductFormType.php:263
 msgid "Automatically"
 msgstr "Automaticky"
 
@@ -547,7 +546,6 @@ msgid "Bolder line"
 msgstr "Výraznější řádek"
 
 #: AdvancedSearchProductFilterTranslation.php:18
-#: ImageController.php:76
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:87
@@ -664,7 +662,6 @@ msgstr "Katalogové číslo"
 msgid "Categories"
 msgstr "Kategorie"
 
-#: ImageController.php:70
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:5
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopCategory/list.html.twig:12
@@ -1748,7 +1745,7 @@ msgstr "Nastala chyba, zkuste to, prosím, znovu."
 msgid "Exchange rate"
 msgstr "Kurz"
 
-#: ProductFormType.php:181
+#: ProductFormType.php:188
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:105
 msgid "Exclude from sale"
 msgstr "Vyřadit z prodeje"
@@ -1933,55 +1930,6 @@ msgstr "Doprava a platba zdarma"
 msgid "Free shipping and payment settings saved"
 msgstr "Nastavení dopravy a platby zdarma bylo uloženo"
 
-#: ImageController.php:155
-msgid "Front-end: Advertising above footer"
-msgstr "Front-end: Reklama nad patičkou"
-
-#: ImageController.php:158
-msgid "Front-end: Advertising in category (above the category name)"
-msgstr "Front-end: Reklama v kategorii (nad názvem kategorie)"
-
-#: ImageController.php:161
-msgid "Front-end: Advertising in the left panel under the category tree"
-msgstr "Front-end: Reklama v levém panelu pod stromem kategorií"
-
-#: ImageController.php:152
-msgid "Front-end: Advertising under heading"
-msgstr "Front-end: Reklama pod hlavičkou"
-
-#: ImageController.php:166
-msgid "Front-end: Brand page"
-msgstr "Front-end: Stránka značky"
-
-#: ImageController.php:147
-msgid "Front-end: Category guidepost"
-msgstr "Front-end: Rozcestník kategorií"
-
-#: ImageController.php:129
-msgid "Front-end: Listing of products in section, listing of products on special offer"
-msgstr "Front-end: Výpis produktů v oddělení, výpis akčního zboží"
-
-#: ImageController.php:123
-msgid "Front-end: Main image in product detail"
-msgstr "Front-end: Hlavní obrázek na detailu produktu"
-
-#: ImageController.php:137
-msgid "Front-end: Main page slider"
-msgstr "Front-end: Slider na hlavní straně"
-
-#: ImageController.php:118
-#: ImageController.php:142
-msgid "Front-end: Ordering process"
-msgstr "Front-end: Objednávkový proces"
-
-#: ImageController.php:132
-msgid "Front-end: Preview in autocomplete for search, preview in cart during ordering process"
-msgstr "Front-end: Náhled v našeptávači pro vyhledávání, náhled v košíku během objednávkového procesu"
-
-#: ImageController.php:126
-msgid "Front-end: Thumbnail of images under the main image in product detail"
-msgstr "Front-end: Náhledy dalších obrázků pod hlavním obrázkem na detailu produktu"
-
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 msgid "Frontend"
 msgstr "Frontend"
@@ -2094,7 +2042,7 @@ msgstr "Skrýt"
 msgid "Hide advertisement"
 msgstr "Skrýt reklamu"
 
-#: ProductFormType.php:180
+#: ProductFormType.php:187
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:97
 msgid "Hide product"
 msgstr "Skrýt zboží"
@@ -2615,7 +2563,7 @@ msgstr "Hlavní varianta"
 msgid "Make modification"
 msgstr "Provést úpravu"
 
-#: ProductFormType.php:257
+#: ProductFormType.php:264
 msgid "Manually"
 msgstr "Ručně"
 
@@ -2682,7 +2630,7 @@ msgid "More information"
 msgstr "Více informací"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:349
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:718
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:744
 msgid "Move"
 msgstr "Přesunout"
 
@@ -2964,14 +2912,6 @@ msgstr "Nelze přiřadit produkt sám sobě"
 msgid "Not possible to create variations of products that are already variant or main variant."
 msgstr "Nelze vytvářet varianty ze zboží, které jsou již variantou nebo hlavní variantou."
 
-#: ImageController.php:175
-msgid "Not specified for entity %entityName% and size %sizeName%"
-msgstr "Není zadáno pro entitu %entityName% a rozměr %sizeName%"
-
-#: ImageController.php:219
-msgid "Not specified for entity %entityName%, type %typeName% and size %sizeName%"
-msgstr "Není zadáno pro entitu %entityName%, typ %typeName% a rozměr %sizeName%"
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:68
 msgid "Not using ID and !important for CSS"
 msgstr "Nevyužívání ID a !important pro CSS"
@@ -2987,7 +2927,7 @@ msgstr "Poznámka"
 msgid "Nothing to choose from"
 msgstr "Není z čeho vybírat"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:660
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:686
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormTheme.html.twig:32
 #: src/Shopsys/ShopBundle/Resources/views/Front/Form/theme.html.twig:203
 msgid "Nothing to choose from."
@@ -3264,7 +3204,6 @@ msgstr "Heslo musí mít minimálně 6 znaků a nesmí být stejné jako přihla
 msgid "Password successfully changed"
 msgstr "Heslo bylo úspěšně změněno"
 
-#: ImageController.php:71
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/preview.html.twig:19
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:8
@@ -3498,10 +3437,6 @@ msgstr "Nastavení cenotvorby bylo upraveno"
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:72
 msgid "Print"
 msgstr "Vytisknout"
-
-#: ImageController.php:72
-msgid "Product"
-msgstr "Produkt"
 
 #: CartController.php:282
 msgid "Product <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }}) added to the cart"
@@ -4008,7 +3943,7 @@ msgstr "Výrobní číslo"
 msgid "Set"
 msgstr "Nastavit"
 
-#: ProductFormType.php:179
+#: ProductFormType.php:186
 msgid "Set alternative availability"
 msgstr "Nastavit alternativní dostupnost"
 
@@ -4041,7 +3976,6 @@ msgstr "Nastavení"
 msgid "Settings modified."
 msgstr "Nastavení bylo upraveno."
 
-#: ImageController.php:74
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/preview.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:8
@@ -4134,7 +4068,6 @@ msgstr "Velikosti: 5, 10, 15, 20, 40, 45, 60, 80, 40px"
 msgid "Slider on main page"
 msgstr "Slider na titulce"
 
-#: ImageController.php:73
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:8
 msgid "Slider page"

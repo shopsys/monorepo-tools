@@ -33,7 +33,7 @@ msgstr ""
 msgid "- Heureka - Verified by Customer"
 msgstr ""
 
-#: ProductFormType.php:183
+#: ProductFormType.php:190
 msgid "-- Choose action --"
 msgstr ""
 
@@ -50,12 +50,12 @@ msgstr ""
 msgid "-- Choose article position --"
 msgstr ""
 
-#: ProductFormType.php:167
-#: ProductFormType.php:196
+#: ProductFormType.php:174
+#: ProductFormType.php:203
 msgid "-- Choose availability --"
 msgstr ""
 
-#: ProductFormType.php:138
+#: ProductFormType.php:145
 msgid "-- Choose brand --"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgid "Active"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ProductPicker/listGrid.html.twig:47
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:697
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:723
 msgid "Add"
 msgstr ""
 
@@ -214,7 +214,6 @@ msgstr ""
 msgid "Advanced search"
 msgstr ""
 
-#: ImageController.php:75
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:4
 msgid "Advertising"
@@ -382,7 +381,7 @@ msgstr ""
 msgid "Automatic stock calculation"
 msgstr ""
 
-#: ProductFormType.php:256
+#: ProductFormType.php:263
 msgid "Automatically"
 msgstr ""
 
@@ -547,7 +546,6 @@ msgid "Bolder line"
 msgstr ""
 
 #: AdvancedSearchProductFilterTranslation.php:18
-#: ImageController.php:76
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:87
@@ -664,7 +662,6 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: ImageController.php:70
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:5
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopCategory/list.html.twig:12
@@ -1748,7 +1745,7 @@ msgstr ""
 msgid "Exchange rate"
 msgstr ""
 
-#: ProductFormType.php:181
+#: ProductFormType.php:188
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:105
 msgid "Exclude from sale"
 msgstr ""
@@ -1933,55 +1930,6 @@ msgstr ""
 msgid "Free shipping and payment settings saved"
 msgstr ""
 
-#: ImageController.php:155
-msgid "Front-end: Advertising above footer"
-msgstr ""
-
-#: ImageController.php:158
-msgid "Front-end: Advertising in category (above the category name)"
-msgstr ""
-
-#: ImageController.php:161
-msgid "Front-end: Advertising in the left panel under the category tree"
-msgstr ""
-
-#: ImageController.php:152
-msgid "Front-end: Advertising under heading"
-msgstr ""
-
-#: ImageController.php:166
-msgid "Front-end: Brand page"
-msgstr ""
-
-#: ImageController.php:147
-msgid "Front-end: Category guidepost"
-msgstr ""
-
-#: ImageController.php:129
-msgid "Front-end: Listing of products in section, listing of products on special offer"
-msgstr ""
-
-#: ImageController.php:123
-msgid "Front-end: Main image in product detail"
-msgstr ""
-
-#: ImageController.php:137
-msgid "Front-end: Main page slider"
-msgstr ""
-
-#: ImageController.php:118
-#: ImageController.php:142
-msgid "Front-end: Ordering process"
-msgstr ""
-
-#: ImageController.php:132
-msgid "Front-end: Preview in autocomplete for search, preview in cart during ordering process"
-msgstr ""
-
-#: ImageController.php:126
-msgid "Front-end: Thumbnail of images under the main image in product detail"
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 msgid "Frontend"
 msgstr ""
@@ -2094,7 +2042,7 @@ msgstr ""
 msgid "Hide advertisement"
 msgstr ""
 
-#: ProductFormType.php:180
+#: ProductFormType.php:187
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:97
 msgid "Hide product"
 msgstr ""
@@ -2615,7 +2563,7 @@ msgstr ""
 msgid "Make modification"
 msgstr ""
 
-#: ProductFormType.php:257
+#: ProductFormType.php:264
 msgid "Manually"
 msgstr ""
 
@@ -2682,7 +2630,7 @@ msgid "More information"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:349
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:718
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:744
 msgid "Move"
 msgstr ""
 
@@ -2964,14 +2912,6 @@ msgstr ""
 msgid "Not possible to create variations of products that are already variant or main variant."
 msgstr ""
 
-#: ImageController.php:175
-msgid "Not specified for entity %entityName% and size %sizeName%"
-msgstr ""
-
-#: ImageController.php:219
-msgid "Not specified for entity %entityName%, type %typeName% and size %sizeName%"
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:68
 msgid "Not using ID and !important for CSS"
 msgstr ""
@@ -2987,7 +2927,7 @@ msgstr ""
 msgid "Nothing to choose from"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:660
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:686
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormTheme.html.twig:32
 #: src/Shopsys/ShopBundle/Resources/views/Front/Form/theme.html.twig:203
 msgid "Nothing to choose from."
@@ -3264,7 +3204,6 @@ msgstr ""
 msgid "Password successfully changed"
 msgstr ""
 
-#: ImageController.php:71
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/preview.html.twig:19
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:8
@@ -3497,10 +3436,6 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:72
 msgid "Print"
-msgstr ""
-
-#: ImageController.php:72
-msgid "Product"
 msgstr ""
 
 #: CartController.php:282
@@ -4008,7 +3943,7 @@ msgstr ""
 msgid "Set"
 msgstr ""
 
-#: ProductFormType.php:179
+#: ProductFormType.php:186
 msgid "Set alternative availability"
 msgstr ""
 
@@ -4041,7 +3976,6 @@ msgstr ""
 msgid "Settings modified."
 msgstr ""
 
-#: ImageController.php:74
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/preview.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:8
@@ -4134,7 +4068,6 @@ msgstr ""
 msgid "Slider on main page"
 msgstr ""
 
-#: ImageController.php:73
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:8
 msgid "Slider page"
