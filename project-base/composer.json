@@ -2,6 +2,7 @@
     "name": "shopsys/shopsys",
     "type": "project",
     "description": "ShopSys Framework",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Shopsys\\": [
