@@ -7,8 +7,8 @@ use PHPUnit\Framework\TestCase;
 use Shopsys\Plugin\DataStorageInterface;
 use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
-use Shopsys\ProductFeed\HeurekaBundle\ShopsysProductFeedHeurekaBundle;
 use Shopsys\ProductFeed\HeurekaBundle\HeurekaFeedConfig;
+use Shopsys\ProductFeed\HeurekaBundle\ShopsysProductFeedHeurekaBundle;
 use Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
@@ -56,7 +56,8 @@ class HeurekaFeedTest extends TestCase
         $this->twig = new Twig_Environment($twigLoader);
     }
 
-    public function testGeneratingOfFeed() {
+    public function testGeneratingOfFeed()
+    {
         $feedItems = $this->getFeedItemsData();
         $pluginData = $this->getPluginData();
 
@@ -86,7 +87,8 @@ class HeurekaFeedTest extends TestCase
      * @param DomainConfigInterface $domainConfig
      * @return string
      */
-    private function getFeedOutputByFeedItems($feedItems, $domainConfig) {
+    private function getFeedOutputByFeedItems($feedItems, $domainConfig)
+    {
         $feedContent = '';
         $feedTemplate = $this->twig->load('feed.xml.twig');
 
@@ -108,9 +110,10 @@ class HeurekaFeedTest extends TestCase
     }
 
     /**
-    * @return array
-    */
-    private function getFeedItemsData() {
+     * @return array
+     */
+    private function getFeedItemsData()
+    {
         $feedItems = [];
 
         $feedItems[] = new TestStandardFeedItem(
@@ -188,7 +191,7 @@ class HeurekaFeedTest extends TestCase
             'cpc' => [
                 self::DOMAIN_ID_FIRST => null,
                 self::DOMAIN_ID_SECOND => null,
-            ]
+            ],
         ];
 
         return $pluginData;
