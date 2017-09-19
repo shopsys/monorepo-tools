@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - new command `shopsys:plugin-data-fixtures:load` for loading demo data from plugins (@MattCzerner)
     - called during build of demo database
-- new documentation abuout Shopsys Framework model architecture (@TomasLudvik)
+- new documentation about Shopsys Framework model architecture (@TomasLudvik)
 - `FeedItemRepositoryInterface` (@vitek-rostislav)
     - moved from [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface/)
 - [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
