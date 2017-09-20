@@ -43,7 +43,7 @@
         $loaderOverlay.remove();
 
         // If multiple overlays are shown over the same element class should be removed only when no overlay is shown anymore
-        if ($loaderElement.children(".in-overlay__in").length === 0) {
+        if ($loaderElement.children('.in-overlay__in').length === 0) {
             $loaderElement.removeClass('in-overlay');
         }
     };

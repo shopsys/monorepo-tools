@@ -26,7 +26,7 @@
         clearTimeout(Shopsys.orderRememberData.delayedSaveDataTimer);
         var $orderForm = $('#js-order-form');
         Shopsys.ajaxPendingCall('Shopsys.orderRememberData.saveData', {
-            type: "POST",
+            type: 'POST',
             url: $orderForm.data('ajax-save-url'),
             data: $orderForm.serialize(),
             loaderElement: null
