@@ -34,6 +34,13 @@ interface FeedConfigInterface
     public function getTemplateFilepath();
 
     /**
+     * Returns additional information about the product feed for the administrator.
+     *
+     * @return string|null
+     */
+    public function getAdditionalInformation();
+
+    /**
      * Filters or modifies a batch of feed items before passing it into the template.
      *
      * @param \Shopsys\ProductFeed\FeedItemInterface[] $items
