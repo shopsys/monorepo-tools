@@ -1,0 +1,18 @@
+{
+    "extends": "standard",
+    "rules": {
+        "semi": ["error", "always"],
+        "indent": ["error", 4, {"SwitchCase": 1}],
+        "operator-linebreak": ["error", "before"],
+        "padded-blocks": "off",
+        "no-undef": "off",
+        "no-multi-str": "off",
+        "no-redeclare": "off",
+        "eqeqeq": "off",
+        "no-eval": "off"
+    },
+    "globals": {
+        "Shopsys": true,
+        "jQuery": true
+    }
+}

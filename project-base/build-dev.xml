@@ -95,6 +95,15 @@
             </filterchain>
         </property>
 
+        <property name="diff.files.js" value="${diff.files.all}">
+            <filterchain>
+                <linecontainsregexp>
+                    <!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
+                    <regexp pattern="\.js\s*$" />
+                </linecontainsregexp>
+            </filterchain>
+        </property>
+
         <property name="diff.files.php" value="${diff.files.all}">
             <filterchain>
                 <linecontainsregexp>
@@ -114,6 +123,14 @@
         </property>
 
         <property name="diff.files.all.spaces" value="${diff.files.all}">
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="[\r\n]+" replace=" " />
+                </replaceregexp>
+            </filterchain>
+        </property>
+
+        <property name="diff.files.js.spaces" value="${diff.files.js}">
             <filterchain>
                 <replaceregexp>
                     <regexp pattern="[\r\n]+" replace=" " />
@@ -145,6 +162,36 @@
                 </replaceregexp>
             </filterchain>
         </property>
+    </target>
+
+    <target name="eslint-check" description="Find JS coding standard violations in all files using ESLint and print human readable output.">
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color" />
+            <arg path="${path.src}" />
+        </exec>
+    </target>
+
+    <target name="eslint-check-diff" depends="diff-files" description="Find JS coding standard violations in changed files using ESLint and print human readable output.">
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color" />
+            <arg line="${diff.files.js.spaces}" />
+        </exec>
+    </target>
+
+    <target name="eslint-fix" description="Fix JS coding standard violations in all files using ESLint.">
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color" />
+            <arg value="--fix" />
+            <arg path="${path.src}" />
+        </exec>
+    </target>
+
+    <target name="eslint-fix-diff" depends="diff-files" description="Fix JS coding standard violations in changed files using ESLint.">
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color" />
+            <arg value="--fix" />
+            <arg line="${diff.files.js.spaces}" />
+        </exec>
     </target>
 
     <target name="phpcbf" description="Fixes coding standards violations in all files by PHP Code Beautifier.">

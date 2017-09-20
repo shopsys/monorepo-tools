@@ -1,6 +1,8 @@
 # Upgrading
 
 ## From 2.0.0-beta.16.0 to Unreleased
+- coding standards for JS files were added, make sure `phing eslint-check` passes
+(you can run `phing eslint-fix` to fix some violations automatically)
 
 ## From 2.0.0-beta.15.0 to 2.0.0-beta.16.0
 - all implementations of `Shopsys\ProductFeed\FeedItemRepositoryInterface` must implement interface `Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface` instead
