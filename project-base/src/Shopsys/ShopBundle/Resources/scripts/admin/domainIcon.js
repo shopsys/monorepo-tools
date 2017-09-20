@@ -44,7 +44,7 @@
                 } else if (data['result'] === 'invalid') {
                     var $iconErrorList = $iconErrorListContainer.show().find('ul');
                     $iconErrorList.find('li').remove();
-                    for (var i in data['errors'] ) {
+                    for (var i in data['errors']) {
                         $iconErrorList.append('<li>' + data['errors'][i] + '</li>');
                     }
                     $spinner.hide();
