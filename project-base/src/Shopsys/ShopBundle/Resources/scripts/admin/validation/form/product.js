@@ -21,7 +21,7 @@
 
                 if ($('input[name="product_edit_form[productData][usingStock]"]:checked').val() === '1') {
                     groups.push(Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\Admin\\Product\\ProductFormType::VALIDATION_GROUP_USING_STOCK'));
-                    if($('select[name="product_edit_form[productData][outOfStockAction]"]').val() === Shopsys.constant('\\Shopsys\\ShopBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY')) {
+                    if ($('select[name="product_edit_form[productData][outOfStockAction]"]').val() === Shopsys.constant('\\Shopsys\\ShopBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY')) {
                         groups.push(Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\Admin\\Product\\ProductFormType::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY'));
                     }
                 } else {
