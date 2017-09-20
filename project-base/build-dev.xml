@@ -12,8 +12,8 @@
     <target name="checks-ci" depends="db-check-mapping,standards-ci,tests,tests-acceptance" description="Checks ORM mapping, coding standards (incl. PhpStorm inspection) and runs unit, DB, smoke and acceptance tests."/>
     <target name="checks-ci-diff" depends="db-check-mapping,standards-ci-diff,tests,tests-acceptance" description="Checks ORM mapping, coding standards on changed files (incl. PhpStorm inspection) and runs unit, DB, smoke and acceptance tests."/>
 
-    <target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint,yaml-lint" description="Checks coding standards."/>
-    <target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint-diff,yaml-lint" description="Checks coding standards on changed files."/>
+    <target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
+    <target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards on changed files."/>
     <target name="standards-ci" depends="standards,phpstorm-inspect" description="Checks coding standards (incl. PhpStorm inspection)."/>
     <target name="standards-ci-diff" depends="standards-diff,phpstorm-inspect" description="Checks coding standards on changed files (incl. PhpStorm inspection)."/>
 
@@ -480,6 +480,7 @@
                 <phingcall target="phpcbf" />
             </catch>
         </trycatch>
+        <phingcall target="eslint-fix" />
     </target>
 
     <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files.">
@@ -492,6 +493,7 @@
                 <phingcall target="phpcbf-diff" />
             </catch>
         </trycatch>
+        <phingcall target="eslint-fix-diff" />
     </target>
 
     <target name="tests-acceptance" depends="test-db-dump" description="Runs acceptance tests. Running Selenium server is required.">
