@@ -4,7 +4,6 @@
     Shopsys.promoCode = Shopsys.promoCode || {};
 
     Shopsys.promoCode.PromoCode = function($container) {
-        var self = this;
         var $promoCodeSubmitButton = $container.filterAllNodes('#js-promo-code-submit-button');
         var $promoCodeInput = $container.filterAllNodes('#js-promo-code-input');
 

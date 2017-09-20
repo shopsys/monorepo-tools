@@ -17,7 +17,6 @@
     };
 
     Shopsys.productsPicker.ProductsPicker = function ($productsPicker) {
-        var self = this;
         var instanceId = Shopsys.productsPicker.instances.length;
         Shopsys.productsPicker.instances[instanceId] = this;
 

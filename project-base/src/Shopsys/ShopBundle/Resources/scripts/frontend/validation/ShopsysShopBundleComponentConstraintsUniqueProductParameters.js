@@ -1,7 +1,6 @@
 (function ($) {
 
     ShopsysShopBundleComponentConstraintsUniqueProductParameters = function() {
-        var self = this;
         this.message = '';
 
         /**

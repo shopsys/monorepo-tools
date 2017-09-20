@@ -324,7 +324,7 @@
         return result;
     };
 
-    var _SymfonyComponentValidatorConstraintsUrl = SymfonyComponentValidatorConstraintsUrl;
+    var _SymfonyComponentValidatorConstraintsUrl = SymfonyComponentValidatorConstraintsUrl; // eslint-disable-line no-unused-vars
     SymfonyComponentValidatorConstraintsUrl = function () {
         this.message = '';
 

@@ -5,8 +5,6 @@
     Shopsys.order.transportAndPayment = Shopsys.order.transportAndPayment || {};
 
     Shopsys.order.transportAndPayment.Prefiller = function () {
-        var self = this;
-
         var $transportSelect = $('#order_form_orderTransport_transport');
         var transportPricesWithVatByTransportId = $transportSelect.closest('.js-order-transport-row').data('transport-prices-with-vat-by-transport-id');
         var transportVatPercentsByTransportId = $transportSelect.closest('.js-order-transport-row').data('transport-vat-percents-by-transport-id');

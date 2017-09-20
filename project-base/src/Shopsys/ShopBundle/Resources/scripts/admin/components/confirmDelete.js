@@ -8,7 +8,6 @@
     };
 
     Shopsys.ConfirmDelete = function (confirmLink, messageContainerSelector) {
-        var self = this;
         var $confirmLink = $(confirmLink);
         var $messageContainer = $(messageContainerSelector);
         var $confirmDeleteForm = $messageContainer.find('.js-confirm-delete-form');
