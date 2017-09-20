@@ -14,7 +14,7 @@
                 Shopsys.ajax({
                     url: $(this).attr('href'),
                     context: this,
-                    success: function(data) {
+                    success: function (data) {
                         Shopsys.window({
                             content: data
                         });

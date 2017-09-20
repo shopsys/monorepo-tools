@@ -8,7 +8,7 @@
 
     var $activeWindow = null;
 
-    var getMainContainer = function() {
+    var getMainContainer = function () {
         var $mainContainer = $('#window-main-container');
         if ($mainContainer.length === 0) {
             $mainContainer = $('<div id="window-main-container"></div>');
@@ -17,7 +17,7 @@
         return $mainContainer;
     };
 
-    var getOverlay = function() {
+    var getOverlay = function () {
         var $overlay = $('#js-overlay');
         if ($overlay.length === 0) {
             $overlay = $('<div id="js-overlay"></div>');
@@ -147,7 +147,7 @@
 
         return $window;
 
-        function show() {
+        function show () {
             showOverlay();
             if (options.closeOnBgClick) {
                 getOverlay().click(function () {
@@ -162,7 +162,7 @@
             $window.fadeIn('fast');
         }
 
-        function moveToCenter() {
+        function moveToCenter () {
             var relativeY = $(window).height() / 2 - $window.height() / 2;
             var minRelativeY = $(window).height() * 0.1;
 

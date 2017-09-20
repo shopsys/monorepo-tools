@@ -1,6 +1,6 @@
 (function ($) {
 
-    ShopsysShopBundleComponentConstraintsUniqueProductParameters = function() {
+    ShopsysShopBundleComponentConstraintsUniqueProductParameters = function () {
         this.message = '';
 
         /**

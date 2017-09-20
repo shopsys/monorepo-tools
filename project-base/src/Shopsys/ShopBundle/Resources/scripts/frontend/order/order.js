@@ -19,14 +19,14 @@
         Shopsys.order.updateContinueButton();
     };
 
-    Shopsys.order.addPaymentTransportRelation = function(paymentId, transportId) {
+    Shopsys.order.addPaymentTransportRelation = function (paymentId, transportId) {
         if (Shopsys.order.paymentTransportRelations[paymentId] === undefined) {
             Shopsys.order.paymentTransportRelations[paymentId] = [];
         }
         Shopsys.order.paymentTransportRelations[paymentId][transportId] = true;
     };
 
-    Shopsys.order.paymentTransportRelationExists = function(paymentId, transportId) {
+    Shopsys.order.paymentTransportRelationExists = function (paymentId, transportId) {
         if (Shopsys.order.paymentTransportRelations[paymentId] !== undefined) {
             if (Shopsys.order.paymentTransportRelations[paymentId][transportId] !== undefined) {
                 return Shopsys.order.paymentTransportRelations[paymentId][transportId];

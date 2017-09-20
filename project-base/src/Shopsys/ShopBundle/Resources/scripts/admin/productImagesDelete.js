@@ -13,7 +13,7 @@
             var $deleteInfo = $image.find('.js-product-images-image-overlay');
             var imageId = $image.data('id');
 
-            $deleteButton.bind('click.deleteImage', function() {
+            $deleteButton.bind('click.deleteImage', function () {
                 Shopsys.choiceControl.select('#product_edit_form_imagesToDelete', imageId);
                 $imagePreview.addClass('list-images__item__in--removed');
                 $deleteButton.hide();
@@ -23,7 +23,7 @@
                 return false;
             });
 
-            $revertButton.bind('click.deleteImage', function() {
+            $revertButton.bind('click.deleteImage', function () {
                 Shopsys.choiceControl.deselect('#product_edit_form_imagesToDelete', imageId);
                 $imagePreview.removeClass('list-images__item__in--removed');
                 $deleteButton.show();

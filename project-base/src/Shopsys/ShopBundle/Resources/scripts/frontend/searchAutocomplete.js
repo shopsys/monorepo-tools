@@ -29,7 +29,7 @@
         $(document).click(Shopsys.search.onDocumentClickHideAutocompleteResults);
     };
 
-    Shopsys.search.autocomplete.onInputChange = function(event) {
+    Shopsys.search.autocomplete.onInputChange = function (event) {
         clearTimeout(requestTimer);
 
         // on "paste" event the $input.val() is not updated with new value yet,
@@ -81,7 +81,7 @@
         });
     };
 
-    Shopsys.search.autocomplete.showResult = function(responseHtml) {
+    Shopsys.search.autocomplete.showResult = function (responseHtml) {
         var $response = $($.parseHTML(responseHtml));
 
         resultExists = $response.find('li').length > 0;

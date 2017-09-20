@@ -1,15 +1,15 @@
-(function($) {
+(function ($) {
 
     Shopsys = Shopsys || {};
     Shopsys.promoCode = Shopsys.promoCode || {};
 
-    Shopsys.promoCode.PromoCode = function($container) {
+    Shopsys.promoCode.PromoCode = function ($container) {
         var $promoCodeSubmitButton = $container.filterAllNodes('#js-promo-code-submit-button');
         var $promoCodeInput = $container.filterAllNodes('#js-promo-code-input');
 
-        this.init = function() {
+        this.init = function () {
             $promoCodeSubmitButton.click(applyPromoCode);
-            $promoCodeInput.keypress(function(event) {
+            $promoCodeInput.keypress(function (event) {
                 if (event.keyCode === Shopsys.keyCodes.ENTER) {
                     applyPromoCode();
                     return false;
@@ -17,7 +17,7 @@
             });
         };
 
-        var applyPromoCode = function() {
+        var applyPromoCode = function () {
             var code = $promoCodeInput.val();
             if (code !== '') {
                 var data = {};
@@ -37,7 +37,7 @@
             }
         };
 
-        var onApplyPromoCode = function(response) {
+        var onApplyPromoCode = function (response) {
             if (response.result === true) {
                 document.location = document.location;
             } else {

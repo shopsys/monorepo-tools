@@ -14,7 +14,7 @@
             .bind('keyup.orderRememberData', Shopsys.orderRememberData.delayedSaveData);
     };
 
-    Shopsys.orderRememberData.delayedSaveData = function() {
+    Shopsys.orderRememberData.delayedSaveData = function () {
         var $this = $(this);
         clearTimeout(Shopsys.orderRememberData.delayedSaveDataTimer);
         Shopsys.orderRememberData.delayedSaveDataTimer = setTimeout(function () {
@@ -22,7 +22,7 @@
         }, Shopsys.orderRememberData.delayedSaveDataDelay);
     };
 
-    Shopsys.orderRememberData.saveData = function() {
+    Shopsys.orderRememberData.saveData = function () {
         clearTimeout(Shopsys.orderRememberData.delayedSaveDataTimer);
         var $orderForm = $('#js-order-form');
         Shopsys.ajaxPendingCall('Shopsys.orderRememberData.saveData', {

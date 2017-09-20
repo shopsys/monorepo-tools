@@ -18,13 +18,13 @@
             $paymentSelect.on('change', onOrderPaymentChange);
         };
 
-        var onOrderTransportChange = function() {
+        var onOrderTransportChange = function () {
             var selectedTransportId = $transportSelect.val();
             $('#order_form_orderTransport_priceWithVat').val(transportPricesWithVatByTransportId[selectedTransportId]);
             $('#order_form_orderTransport_vatPercent').val(transportVatPercentsByTransportId[selectedTransportId]);
         };
 
-        var onOrderPaymentChange = function() {
+        var onOrderPaymentChange = function () {
             var selectedPaymentId = $paymentSelect.val();
             $('#order_form_orderPayment_priceWithVat').val(paymentPricesWithVatByPaymentId[selectedPaymentId]);
             $('#order_form_orderPayment_vatPercent').val(paymentVatPercentsByPaymentId[selectedPaymentId]);

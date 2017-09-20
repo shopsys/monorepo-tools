@@ -8,7 +8,7 @@
     };
 
     Shopsys.targetBlank.bind = function () {
-        $(this).on('click', function() {
+        $(this).on('click', function () {
             var href = $(this).attr('href');
             window.open(href);
             return false;

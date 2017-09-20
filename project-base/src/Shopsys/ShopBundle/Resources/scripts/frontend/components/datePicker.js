@@ -1,9 +1,9 @@
-(function($) {
+(function ($) {
 
     Shopsys = window.Shopsys || {};
 
     var datePicker = function ($container) {
-        $container.filterAllNodes('.js-date-picker').each(function() {
+        $container.filterAllNodes('.js-date-picker').each(function () {
             // Loads regional settings for current locale
             var options = $.datepicker.regional[global.locale] || $.datepicker.regional[''];
 

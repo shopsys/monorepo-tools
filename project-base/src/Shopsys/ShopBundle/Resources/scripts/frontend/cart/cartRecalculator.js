@@ -4,7 +4,7 @@
     Shopsys.cartRecalculator = Shopsys.cartRecalculator || {};
 
     Shopsys.cartRecalculator.init = function ($container) {
-        function reloadWithDelay(delay) {
+        function reloadWithDelay (delay) {
             Shopsys.timeout.setTimeoutAndClearPrevious(
                 'cartRecalculator',
                 function () {

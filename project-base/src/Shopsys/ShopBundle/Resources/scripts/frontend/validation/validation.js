@@ -22,7 +22,7 @@
         return $formInput.filter('input, select, textarea, .form-line');
     };
 
-    Shopsys.validation.highlightSubmitButtons = function($form) {
+    Shopsys.validation.highlightSubmitButtons = function ($form) {
         var $submitButtons = $form.find('.btn[type="submit"]:not(.js-no-validate-button)');
 
         if (Shopsys.validation.isFormValid($form)) {

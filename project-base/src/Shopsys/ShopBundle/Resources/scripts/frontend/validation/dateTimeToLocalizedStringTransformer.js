@@ -1,7 +1,7 @@
 (function ($) {
 
-    SymfonyComponentFormExtensionCoreDataTransformerDateTimeToLocalizedStringTransformer = function() {
-        this.reverseTransform = function(value) {
+    SymfonyComponentFormExtensionCoreDataTransformerDateTimeToLocalizedStringTransformer = function () {
+        this.reverseTransform = function (value) {
             if (this.pattern.toLowerCase() === 'dd.mm.yyyy') {
                 var regexp = /^(\d{2})\.(\d{2})\.(\d{4})$/;
                 var parts = regexp.exec(value);

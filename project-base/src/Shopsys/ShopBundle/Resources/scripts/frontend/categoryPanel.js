@@ -8,7 +8,7 @@
             .on('click', onCategoryCollapseControlClick);
     };
 
-    function onCategoryCollapseControlClick(event) {
+    function onCategoryCollapseControlClick (event) {
         event.stopPropagation();
         event.preventDefault();
 
@@ -28,7 +28,7 @@
         $categoryCollapseControl.toggleClass('open', !isOpen);
     }
 
-    function loadCategoryItemContent($categoryItem, url) {
+    function loadCategoryItemContent ($categoryItem, url) {
         Shopsys.ajax({
             loaderElement: $categoryItem,
             url: url,

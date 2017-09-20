@@ -1,13 +1,13 @@
 (function ($) {
 
-    SymfonyComponentValidatorConstraintsRange = function() {
+    SymfonyComponentValidatorConstraintsRange = function () {
         this.maxMessage = '';
         this.minMessage = '';
         this.invalidMessage = '';
         this.max = null;
         this.min = null;
 
-        this.validate = function(value) {
+        this.validate = function (value) {
 
             var f = FpJsFormValidator;
             var compareValue = Shopsys.number.parseNumber(value);

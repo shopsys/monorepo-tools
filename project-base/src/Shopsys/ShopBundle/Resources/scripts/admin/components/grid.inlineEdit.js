@@ -11,7 +11,7 @@
     Shopsys.grid.inlineEdit.bind = function () {
         var $grid = $(this);
 
-        $grid.on('click', '.js-inline-edit-edit', function() {
+        $grid.on('click', '.js-inline-edit-edit', function () {
             var $row = $(this).closest('.js-grid-row');
             if (Shopsys.grid.inlineEdit.isRowEnabled($row)) {
                 Shopsys.grid.inlineEdit.disableRow($row);
@@ -20,14 +20,14 @@
             return false;
         });
 
-        $grid.on('click', '.js-inline-edit-add', function() {
+        $grid.on('click', '.js-inline-edit-add', function () {
             $grid.find('.js-inline-edit-no-data').remove();
             $grid.find('.js-inline-edit-data-container').removeClass('hidden');
             Shopsys.grid.inlineEdit.addNewRow($grid);
             return false;
         });
 
-        $grid.on('click', '.js-inline-edit-cancel', function() {
+        $grid.on('click', '.js-inline-edit-cancel', function () {
             var $formRow = $(this).closest('.js-grid-editing-row');
             Shopsys.window({
                 content: Shopsys.translator.trans('Do you really want to discard all changes?'),
@@ -41,12 +41,12 @@
             return false;
         });
 
-        $grid.on('click', '.js-inline-edit-save', function() {
+        $grid.on('click', '.js-inline-edit-save', function () {
             Shopsys.grid.inlineEdit.saveRow($(this).closest('.js-grid-editing-row'), $grid);
             return false;
         });
 
-        $grid.on('keyup', '.js-grid-editing-row input', function(event) {
+        $grid.on('keyup', '.js-grid-editing-row input', function (event) {
             if (event.keyCode == Shopsys.keyCodes.ENTER) {
                 Shopsys.grid.inlineEdit.saveRow($(this).closest('.js-grid-editing-row'), $grid);
             }

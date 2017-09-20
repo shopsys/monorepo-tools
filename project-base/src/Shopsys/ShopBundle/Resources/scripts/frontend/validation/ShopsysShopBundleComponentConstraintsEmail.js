@@ -1,6 +1,6 @@
 (function ($) {
 
-    ShopsysShopBundleComponentConstraintsEmail = function() {
+    ShopsysShopBundleComponentConstraintsEmail = function () {
         this.message = '';
 
         this.validate = function (value) {

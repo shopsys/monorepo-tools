@@ -21,13 +21,13 @@
 
     Shopsys.grid.multipleDragAndDrop.getPositionsIndexedByGridId = function ($grids) {
         var rowIdsIndexedByGridId = {};
-        $.each($grids, function(index, grid) {
+        $.each($grids, function (index, grid) {
             var $grid = $(grid);
             var gridId = $grid.data('grid-id');
             rowIdsIndexedByGridId[gridId] = {};
             var rows = $grid.find('.js-grid-row');
 
-            $.each(rows, function(rowIndex, row) {
+            $.each(rows, function (rowIndex, row) {
                 rowIdsIndexedByGridId[gridId][rowIndex] = $(row).data('drag-and-drop-grid-row-id');
             });
         });
@@ -65,7 +65,7 @@
     };
 
     Shopsys.grid.multipleDragAndDrop.toggleRowHolders = function () {
-        $('.js-multiple-grids-rows-unified .js-grid').each(function() {
+        $('.js-multiple-grids-rows-unified .js-grid').each(function () {
             var gridRowsCount = $(this).find('.js-grid-row:not(.ui-sortable-helper):not(.js-grid-row-holder), .in-drop-place').length;
             var $rowHolder = $(this).find('.js-grid-row-holder');
             $rowHolder.toggle(gridRowsCount === 0);

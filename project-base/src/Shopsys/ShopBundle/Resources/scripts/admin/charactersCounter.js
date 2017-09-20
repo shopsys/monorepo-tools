@@ -8,14 +8,14 @@
         var $info = $counter.find('.js-characters-counter-info');
         var recommendedLength = $info.data('recommended-length');
 
-        this.init = function() {
+        this.init = function () {
             if ($input.length > 0) {
                 $input.bind('keyup placeholderChange', countCharacters);
                 countCharacters();
             }
         };
 
-        var countCharacters = function() {
+        var countCharacters = function () {
             var currentLength = $input.val().length;
             var placeholder = $input.attr('placeholder');
             if (currentLength === 0 && placeholder) {

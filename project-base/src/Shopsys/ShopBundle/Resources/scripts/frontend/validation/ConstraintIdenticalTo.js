@@ -1,10 +1,10 @@
 (function ($) {
 
-    SymfonyComponentValidatorConstraintsIdenticalTo = function() {
+    SymfonyComponentValidatorConstraintsIdenticalTo = function () {
         this.message = '';
         this.value = null;
 
-        this.validate = function(value) {
+        this.validate = function (value) {
 
             var f = FpJsFormValidator;
             if (Shopsys.number.parseNumber(this.value) !== null) {

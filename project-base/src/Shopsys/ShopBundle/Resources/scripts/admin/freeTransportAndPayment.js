@@ -7,12 +7,12 @@
         var $checkbox = $container.find('.js-free-transport-and-payment-price-limit-enabled');
         var $input = $container.find('.js-free-transport-and-payment-price-limit-input');
 
-        this.init = function() {
+        this.init = function () {
             $checkbox.click(updateInputDisabledAttribute);
             updateInputDisabledAttribute();
         };
 
-        function updateInputDisabledAttribute() {
+        function updateInputDisabledAttribute () {
             if ($checkbox.is(':checked')) {
                 $input.removeAttr('disabled');
             } else {

@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
 
     Shopsys = window.Shopsys || {};
     Shopsys.responsive = window.Shopsys.responsive || {};
@@ -13,7 +13,7 @@
     var onLayoutChangeListeners = [];
     var lastIsDesktop = null;
 
-    Shopsys.responsive.isDesktopVersion = function() {
+    Shopsys.responsive.isDesktopVersion = function () {
         return $(window).width() >= Shopsys.responsive.LG;
     };
 
@@ -21,11 +21,11 @@
         onLayoutChangeListeners.push(callback);
     };
 
-    $(window).resize(function() {
+    $(window).resize(function () {
         Shopsys.timeout.setTimeoutAndClearPrevious('Shopsys.responsive.window.resize', onWindowResize, 200);
     });
 
-    function onWindowResize() {
+    function onWindowResize () {
         if (lastIsDesktop !== Shopsys.responsive.isDesktopVersion()) {
             $.each(onLayoutChangeListeners, function (index, callback) {
                 callback(Shopsys.responsive.isDesktopVersion());

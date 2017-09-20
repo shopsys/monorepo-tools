@@ -4,7 +4,7 @@
     Shopsys.fileUpload = Shopsys.fileUpload || {};
 
     var fileUpload = function ($container) {
-        $container.filterAllNodes('.js-file-upload').each(function() {
+        $container.filterAllNodes('.js-file-upload').each(function () {
             var uploader = new Shopsys.fileUpload.Uploader($(this));
             uploader.init();
         });
@@ -12,7 +12,7 @@
 
     Shopsys.register.registerCallback(fileUpload);
 
-    Shopsys.fileUpload.Uploader = function($uploader) {
+    Shopsys.fileUpload.Uploader = function ($uploader) {
         var self = this;
         var $uploadedFiles = $uploader.find('.js-file-upload-uploaded-files');
         var $status = $uploader.find('.js-file-upload-status');
@@ -24,20 +24,20 @@
         var lastUploadItemId = null;
         this.$uploader = $uploader;
 
-        self.init = function() {
+        self.init = function () {
             $uploader.closest('form').submit(onFormSubmit);
             initUploadedFiles();
             initUploader();
         };
 
-        var initUploadedFiles = function() {
+        var initUploadedFiles = function () {
             $uploadedFiles.find('.js-file-upload-uploaded-file').each(function () {
                 var fileItem = new Shopsys.fileUpload.FileItem(self, $(this), true);
                 fileItem.init();
             });
         };
 
-        var initUploader = function() {
+        var initUploader = function () {
             $uploader.dmUploader({
                 url: $uploader.data('fileupload-url'),
                 dataType: 'json',
@@ -51,7 +51,7 @@
             });
         };
 
-        this.deleteTemporaryFile = function(filename) {
+        this.deleteTemporaryFile = function (filename) {
             Shopsys.ajax({
                 url: deleteUrl,
                 type: 'POST',
@@ -60,7 +60,7 @@
             });
         };
 
-        var createNewUploadedFile = function() {
+        var createNewUploadedFile = function () {
             var templateHtml = $uploadedFiles.data('prototype').replace(/__name__/g, '');
             var $uploadedFileTemplate = $($.parseHTML(templateHtml));
             $uploadedFileTemplate.find('*[id]').removeAttr('id');
@@ -68,7 +68,7 @@
             return $uploadedFileTemplate;
         };
 
-        var updateFileStatus = function(status, message) {
+        var updateFileStatus = function (status, message) {
             $status.parent().stop(true, true).show();
             $status.text(message).removeClass('error success uploading').addClass(status);
         };
@@ -82,12 +82,12 @@
             }
         };
 
-        var onBeforeUpload = function() {
+        var onBeforeUpload = function () {
             ready = false;
             updateFileStatus('uploading', Shopsys.translator.trans('Uploading...'));
         };
 
-        var onUploadNewFile = function(id, file) {
+        var onUploadNewFile = function (id, file) {
             var $uploadedfile = createNewUploadedFile();
             $uploadedfile.show();
             items[id] = new Shopsys.fileUpload.FileItem(self, $uploadedfile);
@@ -96,17 +96,17 @@
             $uploadedFiles.append($uploadedfile);
         };
 
-        var onUploadComplete = function() {
+        var onUploadComplete = function () {
             ready = true;
             Shopsys.validation.forceValidateElement($uploader);
         };
 
-        var onUploadProgress = function(id, percent) {
+        var onUploadProgress = function (id, percent) {
             items[id].setProgress(percent);
             updateFileStatus('uploading', Shopsys.translator.trans('Uploading...'));
         };
 
-        var onUploadSuccess = function(id, data) {
+        var onUploadSuccess = function (id, data) {
             if (data.status === 'success') {
                 if (lastUploadItemId !== null && multiple === false) {
                     items[lastUploadItemId].deleteItem();
@@ -124,7 +124,7 @@
             }
         };
 
-        var onUploadError = function(id, message, code) {
+        var onUploadError = function (id, message, code) {
             items[id].deleteItem();
             if (code === 413) {
                 message = Shopsys.translator.trans('File is too big');
@@ -136,7 +136,7 @@
             });
         };
 
-        var onFallbackMode = function() {
+        var onFallbackMode = function () {
             $fallbackHide.hide();
         };
     };

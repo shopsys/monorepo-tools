@@ -27,7 +27,7 @@
             url: $orderPreview.data('url'),
             type: 'get',
             data: data,
-            success: function(data) {
+            success: function (data) {
                 $orderPreview.html(data);
             }
         });

@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
 
     /*
      1. add to button class 'js-responsive-toggle'
@@ -28,21 +28,21 @@
                 $(document).click(onClickOut);
             }
 
-            $(window).resize(function() {
+            $(window).resize(function () {
                 Shopsys.timeout.setTimeoutAndClearPrevious('ResponsiveToggle.window.resize.' + instanceNumber, onWindowResize, 200);
             });
         };
 
-        function isActive() {
+        function isActive () {
             return $button.hasClass(activeButtonClass);
         }
 
-        function toggle(show) {
+        function toggle (show) {
             $button.toggleClass(activeButtonClass, show);
             $elementToHide.slideToggle(show);
         }
 
-        function onClickOut(event) {
+        function onClickOut (event) {
             if (
                 isActive()
                 && $(event.target).closest($button).length === 0
@@ -52,7 +52,7 @@
             }
         }
 
-        function onWindowResize() {
+        function onWindowResize () {
             if (Shopsys.responsive.isDesktopVersion()) {
                 if ($elementToHide.is(':animated')) {
                     $elementToHide.stop(true, true);
@@ -64,9 +64,9 @@
 
     };
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-        $('.js-responsive-toggle').each(function() {
+        $('.js-responsive-toggle').each(function () {
             var $button = $(this);
             var $elementToHide = $('#' + $button.data('element'));
             var hideOnClickOut = $button.data('hide-on-click-out');
