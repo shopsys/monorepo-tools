@@ -29,7 +29,7 @@
             var isChecked = $checkbox.prop('checked');
             $deleteButton.toggle(!isChecked);
             $revert.toggle(isChecked);
-        }
+        };
     };
 
     Shopsys.register.registerCallback(function ($container) {

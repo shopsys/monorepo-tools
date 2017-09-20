@@ -46,6 +46,6 @@
         if ($loaderElement.children(".in-overlay__in").length === 0) {
             $loaderElement.removeClass('in-overlay');
         }
-    }
+    };
 
 })(jQuery);

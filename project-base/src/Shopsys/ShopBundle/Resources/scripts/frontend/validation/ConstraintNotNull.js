@@ -28,7 +28,7 @@
             }
 
             return errors;
-        }
+        };
     };
 
 })(jQuery);

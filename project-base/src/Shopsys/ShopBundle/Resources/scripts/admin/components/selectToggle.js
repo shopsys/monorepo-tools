@@ -21,7 +21,7 @@
                 Shopsys.toggleOption.show($(this));
             } else {
                 Shopsys.toggleOption.hide($(this));
-                $(this).removeAttr('selected')
+                $(this).removeAttr('selected');
             }
         });
     };

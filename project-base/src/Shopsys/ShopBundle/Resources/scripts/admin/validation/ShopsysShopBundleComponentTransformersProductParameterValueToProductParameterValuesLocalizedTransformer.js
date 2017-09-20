@@ -31,6 +31,6 @@
 
             return normData;
         };
-    }
+    };
 
 })(jQuery);

@@ -30,7 +30,7 @@
             if (onSelectProductCallback !== undefined) {
                 onSelectProductCallback(productId, productName);
             } else {
-                this.selectProduct(productId, productName)
+                this.selectProduct(productId, productName);
             }
         };
 

@@ -22,7 +22,7 @@
         } else if ($categoryList.length > 0) {
             $categoryList.slideDown('fast');
         } else {
-            loadCategoryItemContent($categoryItem, $categoryCollapseControl.data('url'))
+            loadCategoryItemContent($categoryItem, $categoryCollapseControl.data('url'));
         }
 
         $categoryCollapseControl.toggleClass('open', !isOpen);

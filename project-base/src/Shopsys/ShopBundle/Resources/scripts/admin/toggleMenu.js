@@ -17,13 +17,13 @@
             });
 
             $(document).on('click', function () {
-                hideAllSubmenus()
+                hideAllSubmenus();
             });
 
             var hideAllSubmenus = function () {
                 $items.filterAllNodes('.js-toggle-menu-submenu').hide();
                 $items.removeClass('open');
-            }
+            };
         };
     };
 

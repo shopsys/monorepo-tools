@@ -48,7 +48,7 @@
             $productDetailNavigation.append($navigationItem);
 
             $navigationItem.click(function () {
-                var scrollOffsetTop = $title.offset().top - $webContent.offset().top
+                var scrollOffsetTop = $title.offset().top - $webContent.offset().top;
                 $('html, body').animate({ scrollTop: scrollOffsetTop }, 'slow');
             });
         });
