@@ -9,7 +9,7 @@
 
         this.init = function() {
             $promoCodeSubmitButton.click(applyPromoCode);
-            $promoCodeInput.keypress(function(event){
+            $promoCodeInput.keypress(function(event) {
                 if (event.keyCode === Shopsys.keyCodes.ENTER) {
                     applyPromoCode();
                     return false;

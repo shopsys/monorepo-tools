@@ -1,4 +1,4 @@
-(function ($){
+(function ($) {
 
     Shopsys = window.Shopsys || {};
     Shopsys.grid = Shopsys.grid || {};

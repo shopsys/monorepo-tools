@@ -1,4 +1,4 @@
-(function ($){
+(function ($) {
     $(document).ready(function () {
 
         var $orderForm = $('form[name="order_form"]');

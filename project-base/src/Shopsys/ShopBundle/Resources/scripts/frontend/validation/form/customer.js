@@ -1,4 +1,4 @@
-(function ($){
+(function ($) {
     $(document).ready(function () {
         var $customerDeliveryAddressForm = $('#customer_form_deliveryAddressData');
         $customerDeliveryAddressForm.jsFormValidator({

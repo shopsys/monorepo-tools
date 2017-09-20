@@ -32,7 +32,7 @@
         $('body').addClass('web--window-activated').append($overlay);
 
         // timeout 0 to asynchronous run to fix css animation fade
-        setTimeout(function(){
+        setTimeout(function() {
             $overlay.addClass('window-popup__overlay--active');
         }, 0);
     };
@@ -43,7 +43,7 @@
         $overlay.removeClass('window-popup__overlay--active');
 
         if ($overlay.length !== 0) {
-            setTimeout(function(){
+            setTimeout(function() {
                 $overlay.remove();
             }, animationTime);
         }
@@ -95,7 +95,7 @@
             $window.removeClass('window-popup--active');
             hideOverlay();
 
-            setTimeout(function(){
+            setTimeout(function() {
                 $activeWindow.trigger('windowFastClose');
             }, animationTime);
         });
@@ -200,7 +200,7 @@
                 $('html').addClass('is-flex-popup-height-issue-detected');
             }
             fixVerticalAlign();
-            setTimeout(function(){
+            setTimeout(function() {
                 $window.addClass('window-popup--active');
                 options.eventOnLoad();
             }, animationTime);

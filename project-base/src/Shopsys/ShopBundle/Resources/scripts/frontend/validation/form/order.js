@@ -1,4 +1,4 @@
-(function ($){
+(function ($) {
     $(document).ready(function () {
 
         var $transportAndPaymentForm = $('#transport_and_payment_form');

@@ -17,18 +17,18 @@
             .bind('spinbox.minus', Shopsys.spinbox.minus);
 
         $plus
-            .bind('mousedown.spinbox', function(e){
+            .bind('mousedown.spinbox', function(e) {
                 repeater.startAutorepeat($input, 'spinbox.plus');
             })
-            .bind('mouseup.spinbox mouseout.spinbox', function(e){
+            .bind('mouseup.spinbox mouseout.spinbox', function(e) {
                 repeater.stopAutorepeat();
             });
 
         $minus
-            .bind('mousedown.spinbox', function(e){
+            .bind('mousedown.spinbox', function(e) {
                 repeater.startAutorepeat($input, 'spinbox.minus');
             })
-            .bind('mouseup.spinbox mouseout.spinbox', function(e){
+            .bind('mouseup.spinbox mouseout.spinbox', function(e) {
                 repeater.stopAutorepeat();
             });
 
@@ -69,9 +69,9 @@
         startAutorepeat: function($input, eventString) {
             $input.trigger(eventString);
             repeater.stopAutorepeat();
-            repeater.timerDelay = setTimeout(function(){
+            repeater.timerDelay = setTimeout(function() {
                 $input.trigger(eventString);
-                repeater.timerRepeat = setInterval(function(){
+                repeater.timerRepeat = setInterval(function() {
                     $input.trigger(eventString);
                 }, 100);
             }, 500);

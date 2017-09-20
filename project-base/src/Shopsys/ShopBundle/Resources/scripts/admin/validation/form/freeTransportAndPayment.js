@@ -1,4 +1,4 @@
-(function ($){
+(function ($) {
     $(document).ready(function () {
 
         $('.js-free-transport-and-payment-price-limit').each(function () {

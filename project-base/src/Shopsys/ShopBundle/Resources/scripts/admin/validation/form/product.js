@@ -1,4 +1,4 @@
-(function ($){
+(function ($) {
     $(document).ready(function () {
         var $productEditForm = $('form[name="product_edit_form"]');
         $productEditForm.jsFormValidator({

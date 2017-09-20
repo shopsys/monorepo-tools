@@ -1,4 +1,4 @@
-(function ($){
+(function ($) {
 
     Shopsys = Shopsys || {};
     Shopsys.categoryTree = Shopsys.categoryTree || {};
