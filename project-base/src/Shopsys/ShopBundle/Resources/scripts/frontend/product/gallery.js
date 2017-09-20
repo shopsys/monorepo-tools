@@ -20,7 +20,7 @@
             gallery: {
                 enabled: true,
                 navigateByImgClick: true,
-                preload: [0,1]
+                preload: [0, 1]
             }
         });
 

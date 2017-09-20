@@ -17,7 +17,7 @@
             .bind('spinbox.minus', Shopsys.spinbox.minus);
 
         $plus
-            .bind("mousedown.spinbox",function(e){
+            .bind("mousedown.spinbox", function(e){
                 repeater.startAutorepeat($input, 'spinbox.plus');
             })
             .bind("mouseup.spinbox mouseout.spinbox", function(e){
@@ -25,7 +25,7 @@
             });
 
         $minus
-            .bind("mousedown.spinbox",function(e){
+            .bind("mousedown.spinbox", function(e){
                 repeater.startAutorepeat($input, 'spinbox.minus');
             })
             .bind("mouseup.spinbox mouseout.spinbox", function(e){
