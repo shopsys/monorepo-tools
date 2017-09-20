@@ -26,4 +26,3 @@
     Shopsys.register.registerCallback(Shopsys.cartBox.init);
 
 })(jQuery);
-

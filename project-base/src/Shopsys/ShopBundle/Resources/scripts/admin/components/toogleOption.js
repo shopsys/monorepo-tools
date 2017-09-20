@@ -8,7 +8,6 @@
 
     var wrapperClass = 'js-toggle-option-wrapper';
 
-
     Shopsys.toggleOption.hide = function($element) {
         $element.hide();
         if ($element.parent('span.' + wrapperClass).length === 0) {

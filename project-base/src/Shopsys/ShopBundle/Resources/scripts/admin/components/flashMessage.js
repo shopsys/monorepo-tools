@@ -15,7 +15,6 @@
         event.preventDefault();
     };
 
-
     Shopsys.register.registerCallback(Shopsys.flashMessage.init);
 
 })(jQuery);
