@@ -67,15 +67,15 @@
         timerRepeat: null,
 
         startAutorepeat: function($input, eventString) {
+            $input.trigger(eventString);
+            repeater.stopAutorepeat();
+            repeater.timerDelay = setTimeout(function(){
                 $input.trigger(eventString);
-                repeater.stopAutorepeat();
-                repeater.timerDelay = setTimeout(function(){
+                repeater.timerRepeat = setInterval(function(){
                     $input.trigger(eventString);
-                    repeater.timerRepeat = setInterval(function(){
-                        $input.trigger(eventString);
-                    }, 100);
-                }, 500);
-            },
+                }, 100);
+            }, 500);
+        },
 
         stopAutorepeat: function() {
             clearTimeout(repeater.timerDelay);

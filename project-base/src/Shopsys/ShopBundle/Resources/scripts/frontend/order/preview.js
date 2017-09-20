@@ -6,7 +6,7 @@
     Shopsys.orderPreview.init = function ($container) {
         $container
             .filterAllNodes('.js-order-transport-input, .js-order-payment-input')
-                .change(Shopsys.orderPreview.loadOrderPreview);
+            .change(Shopsys.orderPreview.loadOrderPreview);
     };
 
     Shopsys.orderPreview.loadOrderPreview = function () {

@@ -59,8 +59,9 @@
         var $buttons = $formRow.find('.js-inline-edit-buttons').hide();
         var $saving = $formRow.find('.js-inline-edit-saving').show();
         var $virtualForm = $('<form>')
-                .append($formRow.clone())
-                .append($('<input type="hidden" name="serviceName" />').val($grid.data('inline-edit-service-name')));
+            .append($formRow.clone())
+            .append($('<input type="hidden" name="serviceName" />')
+                .val($grid.data('inline-edit-service-name')));
 
         var $originalRow = $formRow.data('$originalRow');
         if ($originalRow) {
