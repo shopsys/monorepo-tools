@@ -121,7 +121,7 @@
                 });
             $windowActions.append($windowButtonCancel);
         }
-        
+
         if (options.buttonContinue) {
             var $windowButtonContinue = $('<a href="" class="window__actions__btn window-button-continue btn"></a>');
             $windowButtonContinue

@@ -7,7 +7,7 @@
     Shopsys.register.registerCallback(function ($container) {
         var $rootTree = $container.filterAllNodes('#js-category-tree-sorting > .js-category-tree-items');
         var $saveButton = $container.filterAllNodes('#js-category-tree-sorting-save-button');
-        
+
         if ($rootTree.length > 0 && $saveButton.length > 0) {
             var sorting = new Shopsys.categoryTree.sorting.constructor($rootTree, $saveButton);
             sorting.init();
