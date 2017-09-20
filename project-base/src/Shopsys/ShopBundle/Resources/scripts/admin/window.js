@@ -81,7 +81,7 @@
 
         $window.bind('windowClose', function () {
             hideOverlay();
-            $(this).fadeOut('fast', function () {$(this).trigger('windowFastClose')});
+            $(this).fadeOut('fast', function () { $(this).trigger('windowFastClose') });
         });
 
         $window.bind('windowFastClose', function () {
