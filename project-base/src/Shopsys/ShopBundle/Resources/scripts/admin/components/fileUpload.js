@@ -132,7 +132,7 @@
                 message = Shopsys.translator.trans('File is in unsupported format');
             }
             Shopsys.window({
-                content: Shopsys.translator.trans('Error occurred while uploading file: %message%', {'%message%': message })
+                content: Shopsys.translator.trans('Error occurred while uploading file: %message%', { '%message%': message })
             });
         };
 
