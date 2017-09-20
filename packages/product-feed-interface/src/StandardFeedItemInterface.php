@@ -30,6 +30,11 @@ interface StandardFeedItemInterface extends FeedItemInterface
     public function getPriceVat();
 
     /**
+     * @return string
+     */
+    public function getCurrencyCode();
+
+    /**
      * @return string|null
      */
     public function getEan();

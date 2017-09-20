@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
 - [`StandardFeedItemInterface`](src/StandardFeedItemInterface.php) has new method `isSellingDenied()` (@MattCzerner)
 - [`FeedConfigInterface`](src/FeedConfigInterface.php) has new method `getAdditionalInformation()` (@MattCzerner)
+- [`StandardFeedItemInterface`](src/StandardFeedItemInterface.php) has new method `getCurrencyShortcut()` (@MattCzerner)
 
 ## [0.3.0]
 ### Added
