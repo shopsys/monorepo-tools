@@ -12,12 +12,12 @@
         }
 
         var $loaderOverlay = $($.parseHTML(
-            '<div class="in-overlay__in">' +
-                '<div class="in-overlay__spinner">' +
-                    '<span class="in-overlay__spinner__icon"></span>' +
-                    '<span class="in-overlay__spinner__message">' + loaderMessage + '</span>' +
-                '</div>' +
-            '</div>'));
+            '<div class="in-overlay__in">'
+                + '<div class="in-overlay__spinner">'
+                    + '<span class="in-overlay__spinner__icon"></span>'
+                    + '<span class="in-overlay__spinner__message">' + loaderMessage + '</span>'
+                + '</div>'
+            + '</div>'));
 
         if (loaderElement !== 'body') {
             $loaderOverlay.addClass('in-overlay__in--absolute');
