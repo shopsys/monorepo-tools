@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Order;
 use Doctrine\ORM\EntityManager;
 use Exception;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
@@ -13,7 +12,6 @@ use Shopsys\ShopBundle\Model\Cart\CartFacade;
 use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Customer\UserRepository;
 use Shopsys\ShopBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\ShopBundle\Model\Localization\Localization;
 use Shopsys\ShopBundle\Model\Order\Item\OrderProductFacade;
@@ -61,11 +59,6 @@ class OrderFacade
      * @var \Shopsys\ShopBundle\Model\Order\OrderCreationService
      */
     private $orderCreationService;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
-     */
-    private $userRepository;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository
@@ -128,11 +121,6 @@ class OrderFacade
     private $orderProductFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
-     */
-    private $domainRouterFactory;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaFacade
      */
     private $heurekaFacade;
@@ -148,7 +136,6 @@ class OrderFacade
         OrderRepository $orderRepository,
         OrderService $orderService,
         OrderCreationService $orderCreationService,
-        UserRepository $userRepository,
         OrderStatusRepository $orderStatusRepository,
         OrderMailFacade $orderMailFacade,
         OrderHashGeneratorRepository $orderHashGeneratorRepository,
@@ -161,7 +148,6 @@ class OrderFacade
         CurrentCustomer $currentCustomer,
         OrderPreviewFactory $orderPreviewFactory,
         OrderProductFacade $orderProductFacade,
-        DomainRouterFactory $domainRouterFactory,
         HeurekaFacade $heurekaFacade,
         Domain $domain
     ) {
@@ -170,7 +156,6 @@ class OrderFacade
         $this->orderRepository = $orderRepository;
         $this->orderService = $orderService;
         $this->orderCreationService = $orderCreationService;
-        $this->userRepository = $userRepository;
         $this->orderStatusRepository = $orderStatusRepository;
         $this->orderMailFacade = $orderMailFacade;
         $this->orderHashGeneratorRepository = $orderHashGeneratorRepository;
@@ -183,7 +168,6 @@ class OrderFacade
         $this->currentCustomer = $currentCustomer;
         $this->orderPreviewFactory = $orderPreviewFactory;
         $this->orderProductFacade = $orderProductFacade;
-        $this->domainRouterFactory = $domainRouterFactory;
         $this->heurekaFacade = $heurekaFacade;
         $this->domain = $domain;
     }

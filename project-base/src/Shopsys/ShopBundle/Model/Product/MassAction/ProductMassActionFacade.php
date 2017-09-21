@@ -2,18 +2,12 @@
 
 namespace Shopsys\ShopBundle\Model\Product\MassAction;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductMassActionFacade
 {
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    private $em;
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\MassAction\ProductMassActionRepository
      */
@@ -30,12 +24,10 @@ class ProductMassActionFacade
     private $productHiddenRecalculator;
 
     public function __construct(
-        EntityManager $em,
         ProductMassActionRepository $productMassActionRepository,
         ProductVisibilityFacade $productVisibilityFacade,
         ProductHiddenRecalculator $productHiddenRecalculator
     ) {
-        $this->em = $em;
         $this->productMassActionRepository = $productMassActionRepository;
         $this->productVisibilityFacade = $productVisibilityFacade;
         $this->productHiddenRecalculator = $productHiddenRecalculator;

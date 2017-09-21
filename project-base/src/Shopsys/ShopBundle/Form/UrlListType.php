@@ -13,7 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,11 +20,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class UrlListType extends AbstractType
 {
-    /**
-     * @var \Symfony\Component\Form\FormFactoryInterface
-     */
-    private $formFactory;
-
     /**
      * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
@@ -42,7 +36,6 @@ class UrlListType extends AbstractType
     private $domain;
 
     public function __construct(
-        FormFactoryInterface $formFactory,
         FriendlyUrlFacade $friendlyUrlFacade,
         DomainRouterFactory $domainRouterFactory,
         Domain $domain
@@ -50,7 +43,6 @@ class UrlListType extends AbstractType
         $this->friendlyUrlFacade = $friendlyUrlFacade;
         $this->domainRouterFactory = $domainRouterFactory;
         $this->domain = $domain;
-        $this->formFactory = $formFactory;
     }
 
     /**

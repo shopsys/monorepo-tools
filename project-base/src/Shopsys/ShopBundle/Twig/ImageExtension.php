@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Twig;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Shopsys\ShopBundle\Component\Image\ImageLocator;
 use Shopsys\ShopBundle\Component\Utils;
@@ -36,11 +35,6 @@ class ImageExtension extends Twig_Extension
     private $imageLocator;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
-     */
-    private $imageConfig;
-
-    /**
      * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
      */
     private $imageFacade;
@@ -58,14 +52,12 @@ class ImageExtension extends Twig_Extension
         ContainerInterface $container,
         Domain $domain,
         ImageLocator $imageLocator,
-        ImageConfig $imageConfig,
         ImageFacade $imageFacade
     ) {
         $this->frontDesignImageUrlPrefix = $frontDesignImageUrlPrefix;
         $this->container = $container;
         $this->domain = $domain;
         $this->imageLocator = $imageLocator;
-        $this->imageConfig = $imageConfig;
         $this->imageFacade = $imageFacade;
     }
 

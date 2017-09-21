@@ -4,15 +4,10 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Country\CountryInlineEdit;
 
 class CountryController extends AdminBaseController
 {
-    /**
-     * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
-     */
-    private $countryFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Country\CountryInlineEdit
@@ -20,10 +15,8 @@ class CountryController extends AdminBaseController
     private $countryInlineEdit;
 
     public function __construct(
-        CountryFacade $countryFacade,
         CountryInlineEdit $countryInlineEdit
     ) {
-        $this->countryFacade = $countryFacade;
         $this->countryInlineEdit = $countryInlineEdit;
     }
 

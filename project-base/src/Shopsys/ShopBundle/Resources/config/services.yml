@@ -580,11 +580,6 @@ services:
     arguments:
       - '@logger'
 
-  shopsys.shop.order.order_transport_and_payment_watcher_service:
-    class: Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
-    arguments:
-      - '@shopsys.shop.component.flash_message.bag.front'
-
   shopsys.shop.order.promo_code.grid.promo_code_inline_edit:
     class: Shopsys\ShopBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit
 
@@ -772,7 +767,6 @@ services:
   shopsys.shop.twig.javascript.javascript_compiler_service:
     class: Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService
     arguments:
-      - '%shopsys.root_dir%'
       - '%shopsys.web_dir%'
       - '%shopsys.javascript_sources_dir%'
       - '%shopsys.javascript_url_prefix%'

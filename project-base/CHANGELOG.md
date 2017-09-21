@@ -49,6 +49,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 - email for error reporting removed from [`parameters_test.yml.dist`](app/config/parameters_test.yml.dist) (@vitek-rostislav)
+- removed unused private properties from classes (@PetrHeinz)
+- removed `CategoriesTypeTransformerFactory` (@PetrHeinz)
+    - the `CategoriesTypeTransformer` can be fully autowired after deletion of `$domainId`
 
 ### Fixed
 - [`InlineEditPage::createNewRow()`](tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/InlineEditPage.php) now waits for AJAX to complete (@PetrHeinz)

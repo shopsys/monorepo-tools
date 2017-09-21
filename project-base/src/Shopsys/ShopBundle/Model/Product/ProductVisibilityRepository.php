@@ -30,21 +30,14 @@ class ProductVisibilityRepository
      */
     private $pricingGroupRepository;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
-     */
-    private $productRepository;
-
     public function __construct(
         EntityManager $em,
         Domain $domain,
-        PricingGroupRepository $pricingGroupRepository,
-        ProductRepository $productRepository
+        PricingGroupRepository $pricingGroupRepository
     ) {
         $this->em = $em;
         $this->domain = $domain;
         $this->pricingGroupRepository = $pricingGroupRepository;
-        $this->productRepository = $productRepository;
     }
 
     /**

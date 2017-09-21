@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder;
 use Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory;
 use Shopsys\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService;
 use Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminFacade;
-use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvancedSearchOrderFacade
@@ -23,11 +22,6 @@ class AdvancedSearchOrderFacade
     private $advancedSearchOrderService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade
-     */
-    private $productListAdminFacade;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminFacade
      */
     private $orderListAdminFacade;
@@ -35,12 +29,10 @@ class AdvancedSearchOrderFacade
     public function __construct(
         OrderAdvancedSearchFormFactory $orderAdvancedSearchFormFactory,
         AdvancedSearchOrderService $advancedSearchOrderService,
-        ProductListAdminFacade $productListAdminFacade,
         OrderListAdminFacade $orderListAdminFacade
     ) {
         $this->orderAdvancedSearchFormFactory = $orderAdvancedSearchFormFactory;
         $this->advancedSearchOrderService = $advancedSearchOrderService;
-        $this->productListAdminFacade = $productListAdminFacade;
         $this->orderListAdminFacade = $orderListAdminFacade;
     }
 

@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityService;
 use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class AvailabilityFacade
 {
@@ -37,25 +36,18 @@ class AvailabilityFacade
      */
     private $productAvailabilityRecalculationScheduler;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
-     */
-    private $productRepository;
-
     public function __construct(
         EntityManager $em,
         AvailabilityRepository $availabilityRepository,
         AvailabilityService $availabilityService,
         Setting $setting,
-        ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
-        ProductRepository $productRepository
+        ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
     ) {
         $this->em = $em;
         $this->availabilityRepository = $availabilityRepository;
         $this->availabilityService = $availabilityService;
         $this->setting = $setting;
         $this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
-        $this->productRepository = $productRepository;
     }
 
     /**

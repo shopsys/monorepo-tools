@@ -85,11 +85,6 @@ class ProductDataFixture
     private $demoDataIterationCounter;
 
     /**
-     * @var float
-     */
-    private $batchStartMicrotime;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Product\Product[]
      */
     private $productsByCatnum;
@@ -285,7 +280,6 @@ class ProductDataFixture
     private function cleanAndLoadReferences()
     {
         $this->clearResources();
-        $this->batchStartMicrotime = microtime(true);
         $this->productsByCatnum = [];
 
         $onlyForFirstDomain = false;

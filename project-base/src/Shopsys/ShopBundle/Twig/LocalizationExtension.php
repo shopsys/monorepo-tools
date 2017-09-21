@@ -9,10 +9,6 @@ use Twig_SimpleFunction;
 
 class LocalizationExtension extends \Twig_Extension
 {
-    /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Localization\Localization
@@ -26,7 +22,6 @@ class LocalizationExtension extends \Twig_Extension
 
     public function __construct(ContainerInterface $container, Packages $assetPackages)
     {
-        $this->container = $container;
         $this->assetPackages = $assetPackages;
 
         // Twig extensions are loaded during assetic:dump command,

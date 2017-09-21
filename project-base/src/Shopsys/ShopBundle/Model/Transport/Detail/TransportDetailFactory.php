@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Transport\Detail;
 
 use Shopsys\ShopBundle\Model\Transport\Transport;
 use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
-use Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
 class TransportDetailFactory
 {
@@ -14,20 +13,12 @@ class TransportDetailFactory
     private $transportPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation
-     */
-    private $transportVisibilityCalculation;
-
-    /**
      * @param \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
-     * @param \Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation $transportVisibilityCalculation
      */
     public function __construct(
-        TransportPriceCalculation $transportPriceCalculation,
-        TransportVisibilityCalculation $transportVisibilityCalculation
+        TransportPriceCalculation $transportPriceCalculation
     ) {
         $this->transportPriceCalculation = $transportPriceCalculation;
-        $this->transportVisibilityCalculation = $transportVisibilityCalculation;
     }
 
     /**

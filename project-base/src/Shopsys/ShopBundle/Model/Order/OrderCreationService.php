@@ -6,37 +6,19 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Order\FrontOrderData;
 use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\ShopBundle\Model\Order\Item\OrderPayment;
 use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
 use Shopsys\ShopBundle\Model\Order\Item\OrderTransport;
 use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Order\OrderPriceCalculation;
 use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\ShopBundle\Model\Pricing\Price;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\ShopBundle\Twig\NumberFormatterExtension;
 
 class OrderCreationService
 {
-    /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
-     */
-    private $orderItemPriceCalculation;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderPriceCalculation
-     */
-    private $orderPriceCalculation;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
-     */
-    private $productPriceCalculationForUser;
-
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
      */
@@ -58,17 +40,11 @@ class OrderCreationService
     private $numberFormatterExtension;
 
     public function __construct(
-        OrderItemPriceCalculation $orderItemPriceCalculation,
-        OrderPriceCalculation $orderPriceCalculation,
-        ProductPriceCalculationForUser $productPriceCalculationForUser,
         PaymentPriceCalculation $paymentPriceCalculation,
         TransportPriceCalculation $transportPriceCalculation,
         Domain $domain,
         NumberFormatterExtension $numberFormatterExtension
     ) {
-        $this->orderItemPriceCalculation = $orderItemPriceCalculation;
-        $this->orderPriceCalculation = $orderPriceCalculation;
-        $this->productPriceCalculationForUser = $productPriceCalculationForUser;
         $this->paymentPriceCalculation = $paymentPriceCalculation;
         $this->transportPriceCalculation = $transportPriceCalculation;
         $this->domain = $domain;

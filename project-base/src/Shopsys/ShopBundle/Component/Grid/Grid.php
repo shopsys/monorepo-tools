@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Grid\Column;
 use Shopsys\ShopBundle\Component\Grid\DataSourceInterface;
 use Shopsys\ShopBundle\Component\Grid\GridView;
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
-use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService;
 use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
@@ -133,11 +132,6 @@ class Grid
     private $inlineEditService;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService
-     */
-    private $gridOrderingService;
-
-    /**
      * @var string|null
      */
     private $orderingEntityClass;
@@ -174,7 +168,6 @@ class Grid
      * @param \Symfony\Component\Routing\Router $router
      * @param \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
      * @param \Twig_Environment $twig
-     * @param \Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService $gridOrderingService
      */
     public function __construct(
         $id,
@@ -182,8 +175,7 @@ class Grid
         RequestStack $requestStack,
         Router $router,
         RouteCsrfProtector $routeCsrfProtector,
-        Twig_Environment $twig,
-        GridOrderingService $gridOrderingService
+        Twig_Environment $twig
     ) {
         if (empty($id)) {
             $message = 'Grid id cannot be empty.';
@@ -196,7 +188,6 @@ class Grid
         $this->router = $router;
         $this->routeCsrfProtector = $routeCsrfProtector;
         $this->twig = $twig;
-        $this->gridOrderingService = $gridOrderingService;
 
         $this->limit = self::DEFAULT_LIMIT;
         $this->page = 1;

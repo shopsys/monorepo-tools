@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
 use Shopsys\ShopBundle\Model\Order\Mail\OrderMailService;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
 class OrderMailFacade
 {
@@ -27,26 +26,18 @@ class OrderMailFacade
     private $orderMailService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository
-     */
-    private $orderStatusRepository;
-
-    /**
      * @param \Shopsys\ShopBundle\Model\Mail\MailerService $mailer
      * @param \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
      * @param \Shopsys\ShopBundle\Model\Order\Mail\OrderMailService $orderMailService
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
      */
     public function __construct(
         MailerService $mailer,
         MailTemplateFacade $mailTemplateFacade,
-        OrderMailService $orderMailService,
-        OrderStatusRepository $orderStatusRepository
+        OrderMailService $orderMailService
     ) {
         $this->mailer = $mailer;
         $this->mailTemplateFacade = $mailTemplateFacade;
         $this->orderMailService = $orderMailService;
-        $this->orderStatusRepository = $orderStatusRepository;
     }
 
     /**

@@ -6,7 +6,6 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Grid\DataSourceInterface;
 use Shopsys\ShopBundle\Component\Grid\Grid;
 use Shopsys\ShopBundle\Component\Grid\GridView;
-use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService;
 use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
 use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +35,6 @@ class GridTest extends PHPUnit_Framework_TestCase
         $routerMock = $this->createMock(Router::class);
         $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
         $dataSourceMock = $this->createMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -44,8 +42,7 @@ class GridTest extends PHPUnit_Framework_TestCase
             $requestStack,
             $routerMock,
             $routeCsrfProtectorMock,
-            $twigMock,
-            $gridOrderingServiceMock
+            $twigMock
         );
 
         $this->assertSame('gridId', $grid->getId());
@@ -65,7 +62,6 @@ class GridTest extends PHPUnit_Framework_TestCase
         $routerMock = $this->createMock(Router::class);
         $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
         $dataSourceMock = $this->createMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -73,8 +69,7 @@ class GridTest extends PHPUnit_Framework_TestCase
             $requestStack,
             $routerMock,
             $routeCsrfProtectorMock,
-            $twigMock,
-            $gridOrderingServiceMock
+            $twigMock
         );
         $grid->addColumn('columnId1', 'sourceColumnName1', 'title1', true)->setClassAttribute('classAttribute');
         $grid->addColumn('columnId2', 'sourceColumnName2', 'title2', false);
@@ -109,7 +104,6 @@ class GridTest extends PHPUnit_Framework_TestCase
         $routerMock = $this->createMock(Router::class);
         $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
         $dataSourceMock = $this->createMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -117,8 +111,7 @@ class GridTest extends PHPUnit_Framework_TestCase
             $requestStack,
             $routerMock,
             $routeCsrfProtectorMock,
-            $twigMock,
-            $gridOrderingServiceMock
+            $twigMock
         );
         $grid->addColumn('columnId1', 'sourceColumnName1', 'title1');
 
@@ -136,7 +129,6 @@ class GridTest extends PHPUnit_Framework_TestCase
         $routerMock = $this->createMock(Router::class);
         $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
         $dataSourceMock = $this->createMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -144,8 +136,7 @@ class GridTest extends PHPUnit_Framework_TestCase
             $requestStack,
             $routerMock,
             $routeCsrfProtectorMock,
-            $twigMock,
-            $gridOrderingServiceMock
+            $twigMock
         );
         $grid->enablePaging();
         $this->assertTrue($grid->isEnabledPaging());
@@ -161,7 +152,6 @@ class GridTest extends PHPUnit_Framework_TestCase
         $routerMock = $this->createMock(Router::class);
         $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
         $dataSourceMock = $this->createMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -169,8 +159,7 @@ class GridTest extends PHPUnit_Framework_TestCase
             $requestStack,
             $routerMock,
             $routeCsrfProtectorMock,
-            $twigMock,
-            $gridOrderingServiceMock
+            $twigMock
         );
         $this->assertFalse($grid->isEnabledPaging());
     }
@@ -185,7 +174,6 @@ class GridTest extends PHPUnit_Framework_TestCase
         $routerMock = $this->createMock(Router::class);
         $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
         $dataSourceMock = $this->createMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -193,8 +181,7 @@ class GridTest extends PHPUnit_Framework_TestCase
             $requestStack,
             $routerMock,
             $routeCsrfProtectorMock,
-            $twigMock,
-            $gridOrderingServiceMock
+            $twigMock
         );
 
         $grid->setDefaultOrder('columnId1', DataSourceInterface::ORDER_DESC);
@@ -222,7 +209,6 @@ class GridTest extends PHPUnit_Framework_TestCase
         $routerMock = $this->createMock(Router::class);
         $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
         $dataSourceMock = $this->createMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -230,8 +216,7 @@ class GridTest extends PHPUnit_Framework_TestCase
             $requestStack,
             $routerMock,
             $routeCsrfProtectorMock,
-            $twigMock,
-            $gridOrderingServiceMock
+            $twigMock
         );
 
         $grid->setDefaultOrder('default', DataSourceInterface::ORDER_ASC);
@@ -247,7 +232,6 @@ class GridTest extends PHPUnit_Framework_TestCase
         $twigMock = $this->createMock(Twig_Environment::class);
         $routerMock = $this->createMock(Router::class);
         $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
-        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
         $dataSourceMock = $this->getMockBuilder(DataSourceInterface::class)
             ->setMethods(['getTotalRowsCount', 'getPaginatedRows'])
             ->getMockForAbstractClass();
@@ -261,8 +245,7 @@ class GridTest extends PHPUnit_Framework_TestCase
             $requestStack,
             $routerMock,
             $routeCsrfProtectorMock,
-            $twigMock,
-            $gridOrderingServiceMock
+            $twigMock
         );
         $gridView = $grid->createView();
 
@@ -278,7 +261,6 @@ class GridTest extends PHPUnit_Framework_TestCase
         $twigMock = $this->createMock(Twig_Environment::class);
         $routerMock = $this->createMock(Router::class);
         $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
-        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
         $dataSourceMock = $this->getMockBuilder(DataSourceInterface::class)
             ->setMethods(['getTotalRowsCount', 'getPaginatedRows'])
             ->getMockForAbstractClass();
@@ -292,8 +274,7 @@ class GridTest extends PHPUnit_Framework_TestCase
             $requestStack,
             $routerMock,
             $routeCsrfProtectorMock,
-            $twigMock,
-            $gridOrderingServiceMock
+            $twigMock
         );
         $grid->enablePaging();
         $gridView = $grid->createView();
@@ -313,7 +294,6 @@ class GridTest extends PHPUnit_Framework_TestCase
         $routerMock = $this->createMock(Router::class);
         $routeCsrfProtectorMock = $this->createMock(RouteCsrfProtector::class);
         $dataSourceMock = $this->createMock(DataSourceInterface::class);
-        $gridOrderingServiceMock = $this->createMock(GridOrderingService::class);
 
         $grid = new Grid(
             'gridId',
@@ -321,8 +301,7 @@ class GridTest extends PHPUnit_Framework_TestCase
             $requestStack,
             $routerMock,
             $routeCsrfProtectorMock,
-            $twigMock,
-            $gridOrderingServiceMock
+            $twigMock
         );
 
         $this->assertFalse($grid->isDragAndDrop());

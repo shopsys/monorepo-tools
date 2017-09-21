@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Grid;
 
 use Shopsys\ShopBundle\Component\Grid\DataSourceInterface;
 use Shopsys\ShopBundle\Component\Grid\Grid;
-use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService;
 use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
@@ -41,14 +40,12 @@ class GridFactory
         RequestStack $requestStack,
         Router $router,
         RouteCsrfProtector $routeCsrfProtector,
-        Twig_Environment $twig,
-        GridOrderingService $gridOrderingService
+        Twig_Environment $twig
     ) {
         $this->requestStack = $requestStack;
         $this->router = $router;
         $this->routeCsrfProtector = $routeCsrfProtector;
         $this->twig = $twig;
-        $this->gridOrderingService = $gridOrderingService;
     }
 
     /**
@@ -64,8 +61,7 @@ class GridFactory
             $this->requestStack,
             $this->router,
             $this->routeCsrfProtector,
-            $this->twig,
-            $this->gridOrderingService
+            $this->twig
         );
     }
 }

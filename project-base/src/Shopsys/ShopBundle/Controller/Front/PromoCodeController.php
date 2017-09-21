@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -13,21 +12,14 @@ class PromoCodeController extends FrontBaseController
     const PROMO_CODE_PARAMETER = 'code';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
-     */
-    private $promoCodeFacade;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
      */
     private $currentPromoCodeFacade;
 
     public function __construct(
-        PromoCodeFacade $promoCodeFacade,
         CurrentPromoCodeFacade $currentPromoCodeFacade
     ) {
         $this->currentPromoCodeFacade = $currentPromoCodeFacade;
-        $this->promoCodeFacade = $promoCodeFacade;
     }
 
     public function indexAction()

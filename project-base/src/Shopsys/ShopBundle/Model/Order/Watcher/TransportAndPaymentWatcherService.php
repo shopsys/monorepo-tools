@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Order\Watcher;
 
-use Shopsys\ShopBundle\Component\FlashMessage\Bag;
 use Shopsys\ShopBundle\Model\Order\OrderData;
 use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\ShopBundle\Model\Payment\Payment;
@@ -17,11 +16,6 @@ class TransportAndPaymentWatcherService
     const SESSION_ROOT = 'transport_and_payment_watcher';
     const SESSION_TRANSPORT_PRICES = 'transport_prices';
     const SESSION_PAYMENT_PRICES = 'payment_prices';
-
-    /**
-     * @var \Shopsys\ShopBundle\Component\FlashMessage\Bag
-     */
-    private $flashMessageBag;
 
     /**
      * @var \Symfony\Component\HttpFoundation\Session\Session
@@ -39,18 +33,15 @@ class TransportAndPaymentWatcherService
     private $transportPriceCalculation;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\FlashMessage\Bag $flashMessageBag
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
      * @param \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
      */
     public function __construct(
-        Bag $flashMessageBag,
         Session $session,
         PaymentPriceCalculation $paymentPriceCalculation,
         TransportPriceCalculation $transportPriceCalculation
     ) {
-        $this->flashMessageBag = $flashMessageBag;
         $this->session = $session;
         $this->paymentPriceCalculation = $paymentPriceCalculation;
         $this->transportPriceCalculation = $transportPriceCalculation;

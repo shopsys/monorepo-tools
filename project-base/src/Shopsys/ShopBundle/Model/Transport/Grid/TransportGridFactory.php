@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Transport\Grid;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
@@ -15,11 +14,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 class TransportGridFactory implements GridFactoryInterface
 {
     const CURRENCY_ID_FOR_LIST = 1;
-
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    private $em;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
@@ -42,13 +36,11 @@ class TransportGridFactory implements GridFactoryInterface
     private $localization;
 
     public function __construct(
-        EntityManager $em,
         GridFactory $gridFactory,
         TransportRepository $transportRepository,
         TransportDetailFactory $transportDetailFactory,
         Localization $localization
     ) {
-        $this->em = $em;
         $this->gridFactory = $gridFactory;
         $this->transportRepository = $transportRepository;
         $this->transportDetailFactory = $transportDetailFactory;

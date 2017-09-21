@@ -15,11 +15,6 @@ class JavascriptCompilerService
     /**
      * @var string
      */
-    private $rootPath;
-
-    /**
-     * @var string
-     */
     private $webPath;
 
     /**
@@ -31,11 +26,6 @@ class JavascriptCompilerService
      * @var string
      */
     private $jsSourcePath;
-
-    /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
@@ -63,21 +53,17 @@ class JavascriptCompilerService
     private $assetPackages;
 
     public function __construct(
-        $rootPath,
         $webPath,
         $jsSourcePath,
         $jsUrlPrefix,
-        ContainerInterface $container,
         Filesystem $filesystem,
         Domain $domain,
         JsCompiler $jsCompiler,
         Packages $assetPackages
     ) {
-        $this->rootPath = $rootPath;
         $this->webPath = $webPath;
         $this->jsSourcePath = $jsSourcePath;
         $this->jsUrlPrefix = $jsUrlPrefix;
-        $this->container = $container;
         $this->filesystem = $filesystem;
         $this->domain = $domain;
         $this->jsCompiler = $jsCompiler;

@@ -32,11 +32,6 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
     private $fileConstraints;
 
     /**
-     * @var bool
-     */
-    private $required;
-
-    /**
      * @param \Shopsys\ShopBundle\Component\FileUpload\FileUpload $fileUpload
      */
     public function __construct(FileUpload $fileUpload)
@@ -84,7 +79,6 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->required = $options['required'];
         $this->fileConstraints = array_merge(
             [
                 new FileExtensionMaxLength(['limit' => 5]),

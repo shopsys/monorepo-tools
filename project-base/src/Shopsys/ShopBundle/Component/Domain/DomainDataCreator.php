@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Domain;
 
-use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
 use Shopsys\ShopBundle\Component\Setting\Setting;
@@ -29,11 +28,6 @@ class DomainDataCreator
     private $settingValueRepository;
 
     /**
-     * @var \Doctrine\ORM\EntityManager;
-     */
-    private $em;
-
-    /**
      * @var \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator
      */
     private $multidomainEntityDataCreator;
@@ -47,14 +41,12 @@ class DomainDataCreator
         Domain $domain,
         Setting $setting,
         SettingValueRepository $settingValueRepository,
-        EntityManager $em,
         MultidomainEntityDataCreator $multidomainEntityDataCreator,
         TranslatableEntityDataCreator $translatableEntityDataCreator
     ) {
         $this->domain = $domain;
         $this->setting = $setting;
         $this->settingValueRepository = $settingValueRepository;
-        $this->em = $em;
         $this->multidomainEntityDataCreator = $multidomainEntityDataCreator;
         $this->translatableEntityDataCreator = $translatableEntityDataCreator;
     }

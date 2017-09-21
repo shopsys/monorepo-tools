@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterRepository;
 use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductFilterCountRepository
 {
@@ -22,22 +21,15 @@ class ProductFilterCountRepository
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
-     */
-    private $productRepository;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterRepository
      */
     private $productFilterRepository;
 
     public function __construct(
         EntityManager $em,
-        ProductRepository $productRepository,
         ProductFilterRepository $productFilterRepository
     ) {
         $this->em = $em;
-        $this->productRepository = $productRepository;
         $this->productFilterRepository = $productFilterRepository;
     }
 

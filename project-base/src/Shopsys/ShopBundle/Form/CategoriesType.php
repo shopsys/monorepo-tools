@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Form;
 
-use Shopsys\ShopBundle\Component\Transformers\CategoriesTypeTransformerFactory;
+use Shopsys\ShopBundle\Component\Transformers\CategoriesTypeTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,13 +14,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CategoriesType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Transformers\CategoriesTypeTransformerFactory
+     * @var \Shopsys\ShopBundle\Component\Transformers\CategoriesTypeTransformer
      */
-    private $categoriesTypeTransformerFactory;
+    private $categoriesTypeTransformer;
 
-    public function __construct(CategoriesTypeTransformerFactory $categoryTransformerFactory)
+    public function __construct(CategoriesTypeTransformer $categoryTransformer)
     {
-        $this->categoriesTypeTransformerFactory = $categoryTransformerFactory;
+        $this->categoriesTypeTransformer = $categoryTransformer;
     }
 
     /**
@@ -39,9 +39,7 @@ class CategoriesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $categoriesTypeTransformer = $this->categoriesTypeTransformerFactory->create($options['domain_id']);
-
-        $builder->addViewTransformer($categoriesTypeTransformer);
+        $builder->addViewTransformer($this->categoriesTypeTransformer);
     }
 
     /**

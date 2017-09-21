@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
-use Shopsys\ShopBundle\Model\Product\ProductService;
 use Shopsys\ShopBundle\Model\Product\ProductVariantService;
 
 class ProductVariantFacade
@@ -49,11 +48,6 @@ class ProductVariantFacade
      */
     private $productAvailabilityRecalculationScheduler;
 
-    /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductService
-     */
-    private $productService;
-
     public function __construct(
         EntityManager $em,
         ProductFacade $productFacade,
@@ -61,8 +55,7 @@ class ProductVariantFacade
         ImageFacade $imageFacade,
         ProductVariantService $productVariantService,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
-        ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
-        ProductService $productService
+        ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
     ) {
         $this->em = $em;
         $this->productFacade = $productFacade;
@@ -71,7 +64,6 @@ class ProductVariantFacade
         $this->productVariantService = $productVariantService;
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
         $this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
-        $this->productService = $productService;
     }
 
     /**

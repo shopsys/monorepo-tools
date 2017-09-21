@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
 use Shopsys\ShopBundle\Model\Order\Mail\OrderMailService;
 use Shopsys\ShopBundle\Model\Order\OrderRepository;
-use Shopsys\ShopBundle\Model\Order\OrderService;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusService;
@@ -34,11 +33,6 @@ class OrderStatusFacade
     private $orderRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderService
-     */
-    private $orderService;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
      */
     private $mailTemplateFacade;
@@ -48,14 +42,12 @@ class OrderStatusFacade
         OrderStatusRepository $orderStatusRepository,
         OrderStatusService $orderStatusService,
         OrderRepository $orderRepository,
-        OrderService $orderService,
         MailTemplateFacade $mailTemplateFacade
     ) {
         $this->em = $em;
         $this->orderStatusRepository = $orderStatusRepository;
         $this->orderStatusService = $orderStatusService;
         $this->orderRepository = $orderRepository;
-        $this->orderService = $orderService;
         $this->mailTemplateFacade = $mailTemplateFacade;
     }
 

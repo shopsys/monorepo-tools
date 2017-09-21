@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Brand;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
@@ -15,22 +14,15 @@ class BrandDataFactory
     private $friendlyUrlFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
-     */
-    private $domain;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
      */
     private $brandFacade;
 
     public function __construct(
         FriendlyUrlFacade $friendlyUrlFacade,
-        Domain $domain,
         BrandFacade $brandFacade
     ) {
         $this->friendlyUrlFacade = $friendlyUrlFacade;
-        $this->domain = $domain;
         $this->brandFacade = $brandFacade;
     }
 

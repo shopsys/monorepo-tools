@@ -6,8 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Customer\CustomerService;
 use Shopsys\ShopBundle\Model\Customer\Mail\CustomerMailFacade;
 use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Order\OrderRepository;
-use Shopsys\ShopBundle\Model\Order\OrderService;
 
 class CustomerFacade
 {
@@ -17,19 +15,9 @@ class CustomerFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderRepository
-     */
-    private $orderRepository;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
      */
     private $userRepository;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderService
-     */
-    private $orderService;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CustomerService
@@ -43,24 +31,18 @@ class CustomerFacade
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Model\Order\OrderRepository $orderRepository
      * @param \Shopsys\ShopBundle\Model\Customer\UserRepository $userRepository
-     * @param \Shopsys\ShopBundle\Model\Order\OrderService $orderService
      * @param \Shopsys\ShopBundle\Model\Customer\CustomerService $customerService
      * @param \Shopsys\ShopBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
      */
     public function __construct(
         EntityManager $em,
-        OrderRepository $orderRepository,
         UserRepository $userRepository,
-        OrderService $orderService,
         CustomerService $customerService,
         CustomerMailFacade $customerMailFacade
     ) {
         $this->em = $em;
-        $this->orderRepository = $orderRepository;
         $this->userRepository = $userRepository;
-        $this->orderService = $orderService;
         $this->customerService = $customerService;
         $this->customerMailFacade = $customerMailFacade;
     }

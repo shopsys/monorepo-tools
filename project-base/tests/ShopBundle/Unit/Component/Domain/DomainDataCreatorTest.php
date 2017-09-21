@@ -2,7 +2,6 @@
 
 namespace Tests\ShopBundle\Unit\Component\Domain;
 
-use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
@@ -29,8 +28,6 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
 
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $emMock = $this->createMock(EntityManager::class);
-
         $settingValueRepositoryMock = $this->createMock(SettingValueRepository::class);
         $multidomainEntityDataCreatorMock = $this->createMock(MultidomainEntityDataCreator::class);
         $translatableEntityDataCreatorMock = $this->createMock(TranslatableEntityDataCreator::class);
@@ -39,7 +36,6 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
             $domain,
             $settingMock,
             $settingValueRepositoryMock,
-            $emMock,
             $multidomainEntityDataCreatorMock,
             $translatableEntityDataCreatorMock
         );
@@ -68,8 +64,6 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
 
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $emMock = $this->createMock(EntityManager::class);
-
         $settingValueRepositoryMock = $this->createMock(SettingValueRepository::class);
         $settingValueRepositoryMock
             ->expects($this->any())
@@ -87,7 +81,6 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
             $domain,
             $settingMock,
             $settingValueRepositoryMock,
-            $emMock,
             $multidomainEntityDataCreatorMock,
             $translatableEntityDataCreatorMock
         );
@@ -130,7 +123,6 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
             ->method('getDomainConfigById')
             ->willReturn($domainConfigWithDataCreated);
 
-        $emMock = $this->createMock(EntityManager::class);
         $settingValueRepositoryMock = $this->createMock(SettingValueRepository::class);
         $multidomainEntityDataCreatorMock = $this->createMock(MultidomainEntityDataCreator::class);
         $translatableEntityDataCreatorMock = $this->createMock(TranslatableEntityDataCreator::class);
@@ -143,7 +135,6 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
             $domainMock,
             $settingMock,
             $settingValueRepositoryMock,
-            $emMock,
             $multidomainEntityDataCreatorMock,
             $translatableEntityDataCreatorMock
         );

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 
 class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
@@ -15,11 +14,6 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
      */
     private $productRepository;
-
-    /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
-     */
-    private $categoryRepository;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
@@ -33,12 +27,10 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 
     public function __construct(
         ProductRepository $productRepository,
-        CategoryRepository $categoryRepository,
         CategoryFacade $categoryFacade,
         Domain $domain
     ) {
         $this->productRepository = $productRepository;
-        $this->categoryRepository = $categoryRepository;
         $this->categoryFacade = $categoryFacade;
         $this->domain = $domain;
     }
@@ -50,7 +42,7 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     {
         $product = $this->productRepository->getById($routeParameters['id']);
 
-        $productMainCategory = $this->categoryRepository->getProductMainCategoryOnDomain(
+        $productMainCategory = $this->categoryFacade->getProductMainCategoryByDomainId(
             $product,
             $this->domain->getId()
         );
@@ -70,7 +62,7 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      */
     private function getCategoryBreadcrumbItems(Category $category)
     {
-        $categoriesInPath = $this->categoryRepository->getVisibleCategoriesInPathFromRootOnDomain(
+        $categoriesInPath = $this->categoryFacade->getVisibleCategoriesInPathFromRootOnDomain(
             $category,
             $this->domain->getId()
         );

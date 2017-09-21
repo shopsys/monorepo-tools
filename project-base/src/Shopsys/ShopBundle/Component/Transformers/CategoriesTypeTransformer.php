@@ -13,18 +13,11 @@ class CategoriesTypeTransformer implements DataTransformerInterface
     private $categoryFacade;
 
     /**
-     * @var int
-     */
-    private $domainId;
-
-    /**
      * @param \Shopsys\ShopBundle\Model\Category\CategoryFacade $categoryFacade
-     * @param int $domainId
      */
-    public function __construct(CategoryFacade $categoryFacade, $domainId)
+    public function __construct(CategoryFacade $categoryFacade)
     {
         $this->categoryFacade = $categoryFacade;
-        $this->domainId = $domainId;
     }
 
     /**

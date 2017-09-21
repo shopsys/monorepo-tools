@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Payment\Grid;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
@@ -15,11 +14,6 @@ use Shopsys\ShopBundle\Model\Payment\PaymentRepository;
 class PaymentGridFactory implements GridFactoryInterface
 {
     const CURRENCY_ID_FOR_LIST = 1;
-
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    private $em;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
@@ -42,13 +36,11 @@ class PaymentGridFactory implements GridFactoryInterface
     private $localization;
 
     public function __construct(
-        EntityManager $em,
         GridFactory $gridFactory,
         PaymentRepository $paymentRepository,
         PaymentDetailFactory $paymentDetailFactory,
         Localization $localization
     ) {
-        $this->em = $em;
         $this->gridFactory = $gridFactory;
         $this->paymentRepository = $paymentRepository;
         $this->paymentDetailFactory = $paymentDetailFactory;
