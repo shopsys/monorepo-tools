@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValueData;

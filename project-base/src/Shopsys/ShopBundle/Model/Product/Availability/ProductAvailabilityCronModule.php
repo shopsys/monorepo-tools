@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Product\Availability;
 
 use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
-use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use Symfony\Bridge\Monolog\Logger;
 
 class ProductAvailabilityCronModule implements IteratedCronModuleInterface

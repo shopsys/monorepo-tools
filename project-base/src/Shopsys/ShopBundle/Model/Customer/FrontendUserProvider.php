@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Customer;
 
 use DateTime;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Shopsys\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;

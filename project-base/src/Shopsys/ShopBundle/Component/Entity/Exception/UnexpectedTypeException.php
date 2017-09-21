@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Entity\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Entity\Exception\EntityException;
 
 class UnexpectedTypeException extends Exception implements EntityException
 {

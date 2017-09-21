@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use Shopsys\ShopBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
 use Shopsys\ShopBundle\Model\Pricing\Rounding;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\ShopBundle\Model\Product\Product;
 
 class QuantifiedProductPriceCalculation

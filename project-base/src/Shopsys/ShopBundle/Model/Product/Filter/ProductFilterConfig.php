@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Filter;
 
-use Shopsys\ShopBundle\Model\Product\Filter\PriceRange;
-
 class ProductFilterConfig
 {
     /**

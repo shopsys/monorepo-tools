@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Form\Admin\Product\Brand;
 
 use Shopsys\FormTypesBundle\MultidomainType;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
@@ -15,7 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints;
 
 class BrandEditFormType extends AbstractType
 {

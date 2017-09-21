@@ -2,8 +2,6 @@
 
 namespace Shopsys\GeneratorBundle\Controller;
 
-use Shopsys\GeneratorBundle\Model\GeneratorFacade;
-use Shopsys\GeneratorBundle\Model\GeneratorsFormFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 

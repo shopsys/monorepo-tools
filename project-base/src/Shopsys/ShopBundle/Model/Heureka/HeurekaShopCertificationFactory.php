@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Model\Heureka;
 
 use Heureka\ShopCertification;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Heureka\HeurekaSetting;
-use Shopsys\ShopBundle\Model\Heureka\HeurekaShopCertificationService;
 use Shopsys\ShopBundle\Model\Order\Order;
 
 class HeurekaShopCertificationFactory

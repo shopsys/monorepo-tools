@@ -7,9 +7,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader;
-use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 use Shopsys\ShopBundle\Model\Customer\User;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface

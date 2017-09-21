@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Category;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Category\Category;
 
 /**
  * @ORM\Table(name="category_domains")

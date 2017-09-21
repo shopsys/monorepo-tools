@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Form\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Form\Exception\FormException;
 
 class InvertedChoiceNotMultipleException extends Exception implements FormException
 {

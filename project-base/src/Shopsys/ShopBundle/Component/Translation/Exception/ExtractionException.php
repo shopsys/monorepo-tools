@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Translation\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Translation\Exception\TranslationException;
 
 class ExtractionException extends Exception implements TranslationException
 {

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Router;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 

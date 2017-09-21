@@ -10,8 +10,6 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductVisibility;
 
 class ProductVisibilityRepository
 {

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Breadcrumb;
 
 use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
 use Shopsys\ShopBundle\Model\Article\ArticleBreadcrumbGenerator;
-use Shopsys\ShopBundle\Model\Breadcrumb\SimpleBreadcrumbGenerator;
 use Shopsys\ShopBundle\Model\Category\CategoryBreadcrumbGenerator;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandBreadcrumbGenerator;
 use Shopsys\ShopBundle\Model\Product\ProductBreadcrumbGenerator;

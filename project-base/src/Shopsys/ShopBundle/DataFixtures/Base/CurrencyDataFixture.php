@@ -6,7 +6,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class CurrencyDataFixture extends AbstractReferenceFixture
 {

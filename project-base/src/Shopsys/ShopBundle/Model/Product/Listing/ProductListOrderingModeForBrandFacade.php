@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Listing;
 
-use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductListOrderingModeForBrandFacade

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Order\PromoCode\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Model\Order\PromoCode\Exception\PromoCodeException;
 
 class InvalidPromoCodeException extends Exception implements PromoCodeException
 {

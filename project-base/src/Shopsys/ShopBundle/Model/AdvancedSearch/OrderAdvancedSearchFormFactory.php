@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
 use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
 use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation;
-use Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class OrderAdvancedSearchFormFactory extends AbstractAdvancedSearchFormFactory

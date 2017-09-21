@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Category;
 
 use Shopsys\ShopBundle\Form\UrlListData;
-use Shopsys\ShopBundle\Model\Category\Category;
 
 class CategoryData
 {

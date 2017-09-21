@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 
 class AdvancedSearchService
 {

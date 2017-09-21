@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Table(name="transport_domains")

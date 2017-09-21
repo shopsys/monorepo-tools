@@ -6,9 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandRepository;
 
 class BrandFacade
 {

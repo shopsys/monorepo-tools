@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Script;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Script\ScriptData;
 
 /**
  * @ORM\Table(name="scripts")

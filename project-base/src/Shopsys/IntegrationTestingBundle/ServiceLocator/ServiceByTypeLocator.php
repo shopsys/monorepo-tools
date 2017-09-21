@@ -3,9 +3,6 @@
 namespace Shopsys\IntegrationTestingBundle\ServiceLocator;
 
 use ReflectionClass;
-use ReflectionFunctionAbstract;
-use Shopsys\IntegrationTestingBundle\ServiceLocator\Exception\AmbiguousTypeNameException;
-use Shopsys\IntegrationTestingBundle\ServiceLocator\Exception\UnknownTypeNameException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

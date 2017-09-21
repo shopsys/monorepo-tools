@@ -4,9 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\ShopBundle\Form\Admin\Product\Parameter\ParameterFormType;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterGridFactory;
 use Symfony\Component\Form\FormFactory;
 
 class ParameterInlineEdit extends AbstractGridInlineEdit

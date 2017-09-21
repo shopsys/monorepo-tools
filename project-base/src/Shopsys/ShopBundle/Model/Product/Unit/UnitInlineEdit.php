@@ -4,9 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Unit;
 
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\ShopBundle\Form\Admin\Product\Unit\UnitFormType;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitGridFactory;
 use Symfony\Component\Form\FormFactory;
 
 class UnitInlineEdit extends AbstractGridInlineEdit

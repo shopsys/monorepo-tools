@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\JsConstantCompilerException;
 
 class CannotConvertToJsonException extends Exception implements JsConstantCompilerException
 {

@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData;
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 
 class PromoCodeDataFixture extends AbstractReferenceFixture
 {

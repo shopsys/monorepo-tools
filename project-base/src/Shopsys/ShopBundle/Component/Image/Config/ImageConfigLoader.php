@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Image\Config;
 
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
-use Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig;
 use Shopsys\ShopBundle\Component\Utils;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;

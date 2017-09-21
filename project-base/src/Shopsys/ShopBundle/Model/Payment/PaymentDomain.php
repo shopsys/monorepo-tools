@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Payment\Payment;
 
 /**
  * @ORM\Table(name="payment_domains")

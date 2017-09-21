@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Mail\MailTemplate;
 
 class MailTemplateRepository
 {

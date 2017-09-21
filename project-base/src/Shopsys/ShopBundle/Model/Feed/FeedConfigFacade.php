@@ -6,7 +6,6 @@ use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository;
-use Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry;
 use Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemRepository;
 
 class FeedConfigFacade

@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\ShopBundle\Model\Payment\PaymentEditData;
-use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 
 class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {

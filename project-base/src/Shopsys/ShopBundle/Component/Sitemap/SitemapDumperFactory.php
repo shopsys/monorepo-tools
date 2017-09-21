@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Sitemap;
 
 use Presta\SitemapBundle\Service\Dumper;
-use Shopsys\ShopBundle\Component\Sitemap\SitemapService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Filesystem;
 

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Product\Flag;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Product\Flag\Flag;
 
 class FlagRepository
 {

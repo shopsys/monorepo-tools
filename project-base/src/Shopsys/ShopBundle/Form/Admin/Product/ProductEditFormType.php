@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Form\Admin\Product;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FormTypesBundle\MultidomainType;
-use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\ShopBundle\Component\Constraints\UniqueProductParameters;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;

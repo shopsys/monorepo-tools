@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ManualBestsellingProductRepository

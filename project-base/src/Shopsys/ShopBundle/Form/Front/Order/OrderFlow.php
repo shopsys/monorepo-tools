@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Form\Front\Order;
 
 use Craue\FormFlowBundle\Form\FormFlow;
 use Craue\FormFlowBundle\Form\StepInterface;
-use Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType;
-use Shopsys\ShopBundle\Form\Front\Order\TransportAndPaymentFormType;
 
 class OrderFlow extends FormFlow
 {

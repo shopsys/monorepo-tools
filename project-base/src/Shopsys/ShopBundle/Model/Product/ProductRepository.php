@@ -5,9 +5,7 @@ namespace Shopsys\ShopBundle\Model\Product;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Paginator\QueryPaginator;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Localization\Localization;
@@ -17,9 +15,6 @@ use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterRepository;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductDomain;
-use Shopsys\ShopBundle\Model\Product\ProductVisibility;
 use Shopsys\ShopBundle\Model\Product\Search\ProductSearchRepository;
 
 /**

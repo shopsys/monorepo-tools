@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\DataFixtures\Base;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class VatDataFixture extends AbstractReferenceFixture
 {

@@ -4,9 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
-use Shopsys\ShopBundle\Model\Advert\Advert;
 
 class ImageController extends AdminBaseController
 {

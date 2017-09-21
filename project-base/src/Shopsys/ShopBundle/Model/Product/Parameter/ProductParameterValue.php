@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue;
 use Shopsys\ShopBundle\Model\Product\Product;
 
 /**

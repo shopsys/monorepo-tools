@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\DataFixtures\Performance\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\DataFixtures\Performance\Exception\PerformanceException;
 
 class UndefinedArrayKeyException extends Exception implements PerformanceException
 {

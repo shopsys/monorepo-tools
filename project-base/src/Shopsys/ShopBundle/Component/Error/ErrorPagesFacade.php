@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Error;
 
 use AppKernel;
 use Shopsys\Environment;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Symfony\Component\Filesystem\Filesystem;

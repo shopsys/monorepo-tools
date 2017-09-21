@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Domain;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;

@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Product\Accessory;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessory;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 

@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Translation;
 
 use Doctrine\Common\Annotations\DocParser;
-use Shopsys\ShopBundle\Component\Translation\PhpFileExtractor;
-use Shopsys\ShopBundle\Component\Translation\TransMethodSpecification;
 
 class PhpFileExtractorFactory
 {

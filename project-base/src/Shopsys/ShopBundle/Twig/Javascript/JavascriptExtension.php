@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Twig\Javascript;
 
 use Shopsys\ShopBundle\Component\Utils;
-use Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService;
 use Twig_Extension;
 use Twig_SimpleFunction;
 

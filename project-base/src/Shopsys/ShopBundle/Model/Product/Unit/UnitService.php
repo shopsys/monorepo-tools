@@ -2,9 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Unit;
 
-use Shopsys\ShopBundle\Model\Product\Unit\Unit;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
-
 class UnitService
 {
     /**

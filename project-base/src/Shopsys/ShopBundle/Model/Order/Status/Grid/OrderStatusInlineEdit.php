@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Order\Status\Grid;
 
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\ShopBundle\Form\Admin\Order\Status\OrderStatusFormType;
-use Shopsys\ShopBundle\Model\Order\Status\Grid\OrderStatusGridFactory;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\Form\FormFactory;

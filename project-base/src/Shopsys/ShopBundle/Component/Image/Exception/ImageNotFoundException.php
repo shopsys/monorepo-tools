@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Image\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Image\Exception\ImageException;
 
 class ImageNotFoundException extends Exception implements ImageException
 {

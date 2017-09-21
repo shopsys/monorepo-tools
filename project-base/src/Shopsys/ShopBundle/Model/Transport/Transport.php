@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Component\Gedmo\SortablePosition;
 use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
-use Shopsys\ShopBundle\Model\Transport\TransportData;
 
 /**
  * @ORM\Table(name="transports")

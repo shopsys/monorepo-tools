@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Image\Processing\Exception;
 
 use Exception;
 use Shopsys\ShopBundle\Component\Image\Image;
-use Shopsys\ShopBundle\Component\Image\Processing\Exception\ImageProcessingException;
 
 class OriginalSizeImageCannotBeGeneratedException extends Exception implements ImageProcessingException
 {

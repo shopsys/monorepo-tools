@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\HttpFoundation\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\HttpFoundation\Exception\HttpFoundationException;
 
 class TooManyRedirectResponsesException extends Exception implements HttpFoundationException
 {

@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Twig\Javascript;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler;
 use Symfony\Component\Asset\Packages;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 class JavascriptCompilerService

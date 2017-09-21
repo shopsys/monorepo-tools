@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Script;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Script\ScriptRepository;
 
 class ScriptFacade
 {

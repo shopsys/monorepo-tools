@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation;
-use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 

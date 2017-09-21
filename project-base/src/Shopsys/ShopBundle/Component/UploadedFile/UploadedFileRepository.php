@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\UploadedFile;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
 
 class UploadedFileRepository
 {

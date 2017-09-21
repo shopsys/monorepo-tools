@@ -6,8 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterTranslation;
 
 /**
  * @ORM\Table(name="parameters")

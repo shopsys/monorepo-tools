@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Cron\Config;
 
 use Shopsys\ShopBundle\Component\Cron\CronTimeInterface;
-use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
-use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
 
 class CronModuleConfig implements CronTimeInterface
 {

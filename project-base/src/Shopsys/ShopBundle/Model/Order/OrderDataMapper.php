@@ -2,9 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Order;
 
-use Shopsys\ShopBundle\Model\Order\FrontOrderData;
-use Shopsys\ShopBundle\Model\Order\OrderData;
-
 class OrderDataMapper
 {
     /**

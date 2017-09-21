@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Product\Brand;
 
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
 
 class BrandDataFactory
 {

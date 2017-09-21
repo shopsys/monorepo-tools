@@ -8,14 +8,9 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Customer\UserRepository;
 use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use Shopsys\ShopBundle\Model\Order\OrderData;
-use Shopsys\ShopBundle\Model\Order\OrderFacade;
-use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassLength)

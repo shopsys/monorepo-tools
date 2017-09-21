@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\ContactForm;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\ContactForm\ContactFormData;
 use Shopsys\ShopBundle\Model\Mail\MailerService;
 use Shopsys\ShopBundle\Model\Mail\MessageData;
 use Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade;

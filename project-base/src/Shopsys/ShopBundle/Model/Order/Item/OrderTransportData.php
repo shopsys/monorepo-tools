@@ -2,10 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Order\Item;
 
-use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
-use Shopsys\ShopBundle\Model\Order\Item\OrderTransport;
-
 class OrderTransportData extends OrderItemData
 {
     /**

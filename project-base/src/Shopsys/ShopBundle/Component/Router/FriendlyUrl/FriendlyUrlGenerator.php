@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use Symfony\Component\Routing\Generator\UrlGenerator as BaseUrlGenerator;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route;

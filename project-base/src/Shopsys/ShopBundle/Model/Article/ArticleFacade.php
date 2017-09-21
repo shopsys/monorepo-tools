@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Article;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use Shopsys\ShopBundle\Model\Article\ArticleRepository;
 
 class ArticleFacade
 {

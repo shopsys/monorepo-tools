@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Order\Item;
 
-use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
 use Shopsys\ShopBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;

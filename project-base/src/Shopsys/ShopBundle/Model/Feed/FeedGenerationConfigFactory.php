@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Feed;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
-use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
 
 class FeedGenerationConfigFactory
 {

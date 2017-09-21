@@ -8,8 +8,6 @@ use Shopsys\ShopBundle\Component\Domain\DomainFacade;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductInputPriceService;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Model\Product\ProductService;

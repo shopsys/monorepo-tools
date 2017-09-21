@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
 /**
  * @ORM\Table(name="vats")

@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Order\Item;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Module\ModuleFacade;
 use Shopsys\ShopBundle\Model\Module\ModuleList;
-use Shopsys\ShopBundle\Model\Order\Item\OrderProductService;
 use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator;
 use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;

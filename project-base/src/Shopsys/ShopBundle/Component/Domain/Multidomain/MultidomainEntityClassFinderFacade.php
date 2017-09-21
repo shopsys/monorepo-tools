@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Domain\Multidomain;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder;
 use Shopsys\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder;
 use Shopsys\ShopBundle\Component\Setting\SettingValue;
 use Shopsys\ShopBundle\Model\Mail\MailTemplate;

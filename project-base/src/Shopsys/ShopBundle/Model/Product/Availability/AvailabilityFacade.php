@@ -4,10 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityRepository;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityService;
-use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 
 class AvailabilityFacade
 {

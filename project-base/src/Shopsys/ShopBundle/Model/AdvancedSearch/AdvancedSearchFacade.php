@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchService;
-use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchFormFactory;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 

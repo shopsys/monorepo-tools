@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 
 /**

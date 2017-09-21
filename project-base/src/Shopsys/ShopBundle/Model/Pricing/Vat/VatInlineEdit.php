@@ -4,9 +4,6 @@ namespace Shopsys\ShopBundle\Model\Pricing\Vat;
 
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\ShopBundle\Form\Admin\Vat\VatFormType;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatGridFactory;
 use Symfony\Component\Form\FormFactory;
 
 class VatInlineEdit extends AbstractGridInlineEdit

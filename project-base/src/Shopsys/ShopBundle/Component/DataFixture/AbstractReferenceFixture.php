@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\DataFixture;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

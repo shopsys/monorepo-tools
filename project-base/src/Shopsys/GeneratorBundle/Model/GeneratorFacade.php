@@ -2,8 +2,6 @@
 
 namespace Shopsys\GeneratorBundle\Model;
 
-use Shopsys\GeneratorBundle\Model\GeneratorCollectionFactory;
-use Shopsys\GeneratorBundle\Model\GeneratorsFormFactory;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class GeneratorFacade

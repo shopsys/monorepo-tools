@@ -2,9 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Feed\Category;
 
-use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryFacade;
-use Shopsys\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader;
-
 class FeedCategoryLoaderFacade
 {
     /**

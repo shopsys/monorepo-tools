@@ -7,7 +7,6 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
-use Shopsys\ShopBundle\Component\Sitemap\SitemapItem;
 use Shopsys\ShopBundle\Model\Article\ArticleRepository;
 use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;

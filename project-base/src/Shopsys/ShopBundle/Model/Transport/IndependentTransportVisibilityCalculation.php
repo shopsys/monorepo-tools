@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Transport;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 
 class IndependentTransportVisibilityCalculation
 {

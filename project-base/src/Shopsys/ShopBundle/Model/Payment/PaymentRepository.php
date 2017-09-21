@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 
 class PaymentRepository

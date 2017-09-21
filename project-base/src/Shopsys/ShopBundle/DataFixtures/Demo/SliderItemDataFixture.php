@@ -6,7 +6,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Slider\SliderItemData;
-use Shopsys\ShopBundle\Model\Slider\SliderItemFacade;
 
 class SliderItemDataFixture extends AbstractReferenceFixture
 {

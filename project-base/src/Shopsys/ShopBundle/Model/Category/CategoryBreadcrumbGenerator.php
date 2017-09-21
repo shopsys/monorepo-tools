@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Category;
 use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
 use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 
 class CategoryBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {

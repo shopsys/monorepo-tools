@@ -5,8 +5,6 @@ namespace Shopsys\ShopBundle\Component\Cron;
 use DateTimeInterface;
 use Shopsys\ShopBundle\Component\Cron\Config\CronConfig;
 use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use Shopsys\ShopBundle\Component\Cron\CronModuleExecutor;
-use Shopsys\ShopBundle\Component\Cron\CronModuleFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class CronFacade

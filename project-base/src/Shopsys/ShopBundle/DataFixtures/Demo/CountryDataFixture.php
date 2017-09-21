@@ -6,7 +6,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Country\Country;
 use Shopsys\ShopBundle\Model\Country\CountryData;
-use Shopsys\ShopBundle\Model\Country\CountryFacade;
 
 class CountryDataFixture extends AbstractReferenceFixture
 {

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product;
 
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
-use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class ProductDataFactory

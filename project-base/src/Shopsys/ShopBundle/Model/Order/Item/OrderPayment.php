@@ -3,9 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
-use Shopsys\ShopBundle\Model\Order\Item\OrderPaymentData;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Pricing\Price;

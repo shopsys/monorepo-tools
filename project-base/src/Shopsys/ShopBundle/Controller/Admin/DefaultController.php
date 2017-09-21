@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 use Shopsys\ShopBundle\Model\Statistics\StatisticsFacade;
 use Shopsys\ShopBundle\Model\Statistics\StatisticsProcessingFacade;
 

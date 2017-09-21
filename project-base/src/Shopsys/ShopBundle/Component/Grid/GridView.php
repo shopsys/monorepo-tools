@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Grid;
 
-use Shopsys\ShopBundle\Component\Grid\Grid;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;

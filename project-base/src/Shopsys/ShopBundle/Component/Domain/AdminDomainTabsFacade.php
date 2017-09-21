@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Domain;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class AdminDomainTabsFacade

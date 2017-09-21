@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;

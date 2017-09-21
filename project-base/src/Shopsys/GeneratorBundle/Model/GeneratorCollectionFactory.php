@@ -3,7 +3,6 @@
 namespace Shopsys\GeneratorBundle\Model;
 
 use Shopsys\GeneratorBundle\Model\Generator\RepositoryGenerator;
-use Shopsys\GeneratorBundle\Model\GeneratorCollection;
 
 class GeneratorCollectionFactory
 {

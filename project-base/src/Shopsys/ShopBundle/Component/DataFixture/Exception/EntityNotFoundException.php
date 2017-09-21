@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\DataFixture\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\DataFixture\Exception\DataFixtureException;
 
 class EntityNotFoundException extends Exception implements DataFixtureException
 {

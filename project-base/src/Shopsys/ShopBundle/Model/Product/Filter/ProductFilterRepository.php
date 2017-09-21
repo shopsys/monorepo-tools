@@ -7,8 +7,6 @@ use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\Availability\Availability;
-use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterRepository;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\ShopBundle\Model\Product\Product;
 

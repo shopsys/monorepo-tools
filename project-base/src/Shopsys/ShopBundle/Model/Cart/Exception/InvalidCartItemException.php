@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Cart\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Model\Cart\Exception\CartException;
 
 class InvalidCartItemException extends Exception implements CartException
 {

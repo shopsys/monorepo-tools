@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Feed\Category;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Feed\Category\FeedCategory;
-use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository;
 
 class FeedCategoryFacade
 {

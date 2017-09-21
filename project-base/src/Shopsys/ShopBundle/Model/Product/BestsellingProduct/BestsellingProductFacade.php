@@ -5,8 +5,6 @@ namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
 use DateTime;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductService;
-use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository;
 use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 
 class BestsellingProductFacade

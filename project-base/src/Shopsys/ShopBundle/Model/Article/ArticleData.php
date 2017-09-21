@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Article;
 
 use Shopsys\ShopBundle\Form\UrlListData;
-use Shopsys\ShopBundle\Model\Article\Article;
 
 class ArticleData
 {

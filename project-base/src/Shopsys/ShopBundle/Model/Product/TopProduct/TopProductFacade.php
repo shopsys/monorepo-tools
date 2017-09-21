@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductRepository;
 
 class TopProductFacade
 {

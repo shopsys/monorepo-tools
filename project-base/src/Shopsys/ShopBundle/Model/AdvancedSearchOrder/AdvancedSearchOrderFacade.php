@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder;
 
 use Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService;
 use Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 

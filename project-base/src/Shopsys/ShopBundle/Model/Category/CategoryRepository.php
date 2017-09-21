@@ -9,7 +9,6 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Paginator\QueryPaginator;
 use Shopsys\ShopBundle\Component\String\DatabaseSearching;
-use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductCategoryDomain;

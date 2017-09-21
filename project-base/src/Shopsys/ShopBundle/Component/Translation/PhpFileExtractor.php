@@ -14,7 +14,6 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Name;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor;
-use Shopsys\ShopBundle\Component\Translation\PhpParserNodeHelper;
 use SplFileInfo;
 use Twig_Node;
 

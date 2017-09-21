@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\AdminNavigation;
 
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-
 class Menu
 {
     /**

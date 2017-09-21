@@ -4,12 +4,10 @@ namespace Shopsys\ShopBundle\Model\Order;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Order\FrontOrderData;
 use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
 use Shopsys\ShopBundle\Model\Order\Item\OrderPayment;
 use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
 use Shopsys\ShopBundle\Model\Order\Item\OrderTransport;
-use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\ShopBundle\Model\Pricing\Price;

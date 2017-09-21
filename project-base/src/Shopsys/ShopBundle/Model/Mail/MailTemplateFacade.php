@@ -5,9 +5,6 @@ namespace Shopsys\ShopBundle\Model\Mail;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade;
-use Shopsys\ShopBundle\Model\Mail\AllMailTemplatesData;
-use Shopsys\ShopBundle\Model\Mail\MailTemplate;
-use Shopsys\ShopBundle\Model\Mail\MailTemplateRepository;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
 

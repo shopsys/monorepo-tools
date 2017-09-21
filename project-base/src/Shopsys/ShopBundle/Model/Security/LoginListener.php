@@ -8,8 +8,6 @@ use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
 use Shopsys\ShopBundle\Model\Administrator\Administrator;
 use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Order\OrderFlowFacade;
-use Shopsys\ShopBundle\Model\Security\TimelimitLoginInterface;
-use Shopsys\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class LoginListener

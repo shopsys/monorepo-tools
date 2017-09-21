@@ -2,8 +2,6 @@
 
 namespace Shopsys\GeneratorBundle\Model;
 
-use Shopsys\GeneratorBundle\Model\AbstractGenerator;
-use Shopsys\GeneratorBundle\Model\GeneratorInterface;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 

@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Product;
 
-use Shopsys\ShopBundle\Model\Product\Filter\PriceRange;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Symfony\Component\Form\AbstractType;

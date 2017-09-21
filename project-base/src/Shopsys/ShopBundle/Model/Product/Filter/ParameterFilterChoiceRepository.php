@@ -7,7 +7,6 @@ use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\ShopBundle\Component\Doctrine\GroupedScalarHydrator;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice;
 use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue;
 use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;

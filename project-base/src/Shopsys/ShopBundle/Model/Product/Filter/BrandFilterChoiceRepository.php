@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Filter;
 
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;

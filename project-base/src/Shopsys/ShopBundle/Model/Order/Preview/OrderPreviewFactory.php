@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Cart\CartFacade;
 use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
 use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;

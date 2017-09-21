@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Product\Brand;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 
 /**
  * @ORM\Table(name="brand_domains")

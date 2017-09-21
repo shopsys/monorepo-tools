@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Grid\Ordering;
 
-use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
-
 class GridOrderingService
 {
     /**

@@ -6,7 +6,6 @@ use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Filter\PriceRange;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 

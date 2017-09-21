@@ -7,8 +7,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\ArticleDataFixture;
-use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\PricingGroupDataFixture;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 

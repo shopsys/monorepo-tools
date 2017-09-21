@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Model\Order;
 
 use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
-use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Order\OrderTotalPrice;
 use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\Price;

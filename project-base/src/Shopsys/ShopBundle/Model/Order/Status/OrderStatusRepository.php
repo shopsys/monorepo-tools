@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Order\Status;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusRepository
 {

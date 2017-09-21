@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Twig\Exception;
 
 use Exception;
 use InvalidArgumentException as BaseInvalidArgumentException;
-use Shopsys\ShopBundle\Twig\Exception\TwigException;
 
 class InvalidArgumentException extends BaseInvalidArgumentException implements TwigException
 {

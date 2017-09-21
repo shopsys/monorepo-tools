@@ -2,9 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Brand;
 
-use Shopsys\ShopBundle\Form\UrlListData;
-use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-
 class BrandEditData
 {
     /**

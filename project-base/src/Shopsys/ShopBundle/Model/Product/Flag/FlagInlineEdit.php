@@ -4,9 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Flag;
 
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\ShopBundle\Form\Admin\Product\Flag\FlagFormType;
-use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
-use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
-use Shopsys\ShopBundle\Model\Product\Flag\FlagGridFactory;
 use Symfony\Component\Form\FormFactory;
 
 class FlagInlineEdit extends AbstractGridInlineEdit

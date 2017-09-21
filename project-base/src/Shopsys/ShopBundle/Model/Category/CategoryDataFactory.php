@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Category;
 
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Category\CategoryData;
 
 class CategoryDataFactory
 {

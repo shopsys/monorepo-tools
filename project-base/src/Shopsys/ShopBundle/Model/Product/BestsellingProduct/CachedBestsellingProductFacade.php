@@ -6,7 +6,6 @@ use Doctrine\Common\Cache\CacheProvider;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
-use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade;
 use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Model\Product\ProductService;

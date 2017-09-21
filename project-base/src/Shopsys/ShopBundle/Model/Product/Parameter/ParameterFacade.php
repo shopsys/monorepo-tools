@@ -3,9 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterService;
 
 class ParameterFacade
 {

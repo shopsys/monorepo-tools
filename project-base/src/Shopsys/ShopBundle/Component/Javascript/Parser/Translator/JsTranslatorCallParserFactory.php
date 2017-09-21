@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Javascript\Parser\Translator;
 
 use Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
 use Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser;
-use Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
 use Shopsys\ShopBundle\Component\Translation\TransMethodSpecification;
 
 class JsTranslatorCallParserFactory

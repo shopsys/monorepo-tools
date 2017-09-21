@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Command;
 
-use Shopsys\ShopBundle\Command\Exception\NoDomainSetCommandException;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\ArrayInput;

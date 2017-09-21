@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Module;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Module\ModuleList;
 
 class EnabledModuleRepository
 {

@@ -8,8 +8,6 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Pricing\PricingService;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 

@@ -5,8 +5,6 @@ namespace Shopsys\ShopBundle\Component\Image\Processing;
 use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
 use Shopsys\ShopBundle\Component\Image\Image;
 use Shopsys\ShopBundle\Component\Image\ImageLocator;
-use Shopsys\ShopBundle\Component\Image\Processing\Exception\OriginalSizeImageCannotBeGeneratedException;
-use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
 
 class ImageGeneratorService
 {

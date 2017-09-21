@@ -16,15 +16,6 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductDomain;
-use Shopsys\ShopBundle\Model\Product\ProductEditData;
-use Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
-use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
-use Shopsys\ShopBundle\Model\Product\ProductService;
-use Shopsys\ShopBundle\Model\Product\ProductVisibility;
-use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductFacade
 {

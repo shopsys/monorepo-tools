@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\DataFixtures\Base;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class UnitDataFixture extends AbstractReferenceFixture
 {

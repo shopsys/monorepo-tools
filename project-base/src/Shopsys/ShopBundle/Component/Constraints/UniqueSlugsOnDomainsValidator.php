@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Constraints;
 
-use Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Shopsys\ShopBundle\Form\FriendlyUrlType;

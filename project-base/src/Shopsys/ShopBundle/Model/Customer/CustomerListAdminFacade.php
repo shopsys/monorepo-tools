@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Customer;
 
 use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use Shopsys\ShopBundle\Model\Customer\UserRepository;
 
 class CustomerListAdminFacade
 {

@@ -2,10 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Grid;
 
-use Shopsys\ShopBundle\Component\Grid\ActionColumn;
-use Shopsys\ShopBundle\Component\Grid\Column;
-use Shopsys\ShopBundle\Component\Grid\DataSourceInterface;
-use Shopsys\ShopBundle\Component\Grid\GridView;
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
 use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\RequestStack;

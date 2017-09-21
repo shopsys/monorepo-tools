@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Command\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Command\Exception\CommandException;
 
 class TranslationReplaceSourceCommandException extends Exception implements CommandException
 {

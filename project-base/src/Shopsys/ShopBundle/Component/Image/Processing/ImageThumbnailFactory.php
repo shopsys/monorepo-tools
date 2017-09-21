@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Image\Processing;
 
-use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
-
 class ImageThumbnailFactory
 {
     const THUMBNAIL_WIDTH = 140;

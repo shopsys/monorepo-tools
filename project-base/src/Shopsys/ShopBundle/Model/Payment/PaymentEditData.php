@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Payment;
 
-use Shopsys\ShopBundle\Model\Payment\PaymentData;
-
 class PaymentEditData
 {
     /**

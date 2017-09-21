@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\ShopBundle\Model\Transport\TransportEditData;
-use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
 class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {

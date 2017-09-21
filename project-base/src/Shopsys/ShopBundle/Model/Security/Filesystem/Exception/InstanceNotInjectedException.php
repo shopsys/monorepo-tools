@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Security\Filesystem\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Model\Security\Filesystem\Exception\FilesystemException;
 
 class InstanceNotInjectedException extends Exception implements FilesystemException
 {

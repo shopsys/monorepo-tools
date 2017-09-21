@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Form\Admin\Vat;
 
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
-use Shopsys\ShopBundle\Model\Pricing\Rounding;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Order\PromoCode\Grid;
 
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType;
-use Shopsys\ShopBundle\Model\Order\PromoCode\Grid\PromoCodeGridFactory;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use Symfony\Component\Form\FormFactory;

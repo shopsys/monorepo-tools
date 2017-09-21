@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\UploadedFile\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\UploadedFile\Exception\FileException;
 
 class FileNotFoundException extends Exception implements FileException
 {

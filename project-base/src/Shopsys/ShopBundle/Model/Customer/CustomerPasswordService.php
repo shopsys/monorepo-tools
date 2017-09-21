@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Customer;
 
 use DateTime;
 use Shopsys\ShopBundle\Component\String\HashGenerator;
-use Shopsys\ShopBundle\Model\Customer\User;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 class CustomerPasswordService

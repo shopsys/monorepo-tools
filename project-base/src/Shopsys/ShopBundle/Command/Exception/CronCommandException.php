@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Command\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Command\Exception\CommandException;
 
 class CronCommandException extends Exception implements CommandException
 {

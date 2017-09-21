@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Administrator\Security;
 
-use Shopsys\ShopBundle\Model\Administrator\Security\AdministratorUserProvider;
 use Shopsys\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

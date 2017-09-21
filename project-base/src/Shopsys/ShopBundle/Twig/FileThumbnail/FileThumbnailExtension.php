@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Twig\FileThumbnail;
 
 use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
 use Shopsys\ShopBundle\Component\Image\Processing\ImageThumbnailFactory;
-use Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo;
 use Twig_Extension;
 use Twig_SimpleFunction;
 

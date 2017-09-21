@@ -5,9 +5,6 @@ namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader;
-use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\CountryDataFixture;
-use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {

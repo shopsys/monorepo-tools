@@ -6,9 +6,6 @@ use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
-use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfigFactory;
-use Shopsys\ShopBundle\Model\Feed\FeedXmlWriter;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 use Symfony\Component\Filesystem\Filesystem;
 

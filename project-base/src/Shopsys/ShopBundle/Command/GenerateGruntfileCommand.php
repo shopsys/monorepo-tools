@@ -2,12 +2,10 @@
 
 namespace Shopsys\ShopBundle\Command;
 
-use Shopsys\ShopBundle\Component\Css\CssFacade;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Twig_Environment;
 
 class GenerateGruntfileCommand extends ContainerAwareCommand
 {

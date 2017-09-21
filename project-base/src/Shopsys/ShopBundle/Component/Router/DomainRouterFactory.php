@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Component\Router;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory;
-use Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Router;

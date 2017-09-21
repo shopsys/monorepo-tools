@@ -6,10 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
 use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
-use Shopsys\ShopBundle\Component\Image\Image;
-use Shopsys\ShopBundle\Component\Image\ImageLocator;
-use Shopsys\ShopBundle\Component\Image\ImageRepository;
-use Shopsys\ShopBundle\Component\Image\ImageService;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImageFacade

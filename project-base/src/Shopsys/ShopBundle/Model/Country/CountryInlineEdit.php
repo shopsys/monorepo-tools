@@ -5,9 +5,6 @@ namespace Shopsys\ShopBundle\Model\Country;
 use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\ShopBundle\Form\Admin\Country\CountryFormType;
-use Shopsys\ShopBundle\Model\Country\CountryData;
-use Shopsys\ShopBundle\Model\Country\CountryFacade;
-use Shopsys\ShopBundle\Model\Country\CountryGridFactory;
 use Symfony\Component\Form\FormFactory;
 
 class CountryInlineEdit extends AbstractGridInlineEdit

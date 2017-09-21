@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Country\Country;
 
 /**
  * @ORM\Table(name="billing_addresses")

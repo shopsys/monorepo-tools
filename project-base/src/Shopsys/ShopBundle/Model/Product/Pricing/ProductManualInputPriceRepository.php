@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice;
 use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductManualInputPriceRepository

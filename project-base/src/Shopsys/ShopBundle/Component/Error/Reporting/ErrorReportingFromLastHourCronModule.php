@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Component\Error\Reporting;
 use DateTime;
 use Shopsys\Environment;
 use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
-use Shopsys\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Mail\MailerService;
 use Shopsys\ShopBundle\Model\Mail\MessageData;

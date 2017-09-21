@@ -6,7 +6,6 @@ use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use Shopsys\ShopBundle\Component\Doctrine\SortableNullsWalker;
-use Shopsys\ShopBundle\Model\Product\Availability\Availability;
 use Shopsys\ShopBundle\Model\Product\Product;
 
 class AvailabilityRepository

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Newsletter;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Newsletter\NewsletterSubscriber;
 
 class NewsletterRepository
 {

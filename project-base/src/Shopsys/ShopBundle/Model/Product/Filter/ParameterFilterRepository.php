@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData;
 use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 
 class ParameterFilterRepository

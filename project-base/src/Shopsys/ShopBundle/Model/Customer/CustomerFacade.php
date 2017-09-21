@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Customer\CustomerService;
 use Shopsys\ShopBundle\Model\Customer\Mail\CustomerMailFacade;
 use Shopsys\ShopBundle\Model\Order\Order;
 

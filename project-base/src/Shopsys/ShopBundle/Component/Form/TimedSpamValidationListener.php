@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Form;
 
-use Shopsys\ShopBundle\Component\Form\FormTimeProvider;
 use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormError;

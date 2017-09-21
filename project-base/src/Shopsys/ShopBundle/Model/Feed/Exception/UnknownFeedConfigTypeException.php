@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Feed\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\DependencyInjection\Compiler\RegisterProductFeedConfigsCompilerPass;
-use Shopsys\ShopBundle\Model\Feed\Exception\FeedException;
 
 class UnknownFeedConfigTypeException extends Exception implements FeedException
 {

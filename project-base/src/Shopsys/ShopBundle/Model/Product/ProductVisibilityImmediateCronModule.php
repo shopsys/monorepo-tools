@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Product;
 
 use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
-use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class ProductVisibilityImmediateCronModule implements SimpleCronModuleInterface

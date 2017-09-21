@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Advert;
 
-use Shopsys\ShopBundle\Model\Advert\Advert;
-
 class AdvertData
 {
     /**

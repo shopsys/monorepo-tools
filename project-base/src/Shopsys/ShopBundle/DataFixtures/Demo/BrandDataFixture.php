@@ -6,8 +6,6 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 
 class BrandDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {

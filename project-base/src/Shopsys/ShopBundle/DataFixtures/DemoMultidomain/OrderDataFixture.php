@@ -11,14 +11,9 @@ use Shopsys\ShopBundle\DataFixtures\Demo\OrderDataFixture as DemoOrderDataFixtur
 use Shopsys\ShopBundle\DataFixtures\Demo\PaymentDataFixture as DemoPaymentDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture as DemoProductDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\TransportDataFixture as DemoTransportDataFixture;
-use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\CountryDataFixture;
-use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\SettingValueDataFixture;
 use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Customer\UserRepository;
 use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use Shopsys\ShopBundle\Model\Order\OrderData;
-use Shopsys\ShopBundle\Model\Order\OrderFacade;
-use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassLength)

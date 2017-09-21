@@ -9,8 +9,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductSellingPrice;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductDeleteResult;
 
 class ProductService
 {

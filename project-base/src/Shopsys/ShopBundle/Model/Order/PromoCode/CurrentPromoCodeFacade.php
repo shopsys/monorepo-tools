@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Order\PromoCode;
 
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CurrentPromoCodeFacade

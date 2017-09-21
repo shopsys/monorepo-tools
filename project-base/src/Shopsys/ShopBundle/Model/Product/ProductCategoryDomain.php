@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product;
 
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(

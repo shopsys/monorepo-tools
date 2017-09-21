@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
-use Shopsys\ShopBundle\Component\Sitemap\SitemapFacade;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SitemapListener implements SitemapListenerInterface

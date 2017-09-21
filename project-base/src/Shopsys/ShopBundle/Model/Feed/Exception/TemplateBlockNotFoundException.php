@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Feed\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Model\Feed\Exception\FeedException;
 
 class TemplateBlockNotFoundException extends Exception implements FeedException
 {

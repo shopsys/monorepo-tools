@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Shopsys\ShopBundle\Component\Image\ImageRepository;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
-use Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionService;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;

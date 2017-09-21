@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Slider;
 
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
-use Shopsys\ShopBundle\Model\Slider\SliderItemData;
 
 /**
  * SliderItem

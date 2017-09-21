@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Customer;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
-use Shopsys\ShopBundle\Model\Customer\UserData;
 use Shopsys\ShopBundle\Model\Security\Roles;
 use Shopsys\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;

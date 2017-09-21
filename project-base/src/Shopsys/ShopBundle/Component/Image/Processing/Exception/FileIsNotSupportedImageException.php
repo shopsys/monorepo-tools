@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Image\Processing\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Image\Processing\Exception\ImageProcessingException;
 
 class FileIsNotSupportedImageException extends Exception implements ImageProcessingException
 {

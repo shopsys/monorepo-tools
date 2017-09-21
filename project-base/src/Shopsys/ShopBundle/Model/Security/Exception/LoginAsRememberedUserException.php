@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Security\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Model\Security\Exception\SecurityException;
 
 class LoginAsRememberedUserException extends Exception implements SecurityException
 {

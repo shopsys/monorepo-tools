@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Pricing\Vat\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Model\Pricing\Vat\Exception\VatException;
 
 class VatMarkedAsDeletedDeleteException extends Exception implements VatException
 {

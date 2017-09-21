@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Cart\Watcher;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender;
 use Shopsys\ShopBundle\Model\Cart\Cart;
-use Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherService;
 use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 
 class CartWatcherFacade

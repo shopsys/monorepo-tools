@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountRepository;
 use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductOnCurrentDomainFacade
 {

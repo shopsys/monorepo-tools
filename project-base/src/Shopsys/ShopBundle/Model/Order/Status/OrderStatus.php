@@ -6,8 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusTranslation;
 
 /**
  * @ORM\Table(name="order_statuses")

@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Product\Pricing;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductCalculatedPriceRepository

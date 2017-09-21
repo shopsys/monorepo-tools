@@ -4,9 +4,6 @@ namespace Shopsys\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatService;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 class VatFacade

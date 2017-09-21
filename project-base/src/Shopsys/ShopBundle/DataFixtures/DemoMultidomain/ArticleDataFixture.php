@@ -6,7 +6,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticleData;
-use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 
 class ArticleDataFixture extends AbstractReferenceFixture
 {

@@ -6,7 +6,6 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit;
 use Shopsys\ShopBundle\Model\Security\Roles;
 use Shopsys\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Shopsys\ShopBundle\Model\Security\UniqueLoginInterface;

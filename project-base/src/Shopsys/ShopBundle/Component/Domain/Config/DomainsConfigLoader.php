@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Domain\Config;
 
-use Shopsys\ShopBundle\Component\Domain\Config\DomainsUrlsConfigDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;

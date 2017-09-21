@@ -4,11 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Filter;
 
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
-use Shopsys\ShopBundle\Model\Product\Filter\BrandFilterChoiceRepository;
-use Shopsys\ShopBundle\Model\Product\Filter\FlagFilterChoiceRepository;
-use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository;
-use Shopsys\ShopBundle\Model\Product\Filter\PriceRangeRepository;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
 
 class ProductFilterConfigFactory
 {

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\DataFixture;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
 
 class PersistentReferenceFacade
 {

@@ -3,14 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Customer;
 
 use Shopsys\ShopBundle\Component\Utils;
-use Shopsys\ShopBundle\Model\Customer\BillingAddress;
-use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
-use Shopsys\ShopBundle\Model\Customer\CustomerData;
-use Shopsys\ShopBundle\Model\Customer\CustomerPasswordService;
-use Shopsys\ShopBundle\Model\Customer\DeliveryAddress;
-use Shopsys\ShopBundle\Model\Customer\DeliveryAddressData;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Customer\UserData;
 use Shopsys\ShopBundle\Model\Order\Order;
 
 class CustomerService

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Doctrine\Cache\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Doctrine\Cache\Exception\DoctrineCacheException;
 
 class InvalidArgumentException extends Exception implements DoctrineCacheException
 {

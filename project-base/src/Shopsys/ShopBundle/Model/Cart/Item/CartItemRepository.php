@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Cart\Item;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartItemRepository

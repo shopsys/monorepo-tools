@@ -2,10 +2,6 @@
 
 namespace Shopsys\ShopBundle\Command;
 
-use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\DomainDataCreator;
-use Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade;
-use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

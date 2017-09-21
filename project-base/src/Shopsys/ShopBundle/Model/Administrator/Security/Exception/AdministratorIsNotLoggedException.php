@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Administrator\Security\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Model\Administrator\Security\Exception\SecurityException;
 
 class AdministratorIsNotLoggedException extends Exception implements SecurityException
 {

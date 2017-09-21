@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Form\Admin\Administrator\AdministratorFormType;
-use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
 use Shopsys\ShopBundle\Model\Administrator\Administrator;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorData;

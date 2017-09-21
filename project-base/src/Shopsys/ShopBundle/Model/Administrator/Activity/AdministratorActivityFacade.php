@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Administrator\Activity;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityRepository;
 use Shopsys\ShopBundle\Model\Administrator\Administrator;
 
 class AdministratorActivityFacade

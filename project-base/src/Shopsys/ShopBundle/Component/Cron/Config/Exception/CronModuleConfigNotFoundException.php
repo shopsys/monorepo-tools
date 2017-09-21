@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Cron\Config\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Cron\Config\Exception\CronConfigException;
 
 class CronModuleConfigNotFoundException extends Exception implements CronConfigException
 {

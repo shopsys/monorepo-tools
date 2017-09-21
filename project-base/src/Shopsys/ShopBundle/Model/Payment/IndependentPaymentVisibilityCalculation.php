@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Payment;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Payment\PaymentRepository;
 
 class IndependentPaymentVisibilityCalculation
 {

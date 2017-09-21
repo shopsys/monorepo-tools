@@ -4,9 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Availability;
 
 use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\ShopBundle\Form\Admin\Product\Availability\AvailabilityFormType;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityGridFactory;
 use Symfony\Component\Form\FormFactory;
 
 class AvailabilityInlineEdit extends AbstractGridInlineEdit

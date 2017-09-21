@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Customer;
 
-use Shopsys\ShopBundle\Form\Front\Customer\UserFormType;
 use Shopsys\ShopBundle\Model\Customer\CustomerData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

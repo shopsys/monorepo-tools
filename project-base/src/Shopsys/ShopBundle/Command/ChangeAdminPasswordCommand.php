@@ -2,9 +2,6 @@
 
 namespace Shopsys\ShopBundle\Command;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityNotFoundException;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

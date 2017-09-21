@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\UploadedFile\Config;
 
-use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
-use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;

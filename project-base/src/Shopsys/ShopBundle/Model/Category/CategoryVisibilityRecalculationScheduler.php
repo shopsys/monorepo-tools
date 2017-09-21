@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Category;
 
-use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class CategoryVisibilityRecalculationScheduler

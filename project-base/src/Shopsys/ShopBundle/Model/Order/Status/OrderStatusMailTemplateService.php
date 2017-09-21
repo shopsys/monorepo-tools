@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Order\Status;
 
-use Shopsys\ShopBundle\Model\Mail\MailTemplate;
 use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
 use Shopsys\ShopBundle\Model\Order\Mail\OrderMailService;
 

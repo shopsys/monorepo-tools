@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Feed;
 
 use Shopsys\ProductFeed\FeedConfigInterface;
-use Shopsys\ShopBundle\Model\Feed\Exception\UnknownFeedConfigTypeException;
 
 class FeedConfigRegistry
 {

@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Customer;
 
-use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class CustomerIdentifierFactory

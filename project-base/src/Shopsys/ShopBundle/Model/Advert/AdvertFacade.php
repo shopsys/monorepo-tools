@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Advert;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
-use Shopsys\ShopBundle\Model\Advert\AdvertRepository;
 
 class AdvertFacade
 {

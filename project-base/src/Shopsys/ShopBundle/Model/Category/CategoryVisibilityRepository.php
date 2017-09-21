@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Category;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class CategoryVisibilityRepository

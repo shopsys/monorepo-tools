@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\UploadedFile\Config\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileConfigException;
 
 class DuplicateEntityNameException extends Exception implements UploadedFileConfigException
 {

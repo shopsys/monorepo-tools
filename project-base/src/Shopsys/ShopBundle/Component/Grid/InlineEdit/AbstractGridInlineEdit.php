@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Grid\InlineEdit;
 
 use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
-use Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
-use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractGridInlineEdit implements GridInlineEditInterface

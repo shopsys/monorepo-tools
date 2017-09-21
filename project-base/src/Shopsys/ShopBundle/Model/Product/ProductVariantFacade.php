@@ -6,10 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductFacade;
-use Shopsys\ShopBundle\Model\Product\ProductVariantService;
 
 class ProductVariantFacade
 {

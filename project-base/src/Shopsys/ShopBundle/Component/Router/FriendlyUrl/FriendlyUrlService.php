@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use Shopsys\ShopBundle\Component\String\TransformString;
 
 class FriendlyUrlService

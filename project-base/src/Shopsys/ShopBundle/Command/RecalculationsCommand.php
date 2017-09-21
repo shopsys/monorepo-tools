@@ -2,12 +2,6 @@
 
 namespace Shopsys\ShopBundle\Command;
 
-use Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository;
-use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
-use Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator;
-use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
-use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

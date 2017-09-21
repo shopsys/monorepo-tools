@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
 
 /**
  * @ORM\Table(

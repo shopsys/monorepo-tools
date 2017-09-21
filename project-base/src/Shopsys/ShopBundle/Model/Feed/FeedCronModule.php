@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Feed;
 
 use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Feed\FeedFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class FeedCronModule implements IteratedCronModuleInterface

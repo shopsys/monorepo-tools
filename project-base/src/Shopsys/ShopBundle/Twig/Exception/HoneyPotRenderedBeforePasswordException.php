@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Twig\Exception;
 
 use Exception;
 use Shopsys\ShopBundle\Form\HoneyPotType;
-use Shopsys\ShopBundle\Twig\Exception\TwigException;
 use Shopsys\ShopBundle\Twig\HoneyPotExtension;
 use Twig_Error;
 

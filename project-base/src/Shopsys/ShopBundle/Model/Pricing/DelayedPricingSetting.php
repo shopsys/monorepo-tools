@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Pricing;
 
-use Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler;
-
 class DelayedPricingSetting
 {
     /**

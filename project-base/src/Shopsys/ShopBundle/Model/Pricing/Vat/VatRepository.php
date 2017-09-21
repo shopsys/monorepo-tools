@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Pricing\Vat;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Payment\Payment;
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 

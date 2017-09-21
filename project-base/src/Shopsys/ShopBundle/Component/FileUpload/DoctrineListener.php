@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\FileUpload;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
 
 class DoctrineListener
 {

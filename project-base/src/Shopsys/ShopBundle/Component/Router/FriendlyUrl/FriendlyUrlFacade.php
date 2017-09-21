@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use Shopsys\ShopBundle\Form\FriendlyUrlType;
 use Shopsys\ShopBundle\Form\UrlListData;
 

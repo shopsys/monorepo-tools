@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Domain;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Shopsys\ShopBundle\Component\Domain\Domain;
 
 class DomainDbFunctionsFacade
 {

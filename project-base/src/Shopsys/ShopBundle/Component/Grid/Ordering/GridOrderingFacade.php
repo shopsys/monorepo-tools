@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Grid\Ordering;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService;
 
 class GridOrderingFacade
 {

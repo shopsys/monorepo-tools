@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryRepository;
-use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory;
 
 class TopCategoryRepository
 {

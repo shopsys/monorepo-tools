@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Cart\CartFactory;
-use Shopsys\ShopBundle\Model\Cart\CartService;
 use Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository;
 use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory;

@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Base\CategoryRootDataFixture;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {

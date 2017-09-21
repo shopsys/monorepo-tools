@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Image\Processing;
 
 use Shopsys\ShopBundle\Component\Image\ImageRepository;
-use Shopsys\ShopBundle\Component\Image\Processing\ImageGeneratorService;
 
 class ImageGeneratorFacade
 {

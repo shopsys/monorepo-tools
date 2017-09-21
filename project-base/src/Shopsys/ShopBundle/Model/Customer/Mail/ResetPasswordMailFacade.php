@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Customer\Mail;
 
-use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
 use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Mail\MailerService;
 use Shopsys\ShopBundle\Model\Mail\MailTemplate;

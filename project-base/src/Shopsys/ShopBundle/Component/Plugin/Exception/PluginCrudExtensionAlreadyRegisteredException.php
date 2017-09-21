@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Plugin\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Plugin\Exception\PluginException;
 
 class PluginCrudExtensionAlreadyRegisteredException extends Exception implements PluginException
 {

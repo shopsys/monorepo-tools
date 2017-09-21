@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\UploadedFile;
 
 use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
 use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
 
 class UploadedFileService
 {

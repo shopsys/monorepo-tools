@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Form\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Form\Exception\FormException;
 
 class InconsistentChoicesException extends Exception implements FormException
 {

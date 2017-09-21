@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Grid;
 
-use Shopsys\ShopBundle\Component\Grid\DataSourceInterface;
-use Shopsys\ShopBundle\Component\Grid\Grid;
 use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;

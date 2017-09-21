@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Mail;
 
-use Shopsys\ShopBundle\Model\Mail\MessageData;
 use Swift_Attachment;
 use Swift_Mailer;
 use Swift_Message;

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Setting;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;
 
 class Setting
 {

@@ -5,8 +5,6 @@ namespace Shopsys\ShopBundle\Component\Image;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
-use Shopsys\ShopBundle\Component\Image\Image;
-use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ImageDeleteDoctrineListener

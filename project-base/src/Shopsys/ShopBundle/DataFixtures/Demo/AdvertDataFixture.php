@@ -6,7 +6,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Advert\Advert;
 use Shopsys\ShopBundle\Model\Advert\AdvertData;
-use Shopsys\ShopBundle\Model\Advert\AdvertFacade;
 
 class AdvertDataFixture extends AbstractReferenceFixture
 {

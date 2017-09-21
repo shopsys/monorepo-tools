@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Setting;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Shopsys\ShopBundle\Component\Setting\SettingValue;
 
 class SettingValueRepository
 {

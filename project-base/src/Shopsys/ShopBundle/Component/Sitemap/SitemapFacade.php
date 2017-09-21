@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Component\Sitemap;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Sitemap\SitemapDumperFactory;
-use Shopsys\ShopBundle\Component\Sitemap\SitemapRepository;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 
 class SitemapFacade

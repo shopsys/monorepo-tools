@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Administrator\Activity\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Model\Administrator\Activity\Exception\AdministratorActivityException;
 
 class CurrentAdministratorActivityNotFoundException extends Exception implements AdministratorActivityException
 {

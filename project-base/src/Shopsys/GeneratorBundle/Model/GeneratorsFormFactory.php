@@ -2,7 +2,6 @@
 
 namespace Shopsys\GeneratorBundle\Model;
 
-use Shopsys\GeneratorBundle\Model\GeneratorCollectionFactory;
 use Shopsys\ShopBundle\Form\ValidationGroup;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

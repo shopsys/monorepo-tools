@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Transport;
 
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportEditData;
-use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
 class TransportEditDataFactory
 {

@@ -5,10 +5,6 @@ namespace Shopsys\ShopBundle\Component\UploadedFile;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileRepository;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileService;
 use Symfony\Component\Filesystem\Filesystem;
 
 class UploadedFileFacade

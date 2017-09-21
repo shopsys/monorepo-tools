@@ -3,9 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Administrator;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorRepository;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorService;
 
 class AdministratorFacade
 {

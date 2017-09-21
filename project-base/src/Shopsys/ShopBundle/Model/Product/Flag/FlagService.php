@@ -2,9 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Flag;
 
-use Shopsys\ShopBundle\Model\Product\Flag\Flag;
-use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
-
 class FlagService
 {
     /**

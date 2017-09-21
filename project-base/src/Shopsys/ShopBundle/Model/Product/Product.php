@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Component\Utils;
 use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Product\Availability\Availability;
-use Shopsys\ShopBundle\Model\Product\ProductCategoryDomain;
 
 /**
  * Product

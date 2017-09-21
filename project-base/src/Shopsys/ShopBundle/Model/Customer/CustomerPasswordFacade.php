@@ -3,9 +3,7 @@
 namespace Shopsys\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Customer\CustomerPasswordService;
 use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMailFacade;
-use Shopsys\ShopBundle\Model\Customer\UserRepository;
 
 class CustomerPasswordFacade
 {

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Cron;
 
 use DateTimeInterface;
-use Shopsys\ShopBundle\Component\Cron\CronTimeInterface;
 
 class CronTimeResolver
 {

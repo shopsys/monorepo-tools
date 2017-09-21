@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Order\Listing;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\Order\Order;
 
 class OrderListAdminRepository

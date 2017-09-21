@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Cart\CartFactory;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 

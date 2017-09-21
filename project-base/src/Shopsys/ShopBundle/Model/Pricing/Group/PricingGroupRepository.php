@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Pricing\Group;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 
 class PricingGroupRepository
 {

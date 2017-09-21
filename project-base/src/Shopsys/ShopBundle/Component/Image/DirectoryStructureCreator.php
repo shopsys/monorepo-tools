@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Image;
 
 use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
-use Shopsys\ShopBundle\Component\Image\ImageLocator;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreator

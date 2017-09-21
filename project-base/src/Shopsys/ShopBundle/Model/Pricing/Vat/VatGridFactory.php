@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class VatGridFactory implements GridFactoryInterface
 {

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Error\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Error\Exception\ErrorException;
 
 class ErrorPageNotFoundException extends Exception implements ErrorException
 {

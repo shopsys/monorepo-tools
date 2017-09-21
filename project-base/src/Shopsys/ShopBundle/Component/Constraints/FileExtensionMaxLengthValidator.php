@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Constraints;
 
-use Shopsys\ShopBundle\Component\Constraints\FileExtensionMaxLength;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;

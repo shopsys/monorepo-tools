@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
-use Exception;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
@@ -16,12 +15,6 @@ use Shopsys\ShopBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\ShopBundle\Model\Localization\Localization;
 use Shopsys\ShopBundle\Model\Order\Item\OrderProductFacade;
 use Shopsys\ShopBundle\Model\Order\Mail\OrderMailFacade;
-use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Order\OrderCreationService;
-use Shopsys\ShopBundle\Model\Order\OrderData;
-use Shopsys\ShopBundle\Model\Order\OrderHashGeneratorRepository;
-use Shopsys\ShopBundle\Model\Order\OrderNumberSequenceRepository;
-use Shopsys\ShopBundle\Model\Order\OrderService;
 use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;

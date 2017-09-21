@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Order;
 
 use Shopsys\ShopBundle\Component\String\HashGenerator;
-use Shopsys\ShopBundle\Model\Order\OrderRepository;
 
 class OrderHashGeneratorRepository
 {

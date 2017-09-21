@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Grid;
 
-use Shopsys\ShopBundle\Component\Grid\Grid;
 use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Form\Front\Order;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Form\Front\Order\OrderFlow;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class DomainAwareOrderFlowFactory

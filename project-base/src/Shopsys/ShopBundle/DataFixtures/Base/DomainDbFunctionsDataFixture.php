@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractNativeFixture;
-use Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade;
 
 class DomainDbFunctionsDataFixture extends AbstractNativeFixture
 {

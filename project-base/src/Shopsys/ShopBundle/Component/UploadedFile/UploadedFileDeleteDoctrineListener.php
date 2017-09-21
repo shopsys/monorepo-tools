@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Component\UploadedFile;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UploadedFileDeleteDoctrineListener

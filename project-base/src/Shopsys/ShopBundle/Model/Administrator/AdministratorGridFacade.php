@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Model\Administrator;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Grid\Grid;
-use Shopsys\ShopBundle\Model\Administrator\Administrator;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorGridService;
 
 class AdministratorGridFacade
 {

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\UploadedFile\Config\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileConfigException;
 
 class UploadedFileConfigurationParseException extends Exception implements UploadedFileConfigException
 {

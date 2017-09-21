@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Product\Parameter;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
 use Shopsys\ShopBundle\Model\Product\Product;
 
 class ParameterRepository

@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Plugin;
 
-use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionRegistry;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 

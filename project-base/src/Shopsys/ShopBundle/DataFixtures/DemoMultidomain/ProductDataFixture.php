@@ -5,14 +5,8 @@ namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
-use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
-use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductEditData;
-use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {

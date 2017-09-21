@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade;
-use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository;
 
 class ManualBestsellingProductFacade
 {

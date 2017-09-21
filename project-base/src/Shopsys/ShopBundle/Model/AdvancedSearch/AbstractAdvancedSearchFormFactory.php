@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
 use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation;
 use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;

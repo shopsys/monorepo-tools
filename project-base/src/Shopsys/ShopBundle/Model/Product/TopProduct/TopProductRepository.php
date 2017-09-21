@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
-use Shopsys\ShopBundle\Model\Product\TopProduct\TopProduct;
 
 class TopProductRepository
 {

@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Form\Admin\Order;
 
 use Shopsys\ShopBundle\Component\Constraints\Email;
-use Shopsys\ShopBundle\Form\Admin\Order\OrderItemFormType;
-use Shopsys\ShopBundle\Form\Admin\Order\OrderTransportFormType;
 use Shopsys\ShopBundle\Form\ValidationGroup;
 use Shopsys\ShopBundle\Model\Country\Country;
 use Shopsys\ShopBundle\Model\Country\CountryFacade;

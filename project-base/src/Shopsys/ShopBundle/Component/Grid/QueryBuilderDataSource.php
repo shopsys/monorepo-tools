@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Grid;
 
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Component\Doctrine\GroupedScalarHydrator;
-use Shopsys\ShopBundle\Component\Grid\DataSourceInterface;
 use Shopsys\ShopBundle\Component\Paginator\QueryPaginator;
 
 class QueryBuilderDataSource implements DataSourceInterface

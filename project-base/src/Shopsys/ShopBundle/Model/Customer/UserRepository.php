@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Customer;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\String\DatabaseSearching;
 use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 

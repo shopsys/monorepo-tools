@@ -5,9 +5,6 @@ namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\CategoryDataFixture as DemoCategoryDataFixture;
-use Shopsys\ShopBundle\Model\Category\CategoryData;
-use Shopsys\ShopBundle\Model\Category\CategoryDataFactory;
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture
 {

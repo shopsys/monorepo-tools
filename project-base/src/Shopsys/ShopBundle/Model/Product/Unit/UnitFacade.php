@@ -4,10 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Unit;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Product\Unit\Unit;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitRepository;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitService;
 
 class UnitFacade
 {

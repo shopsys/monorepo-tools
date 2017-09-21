@@ -6,10 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountData;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterRepository;
 use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use Shopsys\ShopBundle\Model\Product\Product;
 

@@ -2,9 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Brand;
 
-use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandDetailFactory;
-
 class BrandDetail
 {
     /**

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Product\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Model\Product\Exception\VariantException;
 
 class ProductIsAlreadyMainVariantException extends Exception implements VariantException
 {

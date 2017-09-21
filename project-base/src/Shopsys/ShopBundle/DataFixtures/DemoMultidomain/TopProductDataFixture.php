@@ -6,7 +6,6 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture as DemoProductDataFixture;
-use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 
 class TopProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {

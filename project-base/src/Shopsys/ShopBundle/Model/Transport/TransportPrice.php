@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
-use Shopsys\ShopBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Table(name="transport_prices")

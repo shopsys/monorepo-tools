@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Heureka;
 
 use Exception;
-use Shopsys\ShopBundle\Model\Heureka\HeurekaSetting;
-use Shopsys\ShopBundle\Model\Heureka\HeurekaShopCertificationFactory;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Symfony\Bridge\Monolog\Logger;
 

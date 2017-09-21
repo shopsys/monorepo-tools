@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\HttpFoundation\DownloadFileResponse;
 use Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory;
 use Shopsys\ShopBundle\Model\Cart\CartFacade;
-use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
 use Shopsys\ShopBundle\Model\Order\FrontOrderData;

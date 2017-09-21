@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Order\PromoCode;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData;
 
 class PromoCodeFacade
 {

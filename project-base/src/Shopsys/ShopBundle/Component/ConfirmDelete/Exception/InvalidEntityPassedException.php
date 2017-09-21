@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\ConfirmDelete\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Breadcrumb\Exception\BreadcrumbException;
 
 class InvalidEntityPassedException extends Exception implements ConfirmDeleteException
 {

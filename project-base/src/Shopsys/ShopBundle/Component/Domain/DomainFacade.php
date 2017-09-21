@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Component\Domain;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Domain\DomainService;
 use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;

@@ -2,11 +2,9 @@
 
 namespace Shopsys\ShopBundle\Model\Order;
 
-use Shopsys\ShopBundle\Model\Country\Country;
 use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
 use Shopsys\ShopBundle\Model\Order\Item\OrderPaymentData;
 use Shopsys\ShopBundle\Model\Order\Item\OrderTransportData;
-use Shopsys\ShopBundle\Model\Order\Order;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)

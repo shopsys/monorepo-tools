@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Component\Image;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Image\Image;
 
 class ImageRepository
 {

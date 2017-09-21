@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Mail;
 
-use Shopsys\ShopBundle\Form\Admin\Mail\MailTemplateFormType;
 use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
 use Shopsys\ShopBundle\Model\Mail\AllMailTemplatesData;
 use Symfony\Component\Form\AbstractType;

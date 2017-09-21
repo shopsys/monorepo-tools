@@ -2,9 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
-use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
-
 class ParameterService
 {
     /**

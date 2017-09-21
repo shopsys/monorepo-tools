@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Feed;
 
 use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
-use Shopsys\ShopBundle\Model\Feed\FeedFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class DeliveryFeedCronModule implements SimpleCronModuleInterface

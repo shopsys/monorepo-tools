@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
-use Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;

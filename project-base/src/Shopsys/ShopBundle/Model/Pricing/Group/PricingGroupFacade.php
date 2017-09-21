@@ -5,8 +5,6 @@ namespace Shopsys\ShopBundle\Model\Pricing\Group;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Customer\UserRepository;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;

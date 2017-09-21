@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Mail;
 
-use Shopsys\ShopBundle\Model\Mail\MailTemplate;
-
 class MailTemplateData
 {
     /**

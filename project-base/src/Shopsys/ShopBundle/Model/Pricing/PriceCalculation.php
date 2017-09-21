@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Model\Pricing;
 
-use Shopsys\ShopBundle\Model\Pricing\Rounding;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 
 class PriceCalculation

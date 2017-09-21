@@ -4,8 +4,6 @@ namespace Shopsys\ShopBundle\Component\Cron;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use Shopsys\ShopBundle\Component\Cron\CronModuleRepository;
-use Shopsys\ShopBundle\Component\Cron\CronService;
 
 class CronModuleFacade
 {

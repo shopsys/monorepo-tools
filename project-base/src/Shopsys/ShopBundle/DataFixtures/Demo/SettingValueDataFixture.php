@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\ArticleDataFixture;
 
 class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {

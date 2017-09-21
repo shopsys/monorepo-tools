@@ -8,10 +8,6 @@ use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Shopsys\ShopBundle\Model\Payment\PaymentRepository;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use Shopsys\ShopBundle\Model\Transport\Transport;
-use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
-use Shopsys\ShopBundle\Model\Transport\TransportRepository;
-use Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
 class TransportFacade
 {

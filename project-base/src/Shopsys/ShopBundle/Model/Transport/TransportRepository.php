@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Model\Transport\Transport;
 
 class TransportRepository
 {

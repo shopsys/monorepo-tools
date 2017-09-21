@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Security;
 use Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
 use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Customer\UserRepository;
-use Shopsys\ShopBundle\Model\Security\Roles;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;

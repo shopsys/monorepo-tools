@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Administrator;
 
 use Shopsys\ShopBundle\Component\Grid\Grid;
-use Shopsys\ShopBundle\Model\Administrator\Administrator;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit;
 
 class AdministratorGridService
 {

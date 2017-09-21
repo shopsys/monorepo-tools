@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Model\Pricing\Group;
 use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 
 class PricingGroupSettingFacade
 {

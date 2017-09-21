@@ -3,8 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Pricing\Currency;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 
 class CurrencyService

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Model\Administrator;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Administrator\Administrator;
 
 /**
  * @ORM\Entity
