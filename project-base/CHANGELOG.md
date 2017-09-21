@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - phing targets `eslint-check`, `eslint-check-diff`, `eslint-fix` and `eslint-fix-diff` to check and fix coding standards in JS files (@sspooky13)
     - executed as a part of targets `standards`, `standards-diff`, `standards-fix` and `standards-fix-diff`
 - [product feed plugin for Google](https://github.com/shopsys/product-feed-google/) (@MattCzerner)
+- new article explaining [Basics About Package Architecture](docs/introduction/basics-about-package-architecture.md) (@vitek-rostislav)
 
 ### Changed
 - [`StandardFeedItemRepository`](src/Shopsys/ShopBundle/Model/Feed/Standard/StandardFeedItemRepository.php): now selects available products instead of sellable, filtering of not sellable products is made in product plugins (@MattCzerner)

@@ -5,6 +5,7 @@
 * [Phing Targets](introduction/phing-targets.md)
 * [Automated Testing](introduction/automated-testing.md)
 * [Basics About Model Architecture](introduction/basics-about-model-architecture.md)
+* [Basics About Package Architecture](introduction/basics-about-package-architecture.md)
 
 ## Cookbook
 * [Adding New Attribute to an Entity](cookbook/adding-new-attribute-to-an-entity.md)
