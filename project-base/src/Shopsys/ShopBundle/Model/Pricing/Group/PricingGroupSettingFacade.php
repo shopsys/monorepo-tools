@@ -8,6 +8,26 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class PricingGroupSettingFacade
 {
+    /**
+     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository
+     */
+    private $pricingGroupRepository;
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     */
+    private $domain;
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     */
+    private $adminDomainTabsFacade;
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     */
+    private $setting;
+
     public function __construct(
         PricingGroupRepository $pricingGroupRepository,
         Domain $domain,
