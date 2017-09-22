@@ -51,7 +51,7 @@
      */
     Shopsys.ajaxPendingCall = function (pendingCallName, options) {
         if (typeof pendingCallName !== 'string') {
-            throw 'Ajax queued call must have name!';
+            throw new Error('Ajax queued call must have name!');
         }
         var userCompleteCallback = options.hasOwnProperty('complete') ? options.complete : null;
 
