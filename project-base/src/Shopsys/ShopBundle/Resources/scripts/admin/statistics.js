@@ -1,7 +1,7 @@
 (function ($) {
 
     var initLineChart = function ($chartCanvas) {
-        new Chart($chartCanvas, {
+        Chart($chartCanvas, {
             type: 'bar',
             data: {
                 labels: $chartCanvas.data('chart-labels'),
