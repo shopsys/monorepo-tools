@@ -433,7 +433,7 @@
     };
 
     Shopsys.validation.getInputIdByErrorList = function ($errorList) {
-        var inputIdMatch = $errorList.attr('class').match(/js\-validation\-error\-list\-([^\s]+)/);
+        var inputIdMatch = $errorList.attr('class').match(/js-validation-error-list-([^\s]+)/);
         if (inputIdMatch) {
             return inputIdMatch[1];
         }
@@ -499,7 +499,7 @@
     };
 
     Shopsys.validation.normalizeLabelText = function (labelText) {
-        return labelText.replace(/^\s*(.*)[\s:\*]*$/, '$1');
+        return labelText.replace(/^\s*(.*)[\s:*]*$/, '$1');
     };
 
 })(jQuery);
