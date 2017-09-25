@@ -1,5 +1,7 @@
 # Upgrading
-## From 0.3.0 to Unreleased
+## From 0.4.0 to Unreleased
+
+## From 0.3.0 to 0.4.0
 - implement method `isSellingDenied()` for all implementations of `StandardFeedItemInterface`.
 - you have to take care of filtering of non-sellable items in implementations of `FeedConfigInterface::processItems()` 
 in your product feed plugin because the instances of `StandardFeedItemInterface` passed as an argument can be non-sellable now.
