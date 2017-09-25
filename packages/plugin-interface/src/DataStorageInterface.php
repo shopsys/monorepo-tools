@@ -13,6 +13,13 @@ interface DataStorageInterface
     public function get($key);
 
     /**
+     * Returns all previously saved values indexed by keys
+     *
+     * @return array
+     */
+    public function getAll();
+
+    /**
      * Returns array of previously saved values indexed by keys
      *
      * Requested items are missing if associated values are not found (values are never null)
