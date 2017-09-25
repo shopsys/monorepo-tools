@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Dependency [product-feed-interface](shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0 (@MattCzerner)
 
-## [0.2.0]
+## [0.2.0] - 2017-09-12
 ### Added
 - This Changelog (@vitek-rostislav)
 - New dependencies for dev(@MattCzerner)
@@ -37,5 +37,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `.travis.yml` file with Travis CI configuration (@vitek-rostislav)
 
 [Unreleased]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.1.1...0.2.0
+[0.2.0]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.1.0...v0.1.1
