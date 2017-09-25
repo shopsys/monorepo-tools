@@ -1,4 +1,4 @@
-# Model Architecture of Shopsys Framework
+# Basics About Model Architecture
 
 In this article you will learn about [entities](#entity), [facades](#facade), [repositories](#repository), and [services](#service) and their mutual relations.
 

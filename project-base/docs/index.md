@@ -4,7 +4,7 @@
 * [Installation Guide](introduction/installation-guide.md)
 * [Phing Targets](introduction/phing-targets.md)
 * [Automated Testing](introduction/automated-testing.md)
-* [Basics about model architecture](introduction/basics-about-model-architecture.md)
+* [Basics About Model Architecture](introduction/basics-about-model-architecture.md)
 
 ## Cookbook
 * [Adding New Attribute to an Entity](cookbook/adding-new-attribute-to-an-entity.md)
