@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.4.0]
+## [0.4.0] - 2017-09-25
 ### Added
 - [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
 - [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [`FeedConfigInterface`](src/FeedConfigInterface.php) has new method `getAdditionalInformation()` (@MattCzerner)
 - [`StandardFeedItemInterface`](src/StandardFeedItemInterface.php) has new method `getCurrencyShortcut()` (@MattCzerner)
 
-## [0.3.0]
+## [0.3.0] - 2017-09-12
 ### Added
 - This Changelog (@vitek-rostislav)
 - UPGRADE.md (@vitek-rostislav)
