@@ -8,7 +8,7 @@
             .on('click', onCategoryCollapseControlClick);
     };
 
-    function onCategoryCollapseControlClick(event) {
+    function onCategoryCollapseControlClick (event) {
         event.stopPropagation();
         event.preventDefault();
 
@@ -22,13 +22,13 @@
         } else if ($categoryList.length > 0) {
             $categoryList.slideDown('fast');
         } else {
-            loadCategoryItemContent($categoryItem, $categoryCollapseControl.data('url'))
+            loadCategoryItemContent($categoryItem, $categoryCollapseControl.data('url'));
         }
 
         $categoryCollapseControl.toggleClass('open', !isOpen);
     }
 
-    function loadCategoryItemContent($categoryItem, url) {
+    function loadCategoryItemContent ($categoryItem, url) {
         Shopsys.ajax({
             loaderElement: $categoryItem,
             url: url,

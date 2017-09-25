@@ -26,7 +26,7 @@
         return $formInput.filter('input, select, textarea, .form-line, .table-form');
     };
 
-    Shopsys.validation.highlightSubmitButtons = function($form){
+    Shopsys.validation.highlightSubmitButtons = function ($form) {
         var $submitButtons = $form.find('.btn[type="submit"]');
 
         if (Shopsys.validation.isFormValid($form)) {

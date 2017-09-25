@@ -1,10 +1,10 @@
 (function ($) {
 
-    ShopsysShopBundleComponentConstraintsEmail = function() {
+    ShopsysShopBundleComponentConstraintsEmail = function () {
         this.message = '';
 
         this.validate = function (value) {
-            var regexp = /^.+\@\S+\.\S+$/i;
+            var regexp = /^.+@\S+\.\S+$/i;
             var errors = [];
             var f = FpJsFormValidator;
 

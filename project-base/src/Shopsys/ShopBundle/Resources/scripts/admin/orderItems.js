@@ -13,7 +13,7 @@
         productPicker.init();
     };
 
-    Shopsys.order.items.onRemoveItemClick = function(event) {
+    Shopsys.order.items.onRemoveItemClick = function (event) {
         if (!$(this).hasClass('text-disabled')) {
             var $item = $(this).closest('.js-order-item');
             var $itemNameElement = $item.find('.js-order-item-name');
@@ -31,14 +31,14 @@
         event.preventDefault();
     };
 
-    Shopsys.order.items.onAddItemClick = function(event) {
+    Shopsys.order.items.onAddItemClick = function (event) {
         var $collection = $(this).closest('table').find('#js-order-items');
 
         Shopsys.order.items.addItem($collection);
         event.preventDefault();
     };
 
-    Shopsys.order.items.removeItem = function($item) {
+    Shopsys.order.items.removeItem = function ($item) {
         var $collection = $item.closest('#js-order-items');
         var index = $item.data('index');
 
@@ -49,7 +49,7 @@
         Shopsys.formChangeInfo.showInfo();
     };
 
-    Shopsys.order.items.getNewIndex = function($collection) {
+    Shopsys.order.items.getNewIndex = function ($collection) {
         var maxIndex = 0;
 
         $collection.find('.js-order-item').each(function () {
@@ -65,7 +65,7 @@
         return Shopsys.constant('\\Shopsys\\ShopBundle\\Model\\Order\\OrderData::NEW_ITEM_PREFIX') + (maxIndex + 1);
     };
 
-    Shopsys.order.items.addItem = function($collection) {
+    Shopsys.order.items.addItem = function ($collection) {
         var prototype = $collection.data('prototype');
         var index = Shopsys.order.items.getNewIndex($collection);
 
@@ -80,7 +80,7 @@
         Shopsys.formChangeInfo.showInfo();
     };
 
-    Shopsys.order.items.addProduct = function(productId, productName) {
+    Shopsys.order.items.addProduct = function (productId, productName) {
         var $collection = $('#js-order-items');
         Shopsys.ajax({
             url: $collection.data('order-product-add-url'),
@@ -88,7 +88,7 @@
             data: {
                 productId: productId
             },
-            success: function(data) {
+            success: function (data) {
                 var $data = $($.parseHTML(data));
 
                 var $orderItem = $data.filter('.js-order-item');
@@ -101,13 +101,13 @@
 
                 Shopsys.window({content: Shopsys.translator.trans('Product saved in order')});
             },
-            error: function() {
+            error: function () {
                 Shopsys.window({content: Shopsys.translator.trans('Unable to add product')});
             }
         });
     };
 
-    Shopsys.order.items.refreshCount = function($collection) {
+    Shopsys.order.items.refreshCount = function ($collection) {
         var $items = $collection.find('.js-order-item');
         if ($items.length === 1) {
             $items.find('.js-order-item-remove')

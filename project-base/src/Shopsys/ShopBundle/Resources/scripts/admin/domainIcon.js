@@ -16,7 +16,7 @@
 
     Shopsys.register.registerCallback(domainIcon);
 
-    Shopsys.domainIcon.openDialog = function($editDomainIcon) {
+    Shopsys.domainIcon.openDialog = function ($editDomainIcon) {
         Shopsys.ajax({
             url: $editDomainIcon.closest('.js-domain-icon-edit-container').data('url'),
             success: function (data) {
@@ -28,7 +28,7 @@
         });
     };
 
-    Shopsys.domainIcon.uploadIcon = function($form) {
+    Shopsys.domainIcon.uploadIcon = function ($form) {
         var $iconErrorListContainer = $('#js-domain-icon-errors');
         var $spinner = $('.js-overlay-spinner');
         $iconErrorListContainer.hide();
@@ -44,7 +44,7 @@
                 } else if (data['result'] === 'invalid') {
                     var $iconErrorList = $iconErrorListContainer.show().find('ul');
                     $iconErrorList.find('li').remove();
-                    for (var i in data['errors'] ) {
+                    for (var i in data['errors']) {
                         $iconErrorList.append('<li>' + data['errors'][i] + '</li>');
                     }
                     $spinner.hide();

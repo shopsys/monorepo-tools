@@ -1,14 +1,14 @@
 (function ($) {
 
-    ShopsysShopBundleComponentTransformersProductParameterValueToProductParameterValuesLocalizedTransformer = function() {
+    ShopsysShopBundleComponentTransformersProductParameterValueToProductParameterValuesLocalizedTransformer = function () {
 
-        this.transform = function(normData) {
+        this.transform = function (normData) {
             console.log('transform', normData);
 
             return normData;
         };
 
-        this.reverseTransform = function(viewData) {
+        this.reverseTransform = function (viewData) {
             var normData = [];
 
             for (var i in viewData) {
@@ -31,6 +31,6 @@
 
             return normData;
         };
-    }
+    };
 
 })(jQuery);

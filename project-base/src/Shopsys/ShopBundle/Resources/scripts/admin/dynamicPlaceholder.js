@@ -4,10 +4,9 @@
     Shopsys.dynamicPlaceholder = Shopsys.dynamicPlaceholder || {};
 
     Shopsys.dynamicPlaceholder.DynamicPlaceholder = function ($input) {
-        var self = this;
         var $sourceInput = $('#' + $input.data('placeholder-source-input-id'));
 
-        this.init = function() {
+        this.init = function () {
             $sourceInput.change(function () {
                 updatePlaceholder();
             });

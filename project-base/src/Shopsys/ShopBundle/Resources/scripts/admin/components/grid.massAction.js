@@ -1,10 +1,10 @@
-(function ($){
+(function ($) {
 
     Shopsys = Shopsys || {};
     Shopsys.grid = Shopsys.grid || {};
     Shopsys.grid.massAction = Shopsys.grid.massAction || {};
 
-    Shopsys.grid.massAction = function ($grid) {
+    Shopsys.grid.MassAction = function ($grid) {
         var $selectAllCheckbox = $grid.find('.js-grid-mass-action-select-all');
 
         this.init = function () {
@@ -19,7 +19,7 @@
 
     $(document).ready(function () {
         $('.js-grid').each(function () {
-            var massAction = new Shopsys.grid.massAction($(this));
+            var massAction = new Shopsys.grid.MassAction($(this));
             massAction.init();
         });
     });

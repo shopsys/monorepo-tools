@@ -53,7 +53,7 @@
             fixTabsState();
         };
 
-        function fixTabsState() {
+        function fixTabsState () {
 
             if (tabsMode === Shopsys.hybridTabs.TABS_MODE_SINGLE) {
                 var $activeButtons = $tabButtons.filter('.active');
@@ -73,7 +73,7 @@
             }
         }
 
-        function onClickTabButton() {
+        function onClickTabButton () {
             var tabId = $(this).data('tab-id');
 
             if (tabsMode === Shopsys.hybridTabs.TABS_MODE_SINGLE) {
@@ -88,7 +88,7 @@
         }
 
         // activates exactly one tab (in "single" mode)
-        function activateOneTabAndDeactivateOther(tabId) {
+        function activateOneTabAndDeactivateOther (tabId) {
             $tabButtons.each(function () {
                 var currentTabId = $(this).data('tab-id');
                 var isCurrentTab = currentTabId === tabId;
@@ -98,7 +98,7 @@
         }
 
         // use true to show the tab or false to hide it without checking single/multiple mode
-        function toggleTab(tabId, display) {
+        function toggleTab (tabId, display) {
             var $tabButton = $tabButtons.filter('[data-tab-id="' + tabId + '"]');
             var $tabContent = $tabContents.filter('[data-tab-id="' + tabId + '"]');
 

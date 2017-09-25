@@ -21,7 +21,7 @@
                         break;
                 }
                 Shopsys.window({
-                    content: Shopsys.translator.trans('Do you really want to %action% %count% product?', {'%action%': action, '%count%': count }),
+                    content: Shopsys.translator.trans('Do you really want to %action% %count% product?', { '%action%': action, '%count%': count }),
                     buttonCancel: true,
                     buttonContinue: true,
                     eventContinue: function () {

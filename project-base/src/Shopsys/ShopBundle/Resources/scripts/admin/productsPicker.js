@@ -17,7 +17,6 @@
     };
 
     Shopsys.productsPicker.ProductsPicker = function ($productsPicker) {
-        var self = this;
         var instanceId = Shopsys.productsPicker.instances.length;
         Shopsys.productsPicker.instances[instanceId] = this;
 
@@ -84,9 +83,9 @@
 
         var reIndex = function () {
             $itemsContainer.find('.js-products-picker-item-input').each(function (index) {
-                var name = $(this).attr("name");
+                var name = $(this).attr('name');
                 var newName = name.substr(0, name.lastIndexOf('[') + 1) + index + ']';
-                $(this).attr("name", newName);
+                $(this).attr('name', newName);
             });
         };
 

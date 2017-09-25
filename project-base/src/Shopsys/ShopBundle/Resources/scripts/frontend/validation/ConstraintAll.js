@@ -1,6 +1,6 @@
 (function ($) {
 
-    SymfonyComponentValidatorConstraintsAll = function() {
+    SymfonyComponentValidatorConstraintsAll = function () {
         this.constraints = null;
         this.groups = null;
 
@@ -28,6 +28,6 @@
 
             return [];
         };
-    }
+    };
 
 })(jQuery);

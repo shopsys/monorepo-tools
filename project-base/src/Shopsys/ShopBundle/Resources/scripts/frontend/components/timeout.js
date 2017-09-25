@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     Shopsys = window.Shopsys || {};
     Shopsys.timeout = window.Shopsys.timeout || {};
@@ -11,9 +11,9 @@
      * @param {int} timeoutMilliseconds
      * @returns {void}
      */
-    Shopsys.timeout.setTimeoutAndClearPrevious = function(timeoutName, callback, timeoutMilliseconds) {
+    Shopsys.timeout.setTimeoutAndClearPrevious = function (timeoutName, callback, timeoutMilliseconds) {
         if (typeof timeoutName !== 'string') {
-            throw 'Timeout must have name!';
+            throw new Error('Timeout must have name!');
         }
 
         if (timeouts.hasOwnProperty(timeoutName) === true) {

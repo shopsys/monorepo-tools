@@ -1,4 +1,4 @@
-(function ($){
+(function ($) {
     $(document).ready(function () {
 
         $('#js-mail-templates').find('.js-mail-template').each(function () {

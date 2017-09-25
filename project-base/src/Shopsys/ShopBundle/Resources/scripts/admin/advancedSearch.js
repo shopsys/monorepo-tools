@@ -43,7 +43,7 @@
                 filterName: filterName,
                 newIndex: newIndex
             },
-            success: function(data) {
+            success: function (data) {
                 var $newRule = $($.parseHTML(data));
                 $rule.replaceWith($newRule);
 

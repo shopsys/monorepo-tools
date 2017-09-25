@@ -1,6 +1,6 @@
 // Script is named "noticer.js" because scripts named "advert.js" are often blocked by browser (e.g. by AdBlock plugin)
 
-(function ($){
+(function ($) {
     $(document).ready(function () {
         var $advertForm = $('form[name="advert_form"]');
 

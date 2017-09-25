@@ -9,7 +9,7 @@
     Shopsys.formChangeInfo.initContent = function ($container) {
         $container.filterAllNodes('.web__content form')
             .change(Shopsys.formChangeInfo.showInfo)
-            .each(function() {
+            .each(function () {
                 if ($(this).find('.form-input-error:first, .js-validation-errors-list li:first').length > 0) {
                     Shopsys.formChangeInfo.showInfo();
                 }
@@ -23,7 +23,7 @@
             }
         });
 
-        $(window).on('beforeunload', function() {
+        $(window).on('beforeunload', function () {
             if (isInfoShown && !isFormSubmitted) {
                 return Shopsys.translator.trans('You have unsaved changes!');
             }

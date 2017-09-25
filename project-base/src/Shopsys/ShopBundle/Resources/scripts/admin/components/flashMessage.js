@@ -1,4 +1,4 @@
-(function ($){
+(function ($) {
 
     Shopsys = window.Shopsys || {};
     Shopsys.flashMessage = Shopsys.flashMessage || {};
@@ -14,7 +14,6 @@
         });
         event.preventDefault();
     };
-
 
     Shopsys.register.registerCallback(Shopsys.flashMessage.init);
 

@@ -1,4 +1,4 @@
-(function ($){
+(function ($) {
 
     Shopsys = Shopsys || {};
     Shopsys.grid = Shopsys.grid || {};
@@ -40,7 +40,7 @@
         var rows = $grid.find('.js-grid-row');
 
         var rowIds = [];
-        $.each(rows, function(index, row) {
+        $.each(rows, function (index, row) {
             rowIds.push($(row).data('drag-and-drop-grid-row-id'));
         });
 
@@ -96,17 +96,17 @@
         if ($saveAllButton.length === 1) {
             $gridSaveButtons.hide();
 
-            $gridsOnPage.on('update', function() {
+            $gridsOnPage.on('update', function () {
                 Shopsys.formChangeInfo.showInfo();
                 $saveAllButton.removeClass('btn--disabled');
             });
 
-            $gridsOnPage.on('save', function() {
+            $gridsOnPage.on('save', function () {
                 Shopsys.formChangeInfo.removeInfo();
                 $saveAllButton.addClass('btn--disabled');
             });
 
-            $saveAllButton.click(function() {
+            $saveAllButton.click(function () {
                 $gridSaveButtons.click();
             });
         }

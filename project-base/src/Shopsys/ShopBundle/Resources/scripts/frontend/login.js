@@ -4,7 +4,7 @@
     Shopsys.login = Shopsys.login || {};
 
     Shopsys.login.init = function () {
-        $('body').on('submit', '.js-front-login-window', function() {
+        $('body').on('submit', '.js-front-login-window', function () {
             $('.js-front-login-window-message').empty();
             Shopsys.ajax({
                 loaderElement: '.js-front-login-window',
@@ -26,7 +26,7 @@
             });
             return false;
         });
-        $('body').on('focus', '.js-front-login-window', function() {
+        $('body').on('focus', '.js-front-login-window', function () {
             $('.js-front-login-window-message').empty().hide();
         });
     };

@@ -12,12 +12,12 @@
         }
 
         var $loaderOverlay = $($.parseHTML(
-            '<div class="in-overlay__in">' +
-                '<div class="in-overlay__spinner">' +
-                    '<span class="in-overlay__spinner__icon"></span>' +
-                    '<span class="in-overlay__spinner__message">' + loaderMessage + '</span>' +
-                '</div>' +
-            '</div>'));
+            '<div class="in-overlay__in">'
+                + '<div class="in-overlay__spinner">'
+                    + '<span class="in-overlay__spinner__icon"></span>'
+                    + '<span class="in-overlay__spinner__message">' + loaderMessage + '</span>'
+                + '</div>'
+            + '</div>'));
 
         if (loaderElement !== 'body') {
             $loaderOverlay.addClass('in-overlay__in--absolute');
@@ -43,9 +43,9 @@
         $loaderOverlay.remove();
 
         // If multiple overlays are shown over the same element class should be removed only when no overlay is shown anymore
-        if ($loaderElement.children(".in-overlay__in").length === 0) {
+        if ($loaderElement.children('.in-overlay__in').length === 0) {
             $loaderElement.removeClass('in-overlay');
         }
-    }
+    };
 
 })(jQuery);

@@ -12,8 +12,8 @@
     <target name="checks-ci" depends="db-check-mapping,standards-ci,tests,tests-acceptance" description="Checks ORM mapping, coding standards (incl. PhpStorm inspection) and runs unit, DB, smoke and acceptance tests."/>
     <target name="checks-ci-diff" depends="db-check-mapping,standards-ci-diff,tests,tests-acceptance" description="Checks ORM mapping, coding standards on changed files (incl. PhpStorm inspection) and runs unit, DB, smoke and acceptance tests."/>
 
-    <target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint,yaml-lint" description="Checks coding standards."/>
-    <target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint-diff,yaml-lint" description="Checks coding standards on changed files."/>
+    <target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
+    <target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards on changed files."/>
     <target name="standards-ci" depends="standards,phpstorm-inspect" description="Checks coding standards (incl. PhpStorm inspection)."/>
     <target name="standards-ci-diff" depends="standards-diff,phpstorm-inspect" description="Checks coding standards on changed files (incl. PhpStorm inspection)."/>
 
@@ -95,6 +95,15 @@
             </filterchain>
         </property>
 
+        <property name="diff.files.js" value="${diff.files.all}">
+            <filterchain>
+                <linecontainsregexp>
+                    <!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
+                    <regexp pattern="\.js\s*$" />
+                </linecontainsregexp>
+            </filterchain>
+        </property>
+
         <property name="diff.files.php" value="${diff.files.all}">
             <filterchain>
                 <linecontainsregexp>
@@ -114,6 +123,14 @@
         </property>
 
         <property name="diff.files.all.spaces" value="${diff.files.all}">
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="[\r\n]+" replace=" " />
+                </replaceregexp>
+            </filterchain>
+        </property>
+
+        <property name="diff.files.js.spaces" value="${diff.files.js}">
             <filterchain>
                 <replaceregexp>
                     <regexp pattern="[\r\n]+" replace=" " />
@@ -145,6 +162,36 @@
                 </replaceregexp>
             </filterchain>
         </property>
+    </target>
+
+    <target name="eslint-check" description="Find JS coding standard violations in all files using ESLint and print human readable output.">
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color" />
+            <arg path="${path.src}" />
+        </exec>
+    </target>
+
+    <target name="eslint-check-diff" depends="diff-files" description="Find JS coding standard violations in changed files using ESLint and print human readable output.">
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color" />
+            <arg line="${diff.files.js.spaces}" />
+        </exec>
+    </target>
+
+    <target name="eslint-fix" description="Fix JS coding standard violations in all files using ESLint.">
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color" />
+            <arg value="--fix" />
+            <arg path="${path.src}" />
+        </exec>
+    </target>
+
+    <target name="eslint-fix-diff" depends="diff-files" description="Fix JS coding standard violations in changed files using ESLint.">
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color" />
+            <arg value="--fix" />
+            <arg line="${diff.files.js.spaces}" />
+        </exec>
     </target>
 
     <target name="phpcbf" description="Fixes coding standards violations in all files by PHP Code Beautifier.">
@@ -433,6 +480,7 @@
                 <phingcall target="phpcbf" />
             </catch>
         </trycatch>
+        <phingcall target="eslint-fix" />
     </target>
 
     <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files.">
@@ -445,6 +493,7 @@
                 <phingcall target="phpcbf-diff" />
             </catch>
         </trycatch>
+        <phingcall target="eslint-fix-diff" />
     </target>
 
     <target name="tests-acceptance" depends="test-db-dump" description="Runs acceptance tests. Running Selenium server is required.">

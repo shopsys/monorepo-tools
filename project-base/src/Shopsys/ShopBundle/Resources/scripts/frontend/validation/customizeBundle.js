@@ -30,9 +30,9 @@
     };
 
     Shopsys.validation.ckeditorValidationInit = function (element) {
-        $.each(element.children, function(index, childElement) {
+        $.each(element.children, function (index, childElement) {
             if (childElement.type === Shopsys.constant('\\Ivory\\CKEditorBundle\\Form\\Type\\CKEditorType::class')) {
-                CKEDITOR.instances[childElement.id].on('change', function() {
+                CKEDITOR.instances[childElement.id].on('change', function () {
                     $(childElement.domNode).jsFormValidator('validate');
                 });
             }
@@ -101,7 +101,7 @@
         var validators = delayedValidators;
         delayedValidators = {};
 
-        $.each(validators, function() {
+        $.each(validators, function () {
             this.validate();
         });
     };
@@ -324,7 +324,7 @@
         return result;
     };
 
-    var _SymfonyComponentValidatorConstraintsUrl = SymfonyComponentValidatorConstraintsUrl;
+    var _SymfonyComponentValidatorConstraintsUrl = SymfonyComponentValidatorConstraintsUrl; // eslint-disable-line no-unused-vars
     SymfonyComponentValidatorConstraintsUrl = function () {
         this.message = '';
 
@@ -339,14 +339,14 @@
         };
     };
 
-    Shopsys.validation.isExpandedChoiceFormType = function(element, value) {
+    Shopsys.validation.isExpandedChoiceFormType = function (element, value) {
         return element.type === Shopsys.constant('\\Symfony\\Component\\Form\\Extension\\Core\\Type\\ChoiceType::class') && !$.isArray(value);
     };
 
-    Shopsys.validation.isExpandedChoiceEmpty = function(value) {
+    Shopsys.validation.isExpandedChoiceEmpty = function (value) {
         var isEmpty = true;
 
-        $.each(value, function(key, value) {
+        $.each(value, function (key, value) {
             if (value !== false) {
                 isEmpty = false;
                 return false;
@@ -432,8 +432,8 @@
         return $formattedFormErrors;
     };
 
-    Shopsys.validation.getInputIdByErrorList = function($errorList) {
-        var inputIdMatch = $errorList.attr('class').match(/js\-validation\-error\-list\-([^\s]+)/);
+    Shopsys.validation.getInputIdByErrorList = function ($errorList) {
+        var inputIdMatch = $errorList.attr('class').match(/js-validation-error-list-([^\s]+)/);
         if (inputIdMatch) {
             return inputIdMatch[1];
         }
@@ -485,7 +485,7 @@
         return $formLine.find(selector).filter(':first');
     };
 
-    Shopsys.validation.addLabelError = function(errorsByLabel, labelText, errorMessage) {
+    Shopsys.validation.addLabelError = function (errorsByLabel, labelText, errorMessage) {
         labelText = Shopsys.validation.normalizeLabelText(labelText);
 
         if (errorsByLabel[labelText] === undefined) {
@@ -499,7 +499,7 @@
     };
 
     Shopsys.validation.normalizeLabelText = function (labelText) {
-        return labelText.replace(/^\s*(.*)[\s:\*]*$/, '$1');
+        return labelText.replace(/^\s*(.*)[\s:*]*$/, '$1');
     };
 
 })(jQuery);

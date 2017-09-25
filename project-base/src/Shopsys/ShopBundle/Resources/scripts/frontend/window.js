@@ -10,7 +10,7 @@
     var animationTime = 300;
     var flexPopupHeightIssueDetectionBoundaryHeight = 45;
 
-    var getMainContainer = function() {
+    var getMainContainer = function () {
         var $mainContainer = $('#window-main-container');
         if ($mainContainer.length === 0) {
             $mainContainer = $('<div id="window-main-container"></div>');
@@ -19,7 +19,7 @@
         return $mainContainer;
     };
 
-    var getOverlay = function() {
+    var getOverlay = function () {
         var $overlay = $('#js-overlay');
         if ($overlay.length === 0) {
             $overlay = $('<div class="window-popup__overlay" id="js-overlay"></div>');
@@ -32,7 +32,7 @@
         $('body').addClass('web--window-activated').append($overlay);
 
         // timeout 0 to asynchronous run to fix css animation fade
-        setTimeout(function(){
+        setTimeout(function () {
             $overlay.addClass('window-popup__overlay--active');
         }, 0);
     };
@@ -43,7 +43,7 @@
         $overlay.removeClass('window-popup__overlay--active');
 
         if ($overlay.length !== 0) {
-            setTimeout(function(){
+            setTimeout(function () {
                 $overlay.remove();
             }, animationTime);
         }
@@ -95,7 +95,7 @@
             $window.removeClass('window-popup--active');
             hideOverlay();
 
-            setTimeout(function(){
+            setTimeout(function () {
                 $activeWindow.trigger('windowFastClose');
             }, animationTime);
         });
@@ -168,8 +168,8 @@
 
         show();
 
-        $(window).resize(function() {
-            Shopsys.timeout.setTimeoutAndClearPrevious('window.window.resize', function() {
+        $(window).resize(function () {
+            Shopsys.timeout.setTimeoutAndClearPrevious('window.window.resize', function () {
                 fixVerticalAlign();
             }, 200);
         });
@@ -177,7 +177,7 @@
         /**
          * Window with big height is fixed on top of viewport, smaller window is centered in viewport
          */
-        function fixVerticalAlign() {
+        function fixVerticalAlign () {
             var windowAndViewportRatioLimitToCenter = 0.9;
             if ($window.height() / $(window).height() < windowAndViewportRatioLimitToCenter) {
                 moveToCenter();
@@ -187,7 +187,7 @@
             }
         }
 
-        function show() {
+        function show () {
             showOverlay();
             if (options.closeOnBgClick) {
                 getOverlay().click(function () {
@@ -200,13 +200,13 @@
                 $('html').addClass('is-flex-popup-height-issue-detected');
             }
             fixVerticalAlign();
-            setTimeout(function(){
+            setTimeout(function () {
                 $window.addClass('window-popup--active');
                 options.eventOnLoad();
             }, animationTime);
         }
 
-        function moveToCenter() {
+        function moveToCenter () {
             var relativeY = $(window).height() / 2 - $window.innerHeight() / 2;
             var minRelativeY = 10;
 

@@ -1,7 +1,6 @@
 (function ($) {
 
-    ShopsysShopBundleComponentConstraintsUniqueProductParameters = function() {
-        var self = this;
+    ShopsysShopBundleComponentConstraintsUniqueProductParameters = function () {
         this.message = '';
 
         /**
@@ -11,7 +10,7 @@
         this.validate = function (value) {
             var uniqueCollectionValidator = new ShopsysShopBundleComponentConstraintsUniqueCollection();
             uniqueCollectionValidator.message = this.message;
-            uniqueCollectionValidator.fields = new Array('parameter', 'locale');
+            uniqueCollectionValidator.fields = ['parameter', 'locale'];
             uniqueCollectionValidator.allowEmpty = false;
 
             return uniqueCollectionValidator.validate(value);

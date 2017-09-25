@@ -51,7 +51,7 @@
                 .mouseenter(function () {
                     keepVisible = true;
                 })
-                .mouseleave(function() {
+                .mouseleave(function () {
                     $previewBox.hide();
                 });
         };

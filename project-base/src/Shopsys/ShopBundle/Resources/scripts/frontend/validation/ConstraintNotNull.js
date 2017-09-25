@@ -13,7 +13,7 @@
                 isValueNull = value === null;
             } else if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\SingleCheckboxChoiceType::class')) {
                 isValueNull = true;
-                for(var i in value) {
+                for (var i in value) {
                     if (value.hasOwnProperty(i) && value[i] === true) {
                         isValueNull = false;
                         break;
@@ -28,7 +28,7 @@
             }
 
             return errors;
-        }
+        };
     };
 
 })(jQuery);

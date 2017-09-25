@@ -44,7 +44,7 @@
         Shopsys.parameters.refreshCount($('.js-parameters'));
     };
 
-    Shopsys.parameters.refreshCount = function($collection) {
+    Shopsys.parameters.refreshCount = function ($collection) {
         if ($collection.find('.js-parameters-item').length === 0) {
             $collection.find('.js-parameters-empty-item').show();
         } else {

@@ -17,24 +17,24 @@
             .bind('spinbox.minus', Shopsys.spinbox.minus);
 
         $plus
-            .bind("mousedown.spinbox",function(e){
+            .bind('mousedown.spinbox', function (e) {
                 repeater.startAutorepeat($input, 'spinbox.plus');
             })
-            .bind("mouseup.spinbox mouseout.spinbox", function(e){
+            .bind('mouseup.spinbox mouseout.spinbox', function (e) {
                 repeater.stopAutorepeat();
             });
 
         $minus
-            .bind("mousedown.spinbox",function(e){
+            .bind('mousedown.spinbox', function (e) {
                 repeater.startAutorepeat($input, 'spinbox.minus');
             })
-            .bind("mouseup.spinbox mouseout.spinbox", function(e){
+            .bind('mouseup.spinbox mouseout.spinbox', function (e) {
                 repeater.stopAutorepeat();
             });
 
     };
 
-    Shopsys.spinbox.plus = function() {
+    Shopsys.spinbox.plus = function () {
         var value = $.trim($(this).val());
         var max = $(this).data('spinbox-max');
 
@@ -48,7 +48,7 @@
         }
     };
 
-    Shopsys.spinbox.minus = function() {
+    Shopsys.spinbox.minus = function () {
         var value = $.trim($(this).val());
         var min = $(this).data('spinbox-min');
 
@@ -66,18 +66,18 @@
         timerDelay: null,
         timerRepeat: null,
 
-        startAutorepeat: function($input, eventString) {
+        startAutorepeat: function ($input, eventString) {
+            $input.trigger(eventString);
+            repeater.stopAutorepeat();
+            repeater.timerDelay = setTimeout(function () {
                 $input.trigger(eventString);
-                repeater.stopAutorepeat();
-                repeater.timerDelay = setTimeout(function(){
+                repeater.timerRepeat = setInterval(function () {
                     $input.trigger(eventString);
-                    repeater.timerRepeat = setInterval(function(){
-                        $input.trigger(eventString);
-                    }, 100);
-                }, 500);
-            },
+                }, 100);
+            }, 500);
+        },
 
-        stopAutorepeat: function() {
+        stopAutorepeat: function () {
             clearTimeout(repeater.timerDelay);
             clearInterval(repeater.timerRepeat);
         }

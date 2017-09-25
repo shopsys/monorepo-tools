@@ -13,7 +13,7 @@
 
         $container.trigger('showContent.toggleElement');
 
-        $content.slideDown('fast', function() {
+        $content.slideDown('fast', function () {
             $content.removeClass('display-none');
         });
     };
@@ -23,7 +23,7 @@
 
         $container.trigger('hideContent.toggleElement');
 
-        $content.slideUp('fast', function() {
+        $content.slideUp('fast', function () {
             $content.addClass('display-none');
         });
     };

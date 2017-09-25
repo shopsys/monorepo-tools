@@ -5,7 +5,7 @@
 
     var optionClassPrefix = 'js-select-toggle-option-';
 
-    Shopsys.selectToggle.toggleOptgroupOnControlChange = function($select, $control) {
+    Shopsys.selectToggle.toggleOptgroupOnControlChange = function ($select, $control) {
         Shopsys.selectToggle.setOptgroupClassByLabel($select, optionClassPrefix);
 
         $control
@@ -21,13 +21,13 @@
                 Shopsys.toggleOption.show($(this));
             } else {
                 Shopsys.toggleOption.hide($(this));
-                $(this).removeAttr('selected')
+                $(this).removeAttr('selected');
             }
         });
     };
 
     Shopsys.selectToggle.setOptgroupClassByLabel = function ($select, classPrefix) {
-        $select.find('optgroup').each(function() {
+        $select.find('optgroup').each(function () {
             var $optgroup = $(this);
             var optgroupLabel = $optgroup.attr('label');
             $optgroup.find('option').each(function () {

@@ -8,7 +8,7 @@
         var $metaDescriptionInput = $('#article_form_seoMetaDescription');
 
         $($domainSelectInput).on('change', function () {
-           Shopsys.article.changeMetaDescriptionPlaceholderByDomainId($metaDescriptionInput, $(this).val());
+            Shopsys.article.changeMetaDescriptionPlaceholderByDomainId($metaDescriptionInput, $(this).val());
         });
 
     };

@@ -26,11 +26,11 @@
             });
         };
 
-        this.onSelectProduct = function(productId, productName) {
+        this.onSelectProduct = function (productId, productName) {
             if (onSelectProductCallback !== undefined) {
                 onSelectProductCallback(productId, productName);
             } else {
-                this.selectProduct(productId, productName)
+                this.selectProduct(productId, productName);
             }
         };
 

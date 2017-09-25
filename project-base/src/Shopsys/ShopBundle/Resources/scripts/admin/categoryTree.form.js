@@ -1,4 +1,4 @@
-(function ($){
+(function ($) {
 
     Shopsys = Shopsys || {};
     Shopsys.categoryTree = Shopsys.categoryTree || {};
@@ -12,8 +12,6 @@
     });
 
     Shopsys.categoryTree.Form = function ($tree) {
-        var self = this;
-
         $tree.find('> .js-category-tree-form-children-container > .js-category-tree-form-item').each(function () {
             var categoryTreeItem = new Shopsys.categoryTree.FormItem($(this), null);
             categoryTreeItem.init();

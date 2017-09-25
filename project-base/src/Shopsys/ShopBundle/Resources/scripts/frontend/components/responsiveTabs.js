@@ -52,7 +52,7 @@
                 hybridTabs.setTabsMode(getHybridTabsModeForCurrentResponsiveMode());
             });
 
-            function getHybridTabsModeForCurrentResponsiveMode() {
+            function getHybridTabsModeForCurrentResponsiveMode () {
                 if (Shopsys.responsive.isDesktopVersion()) {
                     return Shopsys.hybridTabs.TABS_MODE_SINGLE;
                 } else {

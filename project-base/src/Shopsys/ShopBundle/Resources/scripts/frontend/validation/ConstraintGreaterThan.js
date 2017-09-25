@@ -1,10 +1,10 @@
 (function ($) {
 
-    SymfonyComponentValidatorConstraintsGreaterThan = function() {
+    SymfonyComponentValidatorConstraintsGreaterThan = function () {
         this.message = '';
         this.value = null;
 
-        this.validate = function(value) {
+        this.validate = function (value) {
 
             var f = FpJsFormValidator;
             var compareValue = Shopsys.number.parseNumber(value);

@@ -3,7 +3,6 @@
     Shopsys = window.Shopsys || {};
     Shopsys.generatorToggle = Shopsys.generatorToggle || {};
 
-
     Shopsys.generatorToggle.init = function () {
         $('.js-generator-title input[type=checkbox]').on('change', Shopsys.generatorToggle.onChange);
 

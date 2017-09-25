@@ -4,7 +4,7 @@
     Shopsys.escape = Shopsys.escape || {};
 
     Shopsys.escape.escapeHtml = function (string) {
-        return $("<textarea/>").text(string).html();
+        return $('<textarea/>').text(string).html();
     };
 
 })(jQuery);

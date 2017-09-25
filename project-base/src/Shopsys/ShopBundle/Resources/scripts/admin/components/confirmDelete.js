@@ -8,7 +8,6 @@
     };
 
     Shopsys.ConfirmDelete = function (confirmLink, messageContainerSelector) {
-        var self = this;
         var $confirmLink = $(confirmLink);
         var $messageContainer = $(messageContainerSelector);
         var $confirmDeleteForm = $messageContainer.find('.js-confirm-delete-form');
@@ -29,7 +28,7 @@
         var canDeleteDirectly = function () {
             Shopsys.ajax({
                 url: $confirmLink.attr('href'),
-                success: function(data) {
+                success: function (data) {
                     if ($($.parseHTML(data)).find('.js-confirm-delete-direct-link').length > 0) {
                         document.location = $directDeleteLink.attr('href');
                     } else {
@@ -62,7 +61,7 @@
             }
         };
 
-        var onConfirmDeleteFormSubmit = function() {
+        var onConfirmDeleteFormSubmit = function () {
             return isSelectedNewValue();
         };
     };
