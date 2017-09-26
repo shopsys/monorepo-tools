@@ -1,5 +1,6 @@
 # Upgrading
 ## From 0.4.0 to Unreleased
+- implement method `getMainCategoryId()` in your implementations of `StandardFeedItemInterface`.
 
 ## From 0.3.0 to 0.4.0
 - implement method `isSellingDenied()` for all implementations of `StandardFeedItemInterface`.
