@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
 - `DataStorageInterface` can return all saved data via `getAll()` (@MattCzerner)
+- `IteratedCronModuleInterface` and `SimpleCronModuleInterface` (@MattCzerner)
 
 ## [0.2.0] - 2017-09-06
 ### Added

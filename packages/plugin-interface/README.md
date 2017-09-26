@@ -127,6 +127,56 @@ class AcmeDataFixture implements PluginDataFixtureInterface
 }
 ```
 
+## CRON modules
+When your plugin needs to execute some task periodically, for example downloading currency exchange rates every six hours, you can use a CRON module. 
+
+There are 2 types of CRON module interfaces:
+- [`SimpleCronModuleInterface`](./src/Cron/SimpleCronModuleInterface.php)
+  - for short tasks that do not take too long to execute
+- [`IteratedCronModuleInterface`](./src/Cron/IteratedCronModuleInterface.php)
+  - for long-running tasks that can be divided into smaller parts
+  - if the module takes too long to run it will be suspended and will be woken up and re-run during the next opportunity
+
+You can implement either one of these interfaces and [tag the service in a DI container](http://symfony.com/doc/current/service_container/tags.html) with `shopsys.cron` tag.
+
+CRON modules are started automatically every time the current system time matches the specified mask in the tag attributes `hours` and `minutes`.
+
+### Example
+```yaml
+acme.data_download_cron_module:
+    class: AcmePlugin\AcmeDataDownloadCronModule
+    tags:
+      - { name: shopsys.cron, hours: '*/6', minutes: '0' }
+```
+
+```php
+<?php
+
+// ...
+class AcmeDataDownloadCronModule implements SimpleCronModuleInterface
+{
+    /**
+     * @var \Symfony\Bridge\Monolog\Logger
+     */
+    private $logger;
+    
+    public function setLogger(Logger $logger)
+    {
+        $this->logger = $logger;
+    }
+    
+    public function run()
+    {
+        $data = $this->downloadData();
+        $this->saveData($data);
+
+        $this->logger->addInfo(sprintf('Downloaded %d new records.', count($data)));
+    }
+
+    // ...
+}
+```
+
 ## How to implement a plugin
 Plugins are implemented in a form of a [Symfony bundle](http://symfony.com/doc/current/bundles.html).
 For tips on how to write a new bundle see [Best Practices for Reusable Bundles](https://symfony.com/doc/current/bundles/best_practices.html).
