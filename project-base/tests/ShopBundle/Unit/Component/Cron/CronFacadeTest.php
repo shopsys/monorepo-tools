@@ -5,13 +5,13 @@ namespace Tests\ShopBundle\Unit\Component\Cron;
 use DateTime;
 use PHPUnit\Framework\Assert;
 use PHPUnit_Framework_TestCase;
+use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
+use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
 use Shopsys\ShopBundle\Component\Cron\Config\CronConfig;
 use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use Shopsys\ShopBundle\Component\Cron\CronFacade;
 use Shopsys\ShopBundle\Component\Cron\CronModuleFacade;
 use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
-use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
-use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
 
 class CronFacadeTest extends PHPUnit_Framework_TestCase

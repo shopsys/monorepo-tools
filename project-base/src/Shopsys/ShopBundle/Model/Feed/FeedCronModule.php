@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Feed;
 
-use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
+use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Bridge\Monolog\Logger;
 

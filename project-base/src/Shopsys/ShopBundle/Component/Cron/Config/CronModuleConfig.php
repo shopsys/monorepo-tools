@@ -7,7 +7,7 @@ use Shopsys\ShopBundle\Component\Cron\CronTimeInterface;
 class CronModuleConfig implements CronTimeInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface
+     * @var \Shopsys\Plugin\Cron\SimpleCronModuleInterface
      */
     private $service;
 
@@ -27,7 +27,7 @@ class CronModuleConfig implements CronTimeInterface
     private $timeHours;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $service
+     * @param \Shopsys\Plugin\Cron\SimpleCronModuleInterface|\Shopsys\Plugin\Cron\IteratedCronModuleInterface $service
      * @param string $serviceId
      * @param string $timeHours
      * @param string $timeMinutes
@@ -41,7 +41,7 @@ class CronModuleConfig implements CronTimeInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface
+     * @return \Shopsys\Plugin\Cron\SimpleCronModuleInterface|\Shopsys\Plugin\Cron\IteratedCronModuleInterface
      */
     public function getService()
     {

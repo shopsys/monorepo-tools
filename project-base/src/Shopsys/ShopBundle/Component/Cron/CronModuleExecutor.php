@@ -3,6 +3,8 @@
 namespace Shopsys\ShopBundle\Component\Cron;
 
 use DateTimeImmutable;
+use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
+use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
 
 class CronModuleExecutor
 {
@@ -24,7 +26,7 @@ class CronModuleExecutor
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
+     * @param \Shopsys\Plugin\Cron\SimpleCronModuleInterface|\Shopsys\Plugin\Cron\IteratedCronModuleInterface $cronModuleService
      * @param bool $suspended
      * @return string
      */

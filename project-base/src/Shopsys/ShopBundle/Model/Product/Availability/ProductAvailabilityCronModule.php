@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Availability;
 
-use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
+use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
 
 class ProductAvailabilityCronModule implements IteratedCronModuleInterface

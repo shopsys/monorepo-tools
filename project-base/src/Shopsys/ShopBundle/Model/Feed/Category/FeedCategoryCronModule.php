@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Feed\Category;
 
-use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
+use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
 
 class FeedCategoryCronModule implements SimpleCronModuleInterface

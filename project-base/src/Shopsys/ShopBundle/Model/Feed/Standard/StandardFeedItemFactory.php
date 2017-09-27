@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Feed\Standard;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;

@@ -3,8 +3,8 @@
 namespace Tests\ShopBundle\Unit\Component\Cron;
 
 use PHPUnit_Framework_TestCase;
+use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
 use Shopsys\ShopBundle\Component\Cron\CronModuleExecutor;
-use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 
 class CronModuleExecutorTest extends PHPUnit_Framework_TestCase
 {
