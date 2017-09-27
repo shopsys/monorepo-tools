@@ -7,6 +7,7 @@ use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension;
+use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\ShopBundle\Form\DomainsType;
 use Shopsys\ShopBundle\Form\FileUploadType;
 use Shopsys\ShopBundle\Form\Locale\LocalizedType;
@@ -47,16 +48,23 @@ class CategoryFormType extends AbstractType
      */
     private $seoSettingFacade;
 
+    /**
+     * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade
+     */
+    private $pluginCrudExtensionFacade;
+
     public function __construct(
         CategoryFacade $categoryFacade,
         FeedCategoryRepository $feedCategoryRepository,
         Domain $domain,
-        SeoSettingFacade $seoSettingFacade
+        SeoSettingFacade $seoSettingFacade,
+        PluginCrudExtensionFacade $pluginCrudExtensionFacade
     ) {
         $this->categoryFacade = $categoryFacade;
         $this->feedCategoryRepository = $feedCategoryRepository;
         $this->domain = $domain;
         $this->seoSettingFacade = $seoSettingFacade;
+        $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
     }
 
     /**
@@ -171,6 +179,8 @@ class CategoryFormType extends AbstractType
                 ],
             ])
             ->add('save', SubmitType::class);
+
+        $this->pluginCrudExtensionFacade->extendForm($builder, 'category', 'pluginData');
     }
 
     /**

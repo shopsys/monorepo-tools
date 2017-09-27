@@ -11,6 +11,7 @@ class PluginCrudExtensionRegistry
 {
     const KNOWN_TYPES = [
         'product',
+        'category',
     ];
 
     /**

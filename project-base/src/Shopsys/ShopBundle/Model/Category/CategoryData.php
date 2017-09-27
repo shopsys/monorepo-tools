@@ -56,6 +56,11 @@ class CategoryData
      */
     public $image;
 
+    /**
+     * @var array
+     */
+    public $pluginData;
+
     public function __construct()
     {
         $this->name = [];
@@ -66,6 +71,7 @@ class CategoryData
         $this->hiddenOnDomains = [];
         $this->urls = new UrlListData();
         $this->image = [];
+        $this->pluginData = [];
     }
 
     /**
