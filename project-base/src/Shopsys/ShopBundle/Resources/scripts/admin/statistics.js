@@ -1,7 +1,8 @@
 (function ($) {
 
     var initLineChart = function ($chartCanvas) {
-        Chart($chartCanvas, {
+        // eslint-disable-next-line no-new
+        new Chart($chartCanvas, {
             type: 'bar',
             data: {
                 labels: $chartCanvas.data('chart-labels'),
