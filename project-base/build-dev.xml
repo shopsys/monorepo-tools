@@ -172,10 +172,17 @@
     </target>
 
     <target name="eslint-check-diff" depends="diff-files" description="Find JS coding standard violations in changed files using ESLint and print human readable output.">
-        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color" />
-            <arg line="${diff.files.js.spaces}" />
-        </exec>
+        <if>
+            <not>
+                <equals arg1="${diff.files.js.spaces}" arg2="" trim="true" />
+            </not>
+            <then>
+                <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+                    <arg value="--color" />
+                    <arg line="${diff.files.js.spaces}" />
+                </exec>
+            </then>
+        </if>
     </target>
 
     <target name="eslint-fix" description="Fix JS coding standard violations in all files using ESLint.">
@@ -187,11 +194,18 @@
     </target>
 
     <target name="eslint-fix-diff" depends="diff-files" description="Fix JS coding standard violations in changed files using ESLint.">
-        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
-            <arg value="--color" />
-            <arg value="--fix" />
-            <arg line="${diff.files.js.spaces}" />
-        </exec>
+        <if>
+            <not>
+                <equals arg1="${diff.files.js.spaces}" arg2="" trim="true" />
+            </not>
+            <then>
+                <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+                    <arg value="--color" />
+                    <arg value="--fix" />
+                    <arg line="${diff.files.js.spaces}" />
+                </exec>
+            </then>
+        </if>
     </target>
 
     <target name="phpcbf" description="Fixes coding standards violations in all files by PHP Code Beautifier.">
