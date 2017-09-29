@@ -12,7 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class FeedFacade
 {
     const TEMPORARY_FILENAME_SUFFIX = '.tmp';
-    const BATCH_SIZE = 200;
+    const BATCH_SIZE = 1000;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
