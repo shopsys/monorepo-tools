@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8fe7e25dbbad5f95fbf2c1881754100",
+    "content-hash": "cd3fba9ea2ce96afd5caf35db4ee597d",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -5497,23 +5497,24 @@
         },
         {
             "name": "shopsys/product-feed-heureka",
-            "version": "v0.4.2",
+            "version": "v0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/product-feed-heureka.git",
-                "reference": "295381f0705b40650d746c250e2559f2dd2f0fb1"
+                "reference": "bc4d7fbc5ee2cdded2b0d1b820857ec00d7a6c3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-heureka/zipball/295381f0705b40650d746c250e2559f2dd2f0fb1",
-                "reference": "295381f0705b40650d746c250e2559f2dd2f0fb1",
+                "url": "https://api.github.com/repos/shopsys/product-feed-heureka/zipball/bc4d7fbc5ee2cdded2b0d1b820857ec00d7a6c3a",
+                "reference": "bc4d7fbc5ee2cdded2b0d1b820857ec00d7a6c3a",
                 "shasum": ""
             },
             "require": {
+                "ext-simplexml": "*",
                 "php": "^7.0",
                 "shopsys/form-types-bundle": "~0.1.0",
-                "shopsys/plugin-interface": "^0.2.0|^0.3.0",
-                "shopsys/product-feed-interface": "^0.4.0|^0.5.0",
+                "shopsys/plugin-interface": "^0.3.0",
+                "shopsys/product-feed-interface": "^0.5.0",
                 "symfony/form": "^3.0",
                 "symfony/framework-bundle": "^3.0",
                 "symfony/translation": "^3.0",
@@ -5552,7 +5553,7 @@
                 "plugin",
                 "product feed"
             ],
-            "time": "2017-10-05T06:51:20+00:00"
+            "time": "2017-10-06T07:08:05+00:00"
         },
         {
             "name": "shopsys/product-feed-heureka-delivery",
@@ -8150,7 +8151,6 @@
         "ext-openssl": "*",
         "ext-pdo": "*",
         "ext-pdo_pgsql": "*",
-        "ext-simplexml": "*",
         "ext-xml": "*"
     },
     "platform-dev": {

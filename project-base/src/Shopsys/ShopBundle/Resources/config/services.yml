@@ -509,12 +509,6 @@ services:
     arguments:
       - '%shopsys.data_fixtures.resource_customers_filepath%'
 
-  shopsys.shop.feed.category.feed_category_loader_facade:
-    class: Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade
-    arguments:
-      - '%shopsys.heureka_category_feed_url%'
-      - '%shopsys.heureka_category_feed_backup_filepath%'
-
   shopsys.shop.feed.feed_config_facade:
     class: Shopsys\ShopBundle\Model\Feed\FeedConfigFacade
     arguments:
@@ -523,9 +517,6 @@ services:
 
   shopsys.shop.feed.feed_config_registry:
     class: Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry
-
-  shopsys.shop.feed.heureka_category_name_provider:
-    class: Shopsys\ShopBundle\Model\Feed\HeurekaCategoryNameProvider
 
   shopsys.shop.http_foundation.response_listener:
     class: Shopsys\ShopBundle\Component\HttpFoundation\ResponseListener

@@ -42,11 +42,6 @@ class CategoryData
     public $hiddenOnDomains;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory|null
-     */
-    public $heurekaCzFeedCategory;
-
-    /**
      * @var \Shopsys\ShopBundle\Form\UrlListData
      */
     public $urls;
@@ -87,7 +82,6 @@ class CategoryData
         }
         $this->name = $names;
         $this->parent = $category->getParent();
-        $this->heurekaCzFeedCategory = $category->getHeurekaCzFeedCategory();
         $seoTitles = [];
         $seoMetaDescriptions = [];
         $seoH1 = [];

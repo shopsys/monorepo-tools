@@ -20,8 +20,6 @@ parameters:
   shopsys.filemanager_upload_dir: '%shopsys.web_dir%/%shopsys.filemanager_upload_web_dir%'
   shopsys.filemanager_upload_web_dir: content/wysiwyg
   shopsys.front_design_image_url_prefix: /assets/frontend/images/
-  shopsys.heureka_category_feed_backup_filepath: '%shopsys.resources_dir%/feeds/heureka-category-feed-backup.xml'
-  shopsys.heureka_category_feed_url: http://www.heureka.cz/direct/xml-export/shops/heureka-sekce.xml
   shopsys.image_config_filepath: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/images.yml'
   shopsys.image_dir: '%shopsys.web_dir%%shopsys.image_url_prefix%'
   shopsys.image_url_prefix: /content/images/
