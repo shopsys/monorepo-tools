@@ -130,7 +130,10 @@
     },
     "config": {
         "preferred-install": "dist",
-        "component-dir": "web/components"
+        "component-dir": "web/components",
+        "platform": {
+            "php": "7.0"
+        }
     },
     "extra": {
         "symfony-app-dir": "app",
