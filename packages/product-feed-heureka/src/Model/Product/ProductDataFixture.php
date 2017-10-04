@@ -3,7 +3,7 @@
 namespace Shopsys\ProductFeed\HeurekaBundle\Model\Product;
 
 use Shopsys\Plugin\PluginDataFixtureInterface;
-use Shopsys\Plugin\PluginDataStorageProviderInterface;
+use Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider;
 
 class ProductDataFixture implements PluginDataFixtureInterface
 {
@@ -16,18 +16,21 @@ class ProductDataFixture implements PluginDataFixtureInterface
     const PRODUCT_ID_FIFTH = 5;
 
     /**
-     * @var \Shopsys\Plugin\PluginDataStorageProviderInterface
+     * @var \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider
      */
-    private $pluginDataStorageProvider;
+    private $dataStorageProvider;
 
-    public function __construct(PluginDataStorageProviderInterface $pluginDataStorageProvider)
+    /**
+     * @param \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider $dataStorageProvider
+     */
+    public function __construct(DataStorageProvider $dataStorageProvider)
     {
-        $this->pluginDataStorageProvider = $pluginDataStorageProvider;
+        $this->dataStorageProvider = $dataStorageProvider;
     }
 
     public function load()
     {
-        $productDataStorage = $this->getProductDataStorage();
+        $productDataStorage = $this->dataStorageProvider->getProductDataStorage();
 
         $productDataStorage->set(self::PRODUCT_ID_FIRST, [
             'cpc' => [
@@ -63,13 +66,5 @@ class ProductDataFixture implements PluginDataFixtureInterface
                 self::DOMAIN_ID_SECOND => 5,
             ],
         ]);
-    }
-
-    /**
-     * @return \Shopsys\Plugin\DataStorageInterface
-     */
-    private function getProductDataStorage()
-    {
-        return $this->pluginDataStorageProvider->getDataStorage(ShopsysProductFeedHeurekaBundle::class, 'product');
     }
 }

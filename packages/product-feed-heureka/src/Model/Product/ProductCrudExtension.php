@@ -3,26 +3,31 @@
 namespace Shopsys\ProductFeed\HeurekaBundle\Model\Product;
 
 use Shopsys\Plugin\PluginCrudExtensionInterface;
-use Shopsys\Plugin\PluginDataStorageProviderInterface;
+use Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ProductCrudExtension implements PluginCrudExtensionInterface
 {
+
     /**
-     * @var \Shopsys\Plugin\PluginDataStorageProviderInterface
+     * @var \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider
      */
-    private $pluginDataStorageProvider;
+    private $dataStorageProvider;
 
     /**
      * @var \Symfony\Component\Translation\TranslatorInterface
      */
     private $translator;
 
+    /**
+     * @param \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider $dataStorageProvider
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     */
     public function __construct(
-        PluginDataStorageProviderInterface $pluginDataStorageProvider,
+        DataStorageProvider $dataStorageProvider,
         TranslatorInterface $translator
     ) {
-        $this->pluginDataStorageProvider = $pluginDataStorageProvider;
+        $this->dataStorageProvider = $dataStorageProvider;
         $this->translator = $translator;
     }
 
@@ -48,7 +53,10 @@ class ProductCrudExtension implements PluginCrudExtensionInterface
      */
     public function getData($productId)
     {
-        return $this->getProductDataStorage()->get($productId) ?? [];
+        $data = $this->dataStorageProvider->getProductDataStorage()
+            ->get($productId);
+
+        return $data ?? [];
     }
 
     /**
@@ -57,7 +65,8 @@ class ProductCrudExtension implements PluginCrudExtensionInterface
      */
     public function saveData($productId, $data)
     {
-        $this->getProductDataStorage()->set($productId, $data);
+        $this->dataStorageProvider->getProductDataStorage()
+            ->set($productId, $data);
     }
 
     /**
@@ -65,14 +74,7 @@ class ProductCrudExtension implements PluginCrudExtensionInterface
      */
     public function removeData($productId)
     {
-        $this->getProductDataStorage()->remove($productId);
-    }
-
-    /**
-     * @return \Shopsys\Plugin\DataStorageInterface
-     */
-    private function getProductDataStorage()
-    {
-        return $this->pluginDataStorageProvider->getDataStorage(ShopsysProductFeedHeurekaBundle::class, 'product');
+        $this->dataStorageProvider->getProductDataStorage()
+            ->remove($productId);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Shopsys\ProductFeed\HeurekaBundle;
 
-use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface;
@@ -17,16 +16,16 @@ class HeurekaFeedConfig implements FeedConfigInterface
     private $heurekaCategoryNameProvider;
 
     /**
-     * @var \Shopsys\Plugin\PluginDataStorageProviderInterface
+     * @var \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider
      */
-    private $pluginDataStorageProvider;
+    private $dataStorageProvider;
 
     public function __construct(
         HeurekaCategoryNameProviderInterface $heurekaCategoryNameProvider,
-        PluginDataStorageProviderInterface $pluginDataStorageProvider
+        DataStorageProvider $dataStorageProvider
     ) {
         $this->heurekaCategoryNameProvider = $heurekaCategoryNameProvider;
-        $this->pluginDataStorageProvider = $pluginDataStorageProvider;
+        $this->dataStorageProvider = $dataStorageProvider;
     }
 
     /**
@@ -93,8 +92,7 @@ class HeurekaFeedConfig implements FeedConfigInterface
             $productIds[] = $item->getId();
         }
 
-        $productDataStorage = $this->pluginDataStorageProvider
-            ->getDataStorage(ShopsysProductFeedHeurekaBundle::class, 'product');
+        $productDataStorage = $this->dataStorageProvider->getProductDataStorage();
 
         return $productDataStorage->getMultiple($productIds);
     }
