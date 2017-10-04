@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ProductFeed\HeurekaBundle;
+namespace Shopsys\ProductFeed\HeurekaBundle\Model\Product;
 
 use Shopsys\Plugin\PluginCrudExtensionInterface;
 use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class HeurekaProductCrudExtension implements PluginCrudExtensionInterface
+class ProductCrudExtension implements PluginCrudExtensionInterface
 {
     /**
      * @var \Shopsys\Plugin\PluginDataStorageProviderInterface
@@ -31,7 +31,7 @@ class HeurekaProductCrudExtension implements PluginCrudExtensionInterface
      */
     public function getFormTypeClass()
     {
-        return HeurekaProductFormType::class;
+        return ProductFormType::class;
     }
 
     /**

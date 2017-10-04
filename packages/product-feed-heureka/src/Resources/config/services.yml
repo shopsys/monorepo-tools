@@ -5,16 +5,16 @@ services:
       - { name: shopsys.product_feed }
 
   shopsys.product_feed.heureka_bundle.product_crud_extension:
-    class: Shopsys\ProductFeed\HeurekaBundle\HeurekaProductCrudExtension
+    class: Shopsys\ProductFeed\HeurekaBundle\Model\Product\ProductCrudExtension
     tags:
       - { name: shopsys.crud_extension, type: product }
 
   shopsys.product_feed.heureka_bundle.product_form_type:
-    class: Shopsys\ProductFeed\HeurekaBundle\HeurekaProductFormType
+    class: Shopsys\ProductFeed\HeurekaBundle\Model\Product\ProductFormType
     tags:
       - { name: form.type }
 
-  shopsys.product_feed.heureka_bundle.data_fixture:
-    class: Shopsys\ProductFeed\HeurekaBundle\HeurekaDataFixture
+  shopsys.product_feed.heureka_bundle.product_data_fixture:
+    class: Shopsys\ProductFeed\HeurekaBundle\Model\Product\ProductDataFixture
     tags:
       - { name: shopsys.data_fixture }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ProductFeed\HeurekaBundle;
+namespace Shopsys\ProductFeed\HeurekaBundle\Model\Product;
 
 use Shopsys\Plugin\PluginDataFixtureInterface;
 use Shopsys\Plugin\PluginDataStorageProviderInterface;
 
-class HeurekaDataFixture implements PluginDataFixtureInterface
+class ProductDataFixture implements PluginDataFixtureInterface
 {
     const DOMAIN_ID_FIRST = 1;
     const DOMAIN_ID_SECOND = 2;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ProductFeed\HeurekaBundle;
+namespace Shopsys\ProductFeed\HeurekaBundle\Model\Product;
 
 use Shopsys\FormTypesBundle\MultidomainType;
 use Symfony\Component\Form\AbstractType;
@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraints\Range;
 
-class HeurekaProductFormType extends AbstractType
+class ProductFormType extends AbstractType
 {
     /**
      * @var \Symfony\Component\Translation\TranslatorInterface
