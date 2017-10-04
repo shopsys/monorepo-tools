@@ -1,5 +1,7 @@
 # Upgrading
-## From 0.4.0 to Unreleased
+## From 0.5.0 to Unreleased
+
+## From 0.4.0 to 0.5.0
 - implement method `getMainCategoryId()` in your implementations of `StandardFeedItemInterface`.
 
 ## From 0.3.0 to 0.4.0
