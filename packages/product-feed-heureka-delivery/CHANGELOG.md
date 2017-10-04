@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.2.2] - 2017-10-04
 ### Added
 - support for [shopsys/product-feed-interface](shopsys/product-feed-interface) 0.5.0 (@PetrHeinz)
 
@@ -40,7 +42,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Extracted Heureka product delivery feed plugin from [Shopsys Framework](http://www.shopsys-framework.com/) (@vitek-rostislav)
 - `.travis.yml` file with Travis CI configuration (@vitek-rostislav)
 
-[Unreleased]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.2...HEAD
+[0.2.1]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.1.0...v0.1.1
