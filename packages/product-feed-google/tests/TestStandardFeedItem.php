@@ -251,6 +251,14 @@ class TestStandardFeedItem implements StandardFeedItemInterface
     }
 
     /**
+     * @return int
+     */
+    public function getMainCategoryId()
+    {
+        return 0;
+    }
+
+    /**
      * @param string $name
      * @return mixed
      */
