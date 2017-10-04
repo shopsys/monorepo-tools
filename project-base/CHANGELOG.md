@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.0.0-beta.17.0] - 2017-10-03
 ### Added
 - MIT license (@TomasLudvik)
 - phing targets `eslint-check`, `eslint-check-diff`, `eslint-fix` and `eslint-fix-diff` to check and fix coding standards in JS files (@sspooky13)
@@ -119,5 +121,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - full friendly URL for main entities
 - customizable SEO attributes for main entities
 
-[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.16.0...HEAD
-[2.0.0-beta.16.0]:https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.15.0...v2.0.0-beta.16.0 
+[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.17.0...HEAD
+[2.0.0-beta.17.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.16.0...v2.0.0-beta.17.0
+[2.0.0-beta.16.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.15.0...v2.0.0-beta.16.0 

@@ -1,6 +1,8 @@
 # Upgrading
 
-## From 2.0.0-beta.16.0 to Unreleased
+## From 2.0.0-beta.17.0 to Unreleased
+
+## From 2.0.0-beta.16.0 to 2.0.0-beta.17.0
 - coding standards for JS files were added, make sure `phing eslint-check` passes
 (you can run `phing eslint-fix` to fix some violations automatically)
 
