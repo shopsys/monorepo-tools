@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - support for shopsys/plugin-interface 0.3.0 (@MattCzerner)
+- support for shopsys/product-feed-interface 0.5.0 (@MattCzerner)
 
 ## [0.4.1] - 2017-09-25
 ### Added
