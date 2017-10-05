@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e03b46242b450803206148627e433097",
+    "content-hash": "e8fe7e25dbbad5f95fbf2c1881754100",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -5392,20 +5392,21 @@
         },
         {
             "name": "shopsys/plugin-interface",
-            "version": "v0.2.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/plugin-interface.git",
-                "reference": "2cfd6b4343ca5dce1931df59706392aec298ca26"
+                "reference": "f406a34f5fe79f1b59226557b4e4073f2f33164d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/plugin-interface/zipball/2cfd6b4343ca5dce1931df59706392aec298ca26",
-                "reference": "2cfd6b4343ca5dce1931df59706392aec298ca26",
+                "url": "https://api.github.com/repos/shopsys/plugin-interface/zipball/f406a34f5fe79f1b59226557b4e4073f2f33164d",
+                "reference": "f406a34f5fe79f1b59226557b4e4073f2f33164d",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0"
+                "php": "^7.0",
+                "symfony/monolog-bridge": "^3.0.0"
             },
             "require-dev": {
                 "shopsys/coding-standards": "3.0.2"
@@ -5434,7 +5435,7 @@
                 "Shopsys Framework",
                 "plugin"
             ],
-            "time": "2017-09-06T07:39:46+00:00"
+            "time": "2017-10-04T11:58:57+00:00"
         },
         {
             "name": "shopsys/product-feed-google",

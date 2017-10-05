@@ -62,6 +62,21 @@ class DoctrinePluginDataStorage implements DataStorageInterface
     /**
      * {@inheritdoc}
      */
+    public function getAll()
+    {
+        $valuesByKey = [];
+        foreach ($this->getAllPluginDataValues() as $pluginDataValue) {
+            if ($pluginDataValue->getValue() !== null) {
+                $valuesByKey[$pluginDataValue->getKey()] = $pluginDataValue->getValue();
+            }
+        }
+
+        return $valuesByKey;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function set($key, $value)
     {
         if ($value === null) {
@@ -125,6 +140,17 @@ class DoctrinePluginDataStorage implements DataStorageInterface
             'pluginName' => $this->pluginName,
             'context' => $this->context,
             'key' => $keys,
+        ]);
+    }
+
+    /**
+     * @return \Shopsys\ShopBundle\Model\PluginData\PluginDataValue[]
+     */
+    private function getAllPluginDataValues()
+    {
+        return $this->getPluginDataRepository()->findBy([
+            'pluginName' => $this->pluginName,
+            'context' => $this->context,
         ]);
     }
 }
