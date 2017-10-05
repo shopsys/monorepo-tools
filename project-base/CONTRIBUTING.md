@@ -8,7 +8,7 @@ You can take part in making Shopsys Framework better.
 * [Guidelines for Writing Documentation](docs/contributing/guidelines-for-writing-documentation.md)
 
 For your code to be accepted, you should follow our guidelines mentioned above,
-and the code must pass coding standards checks and tests:
+and the code must pass [coding standards](docs/contributing/coding-standards.md) checks and tests:
 ```
 php phing standards tests tests-acceptance
 ```
