@@ -4,27 +4,20 @@ namespace Shopsys\ProductFeed\HeurekaBundle;
 
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
-use Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface;
 use Shopsys\ProductFeed\StandardFeedItemInterface;
 
 class HeurekaFeedConfig implements FeedConfigInterface
 {
-
-    /**
-     * @var \Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface
-     */
-    private $heurekaCategoryNameProvider;
-
     /**
      * @var \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider
      */
     private $dataStorageProvider;
 
-    public function __construct(
-        HeurekaCategoryNameProviderInterface $heurekaCategoryNameProvider,
-        DataStorageProvider $dataStorageProvider
-    ) {
-        $this->heurekaCategoryNameProvider = $heurekaCategoryNameProvider;
+    /**
+     * @param \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider $dataStorageProvider
+     */
+    public function __construct(DataStorageProvider $dataStorageProvider)
+    {
         $this->dataStorageProvider = $dataStorageProvider;
     }
 
@@ -74,7 +67,7 @@ class HeurekaFeedConfig implements FeedConfigInterface
             $cpc = $productsDataById[$item->getId()]['cpc'][$domainConfig->getId()] ?? null;
             $item->setCustomValue('cpc', $cpc);
 
-            $categoryName = $this->heurekaCategoryNameProvider->getHeurekaCategoryNameForItem($item, $domainConfig);
+            $categoryName = $this->findHeurekaCategoryFullNameByCategoryId($item->getMainCategoryId());
             $item->setCustomValue('category_name', $categoryName);
         }
 
@@ -105,5 +98,26 @@ class HeurekaFeedConfig implements FeedConfigInterface
     private function isItemSellable(StandardFeedItemInterface $item)
     {
         return !$item->isSellingDenied();
+    }
+
+    /**
+     * @param int $categoryId
+     * @return string|null
+     */
+    private function findHeurekaCategoryFullNameByCategoryId($categoryId)
+    {
+        $categoryDataStorage = $this->dataStorageProvider->getCategoryDataStorage();
+        $heurekaCategoryDataStorage = $this->dataStorageProvider->getHeurekaCategoryDataStorage();
+
+        $categoryData = $categoryDataStorage->get($categoryId);
+        $heurekaCategoryId = $categoryData['heureka_category'] ?? null;
+
+        if ($heurekaCategoryId !== null) {
+            $heurekaCategoryData = $heurekaCategoryDataStorage->get($heurekaCategoryId);
+
+            return $heurekaCategoryData['full_name'];
+        }
+
+        return null;
     }
 }

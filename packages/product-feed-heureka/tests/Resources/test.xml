@@ -10,7 +10,7 @@
     <EAN>79846532EQER</EAN>
     <DELIVERY_DATE>5</DELIVERY_DATE>
     <MANUFACTURER>Best Manufacturer</MANUFACTURER>
-    <CATEGORYTEXT>categoryName</CATEGORYTEXT>
+    <CATEGORYTEXT>fullCategoryName</CATEGORYTEXT>
     <PARAM>
       <PARAM_NAME>Param #1</PARAM_NAME>
       <VAL>Value #1</VAL>
@@ -29,6 +29,5 @@
     <URL>http://www.example.com/product/2</URL>
     <PRICE_VAT>10,00</PRICE_VAT>
     <DELIVERY_DATE/>
-    <CATEGORYTEXT>categoryName</CATEGORYTEXT>
   </SHOPITEM>
 </SHOP>

@@ -9,3 +9,6 @@ msgstr "Heureka.cz product feed"
 
 msgid "Maximum price per click"
 msgstr "Maximum price per click"
+
+msgid "Heureka category"
+msgstr "Heureka category"

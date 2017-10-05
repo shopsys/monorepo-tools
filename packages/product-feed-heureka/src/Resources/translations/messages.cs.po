@@ -9,3 +9,6 @@ msgstr "XML feed Heureka.cz"
 
 msgid "Maximum price per click"
 msgstr "Maximální cena za proklik"
+
+msgid "Heureka category"
+msgstr "Heureka kategorie"

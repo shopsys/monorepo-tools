@@ -1,3 +1,6 @@
+imports:
+  - { resource: services_cron.yml }
+
 services:
   shopsys.product_feed.heureka_bundle.feed_config:
     class: Shopsys\ProductFeed\HeurekaBundle\HeurekaFeedConfig
@@ -16,5 +19,30 @@ services:
 
   shopsys.product_feed.heureka_bundle.product_data_fixture:
     class: Shopsys\ProductFeed\HeurekaBundle\Model\Product\ProductDataFixture
+    tags:
+      - { name: shopsys.data_fixture }
+
+  shopsys.product_feed.heureka_bundle.category_crud_extension:
+    class: Shopsys\ProductFeed\HeurekaBundle\Model\Category\CategoryCrudExtension
+    tags:
+      - { name: shopsys.crud_extension, type: category }
+
+  shopsys.product_feed.heureka_bundle.category_form_type:
+    class: Shopsys\ProductFeed\HeurekaBundle\Model\Category\CategoryFormType
+    tags:
+      - { name: form.type }
+
+  shopsys.product_feed.heureka_bundle.category_data_fixture:
+    class: Shopsys\ProductFeed\HeurekaBundle\Model\Category\CategoryDataFixture
+    tags:
+      - { name: shopsys.data_fixture }
+
+  shopsys.product_feed.heureka_bundle.heureka_category_downloader:
+    class: Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDownloader
+    arguments:
+      - '%shopsys.product_feed.heureka_bundle.heureka_category_feed_url%'
+
+  shopsys.product_feed.heureka_bundle.heureka_category_data_fixture:
+    class: Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDataFixture
     tags:
       - { name: shopsys.data_fixture }

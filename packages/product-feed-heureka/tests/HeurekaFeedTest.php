@@ -8,8 +8,6 @@ use Shopsys\Plugin\DataStorageInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider;
 use Shopsys\ProductFeed\HeurekaBundle\HeurekaFeedConfig;
-use Shopsys\ProductFeed\HeurekaBundle\ShopsysProductFeedHeurekaBundle;
-use Shopsys\ProductFeed\HeurekaCategoryNameProviderInterface;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
@@ -17,9 +15,15 @@ class HeurekaFeedTest extends TestCase
 {
     const DOMAIN_ID_FIRST = 1;
     const DOMAIN_ID_SECOND = 2;
+
     const PRODUCT_ID_FIRST = 1;
     const PRODUCT_ID_SECOND = 2;
     const PRODUCT_ID_THIRD = 3;
+
+    const CATEGORY_ID_FIRST = 1;
+    const CATEGORY_ID_SECOND = 2;
+
+    const HEUREKA_CATEGORY_ID_FIRST = 1;
 
     const EXPECTED_XML_FILE_NAME = 'test.xml';
 
@@ -29,27 +33,57 @@ class HeurekaFeedTest extends TestCase
     private $heurekaFeedConfig;
 
     /**
-     * @var \Shopsys\Plugin\DataStorageInterface|\PHPUnit_Framework_MockObject_MockObject
-     */
-    private $productDataStorageMock;
-
-    /**
      * @var \Twig_Environment
      */
     private $twig;
 
+    /**
+     * @var array[]
+     */
+    private $productData;
+
+    /**
+     * @var array[]
+     */
+    private $categoryData;
+
+    /**
+     * @var array[]
+     */
+    private $heurekaCategoryData;
+
     public function setUp()
     {
-        $this->productDataStorageMock = $this->createMock(DataStorageInterface::class);
         $dataStorageProviderMock = $this->createMock(DataStorageProvider::class);
-        $heurekaCategoryNameProviderMock = $this->createMock(HeurekaCategoryNameProviderInterface::class);
 
+        $this->productData = [];
+        $productDataStorageMock = $this->createMock(DataStorageInterface::class);
+        $productDataStorageMock->method('getMultiple')
+            ->willReturnCallback(function (array $productIds) {
+                return array_intersect_key($this->productData, array_fill_keys($productIds, null));
+            });
         $dataStorageProviderMock->method('getProductDataStorage')
-            ->willReturn($this->productDataStorageMock);
-        $heurekaCategoryNameProviderMock->method('getHeurekaCategoryNameForItem')
-            ->willReturn('categoryName');
+            ->willReturn($productDataStorageMock);
 
-        $this->heurekaFeedConfig = new HeurekaFeedConfig($heurekaCategoryNameProviderMock, $dataStorageProviderMock);
+        $this->categoryData = [];
+        $categoryDataStorageMock = $this->createMock(DataStorageInterface::class);
+        $categoryDataStorageMock->method('get')
+            ->willReturnCallback(function ($categoryId) {
+                return $this->categoryData[$categoryId] ?? null;
+            });
+        $dataStorageProviderMock->method('getCategoryDataStorage')
+            ->willReturn($categoryDataStorageMock);
+
+        $this->heurekaCategoryData = [];
+        $heurekaCategoryDataStorageMock = $this->createMock(DataStorageInterface::class);
+        $heurekaCategoryDataStorageMock->method('get')
+            ->willReturnCallback(function ($heurekaCategoryId) {
+                return $this->heurekaCategoryData[$heurekaCategoryId] ?? null;
+            });
+        $dataStorageProviderMock->method('getHeurekaCategoryDataStorage')
+            ->willReturn($heurekaCategoryDataStorageMock);
+
+        $this->heurekaFeedConfig = new HeurekaFeedConfig($dataStorageProviderMock);
 
         $twigLoader = new Twig_Loader_Filesystem([__DIR__ . '/../src/Resources/views']);
         $this->twig = new Twig_Environment($twigLoader);
@@ -57,19 +91,35 @@ class HeurekaFeedTest extends TestCase
 
     public function testGeneratingOfFeed()
     {
+        $this->productData = [
+            self::PRODUCT_ID_FIRST => [
+                'cpc' => [
+                    self::DOMAIN_ID_FIRST => 7.5,
+                    self::DOMAIN_ID_SECOND => null,
+                ],
+            ],
+            self::PRODUCT_ID_SECOND => [
+                'cpc' => [
+                    self::DOMAIN_ID_FIRST => null,
+                    self::DOMAIN_ID_SECOND => null,
+                ],
+            ],
+        ];
+        $this->categoryData = [
+            self::CATEGORY_ID_FIRST => [
+                'heureka_category' => self::HEUREKA_CATEGORY_ID_FIRST,
+            ],
+        ];
+        $this->heurekaCategoryData = [
+            self::HEUREKA_CATEGORY_ID_FIRST => [
+                'id' => self::HEUREKA_CATEGORY_ID_FIRST,
+                'name' => 'categoryName',
+                'full_name' => 'fullCategoryName',
+            ],
+        ];
+
         $feedItems = $this->getFeedItemsData();
-        $pluginData = $this->getPluginData();
-
-        $this->productDataStorageMock->expects($this->atLeastOnce())
-            ->method('getMultiple')
-            ->with(array_keys($pluginData))
-            ->willReturn($pluginData);
-
-        $domainConfigMock = $this->createMock(DomainConfigInterface::class);
-        $domainConfigMock->method('getId')->willReturn(1);
-        $domainConfigMock->method('getUrl')->willReturn('http://www.example.com/');
-        $domainConfigMock->method('getLocale')->willReturn('en');
-
+        $domainConfigMock = $this->createDomainConfigMock(self::DOMAIN_ID_FIRST, 'http://www.example.com/', 'en');
         $processedFeedItems = $this->heurekaFeedConfig->processItems($feedItems, $domainConfigMock);
 
         $generatedXml = $this->getFeedOutputByFeedItems($processedFeedItems, $domainConfigMock);
@@ -132,7 +182,7 @@ class HeurekaFeedTest extends TestCase
             '132465798',
             null,
             false,
-            1
+            self::CATEGORY_ID_FIRST
         );
 
         $feedItems[] = new TestStandardFeedItem(
@@ -151,7 +201,7 @@ class HeurekaFeedTest extends TestCase
             null,
             12,
             false,
-            2
+            self::CATEGORY_ID_SECOND
         );
 
         $feedItems[] = new TestStandardFeedItem(
@@ -170,34 +220,26 @@ class HeurekaFeedTest extends TestCase
             null,
             12,
             true,
-            2
+            self::CATEGORY_ID_SECOND
         );
 
         return $feedItems;
     }
 
     /**
-     * @return array
+     * @param int $domainId
+     * @param string $url
+     * @param string $locale
+     * @return \Shopsys\ProductFeed\DomainConfigInterface|\PHPUnit_Framework_MockObject_MockObject
      */
-    private function getPluginData()
+    private function createDomainConfigMock($domainId, $url, $locale)
     {
-        $pluginData = [];
+        $domainConfigMock = $this->createMock(DomainConfigInterface::class);
+        $domainConfigMock->method('getId')->willReturn($domainId);
+        $domainConfigMock->method('getUrl')->willReturn($url);
+        $domainConfigMock->method('getLocale')->willReturn($locale);
 
-        $pluginData[self::PRODUCT_ID_FIRST] = [
-            'cpc' => [
-               self::DOMAIN_ID_FIRST => 7.5,
-               self::DOMAIN_ID_SECOND => null,
-            ],
-        ];
-
-        $pluginData[self::PRODUCT_ID_SECOND] = [
-            'cpc' => [
-                self::DOMAIN_ID_FIRST => null,
-                self::DOMAIN_ID_SECOND => null,
-            ],
-        ];
-
-        return $pluginData;
+        return $domainConfigMock;
     }
 
     /**
