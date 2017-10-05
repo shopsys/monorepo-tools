@@ -87,6 +87,11 @@ class StandardFeedItem implements StandardFeedItemInterface
     private $currencyCode;
 
     /**
+     * @var int
+     */
+    private $mainCategoryId;
+
+    /**
      * @param int $id
      * @param string $productName
      * @param string $description
@@ -102,6 +107,7 @@ class StandardFeedItem implements StandardFeedItemInterface
      * @param string|null $partno
      * @param int|null $mainVariantId
      * @param bool $sellingDenied
+     * @param int $mainCategoryId
      */
     public function __construct(
         $id,
@@ -118,7 +124,8 @@ class StandardFeedItem implements StandardFeedItemInterface
         $parametersByName,
         $partno,
         $mainVariantId,
-        $sellingDenied
+        $sellingDenied,
+        $mainCategoryId
     ) {
         $this->id = $id;
         $this->productName = $productName;
@@ -136,6 +143,7 @@ class StandardFeedItem implements StandardFeedItemInterface
         $this->customValues = [];
         $this->sellingDenied = $sellingDenied;
         $this->currencyCode = $currencyCode;
+        $this->mainCategoryId = $mainCategoryId;
     }
 
     /**
@@ -256,6 +264,14 @@ class StandardFeedItem implements StandardFeedItemInterface
     public function isSellingDenied()
     {
         return $this->sellingDenied;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMainCategoryId()
+    {
+        return $this->mainCategoryId;
     }
 
     /**

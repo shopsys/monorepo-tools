@@ -71,6 +71,7 @@ class StandardFeedItemFactory
 
         $items = [];
         foreach ($products as $product) {
+            $mainCategory = $this->categoryFacade->getProductMainCategoryByDomainId($product, $domainConfig->getId());
             $productDomain = $productDomainsByProductId[$product->getId()];
 
             $items[] = new StandardFeedItem(
@@ -88,7 +89,8 @@ class StandardFeedItemFactory
                 $this->getProductParamsIndexedByParamName($product, $paramsByProductIdAndName),
                 $product->getPartno(),
                 $this->findProductMainVariantId($product),
-                $product->isSellingDenied()
+                $product->isSellingDenied(),
+                $mainCategory->getId()
             );
         }
 
