@@ -132,7 +132,8 @@ class HeurekaFeedTest extends TestCase
             ['Param #1' => 'Value #1', 'Param #2' => 'Value #2'],
             '132465798',
             null,
-            false
+            false,
+            1
         );
 
         $feedItems[] = new TestStandardFeedItem(
@@ -150,7 +151,8 @@ class HeurekaFeedTest extends TestCase
             [],
             null,
             12,
-            false
+            false,
+            2
         );
 
         $feedItems[] = new TestStandardFeedItem(
@@ -168,7 +170,8 @@ class HeurekaFeedTest extends TestCase
             [],
             null,
             12,
-            true
+            true,
+            2
         );
 
         return $feedItems;

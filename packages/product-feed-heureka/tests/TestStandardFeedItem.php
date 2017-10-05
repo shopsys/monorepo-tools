@@ -87,6 +87,11 @@ class TestStandardFeedItem implements StandardFeedItemInterface
     private $currencyCode;
 
     /**
+     * @var int
+     */
+    private $mainCategoryId;
+
+    /**
      * @param int $id
      * @param string $productName
      * @param string $description
@@ -102,6 +107,7 @@ class TestStandardFeedItem implements StandardFeedItemInterface
      * @param string|null $partno
      * @param int|null $mainVariantId
      * @param bool $sellingDenied
+     * @param int $mainCategoryId
      */
     public function __construct(
         $id,
@@ -115,10 +121,11 @@ class TestStandardFeedItem implements StandardFeedItemInterface
         $deliveryDate,
         $manufacturer,
         $categoryText,
-        $parametersByName,
+        array $parametersByName,
         $partno,
         $mainVariantId,
-        $sellingDenied
+        $sellingDenied,
+        $mainCategoryId
     ) {
         $this->id = $id;
         $this->productName = $productName;
@@ -136,6 +143,7 @@ class TestStandardFeedItem implements StandardFeedItemInterface
         $this->mainVariantId = $mainVariantId;
         $this->customValues = [];
         $this->sellingDenied = $sellingDenied;
+        $this->mainCategoryId = $mainCategoryId;
     }
 
     /**
@@ -274,5 +282,13 @@ class TestStandardFeedItem implements StandardFeedItemInterface
     public function setCustomValue($name, $value)
     {
         $this->customValues[$name] = $value;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMainCategoryId()
+    {
+        return $this->mainCategoryId;
     }
 }
