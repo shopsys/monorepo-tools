@@ -32,11 +32,9 @@
     <rule ref="Generic.NamingConventions.ConstructorName"/>
     <rule ref="Generic.NamingConventions.CamelCapsFunctionName"/>
     <rule ref="Generic.PHP.NoSilencedErrors"/>
-    <rule ref="MySource.PHP.EvalObjectFactory"/>
     <rule ref="MySource.PHP.GetRequestData"/>
     <rule ref="PEAR.Commenting.InlineComment"/>
     <rule ref="PEAR.NamingConventions.ValidClassName"/>
-    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
     <rule ref="Squiz.PHP.DisallowMultipleAssignments"/>
     <rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops"/>
     <rule ref="Squiz.PHP.Eval"/>
@@ -44,12 +42,9 @@
     <rule ref="Squiz.PHP.InnerFunctions"/>
     <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
     <rule ref="Squiz.PHP.NonExecutableCode"/>
-    <rule ref="Squiz.Scope.MemberVarScope"/>
     <rule ref="Squiz.Scope.StaticThisUsage"/>
     <rule ref="Squiz.Strings.DoubleQuoteUsage"/>
     <rule ref="Squiz.WhiteSpace.CastSpacing"/>
     <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
     <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
-    <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
-    <rule ref="Zend.Files.ClosingTag"/>
 </ruleset>

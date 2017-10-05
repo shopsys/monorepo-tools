@@ -57,7 +57,6 @@ $config = PhpCsFixer\Config::create()
         'self_accessor' => true,
         'semicolon_after_instruction' => true,
         'short_scalar_cast' => true,
-        'single_blank_line_at_eof' => true,
         'single_blank_line_before_namespace' => true,
         'space_after_semicolon' => true,
         'single_quote' => true,
@@ -68,7 +67,6 @@ $config = PhpCsFixer\Config::create()
         'trailing_comma_in_multiline_array' => true,
         'trim_array_spaces' => true,
         'unary_operator_spaces' => true,
-        'visibility_required' => true,
         'whitespace_after_comma_in_array' => true,
     ])
     ->setRiskyAllowed(true)
