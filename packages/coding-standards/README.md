@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/shopsys/coding-standards.svg?branch=master)](https://travis-ci.org/shopsys/coding-standards)
 
 ## About
-This project provides common coding standards for new ShopSys projects.
+This project provides [common coding standards](docs/description-of-used-coding-standards-rules.md) for new ShopSys projects.
 Project includes following tools:
 * [PHP-CS-Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
 * [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
