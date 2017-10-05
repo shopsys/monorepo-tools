@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.5.0] - 2017-10-05
 ### Added
 - logic of Heureka categorization moved from [Shopsys Framework](https://www.shopsys-framework.com/) core repository (@MattCzerner)
     - Heureka categories are downloaded everyday via CRON module
@@ -67,7 +69,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Extracted Heureka product feed plugin from [Shopsys Framework](http://www.shopsys-framework.com/) (@PetrHeinz)
 - `.travis.yml` file with Travis CI configuration (@PetrHeinz)
 
-[Unreleased]: https://github.com/shopsys/product-feed-heureka/compare/v0.4.2...HEAD
+[Unreleased]: https://github.com/shopsys/product-feed-heureka/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/shopsys/product-feed-heureka/compare/v0.4.2...v0.5.0
 [0.4.2]: https://github.com/shopsys/product-feed-heureka/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/shopsys/product-feed-heureka/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/shopsys/product-feed-heureka/compare/v0.3.0...v0.4.0

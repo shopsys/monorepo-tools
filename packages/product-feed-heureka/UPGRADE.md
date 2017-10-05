@@ -1,5 +1,7 @@
 # Upgrading
-## From 0.4.2 to Unreleased
+## From 0.5.0 to Unreleased
+
+## From 0.4.2 to 0.5.0
 - requires possibility of extending the CRUD of categories via `shopsys.crud_extension` of type `category`
 - requires update of [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface) to version `^0.3.0`
 and [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface) to `^0.5.0`
