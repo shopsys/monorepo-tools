@@ -6,7 +6,6 @@ use DateTime;
 use Shopsys\ShopBundle\Component\String\HashGenerator;
 use Shopsys\ShopBundle\Model\Customer\CustomerPasswordService;
 use Shopsys\ShopBundle\Model\Customer\User;
-use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class CustomerPasswordServiceTest extends FunctionalTestCase

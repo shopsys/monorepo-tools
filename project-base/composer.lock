@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd3fba9ea2ce96afd5caf35db4ee597d",
+    "content-hash": "01686c593910589d27a8fd55568d2b7c",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -7795,20 +7795,20 @@
         },
         {
             "name": "shopsys/coding-standards",
-            "version": "v3.0.2",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/coding-standards.git",
-                "reference": "e280fee8299206cb7b08b23d5d8d2a0cd1df2123"
+                "reference": "c9263a009714f318d11bb8f3d7b7042916f4fad2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/coding-standards/zipball/e280fee8299206cb7b08b23d5d8d2a0cd1df2123",
-                "reference": "e280fee8299206cb7b08b23d5d8d2a0cd1df2123",
+                "url": "https://api.github.com/repos/shopsys/coding-standards/zipball/c9263a009714f318d11bb8f3d7b7042916f4fad2",
+                "reference": "c9263a009714f318d11bb8f3d7b7042916f4fad2",
                 "shasum": ""
             },
             "require": {
-                "friendsofphp/php-cs-fixer": "~2.1",
+                "friendsofphp/php-cs-fixer": "~2.3",
                 "jakub-onderka/php-parallel-lint": "~0.9",
                 "phpmd/phpmd": "~2.0",
                 "squizlabs/php_codesniffer": "~2.8"
@@ -7839,7 +7839,7 @@
                 "code quality",
                 "coding standards"
             ],
-            "time": "2017-03-15T10:32:45+00:00"
+            "time": "2017-10-12T14:37:06+00:00"
         },
         {
             "name": "shopsys/http-smoke-testing",

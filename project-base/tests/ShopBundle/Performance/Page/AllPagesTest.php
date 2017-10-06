@@ -12,11 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\HttpFoundation\Request;
 use Tests\ShopBundle\Performance\JmeterCsvReporter;
-use Tests\ShopBundle\Performance\Page\PerformanceResultsCsvExporter;
-use Tests\ShopBundle\Performance\Page\PerformanceTestSample;
-use Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier;
-use Tests\ShopBundle\Performance\Page\PerformanceTestSamplesAggregator;
-use Tests\ShopBundle\Performance\Page\PerformanceTestSummaryPrinter;
 use Tests\ShopBundle\Smoke\Http\RouteConfigCustomization;
 
 class AllPagesTest extends KernelTestCase

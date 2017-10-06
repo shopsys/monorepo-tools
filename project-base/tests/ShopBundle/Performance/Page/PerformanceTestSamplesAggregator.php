@@ -2,8 +2,6 @@
 
 namespace Tests\ShopBundle\Performance\Page;
 
-use Tests\ShopBundle\Performance\Page\PerformanceTestSample;
-
 class PerformanceTestSamplesAggregator
 {
     /**

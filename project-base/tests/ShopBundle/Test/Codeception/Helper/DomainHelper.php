@@ -4,7 +4,6 @@ namespace Tests\ShopBundle\Test\Codeception\Helper;
 
 use Codeception\Module;
 use Codeception\TestInterface;
-use Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper;
 use Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver;
 
 class DomainHelper extends Module

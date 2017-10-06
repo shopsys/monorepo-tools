@@ -433,9 +433,9 @@ class StrictWebDriver extends WebDriver
     /**
      * Grabs current page source code.
      *
-     * @throws \Codeception\Exception\ModuleException if no page was opened.
+     * @throws \Codeception\Exception\ModuleException if no page was opened
      *
-     * @return string Current page source code.
+     * @return string current page source code
      */
     public function grabPageSource()
     {

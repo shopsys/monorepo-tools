@@ -4,7 +4,6 @@ namespace Tests\ShopBundle\Acceptance\acceptance\PageObject\Front;
 
 use Facebook\WebDriver\WebDriverBy;
 use Tests\ShopBundle\Acceptance\acceptance\PageObject\AbstractPage;
-use Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductListComponent;
 use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 use Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver;
 

@@ -3,7 +3,6 @@
 namespace Tests\ShopBundle\Unit\Component\UploadedFile;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\FileUpload\FileForUpload;
 use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
 use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
 use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileService;
