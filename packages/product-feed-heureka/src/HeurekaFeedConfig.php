@@ -14,6 +14,11 @@ class HeurekaFeedConfig implements FeedConfigInterface
     private $dataStorageProvider;
 
     /**
+     * @var string[]
+     */
+    private $heurekaCategoryFullNamesCache = [];
+
+    /**
      * @param \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider $dataStorageProvider
      */
     public function __construct(DataStorageProvider $dataStorageProvider)
@@ -67,7 +72,7 @@ class HeurekaFeedConfig implements FeedConfigInterface
             $cpc = $productsDataById[$item->getId()]['cpc'][$domainConfig->getId()] ?? null;
             $item->setCustomValue('cpc', $cpc);
 
-            $categoryName = $this->findHeurekaCategoryFullNameByCategoryId($item->getMainCategoryId());
+            $categoryName = $this->findHeurekaCategoryFullNameByCategoryIdUsingCache($item->getMainCategoryId());
             $item->setCustomValue('category_name', $categoryName);
         }
 
@@ -98,6 +103,19 @@ class HeurekaFeedConfig implements FeedConfigInterface
     private function isItemSellable(StandardFeedItemInterface $item)
     {
         return !$item->isSellingDenied();
+    }
+
+    /**
+     * @param int $categoryId
+     * @return string|null
+     */
+    private function findHeurekaCategoryFullNameByCategoryIdUsingCache($categoryId)
+    {
+        if (!array_key_exists($categoryId, $this->heurekaCategoryFullNamesCache)) {
+            $this->heurekaCategoryFullNamesCache[$categoryId] = $this->findHeurekaCategoryFullNameByCategoryId($categoryId);
+        }
+
+        return $this->heurekaCategoryFullNamesCache[$categoryId];
     }
 
     /**
