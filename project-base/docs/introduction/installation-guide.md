@@ -1,4 +1,6 @@
 # Installation Guide
+This guide provides instructions how to install Shopsys Framework on your local machine as a server.
+If you would like to use a prepared Docker container instead go to [Installation Using Docker](installation-using-docker.md).
 
 ## Requirements
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)

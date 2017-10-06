@@ -11,3 +11,4 @@
 /MAINTENANCE
 /Gruntfile.js
 /.php_cs.cache
+/.docker-sync

@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Docker based server stack for easier installation and development (@TomasLudvik)
+    - see [Docker Installation Guide](docs/introduction/docker-installation-guide.md) for details
 - plugins can now extend the CRUD of categories (using `CategoryFormType`) (@MattCzerner)
 
 ### Changed

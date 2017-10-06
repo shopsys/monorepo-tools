@@ -18,7 +18,10 @@ php phing img-demo
 php bin/console server:run
 ```
 
-When in doubt consult detailed [Installation Guide](docs/introduction/installation-guide.md).
+This expects you to have the whole server stack (Nginx, PostgreSQL, etc.) installed on your machine.
+The detailed instructions can be found in [Installation Guide](docs/introduction/installation-guide.md).
+
+Alternatively, if you want to try Shopsys Framework without the need to install and configure the whole server stack you can use [Docker Compose with the prepared configuration](docs/introduction/installation-using-docker.md).
 
 ### What to do next
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see running application.
