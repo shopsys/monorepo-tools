@@ -1,5 +1,5 @@
 # Upgrading
-## From 0.5.0 to Unreleased
+## From 0.5.1 to Unreleased
 
 ## From 0.4.2 to 0.5.0
 - requires possibility of extending the CRUD of categories via `shopsys.crud_extension` of type `category`
