@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Feed\Standard;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
@@ -71,6 +70,7 @@ class StandardFeedItemFactory
 
         $items = [];
         foreach ($products as $product) {
+            $mainCategory = $this->categoryFacade->getProductMainCategoryByDomainId($product, $domainConfig->getId());
             $productDomain = $productDomainsByProductId[$product->getId()];
 
             $items[] = new StandardFeedItem(
@@ -88,7 +88,8 @@ class StandardFeedItemFactory
                 $this->getProductParamsIndexedByParamName($product, $paramsByProductIdAndName),
                 $product->getPartno(),
                 $this->findProductMainVariantId($product),
-                $product->isSellingDenied()
+                $product->isSellingDenied(),
+                $mainCategory->getId()
             );
         }
 

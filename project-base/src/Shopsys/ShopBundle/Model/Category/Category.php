@@ -80,14 +80,6 @@ class Category extends AbstractTranslatableEntity
     private $domains;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory|null
-     *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Feed\Category\FeedCategory")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $heurekaCzFeedCategory;
-
-    /**
      * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
      */
     public function __construct(CategoryData $categoryData)
@@ -95,7 +87,6 @@ class Category extends AbstractTranslatableEntity
         $this->setParent($categoryData->parent);
         $this->translations = new ArrayCollection();
         $this->setTranslations($categoryData);
-        $this->heurekaCzFeedCategory = $categoryData->heurekaCzFeedCategory;
     }
 
     /**
@@ -105,7 +96,6 @@ class Category extends AbstractTranslatableEntity
     {
         $this->setParent($categoryData->parent);
         $this->setTranslations($categoryData);
-        $this->heurekaCzFeedCategory = $categoryData->heurekaCzFeedCategory;
     }
 
     /**
@@ -210,15 +200,6 @@ class Category extends AbstractTranslatableEntity
 
         throw new \Shopsys\ShopBundle\Model\Category\Exception\CategoryDomainNotFoundException($this->id, $domainId);
     }
-
-    /**
-     * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory|null
-     */
-    public function getHeurekaCzFeedCategory()
-    {
-        return $this->heurekaCzFeedCategory;
-    }
-
     /**
      * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
      */

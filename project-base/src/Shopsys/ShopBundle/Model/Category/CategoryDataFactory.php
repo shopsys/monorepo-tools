@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Category;
 
+use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
 class CategoryDataFactory
@@ -16,12 +17,19 @@ class CategoryDataFactory
      */
     private $friendlyUrlFacade;
 
+    /**
+     * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade
+     */
+    private $pluginCrudExtensionFacade;
+
     public function __construct(
         CategoryRepository $categoryRepository,
-        FriendlyUrlFacade $friendlyUrlFacade
+        FriendlyUrlFacade $friendlyUrlFacade,
+        PluginCrudExtensionFacade $pluginCrudExtensionFacade
     ) {
         $this->categoryRepository = $categoryRepository;
         $this->friendlyUrlFacade = $friendlyUrlFacade;
+        $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
     }
 
     /**
@@ -41,6 +49,8 @@ class CategoryDataFactory
             $categoryData->urls->mainFriendlyUrlsByDomainId[$domainId] =
                 $this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_list', $category->getId());
         }
+
+        $categoryData->pluginData = $this->pluginCrudExtensionFacade->getAllData('category', $category->getId());
 
         return $categoryData;
     }

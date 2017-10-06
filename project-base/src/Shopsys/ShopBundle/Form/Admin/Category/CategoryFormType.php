@@ -7,6 +7,7 @@ use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension;
+use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\ShopBundle\Form\DomainsType;
 use Shopsys\ShopBundle\Form\FileUploadType;
 use Shopsys\ShopBundle\Form\Locale\LocalizedType;
@@ -14,7 +15,6 @@ use Shopsys\ShopBundle\Form\UrlListType;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -33,11 +33,6 @@ class CategoryFormType extends AbstractType
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository
-     */
-    private $feedCategoryRepository;
-
-    /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */
     private $domain;
@@ -47,16 +42,21 @@ class CategoryFormType extends AbstractType
      */
     private $seoSettingFacade;
 
+    /**
+     * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade
+     */
+    private $pluginCrudExtensionFacade;
+
     public function __construct(
         CategoryFacade $categoryFacade,
-        FeedCategoryRepository $feedCategoryRepository,
         Domain $domain,
-        SeoSettingFacade $seoSettingFacade
+        SeoSettingFacade $seoSettingFacade,
+        PluginCrudExtensionFacade $pluginCrudExtensionFacade
     ) {
         $this->categoryFacade = $categoryFacade;
-        $this->feedCategoryRepository = $feedCategoryRepository;
         $this->domain = $domain;
         $this->seoSettingFacade = $seoSettingFacade;
+        $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
     }
 
     /**
@@ -148,12 +148,6 @@ class CategoryFormType extends AbstractType
                 'property_path' => 'hiddenOnDomains',
                 'required' => false,
             ])
-            ->add('heurekaCzFeedCategory', ChoiceType::class, [
-                'required' => false,
-                'choices' => $this->feedCategoryRepository->getAllHeurekaCz(),
-                'choice_label' => 'name',
-                'choice_value' => 'id',
-            ])
             ->add('urls', UrlListType::class, [
                 'route_name' => 'front_product_list',
                 'entity_id' => $options['category'] !== null ? $options['category']->getId() : null,
@@ -171,6 +165,8 @@ class CategoryFormType extends AbstractType
                 ],
             ])
             ->add('save', SubmitType::class);
+
+        $this->pluginCrudExtensionFacade->extendForm($builder, 'category', 'pluginData');
     }
 
     /**

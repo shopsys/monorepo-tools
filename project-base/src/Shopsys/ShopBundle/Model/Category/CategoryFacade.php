@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\ShopBundle\Component\Utils;
 use Shopsys\ShopBundle\Model\Category\Detail\CategoryDetailFactory;
@@ -54,6 +55,11 @@ class CategoryFacade
      */
     private $imageFacade;
 
+    /**
+     * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade
+     */
+    private $pluginCrudExtensionFacade;
+
     public function __construct(
         EntityManager $em,
         CategoryRepository $categoryRepository,
@@ -62,7 +68,8 @@ class CategoryFacade
         CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler,
         CategoryDetailFactory $categoryDetailFactory,
         FriendlyUrlFacade $friendlyUrlFacade,
-        ImageFacade $imageFacade
+        ImageFacade $imageFacade,
+        PluginCrudExtensionFacade $pluginCrudExtensionFacade
     ) {
         $this->em = $em;
         $this->categoryRepository = $categoryRepository;
@@ -72,6 +79,7 @@ class CategoryFacade
         $this->categoryDetailFactory = $categoryDetailFactory;
         $this->friendlyUrlFacade = $friendlyUrlFacade;
         $this->imageFacade = $imageFacade;
+        $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
     }
 
     /**
@@ -98,6 +106,8 @@ class CategoryFacade
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
         $this->imageFacade->uploadImage($category, $categoryData->image, null);
 
+        $this->pluginCrudExtensionFacade->saveAllData('category', $category->getId(), $categoryData->pluginData);
+
         $this->categoryVisibilityRecalculationScheduler->scheduleRecalculationWithoutDependencies();
 
         return $category;
@@ -118,6 +128,8 @@ class CategoryFacade
         $this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
         $this->imageFacade->uploadImage($category, $categoryData->image, null);
+
+        $this->pluginCrudExtensionFacade->saveAllData('category', $category->getId(), $categoryData->pluginData);
 
         $this->categoryVisibilityRecalculationScheduler->scheduleRecalculation($category);
 
@@ -177,6 +189,8 @@ class CategoryFacade
         // Normally, UnitOfWork performs UPDATEs on children after DELETE of main entity.
         // We need to update `parent` attribute of children first.
         $this->em->flush();
+
+        $this->pluginCrudExtensionFacade->removeAllData('category', $category->getId());
 
         $this->em->remove($category);
         $this->em->flush();

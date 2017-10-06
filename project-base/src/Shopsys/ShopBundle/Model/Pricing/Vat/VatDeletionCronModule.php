@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Pricing\Vat;
 
-use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
+use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
 use Symfony\Bridge\Monolog\Logger;
 

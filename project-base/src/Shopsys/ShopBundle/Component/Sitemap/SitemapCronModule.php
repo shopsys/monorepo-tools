@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Component\Sitemap;
 
-use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
+use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
 
 class SitemapCronModule implements SimpleCronModuleInterface

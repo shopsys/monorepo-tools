@@ -40,6 +40,6 @@ opcache.max_accelerated_files = 20000
 | pdo            | required by package `doctrine/orm`                                                                                                                            |
 | pdo_pgsql      | required to support `pdo_pgsql` database driver                                                                                                               |
 | pgsql          | used in acceptance for fast repopulating of database using `COPY` command                                                                                     |
-| simplexml      | used by `Shopsys\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader`                                                                                    |
+| simplexml      | used by Heureka product feed plugin in `\Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryCronModule`                                   |
 | xml            | used by Phing for XML parsing                                                                                                                                 |
 | zip            | used by `Shopsys\ShopBundle\Command\ImageDemoCommand` to extract demo images                                                                                  |

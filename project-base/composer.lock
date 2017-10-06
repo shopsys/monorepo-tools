@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e7cb64f964d87de7b670dc6c19da68a",
+    "content-hash": "cd3fba9ea2ce96afd5caf35db4ee597d",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -5392,20 +5392,21 @@
         },
         {
             "name": "shopsys/plugin-interface",
-            "version": "v0.2.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/plugin-interface.git",
-                "reference": "2cfd6b4343ca5dce1931df59706392aec298ca26"
+                "reference": "f406a34f5fe79f1b59226557b4e4073f2f33164d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/plugin-interface/zipball/2cfd6b4343ca5dce1931df59706392aec298ca26",
-                "reference": "2cfd6b4343ca5dce1931df59706392aec298ca26",
+                "url": "https://api.github.com/repos/shopsys/plugin-interface/zipball/f406a34f5fe79f1b59226557b4e4073f2f33164d",
+                "reference": "f406a34f5fe79f1b59226557b4e4073f2f33164d",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0"
+                "php": "^7.0",
+                "symfony/monolog-bridge": "^3.0.0"
             },
             "require-dev": {
                 "shopsys/coding-standards": "3.0.2"
@@ -5434,27 +5435,27 @@
                 "Shopsys Framework",
                 "plugin"
             ],
-            "time": "2017-09-06T07:39:46+00:00"
+            "time": "2017-10-04T11:58:57+00:00"
         },
         {
             "name": "shopsys/product-feed-google",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/product-feed-google.git",
-                "reference": "2b23402c6e0bac58cac81d3e7b1813b9251199fa"
+                "reference": "ca976a59cb5c68fc5a026a927a3e2e1a96ac78c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-google/zipball/2b23402c6e0bac58cac81d3e7b1813b9251199fa",
-                "reference": "2b23402c6e0bac58cac81d3e7b1813b9251199fa",
+                "url": "https://api.github.com/repos/shopsys/product-feed-google/zipball/ca976a59cb5c68fc5a026a927a3e2e1a96ac78c5",
+                "reference": "ca976a59cb5c68fc5a026a927a3e2e1a96ac78c5",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0",
                 "shopsys/form-types-bundle": "^0.1.0",
-                "shopsys/plugin-interface": "^0.2.0",
-                "shopsys/product-feed-interface": "^0.4.0",
+                "shopsys/plugin-interface": "^0.2.0|^0.3.0",
+                "shopsys/product-feed-interface": "^0.4.0|^0.5.0",
                 "symfony/form": "^3.0",
                 "symfony/framework-bundle": "^3.0",
                 "symfony/translation": "^3.0",
@@ -5492,27 +5493,28 @@
                 "plugin",
                 "product feed"
             ],
-            "time": "2017-09-25T14:35:10+00:00"
+            "time": "2017-10-04T12:18:05+00:00"
         },
         {
             "name": "shopsys/product-feed-heureka",
-            "version": "v0.4.1",
+            "version": "v0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/product-feed-heureka.git",
-                "reference": "e5bf228558c7172552326c803205e569696c5810"
+                "reference": "bc4d7fbc5ee2cdded2b0d1b820857ec00d7a6c3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-heureka/zipball/e5bf228558c7172552326c803205e569696c5810",
-                "reference": "e5bf228558c7172552326c803205e569696c5810",
+                "url": "https://api.github.com/repos/shopsys/product-feed-heureka/zipball/bc4d7fbc5ee2cdded2b0d1b820857ec00d7a6c3a",
+                "reference": "bc4d7fbc5ee2cdded2b0d1b820857ec00d7a6c3a",
                 "shasum": ""
             },
             "require": {
+                "ext-simplexml": "*",
                 "php": "^7.0",
                 "shopsys/form-types-bundle": "~0.1.0",
-                "shopsys/plugin-interface": "~0.2.0",
-                "shopsys/product-feed-interface": "~0.4.0",
+                "shopsys/plugin-interface": "^0.3.0",
+                "shopsys/product-feed-interface": "^0.5.0",
                 "symfony/form": "^3.0",
                 "symfony/framework-bundle": "^3.0",
                 "symfony/translation": "^3.0",
@@ -5551,25 +5553,25 @@
                 "plugin",
                 "product feed"
             ],
-            "time": "2017-09-25T14:13:28+00:00"
+            "time": "2017-10-06T07:08:05+00:00"
         },
         {
             "name": "shopsys/product-feed-heureka-delivery",
-            "version": "v0.2.1",
+            "version": "v0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/product-feed-heureka-delivery.git",
-                "reference": "6e29753d1dca789da0d6e777b295c0ea45b0b816"
+                "reference": "df0885e01f5515d2c5c08cb64b9cc74c6d00c0f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-heureka-delivery/zipball/6e29753d1dca789da0d6e777b295c0ea45b0b816",
-                "reference": "6e29753d1dca789da0d6e777b295c0ea45b0b816",
+                "url": "https://api.github.com/repos/shopsys/product-feed-heureka-delivery/zipball/df0885e01f5515d2c5c08cb64b9cc74c6d00c0f6",
+                "reference": "df0885e01f5515d2c5c08cb64b9cc74c6d00c0f6",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0",
-                "shopsys/product-feed-interface": "~0.4.0",
+                "shopsys/product-feed-interface": "^0.4.0|^0.5.0",
                 "symfony/framework-bundle": "^3.0"
             },
             "require-dev": {
@@ -5605,20 +5607,20 @@
                 "plugin",
                 "product delivery feed"
             ],
-            "time": "2017-09-25T14:23:10+00:00"
+            "time": "2017-10-04T12:51:59+00:00"
         },
         {
             "name": "shopsys/product-feed-interface",
-            "version": "v0.4.0",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/product-feed-interface.git",
-                "reference": "147ac218104a6b0417b92b6f15c84c132f4cb496"
+                "reference": "9d9a46bf48ec736a83034f1130139d213118309b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-interface/zipball/147ac218104a6b0417b92b6f15c84c132f4cb496",
-                "reference": "147ac218104a6b0417b92b6f15c84c132f4cb496",
+                "url": "https://api.github.com/repos/shopsys/product-feed-interface/zipball/9d9a46bf48ec736a83034f1130139d213118309b",
+                "reference": "9d9a46bf48ec736a83034f1130139d213118309b",
                 "shasum": ""
             },
             "require": {
@@ -5652,26 +5654,26 @@
                 "plugin",
                 "product feed"
             ],
-            "time": "2017-09-25T13:24:51+00:00"
+            "time": "2017-10-04T10:28:43+00:00"
         },
         {
             "name": "shopsys/product-feed-zbozi",
-            "version": "v0.4.1",
+            "version": "v0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/product-feed-zbozi.git",
-                "reference": "78fac3bb7f9f299b6720c311b9070d460f5d2e17"
+                "reference": "17ac54df1588010fb67926e3d3c71360d867c7ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-zbozi/zipball/78fac3bb7f9f299b6720c311b9070d460f5d2e17",
-                "reference": "78fac3bb7f9f299b6720c311b9070d460f5d2e17",
+                "url": "https://api.github.com/repos/shopsys/product-feed-zbozi/zipball/17ac54df1588010fb67926e3d3c71360d867c7ed",
+                "reference": "17ac54df1588010fb67926e3d3c71360d867c7ed",
                 "shasum": ""
             },
             "require": {
                 "shopsys/form-types-bundle": "~0.1.0",
-                "shopsys/plugin-interface": "~0.2.0",
-                "shopsys/product-feed-interface": "~0.4.0",
+                "shopsys/plugin-interface": "^0.2.0|^0.3.0",
+                "shopsys/product-feed-interface": "^0.4.0|^0.5.0",
                 "symfony/form": "^3.0",
                 "symfony/framework-bundle": "^3.0",
                 "symfony/translation": "^3.0",
@@ -5710,7 +5712,7 @@
                 "product feed",
                 "zbozi"
             ],
-            "time": "2017-09-25T13:43:41+00:00"
+            "time": "2017-10-04T12:58:31+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -8149,7 +8151,6 @@
         "ext-openssl": "*",
         "ext-pdo": "*",
         "ext-pdo_pgsql": "*",
-        "ext-simplexml": "*",
         "ext-xml": "*"
     },
     "platform-dev": {

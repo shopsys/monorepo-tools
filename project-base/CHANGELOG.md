@@ -5,6 +5,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- plugins can now extend the CRUD of categories (using `CategoryFormType`) (@MattCzerner)
+
+### Changed
+- interfaces for CRON modules moved to [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface) (@MattCzerner)
+
+### Deleted
+- logic of Heureka categorization moved to [shopsys/product-feed-heureka](https://github.com/shopsys/product-feed-heureka) (@MattCzerner)
+    - all your current Heureka category data will be migrated into the new structure
 
 ## [2.0.0-beta.17.0] - 2017-10-03
 ### Added

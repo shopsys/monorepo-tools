@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Pricing;
 
-use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
+use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
 
 class ProductPriceCronModule implements IteratedCronModuleInterface

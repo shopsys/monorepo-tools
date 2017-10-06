@@ -3,9 +3,9 @@
 namespace Shopsys\ShopBundle\Component\Cron\Config;
 
 use DateTimeInterface;
+use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
+use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
 use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
-use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
-use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
 
 class CronConfig
 {
@@ -26,7 +26,7 @@ class CronConfig
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $service
+     * @param \Shopsys\Plugin\Cron\SimpleCronModuleInterface|\Shopsys\Plugin\Cron\IteratedCronModuleInterface $service
      * @param string $serviceId
      * @param string $timeHours
      * @param string $timeMinutes
