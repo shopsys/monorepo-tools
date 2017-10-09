@@ -7,12 +7,16 @@ use Exception;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use ZipArchive;
 
 class ImageDemoCommand extends ContainerAwareCommand
 {
     const EXIT_CODE_OK = 0;
     const EXIT_CODE_ERROR = 1;
+
+    const IMAGES_TABLE_NAME = 'images';
 
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -49,6 +53,23 @@ class ImageDemoCommand extends ContainerAwareCommand
         $unpackedDomainImagesPath = $imagesPath . 'domain';
 
         $isCompleted = false;
+
+        if (!$this->isImagesTableEmpty()) {
+            $symfonyStyleIo = new SymfonyStyle($input, $output);
+            $questionHelper = $this->getHelper('question');
+            /* @var $questionHelper \Symfony\Component\Console\Helper\QuestionHelper*/
+
+            $question = 'There are some images in your database. Those images will be deleted in order to install demo images. Do you wish to proceed?? [YES]';
+            $truncateImagesQuestion = new ConfirmationQuestion($question);
+            if (!$questionHelper->ask($input, $output, $truncateImagesQuestion)) {
+                $symfonyStyleIo->note('Demo images were not loaded, you need to truncate "' . self::IMAGES_TABLE_NAME . '" DB table first.');
+
+                return self::EXIT_CODE_ERROR;
+            }
+            $this->truncateImagesFromDb();
+            $symfonyStyleIo->note('DB table "' . self::IMAGES_TABLE_NAME . '" has been truncated.');
+        }
+
         if ($this->downloadImages($output, $archiveUrl, $localArchiveFilepath)) {
             if ($this->unpackImages($output, $imagesPath, $localArchiveFilepath)) {
                 $this->moveFiles($unpackedDomainImagesPath, $domainImagesPath);
@@ -158,5 +179,24 @@ class ImageDemoCommand extends ContainerAwareCommand
                 $this->filesystem->rename($filepath, $newFilepath, true);
             }
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function isImagesTableEmpty()
+    {
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('total_count', 'totalCount');
+        // COUNT() returns BIGINT which is hydrated into string on 32-bit architecture
+        $nativeQuery = $this->em->createNativeQuery('SELECT COUNT(*)::INTEGER AS total_count FROM ' . self::IMAGES_TABLE_NAME, $rsm);
+        $imagesCount = $nativeQuery->getSingleScalarResult();
+
+        return $imagesCount === 0;
+    }
+
+    private function truncateImagesFromDb()
+    {
+        $this->em->createNativeQuery('TRUNCATE TABLE ' . self::IMAGES_TABLE_NAME, new ResultSetMapping())->execute();
     }
 }
