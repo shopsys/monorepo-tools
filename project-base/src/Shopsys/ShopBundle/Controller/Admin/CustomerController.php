@@ -20,9 +20,8 @@ use Shopsys\ShopBundle\Model\Customer\CustomerData;
 use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 use Shopsys\ShopBundle\Model\Customer\CustomerListAdminFacade;
 use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Customer\UserData;
+use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
 use Shopsys\ShopBundle\Model\Order\OrderFacade;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\ShopBundle\Model\Security\LoginAsUserFacade;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,9 +32,9 @@ class CustomerController extends AdminBaseController
     const LOGIN_AS_TOKEN_ID_PREFIX = 'loginAs';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+     * @var \Shopsys\ShopBundle\Model\Customer\UserDataFactory
      */
-    private $pricingGroupSettingFacade;
+    private $userDataFactory;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CustomerListAdminFacade
@@ -83,7 +82,7 @@ class CustomerController extends AdminBaseController
     private $domainRouterFactory;
 
     public function __construct(
-        PricingGroupSettingFacade $pricingGroupSettingFacade,
+        UserDataFactory $userDataFactory,
         CustomerListAdminFacade $customerListAdminFacade,
         CustomerFacade $customerFacade,
         Breadcrumb $breadcrumb,
@@ -94,7 +93,7 @@ class CustomerController extends AdminBaseController
         LoginAsUserFacade $loginAsUserFacade,
         DomainRouterFactory $domainRouterFactory
     ) {
-        $this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
+        $this->userDataFactory = $userDataFactory;
         $this->customerListAdminFacade = $customerListAdminFacade;
         $this->customerFacade = $customerFacade;
         $this->breadcrumb = $breadcrumb;
@@ -214,14 +213,13 @@ class CustomerController extends AdminBaseController
     public function newAction(Request $request)
     {
         $customerData = new CustomerData();
-        $userData = new UserData();
-        $defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupBySelectedDomain();
-        $userData->pricingGroup = $defaultPricingGroup;
+        $selectedDomainId = $this->adminDomainTabsFacade->getSelectedDomainId();
+        $userData = $this->userDataFactory->createDefault($selectedDomainId);
         $customerData->userData = $userData;
 
         $form = $this->createForm(CustomerFormType::class, $customerData, [
             'scenario' => CustomerFormType::SCENARIO_CREATE,
-            'domain_id' => $this->adminDomainTabsFacade->getSelectedDomainId(),
+            'domain_id' => $selectedDomainId,
         ]);
         $form->handleRequest($request);
 
