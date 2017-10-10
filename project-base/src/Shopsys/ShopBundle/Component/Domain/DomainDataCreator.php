@@ -63,6 +63,7 @@ class DomainDataCreator
             } catch (\Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
                 $this->settingValueRepository->copyAllMultidomainSettings(self::TEMPLATE_DOMAIN_ID, $domainId);
                 $this->setting->clearCache();
+                $this->setting->setForDomain(Setting::BASE_URL, $domainConfig->getUrl(), $domainId);
                 $this->multidomainEntityDataCreator->copyAllMultidomainDataForNewDomain(self::TEMPLATE_DOMAIN_ID, $domainId);
                 $locale = $domainConfig->getLocale();
                 if ($this->isNewLocale($locale)) {
