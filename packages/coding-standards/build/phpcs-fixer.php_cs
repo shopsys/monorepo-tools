@@ -34,6 +34,7 @@ $config = PhpCsFixer\Config::create()
         'no_trailing_comma_in_list_call' => true,
         'no_trailing_comma_in_singleline_array' => true,
         'no_unneeded_control_parentheses' => ['break', 'clone', 'continue', 'echo_print', 'return', 'switch_case', 'yield'],
+        'no_unused_imports' => true,
         'no_useless_return' => true,
         'no_whitespace_before_comma_in_array' => true,
         'no_whitespace_in_blank_line' => true,
@@ -73,7 +74,6 @@ $config = PhpCsFixer\Config::create()
     ->registerCustomFixers([
         new ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer(),
         new ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer(),
-        new ShopSys\CodingStandards\CsFixer\NoUnusedImportsFixer(),
     ]);
 
 // Twig templates of PHP scripts cannot be linted and cause php-cs-fixer to fail
