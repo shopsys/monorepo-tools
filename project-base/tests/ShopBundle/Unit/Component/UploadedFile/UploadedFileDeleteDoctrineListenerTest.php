@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
 use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileDeleteDoctrineListener;
 use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Tests\ShopBundle\Unit\Component\UploadedFile\Dummy;
 
 class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase
 {

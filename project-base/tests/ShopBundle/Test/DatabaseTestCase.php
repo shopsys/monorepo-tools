@@ -3,7 +3,6 @@
 namespace Tests\ShopBundle\Test;
 
 use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use Tests\ShopBundle\Test\FunctionalTestCase;
 
 abstract class DatabaseTestCase extends FunctionalTestCase
 {

@@ -3,7 +3,6 @@
 namespace Tests\ShopBundle\Test\Codeception\Module;
 
 use Codeception\Module\Db as BaseDb;
-use Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade;
 use Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper;
 
 class Db extends BaseDb

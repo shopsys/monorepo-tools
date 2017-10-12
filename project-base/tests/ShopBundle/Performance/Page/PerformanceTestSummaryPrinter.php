@@ -3,7 +3,6 @@
 namespace Tests\ShopBundle\Performance\Page;
 
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier;
 
 class PerformanceTestSummaryPrinter
 {

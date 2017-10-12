@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
-use Tests\ShopBundle\Unit\Component\Router\Security\DummyController;
 
 class RouteCsrfProtectorTest extends PHPUnit_Framework_TestCase
 {

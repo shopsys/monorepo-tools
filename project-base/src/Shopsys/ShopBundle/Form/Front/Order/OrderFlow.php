@@ -47,7 +47,7 @@ class OrderFlow extends FormFlow
                 'form_options' => ['domain_id' => $this->domainId],
             ],
             [
-                'form_type' => PersonalInfoFormType::class ,
+                'form_type' => PersonalInfoFormType::class,
                 'form_options' => ['domain_id' => $this->domainId],
             ],
         ];

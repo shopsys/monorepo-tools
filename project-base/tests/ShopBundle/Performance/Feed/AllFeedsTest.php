@@ -8,8 +8,6 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\HttpFoundation\Request;
-use Tests\ShopBundle\Performance\Feed\PerformanceResultsCsvExporter;
-use Tests\ShopBundle\Performance\Feed\PerformanceTestSample;
 use Tests\ShopBundle\Performance\JmeterCsvReporter;
 
 class AllFeedsTest extends KernelTestCase

@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Cart\Cart;
 use Shopsys\ShopBundle\Model\Cart\CartFacade;
 use Shopsys\ShopBundle\Model\Cart\CartFactory;
 use Shopsys\ShopBundle\Model\Cart\CartService;
-use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
 use Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository;
 use Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;

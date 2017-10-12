@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation
 use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase
 {

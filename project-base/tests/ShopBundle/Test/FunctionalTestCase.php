@@ -3,7 +3,6 @@
 namespace Tests\ShopBundle\Test;
 
 use Shopsys\Environment;
-use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

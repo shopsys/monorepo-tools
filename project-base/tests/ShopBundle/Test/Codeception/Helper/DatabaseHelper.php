@@ -4,7 +4,6 @@ namespace Tests\ShopBundle\Test\Codeception\Helper;
 
 use Codeception\Module;
 use Doctrine\DBAL\Connection;
-use Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper;
 use Tests\ShopBundle\Test\Codeception\Module\Db;
 
 class DatabaseHelper extends Module
