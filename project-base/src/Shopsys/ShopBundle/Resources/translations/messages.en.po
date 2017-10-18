@@ -445,7 +445,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:43
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/BestsellingProduct/detail.html.twig:26
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:40
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:70
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:87
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:103
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:226
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:59
@@ -676,10 +676,6 @@ msgstr ""
 msgid "Category <strong>{{ name }}</strong> deleted"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:23
-msgid "Category Heureka.cz"
-msgstr ""
-
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopCategory/list.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopCategory/list.html.twig:4
 msgid "Category guidepost on main page"
@@ -745,7 +741,7 @@ msgstr ""
 msgid "Chosen shipping name"
 msgstr ""
 
-#: CustomerController.php:185
+#: CustomerController.php:184
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:70
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:91
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:121
@@ -1100,15 +1096,15 @@ msgstr ""
 msgid "Customer"
 msgstr ""
 
-#: CustomerController.php:235
+#: CustomerController.php:233
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: CustomerController.php:131
+#: CustomerController.php:130
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: CustomerController.php:271
+#: CustomerController.php:269
 msgid "Customer <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -1209,7 +1205,7 @@ msgid "Delivery data"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:16
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:39
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:41
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:43
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:176
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:271
@@ -1339,7 +1335,7 @@ msgstr ""
 msgid "Do you really want to remove this brand? If it is used anywhere it will be unset."
 msgstr ""
 
-#: CustomerController.php:198
+#: CustomerController.php:197
 msgid "Do you really want to remove this customer?"
 msgstr ""
 
@@ -1443,7 +1439,7 @@ msgid "Drag file here"
 msgstr ""
 
 #: AdministratorController.php:68
-#: CustomerController.php:187
+#: CustomerController.php:186
 #: MailController.php:109
 #: MailController.php:121
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:18
@@ -1592,7 +1588,7 @@ msgstr ""
 msgid "Editing customer"
 msgstr ""
 
-#: CustomerController.php:148
+#: CustomerController.php:147
 msgid "Editing customer - %name%"
 msgstr ""
 
@@ -1935,7 +1931,7 @@ msgid "Frontend"
 msgstr ""
 
 #: AdministratorController.php:67
-#: CustomerController.php:184
+#: CustomerController.php:183
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:6
 #: src/Shopsys/ShopBundle/Resources/views/Mail/ContactForm/mail.html.twig:1
@@ -1982,7 +1978,7 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:36
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:26
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:35
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:34
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:298
 msgid "Heading (H1)"
 msgstr ""
@@ -2122,7 +2118,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:26
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:32
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/edit.html.twig:13
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:62
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:64
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/edit.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:49
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/edit.html.twig:42
@@ -2383,7 +2379,7 @@ msgstr ""
 msgid "Last name"
 msgstr ""
 
-#: CustomerController.php:192
+#: CustomerController.php:191
 msgid "Last order"
 msgstr ""
 
@@ -2597,7 +2593,7 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:35
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:25
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:33
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:32
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:296
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Seo/seoSetting.html.twig:18
 msgid "Meta description"
@@ -2943,7 +2939,7 @@ msgstr ""
 msgid "Number of items"
 msgstr ""
 
-#: CustomerController.php:189
+#: CustomerController.php:188
 msgid "Number of orders"
 msgstr ""
 
@@ -3118,7 +3114,7 @@ msgstr ""
 msgid "Orders overview"
 msgstr ""
 
-#: CustomerController.php:190
+#: CustomerController.php:189
 msgid "Orders value"
 msgstr ""
 
@@ -3141,7 +3137,7 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:34
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:24
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:31
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:30
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:294
 msgid "Page title"
 msgstr ""
@@ -3283,8 +3279,8 @@ msgstr ""
 #: CategoryController.php:130
 #: CookiesController.php:58
 #: CustomerController.php:83
-#: CustomerController.php:145
-#: CustomerController.php:250
+#: CustomerController.php:144
+#: CustomerController.php:248
 #: MailController.php:150
 #: OrderController.php:141
 #: OrderController.php:226
@@ -3411,7 +3407,7 @@ msgstr ""
 msgid "Pricing"
 msgstr ""
 
-#: CustomerController.php:188
+#: CustomerController.php:187
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:19
 msgid "Pricing group"
 msgstr ""
@@ -3660,7 +3656,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Article/detail.html.twig:31
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:28
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:27
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:291
 msgid "SEO"
 msgstr ""
@@ -3849,7 +3845,7 @@ msgstr ""
 msgid "Selected currency doesn't exist."
 msgstr ""
 
-#: CustomerController.php:277
+#: CustomerController.php:275
 msgid "Selected customer doesn't exist."
 msgstr ""
 
@@ -4358,7 +4354,7 @@ msgstr ""
 msgid "Technical parameters"
 msgstr ""
 
-#: CustomerController.php:186
+#: CustomerController.php:185
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:31
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:89
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:96
@@ -4462,8 +4458,8 @@ msgstr ""
 msgid "There are several types of tables, but it is not necessary to write down those which are generated by system itself and nobody intervenes in them. That's why there are only those that you will probably want to use."
 msgstr ""
 
-#: CustomerController.php:140
-#: CustomerController.php:244
+#: CustomerController.php:139
+#: CustomerController.php:242
 #: RegistrationController.php:68
 msgid "There is already a customer with this e-mail in the database"
 msgstr ""
@@ -4742,7 +4738,7 @@ msgid "Upload icon"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:35
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:65
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:67
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:53
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:34
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:52
@@ -5015,7 +5011,7 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:30
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Brand/detail.html.twig:35
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:65
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Category/detail.html.twig:67
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/detail.html.twig:53
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/detail.html.twig:310
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:25

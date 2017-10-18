@@ -118,7 +118,7 @@ msgstr ""
 
 #: AdvertFormType.php:93
 #: BrandFormType.php:46
-#: CategoryFormType.php:166
+#: CategoryFormType.php:160
 #: DomainFormType.php:28
 #: PaymentFormType.php:91
 #: ProductEditFormType.php:145
@@ -660,7 +660,7 @@ msgstr ""
 
 #: AdvertFormType.php:95
 #: BrandFormType.php:48
-#: CategoryFormType.php:168
+#: CategoryFormType.php:162
 #: DomainFormType.php:30
 #: PaymentFormType.php:93
 #: ProductEditFormType.php:147
