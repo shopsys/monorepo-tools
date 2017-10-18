@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad5358e2c42ecf7f9a59acc531c5285e",
+    "content-hash": "ff93db8e3a669e32713ed8fc14b568ad",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -966,16 +966,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "1.6.10",
+            "version": "1.6.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "d276b1849ce1c252d3e0993e4ae1f0424118be8f"
+                "reference": "8cd4c2921b6cef14a78d98cd3f0fb81ba6a976f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/d276b1849ce1c252d3e0993e4ae1f0424118be8f",
-                "reference": "d276b1849ce1c252d3e0993e4ae1f0424118be8f",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/8cd4c2921b6cef14a78d98cd3f0fb81ba6a976f9",
+                "reference": "8cd4c2921b6cef14a78d98cd3f0fb81ba6a976f9",
                 "shasum": ""
             },
             "require": {
@@ -1043,7 +1043,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2017-09-29T17:50:40+00:00"
+            "time": "2017-10-11T19:48:03+00:00"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -3709,16 +3709,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.22",
+            "version": "5.7.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "10df877596c9906d4110b5b905313829043f2ada"
+                "reference": "78532d5269d984660080d8e0f4c99c5c2ea65ffe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/10df877596c9906d4110b5b905313829043f2ada",
-                "reference": "10df877596c9906d4110b5b905313829043f2ada",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/78532d5269d984660080d8e0f4c99c5c2ea65ffe",
+                "reference": "78532d5269d984660080d8e0f4c99c5c2ea65ffe",
                 "shasum": ""
             },
             "require": {
@@ -3787,7 +3787,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-09-24T07:23:38+00:00"
+            "time": "2017-10-15T06:13:55+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -5117,21 +5117,21 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.27",
+            "version": "v3.0.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "2651d2c70c5fec10beaa670c61fd8ff1e8b3869a"
+                "reference": "65eadf9e3fd5c47eee7986b306a5aed8affe6496"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/2651d2c70c5fec10beaa670c61fd8ff1e8b3869a",
-                "reference": "2651d2c70c5fec10beaa670c61fd8ff1e8b3869a",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/65eadf9e3fd5c47eee7986b306a5aed8affe6496",
+                "reference": "65eadf9e3fd5c47eee7986b306a5aed8affe6496",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
-                "symfony/dependency-injection": "~2.3|~3.0|~4.0",
+                "symfony/dependency-injection": "~2.3|~3.0",
                 "symfony/framework-bundle": "~2.3|~3.0|~4.0"
             },
             "require-dev": {
@@ -5183,7 +5183,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2017-08-23T12:40:59+00:00"
+            "time": "2017-10-12T17:37:20+00:00"
         },
         {
             "name": "sensio/generator-bundle",
