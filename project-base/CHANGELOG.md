@@ -8,16 +8,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [2.0.0-beta.18.0] - 2017-10-19
 ### Added
+- [coding standards documentation](docs/contributing/coding-standards.md) (@vitek-rostislav)
+- acceptance tests asserting successful image upload in admin for product, transport and payment (@vitek-rostislav)
 - Docker based server stack for easier installation and development (@TomasLudvik)
     - see [Docker Installation Guide](docs/introduction/docker-installation-guide.md) for details
 - plugins can now extend the CRUD of categories (using `CategoryFormType`) (@MattCzerner)
 
 ### Changed
 - interfaces for CRON modules moved to [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface) (@MattCzerner)
+- `ImageDemoCommand` now prompts to truncate "images" db table when it is not empty before new demo images are loaded (@vitek-rostislav)
 
 ### Deleted
 - logic of Heureka categorization moved to [shopsys/product-feed-heureka](https://github.com/shopsys/product-feed-heureka) (@MattCzerner)
     - all your current Heureka category data will be migrated into the new structure
+
+### Fixed
+- proper `baseUrl` value from `domains_urls.yaml` is now stored into `settings` when creating new domain (@vitek-rostislav)
 
 ## [2.0.0-beta.17.0] - 2017-10-03
 ### Added
