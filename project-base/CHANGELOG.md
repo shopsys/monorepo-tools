@@ -5,17 +5,25 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.0.0-beta.18.0] - 2017-10-19
 ### Added
+- [coding standards documentation](docs/contributing/coding-standards.md) (@vitek-rostislav)
+- acceptance tests asserting successful image upload in admin for product, transport and payment (@vitek-rostislav)
 - Docker based server stack for easier installation and development (@TomasLudvik)
     - see [Docker Installation Guide](docs/introduction/docker-installation-guide.md) for details
 - plugins can now extend the CRUD of categories (using `CategoryFormType`) (@MattCzerner)
 
 ### Changed
 - interfaces for CRON modules moved to [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface) (@MattCzerner)
+- `ImageDemoCommand` now prompts to truncate "images" db table when it is not empty before new demo images are loaded (@vitek-rostislav)
 
 ### Deleted
 - logic of Heureka categorization moved to [shopsys/product-feed-heureka](https://github.com/shopsys/product-feed-heureka) (@MattCzerner)
     - all your current Heureka category data will be migrated into the new structure
+
+### Fixed
+- proper `baseUrl` value from `domains_urls.yaml` is now stored into `settings` when creating new domain (@vitek-rostislav)
 
 ## [2.0.0-beta.17.0] - 2017-10-03
 ### Added
@@ -132,6 +140,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - full friendly URL for main entities
 - customizable SEO attributes for main entities
 
-[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.17.0...HEAD
+[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.18.0...HEAD
+[2.0.0-beta.18.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.17.0...v2.0.0-beta.18.0
 [2.0.0-beta.17.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.16.0...v2.0.0-beta.17.0
 [2.0.0-beta.16.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.15.0...v2.0.0-beta.16.0 
