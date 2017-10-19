@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [coding standards documentation](docs/contributing/coding-standards.md) (@vitek-rostislav)
 - acceptance tests asserting successful image upload in admin for product, transport and payment (@vitek-rostislav)
 - Docker based server stack for easier installation and development (@TomasLudvik)
-    - see [Docker Installation Guide](docs/introduction/docker-installation-guide.md) for details
+    - see [Docker Installation Guide](docs/introduction/installation-using-docker.md) for details
 - plugins can now extend the CRUD of categories (using `CategoryFormType`) (@MattCzerner)
 
 ### Changed
