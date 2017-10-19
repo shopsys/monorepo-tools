@@ -59,7 +59,7 @@ class ImageDemoCommand extends ContainerAwareCommand
             $questionHelper = $this->getHelper('question');
             /* @var $questionHelper \Symfony\Component\Console\Helper\QuestionHelper*/
 
-            $question = 'There are some images in your database. Those images will be deleted in order to install demo images. Do you wish to proceed?? [YES]';
+            $question = 'There are some images in your database. Those images will be deleted in order to install demo images. Do you wish to proceed? [YES]';
             $truncateImagesQuestion = new ConfirmationQuestion($question);
             if (!$questionHelper->ask($input, $output, $truncateImagesQuestion)) {
                 $symfonyStyleIo->note('Demo images were not loaded, you need to truncate "' . self::IMAGES_TABLE_NAME . '" DB table first.');
