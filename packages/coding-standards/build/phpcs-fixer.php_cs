@@ -1,6 +1,10 @@
 <?php
 
 $config = PhpCsFixer\Config::create()
+    ->registerCustomFixers([
+        new ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer(),
+        new ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer(),
+    ])
     // list of all available fixers: https://github.com/FriendsOfPHP/PHP-CS-Fixer/
     ->setRules([
         '@PSR2' => true,
@@ -72,11 +76,7 @@ $config = PhpCsFixer\Config::create()
         'unary_operator_spaces' => true,
         'whitespace_after_comma_in_array' => true,
     ])
-    ->setRiskyAllowed(true)
-    ->registerCustomFixers([
-        new ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer(),
-        new ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer(),
-    ]);
+    ->setRiskyAllowed(true);
 
 // Twig templates of PHP scripts cannot be linted and cause php-cs-fixer to fail
 $config->getFinder()->notName('*.php.twig');
