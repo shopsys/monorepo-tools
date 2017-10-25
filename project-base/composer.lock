@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff93db8e3a669e32713ed8fc14b568ad",
+    "content-hash": "9fc3ee4f5fa31692ba73e2be2eb045ad",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -514,11 +514,11 @@
                 "symfony/yaml": "~2.7|~3.0"
             },
             "require-dev": {
-                "doctrine/common": "~2.3",
-                "phpunit/phpunit": "~4.1",
+                "doctrine/doctrine-bundle": "~1.0",
+                "phpunit/phpunit": "^4.8.35|~5.7|~6.0",
                 "sensio/framework-extra-bundle": "~3.0",
-                "symfony/phpunit-bridge": "~2.7",
-                "symfony/symfony": "^2.6.4|~3.0"
+                "symfony/phpunit-bridge": "^3.2.5",
+                "symfony/symfony": "~2.7|~3.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -554,7 +554,7 @@
                 "symfony3",
                 "wizard"
             ],
-            "time": "2015-12-16T13:19:06+00:00"
+            "time": "2017-09-04T11:06:52+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -5321,7 +5321,7 @@
             ],
             "authors": [
                 {
-                    "name": "Shopsys",
+                    "name": "ShopSys",
                     "homepage": "https://www.shopsys.com/"
                 }
             ],
@@ -6695,7 +6695,7 @@
             ],
             "description": "A JavaScript parsing library for PHP",
             "support": {
-                "source": "https://github.com/sustmi/jparser/tree/get-rid-of-import"
+                "source": "https://github.com/shopsys/jparser/tree/get-rid-of-import"
             },
             "time": "2015-10-17T12:17:30+00:00"
         },
@@ -7795,16 +7795,16 @@
         },
         {
             "name": "shopsys/coding-standards",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/coding-standards.git",
-                "reference": "c9263a009714f318d11bb8f3d7b7042916f4fad2"
+                "reference": "516d08b0ab98d8096114b8402841919418e0ce20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/coding-standards/zipball/c9263a009714f318d11bb8f3d7b7042916f4fad2",
-                "reference": "c9263a009714f318d11bb8f3d7b7042916f4fad2",
+                "url": "https://api.github.com/repos/shopsys/coding-standards/zipball/516d08b0ab98d8096114b8402841919418e0ce20",
+                "reference": "516d08b0ab98d8096114b8402841919418e0ce20",
                 "shasum": ""
             },
             "require": {
@@ -7839,7 +7839,7 @@
                 "code quality",
                 "coding standards"
             ],
-            "time": "2017-10-12T14:37:06+00:00"
+            "time": "2017-10-31T15:07:09+00:00"
         },
         {
             "name": "shopsys/http-smoke-testing",
@@ -7878,7 +7878,7 @@
             ],
             "authors": [
                 {
-                    "name": "Shopsys",
+                    "name": "ShopSys",
                     "homepage": "https://www.shopsys.com/"
                 }
             ],
