@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - plugins can now extend the CRUD of categories (using `CategoryFormType`) (@MattCzerner)
 
 ### Changed
+- cache deletion before running unit tests is now done using `Symfony\Filesystem` instead of using console command (@TomasLudvik)
+    - deleting via console command `cache:clear` is slow, because it creates whole application container first and then deletes all cache created in process
 - Windows locales list: use more tolerant name for Czech locale (@vitek-rostislav)
     - in Windows 2017 Fall Creators Update the locale name was changed from "Czech_Czech Republic" to "Czech_Czechia"
     - name "Czech" is acceptable in all Windows versions
