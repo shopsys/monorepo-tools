@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 Changes are described since release 3.0.2.
+### Fixed
+- enabled custom fixers (@vitek-rostislav)
 
 ## [3.1.0] - 2017-10-12
 ### Added
