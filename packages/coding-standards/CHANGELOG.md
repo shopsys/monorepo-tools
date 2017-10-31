@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 Changes are described since release 3.0.2.
+
+## [3.1.1] - 2017-10-31
 ### Fixed
 - enabled custom fixers (@vitek-rostislav)
 
@@ -45,5 +47,6 @@ Changes are described since release 3.0.2.
 ### Deleted
 - Redundant rules which were already covered by other rules (@vitek-rostislav)
 
-[Unreleased]: https://github.com/shopsys/coding-standards/compare/v3.1.0...HEAD
+[Unreleased]: https://github.com/shopsys/coding-standards/compare/v3.1.1...HEAD
+[3.1.1]: https://github.com/shopsys/coding-standards/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/shopsys/coding-standards/compare/v3.0.2...v3.1.0
