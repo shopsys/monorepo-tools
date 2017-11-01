@@ -6,7 +6,7 @@ use Shopsys\HttpSmokeTesting\Auth\AuthInterface;
 use Shopsys\HttpSmokeTesting\Auth\NoAuth;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class RequestDataSet
+class RequestDataSet implements RequestDataSetConfig
 {
     const DEFAULT_EXPECTED_STATUS_CODE = 200;
 
@@ -115,7 +115,7 @@ class RequestDataSet
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-     * @return \Shopsys\HttpSmokeTesting\RequestDataSet
+     * @return $this
      */
     public function executeCallsDuringTestExecution(ContainerInterface $container)
     {
@@ -127,7 +127,7 @@ class RequestDataSet
     }
 
     /**
-     * @return \Shopsys\HttpSmokeTesting\RequestDataSet
+     * @return $this
      */
     public function skip()
     {
@@ -138,7 +138,7 @@ class RequestDataSet
 
     /**
      * @param \Shopsys\HttpSmokeTesting\Auth\AuthInterface $auth
-     * @return \Shopsys\HttpSmokeTesting\RequestDataSet
+     * @return $this
      */
     public function setAuth(AuthInterface $auth)
     {
@@ -149,7 +149,7 @@ class RequestDataSet
 
     /**
      * @param int $code
-     * @return \Shopsys\HttpSmokeTesting\RequestDataSet
+     * @return $this
      */
     public function setExpectedStatusCode($code)
     {
@@ -161,7 +161,7 @@ class RequestDataSet
     /**
      * @param string $name
      * @param mixed $value
-     * @return \Shopsys\HttpSmokeTesting\RequestDataSet
+     * @return $this
      */
     public function setParameter($name, $value)
     {
@@ -172,7 +172,7 @@ class RequestDataSet
 
     /**
      * @param string $debugNote
-     * @return \Shopsys\HttpSmokeTesting\RequestDataSet
+     * @return $this
      */
     public function addDebugNote($debugNote)
     {
@@ -187,7 +187,7 @@ class RequestDataSet
      * Useful for code that needs to access the same instance of container as the test method.
      *
      * @param callable $callback
-     * @return \Shopsys\HttpSmokeTesting\RequestDataSet
+     * @return $this
      */
     public function addCallDuringTestExecution($callback)
     {
@@ -203,7 +203,7 @@ class RequestDataSet
      * Values that were not specified in $requestDataSet have no effect on result.
      *
      * @param \Shopsys\HttpSmokeTesting\RequestDataSet $requestDataSet
-     * @return \Shopsys\HttpSmokeTesting\RequestDataSet
+     * @return $this
      */
     public function mergeExtraValuesFrom(RequestDataSet $requestDataSet)
     {
