@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9fc3ee4f5fa31692ba73e2be2eb045ad",
+    "content-hash": "53f1903837cc4e5dfb0c4d918bd6c068",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -7843,16 +7843,16 @@
         },
         {
             "name": "shopsys/http-smoke-testing",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/http-smoke-testing.git",
-                "reference": "40f6ff5079e381fc1d088dcd74f91e3604e8a06f"
+                "reference": "a23a3ceae8dcb37929138c7fc858420f8fb45341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/http-smoke-testing/zipball/40f6ff5079e381fc1d088dcd74f91e3604e8a06f",
-                "reference": "40f6ff5079e381fc1d088dcd74f91e3604e8a06f",
+                "url": "https://api.github.com/repos/shopsys/http-smoke-testing/zipball/a23a3ceae8dcb37929138c7fc858420f8fb45341",
+                "reference": "a23a3ceae8dcb37929138c7fc858420f8fb45341",
                 "shasum": ""
             },
             "require": {
@@ -7878,7 +7878,7 @@
             ],
             "authors": [
                 {
-                    "name": "ShopSys",
+                    "name": "Shopsys",
                     "homepage": "https://www.shopsys.com/"
                 }
             ],
@@ -7890,7 +7890,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2017-07-03T13:12:28+00:00"
+            "time": "2017-11-01T11:42:42+00:00"
         },
         {
             "name": "shopsys/phpstorm-inspect",
