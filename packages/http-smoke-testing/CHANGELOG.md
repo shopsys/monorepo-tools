@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.1.0] - 2017-11-01
 ### Added
 - [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
 - [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
@@ -24,5 +26,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Extracted HTTP smoke testing functionality from [Shopsys Framework](http://www.shopsys-framework.com/) (@PetrHeinz)
 - `.travis.yml` file with Travis CI configuration (@PetrHeinz)
 
-[Unreleased]: https://github.com/shopsys/http-smoke-testing/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/shopsys/http-smoke-testing/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/shopsys/http-smoke-testing/compare/v1.0.0...v1.1.0
 [1.0.1]: https://github.com/shopsys/http-smoke-testing/compare/v1.0.0...v1.0.1
