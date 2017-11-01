@@ -12,13 +12,13 @@ interface RouteConfig
 
     /**
      * @param string|null $debugNote
-     * @return \Shopsys\HttpSmokeTesting\RequestDataSet
+     * @return \Shopsys\HttpSmokeTesting\RequestDataSetConfig
      */
     public function changeDefaultRequestDataSet($debugNote = null);
 
     /**
      * @param string|null $debugNote
-     * @return \Shopsys\HttpSmokeTesting\RequestDataSet
+     * @return \Shopsys\HttpSmokeTesting\RequestDataSetConfig
      */
     public function addExtraRequestDataSet($debugNote = null);
 }
