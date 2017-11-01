@@ -6,7 +6,7 @@ interface RouteConfig
 {
     /**
      * @param string|null $debugNote
-     * @return \Shopsys\HttpSmokeTesting\RouteConfig
+     * @return $this
      */
     public function skipRoute($debugNote = null);
 
