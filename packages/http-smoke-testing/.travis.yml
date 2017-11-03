@@ -1,11 +1,19 @@
 language: php
 
 php:
-  - '5.6'
-  - '7.0'
+  - 5.6
+  - 7.0
+  - 7.1
+
+matrix:
+  include:
+    - php: 5.6
+      env: DEPENDENCIES="--prefer-lowest --prefer-stable"
+    - php: 7.1
+      env: DEPENDENCIES="--prefer-lowest --prefer-stable"
 
 install:
-  - composer install
+  - travis_retry composer update $DEPENDENCIES
 
 script:
   - php vendor/bin/parallel-lint ./src ./tests
