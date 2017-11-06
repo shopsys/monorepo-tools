@@ -43,7 +43,7 @@ class PostgresqlLocaleMapper
         'bn_IN' => 'Bangla_India',
         'br_FR' => 'Breton_France',
         'ca_ES' => 'Catalan_Spain',
-        'cs_CZ' => 'Czech_Czech Republic',
+        'cs_CZ' => 'Czech',
         'cy_GB' => 'Welsh_United Kingdom',
         'da_DK' => 'Danish_Denmark',
         'de_AT' => 'German_Austria',
