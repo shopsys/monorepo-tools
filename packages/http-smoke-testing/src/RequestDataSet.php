@@ -205,7 +205,7 @@ class RequestDataSet implements RequestDataSetConfig
      * @param \Shopsys\HttpSmokeTesting\RequestDataSet $requestDataSet
      * @return $this
      */
-    public function mergeExtraValuesFrom(RequestDataSet $requestDataSet)
+    public function mergeExtraValuesFrom(self $requestDataSet)
     {
         if ($requestDataSet->auth !== null) {
             $this->setAuth($requestDataSet->getAuth());
