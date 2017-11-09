@@ -19,13 +19,24 @@
 
         {{ form_row(form.password, {label: 'Password'|trans} ) }}
 
-        {{ form_row(form.rememberMe, {
-            label: 'Remember my login'|trans,
-            icon: {
-                type: 'info',
-                title: 'We will remember your login on this computer for 30 days.'|trans
-            }
-        }) }}
+        <dl class="form-line">
+            <dt></dt>
+            <dd>
+                <label class="form-choice">
+                    <span class="form-choice__input">
+                        {{ form_widget(form.rememberMe) }}
+                    </span>
+                    <span class="form-choice__label">
+                        {{ 'Remember my login'|trans }}
+                        <i class="svg svg-info in-icon in-icon--info js-tooltip"
+                           data-toggle="tooltip"
+                           data-placement="right"
+                           title="{{ 'We will remember your login on this computer for 30 days.'|trans }}"
+                        ></i>
+                    </span>
+                </label>
+            </dd>
+        </dl>
 
         <dl class="form-line">
             <dt></dt>
