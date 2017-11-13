@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\SettingValueDataFixture as BaseSettingValueDataFixture;
 use Shopsys\ShopBundle\Model\Customer\User;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -51,7 +51,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     public function getDependencies()
     {
         return [
-            SettingValueDataFixture::class,
+            BaseSettingValueDataFixture::class,
             CountryDataFixture::class,
         ];
     }
