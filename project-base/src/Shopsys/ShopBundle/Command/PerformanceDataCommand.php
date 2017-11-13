@@ -37,11 +37,11 @@ class PerformanceDataCommand extends ContainerAwareCommand
         /* @var $orderDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture */
 
         $output->writeln('<fg=green>loading ' . CategoryDataFixture::class . '</fg=green>');
-        $categoryDataFixture->load();
+        $categoryDataFixture->load($output);
         $output->writeln('<fg=green>loading ' . ProductDataFixture::class . '</fg=green>');
         $productDataFixture->load($output);
         $output->writeln('<fg=green>loading ' . UserDataFixture::class . '</fg=green>');
-        $userDataFixture->load();
+        $userDataFixture->load($output);
         $output->writeln('<fg=green>loading ' . OrderDataFixture::class . '</fg=green>');
         $orderDataFixture->load($output);
     }
