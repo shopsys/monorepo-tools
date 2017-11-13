@@ -795,3 +795,8 @@ services:
     class: Twig_Loader_Array
     tags:
       - { name: twig.loader }
+
+  shopsys.shop.component.validator.constraints.unique_email:
+    class: Shopsys\ShopBundle\Component\Constraints\UniqueEmailValidator
+    tags:
+      - { name: validator.constraint_validator, alias: Shopsys\ShopBundle\Component\Constraints\UniqueEmailValidator }
