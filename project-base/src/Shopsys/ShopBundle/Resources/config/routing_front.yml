@@ -116,3 +116,8 @@ front_search_autocomplete:
   path: /search/autocomplete/
   defaults: { _controller: ShopsysShopBundle:Front\Search:autocomplete }
   methods: [POST]
+
+front_registration_exists_email:
+  path: /registration/exists-email
+  defaults: { _controller: ShopsysShopBundle:Front\Registration:existsEmail }
+  methods: [POST]

@@ -8,6 +8,7 @@ use Shopsys\ShopBundle\Form\Front\Registration\RegistrationFormType;
 use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
 use Shopsys\ShopBundle\Model\Security\LoginService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class RegistrationController extends FrontBaseController
@@ -42,6 +43,14 @@ class RegistrationController extends FrontBaseController
         $this->userDataFactory = $userDataFactory;
         $this->customerFacade = $customerFacade;
         $this->loginService = $loginService;
+    }
+
+    public function existsEmailAction(Request $request)
+    {
+        $email = $request->get('email');
+        $user = $this->customerFacade->findUserByEmailAndDomain($email, $this->domain->getId());
+
+        return new JsonResponse($user !== null);
     }
 
     public function registerAction(Request $request)

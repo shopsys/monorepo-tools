@@ -60,7 +60,7 @@ class CustomerFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Customer\User|null
      */
-    private function findUserByEmailAndDomain($email, $domainId)
+    public function findUserByEmailAndDomain($email, $domainId)
     {
         return $this->userRepository->findUserByEmailAndDomain($email, $domainId);
     }

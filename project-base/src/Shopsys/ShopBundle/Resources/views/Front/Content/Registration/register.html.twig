@@ -13,7 +13,7 @@
 
         {{ form_row(form.firstName, { label: 'First name'|trans }) }}
         {{ form_row(form.lastName, { label: 'Last name'|trans }) }}
-        {{ form_row(form.email, { label: 'E-mail'|trans }) }}
+        {{ form_row(form.email, { label: 'E-mail'|trans , attr: {'data-request-url' : url('front_registration_exists_email') } }) }}
         {{ form_row(form.password.first, {
             label: 'Password'|trans,
             icon: {
