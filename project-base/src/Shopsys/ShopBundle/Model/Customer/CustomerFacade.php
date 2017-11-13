@@ -138,7 +138,7 @@ class CustomerFacade
      */
     private function edit($userId, CustomerData $customerData)
     {
-        $user = $this->userRepository->getUserById($userId);
+        $user = $this->getUserById($userId);
 
         $this->customerService->edit($user, $customerData->userData);
 
@@ -201,7 +201,7 @@ class CustomerFacade
      */
     public function delete($userId)
     {
-        $user = $this->userRepository->getUserById($userId);
+        $user = $this->getUserById($userId);
 
         $this->em->remove($user);
         $this->em->flush();
