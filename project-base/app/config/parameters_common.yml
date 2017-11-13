@@ -3,3 +3,9 @@ parameters:
   # Symfony's FrameworkBundle sets throw_at (error_reporting) to 0 in production by default
   debug.error_handler.throw_at: -1
   locale: en
+  # Performance data parameters
+  shopsys.performance_data.category.counts_by_level: [2, 4, 6]
+  shopsys.performance_data.product.total_count: 40000
+  shopsys.performance_data.user.count_per_domain: 100
+  shopsys.performance_data.order.total_count: 50000
+  shopsys.performance_data.order.item_count_per_order: 6

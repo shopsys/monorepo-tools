@@ -16,8 +16,12 @@ use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
 
 class UserDataFixture
 {
-    const USERS_ON_EACH_DOMAIN = 100;
     const FIRST_PERFORMANCE_USER = 'first_performance_user';
+
+    /**
+     * @var int
+     */
+    private $userCountPerDomain;
 
     /**
      * @var \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
@@ -54,7 +58,18 @@ class UserDataFixture
      */
     private $persistentReferenceFacade;
 
+    /**
+     * @param int $userCountPerDomain
+     * @param \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
+     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
+     * @param \Shopsys\ShopBundle\Model\Customer\CustomerFacade $customerEditFacade
+     * @param \Shopsys\ShopBundle\Model\Customer\UserDataFactory $userDataFactory
+     * @param \Faker\Generator $faker
+     * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     */
     public function __construct(
+        $userCountPerDomain,
         EntityManagerFacade $entityManagerFacade,
         Domain $domain,
         SqlLoggerFacade $sqlLoggerFacade,
@@ -70,6 +85,7 @@ class UserDataFixture
         $this->userDataFactory = $userDataFactory;
         $this->faker = $faker;
         $this->persistentReferenceFacade = $persistentReferenceFacade;
+        $this->userCountPerDomain = $userCountPerDomain;
     }
 
     public function load()
@@ -80,7 +96,7 @@ class UserDataFixture
         $isFirstUser = true;
 
         foreach ($this->domain->getAll() as $domainConfig) {
-            for ($i = 0; $i < self::USERS_ON_EACH_DOMAIN; $i++) {
+            for ($i = 0; $i < $this->userCountPerDomain; $i++) {
                 $user = $this->createCustomerOnDomain($domainConfig->getId(), $i);
 
                 if ($isFirstUser) {

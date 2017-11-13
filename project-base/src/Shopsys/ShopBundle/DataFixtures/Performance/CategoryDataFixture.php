@@ -31,7 +31,7 @@ class CategoryDataFixture
     /**
      * @var int[]
      */
-    private $categoriesCountsByLevel;
+    private $categoryCountsByLevel;
 
     /**
      * @var int
@@ -43,16 +43,24 @@ class CategoryDataFixture
      */
     private $persistentReferenceFacade;
 
+    /**
+     * @param int[] $categoryCountsByLevel
+     * @param \Shopsys\ShopBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
+     * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     * @param \Faker\Generator $faker
+     */
     public function __construct(
+        $categoryCountsByLevel,
         CategoryFacade $categoryFacade,
         SqlLoggerFacade $sqlLoggerFacade,
         PersistentReferenceFacade $persistentReferenceFacade,
         Faker $faker
     ) {
+        $this->categoryCountsByLevel = $categoryCountsByLevel;
         $this->categoryFacade = $categoryFacade;
         $this->sqlLoggerFacade = $sqlLoggerFacade;
         $this->faker = $faker;
-        $this->categoriesCountsByLevel = [2, 4, 6];
         $this->categoriesCreated = 0;
         $this->persistentReferenceFacade = $persistentReferenceFacade;
     }
@@ -71,14 +79,14 @@ class CategoryDataFixture
      */
     private function recursivelyCreateCategoryTree($parentCategory, $categoryLevel = 0)
     {
-        for ($i = 0; $i < $this->categoriesCountsByLevel[$categoryLevel]; $i++) {
+        for ($i = 0; $i < $this->categoryCountsByLevel[$categoryLevel]; $i++) {
             $categoryData = $this->getRandomCategoryDataByParentCategory($parentCategory);
             $newCategory = $this->categoryFacade->create($categoryData);
             $this->categoriesCreated++;
             if ($this->categoriesCreated === 1) {
                 $this->persistentReferenceFacade->persistReference(self::FIRST_PERFORMANCE_CATEGORY, $newCategory);
             }
-            if (array_key_exists($categoryLevel + 1, $this->categoriesCountsByLevel)) {
+            if (array_key_exists($categoryLevel + 1, $this->categoryCountsByLevel)) {
                 $this->recursivelyCreateCategoryTree($newCategory, $categoryLevel + 1);
             }
         }

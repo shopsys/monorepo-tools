@@ -27,11 +27,19 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class OrderDataFixture
 {
-    const ORDERS_COUNT = 50000;
-    const PRODUCTS_PER_ORDER_COUNT = 6;
     const PERCENTAGE_OF_ORDERS_BY_REGISTERED_USERS = 25;
 
     const BATCH_SIZE = 10;
+
+    /**
+     * @var int
+     */
+    private $orderTotalCount;
+
+    /**
+     * @var int
+     */
+    private $orderItemCountPerOrder;
 
     /**
      * @var int[]
@@ -88,7 +96,22 @@ class OrderDataFixture
      */
     private $customerFacade;
 
+    /**
+     * @param int $orderTotalCount
+     * @param int $orderItemCountPerOrder
+     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
+     * @param \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
+     * @param \Faker\Generator $faker
+     * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     * @param \Shopsys\ShopBundle\Model\Order\OrderFacade $orderFacade
+     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory $orderPreviewFactory
+     * @param \Shopsys\ShopBundle\Model\Product\ProductFacade $productFacade
+     * @param \Shopsys\ShopBundle\Model\Customer\CustomerFacade $customerFacade
+     */
     public function __construct(
+        $orderTotalCount,
+        $orderItemCountPerOrder,
         EntityManager $em,
         EntityManagerFacade $entityManagerFacade,
         SqlLoggerFacade $sqlLoggerFacade,
@@ -99,6 +122,8 @@ class OrderDataFixture
         ProductFacade $productFacade,
         CustomerFacade $customerFacade
     ) {
+        $this->orderTotalCount = $orderTotalCount;
+        $this->orderItemCountPerOrder = $orderItemCountPerOrder;
         $this->performanceProductIds = [];
         $this->em = $em;
         $this->entityManagerFacade = $entityManagerFacade;
@@ -122,7 +147,7 @@ class OrderDataFixture
         $this->loadPerformanceProductIds();
         $this->loadPerformanceUserIdsOnFirstDomain();
 
-        $progressBar = new ProgressBar($output, self::ORDERS_COUNT);
+        $progressBar = new ProgressBar($output, $this->orderTotalCount);
         $progressBar->setFormat(
             '%current%/%max% [%bar%] %percent:3s%%,%speed:6.1f% orders/s (%step_duration:.3f% s/ord.),'
             . ' Elapsed: %elapsed_hms%, Remaining: %remaining_hms%, MEM:%memory:9s%'
@@ -130,7 +155,7 @@ class OrderDataFixture
         $progressBar->setRedrawFrequency(10);
         $progressBar->start();
 
-        for ($orderIndex = 0; $orderIndex < self::ORDERS_COUNT; $orderIndex++) {
+        for ($orderIndex = 0; $orderIndex < $this->orderTotalCount; $orderIndex++) {
             $this->createOrder();
 
             $progressBar->advance();
@@ -227,7 +252,7 @@ class OrderDataFixture
     {
         $quantifiedProducts = [];
 
-        $randomProductIds = $this->getRandomPerformanceProductIds(self::PRODUCTS_PER_ORDER_COUNT);
+        $randomProductIds = $this->getRandomPerformanceProductIds($this->orderItemCountPerOrder);
         foreach ($randomProductIds as $randomProductId) {
             $product = $this->productFacade->getById($randomProductId);
             $quantity = $this->faker->numberBetween(1, 10);
