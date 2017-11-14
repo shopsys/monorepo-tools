@@ -58,10 +58,14 @@ msgstr ""
 #: MailTemplateFormType.php:36
 #: OrderFormType.php:119
 #: PersonalInfoFormType.php:66
-#: RegistrationFormType.php:46
+#: RegistrationFormType.php:48
 #: ResetPasswordFormType.php:26
 #: UserFormType.php:64
 msgid "Email cannot be longer then {{ limit }} characters"
+msgstr ""
+
+#: RegistrationFormType.php:47
+msgid "Email {{ email }} is already registered"
 msgstr ""
 
 #: ProductFormType.php:240
@@ -73,7 +77,7 @@ msgstr ""
 
 #: OrderFormType.php:100
 #: PersonalInfoFormType.php:53
-#: RegistrationFormType.php:33
+#: RegistrationFormType.php:34
 #: UserFormType.php:29
 #: UserFormType.php:46
 msgid "First name cannot be longer then {{ limit }} characters"
@@ -128,7 +132,7 @@ msgstr ""
 
 #: OrderFormType.php:109
 #: PersonalInfoFormType.php:59
-#: RegistrationFormType.php:39
+#: RegistrationFormType.php:40
 #: UserFormType.php:35
 #: UserFormType.php:55
 msgid "Last name cannot be longer than {{ limit }} characters"
@@ -173,19 +177,19 @@ msgstr ""
 
 #: AdministratorFormType.php:67
 #: NewPasswordFormType.php:30
-#: RegistrationFormType.php:57
+#: RegistrationFormType.php:59
 #: UserFormType.php:50
 #: UserFormType.php:111
 msgid "Password cannot be longer then {{ limit }} characters"
 msgstr ""
 
-#: RegistrationFormType.php:80
+#: RegistrationFormType.php:82
 #: UserFormType.php:70
 #: UserFormType.php:140
 msgid "Password cannot be same as e-mail"
 msgstr ""
 
-#: RegistrationFormType.php:86
+#: RegistrationFormType.php:88
 #: UserFormType.php:76
 #: UserFormType.php:146
 msgid "Password cannot be same as part of e-mail before at sign"
@@ -199,7 +203,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Form/Admin/Customer/UserFormType.php:78
 #: src/Shopsys/ShopBundle/Form/Front/Customer/Password/NewPasswordFormType.php:33
 #: src/Shopsys/ShopBundle/Form/Front/Customer/UserFormType.php:53
-#: src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php:60
+#: src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php:62
 msgid "Passwords do not match"
 msgstr ""
 
@@ -361,7 +365,7 @@ msgstr ""
 #: MailSettingFormType.php:25
 #: OrderFormType.php:115
 #: PersonalInfoFormType.php:64
-#: RegistrationFormType.php:44
+#: RegistrationFormType.php:45
 #: ResetPasswordFormType.php:24
 #: UserFormType.php:61
 msgid "Please enter e-mail"
@@ -373,7 +377,7 @@ msgstr ""
 
 #: OrderFormType.php:97
 #: PersonalInfoFormType.php:52
-#: RegistrationFormType.php:32
+#: RegistrationFormType.php:33
 #: UserFormType.php:28
 #: UserFormType.php:43
 msgid "Please enter first name"
@@ -411,7 +415,7 @@ msgstr ""
 
 #: OrderFormType.php:106
 #: PersonalInfoFormType.php:58
-#: RegistrationFormType.php:38
+#: RegistrationFormType.php:39
 #: UserFormType.php:34
 #: UserFormType.php:52
 msgid "Please enter last name"
@@ -462,7 +466,7 @@ msgstr ""
 #: LoginFormType.php:30
 #: LoginFormType.php:32
 #: NewPasswordFormType.php:29
-#: RegistrationFormType.php:56
+#: RegistrationFormType.php:58
 #: UserFormType.php:116
 msgid "Please enter password"
 msgstr ""
@@ -558,7 +562,7 @@ msgstr ""
 #: MailSettingFormType.php:26
 #: OrderFormType.php:116
 #: PersonalInfoFormType.php:65
-#: RegistrationFormType.php:45
+#: RegistrationFormType.php:46
 #: ResetPasswordFormType.php:25
 #: UserFormType.php:66
 msgid "Please enter valid e-mail"
