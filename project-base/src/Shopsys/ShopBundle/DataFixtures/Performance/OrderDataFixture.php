@@ -265,17 +265,17 @@ class OrderDataFixture
 
     private function loadPerformanceProductIds()
     {
-        $firstPerformaceProduct = $this->persistentReferenceFacade->getReference(
+        $firstPerformanceProduct = $this->persistentReferenceFacade->getReference(
             PerformanceProductDataFixture::FIRST_PERFORMANCE_PRODUCT
         );
-        /* @var $firstPerformaceProduct \Shopsys\ShopBundle\Model\Product\Product */
+        /* @var $firstPerformanceProduct \Shopsys\ShopBundle\Model\Product\Product */
 
         $qb = $this->em->createQueryBuilder()
             ->select('p.id')
             ->from(Product::class, 'p')
             ->where('p.id >= :firstPerformanceProductId')
             ->andWhere('p.variantType != :mainVariantType')
-            ->setParameter('firstPerformanceProductId', $firstPerformaceProduct->getId())
+            ->setParameter('firstPerformanceProductId', $firstPerformanceProduct->getId())
             ->setParameter('mainVariantType', Product::VARIANT_TYPE_MAIN);
 
         $this->performanceProductIds = array_map('array_pop', $qb->getQuery()->getResult());
@@ -292,17 +292,17 @@ class OrderDataFixture
 
     private function loadPerformanceUserIdsOnFirstDomain()
     {
-        $firstPerformaceUser = $this->persistentReferenceFacade->getReference(
+        $firstPerformanceUser = $this->persistentReferenceFacade->getReference(
             PerformanceUserDataFixture::FIRST_PERFORMANCE_USER
         );
-        /* @var $firstPerformaceUser \Shopsys\ShopBundle\Model\Customer\User */
+        /* @var $firstPerformanceUser \Shopsys\ShopBundle\Model\Customer\User */
 
         $qb = $this->em->createQueryBuilder()
             ->select('u.id')
             ->from(User::class, 'u')
             ->where('u.id >= :firstPerformanceUserId')
             ->andWhere('u.domainId = :domainId')
-            ->setParameter('firstPerformanceUserId', $firstPerformaceUser->getId())
+            ->setParameter('firstPerformanceUserId', $firstPerformanceUser->getId())
             ->setParameter('domainId', 1);
 
         $this->performanceUserIds = array_map('array_pop', $qb->getQuery()->getResult());
