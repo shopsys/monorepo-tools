@@ -278,7 +278,7 @@ class OrderDataFixture
             ->setParameter('firstPerformanceProductId', $firstPerformanceProduct->getId())
             ->setParameter('mainVariantType', Product::VARIANT_TYPE_MAIN);
 
-        $this->performanceProductIds = array_map('array_pop', $qb->getQuery()->getResult());
+        $this->performanceProductIds = array_column($qb->getQuery()->getScalarResult(), 'id');
     }
 
     /**
@@ -305,7 +305,7 @@ class OrderDataFixture
             ->setParameter('firstPerformanceUserId', $firstPerformanceUser->getId())
             ->setParameter('domainId', 1);
 
-        $this->performanceUserIds = array_map('array_pop', $qb->getQuery()->getResult());
+        $this->performanceUserIds = array_column($qb->getQuery()->getScalarResult(), 'id');
     }
 
     /**
