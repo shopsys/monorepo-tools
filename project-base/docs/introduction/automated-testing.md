@@ -164,7 +164,7 @@ It is advised to run these tests on a separate server that is not under load at 
 * preventing application collapse on production data load
 
 #### Example:
-See configuration of performance (and [HTTP smoke](#http-smoke-tests)) tests in [`\Tests\ShopBundle\Smoke\Http\UrlsProvider`](../../tests/ShopBundle/Smoke/Http/UrlsProvider.php).
+See configuration of performance (and [HTTP smoke](#http-smoke-tests)) tests in [`\Tests\ShopBundle\Smoke\Http\RouteConfigCustomization`](../../tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php).
 
 For testing performance of something else than controller actions see implementation of feed performance test in [`\Tests\ShopBundle\Performance\Feed\AllFeedsTest`](../../tests/ShopBundle/Performance/Feed/AllFeedsTest.php).
 
