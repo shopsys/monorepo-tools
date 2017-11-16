@@ -209,7 +209,7 @@ class AllPagesTest extends KernelTestCase
     private function doAssert(
         array $performanceTestSamples
     ) {
-        $performanceTestSampleQualifier = new PerformanceTestSampleQualifier();
+        $performanceTestSampleQualifier = $this->createPerformanceTestSampleQualifier();
 
         $overallStatus = $performanceTestSampleQualifier->getOverallStatus($performanceTestSamples);
 
@@ -254,7 +254,7 @@ class AllPagesTest extends KernelTestCase
      */
     private function printPerformanceTestsSummary(array $performanceTestSamples, ConsoleOutput $consoleOutput)
     {
-        $performanceTestSampleQualifier = new PerformanceTestSampleQualifier();
+        $performanceTestSampleQualifier = $this->createPerformanceTestSampleQualifier();
         $performanceTestSummaryPrinter = new PerformanceTestSummaryPrinter($performanceTestSampleQualifier);
 
         $performanceTestSummaryPrinter->printSummary($performanceTestSamples, $consoleOutput);
@@ -291,5 +291,20 @@ class AllPagesTest extends KernelTestCase
         $connectionConfiguration->setSQLLogger($loggerChain);
 
         return $queryCounter;
+    }
+
+    /**
+     * @return \Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier
+     */
+    private function createPerformanceTestSampleQualifier()
+    {
+        $container = self::$kernel->getContainer();
+
+        return new PerformanceTestSampleQualifier(
+            $container->getParameter('shopsys.performance_test.page.duration_milliseconds.warning'),
+            $container->getParameter('shopsys.performance_test.page.duration_milliseconds.critical'),
+            $container->getParameter('shopsys.performance_test.page.query_count.warning'),
+            $container->getParameter('shopsys.performance_test.page.query_count.critical')
+        );
     }
 }

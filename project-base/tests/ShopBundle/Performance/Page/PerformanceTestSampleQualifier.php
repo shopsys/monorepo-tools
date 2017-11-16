@@ -8,11 +8,39 @@ class PerformanceTestSampleQualifier
     const STATUS_WARNING = 1;
     const STATUS_CRITICAL = 2;
 
-    const DURATION_WARNING = 1000;
-    const DURATION_CRITICAL = 3000;
+    /**
+     * @var int
+     */
+    private $durationWarning;
 
-    const QUERY_COUNT_WARNING = 100;
-    const QUERY_COUNT_CRITICAL = 300;
+    /**
+     * @var int
+     */
+    private $durationCritical;
+
+    /**
+     * @var int
+     */
+    private $queryCountWarning;
+
+    /**
+     * @var int
+     */
+    private $queryCountCritical;
+
+    /**
+     * @param int $durationWarning
+     * @param int $durationCritical
+     * @param int $queryCountWarning
+     * @param int $queryCountCritical
+     */
+    public function __construct($durationWarning, $durationCritical, $queryCountWarning, $queryCountCritical)
+    {
+        $this->durationWarning = $durationWarning;
+        $this->durationCritical = $durationCritical;
+        $this->queryCountWarning = $queryCountWarning;
+        $this->queryCountCritical = $queryCountCritical;
+    }
 
     /**
      * @param float $duration
@@ -20,9 +48,9 @@ class PerformanceTestSampleQualifier
      */
     public function getStatusForDuration($duration)
     {
-        if ($duration >= self::DURATION_CRITICAL) {
+        if ($duration >= $this->durationCritical) {
             return self::STATUS_CRITICAL;
-        } elseif ($duration >= self::DURATION_WARNING) {
+        } elseif ($duration >= $this->durationWarning) {
             return self::STATUS_WARNING;
         }
 
@@ -35,9 +63,9 @@ class PerformanceTestSampleQualifier
      */
     public function getStatusForQueryCount($queryCount)
     {
-        if ($queryCount >= self::QUERY_COUNT_CRITICAL) {
+        if ($queryCount >= $this->queryCountCritical) {
             return self::STATUS_CRITICAL;
-        } elseif ($queryCount >= self::QUERY_COUNT_WARNING) {
+        } elseif ($queryCount >= $this->queryCountWarning) {
             return self::STATUS_WARNING;
         }
 
