@@ -23,7 +23,6 @@ use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
 use Shopsys\ShopBundle\Model\Order\OrderFacade;
 use Shopsys\ShopBundle\Model\Security\LoginAsUserFacade;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -123,21 +122,17 @@ class CustomerController extends AdminBaseController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            try {
-                $this->customerFacade->editByAdmin($id, $customerData);
+            $this->customerFacade->editByAdmin($id, $customerData);
 
-                $this->getFlashMessageSender()->addSuccessFlashTwig(
-                    t('Customer <strong><a href="{{ url }}">{{ name }}</a></strong> modified'),
-                    [
-                        'name' => $user->getFullName(),
-                        'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
-                    ]
-                );
+            $this->getFlashMessageSender()->addSuccessFlashTwig(
+                t('Customer <strong><a href="{{ url }}">{{ name }}</a></strong> modified'),
+                [
+                    'name' => $user->getFullName(),
+                    'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
+                ]
+            );
 
-                return $this->redirectToRoute('admin_customer_list');
-            } catch (\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-                $form->get('email')->addError(new FormError(t('There is already a customer with this e-mail in the database')));
-            }
+            return $this->redirectToRoute('admin_customer_list');
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {
@@ -225,23 +220,17 @@ class CustomerController extends AdminBaseController
 
         if ($form->isValid()) {
             $customerData = $form->getData();
+            $user = $this->customerFacade->create($customerData);
 
-            try {
-                $user = $this->customerFacade->create($customerData);
+            $this->getFlashMessageSender()->addSuccessFlashTwig(
+                t('Customer <strong><a href="{{ url }}">{{ name }}</a></strong> created'),
+                [
+                    'name' => $user->getFullName(),
+                    'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
+                ]
+            );
 
-                $this->getFlashMessageSender()->addSuccessFlashTwig(
-                    t('Customer <strong><a href="{{ url }}">{{ name }}</a></strong> created'),
-                    [
-                        'name' => $user->getFullName(),
-                        'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
-                    ]
-                );
-
-                return $this->redirectToRoute('admin_customer_list');
-            } catch (\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-                $formErrorMessage = t('There is already a customer with this e-mail in the database');
-                $form->get('userData')->get('email')->addError(new FormError($formErrorMessage));
-            }
+            return $this->redirectToRoute('admin_customer_list');
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {

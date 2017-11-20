@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - parameters that are in `parameters.yml` or `parameters_test.yml` that are not in their `.dist` templates are not removed during `composer install` anymore (@PetrHeinz)
+- customer creating controllers are not catching exception for duplicate email, it is not necessary since it is done by UniqueEmail constraint now (@MattCzerner)
 
 ## [2.0.0-beta.18.0] - 2017-10-19
 ### Added

@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Form\Front\Registration;
 use Shopsys\ShopBundle\Component\Constraints\Email;
 use Shopsys\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
 use Shopsys\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
+use Shopsys\ShopBundle\Component\Constraints\UniqueEmail;
 use Shopsys\ShopBundle\Form\HoneyPotType;
 use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
 use Shopsys\ShopBundle\Model\Customer\UserData;
@@ -44,6 +45,7 @@ class RegistrationFormType extends AbstractType
                     new Constraints\NotBlank(['message' => 'Please enter e-mail']),
                     new Email(['message' => 'Please enter valid e-mail']),
                     new Constraints\Length(['max' => 255, 'maxMessage' => 'Email cannot be longer then {{ limit }} characters']),
+                    new UniqueEmail(),
                 ],
             ])
             ->add('password', RepeatedType::class, [

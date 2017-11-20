@@ -56,12 +56,22 @@ class CustomerFacade
     }
 
     /**
+     * @param string $email
+     * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Customer\User|null
+     */
+    public function findUserByEmailAndDomain($email, $domainId)
+    {
+        return $this->userRepository->findUserByEmailAndDomain($email, $domainId);
+    }
+
+    /**
      * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
      * @return \Shopsys\ShopBundle\Model\Customer\User
      */
     public function register(UserData $userData)
     {
-        $userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain($userData->email, $userData->domainId);
+        $userByEmailAndDomain = $this->findUserByEmailAndDomain($userData->email, $userData->domainId);
 
         $billingAddress = new BillingAddress(new BillingAddressData());
 
@@ -98,7 +108,7 @@ class CustomerFacade
             $toFlush[] = $deliveryAddress;
         }
 
-        $userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain(
+        $userByEmailAndDomain = $this->findUserByEmailAndDomain(
             $customerData->userData->email,
             $customerData->userData->domainId
         );
@@ -128,7 +138,7 @@ class CustomerFacade
      */
     private function edit($userId, CustomerData $customerData)
     {
-        $user = $this->userRepository->getUserById($userId);
+        $user = $this->getUserById($userId);
 
         $this->customerService->edit($user, $customerData->userData);
 
@@ -161,7 +171,7 @@ class CustomerFacade
     {
         $user = $this->edit($userId, $customerData);
 
-        $userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain(
+        $userByEmailAndDomain = $this->findUserByEmailAndDomain(
             $customerData->userData->email,
             $customerData->userData->domainId
         );
@@ -191,7 +201,7 @@ class CustomerFacade
      */
     public function delete($userId)
     {
-        $user = $this->userRepository->getUserById($userId);
+        $user = $this->getUserById($userId);
 
         $this->em->remove($user);
         $this->em->flush();

@@ -126,31 +126,39 @@
 
     // Custom behavior:
     // - disable JS validation for forms with class js-no-validate
-    // - let the submit event propagate instead of stoping it and then calling item.submit()
     // - do not submit if custom "on-submit" code is specified
+    // - do not submit if ajax queue is not empty
+    // - clears callbacks if ajax queue exists, because while validation is done via ajax,
+    //   there can be loaded callbacks from last form submit which can cause duplicated form error windows
     // (the rest is copy&pasted from original method; eg. ajax validation)
     FpJsFormValidator.customizeMethods.submitForm = function (event) {
+        var $form = $(this);
         if (!$(this).hasClass('js-no-validate')) {
             FpJsFormValidator.each(this, function (item) {
                 var element = item.jsFormValidator;
                 element.validateRecursively();
-                if (FpJsFormValidator.ajax.queue) {
-                    FpJsFormValidator.ajax.callbacks.push(function () {
-                        element.onValidate.apply(element.domNode, [FpJsFormValidator.getAllErrors(element, {}), event]);
-                        if (element.isValid()) {
-                            item.submit();
-                        }
-                    });
-                } else {
-                    element.onValidate.apply(element.domNode, [FpJsFormValidator.getAllErrors(element, {}), event]);
-                }
+                element.onValidate.apply(element.domNode, [FpJsFormValidator.getAllErrors(element, {}), event]);
             });
-            if (!Shopsys.validation.isFormValid(this)) {
+            if (!FpJsFormValidator.ajax.queue) {
+                if (!Shopsys.validation.isFormValid(this)) {
+                    event.preventDefault();
+                    Shopsys.validation.showFormErrorsWindow(this);
+                } else if ($(this).hasData('on-submit')) {
+                    $(this).trigger($(this).data('on-submit'));
+                    event.preventDefault();
+                }
+            } else {
                 event.preventDefault();
-                Shopsys.validation.showFormErrorsWindow(this);
-            } else if ($(this).data('on-submit') !== undefined) {
-                $(this).trigger($(this).data('on-submit'));
-                event.preventDefault();
+                FpJsFormValidator.ajax.callbacks.push(function () {
+                    FpJsFormValidator.ajax.callbacks = [];
+                    if (!Shopsys.validation.isFormValid($form[0])) {
+                        Shopsys.validation.showFormErrorsWindow($form[0]);
+                    } else if ($form.data('on-submit') !== undefined) {
+                        $form.trigger($form.data('on-submit'));
+                    } else {
+                        $form.addClass('js-no-validate').submit();
+                    }
+                });
             }
         }
     };

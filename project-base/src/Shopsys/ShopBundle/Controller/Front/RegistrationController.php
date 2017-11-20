@@ -8,7 +8,7 @@ use Shopsys\ShopBundle\Form\Front\Registration\RegistrationFormType;
 use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
 use Shopsys\ShopBundle\Model\Security\LoginService;
-use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class RegistrationController extends FrontBaseController
@@ -45,6 +45,14 @@ class RegistrationController extends FrontBaseController
         $this->loginService = $loginService;
     }
 
+    public function existsEmailAction(Request $request)
+    {
+        $email = $request->get('email');
+        $user = $this->customerFacade->findUserByEmailAndDomain($email, $this->domain->getId());
+
+        return new JsonResponse($user !== null);
+    }
+
     public function registerAction(Request $request)
     {
         $userData = $this->userDataFactory->createDefault($this->domain->getId());
@@ -56,17 +64,11 @@ class RegistrationController extends FrontBaseController
             $userData = $form->getData();
             $userData->domainId = $this->domain->getId();
 
-            try {
-                $user = $this->customerFacade->register($userData);
+            $user = $this->customerFacade->register($userData);
+            $this->loginService->loginUser($user, $request);
 
-                $this->loginService->loginUser($user, $request);
-
-                $this->getFlashMessageSender()->addSuccessFlash(t('You have been successfully registered.'));
-
-                return $this->redirectToRoute('front_homepage');
-            } catch (\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-                $form->get('email')->addError(new FormError(t('There is already a customer with this e-mail in the database')));
-            }
+            $this->getFlashMessageSender()->addSuccessFlash(t('You have been successfully registered.'));
+            return $this->redirectToRoute('front_homepage');
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {

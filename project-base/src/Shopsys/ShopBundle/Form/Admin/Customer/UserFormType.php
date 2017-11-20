@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Form\Admin\Customer;
 use Shopsys\ShopBundle\Component\Constraints\Email;
 use Shopsys\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
 use Shopsys\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
+use Shopsys\ShopBundle\Component\Constraints\UniqueEmail;
 use Shopsys\ShopBundle\Form\DomainType;
 use Shopsys\ShopBundle\Model\Customer\UserData;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
@@ -64,6 +65,7 @@ class UserFormType extends AbstractType
                         'maxMessage' => 'Email cannot be longer then {{ limit }} characters',
                     ]),
                     new Email(['message' => 'Please enter valid e-mail']),
+                    new UniqueEmail(),
                 ],
             ])
             ->add('password', RepeatedType::class, [
