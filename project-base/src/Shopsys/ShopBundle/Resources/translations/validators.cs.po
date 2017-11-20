@@ -58,9 +58,9 @@ msgstr "Každý parametr může být nastaven pouze jednou"
 #: MailTemplateFormType.php:36
 #: OrderFormType.php:119
 #: PersonalInfoFormType.php:66
-#: RegistrationFormType.php:48
+#: RegistrationFormType.php:47
 #: ResetPasswordFormType.php:26
-#: UserFormType.php:64
+#: UserFormType.php:65
 msgid "Email cannot be longer then {{ limit }} characters"
 msgstr "E-mail nesmí být delší než {{ limit }} znaků"
 
@@ -79,7 +79,7 @@ msgstr "Datum zadávejte ve formátu dd.mm.rrrr"
 #: PersonalInfoFormType.php:53
 #: RegistrationFormType.php:34
 #: UserFormType.php:29
-#: UserFormType.php:46
+#: UserFormType.php:47
 msgid "First name cannot be longer then {{ limit }} characters"
 msgstr "Jméno nesmí být delší než {{ limit }} znaků"
 
@@ -134,7 +134,7 @@ msgstr "Obrázek může být pouze ve formátech jpg, png nebo gif"
 #: PersonalInfoFormType.php:59
 #: RegistrationFormType.php:40
 #: UserFormType.php:35
-#: UserFormType.php:55
+#: UserFormType.php:56
 msgid "Last name cannot be longer than {{ limit }} characters"
 msgstr "Příjmení nesmí být delší než {{ limit }} znaků"
 
@@ -179,19 +179,19 @@ msgstr "Výrobní číslo nesmí být delší než {{ limit }} znaků"
 #: NewPasswordFormType.php:30
 #: RegistrationFormType.php:59
 #: UserFormType.php:50
-#: UserFormType.php:111
+#: UserFormType.php:113
 msgid "Password cannot be longer then {{ limit }} characters"
 msgstr "Heslo musí mít minimálně {{ limit }} znaků"
 
 #: RegistrationFormType.php:82
 #: UserFormType.php:70
-#: UserFormType.php:140
+#: UserFormType.php:142
 msgid "Password cannot be same as e-mail"
 msgstr "Heslo nesmí být stejné jako přihlašovací e-mail."
 
 #: RegistrationFormType.php:88
 #: UserFormType.php:76
-#: UserFormType.php:146
+#: UserFormType.php:148
 msgid "Password cannot be same as part of e-mail before at sign"
 msgstr "Heslo nesmí být stejné jako část e-mailu před zavináčem."
 
@@ -200,7 +200,7 @@ msgid "Password cannot be same as username"
 msgstr "Heslo nesmí být stejné jako přihlašovací jméno"
 
 #: src/Shopsys/ShopBundle/Form/Admin/Administrator/AdministratorFormType.php:55
-#: src/Shopsys/ShopBundle/Form/Admin/Customer/UserFormType.php:78
+#: src/Shopsys/ShopBundle/Form/Admin/Customer/UserFormType.php:80
 #: src/Shopsys/ShopBundle/Form/Front/Customer/Password/NewPasswordFormType.php:33
 #: src/Shopsys/ShopBundle/Form/Front/Customer/UserFormType.php:53
 #: src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php:62
@@ -367,7 +367,7 @@ msgstr "Vyplňte prosím procento slevy."
 #: PersonalInfoFormType.php:64
 #: RegistrationFormType.php:45
 #: ResetPasswordFormType.php:24
-#: UserFormType.php:61
+#: UserFormType.php:62
 msgid "Please enter e-mail"
 msgstr "Vyplňte prosím e-mail"
 
@@ -379,7 +379,7 @@ msgstr "Vyplňte prosím text emailu"
 #: PersonalInfoFormType.php:52
 #: RegistrationFormType.php:33
 #: UserFormType.php:28
-#: UserFormType.php:43
+#: UserFormType.php:44
 msgid "Please enter first name"
 msgstr "Vyplňte prosím jméno"
 
@@ -417,7 +417,7 @@ msgstr "Prosím vyplňte typ vstupní ceny"
 #: PersonalInfoFormType.php:58
 #: RegistrationFormType.php:39
 #: UserFormType.php:34
-#: UserFormType.php:52
+#: UserFormType.php:53
 msgid "Please enter last name"
 msgstr "Vyplňte prosím příjmení"
 
@@ -467,7 +467,7 @@ msgstr "Prosím vyplňte hodnotu parametru"
 #: LoginFormType.php:32
 #: NewPasswordFormType.php:29
 #: RegistrationFormType.php:58
-#: UserFormType.php:116
+#: UserFormType.php:118
 msgid "Please enter password"
 msgstr "Vyplňte prosím heslo"
 
@@ -564,7 +564,7 @@ msgstr "Prosím zadejte platný třímístný kód měny podle standardu ISO 421
 #: PersonalInfoFormType.php:65
 #: RegistrationFormType.php:46
 #: ResetPasswordFormType.php:25
-#: UserFormType.php:66
+#: UserFormType.php:67
 msgid "Please enter valid e-mail"
 msgstr "Vyplňte prosím platný e-mail"
 
