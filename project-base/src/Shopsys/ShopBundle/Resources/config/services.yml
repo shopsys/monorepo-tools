@@ -489,15 +489,24 @@ services:
 
   shopsys.shop.data_fixtures.performance.category_data_fixture:
     class: Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture
+    arguments:
+      - "%shopsys.performance_data.category.counts_by_level%"
 
   shopsys.shop.data_fixtures.performance.order_data_fixture:
     class: Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture
+    arguments:
+      - "%shopsys.performance_data.order.total_count%"
+      - "%shopsys.performance_data.order.item_count_per_order%"
 
   shopsys.shop.data_fixtures.performance.product_data_fixture:
     class: Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture
+    arguments:
+      - "%shopsys.performance_data.product.total_count%"
 
   shopsys.shop.data_fixtures.performance.user_data_fixture:
     class: Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture
+    arguments:
+      - "%shopsys.performance_data.user.count_per_domain%"
 
   shopsys.shop.data_fixtures.product_data_fixture_csv_reader:
     class: Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader

@@ -12,13 +12,24 @@ use Tests\ShopBundle\Performance\JmeterCsvReporter;
 
 class AllFeedsTest extends KernelTestCase
 {
-    const MAX_DURATION_FEED_SECONDS = 180;
-    const MAX_DURATION_DELIVERY_FEED_SECONDS = 20;
-    const SUSPICIOUSLY_LOW_DURATION_SECONDS = 5;
-
     const ROUTE_NAME_GENERATE_FEED = 'admin_feed_generate';
     const ADMIN_USERNAME = 'admin';
     const ADMIN_PASSWORD = 'admin123';
+
+    /**
+     * @var int
+     */
+    private $maxDuration;
+
+    /**
+     * @var int
+     */
+    private $deliveryMaxDuration;
+
+    /**
+     * @var int
+     */
+    private $minDuration;
 
     protected function setUp()
     {
@@ -29,8 +40,13 @@ class AllFeedsTest extends KernelTestCase
             'debug' => false,
         ]);
 
-        self::$kernel->getContainer()->get('shopsys.shop.component.domain')
+        $container = self::$kernel->getContainer();
+        $container->get('shopsys.shop.component.domain')
             ->switchDomainById(1);
+
+        $this->maxDuration = $container->getParameter('shopsys.performance_test.feed.max_duration_seconds');
+        $this->deliveryMaxDuration = $container->getParameter('shopsys.performance_test.feed.delivery.max_duration_seconds');
+        $this->minDuration = $container->getParameter('shopsys.performance_test.feed.min_duration_seconds');
     }
 
     public function testAllFeedsGeneration()
@@ -98,12 +114,12 @@ class AllFeedsTest extends KernelTestCase
         $feedGenerationData = $this->getFeedGenerationData(
             $feedConfigFacade->getStandardFeedConfigs(),
             $domain->getAll(),
-            self::MAX_DURATION_FEED_SECONDS
+            $this->maxDuration
         );
         $deliveryFeedGenerationData = $this->getFeedGenerationData(
             $feedConfigFacade->getDeliveryFeedConfigs(),
             $domain->getAll(),
-            self::MAX_DURATION_DELIVERY_FEED_SECONDS
+            $this->deliveryMaxDuration
         );
 
         return array_merge($feedGenerationData, $deliveryFeedGenerationData);
@@ -134,7 +150,7 @@ class AllFeedsTest extends KernelTestCase
      */
     private function setPerformanceTestSampleMessage(PerformanceTestSample $performanceTestSample, $maxDuration, $realDuration)
     {
-        $minDuration = self::SUSPICIOUSLY_LOW_DURATION_SECONDS;
+        $minDuration = $this->minDuration;
 
         if ($realDuration < $minDuration) {
             $message = sprintf('<fg=yellow>Feed generated in %.2F s, which is suspiciously fast.</fg=yellow>', $realDuration);

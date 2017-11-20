@@ -94,6 +94,9 @@ Runs performance tests on a newly built test database with performance data.
 
 It may take a few hours as the generation of performance data is very time-consuming. Should be executed on CI server only.
 
+The size of performance data to be generated and asserted limits can be configured via parameters defined in [`parameters_common.yml`](../../app/config/parameters_common.yml).
+You can easily override the default values in your `parameters.yml` or `parameters_test.yml` configuration files. 
+
 ### Other
 
 #### cron

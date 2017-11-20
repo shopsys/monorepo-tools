@@ -23,10 +23,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ProductDataFixture
 {
-    const PRODUCTS = 40000;
     const BATCH_SIZE = 1000;
 
     const FIRST_PERFORMANCE_PRODUCT = 'first_performance_product';
+
+    /**
+     * @var int
+     */
+    private $productTotalCount;
 
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -108,7 +112,24 @@ class ProductDataFixture
      */
     private $productDataFixtureCsvReader;
 
+    /**
+     * @param int $productTotalCount
+     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
+     * @param \Shopsys\ShopBundle\Model\Product\ProductFacade $productFacade
+     * @param \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
+     * @param \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
+     * @param \Shopsys\ShopBundle\Model\Product\ProductVariantFacade $productVariantFacade
+     * @param \Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector $productDataReferenceInjector
+     * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     * @param \Shopsys\ShopBundle\Model\Category\CategoryRepository $categoryRepository
+     * @param \Faker\Generator $faker
+     * @param \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
+     * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+     * @param \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader $productDataFixtureCsvReader
+     */
     public function __construct(
+        $productTotalCount,
         EntityManager $em,
         EntityManagerFacade $entityManagerFacade,
         ProductFacade $productFacade,
@@ -123,6 +144,7 @@ class ProductDataFixture
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
         ProductDataFixtureCsvReader $productDataFixtureCsvReader
     ) {
+        $this->productTotalCount = $productTotalCount;
         $this->em = $em;
         $this->entityManagerFacade = $entityManagerFacade;
         $this->productFacade = $productFacade;
@@ -154,7 +176,7 @@ class ProductDataFixture
             $csvRows
         );
 
-        $progressBar = new ProgressBar($output, self::PRODUCTS);
+        $progressBar = new ProgressBar($output, $this->productTotalCount);
         $progressBar->setFormat(
             '%current%/%max% [%bar%] %percent:3s%%,%speed:6.1f% prod./s (%step_duration:.3f% s/prod.),'
             . ' Elapsed: %elapsed_hms%, Remaining: %remaining_hms%, MEM:%memory:9s%'
@@ -162,7 +184,7 @@ class ProductDataFixture
         $progressBar->setRedrawFrequency(10);
         $progressBar->start();
 
-        while ($this->countImported < self::PRODUCTS) {
+        while ($this->countImported < $this->productTotalCount) {
             $row = next($csvRows);
             if ($row === false) {
                 $this->createVariants($variantCatnumsByMainVariantCatnum);

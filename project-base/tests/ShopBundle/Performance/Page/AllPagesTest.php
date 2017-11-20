@@ -2,6 +2,8 @@
 
 namespace Tests\ShopBundle\Performance\Page;
 
+use Doctrine\DBAL\Logging\LoggerChain;
+use Doctrine\ORM\EntityManager;
 use Shopsys\HttpSmokeTesting\RequestDataSet;
 use Shopsys\HttpSmokeTesting\RequestDataSetGenerator;
 use Shopsys\HttpSmokeTesting\RouteConfig;
@@ -183,7 +185,9 @@ class AllPagesTest extends KernelTestCase
 
         $startTime = microtime(true);
         $entityManager->beginTransaction();
+        $queryCounter = $this->injectQueryCounter($entityManager);
         $response = static::$kernel->handle($request);
+        $queryCount = $queryCounter->getQueryCount();
         $entityManager->rollback();
         $endTime = microtime(true);
 
@@ -193,7 +197,7 @@ class AllPagesTest extends KernelTestCase
             $requestDataSet->getRouteName(),
             $uri,
             ($endTime - $startTime) * 1000,
-            0, // Currently, we are not able to measure query count
+            $queryCount,
             $statusCode,
             $statusCode === $requestDataSet->getExpectedStatusCode()
         );
@@ -205,7 +209,7 @@ class AllPagesTest extends KernelTestCase
     private function doAssert(
         array $performanceTestSamples
     ) {
-        $performanceTestSampleQualifier = new PerformanceTestSampleQualifier();
+        $performanceTestSampleQualifier = $this->createPerformanceTestSampleQualifier();
 
         $overallStatus = $performanceTestSampleQualifier->getOverallStatus($performanceTestSamples);
 
@@ -250,7 +254,7 @@ class AllPagesTest extends KernelTestCase
      */
     private function printPerformanceTestsSummary(array $performanceTestSamples, ConsoleOutput $consoleOutput)
     {
-        $performanceTestSampleQualifier = new PerformanceTestSampleQualifier();
+        $performanceTestSampleQualifier = $this->createPerformanceTestSampleQualifier();
         $performanceTestSummaryPrinter = new PerformanceTestSummaryPrinter($performanceTestSampleQualifier);
 
         $performanceTestSummaryPrinter->printSummary($performanceTestSamples, $consoleOutput);
@@ -265,5 +269,42 @@ class AllPagesTest extends KernelTestCase
         $routerAdapter = new SymfonyRouterAdapter($router);
 
         return $routerAdapter;
+    }
+
+    /**
+     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @return \Tests\ShopBundle\Performance\Page\PerformanceTestSampleQueryCounter
+     */
+    private function injectQueryCounter(EntityManager $entityManager)
+    {
+        $connectionConfiguration = $entityManager->getConnection()->getConfiguration();
+        $loggerChain = new LoggerChain();
+
+        $currentLogger = $connectionConfiguration->getSQLLogger();
+        if ($currentLogger !== null) {
+            $loggerChain->addLogger($currentLogger);
+        }
+
+        $queryCounter = new PerformanceTestSampleQueryCounter();
+        $loggerChain->addLogger($queryCounter);
+
+        $connectionConfiguration->setSQLLogger($loggerChain);
+
+        return $queryCounter;
+    }
+
+    /**
+     * @return \Tests\ShopBundle\Performance\Page\PerformanceTestSampleQualifier
+     */
+    private function createPerformanceTestSampleQualifier()
+    {
+        $container = self::$kernel->getContainer();
+
+        return new PerformanceTestSampleQualifier(
+            $container->getParameter('shopsys.performance_test.page.duration_milliseconds.warning'),
+            $container->getParameter('shopsys.performance_test.page.duration_milliseconds.critical'),
+            $container->getParameter('shopsys.performance_test.page.query_count.warning'),
+            $container->getParameter('shopsys.performance_test.page.query_count.critical')
+        );
     }
 }
