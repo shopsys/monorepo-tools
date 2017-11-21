@@ -101,7 +101,7 @@ class Category extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\ShopBundle\Model\Category\Category|null $parent
      */
-    public function setParent(Category $parent = null)
+    public function setParent(self $parent = null)
     {
         $this->parent = $parent;
     }

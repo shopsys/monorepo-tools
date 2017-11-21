@@ -58,7 +58,7 @@ class Price
      * @param \Shopsys\ShopBundle\Model\Pricing\Price $priceToAdd
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function add(Price $priceToAdd)
+    public function add(self $priceToAdd)
     {
         return new self(
             $this->priceWithoutVat + $priceToAdd->getPriceWithoutVat(),
@@ -71,7 +71,7 @@ class Price
      * @param \Shopsys\ShopBundle\Model\Pricing\Price $priceToSubtract
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function subtract(Price $priceToSubtract)
+    public function subtract(self $priceToSubtract)
     {
         return new self(
             $this->priceWithoutVat - $priceToSubtract->getPriceWithoutVat(),

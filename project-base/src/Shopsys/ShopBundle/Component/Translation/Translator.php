@@ -151,7 +151,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     /**
      * @param \Shopsys\ShopBundle\Component\Translation\Translator $translator
      */
-    public static function injectSelf(Translator $translator)
+    public static function injectSelf(self $translator)
     {
         self::$self = $translator;
     }

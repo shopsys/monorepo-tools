@@ -59,7 +59,7 @@ class FeedGenerationConfig
      * @param \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig $feedGenerationConfig
      * @return bool
      */
-    public function isSameFeedAndDomain(FeedGenerationConfig $feedGenerationConfig)
+    public function isSameFeedAndDomain(self $feedGenerationConfig)
     {
         return $this->feedName === $feedGenerationConfig->feedName && $this->domainId === $feedGenerationConfig->domainId;
     }

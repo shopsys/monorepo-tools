@@ -92,7 +92,7 @@ class Vat
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $newVat
      */
-    public function markForDeletion(Vat $newVat)
+    public function markForDeletion(self $newVat)
     {
         $this->replaceWith = $newVat;
     }

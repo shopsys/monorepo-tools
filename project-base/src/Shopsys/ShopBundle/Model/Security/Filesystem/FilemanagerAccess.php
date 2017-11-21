@@ -57,7 +57,7 @@ class FilemanagerAccess
     /**
      * @param \Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess $filemanagerAccess
      */
-    public static function injectSelf(FilemanagerAccess $filemanagerAccess)
+    public static function injectSelf(self $filemanagerAccess)
     {
         self::$self = $filemanagerAccess;
     }

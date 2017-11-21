@@ -155,7 +155,7 @@ class CartItem
      * @param \Shopsys\ShopBundle\Model\Cart\Item\CartItem $cartItem
      * @return bool
      */
-    public function isSimilarItemAs(CartItem $cartItem)
+    public function isSimilarItemAs(self $cartItem)
     {
         return $this->getProduct()->getId() === $cartItem->getProduct()->getId();
     }

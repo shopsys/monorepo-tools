@@ -798,7 +798,7 @@ class Product extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $variant
      */
-    public function addVariant(Product $variant)
+    public function addVariant(self $variant)
     {
         if (!$this->isMainVariant()) {
             throw new \Shopsys\ShopBundle\Model\Product\Exception\VariantCanBeAddedOnlyToMainVariantException(
@@ -851,7 +851,7 @@ class Product extends AbstractTranslatableEntity
      * @param \Shopsys\ShopBundle\Model\Product\Product $mainVariant
      * @SuppressWarnings(PHPMD.UnusedPrivateMethod) method is used but not through $this
      */
-    private function setMainVariant(Product $mainVariant)
+    private function setMainVariant(self $mainVariant)
     {
         $this->variantType = self::VARIANT_TYPE_VARIANT;
         $this->mainVariant = $mainVariant;
