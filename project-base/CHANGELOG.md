@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.0-beta.19.1] - 2017-11-21
+### Fixed
+- coding standards check "phing standards" passes
+
 ## [2.0.0-beta.19.0] - 2017-11-21
 ### Added
 - size of performance data fixtures and limits for performance testing are now configurable via parameters defined in [`parameters_common.yml`](app/config/parameters_common.yml) (@PetrHeinz)
@@ -156,7 +160,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - full friendly URL for main entities
 - customizable SEO attributes for main entities
 
-[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.19.0...HEAD
+[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.19.1...HEAD
+[2.0.0-beta.19.1]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.19.0...v2.0.0-beta.19.1
 [2.0.0-beta.19.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.18.0...v2.0.0-beta.19.0
 [2.0.0-beta.18.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.17.0...v2.0.0-beta.18.0
 [2.0.0-beta.17.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.16.0...v2.0.0-beta.17.0
