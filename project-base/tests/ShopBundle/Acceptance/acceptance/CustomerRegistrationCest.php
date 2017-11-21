@@ -8,6 +8,8 @@ use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class CustomerRegistrationCest
 {
+    const MINIMUM_FORM_SUBMIT_WAIT_TIME = 10;
+
     public function testSuccessfulRegistration(
         RegistrationPage $registrationPage,
         AcceptanceTester $me,
@@ -17,6 +19,7 @@ class CustomerRegistrationCest
         $me->amOnPage('/');
         $layoutPage->clickOnRegistration();
         $registrationPage->register('Roman', 'Štěpánek', 'no-reply.16@netdevelo.cz', 'user123', 'user123');
+        $me->wait(self::MINIMUM_FORM_SUBMIT_WAIT_TIME);
         $me->see('You have been successfully registered');
         $me->see('Roman Štěpánek');
         $me->see('Log out');
@@ -27,7 +30,7 @@ class CustomerRegistrationCest
         $me->wantTo('use already used email while registration');
         $me->amOnPage('/registration/');
         $registrationPage->register('Roman', 'Štěpánek', 'no-reply@netdevelo.cz', 'user123', 'user123');
-        $registrationPage->seeEmailError('There is already a customer with this e-mail in the database');
+        $registrationPage->seeEmailError('Email no-reply@netdevelo.cz is already registered');
     }
 
     public function testPasswordMismatch(RegistrationPage $registrationPage, AcceptanceTester $me)

@@ -741,7 +741,7 @@ msgstr ""
 msgid "Chosen shipping name"
 msgstr ""
 
-#: CustomerController.php:184
+#: CustomerController.php:179
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:70
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:91
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:121
@@ -1096,15 +1096,15 @@ msgstr ""
 msgid "Customer"
 msgstr ""
 
-#: CustomerController.php:233
+#: CustomerController.php:226
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
-#: CustomerController.php:130
+#: CustomerController.php:128
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr ""
 
-#: CustomerController.php:269
+#: CustomerController.php:258
 msgid "Customer <strong>{{ name }}</strong> deleted"
 msgstr ""
 
@@ -1335,7 +1335,7 @@ msgstr ""
 msgid "Do you really want to remove this brand? If it is used anywhere it will be unset."
 msgstr ""
 
-#: CustomerController.php:197
+#: CustomerController.php:192
 msgid "Do you really want to remove this customer?"
 msgstr ""
 
@@ -1439,7 +1439,7 @@ msgid "Drag file here"
 msgstr ""
 
 #: AdministratorController.php:68
-#: CustomerController.php:186
+#: CustomerController.php:181
 #: MailController.php:109
 #: MailController.php:121
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:18
@@ -1588,7 +1588,7 @@ msgstr ""
 msgid "Editing customer"
 msgstr ""
 
-#: CustomerController.php:147
+#: CustomerController.php:142
 msgid "Editing customer - %name%"
 msgstr ""
 
@@ -1879,7 +1879,7 @@ msgstr ""
 msgid "For subfolders of folder components, the subfolder name is inserted into the component name for better search, but the component filename contains only the rest of the class name."
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:39
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:50
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:39
 msgid "Forgot your password?"
 msgstr ""
@@ -1931,7 +1931,7 @@ msgid "Frontend"
 msgstr ""
 
 #: AdministratorController.php:67
-#: CustomerController.php:183
+#: CustomerController.php:178
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:6
 #: src/Shopsys/ShopBundle/Resources/views/Mail/ContactForm/mail.html.twig:1
@@ -2379,7 +2379,7 @@ msgstr ""
 msgid "Last name"
 msgstr ""
 
-#: CustomerController.php:191
+#: CustomerController.php:186
 msgid "Last order"
 msgstr ""
 
@@ -2466,7 +2466,7 @@ msgid "Location"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Login/loginForm.html.twig:33
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:33
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:44
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:35
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Newsletter/subscription.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:74
@@ -2939,7 +2939,7 @@ msgstr ""
 msgid "Number of items"
 msgstr ""
 
-#: CustomerController.php:188
+#: CustomerController.php:183
 msgid "Number of orders"
 msgstr ""
 
@@ -3114,7 +3114,7 @@ msgstr ""
 msgid "Orders overview"
 msgstr ""
 
-#: CustomerController.php:189
+#: CustomerController.php:184
 msgid "Orders value"
 msgstr ""
 
@@ -3279,8 +3279,8 @@ msgstr ""
 #: CategoryController.php:130
 #: CookiesController.php:58
 #: CustomerController.php:83
-#: CustomerController.php:144
-#: CustomerController.php:248
+#: CustomerController.php:139
+#: CustomerController.php:237
 #: MailController.php:150
 #: OrderController.php:141
 #: OrderController.php:226
@@ -3288,7 +3288,7 @@ msgstr ""
 #: PaymentController.php:127
 #: ProductController.php:162
 #: ProductController.php:212
-#: RegistrationController.php:73
+#: RegistrationController.php:75
 #: SeoController.php:61
 #: ShopInfoController.php:61
 #: SliderController.php:114
@@ -3300,7 +3300,7 @@ msgstr ""
 msgid "Please check the correctness of all data filled."
 msgstr ""
 
-#: customizeBundle.js:413
+#: customizeBundle.js:421
 msgid "Please check the entered values.<br><br>"
 msgstr ""
 
@@ -3407,7 +3407,7 @@ msgstr ""
 msgid "Pricing"
 msgstr ""
 
-#: CustomerController.php:187
+#: CustomerController.php:182
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:19
 msgid "Pricing group"
 msgstr ""
@@ -3612,7 +3612,7 @@ msgstr ""
 msgid "Registration date"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:23
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:30
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:25
 msgid "Remember my login"
 msgstr ""
@@ -3845,7 +3845,7 @@ msgstr ""
 msgid "Selected currency doesn't exist."
 msgstr ""
 
-#: CustomerController.php:275
+#: CustomerController.php:264
 msgid "Selected customer doesn't exist."
 msgstr ""
 
@@ -4354,7 +4354,7 @@ msgstr ""
 msgid "Technical parameters"
 msgstr ""
 
-#: CustomerController.php:185
+#: CustomerController.php:180
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:31
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:89
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:96
@@ -4456,12 +4456,6 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:342
 msgid "There are several types of tables, but it is not necessary to write down those which are generated by system itself and nobody intervenes in them. That's why there are only those that you will probably want to use."
-msgstr ""
-
-#: CustomerController.php:139
-#: CustomerController.php:242
-#: RegistrationController.php:68
-msgid "There is already a customer with this e-mail in the database"
 msgstr ""
 
 #: categoryTree.sorting.js:59
@@ -4914,7 +4908,7 @@ msgstr ""
 msgid "We will get the display either by adding class to element or via <strong class=\"in-article__visible\">form_widget</strong> we add <strong class=\"in-article__visible\">attr class</strong>"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:26
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:34
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:28
 msgid "We will remember your login on this computer for 30 days."
 msgstr ""
@@ -5031,7 +5025,7 @@ msgstr ""
 msgid "You cannot choose product that is variant"
 msgstr ""
 
-#: RegistrationController.php:64
+#: RegistrationController.php:70
 msgid "You have been successfully registered."
 msgstr ""
 

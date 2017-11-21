@@ -5,13 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.0.0-beta.19.0] - 2017-11-21
 ### Added
 - size of performance data fixtures and limits for performance testing are now configurable via parameters defined in [`parameters_common.yml`](app/config/parameters_common.yml) (@PetrHeinz)
 - performance tests report database query counts (@PetrHeinz)
+- UserDataFixture: alias for SettingValueDataFixture to fix [PHP bug #66862](https://bugs.php.net/bug.php?id=66862)
 
 ### Changed
 - parameters that are in `parameters.yml` or `parameters_test.yml` that are not in their `.dist` templates are not removed during `composer install` anymore (@PetrHeinz)
 - customer creating controllers are not catching exception for duplicate email, it is not necessary since it is done by UniqueEmail constraint now (@MattCzerner)
+- input "remember me" in login form is encapsulated by its label for better UX
 
 ## [2.0.0-beta.18.0] - 2017-10-19
 ### Added
@@ -152,7 +156,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - full friendly URL for main entities
 - customizable SEO attributes for main entities
 
-[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.18.0...HEAD
+[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.19.0...HEAD
+[2.0.0-beta.19.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.18.0...v2.0.0-beta.19.0
 [2.0.0-beta.18.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.17.0...v2.0.0-beta.18.0
 [2.0.0-beta.17.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.16.0...v2.0.0-beta.17.0
 [2.0.0-beta.16.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.15.0...v2.0.0-beta.16.0 

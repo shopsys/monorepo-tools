@@ -741,7 +741,7 @@ msgstr "Název zvolené platby"
 msgid "Chosen shipping name"
 msgstr "Název zvolené dopravy"
 
-#: CustomerController.php:184
+#: CustomerController.php:179
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:70
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:91
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:121
@@ -1096,15 +1096,15 @@ msgstr "Aktuální stav"
 msgid "Customer"
 msgstr "Zákazník"
 
-#: CustomerController.php:233
+#: CustomerController.php:226
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byl vytvořen zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: CustomerController.php:130
+#: CustomerController.php:128
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr "Byl upraven zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: CustomerController.php:269
+#: CustomerController.php:258
 msgid "Customer <strong>{{ name }}</strong> deleted"
 msgstr "Zákazník <strong>{{ name }}</strong> byl smazán"
 
@@ -1335,7 +1335,7 @@ msgstr "Opravdu chcete odstranit tento článek?"
 msgid "Do you really want to remove this brand? If it is used anywhere it will be unset."
 msgstr "Opravdu chcete odstranit tuto značku? Pokud je někde použita, bude odnastavena."
 
-#: CustomerController.php:197
+#: CustomerController.php:192
 msgid "Do you really want to remove this customer?"
 msgstr "Opravdu chcete odstranit tohoto zákazníka?"
 
@@ -1439,7 +1439,7 @@ msgid "Drag file here"
 msgstr "Zde přetáhněte soubor"
 
 #: AdministratorController.php:68
-#: CustomerController.php:186
+#: CustomerController.php:181
 #: MailController.php:109
 #: MailController.php:121
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:18
@@ -1588,7 +1588,7 @@ msgstr "Editace kategorie - %name%"
 msgid "Editing customer"
 msgstr "Editace zákazníka"
 
-#: CustomerController.php:147
+#: CustomerController.php:142
 msgid "Editing customer - %name%"
 msgstr "Editace zákazníka - %name%"
 
@@ -1879,7 +1879,7 @@ msgstr "Pro odstranění cenové skupiny \"%name%\" musíte zvolit, která se m�
 msgid "For subfolders of folder components, the subfolder name is inserted into the component name for better search, but the component filename contains only the rest of the class name."
 msgstr "Pro podsložky složky components platí, že název podsložky se vkládá i do názvu komponenty pro lepší vyhledání, nicméně název souboru komponenty obsahuje jen zbytek názvu třídy"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:39
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:50
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:39
 msgid "Forgot your password?"
 msgstr "Zapomněli jste své heslo?"
@@ -1931,7 +1931,7 @@ msgid "Frontend"
 msgstr "Frontend"
 
 #: AdministratorController.php:67
-#: CustomerController.php:183
+#: CustomerController.php:178
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:6
 #: src/Shopsys/ShopBundle/Resources/views/Mail/ContactForm/mail.html.twig:1
@@ -2379,7 +2379,7 @@ msgstr "Poslední přihlášení"
 msgid "Last name"
 msgstr "Příjmení"
 
-#: CustomerController.php:191
+#: CustomerController.php:186
 msgid "Last order"
 msgstr "Poslední objednávka"
 
@@ -2466,7 +2466,7 @@ msgid "Location"
 msgstr "Umístění"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Login/loginForm.html.twig:33
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:33
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:44
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:35
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Newsletter/subscription.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Front/Layout/header.html.twig:74
@@ -2939,7 +2939,7 @@ msgstr "Počet dní k expedici"
 msgid "Number of items"
 msgstr "Počet položek"
 
-#: CustomerController.php:188
+#: CustomerController.php:183
 msgid "Number of orders"
 msgstr "Počet objednávek"
 
@@ -3114,7 +3114,7 @@ msgstr "Objednávky"
 msgid "Orders overview"
 msgstr "Přehled objednávek"
 
-#: CustomerController.php:189
+#: CustomerController.php:184
 msgid "Orders value"
 msgstr "Hodnota objednávek"
 
@@ -3279,8 +3279,8 @@ msgstr "Prosím překontrolujte následující informace:"
 #: CategoryController.php:130
 #: CookiesController.php:58
 #: CustomerController.php:83
-#: CustomerController.php:144
-#: CustomerController.php:248
+#: CustomerController.php:139
+#: CustomerController.php:237
 #: MailController.php:150
 #: OrderController.php:141
 #: OrderController.php:226
@@ -3288,7 +3288,7 @@ msgstr "Prosím překontrolujte následující informace:"
 #: PaymentController.php:127
 #: ProductController.php:162
 #: ProductController.php:212
-#: RegistrationController.php:73
+#: RegistrationController.php:75
 #: SeoController.php:61
 #: ShopInfoController.php:61
 #: SliderController.php:114
@@ -3300,7 +3300,7 @@ msgstr "Prosím překontrolujte následující informace:"
 msgid "Please check the correctness of all data filled."
 msgstr "Prosím zkontrolujte si správnost vyplnění všech údajů"
 
-#: customizeBundle.js:413
+#: customizeBundle.js:421
 msgid "Please check the entered values.<br><br>"
 msgstr "Překontrolujte prosím zadané hodnoty.<br><br>"
 
@@ -3407,7 +3407,7 @@ msgstr "Ceny"
 msgid "Pricing"
 msgstr "Cenotvorba"
 
-#: CustomerController.php:187
+#: CustomerController.php:182
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:19
 msgid "Pricing group"
 msgstr "Cenová skupina"
@@ -3612,7 +3612,7 @@ msgstr "Potvrzení registrace"
 msgid "Registration date"
 msgstr "Datum registrace"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:23
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:30
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:25
 msgid "Remember my login"
 msgstr "Zapamatuj si mé přihlášení"
@@ -3845,7 +3845,7 @@ msgstr "Zvolená kategorie neexistuje"
 msgid "Selected currency doesn't exist."
 msgstr "Zvolená měna neexistuje."
 
-#: CustomerController.php:275
+#: CustomerController.php:264
 msgid "Selected customer doesn't exist."
 msgstr "Zvolený zákazník neexistuje"
 
@@ -4354,7 +4354,7 @@ msgstr "DIČ"
 msgid "Technical parameters"
 msgstr "Technické parametry"
 
-#: CustomerController.php:185
+#: CustomerController.php:180
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:31
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:89
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:96
@@ -4457,12 +4457,6 @@ msgstr "Tlačítek je více druhů, každý z nich může mít další spoustu m
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:342
 msgid "There are several types of tables, but it is not necessary to write down those which are generated by system itself and nobody intervenes in them. That's why there are only those that you will probably want to use."
 msgstr "Tabulek je více druhů, není ale důvod vypisovat ty, co systém generuje sám, a nikdo do nich nezasahuje. Proto jsou zde jen ty, co pravděpodobně budete chtít použít."
-
-#: CustomerController.php:139
-#: CustomerController.php:242
-#: RegistrationController.php:68
-msgid "There is already a customer with this e-mail in the database"
-msgstr "V databázi se již nachází zákazník s tímto e-mailem"
 
 #: categoryTree.sorting.js:59
 msgid "There was an error while saving. The order isn't saved."
@@ -4914,7 +4908,7 @@ msgstr "Zobrazeni dosáhnete tak, že input vypíšete jako <strong class=\"in-a
 msgid "We will get the display either by adding class to element or via <strong class=\"in-article__visible\">form_widget</strong> we add <strong class=\"in-article__visible\">attr class</strong>"
 msgstr "Zobrazení dosáhnem buďto přídáním classy k prvku nebo přes <strong class=\"in-article__visible\">form_widget</strong> přidáme <strong class=\"in-article__visible\">attr class</strong>"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:26
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:34
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:28
 msgid "We will remember your login on this computer for 30 days."
 msgstr "Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní."
@@ -5031,7 +5025,7 @@ msgstr "Nelze vybrat zboží, které je hlavní variantou"
 msgid "You cannot choose product that is variant"
 msgstr "Nelze vybrat zboží, které je variantou"
 
-#: RegistrationController.php:64
+#: RegistrationController.php:70
 msgid "You have been successfully registered."
 msgstr "Byli jste úspěšně zaregistrováni"
 

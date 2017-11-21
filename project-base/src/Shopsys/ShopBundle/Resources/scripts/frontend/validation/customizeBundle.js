@@ -133,28 +133,32 @@
     // (the rest is copy&pasted from original method; eg. ajax validation)
     FpJsFormValidator.customizeMethods.submitForm = function (event) {
         var $form = $(this);
-        if (!$(this).hasClass('js-no-validate')) {
+        if (!$form.hasClass('js-no-validate')) {
             FpJsFormValidator.each(this, function (item) {
                 var element = item.jsFormValidator;
                 element.validateRecursively();
                 element.onValidate.apply(element.domNode, [FpJsFormValidator.getAllErrors(element, {}), event]);
             });
+
+            if (!Shopsys.validation.isFormValid($form)) {
+                event.preventDefault();
+                Shopsys.validation.showFormErrorsWindow($form);
+            }
+
             if (!FpJsFormValidator.ajax.queue) {
-                if (!Shopsys.validation.isFormValid(this)) {
-                    event.preventDefault();
-                    Shopsys.validation.showFormErrorsWindow(this);
-                } else if ($(this).hasData('on-submit')) {
+                if ($form.hasData('on-submit')) {
                     $(this).trigger($(this).data('on-submit'));
                     event.preventDefault();
                 }
             } else {
-                event.preventDefault();
                 FpJsFormValidator.ajax.callbacks.push(function () {
                     FpJsFormValidator.ajax.callbacks = [];
-                    if (!Shopsys.validation.isFormValid($form[0])) {
+                    if (!Shopsys.validation.isFormValid($form)) {
+                        event.preventDefault();
                         Shopsys.validation.showFormErrorsWindow($form[0]);
                     } else if ($form.data('on-submit') !== undefined) {
                         $form.trigger($form.data('on-submit'));
+                        event.preventDefault();
                     } else {
                         $form.addClass('js-no-validate').submit();
                     }
