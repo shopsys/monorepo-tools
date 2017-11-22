@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- updated symfony/symfony to v3.2.14 in order to avoid known security vulnerabilities (@TomasLudvik)
 
 ## [2.0.0-beta.19.1] - 2017-11-21
 ### Fixed

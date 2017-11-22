@@ -96,7 +96,7 @@
         "symfony/assetic-bundle": "2.8.2",
         "symfony/monolog-bundle": "2.12.1",
         "symfony/swiftmailer-bundle": "2.3.12",
-        "symfony/symfony": "3.2.9",
+        "symfony/symfony": "3.2.14",
         "symfony-cmf/routing": "2.0.2",
         "symfony-cmf/routing-bundle": "2.0.1",
         "symplify/controller-autowire": "1.3.3",
@@ -104,7 +104,7 @@
         "timwhitlock/jparser": "dev-get-rid-of-import#c37f4c6",
         "tracy/tracy": "2.3.12",
         "twig/extensions": "1.3.0",
-        "twig/twig": "1.31.0",
+        "twig/twig": "1.35.0",
         "vasek-purchart/console-errors-bundle": "1.0.1"
     },
     "require-dev": {
