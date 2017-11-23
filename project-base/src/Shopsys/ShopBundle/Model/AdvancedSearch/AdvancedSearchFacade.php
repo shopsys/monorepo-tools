@@ -36,7 +36,7 @@ class AdvancedSearchFacade
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\Form\Form
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createAdvancedSearchForm(Request $request)
     {
@@ -49,7 +49,7 @@ class AdvancedSearchFacade
     /**
      * @param string $filterName
      * @param string|int $index
-     * @return \Symfony\Component\Form\Form
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createRuleForm($filterName, $index)
     {

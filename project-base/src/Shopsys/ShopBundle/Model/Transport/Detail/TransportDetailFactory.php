@@ -53,7 +53,7 @@ class TransportDetailFactory
 
     /**
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
+     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
     private function getIndependentPrices(Transport $transport)
     {
