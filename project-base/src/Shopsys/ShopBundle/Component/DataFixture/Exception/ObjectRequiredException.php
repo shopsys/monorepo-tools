@@ -14,6 +14,6 @@ class ObjectRequiredException extends InvalidArgumentException implements DataFi
      */
     public function __construct($given, Exception $previous = null)
     {
-        parent::__construct('Object required, but given "' . Debug::export($given, true) . '"', 0, $previous);
+        parent::__construct('Object required, but given "' . Debug::export($given) . '"', 0, $previous);
     }
 }

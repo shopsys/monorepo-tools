@@ -62,8 +62,7 @@ class Price
     {
         return new self(
             $this->priceWithoutVat + $priceToAdd->getPriceWithoutVat(),
-            $this->priceWithVat + $priceToAdd->getPriceWithVat(),
-            $this->vatAmount + $priceToAdd->getVatAmount()
+            $this->priceWithVat + $priceToAdd->getPriceWithVat()
         );
     }
 
@@ -75,8 +74,7 @@ class Price
     {
         return new self(
             $this->priceWithoutVat - $priceToSubtract->getPriceWithoutVat(),
-            $this->priceWithVat - $priceToSubtract->getPriceWithVat(),
-            $this->vatAmount - $priceToSubtract->getVatAmount()
+            $this->priceWithVat - $priceToSubtract->getPriceWithVat()
         );
     }
 }

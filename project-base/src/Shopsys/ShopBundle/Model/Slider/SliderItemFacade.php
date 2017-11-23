@@ -51,12 +51,11 @@ class SliderItemFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Slider\SliderItemData $sliderItemData
-     * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Slider\SliderItem
      */
-    public function create(SliderItemData $sliderItemData, $domainId)
+    public function create(SliderItemData $sliderItemData)
     {
-        $sliderItem = new SliderItem($sliderItemData, $domainId);
+        $sliderItem = new SliderItem($sliderItemData);
 
         $this->em->persist($sliderItem);
         $this->em->flush();

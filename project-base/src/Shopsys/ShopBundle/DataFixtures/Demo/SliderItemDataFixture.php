@@ -24,16 +24,16 @@ class SliderItemDataFixture extends AbstractReferenceFixture
         $sliderItemData->link = 'http://www.shopsys.cz/';
         $sliderItemData->hidden = false;
 
-        $sliderItemFacade->create($sliderItemData, Domain::FIRST_DOMAIN_ID);
+        $sliderItemFacade->create($sliderItemData);
 
         $sliderItemData->name = 'Twitter';
         $sliderItemData->link = 'https://twitter.com/netdevelo_cz';
 
-        $sliderItemFacade->create($sliderItemData, Domain::FIRST_DOMAIN_ID);
+        $sliderItemFacade->create($sliderItemData);
 
         $sliderItemData->name = 'Pojďte s námi růst';
         $sliderItemData->link = 'http://www.pojdtesnamirust.cz/';
 
-        $sliderItemFacade->create($sliderItemData, Domain::FIRST_DOMAIN_ID);
+        $sliderItemFacade->create($sliderItemData);
     }
 }
