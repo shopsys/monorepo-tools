@@ -14,7 +14,7 @@ class ParameterFilterChoice
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[]
      */
-    private $values = [];
+    private $values;
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\Parameter $parameter
