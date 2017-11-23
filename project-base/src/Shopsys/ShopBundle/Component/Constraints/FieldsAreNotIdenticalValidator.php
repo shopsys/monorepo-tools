@@ -23,7 +23,9 @@ class FieldsAreNotIdenticalValidator extends ConstraintValidator
         $value2 = $propertyAccessor->getValue($values, $constraint->field2);
 
         if ($value1 === $value2) {
-            $this->context->addViolationAt($constraint->errorPath, $constraint->message);
+            $this->context->buildViolation($constraint->message)
+                ->atPath($constraint->errorPath)
+                ->addViolation();
             return;
         }
     }
