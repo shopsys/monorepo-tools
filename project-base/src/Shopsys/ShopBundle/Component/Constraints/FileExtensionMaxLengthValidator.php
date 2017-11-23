@@ -23,7 +23,7 @@ class FileExtensionMaxLengthValidator extends ConstraintValidator
         }
 
         if (!is_int($constraint->limit) || $constraint->limit < 0) {
-            throw new \Symfony\Component\Validator\Exception\InvalidOptionsException('Limit must be integer and greater than zero.');
+            throw new \Symfony\Component\Validator\Exception\InvalidOptionsException('Limit must be integer and greater than zero.', []);
         }
 
         if (mb_strlen($value->getExtension()) > $constraint->limit) {
