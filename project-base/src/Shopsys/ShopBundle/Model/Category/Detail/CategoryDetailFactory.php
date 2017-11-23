@@ -66,7 +66,7 @@ class CategoryDetailFactory
 
     /**
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @param \Shopsys\ShopBundle\Model\Category\Category[] $categoriesByParentId
+     * @param \Shopsys\ShopBundle\Model\Category\Category[][] $categoriesByParentId
      * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
      */
     private function getChildrenDetails(Category $category, array $categoriesByParentId)
