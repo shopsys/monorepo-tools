@@ -58,7 +58,7 @@ class DeliveryAddressData
      * @param string|null $postcode
      * @param string|null $companyName
      * @param string|null $firstName
-     * @param null|null $lastName
+     * @param string|null $lastName
      * @param string|null $telephone
      * @param \Shopsys\ShopBundle\Model\Country\Country|null $country
      */
