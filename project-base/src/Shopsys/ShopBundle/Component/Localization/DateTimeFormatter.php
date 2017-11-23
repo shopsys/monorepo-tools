@@ -22,6 +22,7 @@ class DateTimeFormatter
      * @param int $dateType @see http://php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants
      * @param int $timeType @see http://php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants
      * @param string $locale
+     * @return string|bool
      */
     public function format(DateTime $value, $dateType, $timeType, $locale)
     {
@@ -41,6 +42,7 @@ class DateTimeFormatter
      * @param string $locale
      * @param int|null $dateType
      * @param int|null $timeType
+     * @return string|null
      */
     private function getCustomPattern($locale, $dateType, $timeType)
     {

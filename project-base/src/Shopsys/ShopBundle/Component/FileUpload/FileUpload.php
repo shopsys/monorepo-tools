@@ -58,6 +58,7 @@ class FileUpload
 
     /**
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @return string
      */
     public function upload(UploadedFile $file)
     {

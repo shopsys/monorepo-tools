@@ -45,6 +45,7 @@ class OrderProductService
 
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
+     * @return \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[]
      */
     private function getOrderProductsUsingStockFromOrderProducts(array $orderProducts)
     {

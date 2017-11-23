@@ -51,6 +51,7 @@ class InlineEditService
     /**
      * @param string $serviceName
      * @param mixed $rowId
+     * @return string|null
      */
     public function getRenderedRowHtml($serviceName, $rowId)
     {
