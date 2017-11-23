@@ -116,7 +116,7 @@ class FriendlyUrlRouter implements RouterInterface
      * @param int $referenceType
      * @return string
      */
-    public function generateByFriendlyUrl(FriendlyUrl $friendlyUrl, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
+    public function generateByFriendlyUrl(FriendlyUrl $friendlyUrl, array $parameters = [], $referenceType = self::ABSOLUTE_PATH)
     {
         $routeName = $friendlyUrl->getRouteName();
         $route = $this->getRouteCollection()->get($routeName);
