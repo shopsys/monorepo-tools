@@ -36,7 +36,7 @@ class ProgressBar extends BaseProgressBar
 
     private function initializeCustomPlaceholderFormatters()
     {
-        $this->setPlaceholderFormatterDefinition('speed', function () {
+        self::setPlaceholderFormatterDefinition('speed', function () {
             $microtimeSinceLastDisplay = microtime(true) - $this->microtimeAtLastDisplay;
             $progressSinceLastDisplay = $this->getProgress() - $this->progressAtLastDisplay;
 
@@ -47,7 +47,7 @@ class ProgressBar extends BaseProgressBar
             return $progressSinceLastDisplay / $microtimeSinceLastDisplay;
         });
 
-        $this->setPlaceholderFormatterDefinition('step_duration', function () {
+        self::setPlaceholderFormatterDefinition('step_duration', function () {
             $microtimeSinceLastDisplay = microtime(true) - $this->microtimeAtLastDisplay;
             $progressSinceLastDisplay = $this->getProgress() - $this->progressAtLastDisplay;
 
@@ -58,7 +58,7 @@ class ProgressBar extends BaseProgressBar
             return $microtimeSinceLastDisplay / $progressSinceLastDisplay;
         });
 
-        $this->setPlaceholderFormatterDefinition('remaining_hms', function () {
+        self::setPlaceholderFormatterDefinition('remaining_hms', function () {
             if (!$this->getMaxSteps()) {
                 throw new \LogicException('Unable to display the remaining time if the maximum number of steps is not set.');
             }
@@ -75,7 +75,7 @@ class ProgressBar extends BaseProgressBar
             return $this->formatTimeHms($remainingSeconds);
         });
 
-        $this->setPlaceholderFormatterDefinition('elapsed_hms', function () {
+        self::setPlaceholderFormatterDefinition('elapsed_hms', function () {
             return $this->formatTimeHms(time() - $this->getStartTime());
         });
     }

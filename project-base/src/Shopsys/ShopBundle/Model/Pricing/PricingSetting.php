@@ -95,7 +95,7 @@ class PricingSetting
      */
     public function setRoundingType($roundingType)
     {
-        if (!in_array($roundingType, $this->getRoundingTypes(), true)) {
+        if (!in_array($roundingType, self::getRoundingTypes(), true)) {
             throw new \Shopsys\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException(
                 sprintf('Rounding type %s is not valid', $roundingType)
             );
