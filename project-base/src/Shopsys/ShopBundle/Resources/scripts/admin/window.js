@@ -61,7 +61,7 @@
             eventContinue: function () {},
             eventCancel: function () {}
         };
-        var options = $.extend(defaults, options);
+        options = $.extend(defaults, options);
 
         if ($activeWindow !== null) {
             $activeWindow.trigger('windowFastClose');
