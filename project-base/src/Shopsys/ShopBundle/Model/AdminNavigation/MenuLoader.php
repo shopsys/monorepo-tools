@@ -50,9 +50,7 @@ class MenuLoader
         $inputConfig = $yamlParser->parse(file_get_contents($filename));
         $outputConfig = $processor->processConfiguration($menuConfiguration, [$inputConfig]);
 
-        $menu = $this->loadFromArray($outputConfig);
-
-        return $menu;
+        return $this->loadFromArray($outputConfig);
     }
 
     /**
@@ -62,9 +60,8 @@ class MenuLoader
     public function loadFromArray(array $menuItemsData)
     {
         $items = $this->loadItems($menuItemsData);
-        $menu = new Menu($items);
 
-        return $menu;
+        return new Menu($items);
     }
 
     /**

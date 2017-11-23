@@ -60,8 +60,6 @@ class CategoryDataFactory
      */
     public function createDefault()
     {
-        $categoryData = new CategoryData();
-
-        return $categoryData;
+        return new CategoryData();
     }
 }

@@ -53,9 +53,8 @@ class CategoryDetailFactory
             $lazyLoadedCategoryDetails[] = new LazyLoadedCategoryDetail(
                 function () use ($category, $domainConfig) {
                     $categories = $this->categoryRepository->getTranslatedVisibleSubcategoriesByDomain($category, $domainConfig);
-                    $categoryDetails = $this->createLazyLoadedDetails($categories, $domainConfig);
 
-                    return $categoryDetails;
+                    return $this->createLazyLoadedDetails($categories, $domainConfig);
                 },
                 $category,
                 $hasChildren

@@ -214,9 +214,8 @@ class CreateDatabaseCommand extends ContainerAwareCommand
         /* @var $doctrineRegistry \Symfony\Bridge\Doctrine\RegistryInterface */
 
         $defaultConnectionName = $doctrineRegistry->getDefaultConnectionName();
-        $defaultConnection = $doctrineRegistry->getConnection($defaultConnectionName);
 
-        return $defaultConnection;
+        return $doctrineRegistry->getConnection($defaultConnectionName);
     }
 
     /**

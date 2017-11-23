@@ -175,9 +175,7 @@ class IntlCurrencyRepository extends BaseCurrencyRepository
             throw new \Shopsys\ShopBundle\Model\Localization\Exception\UnsupportedCurrencyException($currencyCode);
         }
 
-        $intlCurrency = parent::get($currencyCode, $locale, $fallbackLocale);
-
-        return $intlCurrency;
+        return parent::get($currencyCode, $locale, $fallbackLocale);
     }
 
     /**

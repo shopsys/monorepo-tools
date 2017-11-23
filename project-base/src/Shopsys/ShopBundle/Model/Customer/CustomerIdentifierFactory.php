@@ -46,8 +46,6 @@ class CustomerIdentifierFactory
      */
     public function getOnlyWithCartIdentifier($cartIdentifier)
     {
-        $customerIdentifier = new CustomerIdentifier($cartIdentifier, null);
-
-        return $customerIdentifier;
+        return new CustomerIdentifier($cartIdentifier, null);
     }
 }
