@@ -95,7 +95,7 @@ class FileUpload
      */
     private function getTemporaryFilename($filename)
     {
-        return TransformString::safeFilename(uniqid() . '__' . $filename);
+        return TransformString::safeFilename(uniqid('', true) . '__' . $filename);
     }
 
     /**

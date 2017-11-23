@@ -55,7 +55,7 @@ class LoginListener
         }
 
         if ($user instanceof UniqueLoginInterface && !$user->isMultidomainLogin()) {
-            $user->setLoginToken(uniqid());
+            $user->setLoginToken(uniqid('', true));
         }
 
         if ($user instanceof Administrator) {
