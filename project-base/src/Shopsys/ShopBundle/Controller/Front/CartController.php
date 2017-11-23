@@ -211,8 +211,8 @@ class CartController extends FrontBaseController
             );
         }
 
-        if ($this->getRequest()->headers->get('referer')) {
-            $redirectTo = $this->getRequest()->headers->get('referer');
+        if ($request->headers->get('referer')) {
+            $redirectTo = $request->headers->get('referer');
         } else {
             $redirectTo = $this->generateUrl('front_homepage');
         }

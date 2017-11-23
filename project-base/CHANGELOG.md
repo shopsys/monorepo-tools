@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - miscellaneous annotations, typos and other minor fixes (@petr.kadlec)
     - accepted [merge request](https://git.shopsys-framework.com/shopsys/shopsys-framework/merge_requests/11)
+- `CartController::addProductAction()`: now uses `Request` instance passed as the method argument (Symfony 3 style) instead of calling the base `Controller` method `getRequest()` (Symfony 2.x style) (@petr.kadlec)
+    - see [Symfony upgrade log](https://github.com/symfony/symfony/blob/3.0/UPGRADE-3.0.md#frameworkbundle) for more information
+    - accepted [merge request](https://git.shopsys-framework.com/shopsys/shopsys-framework/merge_requests/12)
 
 ## [2.0.0-beta.19.2] - 2017-11-23
 ### Fixed
