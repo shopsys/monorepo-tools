@@ -389,7 +389,7 @@ class Grid
     public function setDefaultOrder($columnId, $direction = DataSourceInterface::ORDER_ASC)
     {
         if (!$this->isOrderFromRequest) {
-            $prefix = $direction == DataSourceInterface::ORDER_DESC ? '-' : '';
+            $prefix = $direction === DataSourceInterface::ORDER_DESC ? '-' : '';
             $this->setOrderingByOrderString($prefix . $columnId);
         }
     }
