@@ -35,11 +35,6 @@ class FeedFacade
     private $feedConfigFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfigFactory
-     */
-    private $feedGenerationConfigFactory;
-
-    /**
      * @var \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig[]
      */
     private $standardFeedGenerationConfigs;
@@ -67,8 +62,7 @@ class FeedFacade
         $this->domain = $domain;
         $this->filesystem = $filesystem;
         $this->feedConfigFacade = $feedConfigFacade;
-        $this->feedGenerationConfigFactory = $feedGenerationConfigFactory;
-        $this->standardFeedGenerationConfigs = $this->feedGenerationConfigFactory->createAllForStandardFeeds();
+        $this->standardFeedGenerationConfigs = $feedGenerationConfigFactory->createAllForStandardFeeds();
         $this->entityManagerFacade = $entityManagerFacade;
         $this->productVisibilityFacade = $productVisibilityFacade;
     }
