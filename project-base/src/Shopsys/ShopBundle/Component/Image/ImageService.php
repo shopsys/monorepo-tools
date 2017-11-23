@@ -64,7 +64,7 @@ class ImageService
         $temporaryFilename,
         $type
     ) {
-        $temporaryFilepath = $this->fileUpload->getTemporaryFilePath($temporaryFilename);
+        $temporaryFilepath = $this->fileUpload->getTemporaryFilepath($temporaryFilename);
 
         $image = new Image(
             $imageEntityConfig->getEntityName(),

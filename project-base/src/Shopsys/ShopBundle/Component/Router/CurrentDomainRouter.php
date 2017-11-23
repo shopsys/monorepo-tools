@@ -78,6 +78,6 @@ class CurrentDomainRouter implements RouterInterface
      */
     private function getDomainRouter()
     {
-        return $this->domainRouterFactory->getRouter($this->domain->getid());
+        return $this->domainRouterFactory->getRouter($this->domain->getId());
     }
 }
