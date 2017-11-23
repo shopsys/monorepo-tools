@@ -82,6 +82,7 @@ class SuperadminController extends AdminBaseController
 
     /**
      * @Route("/superadmin/pricing/")
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function pricingAction(Request $request)
     {

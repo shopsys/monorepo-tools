@@ -122,6 +122,7 @@ class Menu
     /**
      * Finds deepest item matching specified route.
      *
+     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $items
      * @param string $route
      * @param array|null $parameters
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem|null

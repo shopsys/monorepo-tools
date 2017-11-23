@@ -101,6 +101,7 @@ class Bag
     }
 
     /**
+     * @param string $key
      * @return string
      */
     private function getFullbagName($key)

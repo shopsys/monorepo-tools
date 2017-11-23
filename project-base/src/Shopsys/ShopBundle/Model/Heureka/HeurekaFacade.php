@@ -32,7 +32,7 @@ class HeurekaFacade
      * @param \Symfony\Bridge\Monolog\Logger $logger
      * @param \Shopsys\ShopBundle\Model\Heureka\HeurekaShopCertificationFactory $heurekaShopCertificationFactory
      * @param \Shopsys\ShopBundle\Model\Heureka\HeurekaShopCertificationService $heurekaShopCertificationService
-     * @param \\Shopsys\ShopBundle\Model\Heureka\HeurekaSetting $heurekaSetting
+     * @param \Shopsys\ShopBundle\Model\Heureka\HeurekaSetting $heurekaSetting
      */
     public function __construct(
         Logger $logger,

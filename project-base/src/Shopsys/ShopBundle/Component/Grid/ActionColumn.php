@@ -63,6 +63,7 @@ class ActionColumn
 
     /**
      * @param \Symfony\Component\Routing\Router $router
+     * @param \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
      * @param string $type
      * @param string $title
      * @param string $route

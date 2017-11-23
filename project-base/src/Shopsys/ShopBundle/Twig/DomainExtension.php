@@ -82,6 +82,7 @@ class DomainExtension extends \Twig_Extension
 
     /**
      * @param int $domainId
+     * @param string $size
      * @return string
      */
     public function getDomainIconHtml($domainId, $size = 'normal')

@@ -411,6 +411,7 @@ class Grid
     }
 
     /**
+     * @param string $columntId
      * @return bool
      */
     public function existsColumn($columntId)

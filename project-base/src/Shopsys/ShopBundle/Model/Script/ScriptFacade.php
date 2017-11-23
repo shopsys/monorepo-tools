@@ -29,6 +29,7 @@ class ScriptFacade
     /**
      * @param \Doctrine\ORM\EntityManager $em
      * @param \Shopsys\ShopBundle\Model\Script\ScriptRepository $scriptRepository
+     * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
      */
     public function __construct(
         EntityManager $em,
@@ -57,6 +58,7 @@ class ScriptFacade
     }
 
     /**
+     * @param int $scriptId
      * @return \Shopsys\ShopBundle\Model\Script\Script
      */
     public function getById($scriptId)

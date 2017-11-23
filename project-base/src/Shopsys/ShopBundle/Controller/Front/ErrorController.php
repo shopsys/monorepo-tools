@@ -64,7 +64,6 @@ class ErrorController extends FrontBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Debug\Exception\FlattenException $exception
      * @param \Symfony\Component\HttpKernel\Log\DebugLoggerInterface $logger
-     * @param string $format
      */
     public function showAction(
         Request $request,

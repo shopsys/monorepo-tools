@@ -40,6 +40,7 @@ class LocalizationExtension extends \Twig_Extension
 
     /**
      * @param string $locale
+     * @param bool $showTitle
      * @return string
      */
     public function getLocaleFlagHtml($locale, $showTitle = true)

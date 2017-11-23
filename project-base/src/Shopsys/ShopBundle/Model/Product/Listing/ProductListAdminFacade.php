@@ -19,7 +19,7 @@ class ProductListAdminFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminRepository $productListAdminRepository
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupSettingFacade
+     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
      */
     public function __construct(
         ProductListAdminRepository $productListAdminRepository,

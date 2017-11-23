@@ -57,7 +57,6 @@ class UploadedFileConfigLoader
 
     /**
      * @param array $outputConfig
-     * @return \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
      */
     private function loadFileEntityConfigsFromArray($outputConfig)
     {

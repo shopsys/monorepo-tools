@@ -20,6 +20,7 @@ class ImageService
 
     /**
      * @param \Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
+     * @param \Shopsys\ShopBundle\Component\FileUpload\FileUpload $fileUpload
      */
     public function __construct(ImageProcessingService $imageProcessingService, FileUpload $fileUpload)
     {

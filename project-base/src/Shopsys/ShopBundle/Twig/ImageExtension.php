@@ -44,7 +44,6 @@ class ImageExtension extends Twig_Extension
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
      * @param \Shopsys\ShopBundle\Component\Image\ImageLocator $imageLocator
-     * @param \Shopsys\ShopBundle\Component\Image\Config\ImageConfig $imageConfig
      * @param \Shopsys\ShopBundle\Component\Image\ImageFacade $imageFacade
      */
     public function __construct(
@@ -171,7 +170,8 @@ class ImageExtension extends Twig_Extension
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Image\Image $image
+     * @param string $entityName
+     * @param string|null $type
      * @param string|null $sizeName
      * @return string
      */

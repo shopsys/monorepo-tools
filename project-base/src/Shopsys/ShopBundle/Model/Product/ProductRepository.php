@@ -320,6 +320,7 @@ class ProductRepository
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
      * @param int $domainId
+     * @param string $locale
      * @param string $orderingModeId
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $page

@@ -113,7 +113,7 @@ class FriendlyUrlRouter implements RouterInterface
     /**
      * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
      * @param array $parameters
-     * @param string $referenceType
+     * @param int $referenceType
      * @return string
      */
     public function generateByFriendlyUrl(FriendlyUrl $friendlyUrl, $parameters = [], $referenceType = self::ABSOLUTE_PATH)

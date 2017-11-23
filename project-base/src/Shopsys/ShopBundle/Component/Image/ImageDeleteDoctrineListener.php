@@ -54,7 +54,6 @@ class ImageDeleteDoctrineListener
     /**
      * @param object $entity
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Component\Image\ImageFacade $imageFacade
      */
     private function deleteEntityImages($entity, EntityManager $em)
     {

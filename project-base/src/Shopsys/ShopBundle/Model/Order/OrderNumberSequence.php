@@ -29,7 +29,7 @@ class OrderNumberSequence
      * @param int $id
      * @param string $number
      */
-    public function __construct($id, $number = 0)
+    public function __construct($id, $number = '0')
     {
         $this->id = $id;
         $this->number = $number;

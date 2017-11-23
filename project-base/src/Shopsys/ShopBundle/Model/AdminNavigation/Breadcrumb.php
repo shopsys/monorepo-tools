@@ -28,6 +28,8 @@ class Breadcrumb
     }
 
     /**
+     * @param \Symfony\Component\Routing\Route $route
+     * @param array|null $routeParameters
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
      */
     public function getItems($route, $routeParameters)

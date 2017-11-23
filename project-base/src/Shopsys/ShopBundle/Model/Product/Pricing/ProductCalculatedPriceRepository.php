@@ -34,7 +34,6 @@ class ProductCalculatedPriceRepository
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string|null $priceWithVat
-     * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice
      */
     public function saveCalculatedPrice(Product $product, PricingGroup $pricingGroup, $priceWithVat)
     {

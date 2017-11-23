@@ -31,7 +31,6 @@ class CountryDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\ShopBundle\Model\Country\CountryData $countryData
      * @param int $domainId
      * @param string $referenceName
-     * @return \Shopsys\ShopBundle\Model\Country\Country
      */
     private function createCountry(CountryData $countryData, $domainId, $referenceName)
     {

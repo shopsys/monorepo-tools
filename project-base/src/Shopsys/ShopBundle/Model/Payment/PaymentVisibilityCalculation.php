@@ -26,6 +26,7 @@ class PaymentVisibilityCalculation
 
     /**
      * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
+     * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
      */
     public function filterVisible(array $payments, $domainId)

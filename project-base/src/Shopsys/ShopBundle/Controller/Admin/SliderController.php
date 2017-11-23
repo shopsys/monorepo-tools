@@ -52,7 +52,6 @@ class SliderController extends AdminBaseController
 
     /**
      * @Route("/slider/list/")
-     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function listAction()
     {

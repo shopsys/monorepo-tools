@@ -30,6 +30,7 @@ class ProductListAdminRepository
     }
 
     /**
+     * @param int $pricingGroupId
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getProductListQueryBuilder($pricingGroupId)

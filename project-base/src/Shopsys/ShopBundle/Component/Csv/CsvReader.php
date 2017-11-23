@@ -6,6 +6,7 @@ class CsvReader
 {
     /**
      * @param string $filename
+     * @param string $delimiter
      * @return array
      */
     public function getRowsFromCsv($filename, $delimiter = ';')

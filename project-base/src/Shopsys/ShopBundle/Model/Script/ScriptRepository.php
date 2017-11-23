@@ -28,6 +28,7 @@ class ScriptRepository
     }
 
     /**
+     * @param int $scriptId
      * @return \Shopsys\ShopBundle\Model\Script\Script
      */
     public function getById($scriptId)

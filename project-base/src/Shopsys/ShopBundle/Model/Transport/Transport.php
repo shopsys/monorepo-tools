@@ -154,6 +154,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     }
 
     /**
+     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
      * @return \Shopsys\ShopBundle\Model\Transport\TransportPrice
      */
     public function getPrice(Currency $currency)
@@ -209,9 +210,6 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
         return $this->deleted;
     }
 
-    /**
-     * @param bool $deleted
-     */
     public function markAsDeleted()
     {
         $this->deleted = true;

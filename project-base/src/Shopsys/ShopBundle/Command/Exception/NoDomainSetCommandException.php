@@ -7,7 +7,6 @@ use Exception;
 class NoDomainSetCommandException extends Exception implements CommandException
 {
     /**
-     * @param string $message
      * @param \Exception|null $previous
      */
     public function __construct(Exception $previous = null)

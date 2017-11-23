@@ -37,7 +37,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param string $routeName
      * @param array $parameters
-     * @param string $referenceType
+     * @param int $referenceType
      * @return string
      */
     public function generateFromRouteCollection(

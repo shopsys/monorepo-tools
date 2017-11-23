@@ -589,9 +589,6 @@ class Order
         return $this->deleted;
     }
 
-    /**
-     * @param bool $deleted
-     */
     public function markAsDeleted()
     {
         $this->deleted = true;

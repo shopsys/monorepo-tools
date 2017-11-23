@@ -57,7 +57,6 @@ class PricingGroupController extends AdminBaseController
 
     /**
      * @Route("/pricing/group/list/")
-     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function listAction()
     {

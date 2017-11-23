@@ -49,6 +49,7 @@ class AdvancedSearchOrderFacade
 
     /**
      * @param string $filterName
+     * @param string|int $index
      * @return \Symfony\Component\Form\Form
      */
     public function createRuleForm($filterName, $index)
