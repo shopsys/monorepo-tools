@@ -99,7 +99,7 @@ class ImageService
         ) {
             throw new \Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException(
                 sprintf(
-                    'Entity %s with ID %s does not own image with ID',
+                    'Entity %s with ID %s does not own image with ID %s',
                     $entityName,
                     $entityId,
                     $image->getId()
