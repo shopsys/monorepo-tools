@@ -22,12 +22,7 @@ class FreeTransportAndPaymentFacade
      */
     public function isActive($domainId)
     {
-        $freeTransportAndPaymentPriceLimit = $this->getFreeTransportAndPaymentPriceLimitOnDomain($domainId);
-        if ($freeTransportAndPaymentPriceLimit === null) {
-            return false;
-        }
-
-        return true;
+        return $this->getFreeTransportAndPaymentPriceLimitOnDomain($domainId) !== null;
     }
 
     /**
