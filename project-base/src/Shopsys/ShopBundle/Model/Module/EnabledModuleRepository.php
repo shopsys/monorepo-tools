@@ -39,7 +39,7 @@ class EnabledModuleRepository
     public function findByName($moduleName)
     {
         if (!in_array($moduleName, $this->moduleList->getNames(), true)) {
-            throw new \Shopsys\ShopBundle\Model\Module\Exception\NotUniqueModuleLabelException($moduleName);
+            throw new \Shopsys\ShopBundle\Model\Module\Exception\UnsupportedModuleException($moduleName);
         }
 
         return $this->getEnabledModuleRepository()->find($moduleName);
