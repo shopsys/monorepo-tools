@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Twig;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;

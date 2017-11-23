@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Twig;
 
-use Shopsys\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;

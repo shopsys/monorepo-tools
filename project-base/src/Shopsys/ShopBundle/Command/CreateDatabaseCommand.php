@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Command;
 
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;

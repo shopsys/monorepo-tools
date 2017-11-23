@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Twig;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Domain\DomainFacade;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;

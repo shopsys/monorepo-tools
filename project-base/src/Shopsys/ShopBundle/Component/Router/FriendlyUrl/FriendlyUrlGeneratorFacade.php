@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Routing\Route;
 
 class FriendlyUrlGeneratorFacade
 {

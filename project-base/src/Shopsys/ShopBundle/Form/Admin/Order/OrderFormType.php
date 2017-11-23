@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Form\Admin\Order;
 
 use Shopsys\ShopBundle\Component\Constraints\Email;
 use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Model\Country\Country;
 use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\OrderData;
