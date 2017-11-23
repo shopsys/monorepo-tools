@@ -29,11 +29,6 @@ class GridFactory
      */
     private $twig;
 
-    /**
-     * @var \Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService
-     */
-    private $gridOrderingService;
-
     public function __construct(
         RequestStack $requestStack,
         Router $router,
