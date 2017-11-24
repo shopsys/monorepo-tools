@@ -26,14 +26,14 @@ class MailerSettingExtension extends Twig_Extension
     /**
      * @var string[]
      */
-    private $mailerWhitelistExpessions;
+    private $mailerWhitelistExpressions;
 
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
         $this->isDeliveryDisabled = $this->container->getParameter('mailer_disable_delivery');
         $this->mailerMasterEmailAddress = $this->container->getParameter('mailer_master_email_address');
-        $this->mailerWhitelistExpessions = $this->container->getParameter('mailer_delivery_whitelist');
+        $this->mailerWhitelistExpressions = $this->container->getParameter('mailer_delivery_whitelist');
     }
 
     /**
@@ -74,7 +74,7 @@ class MailerSettingExtension extends Twig_Extension
         return $this->getTemplatingService()->render('@ShopsysShop/Common/Mailer/settingInfo.html.twig', [
             'isDeliveryDisabled' => $this->isDeliveryDisabled,
             'mailerMasterEmailAddress' => $this->mailerMasterEmailAddress,
-            'mailerWhitelistExpessions' => $this->mailerWhitelistExpessions,
+            'mailerWhitelistExpressions' => $this->mailerWhitelistExpressions,
         ]);
     }
 

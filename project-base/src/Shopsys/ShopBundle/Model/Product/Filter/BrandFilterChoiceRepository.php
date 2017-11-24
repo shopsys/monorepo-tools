@@ -59,9 +59,9 @@ class BrandFilterChoiceRepository
      */
     private function getBrandsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder)
     {
-        $clonnedProductsQueryBuilder = clone $productsQueryBuilder;
+        $clonedProductsQueryBuilder = clone $productsQueryBuilder;
 
-        $clonnedProductsQueryBuilder
+        $clonedProductsQueryBuilder
             ->select('1')
             ->join('p.brand', 'pb')
             ->andWhere('pb.id = b.id')
@@ -71,10 +71,10 @@ class BrandFilterChoiceRepository
         $brandsQueryBuilder
             ->select('b')
             ->from(Brand::class, 'b')
-            ->andWhere($brandsQueryBuilder->expr()->exists($clonnedProductsQueryBuilder))
+            ->andWhere($brandsQueryBuilder->expr()->exists($clonedProductsQueryBuilder))
             ->orderBy('b.name', 'asc');
 
-        foreach ($clonnedProductsQueryBuilder->getParameters() as $parameter) {
+        foreach ($clonedProductsQueryBuilder->getParameters() as $parameter) {
             $brandsQueryBuilder->setParameter($parameter->getName(), $parameter->getValue());
         }
 

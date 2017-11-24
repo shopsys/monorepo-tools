@@ -51,12 +51,12 @@ class AdministratorActivityRepository
      */
     public function getCurrent(Administrator $administrator)
     {
-        $currentAdministratorActvity = $this->getLastActivitiesQueryBuilder($administrator, 1)->getQuery()->getSingleResult();
-        if ($currentAdministratorActvity === null) {
+        $currentAdministratorActivity = $this->getLastActivitiesQueryBuilder($administrator, 1)->getQuery()->getSingleResult();
+        if ($currentAdministratorActivity === null) {
             throw new \Shopsys\ShopBundle\Model\Administrator\Activity\Exception\CurrentAdministratorActivityNotFoundException();
         }
 
-        return $currentAdministratorActvity;
+        return $currentAdministratorActivity;
     }
 
     /**

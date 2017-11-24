@@ -160,7 +160,7 @@ msgid "Name cannot be longer than {{ limit }} characters"
 msgstr "Název nesmí být delší než {{ limit }} znaků"
 
 #: AvailabilityFormType.php:37
-msgid "Number of days to despatch must be greater or equal to {{ compared_value }}"
+msgid "Number of days to dispatch must be greater or equal to {{ compared_value }}"
 msgstr "Počet dní k expedici musí být větší nebo roven {{ compared_value }}"
 
 #: src/Shopsys/ShopBundle/Form/Admin/Product/Availability/AvailabilityFormType.php:34
@@ -447,7 +447,7 @@ msgid "Please enter name"
 msgstr "Vyplňte prosím název"
 
 #: AdvertFormType.php:49
-msgid "Please enter name of advertisment area"
+msgid "Please enter name of advertisement area"
 msgstr "Zadejte prosím název reklamní plochy"
 
 #: OrderStatusFormType.php:24

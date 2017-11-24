@@ -32,7 +32,7 @@ class Column
     /**
      * @var string
      */
-    private $orderSourceColmunName;
+    private $orderSourceColumnName;
 
     /**
      * @param string $id
@@ -47,7 +47,7 @@ class Column
         $this->title = $title;
         $this->sortable = $sortable;
         $this->classAttribute = '';
-        $this->orderSourceColmunName = $sourceColumnName;
+        $this->orderSourceColumnName = $sourceColumnName;
     }
 
     /**
@@ -106,6 +106,6 @@ class Column
      */
     public function getOrderSourceColumnName()
     {
-        return $this->orderSourceColmunName;
+        return $this->orderSourceColumnName;
     }
 }

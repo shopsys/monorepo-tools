@@ -21,7 +21,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 
 class CartController extends FrontBaseController
 {
-    const AFTER_ADD_WINDOW_ACCESORIES_LIMIT = 3;
+    const AFTER_ADD_WINDOW_ACCESSORIES_LIMIT = 3;
 
     const RECALCULATE_ONLY_PARAMETER_NAME = 'recalculateOnly';
 
@@ -240,7 +240,7 @@ class CartController extends FrontBaseController
                     $addProductResult->getCartItem()->getProduct(),
                     $this->domain->getId(),
                     $this->currentCustomer->getPricingGroup(),
-                    self::AFTER_ADD_WINDOW_ACCESORIES_LIMIT
+                    self::AFTER_ADD_WINDOW_ACCESSORIES_LIMIT
                 );
                 $accessoryDetails = $this->productDetailFactory->getDetailsForProducts($accessories);
 

@@ -211,7 +211,7 @@
 
         {% if productDomain.description
             or productDetail.parameters
-            or accesoriesDetails|length > 0
+            or accessoriesDetails|length > 0
         %}
             <div class="in-tab js-responsive-tabs">
                 <div class="in-tab__head">
@@ -221,8 +221,8 @@
                         </a>
                     {% endif %}
 
-                    {% if accesoriesDetails|length > 0 %}
-                        <a href="#" class="in-tab__head__item js-tabs-button" data-tab-id="accesories">
+                    {% if accessoriesDetails|length > 0 %}
+                        <a href="#" class="in-tab__head__item js-tabs-button" data-tab-id="accessories">
                             {{ accessoriesHeadline }}
                         </a>
                     {% endif %}
@@ -261,13 +261,13 @@
                         </div>
                     {% endif %}
 
-                    {% if accesoriesDetails|length > 0 %}
-                        <a href="#" class="in-tab__content__title js-tabs-button" data-tab-id="accesories">
+                    {% if accessoriesDetails|length > 0 %}
+                        <a href="#" class="in-tab__content__title js-tabs-button" data-tab-id="accessories">
                             {{ accessoriesHeadline }}
                             <i class="svg svg-arrow"></i>
                         </a>
-                        <div class="in-tab__content__item js-tabs-content" data-tab-id="accesories">
-                            {{ productList.list(accesoriesDetails) }}
+                        <div class="in-tab__content__item js-tabs-content" data-tab-id="accessories">
+                            {{ productList.list(accessoriesDetails) }}
                         </div>
                     {% endif %}
                 </div>

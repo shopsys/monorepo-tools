@@ -30,7 +30,7 @@ class ProductFormType extends AbstractType
 {
     const VALIDATION_GROUP_AUTO_PRICE_CALCULATION = 'autoPriceCalculation';
     const VALIDATION_GROUP_USING_STOCK = 'usingStock';
-    const VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY = 'usingStockAndAlternateAvaiability';
+    const VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY = 'usingStockAndAlternateAvailability';
     const VALIDATION_GROUP_NOT_USING_STOCK = 'notUsingStock';
 
     /**

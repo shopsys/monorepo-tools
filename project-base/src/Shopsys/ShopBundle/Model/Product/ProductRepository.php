@@ -675,8 +675,8 @@ class ProductRepository
         // Therefore main variant price recalculation is useless here.
         $this->em
             ->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE
-                WHERE p.variantType != :variantyTypeMain AND p.recalculateAvailability = FALSE')
-            ->setParameter('variantyTypeMain', Product::VARIANT_TYPE_MAIN)
+                WHERE p.variantType != :variantTypeMain AND p.recalculateAvailability = FALSE')
+            ->setParameter('variantTypeMain', Product::VARIANT_TYPE_MAIN)
             ->execute();
     }
 

@@ -65,8 +65,8 @@ class MailerService
         $message->setContentType('text/plain; charset=UTF-8');
         $message->setBody(strip_tags($body), 'text/plain');
         $message->addPart($body, 'text/html');
-        foreach ($messageData->attachmentsFilepaths as $attachmenFilepath) {
-            $message->attach(Swift_Attachment::fromPath($attachmenFilepath));
+        foreach ($messageData->attachmentsFilepaths as $attachmentFilepath) {
+            $message->attach(Swift_Attachment::fromPath($attachmentFilepath));
         }
 
         return $message;

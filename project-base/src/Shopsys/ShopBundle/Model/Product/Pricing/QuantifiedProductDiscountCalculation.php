@@ -12,7 +12,7 @@ class QuantifiedProductDiscountCalculation
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation
      */
-    private $priceCalulation;
+    private $priceCalculation;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Rounding
@@ -20,10 +20,10 @@ class QuantifiedProductDiscountCalculation
     private $rounding;
 
     public function __construct(
-        PriceCalculation $priceCalulation,
+        PriceCalculation $priceCalculation,
         Rounding $rounding
     ) {
-        $this->priceCalulation = $priceCalulation;
+        $this->priceCalculation = $priceCalculation;
         $this->rounding = $rounding;
     }
 
@@ -38,7 +38,7 @@ class QuantifiedProductDiscountCalculation
         $priceWithVat = $this->rounding->roundPriceWithVat(
             $quantifiedItemPrice->getTotalPrice()->getPriceWithVat() * $discountPercent / 100
         );
-        $priceVatAmount = $this->priceCalulation->getVatAmountByPriceWithVat($priceWithVat, $vat);
+        $priceVatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
         $priceWithoutVat = $priceWithVat - $priceVatAmount;
 
         return new Price($priceWithoutVat, $priceWithVat);

@@ -693,7 +693,7 @@ services:
   shopsys.shop.product.unit.unit_inline_edit:
     class: Shopsys\ShopBundle\Model\Product\Unit\UnitInlineEdit
 
-  # Define RedicrectController explicitly to prevent creating it on-the-fly
+  # Define RedirectController explicitly to prevent creating it on-the-fly
   # when redirecting (it causes unnecessary container rebuild).
   shopsys.shop.redirect_controller:
     class: Symfony\Bundle\FrameworkBundle\Controller\RedirectController

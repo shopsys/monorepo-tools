@@ -411,12 +411,12 @@ class Grid
     }
 
     /**
-     * @param string $columntId
+     * @param string $columnId
      * @return bool
      */
-    public function existsColumn($columntId)
+    public function existsColumn($columnId)
     {
-        return array_key_exists($columntId, $this->columnsById);
+        return array_key_exists($columnId, $this->columnsById);
     }
 
     /**

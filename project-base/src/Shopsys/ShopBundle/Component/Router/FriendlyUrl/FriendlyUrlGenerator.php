@@ -106,7 +106,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator
     }
 
     /**
-     * Not supproted method
+     * Not supported method
      */
     public function generate($routeName, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
     {
