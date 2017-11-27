@@ -110,7 +110,7 @@ class CategoryVisibilityRepository
                 )
 
             FROM categories AS c
-            JOIN category_translations ct ON ct.translatable_id = c.id AND ct.locale = :locale
+            LEFT JOIN category_translations ct ON ct.translatable_id = c.id AND ct.locale = :locale
             JOIN category_domains AS parent_cd ON parent_cd.category_id = c.parent_id AND parent_cd.domain_id = :domainId
             WHERE c.id = cd.category_id
                 AND cd.domain_id = :domainId
