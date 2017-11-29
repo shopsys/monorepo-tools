@@ -149,7 +149,7 @@ class Menu
      * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem $item
      * @param string $route
      * @param array|null $parameters
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
+     * @return bool
      */
     private function isItemMatchingRoute(MenuItem $item, $route, array $parameters = null)
     {
@@ -200,7 +200,7 @@ class Menu
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem $items
+     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $items
      * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem $item
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]|null
      */
