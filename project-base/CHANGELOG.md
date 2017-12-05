@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Docker `nginx.conf` has been upgraded with better performance settings (@TomasLudvik)
+    - JavaScript and CSS files are compressed with GZip
+    - static content has cache headers set in order to leverage browser cache
 
 ## [2.0.0-beta.19.2] - 2017-11-23
 ### Fixed
