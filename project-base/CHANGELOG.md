@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Docker `nginx.conf` has been upgraded with better performance settings (@TomasLudvik)
     - JavaScript and CSS files are compressed with GZip
     - static content has cache headers set in order to leverage browser cache
+### Fixed
+- miscellaneous annotations, typos and other minor fixes (@petr.kadlec)
+    - accepted [merge request](https://git.shopsys-framework.com/shopsys/shopsys-framework/merge_requests/11)
 
 ## [2.0.0-beta.19.2] - 2017-11-23
 ### Fixed
