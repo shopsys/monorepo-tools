@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Domain\DomainFacade;
-use Shopsys\ShopBundle\Model\AdminNavigation\Menu;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory;
 
 class MenuController extends AdminBaseController

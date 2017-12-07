@@ -84,7 +84,7 @@ class ProductAccessoryRepository
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param int $domainId
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @return \Doctrine\ORM\QueryBuilder
      */
     private function getAllOfferedAccessoriesByProductQueryBuilder(Product $product, $domainId, PricingGroup $pricingGroup)
     {

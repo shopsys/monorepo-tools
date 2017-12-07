@@ -37,6 +37,7 @@ class JsTranslatorCall
      * @param \PLUG\JavaScript\JNodes\JNodeBase $messageIdArgumentNode
      * @param string $messageId
      * @param string $domain
+     * @param string $functionName
      */
     public function __construct(
         JCallExprNode $callExprNode,

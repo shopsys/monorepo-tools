@@ -20,6 +20,7 @@ class ImageService
 
     /**
      * @param \Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
+     * @param \Shopsys\ShopBundle\Component\FileUpload\FileUpload $fileUpload
      */
     public function __construct(ImageProcessingService $imageProcessingService, FileUpload $fileUpload)
     {
@@ -63,7 +64,7 @@ class ImageService
         $temporaryFilename,
         $type
     ) {
-        $temporaryFilepath = $this->fileUpload->getTemporaryFilePath($temporaryFilename);
+        $temporaryFilepath = $this->fileUpload->getTemporaryFilepath($temporaryFilename);
 
         $image = new Image(
             $imageEntityConfig->getEntityName(),
@@ -99,7 +100,7 @@ class ImageService
         ) {
             throw new \Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException(
                 sprintf(
-                    'Entity %s with ID %s does not own image with ID',
+                    'Entity %s with ID %s does not own image with ID %s',
                     $entityName,
                     $entityId,
                     $image->getId()

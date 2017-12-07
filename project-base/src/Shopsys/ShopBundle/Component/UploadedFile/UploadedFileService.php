@@ -28,7 +28,7 @@ class UploadedFileService
         $entityId,
         array $temporaryFilenames
     ) {
-        $temporaryFilepath = $this->fileUpload->getTemporaryFilePath(array_pop($temporaryFilenames));
+        $temporaryFilepath = $this->fileUpload->getTemporaryFilepath(array_pop($temporaryFilenames));
 
         return new UploadedFile(
             $uploadedFileEntityConfig->getEntityName(),

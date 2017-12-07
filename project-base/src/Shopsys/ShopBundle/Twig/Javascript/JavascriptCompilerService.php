@@ -142,17 +142,17 @@ class JavascriptCompilerService
      */
     private function getRelativeTargetPath($javascript)
     {
-        $relavitveTargetPath = null;
+        $relativeTargetPath = null;
         if (strpos($javascript, 'admin/') === 0 || strpos($javascript, 'frontend/') === 0) {
-            $relavitveTargetPath = substr($this->jsUrlPrefix, 1) . $javascript;
-            if (strpos($relavitveTargetPath, '/') === 0) {
-                $relavitveTargetPath = substr($relavitveTargetPath, 1);
+            $relativeTargetPath = substr($this->jsUrlPrefix, 1) . $javascript;
+            if (strpos($relativeTargetPath, '/') === 0) {
+                $relativeTargetPath = substr($relativeTargetPath, 1);
             }
 
-            $relavitveTargetPath = str_replace('/scripts/', '/scripts/' . $this->domain->getLocale() . '/', $relavitveTargetPath);
+            $relativeTargetPath = str_replace('/scripts/', '/scripts/' . $this->domain->getLocale() . '/', $relativeTargetPath);
         }
 
-        return $relavitveTargetPath;
+        return $relativeTargetPath;
     }
 
     /**

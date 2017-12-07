@@ -863,7 +863,7 @@ msgid "Complement to title will be set as suffix to all titles e.g. if complemen
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:998
-msgid "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anythin in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
+msgid "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anything in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
 msgstr ""
 
 #: ContactFormFacade.php:60
@@ -2048,7 +2048,7 @@ msgid "Hiding product"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:77
-msgid "I agree with terms and conditons"
+msgid "I agree with terms and conditions"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:54
@@ -2858,7 +2858,7 @@ msgid "No page found."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Parameter/listGrid.html.twig:4
-msgid "No parametrs found. You have to create some first."
+msgid "No parameters found. You have to create some first."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/listGrid.html.twig:12
@@ -3776,7 +3776,7 @@ msgid "Searching"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/AdvancedSearch/ruleForm.html.twig:32
-msgid "Searching in all currecies"
+msgid "Searching in all currencies"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/list.html.twig:22
@@ -4620,7 +4620,7 @@ msgid "Type"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:268
-msgid "Type modificatons"
+msgid "Type modifications"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:16
@@ -5355,7 +5355,7 @@ msgid "uses"
 msgstr ""
 
 #: ArticleFormType.php:97
-msgid "without positoning"
+msgid "without positioning"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Search/autocomplete.html.twig:26

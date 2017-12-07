@@ -71,6 +71,7 @@ class FeedXmlWriter
      * @param \Twig_Template $twigTemplate
      * @param string $name
      * @param array $parameters
+     * @return string
      */
     private function getRenderedBlock(Twig_Template $twigTemplate, $name, array $parameters = [])
     {

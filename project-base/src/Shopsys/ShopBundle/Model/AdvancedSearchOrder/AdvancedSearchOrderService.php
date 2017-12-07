@@ -55,7 +55,7 @@ class AdvancedSearchOrderService
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-     * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData $advancedSearchOrderData
+     * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData[] $advancedSearchOrderData
      */
     public function extendQueryBuilderByAdvancedSearchOrderData(QueryBuilder $queryBuilder, array $advancedSearchOrderData)
     {

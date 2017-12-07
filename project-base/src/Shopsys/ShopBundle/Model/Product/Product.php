@@ -639,8 +639,7 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
-     * @param int $domainId
+     * @param \Shopsys\ShopBundle\Model\Category\Category[] $categoriesByDomainId
      */
     public function setCategories(array $categoriesByDomainId)
     {

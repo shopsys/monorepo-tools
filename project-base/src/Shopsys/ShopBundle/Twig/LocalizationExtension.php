@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Twig;
 
-use Shopsys\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
@@ -41,6 +40,7 @@ class LocalizationExtension extends \Twig_Extension
 
     /**
      * @param string $locale
+     * @param bool $showTitle
      * @return string
      */
     public function getLocaleFlagHtml($locale, $showTitle = true)

@@ -15,7 +15,6 @@ abstract class AbstractNativeFixture extends AbstractFixture implements Containe
     private $container;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      */
     public function setContainer(ContainerInterface $container = null)
@@ -34,7 +33,7 @@ abstract class AbstractNativeFixture extends AbstractFixture implements Containe
 
     /**
      * @param string $sql
-     * @param arra
+     * @param array|null $parameters
      * @return mixed
      */
     protected function executeNativeQuery($sql, array $parameters = null)

@@ -84,7 +84,6 @@ class ParameterGridFactory implements GridFactoryInterface
     }
 
     /**
-     * @param array $locales
      * @return QueryBuilderDataSource
      */
     private function getParametersDataSource()

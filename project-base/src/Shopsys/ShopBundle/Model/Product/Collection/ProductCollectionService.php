@@ -5,8 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\Collection;
 class ProductCollectionService
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $products
-     * @param \Shopsys\ShopBundle\Component\Image\Image $imagesByProductId
+     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+     * @param \Shopsys\ShopBundle\Component\Image\Image[] $imagesByProductId
      * @return array
      */
     public function getImagesIndexedByProductId(array $products, array $imagesByProductId)

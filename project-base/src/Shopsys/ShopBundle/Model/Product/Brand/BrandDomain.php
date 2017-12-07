@@ -75,7 +75,7 @@ class BrandDomain
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getSeoTitle()
     {
@@ -83,7 +83,7 @@ class BrandDomain
     }
 
     /**
-     * @param null|string $seoTitle
+     * @param string|null $seoTitle
      */
     public function setSeoTitle($seoTitle)
     {
@@ -91,7 +91,7 @@ class BrandDomain
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getSeoMetaDescription()
     {
@@ -99,7 +99,7 @@ class BrandDomain
     }
 
     /**
-     * @param null|string $seoMetaDescription
+     * @param string|null $seoMetaDescription
      */
     public function setSeoMetaDescription($seoMetaDescription)
     {
@@ -107,7 +107,7 @@ class BrandDomain
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getSeoH1()
     {
@@ -115,7 +115,7 @@ class BrandDomain
     }
 
     /**
-     * @param null|string $seoH1
+     * @param string|null $seoH1
      */
     public function setSeoH1($seoH1)
     {

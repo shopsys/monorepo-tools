@@ -12,7 +12,7 @@ class Breadcrumb
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem|null
      */
-    private $overrdingLastItem;
+    private $overridingLastItem;
 
     public function __construct(MenuFactory $menuFactory)
     {
@@ -24,10 +24,12 @@ class Breadcrumb
      */
     public function overrideLastItem(MenuItem $menuItem)
     {
-        $this->overrdingLastItem = $menuItem;
+        $this->overridingLastItem = $menuItem;
     }
 
     /**
+     * @param \Symfony\Component\Routing\Route $route
+     * @param array|null $routeParameters
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
      */
     public function getItems($route, $routeParameters)
@@ -35,9 +37,9 @@ class Breadcrumb
         $menu = $this->menuFactory->createMenuWithVisibleItems();
         $items = $menu->getMenuPath($route, $routeParameters);
 
-        if ($this->overrdingLastItem !== null) {
+        if ($this->overridingLastItem !== null) {
             array_pop($items);
-            $items[] = $this->overrdingLastItem;
+            $items[] = $this->overridingLastItem;
         }
 
         return $items;

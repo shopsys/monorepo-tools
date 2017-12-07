@@ -30,6 +30,7 @@ class ProductListAdminRepository
     }
 
     /**
+     * @param int $pricingGroupId
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getProductListQueryBuilder($pricingGroupId)
@@ -70,8 +71,8 @@ class ProductListAdminRepository
                     OR
                     NORMALIZE(p.partno) LIKE NORMALIZE(:text)
                 )');
-            $querySerachText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
-            $queryBuilder->setParameter('text', $querySerachText);
+            $querySearchText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
+            $queryBuilder->setParameter('text', $querySearchText);
         }
     }
 }

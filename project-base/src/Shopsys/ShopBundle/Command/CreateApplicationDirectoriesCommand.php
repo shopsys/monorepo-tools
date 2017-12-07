@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
 
 class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
 {

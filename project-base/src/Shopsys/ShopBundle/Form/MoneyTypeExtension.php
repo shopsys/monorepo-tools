@@ -42,7 +42,7 @@ class MoneyTypeExtension extends AbstractTypeExtension
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['money_pattern'] = self::getPattern($options['currency']);
+        $view->vars['money_pattern'] = $this->getPattern($options['currency']);
     }
 
     /**

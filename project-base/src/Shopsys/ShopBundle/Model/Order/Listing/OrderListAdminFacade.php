@@ -17,7 +17,7 @@ class OrderListAdminFacade
     private $localization;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminRepository $productListAdminRepository
+     * @param \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminRepository $orderListAdminRepository
      * @param \Shopsys\ShopBundle\Model\Localization\Localization $localization
      */
     public function __construct(

@@ -40,9 +40,8 @@ class CustomerLoginHandler implements AuthenticationSuccessHandlerInterface, Aut
                 'success' => true,
                 'urlToRedirect' => $referer,
             ];
-            $response = new JsonResponse($responseData);
 
-            return $response;
+            return new JsonResponse($responseData);
         } else {
             return new RedirectResponse($referer);
         }
@@ -59,9 +58,8 @@ class CustomerLoginHandler implements AuthenticationSuccessHandlerInterface, Aut
             $responseData = [
                 'success' => false,
             ];
-            $response = new JsonResponse($responseData);
 
-            return $response;
+            return new JsonResponse($responseData);
         } else {
             $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
 

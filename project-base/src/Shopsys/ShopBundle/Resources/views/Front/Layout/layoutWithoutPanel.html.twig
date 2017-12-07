@@ -3,14 +3,13 @@
 {% block content %}
     <div class="web__main">
         <div class="web__main__content js-main-content">
-                {% block breadcrumb %}
-                    {{ render(controller('ShopsysShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
-                {% endblock %}
-                
-                {{ render(controller('ShopsysShopBundle:Front/FlashMessage:index')) }}
+            {% block breadcrumb %}
+                {{ render(controller('ShopsysShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
+            {% endblock %}
 
-                {% block main_content %}{% endblock %}
-            </div>
+            {{ render(controller('ShopsysShopBundle:Front/FlashMessage:index')) }}
+
+            {% block main_content %}{% endblock %}
         </div>
     </div>
 

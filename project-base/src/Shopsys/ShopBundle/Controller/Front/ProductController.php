@@ -126,7 +126,7 @@ class ProductController extends FrontBaseController
 
         return $this->render('@ShopsysShop/Front/Content/Product/detail.html.twig', [
             'productDetail' => $productDetail,
-            'accesoriesDetails' => $accessoriesDetails,
+            'accessoriesDetails' => $accessoriesDetails,
             'variantsDetails' => $variantsDetails,
             'productMainCategory' => $productMainCategory,
         ]);

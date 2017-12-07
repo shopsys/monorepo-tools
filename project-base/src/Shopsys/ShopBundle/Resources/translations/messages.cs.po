@@ -863,7 +863,7 @@ msgid "Complement to title will be set as suffix to all titles e.g. if complemen
 msgstr "Doplněk k titulku bude připojen za všechny titulky na eshopu. Např. pokud nastavíte doplněk na \"| Můj obchod\" a název zboží je \"D-Link\", bude výsledný titulek u tohoto zboží \"D-Link | Můj obchod\""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:998
-msgid "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anythin in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
+msgid "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anything in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
 msgstr "Komponenta se skládá z 5 hlavních prvků. Prvním je obal <strong class=\"in-article__visible\">form-line</strong>, který dodává formuláři pozadí, odsazení a bordery. Je to vlastně jeden řárek této struktury. V něm je další důležitý prvek, a to <strong class=\"in-article__visible\">form-line__label</strong>. Nemusíme to nutně brát jako label, jedná se hlavně o buďto titulek nebo důležitou část pro celý malý formulářový blok. Nejčastěji je to však label. Další 2 prvky jsou pro zarovnání obsahové části. Je to <strong class=\"in-article__visible\">form-line__side</strong> a <strong class=\"in-article__visible\">form-line__line</strong>. Nachází se za labelem a první z nich zarovnává obsah vedle labelu a nikdy se nedostane pod label. Druhý zabírá celou šířku pod labelem. A to nejdůležitější je <strong class=\"in-article__visible\">form-line__item</strong> což je obal pro cokoliv v obsahové části. Obalit to potřebujeme proto, že prvky by měly být od sebe vždy odsazeny a správně zarovnány. Teprve do těchto prvků se strkají inputy, texty, ikonky a podobně! Tento obal nepotřebují jen prvky, které zabírají 100% šířku."
 
 #: ContactFormFacade.php:60
@@ -2048,7 +2048,7 @@ msgid "Hiding product"
 msgstr "Skrývání zboží"
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:77
-msgid "I agree with terms and conditons"
+msgid "I agree with terms and conditions"
 msgstr "Souhlasím s obchodními podmínkami"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:54
@@ -2858,7 +2858,7 @@ msgid "No page found."
 msgstr "Nebyla nalezena žádná stránka."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Parameter/listGrid.html.twig:4
-msgid "No parametrs found. You have to create some first."
+msgid "No parameters found. You have to create some first."
 msgstr "Nebyly nalezeny žádné parametry. Nejprve musíte nějaké vytvořit."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Payment/listGrid.html.twig:12
@@ -3776,7 +3776,7 @@ msgid "Searching"
 msgstr "Vyhledávání"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/AdvancedSearch/ruleForm.html.twig:32
-msgid "Searching in all currecies"
+msgid "Searching in all currencies"
 msgstr "Vyhledává se ve všech měnách"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/list.html.twig:22
@@ -4620,7 +4620,7 @@ msgid "Type"
 msgstr "Typ"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:268
-msgid "Type modificatons"
+msgid "Type modifications"
 msgstr "Typové modifikace"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:16
@@ -5355,7 +5355,7 @@ msgid "uses"
 msgstr "používá"
 
 #: ArticleFormType.php:97
-msgid "without positoning"
+msgid "without positioning"
 msgstr "bez umístění"
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Search/autocomplete.html.twig:26

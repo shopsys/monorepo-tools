@@ -92,15 +92,15 @@ class PaymentData
 
         $translations = $payment->getTranslations();
         $names = [];
-        $desctiptions = [];
+        $descriptions = [];
         $instructions = [];
         foreach ($translations as $translate) {
             $names[$translate->getLocale()] = $translate->getName();
-            $desctiptions[$translate->getLocale()] = $translate->getDescription();
+            $descriptions[$translate->getLocale()] = $translate->getDescription();
             $instructions[$translate->getLocale()] = $translate->getInstructions();
         }
         $this->name = $names;
-        $this->description = $desctiptions;
+        $this->description = $descriptions;
         $this->instructions = $instructions;
 
         $domains = [];

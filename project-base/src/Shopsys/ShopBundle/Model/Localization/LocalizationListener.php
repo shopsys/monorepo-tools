@@ -22,6 +22,7 @@ class LocalizationListener implements EventSubscriberInterface
 
     /**
      * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\ShopBundle\Model\Localization\Localization $localization
      */
     public function __construct(
         Domain $domain,

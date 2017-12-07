@@ -21,6 +21,7 @@ class UserDataFactory
 
     /**
      * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Customer\UserData
      */
     public function createDefault($domainId)
     {

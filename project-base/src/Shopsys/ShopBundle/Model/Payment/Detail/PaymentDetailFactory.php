@@ -49,7 +49,7 @@ class PaymentDetailFactory
 
     /**
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
+     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
     private function getIndependentPrices(Payment $payment)
     {

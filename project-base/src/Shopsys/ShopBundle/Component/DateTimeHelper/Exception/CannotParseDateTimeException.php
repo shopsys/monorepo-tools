@@ -7,7 +7,7 @@ use Exception;
 class CannotParseDateTimeException extends Exception
 {
     /**
-     * @param string $locale
+     * @param string $format
      * @param string $time
      * @param \Exception|null $previous
      */

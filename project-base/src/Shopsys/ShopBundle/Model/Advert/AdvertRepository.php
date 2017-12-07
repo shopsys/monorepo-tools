@@ -41,7 +41,7 @@ class AdvertRepository
      * @param int $domainId
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getAdvertByPositionQueryBuider($positionName, $domainId)
+    private function getAdvertByPositionQueryBuilder($positionName, $domainId)
     {
         return $this->em->createQueryBuilder()
             ->select('a')
@@ -58,7 +58,7 @@ class AdvertRepository
      */
     public function findRandomAdvertByPosition($positionName, $domainId)
     {
-        $count = $this->getAdvertByPositionQueryBuider($positionName, $domainId)
+        $count = $this->getAdvertByPositionQueryBuilder($positionName, $domainId)
             ->select('COUNT(a)')
             ->getQuery()->getSingleScalarResult();
 
@@ -67,7 +67,7 @@ class AdvertRepository
             return null;
         }
 
-        return $this->getAdvertByPositionQueryBuider($positionName, $domainId)
+        return $this->getAdvertByPositionQueryBuilder($positionName, $domainId)
             ->setFirstResult(rand(0, $count - 1))
             ->setMaxResults(1)
             ->getQuery()->getSingleResult();

@@ -58,8 +58,7 @@ class BrandEditDataFactory
     public function createDefault()
     {
         $brandData = $this->brandDataFactory->createDefault();
-        $brandEditData = new BrandEditData($brandData);
 
-        return $brandEditData;
+        return new BrandEditData($brandData);
     }
 }

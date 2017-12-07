@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Command;
 
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -215,9 +214,8 @@ class CreateDatabaseCommand extends ContainerAwareCommand
         /* @var $doctrineRegistry \Symfony\Bridge\Doctrine\RegistryInterface */
 
         $defaultConnectionName = $doctrineRegistry->getDefaultConnectionName();
-        $defaultConnection = $doctrineRegistry->getConnection($defaultConnectionName);
 
-        return $defaultConnection;
+        return $doctrineRegistry->getConnection($defaultConnectionName);
     }
 
     /**

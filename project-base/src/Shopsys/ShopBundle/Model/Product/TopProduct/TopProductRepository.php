@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class TopProductRepository

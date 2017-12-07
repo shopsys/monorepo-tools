@@ -34,7 +34,7 @@ class AvailabilityFormType extends AbstractType
                 'invalid_message' => 'Number of days to expedite must be whole number.',
                 'constraints' => [
                     new Constraints\GreaterThanOrEqual([
-                        'value' => 0, 'message' => 'Number of days to despatch must be greater or equal to {{ compared_value }}',
+                        'value' => 0, 'message' => 'Number of days to dispatch must be greater or equal to {{ compared_value }}',
                     ]),
                 ],
             ]);

@@ -589,9 +589,6 @@ class Order
         return $this->deleted;
     }
 
-    /**
-     * @param bool $deleted
-     */
     public function markAsDeleted()
     {
         $this->deleted = true;
@@ -694,7 +691,7 @@ class Order
                 return $orderItem;
             }
         }
-        throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\OrdetItemNotFoundException(['id' => $orderItemId]);
+        throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\OrderItemNotFoundException(['id' => $orderItemId]);
     }
 
     /**

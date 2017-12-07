@@ -112,6 +112,7 @@ class DateTimeFormatterExtension extends Twig_Extension
      * @param int $dateType {@link http://php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants}
      * @param int $timeType {@link http://php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants}
      * @param string|null $locale
+     * @return string
      */
     private function format($dateTime, $dateType, $timeType, $locale = null)
     {
@@ -129,6 +130,7 @@ class DateTimeFormatterExtension extends Twig_Extension
 
     /**
      * @param string|null $locale
+     * @return string
      */
     private function getLocale($locale = null)
     {

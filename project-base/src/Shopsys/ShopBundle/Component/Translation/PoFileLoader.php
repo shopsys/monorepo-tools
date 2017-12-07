@@ -42,8 +42,6 @@ class PoFileLoader extends BasePoFileLoader
      */
     public function loadIncludingEmpty($resource, $locale, $domain = 'messages')
     {
-        $catalogue = parent::load($resource, $locale, $domain);
-
-        return $catalogue;
+        return parent::load($resource, $locale, $domain);
     }
 }

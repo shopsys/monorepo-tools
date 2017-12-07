@@ -111,6 +111,7 @@ class UnitFacade
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
+     * @return bool
      */
     public function isUnitUsed(Unit $unit)
     {

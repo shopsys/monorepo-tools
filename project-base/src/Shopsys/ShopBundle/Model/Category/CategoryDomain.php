@@ -90,7 +90,7 @@ class CategoryDomain
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getSeoTitle()
     {
@@ -98,7 +98,7 @@ class CategoryDomain
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getSeoMetaDescription()
     {
@@ -106,7 +106,7 @@ class CategoryDomain
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getSeoH1()
     {

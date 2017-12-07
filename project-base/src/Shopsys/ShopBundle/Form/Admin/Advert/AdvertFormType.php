@@ -46,7 +46,7 @@ class AdvertFormType extends AbstractType
             ->add('name', TextType::class, [
                 'required' => true,
                 'constraints' => [
-                    new Constraints\NotBlank(['message' => 'Please enter name of advertisment area']),
+                    new Constraints\NotBlank(['message' => 'Please enter name of advertisement area']),
                 ],
             ])
             ->add('type', ChoiceType::class, [

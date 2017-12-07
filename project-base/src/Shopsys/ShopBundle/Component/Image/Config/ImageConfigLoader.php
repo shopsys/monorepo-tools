@@ -54,9 +54,7 @@ class ImageConfigLoader
 
         $preparedConfig = $this->loadFromArray($outputConfig);
 
-        $imageConfig = new ImageConfig($preparedConfig);
-
-        return $imageConfig;
+        return new ImageConfig($preparedConfig);
     }
 
     /**

@@ -28,6 +28,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
     /**
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -40,8 +41,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
             '%s --dbname=%s --no-owner --schema=public --username=%s --no-password',
             escapeshellcmd($input->getOption(self::OPT_PGDUMP_BIN)),
             escapeshellarg($connection->getDatabase()),
-            escapeshellarg($connection->getUsername()),
-            escapeshellarg($input->getArgument(self::ARG_OUTPUT_FILE))
+            escapeshellarg($connection->getUsername())
         );
 
         putenv('PGPASSWORD=' . $connection->getPassword());

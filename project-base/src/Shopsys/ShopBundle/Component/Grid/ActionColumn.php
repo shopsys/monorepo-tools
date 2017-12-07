@@ -49,7 +49,7 @@ class ActionColumn
     /**
      * @var string|null
      */
-    private $classAttributte;
+    private $classAttribute;
 
     /**
      * @var string|null
@@ -63,6 +63,7 @@ class ActionColumn
 
     /**
      * @param \Symfony\Component\Routing\Router $router
+     * @param \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
      * @param string $type
      * @param string $title
      * @param string $route
@@ -109,7 +110,7 @@ class ActionColumn
      */
     public function getClassAttribute()
     {
-        return $this->classAttributte;
+        return $this->classAttribute;
     }
 
     /**
@@ -126,7 +127,7 @@ class ActionColumn
      */
     public function setClassAttribute($classAttribute)
     {
-        $this->classAttributte = $classAttribute;
+        $this->classAttribute = $classAttribute;
 
         return $this;
     }

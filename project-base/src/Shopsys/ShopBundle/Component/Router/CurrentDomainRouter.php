@@ -56,7 +56,7 @@ class CurrentDomainRouter implements RouterInterface
     /**
      * @param string $routeName
      * @param array $parameters
-     * @param bool $referenceType
+     * @param int $referenceType
      * @return string
      */
     public function generate($routeName, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
@@ -78,6 +78,6 @@ class CurrentDomainRouter implements RouterInterface
      */
     private function getDomainRouter()
     {
-        return $this->domainRouterFactory->getRouter($this->domain->getid());
+        return $this->domainRouterFactory->getRouter($this->domain->getId());
     }
 }

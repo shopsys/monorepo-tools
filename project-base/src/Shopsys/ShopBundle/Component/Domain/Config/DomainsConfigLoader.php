@@ -38,7 +38,7 @@ class DomainsConfigLoader
                 'File ' . $domainsUrlsConfigFilepath . ' does not contain urls for all domains listed in ' . $domainsConfigFilepath;
             throw new \Shopsys\ShopBundle\Component\Domain\Config\Exception\DomainConfigsDoNotMatchException($message);
         }
-        $processedConfigsWithUrlsByDomainId = $this->addUrlsToProccessedConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId);
+        $processedConfigsWithUrlsByDomainId = $this->addUrlsToProcessedConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId);
 
         $domainConfigs = $this->loadDomainConfigsFromArray($processedConfigsWithUrlsByDomainId);
 
@@ -80,7 +80,7 @@ class DomainsConfigLoader
      * @param array $domainUrlsConfigsByDomainId
      * @return array
      */
-    private function addUrlsToProccessedConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId)
+    private function addUrlsToProcessedConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId)
     {
         foreach ($domainConfigsByDomainId as $domainId => $domainConfigArray) {
             $domainConfigArray[DomainsUrlsConfigDefinition::CONFIG_URL] =

@@ -5,7 +5,6 @@ namespace Shopsys\ShopBundle\Form\Admin\Product\Brand;
 use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandEditData;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;

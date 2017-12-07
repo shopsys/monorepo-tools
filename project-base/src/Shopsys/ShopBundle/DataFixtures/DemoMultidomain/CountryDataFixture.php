@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Model\Country\Country;
 use Shopsys\ShopBundle\Model\Country\CountryData;
 
 class CountryDataFixture extends AbstractReferenceFixture
@@ -32,7 +31,6 @@ class CountryDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\ShopBundle\Model\Country\CountryData $countryData
      * @param int $domainId
      * @param string $referenceName
-     * @return \Shopsys\ShopBundle\Model\Country\Country
      */
     private function createCountry(CountryData $countryData, $domainId, $referenceName)
     {

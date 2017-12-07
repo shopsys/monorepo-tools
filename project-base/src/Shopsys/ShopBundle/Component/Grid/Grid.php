@@ -389,7 +389,7 @@ class Grid
     public function setDefaultOrder($columnId, $direction = DataSourceInterface::ORDER_ASC)
     {
         if (!$this->isOrderFromRequest) {
-            $prefix = $direction == DataSourceInterface::ORDER_DESC ? '-' : '';
+            $prefix = $direction === DataSourceInterface::ORDER_DESC ? '-' : '';
             $this->setOrderingByOrderString($prefix . $columnId);
         }
     }
@@ -411,11 +411,12 @@ class Grid
     }
 
     /**
+     * @param string $columnId
      * @return bool
      */
-    public function existsColumn($columntId)
+    public function existsColumn($columnId)
     {
-        return array_key_exists($columntId, $this->columnsById);
+        return array_key_exists($columnId, $this->columnsById);
     }
 
     /**

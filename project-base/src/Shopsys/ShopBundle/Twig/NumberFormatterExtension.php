@@ -68,6 +68,7 @@ class NumberFormatterExtension extends Twig_Extension
 
     /**
      * @param mixed $number
+     * @param int $minimumFractionDigits
      * @param string|null $locale
      * @return string
      */
@@ -98,6 +99,7 @@ class NumberFormatterExtension extends Twig_Extension
 
     /**
      * @param string|null $locale
+     * @return string
      */
     private function getLocale($locale = null)
     {

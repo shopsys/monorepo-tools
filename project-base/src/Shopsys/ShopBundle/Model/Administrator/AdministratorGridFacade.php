@@ -18,6 +18,7 @@ class AdministratorGridFacade
     private $administratorGridService;
 
     /**
+     * @param \Doctrine\ORM\EntityManager $em
      * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorGridService $administratorGridService
      */
     public function __construct(EntityManager $em, AdministratorGridService $administratorGridService)

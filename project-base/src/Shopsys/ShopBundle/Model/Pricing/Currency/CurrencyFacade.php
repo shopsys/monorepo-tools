@@ -212,6 +212,7 @@ class CurrencyFacade
      */
     public function getAllIndexedById()
     {
+        $currenciesIndexedById = [];
         foreach ($this->getAll() as $currency) {
             $currenciesIndexedById[$currency->getId()] = $currency;
         }

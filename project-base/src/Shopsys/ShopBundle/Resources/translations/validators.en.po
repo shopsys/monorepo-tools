@@ -160,7 +160,7 @@ msgid "Name cannot be longer than {{ limit }} characters"
 msgstr ""
 
 #: AvailabilityFormType.php:37
-msgid "Number of days to despatch must be greater or equal to {{ compared_value }}"
+msgid "Number of days to dispatch must be greater or equal to {{ compared_value }}"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Form/Admin/Product/Availability/AvailabilityFormType.php:34
@@ -447,7 +447,7 @@ msgid "Please enter name"
 msgstr ""
 
 #: AdvertFormType.php:49
-msgid "Please enter name of advertisment area"
+msgid "Please enter name of advertisement area"
 msgstr ""
 
 #: OrderStatusFormType.php:24

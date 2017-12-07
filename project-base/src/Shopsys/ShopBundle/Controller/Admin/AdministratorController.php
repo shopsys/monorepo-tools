@@ -54,7 +54,6 @@ class AdministratorController extends AdminBaseController
 
     /**
      * @Route("/administrator/list/")
-     * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function listAction()
     {

@@ -201,6 +201,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     }
 
     /**
+     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
      * @return \Shopsys\ShopBundle\Model\Payment\PaymentPrice
      */
     public function getPrice(Currency $currency)
@@ -257,9 +258,6 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
         return $this->deleted;
     }
 
-    /**
-     * @param bool $deleted
-     */
     public function markAsDeleted()
     {
         $this->deleted = true;

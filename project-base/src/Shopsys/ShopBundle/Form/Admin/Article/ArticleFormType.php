@@ -94,7 +94,7 @@ class ArticleFormType extends AbstractType
                     'choices' => [
                         t('in upper menu') => Article::PLACEMENT_TOP_MENU,
                         t('in footer') => Article::PLACEMENT_FOOTER,
-                        t('without positoning') => Article::PLACEMENT_NONE,
+                        t('without positioning') => Article::PLACEMENT_NONE,
                     ],
                     'placeholder' => t('-- Choose article position --'),
                     'constraints' => [

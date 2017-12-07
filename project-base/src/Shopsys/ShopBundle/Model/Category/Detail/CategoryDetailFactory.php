@@ -53,9 +53,8 @@ class CategoryDetailFactory
             $lazyLoadedCategoryDetails[] = new LazyLoadedCategoryDetail(
                 function () use ($category, $domainConfig) {
                     $categories = $this->categoryRepository->getTranslatedVisibleSubcategoriesByDomain($category, $domainConfig);
-                    $categoryDetails = $this->createLazyLoadedDetails($categories, $domainConfig);
 
-                    return $categoryDetails;
+                    return $this->createLazyLoadedDetails($categories, $domainConfig);
                 },
                 $category,
                 $hasChildren
@@ -67,7 +66,7 @@ class CategoryDetailFactory
 
     /**
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @param \Shopsys\ShopBundle\Model\Category\Category[] $categoriesByParentId
+     * @param \Shopsys\ShopBundle\Model\Category\Category[][] $categoriesByParentId
      * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
      */
     private function getChildrenDetails(Category $category, array $categoriesByParentId)

@@ -62,9 +62,9 @@ class FlagFilterChoiceRepository
      */
     private function getVisibleFlagsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder, $locale)
     {
-        $clonnedProductsQueryBuilder = clone $productsQueryBuilder;
+        $clonedProductsQueryBuilder = clone $productsQueryBuilder;
 
-        $clonnedProductsQueryBuilder
+        $clonedProductsQueryBuilder
             ->select('1')
             ->join('p.flags', 'pf')
             ->andWhere('pf.id = f.id')
@@ -76,11 +76,11 @@ class FlagFilterChoiceRepository
             ->select('f, ft')
             ->from(Flag::class, 'f')
             ->join('f.translations', 'ft', Join::WITH, 'ft.locale = :locale')
-            ->andWhere($flagsQueryBuilder->expr()->exists($clonnedProductsQueryBuilder))
+            ->andWhere($flagsQueryBuilder->expr()->exists($clonedProductsQueryBuilder))
             ->orderBy('ft.name', 'asc')
             ->setParameter('locale', $locale);
 
-        foreach ($clonnedProductsQueryBuilder->getParameters() as $parameter) {
+        foreach ($clonedProductsQueryBuilder->getParameters() as $parameter) {
             $flagsQueryBuilder->setParameter($parameter->getName(), $parameter->getValue());
         }
 

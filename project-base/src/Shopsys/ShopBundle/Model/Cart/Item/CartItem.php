@@ -120,7 +120,7 @@ class CartItem
 
     /**
      * @param string|null $locale
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return string|null
      */
     public function getName($locale = null)
     {

@@ -4,8 +4,8 @@
 {% endif %}
 {% if mailerMasterEmailAddress is not null and not isDeliveryDisabled %}
     {{ 'Master e-mail %masterMail% set '|trans({'%masterMail%': mailerMasterEmailAddress}) }}
-    {% if mailerWhitelistExpessions is not empty %}
-        {{ 'Following expressions are allowed in whitelist: %whitelist%. '|trans({'%whitelist%': mailerWhitelistExpessions|join(', ')}) }}
+    {% if mailerWhitelistExpressions is not empty %}
+        {{ 'Following expressions are allowed in whitelist: %whitelist%. '|trans({'%whitelist%': mailerWhitelistExpressions|join(', ')}) }}
         {{ 'All e-mails will be sent only to entered addresses.'|trans }}
     {% else %}
         {{ 'All e-mails will be sent only to entered address.'|trans }}

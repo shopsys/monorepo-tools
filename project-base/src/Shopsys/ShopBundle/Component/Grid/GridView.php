@@ -88,6 +88,7 @@ class GridView
      * @param string $name
      * @param array $parameters
      * @param bool $echo
+     * @return string|null
      */
     public function renderBlock($name, array $parameters = [], $echo = true)
     {
@@ -136,19 +137,19 @@ class GridView
         ];
 
         if ($formView === null) {
-            $posibleBlocks = [
+            $possibleBlocks = [
                 'grid_value_cell_id_' . $column->getId(),
                 'grid_value_cell_type_' . $this->getVariableType($value),
                 'grid_value_cell',
             ];
         } else {
-            $posibleBlocks = [
+            $possibleBlocks = [
                 'grid_value_cell_edit_id_' . $column->getId(),
                 'grid_value_cell_edit_type_' . $this->getVariableType($value),
                 'grid_value_cell_edit',
             ];
         }
-        foreach ($posibleBlocks as $blockName) {
+        foreach ($possibleBlocks as $blockName) {
             if ($this->blockExists($blockName)) {
                 $this->renderBlock($blockName, $blockParameters);
                 break;
@@ -271,7 +272,7 @@ class GridView
         $template = $this->twig->loadTemplate($theme);
         /* @var $template \Twig_Template */
 
-        while ($template != null) {
+        while ($template !== false) {
             $templates[] = $template;
             $template = $template->getParent([]);
         }

@@ -19,7 +19,7 @@ class UploadedFileEntityConfigNotFoundException extends Exception implements Upl
     {
         $this->entityClassOrName = $entityClassOrName;
 
-        parent::__construct('Not found upladed file config for entity "' . $entityClassOrName . '".', 0, $previous);
+        parent::__construct('Not found uploaded file config for entity "' . $entityClassOrName . '".', 0, $previous);
     }
 
     /**
