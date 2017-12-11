@@ -19,8 +19,8 @@ msgstr ""
 #: BillingAddressFormType.php:103
 #: DeliveryAddressFormType.php:109
 #: DeliveryAddressFormType.php:113
-#: OrderFormType.php:173
-#: OrderFormType.php:265
+#: OrderFormType.php:172
+#: OrderFormType.php:264
 #: PersonalInfoFormType.php:122
 #: PersonalInfoFormType.php:216
 msgid "City name cannot be longer than {{ limit }} characters"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: BillingAddressFormType.php:60
 #: DeliveryAddressFormType.php:47
-#: OrderFormType.php:137
+#: OrderFormType.php:136
 #: PersonalInfoFormType.php:84
 #: PersonalInfoFormType.php:178
 msgid "Company name cannot be longer than {{ limit }} characters"
@@ -56,16 +56,12 @@ msgstr ""
 
 #: AdministratorFormType.php:43
 #: MailTemplateFormType.php:36
-#: OrderFormType.php:119
+#: OrderFormType.php:118
 #: PersonalInfoFormType.php:66
 #: RegistrationFormType.php:47
 #: ResetPasswordFormType.php:26
 #: UserFormType.php:65
 msgid "Email cannot be longer then {{ limit }} characters"
-msgstr ""
-
-#: RegistrationFormType.php:47
-msgid "Email {{ email }} is already registered"
 msgstr ""
 
 #: ProductFormType.php:240
@@ -75,7 +71,7 @@ msgstr ""
 msgid "Enter date in DD.MM.YYYY format"
 msgstr ""
 
-#: OrderFormType.php:100
+#: OrderFormType.php:99
 #: PersonalInfoFormType.php:53
 #: RegistrationFormType.php:34
 #: UserFormType.php:29
@@ -85,7 +81,7 @@ msgstr ""
 
 #: DeliveryAddressFormType.php:60
 #: DeliveryAddressFormType.php:61
-#: OrderFormType.php:204
+#: OrderFormType.php:203
 #: PersonalInfoFormType.php:154
 msgid "First name of contact person cannot be longer then {{ limit }} characters"
 msgstr ""
@@ -111,7 +107,7 @@ msgid "Heureka API must be {{ limit }} characters"
 msgstr ""
 
 #: BillingAddressFormType.php:74
-#: OrderFormType.php:146
+#: OrderFormType.php:145
 #: PersonalInfoFormType.php:98
 msgid "Identification number cannot be longer then {{ limit }} characters"
 msgstr ""
@@ -130,7 +126,7 @@ msgstr ""
 msgid "Image can be only in JPG, GIF or PNG format"
 msgstr ""
 
-#: OrderFormType.php:109
+#: OrderFormType.php:108
 #: PersonalInfoFormType.php:59
 #: RegistrationFormType.php:40
 #: UserFormType.php:35
@@ -140,7 +136,7 @@ msgstr ""
 
 #: DeliveryAddressFormType.php:73
 #: DeliveryAddressFormType.php:75
-#: OrderFormType.php:218
+#: OrderFormType.php:217
 #: PersonalInfoFormType.php:168
 msgid "Last name of contact person cannot be longer than {{ limit }} characters"
 msgstr ""
@@ -152,7 +148,7 @@ msgstr ""
 #: BrandFormType.php:30
 #: CategoryFormType.php:110
 #: CurrencyFormType.php:54
-#: OrderFormType.php:228
+#: OrderFormType.php:227
 #: PaymentFormType.php:52
 #: ProductParameterValueFormType.php:49
 #: TransportFormType.php:46
@@ -233,8 +229,8 @@ msgid "Please choose availability for stock products"
 msgstr ""
 
 #: DeliveryAddressFormType.php:134
-#: OrderFormType.php:191
-#: OrderFormType.php:290
+#: OrderFormType.php:190
+#: OrderFormType.php:289
 #: PersonalInfoFormType.php:136
 #: PersonalInfoFormType.php:242
 msgid "Please choose country"
@@ -310,8 +306,8 @@ msgstr ""
 
 #: DeliveryAddressFormType.php:104
 #: DeliveryAddressFormType.php:108
-#: OrderFormType.php:170
-#: OrderFormType.php:261
+#: OrderFormType.php:169
+#: OrderFormType.php:260
 #: PersonalInfoFormType.php:121
 #: PersonalInfoFormType.php:211
 msgid "Please enter city"
@@ -363,7 +359,7 @@ msgstr ""
 #: ContactFormType.php:41
 #: LoginFormType.php:26
 #: MailSettingFormType.php:25
-#: OrderFormType.php:115
+#: OrderFormType.php:114
 #: PersonalInfoFormType.php:64
 #: RegistrationFormType.php:45
 #: ResetPasswordFormType.php:24
@@ -375,7 +371,7 @@ msgstr ""
 msgid "Please enter e-mail content"
 msgstr ""
 
-#: OrderFormType.php:97
+#: OrderFormType.php:96
 #: PersonalInfoFormType.php:52
 #: RegistrationFormType.php:33
 #: UserFormType.php:28
@@ -385,7 +381,7 @@ msgstr ""
 
 #: DeliveryAddressFormType.php:55
 #: DeliveryAddressFormType.php:56
-#: OrderFormType.php:199
+#: OrderFormType.php:198
 #: PersonalInfoFormType.php:149
 msgid "Please enter first name of contact person"
 msgstr ""
@@ -413,7 +409,7 @@ msgstr ""
 msgid "Please enter input prices"
 msgstr ""
 
-#: OrderFormType.php:106
+#: OrderFormType.php:105
 #: PersonalInfoFormType.php:58
 #: RegistrationFormType.php:39
 #: UserFormType.php:34
@@ -423,7 +419,7 @@ msgstr ""
 
 #: DeliveryAddressFormType.php:68
 #: DeliveryAddressFormType.php:70
-#: OrderFormType.php:213
+#: OrderFormType.php:212
 #: PersonalInfoFormType.php:163
 msgid "Please enter last name of contact person"
 msgstr ""
@@ -523,8 +519,8 @@ msgstr ""
 
 #: DeliveryAddressFormType.php:90
 #: DeliveryAddressFormType.php:94
-#: OrderFormType.php:161
-#: OrderFormType.php:247
+#: OrderFormType.php:160
+#: OrderFormType.php:246
 #: PersonalInfoFormType.php:115
 #: PersonalInfoFormType.php:197
 msgid "Please enter street"
@@ -534,7 +530,7 @@ msgstr ""
 msgid "Please enter subject"
 msgstr ""
 
-#: OrderFormType.php:125
+#: OrderFormType.php:124
 #: PersonalInfoFormType.php:71
 msgid "Please enter telephone number"
 msgstr ""
@@ -560,7 +556,7 @@ msgstr ""
 #: AdministratorFormType.php:41
 #: ContactFormType.php:42
 #: MailSettingFormType.php:26
-#: OrderFormType.php:116
+#: OrderFormType.php:115
 #: PersonalInfoFormType.php:65
 #: RegistrationFormType.php:46
 #: ResetPasswordFormType.php:25
@@ -578,8 +574,8 @@ msgstr ""
 
 #: DeliveryAddressFormType.php:118
 #: DeliveryAddressFormType.php:122
-#: OrderFormType.php:179
-#: OrderFormType.php:274
+#: OrderFormType.php:178
+#: OrderFormType.php:273
 #: PersonalInfoFormType.php:127
 #: PersonalInfoFormType.php:225
 msgid "Please enter zip code"
@@ -627,15 +623,15 @@ msgstr ""
 #: BillingAddressFormType.php:94
 #: DeliveryAddressFormType.php:95
 #: DeliveryAddressFormType.php:99
-#: OrderFormType.php:164
-#: OrderFormType.php:252
+#: OrderFormType.php:163
+#: OrderFormType.php:251
 #: PersonalInfoFormType.php:116
 #: PersonalInfoFormType.php:202
 msgid "Street name cannot be longer than {{ limit }} characters"
 msgstr ""
 
 #: BillingAddressFormType.php:84
-#: OrderFormType.php:155
+#: OrderFormType.php:154
 #: PersonalInfoFormType.php:108
 msgid "Tax number cannot be longer than {{ limit }} characters"
 msgstr ""
@@ -643,8 +639,8 @@ msgstr ""
 #: BillingAddressFormType.php:46
 #: DeliveryAddressFormType.php:82
 #: DeliveryAddressFormType.php:85
-#: OrderFormType.php:128
-#: OrderFormType.php:238
+#: OrderFormType.php:127
+#: OrderFormType.php:237
 #: PersonalInfoFormType.php:72
 #: PersonalInfoFormType.php:188
 msgid "Telephone number cannot be longer than {{ limit }} characters"
@@ -701,8 +697,8 @@ msgstr ""
 #: BillingAddressFormType.php:112
 #: DeliveryAddressFormType.php:123
 #: DeliveryAddressFormType.php:127
-#: OrderFormType.php:182
-#: OrderFormType.php:279
+#: OrderFormType.php:181
+#: OrderFormType.php:278
 #: PersonalInfoFormType.php:128
 #: PersonalInfoFormType.php:230
 msgid "Zip code cannot be longer than {{ limit }} characters"
