@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.0.0-beta.20.0] - 2017-12-11
 ### Changed
 - Docker `nginx.conf` has been upgraded with better performance settings (@TomasLudvik)
     - JavaScript and CSS files are compressed with GZip
@@ -177,7 +179,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - full friendly URL for main entities
 - customizable SEO attributes for main entities
 
-[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.19.2...HEAD
+[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.20.0..HEAD
+[2.0.0-beta.20.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.19.2...v2.0.0-beta.20.0
 [2.0.0-beta.19.2]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.19.1...v2.0.0-beta.19.2
 [2.0.0-beta.19.1]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.19.0...v2.0.0-beta.19.1
 [2.0.0-beta.19.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.18.0...v2.0.0-beta.19.0

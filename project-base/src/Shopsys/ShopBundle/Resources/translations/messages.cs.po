@@ -107,11 +107,11 @@ msgid "Active"
 msgstr "Aktivní"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ProductPicker/listGrid.html.twig:47
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:723
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:722
 msgid "Add"
 msgstr "Přidat"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:310
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:309
 msgid "Add URL"
 msgstr "Přidat URL"
 
@@ -132,7 +132,7 @@ msgid "Add only to order confirmation page"
 msgstr "Vložit jen na stránku s potvrzením objednávky"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:208
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:495
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:494
 msgid "Add product"
 msgstr "Přidat zboží"
 
@@ -178,19 +178,19 @@ msgstr "Administrace"
 msgid "Administrator"
 msgstr "Administrátor"
 
-#: AdministratorController.php:186
+#: AdministratorController.php:185
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byl vytvořen administrátor <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: AdministratorController.php:118
+#: AdministratorController.php:117
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr "Byl upraven administrátor <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: AdministratorController.php:224
+#: AdministratorController.php:223
 msgid "Administrator <strong>{{ name }}</strong> deleted."
 msgstr "Administrátor <strong>{{ name }}</strong> byl smazán."
 
-#: AdministratorController.php:233
+#: AdministratorController.php:232
 msgid "Administrator <strong>{{ name }}</strong> is the only one and can't be deleted."
 msgstr "Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán."
 
@@ -761,7 +761,7 @@ msgstr "Město"
 msgid "Clear filter"
 msgstr "Vynulovat filtr"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:411
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:410
 msgid "Click to go to product section"
 msgstr "Kliknutím přejdete k výběru produktu"
 
@@ -780,7 +780,7 @@ msgstr "Zavřít (Esc)"
 msgid "Close without saving"
 msgstr "Zavřít bez uložení"
 
-#: CurrencyGridFactory.php:57
+#: CurrencyGridFactory.php:58
 #: PromoCodeGridFactory.php:44
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:21
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Script/detail.html.twig:15
@@ -1165,7 +1165,7 @@ msgstr "Defaultní tlačítko"
 msgid "Default pricing group"
 msgstr "Výchozí cenová skupina"
 
-#: PricingGroupController.php:173
+#: PricingGroupController.php:172
 msgid "Default pricing group settings modified"
 msgstr "Nastavení výchozí cenové skupiny bylo upraveno"
 
@@ -1303,7 +1303,7 @@ msgstr "Opravdu si přejete trvale odstranit měnu \"%name%\"?"
 msgid "Do you really want to remove item \"<i>%itemName%</i>\" from the order?"
 msgstr "Opravdu chcete odebrat z objednávky položku \"<i>%itemName%</i>\"?"
 
-#: PricingGroupController.php:142
+#: PricingGroupController.php:141
 msgid "Do you really want to remove pricing group \"%name%\" permanently? It is not used anywhere."
 msgstr "Opravdu si přejete trvale odstranit cenovou skupinu \"%name%\"? Nikde není použita."
 
@@ -1319,7 +1319,7 @@ msgstr "Opravdu si přejete trvale odstranit stav objednávek \"%name%\"? Nikde 
 msgid "Do you really want to remove the order?"
 msgstr "Opravdu si přejete objednávku smazat?"
 
-#: AdministratorController.php:73
+#: AdministratorController.php:72
 msgid "Do you really want to remove this administrator?"
 msgstr "Opravdu chcete odstranit tohoto administrátora?"
 
@@ -1343,7 +1343,7 @@ msgstr "Opravdu chcete odstranit tohoto zákazníka?"
 msgid "Do you really want to remove this flag?"
 msgstr "Opravdu chcete odstranit tento příznak?"
 
-#: SliderController.php:74
+#: SliderController.php:73
 msgid "Do you really want to remove this page?"
 msgstr "Opravdu chcete odstranit tuto stránku?"
 
@@ -1438,7 +1438,7 @@ msgstr "Drag and drop na řádky"
 msgid "Drag file here"
 msgstr "Zde přetáhněte soubor"
 
-#: AdministratorController.php:68
+#: AdministratorController.php:67
 #: CustomerController.php:181
 #: MailController.php:109
 #: MailController.php:121
@@ -1534,7 +1534,7 @@ msgstr "Upravit údaje"
 msgid "Editing administrator"
 msgstr "Editace administrátora"
 
-#: AdministratorController.php:140
+#: AdministratorController.php:139
 msgid "Editing administrator - %name%"
 msgstr "Editace administrátora - %name%"
 
@@ -1653,7 +1653,7 @@ msgstr "Editace dopravy - %name%"
 msgid "Editing slider page"
 msgstr "Editace stránky slideru"
 
-#: SliderController.php:158
+#: SliderController.php:154
 msgid "Editing slider page - %name%"
 msgstr "Editace stránky slideru - %name%"
 
@@ -1737,7 +1737,7 @@ msgstr "Při nahrávání souboru došlo k chybě: %message%"
 msgid "Error occurred, try again please."
 msgstr "Nastala chyba, zkuste to, prosím, znovu."
 
-#: CurrencyGridFactory.php:58
+#: CurrencyGridFactory.php:59
 msgid "Exchange rate"
 msgstr "Kurz"
 
@@ -1871,7 +1871,7 @@ msgstr "Pro odstranění sazby \"%name% musíte zvolit, která se má všude, kd
 msgid "For deleting unit \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which unit you want to set instead?"
 msgstr "Pro odstranění jednotky \"%name% musíte zvolit, která se má všude, kde je aktuálně používaná nastavit. Jakou jednotku místo ní chcete nastavit?"
 
-#: PricingGroupController.php:121
+#: PricingGroupController.php:120
 msgid "For removing pricing group \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
 msgstr "Pro odstranění cenové skupiny \"%name%\" musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
 
@@ -1930,7 +1930,7 @@ msgstr "Nastavení dopravy a platby zdarma bylo uloženo"
 msgid "Frontend"
 msgstr "Frontend"
 
-#: AdministratorController.php:67
+#: AdministratorController.php:66
 #: CustomerController.php:178
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Administrator/detail.html.twig:17
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:6
@@ -2387,7 +2387,7 @@ msgstr "Poslední objednávka"
 msgid "Light button"
 msgstr "Světlé tlačítko"
 
-#: SliderController.php:71
+#: SliderController.php:70
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Advert/detail.html.twig:28
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:25
 msgid "Link"
@@ -2511,8 +2511,8 @@ msgstr "Přihlášení se nepodařilo."
 msgid "Login name"
 msgstr "Přihlašovací jméno"
 
-#: AdministratorController.php:127
-#: AdministratorController.php:195
+#: AdministratorController.php:126
+#: AdministratorController.php:194
 msgid "Login name <strong>{{ name }}</strong> is already used"
 msgstr "Přihlašovací jméno <strong>{{ name }}</strong> je již použito"
 
@@ -2520,7 +2520,7 @@ msgstr "Přihlašovací jméno <strong>{{ name }}</strong> je již použito"
 msgid "Login time"
 msgstr "Čas přihlášení"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:292
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:291
 msgid "Main URL can't be deleted"
 msgstr "Hlavní URL nelze smazat"
 
@@ -2615,7 +2615,7 @@ msgstr "Název modulu"
 msgid "Modules"
 msgstr "Zapínací moduly"
 
-#: SuperadminController.php:170
+#: SuperadminController.php:171
 msgid "Modules configuration modified"
 msgstr "Nastavení zapínacích modulů bylo upraveno"
 
@@ -2628,7 +2628,7 @@ msgid "More information"
 msgstr "Více informací"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/edit.html.twig:349
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:744
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:743
 msgid "Move"
 msgstr "Přesunout"
 
@@ -2652,7 +2652,7 @@ msgstr "Mé objednávky"
 #: AvailabilityGridFactory.php:55
 #: BrandController.php:125
 #: CountryGridFactory.php:54
-#: CurrencyGridFactory.php:56
+#: CurrencyGridFactory.php:57
 #: FlagGridFactory.php:55
 #: OrderStatusGridFactory.php:56
 #: ParameterGridFactory.php:70
@@ -2660,7 +2660,7 @@ msgstr "Mé objednávky"
 #: PricingGroupGridFactory.php:54
 #: ProductController.php:369
 #: ProductPickerController.php:139
-#: SliderController.php:70
+#: SliderController.php:69
 #: TransportGridFactory.php:72
 #: UnitGridFactory.php:55
 #: VatGridFactory.php:67
@@ -2674,7 +2674,7 @@ msgstr "Mé objednávky"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Script/detail.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:24
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Transport/detail.html.twig:22
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:480
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:479
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:27
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:147
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig:161
@@ -2925,7 +2925,7 @@ msgstr "Poznámka"
 msgid "Nothing to choose from"
 msgstr "Není z čeho vybírat"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:686
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:685
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormTheme.html.twig:32
 #: src/Shopsys/ShopBundle/Resources/views/Front/Form/theme.html.twig:203
 msgid "Nothing to choose from."
@@ -3122,7 +3122,7 @@ msgstr "Hodnota objednávek"
 msgid "Our customers who bought this bought also"
 msgstr "Naši zákaznící k tomuto produktu nejčastěji nakupují"
 
-#: SliderController.php:180
+#: SliderController.php:176
 msgid "Page <strong>{{ name }}</strong> deleted"
 msgstr "Stránka <strong>{{ name }}</strong> byla smazána"
 
@@ -3266,8 +3266,8 @@ msgstr "Místo pro input"
 msgid "Please check following information:"
 msgstr "Prosím překontrolujte následující informace:"
 
-#: AdministratorController.php:136
-#: AdministratorController.php:204
+#: AdministratorController.php:135
+#: AdministratorController.php:203
 #: AdvertController.php:101
 #: AdvertController.php:196
 #: ArticleController.php:116
@@ -3291,8 +3291,8 @@ msgstr "Prosím překontrolujte následující informace:"
 #: RegistrationController.php:75
 #: SeoController.php:61
 #: ShopInfoController.php:61
-#: SliderController.php:114
-#: SliderController.php:154
+#: SliderController.php:110
+#: SliderController.php:150
 #: TermsAndConditionsController.php:62
 #: TransportAndPaymentController.php:83
 #: TransportController.php:91
@@ -3300,7 +3300,7 @@ msgstr "Prosím překontrolujte následující informace:"
 msgid "Please check the correctness of all data filled."
 msgstr "Prosím zkontrolujte si správnost vyplnění všech údajů"
 
-#: customizeBundle.js:421
+#: customizeBundle.js:425
 msgid "Please check the entered values.<br><br>"
 msgstr "Překontrolujte prosím zadané hodnoty.<br><br>"
 
@@ -3412,15 +3412,15 @@ msgstr "Cenotvorba"
 msgid "Pricing group"
 msgstr "Cenová skupina"
 
-#: PricingGroupController.php:128
+#: PricingGroupController.php:127
 msgid "Pricing group \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
 msgstr "Cenová skupina \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
 
-#: PricingGroupController.php:89
+#: PricingGroupController.php:88
 msgid "Pricing group <strong>{{ name }}</strong> deleted"
 msgstr "Cenová skupina <strong>{{ name }}</strong> byla smazána"
 
-#: PricingGroupController.php:97
+#: PricingGroupController.php:96
 msgid "Pricing group <strong>{{ name }}</strong> deleted and replaced by group <strong>{{ newName }}</strong>."
 msgstr "Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahrazena skupinou <strong>{{ newName }}</strong>."
 
@@ -3430,7 +3430,7 @@ msgstr "Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahraze
 msgid "Pricing groups"
 msgstr "Cenové skupiny"
 
-#: SuperadminController.php:100
+#: SuperadminController.php:101
 msgid "Pricing settings modified"
 msgstr "Nastavení cenotvorby bylo upraveno"
 
@@ -3617,7 +3617,7 @@ msgstr "Datum registrace"
 msgid "Remember my login"
 msgstr "Zapamatuj si mé přihlášení"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:419
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:418
 msgid "Remove"
 msgstr "Odebrat"
 
@@ -3812,7 +3812,7 @@ msgstr "Zvolené DPH neexistuje"
 msgid "Selected VAT doesn't exist."
 msgstr "Zvolené DPH neexistuje."
 
-#: AdministratorController.php:239
+#: AdministratorController.php:238
 msgid "Selected administrated doesn't exist."
 msgstr "Zvolený administrátor neexistuje."
 
@@ -3862,7 +3862,7 @@ msgstr "Zvolená objednávka neexistuje"
 msgid "Selected order status doesn't exist."
 msgstr "Zvolený stav objednávek neexistuje"
 
-#: SliderController.php:186
+#: SliderController.php:182
 msgid "Selected page doesn't exist."
 msgstr "Zvolená stránka neexistuje."
 
@@ -3874,8 +3874,8 @@ msgstr "Zvolený parametr neexistuje."
 msgid "Selected payment doesn't exist."
 msgstr "Zvolená platba neexistuje."
 
-#: PricingGroupController.php:105
-#: PricingGroupController.php:149
+#: PricingGroupController.php:104
+#: PricingGroupController.php:148
 msgid "Selected pricing group doesn't exist."
 msgstr "Zvolená cenová skupina neexistuje."
 
@@ -4074,11 +4074,11 @@ msgstr "Slider na titulce"
 msgid "Slider page"
 msgstr "Stránka slideru"
 
-#: SliderController.php:104
+#: SliderController.php:100
 msgid "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byla vytvořena stránka slideru <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: SliderController.php:143
+#: SliderController.php:139
 msgid "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 msgstr "Byla upravena stránka slideru <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
@@ -5013,7 +5013,7 @@ msgstr "Ceny můžete nastavit na kartě konkrétní varianty."
 msgid "You can upload following formats: PNG, JPG, GIF"
 msgstr "Můžete nahrávat formáty: PNG, JPG a GIF"
 
-#: AdministratorController.php:230
+#: AdministratorController.php:229
 msgid "You can't delete yourself."
 msgstr "Nemůžete smazat sami sebe."
 
