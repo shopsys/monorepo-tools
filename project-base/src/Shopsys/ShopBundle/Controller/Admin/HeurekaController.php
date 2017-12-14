@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Form\Admin\Heureka\HeurekaShopCertificationFormType;
 use Shopsys\ShopBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\ShopBundle\Model\Heureka\HeurekaSetting;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class HeurekaController extends AdminBaseController
 {
@@ -73,19 +72,6 @@ class HeurekaController extends AdminBaseController
             'form' => $formView,
             'serverName' => $this->heurekaFacade->getServerNameByLocale($locale),
             'selectedDomainConfig' => $domainConfig,
-        ]);
-    }
-
-    public function embedWidgetAction()
-    {
-        $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
-
-        if (!$this->heurekaFacade->isHeurekaWidgetActivated($domainId)) {
-            return new Response('');
-        }
-
-        return $this->render('@ShopsysShop/Admin/Content/Heureka/widget.html.twig', [
-            'widgetCode' => $this->heurekaSetting->getHeurekaShopCertificationWidgetByDomainId($domainId),
         ]);
     }
 }

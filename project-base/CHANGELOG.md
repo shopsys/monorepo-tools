@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Fixed
 - BrandFacade::create now generates friendly URL for all domains (@sspooky13)
+- `Admin/HeurekaController::embedWidgetAction()` moved to new `Front/HeurekaController` as the action is called in FE template (@vitek-rostislav)
 
 ## [2.0.0-beta.20.0] - 2017-12-11
 ### Changed
