@@ -21,6 +21,13 @@ class CloseNewlyOpenedWindowsHelper extends Module
         $webDriver = $this->getModule(StrictWebDriver::class);
         /* @var $webDriver \Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver */
 
+        if ($webDriver->webDriver === null) {
+            // Workaround: When Codeception fails to connect to Selenium WebDriver,
+            // the \Codeception\Module\WebDriver::_before() method fails
+            // and $webDriver->webDriver is null but _after methods are still run.
+            return;
+        }
+
         $this->closeNewlyOpenedWindows($webDriver->webDriver);
     }
 
