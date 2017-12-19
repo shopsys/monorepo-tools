@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ShopSys\\CodingStandards\\": "src/ShopSys/CodingStandards"
+            "ShopSys\\CodingStandards\\": "src"
         }
     }
 }
