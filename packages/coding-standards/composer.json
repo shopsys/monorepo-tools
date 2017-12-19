@@ -15,6 +15,7 @@
         }
     },
     "require": {
+        "php": "^5.6",
         "friendsofphp/php-cs-fixer": "~2.3",
         "jakub-onderka/php-parallel-lint": "~0.9",
         "phpmd/phpmd": "~2.0",
