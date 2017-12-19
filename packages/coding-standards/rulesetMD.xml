@@ -54,7 +54,5 @@
         </properties>
     </rule>
 
-    <rule ref="rulesets/naming.xml/ConstantNamingConventions" />
-
     <rule ref="rulesets/unusedcode.xml/UnusedPrivateMethod" />
 </ruleset>
