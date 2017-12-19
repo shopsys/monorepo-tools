@@ -59,7 +59,6 @@
         <priority>1</priority>
     </rule>
 
-    <rule ref="rulesets/controversial.xml/CamelCaseMethodName" />
     <rule ref="rulesets/controversial.xml/CamelCaseParameterName" />
     <rule ref="rulesets/controversial.xml/CamelCaseVariableName" />
 
