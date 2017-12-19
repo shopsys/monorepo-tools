@@ -64,14 +64,6 @@ class OrmJoinColumnRequireNullableFixer implements FixerInterface, DefinedFixerI
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
-    {
-        return 'Annotations @ORM\ManyToOne and @ORM\OneToOne must have defined nullable option in @ORM\JoinColumn';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Shopsys/orm_join_column_require_nullable';
