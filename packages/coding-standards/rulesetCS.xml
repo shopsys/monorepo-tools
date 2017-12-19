@@ -2,6 +2,15 @@
 <ruleset name="ruleset">
     <description>ShopSys Coding Standards</description>
 
+    <!-- From php-md -->
+    <rule ref="Generic.Metrics.CyclomaticComplexity">
+        <properties>
+            <property name="absoluteComplexity" value="13"/>
+        </properties>
+    </rule>
+
+
+
     <!-- Include the whole PSR-2 standard -->
     <rule ref="PSR2"/>
 

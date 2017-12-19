@@ -29,14 +29,6 @@
         }
     -->
 
-    <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
-        <properties>
-            <property name="reportLevel" value="13"/>
-            <property name="showClassesComplexity" value="true"/>
-            <property name="showMethodsComplexity" value="true"/>
-        </properties>
-    </rule>
-
     <rule ref="rulesets/codesize.xml/ExcessiveMethodLength">
         <properties>
             <property name="minimum" value="51"/>

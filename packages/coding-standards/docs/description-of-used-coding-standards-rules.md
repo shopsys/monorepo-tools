@@ -115,7 +115,6 @@ You can see [official documentation](https://phpmd.org/rules/index.html) for mor
 
 | Rule name                                           | Rule description                                                                                                                   | Note                                         |
 | ---------------------------------------------       | ---------------------------------------------------------------------------------------------------------------------------------- | ----                                         |
-| `rulesets/codesize.xml/CyclomaticComplexity`        | Cyclomatic complexity of a method must not be greater than 13.                                                                     | Can not be fixed automatically.              |
 | `rulesets/codesize.xml/ExcessiveMethodLength`       | A method must not be longer than 51 lines.                                                                                         | Can not be fixed automatically.              |
 | `rulesets/codesize.xml/ExcessiveClassLength`        | A class must not be longer than 501 lines.                                                                                         | Can not be fixed automatically.              |
 | `rulesets/codesize.xml/ExcessivePublicCount`        | Amount of public methods and attributes in a class must not be greater than 31.                                                    | Can not be fixed automatically.              |
