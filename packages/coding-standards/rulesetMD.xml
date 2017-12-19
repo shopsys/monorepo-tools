@@ -38,7 +38,6 @@
     </rule>
 
     <rule ref="rulesets/controversial.xml/CamelCaseParameterName" />
-    <rule ref="rulesets/controversial.xml/CamelCaseVariableName" />
 
     <rule ref="rulesets/design.xml/ExitExpression" />
 
