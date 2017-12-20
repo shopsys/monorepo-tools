@@ -18,23 +18,23 @@ For further information see official documentation of particular project.
 ### PHP-Parallel-Lint
 
 ```
-vendor/bin/parallel-lint /path/to/project
+php vendor/bin/parallel-lint /path/to/project
 ```
 
 ### PHP-CS-Fixer
 
 ```
-vendor/bin/php-cs-fixer fix /path/to/project --config=vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs
+php vendor/bin/php-cs-fixer fix /path/to/project --config=vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs
 ```
 
 ### PHP_CodeSniffer
 
 ```
-vendor/bin/phpcs /path/to/project --standard=vendor/shopsys/coding-standards/rulesetCS.xml
+php vendor/bin/phpcs /path/to/project --standard=vendor/shopsys/coding-standards/rulesetCS.xml
 ```
 
 ### PHPMD
 
 ```
-vendor/bin/phpmd /path/to/project text vendor/shopsys/coding-standards/rulesetMD.xml
+php vendor/bin/phpmd /path/to/project text vendor/shopsys/coding-standards/rulesetMD.xml
 ```
