@@ -32,12 +32,12 @@ final class ForbiddenSuperGlobalSniff implements Sniff
         $tokens = $file->getTokens();
         $currentToken = $tokens[$position];
 
-        if (! in_array($currentToken['content'], $this->superglobalVariables, true ) ) {
+        if (! in_array($currentToken['content'], $this->superglobalVariables, true)) {
             return;
         }
 
         $file->addError(
-            sprintf('Super global %s is forbidden', $currentToken['content']),
+            sprintf('Super global "%s" is forbidden', $currentToken['content']),
             $position,
             self::class
         );
