@@ -27,8 +27,6 @@
         </properties>
     </rule>
 
-    <rule ref="rulesets/controversial.xml/Superglobals" />
-
     <rule
         name="CamelCasePropertyName"
         class="ShopSys\CodingStandards\MessDetector\CamelCasePropertyName"
