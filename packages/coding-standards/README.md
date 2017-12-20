@@ -13,17 +13,17 @@ It contains **few extra ShopSys rules** to those defaults ones:
 
 `Shopsys/missing_button_type` 
 
-- Adds mandatory `type` attribute to `<button>` HTML tag.                                                                            |
+- Adds mandatory `type` attribute to `<button>` HTML tag.
 
 
 `Shopsys/orm_join_column_require_nullable`    
 
-- Doctrine annotations `@ORM\ManyToOne` and `@ORM\OneToOne` must have defined `nullable` option in `@ORM\JoinColumn`.                |
+- Doctrine annotations `@ORM\ManyToOne` and `@ORM\OneToOne` must have defined `nullable` option in `@ORM\JoinColumn`.
 
 
 `Shopsys/no_unused_imports`                   
 
-- Unused use statements (except those from the same namespace) must be removed.                                                      |
+- Unused use statements (except those from the same namespace) must be removed.
 
 
 ### Rules for [PHPMD](https://github.com/phpmd/phpmd)
