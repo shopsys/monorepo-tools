@@ -39,8 +39,6 @@
 
     <rule ref="rulesets/controversial.xml/CamelCaseParameterName" />
 
-    <rule ref="rulesets/design.xml/ExitExpression" />
-
     <rule ref="rulesets/naming.xml/ShortVariable">
         <properties>
             <property name="minimum" value="2"/>
