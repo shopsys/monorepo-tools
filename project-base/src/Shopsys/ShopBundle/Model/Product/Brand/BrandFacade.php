@@ -63,20 +63,23 @@ class BrandFacade
      */
     public function create(BrandEditData $brandEditData)
     {
+        $domains = $this->domain->getAll();
         $brandData = $brandEditData->getBrandData();
         $brand = new Brand($brandData);
         $this->em->persist($brand);
         $this->em->flush();
-        $this->createBrandDomains($brand, $this->domain->getAll());
+        $this->createBrandDomains($brand, $domains);
         $this->refreshBrandDomains($brand, $brandEditData);
         $this->imageFacade->uploadImage($brand, $brandData->image, null);
 
-        $this->friendlyUrlFacade->createFriendlyUrlForDomain(
-            'front_brand_detail',
-            $brand->getId(),
-            $brand->getName(),
-            Domain::FIRST_DOMAIN_ID
-        );
+        foreach ($domains as $domain) {
+            $this->friendlyUrlFacade->createFriendlyUrlForDomain(
+                'front_brand_detail',
+                $brand->getId(),
+                $brand->getName(),
+                $domain->getId()
+            );
+        }
         $this->em->flush();
 
         return $brand;
@@ -89,6 +92,7 @@ class BrandFacade
      */
     public function edit($brandId, BrandEditData $brandEditData)
     {
+        $domains = $this->domain->getAll();
         $brand = $this->brandRepository->getById($brandId);
         $brandData = $brandEditData->getBrandData();
         $brand->edit($brandData);
@@ -99,12 +103,14 @@ class BrandFacade
         $this->em->flush();
 
         $this->friendlyUrlFacade->saveUrlListFormData('front_brand_detail', $brand->getId(), $brandData->urls);
-        $this->friendlyUrlFacade->createFriendlyUrlForDomain(
-            'front_brand_detail',
-            $brand->getId(),
-            $brand->getName(),
-            Domain::FIRST_DOMAIN_ID
-        );
+        foreach ($domains as $domain) {
+            $this->friendlyUrlFacade->createFriendlyUrlForDomain(
+                'front_brand_detail',
+                $brand->getId(),
+                $brand->getName(),
+                $domain->getId()
+            );
+        }
         $this->em->flush();
 
         return $brand;
