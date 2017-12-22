@@ -41,7 +41,7 @@ class OrmJoinColumnRequireNullableFixer implements FixerInterface, DefinedFixerI
      */
     public function isRisky()
     {
-        return false;
+        return true;
     }
 
     /**
