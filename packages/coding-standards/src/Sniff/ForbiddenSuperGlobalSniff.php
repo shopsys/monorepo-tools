@@ -31,7 +31,7 @@ final class ForbiddenSuperGlobalSniff implements Sniff
     {
         $currentToken = $file->getTokens()[$position];
 
-        if (! in_array($currentToken['content'], $this->superglobalVariables, true)) {
+        if (!in_array($currentToken['content'], $this->superglobalVariables, true)) {
             return;
         }
 
