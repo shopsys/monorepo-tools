@@ -44,7 +44,10 @@
     <rule ref="MySource.PHP.GetRequestData"/>
     <rule ref="PEAR.Commenting.InlineComment"/>
     <rule ref="PEAR.NamingConventions.ValidClassName"/>
-    <rule ref="Squiz.NamingConventions.ValidVariableName"/>
+    <rule ref="Squiz.NamingConventions.ValidVariableName">
+        <!-- private properties should not start with "_" -->
+        <exclude name="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
+    </rule>
     <rule ref="Squiz.PHP.DisallowMultipleAssignments"/>
     <rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops"/>
     <rule ref="Squiz.PHP.Eval"/>
