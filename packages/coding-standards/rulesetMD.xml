@@ -27,14 +27,6 @@
         </properties>
     </rule>
 
-    <rule
-        name="CamelCasePropertyName"
-        class="ShopSys\CodingStandards\MessDetector\CamelCasePropertyName"
-        message="The property {0} is not named in camelCase."
-    >
-        <priority>1</priority>
-    </rule>
-
     <rule ref="rulesets/controversial.xml/CamelCaseParameterName" />
 
     <rule ref="rulesets/naming.xml/ShortVariable">
