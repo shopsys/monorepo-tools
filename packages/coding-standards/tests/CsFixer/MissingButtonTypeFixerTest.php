@@ -3,11 +3,11 @@
 namespace ShopSys\Tests\Unit\CodingStandards\CsFixer;
 
 use PhpCsFixer\Tokenizer\Tokens;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer;
 use SplFileInfo;
 
-class MissingButtonTypeFixerTest extends PHPUnit_Framework_TestCase
+class MissingButtonTypeFixerTest extends TestCase
 {
     public function testFix()
     {
