@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ShopSys\CodingStandards\Sniff;
 
 use PHP_CodeSniffer\Files\File;
