@@ -12,6 +12,6 @@ install:
 script:
   - vendor/bin/parallel-lint ./src
   - vendor/bin/php-cs-fixer fix --config=build/phpcs-fixer.php_cs --dry-run --verbose --diff ./src
-  - vendor/bin/phpcs --standard=rulesetCS.xml --extensions=php --encoding=utf-8 -sp ./src
+  - vendor/bin/phpcs --standard=rulesetCS.xml --extensions=php --encoding=utf-8 -sp ./src --colors
   - vendor/bin/phpmd ./src text rulesetMD.xml --extensions=php
   - vendor/bin/phpunit
