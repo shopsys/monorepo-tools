@@ -21,7 +21,7 @@ final class ForbiddenSuperGlobalSniff implements Sniff
     /**
      * @return int[]
      */
-    public function register()
+    public function register(): array
     {
         return [T_VARIABLE];
     }
