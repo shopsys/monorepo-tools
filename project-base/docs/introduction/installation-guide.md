@@ -5,10 +5,10 @@ If you would like to use a prepared Docker container instead go to [Installation
 ## Requirements
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [PostgreSQL 9.4](https://wiki.postgresql.org/wiki/Detailed_installation_guides) (On Windows OS, we recommend to use [EnterpriseDB PostgreSQL distribution](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows))
-* [PHP 7.x](http://php.net/manual/en/install.php) (see [Required PHP Configuration](required-php-configuration.md))
+* [PHP 7.x](http://php.net/manual/en/install.php) (see also [Required PHP Configuration](required-php-configuration.md))
 * [Composer](https://getcomposer.org/doc/00-intro.md#globally)
 * [Node.js 4.x](https://nodejs.org/en/download/)
-* [npm 2.x](https://nodejs.org/en/download/)
+* [npm 2.x](https://nodejs.org/en/download/) (npm is automatically installed when you install Node.js)
 
 ## Steps
 ### 1. Get source code
