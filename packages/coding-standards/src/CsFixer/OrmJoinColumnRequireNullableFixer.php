@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ShopSys\CodingStandards\CsFixer;
 
 use PhpCsFixer\DocBlock\Annotation;
@@ -8,16 +10,17 @@ use PhpCsFixer\Fixer\DefinedFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
 
-class OrmJoinColumnRequireNullableFixer implements FixerInterface, DefinedFixerInterface
+final class OrmJoinColumnRequireNullableFixer implements FixerInterface, DefinedFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
             'Annotations @ORM\ManyToOne and @ORM\OneToOne must have defined nullable option in @ORM\JoinColumn',
@@ -31,7 +34,7 @@ class OrmJoinColumnRequireNullableFixer implements FixerInterface, DefinedFixerI
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens): bool
     {
         return true;
     }
@@ -39,7 +42,7 @@ class OrmJoinColumnRequireNullableFixer implements FixerInterface, DefinedFixerI
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky(): bool
     {
         return true;
     }
@@ -64,7 +67,7 @@ class OrmJoinColumnRequireNullableFixer implements FixerInterface, DefinedFixerI
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'Shopsys/orm_join_column_require_nullable';
     }
@@ -72,7 +75,7 @@ class OrmJoinColumnRequireNullableFixer implements FixerInterface, DefinedFixerI
     /**
      * {@inheritdoc}
      */
-    public function getPriority()
+    public function getPriority(): int
     {
         return 0;
     }
@@ -80,16 +83,15 @@ class OrmJoinColumnRequireNullableFixer implements FixerInterface, DefinedFixerI
     /**
      * {@inheritdoc}
      */
-    public function supports(SplFileInfo $file)
+    public function supports(SplFileInfo $file): bool
     {
         return preg_match('/\.php$/ui', $file->getFilename()) === 1;
     }
 
     /**
      * @param \PhpCsFixer\DocBlock\Annotation $annotation
-     * @return bool
      */
-    private function isRelationAnnotation(Annotation $annotation)
+    private function isRelationAnnotation(Annotation $annotation): bool
     {
         return preg_match('~@ORM\\\(ManyToOne|OneToOne)\\(~', $annotation->getContent()) === 1;
     }

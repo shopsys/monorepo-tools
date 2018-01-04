@@ -1,20 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ShopSys\CodingStandards\CsFixer;
 
 use PhpCsFixer\Fixer\DefinedFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
 
-class MissingButtonTypeFixer implements FixerInterface, DefinedFixerInterface
+final class MissingButtonTypeFixer implements FixerInterface, DefinedFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
             'Adds mandatory type attribute to <button> HTML tag.',
@@ -29,7 +32,7 @@ class MissingButtonTypeFixer implements FixerInterface, DefinedFixerInterface
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens): bool
     {
         return true;
     }
@@ -37,7 +40,7 @@ class MissingButtonTypeFixer implements FixerInterface, DefinedFixerInterface
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky(): bool
     {
         return false;
     }
@@ -69,7 +72,7 @@ class MissingButtonTypeFixer implements FixerInterface, DefinedFixerInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'Shopsys/missing_button_type';
     }
@@ -77,7 +80,7 @@ class MissingButtonTypeFixer implements FixerInterface, DefinedFixerInterface
     /**
      * {@inheritdoc}
      */
-    public function getPriority()
+    public function getPriority(): int
     {
         return 0;
     }
@@ -85,7 +88,7 @@ class MissingButtonTypeFixer implements FixerInterface, DefinedFixerInterface
     /**
      * {@inheritdoc}
      */
-    public function supports(SplFileInfo $file)
+    public function supports(SplFileInfo $file): bool
     {
         return preg_match('/\.html(?:\.twig)?$/ui', $file->getFilename()) === 1;
     }
