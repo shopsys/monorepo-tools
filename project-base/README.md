@@ -18,7 +18,7 @@ php phing img-demo
 php bin/console server:run
 ```
 
-This expects you to have the whole server stack (Nginx, PostgreSQL, etc.) installed on your machine.
+This expects you to have the whole server stack (PHP, PostgreSQL, NPM, etc.) installed on your machine.
 The detailed instructions can be found in [Installation Guide](docs/introduction/installation-guide.md).
 
 Alternatively, if you want to try Shopsys Framework without the need to install and configure the whole server stack you can use [Docker Compose with the prepared configuration](docs/introduction/installation-using-docker.md).
