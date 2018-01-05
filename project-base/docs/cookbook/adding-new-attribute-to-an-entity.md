@@ -113,7 +113,7 @@ In the following example, we will add `code` field to the `Product`  entity.
         {
             // ...
             
-            $builder->add('code', FormType::TEXT, [
+            $builder->add('code', TextType::class, [
                 'required' => false,
                 'constraints' => [
                     new Constraints\Length(['max' => 30]),
