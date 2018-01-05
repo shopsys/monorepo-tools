@@ -510,7 +510,7 @@
         <phingcall target="eslint-fix-diff" />
     </target>
 
-    <target name="tests-acceptance" depends="test-db-dump" description="Runs acceptance tests. Running Selenium server is required.">
+    <target name="tests-acceptance" depends="clean,test-db-dump" description="Runs acceptance tests. Running Selenium server is required.">
         <available file="${path.env.test}" type="file" property="path.env.test.existed" />
         <if>
             <not>
@@ -558,7 +558,7 @@
         </exec>
     </target>
 
-    <target name="tests-smoke" description="Runs smoke tests.">
+    <target name="tests-smoke" depends="clean" description="Runs smoke tests.">
         <if>
             <istrue value="${is-multidomain}" />
             <then>
@@ -593,7 +593,7 @@
         </if>
     </target>
 
-    <target name="tests-db" description="Runs database/integration tests.">
+    <target name="tests-db" depends="clean" description="Runs database/integration tests.">
         <if>
             <istrue value="${is-multidomain}" />
             <then>
@@ -627,7 +627,7 @@
         </if>
     </target>
 
-    <target name="tests-performance" description="Runs performance tests.">
+    <target name="tests-performance" depends="clean" description="Runs performance tests.">
         <exec
             executable="${path.phpunit.executable}"
             logoutput="true"
@@ -657,7 +657,7 @@
         </exec>
     </target>
 
-    <target name="tests-unit" description="Runs unit tests.">
+    <target name="tests-unit" depends="clean" description="Runs unit tests.">
         <if>
             <istrue value="${is-multidomain}" />
             <then>

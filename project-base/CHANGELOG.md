@@ -5,9 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)
+
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)
 - `Admin/HeurekaController::embedWidgetAction()` moved to new `Front/HeurekaController` as the action is called in FE template (@vitek-rostislav)
+- PHPUnit tests do not fail on Windows machine with PHP 7.0 because of excessively long file paths (@PetrHeinz)
+    - see [GitLab issue #21](https://git.shopsys-framework.com/shopsys/shopsys-framework/issues/21) for details 
 
 ## [2.0.0-beta.20.0] - 2017-12-11
 ### Changed
