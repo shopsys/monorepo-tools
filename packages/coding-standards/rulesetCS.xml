@@ -63,4 +63,15 @@
     <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
     <rule ref="src/Sniffs/ForbiddenExitSniff.php"/>
     <rule ref="src/Sniffs/ForbiddenSuperGlobalSniff.php"/>
+
+    <!-- Rules from ObjectCalisthenic package -->
+    <rule ref="vendor/object-calisthenics/phpcs-calisthenics-rules/src/ObjectCalisthenics/Sniffs/NamingConventions/ElementNameMinimalLengthSniff.php">
+        <properties>
+            <property name="minLength" value="2"/>
+        </properties>
+    </rule>
+
+    <!-- Rules from Slevomat Coding Standard package -->
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Classes/UnusedPrivateElementsSniff.php"/>
+
 </ruleset>
