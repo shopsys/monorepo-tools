@@ -21,26 +21,36 @@ interface AdvancedSearchFilterInterface
     const OPERATOR_LTE = 'lte';
 
     /**
+     * Returns a unique name of the filter
+     *
      * @return string
      */
     public function getName();
 
     /**
+     * Returns an array of OPERATOR_* constants specifying which operators can be used with this filter
+     *
      * @return string[]
      */
     public function getAllowedOperators();
 
     /**
+     * Returns a form type that should be used for value selection
+     *
      * @return string|\Symfony\Component\Form\FormTypeInterface
      */
     public function getValueFormType();
 
     /**
+     * Returns options that will be passed to the form type used for value selection
+     *
      * @return array
      */
     public function getValueFormOptions();
 
     /**
+     * Method that applies the filtering conditions specified by $rulesData to the provided query builder
+     *
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData[] $rulesData
      */
