@@ -12,7 +12,9 @@ A lot of the violations of the rules can be fixed automatically by calling
 php phing standards-fix
 ```
 
-Besides these rules, we have few rules for which there are no automatic checks (yet):
+## Standards that are not checked automatically
+Besides the rules that are checked by automatic tools, we have few rules for which there are no automatic checks yet:
+
 - CSS classes are named-with-dash. CSS classes for JavaScript purposes are prefixed with "js-" prefix
     ```
     <div class="js-bestselling-products list-products-line">
@@ -70,7 +72,17 @@ Besides these rules, we have few rules for which there are no automatic checks (
 - Database table and column names are underscored. Names must not be PostgreSQL keywords. In order to prevent conflicts, names of the tables are in plural.
 - Everything possible is ordered alphabetically (`.gitignore` content, configuration files, imports, ...)
 - Annotations are not mandatory for constructors of data objects and constructors using autowiring
-- In annotations, we use fully qualified namespace including leading slash
+- In annotations, we use fully-qualified class names for type names (including leading slash)
+    ```php
+    /**
+     * @return \Shopsys\ShopBundle\Model\Category\Category
+     */
+    public function getRootCategory()
+    {
+        // ...
+        return $rootCategory;
+    }
+    ```
 - When annotating an array, it is mandatory to state the type of array's items (including scalar types)
     ```php
     /**
