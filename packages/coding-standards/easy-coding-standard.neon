@@ -29,12 +29,8 @@ checkers:
     - PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\FixmeSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\NoSpaceAfterCastSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\Functions\CallTimePassByReferenceSniff
-#        <rule ref="Generic.Metrics.CyclomaticComplexity">
-#            <properties>
-#                <property name="complexity" value="13"/>
-#                <property name="absoluteComplexity" value="13"/>
-#            </properties>
-#        </rule>
+    PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff:
+        absoluteComplexity: 13
     - PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\ConstructorNameSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\CamelCapsFunctionNameSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\UpperCaseConstantNameSniff
