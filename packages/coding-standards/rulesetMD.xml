@@ -7,26 +7,6 @@
 >
     <description>ShopSys Coding Standards</description>
 
-    <rule ref="rulesets/codesize.xml/ExcessiveMethodLength">
-        <properties>
-            <property name="minimum" value="51"/>
-            <property name="ignore-whitespace" value="true"/>
-        </properties>
-    </rule>
-
-    <rule ref="rulesets/codesize.xml/ExcessiveClassLength">
-        <properties>
-            <property name="minimum"  value="501"/>
-            <property name="ignore-whitespace" value="true"/>
-        </properties>
-    </rule>
-
-    <rule ref="rulesets/codesize.xml/ExcessivePublicCount">
-        <properties>
-            <property name="minimum" value="31"/>
-        </properties>
-    </rule>
-
     <rule ref="rulesets/controversial.xml/CamelCaseParameterName" />
 
 </ruleset>

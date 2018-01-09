@@ -117,6 +117,14 @@ checkers:
     - PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer
     - PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer
 
+    # Code Metrics
+    ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:
+        maxLength: 550
+    ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
+        maxLength: 60
+    ObjectCalisthenics\Sniffs\Metrics\PropertyPerClassLimitSniff:
+        maxCount: 30
+
 parameters:
     skip_codes:
         # private properties should not start with "_"
