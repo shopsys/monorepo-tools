@@ -21,14 +21,6 @@ final class CamelCaseParameterSniff extends AbstractVariableSniff
         $tokens = $file->getTokens();
 
         $varName = ltrim($tokens[$position]['content'], '$');
-
-        $phpReservedVars = ['_SERVER', '_GET', '_POST', '_REQUEST', '_SESSION', '_ENV', '_COOKIE', '_FILES', '_GLOBALS'];
-
-        // If it's a php reserved var, then its ok.
-        if (in_array($varName, $phpReservedVars, true)) {
-            return;
-        }
-
         if (Common::isCamelCaps($varName)) {
             return;
         }
