@@ -4,19 +4,12 @@ includes:
 
 checkers:
     - PHP_CodeSniffer\Standards\PSR1\Sniffs\Methods\CamelCapsMethodNameSniff
-#
-#        <!-- Fine-tuning of PSR-2 standard -->
-#        <rule ref="Generic.Files.LineLength.TooLong">
-#            <!--
-#                Lower the severity so that this warning is ignored with default severity.
-#                We can use this sniff for code-reviews but it does not block continuous integration.
-#                Sometimes, there is no other way than have longer lines. For example when using
-#                fully-qualified namespaces in type hinting comments.
-#                Using @codingStandardsIgnoreLine to annotate comments would be absurd.
-#            -->
-#            <severity>3</severity>
-#        </rule>
-#
+    # Fine-tuning of PSR-2 standard
+
+    # Todo: Use own set for code reviews, that doess not block continuous integration.
+    # Sometimes, there is no other way than have longer lines. For example when using fully-qualified namespaces in type hinting comments.
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff
+
     # Custom ShopSys standards
     - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopShouldBeWhileLoopSniff
