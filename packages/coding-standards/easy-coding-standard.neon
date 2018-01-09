@@ -14,7 +14,7 @@ checkers:
 
     # Todo: Use own set for code reviews, that doess not block continuous integration.
     # Sometimes, there is no other way than have longer lines. For example when using fully-qualified namespaces in type hinting comments.
-    - PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff
+    #- PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff
 
     # Custom ShopSys standards
     - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff
