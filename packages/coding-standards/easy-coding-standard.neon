@@ -17,47 +17,47 @@ checkers:
 #            <severity>3</severity>
 #        </rule>
 #
-#        <!-- Custom ShopSys standards -->
+    # Custom ShopSys standards
 #        <rule ref="Generic.CodeAnalysis.EmptyStatement">
 #            <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedCATCH"/>
 #        </rule>
-#        <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop"/>
-#        <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"/>
-#        <rule ref="Generic.CodeAnalysis.JumbledIncrementer"/>
-#        <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
-#        <rule ref="Generic.Commenting.Todo"/>
-#        <rule ref="Generic.Commenting.Fixme"/>
-#        <rule ref="Generic.Formatting.NoSpaceAfterCast"/>
-#        <rule ref="Generic.Functions.CallTimePassByReference"/>
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopShouldBeWhileLoopSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopWithTestFunctionCallSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\JumbledIncrementerSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UnconditionalIfStatementSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\TodoSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\FixmeSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\NoSpaceAfterCastSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Functions\CallTimePassByReferenceSniff
 #        <rule ref="Generic.Metrics.CyclomaticComplexity">
 #            <properties>
 #                <property name="complexity" value="13"/>
 #                <property name="absoluteComplexity" value="13"/>
 #            </properties>
 #        </rule>
-#        <rule ref="Generic.NamingConventions.ConstructorName"/>
-#        <rule ref="Generic.NamingConventions.CamelCapsFunctionName"/>
-#        <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
-#        <rule ref="Generic.PHP.DiscourageGoto"/>
-#        <rule ref="Generic.PHP.NoSilencedErrors"/>
-#        <rule ref="MySource.PHP.GetRequestData"/>
-#        <rule ref="PEAR.Commenting.InlineComment"/>
-#        <rule ref="PEAR.NamingConventions.ValidClassName"/>
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\ConstructorNameSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\CamelCapsFunctionNameSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\UpperCaseConstantNameSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DiscourageGotoSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\NoSilencedErrorsSniff
+    - PHP_CodeSniffer\Standards\MySource\Sniffs\PHP\GetRequestDataSniff
+    - PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\InlineCommentSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes\ValidClassNameSniff
 #        <rule ref="Squiz.NamingConventions.ValidVariableName">
 #            <!-- private properties should not start with "_" -->
 #            <exclude name="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
 #        </rule>
-#        <rule ref="Squiz.PHP.DisallowMultipleAssignments"/>
-#        <rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops"/>
-#        <rule ref="Squiz.PHP.Eval"/>
-#        <rule ref="Squiz.PHP.GlobalKeyword"/>
-#        <rule ref="Squiz.PHP.InnerFunctions"/>
-#        <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
-#        <rule ref="Squiz.PHP.NonExecutableCode"/>
-#        <rule ref="Squiz.Scope.StaticThisUsage"/>
-#        <rule ref="Squiz.Strings.DoubleQuoteUsage"/>
-#        <rule ref="Squiz.WhiteSpace.CastSpacing"/>
-#        <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
-#        <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
-#        <rule ref="src/Sniffs/ForbiddenExitSniff.php"/>
-#        <rule ref="src/Sniffs/ForbiddenSuperGlobalSniff.php"/>
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\DisallowMultipleStatementsSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowSizeFunctionsInLoopsSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\EvalSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\GlobalKeywordSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\InnerFunctionsSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\LowercasePHPFunctionsSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\NonExecutableCodeSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\Scope\StaticThisUsageSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\Strings\DoubleQuoteUsageSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\CastSpacingSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LogicalOperatorSpacingSniff
+    - ShopSys\CodingStandards\Sniffs\ForbiddenExitSniff
+    - ShopSys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff
