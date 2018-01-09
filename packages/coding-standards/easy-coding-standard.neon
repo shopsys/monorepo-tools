@@ -3,6 +3,10 @@ includes:
     - vendor/symplify/easy-coding-standard/config/psr2.neon
 
 checkers:
+    # Shopsys Checkers
+    - ShopSys\CodingStandards\Sniffs\ForbiddenExitSniff
+    - ShopSys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff
+
     - PHP_CodeSniffer\Standards\PSR1\Sniffs\Methods\CamelCapsMethodNameSniff
     # Fine-tuning of PSR-2 standard
 
@@ -43,8 +47,6 @@ checkers:
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\CastSpacingSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LogicalOperatorSpacingSniff
-    - ShopSys\CodingStandards\Sniffs\ForbiddenExitSniff
-    - ShopSys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff
 
 #->setRules([
 #        '@PSR2' => true,
