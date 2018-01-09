@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^7.0",
+        "php": "^7.1",
         "friendsofphp/php-cs-fixer": "^2.9",
         "jakub-onderka/php-parallel-lint": "^0.9",
         "phpmd/phpmd": "^2.6",
