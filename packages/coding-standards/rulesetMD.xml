@@ -29,17 +29,4 @@
 
     <rule ref="rulesets/controversial.xml/CamelCaseParameterName" />
 
-    <rule ref="rulesets/naming.xml/ShortVariable">
-        <properties>
-            <property name="minimum" value="2"/>
-        </properties>
-    </rule>
-
-    <rule ref="rulesets/naming.xml/ShortMethodName">
-        <properties>
-            <property name="minimum" value="2"/>
-        </properties>
-    </rule>
-
-    <rule ref="rulesets/unusedcode.xml/UnusedPrivateMethod" />
 </ruleset>
