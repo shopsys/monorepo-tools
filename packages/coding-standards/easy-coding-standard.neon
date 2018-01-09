@@ -18,9 +18,7 @@ checkers:
 #        </rule>
 #
     # Custom ShopSys standards
-#        <rule ref="Generic.CodeAnalysis.EmptyStatement">
-#            <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedCATCH"/>
-#        </rule>
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopShouldBeWhileLoopSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopWithTestFunctionCallSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\JumbledIncrementerSniff
@@ -59,3 +57,5 @@ parameters:
     skip_codes:
         # private properties should not start with "_"
         - PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.PrivateNoUnderscore
+        # allow empty "catch (Exception $exception) { }"
+        - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedCATCH
