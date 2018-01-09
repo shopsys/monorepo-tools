@@ -48,76 +48,84 @@ checkers:
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LogicalOperatorSpacingSniff
 
-#->setRules([
-#        '@PSR2' => true,
-#        'array_syntax' => ['syntax' => 'short'],
-#        'binary_operator_spaces' => ['align_double_arrow' => false, 'align_equals' => false],
-#        'blank_line_after_opening_tag' => true,
-#        'combine_consecutive_unsets' => true,
-#        'concat_space' => ['spacing' => 'one'],
-#        'ereg_to_preg' => true,
-#        'function_typehint_space' => true,
-#        'include' => true,
-#        'linebreak_after_opening_tag' => true,
-#        'lowercase_cast' => true,
-#        'native_function_casing' => true,
-#        'new_with_braces' => true,
-#        'no_alias_functions' => true,
-#        'no_blank_lines_after_phpdoc' => true,
-#        'no_empty_comment' => true,
-#        'no_empty_phpdoc' => true,
-#        'no_empty_statement' => true,
-#        'no_extra_consecutive_blank_lines' => ['use', 'extra'],
-#        'no_leading_import_slash' => true,
-#        'no_leading_namespace_whitespace' => true,
-#        'no_mixed_echo_print' => ['use' => 'echo'],
-#        'no_multiline_whitespace_around_double_arrow' => true,
-#        'no_multiline_whitespace_before_semicolons' => true,
-#        'no_php4_constructor' => true,
-#        'no_short_bool_cast' => true,
-#        'no_singleline_whitespace_before_semicolons' => true,
-#        'no_spaces_around_offset' => ['inside', 'outside'],
-#        'no_trailing_comma_in_list_call' => true,
-#        'no_trailing_comma_in_singleline_array' => true,
-#        'no_unneeded_control_parentheses' => ['break', 'clone', 'continue', 'echo_print', 'return', 'switch_case', 'yield'],
-#        'no_unused_imports' => true,
-#        'no_useless_return' => true,
-#        'no_whitespace_before_comma_in_array' => true,
-#        'no_whitespace_in_blank_line' => true,
-#        'non_printable_character' => true,
-#        'normalize_index_brace' => true,
-#        'object_operator_without_whitespace' => true,
-#        'ordered_imports' => true,
-#        'phpdoc_annotation_without_dot' => true,
-#        'phpdoc_indent' => true,
-#        'phpdoc_no_useless_inheritdoc' => true,
-#        'phpdoc_no_access' => true,
-#        'phpdoc_no_alias_tag' => ['type' => 'var'],
-#        'phpdoc_no_empty_return' => true,
-#        'phpdoc_no_package' => true,
-#        'phpdoc_order' => true,
-#        'phpdoc_scalar' => true,
-#        'phpdoc_single_line_var_spacing' => true,
-#        'phpdoc_trim' => true,
-#        'phpdoc_var_without_name' => true,
-#        'protected_to_private' => true,
-#        'self_accessor' => true,
-#        'semicolon_after_instruction' => true,
-#        'Shopsys/missing_button_type' => true,
-#        'Shopsys/orm_join_column_require_nullable' => true,
-#        'short_scalar_cast' => true,
-#        'single_blank_line_before_namespace' => true,
-#        'space_after_semicolon' => true,
-#        'single_quote' => true,
-#        'single_line_comment_style' => ['comment_types' => ['hash']],
-#        'standardize_not_equals' => true,
-#        'strict_param' => true,
-#        'ternary_operator_spaces' => true,
-#        'trailing_comma_in_multiline_array' => true,
-#        'trim_array_spaces' => true,
-#        'unary_operator_spaces' => true,
-#        'whitespace_after_comma_in_array' => true,
-#    ])
+    PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer:
+        syntax: short
+    PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer:
+        align_double_arrow: false
+        align_equals: false
+    - PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer
+    - PhpCsFixer\Fixer\LanguageConstruct\CombineConsecutiveUnsetsFixer
+    PhpCsFixer\Fixer\Operator\ConcatSpaceFixer:
+        spacing: one
+    - PhpCsFixer\Fixer\Alias\EregToPregFixer
+    - PhpCsFixer\Fixer\FunctionNotation\FunctionTypehintSpaceFixer
+    - PhpCsFixer\Fixer\ControlStructure\IncludeFixer
+    - PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer
+    - PhpCsFixer\Fixer\CastNotation\LowercaseCastFixer
+    - PhpCsFixer\Fixer\Casing\NativeFunctionCasingFixer
+    - PhpCsFixer\Fixer\Operator\NewWithBracesFixer
+    - PhpCsFixer\Fixer\Alias\NoAliasFunctionsFixer
+    - PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer
+    - PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer
+    - PhpCsFixer\Fixer\Phpdoc\NoEmptyPhpdocFixer
+    - PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer
+    PhpCsFixer\Fixer\Whitespace\NoExtraConsecutiveBlankLinesFixer:
+        use: extra
+    - PhpCsFixer\Fixer\Import\NoLeadingImportSlashFixer
+    - PhpCsFixer\Fixer\NamespaceNotation\NoLeadingNamespaceWhitespaceFixer
+    PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer:
+        use: echo
+    - PhpCsFixer\Fixer\ArrayNotation\NoMultilineWhitespaceAroundDoubleArrowFixer
+    - PhpCsFixer\Fixer\Semicolon\NoMultilineWhitespaceBeforeSemicolonsFixer
+    - PhpCsFixer\Fixer\ClassNotation\NoPhp4ConstructorFixer
+    - PhpCsFixer\Fixer\CastNotation\NoShortBoolCastFixer
+    - PhpCsFixer\Fixer\Semicolon\NoSinglelineWhitespaceBeforeSemicolonsFixer
+    PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer:
+        positions: ['inside', 'outside']
+    - PhpCsFixer\Fixer\ControlStructure\NoTrailingCommaInListCallFixer
+    - PhpCsFixer\Fixer\ArrayNotation\NoTrailingCommaInSinglelineArrayFixer
+    PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer:
+        statements: ['break', 'clone', 'continue', 'echo_print', 'return', 'switch_case', 'yield']
+    - PhpCsFixer\Fixer\Import\NoUnusedImportsFixer
+    - PhpCsFixer\Fixer\ReturnNotation\NoUselessReturnFixer
+    - PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer
+    - PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer
+    - PhpCsFixer\Fixer\Basic\NonPrintableCharacterFixer
+    - PhpCsFixer\Fixer\ArrayNotation\NormalizeIndexBraceFixer
+    - PhpCsFixer\Fixer\Operator\ObjectOperatorWithoutWhitespaceFixer
+    - PhpCsFixer\Fixer\Import\OrderedImportsFixer
+    - PhpCsFixer\Fixer\Phpdoc\PhpdocAnnotationWithoutDotFixer
+    - PhpCsFixer\Fixer\Phpdoc\PhpdocIndentFixer
+    - PhpCsFixer\Fixer\Phpdoc\PhpdocNoUselessInheritdocFixer
+    - PhpCsFixer\Fixer\Phpdoc\PhpdocNoAccessFixer
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoAliasTagFixer:
+        type: var
+    - PhpCsFixer\Fixer\Phpdoc\PhpdocNoEmptyReturnFixer
+    - PhpCsFixer\Fixer\Phpdoc\PhpdocNoPackageFixer
+    - PhpCsFixer\Fixer\Phpdoc\PhpdocOrderFixer
+    - PhpCsFixer\Fixer\Phpdoc\PhpdocScalarFixer
+    - PhpCsFixer\Fixer\Phpdoc\PhpdocSingleLineVarSpacingFixer
+    - PhpCsFixer\Fixer\Phpdoc\PhpdocTrimFixer
+    - PhpCsFixer\Fixer\Phpdoc\PhpdocVarWithoutNameFixer
+    - PhpCsFixer\Fixer\ClassNotation\ProtectedToPrivateFixer
+    - PhpCsFixer\Fixer\ClassNotation\SelfAccessorFixer
+    - PhpCsFixer\Fixer\Semicolon\SemicolonAfterInstructionFixer
+    # Custom Fixers
+    - ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer
+    - ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer
+    - PhpCsFixer\Fixer\CastNotation\ShortScalarCastFixer
+    - PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer
+    - PhpCsFixer\Fixer\Semicolon\SpaceAfterSemicolonFixer
+    - PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer
+    PhpCsFixer\Fixer\Comment\SingleLineCommentStyleFixer:
+        comment_types: ['hash']
+    - PhpCsFixer\Fixer\Operator\StandardizeNotEqualsFixer
+    - PhpCsFixer\Fixer\Strict\StrictParamFixer
+    - PhpCsFixer\Fixer\Operator\TernaryOperatorSpacesFixer
+    - PhpCsFixer\Fixer\ArrayNotation\TrailingCommaInMultilineArrayFixer
+    - PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer
+    - PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer
+    - PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer
 
 parameters:
     skip_codes:
