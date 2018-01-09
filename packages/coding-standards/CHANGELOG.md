@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-- [#...] Added [EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard)
+- [#12] Added [EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard)
 
 ### Changed
 - `OrmJoinColumnRequireNullableFixer` marked as *risky* (@sustmi)
