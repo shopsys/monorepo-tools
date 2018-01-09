@@ -39,10 +39,7 @@ checkers:
     - PHP_CodeSniffer\Standards\MySource\Sniffs\PHP\GetRequestDataSniff
     - PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\InlineCommentSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes\ValidClassNameSniff
-#        <rule ref="Squiz.NamingConventions.ValidVariableName">
-#            <!-- private properties should not start with "_" -->
-#            <exclude name="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
-#        </rule>
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\DisallowMultipleStatementsSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowSizeFunctionsInLoopsSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\EvalSniff
@@ -57,3 +54,8 @@ checkers:
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LogicalOperatorSpacingSniff
     - ShopSys\CodingStandards\Sniffs\ForbiddenExitSniff
     - ShopSys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff
+
+parameters:
+    skip_codes:
+        # private properties should not start with "_"
+        - PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.PrivateNoUnderscore
