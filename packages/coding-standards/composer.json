@@ -25,6 +25,11 @@
             "ShopSys\\CodingStandards\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "ShopSys\\Tests\\Unit\\CodingStandards\\": "tests"
+        }
+    },
     "scripts": {
         "run-all-checks": [
             "vendor/bin/parallel-lint ./src ./tests ./examples",
