@@ -11,11 +11,11 @@ checkers:
     - ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer
 
     - PHP_CodeSniffer\Standards\PSR1\Sniffs\Methods\CamelCapsMethodNameSniff
-    # Fine-tuning of PSR-2 standard
 
-    # Todo: Use own set for code reviews, that doess not block continuous integration.
+    # Fine-tuning of PSR-2 standard
     # Sometimes, there is no other way than have longer lines. For example when using fully-qualified namespaces in type hinting comments.
-    #- PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff
+    PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff:
+        absoluteLineLimit: 120
 
     # Custom ShopSys standards
     - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff
