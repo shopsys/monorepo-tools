@@ -48,7 +48,7 @@ final class MissingButtonTypeFixer implements FixerInterface, DefinedFixerInterf
     /**
      * {@inheritdoc}
      */
-    public function fix(SplFileInfo $file, Tokens $tokens)
+    public function fix(SplFileInfo $file, Tokens $tokens): void
     {
         $code = preg_replace_callback(
             '@(<button\b)(.*?)(\s*/?>)@imsu',
