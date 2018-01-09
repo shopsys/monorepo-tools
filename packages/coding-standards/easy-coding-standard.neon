@@ -9,6 +9,8 @@ checkers:
     - ShopSys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff
     - ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer
     - ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer
+    # method arguments and variables should be $camelCase
+    - ShopSys\CodingStandards\Sniffs\CamelCaseParameterSniff
 
     - PHP_CodeSniffer\Standards\PSR1\Sniffs\Methods\CamelCapsMethodNameSniff
 
