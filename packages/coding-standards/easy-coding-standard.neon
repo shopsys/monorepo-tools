@@ -38,7 +38,7 @@ checkers:
     - PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\InlineCommentSniff
     - PHP_CodeSniffer\Standards\PEAR\Sniffs\NamingConventions\ValidClassNameSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff
-    - PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\DisallowMultipleStatementsSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowMultipleAssignmentsSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowSizeFunctionsInLoopsSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\EvalSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\GlobalKeywordSniff
