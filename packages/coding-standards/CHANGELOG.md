@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 *Note: Changes are described since release 3.0.2.*
 
 ## [Unreleased]
+
+### Added
+- [#...] Added [EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard)
+
 ### Changed
 - `OrmJoinColumnRequireNullableFixer` marked as *risky* (@sustmi)
 - dropped support of PHP 7.0 (@vitek-rostislav)
