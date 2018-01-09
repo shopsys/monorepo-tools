@@ -29,11 +29,6 @@ final class CamelCaseParameterSniff extends AbstractVariableSniff
             return;
         }
 
-        // If it is a static public variable of a class, then its ok.
-        if ($tokens[($position - 1)]['code'] === T_DOUBLE_COLON) {
-            return;
-        }
-
         if (Common::isCamelCaps($varName)) {
             return;
         }
