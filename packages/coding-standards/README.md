@@ -25,6 +25,7 @@ php composer require shopsys/coding-standards
 ```bash
 php vendor/bin/parallel-lint /path/to/project
 php vendor/bin/ecs check /path/to/project --config=vendor/shopsys/coding-standards/easy-coding-standard.neon
+php vendor/bin/phpmd /path/to/project text vendor/shopsys/coding-standards/rulesetMD.xml
 ```
 
 ## Custom rules
