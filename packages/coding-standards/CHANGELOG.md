@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - `OrmJoinColumnRequireNullableFixer` marked as *risky* (@sustmi)
-- dropped support of PHP 7.0 (@vitek-rostislav)
+- [#11] dropped support of PHP 7.0 (@vitek-rostislav)
 
 ## [3.1.1] - 2017-10-31
 ### Fixed
