@@ -53,8 +53,7 @@ checkers:
     PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer:
         syntax: short
     PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer:
-        align_double_arrow: false
-        align_equals: false
+        default: 'single_space'
     - PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer
     - PhpCsFixer\Fixer\LanguageConstruct\CombineConsecutiveUnsetsFixer
     PhpCsFixer\Fixer\Operator\ConcatSpaceFixer:
