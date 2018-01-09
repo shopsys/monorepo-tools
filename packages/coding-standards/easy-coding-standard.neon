@@ -1,0 +1,2 @@
+checkers:
+    - PhpCsFixer\Fixer\Basic\BracesFixer
