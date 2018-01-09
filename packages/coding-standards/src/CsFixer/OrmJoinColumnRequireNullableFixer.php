@@ -25,8 +25,14 @@ final class OrmJoinColumnRequireNullableFixer implements FixerInterface, Defined
         return new FixerDefinition(
             'Annotations @ORM\ManyToOne and @ORM\OneToOne must have defined nullable option in @ORM\JoinColumn',
             [
-                new CodeSample("/**\n * @var \\StdObject\n * @ORM\\ManyToOne(targetEntity=\\\"StdObject\\\")\n */\nprivate \$foo;"),
-                new CodeSample("/**\n * @var \\StdObject\n * @ORM\\OneToOne(targetEntity=\\\"StdObject\\\")\n */\nprivate \$foo;"),
+                new CodeSample(
+                    '/**\n * @var \\StdObject\n * ' .
+                    '@ORM\\ManyToOne(targetEntity=\\\"StdObject\\\")\n */\nprivate \$foo;'
+                ),
+                new CodeSample(
+                    '/**\n * @var \\StdObject\n * ' .
+                    '@ORM\\OneToOne(targetEntity=\\\"StdObject\\\")\n */\nprivate \$foo;'
+                ),
             ]
         );
     }
@@ -145,7 +151,11 @@ final class OrmJoinColumnRequireNullableFixer implements FixerInterface, Defined
     {
         $firstLine = $doc->getLine($joinColumnAnnotation->getStart());
         if (preg_match('~\\)\\s*$~', $firstLine->getContent()) === 1) {
-            $firstLine->setContent(preg_replace('~(@ORM\\\JoinColumn\\()~', '$1nullable=false, ', $firstLine->getContent()));
+            $firstLine->setContent(preg_replace(
+                '~(@ORM\\\JoinColumn\\()~',
+                '$1nullable=false, ',
+                $firstLine->getContent()
+            ));
         } else {
             $matches = null;
             preg_match_all('~\\s*\*~', $joinColumnAnnotation->getContent(), $matches);
