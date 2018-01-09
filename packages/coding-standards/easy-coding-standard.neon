@@ -71,23 +71,19 @@ checkers:
     - PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer
     - PhpCsFixer\Fixer\Phpdoc\NoEmptyPhpdocFixer
     - PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer
-    PhpCsFixer\Fixer\Whitespace\NoExtraConsecutiveBlankLinesFixer:
-        use: extra
+    - PhpCsFixer\Fixer\Whitespace\NoExtraConsecutiveBlankLinesFixer
     - PhpCsFixer\Fixer\Import\NoLeadingImportSlashFixer
     - PhpCsFixer\Fixer\NamespaceNotation\NoLeadingNamespaceWhitespaceFixer
-    PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer:
-        use: echo
+    - PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer
     - PhpCsFixer\Fixer\ArrayNotation\NoMultilineWhitespaceAroundDoubleArrowFixer
     - PhpCsFixer\Fixer\Semicolon\NoMultilineWhitespaceBeforeSemicolonsFixer
     - PhpCsFixer\Fixer\ClassNotation\NoPhp4ConstructorFixer
     - PhpCsFixer\Fixer\CastNotation\NoShortBoolCastFixer
     - PhpCsFixer\Fixer\Semicolon\NoSinglelineWhitespaceBeforeSemicolonsFixer
-    PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer:
-        positions: ['inside', 'outside']
+    - PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer
     - PhpCsFixer\Fixer\ControlStructure\NoTrailingCommaInListCallFixer
     - PhpCsFixer\Fixer\ArrayNotation\NoTrailingCommaInSinglelineArrayFixer
-    PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer:
-        statements: ['break', 'clone', 'continue', 'echo_print', 'return', 'switch_case', 'yield']
+    - PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer
     - PhpCsFixer\Fixer\Import\NoUnusedImportsFixer
     - PhpCsFixer\Fixer\ReturnNotation\NoUselessReturnFixer
     - PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer
