@@ -13,7 +13,7 @@ final class CamelCaseParameterSniff extends AbstractVariableSniff
     /**
      * @var string
      */
-    private const NOT_LETTER_THEN_LETTER_PATTERN = '#([^a-zA-Z]{1}[A-Za-z]{1})#';
+    private const NOT_LETTER_THEN_LETTER_PATTERN = '([^a-zA-Z]{1}(?<nextLetter>[A-Za-z]{1}))';
 
     /**
      * @param int $position
@@ -53,12 +53,22 @@ final class CamelCaseParameterSniff extends AbstractVariableSniff
     /**
      * Changes:
      * _someVariable => someVariable
+     * some_variable => someVariable
      */
     private function fixVariableName(File $file, int $position, string $variableName): void
     {
-        $newVariableName = preg_replace_callback(self::NOT_LETTER_THEN_LETTER_PATTERN, function (array $match): string {
-            return $match[0][1];
-        }, $variableName);
+        $newVariableName = preg_replace_callback(
+            '#(?<prefixLetter>[a-z]{1})?' . self::NOT_LETTER_THEN_LETTER_PATTERN . '#',
+            function (array $match): string {
+                $isFirstLetter = ! (bool) $match['prefixLetter'];
+                if ($isFirstLetter) {
+                    return $match['nextLetter'];
+                }
+
+                return $match['prefixLetter'] . strtoupper($match['nextLetter']);
+            },
+            $variableName
+        );
 
         $file->fixer->replaceToken($position, '$' . $newVariableName);
     }
