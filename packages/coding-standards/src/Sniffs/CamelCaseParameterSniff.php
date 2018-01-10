@@ -8,27 +8,32 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 use PHP_CodeSniffer\Util\Common;
 
-/**
- * Inspired by Drupal Coding Standard https://www.drupal.org/project/coder/issues/2303963
- */
 final class CamelCaseParameterSniff extends AbstractVariableSniff
 {
+    /**
+     * @var string
+     */
+    private const NOT_LETTER_THEN_LETTER_PATTERN = '#([^a-zA-Z]{1}[A-Za-z]{1})#';
+
     /**
      * @param int $position
      */
     protected function processVariable(File $file, $position): void
     {
-        $tokens = $file->getTokens();
+        $currentToken = $file->getTokens()[$position];
 
-        $varName = ltrim($tokens[$position]['content'], '$');
-        if (Common::isCamelCaps($varName)) {
+        $variableName = ltrim($currentToken['content'], '$');
+        if (Common::isCamelCaps($variableName)) {
             return;
         }
 
-        $file->addError(sprintf(
-            'Variable "$%s" starts with underscore "_", but only $camelCase is allowed',
-            $varName
+        $fix = $file->addFixableError(sprintf(
+            'Variable "$%s" should be camel case', $variableName
         ), $position, self::class);
+
+        if ($fix) {
+            $this->fixVariableName($file, $position, $variableName);
+        }
     }
 
     /**
@@ -43,5 +48,18 @@ final class CamelCaseParameterSniff extends AbstractVariableSniff
      */
     protected function processMemberVar(File $file, $position): void
     {
+    }
+
+    /**
+     * Changes:
+     * _someVariable => someVariable
+     */
+    private function fixVariableName(File $file, int $position, string $variableName): void
+    {
+        $newVariableName = preg_replace_callback(self::NOT_LETTER_THEN_LETTER_PATTERN, function (array $match): string {
+            return $match[0][1];
+        }, $variableName);
+
+        $file->fixer->replaceToken($position, '$' . $newVariableName);
     }
 }
