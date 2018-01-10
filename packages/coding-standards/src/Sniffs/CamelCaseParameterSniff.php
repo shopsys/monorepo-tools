@@ -28,7 +28,8 @@ final class CamelCaseParameterSniff extends AbstractVariableSniff
         }
 
         $fix = $file->addFixableError(sprintf(
-            'Variable "$%s" should be camel case', $variableName
+            'Variable "$%s" should be camel case',
+            $variableName
         ), $position, self::class);
 
         if ($fix) {
@@ -60,7 +61,7 @@ final class CamelCaseParameterSniff extends AbstractVariableSniff
         $newVariableName = preg_replace_callback(
             '#(?<prefixLetter>[a-z]{1})?' . self::NOT_LETTER_THEN_LETTER_PATTERN . '#',
             function (array $match): string {
-                $isFirstLetter = ! (bool) $match['prefixLetter'];
+                $isFirstLetter = !(bool)$match['prefixLetter'];
                 if ($isFirstLetter) {
                     return $match['nextLetter'];
                 }
