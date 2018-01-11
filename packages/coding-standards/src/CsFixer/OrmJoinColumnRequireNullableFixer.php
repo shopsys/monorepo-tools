@@ -25,8 +25,14 @@ final class OrmJoinColumnRequireNullableFixer implements FixerInterface, Defined
         return new FixerDefinition(
             'Annotations @ORM\ManyToOne and @ORM\OneToOne must have defined nullable option in @ORM\JoinColumn',
             [
-                new CodeSample("/**\n * @var \\StdObject\n * @ORM\\ManyToOne(targetEntity=\\\"StdObject\\\")\n */\nprivate \$foo;"),
-                new CodeSample("/**\n * @var \\StdObject\n * @ORM\\OneToOne(targetEntity=\\\"StdObject\\\")\n */\nprivate \$foo;"),
+                new CodeSample(
+                    '/**\n * @var \\StdObject\n * ' .
+                    '@ORM\\ManyToOne(targetEntity=\\\"StdObject\\\")\n */\nprivate \$foo;'
+                ),
+                new CodeSample(
+                    '/**\n * @var \\StdObject\n * ' .
+                    '@ORM\\OneToOne(targetEntity=\\\"StdObject\\\")\n */\nprivate \$foo;'
+                ),
             ]
         );
     }
@@ -50,7 +56,7 @@ final class OrmJoinColumnRequireNullableFixer implements FixerInterface, Defined
     /**
      * {@inheritdoc}
      */
-    public function fix(SplFileInfo $file, Tokens $tokens)
+    public function fix(SplFileInfo $file, Tokens $tokens): void
     {
         foreach ($tokens->findGivenKind(T_DOC_COMMENT) as $token) {
             /** @var Token $token */
@@ -100,7 +106,7 @@ final class OrmJoinColumnRequireNullableFixer implements FixerInterface, Defined
      * @param \PhpCsFixer\DocBlock\DocBlock $doc
      * @param \PhpCsFixer\DocBlock\Annotation $relationAnnotation
      */
-    private function fixRelationAnnotation(DocBlock $doc, Annotation $relationAnnotation)
+    private function fixRelationAnnotation(DocBlock $doc, Annotation $relationAnnotation): void
     {
         $joinColumnAnnotation = $this->findJoinColumnAnnotation($doc);
         if ($joinColumnAnnotation === null) {
@@ -112,9 +118,8 @@ final class OrmJoinColumnRequireNullableFixer implements FixerInterface, Defined
 
     /**
      * @param \PhpCsFixer\DocBlock\DocBlock $doc
-     * @return \PhpCsFixer\DocBlock\Annotation|null
      */
-    private function findJoinColumnAnnotation(DocBlock $doc)
+    private function findJoinColumnAnnotation(DocBlock $doc): ?Annotation
     {
         foreach ($doc->getAnnotations() as $annotation) {
             if (preg_match('~@ORM\\\JoinColumn\\(~', $annotation->getContent()) === 1) {
@@ -129,7 +134,7 @@ final class OrmJoinColumnRequireNullableFixer implements FixerInterface, Defined
      * @param \PhpCsFixer\DocBlock\DocBlock $doc
      * @param \PhpCsFixer\DocBlock\Annotation $relationAnnotation
      */
-    private function addJoinColumnAnnotation(DocBlock $doc, Annotation $relationAnnotation)
+    private function addJoinColumnAnnotation(DocBlock $doc, Annotation $relationAnnotation): void
     {
         $matches = null;
         preg_match_all('~\\s*\*~', $relationAnnotation->getContent(), $matches);
@@ -141,11 +146,15 @@ final class OrmJoinColumnRequireNullableFixer implements FixerInterface, Defined
      * @param \PhpCsFixer\DocBlock\DocBlock $doc
      * @param \PhpCsFixer\DocBlock\Annotation $joinColumnAnnotation
      */
-    private function extendJoinColumnAnnotation(DocBlock $doc, Annotation $joinColumnAnnotation)
+    private function extendJoinColumnAnnotation(DocBlock $doc, Annotation $joinColumnAnnotation): void
     {
         $firstLine = $doc->getLine($joinColumnAnnotation->getStart());
         if (preg_match('~\\)\\s*$~', $firstLine->getContent()) === 1) {
-            $firstLine->setContent(preg_replace('~(@ORM\\\JoinColumn\\()~', '$1nullable=false, ', $firstLine->getContent()));
+            $firstLine->setContent(preg_replace(
+                '~(@ORM\\\JoinColumn\\()~',
+                '$1nullable=false, ',
+                $firstLine->getContent()
+            ));
         } else {
             $matches = null;
             preg_match_all('~\\s*\*~', $joinColumnAnnotation->getContent(), $matches);

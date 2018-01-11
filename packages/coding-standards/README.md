@@ -10,8 +10,7 @@ The repository also contains [few custom rules](#custom-rules).
 
 Provided tools:
 * [PHP-Parallel-Lint](https://github.com/JakubOnderka/PHP-Parallel-Lint)
-* [PHP-CS-Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
-* [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
+* [EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard) that combines [PHP-CS-Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) and [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
 * [PHPMD](https://github.com/phpmd/phpmd)
 
 For further information see official documentation of those tools.
@@ -25,8 +24,7 @@ php composer require shopsys/coding-standards
 ## Usage
 ```bash
 php vendor/bin/parallel-lint /path/to/project
-php vendor/bin/php-cs-fixer fix /path/to/project --config=vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs
-php vendor/bin/phpcs /path/to/project --standard=vendor/shopsys/coding-standards/rulesetCS.xml
+php vendor/bin/ecs check /path/to/project --config=vendor/shopsys/coding-standards/easy-coding-standard.neon
 php vendor/bin/phpmd /path/to/project text vendor/shopsys/coding-standards/rulesetMD.xml
 ```
 
