@@ -10,7 +10,7 @@ checkers:
     - ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer
     - ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer
     # method arguments and variables should be $camelCase
-    - ShopSys\CodingStandards\Sniffs\CamelCaseParameterSniff
+    - ShopSys\CodingStandards\Sniffs\ValidVariableNameSniff
 
     - PHP_CodeSniffer\Standards\PSR1\Sniffs\Methods\CamelCapsMethodNameSniff
 
