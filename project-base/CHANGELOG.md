@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - reloading of order preview now calls `Shopsys.register.registerNewContent()` (@petr.kadlec)  
     - accepted [merge request](https://git.shopsys-framework.com/shopsys/shopsys-framework/merge_requests/27)
 - CurrentPromoCodeFacace: promo code is not searched in database if code is empty (@petr.kadlec)
+- CategoryRepository::getCategoriesWithVisibleChildren() checks visibility of children (@petr.kadlec)
 
 ### Removed
 - PHPStorm Inspect is no longer used for static analysis of source code (@TomasLudvik)

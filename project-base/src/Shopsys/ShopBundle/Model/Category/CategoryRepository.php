@@ -541,6 +541,9 @@ class CategoryRepository extends NestedTreeRepository
 
         $queryBuilder
             ->join(Category::class, 'cc', Join::WITH, 'cc.parent = c')
+            ->join(CategoryDomain::class, 'ccd', Join::WITH, 'ccd.category = cc.id')
+            ->andWhere('ccd.domainId = :domainId')
+            ->andWhere('ccd.visible = TRUE')
             ->andWhere('c IN (:categories)')
             ->setParameter('categories', $categories);
 
