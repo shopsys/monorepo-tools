@@ -46,6 +46,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - see [GitLab issue #21](https://git.shopsys-framework.com/shopsys/shopsys-framework/issues/21) for details 
 - customizeBundle.js: on-submit actions are no longer triggered when form validation error occurs (@TomasLudvik)
 - fixed google product feed availability values by updating it to v0.1.2 (@simara-svatopluk)
+- reloading of order preview now calls `Shopsys.register.registerNewContent()` (@petr.kadlec)  
+    - accepted [merge request](https://git.shopsys-framework.com/shopsys/shopsys-framework/merge_requests/27)
 
 ### Removed
 - PHPStorm Inspect is no longer used for static analysis of source code (@TomasLudvik)

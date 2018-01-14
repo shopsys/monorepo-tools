@@ -29,6 +29,7 @@
             data: data,
             success: function (data) {
                 $orderPreview.html(data);
+                Shopsys.register.registerNewContent($orderPreview);
             }
         });
     };
