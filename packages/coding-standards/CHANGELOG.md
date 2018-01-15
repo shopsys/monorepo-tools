@@ -9,11 +9,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-- [#12] Added [EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard)
+- composer script `run-all-checks` for easier testing of the package (@TomasVotruba)
 
 ### Changed
 - `OrmJoinColumnRequireNullableFixer` marked as *risky* (@sustmi)
-- [#11] dropped support of PHP 7.0 (@vitek-rostislav)
+- [#11](https://github.com/shopsys/coding-standards/pull/11) dropped support of PHP 7.0 (@vitek-rostislav)
+- [#12](https://github.com/shopsys/coding-standards/pull/12/) [EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard) is now used (@TomasVotruba)
+    - the tool encapsulates PHP-CS-Fixer and PHP_CodeSniffer 
+    - rules configuration is now unified in single file - [`easy-coding-standard.neon`](easy-coding-standard.neon)
+    - the option `ignore-whitespace` for rules checking method and class length is not available anymore
+        - the limits were increased to 550 (class length) and 60 (method length)
+    
+### Removed
+- PHP Mess Detector (@TomasVotruba)
+- line length sniff (@TomasVotruba)
 
 ## [3.1.1] - 2017-10-31
 ### Fixed

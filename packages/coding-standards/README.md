@@ -54,3 +54,11 @@ Function `exit()` is not allowed.
 #### `ForbiddenSuperGlobalSniff`
 
 Usage of superglobals (`$_COOKIE`, `$_GET`, `$_FILES`, `$_POST`, `$_REQUEST`, `$_SERVER`) is not allowed.
+
+#### `ValidVariableNameSniff`
+
+Default `\PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff`
+does not report method parameters in `$_var` format as an violation but it should. 
+It also skips checking of private members when `PrivateNoUnderscore` property is disabled.
+
+This sniff provides the missing functionality and is intended to be used as an addition to the default `ValidVariableNameSniff`.
