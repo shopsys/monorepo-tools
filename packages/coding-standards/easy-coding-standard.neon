@@ -28,7 +28,6 @@ checkers:
         absoluteComplexity: 13
     - PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\ConstructorNameSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\CamelCapsFunctionNameSniff
-    - PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\UpperCaseConstantNameSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DiscourageGotoSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\NoSilencedErrorsSniff
     - PHP_CodeSniffer\Standards\MySource\Sniffs\PHP\GetRequestDataSniff
