@@ -5,14 +5,12 @@ includes:
 
 checkers:
     # Shopsys Checkers
-    - ShopSys\CodingStandards\Sniffs\ForbiddenExitSniff
-    - ShopSys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff
     - ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer
     - ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer
+    - ShopSys\CodingStandards\Sniffs\ForbiddenExitSniff
+    - ShopSys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff
     # method arguments and variables should be $camelCase
     - ShopSys\CodingStandards\Sniffs\ValidVariableNameSniff
-
-    - PHP_CodeSniffer\Standards\PSR1\Sniffs\Methods\CamelCapsMethodNameSniff
 
     # Custom ShopSys standards
     - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff
@@ -33,6 +31,7 @@ checkers:
     - PHP_CodeSniffer\Standards\MySource\Sniffs\PHP\GetRequestDataSniff
     - PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\InlineCommentSniff
     - PHP_CodeSniffer\Standards\PEAR\Sniffs\NamingConventions\ValidClassNameSniff
+    - PHP_CodeSniffer\Standards\PSR1\Sniffs\Methods\CamelCapsMethodNameSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowMultipleAssignmentsSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowSizeFunctionsInLoopsSniff
@@ -46,7 +45,6 @@ checkers:
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\CastSpacingSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff
     - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LogicalOperatorSpacingSniff
-
     PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer:
         syntax: short
     PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer:
