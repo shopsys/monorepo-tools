@@ -9,7 +9,7 @@ use SplFileInfo;
 
 class OrmJoinColumnRequireNullableFixerTest extends TestCase
 {
-    public function testFix()
+    public function testFix(): void
     {
         $ormJoinColumnRequireNullableFixer = new OrmJoinColumnRequireNullableFixer();
 
@@ -24,11 +24,8 @@ class OrmJoinColumnRequireNullableFixerTest extends TestCase
 
     /**
      * @dataProvider supportsDataProvider
-     *
-     * @param string $filename
-     * @param bool   $expected
      */
-    public function testSupports($filename, $expected)
+    public function testSupports(string $filename, bool $expected): void
     {
         $ormJoinColumnRequireNullableFixer = new OrmJoinColumnRequireNullableFixer();
 
@@ -37,10 +34,7 @@ class OrmJoinColumnRequireNullableFixerTest extends TestCase
         $this->assertSame($expected, $ormJoinColumnRequireNullableFixer->supports($splFileInfoMock));
     }
 
-    /**
-     * @return array
-     */
-    public function supportsDataProvider()
+    public function supportsDataProvider(): array
     {
         return [
             ['test.php', true],
@@ -53,10 +47,9 @@ class OrmJoinColumnRequireNullableFixerTest extends TestCase
     }
 
     /**
-     * @param $filename
      * @return \PHPUnit_Framework_MockObject_MockObject|\SplFileInfo
      */
-    private function mockSplFileInfoWithFilename($filename)
+    private function mockSplFileInfoWithFilename(string $filename)
     {
         $splFileInfoMock = $this->getMockBuilder(SplFileInfo::class)
             ->disableOriginalConstructor()

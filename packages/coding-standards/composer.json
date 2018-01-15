@@ -12,7 +12,6 @@
     "require": {
         "php": "^7.1",
         "jakub-onderka/php-parallel-lint": "^0.9",
-        "phpmd/phpmd": "^2.6",
         "object-calisthenics/phpcs-calisthenics-rules": "^3.1",
         "slevomat/coding-standard": "^4.0",
         "symplify/easy-coding-standard": "^3.1"
@@ -25,11 +24,15 @@
             "ShopSys\\CodingStandards\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "ShopSys\\Tests\\Unit\\CodingStandards\\": "tests"
+        }
+    },
     "scripts": {
         "run-all-checks": [
-            "vendor/bin/parallel-lint ./src ./tests",
-            "vendor/bin/ecs check ./src ./tests",
-            "vendor/bin/phpmd ./src,./tests text rulesetMD.xml --extensions=php"
+            "vendor/bin/parallel-lint ./src ./tests ./examples",
+            "vendor/bin/ecs check ./src ./tests ./examples"
         ]
     }
 }

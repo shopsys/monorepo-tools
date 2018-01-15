@@ -9,7 +9,7 @@ use SplFileInfo;
 
 class MissingButtonTypeFixerTest extends TestCase
 {
-    public function testFix()
+    public function testFix(): void
     {
         $missingButtonTypeFixer = new MissingButtonTypeFixer();
 
@@ -24,11 +24,8 @@ class MissingButtonTypeFixerTest extends TestCase
 
     /**
      * @dataProvider supportsDataProvider
-     *
-     * @param string $filename
-     * @param bool   $expected
      */
-    public function testSupports($filename, $expected)
+    public function testSupports(string $filename, bool $expected): void
     {
         $missingButtonTypeFixer = new MissingButtonTypeFixer();
 
@@ -37,10 +34,7 @@ class MissingButtonTypeFixerTest extends TestCase
         $this->assertSame($expected, $missingButtonTypeFixer->supports($splFileInfoMock));
     }
 
-    /**
-     * @return array
-     */
-    public function supportsDataProvider()
+    public function supportsDataProvider(): array
     {
         return [
             ['test.php', false],
@@ -53,10 +47,9 @@ class MissingButtonTypeFixerTest extends TestCase
     }
 
     /**
-     * @param $filename
      * @return \PHPUnit_Framework_MockObject_MockObject|\SplFileInfo
      */
-    private function mockSplFileInfoWithFilename($filename)
+    private function mockSplFileInfoWithFilename(string $filename)
     {
         $splFileInfoMock = $this->getMockBuilder(SplFileInfo::class)
             ->disableOriginalConstructor()
