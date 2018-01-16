@@ -38,8 +38,9 @@ class DatabaseDumpCommand extends ContainerAwareCommand
         // --schema=public option is used in order to dump only "public" schema which contains the application data
         // --no-owner option ensures that the dump can be imported on system with different database username
         $command = sprintf(
-            '%s --dbname=%s --no-owner --schema=public --username=%s --no-password',
+            '%s --host=%s --dbname=%s --no-owner --schema=public --username=%s --no-password',
             escapeshellcmd($input->getOption(self::OPT_PGDUMP_BIN)),
+            escapeshellarg($connection->getHost()),
             escapeshellarg($connection->getDatabase()),
             escapeshellarg($connection->getUsername())
         );

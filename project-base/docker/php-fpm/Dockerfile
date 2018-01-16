@@ -13,6 +13,9 @@ RUN apt-get update && apt-get -y install acl
 # Install Git - it is necessary for code diffs
 RUN apt-get update && apt-get -y install git
 
+# Install PostgreSQL client for dumping database
+RUN apt-get update && apt-get -y install postgresql-client-9.5
+
 # Install locales and switch to en_US.utf8 in order to enable UTF-8 support.
 # See https://perlgeek.de/en/article/set-up-a-clean-utf8-environment
 RUN apt-get update && apt-get -y install locales-all
