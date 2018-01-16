@@ -1,0 +1,74 @@
+# Installation Using Docker - application setup
+
+This guide expects that you have already set up your Docker environment. Otherwise check one of these guides:
+- [Installation via Docker on Linux and MacOS (recommended)](docs/introduction/installation-using-docker-linux-macos.md)
+- [Installation via Docker on Windows 10 Pro and higher](docs/introduction/installation-using-docker-windows-10-pro-higher.md)
+
+## 1. Setup the application
+Now that the Docker environment is prepared we can setup the application itself.
+
+### 1.1. Connect into terminal of the Docker container
+```
+docker exec -it shopsys-framework-php-fpm bash
+```
+
+### 1.2. Install dependencies and configure parameters
+```
+composer install
+```
+
+Composer will prompt you to set parameters ([description of parameters](installation-guide.md#2-install-dependencies-and-configure-parameters)):
+
+Important parameters to set for `app/config/parameters.yml` are listed bellow (the others can be set to default - just press Enter):
+
+| parameter name    | parameter value |
+| ----------------- | --------------- |
+| database_host     | postgres        |
+| database_port     | 5432            |
+| database_name     | shopsys         |
+| database_user     | root            |
+| database_password | root            |
+| ...               | ...             |
+| mailer_host       | smtp-server     |
+
+Important parameters to set for `app/config/parameters_test.yml` are listed bellow (the others can be set to default - just press Enter):
+
+| parameter name         | parameter value |
+| ---------------------- | --------------- |
+| test_database_host     | postgres        |
+| test_database_port     | 5432            |
+| test_database_name     | shopsys-test    |
+| test_database_user     | root            |
+| test_database_password | root            |
+
+For development choose `n` when asked `Build in production environment? (Y/n)`.
+
+It will set the environment in your application to `dev` (this will, for example, show Symfony Web Debug Toolbar).
+
+### 1.3. Configure domains
+Create `domains_urls.yml` from `domains_urls.yml.dist`.
+
+```
+cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
+```
+
+### 1.4. Create databases
+```
+./phing db-create
+./phing test-db-create
+```
+
+### 1.5. Build the application
+```
+./phing build-demo-dev
+./phing img-demo
+```
+
+## 2. See it in your browser!
+Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see running application.
+
+You can also login into the administration section on [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) with default credentials:
+* Username: `admin` or `superadmin` (the latter has access to advanced options)
+* Password: `admin123`
+
+You can also manage the application database using [Adminer](https://www.adminer.org) by going to [http://127.0.0.0:1000](http://127.0.0.0:1000).

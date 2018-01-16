@@ -6,22 +6,8 @@ For documentation of Shopsys Framework itself see [Shopsys Framework Knowledge B
 Documentation of the specific project built on Shopsys Framework should be in [Project Documentation](docs/project/index.md).
 
 ## Installation
-```
-git clone https://git.shopsys-framework.com/shopsys/shopsys-framework.git
-cd shopsys-framework
-composer install
-cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
-php phing db-create
-php phing test-db-create
-php phing build-demo-dev
-php phing img-demo
-php bin/console server:run
-```
-
-This expects you to have the whole server stack (PHP, PostgreSQL, NPM, etc.) installed on your machine.
-The detailed instructions can be found in [Installation Guide](docs/introduction/installation-guide.md).
-
-Alternatively, if you want to try Shopsys Framework without the need to install and configure the whole server stack you can use [Docker Compose with the prepared configuration](docs/introduction/installation-using-docker.md).
+- [Installation via Docker (recommended)](docs/introduction/installation-using-docker.md)
+- [Detailed native installation](docs/introduction/installation-guide.md)
 
 ### What to do next
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see running application.
