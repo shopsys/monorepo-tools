@@ -146,7 +146,7 @@
             }
 
             if (!FpJsFormValidator.ajax.queue) {
-                if ($form.hasData('on-submit')) {
+                if ($form.data('on-submit') !== undefined) {
                     $(this).trigger($(this).data('on-submit'));
                     event.preventDefault();
                 }
