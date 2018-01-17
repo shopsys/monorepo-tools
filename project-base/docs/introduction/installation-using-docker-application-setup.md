@@ -3,6 +3,7 @@
 This guide expects that you have already set up your Docker environment. Otherwise check one of these guides:
 - [Installation via Docker on Linux and MacOS (recommended)](docs/introduction/installation-using-docker-linux-macos.md)
 - [Installation via Docker on Windows 10 Pro and higher](docs/introduction/installation-using-docker-windows-10-pro-higher.md)
+- [Installation via Docker on Windows 10 Home, 8, 8.1, 7](docs/introduction/installation-using-docker-windows-10-lower.md)
 
 ## 1. Setup the application
 Now that the Docker environment is prepared we can setup the application itself.
@@ -65,6 +66,8 @@ cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
 ```
 
 ## 2. See it in your browser!
+
+### On Linux, MacOS and Windows 10 Pro and higher
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see running application.
 
 You can also login into the administration section on [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) with default credentials:
@@ -72,3 +75,12 @@ You can also login into the administration section on [http://127.0.0.1:8000/adm
 * Password: `admin123`
 
 You can also manage the application database using [Adminer](https://www.adminer.org) by going to [http://127.0.0.0:1000](http://127.0.0.0:1000).
+
+### On Windows 10 Home, 8, 8.1, 7 (using Docker Toolbox)
+Open [http://192.168.99.100:8000/](http://192.168.99.100:8000/) to see running application.
+
+You can also login into the administration section on [http://192.168.99.100:8000/admin/](http://192.168.99.100:8000/admin/) with default credentials:
+* Username: `admin` or `superadmin` (the latter has access to advanced options)
+* Password: `admin123`
+
+You can also manage the application database using [Adminer](https://www.adminer.org) by going to [http://192.168.99.100:1000](http://192.168.99.100:1000).
