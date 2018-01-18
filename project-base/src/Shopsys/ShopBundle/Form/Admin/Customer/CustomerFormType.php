@@ -24,6 +24,7 @@ class CustomerFormType extends AbstractType
             ->add('userData', UserFormType::class, [
                 'scenario' => $options['scenario'],
                 'domain_id' => $options['domain_id'],
+                'current_email' => $options['data']->userData->email,
             ])
             ->add('billingAddressData', BillingAddressFormType::class, [
                 'domain_id' => $options['domain_id'],

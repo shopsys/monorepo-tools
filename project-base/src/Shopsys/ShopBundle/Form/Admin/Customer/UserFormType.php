@@ -65,7 +65,7 @@ class UserFormType extends AbstractType
                         'maxMessage' => 'Email cannot be longer then {{ limit }} characters',
                     ]),
                     new Email(['message' => 'Please enter valid e-mail']),
-                    new UniqueEmail(),
+                    new UniqueEmail(['ignoredEmail' => $options['current_email']]),
                 ],
             ])
             ->add('password', RepeatedType::class, [
@@ -128,9 +128,10 @@ class UserFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired(['scenario', 'domain_id'])
+            ->setRequired(['scenario', 'domain_id', 'current_email'])
             ->setAllowedValues('scenario', [CustomerFormType::SCENARIO_CREATE, CustomerFormType::SCENARIO_EDIT])
             ->setAllowedTypes('domain_id', 'int')
+            ->setAllowedTypes('current_email', ['null', 'string'])
             ->setDefaults([
                 'data_class' => UserData::class,
                 'attr' => ['novalidate' => 'novalidate'],
