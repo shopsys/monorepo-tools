@@ -10,7 +10,7 @@ RUN apt-get update && apt-get -y install apt-utils dialog
 # Install ACL support (ie. tools like "setfacl").
 RUN apt-get update && apt-get -y install acl
 
-# Install Git
+# Install Git - it is necessary for code diffs
 RUN apt-get update && apt-get -y install git
 
 # Install locales and switch to en_US.utf8 in order to enable UTF-8 support.
