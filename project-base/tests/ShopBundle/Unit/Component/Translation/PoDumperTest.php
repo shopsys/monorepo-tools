@@ -6,7 +6,6 @@ use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Translation\MessageIdNormalizer;
 use Shopsys\ShopBundle\Component\Translation\PoDumper;
 
 class PoDumperTest extends PHPUnit_Framework_TestCase
@@ -26,8 +25,7 @@ class PoDumperTest extends PHPUnit_Framework_TestCase
         $catalogue->setLocale('en');
         $catalogue->add($message);
 
-        $messageIdNormalizer = new MessageIdNormalizer();
-        $poDumper = new PoDumper($messageIdNormalizer);
+        $poDumper = new PoDumper();
 
         $dump = $poDumper->dump($catalogue);
         $expectedDump = file_get_contents(__DIR__ . '/' . 'dump.po');
