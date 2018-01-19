@@ -800,3 +800,9 @@ services:
     class: Shopsys\ShopBundle\Component\Constraints\UniqueEmailValidator
     tags:
       - { name: validator.constraint_validator, alias: Shopsys\ShopBundle\Component\Constraints\UniqueEmailValidator }
+
+  monolog.activation_strategy.not_found:
+    abstract: true
+
+  monolog.handler.fingers_crossed.error_level_activation_strategy:
+    abstract: true
