@@ -11,6 +11,7 @@
     processIsolation="false"
     stopOnFailure="false"
     syntaxCheck="false"
+    failOnWarning="true"
 >
     <php>
         <server name="KERNEL_DIR" value="app/" />
