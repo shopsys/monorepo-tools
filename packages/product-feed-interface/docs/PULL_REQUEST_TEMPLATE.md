@@ -8,4 +8,4 @@
 
 **Standards and tests pass:** Yes/No
 
-**Licence:** MIT
+**License:** MIT
