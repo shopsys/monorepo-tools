@@ -1,7 +1,7 @@
 includes:
     # pick set from https://github.com/Symplify/EasyCodingStandard/tree/master/config
     # for PSR-2 description, see: http://www.php-fig.org/psr/psr-2/
-    - vendor/symplify/easy-coding-standard/config/psr2.neon
+    - vendor/symplify/easy-coding-standard/config/psr2-checkers.neon
 
 checkers:
     # Shopsys Checkers
