@@ -34,6 +34,17 @@ services:
         depends_on:
             - postgres
 
+    selenium-server:
+        image: selenium/standalone-chrome
+        container_name: shopsys-framework-acceptance-tests
+        ports:
+            - "4400:4444"
+        environment:
+            - HUB_PORT_4444_TCP_ADDR=hub
+            - HUB_PORT_4444_TCP_PORT=4444
+        links:
+            - webserver
+
     adminer:
         image: adminer:latest
         ports:

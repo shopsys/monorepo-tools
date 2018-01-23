@@ -22,25 +22,27 @@ Composer will prompt you to set parameters ([description of parameters](installa
 
 Important parameters to set for `app/config/parameters.yml` are listed bellow (the others can be set to default - just press Enter):
 
-| parameter name    | parameter value |
-| ----------------- | --------------- |
-| database_host     | postgres        |
-| database_port     | 5432            |
-| database_name     | shopsys         |
-| database_user     | root            |
-| database_password | root            |
-| ...               | ...             |
-| mailer_host       | smtp-server     |
+| parameter name             | parameter name             |
+| -------------------------- | -------------------------- |
+| database_host              | postgres                   |
+| database_port              | 5432                       |
+| database_name              | shopsys                    |
+| database_user              | root                       |
+| database_password          | root                       |
+| ...                        | ...                        |
+| mailer_host                | smtp-server                |
 
 Important parameters to set for `app/config/parameters_test.yml` are listed bellow (the others can be set to default - just press Enter):
 
-| parameter name         | parameter value |
-| ---------------------- | --------------- |
-| test_database_host     | postgres        |
-| test_database_port     | 5432            |
-| test_database_name     | shopsys-test    |
-| test_database_user     | root            |
-| test_database_password | root            |
+| parameter name             | parameter value            |
+| -------------------------- | -------------------------- |
+| test_database_host         | postgres                   |
+| test_database_port         | 5432                       |
+| test_database_name         | shopsys-test               |
+| test_database_user         | root                       |
+| test_database_password     | root                       |
+| selenium_server_host       | selenium-server            |
+| overwrite_domain_url       | http://webserver:8080/     |
 
 For development choose `n` when asked `Build in production environment? (Y/n)`.
 

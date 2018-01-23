@@ -5,6 +5,8 @@ paths:
   log: ../var/logs/codeception
   data: ../tests/ShopBundle/Acceptance/data
   support: ../tests/ShopBundle/Test/Codeception
+params:
+  - ../app/config/parameters_test.yml
 settings:
   bootstrap: _bootstrap.php
   colors: true

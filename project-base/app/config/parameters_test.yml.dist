@@ -5,6 +5,9 @@ parameters:
   test_database_user: root
   test_database_password: ~
 
+  selenium_server_host: selenium-server
+  overwrite_domain_url: http://webserver:8080
+
   test_mailer_transport: smtp
   test_mailer_host: 127.0.0.1
   test_mailer_user: ~

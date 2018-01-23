@@ -13,6 +13,7 @@ class DomainsConfigLoader
      * @var \Symfony\Component\Filesystem\Filesystem
      */
     private $filesystem;
+
     /**
      * @param \Symfony\Component\Filesystem\Filesystem $filesystem
      */

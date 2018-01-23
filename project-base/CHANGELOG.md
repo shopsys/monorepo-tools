@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 	- currently analysing source code by level 0
 - PHP 7.2 support (@TomasLudvik)
 - Uniformity of PHP and Postgres timezones is checked during the build (@Miroslav-Stopka)
+- in `TEST` environment `Domain` is created with all instances of `DomainConfig` having URL set to `%overwrite_domain_url%`
+    - parameter is set only in `parameters_test.yml` as it is only relevant in `TEST` environment
+    - overwriting can be switched off by setting the parameter to `~` (null in Yaml)
+    - overwriting the domain URL is necessary for Selenium acceptance tests running in Docker
 
 ### Changed
 - cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)
