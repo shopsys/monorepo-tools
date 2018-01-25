@@ -19,11 +19,10 @@ return $originalConfig;
 ```
 #### Version Unreleased and higher
 ```neon
-#custom config.neon
-
+#custom-coding-standard.neon
 includes:
-    - easy-coding-standard.neon
-
+    - vendor/symplify/easy-coding-standard/config/psr2-checkers.neon
+    - vendor/shopsys/coding-standards/shopsys-coding-standard.neon
 parameters:
     exclude_files:
         - *_generated/*
