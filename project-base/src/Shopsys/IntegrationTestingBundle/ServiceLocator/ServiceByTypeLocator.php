@@ -35,7 +35,10 @@ class ServiceByTypeLocator
         foreach ($classNameByServiceId as $serviceId => $className) {
             $this->serviceIdsByTypeName[$className][] = $serviceId;
 
-            if (class_exists($className)) {
+            // in PHP 7.2 is not allowed to use Object as name of class. RiakCache is loading such class.
+            // RiakCache is not used in Shopsys Framework. This hotfix can be removed after issue
+            // https://github.com/doctrine/cache/issues/239 is solved
+            if ($className !== 'Doctrine\Common\Cache\RiakCache' && class_exists($className)) {
                 $reflectionClass = new ReflectionClass($className);
 
                 $implementedInterfaces = $reflectionClass->getInterfaceNames();

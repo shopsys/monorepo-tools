@@ -1,4 +1,4 @@
-FROM phpdockerio/php71-fpm:latest
+FROM phpdockerio/php72-fpm:latest
 
 # Switch to non-interactive mode during image build to silence some warnings.
 # See https://github.com/moby/moby/issues/4032
@@ -10,7 +10,7 @@ RUN apt-get update && apt-get -y install apt-utils dialog
 # Install ACL support (ie. tools like "setfacl").
 RUN apt-get update && apt-get -y install acl
 
-# Install Git
+# Install Git - it is necessary for code diffs
 RUN apt-get update && apt-get -y install git
 
 # Install locales and switch to en_US.utf8 in order to enable UTF-8 support.
@@ -20,19 +20,18 @@ ENV LC_ALL=en_US.utf8 LANG=en_US.utf8 LANGUAGE=en_US.utf8
 
 # Install required PHP extensions
 RUN apt-get update && apt-get -y --no-install-recommends install \
-        php7.1-bcmath \
-        php7.1-curl \
-        php7.1-fpm \
-        php7.1-gd \
-        php7.1-intl \
-        php7.1-json \
-        php7.1-mbstring \
-        php7.1-mcrypt \
-        php7.1-opcache \
-        php7.1-pgsql \
-        php7.1-soap \
-        php7.1-xml \
-        php7.1-zip
+        php7.2-bcmath \
+        php7.2-curl \
+        php7.2-fpm \
+        php7.2-gd \
+        php7.2-intl \
+        php7.2-json \
+        php7.2-mbstring \
+        php7.2-opcache \
+        php7.2-pgsql \
+        php7.2-soap \
+        php7.2-xml \
+        php7.2-zip
 
 # Install Composer
 RUN php -r "copy('https://getcomposer.org/download/1.5.1/composer.phar', '/usr/local/bin/composer');" \
