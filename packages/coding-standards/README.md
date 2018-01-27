@@ -24,7 +24,7 @@ php composer require shopsys/coding-standards
 ## Usage
 
 Create `custom-coding-standard.neon` config file in your project which includes predefined rulesets. 
-You can also [customize the rules](UPGRADE.md#version-unreleased-and-higher) 
+You can also [customize the rules](UPGRADE.md#version-4.0-and-higher) 
 and even add your own sniffs and fixers in the config.
 
 ```neon

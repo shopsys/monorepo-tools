@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 *Note: Changes are described since release 3.0.2.*
 
-## [Unreleased]
+## [4.0] - 2018-01-27
 
 ### Added
 - composer script `run-all-checks` for easier testing of the package (@TomasVotruba)
@@ -64,6 +64,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Deleted
 - Redundant rules which were already covered by other rules (@vitek-rostislav)
 
-[Unreleased]: https://github.com/shopsys/coding-standards/compare/v3.1.1...HEAD
+[4.0]: https://github.com/shopsys/coding-standards/compare/v3.1.1...HEAD
 [3.1.1]: https://github.com/shopsys/coding-standards/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/shopsys/coding-standards/compare/v3.0.2...v3.1.0
