@@ -23,9 +23,22 @@ php composer require shopsys/coding-standards
 
 ## Usage
 
+Create `custom-coding-standard.neon` config file in your project which includes predefined rulesets. 
+You can also [customize the rules](UPGRADE.md#version-unreleased-and-higher) 
+and even add your own sniffs and fixers in the config.
+
+```neon
+#custom-coding-standard.neon
+includes:
+    - vendor/symplify/easy-coding-standard/config/psr2-checkers.neon
+    - vendor/shopsys/coding-standards/shopsys-coding-standard.neon
+```
+
+In terminal, run following commands:
+
 ```bash
 php vendor/bin/parallel-lint /path/to/project
-php vendor/bin/ecs check /path/to/project --config=vendor/shopsys/coding-standards/easy-coding-standard.neon
+php vendor/bin/ecs check /path/to/project --config=/path/to/project/custom-coding-standard.neon
 ```
 
 ## Custom rules
@@ -54,3 +67,11 @@ Function `exit()` is not allowed.
 #### `ForbiddenSuperGlobalSniff`
 
 Usage of superglobals (`$_COOKIE`, `$_GET`, `$_FILES`, `$_POST`, `$_REQUEST`, `$_SERVER`) is not allowed.
+
+#### `ValidVariableNameSniff`
+
+Default `\PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff`
+does not report method parameters in `$_var` format as an violation but it should. 
+It also skips checking of private members when `PrivateNoUnderscore` property is disabled.
+
+This sniff provides the missing functionality and is intended to be used as an addition to the default `ValidVariableNameSniff`.
