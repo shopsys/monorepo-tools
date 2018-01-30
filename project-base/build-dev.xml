@@ -9,14 +9,11 @@
 
     <target name="checks" depends="db-check-mapping,standards,tests" description="Checks ORM mapping, coding standards and runs unit, DB and smoke tests."/>
     <target name="checks-diff" depends="db-check-mapping,standards-diff,tests" description="Checks ORM mapping, coding standards on changed files and runs unit, DB and smoke tests."/>
-    <target name="checks-ci" depends="db-check-mapping,standards-ci,tests,tests-acceptance" description="Checks ORM mapping, coding standards (incl. PhpStorm inspection) and runs unit, DB, smoke and acceptance tests."/>
-    <target name="checks-ci-diff" depends="db-check-mapping,standards-ci-diff,tests,tests-acceptance" description="Checks ORM mapping, coding standards on changed files (incl. PhpStorm inspection) and runs unit, DB, smoke and acceptance tests."/>
+    <target name="checks-ci" depends="db-check-mapping,standards,tests,tests-acceptance" description="Checks ORM mapping, coding standards and runs unit, DB, smoke and acceptance tests."/>
+    <target name="checks-ci-diff" depends="db-check-mapping,standards-diff,tests,tests-acceptance" description="Checks ORM mapping, coding standards on changed files and runs unit, DB, smoke and acceptance tests."/>
 
     <target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,phpstan,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
     <target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards on changed files."/>
-
-    <target name="standards-ci" depends="standards,phpstorm-inspect" description="Checks coding standards (incl. PhpStorm inspection)."/>
-    <target name="standards-ci-diff" depends="standards-diff,phpstorm-inspect" description="Checks coding standards on changed files (incl. PhpStorm inspection)."/>
 
     <target name="test-db-demo" depends="test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-db-fixtures-demo-singledomain,test-create-domains-data,test-generate-friendly-urls,test-db-fixtures-demo-multidomain,test-load-plugin-demo-data,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
     <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
@@ -455,33 +452,6 @@
             <arg path="${path.tests}"/>
 
             <arg value="--level=0"/>
-        </exec>
-    </target>
-
-    <target name="phpstorm-inspect" description="Runs PhpStorm inspection of all files.">
-        <exec
-                executable="${path.phpstorm-inspect.executable}"
-                logoutput="true"
-                passthru="true"
-                checkreturn="true"
-        >
-            <arg path="${path.phpstorm.inspect.sh}"/>
-            <arg path="${path.phpstorm.system}"/>
-            <arg path="${path.phpstorm.project}"/>
-            <arg path="${path.phpstorm.project.inspection-profile}"/>
-            <arg path="${path.src}"/>
-        </exec>
-        <exec
-                executable="${path.phpstorm-inspect.executable}"
-                logoutput="true"
-                passthru="true"
-                checkreturn="true"
-        >
-            <arg path="${path.phpstorm.inspect.sh}"/>
-            <arg path="${path.phpstorm.system}"/>
-            <arg path="${path.phpstorm.project}"/>
-            <arg path="${path.phpstorm.project.inspection-profile}"/>
-            <arg path="${path.tests}"/>
         </exec>
     </target>
 

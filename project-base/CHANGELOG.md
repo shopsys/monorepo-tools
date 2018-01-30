@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - PHPUnit tests do not fail on Windows machine with PHP 7.0 because of excessively long file paths (@PetrHeinz)
     - see [GitLab issue #21](https://git.shopsys-framework.com/shopsys/shopsys-framework/issues/21) for details 
 
+### Removed
+- PHPStorm Inspect is no longer used for static analysis of source code (@TomasLudvik)
+- Phing targets standards-ci and standards-ci-diff because they were redundant to standards and standards-diff targets (@TomasLudvik)
+
 ## [2.0.0-beta.20.0] - 2017-12-11
 ### Changed
 - Docker `nginx.conf` has been upgraded with better performance settings (@TomasLudvik)

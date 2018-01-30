@@ -43,8 +43,8 @@ The components are isolated from each other -  replacing one of them does not 
 So if you want a completely different way of handling the particular task, you can remove the component completely
 and implement the required behavior directly in your open-box core repository (eg. customized data grid in the picture below).
 
-One of the first Shopsys Framework components are packages for [HTTP Smoke testing](https://github.com/shopsys/phpstorm-inspect),
-[database migrations](https://github.com/shopsys/migrations) or a [CLI tool for running PhpStorm inspections](https://github.com/shopsys/phpstorm-inspect).
+One of the first Shopsys Framework components are packages for [HTTP Smoke testing](https://github.com/shopsys/http-smoke-testing) or 
+[database migrations](https://github.com/shopsys/migrations).
 
 ![Shopsys Framework package architecture schema](img/package-architecture.png)
 
