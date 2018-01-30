@@ -31,7 +31,7 @@ class CurrencyInlineEdit extends AbstractGridInlineEdit
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\currencyData $currencyData
+     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
      * @return int
      */
     protected function createEntityAndGetId($currencyData)
