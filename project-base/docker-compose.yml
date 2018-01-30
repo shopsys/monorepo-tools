@@ -47,6 +47,7 @@ services:
 
     adminer:
         image: adminer:latest
+        container_name: shopsys-framework-adminer
         ports:
             - "1000:8080"
         links:
@@ -56,6 +57,7 @@ services:
 
     smtp-server:
         image: namshi/smtp
+        container_name: shopsys-framework-smtp-server
 
 volumes:
     shopsys-framework-sync:

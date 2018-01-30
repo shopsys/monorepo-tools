@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - emails with empty subject or body are no longer sent (@stanoMilan)
 - postgresql-client is installed in [php-fpm/dockerfile](docker/php-fpm/Dockerfile) for `pg_dump` function (@MattCzerner)
     - postgresql was downgraded to 9.5 because of compatibility with postgresql-client
+- docker-compose: added container_name to smtp-server and adminer (@MattCzerner)
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)
