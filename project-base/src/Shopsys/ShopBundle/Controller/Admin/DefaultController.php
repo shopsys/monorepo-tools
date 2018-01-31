@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
 use Shopsys\ShopBundle\Model\Statistics\StatisticsFacade;
 use Shopsys\ShopBundle\Model\Statistics\StatisticsProcessingFacade;
 
@@ -19,12 +20,19 @@ class DefaultController extends AdminBaseController
      */
     private $statisticsProcessingFacade;
 
+    /**
+     * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
+     */
+    private $mailTemplateFacade;
+
     public function __construct(
         StatisticsFacade $statisticsFacade,
-        StatisticsProcessingFacade $statisticsProcessingFacade
+        StatisticsProcessingFacade $statisticsProcessingFacade,
+        MailTemplateFacade $mailTemplateFacade
     ) {
         $this->statisticsFacade = $statisticsFacade;
         $this->statisticsProcessingFacade = $statisticsProcessingFacade;
+        $this->mailTemplateFacade = $mailTemplateFacade;
     }
 
     /**
@@ -38,6 +46,15 @@ class DefaultController extends AdminBaseController
         $newOrdersCountByDayInLastTwoWeeks = $this->statisticsFacade->getNewOrdersCountByDayInLastTwoWeeks();
         $newOrdersInLastTwoWeeksDates = $this->statisticsProcessingFacade->getDateTimesFormattedToLocaleFormat($newOrdersCountByDayInLastTwoWeeks);
         $newOrdersInLastTwoWeeksCounts = $this->statisticsProcessingFacade->getCounts($newOrdersCountByDayInLastTwoWeeks);
+
+        if ($this->mailTemplateFacade->existsTemplateWithEnabledSendingHavingEmptyBodyOrSubject()) {
+            $this->getFlashMessageSender()->addErrorFlashTwig(
+                t('<a href="{{ url }}">Some required e-mail templates are not fully set.</a>'),
+                [
+                    'url' => $this->generateUrl('admin_mail_template'),
+                ]
+            );
+        }
 
         return $this->render(
             '@ShopsysShop/Admin/Content/Default/index.html.twig',
