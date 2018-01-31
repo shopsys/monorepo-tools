@@ -10,6 +10,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 {
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function load(ObjectManager $manager)
     {
@@ -33,6 +34,55 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
             . 'Produkty: {products} <br />'
             . '{transport_instructions} <br />'
             . '{payment_instructions}';
+
+        $this->updateMailTemplate($mailTemplateData);
+
+        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData->name = 'order_status_2';
+        $mailTemplateData->sendMail = true;
+        $mailTemplateData->subject = 'Stav objednávky se změnil';
+        $mailTemplateData->body = 'Vážený zákazníku, <br /><br />'
+            . 'Vaše objednávka se zpracovává.';
+
+        $this->updateMailTemplate($mailTemplateData);
+
+        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData->name = 'order_status_3';
+        $mailTemplateData->sendMail = true;
+        $mailTemplateData->subject = 'Stav objednávky se změnil';
+        $mailTemplateData->body = 'Vážený zákazníku, <br /><br />'
+            . 'zpracování objednávky bylo dokončeno.';
+
+        $this->updateMailTemplate($mailTemplateData);
+
+        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData->name = 'order_status_4';
+        $mailTemplateData->sendMail = true;
+        $mailTemplateData->subject = 'Stav objednávky se změnil';
+        $mailTemplateData->body = 'Vážený zákazníku, <br /><br />'
+            . 'Vaše objednávka byla zrušena.';
+
+        $this->updateMailTemplate($mailTemplateData);
+
+        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData->name = 'reset_password';
+        $mailTemplateData->sendMail = true;
+        $mailTemplateData->subject = 'Žádost o heslo';
+        $mailTemplateData->body = 'Vážený zákazníku,<br /><br />'
+            . 'na tomto odkazu můžete nastavit nové heslo: <a href="{new_password_url}">{new_password_url}</a>';
+
+        $this->updateMailTemplate($mailTemplateData);
+
+        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData->name = 'registration_confirm';
+        $mailTemplateData->sendMail = true;
+        $mailTemplateData->subject = 'Registrace byla dokončena';
+        $mailTemplateData->body = 'Vážený zákazníku, <br /><br />'
+            . 'Vaše registrace je dokončena. <br />'
+            . 'Jméno: {first_name} {last_name}<br />'
+            . 'E-mail: {email}<br />'
+            . 'Adresa e-shopu: {url}<br />'
+            . 'Přihlašovací stránka: {login_page}';
 
         $this->updateMailTemplate($mailTemplateData);
     }
