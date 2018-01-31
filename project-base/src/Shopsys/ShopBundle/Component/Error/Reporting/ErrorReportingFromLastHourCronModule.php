@@ -100,6 +100,8 @@ class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
                 $this->logger->addInfo('Errors were reported');
             } catch (\Shopsys\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
                 $this->logger->addCritical('Error reporting failed: ' . $e->getMessage(), $e->getFailedRecipients());
+            } catch (\Shopsys\ShopBundle\Model\Mail\Exception\EmptyMailException $e) {
+                $this->logger->addCritical('Error reporting failed mail template is empty.');
             }
         } else {
             $this->logger->addInfo('Nothing to report');

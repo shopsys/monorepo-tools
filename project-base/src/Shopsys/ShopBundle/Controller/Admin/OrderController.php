@@ -132,7 +132,7 @@ class OrderController extends AdminBaseController
                 $this->getFlashMessageSender()->addErrorFlash(
                     t('Entered customer not found, please check entered data.')
                 );
-            } catch (\Shopsys\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
+            } catch (\Shopsys\ShopBundle\Model\Mail\Exception\MailException $e) {
                 $this->getFlashMessageSender()->addErrorFlash(t('Unable to send updating e-mail'));
             }
         }
