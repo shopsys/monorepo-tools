@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - see documentation of [Installation Using Docker](docs/introduction/installation-using-docker.md) for details
 - default parameters in `parameters.yml.dist` and `parameters_test.yml.dist` are for Docker installation (instead of native) (@MattCzerner)
 - Front/NewsletterController: extracted duplicit rendering and add return typehints (@simara-svatopluk)
+- Symfony updated to version 3.4 (@TomasLudvik)
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)
