@@ -1,13 +1,13 @@
 parameters:
-  database_host: 127.0.0.1
+  database_host: postgres
   database_port: ~
   database_name: shopsys
   database_user: root
-  database_password: ~
-  database_server_version: 9.4
+  database_password: root
+  database_server_version: 9.5
 
   mailer_transport: smtp
-  mailer_host: 127.0.0.1
+  mailer_host: smtp-server
   mailer_user: ~
   mailer_password: ~
   mailer_disable_delivery: false

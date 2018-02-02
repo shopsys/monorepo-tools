@@ -18,31 +18,11 @@ docker exec -it shopsys-framework-php-fpm bash
 composer install
 ```
 
-Composer will prompt you to set parameters ([description of parameters](installation-guide.md#2-install-dependencies-and-configure-parameters)):
+Composer will prompt you to set parameters ([description of parameters](installation-guide.md#2-install-dependencies-and-configure-parameters)).
+The default parameters are currently set for application running in Docker so you can just use the defaults.
 
-Important parameters to set for `app/config/parameters.yml` are listed bellow (the others can be set to default - just press Enter):
-
-| parameter name             | parameter name             |
-| -------------------------- | -------------------------- |
-| database_host              | postgres                   |
-| database_port              | 5432                       |
-| database_name              | shopsys                    |
-| database_user              | root                       |
-| database_password          | root                       |
-| ...                        | ...                        |
-| mailer_host                | smtp-server                |
-
-Important parameters to set for `app/config/parameters_test.yml` are listed bellow (the others can be set to default - just press Enter):
-
-| parameter name             | parameter value            |
-| -------------------------- | -------------------------- |
-| test_database_host         | postgres                   |
-| test_database_port         | 5432                       |
-| test_database_name         | shopsys-test               |
-| test_database_user         | root                       |
-| test_database_password     | root                       |
-| selenium_server_host       | selenium-server            |
-| overwrite_domain_url       | http://webserver:8080/     |
+Only exception is the `secret` parameter - you should input a random string to be used for security purposes.
+It is not necessary for development though.
 
 For development choose `n` when asked `Build in production environment? (Y/n)`.
 

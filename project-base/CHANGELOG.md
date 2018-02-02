@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - Docker Sync is used only in configuration for MacOS as only there it is needed
     - `postgres` container is created with a volume for data persistence (in `var/postgres-data`)
     - see documentation of [Installation Using Docker](docs/introduction/installation-using-docker.md) for details
+- default parameters in `parameters.yml.dist` and `parameters_test.yml.dist` are for Docker installation (instead of native) (@MattCzerner)
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)
