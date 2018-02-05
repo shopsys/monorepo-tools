@@ -3,12 +3,13 @@
 namespace Shopsys\ShopBundle\DataFixtures\Performance;
 
 use Faker\Generator as Faker;
-use Shopsys\ShopBundle\Component\Console\ProgressBar;
+use Shopsys\ShopBundle\Component\Console\ProgressBarFactory;
 use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CategoryDataFixture
@@ -46,18 +47,25 @@ class CategoryDataFixture
     private $persistentReferenceFacade;
 
     /**
+     * @var \Shopsys\ShopBundle\Component\Console\ProgressBarFactory
+     */
+    private $progressBarFactory;
+
+    /**
      * @param int[] $categoryCountsByLevel
      * @param \Shopsys\ShopBundle\Model\Category\CategoryFacade $categoryFacade
      * @param \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @param \Faker\Generator $faker
+     * @param \Shopsys\ShopBundle\Component\Console\ProgressBarFactory $progressBarFactory
      */
     public function __construct(
         $categoryCountsByLevel,
         CategoryFacade $categoryFacade,
         SqlLoggerFacade $sqlLoggerFacade,
         PersistentReferenceFacade $persistentReferenceFacade,
-        Faker $faker
+        Faker $faker,
+        ProgressBarFactory $progressBarFactory
     ) {
         $this->categoryCountsByLevel = $categoryCountsByLevel;
         $this->categoryFacade = $categoryFacade;
@@ -65,6 +73,7 @@ class CategoryDataFixture
         $this->faker = $faker;
         $this->categoriesCreated = 0;
         $this->persistentReferenceFacade = $persistentReferenceFacade;
+        $this->progressBarFactory = $progressBarFactory;
     }
 
     /**
@@ -72,7 +81,7 @@ class CategoryDataFixture
      */
     public function load(OutputInterface $output)
     {
-        $progressBar = $this->createProgressBar($output);
+        $progressBar = $this->progressBarFactory->create($output, array_sum($this->categoryCountsByLevel));
 
         $rootCategory = $this->categoryFacade->getRootCategory();
         $this->sqlLoggerFacade->temporarilyDisableLogging();
@@ -134,22 +143,5 @@ class CategoryDataFixture
         $categoryData->parent = $parentCategory;
 
         return $categoryData;
-    }
-
-    /**
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @return \Shopsys\ShopBundle\Component\Console\ProgressBar
-     */
-    private function createProgressBar(OutputInterface $output)
-    {
-        $progressBar = new ProgressBar($output, $this->recursivelyCountCategoriesInCategoryTree());
-        $progressBar->setFormat(
-            '%current%/%max% [%bar%] %percent:3s%%,%speed:6.1f% cat./s (%step_duration:.3f% s/cat.),'
-            . ' Elapsed: %elapsed_hms%, Remaining: %remaining_hms%, MEM:%memory:9s%'
-        );
-        $progressBar->setRedrawFrequency(10);
-        $progressBar->start();
-
-        return $progressBar;
     }
 }

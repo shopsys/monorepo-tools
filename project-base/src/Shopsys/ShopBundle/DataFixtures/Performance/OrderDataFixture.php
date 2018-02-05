@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
 use Faker\Generator as Faker;
-use Shopsys\ShopBundle\Component\Console\ProgressBar;
+use Shopsys\ShopBundle\Component\Console\ProgressBarFactory;
 use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade;
@@ -97,6 +97,11 @@ class OrderDataFixture
     private $customerFacade;
 
     /**
+     * @var \Shopsys\ShopBundle\Component\Console\ProgressBarFactory
+     */
+    private $progressBarFactory;
+
+    /**
      * @param int $orderTotalCount
      * @param int $orderItemCountPerOrder
      * @param \Doctrine\ORM\EntityManager $em
@@ -108,6 +113,7 @@ class OrderDataFixture
      * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory $orderPreviewFactory
      * @param \Shopsys\ShopBundle\Model\Product\ProductFacade $productFacade
      * @param \Shopsys\ShopBundle\Model\Customer\CustomerFacade $customerFacade
+     * @param \Shopsys\ShopBundle\Component\Console\ProgressBarFactory $progressBarFactory
      */
     public function __construct(
         $orderTotalCount,
@@ -120,7 +126,8 @@ class OrderDataFixture
         OrderFacade $orderFacade,
         OrderPreviewFactory $orderPreviewFactory,
         ProductFacade $productFacade,
-        CustomerFacade $customerFacade
+        CustomerFacade $customerFacade,
+        ProgressBarFactory $progressBarFactory
     ) {
         $this->orderTotalCount = $orderTotalCount;
         $this->orderItemCountPerOrder = $orderItemCountPerOrder;
@@ -134,6 +141,7 @@ class OrderDataFixture
         $this->orderPreviewFactory = $orderPreviewFactory;
         $this->productFacade = $productFacade;
         $this->customerFacade = $customerFacade;
+        $this->progressBarFactory = $progressBarFactory;
     }
 
     /**
@@ -147,13 +155,7 @@ class OrderDataFixture
         $this->loadPerformanceProductIds();
         $this->loadPerformanceUserIdsOnFirstDomain();
 
-        $progressBar = new ProgressBar($output, $this->orderTotalCount);
-        $progressBar->setFormat(
-            '%current%/%max% [%bar%] %percent:3s%%,%speed:6.1f% orders/s (%step_duration:.3f% s/ord.),'
-            . ' Elapsed: %elapsed_hms%, Remaining: %remaining_hms%, MEM:%memory:9s%'
-        );
-        $progressBar->setRedrawFrequency(10);
-        $progressBar->start();
+        $progressBar = $this->progressBarFactory->create($output, $this->orderTotalCount);
 
         for ($orderIndex = 0; $orderIndex < $this->orderTotalCount; $orderIndex++) {
             $this->createOrder();
