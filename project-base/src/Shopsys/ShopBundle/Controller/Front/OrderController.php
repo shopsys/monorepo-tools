@@ -8,6 +8,7 @@ use Shopsys\ShopBundle\Component\HttpFoundation\DownloadFileResponse;
 use Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory;
 use Shopsys\ShopBundle\Model\Cart\CartFacade;
 use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade;
 use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
 use Shopsys\ShopBundle\Model\Order\FrontOrderData;
 use Shopsys\ShopBundle\Model\Order\Mail\OrderMailFacade;
@@ -20,7 +21,6 @@ use Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
 use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Symfony\Component\Form\FormError;
@@ -103,9 +103,9 @@ class OrderController extends FrontBaseController
     private $session;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
+     * @var \Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade
      */
-    private $termsAndConditionsFacade;
+    private $legalConditionsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade
@@ -127,7 +127,7 @@ class OrderController extends FrontBaseController
         Session $session,
         TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
         OrderMailFacade $orderMailFacade,
-        TermsAndConditionsFacade $termsAndConditionsFacade,
+        LegalConditionsFacade $legalConditionsFacade,
         NewsletterFacade $newsletterFacade
     ) {
         $this->orderFacade = $orderFacade;
@@ -144,7 +144,7 @@ class OrderController extends FrontBaseController
         $this->session = $session;
         $this->transportAndPaymentWatcherService = $transportAndPaymentWatcherService;
         $this->orderMailFacade = $orderMailFacade;
-        $this->termsAndConditionsFacade = $termsAndConditionsFacade;
+        $this->legalConditionsFacade = $legalConditionsFacade;
         $this->newsletterFacade = $newsletterFacade;
     }
 
@@ -244,7 +244,7 @@ class OrderController extends FrontBaseController
                 $orderPreview->getProductsPrice(),
                 $domainId
             ),
-            'termsAndConditionsArticle' => $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId(
+            'termsAndConditionsArticle' => $this->legalConditionsFacade->findTermsAndConditionsArticleByDomainId(
                 $this->domain->getId()
             ),
         ]);
@@ -349,7 +349,7 @@ class OrderController extends FrontBaseController
         $response = $this->getTermsAndConditionsResponse();
 
         return new DownloadFileResponse(
-            $this->termsAndConditionsFacade->getDownloadFilename(),
+            $this->legalConditionsFacade->getDownloadFilename(),
             $response->getContent()
         );
     }
@@ -359,8 +359,8 @@ class OrderController extends FrontBaseController
      */
     private function getTermsAndConditionsResponse()
     {
-        return $this->render('@ShopsysShop/Front/Content/Order/termsAndConditions.html.twig', [
-            'termsAndConditionsArticle' => $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId(
+        return $this->render('@ShopsysShop/Front/Content/Order/legalConditions.html.twig', [
+            'termsAndConditionsArticle' => $this->legalConditionsFacade->findTermsAndConditionsArticleByDomainId(
                 $this->domain->getId()
             ),
         ]);

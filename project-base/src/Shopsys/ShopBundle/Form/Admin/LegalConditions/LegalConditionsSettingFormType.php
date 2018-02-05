@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\TermsAndConditions;
+namespace Shopsys\ShopBundle\Form\Admin\LegalConditions;
 
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Symfony\Component\Form\AbstractType;
@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TermsAndConditionsSettingFormType extends AbstractType
+class LegalConditionsSettingFormType extends AbstractType
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade

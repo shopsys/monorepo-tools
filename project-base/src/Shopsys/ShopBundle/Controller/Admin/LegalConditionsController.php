@@ -5,11 +5,11 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Form\Admin\TermsAndConditions\TermsAndConditionsSettingFormType;
-use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
+use Shopsys\ShopBundle\Form\Admin\LegalConditions\LegalConditionsSettingFormType;
+use Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class TermsAndConditionsController extends AdminBaseController
+class LegalConditionsController extends AdminBaseController
 {
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
@@ -17,31 +17,31 @@ class TermsAndConditionsController extends AdminBaseController
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
+     * @var \Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade
      */
-    private $termsAndConditionsFacade;
+    private $legalConditionsFacade;
 
     public function __construct(
         AdminDomainTabsFacade $adminDomainTabsFacade,
-        TermsAndConditionsFacade $termsAndConditionsFacade
+        LegalConditionsFacade $legalConditionsFacade
     ) {
         $this->adminDomainTabsFacade = $adminDomainTabsFacade;
-        $this->termsAndConditionsFacade = $termsAndConditionsFacade;
+        $this->legalConditionsFacade = $legalConditionsFacade;
     }
 
     /**
-     * @Route("/terms-and-conditions/setting/")
+     * @Route("/legal-conditions/setting/")
      */
     public function settingAction(Request $request)
     {
         $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
-        $termsAndConditionsArticle = $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId($domainId);
+        $termsAndConditionsArticle = $this->legalConditionsFacade->findTermsAndConditionsArticleByDomainId($domainId);
 
-        $termsAndConditionsSettingData = [
+        $settingData = [
             'termsAndConditionsArticle' => $termsAndConditionsArticle,
         ];
 
-        $form = $this->createForm(TermsAndConditionsSettingFormType::class, $termsAndConditionsSettingData, [
+        $form = $this->createForm(LegalConditionsSettingFormType::class, $settingData, [
             'domain_id' => $domainId,
         ]);
         $form->handleRequest($request);
@@ -49,20 +49,20 @@ class TermsAndConditionsController extends AdminBaseController
         if ($form->isValid()) {
             $termsAndConditionsArticle = $form->getData()['termsAndConditionsArticle'];
 
-            $this->termsAndConditionsFacade->setTermsAndConditionsArticleOnDomain(
+            $this->legalConditionsFacade->setTermsAndConditionsArticleOnDomain(
                 $termsAndConditionsArticle,
                 $domainId
             );
 
-            $this->getFlashMessageSender()->addSuccessFlashTwig(t('Terms and conditions settings modified.'));
-            return $this->redirectToRoute('admin_termsandconditions_setting');
+            $this->getFlashMessageSender()->addSuccessFlashTwig(t('Legal conditions settings modified.'));
+            return $this->redirectToRoute('admin_legalconditions_setting');
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/TermsAndConditions/setting.html.twig', [
+        return $this->render('@ShopsysShop/Admin/Content/LegalConditions/setting.html.twig', [
             'form' => $form->createView(),
         ]);
     }

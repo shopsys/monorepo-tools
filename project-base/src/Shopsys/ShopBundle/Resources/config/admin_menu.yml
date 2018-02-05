@@ -149,11 +149,11 @@
       - label: 'Operator information'
         route: admin_shopinfo_setting
 
-    - label: 'Terms and conditions'
-      route: admin_termsandconditions_setting
+    - label: 'Legal conditions'
+      route: admin_legalconditions_setting
       items:
-        - label: 'Terms and conditions'
-          route: admin_termsandconditions_setting
+        - label: 'Legal conditions'
+          route: admin_legalconditions_setting
 
     - label: 'Cookies information'
       route: admin_cookies_setting

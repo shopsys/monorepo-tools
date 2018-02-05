@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)
 - PHPUnit tests now fail on warning (@TomasLudvik)
 - end of support of PHP 7.0 (@TomasLudvik)
+- renamed TermsAndCondition to LegalCondition to avoid multiple classes for legal conditions agreements (@stanoMilan) 
 - emails with empty subject or body are no longer sent (@stanoMilan)
 - postgresql-client is installed in [php-fpm/dockerfile](docker/php-fpm/Dockerfile) for `pg_dump` function (@MattCzerner)
     - postgresql was downgraded to 9.5 because of compatibility with postgresql-client

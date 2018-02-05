@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\TermsAndConditions;
+namespace Shopsys\ShopBundle\Model\LegalConditions;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 
-class TermsAndConditionsFacade
+class LegalConditionsFacade
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
@@ -80,7 +80,7 @@ class TermsAndConditionsFacade
      * @param \Shopsys\ShopBundle\Model\Article\Article $article
      * @return bool
      */
-    public function isArticleUsedAsTermsAndConditions(Article $article)
+    public function isArticleUsedAsLegalConditions(Article $article)
     {
         foreach ($this->domain->getAll() as $domainConfig) {
             if ($this->findTermsAndConditionsArticleByDomainId($domainConfig->getId()) === $article) {

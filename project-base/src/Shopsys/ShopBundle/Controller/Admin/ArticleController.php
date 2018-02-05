@@ -16,7 +16,7 @@ use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticleDataFactory;
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Shopsys\ShopBundle\Model\Cookies\CookiesFacade;
-use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
+use Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -53,9 +53,9 @@ class ArticleController extends AdminBaseController
     private $confirmDeleteResponseFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
+     * @var \Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade
      */
-    private $termsAndConditionsFacade;
+    private $legalConditionsFacade;
 
     /**
      * @var \Shopsys\ShopBundle\Model\Cookies\CookiesFacade
@@ -69,7 +69,7 @@ class ArticleController extends AdminBaseController
         AdminDomainTabsFacade $adminDomainTabsFacade,
         Breadcrumb $breadcrumb,
         ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
-        TermsAndConditionsFacade $termsAndConditionsFacade,
+        LegalConditionsFacade $legalConditionsFacade,
         CookiesFacade $cookiesFacade
     ) {
         $this->articleFacade = $articleFacade;
@@ -78,7 +78,7 @@ class ArticleController extends AdminBaseController
         $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->breadcrumb = $breadcrumb;
         $this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
-        $this->termsAndConditionsFacade = $termsAndConditionsFacade;
+        $this->legalConditionsFacade = $legalConditionsFacade;
         $this->cookiesFacade = $cookiesFacade;
     }
 
@@ -213,9 +213,9 @@ class ArticleController extends AdminBaseController
     public function deleteConfirmAction($id)
     {
         $article = $this->articleFacade->getById($id);
-        if ($this->termsAndConditionsFacade->isArticleUsedAsTermsAndConditions($article)) {
+        if ($this->legalConditionsFacade->isArticleUsedAsLegalConditions($article)) {
             $message = t(
-                'Article "%name%" set for displaying terms and conditions. This setting will be lost. Do you really want to delete it?',
+                'Article "%name%" set for displaying legal conditions. This setting will be lost. Do you really want to delete it?',
                 ['%name%' => $article->getName()]
             );
         } elseif ($this->cookiesFacade->isArticleUsedAsCookiesInfo($article)) {
