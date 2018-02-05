@@ -12,23 +12,16 @@ use Symfony\Component\Routing\RouteCompiler;
 class FriendlyUrlGenerator extends BaseUrlGenerator
 {
     /**
-     * @var \Symfony\Component\Routing\RouteCompiler
-     */
-    private $routeCompiler;
-
-    /**
      * @var FriendlyUrlRepository
      */
     private $friendlyUrlRepository;
 
     public function __construct(
         RequestContext $context,
-        RouteCompiler $routeCompiler,
         FriendlyUrlRepository $friendlyUrlRepository
     ) {
         parent::__construct(new RouteCollection(), $context, null);
 
-        $this->routeCompiler = $routeCompiler;
         $this->friendlyUrlRepository = $friendlyUrlRepository;
     }
 
