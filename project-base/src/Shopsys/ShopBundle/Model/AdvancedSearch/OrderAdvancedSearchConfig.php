@@ -10,6 +10,7 @@ use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderPhoneNumberFilter;
 use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderPriceFilterWithVatFilter;
 use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderProductFilter;
 use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderStatusFilter;
+use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderStreetFilter;
 
 class OrderAdvancedSearchConfig extends AdvancedSearchConfig
 {
@@ -21,6 +22,7 @@ class OrderAdvancedSearchConfig extends AdvancedSearchConfig
         OrderStatusFilter $orderStatusFilter,
         OrderProductFilter $orderProductFilter,
         OrderPhoneNumberFilter $orderPhoneNumberFilter,
+        OrderStreetFilter $orderStreetFilter,
         Domain $domain
     ) {
         parent::__construct();
@@ -34,5 +36,6 @@ class OrderAdvancedSearchConfig extends AdvancedSearchConfig
         }
         $this->registerFilter($orderProductFilter);
         $this->registerFilter($orderPhoneNumberFilter);
+        $this->registerFilter($orderStreetFilter);
     }
 }

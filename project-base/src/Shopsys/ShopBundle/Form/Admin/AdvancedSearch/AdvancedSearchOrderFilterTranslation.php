@@ -15,5 +15,6 @@ class AdvancedSearchOrderFilterTranslation extends AdvancedSearchFilterTranslati
         $this->addFilterTranslation('orderStatus', t('Status of order'));
         $this->addFilterTranslation('orderProduct', t('Product in order'));
         $this->addFilterTranslation('customerPhoneNumber', t('Customer phone number'));
+        $this->addFilterTranslation('customerStreet', t('Customer street'));
     }
 }
