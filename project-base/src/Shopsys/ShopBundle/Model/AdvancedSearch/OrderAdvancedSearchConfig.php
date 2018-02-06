@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderCreateDateFilter;
 use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderDomainFilter;
+use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderNameFilter;
 use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderNumberFilter;
 use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderPhoneNumberFilter;
 use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderPriceFilterWithVatFilter;
@@ -23,6 +24,7 @@ class OrderAdvancedSearchConfig extends AdvancedSearchConfig
         OrderProductFilter $orderProductFilter,
         OrderPhoneNumberFilter $orderPhoneNumberFilter,
         OrderStreetFilter $orderStreetFilter,
+        OrderNameFilter $orderNameFilter,
         Domain $domain
     ) {
         parent::__construct();
@@ -37,5 +39,6 @@ class OrderAdvancedSearchConfig extends AdvancedSearchConfig
         $this->registerFilter($orderProductFilter);
         $this->registerFilter($orderPhoneNumberFilter);
         $this->registerFilter($orderStreetFilter);
+        $this->registerFilter($orderNameFilter);
     }
 }
