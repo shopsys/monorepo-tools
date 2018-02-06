@@ -1,14 +1,22 @@
 <?php
 
-namespace Tests\ShopBundle\Database\Form\Front;
+namespace Tests\ShopBundle\Unit\Form\Front\Order;
 
-use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType;
-use Symfony\Component\Form\FormFactoryInterface;
-use Tests\ShopBundle\Test\DatabaseTestCase;
+use Shopsys\ShopBundle\Model\Country\Country;
+use Shopsys\ShopBundle\Model\Country\CountryFacade;
+use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
+use Symfony\Component\Form\PreloadedExtension;
+use Symfony\Component\Form\Test\TypeTestCase;
+use Symfony\Component\Validator\Validation;
 
-class PersonalInfoFormTypeTest extends DatabaseTestCase
+class PersonalInfoFormTypeTest extends TypeTestCase
 {
+    /**
+     * @var CountryFacade
+     */
+    private $countryFacade;
+
     /**
      * @return array
      */
@@ -27,12 +35,8 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase
      */
     public function testTermsAndConditionsAgreementIsMandatory(array $personalInfoFormData, $isExpectedValid)
     {
-        $formFactory = $this->getServiceByType(FormFactoryInterface::class);
-        /* @var $formFactory \Symfony\Component\Form\FormFactoryInterface */
-
-        $personalInfoForm = $formFactory->create(PersonalInfoFormType::class, null, [
+        $personalInfoForm = $this->factory->create(PersonalInfoFormType::class, null, [
             'domain_id' => 1,
-            'csrf_protection' => false,
         ]);
 
         $personalInfoForm->submit($personalInfoFormData);
@@ -46,9 +50,6 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase
      */
     private function getPersonalInfoFormData($legalConditionsAgreement)
     {
-        $country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
-        /* @var $country \Shopsys\ShopBundle\Model\Country\Country */
-
         $personalInfoFormData = [];
         $personalInfoFormData['firstName'] = 'test';
         $personalInfoFormData['lastName'] = 'test';
@@ -57,10 +58,31 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase
         $personalInfoFormData['street'] = 'test';
         $personalInfoFormData['city'] = 'test';
         $personalInfoFormData['postcode'] = '12345';
-        $personalInfoFormData['country'] = $country->getId();
+        $personalInfoFormData['country'] = 1;
         $personalInfoFormData['legalConditionsAgreement'] = $legalConditionsAgreement;
         $personalInfoFormData['newsletterSubscription'] = false;
 
         return $personalInfoFormData;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getExtensions(): array
+    {
+        return [
+            new ValidatorExtension(Validation::createValidator()),
+            new PreloadedExtension([new PersonalInfoFormType($this->countryFacade)], []),
+        ];
+    }
+
+    protected function setUp()
+    {
+        $countryMock = $this->createMock(Country::class);
+        $countryMock->method('getId')->willReturn(1);
+
+        $this->countryFacade = $this->createMock(CountryFacade::class);
+        $this->countryFacade->method('getAllByDomainId')->willReturn([$countryMock]);
+        parent::setUp();
     }
 }
