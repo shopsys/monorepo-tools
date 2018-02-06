@@ -12,7 +12,8 @@
             <div class="form-group__title">
                 {{ 'Settings'|trans }}
             </div>
-            {{ form_row(form.termsAndConditionsArticle, { label: 'Terms and conditions'|trans, icon: { title: 'Choose article, which will serve as terms and conditions with which the customer has to agree with when creating order.'|trans } }) }}
+            {{ form_row(form.termsAndConditionsArticle, { label: 'Terms and conditions'|trans, icon: { title: 'Choose article, which will serve as terms and conditions with which the customer has to agree when creating order.'|trans } }) }}
+            {{ form_row(form.privacyPolicyArticle, { label: 'Privacy policy'|trans, icon: { title: 'Choose article, which will serve as privacy policy with which the customer has to agree when creating order or registering user.'|trans } }) }}
         </div>
 
         {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}

@@ -37,6 +37,13 @@ class LegalConditionsSettingFormType extends AbstractType
                 'choice_value' => 'id',
                 'placeholder' => t('-- Choose article --'),
             ])
+            ->add('privacyPolicyArticle', ChoiceType::class, [
+                'required' => false,
+                'choices' => $articles,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'placeholder' => t('-- Choose article --'),
+            ])
             ->add('save', SubmitType::class);
     }
 

@@ -38,42 +38,44 @@ class LegalConditionsFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Article\Article|null
      */
-    public function findTermsAndConditionsArticleByDomainId($domainId)
+    public function findTermsAndConditions($domainId)
     {
-        $termsAndConditionsArticleId = $this->setting->getForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $domainId);
-
-        if ($termsAndConditionsArticleId !== null) {
-            return $this->articleFacade->findById(
-                $this->setting->getForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $domainId)
-            );
-        }
-
-        return null;
+        return $this->findArticle(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $domainId);
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Article\Article|null $termsAndConditionsArticle
+     * @param \Shopsys\ShopBundle\Model\Article\Article|null $termsAndConditions
      * @param int $domainId
      */
-    public function setTermsAndConditionsArticleOnDomain($termsAndConditionsArticle, $domainId)
+    public function setTermsAndConditions(Article $termsAndConditions = null, $domainId)
     {
-        $termsAndConditionsArticleId = null;
-        if ($termsAndConditionsArticle !== null) {
-            $termsAndConditionsArticleId = $termsAndConditionsArticle->getId();
-        }
-        $this->setting->setForDomain(
-            Setting::TERMS_AND_CONDITIONS_ARTICLE_ID,
-            $termsAndConditionsArticleId,
-            $domainId
-        );
+        $this->setArticle(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditions, $domainId);
     }
 
     /**
      * @return string
      */
-    public function getDownloadFilename()
+    public function getTermsAndConditionsDownloadFilename()
     {
         return t('Terms-and-conditions.html');
+    }
+
+    /**
+     * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Article\Article|null
+     */
+    public function findPrivacyPolicy($domainId)
+    {
+        return $this->findArticle(Setting::PRIVACY_POLICY_ARTICLE_ID, $domainId);
+    }
+
+    /**
+     * @param \Shopsys\ShopBundle\Model\Article\Article|null $privacyPolicy
+     * @param int $domainId
+     */
+    public function setPrivacyPolicy(Article $privacyPolicy = null, $domainId)
+    {
+        $this->setArticle(Setting::PRIVACY_POLICY_ARTICLE_ID, $privacyPolicy, $domainId);
     }
 
     /**
@@ -82,12 +84,48 @@ class LegalConditionsFacade
      */
     public function isArticleUsedAsLegalConditions(Article $article)
     {
-        foreach ($this->domain->getAll() as $domainConfig) {
-            if ($this->findTermsAndConditionsArticleByDomainId($domainConfig->getId()) === $article) {
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $legalConditionsArticles = [
+                $this->findTermsAndConditions($domainId),
+                $this->findPrivacyPolicy($domainId),
+            ];
+
+            if (in_array($article, $legalConditionsArticles, true)) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * @param string $settingKey
+     * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Article\Article|null
+     */
+    private function findArticle($settingKey, $domainId)
+    {
+        $articleId = $this->setting->getForDomain($settingKey, $domainId);
+
+        if ($articleId !== null) {
+            return $this->articleFacade->getById($articleId);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param string $settingKey
+     * @param \Shopsys\ShopBundle\Model\Article\Article|null $privacyPolicy
+     * @param int $domainId
+     */
+    private function setArticle($settingKey, Article $privacyPolicy = null, $domainId)
+    {
+        $articleId = null;
+        if ($privacyPolicy !== null) {
+            $articleId = $privacyPolicy->getId();
+        }
+
+        $this->setting->setForDomain($settingKey, $articleId, $domainId);
     }
 }

@@ -10,6 +10,7 @@ class Setting
     const DEFAULT_PRICING_GROUP = 'defaultPricingGroupId';
     const DEFAULT_AVAILABILITY_IN_STOCK = 'defaultAvailabilityInStockId';
     const TERMS_AND_CONDITIONS_ARTICLE_ID = 'termsAndConditionsArticleId';
+    const PRIVACY_POLICY_ARTICLE_ID = 'privacyPolicyArticleId';
     const COOKIES_ARTICLE_ID = 'cookiesArticleId';
     const DOMAIN_DATA_CREATED = 'domainDataCreated';
     const FEED_HASH = 'feedHash';

@@ -7,6 +7,7 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\Front\Registration\RegistrationFormType;
 use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
+use Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade;
 use Shopsys\ShopBundle\Model\Security\LoginService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,16 +34,23 @@ class RegistrationController extends FrontBaseController
      */
     private $loginService;
 
+    /**
+     * @var \Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade
+     */
+    private $legalConditionsFacade;
+
     public function __construct(
         Domain $domain,
         UserDataFactory $userDataFactory,
         CustomerFacade $customerFacade,
-        LoginService $loginService
+        LoginService $loginService,
+        LegalConditionsFacade $legalConditionsFacade
     ) {
         $this->domain = $domain;
         $this->userDataFactory = $userDataFactory;
         $this->customerFacade = $customerFacade;
         $this->loginService = $loginService;
+        $this->legalConditionsFacade = $legalConditionsFacade;
     }
 
     public function existsEmailAction(Request $request)
@@ -77,6 +85,7 @@ class RegistrationController extends FrontBaseController
 
         return $this->render('@ShopsysShop/Front/Content/Registration/register.html.twig', [
             'form' => $form->createView(),
+            'privacyPolicyArticle' => $this->legalConditionsFacade->findPrivacyPolicy($this->domain->getId()),
         ]);
     }
 }

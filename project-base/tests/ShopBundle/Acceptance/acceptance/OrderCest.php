@@ -120,7 +120,7 @@ class OrderCest
 
         $orderPage->fillPersonalInfo('Karel', 'Novák', 'no-reply@shopsys.com', '123456789');
         $orderPage->fillBillingAddress('Koksární 10', 'Ostrava', '702 00');
-        $orderPage->acceptTermsAndConditions();
+        $orderPage->acceptLegalConditions();
 
         $me->clickByText('Finish the order');
 

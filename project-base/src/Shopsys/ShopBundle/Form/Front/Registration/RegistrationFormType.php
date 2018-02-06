@@ -10,6 +10,7 @@ use Shopsys\ShopBundle\Form\HoneyPotType;
 use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
 use Shopsys\ShopBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -60,6 +61,13 @@ class RegistrationFormType extends AbstractType
                     ],
                 ],
                 'invalid_message' => 'Passwords do not match',
+            ])
+            ->add('privacyPolicy', CheckboxType::class, [
+                'required' => true,
+                'mapped' => false,
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'You have to agree with privacy policy']),
+                ],
             ])
             ->add('email2', HoneyPotType::class)
             ->add('save', SubmitType::class);

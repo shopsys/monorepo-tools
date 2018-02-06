@@ -245,12 +245,12 @@ class PersonalInfoFormType extends AbstractType
                 ],
             ])
             ->add('note', TextareaType::class, ['required' => false])
-            ->add('termsAndConditionsAgreement', CheckboxType::class, [
+            ->add('legalConditionsAgreement', CheckboxType::class, [
                 'required' => true,
                 'mapped' => false,
                 'constraints' => [
                     new Constraints\NotBlank([
-                        'message' => 'You have to agree with terms and conditions',
+                        'message' => 'You have to agree with terms and conditions and privacy policy',
                     ]),
                 ],
             ])

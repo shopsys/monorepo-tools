@@ -244,9 +244,8 @@ class OrderController extends FrontBaseController
                 $orderPreview->getProductsPrice(),
                 $domainId
             ),
-            'termsAndConditionsArticle' => $this->legalConditionsFacade->findTermsAndConditionsArticleByDomainId(
-                $this->domain->getId()
-            ),
+            'termsAndConditionsArticle' => $this->legalConditionsFacade->findTermsAndConditions($this->domain->getId()),
+            'privacyPolicyArticle' => $this->legalConditionsFacade->findPrivacyPolicy($this->domain->getId()),
         ]);
     }
 
@@ -349,7 +348,7 @@ class OrderController extends FrontBaseController
         $response = $this->getTermsAndConditionsResponse();
 
         return new DownloadFileResponse(
-            $this->legalConditionsFacade->getDownloadFilename(),
+            $this->legalConditionsFacade->getTermsAndConditionsDownloadFilename(),
             $response->getContent()
         );
     }
@@ -360,9 +359,7 @@ class OrderController extends FrontBaseController
     private function getTermsAndConditionsResponse()
     {
         return $this->render('@ShopsysShop/Front/Content/Order/legalConditions.html.twig', [
-            'termsAndConditionsArticle' => $this->legalConditionsFacade->findTermsAndConditionsArticleByDomainId(
-                $this->domain->getId()
-            ),
+            'termsAndConditionsArticle' => $this->legalConditionsFacade->findTermsAndConditions($this->domain->getId()),
         ]);
     }
 

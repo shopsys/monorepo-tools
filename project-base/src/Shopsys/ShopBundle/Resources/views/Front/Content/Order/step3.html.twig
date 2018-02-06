@@ -74,7 +74,39 @@
                     </div>
                 </div>
             {% endif %}
-            {{ form_row(form.termsAndConditionsAgreement, { label: 'I agree with terms and conditions'|trans }) }}
+            <dl class="form-line">
+                <dt></dt>
+                <dd>
+                    <div class="form-choice">
+                        <div class="form-choice__input">
+                            {{ form_widget(form.legalConditionsAgreement) }}
+                        </div>
+                        <div class="form-choice__label">
+                            <label for="{{ form.legalConditionsAgreement.vars.id }}">
+                                {% if privacyPolicyArticle is not null and termsAndConditionsArticle is not null %}
+                                    {% set privacyPolicyUrl = url('front_article_detail', {'id': privacyPolicyArticle.id}) %}
+                                    {% set termsAndConditionsUrl = url('front_article_detail', {'id': termsAndConditionsArticle.id}) %}
+                                    {{ 'I agree with <a href="%termsAndConditionsUrl%" target="_blank">terms and conditions</a> and <a href="%privacyPolicyUrl%" target="_blank">privacy policy</a>.'|trans({'%privacyPolicyUrl%': privacyPolicyUrl, '%termsAndConditionsUrl%': termsAndConditionsUrl})|raw }}
+                                {% elseif privacyPolicyArticle is not null %}
+                                    {% set privacyPolicyUrl = url('front_article_detail', {'id': privacyPolicyArticle.id}) %}
+                                    {{ 'I agree with terms and conditions and <a href="%privacyPolicyUrl%" target="_blank">privacy policy</a>.'|trans({'%privacyPolicyUrl%': privacyPolicyUrl })|raw }}
+                                {% elseif termsAndConditionsArticle is not null %}
+                                    {% set termsAndConditionsUrl = url('front_article_detail', {'id': termsAndConditionsArticle.id}) %}
+                                    {{ 'I agree with <a href="%termsAndConditionsUrl%" target="_blank">terms and conditions</a> and privacy policy.'|trans({'%termsAndConditionsUrl%': termsAndConditionsUrl })|raw }}
+                                {% else %}
+                                    {{ 'I agree with terms and conditions and privacy policy.'|trans }}
+                                {% endif %}
+                            </label>
+                            <span class="js-validation-errors-list js-validation-error-list-{{ form.legalConditionsAgreement.vars.id }} form-error form-error--choice display-none">
+                                <span class="form-error__icon">
+                                    <i class="svg svg-warning"></i>
+                                </span>
+                                <ul class="form-error__list"></ul>
+                            </span>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
             {{ form_row(form.newsletterSubscription, { label: 'I want to subscribe to the newsletter'|trans }) }}
         </div>
         <div id="js-order-preview" class="box-order__cart" data-url="{{ url('front_order_preview') }}">

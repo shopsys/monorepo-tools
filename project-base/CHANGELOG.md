@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - parameter is set only in `parameters_test.yml` as it is only relevant in `TEST` environment
     - overwriting can be switched off by setting the parameter to `~` (null in Yaml)
     - overwriting the domain URL is necessary for Selenium acceptance tests running in Docker
+- LegalConditionsSetting: added privacy policy article selection (@stanoMilan)
+    - customers need to agree with privacy policy while registring and completing order process
 
 ### Changed
 - cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)

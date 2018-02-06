@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Form\Admin\LegalConditions\LegalConditionsSettingFormType;
 use Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,10 +36,9 @@ class LegalConditionsController extends AdminBaseController
     public function settingAction(Request $request)
     {
         $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
-        $termsAndConditionsArticle = $this->legalConditionsFacade->findTermsAndConditionsArticleByDomainId($domainId);
-
         $settingData = [
-            'termsAndConditionsArticle' => $termsAndConditionsArticle,
+            'termsAndConditionsArticle' => $this->legalConditionsFacade->findTermsAndConditions($domainId),
+            'privacyPolicyArticle' => $this->legalConditionsFacade->findPrivacyPolicy($domainId),
         ];
 
         $form = $this->createForm(LegalConditionsSettingFormType::class, $settingData, [
@@ -47,12 +47,10 @@ class LegalConditionsController extends AdminBaseController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $termsAndConditionsArticle = $form->getData()['termsAndConditionsArticle'];
+            $formData = $form->getData();
 
-            $this->legalConditionsFacade->setTermsAndConditionsArticleOnDomain(
-                $termsAndConditionsArticle,
-                $domainId
-            );
+            $this->legalConditionsFacade->setTermsAndConditions($formData['termsAndConditionsArticle'], $domainId);
+            $this->legalConditionsFacade->setPrivacyPolicy($formData['privacyPolicyArticle'], $domainId);
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(t('Legal conditions settings modified.'));
             return $this->redirectToRoute('admin_legalconditions_setting');
