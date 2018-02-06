@@ -17,5 +17,6 @@ class AdvancedSearchOrderFilterTranslation extends AdvancedSearchFilterTranslati
         $this->addFilterTranslation('customerPhoneNumber', t('Customer phone number'));
         $this->addFilterTranslation('customerStreet', t('Customer street'));
         $this->addFilterTranslation('customerName', t('Customer name'));
+        $this->addFilterTranslation('customerLastName', t('Customer last name'));
     }
 }
