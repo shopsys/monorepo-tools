@@ -60,6 +60,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         $manager->persist(new SettingValue(SeoSettingFacade::SEO_TITLE_MAIN_PAGE, 'ShopSys Framework - Title page', Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(SeoSettingFacade::SEO_TITLE_ADD_ON, '| Demo eshop', Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, null, Domain::FIRST_DOMAIN_ID));
+        $manager->persist(new SettingValue(Setting::PRIVACY_POLICY_ARTICLE_ID, null, Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(Setting::COOKIES_ARTICLE_ID, null, Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(Setting::DOMAIN_DATA_CREATED, true, Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(Setting::FEED_HASH, $hashGenerator->generateHash(10), SettingValue::DOMAIN_ID_COMMON));

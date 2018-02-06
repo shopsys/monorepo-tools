@@ -24,12 +24,14 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         $setting->clearCache();
 
         $termsAndConditions = $this->getReference(ArticleDataFixture::ARTICLE_TERMS_AND_CONDITIONS_1);
+        $privacyPolicy = $this->getReference(ArticleDataFixture::ARTICLE_PRIVACY_POLICY_1);
         /* @var $termsAndConditions \Shopsys\ShopBundle\Model\Article\Article */
         $cookies = $this->getReference(ArticleDataFixture::ARTICLE_COOKIES_1);
         /* @var $cookies \Shopsys\ShopBundle\Model\Article\Article */
 
         $setting->setForDomain(Setting::COOKIES_ARTICLE_ID, $cookies->getId(), Domain::FIRST_DOMAIN_ID);
         $setting->setForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditions->getId(), Domain::FIRST_DOMAIN_ID);
+        $setting->setForDomain(Setting::PRIVACY_POLICY_ARTICLE_ID, $privacyPolicy->getId(), Domain::FIRST_DOMAIN_ID);
     }
 
     /**

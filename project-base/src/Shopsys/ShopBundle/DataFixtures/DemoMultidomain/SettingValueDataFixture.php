@@ -25,6 +25,10 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         /* @var $termsAndConditionsDomain2 \Shopsys\ShopBundle\Model\Article\Article */
         $setting->setForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditionsDomain2->getId(), 2);
 
+        $privacyPolicyDomain2 = $this->getReference(ArticleDataFixture::ARTICLE_PRIVACY_POLICY_2);
+        /* @var $privacyPolicyDomain2 \Shopsys\ShopBundle\Model\Article\Article */
+        $setting->setForDomain(Setting::PRIVACY_POLICY_ARTICLE_ID, $privacyPolicyDomain2->getId(), 2);
+
         $cookiesDomain2 = $this->getReference(ArticleDataFixture::ARTICLE_COOKIES_2);
         /* @var $cookiesDomain2 \Shopsys\ShopBundle\Model\Article\Article */
         $setting->setForDomain(Setting::COOKIES_ARTICLE_ID, $cookiesDomain2->getId(), 2);
