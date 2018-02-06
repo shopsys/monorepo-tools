@@ -23,6 +23,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - postgresql-client is installed in [php-fpm/dockerfile](docker/php-fpm/Dockerfile) for `pg_dump` function (@MattCzerner)
     - postgresql was downgraded to 9.5 because of compatibility with postgresql-client
 - docker-compose: added container_name to smtp-server and adminer (@MattCzerner)
+- configuration of Docker Compose tweaked for easier development (@MattCzerner)
+    - `docker-compose.yml` is added to `.gitignore` for everyone to be able to make individual changes
+    - the predefined templates are now in `/docker/conf` directory
+    - `adminer` container uses port 1100 by default (as 1000 is often already in use)
+    - Docker Sync is used only in configuration for MacOS as only there it is needed
+    - `postgres` container is created with a volume for data persistence (in `var/postgres-data`)
+    - see documentation of [Installation Using Docker](docs/introduction/installation-using-docker.md) for details
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)

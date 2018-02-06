@@ -355,6 +355,7 @@
             <fileset dir="${path.var}/">
                 <exclude name=".gitkeep" />
                 <exclude name="logs/**" />
+                <exclude name="postgres-data/**" />
             </fileset>
             <fileset dir="${path.build.stats}/">
                 <exclude name="/" />

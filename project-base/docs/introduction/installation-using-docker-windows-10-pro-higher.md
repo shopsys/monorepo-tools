@@ -16,11 +16,12 @@
 git clone https://git.shopsys-framework.com/shopsys/shopsys-framework.git
 cd shopsys-framework
 ```
+
 ### 2. Create docker-compose.yml file
-Creates `docker-compose.yml` from `docker-compose-win.yml.dist`.
+Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../docker/conf/docker-compose.yml.dist).
 
 ```
-cp docker/conf/docker-compose-win.yml.dist docker-compose.yml
+cp docker/conf/docker-compose.yml.dist docker-compose.yml
 ```
 
 ### 3. Grant Docker access to your files
@@ -52,5 +53,5 @@ setfacl -dR -m user:33:rwX -m mask:rwX .
 setfacl -R -m user:100:rX ./web
 setfacl -dR -m user:100:rX ./web
 ```
-### 6. Setup the aplication
+### 6. Setup the application
 [Application setup guide](installation-using-docker-application-setup.md)

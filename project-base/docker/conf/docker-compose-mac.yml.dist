@@ -1,9 +1,10 @@
 version: "3.1"
 services:
     postgres:
-        image: postgres:9.6-alpine
+        image: postgres:9.5-alpine
         container_name: shopsys-framework-postgres
-        working_dir: /var/www/shopsys-framework
+        volumes:
+            - ./var/postgres-data:/var/lib/postgresql/data
         environment:
             - POSTGRES_USER=root
             - POSTGRES_PASSWORD=root
@@ -14,7 +15,7 @@ services:
         container_name: shopsys-framework-webserver
         working_dir: /var/www/shopsys-framework
         volumes:
-            - .:/var/www/shopsys-framework
+            - shopsys-framework-sync:/var/www/shopsys-framework
             - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
         ports:
             - "8000:8080"
@@ -27,7 +28,7 @@ services:
         container_name: shopsys-framework-php-fpm
         working_dir: /var/www/shopsys-framework
         volumes:
-            - .:/var/www/shopsys-framework
+            - shopsys-framework-sync:/var/www/shopsys-framework
             - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.1/fpm/conf.d/99-overrides.ini
         links:
             - postgres
@@ -47,8 +48,9 @@ services:
 
     adminer:
         image: adminer:latest
+        container_name: shopsys-framework-adminer
         ports:
-            - "1000:8080"
+            - "1100:8080"
         links:
             - postgres
         depends_on:
@@ -56,3 +58,8 @@ services:
 
     smtp-server:
         image: namshi/smtp
+        container_name: shopsys-framework-smtp-server
+
+volumes:
+    shopsys-framework-sync:
+        external: true
