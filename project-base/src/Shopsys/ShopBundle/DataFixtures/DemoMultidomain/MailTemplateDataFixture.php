@@ -39,7 +39,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 
         $mailTemplateData = new MailTemplateData();
         $mailTemplateData->name = 'order_status_2';
-        $mailTemplateData->sendMail = true;
+        $mailTemplateData->sendMail = false;
         $mailTemplateData->subject = 'Stav objednávky se změnil';
         $mailTemplateData->body = 'Vážený zákazníku, <br /><br />'
             . 'Vaše objednávka se zpracovává.';
@@ -48,7 +48,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 
         $mailTemplateData = new MailTemplateData();
         $mailTemplateData->name = 'order_status_3';
-        $mailTemplateData->sendMail = true;
+        $mailTemplateData->sendMail = false;
         $mailTemplateData->subject = 'Stav objednávky se změnil';
         $mailTemplateData->body = 'Vážený zákazníku, <br /><br />'
             . 'zpracování objednávky bylo dokončeno.';
@@ -57,7 +57,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 
         $mailTemplateData = new MailTemplateData();
         $mailTemplateData->name = 'order_status_4';
-        $mailTemplateData->sendMail = true;
+        $mailTemplateData->sendMail = false;
         $mailTemplateData->subject = 'Stav objednávky se změnil';
         $mailTemplateData->body = 'Vážený zákazníku, <br /><br />'
             . 'Vaše objednávka byla zrušena.';
