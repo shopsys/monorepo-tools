@@ -6,7 +6,6 @@ ivory_ck_editor:
       entities_latin: false
       enterMode: 2
       shiftEnterMode: 1
-      shiftEnterMode:
       filebrowserBrowseRoute: elfinder
       toolbar:
         - ['Bold', 'Italic', 'Underline', 'Strike', 'Superscript', 'Subscript', '-', 'RemoveFormat']
