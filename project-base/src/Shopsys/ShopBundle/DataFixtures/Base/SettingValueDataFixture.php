@@ -8,6 +8,7 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Component\Setting\SettingValue;
+use Shopsys\ShopBundle\Component\String\HashGenerator;
 use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
@@ -29,7 +30,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         /* @var $defaultCurrency \Shopsys\ShopBundle\Model\Pricing\Currency\Currency */
         $defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
         /* @var $defaultInStockAvailability \Shopsys\ShopBundle\Model\Product\Availability\Availability */
-        $hashGenerator = $this->get('shopsys.shop.component.string.hash_generator');
+        $hashGenerator = $this->get(HashGenerator::class);
         /* @var $hashGenerator \Shopsys\ShopBundle\Component\String\HashGenerator */
         $defaultUnit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         /* @var $defaultUnit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
@@ -73,7 +74,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 
     private function clearSettingCache()
     {
-        $setting = $this->get('shopsys.shop.component.setting');
+        $setting = $this->get(Setting::class);
         /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 
         $setting->clearCache();

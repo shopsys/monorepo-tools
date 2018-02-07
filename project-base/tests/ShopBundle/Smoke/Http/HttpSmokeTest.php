@@ -4,6 +4,7 @@ namespace Tests\ShopBundle\Smoke\Http;
 
 use Shopsys\HttpSmokeTesting\HttpSmokeTestCase;
 use Shopsys\HttpSmokeTesting\RouteConfigCustomizer;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\HttpFoundation\Request;
 
 class HttpSmokeTest extends HttpSmokeTestCase
@@ -12,7 +13,7 @@ class HttpSmokeTest extends HttpSmokeTestCase
     {
         parent::setUp();
 
-        self::$kernel->getContainer()->get('shopsys.shop.component.domain')
+        self::$kernel->getContainer()->get(Domain::class)
             ->switchDomainById(1);
     }
 

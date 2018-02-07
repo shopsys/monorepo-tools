@@ -24,7 +24,7 @@ abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAw
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
-        $this->persistentReferenceFacade = $this->get('shopsys.shop.component.data_fixture.persistent_reference_facade');
+        $this->persistentReferenceFacade = $this->get(PersistentReferenceFacade::class);
     }
 
     /**

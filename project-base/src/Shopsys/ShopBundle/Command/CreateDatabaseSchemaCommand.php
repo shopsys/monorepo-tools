@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Command;
 
+use Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,7 +22,7 @@ class CreateDatabaseSchemaCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $databaseSchemaFacade = $this->getContainer()->get('shopsys.shop.component.doctrine.database_schema_facade');
+        $databaseSchemaFacade = $this->getContainer()->get(DatabaseSchemaFacade::class);
         /* @var $databaseSchemaFacade \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
 
         $output->writeln('Initializing database schema');

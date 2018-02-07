@@ -74,6 +74,6 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit
      */
     public function getServiceName()
     {
-        return 'shopsys.shop.product.availability.availability_inline_edit';
+        return self::class;
     }
 }

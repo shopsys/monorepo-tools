@@ -4,13 +4,17 @@ namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Faker\Generator;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
 use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Customer\UserRepository;
 use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use Shopsys\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Model\Order\OrderFacade;
+use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassLength)
@@ -26,9 +30,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
      */
     public function load(ObjectManager $manager)
     {
-        $userRepository = $this->get('shopsys.shop.customer.user_repository');
+        $userRepository = $this->get(UserRepository::class);
         /* @var $userRepository \Shopsys\ShopBundle\Model\Customer\UserRepository */
-        $faker = $this->get('faker.generator');
+        $faker = $this->get(Generator::class);
         /* @var $faker \Faker\Generator */
 
         $user = $userRepository->findUserByEmailAndDomain('no-reply@netdevelo.cz', 1);
@@ -450,9 +454,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         array $products,
         User $user = null
     ) {
-        $orderFacade = $this->get('shopsys.shop.order.order_facade');
+        $orderFacade = $this->get(OrderFacade::class);
         /* @var $orderFacade \Shopsys\ShopBundle\Model\Order\OrderFacade */
-        $orderPreviewFactory = $this->get('shopsys.shop.order.preview.order_preview_factory');
+        $orderPreviewFactory = $this->get(OrderPreviewFactory::class);
         /* @var $orderPreviewFactory \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory */
 
         $quantifiedProducts = [];

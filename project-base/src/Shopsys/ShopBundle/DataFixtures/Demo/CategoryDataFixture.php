@@ -8,6 +8,7 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Base\CategoryRootDataFixture;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -165,7 +166,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
      */
     private function createCategory(CategoryData $categoryData, $referenceName = null)
     {
-        $categoryFacade = $this->get('shopsys.shop.category.category_facade');
+        $categoryFacade = $this->get(CategoryFacade::class);
         /* @var $categoryFacade \Shopsys\ShopBundle\Model\Category\CategoryFacade */
 
         $category = $categoryFacade->create($categoryData);

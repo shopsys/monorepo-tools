@@ -8,6 +8,8 @@ use Shopsys\HttpSmokeTesting\RequestDataSet;
 use Shopsys\HttpSmokeTesting\RouteConfig;
 use Shopsys\HttpSmokeTesting\RouteConfigCustomizer;
 use Shopsys\HttpSmokeTesting\RouteInfo;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Shopsys\ShopBundle\Controller\Front\ProductController;
 use Shopsys\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
@@ -121,7 +123,7 @@ class RouteConfigCustomization
                         . '(Routes are protected by RouteCsrfProtector.)';
                     $config->changeDefaultRequestDataSet($debugNote)
                         ->addCallDuringTestExecution(function (RequestDataSet $requestDataSet, ContainerInterface $container) {
-                            $routeCsrfProtector = $container->get('shopsys.shop.router.security.route_csrf_protector');
+                            $routeCsrfProtector = $container->get(RouteCsrfProtector::class);
                             /* @var $routeCsrfProtector \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector */
                             $csrfTokenManager = $container->get('security.csrf.token_manager');
                             /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
@@ -363,7 +365,7 @@ class RouteConfigCustomization
     private function getPersistentReference($name)
     {
         $persistentReferenceFacade = $this->container
-            ->get('shopsys.shop.component.data_fixture.persistent_reference_facade');
+            ->get(PersistentReferenceFacade::class);
         /* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
 
         return $persistentReferenceFacade->getReference($name);
@@ -374,7 +376,7 @@ class RouteConfigCustomization
      */
     private function isSingleDomain()
     {
-        $domain = $this->container->get('shopsys.shop.component.domain');
+        $domain = $this->container->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
         return count($domain->getAll()) === 1;

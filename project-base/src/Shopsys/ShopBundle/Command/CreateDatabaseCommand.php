@@ -3,6 +3,9 @@
 namespace Shopsys\ShopBundle\Command;
 
 use Doctrine\DBAL\DriverManager;
+use Shopsys\ShopBundle\Component\System\PostgresqlLocaleMapper;
+use Shopsys\ShopBundle\Component\System\System;
+use Shopsys\ShopBundle\Model\Localization\Localization;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -97,11 +100,11 @@ class CreateDatabaseCommand extends ContainerAwareCommand
      */
     private function createSystemSpecificCollationsIfNotExist(SymfonyStyle $symfonyStyleIo)
     {
-        $localization = $this->getContainer()->get('shopsys.shop.localization');
+        $localization = $this->getContainer()->get(Localization::class);
         /* @var $localization \Shopsys\ShopBundle\Model\Localization\Localization */
-        $system = $this->getContainer()->get('shopsys.shop.component.system');
+        $system = $this->getContainer()->get(System::class);
         /* @var $system \Shopsys\ShopBundle\Component\System\System */
-        $postgresqlLocaleMapper = $this->getContainer()->get('shopsys.shop.component.system.postgresql_locale_mapper');
+        $postgresqlLocaleMapper = $this->getContainer()->get(PostgresqlLocaleMapper::class);
         /* @var $postgresqlLocaleMapper \Shopsys\ShopBundle\Component\System\PostgresqlLocaleMapper */
 
         $missingLocaleExceptions = [];

@@ -1,270 +1,221 @@
 services:
-  shopsys.shop.form.admin.advert.advert_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Advert\AdvertFormType
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Shopsys\ShopBundle\Form\Admin\Advert\AdvertFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.article.article_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Article\ArticleFormType
+  Shopsys\ShopBundle\Form\Admin\Article\ArticleFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.product.brand.brand_edit_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Product\Brand\BrandEditFormType
+  Shopsys\ShopBundle\Form\Admin\Product\Brand\BrandEditFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.category.category_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Category\CategoryFormType
+  Shopsys\ShopBundle\Form\Admin\Category\CategoryFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.category.top_category.top_categories_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType
+  Shopsys\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.cookies.cookies_setting_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Cookies\CookiesSettingFormType
+  Shopsys\ShopBundle\Form\Admin\Cookies\CookiesSettingFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.customer.billing_address_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Customer\BillingAddressFormType
+  Shopsys\ShopBundle\Form\Admin\Customer\BillingAddressFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.customer.delivery_address_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Customer\DeliveryAddressFormType
+  Shopsys\ShopBundle\Form\Admin\Customer\DeliveryAddressFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.customer.user_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Customer\UserFormType
+  Shopsys\ShopBundle\Form\Admin\Customer\UserFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.order.order_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Order\OrderFormType
+  Shopsys\ShopBundle\Form\Admin\Order\OrderFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.mail.all_mail_templates_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType
+  Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.payment.payment_edit_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Payment\PaymentEditFormType
+  Shopsys\ShopBundle\Form\Admin\Payment\PaymentEditFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.payment.payment_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormType
+  Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.pricing.currency.currency_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Pricing\Currency\CurrencyFormType
+  Shopsys\ShopBundle\Form\Admin\Pricing\Currency\CurrencyFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.pricing.currency.currency_setting_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType
+  Shopsys\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.pricing.group.pricing_group_setting_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType
+  Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.product.availability.availabilty_setting_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Product\Availability\AvailabilitySettingFormType
+  Shopsys\ShopBundle\Form\Admin\Product\Availability\AvailabilitySettingFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.product.parameter.product_parameter_value_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType
+  Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.product.product_edit_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Product\ProductEditFormType
+  Shopsys\ShopBundle\Form\Admin\Product\ProductEditFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.product.product_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Product\ProductFormType
+  Shopsys\ShopBundle\Form\Admin\Product\ProductFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.product.top_product.top_products_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType
+  Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.product.unit.unit_setting_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Product\Unit\UnitSettingFormType
+  Shopsys\ShopBundle\Form\Admin\Product\Unit\UnitSettingFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.promo_code.promo_code_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType
+  Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.seo.seo_setting_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Seo\SeoSettingFormType
+  Shopsys\ShopBundle\Form\Admin\Seo\SeoSettingFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.legal_conditions.legal_conditions_settings_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\LegalConditions\LegalConditionsSettingFormType
+  Shopsys\ShopBundle\Form\Admin\LegalConditions\LegalConditionsSettingFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.transport.transport_edit_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormType
+  Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.transport.transport_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Transport\TransportFormType
+  Shopsys\ShopBundle\Form\Admin\Transport\TransportFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.transport_and_payment.free_transport_and_payment_price_limits_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\TransportAndPayment\FreeTransportAndPaymentPriceLimitsFormType
+  Shopsys\ShopBundle\Form\Admin\TransportAndPayment\FreeTransportAndPaymentPriceLimitsFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.vat.vat_setting_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\Vat\VatSettingsFormType
+  Shopsys\ShopBundle\Form\Admin\Vat\VatSettingsFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.front.customer.billing_address_form_type:
-    class: Shopsys\ShopBundle\Form\Front\Customer\BillingAddressFormType
+  Shopsys\ShopBundle\Form\Front\Customer\BillingAddressFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.front.customer.delivery_address_form_type:
-    class: Shopsys\ShopBundle\Form\Front\Customer\DeliveryAddressFormType
+  Shopsys\ShopBundle\Form\Front\Customer\DeliveryAddressFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.front.order.personal_info_form_type:
-    class: Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType
+  Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.front.order.transport_and_payment_form_type:
-    class: Shopsys\ShopBundle\Form\Front\Order\TransportAndPaymentFormType
+  Shopsys\ShopBundle\Form\Front\Order\TransportAndPaymentFormType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.component.form.invert_choice_type_extension:
-    class: Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension
+  Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension:
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
 
-  shopsys.shop.form.categories:
-    class: Shopsys\ShopBundle\Form\CategoriesType
+  Shopsys\ShopBundle\Form\CategoriesType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.category_checkbox:
-    class: Shopsys\ShopBundle\Form\CategoryCheckboxType
+  Shopsys\ShopBundle\Form\CategoryCheckboxType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.collection:
-    class: Shopsys\ShopBundle\Form\CollectionTypeExtension
+  Shopsys\ShopBundle\Form\CollectionTypeExtension:
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\CollectionType }
 
-  shopsys.shop.form.color_picker:
-    class: Shopsys\ShopBundle\Form\ColorPickerType
+  Shopsys\ShopBundle\Form\ColorPickerType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.date_picker:
-    class: Shopsys\ShopBundle\Form\DatePickerType
+  Shopsys\ShopBundle\Form\DatePickerType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.domains:
-    class: Shopsys\ShopBundle\Form\DomainsType
+  Shopsys\ShopBundle\Form\DomainsType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.domain:
-    class: Shopsys\ShopBundle\Form\DomainType
+  Shopsys\ShopBundle\Form\DomainType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.file_upload:
-    class: Shopsys\ShopBundle\Form\FileUploadType
+  Shopsys\ShopBundle\Form\FileUploadType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.friendly_url:
-    class: Shopsys\ShopBundle\Form\FriendlyUrlType
+  Shopsys\ShopBundle\Form\FriendlyUrlType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.honey_pot:
-    class: Shopsys\ShopBundle\Form\HoneyPotType
+  Shopsys\ShopBundle\Form\HoneyPotType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.locale.text:
-    class: Shopsys\ShopBundle\Form\Locale\LocalizedType
+  Shopsys\ShopBundle\Form\Locale\LocalizedType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.money:
-    class: Shopsys\ShopBundle\Form\MoneyTypeExtension
+  Shopsys\ShopBundle\Form\MoneyTypeExtension:
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\MoneyType }
 
-  shopsys.shop.form.product:
-    class: Shopsys\ShopBundle\Form\ProductType
+  Shopsys\ShopBundle\Form\ProductType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.products:
-    class: Shopsys\ShopBundle\Form\ProductsType
+  Shopsys\ShopBundle\Form\ProductsType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.single_checkbox_choice_type:
-    class: Shopsys\ShopBundle\Form\SingleCheckboxChoiceType
+  Shopsys\ShopBundle\Form\SingleCheckboxChoiceType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.sortable_values_type:
-    class: Shopsys\ShopBundle\Form\SortableValuesType
+  Shopsys\ShopBundle\Form\SortableValuesType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.timed_form:
-    class: Shopsys\ShopBundle\Form\TimedFormTypeExtension
+  Shopsys\ShopBundle\Form\TimedFormTypeExtension:
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
-  shopsys.shop.form.url_list:
-    class: Shopsys\ShopBundle\Form\UrlListType
+  Shopsys\ShopBundle\Form\UrlListType:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.wysiwyg:
-    class: Shopsys\ShopBundle\Form\WysiwygTypeExtension
+  Shopsys\ShopBundle\Form\WysiwygTypeExtension:
     tags:
       - { name: form.type_extension, extended_type: Ivory\CKEditorBundle\Form\Type\CKEditorType }
 
-  shopsys.shop.form.yes_no:
-    class: Shopsys\FormTypesBundle\YesNoType
+  Shopsys\FormTypesBundle\YesNoType:
     tags:
       - { name: form.type }

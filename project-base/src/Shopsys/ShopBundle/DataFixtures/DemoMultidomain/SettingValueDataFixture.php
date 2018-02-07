@@ -17,7 +17,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
      */
     public function load(ObjectManager $manager)
     {
-        $setting = $this->get('shopsys.shop.component.setting');
+        $setting = $this->get(Setting::class);
         /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
         $setting->clearCache();
 

@@ -1,144 +1,130 @@
 services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
 
-  shopsys.twig.cropzeros_extension:
-    class: Shopsys\ShopBundle\Twig\CropZerosExtension
+  # this package is not Symfony package so services are not registered and could not be even auto-registered because they are from different namespace
+  CommerceGuys\Intl\NumberFormat\:
+    resource: ../../../../vendor/commerceguys/intl/src/NumberFormat/*
+
+  Shopsys\ShopBundle\Twig\CropZerosExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.cookies_extension:
-    class: Shopsys\ShopBundle\Twig\CookiesExtension
+  Shopsys\ShopBundle\Twig\CookiesExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.css_extension:
-    class: Shopsys\ShopBundle\Twig\CssExtension
+  Shopsys\ShopBundle\Twig\CssExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.date_time_formatter_extension:
-    class: Shopsys\ShopBundle\Twig\DateTimeFormatterExtension
+  Shopsys\ShopBundle\Twig\DateTimeFormatterExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.domain_extension:
-    class: Shopsys\ShopBundle\Twig\DomainExtension
+  Shopsys\ShopBundle\Twig\DomainExtension:
     arguments:
-     - '%shopsys.domain_images_url_prefix%'
+      - '%shopsys.domain_images_url_prefix%'
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.uploaded_file_extension:
-    class: Shopsys\ShopBundle\Twig\UploadedFileExtension
+  Shopsys\ShopBundle\Twig\UploadedFileExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.file_upload_extension:
-    class: Shopsys\ShopBundle\Twig\FileUploadExtension
+  Shopsys\ShopBundle\Twig\FileUploadExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.shop.file.file_thumbnail_extension:
-    class: Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension
+  Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.form_detail_extension:
-    class: Shopsys\ShopBundle\Twig\FormDetailExtension
+  Shopsys\ShopBundle\Twig\FormDetailExtension:
     tags:
       -  { name: twig.extension }
 
-  shopsys.twig.form_extension:
-    class: Shopsys\ShopBundle\Twig\FormExtension
+  Shopsys\ShopBundle\Twig\FormExtension:
     tags:
       -  { name: twig.extension }
 
-  shopsys.twig.form_theme_extension:
-    class: Shopsys\ShopBundle\Twig\FormThemeExtension
+  Shopsys\ShopBundle\Twig\FormThemeExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.honey_pot_extension:
-    class: Shopsys\ShopBundle\Twig\HoneyPotExtension
+  Shopsys\ShopBundle\Twig\HoneyPotExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.image_extension:
-    class: Shopsys\ShopBundle\Twig\ImageExtension
+  Shopsys\ShopBundle\Twig\ImageExtension:
     arguments: ['%shopsys.front_design_image_url_prefix%']
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.javascript_extension:
-    class: Shopsys\ShopBundle\Twig\Javascript\JavascriptExtension
+  Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService:
+    arguments:
+      - '%shopsys.web_dir%'
+      - '%shopsys.javascript_sources_dir%'
+      - '%shopsys.javascript_url_prefix%'
+
+  Shopsys\ShopBundle\Twig\Javascript\JavascriptExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.localization_extension:
-    class: Shopsys\ShopBundle\Twig\LocalizationExtension
+  Shopsys\ShopBundle\Twig\LocalizationExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.mailer_setting_extension:
-    class: Shopsys\ShopBundle\Twig\MailerSettingExtension
+  Shopsys\ShopBundle\Twig\MailerSettingExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.module_extension:
-    class: Shopsys\ShopBundle\Twig\ModuleExtension
+  Shopsys\ShopBundle\Twig\ModuleExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.number_formatter_extension:
-    class: Shopsys\ShopBundle\Twig\NumberFormatterExtension
+  Shopsys\ShopBundle\Twig\NumberFormatterExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.input_price_label_extension:
-    class: Shopsys\ShopBundle\Twig\InputPriceLabelExtension
+  Shopsys\ShopBundle\Twig\InputPriceLabelExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.price_extension:
-    class: Shopsys\ShopBundle\Twig\PriceExtension
+  Shopsys\ShopBundle\Twig\PriceExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.product_extension:
-    class: Shopsys\ShopBundle\Twig\ProductExtension
+  Shopsys\ShopBundle\Twig\ProductExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.product_visibility_extension:
-    class: Shopsys\ShopBundle\Twig\ProductVisibilityExtension
+  Shopsys\ShopBundle\Twig\ProductVisibilityExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.request_extension:
-    class: Shopsys\ShopBundle\Twig\RequestExtension
+  Shopsys\ShopBundle\Twig\RequestExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.router_extension:
-    class: Shopsys\ShopBundle\Twig\RouterExtension
+  Shopsys\ShopBundle\Twig\RouterExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.seo_extension:
-    class: Shopsys\ShopBundle\Twig\SeoExtension
+  Shopsys\ShopBundle\Twig\SeoExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.shop_info_extension:
-    class: Shopsys\ShopBundle\Twig\ShopInfoExtension
+  Shopsys\ShopBundle\Twig\ShopInfoExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.translation_extension:
-    class: Shopsys\ShopBundle\Twig\TranslationExtension
+  Shopsys\ShopBundle\Twig\TranslationExtension:
     tags:
       - { name: twig.extension }
 
-  shopsys.twig.var_dumper_extension:
-    class: Shopsys\ShopBundle\Twig\VarDumperExtension
+  Shopsys\ShopBundle\Twig\VarDumperExtension:
     tags:
       - { name: twig.extension }

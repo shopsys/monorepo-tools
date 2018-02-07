@@ -3,6 +3,7 @@
 namespace Shopsys\ShopBundle\Command;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -46,7 +47,7 @@ class ServerRunForDomainCommand extends ContainerAwareCommand
      */
     private function chooseDomainConfig(SymfonyStyle $io)
     {
-        $domain = $this->getContainer()->get('shopsys.shop.component.domain');
+        $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         $domainConfigs = $domain->getAll();
 

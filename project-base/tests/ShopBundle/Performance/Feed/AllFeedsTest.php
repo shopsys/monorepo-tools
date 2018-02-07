@@ -5,6 +5,8 @@ namespace Tests\ShopBundle\Performance\Feed;
 use Shopsys\HttpSmokeTesting\Auth\BasicHttpAuth;
 use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +43,7 @@ class AllFeedsTest extends KernelTestCase
         ]);
 
         $container = self::$kernel->getContainer();
-        $container->get('shopsys.shop.component.domain')
+        $container->get(Domain::class)
             ->switchDomainById(1);
 
         $this->maxDuration = $container->getParameter('shopsys.performance_test.feed.max_duration_seconds');
@@ -106,9 +108,9 @@ class AllFeedsTest extends KernelTestCase
      */
     public function getAllFeedGenerationData()
     {
-        $feedConfigFacade = self::$kernel->getContainer()->get('shopsys.shop.feed.feed_config_facade');
+        $feedConfigFacade = self::$kernel->getContainer()->get(FeedConfigFacade::class);
         /* @var $feedConfigFacade \Shopsys\ShopBundle\Model\Feed\FeedConfigFacade */
-        $domain = self::$kernel->getContainer()->get('shopsys.shop.component.domain');
+        $domain = self::$kernel->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
         $feedGenerationData = $this->getFeedGenerationData(

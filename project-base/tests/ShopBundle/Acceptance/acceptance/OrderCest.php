@@ -86,7 +86,7 @@ class OrderCest
         AcceptanceTester $me,
         SymfonyHelper $symfonyHelper
     ) {
-        $scriptFacade = $symfonyHelper->grabServiceFromContainer('shopsys.shop.script.script_facade');
+        $scriptFacade = $symfonyHelper->grabServiceFromContainer(ScriptFacade::class);
         $this->setGoogleAnalyticsTrackingId('GA-test', $scriptFacade);
 
         $this->testOrderCanBeCompleted($productListPage, $orderPage, $me);

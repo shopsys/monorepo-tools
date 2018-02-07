@@ -4,7 +4,10 @@ namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Faker\Generator;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader;
+use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -13,11 +16,11 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
      */
     public function load(ObjectManager $manager)
     {
-        $customerFacade = $this->get('shopsys.shop.customer.customer_facade');
+        $customerFacade = $this->get(CustomerFacade::class);
         /* @var $customerFacade \Shopsys\ShopBundle\Model\Customer\CustomerFacade */
-        $loaderService = $this->get('shopsys.shop.data_fixtures.user_data_fixture_loader');
+        $loaderService = $this->get(UserDataFixtureLoader::class);
         /* @var $loaderService \Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader */
-        $faker = $this->get('faker.generator');
+        $faker = $this->get(Generator::class);
         /* @var $faker \Faker\Generator */
 
         $countries = [

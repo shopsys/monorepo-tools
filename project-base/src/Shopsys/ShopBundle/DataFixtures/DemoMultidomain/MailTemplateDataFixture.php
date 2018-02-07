@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
+use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
 
 class MailTemplateDataFixture extends AbstractReferenceFixture
 {
@@ -92,7 +93,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
      */
     private function updateMailTemplate(MailTemplateData $mailTemplateData)
     {
-        $mailTemplateFacade = $this->get('shopsys.shop.mail.mail_template_facade');
+        $mailTemplateFacade = $this->get(MailTemplateFacade::class);
         /* @var $mailTemplateFacade \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade */
 
         $domainId = 2;

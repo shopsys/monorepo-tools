@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Country\CountryData;
+use Shopsys\ShopBundle\Model\Country\CountryFacade;
 
 class CountryDataFixture extends AbstractReferenceFixture
 {
@@ -33,7 +34,7 @@ class CountryDataFixture extends AbstractReferenceFixture
      */
     private function createCountry(CountryData $countryData, $domainId, $referenceName)
     {
-        $countryFacade = $this->get('shopsys.shop.country.country_facade');
+        $countryFacade = $this->get(CountryFacade::class);
         /* @var $countryFacade \Shopsys\ShopBundle\Model\Country\CountryFacade */
 
         $country = $countryFacade->create($countryData, $domainId);

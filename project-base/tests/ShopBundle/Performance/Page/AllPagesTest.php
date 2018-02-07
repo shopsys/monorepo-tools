@@ -10,6 +10,7 @@ use Shopsys\HttpSmokeTesting\RouteConfig;
 use Shopsys\HttpSmokeTesting\RouteConfigCustomizer;
 use Shopsys\HttpSmokeTesting\RouteInfo;
 use Shopsys\HttpSmokeTesting\RouterAdapter\SymfonyRouterAdapter;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +30,7 @@ class AllPagesTest extends KernelTestCase
             'debug' => false,
         ]);
 
-        self::$kernel->getContainer()->get('shopsys.shop.component.domain')
+        self::$kernel->getContainer()->get(Domain::class)
             ->switchDomainById(1);
     }
 

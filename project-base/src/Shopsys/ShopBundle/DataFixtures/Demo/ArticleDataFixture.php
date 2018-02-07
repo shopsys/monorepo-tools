@@ -7,6 +7,7 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticleData;
+use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 
 class ArticleDataFixture extends AbstractReferenceFixture
 {
@@ -62,7 +63,7 @@ class ArticleDataFixture extends AbstractReferenceFixture
      */
     private function createArticle(ArticleData $articleData, $referenceName = null)
     {
-        $articleFacade = $this->get('shopsys.shop.article.article_facade');
+        $articleFacade = $this->get(ArticleFacade::class);
         /* @var $articleFacade \Shopsys\ShopBundle\Model\Article\ArticleFacade */
 
         $article = $articleFacade->create($articleData);

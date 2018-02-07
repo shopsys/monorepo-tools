@@ -32,9 +32,9 @@ class CronCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $cronFacade = $this->getContainer()->get('shopsys.shop.component.cron.cron_facade');
+        $cronFacade = $this->getContainer()->get(CronFacade::class);
         /* @var $cronFacade \Shopsys\ShopBundle\Component\Cron\CronFacade */
-        $mutexFactory = $this->getContainer()->get('shopsys.shop.component.mutex.mutex_factory');
+        $mutexFactory = $this->getContainer()->get(MutexFactory::class);
         /* @var $mutexFactory \Shopsys\ShopBundle\Component\Mutex\MutexFactory */
 
         $optionList = $input->getOption(self::OPTION_LIST);

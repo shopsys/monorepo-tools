@@ -39,6 +39,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - default parameters in `parameters.yml.dist` and `parameters_test.yml.dist` are for Docker installation (instead of native) (@MattCzerner)
 - Front/NewsletterController: extracted duplicit rendering and add return typehints (@simara-svatopluk)
 - Symfony updated to version 3.4 (@TomasLudvik)
+    - autowiring is now done via Symfony PSR-4
+    - services now use FQN as naming convention
+    - services are private by default
+    - inlined services (called via container) are set to public
+    - services required by another service are defined in services.yml (e.g. Shopsys\ShopBundle\Model\Administrator\Security\AdministratorUserProvider: ~)
+    - all inline calls of services changed to use FQN
+    - services no longer required in services.yml have been removed
+    - services instanced after DI container creation are set as synthetic
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)

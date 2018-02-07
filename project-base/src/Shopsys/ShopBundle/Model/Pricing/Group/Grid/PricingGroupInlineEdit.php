@@ -80,6 +80,6 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
      */
     public function getServiceName()
     {
-        return 'shopsys.shop.pricing.group.grid.pricing_group_inline_edit';
+        return self::class;
     }
 }

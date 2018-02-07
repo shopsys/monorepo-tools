@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
 
 class TopCategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -14,7 +15,7 @@ class TopCategoryDataFixture extends AbstractReferenceFixture implements Depende
      */
     public function load(ObjectManager $manager)
     {
-        $topCategoryFacade = $this->get('shopsys.shop.category.top_category.top_category_facade');
+        $topCategoryFacade = $this->get(TopCategoryFacade::class);
         /* @var $topCategoryFacade \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade */
 
         $categories = [

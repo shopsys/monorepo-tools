@@ -15,7 +15,7 @@ class RegisterProductFeedConfigsCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $feedConfigRegistryDefinition = $container->findDefinition('shopsys.shop.feed.feed_config_registry');
+        $feedConfigRegistryDefinition = $container->findDefinition(FeedConfigRegistry::class);
 
         $taggedServiceIds = $container->findTaggedServiceIds('shopsys.product_feed');
         foreach ($taggedServiceIds as $serviceId => $tags) {

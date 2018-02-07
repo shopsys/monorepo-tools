@@ -39,10 +39,10 @@ doctrine:
     naming_strategy: doctrine.orm.naming_strategy.underscore
     metadata_cache_driver:
       type: service
-      id: shopsys.doctrine.cache_driver.metadata_cache
+      id: Doctrine\Common\Cache\ChainCache
     query_cache_driver:
       type: service
-      id: shopsys.doctrine.cache_driver.query_cache
+      id: Doctrine\Common\Cache\ChainCache
     auto_mapping: false
     mappings:
       ShopsysShopBundle:
@@ -188,7 +188,7 @@ twig:
     - '@ShopsysShop/Admin/Form/fileuploadFields.html.twig'
   strict_variables: true
   globals:
-    globalMultipleFormSetting: '@shopsys.shop.component.form.multiple_form_setting'
+    globalMultipleFormSetting: '@Shopsys\ShopBundle\Component\Form\MultipleFormSetting'
 
 imports:
     - { resource: wysiwyg.yml }

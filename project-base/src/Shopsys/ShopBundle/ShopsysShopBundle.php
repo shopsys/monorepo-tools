@@ -30,7 +30,7 @@ class ShopsysShopBundle extends Bundle
     {
         parent::boot();
 
-        $filemanagerAccess = $this->container->get('shopsys.shop.security.filesystem.filemanager_access');
+        $filemanagerAccess = $this->container->get(FilemanagerAccess::class);
         FilemanagerAccess::injectSelf($filemanagerAccess);
 
         $translator = $this->container->get('translator');
