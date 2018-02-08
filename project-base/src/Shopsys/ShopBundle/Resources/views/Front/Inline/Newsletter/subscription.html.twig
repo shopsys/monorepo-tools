@@ -20,7 +20,12 @@
                 </div>
                 <div class="form-choice__label">
                     <label for="{{ form.privacyPolicyAgreement.vars.id }}">
-                        {{ 'Please confirm privacy policy agreement.'|trans }}
+                        {% if privacyPolicyArticle is not null %}
+                            {% set articleUrl = url('front_article_detail', {'id': privacyPolicyArticle.id}) %}
+                            {{ "I agree with <a href=\"%url%\" target=\"_blank\">privacy policy</a>."|trans({'%url%': articleUrl})|raw }}
+                        {% else %}
+                            {{ 'I agree with privacy policy.'|trans }}
+                        {% endif %}
                     </label>
                     <span class="js-validation-errors-list js-validation-error-list-{{ form.privacyPolicyAgreement.vars.id }} form-error form-error--choice display-none"><span class="form-error__icon"><i class="svg svg-warning"></i></span><ul class="form-error__list"></ul></span>
                 </div>

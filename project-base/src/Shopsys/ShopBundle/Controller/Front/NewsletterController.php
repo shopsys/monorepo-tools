@@ -3,7 +3,9 @@
 namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Form\Front\Newsletter\SubscriptionFormType;
+use Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade;
 use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +18,24 @@ class NewsletterController extends FrontBaseController
      */
     private $newsletterFacade;
 
-    public function __construct(NewsletterFacade $newsletterFacade)
-    {
+    /**
+     * @var \Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade
+     */
+    private $legalConditionsFacade;
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     */
+    private $domain;
+
+    public function __construct(
+        NewsletterFacade $newsletterFacade,
+        LegalConditionsFacade $legalConditionsFacade,
+        Domain $domain
+    ) {
         $this->newsletterFacade = $newsletterFacade;
+        $this->legalConditionsFacade = $legalConditionsFacade;
+        $this->domain = $domain;
     }
 
     /**
@@ -64,9 +81,12 @@ class NewsletterController extends FrontBaseController
      */
     private function renderSubscription(Form $form): Response
     {
+        $privacyPolicyArticle = $this->legalConditionsFacade->findPrivacyPolicy($this->domain->getId());
+
         return $this->render('@ShopsysShop/Front/Inline/Newsletter/subscription.html.twig', [
             'form' => $form->createView(),
             'success' => $form->isValid(),
+            'privacyPolicyArticle' => $privacyPolicyArticle,
         ]);
     }
 }
