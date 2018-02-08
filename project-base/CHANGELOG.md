@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - overwriting the domain URL is necessary for Selenium acceptance tests running in Docker
 - LegalConditionsSetting: added privacy policy article selection (@stanoMilan)
     - customers need to agree with privacy policy while registring, sending contact form and completing order process
+- SubscriptionFormType: added required privacy policy agreement checkbox (@simara-svatopluk)
 
 ### Changed
 - cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)
