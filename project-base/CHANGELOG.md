@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - customers need to agree with privacy policy while registring, sending contact form and completing order process
 - SubscriptionFormType: added required privacy policy agreement checkbox (@simara-svatopluk)
 - subscription form: added link to privacy policy agreement article (@simara-svatopluk)
+- NewsletterController now exports date of subscription to newsletter (@simara-svatopluk)
 
 ### Changed
 - cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)

@@ -41,7 +41,7 @@ class NewsletterRepository
     {
         $query = $this->getNewsletterSubscriberRepository()
             ->createQueryBuilder('ns')
-            ->select('ns.email')
+            ->select('ns.email, ns.createdAt')
             ->getQuery();
 
         return $query->iterate(null, AbstractQuery::HYDRATE_SCALAR);

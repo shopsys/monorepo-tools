@@ -50,7 +50,8 @@ class NewsletterController extends AdminBaseController
         $emailsDataIterator = $this->newsletterFacade->getAllEmailsDataIterator();
         foreach ($emailsDataIterator as $emailData) {
             $email = $emailData[0]['email'];
-            $fields = [$email];
+            $createdAt = $emailData[0]['createdAt'];
+            $fields = [$email, $createdAt];
             $output->fputcsv($fields, ';');
         }
     }
