@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - `postgres` container is created with a volume for data persistence (in `var/postgres-data`)
     - see documentation of [Installation Using Docker](docs/introduction/installation-using-docker.md) for details
 - default parameters in `parameters.yml.dist` and `parameters_test.yml.dist` are for Docker installation (instead of native) (@MattCzerner)
+- Front/NewsletterController: extracted duplicit rendering and add return typehints (@simara-svatopluk)
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)
