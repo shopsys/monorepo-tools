@@ -15,9 +15,9 @@
         {% endif -%}
         <g:availability>
             {%- if item.sellingDenied -%}
-                out_of_stock
+                out of stock
             {%- else -%}
-                in_stock
+                in stock
             {%- endif -%}
         </g:availability>
         <g:price>{{ item.priceVat|number_format(2, '.', '') }} {{ item.currencyCode }}</g:price>

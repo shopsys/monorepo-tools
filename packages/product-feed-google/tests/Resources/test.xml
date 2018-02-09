@@ -6,7 +6,7 @@
       <title>Product</title>
       <g:description>Lorem ipsum bold...</g:description>
       <link>http://www.example.com/product/1</link>
-      <g:image_link>http://www.example.com/product/img/1.jpg</g:image_link><g:availability>in_stock</g:availability>
+      <g:image_link>http://www.example.com/product/img/1.jpg</g:image_link><g:availability>in stock</g:availability>
       <g:price>127.90 CZK</g:price>
       <g:brand>Best Manufacturer</g:brand>
       <g:gtin>79846532EQER</g:gtin>
@@ -19,7 +19,7 @@
       <title>Product Variant</title>
       <g:description>Lorem ipsum...</g:description>
       <link>http://www.example.com/product/2</link>
-      <g:availability>out_of_stock</g:availability>
+      <g:availability>out of stock</g:availability>
       <g:price>10.00 EUR</g:price>
       <g:identifier_exists>no</g:identifier_exists>
       <g:adult>no</g:adult>
