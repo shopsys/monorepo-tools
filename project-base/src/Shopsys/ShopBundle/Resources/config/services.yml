@@ -1,4 +1,5 @@
 imports:
+  - { resource: services_command.yml }
   - { resource: services_cron.yml }
   - { resource: ../../Form/services.yml }
   - { resource: ../../Twig/services.yml }

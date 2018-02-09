@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ServerRunCommand;
+use Symfony\Bundle\WebServerBundle\Command\ServerRunCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -21,6 +21,7 @@ class ServerRunWithCustomRouterCommand extends ServerRunCommand
         parent::configure();
 
         $this->getDefinition()->getOption('router')->setDefault('app/router.php');
+        $this->setName(self::$defaultName);
     }
 
     /**
