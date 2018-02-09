@@ -34,6 +34,7 @@ class NewsletterSubscriberDataFixture extends AbstractReferenceFixture
             'james.black@no-reply.com',
             'johny.good@no-reply.com',
             'andrew.mathewson@no-reply.com',
+            'vitek@netdevelo.cz',
         ];
     }
 }

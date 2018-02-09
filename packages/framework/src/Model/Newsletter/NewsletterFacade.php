@@ -49,6 +49,16 @@ class NewsletterFacade
     }
 
     /**
+     * @param string $email
+     * @param int $domainId
+     * @return \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriber|null
+     */
+    public function findNewsletterSubscriberByEmailAndDomainId($email, $domainId)
+    {
+        return $this->newsletterRepository->findNewsletterSubscribeByEmailAndDomainId($email, $domainId);
+    }
+
+    /**
      * @param int $selectedDomainId
      * @param \Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData $searchData
      * @return \Doctrine\ORM\QueryBuilder

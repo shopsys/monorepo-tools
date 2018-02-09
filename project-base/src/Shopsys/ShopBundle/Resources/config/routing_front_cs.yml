@@ -53,3 +53,11 @@ front_registration_set_new_password:
 front_brand_list:
   path: /prehled-znacek/
   defaults: { _controller: ShopsysShopBundle:Front\Brand:list }
+
+front_personal_data:
+  path: /prehled-osobnich-udaju/
+  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:index }
+
+front_personal_data_access:
+  path: /prehled-osobnich-udaju/{email}/
+  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:access }

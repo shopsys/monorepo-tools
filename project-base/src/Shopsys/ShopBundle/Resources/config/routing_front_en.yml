@@ -53,3 +53,11 @@ front_registration_set_new_password:
 front_brand_list:
   path: /brands-list/
   defaults: { _controller: ShopsysShopBundle:Front\Brand:list }
+
+front_personal_data:
+  path: /personal-information-overview/
+  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:index }
+
+front_personal_data_access:
+  path: /personal-information-overview/{email}/
+  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:access }

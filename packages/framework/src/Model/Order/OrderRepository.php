@@ -171,6 +171,29 @@ class OrderRepository
     }
 
     /**
+     * @param string $email
+     * @param int $domainId
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order[]
+     */
+    public function getOrderListForEmailByDomainId($email, $domainId)
+    {
+        return $this->em->createQueryBuilder()
+            ->select('o, oi, os, ost, c')
+            ->from(Order::class, 'o')
+            ->join('o.items', 'oi')
+            ->join('o.status', 'os')
+            ->join('os.translations', 'ost')
+            ->join('o.currency', 'c')
+            ->leftJoin('o.customer', 'cu')
+            ->andWhere('o.domainId = :domain')
+            ->andWhere('o.email = :email OR cu.email = :email')
+            ->orderBy('o.createdAt', 'DESC')
+            ->setParameter('email', $email)
+            ->setParameter('domain', $domainId)
+            ->getQuery()->execute();
+    }
+
+    /**
      * @param string $urlHash
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Order\Order
