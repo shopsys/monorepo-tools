@@ -57,7 +57,11 @@
                     {{ form_widget(form) }}
                 </div>
                 <div class="form-choice__label">
-                    {{ form_label(form) }}
+                    {% if rawLabel is defined and rawLabel %}
+                        {{ label|raw }}
+                    {% else %}
+                        {{ label }}
+                    {% endif %}
                     {% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-error--choice'))}) %}
                     {{ form_errors(form, { errors_attr: errors_attr } ) }}
                     {{ block('icon') }}

@@ -7,6 +7,7 @@ use Shopsys\ShopBundle\Form\HoneyPotType;
 use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
 use Shopsys\ShopBundle\Model\ContactForm\ContactFormData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -40,6 +41,13 @@ class ContactFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter e-mail']),
                     new Email(['message' => 'Please enter valid e-mail']),
+                ],
+            ])
+            ->add('privacyPolicy', CheckboxType::class, [
+                'required' => true,
+                'mapped' => false,
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'You have to agree with privacy policy']),
                 ],
             ])
             ->add('email2', HoneyPotType::class)
