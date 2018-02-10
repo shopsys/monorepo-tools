@@ -137,13 +137,13 @@ monorepo_build() {
         original_refs_wipe
     done
     # Merge all master branches
+    COMMIT_MSG="merge multiple repositories into a monorepo"$'\n'$'\n'"- merged using: 'monorepo_build $@'"
     git checkout master
     echo "Merging refs: $MERGE_REFS"
     git merge --no-commit -q $MERGE_REFS --allow-unrelated-histories
     echo 'Resolving conflicts using trees of all parents'
     git read-tree $MERGE_REFS
-    git commit -m 'merge multiple repositories into a monorepo' -m "- merged using: 'monorepo_build $@'"
-    git reset --hard
+    git commit -m "$COMMIT_MSG"
 }
 
 # Split monorepo and push all master branches into specified remotes
