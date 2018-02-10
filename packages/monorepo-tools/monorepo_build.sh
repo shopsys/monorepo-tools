@@ -44,7 +44,7 @@ for PARAM in $@; do
     $MONOREPO_SCRIPT_DIR/original_refs_wipe.sh
 done
 # Merge all master branches
-COMMIT_MSG="merge multiple repositories into a monorepo"$'\n'$'\n'"- merged using: 'monorepo_build.sh $@'"
+COMMIT_MSG="merge multiple repositories into a monorepo"$'\n'$'\n'"- merged using: 'monorepo_build.sh $@'"$'\n'"- see https://github.com/shopsys/monorepo-tools"
 git checkout master
 echo "Merging refs: $MERGE_REFS"
 git merge --no-commit -q $MERGE_REFS --allow-unrelated-histories
