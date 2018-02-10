@@ -14,7 +14,7 @@ if [ "$#" \< "2" ]; then
     echo 'Please provide at least 2 remotes to be merged into a new monorepo'
     echo 'Usage: monorepo_build.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...'
     echo 'Example: monorepo_build.sh main-repository package-alpha:packages/alpha package-beta:packages/beta'
-    return
+    exit
 fi
 # Get directory of the other scripts
 MONOREPO_SCRIPT_DIR=$(dirname "$0")

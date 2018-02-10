@@ -13,7 +13,7 @@ if [ "$#" \< "2" ]; then
     echo 'Please provide at least 2 remotes for splitting'
     echo 'Usage: monorepo_split.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...'
     echo 'Example: monorepo_split.sh main-repository package-alpha:packages/alpha package-beta:packages/beta'
-    return
+    exit
 fi
 # Get directory of the other scripts
 MONOREPO_SCRIPT_DIR=$(dirname "$0")
