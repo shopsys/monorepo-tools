@@ -75,69 +75,48 @@ It may again take a while, depending on the size of your monorepo.
 
 ## Reference
 
+This is just a short description and usage of all the tools in the package.
+For detailed information go to the scripts themselves and read the comments.
+
 ### [monorepo_build.sh](./monorepo_build.sh)
-Build monorepo from specified remotes.  
-You must first add the remotes by `git remote add <remote-name> <repository-url>` and fetch from them by `git fetch --all`.  
-Final monorepo will contain all branches from the first remote and master branches of all remotes will be merged.  
-If subdirectory is not specified remote name will be used instead.
 
-Usage:  
-`monorepo_build.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...`
+Build monorepo from specified remotes. The remotes must be already added to your repository and fetched.
 
-Example:  
-`monorepo_build.sh main-repository package-alpha:packages/alpha package-beta:packages/beta`
+Usage: `monorepo_build.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...`
 
 ### [monorepo_split.sh](./monorepo_split.sh)
-Split monorepo and push all master branches into specified remotes.  
-You must first build the monorepo via `monorepo_build.sh` (uses same parameters as `monorepo_split.sh`).  
-If subdirectory is not specified remote name will be used instead.
 
-Usage:  
-`monorepo_split.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...`
+Split monorepo built by `monorepo_build.sh` and push all master branches into specified remotes.
 
-Example:  
-`monorepo_split.sh main-repository package-alpha:packages/alpha package-beta:packages/beta`
+Usage: `monorepo_split.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...`
 
 ### [rewrite_history_into.sh](./rewrite_history_into.sh)
-Rewrite git history so that all filepaths are in a specific subdirectory.  
-You can use arguments for `git rev-list` to specify what commits to rewrite (defaults to rewriting history of the checked-out branch).
 
-Usage:  
-`rewrite_history_into.sh <subdirectory> [<rev-list-args>]`
+Rewrite git history so that all filepaths are in a specific subdirectory.
 
-Examples:  
-`rewrite_history_into.sh packages/alpha`  
-`rewrite_history_into.sh main-repository --branches`
+Usage: `rewrite_history_into.sh <subdirectory> [<rev-list-args>]`
 
 ### [rewrite_history_from.sh](./rewrite_history_from.sh)
-Rewrite git history so that only commits that made changes in a subdirectory are kept and rewrite all filepaths as if it was root.  
-You can use arguments for `git rev-list` to specify what commits to rewrite (defaults to rewriting history of the checked-out branch).
 
-Usage:  
-`rewrite_history_from.sh <subdirectory> [<rev-list-args>]`
+Rewrite git history so that only commits that made changes in a subdirectory are kept and rewrite all filepaths as if it was root.
 
-Examples:  
-`rewrite_history_from.sh packages/alpha`  
-`rewrite_history_from.sh main-repository --branches`
+Usage: `rewrite_history_from.sh <subdirectory> [<rev-list-args>]`
 
 ### [original_refs_restore.sh](./original_refs_restore.sh)
+
 Restore original git history after rewrite.
 
-Usage:  
-`original_refs_restore.sh`
+Usage: `original_refs_restore.sh`
 
 ### [original_refs_wipe.sh](./original_refs_wipe.sh)
+
 Wipe original git history after rewrite.
 
-Usage:  
-`original_refs_wipe.sh`
+Usage: `original_refs_wipe.sh`
 
 ### [load_branches_from_remote.sh](./load_branches_from_remote.sh)
+
 Delete all local branches and create all non-remote-tracking branches of a specified remote.
 
-Usage:  
-`load_branches_from_remote.sh <remote-name>`
-
-Example:  
-`load_branches_from_remote.sh origin`
+Usage: `load_branches_from_remote.sh <remote-name>`
 
