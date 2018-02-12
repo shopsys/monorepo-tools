@@ -91,7 +91,7 @@
         "shopsys/product-feed-heureka-delivery": "^0.2.2",
         "shopsys/product-feed-interface": "^0.5.0",
         "shopsys/product-feed-zbozi": "^0.4.2",
-        "shopsys/product-feed-google": "^0.1.1",
+        "shopsys/product-feed-google": "^0.1.2",
         "stof/doctrine-extensions-bundle": "1.2.2",
         "symfony/assetic-bundle": "2.8.2",
         "symfony/monolog-bundle": "3.1.2",

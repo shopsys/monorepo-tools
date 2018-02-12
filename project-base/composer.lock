@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9781621f3e39a61f573eeab9ab2b41f8",
+    "content-hash": "5269a4d0a834b8a2f23518e0d57a82fb",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -5451,16 +5451,16 @@
         },
         {
             "name": "shopsys/product-feed-google",
-            "version": "v0.1.1",
+            "version": "v0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/product-feed-google.git",
-                "reference": "ca976a59cb5c68fc5a026a927a3e2e1a96ac78c5"
+                "reference": "16baf942d776fcbe18e7cd4007daf6f6257593f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/product-feed-google/zipball/ca976a59cb5c68fc5a026a927a3e2e1a96ac78c5",
-                "reference": "ca976a59cb5c68fc5a026a927a3e2e1a96ac78c5",
+                "url": "https://api.github.com/repos/shopsys/product-feed-google/zipball/16baf942d776fcbe18e7cd4007daf6f6257593f2",
+                "reference": "16baf942d776fcbe18e7cd4007daf6f6257593f2",
                 "shasum": ""
             },
             "require": {
@@ -5505,7 +5505,7 @@
                 "plugin",
                 "product feed"
             ],
-            "time": "2017-10-04T12:18:05+00:00"
+            "time": "2018-02-12T15:19:55+00:00"
         },
         {
             "name": "shopsys/product-feed-heureka",
