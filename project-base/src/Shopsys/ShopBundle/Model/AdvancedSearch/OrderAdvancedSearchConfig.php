@@ -43,11 +43,11 @@ class OrderAdvancedSearchConfig extends AdvancedSearchConfig
             $this->registerFilter($orderDomainFilter);
         }
         $this->registerFilter($orderProductFilter);
-        $this->registerFilter($orderPhoneNumberFilter);
-        $this->registerFilter($orderStreetFilter);
         $this->registerFilter($orderNameFilter);
         $this->registerFilter($orderLastNameFilter);
         $this->registerFilter($orderEmailFilter);
+        $this->registerFilter($orderPhoneNumberFilter);
+        $this->registerFilter($orderStreetFilter);
         $this->registerFilter($orderCityFilter);
     }
 }
