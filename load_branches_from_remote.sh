@@ -20,6 +20,5 @@ for REMOTE_BRANCH in $(git branch -r|grep $REMOTE/); do
     git branch -q $BRANCH $REMOTE_BRANCH
     git branch --unset-upstream $BRANCH
 done
-git reset --h
-git checkout master
+git checkout -f master
 
