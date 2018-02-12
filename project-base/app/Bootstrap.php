@@ -48,7 +48,6 @@ class Bootstrap
         }
 
         $kernel = new AppKernel($this->environment, Environment::isEnvironmentDebug($this->environment));
-        $kernel->loadClassCache();
         if ($this->console) {
             $input = new ArgvInput();
             $output = new ConsoleOutput();
