@@ -51,4 +51,5 @@ git merge --no-commit -q $MERGE_REFS --allow-unrelated-histories
 echo 'Resolving conflicts using trees of all parents'
 git read-tree $MERGE_REFS
 git commit -m "$COMMIT_MSG"
+git reset --hard
 
