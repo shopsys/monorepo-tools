@@ -136,7 +136,7 @@ services:
     tags:
       - { name: form.type }
 
-  Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension:
+  Shopsys\ShopBundle\Form\InvertChoiceTypeExtension:
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
 

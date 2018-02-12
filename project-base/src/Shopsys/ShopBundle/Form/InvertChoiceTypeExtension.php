@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Form;
+namespace Shopsys\ShopBundle\Form;
 
 use Shopsys\ShopBundle\Component\Transformers\InverseMultipleChoiceTransformer;
 use Symfony\Component\Form\AbstractTypeExtension;
