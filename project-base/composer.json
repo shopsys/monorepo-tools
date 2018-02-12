@@ -80,7 +80,6 @@
         "phpunit/phpunit": "5.7.25",
         "presta/sitemap-bundle": "1.4.2",
         "prezent/doctrine-translatable-bundle": "dev-rise-locale-listener-priority#09863c2",
-        "raulfraile/ladybug-bundle": "1.0.6",
         "sensio/distribution-bundle": "5.0.21",
         "sensio/framework-extra-bundle": "3.0.28",
         "sensio/generator-bundle": "3.1.7",

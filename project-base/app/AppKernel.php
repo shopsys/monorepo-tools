@@ -24,7 +24,6 @@ class AppKernel extends Kernel
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
             new Prezent\Doctrine\TranslatableBundle\PrezentDoctrineTranslatableBundle(),
-            new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Shopsys\FormTypesBundle\ShopsysFormTypesBundle(),
             new ShopSys\MigrationBundle\ShopSysMigrationBundle(),
