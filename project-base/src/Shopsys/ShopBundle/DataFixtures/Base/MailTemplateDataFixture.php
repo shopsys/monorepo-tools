@@ -39,6 +39,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 
         $this->createMailTemplate($manager, 'order_status_1', $mailTemplateData);
 
+        $mailTemplateData->sendMail = false;
         $mailTemplateData->subject = 'Order status has changed';
         $mailTemplateData->body = 'Dear customer, <br /><br />'
             . 'Your order is being processed.';
@@ -57,6 +58,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 
         $this->createMailTemplate($manager, 'order_status_4', $mailTemplateData);
 
+        $mailTemplateData->sendMail = true;
         $mailTemplateData->subject = 'Reset password request';
         $mailTemplateData->body = 'Dear customer.<br /><br />'
             . 'You can set a new password following this link: <a href="{new_password_url}">{new_password_url}</a>';

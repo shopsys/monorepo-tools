@@ -162,4 +162,12 @@ class MailTemplateFacade
 
         return $filepaths;
     }
+
+    /**
+     * @return bool
+     */
+    public function existsTemplateWithEnabledSendingHavingEmptyBodyOrSubject()
+    {
+        return $this->mailTemplateRepository->existsTemplateWithEnabledSendingHavingEmptyBodyOrSubject();
+    }
 }

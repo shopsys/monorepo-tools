@@ -28,6 +28,11 @@ class MailerService
     {
         $message = $this->getMessageWithReplacedVariables($messageData);
         $failedRecipients = [];
+
+        if ($messageData->body === null || $messageData->subject === null) {
+            throw new \Shopsys\ShopBundle\Model\Mail\Exception\EmptyMailException();
+        }
+
         $successSend = $this->mailer->send($message, $failedRecipients);
         if (!$successSend && count($failedRecipients) > 0) {
             throw new \Shopsys\ShopBundle\Model\Mail\Exception\SendMailFailedException($failedRecipients);

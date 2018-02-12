@@ -64,4 +64,20 @@ class MailTemplateRepository
         $criteria = ['domainId' => $domainId];
         return $this->getMailTemplateRepository()->findBy($criteria);
     }
+
+    /**
+     * @return bool
+     */
+    public function existsTemplateWithEnabledSendingHavingEmptyBodyOrSubject()
+    {
+        $countOfEmptyTemplates = (int)$this->em->createQueryBuilder()
+            ->select('COUNT(mt)')
+            ->from(MailTemplate::class, 'mt')
+            ->where('mt.sendMail = TRUE')
+            ->andWhere('mt.body IS NULL OR mt.subject IS NULL')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $countOfEmptyTemplates > 0;
+    }
 }

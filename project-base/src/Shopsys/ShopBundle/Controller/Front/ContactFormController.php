@@ -41,7 +41,7 @@ class ContactFormController extends FrontBaseController
                     'action' => $this->generateUrl('front_contact_form_send'),
                 ]);
                 $message = t('Thank you, your message has been sent.');
-            } catch (\Shopsys\ShopBundle\Model\Mail\Exception\SendMailFailedException $ex) {
+            } catch (\Shopsys\ShopBundle\Model\Mail\Exception\MailException $ex) {
                 $message = t('Error occurred when sending e-mail.');
             }
         }
