@@ -49,7 +49,11 @@ git checkout master
 echo "Merging refs: $MERGE_REFS"
 git merge --no-commit -q $MERGE_REFS --allow-unrelated-histories
 echo 'Resolving conflicts using trees of all parents'
-git read-tree $MERGE_REFS
+for REF in $MERGE_REFS; do
+    # Add all files from all master branches into index
+    # "git read-tree" with multiple refs cannot be used as it is limited to 8 refs
+    git ls-tree -r $REF | git update-index --index-info
+done
 git commit -m "$COMMIT_MSG"
 git reset --hard
 
