@@ -143,9 +143,7 @@
             if (!Shopsys.validation.isFormValid($form)) {
                 event.preventDefault();
                 Shopsys.validation.showFormErrorsWindow($form);
-            }
-
-            if (!FpJsFormValidator.ajax.queue) {
+            } else if (!FpJsFormValidator.ajax.queue) {
                 if ($form.data('on-submit') !== undefined) {
                     $(this).trigger($(this).data('on-submit'));
                     event.preventDefault();
