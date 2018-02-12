@@ -5,9 +5,13 @@ You can read about pros and cons of monorepo approach on the [Shopsys Framework 
 
 We created these scripts because we couldn't find a tool that would keep the git history of subpackages unchanged.
 
-It may need a updated version of `git` (tested on `2.16.1`).
+You may need to update your `git` (tested on `2.16.1`).
+
+Commands will not run on MacOS as it uses slightly different implementation of `sed` and `echo`.
 
 ## Quick start
+
+### 1. Download
 
 First download this repository so you can use the tools (eg. into `~/monorepo-tools`).
 
@@ -15,9 +19,12 @@ First download this repository so you can use the tools (eg. into `~/monorepo-to
 git clone https://github.com/shopsys/monorepo-tools ~/monorepo-tools
 ```
 
-### Adding remotes to a new repository
+### 2. Preparing an empty repository with added remotes
+
 You have to create a new git repository for your monorepo and add all your existing packages as remotes.
 You can add as many remotes as you want.
+
+In this example we will prepare 3 packages from github for merging into monorepo.
 
 ```
 git init
@@ -27,10 +34,11 @@ git remote add package-beta http://github.com/vendor/beta.git
 git fetch --all
 ```
 
-### Building the monorepo
+### 3. Building the monorepo
+
 Then you can build your monorepo using `monorepo_build.sh`.
-Just list all your remotes as arguments.
-Optionally you can specify a directory where the repository will be located by providing `<remote-name>:<subdirectory>`.
+Just list the names of all your previously added remotes as arguments.
+Optionally you can specify a directory where the repository will be located by providing `<remote-name>:<subdirectory>`, otherwise remote name will be used.
 
 The command will rewrite history of all mentioned repositories as if they were developed in separate subdirectories.
 
@@ -43,16 +51,17 @@ Only branches `master` will be merged together, other branches will be kept only
 
 This may take a while, depending on the size of your repositories.
 
-Now your `master` branch should contain all packages in separate directories.
-* main-repository/ - contains repository *vendor/main-repository*
-* packages/
-  * alpha/ - contains repository *vendor/alpha*
-  * beta/ - contains repository *vendor/beta*
+Now your `master` branch should contain all packages in separate directories. For our example it would mean:
+* **main-repository/** - contains repository *vendor/main-repository*
+* **packages/**
+  * **alpha/** - contains repository *vendor/alpha*
+  * **beta/** - contains repository *vendor/beta*
 
-### Splitting into original repositories
+### 4. Splitting into original repositories
+
 You should develop all your packages in this repository from now on.
 
-When you made your changes and would like to update the original repositories use `monorepo_build.sh` with the same arguments as before.
+When you made your changes and would like to update the original repositories use `monorepo_split.sh` with the same arguments as before.
 
 ```
 ~/monorepo-tools/monorepo_split.sh \
