@@ -19,7 +19,7 @@ After that, you can follow the steps below in order to install and configure Sho
 ## Steps
 ### 1. Get source code
 ```
-git clone https://git.shopsys-framework.com/shopsys/shopsys-framework.git
+git clone https://github.com/shopsys/shopsys.git
 cd shopsys-framework
 ```
 
@@ -168,4 +168,4 @@ date.timezone = "UTC"
 ```
 
 ### Still struggling with installation?
-If you encountered any other problem during the installation please [file an issue](https://git.shopsys-framework.com/shopsys/shopsys-framework/issues/new) and we will help you.
+If you encountered any other problem during the installation please [file an issue](https://github.com/shopsys/shopsys/issues/new) and we will help you.

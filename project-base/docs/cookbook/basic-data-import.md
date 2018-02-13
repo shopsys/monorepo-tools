@@ -376,7 +376,7 @@ As an output, you will get a list of all available cron modules.
 - Use database transactions.
     - Use `EntityManger` methods `beginTransaction()`, `commit()` and `rollback()`.
     - Do not forget to clear identity map when doing a rollback (so even entity modifications are reverted).
-    - [`IteratedCronModuleInterface`](../../src/Shopsys/ShopBundle/Component/Cron/IteratedCronModuleInterface.php) offers a way to implement longer processes that can span over many iterations.
+    - [`IteratedCronModuleInterface`](https://github.com/shopsys/plugin-interface/blob/master/src/Cron/IteratedCronModuleInterface.php) offers a way to implement longer processes that can span over many iterations.
 - Disable entity manager SQL logging (use [`SqlLoggerFacade::temporarilyDisableLogging()`](../../src/Shopsys/ShopBundle/Component/Doctrine/SqlLoggerFacade.php)).
     - By default, every executed SQL query is logged and that slows down the process and consumes a lot of memory when there are many iterations.
     - Do not forget to re-enable the logging after the processing is done (use [`SqlLoggerFacade::reenableLogging()`](../../src/Shopsys/ShopBundle/Component/Doctrine/SqlLoggerFacade.php)).

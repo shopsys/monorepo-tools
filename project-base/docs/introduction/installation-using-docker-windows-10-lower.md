@@ -18,7 +18,7 @@ It means that any directory under C:/Users (e.g. C:/Users/<user_name>/shopsys-fr
 If you want to store your folder in other scope [see for example this article](https://gist.github.com/matthiasg/76dd03926d095db08745).
 
 ```
-git clone https://git.shopsys-framework.com/shopsys/shopsys-framework.git
+git clone https://github.com/shopsys/shopsys.git
 cd shopsys-framework
 ```
 
