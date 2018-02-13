@@ -10,12 +10,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 	- currently analysing source code by level 0
 - PHP 7.2 support (@TomasLudvik)
 - Uniformity of PHP and Postgres timezones is checked during the build (@Miroslav-Stopka)
+- in `TEST` environment `Domain` is created with all instances of `DomainConfig` having URL set to `%overwrite_domain_url%`
+    - parameter is set only in `parameters_test.yml` as it is only relevant in `TEST` environment
+    - overwriting can be switched off by setting the parameter to `~` (null in Yaml)
+    - overwriting the domain URL is necessary for Selenium acceptance tests running in Docker
 
 ### Changed
 - cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)
 - PHPUnit tests now fail on warning (@TomasLudvik)
 - end of support of PHP 7.0 (@TomasLudvik)
 - emails with empty subject or body are no longer sent (@stanoMilan)
+- postgresql-client is installed in [php-fpm/dockerfile](docker/php-fpm/Dockerfile) for `pg_dump` function (@MattCzerner)
+    - postgresql was downgraded to 9.5 because of compatibility with postgresql-client
+- docker-compose: added container_name to smtp-server and adminer (@MattCzerner)
+- configuration of Docker Compose tweaked for easier development (@MattCzerner)
+    - `docker-compose.yml` is added to `.gitignore` for everyone to be able to make individual changes
+    - the predefined templates are now in `/docker/conf` directory
+    - `adminer` container uses port 1100 by default (as 1000 is often already in use)
+    - Docker Sync is used only in configuration for MacOS as only there it is needed
+    - `postgres` container is created with a volume for data persistence (in `var/postgres-data`)
+    - see documentation of [Installation Using Docker](docs/introduction/installation-using-docker.md) for details
+- default parameters in `parameters.yml.dist` and `parameters_test.yml.dist` are for Docker installation (instead of native) (@MattCzerner)
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)

@@ -24,7 +24,7 @@ always run the same, regardless of the environment.
 ## 3. Shopsys-framework on Docker
 
 #### 3.1 docker-compose.yml
-[Docker-compose.yml](../../docker-compose.yml) file contains the definitions of containers, that will be created for the installation
+[Docker-compose.yml](../../docker/conf/docker-compose.yml.dist) file contains the definitions of containers, that will be created for the installation
 of the Shopsys framework platform. Containers can communicate with each other. Data need to be saved
 into volumes, otherwise, these data will be lost after the container is closed. 
 
@@ -73,12 +73,3 @@ The official list of dockerfile commands can be found on [Dockerfile reference](
 
 #### 3.5 docker/nginx/nginx.conf
 [Nginx.conf](../../docker/nginx/nginx.conf) file contains Nginx configuration for new webserver container.
-
-#### 3.6 docker/conf/docker-compose-win.yml.dist
-[Docker-compose-win.yml.dist](../../docker/conf/docker-compose-win.yml.dist) is template for creating docker-compose file for Windows.
-In the future, we will adapt this approach entirely - docker-compose.yml
-file will not be part of the application, instead of that, there will be multiple docker-compose-win.yml.dist
-templates for specific platforms.
-
-
-

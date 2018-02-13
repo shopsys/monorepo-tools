@@ -13,3 +13,4 @@
 /.php_cs.cache
 /.docker-sync
 .DS_Store
+/docker-compose.yml

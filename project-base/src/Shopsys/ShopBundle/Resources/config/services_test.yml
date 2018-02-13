@@ -1,0 +1,6 @@
+services:
+
+  shopsys.shop.component.domain.domain_factory:
+    class: Shopsys\ShopBundle\Component\Domain\DomainFactoryOverwritingDomainUrl
+    arguments:
+      - '%overwrite_domain_url%'

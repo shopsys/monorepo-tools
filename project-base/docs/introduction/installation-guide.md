@@ -57,6 +57,8 @@ Composer will then prompt you to set parameters for testing environment (`app/co
 | `test_database_port`              | ...                                                                           |
 | `test_database_name`              | ...                                                                           |
 | `test_database_user`              | ...                                                                           |
+| `overwrite_domain_url`            | overwrites URL of all domains for acceptance testing (set to `~` to disable)  |
+| `selenium_server_host`            | with native installation the selenium server is on `localhost`                |
 | `test_database_password`          | ...                                                                           |
 | `test_mailer_transport`           | access data of your mail server for tests                                     |
 | `test_mailer_host`                | ...                                                                           |

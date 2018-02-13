@@ -1,9 +1,10 @@
 version: "3.1"
 services:
     postgres:
-        image: postgres:9.6-alpine
+        image: postgres:9.5-alpine
         container_name: shopsys-framework-postgres
-        working_dir: /var/www/shopsys-framework
+        volumes:
+            - ./var/postgres-data:/var/lib/postgresql/data
         environment:
             - POSTGRES_USER=root
             - POSTGRES_PASSWORD=root
@@ -34,10 +35,22 @@ services:
         depends_on:
             - postgres
 
+    selenium-server:
+        image: selenium/standalone-chrome
+        container_name: shopsys-framework-acceptance-tests
+        ports:
+            - "4400:4444"
+        environment:
+            - HUB_PORT_4444_TCP_ADDR=hub
+            - HUB_PORT_4444_TCP_PORT=4444
+        links:
+            - webserver
+
     adminer:
         image: adminer:latest
+        container_name: shopsys-framework-adminer
         ports:
-            - "1000:8080"
+            - "1100:8080"
         links:
             - postgres
         depends_on:
@@ -45,6 +58,7 @@ services:
 
     smtp-server:
         image: namshi/smtp
+        container_name: shopsys-framework-smtp-server
 
 volumes:
     shopsys-framework-sync:

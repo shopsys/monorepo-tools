@@ -30,7 +30,7 @@ modules:
       populate: false
       cleanup: true
     Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver:
-      host: localhost
+      host: "%selenium_server_host%"
       port: 4444
       url: ~
       browser: chrome

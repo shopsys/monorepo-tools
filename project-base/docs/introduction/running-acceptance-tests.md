@@ -1,10 +1,24 @@
 # Running Acceptance Tests
 
-## Prerequisites
+## Running in Docker
+There is `selenium-server` container with installed Selenium hub and Google Chrome, prepared to run the acceptance tests.
+
+You should run all command mentioned below while logged into your `php-fpm` container via command:
+```
+docker exec -it shopsys-framework-php-fpm bash
+```
+
+*Note: For `selenium-server` to be able to connect to you `webserver` container and access your application, all domains should have URL set to `http://webserver:8000`.*
+*This is done via parameter `%overwrite_domain_url%` defined in `parameters_test.yml`.*
+*Everything should be configured for you by default but it is important to keep the domain URL overwriting in mind when dealing with acceptance tests.*   
+
+## Native installation
 For running acceptance tests you need to install [Google Chrome browser](https://www.google.com/chrome/browser/desktop/) and download [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/).
 
 You must choose compatible versions of Google Chrome and ChromeDriver.
 As Chrome browser has auto-update enabled by default this may require you to update ChromeDriver from time to time.
+
+When installing Shopsys Framework locally it is important to disable domain URL overwriting in `TEST` environment by setting `%overwrite_domain_url%` parameter to `~` in `parameters_test.yml`. 
 
 ### Installing Google Chrome browser
 Download and install Google Chrome browser from https://www.google.com/chrome/browser/desktop/

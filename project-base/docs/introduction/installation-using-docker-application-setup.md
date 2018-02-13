@@ -18,29 +18,11 @@ docker exec -it shopsys-framework-php-fpm bash
 composer install
 ```
 
-Composer will prompt you to set parameters ([description of parameters](installation-guide.md#2-install-dependencies-and-configure-parameters)):
+Composer will prompt you to set parameters ([description of parameters](installation-guide.md#2-install-dependencies-and-configure-parameters)).
+The default parameters are currently set for application running in Docker so you can just use the defaults.
 
-Important parameters to set for `app/config/parameters.yml` are listed bellow (the others can be set to default - just press Enter):
-
-| parameter name    | parameter value |
-| ----------------- | --------------- |
-| database_host     | postgres        |
-| database_port     | 5432            |
-| database_name     | shopsys         |
-| database_user     | root            |
-| database_password | root            |
-| ...               | ...             |
-| mailer_host       | smtp-server     |
-
-Important parameters to set for `app/config/parameters_test.yml` are listed bellow (the others can be set to default - just press Enter):
-
-| parameter name         | parameter value |
-| ---------------------- | --------------- |
-| test_database_host     | postgres        |
-| test_database_port     | 5432            |
-| test_database_name     | shopsys-test    |
-| test_database_user     | root            |
-| test_database_password | root            |
+Only exception is the `secret` parameter - you should input a random string to be used for security purposes.
+It is not necessary for development though.
 
 For development choose `n` when asked `Build in production environment? (Y/n)`.
 
@@ -74,7 +56,7 @@ You can also login into the administration section on [http://127.0.0.1:8000/adm
 * Username: `admin` or `superadmin` (the latter has access to advanced options)
 * Password: `admin123`
 
-You can also manage the application database using [Adminer](https://www.adminer.org) by going to [http://127.0.0.0:1000](http://127.0.0.0:1000).
+You can also manage the application database using [Adminer](https://www.adminer.org) by going to [http://127.0.0.1:1100](http://127.0.0.1:1100).
 
 ### On Windows 10 Home, 8, 8.1, 7 (using Docker Toolbox)
 Open [http://192.168.99.100:8000/](http://192.168.99.100:8000/) to see running application.
@@ -83,4 +65,4 @@ You can also login into the administration section on [http://192.168.99.100:800
 * Username: `admin` or `superadmin` (the latter has access to advanced options)
 * Password: `admin123`
 
-You can also manage the application database using [Adminer](https://www.adminer.org) by going to [http://192.168.99.100:1000](http://192.168.99.100:1000).
+You can also manage the application database using [Adminer](https://www.adminer.org) by going to [http://192.168.99.100:1100](http://192.168.99.100:1100).
