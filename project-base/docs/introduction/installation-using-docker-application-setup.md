@@ -1,9 +1,7 @@
 # Installation Using Docker - application setup
 
-This guide expects that you have already set up your Docker environment. Otherwise check one of these guides:
-- [Installation via Docker on Linux and MacOS (recommended)](docs/introduction/installation-using-docker-linux-macos.md)
-- [Installation via Docker on Windows 10 Pro and higher](docs/introduction/installation-using-docker-windows-10-pro-higher.md)
-- [Installation via Docker on Windows 10 Home, 8, 8.1, 7](docs/introduction/installation-using-docker-windows-10-lower.md)
+This guide expects that you have already set up your Docker environment.
+If you haven't already done that check the [Installation Guide for Docker](installation-using-docker.md).
 
 ## 1. Setup the application
 Now that the Docker environment is prepared we can setup the application itself.

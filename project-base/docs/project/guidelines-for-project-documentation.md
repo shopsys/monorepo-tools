@@ -16,4 +16,4 @@ Shopsys Framework has it's own documentation so the project documentation should
 * Special requirements for server infrastructure
 
 ## Other rules
-Project documentation should also adhere the rules specified in [Contributing to documentation](../contributing/contributing-to-documentation.md).
+Project documentation should also adhere the rules specified in [Guidelines for Writing Documentation](../contributing/guidelines-for-writing-documentation.md).
