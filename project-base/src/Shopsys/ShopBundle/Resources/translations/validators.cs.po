@@ -58,7 +58,7 @@ msgstr "Každý parametr může být nastaven pouze jednou"
 #: MailTemplateFormType.php:36
 #: OrderFormType.php:118
 #: PersonalInfoFormType.php:66
-#: RegistrationFormType.php:47
+#: RegistrationFormType.php:48
 #: ResetPasswordFormType.php:26
 #: UserFormType.php:65
 msgid "Email cannot be longer then {{ limit }} characters"
@@ -73,7 +73,7 @@ msgstr "Datum zadávejte ve formátu dd.mm.rrrr"
 
 #: OrderFormType.php:99
 #: PersonalInfoFormType.php:53
-#: RegistrationFormType.php:34
+#: RegistrationFormType.php:35
 #: UserFormType.php:29
 #: UserFormType.php:47
 msgid "First name cannot be longer then {{ limit }} characters"
@@ -128,7 +128,7 @@ msgstr "Obrázek může být pouze ve formátech jpg, png nebo gif"
 
 #: OrderFormType.php:108
 #: PersonalInfoFormType.php:59
-#: RegistrationFormType.php:40
+#: RegistrationFormType.php:41
 #: UserFormType.php:35
 #: UserFormType.php:56
 msgid "Last name cannot be longer than {{ limit }} characters"
@@ -173,21 +173,21 @@ msgstr "Výrobní číslo nesmí být delší než {{ limit }} znaků"
 
 #: AdministratorFormType.php:67
 #: NewPasswordFormType.php:30
-#: RegistrationFormType.php:59
+#: RegistrationFormType.php:60
 #: UserFormType.php:50
 #: UserFormType.php:113
 msgid "Password cannot be longer then {{ limit }} characters"
 msgstr "Heslo musí mít minimálně {{ limit }} znaků"
 
-#: RegistrationFormType.php:82
+#: RegistrationFormType.php:90
 #: UserFormType.php:70
-#: UserFormType.php:142
+#: UserFormType.php:143
 msgid "Password cannot be same as e-mail"
 msgstr "Heslo nesmí být stejné jako přihlašovací e-mail."
 
-#: RegistrationFormType.php:88
+#: RegistrationFormType.php:96
 #: UserFormType.php:76
-#: UserFormType.php:148
+#: UserFormType.php:149
 msgid "Password cannot be same as part of e-mail before at sign"
 msgstr "Heslo nesmí být stejné jako část e-mailu před zavináčem."
 
@@ -199,7 +199,7 @@ msgstr "Heslo nesmí být stejné jako přihlašovací jméno"
 #: src/Shopsys/ShopBundle/Form/Admin/Customer/UserFormType.php:80
 #: src/Shopsys/ShopBundle/Form/Front/Customer/Password/NewPasswordFormType.php:33
 #: src/Shopsys/ShopBundle/Form/Front/Customer/UserFormType.php:53
-#: src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php:62
+#: src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php:63
 msgid "Passwords do not match"
 msgstr "Hesla se neshodují"
 
@@ -322,7 +322,7 @@ msgstr "Vyplňte prosím kód."
 msgid "Please enter company name"
 msgstr "Vyplňte prosím název firmy"
 
-#: ContactFormType.php:36
+#: ContactFormType.php:37
 msgid "Please enter content"
 msgstr "Vyplňte prosím text"
 
@@ -356,12 +356,12 @@ msgid "Please enter discount percentage"
 msgstr "Vyplňte prosím procento slevy."
 
 #: AdministratorFormType.php:42
-#: ContactFormType.php:41
+#: ContactFormType.php:42
 #: LoginFormType.php:26
 #: MailSettingFormType.php:25
 #: OrderFormType.php:114
 #: PersonalInfoFormType.php:64
-#: RegistrationFormType.php:45
+#: RegistrationFormType.php:46
 #: ResetPasswordFormType.php:24
 #: UserFormType.php:62
 msgid "Please enter e-mail"
@@ -373,7 +373,7 @@ msgstr "Vyplňte prosím text emailu"
 
 #: OrderFormType.php:96
 #: PersonalInfoFormType.php:52
-#: RegistrationFormType.php:33
+#: RegistrationFormType.php:34
 #: UserFormType.php:28
 #: UserFormType.php:44
 msgid "Please enter first name"
@@ -395,7 +395,7 @@ msgid "Please enter flag name in all languages"
 msgstr "Vyplňte prosím název příznaku ve všech jazycích"
 
 #: AdministratorFormType.php:34
-#: ContactFormType.php:30
+#: ContactFormType.php:31
 #: MailSettingFormType.php:31
 msgid "Please enter full name"
 msgstr "Vyplňte prosím celé jméno"
@@ -411,7 +411,7 @@ msgstr "Prosím vyplňte typ vstupní ceny"
 
 #: OrderFormType.php:105
 #: PersonalInfoFormType.php:58
-#: RegistrationFormType.php:39
+#: RegistrationFormType.php:40
 #: UserFormType.php:34
 #: UserFormType.php:53
 msgid "Please enter last name"
@@ -462,7 +462,7 @@ msgstr "Prosím vyplňte hodnotu parametru"
 #: LoginFormType.php:30
 #: LoginFormType.php:32
 #: NewPasswordFormType.php:29
-#: RegistrationFormType.php:58
+#: RegistrationFormType.php:59
 #: UserFormType.php:118
 msgid "Please enter password"
 msgstr "Vyplňte prosím heslo"
@@ -554,11 +554,11 @@ msgid "Please enter valid 3-digit currency code according to ISO 4217 standard (
 msgstr "Prosím zadejte platný třímístný kód měny podle standardu ISO 4217 (velkými písmeny)"
 
 #: AdministratorFormType.php:41
-#: ContactFormType.php:42
+#: ContactFormType.php:43
 #: MailSettingFormType.php:26
 #: OrderFormType.php:115
 #: PersonalInfoFormType.php:65
-#: RegistrationFormType.php:46
+#: RegistrationFormType.php:47
 #: ResetPasswordFormType.php:25
 #: UserFormType.php:67
 msgid "Please enter valid e-mail"
@@ -690,9 +690,15 @@ msgstr "Alias varianty nesmí být delší než {{ limit }} znaků"
 msgid "You entered same product twice. In list of bestsellers can be product only once. Please correct it and then save form again."
 msgstr "Zadali jste duplicitní zboží. V seznamu nejprodávanějšího zboží musí být každé zboží jen jedenkrát. Prosím chybu opravte a poté znovu uložte."
 
+#: ContactFormType.php:50
+#: RegistrationFormType.php:69
+#: SubscriptionFormType.php:37
+msgid "You have to agree with privacy policy"
+msgstr "Musíte souhlasit se zpracováním osobních údajů"
+
 #: PersonalInfoFormType.php:253
-msgid "You have to agree with terms and conditions"
-msgstr "Musíte souhlasit s obchodními podmínkami."
+msgid "You have to agree with terms and conditions and privacy policy"
+msgstr "Musíte souhlasit s obchodními podmínkami a zpracováním osobních údajů"
 
 #: BillingAddressFormType.php:112
 #: DeliveryAddressFormType.php:123

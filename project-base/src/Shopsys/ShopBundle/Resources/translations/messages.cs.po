@@ -13,6 +13,10 @@ msgstr "%defaultCurrency% za 1 %currentCurrency%"
 msgid "%defaultCurrency% per unit"
 msgstr "%defaultCurrency% za 1 jednotku"
 
+#: src/Shopsys/ShopBundle/Resources/views/Mail/ContactForm/mail.html.twig:13
+msgid "%name% agrees with privacy policy."
+msgstr "%name% souhlasí se zpracováním osobních údajů."
+
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:19
 msgid "(If I buy on the company behalf)"
 msgstr "(Pokud nakupuji na firmu)"
@@ -42,7 +46,8 @@ msgid "-- Choose area --"
 msgstr "-- Vyberte plochu --"
 
 #: CookiesSettingFormType.php:38
-#: TermsAndConditionsSettingFormType.php:38
+#: LegalConditionsSettingFormType.php:38
+#: LegalConditionsSettingFormType.php:45
 msgid "-- Choose article --"
 msgstr "-- Vyberte článek --"
 
@@ -71,6 +76,10 @@ msgstr "--textarea-big"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1123
 msgid "1 254 CZK"
 msgstr "1 254 Kč"
+
+#: DefaultController.php:52
+msgid "<a href=\"{{ url }}\">Some required e-mail templates are not fully set.</a>"
+msgstr "<a href=\"{{ url }}\">Některé povinné emailové šablony nejsou vyplněny.</a>"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Script/list.html.twig:8
 msgid "ATTENTION - inserting scripts on the page can seriously endanger the security, performance or design of the app."
@@ -315,8 +324,8 @@ msgid "Article \"%name%\" set for displaying cookies information. This setting w
 msgstr "Článek \"%name%\" je nastaven pro zobrazení informací o cookies. Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
 
 #: ArticleController.php:217
-msgid "Article \"%name%\" set for displaying terms and conditions. This setting will be lost. Do you really want to delete it?"
-msgstr "Článek \"%name%\" je nastaven pro zobrazení obchodních podmínek. Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
+msgid "Article \"%name%\" set for displaying legal conditions. This setting will be lost. Do you really want to delete it?"
+msgstr "Článek \"%name%\" je nastaven pro zobrazení právních podmínek. Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
 
 #: ArticleController.php:166
 msgid "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
@@ -455,7 +464,7 @@ msgstr "Zpět na přehled objednávek"
 msgid "Back to overview"
 msgstr "Zpět na přehled"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:95
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:122
 msgid "Back to shipping and payment selection"
 msgstr "Zpět na výběr dopravy a platby"
 
@@ -717,8 +726,12 @@ msgstr "Vybrat"
 msgid "Choose article, which will provide information about how this pages uses cookies."
 msgstr "Vyberte článek, který bude sloužit jako informace o tom, jak tyto stránky používají cookies."
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TermsAndConditions/setting.html.twig:15
-msgid "Choose article, which will serve as terms and conditions with which the customer has to agree with when creating order."
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/LegalConditions/setting.html.twig:16
+msgid "Choose article, which will serve as privacy policy with which the customer has to agree when creating order or registering user."
+msgstr "Vyberte článek, který bude sloužit jako zásady ochrany osobních údajů, se kterými zákazník musí souhlasit při vytváření objednávky nebo registraci uživatele."
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/LegalConditions/setting.html.twig:15
+msgid "Choose article, which will serve as terms and conditions with which the customer has to agree when creating order."
 msgstr "Vyberte článek, který bude sloužit jako obchodní podmínky, se kterými musí zákazník souhlasit při vytváření objednávky."
 
 #: confirmDelete.js:58
@@ -1056,7 +1069,6 @@ msgstr "Vytvořeno administrátorem"
 
 #: AdvancedSearchOrderFilterTranslation.php:12
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:10
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:42
 msgid "Created on"
 msgstr "Vytvořeno dne"
 
@@ -1108,18 +1120,42 @@ msgstr "Byl upraven zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></str
 msgid "Customer <strong>{{ name }}</strong> deleted"
 msgstr "Zákazník <strong>{{ name }}</strong> byl smazán"
 
+#: AdvancedSearchOrderFilterTranslation.php:22
+msgid "Customer city"
+msgstr "Město zákazníka"
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:3
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:4
 msgid "Customer detail"
 msgstr "Karta zákazníka"
 
+#: AdvancedSearchOrderFilterTranslation.php:21
+msgid "Customer email adress"
+msgstr "Emailová adresa zákazníka"
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:4
 msgid "Customer has no orders so far."
 msgstr "Zákazník prozatím nemá žádné objednávky."
 
+#: AdvancedSearchOrderFilterTranslation.php:20
+msgid "Customer last name"
+msgstr "Příjmení zákazníka"
+
+#: AdvancedSearchOrderFilterTranslation.php:19
+msgid "Customer name"
+msgstr "Jméno zákazníka"
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:1
 msgid "Customer orders"
 msgstr "Objednávky zákazníka"
+
+#: AdvancedSearchOrderFilterTranslation.php:17
+msgid "Customer phone number"
+msgstr "Telefonní číslo zákazníka"
+
+#: AdvancedSearchOrderFilterTranslation.php:18
+msgid "Customer street"
+msgstr "Ulice zákazníka"
 
 #: CustomerPasswordController.php:61
 #: CustomerPasswordController.php:100
@@ -1144,6 +1180,14 @@ msgstr "Nástěnka"
 #: MailController.php:82
 msgid "Date and time of order creation"
 msgstr "Datum a čas vytvoření objednávky"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:42
+msgid "Date of creation and privacy policy agreement"
+msgstr "Datum vytvoření a dohody o ochraně osobních údajů"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/edit.html.twig:17
+msgid "Date of registration and privacy policy agreement"
+msgstr "Datum registrace a dohody o ochraně soukromí"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Vat/vatSettings.html.twig:6
 msgid "Default VAT rate"
@@ -1720,7 +1764,7 @@ msgstr "Chybové hlášky"
 msgid "Error occurred"
 msgstr "Nastala chyba"
 
-#: ContactFormController.php:45
+#: ContactFormController.php:67
 msgid "Error occurred when sending e-mail."
 msgstr "Nastala chyba při odesílání mailu."
 
@@ -1815,7 +1859,7 @@ msgstr "Filtrovat podle"
 msgid "Finish the assigning"
 msgstr "Dokončit přiřazování"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:90
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:117
 msgid "Finish the order"
 msgstr "Dokončit objednávku"
 
@@ -2047,9 +2091,33 @@ msgstr "Skrýt zboží"
 msgid "Hiding product"
 msgstr "Skrývání zboží"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:77
-msgid "I agree with terms and conditions"
-msgstr "Souhlasím s obchodními podmínkami"
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:89
+msgid "I agree with <a href=\"%termsAndConditionsUrl%\" target=\"_blank\">terms and conditions</a> and <a href=\"%privacyPolicyUrl%\" target=\"_blank\">privacy policy</a>."
+msgstr "Souhlasím s <a href=\"%termsAndConditionsUrl%\" target=\"_blank\">obchodními podmínkami</a> a <a href=\"%privacyPolicyUrl%\" target=\"_blank\">zpracováním osobních údajů</a>."
+
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:95
+msgid "I agree with <a href=\"%termsAndConditionsUrl%\" target=\"_blank\">terms and conditions</a> and privacy policy."
+msgstr "Souhlasím s <a href=\"%termsAndConditionsUrl%\" target=\"_blank\">obchodními podmínkami</a> a zpracováním osobních údajů."
+
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:14
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:36
+#: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Newsletter/subscription.html.twig:25
+msgid "I agree with <a href=\"%url%\" target=\"_blank\">privacy policy</a>."
+msgstr "Souhlasím se <a href=\"%url%\" target=\"_blank\">zpracováním osobních údajů</a>."
+
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:24
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:38
+#: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Newsletter/subscription.html.twig:27
+msgid "I agree with privacy policy."
+msgstr "Souhlasím se zpracováním osobních údajů."
+
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:92
+msgid "I agree with terms and conditions and <a href=\"%privacyPolicyUrl%\" target=\"_blank\">privacy policy</a>."
+msgstr "Souhlasím s obchodními podmínkami a <a href=\"%privacyPolicyUrl%\" target=\"_blank\">zpracováním osobních údajů</a>."
+
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:97
+msgid "I agree with terms and conditions and privacy policy."
+msgstr "Souhlasím s obchodními podmínkami a zpracováním osobních údajů."
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/detail.html.twig:54
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/edit.html.twig:53
@@ -2067,7 +2135,7 @@ msgstr "Rozumím"
 msgid "I want to deliver products to different address than the billing one"
 msgstr "Zboží chci doručit na jinou adresu než fakturační"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:78
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:105
 msgid "I want to subscribe to the newsletter"
 msgstr "Chci se přihlásit k odběru newsletteru"
 
@@ -2382,6 +2450,19 @@ msgstr "Příjmení"
 #: CustomerController.php:186
 msgid "Last order"
 msgstr "Poslední objednávka"
+
+#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/LegalConditions/setting.html.twig:3
+msgid "Legal conditions"
+msgstr "Právní podmínky"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/LegalConditions/setting.html.twig:4
+msgid "Legal conditions settings"
+msgstr "Nastavení právních podmínek"
+
+#: LegalConditionsController.php:77
+msgid "Legal conditions settings modified."
+msgstr "Nastavení právních podmínek upravené"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:261
 msgid "Light button"
@@ -2927,7 +3008,7 @@ msgstr "Není z čeho vybírat"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Form/theme.html.twig:685
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/filterFormTheme.html.twig:32
-#: src/Shopsys/ShopBundle/Resources/views/Front/Form/theme.html.twig:203
+#: src/Shopsys/ShopBundle/Resources/views/Front/Form/theme.html.twig:207
 msgid "Nothing to choose from."
 msgstr "Není z čeho vybírat."
 
@@ -3281,26 +3362,26 @@ msgstr "Prosím překontrolujte následující informace:"
 #: CustomerController.php:83
 #: CustomerController.php:139
 #: CustomerController.php:237
+#: LegalConditionsController.php:82
 #: MailController.php:150
 #: OrderController.php:141
-#: OrderController.php:226
+#: OrderController.php:235
 #: PaymentController.php:91
 #: PaymentController.php:127
 #: ProductController.php:162
 #: ProductController.php:212
-#: RegistrationController.php:75
+#: RegistrationController.php:84
 #: SeoController.php:61
 #: ShopInfoController.php:61
 #: SliderController.php:110
 #: SliderController.php:150
-#: TermsAndConditionsController.php:62
 #: TransportAndPaymentController.php:83
 #: TransportController.php:91
 #: TransportController.php:127
 msgid "Please check the correctness of all data filled."
 msgstr "Prosím zkontrolujte si správnost vyplnění všech údajů"
 
-#: customizeBundle.js:425
+#: customizeBundle.js:423
 msgid "Please check the entered values.<br><br>"
 msgstr "Překontrolujte prosím zadané hodnoty.<br><br>"
 
@@ -3437,6 +3518,10 @@ msgstr "Nastavení cenotvorby bylo upraveno"
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:72
 msgid "Print"
 msgstr "Vytisknout"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/LegalConditions/setting.html.twig:16
+msgid "Privacy policy"
+msgstr "Zásady ochrany osobních údajů"
 
 #: CartController.php:282
 msgid "Product <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }}) added to the cart"
@@ -3584,7 +3669,7 @@ msgstr "Rychlé vyhledávání"
 msgid "Rate can't be modified. It is necessary to create new rate, remove existing one and replace it with new one."
 msgstr "Výši sazby nelze upravit. Je třeba vytvořit novou sazbu a starou odstranit s nahrazením za novou."
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:26
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:53
 msgid "Register"
 msgstr "Registrovat"
 
@@ -3607,10 +3692,6 @@ msgstr "Registrace"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Mail/template.html.twig:120
 msgid "Registration confirmation"
 msgstr "Potvrzení registrace"
-
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/edit.html.twig:17
-msgid "Registration date"
-msgstr "Datum registrace"
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/loginForm.html.twig:30
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Login/windowForm.html.twig:25
@@ -3689,6 +3770,7 @@ msgstr "Uložit"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Cookies/setting.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Currency/currencySettings.html.twig:14
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Heureka/setting.html.twig:18
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/LegalConditions/setting.html.twig:21
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Mail/setting.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/edit.html.twig:227
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/pricingGroupSettings.html.twig:11
@@ -3696,7 +3778,6 @@ msgstr "Uložit"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ShopInfo/shopInfo.html.twig:22
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/modules.html.twig:33
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/pricing.html.twig:17
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TermsAndConditions/setting.html.twig:20
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopCategory/list.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TopProduct/list.html.twig:16
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:53
@@ -3916,7 +3997,7 @@ msgstr "Datum stažení"
 msgid "Selling start date"
 msgstr "Datum vložení"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:11
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:31
 msgid "Send"
 msgstr "Odeslat"
 
@@ -3962,18 +4043,18 @@ msgstr "Nastavit nové heslo"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Cookies/setting.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Currency/currencySettings.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/CustomerCommunication/orderSubmitted.html.twig:13
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/LegalConditions/setting.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Mail/setting.html.twig:12
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Pricing/Groups/pricingGroupSettings.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Seo/seoSetting.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Slider/detail.html.twig:18
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/pricing.html.twig:10
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TermsAndConditions/setting.html.twig:13
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Unit/setting.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Vat/vatSettings.html.twig:4
 msgid "Settings"
 msgstr "Nastavení"
 
-#: HeurekaController.php:67
+#: HeurekaController.php:66
 msgid "Settings modified."
 msgstr "Nastavení bylo upraveno."
 
@@ -4373,22 +4454,12 @@ msgstr "Telefon"
 msgid "Telephone number"
 msgstr "Tel. číslo"
 
-#: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TermsAndConditions/setting.html.twig:15
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/LegalConditions/setting.html.twig:15
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:66
 msgid "Terms and conditions"
 msgstr "Obchodní podmínky"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TermsAndConditions/setting.html.twig:3
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/TermsAndConditions/setting.html.twig:4
-msgid "Terms and conditions settings"
-msgstr "Nastavení obchodních podmínek"
-
-#: TermsAndConditionsController.php:57
-msgid "Terms and conditions settings modified."
-msgstr "Bylo upraveno nastavení obchodních podmínek."
-
-#: TermsAndConditionsFacade.php:76
+#: LegalConditionsFacade.php:76
 msgid "Terms-and-conditions.html"
 msgstr "Obchodní-podmínky.html"
 
@@ -4421,7 +4492,7 @@ msgstr "Modifikace velikostí textarea"
 msgid "Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
 msgstr "Textarea roztáhnutá na celou šířku. V tomhletom případě nemusíme použít form-line__item, protože je prvek na 100% šířku."
 
-#: ContactFormController.php:43
+#: ContactFormController.php:65
 msgid "Thank you, your message has been sent."
 msgstr "Děkujeme, váš vzkaz byl odeslán."
 
@@ -4438,11 +4509,11 @@ msgstr "Změna se u zboží projeví do 10 minut"
 msgid "The link to change your password expired."
 msgstr "Platnost odkazu pro změnu hesla vypršela."
 
-#: OrderController.php:309
+#: OrderController.php:323
 msgid "The price of payment {{ transportName }} changed during ordering process. Check your order, please."
 msgstr "V průběhu objednávkového procesu byla změněna cena platby {{ paymentName }}. Prosím, překontrolujte si objednávku."
 
-#: OrderController.php:301
+#: OrderController.php:315
 msgid "The price of shipping {{ transportName }} changed during ordering process. Check your order, please."
 msgstr "V průběhu objednávkového procesu byla změněna cena dopravy {{ transportName }}. Prosím, překontrolujte si objednávku."
 
@@ -4678,7 +4749,7 @@ msgstr "Nepodařilo se odstranit položku z košíku. Nejspíš je již odstran�
 msgid "Unable to remove item from cart. The link for removing it probably expired, try it again."
 msgstr "Nepodařilo se odstranit položku z košíku. Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou."
 
-#: OrderController.php:215
+#: OrderController.php:224
 msgid "Unable to send some e-mails, please contact us for order verification."
 msgstr "Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte."
 
@@ -5025,7 +5096,7 @@ msgstr "Nelze vybrat zboží, které je hlavní variantou"
 msgid "You cannot choose product that is variant"
 msgstr "Nelze vybrat zboží, které je variantou"
 
-#: RegistrationController.php:70
+#: RegistrationController.php:79
 msgid "You have been successfully registered."
 msgstr "Byli jste úspěšně zaregistrováni"
 

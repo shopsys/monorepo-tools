@@ -10,4 +10,4 @@
 <br />
 {{ 'This e-mail was sent from the contact form located below the panel of categories.'|trans }}
 <br />
-{{ contactFormData.name }} {{'agrees with privacy policy.'|trans }}
+{{'%name% agrees with privacy policy.'|trans({'%name%': contactFormData.name}) }}
