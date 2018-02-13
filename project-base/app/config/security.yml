@@ -20,6 +20,7 @@ security:
       pattern: ^/(admin/|efconnect|elfinder)
       anonymous: ~
       provider: administrators
+      logout_on_user_change: true
       form_login:
         check_path: admin_login_check
         login_path: admin_login
@@ -40,6 +41,7 @@ security:
       pattern: ^/
       anonymous: ~
       provider: user_identities
+      logout_on_user_change: true
       form_login:
         check_path: front_login_check
         login_path: front_login

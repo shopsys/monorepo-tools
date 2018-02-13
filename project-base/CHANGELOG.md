@@ -48,6 +48,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - all inline calls of services changed to use FQN
     - services no longer required in services.yml have been removed
     - services instanced after DI container creation are set as synthetic
+- users and administrators are logged out of all the sessions except the current one on password change (this is required in Symfony 4) (@TomasLudvik)
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)
