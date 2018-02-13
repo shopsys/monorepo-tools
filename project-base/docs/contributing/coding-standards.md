@@ -1,7 +1,6 @@
 # Coding Standards
 
 In order to keep the codebase unified, we use automated tools for checking coding standards. These tools are parts of our package - [shopsys/coding-standards](https://github.com/shopsys/coding-standards/).
-In the package, there are [listed and described all the rules](https://github.com/shopsys/coding-standards/blob/rv-coding-standards-docs/docs/description-of-used-coding-standards-rules.md) that must be followed.
 
 You can run all the standards checks by calling
 ```

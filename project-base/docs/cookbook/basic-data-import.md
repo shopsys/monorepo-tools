@@ -334,7 +334,7 @@ class VatRepository
 **Warning: The method throws an exception when [`Vat`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/Vat.php) object is not found by given percent value.
 Do not forget to handle it (e.g. skip the product data processing and log the exception).**
 
-#### 3.7 - Implement method `getVatByPercent()` in [`VatFacade`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/VatRepository.php)
+#### 3.7 - Implement method `getVatByPercent()` in [`VatFacade`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/VatFacade.php)
 ```php
 // src/Shopsys/ShopBundle/Model/Pricing/Vat/VatFacade.php
 
@@ -392,7 +392,7 @@ for changes in all mapped entities and after time it consumes a huge amount of r
     - You should load any entity again after clearing identity map because any attempt to flush the old one will result in an exception.
 - Use streamed input for XML and JSON.
     - So you do not load huge files at once (can lead to memory overflow).
-- Store external source credentials in [`parameters.yml`](../../app/config/parameters.yml).
+- Store external source credentials in `app/config/parameters.yml`.
     - Storing credentials in local configuration instead of hard-coding them in source code prevents from accidental corrupting of production data.
 - Restrict editing of the transferred fields in administration.
     - At least, mark them as transferred to avoid confusion when an administrator changes the field value and then data import overrides the value.
