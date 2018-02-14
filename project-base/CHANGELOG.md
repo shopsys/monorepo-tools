@@ -50,6 +50,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - accepted [merge request](https://git.shopsys-framework.com/shopsys/shopsys-framework/merge_requests/27)
 - CurrentPromoCodeFacace: promo code is not searched in database if code is empty (@petr.kadlec)
 - CategoryRepository::getCategoriesWithVisibleChildren() checks visibility of children (@petr.kadlec)
+- added missing migration for privacy policy article (@MattCzerner)
 
 ### Removed
 - PHPStorm Inspect is no longer used for static analysis of source code (@TomasLudvik)
