@@ -106,8 +106,8 @@ class OrderPage extends AbstractPage
         $this->tester->fillFieldByName('order_personal_info_form[note]', $note);
     }
 
-    public function acceptTermsAndConditions()
+    public function acceptLegalConditions()
     {
-        $this->tester->checkOptionByLabel('I agree with terms and conditions');
+        $this->tester->checkOptionByLabel('I agree with terms and conditions and privacy policy.');
     }
 }

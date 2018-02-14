@@ -119,8 +119,8 @@ services:
     tags:
       - { name: form.type }
 
-  shopsys.shop.form.admin.terms_and_conditions.terms_and_conditions_settings_form_type:
-    class: Shopsys\ShopBundle\Form\Admin\TermsAndConditions\TermsAndConditionsSettingFormType
+  shopsys.shop.form.admin.legal_conditions.legal_conditions_settings_form_type:
+    class: Shopsys\ShopBundle\Form\Admin\LegalConditions\LegalConditionsSettingFormType
     tags:
       - { name: form.type }
 

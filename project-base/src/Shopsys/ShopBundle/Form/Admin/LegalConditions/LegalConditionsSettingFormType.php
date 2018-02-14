@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\TermsAndConditions;
+namespace Shopsys\ShopBundle\Form\Admin\LegalConditions;
 
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Symfony\Component\Form\AbstractType;
@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TermsAndConditionsSettingFormType extends AbstractType
+class LegalConditionsSettingFormType extends AbstractType
 {
     /**
      * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
@@ -31,6 +31,13 @@ class TermsAndConditionsSettingFormType extends AbstractType
 
         $builder
             ->add('termsAndConditionsArticle', ChoiceType::class, [
+                'required' => false,
+                'choices' => $articles,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'placeholder' => t('-- Choose article --'),
+            ])
+            ->add('privacyPolicyArticle', ChoiceType::class, [
                 'required' => false,
                 'choices' => $articles,
                 'choice_label' => 'name',

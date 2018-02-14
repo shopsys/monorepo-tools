@@ -41,10 +41,10 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase
     }
 
     /**
-     * @param bool $termsAndConditionsAgreement
+     * @param bool $legalConditionsAgreement
      * @return array
      */
-    private function getPersonalInfoFormData($termsAndConditionsAgreement)
+    private function getPersonalInfoFormData($legalConditionsAgreement)
     {
         $country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
         /* @var $country \Shopsys\ShopBundle\Model\Country\Country */
@@ -58,7 +58,7 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase
         $personalInfoFormData['city'] = 'test';
         $personalInfoFormData['postcode'] = '12345';
         $personalInfoFormData['country'] = $country->getId();
-        $personalInfoFormData['termsAndConditionsAgreement'] = $termsAndConditionsAgreement;
+        $personalInfoFormData['legalConditionsAgreement'] = $legalConditionsAgreement;
         $personalInfoFormData['newsletterSubscription'] = false;
 
         return $personalInfoFormData;
