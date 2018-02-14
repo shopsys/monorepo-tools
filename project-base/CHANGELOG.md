@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - overwriting the domain URL is necessary for Selenium acceptance tests running in Docker
 - LegalConditionsSetting: added privacy policy article selection (@stanoMilan)
     - customers need to agree with privacy policy while registring, sending contact form and completing order process
+- SubscriptionFormType: added required privacy policy agreement checkbox (@simara-svatopluk)
+- subscription form: added link to privacy policy agreement article (@simara-svatopluk)
+- NewsletterController now exports date of subscription to newsletter (@simara-svatopluk)
 
 ### Changed
 - cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)
@@ -34,6 +37,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - `postgres` container is created with a volume for data persistence (in `var/postgres-data`)
     - see documentation of [Installation Using Docker](docs/introduction/installation-using-docker.md) for details
 - default parameters in `parameters.yml.dist` and `parameters_test.yml.dist` are for Docker installation (instead of native) (@MattCzerner)
+- Front/NewsletterController: extracted duplicit rendering and add return typehints (@simara-svatopluk)
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)

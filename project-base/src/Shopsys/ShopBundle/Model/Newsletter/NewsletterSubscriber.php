@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Newsletter;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,11 +19,20 @@ class NewsletterSubscriber
     private $email;
 
     /**
-     * @param string $email
+     * @var DateTimeImmutable
+     *
+     * @ORM\Column(type="datetime_immutable", options={"default": "1970-01-01 00:00:00"})
      */
-    public function __construct($email)
+    private $createdAt;
+
+    /**
+     * @param string $email
+     * @param \DateTimeImmutable $createdAt
+     */
+    public function __construct(string $email, DateTimeImmutable $createdAt)
     {
         $this->email = $email;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -31,5 +41,13 @@ class NewsletterSubscriber
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
     }
 }

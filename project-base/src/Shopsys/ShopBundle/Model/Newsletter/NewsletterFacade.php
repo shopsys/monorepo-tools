@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Newsletter;
 
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
 
 class NewsletterFacade
@@ -30,7 +31,7 @@ class NewsletterFacade
     public function addSubscribedEmail($email)
     {
         if (!$this->newsletterRepository->existsSubscribedEmail($email)) {
-            $newsletterSubscriber = new NewsletterSubscriber($email);
+            $newsletterSubscriber = new NewsletterSubscriber($email, new DateTimeImmutable());
             $this->em->persist($newsletterSubscriber);
             $this->em->flush($newsletterSubscriber);
         }
