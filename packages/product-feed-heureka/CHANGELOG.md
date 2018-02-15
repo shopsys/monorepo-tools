@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- services.yml updated to Symfony 3.4 best practices
+
 ## [0.5.1] - 2017-10-06
 - names of Heureka categories are now cached by category ID in [`HeurekaFeedConfig`](src/HeurekaFeedConfig.php) (@PetrHeinz)
 

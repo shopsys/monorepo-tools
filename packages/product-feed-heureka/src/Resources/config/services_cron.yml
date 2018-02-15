@@ -1,5 +1,4 @@
 services:
   Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryCronModule:
-    class: Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryCronModule
     tags:
       - { name: shopsys.cron, hours: '3', minutes: '0' }
