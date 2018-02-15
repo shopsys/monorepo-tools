@@ -173,6 +173,9 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
+  Shopsys\FormTypesBundle\Domain\DomainIdsProviderInterface:
+    alias: Shopsys\ShopBundle\Component\Domain\Domain
+
   Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade:
     public: true
 
