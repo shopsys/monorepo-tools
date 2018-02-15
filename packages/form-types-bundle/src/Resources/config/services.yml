@@ -1,10 +1,8 @@
 services:
-  shopsys.form_types.multidomain:
-    class: Shopsys\FormTypesBundle\MultidomainType
-    tags:
-      - { name: form.type }
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
 
-  shopsys.form_types.yes_no:
-    class: Shopsys\FormTypesBundle\YesNoType
-    tags:
-      - { name: form.type }
+  Shopsys\FormTypesBundle\:
+    resource: '../../*'
