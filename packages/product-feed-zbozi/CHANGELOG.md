@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- services.yml updated to Symfony 3.4 best practices (@TomasLudvik)
+
 ## [0.4.2] - 2017-10-04
 ### Added
 - support for shopsys/plugin-interface 0.3.0 (@MattCzerner)
