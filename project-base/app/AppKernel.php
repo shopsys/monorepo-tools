@@ -40,8 +40,6 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
-            new Symplify\ControllerAutowire\SymplifyControllerAutowireBundle(),
-            new Symplify\DefaultAutowire\SymplifyDefaultAutowireBundle(),
             new VasekPurchart\ConsoleErrorsBundle\ConsoleErrorsBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(), // has to be loaded after FrameworkBundle and TwigBundle
             new Shopsys\ShopBundle\ShopsysShopBundle(), // must be loaded as last, because translations must overwrite other bundles

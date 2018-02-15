@@ -64,6 +64,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Removed
 - PHPStorm Inspect is no longer used for static analysis of source code (@TomasLudvik)
 - Phing targets standards-ci and standards-ci-diff because they were redundant to standards and standards-diff targets (@TomasLudvik)
+- deprecated packages `symplify/controller-autowire` and `symplify/default-autowire` (@TomasLudvik)
 
 ## [2.0.0-beta.20.0] - 2017-12-11
 ### Changed
