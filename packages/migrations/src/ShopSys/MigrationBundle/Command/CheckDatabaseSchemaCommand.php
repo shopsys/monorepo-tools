@@ -2,6 +2,7 @@
 
 namespace ShopSys\MigrationBundle\Command;
 
+use ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,7 +25,7 @@ class CheckDatabaseSchemaCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $databaseSchemaFacade = $this->getContainer()->get('shopsys.migration.component.doctrine.database_schema_facade');
+        $databaseSchemaFacade = $this->getContainer()->get(DatabaseSchemaFacade::class);
         /* @var $databaseSchemaFacade \ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade */
 
         $output->writeln('Checking database schema...');

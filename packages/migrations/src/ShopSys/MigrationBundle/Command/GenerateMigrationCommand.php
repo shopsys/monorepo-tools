@@ -2,6 +2,8 @@
 
 namespace ShopSys\MigrationBundle\Command;
 
+use ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade;
+use ShopSys\MigrationBundle\Component\Generator\GenerateMigrationsService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,10 +27,10 @@ class GenerateMigrationCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $databaseSchemaFacade = $this->getContainer()->get('shopsys.migration.component.doctrine.database_schema_facade');
+        $databaseSchemaFacade = $this->getContainer()->get(DatabaseSchemaFacade::class);
         /* @var $databaseSchemaFacade \ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade */
 
-        $generateMigrationsService = $this->getContainer()->get('shopsys.migration.component.generator.generate_migrations_service');
+        $generateMigrationsService = $this->getContainer()->get(GenerateMigrationsService::class);
         /* @var $generateMigrationsService \ShopSys\MigrationBundle\Component\Generator\GenerateMigrationsService */
 
         $output->writeln('Checking database schema...');

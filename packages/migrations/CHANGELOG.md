@@ -9,4 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - This Changelog (@TomasLudvik)
 
+### Changed
+- services.yml updated to Symfony 3.4 best practices (@TomasLudvik)
+
 [Unreleased]: https://github.com/shopsys/migrations/compare/v2.2.0...HEAD

@@ -4,6 +4,7 @@ namespace ShopSys\MigrationBundle\Command;
 
 use Doctrine\Bundle\MigrationsBundle\Command\DoctrineCommand;
 use Doctrine\DBAL\Migrations\Configuration\Configuration;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,7 +24,7 @@ class GetCountOfMigrationsToExecuteCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
+        $em = $this->getContainer()->get(EntityManagerInterface::class);
         /* @var $em \Doctrine\ORM\EntityManager */
         $migrationsConfiguration = new Configuration($em->getConnection());
 
