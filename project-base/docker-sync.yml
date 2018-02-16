@@ -3,3 +3,6 @@ syncs:
     shopsys-framework-sync:
         src: './'
         sync_excludes: ['docker/']
+
+    shopsys-framework-postgres-data-sync:
+        src: './var/postgres-data/'

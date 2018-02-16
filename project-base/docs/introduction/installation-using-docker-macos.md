@@ -21,8 +21,10 @@ cp docker/conf/docker-compose-mac.yml.dist docker-compose.yml
 ```
 
 ### 3. Compose Docker container
-On MacOS you need to synchronize folders using docker-sync
+On MacOS you need to synchronize folders using docker-sync.
+Before starting synchronization you need to create a directory for persisting Postgres data so you won't lose it when the container is shut down.
 ```
+mkdir -p var/postgres-data
 docker-sync start
 ```
 
