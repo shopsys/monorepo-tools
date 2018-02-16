@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `services_command.yml` to set Commands as services (@TomasLudvik)
 - [docker-common-problems.md](docs/docker/docker-common-problems.md): added to help developers with common problems that occurs using docker for development(@MattCzerner)
 - Newsletter subscriber is distinguished by domain (@stanoMilan)
+    - Admin: E-mail newsletter now exports e-mails to csv for each domain separatedly
 
 ### Changed
 - cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)

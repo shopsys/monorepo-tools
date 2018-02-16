@@ -39,10 +39,11 @@ class NewsletterFacade
     }
 
     /**
+     * @param int $domainId
      * @return \Doctrine\ORM\Internal\Hydration\IterableResult
      */
-    public function getAllEmailsDataIterator()
+    public function getAllEmailsDataIteratorByDomainId($domainId)
     {
-        return $this->newsletterRepository->getAllEmailsDataIterator();
+        return $this->newsletterRepository->getAllEmailsDataIteratorByDomainId($domainId);
     }
 }

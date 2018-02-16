@@ -36,13 +36,16 @@ class NewsletterRepository
     }
 
     /**
+     * @param int $domainId
      * @return \Doctrine\ORM\Internal\Hydration\IterableResult
      */
-    public function getAllEmailsDataIterator()
+    public function getAllEmailsDataIteratorByDomainId($domainId)
     {
         $query = $this->getNewsletterSubscriberRepository()
             ->createQueryBuilder('ns')
             ->select('ns.email, ns.createdAt')
+            ->where('ns.domainId = :domainId')
+            ->setParameter('domainId', $domainId)
             ->getQuery();
 
         return $query->iterate(null, AbstractQuery::HYDRATE_SCALAR);

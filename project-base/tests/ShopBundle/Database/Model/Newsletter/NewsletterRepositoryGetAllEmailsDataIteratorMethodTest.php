@@ -10,6 +10,8 @@ use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class NewsletterRepositoryGetAllEmailsDataIteratorMethodTest extends DatabaseTestCase
 {
+    const FIRST_DOMAIN_ID = 1;
+
     /**
      * @var NewsletterRepository
      */
@@ -23,15 +25,15 @@ class NewsletterRepositoryGetAllEmailsDataIteratorMethodTest extends DatabaseTes
 
     public function testEmpty(): void
     {
-        $iterator = $this->repository->getAllEmailsDataIterator();
+        $iterator = $this->repository->getAllEmailsDataIteratorByDomainId(self::FIRST_DOMAIN_ID);
         Assert::assertFalse($iterator->next());
     }
 
     public function testOneItem(): void
     {
-        $this->createNewsletterSubscriber('no-reply@shopsys.com', '2018-02-05 16:14:28', 1);
+        $this->createNewsletterSubscriber('no-reply@shopsys.com', '2018-02-05 16:14:28', self::FIRST_DOMAIN_ID);
 
-        $iterator = $this->repository->getAllEmailsDataIterator();
+        $iterator = $this->repository->getAllEmailsDataIteratorByDomainId(self::FIRST_DOMAIN_ID);
         $firstRow = $iterator->next()[0];
 
         $expected = [

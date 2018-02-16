@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
 use SplFileObject;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -15,9 +16,15 @@ class NewsletterController extends AdminBaseController
      */
     private $newsletterFacade;
 
-    public function __construct(NewsletterFacade $newsletterFacade)
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     */
+    private $adminDomainTabsFacade;
+
+    public function __construct(NewsletterFacade $newsletterFacade, AdminDomainTabsFacade $adminDomainTabsFacade)
     {
         $this->newsletterFacade = $newsletterFacade;
+        $this->adminDomainTabsFacade = $adminDomainTabsFacade;
     }
 
     /**
@@ -37,17 +44,20 @@ class NewsletterController extends AdminBaseController
         $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
         $response->headers->set('Content-Disposition', 'attachment; filename="emails.csv"');
         $response->setCallback(function () {
-            $this->streamCsvExport();
+            $this->streamCsvExport($this->adminDomainTabsFacade->getSelectedDomainId());
         });
 
         return $response;
     }
 
-    private function streamCsvExport()
+    /**
+     * @param int $domainId
+     */
+    private function streamCsvExport($domainId)
     {
         $output = new SplFileObject('php://output', 'w+');
 
-        $emailsDataIterator = $this->newsletterFacade->getAllEmailsDataIterator();
+        $emailsDataIterator = $this->newsletterFacade->getAllEmailsDataIteratorByDomainId($domainId);
         foreach ($emailsDataIterator as $emailData) {
             $email = $emailData[0]['email'];
             $createdAt = $emailData[0]['createdAt'];
