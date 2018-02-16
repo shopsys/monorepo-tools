@@ -5,6 +5,17 @@
 
 {% block main_content %}
     {{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
+
+    {{ form_start(quickSearchForm) }}
+    <div class="wrap-border form-inline">
+        {{ form_widget(quickSearchForm.text) }}
+        {{ form_widget(quickSearchForm.submit, { label: 'Search [verb]'|trans, full_name: ''}) }}
+    </div>
+    {{ form_end(quickSearchForm) }}
+
+
+    {{ gridView.render() }}
+
     <a href="{{ url('admin_newsletter_export') }}" class="btn">
         {{ 'Export email list in CSV format'|trans }}
     </a>

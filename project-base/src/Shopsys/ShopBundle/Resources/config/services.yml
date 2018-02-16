@@ -535,6 +535,9 @@ services:
   Shopsys\ShopBundle\Model\Order\OrderFacade:
     public: true
 
+  Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade:
+    public: true
+
   Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory:
     public: true
 

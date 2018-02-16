@@ -112,7 +112,7 @@
           route: admin_bestsellingproduct_detail
           visible: false
     - label: 'E-mail newsletter'
-      route: admin_newsletter_index
+      route: admin_newsletter_list
 
 - label: 'Administrators'
   route: admin_administrator_list
