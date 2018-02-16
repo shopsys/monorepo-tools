@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ShopSys Framework" default="build">
+<project name="ShopSys Framework" default="list">
 
     <property file="${project.basedir}/build/build.local.properties" />
 
@@ -292,6 +292,13 @@
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="bin/console" />
             <arg value="shopsys:image:demo" />
+        </exec>
+    </target>
+
+    <target name="list" description="Hidden target to make Phing list all targets when called without an argument." hidden="true">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="phing" />
+            <arg value="-l" />
         </exec>
     </target>
 

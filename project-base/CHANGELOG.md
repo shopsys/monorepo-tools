@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - services no longer required in services.yml have been removed
     - services instanced after DI container creation are set as synthetic
 - users and administrators are logged out of all the sessions except the current one on password change (this is required in Symfony 4) (@TomasLudvik)
+- running Phing without parameter now shows list of available targets instead of building application (@TomasLudvik)
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)
