@@ -27,11 +27,12 @@ class NewsletterRepository
 
     /**
      * @param string $email
+     * @param int $domainId
      * @return bool
      */
-    public function existsSubscribedEmail($email)
+    public function existsSubscribedEmail($email, $domainId)
     {
-        return $this->getNewsletterSubscriberRepository()->find($email) !== null;
+        return $this->getNewsletterSubscriberRepository()->findOneBy(['email' => $email, 'domainId' => $domainId]) !== null;
     }
 
     /**

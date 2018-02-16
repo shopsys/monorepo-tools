@@ -45,6 +45,6 @@ class NewsletterFacadeTest extends TestCase
             ->expects($this->once())
             ->method('flush');
 
-        $this->facade->addSubscribedEmail('no-reply@shopsys.com');
+        $this->facade->addSubscribedEmail('no-reply@shopsys.com', 1);
     }
 }

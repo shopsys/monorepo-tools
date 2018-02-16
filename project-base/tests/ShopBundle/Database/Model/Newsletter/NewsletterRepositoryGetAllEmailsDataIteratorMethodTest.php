@@ -29,7 +29,7 @@ class NewsletterRepositoryGetAllEmailsDataIteratorMethodTest extends DatabaseTes
 
     public function testOneItem(): void
     {
-        $this->createNewsletterSubscriber('no-reply@shopsys.com', '2018-02-05 16:14:28');
+        $this->createNewsletterSubscriber('no-reply@shopsys.com', '2018-02-05 16:14:28', 1);
 
         $iterator = $this->repository->getAllEmailsDataIterator();
         $firstRow = $iterator->next()[0];
@@ -45,10 +45,11 @@ class NewsletterRepositoryGetAllEmailsDataIteratorMethodTest extends DatabaseTes
     /**
      * @param string $email
      * @param string $datetime
+     * @param int $domainId
      */
-    private function createNewsletterSubscriber(string $email, string $datetime): void
+    private function createNewsletterSubscriber(string $email, string $datetime, $domainId): void
     {
-        $newsletterSubscriber = new NewsletterSubscriber($email, new DateTimeImmutable($datetime));
+        $newsletterSubscriber = new NewsletterSubscriber($email, new DateTimeImmutable($datetime), $domainId);
         $em = $this->getEntityManager();
         $em->persist($newsletterSubscriber);
         $em->flush($newsletterSubscriber);

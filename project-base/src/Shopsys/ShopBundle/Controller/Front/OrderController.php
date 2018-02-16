@@ -203,7 +203,7 @@ class OrderController extends FrontBaseController
                 $order = $this->orderFacade->createOrderFromFront($orderData);
 
                 if ($frontOrderFormData->newsletterSubscription) {
-                    $this->newsletterFacade->addSubscribedEmail($frontOrderFormData->email);
+                    $this->newsletterFacade->addSubscribedEmail($frontOrderFormData->email, $this->domain->getId());
                 }
 
                 $orderFlow->reset();

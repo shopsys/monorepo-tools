@@ -49,7 +49,7 @@ class NewsletterController extends FrontBaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $email = $form->getData()['email'];
-            $this->newsletterFacade->addSubscribedEmail($email);
+            $this->newsletterFacade->addSubscribedEmail($email, $this->domain->getId());
         }
 
         return $this->renderSubscription($form);
