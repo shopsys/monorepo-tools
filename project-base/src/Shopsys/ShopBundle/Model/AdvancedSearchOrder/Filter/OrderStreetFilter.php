@@ -53,7 +53,7 @@ class OrderStreetFilter implements AdvancedSearchFilterInterface
             if ($ruleData->value === null || $ruleData->value == '') {
                 $searchValue = '%';
             } else {
-                $searchValue = '%' . DatabaseSearching::getLikeSearchString($ruleData->value) . '%';
+                $searchValue = DatabaseSearching::getFullTextLikeSearchString($ruleData->value);
             }
             $dqlOperator = $this->getContainsDqlOperator($ruleData->operator);
             $parameterName = 'city_' . $index;

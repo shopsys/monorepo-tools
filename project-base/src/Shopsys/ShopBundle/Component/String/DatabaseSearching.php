@@ -16,4 +16,13 @@ class DatabaseSearching
             $string
         );
     }
+
+    /**
+     * @param string|null $string
+     * @return string
+     */
+    public static function getFullTextLikeSearchString($string)
+    {
+        return '%' . self::getLikeSearchString($string) . '%';
+    }
 }

@@ -145,7 +145,7 @@ class OrderRepository
                         OR
                         NORMALIZE(u.email) LIKE NORMALIZE(:text)
                     )');
-            $querySearchText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
+            $querySearchText = DatabaseSearching::getFullTextLikeSearchString($quickSearchData->text);
             $queryBuilder->setParameter('text', $querySearchText);
         }
 

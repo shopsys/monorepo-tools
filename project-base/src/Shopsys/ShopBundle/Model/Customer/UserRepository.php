@@ -142,7 +142,7 @@ class UserRepository
                         OR
                         NORMALIZE(ba.telephone) LIKE :text
                     )');
-            $querySearchText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
+            $querySearchText = DatabaseSearching::getFullTextLikeSearchString($quickSearchData->text);
             $queryBuilder->setParameter('text', $querySearchText);
         }
 
