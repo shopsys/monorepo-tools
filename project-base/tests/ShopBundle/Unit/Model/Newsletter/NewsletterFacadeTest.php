@@ -47,4 +47,25 @@ class NewsletterFacadeTest extends TestCase
 
         $this->newsletterFacade->addSubscribedEmail('no-reply@shopsys.com', 1);
     }
+
+    public function testDeleteSubscribedEmail(): void
+    {
+        $newsletterSubscriberInstance = $this->createMock(NewsletterSubscriber::class);
+
+        $this->newsletterRepository
+            ->expects($this->any())
+            ->method('getNewsletterSubscriberById')
+            ->willReturn($newsletterSubscriberInstance);
+
+        $this->em
+            ->expects($this->once())
+            ->method('remove')
+            ->with($this->isInstanceOf(NewsletterSubscriber::class));
+
+        $this->em
+            ->expects($this->once())
+            ->method('flush');
+
+        $this->newsletterFacade->deleteById(1);
+    }
 }
