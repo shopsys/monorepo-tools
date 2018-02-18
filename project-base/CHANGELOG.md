@@ -61,6 +61,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - all calls of Form::isValid() are called only on submitted forms in order to prevent deprecated call (@TomasLudvik)
 - symlink so root/bin acts like root/project-base/bin (@TomasLudvik) 
 - all commands are now services, that are lazy loaded with autowired dependencies (@TomasLudvik) 
+- NewsletterFacadeTest: renamed properties to match class name (@MattCzerner)
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)
