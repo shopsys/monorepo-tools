@@ -5,7 +5,7 @@ services:
     public: false
 
   Shopsys\ProductFeed\GoogleBundle\:
-    resource: '../*'
+    resource: '../../*'
 
   Shopsys\ProductFeed\GoogleBundle\GoogleFeedConfig:
     tags:
