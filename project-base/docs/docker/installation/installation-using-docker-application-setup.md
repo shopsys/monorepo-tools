@@ -16,7 +16,7 @@ docker exec -it shopsys-framework-php-fpm bash
 composer install
 ```
 
-Composer will prompt you to set parameters ([description of parameters](installation-guide.md#2-install-dependencies-and-configure-parameters)).
+Composer will prompt you to set parameters ([description of parameters](../../introduction/installation-guide.md#2-install-dependencies-and-configure-parameters)).
 The default parameters are currently set for application running in Docker so you can just use the defaults.
 
 Only exception is the `secret` parameter - you should input a random string to be used for security purposes.

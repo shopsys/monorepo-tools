@@ -12,7 +12,7 @@ cd shopsys-framework
 ```
 
 ### 2. Create docker-compose.yml file
-Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../docker/conf/docker-compose.yml.dist).
+Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../../docker/conf/docker-compose.yml.dist).
 ```
 cp docker/conf/docker-compose.yml.dist docker-compose.yml
 ```
