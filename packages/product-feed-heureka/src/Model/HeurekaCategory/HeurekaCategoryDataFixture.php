@@ -4,7 +4,6 @@ namespace Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory;
 
 use Shopsys\Plugin\PluginDataFixtureInterface;
 use Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider;
-use Shopsys\ProductFeed\HeurekaBundle\ShopsysProductFeedHeurekaBundle;
 
 class HeurekaCategoryDataFixture implements PluginDataFixtureInterface
 {

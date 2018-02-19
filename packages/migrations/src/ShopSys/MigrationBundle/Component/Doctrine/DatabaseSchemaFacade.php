@@ -5,7 +5,6 @@ namespace ShopSys\MigrationBundle\Component\Doctrine;
 use Doctrine\DBAL\Schema\Comparator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
-use ShopSys\MigrationBundle\Component\Doctrine\SchemaDiffFilter;
 
 class DatabaseSchemaFacade
 {
