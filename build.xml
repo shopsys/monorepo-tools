@@ -9,4 +9,126 @@
     <import file="project-base/build-dev.xml" />
     <import file="project-base/build.xml" />
 
+    <target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,phpstan,twig-lint,yaml-lint,eslint-check,standards-packages" description="Checks coding standards in both project-base and packages."/>
+    <target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages" description="Checks coding standards on changed files in project-base and all files in packages."/>
+
+    <target name="standards-fix" description="Automatically fixes some coding standards violations in both project-base and packages.">
+        <phingcall target="phpcs-fixer-fix" />
+        <trycatch>
+            <try>
+                <phingcall target="phpcs" />
+            </try>
+            <catch>
+                <phingcall target="phpcbf" />
+            </catch>
+        </trycatch>
+        <phingcall target="eslint-fix" />
+        <phingcall target="standards-fix-packages" />
+    </target>
+
+    <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files in project-base and all files in packages.">
+        <phingcall target="phpcs-fixer-fix-diff" />
+        <trycatch>
+            <try>
+                <phingcall target="phpcs-diff" />
+            </try>
+            <catch>
+                <phingcall target="phpcbf-diff" />
+            </catch>
+        </trycatch>
+        <phingcall target="eslint-fix-diff" />
+        <phingcall target="standards-fix-packages" />
+    </target>
+
+    <target name="standards-packages" description="Checks coding standards in all packages.">
+        <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg path="./packages/*/src"/>
+            <arg path="./packages/*/tests" />
+        </exec>
+        <exec executable="${path.phpcs-fixer.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="fix" />
+            <arg value="--config=${path.phpcs-fixer.configuration}"/>
+            <arg value="--dry-run" />
+            <arg value="--verbose" />
+            <arg value="--diff" />
+            <arg path="./packages/*/src"/>
+            <arg path="./packages/*/tests" />
+        </exec>
+        <exec executable="${path.phpcs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="--standard=${path.phpcs.ruleset}"/>
+            <arg value="--extensions=php" />
+            <arg value="--encoding=utf-8" />
+            <arg value="--tab-width=4" />
+            <arg value="-sp" />
+            <arg path="./packages/*/src"/>
+            <arg path="./packages/*/tests" />
+            <arg value="--ignore=./packages/coding-standards" />
+        </exec>
+        <exec executable="${path.phpmd.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg path="./packages"/>
+            <arg value="text" />
+            <arg value="${path.phpmd.ruleset}" />
+            <arg value="--extensions=php" />
+        </exec>
+    </target>
+
+    <target name="standards-fix-packages" description="Automatically fixes some coding standards violations in all packages.">
+        <exec executable="${path.phpcs-fixer.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="fix" />
+            <arg value="--config=${path.phpcs-fixer.configuration}"/>
+            <arg value="--verbose" />
+            <arg path="./packages/*/src"/>
+            <arg path="./packages/*/tests" />
+        </exec>
+        <trycatch>
+            <try>
+                <exec executable="${path.phpcs.executable}" logoutput="true" passthru="true" checkreturn="true">
+                    <arg value="--standard=${path.phpcs.ruleset}"/>
+                    <arg value="--extensions=php" />
+                    <arg value="--encoding=utf-8" />
+                    <arg value="--tab-width=4" />
+                    <arg value="-sp" />
+                    <arg path="./packages/*/src"/>
+                    <arg path="./packages/*/tests" />
+                    <arg value="--ignore=./packages/coding-standards" />
+                </exec>
+            </try>
+            <catch>
+                <exec executable="${path.phpcbf.executable}" logoutput="true" passthru="true" checkreturn="true">
+                    <arg value="--standard=${path.phpcs.ruleset}"/>
+                    <arg value="--extensions=php"/>
+                    <arg value="--encoding=utf-8"/>
+                    <arg value="--tab-width=4"/>
+                    <arg value="-p" />
+                    <arg path="./packages/*/src"/>
+                    <arg path="./packages/*/tests" />
+                    <arg value="--ignore=./packages/coding-standards" />
+                </exec>
+            </catch>
+        </trycatch>
+    </target>
+
+    <target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-smoke,tests-packages" description="Runs unit, database and smoke tests on a newly built test database and runs tests of all packages."/>
+
+    <target name="tests-packages" description="Runs tests of packages.">
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${path.packages}/product-feed-google/tests"/>
+        </exec>
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${path.packages}/product-feed-heureka/tests"/>
+        </exec>
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${path.packages}/product-feed-heureka-delivery/tests"/>
+        </exec>
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${path.packages}/product-feed-zbozi/tests"/>
+        </exec>
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${path.packages}/http-smoke-testing/tests"/>
+        </exec>
+        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${path.packages}/coding-standards/tests"/>
+        </exec>
+    </target>
+
 </project>
