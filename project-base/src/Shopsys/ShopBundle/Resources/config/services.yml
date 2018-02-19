@@ -355,7 +355,7 @@ services:
 
   Shopsys\ShopBundle\Component\Sitemap\SitemapListener:
     tags:
-      - { name: presta.sitemap.listener }
+      - { name: 'kernel.event_subscriber', priority: 100 }
 
   Shopsys\ShopBundle\Component\String\HashGenerator:
     public: true

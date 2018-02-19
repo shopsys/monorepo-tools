@@ -4,15 +4,15 @@ namespace Shopsys\ShopBundle\Component\Sitemap;
 
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
 use Presta\SitemapBundle\Service\AbstractGenerator;
-use Presta\SitemapBundle\Service\SitemapListenerInterface;
 use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class SitemapListener implements SitemapListenerInterface
+class SitemapListener implements EventSubscriberInterface
 {
     const PRIORITY_HOMEPAGE = 1;
     const PRIORITY_CATEGORIES = 0.8;
@@ -52,6 +52,16 @@ class SitemapListener implements SitemapListenerInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            SitemapPopulateEvent::ON_SITEMAP_POPULATE => 'populateSitemap',
+        ];
+    }
+
+    /**
      * @param \Presta\SitemapBundle\Event\SitemapPopulateEvent $event
      */
     public function populateSitemap(SitemapPopulateEvent $event)
@@ -59,7 +69,7 @@ class SitemapListener implements SitemapListenerInterface
         $section = $event->getSection();
         $domainId = (int)$section;
 
-        $generator = $event->getGenerator();
+        $generator = $event->getUrlContainer();
         $domainConfig = $this->domain->getDomainConfigById($domainId);
 
         $this->addHomepageUrl($generator, $domainConfig, $section, self::PRIORITY_HOMEPAGE);

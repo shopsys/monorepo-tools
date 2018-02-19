@@ -78,7 +78,7 @@
         "jms/translation-bundle": "1.3.2",
         "phing/phing": "2.16.0",
         "phpunit/phpunit": "5.7.25",
-        "presta/sitemap-bundle": "1.4.2",
+        "presta/sitemap-bundle": "^1.5.2",
         "prezent/doctrine-translatable-bundle": "dev-rise-locale-listener-priority#09863c2",
         "sensio/distribution-bundle": "5.0.21",
         "sensio/framework-extra-bundle": "3.0.28",
