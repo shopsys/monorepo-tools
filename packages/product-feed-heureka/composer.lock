@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "80a7436a60061ab038110851670ad4b2",
+    "content-hash": "de9f6dd493ed56c358d5ed95cea31271",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -394,16 +394,16 @@
         },
         {
             "name": "shopsys/form-types-bundle",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/form-types-bundle.git",
-                "reference": "30185a5cff844c4d35908eff93f64dae4ce3cefd"
+                "reference": "d3f5271c1482db0df772eade942d42a882e66ddd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/form-types-bundle/zipball/30185a5cff844c4d35908eff93f64dae4ce3cefd",
-                "reference": "30185a5cff844c4d35908eff93f64dae4ce3cefd",
+                "url": "https://api.github.com/repos/shopsys/form-types-bundle/zipball/d3f5271c1482db0df772eade942d42a882e66ddd",
+                "reference": "d3f5271c1482db0df772eade942d42a882e66ddd",
                 "shasum": ""
             },
             "require": {
@@ -440,7 +440,7 @@
                 "Shopsys Framework",
                 "form"
             ],
-            "time": "2017-08-17T11:00:19+00:00"
+            "time": "2018-02-19T16:50:22+00:00"
         },
         {
             "name": "shopsys/plugin-interface",
@@ -4276,7 +4276,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.0"
+        "php": "^7.0",
+        "ext-simplexml": "*"
     },
     "platform-dev": []
 }

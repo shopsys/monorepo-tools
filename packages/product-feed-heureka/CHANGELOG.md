@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.1] - 2018-02-19
+### Changed
+- updated package shopsys/form-types-bundle to version 0.2.0
+
 ## [0.6.0] - 2018-02-19
 ### Changed
 - services.yml updated to Symfony 3.4 best practices
@@ -76,7 +80,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Extracted Heureka product feed plugin from [Shopsys Framework](http://www.shopsys-framework.com/) (@PetrHeinz)
 - `.travis.yml` file with Travis CI configuration (@PetrHeinz)
 
-[Unreleased]: https://github.com/shopsys/product-feed-heureka/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/shopsys/product-feed-heureka/compare/v0.6.1...HEAD
+[0.6.1]: https://github.com/shopsys/product-feed-heureka/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/shopsys/product-feed-heureka/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/shopsys/product-feed-heureka/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/shopsys/product-feed-heureka/compare/v0.4.2...v0.5.0
