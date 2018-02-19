@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - subscription form: added link to privacy policy agreement article (@simara-svatopluk)
 - NewsletterController now exports date of subscription to newsletter (@simara-svatopluk)
 - `services_command.yml` to set Commands as services (@TomasLudvik)
+- [docker-common-problems.md](docs/docker/docker-common-problems.md): added to help developers with common problems that occurs using docker for development(@MattCzerner)
 
 ### Changed
 - cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)
