@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.0] - 2018-02-19
 ### Added
 - This Changelog (@vitek-rostislav)
 - [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
@@ -21,4 +22,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - YesNoType
 - `.travis.yml` file with Travis CI configuration (@PetrHeinz)
 
-[Unreleased]: https://github.com/shopsys/form-types-bundle/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/shopsys/form-types-bundle/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/shopsys/form-types-bundle/compare/v0.1.0...v0.2.0
