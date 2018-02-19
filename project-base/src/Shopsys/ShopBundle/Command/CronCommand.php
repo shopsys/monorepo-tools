@@ -80,8 +80,6 @@ class CronCommand extends ContainerAwareCommand
             if ($runAllModules) {
                 $cronFacade->runScheduledModules();
             } else {
-                // Service IDs in DIC are converted to lower case by Symfony
-                $requestedModuleServiceId = strtolower($requestedModuleServiceId);
                 $cronFacade->runModuleByServiceId($requestedModuleServiceId);
             }
             $mutex->releaseLock();
