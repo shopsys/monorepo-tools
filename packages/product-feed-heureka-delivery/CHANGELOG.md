@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.0] - 2018-02-19
 ### Changed
 - services.yml updated to Symfony 3.4 best practices (@TomasLudvik)
 
@@ -45,7 +46,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Extracted Heureka product delivery feed plugin from [Shopsys Framework](http://www.shopsys-framework.com/) (@vitek-rostislav)
 - `.travis.yml` file with Travis CI configuration (@vitek-rostislav)
 
-[Unreleased]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.2...v0.3.0
 [0.2.1]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.1.1...v0.2.0
