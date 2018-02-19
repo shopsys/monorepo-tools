@@ -135,7 +135,7 @@ class MailController extends AdminBaseController
         $form = $this->createForm(AllMailTemplatesFormType::class, $allMailTemplatesData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->mailTemplateFacade->saveMailTemplatesData(
                 $allMailTemplatesData->getAllTemplates(),
                 $allMailTemplatesData->domainId
@@ -171,7 +171,7 @@ class MailController extends AdminBaseController
         $form = $this->createForm(MailSettingFormType::class, $mailSettingData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $mailSettingData = $form->getData();
 
             $this->mailSettingFacade->setMainAdminMail($mailSettingData['email'], $selectedDomainId);

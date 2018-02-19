@@ -146,7 +146,7 @@ class VatController extends AdminBaseController
         $form = $this->createForm(VatSettingsFormType::class, $vatSettingsFormData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $vatSettingsFormData = $form->getData();
 
             try {

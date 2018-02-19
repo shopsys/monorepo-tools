@@ -79,7 +79,7 @@ class BrandController extends AdminBaseController
         $form = $this->createForm(BrandEditFormType::class, $brandEditData, ['brand' => $brand]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->brandFacade->edit($id, $brandEditData);
 
             $this->getFlashMessageSender()
@@ -148,7 +148,7 @@ class BrandController extends AdminBaseController
         $form = $this->createForm(BrandEditFormType::class, new BrandEditData(), ['brand' => null]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $brandData = $form->getData();
 
             $brand = $this->brandFacade->create($brandData);

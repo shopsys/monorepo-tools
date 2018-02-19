@@ -74,7 +74,7 @@ class TransportController extends AdminBaseController
         $form = $this->createForm(TransportEditFormType::class, $transportEditData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $transport = $this->transportFacade->create($form->getData());
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -110,7 +110,7 @@ class TransportController extends AdminBaseController
         $form = $this->createForm(TransportEditFormType::class, $transportEditData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->transportFacade->edit($transport, $transportEditData);
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(

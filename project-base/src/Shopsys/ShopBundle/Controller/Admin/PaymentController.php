@@ -74,7 +74,7 @@ class PaymentController extends AdminBaseController
         $form = $this->createForm(PaymentEditFormType::class, $paymentEditData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $payment = $this->paymentFacade->create($paymentEditData);
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -110,7 +110,7 @@ class PaymentController extends AdminBaseController
         $form = $this->createForm(PaymentEditFormType::class, $paymentEditData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->paymentFacade->edit($payment, $paymentEditData);
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(

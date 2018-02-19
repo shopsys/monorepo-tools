@@ -42,7 +42,7 @@ class CookiesController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $cookiesArticle = $form->getData()['cookiesArticle'];
 
             $this->cookiesFacade->setCookiesArticleOnDomain(

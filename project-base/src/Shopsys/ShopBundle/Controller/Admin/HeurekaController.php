@@ -54,7 +54,7 @@ class HeurekaController extends AdminBaseController
             $form = $this->createForm(HeurekaShopCertificationFormType::class, $heurekaShopCertificationData);
             $form->handleRequest($request);
 
-            if ($form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
                 $heurekaShopCertificationData = $form->getData();
 
                 $this->heurekaSetting->setApiKeyForDomain($heurekaShopCertificationData['heurekaApiKey'], $domainId);

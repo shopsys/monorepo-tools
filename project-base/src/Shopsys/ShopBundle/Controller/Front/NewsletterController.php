@@ -47,7 +47,7 @@ class NewsletterController extends FrontBaseController
         $form = $this->createSubscriptionForm();
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $email = $form->getData()['email'];
             $this->newsletterFacade->addSubscribedEmail($email);
         }
@@ -85,7 +85,7 @@ class NewsletterController extends FrontBaseController
 
         return $this->render('@ShopsysShop/Front/Inline/Newsletter/subscription.html.twig', [
             'form' => $form->createView(),
-            'success' => $form->isValid(),
+            'success' => $form->isSubmitted() && $form->isValid(),
             'privacyPolicyArticle' => $privacyPolicyArticle,
         ]);
     }

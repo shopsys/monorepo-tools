@@ -127,7 +127,7 @@ class CurrencyController extends AdminBaseController
         $form = $this->createForm(CurrencySettingsFormType::class, $currencySettingsFormData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $currencySettingsFormData = $form->getData();
 
             $this->currencyFacade->setDefaultCurrency($currencySettingsFormData['defaultCurrency']);

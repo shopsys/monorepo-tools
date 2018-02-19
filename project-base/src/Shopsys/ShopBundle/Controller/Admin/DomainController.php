@@ -116,7 +116,7 @@ class DomainController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             try {
                 if (count($form->getData()[DomainFormType::FIELD_ICON]) !== 0) {
                     $iconName = reset($form->getData()[DomainFormType::FIELD_ICON]);

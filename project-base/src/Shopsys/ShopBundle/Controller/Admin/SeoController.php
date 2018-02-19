@@ -45,7 +45,7 @@ class SeoController extends AdminBaseController
         $form = $this->createForm(SeoSettingFormType::class, $seoSettingData, ['domain_id' => $domainId]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $seoSettingData = $form->getData();
 
             $this->seoSettingFacade->setTitleMainPage($seoSettingData['title'], $domainId);

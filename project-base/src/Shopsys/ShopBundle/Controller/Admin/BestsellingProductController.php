@@ -81,7 +81,7 @@ class BestsellingProductController extends AdminBaseController
         $form = $this->createForm(BestsellingProductFormType::class, ['products' => $products]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $newProducts = $form->getData()['products'];
 
             $this->manualBestsellingProductFacade->edit($category, $domainId, $newProducts);

@@ -46,7 +46,7 @@ class LegalConditionsController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
             $this->legalConditionsFacade->setTermsAndConditions($formData['termsAndConditionsArticle'], $domainId);

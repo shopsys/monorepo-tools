@@ -93,7 +93,7 @@ class SliderController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $sliderItem = $this->sliderItemFacade->create($form->getData());
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -132,7 +132,7 @@ class SliderController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->sliderItemFacade->edit($id, $sliderItemData);
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(

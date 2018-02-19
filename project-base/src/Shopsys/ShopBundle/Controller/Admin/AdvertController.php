@@ -83,7 +83,7 @@ class AdvertController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->advertFacade->edit($id, $advertData);
 
             $this->getFlashMessageSender()
@@ -176,7 +176,7 @@ class AdvertController extends AdminBaseController
         $form = $this->createForm(AdvertFormType::class, $advertData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $advertData = $form->getData();
 
             $advert = $this->advertFacade->create($advertData);

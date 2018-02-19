@@ -121,7 +121,7 @@ class CustomerController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->customerFacade->editByAdmin($id, $customerData);
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -218,7 +218,7 @@ class CustomerController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $customerData = $form->getData();
             $user = $this->customerFacade->create($customerData);
 

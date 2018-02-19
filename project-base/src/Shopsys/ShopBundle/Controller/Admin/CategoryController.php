@@ -72,7 +72,7 @@ class CategoryController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->categoryFacade->edit($id, $categoryData);
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -110,7 +110,7 @@ class CategoryController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $categoryData = $form->getData();
 
             $category = $this->categoryFacade->create($categoryData);

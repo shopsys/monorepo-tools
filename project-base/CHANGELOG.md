@@ -52,7 +52,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - running Phing without parameter now shows list of available targets instead of building application (@TomasLudvik)
 - updated presta/sitemap-bundle to version 1.5.2 in order to avoid deprecated calls (@TomasLudvik)
  - updated SitemapListener to avoid using of deprecated SitemapListenerInterface
-- updated symfony/swiftmailer-bundle to version 3.2.0 in order to fix deprecated calls (@TomasLudvik) 
+- updated symfony/swiftmailer-bundle to version 3.2.0 in order to fix deprecated calls (@TomasLudvik)
+- all calls of Fom::isValid() are called only on submitted forms in order to prevent deprecated call (@TomasLudvik) 
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)

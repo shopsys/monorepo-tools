@@ -70,7 +70,7 @@ class CustomerController extends FrontBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $customerData = $form->getData();
 
             $this->customerFacade->editByCustomer($user->getId(), $customerData);

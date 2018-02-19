@@ -50,7 +50,7 @@ class ScriptController extends AdminBaseController
         $form = $this->createForm(ScriptFormType::class, new ScriptData());
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $scriptData = $form->getData();
 
             $script = $this->scriptFacade->create($scriptData);
@@ -87,7 +87,7 @@ class ScriptController extends AdminBaseController
         $form = $this->createForm(ScriptFormType::class, $scriptData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $scriptData = $form->getData();
 
             $script = $this->scriptFacade->edit($scriptId, $scriptData);
@@ -171,7 +171,7 @@ class ScriptController extends AdminBaseController
         $form = $this->createForm(GoogleAnalyticsScriptFormType::class, $formData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->scriptFacade->setGoogleAnalyticsTrackingId($form->getData()['trackingId'], $domainId);
             $this->getFlashMessageSender()->addSuccessFlashTwig(t('Google script code set'));
         }

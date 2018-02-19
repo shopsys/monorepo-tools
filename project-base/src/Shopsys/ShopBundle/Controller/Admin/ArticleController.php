@@ -98,7 +98,7 @@ class ArticleController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->articleFacade->edit($id, $articleData);
 
             $this->getFlashMessageSender()
@@ -156,7 +156,7 @@ class ArticleController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $articleData = $form->getData();
 
             $article = $this->articleFacade->create($articleData);

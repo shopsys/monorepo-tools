@@ -41,7 +41,7 @@ class CustomerCommunicationController extends AdminBaseController
         $form = $this->createForm(CustomerCommunicationFormType::class, ['content' => $orderSentPageContent]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
             $this->setting->setForDomain(Setting::ORDER_SENT_PAGE_CONTENT, $formData['content'], $domainId);
 
