@@ -68,6 +68,6 @@ class ParameterInlineEdit extends AbstractGridInlineEdit
      */
     public function getServiceName()
     {
-        return 'shopsys.shop.product.parameter.parameter.parameter_inline_edit';
+        return self::class;
     }
 }

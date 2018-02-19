@@ -9,10 +9,10 @@ security:
 
   providers:
     administrators:
-      id: shopsys.shop.administrator.security.administrator_user_provider
+      id: Shopsys\ShopBundle\Model\Administrator\Security\AdministratorUserProvider
 
     user_identities:
-      id: shopsys.shop.customer.frontend_user_provider
+      id: Shopsys\ShopBundle\Model\Customer\FrontendUserProvider
 
   firewalls:
     # see Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
@@ -20,6 +20,7 @@ security:
       pattern: ^/(admin/|efconnect|elfinder)
       anonymous: ~
       provider: administrators
+      logout_on_user_change: true
       form_login:
         check_path: admin_login_check
         login_path: admin_login
@@ -30,7 +31,7 @@ security:
         csrf_parameter: "admin_login_form[_token]"
       logout:
         path: admin_logout
-        success_handler: shopsys.shop.security.admin_logout_handler
+        success_handler: Shopsys\ShopBundle\Model\Security\AdminLogoutHandler
         csrf_parameter: _csrf_token
         csrf_token_generator: security.csrf.token_manager
         csrf_token_id: admin_logout
@@ -40,14 +41,15 @@ security:
       pattern: ^/
       anonymous: ~
       provider: user_identities
+      logout_on_user_change: true
       form_login:
         check_path: front_login_check
         login_path: front_login
         username_parameter: "front_login_form[email]"
         password_parameter: "front_login_form[password]"
         csrf_parameter: "front_login_form[_token]"
-        success_handler: shopsys.shop.security.customer_login_handler
-        failure_handler: shopsys.shop.security.customer_login_handler
+        success_handler: Shopsys\ShopBundle\Model\Security\CustomerLoginHandler
+        failure_handler: Shopsys\ShopBundle\Model\Security\CustomerLoginHandler
         remember_me: true
       remember_me:
         secret: "%secret%"
@@ -57,7 +59,7 @@ security:
         remember_me_parameter: "front_login_form[rememberMe]"
       logout:
         path: front_logout
-        success_handler: shopsys.shop.security.front_logout_handler
+        success_handler: Shopsys\ShopBundle\Model\Security\FrontLogoutHandler
         csrf_parameter: _csrf_token
         csrf_token_generator: security.csrf.token_manager
         csrf_token_id: frontend_logout

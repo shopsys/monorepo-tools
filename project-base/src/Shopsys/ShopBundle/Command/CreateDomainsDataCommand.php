@@ -2,6 +2,9 @@
 
 namespace Shopsys\ShopBundle\Command;
 
+use Shopsys\ShopBundle\Component\Domain\DomainDataCreator;
+use Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade;
+use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -34,18 +37,18 @@ class CreateDomainsDataCommand extends ContainerAwareCommand
         $output->writeln('Start of creating new domains data.');
 
         $domainDbFunctionsFacade = $this->getContainer()
-            ->get('shopsys.shop.component.domain.domain_db_functions_facade');
+            ->get(DomainDbFunctionsFacade::class);
         /* @var $domainDbFunctionsFacade \Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade */
         $domainDbFunctionsFacade->createDomainDbFunctions();
 
-        $domainDataCreator = $this->getContainer()->get('shopsys.shop.component.domain.domain_data_creator');
+        $domainDataCreator = $this->getContainer()->get(DomainDataCreator::class);
         /* @var $domainDataCreator \Shopsys\ShopBundle\Component\Domain\DomainDataCreator */
         $domainsCreated = $domainDataCreator->createNewDomainsData();
 
         $output->writeln('<fg=green>New domains created: ' . $domainsCreated . '.</fg=green>');
 
         $multidomainEntityClassFinderFacade = $this->getContainer()
-            ->get('shopsys.shop.component.domain.multidomain.multidomain_entity_class_finder_facade');
+            ->get(MultidomainEntityClassFinderFacade::class);
         /* @var $multidomainEntityClassFinderFacade \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade */
 
         $multidomainEntitiesNames = $multidomainEntityClassFinderFacade->getMultidomainEntitiesNames();

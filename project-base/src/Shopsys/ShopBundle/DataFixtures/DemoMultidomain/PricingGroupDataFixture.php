@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 
 class PricingGroupDataFixture extends AbstractReferenceFixture
 {
@@ -34,7 +35,7 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
         $domainId,
         $referenceName
     ) {
-        $pricingGroupFacade = $this->get('shopsys.shop.pricing.group.pricing_group_facade');
+        $pricingGroupFacade = $this->get(PricingGroupFacade::class);
         /* @var $pricingGroupFacade \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 
         $pricingGroup = $pricingGroupFacade->create($pricingGroupData, $domainId);

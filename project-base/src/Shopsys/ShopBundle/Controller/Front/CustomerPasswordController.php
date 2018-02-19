@@ -42,7 +42,7 @@ class CustomerPasswordController extends FrontBaseController
         $form = $this->createForm(ResetPasswordFormType::class);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
             $email = $formData['email'];
 
@@ -86,7 +86,7 @@ class CustomerPasswordController extends FrontBaseController
         $form = $this->createForm(NewPasswordFormType::class);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
             $newPassword = $formData['newPassword'];

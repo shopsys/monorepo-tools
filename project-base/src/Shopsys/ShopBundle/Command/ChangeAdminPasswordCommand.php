@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Command;
 
+use Shopsys\ShopBundle\Model\Administrator\AdministratorFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,7 +32,7 @@ class ChangeAdminPasswordCommand extends ContainerAwareCommand
     {
         $io = new SymfonyStyle($input, $output);
 
-        $administratorFacade = $this->getContainer()->get('shopsys.shop.administrator.administrator_facade');
+        $administratorFacade = $this->getContainer()->get(AdministratorFacade::class);
         /* @var $administratorFacade \Shopsys\ShopBundle\Model\Administrator\AdministratorFacade */
 
         $adminUsername = $input->getArgument(self::ARG_USERNAME);

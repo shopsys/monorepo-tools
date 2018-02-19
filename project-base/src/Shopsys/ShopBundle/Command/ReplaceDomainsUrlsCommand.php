@@ -2,6 +2,8 @@
 
 namespace Shopsys\ShopBundle\Command;
 
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\DomainUrlService;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,11 +24,11 @@ class ReplaceDomainsUrlsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $domain = $this->getContainer()->get('shopsys.shop.component.domain');
+        $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
-        $domainUrlService = $this->getContainer()->get('shopsys.shop.component.domain.domain_url_service');
+        $domainUrlService = $this->getContainer()->get(DomainUrlService::class);
         /* @var $domainUrlService \Shopsys\ShopBundle\Component\Domain\DomainUrlService */
-        $setting = $this->getContainer()->get('shopsys.shop.component.setting');
+        $setting = $this->getContainer()->get(Setting::class);
         /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 
         foreach ($domain->getAll() as $domainConfig) {

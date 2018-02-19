@@ -48,7 +48,7 @@ class Bootstrap
         }
 
         $kernel = new AppKernel($this->environment, Environment::isEnvironmentDebug($this->environment));
-        $kernel->loadClassCache();
+        Request::setTrustedProxies(['127.0.0.1'], Request::HEADER_X_FORWARDED_ALL);
         if ($this->console) {
             $input = new ArgvInput();
             $output = new ConsoleOutput();

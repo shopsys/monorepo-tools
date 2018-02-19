@@ -147,7 +147,7 @@ class UnitController extends AdminBaseController
         $form = $this->createForm(UnitSettingFormType::class, $unitSettingsFormData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $unitSettingsFormData = $form->getData();
 
             $this->unitFacade->setDefaultUnit($unitSettingsFormData['defaultUnit']);

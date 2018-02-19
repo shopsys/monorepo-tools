@@ -109,7 +109,7 @@ class AdministratorController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $this->administratorFacade->edit($id, $administratorData);
 
@@ -175,7 +175,7 @@ class AdministratorController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $administratorData = $form->getData();
 
             try {

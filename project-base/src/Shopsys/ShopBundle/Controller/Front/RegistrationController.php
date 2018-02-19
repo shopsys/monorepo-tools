@@ -68,7 +68,7 @@ class RegistrationController extends FrontBaseController
         $form = $this->createForm(RegistrationFormType::class, $userData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $userData = $form->getData();
             $userData->domainId = $this->domain->getId();
 

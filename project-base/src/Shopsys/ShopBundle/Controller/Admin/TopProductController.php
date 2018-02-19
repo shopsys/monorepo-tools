@@ -42,7 +42,7 @@ class TopProductController extends AdminBaseController
         $form = $this->createForm(TopProductsFormType::class, $formData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $products = $form->getData()['products'];
 
             $this->topProductFacade->saveTopProductsForDomain($domainId, $products);

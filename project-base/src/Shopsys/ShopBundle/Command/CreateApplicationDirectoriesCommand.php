@@ -2,6 +2,8 @@
 
 namespace Shopsys\ShopBundle\Command;
 
+use Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator as ImageDirectoryStructureCreator;
+use Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator as UploadedFileDirectoryStructureCreator;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -60,7 +62,7 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
     private function createImageDirectories(OutputInterface $output)
     {
         $imageDirectoryStructureCreator = $this->getContainer()
-            ->get('shopsys.shop.component.image.directory_structure_creator');
+            ->get(ImageDirectoryStructureCreator::class);
         /* @var $imageDirectoryStructureCreator \Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator */
         $imageDirectoryStructureCreator->makeImageDirectories();
 
@@ -73,7 +75,7 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
     private function createUploadedFileDirectories(OutputInterface $output)
     {
         $uploadedFileDirectoryStructureCreator = $this->getContainer()
-            ->get('shopsys.shop.component.uploaded_file.directory_structure_creator');
+            ->get(UploadedFileDirectoryStructureCreator::class);
         /* @var $uploadedFileDirectoryStructureCreator \Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator */
         $uploadedFileDirectoryStructureCreator->makeUploadedFileDirectories();
 

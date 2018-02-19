@@ -72,6 +72,6 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
      */
     public function getServiceName()
     {
-        return 'shopsys.shop.order.promo_code.grid.promo_code_inline_edit';
+        return self::class;
     }
 }

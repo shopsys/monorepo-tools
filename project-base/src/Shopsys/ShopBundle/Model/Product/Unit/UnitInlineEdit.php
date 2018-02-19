@@ -69,6 +69,6 @@ class UnitInlineEdit extends AbstractGridInlineEdit
      */
     public function getServiceName()
     {
-        return 'shopsys.shop.product.unit.unit_inline_edit';
+        return self::class;
     }
 }

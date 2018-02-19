@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\DependencyInjection\Compiler;
 
+use Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -15,7 +16,7 @@ class RegisterPluginDataFixturesCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $pluginDataFixtureRegistryDefinition = $container->findDefinition(
-            'shopsys.shop.component.plugin.plugin_data_fixture_registry'
+            PluginDataFixtureRegistry::class
         );
         $taggedServiceIds = $container->findTaggedServiceIds('shopsys.data_fixture');
         foreach (array_keys($taggedServiceIds) as $serviceId) {

@@ -5,8 +5,11 @@ namespace Shopsys\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use Shopsys\ShopBundle\Model\Product\ProductEditData;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
+use Shopsys\ShopBundle\Model\Product\ProductVariantFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -17,13 +20,13 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     public function load(ObjectManager $manager)
     {
-        $productDataFixtureLoader = $this->get('shopsys.shop.data_fixtures.demo.product_data_fixture_loader');
+        $productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
         /* @var $productDataFixtureLoader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
-        $referenceInjector = $this->get('shopsys.shop.component.data_fixture.product_data_fixture_reference_injector');
+        $referenceInjector = $this->get(ProductDataFixtureReferenceInjector::class);
         /* @var $referenceInjector \Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector */
-        $persistentReferenceFacade = $this->get('shopsys.shop.component.data_fixture.persistent_reference_facade');
+        $persistentReferenceFacade = $this->get(PersistentReferenceFacade::class);
         /* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
-        $productDataFixtureCsvReader = $this->get('shopsys.shop.data_fixtures.product_data_fixture_csv_reader');
+        $productDataFixtureCsvReader = $this->get(ProductDataFixtureCsvReader::class);
         /* @var $productDataFixtureCsvReader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
 
         $onlyForFirstDomain = true;
@@ -52,7 +55,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     private function createProduct($referenceName, ProductEditData $productEditData)
     {
-        $productFacade = $this->get('shopsys.shop.product.product_facade');
+        $productFacade = $this->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
         $product = $productFacade->create($productEditData);
@@ -68,11 +71,11 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     private function createVariants(array $productsByCatnum, $productNo)
     {
-        $loaderService = $this->get('shopsys.shop.data_fixtures.demo.product_data_fixture_loader');
+        $loaderService = $this->get(ProductDataFixtureLoader::class);
         /* @var $loaderService \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
-        $productVariantFacade = $this->get('shopsys.shop.product.product_variant_facade');
+        $productVariantFacade = $this->get(ProductVariantFacade::class);
         /* @var $productVariantFacade \Shopsys\ShopBundle\Model\Product\ProductVariantFacade */
-        $productDataFixtureCsvReader = $this->get('shopsys.shop.data_fixtures.product_data_fixture_csv_reader');
+        $productDataFixtureCsvReader = $this->get(ProductDataFixtureCsvReader::class);
         /* @var $productDataFixtureCsvReader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
 
         $csvRows = $productDataFixtureCsvReader->getProductDataFixtureCsvRows();

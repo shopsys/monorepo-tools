@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
 
 class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
@@ -20,7 +21,7 @@ class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $setting = $this->get('shopsys.shop.component.setting');
+        $setting = $this->get(Setting::class);
         /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 
         // Any previously executed data fixture using Setting (even transitively) would fill the Setting cache.

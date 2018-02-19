@@ -51,7 +51,7 @@ class ContactFormController extends FrontBaseController
         $form->handleRequest($request);
 
         $message = '';
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $contactFormData = $form->getData();
 
             try {

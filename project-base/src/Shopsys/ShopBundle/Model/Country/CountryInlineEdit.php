@@ -77,6 +77,6 @@ class CountryInlineEdit extends AbstractGridInlineEdit
      */
     public function getServiceName()
     {
-        return 'shopsys.shop.country.country_inline_edit';
+        return self::class;
     }
 }

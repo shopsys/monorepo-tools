@@ -93,7 +93,7 @@ class SuperadminController extends AdminBaseController
         $form = $this->createForm(InputPriceTypeFormType::class, $pricingSettingData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $pricingSettingData = $form->getData();
 
             $this->delayedPricingSetting->scheduleSetInputPriceType($pricingSettingData['type']);
@@ -161,7 +161,7 @@ class SuperadminController extends AdminBaseController
         $form = $this->createForm(ModulesFormType::class, $formData, ['module_list' => $this->moduleList]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
             foreach ($formData['modules'] as $moduleName => $isEnabled) {

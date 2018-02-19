@@ -57,7 +57,7 @@ class MailerService
         $fromEmail = $messageData->fromEmail;
         $fromName = $messageData->fromName;
 
-        $message = Swift_Message::newInstance();
+        $message = new Swift_Message();
         $message->setSubject($subject);
         $message->setFrom($fromEmail, $fromName);
         $message->setTo($toEmail);

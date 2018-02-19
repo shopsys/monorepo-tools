@@ -71,6 +71,6 @@ class VatInlineEdit extends AbstractGridInlineEdit
      */
     public function getServiceName()
     {
-        return 'shopsys.shop.pricing.vat.vat_inline_edit';
+        return self::class;
     }
 }

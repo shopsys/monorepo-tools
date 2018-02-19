@@ -39,10 +39,10 @@ doctrine:
     naming_strategy: doctrine.orm.naming_strategy.underscore
     metadata_cache_driver:
       type: service
-      id: shopsys.doctrine.cache_driver.metadata_cache
+      id: Doctrine\Common\Cache\ChainCache
     query_cache_driver:
       type: service
-      id: shopsys.doctrine.cache_driver.query_cache
+      id: Doctrine\Common\Cache\ChainCache
     auto_mapping: false
     mappings:
       ShopsysShopBundle:
@@ -78,7 +78,6 @@ framework:
     engines: ['twig']
   default_locale: "%locale%"
   trusted_hosts: ~
-  trusted_proxies: [127.0.0.1]
   session:
     handler_id: ~
     cookie_httponly: true
@@ -165,20 +164,6 @@ swiftmailer:
   delivery_address: "%mailer_master_email_address%"
   delivery_whitelist: "%mailer_delivery_whitelist%"
 
-symplify_controller_autowire:
-  controller_dirs:
-    - "%kernel.root_dir%/../src/Shopsys/ShopBundle/Controller"
-
-symplify_default_autowire:
-  autowire_types:
-    Doctrine\ORM\EntityManager: 'doctrine.orm.default_entity_manager'
-    Doctrine\ORM\EntityManagerInterface: 'doctrine.orm.default_entity_manager'
-    Doctrine\Portability\Connection: 'database_connection'
-    Symfony\Component\EventDispatcher\EventDispatcher: 'event_dispatcher'
-    Symfony\Component\EventDispatcher\EventDispatcherInterface: 'event_dispatcher'
-    Symfony\Component\Translation\TranslatorInterface: 'translator'
-    Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface: 'security.access.decision_manager'
-
 twig:
   debug: "%kernel.debug%"
   exception_controller: 'Shopsys\ShopBundle\Controller\Front\ErrorController::showAction'
@@ -188,7 +173,7 @@ twig:
     - '@ShopsysShop/Admin/Form/fileuploadFields.html.twig'
   strict_variables: true
   globals:
-    globalMultipleFormSetting: '@shopsys.shop.component.form.multiple_form_setting'
+    globalMultipleFormSetting: '@Shopsys\ShopBundle\Component\Form\MultipleFormSetting'
 
 imports:
     - { resource: wysiwyg.yml }

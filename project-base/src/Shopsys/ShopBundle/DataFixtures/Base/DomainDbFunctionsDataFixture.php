@@ -4,6 +4,7 @@ namespace Shopsys\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractNativeFixture;
+use Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade;
 
 class DomainDbFunctionsDataFixture extends AbstractNativeFixture
 {
@@ -12,7 +13,7 @@ class DomainDbFunctionsDataFixture extends AbstractNativeFixture
      */
     public function load(ObjectManager $manager)
     {
-        $domainDbFunctionsFacade = $this->get('shopsys.shop.component.domain.domain_db_functions_facade');
+        $domainDbFunctionsFacade = $this->get(DomainDbFunctionsFacade::class);
         /* @var $domainDbFunctionsFacade \Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade */
         $domainDbFunctionsFacade->createDomainDbFunctions();
     }

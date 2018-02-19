@@ -1,0 +1,18 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Shopsys\ShopBundle\Command\:
+    resource: '../../Command'
+
+  Shopsys\ShopBundle\Command\ServerRunWithCustomRouterCommand:
+    arguments:
+      - '%kernel.project_dir%/web'
+      - '%kernel.environment%'
+
+  Shopsys\ShopBundle\Command\ServerStartWithCustomRouterCommand:
+    arguments:
+      - '%kernel.project_dir%/web'
+      - '%kernel.environment%'

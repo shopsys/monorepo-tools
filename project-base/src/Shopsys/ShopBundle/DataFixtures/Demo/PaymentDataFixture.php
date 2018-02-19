@@ -9,6 +9,7 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\ShopBundle\Model\Payment\PaymentEditData;
+use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 
 class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -86,7 +87,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
         PaymentEditData $paymentEditData,
         array $transportsReferenceNames
     ) {
-        $paymentFacade = $this->get('shopsys.shop.payment.payment_facade');
+        $paymentFacade = $this->get(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
         $paymentEditData->paymentData->transports = [];

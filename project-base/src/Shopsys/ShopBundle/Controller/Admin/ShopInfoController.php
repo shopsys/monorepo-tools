@@ -45,7 +45,7 @@ class ShopInfoController extends AdminBaseController
         $form = $this->createForm(ShopInfoSettingFormType::class, $shopInfoSettingData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $shopInfoSettingData = $form->getData();
 
             $this->shopInfoSettingFacade->setPhoneNumber($shopInfoSettingData['phoneNumber'], $selectedDomainId);

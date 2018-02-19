@@ -16,7 +16,7 @@ class RegisterPluginCrudExtensionsCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $pluginCrudExtensionRegistryDefinition = $container->findDefinition(
-            'shopsys.shop.component.plugin.plugin_crud_extension_registry'
+            PluginCrudExtensionRegistry::class
         );
 
         $taggedServiceIds = $container->findTaggedServiceIds('shopsys.crud_extension');

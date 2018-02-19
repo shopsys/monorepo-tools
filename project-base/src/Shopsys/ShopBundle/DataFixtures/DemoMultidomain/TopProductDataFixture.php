@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture as DemoProductDataFixture;
+use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 
 class TopProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -30,7 +31,7 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
      */
     private function createTopProducts(array $productReferenceNames, $domainId)
     {
-        $topProductFacade = $this->get('shopsys.shop.product.top_product.top_product_facade');
+        $topProductFacade = $this->get(TopProductFacade::class);
         /* @var $topProductFacade \Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade */
 
         $products = [];

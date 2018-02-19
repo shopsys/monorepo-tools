@@ -71,6 +71,6 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit
      */
     public function getServiceName()
     {
-        return 'shopsys.shop.order.status.grid.order_status_inline_edit';
+        return self::class;
     }
 }

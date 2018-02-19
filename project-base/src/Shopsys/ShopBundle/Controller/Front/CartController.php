@@ -106,7 +106,7 @@ class CartController extends FrontBaseController
         $form->handleRequest($request);
 
         $invalidCart = false;
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $this->cartFacade->changeQuantities($form->getData()['quantities']);
 
@@ -184,7 +184,7 @@ class CartController extends FrontBaseController
         $form = $this->createForm(AddProductFormType::class);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $formData = $form->getData();
 
@@ -228,7 +228,7 @@ class CartController extends FrontBaseController
         $form = $this->createForm(AddProductFormType::class);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $formData = $form->getData();
 

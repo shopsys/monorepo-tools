@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - SubscriptionFormType: added required privacy policy agreement checkbox (@simara-svatopluk)
 - subscription form: added link to privacy policy agreement article (@simara-svatopluk)
 - NewsletterController now exports date of subscription to newsletter (@simara-svatopluk)
+- `services_command.yml` to set Commands as services (@TomasLudvik)
 
 ### Changed
 - cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)
@@ -38,6 +39,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - see documentation of [Installation Using Docker](docs/introduction/installation-using-docker.md) for details
 - default parameters in `parameters.yml.dist` and `parameters_test.yml.dist` are for Docker installation (instead of native) (@MattCzerner)
 - Front/NewsletterController: extracted duplicit rendering and add return typehints (@simara-svatopluk)
+- Symfony updated to version 3.4 (@TomasLudvik)
+    - autowiring is now done via Symfony PSR-4
+    - services now use FQN as naming convention
+    - services are private by default
+    - inlined services (called via container) are set to public
+    - services required by another service are defined in services.yml (e.g. Shopsys\ShopBundle\Model\Administrator\Security\AdministratorUserProvider: ~)
+    - all inline calls of services changed to use FQN
+    - services no longer required in services.yml have been removed
+    - services instanced after DI container creation are set as synthetic
+- users and administrators are logged out of all the sessions except the current one on password change (this is required in Symfony 4) (@TomasLudvik)
+- running Phing without parameter now shows list of available targets instead of building application (@TomasLudvik)
+- updated presta/sitemap-bundle to version 1.5.2 in order to avoid deprecated calls (@TomasLudvik)
+ - updated SitemapListener to avoid using of deprecated SitemapListenerInterface
+- updated symfony/swiftmailer-bundle to version 3.2.0 in order to fix deprecated calls (@TomasLudvik)
+- all calls of Fom::isValid() are called only on submitted forms in order to prevent deprecated call (@TomasLudvik) 
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)
@@ -55,6 +71,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Removed
 - PHPStorm Inspect is no longer used for static analysis of source code (@TomasLudvik)
 - Phing targets standards-ci and standards-ci-diff because they were redundant to standards and standards-diff targets (@TomasLudvik)
+- deprecated packages `symplify/controller-autowire` and `symplify/default-autowire` (@TomasLudvik)
 
 ## [2.0.0-beta.20.0] - 2017-12-11
 ### Changed

@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\DataFixtures\Performance;
 
 use Faker\Generator as Faker;
-use Shopsys\ShopBundle\Component\Console\ProgressBar;
+use Shopsys\ShopBundle\Component\Console\ProgressBarFactory;
 use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade;
@@ -61,6 +61,11 @@ class UserDataFixture
     private $persistentReferenceFacade;
 
     /**
+     * @var \Shopsys\ShopBundle\Component\Console\ProgressBarFactory
+     */
+    private $progressBarFactory;
+
+    /**
      * @param int $userCountPerDomain
      * @param \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
      * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
@@ -69,6 +74,7 @@ class UserDataFixture
      * @param \Shopsys\ShopBundle\Model\Customer\UserDataFactory $userDataFactory
      * @param \Faker\Generator $faker
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     * @param \Shopsys\ShopBundle\Component\Console\ProgressBarFactory $progressBarFactory
      */
     public function __construct(
         $userCountPerDomain,
@@ -78,7 +84,8 @@ class UserDataFixture
         CustomerFacade $customerEditFacade,
         UserDataFactory $userDataFactory,
         Faker $faker,
-        PersistentReferenceFacade $persistentReferenceFacade
+        PersistentReferenceFacade $persistentReferenceFacade,
+        ProgressBarFactory $progressBarFactory
     ) {
         $this->entityManagerFacade = $entityManagerFacade;
         $this->domain = $domain;
@@ -88,6 +95,7 @@ class UserDataFixture
         $this->faker = $faker;
         $this->persistentReferenceFacade = $persistentReferenceFacade;
         $this->userCountPerDomain = $userCountPerDomain;
+        $this->progressBarFactory = $progressBarFactory;
     }
 
     /**
@@ -97,12 +105,13 @@ class UserDataFixture
     {
         // Sql logging during mass data import makes memory leak
         $this->sqlLoggerFacade->temporarilyDisableLogging();
+        $domains = $this->domain->getAll();
 
-        $progressBar = $this->createProgressBar($output);
+        $progressBar = $this->progressBarFactory->create($output, count($domains) * $this->userCountPerDomain);
 
         $isFirstUser = true;
 
-        foreach ($this->domain->getAll() as $domainConfig) {
+        foreach ($domains as $domainConfig) {
             for ($i = 0; $i < $this->userCountPerDomain; $i++) {
                 $user = $this->createCustomerOnDomain($domainConfig->getId(), $i);
                 $progressBar->advance();
@@ -179,22 +188,5 @@ class UserDataFixture
         $customerData->deliveryAddressData = $deliveryAddressData;
 
         return $customerData;
-    }
-
-    /**
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @return \Shopsys\ShopBundle\Component\Console\ProgressBar
-     */
-    private function createProgressBar(OutputInterface $output)
-    {
-        $progressBar = new ProgressBar($output, $this->userCountPerDomain * count($this->domain->getAll()));
-        $progressBar->setFormat(
-            '%current%/%max% [%bar%] %percent:3s%%,%speed:6.1f% users/s (%step_duration:.3f% s/user),'
-            . ' Elapsed: %elapsed_hms%, Remaining: %remaining_hms%, MEM:%memory:9s%'
-        );
-        $progressBar->setRedrawFrequency(10);
-        $progressBar->start();
-
-        return $progressBar;
     }
 }

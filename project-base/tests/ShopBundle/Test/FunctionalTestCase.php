@@ -3,6 +3,8 @@
 namespace Tests\ShopBundle\Test;
 
 use Shopsys\Environment;
+use Shopsys\IntegrationTestingBundle\ServiceLocator\ServiceByTypeLocator;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -15,7 +17,7 @@ abstract class FunctionalTestCase extends WebTestCase
 
     protected function setUpDomain()
     {
-        $domain = $this->getContainer()->get('shopsys.shop.component.domain');
+        $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         $domain->switchDomainById(1);
     }
@@ -78,7 +80,7 @@ abstract class FunctionalTestCase extends WebTestCase
     protected function getReference($referenceName)
     {
         $persistentReferenceFacade = $this->getContainer()
-            ->get('shopsys.shop.component.data_fixture.persistent_reference_facade');
+            ->get(PersistentReferenceFacade::class);
         /* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
 
         return $persistentReferenceFacade->getReference($referenceName);
@@ -90,7 +92,7 @@ abstract class FunctionalTestCase extends WebTestCase
      */
     protected function getServiceByType($className)
     {
-        $serviceByTypeLocator = $this->getContainer()->get('shopsys_integration_testing.service_by_type_locator');
+        $serviceByTypeLocator = $this->getContainer()->get(ServiceByTypeLocator::class);
 
         return $serviceByTypeLocator->getByType($className);
     }

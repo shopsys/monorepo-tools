@@ -24,7 +24,6 @@ class AppKernel extends Kernel
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
             new Prezent\Doctrine\TranslatableBundle\PrezentDoctrineTranslatableBundle(),
-            new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Shopsys\FormTypesBundle\ShopsysFormTypesBundle(),
             new ShopSys\MigrationBundle\ShopSysMigrationBundle(),
@@ -40,8 +39,6 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
-            new Symplify\ControllerAutowire\SymplifyControllerAutowireBundle(),
-            new Symplify\DefaultAutowire\SymplifyDefaultAutowireBundle(),
             new VasekPurchart\ConsoleErrorsBundle\ConsoleErrorsBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(), // has to be loaded after FrameworkBundle and TwigBundle
             new Shopsys\ShopBundle\ShopsysShopBundle(), // must be loaded as last, because translations must overwrite other bundles
@@ -50,9 +47,9 @@ class AppKernel extends Kernel
         if ($this->getEnvironment() === Environment::ENVIRONMENT_DEVELOPMENT) {
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-            $bundles[] = new Shopsys\GeneratorBundle\ShopsysGeneratorBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
+            $bundles[] = new Symfony\Bundle\WebServerBundle\WebServerBundle();
         }
 
         if ($this->getEnvironment() === Environment::ENVIRONMENT_TEST) {

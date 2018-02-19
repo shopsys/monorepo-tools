@@ -27,13 +27,13 @@ class PerformanceDataCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
 
-        $categoryDataFixture = $container->get('shopsys.shop.data_fixtures.performance.category_data_fixture');
+        $categoryDataFixture = $container->get(CategoryDataFixture::class);
         /* @var $categoryDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture */
-        $productDataFixture = $container->get('shopsys.shop.data_fixtures.performance.product_data_fixture');
+        $productDataFixture = $container->get(ProductDataFixture::class);
         /* @var $productDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture */
-        $userDataFixture = $container->get('shopsys.shop.data_fixtures.performance.user_data_fixture');
+        $userDataFixture = $container->get(UserDataFixture::class);
         /* @var $userDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture */
-        $orderDataFixture = $container->get('shopsys.shop.data_fixtures.performance.order_data_fixture');
+        $orderDataFixture = $container->get(OrderDataFixture::class);
         /* @var $orderDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture */
 
         $output->writeln('<fg=green>loading ' . CategoryDataFixture::class . '</fg=green>');

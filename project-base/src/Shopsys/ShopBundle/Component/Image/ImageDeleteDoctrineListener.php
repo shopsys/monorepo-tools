@@ -34,7 +34,7 @@ class ImageDeleteDoctrineListener
      */
     private function getImageFacade()
     {
-        return $this->container->get('shopsys.shop.component.image.image_facade');
+        return $this->container->get(ImageFacade::class);
     }
 
     /**

@@ -164,7 +164,7 @@ class PricingGroupController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $pricingGroupSettingsFormData = $form->getData();
 
             $this->pricingGroupSettingFacade->setDefaultPricingGroupForSelectedDomain($pricingGroupSettingsFormData['defaultPricingGroup']);

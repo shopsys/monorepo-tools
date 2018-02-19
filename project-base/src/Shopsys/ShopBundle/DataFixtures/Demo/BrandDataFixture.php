@@ -6,6 +6,8 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandEditDataFactory;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 
 class BrandDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -39,10 +41,10 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
      */
     public function load(ObjectManager $manager)
     {
-        $brandFacade = $this->get('shopsys.shop.product.brand.brand_facade');
+        $brandFacade = $this->get(BrandFacade::class);
         /* @var $brandFacade \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade */
 
-        $brandEditDataFactory = $this->get('shopsys.shop.product.brand.brand_edit_data_factory');
+        $brandEditDataFactory = $this->get(BrandEditDataFactory::class);
         /* @var $brandEditDataFactory \Shopsys\ShopBundle\Model\Product\Brand\BrandEditDataFactory */
 
         $brandEditData = $brandEditDataFactory->createDefault();

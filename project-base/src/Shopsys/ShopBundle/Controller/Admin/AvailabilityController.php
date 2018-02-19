@@ -145,7 +145,7 @@ class AvailabilityController extends AdminBaseController
         $form = $this->createForm(AvailabilitySettingFormType::class, $availabilitySettingsFormData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $availabilitySettingsFormData = $form->getData();
 
             $this->availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);

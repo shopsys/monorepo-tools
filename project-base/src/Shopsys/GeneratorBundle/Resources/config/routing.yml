@@ -1,3 +1,0 @@
-generator_index:
-  path: /_generator/
-  defaults: { _controller: ShopsysGeneratorBundle:Generator:index}

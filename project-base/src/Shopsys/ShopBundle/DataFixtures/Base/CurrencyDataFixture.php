@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class CurrencyDataFixture extends AbstractReferenceFixture
 {
@@ -35,7 +36,7 @@ class CurrencyDataFixture extends AbstractReferenceFixture
      */
     private function createCurrency(CurrencyData $currencyData, $referenceName = null)
     {
-        $currencyFacade = $this->get('shopsys.shop.pricing.currency.currency_facade');
+        $currencyFacade = $this->get(CurrencyFacade::class);
         /* @var $currencyFacade \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 
         $currency = $currencyFacade->create($currencyData);

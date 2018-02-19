@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Slider\SliderItemData;
+use Shopsys\ShopBundle\Model\Slider\SliderItemFacade;
 
 class SliderItemDataFixture extends AbstractReferenceFixture
 {
@@ -14,7 +15,7 @@ class SliderItemDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $sliderItemFacade = $this->get('shopsys.shop.slider.slider_item_facade');
+        $sliderItemFacade = $this->get(SliderItemFacade::class);
         /* @var $sliderItemFacade \Shopsys\ShopBundle\Model\Slider\SliderItemFacade*/
 
         $sliderItemData = new SliderItemData();

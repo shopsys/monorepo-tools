@@ -45,7 +45,7 @@ class TopCategoryController extends AdminBaseController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $categories = $form->getData()['categories'];
 
             $this->topCategoryFacade->saveTopCategoriesForDomain($domainId, $categories);

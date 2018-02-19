@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\DataFixtures\Base;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractNativeFixture;
+use Shopsys\ShopBundle\Model\Localization\Localization;
 
 class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFixtureInterface
 {
@@ -13,7 +14,7 @@ class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFix
      */
     public function load(ObjectManager $manager)
     {
-        $localization = $this->get('shopsys.shop.localization');
+        $localization = $this->get(Localization::class);
         /* @var $localization \Shopsys\ShopBundle\Model\Localization\Localization */
         foreach ($localization->getLocalesOfAllDomains() as $locale) {
             $domainCollation = $localization->getCollationByLocale($locale);

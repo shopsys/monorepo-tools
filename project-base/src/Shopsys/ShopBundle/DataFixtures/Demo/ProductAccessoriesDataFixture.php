@@ -5,6 +5,8 @@ namespace Shopsys\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 
 class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -13,9 +15,9 @@ class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements 
      */
     public function load(ObjectManager $manager)
     {
-        $productEditDataFactory = $this->get('shopsys.shop.product.product_edit_data_factory');
+        $productEditDataFactory = $this->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $this->get('shopsys.shop.product.product_facade');
+        $productFacade = $this->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\ShopBundle\Model\Product\Product */

@@ -58,7 +58,7 @@ class TransportAndPaymentController extends AdminBaseController
         $form = $this->createForm(FreeTransportAndPaymentPriceLimitsFormType::class, $formData);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
             $subformData = $formData[FreeTransportAndPaymentPriceLimitsFormType::DOMAINS_SUBFORM_NAME];
 

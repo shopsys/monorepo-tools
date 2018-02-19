@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Twig;
 
+use Shopsys\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
@@ -25,7 +26,7 @@ class LocalizationExtension extends \Twig_Extension
 
         // Twig extensions are loaded during assetic:dump command,
         // so they cannot be dependent on Domain service (dependency of Localization)
-        $this->localization = $container->get('shopsys.shop.localization');
+        $this->localization = $container->get(Localization::class);
     }
 
     /**

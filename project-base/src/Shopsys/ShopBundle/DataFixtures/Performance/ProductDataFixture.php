@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
 use Faker\Generator as Faker;
-use Shopsys\ShopBundle\Component\Console\ProgressBar;
+use Shopsys\ShopBundle\Component\Console\ProgressBarFactory;
 use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
@@ -113,6 +113,11 @@ class ProductDataFixture
     private $productDataFixtureCsvReader;
 
     /**
+     * @var \Shopsys\ShopBundle\Component\Console\ProgressBarFactory
+     */
+    private $progressBarFactory;
+
+    /**
      * @param int $productTotalCount
      * @param \Doctrine\ORM\EntityManager $em
      * @param \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
@@ -127,6 +132,7 @@ class ProductDataFixture
      * @param \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
      * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      * @param \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader $productDataFixtureCsvReader
+     * @param \Shopsys\ShopBundle\Component\Console\ProgressBarFactory $progressBarFactory
      */
     public function __construct(
         $productTotalCount,
@@ -142,7 +148,8 @@ class ProductDataFixture
         Faker $faker,
         ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
-        ProductDataFixtureCsvReader $productDataFixtureCsvReader
+        ProductDataFixtureCsvReader $productDataFixtureCsvReader,
+        ProgressBarFactory $progressBarFactory
     ) {
         $this->productTotalCount = $productTotalCount;
         $this->em = $em;
@@ -160,6 +167,7 @@ class ProductDataFixture
         $this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
         $this->productDataFixtureCsvReader = $productDataFixtureCsvReader;
+        $this->progressBarFactory = $progressBarFactory;
     }
 
     /**
@@ -176,13 +184,7 @@ class ProductDataFixture
             $csvRows
         );
 
-        $progressBar = new ProgressBar($output, $this->productTotalCount);
-        $progressBar->setFormat(
-            '%current%/%max% [%bar%] %percent:3s%%,%speed:6.1f% prod./s (%step_duration:.3f% s/prod.),'
-            . ' Elapsed: %elapsed_hms%, Remaining: %remaining_hms%, MEM:%memory:9s%'
-        );
-        $progressBar->setRedrawFrequency(10);
-        $progressBar->start();
+        $progressBar = $this->progressBarFactory->create($output, $this->productTotalCount);
 
         while ($this->countImported < $this->productTotalCount) {
             $row = next($csvRows);

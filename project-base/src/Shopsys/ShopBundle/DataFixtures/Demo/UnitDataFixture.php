@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class UnitDataFixture extends AbstractReferenceFixture
 {
@@ -27,7 +28,7 @@ class UnitDataFixture extends AbstractReferenceFixture
      */
     private function createUnit(UnitData $unitData, $referenceName = null)
     {
-        $unitFacade = $this->get('shopsys.shop.product.unit.unit_facade');
+        $unitFacade = $this->get(UnitFacade::class);
         /* @var $unitFacade \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade */
 
         $unit = $unitFacade->create($unitData);

@@ -116,7 +116,7 @@ class OrderController extends AdminBaseController
         $form = $this->createForm(OrderFormType::class, $orderData, ['order' => $order]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $order = $this->orderFacade->edit($id, $orderData);
 

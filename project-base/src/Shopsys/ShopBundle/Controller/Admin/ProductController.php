@@ -146,7 +146,7 @@ class ProductController extends AdminBaseController
         $form = $this->createForm(ProductEditFormType::class, $productEditData, ['product' => $product]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->productFacade->edit($id, $form->getData());
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -196,7 +196,7 @@ class ProductController extends AdminBaseController
         $form = $this->createForm(ProductEditFormType::class, $productEditData, ['product' => null]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $product = $this->productFacade->create($form->getData());
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -319,7 +319,7 @@ class ProductController extends AdminBaseController
         $form = $this->createForm(VariantFormType::class);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
             $mainVariant = $formData[VariantFormType::MAIN_VARIANT];
             try {

@@ -5,6 +5,7 @@ namespace Shopsys\ShopBundle\DataFixtures\Base;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorFacade;
 
 class AdministratorDataFixture extends AbstractReferenceFixture
 {
@@ -37,7 +38,7 @@ class AdministratorDataFixture extends AbstractReferenceFixture
      */
     private function createAdministrator(AdministratorData $administratorData, $referenceName = null)
     {
-        $administratorFacade = $this->get('shopsys.shop.administrator.administrator_facade');
+        $administratorFacade = $this->get(AdministratorFacade::class);
         /* @var $administratorFacade \Shopsys\ShopBundle\Model\Administrator\AdministratorFacade */
 
         $administrator = $administratorFacade->create($administratorData);

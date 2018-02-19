@@ -27,7 +27,7 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface
         $form = $this->getForm($rowId);
         $form->handleRequest($request);
 
-        if (!$form->isValid()) {
+        if ($form->isSubmitted() && !$form->isValid()) {
             $formErrors = [];
             foreach ($form->getErrors(true) as $error) {
                 /* @var $error \Symfony\Component\Form\FormError */

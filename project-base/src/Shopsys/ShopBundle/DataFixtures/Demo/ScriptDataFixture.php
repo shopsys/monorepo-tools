@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Script\Script;
 use Shopsys\ShopBundle\Model\Script\ScriptData;
+use Shopsys\ShopBundle\Model\Script\ScriptFacade;
 
 class ScriptDataFixture extends AbstractReferenceFixture
 {
@@ -33,7 +34,7 @@ class ScriptDataFixture extends AbstractReferenceFixture
      */
     private function createScript(ScriptData $scriptData)
     {
-        $scriptFacade = $this->get('shopsys.shop.script.script_facade');
+        $scriptFacade = $this->get(ScriptFacade::class);
         /* @var $scriptFacade \Shopsys\ShopBundle\Model\Script\ScriptFacade */
         $scriptFacade->create($scriptData);
     }
