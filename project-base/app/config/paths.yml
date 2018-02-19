@@ -34,3 +34,5 @@ parameters:
   shopsys.uploaded_file_dir: '%shopsys.web_dir%%shopsys.uploaded_file_url_prefix%'
   shopsys.uploaded_file_url_prefix: /content/uploadedFiles/
   shopsys.web_dir: '%shopsys.root_dir%/web'
+  shopsys.vendor_dir: '%kernel.root_dir%/../vendor'
+  shopsys.js_form_validator_output_vendor_dir: '../vendor'

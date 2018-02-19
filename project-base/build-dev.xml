@@ -47,7 +47,7 @@
 
     <target name="dump-translations" description="Extracts translatable messages from all source files.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="translation:extract" />
             <arg value="--bundle=ShopsysShopBundle" />
             <arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Controller" />
@@ -167,6 +167,10 @@
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
             <arg value="--color" />
             <arg path="${path.src}" />
+            <arg value="--config" />
+            <arg path="${path.root}/.eslintrc.json" />
+            <arg value="--ignore-path" />
+            <arg path="${path.root}/.eslintignore" />
         </exec>
     </target>
 
@@ -179,6 +183,10 @@
                 <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
                     <arg value="--color" />
                     <arg line="${diff.files.js.spaces}" />
+                    <arg value="--config" />
+                    <arg path="${path.root}/.eslintrc.json" />
+                    <arg value="--ignore-path" />
+                    <arg path="${path.root}/.eslintignore" />
                 </exec>
             </then>
         </if>
@@ -189,6 +197,10 @@
             <arg value="--color" />
             <arg value="--fix" />
             <arg path="${path.src}" />
+            <arg value="--config" />
+            <arg path="${path.root}/.eslintrc.json" />
+            <arg value="--ignore-path" />
+            <arg path="${path.root}/.eslintignore" />
         </exec>
     </target>
 
@@ -202,6 +214,10 @@
                     <arg value="--color" />
                     <arg value="--fix" />
                     <arg line="${diff.files.js.spaces}" />
+                    <arg value="--config" />
+                    <arg path="${path.root}/.eslintrc.json" />
+                    <arg value="--ignore-path" />
+                    <arg path="${path.root}/.eslintignore" />
                 </exec>
             </then>
         </if>
@@ -470,7 +486,7 @@
 
     <target name="server-run" description="Runs PHP built-in web server for a chosen domain.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="shopsys:server:run" />
         </exec>
     </target>
@@ -564,6 +580,8 @@
                     <arg value="Smoke"/>
                     <arg value="--exclude-group"/>
                     <arg value="singledomain"/>
+                    <arg value="--configuration"/>
+                    <arg value="${path.root}/phpunit.xml"/>
                 </exec>
             </then>
 
@@ -579,6 +597,8 @@
                     <arg value="Smoke"/>
                     <arg value="--exclude-group"/>
                     <arg value="multidomain"/>
+                    <arg value="--configuration"/>
+                    <arg value="${path.root}/phpunit.xml"/>
                 </exec>
             </else>
         </if>
@@ -599,6 +619,8 @@
                     <arg value="Database"/>
                     <arg value="--exclude-group"/>
                     <arg value="multidomain"/>
+                    <arg value="--configuration"/>
+                    <arg value="${path.root}/phpunit.xml"/>
                 </exec>
             </then>
             <else>
@@ -613,6 +635,8 @@
                     <arg value="Database"/>
                     <arg value="--exclude-group"/>
                     <arg value="singledomain"/>
+                    <arg value="--configuration"/>
+                    <arg value="${path.root}/phpunit.xml"/>
                 </exec>
             </else>
         </if>
@@ -630,6 +654,8 @@
             <arg value="Performance"/>
             <arg value="--exclude-group"/>
             <arg value="warmup"/>
+            <arg value="--configuration"/>
+            <arg value="${path.root}/phpunit.xml"/>
         </exec>
     </target>
 
@@ -645,6 +671,8 @@
             <arg value="Performance"/>
             <arg value="--group"/>
             <arg value="warmup"/>
+            <arg value="--configuration"/>
+            <arg value="${path.root}/phpunit.xml"/>
         </exec>
     </target>
 
@@ -663,6 +691,8 @@
                     <arg value="Unit"/>
                     <arg value="--exclude-group"/>
                     <arg value="singledomain"/>
+                    <arg value="--configuration"/>
+                    <arg value="${path.root}/phpunit.xml"/>
                 </exec>
             </then>
             <else>
@@ -684,7 +714,7 @@
 
     <target name="test-create-domains-data" description="Creates domains data in tests DB for newly configured domains.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="shopsys:domains-data:create" />
             <arg value="--env=test" />
         </exec>
@@ -692,7 +722,7 @@
 
     <target name="test-db-check-schema" depends="db-check-mapping" description="Checks if test database schema is satisfying ORM and returns a list of suggestions to fix it.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:migrations:check-schema" />
         </exec>
@@ -700,7 +730,7 @@
 
     <target name="test-db-create" description="Creates test database for application with required configuration.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="shopsys:database:create" />
             <arg value="--env=test" />
         </exec>
@@ -708,7 +738,7 @@
 
     <target name="test-db-dump" description="Dumps current test database into a file to be used in acceptance tests.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:database:dump" />
             <arg value="--pgdump-bin=${path.pg_dump.executable}" />
@@ -718,7 +748,7 @@
 
     <target name="test-db-fixtures-base-settings" description="Loads base data fixtures into test DB.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="doctrine:fixtures:load" />
             <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
@@ -732,7 +762,7 @@
             <istrue value="${is-multidomain}" />
             <then>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="bin/console" />
+                    <arg value="${path.bin-console}" />
                     <arg value="--env=test" />
                     <arg value="doctrine:fixtures:load" />
                     <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/DemoMultidomain" />
@@ -740,7 +770,7 @@
                     <arg value="--no-interaction" />
                 </exec>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="bin/console" />
+                    <arg value="${path.bin-console}" />
                     <arg value="shopsys:recalculations" />
                     <arg value="--env=test" />
                 </exec>
@@ -753,7 +783,7 @@
 
     <target name="test-db-fixtures-demo-singledomain" description="Loads base and demo data fixtures for the first domain into test DB.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="doctrine:fixtures:load" />
             <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
@@ -762,7 +792,7 @@
             <arg value="--no-interaction" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="shopsys:recalculations" />
             <arg value="--env=test" />
         </exec>
@@ -770,12 +800,12 @@
 
     <target name="test-db-fixtures-performance" description="Loads performance data fixtures into test DB.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:performance-data" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:recalculations" />
         </exec>
@@ -783,7 +813,7 @@
 
     <target name="test-db-import-basic-structure" description="Imports basic database structure (without migrations) into test database.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:schema:import-default" />
         </exec>
@@ -791,7 +821,7 @@
 
     <target name="test-db-migrations" description="Executes test database migrations and checks schema.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:migrations:migrate" />
         </exec>
@@ -799,12 +829,12 @@
 
     <target name="test-db-wipe-public-schema" description="Drops and creates public database schema in test database.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:schema:drop" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:schema:create" />
         </exec>
@@ -812,7 +842,7 @@
 
     <target name="test-generate-friendly-urls" description="Generates friendly urls for supported entities when missing in test DB.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:generate:friendly-url" />
         </exec>
@@ -820,7 +850,7 @@
 
     <target name="test-load-plugin-demo-data" description="Loads data fixtures of all registered plugins into test DB.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:plugin-data-fixtures:load" />
         </exec>
@@ -828,7 +858,7 @@
 
     <target name="test-replace-domains-urls" description="Replaces domains urls in test database by urls in configuration.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:domains-urls:replace" />
         </exec>
@@ -836,7 +866,7 @@
 
     <target name="twig-lint" description="Checks syntax of Twig templates.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="lint:twig" />
             <arg value="@ShopsysShopBundle" />
         </exec>
@@ -849,7 +879,7 @@
             </not>
             <then>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-                    <arg value="bin/console" />
+                    <arg value="${path.bin-console}" />
                     <arg value="lint:twig" />
                     <arg line="${diff.files.twig.spaces}"/>
                 </exec>
@@ -859,12 +889,12 @@
 
     <target name="yaml-lint" description="Checks syntax of Yaml files.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="lint:yaml" />
             <arg value="@ShopsysShopBundle" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="lint:yaml" />
             <arg value="${path.app}/config" />
         </exec>
@@ -872,7 +902,7 @@
 
     <target name="timezones-check" description="Checks uniformity of PHP and Postgres timezones.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="bin/console" />
+            <arg value="${path.bin-console}" />
             <arg value="shopsys:check-timezones" />
         </exec>
     </target>

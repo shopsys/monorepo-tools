@@ -1,0 +1,3 @@
+parameters:
+  shopsys.vendor_dir: '%kernel.root_dir%/../../vendor'
+  shopsys.js_form_validator_output_vendor_dir: '../../vendor'

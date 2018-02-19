@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Shell wrapper for Phing
+ * $Id: 3da5a2758ca689a6ee49defabcda5efa6dd70a97 $
+ */
+$phingPhpFilepath = dirname(__FILE__) . '/vendor/phing/phing/bin/phing.php';
+
+if (!file_exists($phingPhpFilepath)) {
+    echo "Error: $phingPhpFilepath not found.\n";
+    echo "Please run: composer install\n";
+    exit(1);
+}
+
+// turn off html errors
+ini_set('html_errors', 'off');
+
+putenv("PHING_HOME=" . realpath(dirname($phingPhpFilepath)));
+
+require_once $phingPhpFilepath;

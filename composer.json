@@ -1,0 +1,198 @@
+{
+  "name": "shopsys/shopsys-monorepo",
+  "type": "project",
+  "description": "ShopSys Framework",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Shopsys\\": [
+        "project-base/app/",
+        "project-base/src/Shopsys/"
+      ],
+      "Shopsys\\FormTypesBundle\\": [
+        "packages/form-types-bundle/src/"
+      ],
+      "Shopsys\\HttpSmokeTesting\\": [
+        "packages/http-smoke-testing/src/"
+      ],
+      "ShopSys\\MigrationBundle\\": [
+        "packages/migrations/src/ShopSys/MigrationBundle/"
+      ],
+      "Shopsys\\Plugin\\": [
+        "packages/plugin-interface/src/"
+      ],
+      "Shopsys\\ProductFeed\\": [
+        "packages/product-feed-interface/src/"
+      ],
+      "Shopsys\\ProductFeed\\ZboziBundle\\": [
+        "packages/product-feed-zbozi/src/"
+      ],
+      "Shopsys\\ProductFeed\\GoogleBundle\\": [
+        "packages/product-feed-google/src/"
+      ],
+      "Shopsys\\ProductFeed\\HeurekaBundle\\": [
+        "packages/product-feed-heureka/src/"
+      ],
+      "Shopsys\\ProductFeed\\HeurekaDeliveryBundle\\": [
+        "packages/product-feed-heureka-delivery/src/"
+      ]
+    },
+    "classmap": [
+      "project-base/app/AppCache.php",
+      "project-base/app/AppKernel.php",
+      "project-base/app/Bootstrap.php",
+      "project-base/app/Environment.php"
+    ],
+    "files": [
+      "project-base/src/Shopsys/ShopBundle/Component/Translation/functions.php",
+      "project-base/src/Shopsys/ShopBundle/Component/VarDumper/functions.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": [
+        "packages/http-smoke-testing/tests/",
+        "packages/product-feed-google/tests/",
+        "packages/product-feed-zbozi/tests/",
+        "packages/product-feed-heureka/tests/",
+        "packages/product-feed-heureka-delivery/tests/",
+        "project-base/tests/"
+      ]
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/molaux/PostgreSearchBundle.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/shopsys/doctrine2.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/shopsys/doctrine-translatable-bundle.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/shopsys/jparser.git"
+    }
+  ],
+  "require": {
+    "php": "~7.1.0 || ~7.2.0",
+    "ext-bcmath": "*",
+    "ext-ctype": "*",
+    "ext-curl": "*",
+    "ext-gd": "*",
+    "ext-iconv": "*",
+    "ext-intl": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-openssl": "*",
+    "ext-pdo": "*",
+    "ext-pdo_pgsql": "*",
+    "ext-xml": "*",
+    "arvenil/ninja-mutex": "0.4.1",
+    "bmatzner/jquery-bundle": "2.2.2",
+    "bmatzner/jquery-ui-bundle": "1.10.3",
+    "commerceguys/intl": "0.7.4",
+    "craue/formflow-bundle": "dev-master#d14fcb1",
+    "doctrine/common": "2.8.1",
+    "doctrine/doctrine-bundle": "1.6.13",
+    "doctrine/doctrine-fixtures-bundle": "2.3.0",
+    "doctrine/orm": "dev-doctrine-260-with-ddc1960-hotfix-and-ddc4005-hotfix as 2.6.0",
+    "egeloen/ckeditor-bundle": "4.0.6",
+    "fp/jsformvalidator-bundle": "1.5.1",
+    "fzaninotto/faker": "1.5.0",
+    "helios-ag/fm-elfinder-bundle": "6.2.1",
+    "heureka/overeno-zakazniky": "2.0.6",
+    "incenteev/composer-parameter-handler": "2.1.2",
+    "intaro/postgres-search-bundle": "dev-master#06625bdc1d",
+    "intervention/image": "2.3.14",
+    "jms/translation-bundle": "1.3.2",
+    "phing/phing": "2.16.0",
+    "presta/sitemap-bundle": "^1.5.2",
+    "prezent/doctrine-translatable-bundle": "dev-rise-locale-listener-priority#09863c2",
+    "sensio/distribution-bundle": "5.0.21",
+    "sensio/framework-extra-bundle": "3.0.28",
+    "sensio/generator-bundle": "3.1.7",
+    "stof/doctrine-extensions-bundle": "1.2.2",
+    "symfony/assetic-bundle": "2.8.2",
+    "symfony/monolog-bundle": "3.1.2",
+    "symfony/swiftmailer-bundle": "^3.2.0",
+    "symfony/symfony": "^3.4.4",
+    "symfony-cmf/routing": "2.0.3",
+    "symfony-cmf/routing-bundle": "2.0.1",
+    "timwhitlock/jparser": "dev-get-rid-of-import#c37f4c6",
+    "tracy/tracy": "2.3.12",
+    "twig/extensions": "1.3.0",
+    "twig/twig": "1.35.0",
+    "vasek-purchart/console-errors-bundle": "1.0.1"
+  },
+  "require-dev": {
+    "ext-pgsql": "*",
+    "ext-zip": "*",
+    "codeception/codeception": "2.3.6",
+    "doctrine/dbal": "~2.5",
+    "doctrine/doctrine-migrations-bundle": "~1.1",
+    "jdorn/sql-formatter": "~1.2",
+    "phpstan/phpstan": "0.7",
+    "phpunit/phpunit": "^5.1",
+    "shopsys/coding-standards": "3.1.1",
+    "symfony/http-foundation": "^2.5|^3.0|^4.0",
+    "symfony/filesystem": "@stable",
+    "symfony/form": "^3.0",
+    "symfony/framework-bundle": "^2.7.3 || ~3",
+    "symfony/templating": "^2.7.3 || ~3",
+    "symfony/translation": "^3.0",
+    "symfony/validator": "^3.0",
+    "symfony/monolog-bridge": "^3.0.0"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Shopsys\\Environment::checkEnvironment"
+    ],
+    "post-update-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Shopsys\\Environment::checkEnvironment"
+    ]
+  },
+  "config": {
+    "preferred-install": "dist",
+    "component-dir": "project-base/web/components",
+    "platform": {
+      "php": "7.1"
+    }
+  },
+  "extra": {
+    "symfony-app-dir": "project-base/app",
+    "symfony-bin-dir": "project-base/bin",
+    "symfony-tests-dir": "project-base/tests",
+    "symfony-var-dir": "project-base/var",
+    "symfony-web-dir": "project-base/web",
+    "incenteev-parameters": [
+      {
+        "file": "project-base/app/config/parameters.yml",
+        "keep-outdated": true
+      },
+      {
+        "file": "project-base/app/config/parameters_test.yml",
+        "keep-outdated": true
+      }
+    ]
+  },
+  "replace": {
+    "shopsys/form-types-bundle": "self.version",
+    "shopsys/http-smoke-testing": "self.version",
+    "shopsys/migrations": "self.version",
+    "shopsys/plugin-interface": "self.version",
+    "shopsys/product-feed-google": "self.version",
+    "shopsys/product-feed-zbozi": "self.version",
+    "shopsys/product-feed-heureka": "self.version",
+    "shopsys/product-feed-heureka-delivery": "self.version",
+    "shopsys/product-feed-interface": "self.version"
+  }
+}

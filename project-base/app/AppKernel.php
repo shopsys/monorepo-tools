@@ -93,6 +93,10 @@ class AppKernel extends Kernel
                 break;
         }
 
+        if (file_exists(__DIR__ . '/../../parameters_monorepo.yml')) {
+            $configs[] = __DIR__ . '/../../parameters_monorepo.yml';
+        }
+
         return $configs;
     }
 

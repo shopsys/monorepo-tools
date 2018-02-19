@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ShopSys Framework" default="list">
+
+    <property name="path.root" value="./project-base"/>
+    <property name="path.vendor" value="./vendor"/>
+    <property name="path.packages" value="./packages"/>
+    <property name="path.bin-console" value="./project-base/bin/console"/>
+
+    <import file="project-base/build-dev.xml" />
+    <import file="project-base/build.xml" />
+
+</project>
