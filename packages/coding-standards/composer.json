@@ -1,0 +1,38 @@
+{
+    "name": "shopsys/coding-standards",
+    "description": "Coding standards definition compatible with PSR-2",
+    "keywords": ["code style","coding standards","PSR-2","code quality"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ShopSys",
+            "homepage": "https://www.shopsys.com/"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "jakub-onderka/php-parallel-lint": "^0.9",
+        "object-calisthenics/phpcs-calisthenics-rules": "^3.1",
+        "slevomat/coding-standard": "^4.0",
+        "symplify/easy-coding-standard": "^2.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "ShopSys\\CodingStandards\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ShopSys\\Tests\\Unit\\CodingStandards\\": "tests"
+        }
+    },
+    "scripts": {
+        "run-all-checks": [
+            "vendor/bin/parallel-lint ./src ./tests ./examples",
+            "vendor/bin/ecs check ./src ./tests ./examples"
+        ]
+    }
+}

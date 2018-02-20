@@ -1,0 +1,28 @@
+<button>
+
+<button/>
+
+<button name="asdf"/>
+
+<button name="asdf" />
+
+<button type="button" />
+
+<button name="asdf" type="submit" />
+
+<button type="submit">xxx</button>
+
+<button>xxx</button>
+
+<button name="asdf"></button>
+
+<button
+    attr="asdf"
+/>
+
+<button
+    attr="asdf"
+    type="submit"
+/>
+
+<a href="asdf"/>

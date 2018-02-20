@@ -1,0 +1,27 @@
+{
+    "name": "shopsys/plugin-interface",
+    "description": "General Shopsys Framework plugin interface",
+    "keywords": ["plugin", "Shopsys Framework", "SSFW"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shopsys",
+            "homepage": "https://www.shopsys.com/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shopsys\\Plugin\\": [
+                "src/"
+            ]
+        }
+    },
+    "require": {
+        "php": "^7.0",
+        "symfony/monolog-bridge": "^3.0.0"
+    },
+    "require-dev": {
+        "shopsys/coding-standards": "3.0.2"
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "name": "shopsys/product-feed-interface",
+    "description": "Shopsys Framework plugin interface for product feed generation",
+    "keywords": ["product feed", "plugin", "Shopsys Framework", "SSFW"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shopsys",
+            "homepage": "https://www.shopsys.com/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shopsys\\ProductFeed\\": [
+                "src/"
+            ]
+        }
+    },
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "shopsys/coding-standards": "3.0.2"
+    }
+}

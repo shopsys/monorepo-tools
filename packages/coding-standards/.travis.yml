@@ -1,0 +1,14 @@
+language: php
+
+php:
+  - 7.1
+  - 7.2
+
+install:
+  - composer install --prefer-source
+
+script:
+  # tests
+  - vendor/bin/phpunit
+  # run all tools
+  - composer run-all-checks
