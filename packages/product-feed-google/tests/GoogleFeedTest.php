@@ -115,7 +115,7 @@ class GoogleFeedTest extends TestCase
     {
         $feedItems = [];
 
-        $feedItems[] = new TestStandardFeedItem(
+        $feedItems[] = new TestGoogleStandardFeedItem(
             self::PRODUCT_ID_FIRST,
             'Product',
             'Lorem ipsum <strong>bold</strong>...',
@@ -133,7 +133,7 @@ class GoogleFeedTest extends TestCase
             false
         );
 
-        $feedItems[] = new TestStandardFeedItem(
+        $feedItems[] = new TestGoogleStandardFeedItem(
             self::PRODUCT_ID_SECOND,
             'Product Variant',
             'Lorem ipsum...',
@@ -151,7 +151,7 @@ class GoogleFeedTest extends TestCase
             true
         );
 
-        $feedItems[] = new TestStandardFeedItem(
+        $feedItems[] = new TestGoogleStandardFeedItem(
             self::PRODUCT_ID_THIRD,
             'Hidden Product',
             'Lorem ipsum...',

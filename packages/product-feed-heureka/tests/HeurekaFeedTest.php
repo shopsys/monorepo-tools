@@ -166,7 +166,7 @@ class HeurekaFeedTest extends TestCase
     {
         $feedItems = [];
 
-        $feedItems[] = new TestStandardFeedItem(
+        $feedItems[] = new TestHeurekaStandardFeedItem(
             self::PRODUCT_ID_FIRST,
             'Product',
             'Lorem ipsum <strong>bold</strong>...',
@@ -185,7 +185,7 @@ class HeurekaFeedTest extends TestCase
             self::CATEGORY_ID_FIRST
         );
 
-        $feedItems[] = new TestStandardFeedItem(
+        $feedItems[] = new TestHeurekaStandardFeedItem(
             self::PRODUCT_ID_SECOND,
             'Product Variant',
             'Lorem ipsum...',
@@ -204,7 +204,7 @@ class HeurekaFeedTest extends TestCase
             self::CATEGORY_ID_SECOND
         );
 
-        $feedItems[] = new TestStandardFeedItem(
+        $feedItems[] = new TestHeurekaStandardFeedItem(
             self::PRODUCT_ID_THIRD,
             'Product with denied selling',
             'Lorem ipsum...',

@@ -114,7 +114,7 @@ class ZboziFeedTest extends TestCase
     {
         $feedItems = [];
 
-        $feedItems[] = new TestStandardFeedItem(
+        $feedItems[] = new TestZboziStandardFeedItem(
             self::PRODUCT_ID_FIRST,
             'Product',
             'Lorem ipsum <strong>bold</strong>...',
@@ -132,7 +132,7 @@ class ZboziFeedTest extends TestCase
             false
         );
 
-        $feedItems[] = new TestStandardFeedItem(
+        $feedItems[] = new TestZboziStandardFeedItem(
             self::PRODUCT_ID_SECOND,
             'Product Variant',
             'Lorem ipsum...',
@@ -150,7 +150,7 @@ class ZboziFeedTest extends TestCase
             false
         );
 
-        $feedItems[] = new TestStandardFeedItem(
+        $feedItems[] = new TestZboziStandardFeedItem(
             self::PRODUCT_ID_THIRD,
             'Hidden Product',
             'Lorem ipsum...',
@@ -168,7 +168,7 @@ class ZboziFeedTest extends TestCase
             false
         );
 
-        $feedItems[] = new TestStandardFeedItem(
+        $feedItems[] = new TestZboziStandardFeedItem(
             self::PRODUCT_ID_FOURTH,
             'Product with denied selling',
             'Lorem ipsum...',
