@@ -6,7 +6,7 @@ For documentation of Shopsys Framework itself see [Shopsys Framework Knowledge B
 Documentation of the specific project built on Shopsys Framework should be in [Project Documentation](docs/project/index.md).
 
 ## Installation
-- [Installation via Docker (recommended)](docs/introduction/installation-using-docker.md)
+- [Installation via Docker (recommended)](docs/docker/installation/installation-using-docker.md)
 - [Detailed native installation](docs/introduction/installation-guide.md)
 
 ### What to do next

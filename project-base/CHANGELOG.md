@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - subscription form: added link to privacy policy agreement article (@simara-svatopluk)
 - NewsletterController now exports date of subscription to newsletter (@simara-svatopluk)
 - `services_command.yml` to set Commands as services (@TomasLudvik)
+- [docker-common-problems.md](docs/docker/docker-common-problems.md): added to help developers with common problems that occurs using docker for development(@MattCzerner)
 
 ### Changed
 - cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)
@@ -107,7 +108,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [coding standards documentation](docs/contributing/coding-standards.md) (@vitek-rostislav)
 - acceptance tests asserting successful image upload in admin for product, transport and payment (@vitek-rostislav)
 - Docker based server stack for easier installation and development (@TomasLudvik)
-    - see [Docker Installation Guide](docs/introduction/installation-using-docker.md) for details
+    - see [Docker Installation Guide](docs/docker/installation/installation-using-docker.md) for details
 - plugins can now extend the CRUD of categories (using `CategoryFormType`) (@MattCzerner)
 
 ### Changed
