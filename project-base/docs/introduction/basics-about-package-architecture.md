@@ -58,7 +58,7 @@ This is the preferred way because when you clone a repository, you create a loca
 
 *Note: Forking, on the other hand, is creating a copy of the repository on the server side under your GitHub ID.
 That means that your copy of the repository would be also public by default which is probably not what you want
-(but it is a great way to [make a pull request](https://git.shopsys-framework.com/shopsys/shopsys-framework/blob/master/CONTRIBUTING.md)).*
+(but it is a great way to [make a pull request](/CONTRIBUTING.md)).*
 
 ### Upgrading
 We know that upgrading should be as easy as possible, ideally without requiring any modification of your code.

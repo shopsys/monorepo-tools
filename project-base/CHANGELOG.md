@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## Unreleased
 ### Added
 - PHPStan support (@mhujer)
 	- currently analysing source code by level 0
@@ -58,12 +58,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)
 - `Admin/HeurekaController::embedWidgetAction()` moved to new `Front/HeurekaController` as the action is called in FE template (@vitek-rostislav)
-- PHPUnit tests do not fail on Windows machine with PHP 7.0 because of excessively long file paths (@PetrHeinz)
-    - see [GitLab issue #21](https://git.shopsys-framework.com/shopsys/shopsys-framework/issues/21) for details 
+- PHPUnit tests do not fail on Windows machine with PHP 7.0 because of excessively long file paths (@PetrHeinz) 
 - customizeBundle.js: on-submit actions are no longer triggered when form validation error occurs (@TomasLudvik)
 - fixed google product feed availability values by updating it to v0.1.2 (@simara-svatopluk)
 - reloading of order preview now calls `Shopsys.register.registerNewContent()` (@petr.kadlec)  
-    - accepted [merge request](https://git.shopsys-framework.com/shopsys/shopsys-framework/merge_requests/27)
 - CurrentPromoCodeFacace: promo code is not searched in database if code is empty (@petr.kadlec)
 - CategoryRepository::getCategoriesWithVisibleChildren() checks visibility of children (@petr.kadlec)
 - added missing migration for privacy policy article (@MattCzerner)
@@ -73,30 +71,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Phing targets standards-ci and standards-ci-diff because they were redundant to standards and standards-diff targets (@TomasLudvik)
 - deprecated packages `symplify/controller-autowire` and `symplify/default-autowire` (@TomasLudvik)
 
-## [2.0.0-beta.20.0] - 2017-12-11
+## 2.0.0-beta.20.0 - 2017-12-11
 ### Changed
 - Docker `nginx.conf` has been upgraded with better performance settings (@TomasLudvik)
     - JavaScript and CSS files are compressed with GZip
     - static content has cache headers set in order to leverage browser cache
 ### Fixed
 - miscellaneous annotations, typos and other minor fixes (@petr.kadlec)
-    - accepted [merge request](https://git.shopsys-framework.com/shopsys/shopsys-framework/merge_requests/11)
 - `CartController::addProductAction()`: now uses `Request` instance passed as the method argument (Symfony 3 style) instead of calling the base `Controller` method `getRequest()` (Symfony 2.x style) (@petr.kadlec)
     - see [Symfony upgrade log](https://github.com/symfony/symfony/blob/3.0/UPGRADE-3.0.md#frameworkbundle) for more information
-    - accepted [merge request](https://git.shopsys-framework.com/shopsys/shopsys-framework/merge_requests/12)
 - `ExecutionContextInterface::buildViolation()` (Symfony 3 style) is now used instead of `ExecutionContextInterface::addViolationAt()` (Symfony 2.x style) (@petr.kadlec)
     - see [Symfony upgrade log](https://github.com/symfony/symfony/blob/3.0/UPGRADE-3.0.md#validator) for more information
-    - accepted [merge request](https://git.shopsys-framework.com/shopsys/shopsys-framework/merge_requests/13)
 
-## [2.0.0-beta.19.2] - 2017-11-23
+## 2.0.0-beta.19.2 - 2017-11-23
 ### Fixed
 - updated symfony/symfony to v3.2.14 in order to avoid known security vulnerabilities (@TomasLudvik)
 
-## [2.0.0-beta.19.1] - 2017-11-21
+## 2.0.0-beta.19.1 - 2017-11-21
 ### Fixed
 - coding standards check "phing standards" passes
 
-## [2.0.0-beta.19.0] - 2017-11-21
+## 2.0.0-beta.19.0 - 2017-11-21
 ### Added
 - size of performance data fixtures and limits for performance testing are now configurable via parameters defined in [`parameters_common.yml`](app/config/parameters_common.yml) (@PetrHeinz)
 - performance tests report database query counts (@PetrHeinz)
@@ -107,7 +102,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - customer creating controllers are not catching exception for duplicate email, it is not necessary since it is done by UniqueEmail constraint now (@MattCzerner)
 - input "remember me" in login form is encapsulated by its label for better UX
 
-## [2.0.0-beta.18.0] - 2017-10-19
+## 2.0.0-beta.18.0 - 2017-10-19
 ### Added
 - [coding standards documentation](docs/contributing/coding-standards.md) (@vitek-rostislav)
 - acceptance tests asserting successful image upload in admin for product, transport and payment (@vitek-rostislav)
@@ -131,7 +126,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - proper `baseUrl` value from `domains_urls.yaml` is now stored into `settings` when creating new domain (@vitek-rostislav)
 
-## [2.0.0-beta.17.0] - 2017-10-03
+## 2.0.0-beta.17.0 - 2017-10-03
 ### Added
 - MIT license (@TomasLudvik)
 - phing targets `eslint-check`, `eslint-check-diff`, `eslint-fix` and `eslint-fix-diff` to check and fix coding standards in JS files (@sspooky13)
@@ -144,7 +139,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - implementations of `StandardFeedItemInterface` now must have implemented methods `isSellingDenied()` and `getCurrencyCode()`(@MattCzerner)
 - implementations of `FeedConfigInterface` now must have implemented method `getAdditionalInformation()` (@MattCzerner)
 
-## [2.0.0-beta.16.0] - 2017-09-19
+## 2.0.0-beta.16.0 - 2017-09-19
 ### Added
 - new command `shopsys:plugin-data-fixtures:load` for loading demo data from plugins (@MattCzerner)
     - called during build of demo database
@@ -245,12 +240,3 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - support for several domains
 - full friendly URL for main entities
 - customizable SEO attributes for main entities
-
-[Unreleased]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.20.0..HEAD
-[2.0.0-beta.20.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.19.2...v2.0.0-beta.20.0
-[2.0.0-beta.19.2]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.19.1...v2.0.0-beta.19.2
-[2.0.0-beta.19.1]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.19.0...v2.0.0-beta.19.1
-[2.0.0-beta.19.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.18.0...v2.0.0-beta.19.0
-[2.0.0-beta.18.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.17.0...v2.0.0-beta.18.0
-[2.0.0-beta.17.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.16.0...v2.0.0-beta.17.0
-[2.0.0-beta.16.0]: https://git.shopsys-framework.com/shopsys/shopsys-framework/compare/v2.0.0-beta.15.0...v2.0.0-beta.16.0 

@@ -334,7 +334,7 @@ class VatRepository
 **Warning: The method throws an exception when [`Vat`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/Vat.php) object is not found by given percent value.
 Do not forget to handle it (e.g. skip the product data processing and log the exception).**
 
-#### 3.7 - Implement method `getVatByPercent()` in [`VatFacade`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/VatRepository.php)
+#### 3.7 - Implement method `getVatByPercent()` in [`VatFacade`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/VatFacade.php)
 ```php
 // src/Shopsys/ShopBundle/Model/Pricing/Vat/VatFacade.php
 
@@ -376,7 +376,7 @@ As an output, you will get a list of all available cron modules.
 - Use database transactions.
     - Use `EntityManger` methods `beginTransaction()`, `commit()` and `rollback()`.
     - Do not forget to clear identity map when doing a rollback (so even entity modifications are reverted).
-    - [`IteratedCronModuleInterface`](../../src/Shopsys/ShopBundle/Component/Cron/IteratedCronModuleInterface.php) offers a way to implement longer processes that can span over many iterations.
+    - [`IteratedCronModuleInterface`](https://github.com/shopsys/plugin-interface/blob/master/src/Cron/IteratedCronModuleInterface.php) offers a way to implement longer processes that can span over many iterations.
 - Disable entity manager SQL logging (use [`SqlLoggerFacade::temporarilyDisableLogging()`](../../src/Shopsys/ShopBundle/Component/Doctrine/SqlLoggerFacade.php)).
     - By default, every executed SQL query is logged and that slows down the process and consumes a lot of memory when there are many iterations.
     - Do not forget to re-enable the logging after the processing is done (use [`SqlLoggerFacade::reenableLogging()`](../../src/Shopsys/ShopBundle/Component/Doctrine/SqlLoggerFacade.php)).
@@ -392,7 +392,7 @@ for changes in all mapped entities and after time it consumes a huge amount of r
     - You should load any entity again after clearing identity map because any attempt to flush the old one will result in an exception.
 - Use streamed input for XML and JSON.
     - So you do not load huge files at once (can lead to memory overflow).
-- Store external source credentials in [`parameters.yml`](../../app/config/parameters.yml).
+- Store external source credentials in `app/config/parameters.yml`.
     - Storing credentials in local configuration instead of hard-coding them in source code prevents from accidental corrupting of production data.
 - Restrict editing of the transferred fields in administration.
     - At least, mark them as transferred to avoid confusion when an administrator changes the field value and then data import overrides the value.

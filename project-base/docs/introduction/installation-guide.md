@@ -7,7 +7,7 @@ First of all, you need to install the following software on your system:
 
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [PostgreSQL 9.4](https://wiki.postgresql.org/wiki/Detailed_installation_guides) (On Windows OS, we recommend to use [EnterpriseDB PostgreSQL distribution](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows))
-* [PHP 7.x](http://php.net/manual/en/install.php) (configure your `php.ini` by [Required PHP Configuration](required-php-configuration.md))
+* [PHP 7.1 - 7.2](http://php.net/manual/en/install.php) (configure your `php.ini` by [Required PHP Configuration](required-php-configuration.md))
 * [Composer](https://getcomposer.org/doc/00-intro.md#globally)
 * [Node.js 4.x](https://nodejs.org/en/download/)
 * [npm 2.x](https://nodejs.org/en/download/) (npm is automatically installed when you install Node.js)
@@ -19,7 +19,7 @@ After that, you can follow the steps below in order to install and configure Sho
 ## Steps
 ### 1. Get source code
 ```
-git clone https://git.shopsys-framework.com/shopsys/shopsys-framework.git
+git clone https://github.com/shopsys/shopsys.git
 cd shopsys-framework
 ```
 
@@ -168,4 +168,4 @@ date.timezone = "UTC"
 ```
 
 ### Still struggling with installation?
-If you encountered any other problem during the installation please [file an issue](https://git.shopsys-framework.com/shopsys/shopsys-framework/issues/new) and we will help you.
+If you encountered any other problem during the installation please [file an issue](https://github.com/shopsys/shopsys/issues/new) and we will help you.

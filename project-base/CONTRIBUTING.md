@@ -2,8 +2,8 @@
 
 You can take part in making Shopsys Framework better.
 
-* [Create a pull request](https://git.shopsys-framework.com/shopsys/shopsys-framework/merge_requests/new)
-* [Report an issue](https://git.shopsys-framework.com/shopsys/shopsys-framework/issues/new)
+* [Create a pull request](https://github.com/shopsys/shopsys/compare)
+* [Report an issue](https://github.com/shopsys/shopsys/issues/new)
 * [Guidelines for Creating Commits](docs/contributing/guidelines-for-creating-commits.md)
 * [Guidelines for Writing Documentation](docs/contributing/guidelines-for-writing-documentation.md)
 

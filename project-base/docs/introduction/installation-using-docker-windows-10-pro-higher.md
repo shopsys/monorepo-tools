@@ -13,7 +13,7 @@
 ## Steps
 ### 1. Download the Shopsys Framework sources
 ```
-git clone https://git.shopsys-framework.com/shopsys/shopsys-framework.git
+git clone https://github.com/shopsys/shopsys.git
 cd shopsys-framework
 ```
 
