@@ -10,7 +10,7 @@
 # Example: monorepo_build.sh main-repository package-alpha:packages/alpha package-beta:packages/beta
 
 # Check provided arguments
-if [ "$#" -le "2" ]; then
+if [ "$#" -lt "2" ]; then
     echo 'Please provide at least 2 remotes to be merged into a new monorepo'
     echo 'Usage: monorepo_build.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...'
     echo 'Example: monorepo_build.sh main-repository package-alpha:packages/alpha package-beta:packages/beta'
