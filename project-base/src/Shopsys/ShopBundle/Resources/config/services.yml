@@ -62,8 +62,6 @@ services:
 
   sensio_framework_extra.routing.loader.annot_class:
     class: Shopsys\ShopBundle\Component\AnnotatedRouteControllerLoader
-    tags:
-      - { name: 'routing.loader' }
     arguments:
       - '@annotation_reader'
 
@@ -193,9 +191,7 @@ services:
     arguments:
       - '%shopsys.domain_images_dir%'
 
-  Shopsys\ShopBundle\Component\Domain\DomainSubscriber:
-    tags:
-      - { name: kernel.event_subscriber }
+  Shopsys\ShopBundle\Component\Domain\DomainSubscriber: ~
 
   Shopsys\ShopBundle\Component\Domain\DomainFactory: ~
 
@@ -324,9 +320,7 @@ services:
   Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureRegistry:
     public: true
 
-  Shopsys\ShopBundle\Component\Request\DenyScriptNameInRequestPathListener:
-    tags:
-      - { name: kernel.event_subscriber }
+  Shopsys\ShopBundle\Component\Request\DenyScriptNameInRequestPathListener: ~
 
   Shopsys\ShopBundle\Component\Request\TransactionalMasterRequestService:
     tags:
@@ -527,9 +521,7 @@ services:
   Shopsys\ShopBundle\Model\Localization\Localization:
     public: true
 
-  Shopsys\ShopBundle\Model\Localization\LocalizationListener:
-    tags:
-      - { name: kernel.event_subscriber }
+  Shopsys\ShopBundle\Model\Localization\LocalizationListener: ~
 
   Shopsys\ShopBundle\Model\Mail\MailTemplateFacade:
     public: true
@@ -686,8 +678,6 @@ services:
   Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector:
     arguments:
       - '@annotations.reader'
-    tags:
-      - { name: kernel.event_subscriber }
 
   Shopsys\ShopBundle\Model\Script\ScriptFacade:
     public: true
@@ -744,7 +734,6 @@ services:
 
   Shopsys\ShopBundle\Component\Error\NotLogFakeHttpExceptionsExceptionListener:
     tags:
-      - { name: 'kernel.event_subscriber' }
       - { name: 'monolog.logger', channel: 'request' }
     arguments:
       - '%twig.exception_listener.controller%'
@@ -752,8 +741,6 @@ services:
 
   twig.stringloader:
     class: Twig_Loader_Array
-    tags:
-      - { name: twig.loader }
 
   Shopsys\ShopBundle\Component\Constraints\UniqueEmailValidator:
     tags:
