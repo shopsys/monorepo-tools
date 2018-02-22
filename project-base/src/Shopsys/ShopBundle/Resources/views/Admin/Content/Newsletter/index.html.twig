@@ -4,6 +4,7 @@
 {% block h1 %}{{ 'E-mail newsletter'|trans }}{% endblock %}
 
 {% block main_content %}
+    {{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
     <a href="{{ url('admin_newsletter_export') }}" class="btn">
         {{ 'Export email list in CSV format'|trans }}
     </a>
