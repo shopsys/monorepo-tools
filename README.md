@@ -10,8 +10,7 @@ This approach was inefficient and repeated process always brought increased erro
 ## Solution
 Monorepo approach provides a single development environment for management of all parts of Shopsys Framework.
 We use [Monorepo tool](https://github.com/shopsys/monorepo-tools) that splits code in appropriate repositories
-after some changes are made in monorepo. This splitting is currently initiated manually,
-but it will be automatized in the future.
+after some changes are made in monorepo. This splitting is initiated automatically once a day.
 
 ## Repositories maintained by monorepo
 
