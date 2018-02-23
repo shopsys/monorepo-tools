@@ -41,6 +41,7 @@ Composer will prompt you to set main parameters (`app/config/parameters.yml`):
 | `database_user`                   | ...                                                                           |
 | `database_password`               | ...                                                                           |
 | `database_server_version`         | version of your PostgreSQL server                                             |
+| `redis_host`                      | host of your Redis storage (credentials are not supported right now)          |
 | `mailer_transport`                | access data of your mail server                                               |
 | `mailer_host`                     | ...                                                                           |
 | `mailer_user`                     | ...                                                                           |
