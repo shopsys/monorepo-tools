@@ -2,6 +2,12 @@
 
 This document provides basic information about development in monorepo to make the work with packages and project-base repository as easy as possible.
 
+If you want to contribute to Shopsys Framework or to any of its packages,
+clone this monorepo [shopsys/shopsys](https://github.com/shopsys/shopsys).
+
+If you want to build your project on Shopsys Framework,
+clone [shopsys/project-base](https://github.com/shopsys/project-base).
+
 ## Problem
 Due to the growing number of new repositories, there were many situations when a developer had to reflect the same change
 into more than one package. It meant, that the developer had to implement this in the separated repositories of each package.
