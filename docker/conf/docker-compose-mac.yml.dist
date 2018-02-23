@@ -4,7 +4,7 @@ services:
         image: postgres:9.5-alpine
         container_name: shopsys-framework-postgres
         volumes:
-            - ./project-base/var/postgres-data:/var/lib/postgresql/data
+            - shopsys-framework-postgres-data-sync:/var/lib/postgresql/data
         environment:
             - POSTGRES_USER=root
             - POSTGRES_PASSWORD=root
@@ -62,4 +62,7 @@ services:
 
 volumes:
     shopsys-framework-sync:
+        external: true
+
+    shopsys-framework-postgres-data-sync:
         external: true
