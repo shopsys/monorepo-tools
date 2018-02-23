@@ -32,6 +32,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
         php7.2-mbstring \
         php7.2-opcache \
         php7.2-pgsql \
+        php7.2-redis \
         php7.2-soap \
         php7.2-xml \
         php7.2-zip

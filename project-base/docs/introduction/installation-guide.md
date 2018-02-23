@@ -1,4 +1,6 @@
-# Installation Guide
+# Installation Guide (obsolete)
+*This guide is obsolete, because recommended way to install Shopsys Framework is via Docker. This guide should be completely correct, but it has not been tested since Redis has been added as prerequisite.*
+ 
 This guide provides instructions how to install Shopsys Framework on your local machine as a server.
 If you would like to use a prepared Docker container instead go to [Installation Using Docker](../docker/installation/installation-using-docker.md).
 
@@ -11,6 +13,7 @@ First of all, you need to install the following software on your system:
 * [Composer](https://getcomposer.org/doc/00-intro.md#globally)
 * [Node.js 4.x](https://nodejs.org/en/download/)
 * [npm 2.x](https://nodejs.org/en/download/) (npm is automatically installed when you install Node.js)
+* [Redis](https://redis.io/topics/quickstart)
 
 *Note: The names link to the appropriate installation guide or download page.* 
 
