@@ -4,14 +4,30 @@ namespace Shopsys\ShopBundle\Command;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class ServerRunForDomainCommand extends ContainerAwareCommand
+class ServerRunForDomainCommand extends Command
 {
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     */
+    private $domain;
+
+    /**
+     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     */
+    public function __construct(Domain $domain)
+    {
+        $this->domain = $domain;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -47,9 +63,7 @@ class ServerRunForDomainCommand extends ContainerAwareCommand
      */
     private function chooseDomainConfig(SymfonyStyle $io)
     {
-        $domain = $this->getContainer()->get(Domain::class);
-        /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
-        $domainConfigs = $domain->getAll();
+        $domainConfigs = $this->domain->getAll();
 
         if (count($domainConfigs) === 0) {
             throw new \Shopsys\ShopBundle\Command\Exception\NoDomainSetCommandException();

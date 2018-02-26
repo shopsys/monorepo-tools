@@ -3,12 +3,28 @@
 namespace Shopsys\ShopBundle\Command;
 
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GenerateFriendlyUrlCommand extends ContainerAwareCommand
+class GenerateFriendlyUrlCommand extends Command
 {
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade
+     */
+    private $friendlyUrlGeneratorFacade;
+
+    /**
+     * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade $friendlyUrlGeneratorFacade
+     */
+    public function __construct(FriendlyUrlGeneratorFacade $friendlyUrlGeneratorFacade)
+    {
+        $this->friendlyUrlGeneratorFacade = $friendlyUrlGeneratorFacade;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -18,13 +34,9 @@ class GenerateFriendlyUrlCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $friendlyUrlGeneratorFacade = $this->getContainer()
-            ->get(FriendlyUrlGeneratorFacade::class);
-        /* @var $friendlyUrlGeneratorFacade \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade */
-
         $output->writeln('<fg=green>Start of generating missing friendly urls from routing_friendly_url.yml file.</fg=green>');
 
-        $friendlyUrlGeneratorFacade->generateUrlsForSupportedEntities($output);
+        $this->friendlyUrlGeneratorFacade->generateUrlsForSupportedEntities($output);
 
         $output->writeln('<fg=green>Generating complete.</fg=green>');
     }

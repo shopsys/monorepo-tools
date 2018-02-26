@@ -16,3 +16,21 @@ services:
     arguments:
       - '%kernel.project_dir%/web'
       - '%kernel.environment%'
+
+  Shopsys\ShopBundle\Command\CreateApplicationDirectoriesCommand:
+    arguments:
+      - '%shopsys.root_dir%'
+      - '%shopsys.web_dir%'
+
+  Shopsys\ShopBundle\Command\GenerateGruntfileCommand:
+    arguments:
+      - '%shopsys.styles_dir%'
+      - '%shopsys.root_dir%'
+
+  Shopsys\ShopBundle\Command\ImageDemoCommand:
+    arguments:
+      - '%shopsys.demo_images_archive_url%'
+      - '%shopsys.demo_images_sql_url%'
+      - '%kernel.cache_dir%'
+      - '%shopsys.image_dir%'
+      - '%shopsys.domain_images_dir%'

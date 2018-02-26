@@ -4,6 +4,9 @@ services:
     autoconfigure: true
     public: true
 
+  ShopSys\MigrationBundle\Command\:
+    resource: '../../Command/'
+
   ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade:
     arguments:
       - '@Doctrine\ORM\EntityManagerInterface'

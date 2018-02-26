@@ -2,22 +2,64 @@
 
 namespace Shopsys\ShopBundle\Command;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\DriverManager;
 use Shopsys\ShopBundle\Component\System\PostgresqlLocaleMapper;
 use Shopsys\ShopBundle\Component\System\System;
 use Shopsys\ShopBundle\Model\Localization\Localization;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class CreateDatabaseCommand extends ContainerAwareCommand
+class CreateDatabaseCommand extends Command
 {
+
     /**
      * @var \Doctrine\DBAL\Connection|null
      */
     private $connection;
+
+    /**
+     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     */
+    private $localization;
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\System\System
+     */
+    private $system;
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\System\PostgresqlLocaleMapper
+     */
+    private $postgresqlLocaleMapper;
+
+    /**
+     * @var \Doctrine\Common\Persistence\ManagerRegistry
+     */
+    private $doctrineRegistry;
+
+    /**
+     * @param \Shopsys\ShopBundle\Model\Localization\Localization $localization
+     * @param \Shopsys\ShopBundle\Component\System\System $system
+     * @param \Shopsys\ShopBundle\Component\System\PostgresqlLocaleMapper $postgresqlLocaleMapper
+     * @param \Doctrine\Common\Persistence\ManagerRegistry $managerRegistry
+     */
+    public function __construct(
+        Localization $localization,
+        System $system,
+        PostgresqlLocaleMapper $postgresqlLocaleMapper,
+        ManagerRegistry $managerRegistry
+    ) {
+        $this->localization = $localization;
+        $this->system = $system;
+        $this->postgresqlLocaleMapper = $postgresqlLocaleMapper;
+        $this->doctrineRegistry = $managerRegistry;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -100,22 +142,15 @@ class CreateDatabaseCommand extends ContainerAwareCommand
      */
     private function createSystemSpecificCollationsIfNotExist(SymfonyStyle $symfonyStyleIo)
     {
-        $localization = $this->getContainer()->get(Localization::class);
-        /* @var $localization \Shopsys\ShopBundle\Model\Localization\Localization */
-        $system = $this->getContainer()->get(System::class);
-        /* @var $system \Shopsys\ShopBundle\Component\System\System */
-        $postgresqlLocaleMapper = $this->getContainer()->get(PostgresqlLocaleMapper::class);
-        /* @var $postgresqlLocaleMapper \Shopsys\ShopBundle\Component\System\PostgresqlLocaleMapper */
-
         $missingLocaleExceptions = [];
-        foreach ($localization->getAllDefinedCollations() as $collation) {
+        foreach ($this->localization->getAllDefinedCollations() as $collation) {
             try {
-                if ($system->isWindows()) {
-                    $systemSpecificLocaleName = $postgresqlLocaleMapper->getWindowsLocale($collation);
-                } elseif ($system->isMac()) {
-                    $systemSpecificLocaleName = $postgresqlLocaleMapper->getMacOsxLocale($collation);
+                if ($this->system->isWindows()) {
+                    $systemSpecificLocaleName = $this->postgresqlLocaleMapper->getWindowsLocale($collation);
+                } elseif ($this->system->isMac()) {
+                    $systemSpecificLocaleName = $this->postgresqlLocaleMapper->getMacOsxLocale($collation);
                 } else {
-                    $systemSpecificLocaleName = $postgresqlLocaleMapper->getLinuxLocale($collation);
+                    $systemSpecificLocaleName = $this->postgresqlLocaleMapper->getLinuxLocale($collation);
                 }
 
                 $this->createCollationIfNotExists($collation, $systemSpecificLocaleName);
@@ -213,12 +248,9 @@ class CreateDatabaseCommand extends ContainerAwareCommand
      */
     private function getDefaultConnection()
     {
-        $doctrineRegistry = $this->getContainer()->get('doctrine');
-        /* @var $doctrineRegistry \Symfony\Bridge\Doctrine\RegistryInterface */
+        $defaultConnectionName = $this->doctrineRegistry->getDefaultConnectionName();
 
-        $defaultConnectionName = $doctrineRegistry->getDefaultConnectionName();
-
-        return $doctrineRegistry->getConnection($defaultConnectionName);
+        return $this->doctrineRegistry->getConnection($defaultConnectionName);
     }
 
     /**

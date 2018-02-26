@@ -4,12 +4,62 @@ namespace Shopsys\ShopBundle\Command;
 
 use Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator as ImageDirectoryStructureCreator;
 use Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator as UploadedFileDirectoryStructureCreator;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
-class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
+class CreateApplicationDirectoriesCommand extends Command
 {
+
+    /**
+     * @var string
+     */
+    private $rootDirectory;
+
+    /**
+     * @var string
+     */
+    private $webDirectory;
+
+    /**
+     * @var \Symfony\Component\Filesystem\Filesystem
+     */
+    private $filesystem;
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator
+     */
+    private $imageDirectoryStructureCreator;
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator
+     */
+    private $uploadedFileDirectoryStructureCreator;
+
+    /**
+     * @param string $rootDirectory
+     * @param string $webDirectory
+     * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+     * @param \Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator $imageDirectoryStructureCreator
+     * @param \Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator $uploadedFileDirectoryStructureCreator
+     */
+    public function __construct(
+        $rootDirectory,
+        $webDirectory,
+        Filesystem $filesystem,
+        ImageDirectoryStructureCreator $imageDirectoryStructureCreator,
+        UploadedFileDirectoryStructureCreator $uploadedFileDirectoryStructureCreator
+    ) {
+        $this->rootDirectory = $rootDirectory;
+        $this->webDirectory = $webDirectory;
+        $this->filesystem = $filesystem;
+        $this->imageDirectoryStructureCreator = $imageDirectoryStructureCreator;
+        $this->uploadedFileDirectoryStructureCreator = $uploadedFileDirectoryStructureCreator;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -30,28 +80,22 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
 
     private function createMiscellaneousDirectories(OutputInterface $output)
     {
-        $rootDirectory = $this->getContainer()->getParameter('shopsys.root_dir');
-        $webDirectory = $this->getContainer()->getParameter('shopsys.web_dir');
-
         $directories = [
-            $rootDirectory . '/build/stats',
-            $rootDirectory . '/docs/generated',
-            $rootDirectory . '/var/cache',
-            $rootDirectory . '/var/lock',
-            $rootDirectory . '/var/logs',
-            $rootDirectory . '/var/errorPages',
-            $webDirectory . '/assets/admin/styles',
-            $webDirectory . '/assets/frontend/styles',
-            $webDirectory . '/assets/scripts',
-            $webDirectory . '/content/feeds',
-            $webDirectory . '/content/sitemaps',
-            $webDirectory . '/content/wysiwyg',
+            $this->rootDirectory . '/build/stats',
+            $this->rootDirectory . '/docs/generated',
+            $this->rootDirectory . '/var/cache',
+            $this->rootDirectory . '/var/lock',
+            $this->rootDirectory . '/var/logs',
+            $this->rootDirectory . '/var/errorPages',
+            $this->webDirectory . '/assets/admin/styles',
+            $this->webDirectory . '/assets/frontend/styles',
+            $this->webDirectory . '/assets/scripts',
+            $this->webDirectory . '/content/feeds',
+            $this->webDirectory . '/content/sitemaps',
+            $this->webDirectory . '/content/wysiwyg',
         ];
 
-        $filesystem = $this->getContainer()->get('filesystem');
-        /* @var $filesystem \Symfony\Component\Filesystem\Filesystem */
-
-        $filesystem->mkdir($directories);
+        $this->filesystem->mkdir($directories);
 
         $output->writeln('<fg=green>Miscellaneous application directories were successfully created.</fg=green>');
     }
@@ -61,10 +105,7 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
      */
     private function createImageDirectories(OutputInterface $output)
     {
-        $imageDirectoryStructureCreator = $this->getContainer()
-            ->get(ImageDirectoryStructureCreator::class);
-        /* @var $imageDirectoryStructureCreator \Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator */
-        $imageDirectoryStructureCreator->makeImageDirectories();
+        $this->imageDirectoryStructureCreator->makeImageDirectories();
 
         $output->writeln('<fg=green>Directories for images were successfully created.</fg=green>');
     }
@@ -74,10 +115,7 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
      */
     private function createUploadedFileDirectories(OutputInterface $output)
     {
-        $uploadedFileDirectoryStructureCreator = $this->getContainer()
-            ->get(UploadedFileDirectoryStructureCreator::class);
-        /* @var $uploadedFileDirectoryStructureCreator \Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator */
-        $uploadedFileDirectoryStructureCreator->makeUploadedFileDirectories();
+        $this->uploadedFileDirectoryStructureCreator->makeUploadedFileDirectories();
 
         $output->writeln('<fg=green>Directories for UploadedFile entities were successfully created.</fg=green>');
     }

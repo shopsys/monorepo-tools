@@ -4,14 +4,38 @@ namespace ShopSys\MigrationBundle\Command;
 
 use ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade;
 use ShopSys\MigrationBundle\Component\Generator\GenerateMigrationsService;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GenerateMigrationCommand extends ContainerAwareCommand
+class GenerateMigrationCommand extends Command
 {
     const RETURN_CODE_OK = 0;
     const RETURN_CODE_ERROR = 1;
+
+    /**
+     * @var \ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade
+     */
+    private $databaseSchemaFacade;
+
+    /**
+     * @var \ShopSys\MigrationBundle\Component\Generator\GenerateMigrationsService
+     */
+    private $generateMigrationsService;
+
+    /**
+     * @param \ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade $databaseSchemaFacade
+     * @param \ShopSys\MigrationBundle\Component\Generator\GenerateMigrationsService $generateMigrationsService
+     */
+    public function __construct(
+        DatabaseSchemaFacade $databaseSchemaFacade,
+        GenerateMigrationsService $generateMigrationsService
+    ) {
+        $this->databaseSchemaFacade = $databaseSchemaFacade;
+        $this->generateMigrationsService = $generateMigrationsService;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -27,22 +51,16 @@ class GenerateMigrationCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $databaseSchemaFacade = $this->getContainer()->get(DatabaseSchemaFacade::class);
-        /* @var $databaseSchemaFacade \ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade */
-
-        $generateMigrationsService = $this->getContainer()->get(GenerateMigrationsService::class);
-        /* @var $generateMigrationsService \ShopSys\MigrationBundle\Component\Generator\GenerateMigrationsService */
-
         $output->writeln('Checking database schema...');
 
-        $filteredSchemaDiffSqlCommands = $databaseSchemaFacade->getFilteredSchemaDiffSqlCommands();
+        $filteredSchemaDiffSqlCommands = $this->databaseSchemaFacade->getFilteredSchemaDiffSqlCommands();
         if (count($filteredSchemaDiffSqlCommands) === 0) {
             $output->writeln('<info>Database schema is satisfying ORM, no migrations was generated.</info>');
 
             return self::RETURN_CODE_OK;
         }
 
-        $generatorResult = $generateMigrationsService->generate($filteredSchemaDiffSqlCommands);
+        $generatorResult = $this->generateMigrationsService->generate($filteredSchemaDiffSqlCommands);
 
         if ($generatorResult->hasError()) {
             $output->writeln('<error>Migration file "' . $generatorResult->getMigrationFilePath() . '" could not be saved.</error>');

@@ -11,6 +11,22 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GetCountOfMigrationsToExecuteCommand extends ContainerAwareCommand
 {
+
+    /**
+     * @var \Doctrine\ORM\EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -24,9 +40,7 @@ class GetCountOfMigrationsToExecuteCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get(EntityManagerInterface::class);
-        /* @var $em \Doctrine\ORM\EntityManager */
-        $migrationsConfiguration = new Configuration($em->getConnection());
+        $migrationsConfiguration = new Configuration($this->em->getConnection());
 
         DoctrineCommand::configureMigrations($this->getContainer(), $migrationsConfiguration);
 

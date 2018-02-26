@@ -2,15 +2,57 @@
 
 namespace Shopsys\ShopBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\ShopBundle\Component\Domain\DomainDataCreator;
 use Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade;
 use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateDomainsDataCommand extends ContainerAwareCommand
+class CreateDomainsDataCommand extends Command
 {
+
+    /**
+     * @var \Doctrine\ORM\EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade
+     */
+    private $domainDbFunctionsFacade;
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\DomainDataCreator
+     */
+    private $domainDataCreator;
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade
+     */
+    private $multidomainEntityClassFinderFacade;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade $domainDbFunctionsFacade
+     * @param \Shopsys\ShopBundle\Component\Domain\DomainDataCreator $domainDataCreator
+     * @param \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade
+     */
+    public function __construct(
+        EntityManagerInterface $em,
+        DomainDbFunctionsFacade $domainDbFunctionsFacade,
+        DomainDataCreator $domainDataCreator,
+        MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade
+    ) {
+        $this->em = $em;
+        $this->domainDbFunctionsFacade = $domainDbFunctionsFacade;
+        $this->domainDataCreator = $domainDataCreator;
+        $this->multidomainEntityClassFinderFacade = $multidomainEntityClassFinderFacade;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -24,10 +66,7 @@ class CreateDomainsDataCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        /* @var $em \Doctrine\ORM\EntityManager */
-
-        $em->transactional(function () use ($output) {
+        $this->em->transactional(function () use ($output) {
             $this->doExecute($output);
         });
     }
@@ -36,22 +75,12 @@ class CreateDomainsDataCommand extends ContainerAwareCommand
     {
         $output->writeln('Start of creating new domains data.');
 
-        $domainDbFunctionsFacade = $this->getContainer()
-            ->get(DomainDbFunctionsFacade::class);
-        /* @var $domainDbFunctionsFacade \Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade */
-        $domainDbFunctionsFacade->createDomainDbFunctions();
-
-        $domainDataCreator = $this->getContainer()->get(DomainDataCreator::class);
-        /* @var $domainDataCreator \Shopsys\ShopBundle\Component\Domain\DomainDataCreator */
-        $domainsCreated = $domainDataCreator->createNewDomainsData();
+        $this->domainDbFunctionsFacade->createDomainDbFunctions();
+        $domainsCreated = $this->domainDataCreator->createNewDomainsData();
 
         $output->writeln('<fg=green>New domains created: ' . $domainsCreated . '.</fg=green>');
 
-        $multidomainEntityClassFinderFacade = $this->getContainer()
-            ->get(MultidomainEntityClassFinderFacade::class);
-        /* @var $multidomainEntityClassFinderFacade \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade */
-
-        $multidomainEntitiesNames = $multidomainEntityClassFinderFacade->getMultidomainEntitiesNames();
+        $multidomainEntitiesNames = $this->multidomainEntityClassFinderFacade->getMultidomainEntitiesNames();
         $output->writeln('<fg=green>Multidomain entities found:</fg=green>');
         foreach ($multidomainEntitiesNames as $multidomainEntityName) {
             $output->writeln($multidomainEntityName);

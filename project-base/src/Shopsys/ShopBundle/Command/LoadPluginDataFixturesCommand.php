@@ -3,12 +3,28 @@
 namespace Shopsys\ShopBundle\Command;
 
 use Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureFacade;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class LoadPluginDataFixturesCommand extends ContainerAwareCommand
+class LoadPluginDataFixturesCommand extends Command
 {
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureFacade
+     */
+    private $pluginDataFixtureFacade;
+
+    /**
+     * @param \Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureFacade $pluginDataFixtureFacade
+     */
+    public function __construct(PluginDataFixtureFacade $pluginDataFixtureFacade)
+    {
+        $this->pluginDataFixtureFacade = $pluginDataFixtureFacade;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -18,8 +34,6 @@ class LoadPluginDataFixturesCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $pluginDataFixtureFacade = $this->getContainer()->get(PluginDataFixtureFacade::class);
-        /** @var \Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureFacade $pluginDataFixtureFacade */
-        $pluginDataFixtureFacade->loadAll();
+        $this->pluginDataFixtureFacade->loadAll();
     }
 }

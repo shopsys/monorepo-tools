@@ -7,15 +7,39 @@ use DateTimeImmutable;
 use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use Shopsys\ShopBundle\Component\Cron\CronFacade;
 use Shopsys\ShopBundle\Component\Mutex\MutexFactory;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CronCommand extends ContainerAwareCommand
+class CronCommand extends Command
 {
     const OPTION_MODULE = 'module';
     const OPTION_LIST = 'list';
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Cron\CronFacade
+     */
+    private $cronFacade;
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Mutex\MutexFactory
+     */
+    private $mutexFactory;
+
+    /**
+     * @param \Shopsys\ShopBundle\Component\Cron\CronFacade $cronFacade
+     * @param \Shopsys\ShopBundle\Component\Mutex\MutexFactory $mutexFactory
+     */
+    public function __construct(
+        CronFacade $cronFacade,
+        MutexFactory $mutexFactory
+    ) {
+        $this->cronFacade = $cronFacade;
+        $this->mutexFactory = $mutexFactory;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -32,16 +56,11 @@ class CronCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $cronFacade = $this->getContainer()->get(CronFacade::class);
-        /* @var $cronFacade \Shopsys\ShopBundle\Component\Cron\CronFacade */
-        $mutexFactory = $this->getContainer()->get(MutexFactory::class);
-        /* @var $mutexFactory \Shopsys\ShopBundle\Component\Mutex\MutexFactory */
-
         $optionList = $input->getOption(self::OPTION_LIST);
         if ($optionList === true) {
-            $this->listAllCronModulesSortedByServiceId($output, $cronFacade);
+            $this->listAllCronModulesSortedByServiceId($output, $this->cronFacade);
         } else {
-            $this->runCron($input, $cronFacade, $mutexFactory);
+            $this->runCron($input, $this->cronFacade, $this->mutexFactory);
         }
     }
 

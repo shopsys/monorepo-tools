@@ -2,16 +2,18 @@
 
 namespace Shopsys\ShopBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Exception;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Filesystem\Filesystem;
 use ZipArchive;
 
-class ImageDemoCommand extends ContainerAwareCommand
+class ImageDemoCommand extends Command
 {
     const EXIT_CODE_OK = 0;
     const EXIT_CODE_ERROR = 1;
@@ -19,7 +21,32 @@ class ImageDemoCommand extends ContainerAwareCommand
     const IMAGES_TABLE_NAME = 'images';
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var string
+     */
+    private $demoImagesArchiveUrl;
+
+    /**
+     * @var string
+     */
+    private $demoImagesSqlUrl;
+
+    /**
+     * @var string
+     */
+    private $cacheDirectory;
+
+    /**
+     * @var string
+     */
+    private $imagesDirectory;
+
+    /**
+     * @var string
+     */
+    private $domainImagesDirectory;
+
+    /**
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -27,6 +54,35 @@ class ImageDemoCommand extends ContainerAwareCommand
      * @var \Symfony\Component\Filesystem\Filesystem
      */
     private $filesystem;
+
+    /**
+     * @param string $demoImagesArchiveUrl
+     * @param string $demoImagesSqlUrl
+     * @param string $cacheDirectory
+     * @param string $imagesDirectory
+     * @param string $domainImagesDirectory
+     * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     */
+    public function __construct(
+        $demoImagesArchiveUrl,
+        $demoImagesSqlUrl,
+        $cacheDirectory,
+        $imagesDirectory,
+        $domainImagesDirectory,
+        Filesystem $filesystem,
+        EntityManagerInterface $em
+    ) {
+        $this->demoImagesArchiveUrl = $demoImagesArchiveUrl;
+        $this->demoImagesSqlUrl = $demoImagesSqlUrl;
+        $this->cacheDirectory = $cacheDirectory;
+        $this->imagesDirectory = $imagesDirectory;
+        $this->domainImagesDirectory = $domainImagesDirectory;
+        $this->filesystem = $filesystem;
+        $this->em = $em;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -42,16 +98,8 @@ class ImageDemoCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->filesystem = $this->getContainer()->get('filesystem');
-        $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
-
-        $archiveUrl = $this->getContainer()->getParameter('shopsys.demo_images_archive_url');
-        $demoImagesSqlUrl = $this->getContainer()->getParameter('shopsys.demo_images_sql_url');
-        $cachePath = $this->getContainer()->getParameter('kernel.cache_dir');
-        $localArchiveFilepath = $cachePath . '/' . 'demoImages.zip';
-        $imagesPath = $this->getContainer()->getParameter('shopsys.image_dir');
-        $domainImagesPath = $this->getContainer()->getParameter('shopsys.domain_images_dir');
-        $unpackedDomainImagesPath = $imagesPath . 'domain';
+        $localArchiveFilepath = $this->cacheDirectory . '/' . 'demoImages.zip';
+        $unpackedDomainImagesPath = $this->imagesDirectory . 'domain';
 
         $isCompleted = false;
 
@@ -71,10 +119,10 @@ class ImageDemoCommand extends ContainerAwareCommand
             $symfonyStyleIo->note('DB table "' . self::IMAGES_TABLE_NAME . '" has been truncated.');
         }
 
-        if ($this->downloadImages($output, $archiveUrl, $localArchiveFilepath)) {
-            if ($this->unpackImages($output, $imagesPath, $localArchiveFilepath)) {
-                $this->moveFiles($unpackedDomainImagesPath, $domainImagesPath);
-                $this->loadDbChanges($output, $demoImagesSqlUrl);
+        if ($this->downloadImages($output, $this->demoImagesArchiveUrl, $localArchiveFilepath)) {
+            if ($this->unpackImages($output, $this->imagesDirectory, $localArchiveFilepath)) {
+                $this->moveFiles($unpackedDomainImagesPath, $this->domainImagesDirectory);
+                $this->loadDbChanges($output, $this->demoImagesSqlUrl);
                 $isCompleted = true;
             }
         }

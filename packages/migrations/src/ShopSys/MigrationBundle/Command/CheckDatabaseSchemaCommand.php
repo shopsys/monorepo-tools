@@ -3,14 +3,29 @@
 namespace ShopSys\MigrationBundle\Command;
 
 use ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CheckDatabaseSchemaCommand extends ContainerAwareCommand
+class CheckDatabaseSchemaCommand extends Command
 {
     const RETURN_CODE_OK = 0;
     const RETURN_CODE_ERROR = 1;
+
+    /**
+     * @var \ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade
+     */
+    private $databaseSchemaFacade;
+
+    /**
+     * @param \ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade $databaseSchemaFacade
+     */
+    public function __construct(DatabaseSchemaFacade $databaseSchemaFacade)
+    {
+        $this->databaseSchemaFacade = $databaseSchemaFacade;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -25,12 +40,9 @@ class CheckDatabaseSchemaCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $databaseSchemaFacade = $this->getContainer()->get(DatabaseSchemaFacade::class);
-        /* @var $databaseSchemaFacade \ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade */
-
         $output->writeln('Checking database schema...');
 
-        $filteredSchemaDiffSqlCommands = $databaseSchemaFacade->getFilteredSchemaDiffSqlCommands();
+        $filteredSchemaDiffSqlCommands = $this->databaseSchemaFacade->getFilteredSchemaDiffSqlCommands();
         if (count($filteredSchemaDiffSqlCommands) === 0) {
             $output->writeln('<info>Database schema is satisfying ORM.</info>');
         } else {

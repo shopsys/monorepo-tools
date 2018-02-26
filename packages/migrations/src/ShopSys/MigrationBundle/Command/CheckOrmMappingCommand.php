@@ -2,15 +2,31 @@
 
 namespace ShopSys\MigrationBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaValidator;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CheckOrmMappingCommand extends ContainerAwareCommand
+class CheckOrmMappingCommand extends Command
 {
     const RETURN_CODE_OK = 0;
     const RETURN_CODE_ERROR = 1;
+
+    /**
+     * @var \Doctrine\ORM\EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -26,12 +42,9 @@ class CheckOrmMappingCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine')->getManager();
-        /* @var $em \Doctrine\ORM\EntityManager */
-
         $output->writeln('Checking ORM mapping...');
 
-        $schemaValidator = new SchemaValidator($em);
+        $schemaValidator = new SchemaValidator($this->em);
         $schemaErrors = $schemaValidator->validateMapping();
 
         if (count($schemaErrors) > 0) {

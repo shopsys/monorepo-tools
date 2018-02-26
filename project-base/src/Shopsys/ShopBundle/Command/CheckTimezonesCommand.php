@@ -2,13 +2,30 @@
 
 namespace Shopsys\ShopBundle\Command;
 
+use Doctrine\DBAL\Connection;
 use Shopsys\ShopBundle\Command\Exception\DifferentTimezonesException;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CheckTimezonesCommand extends ContainerAwareCommand
+class CheckTimezonesCommand extends Command
 {
+
+    /**
+     * @var \Doctrine\DBAL\Connection
+     */
+    private $connection;
+
+    /**
+     * @param \Doctrine\DBAL\Connection $connection
+     */
+    public function __construct(Connection $connection)
+    {
+        $this->connection = $connection;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -34,10 +51,7 @@ class CheckTimezonesCommand extends ContainerAwareCommand
 
         $phpTimezone = empty(ini_get('date.timezone')) ? date_default_timezone_get() : ini_get('date.timezone');
 
-        $connection = $this->getContainer()->get('doctrine.dbal.default_connection');
-        /* @var $connection \Doctrine\DBAL\Connection */
-
-        $stmt = $connection->executeQuery('SHOW timezone');
+        $stmt = $this->connection->executeQuery('SHOW timezone');
 
         $postgreSqlTimezone = $stmt->fetchColumn();
 

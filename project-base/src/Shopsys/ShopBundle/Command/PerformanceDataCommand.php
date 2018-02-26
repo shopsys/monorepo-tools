@@ -6,12 +6,53 @@ use Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class PerformanceDataCommand extends ContainerAwareCommand
+class PerformanceDataCommand extends Command
 {
+
+    /**
+     * @var \Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture
+     */
+    private $categoryDataFixture;
+
+    /**
+     * @var \Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture
+     */
+    private $productDataFixture;
+
+    /**
+     * @var \Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture
+     */
+    private $userDataFixture;
+
+    /**
+     * @var \Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture
+     */
+    private $orderDataFixture;
+
+    /**
+     * @param \Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture $categoryDataFixture
+     * @param \Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture $productDataFixture
+     * @param \Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture $userDataFixture
+     * @param \Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture $orderDataFixture
+     */
+    public function __construct(
+        CategoryDataFixture $categoryDataFixture,
+        ProductDataFixture $productDataFixture,
+        UserDataFixture $userDataFixture,
+        OrderDataFixture $orderDataFixture
+    ) {
+        $this->categoryDataFixture = $categoryDataFixture;
+        $this->productDataFixture = $productDataFixture;
+        $this->userDataFixture = $userDataFixture;
+        $this->orderDataFixture = $orderDataFixture;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -25,24 +66,13 @@ class PerformanceDataCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getContainer();
-
-        $categoryDataFixture = $container->get(CategoryDataFixture::class);
-        /* @var $categoryDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture */
-        $productDataFixture = $container->get(ProductDataFixture::class);
-        /* @var $productDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture */
-        $userDataFixture = $container->get(UserDataFixture::class);
-        /* @var $userDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture */
-        $orderDataFixture = $container->get(OrderDataFixture::class);
-        /* @var $orderDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture */
-
         $output->writeln('<fg=green>loading ' . CategoryDataFixture::class . '</fg=green>');
-        $categoryDataFixture->load($output);
+        $this->categoryDataFixture->load($output);
         $output->writeln('<fg=green>loading ' . ProductDataFixture::class . '</fg=green>');
-        $productDataFixture->load($output);
+        $this->productDataFixture->load($output);
         $output->writeln('<fg=green>loading ' . UserDataFixture::class . '</fg=green>');
-        $userDataFixture->load($output);
+        $this->userDataFixture->load($output);
         $output->writeln('<fg=green>loading ' . OrderDataFixture::class . '</fg=green>');
-        $orderDataFixture->load($output);
+        $this->orderDataFixture->load($output);
     }
 }

@@ -3,16 +3,31 @@
 namespace Shopsys\ShopBundle\Command;
 
 use Shopsys\ShopBundle\Model\Administrator\AdministratorFacade;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class ChangeAdminPasswordCommand extends ContainerAwareCommand
+class ChangeAdminPasswordCommand extends Command
 {
     const ARG_USERNAME = 'username';
+
+    /**
+     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorFacade
+     */
+    private $administratorFacade;
+
+    /**
+     * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorFacade $administratorFacade
+     */
+    public function __construct(AdministratorFacade $administratorFacade)
+    {
+        $this->administratorFacade = $administratorFacade;
+
+        parent::__construct();
+    }
 
     /**
      * {@inheritdoc}
@@ -32,13 +47,10 @@ class ChangeAdminPasswordCommand extends ContainerAwareCommand
     {
         $io = new SymfonyStyle($input, $output);
 
-        $administratorFacade = $this->getContainer()->get(AdministratorFacade::class);
-        /* @var $administratorFacade \Shopsys\ShopBundle\Model\Administrator\AdministratorFacade */
-
         $adminUsername = $input->getArgument(self::ARG_USERNAME);
         $password = $this->askRepeatedlyForNewPassword($input, $io);
 
-        $administratorFacade->changePassword($adminUsername, $password);
+        $this->administratorFacade->changePassword($adminUsername, $password);
 
         $output->writeln(sprintf('Password for administrator "%s" was successfully changed', $adminUsername));
     }

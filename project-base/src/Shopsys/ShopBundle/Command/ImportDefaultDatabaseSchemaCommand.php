@@ -3,12 +3,28 @@
 namespace Shopsys\ShopBundle\Command;
 
 use Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ImportDefaultDatabaseSchemaCommand extends ContainerAwareCommand
+class ImportDefaultDatabaseSchemaCommand extends Command
 {
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade
+     */
+    private $databaseSchemaFacade;
+
+    /**
+     * @param \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade $databaseSchemaFacade
+     */
+    public function __construct(DatabaseSchemaFacade $databaseSchemaFacade)
+    {
+        $this->databaseSchemaFacade = $databaseSchemaFacade;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -22,11 +38,8 @@ class ImportDefaultDatabaseSchemaCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $databaseSchemaFacade = $this->getContainer()->get(DatabaseSchemaFacade::class);
-        /* @var $databaseSchemaFacade \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
-
         $output->writeln('Importing default database schema...');
-        $databaseSchemaFacade->importDefaultSchema();
+        $this->databaseSchemaFacade->importDefaultSchema();
         $output->writeln('Default database schema imported successfully!');
     }
 }

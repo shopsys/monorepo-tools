@@ -3,12 +3,28 @@
 namespace Shopsys\ShopBundle\Command;
 
 use Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class DropDatabaseSchemaCommand extends ContainerAwareCommand
+class DropDatabaseSchemaCommand extends Command
 {
+
+    /**
+     * @var \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade
+     */
+    private $databaseSchemaFacade;
+
+    /**
+     * @param \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade $databaseSchemaFacade
+     */
+    public function __construct(DatabaseSchemaFacade $databaseSchemaFacade)
+    {
+        $this->databaseSchemaFacade = $databaseSchemaFacade;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -22,11 +38,8 @@ class DropDatabaseSchemaCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $databaseSchemaFacade = $this->getContainer()->get(DatabaseSchemaFacade::class);
-        /* @var $databaseSchemaFacade \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
-
         $output->writeln('Dropping database schema...');
-        $databaseSchemaFacade->dropSchemaIfExists('public');
+        $this->databaseSchemaFacade->dropSchemaIfExists('public');
         $output->writeln('Database schema dropped successfully!');
     }
 }

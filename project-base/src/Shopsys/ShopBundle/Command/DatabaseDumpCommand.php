@@ -2,16 +2,32 @@
 
 namespace Shopsys\ShopBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\DBAL\Connection;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class DatabaseDumpCommand extends ContainerAwareCommand
+class DatabaseDumpCommand extends Command
 {
     const ARG_OUTPUT_FILE = 'outputFile';
     const OPT_PGDUMP_BIN = 'pgdump-bin';
+
+    /**
+     * @var \Doctrine\DBAL\Connection
+     */
+    private $connection;
+
+    /**
+     * @param \Doctrine\DBAL\Connection $connection
+     */
+    public function __construct(Connection $connection)
+    {
+        $this->connection = $connection;
+
+        parent::__construct();
+    }
 
     /**
      * {@inheritDoc}
@@ -32,20 +48,17 @@ class DatabaseDumpCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $connection = $this->getContainer()->get('doctrine.dbal.default_connection');
-        /* @var $connection \Doctrine\DBAL\Connection */
-
         // --schema=public option is used in order to dump only "public" schema which contains the application data
         // --no-owner option ensures that the dump can be imported on system with different database username
         $command = sprintf(
             '%s --host=%s --dbname=%s --no-owner --schema=public --username=%s --no-password',
             escapeshellcmd($input->getOption(self::OPT_PGDUMP_BIN)),
-            escapeshellarg($connection->getHost()),
-            escapeshellarg($connection->getDatabase()),
-            escapeshellarg($connection->getUsername())
+            escapeshellarg($this->connection->getHost()),
+            escapeshellarg($this->connection->getDatabase()),
+            escapeshellarg($this->connection->getUsername())
         );
 
-        putenv('PGPASSWORD=' . $connection->getPassword());
+        putenv('PGPASSWORD=' . $this->connection->getPassword());
 
         $pipes = [];
         $process = proc_open(
@@ -70,7 +83,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
         } else {
             $output->writeln(sprintf(
                 'Database "%s" dumped into file: %s',
-                $connection->getDatabase(),
+                $this->connection->getDatabase(),
                 $outputFile
             ));
         }
