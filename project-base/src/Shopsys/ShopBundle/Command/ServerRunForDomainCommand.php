@@ -14,6 +14,11 @@ class ServerRunForDomainCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:server:run';
+
+    /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */
     private $domain;
@@ -31,7 +36,6 @@ class ServerRunForDomainCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:server:run')
             ->setDescription('Runs PHP built-in web server for a chosen domain');
     }
 

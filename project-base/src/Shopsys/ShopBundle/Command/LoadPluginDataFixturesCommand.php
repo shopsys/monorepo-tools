@@ -11,6 +11,11 @@ class LoadPluginDataFixturesCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:plugin-data-fixtures:load';
+
+    /**
      * @var \Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureFacade
      */
     private $pluginDataFixtureFacade;
@@ -28,7 +33,6 @@ class LoadPluginDataFixturesCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:plugin-data-fixtures:load')
             ->setDescription('Loads data fixtures of all registered plugins');
     }
 

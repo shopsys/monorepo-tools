@@ -11,6 +11,11 @@ class GenerateFriendlyUrlCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:generate:friendly-url';
+
+    /**
      * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade
      */
     private $friendlyUrlGeneratorFacade;
@@ -28,7 +33,6 @@ class GenerateFriendlyUrlCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:generate:friendly-url')
             ->setDescription('Generate friendly urls for supported entities.');
     }
 

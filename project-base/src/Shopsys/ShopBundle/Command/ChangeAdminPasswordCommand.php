@@ -15,6 +15,11 @@ class ChangeAdminPasswordCommand extends Command
     const ARG_USERNAME = 'username';
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:administrator:change-password';
+
+    /**
      * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorFacade
      */
     private $administratorFacade;
@@ -35,7 +40,6 @@ class ChangeAdminPasswordCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:administrator:change-password')
             ->setDescription('Set new password for administrator.')
             ->addArgument(self::ARG_USERNAME, InputArgument::REQUIRED, 'Existing administrator username');
     }

@@ -12,6 +12,11 @@ class CheckTimezonesCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:check-timezones';
+
+    /**
      * @var \Doctrine\DBAL\Connection
      */
     private $connection;
@@ -29,7 +34,6 @@ class CheckTimezonesCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:check-timezones')
             ->setDescription('Checks uniformity of PHP and Postgres timezones');
     }
 

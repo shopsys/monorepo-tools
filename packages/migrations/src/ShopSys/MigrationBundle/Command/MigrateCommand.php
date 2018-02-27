@@ -14,6 +14,11 @@ class MigrateCommand extends Command
     const RETURN_CODE_ERROR = 1;
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:migrations:migrate';
+
+    /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
@@ -31,7 +36,6 @@ class MigrateCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:migrations:migrate')
             ->setDescription(
                 'Execute all database migrations and check if database schema is satisfying ORM, all in one transaction.'
             );

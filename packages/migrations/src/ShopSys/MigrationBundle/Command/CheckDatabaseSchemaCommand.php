@@ -13,6 +13,11 @@ class CheckDatabaseSchemaCommand extends Command
     const RETURN_CODE_ERROR = 1;
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:migrations:check-schema';
+
+    /**
      * @var \ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade
      */
     private $databaseSchemaFacade;
@@ -30,7 +35,6 @@ class CheckDatabaseSchemaCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:migrations:check-schema')
             ->setDescription('Check if database schema is satisfying ORM');
     }
 

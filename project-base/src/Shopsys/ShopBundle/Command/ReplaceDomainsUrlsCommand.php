@@ -13,6 +13,11 @@ class ReplaceDomainsUrlsCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:domains-urls:replace';
+
+    /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */
     private $domain;
@@ -47,7 +52,6 @@ class ReplaceDomainsUrlsCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:domains-urls:replace')
             ->setDescription('Replace domains urls in database by urls in domains config');
     }
 

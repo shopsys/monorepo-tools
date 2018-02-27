@@ -15,6 +15,11 @@ class GenerateGruntfileCommand extends Command
     /**
      * @var string
      */
+    protected static $defaultName = 'shopsys:generate:gruntfile';
+
+    /**
+     * @var string
+     */
     private $stylesDirectory;
 
     /**
@@ -63,7 +68,6 @@ class GenerateGruntfileCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:generate:gruntfile')
             ->setDescription('Generate Gruntfile.js by domain settings');
     }
 

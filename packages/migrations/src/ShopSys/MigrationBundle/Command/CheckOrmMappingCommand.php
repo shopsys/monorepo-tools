@@ -14,6 +14,11 @@ class CheckOrmMappingCommand extends Command
     const RETURN_CODE_ERROR = 1;
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:migrations:check-mapping';
+
+    /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
@@ -31,7 +36,6 @@ class CheckOrmMappingCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:migrations:check-mapping')
             ->setDescription('Check if ORM mapping is valid');
     }
 

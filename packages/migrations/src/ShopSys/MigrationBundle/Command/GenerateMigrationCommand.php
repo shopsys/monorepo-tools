@@ -14,6 +14,11 @@ class GenerateMigrationCommand extends Command
     const RETURN_CODE_ERROR = 1;
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:migrations:generate';
+
+    /**
      * @var \ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade
      */
     private $databaseSchemaFacade;
@@ -40,7 +45,6 @@ class GenerateMigrationCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:migrations:generate')
             ->setDescription('Generate a new migration if need it');
     }
 

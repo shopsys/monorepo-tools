@@ -17,6 +17,11 @@ class CreateDatabaseCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:database:create';
+
+    /**
      * @var \Doctrine\DBAL\Connection|null
      */
     private $connection;
@@ -64,7 +69,6 @@ class CreateDatabaseCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:database:create')
             ->setDescription('Creates database with required db extensions');
     }
 

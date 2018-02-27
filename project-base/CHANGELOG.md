@@ -58,7 +58,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - updated symfony/swiftmailer-bundle to version 3.2.0 in order to fix deprecated calls (@TomasLudvik)
 - all calls of Fom::isValid() are called only on submitted forms in order to prevent deprecated call (@TomasLudvik)
 - symlink so root/bin acts like root/project-base/bin (@TomasLudvik) 
-- all commands are now services with autowired dependencies (@TomasLudvik) 
+- all commands are now services, that are lazy loaded with autowired dependencies (@TomasLudvik) 
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)

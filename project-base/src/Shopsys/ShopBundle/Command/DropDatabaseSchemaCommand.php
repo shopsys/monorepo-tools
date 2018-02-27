@@ -11,6 +11,11 @@ class DropDatabaseSchemaCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:schema:drop';
+
+    /**
      * @var \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade
      */
     private $databaseSchemaFacade;
@@ -28,7 +33,6 @@ class DropDatabaseSchemaCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:schema:drop')
             ->setDescription('Drop database public schema');
     }
 

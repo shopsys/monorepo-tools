@@ -15,6 +15,12 @@ use ZipArchive;
 
 class ImageDemoCommand extends Command
 {
+
+    /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:image:demo';
+
     const EXIT_CODE_OK = 0;
     const EXIT_CODE_ERROR = 1;
 
@@ -87,7 +93,6 @@ class ImageDemoCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:image:demo')
             ->setDescription('Download demo images');
     }
 

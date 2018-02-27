@@ -11,6 +11,11 @@ class CreateDatabaseSchemaCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:schema:create';
+
+    /**
      * @var \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade
      */
     private $databaseSchemaFacade;
@@ -28,7 +33,6 @@ class CreateDatabaseSchemaCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:schema:create')
             ->setDescription('Create database public schema');
     }
 

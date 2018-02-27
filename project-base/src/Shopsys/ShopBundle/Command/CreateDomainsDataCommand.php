@@ -14,6 +14,11 @@ class CreateDomainsDataCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:domains-data:create';
+
+    /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
@@ -56,7 +61,6 @@ class CreateDomainsDataCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:domains-data:create')
             ->setDescription('Create new domains data');
     }
 

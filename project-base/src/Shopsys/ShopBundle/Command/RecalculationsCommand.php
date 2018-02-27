@@ -16,6 +16,11 @@ class RecalculationsCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:recalculations';
+
+    /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository
      */
     private $categoryVisibilityRepository;
@@ -74,7 +79,6 @@ class RecalculationsCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:recalculations')
             ->setDescription('Run all recalculations.');
     }
 

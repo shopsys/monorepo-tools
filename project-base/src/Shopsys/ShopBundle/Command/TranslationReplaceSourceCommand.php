@@ -20,10 +20,14 @@ class TranslationReplaceSourceCommand extends Command
 
     const FILE_NAME_REPLACEMENT_ERRORS = 'replacement_errors.log';
 
+    /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:translation:replace-source';
+
     protected function configure()
     {
         $this
-            ->setName('shopsys:translation:replace-source')
             ->setDescription('Replace translation sources to translated texts in target locale. To be used after translation:extract.')
             ->setHelp('Translation messages from whole project should be extracted first as this tool depends on dumped references.')
             ->addArgument(self::ARG_TRANSLATIONS_DIR, InputArgument::REQUIRED, 'Directory of extracted translations in .po format')

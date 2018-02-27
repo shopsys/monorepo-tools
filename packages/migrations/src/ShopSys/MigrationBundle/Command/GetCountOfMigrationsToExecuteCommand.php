@@ -13,6 +13,11 @@ class GetCountOfMigrationsToExecuteCommand extends ContainerAwareCommand
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:migrations:count';
+
+    /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
@@ -30,7 +35,6 @@ class GetCountOfMigrationsToExecuteCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('shopsys:migrations:count')
             ->setDescription('Get count of migrations to execute.');
     }
 

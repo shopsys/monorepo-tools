@@ -14,6 +14,11 @@ class PerformanceDataCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:performance-data';
+
+    /**
      * @var \Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture
      */
     private $categoryDataFixture;
@@ -56,7 +61,6 @@ class PerformanceDataCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:performance-data')
             ->setDescription('Import performance data to test db. Demo and base data fixtures must be imported first.');
     }
 

@@ -15,6 +15,11 @@ class DatabaseDumpCommand extends Command
     const OPT_PGDUMP_BIN = 'pgdump-bin';
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:database:dump';
+
+    /**
      * @var \Doctrine\DBAL\Connection
      */
     private $connection;
@@ -35,7 +40,6 @@ class DatabaseDumpCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:database:dump')
             ->setDescription('Dump database')
             ->addArgument(self::ARG_OUTPUT_FILE, InputArgument::REQUIRED, 'Output SQL file')
             ->addOption(self::OPT_PGDUMP_BIN, null, InputOption::VALUE_OPTIONAL, 'Path to pg_dump binary', 'pg_dump');

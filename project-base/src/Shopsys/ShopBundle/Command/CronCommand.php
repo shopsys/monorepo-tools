@@ -18,6 +18,11 @@ class CronCommand extends Command
     const OPTION_LIST = 'list';
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:cron';
+
+    /**
      * @var \Shopsys\ShopBundle\Component\Cron\CronFacade
      */
     private $cronFacade;
@@ -44,7 +49,6 @@ class CronCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:cron')
             ->setDescription('Runs background jobs. Should be executed periodically by system CRON every 5 minutes.')
             ->addOption(self::OPTION_LIST, null, InputOption::VALUE_NONE, 'List all Service commands')
             ->addOption(self::OPTION_MODULE, null, InputOption::VALUE_OPTIONAL, 'Service ID');

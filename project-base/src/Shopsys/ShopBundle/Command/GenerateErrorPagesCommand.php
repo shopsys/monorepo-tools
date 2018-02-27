@@ -11,6 +11,11 @@ class GenerateErrorPagesCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:error-page:generate-all';
+
+    /**
      * @var \Shopsys\ShopBundle\Component\Error\ErrorPagesFacade
      */
     private $errorPagesFacade;
@@ -28,7 +33,6 @@ class GenerateErrorPagesCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:error-page:generate-all')
             ->setDescription('Generates all error pages for production.');
     }
 

@@ -15,6 +15,11 @@ class CreateApplicationDirectoriesCommand extends Command
     /**
      * @var string
      */
+    protected static $defaultName = 'shopsys:create-directories';
+
+    /**
+     * @var string
+     */
     private $rootDirectory;
 
     /**
@@ -63,7 +68,6 @@ class CreateApplicationDirectoriesCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:create-directories')
             ->setDescription('Create application directories for locks, docs, content, images, uploaded files, etc.');
     }
 

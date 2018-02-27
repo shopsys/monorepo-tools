@@ -11,6 +11,11 @@ class ImportDefaultDatabaseSchemaCommand extends Command
 {
 
     /**
+     * @var string
+     */
+    protected static $defaultName = 'shopsys:schema:import-default';
+
+    /**
      * @var \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade
      */
     private $databaseSchemaFacade;
@@ -28,7 +33,6 @@ class ImportDefaultDatabaseSchemaCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shopsys:schema:import-default')
             ->setDescription('Import database default schema');
     }
 
