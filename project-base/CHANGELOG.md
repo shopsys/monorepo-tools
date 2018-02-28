@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - subscription form: added link to privacy policy agreement article (@simara-svatopluk)
 - NewsletterController now exports date of subscription to newsletter (@simara-svatopluk)
 - `services_command.yml` to set Commands as services (@TomasLudvik)
-- [docker-common-problems.md](docs/docker/docker-common-problems.md): added to help developers with common problems that occurs using docker for development(@MattCzerner)
+- [docker-troubleshooting.md](docs/docker/docker-troubleshooting.md): added to help developers with common problems that occurs using docker for development(@MattCzerner)
 - Newsletter subscriber is distinguished by domain (@stanoMilan)
     - Admin: E-mail newsletter now exports e-mails to csv for each domain separatedly
 

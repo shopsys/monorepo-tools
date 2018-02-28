@@ -1,20 +1,28 @@
-# Docker common problems solutions
+# Docker Troubleshooting
+
+1. [How to Run Multiple Projects by Docker](#how-to-run-multiple-projects-by-docker)
+    1. [Multiple Projects - Quick Solution - Only One Project Running at the Time](#multiple-projects---quick-solution---only-one-project-running-at-the-time)
+    1. [Multiple Projects - Long Term Solution](#multiple-projects---long-term-solution)
+1. [Update of Dockerfile is not Reflected](#update-of-dockerfile-is-not-reflected)
+1. [Update of Docker-compose is not Reflected](#update-of-docker-compose-is-not-reflected)
+1. [Docker Sync does not Synchronize File Consistently](#docker-sync-does-not-synchronize-file-consistently)
+
 If you are developing on Shopsys Framework using docker, you might run into some problems during the process.
 
 Most of the time you might think that a problem is in docker, but the truth is that you are probably using it wrong. This document
 provides advices that will help you develop Shopsys Framework on docker without problems.
 
-## Multiple Projects ran by docker
-If you are using Shopsys for more than one project, you might run into a problem with container names and their ports.
+## How to Run Multiple Projects by Docker
+If you are using docker for more than one Shopsys Framework project, you might run into a problem with container names and their ports.
 Docker requires to have unique container name and port for each container and since our `docker-compose` is not dynamically initialized,
 it contains hard coded container names and ports and that makes running more projects in docker on same machine impossible without 
 modifying your configuration.
 
-With that being said we got 2 options to solve this problem. First is more simple and is used if we only need  one project running at the time. 
-Second solution is more viable for someone who really needs to have projects ready to run in a few seconds and often end up having 
-2 or more projects running at the same time.
+With that being said we got two options to solve this problem.
 
-### Only one project running at the time
+### Multiple Projects - Quick Solution - Only One Project Running at the Time
+This solution is simpler and is used if we only need one project running at the time.
+
 All we really need to do is to properly turn off `docker-compose`. 
 
 Usually everyone shut off their `docker-compose` by running `docker-compose stop`, which is not correct way.
@@ -32,13 +40,14 @@ docker-compose down
 This will not only stop the containers but it will also delete them. This means, that containers and all their data in volumes will be deleted.
 Now you can use same configuration in other project and it will work.
 
-### Proper Solution
-So what if we don't want to always reinstall whole containers and we want our data to persist in volumes?
+### Multiple Projects - Long Term Solution
+This solution is more viable for someone who really needs to have projects ready to run in a few seconds and often end up having
+two or more projects running at the same time. So what if we don't want to always reinstall whole containers and we want our data to persist in volumes?
 
 Earlier we said that Docker needs to have unique container names and ports. 
 
 So how about changing their name?
-We recommend to replace `shopsys-framework` with your project name for instance php-fpm conainer that is defaultly named as 
+We recommend to replace `shopsys-framework` with your project name. For instance, php-fpm conainer that is defaultly named as 
 `shopsys-framework-php-fpm` would now be named `my-project-name-php-fpm`.
 
 This would actually work only if you always downed `docker-compose` before switching between projects.
@@ -77,7 +86,7 @@ Remember that after changing these you need to do few things differently.
 docker exec -it my-new-project-name-php-fpm bash
 ``` 
 
-## Update of Dockerfile
+## Update of Dockerfile is not Reflected
 Sometimes there is need to change the dockerfile for one of our images.
 If we already had project once running in docker, there is probably cached image for the container.
 
@@ -112,7 +121,7 @@ it is forced to look right into dockerfile and build it from scratch.
 
 Done, our change is running and our whale is floating in ocean of containers once again.
 
-## Update of Docker-compose
+## Update of Docker-compose is not Reflected
 Docker compose is much easier to change than images. If we change anything in `docker-compose` we just need to recreate `docker-compose`.
 That is done by executing:
 
@@ -120,7 +129,7 @@ That is done by executing:
 docker-compose up -d --force-recreate
 ```
 
-## Docker Sync does not synchronize file consistently
+## Docker Sync does not Synchronize File Consistently
 Docker sync sometimes stops the synchronization of files. This is issue that docker sync is aware of, but there is no solution yet.
 So if this happens, we use this workaround to get docker sync to functional state back again.
 

@@ -20,4 +20,5 @@ You can also login into the administration section on [http://127.0.0.1:8000/adm
 You can take part in making Shopsys Framework better. See [Contributing guide](CONTRIBUTING.md) for details. 
 
 ## Need help
-Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).
+* [Docker troubleshooting](docs/docker/docker-troubleshooting.md)
+* Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).
