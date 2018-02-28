@@ -15,6 +15,7 @@ use Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade;
+use Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail;
 use Symfony\Component\HttpFoundation\Request;
 
 class MailController extends AdminBaseController
@@ -54,6 +55,11 @@ class MailController extends AdminBaseController
      */
     private $orderStatusFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail
+     */
+    private $personalDataAccessMail;
+
     public function __construct(
         ResetPasswordMail $resetPasswordMail,
         OrderMailService $orderMailService,
@@ -61,7 +67,8 @@ class MailController extends AdminBaseController
         AdminDomainTabsFacade $adminDomainTabsFacade,
         MailTemplateFacade $mailTemplateFacade,
         MailSettingFacade $mailSettingFacade,
-        OrderStatusFacade $orderStatusFacade
+        OrderStatusFacade $orderStatusFacade,
+        PersonalDataAccessMail $personalDataAccessMail
     ) {
         $this->resetPasswordMail = $resetPasswordMail;
         $this->orderMailService = $orderMailService;
@@ -70,6 +77,7 @@ class MailController extends AdminBaseController
         $this->mailTemplateFacade = $mailTemplateFacade;
         $this->mailSettingFacade = $mailSettingFacade;
         $this->orderStatusFacade = $orderStatusFacade;
+        $this->personalDataAccessMail = $personalDataAccessMail;
     }
 
     /**
@@ -124,6 +132,18 @@ class MailController extends AdminBaseController
     }
 
     /**
+     * @return array
+     */
+    private function getPersonalDataAccessVariablesLabels()
+    {
+        return [
+            PersonalDataAccessMail::VARIABLE_DOMAIN => t('E-shop name'),
+            PersonalDataAccessMail::VARIABLE_EMAIL => t('E-mail'),
+            PersonalDataAccessMail::VARIABLE_URL => t('E-shop URL address'),
+        ];
+    }
+
+    /**
      * @Route("/mail/template/")
      */
     public function templateAction(Request $request)
@@ -134,6 +154,7 @@ class MailController extends AdminBaseController
 
         $form = $this->createForm(AllMailTemplatesFormType::class, $allMailTemplatesData);
         $form->handleRequest($request);
+        $allMailTemplatesData->getAllTemplates();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->mailTemplateFacade->saveMailTemplatesData(
@@ -213,6 +234,10 @@ class MailController extends AdminBaseController
             MailTemplate::RESET_PASSWORD_NAME,
             $selectedDomainId
         );
+        $personalDataAccessTemplate = $this->mailTemplateFacade->get(
+            MailTemplate::PERSONAL_DATA_ACCESS_NAME,
+            $selectedDomainId
+        );
 
         return [
             'orderStatusesIndexedById' => $this->orderStatusFacade->getAllIndexedById(),
@@ -227,6 +252,10 @@ class MailController extends AdminBaseController
             'resetPasswordVariables' => $resetPasswordTemplateVariables,
             'resetPasswordVariablesLabels' => $this->getResetPasswordVariablesLabels(),
             'TYPE_NEW' => OrderStatus::TYPE_NEW,
+            'personalDataAccessTemplate' => $personalDataAccessTemplate,
+            'personalDataAccessVariables' => $this->personalDataAccessMail->getSubjectVariables(),
+            'personalDataAccessRequiredVariablesLabels' => $this->personalDataAccessMail->getRequiredBodyVariables(),
+            'personalDataAccessVariablesLabels' => $this->getPersonalDataAccessVariablesLabels(),
         ];
     }
 }

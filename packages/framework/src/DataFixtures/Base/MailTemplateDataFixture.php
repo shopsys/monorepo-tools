@@ -74,6 +74,18 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
             . 'Log in page: {login_page}';
 
         $this->createMailTemplate($manager, MailTemplate::REGISTRATION_CONFIRM_NAME, $mailTemplateData);
+
+        $mailTemplateData->subject = 'Personal information overview - {domain}';
+        $mailTemplateData->body = 'Dear customer, <br /><br />
+            based on your email {e-mail}, we are sending you a link to your personal details. By clicking on the link below, you will be taken to a page listing all the<br/>
+            personal details which we have in evidence in our online store {domain}. 
+            <br/><br/>
+            To overview your personal information please click here - {url} <br/>
+            The link is valid for next 24 hours.<br/>
+            Best Regards <br/><br/>
+            team of {domain}';
+
+        $this->createMailTemplate($manager, MailTemplate::PERSONAL_DATA_ACCESS_NAME, $mailTemplateData);
     }
 
     private function createMailTemplate(
@@ -81,7 +93,19 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
         $name,
         MailTemplateData $mailTemplateData
     ) {
-        $mailTemplate = new MailTemplate($name, Domain::FIRST_DOMAIN_ID, $mailTemplateData);
+        $repository = $manager->getRepository(MailTemplate::class);
+
+        $mailTemplate = $repository->findOneBy([
+            'name' => $name,
+            'domainId' => Domain::FIRST_DOMAIN_ID,
+        ]);
+
+        if ($mailTemplate === null) {
+            $mailTemplate = new MailTemplate($name, Domain::FIRST_DOMAIN_ID, $mailTemplateData);
+        } else {
+            $mailTemplate->edit($mailTemplateData);
+        }
+
         $manager->persist($mailTemplate);
         $manager->flush($mailTemplate);
     }

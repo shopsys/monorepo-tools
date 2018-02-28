@@ -20,6 +20,11 @@ class AllMailTemplatesData
     public $resetPasswordTemplate;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData
+     */
+    public $personalDataAccessTemplate;
+
+    /**
      * @var int
      */
     public $domainId;
@@ -32,6 +37,7 @@ class AllMailTemplatesData
         $allTemplates = $this->orderStatusTemplates;
         $allTemplates[] = $this->registrationTemplate;
         $allTemplates[] = $this->resetPasswordTemplate;
+        $allTemplates[] = $this->personalDataAccessTemplate;
         return $allTemplates;
     }
 }

@@ -9,6 +9,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\OrderDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\PersonalDataAccessRequestDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixture;
 use Shopsys\HttpSmokeTesting\Auth\BasicHttpAuth;
@@ -357,8 +358,15 @@ class RouteConfigCustomization
                     ->setExpectedStatusCode(302);
             })
             ->customizeByRouteName('front_personal_data_access', function (RouteConfig $config) {
-                $config->changeDefaultRequestDataSet('Check personal data site')
-                    ->setParameter('email', 'vitek@netdevelo.cz');
+                $personalDataAccessRequest = $this->getPersistentReference(PersonalDataAccessRequestDataFixture::VALID_ACCESS_REQUEST);
+                /* @var $personalDataAccessRequest \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequest */
+
+                $config->changeDefaultRequestDataSet('Check personal data site with wrong hash')
+                    ->setParameter('hash', 'invalidHash')
+                    ->setExpectedStatusCode(404);
+                $config->addExtraRequestDataSet('Check personal data site with right hash')
+                    ->setParameter('hash', $personalDataAccessRequest->getHash())
+                    ->setExpectedStatusCode(200);
             });
     }
 

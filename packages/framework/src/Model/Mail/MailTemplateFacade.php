@@ -132,6 +132,14 @@ class MailTemplateFacade
         $allMailTemplatesData->orderStatusTemplates =
             $this->orderStatusMailTemplateService->getOrderStatusMailTemplatesData($orderStatuses, $mailTemplates);
 
+        $personalAccessTemplateData = new MailTemplateData();
+        $personaAccessTemplate = $this->mailTemplateRepository
+            ->findByNameAndDomainId(MailTemplate::PERSONAL_DATA_ACCESS_NAME, $domainId);
+        if ($personaAccessTemplate !== null) {
+            $personalAccessTemplateData->setFromEntity($personaAccessTemplate);
+        }
+        $allMailTemplatesData->personalDataAccessTemplate = $personalAccessTemplateData;
+
         return $allMailTemplatesData;
     }
 

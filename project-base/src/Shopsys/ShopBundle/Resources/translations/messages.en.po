@@ -539,6 +539,7 @@ msgstr ""
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/orderList.html.twig:11
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Customer/orderDetail.html.twig:33
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/PersonalData/detail.html.twig:48
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/PersonalData/order.html.twig:26
 msgid "Billing address"
 msgstr ""
 
@@ -1249,6 +1250,7 @@ msgstr ""
 
 #: MailController.php:90
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/PersonalData/detail.html.twig:64
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/PersonalData/order.html.twig:33
 msgid "Delivery address"
 msgstr ""
 
@@ -1744,6 +1746,10 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:1013
 msgid "Elements can be ordered behind each other"
+msgstr ""
+
+#: PersonalDataController.php:83
+msgid "Email with link to personal data access site was sent"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Cart/index.html.twig:157
@@ -3395,6 +3401,10 @@ msgstr ""
 msgid "Personal data of registered customer"
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Mail/template.html.twig:138
+msgid "Personal data request"
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/ShopInfo/shopInfo.html.twig:17
 msgid "Phone availability"
 msgstr ""
@@ -3850,7 +3860,7 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Mail/template.html.twig:139
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Mail/template.html.twig:148
 msgid "Save changes in all templates"
 msgstr ""
 

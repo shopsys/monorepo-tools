@@ -8,6 +8,10 @@
     {{ parent() }}
 {% endblock %}
 
+{% block meta_robots -%}
+    <meta name="robots" content="noindex">
+{% endblock %}
+
 {% block main_content %}
     <div class="in-user-text">
         <h1>{{ 'Personal information overview'|trans }}</h1>
@@ -19,6 +23,7 @@
                 {{ form_row(form.email) }}
                 {{ form_row(form.send) }}
             {{ form_end(form) }}
+            {{ form_errors(form, { errors_attr: { class : 'in-message--alert' } }) }}
         </div>
     </div>
 

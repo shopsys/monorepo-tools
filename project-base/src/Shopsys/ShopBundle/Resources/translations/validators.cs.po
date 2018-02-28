@@ -557,7 +557,7 @@ msgstr "Prosím zadejte platný třímístný kód měny podle standardu ISO 421
 #: ContactFormType.php:43
 #: MailSettingFormType.php:26
 #: OrderFormType.php:115
-#: PersonalDataFormType.php:22
+#: PersonalDataFormType.php:30
 #: PersonalInfoFormType.php:65
 #: RegistrationFormType.php:47
 #: ResetPasswordFormType.php:25

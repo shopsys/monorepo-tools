@@ -120,6 +120,9 @@ services:
   Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade:
     public: true
 
+  Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFacade:
+    public: true
+
   Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig:
     public: true
 
