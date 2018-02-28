@@ -36,7 +36,9 @@ class HttpSmokeTest extends HttpSmokeTestCase
         /* @var $entityManager \Doctrine\ORM\EntityManager */
 
         $entityManager->beginTransaction();
+        ob_start();
         $response = parent::handleRequest($request);
+        ob_end_clean();
         $entityManager->rollback();
 
         return $response;
