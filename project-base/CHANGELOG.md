@@ -56,7 +56,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - updated presta/sitemap-bundle to version 1.5.2 in order to avoid deprecated calls (@TomasLudvik)
  - updated SitemapListener to avoid using of deprecated SitemapListenerInterface
 - updated symfony/swiftmailer-bundle to version 3.2.0 in order to fix deprecated calls (@TomasLudvik)
-- all calls of Fom::isValid() are called only on submitted forms in order to prevent deprecated call (@TomasLudvik)
+- all calls of Form::isValid() are called only on submitted forms in order to prevent deprecated call (@TomasLudvik)
 - symlink so root/bin acts like root/project-base/bin (@TomasLudvik) 
 - all commands are now services, that are lazy loaded with autowired dependencies (@TomasLudvik) 
 
