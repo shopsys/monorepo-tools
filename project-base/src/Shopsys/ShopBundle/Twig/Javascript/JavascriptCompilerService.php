@@ -22,9 +22,9 @@ class JavascriptCompilerService
     private $jsUrlPrefix;
 
     /**
-     * @var string
+     * @var string[]
      */
-    private $jsSourcePath;
+    private $jsSourcePaths;
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
@@ -52,16 +52,16 @@ class JavascriptCompilerService
     private $assetPackages;
 
     public function __construct(
-        $webPath,
-        $jsSourcePath,
-        $jsUrlPrefix,
+        string $webPath,
+        array $jsSourcePaths,
+        string $jsUrlPrefix,
         Filesystem $filesystem,
         Domain $domain,
         JsCompiler $jsCompiler,
         Packages $assetPackages
     ) {
         $this->webPath = $webPath;
-        $this->jsSourcePath = $jsSourcePath;
+        $this->jsSourcePaths = $jsSourcePaths;
         $this->jsUrlPrefix = $jsUrlPrefix;
         $this->filesystem = $filesystem;
         $this->domain = $domain;
@@ -89,24 +89,29 @@ class JavascriptCompilerService
      */
     private function process($javascript)
     {
-        if ($this->tryToProcessJavascriptFile($javascript)) {
-            return;
+        foreach ($this->jsSourcePaths as $jsSourcePath) {
+            if ($this->tryToProcessJavascriptFile($jsSourcePath, $javascript)) {
+                return;
+            }
         }
 
-        if ($this->tryToProcessJavascriptDirectoryMask($javascript)) {
-            return;
+        foreach ($this->jsSourcePaths as $jsSourcePath) {
+            if ($this->tryToProcessJavascriptDirectoryMask($jsSourcePath, $javascript)) {
+                return;
+            }
         }
 
         $this->processExternalJavascript($javascript);
     }
 
     /**
+     * @param string $jsSourcePath
      * @param string $javascript
      * @return bool
      */
-    private function tryToProcessJavascriptFile($javascript)
+    private function tryToProcessJavascriptFile($jsSourcePath, $javascript)
     {
-        $sourcePath = $this->jsSourcePath . '/' . $javascript;
+        $sourcePath = $jsSourcePath . '/' . $javascript;
         $relativeTargetPath = $this->getRelativeTargetPath($javascript);
 
         if ($relativeTargetPath === null) {
@@ -143,7 +148,7 @@ class JavascriptCompilerService
     private function getRelativeTargetPath($javascript)
     {
         $relativeTargetPath = null;
-        if (strpos($javascript, 'admin/') === 0 || strpos($javascript, 'frontend/') === 0) {
+        if (strpos($javascript, 'admin/') === 0 || strpos($javascript, 'frontend/') === 0 || strpos($javascript, 'common/') === 0) {
             $relativeTargetPath = substr($this->jsUrlPrefix, 1) . $javascript;
             if (strpos($relativeTargetPath, '/') === 0) {
                 $relativeTargetPath = substr($relativeTargetPath, 1);
@@ -193,39 +198,36 @@ class JavascriptCompilerService
     }
 
     /**
+     * @param string $jsSourcePath
      * @param string $directoryMask
      * @return bool
      */
-    private function tryToProcessJavascriptDirectoryMask($directoryMask)
+    private function tryToProcessJavascriptDirectoryMask($jsSourcePath, $directoryMask)
     {
         $parts = explode('/', $directoryMask);
         $mask = array_pop($parts);
         $path = implode('/', $parts);
 
-        if (!$this->isMaskValid($mask)) {
+        if (!$this->isMaskValid($mask) || !is_dir($jsSourcePath . '/' . $path)) {
             return false;
         }
 
         $filenameMask = $mask === '' ? '*' : $mask;
-
-        return $this->processJavascriptByMask($path, $filenameMask);
+        return $this->processJavascriptByMask($jsSourcePath, $path, $filenameMask);
     }
 
     /**
+     * @param string $jsSourcePath
      * @param string $path
      * @param string $filenameMask
      * @return bool
      */
-    private function processJavascriptByMask($path, $filenameMask)
+    private function processJavascriptByMask($jsSourcePath, $path, $filenameMask)
     {
-        $filesystemPath = $this->jsSourcePath . '/' . $path;
-
-        if (is_dir($filesystemPath)) {
-            $filepaths = (array)glob($filesystemPath . '/' . $filenameMask);
-            foreach ($filepaths as $filepath) {
-                $javascript = str_replace($this->jsSourcePath . '/', '', $filepath);
-                $this->tryToProcessJavascriptFile($javascript);
-            }
+        $filepaths = (array)glob($jsSourcePath . '/' . $path . '/' . $filenameMask);
+        foreach ($filepaths as $filepath) {
+            $javascript = str_replace($jsSourcePath . '/', '', $filepath);
+            $this->tryToProcessJavascriptFile($jsSourcePath, $javascript);
         }
 
         return true;

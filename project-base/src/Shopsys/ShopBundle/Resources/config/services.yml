@@ -722,7 +722,7 @@ services:
   Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService:
     arguments:
       - '%shopsys.web_dir%'
-      - '%shopsys.javascript_sources_dir%'
+      - ['%shopsys.javascript_sources_dir%']
       - '%shopsys.javascript_url_prefix%'
 
   translation.loader.po:
