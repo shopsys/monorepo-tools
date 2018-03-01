@@ -53,7 +53,7 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
     {
         return [
             'choices' => $this->orderStatusFacade->getAll(),
-            'choice_name' => 'name',
+            'choice_label' => 'name',
             'choice_value' => 'id',
             'expanded' => false,
             'multiple' => false,
