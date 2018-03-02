@@ -74,6 +74,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - CategoryRepository::getCategoriesWithVisibleChildren() checks visibility of children (@petr.kadlec)
 - added missing migration for privacy policy article (@MattCzerner)
 - OrderStatusFilter: show names in labels instead of ids (@simara-svatopluk)
+- legal conditions text in order 3rd step is not HTML escaped anymore (@vitek-rostislav)  
 
 ### Removed
 - PHPStorm Inspect is no longer used for static analysis of source code (@TomasLudvik)
