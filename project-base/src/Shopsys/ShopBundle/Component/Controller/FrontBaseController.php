@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Controller;
+namespace Shopsys\FrameworkBundle\Component\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class FrontBaseController extends Controller
 {
     /**
-     * @return \Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender
+     * @return \Shopsys\FrameworkBundle\Component\FlashMessage\FlashMessageSender
      */
     public function getFlashMessageSender()
     {

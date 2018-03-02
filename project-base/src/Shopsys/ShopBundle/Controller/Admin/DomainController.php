@@ -1,43 +1,43 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Controller\ErrorService;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Domain\DomainFacade;
-use Shopsys\ShopBundle\Component\Grid\ArrayDataSource;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Form\Admin\Domain\DomainFormType;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Controller\ErrorService;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\DomainFacade;
+use Shopsys\FrameworkBundle\Component\Grid\ArrayDataSource;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Form\Admin\Domain\DomainFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class DomainController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\DomainFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\DomainFacade
      */
     private $domainFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Controller\ErrorService
+     * @var \Shopsys\FrameworkBundle\Component\Controller\ErrorService
      */
     private $errorService;
 
@@ -57,7 +57,7 @@ class DomainController extends AdminBaseController
 
     public function domainTabsAction()
     {
-        return $this->render('@ShopsysShop/Admin/Inline/Domain/tabs.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Inline/Domain/tabs.html.twig', [
             'domainConfigs' => $this->domain->getAll(),
             'selectedDomainId' => $this->adminDomainTabsFacade->getSelectedDomainId(),
         ]);
@@ -94,9 +94,9 @@ class DomainController extends AdminBaseController
         $grid->addColumn('locale', 'locale', t('Language'));
         $grid->addColumn('icon', 'icon', t('Icon'));
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Domain/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Domain/listGrid.html.twig');
 
-        return $this->render('@ShopsysShop/Admin/Content/Domain/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Domain/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -130,9 +130,9 @@ class DomainController extends AdminBaseController
                 );
 
                 return new JsonResponse(['result' => 'valid']);
-            } catch (\Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
+            } catch (\Shopsys\FrameworkBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
                 $this->getFlashMessageSender()->addErrorFlash(t('File type not supported.'));
-            } catch (\Shopsys\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException $ex) {
+            } catch (\Shopsys\FrameworkBundle\Component\FileUpload\Exception\MoveToFolderFailedException $ex) {
                 $this->getFlashMessageSender()->addErrorFlash(t('File upload failed, try again please.'));
             }
         }
@@ -145,7 +145,7 @@ class DomainController extends AdminBaseController
             ]);
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Domain/edit.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Domain/edit.html.twig', [
             'form' => $form->createView(),
             'domain' => $domain,
         ]);

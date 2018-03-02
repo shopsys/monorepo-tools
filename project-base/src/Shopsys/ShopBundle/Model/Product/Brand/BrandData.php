@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Brand;
+namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 
-use Shopsys\ShopBundle\Form\UrlListData;
+use Shopsys\FrameworkBundle\Form\UrlListData;
 
 class BrandData
 {
@@ -22,7 +22,7 @@ class BrandData
     public $descriptions;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\UrlListData
+     * @var \Shopsys\FrameworkBundle\Form\UrlListData
      */
     public $urls;
 

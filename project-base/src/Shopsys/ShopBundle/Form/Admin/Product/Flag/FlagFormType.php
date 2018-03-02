@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Product\Flag;
+namespace Shopsys\FrameworkBundle\Form\Admin\Product\Flag;
 
-use Shopsys\ShopBundle\Form\ColorPickerType;
-use Shopsys\ShopBundle\Form\Locale\LocalizedType;
-use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
+use Shopsys\FrameworkBundle\Form\ColorPickerType;
+use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
+use Shopsys\FrameworkBundle\Model\Product\Flag\FlagData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;

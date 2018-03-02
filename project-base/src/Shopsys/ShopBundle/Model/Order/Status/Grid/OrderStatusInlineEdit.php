@@ -1,17 +1,17 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Status\Grid;
+namespace Shopsys\FrameworkBundle\Model\Order\Status\Grid;
 
-use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use Shopsys\ShopBundle\Form\Admin\Order\Status\OrderStatusFormType;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
+use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\FrameworkBundle\Form\Admin\Order\Status\OrderStatusFormType;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\Form\FormFactory;
 
 class OrderStatusInlineEdit extends AbstractGridInlineEdit
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade
      */
     private $orderStatusFacade;
 
@@ -31,7 +31,7 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData $orderStatusData
      * @return int
      */
     protected function createEntityAndGetId($orderStatusData)
@@ -43,7 +43,7 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int $orderStatusId
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData $orderStatusData
      */
     protected function editEntity($orderStatusId, $orderStatusData)
     {

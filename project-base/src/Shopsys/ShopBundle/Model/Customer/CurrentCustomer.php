@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer;
+namespace Shopsys\FrameworkBundle\Model\Customer;
 
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class CurrentCustomer
@@ -13,7 +13,7 @@ class CurrentCustomer
     private $tokenStorage;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
     private $pricingGroupSettingFacade;
 
@@ -26,7 +26,7 @@ class CurrentCustomer
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
      */
     public function getPricingGroup()
     {
@@ -39,7 +39,7 @@ class CurrentCustomer
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Customer\User|null
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User|null
      */
     public function findCurrentUser()
     {

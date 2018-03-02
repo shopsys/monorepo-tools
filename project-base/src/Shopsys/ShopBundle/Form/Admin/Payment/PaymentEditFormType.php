@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Payment;
+namespace Shopsys\FrameworkBundle\Form\Admin\Payment;
 
-use Shopsys\ShopBundle\Model\Payment\PaymentEditData;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentEditData;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints;
 class PaymentEditFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
     private $currencyFacade;
 

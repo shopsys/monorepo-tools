@@ -1,8 +1,8 @@
-{% extends '@ShopsysShop/Admin/Grid/Grid.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_value_cell_edit_id_percent %}
     <span class="form-edit-block form-edit-block--size-0">
-        {% form_theme form '@ShopsysShop/Admin/Form/theme.html.twig' %}
+        {% form_theme form '@ShopsysFramework/Admin/Form/theme.html.twig' %}
         {{ form_widget(form.percent) }}
         <span class="form-edit-block__info">
             %

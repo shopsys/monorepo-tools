@@ -1,27 +1,27 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValueData;
-use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData;
 
 class ProductParametersFixtureLoader
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade
      */
     private $parameterFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter[]
      */
     private $parameters;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
      */
     public function __construct(ParameterFacade $parameterFacade)
     {
@@ -31,7 +31,7 @@ class ProductParametersFixtureLoader
 
     /**
      * @param string|null $cellValue
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData[]
      */
     public function getProductParameterValuesDataFromString($cellValue)
     {
@@ -101,7 +101,7 @@ class ProductParametersFixtureLoader
 
     /**
      * @param string[] $parameterNamesByLocale
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
      */
     private function findParameterByNamesOrCreateNew(array $parameterNamesByLocale)
     {

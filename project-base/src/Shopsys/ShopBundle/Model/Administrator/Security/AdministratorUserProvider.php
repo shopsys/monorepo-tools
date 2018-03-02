@@ -1,25 +1,25 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Administrator\Security;
+namespace Shopsys\FrameworkBundle\Model\Administrator\Security;
 
 use DateTime;
-use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
-use Shopsys\ShopBundle\Model\Administrator\Administrator;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorRepository;
-use Shopsys\ShopBundle\Model\Security\TimelimitLoginInterface;
-use Shopsys\ShopBundle\Model\Security\UniqueLoginInterface;
+use Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade;
+use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository;
+use Shopsys\FrameworkBundle\Model\Security\TimelimitLoginInterface;
+use Shopsys\FrameworkBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class AdministratorUserProvider implements UserProviderInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorRepository
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository
      */
     private $administratorRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade
      */
     private $administratorActivityFacade;
 
@@ -33,7 +33,7 @@ class AdministratorUserProvider implements UserProviderInterface
 
     /**
      * @param string $username The username
-     * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
+     * @return \Shopsys\FrameworkBundle\Model\Administrator\Administrator
      */
     public function loadUserByUsername($username)
     {
@@ -41,7 +41,7 @@ class AdministratorUserProvider implements UserProviderInterface
 
         if ($administrator === null) {
             $message = sprintf(
-                'Unable to find an active admin Shopsys\ShopBundle\Model\Administrator\Administrator object identified by "%s".',
+                'Unable to find an active admin Shopsys\FrameworkBundle\Model\Administrator\Administrator object identified by "%s".',
                 $username
             );
             throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException($message, 0);
@@ -52,7 +52,7 @@ class AdministratorUserProvider implements UserProviderInterface
 
     /**
      * @param \Symfony\Component\Security\Core\User\UserInterface $administrator
-     * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
+     * @return \Shopsys\FrameworkBundle\Model\Administrator\Administrator
      */
     public function refreshUser(UserInterface $administrator)
     {

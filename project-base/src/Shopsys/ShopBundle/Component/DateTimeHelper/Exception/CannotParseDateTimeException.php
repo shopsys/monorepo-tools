@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\DateTimeHelper\Exception;
+namespace Shopsys\FrameworkBundle\Component\DateTimeHelper\Exception;
 
 use Exception;
 

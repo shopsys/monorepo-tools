@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Brand;
+namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 
 class BrandEditDataFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactory
      */
     private $brandDataFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository
      */
     private $brandRepository;
 
@@ -23,8 +23,8 @@ class BrandEditDataFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditData
      */
     public function createFromBrand(Brand $brand)
     {
@@ -37,8 +37,8 @@ class BrandEditDataFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\BrandEditData $brandEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditData $brandEditData
      */
     private function setMultidomainData(Brand $brand, BrandEditData $brandEditData)
     {
@@ -53,7 +53,7 @@ class BrandEditDataFactory
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandEditData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditData
      */
     public function createDefault()
     {

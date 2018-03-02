@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Image;
+namespace Shopsys\FrameworkBundle\Component\Image;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ImageDeleteDoctrineListener
@@ -15,7 +15,7 @@ class ImageDeleteDoctrineListener
     private $container;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
+     * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      */
     private $imageConfig;
 
@@ -30,7 +30,7 @@ class ImageDeleteDoctrineListener
     /**
      * Prevent ServiceCircularReferenceException (DoctrineListener cannot be dependent on the EntityManager)
      *
-     * @return \Shopsys\ShopBundle\Component\Image\ImageFacade
+     * @return \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
     private function getImageFacade()
     {

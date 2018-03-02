@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Availability;
+namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
 class AvailabilityService
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData $availabilityData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      */
     public function create(AvailabilityData $availabilityData)
     {
@@ -14,9 +14,9 @@ class AvailabilityService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability $availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData $availabilityData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      */
     public function edit(Availability $availability, AvailabilityData $availabilityData)
     {

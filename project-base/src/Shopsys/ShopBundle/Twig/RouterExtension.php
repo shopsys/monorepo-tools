@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig;
+namespace Shopsys\FrameworkBundle\Twig;
 
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -10,12 +10,12 @@ use Twig_SimpleFunction;
 class RouterExtension extends Twig_Extension
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+     * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
      */
     public function __construct(DomainRouterFactory $domainRouterFactory)
     {

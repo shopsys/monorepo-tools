@@ -1,28 +1,28 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Customer\CustomerFormType;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\Customer\CustomerData;
-use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
-use Shopsys\ShopBundle\Model\Customer\CustomerListAdminFacade;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
-use Shopsys\ShopBundle\Model\Order\OrderFacade;
-use Shopsys\ShopBundle\Model\Security\LoginAsUserFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Customer\CustomerFormType;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerListAdminFacade;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
+use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
+use Shopsys\FrameworkBundle\Model\Security\LoginAsUserFacade;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -31,52 +31,52 @@ class CustomerController extends AdminBaseController
     const LOGIN_AS_TOKEN_ID_PREFIX = 'loginAs';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\UserDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory
      */
     private $userDataFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CustomerListAdminFacade
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerListAdminFacade
      */
     private $customerListAdminFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade
      */
     private $customerFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
     private $administratorGridFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade
      */
     private $orderFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Security\LoginAsUserFacade
+     * @var \Shopsys\FrameworkBundle\Model\Security\LoginAsUserFacade
      */
     private $loginAsUserFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
 
@@ -143,7 +143,7 @@ class CustomerController extends AdminBaseController
 
         $orders = $this->orderFacade->getCustomerOrderList($user);
 
-        return $this->render('@ShopsysShop/Admin/Content/Customer/edit.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Customer/edit.html.twig', [
             'form' => $form->createView(),
             'user' => $user,
             'orders' => $orders,
@@ -159,7 +159,7 @@ class CustomerController extends AdminBaseController
     public function listAction(Request $request)
     {
         $administrator = $this->getUser();
-        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
+        /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
 
         $quickSearchForm = $this->createForm(QuickSearchFormType::class, new QuickSearchFormData());
         $quickSearchForm->handleRequest($request);
@@ -191,11 +191,11 @@ class CustomerController extends AdminBaseController
         $grid->addDeleteActionColumn('admin_customer_delete', ['id' => 'id'])
             ->setConfirmMessage(t('Do you really want to remove this customer?'));
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Customer/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Customer/listGrid.html.twig');
 
         $this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-        return $this->render('@ShopsysShop/Admin/Content/Customer/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Customer/list.html.twig', [
             'gridView' => $grid->createView(),
             'quickSearchForm' => $quickSearchForm->createView(),
         ]);
@@ -237,7 +237,7 @@ class CustomerController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Customer/new.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Customer/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -260,7 +260,7 @@ class CustomerController extends AdminBaseController
                     'name' => $fullName,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Customer\Exception\UserNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Customer\Exception\UserNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected customer doesn\'t exist.'));
         }
 
@@ -280,7 +280,7 @@ class CustomerController extends AdminBaseController
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @return string
      */
     private function getSsoLoginAsUserUrl(User $user)

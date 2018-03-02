@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Advert\Exception;
+namespace Shopsys\FrameworkBundle\Model\Advert\Exception;
 
 interface AdvertException
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
 
 class BreadcrumbController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
 
@@ -25,7 +25,7 @@ class BreadcrumbController extends AdminBaseController
     {
         $items = $this->breadcrumb->getItems($route, $parameters);
 
-        return $this->render('@ShopsysShop/Admin/Inline/Breadcrumb/breadcrumb.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Inline/Breadcrumb/breadcrumb.html.twig', [
             'items' => $items,
         ]);
     }

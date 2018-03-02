@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Model\Country\CountryInlineEdit;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Model\Country\CountryInlineEdit;
 
 class CountryController extends AdminBaseController
 {
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\CountryInlineEdit
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryInlineEdit
      */
     private $countryInlineEdit;
 
@@ -29,7 +29,7 @@ class CountryController extends AdminBaseController
 
         $grid = $countryInlineEdit->getGrid();
 
-        return $this->render('@ShopsysShop/Admin/Content/Country/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Country/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }

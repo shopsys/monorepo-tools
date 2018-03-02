@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Item\Exception;
+namespace Shopsys\FrameworkBundle\Model\Order\Item\Exception;
 
 use Exception;
 

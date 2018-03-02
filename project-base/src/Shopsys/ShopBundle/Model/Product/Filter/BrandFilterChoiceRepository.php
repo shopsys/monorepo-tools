@@ -1,17 +1,17 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Filter;
+namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class BrandFilterChoiceRepository
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
@@ -23,9 +23,9 @@ class BrandFilterChoiceRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[]
      */
     public function getBrandFilterChoicesInCategory($domainId, PricingGroup $pricingGroup, Category $category)
     {
@@ -40,10 +40,10 @@ class BrandFilterChoiceRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string $locale
      * @param string|null $searchText
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[]
      */
     public function getBrandFilterChoicesForSearch($domainId, PricingGroup $pricingGroup, $locale, $searchText)
     {
@@ -55,7 +55,7 @@ class BrandFilterChoiceRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[]
      */
     private function getBrandsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder)
     {

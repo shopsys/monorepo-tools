@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Plugin;
+namespace Shopsys\FrameworkBundle\Component\Plugin;
 
+use Shopsys\FrameworkBundle\Component\Plugin\Exception\PluginCrudExtensionAlreadyRegisteredException;
+use Shopsys\FrameworkBundle\Component\Plugin\Exception\UnknownPluginCrudExtensionTypeException;
+use Shopsys\FrameworkBundle\Component\String\TransformString;
 use Shopsys\Plugin\PluginCrudExtensionInterface;
-use Shopsys\ShopBundle\Component\Plugin\Exception\PluginCrudExtensionAlreadyRegisteredException;
-use Shopsys\ShopBundle\Component\Plugin\Exception\UnknownPluginCrudExtensionTypeException;
-use Shopsys\ShopBundle\Component\String\TransformString;
 
 class PluginCrudExtensionRegistry
 {

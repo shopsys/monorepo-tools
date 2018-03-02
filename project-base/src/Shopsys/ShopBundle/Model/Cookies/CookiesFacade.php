@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Cookies;
+namespace Shopsys\FrameworkBundle\Model\Cookies;
 
 use Shopsys\Environment;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Article\Article;
-use Shopsys\ShopBundle\Model\Article\ArticleFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Model\Article\Article;
+use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class CookiesFacade
@@ -19,17 +19,17 @@ class CookiesFacade
     private $environment;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade
      */
     private $articleFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -40,9 +40,9 @@ class CookiesFacade
 
     /**
      * @param string $environment
-     * @param \Shopsys\ShopBundle\Model\Article\ArticleFacade $articleFacade
-     * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleFacade $articleFacade
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
      */
     public function __construct(
@@ -61,7 +61,7 @@ class CookiesFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Article\Article|null
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article|null
      */
     public function findCookiesArticleByDomainId($domainId)
     {
@@ -77,7 +77,7 @@ class CookiesFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Article\Article|null $cookiesArticle
+     * @param \Shopsys\FrameworkBundle\Model\Article\Article|null $cookiesArticle
      * @param int $domainId
      */
     public function setCookiesArticleOnDomain($cookiesArticle, $domainId)
@@ -94,7 +94,7 @@ class CookiesFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Article\Article $article
+     * @param \Shopsys\FrameworkBundle\Model\Article\Article $article
      * @return bool
      */
     public function isArticleUsedAsCookiesInfo(Article $article)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Plugin;
+namespace Shopsys\FrameworkBundle\Component\Plugin;
 
 use Shopsys\Plugin\PluginDataFixtureInterface;
 

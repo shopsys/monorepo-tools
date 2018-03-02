@@ -1,19 +1,19 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Pricing;
 
-use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class InputPriceRecalculationScheduler
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculator
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculator
      */
     private $inputPriceRecalculator;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 

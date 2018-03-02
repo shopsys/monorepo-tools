@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Grid\InlineEdit\Exception;
+namespace Shopsys\FrameworkBundle\Component\Grid\InlineEdit\Exception;
 
 interface InlineEditException
 {

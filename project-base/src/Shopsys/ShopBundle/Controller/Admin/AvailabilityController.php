@@ -1,31 +1,31 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Product\Availability\AvailabilitySettingFormType;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit;
+use Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Product\Availability\AvailabilitySettingFormType;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityInlineEdit;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AvailabilityController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+     * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
     private $confirmDeleteResponseFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
     private $availabilityFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityInlineEdit
      */
     private $availabilityInlineEdit;
 
@@ -46,7 +46,7 @@ class AvailabilityController extends AdminBaseController
     {
         $grid = $this->availabilityInlineEdit->getGrid();
 
-        return $this->render('@ShopsysShop/Admin/Content/Availability/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Availability/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -83,7 +83,7 @@ class AvailabilityController extends AdminBaseController
                     ]
                 );
             }
-        } catch (\Shopsys\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected availatibily doesn\'t exist.'));
         }
 
@@ -128,7 +128,7 @@ class AvailabilityController extends AdminBaseController
 
                 return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_availability_delete', $id);
             }
-        } catch (\Shopsys\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
             return new Response(t('Selected availability doesn\'t exist'));
         }
     }
@@ -155,7 +155,7 @@ class AvailabilityController extends AdminBaseController
             return $this->redirectToRoute('admin_availability_list');
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Availability/setting.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Availability/setting.html.twig', [
             'form' => $form->createView(),
         ]);
     }

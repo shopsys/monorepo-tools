@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
-use Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Performance\CategoryDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Performance\OrderDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Performance\ProductDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Performance\UserDataFixture;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,30 +19,30 @@ class PerformanceDataCommand extends Command
     protected static $defaultName = 'shopsys:performance-data';
 
     /**
-     * @var \Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture
+     * @var \Shopsys\FrameworkBundle\DataFixtures\Performance\CategoryDataFixture
      */
     private $categoryDataFixture;
 
     /**
-     * @var \Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture
+     * @var \Shopsys\FrameworkBundle\DataFixtures\Performance\ProductDataFixture
      */
     private $productDataFixture;
 
     /**
-     * @var \Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture
+     * @var \Shopsys\FrameworkBundle\DataFixtures\Performance\UserDataFixture
      */
     private $userDataFixture;
 
     /**
-     * @var \Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture
+     * @var \Shopsys\FrameworkBundle\DataFixtures\Performance\OrderDataFixture
      */
     private $orderDataFixture;
 
     /**
-     * @param \Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture $categoryDataFixture
-     * @param \Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture $productDataFixture
-     * @param \Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture $userDataFixture
-     * @param \Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture $orderDataFixture
+     * @param \Shopsys\FrameworkBundle\DataFixtures\Performance\CategoryDataFixture $categoryDataFixture
+     * @param \Shopsys\FrameworkBundle\DataFixtures\Performance\ProductDataFixture $productDataFixture
+     * @param \Shopsys\FrameworkBundle\DataFixtures\Performance\UserDataFixture $userDataFixture
+     * @param \Shopsys\FrameworkBundle\DataFixtures\Performance\OrderDataFixture $orderDataFixture
      */
     public function __construct(
         CategoryDataFixture $categoryDataFixture,

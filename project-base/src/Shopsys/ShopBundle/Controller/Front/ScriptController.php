@@ -2,21 +2,21 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Script\ScriptFacade;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Script\ScriptFacade;
 use Symfony\Component\HttpFoundation\Response;
 
 class ScriptController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Script\ScriptFacade
+     * @var \Shopsys\FrameworkBundle\Model\Script\ScriptFacade
      */
     private $scriptFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -47,7 +47,7 @@ class ScriptController extends FrontBaseController
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      */
     public function embedOrderSentPageScriptsAction(Order $order)
     {
@@ -57,7 +57,7 @@ class ScriptController extends FrontBaseController
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      */
     public function embedOrderSentPageGoogleAnalyticsScriptAction(Order $order)
     {

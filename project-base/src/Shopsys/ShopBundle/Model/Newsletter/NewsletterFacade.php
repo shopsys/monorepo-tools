@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Newsletter;
+namespace Shopsys\FrameworkBundle\Model\Newsletter;
 
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 
 class NewsletterFacade
 {
@@ -14,7 +14,7 @@ class NewsletterFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Newsletter\NewsletterRepository
+     * @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository
      */
     private $newsletterRepository;
 
@@ -50,7 +50,7 @@ class NewsletterFacade
 
     /**
      * @param int $selectedDomainId
-     * @param \Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $searchData
+     * @param \Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData $searchData
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getQueryBuilderForQuickSearch(int $selectedDomainId, QuickSearchFormData $searchData)
@@ -60,7 +60,7 @@ class NewsletterFacade
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Newsletter\NewsletterSubscriber
+     * @return \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriber
      */
     public function getNewsletterSubscriberById(int $id)
     {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Translation;
+namespace Shopsys\FrameworkBundle\Component\Translation;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Scalar\String_;
-use Shopsys\ShopBundle\Component\Translation\Exception\StringValueUnextractableException;
+use Shopsys\FrameworkBundle\Component\Translation\Exception\StringValueUnextractableException;
 use SplFileInfo;
 
 class PhpParserNodeHelper

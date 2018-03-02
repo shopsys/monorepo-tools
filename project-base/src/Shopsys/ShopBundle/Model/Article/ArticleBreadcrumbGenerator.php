@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Article;
+namespace Shopsys\FrameworkBundle\Model\Article;
 
-use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
-use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
+use Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
+use Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbItem;
 
 class ArticleBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticleRepository
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleRepository
      */
     private $articleRepository;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Javascript\Parser\Constant;
+namespace Shopsys\FrameworkBundle\Component\Javascript\Parser\Constant;
 
 use PLUG\JavaScript\JLexBase; // JLexBase contains J_* constants
 use PLUG\JavaScript\JNodes\JNodeBase;
 use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
 use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
-use Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
-use Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser;
+use Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser;
+use Shopsys\FrameworkBundle\Component\Javascript\Parser\JsStringParser;
 
 class JsConstantCallParser
 {
@@ -15,18 +15,18 @@ class JsConstantCallParser
     const NAME_ARGUMENT_INDEX = 0;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser
+     * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser
      */
     private $jsFunctionCallParser;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser
+     * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsStringParser
      */
     private $jsStringParser;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser $jsFunctionCallParser
-     * @param \Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser $jsStringParser
+     * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser $jsFunctionCallParser
+     * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsStringParser $jsStringParser
      */
     public function __construct(
         JsFunctionCallParser $jsFunctionCallParser,
@@ -38,7 +38,7 @@ class JsConstantCallParser
 
     /**
      * @param \PLUG\JavaScript\JNodes\nonterminal\JProgramNode $node
-     * @return \Shopsys\ShopBundle\Component\Javascript\Parser\Constant\JsConstantCall[]
+     * @return \Shopsys\FrameworkBundle\Component\Javascript\Parser\Constant\JsConstantCall[]
      */
     public function parse(JProgramNode $node)
     {
@@ -80,8 +80,8 @@ class JsConstantCallParser
     {
         try {
             $constantName = $this->jsStringParser->getConcatenatedString($constantNameArgumentNode);
-        } catch (\Shopsys\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException $ex) {
-            throw new \Shopsys\ShopBundle\Component\Javascript\Parser\Constant\Exception\JsConstantCallParserException(
+        } catch (\Shopsys\FrameworkBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException $ex) {
+            throw new \Shopsys\FrameworkBundle\Component\Javascript\Parser\Constant\Exception\JsConstantCallParserException(
                 'Cannot parse constant name ' . (string)$constantNameArgumentNode
                     . ' at line ' . $constantNameArgumentNode->get_line_num()
                     . ', column ' . $constantNameArgumentNode->get_col_num(),
@@ -100,7 +100,7 @@ class JsConstantCallParser
     {
         $argumentNodes = $this->jsFunctionCallParser->getArgumentNodes($callExprNode);
         if (!isset($argumentNodes[self::NAME_ARGUMENT_INDEX])) {
-            throw new \Shopsys\ShopBundle\Component\Javascript\Parser\Constant\Exception\JsConstantCallParserException(
+            throw new \Shopsys\FrameworkBundle\Component\Javascript\Parser\Constant\Exception\JsConstantCallParserException(
                 'Constant name argument not specified at line ' . $callExprNode->get_line_num()
                     . ', column ' . $callExprNode->get_col_num()
             );

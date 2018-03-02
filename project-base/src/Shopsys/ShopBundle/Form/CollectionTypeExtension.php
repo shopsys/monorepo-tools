@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form;
+namespace Shopsys\FrameworkBundle\Form;
 
-use Shopsys\ShopBundle\Component\Form\ResizeFormListener;
+use Shopsys\FrameworkBundle\Component\Form\ResizeFormListener;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener as SymfonyResizerFormListener;

@@ -1,24 +1,24 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Filter;
+namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
-use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter;
 
 class ParameterFilterData
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
      */
     public $parameter;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[]
      */
     public $values = [];
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\Parameter $parameter
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[] $values
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter $parameter
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[] $values
      */
     public function __construct(
         Parameter $parameter = null,

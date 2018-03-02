@@ -1,28 +1,28 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\ShopBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit;
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade;
 
 class PromoCodeController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade
      */
     private $promoCodeFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit
+     * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit
      */
     private $promoCodeInlineEdit;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
     private $administratorGridFacade;
 
@@ -42,7 +42,7 @@ class PromoCodeController extends AdminBaseController
     public function listAction()
     {
         $administrator = $this->getUser();
-        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
+        /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
 
         $grid = $this->promoCodeInlineEdit->getGrid();
 
@@ -50,7 +50,7 @@ class PromoCodeController extends AdminBaseController
 
         $this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-        return $this->render('@ShopsysShop/Admin/Content/PromoCode/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/PromoCode/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -73,7 +73,7 @@ class PromoCodeController extends AdminBaseController
                     'code' => $code,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Order\PromoCode\Exception\PromoCodeNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Order\PromoCode\Exception\PromoCodeNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected promo code doesn\'t exist.'));
         }
 

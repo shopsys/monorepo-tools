@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\PromoCode;
+namespace Shopsys\FrameworkBundle\Form\Admin\PromoCode;
 
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,12 +15,12 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class PromoCodeFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade
      */
     private $promoCodeFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode|null
+     * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode|null
      */
     private $promoCode;
 

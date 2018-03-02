@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade;
 
 class TopCategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -16,7 +16,7 @@ class TopCategoryDataFixture extends AbstractReferenceFixture implements Depende
     public function load(ObjectManager $manager)
     {
         $topCategoryFacade = $this->get(TopCategoryFacade::class);
-        /* @var $topCategoryFacade \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade */
+        /* @var $topCategoryFacade \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade */
 
         $categories = [
             $this->getReference(CategoryDataFixture::CATEGORY_ELECTRONICS),

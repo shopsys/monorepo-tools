@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
 class ProductDeleteResult
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     private $productsForRecalculations;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $productsForRecalculations
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $productsForRecalculations
      */
     public function __construct(array $productsForRecalculations = [])
     {
@@ -18,7 +18,7 @@ class ProductDeleteResult
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function getProductsForRecalculations()
     {

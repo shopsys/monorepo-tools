@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Transformers;
+namespace Shopsys\FrameworkBundle\Component\Transformers;
 
 use Symfony\Component\Form\DataTransformerInterface;
 

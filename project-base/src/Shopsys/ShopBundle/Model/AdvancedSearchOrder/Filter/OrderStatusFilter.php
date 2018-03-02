@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter;
+namespace Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class OrderStatusFilter implements AdvancedSearchFilterInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade
      */
     private $orderStatusFacade;
 

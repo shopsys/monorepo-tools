@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository;
 
 class ProductVisibilityRepository
 {
@@ -19,12 +19,12 @@ class ProductVisibilityRepository
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository
      */
     private $pricingGroupRepository;
 
@@ -51,7 +51,7 @@ class ProductVisibilityRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      */
     public function markProductsForRecalculationAffectedByCategory(Category $category)
     {
@@ -100,7 +100,7 @@ class ProductVisibilityRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $domainId
      */
     public function createAndRefreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup, $domainId)
@@ -127,10 +127,10 @@ class ProductVisibilityRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Product\ProductVisibility
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductVisibility
      */
     public function getProductVisibility(
         Product $product,
@@ -143,7 +143,7 @@ class ProductVisibilityRepository
             'domainId' => $domainId,
         ]);
         if ($productVisibility === null) {
-            throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductVisibilityNotFoundException();
+            throw new \Shopsys\FrameworkBundle\Model\Product\Exception\ProductVisibilityNotFoundException();
         }
 
         return $productVisibility;

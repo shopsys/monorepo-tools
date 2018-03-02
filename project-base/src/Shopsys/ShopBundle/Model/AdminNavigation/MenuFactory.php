@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdminNavigation;
+namespace Shopsys\FrameworkBundle\Model\AdminNavigation;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Security\Roles;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class MenuFactory
@@ -19,20 +19,20 @@ class MenuFactory
     private $authorizationChecker;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuLoader
      */
     private $menuLoader;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
      * @param string $configFilepath
      * @param \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authorizationChecker
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader $menuLoader
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuLoader $menuLoader
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         $configFilepath,
@@ -47,7 +47,7 @@ class MenuFactory
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\Menu
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\Menu
      */
     public function createMenuWithVisibleItems()
     {
@@ -59,8 +59,8 @@ class MenuFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $menuItems
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[] $menuItems
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
     private function filterVisibleRecursive(array $menuItems)
     {
@@ -88,7 +88,7 @@ class MenuFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem $menuItem
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem $menuItem
      * @return bool
      */
     private function isMenuItemVisible(MenuItem $menuItem)

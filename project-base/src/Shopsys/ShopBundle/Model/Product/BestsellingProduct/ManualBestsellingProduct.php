@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
+namespace Shopsys\FrameworkBundle\Model\Product\BestsellingProduct;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(
@@ -28,9 +28,9 @@ class ManualBestsellingProduct
     private $id;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
      * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $product;
@@ -38,7 +38,7 @@ class ManualBestsellingProduct
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Category\Category", inversedBy="domains")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category", inversedBy="domains")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private $category;
@@ -59,8 +59,8 @@ class ManualBestsellingProduct
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $position
      */
     public function __construct($domainId, Category $category, Product $product, $position)
@@ -80,7 +80,7 @@ class ManualBestsellingProduct
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getProduct()
     {
@@ -88,7 +88,7 @@ class ManualBestsellingProduct
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\Category
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category
      */
     public function getCategory()
     {

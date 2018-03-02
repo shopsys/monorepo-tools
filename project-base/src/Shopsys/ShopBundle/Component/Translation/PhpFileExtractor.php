@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Translation;
+namespace Shopsys\FrameworkBundle\Component\Translation;
 
 use Doctrine\Common\Annotations\DocParser;
 use JMS\TranslationBundle\Annotation\Ignore;
@@ -42,7 +42,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
     private $file;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Translation\TransMethodSpecification[]
+     * @var \Shopsys\FrameworkBundle\Component\Translation\TransMethodSpecification[]
      */
     private $transMethodSpecifications;
 
@@ -53,7 +53,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
 
     /**
      * @param \Doctrine\Common\Annotations\DocParser $docParser
-     * @param \Shopsys\ShopBundle\Component\Translation\TransMethodSpecification[] $transMethodSpecifications
+     * @param \Shopsys\FrameworkBundle\Component\Translation\TransMethodSpecification[] $transMethodSpecifications
      */
     public function __construct(DocParser $docParser, array $transMethodSpecifications)
     {
@@ -111,7 +111,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
         $messageIdArgumentIndex = $this->transMethodSpecifications[$methodName]->getMessageIdArgumentIndex();
 
         if (!isset($node->args[$messageIdArgumentIndex])) {
-            throw new \Shopsys\ShopBundle\Component\Translation\Exception\MessageIdArgumentNotPresent();
+            throw new \Shopsys\FrameworkBundle\Component\Translation\Exception\MessageIdArgumentNotPresent();
         }
 
         return PhpParserNodeHelper::getConcatenatedStringValue($node->args[$messageIdArgumentIndex]->value, $this->file);
@@ -142,7 +142,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
         if ($node instanceof MethodCall || $node instanceof FuncCall) {
             try {
                 $methodName = $this->getNormalizedMethodName($this->getNodeName($node));
-            } catch (\Shopsys\ShopBundle\Component\Translation\Exception\ExtractionException $ex) {
+            } catch (\Shopsys\FrameworkBundle\Component\Translation\Exception\ExtractionException $ex) {
                 return false;
             }
 
@@ -221,7 +221,7 @@ class PhpFileExtractor implements FileVisitorInterface, NodeVisitor
         } elseif ($node instanceof FuncCall && $node->name instanceof Name) {
             return (string)$node->name;
         } else {
-            throw new \Shopsys\ShopBundle\Component\Translation\Exception\ExtractionException('Unable to resolve node name');
+            throw new \Shopsys\FrameworkBundle\Component\Translation\Exception\ExtractionException('Unable to resolve node name');
         }
     }
 

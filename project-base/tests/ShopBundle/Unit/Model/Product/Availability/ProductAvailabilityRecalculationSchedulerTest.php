@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Unit\Model\Product\Availability;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_TestCase
 {

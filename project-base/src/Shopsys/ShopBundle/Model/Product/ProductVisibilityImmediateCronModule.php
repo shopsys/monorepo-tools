@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
 use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
@@ -8,7 +8,7 @@ use Symfony\Bridge\Monolog\Logger;
 class ProductVisibilityImmediateCronModule implements SimpleCronModuleInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
     private $productVisibilityFacade;
 

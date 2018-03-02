@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
-use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 
 class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -18,22 +18,22 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
     public function load(ObjectManager $manager)
     {
         $setting = $this->get(Setting::class);
-        /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
+        /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
         $setting->clearCache();
 
         $termsAndConditionsDomain2 = $this->getReference(ArticleDataFixture::ARTICLE_TERMS_AND_CONDITIONS_2);
-        /* @var $termsAndConditionsDomain2 \Shopsys\ShopBundle\Model\Article\Article */
+        /* @var $termsAndConditionsDomain2 \Shopsys\FrameworkBundle\Model\Article\Article */
         $setting->setForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditionsDomain2->getId(), 2);
 
         $privacyPolicyDomain2 = $this->getReference(ArticleDataFixture::ARTICLE_PRIVACY_POLICY_2);
-        /* @var $privacyPolicyDomain2 \Shopsys\ShopBundle\Model\Article\Article */
+        /* @var $privacyPolicyDomain2 \Shopsys\FrameworkBundle\Model\Article\Article */
         $setting->setForDomain(Setting::PRIVACY_POLICY_ARTICLE_ID, $privacyPolicyDomain2->getId(), 2);
 
         $cookiesDomain2 = $this->getReference(ArticleDataFixture::ARTICLE_COOKIES_2);
-        /* @var $cookiesDomain2 \Shopsys\ShopBundle\Model\Article\Article */
+        /* @var $cookiesDomain2 \Shopsys\FrameworkBundle\Model\Article\Article */
         $setting->setForDomain(Setting::COOKIES_ARTICLE_ID, $cookiesDomain2->getId(), 2);
 
-        /* @var $pricingGroup2 \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
+        /* @var $pricingGroup2 \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
         $pricingGroup2 = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_2);
         $setting->setForDomain(Setting::DEFAULT_PRICING_GROUP, $pricingGroup2->getId(), 2);
 
@@ -48,7 +48,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         ';
         $setting->setForDomain(Setting::ORDER_SENT_PAGE_CONTENT, $orderSentText, 2);
 
-        /* @var $defaultCurrency \Shopsys\ShopBundle\Model\Pricing\Currency\Currency */
+        /* @var $defaultCurrency \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency */
         $domain2DefaultCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
         $setting->setForDomain(PricingSetting::DEFAULT_DOMAIN_CURRENCY, $domain2DefaultCurrency->getId(), 2);
 

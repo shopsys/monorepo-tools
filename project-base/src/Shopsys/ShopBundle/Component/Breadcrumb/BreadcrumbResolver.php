@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Breadcrumb;
+namespace Shopsys\FrameworkBundle\Component\Breadcrumb;
 
 class BreadcrumbResolver
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface[]
+     * @var \Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface[]
      */
     private $breadcrumbGeneratorsByRouteName;
 
@@ -15,7 +15,7 @@ class BreadcrumbResolver
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface $breadcrumbGenerator
+     * @param \Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface $breadcrumbGenerator
      */
     public function registerGenerator(BreadcrumbGeneratorInterface $breadcrumbGenerator)
     {
@@ -27,12 +27,12 @@ class BreadcrumbResolver
     /**
      * @param string $routeName
      * @param array $routeParameters
-     * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
+     * @return \Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbItem[]
      */
     public function resolveBreadcrumbItems($routeName, array $routeParameters = [])
     {
         if (!$this->hasGeneratorForRoute($routeName)) {
-            throw new \Shopsys\ShopBundle\Component\Breadcrumb\Exception\BreadcrumbGeneratorNotFoundException($routeName);
+            throw new \Shopsys\FrameworkBundle\Component\Breadcrumb\Exception\BreadcrumbGeneratorNotFoundException($routeName);
         }
 
         $breadcrumbGenerator = $this->breadcrumbGeneratorsByRouteName[$routeName];
@@ -40,7 +40,7 @@ class BreadcrumbResolver
         try {
             return $breadcrumbGenerator->getBreadcrumbItems($routeName, $routeParameters);
         } catch (\Exception $ex) {
-            throw new \Shopsys\ShopBundle\Component\Breadcrumb\Exception\UnableToGenerateBreadcrumbItemsException($ex);
+            throw new \Shopsys\FrameworkBundle\Component\Breadcrumb\Exception\UnableToGenerateBreadcrumbItemsException($ex);
         }
     }
 

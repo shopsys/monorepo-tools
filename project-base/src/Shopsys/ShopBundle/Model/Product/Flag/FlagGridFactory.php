@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Flag;
+namespace Shopsys\FrameworkBundle\Model\Product\Flag;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
 
 class FlagGridFactory implements GridFactoryInterface
 {
@@ -17,12 +17,12 @@ class FlagGridFactory implements GridFactoryInterface
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
@@ -37,7 +37,7 @@ class FlagGridFactory implements GridFactoryInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     public function create()
     {
@@ -60,7 +60,7 @@ class FlagGridFactory implements GridFactoryInterface
         $grid->addDeleteActionColumn('admin_flag_delete', ['id' => 'a.id'])
             ->setConfirmMessage(t('Do you really want to remove this flag?'));
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Flag/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Flag/listGrid.html.twig');
 
         return $grid;
     }

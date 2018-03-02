@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\TopProduct;
+namespace Shopsys\FrameworkBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory;
 
 class TopProductFacade
 {
@@ -13,12 +13,12 @@ class TopProductFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\TopProduct\TopProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductRepository
      */
     private $topProductRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
      */
     private $productDetailFactory;
 
@@ -34,7 +34,7 @@ class TopProductFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Product\TopProduct\TopProduct[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProduct[]
      */
     public function getAll($domainId)
     {
@@ -43,8 +43,8 @@ class TopProductFacade
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
      */
     public function getAllOfferedProductDetails($domainId, $pricingGroup)
     {
@@ -54,7 +54,7 @@ class TopProductFacade
 
     /**
      * @param $domainId
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      */
     public function saveTopProductsForDomain($domainId, array $products)
     {

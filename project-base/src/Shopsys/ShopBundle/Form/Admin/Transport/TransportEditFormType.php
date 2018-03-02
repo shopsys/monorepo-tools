@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Transport;
+namespace Shopsys\FrameworkBundle\Form\Admin\Transport;
 
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportEditData;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\FrameworkBundle\Model\Transport\TransportEditData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints;
 class TransportEditFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
     private $currencyFacade;
 

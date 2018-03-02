@@ -1,34 +1,34 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Cart\Watcher;
+namespace Shopsys\FrameworkBundle\Model\Cart\Watcher;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Cart\Cart;
-use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Cart\Cart;
+use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
+use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
 
 class CartWatcherService
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
     private $productPriceCalculationForUser;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository
      */
     private $productVisibilityRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
-     * @param \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     public function __construct(
         ProductPriceCalculationForUser $productPriceCalculationForUser,
@@ -41,8 +41,8 @@ class CartWatcherService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
-     * @return \Shopsys\ShopBundle\Model\Cart\Item\CartItem[]
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]
      */
     public function getModifiedPriceItemsAndUpdatePrices(Cart $cart)
     {
@@ -58,9 +58,9 @@ class CartWatcherService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
-     * @param \Shopsys\ShopBundle\Model\Customer\CurrentCustomer $currentCustomer
-     * @return \Shopsys\ShopBundle\Model\Cart\Item\CartItem[]
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer $currentCustomer
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]
      */
     public function getNotListableItems(Cart $cart, CurrentCustomer $currentCustomer)
     {
@@ -78,7 +78,7 @@ class CartWatcherService
                 if (!$productVisibility->isVisible() || $product->getCalculatedSellingDenied()) {
                     $notListableItems[] = $item;
                 }
-            } catch (\Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
+            } catch (\Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException $e) {
                 $notListableItems[] = $item;
             }
         }

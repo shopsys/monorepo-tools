@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Cron;
+namespace Shopsys\FrameworkBundle\Component\Cron;
 
 use DateTimeInterface;
-use Shopsys\ShopBundle\Component\Cron\Config\CronConfig;
-use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
+use Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig;
+use Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig;
 use Symfony\Bridge\Monolog\Logger;
 
 class CronFacade
@@ -17,12 +17,12 @@ class CronFacade
     private $logger;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Cron\Config\CronConfig
+     * @var \Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig
      */
     private $cronConfig;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Cron\CronModuleFacade
+     * @var \Shopsys\FrameworkBundle\Component\Cron\CronModuleFacade
      */
     private $cronModuleFacade;
 
@@ -55,8 +55,8 @@ class CronFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
-     * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
+     * @param \Shopsys\FrameworkBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
+     * @param \Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
      */
     private function runModules(CronModuleExecutor $cronModuleExecutor, array $cronModuleConfigs)
     {
@@ -84,8 +84,8 @@ class CronFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
-     * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
+     * @param \Shopsys\FrameworkBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
+     * @param \Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
      */
     private function runModule(CronModuleExecutor $cronModuleExecutor, CronModuleConfig $cronModuleConfig)
     {
@@ -109,7 +109,7 @@ class CronFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+     * @return \Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig[]
      */
     public function getAll()
     {

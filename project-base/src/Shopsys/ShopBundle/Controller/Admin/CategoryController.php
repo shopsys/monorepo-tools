@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Category\CategoryFormType;
-use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\Category\CategoryDataFactory;
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Category\CategoryFormType;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -20,22 +20,22 @@ class CategoryController extends AdminBaseController
     const ALL_DOMAINS = 0;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory
      */
     private $categoryDataFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -91,7 +91,7 @@ class CategoryController extends AdminBaseController
 
         $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing category - %name%', ['%name%' => $category->getName()])));
 
-        return $this->render('@ShopsysShop/Admin/Content/Category/edit.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Category/edit.html.twig', [
             'form' => $form->createView(),
             'category' => $category,
         ]);
@@ -130,7 +130,7 @@ class CategoryController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Category/new.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Category/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -154,7 +154,7 @@ class CategoryController extends AdminBaseController
         if ($domainId !== self::ALL_DOMAINS) {
             try {
                 $this->domain->getDomainConfigById($domainId);
-            } catch (\Shopsys\ShopBundle\Component\Domain\Exception\InvalidDomainIdException $ex) {
+            } catch (\Shopsys\FrameworkBundle\Component\Domain\Exception\InvalidDomainIdException $ex) {
                 $domainId = self::ALL_DOMAINS;
             }
         }
@@ -167,7 +167,7 @@ class CategoryController extends AdminBaseController
             $categoryDetails = $this->categoryFacade->getVisibleCategoryDetailsForDomain($domainId, $request->getLocale());
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Category/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Category/list.html.twig', [
             'categoryDetails' => $categoryDetails,
             'isForAllDomains' => ($domainId === self::ALL_DOMAINS),
         ]);
@@ -211,7 +211,7 @@ class CategoryController extends AdminBaseController
                     'name' => $fullName,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Category\Exception\CategoryNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Category\Exception\CategoryNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected category doesn\'t exist.'));
         }
 
@@ -222,7 +222,7 @@ class CategoryController extends AdminBaseController
     {
         $domainId = $this->session->get('categories_selected_domain_id', self::ALL_DOMAINS);
 
-        return $this->render('@ShopsysShop/Admin/Content/Category/domainTabs.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Category/domainTabs.html.twig', [
             'domainConfigs' => $this->domain->getAll(),
             'selectedDomainId' => $domainId,
         ]);

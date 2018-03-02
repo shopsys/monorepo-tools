@@ -1,31 +1,31 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class FriendlyUrlGeneratorFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
     private $friendlyUrlFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlToGenerateRepository
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlToGenerateRepository
      */
     private $friendlyUrlToGenerateRepository;
 
@@ -61,7 +61,7 @@ class FriendlyUrlGeneratorFacade
 
     /**
      * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return int
      */
     private function generateUrlsByDomainConfig(OutputInterface $output, DomainConfig $domainConfig)
@@ -85,7 +85,7 @@ class FriendlyUrlGeneratorFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param string $routeName
      * @return int
      */
@@ -109,7 +109,7 @@ class FriendlyUrlGeneratorFacade
     /**
      * @param string $routeName
      * @param DomainConfig $domainConfig
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
      */
     private function getFriendlyUrlsDataByRouteName($routeName, DomainConfig $domainConfig)
     {
@@ -127,6 +127,6 @@ class FriendlyUrlGeneratorFacade
                 return $this->friendlyUrlToGenerateRepository->getBrandDetailData($routeName, $domainConfig);
         }
 
-        throw new \Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlRouteNotSupportedException($routeName);
+        throw new \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlRouteNotSupportedException($routeName);
     }
 }

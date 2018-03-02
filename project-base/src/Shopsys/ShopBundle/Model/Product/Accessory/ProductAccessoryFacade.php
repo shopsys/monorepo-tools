@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Accessory;
+namespace Shopsys\FrameworkBundle\Model\Product\Accessory;
 
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductAccessoryFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository
      */
     private $productAccessoryRepository;
 
@@ -18,11 +18,11 @@ class ProductAccessoryFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $limit
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function getTopOfferedAccessories(Product $product, $domainId, PricingGroup $pricingGroup, $limit)
     {

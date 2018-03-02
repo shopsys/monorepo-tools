@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Pricing\Exception;
+namespace Shopsys\FrameworkBundle\Model\Product\Pricing\Exception;
 
 use Exception;
 

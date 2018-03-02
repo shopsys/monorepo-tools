@@ -1,44 +1,44 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade;
-use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade;
+use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductPickerController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
     private $administratorGridFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade
      */
     private $advancedSearchFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade
      */
     private $productListAdminFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
      */
     private $productFacade;
 
@@ -106,7 +106,7 @@ class ProductPickerController extends AdminBaseController
     private function getPickerResponse(Request $request, array $viewParameters, array $gridViewParameters)
     {
         $administrator = $this->getUser();
-        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
+        /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
 
         $advancedSearchForm = $this->advancedSearchFacade->createAdvancedSearchForm($request);
         $advancedSearchData = $advancedSearchForm->getData();
@@ -144,7 +144,7 @@ class ProductPickerController extends AdminBaseController
 
         $gridViewParameters['VARIANT_TYPE_MAIN'] = Product::VARIANT_TYPE_MAIN;
         $gridViewParameters['VARIANT_TYPE_VARIANT'] = Product::VARIANT_TYPE_VARIANT;
-        $grid->setTheme('@ShopsysShop/Admin/Content/ProductPicker/listGrid.html.twig', $gridViewParameters);
+        $grid->setTheme('@ShopsysFramework/Admin/Content/ProductPicker/listGrid.html.twig', $gridViewParameters);
 
         $this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
@@ -153,6 +153,6 @@ class ProductPickerController extends AdminBaseController
         $viewParameters['advancedSearchForm'] = $advancedSearchForm->createView();
         $viewParameters['isAdvancedSearchFormSubmitted'] = $this->advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
 
-        return $this->render('@ShopsysShop/Admin/Content/ProductPicker/list.html.twig', $viewParameters);
+        return $this->render('@ShopsysFramework/Admin/Content/ProductPicker/list.html.twig', $viewParameters);
     }
 }

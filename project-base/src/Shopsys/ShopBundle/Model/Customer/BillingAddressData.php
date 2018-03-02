@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer;
+namespace Shopsys\FrameworkBundle\Model\Customer;
 
-use Shopsys\ShopBundle\Model\Country\Country;
+use Shopsys\FrameworkBundle\Model\Country\Country;
 
 class BillingAddressData
 {
@@ -47,7 +47,7 @@ class BillingAddressData
     public $postcode;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\Country|null
+     * @var \Shopsys\FrameworkBundle\Model\Country\Country|null
      */
     public $country;
 
@@ -60,7 +60,7 @@ class BillingAddressData
      * @param string|null $companyNumber
      * @param string|null $companyTaxNumber
      * @param string|null $telephone
-     * @param \Shopsys\ShopBundle\Model\Country\Country|null $country
+     * @param \Shopsys\FrameworkBundle\Model\Country\Country|null $country
      */
     public function __construct(
         $street = null,
@@ -85,7 +85,7 @@ class BillingAddressData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
+     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddress $billingAddress
      */
     public function setFromEntity(BillingAddress $billingAddress)
     {

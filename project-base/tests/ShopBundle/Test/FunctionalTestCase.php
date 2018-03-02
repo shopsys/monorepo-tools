@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Test;
 
 use Shopsys\Environment;
+use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\IntegrationTestingBundle\ServiceLocator\ServiceByTypeLocator;
-use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class FunctionalTestCase extends WebTestCase
@@ -18,7 +18,7 @@ abstract class FunctionalTestCase extends WebTestCase
     protected function setUpDomain()
     {
         $domain = $this->getContainer()->get(Domain::class);
-        /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
+        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
         $domain->switchDomainById(1);
     }
 
@@ -81,7 +81,7 @@ abstract class FunctionalTestCase extends WebTestCase
     {
         $persistentReferenceFacade = $this->getContainer()
             ->get(PersistentReferenceFacade::class);
-        /* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
+        /* @var $persistentReferenceFacade \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade */
 
         return $persistentReferenceFacade->getReference($referenceName);
     }

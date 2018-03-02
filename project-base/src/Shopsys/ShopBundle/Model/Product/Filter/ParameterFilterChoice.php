@@ -1,24 +1,24 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Filter;
+namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
-use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter;
 
 class ParameterFilterChoice
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
      */
     private $parameter;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[]
      */
     private $values;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\Parameter $parameter
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[] $values
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter $parameter
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[] $values
      */
     public function __construct(
         Parameter $parameter = null,
@@ -29,7 +29,7 @@ class ParameterFilterChoice
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
      */
     public function getParameter()
     {
@@ -37,7 +37,7 @@ class ParameterFilterChoice
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[]
      */
     public function getValues()
     {

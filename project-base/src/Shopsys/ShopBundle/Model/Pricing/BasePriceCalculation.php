@@ -1,24 +1,24 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Pricing;
 
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 
 class BasePriceCalculation
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation
      */
     private $priceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Rounding
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Rounding
      */
     private $rounding;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\PriceCalculation $priceCalculation
-     * @param \Shopsys\ShopBundle\Model\Pricing\Rounding $rounding
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation $priceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Rounding $rounding
      */
     public function __construct(PriceCalculation $priceCalculation, Rounding $rounding)
     {
@@ -29,8 +29,8 @@ class BasePriceCalculation
     /**
      * @param string $inputPrice
      * @param int $inputPriceType
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $vat
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
     public function calculateBasePrice($inputPrice, $inputPriceType, Vat $vat)
     {
@@ -42,10 +42,10 @@ class BasePriceCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price $price
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
      * @param Vat $vat
      * @param string[] $coefficients
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
     public function applyCoefficients(Price $price, Vat $vat, $coefficients)
     {
@@ -76,7 +76,7 @@ class BasePriceCalculation
                 return $this->rounding->roundPriceWithVat($this->priceCalculation->applyVatPercent($inputPrice, $vat));
 
             default:
-                throw new \Shopsys\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
+                throw new \Shopsys\FrameworkBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
         }
     }
 }

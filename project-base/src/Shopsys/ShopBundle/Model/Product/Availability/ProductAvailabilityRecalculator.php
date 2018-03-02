@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Availability;
+namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductAvailabilityRecalculator
@@ -17,22 +17,22 @@ class ProductAvailabilityRecalculator
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
      */
     private $entityManagerFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
      */
     private $productAvailabilityRecalculationScheduler;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCalculation
      */
     private $productAvailabilityCalculation;
 
     /**
-     * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\ShopBundle\Model\Product\Product[][]|null
+     * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\FrameworkBundle\Model\Product\Product[][]|null
      */
     private $productRowsIterator;
 
@@ -91,7 +91,7 @@ class ProductAvailabilityRecalculator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
     private function recalculateProductAvailability(Product $product)
     {

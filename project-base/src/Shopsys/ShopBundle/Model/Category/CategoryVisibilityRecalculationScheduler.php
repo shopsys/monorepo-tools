@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Category;
+namespace Shopsys\FrameworkBundle\Model\Category;
 
-use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade;
 
 class CategoryVisibilityRecalculationScheduler
 {
@@ -12,7 +12,7 @@ class CategoryVisibilityRecalculationScheduler
     private $recalculate = false;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
     private $productVisibilityFacade;
 
@@ -22,7 +22,7 @@ class CategoryVisibilityRecalculationScheduler
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      */
     public function scheduleRecalculation(Category $category)
     {

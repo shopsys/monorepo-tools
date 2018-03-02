@@ -3,8 +3,8 @@
 namespace Tests\ShopBundle\Twig;
 
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
-use Shopsys\ShopBundle\Model\Localization\Localization;
-use Shopsys\ShopBundle\Twig\NumberFormatterExtension;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class NumberFormatterExtensionTest extends FunctionalTestCase

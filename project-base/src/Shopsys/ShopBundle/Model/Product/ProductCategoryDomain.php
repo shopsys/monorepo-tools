@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Category\Category;
 
 /**
  * @ORM\Table(
@@ -15,19 +15,19 @@ use Shopsys\ShopBundle\Model\Category\Category;
 class ProductCategoryDomain
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product", inversedBy="productCategoryDomains")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product", inversedBy="productCategoryDomains")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $product;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\Category
+     * @var \Shopsys\FrameworkBundle\Model\Category\Category
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Category\Category")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $category;
@@ -41,8 +41,8 @@ class ProductCategoryDomain
     private $domainId;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param int $domainId
      */
     public function __construct(Product $product, Category $category, $domainId)
@@ -53,7 +53,7 @@ class ProductCategoryDomain
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\Category
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category
      */
     public function getCategory()
     {

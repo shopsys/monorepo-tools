@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig\Exception;
+namespace Shopsys\FrameworkBundle\Twig\Exception;
 
 interface TwigException
 {

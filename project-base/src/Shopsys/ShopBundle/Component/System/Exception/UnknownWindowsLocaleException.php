@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\System\Exception;
+namespace Shopsys\FrameworkBundle\Component\System\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\System\PostgresqlLocaleMapper;
+use Shopsys\FrameworkBundle\Component\System\PostgresqlLocaleMapper;
 use Throwable;
 
 class UnknownWindowsLocaleException extends Exception

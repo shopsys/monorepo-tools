@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Group\Exception;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Group\Exception;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

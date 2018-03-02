@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Status\Grid;
+namespace Shopsys\FrameworkBundle\Model\Order\Status\Grid;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use Shopsys\ShopBundle\Model\Localization\Localization;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusGridFactory implements GridFactoryInterface
 {
@@ -18,12 +18,12 @@ class OrderStatusGridFactory implements GridFactoryInterface
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
@@ -38,7 +38,7 @@ class OrderStatusGridFactory implements GridFactoryInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     public function create()
     {
@@ -59,7 +59,7 @@ class OrderStatusGridFactory implements GridFactoryInterface
         $grid->addDeleteActionColumn('admin_orderstatus_deleteconfirm', ['id' => 'os.id'])
             ->setAjaxConfirm();
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/OrderStatus/listGrid.html.twig', [
+        $grid->setTheme('@ShopsysFramework/Admin/Content/OrderStatus/listGrid.html.twig', [
             'TYPE_NEW' => OrderStatus::TYPE_NEW,
             'TYPE_DONE' => OrderStatus::TYPE_DONE,
             'TYPE_CANCELED' => OrderStatus::TYPE_CANCELED,

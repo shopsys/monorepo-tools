@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductManualInputPriceService
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string $inputPrice
-     * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice $productManualInputPrice
-     * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice $productManualInputPrice
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice
      */
     public function refresh(Product $product, PricingGroup $pricingGroup, $inputPrice, $productManualInputPrice)
     {

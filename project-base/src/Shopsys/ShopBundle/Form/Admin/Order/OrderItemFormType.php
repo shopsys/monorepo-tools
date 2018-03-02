@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Order;
+namespace Shopsys\FrameworkBundle\Form\Admin\Order;
 
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;

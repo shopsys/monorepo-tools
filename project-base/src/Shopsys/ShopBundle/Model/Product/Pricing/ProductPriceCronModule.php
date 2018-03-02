@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
@@ -13,7 +13,7 @@ class ProductPriceCronModule implements IteratedCronModuleInterface
     private $logger;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator
      */
     private $productPriceRecalculator;
 

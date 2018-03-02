@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Vat;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
 
 class VatGridFactory implements GridFactoryInterface
 {
@@ -17,17 +17,17 @@ class VatGridFactory implements GridFactoryInterface
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
     private $vatFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation
      */
     private $priceCalculation;
 
@@ -44,7 +44,7 @@ class VatGridFactory implements GridFactoryInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     public function create()
     {
@@ -71,7 +71,7 @@ class VatGridFactory implements GridFactoryInterface
         $grid->addDeleteActionColumn('admin_vat_deleteconfirm', ['id' => 'v.id'])
             ->setAjaxConfirm();
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Vat/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Vat/listGrid.html.twig');
 
         return $grid;
     }

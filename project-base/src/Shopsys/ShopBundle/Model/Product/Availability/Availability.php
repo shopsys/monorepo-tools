@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Availability;
+namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 
 /**
  * @ORM\Table(name="availabilities")
@@ -23,9 +23,9 @@ class Availability extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityTranslation[]
      *
-     * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Product\Availability\AvailabilityTranslation")
+     * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityTranslation")
      */
     protected $translations;
 
@@ -37,7 +37,7 @@ class Availability extends AbstractTranslatableEntity
     private $dispatchTime;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData $availabilityData
      */
     public function __construct(AvailabilityData $availabilityData)
     {
@@ -64,7 +64,7 @@ class Availability extends AbstractTranslatableEntity
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData $availabilityData
      */
     private function setTranslations(AvailabilityData $availabilityData)
     {
@@ -74,7 +74,7 @@ class Availability extends AbstractTranslatableEntity
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityTranslation
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityTranslation
      */
     protected function createTranslation()
     {
@@ -82,7 +82,7 @@ class Availability extends AbstractTranslatableEntity
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData $availabilityData
      */
     public function edit(AvailabilityData $availabilityData)
     {

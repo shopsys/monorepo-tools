@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Javascript\Parser;
+namespace Shopsys\FrameworkBundle\Component\Javascript\Parser;
 
 use PLUG\JavaScript\JLexBase; // JLexBase contains J_* constants
 use PLUG\JavaScript\JNodes\JNodeBase;
@@ -29,14 +29,14 @@ class JsStringParser
                 } elseif ($addExprNode->scalar_symbol() === '+') {
                     continue;
                 } else {
-                    throw new \Shopsys\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException();
+                    throw new \Shopsys\FrameworkBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException();
                 }
             } while ($addExprNode = $node->next());
 
             return $concatenatedString;
         }
 
-        throw new \Shopsys\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException();
+        throw new \Shopsys\FrameworkBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException();
     }
 
     /**
@@ -62,7 +62,7 @@ class JsStringParser
             $unescaped = preg_replace("/\\\\'/", "'", $singleQuotesEscaped);
             $doubleQuotesEscaped = preg_replace('/"/', '\\"', $unescaped);
         } else {
-            throw new \Shopsys\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException();
+            throw new \Shopsys\FrameworkBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException();
         }
 
         return '"' . $doubleQuotesEscaped . '"';

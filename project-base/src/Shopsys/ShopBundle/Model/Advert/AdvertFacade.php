@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Advert;
+namespace Shopsys\FrameworkBundle\Model\Advert;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 
 class AdvertFacade
 {
@@ -14,25 +14,25 @@ class AdvertFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Advert\AdvertRepository
+     * @var \Shopsys\FrameworkBundle\Model\Advert\AdvertRepository
      */
     private $advertRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
     private $imageFacade;
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Model\Advert\AdvertRepository $advertRepository
-     * @param \Shopsys\ShopBundle\Component\Image\ImageFacade $imageFacade
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain
+     * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertRepository $advertRepository
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     public function __construct(
         EntityManager $em,
@@ -48,7 +48,7 @@ class AdvertFacade
 
     /**
      * @param int $advertId
-     * @return \Shopsys\ShopBundle\Model\Advert\Advert
+     * @return \Shopsys\FrameworkBundle\Model\Advert\Advert
      */
     public function getById($advertId)
     {
@@ -57,7 +57,7 @@ class AdvertFacade
 
     /**
      * @param string $positionName
-     * @return \Shopsys\ShopBundle\Model\Advert\Advert|null
+     * @return \Shopsys\FrameworkBundle\Model\Advert\Advert|null
      */
     public function findRandomAdvertByPositionOnCurrentDomain($positionName)
     {
@@ -65,8 +65,8 @@ class AdvertFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Advert\AdvertData $advertData
-     * @return \Shopsys\ShopBundle\Model\Advert\Advert
+     * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertData $advertData
+     * @return \Shopsys\FrameworkBundle\Model\Advert\Advert
      */
     public function create(AdvertData $advertData)
     {
@@ -82,8 +82,8 @@ class AdvertFacade
 
     /**
      * @param int $advertId
-     * @param \Shopsys\ShopBundle\Model\Advert\AdvertData $advertData
-     * @return \Shopsys\ShopBundle\Model\Advert\Advert
+     * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertData $advertData
+     * @return \Shopsys\FrameworkBundle\Model\Advert\Advert
      */
     public function edit($advertId, AdvertData $advertData)
     {

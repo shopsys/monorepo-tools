@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Model\Pricing;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
 class PriceTest extends PHPUnit_Framework_TestCase
 {

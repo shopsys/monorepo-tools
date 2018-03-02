@@ -1,25 +1,25 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Article;
+namespace Shopsys\FrameworkBundle\Model\Article;
 
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
 class ArticleDataFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
     private $friendlyUrlFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
@@ -34,8 +34,8 @@ class ArticleDataFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Article\Article $article
-     * @return \Shopsys\ShopBundle\Model\Article\ArticleData
+     * @param \Shopsys\FrameworkBundle\Model\Article\Article $article
+     * @return \Shopsys\FrameworkBundle\Model\Article\ArticleData
      */
     public function createFromArticle(Article $article)
     {
@@ -55,7 +55,7 @@ class ArticleDataFactory
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Article\ArticleData
+     * @return \Shopsys\FrameworkBundle\Model\Article\ArticleData
      */
     public function createDefault()
     {

@@ -11,7 +11,7 @@
 
             if (element.type === Shopsys.constant('\\Symfony\\Component\\Form\\Extension\\Core\\Type\\CheckboxType::class')) {
                 isValueNull = value === null;
-            } else if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\SingleCheckboxChoiceType::class')) {
+            } else if (element.type === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\SingleCheckboxChoiceType::class')) {
                 isValueNull = true;
                 for (var i in value) {
                     if (value.hasOwnProperty(i) && value[i] === true) {

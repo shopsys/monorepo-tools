@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Locale;
+namespace Shopsys\FrameworkBundle\Form\Locale;
 
-use Shopsys\ShopBundle\Component\Utils;
-use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Component\Utils;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,12 +12,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class LocalizedType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Localization\Localization $localization
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
      */
     public function __construct(Localization $localization)
     {

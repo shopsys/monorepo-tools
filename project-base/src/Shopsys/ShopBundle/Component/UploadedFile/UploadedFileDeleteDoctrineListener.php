@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\UploadedFile;
+namespace Shopsys\FrameworkBundle\Component\UploadedFile;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
+use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UploadedFileDeleteDoctrineListener
@@ -14,7 +14,7 @@ class UploadedFileDeleteDoctrineListener
     private $container;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig
      */
     private $uploadedFileConfig;
 
@@ -29,7 +29,7 @@ class UploadedFileDeleteDoctrineListener
     /**
      * Prevent ServiceCircularReferenceException (DoctrineListener cannot be dependent on the EntityManager)
      *
-     * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade
+     * @return \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade
      */
     private function getUploadedFileFacade()
     {

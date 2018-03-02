@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Slider;
+namespace Shopsys\FrameworkBundle\Model\Slider;
 
 use Doctrine\ORM\EntityManager;
 
@@ -29,21 +29,21 @@ class SliderItemRepository
 
     /**
      * @param int $sliderItemId
-     * @return \Shopsys\ShopBundle\Model\Slider\SliderItem
+     * @return \Shopsys\FrameworkBundle\Model\Slider\SliderItem
      */
     public function getById($sliderItemId)
     {
         $sliderItem = $this->getSliderItemRepository()->find($sliderItemId);
         if ($sliderItem === null) {
             $message = 'Slider item with ID ' . $sliderItemId . ' not found.';
-            throw new \Shopsys\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Model\Slider\Exception\SliderItemNotFoundException($message);
         }
         return $sliderItem;
     }
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Slider\SliderItem|null
+     * @return \Shopsys\FrameworkBundle\Model\Slider\SliderItem|null
      */
     public function findById($id)
     {
@@ -51,7 +51,7 @@ class SliderItemRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Slider\SliderItem[]
+     * @return \Shopsys\FrameworkBundle\Model\Slider\SliderItem[]
      */
     public function getAll()
     {
@@ -60,7 +60,7 @@ class SliderItemRepository
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Slider\SliderItem[]
+     * @return \Shopsys\FrameworkBundle\Model\Slider\SliderItem[]
      */
     public function getAllVisibleByDomainId($domainId)
     {

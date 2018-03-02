@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Module;
+namespace Shopsys\FrameworkBundle\Model\Module;
 
 use Doctrine\ORM\EntityManager;
 
@@ -12,7 +12,7 @@ class ModuleFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Module\EnabledModuleRepository
+     * @var \Shopsys\FrameworkBundle\Model\Module\EnabledModuleRepository
      */
     private $enabledModuleRepository;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Script;
+namespace Shopsys\FrameworkBundle\Form\Admin\Script;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

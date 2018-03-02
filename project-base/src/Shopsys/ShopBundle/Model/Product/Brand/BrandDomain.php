@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Brand;
+namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -11,10 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
 class BrandDomain
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\Brand
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Brand\Brand")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Brand\Brand")
      * @ORM\JoinColumn(nullable=false, name="brand_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $brand;
@@ -49,7 +49,7 @@ class BrandDomain
     private $seoH1;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
      * @param int $domainId
      */
     public function __construct(Brand $brand, $domainId)

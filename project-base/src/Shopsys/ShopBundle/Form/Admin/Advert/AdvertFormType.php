@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Advert;
+namespace Shopsys\FrameworkBundle\Form\Admin\Advert;
 
 use Shopsys\FormTypesBundle\YesNoType;
-use Shopsys\ShopBundle\Form\DomainType;
-use Shopsys\ShopBundle\Form\FileUploadType;
-use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Model\Advert\Advert;
-use Shopsys\ShopBundle\Model\Advert\AdvertData;
+use Shopsys\FrameworkBundle\Form\DomainType;
+use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\ValidationGroup;
+use Shopsys\FrameworkBundle\Model\Advert\Advert;
+use Shopsys\FrameworkBundle\Model\Advert\AdvertData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -117,7 +117,7 @@ class AdvertFormType extends AbstractType
                     $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
                     $advertData = $form->getData();
-                    /* @var $advertData \Shopsys\ShopBundle\Model\Advert\AdvertData */
+                    /* @var $advertData \Shopsys\FrameworkBundle\Model\Advert\AdvertData */
 
                     if ($advertData->type === Advert::TYPE_CODE) {
                         $validationGroups[] = self::VALIDATION_GROUP_TYPE_CODE;

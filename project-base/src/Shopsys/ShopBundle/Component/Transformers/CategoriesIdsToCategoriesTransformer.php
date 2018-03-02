@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Transformers;
+namespace Shopsys\FrameworkBundle\Component\Transformers;
 
 use IteratorAggregate;
-use Shopsys\ShopBundle\Model\Category\CategoryRepository;
+use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class CategoriesIdsToCategoriesTransformer implements DataTransformerInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
     private $categoryRepository;
 
@@ -19,7 +19,7 @@ class CategoriesIdsToCategoriesTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category[]|null $categories
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category[]|null $categories
      * @return int[]
      */
     public function transform($categories)
@@ -37,7 +37,7 @@ class CategoriesIdsToCategoriesTransformer implements DataTransformerInterface
 
     /**
      * @param int[] $categoriesIds
-     * @return \Shopsys\ShopBundle\Model\Category\Category[]|null
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category[]|null
      */
     public function reverseTransform($categoriesIds)
     {
@@ -47,7 +47,7 @@ class CategoriesIdsToCategoriesTransformer implements DataTransformerInterface
             foreach ($categoriesIds as $categoryId) {
                 try {
                     $categories[] = $this->categoryRepository->getById($categoryId);
-                } catch (\Shopsys\ShopBundle\Model\Category\Exception\CategoryNotFoundException $e) {
+                } catch (\Shopsys\FrameworkBundle\Model\Category\Exception\CategoryNotFoundException $e) {
                     throw new \Symfony\Component\Form\Exception\TransformationFailedException('Category not found', null, $e);
                 }
             }

@@ -1,19 +1,19 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment\Detail;
+namespace Shopsys\FrameworkBundle\Model\Payment\Detail;
 
-use Shopsys\ShopBundle\Model\Payment\Payment;
-use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 
 class PaymentDetailFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
      */
     private $paymentPriceCalculation;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
      */
     public function __construct(PaymentPriceCalculation $paymentPriceCalculation)
     {
@@ -21,8 +21,8 @@ class PaymentDetailFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @return \Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetail
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetail
      */
     public function createDetailForPayment(Payment $payment)
     {
@@ -33,8 +33,8 @@ class PaymentDetailFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
-     * @return \Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetail[]
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $payments
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetail[]
      */
     public function createDetailsForPayments(array $payments)
     {
@@ -48,8 +48,8 @@ class PaymentDetailFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price[]
      */
     private function getIndependentPrices(Payment $payment)
     {

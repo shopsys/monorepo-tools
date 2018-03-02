@@ -1,11 +1,11 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Operator information'|trans }}{% endblock %}
 {% block h1 %}{{ 'Operator information'|trans }}{% endblock %}
 
 {% block main_content %}
 
-    {{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
+    {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
     {{ form_start(form) }}
         <div class="form-group">
@@ -17,7 +17,7 @@
             {{ form_row(form.phoneHours, { label: 'Phone availability'|trans }) }}
         </div>
 
-        {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 {{ form_widget(form.save, { label: 'Save changes'|trans}) }}
             {% endblock %}

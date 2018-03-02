@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer;
+namespace Shopsys\FrameworkBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Customer\Mail\CustomerMailFacade;
-use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade;
+use Shopsys\FrameworkBundle\Model\Order\Order;
 
 class CustomerFacade
 {
@@ -14,25 +14,25 @@ class CustomerFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserRepository
      */
     private $userRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CustomerService
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerService
      */
     private $customerService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\Mail\CustomerMailFacade
+     * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade
      */
     private $customerMailFacade;
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Model\Customer\UserRepository $userRepository
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerService $customerService
-     * @param \Shopsys\ShopBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerService $customerService
+     * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
      */
     public function __construct(
         EntityManager $em,
@@ -48,7 +48,7 @@ class CustomerFacade
 
     /**
      * @param int $userId
-     * @return \Shopsys\ShopBundle\Model\Customer\User
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
     public function getUserById($userId)
     {
@@ -58,7 +58,7 @@ class CustomerFacade
     /**
      * @param string $email
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Customer\User|null
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User|null
      */
     public function findUserByEmailAndDomain($email, $domainId)
     {
@@ -66,8 +66,8 @@ class CustomerFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
-     * @return \Shopsys\ShopBundle\Model\Customer\User
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
     public function register(UserData $userData)
     {
@@ -92,8 +92,8 @@ class CustomerFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerData $customerData
-     * @return \Shopsys\ShopBundle\Model\Customer\User
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerData $customerData
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
     public function create(CustomerData $customerData)
     {
@@ -133,8 +133,8 @@ class CustomerFacade
 
     /**
      * @param int $userId
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerData $customerData
-     * @return \Shopsys\ShopBundle\Model\Customer\User
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerData $customerData
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
     private function edit($userId, CustomerData $customerData)
     {
@@ -164,8 +164,8 @@ class CustomerFacade
 
     /**
      * @param int $userId
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerData $customerData
-     * @return \Shopsys\ShopBundle\Model\Customer\User
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerData $customerData
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
     public function editByAdmin($userId, CustomerData $customerData)
     {
@@ -184,8 +184,8 @@ class CustomerFacade
 
     /**
      * @param int $userId
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerData $customerData
-     * @return \Shopsys\ShopBundle\Model\Customer\User
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerData $customerData
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
     public function editByCustomer($userId, CustomerData $customerData)
     {
@@ -208,8 +208,8 @@ class CustomerFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      */
     public function amendCustomerDataFromOrder(User $user, Order $order)
     {

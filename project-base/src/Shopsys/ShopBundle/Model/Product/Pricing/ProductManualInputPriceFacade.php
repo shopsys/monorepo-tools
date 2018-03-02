@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductManualInputPriceFacade
 {
@@ -14,12 +14,12 @@ class ProductManualInputPriceFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository
      */
     private $productManualInputPriceRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceService
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceService
      */
     private $productManualInputPriceService;
 
@@ -34,8 +34,8 @@ class ProductManualInputPriceFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string $inputPrice
      */
     public function refresh(Product $product, PricingGroup $pricingGroup, $inputPrice)
@@ -52,8 +52,8 @@ class ProductManualInputPriceFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice[]
      */
     public function getAllByProduct(Product $product)
     {
@@ -61,7 +61,7 @@ class ProductManualInputPriceFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
     public function deleteByProduct(Product $product)
     {

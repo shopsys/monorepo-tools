@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Group;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Group;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -41,7 +41,7 @@ class PricingGroup
     private $coefficient;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
      * @param int $domainId
      */
     public function __construct(PricingGroupData $pricingGroupData, $domainId)
@@ -84,7 +84,7 @@ class PricingGroup
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
      */
     public function edit(PricingGroupData $pricingGroupData)
     {

@@ -1,49 +1,49 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Payment\PaymentEditFormType;
-use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
-use Shopsys\ShopBundle\Model\Payment\Grid\PaymentGridFactory;
-use Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory;
-use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Payment\PaymentEditFormType;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetailFactory;
+use Shopsys\FrameworkBundle\Model\Payment\Grid\PaymentGridFactory;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class PaymentController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetailFactory
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetailFactory
      */
     private $paymentDetailFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Grid\PaymentGridFactory
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Grid\PaymentGridFactory
      */
     private $paymentGridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentEditDataFactory
      */
     private $paymentEditDataFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
      */
     private $paymentFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
     private $currencyFacade;
 
@@ -91,7 +91,7 @@ class PaymentController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Payment/new.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Payment/new.html.twig', [
             'form' => $form->createView(),
             'currencies' => $this->currencyFacade->getAllIndexedById(),
         ]);
@@ -129,7 +129,7 @@ class PaymentController extends AdminBaseController
 
         $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing payment - %name%', ['%name%' => $payment->getName()])));
 
-        return $this->render('@ShopsysShop/Admin/Content/Payment/edit.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Payment/edit.html.twig', [
             'form' => $form->createView(),
             'paymentDetail' => $this->paymentDetailFactory->createDetailForPayment($payment),
             'currencies' => $this->currencyFacade->getAllIndexedById(),
@@ -154,7 +154,7 @@ class PaymentController extends AdminBaseController
                     'name' => $paymentName,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Payment\Exception\PaymentNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected payment doesn\'t exist.'));
         }
 
@@ -165,7 +165,7 @@ class PaymentController extends AdminBaseController
     {
         $grid = $this->paymentGridFactory->create();
 
-        return $this->render('@ShopsysShop/Admin/Content/Payment/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Payment/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }

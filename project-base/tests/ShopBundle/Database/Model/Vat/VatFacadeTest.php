@@ -2,15 +2,15 @@
 
 namespace Tests\ShopBundle\Database\Model\Vat;
 
-use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\PaymentDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\TransportDataFixture;
-use Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory;
-use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory;
-use Shopsys\ShopBundle\Model\Transport\TransportFacade;
+use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\PaymentDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\TransportDataFixture;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\FrameworkBundle\Model\Transport\TransportEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class VatFacadeTest extends DatabaseTestCase
@@ -19,24 +19,24 @@ class VatFacadeTest extends DatabaseTestCase
     {
         $em = $this->getEntityManager();
         $vatFacade = $this->getServiceByType(VatFacade::class);
-        /* @var $vatFacade \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade */
+        /* @var $vatFacade \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade */
         $transportFacade = $this->getServiceByType(TransportFacade::class);
-        /* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
+        /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
         $transportEditDataFactory = $this->getServiceByType(TransportEditDataFactory::class);
-        /* @var $transportEditDataFactory \Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory */
+        /* @var $transportEditDataFactory \Shopsys\FrameworkBundle\Model\Transport\TransportEditDataFactory */
         $paymentEditDataFactory = $this->getServiceByType(PaymentEditDataFactory::class);
-        /* @var $paymentEditDataFactory \Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory */
+        /* @var $paymentEditDataFactory \Shopsys\FrameworkBundle\Model\Payment\PaymentEditDataFactory */
         $paymentFacade = $this->getServiceByType(PaymentFacade::class);
-        /* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
+        /* @var $paymentFacade \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
 
         $vatToDelete = $vatFacade->create(new VatData('name', 10));
         $vatToReplaceWith = $this->getReference(VatDataFixture::VAT_HIGH);
-        /* @var $vatToReplaceWith \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
+        /* @var $vatToReplaceWith \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat */
         $transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
-        /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
+        /* @var $transport \Shopsys\FrameworkBundle\Model\Transport\Transport */
         $transportEditData = $transportEditDataFactory->createFromTransport($transport);
         $payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
-        /* @var $payment \Shopsys\ShopBundle\Model\Payment\Payment */
+        /* @var $payment \Shopsys\FrameworkBundle\Model\Payment\Payment */
         $paymentEditData = $paymentEditDataFactory->createFromPayment($payment);
 
         $transportEditData->transportData->vat = $vatToDelete;

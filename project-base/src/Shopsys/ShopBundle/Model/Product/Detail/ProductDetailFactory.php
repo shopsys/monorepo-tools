@@ -1,38 +1,38 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Detail;
+namespace Shopsys\FrameworkBundle\Model\Product\Detail;
 
-use Shopsys\ShopBundle\Component\Image\ImageFacade;
-use Shopsys\ShopBundle\Model\Localization\Localization;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class ProductDetailFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
     private $productPriceCalculationForUser;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository
      */
     private $parameterRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
     private $imageFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
@@ -51,8 +51,8 @@ class ProductDetailFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail
      */
     public function getDetailForProduct(Product $product)
     {
@@ -60,8 +60,8 @@ class ProductDetailFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
-     * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
+     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
      */
     public function getDetailsForProducts(array $products)
     {
@@ -75,22 +75,22 @@ class ProductDetailFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice|null
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice|null
      */
     public function getSellingPrice(Product $product)
     {
         try {
             $productPrice = $this->productPriceCalculationForUser->calculatePriceForCurrentUser($product);
-        } catch (\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
             $productPrice = null;
         }
         return $productPrice;
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue[]
      */
     public function getParameters(Product $product)
     {
@@ -110,8 +110,8 @@ class ProductDetailFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Component\Image\Image[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
      */
     public function getImagesIndexedById(Product $product)
     {
@@ -119,8 +119,8 @@ class ProductDetailFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]
      */
     public function getProductDomainsIndexedByDomainId(Product $product)
     {

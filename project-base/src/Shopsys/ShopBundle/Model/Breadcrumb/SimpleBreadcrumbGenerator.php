@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Breadcrumb;
+namespace Shopsys\FrameworkBundle\Model\Breadcrumb;
 
-use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
-use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
+use Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
+use Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbItem;
 
 class SimpleBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
@@ -15,7 +15,7 @@ class SimpleBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     /**
      * @param string $routeName
      * @param array $routeParameters
-     * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
+     * @return \Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbItem[]
      */
     public function getBreadcrumbItems($routeName, array $routeParameters = [])
     {

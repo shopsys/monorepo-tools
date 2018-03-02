@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\DependencyInjection\Compiler;
+namespace Shopsys\FrameworkBundle\DependencyInjection\Compiler;
 
-use Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureRegistry;
+use Shopsys\FrameworkBundle\Component\Plugin\PluginDataFixtureRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

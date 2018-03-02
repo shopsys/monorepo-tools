@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Cart\Watcher;
+namespace Shopsys\FrameworkBundle\Model\Cart\Watcher;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender;
-use Shopsys\ShopBundle\Model\Cart\Cart;
-use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\FrameworkBundle\Component\FlashMessage\FlashMessageSender;
+use Shopsys\FrameworkBundle\Model\Cart\Cart;
+use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 
 class CartWatcherFacade
 {
@@ -15,17 +15,17 @@ class CartWatcherFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherService
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService
      */
     private $cartWatcherService;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender
+     * @var \Shopsys\FrameworkBundle\Component\FlashMessage\FlashMessageSender
      */
     private $flashMessageSender;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
     private $currentCustomer;
 
@@ -42,7 +42,7 @@ class CartWatcherFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      */
     public function checkCartModifications(Cart $cart)
     {
@@ -53,7 +53,7 @@ class CartWatcherFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      */
     private function checkModifiedPrices(Cart $cart)
     {
@@ -68,7 +68,7 @@ class CartWatcherFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      */
     private function checkNotListableItems(Cart $cart)
     {
@@ -81,7 +81,7 @@ class CartWatcherFacade
                     t('The price of the product <strong>{{ name }}</strong> you have in cart has changed. Please, check your order.'),
                     ['name' => $productName]
                 );
-            } catch (\Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
+            } catch (\Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException $e) {
                 $this->flashMessageSender->addErrorFlash(
                     t('Product you had in cart is no longer in available. Please check your order.')
                 );

@@ -1,22 +1,22 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig;
+namespace Shopsys\FrameworkBundle\Twig;
 
 use DateTime;
 use IntlDateFormatter;
-use Shopsys\ShopBundle\Component\Localization\DateTimeFormatter;
-use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Twig_Extension;
 
 class DateTimeFormatterExtension extends Twig_Extension
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Localization\DateTimeFormatter
+     * @var \Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter
      */
     private $dateTimeFormatter;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 

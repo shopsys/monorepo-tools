@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Category;
+namespace Shopsys\FrameworkBundle\Model\Category;
 
-use Shopsys\ShopBundle\Form\UrlListData;
+use Shopsys\FrameworkBundle\Form\UrlListData;
 
 class CategoryData
 {
@@ -32,7 +32,7 @@ class CategoryData
     public $descriptions;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\Category|null
+     * @var \Shopsys\FrameworkBundle\Model\Category\Category|null
      */
     public $parent;
 
@@ -42,7 +42,7 @@ class CategoryData
     public $hiddenOnDomains;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\UrlListData
+     * @var \Shopsys\FrameworkBundle\Form\UrlListData
      */
     public $urls;
 
@@ -70,8 +70,8 @@ class CategoryData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @param \Shopsys\ShopBundle\Model\Category\CategoryDomain[] $categoryDomains
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDomain[] $categoryDomains
      */
     public function setFromEntity(Category $category, array $categoryDomains)
     {

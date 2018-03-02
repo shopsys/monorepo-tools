@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\FileUpload;
+namespace Shopsys\FrameworkBundle\Component\FileUpload;
 
 class FileForUpload
 {

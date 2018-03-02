@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment;
+namespace Shopsys\FrameworkBundle\Model\Payment;
 
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 
 class PaymentData
 {
@@ -12,7 +12,7 @@ class PaymentData
     public $name;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      */
     public $vat;
 
@@ -42,7 +42,7 @@ class PaymentData
     public $image;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Transport[]
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport[]
      */
     public $transports;
 
@@ -53,7 +53,7 @@ class PaymentData
 
     /**
      * @param string[] $name
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat|null $vat
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null $vat
      * @param string[] $description
      * @param string[] $instructions
      * @param bool $hidden
@@ -80,8 +80,8 @@ class PaymentData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @param \Shopsys\ShopBundle\Model\Payment\PaymentDomain[] $paymentDomains
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentDomain[] $paymentDomains
      */
     public function setFromEntity(Payment $payment, array $paymentDomains)
     {

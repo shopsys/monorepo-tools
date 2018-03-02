@@ -1,26 +1,26 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Domain;
+namespace Shopsys\FrameworkBundle\Component\Domain;
 
-use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DomainFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     private $pricingSetting;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\DomainService
+     * @var \Shopsys\FrameworkBundle\Component\Domain\DomainService
      */
     private $domainService;
 
@@ -35,7 +35,7 @@ class DomainFacade
     private $domainImagesDirectory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
+     * @var \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
      */
     private $fileUpload;
 
@@ -56,8 +56,8 @@ class DomainFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[]
      */
     public function getDomainConfigsByCurrency(Currency $currency)
     {
@@ -73,7 +73,7 @@ class DomainFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[]
      */
     public function getAllDomainConfigs()
     {

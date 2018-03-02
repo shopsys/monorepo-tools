@@ -1,24 +1,24 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Category;
+namespace Shopsys\FrameworkBundle\Model\Category;
 
-use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade;
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
 class CategoryDataFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
     private $categoryRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
     private $friendlyUrlFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade
+     * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade
      */
     private $pluginCrudExtensionFacade;
 
@@ -33,8 +33,8 @@ class CategoryDataFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @return \Shopsys\ShopBundle\Model\Category\CategoryData
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryData
      */
     public function createFromCategory(Category $category)
     {
@@ -56,7 +56,7 @@ class CategoryDataFactory
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\CategoryData
+     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryData
      */
     public function createDefault()
     {

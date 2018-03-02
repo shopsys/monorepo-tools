@@ -1,21 +1,21 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Mail;
+namespace Shopsys\FrameworkBundle\Model\Mail;
 
 class AllMailTemplatesData
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateData[]
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData[]
      */
     public $orderStatusTemplates;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateData
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData
      */
     public $registrationTemplate;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateData
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData
      */
     public $resetPasswordTemplate;
 
@@ -25,7 +25,7 @@ class AllMailTemplatesData
     public $domainId;
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Mail\MailTemplateData[]
+     * @return \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData[]
      */
     public function getAllTemplates()
     {

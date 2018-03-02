@@ -3,12 +3,12 @@
 namespace Tests\ShopBundle\Unit\Component\Image;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\FileUpload\FileNamingConvention;
-use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
-use Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig;
-use Shopsys\ShopBundle\Component\Image\Image;
-use Shopsys\ShopBundle\Component\Image\ImageService;
-use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
+use Shopsys\FrameworkBundle\Component\FileUpload\FileNamingConvention;
+use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig;
+use Shopsys\FrameworkBundle\Component\Image\Image;
+use Shopsys\FrameworkBundle\Component\Image\ImageService;
+use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImageServiceTest extends PHPUnit_Framework_TestCase
@@ -23,7 +23,7 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase
 
         $imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload());
 
-        $this->expectException(\Shopsys\ShopBundle\Component\Image\Exception\EntityMultipleImageException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Component\Image\Exception\EntityMultipleImageException::class);
         $imageService->getUploadedImages($imageEntityConfig, 1, [], 'type');
     }
 
@@ -73,7 +73,7 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\FileUpload\FileUpload
+     * @return \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
      */
     private function getFileUpload()
     {

@@ -1,5 +1,5 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
-{% import '@ShopsysShop/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+{% import '@ShopsysFramework/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
 {% block title %}- {{ 'Brand'|trans }}{% endblock %}
 {% block h1 %}{{ 'Brand'|trans }}{% endblock %}
 
@@ -35,7 +35,7 @@
             {{ form_row(form.brandData.image, { label: 'Upload image'|trans, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans }) }}
         </div>
 
-        {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 <a href="{{ url('admin_brand_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
                 {{ form_save(brand|default(null), form) }}

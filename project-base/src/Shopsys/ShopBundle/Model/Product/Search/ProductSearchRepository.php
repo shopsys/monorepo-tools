@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Search;
+namespace Shopsys\FrameworkBundle\Model\Product\Search;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Component\Fulltext\TsqueryFactory;
-use Shopsys\ShopBundle\Component\String\DatabaseSearching;
+use Shopsys\FrameworkBundle\Component\Fulltext\TsqueryFactory;
+use Shopsys\FrameworkBundle\Component\String\DatabaseSearching;
 
 class ProductSearchRepository
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Fulltext\TsqueryFactory
+     * @var \Shopsys\FrameworkBundle\Component\Fulltext\TsqueryFactory
      */
     private $tsqueryFactory;
 

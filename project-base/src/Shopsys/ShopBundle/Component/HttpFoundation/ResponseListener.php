@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\HttpFoundation;
+namespace Shopsys\FrameworkBundle\Component\HttpFoundation;
 
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 

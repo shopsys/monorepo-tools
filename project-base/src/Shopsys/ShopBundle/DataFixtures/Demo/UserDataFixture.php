@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Generator;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\DataFixtures\Base\SettingValueDataFixture as BaseSettingValueDataFixture;
-use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
-use Shopsys\ShopBundle\Model\Customer\CustomerPasswordService;
-use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\DataFixtures\Base\SettingValueDataFixture as BaseSettingValueDataFixture;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
+use Shopsys\FrameworkBundle\Model\Customer\User;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -22,9 +22,9 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     public function load(ObjectManager $manager)
     {
         $customerFacade = $this->get(CustomerFacade::class);
-        /* @var $customerFacade \Shopsys\ShopBundle\Model\Customer\CustomerFacade */
+        /* @var $customerFacade \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
         $loaderService = $this->get(UserDataFixtureLoader::class);
-        /* @var $loaderService \Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader */
+        /* @var $loaderService \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader */
         $faker = $this->get(Generator::class);
         /* @var $faker \Faker\Generator */
 
@@ -60,12 +60,12 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $customer
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $customer
      */
     private function resetPassword(User $customer)
     {
         $customerPasswordService = $this->get(CustomerPasswordService::class);
-        /* @var $customerPasswordService \Shopsys\ShopBundle\Model\Customer\CustomerPasswordService */
+        /* @var $customerPasswordService \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService */
         $em = $this->get('doctrine.orm.entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Shopsys\ShopBundle\Component\Domain\DomainDataCreator;
-use Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade;
-use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
+use Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator;
+use Shopsys\FrameworkBundle\Component\Domain\DomainDbFunctionsFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,25 +24,25 @@ class CreateDomainsDataCommand extends Command
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\DomainDbFunctionsFacade
      */
     private $domainDbFunctionsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\DomainDataCreator
+     * @var \Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator
      */
     private $domainDataCreator;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade
      */
     private $multidomainEntityClassFinderFacade;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade $domainDbFunctionsFacade
-     * @param \Shopsys\ShopBundle\Component\Domain\DomainDataCreator $domainDataCreator
-     * @param \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\DomainDbFunctionsFacade $domainDbFunctionsFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator $domainDataCreator
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade
      */
     public function __construct(
         EntityManagerInterface $em,

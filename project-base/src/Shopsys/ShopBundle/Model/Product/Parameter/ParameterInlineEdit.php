@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
-use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use Shopsys\ShopBundle\Form\Admin\Product\Parameter\ParameterFormType;
+use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\FrameworkBundle\Form\Admin\Product\Parameter\ParameterFormType;
 use Symfony\Component\Form\FormFactory;
 
 class ParameterInlineEdit extends AbstractGridInlineEdit
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade
      */
     private $parameterFacade;
 
@@ -28,7 +28,7 @@ class ParameterInlineEdit extends AbstractGridInlineEdit
         $this->formFactory = $formFactory;
     }
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
      * @return int
      */
     protected function createEntityAndGetId($parameterData)
@@ -40,7 +40,7 @@ class ParameterInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int $parameterId
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
      */
     protected function editEntity($parameterId, $parameterData)
     {

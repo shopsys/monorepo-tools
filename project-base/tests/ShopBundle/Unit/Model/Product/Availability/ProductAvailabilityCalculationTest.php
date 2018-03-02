@@ -3,15 +3,15 @@
 namespace Tests\ShopBundle\Unit\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
-use Shopsys\ShopBundle\Model\Product\Availability\Availability;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
-use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductData;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
-use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
-use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
+use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
+use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
+use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCalculation;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator;
+use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class ProductAvailabilityCalculationTest extends FunctionalTestCase

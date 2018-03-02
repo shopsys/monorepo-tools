@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Mail;
+namespace Shopsys\FrameworkBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
 
@@ -30,7 +30,7 @@ class MailTemplateRepository
     /**
      * @param string $templateName
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Mail\MailTemplate|null
+     * @return \Shopsys\FrameworkBundle\Model\Mail\MailTemplate|null
      */
     public function findByNameAndDomainId($templateName, $domainId)
     {
@@ -42,14 +42,14 @@ class MailTemplateRepository
     /**
      * @param string $templateName
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Mail\MailTemplate
+     * @return \Shopsys\FrameworkBundle\Model\Mail\MailTemplate
      */
     public function getByNameAndDomainId($templateName, $domainId)
     {
         $mailTemplate = $this->findByNameAndDomainId($templateName, $domainId);
         if ($mailTemplate === null) {
             $message = 'E-mail template with name "' . $templateName . '" was not found on domain with ID ' . $domainId . '.';
-            throw new \Shopsys\ShopBundle\Model\Mail\Exception\MailTemplateNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Model\Mail\Exception\MailTemplateNotFoundException($message);
         }
 
         return $mailTemplate;
@@ -57,7 +57,7 @@ class MailTemplateRepository
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Mail\MailTemplate[]
+     * @return \Shopsys\FrameworkBundle\Model\Mail\MailTemplate[]
      */
     public function getAllByDomainId($domainId)
     {

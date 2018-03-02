@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\FileUpload;
+namespace Shopsys\FrameworkBundle\Component\FileUpload;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -8,12 +8,12 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 class DoctrineListener
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
+     * @var \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
      */
     private $fileUpload;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\FileUpload\FileUpload $fileUpload
+     * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
      */
     public function __construct(FileUpload $fileUpload)
     {

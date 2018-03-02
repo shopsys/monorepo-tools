@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Newsletter;
+namespace Shopsys\FrameworkBundle\Model\Newsletter;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\String\DatabaseSearching;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\FrameworkBundle\Component\String\DatabaseSearching;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 
 class NewsletterRepository
 {
@@ -55,7 +55,7 @@ class NewsletterRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $searchData
+     * @param \Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData $searchData
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getQueryBuilderForQuickSearch(int $domainId, QuickSearchFormData $searchData)
@@ -76,7 +76,7 @@ class NewsletterRepository
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Newsletter\NewsletterSubscriber
+     * @return \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriber
      */
     public function getNewsletterSubscriberById(int $id)
     {

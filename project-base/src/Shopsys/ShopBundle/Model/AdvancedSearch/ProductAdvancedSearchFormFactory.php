@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdvancedSearch;
+namespace Shopsys\FrameworkBundle\Model\AdvancedSearch;
 
-use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
-use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation;
+use Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
+use Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class ProductAdvancedSearchFormFactory extends AbstractAdvancedSearchFormFactory

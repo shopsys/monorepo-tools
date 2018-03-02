@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Statistics;
+namespace Shopsys\FrameworkBundle\Model\Statistics;
 
 use DateInterval;
 use DateTime;
@@ -8,18 +8,18 @@ use DateTime;
 class StatisticsFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Statistics\StatisticsRepository
+     * @var \Shopsys\FrameworkBundle\Model\Statistics\StatisticsRepository
      */
     private $statisticsRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Statistics\StatisticsService
+     * @var \Shopsys\FrameworkBundle\Model\Statistics\StatisticsService
      */
     private $statisticsService;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Statistics\StatisticsRepository $statisticsRepository
-     * @param \Shopsys\ShopBundle\Model\Statistics\StatisticsService $statisticsService
+     * @param \Shopsys\FrameworkBundle\Model\Statistics\StatisticsRepository $statisticsRepository
+     * @param \Shopsys\FrameworkBundle\Model\Statistics\StatisticsService $statisticsService
      */
     public function __construct(
         StatisticsRepository $statisticsRepository,
@@ -30,7 +30,7 @@ class StatisticsFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Statistics\ValueByDateTimeDataPoint[]
+     * @return \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPoint[]
      */
     public function getCustomersRegistrationsCountByDayInLastTwoWeeks()
     {
@@ -53,7 +53,7 @@ class StatisticsFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Statistics\ValueByDateTimeDataPoint[]
+     * @return \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPoint[]
      */
     public function getNewOrdersCountByDayInLastTwoWeeks()
     {

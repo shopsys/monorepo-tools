@@ -3,13 +3,13 @@
 namespace Tests\ShopBundle\Unit\Component\Domain;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Domain\DomainDataCreator;
-use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;
-use Shopsys\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator;
+use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Component\Setting\SettingValueRepository;
+use Shopsys\FrameworkBundle\Component\Translation\TranslatableEntityDataCreator;
 
 class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
 {
@@ -59,7 +59,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
                 if ($domainId === 1) {
                     return true;
                 }
-                throw new \Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException();
+                throw new \Shopsys\FrameworkBundle\Component\Setting\Exception\SettingValueNotFoundException();
             });
 
         $domain = new Domain($domainConfigs, $settingMock);
@@ -106,7 +106,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
                 if ($domainId === 1) {
                     return true;
                 }
-                throw new \Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException();
+                throw new \Shopsys\FrameworkBundle\Component\Setting\Exception\SettingValueNotFoundException();
             });
 
         $domainMock = $this->createMock(Domain::class);

@@ -1,27 +1,27 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Availability;
+namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
-use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
-use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator;
+use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductAvailabilityCalculation
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
     private $availabilityFacade;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator $productSellingDeniedRecalculator
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator $productSellingDeniedRecalculator
      */
     private $productSellingDeniedRecalculator;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
     private $productVisibilityFacade;
 
@@ -31,7 +31,7 @@ class ProductAvailabilityCalculation
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
@@ -50,8 +50,8 @@ class ProductAvailabilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      */
     public function calculateAvailability(Product $product)
     {
@@ -72,8 +72,8 @@ class ProductAvailabilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $mainVariant
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $mainVariant
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      */
     private function calculateMainVariantAvailability(Product $mainVariant)
     {
@@ -97,8 +97,8 @@ class ProductAvailabilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $mainVariant
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $mainVariant
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     private function getAtLeastSomewhereSellableVariantsByMainVariant(Product $mainVariant)
     {

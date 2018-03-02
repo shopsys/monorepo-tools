@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Domain;
+namespace Shopsys\FrameworkBundle\Component\Domain;
 
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader;
-use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainsConfigLoader;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
 class DomainFactoryOverwritingDomainUrl
 {
@@ -14,19 +14,19 @@ class DomainFactoryOverwritingDomainUrl
     private $overwriteDomainUrl;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainsConfigLoader
      */
     private $domainsConfigLoader;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
      * @param string|null $overwriteDomainUrl
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader $domainsConfigLoader
-     * @param \Shopsys\ShopBundle\Component\Setting\Setting
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainsConfigLoader $domainsConfigLoader
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     public function __construct($overwriteDomainUrl, DomainsConfigLoader $domainsConfigLoader, Setting $setting)
     {
@@ -38,7 +38,7 @@ class DomainFactoryOverwritingDomainUrl
     /**
      * @param string $domainsConfigFilepath
      * @param string $domainsUrlsConfigFilepath
-     * @return \Shopsys\ShopBundle\Component\Domain\Domain
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     public function create($domainsConfigFilepath, $domainsUrlsConfigFilepath)
     {
@@ -58,8 +58,8 @@ class DomainFactoryOverwritingDomainUrl
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[]
      */
     public function overwriteDomainUrl(array $domainConfigs)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Javascript\Parser\Exception;
+namespace Shopsys\FrameworkBundle\Component\Javascript\Parser\Exception;
 
 use Exception;
 

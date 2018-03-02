@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 
 /**
  * @ORM\Table(name="parameters")
@@ -23,9 +23,9 @@ class Parameter extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterTranslation[]
      *
-     * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Product\Parameter\ParameterTranslation")
+     * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterTranslation")
      */
     protected $translations;
 
@@ -37,7 +37,7 @@ class Parameter extends AbstractTranslatableEntity
     private $visible;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
      */
     public function __construct(ParameterData $parameterData)
     {
@@ -72,7 +72,7 @@ class Parameter extends AbstractTranslatableEntity
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
      */
     private function setTranslations(ParameterData $parameterData)
     {
@@ -82,7 +82,7 @@ class Parameter extends AbstractTranslatableEntity
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterTranslation
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterTranslation
      */
     protected function createTranslation()
     {
@@ -90,7 +90,7 @@ class Parameter extends AbstractTranslatableEntity
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
      */
     public function edit(ParameterData $parameterData)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\PromoCode;
+namespace Shopsys\FrameworkBundle\Model\Order\PromoCode;
 
 use Doctrine\ORM\EntityManager;
 
@@ -12,7 +12,7 @@ class PromoCodeFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeRepository
+     * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeRepository
      */
     private $promoCodeRepository;
 
@@ -23,8 +23,8 @@ class PromoCodeFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
-     * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
+     * @return \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode
      */
     public function create(PromoCodeData $promoCodeData)
     {
@@ -37,8 +37,8 @@ class PromoCodeFacade
 
     /**
      * @param int $promoCodeId
-     * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
-     * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
+     * @return \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode
      */
     public function edit($promoCodeId, PromoCodeData $promoCodeData)
     {
@@ -51,7 +51,7 @@ class PromoCodeFacade
 
     /**
      * @param int $promoCodeId
-     * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode
+     * @return \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode
      */
     public function getById($promoCodeId)
     {
@@ -70,7 +70,7 @@ class PromoCodeFacade
 
     /**
      * @param string $code
-     * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode|null
+     * @return \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode|null
      */
     public function findPromoCodeByCode($code)
     {
@@ -78,7 +78,7 @@ class PromoCodeFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode[]
      */
     public function getAll()
     {

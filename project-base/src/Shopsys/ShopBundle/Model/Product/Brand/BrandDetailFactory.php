@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Brand;
+namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 
 class BrandDetailFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository
      */
     private $brandRepository;
 
@@ -15,8 +15,8 @@ class BrandDetailFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandDetail
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDetail
      */
     public function getDetailForBrand(Brand $brand)
     {
@@ -24,8 +24,8 @@ class BrandDetailFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandDomain[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain[]
      */
     public function getBrandDomainsIndexedByDomainId(Brand $brand)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Cron;
+namespace Shopsys\FrameworkBundle\Component\Cron;
 
 use Doctrine\ORM\Mapping as ORM;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Availability;
+namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
 use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
@@ -13,7 +13,7 @@ class ProductAvailabilityCronModule implements IteratedCronModuleInterface
     private $logger;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator
      */
     private $productAvailabilityRecalculator;
 

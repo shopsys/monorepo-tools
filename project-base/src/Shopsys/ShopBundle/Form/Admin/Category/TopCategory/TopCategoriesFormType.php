@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Category\TopCategory;
+namespace Shopsys\FrameworkBundle\Form\Admin\Category\TopCategory;
 
-use Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer;
-use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
-use Shopsys\ShopBundle\Form\SortableValuesType;
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer;
+use Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
+use Shopsys\FrameworkBundle\Form\SortableValuesType;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,24 +14,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TopCategoriesFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
+     * @var \Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
      */
     private $removeDuplicatesTransformer;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer
+     * @var \Shopsys\FrameworkBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer
      */
     private $categoriesIdsToCategoriesTransformer;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\CategoryFacade $categoryFacade
-     * @param \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
-     * @param \Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer $categoriesIdsToCategoriesTransformer
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
+     * @param \Shopsys\FrameworkBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer $categoriesIdsToCategoriesTransformer
      */
     public function __construct(
         CategoryFacade $categoryFacade,

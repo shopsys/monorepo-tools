@@ -1,29 +1,29 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Form\Admin\Heureka\HeurekaShopCertificationFormType;
-use Shopsys\ShopBundle\Model\Heureka\HeurekaFacade;
-use Shopsys\ShopBundle\Model\Heureka\HeurekaSetting;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Form\Admin\Heureka\HeurekaShopCertificationFormType;
+use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
+use Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting;
 use Symfony\Component\HttpFoundation\Request;
 
 class HeurekaController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaSetting
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting
      */
     private $heurekaSetting;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaFacade
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade
      */
     private $heurekaFacade;
 
@@ -68,7 +68,7 @@ class HeurekaController extends AdminBaseController
             $formView = $form->createView();
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Heureka/setting.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Heureka/setting.html.twig', [
             'form' => $formView,
             'serverName' => $this->heurekaFacade->getServerNameByLocale($locale),
             'selectedDomainConfig' => $domainConfig,

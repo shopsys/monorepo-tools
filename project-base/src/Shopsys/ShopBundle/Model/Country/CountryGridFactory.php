@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Country;
+namespace Shopsys\FrameworkBundle\Model\Country;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
 
 class CountryGridFactory implements GridFactoryInterface
 {
@@ -16,12 +16,12 @@ class CountryGridFactory implements GridFactoryInterface
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
@@ -36,7 +36,7 @@ class CountryGridFactory implements GridFactoryInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     public function create()
     {
@@ -54,7 +54,7 @@ class CountryGridFactory implements GridFactoryInterface
         $grid->addColumn('name', 's.name', t('Name'), true);
 
         $grid->setActionColumnClassAttribute('table-col table-col-10');
-        $grid->setTheme('@ShopsysShop/Admin/Content/Country/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Country/listGrid.html.twig');
 
         return $grid;
     }

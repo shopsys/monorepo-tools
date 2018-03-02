@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Grid;
+namespace Shopsys\FrameworkBundle\Component\Grid;
 
-use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
@@ -20,7 +20,7 @@ class GridFactory
     private $router;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector
+     * @var \Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector
      */
     private $routeCsrfProtector;
 
@@ -43,8 +43,8 @@ class GridFactory
 
     /**
      * @param string $gridId
-     * @param \Shopsys\ShopBundle\Component\Grid\DataSourceInterface $dataSource
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @param \Shopsys\FrameworkBundle\Component\Grid\DataSourceInterface $dataSource
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     public function create($gridId, DataSourceInterface $dataSource)
     {

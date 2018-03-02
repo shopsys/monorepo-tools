@@ -2,8 +2,8 @@
 
 namespace Tests\ShopBundle\Unit\Form\Admin\AdvancedSearch;
 
-use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation;
-use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
+use Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class AdvancedSearchProductFilterTranslationTest extends FunctionalTestCase
@@ -11,10 +11,10 @@ class AdvancedSearchProductFilterTranslationTest extends FunctionalTestCase
     public function testTranslateFilterName()
     {
         $advancedSearchConfig = $this->getServiceByType(ProductAdvancedSearchConfig::class);
-        /* @var $advancedSearchConfig \Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig */
+        /* @var $advancedSearchConfig \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig */
         $advancedSearchProductFilterTranslation = $this->getServiceByType(AdvancedSearchProductFilterTranslation::class);
         // @codingStandardsIgnoreStart
-        /* @var $advancedSearchProductFilterTranslation \Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation */
+        /* @var $advancedSearchProductFilterTranslation \Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation */
         // @codingStandardsIgnoreEnd
 
         foreach ($advancedSearchConfig->getAllFilters() as $filter) {
@@ -26,7 +26,7 @@ class AdvancedSearchProductFilterTranslationTest extends FunctionalTestCase
     {
         $advancedSearchTranslator = new AdvancedSearchProductFilterTranslation();
 
-        $this->expectException(\Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
         $advancedSearchTranslator->translateFilterName('nonexistingFilterName');
     }
 }

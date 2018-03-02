@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Pricing\Currency;
+namespace Shopsys\FrameworkBundle\Form\Admin\Pricing\Currency;
 
 use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
-use Shopsys\ShopBundle\Model\Localization\Localization;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,7 +20,7 @@ class CurrencyFormType extends AbstractType
     private $intlCurrencyRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 

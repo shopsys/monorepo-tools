@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Unit;
+namespace Shopsys\FrameworkBundle\Model\Product\Unit;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
 class UnitFacade
 {
@@ -13,25 +13,25 @@ class UnitFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitRepository
      */
     private $unitRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitService
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitService
      */
     private $unitService;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitRepository $unitRepository
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitService $unitService
-     * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitRepository $unitRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitService $unitService
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      */
     public function __construct(
         EntityManager $em,
@@ -47,7 +47,7 @@ class UnitFacade
 
     /**
      * @param int $unitId
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\Unit
      */
     public function getById($unitId)
     {
@@ -55,8 +55,8 @@ class UnitFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData $unitData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\Unit
      */
     public function create(UnitData $unitData)
     {
@@ -69,8 +69,8 @@ class UnitFacade
 
     /**
      * @param int $unitId
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData $unitData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\Unit
      */
     public function edit($unitId, UnitData $unitData)
     {
@@ -102,7 +102,7 @@ class UnitFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\Unit[]
      */
     public function getAll()
     {
@@ -110,7 +110,7 @@ class UnitFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\Unit $unit
      * @return bool
      */
     public function isUnitUsed(Unit $unit)
@@ -120,7 +120,7 @@ class UnitFacade
 
     /**
      * @param int $unitId
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\Unit[]
      */
     public function getAllExceptId($unitId)
     {
@@ -136,7 +136,7 @@ class UnitFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\Unit
      */
     public function getDefaultUnit()
     {
@@ -146,7 +146,7 @@ class UnitFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\Unit $unit
      */
     public function setDefaultUnit(Unit $unit)
     {
@@ -154,7 +154,7 @@ class UnitFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\Unit $unit
      * @return bool
      */
     public function isUnitDefault(Unit $unit)

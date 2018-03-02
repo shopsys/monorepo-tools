@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order;
+namespace Shopsys\FrameworkBundle\Model\Order;
 
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManager;
@@ -41,9 +41,9 @@ class OrderNumberSequenceRepository
             $requestedNumber = time();
 
             $orderNumberSequence = $this->getOrderNumberSequenceRepository()->find(self::ID, LockMode::PESSIMISTIC_WRITE);
-            /* @var $orderNumberSequence \Shopsys\ShopBundle\Model\Order\OrderNumberSequence|null */
+            /* @var $orderNumberSequence \Shopsys\FrameworkBundle\Model\Order\OrderNumberSequence|null */
             if ($orderNumberSequence === null) {
-                throw new \Shopsys\ShopBundle\Model\Order\Exception\OrderNumberSequenceNotFoundException(
+                throw new \Shopsys\FrameworkBundle\Model\Order\Exception\OrderNumberSequenceNotFoundException(
                     'Order number sequence ID ' . self::ID . ' not found.'
                 );
             }

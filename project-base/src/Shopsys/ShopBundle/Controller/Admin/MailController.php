@@ -1,56 +1,56 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType;
-use Shopsys\ShopBundle\Form\Admin\Mail\MailSettingFormType;
-use Shopsys\ShopBundle\Model\Customer\Mail\RegistrationMailService;
-use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
-use Shopsys\ShopBundle\Model\Mail\MailTemplate;
-use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
-use Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade;
-use Shopsys\ShopBundle\Model\Order\Mail\OrderMailService;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Form\Admin\Mail\AllMailTemplatesFormType;
+use Shopsys\FrameworkBundle\Form\Admin\Mail\MailSettingFormType;
+use Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMailService;
+use Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
+use Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade;
+use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class MailController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\Mail\RegistrationMailService
+     * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMailService
      */
     private $registrationMailService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail
+     * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail
      */
     private $resetPasswordMail;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
      */
     private $mailTemplateFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade
      */
     private $mailSettingFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Mail\OrderMailService
+     * @var \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService
      */
     private $orderMailService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade
      */
     private $orderStatusFacade;
 
@@ -153,7 +153,7 @@ class MailController extends AdminBaseController
         $templateParameters = $this->getTemplateParameters();
         $templateParameters['form'] = $form->createView();
 
-        return $this->render('@ShopsysShop/Admin/Content/Mail/template.html.twig', $templateParameters);
+        return $this->render('@ShopsysFramework/Admin/Content/Mail/template.html.twig', $templateParameters);
     }
 
     /**
@@ -180,7 +180,7 @@ class MailController extends AdminBaseController
             $this->getFlashMessageSender()->addSuccessFlash(t('E-mail settings modified.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Mail/setting.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Mail/setting.html.twig', [
             'form' => $form->createView(),
         ]);
     }

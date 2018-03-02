@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdminNavigation;
+namespace Shopsys\FrameworkBundle\Model\AdminNavigation;
 
 class MenuItem
 {
@@ -20,7 +20,7 @@ class MenuItem
     private $type;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
     private $items;
 
@@ -130,7 +130,7 @@ class MenuItem
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
     public function getItems()
     {
@@ -191,7 +191,7 @@ class MenuItem
     private function setType($type)
     {
         if (!in_array($type, $this->getTypes(), true)) {
-            throw new \Shopsys\ShopBundle\Model\AdminNavigation\Exception\InvalidItemTypeException(
+            throw new \Shopsys\FrameworkBundle\Model\AdminNavigation\Exception\InvalidItemTypeException(
                 $type . ' is not a valid item type. Supported types are: ' . implode(', ', $this->getTypes()) . '.'
             );
         }

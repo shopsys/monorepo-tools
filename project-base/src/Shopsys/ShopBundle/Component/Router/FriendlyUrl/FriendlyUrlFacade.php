@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
-use Shopsys\ShopBundle\Form\FriendlyUrlType;
-use Shopsys\ShopBundle\Form\UrlListData;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Form\FriendlyUrlType;
+use Shopsys\FrameworkBundle\Form\UrlListData;
 
 class FriendlyUrlFacade
 {
@@ -18,22 +18,22 @@ class FriendlyUrlFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService
      */
     private $friendlyUrlService;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
      */
     private $friendlyUrlRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -80,7 +80,7 @@ class FriendlyUrlFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
      * @param string $entityName
      */
     private function resolveUniquenessOfFriendlyUrlAndFlush(FriendlyUrl $friendlyUrl, $entityName)
@@ -89,7 +89,7 @@ class FriendlyUrlFacade
         do {
             $attempt++;
             if ($attempt > self::MAX_URL_UNIQUE_RESOLVE_ATTEMPT) {
-                throw new \Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\ReachMaxUrlUniqueResolveAttemptException(
+                throw new \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\Exception\ReachMaxUrlUniqueResolveAttemptException(
                     $friendlyUrl,
                     $attempt
                 );
@@ -121,7 +121,7 @@ class FriendlyUrlFacade
     /**
      * @param string $routeName
      * @param int $entityId
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
      */
     public function getAllByRouteNameAndEntityId($routeName, $entityId)
     {
@@ -132,7 +132,7 @@ class FriendlyUrlFacade
      * @param int $domainId
      * @param string $routeName
      * @param int $entityId
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
      */
     public function findMainFriendlyUrl($domainId, $routeName, $entityId)
     {
@@ -142,7 +142,7 @@ class FriendlyUrlFacade
     /**
      * @param string $routeName
      * @param int $entityId
-     * @param \Shopsys\ShopBundle\Form\UrlListData $urlListData
+     * @param \Shopsys\FrameworkBundle\Form\UrlListData $urlListData
      */
     public function saveUrlListFormData($routeName, $entityId, UrlListData $urlListData)
     {
@@ -175,7 +175,7 @@ class FriendlyUrlFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $mainFriendlyUrl
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl $mainFriendlyUrl
      */
     private function setFriendlyUrlAsMain(FriendlyUrl $mainFriendlyUrl)
     {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig;
+namespace Shopsys\FrameworkBundle\Twig;
 
-use Shopsys\ShopBundle\Component\Css\CssFacade;
+use Shopsys\FrameworkBundle\Component\Css\CssFacade;
 use Twig_SimpleFunction;
 
 class CssExtension extends \Twig_Extension
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Css\CssFacade
+     * @var \Shopsys\FrameworkBundle\Component\Css\CssFacade
      */
     private $cssFacade;
 

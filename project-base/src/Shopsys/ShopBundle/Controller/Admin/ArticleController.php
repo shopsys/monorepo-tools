@@ -1,64 +1,64 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Article\ArticleFormType;
-use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\Article\Article;
-use Shopsys\ShopBundle\Model\Article\ArticleDataFactory;
-use Shopsys\ShopBundle\Model\Article\ArticleFacade;
-use Shopsys\ShopBundle\Model\Cookies\CookiesFacade;
-use Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade;
+use Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Article\ArticleFormType;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\Article\Article;
+use Shopsys\FrameworkBundle\Model\Article\ArticleDataFactory;
+use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
+use Shopsys\FrameworkBundle\Model\Cookies\CookiesFacade;
+use Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade
      */
     private $articleFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticleDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleDataFactory
      */
     private $articleDataFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+     * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
     private $confirmDeleteResponseFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade
+     * @var \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade
      */
     private $legalConditionsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Cookies\CookiesFacade
+     * @var \Shopsys\FrameworkBundle\Model\Cookies\CookiesFacade
      */
     private $cookiesFacade;
 
@@ -118,7 +118,7 @@ class ArticleController extends AdminBaseController
 
         $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing article - %name%', ['%name%' => $article->getName()])));
 
-        return $this->render('@ShopsysShop/Admin/Content/Article/edit.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Article/edit.html.twig', [
             'form' => $form->createView(),
             'article' => $article,
         ]);
@@ -134,7 +134,7 @@ class ArticleController extends AdminBaseController
         $gridNone = $this->getGrid(Article::PLACEMENT_NONE);
         $articlesCountOnSelectedDomain = $this->articleFacade->getAllArticlesCountByDomainId($this->adminDomainTabsFacade->getSelectedDomainId());
 
-        return $this->render('@ShopsysShop/Admin/Content/Article/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Article/list.html.twig', [
             'gridViewTop' => $gridTop->createView(),
             'gridViewFooter' => $gridFooter->createView(),
             'gridViewNone' => $gridNone->createView(),
@@ -176,7 +176,7 @@ class ArticleController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Article/new.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Article/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -199,7 +199,7 @@ class ArticleController extends AdminBaseController
                     'name' => $fullName,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Article\Exception\ArticleNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Article\Exception\ArticleNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected article doesn\'t exist.'));
         }
 
@@ -246,7 +246,7 @@ class ArticleController extends AdminBaseController
 
     /**
      * @param string $articlePlacement
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     private function getGrid($articlePlacement)
     {
@@ -269,7 +269,7 @@ class ArticleController extends AdminBaseController
             ->setAjaxConfirm();
 
         $grid->enableMultipleDragAndDrop();
-        $grid->setTheme('@ShopsysShop/Admin/Content/Article/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Article/listGrid.html.twig');
 
         return $grid;
     }

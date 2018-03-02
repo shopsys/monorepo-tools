@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use Shopsys\ShopBundle\Component\Domain\DomainFacade;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
-use Shopsys\ShopBundle\Model\Product\ProductService;
+use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\FrameworkBundle\Component\Domain\DomainFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Model\Product\ProductService;
 
 class ProductInputPriceFacade
 {
@@ -22,52 +22,52 @@ class ProductInputPriceFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
      */
     private $entityManagerFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductInputPriceService
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceService
      */
     private $productInputPriceService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
     private $currencyFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     private $pricingSetting;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository
      */
     private $productManualInputPriceRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\DomainFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\DomainFacade
      */
     private $domainFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
     private $pricingGroupFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductService
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductService
      */
     private $productService;
 
     /**
-     * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\ShopBundle\Model\Product\Product[][]|null
+     * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\FrameworkBundle\Model\Product\Product[][]|null
      */
     private $productRowsIterator;
 
@@ -96,7 +96,7 @@ class ProductInputPriceFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @return string|null
      */
     public function getInputPrice(Product $product)
@@ -112,7 +112,7 @@ class ProductInputPriceFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @return string[]
      */
     public function getManualInputPricesDataIndexedByPricingGroupId(Product $product)

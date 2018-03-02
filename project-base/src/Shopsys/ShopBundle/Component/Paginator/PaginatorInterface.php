@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Paginator;
+namespace Shopsys\FrameworkBundle\Component\Paginator;
 
 interface PaginatorInterface
 {

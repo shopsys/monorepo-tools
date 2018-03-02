@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment;
+namespace Shopsys\FrameworkBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
 
 class PaymentRepository
 {
@@ -48,7 +48,7 @@ class PaymentRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment[]
      */
     public function getAll()
     {
@@ -56,7 +56,7 @@ class PaymentRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment[]
      */
     public function getAllIncludingDeleted()
     {
@@ -65,7 +65,7 @@ class PaymentRepository
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment|null
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment|null
      */
     public function findById($id)
     {
@@ -77,13 +77,13 @@ class PaymentRepository
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
     public function getById($id)
     {
         $payment = $this->findById($id);
         if ($payment === null) {
-            throw new \Shopsys\ShopBundle\Model\Payment\Exception\PaymentNotFoundException(
+            throw new \Shopsys\FrameworkBundle\Model\Payment\Exception\PaymentNotFoundException(
                 'Payment with ID ' . $id . ' not found.'
             );
         }
@@ -92,8 +92,8 @@ class PaymentRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment[]
      */
     public function getAllByTransport(Transport $transport)
     {
@@ -105,8 +105,8 @@ class PaymentRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @return \Shopsys\ShopBundle\Model\Payment\PaymentDomain[]
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentDomain[]
      */
     public function getPaymentDomainsByPayment(Payment $payment)
     {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Javascript\Parser\Constant\Exception;
+namespace Shopsys\FrameworkBundle\Component\Javascript\Parser\Constant\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Javascript\Parser\Exception\JsParserException;
+use Shopsys\FrameworkBundle\Component\Javascript\Parser\Exception\JsParserException;
 
 class JsConstantCallParserException extends Exception implements JsParserException
 {

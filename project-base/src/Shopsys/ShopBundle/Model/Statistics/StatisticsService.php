@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Statistics;
+namespace Shopsys\FrameworkBundle\Model\Statistics;
 
 use DateInterval;
 use DateTime;
-use Shopsys\ShopBundle\Twig\DateTimeFormatterExtension;
+use Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension;
 
 class StatisticsService
 {
     /**
-     * @var \Shopsys\ShopBundle\Twig\DateTimeFormatterExtension
+     * @var \Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension
      */
     private $dateTimeFormatterExtension;
 
@@ -19,7 +19,7 @@ class StatisticsService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Statistics\ValueByDateTimeDataPoint[] $valueByDateTimeDataPoints
+     * @param \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPoint[] $valueByDateTimeDataPoints
      * @param \DateTime $startDateTime
      * @param \DateTime $endDateTime
      * @param \DateInterval $interval
@@ -52,7 +52,7 @@ class StatisticsService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Statistics\ValueByDateTimeDataPoint[] $valueByDateTimeDataPoints
+     * @param \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPoint[] $valueByDateTimeDataPoints
      * @return string[]
      */
     public function getDateTimesFormattedToLocaleFormat(array $valueByDateTimeDataPoints)
@@ -66,14 +66,14 @@ class StatisticsService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Statistics\ValueByDateTimeDataPoint[] $valueByDateTimeDataPoints
+     * @param \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPoint[] $valueByDateTimeDataPoints
      * @return \DateTime[]
      */
     private function getDateTimes(array $valueByDateTimeDataPoints)
     {
         $returnData = [];
         foreach ($valueByDateTimeDataPoints as $key => $valueByDateTimeDataPoint) {
-            /* @var $valueByDateTimeDataPoint \Shopsys\ShopBundle\Model\Statistics\ValueByDateTimeDataPoint */
+            /* @var $valueByDateTimeDataPoint \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPoint */
             $returnData[$key] = $valueByDateTimeDataPoint->getDateTime();
         }
 
@@ -81,14 +81,14 @@ class StatisticsService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Statistics\ValueByDateTimeDataPoint[] $valueByDateTimeDataPoints
+     * @param \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPoint[] $valueByDateTimeDataPoints
      * @return int[]
      */
     public function getCounts(array $valueByDateTimeDataPoints)
     {
         $returnData = [];
         foreach ($valueByDateTimeDataPoints as $key => $valueByDateTimeDataPoint) {
-            /* @var $valueByDateTimeDataPoint \Shopsys\ShopBundle\Model\Statistics\ValueByDateTimeDataPoint */
+            /* @var $valueByDateTimeDataPoint \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPoint */
             $returnData[$key] = $valueByDateTimeDataPoint->getValue();
         }
 

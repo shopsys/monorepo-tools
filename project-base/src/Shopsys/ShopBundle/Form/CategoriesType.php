@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form;
+namespace Shopsys\FrameworkBundle\Form;
 
-use Shopsys\ShopBundle\Component\Transformers\CategoriesTypeTransformer;
+use Shopsys\FrameworkBundle\Component\Transformers\CategoriesTypeTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CategoriesType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Transformers\CategoriesTypeTransformer
+     * @var \Shopsys\FrameworkBundle\Component\Transformers\CategoriesTypeTransformer
      */
     private $categoriesTypeTransformer;
 

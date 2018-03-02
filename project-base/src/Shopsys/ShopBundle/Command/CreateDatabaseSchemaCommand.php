@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
-use Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade;
+use Shopsys\FrameworkBundle\Component\Doctrine\DatabaseSchemaFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,12 +16,12 @@ class CreateDatabaseSchemaCommand extends Command
     protected static $defaultName = 'shopsys:schema:create';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\DatabaseSchemaFacade
      */
     private $databaseSchemaFacade;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade $databaseSchemaFacade
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\DatabaseSchemaFacade $databaseSchemaFacade
      */
     public function __construct(DatabaseSchemaFacade $databaseSchemaFacade)
     {

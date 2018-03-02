@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport;
+namespace Shopsys\FrameworkBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 
 /**
  * @ORM\Table(name="transport_prices")
@@ -12,19 +12,19 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 class TransportPrice
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Transport
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Transport\Transport", inversedBy="prices")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport", inversedBy="prices")
      * @ORM\JoinColumn(nullable=false)
      */
     private $transport;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Currency\Currency")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $currency;
@@ -37,8 +37,8 @@ class TransportPrice
     private $price;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @param string $price
      */
     public function __construct(Transport $transport, Currency $currency, $price)
@@ -49,7 +49,7 @@ class TransportPrice
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     public function getCurrency()
     {
@@ -57,7 +57,7 @@ class TransportPrice
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
      */
     public function getTransport()
     {

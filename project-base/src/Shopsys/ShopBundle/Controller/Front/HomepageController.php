@@ -2,37 +2,37 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
-use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade;
-use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
-use Shopsys\ShopBundle\Model\Slider\SliderItemFacade;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
+use Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade;
+use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
+use Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade;
 
 class HomepageController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
     private $currentCustomer;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade
      */
     private $topProductFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade
      */
     private $seoSettingFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Slider\SliderItemFacade
+     * @var \Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade
      */
     private $sliderItemFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 

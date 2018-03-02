@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdvancedSearch\Exception;
+namespace Shopsys\FrameworkBundle\Model\AdvancedSearch\Exception;
 
 interface AdvancedSearchException
 {

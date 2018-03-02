@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment\Exception;
+namespace Shopsys\FrameworkBundle\Model\Payment\Exception;
 
 interface PaymentException
 {

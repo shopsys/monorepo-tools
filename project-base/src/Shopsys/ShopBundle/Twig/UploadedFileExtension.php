@@ -1,27 +1,27 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig;
+namespace Shopsys\FrameworkBundle\Twig;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade;
-use Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade;
+use Shopsys\FrameworkBundle\Twig\FileThumbnail\FileThumbnailExtension;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class UploadedFileExtension extends Twig_Extension
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade
      */
     private $uploadedFileFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension
+     * @var \Shopsys\FrameworkBundle\Twig\FileThumbnail\FileThumbnailExtension
      */
     private $fileThumbnailExtension;
 
@@ -96,7 +96,7 @@ class UploadedFileExtension extends Twig_Extension
 
     /**
      * @param Object $entity
-     * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
+     * @return \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile
      */
     public function getUploadedFileByEntity($entity)
     {

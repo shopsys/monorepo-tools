@@ -1,23 +1,23 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Administrator;
+namespace Shopsys\FrameworkBundle\Model\Administrator;
 
-use Shopsys\ShopBundle\Component\Grid\Grid;
+use Shopsys\FrameworkBundle\Component\Grid\Grid;
 
 class AdministratorGridService
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
-     * @param \Shopsys\ShopBundle\Component\Grid\Grid $grid
-     * @return \Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit|null
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
+     * @param \Shopsys\FrameworkBundle\Component\Grid\Grid $grid
+     * @return \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimit|null
      */
     public function rememberGridLimit(Administrator $administrator, Grid $grid)
     {
         if (!$grid->isEnabledPaging()) {
-            throw new \Shopsys\ShopBundle\Model\Administrator\Exception\RememberGridLimitException($grid->getId());
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\RememberGridLimitException($grid->getId());
         }
         if ($grid->getLimit() <= 0) {
-            throw new \Shopsys\ShopBundle\Model\Administrator\Exception\InvalidGridLimitValueException($grid->getLimit());
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\InvalidGridLimitValueException($grid->getLimit());
         }
 
         $gridLimit = $administrator->getGridLimit($grid->getId());
@@ -31,8 +31,8 @@ class AdministratorGridService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
-     * @param \Shopsys\ShopBundle\Component\Grid\Grid $grid
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
+     * @param \Shopsys\FrameworkBundle\Component\Grid\Grid $grid
      */
     public function restoreGridLimit(Administrator $administrator, Grid $grid)
     {

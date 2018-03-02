@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig;
+namespace Shopsys\FrameworkBundle\Twig;
 
 use Symfony\Component\Form\FormError;
 use Twig_SimpleFunction;

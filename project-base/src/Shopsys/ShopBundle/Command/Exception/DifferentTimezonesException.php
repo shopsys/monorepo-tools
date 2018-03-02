@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command\Exception;
+namespace Shopsys\FrameworkBundle\Command\Exception;
 
 use Exception;
 use Throwable;

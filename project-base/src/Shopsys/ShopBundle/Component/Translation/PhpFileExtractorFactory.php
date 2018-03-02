@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Translation;
+namespace Shopsys\FrameworkBundle\Component\Translation;
 
 use Doctrine\Common\Annotations\DocParser;
 
@@ -17,7 +17,7 @@ class PhpFileExtractorFactory
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Translation\PhpFileExtractor
+     * @return \Shopsys\FrameworkBundle\Component\Translation\PhpFileExtractor
      */
     public function create()
     {

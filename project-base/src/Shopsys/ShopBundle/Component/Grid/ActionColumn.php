@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Grid;
+namespace Shopsys\FrameworkBundle\Component\Grid;
 
-use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 
@@ -63,7 +63,7 @@ class ActionColumn
 
     /**
      * @param \Symfony\Component\Routing\Router $router
-     * @param \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
+     * @param \Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
      * @param string $type
      * @param string $title
      * @param string $route
@@ -123,7 +123,7 @@ class ActionColumn
 
     /**
      * @param string $classAttribute
-     * @return \Shopsys\ShopBundle\Component\Grid\ActionColumn
+     * @return \Shopsys\FrameworkBundle\Component\Grid\ActionColumn
      */
     public function setClassAttribute($classAttribute)
     {
@@ -134,7 +134,7 @@ class ActionColumn
 
     /**
      * @param string $confirmMessage
-     * @return \Shopsys\ShopBundle\Component\Grid\ActionColumn
+     * @return \Shopsys\FrameworkBundle\Component\Grid\ActionColumn
      */
     public function setConfirmMessage($confirmMessage)
     {
@@ -144,7 +144,7 @@ class ActionColumn
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Grid\ActionColumn
+     * @return \Shopsys\FrameworkBundle\Component\Grid\ActionColumn
      */
     public function setAjaxConfirm()
     {

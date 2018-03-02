@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\Delivery;
+namespace Shopsys\FrameworkBundle\Model\Feed\Delivery;
 
 class DeliveryFeedItemFactory
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
-     * @return \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItem[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
+     * @return \Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItem[]
      */
     public function createItems(array $products)
     {

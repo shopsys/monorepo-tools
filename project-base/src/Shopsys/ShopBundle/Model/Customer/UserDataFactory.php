@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer;
+namespace Shopsys\FrameworkBundle\Model\Customer;
 
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 
 class UserDataFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
     private $pricingGroupSettingFacade;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
      */
     public function __construct(PricingGroupSettingFacade $pricingGroupSettingFacade)
     {
@@ -21,7 +21,7 @@ class UserDataFactory
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Customer\UserData
+     * @return \Shopsys\FrameworkBundle\Model\Customer\UserData
      */
     public function createDefault($domainId)
     {

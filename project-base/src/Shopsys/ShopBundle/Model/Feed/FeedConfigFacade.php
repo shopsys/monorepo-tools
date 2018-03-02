@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed;
+namespace Shopsys\FrameworkBundle\Model\Feed;
 
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository;
+use Shopsys\FrameworkBundle\Model\Feed\Standard\StandardFeedItemRepository;
 use Shopsys\ProductFeed\FeedConfigInterface;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository;
-use Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemRepository;
 
 class FeedConfigFacade
 {
@@ -21,32 +21,32 @@ class FeedConfigFacade
     private $feedDir;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry
+     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedConfigRegistry
      */
     private $feedConfigRegistry;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemRepository
+     * @var \Shopsys\FrameworkBundle\Model\Feed\Standard\StandardFeedItemRepository
      */
     private $standardFeedItemRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository
+     * @var \Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository
      */
     private $deliveryFeedItemRepository;
 
     /**
      * @param string $feedUrlPrefix
      * @param string $feedDir
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry $feedConfigRegistry
-     * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
-     * @param \Shopsys\ShopBundle\Model\Feed\Standard\StandardFeedItemRepository $standardFeedItemRepository
-     * @param \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemRepository $deliveryFeedItemRepository
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedConfigRegistry $feedConfigRegistry
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Model\Feed\Standard\StandardFeedItemRepository $standardFeedItemRepository
+     * @param \Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository $deliveryFeedItemRepository
      */
     public function __construct(
         $feedUrlPrefix,
@@ -99,7 +99,7 @@ class FeedConfigFacade
 
     /**
      * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */
     public function getFeedUrl(FeedConfigInterface $feedConfig, DomainConfig $domainConfig)
@@ -109,7 +109,7 @@ class FeedConfigFacade
 
     /**
      * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */
     public function getFeedFilepath(FeedConfigInterface $feedConfig, DomainConfig $domainConfig)
@@ -119,7 +119,7 @@ class FeedConfigFacade
 
     /**
      * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */
     private function getFeedFilename(FeedConfigInterface $feedConfig, DomainConfig $domainConfig)
@@ -131,7 +131,7 @@ class FeedConfigFacade
 
     /**
      * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
+     * @return \Shopsys\FrameworkBundle\Model\Feed\FeedItemRepositoryInterface
      */
     public function getFeedItemRepositoryByFeedConfig(FeedConfigInterface $feedConfig)
     {
@@ -141,6 +141,6 @@ class FeedConfigFacade
             return $this->deliveryFeedItemRepository;
         }
 
-        throw new \Shopsys\ShopBundle\Model\Feed\Exception\FeedItemRepositoryForFeedConfigNotFoundException($feedConfig);
+        throw new \Shopsys\FrameworkBundle\Model\Feed\Exception\FeedItemRepositoryForFeedConfigNotFoundException($feedConfig);
     }
 }

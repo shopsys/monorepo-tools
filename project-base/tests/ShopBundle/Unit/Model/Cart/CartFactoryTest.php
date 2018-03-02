@@ -3,10 +3,10 @@
 namespace Tests\ShopBundle\Unit\Model\Cart;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Cart\CartFactory;
-use Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository;
-use Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\FrameworkBundle\Model\Cart\CartFactory;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository;
+use Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 
 class CartFactoryTest extends PHPUnit_Framework_TestCase
 {
@@ -40,7 +40,7 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Cart\CartFactory
+     * @return \Shopsys\FrameworkBundle\Model\Cart\CartFactory
      */
     private function getCartFactory()
     {

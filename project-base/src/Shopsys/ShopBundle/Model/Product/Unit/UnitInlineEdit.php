@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Unit;
+namespace Shopsys\FrameworkBundle\Model\Product\Unit;
 
-use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use Shopsys\ShopBundle\Form\Admin\Product\Unit\UnitFormType;
+use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\FrameworkBundle\Form\Admin\Product\Unit\UnitFormType;
 use Symfony\Component\Form\FormFactory;
 
 class UnitInlineEdit extends AbstractGridInlineEdit
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
      */
     private $unitFacade;
 
@@ -29,7 +29,7 @@ class UnitInlineEdit extends AbstractGridInlineEdit
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData $unitData
      * @return int
      */
     protected function createEntityAndGetId($unitData)
@@ -41,7 +41,7 @@ class UnitInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int $unitId
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData $unitData
      */
     protected function editEntity($unitId, $unitData)
     {

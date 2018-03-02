@@ -88,7 +88,7 @@ These tests use a separate database to not affect your application data so you c
 All tests are isolated from each other thanks to database transactions. This means they can be executed in any order as each has the same starting conditions.
 
 #### Advantages:
-* demo data can be used for testing with [`PersistentReferenceFacade`](../../src/Shopsys/ShopBundle/Component/DataFixture/PersistentReferenceFacade.php)
+* demo data can be used for testing with [`PersistentReferenceFacade`](../../../packages/framework/src/Component/DataFixture/PersistentReferenceFacade.php)
 
 #### Disadvantages:
 * arranging the testing data is typically more complex than in unit tests
@@ -131,7 +131,7 @@ More information can be found in [Running Acceptance Tests](running-acceptance-t
 * end-to-end testing
 * cover errors that occur only in the browser
 * can test JavaScript code
-* demo data can be used for testing with [`PersistentReferenceFacade`](../../src/Shopsys/ShopBundle/Component/DataFixture/PersistentReferenceFacade.php)
+* demo data can be used for testing with [`PersistentReferenceFacade`](../../../packages/framework/src/Component/DataFixture/PersistentReferenceFacade.php)
 
 #### Disadvantages:
 * take a while to execute

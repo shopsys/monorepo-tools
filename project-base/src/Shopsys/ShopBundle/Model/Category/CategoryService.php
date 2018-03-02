@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Category;
+namespace Shopsys\FrameworkBundle\Model\Category;
 
 class CategoryService
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
-     * @param \Shopsys\ShopBundle\Model\Category\Category $rootCategory
-     * @return \Shopsys\ShopBundle\Model\Category\Category
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $rootCategory
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category
      */
     public function create(CategoryData $categoryData, Category $rootCategory)
     {
@@ -20,10 +20,10 @@ class CategoryService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
-     * @param \Shopsys\ShopBundle\Model\Category\Category $rootCategory
-     * @return \Shopsys\ShopBundle\Model\Category\Category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $rootCategory
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category
      */
     public function edit(Category $category, CategoryData $categoryData, Category $rootCategory)
     {
@@ -36,7 +36,7 @@ class CategoryService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      */
     public function setChildrenAsSiblings(Category $category)
     {

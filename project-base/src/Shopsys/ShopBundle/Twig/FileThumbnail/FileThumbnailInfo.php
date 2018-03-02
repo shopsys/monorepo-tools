@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig\FileThumbnail;
+namespace Shopsys\FrameworkBundle\Twig\FileThumbnail;
 
 class FileThumbnailInfo
 {

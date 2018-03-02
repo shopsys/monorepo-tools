@@ -1,20 +1,20 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
-use Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class AdminProductPriceCalculationFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation
      */
     private $basePriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     private $pricingSetting;
 
@@ -25,13 +25,13 @@ class AdminProductPriceCalculationFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
     public function calculateProductBasePrice(Product $product)
     {
         if ($product->getPriceCalculationType() !== Product::PRICE_CALCULATION_TYPE_AUTO) {
-            throw new \Shopsys\ShopBundle\Model\Product\Pricing\Exception\ProductBasePriceCalculationException(
+            throw new \Shopsys\FrameworkBundle\Model\Product\Pricing\Exception\ProductBasePriceCalculationException(
                 'Base price can be calculated only for products with auto calculation type.'
             );
         }

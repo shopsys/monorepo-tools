@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Grid\InlineEdit;
+namespace Shopsys\FrameworkBundle\Component\Grid\InlineEdit;
 
-use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractGridInlineEdit implements GridInlineEditInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactoryInterface
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface
      */
     private $gridFactory;
 
@@ -33,7 +33,7 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface
                 /* @var $error \Symfony\Component\Form\FormError */
                 $formErrors[] = $error->getMessage();
             }
-            throw new \Shopsys\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException($formErrors);
+            throw new \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException($formErrors);
         }
 
         $formData = $form->getData();
@@ -47,7 +47,7 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     public function getGrid()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer;
+namespace Shopsys\FrameworkBundle\Model\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -69,14 +69,14 @@ class DeliveryAddress
     private $telephone;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\Country|null
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Country\Country")
+     * @var \Shopsys\FrameworkBundle\Model\Country\Country|null
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Country\Country")
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=true)
      */
     private $country;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
      */
     public function __construct(DeliveryAddressData $deliveryAddressData)
     {
@@ -91,7 +91,7 @@ class DeliveryAddress
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
      */
     public function edit(DeliveryAddressData $deliveryAddressData)
     {
@@ -162,7 +162,7 @@ class DeliveryAddress
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Country\Country|null
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country|null
      */
     public function getCountry()
     {

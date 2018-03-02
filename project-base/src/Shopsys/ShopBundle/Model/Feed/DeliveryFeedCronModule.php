@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed;
+namespace Shopsys\FrameworkBundle\Model\Feed;
 
 use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
@@ -8,7 +8,7 @@ use Symfony\Bridge\Monolog\Logger;
 class DeliveryFeedCronModule implements SimpleCronModuleInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedFacade
+     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedFacade
      */
     private $feedFacade;
 

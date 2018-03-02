@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
-use Shopsys\ShopBundle\Form\Admin\Login\LoginFormType;
-use Shopsys\ShopBundle\Model\Security\AdministratorLoginFacade;
-use Shopsys\ShopBundle\Model\Security\LoginService;
-use Shopsys\ShopBundle\Model\Security\Roles;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Form\Admin\Login\LoginFormType;
+use Shopsys\FrameworkBundle\Model\Security\AdministratorLoginFacade;
+use Shopsys\FrameworkBundle\Model\Security\LoginService;
+use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -20,22 +20,22 @@ class LoginController extends AdminBaseController
     const ORIGINAL_REFERER_PARAMETER_NAME = 'originalReferer';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Security\LoginService
+     * @var \Shopsys\FrameworkBundle\Model\Security\LoginService
      */
     private $loginService;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Security\AdministratorLoginFacade
+     * @var \Shopsys\FrameworkBundle\Model\Security\AdministratorLoginFacade
      */
     private $administratorLoginFacade;
 
@@ -85,11 +85,11 @@ class LoginController extends AdminBaseController
 
         try {
             $this->loginService->checkLoginProcess($request);
-        } catch (\Shopsys\ShopBundle\Model\Security\Exception\LoginFailedException $e) {
+        } catch (\Shopsys\FrameworkBundle\Model\Security\Exception\LoginFailedException $e) {
             $error = t('Log in failed.');
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Login/loginForm.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Login/loginForm.html.twig', [
             'form' => $form->createView(),
             'error' => $error,
         ]);
@@ -103,7 +103,7 @@ class LoginController extends AdminBaseController
     public function ssoAction(Request $request, $originalDomainId)
     {
         $administrator = $this->getUser();
-        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
+        /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
         $multidomainToken = $this->administratorLoginFacade->generateMultidomainLoginTokenWithExpiration($administrator);
         $originalDomainRouter = $this->domainRouterFactory->getRouter((int)$originalDomainId);
         $redirectTo = $originalDomainRouter->generate(
@@ -128,8 +128,8 @@ class LoginController extends AdminBaseController
         $originalReferer = $request->get(self::ORIGINAL_REFERER_PARAMETER_NAME);
         try {
             $this->administratorLoginFacade->loginByMultidomainToken($request, $multidomainLoginToken);
-        } catch (\Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException $ex) {
-            return $this->render('@ShopsysShop/Admin/Content/Login/loginFailed.html.twig');
+        } catch (\Shopsys\FrameworkBundle\Model\Administrator\Security\Exception\InvalidTokenException $ex) {
+            return $this->render('@ShopsysFramework/Admin/Content/Login/loginFailed.html.twig');
         }
         $redirectTo = ($originalReferer !== null) ? $originalReferer : $this->generateUrl('admin_default_dashboard');
 

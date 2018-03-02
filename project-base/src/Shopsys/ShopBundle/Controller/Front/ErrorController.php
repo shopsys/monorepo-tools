@@ -3,11 +3,11 @@
 namespace Shopsys\ShopBundle\Controller\Front;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Error\ErrorPagesFacade;
-use Shopsys\ShopBundle\Component\Error\ExceptionController;
-use Shopsys\ShopBundle\Component\Error\ExceptionListener;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Error\ErrorPagesFacade;
+use Shopsys\FrameworkBundle\Component\Error\ExceptionController;
+use Shopsys\FrameworkBundle\Component\Error\ExceptionListener;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,22 +18,22 @@ use Tracy\Debugger;
 class ErrorController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Error\ExceptionController
+     * @var \Shopsys\FrameworkBundle\Component\Error\ExceptionController
      */
     private $exceptionController;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Error\ExceptionListener
+     * @var \Shopsys\FrameworkBundle\Component\Error\ExceptionListener
      */
     private $exceptionListener;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Error\ErrorPagesFacade
+     * @var \Shopsys\FrameworkBundle\Component\Error\ErrorPagesFacade
      */
     private $errorPagesFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -57,7 +57,7 @@ class ErrorController extends FrontBaseController
         $this->exceptionController->setDebug(false);
         $this->exceptionController->setShowErrorPagePrototype();
 
-        throw new \Shopsys\ShopBundle\Component\Error\Exception\FakeHttpException($code);
+        throw new \Shopsys\FrameworkBundle\Component\Error\Exception\FakeHttpException($code);
     }
 
     /**

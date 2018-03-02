@@ -1,21 +1,21 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Product;
+namespace Shopsys\FrameworkBundle\Form\Admin\Product;
 
 use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FormTypesBundle\YesNoType;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Form\CategoriesType;
-use Shopsys\ShopBundle\Form\DatePickerType;
-use Shopsys\ShopBundle\Form\Locale\LocalizedType;
-use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
-use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductData;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Form\CategoriesType;
+use Shopsys\FrameworkBundle\Form\DatePickerType;
+use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
+use Shopsys\FrameworkBundle\Form\ValidationGroup;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade;
+use Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -34,32 +34,32 @@ class ProductFormType extends AbstractType
     const VALIDATION_GROUP_NOT_USING_STOCK = 'notUsingStock';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
     private $vatFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
     private $availabilityFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade
      */
     private $brandFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade
      */
     private $flagFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
      */
     private $unitFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -295,7 +295,7 @@ class ProductFormType extends AbstractType
                 'validation_groups' => function (FormInterface $form) {
                     $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
                     $productData = $form->getData();
-                    /* @var $productData \Shopsys\ShopBundle\Model\Product\ProductData */
+                    /* @var $productData \Shopsys\FrameworkBundle\Model\Product\ProductData */
 
                     if ($productData->usingStock) {
                         $validationGroups[] = self::VALIDATION_GROUP_USING_STOCK;
@@ -317,7 +317,7 @@ class ProductFormType extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
     private function disableIrrelevantFields(FormBuilderInterface $builder, Product $product)
     {

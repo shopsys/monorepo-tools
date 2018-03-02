@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Cart;
+namespace Shopsys\FrameworkBundle\Model\Cart;
 
-use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 
 class AddProductResult
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Cart\Item\CartItem
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem
      */
     private $cartItem;
 
@@ -22,7 +22,7 @@ class AddProductResult
     private $addedQuantity;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Cart\Item\CartItem $cartItem
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem $cartItem
      * @param bool $isNew
      * @param int $addedQuantity
      */
@@ -34,7 +34,7 @@ class AddProductResult
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Cart\Item\CartItem
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem
      */
     public function getCartItem()
     {

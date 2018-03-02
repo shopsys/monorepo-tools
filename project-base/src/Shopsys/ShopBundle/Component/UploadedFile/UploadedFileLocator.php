@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\UploadedFile;
+namespace Shopsys\FrameworkBundle\Component\UploadedFile;
 
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 
 class UploadedFileLocator
 {
@@ -27,7 +27,7 @@ class UploadedFileLocator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile $uploadedFile
      * @return string
      */
     public function getRelativeUploadedFileFilepath(UploadedFile $uploadedFile)
@@ -36,7 +36,7 @@ class UploadedFileLocator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile $uploadedFile
      * @return string
      */
     public function getAbsoluteUploadedFileFilepath(UploadedFile $uploadedFile)
@@ -45,8 +45,8 @@ class UploadedFileLocator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile $uploadedFile
      * @return string
      */
     public function getUploadedFileUrl(DomainConfig $domainConfig, UploadedFile $uploadedFile)
@@ -57,11 +57,11 @@ class UploadedFileLocator
             . $this->getRelativeUploadedFileFilepath($uploadedFile);
         }
 
-        throw new \Shopsys\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException();
+        throw new \Shopsys\FrameworkBundle\Component\UploadedFile\Exception\FileNotFoundException();
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile $uploadedFile
      * @return bool
      */
     public function fileExists(UploadedFile $uploadedFile)

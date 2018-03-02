@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Status;
+namespace Shopsys\FrameworkBundle\Model\Order\Status;
 
 class OrderStatusData
 {
@@ -18,7 +18,7 @@ class OrderStatusData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus $orderStatus
      */
     public function setFromEntity(OrderStatus $orderStatus)
     {

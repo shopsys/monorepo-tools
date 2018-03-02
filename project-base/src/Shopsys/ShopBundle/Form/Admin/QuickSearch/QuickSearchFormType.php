@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\QuickSearch;
+namespace Shopsys\FrameworkBundle\Form\Admin\QuickSearch;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

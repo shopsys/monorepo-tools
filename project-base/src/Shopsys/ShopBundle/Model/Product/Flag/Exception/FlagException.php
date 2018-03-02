@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Flag\Exception;
+namespace Shopsys\FrameworkBundle\Model\Product\Flag\Exception;
 
-use Shopsys\ShopBundle\Model\Product\Exception\ProductException;
+use Shopsys\FrameworkBundle\Model\Product\Exception\ProductException;
 
 interface FlagException extends ProductException
 {

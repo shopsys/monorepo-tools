@@ -2,11 +2,11 @@
 
 namespace Tests\ShopBundle\Performance\Feed;
 
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade;
 use Shopsys\HttpSmokeTesting\Auth\BasicHttpAuth;
 use Shopsys\ProductFeed\FeedConfigInterface;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,7 +63,7 @@ class AllFeedsTest extends KernelTestCase
         foreach ($allFeedGenerationData as $feedGenerationData) {
             list($feedConfig, $domainConfig, $maxDuration) = $feedGenerationData;
             /* @var $feedConfig \Shopsys\ProductFeed\FeedConfigInterface */
-            /* @var $domainConfig \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig */
+            /* @var $domainConfig \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig */
 
             $consoleOutput->writeln(
                 sprintf(
@@ -91,7 +91,7 @@ class AllFeedsTest extends KernelTestCase
 
     /**
      * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param int $maxDuration
      * @return \Tests\ShopBundle\Performance\Feed\PerformanceTestSample
      */
@@ -109,9 +109,9 @@ class AllFeedsTest extends KernelTestCase
     public function getAllFeedGenerationData()
     {
         $feedConfigFacade = self::$kernel->getContainer()->get(FeedConfigFacade::class);
-        /* @var $feedConfigFacade \Shopsys\ShopBundle\Model\Feed\FeedConfigFacade */
+        /* @var $feedConfigFacade \Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade */
         $domain = self::$kernel->getContainer()->get(Domain::class);
-        /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
+        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         $feedGenerationData = $this->getFeedGenerationData(
             $feedConfigFacade->getStandardFeedConfigs(),
@@ -129,7 +129,7 @@ class AllFeedsTest extends KernelTestCase
 
     /**
      * @param \Shopsys\ProductFeed\FeedConfigInterface[] $feedConfigs
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
      * @param int $maxDuration
      * @return array[]
      */
@@ -171,7 +171,7 @@ class AllFeedsTest extends KernelTestCase
 
     /**
      * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Tests\ShopBundle\Performance\Feed\PerformanceTestSample
      */
     private function generateFeed(FeedConfigInterface $feedConfig, DomainConfig $domainConfig)

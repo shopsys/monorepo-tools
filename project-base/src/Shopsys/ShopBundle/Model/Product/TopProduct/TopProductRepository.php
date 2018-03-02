@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\TopProduct;
+namespace Shopsys\FrameworkBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class TopProductRepository
 {
@@ -14,7 +14,7 @@ class TopProductRepository
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
@@ -34,7 +34,7 @@ class TopProductRepository
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Product\TopProduct\TopProduct[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProduct[]
      */
     public function getAll($domainId)
     {
@@ -43,8 +43,8 @@ class TopProductRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function getOfferedProductsForTopProductsOnDomain($domainId, $pricingGroup)
     {

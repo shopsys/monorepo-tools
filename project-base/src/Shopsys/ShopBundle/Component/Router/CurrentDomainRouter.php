@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Router;
+namespace Shopsys\FrameworkBundle\Component\Router;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -14,12 +14,12 @@ class CurrentDomainRouter implements RouterInterface
     private $context;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
 
@@ -74,7 +74,7 @@ class CurrentDomainRouter implements RouterInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Router\DomainRouter
+     * @return \Shopsys\FrameworkBundle\Component\Router\DomainRouter
      */
     private function getDomainRouter()
     {

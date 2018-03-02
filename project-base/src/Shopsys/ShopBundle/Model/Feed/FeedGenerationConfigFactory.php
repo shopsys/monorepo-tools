@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed;
+namespace Shopsys\FrameworkBundle\Model\Feed;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 
 class FeedGenerationConfigFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigFacade
+     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade
      */
     private $feedConfigFacade;
 
@@ -23,7 +23,7 @@ class FeedGenerationConfigFactory
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig[]
+     * @return \Shopsys\FrameworkBundle\Model\Feed\FeedGenerationConfig[]
      */
     public function createAllForStandardFeeds()
     {

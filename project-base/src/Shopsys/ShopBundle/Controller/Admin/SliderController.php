@@ -1,40 +1,40 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Slider\SliderItemFormType;
-use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\Slider\SliderItem;
-use Shopsys\ShopBundle\Model\Slider\SliderItemData;
-use Shopsys\ShopBundle\Model\Slider\SliderItemFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Slider\SliderItemFormType;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\Slider\SliderItem;
+use Shopsys\FrameworkBundle\Model\Slider\SliderItemData;
+use Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class SliderController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Slider\SliderItemFacade
+     * @var \Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade
      */
     private $sliderItemFacade;
 
@@ -72,9 +72,9 @@ class SliderController extends AdminBaseController
         $grid->addDeleteActionColumn('admin_slider_delete', ['id' => 's.id'])
             ->setConfirmMessage(t('Do you really want to remove this page?'));
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Slider/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Slider/listGrid.html.twig');
 
-        return $this->render('@ShopsysShop/Admin/Content/Slider/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Slider/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -110,7 +110,7 @@ class SliderController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Slider/new.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Slider/new.html.twig', [
             'form' => $form->createView(),
             'selectedDomainId' => $this->adminDomainTabsFacade->getSelectedDomainId(),
         ]);
@@ -154,7 +154,7 @@ class SliderController extends AdminBaseController
             new MenuItem(t('Editing slider page - %name%', ['%name%' => $sliderItem->getName()]))
         );
 
-        return $this->render('@ShopsysShop/Admin/Content/Slider/edit.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Slider/edit.html.twig', [
             'form' => $form->createView(),
             'sliderItem' => $sliderItem,
         ]);
@@ -178,7 +178,7 @@ class SliderController extends AdminBaseController
                     'name' => $name,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Slider\Exception\SliderItemNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected page doesn\'t exist.'));
         }
 

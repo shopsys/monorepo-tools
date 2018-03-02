@@ -1,33 +1,33 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use Shopsys\ShopBundle\Form\Admin\Script\GoogleAnalyticsScriptFormType;
-use Shopsys\ShopBundle\Form\Admin\Script\ScriptFormType;
-use Shopsys\ShopBundle\Model\Script\Script;
-use Shopsys\ShopBundle\Model\Script\ScriptData;
-use Shopsys\ShopBundle\Model\Script\ScriptFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\FrameworkBundle\Form\Admin\Script\GoogleAnalyticsScriptFormType;
+use Shopsys\FrameworkBundle\Form\Admin\Script\ScriptFormType;
+use Shopsys\FrameworkBundle\Model\Script\Script;
+use Shopsys\FrameworkBundle\Model\Script\ScriptData;
+use Shopsys\FrameworkBundle\Model\Script\ScriptFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class ScriptController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Script\ScriptFacade
+     * @var \Shopsys\FrameworkBundle\Model\Script\ScriptFacade
      */
     private $scriptFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
@@ -67,7 +67,7 @@ class ScriptController extends AdminBaseController
             return $this->redirectToRoute('admin_script_list');
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Script/new.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Script/new.html.twig', [
             'form' => $form->createView(),
             'scriptVariables' => $this->getOrderSentPageScriptVariableLabelsIndexedByVariables(),
         ]);
@@ -103,7 +103,7 @@ class ScriptController extends AdminBaseController
             return $this->redirectToRoute('admin_script_list');
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Script/edit.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Script/edit.html.twig', [
             'script' => $script,
             'form' => $form->createView(),
             'scriptVariables' => $this->getOrderSentPageScriptVariableLabelsIndexedByVariables(),
@@ -125,12 +125,12 @@ class ScriptController extends AdminBaseController
         $grid->addDeleteActionColumn('admin_script_delete', ['scriptId' => 's.id'])
             ->setConfirmMessage(t('Do you really want to remove this script?'));
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Script/listGrid.html.twig', [
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Script/listGrid.html.twig', [
             'PLACEMENT_ORDER_SENT_PAGE' => Script::PLACEMENT_ORDER_SENT_PAGE,
             'PLACEMENT_ALL_PAGES' => Script::PLACEMENT_ALL_PAGES,
         ]);
 
-        return $this->render('@ShopsysShop/Admin/Content/Script/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Script/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -152,7 +152,7 @@ class ScriptController extends AdminBaseController
                     'name' => $script->getName(),
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Script\Exception\ScriptNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Script\Exception\ScriptNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected script doesn\'t exist.'));
         }
 
@@ -176,7 +176,7 @@ class ScriptController extends AdminBaseController
             $this->getFlashMessageSender()->addSuccessFlashTwig(t('Google script code set'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Script/googleAnalytics.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Script/googleAnalytics.html.twig', [
             'form' => $form->createView(),
         ]);
     }

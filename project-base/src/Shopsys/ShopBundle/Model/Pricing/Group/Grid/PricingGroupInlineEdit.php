@@ -1,23 +1,23 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Group\Grid;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Group\Grid;
 
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupFormType;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\FrameworkBundle\Form\Admin\Pricing\Group\PricingGroupFormType;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Symfony\Component\Form\FormFactory;
 
 class PricingGroupInlineEdit extends AbstractGridInlineEdit
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
     private $pricingGroupFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
@@ -39,7 +39,7 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
      * @return int
      */
     protected function createEntityAndGetId($pricingGroupData)
@@ -51,7 +51,7 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int $pricingGroupId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
      */
     protected function editEntity($pricingGroupId, $pricingGroupData)
     {

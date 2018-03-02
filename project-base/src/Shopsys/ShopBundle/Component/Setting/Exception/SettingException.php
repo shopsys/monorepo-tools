@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Setting\Exception;
+namespace Shopsys\FrameworkBundle\Component\Setting\Exception;
 
 interface SettingException
 {

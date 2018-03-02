@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Slider;
+namespace Shopsys\FrameworkBundle\Model\Slider;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 
 class SliderItemFacade
 {
@@ -14,17 +14,17 @@ class SliderItemFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Slider\SliderItemRepository
+     * @var \Shopsys\FrameworkBundle\Model\Slider\SliderItemRepository
      */
     private $sliderItemRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
     private $imageFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -42,7 +42,7 @@ class SliderItemFacade
 
     /**
      * @param int $sliderItemId
-     * @return \Shopsys\ShopBundle\Model\Slider\SliderItem
+     * @return \Shopsys\FrameworkBundle\Model\Slider\SliderItem
      */
     public function getById($sliderItemId)
     {
@@ -50,8 +50,8 @@ class SliderItemFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Slider\SliderItemData $sliderItemData
-     * @return \Shopsys\ShopBundle\Model\Slider\SliderItem
+     * @param \Shopsys\FrameworkBundle\Model\Slider\SliderItemData $sliderItemData
+     * @return \Shopsys\FrameworkBundle\Model\Slider\SliderItem
      */
     public function create(SliderItemData $sliderItemData)
     {
@@ -66,8 +66,8 @@ class SliderItemFacade
 
     /**
      * @param int $sliderItemId
-     * @param \Shopsys\ShopBundle\Model\Slider\SliderItemData $sliderItemData
-     * @return \Shopsys\ShopBundle\Model\Slider\SliderItem
+     * @param \Shopsys\FrameworkBundle\Model\Slider\SliderItemData $sliderItemData
+     * @return \Shopsys\FrameworkBundle\Model\Slider\SliderItem
      */
     public function edit($sliderItemId, SliderItemData $sliderItemData)
     {
@@ -92,7 +92,7 @@ class SliderItemFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Slider\SliderItem[]
+     * @return \Shopsys\FrameworkBundle\Model\Slider\SliderItem[]
      */
     public function getAllVisibleOnCurrentDomain()
     {

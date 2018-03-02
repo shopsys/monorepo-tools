@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Administrator\Exception;
+namespace Shopsys\FrameworkBundle\Model\Administrator\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Debug;
+use Shopsys\FrameworkBundle\Component\Debug;
 
 class InvalidGridLimitValueException extends Exception implements AdministratorException
 {

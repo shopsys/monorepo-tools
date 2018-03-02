@@ -1,17 +1,17 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\PromoCode\Grid;
+namespace Shopsys\FrameworkBundle\Model\Order\PromoCode\Grid;
 
-use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType;
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData;
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
+use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\FrameworkBundle\Form\Admin\PromoCode\PromoCodeFormType;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeData;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade;
 use Symfony\Component\Form\FormFactory;
 
 class PromoCodeInlineEdit extends AbstractGridInlineEdit
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade
      */
     private $promoCodeFacade;
 
@@ -31,7 +31,7 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
      * @return int
      */
     protected function createEntityAndGetId($promoCodeData)
@@ -43,7 +43,7 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int $promoCodeId
-     * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
      */
     protected function editEntity($promoCodeId, $promoCodeData)
     {

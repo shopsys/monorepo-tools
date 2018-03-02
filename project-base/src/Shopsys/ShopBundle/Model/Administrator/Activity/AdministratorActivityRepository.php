@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Administrator\Activity;
+namespace Shopsys\FrameworkBundle\Model\Administrator\Activity;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Administrator\Administrator;
+use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
 
 class AdministratorActivityRepository
 {
@@ -29,7 +29,7 @@ class AdministratorActivityRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      * @param int $maxResults
      * @return \Doctrine\ORM\QueryBuilder
      */
@@ -46,23 +46,23 @@ class AdministratorActivityRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
-     * @return \Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivity
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
+     * @return \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivity
      */
     public function getCurrent(Administrator $administrator)
     {
         $currentAdministratorActivity = $this->getLastActivitiesQueryBuilder($administrator, 1)->getQuery()->getSingleResult();
         if ($currentAdministratorActivity === null) {
-            throw new \Shopsys\ShopBundle\Model\Administrator\Activity\Exception\CurrentAdministratorActivityNotFoundException();
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Activity\Exception\CurrentAdministratorActivityNotFoundException();
         }
 
         return $currentAdministratorActivity;
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      * @param int $maxResults
-     * @return \Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivity[]
+     * @return \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivity[]
      */
     public function getLastAdministratorActivities(Administrator $administrator, $maxResults)
     {

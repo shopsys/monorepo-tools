@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Cart\Item;
+namespace Shopsys\FrameworkBundle\Model\Cart\Item;
 
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 
 class CartItemRepository
 {
@@ -31,8 +31,8 @@ class CartItemRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     * @return \Shopsys\ShopBundle\Model\Cart\Item\CartItem[]
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]
      */
     public function getAllByCustomerIdentifier(CustomerIdentifier $customerIdentifier)
     {

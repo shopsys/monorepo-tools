@@ -1,52 +1,52 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Product\Brand\BrandEditFormType;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandEditData;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Product\Brand\BrandEditFormType;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditData;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class BrandController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
     private $administratorGridFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade
      */
     private $brandFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandEditDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditDataFactory
      */
     private $brandEditDataFactory;
 
@@ -99,7 +99,7 @@ class BrandController extends AdminBaseController
 
         $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing brand - %name%', ['%name%' => $brand->getName()])));
 
-        return $this->render('@ShopsysShop/Admin/Content/Brand/edit.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Brand/edit.html.twig', [
             'form' => $form->createView(),
             'brand' => $brand,
             'domains' => $this->domain->getAll(),
@@ -112,7 +112,7 @@ class BrandController extends AdminBaseController
     public function listAction()
     {
         $administrator = $this->getUser();
-        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
+        /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
 
         $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
         $queryBuilder->select('b')->from(Brand::class, 'b');
@@ -129,11 +129,11 @@ class BrandController extends AdminBaseController
         $grid->addDeleteActionColumn('admin_brand_delete', ['id' => 'b.id'])
             ->setConfirmMessage(t('Do you really want to remove this brand? If it is used anywhere it will be unset.'));
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Brand/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Brand/listGrid.html.twig');
 
         $this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-        return $this->render('@ShopsysShop/Admin/Content/Brand/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Brand/list.html.twig', [
             'gridView' => $grid->createView(),
             'domains' => $this->domain->getAll(),
         ]);
@@ -168,7 +168,7 @@ class BrandController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Brand/new.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Brand/new.html.twig', [
             'form' => $form->createView(),
             'domains' => $this->domain->getAll(),
         ]);
@@ -192,7 +192,7 @@ class BrandController extends AdminBaseController
                     'name' => $fullName,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Product\Brand\Exception\BrandNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Product\Brand\Exception\BrandNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected brand doesn\'t exist.'));
         }
 

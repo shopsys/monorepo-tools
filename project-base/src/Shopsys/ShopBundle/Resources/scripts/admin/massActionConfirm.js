@@ -13,10 +13,10 @@
                 var selectType = $('.js-mass-action-select-type').val();
                 var count;
                 switch (selectType) {
-                    case Shopsys.constant('\\Shopsys\\ShopBundle\\Model\\Product\\MassAction\\ProductMassActionData::SELECT_TYPE_CHECKED'):
+                    case Shopsys.constant('\\Shopsys\\FrameworkBundle\\Model\\Product\\MassAction\\ProductMassActionData::SELECT_TYPE_CHECKED'):
                         count = $('.js-grid-mass-action-select-row:checked').length;
                         break;
-                    case Shopsys.constant('\\Shopsys\\ShopBundle\\Model\\Product\\MassAction\\ProductMassActionData::SELECT_TYPE_ALL_RESULTS'):
+                    case Shopsys.constant('\\Shopsys\\FrameworkBundle\\Model\\Product\\MassAction\\ProductMassActionData::SELECT_TYPE_ALL_RESULTS'):
                         count = $('.js-grid').data('total-count');
                         break;
                 }

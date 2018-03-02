@@ -1,24 +1,24 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class ProductPriceRecalculationScheduler
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     private $products = [];
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductRepository $productRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
      */
     public function __construct(ProductRepository $productRepository)
     {
@@ -26,7 +26,7 @@ class ProductPriceRecalculationScheduler
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
     public function scheduleProductForImmediateRecalculation(Product $product)
     {
@@ -39,7 +39,7 @@ class ProductPriceRecalculationScheduler
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function getProductsForImmediateRecalculation()
     {
@@ -47,7 +47,7 @@ class ProductPriceRecalculationScheduler
     }
 
     /**
-     * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\ShopBundle\Model\Product\Product[][]
+     * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\FrameworkBundle\Model\Product\Product[][]
      */
     public function getProductsIteratorForDelayedRecalculation()
     {

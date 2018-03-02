@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Unit\Exception;
+namespace Shopsys\FrameworkBundle\Model\Product\Unit\Exception;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

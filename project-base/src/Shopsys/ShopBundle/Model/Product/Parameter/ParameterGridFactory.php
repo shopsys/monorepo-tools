@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
 
 class ParameterGridFactory implements GridFactoryInterface
 {
@@ -17,12 +17,12 @@ class ParameterGridFactory implements GridFactoryInterface
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
@@ -37,7 +37,7 @@ class ParameterGridFactory implements GridFactoryInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     public function create()
     {
@@ -78,7 +78,7 @@ class ParameterGridFactory implements GridFactoryInterface
             ->setConfirmMessage(t('Do you really want to remove this parameter? By deleting this parameter you will '
                 . 'remove this parameter from a product where the parameter is assigned. This step is irreversible!'));
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Parameter/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Parameter/listGrid.html.twig');
 
         return $grid;
     }

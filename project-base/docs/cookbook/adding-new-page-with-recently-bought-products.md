@@ -40,7 +40,7 @@ class ProductController extends FrontBaseController
 ```
 
 ### Template
-Create `recentlyBought.html.twig` template in [`src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/`](../../src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/).
+Create `recentlyBought.html.twig` template in [`src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/`](../../src/Shopsys/ShopBundle/Resources/views/Front/Content/Product).
 By extending the template [`@ShopsysShop/Front/Layout/layoutWithPanel.html.twig`](../../src/Shopsys/ShopBundle/Resources/views/Front/Layout/layoutWithPanel.html.twig) you will get the same layout that other product lists use.
 
 The content of `{% block title %}` will be pasted into the `<title>` tag of the resulting HTML page.
@@ -94,8 +94,8 @@ front_product_recently_bought:
 If you try to visit your newly configured page on [http://127.0.0.1:8000/recently-bought/](http://127.0.0.1:8000/recently-bought/) an exception *Breadcrumb generator not found for route "front_product_recently_bought"* will be thrown.
 This is because breadcrumb navigation is mandatory in [`layoutWithPanel.html.twig`](../../src/Shopsys/ShopBundle/Resources/views/Front/Layout/layoutWithPanel.html.twig) and it has not been specified how to create breadcrumb navigation for this page yet.
 
-Classes implementing the [`BreadcrumbGeneratorInterface`](../../src/Shopsys/ShopBundle/Component/Breadcrumb/BreadcrumbGeneratorInterface.php) are responsible for generating the breadcrumb items for each route.
-The simplest implementation, having only one static breadcrumb item for each route, is [`\Shopsys\ShopBundle\Model\Breadcrumb\SimpleBreadcrumbGenerator`](../../src/Shopsys/ShopBundle/Model/Breadcrumb/SimpleBreadcrumbGenerator.php).
+Classes implementing the [`BreadcrumbGeneratorInterface`](../../../packages/framework/src/Component/Breadcrumb/BreadcrumbGeneratorInterface.php) are responsible for generating the breadcrumb items for each route.
+The simplest implementation, having only one static breadcrumb item for each route, is [`\Shopsys\FrameworkBundle\Model\Breadcrumb\SimpleBreadcrumbGenerator`](../../../packages/framework/src/Model/Breadcrumb/SimpleBreadcrumbGenerator.php).
 You can add a new item to `routeNameMap` with the route name `front_product_recently_bought` as a key and the desired label as a value.
 
 To allow for future translation into other languages wrap the text in `t()` function.
@@ -173,7 +173,7 @@ When you have your blank page prepared you can work on displaying the right prod
 
 ### Repository method
 
-Add a new method `getRecentlyBoughtProducts` to [repository](../introduction/basics-about-model-architecture.md#repository) speciffically to [`\Shopsys\ShopBundle\Model\Product\ProductRepository`](../../src/Shopsys/ShopBundle/Model/Product/ProductRepository.php) that will return an array of [`Product`](../../src/Shopsys/ShopBundle/Model/Product/Product.php) entities by provided [`User`](../../src/Shopsys/ShopBundle/Model/Customer/User.php) and `DateTime`.
+Add a new method `getRecentlyBoughtProducts` to [repository](../introduction/basics-about-model-architecture.md#repository) specifically to [`\Shopsys\FrameworkBundle\Model\Product\ProductRepository`](../../../packages/framework/src/Model/Product/ProductRepository.php) that will return an array of [`Product`](../../../packages/framework/src/Model/Product/Product.php) entities by provided [`User`](../../../packages/framework/src/Model/Customer/User.php) and `DateTime`.
 
 Repositories use query builders for specifying the data to be fetched.
 Use the `getAllListableQueryBuilder` method to apply all the rules for listable products (e.g. not hidden and without selling denied).
@@ -183,17 +183,17 @@ Use the `getAllListableQueryBuilder` method to apply all the rules for listable 
 
 // added uses:
 use DateTime;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 
 class ProductRepository
 {
     // ...
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @param \DateTime $orderCreatedFrom
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function getRecentlyBoughtProducts(User $user, DateTime $orderCreatedFrom)
     {
@@ -209,12 +209,12 @@ class ProductRepository
 }
 ```
 
-In order to get recently bought products you need to join [`Order`](../../src/Shopsys/ShopBundle/Model/Order/Order.php) and [`OrderProduct`](../../src/Shopsys/ShopBundle/Model/Order/Item/OrderProduct.php) relations.
+In order to get recently bought products you need to join [`Order`](../../../packages/framework/src/Model/Order/Order.php) and [`OrderProduct`](../../../packages/framework/src/Model/Order/Item/OrderProduct.php) relations.
 
 As a general rule, entities are aliased by class name initials in query builders.
-Condition `op.product = p` means that joined [`OrderProduct`](../../src/Shopsys/ShopBundle/Model/Order/Item/OrderProduct.php) has to have the [`Product`](../../src/Shopsys/ShopBundle/Model/Product/Product.php) from the original query builder in its `$product` property.
+Condition `op.product = p` means that joined [`OrderProduct`](../../../packages/framework/src/Model/Order/Item/OrderProduct.php) has to have the [`Product`](../../../packages/framework/src/Model/Product/Product.php) from the original query builder in its `$product` property.
 
-Then you can filter the joined relations by [`User`](../../src/Shopsys/ShopBundle/Model/Customer/User.php) that created the [`Order`](../../src/Shopsys/ShopBundle/Model/Order/Order.php) and time of its creation.
+Then you can filter the joined relations by [`User`](../../../packages/framework/src/Model/Customer/User.php) that created the [`Order`](../../../packages/framework/src/Model/Order/Order.php) and time of its creation.
 
 It is always a good idea to define the order in which data should be returned.
 By default products fetched using the `getAllListableQueryBuilder` method are ordered by id.
@@ -225,11 +225,11 @@ It is probably best to order the products chronologically so that those bought m
 ### Facade method
 You need to implement a new [facade](../introduction/basics-about-model-architecture.md#facade) method that will be used from your controller.
 
-The easiest way to fetch products for the currently logged [`user`](../../src/Shopsys/ShopBundle/Model/Customer/User.php) on the current [`domain`](../../src/Shopsys/ShopBundle/Component/Domain/Config/DomainConfig.php) is via [`\Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade`](../../src/Shopsys/ShopBundle/Model/Product/ProductOnCurrentDomainFacade.php).
+The easiest way to fetch products for the currently logged [`user`](../../../packages/framework/src/Model/Customer/User.php) on the current [`domain`](../../../packages/framework/src/Component/Domain/Config/DomainConfig.php) is via [`\Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade`](../../../packages/framework/src/Model/Product/ProductOnCurrentDomainFacade.php).
 You should add your new method there.
-The facade method will be responsible for providing the repository with current [`User`](../../src/Shopsys/ShopBundle/Model/Customer/User.php) and correct time limit for recent orders.
+The facade method will be responsible for providing the repository with current [`User`](../../../packages/framework/src/Model/Customer/User.php) and correct time limit for recent orders.
 
-Also it will enrich the [`Product`](../../src/Shopsys/ShopBundle/Model/Product/Product.php) entities with additional info important for displaying on front-end (e.g. calculated selling price, parameters, images) by mapping them to instances of [`ProductDetail`](../../src/Shopsys/ShopBundle/Model/Product/Detail/ProductDetail.php).
+Also it will enrich the [`Product`](../../../packages/framework/src/Model/Product/Product.php) entities with additional info important for displaying on front-end (e.g. calculated selling price, parameters, images) by mapping them to instances of [`ProductDetail`](../../../packages/framework/src/Model/Product/Detail/ProductDetail.php).
 
 ```php
 <?php
@@ -242,7 +242,7 @@ class ProductOnCurrentDomainFacade
     // ...
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
      */
     public function getRecentlyBoughtProductDetails()
     {
@@ -259,15 +259,15 @@ class ProductOnCurrentDomainFacade
 }
 ```
 
-Notice that method `findCurrentUser` of class [`CurrentCustomer`](../../src/Shopsys/ShopBundle/Model/Customer/CurrentCustomer.php) returns `null` if no [`User`](../../src/Shopsys/ShopBundle/Model/Customer/User.php) is currently logged in.
-This `null` cannot be passed into [`ProductRepository`](../../src/Shopsys/ShopBundle/Model/Product/ProductRepository.php) as it would trigger `TypeError`.
+Notice that method `findCurrentUser` of class [`CurrentCustomer`](../../../packages/framework/src/Model/Customer/CurrentCustomer.php) returns `null` if no [`User`](../../../packages/framework/src/Model/Customer/User.php) is currently logged in.
+This `null` cannot be passed into [`ProductRepository`](../../../packages/framework/src/Model/Product/ProductRepository.php) as it would trigger `TypeError`.
 As there are no products to be fetched the method can return an empty array.
 
 *Note: Getter methods that may return `null` are always named `findSomething` in repositories and facades.*
 *When the method never returns `null` it is named `getSomething` (they typically return either an [entity](../introduction/basics-about-model-architecture.md#entity) of given type or an array of entities) or `isSomething` / `hasSomething` if it returns `bool`.*
 
 ### Controller usage
-[`ProductController`](../../src/Shopsys/ShopBundle/Controller/Front/ProductController.php) already has the [`ProductOnCurrentDomainFacade`](../../src/Shopsys/ShopBundle/Model/Product/ProductOnCurrentDomainFacade.php) as a dependency so it is ready to use.
+[`ProductController`](../../src/Shopsys/ShopBundle/Controller/Front/ProductController.php) already has the [`ProductOnCurrentDomainFacade`](../../../packages/framework/src/Model/Product/ProductOnCurrentDomainFacade.php) as a dependency so it is ready to use.
 
 You can just fetch the products in your `recentlyBoughtAction` method and pass them into your template to be listed.
 
@@ -327,7 +327,7 @@ In the last chapter, you will see how the translation of static texts works in S
 php phing dump-translations
 ```
 
-This command will add new translatable messages to `*.po` files in [`src/Shopsys/ShopBundle/Resources/translations/`](../../src/Shopsys/ShopBundle/Resources/translations/).
+This command will add new translatable messages to `*.po` files in [`src/Shopsys/ShopBundle/Resources/translations/`](../../src/Shopsys/ShopBundle/Resources/translations).
 
 ### Adding your translations
 You can leave the [`messages.en.po`](../../src/Shopsys/ShopBundle/Resources/translations/messages.en.po) unchanged as the source messages are already in English.

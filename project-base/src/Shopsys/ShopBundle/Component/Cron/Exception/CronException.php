@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Cron\Exception;
+namespace Shopsys\FrameworkBundle\Component\Cron\Exception;
 
 interface CronException
 {

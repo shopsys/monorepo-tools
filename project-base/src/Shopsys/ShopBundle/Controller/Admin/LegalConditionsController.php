@@ -1,24 +1,24 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Form\Admin\LegalConditions\LegalConditionsSettingFormType;
-use Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Form\Admin\LegalConditions\LegalConditionsSettingFormType;
+use Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class LegalConditionsController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade
+     * @var \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade
      */
     private $legalConditionsFacade;
 
@@ -60,7 +60,7 @@ class LegalConditionsController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/LegalConditions/setting.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/LegalConditions/setting.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Administrator;
+namespace Shopsys\FrameworkBundle\Model\Administrator;
 
 use Doctrine\ORM\EntityManager;
 
@@ -12,19 +12,19 @@ class AdministratorFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorRepository
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository
      */
     private $administratorRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorService
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorService
      */
     private $administratorService;
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorRepository $administratorRepository
-     * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorService $administratorService
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository $administratorRepository
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorService $administratorService
      */
     public function __construct(
         EntityManager $em,
@@ -37,14 +37,14 @@ class AdministratorFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
-     * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorData $administratorData
+     * @return \Shopsys\FrameworkBundle\Model\Administrator\Administrator
      */
     public function create(AdministratorData $administratorData)
     {
         $administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);
         if ($administratorByUserName !== null) {
-            throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administratorByUserName->getUsername());
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DuplicateUserNameException($administratorByUserName->getUsername());
         }
         $administrator = new Administrator($administratorData);
         $this->administratorService->setPassword($administrator, $administratorData->password);
@@ -57,8 +57,8 @@ class AdministratorFacade
 
     /**
      * @param int $administratorId
-     * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
-     * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorData $administratorData
+     * @return \Shopsys\FrameworkBundle\Model\Administrator\Administrator
      */
     public function edit($administratorId, AdministratorData $administratorData)
     {
@@ -100,7 +100,7 @@ class AdministratorFacade
 
     /**
      * @param int $administratorId
-     * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
+     * @return \Shopsys\FrameworkBundle\Model\Administrator\Administrator
      */
     public function getById($administratorId)
     {

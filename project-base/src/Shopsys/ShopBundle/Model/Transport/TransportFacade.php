@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport;
+namespace Shopsys\FrameworkBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Image\ImageFacade;
-use Shopsys\ShopBundle\Model\Payment\PaymentRepository;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class TransportFacade
 {
@@ -17,37 +17,37 @@ class TransportFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentRepository
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository
      */
     private $paymentRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportRepository
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportRepository
      */
     private $transportRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportVisibilityCalculation
      */
     private $transportVisibilityCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
     private $imageFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
     private $currencyFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
      */
     private $transportPriceCalculation;
 
@@ -72,8 +72,8 @@ class TransportFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\TransportEditData $transportEditData
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportEditData $transportEditData
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
      */
     public function create(TransportEditData $transportEditData)
     {
@@ -89,8 +89,8 @@ class TransportFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @param \Shopsys\ShopBundle\Model\Transport\TransportEditData $transportEditData
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportEditData $transportEditData
      */
     public function edit(Transport $transport, TransportEditData $transportEditData)
     {
@@ -105,7 +105,7 @@ class TransportFacade
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
      */
     public function getById($id)
     {
@@ -128,7 +128,7 @@ class TransportFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @param array $domainIds
      */
     private function createTransportDomains(Transport $transport, array $domainIds)
@@ -141,7 +141,7 @@ class TransportFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      */
     private function deleteTransportDomainsByTransport(Transport $transport)
     {
@@ -153,8 +153,8 @@ class TransportFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $visiblePayments
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $visiblePayments
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport[]
      */
     public function getVisibleOnCurrentDomain(array $visiblePayments)
     {
@@ -163,8 +163,8 @@ class TransportFacade
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $visiblePaymentsOnDomain
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $visiblePaymentsOnDomain
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport[]
      */
     public function getVisibleByDomainId($domainId, $visiblePaymentsOnDomain)
     {
@@ -174,8 +174,8 @@ class TransportFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @return \Shopsys\ShopBundle\Model\Transport\TransportDomain[]
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportDomain[]
      */
     public function getTransportDomainsByTransport(Transport $transport)
     {
@@ -183,7 +183,7 @@ class TransportFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @param string[] $pricesByCurrencyId
      */
     private function updateTransportPrices(Transport $transport, $pricesByCurrencyId)
@@ -200,7 +200,7 @@ class TransportFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport[]
      */
     public function getAllIncludingDeleted()
     {
@@ -208,7 +208,7 @@ class TransportFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @return string[]
      */
     public function getTransportPricesWithVatIndexedByTransportId(Currency $currency)

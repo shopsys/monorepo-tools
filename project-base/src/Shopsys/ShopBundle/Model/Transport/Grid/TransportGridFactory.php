@@ -1,37 +1,37 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport\Grid;
+namespace Shopsys\FrameworkBundle\Model\Transport\Grid;
 
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use Shopsys\ShopBundle\Model\Localization\Localization;
-use Shopsys\ShopBundle\Model\Transport\Detail\TransportDetailFactory;
-use Shopsys\ShopBundle\Model\Transport\Transport;
-use Shopsys\ShopBundle\Model\Transport\TransportRepository;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Transport\Detail\TransportDetailFactory;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
+use Shopsys\FrameworkBundle\Model\Transport\TransportRepository;
 
 class TransportGridFactory implements GridFactoryInterface
 {
     const CURRENCY_ID_FOR_LIST = 1;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportRepository
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportRepository
      */
     private $transportRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Detail\TransportDetailFactory
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Detail\TransportDetailFactory
      */
     private $transportDetailFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
@@ -48,7 +48,7 @@ class TransportGridFactory implements GridFactoryInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     public function create()
     {
@@ -78,7 +78,7 @@ class TransportGridFactory implements GridFactoryInterface
             ->setConfirmMessage(t('Do you really want to remove this shipping?'));
 
         $grid->setTheme(
-            '@ShopsysShop/Admin/Content/Transport/listGrid.html.twig',
+            '@ShopsysFramework/Admin/Content/Transport/listGrid.html.twig',
             ['currencyIdForList' => self::CURRENCY_ID_FOR_LIST]
         );
 

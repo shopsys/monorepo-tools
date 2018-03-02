@@ -10,7 +10,7 @@ use PhpParser\Lexer;
 use PhpParser\Parser\Multiple;
 use PhpParser\Parser\Php5;
 use PhpParser\Parser\Php7;
-use Shopsys\ShopBundle\Component\Translation\PhpFileExtractorFactory;
+use Shopsys\FrameworkBundle\Component\Translation\PhpFileExtractorFactory;
 use SplFileInfo;
 
 class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase

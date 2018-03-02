@@ -2,13 +2,13 @@
 
 namespace Tests\ShopBundle\Database\Model\Payment;
 
-use Shopsys\ShopBundle\Model\Payment\Payment;
-use Shopsys\ShopBundle\Model\Payment\PaymentData;
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Transport\Transport;
-use Shopsys\ShopBundle\Model\Transport\TransportData;
-use Shopsys\ShopBundle\Model\Transport\TransportFacade;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
+use Shopsys\FrameworkBundle\Model\Transport\TransportData;
+use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class PaymentTest extends DatabaseTestCase
@@ -28,7 +28,7 @@ class PaymentTest extends DatabaseTestCase
         $em->flush();
 
         $transportFacade = $this->getServiceByType(TransportFacade::class);
-        /* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
+        /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
         $transportFacade->deleteById($transport->getId());
 
         $this->assertFalse($payment->getTransports()->contains($transport));

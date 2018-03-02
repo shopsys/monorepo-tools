@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Localization;
+namespace Shopsys\FrameworkBundle\Model\Localization;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 
 class Localization
 {
@@ -33,7 +33,7 @@ class Localization
     ];
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -43,7 +43,7 @@ class Localization
     private $allLocales;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(Domain $domain)
     {
@@ -96,7 +96,7 @@ class Localization
     public function getLanguageName($locale)
     {
         if (!array_key_exists($locale, $this->languageNamesByLocale)) {
-            throw new \Shopsys\ShopBundle\Model\Localization\Exception\InvalidLocaleException(
+            throw new \Shopsys\FrameworkBundle\Model\Localization\Exception\InvalidLocaleException(
                 sprintf('Locale "%s" is not valid', $locale)
             );
         }

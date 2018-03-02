@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport\Exception;
+namespace Shopsys\FrameworkBundle\Model\Transport\Exception;
 
 interface TransportException
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Mail;
+namespace Shopsys\FrameworkBundle\Form\Admin\Mail;
 
-use Shopsys\ShopBundle\Component\Constraints\Email;
+use Shopsys\FrameworkBundle\Component\Constraints\Email;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

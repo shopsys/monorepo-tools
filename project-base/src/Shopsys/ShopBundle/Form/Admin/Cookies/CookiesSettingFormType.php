@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Cookies;
+namespace Shopsys\FrameworkBundle\Form\Admin\Cookies;
 
-use Shopsys\ShopBundle\Model\Article\ArticleFacade;
+use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CookiesSettingFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade
      */
     private $articleFacade;
 

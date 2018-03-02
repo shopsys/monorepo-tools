@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Javascript\Parser\Translator;
+namespace Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator;
 
-use Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
-use Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser;
-use Shopsys\ShopBundle\Component\Translation\TransMethodSpecification;
+use Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser;
+use Shopsys\FrameworkBundle\Component\Javascript\Parser\JsStringParser;
+use Shopsys\FrameworkBundle\Component\Translation\TransMethodSpecification;
 
 class JsTranslatorCallParserFactory
 {
@@ -12,18 +12,18 @@ class JsTranslatorCallParserFactory
     const METHOD_NAME_TRANS_CHOICE = 'Shopsys.translator.transChoice';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser
+     * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser
      */
     private $jsFunctionCallParser;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser
+     * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsStringParser
      */
     private $jsStringParser;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser $jsFunctionCallParser
-     * @param \Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser $jsStringParser
+     * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser $jsFunctionCallParser
+     * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\JsStringParser $jsStringParser
      */
     public function __construct(
         JsFunctionCallParser $jsFunctionCallParser,
@@ -34,7 +34,7 @@ class JsTranslatorCallParserFactory
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
+     * @return \Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
      */
     public function create()
     {

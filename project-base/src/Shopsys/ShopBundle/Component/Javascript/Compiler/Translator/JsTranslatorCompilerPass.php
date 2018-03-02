@@ -1,17 +1,17 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Javascript\Compiler\Translator;
+namespace Shopsys\FrameworkBundle\Component\Javascript\Compiler\Translator;
 
 use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
-use Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface;
-use Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
-use Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory;
-use Shopsys\ShopBundle\Component\Translation\Translator;
+use Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompilerPassInterface;
+use Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
+use Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory;
+use Shopsys\FrameworkBundle\Component\Translation\Translator;
 
 class JsTranslatorCompilerPass implements JsCompilerPassInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
+     * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
      */
     private $jsTranslatorCallParser;
 
@@ -51,7 +51,7 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCall $jsTranslatorsCall
+     * @param \Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCall $jsTranslatorsCall
      * @return string
      */
     private function translate($jsTranslatorsCall)

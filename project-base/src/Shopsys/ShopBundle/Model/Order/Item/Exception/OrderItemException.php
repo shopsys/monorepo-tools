@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Item\Exception;
+namespace Shopsys\FrameworkBundle\Model\Order\Item\Exception;
 
-use Shopsys\ShopBundle\Model\Order\Exception\OrderException;
+use Shopsys\FrameworkBundle\Model\Order\Exception\OrderException;
 
 interface OrderItemException extends OrderException
 {

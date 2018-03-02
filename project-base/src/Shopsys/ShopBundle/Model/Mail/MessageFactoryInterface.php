@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Mail;
+namespace Shopsys\FrameworkBundle\Model\Mail;
 
 interface MessageFactoryInterface
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate $template
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplate $template
      * @param mixed $data
-     * @return \Shopsys\ShopBundle\Model\Mail\MessageData
+     * @return \Shopsys\FrameworkBundle\Model\Mail\MessageData
      */
     public function createMessage(MailTemplate $template, $data);
 }

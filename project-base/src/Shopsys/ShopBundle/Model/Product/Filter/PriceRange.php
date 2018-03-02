@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Filter;
+namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
 class PriceRange
 {

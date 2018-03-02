@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order;
+namespace Shopsys\FrameworkBundle\Model\Order;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Component\String\DatabaseSearching;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminRepository;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Component\String\DatabaseSearching;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminRepository;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 
 class OrderRepository
 {
@@ -20,7 +20,7 @@ class OrderRepository
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminRepository
+     * @var \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminRepository
      */
     private $orderListAdminRepository;
 
@@ -53,7 +53,7 @@ class OrderRepository
 
     /**
      * @param int $userId
-     * @return \Shopsys\ShopBundle\Model\Order\Order[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order[]
      */
     public function getOrdersByUserId($userId)
     {
@@ -64,7 +64,7 @@ class OrderRepository
 
     /**
      * @param int $userId
-     * @return \Shopsys\ShopBundle\Model\Order\Order|null
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order|null
      */
     public function findLastByUserId($userId)
     {
@@ -77,7 +77,7 @@ class OrderRepository
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Order\Order|null
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order|null
      */
     public function findById($id)
     {
@@ -89,21 +89,21 @@ class OrderRepository
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Order\Order
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order
      */
     public function getById($id)
     {
         $order = $this->findById($id);
 
         if ($order === null) {
-            throw new \Shopsys\ShopBundle\Model\Order\Exception\OrderNotFoundException('Order with ID ' . $id . ' not found.');
+            throw new \Shopsys\FrameworkBundle\Model\Order\Exception\OrderNotFoundException('Order with ID ' . $id . ' not found.');
         }
 
         return $order;
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus $orderStatus
      * @return bool
      */
     public function isOrderStatusUsed(OrderStatus $orderStatus)
@@ -121,7 +121,7 @@ class OrderRepository
 
     /**
      * @param string $locale
-     * @param \Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
+     * @param \Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getOrderListQueryBuilderByQuickSearchData(
@@ -153,8 +153,8 @@ class OrderRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User
-     * @return \Shopsys\ShopBundle\Model\Order\Order[]
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order[]
      */
     public function getCustomerOrderList(User $user)
     {
@@ -173,7 +173,7 @@ class OrderRepository
     /**
      * @param string $urlHash
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Order\Order
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order
      */
     public function getByUrlHashAndDomain($urlHash, $domainId)
     {
@@ -184,7 +184,7 @@ class OrderRepository
             ->getQuery()->getOneOrNullResult();
 
         if ($order === null) {
-            throw new \Shopsys\ShopBundle\Model\Order\Exception\OrderNotFoundException();
+            throw new \Shopsys\FrameworkBundle\Model\Order\Exception\OrderNotFoundException();
         }
 
         return $order;
@@ -192,8 +192,8 @@ class OrderRepository
 
     /**
      * @param string $orderNumber
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @return \Shopsys\ShopBundle\Model\Order\Order
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order
      */
     public function getByOrderNumberAndUser($orderNumber, User $user)
     {
@@ -205,7 +205,7 @@ class OrderRepository
 
         if ($order === null) {
             $message = 'Order with number "' . $orderNumber . '" and userId "' . $user->getId() . '" not found.';
-            throw new \Shopsys\ShopBundle\Model\Order\Exception\OrderNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Model\Order\Exception\OrderNotFoundException($message);
         }
 
         return $order;
@@ -213,7 +213,7 @@ class OrderRepository
 
     /**
      * @param string $urlHash
-     * @return \Shopsys\ShopBundle\Model\Order\Order|null
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order|null
      */
     public function findByUrlHashIncludingDeletedOrders($urlHash)
     {
@@ -221,7 +221,7 @@ class OrderRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency[]
      */
     public function getCurrenciesUsedInOrders()
     {

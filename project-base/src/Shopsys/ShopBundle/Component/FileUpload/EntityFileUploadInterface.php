@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\FileUpload;
+namespace Shopsys\FrameworkBundle\Component\FileUpload;
 
 interface EntityFileUploadInterface
 {
     /**
-     * @return \Shopsys\ShopBundle\Component\FileUpload\FileForUpload[]
+     * @return \Shopsys\FrameworkBundle\Component\FileUpload\FileForUpload[]
      */
     public function getTemporaryFilesForUpload();
 

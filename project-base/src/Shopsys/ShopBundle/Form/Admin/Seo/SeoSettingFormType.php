@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Seo;
+namespace Shopsys\FrameworkBundle\Form\Admin\Seo;
 
-use Shopsys\ShopBundle\Component\Constraints\NotInArray;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
+use Shopsys\FrameworkBundle\Component\Constraints\NotInArray;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -15,12 +15,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class SeoSettingFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade
      */
     private $seoSettingFacade;
 

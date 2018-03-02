@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Currency;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Currency;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Order\OrderRepository;
-use Shopsys\ShopBundle\Model\Payment\PaymentPrice;
-use Shopsys\ShopBundle\Model\Payment\PaymentRepository;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use Shopsys\ShopBundle\Model\Transport\TransportPrice;
-use Shopsys\ShopBundle\Model\Transport\TransportRepository;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPrice;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPrice;
+use Shopsys\FrameworkBundle\Model\Transport\TransportRepository;
 
 class CurrencyFacade
 {
@@ -20,42 +20,42 @@ class CurrencyFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyRepository
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyRepository
      */
     private $currencyRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyService
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyService
      */
     private $currencyService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     private $pricingSetting;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderRepository
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderRepository
      */
     private $orderRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
      */
     private $productPriceRecalculationScheduler;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentRepository
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository
      */
     private $paymentRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportRepository
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportRepository
      */
     private $transportRepository;
 
@@ -83,7 +83,7 @@ class CurrencyFacade
 
     /**
      * @param int $currencyId
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     public function getById($currencyId)
     {
@@ -91,8 +91,8 @@ class CurrencyFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData $currencyData
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     public function create(CurrencyData $currencyData)
     {
@@ -106,8 +106,8 @@ class CurrencyFacade
 
     /**
      * @param int $currencyId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData $currencyData
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     public function edit($currencyId, CurrencyData $currencyData)
     {
@@ -127,14 +127,14 @@ class CurrencyFacade
         $currency = $this->currencyRepository->getById($currencyId);
 
         if (in_array($currency->getId(), $this->getNotAllowedToDeleteCurrencyIds(), true)) {
-            throw new \Shopsys\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException();
+            throw new \Shopsys\FrameworkBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException();
         }
         $this->em->remove($currency);
         $this->em->flush();
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency[]
      */
     public function getAll()
     {
@@ -142,7 +142,7 @@ class CurrencyFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     public function getDefaultCurrency()
     {
@@ -151,7 +151,7 @@ class CurrencyFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     public function getDomainDefaultCurrencyByDomainId($domainId)
     {
@@ -159,7 +159,7 @@ class CurrencyFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      */
     public function setDefaultCurrency(Currency $currency)
     {
@@ -168,7 +168,7 @@ class CurrencyFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @param int $domainId
      */
     public function setDomainDefaultCurrency(Currency $currency, $domainId)
@@ -191,7 +191,7 @@ class CurrencyFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @return bool
      */
     public function isDefaultCurrency(Currency $currency)
@@ -200,7 +200,7 @@ class CurrencyFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency[]
      */
     public function getCurrenciesUsedInOrders()
     {
@@ -208,7 +208,7 @@ class CurrencyFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency[]
      */
     public function getAllIndexedById()
     {
@@ -221,7 +221,7 @@ class CurrencyFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      */
     private function createTransportAndPaymentPrices(Currency $currency)
     {

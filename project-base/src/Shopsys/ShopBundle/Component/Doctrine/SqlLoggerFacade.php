@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Doctrine;
+namespace Shopsys\FrameworkBundle\Component\Doctrine;
 
 use Doctrine\ORM\EntityManager;
 
@@ -34,7 +34,7 @@ class SqlLoggerFacade
     {
         if ($this->isLoggerTemporarilyDisabled) {
             $message = 'Trying to disable already disabled SQL logger.';
-            throw new \Shopsys\ShopBundle\Component\Doctrine\Exception\SqlLoggerAlreadyDisabledException($message);
+            throw new \Shopsys\FrameworkBundle\Component\Doctrine\Exception\SqlLoggerAlreadyDisabledException($message);
         }
         $this->sqlLogger = $this->em->getConnection()->getConfiguration()->getSQLLogger();
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
@@ -45,7 +45,7 @@ class SqlLoggerFacade
     {
         if (!$this->isLoggerTemporarilyDisabled) {
             $message = 'Trying to reenable already enabled SQL logger.';
-            throw new \Shopsys\ShopBundle\Component\Doctrine\Exception\SqlLoggerAlreadyEnabledException($message);
+            throw new \Shopsys\FrameworkBundle\Component\Doctrine\Exception\SqlLoggerAlreadyEnabledException($message);
         }
         $this->em->getConnection()->getConfiguration()->setSQLLogger($this->sqlLogger);
         $this->sqlLogger = null;

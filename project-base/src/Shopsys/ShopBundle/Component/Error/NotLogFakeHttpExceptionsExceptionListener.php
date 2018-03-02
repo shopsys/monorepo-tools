@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Error;
+namespace Shopsys\FrameworkBundle\Component\Error;
 
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
@@ -11,7 +11,7 @@ class NotLogFakeHttpExceptionsExceptionListener extends ExceptionListener
      */
     protected function logException(\Exception $exception, $message)
     {
-        if (!$exception instanceof \Shopsys\ShopBundle\Component\Error\Exception\FakeHttpException) {
+        if (!$exception instanceof \Shopsys\FrameworkBundle\Component\Error\Exception\FakeHttpException) {
             parent::logException($exception, $message);
         }
     }

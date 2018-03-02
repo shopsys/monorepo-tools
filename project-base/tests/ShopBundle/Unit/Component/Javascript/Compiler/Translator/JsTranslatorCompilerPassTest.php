@@ -2,8 +2,8 @@
 
 namespace Tests\ShopBundle\Unit\Component\Javascript\Compiler\Translator;
 
-use Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler;
-use Shopsys\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass;
+use Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompiler;
+use Shopsys\FrameworkBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class JsTranslatorCompilerPassTest extends FunctionalTestCase
@@ -11,9 +11,9 @@ class JsTranslatorCompilerPassTest extends FunctionalTestCase
     public function testProcess()
     {
         $translator = $this->getContainer()->get('translator');
-        /* @var $translator \Shopsys\ShopBundle\Component\Translation\Translator */
+        /* @var $translator \Shopsys\FrameworkBundle\Component\Translation\Translator */
         $jsTranslatorCompilerPass = $this->getServiceByType(JsTranslatorCompilerPass::class);
-        /* @var $jsTranslatorCompilerPass \Shopsys\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass */
+        /* @var $jsTranslatorCompilerPass \Shopsys\FrameworkBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass */
 
         $translator->setLocale('testLocale');
         $translator->getCatalogue()->add([

@@ -1,26 +1,26 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\Delivery;
+namespace Shopsys\FrameworkBundle\Model\Feed\Delivery;
 
+use Shopsys\FrameworkBundle\Model\Feed\FeedItemRepositoryInterface;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Shopsys\ProductFeed\DomainConfigInterface;
-use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class DeliveryFeedItemRepository implements FeedItemRepositoryInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
     private $pricingGroupSettingFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\Delivery\DeliveryFeedItemFactory
+     * @var \Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemFactory
      */
     private $deliveryFeedItemFactory;
 
@@ -39,7 +39,7 @@ class DeliveryFeedItemRepository implements FeedItemRepositoryInterface
      */
     public function getItems(DomainConfigInterface $domainConfig, $seekItemId, $maxResults)
     {
-        /* @var $domainConfig \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig */
+        /* @var $domainConfig \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig */
         $defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
         $queryBuilder = $this->productRepository->getAllSellableUsingStockInStockQueryBuilder(
             $domainConfig->getId(),

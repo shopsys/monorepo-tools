@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Article;
+namespace Shopsys\FrameworkBundle\Model\Article;
 
 use Doctrine\ORM\EntityManager;
 
@@ -29,7 +29,7 @@ class ArticleRepository
 
     /**
      * @param string $articleId
-     * @return \Shopsys\ShopBundle\Model\Article\Article|null
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article|null
      */
     public function findById($articleId)
     {
@@ -85,7 +85,7 @@ class ArticleRepository
     /**
      * @param int $domainId
      * @param string $placement
-     * @return \Shopsys\ShopBundle\Model\Article\Article[]
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article[]
      */
     public function getVisibleArticlesForPlacement($domainId, $placement)
     {
@@ -98,21 +98,21 @@ class ArticleRepository
 
     /**
      * @param int $articleId
-     * @return \Shopsys\ShopBundle\Model\Article\Article
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article
      */
     public function getById($articleId)
     {
         $article = $this->getArticleRepository()->find($articleId);
         if ($article === null) {
             $message = 'Article with ID ' . $articleId . ' not found';
-            throw new \Shopsys\ShopBundle\Model\Article\Exception\ArticleNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Model\Article\Exception\ArticleNotFoundException($message);
         }
         return $article;
     }
 
     /**
      * @param int $articleId
-     * @return \Shopsys\ShopBundle\Model\Article\Article
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article
      */
     public function getVisibleById($articleId)
     {
@@ -123,7 +123,7 @@ class ArticleRepository
 
         if ($article === null) {
             $message = 'Article with ID ' . $articleId . ' not found';
-            throw new \Shopsys\ShopBundle\Model\Article\Exception\ArticleNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Model\Article\Exception\ArticleNotFoundException($message);
         }
         return $article;
     }
@@ -141,7 +141,7 @@ class ArticleRepository
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Article\Article[]
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article[]
      */
     public function getAllByDomainId($domainId)
     {

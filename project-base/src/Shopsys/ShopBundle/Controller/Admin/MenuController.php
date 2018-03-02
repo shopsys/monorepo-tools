@@ -1,20 +1,20 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\DomainFacade;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\DomainFacade;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuFactory;
 
 class MenuController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuFactory
      */
     private $menuFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\DomainFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\DomainFacade
      */
     private $domainFacade;
 
@@ -29,7 +29,7 @@ class MenuController extends AdminBaseController
         $menu = $this->menuFactory->createMenuWithVisibleItems();
         $activePath = $menu->getMenuPath($route, $parameters);
 
-        return $this->render('@ShopsysShop/Admin/Inline/Menu/menu.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Inline/Menu/menu.html.twig', [
             'menu' => $menu,
             'activePath' => $activePath,
             'domainConfigs' => $this->domainFacade->getAllDomainConfigs(),
@@ -49,7 +49,7 @@ class MenuController extends AdminBaseController
             $panelItems = null;
         }
 
-        return $this->render('@ShopsysShop/Admin/Inline/Menu/panel.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Inline/Menu/panel.html.twig', [
             'items' => $panelItems,
             'activePath' => $activePath,
         ]);

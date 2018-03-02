@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer;
+namespace Shopsys\FrameworkBundle\Model\Customer;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
-use Shopsys\ShopBundle\Model\Security\Roles;
-use Shopsys\ShopBundle\Model\Security\TimelimitLoginInterface;
+use Shopsys\FrameworkBundle\Model\Security\Roles;
+use Shopsys\FrameworkBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -58,15 +58,15 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     private $lastActivity;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\BillingAddress
-     * @ORM\OneToOne(targetEntity="Shopsys\ShopBundle\Model\Customer\BillingAddress")
+     * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddress
+     * @ORM\OneToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\BillingAddress")
      * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", nullable=false)
      */
     private $billingAddress;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
-     * @ORM\OneToOne(targetEntity="Shopsys\ShopBundle\Model\Customer\DeliveryAddress")
+     * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null
+     * @ORM\OneToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress")
      * @ORM\JoinColumn(nullable=true)
      */
     private $deliveryAddress;
@@ -90,8 +90,8 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     private $domainId;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup")
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup")
      * @ORM\JoinColumn(name="pricing_group_id", referencedColumnName="id", nullable=false)
      */
     private $pricingGroup;
@@ -109,9 +109,9 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     private $resetPasswordHashValidThrough;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
-     * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
-     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddress $billingAddress
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
      */
     public function __construct(
         UserData $userData,
@@ -133,7 +133,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
      */
     public function edit(UserData $userData)
     {
@@ -170,7 +170,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
      */
     public function setDeliveryAddress(DeliveryAddress $deliveryAddress = null)
     {
@@ -275,7 +275,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Customer\BillingAddress
+     * @return \Shopsys\FrameworkBundle\Model\Customer\BillingAddress
      */
     public function getBillingAddress()
     {
@@ -283,7 +283,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
+     * @return \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null
      */
     public function getDeliveryAddress()
     {
@@ -307,7 +307,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
      */
     public function getPricingGroup()
     {

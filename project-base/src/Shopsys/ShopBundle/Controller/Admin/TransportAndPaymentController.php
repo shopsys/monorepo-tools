@@ -1,23 +1,23 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Form\Admin\TransportAndPayment\FreeTransportAndPaymentPriceLimitsFormType;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Form\Admin\TransportAndPayment\FreeTransportAndPaymentPriceLimitsFormType;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\HttpFoundation\Request;
 
 class TransportAndPaymentController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     private $pricingSetting;
 
@@ -34,7 +34,7 @@ class TransportAndPaymentController extends AdminBaseController
      */
     public function listAction()
     {
-        return $this->render('@ShopsysShop/Admin/Content/TransportAndPayment/list.html.twig');
+        return $this->render('@ShopsysFramework/Admin/Content/TransportAndPayment/list.html.twig');
     }
 
     /**
@@ -83,7 +83,7 @@ class TransportAndPaymentController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig', [
             'form' => $form->createView(),
             'domain' => $this->domain,
         ]);

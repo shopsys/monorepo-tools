@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\CategoryDataFixture as DemoCategoryDataFixture;
-use Shopsys\ShopBundle\Model\Category\CategoryDataFactory;
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture as DemoCategoryDataFixture;
+use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture
 {
@@ -106,12 +106,12 @@ class CategoryDataFixture extends AbstractReferenceFixture
     private function editCategoryOnDomain2($referenceName, $descriptionDomain2)
     {
         $categoryFacade = $this->get(CategoryFacade::class);
-        /* @var $categoryFacade \Shopsys\ShopBundle\Model\Category\CategoryFacade */
+        /* @var $categoryFacade \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
         $categoryDataFactory = $this->get(CategoryDataFactory::class);
-        /* @var $categoryDataFactory \Shopsys\ShopBundle\Model\Category\CategoryDataFactory */
+        /* @var $categoryDataFactory \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory */
 
         $category = $this->getReference($referenceName);
-        /* @var $category \Shopsys\ShopBundle\Model\Category\Category */
+        /* @var $category \Shopsys\FrameworkBundle\Model\Category\Category */
         $categoryData = $categoryDataFactory->createFromCategory($category);
         $domainId = 2;
         $categoryData->descriptions[$domainId] = $descriptionDomain2;

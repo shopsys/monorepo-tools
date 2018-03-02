@@ -1,21 +1,21 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Item;
+namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
-use Shopsys\ShopBundle\Model\Pricing\Price;
-use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 
 class OrderItemPriceCalculation
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation
      */
     private $priceCalculation;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\PriceCalculation $priceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation $priceCalculation
      */
     public function __construct(PriceCalculation $priceCalculation)
     {
@@ -23,7 +23,7 @@ class OrderItemPriceCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItemData $orderItemData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderItemData
      * @return string
      */
     public function calculatePriceWithoutVat(OrderItemData $orderItemData)
@@ -35,8 +35,8 @@ class OrderItemPriceCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $orderItem
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
     public function calculateTotalPrice(OrderItem $orderItem)
     {
@@ -50,8 +50,8 @@ class OrderItemPriceCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem[] $orderItems
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[] $orderItems
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price[]
      */
     public function calculateTotalPricesIndexedById($orderItems)
     {
@@ -60,7 +60,7 @@ class OrderItemPriceCalculation
         foreach ($orderItems as $orderItem) {
             if ($orderItem->getId() === null) {
                 $message = 'OrderItem must have ID filled';
-                throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\OrderItemHasNoIdException($message);
+                throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\OrderItemHasNoIdException($message);
             }
             $prices[$orderItem->getId()] = $this->calculateTotalPrice($orderItem);
         }

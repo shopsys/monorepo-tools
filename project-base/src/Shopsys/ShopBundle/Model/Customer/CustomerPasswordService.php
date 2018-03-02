@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer;
+namespace Shopsys\FrameworkBundle\Model\Customer;
 
 use DateTime;
-use Shopsys\ShopBundle\Component\String\HashGenerator;
+use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 class CustomerPasswordService
@@ -16,7 +16,7 @@ class CustomerPasswordService
     private $encoderFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\String\HashGenerator
+     * @var \Shopsys\FrameworkBundle\Component\String\HashGenerator
      */
     private $hashGenerator;
 
@@ -29,7 +29,7 @@ class CustomerPasswordService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @param string $password
      */
     public function changePassword(User $user, $password)
@@ -40,7 +40,7 @@ class CustomerPasswordService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      */
     public function resetPassword(User $user)
     {
@@ -49,7 +49,7 @@ class CustomerPasswordService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @param string|null $hash
      * @return bool
      */
@@ -68,14 +68,14 @@ class CustomerPasswordService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @param string|null $hash
      * @param string $newPassword
      */
     public function setNewPassword(User $user, $hash, $newPassword)
     {
         if (!$this->isResetPasswordHashValid($user, $hash)) {
-            throw new \Shopsys\ShopBundle\Model\Customer\Exception\InvalidResetPasswordHashException();
+            throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\InvalidResetPasswordHashException();
         }
 
         $this->changePassword($user, $newPassword);

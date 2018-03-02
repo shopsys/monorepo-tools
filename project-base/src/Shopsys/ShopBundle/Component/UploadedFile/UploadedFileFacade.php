@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\UploadedFile;
+namespace Shopsys\FrameworkBundle\Component\UploadedFile;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
 class UploadedFileFacade
@@ -15,17 +15,17 @@ class UploadedFileFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig
      */
     private $uploadedFileConfig;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\UploadedFile\UploadedFileRepository
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileRepository
      */
     private $uploadedFileRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\UploadedFile\UploadedFileService
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileService
      */
     private $uploadedFileService;
 
@@ -35,7 +35,7 @@ class UploadedFileFacade
     private $filesystem;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileLocator
      */
     private $uploadedFileLocator;
 
@@ -98,7 +98,7 @@ class UploadedFileFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile $uploadedFile
      */
     public function deleteFileFromFilesystem(UploadedFile $uploadedFile)
     {
@@ -108,7 +108,7 @@ class UploadedFileFacade
 
     /**
      * @param object $entity
-     * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
+     * @return \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile
      */
     public function getUploadedFileByEntity($entity)
     {
@@ -131,12 +131,12 @@ class UploadedFileFacade
         }
 
         $message = 'Entity "' . get_class($entity) . '" has not set primary key or primary key is compound."';
-        throw new \Shopsys\ShopBundle\Component\UploadedFile\Exception\EntityIdentifierException($message);
+        throw new \Shopsys\FrameworkBundle\Component\UploadedFile\Exception\EntityIdentifierException($message);
     }
 
     /**
      * @param int $uploadedFileId
-     * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
+     * @return \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile
      */
     public function getById($uploadedFileId)
     {
@@ -151,7 +151,7 @@ class UploadedFileFacade
     {
         try {
             $uploadedFile = $this->getUploadedFileByEntity($entity);
-        } catch (\Shopsys\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException $e) {
+        } catch (\Shopsys\FrameworkBundle\Component\UploadedFile\Exception\FileNotFoundException $e) {
             return false;
         }
 
@@ -159,7 +159,7 @@ class UploadedFileFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile $uploadedFile
      * @return string
      */
     public function getAbsoluteUploadedFileFilepath(UploadedFile $uploadedFile)
@@ -168,8 +168,8 @@ class UploadedFileFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile $uploadedFile
      * @return string
      */
     public function getUploadedFileUrl(DomainConfig $domainConfig, UploadedFile $uploadedFile)

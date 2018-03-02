@@ -1,43 +1,43 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
-use Shopsys\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class PricingGroupController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
     private $pricingGroupSettingFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
     private $pricingGroupFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit
      */
     private $pricingGroupInlineEdit;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+     * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
     private $confirmDeleteResponseFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
@@ -62,7 +62,7 @@ class PricingGroupController extends AdminBaseController
     {
         $grid = $this->pricingGroupInlineEdit->getGrid();
 
-        return $this->render('@ShopsysShop/Admin/Content/Pricing/Groups/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Pricing/Groups/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -100,7 +100,7 @@ class PricingGroupController extends AdminBaseController
                     ]
                 );
             }
-        } catch (\Shopsys\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected pricing group doesn\'t exist.'));
         }
 
@@ -144,7 +144,7 @@ class PricingGroupController extends AdminBaseController
                 );
                 return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_pricinggroup_delete', $id);
             }
-        } catch (\Shopsys\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
             return new Response(t('Selected pricing group doesn\'t exist.'));
         }
     }
@@ -174,7 +174,7 @@ class PricingGroupController extends AdminBaseController
             return $this->redirectToRoute('admin_pricinggroup_list');
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Pricing/Groups/pricingGroupSettings.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Pricing/Groups/pricingGroupSettings.html.twig', [
             'form' => $form->createView(),
         ]);
     }

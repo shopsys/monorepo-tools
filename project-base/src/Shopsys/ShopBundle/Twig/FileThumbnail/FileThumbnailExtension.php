@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig\FileThumbnail;
+namespace Shopsys\FrameworkBundle\Twig\FileThumbnail;
 
-use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
-use Shopsys\ShopBundle\Component\Image\Processing\ImageThumbnailFactory;
+use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
+use Shopsys\FrameworkBundle\Component\Image\Processing\ImageThumbnailFactory;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
@@ -18,12 +18,12 @@ class FileThumbnailExtension extends Twig_Extension
     private $iconsByExtension;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
+     * @var \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
      */
     private $fileUpload;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageThumbnailFactory
+     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageThumbnailFactory
      */
     private $imageThumbnailFactory;
 
@@ -67,20 +67,20 @@ class FileThumbnailExtension extends Twig_Extension
 
     /**
      * @param string $filepath
-     * @return \Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo
+     * @return \Shopsys\FrameworkBundle\Twig\FileThumbnail\FileThumbnailInfo
      */
     public function getFileThumbnailInfo($filepath)
     {
         try {
             return $this->getImageThumbnailInfo($filepath);
-        } catch (\Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
             return new FileThumbnailInfo($this->getIconTypeByFilename($filepath));
         }
     }
 
     /**
      * @param string $temporaryFilename
-     * @return \Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo
+     * @return \Shopsys\FrameworkBundle\Twig\FileThumbnail\FileThumbnailInfo
      */
     public function getFileThumbnailInfoByTemporaryFilename($temporaryFilename)
     {
@@ -91,7 +91,7 @@ class FileThumbnailExtension extends Twig_Extension
 
     /**
      * @param string $filepath
-     * @return \Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo
+     * @return \Shopsys\FrameworkBundle\Twig\FileThumbnail\FileThumbnailInfo
      */
     private function getImageThumbnailInfo($filepath)
     {

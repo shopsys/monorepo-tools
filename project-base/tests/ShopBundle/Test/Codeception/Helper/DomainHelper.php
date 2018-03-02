@@ -4,7 +4,7 @@ namespace Tests\ShopBundle\Test\Codeception\Helper;
 
 use Codeception\Module;
 use Codeception\TestInterface;
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver;
 
 class DomainHelper extends Module
@@ -22,7 +22,7 @@ class DomainHelper extends Module
         $symfonyHelper = $this->getModule(SymfonyHelper::class);
         /* @var $symfonyHelper \Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper */
         $domain = $symfonyHelper->grabServiceFromContainer(Domain::class);
-        /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
+        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         $domainConfig = $domain->getDomainConfigById(1);
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Accessory;
+namespace Shopsys\FrameworkBundle\Model\Product\Accessory;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(name="product_accessories")
@@ -12,16 +12,16 @@ use Shopsys\ShopBundle\Model\Product\Product;
 class ProductAccessory
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
      * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
      * @ORM\Id
      */
     private $product;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
      * @ORM\JoinColumn(nullable=false, name="accessory_product_id", referencedColumnName="id", onDelete="CASCADE")
      * @ORM\Id
      */
@@ -35,8 +35,8 @@ class ProductAccessory
     private $position;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Product\Product $accessory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $accessory
      * @param int $position
      */
     public function __construct(Product $product, Product $accessory, $position)
@@ -47,7 +47,7 @@ class ProductAccessory
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getProduct()
     {
@@ -55,7 +55,7 @@ class ProductAccessory
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getAccessory()
     {

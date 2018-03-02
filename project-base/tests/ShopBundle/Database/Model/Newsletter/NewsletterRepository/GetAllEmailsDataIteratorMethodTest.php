@@ -4,7 +4,7 @@ namespace Tests\ShopBundle\Database\Model\Newsletter\NewsletterRepository;
 
 use Doctrine\ORM\Internal\Hydration\IterableResult;
 use PHPUnit\Framework\Assert;
-use Shopsys\ShopBundle\Model\Newsletter\NewsletterRepository;
+use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class GetAllEmailsDataIteratorMethodTest extends DatabaseTestCase
@@ -12,7 +12,7 @@ class GetAllEmailsDataIteratorMethodTest extends DatabaseTestCase
     const FIRST_DOMAIN_SUBSCRIBER_EMAIL = 'james.black@no-reply.com';
 
     /**
-     * @var NewsletterRepository
+     * @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository
      */
     private $newsletterRepository;
 

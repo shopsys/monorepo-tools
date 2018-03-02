@@ -1,31 +1,31 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Sitemap;
+namespace Shopsys\FrameworkBundle\Component\Sitemap;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
-use Shopsys\ShopBundle\Model\Article\ArticleRepository;
-use Shopsys\ShopBundle\Model\Category\CategoryRepository;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl;
+use Shopsys\FrameworkBundle\Model\Article\ArticleRepository;
+use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class SitemapRepository
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
     private $categoryRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticleRepository
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleRepository
      */
     private $articleRepository;
 
@@ -40,9 +40,9 @@ class SitemapRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[]
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Component\Sitemap\SitemapItem[]
      */
     public function getSitemapItemsForVisibleProducts(DomainConfig $domainConfig, PricingGroup $pricingGroup)
     {
@@ -65,8 +65,8 @@ class SitemapRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[]
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return \Shopsys\FrameworkBundle\Component\Sitemap\SitemapItem[]
      */
     public function getSitemapItemsForVisibleCategories(DomainConfig $domainConfig)
     {
@@ -89,8 +89,8 @@ class SitemapRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[]
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return \Shopsys\FrameworkBundle\Component\Sitemap\SitemapItem[]
      */
     public function getSitemapItemsForArticlesOnDomain(DomainConfig $domainConfig)
     {
@@ -114,7 +114,7 @@ class SitemapRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-     * @return \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[]
+     * @return \Shopsys\FrameworkBundle\Component\Sitemap\SitemapItem[]
      */
     private function getSitemapItemsFromQueryBuilderWithSlugField(QueryBuilder $queryBuilder)
     {

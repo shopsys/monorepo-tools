@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Product\Parameter;
+namespace Shopsys\FrameworkBundle\Form\Admin\Product\Parameter;
 
-use Shopsys\ShopBundle\Form\Locale\LocalizedType;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
-use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
+use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints;
 class ProductParameterValueFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade
      */
     private $parameterFacade;
 

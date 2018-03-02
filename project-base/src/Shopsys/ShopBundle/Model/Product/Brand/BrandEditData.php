@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Brand;
+namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 
 class BrandEditData
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandData|null
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData|null
      */
     public $brandData;
 
@@ -41,7 +41,7 @@ class BrandEditData
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandData|null
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData|null
      */
     public function getBrandData()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
 use Symfony\Bundle\WebServerBundle\Command\ServerRunCommand;
 use Symfony\Component\Console\Input\InputInterface;

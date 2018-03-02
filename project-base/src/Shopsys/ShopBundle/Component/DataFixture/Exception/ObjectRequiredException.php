@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\DataFixture\Exception;
+namespace Shopsys\FrameworkBundle\Component\DataFixture\Exception;
 
 use Exception;
 use InvalidArgumentException;
-use Shopsys\ShopBundle\Component\Debug;
+use Shopsys\FrameworkBundle\Component\Debug;
 
 class ObjectRequiredException extends InvalidArgumentException implements DataFixtureException
 {

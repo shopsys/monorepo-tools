@@ -50,16 +50,21 @@
             <arg value="${path.bin-console}" />
             <arg value="translation:extract" />
             <arg value="--bundle=ShopsysShopBundle" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Controller" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Form" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Grid" />
+            <arg value="--dir=${path.framework}/src/Component/Controller" />
+            <arg value="--dir=${path.framework}/src/Component/Form" />
+            <arg value="--dir=${path.framework}/src/Component/Grid" />
+            <arg value="--dir=${path.framework}/src/Controller" />
+            <arg value="--dir=${path.framework}/src/Form" />
+            <arg value="--dir=${path.framework}/src/Model" />
+            <arg value="--dir=${path.framework}/src/Resources/config" />
+            <arg value="--dir=${path.framework}/src/Resources/views" />
+            <arg value="--dir=${path.framework}/src/Resources/scripts" />
+            <arg value="--dir=${path.framework}/src/Twig" />
             <arg value="--dir=${path.src}/Shopsys/ShopBundle/Controller" />
             <arg value="--dir=${path.src}/Shopsys/ShopBundle/Form" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Model" />
             <arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/config" />
             <arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/views" />
             <arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/scripts" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Twig" />
             <arg value="--exclude-dir=admin/plugins" />
             <arg value="--exclude-dir=frontend/plugins" />
             <arg value="--output-format=po" />
@@ -751,7 +756,7 @@
             <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="doctrine:fixtures:load" />
-            <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
+            <arg value="--fixtures=${path.framework}/src/DataFixtures/Base" />
             <arg value="--append" />
             <arg value="--no-interaction" />
         </exec>
@@ -765,7 +770,7 @@
                     <arg value="${path.bin-console}" />
                     <arg value="--env=test" />
                     <arg value="doctrine:fixtures:load" />
-                    <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/DemoMultidomain" />
+                    <arg value="--fixtures=${path.framework}/src/DataFixtures/DemoMultidomain" />
                     <arg value="--append" />
                     <arg value="--no-interaction" />
                 </exec>
@@ -786,8 +791,8 @@
             <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="doctrine:fixtures:load" />
-            <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
-            <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Demo" />
+            <arg value="--fixtures=${path.framework}/src/DataFixtures/Base" />
+            <arg value="--fixtures=${path.framework}/src/DataFixtures/Demo" />
             <arg value="--append" />
             <arg value="--no-interaction" />
         </exec>

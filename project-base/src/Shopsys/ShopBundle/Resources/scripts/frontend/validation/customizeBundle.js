@@ -181,7 +181,7 @@
             value = this.getMappedValue(element);
         } else if (
             element.type === Shopsys.constant('\\Symfony\\Component\\Form\\Extension\\Core\\Type\\CollectionType::class')
-            || (Object.keys(element.children).length > 0 && element.type !== Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FileUploadType::class'))
+            || (Object.keys(element.children).length > 0 && element.type !== Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\FileUploadType::class'))
         ) {
             value = {};
             for (var childName in element.children) {
@@ -203,10 +203,10 @@
         if (element.type === Shopsys.constant('\\Ivory\\CKEditorBundle\\Form\\Type\\CKEditorType::class')) {
             return CKEDITOR.instances[element.id].getData();
         }
-        if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FileUploadType::class')) {
+        if (element.type === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\FileUploadType::class')) {
             return $(element.domNode).find('.js-file-upload-uploaded-file').toArray();
         }
-        if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\ProductsType::class')) {
+        if (element.type === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\ProductsType::class')) {
             var value = [];
             $(element.domNode).find('.js-products-picker-item-input').each(function () {
                 value.push($(this).val());

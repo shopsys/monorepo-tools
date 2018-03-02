@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\PluginData;
+namespace Shopsys\FrameworkBundle\Model\PluginData;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\Plugin\DataStorageInterface;
@@ -119,7 +119,7 @@ class DoctrinePluginDataStorage implements DataStorageInterface
 
     /**
      * @param string $key
-     * @return \Shopsys\ShopBundle\Model\PluginData\PluginDataValue|null
+     * @return \Shopsys\FrameworkBundle\Model\PluginData\PluginDataValue|null
      */
     private function findPluginDataValueByKey($key)
     {
@@ -132,7 +132,7 @@ class DoctrinePluginDataStorage implements DataStorageInterface
 
     /**
      * @param string[] $keys
-     * @return \Shopsys\ShopBundle\Model\PluginData\PluginDataValue[]
+     * @return \Shopsys\FrameworkBundle\Model\PluginData\PluginDataValue[]
      */
     private function getPluginDataValuesByKeys(array $keys)
     {
@@ -144,7 +144,7 @@ class DoctrinePluginDataStorage implements DataStorageInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\PluginData\PluginDataValue[]
+     * @return \Shopsys\FrameworkBundle\Model\PluginData\PluginDataValue[]
      */
     private function getAllPluginDataValues()
     {

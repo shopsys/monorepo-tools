@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Grid;
+namespace Shopsys\FrameworkBundle\Component\Grid;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Component\Doctrine\GroupedScalarHydrator;
-use Shopsys\ShopBundle\Component\Paginator\QueryPaginator;
+use Shopsys\FrameworkBundle\Component\Doctrine\GroupedScalarHydrator;
+use Shopsys\FrameworkBundle\Component\Paginator\QueryPaginator;
 
 class QueryBuilderDataSource implements DataSourceInterface
 {
@@ -33,7 +33,7 @@ class QueryBuilderDataSource implements DataSourceInterface
      * @param int $page
      * @param string|null $orderSourceColumnName
      * @param string $orderDirection
-     * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
     public function getPaginatedRows(
         $limit = null,
@@ -49,7 +49,7 @@ class QueryBuilderDataSource implements DataSourceInterface
         $queryPaginator = new QueryPaginator($queryBuilder, GroupedScalarHydrator::HYDRATION_MODE);
 
         $paginationResult = $queryPaginator->getResult($page, $limit);
-        /* @var $paginationResult \Shopsys\ShopBundle\Component\Paginator\PaginationResult */
+        /* @var $paginationResult \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult */
 
         return $paginationResult;
     }

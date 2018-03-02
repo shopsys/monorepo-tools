@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Brand;
+namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
 class BrandDataFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
     private $friendlyUrlFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade
      */
     private $brandFacade;
 
@@ -25,7 +25,7 @@ class BrandDataFactory
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData
      */
     public function createDefault()
     {
@@ -33,8 +33,8 @@ class BrandDataFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData
      */
     public function createFromBrand(Brand $brand)
     {
@@ -44,7 +44,7 @@ class BrandDataFactory
         $brandData->name = $brand->getName();
 
         $translations = $brand->getTranslations();
-        /* @var $translations \Shopsys\ShopBundle\Model\Product\Brand\BrandTranslation[]  */
+        /* @var $translations \Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation[]  */
 
         $brandData->descriptions = [];
         foreach ($translations as $translation) {

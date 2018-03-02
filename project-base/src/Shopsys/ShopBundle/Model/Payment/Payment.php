@@ -1,17 +1,17 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment;
+namespace Shopsys\FrameworkBundle\Model\Payment;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use Shopsys\ShopBundle\Component\Gedmo\SortablePosition;
-use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
-use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
-use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\FrameworkBundle\Component\Gedmo\SortablePosition;
+use Shopsys\FrameworkBundle\Component\Grid\Ordering\OrderableEntityInterface;
+use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Table(name="payments")
@@ -29,23 +29,23 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     protected $id;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentTranslation[]
      *
-     * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Payment\PaymentTranslation")
+     * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Payment\PaymentTranslation")
      */
     protected $translations;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentPrice[]
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPrice[]
      *
-     * @ORM\OneToMany(targetEntity="Shopsys\ShopBundle\Model\Payment\PaymentPrice", mappedBy="payment", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Payment\PaymentPrice", mappedBy="payment", cascade={"persist"})
      */
     private $prices;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Vat\Vat")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat")
      * @ORM\JoinColumn(nullable=false)
      */
     private $vat;
@@ -53,7 +53,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Shopsys\ShopBundle\Model\Transport\Transport")
+     * @ORM\ManyToMany(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport")
      * @ORM\JoinTable(name="payments_transports")
      */
     private $transports;
@@ -88,7 +88,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     private $czkRounding;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      */
     public function __construct(PaymentData $paymentData)
     {
@@ -104,7 +104,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      */
     public function addTransport(Transport $transport)
     {
@@ -114,7 +114,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport[] $transports
      */
     public function setTransports(array $transports)
     {
@@ -133,7 +133,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      */
     private function setTranslations(PaymentData $paymentData)
     {
@@ -149,7 +149,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      */
     public function edit(PaymentData $paymentData)
     {
@@ -160,7 +160,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @param string $price
      */
     public function setPrice(Currency $currency, $price)
@@ -193,7 +193,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Payment\PaymentPrice[]
+     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentPrice[]
      */
     public function getPrices()
     {
@@ -201,8 +201,8 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @return \Shopsys\ShopBundle\Model\Payment\PaymentPrice
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentPrice
      */
     public function getPrice(Currency $currency)
     {
@@ -213,11 +213,11 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
         }
 
         $message = 'Payment price with currency ID ' . $currency->getId() . ' from payment with ID ' . $this->getId() . 'not found.';
-        throw new \Shopsys\ShopBundle\Model\Payment\Exception\PaymentPriceNotFoundException($message);
+        throw new \Shopsys\FrameworkBundle\Model\Payment\Exception\PaymentPriceNotFoundException($message);
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      */
     public function getVat()
     {
@@ -289,7 +289,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Payment\PaymentTranslation
+     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentTranslation
      */
     protected function createTranslation()
     {

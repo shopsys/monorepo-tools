@@ -1,56 +1,56 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Collection;
+namespace Shopsys\FrameworkBundle\Model\Product\Collection;
 
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
-use Shopsys\ShopBundle\Component\Image\ImageFacade;
-use Shopsys\ShopBundle\Component\Image\ImageRepository;
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
+use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
+use Shopsys\FrameworkBundle\Component\Image\ImageRepository;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class ProductCollectionFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionService
+     * @var \Shopsys\FrameworkBundle\Model\Product\Collection\ProductCollectionService
      */
     private $productCollectionService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
+     * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      */
     private $imageConfig;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\ImageRepository
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageRepository
      */
     private $imageRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
     private $imageFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
      */
     private $friendlyUrlRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService
      */
     private $friendlyUrlService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository
      */
     private $parameterRepository;
 
@@ -75,8 +75,8 @@ class ProductCollectionFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param string|null $sizeName
      * @return string[]
      */
@@ -89,7 +89,7 @@ class ProductCollectionFacade
             } else {
                 try {
                     $imagesUrlsByProductId[$productId] = $this->imageFacade->getImageUrl($domainConfig, $image, $sizeName);
-                } catch (\Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
+                } catch (\Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException $e) {
                     $imagesUrlsByProductId[$productId] = null;
                 }
             }
@@ -99,8 +99,8 @@ class ProductCollectionFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
-     * @return \Shopsys\ShopBundle\Component\Image\Image[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
      */
     private function getMainImagesIndexedByProductId(array $products)
     {
@@ -111,8 +111,8 @@ class ProductCollectionFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string[]
      */
     public function getAbsoluteUrlsIndexedByProductId(array $products, DomainConfig $domainConfig)
@@ -132,9 +132,9 @@ class ProductCollectionFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]
      */
     public function getProductDomainsIndexedByProductId(array $products, DomainConfig $domainConfig)
     {
@@ -145,8 +145,8 @@ class ProductCollectionFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string[][]
      */
     public function getProductParameterValuesIndexedByProductIdAndParameterName(array $products, DomainConfig $domainConfig)

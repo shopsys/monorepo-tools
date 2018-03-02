@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Vat;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Vat;
 
 class VatData
 {
@@ -25,7 +25,7 @@ class VatData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $vat
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      */
     public function setFromEntity(Vat $vat)
     {

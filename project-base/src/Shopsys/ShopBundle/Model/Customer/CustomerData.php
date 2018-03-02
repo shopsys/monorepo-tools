@@ -1,21 +1,21 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer;
+namespace Shopsys\FrameworkBundle\Model\Customer;
 
 class CustomerData
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\UserData
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserData
      */
     public $userData;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\BillingAddressData
+     * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddressData
      */
     public $billingAddressData;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData
+     * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData
      */
     public $deliveryAddressData;
 
@@ -49,7 +49,7 @@ class CustomerData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      */
     public function setFromEntity(User $user)
     {

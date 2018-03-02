@@ -1,25 +1,25 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Image\Processing;
+namespace Shopsys\FrameworkBundle\Component\Image\Processing;
 
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
-use Shopsys\ShopBundle\Component\Image\Image;
-use Shopsys\ShopBundle\Component\Image\ImageLocator;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
+use Shopsys\FrameworkBundle\Component\Image\Image;
+use Shopsys\FrameworkBundle\Component\Image\ImageLocator;
 
 class ImageGeneratorService
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService
+     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService
      */
     private $imageProcessingService;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\ImageLocator
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageLocator
      */
     private $imageLocator;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
+     * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      */
     private $imageConfig;
 
@@ -34,14 +34,14 @@ class ImageGeneratorService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Image\Image $image
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
      * @param string|null $sizeName
      * @return string
      */
     public function generateImageSizeAndGetFilepath(Image $image, $sizeName)
     {
         if ($sizeName === ImageConfig::ORIGINAL_SIZE_NAME) {
-            throw new \Shopsys\ShopBundle\Component\Image\Processing\Exception\OriginalSizeImageCannotBeGeneratedException(
+            throw new \Shopsys\FrameworkBundle\Component\Image\Processing\Exception\OriginalSizeImageCannotBeGeneratedException(
                 $image
             );
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Cron;
+namespace Shopsys\FrameworkBundle\Component\Cron;
 
 use Doctrine\ORM\EntityManager;
 
@@ -26,7 +26,7 @@ class CronModuleRepository
 
     /**
      * @param string $serviceId
-     * @return \Shopsys\ShopBundle\Component\Cron\CronModule
+     * @return \Shopsys\FrameworkBundle\Component\Cron\CronModule
      */
     public function getCronModuleByServiceId($serviceId)
     {

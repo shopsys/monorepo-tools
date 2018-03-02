@@ -1,27 +1,27 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\ContactForm;
+namespace Shopsys\FrameworkBundle\Model\ContactForm;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Mail\MailerService;
-use Shopsys\ShopBundle\Model\Mail\MessageData;
-use Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Mail\MailerService;
+use Shopsys\FrameworkBundle\Model\Mail\MessageData;
+use Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade;
 use Twig_Environment;
 
 class ContactFormFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade
      */
     private $mailSettingFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailerService
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailerService
      */
     private $mailerService;
 
@@ -31,9 +31,9 @@ class ContactFormFacade
     private $twig;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade $mailSettingFacade
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\ShopBundle\Model\Mail\MailerService $mailerService
+     * @param \Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade $mailSettingFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailerService
      * @param \Twig_Environment $twig
      */
     public function __construct(
@@ -49,7 +49,7 @@ class ContactFormFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\ContactForm\ContactFormData $contactFormData
+     * @param \Shopsys\FrameworkBundle\Model\ContactForm\ContactFormData $contactFormData
      */
     public function sendMail(ContactFormData $contactFormData)
     {
@@ -65,12 +65,12 @@ class ContactFormFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\ContactForm\ContactFormData $contactFormData
+     * @param \Shopsys\FrameworkBundle\Model\ContactForm\ContactFormData $contactFormData
      * @return string
      */
     private function getMailBody($contactFormData)
     {
-        return $this->twig->render('@ShopsysShop/Mail/ContactForm/mail.html.twig', [
+        return $this->twig->render('@ShopsysFramework/Mail/ContactForm/mail.html.twig', [
             'contactFormData' => $contactFormData,
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Console\Command\Command;

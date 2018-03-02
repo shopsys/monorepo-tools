@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
-use Shopsys\ShopBundle\Model\Administrator\AdministratorFacade;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,12 +20,12 @@ class ChangeAdminPasswordCommand extends Command
     protected static $defaultName = 'shopsys:administrator:change-password';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorFacade
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade
      */
     private $administratorFacade;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorFacade $administratorFacade
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade $administratorFacade
      */
     public function __construct(AdministratorFacade $administratorFacade)
     {

@@ -1,24 +1,24 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Category\Detail;
+namespace Shopsys\FrameworkBundle\Model\Category\Detail;
 
-use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Category\Category;
 
 class CategoryDetail
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\Category
+     * @var \Shopsys\FrameworkBundle\Model\Category\Category
      */
     private $category;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
+     * @var \Shopsys\FrameworkBundle\Model\Category\Detail\CategoryDetail[]
      */
     private $children;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @param \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[] $children
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Detail\CategoryDetail[] $children
      */
     public function __construct(
         Category $category,
@@ -29,7 +29,7 @@ class CategoryDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\Category
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category
      */
     public function getCategory()
     {
@@ -37,7 +37,7 @@ class CategoryDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\Detail\CategoryDetail[]
      */
     public function getChildren()
     {

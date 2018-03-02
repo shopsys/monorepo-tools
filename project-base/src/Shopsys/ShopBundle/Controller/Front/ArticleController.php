@@ -2,14 +2,14 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Model\Article\Article;
-use Shopsys\ShopBundle\Model\Article\ArticleFacade;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Model\Article\Article;
+use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
 
 class ArticleController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade
      */
     private $articleFacade;
 

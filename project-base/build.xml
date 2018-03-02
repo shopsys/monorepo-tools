@@ -16,6 +16,7 @@
     <property name="path.composer.executable" value="composer"/>
     <property name="path.env.test" value="${path.root}/TEST"/>
     <property name="path.eslint.executable" value="${path.root}/node_modules/.bin/eslint"/>
+    <property name="path.framework" value="${path.vendor}/shopsys/framework"/>
     <property name="path.grunt.executable" value="node_modules/.bin/grunt"/>
     <property name="path.npm.executable" value="npm"/>
     <property name="path.pg_dump.executable" value="pg_dump"/>
@@ -165,7 +166,7 @@
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
             <arg value="doctrine:fixtures:load" />
-            <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
+            <arg value="--fixtures=${path.framework}/src/DataFixtures/Base" />
             <arg value="--append" />
             <arg value="--no-interaction" />
         </exec>
@@ -178,7 +179,7 @@
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
                     <arg value="${path.bin-console}" />
                     <arg value="doctrine:fixtures:load" />
-                    <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/DemoMultidomain" />
+                    <arg value="--fixtures=${path.framework}/src/DataFixtures/DemoMultidomain" />
                     <arg value="--append" />
                     <arg value="--no-interaction" />
                 </exec>
@@ -197,8 +198,8 @@
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
             <arg value="doctrine:fixtures:load" />
-            <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
-            <arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Demo" />
+            <arg value="--fixtures=${path.framework}/src/DataFixtures/Base" />
+            <arg value="--fixtures=${path.framework}/src/DataFixtures/Demo" />
             <arg value="--append" />
             <arg value="--no-interaction" />
         </exec>

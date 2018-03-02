@@ -2,19 +2,19 @@
 
 namespace Tests\ShopBundle\Database\Model\Cart;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\ShopBundle\Model\Cart\Cart;
-use Shopsys\ShopBundle\Model\Cart\CartFacade;
-use Shopsys\ShopBundle\Model\Cart\CartFactory;
-use Shopsys\ShopBundle\Model\Cart\CartService;
-use Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository;
-use Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
-use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory;
-use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\FrameworkBundle\Model\Cart\Cart;
+use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
+use Shopsys\FrameworkBundle\Model\Cart\CartFactory;
+use Shopsys\FrameworkBundle\Model\Cart\CartService;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository;
+use Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade;
+use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class CartFacadeTest extends DatabaseTestCase
@@ -49,7 +49,7 @@ class CartFacadeTest extends DatabaseTestCase
         $customerIdentifier = new CustomerIdentifier('secretSessionHash');
         $cartFacade = $this->createCartFacade($customerIdentifier);
 
-        $this->expectException('\Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException');
+        $this->expectException('\Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException');
         $cartFacade->addProductToCart($productId, $quantity);
 
         $cart = $this->getCartByCustomerIdentifier($customerIdentifier);
@@ -100,7 +100,7 @@ class CartFacadeTest extends DatabaseTestCase
         $cartItems = $cart->getItems();
         $cartItem = array_pop($cartItems);
 
-        $this->expectException('\Shopsys\ShopBundle\Model\Cart\Exception\InvalidCartItemException');
+        $this->expectException('\Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidCartItemException');
         $cartFacade->deleteCartItem($cartItem->getId() + 1);
     }
 
@@ -108,8 +108,8 @@ class CartFacadeTest extends DatabaseTestCase
     {
         // Set currentLocale in TranslatableListener as it done in real request
         // because CartWatcherFacade works with entity translations.
-        $translatableListener = $this->getServiceByType(\Shopsys\ShopBundle\Model\Localization\TranslatableListener::class);
-        /* @var $translatableListener \Shopsys\ShopBundle\Model\Localization\TranslatableListener */
+        $translatableListener = $this->getServiceByType(\Shopsys\FrameworkBundle\Model\Localization\TranslatableListener::class);
+        /* @var $translatableListener \Shopsys\FrameworkBundle\Model\Localization\TranslatableListener */
         $translatableListener->setCurrentLocale('cs');
 
         $customerIdentifier = new CustomerIdentifier('secretSessionHash');
@@ -131,8 +131,8 @@ class CartFacadeTest extends DatabaseTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     * @return \Shopsys\ShopBundle\Model\Cart\CartFacade
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @return \Shopsys\FrameworkBundle\Model\Cart\CartFacade
      */
     private function createCartFacade(CustomerIdentifier $customerIdentifier)
     {
@@ -150,8 +150,8 @@ class CartFacadeTest extends DatabaseTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     * @return \Shopsys\ShopBundle\Model\Cart\Cart
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Cart
      */
     private function getCartByCustomerIdentifier(CustomerIdentifier $customerIdentifier)
     {
@@ -182,7 +182,7 @@ class CartFacadeTest extends DatabaseTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
     private function getCustomerIdentifierFactoryMock(CustomerIdentifier $customerIdentifier)

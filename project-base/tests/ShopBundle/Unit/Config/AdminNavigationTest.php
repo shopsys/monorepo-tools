@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Unit\Config;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuFactory;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuLoader;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
@@ -22,7 +22,7 @@ class AdminNavigationTest extends FunctionalTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $items
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[] $items
      */
     private function resolveRoutesRecursive(array $items)
     {
@@ -41,7 +41,7 @@ class AdminNavigationTest extends FunctionalTestCase
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\Menu
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\Menu
      */
     private function getMenu()
     {

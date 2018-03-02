@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\HttpFoundation;
+namespace Shopsys\FrameworkBundle\Component\HttpFoundation;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -69,7 +69,7 @@ class SubRequestListener
                 $this->redirectResponse = $subResponse;
             } else {
                 $message = 'Only one subresponse can do a redirect.';
-                throw new \Shopsys\ShopBundle\Component\HttpFoundation\Exception\TooManyRedirectResponsesException($message);
+                throw new \Shopsys\FrameworkBundle\Component\HttpFoundation\Exception\TooManyRedirectResponsesException($message);
             }
         }
     }

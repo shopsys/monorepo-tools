@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\ConfirmDelete\Exception;
+namespace Shopsys\FrameworkBundle\Component\ConfirmDelete\Exception;
 
 use Exception;
 

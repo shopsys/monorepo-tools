@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Database\Model\Category;
 
-use Shopsys\ShopBundle\Model\Category\CategoryData;
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Category\CategoryRepository;
-use Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository;
+use Shopsys\FrameworkBundle\Model\Category\CategoryData;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
+use Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class CategoryRepositoryTest extends DatabaseTestCase
@@ -15,11 +15,11 @@ class CategoryRepositoryTest extends DatabaseTestCase
     public function testDoNotGetCategoriesWithoutVisibleChildren()
     {
         $categoryFacade = $this->getServiceByType(CategoryFacade::class);
-        /* @var $categoryFacade \Shopsys\ShopBundle\Model\Category\CategoryFacade */
+        /* @var $categoryFacade \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
         $categoryRepository = $this->getServiceByType(CategoryRepository::class);
-        /* @var $categoryRepository \Shopsys\ShopBundle\Model\Category\CategoryRepository */
+        /* @var $categoryRepository \Shopsys\FrameworkBundle\Model\Category\CategoryRepository */
         $categoryVisibilityRepository = $this->getServiceByType(CategoryVisibilityRepository::class);
-        /* @var $categoryVisibilityRepository \Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository */
+        /* @var $categoryVisibilityRepository \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository */
 
         $categoryData = new CategoryData();
         $categoryData->name = ['en' => 'name'];
@@ -41,11 +41,11 @@ class CategoryRepositoryTest extends DatabaseTestCase
     public function testGetCategoriesWithAtLeastOneVisibleChild()
     {
         $categoryFacade = $this->getServiceByType(CategoryFacade::class);
-        /* @var $categoryFacade \Shopsys\ShopBundle\Model\Category\CategoryFacade */
+        /* @var $categoryFacade \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
         $categoryRepository = $this->getServiceByType(CategoryRepository::class);
-        /* @var $categoryRepository \Shopsys\ShopBundle\Model\Category\CategoryRepository */
+        /* @var $categoryRepository \Shopsys\FrameworkBundle\Model\Category\CategoryRepository */
         $categoryVisibilityRepository = $this->getServiceByType(CategoryVisibilityRepository::class);
-        /* @var $categoryVisibilityRepository \Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository */
+        /* @var $categoryVisibilityRepository \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository */
 
         $categoryData = new CategoryData();
         $categoryData->name = ['en' => 'name'];

@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductManualInputPriceRepository
 {
@@ -30,8 +30,8 @@ class ProductManualInputPriceRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice[]
      */
     public function getByProduct(Product $product)
     {
@@ -39,9 +39,9 @@ class ProductManualInputPriceRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
-     * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice[]
      */
     public function getByProductAndDomainConfigs(Product $product, array $domainConfigs)
     {
@@ -63,9 +63,9 @@ class ProductManualInputPriceRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice|null
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice|null
      */
     public function findByProductAndPricingGroup(Product $product, PricingGroup $pricingGroup)
     {

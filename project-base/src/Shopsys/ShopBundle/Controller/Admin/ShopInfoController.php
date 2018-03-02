@@ -1,23 +1,23 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormType;
-use Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Form\Admin\ShopInfo\ShopInfoSettingFormType;
+use Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class ShopInfoController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade
+     * @var \Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade
      */
     private $shopInfoSettingFacade;
 
@@ -61,7 +61,7 @@ class ShopInfoController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/ShopInfo/shopInfo.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/ShopInfo/shopInfo.html.twig', [
             'form' => $form->createView(),
         ]);
     }

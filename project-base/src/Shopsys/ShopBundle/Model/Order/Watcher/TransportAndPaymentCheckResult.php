@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Watcher;
+namespace Shopsys\FrameworkBundle\Model\Order\Watcher;
 
 class TransportAndPaymentCheckResult
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Administrator;
+namespace Shopsys\FrameworkBundle\Model\Administrator;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Grid\Grid;
+use Shopsys\FrameworkBundle\Component\Grid\Grid;
 
 class AdministratorGridFacade
 {
@@ -13,13 +13,13 @@ class AdministratorGridFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridService
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridService
      */
     private $administratorGridService;
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorGridService $administratorGridService
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridService $administratorGridService
      */
     public function __construct(EntityManager $em, AdministratorGridService $administratorGridService)
     {
@@ -28,8 +28,8 @@ class AdministratorGridFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
-     * @param \Shopsys\ShopBundle\Component\Grid\Grid $grid
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
+     * @param \Shopsys\FrameworkBundle\Component\Grid\Grid $grid
      */
     public function restoreAndRememberGridLimit(Administrator $administrator, Grid $grid)
     {

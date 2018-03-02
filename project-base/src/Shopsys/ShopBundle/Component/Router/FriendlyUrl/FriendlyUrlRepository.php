@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
 use Doctrine\ORM\EntityManager;
 
@@ -30,7 +30,7 @@ class FriendlyUrlRepository
     /**
      * @param int $domainId
      * @param string $slug
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
      */
     public function findByDomainIdAndSlug($domainId, $slug)
     {
@@ -46,7 +46,7 @@ class FriendlyUrlRepository
      * @param int $domainId
      * @param string $routeName
      * @param int $entityId
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl
      */
     public function getMainFriendlyUrl($domainId, $routeName, $entityId)
     {
@@ -59,7 +59,7 @@ class FriendlyUrlRepository
         $friendlyUrl = $this->getFriendlyUrlRepository()->findOneBy($criteria);
 
         if ($friendlyUrl === null) {
-            throw new \Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlNotFoundException();
+            throw new \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlNotFoundException();
         }
 
         return $friendlyUrl;
@@ -69,7 +69,7 @@ class FriendlyUrlRepository
      * @param int $domainId
      * @param string $routeName
      * @param int $entityId
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
      */
     public function findMainFriendlyUrl($domainId, $routeName, $entityId)
     {
@@ -86,7 +86,7 @@ class FriendlyUrlRepository
     /**
      * @param string $routeName
      * @param int $entityId
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
      */
     public function getAllByRouteNameAndEntityId($routeName, $entityId)
     {
@@ -108,7 +108,7 @@ class FriendlyUrlRepository
      * @param string $routeName
      * @param int $entityId
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
      */
     public function getAllByRouteNameAndEntityIdAndDomainId($routeName, $entityId, $domainId)
     {
@@ -125,7 +125,7 @@ class FriendlyUrlRepository
      * @param object[] $entities
      * @param string $routeName
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
      */
     public function getMainFriendlyUrlsByEntitiesIndexedByEntityId(array $entities, $routeName, $domainId)
     {

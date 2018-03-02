@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\Standard;
+namespace Shopsys\FrameworkBundle\Model\Feed\Standard;
 
 use Shopsys\ProductFeed\StandardFeedItemInterface;
 

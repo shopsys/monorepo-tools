@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Mail;
+namespace Shopsys\FrameworkBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusMailTemplateService;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository;
 
 class MailTemplateFacade
 {
@@ -16,27 +16,27 @@ class MailTemplateFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateRepository
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateRepository
      */
     private $mailTemplateRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository
      */
     private $orderStatusRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusMailTemplateService
      */
     private $orderStatusMailTemplateService;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain;
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain;
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade
      */
     private $uploadedFileFacade;
 
@@ -59,7 +59,7 @@ class MailTemplateFacade
     /**
      * @param string $templateName
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Mail\MailTemplate
+     * @return \Shopsys\FrameworkBundle\Model\Mail\MailTemplate
      */
     public function get($templateName, $domainId)
     {
@@ -68,7 +68,7 @@ class MailTemplateFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Mail\MailTemplate[]
+     * @return \Shopsys\FrameworkBundle\Model\Mail\MailTemplate[]
      */
     public function getOrderStatusMailTemplatesIndexedByOrderStatusId($domainId)
     {
@@ -82,7 +82,7 @@ class MailTemplateFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Mail\MailTemplateData[] $mailTemplatesData
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData[] $mailTemplatesData
      * @param int $domainId
      */
     public function saveMailTemplatesData(array $mailTemplatesData, $domainId)
@@ -101,7 +101,7 @@ class MailTemplateFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Mail\AllMailTemplatesData
+     * @return \Shopsys\FrameworkBundle\Model\Mail\AllMailTemplatesData
      */
     public function getAllMailTemplatesDataByDomainId($domainId)
     {
@@ -149,7 +149,7 @@ class MailTemplateFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate $mailTemplate
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplate $mailTemplate
      * @return string[]
      */
     public function getMailTemplateAttachmentsFilepaths(MailTemplate $mailTemplate)

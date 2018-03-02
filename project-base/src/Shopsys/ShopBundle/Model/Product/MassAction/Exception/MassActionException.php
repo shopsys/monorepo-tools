@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\MassAction\Exception;
+namespace Shopsys\FrameworkBundle\Model\Product\MassAction\Exception;
 
 interface MassActionException
 {

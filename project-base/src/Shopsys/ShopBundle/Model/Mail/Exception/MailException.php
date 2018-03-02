@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Mail\Exception;
+namespace Shopsys\FrameworkBundle\Model\Mail\Exception;
 
 interface MailException
 {

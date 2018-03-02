@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Exception;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Exception;
 
 use Exception;
 use InvalidArgumentException as BaseInvalidArgumentException;

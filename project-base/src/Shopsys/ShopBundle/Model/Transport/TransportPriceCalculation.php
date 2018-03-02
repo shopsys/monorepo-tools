@@ -1,27 +1,27 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport;
+namespace Shopsys\FrameworkBundle\Model\Transport;
 
-use Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
-use Shopsys\ShopBundle\Model\Pricing\Price;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 
 class TransportPriceCalculation
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation
      */
     private $basePriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     private $pricingSetting;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
-     * @param \Shopsys\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
      */
     public function __construct(
         BasePriceCalculation $basePriceCalculation,
@@ -32,11 +32,11 @@ class TransportPriceCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
     public function calculatePrice(
         Transport $transport,
@@ -52,9 +52,9 @@ class TransportPriceCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
     public function calculateIndependentPrice(
         Transport $transport,
@@ -68,7 +68,7 @@ class TransportPriceCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
      * @param int $domainId
      * @return bool
      */
@@ -84,11 +84,11 @@ class TransportPriceCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport[] $transports
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price[]
      */
     public function getCalculatedPricesIndexedByTransportId(
         array $transports,

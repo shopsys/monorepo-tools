@@ -2,15 +2,15 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
-use Shopsys\ShopBundle\Component\Image\Processing\ImageGeneratorFacade;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
+use Shopsys\FrameworkBundle\Component\Image\Processing\ImageGeneratorFacade;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ImageController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageGeneratorFacade
+     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageGeneratorFacade
      */
     private $imageGeneratorFacade;
 
@@ -27,7 +27,7 @@ class ImageController extends FrontBaseController
 
         try {
             $imageFilepath = $this->imageGeneratorFacade->generateImageAndGetFilepath($entityName, $imageId, $type, $sizeName);
-        } catch (\Shopsys\ShopBundle\Component\Image\Exception\ImageException $e) {
+        } catch (\Shopsys\FrameworkBundle\Component\Image\Exception\ImageException $e) {
             $message = 'Generate image for entity "' . $entityName
                 . '" (type=' . $type . ', size=' . $sizeName . ', imageId=' . $imageId . ') failed.';
             throw $this->createNotFoundException($message, $e);

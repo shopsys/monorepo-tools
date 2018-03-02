@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Component\HttpFoundation;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\HttpFoundation\SubRequestListener;
+use Shopsys\FrameworkBundle\Component\HttpFoundation\SubRequestListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -66,7 +66,7 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase
         $subRequestListener->onKernelResponse($eventMock1);
         $subRequestListener->onKernelResponse($eventMock2);
 
-        $this->expectException(\Shopsys\ShopBundle\Component\HttpFoundation\Exception\TooManyRedirectResponsesException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Component\HttpFoundation\Exception\TooManyRedirectResponsesException::class);
         $subRequestListener->onKernelResponse($eventMock3);
     }
 

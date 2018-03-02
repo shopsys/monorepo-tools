@@ -1,26 +1,26 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Filter;
+namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Availability\Availability;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductFilterRepository
 {
     const DAYS_FOR_STOCK_FILTER = 0;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
      */
     private $queryBuilderService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterRepository
      */
     private $parameterFilterRepository;
 
@@ -34,8 +34,8 @@ class ProductFilterRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      */
     public function applyFiltering(
         QueryBuilder $productsQueryBuilder,
@@ -70,7 +70,7 @@ class ProductFilterRepository
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
      * @param string $minimalPrice
      * @param string $maximalPrice
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      */
     private function filterByPrice(
         QueryBuilder $productsQueryBuilder,
@@ -118,7 +118,7 @@ class ProductFilterRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\Flag[] $flags
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[] $flags
      */
     private function filterByFlags(QueryBuilder $productsQueryBuilder, array $flags)
     {
@@ -135,7 +135,7 @@ class ProductFilterRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand[] $brands
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[] $brands
      */
     private function filterByBrands(QueryBuilder $productsQueryBuilder, array $brands)
     {
@@ -151,7 +151,7 @@ class ProductFilterRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\Flag[] $flags
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[] $flags
      * @param \Doctrine\ORM\EntityManager $em
      * @return \Doctrine\ORM\QueryBuilder
      */
@@ -170,7 +170,7 @@ class ProductFilterRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand[] $brands
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[] $brands
      * @param \Doctrine\ORM\EntityManager $em
      * @return \Doctrine\ORM\QueryBuilder
      */

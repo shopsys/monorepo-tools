@@ -1,36 +1,36 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Form\Admin\BestsellingProduct\BestsellingProductFormType;
-use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Form\Admin\BestsellingProduct\BestsellingProductFormType;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class BestsellingProductController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade
      */
     private $manualBestsellingProductFacade;
 
@@ -58,7 +58,7 @@ class BestsellingProductController extends AdminBaseController
 
         $bestsellingProductsInCategories = $this->manualBestsellingProductFacade->getCountsIndexedByCategoryId($domainId);
 
-        return $this->render('@ShopsysShop/Admin/Content/BestsellingProduct/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/BestsellingProduct/list.html.twig', [
             'categoryDetails' => $categoryDetails,
             'selectedDomainId' => $domainId,
             'bestsellingProductsInCategories' => $bestsellingProductsInCategories,
@@ -106,7 +106,7 @@ class BestsellingProductController extends AdminBaseController
 
         $this->breadcrumb->overrideLastItem(new MenuItem($category->getName()));
 
-        return $this->render('@ShopsysShop/Admin/Content/BestsellingProduct/detail.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/BestsellingProduct/detail.html.twig', [
             'form' => $form->createView(),
             'categoryName' => $category->getName(),
         ]);

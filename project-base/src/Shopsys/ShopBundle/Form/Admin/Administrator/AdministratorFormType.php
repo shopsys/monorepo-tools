@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Administrator;
+namespace Shopsys\FrameworkBundle\Form\Admin\Administrator;
 
-use Shopsys\ShopBundle\Component\Constraints\Email;
-use Shopsys\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
+use Shopsys\FrameworkBundle\Component\Constraints\Email;
+use Shopsys\FrameworkBundle\Component\Constraints\FieldsAreNotIdentical;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

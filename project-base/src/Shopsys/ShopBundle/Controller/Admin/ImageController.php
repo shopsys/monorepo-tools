@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 
 class ImageController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
     private $imageFacade;
 
@@ -25,7 +25,7 @@ class ImageController extends AdminBaseController
     {
         $imageEntityConfigs = $this->imageFacade->getAllImageEntityConfigsByClass();
 
-        return $this->render('@ShopsysShop/Admin/Content/Image/overview.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Image/overview.html.twig', [
             'imageEntityConfigs' => $imageEntityConfigs,
         ]);
     }

@@ -1,42 +1,42 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Preview;
+namespace Shopsys\FrameworkBundle\Model\Order\Preview;
 
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Order\OrderPriceCalculation;
-use Shopsys\ShopBundle\Model\Payment\Payment;
-use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
-use Shopsys\ShopBundle\Model\Pricing\Price;
-use Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation;
-use Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
-use Shopsys\ShopBundle\Model\Transport\Transport;
-use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 
 class OrderPreviewCalculation
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation
      */
     private $quantifiedProductPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation
      */
     private $quantifiedProductDiscountCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
      */
     private $transportPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
      */
     private $paymentPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation
      */
     private $orderPriceCalculation;
 
@@ -55,14 +55,14 @@ class OrderPreviewCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[] $quantifiedProducts
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport|null $transport
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment|null $payment
-     * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct[] $quantifiedProducts
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport|null $transport
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment|null $payment
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
      * @param float|null $promoCodeDiscountPercent
-     * @return \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview
+     * @return \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function calculatePreview(
@@ -139,12 +139,12 @@ class OrderPreviewCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $transportPrice
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $paymentPrice
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price|null
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $transportPrice
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $paymentPrice
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price|null
      */
     private function calculateRoundingPrice(
         Payment $payment,
@@ -164,11 +164,11 @@ class OrderPreviewCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $transportPrice
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $paymentPrice
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $roundingPrice
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productsPrice
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $transportPrice
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $paymentPrice
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price|null $roundingPrice
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
     private function calculateTotalPrice(
         Price $productsPrice,
@@ -196,9 +196,9 @@ class OrderPreviewCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[] $quantifiedItemsPrices
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price[] $quantifiedItemsDiscounts
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice[] $quantifiedItemsPrices
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price[] $quantifiedItemsDiscounts
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
     private function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts)
     {
@@ -210,7 +210,7 @@ class OrderPreviewCalculation
 
         foreach ($quantifiedItemsDiscounts as $discount) {
             if ($discount !== null) {
-                /* @var $discount \Shopsys\ShopBundle\Model\Pricing\Price */
+                /* @var $discount \Shopsys\FrameworkBundle\Model\Pricing\Price */
                 $finalPrice = $finalPrice->subtract($discount);
             }
         }

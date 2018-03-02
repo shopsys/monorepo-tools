@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Flag;
+namespace Shopsys\FrameworkBundle\Model\Product\Flag;
 
 class FlagData
 {
@@ -32,7 +32,7 @@ class FlagData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\Flag $flag
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag $flag
      */
     public function setFromEntity(Flag $flag)
     {

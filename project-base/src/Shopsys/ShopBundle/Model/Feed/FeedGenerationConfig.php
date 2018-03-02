@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed;
+namespace Shopsys\FrameworkBundle\Model\Feed;
 
 class FeedGenerationConfig
 {
@@ -56,7 +56,7 @@ class FeedGenerationConfig
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig $feedGenerationConfig
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedGenerationConfig $feedGenerationConfig
      * @return bool
      */
     public function isSameFeedAndDomain(self $feedGenerationConfig)

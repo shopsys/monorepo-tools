@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter;
+namespace Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface

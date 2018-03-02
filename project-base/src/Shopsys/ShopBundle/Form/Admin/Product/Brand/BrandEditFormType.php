@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Product\Brand;
+namespace Shopsys\FrameworkBundle\Form\Admin\Product\Brand;
 
 use Shopsys\FormTypesBundle\MultidomainType;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandEditData;
-use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditData;
+use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -17,12 +17,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class BrandEditFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade
      */
     private $seoSettingFacade;
 
@@ -104,7 +104,7 @@ class BrandEditFormType extends AbstractType
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand|null $brand
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand|null $brand
      * @return string
      */
     private function getTitlePlaceholder(Brand $brand = null)

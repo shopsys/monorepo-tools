@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Pricing\Group;
+namespace Shopsys\FrameworkBundle\Form\Admin\Pricing\Group;
 
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

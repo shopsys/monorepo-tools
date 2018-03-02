@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport;
+namespace Shopsys\FrameworkBundle\Model\Transport;
 
-use Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
+use Shopsys\FrameworkBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
 
 class TransportVisibilityCalculation
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation
      */
     private $independentTransportVisibilityCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Payment\IndependentPaymentVisibilityCalculation
      */
     private $independentPaymentVisibilityCalculation;
 
@@ -25,8 +25,8 @@ class TransportVisibilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $allPaymentsOnDomain
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $allPaymentsOnDomain
      * @param int $domainId
      * @return bool
      */
@@ -40,8 +40,8 @@ class TransportVisibilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $payments
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @param int $domainId
      * @return bool
      */
@@ -59,10 +59,10 @@ class TransportVisibilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $visiblePaymentsOnDomain
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport[] $transports
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $visiblePaymentsOnDomain
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport[]
      */
     public function filterVisible(array $transports, array $visiblePaymentsOnDomain, $domainId)
     {

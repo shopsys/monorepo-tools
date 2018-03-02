@@ -1,33 +1,33 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Mail;
+namespace Shopsys\FrameworkBundle\Model\Order\Mail;
 
-use Shopsys\ShopBundle\Model\Mail\MailerService;
-use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
-use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Model\Mail\MailerService;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
+use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 
 class OrderMailFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailerService
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailerService
      */
     private $mailer;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
      */
     private $mailTemplateFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Mail\OrderMailService
+     * @var \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService
      */
     private $orderMailService;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Mail\MailerService $mailer
-     * @param \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
-     * @param \Shopsys\ShopBundle\Model\Order\Mail\OrderMailService $orderMailService
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailer
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService $orderMailService
      */
     public function __construct(
         MailerService $mailer,
@@ -40,7 +40,7 @@ class OrderMailFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      */
     public function sendEmail(Order $order)
     {
@@ -50,9 +50,9 @@ class OrderMailFacade
         $this->mailer->send($messageData);
     }
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus $orderStatus
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Mail\MailTemplate
+     * @return \Shopsys\FrameworkBundle\Model\Mail\MailTemplate
      */
     public function getMailTemplateByStatusAndDomainId(OrderStatus $orderStatus, $domainId)
     {

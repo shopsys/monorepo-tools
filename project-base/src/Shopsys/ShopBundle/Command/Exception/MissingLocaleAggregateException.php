@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command\Exception;
+namespace Shopsys\FrameworkBundle\Command\Exception;
 
 use Exception;
 
 class MissingLocaleAggregateException extends Exception
 {
     /**
-     * @param \Shopsys\ShopBundle\Command\Exception\MissingLocaleException[] $missingLocaleExceptions
+     * @param \Shopsys\FrameworkBundle\Command\Exception\MissingLocaleException[] $missingLocaleExceptions
      */
     public function __construct(array $missingLocaleExceptions)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport;
+namespace Shopsys\FrameworkBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -11,10 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
 class TransportDomain
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Transport
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Transport\Transport")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport")
      * @ORM\JoinColumn(nullable=false)
      */
     private $transport;
@@ -28,7 +28,7 @@ class TransportDomain
     private $domainId;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @param int $domainId
      */
     public function __construct(Transport $transport, $domainId)

@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Security;
+namespace Shopsys\FrameworkBundle\Model\Security;
 
 use DateTime;
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\String\HashGenerator;
-use Shopsys\ShopBundle\Model\Administrator\Administrator;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorRepository;
+use Shopsys\FrameworkBundle\Component\String\HashGenerator;
+use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -30,12 +30,12 @@ class AdministratorLoginFacade
     private $eventDispatcher;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorRepository
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository
      */
     private $administratorRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\String\HashGenerator
+     * @var \Shopsys\FrameworkBundle\Component\String\HashGenerator
      */
     private $hashGenerator;
 
@@ -59,7 +59,7 @@ class AdministratorLoginFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      * @return string
      */
     public function generateMultidomainLoginTokenWithExpiration(Administrator $administrator)

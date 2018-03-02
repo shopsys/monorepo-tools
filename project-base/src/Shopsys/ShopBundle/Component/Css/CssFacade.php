@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Css;
+namespace Shopsys\FrameworkBundle\Component\Css;
 
 class CssFacade
 {
@@ -29,7 +29,7 @@ class CssFacade
     {
         if (!file_exists($this->cssVersionFilepath)) {
             $message = 'File with css version not found in ' . $this->cssVersionFilepath;
-            throw new \Shopsys\ShopBundle\Component\Css\Exception\CssVersionFileNotFound($message);
+            throw new \Shopsys\FrameworkBundle\Component\Css\Exception\CssVersionFileNotFound($message);
         }
 
         return file_get_contents($this->cssVersionFilepath);

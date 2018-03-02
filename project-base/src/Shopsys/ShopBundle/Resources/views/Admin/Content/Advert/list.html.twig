@@ -1,4 +1,4 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Advertising system'|trans }}{% endblock %}
 {% block h1 %}{{ 'Advertising system'|trans }}{% endblock %}
@@ -10,6 +10,6 @@
 {% endblock %}
 
 {% block main_content %}
-    {{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
+    {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
     {{ gridView.render() }}
 {% endblock %}

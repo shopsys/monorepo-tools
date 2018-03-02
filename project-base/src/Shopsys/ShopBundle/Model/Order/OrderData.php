@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order;
+namespace Shopsys\FrameworkBundle\Model\Order;
 
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
-use Shopsys\ShopBundle\Model\Order\Item\OrderPaymentData;
-use Shopsys\ShopBundle\Model\Order\Item\OrderTransportData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportData;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
@@ -14,12 +14,12 @@ class OrderData
     const NEW_ITEM_PREFIX = 'new_';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Transport
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport
      */
     public $transport;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Payment
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
     public $payment;
 
@@ -29,7 +29,7 @@ class OrderData
     public $orderNumber;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus
      */
     public $status;
 
@@ -84,7 +84,7 @@ class OrderData
     public $postcode;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\Country
+     * @var \Shopsys\FrameworkBundle\Model\Country\Country
      */
     public $country;
 
@@ -129,7 +129,7 @@ class OrderData
     public $deliveryPostcode;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\Country
+     * @var \Shopsys\FrameworkBundle\Model\Country\Country
      */
     public $deliveryCountry;
 
@@ -139,7 +139,7 @@ class OrderData
     public $note;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemData[]
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData[]
      */
     public $itemsWithoutTransportAndPayment;
 
@@ -154,12 +154,12 @@ class OrderData
     public $domainId;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     public $currency;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\Administrator|null
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\Administrator|null
      */
     public $createdAsAdministrator;
 
@@ -169,17 +169,17 @@ class OrderData
     public $createdAsAdministratorName;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\OrderPaymentData
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentData
      */
     public $orderPayment;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\OrderTransportData
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportData
      */
     public $orderTransport;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      */
     public function setFromEntity(Order $order)
     {
@@ -227,7 +227,7 @@ class OrderData
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Item\OrderItemData[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData[]
      */
     public function getNewItemsWithoutTransportAndPayment()
     {

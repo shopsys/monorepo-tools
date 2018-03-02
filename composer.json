@@ -35,6 +35,9 @@
       ],
       "Shopsys\\ProductFeed\\HeurekaDeliveryBundle\\": [
         "packages/product-feed-heureka-delivery/src/"
+      ],
+      "Shopsys\\FrameworkBundle\\": [
+        "packages/framework/src/"
       ]
     },
     "classmap": [
@@ -44,8 +47,8 @@
       "project-base/app/Environment.php"
     ],
     "files": [
-      "project-base/src/Shopsys/ShopBundle/Component/Translation/functions.php",
-      "project-base/src/Shopsys/ShopBundle/Component/VarDumper/functions.php"
+      "packages/framework/src/Component/Translation/functions.php",
+      "packages/framework/src/Component/VarDumper/functions.php"
     ]
   },
   "autoload-dev": {
@@ -72,6 +75,10 @@
     {
       "type": "vcs",
       "url": "https://github.com/shopsys/doctrine-translatable-bundle.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/shopsys/framework.git"
     },
     {
       "type": "vcs",
@@ -193,6 +200,7 @@
     "shopsys/product-feed-zbozi": "self.version",
     "shopsys/product-feed-heureka": "self.version",
     "shopsys/product-feed-heureka-delivery": "self.version",
-    "shopsys/product-feed-interface": "self.version"
+    "shopsys/product-feed-interface": "self.version",
+    "shopsys/framework": "self.version"
   }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Translation;
+namespace Shopsys\FrameworkBundle\Component\Translation;
 
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\File\TwigFileExtractor as OriginalTwigFileExtractor;
@@ -27,7 +27,7 @@ class TwigFileExtractor implements FileVisitorInterface
     /**
      * We want to extract messages from custom Twig translation filters "transHtml" and "transchoiceHtml"
      * but original \JMS\TranslationBundle\Translation\Extractor\File\TwigFileExtractor is not open for that type of extension
-     * so we need to inject our \Shopsys\ShopBundle\Component\Translation\CustomTransFiltersVisitor using ReflectionObject
+     * so we need to inject our \Shopsys\FrameworkBundle\Component\Translation\CustomTransFiltersVisitor using ReflectionObject
      */
     private function injectCustomVisitor()
     {

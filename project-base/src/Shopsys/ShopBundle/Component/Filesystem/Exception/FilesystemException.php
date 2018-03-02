@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Filesystem\Exception;
+namespace Shopsys\FrameworkBundle\Component\Filesystem\Exception;
 
 interface FilesystemException
 {

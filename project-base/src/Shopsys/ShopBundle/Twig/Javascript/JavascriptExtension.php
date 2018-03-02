@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig\Javascript;
+namespace Shopsys\FrameworkBundle\Twig\Javascript;
 
-use Shopsys\ShopBundle\Component\Utils;
+use Shopsys\FrameworkBundle\Component\Utils;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class JavascriptExtension extends Twig_Extension
 {
     /**
-     * @var \Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService
+     * @var \Shopsys\FrameworkBundle\Twig\Javascript\JavascriptCompilerService
      */
     private $javascriptCompilerService;
 

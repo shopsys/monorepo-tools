@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form;
+namespace Shopsys\FrameworkBundle\Form;
 
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CategoryCheckboxType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
     private $categoryFacade;
 

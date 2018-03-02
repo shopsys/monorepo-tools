@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\DependencyInjection\Compiler;
+namespace Shopsys\FrameworkBundle\DependencyInjection\Compiler;
 
-use Shopsys\ShopBundle\Component\Cron\Config\CronConfig;
+use Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;

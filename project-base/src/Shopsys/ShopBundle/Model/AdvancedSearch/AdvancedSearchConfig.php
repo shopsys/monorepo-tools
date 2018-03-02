@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdvancedSearch;
+namespace Shopsys\FrameworkBundle\Model\AdvancedSearch;
 
 class AdvancedSearchConfig
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface[]
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface[]
      */
     private $filters;
 
@@ -15,20 +15,20 @@ class AdvancedSearchConfig
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $filter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $filter
      */
     public function registerFilter(AdvancedSearchFilterInterface $filter)
     {
         if (array_key_exists($filter->getName(), $this->filters)) {
             $message = 'Filter "' . $filter->getName() . '" already exists.';
-            throw new \Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchFilterAlreadyExistsException($message);
+            throw new \Shopsys\FrameworkBundle\Model\AdvancedSearch\Exception\AdvancedSearchFilterAlreadyExistsException($message);
         }
 
         $this->filters[$filter->getName()] = $filter;
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface[]
+     * @return \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface[]
      */
     public function getAllFilters()
     {
@@ -37,13 +37,13 @@ class AdvancedSearchConfig
 
     /**
      * @param string $filterName
-     * @return \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface
+     * @return \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface
      */
     public function getFilter($filterName)
     {
         if (!array_key_exists($filterName, $this->filters)) {
             $message = 'Filter "' . $filterName . '" not found.';
-            throw new \Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchFilterNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Model\AdvancedSearch\Exception\AdvancedSearchFilterNotFoundException($message);
         }
 
         return $this->filters[$filterName];

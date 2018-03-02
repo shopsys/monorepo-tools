@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Cart\Item;
+namespace Shopsys\FrameworkBundle\Model\Cart\Item;
 
+use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
-use Shopsys\ShopBundle\Model\Cart\CartFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class DeleteOldCartsCronModule implements SimpleCronModuleInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Cart\CartFacade
+     * @var \Shopsys\FrameworkBundle\Model\Cart\CartFacade
      */
     private $cartFacade;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\UploadedFile;
+namespace Shopsys\FrameworkBundle\Component\UploadedFile;
 
 use Doctrine\ORM\EntityManager;
 
@@ -27,7 +27,7 @@ class UploadedFileRepository
     /**
      * @param string $entityName
      * @param int $entityId
-     * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile|null
+     * @return \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile|null
      */
     public function findUploadedFileByEntity($entityName, $entityId)
     {
@@ -40,14 +40,14 @@ class UploadedFileRepository
     /**
      * @param string $entityName
      * @param int $entityId
-     * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
+     * @return \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile
      */
     public function getUploadedFileByEntity($entityName, $entityId)
     {
         $uploadedFile = $this->findUploadedFileByEntity($entityName, $entityId);
         if ($uploadedFile === null) {
             $message = 'UploadedFile not found for entity "' . $entityName . '" with ID ' . $entityId;
-            throw new \Shopsys\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Component\UploadedFile\Exception\FileNotFoundException($message);
         }
 
         return $uploadedFile;
@@ -55,7 +55,7 @@ class UploadedFileRepository
 
     /**
      * @param int $uploadedFileId
-     * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
+     * @return \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile
      */
     public function getById($uploadedFileId)
     {
@@ -63,7 +63,7 @@ class UploadedFileRepository
 
         if ($uploadedFile === null) {
             $message = 'UploadedFile with ID ' . $uploadedFileId . ' does not exist.';
-            throw new \Shopsys\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Component\UploadedFile\Exception\FileNotFoundException($message);
         }
 
         return $uploadedFile;

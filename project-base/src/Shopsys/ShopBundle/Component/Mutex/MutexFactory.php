@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Mutex;
+namespace Shopsys\FrameworkBundle\Component\Mutex;
 
 use NinjaMutex\Lock\LockInterface;
 use NinjaMutex\Mutex;

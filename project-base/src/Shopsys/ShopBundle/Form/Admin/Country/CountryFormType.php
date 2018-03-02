@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Country;
+namespace Shopsys\FrameworkBundle\Form\Admin\Country;
 
-use Shopsys\ShopBundle\Model\Country\CountryData;
+use Shopsys\FrameworkBundle\Model\Country\CountryData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;

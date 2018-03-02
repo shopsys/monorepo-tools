@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 
 /**
  * @ORM\Table(name="product_domains")
@@ -12,10 +12,10 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 class ProductDomain
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
      * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $product;
@@ -76,7 +76,7 @@ class ProductDomain
     private $seoH1;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $domainId
      */
     public function __construct(Product $product, $domainId)
@@ -142,7 +142,7 @@ class ProductDomain
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @return string
      */
     public function getSeoTitleForHtml(Domain $domain)
@@ -188,7 +188,7 @@ class ProductDomain
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getProduct()
     {

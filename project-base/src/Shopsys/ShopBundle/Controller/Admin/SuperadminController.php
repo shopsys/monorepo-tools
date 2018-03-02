@@ -1,56 +1,56 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Grid\ArrayDataSource;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory;
-use Shopsys\ShopBundle\Form\Admin\Module\ModulesFormType;
-use Shopsys\ShopBundle\Form\Admin\Superadmin\InputPriceTypeFormType;
-use Shopsys\ShopBundle\Model\Localization\Localization;
-use Shopsys\ShopBundle\Model\Module\ModuleFacade;
-use Shopsys\ShopBundle\Model\Module\ModuleList;
-use Shopsys\ShopBundle\Model\Pricing\DelayedPricingSetting;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Grid\ArrayDataSource;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Router\LocalizedRouterFactory;
+use Shopsys\FrameworkBundle\Form\Admin\Module\ModulesFormType;
+use Shopsys\FrameworkBundle\Form\Admin\Superadmin\InputPriceTypeFormType;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Module\ModuleFacade;
+use Shopsys\FrameworkBundle\Model\Module\ModuleList;
+use Shopsys\FrameworkBundle\Model\Pricing\DelayedPricingSetting;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RequestContext;
 
 class SuperadminController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Module\ModuleList
+     * @var \Shopsys\FrameworkBundle\Model\Module\ModuleList
      */
     private $moduleList;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Module\ModuleFacade
+     * @var \Shopsys\FrameworkBundle\Model\Module\ModuleFacade
      */
     private $moduleFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\LocalizedRouterFactory
      */
     private $localizedRouterFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     private $pricingSetting;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\DelayedPricingSetting
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\DelayedPricingSetting
      */
     private $delayedPricingSetting;
 
@@ -77,7 +77,7 @@ class SuperadminController extends AdminBaseController
      */
     public function errorsAction()
     {
-        return $this->render('@ShopsysShop/Admin/Content/Superadmin/errors.html.twig');
+        return $this->render('@ShopsysFramework/Admin/Content/Superadmin/errors.html.twig');
     }
 
     /**
@@ -102,7 +102,7 @@ class SuperadminController extends AdminBaseController
             return $this->redirectToRoute('admin_superadmin_pricing');
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Superadmin/pricing.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Superadmin/pricing.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -121,7 +121,7 @@ class SuperadminController extends AdminBaseController
             $grid->addColumn($locale, $locale, $this->localization->getLanguageName($locale));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Superadmin/urlsListGrid.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Superadmin/urlsListGrid.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -172,7 +172,7 @@ class SuperadminController extends AdminBaseController
             return $this->redirectToRoute('admin_superadmin_modules');
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Superadmin/modules.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Superadmin/modules.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -182,6 +182,6 @@ class SuperadminController extends AdminBaseController
      */
     public function cssDocumentationAction()
     {
-        return $this->render('@ShopsysShop/Admin/Content/Superadmin/cssDocumentation.html.twig');
+        return $this->render('@ShopsysFramework/Admin/Content/Superadmin/cssDocumentation.html.twig');
     }
 }

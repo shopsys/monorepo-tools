@@ -1,33 +1,33 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer\Mail;
+namespace Shopsys\FrameworkBundle\Model\Customer\Mail;
 
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Mail\MailerService;
-use Shopsys\ShopBundle\Model\Mail\MailTemplate;
-use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Mail\MailerService;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
 
 class CustomerMailFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailerService
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailerService
      */
     private $mailer;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
      */
     private $mailTemplateFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\Mail\RegistrationMailService
+     * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMailService
      */
     private $registrationMailService;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Mail\MailerService $mailer
-     * @param \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
-     * @param \Shopsys\ShopBundle\Model\Customer\Mail\RegistrationMailService $registrationMailService
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailer
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
+     * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMailService $registrationMailService
      */
     public function __construct(
         MailerService $mailer,
@@ -40,7 +40,7 @@ class CustomerMailFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      */
     public function sendRegistrationMail(User $user)
     {

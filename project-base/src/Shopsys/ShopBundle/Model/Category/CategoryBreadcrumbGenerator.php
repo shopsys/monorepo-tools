@@ -1,20 +1,20 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Category;
+namespace Shopsys\FrameworkBundle\Model\Category;
 
-use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
-use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
+use Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbItem;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 
 class CategoryBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
     private $categoryRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 

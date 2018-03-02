@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\UploadedFile\Exception;
+namespace Shopsys\FrameworkBundle\Component\UploadedFile\Exception;
 
 interface FileException
 {

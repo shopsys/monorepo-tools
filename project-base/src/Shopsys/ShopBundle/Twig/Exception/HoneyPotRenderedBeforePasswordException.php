@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig\Exception;
+namespace Shopsys\FrameworkBundle\Twig\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Form\HoneyPotType;
-use Shopsys\ShopBundle\Twig\HoneyPotExtension;
+use Shopsys\FrameworkBundle\Form\HoneyPotType;
+use Shopsys\FrameworkBundle\Twig\HoneyPotExtension;
 use Twig_Error;
 
 class HoneyPotRenderedBeforePasswordException extends Twig_Error implements TwigException

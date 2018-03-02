@@ -2,20 +2,20 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Sitemap\SitemapService;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Sitemap\SitemapService;
 use Symfony\Component\HttpFoundation\Response;
 
 class RobotsController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Sitemap\SitemapService
+     * @var \Shopsys\FrameworkBundle\Component\Sitemap\SitemapService
      */
     private $sitemapService;
 
@@ -38,7 +38,7 @@ class RobotsController extends FrontBaseController
         $response->headers->set('Content-Type', 'text/plain');
 
         return $this->render(
-            '@ShopsysShop/Common/robots.txt.twig',
+            '@ShopsysFramework/Common/robots.txt.twig',
             [
                 'sitemapUrl' => $sitemapUrl,
             ],

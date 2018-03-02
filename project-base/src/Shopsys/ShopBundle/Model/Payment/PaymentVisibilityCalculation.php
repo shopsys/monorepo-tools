@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment;
+namespace Shopsys\FrameworkBundle\Model\Payment;
 
-use Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation;
+use Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation;
 
 class PaymentVisibilityCalculation
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Payment\IndependentPaymentVisibilityCalculation
      */
     private $independentPaymentVisibilityCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation
      */
     private $independentTransportVisibilityCalculation;
 
@@ -25,9 +25,9 @@ class PaymentVisibilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $payments
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment[]
      */
     public function filterVisible(array $payments, $domainId)
     {
@@ -42,7 +42,7 @@ class PaymentVisibilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param int $domainId
      * @return bool
      */
@@ -56,14 +56,14 @@ class PaymentVisibilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param int $domainId
      * @return bool
      */
     private function hasIndependentlyVisibleTransport(Payment $payment, $domainId)
     {
         foreach ($payment->getTransports() as $transport) {
-            /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
+            /* @var $transport \Shopsys\FrameworkBundle\Model\Transport\Transport */
             if ($this->independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId)) {
                 return true;
             }

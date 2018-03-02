@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Unit;
+namespace Shopsys\FrameworkBundle\Model\Product\Unit;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
 
 class UnitGridFactory implements GridFactoryInterface
 {
@@ -17,12 +17,12 @@ class UnitGridFactory implements GridFactoryInterface
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
@@ -37,7 +37,7 @@ class UnitGridFactory implements GridFactoryInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     public function create()
     {
@@ -58,7 +58,7 @@ class UnitGridFactory implements GridFactoryInterface
         $grid->addDeleteActionColumn('admin_unit_deleteconfirm', ['id' => 'u.id'])
             ->setAjaxConfirm();
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Unit/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Unit/listGrid.html.twig');
 
         return $grid;
     }

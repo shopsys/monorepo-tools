@@ -1,17 +1,17 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order;
+namespace Shopsys\FrameworkBundle\Model\Order;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
-use Shopsys\ShopBundle\Model\Order\Item\OrderPayment;
-use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
-use Shopsys\ShopBundle\Model\Order\Item\OrderTransport;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
-use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
 /**
  * @ORM\Table(name="orders")
@@ -37,9 +37,9 @@ class Order
     private $number;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\User|null
+     * @var \Shopsys\FrameworkBundle\Model\Customer\User|null
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Customer\User")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\User")
      * @ORM\JoinColumn(nullable=true, name="customer_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $customer;
@@ -52,33 +52,33 @@ class Order
     private $createdAt;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItem[]
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
      *
-     * @ORM\OneToMany(targetEntity="Shopsys\ShopBundle\Model\Order\Item\OrderItem", mappedBy="order", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Order\Item\OrderItem", mappedBy="order", orphanRemoval=true)
      * @ORM\OrderBy({"id" = "ASC"})
      */
     private $items;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Transport
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Transport\Transport")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport")
      * @ORM\JoinColumn(nullable=false)
      */
     private $transport;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Payment
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Payment\Payment")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Payment\Payment")
      * @ORM\JoinColumn(nullable=false)
      */
     private $payment;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Order\Status\OrderStatus")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus")
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
@@ -175,8 +175,8 @@ class Order
     private $postcode;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\Country
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Country\Country")
+     * @var \Shopsys\FrameworkBundle\Model\Country\Country
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Country\Country")
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=false)
      */
     private $country;
@@ -238,8 +238,8 @@ class Order
     private $deliveryPostcode;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\Country|null
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Country\Country")
+     * @var \Shopsys\FrameworkBundle\Model\Country\Country|null
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Country\Country")
      * @ORM\JoinColumn(name="delivery_country_id", referencedColumnName="id", nullable=true)
      */
     private $deliveryCountry;
@@ -273,17 +273,17 @@ class Order
     private $urlHash;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Currency\Currency")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency")
      * @ORM\JoinColumn(nullable=false)
      */
     private $currency;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\Administrator|null
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\Administrator|null
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Administrator\Administrator")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Administrator\Administrator")
      * @ORM\JoinColumn(nullable=true, name="administrator_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $createdAsAdministrator;
@@ -296,10 +296,10 @@ class Order
     private $createdAsAdministratorName;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      * @param string $orderNumber
      * @param string $urlHash
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      */
     public function __construct(
         OrderData $orderData,
@@ -342,7 +342,7 @@ class Order
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      */
     public function edit(OrderData $orderData)
     {
@@ -369,7 +369,7 @@ class Order
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      */
     private function editOrderTransport(OrderData $orderData)
     {
@@ -379,7 +379,7 @@ class Order
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      */
     private function editOrderPayment(OrderData $orderData)
     {
@@ -389,7 +389,7 @@ class Order
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      */
     private function setDeliveryAddress(OrderData $orderData)
     {
@@ -416,7 +416,7 @@ class Order
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $item
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $item
      */
     public function addItem(OrderItem $item)
     {
@@ -426,7 +426,7 @@ class Order
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $item
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $item
      */
     public function removeItem(OrderItem $item)
     {
@@ -440,7 +440,7 @@ class Order
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $status
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus $status
      */
     public function setStatus(OrderStatus $status)
     {
@@ -468,7 +468,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
     public function getPayment()
     {
@@ -484,7 +484,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Item\OrderPayment
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment
      */
     public function getOrderPayment()
     {
@@ -496,7 +496,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
      */
     public function getTransport()
     {
@@ -512,7 +512,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Item\OrderTransport
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport
      */
     public function getOrderTransport()
     {
@@ -524,7 +524,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus
      */
     public function getStatus()
     {
@@ -564,7 +564,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     public function getCurrency()
     {
@@ -572,7 +572,7 @@ class Order
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\OrderTotalPrice $orderTotalPrice
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderTotalPrice $orderTotalPrice
      */
     public function setTotalPrice(OrderTotalPrice $orderTotalPrice)
     {
@@ -611,7 +611,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Customer\User|null
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User|null
      */
     public function getCustomer()
     {
@@ -627,7 +627,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Item\OrderItem[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
      */
     public function getItems()
     {
@@ -635,7 +635,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Item\OrderItem[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
      */
     public function getItemsWithoutTransportAndPayment()
     {
@@ -650,7 +650,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Item\OrderItem[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
      */
     private function getTransportAndPaymentItems()
     {
@@ -665,7 +665,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
     public function getTransportAndPaymentPrice()
     {
@@ -682,7 +682,7 @@ class Order
 
     /**
      * @param int $orderItemId
-     * @return \Shopsys\ShopBundle\Model\Order\Item\OrderItem
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem
      */
     public function getItemById($orderItemId)
     {
@@ -691,7 +691,7 @@ class Order
                 return $orderItem;
             }
         }
-        throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\OrderItemNotFoundException(['id' => $orderItemId]);
+        throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\OrderItemNotFoundException(['id' => $orderItemId]);
     }
 
     /**
@@ -775,7 +775,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Country\Country
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country
      */
     public function getCountry()
     {
@@ -847,7 +847,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Country\Country|null
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country|null
      */
     public function getDeliveryCountry()
     {
@@ -887,7 +887,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct[]
      */
     public function getProductItems()
     {
@@ -902,7 +902,7 @@ class Order
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Administrator\Administrator|null
+     * @return \Shopsys\FrameworkBundle\Model\Administrator\Administrator|null
      */
     public function getCreatedAsAdministrator()
     {

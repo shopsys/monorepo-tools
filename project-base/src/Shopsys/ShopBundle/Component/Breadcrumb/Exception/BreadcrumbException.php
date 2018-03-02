@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Breadcrumb\Exception;
+namespace Shopsys\FrameworkBundle\Component\Breadcrumb\Exception;
 
 interface BreadcrumbException
 {

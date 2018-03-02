@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Cart;
+namespace Shopsys\FrameworkBundle\Model\Cart;
 
-use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 
 class Cart
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Cart\Item\CartItem[]
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]
      */
     private $cartItems;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Cart\Item\CartItem[] $cartItems
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[] $cartItems
      */
     public function __construct(array $cartItems)
     {
@@ -20,7 +20,7 @@ class Cart
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Cart\Item\CartItem $item
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem $item
      */
     public function addItem(CartItem $item)
     {
@@ -39,7 +39,7 @@ class Cart
             }
         }
         $message = 'Cart item with ID = ' . $cartItemId . ' is not in cart for remove.';
-        throw new \Shopsys\ShopBundle\Model\Cart\Exception\InvalidCartItemException($message);
+        throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidCartItemException($message);
     }
 
     public function clean()
@@ -48,7 +48,7 @@ class Cart
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Cart\Item\CartItem[]
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]
      */
     public function getItems()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Item;
+namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 class OrderItemData
 {
@@ -40,7 +40,7 @@ class OrderItemData
     public $catnum;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $orderItem
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
      */
     public function setFromEntity(OrderItem $orderItem)
     {

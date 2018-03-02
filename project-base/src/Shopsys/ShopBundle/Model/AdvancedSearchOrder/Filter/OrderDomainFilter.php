@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter;
+namespace Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Form\DomainType;
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\FrameworkBundle\Form\DomainType;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class OrderDomainFilter implements AdvancedSearchFilterInterface
 {

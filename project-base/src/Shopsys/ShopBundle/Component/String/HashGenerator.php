@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\String;
+namespace Shopsys\FrameworkBundle\Component\String;
 
 class HashGenerator
 {

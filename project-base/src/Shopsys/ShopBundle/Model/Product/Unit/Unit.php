@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Unit;
+namespace Shopsys\FrameworkBundle\Model\Product\Unit;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 
 /**
  * @ORM\Table(name="units")
@@ -23,14 +23,14 @@ class Unit extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitTranslation[]
      *
-     * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Product\Unit\UnitTranslation")
+     * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Product\Unit\UnitTranslation")
      */
     protected $translations;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData $unitData
      */
     public function __construct(UnitData $unitData)
     {
@@ -56,7 +56,7 @@ class Unit extends AbstractTranslatableEntity
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData $unitData
      */
     private function setTranslations(UnitData $unitData)
     {
@@ -66,7 +66,7 @@ class Unit extends AbstractTranslatableEntity
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\UnitTranslation
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\UnitTranslation
      */
     protected function createTranslation()
     {
@@ -74,7 +74,7 @@ class Unit extends AbstractTranslatableEntity
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData $unitData
      */
     public function edit(UnitData $unitData)
     {

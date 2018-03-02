@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
+namespace Shopsys\FrameworkBundle\Model\Product\BestsellingProduct;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Category\Category;
 
 class ManualBestsellingProductFacade
 {
@@ -13,12 +13,12 @@ class ManualBestsellingProductFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository
      */
     private $manualBestsellingProductRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
      */
     private $cachedBestsellingProductFacade;
 
@@ -33,9 +33,9 @@ class ManualBestsellingProductFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $productsIndexedByPosition
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $productsIndexedByPosition
      */
     public function edit(Category $category, $domainId, array $productsIndexedByPosition)
     {
@@ -56,9 +56,9 @@ class ManualBestsellingProductFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function getProductsIndexedByPosition($category, $domainId)
     {

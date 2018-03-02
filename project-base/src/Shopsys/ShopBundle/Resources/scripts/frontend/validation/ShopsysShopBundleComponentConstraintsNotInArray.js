@@ -1,6 +1,6 @@
 (function ($) {
 
-    ShopsysShopBundleComponentConstraintsNotInArray = function () {
+    ShopsysFrameworkBundleComponentConstraintsNotInArray = function () {
         var self = this;
         this.message = '';
         this.array = [];

@@ -2,12 +2,12 @@
 
 namespace Shopsys\ShopBundle;
 
-use Shopsys\ShopBundle\Component\Translation\Translator;
-use Shopsys\ShopBundle\DependencyInjection\Compiler\RegisterCronModulesCompilerPass;
-use Shopsys\ShopBundle\DependencyInjection\Compiler\RegisterPluginCrudExtensionsCompilerPass;
-use Shopsys\ShopBundle\DependencyInjection\Compiler\RegisterPluginDataFixturesCompilerPass;
-use Shopsys\ShopBundle\DependencyInjection\Compiler\RegisterProductFeedConfigsCompilerPass;
-use Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
+use Shopsys\FrameworkBundle\Component\Translation\Translator;
+use Shopsys\FrameworkBundle\DependencyInjection\Compiler\RegisterCronModulesCompilerPass;
+use Shopsys\FrameworkBundle\DependencyInjection\Compiler\RegisterPluginCrudExtensionsCompilerPass;
+use Shopsys\FrameworkBundle\DependencyInjection\Compiler\RegisterPluginDataFixturesCompilerPass;
+use Shopsys\FrameworkBundle\DependencyInjection\Compiler\RegisterProductFeedConfigsCompilerPass;
+use Shopsys\FrameworkBundle\Model\Security\Filesystem\FilemanagerAccess;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

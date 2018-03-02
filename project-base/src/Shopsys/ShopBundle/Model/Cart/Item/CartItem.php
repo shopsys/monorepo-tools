@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Cart\Item;
+namespace Shopsys\FrameworkBundle\Model\Cart\Item;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(name="cart_items")
@@ -30,17 +30,17 @@ class CartItem
     private $cartIdentifier;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\User|null
+     * @var \Shopsys\FrameworkBundle\Model\Customer\User|null
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Customer\User")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable = true, onDelete="CASCADE")
      */
     private $user;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product|null
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product|null
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
      * @ORM\JoinColumn(nullable=true, name="product_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $product;
@@ -67,8 +67,8 @@ class CartItem
     private $addedAt;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $quantity
      * @param string $watchedPrice
      */
@@ -92,7 +92,7 @@ class CartItem
     public function changeQuantity($newQuantity)
     {
         if (filter_var($newQuantity, FILTER_VALIDATE_INT) === false || $newQuantity <= 0) {
-            throw new \Shopsys\ShopBundle\Model\Cart\Exception\InvalidQuantityException($newQuantity);
+            throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException($newQuantity);
         }
 
         $this->quantity = $newQuantity;
@@ -107,12 +107,12 @@ class CartItem
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getProduct()
     {
         if ($this->product === null) {
-            throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException();
+            throw new \Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException();
         }
 
         return $this->product;
@@ -152,7 +152,7 @@ class CartItem
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Cart\Item\CartItem $cartItem
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem $cartItem
      * @return bool
      */
     public function isSimilarItemAs(self $cartItem)

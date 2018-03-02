@@ -1,24 +1,24 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Form\Admin\CustomerCommunication\CustomerCommunicationFormType;
-use Shopsys\ShopBundle\Model\Order\OrderFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Form\Admin\CustomerCommunication\CustomerCommunicationFormType;
+use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class CustomerCommunicationController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
@@ -50,7 +50,7 @@ class CustomerCommunicationController extends AdminBaseController
             return $this->redirectToRoute('admin_customercommunication_ordersubmitted');
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/CustomerCommunication/orderSubmitted.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/CustomerCommunication/orderSubmitted.html.twig', [
             'form' => $form->createView(),
             'VARIABLE_TRANSPORT_INSTRUCTIONS' => OrderFacade::VARIABLE_TRANSPORT_INSTRUCTIONS,
             'VARIABLE_PAYMENT_INSTRUCTIONS' => OrderFacade::VARIABLE_PAYMENT_INSTRUCTIONS,

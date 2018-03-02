@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Grid\InlineEdit;
+namespace Shopsys\FrameworkBundle\Component\Grid\InlineEdit;
 
-use Shopsys\ShopBundle\Component\Grid\Grid;
+use Shopsys\FrameworkBundle\Component\Grid\Grid;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,7 +57,7 @@ class InlineEditService
     {
         $gridInlineEdit = $this->getInlineEditService($serviceName);
         $grid = $gridInlineEdit->getGrid();
-        /* @var $grid \Shopsys\ShopBundle\Component\Grid\Grid */
+        /* @var $grid \Shopsys\FrameworkBundle\Component\Grid\Grid */
 
         $gridView = $grid->createViewWithOneRow($rowId);
         $rows = $grid->getRows();
@@ -71,7 +71,7 @@ class InlineEditService
 
     /**
      * @param string $serviceName
-     * @return \Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface
+     * @return \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface
      */
     private function getInlineEditService($serviceName)
     {
@@ -80,12 +80,12 @@ class InlineEditService
         if ($gridInlineEdit instanceof GridInlineEditInterface) {
             return $gridInlineEdit;
         } else {
-            throw new \Shopsys\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidServiceException($serviceName);
+            throw new \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\Exception\InvalidServiceException($serviceName);
         }
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface $gridInlineEditService
+     * @param \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface $gridInlineEditService
      * @param mixed $rowId
      * @param \Symfony\Component\Form\Form $form
      * @return string
@@ -103,7 +103,7 @@ class InlineEditService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Grid\Grid $grid
+     * @param \Shopsys\FrameworkBundle\Component\Grid\Grid $grid
      * @param \Symfony\Component\Form\Form $form
      * @return array
      */

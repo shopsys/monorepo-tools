@@ -1,19 +1,19 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Performance;
+namespace Shopsys\FrameworkBundle\DataFixtures\Performance;
 
 use Faker\Generator as Faker;
-use Shopsys\ShopBundle\Component\Console\ProgressBarFactory;
-use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
-use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
-use Shopsys\ShopBundle\Model\Customer\CustomerData;
-use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
-use Shopsys\ShopBundle\Model\Customer\DeliveryAddressData;
-use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
+use Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory;
+use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\CountryDataFixture;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
+use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class UserDataFixture
@@ -26,27 +26,27 @@ class UserDataFixture
     private $userCountPerDomain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
      */
     private $entityManagerFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade
      */
     private $sqlLoggerFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade
      */
     private $customerEditFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\UserDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory
      */
     private $userDataFactory;
 
@@ -56,25 +56,25 @@ class UserDataFixture
     private $faker;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade
+     * @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade
      */
     private $persistentReferenceFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Console\ProgressBarFactory
+     * @var \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory
      */
     private $progressBarFactory;
 
     /**
      * @param int $userCountPerDomain
-     * @param \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerFacade $customerEditFacade
-     * @param \Shopsys\ShopBundle\Model\Customer\UserDataFactory $userDataFactory
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerEditFacade
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory $userDataFactory
      * @param \Faker\Generator $faker
-     * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
-     * @param \Shopsys\ShopBundle\Component\Console\ProgressBarFactory $progressBarFactory
+     * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
      */
     public function __construct(
         $userCountPerDomain,
@@ -131,7 +131,7 @@ class UserDataFixture
     /**
      * @param int $domainId
      * @param int $userNumber
-     * @return \Shopsys\ShopBundle\Model\Customer\User
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
     private function createCustomerOnDomain($domainId, $userNumber)
     {
@@ -143,7 +143,7 @@ class UserDataFixture
     /**
      * @param int $domainId
      * @param int $userNumber
-     * @return \Shopsys\ShopBundle\Model\Customer\CustomerData
+     * @return \Shopsys\FrameworkBundle\Model\Customer\CustomerData
      */
     private function getRandomCustomerDataByDomainId($domainId, $userNumber)
     {

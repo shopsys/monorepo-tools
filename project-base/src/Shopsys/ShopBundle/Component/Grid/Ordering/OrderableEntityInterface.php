@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Grid\Ordering;
+namespace Shopsys\FrameworkBundle\Component\Grid\Ordering;
 
 interface OrderableEntityInterface
 {

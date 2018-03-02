@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Unit\Model\Product\Parameter;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterService;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterService;
 
 class ParameterServiceTest extends PHPUnit_Framework_TestCase
 {

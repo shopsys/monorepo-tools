@@ -1,6 +1,6 @@
-{% import '@ShopsysShop/Admin/Content/Order/orderItem.html.twig' as orderItemMacro %}
+{% import '@ShopsysFramework/Admin/Content/Order/orderItem.html.twig' as orderItemMacro %}
 
-{% form_theme form '@ShopsysShop/Admin/Form/theme.html.twig' %}
+{% form_theme form '@ShopsysFramework/Admin/Form/theme.html.twig' %}
 {{ orderItemMacro.orderItem(
     form.itemsWithoutTransportAndPayment[orderItem.id],
     orderItem.id,

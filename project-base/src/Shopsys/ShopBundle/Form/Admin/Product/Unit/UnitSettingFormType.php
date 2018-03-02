@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Product\Unit;
+namespace Shopsys\FrameworkBundle\Form\Admin\Product\Unit;
 
-use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
+use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints;
 class UnitSettingFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
      */
     private $unitFacade;
 

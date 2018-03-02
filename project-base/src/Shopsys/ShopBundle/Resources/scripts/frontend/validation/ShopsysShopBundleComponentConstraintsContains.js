@@ -1,6 +1,6 @@
 (function ($) {
 
-    ShopsysShopBundleComponentConstraintsContains = function () {
+    ShopsysFrameworkBundleComponentConstraintsContains = function () {
         var self = this;
         this.message = '';
         this.needle = null;

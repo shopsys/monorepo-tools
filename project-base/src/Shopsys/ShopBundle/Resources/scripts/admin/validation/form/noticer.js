@@ -19,13 +19,13 @@
 
         $advertForm.jsFormValidator({
             'groups': function () {
-                var groups = [Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\ValidationGroup::VALIDATION_GROUP_DEFAULT')];
+                var groups = [Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\ValidationGroup::VALIDATION_GROUP_DEFAULT')];
 
                 var checkedType = getCheckedType();
-                if (checkedType === Shopsys.constant('\\Shopsys\\ShopBundle\\Model\\Advert\\Advert::TYPE_CODE')) {
-                    groups.push(Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\Admin\\Advert\\AdvertFormType::VALIDATION_GROUP_TYPE_CODE'));
-                } else if (checkedType === Shopsys.constant('\\Shopsys\\ShopBundle\\Model\\Advert\\Advert::TYPE_IMAGE')) {
-                    groups.push(Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\Admin\\Advert\\AdvertFormType::VALIDATION_GROUP_TYPE_IMAGE'));
+                if (checkedType === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Model\\Advert\\Advert::TYPE_CODE')) {
+                    groups.push(Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\Admin\\Advert\\AdvertFormType::VALIDATION_GROUP_TYPE_CODE'));
+                } else if (checkedType === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Model\\Advert\\Advert::TYPE_IMAGE')) {
+                    groups.push(Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\Admin\\Advert\\AdvertFormType::VALIDATION_GROUP_TYPE_IMAGE'));
                 }
 
                 return groups;

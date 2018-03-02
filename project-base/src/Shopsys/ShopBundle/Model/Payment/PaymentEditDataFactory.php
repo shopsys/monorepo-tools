@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment;
+namespace Shopsys\FrameworkBundle\Model\Payment;
 
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 
 class PaymentEditDataFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
      */
     private $paymentFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
     private $vatFacade;
 
@@ -25,7 +25,7 @@ class PaymentEditDataFactory
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Payment\PaymentEditData
+     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentEditData
      */
     public function createDefault()
     {
@@ -36,8 +36,8 @@ class PaymentEditDataFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @return \Shopsys\ShopBundle\Model\Payment\PaymentEditData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentEditData
      */
     public function createFromPayment(Payment $payment)
     {

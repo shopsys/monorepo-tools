@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Administrator\Activity;
+namespace Shopsys\FrameworkBundle\Model\Administrator\Activity;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Administrator\Administrator;
+use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
 
 class AdministratorActivityFacade
 {
@@ -13,7 +13,7 @@ class AdministratorActivityFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityRepository
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityRepository
      */
     private $administratorActivityRepository;
 
@@ -26,9 +26,9 @@ class AdministratorActivityFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      * @param string $ipAddress
-     * @return \Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivity
+     * @return \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivity
      */
     public function create(
         Administrator $administrator,
@@ -46,7 +46,7 @@ class AdministratorActivityFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      */
     public function updateCurrentActivityLastActionTime(Administrator $administrator)
     {
@@ -56,9 +56,9 @@ class AdministratorActivityFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      * @param int $maxResults
-     * @return \Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivity[]
+     * @return \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivity[]
      */
     public function getLastAdministratorActivities(Administrator $administrator, $maxResults)
     {

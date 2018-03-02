@@ -1,36 +1,36 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Grid\ArrayDataSource;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
-use Shopsys\ShopBundle\Model\Feed\FeedFacade;
-use Shopsys\ShopBundle\Model\Security\Roles;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Grid\ArrayDataSource;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade;
+use Shopsys\FrameworkBundle\Model\Feed\FeedFacade;
+use Shopsys\FrameworkBundle\Model\Security\Roles;
 
 class FeedController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedFacade
+     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedFacade
      */
     private $feedFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigFacade
+     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade
      */
     private $feedConfigFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
@@ -64,7 +64,7 @@ class FeedController extends AdminBaseController
                     'feedName' => $feedName,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Feed\Exception\FeedConfigNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Feed\Exception\FeedConfigNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlashTwig(
                 t('Feed "{{ feedName }}" not found.'),
                 [
@@ -110,9 +110,9 @@ class FeedController extends AdminBaseController
             $grid->addColumn('actions', 'actions', t('Action'))->setClassAttribute('column--superadmin');
         }
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Feed/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Feed/listGrid.html.twig');
 
-        return $this->render('@ShopsysShop/Admin/Content/Feed/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Feed/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }

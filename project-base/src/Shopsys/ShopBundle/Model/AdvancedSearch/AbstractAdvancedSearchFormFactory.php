@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdvancedSearch;
+namespace Shopsys\FrameworkBundle\Model\AdvancedSearch;
 
-use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation;
-use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
+use Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation;
+use Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -11,12 +11,12 @@ use Symfony\Component\Form\FormFactoryInterface;
 abstract class AbstractAdvancedSearchFormFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchConfig
      */
     private $advancedSearchConfig;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation
+     * @var \Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation
      */
     private $advancedSearchFilterTranslation;
 
@@ -26,7 +26,7 @@ abstract class AbstractAdvancedSearchFormFactory
     private $formFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation
+     * @var \Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation
      */
     private $advancedSearchOperatorTranslation;
 
@@ -69,7 +69,7 @@ abstract class AbstractAdvancedSearchFormFactory
 
     /**
      * @param string $name
-     * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $ruleFilter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $ruleFilter
      * @return \Symfony\Component\Form\FormBuilderInterface
      */
     private function createRuleFormBuilder($name, AdvancedSearchFilterInterface $ruleFilter)
@@ -93,7 +93,7 @@ abstract class AbstractAdvancedSearchFormFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $filter
+     * @param \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $filter
      * @return string[]
      */
     private function getFilterOperatorChoices(AdvancedSearchFilterInterface $filter)

@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Component\HttpFoundation;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\HttpFoundation\FragmentHandler;
+use Shopsys\FrameworkBundle\Component\HttpFoundation\FragmentHandler;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

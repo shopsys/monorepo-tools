@@ -1,4 +1,4 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Articles overview'|trans }}{% endblock %}
 {% block h1 %}{{ 'Articles overview'|trans }}{% endblock %}
@@ -12,7 +12,7 @@
 {% block main_content %}
 
     <div class="js-multiple-grids-rows-unified">
-        {{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
+        {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
         {% if articlesCountOnSelectedDomain > 0 %}
             <h2>{{ 'Articles in upper menu'|trans }}</h2>
@@ -24,7 +24,7 @@
             <h2>{{ 'Articles without positioning'|trans }}</h2>
             {{ gridViewNone.render() }}
 
-            {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+            {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
                 {% block fixed_bar_content %}
                     <button class="js-multiple-grids-save-all-button btn btn--disabled" data-drag-and-drop-url-save-ordering="{{ url('admin_article_saveordering') }}" type="button">{{ 'Save changes in order'|trans }}</button>
                 {% endblock %}

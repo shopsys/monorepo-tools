@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Seo;
+namespace Shopsys\FrameworkBundle\Model\Seo;
 
-use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
 class SeoSettingFacade
 {
@@ -11,7 +11,7 @@ class SeoSettingFacade
     const SEO_META_DESCRIPTION_MAIN_PAGE = 'seoMetaDescriptionMainPage';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
@@ -39,7 +39,7 @@ class SeoSettingFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
      * @return string[]
      */
     public function getDescriptionsMainPageIndexedByDomainIds(array $domainConfigs)

@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Domain;
+namespace Shopsys\FrameworkBundle\Form\Admin\Domain;
 
-use Shopsys\ShopBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\FileUploadType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

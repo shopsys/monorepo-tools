@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport;
+namespace Shopsys\FrameworkBundle\Model\Transport;
 
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 
 class TransportEditDataFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
      */
     private $transportFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
     private $vatFacade;
 
@@ -25,7 +25,7 @@ class TransportEditDataFactory
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Transport\TransportEditData
+     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportEditData
      */
     public function createDefault()
     {
@@ -36,8 +36,8 @@ class TransportEditDataFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @return \Shopsys\ShopBundle\Model\Transport\TransportEditData
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportEditData
      */
     public function createFromTransport(Transport $transport)
     {

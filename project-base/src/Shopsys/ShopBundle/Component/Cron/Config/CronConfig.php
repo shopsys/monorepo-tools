@@ -1,21 +1,21 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Cron\Config;
+namespace Shopsys\FrameworkBundle\Component\Cron\Config;
 
 use DateTimeInterface;
+use Shopsys\FrameworkBundle\Component\Cron\CronTimeResolver;
 use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
 use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
-use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
 
 class CronConfig
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Cron\CronTimeResolver
+     * @var \Shopsys\FrameworkBundle\Component\Cron\CronTimeResolver
      */
     private $cronTimeResolver;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+     * @var \Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig[]
      */
     private $cronModuleConfigs;
 
@@ -34,7 +34,7 @@ class CronConfig
     public function registerCronModule($service, $serviceId, $timeHours, $timeMinutes)
     {
         if (!$service instanceof SimpleCronModuleInterface && !$service instanceof IteratedCronModuleInterface) {
-            throw new \Shopsys\ShopBundle\Component\Cron\Exception\InvalidCronModuleException($serviceId);
+            throw new \Shopsys\FrameworkBundle\Component\Cron\Exception\InvalidCronModuleException($serviceId);
         }
         $this->cronTimeResolver->validateTimeString($timeHours, 23, 1);
         $this->cronTimeResolver->validateTimeString($timeMinutes, 55, 5);
@@ -43,7 +43,7 @@ class CronConfig
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+     * @return \Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig[]
      */
     public function getAllCronModuleConfigs()
     {
@@ -52,7 +52,7 @@ class CronConfig
 
     /**
      * @param \DateTimeInterface $roundedTime
-     * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+     * @return \Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig[]
      */
     public function getCronModuleConfigsByTime(DateTimeInterface $roundedTime)
     {
@@ -69,7 +69,7 @@ class CronConfig
 
     /**
      * @param string $serviceId
-     * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig
+     * @return \Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig
      */
     public function getCronModuleConfigByServiceId($serviceId)
     {
@@ -79,6 +79,6 @@ class CronConfig
             }
         }
 
-        throw new \Shopsys\ShopBundle\Component\Cron\Config\Exception\CronModuleConfigNotFoundException($serviceId);
+        throw new \Shopsys\FrameworkBundle\Component\Cron\Config\Exception\CronModuleConfigNotFoundException($serviceId);
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,12 +19,12 @@ class ServerRunForDomainCommand extends Command
     protected static $defaultName = 'shopsys:server:run';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(Domain $domain)
     {
@@ -63,14 +63,14 @@ class ServerRunForDomainCommand extends Command
 
     /**
      * @param \Symfony\Component\Console\Style\SymfonyStyle $io
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     private function chooseDomainConfig(SymfonyStyle $io)
     {
         $domainConfigs = $this->domain->getAll();
 
         if (count($domainConfigs) === 0) {
-            throw new \Shopsys\ShopBundle\Command\Exception\NoDomainSetCommandException();
+            throw new \Shopsys\FrameworkBundle\Command\Exception\NoDomainSetCommandException();
         }
 
         $firstDomainConfig = reset($domainConfigs);
@@ -96,7 +96,7 @@ class ServerRunForDomainCommand extends Command
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @return int
      */

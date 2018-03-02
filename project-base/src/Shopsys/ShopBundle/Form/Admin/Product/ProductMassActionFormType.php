@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Product;
+namespace Shopsys\FrameworkBundle\Form\Admin\Product;
 
-use Shopsys\ShopBundle\Model\Product\MassAction\ProductMassActionData;
+use Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

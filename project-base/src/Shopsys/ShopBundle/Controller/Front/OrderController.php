@@ -2,27 +2,27 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\HttpFoundation\DownloadFileResponse;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\HttpFoundation\DownloadFileResponse;
+use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade;
+use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade;
+use Shopsys\FrameworkBundle\Model\Order\FrontOrderData;
+use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade;
+use Shopsys\FrameworkBundle\Model\Order\OrderData;
+use Shopsys\FrameworkBundle\Model\Order\OrderDataMapper;
+use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
+use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
+use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
+use Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory;
-use Shopsys\ShopBundle\Model\Cart\CartFacade;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade;
-use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
-use Shopsys\ShopBundle\Model\Order\FrontOrderData;
-use Shopsys\ShopBundle\Model\Order\Mail\OrderMailFacade;
-use Shopsys\ShopBundle\Model\Order\OrderData;
-use Shopsys\ShopBundle\Model\Order\OrderDataMapper;
-use Shopsys\ShopBundle\Model\Order\OrderFacade;
-use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
-use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
-use Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
-use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
-use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,62 +38,62 @@ class OrderController extends FrontBaseController
     private $domainAwareOrderFlowFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Cart\CartFacade
+     * @var \Shopsys\FrameworkBundle\Model\Cart\CartFacade
      */
     private $cartFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Mail\OrderMailFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade
      */
     private $orderMailFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderDataMapper
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderDataMapper
      */
     private $orderDataMapper;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade
      */
     private $orderFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory
+     * @var \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory
      */
     private $orderPreviewFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
+     * @var \Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
      */
     private $transportAndPaymentWatcherService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
      */
     private $paymentFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
      */
     private $paymentPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
     private $currencyFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
      */
     private $transportFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
      */
     private $transportPriceCalculation;
 
@@ -103,12 +103,12 @@ class OrderController extends FrontBaseController
     private $session;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade
+     * @var \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade
      */
     private $legalConditionsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade
+     * @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade
      */
     private $newsletterFacade;
 
@@ -154,7 +154,7 @@ class OrderController extends FrontBaseController
     public function indexAction()
     {
         $flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.front');
-        /* @var $flashMessageBag \Shopsys\ShopBundle\Component\FlashMessage\Bag */
+        /* @var $flashMessageBag \Shopsys\FrameworkBundle\Component\FlashMessage\Bag */
 
         $cart = $this->cartFacade->getCartOfCurrentCustomer();
         if ($cart->isEmpty()) {
@@ -210,7 +210,7 @@ class OrderController extends FrontBaseController
 
                 try {
                     $this->sendMail($order);
-                } catch (\Shopsys\ShopBundle\Model\Mail\Exception\MailException $e) {
+                } catch (\Shopsys\FrameworkBundle\Model\Mail\Exception\MailException $e) {
                     $this->getFlashMessageSender()->addErrorFlash(
                         t('Unable to send some e-mails, please contact us for order verification.')
                     );
@@ -277,10 +277,10 @@ class OrderController extends FrontBaseController
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport[] $transports
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $payments
      */
     private function checkTransportAndPaymentChanges(
         OrderData $orderData,
@@ -364,7 +364,7 @@ class OrderController extends FrontBaseController
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      */
     private function sendMail($order)
     {

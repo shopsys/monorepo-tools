@@ -1,19 +1,19 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\UploadedFile;
+namespace Shopsys\FrameworkBundle\Component\UploadedFile;
 
-use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
+use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreator
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig
      */
     private $uploadedFileConfig;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileLocator
      */
     private $uploadedFileLocator;
 

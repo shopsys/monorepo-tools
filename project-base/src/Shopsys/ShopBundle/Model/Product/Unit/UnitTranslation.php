@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Unit;
+namespace Shopsys\FrameworkBundle\Model\Product\Unit;
 
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
@@ -13,7 +13,7 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
 class UnitTranslation extends AbstractTranslation
 {
     /**
-     * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Product\Unit\Unit")
+     * @Prezent\Translatable(targetEntity="Shopsys\FrameworkBundle\Model\Product\Unit\Unit")
      */
     protected $translatable;
 

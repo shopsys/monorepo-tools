@@ -5,6 +5,7 @@
     <property name="path.vendor" value="./vendor"/>
     <property name="path.packages" value="./packages"/>
     <property name="path.bin-console" value="./project-base/bin/console"/>
+    <property name="path.framework" value="${path.packages}/framework"/>
 
     <import file="project-base/build-dev.xml" />
     <import file="project-base/build.xml" />
@@ -70,6 +71,24 @@
             <arg value="${path.phpmd.ruleset}" />
             <arg value="--extensions=php" />
         </exec>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}" />
+            <arg value="lint:twig" />
+            <arg value="@ShopsysFrameworkBundle" />
+        </exec>
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}" />
+            <arg value="lint:yaml" />
+            <arg value="@ShopsysFrameworkBundle" />
+        </exec>
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color" />
+            <arg path="${path.framework}/src/Resources/scripts" />
+            <arg value="--config" />
+            <arg path="${path.framework}/.eslintrc.json" />
+            <arg value="--ignore-path" />
+            <arg path="${path.framework}/.eslintignore" />
+        </exec>
     </target>
 
     <target name="standards-fix-packages" description="Automatically fixes some coding standards violations in all packages.">
@@ -106,6 +125,28 @@
                 </exec>
             </catch>
         </trycatch>
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color" />
+            <arg value="--fix" />
+            <arg path="${path.framework}/src/Resources/scripts" />
+            <arg value="--config" />
+            <arg path="${path.framework}/.eslintrc.json" />
+            <arg value="--ignore-path" />
+            <arg path="${path.framework}/.eslintignore" />
+        </exec>
+    </target>
+
+    <target name="phpstan" description="Performs static analysis of PHP files using PHPStan on all packages.">
+        <exec executable="${path.phpstan.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="analyze"/>
+            <arg value="-c"/>
+            <arg path="./phpstan.neon"/>
+            <arg path="${path.src}"/>
+            <arg path="${path.tests}"/>
+            <arg path="./packages/*/src"/>
+            <arg path="./packages/*/tests"/>
+            <arg value="--level=0"/>
+        </exec>
     </target>
 
     <target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-smoke,tests-packages" description="Runs unit, database and smoke tests on a newly built test database and runs tests of all packages."/>

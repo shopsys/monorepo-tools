@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Statistics;
+namespace Shopsys\FrameworkBundle\Model\Statistics;
 
 use DateTime;
 use Doctrine\DBAL\Types\Type;
@@ -25,7 +25,7 @@ class StatisticsRepository
     /**
      * @param DateTime $start
      * @param DateTime $end
-     * @return \Shopsys\ShopBundle\Model\Statistics\ValueByDateTimeDataPoint[]
+     * @return \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPoint[]
      */
     public function getCustomersRegistrationsCountByDayBetweenTwoDateTimes(DateTime $start, DateTime $end)
     {
@@ -56,7 +56,7 @@ class StatisticsRepository
     /**
      * @param DateTime $start
      * @param DateTime $end
-     * @return \Shopsys\ShopBundle\Model\Statistics\ValueByDateTimeDataPoint[]
+     * @return \Shopsys\FrameworkBundle\Model\Statistics\ValueByDateTimeDataPoint[]
      */
     public function getNewOrdersCountByDayBetweenTwoDateTimes(DateTime $start, DateTime $end)
     {

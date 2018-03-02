@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Pricing\Group;
+namespace Shopsys\FrameworkBundle\Form\Admin\Pricing\Group;
 
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,12 +13,12 @@ use Symfony\Component\Validator\Constraints;
 class PricingGroupSettingsFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
     private $pricingGroupFacade;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
      */
     public function __construct(PricingGroupFacade $pricingGroupFacade)
     {

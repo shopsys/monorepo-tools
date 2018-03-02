@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed;
+namespace Shopsys\FrameworkBundle\Model\Feed;
 
 use Shopsys\ProductFeed\FeedConfigInterface;
 
@@ -56,7 +56,7 @@ class FeedConfigRegistry
             }
         }
 
-        throw new \Shopsys\ShopBundle\Model\Feed\Exception\FeedConfigNotFoundException($feedName);
+        throw new \Shopsys\FrameworkBundle\Model\Feed\Exception\FeedConfigNotFoundException($feedName);
     }
 
     /**
@@ -78,7 +78,7 @@ class FeedConfigRegistry
     public static function assertTypeIsKnown($type)
     {
         if (!in_array($type, self::KNOWN_TYPES, true)) {
-            throw new \Shopsys\ShopBundle\Model\Feed\Exception\UnknownFeedConfigTypeException($type, self::KNOWN_TYPES);
+            throw new \Shopsys\FrameworkBundle\Model\Feed\Exception\UnknownFeedConfigTypeException($type, self::KNOWN_TYPES);
         }
     }
 }

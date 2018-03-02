@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Newsletter;
+namespace Shopsys\FrameworkBundle\Model\Newsletter;
 
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;

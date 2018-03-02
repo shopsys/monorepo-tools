@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Security;
+namespace Shopsys\FrameworkBundle\Model\Security;
 
-use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Customer\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -48,14 +48,14 @@ class LoginService
         }
 
         if ($error !== null) {
-            throw new \Shopsys\ShopBundle\Model\Security\Exception\LoginFailedException('Login failed.');
+            throw new \Shopsys\FrameworkBundle\Model\Security\Exception\LoginFailedException('Login failed.');
         }
 
         return true;
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function loginUser(User $user, Request $request)

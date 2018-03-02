@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Category\Detail;
+namespace Shopsys\FrameworkBundle\Model\Category\Detail;
 
 use Closure;
-use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Category\Category;
 
 class LazyLoadedCategoryDetail
 {
@@ -13,7 +13,7 @@ class LazyLoadedCategoryDetail
     private $lazyLoadChildrenCallback;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\Category
+     * @var \Shopsys\FrameworkBundle\Model\Category\Category
      */
     private $category;
 
@@ -23,13 +23,13 @@ class LazyLoadedCategoryDetail
     private $hasChildren;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]|null
+     * @var \Shopsys\FrameworkBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]|null
      */
     private $children;
 
     /**
      * @param \Closure $lazyLoadChildrenCallback
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param bool $hasChildren
      */
     public function __construct(
@@ -43,7 +43,7 @@ class LazyLoadedCategoryDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\Category
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category
      */
     public function getCategory()
     {
@@ -59,7 +59,7 @@ class LazyLoadedCategoryDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
      */
     public function getChildren()
     {

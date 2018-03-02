@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Administrator\Activity\Exception;
+namespace Shopsys\FrameworkBundle\Model\Administrator\Activity\Exception;
 
-use Shopsys\ShopBundle\Model\Administrator\Exception\AdministratorException;
+use Shopsys\FrameworkBundle\Model\Administrator\Exception\AdministratorException;
 
 interface AdministratorActivityException extends AdministratorException
 {

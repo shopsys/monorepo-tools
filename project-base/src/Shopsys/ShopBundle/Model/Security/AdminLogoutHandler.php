@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Security;
+namespace Shopsys\FrameworkBundle\Model\Security;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,13 +15,13 @@ class AdminLogoutHandler implements LogoutSuccessHandlerInterface
     private $router;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Security\AdministratorLoginFacade
+     * @var \Shopsys\FrameworkBundle\Model\Security\AdministratorLoginFacade
      */
     private $administratorLoginFacade;
 
     /**
      * @param \Symfony\Component\Routing\Router $router
-     * @param \Shopsys\ShopBundle\Model\Security\AdministratorLoginFacade
+     * @param \Shopsys\FrameworkBundle\Model\Security\AdministratorLoginFacade
      */
     public function __construct(Router $router, AdministratorLoginFacade $administratorLoginFacade)
     {

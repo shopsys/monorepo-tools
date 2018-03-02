@@ -1,27 +1,27 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
-use Shopsys\ShopBundle\Model\Statistics\StatisticsFacade;
-use Shopsys\ShopBundle\Model\Statistics\StatisticsProcessingFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
+use Shopsys\FrameworkBundle\Model\Statistics\StatisticsFacade;
+use Shopsys\FrameworkBundle\Model\Statistics\StatisticsProcessingFacade;
 
 class DefaultController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Statistics\StatisticsFacade
+     * @var \Shopsys\FrameworkBundle\Model\Statistics\StatisticsFacade
      */
     private $statisticsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Statistics\StatisticsProcessingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Statistics\StatisticsProcessingFacade
      */
     private $statisticsProcessingFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
      */
     private $mailTemplateFacade;
 
@@ -57,7 +57,7 @@ class DefaultController extends AdminBaseController
         }
 
         return $this->render(
-            '@ShopsysShop/Admin/Content/Default/index.html.twig',
+            '@ShopsysFramework/Admin/Content/Default/index.html.twig',
             [
                 'registeredInLastTwoWeeksLabels' => $registeredInLastTwoWeeksDates,
                 'registeredInLastTwoWeeksValues' => $registeredInLastTwoWeeksCounts,

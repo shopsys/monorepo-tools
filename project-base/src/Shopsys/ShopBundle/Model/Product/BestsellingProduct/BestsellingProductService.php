@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
+namespace Shopsys\FrameworkBundle\Model\Product\BestsellingProduct;
 
 class BestsellingProductService
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $manualProductsIndexedByPosition
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $automaticProducts
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $manualProductsIndexedByPosition
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $automaticProducts
      * @param int $maxResults
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function combineManualAndAutomaticProducts(
         array $manualProductsIndexedByPosition,
@@ -28,9 +28,9 @@ class BestsellingProductService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $automaticProducts
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $manualProducts
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $automaticProducts
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $manualProducts
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     private function getAutomaticProductsExcludingManual(
         array $automaticProducts,
@@ -47,10 +47,10 @@ class BestsellingProductService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $manualProductsIndexedByPosition
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $automaticProductsExcludingManual
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $manualProductsIndexedByPosition
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $automaticProductsExcludingManual
      * @param int $maxResults
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     private function getCombinedProducts(
         array $manualProductsIndexedByPosition,

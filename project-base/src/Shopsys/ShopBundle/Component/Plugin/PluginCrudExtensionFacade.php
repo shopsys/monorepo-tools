@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Plugin;
+namespace Shopsys\FrameworkBundle\Component\Plugin;
 
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 class PluginCrudExtensionFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionRegistry
+     * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionRegistry
      */
     private $pluginCrudExtensionRegistry;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
-use Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository;
-use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
-use Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator;
-use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
-use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
+use Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository;
+use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator;
+use Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator;
+use Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator;
+use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,42 +21,42 @@ class RecalculationsCommand extends Command
     protected static $defaultName = 'shopsys:recalculations';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository
      */
     private $categoryVisibilityRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator
      */
     private $productHiddenRecalculator;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator
      */
     private $productPriceRecalculator;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
     private $productVisibilityFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator
      */
     private $productAvailabilityRecalculator;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator
      */
     private $productSellingDeniedRecalculator;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository $categoryVisibilityRepository
-     * @param \Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator $productHiddenRecalculator
-     * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator $productPriceRecalculator
-     * @param \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator $productAvailabilityRecalculator
-     * @param \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator $productSellingDeniedRecalculator
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository $categoryVisibilityRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator $productHiddenRecalculator
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator $productPriceRecalculator
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator $productAvailabilityRecalculator
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator $productSellingDeniedRecalculator
      */
     public function __construct(
         CategoryVisibilityRepository $categoryVisibilityRepository,

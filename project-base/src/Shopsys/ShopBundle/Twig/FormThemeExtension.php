@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig;
+namespace Shopsys\FrameworkBundle\Twig;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig_SimpleFunction;
 
 class FormThemeExtension extends \Twig_Extension
 {
-    const ADMIN_THEME = '@ShopsysShop/Admin/Form/theme.html.twig';
+    const ADMIN_THEME = '@ShopsysFramework/Admin/Form/theme.html.twig';
     const FRONT_THEME = '@ShopsysShop/Front/Form/theme.html.twig';
 
     /**
@@ -39,7 +39,7 @@ class FormThemeExtension extends \Twig_Extension
     public function getDefaultFormTheme()
     {
         $masterRequest = $this->requestStack->getMasterRequest();
-        if (mb_stripos($masterRequest->get('_controller'), 'Shopsys\ShopBundle\Controller\Admin') === 0) {
+        if (mb_stripos($masterRequest->get('_controller'), 'Shopsys\FrameworkBundle\Controller\Admin') === 0) {
             return self::ADMIN_THEME;
         } else {
             return self::FRONT_THEME;

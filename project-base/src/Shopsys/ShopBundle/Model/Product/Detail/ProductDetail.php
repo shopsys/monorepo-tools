@@ -1,39 +1,39 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Detail;
+namespace Shopsys\FrameworkBundle\Model\Product\Detail;
 
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductDetail
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product
      */
     private $product;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
      */
     private $productDetailFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice|null
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice|null
      */
     private $sellingPrice;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductDomain[]|null
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]|null
      */
     private $productDomainsIndexedByDomainId;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue[]|null
      */
     private $parameters;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Image[]|null
+     * @var \Shopsys\FrameworkBundle\Component\Image\Image[]|null
      */
     private $imagesById;
 
@@ -43,12 +43,12 @@ class ProductDetail
     private $sellingPriceLoaded;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
-     * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
-     * @param \Shopsys\ShopBundle\Model\Product\ProductDomain[]|null $productDomainsIndexedByDomainId
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null $parameters
-     * @param \Shopsys\ShopBundle\Component\Image\Image[]|null $imagesById
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]|null $productDomainsIndexedByDomainId
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue[]|null $parameters
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image[]|null $imagesById
      */
     public function __construct(
         Product $product,
@@ -68,7 +68,7 @@ class ProductDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getProduct()
     {
@@ -76,7 +76,7 @@ class ProductDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice|null
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice|null
      */
     public function getSellingPrice()
     {
@@ -89,7 +89,7 @@ class ProductDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]
      */
     public function getProductDomainsIndexedByDomainId()
     {
@@ -101,7 +101,7 @@ class ProductDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue[]
      */
     public function getParameters()
     {
@@ -113,7 +113,7 @@ class ProductDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Image\Image[]
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
      */
     public function getImagesIndexedById()
     {

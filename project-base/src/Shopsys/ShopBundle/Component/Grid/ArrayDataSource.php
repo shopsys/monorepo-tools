@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Grid;
+namespace Shopsys\FrameworkBundle\Component\Grid;
 
-use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
+use Shopsys\FrameworkBundle\Component\Paginator\PaginationResult;
 
 class ArrayDataSource implements DataSourceInterface
 {
@@ -56,18 +56,18 @@ class ArrayDataSource implements DataSourceInterface
      * @param int $page
      * @param null $orderSourceColumnName
      * @param string $orderDirection
-     * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
     public function getPaginatedRows($limit = null, $page = 1, $orderSourceColumnName = null, $orderDirection = self::ORDER_ASC)
     {
         if ($limit !== null) {
             $message = 'Pagination not supported in ArrayDataSource';
-            throw new \Shopsys\ShopBundle\Component\Grid\Exception\PaginationNotSupportedException($message);
+            throw new \Shopsys\FrameworkBundle\Component\Grid\Exception\PaginationNotSupportedException($message);
         }
 
         if ($orderSourceColumnName !== null) {
             $message = 'Ordering not supported in ArrayDataSource';
-            throw new \Shopsys\ShopBundle\Component\Grid\Exception\OrderingNotSupportedException($message);
+            throw new \Shopsys\FrameworkBundle\Component\Grid\Exception\OrderingNotSupportedException($message);
         }
 
         return new PaginationResult(1, count($this->data), count($this->data), $this->data);

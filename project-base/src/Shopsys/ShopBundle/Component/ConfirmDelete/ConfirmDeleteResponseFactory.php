@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\ConfirmDelete;
+namespace Shopsys\FrameworkBundle\Component\ConfirmDelete;
 
-use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 
 class ConfirmDeleteResponseFactory
@@ -13,7 +13,7 @@ class ConfirmDeleteResponseFactory
     private $templating;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector
+     * @var \Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector
      */
     private $routeCsrfProtector;
 
@@ -33,7 +33,7 @@ class ConfirmDeleteResponseFactory
      */
     public function createDeleteResponse($message, $route, $entityId)
     {
-        return $this->templating->renderResponse('@ShopsysShop/Admin/Content/ConfirmDelete/directDelete.html.twig', [
+        return $this->templating->renderResponse('@ShopsysFramework/Admin/Content/ConfirmDelete/directDelete.html.twig', [
             'message' => $message,
             'route' => $route,
             'routeParams' => [
@@ -56,11 +56,11 @@ class ConfirmDeleteResponseFactory
             if (!is_object($object) || !method_exists($object, 'getName') || !method_exists($object, 'getId')) {
                 $message = 'All items in argument 4 passed to ' . __METHOD__ . ' must be objects with methods getId and getName.';
 
-                throw new \Shopsys\ShopBundle\Component\ConfirmDelete\Exception\InvalidEntityPassedException($message);
+                throw new \Shopsys\FrameworkBundle\Component\ConfirmDelete\Exception\InvalidEntityPassedException($message);
             }
         }
 
-        return $this->templating->renderResponse('@ShopsysShop/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig', [
+        return $this->templating->renderResponse('@ShopsysFramework/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig', [
             'message' => $message,
             'route' => $route,
             'entityId' => $entityId,

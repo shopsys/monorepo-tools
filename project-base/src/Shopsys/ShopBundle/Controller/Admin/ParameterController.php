@@ -1,22 +1,22 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterInlineEdit;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterInlineEdit;
 
 class ParameterController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade
      */
     private $parameterFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterInlineEdit
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterInlineEdit
      */
     private $parameterInlineEdit;
 
@@ -35,7 +35,7 @@ class ParameterController extends AdminBaseController
     {
         $grid = $this->parameterInlineEdit->getGrid();
 
-        return $this->render('@ShopsysShop/Admin/Content/Parameter/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Parameter/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -58,7 +58,7 @@ class ParameterController extends AdminBaseController
                     'name' => $fullName,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Product\Parameter\Exception\ParameterNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Product\Parameter\Exception\ParameterNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected parameter doesn\'t exist.'));
         }
 

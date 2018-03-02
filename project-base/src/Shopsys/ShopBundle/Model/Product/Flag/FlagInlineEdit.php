@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Flag;
+namespace Shopsys\FrameworkBundle\Model\Product\Flag;
 
-use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use Shopsys\ShopBundle\Form\Admin\Product\Flag\FlagFormType;
+use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\FrameworkBundle\Form\Admin\Product\Flag\FlagFormType;
 use Symfony\Component\Form\FormFactory;
 
 class FlagInlineEdit extends AbstractGridInlineEdit
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade
      */
     private $flagFacade;
 
@@ -29,7 +29,7 @@ class FlagInlineEdit extends AbstractGridInlineEdit
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagData $flagData
      * @return int
      */
     protected function createEntityAndGetId($flagData)
@@ -41,7 +41,7 @@ class FlagInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int $flagId
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagData $flagData
      */
     protected function editEntity($flagId, $flagData)
     {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Model\Article\Article;
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Model\Article\Article;
+use Shopsys\FrameworkBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class FriendlyUrlToGenerateRepository
 {
@@ -28,8 +28,8 @@ class FriendlyUrlToGenerateRepository
 
     /**
      * @param string $routeName
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
      */
     public function getArticleData($routeName, DomainConfig $domainConfig)
     {
@@ -47,8 +47,8 @@ class FriendlyUrlToGenerateRepository
 
     /**
      * @param string $routeName
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
      */
     public function getProductDetailData($routeName, DomainConfig $domainConfig)
     {
@@ -68,8 +68,8 @@ class FriendlyUrlToGenerateRepository
 
     /**
      * @param string $routeName
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
      */
     public function getProductListData($routeName, DomainConfig $domainConfig)
     {
@@ -89,7 +89,7 @@ class FriendlyUrlToGenerateRepository
 
     /**
      * @param string $routeName
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return array
      */
     public function getBrandDetailData($routeName, DomainConfig $domainConfig)
@@ -108,7 +108,7 @@ class FriendlyUrlToGenerateRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
      */
     private function createFriendlyUrlsData(QueryBuilder $queryBuilder)
     {

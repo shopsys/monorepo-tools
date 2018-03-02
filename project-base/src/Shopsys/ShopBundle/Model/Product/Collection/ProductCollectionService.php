@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Collection;
+namespace Shopsys\FrameworkBundle\Model\Product\Collection;
 
 class ProductCollectionService
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
-     * @param \Shopsys\ShopBundle\Component\Image\Image[] $imagesByProductId
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image[] $imagesByProductId
      * @return array
      */
     public function getImagesIndexedByProductId(array $products, array $imagesByProductId)

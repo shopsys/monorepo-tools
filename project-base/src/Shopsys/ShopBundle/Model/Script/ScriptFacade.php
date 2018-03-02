@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Script;
+namespace Shopsys\FrameworkBundle\Model\Script;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Model\Order\Order;
 
 class ScriptFacade
 {
@@ -17,19 +17,19 @@ class ScriptFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Script\ScriptRepository
+     * @var \Shopsys\FrameworkBundle\Model\Script\ScriptRepository
      */
     private $scriptRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Model\Script\ScriptRepository $scriptRepository
-     * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptRepository $scriptRepository
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      */
     public function __construct(
         EntityManager $em,
@@ -42,7 +42,7 @@ class ScriptFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Script\Script[]
+     * @return \Shopsys\FrameworkBundle\Model\Script\Script[]
      */
     public function getAll()
     {
@@ -59,7 +59,7 @@ class ScriptFacade
 
     /**
      * @param int $scriptId
-     * @return \Shopsys\ShopBundle\Model\Script\Script
+     * @return \Shopsys\FrameworkBundle\Model\Script\Script
      */
     public function getById($scriptId)
     {
@@ -67,8 +67,8 @@ class ScriptFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Script\ScriptData $scriptData
-     * @return \Shopsys\ShopBundle\Model\Script\Script
+     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptData $scriptData
+     * @return \Shopsys\FrameworkBundle\Model\Script\Script
      */
     public function create(ScriptData $scriptData)
     {
@@ -82,8 +82,8 @@ class ScriptFacade
 
     /**
      * @param int $scriptId
-     * @param \Shopsys\ShopBundle\Model\Script\ScriptData $scriptData
-     * @return \Shopsys\ShopBundle\Model\Script\Script
+     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptData $scriptData
+     * @return \Shopsys\FrameworkBundle\Model\Script\Script
      */
     public function edit($scriptId, ScriptData $scriptData)
     {
@@ -124,7 +124,7 @@ class ScriptFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return string[]
      */
     public function getOrderSentPageScriptCodesWithReplacedVariables(Order $order)
@@ -168,7 +168,7 @@ class ScriptFacade
 
     /**
      * @param string $code
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return string
      */
     private function replaceVariables($code, Order $order)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Administrator\Exception;
+namespace Shopsys\FrameworkBundle\Model\Administrator\Exception;
 
 interface AdministratorException
 {

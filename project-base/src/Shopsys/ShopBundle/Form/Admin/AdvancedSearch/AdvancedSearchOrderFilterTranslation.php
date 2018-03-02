@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\AdvancedSearch;
+namespace Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch;
 
 class AdvancedSearchOrderFilterTranslation extends AdvancedSearchFilterTranslation
 {

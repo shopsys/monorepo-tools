@@ -1,30 +1,30 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Model\Order\Status\Grid\OrderStatusInlineEdit;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
+use Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Model\Order\Status\Grid\OrderStatusInlineEdit;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class OrderStatusController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+     * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
     private $confirmDeleteResponseFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\Grid\OrderStatusInlineEdit
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\Grid\OrderStatusInlineEdit
      */
     private $orderStatusInlineEdit;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade
      */
     private $orderStatusFacade;
 
@@ -45,7 +45,7 @@ class OrderStatusController extends AdminBaseController
     {
         $grid = $this->orderStatusInlineEdit->getGrid();
 
-        return $this->render('@ShopsysShop/Admin/Content/OrderStatus/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/OrderStatus/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -81,14 +81,14 @@ class OrderStatusController extends AdminBaseController
                     ]
                 );
             }
-        } catch (\Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
+        } catch (\Shopsys\FrameworkBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
             $this->getFlashMessageSender()->addErrorFlashTwig(
                 t('Status of orders <strong>{{ name }}</strong> reserved and can\'t be deleted'),
                 [
                     'name' => $e->getOrderStatus()->getName(),
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected order status doesn\'t exist.'));
         }
 
@@ -125,7 +125,7 @@ class OrderStatusController extends AdminBaseController
 
                 return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_orderstatus_delete', $id);
             }
-        } catch (\Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
             return new Response(t('Selected order status doesn\'t exist.'));
         }
     }

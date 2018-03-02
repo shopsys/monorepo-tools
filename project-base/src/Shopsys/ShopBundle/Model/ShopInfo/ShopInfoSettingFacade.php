@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\ShopInfo;
+namespace Shopsys\FrameworkBundle\Model\ShopInfo;
 
-use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
 class ShopInfoSettingFacade
 {
@@ -11,12 +11,12 @@ class ShopInfoSettingFacade
     const SHOP_INFO_PHONE_HOURS = 'shopInfoPhoneHours';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      */
     public function __construct(Setting $setting)
     {

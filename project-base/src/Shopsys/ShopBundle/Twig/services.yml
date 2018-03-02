@@ -8,18 +8,12 @@ services:
   CommerceGuys\Intl\NumberFormat\:
     resource: '%shopsys.vendor_dir%/commerceguys/intl/src/NumberFormat/*'
 
-  Shopsys\ShopBundle\Twig\:
-    resource: '../Twig/'
+  Shopsys\FrameworkBundle\Twig\:
+    resource: '../../Twig/'
 
-  Shopsys\ShopBundle\Twig\DomainExtension:
+  Shopsys\FrameworkBundle\Twig\DomainExtension:
     arguments:
       - '%shopsys.domain_images_url_prefix%'
 
-  Shopsys\ShopBundle\Twig\ImageExtension:
+  Shopsys\FrameworkBundle\Twig\ImageExtension:
     arguments: ['%shopsys.front_design_image_url_prefix%']
-
-  Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService:
-    arguments:
-      - '%shopsys.web_dir%'
-      - '%shopsys.javascript_sources_dir%'
-      - '%shopsys.javascript_url_prefix%'

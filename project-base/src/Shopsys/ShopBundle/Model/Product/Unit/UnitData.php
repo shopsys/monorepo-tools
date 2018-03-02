@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Unit;
+namespace Shopsys\FrameworkBundle\Model\Product\Unit;
 
 class UnitData
 {
@@ -18,7 +18,7 @@ class UnitData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\Unit $unit
      */
     public function setFromEntity(Unit $unit)
     {

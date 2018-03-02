@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
+namespace Shopsys\FrameworkBundle\Model\Product\BestsellingProduct;
 
 use DateTime;
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use Shopsys\FrameworkBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory;
 
 class BestsellingProductFacade
 {
@@ -14,22 +14,22 @@ class BestsellingProductFacade
     const MAX_SHOW_RESULTS = 3;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\AutomaticBestsellingProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\AutomaticBestsellingProductRepository
      */
     private $automaticBestsellingProductRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository
      */
     private $manualBestsellingProductRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
      */
     private $productDetailFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductService
+     * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductService
      */
     private $bestsellingProductService;
 
@@ -47,9 +47,9 @@ class BestsellingProductFacade
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
      */
     public function getAllOfferedProductDetails($domainId, Category $category, PricingGroup $pricingGroup)
     {

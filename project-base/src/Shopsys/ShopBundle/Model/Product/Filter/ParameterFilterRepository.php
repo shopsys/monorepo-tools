@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Filter;
+namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue;
 
 class ParameterFilterRepository
 {
     /**
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData[] $parameters
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData[] $parameters
      */
     public function filterByParameters(QueryBuilder $productsQueryBuilder, array $parameters)
     {
@@ -18,7 +18,7 @@ class ParameterFilterRepository
         $valueIndex = 1;
 
         foreach ($parameters as $parameterFilterData) {
-            /* @var $parameterFilterData \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData */
+            /* @var $parameterFilterData \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData */
 
             if (count($parameterFilterData->values) === 0) {
                 continue;
@@ -41,7 +41,7 @@ class ParameterFilterRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData $parameterFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData $parameterFilterData
      * @param \Doctrine\ORM\EntityManager $em
      * @param int $parameterIndex
      * @param int $valueIndex
@@ -81,7 +81,7 @@ class ParameterFilterRepository
      * Generates:
      * ppv.value = :parameterValueM OR ppv.value = :parameterValueN OR ...
      *
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[] $parameterValues
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[] $parameterValues
      * @param \Doctrine\ORM\QueryBuilder $parameterQueryBuilder
      * @param string $ppvAlias
      * @param int $valueIndex

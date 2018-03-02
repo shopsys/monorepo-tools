@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig\Exception;
+namespace Shopsys\FrameworkBundle\Twig\Exception;
 
 use Exception;
 use InvalidArgumentException as BaseInvalidArgumentException;

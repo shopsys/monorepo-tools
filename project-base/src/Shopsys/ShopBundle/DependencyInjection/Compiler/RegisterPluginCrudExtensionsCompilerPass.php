@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\DependencyInjection\Compiler;
+namespace Shopsys\FrameworkBundle\DependencyInjection\Compiler;
 
-use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionRegistry;
+use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

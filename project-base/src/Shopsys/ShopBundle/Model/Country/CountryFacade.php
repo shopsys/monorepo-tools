@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Country;
+namespace Shopsys\FrameworkBundle\Model\Country;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 
 class CountryFacade
 {
@@ -13,19 +13,19 @@ class CountryFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\CountryRepository
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryRepository
      */
     private $countryRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Model\Country\CountryRepository $countryRepository
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryRepository $countryRepository
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         EntityManager $em,
@@ -39,7 +39,7 @@ class CountryFacade
 
     /**
      * @param int $countryId
-     * @return \Shopsys\ShopBundle\Model\Country\Country
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country
      */
     public function getById($countryId)
     {
@@ -47,9 +47,9 @@ class CountryFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Country\CountryData $countryData
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $countryData
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Country\Country
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country
      */
     public function create(CountryData $countryData, $domainId)
     {
@@ -62,8 +62,8 @@ class CountryFacade
 
     /**
      * @param int $countryId
-     * @param \Shopsys\ShopBundle\Model\Country\CountryData $countryData
-     * @return \Shopsys\ShopBundle\Model\Country\Country
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $countryData
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country
      */
     public function edit($countryId, CountryData $countryData)
     {
@@ -76,7 +76,7 @@ class CountryFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Country\Country[]
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country[]
      */
     public function getAllByDomainId($domainId)
     {
@@ -84,7 +84,7 @@ class CountryFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Country\Country[]
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country[]
      */
     public function getAllOnCurrentDomain()
     {

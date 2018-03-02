@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Customer;
+namespace Shopsys\FrameworkBundle\Form\Admin\Customer;
 
-use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Model\Country\CountryFacade;
-use Shopsys\ShopBundle\Model\Customer\DeliveryAddressData;
+use Shopsys\FrameworkBundle\Form\ValidationGroup;
+use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
+use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,7 +19,7 @@ class DeliveryAddressFormType extends AbstractType
     const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade
      */
     private $countryFacade;
 
@@ -151,7 +151,7 @@ class DeliveryAddressFormType extends AbstractType
                     $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
                     $deliveryAddressData = $form->getData();
-                    /* @var $deliveryAddressData \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData */
+                    /* @var $deliveryAddressData \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData */
 
                     if ($deliveryAddressData->addressFilled) {
                         $validationGroups[] = self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS;

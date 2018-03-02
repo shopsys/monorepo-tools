@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\UploadedFile\Config\Exception;
+namespace Shopsys\FrameworkBundle\Component\UploadedFile\Config\Exception;
 
-use Shopsys\ShopBundle\Component\UploadedFile\Exception\FileException;
+use Shopsys\FrameworkBundle\Component\UploadedFile\Exception\FileException;
 
 interface UploadedFileConfigException extends FileException
 {

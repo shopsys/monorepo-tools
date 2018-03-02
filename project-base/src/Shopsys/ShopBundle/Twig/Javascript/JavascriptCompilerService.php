@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig\Javascript;
+namespace Shopsys\FrameworkBundle\Twig\Javascript;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompiler;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -32,12 +32,12 @@ class JavascriptCompilerService
     private $filesystem;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler
+     * @var \Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompiler
      */
     private $jsCompiler;
 

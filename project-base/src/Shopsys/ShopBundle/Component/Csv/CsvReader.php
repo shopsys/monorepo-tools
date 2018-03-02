@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Csv;
+namespace Shopsys\FrameworkBundle\Component\Csv;
 
 class CsvReader
 {

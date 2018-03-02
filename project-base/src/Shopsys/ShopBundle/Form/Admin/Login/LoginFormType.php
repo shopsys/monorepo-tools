@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Login;
+namespace Shopsys\FrameworkBundle\Form\Admin\Login;
 
-use Shopsys\ShopBundle\Model\Administrator\Administrator;
+use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

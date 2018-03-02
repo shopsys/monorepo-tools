@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
-use Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureFacade;
+use Shopsys\FrameworkBundle\Component\Plugin\PluginDataFixtureFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,12 +16,12 @@ class LoadPluginDataFixturesCommand extends Command
     protected static $defaultName = 'shopsys:plugin-data-fixtures:load';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureFacade
+     * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginDataFixtureFacade
      */
     private $pluginDataFixtureFacade;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureFacade $pluginDataFixtureFacade
+     * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginDataFixtureFacade $pluginDataFixtureFacade
      */
     public function __construct(PluginDataFixtureFacade $pluginDataFixtureFacade)
     {

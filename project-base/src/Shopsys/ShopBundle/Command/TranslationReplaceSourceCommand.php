@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
 use DirectoryIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement;
+use Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement;
 use SplFileInfo;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -33,7 +33,7 @@ class TranslationReplaceSourceCommand extends Command
             ->addArgument(self::ARG_TRANSLATIONS_DIR, InputArgument::REQUIRED, 'Directory of extracted translations in .po format')
             ->addArgument(self::ARG_SOURCE_CODE_DIR, InputArgument::REQUIRED, 'Directory searched for replacements in source code')
             ->addArgument(self::ARG_TARGET_LOCALE, InputArgument::REQUIRED, 'Locale of translations to replace original sources')
-            ->addUsage('./src/Shopsys/ShopBundle/Resources/translations ./src/Shopsys/ShopBundle en');
+            ->addUsage('./src/Resources/translations ./src en');
     }
 
     /**
@@ -67,7 +67,7 @@ class TranslationReplaceSourceCommand extends Command
     /**
      * @param \DirectoryIterator $translationsDirectory
      * @param string $targetLocale
-     * @return \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[]
+     * @return \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[]
      */
     private function getAllReplacements(DirectoryIterator $translationsDirectory, $targetLocale)
     {
@@ -97,7 +97,7 @@ class TranslationReplaceSourceCommand extends Command
     /**
      * @see \Symfony\Component\Translation\Loader\PoFileLoader::parse
      * @param \SplFileInfo $file
-     * @return \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[]
+     * @return \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[]
      */
     private function extractReplacementsFromPoFile(SplFileInfo $file)
     {
@@ -124,7 +124,7 @@ class TranslationReplaceSourceCommand extends Command
                 $item['comments'][] = substr($line, 3);
             } elseif (substr($line, 0, 7) === 'msgid "') {
                 if (count($item['ids']) > 0) {
-                    throw new \Shopsys\ShopBundle\Command\Exception\TranslationReplaceSourceCommandException(
+                    throw new \Shopsys\FrameworkBundle\Command\Exception\TranslationReplaceSourceCommandException(
                         sprintf('Parse error: Message ID "%s" must be separated from previous IDs by an empty line.', substr($line, 7, -1))
                     );
                 }
@@ -157,7 +157,7 @@ class TranslationReplaceSourceCommand extends Command
 
     /**
      * @see \Symfony\Component\Translation\Loader\PoFileLoader::addMessage
-     * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $translationSourceReplacements
+     * @param \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[] $translationSourceReplacements
      * @param array $item
      */
     private function parsePoFileItem(array &$translationSourceReplacements, array $item)
@@ -205,9 +205,9 @@ class TranslationReplaceSourceCommand extends Command
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+     * @param \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[] $replacements
      * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @return \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[]
+     * @return \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[]
      */
     private function filterReplacementsWithUniqueOldSource(array $replacements, OutputInterface $output)
     {
@@ -243,9 +243,9 @@ class TranslationReplaceSourceCommand extends Command
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+     * @param \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[] $replacements
      * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @return \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[]
+     * @return \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[]
      */
     private function filterFilledReplacements(array $replacements, OutputInterface $output)
     {
@@ -264,9 +264,9 @@ class TranslationReplaceSourceCommand extends Command
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+     * @param \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[] $replacements
      * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @return \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[]
+     * @return \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[]
      */
     private function filterReplacementsWithUniqueNewSource(array $replacements, OutputInterface $output)
     {
@@ -303,9 +303,9 @@ class TranslationReplaceSourceCommand extends Command
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+     * @param \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[] $replacements
      * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @return \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[]
+     * @return \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[]
      */
     private function filterNonEqualReplacements($replacements, $output)
     {
@@ -324,8 +324,8 @@ class TranslationReplaceSourceCommand extends Command
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
-     * @returns \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+     * @param \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+     * @returns \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[] $replacements
      */
     private function sortBySourceLengthDesc($replacements)
     {
@@ -363,7 +363,7 @@ class TranslationReplaceSourceCommand extends Command
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+     * @param \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[] $replacements
      * @param string[] $searchedPathNames
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
@@ -403,7 +403,7 @@ class TranslationReplaceSourceCommand extends Command
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement $replacement
+     * @param \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement $replacement
      * @param string[] $searchedPathNames
      * @param string $sourceFilePath
      * @return int|null
@@ -450,7 +450,7 @@ class TranslationReplaceSourceCommand extends Command
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+     * @param \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[] $replacements
      * @param \DirectoryIterator $directory
      */
     private function replaceSourcesInPoFiles(array $replacements, DirectoryIterator $directory)
@@ -500,7 +500,7 @@ class TranslationReplaceSourceCommand extends Command
 
     /**
      * @param string $filePath
-     * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement $replacement
+     * @param \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement $replacement
      * @param int|null $realCount
      * @param int $expectedCount
      * @param bool $isExpectedCountExact

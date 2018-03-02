@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Product\Availability;
+namespace Shopsys\FrameworkBundle\Form\Admin\Product\Availability;
 
-use Shopsys\ShopBundle\Form\Locale\LocalizedType;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
+use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;

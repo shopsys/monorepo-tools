@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Unit\Component\Cron;
 
 use PHPUnit_Framework_TestCase;
+use Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig;
+use Shopsys\FrameworkBundle\Component\Cron\CronService;
 use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
-use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use Shopsys\ShopBundle\Component\Cron\CronService;
 
 class CronServiceTest extends PHPUnit_Framework_TestCase
 {

@@ -3,19 +3,19 @@
 namespace Tests\ShopBundle\Database\Model\Cart;
 
 use DateTime;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Cart\CartFacade;
-use Shopsys\ShopBundle\Model\Cart\CartFactory;
-use Shopsys\ShopBundle\Model\Cart\CartService;
-use Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository;
-use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
-use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory;
-use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductFacade;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
+use Shopsys\FrameworkBundle\Model\Cart\CartFactory;
+use Shopsys\FrameworkBundle\Model\Cart\CartService;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository;
+use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
@@ -74,23 +74,23 @@ class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
 
     /**
      * @param int $productId
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     private function getProductById($productId)
     {
         $productFacade = $this->getServiceByType(ProductFacade::class);
-        /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
+        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
         return $productFacade->getById($productId);
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Cart\CartFacade
+     * @return \Shopsys\FrameworkBundle\Model\Cart\CartFacade
      */
     private function getCartFacadeForRegisteredCustomer()
     {
         $customerFacade = $this->getServiceByType(CustomerFacade::class);
-        /* @var $customerFacade \Shopsys\ShopBundle\Model\Customer\CustomerFacade */
+        /* @var $customerFacade \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
 
         $user = $customerFacade->getUserById(1);
 
@@ -98,7 +98,7 @@ class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Cart\CartFacade
+     * @return \Shopsys\FrameworkBundle\Model\Cart\CartFacade
      */
     private function getCartFacadeForUnregisteredCustomer()
     {
@@ -106,8 +106,8 @@ class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     * @return \Shopsys\ShopBundle\Model\Cart\CartFacade
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @return \Shopsys\FrameworkBundle\Model\Cart\CartFacade
      */
     private function getCartFacadeForCustomer(CustomerIdentifier $customerIdentifier)
     {
@@ -125,7 +125,7 @@ class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
     private function getCustomerIdentifierFactoryMock(CustomerIdentifier $customerIdentifier)
@@ -140,8 +140,8 @@ class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Cart\CartFacade $cartFacade
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Cart\CartFacade $cartFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \DateTime $addedAt
      */
     private function addProductToCartAtTime(CartFacade $cartFacade, Product $product, DateTime $addedAt)
@@ -154,7 +154,7 @@ class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Cart\CartFacade $cartFacade
+     * @param \Shopsys\FrameworkBundle\Model\Cart\CartFacade $cartFacade
      * @param int $count
      * @param string $message
      */

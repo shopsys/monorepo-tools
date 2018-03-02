@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\UploadedFile\Config;
+namespace Shopsys\FrameworkBundle\Component\UploadedFile\Config;
 
 class UploadedFileConfig
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
      */
     private $uploadedFileEntityConfigsByClass;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[] $uploadedFileEntityConfigsByClass
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[] $uploadedFileEntityConfigsByClass
      */
     public function __construct(array $uploadedFileEntityConfigsByClass)
     {
@@ -28,7 +28,7 @@ class UploadedFileConfig
 
     /**
      * @param Object $entity
-     * @return \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig
+     * @return \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConfig
      */
     public function getUploadedFileEntityConfig($entity)
     {
@@ -38,7 +38,7 @@ class UploadedFileConfig
             }
         }
 
-        throw new \Shopsys\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileEntityConfigNotFoundException(
+        throw new \Shopsys\FrameworkBundle\Component\UploadedFile\Config\Exception\UploadedFileEntityConfigNotFoundException(
             $entity ? get_class($entity) : null
         );
     }
@@ -58,7 +58,7 @@ class UploadedFileConfig
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
+     * @return \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
      */
     public function getAllUploadedFileEntityConfigs()
     {

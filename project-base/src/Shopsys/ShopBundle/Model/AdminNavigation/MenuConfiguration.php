@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdminNavigation;
+namespace Shopsys\FrameworkBundle\Model\AdminNavigation;
 
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;

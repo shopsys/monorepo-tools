@@ -1,78 +1,78 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Grid\DataSourceInterface;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Order\OrderFormType;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemFacade;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\ShopBundle\Model\Order\OrderData;
-use Shopsys\ShopBundle\Model\Order\OrderFacade;
-use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Grid\DataSourceInterface;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Order\OrderFormType;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFacade;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Order\OrderData;
+use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
+use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
     private $administratorGridFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade
      */
     private $advancedSearchOrderFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation
      */
     private $orderItemPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade
      */
     private $orderFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFacade
      */
     private $orderItemFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
      */
     private $transportFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
      */
     private $paymentFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -128,11 +128,11 @@ class OrderController extends AdminBaseController
                     ]
                 );
                 return $this->redirectToRoute('admin_order_list');
-            } catch (\Shopsys\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
+            } catch (\Shopsys\FrameworkBundle\Model\Customer\Exception\UserNotFoundException $e) {
                 $this->getFlashMessageSender()->addErrorFlash(
                     t('Entered customer not found, please check entered data.')
                 );
-            } catch (\Shopsys\ShopBundle\Model\Mail\Exception\MailException $e) {
+            } catch (\Shopsys\FrameworkBundle\Model\Mail\Exception\MailException $e) {
                 $this->getFlashMessageSender()->addErrorFlash(t('Unable to send updating e-mail'));
             }
         }
@@ -145,7 +145,7 @@ class OrderController extends AdminBaseController
 
         $orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
-        return $this->render('@ShopsysShop/Admin/Content/Order/edit.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Order/edit.html.twig', [
             'form' => $form->createView(),
             'order' => $order,
             'orderItemTotalPricesById' => $orderItemTotalPricesById,
@@ -179,7 +179,7 @@ class OrderController extends AdminBaseController
 
         $orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
-        return $this->render('@ShopsysShop/Admin/Content/Order/addProduct.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Order/addProduct.html.twig', [
             'form' => $form->createView(),
             'order' => $order,
             'orderItem' => $orderItem,
@@ -194,7 +194,7 @@ class OrderController extends AdminBaseController
     public function listAction(Request $request)
     {
         $administrator = $this->getUser();
-        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
+        /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
 
         $advancedSearchForm = $this->advancedSearchOrderFacade->createAdvancedSearchOrderForm($request);
         $advancedSearchData = $advancedSearchForm->getData();
@@ -237,11 +237,11 @@ class OrderController extends AdminBaseController
         $grid->addDeleteActionColumn('admin_order_delete', ['id' => 'id'])
             ->setConfirmMessage(t('Do you really want to remove the order?'));
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Order/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Order/listGrid.html.twig');
 
         $this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-        return $this->render('@ShopsysShop/Admin/Content/Order/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Order/list.html.twig', [
             'gridView' => $grid->createView(),
             'quickSearchForm' => $quickSearchForm->createView(),
             'advancedSearchForm' => $advancedSearchForm->createView(),
@@ -278,7 +278,7 @@ class OrderController extends AdminBaseController
                     'number' => $orderNumber,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Order\Exception\OrderNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Order\Exception\OrderNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected order doesn\'t exist.'));
         }
 
@@ -294,7 +294,7 @@ class OrderController extends AdminBaseController
     {
         $ruleForm = $this->advancedSearchOrderFacade->createRuleForm($request->get('filterName'), $request->get('newIndex'));
 
-        return $this->render('@ShopsysShop/Admin/Content/Order/AdvancedSearch/ruleForm.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Order/AdvancedSearch/ruleForm.html.twig', [
             'rulesForm' => $ruleForm->createView(),
         ]);
     }
@@ -307,7 +307,7 @@ class OrderController extends AdminBaseController
     {
         $order = $this->orderFacade->getById($id);
 
-        return $this->render('@ShopsysShop/Admin/Content/Order/preview.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Order/preview.html.twig', [
             'order' => $order,
         ]);
     }

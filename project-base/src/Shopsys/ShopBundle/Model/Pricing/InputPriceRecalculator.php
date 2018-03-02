@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Pricing;
 
 use Closure;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
-use Shopsys\ShopBundle\Model\Payment\Payment;
-use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductService;
-use Shopsys\ShopBundle\Model\Transport\Transport;
-use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductService;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 
 class InputPriceRecalculator
 {
@@ -22,32 +22,32 @@ class InputPriceRecalculator
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation
      */
     private $inputPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation
      */
     private $basePriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
      */
     private $paymentPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
      */
     private $transportPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductService
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductService
      */
     private $productService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     private $pricingSetting;
 

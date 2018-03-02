@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Form\Exception;
+namespace Shopsys\FrameworkBundle\Component\Form\Exception;
 
 interface FormException
 {

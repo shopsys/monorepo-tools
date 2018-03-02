@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Vat\Exception;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Vat\Exception;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Slider\Exception;
+namespace Shopsys\FrameworkBundle\Model\Slider\Exception;
 
 interface SliderItemException
 {

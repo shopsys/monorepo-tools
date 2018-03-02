@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment;
+namespace Shopsys\FrameworkBundle\Model\Payment;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 
 /**
  * @ORM\Table(name="payment_prices")
@@ -12,19 +12,19 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 class PaymentPrice
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Payment
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Payment\Payment", inversedBy="prices")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Payment\Payment", inversedBy="prices")
      * @ORM\JoinColumn(nullable=false)
      */
     private $payment;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Currency\Currency")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $currency;
@@ -37,8 +37,8 @@ class PaymentPrice
     private $price;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @param string $price
      */
     public function __construct(Payment $payment, Currency $currency, $price)
@@ -49,7 +49,7 @@ class PaymentPrice
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     public function getCurrency()
     {
@@ -57,7 +57,7 @@ class PaymentPrice
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
     public function getPayment()
     {

@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Test;
 
-use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 
 abstract class DatabaseTestCase extends FunctionalTestCase
 {
@@ -15,7 +15,7 @@ abstract class DatabaseTestCase extends FunctionalTestCase
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
+     * @return \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
      */
     protected function getEntityManagerFacade()
     {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig;
+namespace Shopsys\FrameworkBundle\Twig;
 
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
 
 class ProductExtension extends \Twig_Extension
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
     private $categoryFacade;
 
@@ -56,7 +56,7 @@ class ProductExtension extends \Twig_Extension
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @return string
      */
     public function getProductDisplayName(Product $product)
@@ -71,7 +71,7 @@ class ProductExtension extends \Twig_Extension
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @return string
      */
     public function getProductListDisplayName(Product $product)
@@ -84,9 +84,9 @@ class ProductExtension extends \Twig_Extension
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Category\Category
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category
      */
     public function getProductMainCategory(Product $product, $domainId)
     {
@@ -94,9 +94,9 @@ class ProductExtension extends \Twig_Extension
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Category\Category|null
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category|null
      */
     public function findProductMainCategory(Product $product, $domainId)
     {

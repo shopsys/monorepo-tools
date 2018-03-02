@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Security\Filesystem\Exception;
+namespace Shopsys\FrameworkBundle\Model\Security\Filesystem\Exception;
 
-use Shopsys\ShopBundle\Model\Security\Exception\SecurityException;
+use Shopsys\FrameworkBundle\Model\Security\Exception\SecurityException;
 
 interface FilesystemException extends SecurityException
 {

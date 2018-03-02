@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Slider;
+namespace Shopsys\FrameworkBundle\Model\Slider;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
+use Shopsys\FrameworkBundle\Component\Grid\Ordering\OrderableEntityInterface;
 
 /**
  * SliderItem
@@ -57,7 +57,7 @@ class SliderItem implements OrderableEntityInterface
     private $hidden;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Slider\SliderItemData $sliderItemData
+     * @param \Shopsys\FrameworkBundle\Model\Slider\SliderItemData $sliderItemData
      */
     public function __construct(SliderItemData $sliderItemData)
     {
@@ -68,7 +68,7 @@ class SliderItem implements OrderableEntityInterface
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Slider\SliderItemData $sliderItemData
+     * @param \Shopsys\FrameworkBundle\Model\Slider\SliderItemData $sliderItemData
      */
     public function edit(SliderItemData $sliderItemData)
     {

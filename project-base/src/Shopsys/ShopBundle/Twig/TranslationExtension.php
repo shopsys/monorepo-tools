@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig;
+namespace Shopsys\FrameworkBundle\Twig;
 
 use Twig_Environment;
 use Twig_SimpleFilter;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Entity\Exception;
+namespace Shopsys\FrameworkBundle\Component\Entity\Exception;
 
 interface EntityException
 {

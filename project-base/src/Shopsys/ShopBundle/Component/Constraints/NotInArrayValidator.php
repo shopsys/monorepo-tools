@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Constraints;
+namespace Shopsys\FrameworkBundle\Component\Constraints;
 
 use ArrayAccess;
 use Symfony\Component\Validator\Constraint;

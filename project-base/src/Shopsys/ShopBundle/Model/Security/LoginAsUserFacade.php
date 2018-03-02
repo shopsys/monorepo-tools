@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Security;
+namespace Shopsys\FrameworkBundle\Model\Security;
 
-use Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Customer\UserRepository;
+use Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Customer\UserRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -33,12 +33,12 @@ class LoginAsUserFacade
     private $session;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserRepository
      */
     private $userRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
      */
     private $administratorFrontSecurityFacade;
 
@@ -46,8 +46,8 @@ class LoginAsUserFacade
      * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param \Shopsys\ShopBundle\Model\Customer\UserRepository $userRepository
-     * @param \Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade $administratorFrontSecurityFacade
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade $administratorFrontSecurityFacade
      */
     public function __construct(
         TokenStorageInterface $tokenStorage,
@@ -64,7 +64,7 @@ class LoginAsUserFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      */
     public function rememberLoginAsUser(User $user)
     {
@@ -77,15 +77,15 @@ class LoginAsUserFacade
     public function loginAsRememberedUser(Request $request)
     {
         if (!$this->administratorFrontSecurityFacade->isAdministratorLogged()) {
-            throw new \Shopsys\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException('Access denied');
+            throw new \Shopsys\FrameworkBundle\Model\Security\Exception\LoginAsRememberedUserException('Access denied');
         }
 
         if (!$this->session->has(self::SESSION_LOGIN_AS)) {
-            throw new \Shopsys\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException('User not set.');
+            throw new \Shopsys\FrameworkBundle\Model\Security\Exception\LoginAsRememberedUserException('User not set.');
         }
 
         $unserializedUser = unserialize($this->session->get(self::SESSION_LOGIN_AS));
-        /* @var $unserializedUser \Shopsys\ShopBundle\Model\Customer\User */
+        /* @var $unserializedUser \Shopsys\FrameworkBundle\Model\Customer\User */
         $this->session->remove(self::SESSION_LOGIN_AS);
         $freshUser = $this->userRepository->getUserById($unserializedUser->getId());
 

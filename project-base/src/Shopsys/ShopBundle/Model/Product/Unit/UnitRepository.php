@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Unit;
+namespace Shopsys\FrameworkBundle\Model\Product\Unit;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class UnitRepository
 {
@@ -31,7 +31,7 @@ class UnitRepository
 
     /**
      * @param int $unitId
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit|null
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\Unit|null
      */
     public function findById($unitId)
     {
@@ -40,14 +40,14 @@ class UnitRepository
 
     /**
      * @param int $unitId
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\Unit
      */
     public function getById($unitId)
     {
         $unit = $this->findById($unitId);
 
         if ($unit === null) {
-            throw new \Shopsys\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException('Unit with ID ' . $unitId . ' not found.');
+            throw new \Shopsys\FrameworkBundle\Model\Product\Unit\Exception\UnitNotFoundException('Unit with ID ' . $unitId . ' not found.');
         }
 
         return $unit;
@@ -65,7 +65,7 @@ class UnitRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\Unit[]
      */
     public function getAll()
     {
@@ -74,7 +74,7 @@ class UnitRepository
 
     /**
      * @param int $unitId
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\Unit[]
      */
     public function getAllExceptId($unitId)
     {
@@ -84,7 +84,7 @@ class UnitRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\Unit $unit
      * @return bool
      */
     public function existsProductWithUnit(Unit $unit)
@@ -98,8 +98,8 @@ class UnitRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $oldUnit
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $newUnit
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\Unit $oldUnit
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\Unit $newUnit
      */
     public function replaceUnit(Unit $oldUnit, Unit $newUnit)
     {

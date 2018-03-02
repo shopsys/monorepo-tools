@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form;
+namespace Shopsys\FrameworkBundle\Form;
 
 class UrlListData
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
      */
     public $toDelete;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
      */
     public $mainFriendlyUrlsByDomainId;
 
@@ -26,7 +26,7 @@ class UrlListData
      *     ...
      * ]
      *
-     * @see \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade::saveUrlListFormData()
+     * @see \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade::saveUrlListFormData()
      */
     public $newUrls;
 

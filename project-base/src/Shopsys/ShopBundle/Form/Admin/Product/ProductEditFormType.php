@@ -1,26 +1,26 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Product;
+namespace Shopsys\FrameworkBundle\Form\Admin\Product;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FormTypesBundle\MultidomainType;
-use Shopsys\ShopBundle\Component\Constraints\UniqueProductParameters;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Image\ImageFacade;
-use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade;
-use Shopsys\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
-use Shopsys\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
-use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
-use Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType;
-use Shopsys\ShopBundle\Form\FileUploadType;
-use Shopsys\ShopBundle\Form\ProductsType;
-use Shopsys\ShopBundle\Form\UrlListType;
-use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductEditData;
-use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
+use Shopsys\FrameworkBundle\Component\Constraints\UniqueProductParameters;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
+use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
+use Shopsys\FrameworkBundle\Component\Transformers\ImagesIdsToImagesTransformer;
+use Shopsys\FrameworkBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
+use Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
+use Shopsys\FrameworkBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType;
+use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\ProductsType;
+use Shopsys\FrameworkBundle\Form\UrlListType;
+use Shopsys\FrameworkBundle\Form\ValidationGroup;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
+use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -41,37 +41,37 @@ class ProductEditFormType extends AbstractType
     const VALIDATION_GROUP_MANUAL_PRICE_CALCULATION = 'manualPriceCalculation';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
+     * @var \Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
      */
     private $removeDuplicatesTransformer;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer
+     * @var \Shopsys\FrameworkBundle\Component\Transformers\ImagesIdsToImagesTransformer
      */
     private $imagesIdsToImagesTransformer;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
     private $imageFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
     private $pricingGroupFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade
      */
     private $seoSettingFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade
+     * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade
      */
     private $pluginDataFormExtensionFacade;
 
@@ -269,7 +269,7 @@ class ProductEditFormType extends AbstractType
                 'validation_groups' => function (FormInterface $form) {
                     $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
                     $productData = $form->getData()->productData;
-                    /* @var $productData \Shopsys\ShopBundle\Model\Product\ProductData */
+                    /* @var $productData \Shopsys\FrameworkBundle\Model\Product\ProductData */
 
                     if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_MANUAL) {
                         $validationGroups[] = self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION;
@@ -281,8 +281,8 @@ class ProductEditFormType extends AbstractType
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @param \Shopsys\ShopBundle\Model\Product\Product|null $product
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
      * @return string
      */
     private function getTitlePlaceholder(DomainConfig $domainConfig, Product $product = null)
@@ -294,7 +294,7 @@ class ProductEditFormType extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
     private function disableIrrelevantFields(FormBuilderInterface $builder, Product $product)
     {

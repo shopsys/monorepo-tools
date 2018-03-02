@@ -1,37 +1,37 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit;
+use Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CurrencyController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+     * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
     private $confirmDeleteResponseFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
     private $currencyFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit
      */
     private $currencyInlineEdit;
 
@@ -54,7 +54,7 @@ class CurrencyController extends AdminBaseController
     {
         $grid = $this->currencyInlineEdit->getGrid();
 
-        return $this->render('@ShopsysShop/Admin/Content/Currency/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Currency/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -73,7 +73,7 @@ class CurrencyController extends AdminBaseController
             );
 
             return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_currency_delete', $id);
-        } catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
             return new Response(t('Selected currency doesn\'t exist.'));
         }
     }
@@ -95,11 +95,11 @@ class CurrencyController extends AdminBaseController
                     'name' => $fullName,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(
                 t('This currency can\'t be deleted, it is set as default or is saved with order.')
             );
-        } catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected currency doesn\'t exist.'));
         }
 
@@ -145,7 +145,7 @@ class CurrencyController extends AdminBaseController
             return $this->redirectToRoute('admin_currency_list');
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Currency/currencySettings.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Currency/currencySettings.html.twig', [
             'form' => $form->createView(),
             'domainNames' => $domainNames,
         ]);

@@ -1,6 +1,6 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% import '@ShopsysShop/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
+{% import '@ShopsysFramework/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
 
 {% block title %}- {{ 'Article'|trans }}{% endblock %}
 {% block h1 %}{{ 'Article'|trans }}{% endblock %}
@@ -38,7 +38,7 @@
             {% block article_urls %}{% endblock %}
         </div>
 
-        {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 <a href="{{ url('admin_article_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
                 {{ form_save(article|default(null), form) }}

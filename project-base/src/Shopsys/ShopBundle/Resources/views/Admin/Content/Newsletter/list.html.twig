@@ -1,10 +1,10 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}{{ 'E-mail newsletter'|trans }}{% endblock %}
 {% block h1 %}{{ 'E-mail newsletter'|trans }}{% endblock %}
 
 {% block main_content %}
-    {{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
+    {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
     {{ form_start(quickSearchForm) }}
     <div class="wrap-border form-inline">

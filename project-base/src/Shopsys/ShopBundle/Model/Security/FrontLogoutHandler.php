@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Security;
+namespace Shopsys\FrameworkBundle\Model\Security;
 
-use Shopsys\ShopBundle\Model\Order\OrderFlowFacade;
+use Shopsys\FrameworkBundle\Model\Order\OrderFlowFacade;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Router;
@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 class FrontLogoutHandler implements LogoutSuccessHandlerInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderFlowFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderFlowFacade
      */
     private $orderFlowFacade;
 
@@ -22,7 +22,7 @@ class FrontLogoutHandler implements LogoutSuccessHandlerInterface
 
     /**
      * @param \Symfony\Component\Routing\Router $router
-     * @param \Shopsys\ShopBundle\Model\Order\OrderFlowFacade $orderFlowFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderFlowFacade $orderFlowFacade
      */
     public function __construct(Router $router, OrderFlowFacade $orderFlowFacade)
     {

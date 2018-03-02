@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport;
+namespace Shopsys\FrameworkBundle\Model\Transport;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 
 class IndependentTransportVisibilityCalculation
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportRepository
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportRepository
      */
     private $transportRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -25,7 +25,7 @@ class IndependentTransportVisibilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @param int $domainId
      * @return bool
      */
@@ -49,7 +49,7 @@ class IndependentTransportVisibilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @param int $domainId
      * @return bool
      */

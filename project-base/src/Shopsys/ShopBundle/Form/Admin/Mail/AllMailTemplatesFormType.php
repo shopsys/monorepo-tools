@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Mail;
+namespace Shopsys\FrameworkBundle\Form\Admin\Mail;
 
-use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
-use Shopsys\ShopBundle\Model\Mail\AllMailTemplatesData;
+use Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail;
+use Shopsys\FrameworkBundle\Model\Mail\AllMailTemplatesData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class AllMailTemplatesFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail
+     * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail
      */
     private $resetPasswordMail;
 

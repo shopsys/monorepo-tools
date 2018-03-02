@@ -1,10 +1,10 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}{{ '- Heureka - Verified by Customer'|trans }}{% endblock %}
 {% block h1 %}{{ 'Heureka - Verified by Customer'|trans }}{% endblock %}
 
 {% block main_content %}
-    {{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
+    {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
     {% if form is not null %}
         {{ form_start(form) }}
@@ -13,7 +13,7 @@
             {{ form_row(form.heurekaWidgetCode, {label: 'Heureka Widget code'|trans, attr: {class: 'heureka-widget-input'} }) }}
 
 
-            {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+            {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
                 {% block fixed_bar_content %}
                     {{ form_widget(form.save, { label: 'Save changes'|trans }) }}
                 {% endblock %}

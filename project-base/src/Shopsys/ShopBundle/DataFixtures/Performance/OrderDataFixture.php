@@ -1,28 +1,28 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Performance;
+namespace Shopsys\FrameworkBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
 use Faker\Generator as Faker;
-use Shopsys\ShopBundle\Component\Console\ProgressBarFactory;
-use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade;
-use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\PaymentDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\TransportDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture as PerformanceProductDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture as PerformanceUserDataFixture;
-use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
-use Shopsys\ShopBundle\Model\Order\OrderData;
-use Shopsys\ShopBundle\Model\Order\OrderFacade;
-use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductFacade;
+use Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory;
+use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
+use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Base\OrderStatusDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\CountryDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\PaymentDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\TransportDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Performance\ProductDataFixture as PerformanceProductDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Performance\UserDataFixture as PerformanceUserDataFixture;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
+use Shopsys\FrameworkBundle\Model\Order\OrderData;
+use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
+use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class OrderDataFixture
@@ -57,12 +57,12 @@ class OrderDataFixture
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
      */
     private $entityManagerFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade
      */
     private $sqlLoggerFacade;
 
@@ -72,32 +72,32 @@ class OrderDataFixture
     private $faker;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade
+     * @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade
      */
     private $persistentReferenceFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade
      */
     private $orderFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory
+     * @var \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory
      */
     private $orderPreviewFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
      */
     private $productFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade
      */
     private $customerFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Console\ProgressBarFactory
+     * @var \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory
      */
     private $progressBarFactory;
 
@@ -105,15 +105,15 @@ class OrderDataFixture
      * @param int $orderTotalCount
      * @param int $orderItemCountPerOrder
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
-     * @param \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
      * @param \Faker\Generator $faker
-     * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
-     * @param \Shopsys\ShopBundle\Model\Order\OrderFacade $orderFacade
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory $orderPreviewFactory
-     * @param \Shopsys\ShopBundle\Model\Product\ProductFacade $productFacade
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerFacade $customerFacade
-     * @param \Shopsys\ShopBundle\Component\Console\ProgressBarFactory $progressBarFactory
+     * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderFacade $orderFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory $orderPreviewFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade
+     * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
      */
     public function __construct(
         $orderTotalCount,
@@ -192,8 +192,8 @@ class OrderDataFixture
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @return \Shopsys\ShopBundle\Model\Order\OrderData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @return \Shopsys\FrameworkBundle\Model\Order\OrderData
      */
     private function createOrderData(User $user = null)
     {
@@ -248,7 +248,7 @@ class OrderDataFixture
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct[]
      */
     private function createQuantifiedProducts()
     {
@@ -270,7 +270,7 @@ class OrderDataFixture
         $firstPerformanceProduct = $this->persistentReferenceFacade->getReference(
             PerformanceProductDataFixture::FIRST_PERFORMANCE_PRODUCT
         );
-        /* @var $firstPerformanceProduct \Shopsys\ShopBundle\Model\Product\Product */
+        /* @var $firstPerformanceProduct \Shopsys\FrameworkBundle\Model\Product\Product */
 
         $qb = $this->em->createQueryBuilder()
             ->select('p.id')
@@ -297,7 +297,7 @@ class OrderDataFixture
         $firstPerformanceUser = $this->persistentReferenceFacade->getReference(
             PerformanceUserDataFixture::FIRST_PERFORMANCE_USER
         );
-        /* @var $firstPerformanceUser \Shopsys\ShopBundle\Model\Customer\User */
+        /* @var $firstPerformanceUser \Shopsys\FrameworkBundle\Model\Customer\User */
 
         $qb = $this->em->createQueryBuilder()
             ->select('u.id')
@@ -311,7 +311,7 @@ class OrderDataFixture
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Customer\User|null
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User|null
      */
     private function getRandomUserOrNull()
     {
@@ -326,7 +326,7 @@ class OrderDataFixture
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
      */
     private function getRandomTransport()
     {
@@ -340,7 +340,7 @@ class OrderDataFixture
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
     private function getRandomPayment()
     {
@@ -354,7 +354,7 @@ class OrderDataFixture
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Country\Country
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country
      */
     private function getRandomCountryFromFirstDomain()
     {

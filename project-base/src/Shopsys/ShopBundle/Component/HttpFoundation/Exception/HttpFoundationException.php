@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\HttpFoundation\Exception;
+namespace Shopsys\FrameworkBundle\Component\HttpFoundation\Exception;
 
 interface HttpFoundationException
 {

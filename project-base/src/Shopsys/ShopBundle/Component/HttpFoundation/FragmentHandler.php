@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\HttpFoundation;
+namespace Shopsys\FrameworkBundle\Component\HttpFoundation;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -10,7 +10,7 @@ class FragmentHandler extends LazyLoadingFragmentHandler
 {
     /**
      * Support redirect responses in fragments (eg. subrequests). Fragments can only return 2xx HTTP codes by default.
-     * Redirect is handled in @see \Shopsys\ShopBundle\Component\HttpFoundation\SubRequestListener::onKernelResponse().
+     * Redirect is handled in @see \Shopsys\FrameworkBundle\Component\HttpFoundation\SubRequestListener::onKernelResponse().
      *
      * {@inheritdoc}
      */

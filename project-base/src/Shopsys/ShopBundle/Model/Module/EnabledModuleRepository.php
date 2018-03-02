@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Module;
+namespace Shopsys\FrameworkBundle\Model\Module;
 
 use Doctrine\ORM\EntityManager;
 
@@ -12,7 +12,7 @@ class EnabledModuleRepository
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Module\ModuleList
+     * @var \Shopsys\FrameworkBundle\Model\Module\ModuleList
      */
     private $moduleList;
 
@@ -34,12 +34,12 @@ class EnabledModuleRepository
 
     /**
      * @param string $moduleName
-     * @return \Shopsys\ShopBundle\Model\Module\EnabledModule|null
+     * @return \Shopsys\FrameworkBundle\Model\Module\EnabledModule|null
      */
     public function findByName($moduleName)
     {
         if (!in_array($moduleName, $this->moduleList->getNames(), true)) {
-            throw new \Shopsys\ShopBundle\Model\Module\Exception\UnsupportedModuleException($moduleName);
+            throw new \Shopsys\FrameworkBundle\Model\Module\Exception\UnsupportedModuleException($moduleName);
         }
 
         return $this->getEnabledModuleRepository()->find($moduleName);

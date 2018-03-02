@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Advert;
+namespace Shopsys\FrameworkBundle\Model\Advert;
 
 class AdvertData
 {
@@ -72,7 +72,7 @@ class AdvertData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Advert\Advert $advert
+     * @param \Shopsys\FrameworkBundle\Model\Advert\Advert $advert
      */
     public function setFromEntity(Advert $advert)
     {

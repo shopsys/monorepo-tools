@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Product\Brand;
+namespace Shopsys\FrameworkBundle\Form\Admin\Product\Brand;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Shopsys\ShopBundle\Form\FileUploadType;
-use Shopsys\ShopBundle\Form\Locale\LocalizedType;
-use Shopsys\ShopBundle\Form\UrlListType;
-use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
+use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
+use Shopsys\FrameworkBundle\Form\UrlListType;
+use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;

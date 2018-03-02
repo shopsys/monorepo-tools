@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Administrator;
+namespace Shopsys\FrameworkBundle\Model\Administrator;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
@@ -26,7 +26,7 @@ class AdministratorService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      * @param string $password
      */
     public function setPassword(Administrator $administrator, $password)
@@ -37,27 +37,27 @@ class AdministratorService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      * @param int $adminCountExcludingSuperadmin
      */
     public function delete(Administrator $administrator, $adminCountExcludingSuperadmin)
     {
         if ($adminCountExcludingSuperadmin === 1) {
-            throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException();
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingLastAdministratorException();
         }
         if ($this->tokenStorage->getToken()->getUser() === $administrator) {
-            throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DeletingSelfException();
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingSelfException();
         }
         if ($administrator->isSuperadmin()) {
-            throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DeletingSuperadminException();
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DeletingSuperadminException();
         }
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
-     * @param \Shopsys\ShopBundle\Model\Administrator\Administrator|null $administratorByUserName
-     * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorData $administratorData
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator|null $administratorByUserName
+     * @return \Shopsys\FrameworkBundle\Model\Administrator\Administrator
      */
     public function edit(
         AdministratorData $administratorData,
@@ -68,7 +68,7 @@ class AdministratorService
             && $administratorByUserName !== $administrator
             && $administratorByUserName->getUsername() === $administratorData->username
         ) {
-            throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administrator->getUsername());
+            throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DuplicateUserNameException($administrator->getUsername());
         }
         $administrator->edit($administratorData);
         if ($administratorData->password !== null) {

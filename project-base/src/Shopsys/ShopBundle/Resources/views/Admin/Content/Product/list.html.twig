@@ -1,4 +1,4 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Products overview'|trans }}{% endblock %}
 {% block h1 %}{{ 'Products overview'|trans }}{% endblock %}
@@ -29,10 +29,10 @@
         </div>
         <div class="in-tab__content">
             <div class="in-tab__content__in js-tabs-content" data-tab-id="quick">
-                {% include '@ShopsysShop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+                {% include '@ShopsysFramework/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
             </div>
             <div class="in-tab__content__in js-tabs-content" data-tab-id="advanced">
-                {% include '@ShopsysShop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
+                {% include '@ShopsysFramework/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
                     with {advancedSearchForm: advancedSearchForm}
                 %}
             </div>

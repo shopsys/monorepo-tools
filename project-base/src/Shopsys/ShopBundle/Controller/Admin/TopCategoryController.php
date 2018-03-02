@@ -1,23 +1,23 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType;
-use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType;
+use Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class TopCategoryController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade
      */
     private $topCategoryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
@@ -53,7 +53,7 @@ class TopCategoryController extends AdminBaseController
             $this->getFlashMessageSender()->addSuccessFlash(t('Product settings on the main page successfully changed'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/TopCategory/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/TopCategory/list.html.twig', [
             'form' => $form->createView(),
         ]);
     }

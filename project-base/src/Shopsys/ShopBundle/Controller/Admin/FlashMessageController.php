@@ -1,17 +1,17 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
 
 class FlashMessageController extends AdminBaseController
 {
     public function indexAction()
     {
         $flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.admin');
-        /* @var $flashMessageBag \Shopsys\ShopBundle\Component\FlashMessage\Bag */
+        /* @var $flashMessageBag \Shopsys\FrameworkBundle\Component\FlashMessage\Bag */
 
-        return $this->render('@ShopsysShop/Admin/Inline/FlashMessage/index.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Inline/FlashMessage/index.html.twig', [
             'errorMessages' => $flashMessageBag->getErrorMessages(),
             'infoMessages' => $flashMessageBag->getInfoMessages(),
             'successMessages' => $flashMessageBag->getSuccessMessages(),

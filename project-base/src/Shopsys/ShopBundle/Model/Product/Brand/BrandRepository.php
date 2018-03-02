@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Brand;
+namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 
 use Doctrine\ORM\EntityManager;
 
@@ -36,8 +36,8 @@ class BrandRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandDomain[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain[]
      */
     public function getBrandDomainsByBrand(Brand $brand)
     {
@@ -48,7 +48,7 @@ class BrandRepository
 
     /**
      * @param int $brandId
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand
      */
     public function getById($brandId)
     {
@@ -56,14 +56,14 @@ class BrandRepository
 
         if ($brand === null) {
             $message = 'Brand with ID ' . $brandId . ' not found.';
-            throw new \Shopsys\ShopBundle\Model\Product\Brand\Exception\BrandNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Model\Product\Brand\Exception\BrandNotFoundException($message);
         }
 
         return $brand;
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[]
      */
     public function getAll()
     {
@@ -71,8 +71,8 @@ class BrandRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandDomain[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain[]
      */
     public function getBrandDomainsIndexedByDomain($brand)
     {

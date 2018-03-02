@@ -1,19 +1,19 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Status\Exception;
+namespace Shopsys\FrameworkBundle\Model\Order\Status\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusDeletionForbiddenException extends Exception implements OrderStatusException
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus
      */
     private $orderStatus;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus $orderStatus
      * @param \Exception|null $previous
      */
     public function __construct(OrderStatus $orderStatus, Exception $previous = null)
@@ -23,7 +23,7 @@ class OrderStatusDeletionForbiddenException extends Exception implements OrderSt
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus
      */
     public function getOrderStatus()
     {

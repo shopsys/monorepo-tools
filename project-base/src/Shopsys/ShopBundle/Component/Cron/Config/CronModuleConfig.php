@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Cron\Config;
+namespace Shopsys\FrameworkBundle\Component\Cron\Config;
 
-use Shopsys\ShopBundle\Component\Cron\CronTimeInterface;
+use Shopsys\FrameworkBundle\Component\Cron\CronTimeInterface;
 
 class CronModuleConfig implements CronTimeInterface
 {

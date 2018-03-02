@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Cart;
+namespace Shopsys\FrameworkBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository;
-use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory;
-use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository;
+use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class CartFacade
 {
@@ -21,42 +21,42 @@ class CartFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Cart\CartService
+     * @var \Shopsys\FrameworkBundle\Model\Cart\CartService
      */
     private $cartService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Cart\CartFactory
+     * @var \Shopsys\FrameworkBundle\Model\Cart\CartFactory
      */
     private $cartFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory
      */
     private $customerIdentifierFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
     private $currentCustomer;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
      */
     private $currentPromoCodeFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository
      */
     private $cartItemRepository;
 
@@ -85,7 +85,7 @@ class CartFacade
     /**
      * @param int $productId
      * @param int $quantity
-     * @return \Shopsys\ShopBundle\Model\Cart\AddProductResult
+     * @return \Shopsys\FrameworkBundle\Model\Cart\AddProductResult
      */
     public function addProductToCart($productId, $quantity)
     {
@@ -97,7 +97,7 @@ class CartFacade
         $customerIdentifier = $this->customerIdentifierFactory->get();
         $cart = $this->cartFactory->get($customerIdentifier);
         $result = $this->cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
-        /* @var $result \Shopsys\ShopBundle\Model\Cart\AddProductResult */
+        /* @var $result \Shopsys\FrameworkBundle\Model\Cart\AddProductResult */
 
         $this->em->persist($result->getCartItem());
         $this->em->flush();
@@ -144,7 +144,7 @@ class CartFacade
 
     /**
      * @param int $cartItemId
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getProductByCartItemId($cartItemId)
     {
@@ -158,7 +158,7 @@ class CartFacade
         $this->currentPromoCodeFacade->removeEnteredPromoCode();
     }
     /**
-     * @return \Shopsys\ShopBundle\Model\Cart\Cart
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Cart
      */
     public function getCartOfCurrentCustomer()
     {
@@ -168,7 +168,7 @@ class CartFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct[]
      */
     public function getQuantifiedProductsOfCurrentCustomerIndexedByCartItemId()
     {

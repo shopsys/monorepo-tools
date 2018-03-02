@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Country;
+namespace Shopsys\FrameworkBundle\Model\Country;
 
 use Doctrine\ORM\EntityManager;
 
@@ -29,7 +29,7 @@ class CountryRepository
 
     /**
      * @param int $countryId
-     * @return \Shopsys\ShopBundle\Model\Country\Country|null
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country|null
      */
     public function findById($countryId)
     {
@@ -38,14 +38,14 @@ class CountryRepository
 
     /**
      * @param int $countryId
-     * @return \Shopsys\ShopBundle\Model\Country\Country
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country
      */
     public function getById($countryId)
     {
         $country = $this->findById($countryId);
 
         if ($country === null) {
-            throw new \Shopsys\ShopBundle\Model\Country\Exception\CountryNotFoundException('Country with ID ' . $countryId . ' not found.');
+            throw new \Shopsys\FrameworkBundle\Model\Country\Exception\CountryNotFoundException('Country with ID ' . $countryId . ' not found.');
         }
 
         return $country;
@@ -53,7 +53,7 @@ class CountryRepository
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Country\Country[]
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country[]
      */
     public function getAllByDomainId($domainId)
     {

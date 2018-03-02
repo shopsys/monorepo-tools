@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Pricing\Exception;
+namespace Shopsys\FrameworkBundle\Model\Product\Pricing\Exception;
 
-use Shopsys\ShopBundle\Model\Product\Exception\ProductException;
+use Shopsys\FrameworkBundle\Model\Product\Exception\ProductException;
 
 interface ProductPricingException extends ProductException
 {

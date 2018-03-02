@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Image\Processing;
+namespace Shopsys\FrameworkBundle\Component\Image\Processing;
 
 use Intervention\Image\Constraint;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
-use Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImageProcessingService
@@ -53,12 +53,12 @@ class ImageProcessingService
     {
         $extension = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
         if (!in_array($extension, $this->supportedImageExtensions, true)) {
-            throw new \Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
+            throw new \Shopsys\FrameworkBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
         }
         try {
             return $this->imageManager->make($filepath);
         } catch (\Intervention\Image\Exception\NotReadableException $ex) {
-            throw new \Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath, $ex);
+            throw new \Shopsys\FrameworkBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath, $ex);
         }
     }
 
@@ -76,7 +76,7 @@ class ImageProcessingService
         } elseif (in_array($extension, $this->supportedImageExtensions, true)) {
             $newFilepath .= self::EXTENSION_JPG;
         } else {
-            throw new \Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
+            throw new \Shopsys\FrameworkBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
         }
 
         $image = $this->createInterventionImage($filepath)->save($newFilepath);
@@ -113,7 +113,7 @@ class ImageProcessingService
 
     /**
      * @param \Intervention\Image\Image $image
-     * @param \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig $sizeConfig
+     * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig $sizeConfig
      */
     public function resizeBySizeConfig(Image $image, ImageSizeConfig $sizeConfig)
     {

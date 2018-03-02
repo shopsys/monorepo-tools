@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Performance;
+namespace Shopsys\FrameworkBundle\DataFixtures\Performance;
 
 use Faker\Generator as Faker;
-use Shopsys\ShopBundle\Component\Console\ProgressBarFactory;
-use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade;
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Category\CategoryData;
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory;
+use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
+use Shopsys\FrameworkBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Category\CategoryData;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -17,12 +17,12 @@ class CategoryDataFixture
     const FIRST_PERFORMANCE_CATEGORY = 'first_performance_category';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade
      */
     private $sqlLoggerFacade;
 
@@ -42,22 +42,22 @@ class CategoryDataFixture
     private $categoriesCreated;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade
+     * @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade
      */
     private $persistentReferenceFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Console\ProgressBarFactory
+     * @var \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory
      */
     private $progressBarFactory;
 
     /**
      * @param int[] $categoryCountsByLevel
-     * @param \Shopsys\ShopBundle\Model\Category\CategoryFacade $categoryFacade
-     * @param \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
-     * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
+     * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @param \Faker\Generator $faker
-     * @param \Shopsys\ShopBundle\Component\Console\ProgressBarFactory $progressBarFactory
+     * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
      */
     public function __construct(
         $categoryCountsByLevel,
@@ -90,8 +90,8 @@ class CategoryDataFixture
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $parentCategory
-     * @param \Shopsys\ShopBundle\Component\Console\ProgressBar $progressBar
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $parentCategory
+     * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBar $progressBar
      * @param int $categoryLevel
      */
     private function recursivelyCreateCategoryTree($parentCategory, ProgressBar $progressBar, $categoryLevel = 0)
@@ -128,8 +128,8 @@ class CategoryDataFixture
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $parentCategory
-     * @return \Shopsys\ShopBundle\Model\Category\CategoryData
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $parentCategory
+     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryData
      */
     private function getRandomCategoryDataByParentCategory(Category $parentCategory)
     {

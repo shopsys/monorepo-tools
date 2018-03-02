@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Pricing;
 
 class Rounding
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     private $pricingSetting;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
      */
     public function __construct(PricingSetting $pricingSetting)
     {
@@ -39,7 +39,7 @@ class Rounding
                 break;
 
             default:
-                throw new \Shopsys\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException(
+                throw new \Shopsys\FrameworkBundle\Model\Pricing\Exception\InvalidRoundingTypeException(
                     sprintf('Rounding type %s is not valid', $roundingType)
                 );
         }

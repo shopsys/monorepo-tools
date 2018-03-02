@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Filesystem;
+namespace Shopsys\FrameworkBundle\Component\Filesystem;
 
 class FilepathComparator
 {
@@ -13,7 +13,7 @@ class FilepathComparator
     {
         $directoryPathRealpath = realpath($directoryPath);
         if ($directoryPathRealpath === false) {
-            throw new \Shopsys\ShopBundle\Component\Filesystem\Exception\DirectoryDoesNotExistException(
+            throw new \Shopsys\FrameworkBundle\Component\Filesystem\Exception\DirectoryDoesNotExistException(
                 $directoryPath
             );
         }

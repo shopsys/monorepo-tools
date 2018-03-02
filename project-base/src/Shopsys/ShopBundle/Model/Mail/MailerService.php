@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Mail;
+namespace Shopsys\FrameworkBundle\Model\Mail;
 
 use Swift_Attachment;
 use Swift_Mailer;
@@ -22,7 +22,7 @@ class MailerService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Mail\MessageData $messageData
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MessageData $messageData
      */
     public function send(MessageData $messageData)
     {
@@ -30,17 +30,17 @@ class MailerService
         $failedRecipients = [];
 
         if ($messageData->body === null || $messageData->subject === null) {
-            throw new \Shopsys\ShopBundle\Model\Mail\Exception\EmptyMailException();
+            throw new \Shopsys\FrameworkBundle\Model\Mail\Exception\EmptyMailException();
         }
 
         $successSend = $this->mailer->send($message, $failedRecipients);
         if (!$successSend && count($failedRecipients) > 0) {
-            throw new \Shopsys\ShopBundle\Model\Mail\Exception\SendMailFailedException($failedRecipients);
+            throw new \Shopsys\FrameworkBundle\Model\Mail\Exception\SendMailFailedException($failedRecipients);
         }
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Mail\MessageData $messageData
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MessageData $messageData
      * @return \Swift_Message
      */
     private function getMessageWithReplacedVariables(MessageData $messageData)

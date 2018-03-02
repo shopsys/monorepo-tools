@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 2.0.0-beta.21.0 - 2018-03-05
 ### Added
 - PHPStan support (@mhujer)
-	- currently analysing source code by level 0
+    - currently analysing source code by level 0
 - PHP 7.2 support (@TomasLudvik)
 - Uniformity of PHP and Postgres timezones is checked during the build (@Miroslav-Stopka)
 - in `TEST` environment `Domain` is created with all instances of `DomainConfig` having URL set to `%overwrite_domain_url%`
@@ -54,7 +54,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - services now use FQN as naming convention
     - services are private by default
     - inlined services (called via container) are set to public
-    - services required by another service are defined in services.yml (e.g. Shopsys\ShopBundle\Model\Administrator\Security\AdministratorUserProvider: ~)
+    - services required by another service are defined in services.yml (e.g. Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorUserProvider: ~)
     - all inline calls of services changed to use FQN
     - services no longer required in services.yml have been removed
     - services instanced after DI container creation are set as synthetic
@@ -150,7 +150,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - new article explaining [Basics About Package Architecture](docs/introduction/basics-about-package-architecture.md) (@vitek-rostislav)
 
 ### Changed
-- [`StandardFeedItemRepository`](src/Shopsys/ShopBundle/Model/Feed/Standard/StandardFeedItemRepository.php): now selects available products instead of sellable, filtering of not sellable products is made in product plugins (@MattCzerner)
+- `StandardFeedItemRepository`: now selects available products instead of sellable, filtering of not sellable products is made in product plugins (@MattCzerner)
 - implementations of `StandardFeedItemInterface` now must have implemented methods `isSellingDenied()` and `getCurrencyCode()`(@MattCzerner)
 - implementations of `FeedConfigInterface` now must have implemented method `getAdditionalInformation()` (@MattCzerner)
 
@@ -171,26 +171,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - dependency [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface/) upgraded from 0.2.1 to 0.3.0 (@vitek-rostislav)
 - it is no longer needed to redeclare feed plugin's implementations of `FeedConfigInterface` in `services.yml` (@vitek-rostislav)
     - decision about providing proper instance of `FeedItemRepositoryInterface` is made in `FeedConfigFacade`
-- FeedConfigRepository renamed to [`FeedConfigRegistry`](src/Shopsys/ShopBundle/Model/Feed/FeedConfigRegistry.php) (@MattCzerner)
+- FeedConfigRepository renamed to `FeedConfigRegistry` (@MattCzerner)
     - it is not fetching data from Doctrine as other repositories, it only serves as a container for registering services of specific type
-    - similar to [`PluginDataFixtureRegistry`](src/Shopsys/ShopBundle/Component/Plugin/PluginDataFixtureRegistry.php) or [`PluginCrudExtensionRegistry`](src/Shopsys/ShopBundle/Component/Plugin/PluginCrudExtensionRegistry.php)
-- `UknownPluginDataFixtureException` renamed to [`UnknownPluginCrudExtensionTypeException`](src/Shopsys/ShopBundle/Component/Plugin/Exception/UnknownPluginCrudExtensionTypeException.php) because of a typo (@MattCzerner)
-- [`FeedConfigRegistry`](src/Shopsys/ShopBundle/Model/Feed/FeedConfigRegistry.php) now contains all FeedConfigs in one array (indexed by type) (@vitek-rostislav)
-    - definition and assertion of known feed configs types moved from [`RegisterProductFeedConfigsCompilerPass`](src/Shopsys/ShopBundle/DependencyInjection/Compiler/RegisterProductFeedConfigsCompilerPass.php) to [`FeedConfigRegistry`](src/Shopsys/ShopBundle/Model/Feed/FeedConfigRegistry.php)
-    - changed message and arguments of [`UnknownFeedConfigTypeException`](src/Shopsys/ShopBundle/Model/Feed/Exception/UnknownFeedConfigTypeException.php)
+    - similar to `PluginDataFixtureRegistry` or `PluginCrudExtensionRegistry`
+- `UknownPluginDataFixtureException` renamed to `UnknownPluginCrudExtensionTypeException` because of a typo (@MattCzerner)
+- `FeedConfigRegistry` now contains all FeedConfigs in one array (indexed by type) (@vitek-rostislav)
+    - definition and assertion of known feed configs types moved from [`RegisterProductFeedConfigsCompilerPass`](src/Shopsys/ShopBundle/DependencyInjection/Compiler/RegisterProductFeedConfigsCompilerPass.php) to `FeedConfigRegistry`
+    - changed message and arguments of `UnknownFeedConfigTypeException`
 - renamed methods working with standard feeds only to be more expressive (@PetrHeinz)
     - renamed `FeedConfigFacade::getFeedConfigs()` to `getStandardFeedConfigs()`
     - renamed `FeedFacade::generateFeedsIteratively()` to `generateStandardFeedsIteratively()`
     - renamed `FeedGenerationConfigFactory::createAll()` to `createAllForStandardFeeds()`
 - [`parameters.yml.dist`](app/config/parameters.yml.dist): renamed parameter `email_for_error_reporting` to `error_reporting_email_to` (@vitek-rostislav)
 - sender email for error reporting is now configured in [`parameters.yml.dist`](app/config/parameters.yml.dist) (@vitek-rostislav)
-- reimplemented [`CategoriesType`](src/Shopsys/ShopBundle/Form/CategoriesType.php) (@Petr Heinz)
+- reimplemented `CategoriesType` (@Petr Heinz)
     - it now extends `CollectionType` instead of `ChoiceType`
     - it loads only those categories that are needed to show all selected categories in a tree, not all of them
     - collapsed categories can be loaded via AJAX
-- [`CategoryRepository::findById()`](src/Shopsys/ShopBundle/Model/Category/CategoryRepository.php) now uses `find()` method of Doctrine repository instead of query builder so it can use cached results (@PetrHeinz)
+- `CategoryRepository::findById()` now uses `find()` method of Doctrine repository instead of query builder so it can use cached results (@PetrHeinz)
 - it is possible to mention occurrences of an image size in [`images.yml`](src/Shopsys/ShopBundle/Resources/config/images.yml) (@PetrHeinz)
-    - previously they were directly in [`ImageController`](src/Shopsys/ShopBundle/Controller/Admin/ImageController.php)
+    - previously they were directly in `ImageController`
     - they are not translatable anymore (too hard to maintain)
 
 ### Removed

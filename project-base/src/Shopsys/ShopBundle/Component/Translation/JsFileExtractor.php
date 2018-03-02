@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Translation;
+namespace Shopsys\FrameworkBundle\Component\Translation;
 
 use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
@@ -8,7 +8,7 @@ use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
 use PLUG\JavaScript\JParser;
 use PLUG\JavaScript\JTokenizer;
-use Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
+use Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
 use SplFileInfo;
 use Twig_Node;
 
@@ -25,7 +25,7 @@ class JsFileExtractor implements FileVisitorInterface
     private $catalogue;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
+     * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
      */
     private $jsTranslatorCallParser;
 
@@ -53,11 +53,11 @@ class JsFileExtractor implements FileVisitorInterface
         try {
             $this->parseFile($contents);
         } catch (\PLUG\parsing\ParseError $ex) {
-            throw new \Shopsys\ShopBundle\Component\Translation\Exception\ExtractionException(
+            throw new \Shopsys\FrameworkBundle\Component\Translation\Exception\ExtractionException(
                 $ex->getMessage() . "\n" . 'in file ' . $this->file->getRealPath()
             );
-        } catch (\Shopsys\ShopBundle\Component\Javascript\Parser\Exception\JsParserException $ex) {
-            throw new \Shopsys\ShopBundle\Component\Translation\Exception\ExtractionException(
+        } catch (\Shopsys\FrameworkBundle\Component\Javascript\Parser\Exception\JsParserException $ex) {
+            throw new \Shopsys\FrameworkBundle\Component\Translation\Exception\ExtractionException(
                 $ex->getMessage() . ' in file ' . $this->file->getRealPath()
             );
         }

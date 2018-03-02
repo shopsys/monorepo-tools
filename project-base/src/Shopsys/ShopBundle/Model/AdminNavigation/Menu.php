@@ -1,36 +1,36 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdminNavigation;
+namespace Shopsys\FrameworkBundle\Model\AdminNavigation;
 
 class Menu
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
     private $items;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
     private $regularItems;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
      */
     private $settingsItem;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
      */
     private $accountItem;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
      */
     private $domainsItem;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $items
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[] $items
      */
     public function __construct(array $items)
     {
@@ -51,14 +51,14 @@ class Menu
         }
 
         if (!isset($this->settingsItem)) {
-            throw new \Shopsys\ShopBundle\Model\AdminNavigation\Exception\MissingSettingsItemException(
+            throw new \Shopsys\FrameworkBundle\Model\AdminNavigation\Exception\MissingSettingsItemException(
                 'Menu item of type ' . MenuItem::TYPE_SETTINGS . ' not found in config'
             );
         }
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
     public function getItems()
     {
@@ -66,7 +66,7 @@ class Menu
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
     public function getRegularItems()
     {
@@ -74,7 +74,7 @@ class Menu
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
      */
     public function getSettingsItem()
     {
@@ -82,7 +82,7 @@ class Menu
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
     public function getSettingsItems()
     {
@@ -90,7 +90,7 @@ class Menu
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
      */
     public function getAccountItem()
     {
@@ -98,7 +98,7 @@ class Menu
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
      */
     public function getDomainsItem()
     {
@@ -110,7 +110,7 @@ class Menu
      *
      * @param string $route
      * @param array|null $parameters
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem|null
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem|null
      */
     private function getItemMatchingRoute($route, array $parameters = null)
     {
@@ -122,10 +122,10 @@ class Menu
     /**
      * Finds deepest item matching specified route.
      *
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $items
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[] $items
      * @param string $route
      * @param array|null $parameters
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem|null
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem|null
      */
     private function getItemMatchingRouteRecursive(array $items, $route, array $parameters = null)
     {
@@ -147,7 +147,7 @@ class Menu
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem $item
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem $item
      * @param string $route
      * @param array|null $parameters
      * @return bool
@@ -174,8 +174,8 @@ class Menu
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem $item
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]|null
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem $item
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]|null
      */
     private function getItemPath(MenuItem $item)
     {
@@ -183,7 +183,7 @@ class Menu
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem $item
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem $item
      * @return bool
      */
     private function isItemDescendantOfSettings(MenuItem $item)
@@ -201,9 +201,9 @@ class Menu
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $items
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem $item
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]|null
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[] $items
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem $item
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]|null
      */
     private function getItemPathRecursive(array $items, MenuItem $item)
     {
@@ -228,13 +228,13 @@ class Menu
     /**
      * @param string $route
      * @param array|null $parameters
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
     public function getMenuPath($route, $parameters)
     {
         $matchingItem = $this->getItemMatchingRoute($route, $parameters);
         if ($matchingItem === null) {
-            throw new \Shopsys\ShopBundle\Model\AdminNavigation\Exception\MenuItemNotMatchingRouteException($route, $parameters);
+            throw new \Shopsys\FrameworkBundle\Model\AdminNavigation\Exception\MenuItemNotMatchingRouteException($route, $parameters);
         }
 
         return $this->getItemPath($matchingItem);

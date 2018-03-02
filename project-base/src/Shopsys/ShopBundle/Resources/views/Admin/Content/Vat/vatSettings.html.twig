@@ -6,7 +6,7 @@
         {{ form_row(form.defaultVat, { 'label': 'Default VAT rate'|trans }) }}
         {{ form_row(form.roundingType, { 'label': 'Price including VAT rounding'|trans }) }}
 
-        {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 {{ form_widget(form.save, { label: 'Save changes'|trans}) }}
             {% endblock %}

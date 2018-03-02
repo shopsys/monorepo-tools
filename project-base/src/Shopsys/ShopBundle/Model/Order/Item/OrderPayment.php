@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Item;
+namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Payment\Payment;
-use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
 /**
  * @ORM\Entity
@@ -13,20 +13,20 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
 class OrderPayment extends OrderItem
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Payment
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Payment\Payment")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Payment\Payment")
      * @ORM\JoinColumn(nullable=true)
      */
     private $payment;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @param string $name
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price $price
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
      * @param string $vatPercent
      * @param int $quantity
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      */
     public function __construct(
         Order $order,
@@ -49,7 +49,7 @@ class OrderPayment extends OrderItem
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
     public function getPayment()
     {
@@ -57,7 +57,7 @@ class OrderPayment extends OrderItem
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItemData $orderPaymentData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderPaymentData
      */
     public function edit(OrderItemData $orderPaymentData)
     {
@@ -65,7 +65,7 @@ class OrderPayment extends OrderItem
             $this->payment = $orderPaymentData->payment;
             parent::edit($orderPaymentData);
         } else {
-            throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\InvalidArgumentException(
+            throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidArgumentException(
                 'Instance of ' . OrderPaymentData::class . ' is required as argument.'
             );
         }

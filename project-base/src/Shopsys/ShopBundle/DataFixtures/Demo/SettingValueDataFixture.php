@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture;
 
 class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -17,7 +17,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
     public function load(ObjectManager $manager)
     {
         $setting = $this->get(Setting::class);
-        /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
+        /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
 
         // Any previously executed data fixture using Setting (even transitively) would fill the Setting cache.
         // As EM identity map is cleared after each fixture we should clear the Setting cache before editing the values.
@@ -25,9 +25,9 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 
         $termsAndConditions = $this->getReference(ArticleDataFixture::ARTICLE_TERMS_AND_CONDITIONS_1);
         $privacyPolicy = $this->getReference(ArticleDataFixture::ARTICLE_PRIVACY_POLICY_1);
-        /* @var $termsAndConditions \Shopsys\ShopBundle\Model\Article\Article */
+        /* @var $termsAndConditions \Shopsys\FrameworkBundle\Model\Article\Article */
         $cookies = $this->getReference(ArticleDataFixture::ARTICLE_COOKIES_1);
-        /* @var $cookies \Shopsys\ShopBundle\Model\Article\Article */
+        /* @var $cookies \Shopsys\FrameworkBundle\Model\Article\Article */
 
         $setting->setForDomain(Setting::COOKIES_ARTICLE_ID, $cookies->getId(), Domain::FIRST_DOMAIN_ID);
         $setting->setForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditions->getId(), Domain::FIRST_DOMAIN_ID);

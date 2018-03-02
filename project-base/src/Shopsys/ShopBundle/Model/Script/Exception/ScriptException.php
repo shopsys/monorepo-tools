@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Script\Exception;
+namespace Shopsys\FrameworkBundle\Model\Script\Exception;
 
 interface ScriptException
 {

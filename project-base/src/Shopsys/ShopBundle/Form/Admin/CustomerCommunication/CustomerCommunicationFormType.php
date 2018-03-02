@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\CustomerCommunication;
+namespace Shopsys\FrameworkBundle\Form\Admin\CustomerCommunication;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;

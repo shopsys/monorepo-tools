@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Availability;
+namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
-use Shopsys\ShopBundle\Component\Doctrine\SortableNullsWalker;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Component\Doctrine\SortableNullsWalker;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class AvailabilityRepository
 {
@@ -33,7 +33,7 @@ class AvailabilityRepository
 
     /**
      * @param int $availabilityId
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability|null
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability|null
      */
     public function findById($availabilityId)
     {
@@ -42,7 +42,7 @@ class AvailabilityRepository
 
     /**
      * @param int $availabilityId
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      */
     public function getById($availabilityId)
     {
@@ -50,14 +50,14 @@ class AvailabilityRepository
 
         if ($availability === null) {
             $message = 'Availability with ID ' . $availabilityId . ' not found.';
-            throw new \Shopsys\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException($message);
         }
 
         return $availability;
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability[]
      */
     public function getAll()
     {
@@ -74,7 +74,7 @@ class AvailabilityRepository
 
     /**
      * @param int $availabilityId
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability[]
      */
     public function getAllExceptId($availabilityId)
     {
@@ -86,7 +86,7 @@ class AvailabilityRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability $availability
      * @return bool
      */
     public function isAvailabilityUsed(Availability $availability)
@@ -103,8 +103,8 @@ class AvailabilityRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $oldAvailability
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $newAvailability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability $oldAvailability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability $newAvailability
      */
     public function replaceAvailability(Availability $oldAvailability, Availability $newAvailability)
     {

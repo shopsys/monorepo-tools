@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Domain\Config;
+namespace Shopsys\FrameworkBundle\Component\Domain\Config;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
@@ -25,7 +25,7 @@ class DomainsConfigLoader
     /**
      * @param string $domainsConfigFilepath
      * @param string $domainsUrlsConfigFilepath
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[]
      */
     public function loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath)
     {
@@ -37,7 +37,7 @@ class DomainsConfigLoader
         if (!$this->isConfigMatchingUrlsConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId)) {
             $message =
                 'File ' . $domainsUrlsConfigFilepath . ' does not contain urls for all domains listed in ' . $domainsConfigFilepath;
-            throw new \Shopsys\ShopBundle\Component\Domain\Config\Exception\DomainConfigsDoNotMatchException($message);
+            throw new \Shopsys\FrameworkBundle\Component\Domain\Config\Exception\DomainConfigsDoNotMatchException($message);
         }
         $processedConfigsWithUrlsByDomainId = $this->addUrlsToProcessedConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId);
 
@@ -48,7 +48,7 @@ class DomainsConfigLoader
 
     /**
      * @param array $processedConfigsByDomainId
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[]
      */
     private function loadDomainConfigsFromArray($processedConfigsByDomainId)
     {
@@ -63,7 +63,7 @@ class DomainsConfigLoader
 
     /**
      * @param array $domainConfig
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     private function processDomainConfigArray(array $domainConfig)
     {

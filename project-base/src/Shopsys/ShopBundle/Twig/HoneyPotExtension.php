@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig;
+namespace Shopsys\FrameworkBundle\Twig;
 
 use Symfony\Component\Form\FormView;
 use Twig_Extension;
@@ -39,7 +39,7 @@ class HoneyPotExtension extends Twig_Extension
         $rootFormView = $this->getRootFormView($formView);
 
         if ($this->containsNotRenderedPassword($rootFormView)) {
-            throw new \Shopsys\ShopBundle\Twig\Exception\HoneyPotRenderedBeforePasswordException();
+            throw new \Shopsys\FrameworkBundle\Twig\Exception\HoneyPotRenderedBeforePasswordException();
         }
     }
 

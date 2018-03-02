@@ -1,4 +1,4 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Categories'|trans }}{% endblock %}
 {% block h1 %}{{ 'Categories'|trans }}{% endblock %}
@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block main_content %}
-    {{ render(controller('ShopsysShopBundle:Admin/Category:listDomainTabs')) }}
+    {{ render(controller('ShopsysFrameworkBundle:Admin/Category:listDomainTabs')) }}
 
     {% macro categoryTreeItem(categoryDetails, isFirstLevel) %}
         <ul class="js-category-tree-items {{ isFirstLevel ? 'form-tree__content' : '' }}">
@@ -23,10 +23,10 @@
                             <a href="{{ url('admin_category_edit', {id: categoryDetail.category.id}) }}" class="form-tree__item__control">
                                 <i class="svg svg-pencil"></i>
                             </a>
-                            {% set csrfTokenId = constant('Shopsys\\ShopBundle\\Component\\Router\\Security\\RouteCsrfProtector::CSRF_TOKEN_ID_PREFIX') ~ 'admin_category_delete' %}
+                            {% set csrfTokenId = constant('Shopsys\\FrameworkBundle\\Component\\Router\\Security\\RouteCsrfProtector::CSRF_TOKEN_ID_PREFIX') ~ 'admin_category_delete' %}
                             {% set categoryDeleteUrl = url('admin_category_delete', {
                                 id: categoryDetail.category.id,
-                                (constant('Shopsys\\ShopBundle\\Component\\Router\\Security\\RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER')): csrf_token(csrfTokenId)
+                                (constant('Shopsys\\FrameworkBundle\\Component\\Router\\Security\\RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER')): csrf_token(csrfTokenId)
                             }) %}
                             <a
                                 href="{{ categoryDeleteUrl }}"
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 <button
                     class="btn btn--disabled"

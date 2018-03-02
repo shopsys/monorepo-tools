@@ -1,21 +1,21 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
 class ProductParameterValueData
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter|null
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter|null
      */
     public $parameter;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValueData|null
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueData|null
      */
     public $parameterValueData;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue $productParameterValue
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue $productParameterValue
      */
     public function setFromEntity(ProductParameterValue $productParameterValue)
     {

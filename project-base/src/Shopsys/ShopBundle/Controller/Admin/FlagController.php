@@ -1,22 +1,22 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
-use Shopsys\ShopBundle\Model\Product\Flag\FlagInlineEdit;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade;
+use Shopsys\FrameworkBundle\Model\Product\Flag\FlagInlineEdit;
 
 class FlagController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade
      */
     private $flagFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagInlineEdit
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagInlineEdit
      */
     private $flagInlineEdit;
 
@@ -37,7 +37,7 @@ class FlagController extends AdminBaseController
 
         $grid = $productInlineEdit->getGrid();
 
-        return $this->render('@ShopsysShop/Admin/Content/Flag/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Flag/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -60,7 +60,7 @@ class FlagController extends AdminBaseController
                     'name' => $fullName,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Product\Flag\Exception\FlagNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Product\Flag\Exception\FlagNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected flag doesn\'t exist.'));
         }
 

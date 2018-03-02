@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Module;
+namespace Shopsys\FrameworkBundle\Model\Module;
 
 class ModuleList
 {
@@ -24,7 +24,7 @@ class ModuleList
         $labelsIndexedByNames = $this->getLabelsIndexedByName();
         $namesIndexedByLabel = array_flip($labelsIndexedByNames);
         if (count($labelsIndexedByNames) !== count($namesIndexedByLabel)) {
-            throw new \Shopsys\ShopBundle\Model\Module\Exception\NotUniqueModuleLabelException($labelsIndexedByNames);
+            throw new \Shopsys\FrameworkBundle\Model\Module\Exception\NotUniqueModuleLabelException($labelsIndexedByNames);
         }
 
         return $namesIndexedByLabel;

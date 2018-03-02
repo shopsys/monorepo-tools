@@ -2,7 +2,7 @@
 {% use '@ShopsysShop/Front/Layout/header.html.twig' %}
 
 {% block html_body %}
-    {% set adminLoggedAsCustomer = is_granted(constant('Shopsys\\ShopBundle\\Model\\Security\\Roles::ROLE_ADMIN_AS_CUSTOMER')) %}
+    {% set adminLoggedAsCustomer = is_granted(constant('Shopsys\\FrameworkBundle\\Model\\Security\\Roles::ROLE_ADMIN_AS_CUSTOMER')) %}
     {% if adminLoggedAsCustomer or isMailerSettingUnusual() %}
         <div class="window-bar">
             {% if adminLoggedAsCustomer %}

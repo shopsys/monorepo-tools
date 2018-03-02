@@ -4,8 +4,8 @@ services:
     autoconfigure: true
     public: false
 
-  Shopsys\ShopBundle\Component\Domain\DomainFactory:
-    class: Shopsys\ShopBundle\Component\Domain\DomainFactoryOverwritingDomainUrl
+  Shopsys\FrameworkBundle\Component\Domain\DomainFactory:
+    class: Shopsys\FrameworkBundle\Component\Domain\DomainFactoryOverwritingDomainUrl
     public: true
     arguments:
       - '%overwrite_domain_url%'

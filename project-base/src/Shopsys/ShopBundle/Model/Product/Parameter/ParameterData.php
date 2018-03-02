@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
 class ParameterData
 {
@@ -25,7 +25,7 @@ class ParameterData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\Parameter $parameter
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter $parameter
      */
     public function setFromEntity(Parameter $parameter)
     {

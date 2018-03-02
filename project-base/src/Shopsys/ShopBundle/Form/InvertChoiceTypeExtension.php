@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form;
+namespace Shopsys\FrameworkBundle\Form;
 
-use Shopsys\ShopBundle\Component\Transformers\InverseMultipleChoiceTransformer;
+use Shopsys\FrameworkBundle\Component\Transformers\InverseMultipleChoiceTransformer;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,7 +28,7 @@ class InvertChoiceTypeExtension extends AbstractTypeExtension
         parent::buildForm($builder, $options);
 
         if ($options[self::INVERT_OPTION] && !$options['multiple']) {
-            throw new \Shopsys\ShopBundle\Component\Form\Exception\InvertedChoiceNotMultipleException(
+            throw new \Shopsys\FrameworkBundle\Component\Form\Exception\InvertedChoiceNotMultipleException(
                 'The "invert" option can be enabled only with "multiple" set to true.'
             );
         }

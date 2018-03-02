@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Cron\Config\Exception;
+namespace Shopsys\FrameworkBundle\Component\Cron\Config\Exception;
 
 use Exception;
 

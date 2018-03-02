@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Domain;
+namespace Shopsys\FrameworkBundle\Component\Domain;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -9,7 +9,7 @@ class AdminDomainTabsFacade
     const SESSION_SELECTED_DOMAIN = 'selected_domain_id';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -19,7 +19,7 @@ class AdminDomainTabsFacade
     private $session;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
      */
     public function __construct(Domain $domain, Session $session)
@@ -43,14 +43,14 @@ class AdminDomainTabsFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     public function getSelectedDomainConfig()
     {
         try {
             $domainId = $this->session->get(self::SESSION_SELECTED_DOMAIN);
             return $this->domain->getDomainConfigById($domainId);
-        } catch (\Shopsys\ShopBundle\Component\Domain\Exception\InvalidDomainIdException $e) {
+        } catch (\Shopsys\FrameworkBundle\Component\Domain\Exception\InvalidDomainIdException $e) {
             $allDomains = $this->domain->getAll();
             return reset($allDomains);
         }

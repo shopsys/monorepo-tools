@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Advert;
+namespace Shopsys\FrameworkBundle\Model\Advert;
 
 use Doctrine\ORM\EntityManager;
 
@@ -29,7 +29,7 @@ class AdvertRepository
 
     /**
      * @param string $advertId
-     * @return \Shopsys\ShopBundle\Model\Advert\Advert|null
+     * @return \Shopsys\FrameworkBundle\Model\Advert\Advert|null
      */
     public function findById($advertId)
     {
@@ -54,7 +54,7 @@ class AdvertRepository
     /**
      * @param string $positionName
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Advert\Advert|null
+     * @return \Shopsys\FrameworkBundle\Model\Advert\Advert|null
      */
     public function findRandomAdvertByPosition($positionName, $domainId)
     {
@@ -75,14 +75,14 @@ class AdvertRepository
 
     /**
      * @param int $advertId
-     * @return \Shopsys\ShopBundle\Model\Advert\Advert
+     * @return \Shopsys\FrameworkBundle\Model\Advert\Advert
      */
     public function getById($advertId)
     {
         $advert = $this->getAdvertRepository()->find($advertId);
         if ($advert === null) {
             $message = 'Advert with ID ' . $advertId . ' not found';
-            throw new \Shopsys\ShopBundle\Model\Advert\Exception\AdvertNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Model\Advert\Exception\AdvertNotFoundException($message);
         }
         return $advert;
     }

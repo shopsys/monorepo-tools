@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Category;
+namespace Shopsys\FrameworkBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class CategoryVisibilityRepository
@@ -15,12 +15,12 @@ class CategoryVisibilityRepository
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRecalculationScheduler
      */
     private $categoryVisibilityRecalculationScheduler;
 
@@ -43,7 +43,7 @@ class CategoryVisibilityRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      */
     private function refreshCategoriesVisibilityOnDomain(DomainConfig $domainConfig)
     {
@@ -57,7 +57,7 @@ class CategoryVisibilityRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      */
     private function setRootCategoryVisibleOnDomain(DomainConfig $domainConfig)
     {
@@ -77,7 +77,7 @@ class CategoryVisibilityRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return int
      */
     private function getMaxLevelOnDomain(DomainConfig $domainConfig)
@@ -94,7 +94,7 @@ class CategoryVisibilityRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param int $level
      */
     private function refreshCategoriesVisibilityOnDomainAndLevel(DomainConfig $domainConfig, $level)

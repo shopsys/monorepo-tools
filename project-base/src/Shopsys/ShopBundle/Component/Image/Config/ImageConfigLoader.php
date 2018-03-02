@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Image\Config;
+namespace Shopsys\FrameworkBundle\Component\Image\Config;
 
-use Shopsys\ShopBundle\Component\Utils;
+use Shopsys\FrameworkBundle\Component\Utils;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
@@ -15,7 +15,7 @@ class ImageConfigLoader
     private $filesystem;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[]
+     * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig[]
      */
     private $foundEntityConfigs;
 
@@ -34,7 +34,7 @@ class ImageConfigLoader
 
     /**
      * @param string $filename
-     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      */
     public function loadFromYaml($filename)
     {
@@ -59,7 +59,7 @@ class ImageConfigLoader
 
     /**
      * @param array $outputConfig
-     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[]
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig[]
      */
     public function loadFromArray($outputConfig)
     {
@@ -69,8 +69,8 @@ class ImageConfigLoader
         foreach ($outputConfig as $entityConfig) {
             try {
                 $this->processEntityConfig($entityConfig);
-            } catch (\Shopsys\ShopBundle\Component\Image\Config\Exception\ImageConfigException $e) {
-                throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\EntityParseException(
+            } catch (\Shopsys\FrameworkBundle\Component\Image\Config\Exception\ImageConfigException $e) {
+                throw new \Shopsys\FrameworkBundle\Component\Image\Config\Exception\EntityParseException(
                     $entityConfig[ImageConfigDefinition::CONFIG_CLASS],
                     $e
                 );
@@ -91,7 +91,7 @@ class ImageConfigLoader
         if (array_key_exists($entityClass, $this->foundEntityConfigs)
             || array_key_exists($entityName, $this->foundEntityNames)
         ) {
-            throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\DuplicateEntityNameException($entityName);
+            throw new \Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateEntityNameException($entityName);
         }
 
         $types = $this->prepareTypes($entityConfig[ImageConfigDefinition::CONFIG_TYPES]);
@@ -105,7 +105,7 @@ class ImageConfigLoader
 
     /**
      * @param array $sizesConfig
-     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig[]
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig[]
      */
     private function prepareSizes($sizesConfig)
     {
@@ -122,7 +122,7 @@ class ImageConfigLoader
                     $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_OCCURRENCE]
                 );
             } else {
-                throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\DuplicateSizeNameException($sizeName);
+                throw new \Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateSizeNameException($sizeName);
             }
         }
         if (!array_key_exists(ImageConfig::ORIGINAL_SIZE_NAME, $result)) {
@@ -144,7 +144,7 @@ class ImageConfigLoader
             if (!array_key_exists($typeName, $result)) {
                 $result[$typeName] = $this->prepareSizes($typeConfig[ImageConfigDefinition::CONFIG_SIZES]);
             } else {
-                throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\DuplicateTypeNameException($typeName);
+                throw new \Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateTypeNameException($typeName);
             }
         }
 

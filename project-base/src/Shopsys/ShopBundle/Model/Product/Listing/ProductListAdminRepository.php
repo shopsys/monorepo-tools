@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Listing;
+namespace Shopsys\FrameworkBundle\Model\Product\Listing;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Component\String\DatabaseSearching;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use Shopsys\ShopBundle\Model\Localization\Localization;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Component\String\DatabaseSearching;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductListAdminRepository
 {
@@ -19,7 +19,7 @@ class ProductListAdminRepository
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
@@ -56,7 +56,7 @@ class ProductListAdminRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-     * @param \Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
+     * @param \Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
      */
     public function extendQueryBuilderByQuickSearchData(
         QueryBuilder $queryBuilder,

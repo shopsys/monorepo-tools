@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use DateTime;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductEditData;
-use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
+use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
 
 class ProductDataFixtureLoader
 {
@@ -38,52 +38,52 @@ class ProductDataFixtureLoader
     const COLUMN_MAIN_VARIANT_CATNUM = 25;
 
     /**
-     * @var \Shopsys\ShopBundle\DataFixtures\Demo\ProductParametersFixtureLoader
+     * @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductParametersFixtureLoader
      */
     private $productParametersFixtureLoader;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat[]
      */
     private $vats;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\Availability[]
      */
     private $availabilities;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\Category[]
+     * @var \Shopsys\FrameworkBundle\Model\Category\Category[]
      */
     private $categories;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
      */
     private $flags;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[]
      */
     private $brands;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\Unit[]
      */
     private $units;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup[]
      */
     private $pricingGroups;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory
      */
     private $productEditDataFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -98,13 +98,13 @@ class ProductDataFixtureLoader
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[] $vats
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability[] $availabilities
-     * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\Flag[] $flags
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand[] $brands
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit[] $units
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat[] $vats
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability[] $availabilities
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category[] $categories
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[] $flags
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[] $brands
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\Unit[] $units
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
      */
     public function refreshCachedEntities(
         array $vats,
@@ -127,7 +127,7 @@ class ProductDataFixtureLoader
 
     /**
      * @param array $row
-     * @return \Shopsys\ShopBundle\Model\Product\ProductEditData
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductEditData
      */
     public function createProductEditDataFromRowForFirstDomain($row)
     {
@@ -154,7 +154,7 @@ class ProductDataFixtureLoader
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
      * @param array $row
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
@@ -230,7 +230,7 @@ class ProductDataFixtureLoader
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
      * @param array $row
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
@@ -258,7 +258,7 @@ class ProductDataFixtureLoader
             case 'en':
                 return self::COLUMN_SHORT_DESCRIPTION_EN;
             default:
-                throw new \Shopsys\ShopBundle\Component\DataFixture\Exception\UnsupportedLocaleException($locale);
+                throw new \Shopsys\FrameworkBundle\Component\DataFixture\Exception\UnsupportedLocaleException($locale);
         }
     }
 
@@ -276,7 +276,7 @@ class ProductDataFixtureLoader
             case 'en':
                 return self::COLUMN_DESCRIPTION_EN;
             default:
-                throw new \Shopsys\ShopBundle\Component\DataFixture\Exception\UnsupportedLocaleException($locale);
+                throw new \Shopsys\FrameworkBundle\Component\DataFixture\Exception\UnsupportedLocaleException($locale);
         }
     }
 
@@ -316,7 +316,7 @@ class ProductDataFixtureLoader
 
     /**
      * @param array $row
-     * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
      * @param int $domainId
      */
     private function setProductDataPricesFromCsv(array $row, ProductEditData $productEditData, $domainId)
@@ -339,14 +339,14 @@ class ProductDataFixtureLoader
                 }
                 break;
             default:
-                throw new \Shopsys\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException(
+                throw new \Shopsys\FrameworkBundle\Model\Product\Exception\InvalidPriceCalculationTypeException(
                     $row[self::COLUMN_PRICE_CALCULATION_TYPE]
                 );
         }
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
      */
     private function createDefaultManualPriceForAllPricingGroups(ProductEditData $productEditData)
     {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdminNavigation;
+namespace Shopsys\FrameworkBundle\Model\AdminNavigation;
 
 class Breadcrumb
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuFactory
      */
     private $menuFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem|null
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem|null
      */
     private $overridingLastItem;
 
@@ -20,7 +20,7 @@ class Breadcrumb
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem $menuItem
+     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem $menuItem
      */
     public function overrideLastItem(MenuItem $menuItem)
     {
@@ -30,7 +30,7 @@ class Breadcrumb
     /**
      * @param \Symfony\Component\Routing\Route $route
      * @param array|null $routeParameters
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
     public function getItems($route, $routeParameters)
     {

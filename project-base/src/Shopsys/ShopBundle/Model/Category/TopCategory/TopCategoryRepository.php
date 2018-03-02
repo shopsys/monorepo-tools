@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Category\TopCategory;
+namespace Shopsys\FrameworkBundle\Model\Category\TopCategory;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Model\Category\CategoryRepository;
+use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
 
 class TopCategoryRepository
 {
@@ -14,7 +14,7 @@ class TopCategoryRepository
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
     private $categoryRepository;
 
@@ -34,7 +34,7 @@ class TopCategoryRepository
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategory[]
      */
     public function getAllByDomainId($domainId)
     {
@@ -43,7 +43,7 @@ class TopCategoryRepository
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategory[]
      */
     public function getVisibleByDomainId($domainId)
     {

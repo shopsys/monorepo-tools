@@ -1,20 +1,20 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdvancedSearch;
+namespace Shopsys\FrameworkBundle\Model\AdvancedSearch;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderCityFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderCreateDateFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderDomainFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderEmailFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderLastNameFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderNameFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderNumberFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderPhoneNumberFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderPriceFilterWithVatFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderProductFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderStatusFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderStreetFilter;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderCityFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderCreateDateFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderDomainFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderEmailFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderLastNameFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderNameFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderNumberFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderPhoneNumberFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderPriceFilterWithVatFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderProductFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderStatusFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\OrderStreetFilter;
 
 class OrderAdvancedSearchConfig extends AdvancedSearchConfig
 {

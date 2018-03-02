@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Feed\Delivery;
+namespace Shopsys\FrameworkBundle\Model\Feed\Delivery;
 
 use Shopsys\ProductFeed\DeliveryFeedItemInterface;
 

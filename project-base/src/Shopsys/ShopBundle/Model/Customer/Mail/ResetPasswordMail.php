@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer\Mail;
+namespace Shopsys\FrameworkBundle\Model\Customer\Mail;
 
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Mail\MailTemplate;
-use Shopsys\ShopBundle\Model\Mail\MailTypeInterface;
-use Shopsys\ShopBundle\Model\Mail\MessageData;
-use Shopsys\ShopBundle\Model\Mail\MessageFactoryInterface;
-use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
+use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
+use Shopsys\FrameworkBundle\Model\Mail\MailTypeInterface;
+use Shopsys\FrameworkBundle\Model\Mail\MessageData;
+use Shopsys\FrameworkBundle\Model\Mail\MessageFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Mail\Setting\MailSetting;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
@@ -18,12 +18,12 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
     const VARIABLE_NEW_PASSWORD_URL = '{new_password_url}';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
 
@@ -73,9 +73,9 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate $template
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @return \Shopsys\ShopBundle\Model\Mail\MessageData
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplate $template
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @return \Shopsys\FrameworkBundle\Model\Mail\MessageData
      */
     public function createMessage(MailTemplate $template, $user)
     {
@@ -92,7 +92,7 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @return string[]
      */
     private function getBodyValuesIndexedByVariableName(User $user)
@@ -104,7 +104,7 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @return string
      */
     private function getVariableNewPasswordUrl(User $user)
@@ -124,7 +124,7 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @return string[]
      */
     private function getSubjectValuesIndexedByVariableName(User $user)

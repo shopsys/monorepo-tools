@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\DependencyInjection\Compiler;
+namespace Shopsys\FrameworkBundle\DependencyInjection\Compiler;
 
-use Shopsys\ShopBundle\Model\Feed\FeedConfigRegistry;
+use Shopsys\FrameworkBundle\Model\Feed\FeedConfigRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

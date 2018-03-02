@@ -2,9 +2,9 @@
 
 namespace Tests\ShopBundle\Database\Component\Grid;
 
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class QueryBuilderWithRowManipulatorDataSourceTest extends DatabaseTestCase

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component;
+namespace Shopsys\FrameworkBundle\Component;
 
 use Doctrine\Common\Util\Debug as DoctrineDebug;
 

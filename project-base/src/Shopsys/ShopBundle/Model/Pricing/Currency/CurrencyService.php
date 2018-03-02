@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Currency;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Currency;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 
 class CurrencyService
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData $currencyData
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     public function create(CurrencyData $currencyData)
     {
@@ -17,10 +17,10 @@ class CurrencyService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData $currencyData
      * @param bool $isDefaultCurrency
-     * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     public function edit(Currency $currency, CurrencyData $currencyData, $isDefaultCurrency)
     {
@@ -36,9 +36,9 @@ class CurrencyService
 
     /**
      * @param int $defaultCurrencyId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[] $currenciesUsedInOrders
-     * @param \Shopsys\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency[] $currenciesUsedInOrders
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting $pricingSetting
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @return int[]
      */
     public function getNotAllowedToDeleteCurrencyIds(

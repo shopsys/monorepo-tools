@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Form;
+namespace Shopsys\FrameworkBundle\Component\Form;
 
 use DateTime;
-use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
+use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class FormTimeProvider

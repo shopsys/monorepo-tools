@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Watcher;
+namespace Shopsys\FrameworkBundle\Model\Order\Watcher;
 
-use Shopsys\ShopBundle\Model\Order\OrderData;
-use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
-use Shopsys\ShopBundle\Model\Payment\Payment;
-use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
-use Shopsys\ShopBundle\Model\Transport\Transport;
-use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Order\OrderData;
+use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class TransportAndPaymentWatcherService
@@ -23,19 +23,19 @@ class TransportAndPaymentWatcherService
     private $session;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
      */
     private $paymentPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
      */
     private $transportPriceCalculation;
 
     /**
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
-     * @param \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
-     * @param \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
      */
     public function __construct(
         Session $session,
@@ -48,11 +48,11 @@ class TransportAndPaymentWatcherService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
-     * @return \Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentCheckResult
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport[] $transports
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $payments
+     * @return \Shopsys\FrameworkBundle\Model\Order\Watcher\TransportAndPaymentCheckResult
      */
     public function checkTransportAndPayment(OrderData $orderData, OrderPreview $orderPreview, $transports, $payments)
     {
@@ -91,9 +91,9 @@ class TransportAndPaymentWatcherService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param int $domainId
      * @return bool
      */
@@ -123,9 +123,9 @@ class TransportAndPaymentWatcherService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param int $domainId
      * @return bool
      */
@@ -155,9 +155,9 @@ class TransportAndPaymentWatcherService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport[] $transports
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param int $domainId
      * @return array
      */
@@ -182,9 +182,9 @@ class TransportAndPaymentWatcherService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $payments
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param int $domainId
      * @return array
      */
@@ -209,10 +209,10 @@ class TransportAndPaymentWatcherService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport[] $transports
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $payments
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param int $domainId
      */
     private function rememberTransportAndPayment(

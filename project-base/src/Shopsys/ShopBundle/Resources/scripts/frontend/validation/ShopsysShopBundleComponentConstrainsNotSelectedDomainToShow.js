@@ -1,6 +1,6 @@
 (function ($) {
 
-    ShopsysShopBundleComponentConstraintsNotSelectedDomainToShow = function () {
+    ShopsysFrameworkBundleComponentConstraintsNotSelectedDomainToShow = function () {
         this.message = '';
 
         this.validate = function (value, ele) {

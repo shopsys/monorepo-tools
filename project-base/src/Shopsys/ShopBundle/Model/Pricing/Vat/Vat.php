@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Vat;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,9 +36,9 @@ class Vat
     private $percent;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat|null
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Vat\Vat")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat")
      * @ORM\JoinColumn(nullable=true)
      */
     private $replaceWith;
@@ -74,7 +74,7 @@ class Vat
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat|null
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null
      */
     public function getReplaceWith()
     {
@@ -82,7 +82,7 @@ class Vat
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData $vatData
      */
     public function edit(VatData $vatData)
     {
@@ -90,7 +90,7 @@ class Vat
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $newVat
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $newVat
      */
     public function markForDeletion(self $newVat)
     {

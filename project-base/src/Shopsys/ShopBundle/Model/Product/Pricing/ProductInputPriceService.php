@@ -1,19 +1,19 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
-use Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductInputPriceService
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation
      */
     private $inputPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation
      */
     private $productPriceCalculation;
 
@@ -26,10 +26,10 @@ class ProductInputPriceService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $inputPriceType
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
-     * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[] $manualInputPrices
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice[] $manualInputPrices
      * @return string[]
      */
     public function getManualInputPricesDataIndexedByPricingGroupId(
@@ -66,9 +66,9 @@ class ProductInputPriceService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $inputPriceType
-     * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[] $manualInputPricesInDefaultCurrency
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice[] $manualInputPricesInDefaultCurrency
      * @return string|null
      */
     public function getInputPrice(Product $product, $inputPriceType, array $manualInputPricesInDefaultCurrency)
@@ -94,8 +94,8 @@ class ProductInputPriceService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[] $manualInputPricesInDefaultCurrency
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice[] $manualInputPricesInDefaultCurrency
      * @return string|null
      */
     private function getMaxSellingPriceWithVatInDefaultCurrency(Product $product, array $manualInputPricesInDefaultCurrency)

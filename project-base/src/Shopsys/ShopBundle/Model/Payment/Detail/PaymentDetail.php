@@ -1,24 +1,24 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment\Detail;
+namespace Shopsys\FrameworkBundle\Model\Payment\Detail;
 
-use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
 
 class PaymentDetail
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Payment
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
     private $payment;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Price[]
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Price[]
      */
     private $basePricesByCurrencyId;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price[] $basePricesByCurrencyId
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price[] $basePricesByCurrencyId
      */
     public function __construct(Payment $payment, array $basePricesByCurrencyId)
     {
@@ -27,7 +27,7 @@ class PaymentDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
     public function getPayment()
     {
@@ -35,7 +35,7 @@ class PaymentDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price[]
      */
     public function getBasePricesByCurrencyId()
     {

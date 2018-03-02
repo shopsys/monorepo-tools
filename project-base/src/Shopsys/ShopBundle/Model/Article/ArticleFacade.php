@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Article;
+namespace Shopsys\FrameworkBundle\Model\Article;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
 class ArticleFacade
 {
@@ -14,25 +14,25 @@ class ArticleFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticleRepository
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleRepository
      */
     private $articleRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
     private $friendlyUrlFacade;
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Model\Article\ArticleRepository $articleRepository
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain
-     * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleRepository $articleRepository
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
     public function __construct(
         EntityManager $em,
@@ -48,7 +48,7 @@ class ArticleFacade
 
     /**
      * @param int $articleId
-     * @return \Shopsys\ShopBundle\Model\Article\Article|null
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article|null
      */
     public function findById($articleId)
     {
@@ -57,7 +57,7 @@ class ArticleFacade
 
     /**
      * @param int $articleId
-     * @return \Shopsys\ShopBundle\Model\Article\Article
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article
      */
     public function getById($articleId)
     {
@@ -66,7 +66,7 @@ class ArticleFacade
 
     /**
      * @param int $articleId
-     * @return \Shopsys\ShopBundle\Model\Article\Article
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article
      */
     public function getVisibleById($articleId)
     {
@@ -84,7 +84,7 @@ class ArticleFacade
 
     /**
      * @param string $placement
-     * @return \Shopsys\ShopBundle\Model\Article\Article[]
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article[]
      */
     public function getVisibleArticlesForPlacementOnCurrentDomain($placement)
     {
@@ -102,8 +102,8 @@ class ArticleFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Article\ArticleData $articleData
-     * @return \Shopsys\ShopBundle\Model\Article\Article
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleData $articleData
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article
      */
     public function create(ArticleData $articleData)
     {
@@ -124,8 +124,8 @@ class ArticleFacade
 
     /**
      * @param int $articleId
-     * @param \Shopsys\ShopBundle\Model\Article\ArticleData $articleData
-     * @return \Shopsys\ShopBundle\Model\Article\Article
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleData $articleData
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article
      */
     public function edit($articleId, ArticleData $articleData)
     {
@@ -172,7 +172,7 @@ class ArticleFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Article\Article[]
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article[]
      */
     public function getAllByDomainId($domainId)
     {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Model\Article\Article;
-use Shopsys\ShopBundle\Model\Article\ArticleData;
-use Shopsys\ShopBundle\Model\Article\ArticleFacade;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Model\Article\Article;
+use Shopsys\FrameworkBundle\Model\Article\ArticleData;
+use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
 
 class ArticleDataFixture extends AbstractReferenceFixture
 {
@@ -56,13 +56,13 @@ class ArticleDataFixture extends AbstractReferenceFixture
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Article\ArticleData $articleData
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleData $articleData
      * @param string|null $referenceName
      */
     private function createArticle(ArticleData $articleData, $referenceName = null)
     {
         $articleFacade = $this->get(ArticleFacade::class);
-        /* @var $articleFacade \Shopsys\ShopBundle\Model\Article\ArticleFacade */
+        /* @var $articleFacade \Shopsys\FrameworkBundle\Model\Article\ArticleFacade */
 
         $article = $articleFacade->create($articleData);
         if ($referenceName !== null) {

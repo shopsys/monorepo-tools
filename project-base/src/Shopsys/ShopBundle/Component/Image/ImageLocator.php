@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Image;
+namespace Shopsys\FrameworkBundle\Component\Image;
 
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 
 class ImageLocator
 {
@@ -12,7 +12,7 @@ class ImageLocator
     private $imageDir;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
+     * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      */
     private $imageConfig;
 
@@ -23,7 +23,7 @@ class ImageLocator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Image\Image $image
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
      * @param string|null $sizeName
      * @return string
      */
@@ -35,7 +35,7 @@ class ImageLocator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Image\Image $image
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
      * @param string|null $sizeName
      * @return string
      */
@@ -47,7 +47,7 @@ class ImageLocator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Image\Image $image
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
      * @return bool
      */
     public function imageExists(Image $image)

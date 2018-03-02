@@ -1,19 +1,19 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Transformers;
+namespace Shopsys\FrameworkBundle\Component\Transformers;
 
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class CategoriesTypeTransformer implements DataTransformerInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
     private $categoryFacade;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
      */
     public function __construct(CategoryFacade $categoryFacade)
     {
@@ -21,7 +21,7 @@ class CategoriesTypeTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category[]|null $categories
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category[]|null $categories
      * @return bool[]
      */
     public function transform($categories)
@@ -40,7 +40,7 @@ class CategoriesTypeTransformer implements DataTransformerInterface
 
     /**
      * @param bool[]|null $isCheckedIndexedByCategoryId
-     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category[]
      */
     public function reverseTransform($isCheckedIndexedByCategoryId)
     {

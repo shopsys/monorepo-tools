@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Script;
+namespace Shopsys\FrameworkBundle\Model\Script;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -45,7 +45,7 @@ class Script
     private $placement;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Script\ScriptData $scriptData
+     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptData $scriptData
      */
     public function __construct(ScriptData $scriptData)
     {
@@ -87,7 +87,7 @@ class Script
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Script\ScriptData $scriptData
+     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptData $scriptData
      */
     public function edit(ScriptData $scriptData)
     {

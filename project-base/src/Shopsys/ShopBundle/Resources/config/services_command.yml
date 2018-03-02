@@ -4,30 +4,30 @@ services:
     autoconfigure: true
     public: false
 
-  Shopsys\ShopBundle\Command\:
+  Shopsys\FrameworkBundle\Command\:
     resource: '../../Command'
 
-  Shopsys\ShopBundle\Command\ServerRunWithCustomRouterCommand:
+  Shopsys\FrameworkBundle\Command\ServerRunWithCustomRouterCommand:
     arguments:
       - '%kernel.project_dir%/web'
       - '%kernel.environment%'
 
-  Shopsys\ShopBundle\Command\ServerStartWithCustomRouterCommand:
+  Shopsys\FrameworkBundle\Command\ServerStartWithCustomRouterCommand:
     arguments:
       - '%kernel.project_dir%/web'
       - '%kernel.environment%'
 
-  Shopsys\ShopBundle\Command\CreateApplicationDirectoriesCommand:
+  Shopsys\FrameworkBundle\Command\CreateApplicationDirectoriesCommand:
     arguments:
       - '%shopsys.root_dir%'
       - '%shopsys.web_dir%'
 
-  Shopsys\ShopBundle\Command\GenerateGruntfileCommand:
+  Shopsys\FrameworkBundle\Command\GenerateGruntfileCommand:
     arguments:
       - '%shopsys.styles_dir%'
       - '%shopsys.root_dir%'
 
-  Shopsys\ShopBundle\Command\ImageDemoCommand:
+  Shopsys\FrameworkBundle\Command\ImageDemoCommand:
     arguments:
       - '%shopsys.demo_images_archive_url%'
       - '%shopsys.demo_images_sql_url%'

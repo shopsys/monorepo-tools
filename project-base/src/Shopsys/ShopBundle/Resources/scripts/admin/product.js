@@ -12,11 +12,11 @@
         });
 
         $outOfStockActionSelection.change(function () {
-            Shopsys.product.toggleIsUsingAlternateAvailability($(this).val() === Shopsys.constant('\\Shopsys\\ShopBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY'));
+            Shopsys.product.toggleIsUsingAlternateAvailability($(this).val() === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY'));
         });
 
         Shopsys.product.toggleIsUsingStock(usingStockSelection.filter(':checked').val() === '1');
-        Shopsys.product.toggleIsUsingAlternateAvailability($outOfStockActionSelection.val() === Shopsys.constant('\\Shopsys\\ShopBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY'));
+        Shopsys.product.toggleIsUsingAlternateAvailability($outOfStockActionSelection.val() === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY'));
 
         Shopsys.product.initializeSideNavigation();
 

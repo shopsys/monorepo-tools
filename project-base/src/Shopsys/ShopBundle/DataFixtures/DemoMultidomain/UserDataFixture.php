@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Generator;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader;
-use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
@@ -17,9 +17,9 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     public function load(ObjectManager $manager)
     {
         $customerFacade = $this->get(CustomerFacade::class);
-        /* @var $customerFacade \Shopsys\ShopBundle\Model\Customer\CustomerFacade */
+        /* @var $customerFacade \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
         $loaderService = $this->get(UserDataFixtureLoader::class);
-        /* @var $loaderService \Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader */
+        /* @var $loaderService \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader */
         $faker = $this->get(Generator::class);
         /* @var $faker \Faker\Generator */
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment;
+namespace Shopsys\FrameworkBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Image\ImageFacade;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportRepository;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\FrameworkBundle\Model\Transport\TransportRepository;
 
 class PaymentFacade
 {
@@ -17,37 +17,37 @@ class PaymentFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentRepository
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository
      */
     private $paymentRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportRepository
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportRepository
      */
     private $transportRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentVisibilityCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentVisibilityCalculation
      */
     private $paymentVisibilityCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
     private $imageFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
     private $currencyFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
      */
     private $paymentPriceCalculation;
 
@@ -72,8 +72,8 @@ class PaymentFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentEditData $paymentEditData
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
     public function create(PaymentEditData $paymentEditData)
     {
@@ -88,8 +88,8 @@ class PaymentFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @param \Shopsys\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentEditData $paymentEditData
      */
     public function edit(Payment $payment, PaymentEditData $paymentEditData)
     {
@@ -102,7 +102,7 @@ class PaymentFacade
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
     public function getById($id)
     {
@@ -110,8 +110,8 @@ class PaymentFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @return \Shopsys\ShopBundle\Model\Payment\PaymentDomain[]
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentDomain[]
      */
     public function getPaymentDomainsByPayment(Payment $payment)
     {
@@ -130,8 +130,8 @@ class PaymentFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
-     * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      */
     private function setAdditionalDataAndFlush(Payment $payment, PaymentData $paymentData)
     {
@@ -142,7 +142,7 @@ class PaymentFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment[]
      */
     public function getVisibleOnCurrentDomain()
     {
@@ -151,7 +151,7 @@ class PaymentFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment[]
      */
     public function getVisibleByDomainId($domainId)
     {
@@ -161,7 +161,7 @@ class PaymentFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param array $domainIds
      */
     private function createPaymentDomains(Payment $payment, array $domainIds)
@@ -174,7 +174,7 @@ class PaymentFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      */
     private function deletePaymentDomainsByPayment(Payment $payment)
     {
@@ -186,7 +186,7 @@ class PaymentFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param string[] $pricesByCurrencyId
      */
     private function updatePaymentPrices(Payment $payment, $pricesByCurrencyId)
@@ -198,7 +198,7 @@ class PaymentFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment[]
      */
     public function getAllIncludingDeleted()
     {
@@ -206,7 +206,7 @@ class PaymentFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @return string[]
      */
     public function getPaymentPricesWithVatIndexedByPaymentId(Currency $currency)

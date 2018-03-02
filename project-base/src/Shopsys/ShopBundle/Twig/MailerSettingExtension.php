@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Twig;
+namespace Shopsys\FrameworkBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_Extension;
@@ -71,7 +71,7 @@ class MailerSettingExtension extends Twig_Extension
      */
     public function getMailerSettingInfo()
     {
-        return $this->getTemplatingService()->render('@ShopsysShop/Common/Mailer/settingInfo.html.twig', [
+        return $this->getTemplatingService()->render('@ShopsysFramework/Common/Mailer/settingInfo.html.twig', [
             'isDeliveryDisabled' => $this->isDeliveryDisabled,
             'mailerMasterEmailAddress' => $this->mailerMasterEmailAddress,
             'mailerWhitelistExpressions' => $this->mailerWhitelistExpressions,

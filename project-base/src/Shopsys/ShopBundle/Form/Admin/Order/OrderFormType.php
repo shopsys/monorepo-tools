@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Order;
+namespace Shopsys\FrameworkBundle\Form\Admin\Order;
 
-use Shopsys\ShopBundle\Component\Constraints\Email;
-use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Model\Country\CountryFacade;
-use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Order\OrderData;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
-use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportFacade;
+use Shopsys\FrameworkBundle\Component\Constraints\Email;
+use Shopsys\FrameworkBundle\Form\ValidationGroup;
+use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
+use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Order\OrderData;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
+use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -28,22 +28,22 @@ class OrderFormType extends AbstractType
     const VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS = 'deliveryAddressSameAsBillingAddress';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
      */
     private $paymentFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
      */
     private $transportFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade
      */
     private $countryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade
      */
     private $orderStatusFacade;
 
@@ -320,7 +320,7 @@ class OrderFormType extends AbstractType
                     $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
                     $orderData = $form->getData();
-                    /* @var $data \Shopsys\ShopBundle\Model\Order\OrderData */
+                    /* @var $data \Shopsys\FrameworkBundle\Model\Order\OrderData */
 
                     if (!$orderData->deliveryAddressSameAsBillingAddress) {
                         $validationGroups[] = self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS;

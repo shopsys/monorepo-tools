@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Constraints;
+namespace Shopsys\FrameworkBundle\Component\Constraints;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraint;

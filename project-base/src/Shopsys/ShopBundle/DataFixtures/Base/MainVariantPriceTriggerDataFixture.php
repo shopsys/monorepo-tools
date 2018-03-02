@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Base;
+namespace Shopsys\FrameworkBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractNativeFixture;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractNativeFixture;
 
 class MainVariantPriceTriggerDataFixture extends AbstractNativeFixture
 {

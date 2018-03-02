@@ -1,29 +1,29 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Filter;
+namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService;
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService;
+use Shopsys\FrameworkBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class PriceRangeRepository
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
      */
     private $queryBuilderService;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductRepository $productRepository
-     * @param \Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService $queryBuilderService
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService $queryBuilderService
      */
     public function __construct(ProductRepository $productRepository, QueryBuilderService $queryBuilderService)
     {
@@ -33,9 +33,9 @@ class PriceRangeRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @return \Shopsys\ShopBundle\Model\Product\Filter\PriceRange
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     * @return \Shopsys\FrameworkBundle\Model\Product\Filter\PriceRange
      */
     public function getPriceRangeInCategory($domainId, PricingGroup $pricingGroup, Category $category)
     {
@@ -50,10 +50,10 @@ class PriceRangeRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string $locale
      * @param string|null $searchText
-     * @return \Shopsys\ShopBundle\Model\Product\Filter\PriceRange
+     * @return \Shopsys\FrameworkBundle\Model\Product\Filter\PriceRange
      */
     public function getPriceRangeForSearch($domainId, PricingGroup $pricingGroup, $locale, $searchText)
     {
@@ -65,8 +65,8 @@ class PriceRangeRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\ShopBundle\Model\Product\Filter\PriceRange
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Product\Filter\PriceRange
      */
     private function getPriceRangeByProductsQueryBuilder(QueryBuilder $productsQueryBuilder, PricingGroup $pricingGroup)
     {

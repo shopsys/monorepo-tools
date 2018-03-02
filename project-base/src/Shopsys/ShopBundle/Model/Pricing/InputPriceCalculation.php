@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Pricing;
 
 class InputPriceCalculation
 {
@@ -20,7 +20,7 @@ class InputPriceCalculation
         } elseif ($inputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
             $inputPrice = $basePriceWithVat;
         } else {
-            throw new \Shopsys\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException(
+            throw new \Shopsys\FrameworkBundle\Model\Pricing\Exception\InvalidInputPriceTypeException(
                 sprintf('Input price type "%s" is not valid', $inputPriceType)
             );
         }

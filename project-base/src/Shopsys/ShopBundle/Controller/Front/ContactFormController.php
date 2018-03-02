@@ -2,29 +2,29 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\ContactForm\ContactFormData;
+use Shopsys\FrameworkBundle\Model\ContactForm\ContactFormFacade;
+use Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade;
 use Shopsys\ShopBundle\Form\Front\Contact\ContactFormType;
-use Shopsys\ShopBundle\Model\ContactForm\ContactFormData;
-use Shopsys\ShopBundle\Model\ContactForm\ContactFormFacade;
-use Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ContactFormController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\ContactForm\ContactFormFacade
+     * @var \Shopsys\FrameworkBundle\Model\ContactForm\ContactFormFacade
      */
     private $contactFormFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade
+     * @var \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade
      */
     private $legalConditionsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -60,7 +60,7 @@ class ContactFormController extends FrontBaseController
                     'action' => $this->generateUrl('front_contact_form_send'),
                 ]);
                 $message = t('Thank you, your message has been sent.');
-            } catch (\Shopsys\ShopBundle\Model\Mail\Exception\MailException $ex) {
+            } catch (\Shopsys\FrameworkBundle\Model\Mail\Exception\MailException $ex) {
                 $message = t('Error occurred when sending e-mail.');
             }
         }

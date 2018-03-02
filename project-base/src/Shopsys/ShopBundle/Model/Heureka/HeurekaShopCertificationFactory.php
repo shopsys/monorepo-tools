@@ -1,32 +1,32 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Heureka;
+namespace Shopsys\FrameworkBundle\Model\Heureka;
 
 use Heureka\ShopCertification;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Order\Order;
 
 class HeurekaShopCertificationFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaSetting
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting
      */
     private $heurekaSetting;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaShopCertificationService
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationService
      */
     private $heurekaShopCertificationService;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\ShopBundle\Model\Heureka\HeurekaSetting
-     * @param \Shopsys\ShopBundle\Model\Heureka\HeurekaShopCertificationService
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting
+     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationService
      */
     public function __construct(
         Domain $domain,
@@ -39,7 +39,7 @@ class HeurekaShopCertificationFactory
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return \Heureka\ShopCertification
      */
     public function create(Order $order)

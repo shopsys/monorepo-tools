@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Status;
+namespace Shopsys\FrameworkBundle\Model\Order\Status;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
-use Shopsys\ShopBundle\Model\Order\Mail\OrderMailService;
-use Shopsys\ShopBundle\Model\Order\OrderRepository;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
+use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService;
+use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
 
 class OrderStatusFacade
 {
@@ -15,22 +15,22 @@ class OrderStatusFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository
      */
     private $orderStatusRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusService
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusService
      */
     private $orderStatusService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderRepository
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderRepository
      */
     private $orderRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
      */
     private $mailTemplateFacade;
 
@@ -49,8 +49,8 @@ class OrderStatusFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusFormData
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData $orderStatusFormData
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus
      */
     public function create(OrderStatusData $orderStatusFormData)
     {
@@ -67,8 +67,8 @@ class OrderStatusFacade
 
     /**
      * @param int $orderStatusId
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData $orderStatusData
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus
      */
     public function edit($orderStatusId, OrderStatusData $orderStatusData)
     {
@@ -98,7 +98,7 @@ class OrderStatusFacade
 
     /**
      * @param int $orderStatusId
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus
      */
     public function getById($orderStatusId)
     {
@@ -107,7 +107,7 @@ class OrderStatusFacade
 
     /**
      * @param int $orderStatusId
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus[]
      */
     public function getAllExceptId($orderStatusId)
     {
@@ -115,7 +115,7 @@ class OrderStatusFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus $orderStatus
      * @return bool
      */
     public function isOrderStatusUsed(OrderStatus $orderStatus)
@@ -124,7 +124,7 @@ class OrderStatusFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus[]
      */
     public function getAll()
     {
@@ -132,7 +132,7 @@ class OrderStatusFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus[]
      */
     public function getAllIndexedById()
     {

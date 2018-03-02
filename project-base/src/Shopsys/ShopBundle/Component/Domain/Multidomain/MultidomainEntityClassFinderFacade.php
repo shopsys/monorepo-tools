@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Domain\Multidomain;
+namespace Shopsys\FrameworkBundle\Component\Domain\Multidomain;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder;
-use Shopsys\ShopBundle\Component\Setting\SettingValue;
-use Shopsys\ShopBundle\Model\Mail\MailTemplate;
-use Shopsys\ShopBundle\Model\Product\ProductVisibility;
+use Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder;
+use Shopsys\FrameworkBundle\Component\Setting\SettingValue;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
+use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 
 class MultidomainEntityClassFinderFacade
 {
@@ -16,12 +16,12 @@ class MultidomainEntityClassFinderFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder
      */
     private $multidomainEntityClassFinder;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder
+     * @var \Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder
      */
     private $entityNotNullableColumnsFinder;
 

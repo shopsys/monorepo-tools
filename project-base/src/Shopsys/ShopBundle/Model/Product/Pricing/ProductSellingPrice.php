@@ -1,25 +1,25 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
 class ProductSellingPrice
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
      */
     private $pricingGroup;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Price
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
     private $sellingPrice;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price $sellingPrice
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $sellingPrice
      */
     public function __construct(PricingGroup $pricingGroup, Price $sellingPrice)
     {
@@ -28,7 +28,7 @@ class ProductSellingPrice
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
      */
     public function getPricingGroup()
     {
@@ -36,7 +36,7 @@ class ProductSellingPrice
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
     public function getSellingPrice()
     {

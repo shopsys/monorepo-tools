@@ -1,34 +1,34 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Filter;
+namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\FrameworkBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 
 class ProductFilterConfigFactory
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterChoiceRepository
      */
     private $parameterFilterChoiceRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Filter\FlagFilterChoiceRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Filter\FlagFilterChoiceRepository
      */
     private $flagFilterChoiceRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
     private $currentCustomer;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Filter\BrandFilterChoiceRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Filter\BrandFilterChoiceRepository
      */
     private $brandFilterChoiceRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Filter\PriceRangeRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Filter\PriceRangeRepository
      */
     private $priceRangeRepository;
 
@@ -49,8 +49,8 @@ class ProductFilterConfigFactory
     /**
      * @param int $domainId
      * @param string $locale
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @return \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     * @return \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig
      */
     public function createForCategory($domainId, $locale, Category $category)
     {
@@ -70,7 +70,7 @@ class ProductFilterConfigFactory
      * @param int $domainId
      * @param string $locale
      * @param string|null $searchText
-     * @return \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig
+     * @return \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig
      */
     public function createForSearch($domainId, $locale, $searchText)
     {

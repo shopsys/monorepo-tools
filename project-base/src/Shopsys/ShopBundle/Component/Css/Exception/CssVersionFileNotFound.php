@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Css\Exception;
+namespace Shopsys\FrameworkBundle\Component\Css\Exception;
 
 use Exception;
 

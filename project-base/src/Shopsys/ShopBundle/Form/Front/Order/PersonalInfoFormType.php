@@ -2,11 +2,11 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Order;
 
-use Shopsys\ShopBundle\Component\Constraints\Email;
-use Shopsys\ShopBundle\Component\Transformers\InverseTransformer;
-use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Model\Country\CountryFacade;
-use Shopsys\ShopBundle\Model\Order\FrontOrderData;
+use Shopsys\FrameworkBundle\Component\Constraints\Email;
+use Shopsys\FrameworkBundle\Component\Transformers\InverseTransformer;
+use Shopsys\FrameworkBundle\Form\ValidationGroup;
+use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
+use Shopsys\FrameworkBundle\Model\Order\FrontOrderData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -25,12 +25,12 @@ class PersonalInfoFormType extends AbstractType
     const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade
      */
     private $countryFacade;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Country\CountryFacade $countryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryFacade $countryFacade
      */
     public function __construct(CountryFacade $countryFacade)
     {
@@ -283,7 +283,7 @@ class PersonalInfoFormType extends AbstractType
                     $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
                     $orderData = $form->getData();
-                    /* @var $data \Shopsys\ShopBundle\Model\Order\OrderData */
+                    /* @var $data \Shopsys\FrameworkBundle\Model\Order\OrderData */
 
                     if ($orderData->companyCustomer) {
                         $validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;

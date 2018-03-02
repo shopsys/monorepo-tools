@@ -1,6 +1,6 @@
 # Example:
 #- name: product
-#  class: Shopsys\ShopBundle\Model\Product\Product
+#  class: Shopsys\FrameworkBundle\Model\Product\Product
 #  types:
 #    - name: gallery
 #      multiple: true
@@ -24,7 +24,7 @@
 #          occurrence: 'Front-end: Product detail, Product list'
 
 - name: payment
-  class: Shopsys\ShopBundle\Model\Payment\Payment
+  class: Shopsys\FrameworkBundle\Model\Payment\Payment
   sizes:
     - name: ~
       width: ~
@@ -33,7 +33,7 @@
       occurrence: 'Front-end: Ordering process'
 
 - name: category
-  class: Shopsys\ShopBundle\Model\Category\Category
+  class: Shopsys\FrameworkBundle\Model\Category\Category
   sizes:
     - name: ~
       width: 30
@@ -42,7 +42,7 @@
       occurrence: 'Front-end: Product list by category'
 
 - name: product
-  class: Shopsys\ShopBundle\Model\Product\Product
+  class: Shopsys\FrameworkBundle\Model\Product\Product
   multiple: true
   sizes:
     - name: ~
@@ -67,7 +67,7 @@
       occurrence: 'Front-end: Preview in autocomplete for search, preview in cart during ordering process'
 
 - name: sliderItem
-  class: Shopsys\ShopBundle\Model\Slider\SliderItem
+  class: Shopsys\FrameworkBundle\Model\Slider\SliderItem
   sizes:
     - name: ~
       width: 918
@@ -76,7 +76,7 @@
       occurrence: 'Front-end: Main page slider'
 
 - name: transport
-  class: Shopsys\ShopBundle\Model\Transport\Transport
+  class: Shopsys\FrameworkBundle\Model\Transport\Transport
   sizes:
     - name: ~
       width: ~
@@ -85,7 +85,7 @@
       occurrence: 'Front-end: Ordering process'
 
 - name: noticer
-  class: Shopsys\ShopBundle\Model\Advert\Advert
+  class: Shopsys\FrameworkBundle\Model\Advert\Advert
   sizes:
     - name: header
       width: 1160
@@ -109,7 +109,7 @@
       occurrence: 'Front-end: Advertising in the left panel under the category tree'
 
 - name: brand
-  class: Shopsys\ShopBundle\Model\Product\Brand\Brand
+  class: Shopsys\FrameworkBundle\Model\Product\Brand\Brand
   sizes:
     - name: ~
       width: 300

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception;
+namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\Exception;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

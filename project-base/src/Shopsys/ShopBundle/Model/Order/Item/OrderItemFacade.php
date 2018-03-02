@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Item;
+namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Order\OrderRepository;
-use Shopsys\ShopBundle\Model\Order\OrderService;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
+use Shopsys\FrameworkBundle\Model\Order\OrderService;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class OrderItemFacade
 {
@@ -16,22 +16,22 @@ class OrderItemFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderRepository
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderRepository
      */
     private $orderRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
     private $productPriceCalculationForUser;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderService
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderService
      */
     private $orderService;
 
@@ -52,7 +52,7 @@ class OrderItemFacade
     /**
      * @param int $orderId
      * @param int $productId
-     * @return \Shopsys\ShopBundle\Model\Order\Item\OrderProduct
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct
      */
     public function createOrderProductInOrder($orderId, $productId)
     {

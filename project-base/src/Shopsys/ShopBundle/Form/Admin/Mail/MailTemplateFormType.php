@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Mail;
+namespace Shopsys\FrameworkBundle\Form\Admin\Mail;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Shopsys\ShopBundle\Component\Constraints\Contains;
-use Shopsys\ShopBundle\Component\Constraints\Email;
-use Shopsys\ShopBundle\Component\Transformers\EmptyWysiwygTransformer;
-use Shopsys\ShopBundle\Form\FileUploadType;
-use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
+use Shopsys\FrameworkBundle\Component\Constraints\Contains;
+use Shopsys\FrameworkBundle\Component\Constraints\Email;
+use Shopsys\FrameworkBundle\Component\Transformers\EmptyWysiwygTransformer;
+use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\ValidationGroup;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplateData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -133,7 +133,7 @@ class MailTemplateFormType extends AbstractType
                 'validation_groups' => function (FormInterface $form) {
                     $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
                     $mailTemplateData = $form->getData();
-                    /* @var $mailTemplateData \Shopsys\ShopBundle\Model\Mail\MailTemplateData */
+                    /* @var $mailTemplateData \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData */
 
                     if ($mailTemplateData->sendMail) {
                         $validationGroups[] = self::VALIDATION_GROUP_SEND_MAIL;

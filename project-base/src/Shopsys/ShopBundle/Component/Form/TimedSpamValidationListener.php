@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Form;
+namespace Shopsys\FrameworkBundle\Component\Form;
 
-use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
+use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormEvents;
 class TimedSpamValidationListener implements EventSubscriberInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Form\FormTimeProvider
+     * @var \Shopsys\FrameworkBundle\Component\Form\FormTimeProvider
      */
     private $formTimeProvider;
 
@@ -21,7 +21,7 @@ class TimedSpamValidationListener implements EventSubscriberInterface
     private $options;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Form\FormTimeProvider $formTimeProvider
+     * @param \Shopsys\FrameworkBundle\Component\Form\FormTimeProvider $formTimeProvider
      * @param array $options
      */
     public function __construct(FormTimeProvider $formTimeProvider, array $options)

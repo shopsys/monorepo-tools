@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form;
+namespace Shopsys\FrameworkBundle\Form;
 
-use Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\FrameworkBundle\Component\Constraints\UniqueSlugsOnDomains;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -19,17 +19,17 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class UrlListType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
     private $friendlyUrlFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -50,7 +50,7 @@ class UrlListType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['route_name'] === null) {
-            throw new \Shopsys\ShopBundle\Form\Exception\MissingRouteNameException();
+            throw new \Shopsys\FrameworkBundle\Form\Exception\MissingRouteNameException();
         }
 
         $builder->add('toDelete', FormType::class);
@@ -127,7 +127,7 @@ class UrlListType extends AbstractType
     /**
      * @param string $routeName
      * @param string $entityId
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
      */
     private function getFriendlyUrlsIndexedByDomain($routeName, $entityId)
     {

@@ -1,5 +1,5 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
-{% import '@ShopsysShop/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+{% import '@ShopsysFramework/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
 
 {% block title %}- {{ 'Category'|trans }}{% endblock %}
 {% block h1 %}{{ 'Category'|trans }}{% endblock %}
@@ -82,7 +82,7 @@
             {% endfor %}
         {% endif %}
 
-        {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 <a href="{{ url('admin_category_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
                 {{ form_save(category|default(null), form) }}

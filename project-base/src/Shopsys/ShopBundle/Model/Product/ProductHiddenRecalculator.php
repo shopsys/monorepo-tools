@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 
@@ -18,7 +18,7 @@ class ProductHiddenRecalculator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
     public function calculateHiddenForProduct(Product $product)
     {
@@ -31,7 +31,7 @@ class ProductHiddenRecalculator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product|null $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
      */
     private function executeQuery(Product $product = null)
     {

@@ -2,8 +2,8 @@
 
 namespace Tests\ShopBundle\Performance\Feed;
 
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ProductFeed\FeedConfigInterface;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 
 class PerformanceTestSample
 {
@@ -13,7 +13,7 @@ class PerformanceTestSample
     private $feedConfig;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     private $domainConfig;
 
@@ -44,7 +44,7 @@ class PerformanceTestSample
 
     /**
      * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param $generationUri
      * @param $duration
      * @param $statusCode
@@ -88,7 +88,7 @@ class PerformanceTestSample
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     public function getDomainConfig()
     {

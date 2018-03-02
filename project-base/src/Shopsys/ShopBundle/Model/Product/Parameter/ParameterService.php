@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
 class ParameterService
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
      */
     public function create(ParameterData $parameterData)
     {
@@ -14,9 +14,9 @@ class ParameterService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\Parameter $parameter
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter $parameter
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
      */
     public function edit(Parameter $parameter, ParameterData $parameterData)
     {

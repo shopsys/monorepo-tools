@@ -1,24 +1,24 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Listing;
+namespace Shopsys\FrameworkBundle\Model\Order\Listing;
 
-use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
 
 class OrderListAdminFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminRepository
+     * @var \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminRepository
      */
     private $orderListAdminRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminRepository $orderListAdminRepository
-     * @param \Shopsys\ShopBundle\Model\Localization\Localization $localization
+     * @param \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminRepository $orderListAdminRepository
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
      */
     public function __construct(
         OrderListAdminRepository $orderListAdminRepository,

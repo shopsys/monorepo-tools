@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer;
+namespace Shopsys\FrameworkBundle\Model\Customer;
 
 use DateTime;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 
 class UserData
 {
@@ -33,7 +33,7 @@ class UserData
     public $domainId;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
      */
     public $pricingGroup;
 
@@ -48,7 +48,7 @@ class UserData
      * @param string|null $lastName
      * @param string|null $email
      * @param string|null $password
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup|null $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup|null $pricingGroup
      * @param \DateTime|null $createdAt
      */
     public function __construct(
@@ -70,7 +70,7 @@ class UserData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      */
     public function setFromEntity(User $user)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Listing;
+namespace Shopsys\FrameworkBundle\Model\Product\Listing;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,7 +15,7 @@ class ProductListOrderingModeService
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingConfig $productListOrderingConfig
+     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig $productListOrderingConfig
      * @return string
      */
     public function getOrderingModeIdFromRequest(
@@ -32,7 +32,7 @@ class ProductListOrderingModeService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingConfig $productListOrderingConfig
+     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig $productListOrderingConfig
      * @return string[]
      */
     private function getSupportedOrderingModeIds(ProductListOrderingConfig $productListOrderingConfig)

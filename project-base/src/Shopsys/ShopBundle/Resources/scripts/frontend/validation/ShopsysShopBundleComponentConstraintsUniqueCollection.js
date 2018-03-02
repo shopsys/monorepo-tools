@@ -1,6 +1,6 @@
 (function ($) {
 
-    ShopsysShopBundleComponentConstraintsUniqueCollection = function () {
+    ShopsysFrameworkBundleComponentConstraintsUniqueCollection = function () {
         var self = this;
         this.message = '';
         this.fields = null;

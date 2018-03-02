@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\DateTimeHelper;
+namespace Shopsys\FrameworkBundle\Component\DateTimeHelper;
 
 use DateTime;
 
@@ -27,7 +27,7 @@ class DateTimeHelper
         $dateTime = DateTime::createFromFormat($format, $time);
 
         if ($dateTime === false) {
-            throw new \Shopsys\ShopBundle\Component\DateTimeHelper\Exception\CannotParseDateTimeException($format, $time);
+            throw new \Shopsys\FrameworkBundle\Component\DateTimeHelper\Exception\CannotParseDateTimeException($format, $time);
         }
 
         return $dateTime;

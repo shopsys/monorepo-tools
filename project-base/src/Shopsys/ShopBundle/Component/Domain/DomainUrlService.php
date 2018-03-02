@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Domain;
+namespace Shopsys\FrameworkBundle\Component\Domain;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Shopsys\ShopBundle\Component\Entity\EntityStringColumnsFinder;
-use Shopsys\ShopBundle\Component\Sql\SqlQuoter;
+use Shopsys\FrameworkBundle\Component\Entity\EntityStringColumnsFinder;
+use Shopsys\FrameworkBundle\Component\Sql\SqlQuoter;
 
 class DomainUrlService
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Entity\EntityStringColumnsFinder
+     * @var \Shopsys\FrameworkBundle\Component\Entity\EntityStringColumnsFinder
      */
     private $entityStringColumnsFinder;
 
@@ -20,7 +20,7 @@ class DomainUrlService
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Sql\SqlQuoter
+     * @var \Shopsys\FrameworkBundle\Component\Sql\SqlQuoter
      */
     private $sqlQuoter;
 

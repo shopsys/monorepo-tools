@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form;
+namespace Shopsys\FrameworkBundle\Form;
 
-use Shopsys\ShopBundle\Component\Constraints\FileExtensionMaxLength;
-use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
+use Shopsys\FrameworkBundle\Component\Constraints\FileExtensionMaxLength;
+use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class FileUploadType extends AbstractType implements DataTransformerInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
+     * @var \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
      */
     private $fileUpload;
 
@@ -32,7 +32,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
     private $fileConstraints;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\FileUpload\FileUpload $fileUpload
+     * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
      */
     public function __construct(FileUpload $fileUpload)
     {
@@ -133,7 +133,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
                 if ($file instanceof UploadedFile) {
                     try {
                         $data['uploadedFiles'][] = $this->fileUpload->upload($file);
-                    } catch (\Shopsys\ShopBundle\Component\FileUpload\Exception\FileUploadException $ex) {
+                    } catch (\Shopsys\FrameworkBundle\Component\FileUpload\Exception\FileUploadException $ex) {
                         $event->getForm()->addError(new FormError(t('File upload failed')));
                     }
                 }

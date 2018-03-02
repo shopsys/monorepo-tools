@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\PromoCode;
+namespace Shopsys\FrameworkBundle\Model\Order\PromoCode;
 
 class PromoCodeData
 {
@@ -25,7 +25,7 @@ class PromoCodeData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode $promoCode
+     * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode $promoCode
      */
     public function setFromEntity(PromoCode $promoCode)
     {

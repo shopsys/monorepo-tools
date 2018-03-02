@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Image;
+namespace Shopsys\FrameworkBundle\Component\Image;
 
 use Doctrine\ORM\EntityManager;
 
@@ -28,7 +28,7 @@ class ImageRepository
      * @param string $entityName
      * @param int $entityId
      * @param string|null $type
-     * @return \Shopsys\ShopBundle\Component\Image\Image|null
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image|null
      */
     public function findImageByEntity($entityName, $entityId, $type)
     {
@@ -51,14 +51,14 @@ class ImageRepository
      * @param string $entityName
      * @param int $entityId
      * @param string|null $type
-     * @return \Shopsys\ShopBundle\Component\Image\Image
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image
      */
     public function getImageByEntity($entityName, $entityId, $type)
     {
         $image = $this->findImageByEntity($entityName, $entityId, $type);
         if ($image === null) {
             $message = 'Image of type "' . ($type ?: 'NULL') . '" not found for entity "' . $entityName . '" with ID ' . $entityId;
-            throw new \Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException($message);
         }
 
         return $image;
@@ -68,7 +68,7 @@ class ImageRepository
      * @param string $entityName
      * @param int $entityId
      * @param string|null $type
-     * @return \Shopsys\ShopBundle\Component\Image\Image[]
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
      */
     public function getImagesByEntityIndexedById($entityName, $entityId, $type)
     {
@@ -92,7 +92,7 @@ class ImageRepository
     /**
      * @param string $entityName
      * @param int $entityId
-     * @return \Shopsys\ShopBundle\Component\Image\Image[]
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
      */
     public function getAllImagesByEntity($entityName, $entityId)
     {
@@ -104,14 +104,14 @@ class ImageRepository
 
     /**
      * @param int $imageId
-     * @return \Shopsys\ShopBundle\Component\Image\Image
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image
      */
     public function getById($imageId)
     {
         $image = $this->getImageRepository()->find($imageId);
 
         if ($image === null) {
-            throw new \Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException('Image with ID ' . $imageId . ' does not exist.');
+            throw new \Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException('Image with ID ' . $imageId . ' does not exist.');
         }
 
         return $image;
@@ -120,7 +120,7 @@ class ImageRepository
     /**
      * @param array $entities
      * @param string $entityName
-     * @return \Shopsys\ShopBundle\Component\Image\Image[]
+     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
      */
     public function getMainImagesByEntitiesIndexedByEntityId(array $entities, $entityName)
     {
@@ -133,7 +133,7 @@ class ImageRepository
 
         $imagesByEntityId = [];
         foreach ($queryBuilder->getQuery()->execute() as $image) {
-            /* @var $image \Shopsys\ShopBundle\Component\Image\Image */
+            /* @var $image \Shopsys\FrameworkBundle\Component\Image\Image */
             $imagesByEntityId[$image->getEntityId()] = $image;
         }
 

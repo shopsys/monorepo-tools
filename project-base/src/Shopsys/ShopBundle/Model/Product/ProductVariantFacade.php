@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Image\ImageFacade;
-use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
+use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 class ProductVariantFacade
 {
@@ -15,32 +15,32 @@ class ProductVariantFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
      */
     private $productFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory
      */
     private $productEditDataFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
     private $imageFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductVariantService
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantService
      */
     private $productVariantService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
      */
     private $productPriceRecalculationScheduler;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
      */
     private $productAvailabilityRecalculationScheduler;
 
@@ -63,9 +63,9 @@ class ProductVariantFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $mainProduct
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $mainProduct
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $variants
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function createVariant(Product $mainProduct, array $variants)
     {

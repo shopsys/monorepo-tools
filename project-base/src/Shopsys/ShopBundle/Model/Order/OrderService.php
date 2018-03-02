@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order;
+namespace Shopsys\FrameworkBundle\Model\Order;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
-use Shopsys\ShopBundle\Model\Pricing\Price;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class OrderService
@@ -15,22 +15,22 @@ class OrderService
     const DEFAULT_QUANTITY = 1;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation
      */
     private $orderItemPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation
      */
     private $orderPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
 
@@ -47,9 +47,9 @@ class OrderService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
-     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
-     * @return \Shopsys\ShopBundle\Model\Order\OrderEditResult
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
+     * @return \Shopsys\FrameworkBundle\Model\Order\OrderEditResult
      */
     public function editOrder(Order $order, OrderData $orderData)
     {
@@ -99,10 +99,10 @@ class OrderService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price $productPrice
-     * @return \Shopsys\ShopBundle\Model\Order\Item\OrderProduct
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $productPrice
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct
      */
     public function createOrderProductInOrder(Order $order, Product $product, Price $productPrice)
     {
@@ -126,7 +126,7 @@ class OrderService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      */
     public function calculateTotalPrice(Order $order)
     {
@@ -135,7 +135,7 @@ class OrderService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return string
      */
     public function getOrderDetailUrl(Order $order)

@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Script;
+namespace Shopsys\FrameworkBundle\Form\Admin\Script;
 
-use Shopsys\ShopBundle\Component\Transformers\ScriptPlacementToBooleanTransformer;
-use Shopsys\ShopBundle\Model\Script\ScriptData;
+use Shopsys\FrameworkBundle\Component\Transformers\ScriptPlacementToBooleanTransformer;
+use Shopsys\FrameworkBundle\Model\Script\ScriptData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
-use Shopsys\ShopBundle\Form\UrlListData;
+use Shopsys\FrameworkBundle\Form\UrlListData;
 
 class ProductEditData
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductData
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductData
      */
     public $productData;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData[]
      */
     public $parameters;
 
@@ -22,12 +22,12 @@ class ProductEditData
     public $imagesToUpload;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Image[]
+     * @var \Shopsys\FrameworkBundle\Component\Image\Image[]
      */
     public $imagesToDelete;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Image[]
+     * @var \Shopsys\FrameworkBundle\Component\Image\Image[]
      */
     public $orderedImagesById;
 
@@ -57,17 +57,17 @@ class ProductEditData
     public $shortDescriptions;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\UrlListData
+     * @var \Shopsys\FrameworkBundle\Form\UrlListData
      */
     public $urls;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public $accessories;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public $variants;
 
@@ -82,18 +82,18 @@ class ProductEditData
     public $pluginData;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
      * @param string[] $imagesToUpload
-     * @param \Shopsys\ShopBundle\Component\Image\Image[] $imagesToDelete
-     * @param \Shopsys\ShopBundle\Component\Image\Image[] $orderedImagesById
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image[] $imagesToDelete
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image[] $orderedImagesById
      * @param string[] $manualInputPricesByPricingGroupId
      * @param string[]|null[] $seoTitles
      * @param string[]|null[] $seoMetaDescriptions
      * @param string[]|null[] $descriptions
      * @param string[]|null[] $shortDescriptions
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $accessories
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $accessories
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $variants
      * @param string[]|null[] $seoH1s
      */
     public function __construct(

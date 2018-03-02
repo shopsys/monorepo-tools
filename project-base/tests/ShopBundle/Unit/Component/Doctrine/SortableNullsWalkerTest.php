@@ -3,8 +3,8 @@
 namespace Tests\ShopBundle\Unit\Component\Doctrine;
 
 use Doctrine\ORM\Query;
-use Shopsys\ShopBundle\Component\Doctrine\SortableNullsWalker;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Component\Doctrine\SortableNullsWalker;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class SortableNullsWalkerTest extends FunctionalTestCase

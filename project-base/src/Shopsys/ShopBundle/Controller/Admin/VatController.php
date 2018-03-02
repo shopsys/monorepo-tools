@@ -1,37 +1,37 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Vat\VatSettingsFormType;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatInlineEdit;
+use Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Vat\VatSettingsFormType;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatInlineEdit;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class VatController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+     * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
     private $confirmDeleteResponseFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     private $pricingSetting;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
     private $vatFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatInlineEdit
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatInlineEdit
      */
     private $vatInlineEdit;
 
@@ -54,7 +54,7 @@ class VatController extends AdminBaseController
     {
         $grid = $this->vatInlineEdit->getGrid();
 
-        return $this->render('@ShopsysShop/Admin/Content/Vat/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Vat/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -89,7 +89,7 @@ class VatController extends AdminBaseController
 
                 return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_vat_delete', $id);
             }
-        } catch (\Shopsys\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
             return new Response(t('Selected VAT doesn\'t exist'));
         }
     }
@@ -126,7 +126,7 @@ class VatController extends AdminBaseController
                     ]
                 );
             }
-        } catch (\Shopsys\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected VAT doesn\'t exist.'));
         }
 
@@ -156,12 +156,12 @@ class VatController extends AdminBaseController
                 $this->getFlashMessageSender()->addSuccessFlash(t('VAT settings modified'));
 
                 return $this->redirectToRoute('admin_vat_list');
-            } catch (\Shopsys\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
+            } catch (\Shopsys\FrameworkBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
                 $this->getFlashMessageSender()->addErrorFlash(t('Invalid rounding settings'));
             }
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Vat/vatSettings.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Vat/vatSettings.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Heureka\Exception;
+namespace Shopsys\FrameworkBundle\Model\Heureka\Exception;
 
 interface HeurekaException
 {

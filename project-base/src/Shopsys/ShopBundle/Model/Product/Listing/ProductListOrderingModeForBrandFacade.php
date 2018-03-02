@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Listing;
+namespace Shopsys\FrameworkBundle\Model\Product\Listing;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -9,7 +9,7 @@ class ProductListOrderingModeForBrandFacade
     const COOKIE_NAME = 'productListOrderingModeForBrand';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService
+     * @var \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService
      */
     private $productListOrderingModeService;
 
@@ -19,7 +19,7 @@ class ProductListOrderingModeForBrandFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingConfig
+     * @return \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingConfig
      */
     public function getProductListOrderingConfig()
     {

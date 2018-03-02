@@ -1,24 +1,24 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport\Detail;
+namespace Shopsys\FrameworkBundle\Model\Transport\Detail;
 
-use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
 
 class TransportDetail
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Transport
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport
      */
     private $transport;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Price[]
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Price[]
      */
     private $basePricesByCurrencyId;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price[] $basePricesByCurrencyId
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price[] $basePricesByCurrencyId
      */
     public function __construct(
         Transport $transport,
@@ -29,7 +29,7 @@ class TransportDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
      */
     public function getTransport()
     {
@@ -37,7 +37,7 @@ class TransportDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price[]
      */
     public function getBasePricesByCurrencyId()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Exception;
+namespace Shopsys\FrameworkBundle\Model\Product\Exception;
 
 interface VariantException extends ProductException
 {

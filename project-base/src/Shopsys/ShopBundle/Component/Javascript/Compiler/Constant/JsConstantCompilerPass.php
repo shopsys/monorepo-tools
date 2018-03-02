@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Javascript\Compiler\Constant;
+namespace Shopsys\FrameworkBundle\Component\Javascript\Compiler\Constant;
 
 use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
-use Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface;
-use Shopsys\ShopBundle\Component\Javascript\Parser\Constant\JsConstantCallParser;
+use Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompilerPassInterface;
+use Shopsys\FrameworkBundle\Component\Javascript\Parser\Constant\JsConstantCallParser;
 
 class JsConstantCompilerPass implements JsCompilerPassInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Javascript\Parser\Constant\JsConstantCallParser
+     * @var \Shopsys\FrameworkBundle\Component\Javascript\Parser\Constant\JsConstantCallParser
      */
     private $jsConstantCallParser;
 
@@ -34,7 +34,7 @@ class JsConstantCompilerPass implements JsCompilerPassInterface
             $constantValueJson = json_encode($constantValue);
 
             if ($constantValueJson === false) {
-                throw new \Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\CannotConvertToJsonException(
+                throw new \Shopsys\FrameworkBundle\Component\Javascript\Compiler\Constant\Exception\CannotConvertToJsonException(
                     'Constant "' . $constantName . '" cannot be converted to JSON'
                 );
             }
@@ -65,7 +65,7 @@ class JsConstantCompilerPass implements JsCompilerPassInterface
             }
         }
 
-        throw new \Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException(
+        throw new \Shopsys\FrameworkBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException(
             'Constant "' . $constantName . '" not defined in PHP code'
         );
     }

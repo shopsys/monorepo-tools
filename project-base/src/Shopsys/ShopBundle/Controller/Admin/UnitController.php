@@ -1,31 +1,31 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Product\Unit\UnitSettingFormType;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitInlineEdit;
+use Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Product\Unit\UnitSettingFormType;
+use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
+use Shopsys\FrameworkBundle\Model\Product\Unit\UnitInlineEdit;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class UnitController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
      */
     private $unitFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitInlineEdit
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitInlineEdit
      */
     private $unitInlineEdit;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+     * @var \Shopsys\FrameworkBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */
     private $confirmDeleteResponseFactory;
 
@@ -48,7 +48,7 @@ class UnitController extends AdminBaseController
 
         $grid = $unitInlineEdit->getGrid();
 
-        return $this->render('@ShopsysShop/Admin/Content/Unit/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Unit/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -92,7 +92,7 @@ class UnitController extends AdminBaseController
 
                 return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_unit_delete', $id);
             }
-        } catch (\Shopsys\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Product\Unit\Exception\UnitNotFoundException $ex) {
             return new Response(t('Selected unit doesn\'t exist'));
         }
     }
@@ -129,7 +129,7 @@ class UnitController extends AdminBaseController
                     ]
                 );
             }
-        } catch (\Shopsys\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Product\Unit\Exception\UnitNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected unit doesn\'t exist.'));
         }
 
@@ -157,7 +157,7 @@ class UnitController extends AdminBaseController
             return $this->redirectToRoute('admin_unit_list');
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Unit/setting.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Unit/setting.html.twig', [
             'form' => $form->createView(),
         ]);
     }

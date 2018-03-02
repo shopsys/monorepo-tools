@@ -1,21 +1,21 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService;
-use Shopsys\ShopBundle\Component\Paginator\QueryPaginator;
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Localization\Localization;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Product\Brand\Brand;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterRepository;
-use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
-use Shopsys\ShopBundle\Model\Product\Search\ProductSearchRepository;
+use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService;
+use Shopsys\FrameworkBundle\Component\Paginator\QueryPaginator;
+use Shopsys\FrameworkBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
+use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
+use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterRepository;
+use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
+use Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
@@ -28,22 +28,22 @@ class ProductRepository
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterRepository
      */
     private $productFilterRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
      */
     private $queryBuilderService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Search\ProductSearchRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository
      */
     private $productSearchRepository;
 
@@ -79,7 +79,7 @@ class ProductRepository
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Product\Product|null
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product|null
      */
     public function findById($id)
     {
@@ -88,7 +88,7 @@ class ProductRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getAllListableQueryBuilder($domainId, PricingGroup $pricingGroup)
@@ -102,7 +102,7 @@ class ProductRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getAllSellableQueryBuilder($domainId, PricingGroup $pricingGroup)
@@ -116,7 +116,7 @@ class ProductRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getAllOfferedQueryBuilder($domainId, PricingGroup $pricingGroup)
@@ -129,7 +129,7 @@ class ProductRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getAllVisibleQueryBuilder($domainId, PricingGroup $pricingGroup)
@@ -173,8 +173,8 @@ class ProductRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getListableInCategoryQueryBuilder(
@@ -189,8 +189,8 @@ class ProductRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
      * @return \Doctrine\ORM\QueryBuilder
      */
     private function getListableForBrandQueryBuilder(
@@ -205,8 +205,8 @@ class ProductRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getSellableInCategoryQueryBuilder(
@@ -221,8 +221,8 @@ class ProductRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getOfferedInCategoryQueryBuilder(
@@ -238,7 +238,7 @@ class ProductRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string $locale
      * @param string|null $searchText
      * @return \Doctrine\ORM\QueryBuilder
@@ -261,7 +261,7 @@ class ProductRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param int $domainId
      */
     private function filterByCategory(QueryBuilder $queryBuilder, Category $category, $domainId)
@@ -273,7 +273,7 @@ class ProductRepository
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
      */
     private function filterByBrand(QueryBuilder $queryBuilder, Brand $brand)
     {
@@ -282,15 +282,15 @@ class ProductRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param int $domainId
      * @param string $locale
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @param string $orderingModeId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $page
      * @param int $limit
-     * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
     public function getPaginationResultForListableInCategory(
         Category $category,
@@ -318,14 +318,14 @@ class ProductRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
      * @param int $domainId
      * @param string $locale
      * @param string $orderingModeId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $page
      * @param int $limit
-     * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
     public function getPaginationResultForListableForBrand(
         Brand $brand,
@@ -351,11 +351,11 @@ class ProductRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param int $domainId
      * @param string $locale
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getFilteredListableInCategoryQueryBuilder(
@@ -385,12 +385,12 @@ class ProductRepository
      * @param string|null $searchText
      * @param int $domainId
      * @param string $locale
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @param string $orderingModeId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $page
      * @param int $limit
-     * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
     public function getPaginationResultForSearchListable(
         $searchText,
@@ -422,8 +422,8 @@ class ProductRepository
      * @param string|null $searchText
      * @param int $domainId
      * @param string $locale
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getFilteredListableForSearchQueryBuilder(
@@ -452,7 +452,7 @@ class ProductRepository
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param string $orderingModeId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string $locale
      */
     private function applyOrdering(
@@ -506,7 +506,7 @@ class ProductRepository
 
             default:
                 $message = 'Product list ordering mode "' . $orderingModeId . '" is not supported.';
-                throw new \Shopsys\ShopBundle\Model\Product\Exception\InvalidOrderingModeException($message);
+                throw new \Shopsys\FrameworkBundle\Model\Product\Exception\InvalidOrderingModeException($message);
         }
 
         $queryBuilder->addOrderBy('p.id', 'asc');
@@ -514,14 +514,14 @@ class ProductRepository
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getById($id)
     {
         $product = $this->findById($id);
 
         if ($product === null) {
-            throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException('Product with ID ' . $id . ' does not exist.');
+            throw new \Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException('Product with ID ' . $id . ' does not exist.');
         }
 
         return $product;
@@ -529,7 +529,7 @@ class ProductRepository
 
     /**
      * @param int[] $ids
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function getAllByIds($ids)
     {
@@ -539,8 +539,8 @@ class ProductRepository
     /**
      * @param int $id
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getVisible($id, $domainId, PricingGroup $pricingGroup)
     {
@@ -551,7 +551,7 @@ class ProductRepository
         $product = $qb->getQuery()->getOneOrNullResult();
 
         if ($product === null) {
-            throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException();
+            throw new \Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException();
         }
 
         return $product;
@@ -560,8 +560,8 @@ class ProductRepository
     /**
      * @param int $id
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getSellableById($id, $domainId, PricingGroup $pricingGroup)
     {
@@ -572,14 +572,14 @@ class ProductRepository
         $product = $qb->getQuery()->getOneOrNullResult();
 
         if ($product === null) {
-            throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException();
+            throw new \Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException();
         }
 
         return $product;
     }
 
     /**
-     * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\ShopBundle\Model\Product\Product[][]
+     * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\FrameworkBundle\Model\Product\Product[][]
      */
     public function getProductIteratorForReplaceVat()
     {
@@ -594,8 +594,8 @@ class ProductRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]
      */
     public function getProductDomainsByProductIndexedByDomainId(Product $product)
     {
@@ -610,9 +610,9 @@ class ProductRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]
      */
     public function getProductDomainsByProductsAndDomainIdIndexedByProductId(array $products, $domainId)
     {
@@ -624,7 +624,7 @@ class ProductRepository
 
         $productDomainByProductId = [];
         foreach ($queryBuilder->getQuery()->execute() as $productDomain) {
-            /* @var $productDomain \Shopsys\ShopBundle\Model\Product\ProductDomain */
+            /* @var $productDomain \Shopsys\FrameworkBundle\Model\Product\ProductDomain */
             $productDomainByProductId[$productDomain->getProduct()->getId()] = $productDomain;
         }
 
@@ -632,9 +632,9 @@ class ProductRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Product\ProductDomain|null
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain|null
      */
     public function findProductDomainByProductAndDomainId(Product $product, $domainId)
     {
@@ -645,15 +645,15 @@ class ProductRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Product\ProductDomain
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain
      */
     public function getProductDomainByProductAndDomainId(Product $product, $domainId)
     {
         $productDomain = $this->findProductDomainByProductAndDomainId($product, $domainId);
         if ($productDomain === null) {
-            throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductDomainNotFoundException();
+            throw new \Shopsys\FrameworkBundle\Model\Product\Exception\ProductDomainNotFoundException();
         }
 
         return $productDomain;
@@ -681,7 +681,7 @@ class ProductRepository
     }
 
     /**
-     * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\ShopBundle\Model\Product\Product[][]
+     * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\FrameworkBundle\Model\Product\Product[][]
      */
     public function getProductsForPriceRecalculationIterator()
     {
@@ -693,7 +693,7 @@ class ProductRepository
     }
 
     /**
-     * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\ShopBundle\Model\Product\Product[][]
+     * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\FrameworkBundle\Model\Product\Product[][]
      */
     public function getProductsForAvailabilityRecalculationIterator()
     {
@@ -705,10 +705,10 @@ class ProductRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $mainVariant
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $mainVariant
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function getAllSellableVariantsByMainVariant(Product $mainVariant, $domainId, PricingGroup $pricingGroup)
     {
@@ -722,7 +722,7 @@ class ProductRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getAllSellableUsingStockInStockQueryBuilder($domainId, $pricingGroup)
@@ -736,8 +736,8 @@ class ProductRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $mainVariant
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $mainVariant
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function getAtLeastSomewhereSellableVariantsByMainVariant(Product $mainVariant)
     {
@@ -754,9 +754,9 @@ class ProductRepository
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int[] $productIds
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function getOfferedByIds($domainId, PricingGroup $pricingGroup, array $productIds)
     {
@@ -772,7 +772,7 @@ class ProductRepository
 
     /**
      * @param string $productCatnum
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getOneByCatnumExcludeMainVariants($productCatnum)
     {
@@ -784,7 +784,7 @@ class ProductRepository
         $product = $queryBuilder->getQuery()->getOneOrNullResult();
 
         if ($product === null) {
-            throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException(
+            throw new \Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException(
                 'Product with catnum ' . $productCatnum . ' does not exist.'
             );
         }

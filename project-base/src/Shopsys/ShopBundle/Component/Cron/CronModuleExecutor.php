@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Cron;
+namespace Shopsys\FrameworkBundle\Component\Cron;
 
 use DateTimeImmutable;
 use Shopsys\Plugin\Cron\IteratedCronModuleInterface;

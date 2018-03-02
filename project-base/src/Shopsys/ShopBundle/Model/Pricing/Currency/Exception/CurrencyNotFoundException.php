@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Currency\Exception;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Currency\Exception;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

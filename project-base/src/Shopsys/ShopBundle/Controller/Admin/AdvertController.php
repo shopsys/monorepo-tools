@@ -1,52 +1,52 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Advert\AdvertFormType;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\Advert\Advert;
-use Shopsys\ShopBundle\Model\Advert\AdvertData;
-use Shopsys\ShopBundle\Model\Advert\AdvertFacade;
-use Shopsys\ShopBundle\Twig\ImageExtension;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Advert\AdvertFormType;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\Advert\Advert;
+use Shopsys\FrameworkBundle\Model\Advert\AdvertData;
+use Shopsys\FrameworkBundle\Model\Advert\AdvertFacade;
+use Shopsys\FrameworkBundle\Twig\ImageExtension;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvertController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
     private $administratorGridFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Advert\AdvertFacade
+     * @var \Shopsys\FrameworkBundle\Model\Advert\AdvertFacade
      */
     private $advertFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Twig\ImageExtension
+     * @var \Shopsys\FrameworkBundle\Twig\ImageExtension
      */
     private $imageExtension;
 
@@ -103,7 +103,7 @@ class AdvertController extends AdminBaseController
 
         $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing advertising - %name%', ['%name%' => $advert->getName()])));
 
-        return $this->render('@ShopsysShop/Admin/Content/Advert/edit.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Advert/edit.html.twig', [
             'form' => $form->createView(),
             'advert' => $advert,
         ]);
@@ -115,7 +115,7 @@ class AdvertController extends AdminBaseController
     public function listAction()
     {
         $administrator = $this->getUser();
-        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
+        /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
 
         $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
         $queryBuilder
@@ -147,7 +147,7 @@ class AdvertController extends AdminBaseController
         $grid->addDeleteActionColumn('admin_advert_delete', ['id' => 'a.id'])
             ->setConfirmMessage(t('Do you really want to remove this advert?'));
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Advert/listGrid.html.twig', [
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Advert/listGrid.html.twig', [
             'advertPositionNames' => [
                 Advert::POSITION_HEADER => t('under heading'),
                 Advert::POSITION_FOOTER => t('above footer'),
@@ -159,7 +159,7 @@ class AdvertController extends AdminBaseController
 
         $this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-        return $this->render('@ShopsysShop/Admin/Content/Advert/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Advert/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }
@@ -196,7 +196,7 @@ class AdvertController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Advert/new.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Advert/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -219,7 +219,7 @@ class AdvertController extends AdminBaseController
                     'name' => $fullName,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Advert\Exception\AdvertNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Advert\Exception\AdvertNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected advertisement doesn\'t exist.'));
         }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Unit\Exception;
+namespace Shopsys\FrameworkBundle\Model\Product\Unit\Exception;
 
-use Shopsys\ShopBundle\Model\Product\Exception\ProductException;
+use Shopsys\FrameworkBundle\Model\Product\Exception\ProductException;
 
 interface UnitException extends ProductException
 {

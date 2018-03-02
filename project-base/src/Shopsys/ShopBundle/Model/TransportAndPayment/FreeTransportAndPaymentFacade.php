@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\TransportAndPayment;
+namespace Shopsys\FrameworkBundle\Model\TransportAndPayment;
 
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 
 class FreeTransportAndPaymentFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
     private $pricingSetting;
 

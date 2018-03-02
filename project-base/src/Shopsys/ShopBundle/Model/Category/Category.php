@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Category;
+namespace Shopsys\FrameworkBundle\Model\Category;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 
 /**
  * @Gedmo\Tree(type="nested")
@@ -25,25 +25,25 @@ class Category extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryTranslation[]
      *
-     * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Category\CategoryTranslation")
+     * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Category\CategoryTranslation")
      */
     protected $translations;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\Category|null
+     * @var \Shopsys\FrameworkBundle\Model\Category\Category|null
      *
      * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Category\Category", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category", inversedBy="children")
      * @ORM\JoinColumn(nullable=true, name="parent_id", referencedColumnName="id")
      */
     private $parent;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\Category[]
+     * @var \Shopsys\FrameworkBundle\Model\Category\Category[]
      *
-     * @ORM\OneToMany(targetEntity="Shopsys\ShopBundle\Model\Category\Category", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     private $children;
@@ -73,14 +73,14 @@ class Category extends AbstractTranslatableEntity
     private $rgt;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryDomain[]|\Doctrine\Common\Collections\ArrayCollection
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDomain[]|\Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Shopsys\ShopBundle\Model\Category\CategoryDomain", mappedBy="category", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Category\CategoryDomain", mappedBy="category", fetch="EXTRA_LAZY")
      */
     private $domains;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
      */
     public function __construct(CategoryData $categoryData)
     {
@@ -90,7 +90,7 @@ class Category extends AbstractTranslatableEntity
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
      */
     public function edit(CategoryData $categoryData)
     {
@@ -99,7 +99,7 @@ class Category extends AbstractTranslatableEntity
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category|null $parent
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category|null $parent
      */
     public function setParent(self $parent = null)
     {
@@ -137,7 +137,7 @@ class Category extends AbstractTranslatableEntity
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\Category|null
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category|null
      */
     public function getParent()
     {
@@ -163,7 +163,7 @@ class Category extends AbstractTranslatableEntity
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category[]
      */
     public function getChildren()
     {
@@ -188,7 +188,7 @@ class Category extends AbstractTranslatableEntity
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Category\CategoryDomain
+     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryDomain
      */
     public function getCategoryDomain($domainId)
     {
@@ -198,10 +198,10 @@ class Category extends AbstractTranslatableEntity
             }
         }
 
-        throw new \Shopsys\ShopBundle\Model\Category\Exception\CategoryDomainNotFoundException($this->id, $domainId);
+        throw new \Shopsys\FrameworkBundle\Model\Category\Exception\CategoryDomainNotFoundException($this->id, $domainId);
     }
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
      */
     private function setTranslations(CategoryData $categoryData)
     {
@@ -211,7 +211,7 @@ class Category extends AbstractTranslatableEntity
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\CategoryTranslation
+     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryTranslation
      */
     protected function createTranslation()
     {

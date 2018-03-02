@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Heureka;
+namespace Shopsys\FrameworkBundle\Model\Heureka;
 
 use Exception;
-use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Order\Order;
 use Symfony\Bridge\Monolog\Logger;
 
 class HeurekaFacade
@@ -14,25 +14,25 @@ class HeurekaFacade
     private $logger;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaShopCertificationFactory
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationFactory
      */
     private $heurekaShopCertificationFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaShopCertificationService
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationService
      */
     private $heurekaShopCertificationService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaSetting
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting
      */
     private $heurekaSetting;
 
     /**
      * @param \Symfony\Bridge\Monolog\Logger $logger
-     * @param \Shopsys\ShopBundle\Model\Heureka\HeurekaShopCertificationFactory $heurekaShopCertificationFactory
-     * @param \Shopsys\ShopBundle\Model\Heureka\HeurekaShopCertificationService $heurekaShopCertificationService
-     * @param \Shopsys\ShopBundle\Model\Heureka\HeurekaSetting $heurekaSetting
+     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationFactory $heurekaShopCertificationFactory
+     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationService $heurekaShopCertificationService
+     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting $heurekaSetting
      */
     public function __construct(
         Logger $logger,
@@ -47,14 +47,14 @@ class HeurekaFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      */
     public function sendOrderInfo(Order $order)
     {
         try {
             $heurekaShopCertification = $this->heurekaShopCertificationFactory->create($order);
             $heurekaShopCertification->logOrder();
-        } catch (\Shopsys\ShopBundle\Model\Heureka\Exception\LocaleNotSupportedException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Heureka\Exception\LocaleNotSupportedException $ex) {
             $this->logError($ex, $order);
         } catch (\Heureka\ShopCertification\Exception $ex) {
             $this->logError($ex, $order);
@@ -99,7 +99,7 @@ class HeurekaFacade
 
     /**
      * @param \Exception $ex
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      */
     private function logError(Exception $ex, Order $order)
     {

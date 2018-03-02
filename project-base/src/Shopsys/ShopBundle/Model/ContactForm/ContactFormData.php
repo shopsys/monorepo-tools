@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\ContactForm;
+namespace Shopsys\FrameworkBundle\Model\ContactForm;
 
 class ContactFormData
 {

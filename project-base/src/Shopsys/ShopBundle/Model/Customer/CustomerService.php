@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer;
+namespace Shopsys\FrameworkBundle\Model\Customer;
 
-use Shopsys\ShopBundle\Component\Utils;
-use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Component\Utils;
+use Shopsys\FrameworkBundle\Model\Order\Order;
 
 class CustomerService
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CustomerPasswordService
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService
      */
     private $customerPasswordService;
 
@@ -18,11 +18,11 @@ class CustomerService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
-     * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
-     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-     * @param \Shopsys\ShopBundle\Model\Customer\User|null $userByEmail
-     * @return \Shopsys\ShopBundle\Model\Customer\User
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddress $billingAddress
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $userByEmail
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
     public function create(
         UserData $userData,
@@ -34,7 +34,7 @@ class CustomerService
             $isSameEmail = (mb_strtolower($userByEmail->getEmail()) === mb_strtolower($userData->email));
             $isSameDomain = ($userByEmail->getDomainId() === $userData->domainId);
             if ($isSameEmail && $isSameDomain) {
-                throw new \Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException($userData->email);
+                throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException($userData->email);
             }
         }
 
@@ -49,8 +49,8 @@ class CustomerService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @param \Shopsys\ShopBundle\Model\Customer\UserData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserData
      */
     public function edit(User $user, UserData $userData)
     {
@@ -62,8 +62,8 @@ class CustomerService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData
-     * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData
+     * @return \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null
      */
     public function createDeliveryAddress(DeliveryAddressData $deliveryAddressData)
     {
@@ -77,10 +77,10 @@ class CustomerService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
-     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-     * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     * @return \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null
      */
     public function editDeliveryAddress(
         User $user,
@@ -103,9 +103,9 @@ class CustomerService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @param string $email
-     * @param \Shopsys\ShopBundle\Model\Customer\User|null $userByEmail
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $userByEmail
      */
     public function changeEmail(User $user, $email, User $userByEmail = null)
     {
@@ -115,7 +115,7 @@ class CustomerService
 
         if ($userByEmail instanceof User) {
             if (mb_strtolower($userByEmail->getEmail()) === $email && $user !== $userByEmail) {
-                throw new \Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException($email);
+                throw new \Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException($email);
             }
         }
 
@@ -123,9 +123,9 @@ class CustomerService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
-     * @return \Shopsys\ShopBundle\Model\Customer\CustomerData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @return \Shopsys\FrameworkBundle\Model\Customer\CustomerData
      */
     public function getAmendedCustomerDataByOrder(User $user, Order $order)
     {
@@ -144,9 +144,9 @@ class CustomerService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
-     * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
-     * @return \Shopsys\ShopBundle\Model\Customer\BillingAddressData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddress $billingAddress
+     * @return \Shopsys\FrameworkBundle\Model\Customer\BillingAddressData
      */
     private function getAmendedBillingAddressDataByOrder(Order $order, BillingAddress $billingAddress)
     {
@@ -172,9 +172,9 @@ class CustomerService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
-     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-     * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     * @return \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData
      */
     private function getAmendedDeliveryAddressDataByOrder(Order $order, DeliveryAddress $deliveryAddress = null)
     {

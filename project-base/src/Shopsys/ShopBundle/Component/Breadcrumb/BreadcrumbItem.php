@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Breadcrumb;
+namespace Shopsys\FrameworkBundle\Component\Breadcrumb;
 
 class BreadcrumbItem
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Performance\Exception;
+namespace Shopsys\FrameworkBundle\DataFixtures\Performance\Exception;
 
 use Exception;
 

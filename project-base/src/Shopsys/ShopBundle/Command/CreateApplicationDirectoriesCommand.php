@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
-use Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator as ImageDirectoryStructureCreator;
-use Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator as UploadedFileDirectoryStructureCreator;
+use Shopsys\FrameworkBundle\Component\Image\DirectoryStructureCreator as ImageDirectoryStructureCreator;
+use Shopsys\FrameworkBundle\Component\UploadedFile\DirectoryStructureCreator as UploadedFileDirectoryStructureCreator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -33,12 +33,12 @@ class CreateApplicationDirectoriesCommand extends Command
     private $filesystem;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator
+     * @var \Shopsys\FrameworkBundle\Component\Image\DirectoryStructureCreator
      */
     private $imageDirectoryStructureCreator;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\DirectoryStructureCreator
      */
     private $uploadedFileDirectoryStructureCreator;
 
@@ -46,8 +46,8 @@ class CreateApplicationDirectoriesCommand extends Command
      * @param string $rootDirectory
      * @param string $webDirectory
      * @param \Symfony\Component\Filesystem\Filesystem $filesystem
-     * @param \Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator $imageDirectoryStructureCreator
-     * @param \Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator $uploadedFileDirectoryStructureCreator
+     * @param \Shopsys\FrameworkBundle\Component\Image\DirectoryStructureCreator $imageDirectoryStructureCreator
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\DirectoryStructureCreator $uploadedFileDirectoryStructureCreator
      */
     public function __construct(
         $rootDirectory,

@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Error;
+namespace Shopsys\FrameworkBundle\Component\Error;
 
 use AppKernel;
 use Shopsys\Environment;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,12 +22,12 @@ class ErrorPagesFacade
     private $errorPagesDir;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
 
@@ -38,8 +38,8 @@ class ErrorPagesFacade
 
     /**
      * @param string $errorPagesDir
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\ShopBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
      * @param \Symfony\Component\Filesystem\Filesystem $filesystem
      */
     public function __construct(
@@ -71,7 +71,7 @@ class ErrorPagesFacade
     {
         $errorPageContent = file_get_contents($this->getErrorPageFilename($domainId, $statusCode));
         if ($errorPageContent === false) {
-            throw new \Shopsys\ShopBundle\Component\Error\Exception\ErrorPageNotFoundException($domainId, $statusCode);
+            throw new \Shopsys\FrameworkBundle\Component\Error\Exception\ErrorPageNotFoundException($domainId, $statusCode);
         }
 
         return $errorPageContent;
@@ -139,7 +139,7 @@ class ErrorPagesFacade
         $errorPageKernel->terminate($errorPageFakeRequest, $errorPageResponse);
 
         if ($expectedStatusCode !== $errorPageResponse->getStatusCode()) {
-            throw new \Shopsys\ShopBundle\Component\Error\Exception\BadErrorPageStatusCodeException(
+            throw new \Shopsys\FrameworkBundle\Component\Error\Exception\BadErrorPageStatusCodeException(
                 $errorPageUrl,
                 $expectedStatusCode,
                 $errorPageResponse->getStatusCode()

@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Domain;
+namespace Shopsys\FrameworkBundle\Component\Domain;
 
-use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
+use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService;
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -13,7 +13,7 @@ class DomainService
     const DOMAIN_ICON_CROP = false;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService
+     * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService
      */
     private $imageProcessingService;
 
@@ -66,7 +66,7 @@ class DomainService
             $this->filesystem->remove($filepath);
         } catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
             $message = 'Move file from temporary directory to domain directory failed';
-            $moveToFolderFailedException = new \Shopsys\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException(
+            $moveToFolderFailedException = new \Shopsys\FrameworkBundle\Component\FileUpload\Exception\MoveToFolderFailedException(
                 $message,
                 $ex
             );

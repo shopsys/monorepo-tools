@@ -1,26 +1,26 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\LegalConditions;
+namespace Shopsys\FrameworkBundle\Model\LegalConditions;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Article\Article;
-use Shopsys\ShopBundle\Model\Article\ArticleFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Model\Article\Article;
+use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
 
 class LegalConditionsFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade
      */
     private $articleFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -36,7 +36,7 @@ class LegalConditionsFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Article\Article|null
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article|null
      */
     public function findTermsAndConditions($domainId)
     {
@@ -44,7 +44,7 @@ class LegalConditionsFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Article\Article|null $termsAndConditions
+     * @param \Shopsys\FrameworkBundle\Model\Article\Article|null $termsAndConditions
      * @param int $domainId
      */
     public function setTermsAndConditions(Article $termsAndConditions = null, $domainId)
@@ -62,7 +62,7 @@ class LegalConditionsFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Article\Article|null
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article|null
      */
     public function findPrivacyPolicy($domainId)
     {
@@ -70,7 +70,7 @@ class LegalConditionsFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Article\Article|null $privacyPolicy
+     * @param \Shopsys\FrameworkBundle\Model\Article\Article|null $privacyPolicy
      * @param int $domainId
      */
     public function setPrivacyPolicy(Article $privacyPolicy = null, $domainId)
@@ -79,7 +79,7 @@ class LegalConditionsFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Article\Article $article
+     * @param \Shopsys\FrameworkBundle\Model\Article\Article $article
      * @return bool
      */
     public function isArticleUsedAsLegalConditions(Article $article)
@@ -101,7 +101,7 @@ class LegalConditionsFacade
     /**
      * @param string $settingKey
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Article\Article|null
+     * @return \Shopsys\FrameworkBundle\Model\Article\Article|null
      */
     private function findArticle($settingKey, $domainId)
     {
@@ -116,7 +116,7 @@ class LegalConditionsFacade
 
     /**
      * @param string $settingKey
-     * @param \Shopsys\ShopBundle\Model\Article\Article|null $privacyPolicy
+     * @param \Shopsys\FrameworkBundle\Model\Article\Article|null $privacyPolicy
      * @param int $domainId
      */
     private function setArticle($settingKey, Article $privacyPolicy = null, $domainId)

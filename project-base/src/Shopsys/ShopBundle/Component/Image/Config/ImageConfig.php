@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Image\Config;
+namespace Shopsys\FrameworkBundle\Component\Image\Config;
 
-use Shopsys\ShopBundle\Component\Image\Image;
+use Shopsys\FrameworkBundle\Component\Image\Image;
 
 class ImageConfig
 {
@@ -10,12 +10,12 @@ class ImageConfig
     const DEFAULT_SIZE_NAME = 'default';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[]
+     * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig[]
      */
     private $imageEntityConfigsByClass;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigsByClass
+     * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigsByClass
      */
     public function __construct(array $imageEntityConfigsByClass)
     {
@@ -36,7 +36,7 @@ class ImageConfig
      * @param Object $entity
      * @param string|null $type
      * @param string|null $sizeName
-     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig
      */
     public function getImageSizeConfigByEntity($entity, $type, $sizeName)
     {
@@ -48,7 +48,7 @@ class ImageConfig
      * @param string $entityName
      * @param string|null $type
      * @param string|null $sizeName
-     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig
      */
     public function getImageSizeConfigByEntityName($entityName, $type, $sizeName)
     {
@@ -67,9 +67,9 @@ class ImageConfig
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Image\Image $image
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
      * @param string|null $sizeName
-     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig
      */
     public function getImageSizeConfigByImage(Image $image, $sizeName)
     {
@@ -79,7 +79,7 @@ class ImageConfig
 
     /**
      * @param Object $entity
-     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig
      */
     public function getImageEntityConfig($entity)
     {
@@ -89,7 +89,7 @@ class ImageConfig
             }
         }
 
-        throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException(
+        throw new \Shopsys\FrameworkBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException(
             $entity ? get_class($entity) : null
         );
     }
@@ -110,7 +110,7 @@ class ImageConfig
 
     /**
      * @param string $entityName
-     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig;
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig;
      */
     public function getEntityConfigByEntityName($entityName)
     {
@@ -120,11 +120,11 @@ class ImageConfig
             }
         }
 
-        throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException($entityName);
+        throw new \Shopsys\FrameworkBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException($entityName);
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[]
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig[]
      */
     public function getAllImageEntityConfigsByClass()
     {
@@ -133,7 +133,7 @@ class ImageConfig
 
     /**
      * @param string $class
-     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig
      */
     public function getImageEntityConfigByClass($class)
     {
@@ -141,6 +141,6 @@ class ImageConfig
             return $this->imageEntityConfigsByClass[$class];
         }
 
-        throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException($class);
+        throw new \Shopsys\FrameworkBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException($class);
     }
 }

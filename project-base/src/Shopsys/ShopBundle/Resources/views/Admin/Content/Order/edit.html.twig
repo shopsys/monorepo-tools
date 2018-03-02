@@ -1,6 +1,6 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% import '@ShopsysShop/Admin/Content/Order/orderItem.html.twig' as orderItemMacro %}
+{% import '@ShopsysFramework/Admin/Content/Order/orderItem.html.twig' as orderItemMacro %}
 
 {% block title %}{{ 'Order Nr.'|trans }} {{ order.number }}{% endblock %}
 {% block h1 %}{{ 'Order Nr.'|trans }} {{ order.number }}{% endblock %}
@@ -221,7 +221,7 @@
             </div>
         </fieldset>
 
-        {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 <a href="{{ url('admin_order_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
                 {{ form_widget(form.save, { label: 'Save changes'|trans}) }}

@@ -1,10 +1,10 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Units overview'|trans }}{% endblock %}
 {% block h1 %}{{ 'Units overview'|trans }}{% endblock %}
 
 {% block main_content %}
-    {{ render(controller('ShopsysShopBundle:Admin/Unit:setting')) }}
+    {{ render(controller('ShopsysFrameworkBundle:Admin/Unit:setting')) }}
 
     {{ gridView.render() }}
 {% endblock %}

@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder;
+namespace Shopsys\FrameworkBundle\Model\AdvancedSearchOrder;
 
-use Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory;
-use Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminFacade;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory;
+use Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvancedSearchOrderFacade
@@ -11,17 +11,17 @@ class AdvancedSearchOrderFacade
     const RULES_FORM_NAME = 'as';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory
      */
     private $orderAdvancedSearchFormFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService
      */
     private $advancedSearchOrderService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminFacade
      */
     private $orderListAdminFacade;
 

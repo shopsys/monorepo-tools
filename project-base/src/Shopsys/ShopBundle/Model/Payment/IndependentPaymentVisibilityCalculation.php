@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment;
+namespace Shopsys\FrameworkBundle\Model\Payment;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 
 class IndependentPaymentVisibilityCalculation
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentRepository
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository
      */
     private $paymentRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -25,7 +25,7 @@ class IndependentPaymentVisibilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param int $domainId
      * @return bool
      */
@@ -49,7 +49,7 @@ class IndependentPaymentVisibilityCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param int $domainId
      * @return bool
      */

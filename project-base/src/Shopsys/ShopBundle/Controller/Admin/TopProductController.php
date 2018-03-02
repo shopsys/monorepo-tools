@@ -1,23 +1,23 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType;
-use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Form\Admin\Product\TopProduct\TopProductsFormType;
+use Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class TopProductController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade
      */
     private $topProductFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
@@ -50,14 +50,14 @@ class TopProductController extends AdminBaseController
             $this->getFlashMessageSender()->addSuccessFlash(t('Product settings on the main page successfully changed'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/TopProduct/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/TopProduct/list.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     private function getProductsForDomain($domainId)
     {

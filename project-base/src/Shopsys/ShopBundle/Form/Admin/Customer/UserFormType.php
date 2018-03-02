@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Customer;
+namespace Shopsys\FrameworkBundle\Form\Admin\Customer;
 
-use Shopsys\ShopBundle\Component\Constraints\Email;
-use Shopsys\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
-use Shopsys\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
-use Shopsys\ShopBundle\Component\Constraints\UniqueEmail;
-use Shopsys\ShopBundle\Form\DomainType;
-use Shopsys\ShopBundle\Model\Customer\UserData;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\FrameworkBundle\Component\Constraints\Email;
+use Shopsys\FrameworkBundle\Component\Constraints\FieldsAreNotIdentical;
+use Shopsys\FrameworkBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
+use Shopsys\FrameworkBundle\Component\Constraints\UniqueEmail;
+use Shopsys\FrameworkBundle\Form\DomainType;
+use Shopsys\FrameworkBundle\Model\Customer\UserData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints;
 class UserFormType extends AbstractType
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
     private $pricingGroupFacade;
 

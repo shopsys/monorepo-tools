@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Group;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Group;
 
 class PricingGroupData
 {
@@ -25,7 +25,7 @@ class PricingGroupData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      */
     public function setFromEntity(PricingGroup $pricingGroup)
     {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Base;
+namespace Shopsys\FrameworkBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Model\Order\OrderNumberSequence;
-use Shopsys\ShopBundle\Model\Order\OrderNumberSequenceRepository;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Model\Order\OrderNumberSequence;
+use Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository;
 
 class OrderNumberSequenceDataFixture extends AbstractReferenceFixture
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
-use Shopsys\ShopBundle\Component\Css\CssFacade;
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Css\CssFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -28,7 +28,7 @@ class GenerateGruntfileCommand extends Command
     private $rootDirectory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -38,16 +38,16 @@ class GenerateGruntfileCommand extends Command
     private $twig;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Css\CssFacade
+     * @var \Shopsys\FrameworkBundle\Component\Css\CssFacade
      */
     private $cssFacade;
 
     /**
      * @param string $stylesDirectory
      * @param string $rootDirectory
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Twig\Environment $twig
-     * @param \Shopsys\ShopBundle\Component\Css\CssFacade $cssFacade
+     * @param \Shopsys\FrameworkBundle\Component\Css\CssFacade $cssFacade
      */
     public function __construct(
         $stylesDirectory,

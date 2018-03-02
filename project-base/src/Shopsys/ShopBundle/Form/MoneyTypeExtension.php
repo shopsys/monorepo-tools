@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form;
+namespace Shopsys\FrameworkBundle\Form;
 
 use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
-use Shopsys\ShopBundle\Component\Transformers\RemoveWhitespacesTransformer;
-use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Component\Transformers\RemoveWhitespacesTransformer;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormView;
 class MoneyTypeExtension extends AbstractTypeExtension
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 

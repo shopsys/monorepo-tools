@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Log;
+namespace Shopsys\FrameworkBundle\Component\Log;
 
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;

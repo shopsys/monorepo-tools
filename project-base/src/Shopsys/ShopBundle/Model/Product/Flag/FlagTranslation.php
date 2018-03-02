@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Flag;
+namespace Shopsys\FrameworkBundle\Model\Product\Flag;
 
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
@@ -13,7 +13,7 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
 class FlagTranslation extends AbstractTranslation
 {
     /**
-     * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Product\Flag\Flag")
+     * @Prezent\Translatable(targetEntity="Shopsys\FrameworkBundle\Model\Product\Flag\Flag")
      */
     protected $translatable;
 

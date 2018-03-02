@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Statistics;
+namespace Shopsys\FrameworkBundle\Model\Statistics;
 
 use DateTime;
 

@@ -1,27 +1,25 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order;
-
-use Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory;
+namespace Shopsys\FrameworkBundle\Model\Order;
 
 class OrderFlowFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface
      */
-    private $domainAwareOrderFlowFactory;
+    private $orderFlowFactory;
 
     /**
-     * @param \Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory $domainAwareOrderFlowFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface $orderFlowFactory
      */
-    public function __construct(DomainAwareOrderFlowFactory $domainAwareOrderFlowFactory)
+    public function __construct(OrderFlowFactoryInterface $orderFlowFactory)
     {
-        $this->domainAwareOrderFlowFactory = $domainAwareOrderFlowFactory;
+        $this->orderFlowFactory = $orderFlowFactory;
     }
 
     public function resetOrderForm()
     {
-        $orderFlow = $this->domainAwareOrderFlowFactory->create();
+        $orderFlow = $this->orderFlowFactory->create();
         $orderFlow->reset();
     }
 }

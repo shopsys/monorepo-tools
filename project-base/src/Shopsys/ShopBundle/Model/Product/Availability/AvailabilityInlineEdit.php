@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Availability;
+namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
-use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use Shopsys\ShopBundle\Form\Admin\Product\Availability\AvailabilityFormType;
+use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\FrameworkBundle\Form\Admin\Product\Availability\AvailabilityFormType;
 use Symfony\Component\Form\FormFactory;
 
 class AvailabilityInlineEdit extends AbstractGridInlineEdit
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
     private $availabilityFacade;
 
@@ -19,8 +19,8 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit
     private $formFactory;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityGridFactory $availabilityGridFactory
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityGridFactory $availabilityGridFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
      * @param \Symfony\Component\Form\FormFactory $formFactory
      */
     public function __construct(
@@ -34,7 +34,7 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData $availabilityData
      * @return int
      */
     protected function createEntityAndGetId($availabilityData)
@@ -46,7 +46,7 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int $availabilityId
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData $availabilityData
      */
     protected function editEntity($availabilityId, $availabilityData)
     {

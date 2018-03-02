@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Base;
+namespace Shopsys\FrameworkBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Model\Module\ModuleFacade;
-use Shopsys\ShopBundle\Model\Module\ModuleList;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Model\Module\ModuleFacade;
+use Shopsys\FrameworkBundle\Model\Module\ModuleList;
 
 class EnabledModuleDataFixture extends AbstractReferenceFixture
 {
@@ -15,7 +15,7 @@ class EnabledModuleDataFixture extends AbstractReferenceFixture
     public function load(ObjectManager $manager)
     {
         $moduleFacade = $this->get(ModuleFacade::class);
-        /* @var $moduleFacade \Shopsys\ShopBundle\Model\Module\ModuleFacade */
+        /* @var $moduleFacade \Shopsys\FrameworkBundle\Model\Module\ModuleFacade */
         $moduleFacade->setEnabled(ModuleList::PRODUCT_FILTER_COUNTS, true);
         $moduleFacade->setEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS, true);
     }

@@ -1,17 +1,17 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Transformers;
+namespace Shopsys\FrameworkBundle\Component\Transformers;
 
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValueData;
-use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
-use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class ProductParameterValueToProductParameterValuesLocalizedTransformer implements DataTransformerInterface
 {
     /**
      * @param mixed $normData
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData[]
      */
     public function transform($normData)
     {
@@ -25,7 +25,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 
         $normValue = [];
         foreach ($normData as $productParameterValueData) {
-            /* @var $productParameterValueData \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData */
+            /* @var $productParameterValueData \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData */
             $parameterId = $productParameterValueData->parameter->getId();
             $locale = $productParameterValueData->parameterValueData->locale;
 
@@ -47,7 +47,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 
     /**
      * @param mixed $viewData
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData[]
      */
     public function reverseTransform($viewData)
     {
@@ -55,7 +55,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
             $normData = [];
 
             foreach ($viewData as $productParameterValuesLocalizedData) {
-                /* @var $productParameterValuesLocalizedData \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData */
+                /* @var $productParameterValuesLocalizedData \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData */
 
                 foreach ($productParameterValuesLocalizedData->valueTextsByLocale as $locale => $valueText) {
                     if ($valueText !== null) {

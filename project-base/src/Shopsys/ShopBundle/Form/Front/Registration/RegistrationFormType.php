@@ -2,13 +2,13 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Registration;
 
-use Shopsys\ShopBundle\Component\Constraints\Email;
-use Shopsys\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
-use Shopsys\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
-use Shopsys\ShopBundle\Component\Constraints\UniqueEmail;
-use Shopsys\ShopBundle\Form\HoneyPotType;
-use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
-use Shopsys\ShopBundle\Model\Customer\UserData;
+use Shopsys\FrameworkBundle\Component\Constraints\Email;
+use Shopsys\FrameworkBundle\Component\Constraints\FieldsAreNotIdentical;
+use Shopsys\FrameworkBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
+use Shopsys\FrameworkBundle\Component\Constraints\UniqueEmail;
+use Shopsys\FrameworkBundle\Form\HoneyPotType;
+use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
+use Shopsys\FrameworkBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component;
+namespace Shopsys\FrameworkBundle\Component;
 
 class Utils
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Status;
+namespace Shopsys\FrameworkBundle\Model\Order\Status;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Order\Order;
 
 class OrderStatusRepository
 {
@@ -30,7 +30,7 @@ class OrderStatusRepository
 
     /**
      * @param int $orderStatusId
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus|null
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus|null
      */
     public function findById($orderStatusId)
     {
@@ -39,7 +39,7 @@ class OrderStatusRepository
 
     /**
      * @param int $orderStatusId
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus
      */
     public function getById($orderStatusId)
     {
@@ -47,14 +47,14 @@ class OrderStatusRepository
 
         if ($orderStatus === null) {
             $message = 'Order status with ID ' . $orderStatusId . ' not found.';
-            throw new \Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
         }
 
         return $orderStatus;
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus
      */
     public function getDefault()
     {
@@ -62,14 +62,14 @@ class OrderStatusRepository
 
         if ($orderStatus === null) {
             $message = 'Default order status not found.';
-            throw new \Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
         }
 
         return $orderStatus;
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus[]
      */
     public function getAll()
     {
@@ -77,7 +77,7 @@ class OrderStatusRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus[]
      */
     public function getAllIndexedById()
     {
@@ -92,7 +92,7 @@ class OrderStatusRepository
 
     /**
      * @param int $orderStatusId
-     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
+     * @return \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus[]
      */
     public function getAllExceptId($orderStatusId)
     {
@@ -104,8 +104,8 @@ class OrderStatusRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $oldOrderStatus
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $newOrderStatus
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus $oldOrderStatus
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus $newOrderStatus
      */
     public function replaceOrderStatus(OrderStatus $oldOrderStatus, OrderStatus $newOrderStatus)
     {

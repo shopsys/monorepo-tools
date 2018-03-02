@@ -1,104 +1,104 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Product\ProductEditFormType;
-use Shopsys\ShopBundle\Form\Admin\Product\ProductMassActionFormType;
-use Shopsys\ShopBundle\Form\Admin\Product\VariantFormType;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
-use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade;
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
-use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
-use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
-use Shopsys\ShopBundle\Model\Product\MassAction\ProductMassActionFacade;
-use Shopsys\ShopBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductFacade;
-use Shopsys\ShopBundle\Model\Product\ProductVariantFacade;
-use Shopsys\ShopBundle\Twig\ProductExtension;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Product\ProductEditFormType;
+use Shopsys\FrameworkBundle\Form\Admin\Product\ProductMassActionFormType;
+use Shopsys\FrameworkBundle\Form\Admin\Product\VariantFormType;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory;
+use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade;
+use Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionFacade;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade;
+use Shopsys\FrameworkBundle\Twig\ProductExtension;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\MassAction\ProductMassActionFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionFacade
      */
     private $productMassActionFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
      */
     private $productFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
      */
     private $productDetailFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory
      */
     private $productEditDataFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade
      */
     private $adminProductPriceCalculationFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
     private $pricingGroupFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
      */
     private $administratorGridFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade
      */
     private $productListAdminFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade
+     * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade
      */
     private $advancedSearchFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductVariantFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade
      */
     private $productVariantFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Twig\ProductExtension
+     * @var \Shopsys\FrameworkBundle\Twig\ProductExtension
      */
     private $productExtension;
 
@@ -179,10 +179,10 @@ class ProductController extends AdminBaseController
         try {
             $productSellingPricesIndexedByDomainId = $this->productFacade->getAllProductSellingPricesIndexedByDomainId($product);
             $viewParameters['productSellingPricesIndexedByDomainId'] = $productSellingPricesIndexedByDomainId;
-        } catch (\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Product/edit.html.twig', $viewParameters);
+        return $this->render('@ShopsysFramework/Admin/Content/Product/edit.html.twig', $viewParameters);
     }
 
     /**
@@ -212,7 +212,7 @@ class ProductController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Product/new.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Product/new.html.twig', [
             'form' => $form->createView(),
             'pricingGroupsIndexedByDomainId' => $this->pricingGroupFacade->getAllIndexedByDomainId(),
         ]);
@@ -225,7 +225,7 @@ class ProductController extends AdminBaseController
     public function listAction(Request $request)
     {
         $administrator = $this->getUser();
-        /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
+        /* @var $administrator \Shopsys\FrameworkBundle\Model\Administrator\Administrator */
 
         $advancedSearchForm = $this->advancedSearchFacade->createAdvancedSearchForm($request);
         $advancedSearchData = $advancedSearchForm->getData();
@@ -263,7 +263,7 @@ class ProductController extends AdminBaseController
 
         $this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-        return $this->render('@ShopsysShop/Admin/Content/Product/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Product/list.html.twig', [
             'gridView' => $grid->createView(),
             'quickSearchForm' => $quickSearchForm->createView(),
             'advancedSearchForm' => $advancedSearchForm->createView(),
@@ -290,7 +290,7 @@ class ProductController extends AdminBaseController
                     'product' => $product,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected product doesn\'t exist.'));
         }
 
@@ -305,7 +305,7 @@ class ProductController extends AdminBaseController
     {
         $ruleForm = $this->advancedSearchFacade->createRuleForm($request->get('filterName'), $request->get('newIndex'));
 
-        return $this->render('@ShopsysShop/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig', [
             'rulesForm' => $ruleForm->createView(),
         ]);
     }
@@ -333,21 +333,21 @@ class ProductController extends AdminBaseController
                 );
 
                 return $this->redirectToRoute('admin_product_edit', ['id' => $newMainVariant->getId()]);
-            } catch (\Shopsys\ShopBundle\Model\Product\Exception\VariantException $ex) {
+            } catch (\Shopsys\FrameworkBundle\Model\Product\Exception\VariantException $ex) {
                 $this->getFlashMessageSender()->addErrorFlash(
                     t('Not possible to create variations of products that are already variant or main variant.')
                 );
             }
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Product/createVariant.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Product/createVariant.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     private function getGrid(QueryBuilder $queryBuilder)
     {
@@ -376,7 +376,7 @@ class ProductController extends AdminBaseController
         $grid->addDeleteActionColumn('admin_product_delete', ['id' => 'p.id'])
             ->setConfirmMessage(t('Do you really want to remove this product?'));
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/Product/listGrid.html.twig', [
+        $grid->setTheme('@ShopsysFramework/Admin/Content/Product/listGrid.html.twig', [
             'VARIANT_TYPE_MAIN' => Product::VARIANT_TYPE_MAIN,
             'VARIANT_TYPE_VARIANT' => Product::VARIANT_TYPE_VARIANT,
         ]);
@@ -392,7 +392,7 @@ class ProductController extends AdminBaseController
     {
         $product = $this->productFacade->getById($productId);
 
-        return $this->render('@ShopsysShop/Admin/Content/Product/visibility.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Product/visibility.html.twig', [
             'productDetail' => $this->productDetailFactory->getDetailForProduct($product),
         ]);
     }

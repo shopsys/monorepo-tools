@@ -8,7 +8,7 @@
             var options = $.datepicker.regional[global.locale] || $.datepicker.regional[''];
 
             // Date format is fixed so that it is understood by back-end
-            options.dateFormat = Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\DatePickerType::FORMAT_JS');
+            options.dateFormat = Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\DatePickerType::FORMAT_JS');
 
             $(this).datepicker(options);
         });

@@ -1,4 +1,4 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}
     - {{ 'Shippings and payments'|trans }}
@@ -9,10 +9,10 @@
 {% endblock %}
 
 {% block main_content %}
-    {{ render(controller('ShopsysShopBundle:Admin/Transport:list')) }}
-    {{ render(controller('ShopsysShopBundle:Admin/Payment:list')) }}
+    {{ render(controller('ShopsysFrameworkBundle:Admin/Transport:list')) }}
+    {{ render(controller('ShopsysFrameworkBundle:Admin/Payment:list')) }}
 
-    {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+    {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
         {% block fixed_bar_content %}
             <button class="js-drag-and-drop-grid-submit-all btn btn--disabled" type="button">{{ 'Save changes in order'|trans }}</button>
         {% endblock %}

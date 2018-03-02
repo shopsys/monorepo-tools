@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\PromoCode\Exception;
+namespace Shopsys\FrameworkBundle\Model\Order\PromoCode\Exception;
 
-use Shopsys\ShopBundle\Model\Order\Exception\OrderException;
+use Shopsys\FrameworkBundle\Model\Order\Exception\OrderException;
 
 interface PromoCodeException extends OrderException
 {

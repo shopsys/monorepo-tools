@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Grid\Ordering\Exception;
+namespace Shopsys\FrameworkBundle\Component\Grid\Ordering\Exception;
 
 interface OrderingException
 {

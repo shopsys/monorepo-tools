@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 
@@ -18,7 +18,7 @@ class ProductSellingDeniedRecalculator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
     public function calculateSellingDeniedForProduct(Product $product)
     {
@@ -32,7 +32,7 @@ class ProductSellingDeniedRecalculator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      */
     private function calculate(array $products = [])
     {
@@ -42,8 +42,8 @@ class ProductSellingDeniedRecalculator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     private function getProductsForCalculations(Product $product)
     {
@@ -58,7 +58,7 @@ class ProductSellingDeniedRecalculator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      */
     private function calculateIndependent(array $products)
     {
@@ -82,7 +82,7 @@ class ProductSellingDeniedRecalculator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      */
     private function propagateMainVariantSellingDeniedToVariants(array $products)
     {
@@ -108,7 +108,7 @@ class ProductSellingDeniedRecalculator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      */
     private function propagateVariantsSellingDeniedToMainVariant(array $products)
     {

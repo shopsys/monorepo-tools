@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Database\Model\Unit;
 
-use Shopsys\ShopBundle\DataFixtures\Base\UnitDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductFacade;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
-use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
+use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
+use Shopsys\FrameworkBundle\Model\Product\Unit\UnitData;
+use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class UnitFacadeTest extends DatabaseTestCase
@@ -16,19 +16,19 @@ class UnitFacadeTest extends DatabaseTestCase
     {
         $em = $this->getEntityManager();
         $unitFacade = $this->getServiceByType(UnitFacade::class);
-        /* @var $unitFacade \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade */
+        /* @var $unitFacade \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade */
         $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
+        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
         $productFacade = $this->getServiceByType(ProductFacade::class);
-        /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
+        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
         $unitToDelete = $unitFacade->create(new UnitData(['cs' => 'name']));
         $unitToReplaceWith = $this->getReference(UnitDataFixture::UNIT_PIECES);
-        /* @var $newUnit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
+        /* @var $newUnit \Shopsys\FrameworkBundle\Model\Product\Unit\Unit */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-        /* @var $product \Shopsys\ShopBundle\Model\Product\Product */
+        /* @var $product \Shopsys\FrameworkBundle\Model\Product\Product */
         $productEditData = $productEditDataFactory->createFromProduct($product);
-        /* @var $productEditData \Shopsys\ShopBundle\Model\Product\ProductEditData */
+        /* @var $productEditData \Shopsys\FrameworkBundle\Model\Product\ProductEditData */
 
         $productEditData->productData->unit = $unitToDelete;
         $productFacade->edit($product->getId(), $productEditData);

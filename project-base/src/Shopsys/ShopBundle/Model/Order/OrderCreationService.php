@@ -1,39 +1,39 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order;
+namespace Shopsys\FrameworkBundle\Model\Order;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
-use Shopsys\ShopBundle\Model\Order\Item\OrderPayment;
-use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
-use Shopsys\ShopBundle\Model\Order\Item\OrderTransport;
-use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
-use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\Price;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
-use Shopsys\ShopBundle\Twig\NumberFormatterExtension;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
+use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 
 class OrderCreationService
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
      */
     private $paymentPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
      */
     private $transportPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Twig\NumberFormatterExtension
+     * @var \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension
      */
     private $numberFormatterExtension;
 
@@ -50,9 +50,9 @@ class OrderCreationService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\FrontOrderData $frontOrderData
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\FrontOrderData $frontOrderData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      */
     public function prefillFrontFormData(FrontOrderData $frontOrderData, User $user, Order $order = null)
     {
@@ -63,8 +63,8 @@ class OrderCreationService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\FrontOrderData $frontOrderData
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\FrontOrderData $frontOrderData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      */
     private function prefillTransportAndPaymentFromOrder(FrontOrderData $frontOrderData, Order $order)
     {
@@ -73,8 +73,8 @@ class OrderCreationService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\FrontOrderData $frontOrderData
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Order\FrontOrderData $frontOrderData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      */
     private function prefillFrontFormDataFromCustomer(FrontOrderData $frontOrderData, User $user)
     {
@@ -106,8 +106,8 @@ class OrderCreationService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      */
     public function fillOrderItems(Order $order, OrderPreview $orderPreview)
     {
@@ -119,8 +119,8 @@ class OrderCreationService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param string $locale
      */
     private function fillOrderTransportAndPayment(Order $order, OrderPreview $orderPreview, $locale)
@@ -161,8 +161,8 @@ class OrderCreationService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param string $locale
      */
     private function fillOrderProducts(Order $order, OrderPreview $orderPreview, $locale)
@@ -174,13 +174,13 @@ class OrderCreationService
             $product = $quantifiedProduct->getProduct();
             if (!$product instanceof Product) {
                 $message = 'Object "' . get_class($product) . '" is not valid for order creation.';
-                throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\InvalidQuantifiedProductException($message);
+                throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidQuantifiedProductException($message);
             }
 
             $quantifiedItemPrice = $quantifiedItemPrices[$index];
-            /* @var $quantifiedItemPrice \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice */
+            /* @var $quantifiedItemPrice \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice */
             $quantifiedItemDiscount = $quantifiedItemDiscounts[$index];
-            /* @var $quantifiedItemDiscount \Shopsys\ShopBundle\Model\Pricing\Price|null */
+            /* @var $quantifiedItemDiscount \Shopsys\FrameworkBundle\Model\Pricing\Price|null */
 
             $orderItem = new OrderProduct(
                 $order,
@@ -200,8 +200,8 @@ class OrderCreationService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param string $locale
      */
     private function fillOrderRounding(Order $order, OrderPreview $orderPreview, $locale)
@@ -221,8 +221,8 @@ class OrderCreationService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $orderItem
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price $discount
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderItem
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $discount
      * @param string $locale
      * @param float $discountPercent
      */

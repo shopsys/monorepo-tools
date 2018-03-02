@@ -57,7 +57,7 @@
 
 {% block grid_value_cell_edit %}
     {% if form[column.id] is defined %}
-        {% form_theme form '@ShopsysShop/Admin/Form/theme.html.twig' %}
+        {% form_theme form '@ShopsysFramework/Admin/Form/theme.html.twig' %}
         {{ form_widget(form[column.id]) }}
     {% endif -%}
 {% endblock %}

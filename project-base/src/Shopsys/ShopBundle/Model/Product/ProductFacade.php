@@ -1,21 +1,21 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Image\ImageFacade;
-use Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade;
-use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
-use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessory;
-use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
-use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
+use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository;
+use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessory;
+use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
+use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 class ProductFacade
 {
@@ -25,87 +25,87 @@ class ProductFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
     private $productVisibilityFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository
      */
     private $parameterRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductService
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductService
      */
     private $productService;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
     private $imageFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
      */
     private $productPriceRecalculationScheduler;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository
      */
     private $pricingGroupRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade
      */
     private $productManualInputPriceFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
      */
     private $productAvailabilityRecalculationScheduler;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
     private $friendlyUrlFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator
      */
     private $productHiddenRecalculator;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator
      */
     private $productSellingDeniedRecalculator;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository
      */
     private $productAccessoryRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductVariantService
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantService
      */
     private $productVariantService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
     private $availabilityFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Plugin\PluginCrudExtensionFacade
+     * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade
      */
     private $pluginCrudExtensionFacade;
 
@@ -151,7 +151,7 @@ class ProductFacade
 
     /**
      * @param int $productId
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getById($productId)
     {
@@ -159,8 +159,8 @@ class ProductFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function create(ProductEditData $productEditData)
     {
@@ -182,8 +182,8 @@ class ProductFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
      */
     public function setAdditionalDataAfterCreate(Product $product, ProductEditData $productEditData)
     {
@@ -211,8 +211,8 @@ class ProductFacade
 
     /**
      * @param int $productId
-     * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function edit($productId, ProductEditData $productEditData)
     {
@@ -266,8 +266,8 @@ class ProductFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $productParameterValuesData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData[] $productParameterValuesData
      */
     private function saveParameters(Product $product, array $productParameterValuesData)
     {
@@ -298,8 +298,8 @@ class ProductFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domains
      */
     private function createProductDomains(Product $product, array $domains)
     {
@@ -313,8 +313,8 @@ class ProductFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
      */
     private function refreshProductDomains(Product $product, ProductEditData $productEditData)
     {
@@ -349,8 +349,8 @@ class ProductFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductSellingPrice[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductSellingPrice[]
      */
     public function getAllProductSellingPricesIndexedByDomainId(Product $product)
     {
@@ -361,7 +361,7 @@ class ProductFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param string[] $manualInputPrices
      */
     private function refreshProductManualInputPrices(Product $product, array $manualInputPrices)
@@ -376,7 +376,7 @@ class ProductFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
     private function createProductVisibilities(Product $product)
     {
@@ -393,8 +393,8 @@ class ProductFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $accessories
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $accessories
      */
     private function refreshProductAccessories(Product $product, array $accessories)
     {
@@ -415,7 +415,7 @@ class ProductFacade
 
     /**
      * @param string $productCatnum
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getOneByCatnumExcludeMainVariants($productCatnum)
     {

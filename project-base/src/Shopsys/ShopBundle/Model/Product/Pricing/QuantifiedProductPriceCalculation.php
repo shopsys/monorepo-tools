@@ -1,44 +1,44 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
-use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
-use Shopsys\ShopBundle\Model\Pricing\Price;
-use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\Rounding;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice;
+use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class QuantifiedProductPriceCalculation
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
     private $productPriceCalculationForUser;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Rounding
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Rounding
      */
     private $rounding;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct
      */
     private $quantifiedProduct;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product
      */
     private $product;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Price
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Price
      */
     private $productPrice;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation
      */
     private $priceCalculation;
 
@@ -53,17 +53,17 @@ class QuantifiedProductPriceCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct $quantifiedProduct
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct $quantifiedProduct
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
-     * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice
      */
     public function calculatePrice(QuantifiedProduct $quantifiedProduct, $domainId, User $user = null)
     {
         $product = $quantifiedProduct->getProduct();
         if (!$product instanceof Product) {
             $message = 'Object "' . get_class($product) . '" is not valid for QuantifiedProductPriceCalculation.';
-            throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\InvalidQuantifiedProductException($message);
+            throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidQuantifiedProductException($message);
         }
 
         $this->quantifiedProduct = $quantifiedProduct;
@@ -115,10 +115,10 @@ class QuantifiedProductPriceCalculation
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[] $quantifiedProducts
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct[] $quantifiedProducts
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
-     * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[]
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice[]
      */
     public function calculatePrices(array $quantifiedProducts, $domainId, User $user = null)
     {

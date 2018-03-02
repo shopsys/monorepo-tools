@@ -3,8 +3,8 @@
 namespace Tests\ShopBundle\Unit\Model\Product;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
-use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
+use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
 class FriendlyUrlUniqueResult
 {
@@ -10,13 +10,13 @@ class FriendlyUrlUniqueResult
     private $unique;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl
      */
     private $friendlyUrlForPersist;
 
     /**
      * @param bool $unique
-     * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null $friendlyUrl
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl|null $friendlyUrl
      */
     public function __construct($unique, FriendlyUrl $friendlyUrl = null)
     {
@@ -33,7 +33,7 @@ class FriendlyUrlUniqueResult
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
      */
     public function getFriendlyUrlForPersist()
     {

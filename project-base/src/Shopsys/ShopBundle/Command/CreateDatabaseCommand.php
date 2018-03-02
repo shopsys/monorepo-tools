@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\DriverManager;
-use Shopsys\ShopBundle\Component\System\PostgresqlLocaleMapper;
-use Shopsys\ShopBundle\Component\System\System;
-use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Component\System\PostgresqlLocaleMapper;
+use Shopsys\FrameworkBundle\Component\System\System;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,17 +27,17 @@ class CreateDatabaseCommand extends Command
     private $connection;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\System\System
+     * @var \Shopsys\FrameworkBundle\Component\System\System
      */
     private $system;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\System\PostgresqlLocaleMapper
+     * @var \Shopsys\FrameworkBundle\Component\System\PostgresqlLocaleMapper
      */
     private $postgresqlLocaleMapper;
 
@@ -47,9 +47,9 @@ class CreateDatabaseCommand extends Command
     private $doctrineRegistry;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Localization\Localization $localization
-     * @param \Shopsys\ShopBundle\Component\System\System $system
-     * @param \Shopsys\ShopBundle\Component\System\PostgresqlLocaleMapper $postgresqlLocaleMapper
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     * @param \Shopsys\FrameworkBundle\Component\System\System $system
+     * @param \Shopsys\FrameworkBundle\Component\System\PostgresqlLocaleMapper $postgresqlLocaleMapper
      * @param \Doctrine\Common\Persistence\ManagerRegistry $managerRegistry
      */
     public function __construct(
@@ -158,13 +158,13 @@ class CreateDatabaseCommand extends Command
                 }
 
                 $this->createCollationIfNotExists($collation, $systemSpecificLocaleName);
-            } catch (\Shopsys\ShopBundle\Command\Exception\MissingLocaleException $e) {
+            } catch (\Shopsys\FrameworkBundle\Command\Exception\MissingLocaleException $e) {
                 $missingLocaleExceptions[] = $e;
             }
         }
 
         if (count($missingLocaleExceptions) > 0) {
-            throw new \Shopsys\ShopBundle\Command\Exception\MissingLocaleAggregateException($missingLocaleExceptions);
+            throw new \Shopsys\FrameworkBundle\Command\Exception\MissingLocaleAggregateException($missingLocaleExceptions);
         }
 
         $symfonyStyleIo->success('Collations are created');
@@ -201,7 +201,7 @@ class CreateDatabaseCommand extends Command
                 ));
             } catch (\Doctrine\DBAL\Exception\DriverException $e) {
                 if (preg_match('/could not create locale/ui', $e->getMessage())) {
-                    $e = new \Shopsys\ShopBundle\Command\Exception\MissingLocaleException($locale, $e);
+                    $e = new \Shopsys\FrameworkBundle\Command\Exception\MissingLocaleException($locale, $e);
                 }
 
                 throw $e;

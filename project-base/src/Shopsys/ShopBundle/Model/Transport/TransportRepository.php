@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport;
+namespace Shopsys\FrameworkBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
@@ -48,7 +48,7 @@ class TransportRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport[]
      */
     public function getAll()
     {
@@ -57,7 +57,7 @@ class TransportRepository
 
     /**
      * @param array $transportIds
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport[]
      */
     public function getAllByIds(array $transportIds)
     {
@@ -73,7 +73,7 @@ class TransportRepository
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport[]
      */
     public function getAllByDomainId($domainId)
     {
@@ -85,7 +85,7 @@ class TransportRepository
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport[]
      */
     public function getAllIncludingDeleted()
     {
@@ -94,7 +94,7 @@ class TransportRepository
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport|null
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport|null
      */
     public function findById($id)
     {
@@ -106,13 +106,13 @@ class TransportRepository
 
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Transport\Transport
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
      */
     public function getById($id)
     {
         $transport = $this->findById($id);
         if ($transport === null) {
-            throw new \Shopsys\ShopBundle\Model\Transport\Exception\TransportNotFoundException(
+            throw new \Shopsys\FrameworkBundle\Model\Transport\Exception\TransportNotFoundException(
                 'Transport with ID ' . $id . ' not found.'
             );
         }
@@ -121,8 +121,8 @@ class TransportRepository
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @return \Shopsys\ShopBundle\Model\Transport\TransportDomain[]
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportDomain[]
      */
     public function getTransportDomainsByTransport(Transport $transport)
     {

@@ -2,41 +2,41 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
+use Shopsys\FrameworkBundle\Model\Security\LoginAsUserFacade;
+use Shopsys\FrameworkBundle\Model\Security\Roles;
 use Shopsys\ShopBundle\Form\Front\Customer\CustomerFormType;
-use Shopsys\ShopBundle\Model\Customer\CustomerData;
-use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\ShopBundle\Model\Order\OrderFacade;
-use Shopsys\ShopBundle\Model\Security\LoginAsUserFacade;
-use Shopsys\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Request;
 
 class CustomerController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade
      */
     private $customerFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation
      */
     private $orderItemPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade
      */
     private $orderFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Security\LoginAsUserFacade
+     * @var \Shopsys\FrameworkBundle\Model\Security\LoginAsUserFacade
      */
     private $loginAsUserFacade;
 
@@ -96,7 +96,7 @@ class CustomerController extends FrontBaseController
         }
 
         $user = $this->getUser();
-        /* @var $user \Shopsys\ShopBundle\Model\Customer\User */
+        /* @var $user \Shopsys\FrameworkBundle\Model\Customer\User */
 
         $orders = $this->orderFacade->getCustomerOrderList($user);
         return $this->render('@ShopsysShop/Front/Content/Customer/orders.html.twig', [
@@ -135,14 +135,14 @@ class CustomerController extends FrontBaseController
             $user = $this->getUser();
             try {
                 $order = $this->orderFacade->getByOrderNumberAndUser($orderNumber, $user);
-                /* @var $order \Shopsys\ShopBundle\Model\Order\Order */
-            } catch (\Shopsys\ShopBundle\Model\Order\Exception\OrderNotFoundException $ex) {
+                /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
+            } catch (\Shopsys\FrameworkBundle\Model\Order\Exception\OrderNotFoundException $ex) {
                 $this->getFlashMessageSender()->addErrorFlash(t('Order not found'));
                 return $this->redirectToRoute('front_customer_orders');
             }
         } else {
             $order = $this->orderFacade->getByUrlHashAndDomain($urlHash, $this->domain->getId());
-            /* @var $order \Shopsys\ShopBundle\Model\Order\Order */
+            /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
         }
 
         $orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
@@ -161,13 +161,13 @@ class CustomerController extends FrontBaseController
     {
         try {
             $this->loginAsUserFacade->loginAsRememberedUser($request);
-        } catch (\Shopsys\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
+        } catch (\Shopsys\FrameworkBundle\Model\Customer\Exception\UserNotFoundException $e) {
             $adminFlashMessageSender = $this->get('shopsys.shop.component.flash_message.sender.admin');
-            /* @var $adminFlashMessageSender \Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender */
+            /* @var $adminFlashMessageSender \Shopsys\FrameworkBundle\Component\FlashMessage\FlashMessageSender */
             $adminFlashMessageSender->addErrorFlash(t('User not found.'));
 
             return $this->redirectToRoute('admin_customer_list');
-        } catch (\Shopsys\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException $e) {
+        } catch (\Shopsys\FrameworkBundle\Model\Security\Exception\LoginAsRememberedUserException $e) {
             throw $this->createAccessDeniedException('', $e);
         }
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
-use Shopsys\ShopBundle\Component\Csv\CsvReader;
-use Shopsys\ShopBundle\Component\String\EncodingConverter;
-use Shopsys\ShopBundle\Component\String\TransformString;
-use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
-use Shopsys\ShopBundle\Model\Customer\CustomerData;
-use Shopsys\ShopBundle\Model\Customer\DeliveryAddressData;
-use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
+use Shopsys\FrameworkBundle\Component\Csv\CsvReader;
+use Shopsys\FrameworkBundle\Component\String\EncodingConverter;
+use Shopsys\FrameworkBundle\Component\String\TransformString;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
+use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
 
 class UserDataFixtureLoader
 {
@@ -47,19 +47,19 @@ class UserDataFixtureLoader
     private $path;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\UserDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory
      */
     private $userDataFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\Country[]
+     * @var \Shopsys\FrameworkBundle\Model\Country\Country[]
      */
     private $countries;
 
     /**
      * @param string $path
-     * @param \Shopsys\ShopBundle\Component\Csv\CsvReader $csvReader
-     * @param \Shopsys\ShopBundle\Model\Customer\UserDataFactory $userDataFactory
+     * @param \Shopsys\FrameworkBundle\Component\Csv\CsvReader $csvReader
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory $userDataFactory
      */
     public function __construct($path, CsvReader $csvReader, UserDataFactory $userDataFactory)
     {
@@ -69,7 +69,7 @@ class UserDataFixtureLoader
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
+     * @param \Shopsys\FrameworkBundle\Model\Country\Country[] $countries
      */
     public function injectReferences(array $countries)
     {
@@ -78,7 +78,7 @@ class UserDataFixtureLoader
 
     /**
      * @param int $domainId
-     * @return  \Shopsys\ShopBundle\Model\Customer\CustomerData[]
+     * @return  \Shopsys\FrameworkBundle\Model\Customer\CustomerData[]
      */
     public function getCustomersDataByDomainId($domainId)
     {
@@ -123,7 +123,7 @@ class UserDataFixtureLoader
 
     /**
      * @param array $row
-     * @return \Shopsys\ShopBundle\Model\Customer\CustomerData
+     * @return \Shopsys\FrameworkBundle\Model\Customer\CustomerData
      */
     private function getCustomerDataFromCsvRow(array $row)
     {
@@ -171,7 +171,7 @@ class UserDataFixtureLoader
 
     /**
      * @param string $countryName
-     * @return \Shopsys\ShopBundle\Model\Country\Country
+     * @return \Shopsys\FrameworkBundle\Model\Country\Country
      */
     private function getCountryByName($countryName)
     {
@@ -182,6 +182,6 @@ class UserDataFixtureLoader
         }
 
         $message = 'Country with name "' . $countryName . '" was not found.';
-        throw new \Shopsys\ShopBundle\Model\Country\Exception\CountryNotFoundException($message);
+        throw new \Shopsys\FrameworkBundle\Model\Country\Exception\CountryNotFoundException($message);
     }
 }

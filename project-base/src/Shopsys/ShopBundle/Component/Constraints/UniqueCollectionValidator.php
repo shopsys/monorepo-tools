@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Constraints;
+namespace Shopsys\FrameworkBundle\Component\Constraints;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
@@ -45,7 +45,7 @@ class UniqueCollectionValidator extends ConstraintValidator
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Constraints\UniqueCollection $constraint
+     * @param \Shopsys\FrameworkBundle\Component\Constraints\UniqueCollection $constraint
      * @param mixed $value1
      * @param mixed $value2
      * @return bool

@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Plugin;
+namespace Shopsys\FrameworkBundle\Component\Plugin;
 
 class PluginDataFixtureFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Plugin\PluginDataFixtureRegistry
+     * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginDataFixtureRegistry
      */
     private $pluginDataFixtureRegistry;
 

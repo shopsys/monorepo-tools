@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Javascript\Parser;
+namespace Shopsys\FrameworkBundle\Component\Javascript\Parser;
 
 use PLUG\JavaScript\JLexBase; // JLexBase contains J_* constants
 use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;

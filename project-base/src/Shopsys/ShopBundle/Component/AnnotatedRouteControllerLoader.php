@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component;
+namespace Shopsys\FrameworkBundle\Component;
 
 use Sensio\Bundle\FrameworkExtraBundle\Routing\AnnotatedRouteControllerLoader as SensioAnnotatedRouteControllerLoader;
 
@@ -21,6 +21,6 @@ class AnnotatedRouteControllerLoader extends SensioAnnotatedRouteControllerLoade
     {
         $routeName = parent::getDefaultRouteName($class, $method);
 
-        return preg_replace('/^shopsys_shop_/', '', $routeName);
+        return preg_replace('/^shopsys_(shop|framework)_/', '', $routeName);
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Availability;
+namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
 class AvailabilityFacade
 {
@@ -13,22 +13,22 @@ class AvailabilityFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityRepository
      */
     private $availabilityRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityService
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityService
      */
     private $availabilityService;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
      */
     private $productAvailabilityRecalculationScheduler;
 
@@ -48,7 +48,7 @@ class AvailabilityFacade
 
     /**
      * @param int $availabilityId
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      */
     public function getById($availabilityId)
     {
@@ -56,8 +56,8 @@ class AvailabilityFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData $availabilityData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      */
     public function create(AvailabilityData $availabilityData)
     {
@@ -70,8 +70,8 @@ class AvailabilityFacade
 
     /**
      * @param int $availabilityId
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData $availabilityData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      */
     public function edit($availabilityId, AvailabilityData $availabilityData)
     {
@@ -104,7 +104,7 @@ class AvailabilityFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      */
     public function getDefaultInStockAvailability()
     {
@@ -114,7 +114,7 @@ class AvailabilityFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability $availability
      */
     public function setDefaultInStockAvailability(Availability $availability)
     {
@@ -123,7 +123,7 @@ class AvailabilityFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability[]
      */
     public function getAll()
     {
@@ -132,7 +132,7 @@ class AvailabilityFacade
 
     /**
      * @param int $availabilityId
-     * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability[]
      */
     public function getAllExceptId($availabilityId)
     {
@@ -140,7 +140,7 @@ class AvailabilityFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability $availability
      * @return bool
      */
     public function isAvailabilityUsed(Availability $availability)
@@ -149,7 +149,7 @@ class AvailabilityFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability $availability
      * @return bool
      */
     public function isAvailabilityDefault(Availability $availability)

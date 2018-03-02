@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
-use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Category\Category;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductVisibilityFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository
      */
     private $productVisibilityRepository;
 
@@ -18,7 +18,7 @@ class ProductVisibilityFacade
     private $recalcVisibilityForMarked = false;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
      */
     public function __construct(ProductVisibilityRepository $productVisibilityRepository)
     {
@@ -41,7 +41,7 @@ class ProductVisibilityFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      */
     public function markProductsForRecalculationAffectedByCategory(Category $category)
     {

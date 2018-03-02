@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Flag;
+namespace Shopsys\FrameworkBundle\Model\Product\Flag;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 
 /**
  * @ORM\Table(name="flags")
@@ -23,9 +23,9 @@ class Flag extends AbstractTranslatableEntity
     protected $id;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagTranslation[]
      *
-     * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Product\Flag\FlagTranslation")
+     * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Product\Flag\FlagTranslation")
      */
     protected $translations;
 
@@ -44,7 +44,7 @@ class Flag extends AbstractTranslatableEntity
     private $visible;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagData $flagData
      */
     public function __construct(FlagData $flagData)
     {
@@ -88,7 +88,7 @@ class Flag extends AbstractTranslatableEntity
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagData $flagData
      */
     private function setTranslations(FlagData $flagData)
     {
@@ -98,7 +98,7 @@ class Flag extends AbstractTranslatableEntity
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Flag\FlagTranslation
+     * @return \Shopsys\FrameworkBundle\Model\Product\Flag\FlagTranslation
      */
     protected function createTranslation()
     {
@@ -106,7 +106,7 @@ class Flag extends AbstractTranslatableEntity
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagData $flagData
      */
     public function edit(FlagData $flagData)
     {

@@ -3,8 +3,8 @@
 namespace Tests\ShopBundle\Unit\Model\Pricing;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 
 class InputPriceCalculationTest extends PHPUnit_Framework_TestCase
 {

@@ -1,25 +1,25 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order;
+namespace Shopsys\FrameworkBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
-use Shopsys\ShopBundle\Model\Cart\CartFacade;
-use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
-use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Heureka\HeurekaFacade;
-use Shopsys\ShopBundle\Model\Localization\Localization;
-use Shopsys\ShopBundle\Model\Order\Item\OrderProductFacade;
-use Shopsys\ShopBundle\Model\Order\Mail\OrderMailFacade;
-use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
-use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
-use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
+use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
+use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade;
+use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade;
+use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
+use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository;
 
 class OrderFacade
 {
@@ -34,92 +34,92 @@ class OrderFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderNumberSequenceRepository
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository
      */
     private $orderNumberSequenceRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderRepository
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderRepository
      */
     private $orderRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderService
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderService
      */
     private $orderService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderCreationService
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderCreationService
      */
     private $orderCreationService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository
      */
     private $orderStatusRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Mail\OrderMailFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade
      */
     private $orderMailFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderHashGeneratorRepository
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderHashGeneratorRepository
      */
     private $orderHashGeneratorRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
      */
     private $administratorFrontSecurityFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
      */
     private $currentPromoCodeFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Cart\CartFacade
+     * @var \Shopsys\FrameworkBundle\Model\Cart\CartFacade
      */
     private $cartFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade
      */
     private $customerFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
     private $currentCustomer;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory
+     * @var \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory
      */
     private $orderPreviewFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\OrderProductFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade
      */
     private $orderProductFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaFacade
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade
      */
     private $heurekaFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
@@ -166,10 +166,10 @@ class OrderFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
-     * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
-     * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
-     * @return \Shopsys\ShopBundle\Model\Order\Order
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview $orderPreview
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order
      */
     public function createOrder(OrderData $orderData, OrderPreview $orderPreview, User $user = null)
     {
@@ -202,8 +202,8 @@ class OrderFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
-     * @return \Shopsys\ShopBundle\Model\Order\Order
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order
      */
     public function createOrderFromFront(OrderData $orderData)
     {
@@ -233,8 +233,8 @@ class OrderFacade
 
     /**
      * @param int $orderId
-     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
-     * @return \Shopsys\ShopBundle\Model\Order\Order
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order
      */
     public function edit($orderId, OrderData $orderData)
     {
@@ -288,8 +288,8 @@ class OrderFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\FrontOrderData $orderData
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Order\FrontOrderData $orderData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      */
     public function prefillFrontOrderData(FrontOrderData $orderData, User $user)
     {
@@ -311,8 +311,8 @@ class OrderFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @return \Shopsys\ShopBundle\Model\Order\Order[]
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order[]
      */
     public function getCustomerOrderList(User $user)
     {
@@ -321,7 +321,7 @@ class OrderFacade
 
     /**
      * @param int $orderId
-     * @return \Shopsys\ShopBundle\Model\Order\Order
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order
      */
     public function getById($orderId)
     {
@@ -331,7 +331,7 @@ class OrderFacade
     /**
      * @param string $urlHash
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Order\Order
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order
      */
     public function getByUrlHashAndDomain($urlHash, $domainId)
     {
@@ -340,8 +340,8 @@ class OrderFacade
 
     /**
      * @param string $orderNumber
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @return \Shopsys\ShopBundle\Model\Order\Order
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order
      */
     public function getByOrderNumberAndUser($orderNumber, User $user)
     {
@@ -349,7 +349,7 @@ class OrderFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
+     * @param \Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getOrderListQueryBuilderByQuickSearchData(QuickSearchFormData $quickSearchData)
@@ -361,7 +361,7 @@ class OrderFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      */
     private function setOrderDataAdministrator(OrderData $orderData)
     {
@@ -370,7 +370,7 @@ class OrderFacade
                 $currentAdmin = $this->administratorFrontSecurityFacade->getCurrentAdministrator();
                 $orderData->createdAsAdministrator = $currentAdmin;
                 $orderData->createdAsAdministratorName = $currentAdmin->getRealName();
-            } catch (\Shopsys\ShopBundle\Model\Administrator\Security\Exception\AdministratorIsNotLoggedException $ex) {
+            } catch (\Shopsys\FrameworkBundle\Model\Administrator\Security\Exception\AdministratorIsNotLoggedException $ex) {
             }
         }
     }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Module;
+namespace Shopsys\FrameworkBundle\Form\Admin\Module;
 
 use Shopsys\FormTypesBundle\YesNoType;
-use Shopsys\ShopBundle\Model\Module\ModuleList;
+use Shopsys\FrameworkBundle\Model\Module\ModuleList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -23,7 +23,7 @@ class ModulesFormType extends AbstractType
             ->add('save', SubmitType::class);
 
         $moduleList = $options['module_list'];
-        /* @var $moduleList \Shopsys\ShopBundle\Model\Module\ModuleList */
+        /* @var $moduleList \Shopsys\FrameworkBundle\Model\Module\ModuleList */
         foreach ($moduleList->getNamesIndexedByLabel() as $moduleLabel => $moduleName) {
             $builder->get('modules')
                 ->add($moduleName, YesNoType::class, [

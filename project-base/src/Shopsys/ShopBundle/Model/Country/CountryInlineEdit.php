@@ -1,21 +1,21 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Country;
+namespace Shopsys\FrameworkBundle\Model\Country;
 
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use Shopsys\ShopBundle\Form\Admin\Country\CountryFormType;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\FrameworkBundle\Form\Admin\Country\CountryFormType;
 use Symfony\Component\Form\FormFactory;
 
 class CountryInlineEdit extends AbstractGridInlineEdit
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade
      */
     private $countryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
@@ -37,7 +37,7 @@ class CountryInlineEdit extends AbstractGridInlineEdit
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Country\CountryData $countryData
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $countryData
      * @return int
      */
     protected function createEntityAndGetId($countryData)
@@ -49,7 +49,7 @@ class CountryInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int $countryId
-     * @param \Shopsys\ShopBundle\Model\Country\CountryData $countryData
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $countryData
      */
     protected function editEntity($countryId, $countryData)
     {

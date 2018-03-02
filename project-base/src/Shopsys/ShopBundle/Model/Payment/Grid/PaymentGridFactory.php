@@ -1,37 +1,37 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment\Grid;
+namespace Shopsys\FrameworkBundle\Model\Payment\Grid;
 
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use Shopsys\ShopBundle\Model\Localization\Localization;
-use Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
-use Shopsys\ShopBundle\Model\Payment\Payment;
-use Shopsys\ShopBundle\Model\Payment\PaymentRepository;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetailFactory;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
 
 class PaymentGridFactory implements GridFactoryInterface
 {
     const CURRENCY_ID_FOR_LIST = 1;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentRepository
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository
      */
     private $paymentRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetailFactory
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetailFactory
      */
     private $paymentDetailFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
     private $localization;
 
@@ -48,7 +48,7 @@ class PaymentGridFactory implements GridFactoryInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     public function create()
     {
@@ -78,7 +78,7 @@ class PaymentGridFactory implements GridFactoryInterface
             ->setConfirmMessage(t('Do you really want to remove this payment?'));
 
         $grid->setTheme(
-            '@ShopsysShop/Admin/Content/Payment/listGrid.html.twig',
+            '@ShopsysFramework/Admin/Content/Payment/listGrid.html.twig',
             ['currencyIdForList' => self::CURRENCY_ID_FOR_LIST]
         );
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\System;
+namespace Shopsys\FrameworkBundle\Component\System;
 
 /**
  * This class provides locale names for collations on different systems
@@ -192,7 +192,7 @@ class PostgresqlLocaleMapper
     public function getWindowsLocale($collationName)
     {
         if (!array_key_exists($collationName, self::$windowsLocalesIndexedByCollation)) {
-            throw new \Shopsys\ShopBundle\Component\System\Exception\UnknownWindowsLocaleException($collationName);
+            throw new \Shopsys\FrameworkBundle\Component\System\Exception\UnknownWindowsLocaleException($collationName);
         }
 
         return self::$windowsLocalesIndexedByCollation[$collationName];

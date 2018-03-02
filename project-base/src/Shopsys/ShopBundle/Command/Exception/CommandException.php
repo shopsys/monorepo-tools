@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command\Exception;
+namespace Shopsys\FrameworkBundle\Command\Exception;
 
 interface CommandException
 {

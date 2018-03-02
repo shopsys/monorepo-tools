@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\MassAction;
+namespace Shopsys\FrameworkBundle\Model\Product\MassAction;
 
 class ProductMassActionData
 {

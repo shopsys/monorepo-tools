@@ -2,8 +2,8 @@
 
 namespace Tests\ShopBundle\Unit\Form\Admin\AdvancedSearch;
 
-use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation;
-use Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig;
+use Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class AdvancedSearchOrderFilterTranslationTest extends FunctionalTestCase
@@ -11,10 +11,10 @@ class AdvancedSearchOrderFilterTranslationTest extends FunctionalTestCase
     public function testTranslateFilterName()
     {
         $advancedSearchConfig = $this->getServiceByType(OrderAdvancedSearchConfig::class);
-        /* @var $advancedSearchConfig \Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig */
+        /* @var $advancedSearchConfig \Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig */
         $advancedSearchOrderFilterTranslation = $this->getServiceByType(AdvancedSearchOrderFilterTranslation::class);
         // @codingStandardsIgnoreStart
-        /* @var $advancedSearchOrderFilterTranslation \Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation */
+        /* @var $advancedSearchOrderFilterTranslation \Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation */
         // @codingStandardsIgnoreEnd
 
         foreach ($advancedSearchConfig->getAllFilters() as $filter) {
@@ -26,7 +26,7 @@ class AdvancedSearchOrderFilterTranslationTest extends FunctionalTestCase
     {
         $advancedSearchTranslator = new AdvancedSearchOrderFilterTranslation();
 
-        $this->expectException(\Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
         $advancedSearchTranslator->translateFilterName('nonexistingFilterName');
     }
 }

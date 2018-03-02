@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Plugin\Exception;
+namespace Shopsys\FrameworkBundle\Component\Plugin\Exception;
 
 interface PluginException
 {

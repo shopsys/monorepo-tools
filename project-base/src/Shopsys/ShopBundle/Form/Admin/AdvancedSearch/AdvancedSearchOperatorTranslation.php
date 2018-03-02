@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\AdvancedSearch;
+namespace Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch;
 
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class AdvancedSearchOperatorTranslation
 {
@@ -41,6 +41,6 @@ class AdvancedSearchOperatorTranslation
         }
 
         $message = 'Operator "' . $operator . '" translation not found.';
-        throw new \Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException($message);
+        throw new \Shopsys\FrameworkBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException($message);
     }
 }

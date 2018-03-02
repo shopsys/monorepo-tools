@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Domain\Config;
+namespace Shopsys\FrameworkBundle\Component\Domain\Config;
 
 use Shopsys\ProductFeed\DomainConfigInterface;
 

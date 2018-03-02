@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Localization;
+namespace Shopsys\FrameworkBundle\Model\Localization;
 
 use IntlDateFormatter;
-use Shopsys\ShopBundle\Component\Localization\DateTimeFormatPattern;
-use Shopsys\ShopBundle\Component\Localization\DateTimeFormatPatternRepository;
-use Shopsys\ShopBundle\Component\Localization\DateTimeFormatter;
+use Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatPattern;
+use Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatPatternRepository;
+use Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter;
 
 class CustomDateTimeFormatterFactory
 {
     /**
-     * @return \Shopsys\ShopBundle\Component\Localization\DateTimeFormatter
+     * @return \Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter
      */
     public function create()
     {

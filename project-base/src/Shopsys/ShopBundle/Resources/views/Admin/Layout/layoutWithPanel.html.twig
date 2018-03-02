@@ -1,11 +1,11 @@
-{% extends '@ShopsysShop/Admin/Layout/layout.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layout.html.twig' %}
 
 {% block content %}
     <div class="web__container">
         <div class="web__panel">
             <div class="web__panel__in">
                 {% block menu_panel %}
-                    {{ render(controller('ShopsysShopBundle:Admin/Menu:panel', {
+                    {{ render(controller('ShopsysFrameworkBundle:Admin/Menu:panel', {
                         route: app.request.get('_route'),
                         parameters: app.request.attributes.get('_route_params')
                     } )) }}
@@ -15,14 +15,14 @@
 
         <div class="web__content">
             {% block breadcrumb %}
-                {{ render(controller('ShopsysShopBundle:Admin/Breadcrumb:index', {
+                {{ render(controller('ShopsysFrameworkBundle:Admin/Breadcrumb:index', {
                     route: app.request.get('_route'),
                     parameters: app.request.attributes.get('_route_params')
                 } )) }}
             {% endblock %}
 
             <div class="mt15">
-                {{ render(controller('ShopsysShopBundle:Admin/FlashMessage:index')) }}
+                {{ render(controller('ShopsysFrameworkBundle:Admin/FlashMessage:index')) }}
             </div>
 
             {% if showHeading is not defined or showHeading %}

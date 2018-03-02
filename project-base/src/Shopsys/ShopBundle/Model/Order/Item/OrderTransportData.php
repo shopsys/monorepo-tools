@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Item;
+namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 class OrderTransportData extends OrderItemData
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Transport
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport
      */
     public $transport;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $orderTransport
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderTransport
      */
     public function setFromEntity(OrderItem $orderTransport)
     {
@@ -18,7 +18,7 @@ class OrderTransportData extends OrderItemData
             $this->transport = $orderTransport->getTransport();
             parent::setFromEntity($orderTransport);
         } else {
-            throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\InvalidArgumentException(
+            throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidArgumentException(
                 'Instance of ' . OrderTransport::class . ' is required as argument.'
             );
         }

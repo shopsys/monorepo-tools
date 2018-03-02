@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer;
+namespace Shopsys\FrameworkBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMailFacade;
+use Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMailFacade;
 
 class CustomerPasswordFacade
 {
@@ -13,17 +13,17 @@ class CustomerPasswordFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserRepository
      */
     private $userRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMailFacade
+     * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMailFacade
      */
     private $resetPasswordMailFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CustomerPasswordService
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService
      */
     private $customerPasswordService;
 
@@ -70,7 +70,7 @@ class CustomerPasswordFacade
      * @param int $domainId
      * @param string|null $hash
      * @param string $newPassword
-     * @return \Shopsys\ShopBundle\Model\Customer\User
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
     public function setNewPassword($email, $domainId, $hash, $newPassword)
     {

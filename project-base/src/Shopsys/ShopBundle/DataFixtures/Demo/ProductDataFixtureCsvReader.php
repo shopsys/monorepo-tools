@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
-use Shopsys\ShopBundle\Component\Csv\CsvReader;
-use Shopsys\ShopBundle\Component\String\EncodingConverter;
-use Shopsys\ShopBundle\Component\String\TransformString;
+use Shopsys\FrameworkBundle\Component\Csv\CsvReader;
+use Shopsys\FrameworkBundle\Component\String\EncodingConverter;
+use Shopsys\FrameworkBundle\Component\String\TransformString;
 
 class ProductDataFixtureCsvReader
 {
@@ -14,13 +14,13 @@ class ProductDataFixtureCsvReader
     private $path;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Csv\CsvReader
+     * @var \Shopsys\FrameworkBundle\Component\Csv\CsvReader
      */
     private $csvReader;
 
     /**
      * @param string $path
-     * @param \Shopsys\ShopBundle\Component\Csv\CsvReader $csvReader
+     * @param \Shopsys\FrameworkBundle\Component\Csv\CsvReader $csvReader
      */
     public function __construct(
         $path,

@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter;
+namespace Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Form\ProductType;
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
-use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Form\ProductType;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 
 class OrderProductFilter implements AdvancedSearchFilterInterface
 {
@@ -52,7 +52,7 @@ class OrderProductFilter implements AdvancedSearchFilterInterface
         foreach ($rulesData as $index => $ruleData) {
             if ($ruleData->operator === self::OPERATOR_CONTAINS || $ruleData->operator === self::OPERATOR_NOT_CONTAINS) {
                 $searchValue = $ruleData->value;
-                /* @var $searchValue \Shopsys\ShopBundle\Model\Product\Product */
+                /* @var $searchValue \Shopsys\FrameworkBundle\Model\Product\Product */
                 if ($searchValue === null) {
                     continue;
                 }

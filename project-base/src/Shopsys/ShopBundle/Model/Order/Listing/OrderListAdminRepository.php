@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Listing;
+namespace Shopsys\FrameworkBundle\Model\Order\Listing;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Order\Order;
 
 class OrderListAdminRepository
 {

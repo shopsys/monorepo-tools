@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Unit\Model\Product\Availability;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Product\Availability\Availability;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityService;
+use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityService;
 
 class AvailabilityServiceTest extends PHPUnit_Framework_TestCase
 {

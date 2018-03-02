@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Base;
+namespace Shopsys\FrameworkBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 
 class VatDataFixture extends AbstractReferenceFixture
 {
@@ -39,13 +39,13 @@ class VatDataFixture extends AbstractReferenceFixture
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData $vatData
      * @param string|null $referenceName
      */
     private function createVat(VatData $vatData, $referenceName = null)
     {
         $vatFacade = $this->get(VatFacade::class);
-        /* @var $vatFacade \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade */
+        /* @var $vatFacade \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade */
 
         $vat = $vatFacade->create($vatData);
         if ($referenceName !== null) {

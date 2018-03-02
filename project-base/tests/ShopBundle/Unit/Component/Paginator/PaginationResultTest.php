@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Component\Paginator;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
+use Shopsys\FrameworkBundle\Component\Paginator\PaginationResult;
 
 class PaginationResultTest extends PHPUnit_Framework_TestCase
 {

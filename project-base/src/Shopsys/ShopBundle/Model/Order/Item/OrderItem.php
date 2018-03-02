@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Item;
+namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
-use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
 /**
  * @ORM\Table(name="order_items")
@@ -25,9 +25,9 @@ abstract class OrderItem
     protected $id;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Order
+     * @var \Shopsys\FrameworkBundle\Model\Order\Order
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Order\Order", inversedBy="items")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Order\Order", inversedBy="items")
      * @ORM\JoinColumn(name="order_id", referencedColumnName="id", nullable=false)
      */
     private $order;
@@ -82,9 +82,9 @@ abstract class OrderItem
     private $catnum;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @param string $name
-     * @param \Shopsys\ShopBundle\Model\Pricing\Price $price
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Price $price
      * @param string $vatPercent
      * @param int $quantity
      * @param string|null $unitName
@@ -119,7 +119,7 @@ abstract class OrderItem
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\Order
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order
      */
     public function getOrder()
     {
@@ -191,7 +191,7 @@ abstract class OrderItem
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItemData $orderItemData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData $orderItemData
      */
     public function edit(OrderItemData $orderItemData)
     {

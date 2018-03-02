@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Availability;
+namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
 class AvailabilityData
 {
@@ -25,7 +25,7 @@ class AvailabilityData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\Availability $availability
      */
     public function setFromEntity(Availability $availability)
     {

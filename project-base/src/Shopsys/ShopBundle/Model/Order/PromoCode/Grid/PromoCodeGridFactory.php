@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\PromoCode\Grid;
+namespace Shopsys\FrameworkBundle\Model\Order\PromoCode\Grid;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\Component\Grid\GridFactory;
-use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
-use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
+use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode;
 
 class PromoCodeGridFactory implements GridFactoryInterface
 {
@@ -16,7 +16,7 @@ class PromoCodeGridFactory implements GridFactoryInterface
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
@@ -29,7 +29,7 @@ class PromoCodeGridFactory implements GridFactoryInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     * @return \Shopsys\FrameworkBundle\Component\Grid\Grid
      */
     public function create()
     {
@@ -47,7 +47,7 @@ class PromoCodeGridFactory implements GridFactoryInterface
         $grid->addDeleteActionColumn('admin_promocode_delete', ['id' => 'pc.id'])
             ->setConfirmMessage(t('Do you really want to remove this promo code?'));
 
-        $grid->setTheme('@ShopsysShop/Admin/Content/PromoCode/listGrid.html.twig');
+        $grid->setTheme('@ShopsysFramework/Admin/Content/PromoCode/listGrid.html.twig');
 
         return $grid;
     }

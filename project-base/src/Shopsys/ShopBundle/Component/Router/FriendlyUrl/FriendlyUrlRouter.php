@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
@@ -20,17 +20,17 @@ class FriendlyUrlRouter implements RouterInterface
     private $delegatingLoader;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator
      */
     private $friendlyUrlGenerator;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher
      */
     private $friendlyUrlMatcher;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     private $domainConfig;
 
@@ -47,9 +47,9 @@ class FriendlyUrlRouter implements RouterInterface
     /**
      * @param \Symfony\Component\Routing\RequestContext $context
      * @param \Symfony\Component\Config\Loader\DelegatingLoader $delegatingLoader
-     * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator $friendlyUrlGenerator
-     * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher $friendlyUrlMatcher
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator $friendlyUrlGenerator
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher $friendlyUrlMatcher
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param string $friendlyUrlRouterResourceFilepath
      */
     public function __construct(
@@ -111,7 +111,7 @@ class FriendlyUrlRouter implements RouterInterface
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
      * @param array $parameters
      * @param int $referenceType
      * @return string
@@ -122,7 +122,7 @@ class FriendlyUrlRouter implements RouterInterface
         $route = $this->getRouteCollection()->get($routeName);
 
         if ($route === null) {
-            throw new \Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlRouteNotFoundException(
+            throw new \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlRouteNotFoundException(
                 $routeName,
                 $this->friendlyUrlRouterResourceFilepath
             );

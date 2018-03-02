@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\PromoCode;
+namespace Shopsys\FrameworkBundle\Model\Order\PromoCode;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -14,7 +14,7 @@ class CurrentPromoCodeFacade
     private $session;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
+     * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade
      */
     private $promoCodeFacade;
 
@@ -25,7 +25,7 @@ class CurrentPromoCodeFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode|null
+     * @return \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode|null
      */
     public function getValidEnteredPromoCodeOrNull()
     {
@@ -44,7 +44,7 @@ class CurrentPromoCodeFacade
     {
         $promoCode = $this->promoCodeFacade->findPromoCodeByCode($enteredCode);
         if ($promoCode === null) {
-            throw new \Shopsys\ShopBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException($enteredCode);
+            throw new \Shopsys\FrameworkBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException($enteredCode);
         } else {
             $this->session->set(self::PROMO_CODE_SESSION_KEY, $enteredCode);
         }

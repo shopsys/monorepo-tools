@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Vat;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Vat;
 
-use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use Shopsys\ShopBundle\Form\Admin\Vat\VatFormType;
+use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\FrameworkBundle\Form\Admin\Vat\VatFormType;
 use Symfony\Component\Form\FormFactory;
 
 class VatInlineEdit extends AbstractGridInlineEdit
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
     private $vatFacade;
 
@@ -29,7 +29,7 @@ class VatInlineEdit extends AbstractGridInlineEdit
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData $vatData
      * @return int
      */
     protected function createEntityAndGetId($vatData)
@@ -41,7 +41,7 @@ class VatInlineEdit extends AbstractGridInlineEdit
 
     /**
      * @param int $vatId
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData $vatData
      */
     protected function editEntity($vatId, $vatData)
     {

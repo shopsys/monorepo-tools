@@ -2,22 +2,22 @@
 
 namespace Tests\ShopBundle\Unit\Model\Order\Preview;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
-use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
-use Shopsys\ShopBundle\Model\Order\OrderPriceCalculation;
-use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
-use Shopsys\ShopBundle\Model\Payment\Payment;
-use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
-use Shopsys\ShopBundle\Model\Pricing\Price;
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation;
-use Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
-use Shopsys\ShopBundle\Model\Transport\Transport;
-use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedItemPrice;
+use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
+use Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewCalculation;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class OrderPreviewCalculationTest extends FunctionalTestCase
@@ -28,7 +28,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
     public function testCalculatePreviewWithTransportAndPayment()
     {
         $domain = $this->getServiceByType(Domain::class);
-        /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
+        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
         $vat = new Vat(new VatData('vatName', 20));
 
         $paymentPrice = new Price(100, 120);
@@ -115,7 +115,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
     public function testCalculatePreviewWithoutTransportAndPayment()
     {
         $domain = $this->getServiceByType(Domain::class);
-        /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
+        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
         $vat = new Vat(new VatData('vatName', 20));
 
         $unitPrice = new Price(1000, 1200);

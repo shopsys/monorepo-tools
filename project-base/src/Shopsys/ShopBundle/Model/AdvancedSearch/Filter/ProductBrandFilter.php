@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdvancedSearch\Filter;
+namespace Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
-use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProductBrandFilter implements AdvancedSearchFilterInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade
      */
     private $brandFacade;
 

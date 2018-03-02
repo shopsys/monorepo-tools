@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Script;
+namespace Shopsys\FrameworkBundle\Model\Script;
 
 use Doctrine\ORM\EntityManager;
 
@@ -29,21 +29,21 @@ class ScriptRepository
 
     /**
      * @param int $scriptId
-     * @return \Shopsys\ShopBundle\Model\Script\Script
+     * @return \Shopsys\FrameworkBundle\Model\Script\Script
      */
     public function getById($scriptId)
     {
         $script = $this->getScriptRepository()->find($scriptId);
 
         if ($script === null) {
-            throw new \Shopsys\ShopBundle\Model\Script\Exception\ScriptNotFoundException('Script with ID ' . $scriptId . ' does not exist.');
+            throw new \Shopsys\FrameworkBundle\Model\Script\Exception\ScriptNotFoundException('Script with ID ' . $scriptId . ' does not exist.');
         }
 
         return $script;
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Script\Script[]
+     * @return \Shopsys\FrameworkBundle\Model\Script\Script[]
      */
     public function getAll()
     {
@@ -60,7 +60,7 @@ class ScriptRepository
 
     /**
      * @param string $placement
-     * @return \Shopsys\ShopBundle\Model\Script\Script[]
+     * @return \Shopsys\FrameworkBundle\Model\Script\Script[]
      */
     public function getScriptsByPlacement($placement)
     {

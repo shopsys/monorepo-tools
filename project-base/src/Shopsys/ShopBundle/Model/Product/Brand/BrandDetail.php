@@ -1,27 +1,27 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Brand;
+namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 
 class BrandDetail
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\Brand
      */
     public $brand;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandDetailFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDetailFactory
      */
     public $brandDetailFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandDomain
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain
      */
     private $brandDomainsIndexedByDomainId;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
-     * @param \Shopsys\ShopBundle\Model\Product\Brand\BrandDetailFactory $brandDetailFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDetailFactory $brandDetailFactory
      * @param array|null $brandDomainsIndexedByDomainId
      */
     public function __construct(
@@ -35,7 +35,7 @@ class BrandDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand
      */
     public function getBrand()
     {
@@ -43,7 +43,7 @@ class BrandDetail
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandDomain[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain[]
      */
     public function getBrandDomainsIndexedByDomainId()
     {

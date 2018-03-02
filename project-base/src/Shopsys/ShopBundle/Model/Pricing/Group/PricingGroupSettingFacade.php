@@ -1,30 +1,30 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Pricing\Group;
+namespace Shopsys\FrameworkBundle\Model\Pricing\Group;
 
-use Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
 class PricingGroupSettingFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository
      */
     private $pricingGroupRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\AdminDomainTabsFacade
+     * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
@@ -41,7 +41,7 @@ class PricingGroupSettingFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return bool
      */
     public function isPricingGroupUsedOnSelectedDomain(PricingGroup $pricingGroup)
@@ -52,7 +52,7 @@ class PricingGroupSettingFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
      */
     public function getDefaultPricingGroupByDomainId($domainId)
     {
@@ -62,7 +62,7 @@ class PricingGroupSettingFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
      */
     public function getDefaultPricingGroupByCurrentDomain()
     {
@@ -70,7 +70,7 @@ class PricingGroupSettingFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
      */
     public function getDefaultPricingGroupBySelectedDomain()
     {
@@ -78,7 +78,7 @@ class PricingGroupSettingFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      */
     public function setDefaultPricingGroupForSelectedDomain(PricingGroup $pricingGroup)
     {
@@ -86,7 +86,7 @@ class PricingGroupSettingFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return bool
      */
     public function isPricingGroupDefaultOnSelectedDomain(PricingGroup $pricingGroup)

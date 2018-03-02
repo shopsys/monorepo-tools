@@ -1,49 +1,49 @@
 <?php
 
-namespace Shopsys\ShopBundle\Controller\Admin;
+namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormType;
-use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use Shopsys\ShopBundle\Model\Transport\Detail\TransportDetailFactory;
-use Shopsys\ShopBundle\Model\Transport\Grid\TransportGridFactory;
-use Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory;
-use Shopsys\ShopBundle\Model\Transport\TransportFacade;
+use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Form\Admin\Transport\TransportEditFormType;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\FrameworkBundle\Model\Transport\Detail\TransportDetailFactory;
+use Shopsys\FrameworkBundle\Model\Transport\Grid\TransportGridFactory;
+use Shopsys\FrameworkBundle\Model\Transport\TransportEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class TransportController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
     private $currencyFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Detail\TransportDetailFactory
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Detail\TransportDetailFactory
      */
     private $transportDetailFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\Grid\TransportGridFactory
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Grid\TransportGridFactory
      */
     private $transportGridFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportEditDataFactory
      */
     private $transportEditDataFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
      */
     private $transportFacade;
 
@@ -91,7 +91,7 @@ class TransportController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        return $this->render('@ShopsysShop/Admin/Content/Transport/new.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Transport/new.html.twig', [
             'form' => $form->createView(),
             'currencies' => $this->currencyFacade->getAllIndexedById(),
         ]);
@@ -129,7 +129,7 @@ class TransportController extends AdminBaseController
 
         $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing shipping - %name%', ['%name%' => $transport->getName()])));
 
-        return $this->render('@ShopsysShop/Admin/Content/Transport/edit.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Transport/edit.html.twig', [
             'form' => $form->createView(),
             'transportDetail' => $this->transportDetailFactory->createDetailForTransportWithIndependentPrices($transport),
             'currencies' => $this->currencyFacade->getAllIndexedById(),
@@ -154,7 +154,7 @@ class TransportController extends AdminBaseController
                     'name' => $transportName,
                 ]
             );
-        } catch (\Shopsys\ShopBundle\Model\Transport\Exception\TransportNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Transport\Exception\TransportNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected shipping doesn\'t exist.'));
         }
 
@@ -165,7 +165,7 @@ class TransportController extends AdminBaseController
     {
         $grid = $this->transportGridFactory->create();
 
-        return $this->render('@ShopsysShop/Admin/Content/Transport/list.html.twig', [
+        return $this->render('@ShopsysFramework/Admin/Content/Transport/list.html.twig', [
             'gridView' => $grid->createView(),
         ]);
     }

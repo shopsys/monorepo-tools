@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Payment;
+namespace Shopsys\FrameworkBundle\Model\Payment;
 
 class PaymentEditData
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\PaymentData
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentData
      */
     public $paymentData;
 
@@ -15,7 +15,7 @@ class PaymentEditData
     public $pricesByCurrencyId;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      * @param array $pricesByCurrencyId
      */
     public function __construct(PaymentData $paymentData = null, array $pricesByCurrencyId = [])

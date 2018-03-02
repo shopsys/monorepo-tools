@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\PromoCode\Exception;
+namespace Shopsys\FrameworkBundle\Model\Order\PromoCode\Exception;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

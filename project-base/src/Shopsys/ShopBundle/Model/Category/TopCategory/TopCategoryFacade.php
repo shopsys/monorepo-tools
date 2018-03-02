@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Category\TopCategory;
+namespace Shopsys\FrameworkBundle\Model\Category\TopCategory;
 
 use Doctrine\ORM\EntityManager;
 
@@ -12,7 +12,7 @@ class TopCategoryFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryRepository
+     * @var \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryRepository
      */
     private $topCategoryRepository;
 
@@ -26,7 +26,7 @@ class TopCategoryFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category[]
      */
     public function getAllCategoriesByDomainId($domainId)
     {
@@ -37,7 +37,7 @@ class TopCategoryFacade
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category[]
      */
     public function getVisibleCategoriesByDomainId($domainId)
     {
@@ -47,8 +47,8 @@ class TopCategoryFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[] $topCategories
-     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     * @param \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategory[] $topCategories
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category[]
      */
     private function getCategoriesFromTopCategories($topCategories)
     {
@@ -63,7 +63,7 @@ class TopCategoryFacade
 
     /**
      * @param int $domainId
-     * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category[] $categories
      */
     public function saveTopCategoriesForDomain($domainId, array $categories)
     {

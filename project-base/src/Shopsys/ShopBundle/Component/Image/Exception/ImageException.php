@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Image\Exception;
+namespace Shopsys\FrameworkBundle\Component\Image\Exception;
 
 interface ImageException
 {

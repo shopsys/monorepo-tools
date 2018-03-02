@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Module;
+namespace Shopsys\FrameworkBundle\Model\Module;
 
 use Doctrine\ORM\Mapping as ORM;
 

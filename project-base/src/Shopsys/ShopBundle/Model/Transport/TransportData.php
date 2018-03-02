@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport;
+namespace Shopsys\FrameworkBundle\Model\Transport;
 
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 
 class TransportData
 {
@@ -12,7 +12,7 @@ class TransportData
     public $name;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      */
     public $vat;
 
@@ -43,7 +43,7 @@ class TransportData
 
     /**
      * @param string[] $names
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat|null $vat
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null $vat
      * @param string[] $descriptions
      * @param string[] $instructions
      * @param bool $hidden
@@ -66,8 +66,8 @@ class TransportData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-     * @param \Shopsys\ShopBundle\Model\Transport\TransportDomain[] $transportDomains
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportDomain[] $transportDomains
      */
     public function setFromEntity(Transport $transport, array $transportDomains)
     {

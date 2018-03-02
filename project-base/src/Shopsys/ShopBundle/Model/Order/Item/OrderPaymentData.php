@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Item;
+namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 class OrderPaymentData extends OrderItemData
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Payment\Payment
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
     public $payment;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $orderPayment
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem $orderPayment
      */
     public function setFromEntity(OrderItem $orderPayment)
     {
@@ -18,7 +18,7 @@ class OrderPaymentData extends OrderItemData
             $this->payment = $orderPayment->getPayment();
             parent::setFromEntity($orderPayment);
         } else {
-            throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\InvalidArgumentException(
+            throw new \Shopsys\FrameworkBundle\Model\Order\Item\Exception\InvalidArgumentException(
                 'Instance of ' . OrderPayment::class . ' is required as argument.'
             );
         }

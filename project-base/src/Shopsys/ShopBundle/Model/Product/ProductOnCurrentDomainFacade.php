@@ -1,58 +1,58 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
-use Shopsys\ShopBundle\Model\Category\CategoryRepository;
-use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
-use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
-use Shopsys\ShopBundle\Model\Product\Brand\BrandRepository;
-use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountRepository;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
-use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Paginator\PaginationResult;
+use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
+use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
+use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository;
+use Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory;
+use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig;
+use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountRepository;
+use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
+use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService;
 
 class ProductOnCurrentDomainFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
     private $productRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
      */
     private $productDetailFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
     private $currentCustomer;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
     private $categoryRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountRepository
      */
     private $productFilterCountRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository
      */
     private $productAccessoryRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository
      */
     private $brandRepository;
 
@@ -78,7 +78,7 @@ class ProductOnCurrentDomainFacade
 
     /**
      * @param int $productId
-     * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail
+     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail
      */
     public function getVisibleProductDetailById($productId)
     {
@@ -92,8 +92,8 @@ class ProductOnCurrentDomainFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
      */
     public function getAccessoriesProductDetailsForProduct(Product $product)
     {
@@ -107,8 +107,8 @@ class ProductOnCurrentDomainFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
-     * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
      */
     public function getVariantsProductDetailsForProduct(Product $product)
     {
@@ -122,12 +122,12 @@ class ProductOnCurrentDomainFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @param string $orderingModeId
      * @param int $page
      * @param int $limit
      * @param int $categoryId
-     * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
     public function getPaginatedProductDetailsInCategory(
         ProductFilterData $productFilterData,
@@ -163,7 +163,7 @@ class ProductOnCurrentDomainFacade
      * @param int $page
      * @param int $limit
      * @param int $brandId
-     * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
     public function getPaginatedProductDetailsForBrand(
         $orderingModeId,
@@ -194,11 +194,11 @@ class ProductOnCurrentDomainFacade
 
     /**
      * @param string|null $searchText
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @param string $orderingModeId
      * @param int $page
      * @param int $limit
-     * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
     public function getPaginatedProductDetailsForSearch(
         $searchText,
@@ -230,7 +230,7 @@ class ProductOnCurrentDomainFacade
     /**
      * @param string|null $searchText
      * @param int $limit
-     * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
     public function getSearchAutocompleteProducts($searchText, $limit)
     {
@@ -254,9 +254,9 @@ class ProductOnCurrentDomainFacade
 
     /**
      * @param int $categoryId
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-     * @return \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountData
      */
     public function getProductFilterCountDataInCategory(
         $categoryId,
@@ -280,9 +280,9 @@ class ProductOnCurrentDomainFacade
 
     /**
      * @param string|null $searchText
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-     * @return \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountData
      */
     public function getProductFilterCountDataForSearch(
         $searchText,

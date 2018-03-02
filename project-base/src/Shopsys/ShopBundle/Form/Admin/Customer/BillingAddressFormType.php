@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Customer;
+namespace Shopsys\FrameworkBundle\Form\Admin\Customer;
 
-use Shopsys\ShopBundle\Form\ValidationGroup;
-use Shopsys\ShopBundle\Model\Country\CountryFacade;
-use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
+use Shopsys\FrameworkBundle\Form\ValidationGroup;
+use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,7 +19,7 @@ class BillingAddressFormType extends AbstractType
     const VALIDATION_GROUP_COMPANY_CUSTOMER = 'companyCustomer';
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade
      */
     private $countryFacade;
 
@@ -136,7 +136,7 @@ class BillingAddressFormType extends AbstractType
                     $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
                     $billingAddressData = $form->getData();
-                    /* @var $billingAddressData \Shopsys\ShopBundle\Model\Customer\BillingAddressData */
+                    /* @var $billingAddressData \Shopsys\FrameworkBundle\Model\Customer\BillingAddressData */
 
                     if ($billingAddressData->companyCustomer) {
                         $validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;

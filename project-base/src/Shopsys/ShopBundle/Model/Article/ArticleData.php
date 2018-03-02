@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Article;
+namespace Shopsys\FrameworkBundle\Model\Article;
 
-use Shopsys\ShopBundle\Form\UrlListData;
+use Shopsys\FrameworkBundle\Form\UrlListData;
 
 class ArticleData
 {
@@ -32,7 +32,7 @@ class ArticleData
     public $domainId;
 
     /**
-     * @var \Shopsys\ShopBundle\Form\UrlListData
+     * @var \Shopsys\FrameworkBundle\Form\UrlListData
      */
     public $urls;
 
@@ -58,7 +58,7 @@ class ArticleData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Article\Article $article
+     * @param \Shopsys\FrameworkBundle\Model\Article\Article $article
      */
     public function setFromEntity(Article $article)
     {

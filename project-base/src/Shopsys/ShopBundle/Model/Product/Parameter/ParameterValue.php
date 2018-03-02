@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,7 +34,7 @@ class ParameterValue
     private $locale;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValueData $parameterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueData $parameterData
      */
     public function __construct(ParameterValueData $parameterData)
     {
@@ -67,7 +67,7 @@ class ParameterValue
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValueData $parameterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueData $parameterData
      */
     public function edit(ParameterValueData $parameterData)
     {

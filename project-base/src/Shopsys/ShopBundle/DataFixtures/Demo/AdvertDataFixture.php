@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Model\Advert\Advert;
-use Shopsys\ShopBundle\Model\Advert\AdvertData;
-use Shopsys\ShopBundle\Model\Advert\AdvertFacade;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Model\Advert\Advert;
+use Shopsys\FrameworkBundle\Model\Advert\AdvertData;
+use Shopsys\FrameworkBundle\Model\Advert\AdvertFacade;
 
 class AdvertDataFixture extends AbstractReferenceFixture
 {
@@ -28,12 +28,12 @@ class AdvertDataFixture extends AbstractReferenceFixture
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Advert\AdvertData $advertData
+     * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertData $advertData
      */
     private function createAdvert(AdvertData $advertData)
     {
         $advertFacade = $this->get(AdvertFacade::class);
-        /* @var $advertFacade \Shopsys\ShopBundle\Model\Advert\AdvertFacade */
+        /* @var $advertFacade \Shopsys\FrameworkBundle\Model\Advert\AdvertFacade */
         $advertFacade->create($advertData);
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Base;
+namespace Shopsys\FrameworkBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
-use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Model\Product\Flag\FlagData;
+use Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade;
 
 class FlagDataFixture extends AbstractReferenceFixture
 {
@@ -37,13 +37,13 @@ class FlagDataFixture extends AbstractReferenceFixture
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagData $flagData
      * @param string|null $referenceName
      */
     private function createFlag(FlagData $flagData, $referenceName = null)
     {
         $flagFacade = $this->get(FlagFacade::class);
-        /* @var $flagFacade \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade */
+        /* @var $flagFacade \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade */
 
         $flag = $flagFacade->create($flagData);
         if ($referenceName !== null) {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Unit;
+namespace Shopsys\FrameworkBundle\Model\Product\Unit;
 
 class UnitService
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData $unitData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\Unit
      */
     public function create(UnitData $unitData)
     {
@@ -14,9 +14,9 @@ class UnitService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
-     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
-     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\Unit $unit
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData $unitData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Unit\Unit
      */
     public function edit(Unit $unit, UnitData $unitData)
     {

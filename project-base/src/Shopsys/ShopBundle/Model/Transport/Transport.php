@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Transport;
+namespace Shopsys\FrameworkBundle\Model\Transport;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use Shopsys\ShopBundle\Component\Gedmo\SortablePosition;
-use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
-use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Component\Gedmo\SortablePosition;
+use Shopsys\FrameworkBundle\Component\Grid\Ordering\OrderableEntityInterface;
+use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 
 /**
  * @ORM\Table(name="transports")
@@ -27,23 +27,23 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     protected $id;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportTranslation[]
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportTranslation[]
      *
-     * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Transport\TransportTranslation")
+     * @Prezent\Translations(targetEntity="Shopsys\FrameworkBundle\Model\Transport\TransportTranslation")
      */
     protected $translations;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Transport\TransportPrice[]
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPrice[]
      *
-     * @ORM\OneToMany(targetEntity="Shopsys\ShopBundle\Model\Transport\TransportPrice", mappedBy="transport", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Transport\TransportPrice", mappedBy="transport", cascade={"persist"})
      */
     private $prices;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Vat\Vat")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat")
      * @ORM\JoinColumn(nullable=false)
      */
     private $vat;
@@ -71,7 +71,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     private $position;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\TransportData $transportData
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportData $transportData
      */
     public function __construct(TransportData $transportData)
     {
@@ -85,7 +85,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\TransportData $transportData
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportData $transportData
      */
     public function edit(TransportData $transportData)
     {
@@ -95,7 +95,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Transport\TransportData $transportData
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportData $transportData
      */
     private function setTranslations(TransportData $transportData)
     {
@@ -146,7 +146,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Transport\TransportPrice[]
+     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportPrice[]
      */
     public function getPrices()
     {
@@ -154,8 +154,8 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
-     * @return \Shopsys\ShopBundle\Model\Transport\TransportPrice
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
+     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportPrice
      */
     public function getPrice(Currency $currency)
     {
@@ -167,11 +167,11 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 
         $message = 'Transport price with currency ID ' . $currency->getId()
             . ' from transport with ID ' . $this->getId() . 'not found.';
-        throw new \Shopsys\ShopBundle\Model\Transport\Exception\TransportPriceNotFoundException($message);
+        throw new \Shopsys\FrameworkBundle\Model\Transport\Exception\TransportPriceNotFoundException($message);
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @param string $price
      */
     public function setPrice(Currency $currency, $price)
@@ -187,7 +187,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      */
     public function getVat()
     {
@@ -232,7 +232,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Transport\TransportTranslation
+     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportTranslation
      */
     protected function createTranslation()
     {

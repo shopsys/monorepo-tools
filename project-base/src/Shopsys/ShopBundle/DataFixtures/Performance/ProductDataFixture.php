@@ -1,24 +1,24 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Performance;
+namespace Shopsys\FrameworkBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
 use Faker\Generator as Faker;
-use Shopsys\ShopBundle\Component\Console\ProgressBarFactory;
-use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
-use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade;
-use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
-use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Category\CategoryRepository;
-use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductEditData;
-use Shopsys\ShopBundle\Model\Product\ProductFacade;
-use Shopsys\ShopBundle\Model\Product\ProductVariantFacade;
+use Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory;
+use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
+use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader;
+use Shopsys\FrameworkBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
+use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
+use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ProductDataFixture
@@ -38,42 +38,42 @@ class ProductDataFixture
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
      */
     private $entityManagerFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
      */
     private $productFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader
+     * @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader
      */
     private $productDataFixtureLoader;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade
      */
     private $sqlLoggerFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductVariantFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade
      */
     private $productVariantFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector
+     * @var \Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector
      */
     private $productDataReferenceInjector;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade
+     * @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade
      */
     private $persistentReferenceFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
     private $categoryRepository;
 
@@ -88,7 +88,7 @@ class ProductDataFixture
     private $demoDataIterationCounter;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Product[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     private $productsByCatnum;
 
@@ -98,41 +98,41 @@ class ProductDataFixture
     private $faker;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
      */
     private $productAvailabilityRecalculationScheduler;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
      */
     private $productPriceRecalculationScheduler;
 
     /**
-     * @var \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader
+     * @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader
      */
     private $productDataFixtureCsvReader;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Console\ProgressBarFactory
+     * @var \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory
      */
     private $progressBarFactory;
 
     /**
      * @param int $productTotalCount
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
-     * @param \Shopsys\ShopBundle\Model\Product\ProductFacade $productFacade
-     * @param \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
-     * @param \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
-     * @param \Shopsys\ShopBundle\Model\Product\ProductVariantFacade $productVariantFacade
-     * @param \Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector $productDataReferenceInjector
-     * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
-     * @param \Shopsys\ShopBundle\Model\Category\CategoryRepository $categoryRepository
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
+     * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade $productVariantFacade
+     * @param \Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector $productDataReferenceInjector
+     * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
      * @param \Faker\Generator $faker
-     * @param \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
-     * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
-     * @param \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader $productDataFixtureCsvReader
-     * @param \Shopsys\ShopBundle\Component\Console\ProgressBarFactory $progressBarFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+     * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader $productDataFixtureCsvReader
+     * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
      */
     public function __construct(
         $productTotalCount,
@@ -248,7 +248,7 @@ class ProductDataFixture
 
     /**
      * @param string $catnum
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     private function getProductByCatnum($catnum)
     {
@@ -262,7 +262,7 @@ class ProductDataFixture
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
      */
     private function makeProductEditDataUnique(ProductEditData $productEditData)
     {
@@ -314,7 +314,7 @@ class ProductDataFixture
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
      */
     private function setRandomPerformanceCategoriesToProductEditData(ProductEditData $productEditData)
     {
@@ -325,7 +325,7 @@ class ProductDataFixture
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
      * @param int $domainId
      */
     private function cleanPerformanceCategoriesFromProductEditDataByDomainId(ProductEditData $productEditData, $domainId)
@@ -338,7 +338,7 @@ class ProductDataFixture
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
      * @param int $domainId
      */
     private function addRandomPerformanceCategoriesToProductEditDataByDomainId(ProductEditData $productEditData, $domainId)
@@ -372,7 +372,7 @@ class ProductDataFixture
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @return bool
      */
     private function isPerformanceCategory(Category $category)
@@ -380,7 +380,7 @@ class ProductDataFixture
         $firstPerformanceCategory = $this->persistentReferenceFacade->getReference(
             CategoryDataFixture::FIRST_PERFORMANCE_CATEGORY
         );
-        /* @var $firstPerformanceCategory \Shopsys\ShopBundle\Model\Category\Category */
+        /* @var $firstPerformanceCategory \Shopsys\FrameworkBundle\Model\Category\Category */
 
         return $category->getId() >= $firstPerformanceCategory->getId();
     }
@@ -394,7 +394,7 @@ class ProductDataFixture
         reset($array);
         while (key($array) !== $key) {
             if (each($array) === false) {
-                throw new \Shopsys\ShopBundle\DataFixtures\Performance\Exception\UndefinedArrayKeyException($key);
+                throw new \Shopsys\FrameworkBundle\DataFixtures\Performance\Exception\UndefinedArrayKeyException($key);
             }
         }
     }

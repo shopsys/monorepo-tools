@@ -4,7 +4,7 @@ namespace Tests\ShopBundle\Unit\Component\Router\Security;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Security\Csrf\CsrfToken;

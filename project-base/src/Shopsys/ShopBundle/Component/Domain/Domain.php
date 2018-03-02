@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Domain;
+namespace Shopsys\FrameworkBundle\Component\Domain;
 
 use Shopsys\FormTypesBundle\Domain\DomainIdsProviderInterface;
-use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 
 class Domain implements DomainIdsProviderInterface
@@ -12,23 +12,23 @@ class Domain implements DomainIdsProviderInterface
     const MAIN_ADMIN_DOMAIN_ID = 1;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig|null
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig|null
      */
     private $currentDomainConfig;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[]
      */
     private $domainConfigs;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
-     * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      */
     public function __construct(array $domainConfigs, Setting $setting)
     {
@@ -77,7 +77,7 @@ class Domain implements DomainIdsProviderInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[]
      */
     public function getAll()
     {
@@ -87,7 +87,7 @@ class Domain implements DomainIdsProviderInterface
             try {
                 $this->setting->getForDomain(Setting::DOMAIN_DATA_CREATED, $domainId);
                 $domainConfigsWithDataCreated[] = $domainConfig;
-            } catch (\Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
+            } catch (\Shopsys\FrameworkBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
             }
         }
 
@@ -108,7 +108,7 @@ class Domain implements DomainIdsProviderInterface
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[]
      */
     public function getAllIncludingDomainConfigsWithoutDataCreated()
     {
@@ -117,7 +117,7 @@ class Domain implements DomainIdsProviderInterface
 
     /**
      * @param int $domainId
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     public function getDomainConfigById($domainId)
     {
@@ -127,7 +127,7 @@ class Domain implements DomainIdsProviderInterface
             }
         }
 
-        throw new \Shopsys\ShopBundle\Component\Domain\Exception\InvalidDomainIdException();
+        throw new \Shopsys\FrameworkBundle\Component\Domain\Exception\InvalidDomainIdException();
     }
 
     /**
@@ -153,16 +153,16 @@ class Domain implements DomainIdsProviderInterface
             }
         }
 
-        throw new \Shopsys\ShopBundle\Component\Domain\Exception\UnableToResolveDomainException($url);
+        throw new \Shopsys\FrameworkBundle\Component\Domain\Exception\UnableToResolveDomainException($url);
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
      */
     public function getCurrentDomainConfig()
     {
         if ($this->currentDomainConfig === null) {
-            throw new \Shopsys\ShopBundle\Component\Domain\Exception\NoDomainSelectedException();
+            throw new \Shopsys\FrameworkBundle\Component\Domain\Exception\NoDomainSelectedException();
         }
 
         return $this->currentDomainConfig;

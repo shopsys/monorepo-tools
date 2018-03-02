@@ -1,4 +1,4 @@
-{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}{{ 'Superadmin - Closing modules'|trans }}{% endblock %}
 {% block h1 %}{{ 'Superadmin - Closing modules'|trans }}{% endblock %}
@@ -28,7 +28,7 @@
             </tbody>
         </table>
 
-        {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 {{ form_widget(form.save, { label: 'Save changes'|trans}) }}
             {% endblock %}

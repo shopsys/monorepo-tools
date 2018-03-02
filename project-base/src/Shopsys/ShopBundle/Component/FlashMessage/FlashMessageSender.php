@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\FlashMessage;
+namespace Shopsys\FrameworkBundle\Component\FlashMessage;
 
 use Twig_Environment;
 
 class FlashMessageSender
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\FlashMessage\Bag
+     * @var \Shopsys\FrameworkBundle\Component\FlashMessage\Bag
      */
     private $flashMessageBag;
 

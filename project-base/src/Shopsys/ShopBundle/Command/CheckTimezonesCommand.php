@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Command;
+namespace Shopsys\FrameworkBundle\Command;
 
 use Doctrine\DBAL\Connection;
-use Shopsys\ShopBundle\Command\Exception\DifferentTimezonesException;
+use Shopsys\FrameworkBundle\Command\Exception\DifferentTimezonesException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

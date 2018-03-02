@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order;
+namespace Shopsys\FrameworkBundle\Model\Order;
 
 class OrderDataMapper
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\FrontOrderData $frontOrderData
-     * @return \Shopsys\ShopBundle\Model\Order\OrderData
+     * @param \Shopsys\FrameworkBundle\Model\Order\FrontOrderData $frontOrderData
+     * @return \Shopsys\FrameworkBundle\Model\Order\OrderData
      */
     public function getOrderDataFromFrontOrderData(FrontOrderData $frontOrderData)
     {

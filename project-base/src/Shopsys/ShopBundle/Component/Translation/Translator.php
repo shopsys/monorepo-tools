@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Translation;
+namespace Shopsys\FrameworkBundle\Component\Translation;
 
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -11,7 +11,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     const SOURCE_LOCALE = 'en';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Translation\Translator|null
+     * @var \Shopsys\FrameworkBundle\Component\Translation\Translator|null
      */
     private static $self;
 
@@ -31,7 +31,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     private $identityTranslator;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Translation\MessageIdNormalizer
+     * @var \Shopsys\FrameworkBundle\Component\Translation\MessageIdNormalizer
      */
     private $messageIdNormalizer;
 
@@ -149,7 +149,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Translation\Translator $translator
+     * @param \Shopsys\FrameworkBundle\Component\Translation\Translator $translator
      */
     public static function injectSelf(self $translator)
     {
@@ -166,7 +166,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     public static function staticTrans($id, array $parameters = [], $domain = null, $locale = null)
     {
         if (self::$self === null) {
-            throw new \Shopsys\ShopBundle\Component\Translation\Exception\InstanceNotInjectedException();
+            throw new \Shopsys\FrameworkBundle\Component\Translation\Exception\InstanceNotInjectedException();
         }
 
         return self::$self->trans($id, $parameters, $domain, $locale);
@@ -183,7 +183,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     public static function staticTransChoice($id, $number, array $parameters = [], $domain = null, $locale = null)
     {
         if (self::$self === null) {
-            throw new \Shopsys\ShopBundle\Component\Translation\Exception\InstanceNotInjectedException();
+            throw new \Shopsys\FrameworkBundle\Component\Translation\Exception\InstanceNotInjectedException();
         }
 
         return self::$self->transChoice($id, $number, $parameters, $domain, $locale);

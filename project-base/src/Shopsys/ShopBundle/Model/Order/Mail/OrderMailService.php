@@ -1,19 +1,19 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Mail;
+namespace Shopsys\FrameworkBundle\Model\Order\Mail;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Mail\MailTemplate;
-use Shopsys\ShopBundle\Model\Mail\MessageData;
-use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Order\OrderService;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
-use Shopsys\ShopBundle\Twig\DateTimeFormatterExtension;
-use Shopsys\ShopBundle\Twig\PriceExtension;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
+use Shopsys\FrameworkBundle\Model\Mail\MessageData;
+use Shopsys\FrameworkBundle\Model\Mail\Setting\MailSetting;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Order\OrderService;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension;
+use Shopsys\FrameworkBundle\Twig\PriceExtension;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig_Environment;
 
@@ -35,12 +35,12 @@ class OrderMailService
     const VARIABLE_PAYMENT_INSTRUCTIONS = '{payment_instructions}';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
 
@@ -50,27 +50,27 @@ class OrderMailService
     private $twig;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation
      */
     private $orderItemPriceCalculation;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Twig\PriceExtension
+     * @var \Shopsys\FrameworkBundle\Twig\PriceExtension
      */
     private $priceExtension;
 
     /**
-     * @var \Shopsys\ShopBundle\Twig\DateTimeFormatterExtension
+     * @var \Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension
      */
     private $dateTimeFormatterExtension;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Order\OrderService
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderService
      */
     private $orderService;
 
@@ -95,9 +95,9 @@ class OrderMailService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
-     * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate $mailTemplate
-     * @return \Shopsys\ShopBundle\Model\Mail\MessageData
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplate $mailTemplate
+     * @return \Shopsys\FrameworkBundle\Model\Mail\MessageData
      */
     public function getMessageDataByOrder(Order $order, MailTemplate $mailTemplate)
     {
@@ -114,7 +114,7 @@ class OrderMailService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus $orderStatus
      * @return string
      */
     public function getMailTemplateNameByStatus(OrderStatus $orderStatus)
@@ -123,7 +123,7 @@ class OrderMailService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return array
      */
     private function getVariablesReplacementsForBody(Order $order)
@@ -155,7 +155,7 @@ class OrderMailService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return array
      */
     private function getVariablesReplacementsForSubject(Order $order)
@@ -189,7 +189,7 @@ class OrderMailService
     }
 
     /**
-     * @param  \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param  \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return string
      */
     private function getFormattedPrice(Order $order)
@@ -202,7 +202,7 @@ class OrderMailService
     }
 
     /**
-     * @param  \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param  \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return string
      */
     private function getFormattedDateTime(Order $order)
@@ -214,38 +214,38 @@ class OrderMailService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return string
      */
     private function getBillingAddressHtmlTable(Order $order)
     {
-        return $this->twig->render('@ShopsysShop/Mail/Order/billingAddress.html.twig', [
+        return $this->twig->render('@ShopsysFramework/Mail/Order/billingAddress.html.twig', [
             'order' => $order,
             'orderLocale' => $this->getDomainLocaleByOrder($order),
         ]);
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return string
      */
     private function getDeliveryAddressHtmlTable(Order $order)
     {
-        return $this->twig->render('@ShopsysShop/Mail/Order/deliveryAddress.html.twig', [
+        return $this->twig->render('@ShopsysFramework/Mail/Order/deliveryAddress.html.twig', [
             'order' => $order,
             'orderLocale' => $this->getDomainLocaleByOrder($order),
         ]);
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return string
      */
     private function getProductsHtmlTable(Order $order)
     {
         $orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
-        return $this->twig->render('@ShopsysShop/Mail/Order/products.html.twig', [
+        return $this->twig->render('@ShopsysFramework/Mail/Order/products.html.twig', [
             'order' => $order,
             'orderItemTotalPricesById' => $orderItemTotalPricesById,
             'orderLocale' => $this->getDomainLocaleByOrder($order),
@@ -253,7 +253,7 @@ class OrderMailService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Order $order
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return string
      */
     private function getDomainLocaleByOrder($order)

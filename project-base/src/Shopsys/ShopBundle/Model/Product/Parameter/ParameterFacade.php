@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\EntityManager;
 
@@ -12,19 +12,19 @@ class ParameterFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository
      */
     private $parameterRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterService
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterService
      */
     private $parameterService;
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterService $parameterService
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterService $parameterService
      */
     public function __construct(
         EntityManager $em,
@@ -38,7 +38,7 @@ class ParameterFacade
 
     /**
      * @param int $parameterId
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
      */
     public function getById($parameterId)
     {
@@ -46,7 +46,7 @@ class ParameterFacade
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter[]
      */
     public function getAll()
     {
@@ -54,8 +54,8 @@ class ParameterFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
      */
     public function create(ParameterData $parameterData)
     {
@@ -68,7 +68,7 @@ class ParameterFacade
 
     /**
      * @param string[] $namesByLocale
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter|null
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter|null
      */
     public function findParameterByNames(array $namesByLocale)
     {
@@ -77,8 +77,8 @@ class ParameterFacade
 
     /**
      * @param int $parameterId
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
      */
     public function edit($parameterId, ParameterData $parameterData)
     {

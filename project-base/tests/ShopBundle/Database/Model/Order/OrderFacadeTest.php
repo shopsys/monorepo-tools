@@ -2,21 +2,21 @@
 
 namespace Tests\ShopBundle\Database\Model\Order;
 
-use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
-use Shopsys\ShopBundle\Model\Cart\CartFacade;
-use Shopsys\ShopBundle\Model\Cart\CartService;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
-use Shopsys\ShopBundle\Model\Order\OrderData;
-use Shopsys\ShopBundle\Model\Order\OrderFacade;
-use Shopsys\ShopBundle\Model\Order\OrderRepository;
-use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
-use Shopsys\ShopBundle\Model\Payment\PaymentRepository;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
-use Shopsys\ShopBundle\Model\Transport\TransportRepository;
+use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Base\OrderStatusDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\CountryDataFixture;
+use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
+use Shopsys\FrameworkBundle\Model\Cart\CartService;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
+use Shopsys\FrameworkBundle\Model\Order\OrderData;
+use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
+use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
+use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Model\Transport\TransportRepository;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class OrderFacadeTest extends DatabaseTestCase
@@ -27,23 +27,23 @@ class OrderFacadeTest extends DatabaseTestCase
     public function testCreate()
     {
         $cartFacade = $this->getServiceByType(CartFacade::class);
-        /* @var $cartFacade \Shopsys\ShopBundle\Model\Cart\CartFacade */
+        /* @var $cartFacade \Shopsys\FrameworkBundle\Model\Cart\CartFacade */
         $cartService = $this->getServiceByType(CartService::class);
-        /* @var $cartService \Shopsys\ShopBundle\Model\Cart\CartService */
+        /* @var $cartService \Shopsys\FrameworkBundle\Model\Cart\CartService */
         $orderFacade = $this->getServiceByType(OrderFacade::class);
-        /* @var $orderFacade \Shopsys\ShopBundle\Model\Order\OrderFacade */
+        /* @var $orderFacade \Shopsys\FrameworkBundle\Model\Order\OrderFacade */
         $orderPreviewFactory = $this->getServiceByType(OrderPreviewFactory::class);
-        /* @var $orderPreviewFactory \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory */
+        /* @var $orderPreviewFactory \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory */
         $orderRepository = $this->getServiceByType(OrderRepository::class);
-        /* @var $orderRepository \Shopsys\ShopBundle\Model\Order\OrderRepository */
+        /* @var $orderRepository \Shopsys\FrameworkBundle\Model\Order\OrderRepository */
         $productRepository = $this->getServiceByType(ProductRepository::class);
-        /* @var $productRepository \Shopsys\ShopBundle\Model\Product\ProductRepository */
+        /* @var $productRepository \Shopsys\FrameworkBundle\Model\Product\ProductRepository */
         $transportRepository = $this->getServiceByType(TransportRepository::class);
-        /* @var $transportRepository \Shopsys\ShopBundle\Model\Transport\TransportRepository */
+        /* @var $transportRepository \Shopsys\FrameworkBundle\Model\Transport\TransportRepository */
         $paymentRepository = $this->getServiceByType(PaymentRepository::class);
-        /* @var $paymentRepository \Shopsys\ShopBundle\Model\Payment\PaymentRepository */
+        /* @var $paymentRepository \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository */
         $persistentReferenceFacade = $this->getServiceByType(PersistentReferenceFacade::class);
-        /* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
+        /* @var $persistentReferenceFacade \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade */
 
         $cart = $cartFacade->getCartOfCurrentCustomer();
 
@@ -119,12 +119,12 @@ class OrderFacadeTest extends DatabaseTestCase
     public function testEdit()
     {
         $orderFacade = $this->getServiceByType(OrderFacade::class);
-        /* @var $orderFacade \Shopsys\ShopBundle\Model\Order\OrderFacade */
+        /* @var $orderFacade \Shopsys\FrameworkBundle\Model\Order\OrderFacade */
         $orderRepository = $this->getServiceByType(OrderRepository::class);
-        /* @var $orderRepository \Shopsys\ShopBundle\Model\Order\OrderRepository */
+        /* @var $orderRepository \Shopsys\FrameworkBundle\Model\Order\OrderRepository */
 
         $order = $this->getReference('order_1');
-        /* @var $order \Shopsys\ShopBundle\Model\Order\Order */
+        /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
 
         $this->assertCount(4, $order->getItems());
 

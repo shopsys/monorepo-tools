@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\Order;
+namespace Shopsys\FrameworkBundle\Form\Admin\Order;
 
-use Shopsys\ShopBundle\Model\Order\Item\OrderPaymentData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;

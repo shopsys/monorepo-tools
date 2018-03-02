@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Flag;
+namespace Shopsys\FrameworkBundle\Model\Product\Flag;
 
 use Doctrine\ORM\EntityManager;
 
@@ -29,7 +29,7 @@ class FlagRepository
 
     /**
      * @param int $flagId
-     * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag|null
+     * @return \Shopsys\FrameworkBundle\Model\Product\Flag\Flag|null
      */
     public function findById($flagId)
     {
@@ -38,21 +38,21 @@ class FlagRepository
 
     /**
      * @param int $flagId
-     * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag
+     * @return \Shopsys\FrameworkBundle\Model\Product\Flag\Flag
      */
     public function getById($flagId)
     {
         $flag = $this->findById($flagId);
 
         if ($flag === null) {
-            throw new \Shopsys\ShopBundle\Model\Product\Flag\Exception\FlagNotFoundException('Flag with ID ' . $flagId . ' not found.');
+            throw new \Shopsys\FrameworkBundle\Model\Product\Flag\Exception\FlagNotFoundException('Flag with ID ' . $flagId . ' not found.');
         }
 
         return $flag;
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
      */
     public function getAll()
     {

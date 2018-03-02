@@ -1,15 +1,15 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\AdvancedSearch;
+namespace Shopsys\FrameworkBundle\Model\AdvancedSearch;
 
-use Shopsys\ShopBundle\Model\AdvancedSearch\Filter\ProductAvailabilityFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearch\Filter\ProductBrandFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearch\Filter\ProductCalculatedSellingDeniedFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearch\Filter\ProductCatnumFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearch\Filter\ProductFlagFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearch\Filter\ProductNameFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearch\Filter\ProductPartnoFilter;
-use Shopsys\ShopBundle\Model\AdvancedSearch\Filter\ProductStockFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductAvailabilityFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductBrandFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductCalculatedSellingDeniedFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductCatnumFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductFlagFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductNameFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductPartnoFilter;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\ProductStockFilter;
 
 class ProductAdvancedSearchConfig extends AdvancedSearchConfig
 {

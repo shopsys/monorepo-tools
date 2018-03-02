@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Router\Security\Annotation;
+namespace Shopsys\FrameworkBundle\Component\Router\Security\Annotation;
 
 use Doctrine\Common\Annotations\Annotation;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Shopsys\ShopBundle\Form\Admin\BestsellingProduct;
+namespace Shopsys\FrameworkBundle\Form\Admin\BestsellingProduct;
 
-use Shopsys\ShopBundle\Component\Constraints;
-use Shopsys\ShopBundle\Form\ProductType;
+use Shopsys\FrameworkBundle\Component\Constraints;
+use Shopsys\FrameworkBundle\Form\ProductType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

@@ -9,13 +9,13 @@ security:
 
   providers:
     administrators:
-      id: Shopsys\ShopBundle\Model\Administrator\Security\AdministratorUserProvider
+      id: Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorUserProvider
 
     user_identities:
-      id: Shopsys\ShopBundle\Model\Customer\FrontendUserProvider
+      id: Shopsys\FrameworkBundle\Model\Customer\FrontendUserProvider
 
   firewalls:
-    # see Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
+    # see Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
     administration:
       pattern: ^/(admin/|efconnect|elfinder)
       anonymous: ~
@@ -31,7 +31,7 @@ security:
         csrf_parameter: "admin_login_form[_token]"
       logout:
         path: admin_logout
-        success_handler: Shopsys\ShopBundle\Model\Security\AdminLogoutHandler
+        success_handler: Shopsys\FrameworkBundle\Model\Security\AdminLogoutHandler
         csrf_parameter: _csrf_token
         csrf_token_generator: security.csrf.token_manager
         csrf_token_id: admin_logout
@@ -48,8 +48,8 @@ security:
         username_parameter: "front_login_form[email]"
         password_parameter: "front_login_form[password]"
         csrf_parameter: "front_login_form[_token]"
-        success_handler: Shopsys\ShopBundle\Model\Security\CustomerLoginHandler
-        failure_handler: Shopsys\ShopBundle\Model\Security\CustomerLoginHandler
+        success_handler: Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler
+        failure_handler: Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler
         remember_me: true
       remember_me:
         secret: "%secret%"
@@ -59,7 +59,7 @@ security:
         remember_me_parameter: "front_login_form[rememberMe]"
       logout:
         path: front_logout
-        success_handler: Shopsys\ShopBundle\Model\Security\FrontLogoutHandler
+        success_handler: Shopsys\FrameworkBundle\Model\Security\FrontLogoutHandler
         csrf_parameter: _csrf_token
         csrf_token_generator: security.csrf.token_manager
         csrf_token_id: frontend_logout

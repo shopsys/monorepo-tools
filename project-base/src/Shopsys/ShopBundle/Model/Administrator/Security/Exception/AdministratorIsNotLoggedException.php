@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Administrator\Security\Exception;
+namespace Shopsys\FrameworkBundle\Model\Administrator\Security\Exception;
 
 use Exception;
 

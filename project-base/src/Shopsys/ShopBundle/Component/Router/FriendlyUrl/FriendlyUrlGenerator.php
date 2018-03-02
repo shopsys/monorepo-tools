@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Symfony\Component\Routing\Generator\UrlGenerator as BaseUrlGenerator;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route;
@@ -27,7 +27,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator
 
     /**
      * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param string $routeName
      * @param array $parameters
      * @param int $referenceType
@@ -58,7 +58,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator
                 $routeName,
                 $entityId
             );
-        } catch (\Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlNotFoundException $e) {
+        } catch (\Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlNotFoundException $e) {
             $message = 'Unable to generate a URL for the named route "' . $routeName . '" as such route does not exist.';
             throw new \Symfony\Component\Routing\Exception\RouteNotFoundException($message, 0, $e);
         }
@@ -69,7 +69,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator
     /**
      * @param string $routeName
      * @param \Symfony\Component\Routing\Route $route
-     * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
      * @param array $parameters
      * @param string $referenceType
      * @return string
@@ -103,6 +103,6 @@ class FriendlyUrlGenerator extends BaseUrlGenerator
      */
     public function generate($routeName, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
     {
-        throw new \Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\MethodGenerateIsNotSupportedException();
+        throw new \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\Exception\MethodGenerateIsNotSupportedException();
     }
 }

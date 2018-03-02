@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Entity;
+namespace Shopsys\FrameworkBundle\Component\Entity;
 
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
@@ -16,7 +16,7 @@ class EntityNotNullableColumnsFinder
         foreach ($classesMetadata as $classMetadata) {
             if (!($classMetadata instanceof ClassMetadataInfo)) {
                 $message = 'Instance of ' . ClassMetadataInfo::class . ' is required.';
-                throw new \Shopsys\ShopBundle\Component\Entity\Exception\UnexpectedTypeException($message);
+                throw new \Shopsys\FrameworkBundle\Component\Entity\Exception\UnexpectedTypeException($message);
             }
             $notNullableColumnNamesIndexedByTableName[$classMetadata->getTableName()] =
                 array_merge(

@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade;
 
 class NewsletterSubscriberDataFixture extends AbstractReferenceFixture
 {
@@ -16,7 +16,7 @@ class NewsletterSubscriberDataFixture extends AbstractReferenceFixture
     public function load(ObjectManager $manager)
     {
         $newsletterFacade = $this->get(NewsletterFacade::class);
-        /* @var $newsletterFacade \Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade */
+        /* @var $newsletterFacade \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade */
 
         $newsletterSubscribersData = $this->getEmailData();
 

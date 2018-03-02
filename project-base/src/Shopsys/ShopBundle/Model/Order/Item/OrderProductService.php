@@ -1,11 +1,11 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Order\Item;
+namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 class OrderProductService
 {
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct[] $orderProducts
      */
     public function subtractOrderProductsFromStock(array $orderProducts)
     {
@@ -17,7 +17,7 @@ class OrderProductService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct[] $orderProducts
      */
     public function returnOrderProductsToStock(array $orderProducts)
     {
@@ -29,8 +29,8 @@ class OrderProductService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct[] $orderProducts
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function getProductsUsingStockFromOrderProducts(array $orderProducts)
     {
@@ -44,8 +44,8 @@ class OrderProductService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
-     * @return \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[]
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct[] $orderProducts
+     * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct[]
      */
     private function getOrderProductsUsingStockFromOrderProducts(array $orderProducts)
     {

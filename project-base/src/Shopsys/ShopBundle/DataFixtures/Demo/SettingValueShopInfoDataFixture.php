@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
+use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade;
 
 class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
 {
@@ -23,7 +23,7 @@ class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
     public function load(ObjectManager $manager)
     {
         $setting = $this->get(Setting::class);
-        /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
+        /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
 
         // Any previously executed data fixture using Setting (even transitively) would fill the Setting cache.
         // As EM identity map is cleared after each fixture we should clear the Setting cache before editing the values.

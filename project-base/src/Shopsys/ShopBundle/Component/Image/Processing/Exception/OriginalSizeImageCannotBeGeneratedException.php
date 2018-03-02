@@ -1,14 +1,14 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Image\Processing\Exception;
+namespace Shopsys\FrameworkBundle\Component\Image\Processing\Exception;
 
 use Exception;
-use Shopsys\ShopBundle\Component\Image\Image;
+use Shopsys\FrameworkBundle\Component\Image\Image;
 
 class OriginalSizeImageCannotBeGeneratedException extends Exception implements ImageProcessingException
 {
     /**
-     * @param \Shopsys\ShopBundle\Component\Image\Image $image
+     * @param \Shopsys\FrameworkBundle\Component\Image\Image $image
      * @param \Exception|null $previous
      */
     public function __construct(Image $image, Exception $previous = null)

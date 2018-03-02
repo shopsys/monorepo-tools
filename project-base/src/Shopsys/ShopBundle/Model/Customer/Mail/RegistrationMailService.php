@@ -1,13 +1,13 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer\Mail;
+namespace Shopsys\FrameworkBundle\Model\Customer\Mail;
 
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Mail\MailTemplate;
-use Shopsys\ShopBundle\Model\Mail\MessageData;
-use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
+use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
+use Shopsys\FrameworkBundle\Model\Mail\MessageData;
+use Shopsys\FrameworkBundle\Model\Mail\Setting\MailSetting;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RegistrationMailService
@@ -19,12 +19,12 @@ class RegistrationMailService
     const VARIABLE_LOGIN_PAGE = '{login_page}';
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     private $setting;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
     private $domainRouterFactory;
 
@@ -35,9 +35,9 @@ class RegistrationMailService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
-     * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate $mailTemplate
-     * @return \Shopsys\ShopBundle\Model\Mail\MessageData
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplate $mailTemplate
+     * @return \Shopsys\FrameworkBundle\Model\Mail\MessageData
      */
     public function getMessageDataByUser(User $user, MailTemplate $mailTemplate)
     {
@@ -53,7 +53,7 @@ class RegistrationMailService
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @return array
      */
     private function getVariablesReplacements(User $user)

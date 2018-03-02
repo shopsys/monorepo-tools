@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Router;
+namespace Shopsys\FrameworkBundle\Component\Router;
 
 use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
@@ -40,7 +40,7 @@ class LocalizedRouterFactory
         if (!array_key_exists($locale, $this->localeRoutersResourcesFilepaths)) {
             $message = 'File with localized routes "routing_front_' . $locale . '.yml" was not found. '
                 . 'Please add it to Resources/config folder.';
-            throw new \Shopsys\ShopBundle\Component\Router\Exception\LocalizedRoutingConfigFileNotFoundException($message);
+            throw new \Shopsys\FrameworkBundle\Component\Router\Exception\LocalizedRoutingConfigFileNotFoundException($message);
         }
 
         if (!array_key_exists($locale, $this->routersByLocaleAndHost)

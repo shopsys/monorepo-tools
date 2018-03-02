@@ -34,8 +34,8 @@ doctrine:
     auto_generate_proxy_classes: false
     dql:
       string_functions:
-        collate: Shopsys\ShopBundle\Component\Doctrine\CollateFunction
-        normalize: Shopsys\ShopBundle\Component\Doctrine\NormalizeFunction
+        collate: Shopsys\FrameworkBundle\Component\Doctrine\CollateFunction
+        normalize: Shopsys\FrameworkBundle\Component\Doctrine\NormalizeFunction
     naming_strategy: doctrine.orm.naming_strategy.underscore
     metadata_cache_driver:
       type: service
@@ -45,20 +45,20 @@ doctrine:
       id: Doctrine\Common\Cache\ChainCache
     auto_mapping: false
     mappings:
-      ShopsysShopBundle:
+      ShopsysFrameworkBundle:
         type: annotation
-        dir: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Model'
-        alias: ShopsysShopBundle
-        prefix: Shopsys\ShopBundle\Model
+        dir: '%shopsys.framework.root_dir%/src/Model'
+        alias: ShopsysFrameworkBundle
+        prefix: Shopsys\FrameworkBundle\Model
         is_bundle: false
-      ShopsysShopBundleComponent:
+      ShopsysFrameworkBundleComponent:
         type: annotation
-        dir: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Component'
-        alias: ShopsysShopBundleComponent
-        prefix: Shopsys\ShopBundle\Component
+        dir: '%shopsys.framework.root_dir%/src/Component'
+        alias: ShopsysFrameworkBundleComponent
+        prefix: Shopsys\FrameworkBundle\Component
         is_bundle: false
     hydrators:
-      GroupedScalarHydrator: \Shopsys\ShopBundle\Component\Doctrine\GroupedScalarHydrator
+      GroupedScalarHydrator: \Shopsys\FrameworkBundle\Component\Doctrine\GroupedScalarHydrator
 
 doctrine_migrations:
     dir_name: "%shopsys.root_dir%/src/Shopsys/ShopBundle/Migrations"
@@ -168,12 +168,12 @@ twig:
   debug: "%kernel.debug%"
   exception_controller: 'Shopsys\ShopBundle\Controller\Front\ErrorController::showAction'
   form_themes:
-    - '@ShopsysShop/Common/Form/theme.html.twig'
-    - '@ShopsysShop/Admin/Form/colorpickerFields.html.twig'
-    - '@ShopsysShop/Admin/Form/fileuploadFields.html.twig'
+    - '@ShopsysFramework/Common/Form/theme.html.twig'
+    - '@ShopsysFramework/Admin/Form/colorpickerFields.html.twig'
+    - '@ShopsysFramework/Admin/Form/fileuploadFields.html.twig'
   strict_variables: true
   globals:
-    globalMultipleFormSetting: '@Shopsys\ShopBundle\Component\Form\MultipleFormSetting'
+    globalMultipleFormSetting: '@Shopsys\FrameworkBundle\Component\Form\MultipleFormSetting'
 
 imports:
     - { resource: wysiwyg.yml }

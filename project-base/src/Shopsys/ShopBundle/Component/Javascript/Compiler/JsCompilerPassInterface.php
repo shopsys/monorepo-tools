@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\Javascript\Compiler;
+namespace Shopsys\FrameworkBundle\Component\Javascript\Compiler;
 
 use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
 

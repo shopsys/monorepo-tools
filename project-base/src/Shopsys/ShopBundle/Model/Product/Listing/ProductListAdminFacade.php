@@ -1,25 +1,25 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Product\Listing;
+namespace Shopsys\FrameworkBundle\Model\Product\Listing;
 
-use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 
 class ProductListAdminFacade
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminRepository
+     * @var \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminRepository
      */
     private $productListAdminRepository;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
     private $pricingGroupSettingFacade;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminRepository $productListAdminRepository
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminRepository $productListAdminRepository
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
      */
     public function __construct(
         ProductListAdminRepository $productListAdminRepository,
@@ -44,7 +44,7 @@ class ProductListAdminFacade
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
+     * @param \Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getQueryBuilderByQuickSearchData(QuickSearchFormData $quickSearchData)

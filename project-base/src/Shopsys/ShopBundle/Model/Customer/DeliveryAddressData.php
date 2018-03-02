@@ -1,8 +1,8 @@
 <?php
 
-namespace Shopsys\ShopBundle\Model\Customer;
+namespace Shopsys\FrameworkBundle\Model\Customer;
 
-use Shopsys\ShopBundle\Model\Country\Country;
+use Shopsys\FrameworkBundle\Model\Country\Country;
 
 class DeliveryAddressData
 {
@@ -47,7 +47,7 @@ class DeliveryAddressData
     public $postcode;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Country\Country|null
+     * @var \Shopsys\FrameworkBundle\Model\Country\Country|null
      */
     public $country;
 
@@ -60,7 +60,7 @@ class DeliveryAddressData
      * @param string|null $firstName
      * @param string|null $lastName
      * @param string|null $telephone
-     * @param \Shopsys\ShopBundle\Model\Country\Country|null $country
+     * @param \Shopsys\FrameworkBundle\Model\Country\Country|null $country
      */
     public function __construct(
         $addressFilled = false,
@@ -85,7 +85,7 @@ class DeliveryAddressData
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
      */
     public function setFromEntity(DeliveryAddress $deliveryAddress = null)
     {

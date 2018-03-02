@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ShopBundle\Component\FlashMessage;
+namespace Shopsys\FrameworkBundle\Component\FlashMessage;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -30,7 +30,7 @@ class Bag
     {
         if (!is_string($bagName) || empty($bagName)) {
             $message = 'Bag name for messages must be non-empty string.';
-            throw new \Shopsys\ShopBundle\Component\FlashMessage\Exception\BagNameIsNotValidException($message);
+            throw new \Shopsys\FrameworkBundle\Component\FlashMessage\Exception\BagNameIsNotValidException($message);
         }
 
         $this->session = $session;
