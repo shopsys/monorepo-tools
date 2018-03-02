@@ -23,7 +23,7 @@ class LoginController extends FrontBaseController
 
     public function loginAction(Request $request)
     {
-        if ($this->isGranted(Roles::ROLE_CUSTOMER)) {
+        if ($this->isGranted(Roles::ROLE_LOGGED_CUSTOMER)) {
             return $this->redirectToRoute('front_homepage');
         }
 

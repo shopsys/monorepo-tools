@@ -148,7 +148,7 @@ Use `url()` Twig function to get the URL for the link by route name.
 
             <div class="header__top__right">
                 <ul class="menu-iconic">
-                    {% if is_granted('ROLE_CUSTOMER') %}
+                    {% if is_granted('ROLE_LOGGED_CUSTOMER') %}
                         <li class="menu-iconic__item">
 
                             {# ... #}

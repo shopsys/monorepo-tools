@@ -56,7 +56,7 @@ class CustomerController extends FrontBaseController
 
     public function editAction(Request $request)
     {
-        if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
+        if (!$this->isGranted(Roles::ROLE_LOGGED_CUSTOMER)) {
             $this->getFlashMessageSender()->addErrorFlash(t('You have to be logged in to enter this page'));
             return $this->redirectToRoute('front_login');
         }
@@ -90,7 +90,7 @@ class CustomerController extends FrontBaseController
 
     public function ordersAction()
     {
-        if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
+        if (!$this->isGranted(Roles::ROLE_LOGGED_CUSTOMER)) {
             $this->getFlashMessageSender()->addErrorFlash(t('You have to be logged in to enter this page'));
             return $this->redirectToRoute('front_login');
         }
@@ -127,7 +127,7 @@ class CustomerController extends FrontBaseController
     private function orderDetailAction($urlHash = null, $orderNumber = null)
     {
         if ($orderNumber !== null) {
-            if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
+            if (!$this->isGranted(Roles::ROLE_LOGGED_CUSTOMER)) {
                 $this->getFlashMessageSender()->addErrorFlash(t('You have to be logged in to enter this page'));
                 return $this->redirectToRoute('front_login');
             }

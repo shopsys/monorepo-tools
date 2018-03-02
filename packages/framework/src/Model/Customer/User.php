@@ -374,7 +374,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
      */
     public function getRoles()
     {
-        return [Roles::ROLE_CUSTOMER];
+        return [Roles::ROLE_LOGGED_CUSTOMER];
     }
 
     /**

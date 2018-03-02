@@ -179,7 +179,7 @@
         </div>
     </div>
 
-    {% if is_granted('ROLE_CUSTOMER') %}
+    {% if is_granted('ROLE_LOGGED_CUSTOMER') %}
         <a href="{{ url('front_customer_orders') }}" class="btn">{{ 'Back to orders overview'|trans }}</a>
     {% endif %}
 {% endblock %}
