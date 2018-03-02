@@ -20,8 +20,6 @@ parameters:
   shopsys.filemanager_upload_dir: '%shopsys.web_dir%/%shopsys.filemanager_upload_web_dir%'
   shopsys.filemanager_upload_web_dir: content/wysiwyg
   shopsys.framework.root_dir: '%shopsys.root_dir%/vendor/shopsys/framework'
-  shopsys.framework.resource_dir: "%shopsys.framework.root_dir%/src/Resources"
-  shopsys.framework.javascript_sources_dir: "%shopsys.framework.resource_dir%/scripts"
   shopsys.front_design_image_url_prefix: /assets/frontend/images/
   shopsys.image_config_filepath: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/images.yml'
   shopsys.image_dir: '%shopsys.web_dir%%shopsys.image_url_prefix%'

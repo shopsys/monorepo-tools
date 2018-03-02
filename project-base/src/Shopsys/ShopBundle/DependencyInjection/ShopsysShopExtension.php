@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\DependencyInjection;
 
-use Shopsys\Environment;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -17,11 +16,6 @@ class ShopsysShopExtension extends ConfigurableExtension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
-
-        if ($container->getParameter('kernel.environment') === Environment::ENVIRONMENT_TEST) {
-            $loader->load('services_test.yml');
-        }
-
         $container->setParameter('shopsys.router.locale_router_filepaths', $config['router']['locale_router_filepaths']);
         $container->setParameter('shopsys.router.friendly_url_router_filepath', $config['router']['friendly_url_router_filepath']);
     }

@@ -1,0 +1,3 @@
+parameters:
+  shopsys.framework.resource_dir: "%shopsys.framework.root_dir%/src/Resources"
+  shopsys.framework.javascript_sources_dir: "%shopsys.framework.resource_dir%/scripts"

@@ -1,9 +1,3 @@
 src/Shopsys/ShopBundle/Resources/scripts/frontend/plugins/**
 
-src/Shopsys/ShopBundle/Resources/scripts/common/plugins/**
-src/Shopsys/ShopBundle/Resources/scripts/common/bootstrap/**
-
-src/Shopsys/ShopBundle/Resources/scripts/admin/plugins/**
-src/Shopsys/ShopBundle/Resources/scripts/admin/components/jquery.dmuploader.js
-
 node_modules/**

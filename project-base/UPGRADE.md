@@ -1,6 +1,12 @@
 # Upgrading
 
 ## From 2.0.0-beta.21.0 to Unreleased
+- manual upgrade from this version will be very hard because of BC-breaking extraction of [shopsys/framework](https://github.com/shopsys/framework)
+    - at this moment the core is not easily extensible by your individual functionality
+    - before upgrading to the new architecture you should upgrade to Dockerized architecture of `2.0.0-beta.21.0`
+    - the upgrade will require overriding or extending of all classes now located in
+    [shopsys/framework](https://github.com/shopsys/framework) that you customized in your forked repository
+    - it would be wise to wait with the upgrade until the newly build architecture has matured
 
 ## From 2.0.0-beta.20.0 to 2.0.0-beta.21.0
 - do not longer use Phing targets standards-ci and standards-ci-diff, use standards and standards-diff instead

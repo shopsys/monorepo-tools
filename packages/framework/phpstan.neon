@@ -1,0 +1,6 @@
+parameters:
+    ignoreErrors:
+        # Ignoring absence of \Shopsys\Environment, which should be provided by project implementation
+        - '~Class Shopsys\\Environment not found~'
+        # Ignoring absence of \AppKernel, which should be provided by project implementation
+        - '~Instantiated class AppKernel not found~'

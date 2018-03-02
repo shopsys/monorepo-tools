@@ -1,8 +1,3 @@
 shopsys_shop_front:
   resource: "@ShopsysShopBundle/Resources/config/routing_front.yml"
   prefix: /
-
-shopsys_framework_admin:
-  resource: "@ShopsysFrameworkBundle/Controller"
-  prefix: /admin
-  type: annotation

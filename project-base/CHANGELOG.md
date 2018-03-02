@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - `JavascriptCompilerService` can now compile javascript from more than one source directory (@MattCzerner)
     - the compiler supports subdirectory `common` in addition to `admin` and  `frontend`
+- **the core functionality was extracted to a separate repository [shopsys/framework](https://github.com/shopsys/framework)** (@MattCzerner)
+    - this will allow the core to be upgraded via `composer update` in different project implementations
+    - core functionality includes:
+        - all Shopsys-specific Symfony commands
+        - model and components with business logic and their data fixtures
+        - Symfony controllers with form definitions, Twig templates and all javascripts of the web-based administration
+        - custom form types, form extensions and twig extensions
+        - compiler passes to allow basic extensibility with plugins (eg. product feeds)
+    - this is going to be a base of a newly built architecture of [Shopsys Framework](http://www.shopsys-framework.com/)
+    - translations are extracted from both this repository and the framework package during `phing dump-translations`
+        - this is because the translations are located solely in this package
 
 ## 2.0.0-beta.21.0 - 2018-03-05
 ### Added
