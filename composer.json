@@ -54,12 +54,14 @@
   "autoload-dev": {
     "psr-4": {
       "Tests\\": [
-        "packages/http-smoke-testing/tests/",
         "packages/product-feed-google/tests/",
         "packages/product-feed-zbozi/tests/",
         "packages/product-feed-heureka/tests/",
         "packages/product-feed-heureka-delivery/tests/",
         "project-base/tests/"
+      ],
+      "Tests\\Shopsys\\HttpSmokeTesting\\": [
+        "packages/http-smoke-testing/tests/"
       ]
     }
   },
