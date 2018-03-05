@@ -69,6 +69,6 @@ class FlagInlineEdit extends AbstractGridInlineEdit
      */
     public function getServiceName()
     {
-        return 'shopsys.shop.product.flag.flag_inline_edit';
+        return self::class;
     }
 }
