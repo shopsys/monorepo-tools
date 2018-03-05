@@ -1,6 +1,8 @@
 # Upgrading
 
-## From 2.0.0-beta.20.0 to Unreleased
+## From 2.0.0-beta.21.0 to Unreleased
+
+## From 2.0.0-beta.20.0 to 2.0.0-beta.21.0
 - do not longer use Phing targets standards-ci and standards-ci-diff, use standards and standards-diff instead
 
 ## From 2.0.0-beta.17.0 to 2.0.0-beta.18.0
