@@ -63,7 +63,7 @@ class ProductSearchRepository
 
         $productQueryBuilder->setParameter(
             'searchTextLikeWithWildcardsOnBothSides',
-            '%' . DatabaseSearching::getLikeSearchString($searchText) . '%'
+            DatabaseSearching::getFullTextLikeSearchString($searchText)
         );
 
         $productQueryBuilder->setParameter(

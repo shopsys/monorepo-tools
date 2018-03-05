@@ -57,7 +57,7 @@ class ProductPartnoFilter implements AdvancedSearchFilterInterface
                 if ($ruleData->value === null) {
                     $searchValue = '%';
                 } else {
-                    $searchValue = '%' . DatabaseSearching::getLikeSearchString($ruleData->value) . '%';
+                    $searchValue = DatabaseSearching::getFullTextLikeSearchString($ruleData->value);
                 }
 
                 $dqlOperator = $this->getContainsDqlOperator($ruleData->operator);

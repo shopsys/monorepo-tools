@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [docker-troubleshooting.md](docs/docker/docker-troubleshooting.md): added to help developers with common problems that occurs using docker for development(@MattCzerner)
 - Newsletter subscriber is distinguished by domain (@stanoMilan)
     - Admin: E-mail newsletter now exports e-mails to csv for each domain separatedly
+- DatabaseSearching: added getFullTextLikeSearchString() (@MattCzerner)
+- admin: E-mail newsletter: now contains list of registered e-mails with ability to delete them
 
 ### Changed
 - cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)
@@ -59,6 +61,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - all calls of Form::isValid() are called only on submitted forms in order to prevent deprecated call (@TomasLudvik)
 - symlink so root/bin acts like root/project-base/bin (@TomasLudvik) 
 - all commands are now services, that are lazy loaded with autowired dependencies (@TomasLudvik) 
+- NewsletterFacadeTest: renamed properties to match class name (@MattCzerner)
 
 ### Fixed
 - `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)

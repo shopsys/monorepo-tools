@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Database\Model\Newsletter;
+namespace Tests\ShopBundle\Database\Model\Newsletter\Subscriber;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\Assert;

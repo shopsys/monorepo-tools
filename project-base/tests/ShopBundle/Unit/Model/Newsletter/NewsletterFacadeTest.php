@@ -19,19 +19,19 @@ class NewsletterFacadeTest extends TestCase
     /**
      * @var NewsletterRepository|PHPUnit_Framework_MockObject_MockObject
      */
-    private $repository;
+    private $newsletterRepository;
 
     /**
      * @var NewsletterFacade
      */
-    private $facade;
+    private $newsletterFacade;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->em = $this->createMock(EntityManager::class);
-        $this->repository = $this->createMock(NewsletterRepository::class);
-        $this->facade = new NewsletterFacade($this->em, $this->repository);
+        $this->newsletterRepository = $this->createMock(NewsletterRepository::class);
+        $this->newsletterFacade = new NewsletterFacade($this->em, $this->newsletterRepository);
     }
 
     public function testAddSubscribedEmail(): void
@@ -45,6 +45,27 @@ class NewsletterFacadeTest extends TestCase
             ->expects($this->once())
             ->method('flush');
 
-        $this->facade->addSubscribedEmail('no-reply@shopsys.com', 1);
+        $this->newsletterFacade->addSubscribedEmail('no-reply@shopsys.com', 1);
+    }
+
+    public function testDeleteSubscribedEmail(): void
+    {
+        $newsletterSubscriberInstance = $this->createMock(NewsletterSubscriber::class);
+
+        $this->newsletterRepository
+            ->expects($this->any())
+            ->method('getNewsletterSubscriberById')
+            ->willReturn($newsletterSubscriberInstance);
+
+        $this->em
+            ->expects($this->once())
+            ->method('remove')
+            ->with($this->isInstanceOf(NewsletterSubscriber::class));
+
+        $this->em
+            ->expects($this->once())
+            ->method('flush');
+
+        $this->newsletterFacade->deleteById(1);
     }
 }

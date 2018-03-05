@@ -71,7 +71,7 @@ class ProductListAdminRepository
                     OR
                     NORMALIZE(p.partno) LIKE NORMALIZE(:text)
                 )');
-            $querySearchText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
+            $querySearchText = DatabaseSearching::getFullTextLikeSearchString($quickSearchData->text);
             $queryBuilder->setParameter('text', $querySearchText);
         }
     }

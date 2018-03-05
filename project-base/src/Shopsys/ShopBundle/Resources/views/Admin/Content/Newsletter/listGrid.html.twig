@@ -1,0 +1,10 @@
+{% extends '@ShopsysShop/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_no_data %}
+    {{ 'No subsribers found.'|trans }}
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+    {% set entityName = 'subscribers'|trans %}
+    {{ parent() }}
+{% endblock %}
