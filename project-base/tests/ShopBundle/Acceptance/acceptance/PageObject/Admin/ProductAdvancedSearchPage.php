@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Acceptance\acceptance\PageObject\Admin;
 
 use Facebook\WebDriver\WebDriverBy;
+use PHPUnit\Framework\Assert;
 use Tests\ShopBundle\Acceptance\acceptance\PageObject\AbstractPage;
 
 class ProductAdvancedSearchPage extends AbstractPage
@@ -40,9 +41,7 @@ class ProductAdvancedSearchPage extends AbstractPage
     {
         $foundProductCount = $this->tester->countVisibleByCss('tbody .table-grid__row');
 
-        if ($foundProductCount !== $expectedCount) {
-            $message = 'Product advanced search expected to found ' . $expectedCount . ' products but found ' . $foundProductCount . '.';
-            throw new \PHPUnit_Framework_ExpectationFailedException($message);
-        }
+        $message = 'Product advanced search expected to found ' . $expectedCount . ' products but found ' . $foundProductCount . '.';
+        Assert::assertSame($expectedCount, $foundProductCount, $message);
     }
 }
