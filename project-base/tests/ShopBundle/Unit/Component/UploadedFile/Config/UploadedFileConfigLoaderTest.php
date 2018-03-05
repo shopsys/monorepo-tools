@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Component\UploadedFile\Config;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfigLoader;
 use Symfony\Component\Filesystem\Filesystem;
 use Tests\ShopBundle\Unit\Component\UploadedFile\Dummy;
 
-class UploadedFileConfigLoaderTest extends PHPUnit_Framework_TestCase
+class UploadedFileConfigLoaderTest extends TestCase
 {
     public function testLoadFromYaml()
     {

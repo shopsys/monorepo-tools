@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Model\Cart;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
-class CartTest extends PHPUnit_Framework_TestCase
+class CartTest extends TestCase
 {
     public function testGetItemsCountZero()
     {

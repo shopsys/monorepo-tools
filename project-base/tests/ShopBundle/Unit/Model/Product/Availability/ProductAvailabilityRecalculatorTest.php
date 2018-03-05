@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalc
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
-class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase
+class ProductAvailabilityRecalculatorTest extends TestCase
 {
     public function testRunImmediatelyRecalculations()
     {

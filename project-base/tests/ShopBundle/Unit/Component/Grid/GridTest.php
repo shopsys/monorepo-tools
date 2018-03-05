@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Component\Grid;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Grid\DataSourceInterface;
 use Shopsys\FrameworkBundle\Component\Grid\Grid;
 use Shopsys\FrameworkBundle\Component\Grid\GridView;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
 
-class GridTest extends PHPUnit_Framework_TestCase
+class GridTest extends TestCase
 {
     public function testGetParametersFromRequest()
     {

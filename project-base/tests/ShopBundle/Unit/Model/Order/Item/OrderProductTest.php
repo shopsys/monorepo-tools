@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Model\Order\Item;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Order;
@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
-class OrderProductTest extends PHPUnit_Framework_TestCase
+class OrderProductTest extends TestCase
 {
     public function testEditWithProduct()
     {

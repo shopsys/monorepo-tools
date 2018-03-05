@@ -230,7 +230,7 @@ class HeurekaFeedTest extends TestCase
      * @param int $domainId
      * @param string $url
      * @param string $locale
-     * @return \Shopsys\ProductFeed\DomainConfigInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return \Shopsys\ProductFeed\DomainConfigInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function createDomainConfigMock($domainId, $url, $locale)
     {

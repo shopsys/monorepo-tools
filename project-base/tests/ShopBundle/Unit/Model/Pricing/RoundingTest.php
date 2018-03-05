@@ -2,11 +2,11 @@
 
 namespace Tests\ShopBundle\Unit\Model\Pricing;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
 
-class RoundingTest extends PHPUnit_Framework_TestCase
+class RoundingTest extends TestCase
 {
     public function roundingProvider()
     {

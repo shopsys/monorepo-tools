@@ -2,14 +2,14 @@
 
 namespace Tests\ShopBundle\Unit\Component\HttpFoundation;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\HttpFoundation\SubRequestListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class SubRequestListenerTest extends PHPUnit_Framework_TestCase
+class SubRequestListenerTest extends TestCase
 {
     /**
      * @param bool $redirect
@@ -103,7 +103,7 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase
         $masterRequestMock = $this->getMockBuilder(Request::class)
             ->setMethods(['getMethod'])
             ->getMock();
-        /* @var $masterRequestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
+        /* @var $masterRequestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit\Framework\MockObject\MockObject */
         $masterRequestMock->expects($this->once())->method('getMethod')->will($this->returnValue('POST'));
         $masterRequestMock->query->replace([
             'key1' => 'value1',
@@ -114,7 +114,7 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase
         $subRequestMock = $this->getMockBuilder(Request::class)
             ->setMethods(['setMethod'])
             ->getMock();
-        /* @var $subRequestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
+        /* @var $subRequestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit\Framework\MockObject\MockObject */
         $subRequestMock->expects($this->once())->method('setMethod')->with($this->equalTo('POST'));
         $subRequestMock->query->replace([
             'key2' => 'value2_2',

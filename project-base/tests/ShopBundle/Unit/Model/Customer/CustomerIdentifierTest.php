@@ -2,11 +2,11 @@
 
 namespace Tests\ShopBundle\Unit\Model\Customer;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Customer\Exception\EmptyCustomerIdentifierException;
 
-class CustomerIdentifierTest extends PHPUnit_Framework_TestCase
+class CustomerIdentifierTest extends TestCase
 {
     public function testCannotCreateIdentifierForEmptyCartIdentifierAndNullUser()
     {

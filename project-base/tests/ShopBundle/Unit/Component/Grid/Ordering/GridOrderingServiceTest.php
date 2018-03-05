@@ -2,11 +2,11 @@
 
 namespace Tests\ShopBundle\Unit\Component\Grid\Ordering;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Grid\Ordering\GridOrderingService;
 use Shopsys\FrameworkBundle\Component\Grid\Ordering\OrderableEntityInterface;
 
-class GridOrderingServiceTest extends PHPUnit_Framework_TestCase
+class GridOrderingServiceTest extends TestCase
 {
     public function testSetPositionNull()
     {

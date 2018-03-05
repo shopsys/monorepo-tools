@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
@@ -16,7 +16,7 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductService;
 
-class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase
+class ProductPriceRecalculatorTest extends TestCase
 {
     public function testRunImmediatelyRecalculations()
     {

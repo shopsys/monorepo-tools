@@ -3,12 +3,12 @@
 namespace Tests\ShopBundle\Unit\Component\Setting;
 
 use DateTime;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Setting\Exception\InvalidArgumentException;
 use Shopsys\FrameworkBundle\Component\Setting\SettingValue;
 use stdClass;
 
-class SettingValueTest extends PHPUnit_Framework_TestCase
+class SettingValueTest extends TestCase
 {
     public function editProvider()
     {

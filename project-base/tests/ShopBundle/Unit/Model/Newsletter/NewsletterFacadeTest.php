@@ -3,8 +3,8 @@
 namespace Tests\ShopBundle\Unit\Model\Newsletter;
 
 use Doctrine\ORM\EntityManager;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriber;
@@ -12,12 +12,12 @@ use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriber;
 class NewsletterFacadeTest extends TestCase
 {
     /**
-     * @var EntityManager|PHPUnit_Framework_MockObject_MockObject
+     * @var EntityManager|MockObject
      */
     private $em;
 
     /**
-     * @var NewsletterRepository|PHPUnit_Framework_MockObject_MockObject
+     * @var NewsletterRepository|MockObject
      */
     private $newsletterRepository;
 

@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Component\Transformers;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Transformers\ScriptPlacementToBooleanTransformer;
 use Shopsys\FrameworkBundle\Model\Script\Script;
 use stdClass;
 
-class ScriptPlacementToBooleanTransformerTest extends PHPUnit_Framework_TestCase
+class ScriptPlacementToBooleanTransformerTest extends TestCase
 {
     public function testTransform()
     {

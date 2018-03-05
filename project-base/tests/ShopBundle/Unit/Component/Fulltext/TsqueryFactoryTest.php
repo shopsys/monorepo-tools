@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Unit\Component\Fulltext;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Fulltext\TsqueryFactory;
 
-class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
+class TsqueryFactoryTest extends TestCase
 {
     /**
      * @dataProvider getIsValidSearchTextData

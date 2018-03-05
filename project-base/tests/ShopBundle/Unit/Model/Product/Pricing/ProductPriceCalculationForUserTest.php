@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Model\Product\Pricing;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
@@ -17,7 +17,7 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
-class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase
+class ProductPriceCalculationForUserTest extends TestCase
 {
     public function testCalculatePriceByUserAndDomainIdWithUser()
     {

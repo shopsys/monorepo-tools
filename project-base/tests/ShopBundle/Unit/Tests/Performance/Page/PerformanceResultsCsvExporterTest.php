@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Tests\Performance\Page;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tests\ShopBundle\Performance\JmeterCsvReporter;
 use Tests\ShopBundle\Performance\Page\PerformanceResultsCsvExporter;
 use Tests\ShopBundle\Performance\Page\PerformanceTestSample;
 
-class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase
+class PerformanceResultsCsvExporterTest extends TestCase
 {
     public function testExportJmeterCsvReportWritesExpectedHeader()
     {

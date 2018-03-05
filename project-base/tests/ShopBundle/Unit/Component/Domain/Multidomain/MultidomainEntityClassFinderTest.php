@@ -3,10 +3,10 @@
 namespace Tests\ShopBundle\Unit\Component\Domain\Multidomain;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder;
 
-class MultidomainEntityClassFinderTest extends PHPUnit_Framework_TestCase
+class MultidomainEntityClassFinderTest extends TestCase
 {
     public function testGetMultidomainEntitiesNames()
     {

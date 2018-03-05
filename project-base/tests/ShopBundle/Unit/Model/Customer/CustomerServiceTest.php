@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Model\Customer;
 
 use DateTime;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Country\Country;
 use Shopsys\FrameworkBundle\Model\Country\CountryData;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
@@ -23,7 +23,7 @@ use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 
-class CustomerServiceTest extends PHPUnit_Framework_TestCase
+class CustomerServiceTest extends TestCase
 {
     public function testCreate()
     {

@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Model\Order;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
@@ -16,7 +16,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
 
-class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
+class OrderPriceCalculationTest extends TestCase
 {
     public function testGetOrderTotalPrice()
     {

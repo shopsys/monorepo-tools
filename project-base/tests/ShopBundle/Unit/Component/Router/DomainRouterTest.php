@@ -2,13 +2,13 @@
 
 namespace Tests\ShopBundle\Unit\Component\Router;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouter;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
-class DomainRouterTest extends PHPUnit_Framework_TestCase
+class DomainRouterTest extends TestCase
 {
     public function testGetRouter()
     {

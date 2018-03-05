@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Component\Transformers;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Transformers\ProductIdToProductTransformer;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
-class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase
+class ProductIdToProductTransformerTest extends TestCase
 {
     public function testTransform()
     {

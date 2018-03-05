@@ -5,12 +5,13 @@ namespace Tests\ShopBundle\Unit\Component\Translation;
 use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser;
 use Shopsys\FrameworkBundle\Component\Javascript\Parser\JsStringParser;
 use Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory;
 use Shopsys\FrameworkBundle\Component\Translation\JsFileExtractor;
 
-class JsFileExtractorTest extends \PHPUnit_Framework_TestCase
+class JsFileExtractorTest extends TestCase
 {
     public function testExtract()
     {

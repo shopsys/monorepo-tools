@@ -2,11 +2,11 @@
 
 namespace Tests\ShopBundle\Unit\Component\Cron;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Cron\CronModuleExecutor;
 use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
 
-class CronModuleExecutorTest extends PHPUnit_Framework_TestCase
+class CronModuleExecutorTest extends TestCase
 {
     public function testRunModuleSuspendAfterTimeout()
     {

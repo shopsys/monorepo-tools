@@ -2,11 +2,11 @@
 
 namespace Tests\ShopBundle\Unit\Model\Pricing;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 
-class InputPriceCalculationTest extends PHPUnit_Framework_TestCase
+class InputPriceCalculationTest extends TestCase
 {
     /**
      * @dataProvider getInputPriceDataProvider

@@ -3,14 +3,14 @@
 namespace Tests\ShopBundle\Unit\Component\DataFixture;
 
 use Doctrine\ORM\EntityManager;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReference;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceRepository;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use stdClass;
 
-class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
+class PersistentReferenceFacadeTest extends TestCase
 {
     public function testCannotPersistReferenceToEntityWithoutGetIdMethod()
     {

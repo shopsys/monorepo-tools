@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Component\Router;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\CurrentDomainRouter;
@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
-class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase
+class CurrentDomainRouterTest extends TestCase
 {
     public function testDelegateRouter()
     {

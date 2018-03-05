@@ -10,10 +10,10 @@ use Doctrine\DBAL\Schema\Sequence;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\TableDiff;
 use Doctrine\DBAL\Types\Type;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ShopSys\MigrationBundle\Component\Doctrine\SchemaDiffFilter;
 
-class SchemaDiffFilterTest extends PHPUnit_Framework_TestCase
+class SchemaDiffFilterTest extends TestCase
 {
     public function testGetFilteredSchemaDiff()
     {

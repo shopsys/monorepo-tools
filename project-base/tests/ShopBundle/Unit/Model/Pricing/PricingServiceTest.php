@@ -2,11 +2,11 @@
 
 namespace Tests\ShopBundle\Unit\Model\Pricing;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingService;
 
-class PricingServiceTest extends PHPUnit_Framework_TestCase
+class PricingServiceTest extends TestCase
 {
     /**
      * @dataProvider getMinimumPriceProvider

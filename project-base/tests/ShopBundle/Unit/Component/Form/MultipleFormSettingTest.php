@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Unit\Component\Form;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Form\MultipleFormSetting;
 
-class MultipleFormSettingTest extends PHPUnit_Framework_TestCase
+class MultipleFormSettingTest extends TestCase
 {
     public function testCurrentFormIsMultiple()
     {

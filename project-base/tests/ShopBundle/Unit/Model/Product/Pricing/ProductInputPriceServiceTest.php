@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Model\Product\Pricing;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -16,7 +16,7 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
-class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
+class ProductInputPriceServiceTest extends TestCase
 {
     public function testGetManualInputPricesDataWithManualCalculationType()
     {

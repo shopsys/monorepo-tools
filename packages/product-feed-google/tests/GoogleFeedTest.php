@@ -28,7 +28,7 @@ class GoogleFeedTest extends TestCase
     private $googleFeedConfig;
 
     /**
-     * @var \Shopsys\Plugin\DataStorageInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Shopsys\Plugin\DataStorageInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $productDataStorageMock;
 

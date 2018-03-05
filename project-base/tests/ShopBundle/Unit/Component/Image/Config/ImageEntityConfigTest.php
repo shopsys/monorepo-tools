@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Component\Image\Config;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Image\Config\Exception\ImageTypeNotFoundException;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig;
 
-class ImageEntityConfigTest extends PHPUnit_Framework_TestCase
+class ImageEntityConfigTest extends TestCase
 {
     public function testGetTypeSizes()
     {

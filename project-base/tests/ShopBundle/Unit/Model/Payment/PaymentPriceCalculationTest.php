@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Model\Payment;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
@@ -16,7 +16,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 
-class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase
+class PaymentPriceCalculationTest extends TestCase
 {
     public function calculateIndependentPriceProvider()
     {

@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Model\Product;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
@@ -14,7 +14,7 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductService;
 
-class ProductServiceTest extends PHPUnit_Framework_TestCase
+class ProductServiceTest extends TestCase
 {
     public function testEditSchedulesPriceRecalculation()
     {

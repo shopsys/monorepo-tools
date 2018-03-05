@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Model\Pricing\Vat;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatService;
 
-class VatServiceTest extends PHPUnit_Framework_TestCase
+class VatServiceTest extends TestCase
 {
     public function testCreate()
     {

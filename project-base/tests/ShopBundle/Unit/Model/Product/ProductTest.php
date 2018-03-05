@@ -2,11 +2,11 @@
 
 namespace Tests\ShopBundle\Unit\Model\Product;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
-class ProductTest extends PHPUnit_Framework_TestCase
+class ProductTest extends TestCase
 {
     public function testNoVariant()
     {

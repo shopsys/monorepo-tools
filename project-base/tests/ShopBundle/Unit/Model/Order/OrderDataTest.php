@@ -2,11 +2,11 @@
 
 namespace Tests\ShopBundle\Unit\Model\Order;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\OrderData;
 
-class OrderDataTest extends PHPUnit_Framework_TestCase
+class OrderDataTest extends TestCase
 {
     public function testGetNewItemsWithoutTransportAndPayment()
     {

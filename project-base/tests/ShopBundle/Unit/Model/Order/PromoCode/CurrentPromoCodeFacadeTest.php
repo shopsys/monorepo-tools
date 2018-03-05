@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Model\Order\PromoCode;
 
 use Doctrine\ORM\EntityManager;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeData;
@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
+class CurrentPromoCodeFacadeTest extends TestCase
 {
     public function testGetEnteredPromoCode()
     {

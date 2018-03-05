@@ -3,12 +3,12 @@
 namespace Tests\ShopBundle\Unit\Twig\FileThumbnail;
 
 use Intervention\Image\Image;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\Image\Processing\ImageThumbnailFactory;
 use Shopsys\FrameworkBundle\Twig\FileThumbnail\FileThumbnailExtension;
 
-class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase
+class FileThumbnailExtensionTest extends TestCase
 {
     public function testGetFileThumbnailInfoByTemporaryFilenameBrokenImage()
     {

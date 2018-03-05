@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Model\Customer;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Customer\User;
@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class CurrentCustomerTest extends PHPUnit_Framework_TestCase
+class CurrentCustomerTest extends TestCase
 {
     public function testGetPricingGroupForUnregisteredCustomerReturnsDefaultPricingGroup()
     {
@@ -44,7 +44,7 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $defaultPricingGroup
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
     private function getPricingGroupSettingFacadeMockReturningDefaultPricingGroup(PricingGroup $defaultPricingGroup)
     {
@@ -75,7 +75,7 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
      */
     private function getTokenStorageMockForUser(User $user)
     {

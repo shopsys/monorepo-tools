@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatService;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use stdClass;
 
-class VatFacadeTest extends PHPUnit_Framework_TestCase
+class VatFacadeTest extends TestCase
 {
     public function testGetDefaultVat()
     {

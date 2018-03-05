@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Unit\Model\Pricing;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
-class PriceTest extends PHPUnit_Framework_TestCase
+class PriceTest extends TestCase
 {
     public function testAdd()
     {

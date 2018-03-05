@@ -3,12 +3,12 @@
 namespace Tests\ShopBundle\Unit\Component\Form;
 
 use DateTime;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Form\FormTimeProvider;
 use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class FormTimeProviderTest extends PHPUnit_Framework_TestCase
+class FormTimeProviderTest extends TestCase
 {
     public function isFormTimeValidProvider()
     {
