@@ -464,7 +464,7 @@ msgstr "Zpět na přehled objednávek"
 msgid "Back to overview"
 msgstr "Zpět na přehled"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:122
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:127
 msgid "Back to shipping and payment selection"
 msgstr "Zpět na výběr dopravy a platby"
 
@@ -1415,6 +1415,10 @@ msgstr "Opravdu chcete odstranit tento skript?"
 msgid "Do you really want to remove this shipping?"
 msgstr "Opravdu chcete odstranit tuto dopravu?"
 
+#: NewsletterController.php:66
+msgid "Do you really want to remove this subscriber?"
+msgstr "Opravdu chcete odstranit tohoto příjemnce newsletteru?"
+
 #: UnitController.php:88
 msgid "Do you really want to remove unit \"%name%\" permanently? It is not used anywhere."
 msgstr "Opravdu si přejete trvale odstranit jednotku \"%name%\"? Nikde není použita."
@@ -1507,8 +1511,8 @@ msgid "E-mail name"
 msgstr "Jméno k emailu"
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/index.html.twig:3
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/index.html.twig:4
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/list.html.twig:3
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/list.html.twig:4
 msgid "E-mail newsletter"
 msgstr "Emaily zpravodaje"
 
@@ -1764,7 +1768,7 @@ msgstr "Chybové hlášky"
 msgid "Error occurred"
 msgstr "Nastala chyba"
 
-#: ContactFormController.php:67
+#: ContactFormController.php:64
 msgid "Error occurred when sending e-mail."
 msgstr "Nastala chyba při odesílání mailu."
 
@@ -1802,7 +1806,7 @@ msgstr "Bez DPH"
 msgid "Existing icon"
 msgstr "Současná ikona"
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/index.html.twig:8
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/list.html.twig:20
 msgid "Export email list in CSV format"
 msgstr "Exportovat seznam emailů jako CSV"
 
@@ -1859,7 +1863,7 @@ msgstr "Filtrovat podle"
 msgid "Finish the assigning"
 msgstr "Dokončit přiřazování"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:117
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:122
 msgid "Finish the order"
 msgstr "Dokončit objednávku"
 
@@ -2100,12 +2104,18 @@ msgid "I agree with <a href=\"%termsAndConditionsUrl%\" target=\"_blank\">terms 
 msgstr "Souhlasím s <a href=\"%termsAndConditionsUrl%\" target=\"_blank\">obchodními podmínkami</a> a zpracováním osobních údajů."
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:14
+msgid "I agree with <a href=\"%url%\" target=\"_blank\">privacy policy agreement</a>."
+msgstr "Souhlasím se <a href=\"%url%\" target=\"_blank\">zpracováním osobních údajů</a>."
+
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:36
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Newsletter/subscription.html.twig:25
 msgid "I agree with <a href=\"%url%\" target=\"_blank\">privacy policy</a>."
 msgstr "Souhlasím se <a href=\"%url%\" target=\"_blank\">zpracováním osobních údajů</a>."
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:24
+msgid "I agree with privacy policy agreement."
+msgstr "Souhlasím se zpracováním osobních údajů."
+
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:38
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Newsletter/subscription.html.twig:27
 msgid "I agree with privacy policy."
@@ -2135,7 +2145,7 @@ msgstr "Rozumím"
 msgid "I want to deliver products to different address than the billing one"
 msgstr "Zboží chci doručit na jinou adresu než fakturační"
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:105
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:110
 msgid "I want to subscribe to the newsletter"
 msgstr "Chci se přihlásit k odběru newsletteru"
 
@@ -2460,7 +2470,7 @@ msgstr "Právní podmínky"
 msgid "Legal conditions settings"
 msgstr "Nastavení právních podmínek"
 
-#: LegalConditionsController.php:77
+#: LegalConditionsController.php:55
 msgid "Legal conditions settings modified."
 msgstr "Nastavení právních podmínek upravené"
 
@@ -2979,6 +2989,10 @@ msgstr "Doposud nejsou žádné skripty."
 msgid "No shipping created so far."
 msgstr "Doposud nebyly vytvořeny žádné dopravy."
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/listGrid.html.twig:4
+msgid "No subscribers found."
+msgstr "Doposud se nikdo nepřihlásil k odběru newsletteru."
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Unit/listGrid.html.twig:4
 msgid "No units found. You have to create some first."
 msgstr "Nebyly nalezeny žádné jednotky. Nejprve musíte nějaké vytvořit."
@@ -3362,15 +3376,15 @@ msgstr "Prosím překontrolujte následující informace:"
 #: CustomerController.php:83
 #: CustomerController.php:139
 #: CustomerController.php:237
-#: LegalConditionsController.php:82
+#: LegalConditionsController.php:60
 #: MailController.php:150
 #: OrderController.php:141
-#: OrderController.php:235
+#: OrderController.php:226
 #: PaymentController.php:91
 #: PaymentController.php:127
 #: ProductController.php:162
 #: ProductController.php:212
-#: RegistrationController.php:84
+#: RegistrationController.php:83
 #: SeoController.php:61
 #: ShopInfoController.php:61
 #: SliderController.php:110
@@ -3835,6 +3849,7 @@ msgid "Search [noun]"
 msgstr "Hledání"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/list.html.twig:19
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/list.html.twig:12
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/AdvancedSearch/advancedSearch.html.twig:7
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/quickSearchFormContent.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig:7
@@ -3980,6 +3995,10 @@ msgstr "Zvolený skript neexistuje"
 #: TransportController.php:158
 msgid "Selected shipping doesn't exist."
 msgstr "Zvolená doprava neexistuje."
+
+#: NewsletterController.php:98
+msgid "Selected subscriber doesn't exist."
+msgstr "Zvolený odběratel newsletteru neexistuje"
 
 #: UnitController.php:96
 msgid "Selected unit doesn't exist"
@@ -4251,6 +4270,14 @@ msgstr "Ulice"
 msgid "Subject"
 msgstr "Předmět"
 
+#: NewsletterController.php:63
+msgid "Subscribed at"
+msgstr "Datum přihlášení k odběru"
+
+#: NewsletterController.php:92
+msgid "Subscriber <strong>{{ email }}</strong> deleted"
+msgstr "Odběratel newsletteru <strong>{{ email }}</strong> byl smazán"
+
 #: fileUpload.js:116
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Form/fileuploadFields.html.twig:51
 msgid "Successfully uploaded"
@@ -4459,7 +4486,7 @@ msgstr "Tel. číslo"
 msgid "Terms and conditions"
 msgstr "Obchodní podmínky"
 
-#: LegalConditionsFacade.php:76
+#: LegalConditionsFacade.php:60
 msgid "Terms-and-conditions.html"
 msgstr "Obchodní-podmínky.html"
 
@@ -4492,7 +4519,7 @@ msgstr "Modifikace velikostí textarea"
 msgid "Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
 msgstr "Textarea roztáhnutá na celou šířku. V tomhletom případě nemusíme použít form-line__item, protože je prvek na 100% šířku."
 
-#: ContactFormController.php:65
+#: ContactFormController.php:62
 msgid "Thank you, your message has been sent."
 msgstr "Děkujeme, váš vzkaz byl odeslán."
 
@@ -4509,11 +4536,11 @@ msgstr "Změna se u zboží projeví do 10 minut"
 msgid "The link to change your password expired."
 msgstr "Platnost odkazu pro změnu hesla vypršela."
 
-#: OrderController.php:323
+#: OrderController.php:308
 msgid "The price of payment {{ transportName }} changed during ordering process. Check your order, please."
 msgstr "V průběhu objednávkového procesu byla změněna cena platby {{ paymentName }}. Prosím, překontrolujte si objednávku."
 
-#: OrderController.php:315
+#: OrderController.php:300
 msgid "The price of shipping {{ transportName }} changed during ordering process. Check your order, please."
 msgstr "V průběhu objednávkového procesu byla změněna cena dopravy {{ transportName }}. Prosím, překontrolujte si objednávku."
 
@@ -4749,7 +4776,7 @@ msgstr "Nepodařilo se odstranit položku z košíku. Nejspíš je již odstran�
 msgid "Unable to remove item from cart. The link for removing it probably expired, try it again."
 msgstr "Nepodařilo se odstranit položku z košíku. Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou."
 
-#: OrderController.php:224
+#: OrderController.php:215
 msgid "Unable to send some e-mails, please contact us for order verification."
 msgstr "Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte."
 
@@ -5096,7 +5123,7 @@ msgstr "Nelze vybrat zboží, které je hlavní variantou"
 msgid "You cannot choose product that is variant"
 msgstr "Nelze vybrat zboží, které je variantou"
 
-#: RegistrationController.php:79
+#: RegistrationController.php:78
 msgid "You have been successfully registered."
 msgstr "Byli jste úspěšně zaregistrováni"
 
@@ -5399,6 +5426,10 @@ msgstr "jednoduchý checkbox"
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:835
 msgid "simple checkbox can be ordered consecutively"
 msgstr "jednoduchý checkbox lze skládat za sebe"
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/listGrid.html.twig:8
+msgid "subscribers"
+msgstr "odběratelé newsletteru"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:53
 msgid "two dash \"--\" represent modification of component"
