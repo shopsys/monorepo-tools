@@ -10,11 +10,14 @@ class DatabaseSearching
      */
     public static function getLikeSearchString($string)
     {
-        return str_replace(
+        // LIKE pattern must not end with escape character in Postgres
+        $string = rtrim($string, '\\');
+        $string = str_replace(
             ['%', '_', '*', '?'],
             ['\%', '\_', '%', '_'],
             $string
         );
+        return $string;
     }
 
     /**

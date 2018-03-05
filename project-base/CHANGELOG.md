@@ -98,6 +98,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - added missing migration for privacy policy article (@MattCzerner)
 - OrderStatusFilter: show names in labels instead of ids (@simara-svatopluk)
 - legal conditions text in order 3rd step is not HTML escaped anymore (@vitek-rostislav)  
+- product search now does not cause 500 error when the search string ends with backslash
 
 ### Removed
 - PHPStorm Inspect is no longer used for static analysis of source code (@TomasLudvik)
