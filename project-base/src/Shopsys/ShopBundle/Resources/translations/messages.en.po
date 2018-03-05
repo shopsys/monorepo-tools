@@ -464,7 +464,7 @@ msgstr ""
 msgid "Back to overview"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:122
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:127
 msgid "Back to shipping and payment selection"
 msgstr ""
 
@@ -1415,6 +1415,10 @@ msgstr ""
 msgid "Do you really want to remove this shipping?"
 msgstr ""
 
+#: NewsletterController.php:66
+msgid "Do you really want to remove this subscriber?"
+msgstr ""
+
 #: UnitController.php:88
 msgid "Do you really want to remove unit \"%name%\" permanently? It is not used anywhere."
 msgstr ""
@@ -1507,8 +1511,8 @@ msgid "E-mail name"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/config/admin_menu.yml:
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/index.html.twig:3
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/index.html.twig:4
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/list.html.twig:3
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/list.html.twig:4
 msgid "E-mail newsletter"
 msgstr ""
 
@@ -1764,7 +1768,7 @@ msgstr ""
 msgid "Error occurred"
 msgstr ""
 
-#: ContactFormController.php:67
+#: ContactFormController.php:64
 msgid "Error occurred when sending e-mail."
 msgstr ""
 
@@ -1802,7 +1806,7 @@ msgstr ""
 msgid "Existing icon"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/index.html.twig:8
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/list.html.twig:20
 msgid "Export email list in CSV format"
 msgstr ""
 
@@ -1859,7 +1863,7 @@ msgstr ""
 msgid "Finish the assigning"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:117
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:122
 msgid "Finish the order"
 msgstr ""
 
@@ -2100,12 +2104,18 @@ msgid "I agree with <a href=\"%termsAndConditionsUrl%\" target=\"_blank\">terms 
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:14
+msgid "I agree with <a href=\"%url%\" target=\"_blank\">privacy policy agreement</a>."
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:36
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Newsletter/subscription.html.twig:25
 msgid "I agree with <a href=\"%url%\" target=\"_blank\">privacy policy</a>."
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/ContactForm/contactForm.html.twig:24
+msgid "I agree with privacy policy agreement."
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Front/Content/Registration/register.html.twig:38
 #: src/Shopsys/ShopBundle/Resources/views/Front/Inline/Newsletter/subscription.html.twig:27
 msgid "I agree with privacy policy."
@@ -2135,7 +2145,7 @@ msgstr ""
 msgid "I want to deliver products to different address than the billing one"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:105
+#: src/Shopsys/ShopBundle/Resources/views/Front/Content/Order/step3.html.twig:110
 msgid "I want to subscribe to the newsletter"
 msgstr ""
 
@@ -2460,7 +2470,7 @@ msgstr ""
 msgid "Legal conditions settings"
 msgstr ""
 
-#: LegalConditionsController.php:77
+#: LegalConditionsController.php:55
 msgid "Legal conditions settings modified."
 msgstr ""
 
@@ -2979,6 +2989,10 @@ msgstr ""
 msgid "No shipping created so far."
 msgstr ""
 
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/listGrid.html.twig:4
+msgid "No subscribers found."
+msgstr ""
+
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Unit/listGrid.html.twig:4
 msgid "No units found. You have to create some first."
 msgstr ""
@@ -3362,15 +3376,15 @@ msgstr ""
 #: CustomerController.php:83
 #: CustomerController.php:139
 #: CustomerController.php:237
-#: LegalConditionsController.php:82
+#: LegalConditionsController.php:60
 #: MailController.php:150
 #: OrderController.php:141
-#: OrderController.php:235
+#: OrderController.php:226
 #: PaymentController.php:91
 #: PaymentController.php:127
 #: ProductController.php:162
 #: ProductController.php:212
-#: RegistrationController.php:84
+#: RegistrationController.php:83
 #: SeoController.php:61
 #: ShopInfoController.php:61
 #: SliderController.php:110
@@ -3835,6 +3849,7 @@ msgid "Search [noun]"
 msgstr "Search"
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Customer/list.html.twig:19
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/list.html.twig:12
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/AdvancedSearch/advancedSearch.html.twig:7
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Order/quickSearchFormContent.html.twig:4
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig:7
@@ -3979,6 +3994,10 @@ msgstr ""
 
 #: TransportController.php:158
 msgid "Selected shipping doesn't exist."
+msgstr ""
+
+#: NewsletterController.php:98
+msgid "Selected subscriber doesn't exist."
 msgstr ""
 
 #: UnitController.php:96
@@ -4251,6 +4270,14 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
+#: NewsletterController.php:63
+msgid "Subscribed at"
+msgstr ""
+
+#: NewsletterController.php:92
+msgid "Subscriber <strong>{{ email }}</strong> deleted"
+msgstr ""
+
 #: fileUpload.js:116
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Form/fileuploadFields.html.twig:51
 msgid "Successfully uploaded"
@@ -4459,7 +4486,7 @@ msgstr ""
 msgid "Terms and conditions"
 msgstr ""
 
-#: LegalConditionsFacade.php:76
+#: LegalConditionsFacade.php:60
 msgid "Terms-and-conditions.html"
 msgstr ""
 
@@ -4492,7 +4519,7 @@ msgstr ""
 msgid "Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
 msgstr ""
 
-#: ContactFormController.php:65
+#: ContactFormController.php:62
 msgid "Thank you, your message has been sent."
 msgstr ""
 
@@ -4509,11 +4536,11 @@ msgstr ""
 msgid "The link to change your password expired."
 msgstr ""
 
-#: OrderController.php:323
+#: OrderController.php:308
 msgid "The price of payment {{ transportName }} changed during ordering process. Check your order, please."
 msgstr ""
 
-#: OrderController.php:315
+#: OrderController.php:300
 msgid "The price of shipping {{ transportName }} changed during ordering process. Check your order, please."
 msgstr ""
 
@@ -4749,7 +4776,7 @@ msgstr ""
 msgid "Unable to remove item from cart. The link for removing it probably expired, try it again."
 msgstr ""
 
-#: OrderController.php:224
+#: OrderController.php:215
 msgid "Unable to send some e-mails, please contact us for order verification."
 msgstr ""
 
@@ -5096,7 +5123,7 @@ msgstr ""
 msgid "You cannot choose product that is variant"
 msgstr ""
 
-#: RegistrationController.php:79
+#: RegistrationController.php:78
 msgid "You have been successfully registered."
 msgstr ""
 
@@ -5398,6 +5425,10 @@ msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:835
 msgid "simple checkbox can be ordered consecutively"
+msgstr ""
+
+#: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Newsletter/listGrid.html.twig:8
+msgid "subscribers"
 msgstr ""
 
 #: src/Shopsys/ShopBundle/Resources/views/Admin/Content/Superadmin/cssDocumentation.html.twig:53
