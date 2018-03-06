@@ -1,0 +1,28 @@
+{% extends '@ShopsysFramework/Admin/Content/Slider/detail.html.twig' %}
+
+{% block title %}- {{ 'Editing slider page'|trans }} - {{ sliderItem.name }}{% endblock %}
+{% block h1 %}{{ 'Editing slider page'|trans }} - {{ sliderItem.name }}{% endblock %}
+
+{% block domain %}
+    {% if isMultidomain() %}
+        <div class="form-line">
+            <label class="form-line__label">{{ 'Domain'|trans }}:</label>
+            <div class="form-line__side">
+                <div class="form-line__item">
+                    <input type="text" value="{{ getDomainName(sliderItem.domainId) }}" class="input" readonly="readonly" />
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block image %}
+    <div class="form-line">
+        <label class="form-line__label">
+            {{ 'Image'|trans }}:
+        </label>
+        <div class="form-line__line">
+            {{ image(sliderItem, { size: 'original', height: 100 }) }}
+        </div>
+    </div>
+{% endblock %}

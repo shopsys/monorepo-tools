@@ -1,0 +1,19 @@
+{% extends '@ShopsysFramework/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_no_data %}
+    {{ 'No parameters found. You have to create some first.'|trans }}
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+    {% set entityName = 'parameters'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block grid_inline_edit_add_button %}
+    {% set addEntity = 'Create parameter'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block grid_value_cell_id_visible %}
+    {{ block('grid_value_cell_type_boolean') }}
+{% endblock %}

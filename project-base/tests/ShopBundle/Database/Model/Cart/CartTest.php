@@ -2,16 +2,16 @@
 
 namespace Tests\ShopBundle\Database\Model\Cart;
 
-use Shopsys\ShopBundle\DataFixtures\Base\UnitDataFixture;
-use Shopsys\ShopBundle\Model\Cart\Cart;
-use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Product\Availability\Availability;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture;
+use Shopsys\FrameworkBundle\Model\Cart\Cart;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class CartTest extends DatabaseTestCase

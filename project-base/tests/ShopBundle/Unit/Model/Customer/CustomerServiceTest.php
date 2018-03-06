@@ -4,24 +4,24 @@ namespace Tests\ShopBundle\Unit\Model\Customer;
 
 use DateTime;
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Country\Country;
-use Shopsys\ShopBundle\Model\Country\CountryData;
-use Shopsys\ShopBundle\Model\Customer\BillingAddress;
-use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
-use Shopsys\ShopBundle\Model\Customer\CustomerPasswordService;
-use Shopsys\ShopBundle\Model\Customer\CustomerService;
-use Shopsys\ShopBundle\Model\Customer\DeliveryAddress;
-use Shopsys\ShopBundle\Model\Customer\DeliveryAddressData;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Customer\UserData;
-use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Order\OrderData;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
-use Shopsys\ShopBundle\Model\Payment\Payment;
-use Shopsys\ShopBundle\Model\Payment\PaymentData;
-use Shopsys\ShopBundle\Model\Transport\Transport;
-use Shopsys\ShopBundle\Model\Transport\TransportData;
+use Shopsys\FrameworkBundle\Model\Country\Country;
+use Shopsys\FrameworkBundle\Model\Country\CountryData;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerService;
+use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress;
+use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Customer\UserData;
+use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Order\OrderData;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
+use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 
 class CustomerServiceTest extends PHPUnit_Framework_TestCase
 {
@@ -114,7 +114,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
         $userData2->email = 'no-reply@netdevelo.cz';
         $userData2->password = 'pa55w0rd';
 
-        $this->expectException(\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException::class);
         $customerService->create(
             $userData2,
             $billingAddress2,
@@ -151,7 +151,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
         $userData2->email = 'NO-reply@netdevelo.cz';
         $userData2->password = 'pa55w0rd';
 
-        $this->expectException(\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException::class);
         $customerService->create(
             $userData2,
             $billingAddress2,
@@ -326,7 +326,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\Customer\CustomerService
+     * @return \Shopsys\FrameworkBundle\Model\Customer\CustomerService
      */
     private function getCustomerService()
     {
@@ -336,8 +336,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\BillingAddressData|null $billingAddressData
-     * @return \Shopsys\ShopBundle\Model\Customer\BillingAddress
+     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressData|null $billingAddressData
+     * @return \Shopsys\FrameworkBundle\Model\Customer\BillingAddress
      */
     private function createBillingAddress(BillingAddressData $billingAddressData = null)
     {
@@ -349,8 +349,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData|null $deliveryAddressData
-     * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData|null $deliveryAddressData
+     * @return \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress
      */
     private function createDeliveryAddress(DeliveryAddressData $deliveryAddressData = null)
     {

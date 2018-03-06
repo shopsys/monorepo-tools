@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Component\String;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\String\EncodingConverter;
+use Shopsys\FrameworkBundle\Component\String\EncodingConverter;
 use stdClass;
 
 class EncodingConverterTest extends PHPUnit_Framework_TestCase

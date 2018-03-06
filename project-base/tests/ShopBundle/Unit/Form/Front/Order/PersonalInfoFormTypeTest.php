@@ -2,9 +2,9 @@
 
 namespace Tests\ShopBundle\Unit\Form\Front\Order;
 
+use Shopsys\FrameworkBundle\Model\Country\Country;
+use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType;
-use Shopsys\ShopBundle\Model\Country\Country;
-use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;

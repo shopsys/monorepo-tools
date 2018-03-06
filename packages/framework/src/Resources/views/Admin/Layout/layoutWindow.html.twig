@@ -1,0 +1,12 @@
+{% extends '@ShopsysFramework/Admin/Layout/base.html.twig' %}
+
+{% block html_body %}
+    <div class="window-content">
+        <div class="window-content__heading">
+            {% block heading %}{% endblock %}
+        </div>
+        <div class="window-content__in">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Shopsys\FrameworkBundle\Component\Domain\DomainFactory:
+    class: Shopsys\FrameworkBundle\Component\Domain\DomainFactoryOverwritingDomainUrl
+    public: true
+    arguments:
+      - '%overwrite_domain_url%'

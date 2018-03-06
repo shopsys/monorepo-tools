@@ -3,11 +3,11 @@
 namespace Tests\ShopBundle\Unit\Model\Product\BestsellingProduct;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductService;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductService;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
 class BestsellingProductServiceTest extends PHPUnit_Framework_TestCase
 {

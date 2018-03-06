@@ -3,8 +3,8 @@
 namespace Shopsys\ShopBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
+use Shopsys\FrameworkBundle\Component\Migration\MultidomainMigrationTrait;
 use ShopSys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;
-use Shopsys\ShopBundle\Component\Migration\MultidomainMigrationTrait;
 
 class Version20170530101845 extends AbstractMigration
 {

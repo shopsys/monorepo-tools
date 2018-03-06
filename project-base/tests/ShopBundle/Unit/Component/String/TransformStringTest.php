@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Component\String;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\String\TransformString;
+use Shopsys\FrameworkBundle\Component\String\TransformString;
 
 class TransformStringTest extends PHPUnit_Framework_TestCase
 {

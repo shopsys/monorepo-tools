@@ -3,11 +3,11 @@
 namespace Tests\ShopBundle\Unit\Component\Image;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
-use Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig;
-use Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig;
-use Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator;
-use Shopsys\ShopBundle\Component\Image\ImageLocator;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig;
+use Shopsys\FrameworkBundle\Component\Image\DirectoryStructureCreator;
+use Shopsys\FrameworkBundle\Component\Image\ImageLocator;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase

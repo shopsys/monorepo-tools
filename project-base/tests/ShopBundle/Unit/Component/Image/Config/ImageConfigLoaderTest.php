@@ -3,19 +3,19 @@
 namespace Tests\ShopBundle\Unit\Component\Image\Config;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Image\Config\Exception\DuplicateEntityNameException;
-use Shopsys\ShopBundle\Component\Image\Config\Exception\DuplicateSizeNameException;
-use Shopsys\ShopBundle\Component\Image\Config\Exception\DuplicateTypeNameException;
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfigDefinition;
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfigLoader;
-use Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig;
+use Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateEntityNameException;
+use Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateSizeNameException;
+use Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateTypeNameException;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigDefinition;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigLoader;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfigLoader
+     * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigLoader
      */
     private $imageConfigLoader;
 
@@ -47,7 +47,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
         $previousException = null;
         try {
             $this->imageConfigLoader->loadFromArray($inputConfig);
-        } catch (\Shopsys\ShopBundle\Component\Image\Config\Exception\EntityParseException $exception) {
+        } catch (\Shopsys\FrameworkBundle\Component\Image\Config\Exception\EntityParseException $exception) {
             $previousException = $exception->getPrevious();
         }
 
@@ -76,7 +76,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
         $previousException = null;
         try {
             $this->imageConfigLoader->loadFromArray($inputConfig);
-        } catch (\Shopsys\ShopBundle\Component\Image\Config\Exception\EntityParseException $exception) {
+        } catch (\Shopsys\FrameworkBundle\Component\Image\Config\Exception\EntityParseException $exception) {
             $previousException = $exception->getPrevious();
         }
 
@@ -113,7 +113,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
         $previousException = null;
         try {
             $this->imageConfigLoader->loadFromArray($inputConfig);
-        } catch (\Shopsys\ShopBundle\Component\Image\Config\Exception\EntityParseException $exception) {
+        } catch (\Shopsys\FrameworkBundle\Component\Image\Config\Exception\EntityParseException $exception) {
             $previousException = $exception->getPrevious();
         }
 
@@ -145,7 +145,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
         $previousException = null;
         try {
             $this->imageConfigLoader->loadFromArray($inputConfig);
-        } catch (\Shopsys\ShopBundle\Component\Image\Config\Exception\EntityParseException $exception) {
+        } catch (\Shopsys\FrameworkBundle\Component\Image\Config\Exception\EntityParseException $exception) {
             $previousException = $exception->getPrevious();
         }
 

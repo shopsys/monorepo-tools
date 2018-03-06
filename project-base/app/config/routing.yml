@@ -1,6 +1,9 @@
 shopsys_shop:
   resource: "@ShopsysShopBundle/Resources/config/routing.yml"
   prefix: /
+
+shopsys_framework:
+  resource: "@ShopsysFrameworkBundle/Resources/config/routing.yml"
   
 elfinder:
   resource: "@FMElfinderBundle/Resources/config/routing.yml"

@@ -1,0 +1,34 @@
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Orders overview'|trans }}{% endblock %}
+{% block h1 %}{{ 'Orders overview'|trans }}{% endblock %}
+
+{% block main_content %}
+    <div class="in-tab js-tabs">
+        <div class="in-tab__heading">
+            <a href="#"
+                class="in-tab__heading__item js-tabs-button {{ not isAdvancedSearchFormSubmitted ? 'active' }}"
+                data-tab-id="quick"
+            >
+                {{ 'Quick search'|trans }}
+            </a>
+            <a href="#"
+                class="in-tab__heading__item js-tabs-button {{ isAdvancedSearchFormSubmitted ? ' active' }}"
+                data-tab-id="advanced"
+            >
+                {{ 'Advanced search'|trans }}
+            </a>
+        </div>
+        <div class="in-tab__content">
+            <div class="in-tab__content__in js-tabs-content" data-tab-id="quick">
+                {% include '@ShopsysFramework/Admin/Content/Order/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+            </div>
+            <div class="in-tab__content__in js-tabs-content" data-tab-id="advanced">
+                {% include '@ShopsysFramework/Admin/Content/Order/AdvancedSearch/advancedSearch.html.twig'
+                    with {advancedSearchForm: advancedSearchForm}
+                %}
+            </div>
+        </div>
+    </div>
+    {{ gridView.render() }}
+{% endblock %}

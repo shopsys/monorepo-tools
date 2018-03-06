@@ -58,7 +58,7 @@ This is the preferred way because when you clone a repository, you create a loca
 
 *Note: Forking, on the other hand, is creating a copy of the repository on the server side under your GitHub ID.
 That means that your copy of the repository would be also public by default which is probably not what you want
-(but it is a great way to [make a pull request](/CONTRIBUTING.md)).*
+(but it is a great way to [make a pull request](../../CONTRIBUTING.md)).*
 
 ### Upgrading
 We know that upgrading should be as easy as possible, ideally without requiring any modification of your code.
@@ -69,8 +69,8 @@ as the project’s every customization has to work well with every new release.
 So far, there is no automated way of upgrading the core.
 You need to [cherry-pick](https://git-scm.com/docs/git-cherry-pick) or [merge](https://git-scm.com/docs/git-merge) modifications from the original repository manually.
 We try to ease you the process as much as possible by maintaining clear GIT history,
-keeping up-to-date [changelog](/CHANGELOG.md) and [upgrading instructions](/UPGRADE.md),
-and writing [understandable commit messages](/docs/contributing/guidelines-for-creating-commits.md).
+keeping up-to-date [changelog](../../CHANGELOG.md) and [upgrading instructions](../../UPGRADE.md),
+and writing [understandable commit messages](../../docs/contributing/guidelines-for-creating-commits.md).
 
 #### Plugins and components
 As mentioned above, plugins and components provide glass-box extensibility,

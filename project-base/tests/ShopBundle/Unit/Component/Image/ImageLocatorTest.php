@@ -3,17 +3,17 @@
 namespace Tests\ShopBundle\Unit\Component\Image;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfigDefinition;
-use Shopsys\ShopBundle\Component\Image\Config\ImageConfigLoader;
-use Shopsys\ShopBundle\Component\Image\ImageLocator;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigDefinition;
+use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigLoader;
+use Shopsys\FrameworkBundle\Component\Image\ImageLocator;
 use stdClass;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImageLocatorTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @return \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
+     * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     private function getBaseImageConfig()
@@ -123,19 +123,19 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase
                 'NonexistentName',
                 null,
                 null,
-                \Shopsys\ShopBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException::class,
+                \Shopsys\FrameworkBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException::class,
             ],
             [
                 'Name_1',
                 'NonexistentTypeName',
                 null,
-                \Shopsys\ShopBundle\Component\Image\Config\Exception\ImageTypeNotFoundException::class,
+                \Shopsys\FrameworkBundle\Component\Image\Config\Exception\ImageTypeNotFoundException::class,
             ],
             [
                 'Name_1',
                 null,
                 'NonexistentSizeName',
-                \Shopsys\ShopBundle\Component\Image\Config\Exception\ImageSizeNotFoundException::class,
+                \Shopsys\FrameworkBundle\Component\Image\Config\Exception\ImageSizeNotFoundException::class,
             ],
         ];
     }

@@ -2,8 +2,8 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Product;
 
-use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
+use Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData;
+use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ParameterFilterFormType extends AbstractType implements DataTransformerInterface
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
+     * @var \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterChoice[]
      */
     private $parameterChoicesIndexedByParameterId;
 
@@ -24,7 +24,7 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $config = $options['product_filter_config'];
-        /* @var $config \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig */
+        /* @var $config \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig */
 
         $this->parameterChoicesIndexedByParameterId = [];
         foreach ($config->getParameterChoices() as $parameterChoice) {
@@ -61,8 +61,8 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[][]|null $value
-     * @return \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData[]|null
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[][]|null $value
+     * @return \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData[]|null
      */
     public function reverseTransform($value)
     {
@@ -86,8 +86,8 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData[]|null $value
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[][]|null
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData[]|null $value
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[][]|null
      */
     public function transform($value)
     {

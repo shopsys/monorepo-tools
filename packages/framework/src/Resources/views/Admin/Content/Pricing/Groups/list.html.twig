@@ -1,0 +1,12 @@
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Pricing groups'|trans }}{% endblock %}
+{% block h1 %}{{ 'Pricing groups'|trans }}{% endblock %}
+
+{% block main_content %}
+    {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
+
+    {{ render(controller('ShopsysFrameworkBundle:Admin/PricingGroup:settings')) }}
+
+    {{ gridView.render() }}
+{% endblock %}

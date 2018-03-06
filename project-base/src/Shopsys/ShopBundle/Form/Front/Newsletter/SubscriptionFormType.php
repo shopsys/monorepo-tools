@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Newsletter;
 
-use Shopsys\ShopBundle\Component\Constraints\Email;
-use Shopsys\ShopBundle\Form\HoneyPotType;
-use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
+use Shopsys\FrameworkBundle\Component\Constraints\Email;
+use Shopsys\FrameworkBundle\Form\HoneyPotType;
+use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;

@@ -5,10 +5,10 @@ namespace Tests\ShopBundle\Unit\Component\Translation;
 use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
-use Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
-use Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser;
-use Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory;
-use Shopsys\ShopBundle\Component\Translation\JsFileExtractor;
+use Shopsys\FrameworkBundle\Component\Javascript\Parser\JsFunctionCallParser;
+use Shopsys\FrameworkBundle\Component\Javascript\Parser\JsStringParser;
+use Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory;
+use Shopsys\FrameworkBundle\Component\Translation\JsFileExtractor;
 
 class JsFileExtractorTest extends \PHPUnit_Framework_TestCase
 {

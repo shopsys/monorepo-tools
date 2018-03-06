@@ -2,8 +2,8 @@
 
 namespace Tests\ShopBundle\Unit\Form\Admin\AdvancedSearch;
 
-use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
-use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
+use Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class AdvancedSearchOperatorTranslationTest extends FunctionalTestCase
@@ -11,12 +11,12 @@ class AdvancedSearchOperatorTranslationTest extends FunctionalTestCase
     public function testTranslateOperator()
     {
         $productAdvancedSearchConfig = $this->getServiceByType(ProductAdvancedSearchConfig::class);
-        /* @var $productAdvancedSearchConfig \Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig */
+        /* @var $productAdvancedSearchConfig \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig */
         $orderAdvancedSearchConfig = $this->getServiceByType(ProductAdvancedSearchConfig::class);
-        /* @var $orderAdvancedSearchConfig \Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig */
+        /* @var $orderAdvancedSearchConfig \Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig */
 
         $advancedSearchOperatorTranslation = $this->getServiceByType(AdvancedSearchOperatorTranslation::class);
-        /* @var $advancedSearchOperatorTranslation \Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation */
+        /* @var $advancedSearchOperatorTranslation \Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation */
 
         $operators = [];
         foreach ($productAdvancedSearchConfig->getAllFilters() as $filter) {
@@ -35,7 +35,7 @@ class AdvancedSearchOperatorTranslationTest extends FunctionalTestCase
     {
         $advancedSearchTranslator = new AdvancedSearchOperatorTranslation();
 
-        $this->expectException(\Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
         $advancedSearchTranslator->translateOperator('nonexistingOperator');
     }
 }

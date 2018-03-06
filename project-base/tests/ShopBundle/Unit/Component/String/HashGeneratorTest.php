@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Component\String;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\String\HashGenerator;
+use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 
 class HashGeneratorTest extends PHPUnit_Framework_TestCase
 {

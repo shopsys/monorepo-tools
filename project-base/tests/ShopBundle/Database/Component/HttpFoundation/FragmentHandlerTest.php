@@ -19,7 +19,7 @@ class FragmentHandlerTest extends DatabaseTestCase
 
         $this->expectException(\Shopsys\ShopBundle\Controller\Test\ExpectedTestException::class);
 
-        /** This should call @see \Shopsys\ShopBundle\Component\HttpFoundation\FragmentHandler::render() */
+        /** This should call @see \Shopsys\FrameworkBundle\Component\HttpFoundation\FragmentHandler::render() */
         $httpKernelRuntime->renderFragment('/test/error-handler/exception');
     }
 

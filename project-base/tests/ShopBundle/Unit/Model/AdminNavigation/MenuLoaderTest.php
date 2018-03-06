@@ -2,9 +2,9 @@
 
 namespace Tests\ShopBundle\Unit\Model\AdminNavigation;
 
-use Shopsys\ShopBundle\Component\Translation\Translator;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader;
+use Shopsys\FrameworkBundle\Component\Translation\Translator;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuLoader;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class MenuLoaderTest extends FunctionalTestCase
@@ -76,12 +76,12 @@ class MenuLoaderTest extends FunctionalTestCase
 
         $menuLoader = $this->getMenuLoaderWithMockedTranslator();
 
-        $this->expectException(\Shopsys\ShopBundle\Model\AdminNavigation\Exception\MissingSettingsItemException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Model\AdminNavigation\Exception\MissingSettingsItemException::class);
         $menuLoader->loadFromArray($testMenu);
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuLoader
      */
     private function getMenuLoaderWithMockedTranslator()
     {

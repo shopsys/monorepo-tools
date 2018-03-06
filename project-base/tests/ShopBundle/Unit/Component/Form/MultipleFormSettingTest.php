@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Component\Form;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Form\MultipleFormSetting;
+use Shopsys\FrameworkBundle\Component\Form\MultipleFormSetting;
 
 class MultipleFormSettingTest extends PHPUnit_Framework_TestCase
 {

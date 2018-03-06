@@ -4,7 +4,7 @@ namespace Tests\ShopBundle\Database\Model\Newsletter\Subscriber;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\Assert;
-use Shopsys\ShopBundle\Model\Newsletter\NewsletterSubscriber;
+use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriber;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class NewsletterSubscriberPersistenceTest extends DatabaseTestCase

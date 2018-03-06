@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Component\String;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\String\DatabaseSearching;
+use Shopsys\FrameworkBundle\Component\String\DatabaseSearching;
 
 class DatabaseSearchingTest extends PHPUnit_Framework_TestCase
 {

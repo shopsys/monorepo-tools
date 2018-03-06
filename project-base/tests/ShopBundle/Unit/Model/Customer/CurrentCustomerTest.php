@@ -3,13 +3,13 @@
 namespace Tests\ShopBundle\Unit\Model\Customer;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Customer\BillingAddress;
-use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Customer\UserData;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
+use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Customer\UserData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
@@ -43,8 +43,8 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $defaultPricingGroup
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $defaultPricingGroup
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
     private function getPricingGroupSettingFacadeMockReturningDefaultPricingGroup(PricingGroup $defaultPricingGroup)
     {
@@ -61,8 +61,8 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\ShopBundle\Model\Customer\User
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
     private function getUserWithPricingGroup(PricingGroup $pricingGroup)
     {
@@ -74,7 +74,7 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
      * @return \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
      */
     private function getTokenStorageMockForUser(User $user)

@@ -3,16 +3,16 @@
 namespace Tests\ShopBundle\Unit\Model\Product;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductData;
-use Shopsys\ShopBundle\Model\Product\ProductService;
+use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Product\ProductService;
 
 class ProductServiceTest extends PHPUnit_Framework_TestCase
 {

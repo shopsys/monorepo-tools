@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Component\Translation;
 
 use JMS\TranslationBundle\Annotation\Ignore;
-use Shopsys\ShopBundle\Component\Translation\Translator;
+use Shopsys\FrameworkBundle\Component\Translation\Translator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
 
 class Controller extends BaseController
@@ -11,7 +11,7 @@ class Controller extends BaseController
     public function indexAction()
     {
         $translator = $this->get(Translator::class);
-        /* @var $translator \Shopsys\ShopBundle\Component\Translation\Translator */
+        /* @var $translator \Shopsys\FrameworkBundle\Component\Translation\Translator */
 
         $translator->trans('trans test');
         $translator->transChoice('transChoice test', 5);

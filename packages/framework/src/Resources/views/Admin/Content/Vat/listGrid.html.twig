@@ -1,0 +1,85 @@
+{% extends '@ShopsysFramework/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_value_cell_edit_id_percent %}
+    <span class="form-edit-block form-edit-block--size-0">
+        {% form_theme form '@ShopsysFramework/Admin/Form/theme.html.twig' %}
+        {{ form_widget(form.percent) }}
+        <span class="form-edit-block__info">
+            %
+            {% if row is not null %}
+                <span
+                    title="{{ 'Rate can\'t be modified. It is necessary to create new rate, remove existing one and replace it with new one.'|trans }}"
+                    class="js-tooltip table-action cursor-help in-action-icons__item"
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                >
+                    <i class="svg svg-info"></i>
+                </span>
+            {% endif %}
+        </span>
+    </span>
+{% endblock %}
+
+{% block grid_value_cell_id_name %}
+    {% if row.vat.markedAsDeleted %}
+        <span class="text-muted">
+            {{ value }}
+            <span
+                title="{{ 'VAT rate is marked for deleting and will be soon automatically removed. Conversion rate is several hundreds of products in 5 minutes.'|trans }}"
+                class="js-tooltip table-action cursor-help"
+                data-toggle="tooltip"
+                data-placement="right"
+            >
+                <i class="svg svg-warning"></i>
+            </span>
+        </span>
+    {% else %}
+        {{ value }}
+    {% endif %}
+{% endblock %}
+
+{% block grid_action_cell %}
+    {% if row.vat.markedAsDeleted %}
+        <span
+            title="{{ 'VAT rate is marked for deleting and will be soon automatically removed. Conversion rate is several hundreds of products in 5 minutes.'|trans }}"
+            class="js-tooltip table-action cursor-help text-muted"
+            data-toggle="tooltip"
+            data-placement="bottom"
+        >
+            <i class="svg svg-trash"></i>
+        </span>
+    {% elseif row.asReplacementCount > 0 %}
+        <span
+            title="{{ 'VAT rate can\'t be removed because it is being currently used for conversion to this VAT rate'|trans }}"
+            class="js-tooltip table-action cursor-help text-muted"
+            data-toggle="tooltip"
+            data-placement="bottom"
+        >
+            <i class="svg svg-trash"></i>
+        </span>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block grid_value_cell_id_percent %}
+    {{ value|formatPercent }}
+{% endblock %}
+
+{% block grid_value_cell_id_coefficient %}
+    {{ row.coefficient|formatNumber }}
+{% endblock %}
+
+{% block grid_no_data %}
+    {{ 'No VAT rate found. You have to create some first.'|trans }}
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+    {% set entityName = 'VAT rates'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block grid_inline_edit_add_button %}
+    {% set addEntity = 'Create VAT rate'|trans %}
+    {{ parent() }}
+{% endblock %}

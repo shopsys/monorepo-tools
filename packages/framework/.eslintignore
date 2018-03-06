@@ -1,0 +1,5 @@
+src/Resources/scripts/admin/plugins/**
+src/Resources/scripts/admin/components/jquery.dmuploader.js
+
+src/Resources/scripts/common/plugins/**
+src/Resources/scripts/common/bootstrap/**

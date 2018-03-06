@@ -5,9 +5,9 @@ namespace Tests\ShopBundle\Unit\Model\Newsletter;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
-use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
-use Shopsys\ShopBundle\Model\Newsletter\NewsletterRepository;
-use Shopsys\ShopBundle\Model\Newsletter\NewsletterSubscriber;
+use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade;
+use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository;
+use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriber;
 
 class NewsletterFacadeTest extends TestCase
 {

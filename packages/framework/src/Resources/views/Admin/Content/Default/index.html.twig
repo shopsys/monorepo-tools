@@ -1,0 +1,23 @@
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Dashboard'|trans }}{% endblock %}
+{% block h1 %}{{ 'Dashboard'|trans }}{% endblock %}
+
+{% block main_content %}
+	<div class="width-50-percent float-left">
+		<canvas
+			class="js-line-chart"
+			data-chart-labels="{{ newOrdersInLastTwoWeeksLabels|json_encode }}"
+			data-chart-values="{{ newOrdersInLastTwoWeeksValues|json_encode }}"
+			data-chart-title="{{ 'New orders'|trans }}"
+		></canvas>
+	</div>
+	<div class="width-50-percent float-left">
+		<canvas
+			class="js-line-chart"
+			data-chart-labels="{{ registeredInLastTwoWeeksLabels|json_encode }}"
+			data-chart-values="{{ registeredInLastTwoWeeksValues|json_encode }}"
+			data-chart-title="{{ 'New registered customers'|trans }}"
+		></canvas>
+	</div>
+{% endblock %}

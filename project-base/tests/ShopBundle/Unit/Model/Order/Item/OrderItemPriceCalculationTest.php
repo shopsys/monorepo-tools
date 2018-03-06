@@ -3,10 +3,10 @@
 namespace Tests\ShopBundle\Unit\Model\Order\Item;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
 
 class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase
 {

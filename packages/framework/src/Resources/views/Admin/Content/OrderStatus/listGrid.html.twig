@@ -1,0 +1,39 @@
+{% extends '@ShopsysFramework/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_action_cell_type_delete %}
+    {% if row.os.type == TYPE_NEW %}
+        <span title="{{ 'This status can\'t be deleted. This is automatically assigned status to all new orders.'|trans }}"
+            class="js-tooltip cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
+        >
+            <i class="svg svg-info"></i>
+        </span>
+    {% elseif row.os.type == TYPE_DONE %}
+        <span title="{{ 'This status can\'t be deleted, because there is a functionality bounded to it - it identifies orders that were successfully processed.'|trans }}"
+            class="js-tooltip cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
+        >
+            <i class="svg svg-info"></i>
+        </span>
+    {% elseif row.os.type == TYPE_CANCELED %}
+        <span title="{{ 'This status can\'t be deleted, because there is a functionality bounded to it - it identifies orders that were not successfully processed.'|trans }}"
+            class="js-tooltip cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
+        >
+            <i class="svg svg-info"></i>
+        </span>
+    {% else %}
+        {{ gridView.renderBlock('grid_action_cell', {actionColumn: actionColumn, row: row}) }}
+    {% endif %}
+{% endblock %}
+
+{% block grid_no_data %}
+    {{ 'No orders status found.'|trans }}
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+    {% set entityName = 'order statuses'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block grid_inline_edit_add_button %}
+    {% set addEntity = 'Create new order status'|trans %}
+    {{ parent() }}
+{% endblock %}

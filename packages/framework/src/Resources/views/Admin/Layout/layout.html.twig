@@ -1,0 +1,31 @@
+{% extends '@ShopsysFramework/Admin/Layout/base.html.twig' %}
+
+{% block html_body %}
+    {% if isMailerSettingUnusual() %}
+        <div class="window-fixed-bar window-fixed-bar--top window-fixed-bar--type-alert">
+            <div class="window-fixed-bar__in">
+                <div class="window-fixed-bar__item">
+                    <div class="window-fixed-bar__item__cell">
+                        {{ getMailerSettingInfo() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="web {% if isMailerSettingUnusual() %} web--with-info {% endif %}">
+        {% block header %}
+            <header class="web__header">
+                <div class="web__header__in">
+                    {{ render(controller('ShopsysFrameworkBundle:Admin/Menu:menu', {
+                        route: app.request.get('_route'),
+                        parameters: app.request.attributes.get('_route_params')
+                    } )) }}
+                </div>
+            </header>
+        {% endblock %}
+
+        {% block content %}{% endblock %}
+
+        {% block footer %}{% endblock %}
+    </div>
+{% endblock %}

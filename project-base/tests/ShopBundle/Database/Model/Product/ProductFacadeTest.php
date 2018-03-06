@@ -3,15 +3,15 @@
 namespace Tests\ShopBundle\Database\Model\Product;
 
 use ReflectionClass;
-use Shopsys\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Base\UnitDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductData;
-use Shopsys\ShopBundle\Model\Product\ProductEditData;
-use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductFacade;
+use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
+use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class ProductFacadeTest extends DatabaseTestCase
@@ -41,12 +41,12 @@ class ProductFacadeTest extends DatabaseTestCase
         $productEditData = new ProductEditData($productData);
 
         $productFacade = $this->getServiceByType(ProductFacade::class);
-        /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
+        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
         $product = $productFacade->create($productEditData);
 
         $entityManagerFacade = $this->getEntityManagerFacade();
-        /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
+        /* @var $entityManagerFacade \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade */
 
         $entityManagerFacade->clear();
 
@@ -116,11 +116,11 @@ class ProductFacadeTest extends DatabaseTestCase
     public function testEditMarkProductForVisibilityRecalculation()
     {
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-        /* @var $product \Shopsys\ShopBundle\Model\Product\Product */
+        /* @var $product \Shopsys\FrameworkBundle\Model\Product\Product */
         $productFacade = $this->getServiceByType(ProductFacade::class);
-        /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
+        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
         $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
+        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
 
         $reflectionClass = new ReflectionClass(Product::class);
         $reflectionPropertyRecalculateVisibility = $reflectionClass->getProperty('recalculateVisibility');

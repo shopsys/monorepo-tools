@@ -5,13 +5,13 @@ namespace Tests\ShopBundle\Unit\Component\Cron;
 use DateTime;
 use PHPUnit\Framework\Assert;
 use PHPUnit_Framework_TestCase;
+use Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig;
+use Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig;
+use Shopsys\FrameworkBundle\Component\Cron\CronFacade;
+use Shopsys\FrameworkBundle\Component\Cron\CronModuleFacade;
+use Shopsys\FrameworkBundle\Component\Cron\CronTimeResolver;
 use Shopsys\Plugin\Cron\IteratedCronModuleInterface;
 use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
-use Shopsys\ShopBundle\Component\Cron\Config\CronConfig;
-use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use Shopsys\ShopBundle\Component\Cron\CronFacade;
-use Shopsys\ShopBundle\Component\Cron\CronModuleFacade;
-use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
 use Symfony\Bridge\Monolog\Logger;
 
 class CronFacadeTest extends PHPUnit_Framework_TestCase
@@ -106,9 +106,9 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Component\Cron\Config\CronConfig $cronConfig
-     * @param \Shopsys\ShopBundle\Component\Cron\CronModuleFacade $cronModuleFacade
-     * @return \Shopsys\ShopBundle\Component\Cron\CronFacade
+     * @param \Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig $cronConfig
+     * @param \Shopsys\FrameworkBundle\Component\Cron\CronModuleFacade $cronModuleFacade
+     * @return \Shopsys\FrameworkBundle\Component\Cron\CronFacade
      */
     private function createCronFacade(CronConfig $cronConfig, CronModuleFacade $cronModuleFacade)
     {
@@ -119,7 +119,7 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Cron\CronModuleFacade|\PHPUnit_Framework_MockObject_MockObject
+     * @return \Shopsys\FrameworkBundle\Component\Cron\CronModuleFacade|\PHPUnit_Framework_MockObject_MockObject
      */
     private function mockCronModuleFacade()
     {
@@ -140,8 +140,8 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param array $servicesIndexedById
-     * @param \Shopsys\ShopBundle\Component\Cron\CronTimeResolver|\PHPUnit_Framework_MockObject_MockObject|null $cronTimeResolverMock
-     * @return \Shopsys\ShopBundle\Component\Cron\Config\CronConfig
+     * @param \Shopsys\FrameworkBundle\Component\Cron\CronTimeResolver|\PHPUnit_Framework_MockObject_MockObject|null $cronTimeResolverMock
+     * @return \Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig
      */
     private function createCronConfigWithRegisteredServices(array $servicesIndexedById, $cronTimeResolverMock = null)
     {

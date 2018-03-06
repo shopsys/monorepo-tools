@@ -6,7 +6,7 @@ use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Translation\PoDumper;
+use Shopsys\FrameworkBundle\Component\Translation\PoDumper;
 
 class PoDumperTest extends PHPUnit_Framework_TestCase
 {

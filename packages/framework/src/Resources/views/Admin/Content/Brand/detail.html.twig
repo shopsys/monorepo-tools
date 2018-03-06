@@ -1,0 +1,45 @@
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+{% import '@ShopsysFramework/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
+{% block title %}- {{ 'Brand'|trans }}{% endblock %}
+{% block h1 %}{{ 'Brand'|trans }}{% endblock %}
+
+{% block main_content %}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div class="wrap-border">
+            <div class="form-group__title">
+                {{ 'Basic information'|trans }}
+            </div>
+            {{ form_id(brand|default(null)) }}
+            {{ form_row(form.brandData.name, { label: 'Name'|trans}) }}
+            {{ form_row(form.brandData.descriptions, { label: 'Description'|trans}) }}
+        </div>
+
+        <div class="wrap-border">
+            <div class="form-group">
+                <div class="form-group__title">
+                    {{ 'SEO'|trans }}
+                </div>
+                {{ seoFormRowMacros.multidomainRow(form.seoTitles, 'Page title'|trans, 60) }}
+                {{ seoFormRowMacros.multidomainRow(form.seoMetaDescriptions, 'Meta description'|trans, 155, 'input--domain') }}
+                {{ seoFormRowMacros.multidomainRow(form.seoH1s, 'Heading (H1)'|trans) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group__title">
+                {{ 'Image'|trans }}
+            </div>
+            {% block image %}{% endblock %}
+            {{ form_row(form.brandData.image, { label: 'Upload image'|trans, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans }) }}
+        </div>
+
+        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+            {% block fixed_bar_content %}
+                <a href="{{ url('admin_brand_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
+                {{ form_save(brand|default(null), form) }}
+            {% endblock %}
+        {% endembed %}
+    {{ form_end(form) }}
+{% endblock %}

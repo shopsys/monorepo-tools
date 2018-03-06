@@ -4,7 +4,7 @@ namespace Tests\ShopBundle\Unit\Component\Domain\Multidomain;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder;
+use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder;
 
 class MultidomainEntityClassFinderTest extends PHPUnit_Framework_TestCase
 {

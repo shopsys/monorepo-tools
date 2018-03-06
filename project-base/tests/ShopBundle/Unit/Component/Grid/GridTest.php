@@ -3,11 +3,11 @@
 namespace Tests\ShopBundle\Unit\Component\Grid;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Grid\DataSourceInterface;
-use Shopsys\ShopBundle\Component\Grid\Grid;
-use Shopsys\ShopBundle\Component\Grid\GridView;
-use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
-use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use Shopsys\FrameworkBundle\Component\Grid\DataSourceInterface;
+use Shopsys\FrameworkBundle\Component\Grid\Grid;
+use Shopsys\FrameworkBundle\Component\Grid\GridView;
+use Shopsys\FrameworkBundle\Component\Paginator\PaginationResult;
+use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
@@ -77,9 +77,9 @@ class GridTest extends PHPUnit_Framework_TestCase
 
         $this->assertCount(2, $columns);
         $column2 = array_pop($columns);
-        /* @var $column2 \Shopsys\ShopBundle\Component\Grid\Column */
+        /* @var $column2 \Shopsys\FrameworkBundle\Component\Grid\Column */
         $column1 = array_pop($columns);
-        /* @var $column1 \Shopsys\ShopBundle\Component\Grid\Column */
+        /* @var $column1 \Shopsys\FrameworkBundle\Component\Grid\Column */
 
         $this->assertSame('columnId1', $column1->getId());
         $this->assertSame('sourceColumnName1', $column1->getSourceColumnName());
@@ -115,7 +115,7 @@ class GridTest extends PHPUnit_Framework_TestCase
         );
         $grid->addColumn('columnId1', 'sourceColumnName1', 'title1');
 
-        $this->expectException(\Shopsys\ShopBundle\Component\Grid\Exception\DuplicateColumnIdException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Component\Grid\Exception\DuplicateColumnIdException::class);
         $grid->addColumn('columnId1', 'sourceColumnName2', 'title2');
     }
 

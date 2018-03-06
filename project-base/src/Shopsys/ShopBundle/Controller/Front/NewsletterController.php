@@ -2,11 +2,11 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade;
+use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade;
 use Shopsys\ShopBundle\Form\Front\Newsletter\SubscriptionFormType;
-use Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade;
-use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,17 +14,17 @@ use Symfony\Component\HttpFoundation\Response;
 class NewsletterController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade
+     * @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade
      */
     private $newsletterFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\LegalConditions\LegalConditionsFacade
+     * @var \Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade
      */
     private $legalConditionsFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 

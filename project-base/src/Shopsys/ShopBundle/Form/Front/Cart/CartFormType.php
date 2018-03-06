@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Cart;
 
-use Shopsys\ShopBundle\Component\Constraints\ConstraintValue;
+use Shopsys\FrameworkBundle\Component\Constraints\ConstraintValue;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

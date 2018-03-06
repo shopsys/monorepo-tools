@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Database\Model\Transport;
 
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation;
-use Shopsys\ShopBundle\Model\Transport\Transport;
-use Shopsys\ShopBundle\Model\Transport\TransportData;
-use Shopsys\ShopBundle\Model\Transport\TransportDomain;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
+use Shopsys\FrameworkBundle\Model\Transport\TransportData;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDomain;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
@@ -30,7 +30,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
 
         $independentTransportVisibilityCalculation =
             $this->getServiceByType(IndependentTransportVisibilityCalculation::class);
-        /* @var $independentTransportVisibilityCalculation \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
+        /* @var $independentTransportVisibilityCalculation \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
         $this->assertTrue($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
     }
@@ -53,7 +53,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
 
         $independentTransportVisibilityCalculation =
             $this->getServiceByType(IndependentTransportVisibilityCalculation::class);
-        /* @var $independentTransportVisibilityCalculation \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
+        /* @var $independentTransportVisibilityCalculation \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
         $this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
     }
@@ -72,7 +72,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
 
         $independentTransportVisibilityCalculation =
             $this->getServiceByType(IndependentTransportVisibilityCalculation::class);
-        /* @var $independentTransportVisibilityCalculation \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
+        /* @var $independentTransportVisibilityCalculation \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
         $this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
     }
@@ -95,7 +95,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
 
         $independentTransportVisibilityCalculation =
             $this->getServiceByType(IndependentTransportVisibilityCalculation::class);
-        /* @var $independentTransportVisibilityCalculation \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
+        /* @var $independentTransportVisibilityCalculation \Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
         $this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
     }

@@ -1,0 +1,49 @@
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block h1 %}{% endblock %}
+
+{% block main_content %}
+    <div class="in-message in-message--block">{{ 'Script will be placed at the beginning of the page, after tag <body>.'|trans }} </div>
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {{ form_id(script|default(null)) }}
+
+        {{ form_row(form.name, { label: 'Name'|trans}) }}
+        {{ form_row(form.code, { label: 'Code'|trans, attr: {class: 'measuring-code-input'} }) }}
+        {{ form_row(form.placement, { label: 'Add only to order confirmation page'|trans}) }}
+        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+            {% block fixed_bar_content %}
+                <a href="{{ url('admin_script_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
+                {{ form_save(script|default(null), form) }}
+            {% endblock %}
+        {% endembed %}
+    {{ form_end(form) }}
+    <div id="js-order-sent-page-variables">
+        <table class="table-main">
+            <thead>
+                <tr>
+                    <th>
+                        {{ 'Applicable variables'|trans }}
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for variable, label in scriptVariables %}
+                    <tr>
+                        <td>
+                            {{ variable }}
+                        </td>
+                        <td>
+                            {{ label }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -124,7 +124,7 @@ psql --username postgres --dbname <test_database_name> --command "ALTER SCHEMA p
 ### Phing target db-create fails on MissingLocaleException
 Error message:
 ```
-[Shopsys\ShopBundle\Command\Exception\MissingLocaleException]                                                                                    
+[Shopsys\FrameworkBundle\Command\Exception\MissingLocaleException]                                                                                    
 It looks like your operating system does not support locale "cs_CZ.utf8". Please visit docs/introduction/installation-guide.md for more details.
 
 [Doctrine\DBAL\Exception\DriverException]                                                                           
@@ -147,9 +147,9 @@ However, if your operating system does not provide the required locales you can 
 Error message:
 ```
 1) Tests\ShopBundle\Database\Model\Administrator\AdministratorRepositoryTest::testGetByValidMultidomainLogin
-Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException: Administrator with valid multidomain login token validMultidomainLoginToken not found.
+Shopsys\FrameworkBundle\Model\Administrator\Security\Exception\InvalidTokenException: Administrator with valid multidomain login token validMultidomainLoginToken not found.
 
-.../src/Shopsys/ShopBundle/Model/Administrator/AdministratorRepository.php:69
+.../FrameworkBundle/Model/Administrator/AdministratorRepository.php:69
 .../tests/ShopBundle/Database/Model/Administrator/AdministratorRepositoryTest.php:25
 ```
 

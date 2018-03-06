@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Controller\Test;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
 use Symfony\Component\HttpFoundation\Response;
 
 class ErrorHandlerController extends FrontBaseController

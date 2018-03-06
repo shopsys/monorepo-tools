@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Smoke;
 
-use Shopsys\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture;
-use Shopsys\ShopBundle\Form\Admin\Product\ProductEditFormType;
+use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
+use Shopsys\FrameworkBundle\Form\Admin\Product\ProductEditFormType;
 use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Tests\ShopBundle\Test\FunctionalTestCase;
@@ -44,7 +44,7 @@ class NewProductTest extends FunctionalTestCase
         $em2->rollback();
 
         $flashMessageBag = $client2->getContainer()->get('shopsys.shop.component.flash_message.bag.admin');
-        /* @var $flashMessageBag \Shopsys\ShopBundle\Component\FlashMessage\Bag */
+        /* @var $flashMessageBag \Shopsys\FrameworkBundle\Component\FlashMessage\Bag */
 
         $this->assertSame(302, $client2->getResponse()->getStatusCode());
         $this->assertNotEmpty($flashMessageBag->getSuccessMessages());

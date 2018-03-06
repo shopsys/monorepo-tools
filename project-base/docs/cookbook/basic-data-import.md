@@ -45,7 +45,7 @@ The source is mocked with [apiari.io service](http://docs.ssfwbasicdataimportdem
 ]
 ```
 
-### Step 1 - Add `$externalId` to [Product](../../src/Shopsys/ShopBundle/Model/Product/Product.php) [entity](../introduction/basics-about-model-architecture.md#entity)
+### Step 1 - Add `$externalId` to [Product](../../../packages/framework/src/Model/Product/Product.php) [entity](../introduction/basics-about-model-architecture.md#entity)
 We need to store the relation between your application database and the external source of data because later, in data transfer processing,
 we will be deciding whether to create a new product or update existing one, based on the `$externalId` attribute.
 If you do not know how to add an attribute to an entity, take a look at [the cookbook](adding-new-attribute-to-an-entity.md).
@@ -55,13 +55,13 @@ It is not necessary to edit the `$externalId` attribute in administration, so yo
 Cron modules are the best way to handle data downloaded from external sources
 because they can be scheduled, run on background and even iterated when necessary.
 
-#### 2.1 - Add new `ImportProductsCronModule` class that implements [`SimpleCronModuleInterface`](../../src/Shopsys/ShopBundle/Component/Cron/SimpleCronModuleInterface.php)
+#### 2.1 - Add new `ImportProductsCronModule` class that implements [`SimpleCronModuleInterface`](../../../packages/plugin-interface/src/Cron/SimpleCronModuleInterface.php)
 ```php
-// src/Shopsys/ShopBundle/Component/Cron/SimpleCronModuleInterface.php
+// FrameworkBundle/Component/Cron/SimpleCronModuleInterface.php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
-use Shopsys\ShopBundle\Component\Cron\SimpleCronModuleInterface;
+use Shopsys\FrameworkBundle\Component\Cron\SimpleCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
 
 class ImportProductsCronModule implements SimpleCronModuleInterface
@@ -82,12 +82,12 @@ class ImportProductsCronModule implements SimpleCronModuleInterface
 *Note: Cron modules are not suitable for data transfers initialized by an external source,
 you should implement Web Services for that purpose.*
 
-#### 2.2 - Register new cron module in [`services_cron.yml`](../../src/Shopsys/ShopBundle/Resources/config/services_cron.yml)
+#### 2.2 - Register new cron module in [`services/cron.yml`](../../../packages/framework/src/Resources/config/services/cron.yml)
 ```yaml
-# src/Shopsys/ShopBundle/Resources/config/services_cron.yml
+# FrameworkBundle/Resources/config/services/cron.yml
 
-Shopsys\ShopBundle\Model\Product\ImportProductsCronModule:
-      class: Shopsys\ShopBundle\Model\Product\ImportProductsCronModule
+Shopsys\FrameworkBundle\Model\Product\ImportProductsCronModule:
+      class: Shopsys\FrameworkBundle\Model\Product\ImportProductsCronModule
       tags:
         - { name: shopsys.cron, hours: '*/3', minutes: '0' }
 ```
@@ -101,11 +101,11 @@ and then decide whether to create or update existing product based on `$external
 #### 3.1 - Download external data and create or update product based on `$externalId`
 If a product exists with given `$externalId` we modify it, otherwise, we need to create a new one.
 ```php
-// src/shopsys/ShopBundle/Model/Product/ImportProductsCronModule.php
+// FrameworkBundle/Model/Product/ImportProductsCronModule.php
 
 // ...
 
-use Shopsys\ShopBundle\Model\Product\ProductFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 
 // ...
 
@@ -114,7 +114,7 @@ const PRODUCT_DATA_URL = 'http://private-53864-productsimportexample.apiary-mock
 // ...
 
 /**
- * @var \Shopsys\ShopBundle\Model\Product\ProductFacade
+ * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
  */
 private $productFacade;
 
@@ -152,19 +152,19 @@ private function importExternalProductsData(array $externalProductsData)
 ```
 
 *Note: We need to know whether the product with given `$externalId` exists.
-For that purpose, we use [`ProductFacade`](../../src/Shopsys/ShopBundle/Model/Product/ProductFacade.php) ([more about facades](../introduction/basics-about-model-architecture.md#facade))
-which uses [`ProductRepository`](../../src/Shopsys/ShopBundle/Model/Product/ProductRepository.php) ([more about repositories](../introduction/basics-about-model-architecture.md#repository))
+For that purpose, we use [`ProductFacade`](../../../packages/framework/src/Model/Product/ProductFacade.php) ([more about facades](../introduction/basics-about-model-architecture.md#facade))
+which uses [`ProductRepository`](../../../packages/framework/src/Model/Product/ProductRepository.php) ([more about repositories](../introduction/basics-about-model-architecture.md#repository))
 that can talk to the persistence layer. So we will implement new methods in these classes in next two steps.*
 
-#### 3.2 - Implement method `findByExternalId()` in [`ProductRepository`](../../src/Shopsys/ShopBundle/Model/Product/ProductRepository.php) in order to be able find a [`Product`](../../src/Shopsys/ShopBundle/Model/Product/Product.php) by an external ID
+#### 3.2 - Implement method `findByExternalId()` in [`ProductRepository`](../../../packages/framework/src/Model/Product/ProductRepository.php) in order to be able find a [`Product`](../../../packages/framework/src/Model/Product/Product.php) by an external ID
 ```php
-// src/Shopsys/ShopBundle/Model/Product/ProductRepository.php
+// FrameworkBundle/Model/Product/ProductRepository.php
 
 // ...
 
 /**
  * @param int $externalId
- * @return \Shopsys\ShopBundle\Model\Product\Product|null
+ * @return \Shopsys\FrameworkBundle\Model\Product\Product|null
  */
 public function findByExternalId($externalId)
 {
@@ -172,16 +172,16 @@ public function findByExternalId($externalId)
 }
 ```
 
-#### 3.3 - Implement method `findByExternalId()` in [`ProductFacade`](../../src/Shopsys/ShopBundle/Model/Product/ProductFacade.php) in order to get [`Product`](../../src/Shopsys/ShopBundle/Model/Product/Product.php) from repository
+#### 3.3 - Implement method `findByExternalId()` in [`ProductFacade`](../../../packages/framework/src/Model/Product/ProductFacade.php) in order to get [`Product`](../../../packages/framework/src/Model/Product/Product.php) from repository
 
 ```php
-// src/Shopsys/ShopBundle/Model/Product/ProductFacade.php
+// FrameworkBundle/Model/Product/ProductFacade.php
 
 // ...
 
 /**
  * @param int $externalId
- * @return \Shopsys\ShopBundle\Model\Product\Product|null
+ * @return \Shopsys\FrameworkBundle\Model\Product\Product|null
  */
 public function findByExternalId($externalId)
 {
@@ -191,22 +191,22 @@ public function findByExternalId($externalId)
 
 #### 3.4 - Implement `ImportProductsCronModule::createProduct()` and `ImportProductsCronModule::updateProduct()`
 As an entry-point for data processing in Shopsys Framework, we use facades.
-In this case, [`ProductFacade`](../../src/Shopsys/ShopBundle/Model/Product/ProductFacade.php)
+In this case, [`ProductFacade`](../../../packages/framework/src/Model/Product/ProductFacade.php)
 and its methods `create()` and `edit()`.
-Those methods expect [`ProductEditData`](../../src/Shopsys/ShopBundle/Model/Product/ProductEditData.php)
-class as a parameter, you can use [`ProductEditDataFactory`](../../src/Shopsys/ShopBundle/Model/Product/ProductEditDataFactory.php) to create it.
+Those methods expect [`ProductEditData`](../../../packages/framework/src/Model/Product/ProductEditData.php)
+class as a parameter, you can use [`ProductEditDataFactory`](../../../packages/framework/src/Model/Product/ProductEditDataFactory.php) to create it.
 
 ```php
-// src/shopsys/ShopBundle/Model/Product/ImportProductsCronModule.php
+// FrameworkBundle/Model/Product/ImportProductsCronModule.php
 
 // ...
 
-use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
 
 // ...
 
 /**
- * @var \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory
+ * @var \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory
  */
 private $productEditDataFactory;
 
@@ -234,7 +234,7 @@ private function createProduct(array $externalProductData) {
 }
 
 /**
- * @param \Shopsys\ShopBundle\Model\Product\Product $product
+ * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
  * @param array $externalProductData
  */
 private function editProduct(Product $product, array $externalProductData) {
@@ -247,14 +247,14 @@ private function editProduct(Product $product, array $externalProductData) {
 
 #### 3.5 - Implement `ImportProductsCronModule::fillProductEditData()`
 Finally, we can implement the private method for filling data object
-[`ProductEditData`](../../src/Shopsys/ShopBundle/Model/Product/ProductEditData.php) with external source data.
+[`ProductEditData`](../../../packages/framework/src/Model/Product/ProductEditData.php) with external source data.
 ```php
-// src/shopsys/ShopBundle/Model/Product/ImportProductsCronModule.php
+// FrameworkBundle/Model/Product/ImportProductsCronModule.php
 
 // ...
 
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
-use Shopsys\ShopBundle\Model\Product\ProductEditData;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
 
 // ...
 
@@ -264,7 +264,7 @@ const LOCALE = 'en';
 // ...
 
 /**
- * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
+ * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
  */
 private $vatFacade;
 
@@ -280,7 +280,7 @@ public function __construct(
 
 
 /**
- * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+ * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
  * @param array $externalProductData
  */
 private function fillProductEditData(ProductEditData $productEditData, array $externalProductData)
@@ -297,15 +297,15 @@ private function fillProductEditData(ProductEditData $productEditData, array $ex
 *Note: In order to be able to use stock quantity, we must enable it by setting the `$usingStock` attribute to `true`.*
 
 *Note 2: Data from external source contain only integer value for vat percent information but we need
-[`Vat`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/Vat.php) object
-in [`ProductData`](../../src/Shopsys/ShopBundle/Model/Product/ProductData.php).
+[`Vat`](../../../packages/framework/src/Model/Pricing/Vat/Vat.php) object
+in [`ProductData`](../../../packages/framework/src/Model/Product/ProductData.php).
 So we will implement appropriate methods
-in [`VatRepository`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/VatRepository.php)
-and in [`VatFacade`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/VatRepository.php) in next steps.*
+in [`VatRepository`](../../../packages/framework/src/Model/Pricing/Vat/VatRepository.php)
+and in [`VatFacade`](../../../packages/framework/src/Model/Pricing/Vat/VatRepository.php) in next steps.*
 
-#### 3.6 - Implement method `getVatByPercent()` in [`VatRepository`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/VatRepository.php) in order to load [`Vat`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/Vat.php) by percent
+#### 3.6 - Implement method `getVatByPercent()` in [`VatRepository`](../../../packages/framework/src/Model/Pricing/Vat/VatRepository.php) in order to load [`Vat`](../../../packages/framework/src/Model/Pricing/Vat/Vat.php) by percent
 ```php
-// src/Shopsys/ShopBundle/Model/Pricing/Vat/VatRepository.php
+// FrameworkBundle/Model/Pricing/Vat/VatRepository.php
 
 namespace Shopsys\Model\Pricing\Vat;
 
@@ -315,14 +315,14 @@ class VatRepository
 
     /**
      * @param int $percent
-     * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      */
     public function getVatByPercent($percent)
     {
         $vat = $this->getVatRepository()->findOneBy(['percent' => $percent]);
 
         if ($vat === null) {
-            throw new \Shopsys\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException('Vat with ' . $percent . '% not found.');
+            throw new \Shopsys\FrameworkBundle\Model\Pricing\Vat\Exception\VatNotFoundException('Vat with ' . $percent . '% not found.');
         }
 
         return $vat;
@@ -331,12 +331,12 @@ class VatRepository
 }
 ```
 
-**Warning: The method throws an exception when [`Vat`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/Vat.php) object is not found by given percent value.
+**Warning: The method throws an exception when [`Vat`](../../../packages/framework/src/Model/Pricing/Vat/Vat.php) object is not found by given percent value.
 Do not forget to handle it (e.g. skip the product data processing and log the exception).**
 
-#### 3.7 - Implement method `getVatByPercent()` in [`VatFacade`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/VatFacade.php)
+#### 3.7 - Implement method `getVatByPercent()` in [`VatFacade`](../../../packages/framework/src/Model/Pricing/Vat/VatFacade.php)
 ```php
-// src/Shopsys/ShopBundle/Model/Pricing/Vat/VatFacade.php
+// FrameworkBundle/Model/Pricing/Vat/VatFacade.php
 
 namespace Shopsys\Model\Pricing\Vat;
 
@@ -346,7 +346,7 @@ class VatFacade
 
     /**
      * @param int $percent
-     * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      */
     public function getVatByPercent($percent)
     {
@@ -363,7 +363,7 @@ As an output, you will get a list of all available cron modules.
 ![example output from "cron-list" phing target](img/cron-list-output-example.png 'example output from "cron-list" phing target')
 
 #### 4.2 - Find your module and run appropriate console command
-`php bin/console shopsys:cron --module="shopsys\shopbundle\model\product\importproductscronmodule"`
+`php bin/console shopsys:cron --module="shopsys\frameworkbundle\model\product\importproductscronmodule"`
 
 ## Best practices
 - Validate all incoming data before putting them into data objects.
@@ -377,9 +377,9 @@ As an output, you will get a list of all available cron modules.
     - Use `EntityManger` methods `beginTransaction()`, `commit()` and `rollback()`.
     - Do not forget to clear identity map when doing a rollback (so even entity modifications are reverted).
     - [`IteratedCronModuleInterface`](https://github.com/shopsys/plugin-interface/blob/master/src/Cron/IteratedCronModuleInterface.php) offers a way to implement longer processes that can span over many iterations.
-- Disable entity manager SQL logging (use [`SqlLoggerFacade::temporarilyDisableLogging()`](../../src/Shopsys/ShopBundle/Component/Doctrine/SqlLoggerFacade.php)).
+- Disable entity manager SQL logging (use [`SqlLoggerFacade::temporarilyDisableLogging()`](../../../packages/framework/src/Component/Doctrine/SqlLoggerFacade.php)).
     - By default, every executed SQL query is logged and that slows down the process and consumes a lot of memory when there are many iterations.
-    - Do not forget to re-enable the logging after the processing is done (use [`SqlLoggerFacade::reenableLogging()`](../../src/Shopsys/ShopBundle/Component/Doctrine/SqlLoggerFacade.php)).
+    - Do not forget to re-enable the logging after the processing is done (use [`SqlLoggerFacade::reenableLogging()`](../../../packages/framework/src/Component/Doctrine/SqlLoggerFacade.php)).
 - Logging of some key functions might be helpful for future debugging
 but it is not a good idea to log "everything". Too many information in logs might be counterproductive.
 - Clear entity manager identity map once in a while, because `EntityManager::flush()` searches
@@ -387,7 +387,7 @@ for changes in all mapped entities and after time it consumes a huge amount of r
     - Call `EntityManager::flush()` with parameter (i.e. entity or array of entities you want to flush) anytime it is possible.
      **Warning: Flushing is not cascade operation, i.e. when you flush entity that contains any other entities (e.g. translations),
     these are not flushed automatically. You should not forget to flush them as well.**
-    - Use [`EntityManagerFacade::clear()`](../../src/Shopsys/ShopBundle/Component/Doctrine/EntityManagerFacade.php)
+    - Use [`EntityManagerFacade::clear()`](../../../packages/framework/src/Component/Doctrine/EntityManagerFacade.php)
     instead of `EntityManager::clear()` for clearing identity map as it clears application cache as well.
     - You should load any entity again after clearing identity map because any attempt to flush the old one will result in an exception.
 - Use streamed input for XML and JSON.
@@ -415,7 +415,7 @@ On the other hand, you have to handle all related logic manually then.
 Now you know how to implement simple data transfer to your e-shop from an external source.
 You know why you should persist external ID and how to decide whether create new entities or update existing ones.
 You learned about Shopsys Framework cron modules, how to create and run them. You also know how to get desired objects based on external data
-(e.g. [`Vat`](../../src/Shopsys/ShopBundle/Model/Pricing/Vat/Vat.php) object based on vat percent).
+(e.g. [`Vat`](../../../packages/framework/src/Model/Pricing/Vat/Vat.php) object based on vat percent).
 You are familiar with best practices for implementing data transfers,
 what pitfalls you can encounter with
 and what are the ways of dealing with them.

@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Unit\Model\Customer;
 
 use DateTime;
-use Shopsys\ShopBundle\Component\String\HashGenerator;
-use Shopsys\ShopBundle\Model\Customer\CustomerPasswordService;
-use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Component\String\HashGenerator;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
+use Shopsys\FrameworkBundle\Model\Customer\User;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class CustomerPasswordServiceTest extends FunctionalTestCase

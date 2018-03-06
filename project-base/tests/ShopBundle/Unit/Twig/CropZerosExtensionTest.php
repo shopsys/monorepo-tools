@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Twig;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Twig\CropZerosExtension;
+use Shopsys\FrameworkBundle\Twig\CropZerosExtension;
 
 class CropZerosExtensionTest extends PHPUnit_Framework_TestCase
 {

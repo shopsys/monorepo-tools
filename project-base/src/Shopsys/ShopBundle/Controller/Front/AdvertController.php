@@ -2,13 +2,13 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Model\Advert\AdvertFacade;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Model\Advert\AdvertFacade;
 
 class AdvertController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Advert\AdvertFacade
+     * @var \Shopsys\FrameworkBundle\Model\Advert\AdvertFacade
      */
     private $advertFacade;
 

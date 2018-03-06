@@ -3,18 +3,18 @@
 namespace Tests\ShopBundle\Unit\Model\Product\Pricing;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\Price;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductInputPriceService;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Pricing\InputPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceService;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
 class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
 {

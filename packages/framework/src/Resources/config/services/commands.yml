@@ -1,0 +1,36 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Shopsys\FrameworkBundle\Command\:
+    resource: '../../Command'
+
+  Shopsys\FrameworkBundle\Command\ServerRunWithCustomRouterCommand:
+    arguments:
+      - '%kernel.project_dir%/web'
+      - '%kernel.environment%'
+
+  Shopsys\FrameworkBundle\Command\ServerStartWithCustomRouterCommand:
+    arguments:
+      - '%kernel.project_dir%/web'
+      - '%kernel.environment%'
+
+  Shopsys\FrameworkBundle\Command\CreateApplicationDirectoriesCommand:
+    arguments:
+      - '%shopsys.root_dir%'
+      - '%shopsys.web_dir%'
+
+  Shopsys\FrameworkBundle\Command\GenerateGruntfileCommand:
+    arguments:
+      - '%shopsys.styles_dir%'
+      - '%shopsys.root_dir%'
+
+  Shopsys\FrameworkBundle\Command\ImageDemoCommand:
+    arguments:
+      - '%shopsys.demo_images_archive_url%'
+      - '%shopsys.demo_images_sql_url%'
+      - '%kernel.cache_dir%'
+      - '%shopsys.image_dir%'
+      - '%shopsys.domain_images_dir%'

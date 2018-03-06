@@ -3,13 +3,13 @@
 namespace Tests\ShopBundle\Unit\Model\Cart;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Cart\Cart;
-use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
-use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Cart\Cart;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
 class CartTest extends PHPUnit_Framework_TestCase
 {

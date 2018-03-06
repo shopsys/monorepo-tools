@@ -4,10 +4,10 @@ namespace Tests\ShopBundle\Unit\Model\AdvancedSearch;
 
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
-use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchService;
-use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchService;
+use Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 
 class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase
 {

@@ -1,0 +1,10 @@
+{% extends '@ShopsysFramework/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_value_cell_id_realName %}
+    <a href="{{ url('admin_administrator_edit', { id: row.a.id }) }}">{{ value }}</a>
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+    {% set entityName = 'administrators'|trans %}
+    {{ parent() }}
+{% endblock %}

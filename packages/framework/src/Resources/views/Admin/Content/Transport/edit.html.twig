@@ -1,0 +1,48 @@
+{% extends '@ShopsysFramework/Admin/Content/Transport/detail.html.twig' %}
+
+{% block title %}- {{ 'Editing shipping'|trans }} - {{ transportDetail.transport.name }}{% endblock %}
+{% block h1 %}{{ 'Editing shipping'|trans }} - {{ transportDetail.transport.name }}{% endblock %}
+
+{% block transport_base_prices %}
+    <div id="transport_prices">
+        <div class="form-price-heading">
+            <div class="form-price-heading__cell form-price-heading__cell--field">
+                {{ inputPriceLabel({ isSimple: true }) }}
+            </div>
+            <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price excluding VAT'|trans }}</div>
+            <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price including VAT'|trans }}</div>
+        </div>
+        {% for currencyId, currency in currencies %}
+            <div class="form-line">
+                <div class="form-line__label">
+                    {{ form_label(form.pricesByCurrencyId[currencyId], 'Base price in %currencyCode%'|trans({'%currencyCode%': currency.code}), { isSimple: true } ) }}
+                </div>
+                <div class="form-line__side">
+                    <div class="form-line__item">
+                        {{ form_widget(form.pricesByCurrencyId[currencyId], { symbolAfterInput: currencySymbolByCurrencyId(currencyId) }) }}
+                    </div>
+                    <div class="form-line__item--right">
+                        <div class="form-line__item__price">
+                            {{ transportDetail.basePricesByCurrencyId[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}
+                        </div>
+                        <div class="form-line__item__price">
+                            <strong>{{ transportDetail.basePricesByCurrencyId[currencyId].priceWithVat|priceWithCurrencyByCurrencyId(currencyId) }}</strong>
+                        </div>
+                    </div>
+                    {{ form_errors(form.pricesByCurrencyId[currencyId]) }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block image %}
+    <div class="form-line">
+        <label class="form-line__label">
+            {{ 'Image'|trans }}:
+        </label>
+        <div class="form-line__line">
+            {{ image(transportDetail.transport, { size: 'original', height: 100 }) }}
+        </div>
+    </div>
+{% endblock %}

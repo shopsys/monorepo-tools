@@ -3,8 +3,8 @@
 namespace Tests\ShopBundle\Unit\Model\Order;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
-use Shopsys\ShopBundle\Model\Order\OrderData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
+use Shopsys\FrameworkBundle\Model\Order\OrderData;
 
 class OrderDataTest extends PHPUnit_Framework_TestCase
 {

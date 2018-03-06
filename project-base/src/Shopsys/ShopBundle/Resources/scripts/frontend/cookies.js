@@ -1,7 +1,7 @@
 (function ($) {
 
     Shopsys = window.Shopsys || {};
-    var cookieName = Shopsys.constant('\\Shopsys\\ShopBundle\\Model\\Cookies\\CookiesFacade::EU_COOKIES_COOKIE_CONSENT_NAME');
+    var cookieName = Shopsys.constant('\\Shopsys\\FrameworkBundle\\Model\\Cookies\\CookiesFacade::EU_COOKIES_COOKIE_CONSENT_NAME');
     var tenYears = 10 * 365;
 
     $(document).ready(function () {

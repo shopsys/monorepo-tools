@@ -2,33 +2,33 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Heureka\HeurekaFacade;
-use Shopsys\ShopBundle\Model\Heureka\HeurekaSetting;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
+use Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting;
 use Symfony\Component\HttpFoundation\Response;
 
 class HeurekaController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaFacade
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade
      */
     private $heurekaFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaSetting
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting
      */
     private $heurekaSetting;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Heureka\HeurekaFacade $heurekaFacade
-     * @param \Shopsys\ShopBundle\Model\Heureka\HeurekaSetting $heurekaSetting
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade $heurekaFacade
+     * @param \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting $heurekaSetting
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(HeurekaFacade $heurekaFacade, HeurekaSetting $heurekaSetting, Domain $domain)
     {

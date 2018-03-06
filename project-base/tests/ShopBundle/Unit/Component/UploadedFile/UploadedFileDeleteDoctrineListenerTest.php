@@ -5,11 +5,11 @@ namespace Tests\ShopBundle\Unit\Component\UploadedFile;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
-use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileDeleteDoctrineListener;
-use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade;
+use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig;
+use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
+use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile;
+use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileDeleteDoctrineListener;
+use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase

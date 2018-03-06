@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Test\Codeception\Module;
 
 use Codeception\Module\Db as BaseDb;
-use Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade;
+use Shopsys\FrameworkBundle\Component\Doctrine\DatabaseSchemaFacade;
 use Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper;
 
 class Db extends BaseDb
@@ -26,7 +26,7 @@ class Db extends BaseDb
         $symfonyHelper = $this->getModule(SymfonyHelper::class);
         /* @var $symfonyHelper \Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper */
         $databaseSchemaFacade = $symfonyHelper->grabServiceFromContainer(DatabaseSchemaFacade::class);
-        /* @var $databaseSchemaFacade \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
+        /* @var $databaseSchemaFacade \Shopsys\FrameworkBundle\Component\Doctrine\DatabaseSchemaFacade */
         $databaseSchemaFacade->dropSchemaIfExists('public');
         $databaseSchemaFacade->createSchema('public');
     }

@@ -2,8 +2,8 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Product;
 
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
+use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig;
+use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -26,7 +26,7 @@ class ProductFilterFormType extends AbstractType
         $priceScale = 2;
         $priceTransformer = new MoneyToLocalizedStringTransformer($priceScale, false);
         $config = $options['product_filter_config'];
-        /* @var $config \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterConfig */
+        /* @var $config \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig */
 
         $builder
             ->add('minimalPrice', MoneyType::class, [

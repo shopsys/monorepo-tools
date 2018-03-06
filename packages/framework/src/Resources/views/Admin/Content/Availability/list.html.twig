@@ -1,0 +1,11 @@
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Availabilities overview'|trans }}{% endblock %}
+{% block h1 %}{{ 'Availabilities overview'|trans }}{% endblock %}
+
+
+{% block main_content %}
+    {{ render(controller('ShopsysFrameworkBundle:Admin/Availability:setting')) }}
+
+    {{ gridView.render() }}
+{% endblock %}

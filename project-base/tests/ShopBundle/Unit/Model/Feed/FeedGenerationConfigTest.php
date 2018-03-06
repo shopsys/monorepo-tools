@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Model\Feed;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
+use Shopsys\FrameworkBundle\Model\Feed\FeedGenerationConfig;
 
 class FeedGenerationConfigTest extends PHPUnit_Framework_TestCase
 {

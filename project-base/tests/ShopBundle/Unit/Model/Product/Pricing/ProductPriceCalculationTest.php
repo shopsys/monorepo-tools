@@ -3,22 +3,22 @@
 namespace Tests\ShopBundle\Unit\Model\Product\Pricing;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
-use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
-use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
-use Shopsys\ShopBundle\Model\Pricing\PricingService;
-use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
-use Shopsys\ShopBundle\Model\Pricing\Rounding;
-use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
-use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
-use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductData;
-use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingService;
+use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
+use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
+use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
 {
@@ -46,8 +46,8 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param int $inputPriceType
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
-     * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $variants
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     private function getProductPriceCalculationWithInputPriceTypeAndVariants($inputPriceType, $variants)
@@ -115,7 +115,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
     /**
      * @param string $inputPrice
      * @param string $vatPercent
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     private function getProductWithInputPriceAndVatPercentAndAutoCalculationPriceType(
         $inputPrice,
@@ -202,7 +202,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
         $product = Product::createMainVariant(new ProductData(), $variants);
 
         $productPrice = $productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
-        /* @var $productPrice \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice */
+        /* @var $productPrice \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice */
 
         $this->assertSame(round($expectedPriceWithVat, 6), round($productPrice->getPriceWithVat(), 6));
         $this->assertSame($expectedFrom, $productPrice->isPriceFrom());
@@ -220,7 +220,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
         $variant = Product::create(new ProductData());
         $product = Product::createMainVariant(new ProductData(), [$variant]);
 
-        $this->expectException(\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException::class);
 
         $productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
     }

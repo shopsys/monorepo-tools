@@ -1,0 +1,8 @@
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'E-shop identification'|trans }}{% endblock %}
+{% block h1 %}{{ 'E-shop domains'|trans }}{% endblock %}
+
+{% block main_content %}
+    {{ gridView.render() }}
+{% endblock%}

@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Component\Router\Security;
 
-use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
 
 class DummyController
 {

@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class SearchController extends FrontBaseController
@@ -13,12 +13,12 @@ class SearchController extends FrontBaseController
     const AUTOCOMPLETE_PRODUCT_LIMIT = 5;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade
      */
     private $productOnCurrentDomainFacade;
 

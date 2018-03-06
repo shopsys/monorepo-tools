@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Model\Localization;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository;
+use Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository;
 
 class IntlCurrencyRepositoryTest extends PHPUnit_Framework_TestCase
 {

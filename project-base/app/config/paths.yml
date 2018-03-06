@@ -1,11 +1,11 @@
 parameters:
-  shopsys.admin_navigation.config_filepath: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/admin_menu.yml'
+  shopsys.admin_navigation.config_filepath: '%shopsys.framework.resource_dir%/config/admin_menu.yml'
   shopsys.bestselling_product.cache_directory_path: '%kernel.cache_dir%/bestselling_product'
   shopsys.css_version_filepath: '%shopsys.web_dir%/assets/cssVersion'
   shopsys.data_fixtures.resource_customers_filepath: '%shopsys.data_fixtures.resources_dir%/demo-data-customers.csv'
   shopsys.data_fixtures.resource_products_filepath: '%shopsys.data_fixtures.resources_dir%/demo-data-products.csv'
-  shopsys.data_fixtures.resources_dir: '%shopsys.root_dir%/src/Shopsys/ShopBundle/DataFixtures/resources'
-  shopsys.default_db_schema_filepath: '%shopsys.resources_dir%/database/schema.sql'
+  shopsys.data_fixtures.resources_dir: '%shopsys.framework.root_dir%/src/DataFixtures/resources'
+  shopsys.default_db_schema_filepath: '%shopsys.framework.resource_dir%/database/schema.sql'
   shopsys.demo_images_archive_url: https://images.shopsysdemo.com/demoImages.v10.zip
   shopsys.demo_images_sql_url: https://images.shopsysdemo.com/demoImagesSql.v8.sql
   shopsys.doctrine.metadata_cache_directory_path: '%kernel.cache_dir%/doctrine_metadata'
@@ -19,6 +19,7 @@ parameters:
   shopsys.feed_url_prefix: /content/feeds/
   shopsys.filemanager_upload_dir: '%shopsys.web_dir%/%shopsys.filemanager_upload_web_dir%'
   shopsys.filemanager_upload_web_dir: content/wysiwyg
+  shopsys.framework.root_dir: '%shopsys.root_dir%/vendor/shopsys/framework'
   shopsys.front_design_image_url_prefix: /assets/frontend/images/
   shopsys.image_config_filepath: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/images.yml'
   shopsys.image_dir: '%shopsys.web_dir%%shopsys.image_url_prefix%'

@@ -3,10 +3,10 @@
 namespace Tests\ShopBundle\Unit\Model\Customer;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Customer\BillingAddress;
-use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
-use Shopsys\ShopBundle\Model\Customer\User;
-use Shopsys\ShopBundle\Model\Customer\UserData;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\User;
+use Shopsys\FrameworkBundle\Model\Customer\UserData;
 
 class UserTest extends PHPUnit_Framework_TestCase
 {

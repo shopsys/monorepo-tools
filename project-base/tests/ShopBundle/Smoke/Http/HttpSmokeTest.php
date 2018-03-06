@@ -2,9 +2,9 @@
 
 namespace Tests\ShopBundle\Smoke\Http;
 
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\HttpSmokeTesting\HttpSmokeTestCase;
 use Shopsys\HttpSmokeTesting\RouteConfigCustomizer;
-use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\HttpFoundation\Request;
 
 class HttpSmokeTest extends HttpSmokeTestCase

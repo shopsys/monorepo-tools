@@ -2,22 +2,22 @@
 
 namespace Tests\ShopBundle\Smoke\Http;
 
+use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
+use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\OrderDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixture;
 use Shopsys\HttpSmokeTesting\Auth\BasicHttpAuth;
 use Shopsys\HttpSmokeTesting\Auth\NoAuth;
 use Shopsys\HttpSmokeTesting\RequestDataSet;
 use Shopsys\HttpSmokeTesting\RouteConfig;
 use Shopsys\HttpSmokeTesting\RouteConfigCustomizer;
 use Shopsys\HttpSmokeTesting\RouteInfo;
-use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Shopsys\ShopBundle\Controller\Front\ProductController;
-use Shopsys\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\OrderDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixture;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RouteConfigCustomization
@@ -124,7 +124,7 @@ class RouteConfigCustomization
                     $config->changeDefaultRequestDataSet($debugNote)
                         ->addCallDuringTestExecution(function (RequestDataSet $requestDataSet, ContainerInterface $container) {
                             $routeCsrfProtector = $container->get(RouteCsrfProtector::class);
-                            /* @var $routeCsrfProtector \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector */
+                            /* @var $routeCsrfProtector \Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector */
                             $csrfTokenManager = $container->get('security.csrf.token_manager');
                             /* @var $csrfTokenManager \Symfony\Component\Security\Csrf\CsrfTokenManager */
 
@@ -201,7 +201,7 @@ class RouteConfigCustomization
             })
             ->customizeByRouteName('admin_pricinggroup_delete', function (RouteConfig $config) {
                 $pricingGroup = $this->getPersistentReference(PricingGroupDataFixture::PRICING_GROUP_PARTNER_DOMAIN_1);
-                /* @var $pricingGroup \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
+                /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
 
                 $debugNote = sprintf('Delete pricing group "%s".', $pricingGroup->getName());
                 $config->changeDefaultRequestDataSet($debugNote)
@@ -215,9 +215,9 @@ class RouteConfigCustomization
             })
             ->customizeByRouteName('admin_unit_delete', function (RouteConfig $config) {
                 $unit = $this->getPersistentReference(BaseUnitDataFixture::UNIT_PIECES);
-                /* @var $unit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
+                /* @var $unit \Shopsys\FrameworkBundle\Model\Product\Unit\Unit */
                 $newUnit = $this->getPersistentReference(DemoUnitDataFixture::UNIT_CUBIC_METERS);
-                /* @var $newUnit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
+                /* @var $newUnit \Shopsys\FrameworkBundle\Model\Product\Unit\Unit */
 
                 $debugNote = sprintf('Delete unit "%s" and replace it by "%s".', $unit->getName('en'), $newUnit->getName('en'));
                 $config->changeDefaultRequestDataSet($debugNote)
@@ -226,9 +226,9 @@ class RouteConfigCustomization
             })
             ->customizeByRouteName('admin_vat_delete', function (RouteConfig $config) {
                 $vat = $this->getPersistentReference(VatDataFixture::VAT_SECOND_LOW);
-                /* @var $vat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
+                /* @var $vat \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat */
                 $newVat = $this->getPersistentReference(VatDataFixture::VAT_LOW);
-                /* @var $newVat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
+                /* @var $newVat \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat */
 
                 $debugNote = sprintf('Delete VAT "%s" and replace it by "%s".', $vat->getName(), $newVat->getName());
                 $config->changeDefaultRequestDataSet($debugNote)
@@ -282,7 +282,7 @@ class RouteConfigCustomization
             })
             ->customizeByRouteName('front_customer_order_detail_unregistered', function (RouteConfig $config) {
                 $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
-                /* @var $order \Shopsys\ShopBundle\Model\Order\Order */
+                /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
 
                 $debugNote = sprintf('Use hash of order n. %s for unregistered access.', $order->getNumber());
                 $config->changeDefaultRequestDataSet($debugNote)
@@ -290,7 +290,7 @@ class RouteConfigCustomization
             })
             ->customizeByRouteName('front_customer_order_detail_registered', function (RouteConfig $config) {
                 $order = $this->getPersistentReference(OrderDataFixture::ORDER_PREFIX . '1');
-                /* @var $order \Shopsys\ShopBundle\Model\Order\Order */
+                /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
 
                 $debugNote = sprintf('Log as demo user "Jaromír Jágr" on front-end to access order n. %s.', $order->getNumber());
                 $config->changeDefaultRequestDataSet($debugNote)
@@ -347,7 +347,7 @@ class RouteConfigCustomization
             })
             ->customizeByRouteName('front_registration_set_new_password', function (RouteConfig $config) {
                 $customer = $this->getPersistentReference(UserDataFixture::USER_WITH_RESET_PASSWORD_HASH);
-                /* @var $customer \Shopsys\ShopBundle\Model\Customer\User */
+                /* @var $customer \Shopsys\FrameworkBundle\Model\Customer\User */
 
                 $config->changeDefaultRequestDataSet('See new password page for customer with reset password hash.')
                     ->setParameter('email', $customer->getEmail())
@@ -366,7 +366,7 @@ class RouteConfigCustomization
     {
         $persistentReferenceFacade = $this->container
             ->get(PersistentReferenceFacade::class);
-        /* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
+        /* @var $persistentReferenceFacade \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade */
 
         return $persistentReferenceFacade->getReference($name);
     }
@@ -377,7 +377,7 @@ class RouteConfigCustomization
     private function isSingleDomain()
     {
         $domain = $this->container->get(Domain::class);
-        /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
+        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         return count($domain->getAll()) === 1;
     }

@@ -5,15 +5,15 @@ namespace Tests\ShopBundle\Unit\Model\Order;
 use DateTime;
 use DateTimeInterface;
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Country\Country;
-use Shopsys\ShopBundle\Model\Country\CountryData;
-use Shopsys\ShopBundle\Model\Order\Item\OrderPayment;
-use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
-use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Order\OrderData;
-use Shopsys\ShopBundle\Model\Payment\Payment;
-use Shopsys\ShopBundle\Model\Payment\PaymentData;
-use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Country\Country;
+use Shopsys\FrameworkBundle\Model\Country\CountryData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Order\OrderData;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
 class OrderTest extends PHPUnit_Framework_TestCase
 {

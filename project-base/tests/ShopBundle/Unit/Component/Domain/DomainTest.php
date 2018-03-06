@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Unit\Component\Domain;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 
 class DomainTest extends PHPUnit_Framework_TestCase
@@ -19,7 +19,7 @@ class DomainTest extends PHPUnit_Framework_TestCase
         $settingMock = $this->createMock(Setting::class);
 
         $domain = new Domain($domainConfigs, $settingMock);
-        $this->expectException(\Shopsys\ShopBundle\Component\Domain\Exception\NoDomainSelectedException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Component\Domain\Exception\NoDomainSelectedException::class);
         $domain->getId();
     }
 
@@ -77,7 +77,7 @@ class DomainTest extends PHPUnit_Framework_TestCase
                 if ($domainId === $domainConfigWithDataCreated->getId()) {
                     return true;
                 }
-                throw new \Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException();
+                throw new \Shopsys\FrameworkBundle\Component\Setting\Exception\SettingValueNotFoundException();
             });
 
         $domain = new Domain($domainConfigs, $settingMock);
@@ -98,7 +98,7 @@ class DomainTest extends PHPUnit_Framework_TestCase
         $this->assertSame($domainConfigs[0], $domain->getDomainConfigById(1));
         $this->assertSame($domainConfigs[1], $domain->getDomainConfigById(2));
 
-        $this->expectException(\Shopsys\ShopBundle\Component\Domain\Exception\InvalidDomainIdException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Component\Domain\Exception\InvalidDomainIdException::class);
         $domain->getDomainConfigById(3);
     }
 }

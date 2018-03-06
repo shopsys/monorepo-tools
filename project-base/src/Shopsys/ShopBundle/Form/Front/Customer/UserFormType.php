@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Customer;
 
-use Shopsys\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
-use Shopsys\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
-use Shopsys\ShopBundle\Model\Customer\UserData;
+use Shopsys\FrameworkBundle\Component\Constraints\FieldsAreNotIdentical;
+use Shopsys\FrameworkBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
+use Shopsys\FrameworkBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

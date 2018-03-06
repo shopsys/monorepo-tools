@@ -1,0 +1,53 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Shopsys\FrameworkBundle\Component\Error\Reporting\ErrorReportingFromLastHourCronModule:
+    tags:
+      - { name: shopsys.cron, hours: '*', minutes: '55' }
+    arguments:
+      - '%error_reporting_email_to%'
+      - '%error_reporting_email_from%'
+
+  Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDeletionCronModule:
+    tags:
+      - { name: shopsys.cron, hours: '*', minutes: '*' }
+
+  Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCronModule:
+    tags:
+      - { name: shopsys.cron, hours: '*', minutes: '*' }
+
+  Shopsys\FrameworkBundle\Model\Product\ProductVisibilityImmediateCronModule:
+    tags:
+      - { name: shopsys.cron, hours: '*', minutes: '*' }
+
+  Shopsys\FrameworkBundle\Model\Product\ProductVisibilityMidnightCronModule:
+    tags:
+      - { name: shopsys.cron, hours: '0', minutes: '0' }
+
+  Shopsys\FrameworkBundle\Model\Cart\Item\DeleteOldCartsCronModule:
+    tags:
+      - { name: shopsys.cron, hours: '0', minutes: '0' }
+
+  Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCronModule:
+    tags:
+      - { name: shopsys.cron, hours: '*', minutes: '*' }
+
+  Shopsys\FrameworkBundle\Model\Feed\FeedCronModule:
+    tags:
+      - { name: shopsys.cron, hours: '*/6', minutes: '0' }
+
+  Shopsys\FrameworkBundle\Model\Feed\DeliveryFeedCronModule:
+    tags:
+      - { name: shopsys.cron, hours: '*', minutes: '10' }
+
+  Shopsys\FrameworkBundle\Component\Sitemap\SitemapCronModule:
+    tags:
+      - { name: shopsys.cron, hours: '4', minutes: '0' }
+
+  # This module should run as last because it creates multiple kernels and fake requests.
+  Shopsys\FrameworkBundle\Component\Error\ErrorPageCronModule:
+    tags:
+      - { name: shopsys.cron, hours: '21', minutes: '10' }

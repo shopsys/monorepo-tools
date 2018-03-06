@@ -3,10 +3,10 @@
 namespace Tests\ShopBundle\Unit\Model\Order\Status;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatusService;
+use Shopsys\FrameworkBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusService;
 
 class OrderStatusServiceTest extends PHPUnit_Framework_TestCase
 {

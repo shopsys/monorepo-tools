@@ -1,0 +1,25 @@
+{% extends '@ShopsysFramework/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_no_data %}
+    {{ 'No flags found. You have to create some first.'|trans }}
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+    {% set entityName = 'flags'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block grid_inline_edit_add_button %}
+    {% set addEntity = 'Create flag'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block grid_value_cell_id_rgbColor %}
+    {% if value is not empty %}
+        <span class="in-pill" style="background-color: {{ value }};">{{ value }}</span>
+    {% endif %}
+{% endblock %}
+
+{% block grid_value_cell_id_visible %}
+    {{ block('grid_value_cell_type_boolean') }}
+{% endblock %}

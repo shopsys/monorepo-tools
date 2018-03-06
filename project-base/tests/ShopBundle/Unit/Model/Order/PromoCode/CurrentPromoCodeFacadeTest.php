@@ -4,11 +4,11 @@ namespace Tests\ShopBundle\Unit\Model\Order\PromoCode;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData;
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
-use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeRepository;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeData;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
@@ -86,7 +86,7 @@ class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
 
         $promoCodeFacade = new PromoCodeFacade($emMock, $promoCodeRepositoryMock);
         $currentPromoCodeFacade = new CurrentPromoCodeFacade($promoCodeFacade, $sessionMock);
-        $this->expectException(\Shopsys\ShopBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException::class);
         $currentPromoCodeFacade->setEnteredPromoCode($enteredCode);
     }
 }

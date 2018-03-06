@@ -28,7 +28,7 @@ Besides the rules that are checked by automatic tools, we have few rules for whi
     ```php
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Product\Product|null
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product|null
      */
     public function findById($id)
     {
@@ -37,14 +37,14 @@ Besides the rules that are checked by automatic tools, we have few rules for whi
     
     /**
      * @param int $id
-     * @return \Shopsys\ShopBundle\Model\Product\Product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public function getById($id)
     {
         $product = $this->findById($id);
 
         if ($product === null) {
-            throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException('Product with ID ' . $id . ' does not exist.');
+            throw new \Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException('Product with ID ' . $id . ' does not exist.');
         }
 
         return $product;
@@ -74,7 +74,7 @@ Besides the rules that are checked by automatic tools, we have few rules for whi
 - In annotations, we use fully-qualified class names for type names (including leading slash)
     ```php
     /**
-     * @return \Shopsys\ShopBundle\Model\Category\Category
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category
      */
     public function getRootCategory()
     {
@@ -86,7 +86,7 @@ Besides the rules that are checked by automatic tools, we have few rules for whi
     ```php
     /**
      * @param int[] $ids
-     * @return \Shopsys\ShopBundle\Model\Product\Product[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
     public function getAllByIds($ids)
     {

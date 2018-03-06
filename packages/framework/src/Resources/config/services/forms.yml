@@ -1,0 +1,205 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Shopsys\FrameworkBundle\Form\Admin\Advert\AdvertFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Article\ArticleFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Product\Brand\BrandEditFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Category\CategoryFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Cookies\CookiesSettingFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Customer\BillingAddressFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Customer\DeliveryAddressFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Customer\UserFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Order\OrderFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Mail\AllMailTemplatesFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Payment\PaymentEditFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Payment\PaymentFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Pricing\Currency\CurrencyFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Product\Availability\AvailabilitySettingFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Product\ProductEditFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Product\ProductFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Product\TopProduct\TopProductsFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Product\Unit\UnitSettingFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\PromoCode\PromoCodeFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Seo\SeoSettingFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\LegalConditions\LegalConditionsSettingFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Transport\TransportEditFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Transport\TransportFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\TransportAndPayment\FreeTransportAndPaymentPriceLimitsFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Admin\Vat\VatSettingsFormType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\InvertChoiceTypeExtension:
+    tags:
+      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
+
+  Shopsys\FrameworkBundle\Form\CategoriesType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\CategoryCheckboxType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\CollectionTypeExtension:
+    tags:
+      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\CollectionType }
+
+  Shopsys\FrameworkBundle\Form\ColorPickerType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\DatePickerType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\DomainsType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\DomainType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\FileUploadType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\FriendlyUrlType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\HoneyPotType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\Locale\LocalizedType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\MoneyTypeExtension:
+    tags:
+      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\MoneyType }
+
+  Shopsys\FrameworkBundle\Form\ProductType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\ProductsType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\SingleCheckboxChoiceType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\SortableValuesType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\TimedFormTypeExtension:
+    tags:
+      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+  Shopsys\FrameworkBundle\Form\UrlListType:
+    tags:
+      - { name: form.type }
+
+  Shopsys\FrameworkBundle\Form\WysiwygTypeExtension:
+    tags:
+      - { name: form.type_extension, extended_type: Ivory\CKEditorBundle\Form\Type\CKEditorType }
+
+  Shopsys\FormTypesBundle\YesNoType:
+    tags:
+      - { name: form.type }

@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Unit\Model\Product\Flag;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Product\Flag\Flag;
-use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
-use Shopsys\ShopBundle\Model\Product\Flag\FlagService;
+use Shopsys\FrameworkBundle\Model\Product\Flag\Flag;
+use Shopsys\FrameworkBundle\Model\Product\Flag\FlagData;
+use Shopsys\FrameworkBundle\Model\Product\Flag\FlagService;
 
 class FlagServiceTest extends PHPUnit_Framework_TestCase
 {

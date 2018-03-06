@@ -3,8 +3,8 @@
 namespace Tests\ShopBundle\Unit\Model\AdminNavigation;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\AdminNavigation\Menu;
-use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\Menu;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
 
 class MenuTest extends PHPUnit_Framework_TestCase
 {

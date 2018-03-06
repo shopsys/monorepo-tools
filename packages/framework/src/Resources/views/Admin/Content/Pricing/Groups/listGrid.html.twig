@@ -1,0 +1,31 @@
+{% extends '@ShopsysFramework/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_value_cell_id_coefficient %}
+    {{ value|formatNumber }}
+{% endblock %}
+
+{% block grid_no_data %}
+    {{ 'No pricing groups found. You have to create some first.'|trans }}
+{% endblock %}
+
+{% block grid_inline_edit_add_button %}
+    <div class="wrap-bar">
+            <span
+                title="{{
+                'While creating a new pricing group, please be patient.
+                    The application needs to recalculate price for every product on e-shop.
+                    Products without recalculated price will not be displayed on e-shop.
+                    For instance, it takes about an hour to recalculate 2000 products.'|trans
+                }}"
+                class="js-tooltip cursor-help wrap-bar__tooltip"
+                data-toggle="tooltip"
+                data-placement="top"
+            >
+                <i class="svg svg-question"></i>
+            </span>
+        <a href="#" class="btn btn--plus wrap-bar__btn js-inline-edit-add">
+            <i class="btn__icon">+</i>
+            {{ 'Create pricing group'|trans }}
+        </a>
+    </div>
+{% endblock %}

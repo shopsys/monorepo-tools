@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Database\Model\Product\Availability;
 
-use Shopsys\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
-use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
-use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductFacade;
+use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
+use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
@@ -15,11 +15,11 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
     public function testRecalculateOnProductEditNotUsingStock()
     {
         $productFacade = $this->getServiceByType(ProductFacade::class);
-        /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
+        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
         $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
+        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
         $productAvailabilityRecalculator = $this->getServiceByType(ProductAvailabilityRecalculator::class);
-        /* @var $productAvailabilityRecalculator \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
+        /* @var $productAvailabilityRecalculator \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
         $productId = 1;
 
@@ -42,13 +42,13 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
     public function testRecalculateOnProductEditUsingStockInStock()
     {
         $productFacade = $this->getServiceByType(ProductFacade::class);
-        /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
+        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
         $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
+        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
         $availabilityFacade = $this->getServiceByType(AvailabilityFacade::class);
-        /* @var $availabilityFacade \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade */
+        /* @var $availabilityFacade \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade */
         $productAvailabilityRecalculator = $this->getServiceByType(ProductAvailabilityRecalculator::class);
-        /* @var $productAvailabilityRecalculator \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
+        /* @var $productAvailabilityRecalculator \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
         $productId = 1;
 
@@ -73,11 +73,11 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
     public function testRecalculateOnProductEditUsingStockOutOfStock()
     {
         $productFacade = $this->getServiceByType(ProductFacade::class);
-        /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
+        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
         $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
+        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
         $productAvailabilityRecalculator = $this->getServiceByType(ProductAvailabilityRecalculator::class);
-        /* @var $productAvailabilityRecalculator \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
+        /* @var $productAvailabilityRecalculator \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
         $productId = 1;
 

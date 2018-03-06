@@ -1,0 +1,62 @@
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}
+    - {{ 'Shipping'|trans }}
+{% endblock %}
+
+{% block h1 %}
+    {{ 'Shipping'|trans }}
+{% endblock %}
+
+{% block main_content %}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div class="form-group wrap-border">
+
+            <div class="form-group__title">
+                {{ 'Basic information'|trans }}
+            </div>
+            {{ form_id(transportDetail.transport|default(null)) }}
+
+            {{ form_row(form.transportData.name, { label: 'Name'|trans }) }}
+            {{ form_row(form.transportData.domains, { label: 'Display on'|trans }) }}
+            {{ form_row(form.transportData.hidden, { label: 'Hidden'|trans, attr: {class: 'form-line--between'} }) }}
+        </div>
+
+        <div class="form-group wrap-border">
+
+            <div class="form-group__title">
+                {{ 'Prices'|trans }}
+            </div>
+            {{ form_row(form.transportData.vat, { label: 'VAT'|trans }) }}
+            {% block transport_base_prices %}{% endblock %}
+        </div>
+
+        <div class="form-group wrap-border">
+
+            <div class="form-group__title">
+                {{ 'Description'|trans }}
+            </div>
+            {{ form_row(form.transportData.description, { label: 'Description'|trans }) }}
+            {{ form_row(form.transportData.instructions, { label: 'Instructions'|trans }) }}
+        </div>
+
+
+        <div class="form-group">
+            <div class="form-group__title">
+                {{ 'Image'|trans }}
+            </div>
+
+            {% block image %}{% endblock %}
+            {{ form_row(form.transportData.image, { label: 'Upload image'|trans, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans }) }}
+        </div>
+
+        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+            {% block fixed_bar_content %}
+                <a href="{{ url('admin_transportandpayment_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
+                {{ form_save(transportDetail|default(null), form) }}
+            {% endblock %}
+        {% endembed %}
+    {{ form_end(form) }}
+{% endblock %}

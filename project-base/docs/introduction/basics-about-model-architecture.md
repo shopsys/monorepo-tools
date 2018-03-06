@@ -9,7 +9,7 @@ Model architecture of Shopsys Framework is inspired by Domain Driven Design (DDD
 - **Domain model** is a system of abstractions that describes selected aspects of the domain.
 - **Domain logic** or **business logic** is the higher level rules for how objects of the domain model interact with one another.
  
-Domain model of Shopsys Framework is located in [`src/Shopsys/ShopBundle/Model`](../../src/Shopsys/ShopBundle/Model). Its concept is to separate behavior and properties of objects from its persistence. This separation is suitable for code reusability, easier testing and it fulfills the Single Responsibility Principle.
+Domain model of Shopsys Framework is located in [`FrameworkBundle/Model`](../../../packages/framework/src/Model). Its concept is to separate behavior and properties of objects from its persistence. This separation is suitable for code reusability, easier testing and it fulfills the Single Responsibility Principle.
 
 Code belonging to the same feature is grouped together (eg. `Cart` and `CartItem`). Names of classes and methods are based on real world vocabulary to be more intuitive (eg. `OrderHashGenerator` or `getSellableProductsInCategory()`).
 
@@ -26,9 +26,9 @@ Entities can be used by all layers of the model and even outside of model (eg. c
 
 ### Example
 ```php
-// src/Shopsys/ShopBundle/Model/Product/Product.php
+// FrameworkBundle/Model/Product/Product.php
 
-namespace Shopsys\ShopBundle\Model\Product;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -46,15 +46,15 @@ class Product
     // ...
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
      *
-     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Vat\Vat")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat")
      * @ORM\JoinColumn(nullable=false)
      */
     private $vat;
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $vat
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      */
     public function changeVat(Vat $vat)
     {
@@ -78,9 +78,9 @@ Repositories should be used only by facade so you should avoid using them in any
 
 ### Example
 ```php
-// src/Shopsys/ShopBundle/Model/Cart/Item/CartItemRepository.php
+// FrameworkBundle/Model/Cart/Item/CartItemRepository.php
 
-namespace Shopsys\ShopBundle\Model\Cart\Item;
+namespace Shopsys\FrameworkBundle\Model\Cart\Item;
 
 // ...
 
@@ -90,8 +90,8 @@ class CartItemRepository
     // ...
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     * @return \Shopsys\ShopBundle\Model\Cart\Item\CartItem[]
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem[]
      */
     public function getAllByCustomerIdentifier(CustomerIdentifier $customerIdentifier)
     {
@@ -145,9 +145,9 @@ Facades as entry-point of the model can be used anywhere outside of the model.
 
 ### Example
 ```php
-// src/Shopsys/ShopBundle/Model/Cart/CartFacade.php
+// FrameworkBundle/Model/Cart/CartFacade.php
 
-namespace Shopsys\ShopBundle\Model\Cart;
+namespace Shopsys\FrameworkBundle\Model\Cart;
 
 // ...
 
@@ -162,27 +162,27 @@ class CartFacade
     private $em;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Cart\CartService
+     * @var \Shopsys\FrameworkBundle\Model\Cart\CartService
      */
     private $cartService;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Cart\CartFactory
+     * @var \Shopsys\FrameworkBundle\Model\Cart\CartFactory
      */
     private $cartFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory
      */
     private $customerIdentifierFactory;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
     private $currentCustomer;
     
@@ -191,7 +191,7 @@ class CartFacade
     /**
      * @param int $productId
      * @param int $quantity
-     * @return \Shopsys\ShopBundle\Model\Cart\AddProductResult
+     * @return \Shopsys\FrameworkBundle\Model\Cart\AddProductResult
      */
     public function addProductToCart($productId, $quantity)
     {
@@ -222,32 +222,32 @@ Services should be used only by facades and other services.
 
 ### Example
 ```php
-// src/Shopsys/ShopBundle/Model/Cart/CartService.php
+// FrameworkBundle/Model/Cart/CartService.php
 
-namespace Shopsys\ShopBundle\Model\Cart;
+namespace Shopsys\FrameworkBundle\Model\Cart;
 
 // ...
 
 class CartService
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
     private $productPriceCalculation;
     
     // ...
     
     /**
-     * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
-     * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param int $quantity
-     * @return \Shopsys\ShopBundle\Model\Cart\AddProductResult
+     * @return \Shopsys\FrameworkBundle\Model\Cart\AddProductResult
      */
     public function addProductToCart(Cart $cart, CustomerIdentifier $customerIdentifier, Product $product, $quantity)
     {
         if (!is_int($quantity) || $quantity <= 0) {
-            throw new \Shopsys\ShopBundle\Model\Cart\Exception\InvalidQuantityException($quantity);
+            throw new \Shopsys\FrameworkBundle\Model\Cart\Exception\InvalidQuantityException($quantity);
         }
 
         foreach ($cart->getItems() as $cartItem) {

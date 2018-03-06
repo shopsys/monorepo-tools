@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Unit\Model\Category;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Category\CategoryData;
-use Shopsys\ShopBundle\Model\Category\CategoryService;
+use Shopsys\FrameworkBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Category\CategoryData;
+use Shopsys\FrameworkBundle\Model\Category\CategoryService;
 
 class CategoryServiceTest extends PHPUnit_Framework_TestCase
 {

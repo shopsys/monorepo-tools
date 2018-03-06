@@ -3,16 +3,16 @@
 namespace Tests\ShopBundle\Database\Model\Product;
 
 use Doctrine\ORM\EntityManager;
-use Shopsys\ShopBundle\DataFixtures\Base\FlagDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\BrandDataFixture;
-use Shopsys\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
-use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData;
-use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
-use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue;
-use Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
+use Shopsys\FrameworkBundle\DataFixtures\Base\FlagDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\BrandDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
+use Shopsys\FrameworkBundle\Model\Category\Category;
+use Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData;
+use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
+use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue;
+use Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
@@ -156,12 +156,12 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
     /**
      * @param array $namesByLocale
      * @param array $valuesTextsByLocales
-     * @return \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData
+     * @return \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData
      */
     private function createParameterFilterData(array $namesByLocale, array $valuesTextsByLocales)
     {
         $parameterRepository = $this->getServiceByType(ParameterRepository::class);
-        /* @var $parameterRepository \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository */
+        /* @var $parameterRepository \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository */
 
         $parameter = $parameterRepository->findParameterByNames($namesByLocale);
         $parameterValues = $this->getParameterValuesByLocalesAndTexts($valuesTextsByLocales);
@@ -175,7 +175,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 
     /**
      * @param array[] $valuesTextsByLocales
-     * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[]
      */
     private function getParameterValuesByLocalesAndTexts(array $valuesTextsByLocales)
     {
@@ -196,14 +196,14 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-     * @param \Shopsys\ShopBundle\Model\Category\Category $category
-     * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
      */
     private function getPaginationResultInCategory(ProductFilterData $productFilterData, Category $category)
     {
         $productOnCurrentDomainFacade = $this->getServiceByType(ProductOnCurrentDomainFacade::class);
-        /* @var $productOnCurrentDomainFacade \Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
+        /* @var $productOnCurrentDomainFacade \Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade */
         $page = 1;
         $limit = PHP_INT_MAX;
 

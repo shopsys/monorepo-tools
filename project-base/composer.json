@@ -15,10 +15,6 @@
             "app/AppKernel.php",
             "app/Bootstrap.php",
             "app/Environment.php"
-        ],
-        "files": [
-            "src/Shopsys/ShopBundle/Component/Translation/functions.php",
-            "src/Shopsys/ShopBundle/Component/VarDumper/functions.php"
         ]
     },
     "autoload-dev": {
@@ -38,6 +34,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/shopsys/doctrine-translatable-bundle.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/shopsys/framework.git"
         },
         {
             "type": "vcs",
@@ -84,6 +84,7 @@
         "sensio/generator-bundle": "3.1.7",
         "shopsys/migrations": "^2.3.0",
         "shopsys/form-types-bundle": "^0.2.0",
+        "shopsys/framework": "dev-master",
         "shopsys/plugin-interface": "^0.3.0",
         "shopsys/product-feed-heureka": "^0.6.1",
         "shopsys/product-feed-heureka-delivery": "^0.3.0",

@@ -2,25 +2,25 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Order;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class DomainAwareOrderFlowFactory
+class DomainAwareOrderFlowFactory implements OrderFlowFactoryInterface
 {
-
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */
     private $container;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-     * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         ContainerInterface $container,

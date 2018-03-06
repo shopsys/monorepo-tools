@@ -2,38 +2,38 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\ShopBundle\Component\Category\CurrentCategoryResolver;
-use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
-use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\FrameworkBundle\Component\Category\CurrentCategoryResolver;
+use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
+use Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade;
+use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends FrontBaseController
 {
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
     /**
-     * @var \Shopsys\ShopBundle\Component\Category\CurrentCategoryResolver
+     * @var \Shopsys\FrameworkBundle\Component\Category\CurrentCategoryResolver
      */
     private $currentCategoryResolver;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade
      */
     private $topCategoryFacade;
 
     /**
-     * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
     private $currentCustomer;
 
@@ -107,7 +107,7 @@ class CategoryController extends FrontBaseController
     }
 
     /**
-     * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category[] $categories
      * @param bool $showProductsCountByCategory
      */
     public function categoryListAction(array $categories, $showProductsCountByCategory = true)

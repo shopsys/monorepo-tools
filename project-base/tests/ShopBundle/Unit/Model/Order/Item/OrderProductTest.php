@@ -3,12 +3,12 @@
 namespace Tests\ShopBundle\Unit\Model\Order\Item;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
-use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
-use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Pricing\Price;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
 class OrderProductTest extends PHPUnit_Framework_TestCase
 {
@@ -65,7 +65,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase
 
         $orderMock = $this->createMock(Order::class);
 
-        $this->expectException(\Shopsys\ShopBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException::class);
 
         new OrderProduct($orderMock, 'productName', $productPrice, 0, 1, null, 'catnum', $mainVariant);
     }

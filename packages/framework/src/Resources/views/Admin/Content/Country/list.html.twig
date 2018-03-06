@@ -1,0 +1,9 @@
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Countries overview'|trans }}{% endblock %}
+{% block h1 %}{{ 'Countries overview'|trans }}{% endblock %}
+
+{% block main_content %}
+    {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
+    {{ gridView.render() }}
+{% endblock %}

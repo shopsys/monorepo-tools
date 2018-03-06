@@ -2,8 +2,8 @@
 
 namespace Tests\ShopBundle\Acceptance\acceptance;
 
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Model\Script\ScriptFacade;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Model\Script\ScriptFacade;
 use Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\OrderPage;
 use Tests\ShopBundle\Acceptance\acceptance\PageObject\Front\ProductListPage;
 use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
@@ -96,7 +96,7 @@ class OrderCest
 
     /**
      * @param string $trackingId
-     * @param \Shopsys\ShopBundle\Model\Script\ScriptFacade $scriptFacade
+     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptFacade $scriptFacade
      */
     private function setGoogleAnalyticsTrackingId($trackingId, ScriptFacade $scriptFacade)
     {

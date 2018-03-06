@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Unit\Component\Transformers;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
+use Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 
 class RemoveDuplicatesFromArrayTransformerTest extends PHPUnit_Framework_TestCase
 {

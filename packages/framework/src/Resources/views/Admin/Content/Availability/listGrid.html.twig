@@ -1,0 +1,29 @@
+{% extends '@ShopsysFramework/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_no_data %}
+    {{ 'No availabilities found. You have to create some first.'|trans }}
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+    {% set entityName = 'availability'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block grid_inline_edit_add_button %}
+    {% set addEntity = 'Create availability'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block grid_title_cell_id_dispatchTime %}
+    {{ gridView.renderBlock('grid_title_cell', { column:column }) }}
+    <span title="" class="js-tooltip cursor-help" data-toggle="tooltip" data-placement="top" data-original-title="{{ 'Entered in days. Zero represents products in stock, empty means unknown availability.'|trans }}">
+        <i class="svg svg-question"></i>
+    </span>
+{% endblock %}
+
+{% block grid_value_cell_edit_id_dispatchTime %}
+    <span class="form-edit-block form-edit-block--size-1">
+        {% form_theme form '@ShopsysFramework/Admin/Form/theme.html.twig' %}
+        {{ form_widget(form.dispatchTime) }}
+    </span>
+{% endblock %}

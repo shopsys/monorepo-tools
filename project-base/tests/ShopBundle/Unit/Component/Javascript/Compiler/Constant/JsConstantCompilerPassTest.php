@@ -2,8 +2,8 @@
 
 namespace Tests\ShopBundle\Unit\Component\Javascript\Compiler\Constant;
 
-use Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass;
-use Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler;
+use Shopsys\FrameworkBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass;
+use Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompiler;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class JsConstantCompilerPassTest extends FunctionalTestCase
@@ -32,12 +32,12 @@ class JsConstantCompilerPassTest extends FunctionalTestCase
     {
         $content = file_get_contents(__DIR__ . '/testUndefinedConstant.js');
 
-        $this->expectException(\Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException::class);
         $this->getJsCompiler()->compile($content);
     }
 
     /**
-     * @return \Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler
+     * @return \Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompiler
      */
     private function getJsCompiler()
     {

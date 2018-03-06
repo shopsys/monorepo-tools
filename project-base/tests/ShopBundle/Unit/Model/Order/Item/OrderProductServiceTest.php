@@ -3,12 +3,12 @@
 namespace Tests\ShopBundle\Unit\Model\Order\Item;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
-use Shopsys\ShopBundle\Model\Order\Item\OrderProductService;
-use Shopsys\ShopBundle\Model\Order\Order;
-use Shopsys\ShopBundle\Model\Pricing\Price;
-use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductService;
+use Shopsys\FrameworkBundle\Model\Order\Order;
+use Shopsys\FrameworkBundle\Model\Pricing\Price;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
 class OrderProductServiceTest extends PHPUnit_Framework_TestCase
 {

@@ -2,19 +2,19 @@
 
 namespace Tests\ShopBundle\Unit\Model\Order\Mail;
 
-use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ShopBundle\Component\Domain\Domain;
-use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
-use Shopsys\ShopBundle\Component\Setting\Setting;
-use Shopsys\ShopBundle\Model\Mail\MailTemplate;
-use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
-use Shopsys\ShopBundle\Model\Mail\MessageData;
-use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\ShopBundle\Model\Order\Mail\OrderMailService;
-use Shopsys\ShopBundle\Model\Order\OrderService;
-use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
-use Shopsys\ShopBundle\Twig\DateTimeFormatterExtension;
-use Shopsys\ShopBundle\Twig\PriceExtension;
+use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplateData;
+use Shopsys\FrameworkBundle\Model\Mail\MessageData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService;
+use Shopsys\FrameworkBundle\Model\Order\OrderService;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
+use Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension;
+use Shopsys\FrameworkBundle\Twig\PriceExtension;
 use Symfony\Component\Routing\RouterInterface;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 use Twig_Environment;

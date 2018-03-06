@@ -1,0 +1,15 @@
+language: php
+
+php:
+  - '7.1'
+  - '7.2'
+
+install:
+  - composer install
+
+script:
+  - php vendor/bin/parallel-lint ./src
+  - php vendor/bin/php-cs-fixer fix --config=vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs --dry-run --verbose --diff ./src
+  - php vendor/bin/phpcs --standard=vendor/shopsys/coding-standards/rulesetCS.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp ./src
+  - php vendor/bin/phpmd "./src" text vendor/shopsys/coding-standards/rulesetMD.xml --extensions=php
+  - php vendor/bin/phpstan analyze -c ./phpstan.neon ./src --level=0

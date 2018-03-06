@@ -1,0 +1,67 @@
+{% extends '@ShopsysFramework/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_no_data %}
+    {{ 'No product found.'|trans }}
+{% endblock %}
+
+{% block grid_value_cell_id_name %}
+    {% if row.p.variantType == VARIANT_TYPE_MAIN %}
+        <span class="in-letter cursor-help js-tooltip" title="{{ 'Main variant'|trans }}">H</span>
+    {% endif %}
+    {% if row.p.variantType == VARIANT_TYPE_VARIANT %}
+        <span class="in-letter cursor-help js-tooltip" title="{{ 'Variant'|trans }}">V</span>
+    {% endif %}
+    {{ row.product|productListDisplayName }}
+{% endblock %}
+
+{% block grid_value_cell_id_calculatedVisibility %}
+    <span class="in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}"
+        title="{{ value ? 'Yes'|trans : 'No'|trans }}"
+    ></span>
+    {% if row.p.calculatedSellingDenied %}
+        <i class="svg svg-cart in-icon" title="{{ 'Product excluded from sale'|trans }}"></i>
+    {% endif %}
+{% endblock %}
+
+{% block grid_value_cell_id_select %}
+    {%- if not allowMainVariants and row.p.variantType == VARIANT_TYPE_MAIN %}
+        <i class="in-icon in-icon--info svg svg-info cursor-help js-tooltip"
+            data-toggle="tooltip" data-placement="left"
+            title="" data-original-title="{{ 'You cannot choose product that is main variant'|trans }}"
+        ></i>
+    {% elseif not allowVariants and row.p.variantType == VARIANT_TYPE_VARIANT %}
+        <i class="in-icon in-icon--info svg svg-info cursor-help js-tooltip"
+            data-toggle="tooltip" data-placement="left" title=""
+            data-original-title="{{ 'You cannot choose product that is variant'|trans }}"
+        ></i>
+    {% elseif isMultiple %}
+        <a
+            class="js-products-picker-window-add-product btn btn--light btn--plus btn--small"
+            href="#"
+            data-product-picker-instance-id="{{ jsInstanceId }}"
+            data-product-picker-product-id="{{ row.p.id }}"
+            data-product-picker-product-name="{{ row.pt.name }}"
+        >
+            <i class="js-products-picker-icon btn__icon">+</i>
+            <span class="js-products-picker-label">
+                {{ 'Add'|trans }}
+            </span>
+        </a>
+    {% else %}
+        <a
+            href="#"
+            onclick="Shopsys.productPicker.onClickSelectProduct('{{ parentInstanceId|e('js') }}', {{ row.p.id|e('js') }}, '{{ row.pt.name|e('js') }}'); return false;"
+            class="btn btn--light btn--plus btn--small"
+        >
+            <i class="js-products-picker-icon btn__icon">+</i>
+            <span class="js-products-picker-label">
+                {{ 'Choose'|trans }}
+            </span>
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+    {% set entityName = 'products'|trans %}
+    {{ parent() }}
+{% endblock %}

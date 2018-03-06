@@ -1,0 +1,68 @@
+{% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Order confirmation page'|trans }}{% endblock %}
+{% block h1 %}{{ 'Order confirmation page'|trans }}{% endblock %}
+
+{% block main_content %}
+
+    {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
+
+    {{ form_start(form) }}
+        <div class="form-group">
+            <div class="form-group__title">
+                {{ 'Settings'|trans }}
+            </div>
+            {{ form_row(form.content, { label: 'Content'|trans}) }}
+        </div>
+        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+            {% block fixed_bar_content %}
+                {{ form_widget(form.save, { label: 'Save'|trans}) }}
+            {% endblock %}
+        {% endembed %}
+    {{ form_end(form) }}
+
+    <div class="grid_body">
+        <table class="table-main">
+            <thead>
+                <tr class="grid-row-titles">
+                    <th>
+                        {{ 'Applicable variables'|trans }}
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="grid-row-cells">
+                    <td>
+                        {{ VARIABLE_TRANSPORT_INSTRUCTIONS }}
+                    </td>
+                    <td>{{ 'Shipping instructions'|trans }}</td>
+                </tr>
+                <tr class="grid-row-cells">
+                    <td>
+                        {{ VARIABLE_PAYMENT_INSTRUCTIONS }}
+                    </td>
+                    <td>{{ 'Payment instructions'|trans }}</td>
+                </tr>
+                <tr class="grid-row-cells">
+                    <td>
+                        {{ VARIABLE_ORDER_DETAIL_URL }}
+                    </td>
+                    <td>
+                        {{ 'Order URL address'|trans }}
+                        <i class="js-tooltip svg svg-info cursor-help" data-toggle="tooltip" data-placement="right" title="{{
+                            'It is possible to use this when creating a link: mark the text you want to create the link from with mouse and push the Link button (top right, interconnected staples icon). In the popup menu select the protocol <different> and insert the text "%orderDetailUrlConstant%" in the URL field (Including the braces)'|trans({'%orderDetailUrlConstant%' : VARIABLE_ORDER_DETAIL_URL}) }}"
+                        ></i>
+                    </td>
+                </tr>
+                <tr class="grid-row-cells">
+                    <td>
+                        {{ VARIABLE_NUMBER }}
+                    </td>
+                    <td>{{ 'Order number'|trans }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
