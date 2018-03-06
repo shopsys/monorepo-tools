@@ -13,12 +13,12 @@ module.exports = function(grunt) {
         less: {
             helpersAdmin: {
                 files: {
-                    '{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less': '{{ rootStylesDirectory|raw }}/admin/helpers.less'
+                    '{{ frameworkResourcesDirectory|raw }}/styles/admin/helpers/helpers-generated.less': '{{ frameworkResourcesDirectory|raw }}/styles/admin/helpers.less'
                 }
             },
             admin: {
                 files: {
-                    'web/assets/admin/styles/index_{{ cssVersion }}.css': '{{ rootStylesDirectory|raw }}/admin/main.less'
+                    'web/assets/admin/styles/index_{{ cssVersion }}.css': '{{ frameworkResourcesDirectory|raw }}/styles/admin/main.less'
                 },
                 options: {
                     compress: true,
@@ -33,12 +33,12 @@ module.exports = function(grunt) {
             {% for domain in domains -%}
                 helpers{{ domain.id }}: {
                     files: {
-                        '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less'
+                        '{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less': '{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/helpers.less'
                     }
                 },
                 frontend{{ domain.id }}: {
                     files: {
-                        'web/assets/frontend/styles/index{{ domain.id }}_{{ cssVersion }}.css': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/main.less'
+                        'web/assets/frontend/styles/index{{ domain.id }}_{{ cssVersion }}.css': '{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/main.less'
                     },
                     options: {
                         compress: true,
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
             {% for domain in domains -%}
                 wysiwyg{{ domain.id }}: {
                     files: {
-                        'web/assets/admin/styles/wysiwyg_{{ cssVersion }}.css': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/wysiwyg.less'
+                        'web/assets/admin/styles/wysiwyg_{{ cssVersion }}.css': '{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/wysiwyg.less'
                     },
                     options: {
                         compress: true
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
             {% for domain in domains -%}
                 wysiwygLocalized{{ domain.id }}: {
                     files: {
-                        'web/assets/admin/styles/wysiwyg-localized_{{ cssVersion }}.css': '{{ (rootStylesDirectory ~ '/admin/')|raw }}/wysiwyg-localized.less'
+                        'web/assets/admin/styles/wysiwyg-localized_{{ cssVersion }}.css': '{{ (customResourcesDirectory ~ '/styles/admin/')|raw }}/wysiwyg-localized.less'
                     },
                     options: {
                         compress: true
@@ -116,7 +116,7 @@ module.exports = function(grunt) {
             admin: {
                 src: 'web/assets/admin/images/icons/*.png',
                 dest: 'web/assets/admin/images/sprites/sprite.png',
-                destCss: '{{ rootStylesDirectory|raw }}/admin/libs/sprites.less',
+                destCss: '{{ frameworkResourcesDirectory|raw }}/styles/admin/libs/sprites.less',
                 imgPath: '../images/sprites/sprite.png?v=' + (new Date().getTime()),
                 algorithm: 'binary-tree',
                 padding: 50,
@@ -146,7 +146,7 @@ module.exports = function(grunt) {
             frontend: {
                 src: 'web/assets/frontend/images/icons/*.png',
                 dest: 'web/assets/frontend/images/sprites/sprite.png',
-                destCss: '{{ rootStylesDirectory|raw }}/front/common/libs/sprites.less',
+                destCss: '{{ customResourcesDirectory|raw }}/styles/front/common/libs/sprites.less',
                 imgPath: '../images/sprites/sprite.png?v=' + (new Date().getTime()),
                 algorithm: 'binary-tree',
                 padding: 50,
@@ -176,9 +176,9 @@ module.exports = function(grunt) {
 
         webfont: {
             admin: {
-                src: 'src/Shopsys/ShopBundle/Resources/svg/admin/*.svg',
+                src: '{{ frameworkResourcesDirectory|raw }}/svg/admin/*.svg',
                 dest: 'web/assets/admin/fonts',
-                destCss: 'src/Shopsys/ShopBundle/Resources/styles/admin/libs/',
+                destCss: '{{ frameworkResourcesDirectory|raw }}/styles/admin/libs/',
                 options: {
                     autoHint: false,
                     font: 'svg',
@@ -199,9 +199,9 @@ module.exports = function(grunt) {
                 }
             },
             frontend: {
-                src: 'src/Shopsys/ShopBundle/Resources/svg/front/*.svg',
+                src: '{{ customResourcesDirectory|raw }}/svg/front/*.svg',
                 dest: 'web/assets/frontend/fonts',
-                destCss: 'src/Shopsys/ShopBundle/Resources/styles/front/common/libs/',
+                destCss: '{{ customResourcesDirectory|raw }}/styles/front/common/libs/',
                 options: {
                     autoHint: false,
                     font: 'svg',
@@ -226,18 +226,18 @@ module.exports = function(grunt) {
         watch: {
             admin: {
                 files: [
-                    '{{ rootStylesDirectory|raw }}/admin/**/*.less',
-                    '!{{ rootStylesDirectory|raw }}/admin/helpers.less',
-                    '!{{ rootStylesDirectory|raw }}/admin/helpers/*.less',
-                    '{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less'
+                    '{{ frameworkResourcesDirectory|raw }}/styles/admin/**/*.less',
+                    '!{{ frameworkResourcesDirectory|raw }}/styles/admin/helpers.less',
+                    '!{{ frameworkResourcesDirectory|raw }}/styles/admin/helpers/*.less',
+                    '{{ frameworkResourcesDirectory|raw }}/styles/admin/helpers/helpers-generated.less'
                 ],
                 tasks: ['adminLess']
             },
             adminHelpers: {
                 files: [
-                    '{{ rootStylesDirectory|raw }}/admin/helpers.less',
-                    '{{ rootStylesDirectory|raw }}/admin/helpers/*.less',
-                    '!{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less'
+                    '{{ frameworkResourcesDirectory|raw }}/styles/admin/helpers.less',
+                    '{{ frameworkResourcesDirectory|raw }}/styles/admin/helpers/*.less',
+                    '!{{ frameworkResourcesDirectory|raw }}/styles/admin/helpers/helpers-generated.less'
                 ],
                 tasks: ['less:helpersAdmin']
             },
@@ -249,7 +249,7 @@ module.exports = function(grunt) {
                 }
             },
             adminWebfont: {
-                files: ['src/Shopsys/ShopBundle/Resources/svg/admin/*.svg'],
+                files: ['{{ customResourcesDirectory|raw }}/svg/admin/*.svg'],
                 tasks: ['webfont:admin'],
                 options: {
                     livereload: true
@@ -263,18 +263,18 @@ module.exports = function(grunt) {
                 }
             },
             frontendWebfont: {
-                files: ['src/Shopsys/ShopBundle/Resources/svg/front/*.svg'],
+                files: ['{{ customResourcesDirectory|raw }}/svg/front/*.svg'],
                 tasks: ['webfont:frontend']
             },
             {% for domain in domains -%}
                 frontend{{ domain.id }}: {
                     files: [
-                        '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/**/*.less',
-                        '!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less',
-                        '!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less',
-                        '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less',
-                        '!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/*.less',
-                        '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/base.less'
+                        '{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/**/*.less',
+                        '!{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/helpers.less',
+                        '!{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less',
+                        '{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less',
+                        '!{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/*.less',
+                        '{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/base.less'
                     ],
                     tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'frontendLess{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
                     {% else -%}
@@ -283,11 +283,11 @@ module.exports = function(grunt) {
                 },
                 helpers{{ domain.id }}: {
                     files: [
-                        '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less',
-                        '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less',
-                        '!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less',
-                        '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/*.less',
-                        '!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/base.less'
+                        '{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/helpers.less',
+                        '{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less',
+                        '!{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less',
+                        '{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/*.less',
+                        '!{{ (customResourcesDirectory ~ '/styles/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/base.less'
                     ],
                     tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'less:helpers{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
                     {% else -%}
@@ -303,7 +303,7 @@ module.exports = function(grunt) {
                 files: ['web/assets/admin/styles/*.css', 'web/assets/frontend/styles/*.css']
             },
             twig: {
-                files: ['src/Shopsys/ShopBundle/Resources/views/**/*.twig'],
+                files: ['{{ customResourcesDirectory|raw }}/views/**/*.twig'],
                 tasks: [],
                 options: {
                     livereload: true,

@@ -24,7 +24,8 @@ services:
 
   Shopsys\FrameworkBundle\Command\GenerateGruntfileCommand:
     arguments:
-      - '%shopsys.styles_dir%'
+      - '%shopsys.resources_dir%'
+      - '%shopsys.framework.resource_dir%'
       - '%shopsys.root_dir%'
 
   Shopsys\FrameworkBundle\Command\ImageDemoCommand:
