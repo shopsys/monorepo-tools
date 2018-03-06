@@ -5,7 +5,7 @@ Package of interfaces providing compatibility between [Shopsys Framework](https:
 This package contains interfaces responsible for general functionality usable in almost any plugin.
 For specific functionality, such as generating product feeds, there are [separate repositories](https://github.com/search?q=topic%3Aplugin-interface+org%3Ashopsys&type=Repositories), eg. [ProductFeedInterface](https://github.com/shopsys/product-feed-interface/).
 
-### Data storage
+### Data storage - deprecated
 A lot of plugins need to persist some kind of custom data, for example, the last time a command was executed.
 
 For this task you can use [`DataStorageInterface`](./src/DataStorageInterface.php) that has all the methods you need.
@@ -17,6 +17,35 @@ See [`\Shopsys\Plugin\DataStorageInterface`](./src/DataStorageInterface.php) and
 
 #### Example
 For example usage see the `AcmeProductCrudExtension` in the CRUD extension section below.
+
+### Storing data - new way
+Best way to store your plugin data is to use Doctrine entities. 
+Create a folder (e.g. `src/Entity`) in your plugin and put your entities there. 
+Then you need to create `DoctrineOrmMappingPass` and add it as `CompilerPass` in your `YourBundleNameBundle` class. This can be done like this:
+
+```php
+// vendor/your-bundle-name-bundle/src/YourBundleNameBundle.php
+
+// ...
+
+    /**
+     * @inheritdoc
+     */
+    public function build(ContainerBuilder $container) {
+        parent::build($container);
+
+        $container->addCompilerPass(
+            DoctrineOrmMappingsPass::createAnnotationMappingDriver(
+                [$this->getNamespace() . '\Entity'],
+                [$this->getPath() . '/Entity']
+            )
+        );
+    }
+    
+// ...
+
+```
+This tells Doctrine where to look for your entities. Now you can create `Repository` and manage your data as you are used to.
 
 ### CRUD extension
 Sometimes your plugin needs some extra information to be included in an entity, for example, you need to track the weight of products.

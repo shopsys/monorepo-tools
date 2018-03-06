@@ -2,6 +2,9 @@
 
 namespace Shopsys\Plugin;
 
+/**
+ * @deprecated
+ */
 interface DataStorageInterface
 {
     /**
