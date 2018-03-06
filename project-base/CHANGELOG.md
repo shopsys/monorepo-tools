@@ -22,6 +22,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - this is going to be a base of a newly built architecture of [Shopsys Framework](http://www.shopsys-framework.com/)
     - translations are extracted from both this repository and the framework package during `phing dump-translations`
         - this is because the translations are located solely in this package
+- styles related to admin extracted into [shopsys/framework](https://github.com/shopsys/framework) package (@MattCzerner)
+    - this will allow styles to be upgraded via `composer update` in project implementations
+- grunt now compiles less files also from [shopsys/framework](https://github.com/shopsys/framework) package (@MattCzerner)
 
 ## 2.0.0-beta.21.0 - 2018-03-05
 ### Added
