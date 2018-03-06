@@ -71,12 +71,4 @@ class CountryInlineEdit extends AbstractGridInlineEdit
 
         return $this->formFactory->create(CountryFormType::class, $countryData);
     }
-
-    /**
-     * @return string
-     */
-    public function getServiceName()
-    {
-        return self::class;
-    }
 }

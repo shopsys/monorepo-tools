@@ -83,12 +83,4 @@ class CurrencyInlineEdit extends AbstractGridInlineEdit
 
         return false;
     }
-
-    /**
-     * @return string
-     */
-    public function getServiceName()
-    {
-        return self::class;
-    }
 }

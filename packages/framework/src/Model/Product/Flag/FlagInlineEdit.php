@@ -63,12 +63,4 @@ class FlagInlineEdit extends AbstractGridInlineEdit
 
         return $this->formFactory->create(FlagFormType::class, $flagData);
     }
-
-    /**
-     * @return string
-     */
-    public function getServiceName()
-    {
-        return self::class;
-    }
 }

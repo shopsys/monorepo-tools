@@ -65,12 +65,4 @@ class VatInlineEdit extends AbstractGridInlineEdit
             'scenario' => ($vatId === null ? VatFormType::SCENARIO_CREATE : VatFormType::SCENARIO_EDIT),
         ]);
     }
-
-    /**
-     * @return string
-     */
-    public function getServiceName()
-    {
-        return self::class;
-    }
 }
