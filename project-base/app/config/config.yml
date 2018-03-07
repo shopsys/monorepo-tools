@@ -61,8 +61,8 @@ doctrine:
       GroupedScalarHydrator: \Shopsys\FrameworkBundle\Component\Doctrine\GroupedScalarHydrator
 
 doctrine_migrations:
-    dir_name: "%shopsys.root_dir%/src/Shopsys/ShopBundle/Migrations"
-    namespace: Shopsys\ShopBundle\Migrations
+    dir_name: "%shopsys.migrations.dir%"
+    namespace: "%shopsys.migrations.namespace%"
     table_name: migrations
     name: Migrations
 
