@@ -4,18 +4,5 @@ services:
     autoconfigure: true
     public: false
 
-  Shopsys\ShopBundle\Form\Front\Customer\BillingAddressFormType:
-    tags:
-      - { name: form.type }
-
-  Shopsys\ShopBundle\Form\Front\Customer\DeliveryAddressFormType:
-    tags:
-      - { name: form.type }
-
-  Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType:
-    tags:
-      - { name: form.type }
-
-  Shopsys\ShopBundle\Form\Front\Order\TransportAndPaymentFormType:
-    tags:
-      - { name: form.type }
+  Shopsys\ShopBundle\Form\:
+      resource: '../../Form/'
