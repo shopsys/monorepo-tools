@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6df327dcfd500c54f3fb831816401785",
+    "content-hash": "0a26f19626c46c745173636fdfdb6425",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -6878,7 +6878,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
+                    "email": "sb@sebastian-bergmann.de",
                     "role": "lead"
                 }
             ],
