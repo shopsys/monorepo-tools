@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Shopsys\ProductFeed\ZboziBundle\ShopsysProductFeedZboziBundle(),
             new Shopsys\ProductFeed\GoogleBundle\ShopsysProductFeedGoogleBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Snc\RedisBundle\SncRedisBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),

@@ -88,40 +88,29 @@ docker exec -it my-new-project-name-php-fpm bash
 
 ## Update of Dockerfile is not Reflected
 Sometimes there is need to change the dockerfile for one of our images.
-If we already had project once running in docker, there is probably cached image for the container.
+If we already had project running once in docker, there is probably cached image for the container.
 
 That means that docker does not really check if there is change in the dockerfile, 
-it will always build container by cached image if it has one available.
-So what we actually only need is to delete the cache of image that we changed.
-Lets say that we modified our docker file for container `php-fpm`.
-First we need to delete our containers in `docker-compose` because we can not delete image that is used by container that is in memory.
+it will always build container by cached image. So what we actually need is to rebuild our containers.
+First we need to stop our containers in `docker-compose` because we cannot update containers that are already in use:
 
 ```
-docker-compose down
+docker-compose stop
 ```
 
-Than we need to find id of this image by using
+Then we need to force Docker to rebuild our containers:
 
 ```
-docker images
+docker-compose build
 ```
 
-This will output all images that were build on our system. We are looking for image that contains our directory name and container name.
-For me, my directory is `shopsys-framework` and i need to rebuild `php-fpm` image.
-
-`shopsysframework_php-fpm` is the image that i need to rebuild. So I need to copy image_id of image which in my case is
-`ea1d31c585b3` and just execute this command
-
+Docker has now updated our containers and we can continue as usual with:
 ```
-docker rmi ea1d31c585b3
+docker-compose up -d
 ```
-
-Now if I execute `docker-compose up -d` docker will try to find the cached build of image, but since we deleted it, 
-it is forced to look right into dockerfile and build it from scratch.
-
-Done, our change is running and our whale is floating in ocean of containers once again.
 
 ## Update of Docker-compose is not Reflected
+
 Docker compose is much easier to change than images. If we change anything in `docker-compose` we just need to recreate `docker-compose`.
 That is done by executing:
 

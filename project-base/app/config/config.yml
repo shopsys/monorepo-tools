@@ -79,7 +79,7 @@ framework:
   default_locale: "%locale%"
   trusted_hosts: ~
   session:
-    handler_id: ~
+    handler_id: snc_redis.session.handler
     cookie_httponly: true
     # Disable the default PHP session garbage collection.
     # Session garbage collection is responsibility of hosting.
@@ -147,6 +147,16 @@ shopsys_shop:
       cs: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/routing_front_cs.yml'
       en: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/routing_front_en.yml'
     friendly_url_router_filepath: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/routing_friendly_url.yml'
+
+snc_redis:
+  clients:
+    session:
+      type: 'phpredis'
+      alias: 'session'
+      dsn: 'redis://%redis_host%'
+  session:
+    client: 'session'
+    prefix: 'session_'
 
 stof_doctrine_extensions:
   orm:

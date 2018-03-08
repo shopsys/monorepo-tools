@@ -6,6 +6,8 @@ parameters:
   database_password: root
   database_server_version: 9.5
 
+  redis_host: redis
+
   mailer_transport: smtp
   mailer_host: smtp-server
   mailer_user: ~
