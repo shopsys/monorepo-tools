@@ -4,4 +4,4 @@ parameters:
         # - '#PHPUnit_Framework_MockObject_MockObject(.*) given#'
     excludes_analyse:
         # Exclude coding standards from packages as it is in incompatible version
-        - %currentWorkingDirectory%/packages/coding-standards/src/*
+        - %currentWorkingDirectory%/packages/coding-standards/*

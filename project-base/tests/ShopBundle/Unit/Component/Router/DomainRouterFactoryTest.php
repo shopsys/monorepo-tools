@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Component\Router;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
@@ -14,7 +14,7 @@ use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
-class DomainRouterFactoryTest extends PHPUnit_Framework_TestCase
+class DomainRouterFactoryTest extends TestCase
 {
     public function testGetRouter()
     {

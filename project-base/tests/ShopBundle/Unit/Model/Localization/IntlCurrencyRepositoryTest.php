@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Unit\Model\Localization;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository;
 
-class IntlCurrencyRepositoryTest extends PHPUnit_Framework_TestCase
+class IntlCurrencyRepositoryTest extends TestCase
 {
     /**
      * @dataProvider getSupportedCurrencyCodes

@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Component\UploadedFile\Config;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
 use Tests\ShopBundle\Unit\Component\UploadedFile\Dummy;
 
-class UploadedFileConfigTest extends PHPUnit_Framework_TestCase
+class UploadedFileConfigTest extends TestCase
 {
     public function testGetEntityName()
     {

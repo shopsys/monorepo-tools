@@ -28,7 +28,7 @@ class ZboziFeedTest extends TestCase
     private $zboziFeedConfig;
 
     /**
-     * @var \Shopsys\Plugin\DataStorageInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Shopsys\Plugin\DataStorageInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $productDataStorageMock;
 

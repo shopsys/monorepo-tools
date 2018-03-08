@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Model\Product\Flag;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Product\Flag\Flag;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagData;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagService;
 
-class FlagServiceTest extends PHPUnit_Framework_TestCase
+class FlagServiceTest extends TestCase
 {
     public function testCreate()
     {

@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Unit\Model\Feed;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Feed\FeedGenerationConfig;
 
-class FeedGenerationConfigTest extends PHPUnit_Framework_TestCase
+class FeedGenerationConfigTest extends TestCase
 {
     public function isSameFeedAndDomainProvider()
     {

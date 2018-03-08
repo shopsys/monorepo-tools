@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Unit\Component\String;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 
-class HashGeneratorTest extends PHPUnit_Framework_TestCase
+class HashGeneratorTest extends TestCase
 {
     public function hashLengthProvider()
     {

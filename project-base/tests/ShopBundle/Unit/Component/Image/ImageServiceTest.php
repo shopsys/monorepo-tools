@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Component\Image;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileNamingConvention;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig;
@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Component\Image\ImageService;
 use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageServiceTest extends PHPUnit_Framework_TestCase
+class ImageServiceTest extends TestCase
 {
     public function testGetUploadedImagesException()
     {

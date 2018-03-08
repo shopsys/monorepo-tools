@@ -2,20 +2,20 @@
 
 namespace Tests\ShopBundle\Unit\Model\Security;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Security\LoginService;
 use StdClass;
 use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
-class LoginServiceTest extends PHPUnit_Framework_TestCase
+class LoginServiceTest extends TestCase
 {
     public function testCheckLoginProcessWithRequestError()
     {
         $loginService = $this->getLoginService();
 
         $requestMock = $this->createMock('\Symfony\Component\HttpFoundation\Request');
-        /* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
+        /* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit\Framework\MockObject\MockObject */
         $requestMock->expects($this->never())->method('getSession');
 
         $requestMock->attributes = $this->createMock('\Symfony\Component\HttpFoundation\ParameterBag');
@@ -35,7 +35,7 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase
         $sessionMock->expects($this->atLeastOnce())->method('remove');
 
         $requestMock = $this->createMock('\Symfony\Component\HttpFoundation\Request');
-        /* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
+        /* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit\Framework\MockObject\MockObject */
         $requestMock->expects($this->once())->method('getSession')->will($this->returnValue($sessionMock));
 
         $requestMock->attributes = $this->createMock('\Symfony\Component\HttpFoundation\ParameterBag');
@@ -55,7 +55,7 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase
         $sessionMock->expects($this->once())->method('remove');
 
         $requestMock = $this->createMock('\Symfony\Component\HttpFoundation\Request');
-        /* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
+        /* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit\Framework\MockObject\MockObject */
         $requestMock->expects($this->once())->method('getSession')->will($this->returnValue($sessionMock));
 
         $requestMock->attributes = $this->createMock('\Symfony\Component\HttpFoundation\ParameterBag');

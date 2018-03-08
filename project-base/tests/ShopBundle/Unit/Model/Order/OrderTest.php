@@ -4,7 +4,7 @@ namespace Tests\ShopBundle\Unit\Model\Order;
 
 use DateTime;
 use DateTimeInterface;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Country\Country;
 use Shopsys\FrameworkBundle\Model\Country\CountryData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
@@ -15,7 +15,7 @@ use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 
-class OrderTest extends PHPUnit_Framework_TestCase
+class OrderTest extends TestCase
 {
     const DOMAIN_ID = 1;
 

@@ -3,6 +3,7 @@
 namespace Tests\ShopBundle\Acceptance\acceptance\PageObject\Front;
 
 use Facebook\WebDriver\WebDriverBy;
+use PHPUnit\Framework\Assert;
 use Tests\ShopBundle\Acceptance\acceptance\PageObject\AbstractPage;
 use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 use Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver;
@@ -43,10 +44,8 @@ class ProductListPage extends AbstractPage
             ->findElement(WebDriverBy::cssSelector('.js-paging-total-count'));
         $actualCount = (int)trim($totalCountElement->getText());
 
-        if ($expectedCount !== $actualCount) {
-            $message = 'Product list expects ' . $expectedCount . ' products but contains ' . $actualCount . '.';
-            throw new \PHPUnit_Framework_ExpectationFailedException($message);
-        }
+        $message = 'Product list expects ' . $expectedCount . ' products but contains ' . $actualCount . '.';
+        Assert::assertSame($expectedCount, $actualCount, $message);
     }
 
     /**

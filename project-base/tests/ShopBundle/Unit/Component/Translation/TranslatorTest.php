@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Component\Translation;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Translation\MessageIdNormalizer;
 use Shopsys\FrameworkBundle\Component\Translation\Translator;
 use Symfony\Component\Translation\IdentityTranslator;
@@ -11,20 +11,20 @@ use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class TranslatorTest extends PHPUnit_Framework_TestCase
+class TranslatorTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\Translation\TranslatorInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Translation\TranslatorInterface
      */
     private $originalTranslatorMock;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\Translation\TranslatorBagInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Translation\TranslatorBagInterface
      */
     private $originalTranslatorBagMock;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|\Shopsys\FrameworkBundle\Component\Translation\MessageIdNormalizer
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Shopsys\FrameworkBundle\Component\Translation\MessageIdNormalizer
      */
     private $messageIdNormalizerMock;
 

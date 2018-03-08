@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Model\Pricing;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 
-class BasePriceCalculationTest extends PHPUnit_Framework_TestCase
+class BasePriceCalculationTest extends TestCase
 {
     public function calculateBasePriceProvider()
     {

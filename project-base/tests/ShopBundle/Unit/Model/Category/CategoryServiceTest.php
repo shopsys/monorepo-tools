@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Model\Category;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Category\CategoryData;
 use Shopsys\FrameworkBundle\Model\Category\CategoryService;
 
-class CategoryServiceTest extends PHPUnit_Framework_TestCase
+class CategoryServiceTest extends TestCase
 {
     public function testCreateSetRoot()
     {

@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Unit\Component\Transformers;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Transformers\RemoveWhitespacesTransformer;
 
-class RemoveWhitespacesTransformerTest extends PHPUnit_Framework_TestCase
+class RemoveWhitespacesTransformerTest extends TestCase
 {
     public function transformValuesProvider()
     {

@@ -4,10 +4,10 @@ namespace Tests\ShopBundle\Unit\Component\Entity;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder;
 
-class EntityNotNullableColumnsFinderTest extends PHPUnit_Framework_TestCase
+class EntityNotNullableColumnsFinderTest extends TestCase
 {
     public function testGetAllNotNullableColumnNamesIndexedByTableName()
     {

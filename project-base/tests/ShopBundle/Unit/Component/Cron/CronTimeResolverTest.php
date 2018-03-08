@@ -3,11 +3,11 @@
 namespace Tests\ShopBundle\Unit\Component\Cron;
 
 use DateTime;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Cron\CronTimeInterface;
 use Shopsys\FrameworkBundle\Component\Cron\CronTimeResolver;
 
-class CronTimeResolverTest extends PHPUnit_Framework_TestCase
+class CronTimeResolverTest extends TestCase
 {
     public function validTimeStringProvider()
     {

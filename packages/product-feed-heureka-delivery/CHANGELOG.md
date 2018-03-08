@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.3.0] - 2018-02-19
 ### Changed
 - services.yml updated to Symfony 3.4 best practices (@TomasLudvik)
+- updated phpunit/phpunit to version 7 (@simara-svatopluk)
 
 ## [0.2.2] - 2017-10-04
 ### Added

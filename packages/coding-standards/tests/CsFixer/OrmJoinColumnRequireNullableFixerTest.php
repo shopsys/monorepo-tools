@@ -47,7 +47,7 @@ class OrmJoinColumnRequireNullableFixerTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\SplFileInfo
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SplFileInfo
      */
     private function mockSplFileInfoWithFilename(string $filename)
     {

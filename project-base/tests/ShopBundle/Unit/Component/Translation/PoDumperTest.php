@@ -5,10 +5,10 @@ namespace Tests\ShopBundle\Unit\Component\Translation;
 use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Translation\PoDumper;
 
-class PoDumperTest extends PHPUnit_Framework_TestCase
+class PoDumperTest extends TestCase
 {
     public function testDump()
     {

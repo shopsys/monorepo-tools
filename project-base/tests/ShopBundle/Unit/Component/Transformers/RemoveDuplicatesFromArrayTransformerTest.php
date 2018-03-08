@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Unit\Component\Transformers;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 
-class RemoveDuplicatesFromArrayTransformerTest extends PHPUnit_Framework_TestCase
+class RemoveDuplicatesFromArrayTransformerTest extends TestCase
 {
     public function testReverseTransform()
     {

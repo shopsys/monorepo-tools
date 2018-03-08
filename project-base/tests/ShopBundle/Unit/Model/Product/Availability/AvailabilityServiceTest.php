@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Model\Product\Availability;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityService;
 
-class AvailabilityServiceTest extends PHPUnit_Framework_TestCase
+class AvailabilityServiceTest extends TestCase
 {
     public function testCreate()
     {

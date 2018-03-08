@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Component\Domain;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Domain\DomainFacade;
@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Filesystem\Filesystem;
 
-class DomainFacadeTest extends PHPUnit_Framework_TestCase
+class DomainFacadeTest extends TestCase
 {
     public function testGeDomainConfigsByCurrency()
     {

@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Component\Image\Config;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigDefinition;
@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigLoader;
 use stdClass;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageConfigTest extends PHPUnit_Framework_TestCase
+class ImageConfigTest extends TestCase
 {
     /**
      * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig

@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Component\Image;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigDefinition;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigLoader;
@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Component\Image\ImageLocator;
 use stdClass;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageLocatorTest extends PHPUnit_Framework_TestCase
+class ImageLocatorTest extends TestCase
 {
     /**
      * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig

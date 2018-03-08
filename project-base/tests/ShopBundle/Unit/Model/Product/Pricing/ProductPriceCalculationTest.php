@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Model\Product\Pricing;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
@@ -20,7 +20,7 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
-class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
+class ProductPriceCalculationTest extends TestCase
 {
     public function calculatePriceProvider()
     {

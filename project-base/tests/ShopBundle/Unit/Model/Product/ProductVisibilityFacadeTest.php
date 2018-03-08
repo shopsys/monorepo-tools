@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Model\Product;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase
+class ProductVisibilityFacadeTest extends TestCase
 {
     public function testOnKernelResponseRecalc()
     {

@@ -2,14 +2,14 @@
 
 namespace Tests\ShopBundle\Unit\Component\Domain;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Domain\DomainSubscriber;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
-class DomainSubscriberTest extends PHPUnit_Framework_TestCase
+class DomainSubscriberTest extends TestCase
 {
     public function testOnKernelRequestWithoutMasterRequest()
     {

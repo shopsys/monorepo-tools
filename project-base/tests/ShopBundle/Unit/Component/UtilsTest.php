@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Unit\Component;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Utils;
 
-class UtilsTest extends PHPUnit_Framework_TestCase
+class UtilsTest extends TestCase
 {
     public function testIfNull()
     {

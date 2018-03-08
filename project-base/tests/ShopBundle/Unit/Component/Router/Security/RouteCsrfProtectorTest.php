@@ -3,14 +3,14 @@
 namespace Tests\ShopBundle\Unit\Component\Router\Security;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
 
-class RouteCsrfProtectorTest extends PHPUnit_Framework_TestCase
+class RouteCsrfProtectorTest extends TestCase
 {
     public function testSubRequest()
     {

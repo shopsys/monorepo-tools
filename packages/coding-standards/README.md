@@ -30,7 +30,7 @@ and even add your own sniffs and fixers in the config.
 ```neon
 #custom-coding-standard.neon
 includes:
-    - vendor/symplify/easy-coding-standard/config/psr2-checkers.neon
+    - vendor/symplify/easy-coding-standard/config/psr2.neon
     - vendor/shopsys/coding-standards/shopsys-coding-standard.neon
 ```
 

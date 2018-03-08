@@ -3,14 +3,14 @@
 namespace Tests\ShopBundle\Unit\Component\Setting;
 
 use Doctrine\ORM\EntityManager;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Setting\Exception\InvalidArgumentException;
 use Shopsys\FrameworkBundle\Component\Setting\Exception\SettingValueNotFoundException;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Component\Setting\SettingValue;
 use Shopsys\FrameworkBundle\Component\Setting\SettingValueRepository;
 
-class SettingTest extends PHPUnit_Framework_TestCase
+class SettingTest extends TestCase
 {
     public function testSet()
     {

@@ -2,11 +2,11 @@
 
 namespace Tests\ShopBundle\Unit\Component\Filesystem;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Filesystem\Exception\DirectoryDoesNotExistException;
 use Shopsys\FrameworkBundle\Component\Filesystem\FilepathComparator;
 
-class FilepathComparatorTest extends PHPUnit_Framework_TestCase
+class FilepathComparatorTest extends TestCase
 {
     public function testIsPathWithinDirectoryThrowsExceptionWithNonExistentDirectoryPath()
     {

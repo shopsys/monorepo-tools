@@ -2,13 +2,13 @@
 
 namespace Tests\ShopBundle\Unit\Model\Order\Item;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
 
-class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase
+class OrderItemPriceCalculationTest extends TestCase
 {
     public function testCalculatePriceWithoutVat()
     {

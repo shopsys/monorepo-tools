@@ -2,13 +2,13 @@
 
 namespace Tests\ShopBundle\Unit\Model\Cart;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Cart\CartFactory;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository;
 use Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 
-class CartFactoryTest extends PHPUnit_Framework_TestCase
+class CartFactoryTest extends TestCase
 {
     public function testGetReturnsTheSameCartForTheSameCustomer()
     {

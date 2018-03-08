@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Model\Transport;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
@@ -15,7 +15,7 @@ use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
 
-class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase
+class TransportPriceCalculationTest extends TestCase
 {
     public function calculateIndependentPriceProvider()
     {

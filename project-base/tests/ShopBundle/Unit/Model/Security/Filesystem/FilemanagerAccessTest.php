@@ -3,11 +3,11 @@
 namespace Tests\ShopBundle\Unit\Model\Security\Filesystem;
 
 use FM\ElfinderBundle\Configuration\ElFinderConfigurationReader;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Filesystem\FilepathComparator;
 use Shopsys\FrameworkBundle\Model\Security\Filesystem\FilemanagerAccess;
 
-class FilemanagerAccessTest extends PHPUnit_Framework_TestCase
+class FilemanagerAccessTest extends TestCase
 {
     public function isPathAccessibleProvider()
     {

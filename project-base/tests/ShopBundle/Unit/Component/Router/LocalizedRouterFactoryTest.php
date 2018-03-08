@@ -2,13 +2,13 @@
 
 namespace Tests\ShopBundle\Unit\Component\Router;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Router\LocalizedRouterFactory;
 use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
-class LocalizedRouterFactoryTest extends PHPUnit_Framework_TestCase
+class LocalizedRouterFactoryTest extends TestCase
 {
     public function testGetRouterRouterNotResolvedException()
     {

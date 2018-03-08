@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Component\UploadedFile;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
 use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileService;
 
-class UploadedFileServiceTest extends PHPUnit_Framework_TestCase
+class UploadedFileServiceTest extends TestCase
 {
     public function testCreateUploadedFile()
     {

@@ -3,14 +3,14 @@
 namespace Tests\ShopBundle\Unit\Model\Transport;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportVisibilityCalculation;
 
-class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
+class TransportVisibilityCalculationTest extends TestCase
 {
     public function testIsVisibleWhenIndepentlyInvisible()
     {

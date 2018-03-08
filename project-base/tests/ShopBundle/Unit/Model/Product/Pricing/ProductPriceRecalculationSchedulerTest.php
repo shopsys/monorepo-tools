@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Model\Product\Pricing;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
-class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase
+class ProductPriceRecalculationSchedulerTest extends TestCase
 {
     public function testProductCanBeScheduledForImmediateRecalculation()
     {

@@ -2,13 +2,13 @@
 
 namespace Tests\ShopBundle\Unit\Model\Product;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
 use Shopsys\FrameworkBundle\Model\Product\ProductVariantService;
 
-class ProductVariantServiceTest extends PHPUnit_Framework_TestCase
+class ProductVariantServiceTest extends TestCase
 {
     public function testCheckProductIsNotMainVariantException()
     {

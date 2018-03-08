@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Unit\Component\Image\Config;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateEntityNameException;
 use Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateSizeNameException;
 use Shopsys\FrameworkBundle\Component\Image\Config\Exception\DuplicateTypeNameException;
@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigLoader;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
+class ImageConfigLoaderTest extends TestCase
 {
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigLoader

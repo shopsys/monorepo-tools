@@ -2,10 +2,10 @@
 
 namespace Tests\ShopBundle\Unit\Component\String;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\String\TransformString;
 
-class TransformStringTest extends PHPUnit_Framework_TestCase
+class TransformStringTest extends TestCase
 {
     public function safeFilenameProvider()
     {

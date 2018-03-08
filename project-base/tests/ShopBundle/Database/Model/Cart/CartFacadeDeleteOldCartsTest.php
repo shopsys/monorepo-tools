@@ -126,7 +126,7 @@ class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function getCustomerIdentifierFactoryMock(CustomerIdentifier $customerIdentifier)
     {

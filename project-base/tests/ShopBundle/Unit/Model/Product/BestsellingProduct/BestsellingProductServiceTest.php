@@ -2,14 +2,14 @@
 
 namespace Tests\ShopBundle\Unit\Model\Product\BestsellingProduct;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductService;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 
-class BestsellingProductServiceTest extends PHPUnit_Framework_TestCase
+class BestsellingProductServiceTest extends TestCase
 {
     public function testCombineManualAndAutomaticBestsellingProducts()
     {

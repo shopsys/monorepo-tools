@@ -416,4 +416,26 @@ class StrictWebDriver extends WebDriver
     {
         $element->sendKeys($keys);
     }
+
+    /**
+     * @param string $text
+     * @param array $nodes
+     * @param mixed $selector
+     */
+    protected function assertNodesContain($text, $nodes, $selector = null)
+    {
+        $message = Locator::humanReadableString($selector);
+        parent::assertNodesContain($text, $nodes, $message);
+    }
+
+    /**
+     * @param string $text
+     * @param array $nodes
+     * @param mixed $selector
+     */
+    protected function assertNodesNotContain($text, $nodes, $selector = null)
+    {
+        $message = Locator::humanReadableString($selector);
+        parent::assertNodesNotContain($text, $nodes, $message);
+    }
 }

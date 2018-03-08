@@ -2,11 +2,11 @@
 
 namespace Tests\ShopBundle\Unit\Component\String;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\String\EncodingConverter;
 use stdClass;
 
-class EncodingConverterTest extends PHPUnit_Framework_TestCase
+class EncodingConverterTest extends TestCase
 {
     const STRING_UTF8 = 'příšerně žluťoučký kůň úpěl ďábelské ódy. PŘÍŠERNĚ ŽLUŤOUČKÝ KŮŇ ÚPĚL ĎÁBELSKÉ ÓDY.';
 

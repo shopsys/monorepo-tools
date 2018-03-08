@@ -2,12 +2,12 @@
 
 namespace Tests\ShopBundle\Unit\Component\Cron;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig;
 use Shopsys\FrameworkBundle\Component\Cron\CronService;
 use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
 
-class CronServiceTest extends PHPUnit_Framework_TestCase
+class CronServiceTest extends TestCase
 {
     public function testFilterScheduledCronModuleConfigs()
     {

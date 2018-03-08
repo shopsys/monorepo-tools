@@ -12,6 +12,7 @@
     stopOnFailure="false"
     syntaxCheck="false"
     failOnWarning="true"
+    beStrictAboutTestsThatDoNotTestAnything="false"
 >
     <php>
         <server name="KERNEL_DIR" value="app/" />
