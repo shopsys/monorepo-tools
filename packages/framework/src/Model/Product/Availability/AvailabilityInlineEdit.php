@@ -68,12 +68,4 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit
 
         return $this->formFactory->create(AvailabilityFormType::class, $availabilityData);
     }
-
-    /**
-     * @return string
-     */
-    public function getServiceName()
-    {
-        return self::class;
-    }
 }

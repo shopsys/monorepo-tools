@@ -63,12 +63,4 @@ class UnitInlineEdit extends AbstractGridInlineEdit
 
         return $this->formFactory->create(UnitFormType::class, $unitData);
     }
-
-    /**
-     * @return string
-     */
-    public function getServiceName()
-    {
-        return self::class;
-    }
 }

@@ -66,9 +66,15 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface
     }
 
     /**
+     * Since Symfony 3.4, the best practice for service names is using FQCN
+     * if you don't follow this best practice you should override this method
+     *
      * @return string
      */
-    abstract public function getServiceName();
+    public function getServiceName()
+    {
+        return static::class;
+    }
 
     /**
      * @param int|string|null $rowId

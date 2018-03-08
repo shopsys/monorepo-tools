@@ -74,12 +74,4 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
 
         return $this->formFactory->create(PricingGroupFormType::class, $pricingGroupData);
     }
-
-    /**
-     * @return string
-     */
-    public function getServiceName()
-    {
-        return self::class;
-    }
 }
