@@ -4,7 +4,7 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 
 ## Requirements
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-* [Docker](https://docs.docker.com/engine/installation/)
+* [Docker for Mac](https://docs.docker.com/engine/installation/) (Docker-sync suggests ([in known issue](https://github.com/EugenMayer/docker-sync/issues/517)) to use Docker for Mac in version 17.09.1-ce-mac42 (21090)) 
 * [Docker-sync](http://docker-sync.io/) (install via `sudo gem install docker-sync`)
 
 ## Steps

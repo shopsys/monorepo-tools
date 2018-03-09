@@ -118,39 +118,17 @@ That is done by executing:
 docker-compose up -d --force-recreate
 ```
 
-## Docker Sync does not Synchronize File Consistently
-Docker sync sometimes stops the synchronization of files. This is issue that docker sync is aware of, but there is no solution yet.
-So if this happens, we use this workaround to get docker sync to functional state back again.
+## Docker-sync stopped to sync files
+Docker-sync suggests ([in known issue](https://github.com/EugenMayer/docker-sync/issues/517)) to use Docker for Mac in version 17.09.1-ce-mac42 (21090).
+This version helped most people to solve their issues with syncing.
 
-First, stop the docker compose
+You may sometimes encounter a sync problem even with the suggested version of Docker. In those cases, you need to recreate docker-sync containers. Here are two easy steps you have to follow:
 
+Delete your docker-sync containers and volumes (data on your host will not be removed):
 ```
-docker-compose stop
+docker-sync clean
 ```
-
-Then stop docker sync
-```
-docker-sync stop
-```
-
-Find the docker sync container, copy container_id of it and delete the docker sync container:
-
-```
-docker ps -a
-```
-
-```
-docker rm <container_id>
-```
-
-Then start docker sync and docker compose:
-
+Start docker-sync so your docker-sync containers and volumes will be recreated:
 ```
 docker-sync start
 ```
-
-```
-docker-compose up -d
-```
-
-This is actually a way to properly restart docker sync.
