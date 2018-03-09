@@ -49,9 +49,11 @@
 {%- endblock localized_widget %}
 
 {% block form_row %}
-    <div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
-        {{ form_errors(form) }}
-        {{ form_label(form, label) }}
+    {% if (form.vars.is_group_container == false or form.vars.is_group_container == null) %}
+        <div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
+            {{ form_errors(form) }}
+            {{ form_label(form, label) }}
+    {% endif %}
         {{ form_widget(form) }}
         {% if disabledField is defined %}
             <span class="form-disabled {{ disabledField.class }} js-tooltip" data-toggle="tooltip" data-placement="{{ disabledField.placement|default('right') }}"
@@ -59,7 +61,9 @@
                 <i class="svg svg-pencil"></i>
             </span>
         {% endif %}
-    </div>
+    {% if form.vars.is_group_container == false or form.vars.is_group_container == null %}
+        </div>
+    {% endif %}
 {% endblock form_row %}
 
 {% block localized_form_rows -%}
@@ -927,3 +931,31 @@
         </div>
     {% endif %}
 {% endblock date_picker_widget %}
+
+{%- block form_rows -%}
+    {% set previous_group_name = '' %}
+    {% for child in form %}
+        {% set current_group_name = (form.vars.is_group_container == true and form.vars.name is defined) ? form.vars.name : '' %}
+
+        {% if previous_group_name != current_group_name %}
+            {% if previous_group_name != '' %}
+                </div>
+            {% endif %}
+
+            {% if current_group_name != '' %}
+                <div class="form-group wrap-border">
+                <div class="form-group__title">
+                    {{ form.vars.label }}
+                </div>
+            {% endif %}
+        {% endif %}
+
+        {{- form_row(child) -}}
+
+        {% set previous_group_name = current_group_name %}
+    {% endfor %}
+
+    {% if previous_group_name != '' %}
+        </div>
+    {% endif %}
+{%- endblock form_rows -%}
