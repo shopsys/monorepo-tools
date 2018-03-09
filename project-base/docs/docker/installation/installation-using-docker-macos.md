@@ -14,6 +14,13 @@ git clone https://github.com/shopsys/shopsys.git
 cd shopsys-framework
 ```
 
+### 1.1 Enable second domain (optional)
+There are two domains each for different language in default installation. First one is available via IP adress `127.0.O.1` and second one via `127.0.0.2`.
+`127.0.0.2` is not alias of `127.0.0.1` on Mac by default. To create this alias in network interface run:
+```
+sudo ifconfig lo0 alias 127.0.0.2 up
+```
+
 ### 2. Create docker-compose.yml file
 Create `docker-compose.yml` from template [`docker-compose-mac.yml.dist`](../../../docker/conf/docker-compose-mac.yml.dist).
 ```
