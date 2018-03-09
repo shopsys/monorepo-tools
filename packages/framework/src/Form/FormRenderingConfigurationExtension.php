@@ -19,6 +19,7 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
     {
         parent::buildView($view, $form, $options);
         $view->vars['is_group_container'] = $options['is_group_container'];
+        $view->vars['macro'] = $options['macro'];
     }
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
@@ -27,7 +28,8 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
     {
         $resolver->setRequired('is_group_container')
             ->addAllowedTypes('is_group_container', 'boolean')
-            ->setDefaults(['is_group_container' => false]);
+            ->setDefaults(['is_group_container' => false])
+            ->setDefaults(['macro' => null]);
     }
     /**
      * @return string

@@ -73,13 +73,43 @@
 {%- endblock localized_form_rows %}
 
 {% block multidomain_row -%}
-    <div class="form-line">
-        {{- form_label(form) -}}
-        {{- form_errors(form) -}}
+    {% if form.vars.macro is not null %}
+        {% if form.vars.macro.name == 'seoFormRowMacros' %}
+            {% import '@ShopsysFramework/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
+            {{ seoFormRowMacros.row(form, form.vars.label|trans, form.vars.macro.recommended_length) }}
+        {% elseif form.vars.macro.name == 'seoFormRowMacros.multidomainRow' %}
+            {% import '@ShopsysFramework/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
+            {{ seoFormRowMacros.multidomainRow(form, form.vars.label|trans, form.vars.macro.recommended_length) }}
+        {% endif %}
+    {% else %}
+        <div class="form-line">
+            {{- form_label(form) -}}
+            {{- form_errors(form) -}}
 
-        {{- block('multidomain_form_rows') -}}
-    </div>
+            {{- block('multidomain_form_rows') -}}
+        </div>
+    {% endif %}
 {%- endblock multidomain_row %}
+
+{% block multidomain_form_rows_no_padding %}
+    {% for domainId, contentForm in form %}
+        {% if isMultidomain() %}
+            <div class="form-line form-line--no-padd">
+                <div class="form-line__group">
+                            <span class="form-line__group__image">
+                                {{ domainIcon(domainId, 'large') }}
+                            </span>
+                    <strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+                </div>
+            </div>
+        {% endif %}
+        <div class="form-line">
+            <div class="form-line__line form-line__line--no-space">
+                {{ form_widget(contentForm) }}
+            </div>
+        </div>
+    {% endfor %}
+{%- endblock %}
 
 {% block multidomain_widget -%}
     {% for domainId, child in form %}
@@ -138,7 +168,16 @@
             {{ form_errors(form) }}
         </div>
     {% else %}
-        <div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
+        {% if form.vars.macro is not null %}
+            {% if form.vars.macro.name == 'seoFormRowMacros' %}
+                {% import '@ShopsysFramework/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
+                {{ seoFormRowMacros.row(form, form.vars.label|trans, form.vars.macro.recommended_length) }}
+            {% elseif form.vars.macro.name == 'seoFormRowMacros.multidomainRow' %}
+                {% import '@ShopsysFramework/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
+                {{ seoFormRowMacros.multidomainRow(form, form.vars.label|trans, form.vars.macro.recommended_length) }}
+            {% endif %}
+        {% else %}
+            <div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
             {{ form_label(form, label) }}
             <div class="form-line__side">
                 <div class="form-line__item">
@@ -153,6 +192,7 @@
                 </span>
             {% endif %}
         </div>
+        {% endif %}
     {% endif %}
 {%- endblock text_row %}
 
@@ -200,7 +240,13 @@
             {{ form_errors(form) }}
         </div>
     {% else %}
-        <div class="form-line">
+        {% if form.vars.macro is not null %}
+            {% if form.vars.macro.name == 'seoFormRowMacros' %}
+                {% import '@ShopsysFramework/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
+                {{ seoFormRowMacros.row(form, form.vars.label|trans, form.vars.macro.recommended_length) }}
+            {% endif %}
+        {% else %}
+            <div class="form-line">
             {% if multidomain is defined %}
                 {% if isMultidomain() %}
                     {{ form_label(form, getDomainName(domainId)) }}
@@ -223,6 +269,7 @@
                 </div>
             {% endif %}
         </div>
+        {% endif %}
     {% endif %}
 {%- endblock textarea_row %}
 
