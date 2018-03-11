@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FormRenderingConfigurationExtension extends AbstractTypeExtension
 {
+    const DISPLAY_FORMAT_MULTIDOMAIN_ROWS_NO_PADDING = 'multidomain_form_rows_no_padding';
 
     /**
      * @param \Symfony\Component\Form\FormView $view
@@ -21,6 +22,7 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
         $view->vars['is_group_container'] = $options['is_group_container'];
         $view->vars['macro'] = $options['macro'];
         $view->vars['icon_title'] = $options['icon_title'];
+        $view->vars['display_format'] = $options['display_format'];
     }
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
@@ -31,7 +33,8 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
             ->addAllowedTypes('is_group_container', 'boolean')
             ->setDefaults(['is_group_container' => false])
             ->setDefaults(['macro' => null])
-            ->setDefaults(['icon_title' => null]);
+            ->setDefaults(['icon_title' => null])
+            ->setDefaults(['display_format' => null]);
     }
     /**
      * @return string

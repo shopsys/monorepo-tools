@@ -82,12 +82,16 @@
             {{ seoFormRowMacros.multidomainRow(form, form.vars.label|trans, form.vars.macro.recommended_length) }}
         {% endif %}
     {% else %}
-        <div class="form-line">
-            {{- form_label(form) -}}
-            {{- form_errors(form) -}}
+        {% if form.vars.display_format == 'multidomain_form_rows_no_padding' %}
+            {{- block('multidomain_form_rows_no_padding') -}}
+        {% else %}
+            <div class="form-line">
+                {{- form_label(form) -}}
+                {{- form_errors(form) -}}
 
-            {{- block('multidomain_form_rows') -}}
-        </div>
+                {{- block('multidomain_form_rows') -}}
+            </div>
+        {% endif %}
     {% endif %}
 {%- endblock multidomain_row %}
 
