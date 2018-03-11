@@ -2,20 +2,3 @@
 
 {% block title %}- {{ 'Editing category'|trans }} - {{ category.name }}{% endblock %}
 {% block h1 %}{{ 'Editing category'|trans }} - {{ category.name }}{% endblock %}
-
-{% block category_urls %}
-    {{ form_row(form.urls, { label: 'URL addresses'|trans }) }}
-{% endblock %}
-
-{% block image %}
-    <div class="form-line">
-        <label class="form-line__label">
-            {{ 'Image'|trans }}:
-        </label>
-        <div class="form-line__side">
-            <div class="form-line__item">
-                {{ image(category, { size: 'original', height: 100 }) }}
-            </div>
-        </div>
-    </div>
-{% endblock %}
