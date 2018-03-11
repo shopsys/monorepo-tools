@@ -6,6 +6,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,7 +30,13 @@ class VatSettingsFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        $builderSettingsGroup = $builder->create('settings', FormType::class, [
+            'inherit_data' => true,
+            'is_group_container' => true,
+            'label' => t('Settings'),
+        ]);
+
+        $builderSettingsGroup
             ->add('defaultVat', ChoiceType::class, [
                 'required' => true,
                 'choices' => $this->vatFacade->getAll(),
@@ -38,6 +45,7 @@ class VatSettingsFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter default VAT']),
                 ],
+                'label' => t('Default VAT rate'),
             ])
             ->add('roundingType', ChoiceType::class, [
                 'required' => true,
@@ -46,7 +54,11 @@ class VatSettingsFormType extends AbstractType
                     t('To fifty hundredths (halfs)') => PricingSetting::ROUNDING_TYPE_FIFTIES,
                     t('To whole numbers') => PricingSetting::ROUNDING_TYPE_INTEGER,
                 ],
-            ])
+                'label' => t('Price including VAT rounding'),
+            ]);
+
+        $builder
+            ->add($builderSettingsGroup)
             ->add('save', SubmitType::class);
     }
 
