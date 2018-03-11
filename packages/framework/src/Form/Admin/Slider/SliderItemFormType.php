@@ -5,8 +5,10 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Slider;
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\FrameworkBundle\Form\DomainType;
 use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Model\Slider\SliderItem;
 use Shopsys\FrameworkBundle\Model\Slider\SliderItemData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -22,6 +24,7 @@ class SliderItemFormType extends AbstractType
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -30,13 +33,88 @@ class SliderItemFormType extends AbstractType
             $imageConstraints[] = new Constraints\NotBlank(['message' => 'Please choose image']);
         }
 
-        $builder
+        $builderSettingsGroup = $builder->create('settings', FormType::class, [
+            'inherit_data' => true,
+            'is_group_container' => true,
+            'label' => t('Settings'),
+        ]);
+
+        if ($options['scenario'] === self::SCENARIO_EDIT) {
+            $builderSettingsGroup
+                ->add('id', TextType::class, [
+                    'required' => true,
+                    'constraints' => [
+                        new Constraints\NotBlank(['message' => 'Please enter article name']),
+                    ],
+                    'data' => $options['slider_item']->getId(),
+                    'mapped' => false,
+                    'attr' => ['readonly' => 'readonly'],
+                    'label' => t('ID'),
+                ])
+                ->add('domainId', DomainType::class, [
+                    'required' => true,
+                    'attr' => ['readonly' => 'readonly'],
+                    'label' => t('Domain'),
+                ]);
+        }
+
+        if ($options['scenario'] === self::SCENARIO_CREATE) {
+            $builderSettingsGroup->add('domainId', DomainType::class, [
+                'required' => true,
+                'label' => t('Domain'),
+            ]);
+        }
+
+        $builderSettingsGroup
             ->add('name', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name']),
                 ],
+                'label' => t('Name'),
+                'icon_title' => t('Name serves only for internal use within the administration'),
+
             ])
+            ->add('link', UrlType::class, [
+                'required' => true,
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter link']),
+                    new Constraints\Url(['message' => 'Link must be valid URL address']),
+                ],
+                'label' => t('Link'),
+            ])
+            ->add('hidden', YesNoType::class, [
+                'required' => false,
+                'constraints' => [
+                    new Constraints\NotNull([
+                        'message' => 'Please choose visibility',
+                    ]),
+                ],
+                'label' => t('Hide'),
+            ]);
+
+        $builderImageGroup = $builder->create('image', FormType::class, [
+            'inherit_data' => true,
+            'is_group_container' => true,
+            'is_group_container_to_render_as_the_last_one' => true,
+            'label' => t('Image'),
+        ]);
+
+        if ($options['scenario'] === self::SCENARIO_EDIT) {
+            $builderImageGroup
+                ->add('image_preview', FormType::class, [
+                    'data' => $options['slider_item'],
+                    'mapped' => false,
+                    'required' => false,
+                    'label' => t('Image'),
+                    'image_preview' => [
+                        'size' => 'original',
+                        'height' => 100,
+                    ],
+                ]);
+        }
+
+        $builderImageGroup
             ->add('image', FileUploadType::class, [
                 'required' => $options['scenario'] === self::SCENARIO_CREATE,
                 'constraints' => $imageConstraints,
@@ -49,27 +127,13 @@ class SliderItemFormType extends AbstractType
                             . 'Maximum size of an image is {{ limit }} {{ suffix }}.',
                     ]),
                 ],
-            ])
-            ->add('link', UrlType::class, [
-                'required' => true,
-                'constraints' => [
-                    new Constraints\NotBlank(['message' => 'Please enter link']),
-                    new Constraints\Url(['message' => 'Link must be valid URL address']),
-                ],
-            ])
-            ->add('hidden', YesNoType::class, [
-                'required' => false,
-                'constraints' => [
-                    new Constraints\NotNull([
-                        'message' => 'Please choose visibility',
-                    ]),
-                ],
-            ])
-            ->add('save', SubmitType::class);
+                'label' => t('Upload image'),
+            ]);
 
-        if ($options['scenario'] === self::SCENARIO_CREATE) {
-            $builder->add('domainId', DomainType::class, ['required' => true]);
-        }
+        $builder
+            ->add($builderSettingsGroup)
+            ->add($builderImageGroup)
+            ->add('save', SubmitType::class);
     }
 
     /**
@@ -78,7 +142,8 @@ class SliderItemFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired('scenario')
+            ->setRequired(['scenario', 'slider_item'])
+            ->addAllowedTypes('slider_item', [SliderItem::class, 'null'])
             ->addAllowedValues('scenario', [self::SCENARIO_CREATE, self::SCENARIO_EDIT])
             ->setDefaults([
                 'data_class' => SliderItemData::class,

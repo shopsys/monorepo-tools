@@ -13,27 +13,6 @@
     {{ form_start(form) }}
         {{ form_errors(form) }}
 
-        <div class="form-group wrap-border">
-            <div class="form-group__title">
-                {{ 'Settings'|trans }}
-            </div>
-            {{ form_id(sliderItem|default(null)) }}
-            {% block domain %}
-                {{ form_row(form.domainId, { label: 'Domain'|trans }) }}
-            {% endblock %}
-            {{ form_row(form.name, { label: 'Name'|trans, icon: { title: 'Name serves only for internal use within the administration'|trans } }) }}
-            {{ form_row(form.link, { label: 'Link'|trans, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans}) }}
-            {{ form_row(form.hidden, { label: 'Hide'|trans }) }}
-        </div>
-
-        <div class="form-group">
-            <div class="form-group__title">
-                {{ 'Image'|trans }}
-            </div>
-            {% block image %}{% endblock %}
-            {{ form_row(form.image, { label: 'Upload image'|trans}) }}
-        </div>
-
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 <a href="{{ url('admin_slider_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>

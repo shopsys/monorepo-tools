@@ -15,14 +15,3 @@
         </div>
     {% endif %}
 {% endblock %}
-
-{% block image %}
-    <div class="form-line">
-        <label class="form-line__label">
-            {{ 'Image'|trans }}:
-        </label>
-        <div class="form-line__line">
-            {{ image(sliderItem, { size: 'original', height: 100 }) }}
-        </div>
-    </div>
-{% endblock %}

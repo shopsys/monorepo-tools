@@ -90,6 +90,7 @@ class SliderController extends AdminBaseController
 
         $form = $this->createForm(SliderItemFormType::class, $sliderItemData, [
             'scenario' => SliderItemFormType::SCENARIO_CREATE,
+            'slider_item' => null,
         ]);
         $form->handleRequest($request);
 
@@ -129,6 +130,7 @@ class SliderController extends AdminBaseController
 
         $form = $this->createForm(SliderItemFormType::class, $sliderItemData, [
             'scenario' => SliderItemFormType::SCENARIO_EDIT,
+            'slider_item' => $sliderItem,
         ]);
         $form->handleRequest($request);
 
