@@ -49,20 +49,37 @@
 {%- endblock localized_widget %}
 
 {% block form_row %}
-    {% if (form.vars.is_group_container == false or form.vars.is_group_container == null) %}
-        <div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
+    {% if form.vars.is_plugin_data_group == true %}
+        {% if form.pluginData is empty %}
+            {% do form.pluginData.setRendered %}
+        {% else %}
+            {% for pluginForm in form.pluginData %}
+                <div class="form-group {% if not loop.last %}wrap-border{% endif %}">
+                    <div class="form-group__title">
+                        {{ pluginForm.vars.label }}
+                    </div>
+
+                    {{ form_widget(pluginForm) }}
+                    {{ form_errors(pluginForm) }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% else %}
+        {% if (form.vars.is_group_container == false or form.vars.is_group_container == null) %}
+            <div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
             {{ form_errors(form) }}
             {{ form_label(form, label) }}
-    {% endif %}
+        {% endif %}
         {{ form_widget(form) }}
         {% if disabledField is defined %}
             <span class="form-disabled {{ disabledField.class }} js-tooltip" data-toggle="tooltip" data-placement="{{ disabledField.placement|default('right') }}"
-                title="{{ disabledField.title }}">
+                  title="{{ disabledField.title }}">
                 <i class="svg svg-pencil"></i>
             </span>
         {% endif %}
-    {% if form.vars.is_group_container == false or form.vars.is_group_container == null %}
-        </div>
+        {% if form.vars.is_group_container == false or form.vars.is_group_container == null %}
+            </div>
+        {% endif %}
     {% endif %}
 {% endblock form_row %}
 
