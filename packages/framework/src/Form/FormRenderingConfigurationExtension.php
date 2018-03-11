@@ -1,6 +1,7 @@
 <?php
 
 namespace Shopsys\FrameworkBundle\Form;
+
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
@@ -23,6 +24,7 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
         $view->vars['macro'] = $options['macro'];
         $view->vars['icon_title'] = $options['icon_title'];
         $view->vars['display_format'] = $options['display_format'];
+        $view->vars['js_container'] = $options['js_container'];
     }
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
@@ -34,7 +36,8 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
             ->setDefaults(['is_group_container' => false])
             ->setDefaults(['macro' => null])
             ->setDefaults(['icon_title' => null])
-            ->setDefaults(['display_format' => null]);
+            ->setDefaults(['display_format' => null])
+            ->setDefaults(['js_container' => null]);
     }
     /**
      * @return string

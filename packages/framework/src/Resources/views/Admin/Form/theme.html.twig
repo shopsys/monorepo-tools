@@ -256,6 +256,9 @@
                 {{ seoFormRowMacros.row(form, form.vars.label|trans, form.vars.macro.recommended_length) }}
             {% endif %}
         {% else %}
+            {% if js_container is not null %}
+                <div class="{{ js_container.container_class }}" data-type="{{ js_container.data_type }}">
+            {% endif %}
             <div class="form-line">
             {% if multidomain is defined %}
                 {% if isMultidomain() %}
@@ -278,7 +281,10 @@
                     {{- form_widget(form, { attr: inputAttr } ) -}}
                 </div>
             {% endif %}
-        </div>
+            </div>
+            {% if js_container is not null %}
+                </div>
+            {% endif %}
         {% endif %}
     {% endif %}
 {%- endblock textarea_row %}
@@ -1006,6 +1012,9 @@
             {% endif %}
 
             {% if current_group_name != '' %}
+                {% if js_container is not null %}
+                    <div class="{{ js_container.container_class }}" data-type="{{ js_container.data_type }}">
+                {% endif %}
                 <div class="form-group wrap-border">
                 <div class="form-group__title">
                     {{ form.vars.label }}
@@ -1020,5 +1029,8 @@
 
     {% if previous_group_name != '' %}
         </div>
+        {% if js_container is not null %}
+            </div>
+        {% endif %}
     {% endif %}
 {%- endblock form_rows -%}
