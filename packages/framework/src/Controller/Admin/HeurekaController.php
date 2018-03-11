@@ -44,6 +44,7 @@ class HeurekaController extends AdminBaseController
         $domainConfig = $this->adminDomainTabsFacade->getSelectedDomainConfig();
         $locale = $domainConfig->getLocale();
         $formView = null;
+        $serverName = $this->heurekaFacade->getServerNameByLocale($locale);
 
         if ($this->heurekaFacade->isDomainLocaleSupported($locale)) {
             $heurekaShopCertificationData = [
@@ -51,7 +52,9 @@ class HeurekaController extends AdminBaseController
                 'heurekaWidgetCode' => $this->heurekaSetting->getHeurekaShopCertificationWidgetByDomainId($domainId),
             ];
 
-            $form = $this->createForm(HeurekaShopCertificationFormType::class, $heurekaShopCertificationData);
+            $form = $this->createForm(HeurekaShopCertificationFormType::class, $heurekaShopCertificationData, [
+                'server_name' => $serverName,
+            ]);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -70,7 +73,7 @@ class HeurekaController extends AdminBaseController
 
         return $this->render('@ShopsysFramework/Admin/Content/Heureka/setting.html.twig', [
             'form' => $formView,
-            'serverName' => $this->heurekaFacade->getServerNameByLocale($locale),
+            'serverName' => $serverName,
             'selectedDomainConfig' => $domainConfig,
         ]);
     }

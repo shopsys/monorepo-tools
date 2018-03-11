@@ -8,10 +8,6 @@
 
     {% if form is not null %}
         {{ form_start(form) }}
-            {{ form_row(form.heurekaApiKey, {label: 'Code of service Heureka - Verified by Customer'|trans, icon: {
-                title: 'Enter 32-digit code which will be sent to server %serverName%'|trans ({'%serverName%': serverName}) } }) }}
-            {{ form_row(form.heurekaWidgetCode, {label: 'Heureka Widget code'|trans, attr: {class: 'heureka-widget-input'} }) }}
-
 
             {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
                 {% block fixed_bar_content %}
