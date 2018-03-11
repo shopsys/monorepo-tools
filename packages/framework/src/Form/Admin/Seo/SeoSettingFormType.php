@@ -6,6 +6,7 @@ use Shopsys\FrameworkBundle\Component\Constraints\NotInArray;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -35,6 +36,7 @@ class SeoSettingFormType extends AbstractType
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -49,7 +51,15 @@ class SeoSettingFormType extends AbstractType
             }
         }
 
-        $builder
+        $builderSettingsGroup = $builder->create('settings', FormType::class, [
+            'inherit_data' => true,
+            'required' => false,
+            'is_group_container' => true,
+            'is_group_container_to_render_as_the_last_one' => true,
+            'label' => t('Settings'),
+        ]);
+
+        $builderSettingsGroup
             ->add('title', TextType::class, [
                 'required' => false,
                 'constraints' => [
@@ -58,6 +68,7 @@ class SeoSettingFormType extends AbstractType
                         'message' => 'Same title is used on another domain',
                     ]),
                 ],
+                'label' => t('Headline'),
             ])
             ->add('titleAddOn', TextType::class, [
                 'required' => false,
@@ -67,6 +78,8 @@ class SeoSettingFormType extends AbstractType
                         'message' => 'Same title complement is used on another domain',
                     ]),
                 ],
+                'label' => t('Complement to title'),
+                'icon_title' => 'Complement to title will be set as suffix to all titles e.g. if complement is set “ | My shop” and product name is “iPhone S7” the result title for this products page will be “iPhone S7 | My shop”.',
             ])
             ->add('metaDescription', TextareaType::class, [
                 'required' => false,
@@ -76,7 +89,11 @@ class SeoSettingFormType extends AbstractType
                         'message' => 'Same description is used on another domain',
                     ]),
                 ],
-            ])
+                'label' => t('Meta description'),
+            ]);
+
+        $builder
+            ->add($builderSettingsGroup)
             ->add('save', SubmitType::class);
     }
 
