@@ -26,6 +26,7 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
         $view->vars['display_format'] = $options['display_format'];
         $view->vars['js_container'] = $options['js_container'];
         $view->vars['is_plugin_data_group'] = $options['is_plugin_data_group'];
+        $view->vars['image_preview'] = $options['image_preview'];
     }
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
@@ -39,7 +40,8 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
             ->setDefaults(['icon_title' => null])
             ->setDefaults(['display_format' => null])
             ->setDefaults(['js_container' => null])
-            ->setDefaults(['is_plugin_data_group' => false]);
+            ->setDefaults(['is_plugin_data_group' => false])
+            ->setDefaults(['image_preview' => null]);
     }
     /**
      * @return string
