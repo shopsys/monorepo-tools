@@ -1035,7 +1035,7 @@
                 {% if js_container is not null %}
                     <div class="{{ js_container.container_class }}" data-type="{{ js_container.data_type }}">
                 {% endif %}
-                <div class="form-group wrap-border">
+                <div class="form-group{% if is_group_container_to_render_as_the_last_one != true %} wrap-border{% endif %}">
                 <div class="form-group__title">
                     {{ form.vars.label }}
                 </div>

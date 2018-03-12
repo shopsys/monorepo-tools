@@ -27,6 +27,7 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
         $view->vars['js_container'] = $options['js_container'];
         $view->vars['is_plugin_data_group'] = $options['is_plugin_data_group'];
         $view->vars['image_preview'] = $options['image_preview'];
+        $view->vars['is_group_container_to_render_as_the_last_one'] = $options['is_group_container_to_render_as_the_last_one'];
     }
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
@@ -41,7 +42,8 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
             ->setDefaults(['display_format' => null])
             ->setDefaults(['js_container' => null])
             ->setDefaults(['is_plugin_data_group' => false])
-            ->setDefaults(['image_preview' => null]);
+            ->setDefaults(['image_preview' => null])
+            ->setDefaults(['is_group_container_to_render_as_the_last_one' => false]);
     }
     /**
      * @return string
