@@ -9,35 +9,6 @@
     {{ form_start(form) }}
         {{ form_errors(form) }}
 
-        <div class="form-group wrap-border">
-            <div class="form-group__title">
-                {{ 'Article data'|trans }}
-            </div>
-
-            {{ form_id(article|default(null)) }}
-
-            {% block article_domain %}
-                {{ form_row(form.domainId, { label: 'Domain'|trans }) }}
-            {% endblock %}
-            {% block article_placement %}{% endblock %}
-
-            {{ form_row(form.name, { label: 'Name'|trans}) }}
-            {{ form_row(form.hidden, { label: 'Hide'|trans, newline: true}) }}
-            {{ form_row(form.text, { label: 'Content'|trans, newline: true}) }}
-        </div>
-
-        <div class="form-group">
-            <div class="form-group__title">
-                {{ 'SEO'|trans }}
-            </div>
-
-            {{ seoFormRowMacros.row(form.seoTitle, 'Page title'|trans, 60) }}
-            {{ seoFormRowMacros.row(form.seoMetaDescription, 'Meta description'|trans, 155, 'input--seo') }}
-            {{ seoFormRowMacros.row(form.seoH1, 'Heading (H1)'|trans) }}
-
-            {% block article_urls %}{% endblock %}
-        </div>
-
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 <a href="{{ url('admin_article_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
