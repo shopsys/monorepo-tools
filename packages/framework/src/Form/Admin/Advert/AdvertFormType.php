@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Form\Admin\Advert;
 
 use Shopsys\FormTypesBundle\YesNoType;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Form\DomainType;
 use Shopsys\FrameworkBundle\Form\FileUploadType;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
@@ -10,6 +11,7 @@ use Shopsys\FrameworkBundle\Model\Advert\Advert;
 use Shopsys\FrameworkBundle\Model\Advert\AdvertData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,6 +24,19 @@ class AdvertFormType extends AbstractType
 {
     const VALIDATION_GROUP_TYPE_IMAGE = 'typeImage';
     const VALIDATION_GROUP_TYPE_CODE = 'typeCode';
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_EDIT = 'edit';
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
+
+    public function __construct(
+        Domain $domain
+    ) {
+        $this->domain = $domain;
+    }
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
@@ -36,18 +51,48 @@ class AdvertFormType extends AbstractType
                 'groups' => [self::VALIDATION_GROUP_TYPE_IMAGE],
             ]),
         ];
-        $builder
-            ->add('domainId', DomainType::class, [
-                'required' => true,
-                'constraints' => [
-                    new Constraints\NotBlank(),
-                ],
-            ])
+
+        $builderSettingsGroup = $builder->create('settings', FormType::class, [
+            'inherit_data' => true,
+            'is_group_container' => true,
+            'label' => t('Settings'),
+        ]);
+
+        if ($options['scenario'] === self::SCENARIO_EDIT) {
+            $builderSettingsGroup
+                ->add('id', TextType::class, [
+                    'required' => false,
+                    'data' => $options['advert']->getId(),
+                    'mapped' => false,
+                    'attr' => ['readonly' => 'readonly'],
+                    'label' => t('ID'),
+                ])
+                ->add('domain', TextType::class, [
+                    'required' => false,
+                    'data' => $this->domain->getDomainConfigById($options['advert']->getDomainId())->getName(),
+                    'mapped' => false,
+                    'attr' => ['readonly' => 'readonly'],
+                    'label' => t('Domain'),
+                ]);
+        } else {
+            $builderSettingsGroup
+                ->add('domainId', DomainType::class, [
+                    'required' => true,
+                    'constraints' => [
+                        new Constraints\NotBlank(),
+                    ],
+                    'label' => t('Domain'),
+                ]);
+        }
+
+        $builderSettingsGroup
             ->add('name', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name of advertisement area']),
                 ],
+                'label' => t('Name'),
+                'icon_title' => 'Name serves only for internal use within the administration.',
             ])
             ->add('type', ChoiceType::class, [
                 'required' => true,
@@ -60,6 +105,7 @@ class AdvertFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose advertisement type']),
                 ],
+                'label' => t('Type'),
             ])
             ->add('positionName', ChoiceType::class, [
                 'required' => true,
@@ -73,6 +119,11 @@ class AdvertFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose advertisement area']),
                 ],
+                'label' => t('Area'),
+            ])
+            ->add('hidden', YesNoType::class, [
+                'required' => false,
+                'label' => t('Hide advertisement'),
             ])
             ->add('code', TextareaType::class, [
                 'required' => true,
@@ -82,9 +133,43 @@ class AdvertFormType extends AbstractType
                         'groups' => [self::VALIDATION_GROUP_TYPE_CODE],
                     ]),
                 ],
-            ])
-            ->add('hidden', YesNoType::class, ['required' => false])
-            ->add('link', TextType::class, ['required' => false])
+                'js_container' => [
+                    'container_class' => 'js-advert-type-content form-line__js',
+                    'data_type' => 'code',
+                ],
+            ]);
+
+        $builderImageGroup = $builder->create('image_group', FormType::class, [
+            'inherit_data' => true,
+            'is_group_container' => true,
+            'label' => t('Images'),
+            'js_container' => [
+                'container_class' => 'js-advert-type-content',
+                'data_type' => 'image',
+            ],
+        ]);
+
+        $builderImageGroup
+            ->add('link', TextType::class, [
+                'required' => false,
+                'label' => t('Link'),
+            ]);
+
+        if ($options['scenario'] === self::SCENARIO_EDIT) {
+            $builderImageGroup
+                ->add('image_preview', FormType::class, [
+                    'data' => $options['advert'],
+                    'mapped' => false,
+                    'required' => false,
+                    'label' => t('Image'),
+                    'image_preview' => [
+                        'size' => 'original',
+                        'height' => 100,
+                    ],
+                ]);
+        }
+
+        $builderImageGroup
             ->add('image', FileUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
@@ -97,7 +182,12 @@ class AdvertFormType extends AbstractType
                     ]),
                 ],
                 'constraints' => ($options['image_exists'] ? [] : $imageConstraints),
-            ])
+                'label' => t('Upload new image'),
+            ]);
+
+        $builder
+            ->add($builderSettingsGroup)
+            ->add($builderImageGroup)
             ->add('save', SubmitType::class);
     }
 
@@ -107,8 +197,10 @@ class AdvertFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired('image_exists')
+            ->setRequired(['scenario', 'advert', 'image_exists'])
             ->setAllowedTypes('image_exists', 'bool')
+            ->setAllowedValues('scenario', [self::SCENARIO_CREATE, self::SCENARIO_EDIT])
+            ->setAllowedTypes('advert', [Advert::class, 'null'])
             ->setDefaults([
                 'image_exists' => false,
                 'data_class' => AdvertData::class,
