@@ -8,12 +8,7 @@
     {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
     {{ form_start(form) }}
-        <div class="form-group">
-            <div class="form-group__title">
-                {{ 'Settings'|trans }}
-            </div>
-            {{ form_row(form.content, { label: 'Content'|trans}) }}
-        </div>
+
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 {{ form_widget(form.save, { label: 'Save'|trans}) }}

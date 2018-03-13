@@ -80,6 +80,8 @@ class AdvertController extends AdminBaseController
 
         $form = $this->createForm(AdvertFormType::class, $advertData, [
             'image_exists' => $this->imageExtension->imageExists($advert),
+            'scenario' => AdvertFormType::SCENARIO_EDIT,
+            'advert' => $advert,
         ]);
         $form->handleRequest($request);
 
@@ -173,7 +175,10 @@ class AdvertController extends AdminBaseController
         $advertData = new AdvertData();
         $advertData->domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
 
-        $form = $this->createForm(AdvertFormType::class, $advertData);
+        $form = $this->createForm(AdvertFormType::class, $advertData, [
+            'scenario' => AdvertFormType::SCENARIO_CREATE,
+            'advert' => null,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

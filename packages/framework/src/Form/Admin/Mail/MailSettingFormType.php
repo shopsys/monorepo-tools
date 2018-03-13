@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Mail;
 use Shopsys\FrameworkBundle\Component\Constraints\Email;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,18 +20,30 @@ class MailSettingFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        $builderSettingsGroup = $builder->create('settings', FormType::class, [
+            'inherit_data' => true,
+            'label' => t('Settings'),
+            'is_group_container' => true,
+            'is_group_container_to_render_as_the_last_one' => true,
+        ]);
+
+        $builderSettingsGroup
             ->add('email', EmailType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter e-mail']),
                     new Email(['message' => 'Please enter valid e-mail']),
                 ],
+                'label' => t('Main administrator e-mail'),
             ])
             ->add('name', TextType::class, [
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter full name']),
                 ],
-            ])
+                'label' => t('E-mail name'),
+            ]);
+
+        $builder
+            ->add($builderSettingsGroup)
             ->add('save', SubmitType::class);
     }
 

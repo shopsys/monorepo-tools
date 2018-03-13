@@ -7,23 +7,6 @@
     {{ form_start(form) }}
         {{ form_errors(form) }}
 
-        <div class="form-group wrap-border">
-            <div class="form-group__title">
-                {{ 'Settings'|trans }}
-            </div>
-            {{ form_id(administrator|default(null)) }}
-
-            {{ form_row(form.username, { label: 'Login name'|trans}) }}
-            {{ form_row(form.realName, { label: 'Full name'|trans}) }}
-            {{ form_row(form.email, { label: 'E-mail'|trans}) }}
-            {{ form_row(form.password.first, { label: 'Password'|trans,
-                icon: {
-                    title: 'Password must be at least six characters and can\'t be the same as login name.'|trans} }) }}
-            {{ form_row(form.password.second, { label: 'Password again'|trans}) }}
-        </div>
-
-        {% block admin_log %}{% endblock %}
-
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 <a href="{{ url('admin_administrator_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
@@ -31,4 +14,6 @@
             {% endblock %}
         {% endembed %}
     {{ form_end(form) }}
+
+    {% block admin_log %}{% endblock %}
 {% endblock %}

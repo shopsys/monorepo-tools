@@ -9,6 +9,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Form\DomainsType;
 use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension;
 use Shopsys\FrameworkBundle\Form\InvertChoiceTypeExtension;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
 use Shopsys\FrameworkBundle\Form\UrlListType;
@@ -18,6 +19,7 @@ use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -27,6 +29,9 @@ use Symfony\Component\Validator\Constraints;
 
 class CategoryFormType extends AbstractType
 {
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_EDIT = 'edit';
+
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
      */
@@ -99,7 +104,27 @@ class CategoryFormType extends AbstractType
             $parentChoices = $this->categoryFacade->getAll();
         }
 
-        $builder
+        $builderSettingsGroup = $builder->create('settings', FormType::class, [
+            'inherit_data' => true,
+            'is_group_container' => true,
+            'label' => t('Settings'),
+        ]);
+
+        if ($options['scenario'] === self::SCENARIO_EDIT) {
+            $builderSettingsGroup
+                ->add('id', TextType::class, [
+                    'required' => true,
+                    'constraints' => [
+                        new Constraints\NotBlank(['message' => 'Please enter article name']),
+                    ],
+                    'data' => $options['category']->getId(),
+                    'mapped' => false,
+                    'attr' => ['readonly' => 'readonly'],
+                    'label' => t('ID'),
+                ]);
+        }
+
+        $builderSettingsGroup
             ->add('name', LocalizedType::class, [
                 'main_constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name']),
@@ -110,29 +135,7 @@ class CategoryFormType extends AbstractType
                         new Constraints\Length(['max' => 255, 'maxMessage' => 'Name cannot be longer than {{ limit }} characters']),
                     ],
                 ],
-            ])
-            ->add('seoTitles', MultidomainType::class, [
-                'entry_type' => TextType::class,
-                'required' => false,
-                'options_by_domain_id' => $seoTitlesOptionsByDomainId,
-            ])
-            ->add('seoMetaDescriptions', MultidomainType::class, [
-                'entry_type' => TextareaType::class,
-                'required' => false,
-                'options_by_domain_id' => $seoMetaDescriptionsOptionsByDomainId,
-            ])
-            ->add('seoH1s', MultidomainType::class, [
-                'required' => false,
-                'entry_options' => [
-                    'constraints' => [
-                        new Constraints\Length(['max' => 255, 'maxMessage' => 'Heading (H1) cannot be longer than {{ limit }} characters']),
-                    ],
-                ],
-                'options_by_domain_id' => $seoH1OptionsByDomainId,
-            ])
-            ->add('descriptions', MultidomainType::class, [
-                'entry_type' => CKEditorType::class,
-                'required' => false,
+                'label' => t('Name'),
             ])
             ->add('parent', ChoiceType::class, [
                 'required' => false,
@@ -142,16 +145,100 @@ class CategoryFormType extends AbstractType
                     return $padding . $category->getName();
                 },
                 'choice_value' => 'id',
+                'label' => t('Ancestor category'),
             ])
             ->add('showOnDomains', DomainsType::class, [
                 InvertChoiceTypeExtension::INVERT_OPTION => true,
                 'property_path' => 'hiddenOnDomains',
                 'required' => false,
+                'label' => t('Display on'),
+            ]);
+
+        $builderSeoGroup = $builder->create('seo', FormType::class, [
+            'inherit_data' => true,
+            'is_group_container' => true,
+            'label' => t('Seo'),
+        ]);
+
+        $builderSeoGroup
+            ->add('seoTitles', MultidomainType::class, [
+                'entry_type' => TextType::class,
+                'required' => false,
+                'options_by_domain_id' => $seoTitlesOptionsByDomainId,
+                'macro' => [
+                    'name' => 'seoFormRowMacros.multidomainRow',
+                    'recommended_length' => 60,
+                ],
+                'label' => t('Page title'),
             ])
-            ->add('urls', UrlListType::class, [
-                'route_name' => 'front_product_list',
-                'entity_id' => $options['category'] !== null ? $options['category']->getId() : null,
+            ->add('seoMetaDescriptions', MultidomainType::class, [
+                'entry_type' => TextareaType::class,
+                'required' => false,
+                'options_by_domain_id' => $seoMetaDescriptionsOptionsByDomainId,
+                'macro' => [
+                    'name' => 'seoFormRowMacros.multidomainRow',
+                    'recommended_length' => 155,
+                ],
+                'label' => t('Meta description'),
             ])
+            ->add('seoH1s', MultidomainType::class, [
+                'required' => false,
+                'entry_options' => [
+                    'constraints' => [
+                        new Constraints\Length(['max' => 255, 'maxMessage' => 'Heading (H1) cannot be longer than {{ limit }} characters']),
+                    ],
+                ],
+                'options_by_domain_id' => $seoH1OptionsByDomainId,
+                'macro' => [
+                    'name' => 'seoFormRowMacros.multidomainRow',
+                    'recommended_length' => null,
+                ],
+                'label' => t('Heading (H1)'),
+            ]);
+
+        if ($options['scenario'] === self::SCENARIO_EDIT) {
+            $builderSeoGroup
+                ->add('urls', UrlListType::class, [
+                    'route_name' => 'front_product_list',
+                    'entity_id' => $options['category'] !== null ? $options['category']->getId() : null,
+                    'label' => t('URL addresses'),
+                ]);
+        }
+
+        $builderDescriptionGroup = $builder->create('description', FormType::class, [
+            'inherit_data' => true,
+            'is_group_container' => true,
+            'label' => t('Description'),
+        ]);
+
+        $builderDescriptionGroup
+            ->add('descriptions', MultidomainType::class, [
+                'entry_type' => CKEditorType::class,
+                'required' => false,
+                'display_format' => FormRenderingConfigurationExtension::DISPLAY_FORMAT_MULTIDOMAIN_ROWS_NO_PADDING,
+            ]);
+
+        $builderImageGroup = $builder->create('image', FormType::class, [
+            'inherit_data' => true,
+            'is_group_container' => true,
+            'label' => t('Image'),
+        ]);
+
+        if ($options['scenario'] === self::SCENARIO_EDIT) {
+            $builderImageGroup
+                ->add('image_preview', FormType::class, [
+                    'data' => $options['category'],
+                    'mapped' => false,
+                    'required' => false,
+                    'label' => t('Image'),
+                    'image_preview' => [
+                        'size' => 'original',
+                        'height' => 100,
+                    ],
+                ]);
+        }
+
+        $builderImageGroup
             ->add('image', FileUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
@@ -163,10 +250,23 @@ class CategoryFormType extends AbstractType
                             . 'Maximum size of an image is {{ limit }} {{ suffix }}.',
                     ]),
                 ],
-            ])
-            ->add('save', SubmitType::class);
+                'label' => t('Upload image'),
+            ]);
 
-        $this->pluginCrudExtensionFacade->extendForm($builder, 'category', 'pluginData');
+        $builderPluginGroup = $builder->create('plugin', FormType::class, [
+            'inherit_data' => true,
+            'is_plugin_data_group' => true,
+        ]);
+
+        $this->pluginCrudExtensionFacade->extendForm($builderPluginGroup, 'category', 'pluginData');
+
+        $builder
+            ->add($builderSettingsGroup)
+            ->add($builderSeoGroup)
+            ->add($builderDescriptionGroup)
+            ->add($builderImageGroup)
+            ->add($builderPluginGroup)
+            ->add('save', SubmitType::class);
     }
 
     /**
@@ -175,8 +275,9 @@ class CategoryFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired('category')
+            ->setRequired(['scenario', 'category'])
             ->setAllowedTypes('category', [Category::class, 'null'])
+            ->setAllowedValues('scenario', [self::SCENARIO_CREATE, self::SCENARIO_EDIT])
             ->setDefaults([
                 'data_class' => CategoryData::class,
                 'attr' => ['novalidate' => 'novalidate'],

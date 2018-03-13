@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Form\Admin\Heureka;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,7 +19,14 @@ class HeurekaShopCertificationFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        $builderSettingsGroup = $builder->create('settings', FormType::class, [
+            'inherit_data' => true,
+            'label' => t('Settings'),
+            'is_group_container' => true,
+            'is_group_container_to_render_as_the_last_one' => true,
+        ]);
+
+        $builderSettingsGroup
             ->add('heurekaApiKey', TextType::class, [
                 'required' => false,
                 'constraints' => [
@@ -28,10 +36,16 @@ class HeurekaShopCertificationFormType extends AbstractType
                         'exactMessage' => 'Heureka API must be {{ limit }} characters',
                     ]),
                 ],
+                'label' => t('Code of service Heureka - Verified by Customer'),
+                'icon_title' => t('Enter 32-digit code which will be sent to server') . ' ' . $options['server_name'],
             ])
             ->add('heurekaWidgetCode', TextareaType::class, [
                 'required' => false,
-            ])
+                'label' => t('Heureka Widget code'),
+            ]);
+
+        $builder
+            ->add($builderSettingsGroup)
             ->add('save', SubmitType::class);
     }
 
@@ -40,8 +54,11 @@ class HeurekaShopCertificationFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
+        $resolver
+            ->setRequired('server_name')
+            ->setAllowedTypes('server_name', ['string', 'null'])
+            ->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
-        ]);
+            ]);
     }
 }

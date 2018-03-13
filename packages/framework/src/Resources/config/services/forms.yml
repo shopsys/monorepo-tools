@@ -24,6 +24,11 @@ services:
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\CollectionType }
 
+  Shopsys\FrameworkBundle\Form\FormGroup:
+    class: Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension
+    tags:
+      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
   Shopsys\FrameworkBundle\Form\MoneyTypeExtension:
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\MoneyType }

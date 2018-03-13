@@ -7,13 +7,6 @@
     {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
     {{ form_start(form) }}
-        <div class="form-group">
-            <div class="form-group__title">
-                {{ 'Settings'|trans }}
-            </div>
-            {{ form_row(form.email, { 'label': 'Main administrator e-mail'|trans }) }}
-            {{ form_row(form.name, { 'label': 'E-mail name'|trans }) }}
-        </div>
 
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}

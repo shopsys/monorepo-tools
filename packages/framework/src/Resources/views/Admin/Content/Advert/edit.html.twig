@@ -2,15 +2,3 @@
 
 {% block title %}- {{ 'Editing advertising'|trans }} - {{ advert.name }}{% endblock %}
 {% block h1 %}{{ 'Editing advertising'|trans }} - {{ advert.name }}{% endblock %}
-{% block image %}
-    <div class="form-line">
-        <label class="form-line__label">
-            {{ 'Uploaded image'|trans }}:
-        </label>
-        <div class="form-line__side">
-            <div class="form-line__item">
-                {{ image(advert, { size: 'original', height: 100 }) }}
-            </div>
-        </div>
-    </div>
-{% endblock %}

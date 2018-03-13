@@ -2,25 +2,3 @@
 
 {% block title %}- {{ 'Editing article'|trans }} - {{ article.name }}{% endblock %}
 {% block h1 %}{{ 'Editing article'|trans }} - {{ article.name }}{% endblock %}
-
-{% block article_domain %}
-    {% if isMultidomain() %}
-        <div class="form-line">
-            <label class="form-line__label">{{ 'Domain:'|trans }}</label>
-            <div class="form-line__side">
-                <div class="form-line__item">
-                    <input
-                        type="text"
-                        value="{{ getDomainName(article.domainId) }}"
-                        class="input"
-                        readonly="readonly"
-                    >
-                </div>
-            </div>
-        </div>
-    {% endif %}
-{% endblock %}
-
-{% block article_urls %}
-    {{ form_row(form.urls, { label: 'URL addresses'|trans }) }}
-{% endblock %}

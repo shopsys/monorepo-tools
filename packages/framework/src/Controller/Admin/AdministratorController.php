@@ -105,6 +105,7 @@ class AdministratorController extends AdminBaseController
         $administratorData->setFromEntity($administrator);
 
         $form = $this->createForm(AdministratorFormType::class, $administratorData, [
+            'administrator' => $administrator,
             'scenario' => AdministratorFormType::SCENARIO_EDIT,
         ]);
         $form->handleRequest($request);
@@ -172,6 +173,7 @@ class AdministratorController extends AdminBaseController
     {
         $form = $this->createForm(AdministratorFormType::class, new AdministratorData(), [
             'scenario' => AdministratorFormType::SCENARIO_CREATE,
+            'administrator' => null,
         ]);
         $form->handleRequest($request);
 

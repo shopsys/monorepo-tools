@@ -18,3 +18,20 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
     - this is going to be a base of a newly built architecture of [Shopsys Framework](http://www.shopsys-framework.com/)
 - styles related to admin extracted from [shopsys/project-base](https://github.com/shopsys/project-base) package (@MattCzerner)
     - this will allow styles to be upgraded via `composer update` in project implementations
+
+### Changed
+- configuration of form types in administration is enabled using form type options (@Miroslav-Stopka)
+    -  following form types configured using options:
+        - VatSettingsFormType
+        - SliderItemFormType
+        - ShopInfoSettingFormType
+        - SeoSettingFormType
+        - MailSettingFormType
+        - LegalConditionsSettingFormType
+        - HeurekaShopCertificationFormType
+        - CustomerCommunicationFormType
+        - CookiesSettingFormType
+        - CategoryFormType
+        - ArticleFormType
+        - AdvertFormType
+        - AdministratorFormType

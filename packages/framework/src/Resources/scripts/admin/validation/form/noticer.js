@@ -5,7 +5,7 @@
         var $advertForm = $('form[name="advert_form"]');
 
         var getCheckedType = function () {
-            return $advertForm.find('input[name="advert_form[type]"]:checked').val();
+            return $advertForm.find('input[name="advert_form[settings][type]"]:checked').val();
         };
 
         var initAdvertForm = function () {
@@ -14,7 +14,7 @@
                 .filter('[data-type=' + getCheckedType() + ']').show();
         };
 
-        $advertForm.find('input[name="advert_form[type]"]').change(initAdvertForm);
+        $advertForm.find('input[name="advert_form[settings][type]"]').change(initAdvertForm);
         initAdvertForm();
 
         $advertForm.jsFormValidator({

@@ -8,15 +8,6 @@
     {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
     {{ form_start(form) }}
-        <div class="form-group">
-            <div class="form-group__title">
-                {{ 'Settings'|trans }}
-            </div>
-            {{ form_row(form.title, { label: 'Headline'|trans }) }}
-            {% set infoText = 'Complement to title will be set as suffix to all titles e.g. if complement is set “ | My shop” and product name is “iPhone S7” the result title for this products page will be “iPhone S7 | My shop”.'|trans %}
-            {{ form_row(form.titleAddOn, { label: 'Complement to title'|trans, icon: { title: infoText } }) }}
-            {{ form_row(form.metaDescription, { label: 'Meta description'|trans }) }}
-        </div>
 
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}

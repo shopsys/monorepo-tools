@@ -69,6 +69,7 @@ class CategoryController extends AdminBaseController
 
         $form = $this->createForm(CategoryFormType::class, $categoryData, [
             'category' => $category,
+            'scenario' => CategoryFormType::SCENARIO_EDIT,
         ]);
         $form->handleRequest($request);
 
@@ -107,6 +108,7 @@ class CategoryController extends AdminBaseController
 
         $form = $this->createForm(CategoryFormType::class, $categoryData, [
             'category' => null,
+            'scenario' => CategoryFormType::SCENARIO_CREATE,
         ]);
         $form->handleRequest($request);
 

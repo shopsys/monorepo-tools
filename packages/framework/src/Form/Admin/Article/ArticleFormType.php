@@ -12,6 +12,7 @@ use Shopsys\FrameworkBundle\Model\Article\ArticleData;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -48,47 +49,19 @@ class ArticleFormType extends AbstractType
     {
         $seoMetaDescriptionAttributes = $this->getSeoMetaDescriptionAttributes($options);
 
-        $builder
-            ->add('name', TextType::class, [
-                'required' => true,
-                'constraints' => [
-                    new Constraints\NotBlank(['message' => 'Please enter article name']),
-                ],
-            ])
-            ->add('hidden', YesNoType::class, ['required' => false])
-            ->add('text', CKEditorType::class, [
-                'required' => true,
-                'constraints' => [
-                    new Constraints\NotBlank(['message' => 'Please enter article content']),
-                ],
-            ])
-            ->add('seoTitle', TextType::class, [
-                'required' => false,
-                'attr' => [
-                    'class' => 'js-dynamic-placeholder',
-                    'data-placeholder-source-input-id' => 'article_form_name',
-                ],
-            ])
-            ->add('seoMetaDescription', TextareaType::class, [
-                'required' => false,
-                'attr' => $seoMetaDescriptionAttributes,
-            ])
-            ->add('seoH1', TextType::class, [
-                'required' => false,
-                'attr' => [
-                    'class' => 'js-dynamic-placeholder',
-                    'data-placeholder-source-input-id' => 'article_form_name',
-                ],
-            ])
-            ->add('urls', UrlListType::class, [
-                'route_name' => 'front_article_detail',
-                'entity_id' => $options['article'] !== null ? $options['article']->getId() : null,
-            ])
-            ->add('save', SubmitType::class);
+        $builderArticleData = $builder->create('articleData', FormType::class, [
+            'inherit_data' => true,
+            'label' => t('Article data'),
+            'is_group_container' => true,
+        ]);
 
         if ($options['article'] === null) {
-            $builder
-                ->add('domainId', DomainType::class, ['required' => true])
+            $builderArticleData
+                ->add('domainId', DomainType::class, [
+                    'required' => true,
+                    'data' => $options['domain_id'],
+                    'label' => t('Domain'),
+                ])
                 ->add('placement', ChoiceType::class, [
                     'required' => true,
                     'choices' => [
@@ -100,8 +73,96 @@ class ArticleFormType extends AbstractType
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please choose article placement']),
                     ],
+                    'label' => t('Location'),
+                ]);
+        } else {
+            $builderArticleData
+                ->add('id', TextType::class, [
+                    'required' => false,
+                    'data' => $options['article']->getId(),
+                    'mapped' => false,
+                    'attr' => ['readonly' => 'readonly'],
+                    'label' => t('ID'),
+                ])
+                ->add('domain', TextType::class, [
+                    'required' => false,
+                    'data' => $this->domain->getDomainConfigById($options['article']->getDomainId())->getName(),
+                    'mapped' => false,
+                    'attr' => ['readonly' => 'readonly'],
+                    'label' => t('Domain'),
                 ]);
         }
+        $builderArticleData
+            ->add('name', TextType::class, [
+                'required' => true,
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter article name']),
+                ],
+                'label' => t('Name'),
+            ])
+            ->add('hidden', YesNoType::class, [
+                'required' => false,
+                'label' => t('Hide'),
+            ])
+            ->add('text', CKEditorType::class, [
+                'required' => true,
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter article content']),
+                ],
+                'label' => t('Content'),
+            ]);
+
+        $builderSeoData = $builder->create('seo', FormType::class, [
+            'inherit_data' => true,
+            'label' => t('SEO'),
+            'is_group_container' => true,
+            'is_group_container_to_render_as_the_last_one' => true,
+        ]);
+
+        $builderSeoData
+            ->add('seoTitle', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'js-dynamic-placeholder',
+                    'data-placeholder-source-input-id' => 'article_form_name',
+                ],
+                'label' => t('Page title'),
+                'macro' => [
+                    'name' => 'seoFormRowMacros',
+                    'recommended_length' => 60,
+                ],
+            ])
+            ->add('seoMetaDescription', TextareaType::class, [
+                'required' => false,
+                'attr' => $seoMetaDescriptionAttributes,
+                'label' => t('Meta description'),
+                'macro' => [
+                    'name' => 'seoFormRowMacros',
+                    'recommended_length' => 155,
+                ],
+            ])
+            ->add('seoH1', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'js-dynamic-placeholder',
+                    'data-placeholder-source-input-id' => 'article_form_name',
+                ],
+                'label' => t('Heading (H1)'),
+            ]);
+
+        if ($options['article'] !== null) {
+            $builderSeoData
+                ->add('urls', UrlListType::class, [
+                    'label' => t('URL addresses'),
+                    'route_name' => 'front_article_detail',
+                    'entity_id' => $options['article'] !== null ? $options['article']->getId() : null,
+                ]);
+        }
+
+        $builder
+            ->add($builderArticleData)
+            ->add($builderSeoData)
+            ->add('save', SubmitType::class);
     }
 
     /**

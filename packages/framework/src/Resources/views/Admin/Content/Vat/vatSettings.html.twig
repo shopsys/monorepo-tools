@@ -1,16 +1,7 @@
 {{ form_start(form) }}
-    <div class="wrap-border form-group">
-        <div class="form-group__title">
-            {{ 'Settings'|trans }}
-        </div>
-        {{ form_row(form.defaultVat, { 'label': 'Default VAT rate'|trans }) }}
-        {{ form_row(form.roundingType, { 'label': 'Price including VAT rounding'|trans }) }}
-
-        {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
-            {% block fixed_bar_content %}
-                {{ form_widget(form.save, { label: 'Save changes'|trans}) }}
-            {% endblock %}
-        {% endembed %}
-
-    </div>
+    {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+        {% block fixed_bar_content %}
+            {{ form_widget(form.save, { label: 'Save changes'|trans}) }}
+        {% endblock %}
+    {% endembed %}
 {{ form_end(form) }}
