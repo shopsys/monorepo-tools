@@ -20,7 +20,12 @@ class GenerateGruntfileCommand extends Command
     /**
      * @var string
      */
-    private $stylesDirectory;
+    private $customResourcesDirectory;
+
+    /**
+     * @var string
+     */
+    private $frameworkResourcesDirectory;
 
     /**
      * @var string
@@ -43,20 +48,23 @@ class GenerateGruntfileCommand extends Command
     private $cssFacade;
 
     /**
-     * @param string $stylesDirectory
+     * @param string $customResourcesDirectory
+     * @param string $frameworkResourcesDirectory
      * @param string $rootDirectory
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Twig\Environment $twig
      * @param \Shopsys\FrameworkBundle\Component\Css\CssFacade $cssFacade
      */
     public function __construct(
-        $stylesDirectory,
-        $rootDirectory,
+        string $customResourcesDirectory,
+        string $frameworkResourcesDirectory,
+        string $rootDirectory,
         Domain $domain,
         Environment $twig,
         CssFacade $cssFacade
     ) {
-        $this->stylesDirectory = $stylesDirectory;
+        $this->customResourcesDirectory = $customResourcesDirectory;
+        $this->frameworkResourcesDirectory = $frameworkResourcesDirectory;
         $this->rootDirectory = $rootDirectory;
         $this->domain = $domain;
         $this->twig = $twig;
@@ -83,7 +91,8 @@ class GenerateGruntfileCommand extends Command
         $output->writeln('Start of generating Gruntfile.js.');
         $gruntfileContents = $this->twig->render('@ShopsysShop/Grunt/gruntfile.js.twig', [
             'domains' => $this->domain->getAll(),
-            'rootStylesDirectory' => $this->stylesDirectory,
+            'customResourcesDirectory' => $this->customResourcesDirectory,
+            'frameworkResourcesDirectory' => $this->frameworkResourcesDirectory,
             'cssVersion' => $cssVersion,
         ]);
         $path = $this->rootDirectory;

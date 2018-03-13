@@ -1,11 +1,11 @@
 parameters:
-  shopsys.admin_navigation.config_filepath: '%shopsys.framework.resource_dir%/config/admin_menu.yml'
+  shopsys.admin_navigation.config_filepath: '%shopsys.framework.resources_dir%/config/admin_menu.yml'
   shopsys.bestselling_product.cache_directory_path: '%kernel.cache_dir%/bestselling_product'
   shopsys.css_version_filepath: '%shopsys.web_dir%/assets/cssVersion'
   shopsys.data_fixtures.resource_customers_filepath: '%shopsys.data_fixtures.resources_dir%/demo-data-customers.csv'
   shopsys.data_fixtures.resource_products_filepath: '%shopsys.data_fixtures.resources_dir%/demo-data-products.csv'
   shopsys.data_fixtures.resources_dir: '%shopsys.framework.root_dir%/src/DataFixtures/resources'
-  shopsys.default_db_schema_filepath: '%shopsys.framework.resource_dir%/database/schema.sql'
+  shopsys.default_db_schema_filepath: '%shopsys.framework.resources_dir%/database/schema.sql'
   shopsys.demo_images_archive_url: https://images.shopsysdemo.com/demoImages.v10.zip
   shopsys.demo_images_sql_url: https://images.shopsysdemo.com/demoImagesSql.v8.sql
   shopsys.doctrine.metadata_cache_directory_path: '%kernel.cache_dir%/doctrine_metadata'
@@ -30,7 +30,6 @@ parameters:
   shopsys.root_dir: '%kernel.root_dir%/..'
   shopsys.sitemaps_dir: '%shopsys.web_dir%%shopsys.sitemaps_url_prefix%'
   shopsys.sitemaps_url_prefix: /content/sitemaps
-  shopsys.styles_dir: src/Shopsys/ShopBundle/Resources/styles
   shopsys.uploaded_file_config_filepath: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/uploaded_files.yml'
   shopsys.uploaded_file_dir: '%shopsys.web_dir%%shopsys.uploaded_file_url_prefix%'
   shopsys.uploaded_file_url_prefix: /content/uploadedFiles/
