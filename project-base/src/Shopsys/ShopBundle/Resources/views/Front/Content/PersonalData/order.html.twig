@@ -1,0 +1,54 @@
+{% for order in orders %}
+    <div class="box-order-detail">
+        <div class="wrap-box">
+            <h2 class="wrap-box__title">{{ 'Order Nr.'|trans }} {{ order.number }}</h2>
+            <div class="wrap-box__in">
+                <table class="table-params">
+                        <tr>
+                            <th>{{ 'First name'|trans }}:</th>
+                            <td>{{ order.firstName }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Last name'|trans }}:</th>
+                            <td>{{ order.lastName }}</td>
+                        </tr>
+                    {% if order.telephone != '' %}
+                        <tr>
+                            <th>{{ 'Telephone'|trans }}:</th>
+                            <td>{{ order.telephone }}</td>
+                        </tr>
+                    {% endif %}
+                        <tr>
+                            <th>{{ 'E-mail'|trans }}:</th>
+                            <td>{{ order.email }}</td>
+                        </tr>
+                            <tr>
+                                <th> {{ 'Billing address'|trans }}:</th>
+                                <td>
+                                    {{ [order.street, order.city, order.postcode, order.country.name]|joinNoneEmpty }}
+                                </td>
+                            </tr>
+                    {% if order.deliveryAddressSameAsBillingAddress == false %}
+                        <tr>
+                            <th>{{ 'Delivery address'|trans }}:</th>
+                            <td>
+                                {{ [ order.deliveryFirstName, order.deliveryLastName, order.deliveryTelephone,
+                                    order.deliveryCompanyName, order.deliveryStreet, order.deliveryCity, order.deliveryPostcode,
+                                    order.deliveryCountry.name|default('') ]|joinNoneEmpty }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if order.companyName is not null or order.companyNumber is not null or order.companyTaxNumber is not null %}
+                            <tr>
+                                <th>{{ 'Company'|trans }}:</th>
+                                <td>
+                                    {{ [ order.companyName, order.companyNumber, order.companyTaxNumber ]|joinNoneEmpty }}
+                                </td>
+                            </tr>
+                    {% endif %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+{% endfor %}

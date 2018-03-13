@@ -320,6 +320,16 @@ class OrderFacade
     }
 
     /**
+     * @param string $email
+     * @param int $domainId
+     * @return \Shopsys\FrameworkBundle\Model\Order\Order[]
+     */
+    public function getOrderListForEmailByDomainId($email, $domainId)
+    {
+        return $this->orderRepository->getOrderListForEmailByDomainId($email, $domainId);
+    }
+
+    /**
      * @param int $orderId
      * @return \Shopsys\FrameworkBundle\Model\Order\Order
      */

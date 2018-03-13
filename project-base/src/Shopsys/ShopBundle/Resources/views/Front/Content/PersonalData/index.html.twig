@@ -1,0 +1,29 @@
+{% extends '@ShopsysShop/Front/Layout/layoutWithoutPanel.html.twig' %}
+
+{% block title %}
+    {{ 'Personal information overview'|trans }}
+{% endblock %}
+
+{% block meta_description %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main_content %}
+    <div class="in-user-text">
+        <h1>{{ 'Personal information overview'|trans }}</h1>
+
+        {{ personalDataSiteContent|raw }}
+
+        <div class="padding-20">
+            {{ form_start(form, { action: url('front_personal_data'), method: 'POST' }) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.send) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    {% if user is defined %}
+        {{ include('@ShopsysShop/Front/Content/PersonalData/detail.html.twig') }}
+    {% endif %}
+
+{% endblock %}

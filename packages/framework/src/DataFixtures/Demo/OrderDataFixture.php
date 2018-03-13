@@ -442,6 +442,84 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
                 ProductDataFixture::PRODUCT_PREFIX . '10' => 2,
             ]
         );
+
+        $orderData = new OrderData();
+        $orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PPL);
+        $orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CARD);
+        $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
+        $orderData->firstName = 'Radim';
+        $orderData->lastName = 'Svátek';
+        $orderData->email = 'vitek@netdevelo.cz';
+        $orderData->telephone = '+420733598748';
+        $orderData->street = 'Křivá 11';
+        $orderData->city = 'Jablonec';
+        $orderData->postcode = '78952';
+        $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
+        $orderData->deliveryAddressSameAsBillingAddress = false;
+        $orderData->deliveryCity = 'Ostrava';
+        $orderData->deliveryCompanyName = 'BestCompanyEver, s.r.o.';
+        $orderData->deliveryCountry = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1);
+        $orderData->deliveryStreet = 'Křivá 11';
+        $orderData->deliveryTelephone = '+421555444';
+        $orderData->deliveryPostcode = '01305';
+        $orderData->deliveryFirstName = 'Pavol';
+        $orderData->deliveryLastName = 'Svátek';
+        $orderData->companyName = 'BestCompanyEver, s.r.o.';
+        $orderData->companyNumber = '555555';
+        $orderData->note = 'Doufám, že vše dorazí v pořádku a co nejdříve :)';
+        $orderData->domainId = Domain::FIRST_DOMAIN_ID;
+        $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
+        $orderData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
+        $this->createOrder(
+            $orderData,
+            [
+                ProductDataFixture::PRODUCT_PREFIX . '7' => 1,
+                ProductDataFixture::PRODUCT_PREFIX . '17' => 6,
+                ProductDataFixture::PRODUCT_PREFIX . '9' => 1,
+                ProductDataFixture::PRODUCT_PREFIX . '14' => 1,
+                ProductDataFixture::PRODUCT_PREFIX . '10' => 2,
+            ]
+        );
+
+        $user = $userRepository->findUserByEmailAndDomain('vitek@netdevelo.cz', Domain::FIRST_DOMAIN_ID);
+        $orderData = new OrderData();
+        $orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PPL);
+        $orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CARD);
+        $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
+        $orderData->firstName = 'Radim';
+        $orderData->lastName = 'Svátek';
+        $orderData->email = 'vitek@netdevelo.cz';
+        $orderData->telephone = '+420733598748';
+        $orderData->street = 'Křivá 11';
+        $orderData->city = 'Jablonec';
+        $orderData->postcode = '78952';
+        $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
+        $orderData->deliveryAddressSameAsBillingAddress = false;
+        $orderData->deliveryCity = 'Ostrava';
+        $orderData->deliveryCompanyName = 'BestCompanyEver, s.r.o.';
+        $orderData->deliveryCountry = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1);
+        $orderData->deliveryStreet = 'Křivá 11';
+        $orderData->deliveryTelephone = '+421555444';
+        $orderData->deliveryPostcode = '01305';
+        $orderData->deliveryFirstName = 'Pavol';
+        $orderData->deliveryLastName = 'Svátek';
+        $orderData->companyName = 'BestCompanyEver, s.r.o.';
+        $orderData->companyNumber = '555555';
+        $orderData->note = 'Doufám, že vše dorazí v pořádku a co nejdříve :)';
+        $orderData->domainId = Domain::FIRST_DOMAIN_ID;
+        $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
+        $orderData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
+        $this->createOrder(
+            $orderData,
+            [
+                ProductDataFixture::PRODUCT_PREFIX . '7' => 1,
+                ProductDataFixture::PRODUCT_PREFIX . '17' => 6,
+                ProductDataFixture::PRODUCT_PREFIX . '9' => 1,
+                ProductDataFixture::PRODUCT_PREFIX . '14' => 1,
+                ProductDataFixture::PRODUCT_PREFIX . '10' => 2,
+            ],
+            $user
+        );
     }
 
     /**

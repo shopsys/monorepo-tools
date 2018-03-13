@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## Unreleased
 ### Added
 - Sessions are now stored in Redis (@TomasLudvik)
+- Admin - Legal conditions: added personal data settings (@stanoMilan) 
+- Frontend site for requesting personal data information (@stanoMilan)
 
 ### Changed
 - `JavascriptCompilerService` can now compile javascript from more than one source directory (@MattCzerner)

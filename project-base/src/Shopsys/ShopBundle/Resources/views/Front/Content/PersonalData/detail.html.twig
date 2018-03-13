@@ -1,0 +1,118 @@
+{% extends '@ShopsysShop/Front/Layout/layoutWithoutPanel.html.twig' %}
+
+{% block title %}
+    {{ 'Personal information overview'|trans }}
+{% endblock %}
+
+{% block meta_description %}
+    {{ parent() }}
+{% endblock %}
+
+{% block meta_robots -%}
+    <meta name="robots" content="noindex">
+{% endblock %}
+
+{% block main_content %}
+    <div class="in-user-text">
+        <div class="padding-20">
+            <h1>{{ 'Personal information overview'|trans }} - {{ personalDataAccessRequest.email }}</h1>
+        </div>
+    </div>
+    <div class="padding-20">
+        {% if user is null and orders|length == 0 and newsletterSubscriber is null %}
+            <h2>{{ 'No personal data for this email address'|trans }}</h2>
+        {% else %}
+            {% if user is not null %}
+            <div class="wrap-box">
+                <h2 class="wrap-box__title">{{ 'Personal data of registered customer'|trans }}</h2>
+                <div class="wrap-box__in">
+                    <table class="table-params">
+                        <tr>
+                            <th>{{ 'First name'|trans }}:</th>
+                            <td>{{ user.firstName }} </td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Last name'|trans }}:</th>
+                            <td>{{ user.lastName }} </td>
+                        </tr>
+                        {% if user.billingAddress.telephone is not null %}
+                            <tr>
+                                <th>{{ 'Telephone'|trans }}:</th>
+                                <td>{{ user.billingAddress.telephone }} </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <th>{{ 'E-mail'|trans }}:</th>
+                            <td>{{ user.email }} </td>
+                        </tr>
+                        {% if user.billingAddress is not null %}
+                            {% set addr = user.billingAddress %}
+                            {% if addr.street is not null or addr.city is not null or addr.postCode is not null or addr.country.name is defined %}
+                                <tr>
+                                    <th>{{ 'Billing address'|trans }}:</th>
+                                    <td>
+
+                                        {{ [addr.street, addr.city, addr.postCode, addr.country.name|default('') ]|joinNoneEmpty }}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
+                        {% if user.deliveryAddress is not null %}
+                            {% if user.deliveryAddress is not null %}
+                                {% set delivery = user.deliveryAddress %}
+                                {% if delivery.firstName is not null or delivery.lastName is not null or
+                                    delivery.companyName is not null or delivery.street is not null or
+                                    delivery.city is not null or delivery.postcode is not null or
+                                    delivery.country.name is defined %}
+                                    <tr>
+                                        <th>{{ 'Delivery address'|trans }}:</th>
+                                        <td>
+
+                                            {{ [ delivery.firstName, delivery.lastName, delivery.companyName, delivery.street,
+                                                delivery.city, delivery.postcode, delivery.country.name|default('') ]|joinNoneEmpty }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+
+                        {% if user.billingAddress.companyTaxNumber is not null or
+                            user.billingAddress.companyNumber is not null or
+                            user.billingAddress.companyName is not null %}
+                            <tr>
+                                <th>{{ 'Company'|trans }}:</th>
+                                <td>
+                                    {% set address = user.billingAddress %}
+                                    {{ [address.companyName, address.companyNumber, address.companyTaxNumber ]|joinNoneEmpty }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if orders|length != 0 %}
+                {% include '@ShopsysShop/Front/Content/PersonalData/order.html.twig' with { 'orders': orders } %}
+            {% endif %}
+
+            {% if newsletterSubscriber %}
+                <div class="wrap-box">
+                <h2 class="wrap-box__title">{{ 'Subscription to email newsletter'|trans }}</h2>
+                <div class="wrap-box__in">
+                <table class="table-params">
+                    <tr>
+                        <th>{{ 'E-mail'|trans }}</th>
+                        <td>{{ newsletterSubscriber.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'Date of subscription'|trans }}</th>
+                        <td>{{ newsletterSubscriber.createdAt|formatDateTime }}</td>
+                    </tr>
+                </table>
+                </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}
