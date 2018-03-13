@@ -41,10 +41,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - docs updated in order to provide up-to-date information about the current project state (@vitek-rostislav) 
 - installation guides: updated instructions for creating new project from Shopsys Framework sources (@vitek-rostislav)
 - basics-about-package-architecture.md updated to reflect current architecture state (@vitek-rostislav)
-
+- updated doctrine/doctrine-fixtures-bundle (@stanoMilan)
+    - all fixtures now use autowiring
+   
 ## 6.0.0-beta21 - 2018-03-05
 - released only in closed beta
-
 ### Added
 - PHPStan support (@mhujer)
     - currently analysing source code by level 0

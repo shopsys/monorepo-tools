@@ -10,16 +10,24 @@ use Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingPr
 
 class BestsellingProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
+    /** @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade */
+    private $manualBestsellingProductFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade $manualBestsellingProductFacade
+     */
+    public function __construct(
+        ManualBestsellingProductFacade $manualBestsellingProductFacade
+    ) {
+        $this->manualBestsellingProductFacade = $manualBestsellingProductFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $manualBestsellingProductFacade = $this
-            ->get(ManualBestsellingProductFacade::class);
-        /* @var $manualBestsellingProductFacade \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade */
-
-        $manualBestsellingProductFacade->edit(
+        $this->manualBestsellingProductFacade->edit(
             $this->getReference(CategoryDataFixture::CATEGORY_PHOTO),
             Domain::FIRST_DOMAIN_ID,
             [

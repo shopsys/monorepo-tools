@@ -12,16 +12,25 @@ class PersonalDataAccessRequestDataFixture extends AbstractReferenceFixture
 {
     const VALID_ACCESS_REQUEST = 'valid_access_request';
 
+    /** @var PersonalDataAccessRequestFacade */
+    private $personalDataFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFacade $personalDataFacade
+     */
+    public function __construct(PersonalDataAccessRequestFacade $personalDataFacade)
+    {
+        $this->personalDataFacade = $personalDataFacade;
+    }
+
     public function load(ObjectManager $manager)
     {
-        $personalDataFacade = $this->get(PersonalDataAccessRequestFacade::class);
-        /* @var $personalDataFacade \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFacade */
         $personalDataAccessRequestData = new PersonalDataAccessRequestData();
         $personalDataAccessRequestData->domainId = Domain::FIRST_DOMAIN_ID;
         $personalDataAccessRequestData->email = 'no-reply@netdevelo.cz';
         $personalDataAccessRequestData->hash = 'UrSqiLmCK0cdGfBuwRza';
 
-        $personalDataAccessRequest = $personalDataFacade->createPersonalDataAccessRequest(
+        $personalDataAccessRequest = $this->personalDataFacade->createPersonalDataAccessRequest(
             $personalDataAccessRequestData,
             Domain::FIRST_DOMAIN_ID
         );

@@ -16,6 +16,22 @@ use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 
 class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
+    /** @var \Shopsys\FrameworkBundle\Component\String\HashGenerator */
+    private $hashGenerator;
+
+    /** @var \Shopsys\FrameworkBundle\Component\Setting\Setting */
+    private $setting;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     */
+    public function __construct(HashGenerator $hashGenerator, Setting $setting)
+    {
+        $this->hashGenerator = $hashGenerator;
+        $this->setting = $setting;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
@@ -30,8 +46,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         /* @var $defaultCurrency \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency */
         $defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
         /* @var $defaultInStockAvailability \Shopsys\FrameworkBundle\Model\Product\Availability\Availability */
-        $hashGenerator = $this->get(HashGenerator::class);
-        /* @var $hashGenerator \Shopsys\FrameworkBundle\Component\String\HashGenerator */
         $defaultUnit = $this->getReference(UnitDataFixture::UNIT_PIECES);
         /* @var $defaultUnit \Shopsys\FrameworkBundle\Model\Product\Unit\Unit */
 
@@ -63,21 +77,13 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         $manager->persist(new SettingValue(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, null, Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(Setting::COOKIES_ARTICLE_ID, null, Domain::FIRST_DOMAIN_ID));
         $manager->persist(new SettingValue(Setting::DOMAIN_DATA_CREATED, true, Domain::FIRST_DOMAIN_ID));
-        $manager->persist(new SettingValue(Setting::FEED_HASH, $hashGenerator->generateHash(10), SettingValue::DOMAIN_ID_COMMON));
+        $manager->persist(new SettingValue(Setting::FEED_HASH, $this->hashGenerator->generateHash(10), SettingValue::DOMAIN_ID_COMMON));
         $manager->persist(new SettingValue(Setting::DEFAULT_UNIT, $defaultUnit->getId(), SettingValue::DOMAIN_ID_COMMON));
         // @codingStandardsIgnoreStop
 
         $manager->flush();
 
-        $this->clearSettingCache();
-    }
-
-    private function clearSettingCache()
-    {
-        $setting = $this->get(Setting::class);
-        /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
-
-        $setting->clearCache();
+        $this->setting->clearCache();
     }
 
     /**

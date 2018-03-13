@@ -10,6 +10,17 @@ use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
 
 class MailTemplateDataFixture extends AbstractReferenceFixture
 {
+    /** @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade */
+    private $mailTemplateFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
+     */
+    public function __construct(MailTemplateFacade $mailTemplateFacade)
+    {
+        $this->mailTemplateFacade = $mailTemplateFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
@@ -108,11 +119,8 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
      */
     private function updateMailTemplate(MailTemplateData $mailTemplateData)
     {
-        $mailTemplateFacade = $this->get(MailTemplateFacade::class);
-        /* @var $mailTemplateFacade \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade */
-
         $domainId = 2;
 
-        $mailTemplateFacade->saveMailTemplatesData([$mailTemplateData], $domainId);
+        $this->mailTemplateFacade->saveMailTemplatesData([$mailTemplateData], $domainId);
     }
 }

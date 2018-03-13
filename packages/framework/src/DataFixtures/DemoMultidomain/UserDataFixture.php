@@ -11,30 +11,47 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
+    /** @var \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader */
+    private $loaderService;
+
+    /** @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
+    private $customerFacade;
+
+    /** @var \Faker\Generator */
+    private $faker;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader $loaderService
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade
+     * @param \Faker\Generator $faker
+     */
+    public function __construct(
+        UserDataFixtureLoader $loaderService,
+        CustomerFacade $customerFacade,
+        Generator $faker
+    ) {
+        $this->loaderService = $loaderService;
+        $this->customerFacade = $customerFacade;
+        $this->faker = $faker;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $customerFacade = $this->get(CustomerFacade::class);
-        /* @var $customerFacade \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
-        $loaderService = $this->get(UserDataFixtureLoader::class);
-        /* @var $loaderService \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader */
-        $faker = $this->get(Generator::class);
-        /* @var $faker \Faker\Generator */
-
         $countries = [
             $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_2),
             $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_2),
         ];
-        $loaderService->injectReferences($countries);
+        $this->loaderService->injectReferences($countries);
 
-        $customersData = $loaderService->getCustomersDataByDomainId(2);
+        $customersData = $this->loaderService->getCustomersDataByDomainId(2);
 
         foreach ($customersData as $customerData) {
-            $customerData->userData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
+            $customerData->userData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
 
-            $customerFacade->create($customerData);
+            $this->customerFacade->create($customerData);
         }
     }
 

@@ -10,21 +10,29 @@ use Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade;
 
 class TopCategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
+    /** @var \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade */
+    private $topCategoryFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade $topCategoryFacade
+     */
+    public function __construct(TopCategoryFacade $topCategoryFacade)
+    {
+        $this->topCategoryFacade = $topCategoryFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $topCategoryFacade = $this->get(TopCategoryFacade::class);
-        /* @var $topCategoryFacade \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade */
-
         $categories = [
             $this->getReference(CategoryDataFixture::CATEGORY_ELECTRONICS),
             $this->getReference(CategoryDataFixture::CATEGORY_BOOKS),
             $this->getReference(CategoryDataFixture::CATEGORY_TOYS),
         ];
 
-        $topCategoryFacade->saveTopCategoriesForDomain(Domain::FIRST_DOMAIN_ID, $categories);
+        $this->topCategoryFacade->saveTopCategoriesForDomain(Domain::FIRST_DOMAIN_ID, $categories);
     }
 
     /**

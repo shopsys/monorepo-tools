@@ -14,6 +14,19 @@ class FlagDataFixture extends AbstractReferenceFixture
     const FLAG_ACTION_PRODUCT = 'flag_action';
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade
+     */
+    private $flagFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade $flagFacade
+     */
+    public function __construct(FlagFacade $flagFacade)
+    {
+        $this->flagFacade = $flagFacade;
+    }
+
+    /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
@@ -42,10 +55,7 @@ class FlagDataFixture extends AbstractReferenceFixture
      */
     private function createFlag(FlagData $flagData, $referenceName = null)
     {
-        $flagFacade = $this->get(FlagFacade::class);
-        /* @var $flagFacade \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade */
-
-        $flag = $flagFacade->create($flagData);
+        $flag = $this->flagFacade->create($flagData);
         if ($referenceName !== null) {
             $this->addReference($referenceName, $flag);
         }

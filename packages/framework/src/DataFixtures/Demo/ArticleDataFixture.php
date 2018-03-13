@@ -15,6 +15,17 @@ class ArticleDataFixture extends AbstractReferenceFixture
     const ARTICLE_PRIVACY_POLICY_1 = 'article_privacy_policy_1';
     const ARTICLE_COOKIES_1 = 'article_cookies_1';
 
+    /** @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade */
+    private $articleFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleFacade $articleFacade
+     */
+    public function __construct(ArticleFacade $articleFacade)
+    {
+        $this->articleFacade = $articleFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
@@ -63,10 +74,7 @@ class ArticleDataFixture extends AbstractReferenceFixture
      */
     private function createArticle(ArticleData $articleData, $referenceName = null)
     {
-        $articleFacade = $this->get(ArticleFacade::class);
-        /* @var $articleFacade \Shopsys\FrameworkBundle\Model\Article\ArticleFacade */
-
-        $article = $articleFacade->create($articleData);
+        $article = $this->articleFacade->create($articleData);
         if ($referenceName !== null) {
             $this->addReference($referenceName, $article);
         }

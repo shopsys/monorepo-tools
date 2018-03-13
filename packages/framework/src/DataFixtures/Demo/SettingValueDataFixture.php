@@ -12,16 +12,26 @@ use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture;
 class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
+     */
+    private $setting;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     */
+    public function __construct(Setting $setting)
+    {
+        $this->setting = $setting;
+    }
+
+    /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $setting = $this->get(Setting::class);
-        /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
-
         // Any previously executed data fixture using Setting (even transitively) would fill the Setting cache.
         // As EM identity map is cleared after each fixture we should clear the Setting cache before editing the values.
-        $setting->clearCache();
+        $this->setting->clearCache();
 
         $termsAndConditions = $this->getReference(ArticleDataFixture::ARTICLE_TERMS_AND_CONDITIONS_1);
         $privacyPolicy = $this->getReference(ArticleDataFixture::ARTICLE_PRIVACY_POLICY_1);
@@ -33,10 +43,10 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         An email with a link will be sent to you after entering your email address, to verify your identity. 
         Clicking on the link will take you to a page listing all the personal details we have connected to your email address.';
 
-        $setting->setForDomain(Setting::COOKIES_ARTICLE_ID, $cookies->getId(), Domain::FIRST_DOMAIN_ID);
-        $setting->setForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditions->getId(), Domain::FIRST_DOMAIN_ID);
-        $setting->setForDomain(Setting::PRIVACY_POLICY_ARTICLE_ID, $privacyPolicy->getId(), Domain::FIRST_DOMAIN_ID);
-        $setting->setForDomain(Setting::PERSONAL_DATA_SITE_CONTENT, $personalDataSiteContent, Domain::FIRST_DOMAIN_ID);
+        $this->setting->setForDomain(Setting::COOKIES_ARTICLE_ID, $cookies->getId(), Domain::FIRST_DOMAIN_ID);
+        $this->setting->setForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditions->getId(), Domain::FIRST_DOMAIN_ID);
+        $this->setting->setForDomain(Setting::PRIVACY_POLICY_ARTICLE_ID, $privacyPolicy->getId(), Domain::FIRST_DOMAIN_ID);
+        $this->setting->setForDomain(Setting::PERSONAL_DATA_SITE_CONTENT, $personalDataSiteContent, Domain::FIRST_DOMAIN_ID);
     }
 
     /**

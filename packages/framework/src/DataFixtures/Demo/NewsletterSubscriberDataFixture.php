@@ -10,18 +10,26 @@ class NewsletterSubscriberDataFixture extends AbstractReferenceFixture
 {
     const FIRST_DOMAIN_ID = 1;
 
+    /** @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade */
+    private $newsletterFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade $newsletterFacade
+     */
+    public function __construct(NewsletterFacade $newsletterFacade)
+    {
+        $this->newsletterFacade = $newsletterFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $newsletterFacade = $this->get(NewsletterFacade::class);
-        /* @var $newsletterFacade \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade */
-
         $newsletterSubscribersData = $this->getEmailData();
 
         foreach ($newsletterSubscribersData as $email) {
-            $newsletterFacade->addSubscribedEmail($email, self::FIRST_DOMAIN_ID);
+            $this->newsletterFacade->addSubscribedEmail($email, self::FIRST_DOMAIN_ID);
         }
     }
 

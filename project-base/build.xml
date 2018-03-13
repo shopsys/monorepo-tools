@@ -165,7 +165,7 @@
     <target name="db-fixtures-base-settings" description="Loads base data fixtures.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
-            <arg value="doctrine:fixtures:load" />
+            <arg value="shopsys:fixtures:load" />
             <arg value="--fixtures=${path.framework}/src/DataFixtures/Base" />
             <arg value="--append" />
             <arg value="--no-interaction" />
@@ -178,7 +178,7 @@
             <then>
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
                     <arg value="${path.bin-console}" />
-                    <arg value="doctrine:fixtures:load" />
+                    <arg value="shopsys:fixtures:load" />
                     <arg value="--fixtures=${path.framework}/src/DataFixtures/DemoMultidomain" />
                     <arg value="--append" />
                     <arg value="--no-interaction" />
@@ -197,7 +197,7 @@
     <target name="db-fixtures-demo-singledomain" description="Loads base and demo data fixtures for the first domain.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
-            <arg value="doctrine:fixtures:load" />
+            <arg value="shopsys:fixtures:load" />
             <arg value="--fixtures=${path.framework}/src/DataFixtures/Base" />
             <arg value="--fixtures=${path.framework}/src/DataFixtures/Demo" />
             <arg value="--append" />

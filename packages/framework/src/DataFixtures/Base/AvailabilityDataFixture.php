@@ -14,6 +14,17 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
     const AVAILABILITY_OUT_OF_STOCK = 'availability_out_of_stock';
     const AVAILABILITY_PREPARING = 'availability_preparing';
 
+    /** @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade */
+    private $availabilityFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
+     */
+    public function __construct(AvailabilityFacade $availabilityFacade)
+    {
+        $this->availabilityFacade = $availabilityFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
@@ -43,10 +54,7 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
      */
     private function createAvailability(AvailabilityData $availabilityData, $referenceName = null)
     {
-        $availabilityFacade = $this->get(AvailabilityFacade::class);
-        /* @var $availabilityFacade \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade */
-
-        $availability = $availabilityFacade->create($availabilityData);
+        $availability = $this->availabilityFacade->create($availabilityData);
         if ($referenceName !== null) {
             $this->addReference($referenceName, $availability);
         }

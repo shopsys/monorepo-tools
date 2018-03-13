@@ -722,7 +722,7 @@
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
             <arg value="--env=test" />
-            <arg value="doctrine:fixtures:load" />
+            <arg value="shopsys:fixtures:load" />
             <arg value="--fixtures=${path.framework}/src/DataFixtures/Base" />
             <arg value="--append" />
             <arg value="--no-interaction" />
@@ -736,7 +736,7 @@
                 <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
                     <arg value="${path.bin-console}" />
                     <arg value="--env=test" />
-                    <arg value="doctrine:fixtures:load" />
+                    <arg value="shopsys:fixtures:load" />
                     <arg value="--fixtures=${path.framework}/src/DataFixtures/DemoMultidomain" />
                     <arg value="--append" />
                     <arg value="--no-interaction" />
@@ -757,7 +757,7 @@
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
             <arg value="--env=test" />
-            <arg value="doctrine:fixtures:load" />
+            <arg value="shopsys:fixtures:load" />
             <arg value="--fixtures=${path.framework}/src/DataFixtures/Base" />
             <arg value="--fixtures=${path.framework}/src/DataFixtures/Demo" />
             <arg value="--append" />

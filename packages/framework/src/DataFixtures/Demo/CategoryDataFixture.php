@@ -24,6 +24,17 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
     const CATEGORY_GARDEN_TOOLS = 'category_garden_tools';
     const CATEGORY_FOOD = 'category_food';
 
+    /** @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
+    private $categoryFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     */
+    public function __construct(CategoryFacade $categoryFacade)
+    {
+        $this->categoryFacade = $categoryFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
@@ -166,10 +177,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
      */
     private function createCategory(CategoryData $categoryData, $referenceName = null)
     {
-        $categoryFacade = $this->get(CategoryFacade::class);
-        /* @var $categoryFacade \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
-
-        $category = $categoryFacade->create($categoryData);
+        $category = $this->categoryFacade->create($categoryData);
         if ($referenceName !== null) {
             $this->addReference($referenceName, $category);
         }

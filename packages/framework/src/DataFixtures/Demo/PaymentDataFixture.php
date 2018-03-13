@@ -17,6 +17,17 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
     const PAYMENT_CASH_ON_DELIVERY = 'payment_cash_on_delivery';
     const PAYMENT_CASH = 'payment_cash';
 
+    /** @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
+    private $paymentFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade $paymentFacade
+     */
+    public function __construct(PaymentFacade $paymentFacade)
+    {
+        $this->paymentFacade = $paymentFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
@@ -87,15 +98,12 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
         PaymentEditData $paymentEditData,
         array $transportsReferenceNames
     ) {
-        $paymentFacade = $this->get(PaymentFacade::class);
-        /* @var $paymentFacade \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
-
         $paymentEditData->paymentData->transports = [];
         foreach ($transportsReferenceNames as $transportReferenceName) {
             $paymentEditData->paymentData->transports[] = $this->getReference($transportReferenceName);
         }
 
-        $payment = $paymentFacade->create($paymentEditData);
+        $payment = $this->paymentFacade->create($paymentEditData);
         $this->addReference($referenceName, $payment);
     }
 

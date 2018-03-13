@@ -10,14 +10,25 @@ use Shopsys\FrameworkBundle\Model\Localization\Localization;
 class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFixtureInterface
 {
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
+     */
+    private $localization;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
+     */
+    public function __construct(Localization $localization)
+    {
+        $this->localization = $localization;
+    }
+
+    /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $localization = $this->get(Localization::class);
-        /* @var $localization \Shopsys\FrameworkBundle\Model\Localization\Localization */
-        foreach ($localization->getLocalesOfAllDomains() as $locale) {
-            $domainCollation = $localization->getCollationByLocale($locale);
+        foreach ($this->localization->getLocalesOfAllDomains() as $locale) {
+            $domainCollation = $this->localization->getCollationByLocale($locale);
             $this->executeNativeQuery('CREATE INDEX product_translations_name_' . $locale . '_idx
                 ON product_translations (name COLLATE "' . $domainCollation . '") WHERE locale = \'' . $locale . '\'');
         }
