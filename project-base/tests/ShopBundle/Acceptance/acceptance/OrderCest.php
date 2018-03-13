@@ -16,7 +16,7 @@ class OrderCest
         OrderPage $orderPage,
         AcceptanceTester $me
     ) {
-        $me->wantTo('have my payment and transport remebered by order');
+        $me->wantTo('have my payment and transport remembered by order');
 
         $me->amOnPage('/tv-audio/');
         $productListPage->addProductToCartByName('Defender 2.0 SPK-480');
@@ -40,7 +40,7 @@ class OrderCest
         OrderPage $orderPage,
         AcceptanceTester $me
     ) {
-        $me->wantTo('have my payment and transport remebered by order');
+        $me->wantTo('have my payment and transport remembered by order');
 
         $me->amOnPage('/tv-audio/');
         $productListPage->addProductToCartByName('Defender 2.0 SPK-480');
@@ -61,7 +61,7 @@ class OrderCest
 
     public function testFormRemembersFirstName(ProductListPage $productListPage, OrderPage $orderPage, AcceptanceTester $me)
     {
-        $me->wantTo('have my first name remebered by order');
+        $me->wantTo('have my first name remembered by order');
 
         $me->amOnPage('/tv-audio/');
         $productListPage->addProductToCartByName('Defender 2.0 SPK-480');
