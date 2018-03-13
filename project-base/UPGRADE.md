@@ -7,6 +7,7 @@
     - the upgrade will require overriding or extending of all classes now located in
     [shopsys/framework](https://github.com/shopsys/framework) that you customized in your forked repository
     - it would be wise to wait with the upgrade until the newly build architecture has matured
+- update custom tests to be compatible with phpunit 7. For further details visit phpunit release announcements [phpunit 6](https://phpunit.de/announcements/phpunit-6.html) and [phpunit 7](https://phpunit.de/announcements/phpunit-7.html)
 
 ## From 2.0.0-beta.20.0 to 2.0.0-beta.21.0
 - do not longer use Phing targets standards-ci and standards-ci-diff, use standards and standards-diff instead
