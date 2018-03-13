@@ -36,14 +36,16 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
     {
         $resolver->setRequired('is_group_container')
             ->addAllowedTypes('is_group_container', 'boolean')
-            ->setDefaults(['is_group_container' => false])
-            ->setDefaults(['macro' => null])
-            ->setDefaults(['icon_title' => null])
-            ->setDefaults(['display_format' => null])
-            ->setDefaults(['js_container' => null])
-            ->setDefaults(['is_plugin_data_group' => false])
-            ->setDefaults(['image_preview' => null])
-            ->setDefaults(['is_group_container_to_render_as_the_last_one' => false]);
+            ->setDefaults([
+                'is_group_container' => false,
+                'macro' => null,
+                'icon_title' => null,
+                'display_format' => null,
+                'js_container' => null,
+                'is_plugin_data_group' => false,
+                'image_preview' => null,
+                'is_group_container_to_render_as_the_last_one' => false,
+            ]);
     }
     /**
      * @return string
