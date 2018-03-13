@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Admin - Legal conditions: added personal data settings (@stanoMilan) 
 - Frontend site for requesting personal data information (@stanoMilan)
     - Admin - added email template for personal data request
-    - Frontend send email with link to personal data access site  
+    - Frontend send email with link to personal data access site 
+- [wip-glassbox-customization.md](docs/wip_glassbox/wip-glassbox-customization.md): new WIP documentation about working with glassbox (@Miroslav-Stopka) 
 
 ### Changed
 - `JavascriptCompilerService` can now compile javascript from more than one source directory (@MattCzerner)
