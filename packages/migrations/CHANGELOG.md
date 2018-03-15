@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - updated phpunit/phpunit to version 7 (@simara-svatopluk)
+- DB migrations are installed from all registered bundles (@TomasLudvik)
+    - they should be located in directory "Migrations" in the root of the bundle
 
 ## [2.3.0] - 2018-02-19
 ### Added

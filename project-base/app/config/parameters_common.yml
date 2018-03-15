@@ -16,5 +16,5 @@ parameters:
   shopsys.performance_test.feed.max_duration_seconds: 180
   shopsys.performance_test.feed.delivery.max_duration_seconds: 20
   shopsys.performance_test.feed.min_duration_seconds: 5
-  shopsys.migrations.dir: '%kernel.root_dir%/src/Shopsys/ShopBundle/Migrations'
+  shopsys.migrations.dir: '%kernel.project_dir%/src/Shopsys/ShopBundle/Migrations'
   shopsys.migrations.namespace: 'Shopsys\ShopBundle\Migrations'
