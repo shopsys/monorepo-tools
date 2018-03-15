@@ -33,6 +33,8 @@ services:
         links:
             - postgres
             - redis
+        ports:
+            - "35729:35729"
         depends_on:
             - postgres
             - redis

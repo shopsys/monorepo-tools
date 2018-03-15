@@ -48,4 +48,7 @@ RUN php -r "copy('https://getcomposer.org/download/1.5.1/composer.phar', '/usr/l
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
     && apt-get update && apt-get -y install nodejs=6.*
 
+# Install grunt-cli using npm to be able to run grunt watch.
+RUN npm install -g grunt-cli
+
 WORKDIR "/var/www/shopsys-framework"
