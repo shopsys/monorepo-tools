@@ -22,25 +22,25 @@ class NewsletterSubscriber
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    protected $email;
 
     /**
      * @var int
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var DateTimeImmutable
      * @ORM\Column(type="datetime_immutable", options={"default": "1970-01-01 00:00:00"})
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @param string $email

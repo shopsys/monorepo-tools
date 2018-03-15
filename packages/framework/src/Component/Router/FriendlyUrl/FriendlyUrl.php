@@ -20,14 +20,14 @@ class FriendlyUrl
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $routeName;
+    protected $routeName;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $entityId;
+    protected $entityId;
 
     /**
      * @var int
@@ -35,7 +35,7 @@ class FriendlyUrl
      * @ORM\Column(type="integer")
      * @ORM\Id
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var string
@@ -43,14 +43,14 @@ class FriendlyUrl
      * @ORM\Column(type="text")
      * @ORM\Id
      */
-    private $slug;
+    protected $slug;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $main;
+    protected $main;
 
     /**
      * @param string $routeName

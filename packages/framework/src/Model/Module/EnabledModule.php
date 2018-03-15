@@ -16,7 +16,7 @@ class EnabledModule
      * @ORM\Id
      * @ORM\Column(type="string", length=100)
      */
-    private $name;
+    protected $name;
 
     /**
      * @param string $name

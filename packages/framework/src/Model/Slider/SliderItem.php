@@ -19,42 +19,42 @@ class SliderItem implements OrderableEntityInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $link;
+    protected $link;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var int|null
      *
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $position;
+    protected $position;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $hidden;
+    protected $hidden;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Slider\SliderItemData $sliderItemData

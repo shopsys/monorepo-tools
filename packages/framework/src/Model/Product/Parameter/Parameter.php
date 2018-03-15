@@ -34,7 +34,7 @@ class Parameter extends AbstractTranslatableEntity
      *
      * @ORM\Column(type="boolean")
      */
-    private $visible;
+    protected $visible;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
@@ -74,7 +74,7 @@ class Parameter extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
      */
-    private function setTranslations(ParameterData $parameterData)
+    protected function setTranslations(ParameterData $parameterData)
     {
         foreach ($parameterData->name as $locale => $name) {
             $this->translation($locale)->setName($name);

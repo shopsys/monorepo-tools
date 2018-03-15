@@ -16,21 +16,21 @@ class CronModule
      * @ORM\Column(type="string", length=255)
      * @ORM\Id
      */
-    private $serviceId;
+    protected $serviceId;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $scheduled;
+    protected $scheduled;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean", options={"default"=false})
      */
-    private $suspended;
+    protected $suspended;
 
     /**
      * @param string $serviceId

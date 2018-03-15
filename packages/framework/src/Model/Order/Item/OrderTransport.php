@@ -18,7 +18,7 @@ class OrderTransport extends OrderItem
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $transport;
+    protected $transport;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order

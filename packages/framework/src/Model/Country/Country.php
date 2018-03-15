@@ -17,21 +17,21 @@ class Country
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $countryData

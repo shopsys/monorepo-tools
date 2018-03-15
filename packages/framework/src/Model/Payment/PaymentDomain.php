@@ -17,7 +17,7 @@ class PaymentDomain
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Payment\Payment")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $payment;
+    protected $payment;
 
     /**
      * @var int
@@ -25,7 +25,7 @@ class PaymentDomain
      * @ORM\Id
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment

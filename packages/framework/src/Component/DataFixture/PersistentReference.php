@@ -18,21 +18,21 @@ class PersistentReference
      * @ORM\Column(type="string", length=100, nullable=true)
      * @ORM\Id
      */
-    private $referenceName;
+    protected $referenceName;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $entityName;
+    protected $entityName;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $entityId;
+    protected $entityId;
 
     /**
      * @param string $referenceName

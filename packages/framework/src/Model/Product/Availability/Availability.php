@@ -34,7 +34,7 @@ class Availability extends AbstractTranslatableEntity
      *
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $dispatchTime;
+    protected $dispatchTime;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData $availabilityData
@@ -66,7 +66,7 @@ class Availability extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData $availabilityData
      */
-    private function setTranslations(AvailabilityData $availabilityData)
+    protected function setTranslations(AvailabilityData $availabilityData)
     {
         foreach ($availabilityData->name as $locale => $name) {
             $this->translation($locale)->setName($name);

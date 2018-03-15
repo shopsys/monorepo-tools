@@ -22,7 +22,7 @@ class OrderStatusTranslation extends AbstractTranslation
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @return string

@@ -19,7 +19,7 @@ class ProductManualInputPrice
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
      * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $product;
+    protected $product;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Product
@@ -28,14 +28,14 @@ class ProductManualInputPrice
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup")
      * @ORM\JoinColumn(nullable=false, name="pricing_group_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $pricingGroup;
+    protected $pricingGroup;
 
     /**
      * @var string
      *
      * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
      */
-    private $inputPrice;
+    protected $inputPrice;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product

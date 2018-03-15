@@ -21,28 +21,28 @@ class Script
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $code;
+    protected $code;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $placement;
+    protected $placement;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Script\ScriptData $scriptData

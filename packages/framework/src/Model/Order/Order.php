@@ -27,14 +27,14 @@ class Order
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=30, unique=true, nullable=false)
      */
-    private $number;
+    protected $number;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\User|null
@@ -42,14 +42,14 @@ class Order
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\User")
      * @ORM\JoinColumn(nullable=true, name="customer_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $customer;
+    protected $customer;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
@@ -57,7 +57,7 @@ class Order
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Order\Item\OrderItem", mappedBy="order", orphanRemoval=true)
      * @ORM\OrderBy({"id" = "ASC"})
      */
-    private $items;
+    protected $items;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\Transport
@@ -65,7 +65,7 @@ class Order
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $transport;
+    protected $transport;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\Payment
@@ -73,7 +73,7 @@ class Order
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Payment\Payment")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $payment;
+    protected $payment;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus
@@ -81,196 +81,196 @@ class Order
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $status;
+    protected $status;
 
     /**
      * @var string
      *
      * @ORM\Column(type="decimal", precision=20, scale=6)
      */
-    private $totalPriceWithVat;
+    protected $totalPriceWithVat;
 
     /**
      * @var string
      *
      * @ORM\Column(type="decimal", precision=20, scale=6)
      */
-    private $totalPriceWithoutVat;
+    protected $totalPriceWithoutVat;
 
     /**
      * @var string
      *
      * @ORM\Column(type="decimal", precision=20, scale=6)
      */
-    private $totalProductPriceWithVat;
+    protected $totalProductPriceWithVat;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=100)
      */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=100)
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=30)
      */
-    private $telephone;
+    protected $telephone;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $companyName;
+    protected $companyName;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $companyNumber;
+    protected $companyNumber;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $companyTaxNumber;
+    protected $companyTaxNumber;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=100)
      */
-    private $street;
+    protected $street;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=100)
      */
-    private $city;
+    protected $city;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=30)
      */
-    private $postcode;
+    protected $postcode;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\Country
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Country\Country")
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=false)
      */
-    private $country;
+    protected $country;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $deliveryAddressSameAsBillingAddress;
+    protected $deliveryAddressSameAsBillingAddress;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=100)
      */
-    private $deliveryFirstName;
+    protected $deliveryFirstName;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=100)
      */
-    private $deliveryLastName;
+    protected $deliveryLastName;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $deliveryCompanyName;
+    protected $deliveryCompanyName;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private $deliveryTelephone;
+    protected $deliveryTelephone;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=100)
      */
-    private $deliveryStreet;
+    protected $deliveryStreet;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100)
      */
-    private $deliveryCity;
+    protected $deliveryCity;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=30)
      */
-    private $deliveryPostcode;
+    protected $deliveryPostcode;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\Country|null
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Country\Country")
      * @ORM\JoinColumn(name="delivery_country_id", referencedColumnName="id", nullable=true)
      */
-    private $deliveryCountry;
+    protected $deliveryCountry;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $note;
+    protected $note;
 
     /**
      * @var int
      *
      * @ORM\Column(type="boolean")
      */
-    private $deleted;
+    protected $deleted;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=50, unique=true)
      */
-    private $urlHash;
+    protected $urlHash;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
@@ -278,7 +278,7 @@ class Order
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $currency;
+    protected $currency;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\Administrator|null
@@ -286,14 +286,14 @@ class Order
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Administrator\Administrator")
      * @ORM\JoinColumn(nullable=true, name="administrator_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $createdAsAdministrator;
+    protected $createdAsAdministrator;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $createdAsAdministratorName;
+    protected $createdAsAdministratorName;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
@@ -371,7 +371,7 @@ class Order
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      */
-    private function editOrderTransport(OrderData $orderData)
+    protected function editOrderTransport(OrderData $orderData)
     {
         $orderTransportData = $orderData->orderTransport;
         $this->transport = $orderTransportData->transport;
@@ -381,7 +381,7 @@ class Order
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      */
-    private function editOrderPayment(OrderData $orderData)
+    protected function editOrderPayment(OrderData $orderData)
     {
         $orderPaymentData = $orderData->orderPayment;
         $this->payment = $orderPaymentData->payment;
@@ -391,7 +391,7 @@ class Order
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      */
-    private function setDeliveryAddress(OrderData $orderData)
+    protected function setDeliveryAddress(OrderData $orderData)
     {
         $this->deliveryAddressSameAsBillingAddress = $orderData->deliveryAddressSameAsBillingAddress;
         if ($orderData->deliveryAddressSameAsBillingAddress) {
@@ -652,7 +652,7 @@ class Order
     /**
      * @return \Shopsys\FrameworkBundle\Model\Order\Item\OrderItem[]
      */
-    private function getTransportAndPaymentItems()
+    protected function getTransportAndPaymentItems()
     {
         $transportAndPaymentItems = [];
         foreach ($this->getItems() as $orderItem) {

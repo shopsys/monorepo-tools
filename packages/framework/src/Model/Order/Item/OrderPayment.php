@@ -18,7 +18,7 @@ class OrderPayment extends OrderItem
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Payment\Payment")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $payment;
+    protected $payment;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order

@@ -22,7 +22,7 @@ class ParameterTranslation extends AbstractTranslation
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $name;
+    protected $name;
 
     /**
      * @return string

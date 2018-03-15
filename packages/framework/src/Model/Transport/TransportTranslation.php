@@ -22,21 +22,21 @@ class TransportTranslation extends AbstractTranslation
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $instructions;
+    protected $instructions;
 
     /**
      * @return string

@@ -21,7 +21,7 @@ class ProductCategoryDomain
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product", inversedBy="productCategoryDomains")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    private $product;
+    protected $product;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\Category
@@ -30,7 +30,7 @@ class ProductCategoryDomain
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    private $category;
+    protected $category;
 
     /**
      * @var int
@@ -38,7 +38,7 @@ class ProductCategoryDomain
      * @ORM\Id
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product

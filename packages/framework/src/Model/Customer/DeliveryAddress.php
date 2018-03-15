@@ -17,63 +17,63 @@ class DeliveryAddress
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $companyName;
+    protected $companyName;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $street;
+    protected $street;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $city;
+    protected $city;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private $postcode;
+    protected $postcode;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private $telephone;
+    protected $telephone;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\Country|null
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Country\Country")
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=true)
      */
-    private $country;
+    protected $country;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData $deliveryAddressData

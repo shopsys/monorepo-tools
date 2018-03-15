@@ -38,7 +38,7 @@ class Category extends AbstractTranslatableEntity
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category", inversedBy="children")
      * @ORM\JoinColumn(nullable=true, name="parent_id", referencedColumnName="id")
      */
-    private $parent;
+    protected $parent;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\Category[]
@@ -46,7 +46,7 @@ class Category extends AbstractTranslatableEntity
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
      */
-    private $children;
+    protected $children;
 
     /**
      * @var int
@@ -54,7 +54,7 @@ class Category extends AbstractTranslatableEntity
      * @Gedmo\TreeLevel
      * @ORM\Column(type="integer")
      */
-    private $level;
+    protected $level;
 
     /**
      * @var int
@@ -62,7 +62,7 @@ class Category extends AbstractTranslatableEntity
      * @Gedmo\TreeLeft
      * @ORM\Column(type="integer")
      */
-    private $lft;
+    protected $lft;
 
     /**
      * @var int
@@ -70,14 +70,14 @@ class Category extends AbstractTranslatableEntity
      * @Gedmo\TreeRight
      * @ORM\Column(type="integer")
      */
-    private $rgt;
+    protected $rgt;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDomain[]|\Doctrine\Common\Collections\ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Category\CategoryDomain", mappedBy="category", fetch="EXTRA_LAZY")
      */
-    private $domains;
+    protected $domains;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
@@ -203,7 +203,7 @@ class Category extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
      */
-    private function setTranslations(CategoryData $categoryData)
+    protected function setTranslations(CategoryData $categoryData)
     {
         foreach ($categoryData->name as $locale => $name) {
             $this->translation($locale)->setName($name);

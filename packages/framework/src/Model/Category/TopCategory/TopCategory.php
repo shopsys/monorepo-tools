@@ -18,7 +18,7 @@ class TopCategory
      * @ORM\JoinColumn(nullable=false, name="category_id", referencedColumnName="id", onDelete="CASCADE")
      * @ORM\Id
      */
-    private $category;
+    protected $category;
 
     /**
      * @var int
@@ -26,14 +26,14 @@ class TopCategory
      * @ORM\Column(type="integer")
      * @ORM\Id
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $position;
+    protected $position;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category

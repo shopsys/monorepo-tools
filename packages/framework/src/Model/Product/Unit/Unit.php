@@ -58,7 +58,7 @@ class Unit extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitData $unitData
      */
-    private function setTranslations(UnitData $unitData)
+    protected function setTranslations(UnitData $unitData)
     {
         foreach ($unitData->name as $locale => $name) {
             $this->translation($locale)->setName($name);

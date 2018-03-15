@@ -18,7 +18,7 @@ class ProductDomain
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
      * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $product;
+    protected $product;
 
     /**
      * @var int
@@ -26,54 +26,54 @@ class ProductDomain
      * @ORM\Id
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $seoTitle;
+    protected $seoTitle;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $seoMetaDescription;
+    protected $seoMetaDescription;
 
     /**
      * @var string|null
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @var string|null
      * @ORM\Column(type="text", nullable=true)
      */
-    private $shortDescription;
+    protected $shortDescription;
 
     /**
      * @var string
      *
      * @ORM\Column(type="tsvector", nullable=false)
      */
-    private $descriptionTsvector;
+    protected $descriptionTsvector;
 
     /**
      * @var string
      *
      * @ORM\Column(type="tsvector", nullable=false)
      */
-    private $fulltextTsvector;
+    protected $fulltextTsvector;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $seoH1;
+    protected $seoH1;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product

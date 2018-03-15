@@ -18,7 +18,7 @@ class TopProduct
      * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
      * @ORM\Id
      */
-    private $product;
+    protected $product;
 
     /**
      * @var int
@@ -26,14 +26,14 @@ class TopProduct
      * @ORM\Column(type="integer")
      * @ORM\Id
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $position;
+    protected $position;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product

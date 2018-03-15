@@ -23,40 +23,40 @@ class UploadedFile implements EntityFileUploadInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=100)
      */
-    private $entityName;
+    protected $entityName;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $entityId;
+    protected $entityId;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=5)
      */
-    private $extension;
+    protected $extension;
 
     /**
      * @var \Datetime
      *
      * @ORM\Column(type="datetime")
      */
-    private $modifiedAt;
+    protected $modifiedAt;
 
     /**
      * @var string|null
      */
-    private $temporaryFilename;
+    protected $temporaryFilename;
 
     /**
      * @param string $entityName

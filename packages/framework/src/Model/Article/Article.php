@@ -24,7 +24,7 @@ class Article implements OrderableEntityInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var int
@@ -32,7 +32,7 @@ class Article implements OrderableEntityInterface
      * @Gedmo\SortableGroup
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var int
@@ -40,42 +40,42 @@ class Article implements OrderableEntityInterface
      * @Gedmo\SortablePosition
      * @ORM\Column(type="integer")
      */
-    private $position;
+    protected $position;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $text;
+    protected $text;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $seoTitle;
+    protected $seoTitle;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $seoMetaDescription;
+    protected $seoMetaDescription;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $seoH1;
+    protected $seoH1;
 
     /**
      * @var string
@@ -83,14 +83,14 @@ class Article implements OrderableEntityInterface
      * @Gedmo\SortableGroup
      * @ORM\Column(type="text")
      */
-    private $placement;
+    protected $placement;
 
     /**
      * @var string
      *
      * @ORM\Column(type="boolean")
      */
-    private $hidden;
+    protected $hidden;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Article\ArticleData $articleData

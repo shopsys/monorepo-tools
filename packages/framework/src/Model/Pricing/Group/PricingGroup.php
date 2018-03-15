@@ -17,28 +17,28 @@ class PricingGroup
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $name;
+    protected $name;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var string
      *
      * @ORM\Column(type="decimal", precision=20, scale=4)
      */
-    private $coefficient;
+    protected $coefficient;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData

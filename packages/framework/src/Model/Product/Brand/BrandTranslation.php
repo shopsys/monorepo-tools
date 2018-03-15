@@ -22,7 +22,7 @@ class BrandTranslation extends AbstractTranslation
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @return string

@@ -26,28 +26,28 @@ class PersonalDataAccessRequest
      *
      * @ORM\Column(type="string")
      */
-    private $email;
+    protected $email;
 
     /**
      * @var DateTime
      *
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", unique=true)
      */
-    private $hash;
+    protected $hash;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestData $personalDataAccessRequestData

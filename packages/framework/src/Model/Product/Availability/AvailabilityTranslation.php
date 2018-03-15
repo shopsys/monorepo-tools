@@ -22,7 +22,7 @@ class AvailabilityTranslation extends AbstractTranslation
      *
      * @ORM\Column(type="string", length=100)
      */
-    private $name;
+    protected $name;
 
     /**
      * @return string

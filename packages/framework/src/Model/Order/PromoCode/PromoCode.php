@@ -17,21 +17,21 @@ class PromoCode
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text", unique=true)
      */
-    private $code;
+    protected $code;
 
     /**
      * @var float
      *
      * @ORM\Column(type="decimal", precision=20, scale=4)
      */
-    private $percent;
+    protected $percent;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData

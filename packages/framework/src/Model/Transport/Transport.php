@@ -38,7 +38,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Transport\TransportPrice", mappedBy="transport", cascade={"persist"})
      */
-    private $prices;
+    protected $prices;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
@@ -46,21 +46,21 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $vat;
+    protected $vat;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $hidden;
+    protected $hidden;
 
     /**
      * @var int
      *
      * @ORM\Column(type="boolean")
      */
-    private $deleted;
+    protected $deleted;
 
     /**
      * @var int|null
@@ -68,7 +68,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
      * @Gedmo\SortablePosition
      * @ORM\Column(type="integer", nullable=false)
      */
-    private $position;
+    protected $position;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportData $transportData
@@ -97,7 +97,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportData $transportData
      */
-    private function setTranslations(TransportData $transportData)
+    protected function setTranslations(TransportData $transportData)
     {
         foreach ($transportData->name as $locale => $name) {
             $this->translation($locale)->setName($name);
