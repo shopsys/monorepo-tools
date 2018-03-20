@@ -148,6 +148,9 @@ However, if your operating system does not provide the required locales you can 
 (Note: every OS should support special locale `"C"` or `"POSIX"`.)
 
 ### Phing target tests-db fails on test AdministratorRepositoryTest::testGetByValidMultidomainLogin
+This error is not likely to occur anymore. 
+We added new phing target `timezones-check` that is run during the application build and prevents this error.
+
 Error message:
 ```
 1) Tests\ShopBundle\Database\Model\Administrator\AdministratorRepositoryTest::testGetByValidMultidomainLogin
