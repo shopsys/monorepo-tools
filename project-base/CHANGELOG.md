@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - grunt now compiles less files also from [shopsys/framework](https://github.com/shopsys/framework) package (@MattCzerner)
 - updated phpunit/phpunit to version 7 (@simara-svatopluk)
 - phing target dump-translations does not delete messages, that are not found in translated directories (Miroslav-Stopka)
+- docs updated in order to provide up-to-date information about the current project state (@vitek-rostislav) 
 
 ## 6.0.0-beta21 - 2018-03-05
 - released only in closed beta
