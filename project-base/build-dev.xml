@@ -45,30 +45,17 @@
         </exec>
     </target>
 
-    <target name="dump-translations" description="Extracts translatable messages from all source files.">
+    <target name="dump-translations" depends="dump-translations-project-base" description="Extracts translatable messages from all source files in project base." />
+
+    <target name="dump-translations-project-base" description="Extracts translatable messages from all source files in project base.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
             <arg value="translation:extract" />
             <arg value="--bundle=ShopsysShopBundle" />
-            <arg value="--dir=${path.framework}/src/Component/Controller" />
-            <arg value="--dir=${path.framework}/src/Component/Form" />
-            <arg value="--dir=${path.framework}/src/Component/Grid" />
-            <arg value="--dir=${path.framework}/src/Controller" />
-            <arg value="--dir=${path.framework}/src/Form" />
-            <arg value="--dir=${path.framework}/src/Model" />
-            <arg value="--dir=${path.framework}/src/Resources/config" />
-            <arg value="--dir=${path.framework}/src/Resources/views" />
-            <arg value="--dir=${path.framework}/src/Resources/scripts" />
-            <arg value="--dir=${path.framework}/src/Twig" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Controller" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Form" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/config" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/views" />
-            <arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/scripts" />
-            <arg value="--exclude-dir=admin/plugins" />
+            <arg value="--dir=${path.src}/Shopsys/ShopBundle" />
             <arg value="--exclude-dir=frontend/plugins" />
             <arg value="--output-format=po" />
-
+            <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations" />
             <arg value="cs" />
             <arg value="en" />
         </exec>
