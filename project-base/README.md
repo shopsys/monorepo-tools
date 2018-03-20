@@ -25,6 +25,11 @@ For documentation of Shopsys Framework itself see [Shopsys Framework Knowledge B
 Documentation of the specific project built on Shopsys Framework should be in [Project Documentation](docs/project/index.md).
 
 ## Installation
+Create new project from [`shopsys/project-base`](https://github.com/shopsys/project-base) using composer.
+```
+composer create-project shopsys/project-base --no-install
+```
+For more detailed instructions, follow one of the installation guides:
 - [Installation via Docker (recommended)](docs/docker/installation/installation-using-docker.md)
 - [Detailed native installation](docs/introduction/installation-guide.md)
 
