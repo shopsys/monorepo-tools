@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - this will allow styles to be upgraded via `composer update` in project implementations
 - grunt now compiles less files also from [shopsys/framework](https://github.com/shopsys/framework) package (@MattCzerner)
 - updated phpunit/phpunit to version 7 (@simara-svatopluk)
+- phing target dump-translations does not delete messages, that are not found in translated directories (Miroslav-Stopka)
 
 ## 2.0.0-beta.21.0 - 2018-03-05
 ### Added

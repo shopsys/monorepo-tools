@@ -56,6 +56,7 @@
             <arg value="--exclude-dir=frontend/plugins" />
             <arg value="--output-format=po" />
             <arg value="--output-dir=${path.src}/Shopsys/ShopBundle/Resources/translations" />
+            <arg value="--keep" />
             <arg value="cs" />
             <arg value="en" />
         </exec>
