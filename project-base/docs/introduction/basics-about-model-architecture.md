@@ -9,7 +9,7 @@ Model architecture of Shopsys Framework is inspired by Domain Driven Design (DDD
 - **Domain model** is a system of abstractions that describes selected aspects of the domain.
 - **Domain logic** or **business logic** is the higher level rules for how objects of the domain model interact with one another.
  
-Domain model of Shopsys Framework is located in [`FrameworkBundle/Model`](../../../packages/framework/src/Model). Its concept is to separate behavior and properties of objects from its persistence. This separation is suitable for code reusability, easier testing and it fulfills the Single Responsibility Principle.
+Domain model of Shopsys Framework is located in [`FrameworkBundle/Model`](https://github.com/shopsys/framework/tree/master/src/Model). Its concept is to separate behavior and properties of objects from its persistence. This separation is suitable for code reusability, easier testing and it fulfills the Single Responsibility Principle.
 
 Code belonging to the same feature is grouped together (eg. `Cart` and `CartItem`). Names of classes and methods are based on real world vocabulary to be more intuitive (eg. `OrderHashGenerator` or `getSellableProductsInCategory()`).
 
@@ -18,7 +18,7 @@ Model is divided into four parts: Entity, Repository, Service, and Facade. There
 ![model architecture schema](img/model-architecture.png 'model architecture schema')
 
 ## Entity
-Is class encapsulating data. All entities are persisted by Doctrine ORM. One entity class usually represents one table in the database and one instance of the entity represents one row in the table. The entity is composed of private fields, which can be mapped to columns in the table. Doctrine ORM annotations are used to define the details about the database mapping (types of columns, relations, etc.).
+Is class encapsulating data. All entities are persisted by Doctrine ORM. One entity class usually represents one table in the database and one instance of the entity represents one row in the table. The entity is composed of fields, which can be mapped to columns in the table. Doctrine ORM annotations are used to define the details about the database mapping (types of columns, relations, etc.).
 
 Entities are inspired by Rich Domain Model. That means entity contains not only getters and setters, but also some use case methods with basic domain logic (e.g. `Product::changeVat()` sets vat and marks product for price recalculation). The entity cannot depend on any other class.
 
