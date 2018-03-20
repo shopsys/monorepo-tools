@@ -864,11 +864,13 @@
             <arg value="${path.bin-console}" />
             <arg value="lint:yaml" />
             <arg value="@ShopsysShopBundle" />
+            <arg value="--parse-tags" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
             <arg value="lint:yaml" />
             <arg value="${path.app}/config" />
+            <arg value="--parse-tags" />
         </exec>
     </target>
 

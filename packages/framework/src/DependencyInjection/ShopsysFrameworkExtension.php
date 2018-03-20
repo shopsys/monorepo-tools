@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\DependencyInjection;
 
 use Shopsys\Environment;
+use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -22,5 +23,8 @@ class ShopsysFrameworkExtension extends Extension
         if ($container->getParameter('kernel.environment') === Environment::ENVIRONMENT_TEST) {
             $loader->load('services_test.yml');
         }
+
+        $container->registerForAutoconfiguration(GridInlineEditInterface::class)
+            ->addTag('shopsys.grid_inline_edit');
     }
 }

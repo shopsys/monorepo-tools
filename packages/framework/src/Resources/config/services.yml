@@ -256,6 +256,9 @@ services:
   Shopsys\FrameworkBundle\Component\Form\TimedSpamValidationListener:
     $options: []
 
+  Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditRegistry:
+    arguments: [!tagged shopsys.grid_inline_edit]
+
   Shopsys\FrameworkBundle\Component\Image\DirectoryStructureCreator:
     public: true
     arguments:
