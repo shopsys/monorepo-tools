@@ -4,11 +4,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 
+msgid "Heureka category"
+msgstr "Heureka category"
+
 msgid "Heureka.cz product feed"
 msgstr "Heureka.cz product feed"
 
 msgid "Maximum price per click"
 msgstr "Maximum price per click"
 
-msgid "Heureka category"
-msgstr "Heureka category"

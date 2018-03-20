@@ -2,7 +2,10 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
+"Language: cs\n"
+
+msgid "Heureka category"
+msgstr "Heureka kategorie"
 
 msgid "Heureka.cz product feed"
 msgstr "XML feed Heureka.cz"
@@ -10,5 +13,3 @@ msgstr "XML feed Heureka.cz"
 msgid "Maximum price per click"
 msgstr "Maximální cena za proklik"
 
-msgid "Heureka category"
-msgstr "Heureka kategorie"

@@ -1,0 +1,381 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+
+msgid "Availability name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Catalogue number cannot be longer then {{ limit }} characters"
+msgstr ""
+
+msgid "Choose image"
+msgstr ""
+
+msgid "City name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Coefficient must be greater than 0"
+msgstr ""
+
+msgid "Company name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Country name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "E-mail subject cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "EAN cannot be longer then {{ limit }} characters"
+msgstr ""
+
+msgid "Each parameter can be used only once"
+msgstr ""
+
+msgid "Email cannot be longer then {{ limit }} characters"
+msgstr ""
+
+msgid "Enter date in DD.MM.YYYY format"
+msgstr ""
+
+msgid "First name cannot be longer then {{ limit }} characters"
+msgstr ""
+
+msgid "First name of contact person cannot be longer then {{ limit }} characters"
+msgstr ""
+
+msgid "Flag color in must be in valid hexadecimal code e.g. #3333ff"
+msgstr ""
+
+msgid "Flag name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Full name cannot be longer then {{ limit }} characters"
+msgstr ""
+
+msgid "Heading (H1) cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Heureka API must be {{ limit }} characters"
+msgstr ""
+
+msgid "Identification number cannot be longer then {{ limit }} characters"
+msgstr ""
+
+msgid "Image can be only in JPG or PNG format"
+msgstr ""
+
+msgid "Image can be only in JPG, GIF or PNG format"
+msgstr ""
+
+msgid "Last name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Last name of contact person cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Link must be valid URL address"
+msgstr ""
+
+msgid "Name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Number of days to dispatch must be greater or equal to {{ compared_value }}"
+msgstr ""
+
+msgid "Number of days to expedite must be whole number."
+msgstr ""
+
+msgid "Parameter name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Part number cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Password cannot be longer then {{ limit }} characters"
+msgstr ""
+
+msgid "Password cannot be same as e-mail"
+msgstr ""
+
+msgid "Password cannot be same as part of e-mail before at sign"
+msgstr ""
+
+msgid "Password cannot be same as username"
+msgstr ""
+
+msgid "Passwords do not match"
+msgstr ""
+
+msgid "Please choose action"
+msgstr ""
+
+msgid "Please choose advertisement area"
+msgstr ""
+
+msgid "Please choose advertisement type"
+msgstr ""
+
+msgid "Please choose article placement"
+msgstr ""
+
+msgid "Please choose availability"
+msgstr ""
+
+msgid "Please choose availability for stock products"
+msgstr ""
+
+msgid "Please choose country"
+msgstr ""
+
+msgid "Please choose default unit"
+msgstr ""
+
+msgid "Please choose image"
+msgstr ""
+
+msgid "Please choose parameter"
+msgstr ""
+
+msgid "Please choose unit"
+msgstr ""
+
+msgid "Please choose visibility"
+msgstr ""
+
+msgid "Please enter HTML code for advertisement area"
+msgstr ""
+
+msgid "Please enter VAT in correct format."
+msgstr ""
+
+msgid "Please enter VAT name"
+msgstr ""
+
+msgid "Please enter VAT rate"
+msgstr ""
+
+msgid "Please enter a number"
+msgstr ""
+
+msgid "Please enter article content"
+msgstr ""
+
+msgid "Please enter article name"
+msgstr ""
+
+msgid "Please enter availability name in all languages"
+msgstr ""
+
+msgid "Please enter city"
+msgstr ""
+
+msgid "Please enter code"
+msgstr ""
+
+msgid "Please enter company name"
+msgstr ""
+
+msgid "Please enter country name"
+msgstr ""
+
+msgid "Please enter currency code"
+msgstr ""
+
+msgid "Please enter currency exchange rate"
+msgstr ""
+
+msgid "Please enter default VAT"
+msgstr ""
+
+msgid "Please enter default currency"
+msgstr ""
+
+msgid "Please enter default pricing group"
+msgstr ""
+
+msgid "Please enter discount percentage"
+msgstr ""
+
+msgid "Please enter e-mail"
+msgstr ""
+
+msgid "Please enter e-mail content"
+msgstr ""
+
+msgid "Please enter first name"
+msgstr ""
+
+msgid "Please enter first name of contact person"
+msgstr ""
+
+msgid "Please enter flag color"
+msgstr ""
+
+msgid "Please enter flag name in all languages"
+msgstr ""
+
+msgid "Please enter full name"
+msgstr ""
+
+msgid "Please enter identification number"
+msgstr ""
+
+msgid "Please enter input prices"
+msgstr ""
+
+msgid "Please enter last name"
+msgstr ""
+
+msgid "Please enter last name of contact person"
+msgstr ""
+
+msgid "Please enter link"
+msgstr ""
+
+msgid "Please enter login"
+msgstr ""
+
+msgid "Please enter name"
+msgstr ""
+
+msgid "Please enter name of advertisement area"
+msgstr ""
+
+msgid "Please enter order status name in all languages"
+msgstr ""
+
+msgid "Please enter parameter name"
+msgstr ""
+
+msgid "Please enter parameter value"
+msgstr ""
+
+msgid "Please enter password"
+msgstr ""
+
+msgid "Please enter price"
+msgstr ""
+
+msgid "Please enter price in correct format (positive number with decimal separator)"
+msgstr ""
+
+msgid "Please enter pricing group coefficient"
+msgstr ""
+
+msgid "Please enter pricing group name"
+msgstr ""
+
+msgid "Please enter quantity"
+msgstr ""
+
+msgid "Please enter ratio in correct format"
+msgstr ""
+
+msgid "Please enter script code"
+msgstr ""
+
+msgid "Please enter script name"
+msgstr ""
+
+msgid "Please enter sorting priority"
+msgstr ""
+
+msgid "Please enter stock quantity"
+msgstr ""
+
+msgid "Please enter street"
+msgstr ""
+
+msgid "Please enter subject"
+msgstr ""
+
+msgid "Please enter telephone number"
+msgstr ""
+
+msgid "Please enter unit name in all languages"
+msgstr ""
+
+msgid "Please enter unit price with VAT"
+msgstr ""
+
+msgid "Please enter username"
+msgstr ""
+
+msgid "Please enter valid 3-digit currency code according to ISO 4217 standard (uppercase)"
+msgstr ""
+
+msgid "Please enter valid e-mail"
+msgstr ""
+
+msgid "Please enter whole number."
+msgstr ""
+
+msgid "Please enter zip code"
+msgstr ""
+
+msgid "Previously selected main URL dos not exist any more"
+msgstr ""
+
+msgid "Price must be greater or equal to {{ compared_value }}"
+msgstr ""
+
+msgid "Product name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Quantity must be greater than {{ compared_value }}"
+msgstr ""
+
+msgid "Same description is used on another domain"
+msgstr ""
+
+msgid "Same title complement is used on another domain"
+msgstr ""
+
+msgid "Same title is used on another domain"
+msgstr ""
+
+msgid "Status name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Street name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Tax number cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Telephone number cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "This field must be empty"
+msgstr ""
+
+msgid "Unit name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Uploaded file is to large ({{ size }} {{ suffix }}). Maximum size of an file is {{ limit }} {{ suffix }}."
+msgstr ""
+
+msgid "Uploaded image is to large ({{ size }} {{ suffix }}). Maximum size of an image is {{ limit }} {{ suffix }}."
+msgstr ""
+
+msgid "Username cannot be longer then {{ limit }} characters"
+msgstr ""
+
+msgid "VAT name cannot be longer than {{ limit }} characters"
+msgstr ""
+
+msgid "Variable {{ needle }} is required"
+msgstr ""
+
+msgid "Variant alias cannot be longer then {{ limit }} characters"
+msgstr ""
+
+msgid "You entered same product twice. In list of bestsellers can be product only once. Please correct it and then save form again."
+msgstr ""
+
+msgid "Zip code cannot be longer than {{ limit }} characters"
+msgstr ""
+

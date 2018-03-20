@@ -12,3 +12,4 @@ msgstr "Google Nákupy nejsou optimalizovaný pro prodej v Austrálii, Česku, F
 
 msgid "Show in feed"
 msgstr "Zobrazit ve feedu"
+
