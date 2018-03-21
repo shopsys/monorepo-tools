@@ -25,9 +25,9 @@
     "require": {
         "php": "^7.0",
         "ext-simplexml": "*",
-        "shopsys/form-types-bundle": "~0.2.0",
-        "shopsys/plugin-interface": "^0.3.0",
-        "shopsys/product-feed-interface": "^0.5.0",
+        "shopsys/form-types-bundle": "dev-master",
+        "shopsys/plugin-interface": "dev-master",
+        "shopsys/product-feed-interface": "dev-master",
         "symfony/form": "^3.0",
         "symfony/framework-bundle": "^3.0",
         "symfony/translation": "^3.0",
