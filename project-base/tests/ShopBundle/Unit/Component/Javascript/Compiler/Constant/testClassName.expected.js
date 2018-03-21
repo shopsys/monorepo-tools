@@ -1,2 +1,0 @@
-var noLeadingBackslash = "Tests\\ShopBundle\\Unit\\Component\\Javascript\\Compiler\\Constant\\Testclass";
-var leadingBackslash = "Tests\\ShopBundle\\Unit\\Component\\Javascript\\Compiler\\Constant\\Testclass";
