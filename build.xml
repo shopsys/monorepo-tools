@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ShopSys Framework" default="list">
+<project name="Shopsys Framework" default="list">
 
     <property name="path.root" value="./project-base"/>
     <property name="path.vendor" value="./vendor"/>
@@ -168,7 +168,7 @@
             <arg value="${path.packages}/http-smoke-testing/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="${path.packages}/migrations/src/ShopSys/MigrationBundle/Tests"/>
+            <arg value="${path.packages}/migrations/src/Shopsys/MigrationBundle/Tests"/>
         </exec>
     </target>
 

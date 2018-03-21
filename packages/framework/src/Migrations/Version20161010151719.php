@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use ShopSys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;
+use Shopsys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;
 
 class Version20161010151719 extends AbstractMigration
 {

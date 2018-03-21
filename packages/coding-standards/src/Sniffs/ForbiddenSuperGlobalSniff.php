@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ShopSys\CodingStandards\Sniffs;
+namespace Shopsys\CodingStandards\Sniffs;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;

@@ -1,10 +1,10 @@
 <?php
 
-namespace ShopSys\Tests\Unit\CodingStandards\CsFixer;
+namespace Shopsys\Tests\Unit\CodingStandards\CsFixer;
 
 use PhpCsFixer\Tokenizer\Tokens;
 use PHPUnit\Framework\TestCase;
-use ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer;
+use Shopsys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer;
 use SplFileInfo;
 
 class OrmJoinColumnRequireNullableFixerTest extends TestCase

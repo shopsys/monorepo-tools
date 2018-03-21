@@ -5,14 +5,14 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "ShopSys",
+            "name": "Shopsys",
             "homepage": "https://www.shopsys.com/"
         }
     ],
     "autoload": {
         "psr-4": {
-            "ShopSys\\": [
-                "src/ShopSys/"
+            "Shopsys\\": [
+                "src/Shopsys/"
             ]
         }
     },

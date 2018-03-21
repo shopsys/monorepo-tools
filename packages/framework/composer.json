@@ -1,7 +1,7 @@
 {
     "name": "shopsys/framework",
     "type": "library",
-    "description": "ShopSys Framework",
+    "description": "Shopsys Framework",
     "license": "MIT",
     "autoload": {
         "psr-4": {

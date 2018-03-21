@@ -1,13 +1,13 @@
 checkers:
     # Shopsys Checkers
-    - ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer
-    - ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer
-    - ShopSys\CodingStandards\Sniffs\ForbiddenExitSniff
-    - ShopSys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff
+    - Shopsys\CodingStandards\CsFixer\MissingButtonTypeFixer
+    - Shopsys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer
+    - Shopsys\CodingStandards\Sniffs\ForbiddenExitSniff
+    - Shopsys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff
     # method arguments and variables should be $camelCase
-    - ShopSys\CodingStandards\Sniffs\ValidVariableNameSniff
+    - Shopsys\CodingStandards\Sniffs\ValidVariableNameSniff
 
-    # Custom ShopSys standards
+    # Custom Shopsys standards
     - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopShouldBeWhileLoopSniff
     - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopWithTestFunctionCallSniff

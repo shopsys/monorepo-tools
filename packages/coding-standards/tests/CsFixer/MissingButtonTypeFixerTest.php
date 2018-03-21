@@ -1,10 +1,10 @@
 <?php
 
-namespace ShopSys\Tests\Unit\CodingStandards\CsFixer;
+namespace Shopsys\Tests\Unit\CodingStandards\CsFixer;
 
 use PhpCsFixer\Tokenizer\Tokens;
 use PHPUnit\Framework\TestCase;
-use ShopSys\CodingStandards\CsFixer\MissingButtonTypeFixer;
+use Shopsys\CodingStandards\CsFixer\MissingButtonTypeFixer;
 use SplFileInfo;
 
 class MissingButtonTypeFixerTest extends TestCase

@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
 /**
  * This trait can be used in classes
- * that extend \ShopSys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration.
+ * that extend \Shopsys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration.
  */
 trait MultidomainMigrationTrait
 {

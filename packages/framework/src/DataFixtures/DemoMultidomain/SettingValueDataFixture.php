@@ -54,10 +54,10 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 
         $setting->setForDomain(
             SeoSettingFacade::SEO_META_DESCRIPTION_MAIN_PAGE,
-            'ShopSys Framework - nejlepší řešení pro váš internetový obchod.',
+            'Shopsys Framework - nejlepší řešení pro váš internetový obchod.',
             2
         );
-        $setting->setForDomain(SeoSettingFacade::SEO_TITLE_MAIN_PAGE, 'ShopSys Framework - Titulní strana', 2);
+        $setting->setForDomain(SeoSettingFacade::SEO_TITLE_MAIN_PAGE, 'Shopsys Framework - Titulní strana', 2);
         $setting->setForDomain(SeoSettingFacade::SEO_TITLE_ADD_ON, '| Demo obchod', 2);
 
         $personalDataSiteContent = 'Zadáním e-mailu níže si můžete nechat zobrazit vaše osobní údaje, která evidujeme v našem internetovém obchodu.

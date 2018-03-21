@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Shopsys\FrameworkBundle\Component\Migration\MultidomainMigrationTrait;
-use ShopSys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;
+use Shopsys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;
 
 class Version20161207135225 extends AbstractMigration
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ShopSys\CodingStandards\CsFixer;
+namespace Shopsys\CodingStandards\CsFixer;
 
 use PhpCsFixer\DocBlock\Annotation;
 use PhpCsFixer\DocBlock\DocBlock;

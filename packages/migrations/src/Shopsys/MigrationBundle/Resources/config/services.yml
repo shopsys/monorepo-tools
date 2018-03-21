@@ -1,0 +1,31 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  Shopsys\MigrationBundle\Command\:
+    resource: '../../Command/'
+
+  Shopsys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade:
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+      - '@Shopsys\MigrationBundle\Component\Doctrine\SchemaDiffFilter'
+      - '@Doctrine\DBAL\Schema\Comparator'
+      - '@Doctrine\ORM\Tools\SchemaTool'
+
+  Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocator: ~
+
+  Shopsys\MigrationBundle\Component\Doctrine\SchemaDiffFilter: ~
+
+  Doctrine\DBAL\Schema\Comparator: ~
+
+  Doctrine\ORM\Tools\SchemaTool:
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+
+  Shopsys\MigrationBundle\Component\Generator\GenerateMigrationsService:
+    arguments:
+      - '@templating'
+      - '%doctrine_migrations.namespace%'
+      - '%doctrine_migrations.dir_name%'

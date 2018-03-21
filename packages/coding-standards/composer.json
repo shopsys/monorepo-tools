@@ -5,7 +5,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "ShopSys",
+            "name": "Shopsys",
             "homepage": "https://www.shopsys.com/"
         }
     ],
@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ShopSys\\CodingStandards\\": "src"
+            "Shopsys\\CodingStandards\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ShopSys\\Tests\\Unit\\CodingStandards\\": "tests"
+            "Shopsys\\Tests\\Unit\\CodingStandards\\": "tests"
         }
     },
     "scripts": {

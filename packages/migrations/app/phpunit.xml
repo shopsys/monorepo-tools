@@ -14,7 +14,7 @@
 
     <testsuites>
         <testsuite name="Unit">
-            <directory>../src/ShopSys/MigrationBundle/Tests/Unit</directory>
+            <directory>../src/Shopsys/MigrationBundle/Tests/Unit</directory>
         </testsuite>
     </testsuites>
 

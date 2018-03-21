@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ShopSys\CodingStandards\Sniffs;
+namespace Shopsys\CodingStandards\Sniffs;
 
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\ForbiddenFunctionsSniff;
 

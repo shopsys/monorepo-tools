@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ShopSys Framework (dev)" default="build-demo-ci">
+<project name="Shopsys Framework (dev)" default="build-demo-ci">
 
     <target name="build-dev" depends="timezones-check,clean,composer-dev,npm,dirs-create,domains-urls-check,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,tests-acceptance-build,checks-diff" description="Builds application for development preserving your DB and runs checks on changed files."/>
     <target name="build-dev-quick" depends="timezones-check,clean,composer-dev,npm,dirs-create,domains-urls-check,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,tests-acceptance-build" description="Builds application for development preserving your DB while skipping nonessential steps."/>

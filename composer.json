@@ -1,7 +1,7 @@
 {
   "name": "shopsys/shopsys-monorepo",
   "type": "project",
-  "description": "ShopSys Framework",
+  "description": "Shopsys Framework",
   "license": "MIT",
   "autoload": {
     "psr-4": {
@@ -15,8 +15,8 @@
       "Shopsys\\HttpSmokeTesting\\": [
         "packages/http-smoke-testing/src/"
       ],
-      "ShopSys\\MigrationBundle\\": [
-        "packages/migrations/src/ShopSys/MigrationBundle/"
+      "Shopsys\\MigrationBundle\\": [
+        "packages/migrations/src/Shopsys/MigrationBundle/"
       ],
       "Shopsys\\Plugin\\": [
         "packages/plugin-interface/src/"
