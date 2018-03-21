@@ -78,7 +78,8 @@ class MigrationsLocatorTest extends TestCase
      * @param string $namespace
      * @param string $path
      */
-    private function kernelReturnsOneBundle($namespace, $path) {
+    private function kernelReturnsOneBundle($namespace, $path)
+    {
         $this->kernelMock->method('getBundles')
             ->willReturn([$this->createBundleMock($namespace, $path)]);
     }
@@ -87,7 +88,8 @@ class MigrationsLocatorTest extends TestCase
      * @param string $path
      * @param bool $exists
      */
-    private function filesystemSaysPathExists($path, $exists = true) {
+    private function filesystemSaysPathExists($path, $exists = true)
+    {
         $this->filesystemMock->method('exists')
             ->with($path)
             ->willReturn($exists);
@@ -96,7 +98,8 @@ class MigrationsLocatorTest extends TestCase
     /**
      * @param bool $exists
      */
-    private function filesystemSaysEveryPathExists($exists = true) {
+    private function filesystemSaysEveryPathExists($exists = true)
+    {
         $this->filesystemMock->method('exists')
             ->willReturn($exists);
     }
@@ -106,7 +109,8 @@ class MigrationsLocatorTest extends TestCase
      * @param string $path
      * @return \Symfony\Component\HttpKernel\Bundle\BundleInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    private function createBundleMock($namespace, $path) {
+    private function createBundleMock($namespace, $path)
+    {
         $bundleMock = $this->createMock(BundleInterface::class);
 
         $bundleMock->method('getNamespace')
