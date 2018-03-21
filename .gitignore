@@ -4,5 +4,6 @@
 /.php_cs.cache
 /.docker-sync
 .DS_Store
+/composer.lock
 /docker-compose.yml
 /project-base/composer.lock
