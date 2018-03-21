@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Pricing\Currency;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPrice;
@@ -15,7 +15,7 @@ use Shopsys\FrameworkBundle\Model\Transport\TransportRepository;
 class CurrencyFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -60,7 +60,7 @@ class CurrencyFacade
     private $transportRepository;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         CurrencyRepository $currencyRepository,
         CurrencyService $currencyService,
         PricingSetting $pricingSetting,

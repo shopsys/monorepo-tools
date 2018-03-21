@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
@@ -14,7 +14,7 @@ class ProductPriceRecalculator
     const BATCH_SIZE = 250;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -59,7 +59,7 @@ class ProductPriceRecalculator
     private $productRowsIterator;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         EntityManagerFacade $entityManagerFacade,
         ProductPriceCalculation $productPriceCalculation,
         ProductCalculatedPriceRepository $productCalculatedPriceRepository,

@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\Pricing\Currency\CurrencyFormType;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class CurrencyInlineEdit extends AbstractGridInlineEdit
 {
@@ -16,14 +16,14 @@ class CurrencyInlineEdit extends AbstractGridInlineEdit
     private $currencyFacade;
 
     /**
-     * @var \Symfony\Component\Form\FormFactory
+     * @var \Symfony\Component\Form\FormFactoryInterface
      */
     private $formFactory;
 
     public function __construct(
         CurrencyGridFactory $currencyGridFactory,
         CurrencyFacade $currencyFacade,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($currencyGridFactory);
         $this->currencyFacade = $currencyFacade;

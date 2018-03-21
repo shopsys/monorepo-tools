@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
 use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 class CurrencyGridFactory implements GridFactoryInterface
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -27,12 +27,12 @@ class CurrencyGridFactory implements GridFactoryInterface
     private $currencyFacade;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Grid\GridFactory $gridFactory
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         GridFactory $gridFactory,
         CurrencyFacade $currencyFacade
     ) {

@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Mail;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusMailTemplateService;
@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository;
 class MailTemplateFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -41,7 +41,7 @@ class MailTemplateFacade
     private $uploadedFileFacade;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         MailTemplateRepository $mailTemplateRepository,
         OrderStatusRepository $orderStatusRepository,
         OrderStatusMailTemplateService $orderStatusMailTemplateService,

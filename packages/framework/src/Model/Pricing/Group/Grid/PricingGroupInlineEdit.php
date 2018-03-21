@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\Pricing\Group\PricingGroupFormType;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class PricingGroupInlineEdit extends AbstractGridInlineEdit
 {
@@ -22,7 +22,7 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Symfony\Component\Form\FormFactory
+     * @var \Symfony\Component\Form\FormFactoryInterface
      */
     private $formFactory;
 
@@ -30,7 +30,7 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
         PricingGroupGridFactory $pricingGroupGridFactory,
         PricingGroupFacade $pricingGroupFacade,
         AdminDomainTabsFacade $adminDomainTabsFacade,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($pricingGroupGridFactory);
         $this->pricingGroupFacade = $pricingGroupFacade;

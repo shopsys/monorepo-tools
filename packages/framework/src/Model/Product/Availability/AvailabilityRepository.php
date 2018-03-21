@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
 use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Shopsys\FrameworkBundle\Component\Doctrine\SortableNullsWalker;
 use Shopsys\FrameworkBundle\Model\Product\Product;
@@ -16,9 +16,9 @@ class AvailabilityRepository
     private $em;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->em = $entityManager;
     }

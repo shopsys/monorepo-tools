@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Security;
 
 use DateTime;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository;
@@ -40,7 +40,7 @@ class AdministratorLoginFacade
     private $hashGenerator;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -49,7 +49,7 @@ class AdministratorLoginFacade
         EventDispatcherInterface $eventDispatcher,
         AdministratorRepository $administratorRepository,
         HashGenerator $hashGenerator,
-        EntityManager $em
+        EntityManagerInterface $em
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->eventDispatcher = $eventDispatcher;

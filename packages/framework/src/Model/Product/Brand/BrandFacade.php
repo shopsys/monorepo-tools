@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 class BrandFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -35,7 +35,7 @@ class BrandFacade
     private $domain;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         BrandRepository $brandRepository,
         ImageFacade $imageFacade,
         FriendlyUrlFacade $friendlyUrlFacade,

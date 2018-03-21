@@ -2,14 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\Model\Article;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
 class ArticleFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -29,13 +29,13 @@ class ArticleFacade
     private $friendlyUrlFacade;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Article\ArticleRepository $articleRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         ArticleRepository $articleRepository,
         Domain $domain,
         FriendlyUrlFacade $friendlyUrlFacade

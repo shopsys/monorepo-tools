@@ -4,14 +4,14 @@ namespace Shopsys\FrameworkBundle\Model\Customer;
 
 use DateTime;
 use Shopsys\FrameworkBundle\Component\String\HashGenerator;
-use Symfony\Component\Security\Core\Encoder\EncoderFactory;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class CustomerPasswordService
 {
     const RESET_PASSWORD_HASH_LENGTH = 50;
 
     /**
-     * @var \Symfony\Component\Security\Core\Encoder\EncoderFactory
+     * @var \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface
      */
     private $encoderFactory;
 
@@ -21,7 +21,7 @@ class CustomerPasswordService
     private $hashGenerator;
 
     public function __construct(
-        EncoderFactory $encoderFactory,
+        EncoderFactoryInterface $encoderFactory,
         HashGenerator $hashGenerator
     ) {
         $this->encoderFactory = $encoderFactory;

@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Component\Grid;
 
 use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 
 class ActionColumn
 {
@@ -12,7 +12,7 @@ class ActionColumn
     const TYPE_EDIT = 'edit';
 
     /**
-     * @var \Symfony\Component\Routing\Router
+     * @var \Symfony\Component\Routing\RouterInterface
      */
     private $router;
 
@@ -62,7 +62,7 @@ class ActionColumn
     private $isAjaxConfirm;
 
     /**
-     * @param \Symfony\Component\Routing\Router $router
+     * @param \Symfony\Component\Routing\RouterInterface $router
      * @param \Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
      * @param string $type
      * @param string $title
@@ -71,7 +71,7 @@ class ActionColumn
      * @param array $additionalRouteParams
      */
     public function __construct(
-        Router $router,
+        RouterInterface $router,
         RouteCsrfProtector $routeCsrfProtector,
         $type,
         $title,

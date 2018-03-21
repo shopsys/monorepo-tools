@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Doctrine;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class SqlLoggerFacade
 {
@@ -17,14 +17,14 @@ class SqlLoggerFacade
     private $isLoggerTemporarilyDisabled;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      */
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
         $this->isLoggerTemporarilyDisabled = false;

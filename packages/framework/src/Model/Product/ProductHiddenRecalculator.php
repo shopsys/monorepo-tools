@@ -2,17 +2,17 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ProductHiddenRecalculator
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
     public function __construct(
-        EntityManager $entityManager
+        EntityManagerInterface $entityManager
     ) {
         $this->em = $entityManager;
     }

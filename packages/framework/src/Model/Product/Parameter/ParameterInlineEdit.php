@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\Product\Parameter\ParameterFormType;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class ParameterInlineEdit extends AbstractGridInlineEdit
 {
@@ -14,14 +14,14 @@ class ParameterInlineEdit extends AbstractGridInlineEdit
     private $parameterFacade;
 
     /**
-     * @var \Symfony\Component\Form\FormFactory
+     * @var \Symfony\Component\Form\FormFactoryInterface
      */
     private $formFactory;
 
     public function __construct(
         ParameterGridFactory $parameterGridFactory,
         ParameterFacade $parameterFacade,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($parameterGridFactory);
         $this->parameterFacade = $parameterFacade;

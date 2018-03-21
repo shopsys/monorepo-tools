@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\FrameworkBundle\Model\Product\Product;
@@ -10,12 +10,12 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 class ParameterRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
     public function __construct(
-        EntityManager $entityManager
+        EntityManagerInterface $entityManager
     ) {
         $this->em = $entityManager;
     }

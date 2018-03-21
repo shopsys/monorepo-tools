@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
@@ -29,7 +29,7 @@ class OrderFacade
     const VARIABLE_TRANSPORT_INSTRUCTIONS = '{transport_instructions}';
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -124,7 +124,7 @@ class OrderFacade
     private $domain;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         OrderNumberSequenceRepository $orderNumberSequenceRepository,
         OrderRepository $orderRepository,
         OrderService $orderService,

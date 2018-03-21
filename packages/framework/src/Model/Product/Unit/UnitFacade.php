@@ -2,13 +2,13 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Unit;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
 class UnitFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -28,13 +28,13 @@ class UnitFacade
     private $setting;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitRepository $unitRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitService $unitService
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         UnitRepository $unitRepository,
         UnitService $unitService,
         Setting $setting

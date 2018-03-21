@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Component\Grid;
 
 use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Twig_Environment;
 
 class GridFactory
@@ -15,7 +15,7 @@ class GridFactory
     private $requestStack;
 
     /**
-     * @var \Symfony\Component\Routing\Router
+     * @var \Symfony\Component\Routing\RouterInterface
      */
     private $router;
 
@@ -31,7 +31,7 @@ class GridFactory
 
     public function __construct(
         RequestStack $requestStack,
-        Router $router,
+        RouterInterface $router,
         RouteCsrfProtector $routeCsrfProtector,
         Twig_Environment $twig
     ) {

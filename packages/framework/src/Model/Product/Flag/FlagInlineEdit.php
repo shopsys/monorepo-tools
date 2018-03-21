@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Flag;
 
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\Product\Flag\FlagFormType;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class FlagInlineEdit extends AbstractGridInlineEdit
 {
@@ -14,14 +14,14 @@ class FlagInlineEdit extends AbstractGridInlineEdit
     private $flagFacade;
 
     /**
-     * @var \Symfony\Component\Form\FormFactory
+     * @var \Symfony\Component\Form\FormFactoryInterface
      */
     private $formFactory;
 
     public function __construct(
         FlagGridFactory $flagGridFactory,
         FlagFacade $flagFacade,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($flagGridFactory);
         $this->flagFacade = $flagFacade;

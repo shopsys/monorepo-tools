@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Shopsys\FrameworkBundle\Form\FriendlyUrlType;
@@ -13,7 +13,7 @@ class FriendlyUrlFacade
     const MAX_URL_UNIQUE_RESOLVE_ATTEMPT = 100;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -38,7 +38,7 @@ class FriendlyUrlFacade
     private $domain;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         DomainRouterFactory $domainRouterFactory,
         FriendlyUrlService $friendlyUrlService,
         FriendlyUrlRepository $friendlyUrlRepository,

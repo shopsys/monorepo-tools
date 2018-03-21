@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Image;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
@@ -11,7 +11,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class ImageFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -52,7 +52,7 @@ class ImageFacade
 
     public function __construct(
         $imageUrlPrefix,
-        EntityManager $em,
+        EntityManagerInterface $em,
         ImageConfig $imageConfig,
         ImageRepository $imageRepository,
         ImageService $imageService,

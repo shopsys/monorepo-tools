@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Cart;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
@@ -11,7 +11,7 @@ class CartMigrationFacade
     const SESSION_PREVIOUS_CART_IDENTIFIER = 'previous_id';
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -31,13 +31,13 @@ class CartMigrationFacade
     private $customerIdentifierFactory;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Cart\CartService $cartService
      * @param \Shopsys\FrameworkBundle\Model\Cart\CartFactory $cartFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         CartService $cartService,
         CartFactory $cartFactory,
         CustomerIdentifierFactory $customerIdentifierFactory

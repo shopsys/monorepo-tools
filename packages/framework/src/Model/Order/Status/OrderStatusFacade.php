@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Status;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
 class OrderStatusFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -35,7 +35,7 @@ class OrderStatusFacade
     private $mailTemplateFacade;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         OrderStatusRepository $orderStatusRepository,
         OrderStatusService $orderStatusService,
         OrderRepository $orderRepository,

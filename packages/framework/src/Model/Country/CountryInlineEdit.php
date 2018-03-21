@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Country;
 use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\Country\CountryFormType;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class CountryInlineEdit extends AbstractGridInlineEdit
 {
@@ -20,7 +20,7 @@ class CountryInlineEdit extends AbstractGridInlineEdit
     private $adminDomainTabsFacade;
 
     /**
-     * @var \Symfony\Component\Form\FormFactory
+     * @var \Symfony\Component\Form\FormFactoryInterface
      */
     private $formFactory;
 
@@ -28,7 +28,7 @@ class CountryInlineEdit extends AbstractGridInlineEdit
         CountryGridFactory $countryGridFactory,
         CountryFacade $countryFacade,
         AdminDomainTabsFacade $adminDomainTabsFacade,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($countryGridFactory);
         $this->countryFacade = $countryFacade;

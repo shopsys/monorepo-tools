@@ -3,22 +3,22 @@
 namespace Shopsys\FrameworkBundle\Component\DataFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 
 abstract class AbstractNativeFixture extends AbstractFixture
 {
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $entityManager;
 
     /**
      * @required
-     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
      */
-    public function autowireEntityManager(EntityManager $entityManager)
+    public function autowireEntityManager(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }

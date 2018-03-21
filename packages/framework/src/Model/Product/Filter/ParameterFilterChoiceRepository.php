@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\FrameworkBundle\Component\Doctrine\GroupedScalarHydrator;
 use Shopsys\FrameworkBundle\Model\Category\Category;
@@ -15,7 +15,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 class ParameterFilterChoiceRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -25,7 +25,7 @@ class ParameterFilterChoiceRepository
     private $productRepository;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         ProductRepository $productRepository
     ) {
         $this->em = $em;

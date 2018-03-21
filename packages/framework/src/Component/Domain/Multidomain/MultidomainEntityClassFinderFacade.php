@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Domain\Multidomain;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder;
 use Shopsys\FrameworkBundle\Component\Setting\SettingValue;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 class MultidomainEntityClassFinderFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -26,7 +26,7 @@ class MultidomainEntityClassFinderFacade
     private $entityNotNullableColumnsFinder;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         MultidomainEntityClassFinder $multidomainEntityClassFinder,
         EntityNotNullableColumnsFinder $entityNotNullableColumnsFinder
     ) {

@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\BestsellingProduct;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 class ManualBestsellingProductRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -20,7 +20,7 @@ class ManualBestsellingProductRepository
      */
     private $productRepository;
 
-    public function __construct(EntityManager $entityManager, ProductRepository $productRepository)
+    public function __construct(EntityManagerInterface $entityManager, ProductRepository $productRepository)
     {
         $this->em = $entityManager;
         $this->productRepository = $productRepository;

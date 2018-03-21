@@ -2,13 +2,13 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\TopProduct;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory;
 
 class TopProductFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -23,7 +23,7 @@ class TopProductFacade
     private $productDetailFactory;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         TopProductRepository $topProductRepository,
         ProductDetailFactory $productDetailFactory
     ) {

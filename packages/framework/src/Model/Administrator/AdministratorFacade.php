@@ -2,12 +2,12 @@
 
 namespace Shopsys\FrameworkBundle\Model\Administrator;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class AdministratorFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -22,12 +22,12 @@ class AdministratorFacade
     private $administratorService;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository $administratorRepository
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorService $administratorService
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         AdministratorRepository $administratorRepository,
         AdministratorService $administratorService
     ) {

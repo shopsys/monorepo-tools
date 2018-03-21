@@ -2,14 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\Model\Customer;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 
 class CustomerFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -29,13 +29,13 @@ class CustomerFacade
     private $customerMailFacade;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerService $customerService
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         UserRepository $userRepository,
         CustomerService $customerService,
         CustomerMailFacade $customerMailFacade

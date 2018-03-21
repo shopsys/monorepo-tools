@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Setting;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class Setting
 {
@@ -22,7 +22,7 @@ class Setting
     const FEED_ITEM_ID_TO_CONTINUE = 'feedItemIdToContinue';
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -37,10 +37,10 @@ class Setting
     private $values;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Setting\SettingValueRepository $settingValueRepository
      */
-    public function __construct(EntityManager $em, SettingValueRepository $settingValueRepository)
+    public function __construct(EntityManagerInterface $em, SettingValueRepository $settingValueRepository)
     {
         $this->em = $em;
         $this->settingValueRepository = $settingValueRepository;

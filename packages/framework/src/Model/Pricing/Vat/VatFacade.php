@@ -2,14 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\Model\Pricing\Vat;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 class VatFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -34,14 +34,14 @@ class VatFacade
     private $productPriceRecalculationScheduler;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatRepository $vatRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatService $vatService
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         VatRepository $vatRepository,
         VatService $vatService,
         Setting $setting,

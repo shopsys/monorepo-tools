@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Script;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 
@@ -12,7 +12,7 @@ class ScriptFacade
     const VARIABLE_TOTAL_PRICE = '{total_price}';
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -27,12 +27,12 @@ class ScriptFacade
     private $setting;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Script\ScriptRepository $scriptRepository
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         ScriptRepository $scriptRepository,
         Setting $setting
     ) {

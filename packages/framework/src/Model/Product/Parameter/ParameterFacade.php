@@ -2,12 +2,12 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ParameterFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -22,12 +22,12 @@ class ParameterFacade
     private $parameterService;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterService $parameterService
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         ParameterRepository $parameterRepository,
         ParameterService $parameterService
     ) {

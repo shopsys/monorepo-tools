@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Category;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
@@ -16,7 +16,7 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 class CategoryFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -61,7 +61,7 @@ class CategoryFacade
     private $pluginCrudExtensionFacade;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         CategoryRepository $categoryRepository,
         CategoryService $categoryService,
         Domain $domain,

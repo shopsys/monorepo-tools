@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator;
@@ -26,7 +26,7 @@ class ProductAvailabilityCalculation
     private $productVisibilityFacade;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -39,7 +39,7 @@ class ProductAvailabilityCalculation
         AvailabilityFacade $availabilityFacade,
         ProductSellingDeniedRecalculator $productSellingDeniedRecalculator,
         ProductVisibilityFacade $productVisibilityFacade,
-        EntityManager $em,
+        EntityManagerInterface $em,
         ProductRepository $productRepository
     ) {
         $this->availabilityFacade = $availabilityFacade;

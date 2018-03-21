@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Pricing\Vat;
 
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\Vat\VatFormType;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class VatInlineEdit extends AbstractGridInlineEdit
 {
@@ -14,14 +14,14 @@ class VatInlineEdit extends AbstractGridInlineEdit
     private $vatFacade;
 
     /**
-     * @var \Symfony\Component\Form\FormFactory
+     * @var \Symfony\Component\Form\FormFactoryInterface
      */
     private $formFactory;
 
     public function __construct(
         VatGridFactory $vatGridFactory,
         VatFacade $vatFacade,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($vatGridFactory);
         $this->vatFacade = $vatFacade;

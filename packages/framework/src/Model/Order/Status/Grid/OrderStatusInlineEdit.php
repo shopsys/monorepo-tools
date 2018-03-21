@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\Order\Status\OrderStatusFormType;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class OrderStatusInlineEdit extends AbstractGridInlineEdit
 {
@@ -16,14 +16,14 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit
     private $orderStatusFacade;
 
     /**
-     * @var \Symfony\Component\Form\FormFactory
+     * @var \Symfony\Component\Form\FormFactoryInterface
      */
     private $formFactory;
 
     public function __construct(
         OrderStatusGridFactory $orderStatusGridFactory,
         OrderStatusFacade $orderStatusFacade,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($orderStatusGridFactory);
         $this->orderStatusFacade = $orderStatusFacade;

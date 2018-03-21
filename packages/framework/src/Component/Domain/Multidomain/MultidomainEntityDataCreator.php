@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Domain\Multidomain;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Shopsys\FrameworkBundle\Component\Sql\SqlQuoter;
 
@@ -14,7 +14,7 @@ class MultidomainEntityDataCreator
     private $multidomainEntityClassFinderFacade;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -25,7 +25,7 @@ class MultidomainEntityDataCreator
 
     public function __construct(
         MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade,
-        EntityManager $em,
+        EntityManagerInterface $em,
         SqlQuoter $sqlQuoter
     ) {
         $this->multidomainEntityClassFinderFacade = $multidomainEntityClassFinderFacade;

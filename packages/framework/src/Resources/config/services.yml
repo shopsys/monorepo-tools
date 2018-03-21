@@ -480,6 +480,8 @@ services:
     calls:
       - [setContainer, ['@service_container']]
 
+  Symfony\Component\Config\Loader\LoaderInterface: '@routing.loader'
+
   Shopsys\FrameworkBundle\Component\Router\CurrentDomainRouter:
     tags:
       - { name: router, priority: 70 }
@@ -496,6 +498,8 @@ services:
   Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector:
     arguments:
       - '@annotations.reader'
+
+  Shopsys\FrameworkBundle\Component\Grid\GridFactory: ~
 
   Shopsys\FrameworkBundle\Model\Script\ScriptFacade:
     public: true

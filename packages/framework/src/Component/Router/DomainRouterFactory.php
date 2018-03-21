@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Component\Router;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory;
-use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Router;
 
@@ -27,9 +27,9 @@ class DomainRouterFactory
     private $domain;
 
     /**
-     * @var \Symfony\Component\Config\Loader\DelegatingLoader
+     * @var \Symfony\Component\Config\Loader\LoaderInterface
      */
-    private $delegatingLoader;
+    private $configLoader;
 
     /**
      * @var string
@@ -43,13 +43,13 @@ class DomainRouterFactory
 
     public function __construct(
         $routerConfiguration,
-        DelegatingLoader $delegatingLoader,
+        LoaderInterface $configLoader,
         LocalizedRouterFactory $localizedRouterFactory,
         FriendlyUrlRouterFactory $friendlyUrlRouterFactory,
         Domain $domain
     ) {
         $this->routerConfiguration = $routerConfiguration;
-        $this->delegatingLoader = $delegatingLoader;
+        $this->configLoader = $configLoader;
         $this->localizedRouterFactory = $localizedRouterFactory;
         $this->domain = $domain;
         $this->friendlyUrlRouterFactory = $friendlyUrlRouterFactory;
@@ -89,7 +89,7 @@ class DomainRouterFactory
     private function getBasicRouter(DomainConfig $domainConfig)
     {
         return new Router(
-            $this->delegatingLoader,
+            $this->configLoader,
             $this->routerConfiguration,
             [],
             $this->getRequestContextByDomainConfig($domainConfig)

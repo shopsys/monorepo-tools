@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CategoryController extends AdminBaseController
 {
@@ -40,14 +40,14 @@ class CategoryController extends AdminBaseController
     private $domain;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
     private $session;
 
     public function __construct(
         CategoryFacade $categoryFacade,
         CategoryDataFactory $categoryDataFactory,
-        Session $session,
+        SessionInterface $session,
         Domain $domain,
         Breadcrumb $breadcrumb
     ) {

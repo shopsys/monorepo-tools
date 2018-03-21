@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\FlashMessage;
 
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Bag
 {
@@ -18,15 +18,15 @@ class Bag
     protected $bagName;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
     private $session;
 
     /**
      * @param string $bagName
-     * @param \Symfony\Component\HttpFoundation\Session\Session $session
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
      */
-    public function __construct($bagName, Session $session)
+    public function __construct($bagName, SessionInterface $session)
     {
         if (!is_string($bagName) || empty($bagName)) {
             $message = 'Bag name for messages must be non-empty string.';

@@ -2,13 +2,13 @@
 
 namespace Shopsys\FrameworkBundle\Component\Cron;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig;
 
 class CronModuleFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -23,7 +23,7 @@ class CronModuleFacade
     private $cronService;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         CronModuleRepository $cronModuleRepository,
         CronService $cronService
     ) {

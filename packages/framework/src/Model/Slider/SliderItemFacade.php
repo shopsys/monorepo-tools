@@ -2,14 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\Model\Slider;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 
 class SliderItemFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -29,7 +29,7 @@ class SliderItemFacade
     private $domain;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         SliderItemRepository $sliderItemRepository,
         ImageFacade $imageFacade,
         Domain $domain

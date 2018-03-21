@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
-use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -15,9 +15,9 @@ class FriendlyUrlRouter implements RouterInterface
     private $context;
 
     /**
-     * @var \Symfony\Component\Config\Loader\DelegatingLoader
+     * @var \Symfony\Component\Config\Loader\LoaderInterface
      */
-    private $delegatingLoader;
+    private $configLoader;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator
@@ -46,7 +46,7 @@ class FriendlyUrlRouter implements RouterInterface
 
     /**
      * @param \Symfony\Component\Routing\RequestContext $context
-     * @param \Symfony\Component\Config\Loader\DelegatingLoader $delegatingLoader
+     * @param \Symfony\Component\Config\Loader\LoaderInterface $configLoader
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator $friendlyUrlGenerator
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher $friendlyUrlMatcher
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
@@ -54,14 +54,14 @@ class FriendlyUrlRouter implements RouterInterface
      */
     public function __construct(
         RequestContext $context,
-        DelegatingLoader $delegatingLoader,
+        LoaderInterface $configLoader,
         FriendlyUrlGenerator $friendlyUrlGenerator,
         FriendlyUrlMatcher $friendlyUrlMatcher,
         DomainConfig $domainConfig,
         $friendlyUrlRouterResourceFilepath
     ) {
         $this->context = $context;
-        $this->delegatingLoader = $delegatingLoader;
+        $this->configLoader = $configLoader;
         $this->friendlyUrlGenerator = $friendlyUrlGenerator;
         $this->friendlyUrlMatcher = $friendlyUrlMatcher;
         $this->domainConfig = $domainConfig;
@@ -90,7 +90,7 @@ class FriendlyUrlRouter implements RouterInterface
     public function getRouteCollection()
     {
         if ($this->collection === null) {
-            $this->collection = $this->delegatingLoader->load($this->friendlyUrlRouterResourceFilepath);
+            $this->collection = $this->configLoader->load($this->friendlyUrlRouterResourceFilepath);
         }
 
         return $this->collection;

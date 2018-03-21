@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Component\Grid;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Twig_Environment;
 
 class GridView
@@ -36,7 +36,7 @@ class GridView
     private $requestStack;
 
     /**
-     * @var \Symfony\Component\Routing\Router
+     * @var \Symfony\Component\Routing\RouterInterface
      */
     private $router;
 
@@ -48,7 +48,7 @@ class GridView
     /**
      * @param \Shopsys\FrameworkBundle\Component\Grid\Grid $grid
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-     * @param \Symfony\Component\Routing\Router $router
+     * @param \Symfony\Component\Routing\RouterInterface $router
      * @param \Twig_Environment $twig
      * @param string|string[] $theme
      * @param array $templateParameters
@@ -56,7 +56,7 @@ class GridView
     public function __construct(
         Grid $grid,
         RequestStack $requestStack,
-        Router $router,
+        RouterInterface $router,
         Twig_Environment $twig,
         $theme,
         array $templateParameters = []

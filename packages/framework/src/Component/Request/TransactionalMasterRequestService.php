@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Request;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 class TransactionalMasterRequestService
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -19,7 +19,7 @@ class TransactionalMasterRequestService
      */
     private $inTransaction;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->inTransaction = false;
         $this->em = $em;

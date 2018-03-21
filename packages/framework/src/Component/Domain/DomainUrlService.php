@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Domain;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Shopsys\FrameworkBundle\Component\Entity\EntityStringColumnsFinder;
 use Shopsys\FrameworkBundle\Component\Sql\SqlQuoter;
@@ -15,7 +15,7 @@ class DomainUrlService
     private $entityStringColumnsFinder;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -26,7 +26,7 @@ class DomainUrlService
 
     public function __construct(
         EntityStringColumnsFinder $entityStringColumnsFinder,
-        EntityManager $em,
+        EntityManagerInterface $em,
         SqlQuoter $sqlQuoter
     ) {
         $this->entityStringColumnsFinder = $entityStringColumnsFinder;

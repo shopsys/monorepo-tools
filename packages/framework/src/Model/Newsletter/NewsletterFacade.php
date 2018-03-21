@@ -3,13 +3,13 @@
 namespace Shopsys\FrameworkBundle\Model\Newsletter;
 
 use DateTimeImmutable;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 
 class NewsletterFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -19,7 +19,7 @@ class NewsletterFacade
     private $newsletterRepository;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         NewsletterRepository $newsletterRepository
     ) {
         $this->em = $em;

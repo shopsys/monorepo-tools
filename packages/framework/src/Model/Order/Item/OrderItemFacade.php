@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
 use Shopsys\FrameworkBundle\Model\Order\OrderService;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 class OrderItemFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -36,7 +36,7 @@ class OrderItemFacade
     private $orderService;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         OrderRepository $orderRepository,
         ProductRepository $productRepository,
         ProductPriceCalculationForUser $productPriceCalculationForUser,

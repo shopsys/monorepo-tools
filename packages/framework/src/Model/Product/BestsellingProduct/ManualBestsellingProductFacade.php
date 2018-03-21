@@ -2,13 +2,13 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\BestsellingProduct;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 
 class ManualBestsellingProductFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -23,7 +23,7 @@ class ManualBestsellingProductFacade
     private $cachedBestsellingProductFacade;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         ManualBestsellingProductRepository $manualBestsellingProductRepository,
         CachedBestsellingProductFacade $cachedBestsellingProductFacade
     ) {

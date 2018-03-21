@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Product;
 
 use DateTime;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
@@ -14,7 +14,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository;
 class ProductVisibilityRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -29,7 +29,7 @@ class ProductVisibilityRepository
     private $pricingGroupRepository;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         Domain $domain,
         PricingGroupRepository $pricingGroupRepository
     ) {

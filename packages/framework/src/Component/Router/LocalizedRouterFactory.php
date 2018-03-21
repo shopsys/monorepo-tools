@@ -2,16 +2,16 @@
 
 namespace Shopsys\FrameworkBundle\Component\Router;
 
-use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Router;
 
 class LocalizedRouterFactory
 {
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader
+     * @var \Symfony\Component\Config\Loader\LoaderInterface
      */
-    private $delegatingLoader;
+    private $configLoader;
 
     /**
      * @var string[]
@@ -23,9 +23,9 @@ class LocalizedRouterFactory
      */
     private $routersByLocaleAndHost;
 
-    public function __construct($localeRoutersResourcesFilepaths, DelegatingLoader $delegatingLoader)
+    public function __construct($localeRoutersResourcesFilepaths, LoaderInterface $configLoader)
     {
-        $this->delegatingLoader = $delegatingLoader;
+        $this->configLoader = $configLoader;
         $this->localeRoutersResourcesFilepaths = $localeRoutersResourcesFilepaths;
         $this->routersByLocaleAndHost = [];
     }
@@ -47,7 +47,7 @@ class LocalizedRouterFactory
             || !array_key_exists($context->getHost(), $this->routersByLocaleAndHost[$locale])
         ) {
             $this->routersByLocaleAndHost[$locale][$context->getHost()] = new Router(
-                $this->delegatingLoader,
+                $this->configLoader,
                 $this->localeRoutersResourcesFilepaths[$locale],
                 [],
                 $context

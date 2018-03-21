@@ -6,7 +6,7 @@ use Craue\FormFlowBundle\Storage\DataManager;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -23,7 +23,7 @@ class DomainAwareOrderFlowFactory implements OrderFlowFactoryInterface
     private $domain;
 
     /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcher
+     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
      */
     private $eventDispatcher;
 
@@ -49,7 +49,7 @@ class DomainAwareOrderFlowFactory implements OrderFlowFactoryInterface
     public function __construct(
         ContainerInterface $container,
         Domain $domain,
-        EventDispatcher $eventDispatcher,
+        EventDispatcherInterface $eventDispatcher,
         RequestStack $requestStack,
         FormFactoryInterface $formFactory,
         DataManager $dataManager

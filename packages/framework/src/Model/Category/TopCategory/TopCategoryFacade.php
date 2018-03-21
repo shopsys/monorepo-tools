@@ -2,12 +2,12 @@
 
 namespace Shopsys\FrameworkBundle\Model\Category\TopCategory;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class TopCategoryFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -17,7 +17,7 @@ class TopCategoryFacade
     private $topCategoryRepository;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         TopCategoryRepository $topCategoryRepository
     ) {
         $this->em = $em;

@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Pricing\Group;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Customer\UserRepository;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
 class PricingGroupFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -52,7 +52,7 @@ class PricingGroupFacade
     private $userRepository;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         PricingGroupRepository $pricingGroupRepository,
         Domain $domain,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,

@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Payment;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Transport\TransportRepository;
 class PaymentFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -52,7 +52,7 @@ class PaymentFacade
     private $paymentPriceCalculation;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         PaymentRepository $paymentRepository,
         TransportRepository $transportRepository,
         PaymentVisibilityCalculation $paymentVisibilityCalculation,

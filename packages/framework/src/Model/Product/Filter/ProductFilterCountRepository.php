@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 class ProductFilterCountRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -22,7 +22,7 @@ class ProductFilterCountRepository
     private $productFilterRepository;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         ProductFilterRepository $productFilterRepository
     ) {
         $this->em = $em;

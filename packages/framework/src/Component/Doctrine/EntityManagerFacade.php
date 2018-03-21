@@ -2,13 +2,13 @@
 
 namespace Shopsys\FrameworkBundle\Component\Doctrine;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
 class EntityManagerFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -17,7 +17,7 @@ class EntityManagerFacade
      */
     private $setting;
 
-    public function __construct(EntityManager $em, Setting $setting)
+    public function __construct(EntityManagerInterface $em, Setting $setting)
     {
         $this->em = $em;
         $this->setting = $setting;

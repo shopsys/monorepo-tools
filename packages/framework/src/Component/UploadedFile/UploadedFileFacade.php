@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\UploadedFile;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use Symfony\Component\Filesystem\Filesystem;
@@ -10,7 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class UploadedFileFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -40,7 +40,7 @@ class UploadedFileFacade
     private $uploadedFileLocator;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         UploadedFileConfig $uploadedFileConfig,
         UploadedFileRepository $uploadedFileRepository,
         UploadedFileService $uploadedFileService,

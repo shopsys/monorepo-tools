@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Component\ConfirmDelete;
 
 use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
-use Symfony\Bundle\TwigBundle\TwigEngine;
+use Symfony\Component\Templating\EngineInterface;
 
 class ConfirmDeleteResponseFactory
 {
@@ -18,7 +18,7 @@ class ConfirmDeleteResponseFactory
     private $routeCsrfProtector;
 
     public function __construct(
-        TwigEngine $templating,
+        EngineInterface $templating,
         RouteCsrfProtector $routeCsrfProtector
     ) {
         $this->templating = $templating;

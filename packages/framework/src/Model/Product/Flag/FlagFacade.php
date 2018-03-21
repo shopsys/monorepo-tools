@@ -2,12 +2,12 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Flag;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class FlagFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -22,12 +22,12 @@ class FlagFacade
     private $flagService;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagRepository $flagRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagService $flagService
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         FlagRepository $flagRepository,
         FlagService $flagService
     ) {

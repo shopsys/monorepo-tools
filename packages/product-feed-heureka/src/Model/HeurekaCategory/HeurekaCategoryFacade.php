@@ -2,13 +2,13 @@
 
 namespace Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
 
 class HeurekaCategoryFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -23,12 +23,12 @@ class HeurekaCategoryFacade
     private $categoryRepository;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryRepository $heurekaCategoryRepository
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         HeurekaCategoryRepository $heurekaCategoryRepository,
         CategoryRepository $categoryRepository
     ) {

@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Accessory;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Product;
@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 class ProductAccessoryRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -26,7 +26,7 @@ class ProductAccessoryRepository
     private $queryBuilderService;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         ProductRepository $productRepository,
         QueryBuilderService $queryBuilderService
     ) {

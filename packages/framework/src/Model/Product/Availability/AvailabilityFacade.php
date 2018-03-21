@@ -2,13 +2,13 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
 class AvailabilityFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -33,7 +33,7 @@ class AvailabilityFacade
     private $productAvailabilityRecalculationScheduler;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         AvailabilityRepository $availabilityRepository,
         AvailabilityService $availabilityService,
         Setting $setting,

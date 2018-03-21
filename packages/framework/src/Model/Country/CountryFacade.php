@@ -2,13 +2,13 @@
 
 namespace Shopsys\FrameworkBundle\Model\Country;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 
 class CountryFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -23,12 +23,12 @@ class CountryFacade
     private $domain;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Country\CountryRepository $countryRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         CountryRepository $countryRepository,
         Domain $domain
     ) {

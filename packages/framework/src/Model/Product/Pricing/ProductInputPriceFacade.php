@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\FrameworkBundle\Component\Domain\DomainFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
@@ -17,7 +17,7 @@ class ProductInputPriceFacade
     const BATCH_SIZE = 50;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -72,7 +72,7 @@ class ProductInputPriceFacade
     private $productRowsIterator;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         EntityManagerFacade $entityManagerFacade,
         ProductInputPriceService $productInputPriceService,
         CurrencyFacade $currencyFacade,
