@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - core functionality includes:
         - all Shopsys-specific Symfony commands
         - model and components with business logic and their data fixtures
+        - database migrations
         - Symfony controllers with form definitions, Twig templates and all javascripts of the web-based administration
         - custom form types, form extensions and twig extensions
         - compiler passes to allow basic extensibility with plugins (eg. product feeds)

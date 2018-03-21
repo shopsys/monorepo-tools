@@ -16,3 +16,6 @@
     * `ArticleFormType`
     * `AdvertFormType`
     * `AdministratorFormType`
+    
+## Migrations
+* migrations now can be installed from all bundles registered in application, directory should be in bundle_root/Migrations folder
