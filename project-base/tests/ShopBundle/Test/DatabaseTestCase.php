@@ -19,7 +19,7 @@ abstract class DatabaseTestCase extends FunctionalTestCase
      */
     protected function getEntityManagerFacade()
     {
-        return $this->getServiceByType(EntityManagerFacade::class);
+        return $this->getContainer()->get(EntityManagerFacade::class);
     }
 
     protected function setUp()

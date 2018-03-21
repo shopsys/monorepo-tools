@@ -19,7 +19,7 @@ class GetAllEmailsDataIteratorMethodTest extends DatabaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->newsletterRepository = $this->getServiceByType(NewsletterRepository::class);
+        $this->newsletterRepository = $this->getContainer()->get(NewsletterRepository::class);
     }
 
     public function testSubscriberFoundInFirstDomain(): void

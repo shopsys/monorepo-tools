@@ -13,11 +13,11 @@ class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
 {
     public function testGetItemsWithProductInStock()
     {
-        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $this->getServiceByType(ProductFacade::class);
+        $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $domain = $this->getServiceByType(Domain::class);
+        $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
@@ -28,7 +28,7 @@ class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
         $productEditData->productData->stockQuantity = 1;
         $productFacade->edit($product->getId(), $productEditData);
 
-        $deliveryFeedItemRepository = $this->getServiceByType(DeliveryFeedItemRepository::class);
+        $deliveryFeedItemRepository = $this->getContainer()->get(DeliveryFeedItemRepository::class);
         /* @var $deliveryFeedItemRepository \Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository */
         $seekItemId = null;
         $maxResults = PHP_INT_MAX;
@@ -46,11 +46,11 @@ class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
 
     public function testGetItemsWithProductOutOfStock()
     {
-        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $this->getServiceByType(ProductFacade::class);
+        $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $domain = $this->getServiceByType(Domain::class);
+        $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
@@ -61,7 +61,7 @@ class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
         $productEditData->productData->stockQuantity = 0;
         $productFacade->edit($product->getId(), $productEditData);
 
-        $deliveryFeedItemRepository = $this->getServiceByType(DeliveryFeedItemRepository::class);
+        $deliveryFeedItemRepository = $this->getContainer()->get(DeliveryFeedItemRepository::class);
         /* @var $deliveryFeedItemRepository \Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository */
         $seekItemId = null;
         $maxResults = PHP_INT_MAX;
@@ -77,11 +77,11 @@ class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
 
     public function testGetItemsWithProductWithoutStock()
     {
-        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $this->getServiceByType(ProductFacade::class);
+        $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $domain = $this->getServiceByType(Domain::class);
+        $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
@@ -92,7 +92,7 @@ class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
         $productEditData->productData->stockQuantity = null;
         $productFacade->edit($product->getId(), $productEditData);
 
-        $deliveryFeedItemRepository = $this->getServiceByType(DeliveryFeedItemRepository::class);
+        $deliveryFeedItemRepository = $this->getContainer()->get(DeliveryFeedItemRepository::class);
         /* @var $deliveryFeedItemRepository \Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository */
         $seekItemId = null;
         $maxResults = PHP_INT_MAX;

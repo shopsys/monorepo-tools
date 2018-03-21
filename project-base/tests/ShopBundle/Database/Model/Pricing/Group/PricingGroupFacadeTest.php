@@ -21,9 +21,9 @@ class PricingGroupFacadeTest extends DatabaseTestCase
         $em = $this->getEntityManager();
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $prodcu \Shopsys\FrameworkBundle\Model\Product\Product */
-        $pricingGroupFacade = $this->getServiceByType(PricingGroupFacade::class);
+        $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
         /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
-        $productPriceRecalculator = $this->getServiceByType(ProductPriceRecalculator::class);
+        $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
         /* @var $productPriceRecalculator \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator */
         $pricingGroupData = new PricingGroupData('pricing_group_name', 1);
         $domainId = 1;
@@ -44,9 +44,9 @@ class PricingGroupFacadeTest extends DatabaseTestCase
         /* @var $prodcu \Shopsys\FrameworkBundle\Model\Product\Product */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
-        $pricingGroupFacade = $this->getServiceByType(PricingGroupFacade::class);
+        $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
         /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
-        $productPriceRecalculator = $this->getServiceByType(ProductPriceRecalculator::class);
+        $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
         /* @var $productPriceRecalculator \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator */
         $productCalculatedPrice = $em->getRepository(ProductCalculatedPrice::class)->findOneBy([
             'product' => $product,
@@ -76,9 +76,9 @@ class PricingGroupFacadeTest extends DatabaseTestCase
     public function testDeleteAndReplace()
     {
         $em = $this->getEntityManager();
-        $pricingGroupFacade = $this->getServiceByType(PricingGroupFacade::class);
+        $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
         /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
-        $customerFacade = $this->getServiceByType(CustomerFacade::class);
+        $customerFacade = $this->getContainer()->get(CustomerFacade::class);
         /* @var $customerFacade \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
 
         $domainId = 1;

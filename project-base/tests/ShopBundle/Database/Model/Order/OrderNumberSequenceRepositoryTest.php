@@ -9,7 +9,7 @@ class OrderNumberSequenceRepositoryTest extends DatabaseTestCase
 {
     public function testGetNextNumber()
     {
-        $orderNumberSequenceRepository = $this->getServiceByType(OrderNumberSequenceRepository::class);
+        $orderNumberSequenceRepository = $this->getContainer()->get(OrderNumberSequenceRepository::class);
         /* @var $orderNumberSequenceRepository \Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository */
 
         $numbers = [];

@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Templating\EngineInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
@@ -28,23 +29,18 @@ class MailerSettingExtension extends Twig_Extension
      */
     private $mailerWhitelistExpressions;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var \Symfony\Component\Templating\EngineInterface
+     */
+    private $templating;
+
+    public function __construct(ContainerInterface $container, EngineInterface $templating)
     {
         $this->container = $container;
         $this->isDeliveryDisabled = $this->container->getParameter('mailer_disable_delivery');
         $this->mailerMasterEmailAddress = $this->container->getParameter('mailer_master_email_address');
         $this->mailerWhitelistExpressions = $this->container->getParameter('mailer_delivery_whitelist');
-    }
-
-    /**
-     * Get service "templating" cannot be called in constructor - https://github.com/symfony/symfony/issues/2347
-     * because it causes circular dependency
-     *
-     * @return \Symfony\Bundle\TwigBundle\TwigEngine
-     */
-    private function getTemplatingService()
-    {
-        return $this->container->get('templating');
+        $this->templating = $templating;
     }
 
     /**
@@ -71,7 +67,7 @@ class MailerSettingExtension extends Twig_Extension
      */
     public function getMailerSettingInfo()
     {
-        return $this->getTemplatingService()->render('@ShopsysFramework/Common/Mailer/settingInfo.html.twig', [
+        return $this->templating->render('@ShopsysFramework/Common/Mailer/settingInfo.html.twig', [
             'isDeliveryDisabled' => $this->isDeliveryDisabled,
             'mailerMasterEmailAddress' => $this->mailerMasterEmailAddress,
             'mailerWhitelistExpressions' => $this->mailerWhitelistExpressions,

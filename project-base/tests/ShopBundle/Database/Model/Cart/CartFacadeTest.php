@@ -4,15 +4,14 @@ namespace Tests\ShopBundle\Database\Model\Cart;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Cart\CartFactory;
 use Shopsys\FrameworkBundle\Model\Cart\CartService;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository;
-use Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory;
+use Shopsys\FrameworkBundle\Model\Localization\TranslatableListener;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Tests\ShopBundle\Test\DatabaseTestCase;
@@ -108,7 +107,7 @@ class CartFacadeTest extends DatabaseTestCase
     {
         // Set currentLocale in TranslatableListener as it done in real request
         // because CartWatcherFacade works with entity translations.
-        $translatableListener = $this->getServiceByType(\Shopsys\FrameworkBundle\Model\Localization\TranslatableListener::class);
+        $translatableListener = $this->getContainer()->get(TranslatableListener::class);
         /* @var $translatableListener \Shopsys\FrameworkBundle\Model\Localization\TranslatableListener */
         $translatableListener->setCurrentLocale('cs');
 
@@ -138,14 +137,14 @@ class CartFacadeTest extends DatabaseTestCase
     {
         return new CartFacade(
             $this->getEntityManager(),
-            $this->getServiceByType(CartService::class),
-            $this->getServiceByType(CartFactory::class),
-            $this->getServiceByType(ProductRepository::class),
+            $this->getContainer()->get(CartService::class),
+            $this->getContainer()->get(CartFactory::class),
+            $this->getContainer()->get(ProductRepository::class),
             $this->getCustomerIdentifierFactoryMock($customerIdentifier),
-            $this->getServiceByType(Domain::class),
-            $this->getServiceByType(CurrentCustomer::class),
-            $this->getServiceByType(CurrentPromoCodeFacade::class),
-            $this->getServiceByType(CartItemRepository::class)
+            $this->getContainer()->get(Domain::class),
+            $this->getContainer()->get(CurrentCustomer::class),
+            $this->getContainer()->get(CurrentPromoCodeFacade::class),
+            $this->getContainer()->get(CartItemRepository::class)
         );
     }
 
@@ -155,7 +154,7 @@ class CartFacadeTest extends DatabaseTestCase
      */
     private function getCartByCustomerIdentifier(CustomerIdentifier $customerIdentifier)
     {
-        $cartFactory = $this->getServiceByType(CartFactory::class);
+        $cartFactory = $this->getContainer()->get(CartFactory::class);
 
         return $cartFactory->get($customerIdentifier);
     }

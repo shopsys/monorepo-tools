@@ -2,7 +2,6 @@
 
 namespace Tests\ShopBundle\Database\Component\Domain\Multidomain;
 
-use Doctrine\ORM\EntityManager;
 use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
 use Shopsys\FrameworkBundle\Component\Sql\SqlQuoter;
@@ -12,7 +11,7 @@ class MultidomainEntityDataCreatorTest extends DatabaseTestCase
 {
     public function testCopyAllMultidomainDataForNewDomainCopiesTestRow()
     {
-        $em = $this->getServiceByType(EntityManager::class);
+        $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
 
         $em->getConnection()->executeQuery('
@@ -69,7 +68,7 @@ class MultidomainEntityDataCreatorTest extends DatabaseTestCase
 
     public function testCopyAllMultidomainDataForNewDomainWithDomainIdDoesNotThrowDriverException()
     {
-        $em = $this->getServiceByType(EntityManager::class);
+        $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
 
         $em->getConnection()->executeQuery('

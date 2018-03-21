@@ -39,12 +39,12 @@ class ProductRepositoryTest extends DatabaseTestCase
 
     private function getAllListableQueryBuilderTest($productReferenceId, $isExpectedInResult)
     {
-        $productRepository = $this->getServiceByType(ProductRepository::class);
+        $productRepository = $this->getContainer()->get(ProductRepository::class);
         /* @var $productRepository \Shopsys\FrameworkBundle\Model\Product\ProductRepository */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
 
-        $domain = $this->getServiceByType(Domain::class);
+        $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . $productReferenceId);
@@ -80,12 +80,12 @@ class ProductRepositoryTest extends DatabaseTestCase
 
     private function getAllSellableQueryBuilderTest($productReferenceId, $isExpectedInResult)
     {
-        $productRepository = $this->getServiceByType(ProductRepository::class);
+        $productRepository = $this->getContainer()->get(ProductRepository::class);
         /* @var $productRepository \Shopsys\FrameworkBundle\Model\Product\ProductRepository */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
 
-        $domain = $this->getServiceByType(Domain::class);
+        $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . $productReferenceId);
@@ -121,12 +121,12 @@ class ProductRepositoryTest extends DatabaseTestCase
 
     private function getAllOfferedQueryBuilderTest($productReferenceId, $isExpectedInResult)
     {
-        $productRepository = $this->getServiceByType(ProductRepository::class);
+        $productRepository = $this->getContainer()->get(ProductRepository::class);
         /* @var $productRepository \Shopsys\FrameworkBundle\Model\Product\ProductRepository */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
 
-        $domain = $this->getServiceByType(Domain::class);
+        $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . $productReferenceId);
@@ -186,9 +186,9 @@ class ProductRepositoryTest extends DatabaseTestCase
      */
     private function setProductOrderingPriority(Product $product, $priority)
     {
-        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $this->getServiceByType(ProductFacade::class);
+        $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
         $productEditData = $productEditDataFactory->createFromProduct($product);
@@ -202,7 +202,7 @@ class ProductRepositoryTest extends DatabaseTestCase
      */
     private function getProductsForSearchOrderedByPriority($searchText)
     {
-        $productRepository = $this->getServiceByType(ProductRepository::class);
+        $productRepository = $this->getContainer()->get(ProductRepository::class);
         /* @var $productRepository \Shopsys\FrameworkBundle\Model\Product\ProductRepository */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
@@ -227,7 +227,7 @@ class ProductRepositoryTest extends DatabaseTestCase
      */
     private function getProductsInCategoryOrderedByPriority(Category $category)
     {
-        $productRepository = $this->getServiceByType(ProductRepository::class);
+        $productRepository = $this->getContainer()->get(ProductRepository::class);
         /* @var $productRepository \Shopsys\FrameworkBundle\Model\Product\ProductRepository */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */

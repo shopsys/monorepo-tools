@@ -2,7 +2,6 @@
 
 namespace Tests\ShopBundle\Database\Model\Product;
 
-use Doctrine\ORM\EntityManager;
 use Shopsys\FrameworkBundle\DataFixtures\Base\FlagDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\BrandDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
@@ -160,7 +159,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
      */
     private function createParameterFilterData(array $namesByLocale, array $valuesTextsByLocales)
     {
-        $parameterRepository = $this->getServiceByType(ParameterRepository::class);
+        $parameterRepository = $this->getContainer()->get(ParameterRepository::class);
         /* @var $parameterRepository \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository */
 
         $parameter = $parameterRepository->findParameterByNames($namesByLocale);
@@ -179,7 +178,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
      */
     private function getParameterValuesByLocalesAndTexts(array $valuesTextsByLocales)
     {
-        $em = $this->getServiceByType(EntityManager::class);
+        $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
         $parameterValues = [];
 
@@ -202,7 +201,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
      */
     private function getPaginationResultInCategory(ProductFilterData $productFilterData, Category $category)
     {
-        $productOnCurrentDomainFacade = $this->getServiceByType(ProductOnCurrentDomainFacade::class);
+        $productOnCurrentDomainFacade = $this->getContainer()->get(ProductOnCurrentDomainFacade::class);
         /* @var $productOnCurrentDomainFacade \Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade */
         $page = 1;
         $limit = PHP_INT_MAX;

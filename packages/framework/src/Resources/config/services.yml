@@ -15,7 +15,6 @@ services:
 
   Shopsys\FrameworkBundle\Controller\:
     resource: '../../Controller/'
-    public: true
     tags: ['controller.service_arguments']
 
   doctrine.orm.default_entity_manager:
@@ -34,7 +33,6 @@ services:
 
   Faker\Generator:
     factory: [Faker\Factory, create]
-    public: true
     calls:
       - [seed, ['%faker.seed%']]
 
@@ -84,15 +82,6 @@ services:
       - '%shopsys.admin_navigation.config_filepath%'
       - '@security.authorization_checker'
 
-  Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Advert\AdvertFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Article\ArticleFacade:
-    public: true
-
   Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbResolver:
     factory: ['@Shopsys\FrameworkBundle\Model\Breadcrumb\FrontBreadcrumbResolverFactory', create]
 
@@ -106,44 +95,22 @@ services:
     arguments:
       - '@shopsys.shop.component.flash_message.sender.front'
 
-  Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Category\CategoryFacade:
-    public: true
-
   Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository:
-    public: true
     tags:
       # must be ran before ProductVisibilityFacade
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
-  Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig:
-    public: true
+  Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig: ~
 
   Shopsys\FrameworkBundle\Component\Cron\CronFacade:
-    public: true
     arguments:
       - '@monolog.logger.cron'
 
   Shopsys\FrameworkBundle\Component\Css\CssFacade:
-    public: true
     arguments:
       - '%shopsys.css_version_filepath%'
 
   Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader:
-    public: true
-
-  Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector:
     public: true
 
   shopsys.shop.component.doctrine.cache.metadata.permanent_php_file_cache:
@@ -157,13 +124,11 @@ services:
       - '%shopsys.doctrine.query_cache_directory_path%'
 
   Shopsys\FrameworkBundle\Component\Doctrine\DatabaseSchemaFacade:
-    public: true
     arguments:
       - '%shopsys.default_db_schema_filepath%'
 
   Shopsys\FrameworkBundle\Component\Domain\Domain:
     factory: ['@Shopsys\FrameworkBundle\Component\Domain\DomainFactory', create]
-    public: true
     arguments:
       - '%shopsys.domain_config_filepath%'
       - '%shopsys.domain_urls_config_filepath%'
@@ -175,20 +140,7 @@ services:
   Shopsys\FormTypesBundle\Domain\DomainIdsProviderInterface:
     alias: Shopsys\FrameworkBundle\Component\Domain\Domain
 
-  Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Component\Domain\Config\DomainsConfigLoader:
-    public: true
-
-  Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator:
-    public: true
-
-  Shopsys\FrameworkBundle\Component\Domain\DomainDbFunctionsFacade:
-    public: true
-
   Shopsys\FrameworkBundle\Component\Domain\DomainFacade:
-    public: true
     arguments:
       - '%shopsys.domain_images_dir%'
 
@@ -200,14 +152,7 @@ services:
     arguments:
       - '@monolog.logger'
 
-  Shopsys\FrameworkBundle\Component\Domain\DomainUrlService:
-    public: true
-
-  Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade:
-    public: true
-
   Shopsys\FrameworkBundle\Component\Error\ErrorPagesFacade:
-    public: true
     arguments:
       - '%shopsys.error_pages_dir%'
 
@@ -260,7 +205,6 @@ services:
     arguments: [!tagged shopsys.grid_inline_edit]
 
   Shopsys\FrameworkBundle\Component\Image\DirectoryStructureCreator:
-    public: true
     arguments:
       - '%shopsys.image_dir%'
       - '%shopsys.domain_images_dir%'
@@ -277,7 +221,6 @@ services:
       - { name: doctrine.event_listener, event: preRemove }
 
   Shopsys\FrameworkBundle\Component\Image\ImageFacade:
-    public: true
     arguments: ['%shopsys.image_url_prefix%']
 
   Shopsys\FrameworkBundle\Component\Image\ImageLocator:
@@ -287,11 +230,9 @@ services:
     arguments:
       - [driver: 'gd']
 
-  Shopsys\FrameworkBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass:
-    public: true
+  Shopsys\FrameworkBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass: ~
 
-  Shopsys\FrameworkBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass:
-    public: true
+  Shopsys\FrameworkBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass: ~
 
   Shopsys\FrameworkBundle\Component\Javascript\Compiler\JsCompiler:
     arguments:
@@ -313,16 +254,11 @@ services:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
       - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
 
-  Shopsys\FrameworkBundle\Component\Mutex\MutexFactory:
-    public: true
+  Shopsys\FrameworkBundle\Component\Mutex\MutexFactory: ~
 
   Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionRegistry: ~
 
-  Shopsys\FrameworkBundle\Component\Plugin\PluginDataFixtureFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Component\Plugin\PluginDataFixtureRegistry:
-    public: true
+  Shopsys\FrameworkBundle\Component\Plugin\PluginDataFixtureRegistry: ~
 
   Shopsys\FrameworkBundle\Component\Request\DenyScriptNameInRequestPathListener: ~
 
@@ -336,11 +272,9 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
-  Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade:
-    public: true
+  Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade: ~
 
-  Shopsys\FrameworkBundle\Component\Setting\Setting:
-    public: true
+  Shopsys\FrameworkBundle\Component\Setting\Setting: ~
 
   Shopsys\FrameworkBundle\Component\Sitemap\SitemapDumperFactory:
     arguments:
@@ -354,15 +288,6 @@ services:
   Shopsys\FrameworkBundle\Component\Sitemap\SitemapListener:
     tags:
       - { name: 'kernel.event_subscriber', priority: 100 }
-
-  Shopsys\FrameworkBundle\Component\String\HashGenerator:
-    public: true
-
-  Shopsys\FrameworkBundle\Component\System\System:
-    public: true
-
-  Shopsys\FrameworkBundle\Component\System\PostgresqlLocaleMapper:
-    public: true
 
   Shopsys\FrameworkBundle\Component\Translation\NormalizingExtractorManager:
     arguments:
@@ -400,7 +325,6 @@ services:
 
   Shopsys\FrameworkBundle\Component\Translation\Translator:
     decorates: translator
-    public: true
     arguments:
       - '@Shopsys\FrameworkBundle\Component\Translation\Translator.inner'
       - '@Shopsys\FrameworkBundle\Component\Translation\Translator.inner'
@@ -420,15 +344,9 @@ services:
 
   Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfigLoader: ~
 
-  Shopsys\FrameworkBundle\Component\UploadedFile\DirectoryStructureCreator:
-    public: true
-
   Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileDeleteDoctrineListener:
     tags:
       - { name: doctrine.event_listener, event: preRemove }
-
-  Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade:
-    public: true
 
   Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileLocator:
     arguments:
@@ -445,66 +363,46 @@ services:
 
   Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorUserProvider: ~
 
-  Shopsys\FrameworkBundle\Model\Country\CountryInlineEdit:
-    public: true
+  Shopsys\FrameworkBundle\Model\Country\CountryInlineEdit: ~
 
   Shopsys\FrameworkBundle\Model\Cookies\CookiesFacade:
     arguments:
       - '%kernel.environment%'
 
-  Shopsys\FrameworkBundle\Model\Country\CountryFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Customer\CustomerFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService:
-    public: true
-
   Shopsys\FrameworkBundle\Model\Customer\FrontendUserProvider: ~
 
-  Shopsys\FrameworkBundle\Model\Customer\UserRepository:
-    public: true
-
   Shopsys\FrameworkBundle\DataFixtures\Performance\CategoryDataFixture:
-    public: true
-    arguments:
-      - "%shopsys.performance_data.category.counts_by_level%"
+     arguments:
+       - "%shopsys.performance_data.category.counts_by_level%"
 
   Shopsys\FrameworkBundle\DataFixtures\Performance\OrderDataFixture:
-    public: true
-    arguments:
-      - "%shopsys.performance_data.order.total_count%"
-      - "%shopsys.performance_data.order.item_count_per_order%"
+     arguments:
+       - "%shopsys.performance_data.order.total_count%"
+       - "%shopsys.performance_data.order.item_count_per_order%"
 
   Shopsys\FrameworkBundle\DataFixtures\Performance\ProductDataFixture:
-    public: true
-    arguments:
-      - "%shopsys.performance_data.product.total_count%"
+     arguments:
+       - "%shopsys.performance_data.product.total_count%"
 
   Shopsys\FrameworkBundle\DataFixtures\Performance\UserDataFixture:
-    public: true
-    arguments:
-      - "%shopsys.performance_data.user.count_per_domain%"
+     arguments:
+       - "%shopsys.performance_data.user.count_per_domain%"
 
   Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader:
-    public: true
-    arguments:
-      - '%shopsys.data_fixtures.resource_products_filepath%'
+     arguments:
+       - '%shopsys.data_fixtures.resource_products_filepath%'
 
   Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader:
-    public: true
-    arguments:
-      - '%shopsys.data_fixtures.resource_customers_filepath%'
+     arguments:
+       - '%shopsys.data_fixtures.resource_customers_filepath%'
+
 
   Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade:
-    public: true
     arguments:
       - '%shopsys.feed_url_prefix%'
       - '%shopsys.feed_dir%'
 
-  Shopsys\FrameworkBundle\Model\Feed\FeedConfigRegistry:
-    public: true
+  Shopsys\FrameworkBundle\Model\Feed\FeedConfigRegistry: ~
 
   Shopsys\FrameworkBundle\Component\HttpFoundation\ResponseListener:
     tags:
@@ -522,78 +420,34 @@ services:
 
   Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository: ~
 
-  Shopsys\FrameworkBundle\Model\Localization\Localization:
-    public: true
-
   Shopsys\FrameworkBundle\Model\Localization\LocalizationListener: ~
-
-  Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade:
-    public: true
 
   Shopsys\FrameworkBundle\Model\Mail\MailerService:
     arguments: ['@mailer']
-
-  Shopsys\FrameworkBundle\Model\Module\ModuleFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Order\OrderFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory:
-    public: true
 
   Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade:
     arguments:
       - '@logger'
 
-  Shopsys\FrameworkBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit:
-    public: true
+  Shopsys\FrameworkBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit: ~
 
-  Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Order\Status\Grid\OrderStatusInlineEdit:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Payment\PaymentFacade:
-    public: true
+  Shopsys\FrameworkBundle\Model\Order\Status\Grid\OrderStatusInlineEdit: ~
 
   Shopsys\FrameworkBundle\Model\PluginData\DoctrinePluginDataStorageProvider: ~
 
-  Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade:
-    public: true
+  Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit: ~
 
-  Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade:
-    public: true
+  Shopsys\FrameworkBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit: ~
 
   Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculationScheduler:
-    public: true
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
-  Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade:
-    public: true
+  Shopsys\FrameworkBundle\Model\Pricing\Vat\VatInlineEdit: ~
 
-  Shopsys\FrameworkBundle\Model\Pricing\Vat\VatInlineEdit:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityInlineEdit:
-    public: true
+  Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityInlineEdit: ~
 
   Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator:
-    public: true
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
@@ -606,59 +460,21 @@ services:
     arguments:
       - '@shopsys.shop.product.bestselling_product.cache_provider'
 
-  Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade:
-    public: true
+  Shopsys\FrameworkBundle\Model\Product\Flag\FlagInlineEdit: ~
 
-  Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditDataFactory:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Product\Flag\FlagInlineEdit:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterInlineEdit:
-    public: true
+  Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterInlineEdit: ~
 
   Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator:
-    public: true
     tags:
       # must be run before ProductVisibilityFacade
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
-  Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Product\ProductFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade:
-    public: true
-
   Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade:
-    public: true
     tags:
       # must be ran after CategoryVisibilityRepository and ProductPriceRecalculator
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 10 }
 
-  Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade:
-    public: true
-
-  Shopsys\FrameworkBundle\Model\Product\Unit\UnitInlineEdit:
-    public: true
+  Shopsys\FrameworkBundle\Model\Product\Unit\UnitInlineEdit: ~
 
   # Define RedirectController explicitly to prevent creating it on-the-fly
   # when redirecting (it causes unnecessary container rebuild).
@@ -667,16 +483,13 @@ services:
       - [setContainer, ['@service_container']]
 
   Shopsys\FrameworkBundle\Component\Router\CurrentDomainRouter:
-    public: true
     tags:
       - { name: router, priority: 70 }
 
   Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory:
-    public: true
     arguments: ['%router.resource%']
 
   Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory:
-    public: true
     arguments: ['%shopsys.router.friendly_url_router_filepath%']
 
   Shopsys\FrameworkBundle\Component\Router\LocalizedRouterFactory:
@@ -689,12 +502,11 @@ services:
   Shopsys\FrameworkBundle\Model\Script\ScriptFacade:
     public: true
 
+  Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade: ~
+
   Shopsys\FrameworkBundle\Model\Security\AdminLogoutHandler: ~
 
   Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler: ~
-
-  Shopsys\FrameworkBundle\Model\Transport\TransportFacade:
-    public: true
 
   Shopsys\FrameworkBundle\Model\Security\LoginService:
     arguments:
@@ -720,8 +532,6 @@ services:
   Shopsys\FrameworkBundle\Model\Security\LoginListener:
     tags:
       - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
-
-  Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade: ~
 
   Shopsys\FrameworkBundle\Twig\Javascript\JavascriptCompilerService:
     arguments:

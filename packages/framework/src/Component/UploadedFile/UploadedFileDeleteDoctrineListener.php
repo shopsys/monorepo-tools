@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Component\UploadedFile;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UploadedFileDeleteDoctrineListener
 {
@@ -18,22 +17,17 @@ class UploadedFileDeleteDoctrineListener
      */
     private $uploadedFileConfig;
 
-    public function __construct(
-        ContainerInterface $container,
-        UploadedFileConfig $uploadedFileConfig
-    ) {
-        $this->container = $container;
-        $this->uploadedFileConfig = $uploadedFileConfig;
-    }
-
     /**
-     * Prevent ServiceCircularReferenceException (DoctrineListener cannot be dependent on the EntityManager)
-     *
-     * @return \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade
      */
-    private function getUploadedFileFacade()
-    {
-        return $this->container->get(UploadedFileFacade::class);
+    private $uploadedFileFacade;
+
+    public function __construct(
+        UploadedFileConfig $uploadedFileConfig,
+        UploadedFileFacade $uploadedFileFacade
+    ) {
+        $this->uploadedFileConfig = $uploadedFileConfig;
+        $this->uploadedFileFacade = $uploadedFileFacade;
     }
 
     /**
@@ -42,12 +36,11 @@ class UploadedFileDeleteDoctrineListener
     public function preRemove(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-
         if ($this->uploadedFileConfig->hasUploadedFileEntityConfig($entity)) {
-            $uploadedFile = $this->getUploadedFileFacade()->getUploadedFileByEntity($entity);
+            $uploadedFile = $this->uploadedFileFacade->getUploadedFileByEntity($entity);
             $args->getEntityManager()->remove($uploadedFile);
         } elseif ($entity instanceof UploadedFile) {
-            $this->getUploadedFileFacade()->deleteFileFromFilesystem($entity);
+            $this->uploadedFileFacade->deleteFileFromFilesystem($entity);
         }
     }
 }

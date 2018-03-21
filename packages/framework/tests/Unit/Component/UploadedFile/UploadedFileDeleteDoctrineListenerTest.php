@@ -10,7 +10,6 @@ use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConf
 use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFile;
 use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileDeleteDoctrineListener;
 use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UploadedFileDeleteDoctrineListenerTest extends TestCase
 {
@@ -26,19 +25,14 @@ class UploadedFileDeleteDoctrineListenerTest extends TestCase
             ->getMock();
         $uploadedFileFacadeMock->expects($this->once())->method('deleteFileFromFilesystem')->with($this->equalTo($uploadedFile));
 
-        $containerMock = $this->getMockBuilder(ContainerInterface::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['get'])
-            ->getMockForAbstractClass();
-        $containerMock->expects($this->once())->method('get')->willReturn($uploadedFileFacadeMock);
-
         $args = $this->getMockBuilder(LifecycleEventArgs::class)
             ->setMethods(['getEntity'])
             ->disableOriginalConstructor()
             ->getMock();
         $args->method('getEntity')->willReturn($uploadedFile);
 
-        $doctrineListener = new UploadedFileDeleteDoctrineListener($containerMock, $uploadedFileConfig);
+        $doctrineListener = new UploadedFileDeleteDoctrineListener($uploadedFileConfig, $uploadedFileFacadeMock);
+
         $doctrineListener->preRemove($args);
     }
 
@@ -62,12 +56,6 @@ class UploadedFileDeleteDoctrineListenerTest extends TestCase
             ->with($this->equalTo($entity))
             ->willReturn($uploadedFile);
 
-        $containerMock = $this->getMockBuilder(ContainerInterface::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['get'])
-            ->getMockForAbstractClass();
-        $containerMock->expects($this->once())->method('get')->willReturn($uploadedFileFacadeMock);
-
         $emMock = $this->getMockBuilder(EntityManager::class)
             ->setMethods(['remove'])
             ->disableOriginalConstructor()
@@ -81,7 +69,7 @@ class UploadedFileDeleteDoctrineListenerTest extends TestCase
         $args->method('getEntity')->willReturn($entity);
         $args->method('getEntityManager')->willReturn($emMock);
 
-        $doctrineListener = new UploadedFileDeleteDoctrineListener($containerMock, $uploadedFileConfig);
+        $doctrineListener = new UploadedFileDeleteDoctrineListener($uploadedFileConfig, $uploadedFileFacadeMock);
         $doctrineListener->preRemove($args);
     }
 }

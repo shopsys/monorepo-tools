@@ -26,7 +26,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
 {
     public function testOnKernelResponseNoAction()
     {
-        $setting = $this->getServiceByType(Setting::class);
+        $setting = $this->getContainer()->get(Setting::class);
         /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
 
         $inputPriceRecalculatorMock = $this->getMockBuilder(InputPriceRecalculator::class)
@@ -66,9 +66,9 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $vatPercent
     ) {
         $em = $this->getEntityManager();
-        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $this->getServiceByType(ProductFacade::class);
+        $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
         $vat = new Vat(new VatData('vat', $vatPercent));
@@ -93,13 +93,13 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
     ) {
         $em = $this->getEntityManager();
 
-        $setting = $this->getServiceByType(Setting::class);
+        $setting = $this->getContainer()->get(Setting::class);
         /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
-        $inputPriceRecalculationScheduler = $this->getServiceByType(InputPriceRecalculationScheduler::class);
+        $inputPriceRecalculationScheduler = $this->getContainer()->get(InputPriceRecalculationScheduler::class);
         /* @var $inputPriceRecalculationScheduler \Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculationScheduler */
-        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
+        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
-        $transportFacade = $this->getServiceByType(TransportFacade::class);
+        $transportFacade = $this->getContainer()->get(TransportFacade::class);
         /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
@@ -162,13 +162,13 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
     ) {
         $em = $this->getEntityManager();
 
-        $setting = $this->getServiceByType(Setting::class);
+        $setting = $this->getContainer()->get(Setting::class);
         /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
-        $inputPriceRecalculationScheduler = $this->getServiceByType(InputPriceRecalculationScheduler::class);
+        $inputPriceRecalculationScheduler = $this->getContainer()->get(InputPriceRecalculationScheduler::class);
         /* @var $inputPriceRecalculationScheduler \Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculationScheduler */
-        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
+        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
-        $transportFacade = $this->getServiceByType(TransportFacade::class);
+        $transportFacade = $this->getContainer()->get(TransportFacade::class);
         /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);

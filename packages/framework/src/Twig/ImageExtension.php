@@ -6,6 +6,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Image\ImageLocator;
 use Shopsys\FrameworkBundle\Component\Utils;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -40,6 +41,11 @@ class ImageExtension extends Twig_Extension
     private $imageFacade;
 
     /**
+     * @var \Symfony\Component\Templating\EngineInterface
+     */
+    private $templating;
+
+    /**
      * @param string $frontDesignImageUrlPrefix
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
@@ -51,24 +57,15 @@ class ImageExtension extends Twig_Extension
         ContainerInterface $container,
         Domain $domain,
         ImageLocator $imageLocator,
-        ImageFacade $imageFacade
+        ImageFacade $imageFacade,
+        EngineInterface $templating
     ) {
         $this->frontDesignImageUrlPrefix = $frontDesignImageUrlPrefix;
         $this->container = $container;
         $this->domain = $domain;
         $this->imageLocator = $imageLocator;
         $this->imageFacade = $imageFacade;
-    }
-
-    /**
-     * Get service "templating" cannot be called in constructor - https://github.com/symfony/symfony/issues/2347
-     * because it causes circular dependency
-     *
-     * @return \Symfony\Bundle\TwigBundle\TwigEngine
-     */
-    private function getTemplatingService()
-    {
-        return $this->container->get('templating');
+        $this->templating = $templating;
     }
 
     /**
@@ -217,7 +214,7 @@ class ImageExtension extends Twig_Extension
         $htmlAttributes = $attributes;
         unset($htmlAttributes['type'], $htmlAttributes['size']);
 
-        return $this->getTemplatingService()->render('@ShopsysFramework/Common/image.html.twig', [
+        return $this->templating->render('@ShopsysFramework/Common/image.html.twig', [
             'attr' => $htmlAttributes,
             'imageCssClass' => $this->getImageCssClass($entityName, $attributes['type'], $attributes['size']),
         ]);

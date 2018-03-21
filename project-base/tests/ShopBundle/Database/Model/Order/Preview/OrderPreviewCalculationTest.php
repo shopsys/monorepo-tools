@@ -27,7 +27,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
      */
     public function testCalculatePreviewWithTransportAndPayment()
     {
-        $domain = $this->getServiceByType(Domain::class);
+        $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
         $vat = new Vat(new VatData('vatName', 20));
 
@@ -114,7 +114,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
      */
     public function testCalculatePreviewWithoutTransportAndPayment()
     {
-        $domain = $this->getServiceByType(Domain::class);
+        $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
         $vat = new Vat(new VatData('vatName', 20));
 

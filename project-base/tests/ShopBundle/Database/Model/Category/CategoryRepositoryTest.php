@@ -14,11 +14,11 @@ class CategoryRepositoryTest extends DatabaseTestCase
 
     public function testDoNotGetCategoriesWithoutVisibleChildren()
     {
-        $categoryFacade = $this->getServiceByType(CategoryFacade::class);
+        $categoryFacade = $this->getContainer()->get(CategoryFacade::class);
         /* @var $categoryFacade \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
-        $categoryRepository = $this->getServiceByType(CategoryRepository::class);
+        $categoryRepository = $this->getContainer()->get(CategoryRepository::class);
         /* @var $categoryRepository \Shopsys\FrameworkBundle\Model\Category\CategoryRepository */
-        $categoryVisibilityRepository = $this->getServiceByType(CategoryVisibilityRepository::class);
+        $categoryVisibilityRepository = $this->getContainer()->get(CategoryVisibilityRepository::class);
         /* @var $categoryVisibilityRepository \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository */
 
         $categoryData = new CategoryData();
@@ -40,11 +40,11 @@ class CategoryRepositoryTest extends DatabaseTestCase
 
     public function testGetCategoriesWithAtLeastOneVisibleChild()
     {
-        $categoryFacade = $this->getServiceByType(CategoryFacade::class);
+        $categoryFacade = $this->getContainer()->get(CategoryFacade::class);
         /* @var $categoryFacade \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
-        $categoryRepository = $this->getServiceByType(CategoryRepository::class);
+        $categoryRepository = $this->getContainer()->get(CategoryRepository::class);
         /* @var $categoryRepository \Shopsys\FrameworkBundle\Model\Category\CategoryRepository */
-        $categoryVisibilityRepository = $this->getServiceByType(CategoryVisibilityRepository::class);
+        $categoryVisibilityRepository = $this->getContainer()->get(CategoryVisibilityRepository::class);
         /* @var $categoryVisibilityRepository \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRepository */
 
         $categoryData = new CategoryData();

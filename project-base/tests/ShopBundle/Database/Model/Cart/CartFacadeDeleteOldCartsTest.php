@@ -78,7 +78,7 @@ class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
      */
     private function getProductById($productId)
     {
-        $productFacade = $this->getServiceByType(ProductFacade::class);
+        $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
         return $productFacade->getById($productId);
@@ -89,7 +89,7 @@ class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
      */
     private function getCartFacadeForRegisteredCustomer()
     {
-        $customerFacade = $this->getServiceByType(CustomerFacade::class);
+        $customerFacade = $this->getContainer()->get(CustomerFacade::class);
         /* @var $customerFacade \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
 
         $user = $customerFacade->getUserById(1);
@@ -113,14 +113,14 @@ class CartFacadeDeleteOldCartsTest extends DatabaseTestCase
     {
         return new CartFacade(
             $this->getEntityManager(),
-            $this->getServiceByType(CartService::class),
-            $this->getServiceByType(CartFactory::class),
-            $this->getServiceByType(ProductRepository::class),
+            $this->getContainer()->get(CartService::class),
+            $this->getContainer()->get(CartFactory::class),
+            $this->getContainer()->get(ProductRepository::class),
             $this->getCustomerIdentifierFactoryMock($customerIdentifier),
-            $this->getServiceByType(Domain::class),
-            $this->getServiceByType(CurrentCustomer::class),
-            $this->getServiceByType(CurrentPromoCodeFacade::class),
-            $this->getServiceByType(CartItemRepository::class)
+            $this->getContainer()->get(Domain::class),
+            $this->getContainer()->get(CurrentCustomer::class),
+            $this->getContainer()->get(CurrentPromoCodeFacade::class),
+            $this->getContainer()->get(CartItemRepository::class)
         );
     }
 
