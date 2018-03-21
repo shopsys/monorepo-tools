@@ -13,7 +13,7 @@ use Twig_SimpleFunction;
 
 class ImageExtension extends Twig_Extension
 {
-    const NOIMAGE_FILENAME = 'noimage.jpg';
+    const NOIMAGE_FILENAME = 'noimage.png';
 
     /**
      * @var string

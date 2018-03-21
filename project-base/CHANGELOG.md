@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - IntegrationTestingBundle was removed
     - all services that must be public because of tests moved to services_test.yml
     - unnecessary service obtaining from container replaced with autowiring
+- new images for no image and empty cart (@stanoMilan)
 
 ## 6.0.0-beta21 - 2018-03-05
 - released only in closed beta
