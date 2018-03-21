@@ -170,9 +170,6 @@
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
             <arg value="${path.packages}/migrations/src/ShopSys/MigrationBundle/Tests"/>
         </exec>
-        <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="${path.packages}/coding-standards/tests"/>
-        </exec>
     </target>
 
     <target name="dump-translations" depends="dump-translations-project-base, dump-translations-packages" description="Extracts translatable messages in all packages ." />
