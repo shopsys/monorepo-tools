@@ -4,7 +4,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 
-#: filepath:10
 msgid "message id"
 msgstr "locale string"
 

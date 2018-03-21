@@ -325,7 +325,7 @@ class TranslationReplaceSourceCommand extends Command
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[] $replacements
-     * @returns \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+     * @return \Shopsys\FrameworkBundle\Component\Translation\TranslationSourceReplacement[] $replacements
      */
     private function sortBySourceLengthDesc($replacements)
     {

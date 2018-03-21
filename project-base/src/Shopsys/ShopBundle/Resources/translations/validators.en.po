@@ -4,710 +4,126 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 
-#: AvailabilityFormType.php:27
-msgid "Availability name cannot be longer than {{ limit }} characters"
-msgstr ""
-
-#: ProductFormType.php:125
-msgid "Catalogue number cannot be longer then {{ limit }} characters"
-msgstr ""
-
-#: AdvertFormType.php:35
-msgid "Choose image"
-msgstr ""
-
-#: BillingAddressFormType.php:103
-#: DeliveryAddressFormType.php:109
-#: DeliveryAddressFormType.php:113
-#: OrderFormType.php:172
-#: OrderFormType.php:264
-#: PersonalInfoFormType.php:122
-#: PersonalInfoFormType.php:216
 msgid "City name cannot be longer than {{ limit }} characters"
 msgstr ""
 
-#: PricingGroupFormType.php:34
-msgid "Coefficient must be greater than 0"
-msgstr ""
-
-#: BillingAddressFormType.php:60
-#: DeliveryAddressFormType.php:47
-#: OrderFormType.php:136
-#: PersonalInfoFormType.php:84
-#: PersonalInfoFormType.php:178
 msgid "Company name cannot be longer than {{ limit }} characters"
 msgstr ""
 
-#: CountryFormType.php:25
-msgid "Country name cannot be longer than {{ limit }} characters"
-msgstr ""
-
-#: MailTemplateFormType.php:81
-msgid "E-mail subject cannot be longer than {{ limit }} characters"
-msgstr ""
-
-#: ProductFormType.php:137
-msgid "EAN cannot be longer then {{ limit }} characters"
-msgstr ""
-
-#: ProductEditFormType.php:173
-msgid "Each parameter can be used only once"
-msgstr ""
-
-#: AdministratorFormType.php:43
-#: MailTemplateFormType.php:36
-#: OrderFormType.php:118
-#: PersonalInfoFormType.php:66
-#: RegistrationFormType.php:48
-#: ResetPasswordFormType.php:26
-#: UserFormType.php:65
 msgid "Email cannot be longer then {{ limit }} characters"
 msgstr ""
 
-#: ProductFormType.php:240
-#: ProductFormType.php:247
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:242
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:249
-msgid "Enter date in DD.MM.YYYY format"
-msgstr ""
-
-#: OrderFormType.php:99
-#: PersonalInfoFormType.php:53
-#: RegistrationFormType.php:35
-#: UserFormType.php:29
-#: UserFormType.php:47
 msgid "First name cannot be longer then {{ limit }} characters"
 msgstr ""
 
-#: DeliveryAddressFormType.php:60
-#: DeliveryAddressFormType.php:61
-#: OrderFormType.php:203
-#: PersonalInfoFormType.php:154
 msgid "First name of contact person cannot be longer then {{ limit }} characters"
 msgstr ""
 
-#: FlagFormType.php:37
-msgid "Flag color in must be in valid hexadecimal code e.g. #3333ff"
-msgstr ""
-
-#: FlagFormType.php:28
-msgid "Flag name cannot be longer than {{ limit }} characters"
-msgstr ""
-
-#: AdministratorFormType.php:35
-msgid "Full name cannot be longer then {{ limit }} characters"
-msgstr ""
-
-#: CategoryFormType.php:128
-msgid "Heading (H1) cannot be longer than {{ limit }} characters"
-msgstr ""
-
-#: HeurekaShopCertificationFormType.php:28
-msgid "Heureka API must be {{ limit }} characters"
-msgstr ""
-
-#: BillingAddressFormType.php:74
-#: OrderFormType.php:145
-#: PersonalInfoFormType.php:98
 msgid "Identification number cannot be longer then {{ limit }} characters"
 msgstr ""
 
-#: SliderItemFormType.php:46
-msgid "Image can be only in JPG or PNG format"
-msgstr ""
-
-#: AdvertFormType.php:93
-#: BrandFormType.php:46
-#: CategoryFormType.php:160
-#: DomainFormType.php:28
-#: PaymentFormType.php:91
-#: ProductEditFormType.php:145
-#: TransportFormType.php:76
-msgid "Image can be only in JPG, GIF or PNG format"
-msgstr ""
-
-#: OrderFormType.php:108
-#: PersonalInfoFormType.php:59
-#: RegistrationFormType.php:41
-#: UserFormType.php:35
-#: UserFormType.php:56
 msgid "Last name cannot be longer than {{ limit }} characters"
 msgstr ""
 
-#: DeliveryAddressFormType.php:73
-#: DeliveryAddressFormType.php:75
-#: OrderFormType.php:217
-#: PersonalInfoFormType.php:168
 msgid "Last name of contact person cannot be longer than {{ limit }} characters"
 msgstr ""
 
-#: SliderItemFormType.php:57
-msgid "Link must be valid URL address"
-msgstr ""
-
-#: BrandFormType.php:30
-#: CategoryFormType.php:110
-#: CurrencyFormType.php:54
-#: OrderFormType.php:227
-#: PaymentFormType.php:52
-#: ProductParameterValueFormType.php:49
-#: TransportFormType.php:46
-msgid "Name cannot be longer than {{ limit }} characters"
-msgstr ""
-
-#: AvailabilityFormType.php:37
-msgid "Number of days to dispatch must be greater or equal to {{ compared_value }}"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Form/Admin/Product/Availability/AvailabilityFormType.php:34
-msgid "Number of days to expedite must be whole number."
-msgstr ""
-
-#: ParameterFormType.php:27
-msgid "Parameter name cannot be longer than {{ limit }} characters"
-msgstr ""
-
-#: ProductFormType.php:131
-msgid "Part number cannot be longer than {{ limit }} characters"
-msgstr ""
-
-#: AdministratorFormType.php:67
-#: NewPasswordFormType.php:30
-#: RegistrationFormType.php:60
-#: UserFormType.php:50
-#: UserFormType.php:113
 msgid "Password cannot be longer then {{ limit }} characters"
 msgstr ""
 
-#: RegistrationFormType.php:90
-#: UserFormType.php:70
-#: UserFormType.php:143
 msgid "Password cannot be same as e-mail"
 msgstr ""
 
-#: RegistrationFormType.php:96
-#: UserFormType.php:76
-#: UserFormType.php:149
 msgid "Password cannot be same as part of e-mail before at sign"
 msgstr ""
 
-#: AdministratorFormType.php:95
-msgid "Password cannot be same as username"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Form/Admin/Administrator/AdministratorFormType.php:55
-#: src/Shopsys/ShopBundle/Form/Admin/Customer/UserFormType.php:80
-#: src/Shopsys/ShopBundle/Form/Front/Customer/Password/NewPasswordFormType.php:33
-#: src/Shopsys/ShopBundle/Form/Front/Customer/UserFormType.php:53
-#: src/Shopsys/ShopBundle/Form/Front/Registration/RegistrationFormType.php:63
 msgid "Passwords do not match"
 msgstr ""
 
-#: ProductFormType.php:193
-msgid "Please choose action"
-msgstr ""
-
-#: AdvertFormType.php:74
-msgid "Please choose advertisement area"
-msgstr ""
-
-#: AdvertFormType.php:61
-msgid "Please choose advertisement type"
-msgstr ""
-
-#: ArticleFormType.php:101
-msgid "Please choose article placement"
-msgstr ""
-
-#: ProductFormType.php:177
-#: ProductFormType.php:206
-msgid "Please choose availability"
-msgstr ""
-
-#: AvailabilitySettingFormType.php:38
-msgid "Please choose availability for stock products"
-msgstr ""
-
-#: DeliveryAddressFormType.php:134
-#: OrderFormType.php:190
-#: OrderFormType.php:289
-#: PersonalInfoFormType.php:136
-#: PersonalInfoFormType.php:242
 msgid "Please choose country"
 msgstr ""
 
-#: UnitSettingFormType.php:38
-msgid "Please choose default unit"
-msgstr ""
-
-#: SliderItemFormType.php:30
-msgid "Please choose image"
-msgstr ""
-
-#: ProductParameterValueFormType.php:39
-msgid "Please choose parameter"
-msgstr ""
-
-#: TransportAndPaymentFormType.php:64
-#: src/Shopsys/ShopBundle/Form/Front/Order/TransportAndPaymentFormType.php:66
 msgid "Please choose payment type"
 msgstr ""
 
-#: TransportAndPaymentFormType.php:55
-#: src/Shopsys/ShopBundle/Form/Front/Order/TransportAndPaymentFormType.php:57
 msgid "Please choose shipping type"
 msgstr ""
 
-#: ProductFormType.php:165
-msgid "Please choose unit"
-msgstr ""
-
-#: SliderItemFormType.php:64
-msgid "Please choose visibility"
-msgstr ""
-
-#: AdvertFormType.php:81
-msgid "Please enter HTML code for advertisement area"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Form/Admin/Vat/VatFormType.php:39
-msgid "Please enter VAT in correct format."
-msgstr ""
-
-#: VatFormType.php:28
-msgid "Please enter VAT name"
-msgstr ""
-
-#: OrderItemFormType.php:45
-#: OrderPaymentFormType.php:39
-#: OrderTransportFormType.php:39
-#: PaymentFormType.php:75
-#: ProductFormType.php:234
-#: TransportFormType.php:60
-#: VatFormType.php:41
-msgid "Please enter VAT rate"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:150
-msgid "Please enter a number"
-msgstr ""
-
-#: ArticleFormType.php:62
-msgid "Please enter article content"
-msgstr ""
-
-#: ArticleFormType.php:55
-msgid "Please enter article name"
-msgstr ""
-
-#: AvailabilityFormType.php:26
-msgid "Please enter availability name in all languages"
-msgstr ""
-
-#: DeliveryAddressFormType.php:104
-#: DeliveryAddressFormType.php:108
-#: OrderFormType.php:169
-#: OrderFormType.php:260
-#: PersonalInfoFormType.php:121
-#: PersonalInfoFormType.php:211
 msgid "Please enter city"
 msgstr ""
 
-#: PromoCodeFormType.php:45
-msgid "Please enter code"
-msgstr ""
-
-#: BillingAddressFormType.php:55
-#: PersonalInfoFormType.php:80
 msgid "Please enter company name"
 msgstr ""
 
-#: ContactFormType.php:37
 msgid "Please enter content"
 msgstr ""
 
-#: CountryFormType.php:24
-msgid "Please enter country name"
-msgstr ""
-
-#: CurrencyFormType.php:60
-msgid "Please enter currency code"
-msgstr ""
-
-#: CurrencyFormType.php:74
-msgid "Please enter currency exchange rate"
-msgstr ""
-
-#: VatSettingsFormType.php:39
-msgid "Please enter default VAT"
-msgstr ""
-
-#: CurrencySettingsFormType.php:39
-#: CurrencySettingsFormType.php:51
-msgid "Please enter default currency"
-msgstr ""
-
-#: PricingGroupSettingsFormType.php:43
-msgid "Please enter default pricing group"
-msgstr ""
-
-#: PromoCodeFormType.php:54
-msgid "Please enter discount percentage"
-msgstr ""
-
-#: AdministratorFormType.php:42
-#: ContactFormType.php:42
-#: LoginFormType.php:26
-#: MailSettingFormType.php:25
-#: OrderFormType.php:114
-#: PersonalInfoFormType.php:64
-#: RegistrationFormType.php:46
-#: ResetPasswordFormType.php:24
-#: UserFormType.php:62
 msgid "Please enter e-mail"
 msgstr ""
 
-#: MailTemplateFormType.php:104
-msgid "Please enter e-mail content"
-msgstr ""
-
-#: OrderFormType.php:96
-#: PersonalInfoFormType.php:52
-#: RegistrationFormType.php:34
-#: UserFormType.php:28
-#: UserFormType.php:44
 msgid "Please enter first name"
 msgstr ""
 
-#: DeliveryAddressFormType.php:55
-#: DeliveryAddressFormType.php:56
-#: OrderFormType.php:198
-#: PersonalInfoFormType.php:149
 msgid "Please enter first name of contact person"
 msgstr ""
 
-#: FlagFormType.php:34
-msgid "Please enter flag color"
-msgstr ""
-
-#: FlagFormType.php:27
-msgid "Please enter flag name in all languages"
-msgstr ""
-
-#: AdministratorFormType.php:34
-#: ContactFormType.php:31
-#: MailSettingFormType.php:31
 msgid "Please enter full name"
 msgstr ""
 
-#: BillingAddressFormType.php:69
-#: PersonalInfoFormType.php:93
 msgid "Please enter identification number"
 msgstr ""
 
-#: InputPriceTypeFormType.php:28
-msgid "Please enter input prices"
-msgstr ""
-
-#: OrderFormType.php:105
-#: PersonalInfoFormType.php:58
-#: RegistrationFormType.php:40
-#: UserFormType.php:34
-#: UserFormType.php:53
 msgid "Please enter last name"
 msgstr ""
 
-#: DeliveryAddressFormType.php:68
-#: DeliveryAddressFormType.php:70
-#: OrderFormType.php:212
-#: PersonalInfoFormType.php:163
 msgid "Please enter last name of contact person"
 msgstr ""
 
-#: SliderItemFormType.php:56
-msgid "Please enter link"
-msgstr ""
-
-#: LoginFormType.php:25
-msgid "Please enter login"
-msgstr ""
-
-#: BrandFormType.php:29
-#: CategoryFormType.php:105
-#: CurrencyFormType.php:53
-#: OrderItemFormType.php:25
-#: PaymentFormType.php:48
-#: SliderItemFormType.php:37
-#: TransportFormType.php:41
-msgid "Please enter name"
-msgstr ""
-
-#: AdvertFormType.php:49
-msgid "Please enter name of advertisement area"
-msgstr ""
-
-#: OrderStatusFormType.php:24
-msgid "Please enter order status name in all languages"
-msgstr ""
-
-#: ParameterFormType.php:26
-msgid "Please enter parameter name"
-msgstr ""
-
-#: ProductParameterValueFormType.php:45
-msgid "Please enter parameter value"
-msgstr ""
-
-#: AdministratorFormType.php:72
-#: LoginFormType.php:30
-#: LoginFormType.php:32
-#: NewPasswordFormType.php:29
-#: RegistrationFormType.php:59
-#: UserFormType.php:118
 msgid "Please enter password"
 msgstr ""
 
-#: FreeTransportAndPaymentPriceLimitsFormType.php:78
-#: PaymentEditFormType.php:55
-#: ProductEditFormType.php:231
-#: ProductFormType.php:218
-#: TransportEditFormType.php:55
-msgid "Please enter price"
-msgstr ""
-
-#: src/Shopsys/ShopBundle/Form/Admin/Payment/PaymentEditFormType.php:53
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductEditFormType.php:228
-#: src/Shopsys/ShopBundle/Form/Admin/Product/ProductFormType.php:215
-#: src/Shopsys/ShopBundle/Form/Admin/Transport/TransportEditFormType.php:53
-#: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:37
-#: src/Shopsys/ShopBundle/Form/Front/Product/ProductFilterFormType.php:50
 msgid "Please enter price in correct format (positive number with decimal separator)"
 msgstr ""
 
-#: PricingGroupFormType.php:33
-msgid "Please enter pricing group coefficient"
-msgstr ""
-
-#: PricingGroupFormType.php:25
-msgid "Please enter pricing group name"
-msgstr ""
-
-#: CartFormType.php:30
-#: OrderItemFormType.php:51
 msgid "Please enter quantity"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Form/Admin/Pricing/Group/PricingGroupFormType.php:31
-msgid "Please enter ratio in correct format"
-msgstr ""
-
-#: ScriptFormType.php:32
-msgid "Please enter script code"
-msgstr ""
-
-#: ScriptFormType.php:27
-msgid "Please enter script name"
-msgstr ""
-
-#: ProductFormType.php:270
-msgid "Please enter sorting priority"
-msgstr ""
-
-#: ProductFormType.php:153
-msgid "Please enter stock quantity"
-msgstr ""
-
-#: DeliveryAddressFormType.php:90
-#: DeliveryAddressFormType.php:94
-#: OrderFormType.php:160
-#: OrderFormType.php:246
-#: PersonalInfoFormType.php:115
-#: PersonalInfoFormType.php:197
 msgid "Please enter street"
 msgstr ""
 
-#: MailTemplateFormType.php:76
-msgid "Please enter subject"
-msgstr ""
-
-#: OrderFormType.php:124
-#: PersonalInfoFormType.php:71
 msgid "Please enter telephone number"
 msgstr ""
 
-#: UnitFormType.php:25
-msgid "Please enter unit name in all languages"
-msgstr ""
-
-#: OrderItemFormType.php:38
-#: OrderPaymentFormType.php:32
-#: OrderTransportFormType.php:32
-msgid "Please enter unit price with VAT"
-msgstr ""
-
-#: AdministratorFormType.php:28
-msgid "Please enter username"
-msgstr ""
-
-#: CurrencyFormType.php:63
-msgid "Please enter valid 3-digit currency code according to ISO 4217 standard (uppercase)"
-msgstr ""
-
-#: AdministratorFormType.php:41
-#: ContactFormType.php:43
-#: MailSettingFormType.php:26
-#: OrderFormType.php:115
-#: PersonalDataFormType.php:30
-#: PersonalInfoFormType.php:65
-#: RegistrationFormType.php:47
-#: ResetPasswordFormType.php:25
-#: UserFormType.php:67
 msgid "Please enter valid e-mail"
 msgstr ""
 
-#: CartFormType.php:34
 msgid "Please enter valid quantity"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Form/Admin/PromoCode/PromoCodeFormType.php:61
-msgid "Please enter whole number."
-msgstr ""
-
-#: DeliveryAddressFormType.php:118
-#: DeliveryAddressFormType.php:122
-#: OrderFormType.php:178
-#: OrderFormType.php:273
-#: PersonalInfoFormType.php:127
-#: PersonalInfoFormType.php:225
 msgid "Please enter zip code"
 msgstr ""
 
-#: src/Shopsys/ShopBundle/Form/UrlListType.php:86
-msgid "Previously selected main URL dos not exist any more"
-msgstr ""
-
-#: FreeTransportAndPaymentPriceLimitsFormType.php:74
-#: PaymentEditFormType.php:58
-#: ProductEditFormType.php:236
-#: ProductFilterFormType.php:41
-#: ProductFilterFormType.php:54
-#: ProductFormType.php:223
-#: TransportEditFormType.php:58
 msgid "Price must be greater or equal to {{ compared_value }}"
 msgstr ""
 
-#: ProductFormType.php:114
-msgid "Product name cannot be longer than {{ limit }} characters"
-msgstr ""
-
-#: CartFormType.php:31
-#: OrderItemFormType.php:52
 msgid "Quantity must be greater than {{ compared_value }}"
 msgstr ""
 
-#: SeoSettingFormType.php:76
-msgid "Same description is used on another domain"
-msgstr ""
-
-#: SeoSettingFormType.php:67
-msgid "Same title complement is used on another domain"
-msgstr ""
-
-#: SeoSettingFormType.php:58
-msgid "Same title is used on another domain"
-msgstr ""
-
-#: OrderStatusFormType.php:25
-msgid "Status name cannot be longer than {{ limit }} characters"
-msgstr ""
-
-#: BillingAddressFormType.php:94
-#: DeliveryAddressFormType.php:95
-#: DeliveryAddressFormType.php:99
-#: OrderFormType.php:163
-#: OrderFormType.php:251
-#: PersonalInfoFormType.php:116
-#: PersonalInfoFormType.php:202
 msgid "Street name cannot be longer than {{ limit }} characters"
 msgstr ""
 
-#: BillingAddressFormType.php:84
-#: OrderFormType.php:154
-#: PersonalInfoFormType.php:108
 msgid "Tax number cannot be longer than {{ limit }} characters"
 msgstr ""
 
-#: BillingAddressFormType.php:46
-#: DeliveryAddressFormType.php:82
-#: DeliveryAddressFormType.php:85
-#: OrderFormType.php:127
-#: OrderFormType.php:237
-#: PersonalInfoFormType.php:72
-#: PersonalInfoFormType.php:188
 msgid "Telephone number cannot be longer than {{ limit }} characters"
 msgstr ""
 
-#: HoneyPotType.php:28
-msgid "This field must be empty"
-msgstr ""
-
-#: UnitFormType.php:26
-msgid "Unit name cannot be longer than {{ limit }} characters"
-msgstr ""
-
-#: MailTemplateFormType.php:58
-msgid "Uploaded file is to large ({{ size }} {{ suffix }}). Maximum size of an file is {{ limit }} {{ suffix }}."
-msgstr ""
-
-#: AdvertFormType.php:95
-#: BrandFormType.php:48
-#: CategoryFormType.php:162
-#: DomainFormType.php:30
-#: PaymentFormType.php:93
-#: ProductEditFormType.php:147
-#: SliderItemFormType.php:48
-#: TransportFormType.php:78
-msgid "Uploaded image is to large ({{ size }} {{ suffix }}). Maximum size of an image is {{ limit }} {{ suffix }}."
-msgstr ""
-
-#: AdministratorFormType.php:29
-msgid "Username cannot be longer then {{ limit }} characters"
-msgstr ""
-
-#: VatFormType.php:29
-msgid "VAT name cannot be longer than {{ limit }} characters"
-msgstr ""
-
-#: MailTemplateFormType.php:87
-#: MailTemplateFormType.php:111
-msgid "Variable {{ needle }} is required"
-msgstr ""
-
-#: ProductFormType.php:96
-msgid "Variant alias cannot be longer then {{ limit }} characters"
-msgstr ""
-
-#: BestsellingProductFormType.php:27
-msgid "You entered same product twice. In list of bestsellers can be product only once. Please correct it and then save form again."
-msgstr ""
-
-#: ContactFormType.php:50
-#: RegistrationFormType.php:69
-#: SubscriptionFormType.php:37
 msgid "You have to agree with privacy policy"
 msgstr ""
 
-#: PersonalInfoFormType.php:253
 msgid "You have to agree with terms and conditions and privacy policy"
 msgstr ""
 
-#: BillingAddressFormType.php:112
-#: DeliveryAddressFormType.php:123
-#: DeliveryAddressFormType.php:127
-#: OrderFormType.php:181
-#: OrderFormType.php:278
-#: PersonalInfoFormType.php:128
-#: PersonalInfoFormType.php:230
 msgid "Zip code cannot be longer than {{ limit }} characters"
 msgstr ""
 

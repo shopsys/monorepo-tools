@@ -2,10 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Translation;
 
-use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
-use JMS\TranslationBundle\Model\SourceInterface;
 use JMS\TranslationBundle\Translation\Dumper\DumperInterface;
 
 class PoDumper implements DumperInterface
@@ -28,7 +26,6 @@ class PoDumper implements DumperInterface
         $sortedMessages = $this->sortMessagesByMessageId($messages);
 
         foreach ($sortedMessages as $message) {
-            $output .= $this->getReferences($message);
             $output .= sprintf('msgid "%s"' . "\n", $this->escape($message->getId()));
             if ($message->isNew()) {
                 $output .= 'msgstr ""' . "\n";
@@ -37,28 +34,6 @@ class PoDumper implements DumperInterface
             }
 
             $output .= "\n";
-        }
-
-        return $output;
-    }
-
-    /**
-     * @param \JMS\TranslationBundle\Model\Message $message
-     * @return string
-     */
-    private function getReferences(Message $message)
-    {
-        $output = '';
-
-        $sources = $message->getSources();
-        $sortedSources = $this->sortSourcesByFixedSourcePathAndLineNumber($sources);
-
-        foreach ($sortedSources as $source) {
-            if ($source instanceof FileSource) {
-                $sourcePath = $this->fixFileSourcePath($source);
-
-                $output .= sprintf('#: %s:%s' . "\n", $this->escape($sourcePath), $this->escape($source->getLine()));
-            }
         }
 
         return $output;
@@ -74,41 +49,6 @@ class PoDumper implements DumperInterface
     }
 
     /**
-     * FileSource path may contain corrupted paths (especially when dumped on Windows machine):
-     * - Unix and Windows directory separators may mix
-     * - Path may end with a separator
-     * - A path may contain unresolved .. directories
-     * To fix this some level of path normalization is needed.
-     *
-     * Examples of method input / output:
-     * - directory/file.html/ => directory/file.html
-     * - directory\file.html => directory/file.html
-     * - directory/secondDirectory/..\file.html => directory/file.html
-     * - ../../directory///file.html => directory/file.html
-     * - ./directory/./file.html => directory/file.html
-     *
-     * @param \JMS\TranslationBundle\Model\FileSource $source
-     * @return string
-     */
-    private function fixFileSourcePath(FileSource $source)
-    {
-        $path = $source->getPath();
-        $pathWithNormalizedSeparators = str_replace(DIRECTORY_SEPARATOR, '/', $path);
-        $pathParts = explode('/', $pathWithNormalizedSeparators);
-
-        $fixedPathParts = [];
-        foreach ($pathParts as $pathPart) {
-            if ($pathPart === '..') {
-                array_pop($fixedPathParts);
-            } elseif ($pathPart !== '.' && $pathPart !== '') {
-                $fixedPathParts[] = $pathPart;
-            }
-        }
-
-        return implode('/', $fixedPathParts);
-    }
-
-    /**
      * @param \JMS\TranslationBundle\Model\Message[] $messages
      * @return \JMS\TranslationBundle\Model\Message[]
      */
@@ -119,31 +59,5 @@ class PoDumper implements DumperInterface
         });
 
         return $messages;
-    }
-
-    /**
-     * @param \JMS\TranslationBundle\Model\SourceInterface[] $sources
-     * @return \JMS\TranslationBundle\Model\SourceInterface[]
-     */
-    private function sortSourcesByFixedSourcePathAndLineNumber(array $sources)
-    {
-        usort($sources, function (SourceInterface $sourceA, SourceInterface $sourceB) {
-            if ($sourceA instanceof FileSource && $sourceB instanceof FileSource) {
-                $pathsComparisonResult = strcmp(
-                    $this->fixFileSourcePath($sourceA),
-                    $this->fixFileSourcePath($sourceB)
-                );
-
-                if ($pathsComparisonResult !== 0) {
-                    return $pathsComparisonResult;
-                } else {
-                    return $sourceA->getLine() - $sourceB->getLine();
-                }
-            }
-
-            return 0;
-        });
-
-        return $sources;
     }
 }
