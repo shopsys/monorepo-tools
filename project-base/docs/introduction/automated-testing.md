@@ -76,9 +76,13 @@ Unit tests in Shopsys Framework are built on [PHPUnit testing framework](https:/
 * test driven development
 
 #### Example:
-See test class [`\Tests\ShopBundle\Unit\Model\Cart\CartServiceTest`](../../tests/ShopBundle/Unit/Model/Cart/CartServiceTest.php).
+See test class `\Tests\FrameworkBundle\Unit\Model\Cart\CartServiceTest` in the `shopsys/framework` package.
 Notice that test method names describe the tested scenario. Also, notice that each test case focuses just on one specific behavior of the class.
 When a test fails it provides detailed feedback to the developer.
+
+You can create similar unit tests anywhere in your directory `tests/Unit/`.
+If they are named with a prefix `Test` and are extending `\PHPUnit\Framework\TestCase` they will be executed during the [`tests` Phing target](phing-targets.md#tests).
+  
 
 ### Database tests (a.k.a. integration tests)
 Even when all parts are working it is not guaranteed they work well together. Mocking can still be used for isolation when appropriate.

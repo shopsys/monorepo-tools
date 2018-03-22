@@ -60,6 +60,9 @@
         "packages/product-feed-heureka-delivery/tests/",
         "project-base/tests/"
       ],
+      "Tests\\FrameworkBundle\\": [
+        "packages/framework/tests/"
+      ],
       "Tests\\Shopsys\\HttpSmokeTesting\\": [
         "packages/http-smoke-testing/tests/"
       ]
