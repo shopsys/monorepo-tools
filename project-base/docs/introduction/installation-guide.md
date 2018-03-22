@@ -20,17 +20,15 @@ First of all, you need to install the following software on your system:
 After that, you can follow the steps below in order to install and configure Shopsys Framework.
 
 ## Steps
-### 1. Get source code
+### 1. Create new project from Shopsys Framework sources
 ```
-git clone https://github.com/shopsys/shopsys.git
-cd shopsys-framework
+composer create-project shopsys/project-base --keep-vcs
+cd project-base
 ```
+Notes: 
+- The `--keep-vcs` option keeps the GIT history of `shopsys/project-base` in your new project
 
 ### 2. Install dependencies and configure parameters
-```
-composer install
-```
-
 Composer will prompt you to set main parameters (`app/config/parameters.yml`):
 
 | Name                              | Description                                                                   |

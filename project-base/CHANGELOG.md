@@ -39,6 +39,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - updated phpunit/phpunit to version 7 (@simara-svatopluk)
 - phing target dump-translations does not delete messages, that are not found in translated directories (Miroslav-Stopka)
 - docs updated in order to provide up-to-date information about the current project state (@vitek-rostislav) 
+- installation guides: updated instructions for creating new project from Shopsys Framework sources (@vitek-rostislav)
+- basics-about-package-architecture.md updated to reflect current architecture state (@vitek-rostislav)
 
 ## 6.0.0-beta21 - 2018-03-05
 - released only in closed beta

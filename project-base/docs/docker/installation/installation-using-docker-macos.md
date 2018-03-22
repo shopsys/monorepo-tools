@@ -8,11 +8,14 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 * [Docker-sync](http://docker-sync.io/) (install via `sudo gem install docker-sync`)
 
 ## Steps
-### 1. Download the Shopsys Framework sources
+### 1. Create new project from Shopsys Framework sources
 ```
-git clone https://github.com/shopsys/shopsys.git
-cd shopsys-framework
+composer create-project shopsys/project-base --no-install
+cd project-base
 ```
+Notes: 
+- The `--no-install` option disables installation of the vendors - this will be done later in the Docker container
+- If you want to keep the GIT history of `shopsys/project-base` in your new project, use the `--keep-vcs` option
 
 ### 1.1 Enable second domain (optional)
 There are two domains each for different language in default installation. First one is available via IP adress `127.0.O.1` and second one via `127.0.0.2`.

@@ -12,15 +12,18 @@
 
 ## Steps
 
-### 1. Download the Shopsys Framework sources
+### 1. Create new project from Shopsys Framework sources
 Docker Toolbox for Windows mounts C:/Users to Docker containers on default. 
-It means that any directory under C:/Users (e.g. C:/Users/<user_name>/shopsys-framework) will work automatically.
+It means that any directory under C:/Users (e.g. C:/Users/<user_name>/project-base) will work automatically.
 If you want to store your folder in other scope [see for example this article](https://gist.github.com/matthiasg/76dd03926d095db08745).
 
 ```
-git clone https://github.com/shopsys/shopsys.git
-cd shopsys-framework
+composer create-project shopsys/project-base --no-install
+cd project-base
 ```
+Notes: 
+- The `--no-install` option disables installation of the vendors - this will be done later in the Docker container
+- If you want to keep the GIT history of `shopsys/project-base` in your new project, use the `--keep-vcs` option
 
 ### 2. Create docker-compose.yml file
 Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../../docker/conf/docker-compose.yml.dist).
