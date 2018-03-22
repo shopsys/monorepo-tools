@@ -41,7 +41,10 @@ You can also login into the administration section on [http://127.0.0.1:8000/adm
 * Password: `admin123`
 
 ## Contributing
-You can take part in making Shopsys Framework better. See [Contributing guide](CONTRIBUTING.md) for details. 
+Shopsys Framework is decoupled into many packages, but all sources, 
+pull requests and issues are maintained in one repository - [`shopsys/shopsys`](https://github.com/shopsys/shopsys). 
+That is the only place where to [contribute](CONTRIBUTING.md) when you have any feedback for us.
+You can take part in making Shopsys Framework better. 
 
 ## Need help
 * [Docker troubleshooting](docs/docker/docker-troubleshooting.md)
