@@ -16,7 +16,7 @@ class DbFunctionsDataFixture extends AbstractNativeFixture
         $this->executeNativeQuery('CREATE FUNCTION immutable_unaccent(text)
             RETURNS text AS
             $$
-            SELECT unaccent(\'unaccent\', $1)
+            SELECT pg_catalog.unaccent(\'pg_catalog.unaccent\', $1)
             $$
             LANGUAGE SQL IMMUTABLE');
 
@@ -24,7 +24,7 @@ class DbFunctionsDataFixture extends AbstractNativeFixture
         $this->executeNativeQuery('CREATE FUNCTION normalize(text)
             RETURNS text AS
             $$
-            SELECT lower(immutable_unaccent($1))
+            SELECT pg_catalog.lower(public.immutable_unaccent($1))
             $$
             LANGUAGE SQL IMMUTABLE');
     }
