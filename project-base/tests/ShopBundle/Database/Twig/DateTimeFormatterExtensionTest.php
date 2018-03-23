@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Twig;
+namespace Tests\ShopBundle\Database\Twig;
 
 use DateTime;
 use Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter;

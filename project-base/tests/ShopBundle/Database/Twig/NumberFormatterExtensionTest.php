@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ShopBundle\Twig;
+namespace Tests\ShopBundle\Database\Twig;
 
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
