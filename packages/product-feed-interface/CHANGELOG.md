@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- We are releasing the Shopsys Framework in version 7 and we are synchronizing versions because
+  the Shopsys Framework and all packages are now developed together and are now same-version compatible.
+
 ### Removed
 - `HeurekaCategoryNameProviderInterface` as it is specific to Heureka product feed (@PetrHeinz)
     - [shopsys/product-feed-heureka](https://github.com/shopsys/product-feed-heureka) manages Heureka categories on its own since v0.5.0

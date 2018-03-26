@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+- We are releasing version 7 (open-source project known as Shopsys Framework) to better distinguish it from Shopsys 6
+  (internal platform of Shopsys company) and older versions that we have been developing and improving for 15 years.
+
 ### Added
 - Sessions are now stored in Redis (@TomasLudvik)
 - Admin - Legal conditions: added personal data settings (@stanoMilan) 

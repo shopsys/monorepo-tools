@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+- We are releasing the Shopsys Framework in version 7 and we are synchronizing versions because
+  the Shopsys Framework and all packages are now developed together and are now same-version compatible.
+
 ### Added
 - extracted core functionality of [Shopsys Framework](http://www.shopsys-framework.com/)
 from its open-box repository [shopsys/project-base](https://github.com/shopsys/project-base) (@MattCzerner)
