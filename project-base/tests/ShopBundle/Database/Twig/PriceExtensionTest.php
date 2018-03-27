@@ -14,7 +14,43 @@ class PriceExtensionTest extends FunctionalTestCase
 {
     const NBSP = "\xc2\xa0";
 
-    public function priceFilterDataProvider()
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
+     */
+    private $currencyFacade;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
+     */
+    private $localization;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository
+     */
+    private $intlCurrencyRepository;
+
+    /**
+     * @var \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface
+     */
+    private $numberFormatRepository;
+
+    protected function setUp()
+    {
+        $this->currencyFacade = $this->getServiceByType(CurrencyFacade::class);
+        $this->domain = $this->getServiceByType(Domain::class);
+        $this->localization = $this->getServiceByType(Localization::class);
+        $this->intlCurrencyRepository = $this->getServiceByType(IntlCurrencyRepository::class);
+        $this->numberFormatRepository = $this->getServiceByType(NumberFormatRepositoryInterface::class);
+
+        parent::setUp();
+    }
+
+    public function priceFilterDataProviderSingleDomain()
     {
         return [
             ['input' => '12', 'domainId' => 1, 'result' => 'CZK12.00'],
@@ -30,7 +66,14 @@ class PriceExtensionTest extends FunctionalTestCase
             ],
             ['input' => null, 'domainId' => 1, 'result' => null],
             ['input' => 'asdf', 'domainId' => 1, 'result' => 'asdf'],
+        ];
+    }
 
+    public function priceFilterDataProviderMultiDomain()
+    {
+        $filterDataSingleDomain = $this->priceFilterDataProviderSingleDomain();
+
+        $filterDataMultiDomain = [
             ['input' => '12', 'domainId' => 2, 'result' => '12,00' . self::NBSP . '€'],
             ['input' => '12.00', 'domainId' => 2, 'result' => '12,00' . self::NBSP . '€'],
             ['input' => '12.600', 'domainId' => 2, 'result' => '12,60' . self::NBSP . '€'],
@@ -43,33 +86,41 @@ class PriceExtensionTest extends FunctionalTestCase
                 'result' => '123' . self::NBSP . '456' . self::NBSP . '789,12346' . self::NBSP . '€',
             ],
         ];
+
+        return array_merge($filterDataSingleDomain, $filterDataMultiDomain);
+    }
+
+    /**
+     * @group singledomain
+     * @dataProvider priceFilterDataProviderSingleDomain
+     */
+    public function testPriceFilterForSingleDomain($input, $domainId, $result)
+    {
+        $this->checkPriceFilter($input, $domainId, $result);
+    }
+
+    /**
+     * @group multidomain
+     * @dataProvider priceFilterDataProviderMultiDomain
+     */
+    public function testPriceFilterForMultiDomain($input, $domainId, $result)
+    {
+        $this->checkPriceFilter($input, $domainId, $result);
     }
 
     /**
      * @dataProvider priceFilterDataProvider
      */
-    public function testPriceFilter($input, $domainId, $result)
+    private function checkPriceFilter($input, $domainId, $result)
     {
-        $currencyFacade = $this->getServiceByType(CurrencyFacade::class);
-        /* @var $currencyFacade \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade */
-        $domain = $this->getServiceByType(Domain::class);
-        /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
-        $localization = $this->getServiceByType(Localization::class);
-        /* @var $localization \Shopsys\FrameworkBundle\Model\Localization\Localization */
-        $intlCurrencyRepository = $this->getServiceByType(IntlCurrencyRepository::class);
-        /* @var $intlCurrencyRepository \Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository */
-
-        $numberFormatRepository = $this->getServiceByType(NumberFormatRepositoryInterface::class);
-        /* @var $numberFormatRepository \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface */
-
-        $domain->switchDomainById($domainId);
+        $this->domain->switchDomainById($domainId);
 
         $priceExtension = new PriceExtension(
-            $currencyFacade,
-            $domain,
-            $localization,
-            $numberFormatRepository,
-            $intlCurrencyRepository
+            $this->currencyFacade,
+            $this->domain,
+            $this->localization,
+            $this->numberFormatRepository,
+            $this->intlCurrencyRepository
         );
 
         $this->assertSame($result, $priceExtension->priceFilter($input));
