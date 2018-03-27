@@ -11,11 +11,14 @@
 * [Docker](https://docs.docker.com/engine/installation/)
 
 ## Steps
-### 1. Download the Shopsys Framework sources
+### 1. Create new project from Shopsys Framework sources
 ```
-git clone https://github.com/shopsys/shopsys.git
-cd shopsys-framework
+composer create-project shopsys/project-base --no-install
+cd project-base
 ```
+Notes: 
+- The `--no-install` option disables installation of the vendors - this will be done later in the Docker container
+- If you want to keep the GIT history of `shopsys/project-base` in your new project, use the `--keep-vcs` option
 
 ### 2. Create docker-compose.yml file
 Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../../docker/conf/docker-compose.yml.dist).

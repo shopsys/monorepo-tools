@@ -6,7 +6,7 @@ If you want to contribute to Shopsys Framework or to any of its packages,
 clone this monorepo [shopsys/shopsys](https://github.com/shopsys/shopsys).
 
 If you want to build your project on Shopsys Framework,
-clone [shopsys/project-base](https://github.com/shopsys/project-base).
+use composer to create project from [shopsys/project-base](https://github.com/shopsys/project-base).
 
 ## Problem
 Due to the growing number of new repositories, there were many situations when a developer had to reflect the same change

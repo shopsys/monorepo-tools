@@ -20,17 +20,15 @@ First of all, you need to install the following software on your system:
 After that, you can follow the steps below in order to install and configure Shopsys Framework.
 
 ## Steps
-### 1. Get source code
+### 1. Create new project from Shopsys Framework sources
 ```
-git clone https://github.com/shopsys/shopsys.git
-cd shopsys-framework
+composer create-project shopsys/project-base --keep-vcs
+cd project-base
 ```
+Notes: 
+- The `--keep-vcs` option keeps the GIT history of `shopsys/project-base` in your new project
 
 ### 2. Install dependencies and configure parameters
-```
-composer install
-```
-
 Composer will prompt you to set main parameters (`app/config/parameters.yml`):
 
 | Name                              | Description                                                                   |
@@ -148,6 +146,9 @@ However, if your operating system does not provide the required locales you can 
 (Note: every OS should support special locale `"C"` or `"POSIX"`.)
 
 ### Phing target tests-db fails on test AdministratorRepositoryTest::testGetByValidMultidomainLogin
+This error is not likely to occur anymore. 
+We added new phing target `timezones-check` that is run during the application build and prevents this error.
+
 Error message:
 ```
 1) Tests\ShopBundle\Database\Model\Administrator\AdministratorRepositoryTest::testGetByValidMultidomainLogin

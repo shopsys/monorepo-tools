@@ -21,10 +21,10 @@ phing db-wipe-public-schema
 
 Then you can import the dump:
 ```
-psql --quiet --username=database_user target_database_name < dump.sql
+psql --quiet --username=database_user --host=database_host target_database_name < dump.sql
 ```
 
-Replace `database_user` and `target_database_name` with the correct values (from your `app/config/parameters.yml`).
+Replace `database_user`, `database_host` and `target_database_name` with the correct values (from your `app/config/parameters.yml`).
 The command will prompt you for the user's password.
 
 ## Importing database into a new database
@@ -39,8 +39,8 @@ phing db-create
 
 Then you can import the dump:
 ```
-psql --quiet --username=database_user target_database_name < dump.sql
+psql --quiet --username=database_user --host=database_host target_database_name < dump.sql
 ```
 
-Replace `database_user` and `target_database_name` with the correct values (from your `app/config/parameters.yml`).
+Replace `database_user`, `database_host` and `target_database_name` with the correct values (from your `app/config/parameters.yml`).
 The command will prompt you for the user's password.
