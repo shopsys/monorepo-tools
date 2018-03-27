@@ -37,6 +37,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - phing target dump-translations does not delete messages, that are not found in translated directories (Miroslav-Stopka)
 
 ## 6.0.0-beta21 - 2018-03-05
+- released only in closed beta
+
 ### Added
 - PHPStan support (@mhujer)
     - currently analysing source code by level 0
@@ -115,6 +117,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - deprecated packages `symplify/controller-autowire` and `symplify/default-autowire` (@TomasLudvik)
 
 ## 6.0.0-beta20 - 2017-12-11
+- released only in closed beta
+
 ### Changed
 - Docker `nginx.conf` has been upgraded with better performance settings (@TomasLudvik)
     - JavaScript and CSS files are compressed with GZip
@@ -127,14 +131,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - see [Symfony upgrade log](https://github.com/symfony/symfony/blob/3.0/UPGRADE-3.0.md#validator) for more information
 
 ## 6.0.0-beta19.2 - 2017-11-23
+- released only in closed beta
+
 ### Fixed
 - updated symfony/symfony to v3.2.14 in order to avoid known security vulnerabilities (@TomasLudvik)
 
 ## 6.0.0-beta19.1 - 2017-11-21
+- released only in closed beta
+
 ### Fixed
 - coding standards check "phing standards" passes
 
 ## 6.0.0-beta19 - 2017-11-21
+- released only in closed beta
+
 ### Added
 - size of performance data fixtures and limits for performance testing are now configurable via parameters defined in [`parameters_common.yml`](app/config/parameters_common.yml) (@PetrHeinz)
 - performance tests report database query counts (@PetrHeinz)
@@ -146,6 +156,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - input "remember me" in login form is encapsulated by its label for better UX
 
 ## 6.0.0-beta18 - 2017-10-19
+- released only in closed beta
+
 ### Added
 - [coding standards documentation](docs/contributing/coding-standards.md) (@vitek-rostislav)
 - acceptance tests asserting successful image upload in admin for product, transport and payment (@vitek-rostislav)
@@ -170,6 +182,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - proper `baseUrl` value from `domains_urls.yaml` is now stored into `settings` when creating new domain (@vitek-rostislav)
 
 ## 6.0.0-beta17 - 2017-10-03
+- released only in closed beta
+
 ### Added
 - MIT license (@TomasLudvik)
 - phing targets `eslint-check`, `eslint-check-diff`, `eslint-fix` and `eslint-fix-diff` to check and fix coding standards in JS files (@sspooky13)
@@ -183,6 +197,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - implementations of `FeedConfigInterface` now must have implemented method `getAdditionalInformation()` (@MattCzerner)
 
 ## 6.0.0-beta16 - 2017-09-19
+- released only in closed beta
+
 ### Added
 - new command `shopsys:plugin-data-fixtures:load` for loading demo data from plugins (@MattCzerner)
     - called during build of demo database
@@ -233,6 +249,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 6.0.0-beta15 - 2017-08-31
 - previous beta versions released only internally (mentioned changes since 6.0.0-alpha)
+- this version was released only in closed beta
 
 ### Added
 - PHP 7 support
