@@ -611,7 +611,7 @@
                     <arg value="--testsuite"/>
                     <arg value="Database"/>
                     <arg value="--exclude-group"/>
-                    <arg value="multidomain"/>
+                    <arg value="singledomain"/>
                     <arg value="--configuration"/>
                     <arg value="${path.root}/phpunit.xml"/>
                 </exec>
@@ -627,7 +627,7 @@
                     <arg value="--testsuite"/>
                     <arg value="Database"/>
                     <arg value="--exclude-group"/>
-                    <arg value="singledomain"/>
+                    <arg value="multidomain"/>
                     <arg value="--configuration"/>
                     <arg value="${path.root}/phpunit.xml"/>
                 </exec>
