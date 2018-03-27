@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 *Note: Changes are described since release 3.0.2.*
 
+## [Unreleased]
+- We are releasing the Shopsys Framework in version 7 and we are synchronizing versions because
+  the Shopsys Framework and all packages are now developed together and are now same-version compatible.
+
 ## [4.0] - 2018-01-27
 
 ### Added
@@ -64,6 +68,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Deleted
 - Redundant rules which were already covered by other rules (@vitek-rostislav)
 
-[4.0]: https://github.com/shopsys/coding-standards/compare/v3.1.1...HEAD
+[Unreleased]: https://github.com/shopsys/coding-standards/compare/v4.0.0...HEAD
+[4.0]: https://github.com/shopsys/coding-standards/compare/v3.1.1...v4.0.0
 [3.1.1]: https://github.com/shopsys/coding-standards/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/shopsys/coding-standards/compare/v3.0.2...v3.1.0
