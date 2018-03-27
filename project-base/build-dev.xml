@@ -670,39 +670,18 @@
     </target>
 
     <target name="tests-unit" depends="clean" description="Runs unit tests.">
-        <if>
-            <istrue value="${is-multidomain}" />
-            <then>
-                <exec
-                    executable="${path.phpunit.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
-                    <arg value="--colors=always"/>
-                    <arg value="--testsuite"/>
-                    <arg value="Unit"/>
-                    <arg value="--exclude-group"/>
-                    <arg value="singledomain"/>
-                    <arg value="--configuration"/>
-                    <arg value="${path.root}/phpunit.xml"/>
-                </exec>
-            </then>
-            <else>
-                <exec
-                    executable="${path.phpunit.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
-                    <arg value="--colors=always"/>
-                    <arg value="--testsuite"/>
-                    <arg value="Unit"/>
-                    <arg value="--exclude-group"/>
-                    <arg value="multidomain"/>
-                </exec>
-            </else>
-        </if>
+        <exec
+            executable="${path.phpunit.executable}"
+            logoutput="true"
+            passthru="true"
+            checkreturn="true"
+        >
+            <arg value="--colors=always"/>
+            <arg value="--testsuite"/>
+            <arg value="Unit"/>
+            <arg value="--configuration"/>
+            <arg value="${path.root}/phpunit.xml"/>
+        </exec>
     </target>
 
     <target name="test-create-domains-data" description="Creates domains data in tests DB for newly configured domains.">
