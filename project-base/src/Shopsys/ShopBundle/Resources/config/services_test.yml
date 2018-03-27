@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  CommerceGuys\Intl\Currency\CurrencyRepository: ~
+
+  Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter:
+    factory: ['@Shopsys\FrameworkBundle\Model\Localization\CustomDateTimeFormatterFactory', create]
+
+  Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository: ~

@@ -49,7 +49,7 @@ class TransformString
     /**
      * Transforms arbitrary string (natural sentence, under_score, PascalCase, ...) into one ascii camelCase string
      *
-     * @see \Tests\ShopBundle\Unit\Component\String\TransformStringTest::stringToCamelCaseProvider() for example usages
+     * @see \Tests\FrameworkBundle\Unit\Component\String\TransformStringTest::stringToCamelCaseProvider() for example usages
      *
      * @param string $string
      * @return string
