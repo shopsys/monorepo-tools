@@ -23,6 +23,7 @@
         }
     },
     "require": {
+        "php": "^7.0",
         "shopsys/form-types-bundle": "dev-master",
         "shopsys/plugin-interface": "dev-master",
         "shopsys/product-feed-interface": "dev-master",
