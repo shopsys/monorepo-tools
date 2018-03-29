@@ -205,14 +205,8 @@ msgstr "Souhlasím s <a href=\"%termsAndConditionsUrl%\" target=\"_blank\">obcho
 msgid "I agree with <a href=\"%termsAndConditionsUrl%\" target=\"_blank\">terms and conditions</a> and privacy policy."
 msgstr "Souhlasím s <a href=\"%termsAndConditionsUrl%\" target=\"_blank\">obchodními podmínkami</a> a zpracováním osobních údajů."
 
-msgid "I agree with <a href=\"%url%\" target=\"_blank\">privacy policy agreement</a>."
-msgstr "Souhlasím se <a href=\"%url%\" target=\"_blank\">zpracováním osobních údajů</a>."
-
 msgid "I agree with <a href=\"%url%\" target=\"_blank\">privacy policy</a>."
 msgstr "Souhlasím se <a href=\"%url%\" target=\"_blank\">zpracováním osobních údajů</a>."
-
-msgid "I agree with privacy policy agreement."
-msgstr "Souhlasím se zpracováním osobních údajů."
 
 msgid "I agree with privacy policy."
 msgstr "Souhlasím se zpracováním osobních údajů."

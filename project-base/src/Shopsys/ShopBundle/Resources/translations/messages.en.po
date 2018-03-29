@@ -205,13 +205,7 @@ msgstr ""
 msgid "I agree with <a href=\"%termsAndConditionsUrl%\" target=\"_blank\">terms and conditions</a> and privacy policy."
 msgstr ""
 
-msgid "I agree with <a href=\"%url%\" target=\"_blank\">privacy policy agreement</a>."
-msgstr ""
-
 msgid "I agree with <a href=\"%url%\" target=\"_blank\">privacy policy</a>."
-msgstr ""
-
-msgid "I agree with privacy policy agreement."
 msgstr ""
 
 msgid "I agree with privacy policy."

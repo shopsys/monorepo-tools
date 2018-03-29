@@ -11,7 +11,7 @@
         {{ form_row(
             form.privacyPolicy,
             {
-                label:  'I agree with  <a href="%url%" target="_blank">privacy policy agreement</a>.'|trans({'%url%': articleUrl}),
+                label:  'I agree with  <a href="%url%" target="_blank">privacy policy</a>.'|trans({'%url%': articleUrl}),
                 errors_attr: { class: 'form-error--line-block' },
                 rawLabel:true,
                 rowClass: 'form-line-block'
@@ -21,7 +21,7 @@
         {{ form_row(
             form.privacyPolicy,
             {
-                label:  'I agree with privacy policy agreement.'|trans,
+                label:  'I agree with privacy policy.'|trans,
                 errors_attr: { class: 'form-error--line-block' },
                 rowClass: 'form-line-block'
             }
