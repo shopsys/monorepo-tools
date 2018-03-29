@@ -3,7 +3,6 @@
 namespace Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory;
 
 use Shopsys\Plugin\PluginDataFixtureInterface;
-use Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider;
 
 class HeurekaCategoryDataFixture implements PluginDataFixtureInterface
 {
@@ -11,61 +10,61 @@ class HeurekaCategoryDataFixture implements PluginDataFixtureInterface
     const HEUREKA_CATEGORY_ID_SECOND = 2;
     const HEUREKA_CATEGORY_ID_THIRD = 3;
 
-    /**
-     * @var \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider
-     */
-    private $dataStorageProvider;
+    const CATEGORY_ID_FIRST = 2;
+    const CATEGORY_ID_SECOND = 3;
+    const CATEGORY_ID_THIRD = 4;
+    const CATEGORY_ID_FOURTH = 5;
+    const CATEGORY_ID_FIFTH = 6;
 
     /**
-     * @param \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider $pluginDataStorageProvider
+     * @var \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade
      */
-    public function __construct(DataStorageProvider $pluginDataStorageProvider)
+    private $heurekaCategoryFacade;
+
+    /**
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade $heurekaCategoryFacade
+     */
+    public function __construct(HeurekaCategoryFacade $heurekaCategoryFacade)
     {
-        $this->dataStorageProvider = $pluginDataStorageProvider;
+        $this->heurekaCategoryFacade = $heurekaCategoryFacade;
     }
 
     public function load()
     {
-        $dataStorage = $this->getHeurekaCategoryDataStorage();
+        $heurekaCategoriesData = [];
 
-        $dataFixture = $this->getData();
+        $firsHeurekaCategoryData = new HeurekaCategoryData();
+        $firsHeurekaCategoryData->id = self::HEUREKA_CATEGORY_ID_FIRST;
+        $firsHeurekaCategoryData->name = 'Autobaterie';
+        $firsHeurekaCategoryData->fullName = 'Heureka.cz | Auto-moto | Autodoplňky | Autobaterie';
 
-        foreach ($dataFixture as $key => $data) {
-            $dataStorage->set($key, $data);
-        }
-    }
+        $heurekaCategoriesData[] = $firsHeurekaCategoryData;
 
-    /**
-     * @return array
-     */
-    public function getData()
-    {
-        $heurekaCategoryData = [];
+        $secondHeurekaCategoryData = new HeurekaCategoryData();
+        $secondHeurekaCategoryData->id = self::HEUREKA_CATEGORY_ID_SECOND;
+        $secondHeurekaCategoryData->name = 'Bublifuky';
+        $secondHeurekaCategoryData->fullName = 'Heureka.cz | Dětské zboží | Hračky | Hry na zahradu | Bublifuky';
 
-        $heurekaCategoryData[self::HEUREKA_CATEGORY_ID_FIRST] = [
-            'id' => self::HEUREKA_CATEGORY_ID_FIRST,
-            'name' => 'Autobaterie',
-            'full_name' => 'Heureka.cz | Auto-moto | Autodoplňky | Autobaterie',
-        ];
-        $heurekaCategoryData[self::HEUREKA_CATEGORY_ID_SECOND] = [
-            'id' => self::HEUREKA_CATEGORY_ID_SECOND,
-            'name' => 'Bublifuky',
-            'full_name' => 'Heureka.cz | Dětské zboží | Hračky | Hry na zahradu | Bublifuky',
-        ];
-        $heurekaCategoryData[self::HEUREKA_CATEGORY_ID_THIRD] = [
-            'id' => self::HEUREKA_CATEGORY_ID_THIRD,
-            'name' => 'Cukřenky',
-            'full_name' => 'Heureka.cz | Dům a zahrada | Domácnost | Kuchyně | Stolování | Cukřenky',
-        ];
+        $heurekaCategoriesData[] = $secondHeurekaCategoryData;
 
-        return $heurekaCategoryData;
-    }
+        $thirdHeurekaCategoryData = new HeurekaCategoryData();
+        $thirdHeurekaCategoryData->id = self::HEUREKA_CATEGORY_ID_THIRD;
+        $thirdHeurekaCategoryData->name = 'Cukřenky';
+        $thirdHeurekaCategoryData->fullName = 'Heureka.cz | Dům a zahrada | Domácnost | Kuchyně | Stolování | Cukřenky';
 
-    /**
-     * @return \Shopsys\Plugin\DataStorageInterface
-     */
-    private function getHeurekaCategoryDataStorage()
-    {
-        return $this->dataStorageProvider->getHeurekaCategoryDataStorage();
+        $heurekaCategoriesData[] = $thirdHeurekaCategoryData;
+
+        $this->heurekaCategoryFacade->saveHeurekaCategories($heurekaCategoriesData);
+
+        $heurekaCategoryFirst = $this->heurekaCategoryFacade->getOneById(self::HEUREKA_CATEGORY_ID_FIRST);
+        $this->heurekaCategoryFacade->changeHeurekaCategoryForCategoryId(self::CATEGORY_ID_FIRST, $heurekaCategoryFirst);
+
+        $heurekaCategorySecond = $this->heurekaCategoryFacade->getOneById(self::HEUREKA_CATEGORY_ID_SECOND);
+        $this->heurekaCategoryFacade->changeHeurekaCategoryForCategoryId(self::CATEGORY_ID_SECOND, $heurekaCategorySecond);
+        $this->heurekaCategoryFacade->changeHeurekaCategoryForCategoryId(self::CATEGORY_ID_THIRD, $heurekaCategorySecond);
+
+        $heurekaCategoryThird = $this->heurekaCategoryFacade->getOneById(self::HEUREKA_CATEGORY_ID_THIRD);
+        $this->heurekaCategoryFacade->changeHeurekaCategoryForCategoryId(self::CATEGORY_ID_FOURTH, $heurekaCategoryThird);
+        $this->heurekaCategoryFacade->changeHeurekaCategoryForCategoryId(self::CATEGORY_ID_FIFTH, $heurekaCategoryThird);
     }
 }

@@ -23,17 +23,13 @@ services:
     tags:
       - { name: shopsys.crud_extension, type: category }
 
-  Shopsys\ProductFeed\HeurekaBundle\Model\Category\CategoryDataFixture:
+  Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDataFixture:
     tags:
       - { name: shopsys.data_fixture }
 
   Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDownloader:
     arguments:
       - '%shopsys.product_feed.heureka_bundle.heureka_category_feed_url%'
-
-  Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDataFixture:
-    tags:
-      - { name: shopsys.data_fixture }
 
   Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryCronModule:
     tags:

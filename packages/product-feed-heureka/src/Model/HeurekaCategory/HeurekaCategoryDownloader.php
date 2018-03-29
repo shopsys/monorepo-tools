@@ -20,13 +20,13 @@ class HeurekaCategoryDownloader
     }
 
     /**
-     * @return array[]
+     * @return \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryData[]
      */
     public function getHeurekaCategories()
     {
-        $categoryDataObjects = $this->loadXml()->xpath('/HEUREKA//CATEGORY[CATEGORY_FULLNAME]');
+        $xmlCategoryDataObjects = $this->loadXml()->xpath('/HEUREKA//CATEGORY[CATEGORY_FULLNAME]');
 
-        return $this->convertObjectsToArrays($categoryDataObjects);
+        return $this->convertToShopEntities($xmlCategoryDataObjects);
     }
 
     /**
@@ -43,22 +43,23 @@ class HeurekaCategoryDownloader
 
     /**
      * @param \SimpleXMLElement[] $categoryDataObjects
-     * @return array[]
+     * @return \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryData[]
      */
-    private function convertObjectsToArrays(array $categoryDataObjects)
+    private function convertToShopEntities(array $xmlCategoryDataObjects)
     {
-        $categoryDataArrays = [];
+        $heurekaCategoriesData = [];
 
-        foreach ($categoryDataObjects as $categoryDataObject) {
-            $categoryId = (int)$categoryDataObject->CATEGORY_ID;
+        foreach ($xmlCategoryDataObjects as $xmlCategoryDataObject) {
+            $categoryId = (int)$xmlCategoryDataObject->CATEGORY_ID;
 
-            $categoryDataArrays[$categoryId] = [
-                'id' => $categoryId,
-                'name' => (string)$categoryDataObject->CATEGORY_NAME,
-                'full_name' => (string)$categoryDataObject->CATEGORY_FULLNAME,
-            ];
+            $heurekaCategoryData = new HeurekaCategoryData();
+            $heurekaCategoryData->id = $categoryId;
+            $heurekaCategoryData->name = (string)$xmlCategoryDataObject->CATEGORY_NAME;
+            $heurekaCategoryData->fullName = (string)$xmlCategoryDataObject->CATEGORY_FULLNAME;
+
+            $heurekaCategoriesData[$categoryId] = $heurekaCategoryData;
         }
 
-        return $categoryDataArrays;
+        return $heurekaCategoriesData;
     }
 }

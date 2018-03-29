@@ -4,6 +4,7 @@ namespace Shopsys\ProductFeed\HeurekaBundle;
 
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
+use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade;
 use Shopsys\ProductFeed\StandardFeedItemInterface;
 
 class HeurekaFeedConfig implements FeedConfigInterface
@@ -19,11 +20,20 @@ class HeurekaFeedConfig implements FeedConfigInterface
     private $heurekaCategoryFullNamesCache = [];
 
     /**
-     * @param \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider $dataStorageProvider
+     * @var \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade
      */
-    public function __construct(DataStorageProvider $dataStorageProvider)
-    {
+    private $heurekaCategoryFacade;
+
+    /**
+     * @param \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider $dataStorageProvider
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade $heurekaCategoryFacade
+     */
+    public function __construct(
+        DataStorageProvider $dataStorageProvider,
+        HeurekaCategoryFacade $heurekaCategoryFacade
+    ) {
         $this->dataStorageProvider = $dataStorageProvider;
+        $this->heurekaCategoryFacade = $heurekaCategoryFacade;
     }
 
     /**
@@ -67,15 +77,12 @@ class HeurekaFeedConfig implements FeedConfigInterface
     {
         $sellableItems = array_filter($items, [$this, 'isItemSellable']);
         $productsDataById = $this->getProductsDataIndexedByItemId($sellableItems);
-
         foreach ($sellableItems as $key => $item) {
             $cpc = $productsDataById[$item->getId()]['cpc'][$domainConfig->getId()] ?? null;
             $item->setCustomValue('cpc', $cpc);
-
             $categoryName = $this->findHeurekaCategoryFullNameByCategoryIdUsingCache($item->getMainCategoryId());
             $item->setCustomValue('category_name', $categoryName);
         }
-
         return $sellableItems;
     }
 
@@ -89,9 +96,7 @@ class HeurekaFeedConfig implements FeedConfigInterface
         foreach ($items as $item) {
             $productIds[] = $item->getId();
         }
-
         $productDataStorage = $this->dataStorageProvider->getProductDataStorage();
-
         return $productDataStorage->getMultiple($productIds);
     }
 
@@ -114,7 +119,6 @@ class HeurekaFeedConfig implements FeedConfigInterface
         if (!array_key_exists($categoryId, $this->heurekaCategoryFullNamesCache)) {
             $this->heurekaCategoryFullNamesCache[$categoryId] = $this->findHeurekaCategoryFullNameByCategoryId($categoryId);
         }
-
         return $this->heurekaCategoryFullNamesCache[$categoryId];
     }
 
@@ -124,18 +128,7 @@ class HeurekaFeedConfig implements FeedConfigInterface
      */
     private function findHeurekaCategoryFullNameByCategoryId($categoryId)
     {
-        $categoryDataStorage = $this->dataStorageProvider->getCategoryDataStorage();
-        $heurekaCategoryDataStorage = $this->dataStorageProvider->getHeurekaCategoryDataStorage();
-
-        $categoryData = $categoryDataStorage->get($categoryId);
-        $heurekaCategoryId = $categoryData['heureka_category'] ?? null;
-
-        if ($heurekaCategoryId !== null) {
-            $heurekaCategoryData = $heurekaCategoryDataStorage->get($heurekaCategoryId);
-
-            return $heurekaCategoryData['full_name'];
-        }
-
-        return null;
+        $heurekaCategory = $this->heurekaCategoryFacade->findByCategoryId($categoryId);
+        return $heurekaCategory !== null ? $heurekaCategory->getFullName() : null;
     }
 }
