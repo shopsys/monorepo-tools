@@ -2,29 +2,30 @@
 
 namespace Shopsys\ProductFeed\GoogleBundle;
 
-use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
+use Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainFacade;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class GoogleFeedConfig implements FeedConfigInterface
 {
-    /**
-     * @var \Shopsys\Plugin\PluginDataStorageProviderInterface
-     */
-    private $pluginDataStorageProvider;
 
     /**
      * @var \Symfony\Component\Translation\TranslatorInterface
      */
     private $translator;
 
+    /**
+     * @var \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainFacade
+     */
+    private $googleProductDomainFacade;
+
     public function __construct(
-        PluginDataStorageProviderInterface $pluginDataStorageProvider,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        GoogleProductDomainFacade $googleProductDomainFacade
     ) {
-        $this->pluginDataStorageProvider = $pluginDataStorageProvider;
         $this->translator = $translator;
+        $this->googleProductDomainFacade = $googleProductDomainFacade;
     }
 
     /**
@@ -70,45 +71,26 @@ class GoogleFeedConfig implements FeedConfigInterface
      */
     public function processItems(array $items, DomainConfigInterface $domainConfig)
     {
-        $productsDataById = $this->getProductsDataById($items);
+        $productsIds = [];
+        foreach ($items as $item) {
+            $productsIds[] = $item->getId();
+        }
+
+        $googleProductDomainsIndexedByProductId = $this->googleProductDomainFacade->getGoogleProductDomainsByProductsIdsDomainIdIndexedByProductId(
+            $productsIds,
+            $domainConfig->getId()
+        );
 
         foreach ($items as $key => $item) {
-            $productId = $item->getId();
+            $show = isset($googleProductDomainsIndexedByProductId[$item->getId()]) ?
+                $googleProductDomainsIndexedByProductId[$item->getId()]->getShow() : true;
 
-            if (!$this->isProductShownOnDomain($productId, $productsDataById, $domainConfig)) {
+            if (!$show) {
                 unset($items[$key]);
                 continue;
             }
         }
 
         return $items;
-    }
-
-    /**
-     * @param \Shopsys\ProductFeed\StandardFeedItemInterface[] $items
-     * @return array
-     */
-    private function getProductsDataById(array $items)
-    {
-        $productIds = [];
-        foreach ($items as $item) {
-            $productIds[] = $item->getId();
-        }
-
-        $productDataStorage = $this->pluginDataStorageProvider
-            ->getDataStorage(ShopsysProductFeedGoogleBundle::class, 'product');
-
-        return $productDataStorage->getMultiple($productIds);
-    }
-
-    /**
-     * @param int $productId
-     * @param array $productsDataById
-     * @param \Shopsys\ProductFeed\DomainConfigInterface $domainConfig
-     * @return bool
-     */
-    protected function isProductShownOnDomain($productId, $productsDataById, DomainConfigInterface $domainConfig)
-    {
-        return $productsDataById[$productId]['show'][$domainConfig->getId()] ?? true;
     }
 }

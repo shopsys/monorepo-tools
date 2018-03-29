@@ -3,27 +3,33 @@
 namespace Shopsys\ProductFeed\GoogleBundle;
 
 use Shopsys\Plugin\PluginCrudExtensionInterface;
-use Shopsys\Plugin\PluginDataStorageProviderInterface;
+use Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainData;
+use Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainFacade;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class GoogleProductCrudExtension implements PluginCrudExtensionInterface
 {
-    /**
-     * @var \Shopsys\Plugin\PluginDataStorageProviderInterface
-     */
-    private $pluginDataStorageProvider;
 
     /**
      * @var \Symfony\Component\Translation\TranslatorInterface
      */
     private $translator;
 
+    /**
+     * @var \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainFacade
+     */
+    private $googleProductDomainFacade;
+
+    /**
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainFacade $googleProductDomainFacade
+     */
     public function __construct(
-        PluginDataStorageProviderInterface $pluginDataStorageProvider,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        GoogleProductDomainFacade $googleProductDomainFacade
     ) {
-        $this->pluginDataStorageProvider = $pluginDataStorageProvider;
         $this->translator = $translator;
+        $this->googleProductDomainFacade = $googleProductDomainFacade;
     }
 
     /**
@@ -48,7 +54,15 @@ class GoogleProductCrudExtension implements PluginCrudExtensionInterface
      */
     public function getData($productId)
     {
-        return $this->getProductDataStorage()->get($productId) ?? [];
+        $googleProductDomains = $this->googleProductDomainFacade->findByProductId($productId);
+
+        $pluginData = [
+            'show' => [],
+        ];
+        foreach ($googleProductDomains as $googleProductDomain) {
+            $pluginData['show'][$googleProductDomain->getDomainId()] = $googleProductDomain->getShow();
+        }
+        return $pluginData;
     }
 
     /**
@@ -57,7 +71,44 @@ class GoogleProductCrudExtension implements PluginCrudExtensionInterface
      */
     public function saveData($productId, $data)
     {
-        $this->getProductDataStorage()->set($productId, $data);
+        $googleProductDomainsDataIndexdByDomainId = [];
+        foreach ($data as $productAttributeName => $productAttributeValuesByDomainIds) {
+            foreach ($productAttributeValuesByDomainIds as $domainId => $productAttributeValue) {
+                if (!array_key_exists($domainId, $googleProductDomainsDataIndexdByDomainId)) {
+                    $googleProductDomainsDataIndexdByDomainId[$domainId] = new GoogleProductDomainData();
+
+                    $googleProductDomainsDataIndexdByDomainId[$domainId]->domainId = $domainId;
+                }
+
+                $this->setGoogleProductDomainDataProperty(
+                    $googleProductDomainsDataIndexdByDomainId[$domainId],
+                    $productAttributeName,
+                    $productAttributeValue
+                );
+            }
+        }
+
+        $this->googleProductDomainFacade->saveGoogleProductDomainsForProductId(
+            $productId,
+            $googleProductDomainsDataIndexdByDomainId
+        );
+    }
+
+    /**
+     * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainData $googleProductDomainData
+     * @param string $propertyName
+     * @param string $propertyValue
+     */
+    private function setGoogleProductDomainDataProperty(
+        GoogleProductDomainData $googleProductDomainData,
+        $propertyName,
+        $propertyValue
+    ) {
+        switch ($propertyName) {
+            case 'show':
+                $googleProductDomainData->show = $propertyValue;
+                break;
+        }
     }
 
     /**
@@ -65,14 +116,6 @@ class GoogleProductCrudExtension implements PluginCrudExtensionInterface
      */
     public function removeData($productId)
     {
-        $this->getProductDataStorage()->remove($productId);
-    }
-
-    /**
-     * @return \Shopsys\Plugin\DataStorageInterface
-     */
-    private function getProductDataStorage()
-    {
-        return $this->pluginDataStorageProvider->getDataStorage(ShopsysProductFeedGoogleBundle::class, 'product');
+        $this->googleProductDomainFacade->delete($productId);
     }
 }
