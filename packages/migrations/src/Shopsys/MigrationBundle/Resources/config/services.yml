@@ -23,9 +23,3 @@ services:
   Doctrine\ORM\Tools\SchemaTool:
     arguments:
       - '@Doctrine\ORM\EntityManagerInterface'
-
-  Shopsys\MigrationBundle\Component\Generator\GenerateMigrationsService:
-    arguments:
-      - '@templating'
-      - '%doctrine_migrations.namespace%'
-      - '%doctrine_migrations.dir_name%'

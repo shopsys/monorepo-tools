@@ -3,6 +3,7 @@
 namespace Shopsys\MigrationBundle\Component\Doctrine\Migrations;
 
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class MigrationsLocator
@@ -36,16 +37,25 @@ class MigrationsLocator
     public function getMigrationsLocations()
     {
         $migrationsLocations = [];
-
         foreach ($this->kernel->getBundles() as $bundle) {
-            $migrationsDirectory = $bundle->getPath() . '/' . self::MIGRATIONS_DIRECTORY;
-            $migrationsNamespace = $bundle->getNamespace() . '\\' . self::MIGRATIONS_NAMESPACE;
-
-            if ($this->filesystem->exists($migrationsDirectory)) {
-                $migrationsLocations[] = new MigrationsLocation($migrationsDirectory, $migrationsNamespace);
+            $migrationsLocation = $this->createMigrationsLocation($bundle);
+            if ($this->filesystem->exists($migrationsLocation->getDirectory())) {
+                $migrationsLocations[] = $migrationsLocation;
             }
         }
 
         return $migrationsLocations;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpKernel\Bundle\BundleInterface $bundle
+     * @return \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocation
+     */
+    public function createMigrationsLocation(BundleInterface $bundle)
+    {
+        return new MigrationsLocation(
+            $bundle->getPath() . '/' . self::MIGRATIONS_DIRECTORY,
+            $bundle->getNamespace() . '\\' . self::MIGRATIONS_NAMESPACE
+        );
     }
 }

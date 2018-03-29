@@ -35,3 +35,7 @@ services:
       - '%kernel.cache_dir%'
       - '%shopsys.image_dir%'
       - '%shopsys.domain_images_dir%'
+
+  Shopsys\MigrationBundle\Command\GenerateMigrationCommand:
+    arguments:
+     - '%shopsys.vendor_dir%'

@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - updated phpunit/phpunit to version 7 (@simara-svatopluk)
 - DB migrations are installed from all registered bundles (@TomasLudvik)
     - they should be located in directory "Migrations" in the root of the bundle
+- command `shopsys:migrations:generate` now offers a list of available bundles for generating the migrations (@stanoMilan)
 
 ## [2.3.0] - 2018-02-19
 ### Added

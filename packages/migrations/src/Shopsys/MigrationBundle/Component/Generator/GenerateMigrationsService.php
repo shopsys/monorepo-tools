@@ -2,7 +2,9 @@
 
 namespace Shopsys\MigrationBundle\Component\Generator;
 
+use Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocation;
 use SqlFormatter;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Templating\EngineInterface;
 
 class GenerateMigrationsService
@@ -18,46 +20,40 @@ class GenerateMigrationsService
     private $twigEngine;
 
     /**
-     * @var string
+     * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $migrationNamespace;
-
-    /**
-     * @var string
-     */
-    private $migrationDirectory;
+    private $filesystem;
 
     /**
      * @param \Symfony\Component\Templating\EngineInterface $twigEngine
-     * @param string $migrationNamespace
-     * @param string $migrationDirectory
+     * @param \Symfony\Component\Filesystem\Filesystem $filesystem
      */
     public function __construct(
         EngineInterface $twigEngine,
-        $migrationNamespace,
-        $migrationDirectory
+        Filesystem $filesystem
     ) {
         $this->twigEngine = $twigEngine;
-        $this->migrationNamespace = $migrationNamespace;
-        $this->migrationDirectory = $migrationDirectory;
+        $this->filesystem = $filesystem;
     }
 
     /**
      * @param array $sqlCommands
+     * @param \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocation $migrationsLocation
      * @return \Shopsys\MigrationBundle\Component\Generator\GeneratorResult
      */
-    public function generate(array $sqlCommands)
+    public function generate(array $sqlCommands, MigrationsLocation $migrationsLocation)
     {
+        $this->createMigrationLocationDirectoryIfNotExists($migrationsLocation);
         $formattedSqlCommands = $this->formatSqlCommandsIfLengthOverflow($sqlCommands);
         $escapedFormattedSqlCommands = $this->escapeSqlCommands($formattedSqlCommands);
         $migrationClassName = 'Version' . date('YmdHis');
         $migrationFileRawData = $this->twigEngine->render('@ShopsysMigration/Migration/migration.php.twig', [
             'sqlCommands' => $escapedFormattedSqlCommands,
             'migrationClassName' => $migrationClassName,
-            'namespace' => $this->migrationNamespace,
+            'namespace' => $migrationsLocation->getNamespace(),
         ]);
 
-        $migrationFilePath = $this->migrationDirectory . '/' . $migrationClassName . '.php';
+        $migrationFilePath = $migrationsLocation->getDirectory() . '/' . $migrationClassName . '.php';
         $writtenBytes = file_put_contents($migrationFilePath, $migrationFileRawData);
 
         return new GeneratorResult($migrationFilePath, $writtenBytes);
@@ -129,5 +125,15 @@ class GenerateMigrationsService
         return array_map(function ($sqlCommand) {
             return str_replace('\'', "\\'", $sqlCommand);
         }, $sqlCommands);
+    }
+
+    /**
+     * @param \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocation $migrationLocation
+     */
+    private function createMigrationLocationDirectoryIfNotExists(MigrationsLocation $migrationLocation)
+    {
+        if (!$this->filesystem->exists($migrationLocation->getDirectory())) {
+            $this->filesystem->mkdir($migrationLocation->getDirectory());
+        }
     }
 }

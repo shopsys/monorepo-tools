@@ -3,10 +3,14 @@
 namespace Shopsys\MigrationBundle\Command;
 
 use Shopsys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade;
+use Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocator;
 use Shopsys\MigrationBundle\Component\Generator\GenerateMigrationsService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class GenerateMigrationCommand extends Command
 {
@@ -29,16 +33,39 @@ class GenerateMigrationCommand extends Command
     private $generateMigrationsService;
 
     /**
+     * @var \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocator
+     */
+    private $migrationsLocator;
+
+    /**
+     * @var \Symfony\Component\HttpKernel\KernelInterface
+     */
+    private $kernel;
+
+    /**
+     * @var string
+     */
+    private $vendorDirectoryPath;
+
+    /**
+     * @param string $vendorDirectoryPath
      * @param \Shopsys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade $databaseSchemaFacade
      * @param \Shopsys\MigrationBundle\Component\Generator\GenerateMigrationsService $generateMigrationsService
+     * @param \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocator $migrationsLocator
+     * @param \Symfony\Component\HttpKernel\KernelInterface $kernel
      */
     public function __construct(
+        $vendorDirectoryPath,
         DatabaseSchemaFacade $databaseSchemaFacade,
-        GenerateMigrationsService $generateMigrationsService
+        GenerateMigrationsService $generateMigrationsService,
+        MigrationsLocator $migrationsLocator,
+        KernelInterface $kernel
     ) {
         $this->databaseSchemaFacade = $databaseSchemaFacade;
         $this->generateMigrationsService = $generateMigrationsService;
-
+        $this->migrationsLocator = $migrationsLocator;
+        $this->kernel = $kernel;
+        $this->vendorDirectoryPath = $vendorDirectoryPath;
         parent::__construct();
     }
 
@@ -64,7 +91,14 @@ class GenerateMigrationCommand extends Command
             return self::RETURN_CODE_OK;
         }
 
-        $generatorResult = $this->generateMigrationsService->generate($filteredSchemaDiffSqlCommands);
+        $io = new SymfonyStyle($input, $output);
+
+        $migrationsLocation = $this->chooseMigrationLocation($io);
+
+        $generatorResult = $this->generateMigrationsService->generate(
+            $filteredSchemaDiffSqlCommands,
+            $migrationsLocation
+        );
 
         if ($generatorResult->hasError()) {
             $output->writeln('<error>Migration file "' . $generatorResult->getMigrationFilePath() . '" could not be saved.</error>');
@@ -80,5 +114,48 @@ class GenerateMigrationCommand extends Command
         ));
 
         return self::RETURN_CODE_OK;
+    }
+
+    /**
+     * @param \Symfony\Component\Console\Style\SymfonyStyle $io
+     * @return \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocation
+     */
+    private function chooseMigrationLocation(SymfonyStyle $io)
+    {
+        $bundles = $this->getAllBundleNamesExceptVendor();
+
+        if (count($bundles) > 1) {
+            $chosenBundle = $io->choice(
+                'There is more than one bundle available as the destination of generated migrations. Which bundle would you like to choose?',
+                $bundles
+            );
+        } else {
+            $chosenBundle = reset($bundles);
+        }
+
+        return $this->getMigrationLocation($this->kernel->getBundle($chosenBundle));
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getAllBundleNamesExceptVendor()
+    {
+        $bundles = [];
+        foreach ($this->kernel->getBundles() as $bundle) {
+            if (strpos(realpath($bundle->getPath()), realpath($this->vendorDirectoryPath)) !== 0) {
+                $bundles[] = $bundle->getName();
+            }
+        }
+        return $bundles;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpKernel\Bundle\BundleInterface $bundle
+     * @return \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocation
+     */
+    private function getMigrationLocation(BundleInterface $bundle)
+    {
+        return $this->migrationsLocator->createMigrationsLocation($bundle);
     }
 }
