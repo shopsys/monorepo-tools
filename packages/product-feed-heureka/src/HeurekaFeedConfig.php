@@ -5,14 +5,11 @@ namespace Shopsys\ProductFeed\HeurekaBundle;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade;
+use Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade;
 use Shopsys\ProductFeed\StandardFeedItemInterface;
 
 class HeurekaFeedConfig implements FeedConfigInterface
 {
-    /**
-     * @var \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider
-     */
-    private $dataStorageProvider;
 
     /**
      * @var string[]
@@ -20,19 +17,24 @@ class HeurekaFeedConfig implements FeedConfigInterface
     private $heurekaCategoryFullNamesCache = [];
 
     /**
+     * @var \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade
+     */
+    private $heurekaProductDomainFacade;
+
+    /**
      * @var \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade
      */
     private $heurekaCategoryFacade;
 
     /**
-     * @param \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider $dataStorageProvider
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade $heurekaProductDomainFacade
      * @param \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade $heurekaCategoryFacade
      */
     public function __construct(
-        DataStorageProvider $dataStorageProvider,
+        HeurekaProductDomainFacade $heurekaProductDomainFacade,
         HeurekaCategoryFacade $heurekaCategoryFacade
     ) {
-        $this->dataStorageProvider = $dataStorageProvider;
+        $this->heurekaProductDomainFacade = $heurekaProductDomainFacade;
         $this->heurekaCategoryFacade = $heurekaCategoryFacade;
     }
 
@@ -75,35 +77,36 @@ class HeurekaFeedConfig implements FeedConfigInterface
      */
     public function processItems(array $items, DomainConfigInterface $domainConfig)
     {
-        $sellableItems = array_filter($items, [$this, 'isItemSellable']);
-        $productsDataById = $this->getProductsDataIndexedByItemId($sellableItems);
+        $sellableItems = array_filter($items, function ($item) {
+            return $this->isItemSellable($item);
+        });
+
+        $productsIds = [];
+        foreach ($sellableItems as $item) {
+            $productsIds[] = $item->getId();
+        }
+
+        $heurekaProductDomainsIndexedByProductId = $this->heurekaProductDomainFacade->getHeurekaProductDomainsByProductsIdsDomainIdIndexedByProductId(
+            $productsIds,
+            $domainConfig->getId()
+        );
+
         foreach ($sellableItems as $key => $item) {
-            $cpc = $productsDataById[$item->getId()]['cpc'][$domainConfig->getId()] ?? null;
+            $cpc = array_key_exists($item->getId(), $heurekaProductDomainsIndexedByProductId) ?
+                $heurekaProductDomainsIndexedByProductId[$item->getId()]->getCpc() : null;
+
             $item->setCustomValue('cpc', $cpc);
+
             $categoryName = $this->findHeurekaCategoryFullNameByCategoryIdUsingCache($item->getMainCategoryId());
             $item->setCustomValue('category_name', $categoryName);
         }
-        return $sellableItems;
-    }
 
-    /**
-     * @param \Shopsys\ProductFeed\StandardFeedItemInterface[] $items
-     * @return array
-     */
-    private function getProductsDataIndexedByItemId(array $items)
-    {
-        $productIds = [];
-        foreach ($items as $item) {
-            $productIds[] = $item->getId();
-        }
-        $productDataStorage = $this->dataStorageProvider->getProductDataStorage();
-        return $productDataStorage->getMultiple($productIds);
+        return $sellableItems;
     }
 
     /**
      * @param \Shopsys\ProductFeed\StandardFeedItemInterface $item
      * @return bool
-     * @SuppressWarnings(PHPMD.UnusedPrivateMethod) method is used through array_filter
      */
     private function isItemSellable(StandardFeedItemInterface $item)
     {
@@ -119,6 +122,7 @@ class HeurekaFeedConfig implements FeedConfigInterface
         if (!array_key_exists($categoryId, $this->heurekaCategoryFullNamesCache)) {
             $this->heurekaCategoryFullNamesCache[$categoryId] = $this->findHeurekaCategoryFullNameByCategoryId($categoryId);
         }
+
         return $this->heurekaCategoryFullNamesCache[$categoryId];
     }
 
