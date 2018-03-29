@@ -3,11 +3,15 @@
 namespace Tests;
 
 use DOMDocument;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Shopsys\Plugin\DataStorageInterface;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\ProductFeed\DomainConfigInterface;
-use Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider;
 use Shopsys\ProductFeed\HeurekaBundle\HeurekaFeedConfig;
+use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategory;
+use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade;
+use Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomain;
+use Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
@@ -38,86 +42,167 @@ class HeurekaFeedTest extends TestCase
     private $twig;
 
     /**
-     * @var array[]
+     * @var \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomain[]
      */
-    private $productData;
+    private $heurekaProductDomainsForDomainFirst;
 
     /**
-     * @var array[]
+     * @var \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomain[]
      */
-    private $categoryData;
+    private $heurekaProductDomainsForDomainSecond;
 
     /**
-     * @var array[]
+     * @var \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategory
      */
-    private $heurekaCategoryData;
+    private $heurekaCategory;
+
+    /**
+     * @var array
+     */
+    private $productsIds;
 
     public function setUp()
     {
-        $dataStorageProviderMock = $this->createMock(DataStorageProvider::class);
+        $this->initTestData();
 
-        $this->productData = [];
-        $productDataStorageMock = $this->createMock(DataStorageInterface::class);
-        $productDataStorageMock->method('getMultiple')
-            ->willReturnCallback(function (array $productIds) {
-                return array_intersect_key($this->productData, array_fill_keys($productIds, null));
-            });
-        $dataStorageProviderMock->method('getProductDataStorage')
-            ->willReturn($productDataStorageMock);
+        $heurekaProductDomainFacadeMock = $this->createHeurekaProductDomainFacadeMock();
 
-        $this->categoryData = [];
-        $categoryDataStorageMock = $this->createMock(DataStorageInterface::class);
-        $categoryDataStorageMock->method('get')
-            ->willReturnCallback(function ($categoryId) {
-                return $this->categoryData[$categoryId] ?? null;
-            });
-        $dataStorageProviderMock->method('getCategoryDataStorage')
-            ->willReturn($categoryDataStorageMock);
+        $heurekaCategoryFacadeMock = $this->createHeurekaCategoryFacadeMock();
 
-        $this->heurekaCategoryData = [];
-        $heurekaCategoryDataStorageMock = $this->createMock(DataStorageInterface::class);
-        $heurekaCategoryDataStorageMock->method('get')
-            ->willReturnCallback(function ($heurekaCategoryId) {
-                return $this->heurekaCategoryData[$heurekaCategoryId] ?? null;
-            });
-        $dataStorageProviderMock->method('getHeurekaCategoryDataStorage')
-            ->willReturn($heurekaCategoryDataStorageMock);
-
-        $this->heurekaFeedConfig = new HeurekaFeedConfig($dataStorageProviderMock);
+        $this->heurekaFeedConfig = new HeurekaFeedConfig($heurekaProductDomainFacadeMock, $heurekaCategoryFacadeMock);
 
         $twigLoader = new Twig_Loader_Filesystem([__DIR__ . '/../src/Resources/views']);
         $this->twig = new Twig_Environment($twigLoader);
     }
 
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade
+     */
+    private function createHeurekaProductDomainFacadeMock()
+    {
+        $returnCallback = function ($productsIds, $domainId) {
+            if ($productsIds === $this->productsIds && $domainId === self::DOMAIN_ID_FIRST) {
+                return $this->heurekaProductDomainsForDomainFirst;
+            } elseif ($productsIds === $this->productsIds && $domainId === self::DOMAIN_ID_SECOND) {
+                return $this->heurekaProductDomainsForDomainSecond;
+            }
+            return [];
+        };
+
+        /** @var HeurekaProductDomainFacade|\PHPUnit\Framework\MockObject\MockObject $heurekaProductDomainFacadeMock */
+        $heurekaProductDomainFacadeMock = $this->createMock(HeurekaProductDomainFacade::class);
+
+        $heurekaProductDomainFacadeMock->method('getHeurekaProductDomainsByProductsIdsDomainIdIndexedByProductId')
+            ->willReturnCallback($returnCallback);
+
+        return $heurekaProductDomainFacadeMock;
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade
+     */
+    private function createHeurekaCategoryFacadeMock()
+    {
+        $returnCallback = function ($categoryId) {
+            if ($categoryId === self::CATEGORY_ID_FIRST) {
+                return $this->heurekaCategory;
+            }
+            return null;
+        };
+
+        /** @var HeurekaCategoryFacade|\PHPUnit\Framework\MockObject\MockObject $heurekaCategoryFacadeMock */
+        $heurekaCategoryFacadeMock = $this->createMock(HeurekaCategoryFacade::class);
+
+        $heurekaCategoryFacadeMock
+            ->method('findByCategoryId')
+            ->willReturnCallback($returnCallback);
+
+        return $heurekaCategoryFacadeMock;
+    }
+
+    private function initTestData()
+    {
+        $this->productsIds = [self::PRODUCT_ID_FIRST, self::PRODUCT_ID_SECOND];
+
+        $firstProductMock = $this->createProductMock(self::PRODUCT_ID_FIRST);
+
+        $heurekaProductDomainForFirstProductFirstDomainMock = $this->createHeurekaProductDomainMock(
+            $firstProductMock,
+            self::DOMAIN_ID_FIRST,
+            7.5
+        );
+
+        $this->heurekaProductDomainsForDomainFirst[self::PRODUCT_ID_FIRST] = $heurekaProductDomainForFirstProductFirstDomainMock;
+
+        $heurekaProductDomainForFirstProductSecondDomainMock = $this->createHeurekaProductDomainMock(
+            $firstProductMock,
+            self::DOMAIN_ID_SECOND,
+            null
+        );
+
+        $this->heurekaProductDomainsForDomainSecond[self::PRODUCT_ID_FIRST] = $heurekaProductDomainForFirstProductSecondDomainMock;
+
+        $secondProductMock = $this->createProductMock(self::PRODUCT_ID_SECOND);
+
+        $heurekaProductDomainForSecondProductFirstDomainMock = $this->createHeurekaProductDomainMock(
+            $secondProductMock,
+            self::DOMAIN_ID_FIRST,
+            null
+        );
+
+        $this->heurekaProductDomainsForDomainFirst[self::PRODUCT_ID_SECOND] = $heurekaProductDomainForSecondProductFirstDomainMock;
+
+        $heurekaProductDomainForSecondProductSecondDomainMock = $this->createHeurekaProductDomainMock(
+            $secondProductMock,
+            self::DOMAIN_ID_SECOND,
+            null
+        );
+
+        $this->heurekaProductDomainsForDomainSecond[self::PRODUCT_ID_SECOND] = $heurekaProductDomainForSecondProductSecondDomainMock;
+
+        $this->heurekaCategory = $this->getMockBuilder(HeurekaCategory::class)
+            ->setMethods(['getFullName'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->heurekaCategory->method('getFullName')->willReturn('fullCategoryName');
+    }
+
+    /**
+     * @param int $productId
+     * @return \PHPUnit\Framework\MockObject\MockObject
+     */
+    private function createProductMock($productId)
+    {
+        $productMock = $this->getMockBuilder(Product::class)
+            ->setMethods(['getId'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $productMock->method('getId')->willReturn($productId);
+
+        return $productMock;
+    }
+
+    /**
+     * @param \PHPUnit\Framework\MockObject\MockObject $productMock
+     * @param int $domainId
+     * @param float|null $cpc
+     * @return \PHPUnit\Framework\MockObject\MockObject
+     */
+    private function createHeurekaProductDomainMock(MockObject $productMock, $domainId, $cpc)
+    {
+        $heurekaProductDomainMock = $this->getMockBuilder(HeurekaProductDomain::class)
+            ->setMethods(['getProduct', 'getDomainId', 'getCpc'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $heurekaProductDomainMock->method('getProduct')->willReturn($productMock);
+        $heurekaProductDomainMock->method('getDomainId')->willReturn($domainId);
+        $heurekaProductDomainMock->method('getCpc')->willReturn($cpc);
+
+        return $heurekaProductDomainMock;
+    }
+
     public function testGeneratingOfFeed()
     {
-        $this->productData = [
-            self::PRODUCT_ID_FIRST => [
-                'cpc' => [
-                    self::DOMAIN_ID_FIRST => 7.5,
-                    self::DOMAIN_ID_SECOND => null,
-                ],
-            ],
-            self::PRODUCT_ID_SECOND => [
-                'cpc' => [
-                    self::DOMAIN_ID_FIRST => null,
-                    self::DOMAIN_ID_SECOND => null,
-                ],
-            ],
-        ];
-        $this->categoryData = [
-            self::CATEGORY_ID_FIRST => [
-                'heureka_category' => self::HEUREKA_CATEGORY_ID_FIRST,
-            ],
-        ];
-        $this->heurekaCategoryData = [
-            self::HEUREKA_CATEGORY_ID_FIRST => [
-                'id' => self::HEUREKA_CATEGORY_ID_FIRST,
-                'name' => 'categoryName',
-                'full_name' => 'fullCategoryName',
-            ],
-        ];
-
         $feedItems = $this->getFeedItemsData();
         $domainConfigMock = $this->createDomainConfigMock(self::DOMAIN_ID_FIRST, 'http://www.example.com/', 'en');
         $processedFeedItems = $this->heurekaFeedConfig->processItems($feedItems, $domainConfigMock);
