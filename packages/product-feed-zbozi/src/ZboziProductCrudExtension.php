@@ -3,27 +3,32 @@
 namespace Shopsys\ProductFeed\ZboziBundle;
 
 use Shopsys\Plugin\PluginCrudExtensionInterface;
-use Shopsys\Plugin\PluginDataStorageProviderInterface;
+use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData;
+use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ZboziProductCrudExtension implements PluginCrudExtensionInterface
 {
     /**
-     * @var \Shopsys\Plugin\PluginDataStorageProviderInterface
-     */
-    private $pluginDataStorageProvider;
-
-    /**
      * @var \Symfony\Component\Translation\TranslatorInterface
      */
     private $translator;
 
+    /**
+     * @var \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade
+     */
+    private $zboziProductDomainFacade;
+
+    /**
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade $zboziProductDomainFacade
+     */
     public function __construct(
-        PluginDataStorageProviderInterface $pluginDataStorageProvider,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        ZboziProductDomainFacade $zboziProductDomainFacade
     ) {
-        $this->pluginDataStorageProvider = $pluginDataStorageProvider;
         $this->translator = $translator;
+        $this->zboziProductDomainFacade = $zboziProductDomainFacade;
     }
 
     /**
@@ -48,7 +53,9 @@ class ZboziProductCrudExtension implements PluginCrudExtensionInterface
      */
     public function getData($productId)
     {
-        return $this->getProductDataStorage()->get($productId) ?? [];
+        $zboziProductDomains = $this->zboziProductDomainFacade->findByProductId($productId);
+
+        return !empty($zboziProductDomains) ? $this->getZboziProductDomainsAsPluginDataArray($zboziProductDomains) : [];
     }
 
     /**
@@ -57,7 +64,72 @@ class ZboziProductCrudExtension implements PluginCrudExtensionInterface
      */
     public function saveData($productId, $data)
     {
-        $this->getProductDataStorage()->set($productId, $data);
+        $zboziProductDomainsDataIndexedByDomainId = [];
+
+        foreach ($data as $productAttributeName => $productAttributeValuesByDomainIds) {
+            foreach ($productAttributeValuesByDomainIds as $domainId => $productAttributeValue) {
+                if (!array_key_exists($domainId, $zboziProductDomainsDataIndexedByDomainId)) {
+                    $zboziProductDomainsDataIndexedByDomainId[$domainId] = new ZboziProductDomainData();
+
+                    $zboziProductDomainsDataIndexedByDomainId[$domainId]->domainId = $domainId;
+                }
+
+                $this->setZboziProductDomainDataProperty(
+                    $zboziProductDomainsDataIndexedByDomainId[$domainId],
+                    $productAttributeName,
+                    $productAttributeValue
+                );
+            }
+        }
+
+        $this->zboziProductDomainFacade->saveZboziProductDomainsForProductId(
+            $productId,
+            $zboziProductDomainsDataIndexedByDomainId
+        );
+    }
+
+    /**
+     * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData $zboziProductDomainData
+     * @param string $propertyName
+     * @param string $propertyValue
+     */
+    private function setZboziProductDomainDataProperty(
+        ZboziProductDomainData $zboziProductDomainData,
+        $propertyName,
+        $propertyValue
+    ) {
+        switch ($propertyName) {
+            case 'show':
+                $zboziProductDomainData->show = $propertyValue;
+                break;
+            case 'cpc':
+                $zboziProductDomainData->cpc = $propertyValue;
+                break;
+            case 'cpc_search':
+                $zboziProductDomainData->cpcSearch = $propertyValue;
+                break;
+        }
+    }
+
+    /**
+     * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomain[] $zboziProductDomains
+     * @return array
+     */
+    private function getZboziProductDomainsAsPluginDataArray(array $zboziProductDomains)
+    {
+        $pluginData = [
+            'show' => [],
+            'cpc' => [],
+            'cpc_search' => [],
+        ];
+
+        foreach ($zboziProductDomains as $zboziProductDomain) {
+            $pluginData['show'][$zboziProductDomain->getDomainId()] = $zboziProductDomain->getShow();
+            $pluginData['cpc'][$zboziProductDomain->getDomainId()] = $zboziProductDomain->getCpc();
+            $pluginData['cpc_search'][$zboziProductDomain->getDomainId()] = $zboziProductDomain->getCpcSearch();
+        }
+
+        return $pluginData;
     }
 
     /**
@@ -65,14 +137,6 @@ class ZboziProductCrudExtension implements PluginCrudExtensionInterface
      */
     public function removeData($productId)
     {
-        $this->getProductDataStorage()->remove($productId);
-    }
-
-    /**
-     * @return \Shopsys\Plugin\DataStorageInterface
-     */
-    private function getProductDataStorage()
-    {
-        return $this->pluginDataStorageProvider->getDataStorage(ShopsysProductFeedZboziBundle::class, 'product');
+        $this->zboziProductDomainFacade->delete($productId);
     }
 }

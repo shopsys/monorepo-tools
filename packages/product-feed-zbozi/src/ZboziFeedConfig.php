@@ -2,22 +2,25 @@
 
 namespace Shopsys\ProductFeed\ZboziBundle;
 
-use Shopsys\Plugin\PluginDataStorageProviderInterface;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\FeedConfigInterface;
 use Shopsys\ProductFeed\StandardFeedItemInterface;
+use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade;
 
 class ZboziFeedConfig implements FeedConfigInterface
 {
     /**
-     * @var \Shopsys\Plugin\PluginDataStorageProviderInterface
+     * @var \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade
      */
-    private $pluginDataStorageProvider;
+    private $zboziProductDomainFacade;
 
+    /**
+     * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade $zboziProductDomainFacade
+     */
     public function __construct(
-        PluginDataStorageProviderInterface $pluginDataStorageProvider
+        ZboziProductDomainFacade $zboziProductDomainFacade
     ) {
-        $this->pluginDataStorageProvider = $pluginDataStorageProvider;
+        $this->zboziProductDomainFacade = $zboziProductDomainFacade;
     }
 
     /**
@@ -59,42 +62,39 @@ class ZboziFeedConfig implements FeedConfigInterface
      */
     public function processItems(array $items, DomainConfigInterface $domainConfig)
     {
-        $domainId = $domainConfig->getId();
         $sellableItems = array_filter($items, [$this, 'isItemSellable']);
-        $productsDataById = $this->getProductsDataIndexedByItemId($sellableItems);
+
+        $productsIds = [];
+        foreach ($sellableItems as $item) {
+            $productsIds[] = $item->getId();
+        }
+
+        $zboziProductDomainsIndexedByProductId = $this->zboziProductDomainFacade->getZboziProductDomainsByProductsIdsDomainIdIndexedByProductId(
+            $productsIds,
+            $domainConfig->getId()
+        );
 
         foreach ($sellableItems as $key => $item) {
-            $itemId = $item->getId();
-            $productData = $productsDataById[$itemId] ?? [];
-            $showInFeed = $productData['show'][$domainId] ?? true;
+            $show = true;
+            $cpc = null;
+            $cpcSearch = null;
 
-            if (!$showInFeed) {
+            if (array_key_exists($item->getId(), $zboziProductDomainsIndexedByProductId)) {
+                $show = $zboziProductDomainsIndexedByProductId[$item->getId()]->getShow();
+                $cpc = $zboziProductDomainsIndexedByProductId[$item->getId()]->getCpc();
+                $cpcSearch = $zboziProductDomainsIndexedByProductId[$item->getId()]->getCpcSearch();
+            }
+
+            if (!$show) {
                 unset($sellableItems[$key]);
                 continue;
             }
 
-            $item->setCustomValue('cpc', $productData['cpc'][$domainId] ?? null);
-            $item->setCustomValue('cpc_search', $productData['cpc_search'][$domainId] ?? null);
+            $item->setCustomValue('cpc', $cpc);
+            $item->setCustomValue('cpc_search', $cpcSearch);
         }
 
         return $sellableItems;
-    }
-
-    /**
-     * @param \Shopsys\ProductFeed\StandardFeedItemInterface[] $items
-     * @return array
-     */
-    private function getProductsDataIndexedByItemId(array $items)
-    {
-        $productIds = [];
-        foreach ($items as $item) {
-            $productIds[] = $item->getId();
-        }
-
-        $productDataStorage = $this->pluginDataStorageProvider
-            ->getDataStorage(ShopsysProductFeedZboziBundle::class, 'product');
-
-        return $productDataStorage->getMultiple($productIds);
     }
 
     /**

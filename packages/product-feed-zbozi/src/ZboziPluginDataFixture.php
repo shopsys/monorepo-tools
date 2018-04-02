@@ -3,7 +3,8 @@
 namespace Shopsys\ProductFeed\ZboziBundle;
 
 use Shopsys\Plugin\PluginDataFixtureInterface;
-use Shopsys\Plugin\PluginDataStorageProviderInterface;
+use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData;
+use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade;
 
 class ZboziPluginDataFixture implements PluginDataFixtureInterface
 {
@@ -16,13 +17,13 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
     const PRODUCT_ID_FIFTH = 5;
 
     /**
-     * @var \Shopsys\Plugin\PluginDataStorageProviderInterface
+     * @var ZboziProductDomainFacade
      */
-    private $pluginDataStorageProvider;
+    private $zboziProductDomainFacade;
 
-    public function __construct(PluginDataStorageProviderInterface $pluginDataStorageProvider)
+    public function __construct(ZboziProductDomainFacade $zboziProductDomainFacade)
     {
-        $this->pluginDataStorageProvider = $pluginDataStorageProvider;
+        $this->zboziProductDomainFacade = $zboziProductDomainFacade;
     }
 
     /**
@@ -30,89 +31,84 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
      */
     public function load()
     {
-        $productDataStorage = $this->getProductDataStorage();
+        $firstZboziProductDomainData = new ZboziProductDomainData();
+        $firstZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
+        $firstZboziProductDomainData->cpc = 15;
+        $firstZboziProductDomainData->cpcSearch = 8;
+        $firstZboziProductDomainData->show = true;
 
-        $productDataStorage->set(self::PRODUCT_ID_FIRST, [
-            'cpc' => [
-                self::DOMAIN_ID_FIRST => 15,
-                self::DOMAIN_ID_SECOND => 12,
-            ],
-            'cpc_search' => [
-                self::DOMAIN_ID_FIRST => 8,
-                self::DOMAIN_ID_SECOND => 15,
-            ],
-            'show' => [
-                self::DOMAIN_ID_FIRST => true,
-                self::DOMAIN_ID_SECOND => true,
-            ],
-        ]);
+        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FIRST, $firstZboziProductDomainData);
 
-        $productDataStorage->set(self::PRODUCT_ID_SECOND, [
-            'cpc' => [
-                self::DOMAIN_ID_FIRST => 5,
-                self::DOMAIN_ID_SECOND => 20,
-            ],
-            'cpc_search' => [
-                self::DOMAIN_ID_FIRST => 3,
-                self::DOMAIN_ID_SECOND => 5,
-            ],
-            'show' => [
-                self::DOMAIN_ID_FIRST => false,
-                self::DOMAIN_ID_SECOND => true,
-            ],
-        ]);
+        $secondZboziProductDomainData = new ZboziProductDomainData();
+        $secondZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
+        $secondZboziProductDomainData->cpc = 12;
+        $secondZboziProductDomainData->cpcSearch = 15;
+        $secondZboziProductDomainData->show = true;
 
-        $productDataStorage->set(self::PRODUCT_ID_THIRD, [
-            'cpc' => [
-                self::DOMAIN_ID_FIRST => 10,
-                self::DOMAIN_ID_SECOND => 15,
-            ],
-            'cpc_search' => [
-                self::DOMAIN_ID_FIRST => 5,
-                self::DOMAIN_ID_SECOND => 7,
-            ],
-            'show' => [
-                self::DOMAIN_ID_FIRST => false,
-                self::DOMAIN_ID_SECOND => false,
-            ],
-        ]);
+        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FIRST, $secondZboziProductDomainData);
 
-        $productDataStorage->set(self::PRODUCT_ID_FOURTH, [
-            'cpc' => [
-                self::DOMAIN_ID_FIRST => 9,
-                self::DOMAIN_ID_SECOND => 4,
-            ],
-            'cpc_search' => [
-                self::DOMAIN_ID_FIRST => 8,
-                self::DOMAIN_ID_SECOND => 3,
-            ],
-            'show' => [
-                self::DOMAIN_ID_FIRST => true,
-                self::DOMAIN_ID_SECOND => true,
-            ],
-        ]);
+        $thirdZboziProductDomainData = new ZboziProductDomainData();
+        $thirdZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
+        $thirdZboziProductDomainData->cpc = 5;
+        $thirdZboziProductDomainData->cpcSearch = 3;
+        $thirdZboziProductDomainData->show = false;
 
-        $productDataStorage->set(self::PRODUCT_ID_FIFTH, [
-            'cpc' => [
-                self::DOMAIN_ID_FIRST => 4,
-                self::DOMAIN_ID_SECOND => 5,
-            ],
-            'cpc_search' => [
-                self::DOMAIN_ID_FIRST => 2,
-                self::DOMAIN_ID_SECOND => 6,
-            ],
-            'show' => [
-                self::DOMAIN_ID_FIRST => true,
-                self::DOMAIN_ID_SECOND => false,
-            ],
-        ]);
-    }
+        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_SECOND, $thirdZboziProductDomainData);
 
-    /**
-     * @return \Shopsys\Plugin\DataStorageInterface
-     */
-    private function getProductDataStorage()
-    {
-        return $this->pluginDataStorageProvider->getDataStorage(ShopsysProductFeedZboziBundle::class, 'product');
+        $fourthZboziProductDomainData = new ZboziProductDomainData();
+        $fourthZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
+        $fourthZboziProductDomainData->cpc = 20;
+        $fourthZboziProductDomainData->cpcSearch = 5;
+        $fourthZboziProductDomainData->show = true;
+
+        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_SECOND, $fourthZboziProductDomainData);
+
+        $fifthZboziProductDomainData = new ZboziProductDomainData();
+        $fifthZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
+        $fifthZboziProductDomainData->cpc = 10;
+        $fifthZboziProductDomainData->cpcSearch = 5;
+        $fifthZboziProductDomainData->show = false;
+
+        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_THIRD, $fifthZboziProductDomainData);
+
+        $sixthZboziProductDomainData = new ZboziProductDomainData();
+        $sixthZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
+        $sixthZboziProductDomainData->cpc = 15;
+        $sixthZboziProductDomainData->cpcSearch = 7;
+        $sixthZboziProductDomainData->show = false;
+
+        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_THIRD, $sixthZboziProductDomainData);
+
+        $seventhZboziProductDomainData = new ZboziProductDomainData();
+        $seventhZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
+        $seventhZboziProductDomainData->cpc = 9;
+        $seventhZboziProductDomainData->cpcSearch = 8;
+        $seventhZboziProductDomainData->show = true;
+
+        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FOURTH, $seventhZboziProductDomainData);
+
+        $eighthZboziProductDomainData = new ZboziProductDomainData();
+        $eighthZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
+        $eighthZboziProductDomainData->cpc = 4;
+        $eighthZboziProductDomainData->cpcSearch = 3;
+        $eighthZboziProductDomainData->show = true;
+
+        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FOURTH, $eighthZboziProductDomainData);
+
+        $ninthZboziProductDomainData = new ZboziProductDomainData();
+        $ninthZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
+        $ninthZboziProductDomainData->cpc = 4;
+        $ninthZboziProductDomainData->cpcSearch = 2;
+        $ninthZboziProductDomainData->show = true;
+
+        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FIFTH, $ninthZboziProductDomainData);
+
+        $tenthZboziProductDomainData = new ZboziProductDomainData();
+        $tenthZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
+        $tenthZboziProductDomainData->cpc = 5;
+        $tenthZboziProductDomainData->cpcSearch = 6;
+        $tenthZboziProductDomainData->show = false;
+
+        $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FIFTH, $tenthZboziProductDomainData);
     }
 }
