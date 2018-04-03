@@ -17,16 +17,16 @@
         }
     },
     "require": {
+        "php": "^5.6|^7.0",
         "doctrine/dbal": "~2.5",
         "doctrine/doctrine-migrations-bundle": "~1.1",
         "doctrine/orm": "~2.5",
         "jdorn/sql-formatter": "~1.2",
-        "php": "^5.6 || ^7.0",
         "symfony/framework-bundle": "^2.7.3 || ~3",
         "symfony/templating": "^2.7.3 || ~3"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.0",
+        "phpunit/phpunit": "^5.7|^6.0|^7.0",
         "shopsys/coding-standards": "3.0.1"
     }
 }

@@ -23,6 +23,7 @@
         }
     },
     "require": {
+        "php": "^7.0",
         "shopsys/form-types-bundle": "dev-master",
         "shopsys/plugin-interface": "dev-master",
         "shopsys/product-feed-interface": "dev-master",
@@ -33,7 +34,7 @@
     },
     "require-dev": {
         "shopsys/coding-standards": "3.0.2",
-        "phpunit/phpunit": "^7.0",
+        "phpunit/phpunit": "^6.0|^7.0",
         "twig/extensions": "1.3.0",
         "twig/twig": "1.34.0"
     }
