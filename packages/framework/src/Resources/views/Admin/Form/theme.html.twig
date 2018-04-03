@@ -258,7 +258,7 @@
 {% block textarea_row -%}
     {% if localized is defined %}
         <div class="form-line__side">
-            <div class="form-line__item">
+            <div class="form-line__item--full-width">
                 <div class="input__wrap">
                     {% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--flag')|trim}) %}
                     {{ form_widget(form, { attr: inputAttr, localized: true, locale: locale }) }}
@@ -288,7 +288,7 @@
             {{- form_errors(form) -}}
             {% if newline is not defined %}
                 <div{% if isMultidomain() %} class="form-line__side"{% endif %}>
-                    <div class="form-line__item">
+                    <div class="form-line__item--full-width">
                         {{- form_widget(form) -}}
                     </div>
                 </div>
