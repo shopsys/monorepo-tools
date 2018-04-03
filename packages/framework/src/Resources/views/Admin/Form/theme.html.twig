@@ -294,7 +294,7 @@
                 </div>
             {% else %}
                 <div{% if isMultidomain() %} class="form-line__side"{% endif %}>
-                    {% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--textarea-big')|trim}) %}
+                    {% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--textarea')|trim}) %}
                     {{- form_widget(form, { attr: inputAttr } ) -}}
                 </div>
             {% endif %}
