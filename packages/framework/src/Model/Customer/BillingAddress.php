@@ -17,70 +17,70 @@ class BillingAddress
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean", nullable=false)
      */
-    private $companyCustomer;
+    protected $companyCustomer;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $companyName;
+    protected $companyName;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $companyNumber;
+    protected $companyNumber;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $companyTaxNumber;
+    protected $companyTaxNumber;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $street;
+    protected $street;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $city;
+    protected $city;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private $postcode;
+    protected $postcode;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private $telephone;
+    protected $telephone;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\Country|null
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Country\Country")
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=true)
      */
-    private $country;
+    protected $country;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressData $billingAddressData

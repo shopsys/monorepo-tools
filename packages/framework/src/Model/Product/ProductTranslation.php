@@ -22,21 +22,21 @@ class ProductTranslation extends AbstractTranslation
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(type="tsvector", nullable=false)
      */
-    private $nameTsvector;
+    protected $nameTsvector;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $variantAlias;
+    protected $variantAlias;
 
     /**
      * @return string

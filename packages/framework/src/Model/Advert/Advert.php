@@ -25,56 +25,56 @@ class Advert
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $type;
+    protected $type;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $code;
+    protected $code;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $link;
+    protected $link;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $positionName;
+    protected $positionName;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $hidden;
+    protected $hidden;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertData $advert

@@ -55,42 +55,42 @@ class Product extends AbstractTranslatableEntity
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $catnum;
+    protected $catnum;
 
     /**
      * @var string
      *
      * @ORM\Column(type="tsvector", nullable=false)
      */
-    private $catnumTsvector;
+    protected $catnumTsvector;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $partno;
+    protected $partno;
 
     /**
      * @var string
      *
      * @ORM\Column(type="tsvector", nullable=false)
      */
-    private $partnoTsvector;
+    protected $partnoTsvector;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $ean;
+    protected $ean;
 
     /**
      * @var string
      *
      * @ORM\Column(type="decimal", precision=20, scale=6)
      */
-    private $price;
+    protected $price;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
@@ -98,63 +98,63 @@ class Product extends AbstractTranslatableEntity
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $vat;
+    protected $vat;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(type="date", nullable=true)
      */
-    private $sellingFrom;
+    protected $sellingFrom;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(type="date", nullable=true)
      */
-    private $sellingTo;
+    protected $sellingTo;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $sellingDenied;
+    protected $sellingDenied;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $calculatedSellingDenied;
+    protected $calculatedSellingDenied;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $hidden;
+    protected $hidden;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $calculatedHidden;
+    protected $calculatedHidden;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $usingStock;
+    protected $usingStock;
 
     /**
      * @var int|null
      *
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $stockQuantity;
+    protected $stockQuantity;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\Unit
@@ -162,49 +162,49 @@ class Product extends AbstractTranslatableEntity
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Unit\Unit")
      * @ORM\JoinColumn(name="unit_id", referencedColumnName="id", nullable=false)
      */
-    private $unit;
+    protected $unit;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", nullable=true)
      */
-    private $outOfStockAction;
+    protected $outOfStockAction;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\Availability|null
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Availability\Availability")
      * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=true)
      */
-    private $availability;
+    protected $availability;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\Availability|null
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Availability\Availability")
      * @ORM\JoinColumn(name="out_of_stock_availability_id", referencedColumnName="id", nullable=true)
      */
-    private $outOfStockAvailability;
+    protected $outOfStockAvailability;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Availability\Availability")
      * @ORM\JoinColumn(name="calculated_availability_id", referencedColumnName="id", nullable=false)
      */
-    private $calculatedAvailability;
+    protected $calculatedAvailability;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean", options={"default" = true})
      */
-    private $recalculateAvailability;
+    protected $recalculateAvailability;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $calculatedVisibility;
+    protected $calculatedVisibility;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomain[]
@@ -216,7 +216,7 @@ class Product extends AbstractTranslatableEntity
      *   cascade={"persist"}
      * )
      */
-    private $productCategoryDomains;
+    protected $productCategoryDomains;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
@@ -224,28 +224,28 @@ class Product extends AbstractTranslatableEntity
      * @ORM\ManyToMany(targetEntity="Shopsys\FrameworkBundle\Model\Product\Flag\Flag")
      * @ORM\JoinTable(name="product_flags")
      */
-    private $flags;
+    protected $flags;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=32)
      */
-    private $priceCalculationType;
+    protected $priceCalculationType;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean", options={"default" = true})
      */
-    private $recalculatePrice;
+    protected $recalculatePrice;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean", options={"default" = true})
      */
-    private $recalculateVisibility;
+    protected $recalculateVisibility;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\Brand|null
@@ -253,14 +253,14 @@ class Product extends AbstractTranslatableEntity
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Brand\Brand")
      * @ORM\JoinColumn(name="brand_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
-    private $brand;
+    protected $brand;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\FrameworkBundle\Model\Product\Product[]
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product", mappedBy="mainVariant", cascade={"persist"})
      */
-    private $variants;
+    protected $variants;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Product|null
@@ -268,27 +268,27 @@ class Product extends AbstractTranslatableEntity
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product", inversedBy="variants", cascade={"persist"})
      * @ORM\JoinColumn(name="main_variant_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $mainVariant;
+    protected $mainVariant;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=32, nullable=false)
      */
-    private $variantType;
+    protected $variantType;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $orderingPriority;
+    protected $orderingPriority;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[]|null $variants
      */
-    private function __construct(ProductData $productData, array $variants = null)
+    protected function __construct(ProductData $productData, array $variants = null)
     {
         $this->translations = new ArrayCollection();
         $this->catnum = $productData->catnum;
@@ -394,7 +394,7 @@ class Product extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[] $flags
      */
-    private function editFlags(array $flags)
+    protected function editFlags(array $flags)
     {
         $this->flags->clear();
         foreach ($flags as $flag) {
@@ -653,7 +653,7 @@ class Product extends AbstractTranslatableEntity
      * @param \Shopsys\FrameworkBundle\Model\Category\Category[] $newCategories
      * @param int $domainId
      */
-    private function createNewProductCategoryDomains(array $newCategories, $domainId)
+    protected function createNewProductCategoryDomains(array $newCategories, $domainId)
     {
         $currentProductCategoryDomainsOnDomainByCategoryId = $this->getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId);
 
@@ -669,7 +669,7 @@ class Product extends AbstractTranslatableEntity
      * @param \Shopsys\FrameworkBundle\Model\Category\Category[] $newCategories
      * @param int $domainId
      */
-    private function removeOldProductCategoryDomains(array $newCategories, $domainId)
+    protected function removeOldProductCategoryDomains(array $newCategories, $domainId)
     {
         $currentProductCategoryDomains = $this->getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId);
 
@@ -684,7 +684,7 @@ class Product extends AbstractTranslatableEntity
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomain[]
      */
-    private function getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId)
+    protected function getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId)
     {
         $productCategoryDomainsByCategoryId = [];
 
@@ -738,7 +738,7 @@ class Product extends AbstractTranslatableEntity
     /**
      * @return bool
      */
-    private function getCalculatedVisibility()
+    protected function getCalculatedVisibility()
     {
         return $this->calculatedVisibility;
     }
@@ -821,7 +821,7 @@ class Product extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $variants
      */
-    private function addVariants(array $variants)
+    protected function addVariants(array $variants)
     {
         foreach ($variants as $variant) {
             $this->addVariant($variant);
@@ -848,9 +848,9 @@ class Product extends AbstractTranslatableEntity
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $mainVariant
-     * @SuppressWarnings(PHPMD.UnusedPrivateMethod) method is used but not through $this
+     * @SuppressWarnings(PHPMD.UnusedprotectedMethod) method is used but not through $this
      */
-    private function setMainVariant(self $mainVariant)
+    protected function setMainVariant(self $mainVariant)
     {
         $this->variantType = self::VARIANT_TYPE_VARIANT;
         $this->mainVariant = $mainVariant;
@@ -875,7 +875,7 @@ class Product extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      */
-    private function setTranslations(ProductData $productData)
+    protected function setTranslations(ProductData $productData)
     {
         foreach ($productData->name as $locale => $name) {
             $this->translation($locale)->setName($name);

@@ -17,7 +17,7 @@ class CategoryDomain
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category", inversedBy="domains")
      * @ORM\JoinColumn(nullable=false, name="category_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $category;
+    protected $category;
 
     /**
      * @var int
@@ -25,49 +25,49 @@ class CategoryDomain
      * @ORM\Id
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $seoTitle;
+    protected $seoTitle;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $seoMetaDescription;
+    protected $seoMetaDescription;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $seoH1;
+    protected $seoH1;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $hidden;
+    protected $hidden;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $visible;
+    protected $visible;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category

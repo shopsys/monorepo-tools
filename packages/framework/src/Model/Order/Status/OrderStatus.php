@@ -39,7 +39,7 @@ class OrderStatus extends AbstractTranslatableEntity
      *
      * @ORM\Column(type="integer")
      */
-    private $type;
+    protected $type;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData $orderStatusData
@@ -72,7 +72,7 @@ class OrderStatus extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData $orderStatusData
      */
-    private function setTranslations(OrderStatusData $orderStatusData)
+    protected function setTranslations(OrderStatusData $orderStatusData)
     {
         foreach ($orderStatusData->name as $locale => $name) {
             $this->translation($locale)->setName($name);
@@ -98,7 +98,7 @@ class OrderStatus extends AbstractTranslatableEntity
     /**
      * @param int $type
      */
-    private function setType($type)
+    protected function setType($type)
     {
         if (in_array($type, [
             self::TYPE_NEW,

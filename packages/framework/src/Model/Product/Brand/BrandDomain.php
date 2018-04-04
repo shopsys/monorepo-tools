@@ -17,7 +17,7 @@ class BrandDomain
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Brand\Brand")
      * @ORM\JoinColumn(nullable=false, name="brand_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $brand;
+    protected $brand;
 
     /**
      * @var int
@@ -25,28 +25,28 @@ class BrandDomain
      * @ORM\Id
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $seoTitle;
+    protected $seoTitle;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $seoMetaDescription;
+    protected $seoMetaDescription;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $seoH1;
+    protected $seoH1;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand

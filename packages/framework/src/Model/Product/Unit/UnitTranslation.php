@@ -22,7 +22,7 @@ class UnitTranslation extends AbstractTranslation
      *
      * @ORM\Column(type="string", length=10)
      */
-    private $name;
+    protected $name;
 
     /**
      * @return string

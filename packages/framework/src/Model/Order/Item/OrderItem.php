@@ -11,7 +11,11 @@ use Shopsys\FrameworkBundle\Model\Pricing\Price;
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"payment" = "OrderPayment", "product" = "OrderProduct", "transport" = "OrderTransport"})
+ * @ORM\DiscriminatorMap({
+ *     "payment" = "\Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment",
+ *     "product" = "\Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct",
+ *     "transport" = "\Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport"
+ * })
  */
 abstract class OrderItem
 {
@@ -30,7 +34,7 @@ abstract class OrderItem
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Order\Order", inversedBy="items")
      * @ORM\JoinColumn(name="order_id", referencedColumnName="id", nullable=false)
      */
-    private $order;
+    protected $order;
 
     /**
      * @var string
@@ -79,7 +83,7 @@ abstract class OrderItem
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $catnum;
+    protected $catnum;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order

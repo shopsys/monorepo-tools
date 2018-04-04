@@ -20,14 +20,14 @@ class CartItem
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=127)
      */
-    private $cartIdentifier;
+    protected $cartIdentifier;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\User|null
@@ -35,7 +35,7 @@ class CartItem
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable = true, onDelete="CASCADE")
      */
-    private $user;
+    protected $user;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Product|null
@@ -43,28 +43,28 @@ class CartItem
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
      * @ORM\JoinColumn(nullable=true, name="product_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $product;
+    protected $product;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $quantity;
+    protected $quantity;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
      */
-    private $watchedPrice;
+    protected $watchedPrice;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime")
      */
-    private $addedAt;
+    protected $addedAt;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier

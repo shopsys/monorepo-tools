@@ -28,37 +28,37 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=100, unique = true)
      */
-    private $username;
+    protected $username;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $realName;
+    protected $realName;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $password;
+    protected $password;
 
     /**
      * @ORM\Column(type="string", length=32)
      */
-    private $loginToken;
+    protected $loginToken;
 
     /**
      * @var \DateTime
      */
-    private $lastActivity;
+    protected $lastActivity;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    protected $email;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimit[]
@@ -68,33 +68,33 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
      *     orphanRemoval=true
      * )
      */
-    private $gridLimits;
+    protected $gridLimits;
 
     /**
      * @ORM\Column(type="boolean")
      *
      * @var bool
      */
-    private $superadmin;
+    protected $superadmin;
 
     /**
      * @var bool
      */
-    private $multidomainLogin;
+    protected $multidomainLogin;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      *
      * @var string
      */
-    private $multidomainLoginToken;
+    protected $multidomainLoginToken;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $multidomainLoginTokenExpiration;
+    protected $multidomainLoginTokenExpiration;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorData $administratorData

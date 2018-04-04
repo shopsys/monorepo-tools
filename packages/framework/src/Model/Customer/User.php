@@ -30,83 +30,83 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    protected $email;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $password;
+    protected $password;
 
     /**
      * @var DateTime
      */
-    private $lastActivity;
+    protected $lastActivity;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddress
      * @ORM\OneToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\BillingAddress")
      * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", nullable=false)
      */
-    private $billingAddress;
+    protected $billingAddress;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null
      * @ORM\OneToOne(targetEntity="Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $deliveryAddress;
+    protected $deliveryAddress;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \DateTime|null
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $lastLogin;
+    protected $lastLogin;
 
     /**
      * @var int
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup")
      * @ORM\JoinColumn(name="pricing_group_id", referencedColumnName="id", nullable=false)
      */
-    private $pricingGroup;
+    protected $pricingGroup;
 
     /**
      * @var string|null
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $resetPasswordHash;
+    protected $resetPasswordHash;
 
     /**
      * @var \DateTime|null
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $resetPasswordHashValidThrough;
+    protected $resetPasswordHashValidThrough;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData

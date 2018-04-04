@@ -17,7 +17,7 @@ class TransportDomain
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $transport;
+    protected $transport;
 
     /**
      * @var int
@@ -25,7 +25,7 @@ class TransportDomain
      * @ORM\Id
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport

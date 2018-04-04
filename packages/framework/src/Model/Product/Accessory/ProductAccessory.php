@@ -17,7 +17,7 @@ class ProductAccessory
      * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
      * @ORM\Id
      */
-    private $product;
+    protected $product;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Product
@@ -25,14 +25,14 @@ class ProductAccessory
      * @ORM\JoinColumn(nullable=false, name="accessory_product_id", referencedColumnName="id", onDelete="CASCADE")
      * @ORM\Id
      */
-    private $accessory;
+    protected $accessory;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer", nullable=false)
      */
-    private $position;
+    protected $position;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product

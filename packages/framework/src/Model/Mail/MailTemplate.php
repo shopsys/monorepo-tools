@@ -24,49 +24,49 @@ class MailTemplate
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $bccEmail;
+    protected $bccEmail;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $subject;
+    protected $subject;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $body;
+    protected $body;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $sendMail;
+    protected $sendMail;
 
     /**
      * @param string $name

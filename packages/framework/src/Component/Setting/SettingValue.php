@@ -32,7 +32,7 @@ class SettingValue
      * @ORM\Id
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var int
@@ -40,21 +40,21 @@ class SettingValue
      * @ORM\Id
      * @ORM\Column(type="integer")
      */
-    private $domainId;
+    protected $domainId;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $value;
+    protected $value;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=8)
      */
-    private $type;
+    protected $type;
 
     /**
      * @param string $name
@@ -118,7 +118,7 @@ class SettingValue
     /**
      * @param \DateTime|string|int|float|bool|null $value
      */
-    private function setValue($value)
+    protected function setValue($value)
     {
         $this->type = $this->getValueType($value);
         if ($this->type === self::TYPE_BOOLEAN) {
@@ -136,7 +136,7 @@ class SettingValue
      * @param \DateTime|string|int|float|bool|null $value
      * @return string
      */
-    private function getValueType($value)
+    protected function getValueType($value)
     {
         if (is_int($value)) {
             return self::TYPE_INTEGER;

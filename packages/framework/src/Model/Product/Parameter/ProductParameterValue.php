@@ -18,7 +18,7 @@ class ProductParameterValue
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
      * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $product;
+    protected $product;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
@@ -27,7 +27,7 @@ class ProductParameterValue
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter")
      * @ORM\JoinColumn(nullable=false, name="parameter_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $parameter;
+    protected $parameter;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue
@@ -36,7 +36,7 @@ class ProductParameterValue
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue")
      * @ORM\JoinColumn(name="value_id", referencedColumnName="id", nullable=false)
      */
-    private $value;
+    protected $value;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product

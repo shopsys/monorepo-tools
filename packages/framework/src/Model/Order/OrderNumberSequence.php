@@ -16,14 +16,14 @@ class OrderNumberSequence
      * @ORM\Column(type="integer")
      * @ORM\Id
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="decimal", precision=10, scale=0, nullable=false)
      */
-    private $number;
+    protected $number;
 
     /**
      * @param int $id

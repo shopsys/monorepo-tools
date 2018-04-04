@@ -18,7 +18,7 @@ class OrderProduct extends OrderItem
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
      * @ORM\JoinColumn(nullable=true, name="product_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $product;
+    protected $product;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order

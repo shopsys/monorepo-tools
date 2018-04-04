@@ -18,7 +18,7 @@ class PaymentPrice
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Payment\Payment", inversedBy="prices")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $payment;
+    protected $payment;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
@@ -27,14 +27,14 @@ class PaymentPrice
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    private $currency;
+    protected $currency;
 
     /**
      * @var string
      *
      * @ORM\Column(type="decimal", precision=20, scale=6)
      */
-    private $price;
+    protected $price;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment

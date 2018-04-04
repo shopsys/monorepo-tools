@@ -40,7 +40,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
      *
      * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Payment\PaymentPrice", mappedBy="payment", cascade={"persist"})
      */
-    private $prices;
+    protected $prices;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
@@ -48,7 +48,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $vat;
+    protected $vat;
 
     /**
      * @var Collection
@@ -56,21 +56,21 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
      * @ORM\ManyToMany(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport")
      * @ORM\JoinTable(name="payments_transports")
      */
-    private $transports;
+    protected $transports;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $hidden;
+    protected $hidden;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $deleted;
+    protected $deleted;
 
     /**
      * @var int|null
@@ -78,14 +78,14 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
      * @Gedmo\SortablePosition
      * @ORM\Column(type="integer", nullable=false)
      */
-    private $position;
+    protected $position;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $czkRounding;
+    protected $czkRounding;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
@@ -135,7 +135,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      */
-    private function setTranslations(PaymentData $paymentData)
+    protected function setTranslations(PaymentData $paymentData)
     {
         foreach ($paymentData->name as $locale => $name) {
             $this->translation($locale)->setName($name);

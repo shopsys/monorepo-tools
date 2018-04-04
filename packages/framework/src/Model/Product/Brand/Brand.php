@@ -27,7 +27,7 @@ class Brand extends AbstractTranslatableEntity
      *
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation[]
@@ -74,7 +74,7 @@ class Brand extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData $brandData
      */
-    private function setTranslations(BrandData $brandData)
+    protected function setTranslations(BrandData $brandData)
     {
         foreach ($brandData->descriptions as $locale => $description) {
             $brandTranslation = $this->translation($locale);

@@ -19,21 +19,21 @@ class Vat
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=50)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(type="decimal", precision=20, scale=4)
      */
-    private $percent;
+    protected $percent;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null
@@ -41,7 +41,7 @@ class Vat
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $replaceWith;
+    protected $replaceWith;
 
     public function __construct(VatData $vatData)
     {

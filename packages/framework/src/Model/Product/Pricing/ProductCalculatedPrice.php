@@ -19,7 +19,7 @@ class ProductCalculatedPrice
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Product")
      * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $product;
+    protected $product;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Product
@@ -28,14 +28,14 @@ class ProductCalculatedPrice
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup")
      * @ORM\JoinColumn(nullable=false, name="pricing_group_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $pricingGroup;
+    protected $pricingGroup;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
      */
-    private $priceWithVat;
+    protected $priceWithVat;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product

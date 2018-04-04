@@ -5,6 +5,7 @@ parameters:
   fp_js_form_validator.factory.class: Shopsys\FrameworkBundle\Component\Validator\JsFormValidatorFactory
   prezent_doctrine_translatable.listener.class: Shopsys\FrameworkBundle\Model\Localization\TranslatableListener
   faker.seed: 1234
+  shopsys.entity_extension.map: {}
 
 services:
   _defaults:
@@ -754,3 +755,18 @@ services:
 
   monolog.handler.fingers_crossed.error_level_activation_strategy:
     abstract: true
+
+  Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber:
+    class: Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber
+    arguments:
+      - "%shopsys.entity_extension.map%"
+    tags:
+      - { name: doctrine.event_subscriber, priority: 10 }
+
+  joschi127_doctrine_entity_override.event_subscriber.load_orm_metadata:
+    class: Joschi127\DoctrineEntityOverrideBundle\EventListener\LoadORMMetadataSubscriber
+    arguments:
+      - "@service_container"
+      - "%shopsys.entity_extension.map%"
+    tags:
+      - { name: doctrine.event_subscriber, priority: -10 }

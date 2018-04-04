@@ -34,14 +34,14 @@ class Flag extends AbstractTranslatableEntity
      *
      * @ORM\Column(type="string", length=7)
      */
-    private $rgbColor;
+    protected $rgbColor;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $visible;
+    protected $visible;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagData $flagData
@@ -90,7 +90,7 @@ class Flag extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagData $flagData
      */
-    private function setTranslations(FlagData $flagData)
+    protected function setTranslations(FlagData $flagData)
     {
         foreach ($flagData->name as $locale => $name) {
             $this->translation($locale)->setName($name);

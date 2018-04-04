@@ -51,7 +51,7 @@ class Product
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $vat;
+    protected $vat;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat

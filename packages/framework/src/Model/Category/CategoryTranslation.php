@@ -22,7 +22,7 @@ class CategoryTranslation extends AbstractTranslation
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $name;
+    protected $name;
 
     /**
      * @return string

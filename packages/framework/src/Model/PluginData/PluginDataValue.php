@@ -16,7 +16,7 @@ class PluginDataValue
      * @ORM\Id
      * @ORM\Column(type="string", length=255)
      */
-    private $pluginName;
+    protected $pluginName;
 
     /**
      * @var string
@@ -24,7 +24,7 @@ class PluginDataValue
      * @ORM\Id
      * @ORM\Column(type="string", length=255)
      */
-    private $context;
+    protected $context;
 
     /**
      * @var string
@@ -32,14 +32,14 @@ class PluginDataValue
      * @ORM\Id
      * @ORM\Column(type="string", length=255)
      */
-    private $key;
+    protected $key;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $jsonValue;
+    protected $jsonValue;
 
     /**
      * @param string $pluginName

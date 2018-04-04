@@ -17,21 +17,21 @@ class ParameterValue
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=100)
      */
-    private $text;
+    protected $text;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string")
      */
-    private $locale;
+    protected $locale;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueData $parameterData
