@@ -27,3 +27,6 @@ For general information on plugin creation see the documentation of the [General
 ### Example
 You can take a look at the package [shopsys/product-feed-zbozi](https://github.com/shopsys/product-feed-zbozi/)
 for implementation of [Zboží.cz](https://www.zbozi.cz) product feed plugin.
+
+## Need help
+Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).

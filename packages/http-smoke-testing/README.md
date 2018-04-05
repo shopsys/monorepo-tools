@@ -144,3 +144,6 @@ php vendor/bin/phpcs --standard=vendor/shopsys/coding-standards/rulesetCS.xml --
 php vendor/bin/phpmd "./src,./tests" text vendor/shopsys/coding-standards/rulesetMD.xml --extensions=php
 php vendor/bin/phpunit tests
 ```
+
+## Need help
+Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).

@@ -209,3 +209,6 @@ class AcmeDataDownloadCronModule implements SimpleCronModuleInterface
 ## How to implement a plugin
 Plugins are implemented in a form of a [Symfony bundle](http://symfony.com/doc/current/bundles.html).
 For tips on how to write a new bundle see [Best Practices for Reusable Bundles](https://symfony.com/doc/current/bundles/best_practices.html).
+
+## Need help
+Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).

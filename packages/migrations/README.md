@@ -17,3 +17,6 @@ This bundle uses [DoctrineMigrationsBundle](https://symfony.com/doc/current/bund
     new Shopsys\MigrationBundle\ShopsysMigrationBundle(),
     ```
 3. Configure `DoctrineMigrationsBundle` according to its documentation (see https://symfony.com/doc/current/bundles/DoctrineMigrationsBundle/index.html#configuration)
+
+## Need help
+Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).
