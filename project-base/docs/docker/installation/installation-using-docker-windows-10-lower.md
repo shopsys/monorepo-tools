@@ -18,7 +18,7 @@ It means that any directory under C:/Users (e.g. C:/Users/<user_name>/project-ba
 If you want to store your folder in other scope [see for example this article](https://gist.github.com/matthiasg/76dd03926d095db08745).
 
 ```
-composer create-project shopsys/project-base --no-install
+composer create-project shopsys/project-base --stability=alpha --no-install
 cd project-base
 ```
 Notes: 

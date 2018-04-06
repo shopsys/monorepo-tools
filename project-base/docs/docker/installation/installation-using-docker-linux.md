@@ -7,7 +7,7 @@
 ## Steps
 ### 1. Create new project from Shopsys Framework sources
 ```
-composer create-project shopsys/project-base --no-install
+composer create-project shopsys/project-base --stability=alpha --no-install
 cd project-base
 ```
 Notes: 
