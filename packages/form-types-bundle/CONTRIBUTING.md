@@ -2,6 +2,8 @@
 
 Thank you for contributing to form-types-bundle!
 
+Report [issues](https://github.com/shopsys/shopsys/issues/new) and send [pull requests](https://github.com/shopsys/shopsys/compare) in the main [Shopsys repository](https://github.com/shopsys/shopsys).
+
 There are a few rules that must be followed so that your code could be accepted.
 These rules ensure that the code will remain consistent and the project is maintainable in the future.
 

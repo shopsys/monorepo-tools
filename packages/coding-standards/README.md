@@ -76,5 +76,8 @@ It also skips checking of private members when `PrivateNoUnderscore` property is
 
 This sniff provides the missing functionality and is intended to be used as an addition to the default `ValidVariableNameSniff`.
 
+## Contributing
+Report [issues](https://github.com/shopsys/shopsys/issues/new) and send [pull requests](https://github.com/shopsys/shopsys/compare) in the main [Shopsys repository](https://github.com/shopsys/shopsys).
+
 ## Need help
 Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).
