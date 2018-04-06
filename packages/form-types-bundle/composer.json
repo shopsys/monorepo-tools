@@ -1,8 +1,8 @@
 {
     "name": "shopsys/form-types-bundle",
+    "type": "library",
     "description": "Shopsys Framework custom Symfony form types",
     "keywords": ["form", "form type", "Shopsys Framework", "SSFW"],
-    "type": "library",
     "license": "MIT",
     "authors": [
         {

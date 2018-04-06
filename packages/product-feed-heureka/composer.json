@@ -1,8 +1,8 @@
 {
     "name": "shopsys/product-feed-heureka",
+    "type": "library",
     "description": "Shopsys Framework plugin interface for Heureka XML product feed generation",
     "keywords": ["Heureka", "product feed", "XML feed", "plugin", "Shopsys Framework", "SSFW"],
-    "type": "library",
     "license": "MIT",
     "authors": [
         {

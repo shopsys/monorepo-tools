@@ -1,8 +1,8 @@
 {
     "name": "shopsys/product-feed-zbozi",
+    "type": "library",
     "description": "Shopsys Framework plugin interface for Zboží XML product feed generation",
     "keywords": ["Zboží", "product feed", "XML feed", "plugin", "Shopsys Framework", "SSFW"],
-    "type": "library",
     "license": "MIT",
     "authors": [
         {

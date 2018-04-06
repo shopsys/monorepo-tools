@@ -1,8 +1,8 @@
 {
     "name": "shopsys/product-feed-interface",
+    "type": "library",
     "description": "Shopsys Framework plugin interface for product feed generation",
     "keywords": ["product feed", "plugin", "Shopsys Framework", "SSFW"],
-    "type": "library",
     "license": "MIT",
     "authors": [
         {
