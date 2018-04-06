@@ -24,3 +24,4 @@
 * entities can be extended by inheritance
 * all entities are extensible via `%shopsys.entity_extension.map%` parameter
 * more info in separate article [Entity Extension](entity-extension.md)
+* reasons and alternatives to this approach are explained in [Entity Extension vs. Entity Generation](entity-extension-vs-entity-generation.md)

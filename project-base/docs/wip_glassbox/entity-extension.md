@@ -3,6 +3,8 @@
 This article describes the internals of entity extension system implemented in Shopsys Framework along with a quick guide on how to use it.
 The entity extension is a work in progress.
 
+You can read about alternative solutions we considered and the reasons behind this approach in [Entity Extension vs. Entity Generation](entity-extension-vs-entity-generation.md).
+
 Let's suppose that we are implementing Dream project as a clone of the [project-base repository](https://github.com/shopsys/project-base).
 Dream project is dependent on the glass-box [framework repository](https://github.com/shopsys/framework).
 The framework is, of course, independent of our Dream project.
