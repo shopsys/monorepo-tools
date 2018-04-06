@@ -121,5 +121,8 @@ Delete all local branches and create all non-remote-tracking branches of a speci
 
 Usage: `load_branches_from_remote.sh <remote-name>`
 
+## Contributing
+Report [issues](https://github.com/shopsys/shopsys/issues/new) and send [pull requests](https://github.com/shopsys/shopsys/compare) in the main [Shopsys repository](https://github.com/shopsys/shopsys).
+
 ## Need help
 Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).
