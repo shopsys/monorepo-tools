@@ -1,6 +1,7 @@
 # Shopsys HTTP Smoke Testing
 
 [![Build Status](https://travis-ci.org/shopsys/http-smoke-testing.svg?branch=master)](https://travis-ci.org/shopsys/http-smoke-testing)
+[![Downloads](https://img.shields.io/packagist/dt/shopsys/http-smoke-testing.svg)](https://packagist.org/packages/shopsys/http-smoke-testing)
 
 This package enables you to do simple HTTP smoke testing of your Symfony application.
 

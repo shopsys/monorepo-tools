@@ -1,4 +1,8 @@
 # General Shopsys Framework Plugin Interface
+
+[![Build Status](https://travis-ci.org/shopsys/plugin-interface.svg?branch=master)](https://travis-ci.org/shopsys/plugin-interface)
+[![Downloads](https://img.shields.io/packagist/dt/shopsys/plugin-interface.svg)](https://packagist.org/packages/shopsys/plugin-interface)
+
 Package of interfaces providing compatibility between [Shopsys Framework](https://www.shopsys-framework.com) and plugins.
 
 ## Features

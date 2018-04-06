@@ -1,4 +1,8 @@
 # Shopsys Framework Product Feed Plugin Interface
+
+[![Build Status](https://travis-ci.org/shopsys/product-feed-interface.svg?branch=master)](https://travis-ci.org/shopsys/product-feed-interface)
+[![Downloads](https://img.shields.io/packagist/dt/shopsys/product-feed-interface.svg)](https://packagist.org/packages/shopsys/product-feed-interface)
+
 Package of interfaces providing compatibility between [Shopsys Framework](https://www.shopsys-framework.com) and product feed plugins. 
 
 ## How to implement a plugin

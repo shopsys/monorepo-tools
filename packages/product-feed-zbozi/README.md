@@ -1,8 +1,9 @@
 # Shopsys Framework Zboží.cz Product Feed Plugin
-Plugin for [Shopsys Framework](https://www.shopsys-framework.com) responsible for generating XML product feed for [Zboží.cz](https://www.zbozi.cz).
 
 [![Build Status](https://travis-ci.org/shopsys/product-feed-zbozi.svg?branch=master)](https://travis-ci.org/shopsys/product-feed-zbozi)
+[![Downloads](https://img.shields.io/packagist/dt/shopsys/product-feed-zbozi.svg)](https://packagist.org/packages/shopsys/product-feed-zbozi)
 
+Plugin for [Shopsys Framework](https://www.shopsys-framework.com) responsible for generating XML product feed for [Zboží.cz](https://www.zbozi.cz).
 
 For detailed information about the feed see [official documentation](https://napoveda.seznam.cz/cz/zbozi/specifikace-xml-pro-obchody/specifikace-xml-feedu/).
 

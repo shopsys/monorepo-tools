@@ -1,7 +1,10 @@
 # Shopsys Framework Heureka Product Feed Plugin
-Plugin for [Shopsys Framework](https://www.shopsys-framework.com) responsible for generating XML product feed for [Heureka](https://www.heureka.cz).
 
 [![Build Status](https://travis-ci.org/shopsys/product-feed-heureka.svg?branch=master)](https://travis-ci.org/shopsys/product-feed-heureka)
+[![Downloads](https://img.shields.io/packagist/dt/shopsys/product-feed-heureka.svg)](https://packagist.org/packages/shopsys/product-feed-heureka)
+
+Plugin for [Shopsys Framework](https://www.shopsys-framework.com) responsible for generating XML product feed for [Heureka](https://www.heureka.cz).
+
 
 For detailed information about the feed see [official documentation](https://sluzby.heureka.cz/napoveda/xml-feed/).
 
