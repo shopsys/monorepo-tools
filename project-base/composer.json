@@ -77,6 +77,7 @@
         "intaro/postgres-search-bundle": "dev-master#06625bdc1d",
         "intervention/image": "2.3.14",
         "jms/translation-bundle": "1.4.1",
+        "joschi127/doctrine-entity-override-bundle": "0.5.0",
         "phing/phing": "2.16.1",
         "presta/sitemap-bundle": "^1.5.3",
         "prezent/doctrine-translatable-bundle": "1.0.3",
