@@ -9,8 +9,8 @@
 # Example: monorepo_split.sh main-repository package-alpha:packages/alpha package-beta:packages/beta
 
 # Check provided arguments
-if [ "$#" -lt "2" ]; then
-    echo 'Please provide at least 2 remotes for splitting'
+if [ "$#" -lt "1" ]; then
+    echo 'Please provide at least 1 remote for splitting'
     echo 'Usage: monorepo_split.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...'
     echo 'Example: monorepo_split.sh main-repository package-alpha:packages/alpha package-beta:packages/beta'
     exit
