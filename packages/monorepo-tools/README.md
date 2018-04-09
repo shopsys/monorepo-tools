@@ -31,7 +31,7 @@ git init
 git remote add main-repository http://github.com/vendor/main-repository.git
 git remote add package-alpha http://github.com/vendor/alpha.git
 git remote add package-beta http://github.com/vendor/beta.git
-git fetch --all
+git fetch --all --no-tags
 ```
 
 ### 3. Building the monorepo
@@ -69,7 +69,8 @@ When you made your changes and would like to update the original repositories us
 ```
 
 This will push all relevant changes into all of your remotes.
-Only `master` branches will be pushed.
+It will split and push your `master` branch along with all tags you added in this repository.
+Other branches are not pushed.
 
 It may again take a while, depending on the size of your monorepo.
 
@@ -86,19 +87,19 @@ Usage: `monorepo_build.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdire
 
 ### [monorepo_split.sh](./monorepo_split.sh)
 
-Split monorepo built by `monorepo_build.sh` and push all master branches into specified remotes.
+Split monorepo built by `monorepo_build.sh` and push all `master` branches along with all tags into specified remotes.
 
 Usage: `monorepo_split.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...`
 
 ### [rewrite_history_into.sh](./rewrite_history_into.sh)
 
-Rewrite git history so that all filepaths are in a specific subdirectory.
+Rewrite git history (even tags) so that all filepaths are in a specific subdirectory.
 
 Usage: `rewrite_history_into.sh <subdirectory> [<rev-list-args>]`
 
 ### [rewrite_history_from.sh](./rewrite_history_from.sh)
 
-Rewrite git history so that only commits that made changes in a subdirectory are kept and rewrite all filepaths as if it was root.
+Rewrite git history (even tags) so that only commits that made changes in a subdirectory are kept and rewrite all filepaths as if it was root.
 
 Usage: `rewrite_history_from.sh <subdirectory> [<rev-list-args>]`
 
