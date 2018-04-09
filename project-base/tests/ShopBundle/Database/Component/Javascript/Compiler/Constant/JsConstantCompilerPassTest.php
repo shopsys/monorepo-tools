@@ -41,7 +41,7 @@ class JsConstantCompilerPassTest extends FunctionalTestCase
      */
     private function getJsCompiler()
     {
-        $jsConstantCompilerPass = $this->getServiceByType(JsConstantCompilerPass::class);
+        $jsConstantCompilerPass = $this->getContainer()->get(JsConstantCompilerPass::class);
 
         return new JsCompiler([
             $jsConstantCompilerPass,

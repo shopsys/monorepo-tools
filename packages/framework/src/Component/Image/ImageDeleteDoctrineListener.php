@@ -19,12 +19,19 @@ class ImageDeleteDoctrineListener
      */
     private $imageConfig;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
+     */
+    private $imageFacade;
+
     public function __construct(
         ContainerInterface $container,
-        ImageConfig $imageConfig
+        ImageConfig $imageConfig,
+        ImageFacade $imageFacade
     ) {
         $this->container = $container;
         $this->imageConfig = $imageConfig;
+        $this->imageFacade = $imageFacade;
     }
 
     /**
@@ -34,7 +41,7 @@ class ImageDeleteDoctrineListener
      */
     private function getImageFacade()
     {
-        return $this->container->get(ImageFacade::class);
+        return $this->imageFacade;
     }
 
     /**

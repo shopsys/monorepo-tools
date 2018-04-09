@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
 use Faker\Generator;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
@@ -16,30 +17,60 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 {
     const USER_WITH_RESET_PASSWORD_HASH = 'user_with_reset_password_hash';
 
+    /** @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
+    private $customerFacade;
+
+    /** @var \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader */
+    private $loaderService;
+
+    /** @var \Faker\Generator */
+    private $faker;
+
+    /** @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService */
+    private $customerPasswordService;
+
+    /** @var \Doctrine\ORM\EntityManager */
+    private $em;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade
+     * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader $loaderService
+     * @param \Faker\Generator $faker
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
+     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     */
+    public function __construct(
+        CustomerFacade $customerFacade,
+        UserDataFixtureLoader $loaderService,
+        Generator $faker,
+        CustomerPasswordService $customerPasswordService,
+        EntityManager $em
+    ) {
+        $this->customerFacade = $customerFacade;
+        $this->loaderService = $loaderService;
+        $this->faker = $faker;
+        $this->customerPasswordService = $customerPasswordService;
+        $this->em = $em;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $customerFacade = $this->get(CustomerFacade::class);
-        /* @var $customerFacade \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
-        $loaderService = $this->get(UserDataFixtureLoader::class);
-        /* @var $loaderService \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader */
-        $faker = $this->get(Generator::class);
-        /* @var $faker \Faker\Generator */
-
         $countries = [
             $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1),
             $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1),
         ];
-        $loaderService->injectReferences($countries);
+        $this->loaderService->injectReferences($countries);
 
-        $customersData = $loaderService->getCustomersDataByDomainId(Domain::FIRST_DOMAIN_ID);
+        $customersData = $this->loaderService->getCustomersDataByDomainId(Domain::FIRST_DOMAIN_ID);
 
         foreach ($customersData as $customerData) {
-            $customerData->userData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
+            $customerData->userData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
 
-            $customer = $customerFacade->create($customerData);
+            $customer = $this->customerFacade->create($customerData);
 
             if ($customer->getId() === 1) {
                 $this->resetPassword($customer);
@@ -64,12 +95,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
      */
     private function resetPassword(User $customer)
     {
-        $customerPasswordService = $this->get(CustomerPasswordService::class);
-        /* @var $customerPasswordService \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService */
-        $em = $this->get('doctrine.orm.entity_manager');
-        /* @var $em \Doctrine\ORM\EntityManager */
-
-        $customerPasswordService->resetPassword($customer);
-        $em->flush($customer);
+        $this->customerPasswordService->resetPassword($customer);
+        $this->em->flush($customer);
     }
 }

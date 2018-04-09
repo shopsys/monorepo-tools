@@ -15,12 +15,20 @@ class InlineEditService
     private $container;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditRegistry
+     */
+    private $gridInlineEditRegistry;
+
+    /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+     * @param \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditRegistry $gridInlineEditRegistry
      */
     public function __construct(
-        ContainerInterface $container
+        ContainerInterface $container,
+        GridInlineEditRegistry $gridInlineEditRegistry
     ) {
         $this->container = $container;
+        $this->gridInlineEditRegistry = $gridInlineEditRegistry;
     }
 
     /**
@@ -30,7 +38,7 @@ class InlineEditService
      */
     public function getRenderedFormRow($serviceName, $rowId)
     {
-        $gridInlineEdit = $this->getInlineEditService($serviceName);
+        $gridInlineEdit = $this->gridInlineEditRegistry->getGridInlineEdit($serviceName);
         $form = $gridInlineEdit->getForm($rowId);
 
         return $this->renderFormAsRow($gridInlineEdit, $rowId, $form);
@@ -44,7 +52,7 @@ class InlineEditService
      */
     public function saveFormData($serviceName, Request $request, $rowId)
     {
-        $gridInlineEdit = $this->getInlineEditService($serviceName);
+        $gridInlineEdit = $this->gridInlineEditRegistry->getGridInlineEdit($serviceName);
         return $gridInlineEdit->saveForm($request, $rowId);
     }
 
@@ -55,7 +63,7 @@ class InlineEditService
      */
     public function getRenderedRowHtml($serviceName, $rowId)
     {
-        $gridInlineEdit = $this->getInlineEditService($serviceName);
+        $gridInlineEdit = $this->gridInlineEditRegistry->getGridInlineEdit($serviceName);
         $grid = $gridInlineEdit->getGrid();
         /* @var $grid \Shopsys\FrameworkBundle\Component\Grid\Grid */
 
@@ -67,21 +75,6 @@ class InlineEditService
             'lastRow' => false,
             'row' => $rowData,
         ], false);
-    }
-
-    /**
-     * @param string $serviceName
-     * @return \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface
-     */
-    private function getInlineEditService($serviceName)
-    {
-        $gridInlineEdit = $this->container->get($serviceName, ContainerInterface::NULL_ON_INVALID_REFERENCE);
-
-        if ($gridInlineEdit instanceof GridInlineEditInterface) {
-            return $gridInlineEdit;
-        } else {
-            throw new \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\Exception\InvalidServiceException($serviceName);
-        }
     }
 
     /**

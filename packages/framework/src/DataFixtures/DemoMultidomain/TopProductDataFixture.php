@@ -11,6 +11,19 @@ use Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade;
 class TopProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade
+     */
+    private $topProductFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade $topProductFacade
+     */
+    public function __construct(TopProductFacade $topProductFacade)
+    {
+        $this->topProductFacade = $topProductFacade;
+    }
+
+    /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
@@ -31,15 +44,12 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
      */
     private function createTopProducts(array $productReferenceNames, $domainId)
     {
-        $topProductFacade = $this->get(TopProductFacade::class);
-        /* @var $topProductFacade \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade */
-
         $products = [];
         foreach ($productReferenceNames as $productReferenceName) {
             $products[] = $this->getReference($productReferenceName);
         }
 
-        $topProductFacade->saveTopProductsForDomain($domainId, $products);
+        $this->topProductFacade->saveTopProductsForDomain($domainId, $products);
     }
 
     /**

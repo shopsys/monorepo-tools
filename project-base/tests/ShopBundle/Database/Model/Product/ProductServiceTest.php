@@ -18,9 +18,9 @@ class ProductServiceTest extends DatabaseTestCase
 {
     public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithoutVat()
     {
-        $productService = $this->getServiceByType(ProductService::class);
+        $productService = $this->getContainer()->get(ProductService::class);
         /* @var $productService \Shopsys\FrameworkBundle\Model\Product\ProductService */
-        $setting = $this->getServiceByType(Setting::class);
+        $setting = $this->getContainer()->get(Setting::class);
         /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
@@ -46,9 +46,9 @@ class ProductServiceTest extends DatabaseTestCase
 
     public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithVat()
     {
-        $productService = $this->getServiceByType(ProductService::class);
+        $productService = $this->getContainer()->get(ProductService::class);
         /* @var $productService \Shopsys\FrameworkBundle\Model\Product\ProductService */
-        $setting = $this->getServiceByType(Setting::class);
+        $setting = $this->getContainer()->get(Setting::class);
         /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);

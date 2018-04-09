@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Database\Twig;
 
-use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
+use CommerceGuys\Intl\NumberFormat\NumberFormatRepository;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 use Tests\ShopBundle\Test\FunctionalTestCase;
@@ -44,8 +44,8 @@ class NumberFormatterExtensionTest extends FunctionalTestCase
         $localizationMock->expects($this->any())->method('getLocale')
             ->willReturn($locale);
 
-        $numberFormatRepository = $this->getServiceByType(NumberFormatRepositoryInterface::class);
-        /* @var $numberFormatRepository \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface */
+        $numberFormatRepository = $this->getContainer()->get(NumberFormatRepository::class);
+        /* @var $numberFormatRepository \CommerceGuys\Intl\NumberFormat\NumberFormatRepository */
 
         $numberFormatterExtension = new NumberFormatterExtension($localizationMock, $numberFormatRepository);
 

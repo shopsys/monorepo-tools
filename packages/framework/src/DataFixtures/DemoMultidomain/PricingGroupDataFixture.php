@@ -9,8 +9,19 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 
 class PricingGroupDataFixture extends AbstractReferenceFixture
 {
+    /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
+    private $pricingGroupFacade;
+
     const PRICING_GROUP_ORDINARY_DOMAIN_2 = 'pricing_group_ordinary_domain_2';
     const PRICING_GROUP_VIP_DOMAIN_2 = 'pricing_group_vip_domain_2';
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+     */
+    public function __construct(PricingGroupFacade $pricingGroupFacade)
+    {
+        $this->pricingGroupFacade = $pricingGroupFacade;
+    }
 
     public function load(ObjectManager $manager)
     {
@@ -35,10 +46,7 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
         $domainId,
         $referenceName
     ) {
-        $pricingGroupFacade = $this->get(PricingGroupFacade::class);
-        /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
-
-        $pricingGroup = $pricingGroupFacade->create($pricingGroupData, $domainId);
+        $pricingGroup = $this->pricingGroupFacade->create($pricingGroupData, $domainId);
         $this->addReference($referenceName, $pricingGroup);
     }
 }

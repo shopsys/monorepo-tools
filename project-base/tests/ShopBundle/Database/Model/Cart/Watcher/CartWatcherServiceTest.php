@@ -32,14 +32,14 @@ class CartWatcherServiceTest extends FunctionalTestCase
         $productData1->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
         $productMock = Product::create($productData1);
 
-        $productPriceCalculationForUser = $this->getServiceByType(ProductPriceCalculationForUser::class);
+        $productPriceCalculationForUser = $this->getContainer()->get(ProductPriceCalculationForUser::class);
         /* @var $productPriceCalculationForUser \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser */
         $productPrice = $productPriceCalculationForUser->calculatePriceForCurrentUser($productMock);
         $cartItem = new CartItem($customerIdentifier, $productMock, 1, $productPrice->getPriceWithVat());
         $cartItems = [$cartItem];
         $cart = new Cart($cartItems);
 
-        $cartWatcherService = $this->getServiceByType(CartWatcherService::class);
+        $cartWatcherService = $this->getContainer()->get(CartWatcherService::class);
         /* @var $cartWatcherService \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService */
 
         $modifiedItems1 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
@@ -78,7 +78,7 @@ class CartWatcherServiceTest extends FunctionalTestCase
         $cartItems = [$cartItemMock];
         $cart = new Cart($cartItems);
 
-        $cartWatcherService = $this->getServiceByType(CartWatcherService::class);
+        $cartWatcherService = $this->getContainer()->get(CartWatcherService::class);
         /* @var $cartWatcherService \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService */
 
         $notListableItems = $cartWatcherService->getNotListableItems($cart, $currentCustomerMock);
@@ -130,8 +130,8 @@ class CartWatcherServiceTest extends FunctionalTestCase
             ->method('getProductVisibility')
             ->willReturn($productVisibilityMock);
 
-        $productPriceCalculationForUser = $this->getServiceByType(ProductPriceCalculationForUser::class);
-        $domain = $this->getServiceByType(Domain::class);
+        $productPriceCalculationForUser = $this->getContainer()->get(ProductPriceCalculationForUser::class);
+        $domain = $this->getContainer()->get(Domain::class);
 
         $cartWatcherService = new CartWatcherService($productPriceCalculationForUser, $productVisibilityRepositoryMock, $domain);
 

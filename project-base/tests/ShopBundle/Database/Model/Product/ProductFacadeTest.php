@@ -40,7 +40,7 @@ class ProductFacadeTest extends DatabaseTestCase
 
         $productEditData = new ProductEditData($productData);
 
-        $productFacade = $this->getServiceByType(ProductFacade::class);
+        $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
         $product = $productFacade->create($productEditData);
@@ -117,9 +117,9 @@ class ProductFacadeTest extends DatabaseTestCase
     {
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\FrameworkBundle\Model\Product\Product */
-        $productFacade = $this->getServiceByType(ProductFacade::class);
+        $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getServiceByType(ProductEditDataFactory::class);
+        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
 
         $reflectionClass = new ReflectionClass(Product::class);

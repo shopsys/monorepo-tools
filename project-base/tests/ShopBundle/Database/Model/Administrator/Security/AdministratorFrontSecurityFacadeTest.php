@@ -5,7 +5,6 @@ namespace Tests\ShopBundle\Database\Model\Administrator\Security;
 use Shopsys\FrameworkBundle\DataFixtures\Base\AdministratorDataFixture;
 use Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade;
 use Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
@@ -13,7 +12,7 @@ class AdministratorFrontSecurityFacadeTest extends DatabaseTestCase
 {
     public function testIsAdministratorLoggedNot()
     {
-        $administratorFrontSecurityFacade = $this->getServiceByType(AdministratorFrontSecurityFacade::class);
+        $administratorFrontSecurityFacade = $this->getContainer()->get(AdministratorFrontSecurityFacade::class);
         /* @var $administratorFrontSecurityFacade \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade */
 
         $this->assertFalse($administratorFrontSecurityFacade->isAdministratorLogged());
@@ -21,9 +20,9 @@ class AdministratorFrontSecurityFacadeTest extends DatabaseTestCase
 
     public function testIsAdministratorLogged()
     {
-        $session = $this->getServiceByType(SessionInterface::class);
+        $session = $this->getContainer()->get('session');
         /* @var $session \Symfony\Component\HttpFoundation\Session\SessionInterface */
-        $administratorFrontSecurityFacade = $this->getServiceByType(AdministratorFrontSecurityFacade::class);
+        $administratorFrontSecurityFacade = $this->getContainer()->get(AdministratorFrontSecurityFacade::class);
         /* @var $administratorFrontSecurityFacade \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade */
 
         $administrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
@@ -34,7 +33,7 @@ class AdministratorFrontSecurityFacadeTest extends DatabaseTestCase
 
         $session->set('_security_' . AdministratorFrontSecurityFacade::ADMINISTRATION_CONTEXT, serialize($token));
 
-        $administratorActivityFacade = $this->getServiceByType(AdministratorActivityFacade::class);
+        $administratorActivityFacade = $this->getContainer()->get(AdministratorActivityFacade::class);
         /* @var $administratorActivityFacade \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade */
         $administratorActivityFacade->create($administrator, '127.0.0.1');
 

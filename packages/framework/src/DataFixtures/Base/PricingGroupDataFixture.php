@@ -14,6 +14,19 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
     const PRICING_GROUP_PARTNER_DOMAIN_1 = 'pricing_group_partner_domain_1';
     const PRICING_GROUP_VIP_DOMAIN_1 = 'pricing_group_vip_domain_1';
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
+     */
+    private $pricingGroupFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+     */
+    public function __construct(PricingGroupFacade $pricingGroupFacade)
+    {
+        $this->pricingGroupFacade = $pricingGroupFacade;
+    }
+
     public function load(ObjectManager $manager)
     {
         $pricingGroupData = new PricingGroupData();
@@ -36,10 +49,7 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
         PricingGroupData $pricingGroupData,
         $referenceName
     ) {
-        $pricingGroupFacade = $this->get(PricingGroupFacade::class);
-        /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
-
-        $pricingGroup = $pricingGroupFacade->create($pricingGroupData, Domain::FIRST_DOMAIN_ID);
+        $pricingGroup = $this->pricingGroupFacade->create($pricingGroupData, Domain::FIRST_DOMAIN_ID);
         $this->addReference($referenceName, $pricingGroup);
     }
 }

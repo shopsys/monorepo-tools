@@ -10,6 +10,25 @@ use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture
 {
+    /** @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
+    private $categoryFacade;
+
+    /** @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory */
+    private $categoryDataFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory $categoryDataFacade
+     * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+     */
+    public function __construct(
+        CategoryFacade $categoryFacade,
+        CategoryDataFactory $categoryDataFacade
+    ) {
+        $this->categoryFacade = $categoryFacade;
+        $this->categoryDataFacade = $categoryDataFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
@@ -105,16 +124,11 @@ class CategoryDataFixture extends AbstractReferenceFixture
      */
     private function editCategoryOnDomain2($referenceName, $descriptionDomain2)
     {
-        $categoryFacade = $this->get(CategoryFacade::class);
-        /* @var $categoryFacade \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
-        $categoryDataFactory = $this->get(CategoryDataFactory::class);
-        /* @var $categoryDataFactory \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory */
-
         $category = $this->getReference($referenceName);
         /* @var $category \Shopsys\FrameworkBundle\Model\Category\Category */
-        $categoryData = $categoryDataFactory->createFromCategory($category);
+        $categoryData = $this->categoryDataFacade->createFromCategory($category);
         $domainId = 2;
         $categoryData->descriptions[$domainId] = $descriptionDomain2;
-        $categoryFacade->edit($category->getId(), $categoryData);
+        $this->categoryFacade->edit($category->getId(), $categoryData);
     }
 }

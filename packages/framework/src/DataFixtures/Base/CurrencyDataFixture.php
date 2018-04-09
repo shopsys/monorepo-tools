@@ -13,6 +13,17 @@ class CurrencyDataFixture extends AbstractReferenceFixture
     const CURRENCY_CZK = 'currency_czk';
     const CURRENCY_EUR = 'currency_eur';
 
+    /** @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade */
+    private $currencyFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
+     */
+    public function __construct(CurrencyFacade $currencyFacade)
+    {
+        $this->currencyFacade = $currencyFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
@@ -36,10 +47,7 @@ class CurrencyDataFixture extends AbstractReferenceFixture
      */
     private function createCurrency(CurrencyData $currencyData, $referenceName = null)
     {
-        $currencyFacade = $this->get(CurrencyFacade::class);
-        /* @var $currencyFacade \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade */
-
-        $currency = $currencyFacade->create($currencyData);
+        $currency = $this->currencyFacade->create($currencyData);
         if ($referenceName !== null) {
             $this->addReference($referenceName, $currency);
         }

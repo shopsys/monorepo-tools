@@ -2,9 +2,13 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Order;
 
+use Craue\FormFlowBundle\Storage\DataManager;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class DomainAwareOrderFlowFactory implements OrderFlowFactoryInterface
 {
@@ -19,15 +23,43 @@ class DomainAwareOrderFlowFactory implements OrderFlowFactoryInterface
     private $domain;
 
     /**
+     * @var \Symfony\Component\EventDispatcher\EventDispatcher
+     */
+    private $eventDispatcher;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\RequestStack
+     */
+    private $requestStack;
+
+    /**
+     * @var \Symfony\Component\Form\FormFactoryInterface
+     */
+    private $formFactory;
+
+    /**
+     * @var \Craue\FormFlowBundle\Storage\DataManager
+     */
+    private $dataManager;
+
+    /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         ContainerInterface $container,
-        Domain $domain
+        Domain $domain,
+        EventDispatcher $eventDispatcher,
+        RequestStack $requestStack,
+        FormFactoryInterface $formFactory,
+        DataManager $dataManager
     ) {
         $this->container = $container;
         $this->domain = $domain;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->requestStack = $requestStack;
+        $this->formFactory = $formFactory;
+        $this->dataManager = $dataManager;
     }
 
     /**
@@ -39,10 +71,10 @@ class DomainAwareOrderFlowFactory implements OrderFlowFactoryInterface
         $orderFlow->setDomainId($this->domain->getId());
 
         // see vendor/craue/formflow-bundle/Resources/config/form_flow.xml
-        $orderFlow->setDataManager($this->container->get('craue.form.flow.data_manager'));
-        $orderFlow->setFormFactory($this->container->get('form.factory'));
-        $orderFlow->setRequestStack($this->container->get('request_stack'));
-        $orderFlow->setEventDispatcher($this->container->get('event_dispatcher'));
+        $orderFlow->setDataManager($this->dataManager);
+        $orderFlow->setFormFactory($this->formFactory);
+        $orderFlow->setRequestStack($this->requestStack);
+        $orderFlow->setEventDispatcher($this->eventDispatcher);
 
         return $orderFlow;
     }

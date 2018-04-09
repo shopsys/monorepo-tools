@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Database\Twig;
 
-use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
+use CommerceGuys\Intl\NumberFormat\NumberFormatRepository;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
@@ -41,11 +41,11 @@ class PriceExtensionTest extends FunctionalTestCase
 
     protected function setUp()
     {
-        $this->currencyFacade = $this->getServiceByType(CurrencyFacade::class);
-        $this->domain = $this->getServiceByType(Domain::class);
-        $this->localization = $this->getServiceByType(Localization::class);
-        $this->intlCurrencyRepository = $this->getServiceByType(IntlCurrencyRepository::class);
-        $this->numberFormatRepository = $this->getServiceByType(NumberFormatRepositoryInterface::class);
+        $this->currencyFacade = $this->getContainer()->get(CurrencyFacade::class);
+        $this->domain = $this->getContainer()->get(Domain::class);
+        $this->localization = $this->getContainer()->get(Localization::class);
+        $this->intlCurrencyRepository = $this->getContainer()->get(IntlCurrencyRepository::class);
+        $this->numberFormatRepository = $this->getContainer()->get(NumberFormatRepository::class);
 
         parent::setUp();
     }

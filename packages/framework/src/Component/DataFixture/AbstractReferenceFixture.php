@@ -3,37 +3,21 @@
 namespace Shopsys\FrameworkBundle\Component\DataFixture;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
-abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAwareInterface
+abstract class AbstractReferenceFixture implements FixtureInterface
 {
-    /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    protected $container;
-
     /**
      * @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade
      */
     private $persistentReferenceFacade;
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+     * @required
+     * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      */
-    public function setContainer(ContainerInterface $container = null)
+    public function autowirePersistentReferenceFacade(PersistentReferenceFacade $persistentReferenceFacade)
     {
-        $this->container = $container;
-        $this->persistentReferenceFacade = $this->get(PersistentReferenceFacade::class);
-    }
-
-    /**
-     * @param string $serviceId
-     * @return mixed
-     */
-    protected function get($serviceId)
-    {
-        return $this->container->get($serviceId);
+        $this->persistentReferenceFacade = $persistentReferenceFacade;
     }
 
     /**

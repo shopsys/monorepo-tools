@@ -10,14 +10,22 @@ use Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade;
 
 class SliderItemDataFixture extends AbstractReferenceFixture
 {
+    /** @var \Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade */
+    private $sliderItemFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade $sliderItemFacade
+     */
+    public function __construct(SliderItemFacade $sliderItemFacade)
+    {
+        $this->sliderItemFacade = $sliderItemFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $sliderItemFacade = $this->get(SliderItemFacade::class);
-        /* @var $sliderItemFacade \Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade*/
-
         $sliderItemData = new SliderItemData();
         $sliderItemData->domainId = Domain::FIRST_DOMAIN_ID;
 
@@ -25,16 +33,16 @@ class SliderItemDataFixture extends AbstractReferenceFixture
         $sliderItemData->link = 'http://www.shopsys.cz/';
         $sliderItemData->hidden = false;
 
-        $sliderItemFacade->create($sliderItemData);
+        $this->sliderItemFacade->create($sliderItemData);
 
         $sliderItemData->name = 'Twitter';
         $sliderItemData->link = 'https://twitter.com/netdevelo_cz';
 
-        $sliderItemFacade->create($sliderItemData);
+        $this->sliderItemFacade->create($sliderItemData);
 
         $sliderItemData->name = 'Pojďte s námi růst';
         $sliderItemData->link = 'http://www.pojdtesnamirust.cz/';
 
-        $sliderItemFacade->create($sliderItemData);
+        $this->sliderItemFacade->create($sliderItemData);
     }
 }

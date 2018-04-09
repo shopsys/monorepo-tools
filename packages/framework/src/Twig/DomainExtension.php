@@ -25,11 +25,28 @@ class DomainExtension extends \Twig_Extension
      */
     private $assetPackages;
 
-    public function __construct($domainImagesUrlPrefix, ContainerInterface $container, Packages $assetPackages)
-    {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\DomainFacade
+     */
+    private $domainFacade;
+
+    public function __construct(
+        $domainImagesUrlPrefix,
+        ContainerInterface $container,
+        Packages $assetPackages,
+        Domain $domain,
+        DomainFacade $domainFacade
+    ) {
         $this->domainImagesUrlPrefix = $domainImagesUrlPrefix;
         $this->container = $container;
         $this->assetPackages = $assetPackages;
+        $this->domain = $domain;
+        $this->domainFacade = $domainFacade;
     }
 
     /**
@@ -50,19 +67,7 @@ class DomainExtension extends \Twig_Extension
      */
     public function getDomain()
     {
-        // Twig extensions are loaded during assetic:dump command,
-        // so they cannot be dependent on Domain service
-        return $this->container->get(Domain::class);
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Component\Domain\DomainFacade
-     */
-    private function getDomainFacade()
-    {
-        // Twig extensions are loaded during assetic:dump command,
-        // so they cannot be dependent on DomainFacade service
-        return $this->container->get(DomainFacade::class);
+        return $this->domain;
     }
 
     /**
@@ -90,7 +95,7 @@ class DomainExtension extends \Twig_Extension
     public function getDomainIconHtml($domainId, $size = 'normal')
     {
         $domainName = $this->getDomain()->getDomainConfigById($domainId)->getName();
-        if ($this->getDomainFacade()->existsDomainIcon($domainId)) {
+        if ($this->domainFacade->existsDomainIcon($domainId)) {
             $src = $this->assetPackages->getUrl(sprintf('%s/%u.png', $this->domainImagesUrlPrefix, $domainId));
 
             return '

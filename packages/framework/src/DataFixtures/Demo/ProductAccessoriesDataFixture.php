@@ -10,24 +10,38 @@ use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 
 class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
+    /** @var \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+    private $productEditDataFactory;
+
+    /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
+    private $productFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory $productEditDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
+     */
+    public function __construct(
+        ProductEditDataFactory $productEditDataFactory,
+        ProductFacade $productFacade
+    ) {
+        $this->productEditDataFactory = $productEditDataFactory;
+        $this->productFacade = $productFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $productEditDataFactory = $this->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
-        $productFacade = $this->get(ProductFacade::class);
-        /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\FrameworkBundle\Model\Product\Product */
 
-        $productEditData = $productEditDataFactory->createFromProduct($product);
+        $productEditData = $this->productEditDataFactory->createFromProduct($product);
         $productEditData->accessories = [
             $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '24'),
             $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '13'),
         ];
-        $productFacade->edit($product->getId(), $productEditData);
+        $this->productFacade->edit($product->getId(), $productEditData);
     }
 
     /**

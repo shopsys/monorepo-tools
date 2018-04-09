@@ -20,15 +20,23 @@ class SeoExtension extends \Twig_Extension
     private $seoSettingFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
+
+    /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade $seoSettingFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         ContainerInterface $container,
-        SeoSettingFacade $seoSettingFacade
+        SeoSettingFacade $seoSettingFacade,
+        Domain $domain
     ) {
         $this->container = $container;
         $this->seoSettingFacade = $seoSettingFacade;
+        $this->domain = $domain;
     }
 
     /**
@@ -40,16 +48,6 @@ class SeoExtension extends \Twig_Extension
             new Twig_SimpleFunction('getSeoTitleAddOn', [$this, 'getSeoTitleAddOn']),
             new Twig_SimpleFunction('getSeoMetaDescription', [$this, 'getSeoMetaDescription']),
         ];
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Component\Domain\Domain
-     */
-    private function getDomain()
-    {
-        // Twig extensions are loaded during assetic:dump command,
-        // so they cannot be dependent on Domain service
-        return $this->container->get(Domain::class);
     }
 
     /**
@@ -65,7 +63,7 @@ class SeoExtension extends \Twig_Extension
      */
     public function getSeoTitleAddOn()
     {
-        $currentDomainId = $this->getDomain()->getId();
+        $currentDomainId = $this->domain->getId();
         return $this->seoSettingFacade->getTitleAddOn($currentDomainId);
     }
 
@@ -74,7 +72,7 @@ class SeoExtension extends \Twig_Extension
      */
     public function getSeoMetaDescription()
     {
-        $currentDomainId = $this->getDomain()->getId();
+        $currentDomainId = $this->domain->getId();
         return $this->seoSettingFacade->getDescriptionMainPage($currentDomainId);
     }
 }

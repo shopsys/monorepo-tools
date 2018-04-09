@@ -36,18 +36,28 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
     const BRAND_HYUNDAI = 'brand_hyundai';
     const BRAND_NIKON = 'brand_nikon';
 
+    /** @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade */
+    private $brandFacade;
+
+    /** @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditDataFactory */
+    private $brandEditDataFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade $brandFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditDataFactory $brandEditDataFactory
+     */
+    public function __construct(BrandFacade $brandFacade, BrandEditDataFactory $brandEditDataFactory)
+    {
+        $this->brandFacade = $brandFacade;
+        $this->brandEditDataFactory = $brandEditDataFactory;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $brandFacade = $this->get(BrandFacade::class);
-        /* @var $brandFacade \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade */
-
-        $brandEditDataFactory = $this->get(BrandEditDataFactory::class);
-        /* @var $brandEditDataFactory \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditDataFactory */
-
-        $brandEditData = $brandEditDataFactory->createDefault();
+        $brandEditData = $this->brandEditDataFactory->createDefault();
         $brandData = $brandEditData->getBrandData();
 
         foreach ($this->getBrandNamesIndexedByBrandConstants() as $brandConstant => $brandName) {
@@ -56,7 +66,7 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
                 'cs' => 'Toto je popis značky ' . $brandData->name . '.',
                 'en' => 'This is description of brand ' . $brandData->name . '.',
             ];
-            $brand = $brandFacade->create($brandEditData);
+            $brand = $this->brandFacade->create($brandEditData);
             $this->addReference($brandConstant, $brand);
         }
     }

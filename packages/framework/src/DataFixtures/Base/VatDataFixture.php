@@ -15,6 +15,19 @@ class VatDataFixture extends AbstractReferenceFixture
     const VAT_HIGH = 'vat_high';
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
+     */
+    private $vatFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade
+     */
+    public function __construct(VatFacade $vatFacade)
+    {
+        $this->vatFacade = $vatFacade;
+    }
+
+    /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
@@ -44,10 +57,7 @@ class VatDataFixture extends AbstractReferenceFixture
      */
     private function createVat(VatData $vatData, $referenceName = null)
     {
-        $vatFacade = $this->get(VatFacade::class);
-        /* @var $vatFacade \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade */
-
-        $vat = $vatFacade->create($vatData);
+        $vat = $this->vatFacade->create($vatData);
         if ($referenceName !== null) {
             $this->addReference($referenceName, $vat);
         }

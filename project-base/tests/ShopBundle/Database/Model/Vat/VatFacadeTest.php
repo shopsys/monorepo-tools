@@ -18,15 +18,15 @@ class VatFacadeTest extends DatabaseTestCase
     public function testDeleteByIdAndReplace()
     {
         $em = $this->getEntityManager();
-        $vatFacade = $this->getServiceByType(VatFacade::class);
+        $vatFacade = $this->getContainer()->get(VatFacade::class);
         /* @var $vatFacade \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade */
-        $transportFacade = $this->getServiceByType(TransportFacade::class);
+        $transportFacade = $this->getContainer()->get(TransportFacade::class);
         /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
-        $transportEditDataFactory = $this->getServiceByType(TransportEditDataFactory::class);
+        $transportEditDataFactory = $this->getContainer()->get(TransportEditDataFactory::class);
         /* @var $transportEditDataFactory \Shopsys\FrameworkBundle\Model\Transport\TransportEditDataFactory */
-        $paymentEditDataFactory = $this->getServiceByType(PaymentEditDataFactory::class);
+        $paymentEditDataFactory = $this->getContainer()->get(PaymentEditDataFactory::class);
         /* @var $paymentEditDataFactory \Shopsys\FrameworkBundle\Model\Payment\PaymentEditDataFactory */
-        $paymentFacade = $this->getServiceByType(PaymentFacade::class);
+        $paymentFacade = $this->getContainer()->get(PaymentFacade::class);
         /* @var $paymentFacade \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
 
         $vatToDelete = $vatFacade->create(new VatData('name', 10));

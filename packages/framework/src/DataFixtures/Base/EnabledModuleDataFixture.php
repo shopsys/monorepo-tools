@@ -9,14 +9,23 @@ use Shopsys\FrameworkBundle\Model\Module\ModuleList;
 
 class EnabledModuleDataFixture extends AbstractReferenceFixture
 {
+    /** @var \Shopsys\FrameworkBundle\Model\Module\ModuleFacade */
+    private $moduleFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Module\ModuleFacade $moduleFacade
+     */
+    public function __construct(ModuleFacade $moduleFacade)
+    {
+        $this->moduleFacade = $moduleFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        $moduleFacade = $this->get(ModuleFacade::class);
-        /* @var $moduleFacade \Shopsys\FrameworkBundle\Model\Module\ModuleFacade */
-        $moduleFacade->setEnabled(ModuleList::PRODUCT_FILTER_COUNTS, true);
-        $moduleFacade->setEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS, true);
+        $this->moduleFacade->setEnabled(ModuleList::PRODUCT_FILTER_COUNTS, true);
+        $this->moduleFacade->setEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS, true);
     }
 }

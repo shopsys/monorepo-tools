@@ -9,8 +9,19 @@ use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
 
 class CountryDataFixture extends AbstractReferenceFixture
 {
+    /** @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade */
+    private $countryFacade;
+
     const COUNTRY_CZECH_REPUBLIC_2 = 'country_czech_republic_2';
     const COUNTRY_SLOVAKIA_2 = 'country_slovakia_2';
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryFacade $countryFacade
+     */
+    public function __construct(CountryFacade $countryFacade)
+    {
+        $this->countryFacade = $countryFacade;
+    }
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -35,10 +46,7 @@ class CountryDataFixture extends AbstractReferenceFixture
      */
     private function createCountry(CountryData $countryData, $domainId, $referenceName)
     {
-        $countryFacade = $this->get(CountryFacade::class);
-        /* @var $countryFacade \Shopsys\FrameworkBundle\Model\Country\CountryFacade */
-
-        $country = $countryFacade->create($countryData, $domainId);
+        $country = $this->countryFacade->create($countryData, $domainId);
         $this->addReference($referenceName, $country);
     }
 }

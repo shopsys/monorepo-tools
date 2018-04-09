@@ -24,6 +24,36 @@ use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
  */
 class OrderDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
+    /** @var \Shopsys\FrameworkBundle\Model\Customer\UserRepository */
+    private $userRepository;
+
+    /** @var \Faker\Generator */
+    private $faker;
+
+    /** @var \Shopsys\FrameworkBundle\Model\Order\OrderFacade */
+    private $orderFacade;
+
+    /** @var \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory */
+    private $orderPreviewFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
+     * @param \Faker\Generator $faker
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderFacade $orderFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory $orderPreviewFactory
+     */
+    public function __construct(
+        UserRepository $userRepository,
+        Generator $faker,
+        OrderFacade $orderFacade,
+        OrderPreviewFactory $orderPreviewFactory
+    ) {
+        $this->userRepository = $userRepository;
+        $this->faker = $faker;
+        $this->orderFacade = $orderFacade;
+        $this->orderPreviewFactory = $orderPreviewFactory;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      *
@@ -31,11 +61,6 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
      */
     public function load(ObjectManager $manager)
     {
-        $userRepository = $this->get(UserRepository::class);
-        /* @var $userRepository \Shopsys\FrameworkBundle\Model\Customer\UserRepository */
-        $faker = $this->get(Generator::class);
-        /* @var $faker \Faker\Generator */
-
         $orderData = new OrderData();
         $orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_CZECH_POST);
         $orderData->payment = $this->getReference(DemoPaymentDataFixture::PAYMENT_CASH_ON_DELIVERY);
@@ -51,7 +76,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = 2;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
-        $orderData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -59,7 +84,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
             ]
         );
 
-        $user = $userRepository->findUserByEmailAndDomain('no-reply.2@netdevelo.cz', 2);
+        $user = $this->userRepository->findUserByEmailAndDomain('no-reply.2@netdevelo.cz', 2);
         $orderData = new OrderData();
         $orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_PERSONAL);
         $orderData->payment = $this->getReference(DemoPaymentDataFixture::PAYMENT_CASH);
@@ -87,7 +112,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->note = 'Prosím o dodání do pátku. Děkuji.';
         $orderData->domainId = 2;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        $orderData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -97,7 +122,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
             $user
         );
 
-        $user = $userRepository->findUserByEmailAndDomain('no-reply.7@netdevelo.cz', 2);
+        $user = $this->userRepository->findUserByEmailAndDomain('no-reply.7@netdevelo.cz', 2);
         $orderData = new OrderData();
         $orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_CZECH_POST);
         $orderData->payment = $this->getReference(DemoPaymentDataFixture::PAYMENT_CASH_ON_DELIVERY);
@@ -113,7 +138,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = 2;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
-        $orderData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -138,7 +163,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = 2;
         $orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
-        $orderData->createdAt = $faker->dateTimeBetween('-1 week', 'now');
+        $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
         $this->createOrder(
             $orderData,
             [
@@ -157,17 +182,12 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         array $products,
         User $user = null
     ) {
-        $orderFacade = $this->get(OrderFacade::class);
-        /* @var $orderFacade \Shopsys\FrameworkBundle\Model\Order\OrderFacade */
-        $orderPreviewFactory = $this->get(OrderPreviewFactory::class);
-        /* @var $orderPreviewFactory \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory */
-
         $quantifiedProducts = [];
         foreach ($products as $productReferenceName => $quantity) {
             $product = $this->getReference($productReferenceName);
             $quantifiedProducts[] = new QuantifiedProduct($product, $quantity);
         }
-        $orderPreview = $orderPreviewFactory->create(
+        $orderPreview = $this->orderPreviewFactory->create(
             $orderData->currency,
             $orderData->domainId,
             $quantifiedProducts,
@@ -177,7 +197,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
             null
         );
 
-        $order = $orderFacade->createOrder($orderData, $orderPreview, $user);
+        $order = $this->orderFacade->createOrder($orderData, $orderPreview, $user);
         /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
 
         $referenceName = DemoOrderDataFixture::ORDER_PREFIX . $order->getId();

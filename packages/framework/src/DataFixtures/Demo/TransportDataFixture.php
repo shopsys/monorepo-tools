@@ -17,6 +17,17 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
     const TRANSPORT_PPL = 'transport_ppl';
     const TRANSPORT_PERSONAL = 'transport_personal';
 
+    /** @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
+    private $transportFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade
+     */
+    public function __construct(TransportFacade $transportFacade)
+    {
+        $this->transportFacade = $transportFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
@@ -82,10 +93,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
      */
     private function createTransport($referenceName, TransportEditData $transportEditData)
     {
-        $transportFacade = $this->get(TransportFacade::class);
-        /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
-
-        $transport = $transportFacade->create($transportEditData);
+        $transport = $this->transportFacade->create($transportEditData);
         $this->addReference($referenceName, $transport);
     }
 

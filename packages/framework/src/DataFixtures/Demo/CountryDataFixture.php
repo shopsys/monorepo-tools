@@ -12,6 +12,17 @@ class CountryDataFixture extends AbstractReferenceFixture
     const COUNTRY_CZECH_REPUBLIC_1 = 'country_czech_republic_1';
     const COUNTRY_SLOVAKIA_1 = 'country_slovakia_1';
 
+    /** @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade */
+    private $countryFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryFacade $countryFacade
+     */
+    public function __construct(CountryFacade $countryFacade)
+    {
+        $this->countryFacade = $countryFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
@@ -34,10 +45,7 @@ class CountryDataFixture extends AbstractReferenceFixture
      */
     private function createCountry(CountryData $countryData, $domainId, $referenceName)
     {
-        $countryFacade = $this->get(CountryFacade::class);
-        /* @var $countryFacade \Shopsys\FrameworkBundle\Model\Country\CountryFacade */
-
-        $country = $countryFacade->create($countryData, $domainId);
+        $country = $this->countryFacade->create($countryData, $domainId);
         $this->addReference($referenceName, $country);
     }
 }

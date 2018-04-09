@@ -7,15 +7,6 @@ services:
   Shopsys\FrameworkBundle\Form\:
     resource: '../../Form/'
 
-  Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation:
-    public: true
-
-  Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation:
-    public: true
-
-  Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation:
-    public: true
-
   Shopsys\FrameworkBundle\Form\InvertChoiceTypeExtension:
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }

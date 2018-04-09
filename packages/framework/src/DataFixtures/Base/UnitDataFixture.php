@@ -12,6 +12,19 @@ class UnitDataFixture extends AbstractReferenceFixture
     const UNIT_PIECES = 'unit_pcs';
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
+     */
+    private $unitFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade $unitFacade
+     */
+    public function __construct(UnitFacade $unitFacade)
+    {
+        $this->unitFacade = $unitFacade;
+    }
+
+    /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager)
@@ -28,10 +41,7 @@ class UnitDataFixture extends AbstractReferenceFixture
      */
     private function createUnit(UnitData $unitData, $referenceName = null)
     {
-        $unitFacade = $this->get(UnitFacade::class);
-        /* @var $unitFacade \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade */
-
-        $unit = $unitFacade->create($unitData);
+        $unit = $this->unitFacade->create($unitData);
         if ($referenceName !== null) {
             $this->addReference($referenceName, $unit);
         }

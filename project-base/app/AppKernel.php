@@ -55,10 +55,6 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebServerBundle\WebServerBundle();
         }
 
-        if ($this->getEnvironment() === Environment::ENVIRONMENT_TEST) {
-            $bundles[] = new Shopsys\IntegrationTestingBundle\ShopsysIntegrationTestingBundle();
-        }
-
         return $bundles;
     }
 

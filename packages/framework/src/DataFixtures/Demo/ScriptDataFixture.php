@@ -10,6 +10,17 @@ use Shopsys\FrameworkBundle\Model\Script\ScriptFacade;
 
 class ScriptDataFixture extends AbstractReferenceFixture
 {
+    /** @var \Shopsys\FrameworkBundle\Model\Script\ScriptFacade */
+    private $scriptFacade;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptFacade $scriptFacade
+     */
+    public function __construct(ScriptFacade $scriptFacade)
+    {
+        $this->scriptFacade = $scriptFacade;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
@@ -20,22 +31,12 @@ class ScriptDataFixture extends AbstractReferenceFixture
         $scriptData->code = '<!-- demo script -->';
         $scriptData->placement = Script::PLACEMENT_ALL_PAGES;
 
-        $this->createScript($scriptData);
+        $this->scriptFacade->create($scriptData);
 
         $scriptData->name = 'Demo skript 2';
         $scriptData->code = '<!-- script to display on order sent page -->';
         $scriptData->placement = Script::PLACEMENT_ORDER_SENT_PAGE;
 
-        $this->createScript($scriptData);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptData $scriptData
-     */
-    private function createScript(ScriptData $scriptData)
-    {
-        $scriptFacade = $this->get(ScriptFacade::class);
-        /* @var $scriptFacade \Shopsys\FrameworkBundle\Model\Script\ScriptFacade */
-        $scriptFacade->create($scriptData);
+        $this->scriptFacade->create($scriptData);
     }
 }

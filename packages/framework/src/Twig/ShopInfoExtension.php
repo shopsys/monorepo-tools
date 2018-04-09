@@ -20,15 +20,23 @@ class ShopInfoExtension extends \Twig_Extension
     private $shopInfoSettingFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
+
+    /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param \Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade $shopInfoSettingFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
         ContainerInterface $container,
-        ShopInfoSettingFacade $shopInfoSettingFacade
+        ShopInfoSettingFacade $shopInfoSettingFacade,
+        Domain $domain
     ) {
         $this->container = $container;
         $this->shopInfoSettingFacade = $shopInfoSettingFacade;
+        $this->domain = $domain;
     }
 
     /**
@@ -50,7 +58,7 @@ class ShopInfoExtension extends \Twig_Extension
     {
         // Twig extensions are loaded during assetic:dump command,
         // so they cannot be dependent on Domain service
-        return $this->container->get(Domain::class);
+        return $this->domain;
     }
 
     /**

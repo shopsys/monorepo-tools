@@ -41,10 +41,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - docs updated in order to provide up-to-date information about the current project state (@vitek-rostislav) 
 - installation guides: updated instructions for creating new project from Shopsys Framework sources (@vitek-rostislav)
 - basics-about-package-architecture.md updated to reflect current architecture state (@vitek-rostislav)
+- updated doctrine/doctrine-fixtures-bundle (@stanoMilan)
+    - all fixtures now use autowiring
+- services that are not obtained directly from container in the application are not defined as public anymore (@stanoMilan)
+    - IntegrationTestingBundle was removed
+    - all services that must be public because of tests moved to services_test.yml
+    - unnecessary service obtaining from container replaced with autowiring
 
 ## 6.0.0-beta21 - 2018-03-05
 - released only in closed beta
-
 ### Added
 - PHPStan support (@mhujer)
     - currently analysing source code by level 0

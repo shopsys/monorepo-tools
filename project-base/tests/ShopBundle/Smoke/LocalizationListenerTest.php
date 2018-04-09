@@ -12,7 +12,7 @@ class LocalizationListenerTest extends DatabaseTestCase
 {
     public function testProductDetailOnFirstDomainHasEnglishLocale()
     {
-        $router = $this->getServiceByType(CurrentDomainRouter::class);
+        $router = $this->getContainer()->get(CurrentDomainRouter::class);
         /* @var $router \Shopsys\FrameworkBundle\Component\Router\CurrentDomainRouter */
         $productUrl = $router->generate('front_product_detail', ['id' => 3], UrlGeneratorInterface::ABSOLUTE_URL);
 
@@ -30,12 +30,12 @@ class LocalizationListenerTest extends DatabaseTestCase
      */
     public function testProductDetailOnSecondDomainHasCzechLocale()
     {
-        $domain = $this->getServiceByType(Domain::class);
+        $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
 
         $domain->switchDomainById(2);
 
-        $router = $this->getServiceByType(DomainRouterFactory::class)->getRouter(2);
+        $router = $this->getContainer()->get(DomainRouterFactory::class)->getRouter(2);
         /* @var $router \Symfony\Component\Routing\RouterInterface */
         $productUrl = $router->generate('front_product_detail', ['id' => 3], UrlGeneratorInterface::ABSOLUTE_URL);
         $crawler = $this->getClient()->request('GET', $productUrl);
