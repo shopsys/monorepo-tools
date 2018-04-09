@@ -433,8 +433,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Order\Status\Grid\OrderStatusInlineEdit: ~
 
-  Shopsys\FrameworkBundle\Model\PluginData\DoctrinePluginDataStorageProvider: ~
-
   Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit: ~
 
   Shopsys\FrameworkBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit: ~

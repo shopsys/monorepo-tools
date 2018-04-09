@@ -9,20 +9,10 @@ Package of interfaces providing compatibility between [Shopsys Framework](https:
 This package contains interfaces responsible for general functionality usable in almost any plugin.
 For specific functionality, such as generating product feeds, there are [separate repositories](https://github.com/search?q=topic%3Aplugin-interface+org%3Ashopsys&type=Repositories), eg. [ProductFeedInterface](https://github.com/shopsys/product-feed-interface/).
 
-### Data storage - deprecated
-A lot of plugins need to persist some kind of custom data, for example, the last time a command was executed.
-
-For this task you can use [`DataStorageInterface`](./src/DataStorageInterface.php) that has all the methods you need.
-You can safely persist scalar values or arrays in a key-value storage fashion.
-
-To get the instance of the data storage you can call `getDataStorage()` method on a service from Shopsys Framework implementing [`PluginDataStorageProviderInterface`](./src/PluginDataStorageProviderInterface.php).
-
-See [`\Shopsys\Plugin\DataStorageInterface`](./src/DataStorageInterface.php) and [`\Shopsys\Plugin\PluginDataStorageProviderInterface`](./src/PluginDataStorageProviderInterface.php) for details.
-
 #### Example
 For example usage see the `AcmeProductCrudExtension` in the CRUD extension section below.
 
-### Storing data - new way
+### Storing data
 Best way to store your plugin data is to use Doctrine entities. 
 Create a folder (e.g. `src/Entity`) in your plugin and put your entities there. 
 Then you need to create `DoctrineOrmMappingPass` and add it as `CompilerPass` in your `YourBundleNameBundle` class. This can be done like this:
@@ -80,10 +70,10 @@ services:
 // ...
 class AcmeProductCrudExtension implements PluginCrudExtensionInterface
 {
-    private $pluginDataStorage;
+    private $acmeProductFacade;
 
-    public function __construct(PluginDataStorageProviderInterface $pluginDataStorageProvider) {
-        $this->pluginDataStorage = $pluginDataStorageProvider->getDataStorage(AcmePluginBundle::class, 'product');
+    public function __construct(AcmeProductFacade $acmeProductFacade) {
+        $this->acmeProductFacade = $acmeProductFacade;
     }
 
     public function getFormTypeClass()
@@ -98,17 +88,26 @@ class AcmeProductCrudExtension implements PluginCrudExtensionInterface
 
     public function getData($productId)
     {
-        return $this->pluginDataStorage->get($productId);
+        $acmeProduct = $this->acmeProductFacade->findByProductId($productId);
+        
+        $pluginData = [
+            'attribute' => $acmeProduct->getAttribute(),
+        ];
+        
+        return $pluginData;
     }
 
     public function saveData($productId, $data)
     {
-        $this->pluginDataStorage->set($productId, $data);
+        $acmeProductData = new AcmeProductData();
+        $acmeProductData->attribute = $data['attribute'];
+        
+        $this->acmeProductFacade->save($productId, $acmeProductData);
     }
 
     public function removeData($productId)
     {
-        $this->pluginDataStorage->remove($productId);
+        $this->acmeProductFacade->remove($productId);
     }
 }
 ```
@@ -119,8 +118,7 @@ class AcmeProductCrudExtension implements PluginCrudExtensionInterface
 In order to enable easy testing or to demonstrate usage of your plugin, you might want to provide demonstrational data with it.
 In that case, you should implement [`PluginDataFixtureInterface`](./src/PluginDataFixtureInterface.php) that will take care of loading demonstrational data into the core.
 
-All you got to do is to implement `PluginDataFixtureInterface::load()` method, 
-where you must set data using [the plugin data storage](#data-storage) and [tag the service in a DI container](http://symfony.com/doc/current/service_container/tags.html) with `shopsys.data_fixture` tag.
+All you got to do is to implement `PluginDataFixtureInterface::load()` method and [tag the service in a DI container](http://symfony.com/doc/current/service_container/tags.html) with `shopsys.data_fixture` tag.
 
 #### Example
 ```yaml
@@ -136,25 +134,26 @@ services:
 
 class AcmeDataFixture implements PluginDataFixtureInterface
 {
-    /**
-     * @var \Shopsys\Plugin\PluginDataStorageInterface
-     */
-    private $pluginDataStorage;
+    private $acmeProductFacade;
 
-    public function __construct(PluginDataStorageProviderInterface $pluginDataStorageProvider) {
-        $this->pluginDataStorage = $pluginDataStorageProvider->getDataStorage(AcmePluginBundle::class, 'product');
+    public function __construct(AcmeProductFacade $acmeProductFacade) {
+        $this->acmeProductFacade = $acmeProductFacade;
     }
 
     public function load() {
-        $this->productDataStorage->set(1, [
-            'enable_weight_calculation' => true,
-            'weight' => 42,
-        ]);
-
-        $this->productDataStorage->set(2, [
-            'enable_weight_calculation' => false,
-            'weight' => null,
-        ]);
+        $firstAcmeProductData = new AcmeProductData();
+        $firstAcmeProductData->enableWeightCalculation = true;
+        $firstAcmeProductData->weight = 42;
+        $firstAcmeProductData->domainId = 1;
+        
+        $this->acmeProductFacade->save($firstAcmeProductData);
+        
+        $secondAcmeProductData = new AcmeProductData();
+        $secondAcmeProductData->enableWeightCalculation = false;
+        $secondAcmeProductData->weight = null;
+        $secondAcmeProductData->domainId = 2;
+        
+        $this->acmeProductFacade->save($secondAcmeProductData);
     }
 
 }
