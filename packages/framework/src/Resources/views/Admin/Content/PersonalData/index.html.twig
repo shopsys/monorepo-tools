@@ -46,6 +46,11 @@
                             {{ domainIcon(domainId) }}
                         {% endif %}
                     </div>
+                    <div class="form-line__item form-line__item--text">
+                        <a href="{{ findUrlByDomainId('front_personal_data_export', {}, domainId) }}" target="_blank">
+                            {{ findUrlByDomainId('front_personal_data_export', {}, domainId) }}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

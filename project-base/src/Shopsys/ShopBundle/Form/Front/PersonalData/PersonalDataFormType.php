@@ -7,6 +7,7 @@ use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
 use Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,6 +32,7 @@ class PersonalDataFormType extends AbstractType
                 ],
             ])
             ->add('email2', HoneyPotType::class)
+            ->add('type', HiddenType::class)
             ->add('send', SubmitType::class);
     }
 

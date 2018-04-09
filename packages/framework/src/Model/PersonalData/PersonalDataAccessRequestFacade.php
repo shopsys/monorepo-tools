@@ -66,7 +66,7 @@ class PersonalDataAccessRequestFacade
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequest|null
      */
-    public function findEmailByHashAndDomainId($hash, $domainId)
+    public function findByHashAndDomainId($hash, $domainId)
     {
         return $this->personalDataAccessRequestRepository->findByHashAndDomainId($hash, $domainId);
     }

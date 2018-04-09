@@ -916,4 +916,12 @@ class Order
     {
         return $this->createdAsAdministratorName;
     }
+
+    /**
+     * @return bool
+     */
+    public function isCancelled()
+    {
+        return $this->status === OrderStatus::TYPE_CANCELED;
+    }
 }

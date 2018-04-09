@@ -48,8 +48,8 @@ class PersonalDataController extends AdminBaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->setting->setForDomain(Setting::PERSONAL_DATA_DISPLAY_SITE_CONTENT, $form->getData()['contentDisplayPerosnalData'], $domainId);
-            $this->setting->setForDomain(Setting::PERSONAL_DATA_EXPORT_SITE_CONTENT, $form->getData()['contentExportPersonalData'], $domainId);
+            $this->setting->setForDomain(Setting::PERSONAL_DATA_DISPLAY_SITE_CONTENT, $form->getData()['personalDataDisplaySiteContent'], $domainId);
+            $this->setting->setForDomain(Setting::PERSONAL_DATA_EXPORT_SITE_CONTENT, $form->getData()['personalDataExportSiteContent'], $domainId);
             $this->getFlashMessageSender()->addSuccessFlash(t('Personal data site content updated successfully'));
         }
 

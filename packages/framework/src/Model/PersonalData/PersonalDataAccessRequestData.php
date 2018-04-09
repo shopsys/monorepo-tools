@@ -26,4 +26,9 @@ class PersonalDataAccessRequestData
      * @var int
      */
     public $domainId;
+
+    /**
+     * @var string
+     */
+    public $type;
 }

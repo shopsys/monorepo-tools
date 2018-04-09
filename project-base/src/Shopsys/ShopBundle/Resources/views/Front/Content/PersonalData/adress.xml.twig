@@ -1,0 +1,20 @@
+<customer_addresses>
+    {% set billingAddress = user.billingAddress %}
+    <address>
+        <address_type>billing</address_type>
+        <street><![CDATA[{{ billingAddress.street }}]]></street>
+        <city><![CDATA[{{ billingAddress.city }}]]></city>
+        <postal_code><![CDATA[{{ billingAddress.postCode }}]]></postal_code>
+        <country_code><![CDATA[{{ billingAddress.country.code|default('') }}]]></country_code>
+    </address>
+    {% if user.deliveryAddress is not null %}
+        <address>
+            {% set deliveryAddress = user.deliveryAddress %}
+            <address_type>shipping</address_type>
+            {% if deliveryAddress.street is not null %}<street><![CDATA[{{ deliveryAddress.street }}]]></street>{% endif %}
+            {% if deliveryAddress.city is not null %}<city><![CDATA[{{ deliveryAddress.city }}]]></city>{% endif %}
+            {% if deliveryAddress.postCode is not null %}<postal_code><![CDATA[{{ deliveryAddress.postCode }}]]></postal_code>{% endif %}
+            {% if deliveryAddress.country is not null %}<country_code><![CDATA[{{ deliveryAddress.country.code }}]]></country_code>{% endif %}
+        </address>
+    {% endif %}
+</customer_addresses>

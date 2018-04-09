@@ -358,13 +358,35 @@ class RouteConfigCustomization
                     ->setExpectedStatusCode(302);
             })
             ->customizeByRouteName('front_personal_data_access', function (RouteConfig $config) {
-                $personalDataAccessRequest = $this->getPersistentReference(PersonalDataAccessRequestDataFixture::VALID_ACCESS_REQUEST);
+                $personalDataAccessRequest = $this->getPersistentReference(PersonalDataAccessRequestDataFixture::REFERENCE_ACCESS_DISPLAY_REQUEST);
                 /* @var $personalDataAccessRequest \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequest */
 
                 $config->changeDefaultRequestDataSet('Check personal data site with wrong hash')
                     ->setParameter('hash', 'invalidHash')
                     ->setExpectedStatusCode(404);
                 $config->addExtraRequestDataSet('Check personal data site with right hash')
+                    ->setParameter('hash', $personalDataAccessRequest->getHash())
+                    ->setExpectedStatusCode(200);
+            })
+            ->customizeByRouteName('front_personal_data_access_export', function (RouteConfig $config) {
+                $personalDataAccessRequest = $this->getPersistentReference(PersonalDataAccessRequestDataFixture::REFERENCE_ACCESS_EXPORT_REQUEST);
+                /* @var $personalDataAccessRequest \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequest */
+
+                $config->changeDefaultRequestDataSet('Check personal data export site with wrong hash')
+                    ->setParameter('hash', 'invalidHash')
+                    ->setExpectedStatusCode(404);
+                $config->addExtraRequestDataSet('Check personal data export site with right hash')
+                    ->setParameter('hash', $personalDataAccessRequest->getHash())
+                    ->setExpectedStatusCode(200);
+            })
+            ->customizeByRouteName('front_export_personal_data', function (RouteConfig $config) {
+                $personalDataAccessRequest = $this->getPersistentReference(PersonalDataAccessRequestDataFixture::REFERENCE_ACCESS_EXPORT_REQUEST);
+                /* @var $personalDataAccessRequest \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequest */
+
+                $config->changeDefaultRequestDataSet('Check personal data XML export with wrong hash')
+                    ->setParameter('hash', 'invalidHash')
+                    ->setExpectedStatusCode(404);
+                $config->addExtraRequestDataSet('Check personal data XML export with right hash')
                     ->setParameter('hash', $personalDataAccessRequest->getHash())
                     ->setExpectedStatusCode(200);
             });

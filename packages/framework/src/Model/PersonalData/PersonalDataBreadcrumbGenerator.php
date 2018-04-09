@@ -12,15 +12,32 @@ class PersonalDataBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      */
     public function getBreadcrumbItems($routeName, array $routeParameters = [])
     {
-        return [
-            new BreadcrumbItem(t('Personal information overview')),
-        ];
+        if (in_array($routeName, $this->getPersonalDataRouteNames(), true)) {
+            $breadcrumbItem = new BreadcrumbItem(t('Personal information overview'));
+        } else {
+            $breadcrumbItem = new BreadcrumbItem(t('Personal information export'));
+        }
+
+        return [$breadcrumbItem];
     }
 
     /**
      * @inheritdoc
      */
     public function getRouteNames()
+    {
+        return [
+            'front_personal_data',
+            'front_personal_data_access',
+            'front_personal_data_export',
+            'front_personal_data_access_export',
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getPersonalDataRouteNames()
     {
         return [
             'front_personal_data',
