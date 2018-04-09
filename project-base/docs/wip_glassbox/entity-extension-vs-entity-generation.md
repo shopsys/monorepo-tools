@@ -54,6 +54,7 @@ On the other hand, combining PHP classes that would allow defining behavior in m
 All modules would have to use the generated entity class.
 This class is not defined in the committed code which may be confusing while browsing the repository and it would complicate the build process for code checking and static analysis.
 Having uncommitted generated classes might complicate work for programmers, eg. preventing them from using refactoring tool in their IDEs.
+Also, all modules, framework, and project wouldn't contain full-featured entities, always only pieces of entities and that would be difficult to orient in.
 
 Any modification to an entity in your project would require executing a command before the changes can take effect.
 This delay and extra workflow step could lead to unexpected issues and worse developer experience.
