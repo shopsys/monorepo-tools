@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Split monorepo and push all master branches into specified remotes
+# Split monorepo and push all master branches and all tags into specified remotes
 # You must first build the monorepo via "monorepo_build" (uses same parameters as "monorepo_split")
 # If subdirectory is not specified remote name will be used instead
 #
@@ -30,9 +30,13 @@ for PARAM in $@; do
     # Rewrite git history of master branch
     echo "Splitting repository for the remote '$REMOTE'"
     git checkout master
-    $MONOREPO_SCRIPT_DIR/rewrite_history_from.sh $SUBDIRECTORY
-    echo "Pushing branch 'master' into '$REMOTE'"
-    git push $REMOTE master
+    $MONOREPO_SCRIPT_DIR/rewrite_history_from.sh $SUBDIRECTORY master $(git tag)
+    if [ $? -eq 0 ]; then
+        echo "Pushing branch 'master' and all tags into '$REMOTE'"
+        git push --tags $REMOTE master
+    else
+        echo "Splitting repository for the remote '$REMOTE' failed! Not pushing anything into it."
+    fi
     # Restore the original history from back-up
     $MONOREPO_SCRIPT_DIR/original_refs_restore.sh
 done
