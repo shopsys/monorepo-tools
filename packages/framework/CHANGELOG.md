@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ## Added
 - Countries have code in ISO 3166-1 alpha-2 (@petr.kadlec)
+- admin: added site content and email template for personal data export (@stanoMilan)
 
 ### Added
 - extended glass-box model entities are now used instead of their parent entities in EntityManager and QueryBuilders (@PetrHeinz, @vitek-rostislav)

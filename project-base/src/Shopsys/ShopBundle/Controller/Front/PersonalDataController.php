@@ -126,6 +126,6 @@ class PersonalDataController extends FrontBaseController
      */
     private function getPersonalDataSiteContent()
     {
-        return $this->setting->getForDomain(Setting::PERSONAL_DATA_SITE_CONTENT, $this->domain->getId());
+        return $this->setting->getForDomain(Setting::PERSONAL_DATA_DISPLAY_SITE_CONTENT, $this->domain->getId());
     }
 }

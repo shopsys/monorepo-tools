@@ -7,7 +7,8 @@ use Doctrine\ORM\EntityManagerInterface;
 class Setting
 {
     const ORDER_SENT_PAGE_CONTENT = 'orderSubmittedText';
-    const PERSONAL_DATA_SITE_CONTENT = 'personalDataSiteContent';
+    const PERSONAL_DATA_DISPLAY_SITE_CONTENT = 'personalDataDisplaySiteContent';
+    const PERSONAL_DATA_EXPORT_SITE_CONTENT = 'personalDataExportSiteContent';
     const DEFAULT_PRICING_GROUP = 'defaultPricingGroupId';
     const DEFAULT_AVAILABILITY_IN_STOCK = 'defaultAvailabilityInStockId';
     const TERMS_AND_CONDITIONS_ARTICLE_ID = 'termsAndConditionsArticleId';

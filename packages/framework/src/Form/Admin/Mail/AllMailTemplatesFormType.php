@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Mail;
 use Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail;
 use Shopsys\FrameworkBundle\Model\Mail\AllMailTemplatesData;
 use Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail;
+use Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataExportMail;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -24,10 +25,19 @@ class AllMailTemplatesFormType extends AbstractType
      */
     private $personalDataAccessMail;
 
-    public function __construct(ResetPasswordMail $resetPasswordMail, PersonalDataAccessMail $personalDataAccessMail)
-    {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataExportMail
+     */
+    private $personalDataExportMail;
+
+    public function __construct(
+        ResetPasswordMail $resetPasswordMail,
+        PersonalDataAccessMail $personalDataAccessMail,
+        PersonalDataExportMail $personalDataExportMail
+    ) {
         $this->resetPasswordMail = $resetPasswordMail;
         $this->personalDataAccessMail = $personalDataAccessMail;
+        $this->personalDataExportMail = $personalDataExportMail;
     }
 
     /**
@@ -40,6 +50,9 @@ class AllMailTemplatesFormType extends AbstractType
             ->add('registrationTemplate', MailTemplateFormType::class)
             ->add('personalDataAccessTemplate', MailTemplateFormType::class, [
                 'required_body_variables' => $this->personalDataAccessMail->getRequiredBodyVariables(),
+            ])
+            ->add('personalDataExportTemplate', MailTemplateFormType::class, [
+                'required_body_variables' => $this->personalDataExportMail->getRequiredBodyVariables(),
             ])
             ->add('resetPasswordTemplate', MailTemplateFormType::class, [
                 'required_subject_variables' => $this->resetPasswordMail->getRequiredSubjectVariables(),

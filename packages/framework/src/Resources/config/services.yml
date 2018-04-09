@@ -395,6 +395,8 @@ services:
 
   Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail: ~
 
+  Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataExportMail: ~
+
   Shopsys\FrameworkBundle\DataFixtures\Performance\CategoryDataFixture:
      arguments:
        - "%shopsys.performance_data.category.counts_by_level%"

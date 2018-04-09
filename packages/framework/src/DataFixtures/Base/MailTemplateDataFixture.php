@@ -86,6 +86,19 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
             team of {domain}';
 
         $this->createMailTemplate($manager, MailTemplate::PERSONAL_DATA_ACCESS_NAME, $mailTemplateData);
+
+        $mailTemplateData->subject = 'Personal information export - {domain}';
+        $mailTemplateData->body = 'Dear customer, <br/><br/>
+based on your email {e-mail}, we are sending you a link where you can download your personal details registered on our online store in readable format. Clicking on the link will take you to a page where you’ll be able to download these informations, which we have in evidence in our online store {domain}. 
+<br/><br/>
+To download your personal information please click here - {url}<br/> 
+The link is valid for next 24 hours.
+<br/><br/>
+Best regards<br/>
+team of {domain}
+';
+
+        $this->createMailTemplate($manager, MailTemplate::PERSONAL_DATA_EXPORT_NAME, $mailTemplateData);
     }
 
     private function createMailTemplate(

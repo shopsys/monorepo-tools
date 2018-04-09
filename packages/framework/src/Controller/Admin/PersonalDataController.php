@@ -35,12 +35,21 @@ class PersonalDataController extends AdminBaseController
     public function settingAction(Request $request)
     {
         $domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
-        $personalDataSiteContent = $this->setting->getForDomain(Setting::PERSONAL_DATA_SITE_CONTENT, $domainId);
-        $form = $this->createForm(PersonalDataFormType::class, ['content' => $personalDataSiteContent]);
+        $personalDataDisplaySiteContent = $this->setting->getForDomain(Setting::PERSONAL_DATA_DISPLAY_SITE_CONTENT, $domainId);
+        $personalDataExportSiteContent = $this->setting->getForDomain(Setting::PERSONAL_DATA_EXPORT_SITE_CONTENT, $domainId);
+
+        $form = $this->createForm(
+            PersonalDataFormType::class,
+            [
+                'personalDataDisplaySiteContent' => $personalDataDisplaySiteContent,
+                'personalDataExportSiteContent' => $personalDataExportSiteContent,
+            ]
+        );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->setting->setForDomain(Setting::PERSONAL_DATA_SITE_CONTENT, $form->getData()['content'], $domainId);
+            $this->setting->setForDomain(Setting::PERSONAL_DATA_DISPLAY_SITE_CONTENT, $form->getData()['contentDisplayPerosnalData'], $domainId);
+            $this->setting->setForDomain(Setting::PERSONAL_DATA_EXPORT_SITE_CONTENT, $form->getData()['contentExportPersonalData'], $domainId);
             $this->getFlashMessageSender()->addSuccessFlash(t('Personal data site content updated successfully'));
         }
 
