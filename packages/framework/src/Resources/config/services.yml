@@ -43,6 +43,10 @@ services:
       - '@request_stack'
       - '%kernel.debug%'
 
+  Symfony\Component\Translation\MessageSelector: '@translator.selector'
+
+  Doctrine\Common\Annotations\DocParser: '@jms_translation.doc_parser'
+
   # disable original DefaultPhpFileExtractor
   jms_translation.extractor.file.default_php_extractor:
     alias: Shopsys\FrameworkBundle\Component\Translation\PhpFileExtractor
@@ -51,7 +55,7 @@ services:
   jms_translation.extractor_manager:
     alias: Shopsys\FrameworkBundle\Component\Translation\NormalizingExtractorManager
 
-  ninja_mutex.adapter:
+  NinjaMutex\Lock\LockInterface:
     class: NinjaMutex\Lock\FlockLock
     arguments:
       - '%shopsys.root_dir%/var/lock'
@@ -418,7 +422,8 @@ services:
 
   Shopsys\FrameworkBundle\Model\Localization\CustomDateTimeFormatterFactory: ~
 
-  Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository: ~
+  CommerceGuys\Intl\Currency\CurrencyRepositoryInterface:
+    class: Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository
 
   Shopsys\FrameworkBundle\Model\Localization\LocalizationListener: ~
 
@@ -571,6 +576,10 @@ services:
   monolog.handler.fingers_crossed.error_level_activation_strategy:
     abstract: true
 
+  Doctrine\Common\EventManager: '@doctrine.dbal.default_connection.event_manager'
+
+  Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader: '@doctrine.fixtures.loader'
+
   Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber:
     class: Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber
     arguments:
@@ -585,3 +594,9 @@ services:
       - "%shopsys.entity_extension.map%"
     tags:
       - { name: doctrine.event_subscriber, priority: -10 }
+
+  Metadata\MetadataFactory: '@prezent_doctrine_translatable.metadata_factory'
+
+  Craue\FormFlowBundle\Storage\DataManager: '@craue.form.flow.data_manager_default'
+
+  FM\ElfinderBundle\Configuration\ElFinderConfigurationReader: '@fm_elfinder.configurator.default'

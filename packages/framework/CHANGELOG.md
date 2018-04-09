@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - moved constants with types of environment from [shopsys/project-base](https://github.com/shopsys/project-base) (@PetrHeinz)
     - moved from `\Shopsys\Environment` to `\Shopsys\FrameworkBundle\Component\Environment\EnvironmentType`
 - service definition follows Symfony 4 autowiring standards (@EdoBarnas)
+    - FQN is always used as service ID
     - usage of interfaces is preferred, if possible
 
 ## 7.0.0-alpha1 - 2018-04-12
