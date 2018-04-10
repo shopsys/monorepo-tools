@@ -1,6 +1,3 @@
-imports:
-  - { resource: services_cron.yml }
-
 services:
   _defaults:
     autowire: true
@@ -37,3 +34,7 @@ services:
   Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDataFixture:
     tags:
       - { name: shopsys.data_fixture }
+
+  Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryCronModule:
+    tags:
+      - { name: shopsys.cron, hours: '3', minutes: '0' }
