@@ -2,7 +2,7 @@
     "name": "shopsys/framework",
     "type": "library",
     "description": "Shopsys Framework",
-    "license": "MIT",
+    "license": "Shopsys Community Licence",
     "autoload": {
         "psr-4": {
             "Shopsys\\FrameworkBundle\\": [
