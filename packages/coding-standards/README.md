@@ -79,5 +79,7 @@ This sniff provides the missing functionality and is intended to be used as an a
 ## Contributing
 Report [issues](https://github.com/shopsys/shopsys/issues/new) and send [pull requests](https://github.com/shopsys/shopsys/compare) in the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
+Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/CONTRIBUTING.md) before contributing.
+
 ## Need help
 Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).
