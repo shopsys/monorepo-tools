@@ -102,7 +102,7 @@ All tests are isolated from each other thanks to database transactions. This mea
 * low-level testing of components that are hard to unit-test
 
 #### Example:
-See test class [`\Tests\ShopBundle\Database\Model\Cart\CartFacadeTest`](../../tests/ShopBundle/Database/Model/Cart/CartFacadeTest.php). Notice usage of demo data instead of preparing own entities.
+See test class [`\Tests\ShopBundle\Database\Model\Cart\CartFacadeTest`](../../project-base/tests/ShopBundle/Database/Model/Cart/CartFacadeTest.php). Notice usage of demo data instead of preparing own entities.
   
 ### HTTP smoke tests
 Test HTTP codes returned by individual controller actions provided by the routing (e.g. product detail page should return *200 OK* for a visible product and *404 Not Found* for a hidden one).
@@ -120,7 +120,7 @@ You will no longer cause *500 Server Error* on some random page by a seemingly u
 * protection from unhandled exceptions in controller actions
 
 #### Example:
-See configuration of HTTP smoke (and [performance](#performance-tests)) tests in [`\Tests\ShopBundle\Smoke\Http\RouteConfigCustomization`](../../tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php).
+See configuration of HTTP smoke (and [performance](#performance-tests)) tests in [`\Tests\ShopBundle\Smoke\Http\RouteConfigCustomization`](../../project-base/tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php).
 
 *Note: you can read more about customization of HTTP smoke tests in their [own documentation on GitHub](https://github.com/shopsys/http-smoke-testing).*
 
@@ -147,7 +147,7 @@ More information can be found in [Running Acceptance Tests](running-acceptance-t
 * validating business-critical scenarios (eg. order creation)
 
 #### Example:
-See acceptance test for product filter in administration in [`\Tests\ShopBundle\Acceptance\acceptance\AdminProductAdvancedSearchCest`](../../tests/ShopBundle/Acceptance/acceptance/AdminProductAdvancedSearchCest.php). Notice the usage of auto-wired Page objects [`LoginPage`](../../tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/LoginPage.php) and [`ProductAdvancedSearchPage`](../../tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/ProductAdvancedSearchPage.php). They provide a way to reuse code that interacts with user interface.
+See acceptance test for product filter in administration in [`\Tests\ShopBundle\Acceptance\acceptance\AdminProductAdvancedSearchCest`](../../project-base/tests/ShopBundle/Acceptance/acceptance/AdminProductAdvancedSearchCest.php). Notice the usage of auto-wired Page objects [`LoginPage`](../../project-base/tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/LoginPage.php) and [`ProductAdvancedSearchPage`](../../project-base/tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/ProductAdvancedSearchPage.php). They provide a way to reuse code that interacts with user interface.
 
 ### Performance tests
 These tests assert that key actions do not take too long. They are similar to [HTTP smoke tests](#http-smoke-tests) but they measure response time as well. In addition to routes tested by HTTP smoke tests, these tests also request and measure regeneration of all product feeds.
@@ -168,9 +168,9 @@ It is advised to run these tests on a separate server that is not under load at 
 * preventing application collapse on production data load
 
 #### Example:
-See configuration of performance (and [HTTP smoke](#http-smoke-tests)) tests in [`\Tests\ShopBundle\Smoke\Http\RouteConfigCustomization`](../../tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php).
+See configuration of performance (and [HTTP smoke](#http-smoke-tests)) tests in [`\Tests\ShopBundle\Smoke\Http\RouteConfigCustomization`](../../project-base/tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php).
 
-For testing performance of something else than controller actions see implementation of feed performance test in [`\Tests\ShopBundle\Performance\Feed\AllFeedsTest`](../../tests/ShopBundle/Performance/Feed/AllFeedsTest.php).
+For testing performance of something else than controller actions see implementation of feed performance test in [`\Tests\ShopBundle\Performance\Feed\AllFeedsTest`](../../project-base/tests/ShopBundle/Performance/Feed/AllFeedsTest.php).
 
 ## How many tests should you write
 > The crucial question you should ask yourself is this: do I care about the future of my code?  

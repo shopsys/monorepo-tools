@@ -1,12 +1,6 @@
-# Shopsys Framework Knowledge Base
+# Project Documentation
 
-## Introduction
-* [Installation Guide](introduction/installation-guide.md) and [Installation Using Docker](docker/installation/installation-using-docker.md)
-* [Phing Targets](introduction/phing-targets.md)
-* [Automated Testing](introduction/automated-testing.md)
-* [Basics About Model Architecture](introduction/basics-about-model-architecture.md)
-* [Basics About Package Architecture](introduction/basics-about-package-architecture.md)
+*This is a place where to put any important information that other developers should know about the project. For advices on what should be documented see
+[Guidelines for Project Documentation](https://github.com/shopsys/shopsys/docs/project/guidelines-for-project-documentation.md)*.
 
-## Cookbook
-* [Dumping and Importing the Database](cookbook/dumping-and-importing-the-database.md)
-* [Configuring Jenkins for Continuous Integration](cookbook/jenkins-configuration.md)
+**{Put the content here}**

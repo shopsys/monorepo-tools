@@ -24,7 +24,7 @@ always run the same, regardless of the environment.
 ## 3. Shopsys-framework on Docker
 
 #### 3.1 docker-compose.yml
-[Docker-compose.yml](../../docker/conf/docker-compose.yml.dist) file contains the definitions of containers, that will be created for the installation
+[Docker-compose.yml](../../project-base/docker/conf/docker-compose.yml.dist) file contains the definitions of containers, that will be created for the installation
 of the Shopsys framework platform. Containers can communicate with each other. Data need to be saved
 into volumes, otherwise, these data will be lost after the container is closed. 
 
@@ -51,13 +51,13 @@ an actual container can communicate with all containers
 The definition of volumes:
 * **shopsys-framework-sync** : name of the volume
 * **external: true** : flag, which indicates, that volume is already defined external
-(in this case in [docker-sync.yml](../../docker-sync.yml))
+(in this case in [docker-sync.yml](../../project-base/docker-sync.yml))
 
 #### 3.2 docker-sync.yml
-[Docker-sync.yml](../../docker-sync.yml) file contains the definition of synchronization for the docker-sync tool.
+[Docker-sync.yml](../../project-base/docker-sync.yml) file contains the definition of synchronization for the docker-sync tool.
 
 #### 3.3 docker/php-fpm/Dockerfile
-[Dockerfile](../../docker/php-fpm/Dockerfile) is a text document that contains all the commands a user
+[Dockerfile](../../project-base/docker/php-fpm/Dockerfile) is a text document that contains all the commands a user
 could call on the command line to assemble an image. It is like some
 kind of recipe by which final image is cooked.
 
@@ -69,7 +69,7 @@ _FROM phpdockerio/php71-fpm:latest_
 The official list of dockerfile commands can be found on [Dockerfile reference](https://docs.docker.com/engine/reference/builder/#from).
 
 #### 3.4 docker/php-fpm/php-ini-overrides.ini
-[Php-ini-overrides.ini](../../docker/php-fpm/php-ini-overrides.ini) file contains php custom configuration which is used after installing php in new container
+[Php-ini-overrides.ini](../../project-base/docker/php-fpm/php-ini-overrides.ini) file contains php custom configuration which is used after installing php in new container
 
 #### 3.5 docker/nginx/nginx.conf
-[Nginx.conf](../../docker/nginx/nginx.conf) file contains Nginx configuration for new webserver container.
+[Nginx.conf](../../project-base/docker/nginx/nginx.conf) file contains Nginx configuration for new webserver container.

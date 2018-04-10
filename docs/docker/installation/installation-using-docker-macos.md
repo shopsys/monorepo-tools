@@ -25,7 +25,7 @@ sudo ifconfig lo0 alias 127.0.0.2 up
 ```
 
 ### 2. Create docker-compose.yml file
-Create `docker-compose.yml` from template [`docker-compose-mac.yml.dist`](../../../docker/conf/docker-compose-mac.yml.dist).
+Create `docker-compose.yml` from template [`docker-compose-mac.yml.dist`](../../../project-base/docker/conf/docker-compose-mac.yml.dist).
 ```
 cp docker/conf/docker-compose-mac.yml.dist docker-compose.yml
 ```

@@ -68,7 +68,7 @@ ie. you can upgrade them independently via `composer update`.
 There is no automated way of upgrading the project base.
 If you wanted to upgrade your project base, you would need to [cherry-pick](https://git-scm.com/docs/git-cherry-pick) or [merge](https://git-scm.com/docs/git-merge) modifications from the original repository manually.
 We try to ease you the process as much as possible by maintaining clear GIT history,
-keeping up-to-date [changelog](../../CHANGELOG.md) and [upgrading instructions](../../UPGRADE.md),
+keeping up-to-date [changelog](../../project-base/CHANGELOG.md) and [upgrading instructions](../../project-base/UPGRADE.md),
 and writing [understandable commit messages](../../docs/contributing/guidelines-for-creating-commits.md).
 
 ## Conclusion

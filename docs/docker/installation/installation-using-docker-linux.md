@@ -15,7 +15,7 @@ Notes:
 - If you want to keep the GIT history of `shopsys/project-base` in your new project, use the `--keep-vcs` option
  
 ### 2. Create docker-compose.yml file
-Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../../docker/conf/docker-compose.yml.dist).
+Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../../project-base/docker/conf/docker-compose.yml.dist).
 ```
 cp docker/conf/docker-compose.yml.dist docker-compose.yml
 ```

@@ -18,7 +18,7 @@
    	  git fetch
    	  git rebase origin/master
  	
-* You have to check your change using the command ```php phing standards tests tests-acceptance``` as it’s mentioned in [contributing](../../../project-base/CONTRIBUTING.md).
+* You have to check your change using the command ```php phing standards tests tests-acceptance``` as it’s mentioned in [contributing](../../project-base/CONTRIBUTING.md).
 * During PR [creation](https://github.com/shopsys/shopsys/compare?expand=1) please confirm your agreement with [license conditions](https://www.shopsys-framework.com/license-agreement) and fill up the template by which we will be able to review your code. Now just wait for review of your change.
 ## 2. Changes after review
 During the review, reviewer will write comments how to improve the solution or fix bugs. CR can end in `Approved` or `RequestChanges` status when further edits are needed. After completing the CR, it is necessary to correct to correct errors encountered by the reviewer. 
