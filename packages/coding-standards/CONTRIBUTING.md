@@ -1,7 +1,10 @@
 # Contributing
 
-You can take part in making Shopsys Framework better.
+Thank you for your contributions to Shopsys Coding Standards package.
+Together we are making Shopsys Framework better.
 
-Report [issues](https://github.com/shopsys/shopsys/issues/new) and send [pull requests](https://github.com/shopsys/shopsys/compare) in the main [Shopsys repository](https://github.com/shopsys/shopsys).
+This repository is READ-ONLY.
+If you want to [report issues](https://github.com/shopsys/shopsys/issues/new) and/or send [pull requests](https://github.com/shopsys/shopsys/compare),
+please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
 Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/CONTRIBUTING.md) before contributing.

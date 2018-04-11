@@ -90,8 +90,7 @@ For documentation of Shopsys Framework itself see
 If you have some ideas or you want to help to improve Shopsys Framework, let us know! We are looking forward for your
 insights, feedback and improvements. Thank you for helping us making Shopsys Framework better.
 
-All necessary information you can find in
-[contribution guide](./CONTRIBUTING.md). 
+You can find all the necessary information in our [Contribution Guide](./CONTRIBUTING.md). 
 
 ## Support
 What to do when you are in troubles or need some help? Best way is to contact us on our

@@ -131,17 +131,14 @@ Additionally you can override these methods in your implementation of [`HttpSmok
 * `handleRequest` to customize handling `Request` in your application (eg. you can wrap it in database transaction to roll it back into original state).
 
 ## Contributing
-Report [issues](https://github.com/shopsys/shopsys/issues/new) and send [pull requests](https://github.com/shopsys/shopsys/compare) in the main [Shopsys repository](https://github.com/shopsys/shopsys).
+Thank you for your contributions to Shopsys HTTP Smoke Testing package.
+Together we are making Shopsys Framework better.
 
-To execute all checks run these commands (same commands run automatically in [Travis CI](https://travis-ci.org/shopsys/http-smoke-testing)):
+This repository is READ-ONLY.
+If you want to [report issues](https://github.com/shopsys/shopsys/issues/new) and/or send [pull requests](https://github.com/shopsys/shopsys/compare),
+please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
-```
-php vendor/bin/parallel-lint ./src ./tests
-php vendor/bin/php-cs-fixer fix --config=vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs --dry-run --verbose --diff ./src ./tests
-php vendor/bin/phpcs --standard=vendor/shopsys/coding-standards/rulesetCS.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp ./src ./tests
-php vendor/bin/phpmd "./src,./tests" text vendor/shopsys/coding-standards/rulesetMD.xml --extensions=php
-php vendor/bin/phpunit tests
-```
+Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/CONTRIBUTING.md) before contributing.
 
 ## Need help
 Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).

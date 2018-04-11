@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for your contributions to Shopsys Product Feed Google package.
+Thank you for your contributions to Shopsys Monorepo Tools package.
 Together we are making Shopsys Framework better.
 
 This repository is READ-ONLY.

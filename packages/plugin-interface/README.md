@@ -215,7 +215,14 @@ Plugins are implemented in a form of a [Symfony bundle](http://symfony.com/doc/c
 For tips on how to write a new bundle see [Best Practices for Reusable Bundles](https://symfony.com/doc/current/bundles/best_practices.html).
 
 ## Contributing
-Report [issues](https://github.com/shopsys/shopsys/issues/new) and send [pull requests](https://github.com/shopsys/shopsys/compare) in the main [Shopsys repository](https://github.com/shopsys/shopsys).
+Thank you for your contributions to Shopsys Plugin Interface package.
+Together we are making Shopsys Framework better.
+
+This repository is READ-ONLY.
+If you want to [report issues](https://github.com/shopsys/shopsys/issues/new) and/or send [pull requests](https://github.com/shopsys/shopsys/compare),
+please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
+
+Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/CONTRIBUTING.md) before contributing.
 
 ## Need help
 Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).
