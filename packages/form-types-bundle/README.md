@@ -1,4 +1,4 @@
-# Shopsys Framework Form Types
+# Shopsys Form Types Bundle
 
 [![Build Status](https://travis-ci.org/shopsys/form-types-bundle.svg?branch=master)](https://travis-ci.org/shopsys/form-types-bundle)
 [![Downloads](https://img.shields.io/packagist/dt/shopsys/form-types-bundle.svg)](https://packagist.org/packages/shopsys/form-types-bundle)

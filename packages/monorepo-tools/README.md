@@ -1,4 +1,4 @@
-# Monorepo Tools
+# Shopsys Monorepo Tools
 
 Tools for building and splitting monolithic repository from existing packages.
 You can read about pros and cons of monorepo approach on the [Shopsys Framework Blog](https://blog.shopsys.com/how-to-maintain-multiple-git-repositories-with-ease-61a5e17152e0).

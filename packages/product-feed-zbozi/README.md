@@ -1,4 +1,4 @@
-# Shopsys Framework Zboží.cz Product Feed Plugin
+# Shopsys Product Feed Zbozi
 
 [![Build Status](https://travis-ci.org/shopsys/product-feed-zbozi.svg?branch=master)](https://travis-ci.org/shopsys/product-feed-zbozi)
 [![Downloads](https://img.shields.io/packagist/dt/shopsys/product-feed-zbozi.svg)](https://packagist.org/packages/shopsys/product-feed-zbozi)

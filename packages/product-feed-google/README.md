@@ -1,4 +1,4 @@
-# Shopsys Framework Google Product Feed Plugin
+# Shopsys Product Feed Google
 
 [![Build Status](https://travis-ci.org/shopsys/product-feed-google.svg?branch=master)](https://travis-ci.org/shopsys/product-feed-google)
 [![Downloads](https://img.shields.io/packagist/dt/shopsys/product-feed-google.svg)](https://packagist.org/packages/shopsys/product-feed-google)

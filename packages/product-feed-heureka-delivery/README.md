@@ -1,4 +1,4 @@
-# Shopsys Framework Heureka Product Delivery Feed Plugin
+# Shopsys Product Feed Heureka Delivery
 
 [![Build Status](https://travis-ci.org/shopsys/product-feed-heureka-delivery.svg?branch=master)](https://travis-ci.org/shopsys/product-feed-heureka-delivery)
 [![Downloads](https://img.shields.io/packagist/dt/shopsys/product-feed-heureka-delivery.svg)](https://packagist.org/packages/shopsys/product-feed-heureka-delivery)

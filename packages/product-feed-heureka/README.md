@@ -1,4 +1,4 @@
-# Shopsys Framework Heureka Product Feed Plugin
+# Shopsys Product Feed Heureka
 
 [![Build Status](https://travis-ci.org/shopsys/product-feed-heureka.svg?branch=master)](https://travis-ci.org/shopsys/product-feed-heureka)
 [![Downloads](https://img.shields.io/packagist/dt/shopsys/product-feed-heureka.svg)](https://packagist.org/packages/shopsys/product-feed-heureka)
