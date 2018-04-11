@@ -25,3 +25,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - basic infrastructure so that the monorepo can be installed and used as standard application (@Miroslav-Stopka)
     - for details see [the Monorepo article](./docs/introduction/monorepo.md#infrastructure) in documentation
+- [Shopsys Community Licence](./LICENCE)
+- documentation was moved from [shopsys/project-base](https://github.com/shopsys/project-base) (@Miroslav-Stopka)

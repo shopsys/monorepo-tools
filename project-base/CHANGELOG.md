@@ -48,6 +48,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - all services that must be public because of tests moved to services_test.yml
     - unnecessary service obtaining from container replaced with autowiring
 - new images for no image and empty cart (@stanoMilan)
+- **the licence was changed from MIT to [Shopsys Community Licence](./LICENCE)**
+
+### Removed
+- documentation was moved into the main [Shopsys repository](https://github.com/shopsys/shopsys/docs) (@Miroslav-Stopka)
 
 ## 6.0.0-beta21 - 2018-03-05
 - released only in closed beta
