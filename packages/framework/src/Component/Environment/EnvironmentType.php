@@ -8,6 +8,8 @@ class EnvironmentType
     const PRODUCTION = 'prod';
     const TEST = 'test';
 
+    const ALL = [self::DEVELOPMENT, self::PRODUCTION, self::TEST];
+
     /**
      * @param string $environment
      * @return bool
