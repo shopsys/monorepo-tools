@@ -10,11 +10,18 @@ class CountryData
     public $name;
 
     /**
-     * @param string $name
+     * @var string|null
      */
-    public function __construct($name = '')
+    public $code;
+
+    /**
+     * @param string $name
+     * @param null $code
+     */
+    public function __construct($name = '', $code = null)
     {
         $this->name = $name;
+        $this->code = $code;
     }
 
     /**
@@ -23,5 +30,6 @@ class CountryData
     public function setFromEntity(Country $country)
     {
         $this->name = $country->getName();
+        $this->code = $country->getCode();
     }
 }

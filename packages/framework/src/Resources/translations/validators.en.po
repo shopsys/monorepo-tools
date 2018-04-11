@@ -22,6 +22,9 @@ msgstr ""
 msgid "Company name cannot be longer than {{ limit }} characters"
 msgstr ""
 
+msgid "Country code cannot be longer than {{ limit }} characters"
+msgstr ""
+
 msgid "Country name cannot be longer than {{ limit }} characters"
 msgstr ""
 
