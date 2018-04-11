@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\PersonalData;
 use Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
 use Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbItem;
 
-class PersonalDataBreadcrumbResolverFactory implements BreadcrumbGeneratorInterface
+class PersonalDataBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
     /**
      * @inheritdoc
