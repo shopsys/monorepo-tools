@@ -2,7 +2,7 @@
   "name": "shopsys/shopsys",
   "type": "project",
   "description": "Repository for maintaining Shopsys Framework packages",
-  "license": "Shopsys Community Licence",
+  "license": "Shopsys Community License",
   "autoload": {
     "psr-4": {
       "Shopsys\\": [
