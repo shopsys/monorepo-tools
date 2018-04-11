@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Component\Error\Reporting;
 
 use DateTime;
-use Shopsys\Environment;
+use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Mail\MailerService;
 use Shopsys\FrameworkBundle\Model\Mail\MessageData;
@@ -13,7 +13,7 @@ use Symfony\Bridge\Monolog\Logger;
 class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
 {
     const REPORT_ERRORS_FOR_LAST_SECONDS = 3600 + 300;
-    const ROTATED_LOG_NAME = Environment::ENVIRONMENT_PRODUCTION;
+    const ROTATED_LOG_NAME = EnvironmentType::PRODUCTION;
 
     const FROM_NAME = 'Error reporting';
 

@@ -2,8 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Cookies;
 
-use Shopsys\Environment;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Article\Article;
 use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
@@ -114,7 +114,7 @@ class CookiesFacade
     public function isCookiesConsentGiven()
     {
         // Cookie fixed bar overlays some elements in viewport and mouseover fails on these elements in acceptance tests.
-        if ($this->environment === Environment::ENVIRONMENT_TEST) {
+        if ($this->environment === EnvironmentType::TEST) {
             return true;
         }
         $masterRequest = $this->requestStack->getMasterRequest();

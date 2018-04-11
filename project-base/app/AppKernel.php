@@ -1,6 +1,6 @@
 <?php
 
-use Shopsys\Environment;
+use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -47,7 +47,7 @@ class AppKernel extends Kernel
             new Shopsys\ShopBundle\ShopsysShopBundle(), // must be loaded as last, because translations must overwrite other bundles
         ];
 
-        if ($this->getEnvironment() === Environment::ENVIRONMENT_DEVELOPMENT) {
+        if ($this->getEnvironment() === EnvironmentType::DEVELOPMENT) {
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
@@ -83,10 +83,10 @@ class AppKernel extends Kernel
             __DIR__ . '/config/security.yml',
         ];
         switch ($this->getEnvironment()) {
-            case Environment::ENVIRONMENT_DEVELOPMENT:
+            case EnvironmentType::DEVELOPMENT:
                 $configs[] = __DIR__ . '/config/config_dev.yml';
                 break;
-            case Environment::ENVIRONMENT_TEST:
+            case EnvironmentType::TEST:
                 $configs[] = __DIR__ . '/config/parameters_test.yml';
                 $configs[] = __DIR__ . '/config/config_test.yml';
                 break;

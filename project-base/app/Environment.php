@@ -4,13 +4,10 @@ namespace Shopsys;
 
 use Composer\IO\IOInterface;
 use Composer\Script\Event;
+use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 
 class Environment
 {
-    const ENVIRONMENT_PRODUCTION = 'prod';
-    const ENVIRONMENT_DEVELOPMENT = 'dev';
-    const ENVIRONMENT_TEST = 'test';
-
     const FILE_DEVELOPMENT = 'DEVELOPMENT';
     const FILE_PRODUCTION = 'PRODUCTION';
     const FILE_TEST = 'TEST';
@@ -39,16 +36,9 @@ class Environment
     public static function getEnvironment($console)
     {
         $environmentSetting = self::getEnvironmentSetting($console);
-        return $environmentSetting ?: self::ENVIRONMENT_PRODUCTION;
+        return $environmentSetting ?: EnvironmentType::PRODUCTION;
     }
 
-    /**
-     * @param string $environment
-     */
-    public static function isEnvironmentDebug($environment)
-    {
-        return $environment === self::ENVIRONMENT_DEVELOPMENT;
-    }
 
     /**
      * @param \Composer\IO\IOInterface $io
@@ -82,11 +72,11 @@ class Environment
     private static function getEnvironmentSetting($ignoreTestFile)
     {
         if (!$ignoreTestFile && is_file(self::getRootDir() . '/' . self::FILE_TEST)) {
-            return self::ENVIRONMENT_TEST;
+            return EnvironmentType::TEST;
         } elseif (is_file(self::getRootDir() . '/' . self::FILE_DEVELOPMENT)) {
-            return self::ENVIRONMENT_DEVELOPMENT;
+            return EnvironmentType::DEVELOPMENT;
         } elseif (is_file(self::getRootDir() . '/' . self::FILE_PRODUCTION)) {
-            return self::ENVIRONMENT_PRODUCTION;
+            return EnvironmentType::PRODUCTION;
         }
         return null;
     }

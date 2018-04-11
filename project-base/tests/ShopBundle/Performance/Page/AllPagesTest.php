@@ -5,6 +5,7 @@ namespace Tests\ShopBundle\Performance\Page;
 use Doctrine\DBAL\Logging\LoggerChain;
 use Doctrine\ORM\EntityManager;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Shopsys\HttpSmokeTesting\RequestDataSet;
 use Shopsys\HttpSmokeTesting\RequestDataSetGenerator;
 use Shopsys\HttpSmokeTesting\RouteConfig;
@@ -26,8 +27,8 @@ class AllPagesTest extends KernelTestCase
         parent::setUp();
 
         static::bootKernel([
-            'environment' => 'test',
-            'debug' => false,
+            'environment' => EnvironmentType::TEST,
+            'debug' => EnvironmentType::isDebug(EnvironmentType::TEST),
         ]);
 
         self::$kernel->getContainer()->get(Domain::class)

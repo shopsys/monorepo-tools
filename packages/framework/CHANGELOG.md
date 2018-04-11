@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- moved constants with types of environment from [shopsys/project-base](https://github.com/shopsys/project-base) (@PetrHeinz)
+    - moved from `\Shopsys\Environment` to `\Shopsys\FrameworkBundle\Component\Environment\EnvironmentType`
+
 ## 7.0.0-alpha1 - 2018-04-12
 - We are releasing the Shopsys Framework in version 7 and we are synchronizing versions because
   the Shopsys Framework and all packages are now developed together and are now same-version compatible.
