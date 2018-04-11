@@ -6,7 +6,7 @@ In March 2018 we extracted the core functionality into [separate package](https:
 But the extraction causes that majority of customizations is not achievable at the moment.
 You can only use [standard Symfony extensibility concepts](https://symfony.com/doc/3.4/bundles/override.html), 
 eg. services and templates overriding. 
-We have already implemented [steps towards the project customization](../docs/wip_glassbox/wip-glassbox-customization.md) 
+We have already implemented [steps towards the project customization](https://github.com/shopsys/shopsys/blob/master/docs/wip_glassbox/wip-glassbox-customization.md) 
 but there is still quite an amount of work that needs to be done. 
 We are also planning architectural changes, 
 see the roadmap on the picture below and read more about our near-future plans in [our blog](https://blog.shopsys.com/here-it-is-shopsys-framework-development-roadmap-154edb549c97).
@@ -17,7 +17,7 @@ But we do not recommend to build production sites on the framework at the moment
 Nevertheless, you are more than welcome to explore the source codes and play with the framework. 
 We would be very happy to get any [feedback](https://github.com/shopsys/shopsys/blob/master/project-base/CONTRIBUTING.md) from you.**
 
-![Shopsys Framework roadmap](../docs/img/roadmap.png 'Shopsys Framework roadmap')
+![Shopsys Framework roadmap](https://github.com/shopsys/shopsys/blob/master/docs/img/roadmap.png 'Shopsys Framework roadmap')
 
 ## Documentation
 For documentation of Shopsys Framework itself see [Shopsys Framework Knowledge Base](docs/index.md).
@@ -30,8 +30,8 @@ Create new project from [`shopsys/project-base`](https://github.com/shopsys/proj
 composer create-project shopsys/project-base --stability=alpha --no-install
 ```
 For more detailed instructions, follow one of the installation guides:
-- [Installation via Docker (recommended)](../docs/docker/installation/installation-using-docker.md)
-- [Detailed native installation](../docs/introduction/installation-guide.md)
+- [Installation via Docker (recommended)](https://github.com/shopsys/shopsys/blob/master/docs/docker/installation/installation-using-docker.md)
+- [Detailed native installation](https://github.com/shopsys/shopsys/blob/master/docs/introduction/installation-guide.md)
 
 ### What to do next
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see running application.
@@ -46,5 +46,5 @@ Report [issues](https://github.com/shopsys/shopsys/issues/new) and send [pull re
 Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/CONTRIBUTING.md) before contributing.
 
 ## Need help
-* [Docker troubleshooting](../docs/docker/docker-troubleshooting.md)
+* [Docker troubleshooting](https://github.com/shopsys/shopsys/blob/master/docs/docker/docker-troubleshooting.md)
 * Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).
