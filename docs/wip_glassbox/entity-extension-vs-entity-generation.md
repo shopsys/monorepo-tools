@@ -1,7 +1,7 @@
 # Entity Extension vs. Entity Generation
 
 When we extracted base functionality into separate package [shopsys/framework](https://github.com/shopsys/framework), we have considered two main ways how to extend its entities in other modules and in the project repository as well.
-The first way, which is currently implemented, we call [entity extension](entity-extension.md) and it allows adding and modifying properties and behavior using class inheritance.
+The first way, which is currently implemented, we call [entity extension](./entity-extension.md) and it allows adding and modifying properties and behavior using class inheritance.
 The second way is to generate the entity classes that are used in the application by combining information from all modules and the project repository.
 
 This article should explain advantages and disadvantages we found in both solutions and describe the reasons behind our choice.
@@ -12,7 +12,7 @@ Base entities are extended using class inheritance.
 Support of this extension by Doctrine is based on event subscribers and metadata manipulation.
 It requires using the extended entity instead of the parent entity in the whole application if an extension is defined.
 
-Details about internal workings of the implemented solution are described in the [Entity Extension](entity-extension.md) article.
+Details about internal workings of the implemented solution are described in the [Entity Extension](./entity-extension.md) article.
 
 ### Class inheritance as a double-edged sword
 

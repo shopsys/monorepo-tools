@@ -57,4 +57,4 @@ setfacl -R -m user:100:rX ./web
 setfacl -dR -m user:100:rX ./web
 ```
 ### 6. Setup the application
-[Application setup guide](installation-using-docker-application-setup.md)
+[Application setup guide](./installation-using-docker-application-setup.md)

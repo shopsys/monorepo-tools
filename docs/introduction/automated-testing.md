@@ -81,7 +81,7 @@ Notice that test method names describe the tested scenario. Also, notice that ea
 When a test fails it provides detailed feedback to the developer.
 
 You can create similar unit tests anywhere in your directory `tests/Unit/`.
-If they are named with a prefix `Test` and are extending `\PHPUnit\Framework\TestCase` they will be executed during the [`tests` Phing target](phing-targets.md#tests).
+If they are named with a prefix `Test` and are extending `\PHPUnit\Framework\TestCase` they will be executed during the [`tests` Phing target](./phing-targets.md#tests).
   
 
 ### Database tests (a.k.a. integration tests)

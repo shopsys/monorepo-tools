@@ -5,7 +5,7 @@
       
         git branch branch-name
       
-* Make change and follow [commit message guidelines](guidelines-for-creating-commits.md)
+* Make change and follow [commit message guidelines](./guidelines-for-creating-commits.md)
 * Push to your fork
   
         git push
@@ -31,12 +31,12 @@ We use fixup commits for correcting pull request so the reviewer can see what ed
 
 #### Hash commit on GitHub (in right):
 
-![alt text](img/github-commit-hash.png)
+![alt text](./img/github-commit-hash.png)
 
 
 #### Hash in console command git log:
 
-![alt text](img/console-hash-commit.png)
+![alt text](./img/console-hash-commit.png)
 
 
 

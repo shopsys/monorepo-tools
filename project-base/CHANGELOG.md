@@ -15,8 +15,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - Admin - added email template for personal data request
     - Frontend send email with link to personal data access site 
 - [wip-glassbox-customization.md](../docs/wip_glassbox/wip-glassbox-customization.md): new WIP documentation about working with glassbox (@Miroslav-Stopka)
-- docker: [`php-fpm/Dockerfile`](docker/php-fpm/Dockerfile) added installation of `grunt-cli` to be able to run `grunt watch` (@MattCzerner)
-    - [`docker-compose.yml.dist`](docker/conf/docker-compose.yml.dist) and [`docker-compose-mac.yml.dist`](docker/conf/docker-compose-mac.yml.dist): opened port 35729 for livereload, that is used by `grunt watch`
+- docker: [`php-fpm/Dockerfile`](./docker/php-fpm/Dockerfile) added installation of `grunt-cli` to be able to run `grunt watch` (@MattCzerner)
+    - [`docker-compose.yml.dist`](./docker/conf/docker-compose.yml.dist) and [`docker-compose-mac.yml.dist`](./docker/conf/docker-compose-mac.yml.dist): opened port 35729 for livereload, that is used by `grunt watch`
 
 ### Changed
 - `JavascriptCompilerService` can now compile javascript from more than one source directory (@MattCzerner)
@@ -78,7 +78,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - end of support of PHP 7.0 (@TomasLudvik)
 - renamed TermsAndCondition to LegalCondition to avoid multiple classes for legal conditions agreements (@stanoMilan) 
 - emails with empty subject or body are no longer sent (@stanoMilan)
-- postgresql-client is installed in [php-fpm/dockerfile](docker/php-fpm/Dockerfile) for `pg_dump` function (@MattCzerner)
+- postgresql-client is installed in [php-fpm/dockerfile](./docker/php-fpm/Dockerfile) for `pg_dump` function (@MattCzerner)
     - postgresql was downgraded to 9.5 because of compatibility with postgresql-client
 - docker-compose: added container_name to smtp-server and adminer (@MattCzerner)
 - configuration of Docker Compose tweaked for easier development (@MattCzerner)
@@ -158,7 +158,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - released only in closed beta
 
 ### Added
-- size of performance data fixtures and limits for performance testing are now configurable via parameters defined in [`parameters_common.yml`](app/config/parameters_common.yml) (@PetrHeinz)
+- size of performance data fixtures and limits for performance testing are now configurable via parameters defined in [`parameters_common.yml`](./app/config/parameters_common.yml) (@PetrHeinz)
 - performance tests report database query counts (@PetrHeinz)
 - UserDataFixture: alias for SettingValueDataFixture to fix [PHP bug #66862](https://bugs.php.net/bug.php?id=66862)
 
@@ -232,20 +232,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - similar to `PluginDataFixtureRegistry` or `PluginCrudExtensionRegistry`
 - `UknownPluginDataFixtureException` renamed to `UnknownPluginCrudExtensionTypeException` because of a typo (@MattCzerner)
 - `FeedConfigRegistry` now contains all FeedConfigs in one array (indexed by type) (@vitek-rostislav)
-    - definition and assertion of known feed configs types moved from [`RegisterProductFeedConfigsCompilerPass`](src/Shopsys/ShopBundle/DependencyInjection/Compiler/RegisterProductFeedConfigsCompilerPass.php) to `FeedConfigRegistry`
+    - definition and assertion of known feed configs types moved from [`RegisterProductFeedConfigsCompilerPass`](./src/Shopsys/ShopBundle/DependencyInjection/Compiler/RegisterProductFeedConfigsCompilerPass.php) to `FeedConfigRegistry`
     - changed message and arguments of `UnknownFeedConfigTypeException`
 - renamed methods working with standard feeds only to be more expressive (@PetrHeinz)
     - renamed `FeedConfigFacade::getFeedConfigs()` to `getStandardFeedConfigs()`
     - renamed `FeedFacade::generateFeedsIteratively()` to `generateStandardFeedsIteratively()`
     - renamed `FeedGenerationConfigFactory::createAll()` to `createAllForStandardFeeds()`
-- [`parameters.yml.dist`](app/config/parameters.yml.dist): renamed parameter `email_for_error_reporting` to `error_reporting_email_to` (@vitek-rostislav)
-- sender email for error reporting is now configured in [`parameters.yml.dist`](app/config/parameters.yml.dist) (@vitek-rostislav)
+- [`parameters.yml.dist`](./app/config/parameters.yml.dist): renamed parameter `email_for_error_reporting` to `error_reporting_email_to` (@vitek-rostislav)
+- sender email for error reporting is now configured in [`parameters.yml.dist`](./app/config/parameters.yml.dist) (@vitek-rostislav)
 - reimplemented `CategoriesType` (@Petr Heinz)
     - it now extends `CollectionType` instead of `ChoiceType`
     - it loads only those categories that are needed to show all selected categories in a tree, not all of them
     - collapsed categories can be loaded via AJAX
 - `CategoryRepository::findById()` now uses `find()` method of Doctrine repository instead of query builder so it can use cached results (@PetrHeinz)
-- it is possible to mention occurrences of an image size in [`images.yml`](src/Shopsys/ShopBundle/Resources/config/images.yml) (@PetrHeinz)
+- it is possible to mention occurrences of an image size in [`images.yml`](./src/Shopsys/ShopBundle/Resources/config/images.yml) (@PetrHeinz)
     - previously they were directly in `ImageController`
     - they are not translatable anymore (too hard to maintain)
 

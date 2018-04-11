@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.3.0] - 2017-10-04
 ### Added
-- [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
+- [CONTRIBUTING.md](./CONTRIBUTING.md) (@vitek-rostislav)
 - `DataStorageInterface` can return all saved data via `getAll()` (@MattCzerner)
 - `IteratedCronModuleInterface` and `SimpleCronModuleInterface` (@MattCzerner)
 
@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - This Changelog (@vitek-rostislav)
 - interface for loading plugin's demo data (@MattCzerner)
     - `PluginDataFixtureInterface`
-- [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
+- [template for github pull requests](./docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
 
 ## 0.1.0 - 2017-08-04
 ### Added

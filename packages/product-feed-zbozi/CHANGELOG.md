@@ -24,13 +24,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.4.1] - 2017-09-25
 ### Added
-- [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
-- [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
+- [CONTRIBUTING.md](./CONTRIBUTING.md) (@vitek-rostislav)
+- [template for github pull requests](./docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
 ### Changed
-- Dependency [product-feed-interface](shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0 (@MattCzerner)
-- [`ZboziFeedConfig`](src/ZboziFeedConfig.php) now filters not sellable products (@MattCzerner)
-- [`ZboziFeedConfig`](src/ZboziFeedConfig.php) implemented method `getAdditionalData()` (@MattCzerner)
-- [`TestStandardFeedItem`](tests/TestStandardFeedItem.php) implemented method `getCurrencyCode()` (@MattCzerner)
+- Dependency [product-feed-interface](./shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0 (@MattCzerner)
+- [`ZboziFeedConfig`](./src/ZboziFeedConfig.php) now filters not sellable products (@MattCzerner)
+- [`ZboziFeedConfig`](./src/ZboziFeedConfig.php) implemented method `getAdditionalData()` (@MattCzerner)
+- [`TestStandardFeedItem`](./tests/TestStandardFeedItem.php) implemented method `getCurrencyCode()` (@MattCzerner)
 
 ## [0.4.0] - 2017-09-12
 ### Added
@@ -39,9 +39,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - twig/twig 1.34.0
     - twig/extensions 1.3.0
 - New automatic test that is controlling right behaviour of plugin (@MattCzerner)
-- Added travis build icon into [README.md](README.md) (@MattCzerner)
+- Added travis build icon into [README.md](./README.md) (@MattCzerner)
 ### Changed
-- Dependency [product-feed-interface](shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0 (@MattCzerner)
+- Dependency [product-feed-interface](./shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0 (@MattCzerner)
 ### Removed
 - `ZboziFeedConfig::getFeedItemRepository()` (@MattCzerner)
 
@@ -51,7 +51,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - UPGRADE.md (@vitek-rostislav)
 - Plugin demo data (cpc, cpc_search and show for 2 domains) (@MattCzerner)
 ### Changed
-- Dependency [plugin-interface](shopsys/plugin-interface) upgraded from ~0.1.0 to ~0.2.0 (@MattCzerner)
+- Dependency [plugin-interface](./shopsys/plugin-interface) upgraded from ~0.1.0 to ~0.2.0 (@MattCzerner)
 
 ## [0.2.0] - 2017-08-08
 ### Added
@@ -66,7 +66,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - [symfony/translation ^3.0](https://github.com/symfony/translation)
     - [symfony/validator ^3.0](https://github.com/symfony/validator)
 ### Changed
-- Dependency [product-feed-interface](shopsys/product-feed-interface) upgraded from ~0.1.0 to ~0.2.0 (@PetrHeinz)
+- Dependency [product-feed-interface](./shopsys/product-feed-interface) upgraded from ~0.1.0 to ~0.2.0 (@PetrHeinz)
 
 ## 0.1.0 - 2017-07-13
 ### Added

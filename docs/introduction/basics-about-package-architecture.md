@@ -2,7 +2,7 @@
 
 ## Introduction
 This article describes the architecture of Shopsys Framework from the viewpoint of packages
-(in a contrast to application layers, about which you can read in the [separate article](basics-about-model-architecture.md)).
+(in a contrast to application layers, about which you can read in the [separate article](./basics-about-model-architecture.md)).
 After you finish reading the article, you will know 
 how to start an implementation, how to perform upgrades of your own project based on Shopsys Framework
 and you will understand what modules are.
@@ -38,7 +38,7 @@ So far, we created packages for [HTTP Smoke testing](https://github.com/shopsys/
 and extracted product XML feeds (eg. [Google Shopping product feed](https://github.com/shopsys/product-feed-google)).
 Other candidates for extraction into modules are for example payment methods gateways, package shipping integrations or analytic service integrations.
 
-![Shopsys Framework package architecture schema](img/package-architecture.png)
+![Shopsys Framework package architecture schema](./img/package-architecture.png)
 
 *Note: The specific modules in this diagram are just examples.*
 

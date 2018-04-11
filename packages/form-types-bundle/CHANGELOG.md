@@ -11,8 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.2.0] - 2018-02-19
 ### Added
 - This Changelog (@vitek-rostislav)
-- [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
-- [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
+- [CONTRIBUTING.md](./CONTRIBUTING.md) (@vitek-rostislav)
+- [template for github pull requests](./docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
 
 ### Changed
 - services.yml updated to Symfony 3.4 best practices (@TomasLudvik)

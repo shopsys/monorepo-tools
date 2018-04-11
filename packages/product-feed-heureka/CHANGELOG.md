@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - services.yml updated to Symfony 3.4 best practices
 
 ## [0.5.1] - 2017-10-06
-- names of Heureka categories are now cached by category ID in [`HeurekaFeedConfig`](src/HeurekaFeedConfig.php) (@PetrHeinz)
+- names of Heureka categories are now cached by category ID in [`HeurekaFeedConfig`](./src/HeurekaFeedConfig.php) (@PetrHeinz)
 
 ## [0.5.0] - 2017-10-05
 ### Added
@@ -37,13 +37,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.4.1] - 2017-09-25
 ### Added
-- [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
-- [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
+- [CONTRIBUTING.md](./CONTRIBUTING.md) (@vitek-rostislav)
+- [template for github pull requests](./docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
 ### Changed
-- Dependency [product-feed-interface](shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0 (@MattCzerner)
-- [`HeurekaFeedConfig`](src/HeurekaFeedConfig.php) now filters not sellable products (@MattCzerner)
-- [`HeurekaFeedConfig`](src/HeurekaFeedConfig.php) implemented method `getAdditionalData()` (@MattCzerner)
-- [`TestStandardFeedItem`](tests/TestStandardFeedItem.php) implemented method `getCurrencyCode()` (@MattCzerner)
+- Dependency [product-feed-interface](./shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0 (@MattCzerner)
+- [`HeurekaFeedConfig`](./src/HeurekaFeedConfig.php) now filters not sellable products (@MattCzerner)
+- [`HeurekaFeedConfig`](./src/HeurekaFeedConfig.php) implemented method `getAdditionalData()` (@MattCzerner)
+- [`TestStandardFeedItem`](./tests/TestStandardFeedItem.php) implemented method `getCurrencyCode()` (@MattCzerner)
 
 ## [0.4.0] - 2017-09-12
 ### Added
@@ -52,9 +52,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - twig/twig 1.34.0
     - twig/extensions 1.3.0
 - New automatic test that is controlling right behaviour of plugin (@MattCzerner)
-- Added travis build icon into [README.md](README.md) (@MattCzerner)
+- Added travis build icon into [README.md](./README.md) (@MattCzerner)
 ### Changed
-- Dependency [product-feed-interface](shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0 (@MattCzerner)
+- Dependency [product-feed-interface](./shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0 (@MattCzerner)
 ### Removed
 - `HeurekaFeedConfig::getFeedItemRepository()` (@MattCzerner)
 
@@ -64,7 +64,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - UPGRADE.md (@vitek-rostislav)
 - Plugin demo data (cpc for 2 domains) (@MattCzerner)
 ### Changed
-- Dependency [plugin-interface](shopsys/plugin-interface) upgraded from ~0.1.0 to ~0.2.0 (@MattCzerner)
+- Dependency [plugin-interface](./shopsys/plugin-interface) upgraded from ~0.1.0 to ~0.2.0 (@MattCzerner)
 
 ## [0.2.0] - 2017-08-02
 ### Added
@@ -79,7 +79,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - [symfony/translation ^3.0](https://github.com/symfony/translation)
     - [symfony/validator ^3.0](https://github.com/symfony/validator)
 ### Changed
-- Dependency [product-feed-interface](shopsys/product-feed-interface) upgraded from ~0.1.0 to ~0.2.0 (@PetrHeinz)
+- Dependency [product-feed-interface](./shopsys/product-feed-interface) upgraded from ~0.1.0 to ~0.2.0 (@PetrHeinz)
 
 ## 0.1.0 - 2017-07-13
 ### Added

@@ -1,7 +1,7 @@
 # Installation Using Docker - application setup
 
 This guide expects that you have already set up your Docker environment.
-If you haven't already done that check the [Installation Guide for Docker](installation-using-docker.md).
+If you haven't already done that check the [Installation Guide for Docker](./installation-using-docker.md).
 
 ## 1. Setup the application
 Now that the Docker environment is prepared we can setup the application itself.

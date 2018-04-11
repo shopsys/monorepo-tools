@@ -13,13 +13,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.0] - 2017-11-01
 ### Added
-- [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
-- [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
+- [CONTRIBUTING.md](./CONTRIBUTING.md) (@vitek-rostislav)
+- [template for github pull requests](./docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
 
 ### Changed
-- Improved IDE auto-completion when customizing test cases via [`RouteConfig`](src/RouteConfig.php) (@PetrHeinz)
-    - Methods `changeDefaultRequestDataSet()` and `addExtraRequestDataSet()` now return new interface [`RequestDataSetInterface`](src/RequestDataSetConfig.php).
-    - This new interface includes only a subset of methods in [`RequestDataSet`](src/RequestDataSet.php) that is relevant to test case customization.
+- Improved IDE auto-completion when customizing test cases via [`RouteConfig`](./src/RouteConfig.php) (@PetrHeinz)
+    - Methods `changeDefaultRequestDataSet()` and `addExtraRequestDataSet()` now return new interface [`RequestDataSetInterface`](./src/RequestDataSetConfig.php).
+    - This new interface includes only a subset of methods in [`RequestDataSet`](./src/RequestDataSet.php) that is relevant to test case customization.
 
 ## [1.0.1] - 2017-07-03
 ### Added

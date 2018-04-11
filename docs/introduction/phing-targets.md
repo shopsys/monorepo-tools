@@ -84,7 +84,7 @@ Creates a new test database with demo data and runs all tests except acceptance 
 #### tests-acceptance
 Runs acceptance tests. Running Selenium server is required.
 
-More on this topic can be found in [Running Acceptance Tests](running-acceptance-tests.md).
+More on this topic can be found in [Running Acceptance Tests](./running-acceptance-tests.md).
 
 #### selenium-run
 Runs the Selenium server for acceptance testing. [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) is required.

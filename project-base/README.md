@@ -9,7 +9,7 @@ eg. services and templates overriding.
 We have already implemented [steps towards the project customization](../docs/wip_glassbox/wip-glassbox-customization.md) 
 but there is still quite an amount of work that needs to be done. 
 We are also planning architectural changes, 
-see the roadmap on the picture below and read more about our near-future plans in [our blog]((https://blog.shopsys.com/here-it-is-shopsys-framework-development-roadmap-154edb549c97)).
+see the roadmap on the picture below and read more about our near-future plans in [our blog](https://blog.shopsys.com/here-it-is-shopsys-framework-development-roadmap-154edb549c97).
 
 **The framework is fully-functional now, 
 see the [rough functionality specifications](https://github.com/shopsys/project-base/blob/master/CHANGELOG.md#added-7). 
