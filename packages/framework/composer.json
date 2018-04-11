@@ -54,7 +54,7 @@
         "craue/formflow-bundle": "3.0.3",
         "doctrine/common": "2.8.1",
         "doctrine/doctrine-bundle": "1.8.1",
-        "doctrine/doctrine-fixtures-bundle": "2.4.1",
+        "doctrine/doctrine-fixtures-bundle": "3.0.2",
         "doctrine/orm": "dev-doctrine-260-with-ddc1960-hotfix-and-ddc4005-hotfix as 2.6.0",
         "egeloen/ckeditor-bundle": "4.0.6",
         "fp/jsformvalidator-bundle": "1.5.1",
