@@ -1,8 +1,8 @@
 {
-  "name": "shopsys/shopsys-monorepo",
+  "name": "shopsys/shopsys",
   "type": "project",
-  "description": "Shopsys Framework",
-  "license": "MIT",
+  "description": "Repository for maintaining Shopsys Framework packages",
+  "license": "Shopsys Community Licence",
   "autoload": {
     "psr-4": {
       "Shopsys\\": [

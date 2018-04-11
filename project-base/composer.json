@@ -1,8 +1,8 @@
 {
-    "name": "shopsys/shopsys",
+    "name": "shopsys/project-base",
     "type": "project",
-    "description": "Shopsys Framework",
-    "license": "MIT",
+    "description": "Full-featured basis for your e-commerce project on Shopsys Framework",
+    "license": "Shopsys Community Licence",
     "autoload": {
         "psr-4": {
             "Shopsys\\": [

@@ -1,4 +1,4 @@
-# Monorepo Tools
+# Shopsys Monorepo Tools
 
 Tools for building and splitting monolithic repository from existing packages.
 You can read about pros and cons of monorepo approach on the [Shopsys Framework Blog](https://blog.shopsys.com/how-to-maintain-multiple-git-repositories-with-ease-61a5e17152e0).
@@ -120,4 +120,19 @@ Usage: `original_refs_wipe.sh`
 Delete all local branches and create all non-remote-tracking branches of a specified remote.
 
 Usage: `load_branches_from_remote.sh <remote-name>`
+
+## Contributing
+Thank you for your contributions to Shopsys Monorepo Tools package.
+Together we are making Shopsys Framework better.
+
+This repository is READ-ONLY.
+If you want to [report issues](https://github.com/shopsys/shopsys/issues/new) and/or send [pull requests](https://github.com/shopsys/shopsys/compare),
+please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
+
+Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/master/CONTRIBUTING.md) before contributing.
+
+## Support
+What to do when you are in troubles or need some help? Best way is to contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/)
+
+If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 

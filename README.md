@@ -1,69 +1,109 @@
-# Monorepo
+# Shopsys Framework
+Shopsys Framework is a **scalable e-commerce framework** for fast-growing e-commerce sites created and maintained by in-house developers or outsourcing companies.
 
-This document provides basic information about development in monorepo to make the work with packages and project-base repository as easy as possible.
+Our product provides the tools and know-how **to help save thousands of developer man-hours** in the short and long-term growth of e-merchants and their websites. 
 
-If you want to contribute to Shopsys Framework or to any of its packages,
-clone this monorepo [shopsys/shopsys](https://github.com/shopsys/shopsys).
+A typical project using our framework is a **B2B or B2C site with a yearly revenue ranging from €5M to €60M,
+thousands of orders and hundreds of thousands of pageviews each day**.
 
-If you want to build your project on Shopsys Framework,
-use composer to create project from [shopsys/project-base](https://github.com/shopsys/project-base).
+## Shopsys Framework Infrastructure
+![Shopsys Framework Infrastructure](./docs/img/shopsys-framework-infrastructure.jpeg 'Shopsys Framework Infrastructure')
 
-## Problem
-Due to the growing number of new repositories, there were many situations when a developer had to reflect the same change
-into more than one package. It meant, that the developer had to implement this in the separated repositories of each package.
-This approach was inefficient and repeated process always brought increased errors rate.
+## Shopsys Framework Package Architecture
+These are most important packages and the way they depend on each other.
+For more info see the article [Basics About Package Architecture](./docs/introduction/basics-about-package-architecture.md) in our knowledge base.
 
-## Solution
-Monorepo approach provides a single development environment for management of all parts of Shopsys Framework.
-We use [Monorepo tool](https://github.com/shopsys/monorepo-tools) that splits code in appropriate repositories
-after some changes are made in monorepo. This splitting is initiated automatically once a day.
+![Shopsys Framework package architecture schema](./docs/img/package-architecture.png 'Shopsys Framework Package Architecture')
 
-## Repositories maintained by monorepo
+## Current State and a Roadmap
 
-* [shopsys/project-base](https://github.com/shopsys/project-base)
-* [shopsys/product-feed-zbozi](https://github.com/shopsys/product-feed-zbozi)
-* [shopsys/product-feed-google](https://github.com/shopsys/product-feed-google)
-* [shopsys/product-feed-heureka](https://github.com/shopsys/product-feed-heureka)
-* [shopsys/product-feed-heureka-delivery](https://github.com/shopsys/product-feed-heureka-delivery)
-* [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface)
-* [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface)
-* [shopsys/coding-standards](https://github.com/shopsys/coding-standards)
-* [shopsys/http-smoke-testing](https://github.com/shopsys/http-smoke-testing)
-* [shopsys/form-types-bundle](https://github.com/shopsys/form-types-bundle)
-* [shopsys/migrations](https://github.com/shopsys/migrations)
-* [shopsys/monorepo-tools](https://github.com/shopsys/monorepo-tools)
+### State in March 2018
+Shopsys Framework is fully functional e-commerce platform with all basic functionality all e-commerce sites needs:
+* product catalogue
+* registered customers
+* basic orders management
+* back-end administration
+* front-end full-text search and product filtering
+* 3-step ordering process
+* basic CMS
+* support for several currencies, languages, and domains
+* full friendly URL for main entities
 
-## Infrastructure
-Monorepo can be installed and used as standard application. This requires some additional infrastructure:
+Last stable release of Shopsys 6.1 was published at the beginning of 2018 and on this version we created several big B2C and B2B projects.
+Experience we got through implementations lead us to ideas and plans for next version of our Shopsys Framework.
+The main change is a bigger focus on performance and scalability and significant architecture changes which will provide easy upgradability.
+You can read a full article about our goals
+[on our blog](https://blog.shopsys.com/shopsys-framework-goals-for-the-beta-and-the-stabile-version-9facf4763376).
 
-* **docker/** - templates for configuration of docker in monorepo.
+Shopsys Framework is currently in the process of architecture refactoring.
+Because of this fact, there will be lots of BC breaks in next few months and architecture is not consistent at the moment.
+**So we strictly recommend to use the last stable version of Shopsys 6.1 for production - contact us and we will provide you the access for free.**
 
-* **build.xml** - definitions of targets for use in the monorepo, some already defined targets
-have modified behaviour in such a way that their actions are launched over all monorepo packages
+### Summer 2018 - Alpha
+* Experimental projects to validate upgradability
+* Heavy performance testing
+* Security audits
 
-* **composer.json** - contains the dependencies required by individual packages and by Shopsys Framework.
-It is not generated automatically, so each change made in the `composer.json` of the specific package must be reflected
-also in `composer.json` in the root of monorepo. In monorepo, Shopsys packages are used directly from the directory
-`packages/`, so there are no requirements of those packages in `composer.json`. The exception is the coding-standards
-package that continues to be installed in the vendor because the current master version of the package in
-`packages/` is not supported by Shopsys Framework.
+### September 2018 - Open beta
+* Performance optimization through Elasticsearch, Redis, PostgreSQL
+* Full core upgradability
+* GDPR compliance
+* First modules
 
-* **parameters_monorepo.yml** - overriding of global variables of Shopsys Framework, which makes it possible to run 
-Shopsys Framework in monorepo
+### February 2019 - Stable version
+* Ready to scale
+* Asynchronous Processing (RabbitMQ)
+* API for front-end applications
+* Module store (10 modules)
+* Best practice manuals
 
-## Development in monorepo
-During the development in monorepo, it is necessary to ensure that the changes made in specific package
-preserve the functionality of the package even outside the monorepo.
- 
-Keep in mind that the file structure of Shopsys Framework (standardly located in the root of the project) is in monorepo
-located in the directory `project-base/`
+You can learn more about our development plans [on our blog](https://blog.shopsys.com/here-it-is-shopsys-framework-development-roadmap-154edb549c97). 
 
-Installation of Shopsys Framework is described in [Shopsys Framework installation guide](./project-base/docs/introduction/installation-guide.md)
+## Sites Built on Shopsys Framework
+List of typical projects built on previous versions of Shopsys Framework:
+* [Zoopy](https://www.zoopy.cz/)
+* [Prumex](https://www.prumex.cz/)
+* [Elektro Vlášek](https://www.elektrovlasek.cz/)
+* [AB COM CZECH](https://www.ab-com.cz/)
+* [Knihy.cz](https://www.knihy.cz/)
 
-## Troubleshooting
-* Package is functional in monorepo but broken outside of monorepo - ensure that every parameter required by package
-is available even outside the monorepo
+## How to Start a New Project
+The *shopsys/shopsys* package is a monolithic repository, a single development environment, for management of all parts of Shopsys Framework.
+See more information about the monorepo approach in [the Monorepo article](./docs/introduction/monorepo.md).
 
-* Command `cp app/config/domains_urls.yml.dist app/config/domains_urls.yml` results in failure - during the development
-in monorepo, Shopsys Framework is placed in the directory `project-base/`. The correct form of this command during the
-development in monorepo is `cp project-base/app/config/domains_urls.yml.dist project-base/app/config/domains_urls.yml`
+For the purposes of building a new project use our [shopsys/project-base](https://github.com/shopsys/project-base),
+which is fully ready as the base for building your Shopsys Framework project.
+For more detailed instructions, follow one of the installation guides:
+
+* [Installation via Docker (recommended)](./docs/docker/installation/installation-using-docker.md)
+* [Native installation](./docs/introduction/installation-guide.md)
+
+## Documentation
+For documentation of Shopsys Framework itself, see [Shopsys Framework Knowledge Base](./docs/index.md).
+
+## Contributing
+If you have some ideas or you want to help to improve Shopsys Framework, let us know!
+We are looking forward to your insights, feedback, and improvements.
+Thank you for helping us making Shopsys Framework better.
+
+You can find all the necessary information in our [Contribution Guide](./CONTRIBUTING.md). 
+
+## Support
+What to do when you are in troubles or need some help?
+The best way is to contact us on our [Slack](http://slack.shopsys-framework.com/).
+
+If you are experiencing problems during installation or running Shopsys Framework on Docker,
+please see our [Docker troubleshooting](./docs/docker/docker-troubleshooting.md).
+
+Or ultimately, just [report an issue](https://github.com/shopsys/shopsys/issues/new).
+
+## License
+We distribute our main parts of Shopsys Framework
+[shopsys/project-base](https://github.com/shopsys/project-base) and
+[shopsys/framework](https://github.com/shopsys/framework) under two different licenses: 
+
+* [Community License](./LICENSE) in MIT style for small to mid-size e-commerce sites with yearly total online sales less than €10.000.000
+* Enterprise License
+
+The rest of modules of Shopsys Framework including [HTTP smoke testing](https://github.com/shopsys/http-smoke-testing) are distributed under standard MIT license. 
+

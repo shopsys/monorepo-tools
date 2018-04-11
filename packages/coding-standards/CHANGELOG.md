@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#11](https://github.com/shopsys/coding-standards/pull/11) dropped support of PHP 7.0 (@vitek-rostislav)
 - [#12](https://github.com/shopsys/coding-standards/pull/12/) [EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard) is now used (@TomasVotruba)
     - the tool encapsulates PHP-CS-Fixer and PHP_CodeSniffer 
-    - rules configuration is now unified in single file - [`easy-coding-standard.neon`](easy-coding-standard.neon)
+    - rules configuration is now unified in single file - [`easy-coding-standard.neon`](./easy-coding-standard.neon)
     - the option `ignore-whitespace` for rules checking method and class length is not available anymore
         - the limits were increased to 550 (class length) and 60 (method length)
     
@@ -35,8 +35,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [3.1.0] - 2017-10-12
 ### Added
 - This changelog (@vitek-rostislav)
-- [Description of used coding standards rules](docs/description-of-used-coding-standards-rules.md) (@vitek-rostislav)
-- New rules in [phpcs-fixer ruleset](build/phpcs-fixer.php_cs) (@TomasLudvik):
+- [Description of used coding standards rules](./docs/description-of-used-coding-standards-rules.md) (@vitek-rostislav)
+- New rules in [phpcs-fixer ruleset](./build/phpcs-fixer.php_cs) (@TomasLudvik):
     - combine_consecutive_unsets
     - function_typehint_space
     - hash_to_slash_comment
@@ -61,7 +61,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - friendsofphp/php-cs-fixer upgraded from version 2.1 to version 2.3 (@TomasLudvik)
-- [phpcs-fixer ruleset](build/phpcs-fixer.php_cs) (@vitek-rostislav)
+- [phpcs-fixer ruleset](./build/phpcs-fixer.php_cs) (@vitek-rostislav)
     - replaced deprecated "hash_to_slash_comment" rule with "single_line_comment_style" rule
     - custom NoUnusedImportsFixer replaced with standard "no_unused_imports" rule
 

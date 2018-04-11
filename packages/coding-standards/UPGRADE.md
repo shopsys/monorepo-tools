@@ -2,7 +2,7 @@
 
 ## From 3.x to 4.0
 - In order to run all checks, there is new unified way - execute `php vendor/bin/ecs check /path/to/project --config=vendor/shopsys/coding-standards/easy-coding-standard.neon`
-    - If you are overriding rules configuration in your project, it is necessary to do so in neon configuration file, see [example bellow](example-of-custom-configuration-file).
+    - If you are overriding rules configuration in your project, it is necessary to do so in neon configuration file, see [example bellow](./example-of-custom-configuration-file).
     - See [EasyCodingStandard docs](https://github.com/Symplify/EasyCodingStandard#usage) for more information
 ### Example of custom configuration file
 #### Version 3.x and lower

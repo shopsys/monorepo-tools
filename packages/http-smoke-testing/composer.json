@@ -1,8 +1,8 @@
 {
     "name": "shopsys/http-smoke-testing",
+    "type": "library",
     "description": "HTTP smoke test case for testing all configured routes in your Symfony project",
     "keywords": ["smoke testing","testing","Symfony","routing", "PHPUnit"],
-    "type": "library",
     "license": "MIT",
     "authors": [
         {

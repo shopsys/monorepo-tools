@@ -24,7 +24,7 @@ php composer require shopsys/coding-standards
 ## Usage
 
 Create `custom-coding-standard.neon` config file in your project which includes predefined rulesets. 
-You can also [customize the rules](UPGRADE.md#version-4.0-and-higher) 
+You can also [customize the rules](./UPGRADE.md#version-4.0-and-higher) 
 and even add your own sniffs and fixers in the config.
 
 ```neon
@@ -75,3 +75,19 @@ does not report method parameters in `$_var` format as an violation but it shoul
 It also skips checking of private members when `PrivateNoUnderscore` property is disabled.
 
 This sniff provides the missing functionality and is intended to be used as an addition to the default `ValidVariableNameSniff`.
+
+## Contributing
+Thank you for your contributions to Shopsys Coding Standards package.
+Together we are making Shopsys Framework better.
+
+This repository is READ-ONLY.
+If you want to [report issues](https://github.com/shopsys/shopsys/issues/new) and/or send [pull requests](https://github.com/shopsys/shopsys/compare),
+please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
+
+Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/master/CONTRIBUTING.md) before contributing.
+
+## Support
+What to do when you are in troubles or need some help? Best way is to contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/)
+
+If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
+

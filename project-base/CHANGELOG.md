@@ -14,9 +14,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Frontend site for requesting personal data information (@stanoMilan)
     - Admin - added email template for personal data request
     - Frontend send email with link to personal data access site 
-- [wip-glassbox-customization.md](docs/wip_glassbox/wip-glassbox-customization.md): new WIP documentation about working with glassbox (@Miroslav-Stopka)
-- docker: [`php-fpm/Dockerfile`](docker/php-fpm/Dockerfile) added installation of `grunt-cli` to be able to run `grunt watch` (@MattCzerner)
-    - [`docker-compose.yml.dist`](docker/conf/docker-compose.yml.dist) and [`docker-compose-mac.yml.dist`](docker/conf/docker-compose-mac.yml.dist): opened port 35729 for livereload, that is used by `grunt watch`
+- [wip-glassbox-customization.md](https://github.com/shopsys/shopsys/blob/master/docs/wip_glassbox/wip-glassbox-customization.md): new WIP documentation about working with glassbox (@Miroslav-Stopka)
+- docker: [`php-fpm/Dockerfile`](./docker/php-fpm/Dockerfile) added installation of `grunt-cli` to be able to run `grunt watch` (@MattCzerner)
+    - [`docker-compose.yml.dist`](./docker/conf/docker-compose.yml.dist) and [`docker-compose-mac.yml.dist`](./docker/conf/docker-compose-mac.yml.dist): opened port 35729 for livereload, that is used by `grunt watch`
 
 ### Changed
 - `JavascriptCompilerService` can now compile javascript from more than one source directory (@MattCzerner)
@@ -48,6 +48,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - all services that must be public because of tests moved to services_test.yml
     - unnecessary service obtaining from container replaced with autowiring
 - new images for no image and empty cart (@stanoMilan)
+- **the licence was changed from MIT to [Shopsys Community Licence](./LICENCE)**
+
+### Removed
+- documentation was moved into the main [Shopsys repository](https://github.com/shopsys/shopsys/docs) (@Miroslav-Stopka)
 
 ## 6.0.0-beta21 - 2018-03-05
 - released only in closed beta
@@ -66,19 +70,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - subscription form: added link to privacy policy agreement article (@simara-svatopluk)
 - NewsletterController now exports date of subscription to newsletter (@simara-svatopluk)
 - `services_command.yml` to set Commands as services (@TomasLudvik)
-- [docker-troubleshooting.md](docs/docker/docker-troubleshooting.md): added to help developers with common problems that occurs using docker for development(@MattCzerner)
+- [docker-troubleshooting.md](https://github.com/shopsys/shopsys/blob/master/docs/docker/docker-troubleshooting.md): added to help developers with common problems that occurs using docker for development(@MattCzerner)
 - Newsletter subscriber is distinguished by domain (@stanoMilan)
     - Admin: E-mail newsletter now exports e-mails to csv for each domain separatedly
 - DatabaseSearching: added getFullTextLikeSearchString() (@MattCzerner)
 - admin: E-mail newsletter: now contains list of registered e-mails with ability to delete them
 
 ### Changed
-- cache is cleared before PHPUnit tests only when run via [Phing targets](docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)
+- cache is cleared before PHPUnit tests only when run via [Phing targets](https://github.com/shopsys/shopsys/blob/master/docs/introduction/phing-targets.md), not when run using `phpunit` directly (@PetrHeinz)
 - PHPUnit tests now fail on warning (@TomasLudvik)
 - end of support of PHP 7.0 (@TomasLudvik)
 - renamed TermsAndCondition to LegalCondition to avoid multiple classes for legal conditions agreements (@stanoMilan) 
 - emails with empty subject or body are no longer sent (@stanoMilan)
-- postgresql-client is installed in [php-fpm/dockerfile](docker/php-fpm/Dockerfile) for `pg_dump` function (@MattCzerner)
+- postgresql-client is installed in [php-fpm/dockerfile](./docker/php-fpm/Dockerfile) for `pg_dump` function (@MattCzerner)
     - postgresql was downgraded to 9.5 because of compatibility with postgresql-client
 - docker-compose: added container_name to smtp-server and adminer (@MattCzerner)
 - configuration of Docker Compose tweaked for easier development (@MattCzerner)
@@ -87,7 +91,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - `adminer` container uses port 1100 by default (as 1000 is often already in use)
     - Docker Sync is used only in configuration for MacOS as only there it is needed
     - `postgres` container is created with a volume for data persistence (in `var/postgres-data`)
-    - see documentation of [Installation Using Docker](docs/introduction/installation-using-docker.md) for details
+    - see documentation of [Installation Using Docker](https://github.com/shopsys/shopsys/blob/master/docs/introduction/installation-using-docker.md) for details
 - default parameters in `parameters.yml.dist` and `parameters_test.yml.dist` are for Docker installation (instead of native) (@MattCzerner)
 - Front/NewsletterController: extracted duplicit rendering and add return typehints (@simara-svatopluk)
 - Symfony updated to version 3.4 (@TomasLudvik)
@@ -158,7 +162,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - released only in closed beta
 
 ### Added
-- size of performance data fixtures and limits for performance testing are now configurable via parameters defined in [`parameters_common.yml`](app/config/parameters_common.yml) (@PetrHeinz)
+- size of performance data fixtures and limits for performance testing are now configurable via parameters defined in [`parameters_common.yml`](./app/config/parameters_common.yml) (@PetrHeinz)
 - performance tests report database query counts (@PetrHeinz)
 - UserDataFixture: alias for SettingValueDataFixture to fix [PHP bug #66862](https://bugs.php.net/bug.php?id=66862)
 
@@ -171,10 +175,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - released only in closed beta
 
 ### Added
-- [coding standards documentation](docs/contributing/coding-standards.md) (@vitek-rostislav)
+- [coding standards documentation](https://github.com/shopsys/shopsys/blob/master/docs/contributing/coding-standards.md) (@vitek-rostislav)
 - acceptance tests asserting successful image upload in admin for product, transport and payment (@vitek-rostislav)
 - Docker based server stack for easier installation and development (@TomasLudvik)
-    - see [Docker Installation Guide](docs/docker/installation/installation-using-docker.md) for details
+    - see [Docker Installation Guide](https://github.com/shopsys/shopsys/blob/master/docs/docker/installation/installation-using-docker.md) for details
 - plugins can now extend the CRUD of categories (using `CategoryFormType`) (@MattCzerner)
 
 ### Changed
@@ -201,7 +205,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - phing targets `eslint-check`, `eslint-check-diff`, `eslint-fix` and `eslint-fix-diff` to check and fix coding standards in JS files (@sspooky13)
     - executed as a part of targets `standards`, `standards-diff`, `standards-fix` and `standards-fix-diff`
 - [product feed plugin for Google](https://github.com/shopsys/product-feed-google/) (@MattCzerner)
-- new article explaining [Basics About Package Architecture](docs/introduction/basics-about-package-architecture.md) (@vitek-rostislav)
+- new article explaining [Basics About Package Architecture](https://github.com/shopsys/shopsys/blob/master/docs/introduction/basics-about-package-architecture.md) (@vitek-rostislav)
 
 ### Changed
 - `StandardFeedItemRepository`: now selects available products instead of sellable, filtering of not sellable products is made in product plugins (@MattCzerner)
@@ -217,7 +221,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - new documentation about Shopsys Framework model architecture (@TomasLudvik)
 - `FeedItemRepositoryInterface` (@vitek-rostislav)
     - moved from [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface/)
-- [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
+- [template for github pull requests](https://github.com/shopsys/shopsys/blob/master/docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
 
 ### Changed
 - dependency [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface/) upgraded from 0.1.0 to 0.2.0 (@MattCzerner)
@@ -232,20 +236,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - similar to `PluginDataFixtureRegistry` or `PluginCrudExtensionRegistry`
 - `UknownPluginDataFixtureException` renamed to `UnknownPluginCrudExtensionTypeException` because of a typo (@MattCzerner)
 - `FeedConfigRegistry` now contains all FeedConfigs in one array (indexed by type) (@vitek-rostislav)
-    - definition and assertion of known feed configs types moved from [`RegisterProductFeedConfigsCompilerPass`](src/Shopsys/ShopBundle/DependencyInjection/Compiler/RegisterProductFeedConfigsCompilerPass.php) to `FeedConfigRegistry`
+    - definition and assertion of known feed configs types moved from [`RegisterProductFeedConfigsCompilerPass`](./src/Shopsys/ShopBundle/DependencyInjection/Compiler/RegisterProductFeedConfigsCompilerPass.php) to `FeedConfigRegistry`
     - changed message and arguments of `UnknownFeedConfigTypeException`
 - renamed methods working with standard feeds only to be more expressive (@PetrHeinz)
     - renamed `FeedConfigFacade::getFeedConfigs()` to `getStandardFeedConfigs()`
     - renamed `FeedFacade::generateFeedsIteratively()` to `generateStandardFeedsIteratively()`
     - renamed `FeedGenerationConfigFactory::createAll()` to `createAllForStandardFeeds()`
-- [`parameters.yml.dist`](app/config/parameters.yml.dist): renamed parameter `email_for_error_reporting` to `error_reporting_email_to` (@vitek-rostislav)
-- sender email for error reporting is now configured in [`parameters.yml.dist`](app/config/parameters.yml.dist) (@vitek-rostislav)
+- [`parameters.yml.dist`](./app/config/parameters.yml.dist): renamed parameter `email_for_error_reporting` to `error_reporting_email_to` (@vitek-rostislav)
+- sender email for error reporting is now configured in [`parameters.yml.dist`](./app/config/parameters.yml.dist) (@vitek-rostislav)
 - reimplemented `CategoriesType` (@Petr Heinz)
     - it now extends `CollectionType` instead of `ChoiceType`
     - it loads only those categories that are needed to show all selected categories in a tree, not all of them
     - collapsed categories can be loaded via AJAX
 - `CategoryRepository::findById()` now uses `find()` method of Doctrine repository instead of query builder so it can use cached results (@PetrHeinz)
-- it is possible to mention occurrences of an image size in [`images.yml`](src/Shopsys/ShopBundle/Resources/config/images.yml) (@PetrHeinz)
+- it is possible to mention occurrences of an image size in [`images.yml`](./src/Shopsys/ShopBundle/Resources/config/images.yml) (@PetrHeinz)
     - previously they were directly in `ImageController`
     - they are not translatable anymore (too hard to maintain)
 
@@ -265,7 +269,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - PHP 7 support
-- [a basic knowledgebase](docs/index.md)
+- [a basic knowledgebase](https://github.com/shopsys/shopsys/blob/master/docs/index.md)
     - installation guide
     - guidelines for contributions
     - cookbooks

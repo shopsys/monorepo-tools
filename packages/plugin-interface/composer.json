@@ -1,8 +1,8 @@
 {
     "name": "shopsys/plugin-interface",
+    "type": "library",
     "description": "General Shopsys Framework plugin interface",
     "keywords": ["plugin", "Shopsys Framework", "SSFW"],
-    "type": "library",
     "license": "MIT",
     "authors": [
         {

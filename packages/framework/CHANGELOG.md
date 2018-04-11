@@ -24,6 +24,7 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
 - glass-box model entities are now extensible from project-base without changing the framework code (@simara-svatopluk)
     - the entity extension is a work in progress
     - currently it would require you to override a lot of classes to use the extended entities instead of the parents
+- [Shopsys Community Licence](./LICENCE)
 
 ### Changed
 - configuration of form types in administration is enabled using form type options (@Miroslav-Stopka)

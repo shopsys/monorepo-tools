@@ -1,5 +1,6 @@
 {
     "name": "shopsys/migrations",
+    "type": "library",
     "description": "Symfony bundle providing commands for transactional Doctrine database migrations",
     "keywords": ["database","migrations","migrate","schema","ORM","Doctrine"],
     "license": "MIT",

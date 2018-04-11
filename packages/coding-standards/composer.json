@@ -1,5 +1,6 @@
 {
     "name": "shopsys/coding-standards",
+    "type": "library",
     "description": "Coding standards definition compatible with PSR-2",
     "keywords": ["code style","coding standards","PSR-2","code quality"],
     "license": "MIT",

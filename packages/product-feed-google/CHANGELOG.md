@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fix availability value (@simara-svatopluk)
 
 ### Added
-- [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@stanoMilan)
+- [template for github pull requests](./docs/PULL_REQUEST_TEMPLATE.md) (@stanoMilan)
 
 ## [0.1.1] - 2017-10-04
 ### Added

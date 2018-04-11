@@ -1,8 +1,8 @@
 {
     "name": "shopsys/framework",
     "type": "library",
-    "description": "Shopsys Framework",
-    "license": "MIT",
+    "description": "Core of Shopsys Framework - open source framework for building large, scalable, fast-growing e-commerce projects based on Symfony",
+    "license": "Shopsys Community Licence",
     "autoload": {
         "psr-4": {
             "Shopsys\\FrameworkBundle\\": [

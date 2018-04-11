@@ -1,4 +1,8 @@
-# General Shopsys Framework Plugin Interface
+# Shopsys Plugin Interface
+
+[![Build Status](https://travis-ci.org/shopsys/plugin-interface.svg?branch=master)](https://travis-ci.org/shopsys/plugin-interface)
+[![Downloads](https://img.shields.io/packagist/dt/shopsys/plugin-interface.svg)](https://packagist.org/packages/shopsys/plugin-interface)
+
 Package of interfaces providing compatibility between [Shopsys Framework](https://www.shopsys-framework.com) and plugins.
 
 ## Features
@@ -209,3 +213,19 @@ class AcmeDataDownloadCronModule implements SimpleCronModuleInterface
 ## How to implement a plugin
 Plugins are implemented in a form of a [Symfony bundle](http://symfony.com/doc/current/bundles.html).
 For tips on how to write a new bundle see [Best Practices for Reusable Bundles](https://symfony.com/doc/current/bundles/best_practices.html).
+
+## Contributing
+Thank you for your contributions to Shopsys Plugin Interface package.
+Together we are making Shopsys Framework better.
+
+This repository is READ-ONLY.
+If you want to [report issues](https://github.com/shopsys/shopsys/issues/new) and/or send [pull requests](https://github.com/shopsys/shopsys/compare),
+please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
+
+Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/master/CONTRIBUTING.md) before contributing.
+
+## Support
+What to do when you are in troubles or need some help? Best way is to contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/)
+
+If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
+

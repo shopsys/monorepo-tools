@@ -15,15 +15,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.2.2] - 2017-10-04
 ### Added
-- support for [shopsys/product-feed-interface](shopsys/product-feed-interface) 0.5.0 (@PetrHeinz)
+- support for [shopsys/product-feed-interface](./shopsys/product-feed-interface) 0.5.0 (@PetrHeinz)
 
 ## [0.2.1] - 2017-09-25
 ### Added
-- [CONTRIBUTING.md](CONTRIBUTING.md) (@vitek-rostislav)
-- [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
+- [CONTRIBUTING.md](./CONTRIBUTING.md) (@vitek-rostislav)
+- [template for github pull requests](./docs/PULL_REQUEST_TEMPLATE.md) (@vitek-rostislav)
 
 ### Changed
-- Dependency [product-feed-interface](shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0 (@MattCzerner)
+- Dependency [product-feed-interface](./shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0 (@MattCzerner)
 
 ## [0.2.0] - 2017-09-12
 ### Added
@@ -33,9 +33,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - twig/twig 1.34.0
     - twig/extensions 1.3.0
 - New automatic test that is controlling right behaviour of plugin (@MattCzerner)
-- Added travis build icon into [README.md](README.md) (@MattCzerner)
+- Added travis build icon into [README.md](./README.md) (@MattCzerner)
 ### Changed
-- Dependency [plugin-interface](shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0 (@MattCzerner)
+- Dependency [plugin-interface](./shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0 (@MattCzerner)
 ### Removed
 - `HeurekaDeliveryFeedConfig::getFeedItemRepository()` (@MattCzerner)
 
@@ -51,7 +51,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 [Unreleased]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.3.0...HEAD
 [0.3.0]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.2...v0.3.0
-[0.2.1]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.1...v0.2.2
+[0.2.2]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.1.0...v0.1.1
