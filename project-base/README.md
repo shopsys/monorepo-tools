@@ -1,50 +1,34 @@
-# Shopsys Framework
+# Shopsys Project-base
 
-## Important - current status
-[Shopsys Framework](https://www.shopsys-framework.com/) has been developed since the beginning of 2014 and there are some projects in production that already leverage the framework. 
-In March 2018 we extracted the core functionality into [separate package](https://github.com/shopsys/framework) to provide future upgradeability of projects based on the framework. 
-But the extraction causes that majority of customizations is not achievable at the moment.
-You can only use [standard Symfony extensibility concepts](https://symfony.com/doc/3.4/bundles/override.html), 
-eg. services and templates overriding. 
-We have already implemented [steps towards the project customization](https://github.com/shopsys/shopsys/blob/master/docs/wip_glassbox/wip-glassbox-customization.md) 
-but there is still quite an amount of work that needs to be done. 
-We are also planning architectural changes, 
-see the roadmap on the picture below and read more about our near-future plans in [our blog](https://blog.shopsys.com/here-it-is-shopsys-framework-development-roadmap-154edb549c97).
+This repository is part of Shopsys Framework - a **scalable ecommerce framework** for fast-growing ecommerce sites created and maintained by in-house developers or outsourcing companies.
 
-**The framework is fully-functional now, 
-see the [rough functionality specifications](https://github.com/shopsys/project-base/blob/master/CHANGELOG.md#added-7). 
-But we do not recommend to build production sites on the framework at the moment. 
-Nevertheless, you are more than welcome to explore the source codes and play with the framework. 
-We would be very happy to get any [feedback](https://github.com/shopsys/shopsys/blob/master/project-base/CONTRIBUTING.md) from you.**
+Shopsys/project-base repository contains the fully ready base for building your Shopsys Framework projects. This repository is READ-ONLY and it is maintained by monorepo [shopsys/shopsys](https://github.com/shopsys/shopsys).
 
-![Shopsys Framework roadmap](https://github.com/shopsys/shopsys/blob/master/docs/img/roadmap.png 'Shopsys Framework roadmap')
-
-## Documentation
-For documentation of Shopsys Framework itself see [Shopsys Framework Knowledge Base](docs/index.md).
-
-Documentation of the specific project built on Shopsys Framework should be in [Project Documentation](docs/project/index.md).
+For more informations about project, please see [shopsys/shopsys](https://github.com/shopsys/shopsys) readme.
 
 ## Installation
-Create new project from [`shopsys/project-base`](https://github.com/shopsys/project-base) using composer.
-```
-composer create-project shopsys/project-base --stability=alpha --no-install
-```
-For more detailed instructions, follow one of the installation guides:
-- [Installation via Docker (recommended)](https://github.com/shopsys/shopsys/blob/master/docs/docker/installation/installation-using-docker.md)
-- [Detailed native installation](https://github.com/shopsys/shopsys/blob/master/docs/introduction/installation-guide.md)
+Create new project on Shopsys Framework easily from this package following one of the installation guides:
 
-### What to do next
-Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see running application.
+* [Installation via Docker (recommended)](./docs/docker/installation/installation-using-docker.md)
+* [Native installation](./docs/introduction/installation-guide.md)
 
-You can also login into the administration section on [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) with default credentials:
-* Username: `admin` or `superadmin` (the latter has access to advanced options)
-* Password: `admin123`
+## Documentation
+For documentation of Shopsys Framework itself see [Shopsys Framework Knowledge Base](https://github.com/shopsys/shopsys/docs/index.md).
+
+Documentation of the specific project built on Shopsys Framework should be in [Project Documentation](https://github.com/shopsys/project-base/docs/index.md).
 
 ## Contributing
-Report [issues](https://github.com/shopsys/shopsys/issues/new) and send [pull requests](https://github.com/shopsys/shopsys/compare) in the main [Shopsys repository](https://github.com/shopsys/shopsys).
+Thank you for your contributions to Shopsys Project-base.
+Together we are making Shopsys Framework better.
 
-Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/master/CONTRIBUTING.md) before contributing.
+This repository is READ-ONLY.
+If you want to [report issues](https://github.com/shopsys/shopsys/issues/new) and/or send [pull requests](https://github.com/shopsys/shopsys/compare),
+please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
-## Need help
-* [Docker troubleshooting](https://github.com/shopsys/shopsys/blob/master/docs/docker/docker-troubleshooting.md)
-* Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).
+Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/CONTRIBUTING.md) before contributing.
+
+## Support
+What to do when you are in troubles or need some help? Best way is to contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/)
+Contact us on our Slack .
+
+If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
