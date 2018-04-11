@@ -55,5 +55,8 @@ please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
 Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/master/CONTRIBUTING.md) before contributing.
 
-## Need help
-Contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/).
+## Support
+What to do when you are in troubles or need some help? Best way is to contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/)
+
+If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
+
