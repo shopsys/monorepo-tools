@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [Unreleased]
+
+## 7.0.0-alpha1 - 2018-04-12
 - We are releasing version 7 (open-source project known as Shopsys Framework) to better distinguish it from Shopsys 6
   (internal platform of Shopsys company) and older versions that we have been developing and improving for 15 years.
 
@@ -316,3 +318,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - support for several domains
 - full friendly URL for main entities
 - customizable SEO attributes for main entities
+
+[Unreleased]: https://github.com/shopsys/project-base/compare/v7.0.0-alpha1...HEAD

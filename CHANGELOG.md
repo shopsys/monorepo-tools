@@ -21,9 +21,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * [shopsys/migrations](./packages/migrations/CHANGELOG.md)
 * [shopsys/monorepo-tools](./packages/monorepo-tools/CHANGELOG.md)
 
-## Unreleased
+## [Unreleased]
+
+## 7.0.0-alpha1 - 2018-04-12
 ### Added
 - basic infrastructure so that the monorepo can be installed and used as standard application (@Miroslav-Stopka)
     - for details see [the Monorepo article](./docs/introduction/monorepo.md#infrastructure) in documentation
 - [Shopsys Community License](./LICENSE)
 - documentation was moved from [shopsys/project-base](https://github.com/shopsys/project-base) (@Miroslav-Stopka)
+
+[Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...HEAD
