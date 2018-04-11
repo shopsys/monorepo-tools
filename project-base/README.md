@@ -43,7 +43,7 @@ You can also login into the administration section on [http://127.0.0.1:8000/adm
 ## Contributing
 Report [issues](https://github.com/shopsys/shopsys/issues/new) and send [pull requests](https://github.com/shopsys/shopsys/compare) in the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
-Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/CONTRIBUTING.md) before contributing.
+Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/master/CONTRIBUTING.md) before contributing.
 
 ## Need help
 * [Docker troubleshooting](https://github.com/shopsys/shopsys/blob/master/docs/docker/docker-troubleshooting.md)
