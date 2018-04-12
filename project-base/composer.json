@@ -2,7 +2,7 @@
     "name": "shopsys/project-base",
     "type": "project",
     "description": "Full-featured basis for your e-commerce project on Shopsys Framework",
-    "license": "Shopsys Community License",
+    "license": "proprietary",
     "autoload": {
         "psr-4": {
             "Shopsys\\": [
