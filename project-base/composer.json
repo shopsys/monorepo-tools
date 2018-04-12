@@ -37,10 +37,6 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/shopsys/framework.git"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/shopsys/jparser.git"
         }
     ],
