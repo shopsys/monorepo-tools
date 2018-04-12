@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [7.0.0-alpha1] - 2018-04-12
 - We are releasing the Shopsys Framework in version 7 and we are synchronizing versions because
   the Shopsys Framework and all packages are now developed together and are now same-version compatible.
 
@@ -21,5 +23,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - services.yml updated to Symfony 3.4 best practices (@TomasLudvik)
 
-[Unreleased]: https://github.com/shopsys/migrations/compare/v2.3.0...HEAD
+[Unreleased]: https://github.com/shopsys/migrations/compare/v7.0.0-alpha1...HEAD
+[7.0.0-alpha1]: https://github.com/shopsys/migrations/compare/v2.3.0...v7.0.0-alpha1
 [2.3.0]: https://github.com/shopsys/migrations/compare/v2.2.0...v2.3.0

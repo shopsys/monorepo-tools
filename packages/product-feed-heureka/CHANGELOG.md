@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [7.0.0-alpha1] - 2018-04-12
 - We are releasing the Shopsys Framework in version 7 and we are synchronizing versions because
   the Shopsys Framework and all packages are now developed together and are now same-version compatible.
 
@@ -86,7 +88,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Extracted Heureka product feed plugin from [Shopsys Framework](http://www.shopsys-framework.com/) (@PetrHeinz)
 - `.travis.yml` file with Travis CI configuration (@PetrHeinz)
 
-[Unreleased]: https://github.com/shopsys/product-feed-heureka/compare/v0.6.1...HEAD
+[Unreleased]: https://github.com/shopsys/product-feed-heureka/compare/v7.0.0-alpha1...HEAD
+[7.0.0-alpha1]: https://github.com/shopsys/product-feed-heureka/compare/v0.6.1...v7.0.0-alpha1
 [0.6.1]: https://github.com/shopsys/product-feed-heureka/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/shopsys/product-feed-heureka/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/shopsys/product-feed-heureka/compare/v0.5.0...v0.5.1

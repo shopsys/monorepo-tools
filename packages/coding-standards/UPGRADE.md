@@ -1,5 +1,7 @@
 # Upgrading
 
+## From 7.0.0-alpha1 to Unreleased
+
 ## From 3.x to 4.0
 - In order to run all checks, there is new unified way - execute `php vendor/bin/ecs check /path/to/project --config=vendor/shopsys/coding-standards/easy-coding-standard.neon`
     - If you are overriding rules configuration in your project, it is necessary to do so in neon configuration file, see [example bellow](./example-of-custom-configuration-file).
