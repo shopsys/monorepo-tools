@@ -57,7 +57,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - **the license was changed from MIT to [Shopsys Community License](./LICENSE)**
 
 ### Removed
-- documentation was moved into the main [Shopsys repository](https://github.com/shopsys/shopsys/docs) (@Miroslav-Stopka)
+- documentation was moved into the main [Shopsys repository](https://github.com/shopsys/shopsys/blob/master/docs) (@Miroslav-Stopka)
 
 ## 6.0.0-beta21 - 2018-03-05
 - released only in closed beta

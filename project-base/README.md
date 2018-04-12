@@ -9,13 +9,13 @@ For more informations about project, please see [shopsys/shopsys](https://github
 ## Installation
 Create new project on Shopsys Framework easily from this package following one of the installation guides:
 
-* [Installation via Docker (recommended)](./docs/docker/installation/installation-using-docker.md)
-* [Native installation](./docs/introduction/installation-guide.md)
+* [Installation via Docker (recommended)](https://github.com/shopsys/shopsys/blob/master/docs/docker/installation/installation-using-docker.md)
+* [Native installation](https://github.com/shopsys/shopsys/blob/master/docs/introduction/installation-guide.md)
 
 ## Documentation
-For documentation of Shopsys Framework itself see [Shopsys Framework Knowledge Base](https://github.com/shopsys/shopsys/docs/index.md).
+For documentation of Shopsys Framework itself see [Shopsys Framework Knowledge Base](https://github.com/shopsys/shopsys/blob/master/docs/index.md).
 
-Documentation of the specific project built on Shopsys Framework should be in [Project Documentation](https://github.com/shopsys/project-base/docs/index.md).
+Documentation of the specific project built on Shopsys Framework should be in [Project Documentation](https://github.com/shopsys/project-base/blob/master/docs/index.md).
 
 ## Contributing
 Thank you for your contributions to Shopsys Project-base.
@@ -25,7 +25,7 @@ This repository is READ-ONLY.
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new) and/or send [pull requests](https://github.com/shopsys/shopsys/compare),
 please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
-Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/CONTRIBUTING.md) before contributing.
+Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/master/CONTRIBUTING.md) before contributing.
 
 ## Support
 What to do when you are in troubles or need some help? Best way is to contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/)
