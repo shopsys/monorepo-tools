@@ -24,9 +24,9 @@
     },
     "require": {
         "php": "^7.0",
-        "shopsys/form-types-bundle": "7.0.0-alpha1",
-        "shopsys/plugin-interface": "7.0.0-alpha1",
-        "shopsys/product-feed-interface": "7.0.0-alpha1",
+        "shopsys/form-types-bundle": "dev-master",
+        "shopsys/plugin-interface": "dev-master",
+        "shopsys/product-feed-interface": "dev-master",
         "symfony/form": "^3.0",
         "symfony/framework-bundle": "^3.0",
         "symfony/translation": "^3.0",
