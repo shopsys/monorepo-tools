@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\DependencyInjection;
 
-use Shopsys\Environment;
+use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -18,7 +18,7 @@ class ShopsysShopExtension extends ConfigurableExtension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
-        if ($container->getParameter('kernel.environment') === Environment::ENVIRONMENT_TEST) {
+        if ($container->getParameter('kernel.environment') === EnvironmentType::TEST) {
             $loader->load('services_test.yml');
         }
 

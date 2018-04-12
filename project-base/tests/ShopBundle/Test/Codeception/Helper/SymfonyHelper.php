@@ -6,7 +6,7 @@ use AppKernel;
 use Codeception\Configuration;
 use Codeception\Module;
 use Codeception\TestInterface;
-use Shopsys\Environment;
+use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 
 class SymfonyHelper extends Module
 {
@@ -25,7 +25,7 @@ class SymfonyHelper extends Module
         // @codingStandardsIgnoreEnd
         require_once Configuration::projectDir() . '/../app/autoload.php';
 
-        $this->kernel = new AppKernel(Environment::ENVIRONMENT_TEST, true);
+        $this->kernel = new AppKernel(EnvironmentType::TEST, EnvironmentType::isDebug(EnvironmentType::TEST));
         $this->kernel->boot();
     }
 

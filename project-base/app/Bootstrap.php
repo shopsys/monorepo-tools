@@ -4,7 +4,7 @@ namespace Shopsys;
 
 use AppKernel;
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Shopsys\Environment;
+use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -33,7 +33,7 @@ class Bootstrap
 
     public function run()
     {
-        if ($this->environment !== Environment::ENVIRONMENT_DEVELOPMENT) {
+        if ($this->environment !== EnvironmentType::DEVELOPMENT) {
             // Speed-up loading in production using bootstrap file that combines multiple PHP files to reduce disk IO.
             // See http://symfony.com/doc/3.0/performance.html#use-bootstrap-files
             include_once __DIR__ . '/../var/bootstrap.php.cache';
@@ -41,13 +41,13 @@ class Bootstrap
 
         $this->configurePhp();
 
-        if (Environment::isEnvironmentDebug($this->environment)) {
+        if (EnvironmentType::isDebug($this->environment)) {
             Debug::enable();
         } else {
             ErrorHandler::register();
         }
 
-        $kernel = new AppKernel($this->environment, Environment::isEnvironmentDebug($this->environment));
+        $kernel = new AppKernel($this->environment, EnvironmentType::isDebug($this->environment));
         Request::setTrustedProxies(['127.0.0.1'], Request::HEADER_X_FORWARDED_ALL);
         if ($this->console) {
             $input = new ArgvInput();
@@ -74,7 +74,7 @@ class Bootstrap
 
     private function initDoctrine()
     {
-        if ($this->environment === Environment::ENVIRONMENT_DEVELOPMENT) {
+        if ($this->environment === EnvironmentType::DEVELOPMENT) {
             $dirs = [__DIR__ . '/../vendor/doctrine/orm/lib/'];
             AnnotationRegistry::registerAutoloadNamespace('Doctrine\ORM', $dirs);
         }

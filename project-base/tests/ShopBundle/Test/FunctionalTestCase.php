@@ -2,9 +2,9 @@
 
 namespace Tests\ShopBundle\Test;
 
-use Shopsys\Environment;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class FunctionalTestCase extends WebTestCase
@@ -41,8 +41,8 @@ abstract class FunctionalTestCase extends WebTestCase
         $kernelOptions = []
     ) {
         $defaultKernelOptions = [
-            'environment' => Environment::ENVIRONMENT_TEST,
-            'debug' => Environment::isEnvironmentDebug(Environment::ENVIRONMENT_TEST),
+            'environment' => EnvironmentType::TEST,
+            'debug' => EnvironmentType::isDebug(EnvironmentType::TEST),
         ];
 
         $kernelOptions = array_replace($defaultKernelOptions, $kernelOptions);

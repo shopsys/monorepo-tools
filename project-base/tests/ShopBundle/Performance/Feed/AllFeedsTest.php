@@ -4,6 +4,7 @@ namespace Tests\ShopBundle\Performance\Feed;
 
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade;
 use Shopsys\HttpSmokeTesting\Auth\BasicHttpAuth;
 use Shopsys\ProductFeed\FeedConfigInterface;
@@ -38,8 +39,8 @@ class AllFeedsTest extends KernelTestCase
         parent::setUp();
 
         static::bootKernel([
-            'environment' => 'test',
-            'debug' => false,
+            'environment' => EnvironmentType::TEST,
+            'debug' => EnvironmentType::isDebug(EnvironmentType::TEST),
         ]);
 
         $container = self::$kernel->getContainer();

@@ -3,8 +3,8 @@
 namespace Shopsys\FrameworkBundle\Component\Error;
 
 use AppKernel;
-use Shopsys\Environment;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -131,7 +131,7 @@ class ErrorPagesFacade
      */
     private function getUrlContent($errorPageUrl, $expectedStatusCode)
     {
-        $errorPageKernel = new AppKernel(Environment::ENVIRONMENT_PRODUCTION, false);
+        $errorPageKernel = new AppKernel(EnvironmentType::PRODUCTION, false);
 
         $errorPageFakeRequest = Request::create($errorPageUrl);
 

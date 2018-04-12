@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\DependencyInjection;
 
-use Shopsys\Environment;
+use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -20,7 +20,7 @@ class ShopsysFrameworkExtension extends Extension
         $loader->load('services.yml');
         $loader->load('paths.yml');
 
-        if ($container->getParameter('kernel.environment') === Environment::ENVIRONMENT_TEST) {
+        if ($container->getParameter('kernel.environment') === EnvironmentType::TEST) {
             $loader->load('services_test.yml');
         }
 
