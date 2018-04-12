@@ -10,7 +10,7 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 ## Steps
 ### 1. Create new project from Shopsys Framework sources
 ```
-composer create-project shopsys/project-base --stability=alpha --no-install
+composer create-project shopsys/project-base --stability=alpha --no-install --keep-vcs
 cd project-base
 ```
 Notes: 
