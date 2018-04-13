@@ -4,6 +4,13 @@ php:
   - 7.1
   - 7.2
 
+cache:
+  directories:
+    - ~/.composer/cache
+
+before_install:
+  - composer config github-oauth.github.com $GITHUB_TOKEN
+
 install:
   - composer install
 
