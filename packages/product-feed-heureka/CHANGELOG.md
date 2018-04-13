@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- Doctrine entities are used for storing data instead of using `DataStorageProviderInterface` (@Miroslav-Stopka)
+    - previously saved data will be migrated
+
 ## [7.0.0-alpha1] - 2018-04-12
 - We are releasing the Shopsys Framework in version 7 and we are synchronizing versions because
   the Shopsys Framework and all packages are now developed together and are now same-version compatible.
