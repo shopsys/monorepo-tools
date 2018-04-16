@@ -2,7 +2,7 @@
 
 namespace Shopsys\ProductFeed\HeurekaBundle\Model\Category;
 
-use Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider;
+use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,20 +16,20 @@ class CategoryFormType extends AbstractType
     private $translator;
 
     /**
-     * @var \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider
+     * @var \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade
      */
-    private $dataStorageProvider;
+    private $heurekaCategoryFacade;
 
     /**
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \Shopsys\ProductFeed\HeurekaBundle\DataStorageProvider $dataStorageProvider
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade $heurekaCategoryFacade
      */
     public function __construct(
         TranslatorInterface $translator,
-        DataStorageProvider $dataStorageProvider
+        HeurekaCategoryFacade $heurekaCategoryFacade
     ) {
         $this->translator = $translator;
-        $this->dataStorageProvider = $dataStorageProvider;
+        $this->heurekaCategoryFacade = $heurekaCategoryFacade;
     }
 
     /**
@@ -38,13 +38,14 @@ class CategoryFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $allHeurekaCategories = $this->dataStorageProvider->getHeurekaCategoryDataStorage()->getAll();
+        $heurekaCategories = $this->heurekaCategoryFacade->getAllIndexedById();
 
         $builder->add('heureka_category', ChoiceType::class, [
             'label' => $this->translator->trans('Heureka category'),
-            'choices' => array_column($allHeurekaCategories, 'id', 'name'),
+            'choices' => $heurekaCategories,
             'required' => false,
             'attr' => ['class' => 'js-autocomplete-selectbox'],
+            'choice_label' => 'getName',
         ]);
     }
 }

@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraints\Range;
 
-class ProductFormType extends AbstractType
+class HeurekaProductFormType extends AbstractType
 {
     /**
      * @var \Symfony\Component\Translation\TranslatorInterface

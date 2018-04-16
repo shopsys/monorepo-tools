@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - We are releasing the Shopsys Framework in version 7 and we are synchronizing versions because
   the Shopsys Framework and all packages are now developed together and are now same-version compatible.
 
+### Removed
+- storing data via Data storage was removed (@Miroslav-Stopka)
+    - removed interfaces `PluginDataStorageProviderInterface` and `DataStorageInterface`
+    - only Doctrine entities are further allowed for storing data
+
 ## [0.3.0] - 2017-10-04
 ### Added
 - [CONTRIBUTING.md](./CONTRIBUTING.md) (@vitek-rostislav)

@@ -3,12 +3,13 @@
 namespace Tests;
 
 use DOMDocument;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Shopsys\Plugin\DataStorageInterface;
-use Shopsys\Plugin\PluginDataStorageProviderInterface;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\GoogleBundle\GoogleFeedConfig;
-use Shopsys\ProductFeed\GoogleBundle\ShopsysProductFeedGoogleBundle;
+use Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomain;
+use Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainFacade;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
@@ -23,14 +24,19 @@ class GoogleFeedTest extends TestCase
     const DOMAIN_ID_SECOND = 2;
 
     /**
+     * @var array
+     */
+    private $productsIds;
+
+    /**
+     * @var array
+     */
+    private $googleProductDomainsGroupedByDomainId;
+
+    /**
      * @var \Shopsys\ProductFeed\GoogleBundle\GoogleFeedConfig
      */
     private $googleFeedConfig;
-
-    /**
-     * @var \Shopsys\Plugin\DataStorageInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $productDataStorageMock;
 
     /**
      * @var \Twig_Environment
@@ -39,29 +45,142 @@ class GoogleFeedTest extends TestCase
 
     public function setUp()
     {
-        $this->productDataStorageMock = $this->createMock(DataStorageInterface::class);
-        $pluginDataStorageProviderMock = $this->createMock(PluginDataStorageProviderInterface::class);
+        $this->initTestData();
+
+        $googleProductDomainFacadeMock = $this->createGoogleProductDomainFacadeMock();
+
+        /** @var \Symfony\Component\Translation\TranslatorInterface|\PHPUnit\Framework\MockObject\MockObject $translatorMock */
         $translatorMock = $this->createMock(TranslatorInterface::class);
 
-        $pluginDataStorageProviderMock->method('getDataStorage')
-            ->with(ShopsysProductFeedGoogleBundle::class, 'product')
-            ->willReturn($this->productDataStorageMock);
-
-        $this->googleFeedConfig = new GoogleFeedConfig($pluginDataStorageProviderMock, $translatorMock);
+        $this->googleFeedConfig = new GoogleFeedConfig($translatorMock, $googleProductDomainFacadeMock);
 
         $twigLoader = new Twig_Loader_Filesystem([__DIR__ . '/../src/Resources/views']);
         $this->twig = new Twig_Environment($twigLoader);
     }
 
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainFacade
+     */
+    private function createGoogleProductDomainFacadeMock()
+    {
+        $returnCallback = function ($productsIds, $domainId) {
+            if ($productsIds === $this->productsIds && $domainId === self::DOMAIN_ID_FIRST) {
+                return $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_FIRST];
+            } elseif ($productsIds === $this->productsIds && $domainId === self::DOMAIN_ID_SECOND) {
+                return $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_SECOND];
+            }
+            return [];
+        };
+
+        /** @var GoogleProductDomainFacade|\PHPUnit\Framework\MockObject\MockObject $googleProductDomainFacadeMock */
+        $googleProductDomainFacadeMock = $this->createMock(GoogleProductDomainFacade::class);
+
+        $googleProductDomainFacadeMock->method('getGoogleProductDomainsByProductsIdsDomainIdIndexedByProductId')
+            ->willReturnCallback($returnCallback);
+
+        return $googleProductDomainFacadeMock;
+    }
+
+    private function initTestData()
+    {
+        $this->productsIds = [self::PRODUCT_ID_FIRST, self::PRODUCT_ID_SECOND, self::PRODUCT_ID_THIRD];
+
+        $this->googleProductDomainsGroupedByDomainId = [
+            self::DOMAIN_ID_FIRST => [],
+            self::DOMAIN_ID_SECOND => [],
+        ];
+
+        $firstProductMock = $this->createProductMock(self::PRODUCT_ID_FIRST);
+        $googleProductDomainForFirstProductFirstDomainMock = $this->createGoogleProductDomainMock(
+            $firstProductMock,
+            self::DOMAIN_ID_FIRST,
+            true
+        );
+
+        $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_FIRST][self::PRODUCT_ID_FIRST] = $googleProductDomainForFirstProductFirstDomainMock;
+
+        $googleProductDomainForFirstProductSecondDomainMock = $this->createGoogleProductDomainMock(
+            $firstProductMock,
+            self::DOMAIN_ID_SECOND,
+            false
+        );
+
+        $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_SECOND][self::PRODUCT_ID_FIRST] = $googleProductDomainForFirstProductSecondDomainMock;
+
+        $secondProductMock = $this->createProductMock(self::PRODUCT_ID_SECOND);
+
+        $googleProductDomainForSecondProductFirstDomainMock = $this->createGoogleProductDomainMock(
+            $secondProductMock,
+            self::DOMAIN_ID_FIRST,
+            true
+        );
+
+        $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_FIRST][self::PRODUCT_ID_SECOND] = $googleProductDomainForSecondProductFirstDomainMock;
+
+        $googleProductDomainForSecondProductSecondDomainMock = $this->createGoogleProductDomainMock(
+            $secondProductMock,
+            self::DOMAIN_ID_SECOND,
+            false
+        );
+
+        $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_SECOND][self::PRODUCT_ID_SECOND] = $googleProductDomainForSecondProductSecondDomainMock;
+
+        $thirdProductMock = $this->createProductMock(self::PRODUCT_ID_THIRD);
+
+        $googleProductDomainForThirdProductFirstDomainMock = $this->createGoogleProductDomainMock(
+            $thirdProductMock,
+            self::DOMAIN_ID_FIRST,
+            false
+        );
+
+        $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_FIRST][self::PRODUCT_ID_THIRD] = $googleProductDomainForThirdProductFirstDomainMock;
+
+        $googleProductDomainForThirdProductSecondDomainMock = $this->createGoogleProductDomainMock(
+            $thirdProductMock,
+            self::DOMAIN_ID_SECOND,
+            false
+        );
+
+        $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_SECOND][self::PRODUCT_ID_THIRD] = $googleProductDomainForThirdProductSecondDomainMock;
+    }
+
+    /**
+     * @param int $productId
+     * @return \PHPUnit\Framework\MockObject\MockObject
+     */
+    private function createProductMock($productId)
+    {
+        $productMock = $this->getMockBuilder(Product::class)
+            ->setMethods(['getId'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $productMock->method('getId')->willReturn($productId);
+
+        return $productMock;
+    }
+
+    /**
+     * @param \PHPUnit\Framework\MockObject\MockObject $productMock
+     * @param int $domainId
+     * @param bool $show
+     * @return \PHPUnit\Framework\MockObject\MockObject
+     */
+    private function createGoogleProductDomainMock(MockObject $productMock, $domainId, $show)
+    {
+        $googleProductDomainMock = $this->getMockBuilder(GoogleProductDomain::class)
+            ->setMethods(['getProduct', 'getDomainId', 'getShow'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $googleProductDomainMock->method('getProduct')->willReturn($productMock);
+        $googleProductDomainMock->method('getDomainId')->willReturn($domainId);
+        $googleProductDomainMock->method('getShow')->willReturn($show);
+
+        return $googleProductDomainMock;
+    }
+
     public function testGeneratingOfFeed()
     {
         $feedItems = $this->getFeedItemsData();
-        $pluginData = $this->getPluginData();
-
-        $this->productDataStorageMock->expects($this->atLeastOnce())
-            ->method('getMultiple')
-            ->with(array_keys($pluginData))
-            ->willReturn($pluginData);
 
         $domainConfigMock = $this->createMock(DomainConfigInterface::class);
         $domainConfigMock->method('getId')->willReturn(1);
@@ -170,37 +289,6 @@ class GoogleFeedTest extends TestCase
         );
 
         return $feedItems;
-    }
-
-    /**
-     * @return array
-     */
-    private function getPluginData()
-    {
-        $pluginData = [];
-
-        $pluginData[self::PRODUCT_ID_FIRST] = [
-            'show' => [
-                self::DOMAIN_ID_FIRST => true,
-                self::DOMAIN_ID_SECOND => false,
-            ],
-        ];
-
-        $pluginData[self::PRODUCT_ID_SECOND] = [
-            'show' => [
-                self::DOMAIN_ID_FIRST => true,
-                self::DOMAIN_ID_SECOND => false,
-            ],
-        ];
-
-        $pluginData[self::PRODUCT_ID_THIRD] = [
-            'show' => [
-                self::DOMAIN_ID_FIRST => false,
-                self::DOMAIN_ID_SECOND => false,
-            ],
-        ];
-
-        return $pluginData;
     }
 
     /**
