@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Cron\Config\Exception;
 
-interface CronConfigException
+use Throwable;
+
+interface CronConfigException extends Throwable
 {
 }

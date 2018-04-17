@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Advert\Exception;
 
-interface AdvertException
+use Throwable;
+
+interface AdvertException extends Throwable
 {
 }

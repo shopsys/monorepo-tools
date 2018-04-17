@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\FileUpload\Exception;
 
-interface FileUploadException
+use Throwable;
+
+interface FileUploadException extends Throwable
 {
 }

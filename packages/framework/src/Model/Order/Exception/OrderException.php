@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Exception;
 
-interface OrderException
+use Throwable;
+
+interface OrderException extends Throwable
 {
 }

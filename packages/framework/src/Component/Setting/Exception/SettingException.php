@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Setting\Exception;
 
-interface SettingException
+use Throwable;
+
+interface SettingException extends Throwable
 {
 }

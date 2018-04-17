@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\MassAction\Exception;
 
-interface MassActionException
+use Throwable;
+
+interface MassActionException extends Throwable
 {
 }

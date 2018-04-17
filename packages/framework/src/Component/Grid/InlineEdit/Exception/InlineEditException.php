@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Grid\InlineEdit\Exception;
 
-interface InlineEditException
+use Throwable;
+
+interface InlineEditException extends Throwable
 {
 }

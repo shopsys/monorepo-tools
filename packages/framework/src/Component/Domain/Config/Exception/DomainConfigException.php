@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Domain\Config\Exception;
 
-interface DomainConfigException
+use Throwable;
+
+interface DomainConfigException extends Throwable
 {
 }

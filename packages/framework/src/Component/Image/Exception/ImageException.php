@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Image\Exception;
 
-interface ImageException
+use Throwable;
+
+interface ImageException extends Throwable
 {
 }

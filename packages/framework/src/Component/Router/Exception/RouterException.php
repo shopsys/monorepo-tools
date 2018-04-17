@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Router\Exception;
 
-interface RouterException
+use Throwable;
+
+interface RouterException extends Throwable
 {
 }

@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\HttpFoundation\Exception;
 
-interface HttpFoundationException
+use Throwable;
+
+interface HttpFoundationException extends Throwable
 {
 }

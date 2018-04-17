@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Country\Exception;
 
-interface CountryException
+use Throwable;
+
+interface CountryException extends Throwable
 {
 }

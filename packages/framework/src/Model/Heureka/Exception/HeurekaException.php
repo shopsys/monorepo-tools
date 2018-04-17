@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Heureka\Exception;
 
-interface HeurekaException
+use Throwable;
+
+interface HeurekaException extends Throwable
 {
 }

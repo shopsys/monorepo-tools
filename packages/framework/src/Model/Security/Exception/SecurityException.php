@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Security\Exception;
 
-interface SecurityException
+use Throwable;
+
+interface SecurityException extends Throwable
 {
 }

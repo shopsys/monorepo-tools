@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Javascript\Compiler\Constant\Exception;
 
-interface JsConstantCompilerException
+use Throwable;
+
+interface JsConstantCompilerException extends Throwable
 {
 }

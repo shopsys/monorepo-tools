@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\DataFixtures\Performance\Exception;
 
-interface PerformanceException
+use Throwable;
+
+interface PerformanceException extends Throwable
 {
 }

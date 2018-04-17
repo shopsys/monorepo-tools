@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Grid\Exception;
 
-interface GridException
+use Throwable;
+
+interface GridException extends Throwable
 {
 }

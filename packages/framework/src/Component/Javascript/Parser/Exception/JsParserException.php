@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Javascript\Parser\Exception;
 
-interface JsParserException
+use Throwable;
+
+interface JsParserException extends Throwable
 {
 }

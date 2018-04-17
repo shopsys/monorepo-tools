@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Form\Exception;
 
-interface FormException
+use Throwable;
+
+interface FormException extends Throwable
 {
 }

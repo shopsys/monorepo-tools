@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Breadcrumb\Exception;
 
-interface BreadcrumbException
+use Throwable;
+
+interface BreadcrumbException extends Throwable
 {
 }

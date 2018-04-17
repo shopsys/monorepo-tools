@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Cart\Exception;
 
-interface CartException
+use Throwable;
+
+interface CartException extends Throwable
 {
 }

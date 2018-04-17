@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Pricing\Currency\Exception;
 
-interface CurrencyException
+use Throwable;
+
+interface CurrencyException extends Throwable
 {
 }

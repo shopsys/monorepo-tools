@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Twig\Exception;
 
-interface TwigException
+use Throwable;
+
+interface TwigException extends Throwable
 {
 }

@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Slider\Exception;
 
-interface SliderItemException
+use Throwable;
+
+interface SliderItemException extends Throwable
 {
 }

@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\DataFixture\Exception;
 
-interface DataFixtureException
+use Throwable;
+
+interface DataFixtureException extends Throwable
 {
 }

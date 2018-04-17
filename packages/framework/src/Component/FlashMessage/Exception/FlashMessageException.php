@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\FlashMessage\Exception;
 
-interface FlashMessageException
+use Throwable;
+
+interface FlashMessageException extends Throwable
 {
 }

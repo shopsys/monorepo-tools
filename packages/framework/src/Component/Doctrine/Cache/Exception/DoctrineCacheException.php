@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Doctrine\Cache\Exception;
 
-interface DoctrineCacheException
+use Throwable;
+
+interface DoctrineCacheException extends Throwable
 {
 }

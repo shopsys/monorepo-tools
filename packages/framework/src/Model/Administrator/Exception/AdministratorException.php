@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Administrator\Exception;
 
-interface AdministratorException
+use Throwable;
+
+interface AdministratorException extends Throwable
 {
 }

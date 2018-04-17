@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Script\Exception;
 
-interface ScriptException
+use Throwable;
+
+interface ScriptException extends Throwable
 {
 }

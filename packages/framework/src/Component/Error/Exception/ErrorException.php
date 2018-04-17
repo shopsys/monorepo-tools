@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Error\Exception;
 
-interface ErrorException
+use Throwable;
+
+interface ErrorException extends Throwable
 {
 }

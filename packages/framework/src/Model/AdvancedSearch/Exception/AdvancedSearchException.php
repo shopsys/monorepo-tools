@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\AdvancedSearch\Exception;
 
-interface AdvancedSearchException
+use Throwable;
+
+interface AdvancedSearchException extends Throwable
 {
 }

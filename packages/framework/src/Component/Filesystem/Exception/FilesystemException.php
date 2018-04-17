@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Filesystem\Exception;
 
-interface FilesystemException
+use Throwable;
+
+interface FilesystemException extends Throwable
 {
 }

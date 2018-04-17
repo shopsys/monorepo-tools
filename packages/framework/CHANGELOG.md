@@ -58,5 +58,6 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
         - ArticleFormType
         - AdvertFormType
         - AdministratorFormType
+- all exception interfaces are now Throwable (@TomasLudvik)
 
 [Unreleased]: https://github.com/shopsys/framework/compare/v7.0.0-alpha1...HEAD

@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Grid\Ordering\Exception;
 
-interface OrderingException
+use Throwable;
+
+interface OrderingException extends Throwable
 {
 }

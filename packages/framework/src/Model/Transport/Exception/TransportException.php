@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Transport\Exception;
 
-interface TransportException
+use Throwable;
+
+interface TransportException extends Throwable
 {
 }

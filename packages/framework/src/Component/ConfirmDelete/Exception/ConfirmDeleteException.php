@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\ConfirmDelete\Exception;
 
-interface ConfirmDeleteException
+use Throwable;
+
+interface ConfirmDeleteException extends Throwable
 {
 }

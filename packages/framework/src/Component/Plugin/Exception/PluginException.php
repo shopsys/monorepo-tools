@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Plugin\Exception;
 
-interface PluginException
+use Throwable;
+
+interface PluginException extends Throwable
 {
 }

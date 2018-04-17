@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\AdminNavigation\Exception;
 
-interface MenuException
+use Throwable;
+
+interface MenuException extends Throwable
 {
 }

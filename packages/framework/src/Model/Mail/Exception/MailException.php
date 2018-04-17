@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Mail\Exception;
 
-interface MailException
+use Throwable;
+
+interface MailException extends Throwable
 {
 }

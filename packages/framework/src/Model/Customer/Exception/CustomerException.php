@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Customer\Exception;
 
-interface CustomerException
+use Throwable;
+
+interface CustomerException extends Throwable
 {
 }

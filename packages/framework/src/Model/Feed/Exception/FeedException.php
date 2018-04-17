@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Feed\Exception;
 
-interface FeedException
+use Throwable;
+
+interface FeedException extends Throwable
 {
 }

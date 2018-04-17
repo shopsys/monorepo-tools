@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Localization\Exception;
 
-interface LocalizationException
+use Throwable;
+
+interface LocalizationException extends Throwable
 {
 }

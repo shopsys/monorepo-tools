@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Pricing\Group\Exception;
 
-interface PricingGroupException
+use Throwable;
+
+interface PricingGroupException extends Throwable
 {
 }
