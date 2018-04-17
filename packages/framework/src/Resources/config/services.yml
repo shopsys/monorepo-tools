@@ -594,6 +594,16 @@ services:
     tags:
       - { name: doctrine.event_subscriber, priority: 10 }
 
+  Shopsys\FrameworkBundle\Component\EntityExtension\EntityManagerDecorator:
+    decorates: 'doctrine.orm.default_entity_manager'
+    arguments:
+      - '@Shopsys\FrameworkBundle\Component\EntityExtension\EntityManagerDecorator.inner'
+      - '@doctrine.orm.default_configuration'
+
+  Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver:
+    arguments:
+      - '%shopsys.entity_extension.map%'
+
   joschi127_doctrine_entity_override.event_subscriber.load_orm_metadata:
     class: Joschi127\DoctrineEntityOverrideBundle\EventListener\LoadORMMetadataSubscriber
     arguments:

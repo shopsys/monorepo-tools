@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- extended glass-box model entities are now used instead of their parent entities in EntityManager and QueryBuilders (@PetrHeinz, @vitek-rostislav)
+    - this removes the need to manually override all repositories that work with extended entities
+    - the functionality is automatically tested in [shopsys/project-base](https://github.com/shopsys/project-base)
+        - see `\Tests\ShopBundle\Database\EntityExtension\EntityExtensionTest`
+
 ### Changed
 - moved constants with types of environment from [shopsys/project-base](https://github.com/shopsys/project-base) (@PetrHeinz)
     - moved from `\Shopsys\Environment` to `\Shopsys\FrameworkBundle\Component\Environment\EnvironmentType`
