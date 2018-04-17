@@ -130,6 +130,11 @@ Additionally you can override these methods in your implementation of [`HttpSmok
 * `createRequest` if you have specific needs about the way `Request` is created from [`RequestDataSet`](./src/RequestDataSet.php).
 * `handleRequest` to customize handling `Request` in your application (eg. you can wrap it in database transaction to roll it back into original state).
 
+## Troubleshooting
+
+### Tests do not fail on non-existing route
+PHPUnit by default does not fail on warnings. Setting `failOnWarning="true"` in `phpunit.xml` fixes this problem.
+
 ## Contributing
 Thank you for your contributions to Shopsys HTTP Smoke Testing package.
 Together we are making Shopsys Framework better.
