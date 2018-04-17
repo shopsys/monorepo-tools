@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue;
 
@@ -42,14 +42,14 @@ class ParameterFilterRepository
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData $parameterFilterData
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param int $parameterIndex
      * @param int $valueIndex
-     * @return \Doctrine\DBAL\Query\QueryBuilder
+     * @return \Doctrine\ORM\QueryBuilder
      */
     private function getParameterQueryBuilder(
         ParameterFilterData $parameterFilterData,
-        EntityManager $em,
+        EntityManagerInterface $em,
         $parameterIndex,
         &$valueIndex
     ) {
