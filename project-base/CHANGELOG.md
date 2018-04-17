@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Dependency Injection strict mode is now enabled (@EdoBarnas)
     - disables autowiring features that were removed in Symfony 4
 
+### Fixed
+- swiftmailer setting `delivery_address` renamed to `delivery_addresses` as the former does not exist anymore in version 3.* (@vitek-rostislav)
+    - see https://github.com/symfony/swiftmailer-bundle/commit/5edfbd39eaefb176922a346c16b0ae3aaeec87e0
+    - the new setting requires array instead of string so the parameter `mailer_master_email_address` is wrapped into array in config
+
 ## 7.0.0-alpha1 - 2018-04-12
 - We are releasing version 7 (open-source project known as Shopsys Framework) to better distinguish it from Shopsys 6
   (internal platform of Shopsys company) and older versions that we have been developing and improving for 15 years.

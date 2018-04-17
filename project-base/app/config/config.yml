@@ -175,7 +175,7 @@ swiftmailer:
   password: "%mailer_password%"
   spool: { type: memory }
   disable_delivery: "%mailer_disable_delivery%"
-  delivery_address: "%mailer_master_email_address%"
+  delivery_addresses: ["%mailer_master_email_address%"]
   delivery_whitelist: "%mailer_delivery_whitelist%"
 
 twig:
