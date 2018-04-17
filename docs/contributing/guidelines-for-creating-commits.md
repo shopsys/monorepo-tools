@@ -53,6 +53,10 @@ OrderFlowFacade: removed unused uses
 ```
 
 ```
+[US-1023] [US-1024] acceptance tests for customer registration and login
+```
+
+```
 [BG-1598] category translations are now correctly saved on category edit`
 ```
 
