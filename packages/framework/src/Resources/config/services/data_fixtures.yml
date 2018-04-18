@@ -4,5 +4,4 @@ services:
     autowire: true
 
   Shopsys\FrameworkBundle\DataFixtures\:
-   resource: '../../../DataFixtures/'
-   exclude: '../../../DataFixtures/{**/Exception,Demo/ProductDataFixtureLoader.php,Demo/ProductParametersFixtureLoader.php}'
+   resource: '../../../DataFixtures/**/*DataFixture.php'
