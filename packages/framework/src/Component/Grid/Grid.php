@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Component\Grid;
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
 use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Twig_Environment;
 
 /**
@@ -98,7 +98,7 @@ class Grid
     private $requestStack;
 
     /**
-     * @var \Symfony\Component\Routing\Router
+     * @var \Symfony\Component\Routing\RouterInterface
      */
     private $router;
 
@@ -161,7 +161,7 @@ class Grid
      * @param string $id
      * @param \Shopsys\FrameworkBundle\Component\Grid\DataSourceInterface $dataSource
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-     * @param \Symfony\Component\Routing\Router $router
+     * @param \Symfony\Component\Routing\RouterInterface $router
      * @param \Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
      * @param \Twig_Environment $twig
      */
@@ -169,7 +169,7 @@ class Grid
         $id,
         DataSourceInterface $dataSource,
         RequestStack $requestStack,
-        Router $router,
+        RouterInterface $router,
         RouteCsrfProtector $routeCsrfProtector,
         Twig_Environment $twig
     ) {

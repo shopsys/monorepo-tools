@@ -2,7 +2,7 @@
 
 namespace Shopsys\ProductFeed\HeurekaBundle\Model\Product;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
@@ -10,12 +10,12 @@ use Doctrine\ORM\EntityManager;
 class HeurekaProductDomainRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
     public function __construct(
-        EntityManager $em
+        EntityManagerInterface $em
     ) {
         $this->em = $em;
     }

@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Security;
 
 use DateTime;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade;
 use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
 use Shopsys\FrameworkBundle\Model\Customer\User;
@@ -13,7 +13,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 class LoginListener
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -28,7 +28,7 @@ class LoginListener
     private $administratorActivityFacade;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         OrderFlowFacade $orderFlowFacade,
         AdministratorActivityFacade $administratorActivityFacade
     ) {

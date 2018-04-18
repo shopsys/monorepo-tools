@@ -2,14 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\Model\Advert;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 
 class AdvertFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -29,13 +29,13 @@ class AdvertFacade
     private $imageFacade;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertRepository $advertRepository
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         AdvertRepository $advertRepository,
         ImageFacade $imageFacade,
         Domain $domain

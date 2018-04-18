@@ -2,13 +2,13 @@
 
 namespace Shopsys\FrameworkBundle\Model\Administrator;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Grid\Grid;
 
 class AdministratorGridFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager;
+     * @var \Doctrine\ORM\EntityManagerInterface;
      */
     private $em;
 
@@ -18,10 +18,10 @@ class AdministratorGridFacade
     private $administratorGridService;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridService $administratorGridService
      */
-    public function __construct(EntityManager $em, AdministratorGridService $administratorGridService)
+    public function __construct(EntityManagerInterface $em, AdministratorGridService $administratorGridService)
     {
         $this->em = $em;
         $this->administratorGridService = $administratorGridService;

@@ -3,12 +3,12 @@
 namespace Shopsys\FrameworkBundle\Model\Customer;
 
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class CurrentCustomer
 {
     /**
-     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
      */
     private $tokenStorage;
 
@@ -18,7 +18,7 @@ class CurrentCustomer
     private $pricingGroupSettingFacade;
 
     public function __construct(
-        TokenStorage $tokenStorage,
+        TokenStorageInterface $tokenStorage,
         PricingGroupSettingFacade $ricingGroupSettingFacade
     ) {
         $this->tokenStorage = $tokenStorage;

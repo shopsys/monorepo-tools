@@ -4,19 +4,19 @@ namespace Shopsys\FrameworkBundle\Component\Form;
 
 use DateTime;
 use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class FormTimeProvider
 {
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
     private $session;
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Session\Session $session
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
      */
-    public function __construct(Session $session)
+    public function __construct(SessionInterface $session)
     {
         $this->session = $session;
     }

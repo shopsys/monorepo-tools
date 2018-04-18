@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Category;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
@@ -19,7 +19,7 @@ class CategoryRepository extends NestedTreeRepository
     const MOVE_DOWN_TO_BOTTOM = true;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -29,10 +29,10 @@ class CategoryRepository extends NestedTreeRepository
     private $productRepository;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    public function __construct(EntityManager $em, ProductRepository $productRepository)
+    public function __construct(EntityManagerInterface $em, ProductRepository $productRepository)
     {
         $this->em = $em;
         $classMetadata = $this->em->getClassMetadata(Category::class);

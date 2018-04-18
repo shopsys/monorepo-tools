@@ -13,6 +13,16 @@ services:
     autoconfigure: true
     public: false
 
+  Shopsys\FrameworkBundle\:
+    resource: '../../**/*{Calculation,Facade,Factory,Generator,Handler,InlineEdit,Listener,Loader,Mapper,Parser,Provider,Recalculator,Registry,Repository,Resolver,Service,Scheduler,Subscriber,Transformer}.php'
+    exclude: '../../{Command,Controller,DependencyInjection,Form,Migrations,Resources,Twig}'
+
+  Shopsys\FrameworkBundle\Model\AdvancedSearch\Filter\:
+    resource: '../../Model/AdvancedSearch/Filter/*Filter.php'
+
+  Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\Filter\:
+    resource: '../../Model/AdvancedSearchOrder/Filter/*Filter.php'
+
   Shopsys\FrameworkBundle\Controller\:
     resource: '../../Controller/'
     tags: ['controller.service_arguments']
@@ -24,6 +34,8 @@ services:
     arguments:
       - '@doctrine.dbal.default_connection'
       - '@doctrine.orm.default_configuration'
+
+  Doctrine\DBAL\Migrations\Configuration\Configuration: ~
 
   Doctrine\Common\Cache\ChainCache: ~
 
@@ -43,6 +55,10 @@ services:
       - '@request_stack'
       - '%kernel.debug%'
 
+  Symfony\Component\Translation\MessageSelector: '@translator.selector'
+
+  Doctrine\Common\Annotations\DocParser: '@jms_translation.doc_parser'
+
   # disable original DefaultPhpFileExtractor
   jms_translation.extractor.file.default_php_extractor:
     alias: Shopsys\FrameworkBundle\Component\Translation\PhpFileExtractor
@@ -51,7 +67,7 @@ services:
   jms_translation.extractor_manager:
     alias: Shopsys\FrameworkBundle\Component\Translation\NormalizingExtractorManager
 
-  ninja_mutex.adapter:
+  NinjaMutex\Lock\LockInterface:
     class: NinjaMutex\Lock\FlockLock
     arguments:
       - '%shopsys.root_dir%/var/lock'
@@ -77,19 +93,29 @@ services:
         - '@Doctrine\Common\Cache\ArrayCache'
         - '@shopsys.shop.component.doctrine.cache.metadata.permanent_php_file_cache'
 
+  Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig: ~
+
+  Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig: ~
+
+  Shopsys\FrameworkBundle\Model\Module\ModuleList: ~
+
   Shopsys\FrameworkBundle\Model\AdminNavigation\MenuFactory:
     arguments:
       - '%shopsys.admin_navigation.config_filepath%'
       - '@security.authorization_checker'
 
+  Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb: ~
+
   Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbResolver:
     factory: ['@Shopsys\FrameworkBundle\Model\Breadcrumb\FrontBreadcrumbResolverFactory', create]
-
-  Shopsys\FrameworkBundle\Model\Breadcrumb\FrontBreadcrumbResolverFactory: ~
 
   Shopsys\FrameworkBundle\Model\Cart\CartMigrationFacade:
     tags:
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+  Shopsys\FrameworkBundle\Component\Csv\CsvReader: ~
+
+  Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig: ~
 
   Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherFacade:
     arguments:
@@ -100,11 +126,11 @@ services:
       # must be ran before ProductVisibilityFacade
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
-  Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig: ~
-
   Shopsys\FrameworkBundle\Component\Cron\CronFacade:
     arguments:
       - '@monolog.logger.cron'
+
+  Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector: ~
 
   Shopsys\FrameworkBundle\Component\Css\CssFacade:
     arguments:
@@ -144,13 +170,17 @@ services:
     arguments:
       - '%shopsys.domain_images_dir%'
 
-  Shopsys\FrameworkBundle\Component\Domain\DomainSubscriber: ~
-
-  Shopsys\FrameworkBundle\Component\Domain\DomainFactory: ~
-
   Shopsys\FrameworkBundle\Component\Domain\DomainService:
     arguments:
       - '@monolog.logger'
+
+  Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator: ~
+
+  Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator: ~
+
+  Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder: ~
+
+  Shopsys\FrameworkBundle\Component\Form\MultipleFormSetting: ~
 
   Shopsys\FrameworkBundle\Component\Error\ErrorPagesFacade:
     arguments:
@@ -163,6 +193,8 @@ services:
   Shopsys\FrameworkBundle\Component\Error\Reporting\LogErrorReportingFacade:
     arguments:
       - '%kernel.logs_dir%'
+
+  Shopsys\FrameworkBundle\Component\FileUpload\FileNamingConvention: ~
 
   Shopsys\FrameworkBundle\Component\FileUpload\FileUpload:
     arguments: ['%kernel.cache_dir%', '%shopsys.uploaded_file_dir%', '%shopsys.image_dir%']
@@ -196,8 +228,6 @@ services:
     arguments:
       - '@shopsys.shop.component.flash_message.bag.front'
 
-  Shopsys\FrameworkBundle\Component\Form\MultipleFormSetting: ~
-
   Shopsys\FrameworkBundle\Component\Form\TimedSpamValidationListener:
     $options: []
 
@@ -213,8 +243,6 @@ services:
     factory: ['@Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigLoader', loadFromYaml]
     arguments:
       - '%shopsys.image_config_filepath%'
-
-  Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigLoader: ~
 
   Shopsys\FrameworkBundle\Component\Image\ImageDeleteDoctrineListener:
     tags:
@@ -245,22 +273,12 @@ services:
     factory: ['@Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory', create]
     synthetic: false
 
-  Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory: ~
-
   Shopsys\FrameworkBundle\Component\Log\SlowLogFacade:
     arguments:
       - '@monolog.logger.slow'
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
       - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
-
-  Shopsys\FrameworkBundle\Component\Mutex\MutexFactory: ~
-
-  Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionRegistry: ~
-
-  Shopsys\FrameworkBundle\Component\Plugin\PluginDataFixtureRegistry: ~
-
-  Shopsys\FrameworkBundle\Component\Request\DenyScriptNameInRequestPathListener: ~
 
   Shopsys\FrameworkBundle\Component\Request\TransactionalMasterRequestService:
     tags:
@@ -272,9 +290,9 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
-  Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade: ~
-
   Shopsys\FrameworkBundle\Component\Setting\Setting: ~
+
+  Shopsys\FrameworkBundle\Component\System\System: ~
 
   Shopsys\FrameworkBundle\Component\Sitemap\SitemapDumperFactory:
     arguments:
@@ -289,6 +307,8 @@ services:
     tags:
       - { name: 'kernel.event_subscriber', priority: 100 }
 
+  Shopsys\FrameworkBundle\Component\Translation\TranslatableEntityDataCreator: ~
+
   Shopsys\FrameworkBundle\Component\Translation\NormalizingExtractorManager:
     arguments:
       - '@jms_translation.extractor.file_extractor'
@@ -302,8 +322,6 @@ services:
     factory: ['@Shopsys\FrameworkBundle\Component\Translation\PhpFileExtractorFactory', create]
     tags:
       - { name: jms_translation.file_visitor }
-
-  Shopsys\FrameworkBundle\Component\Translation\PhpFileExtractorFactory: ~
 
   Shopsys\FrameworkBundle\Component\Translation\ConstraintMessageExtractor:
     tags:
@@ -323,14 +341,16 @@ services:
     synthetic: true
     public: true
 
+  Shopsys\FrameworkBundle\Component\Translation\MessageIdNormalizer: ~
+
+  Symfony\Component\Translation\IdentityTranslator: ~
+
   Shopsys\FrameworkBundle\Component\Translation\Translator:
     decorates: translator
     arguments:
       - '@Shopsys\FrameworkBundle\Component\Translation\Translator.inner'
       - '@Shopsys\FrameworkBundle\Component\Translation\Translator.inner'
       - '@Symfony\Component\Translation\IdentityTranslator'
-
-  Symfony\Component\Translation\IdentityTranslator: ~
 
   Shopsys\FrameworkBundle\Component\Translation\TwigFileExtractor:
     decorates: 'jms_translation.extractor.file.twig_extractor'
@@ -342,11 +362,11 @@ services:
     arguments:
       - '%shopsys.uploaded_file_config_filepath%'
 
-  Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfigLoader: ~
-
   Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileDeleteDoctrineListener:
     tags:
       - { name: doctrine.event_listener, event: preRemove }
+
+  Shopsys\FrameworkBundle\Component\UploadedFile\DirectoryStructureCreator: ~
 
   Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileLocator:
     arguments:
@@ -363,13 +383,17 @@ services:
 
   Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorUserProvider: ~
 
-  Shopsys\FrameworkBundle\Model\Country\CountryInlineEdit: ~
-
   Shopsys\FrameworkBundle\Model\Cookies\CookiesFacade:
     arguments:
       - '%kernel.environment%'
 
   Shopsys\FrameworkBundle\Model\Customer\FrontendUserProvider: ~
+
+  Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer: ~
+
+  Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail: ~
+
+  Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail: ~
 
   Shopsys\FrameworkBundle\DataFixtures\Performance\CategoryDataFixture:
      arguments:
@@ -396,13 +420,12 @@ services:
      arguments:
        - '%shopsys.data_fixtures.resource_customers_filepath%'
 
+  Shopsys\FrameworkBundle\Model\Feed\FeedXmlWriter: ~
 
   Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade:
     arguments:
       - '%shopsys.feed_url_prefix%'
       - '%shopsys.feed_dir%'
-
-  Shopsys\FrameworkBundle\Model\Feed\FeedConfigRegistry: ~
 
   Shopsys\FrameworkBundle\Component\HttpFoundation\ResponseListener:
     tags:
@@ -413,37 +436,28 @@ services:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
+  Shopsys\FrameworkBundle\Model\Localization\Localization: ~
+
   Shopsys\FrameworkBundle\Component\Localization\DateTimeFormatter:
     factory: ['@Shopsys\FrameworkBundle\Model\Localization\CustomDateTimeFormatterFactory', create]
 
-  Shopsys\FrameworkBundle\Model\Localization\CustomDateTimeFormatterFactory: ~
-
-  Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository: ~
-
-  Shopsys\FrameworkBundle\Model\Localization\LocalizationListener: ~
+  CommerceGuys\Intl\Currency\CurrencyRepositoryInterface:
+    class: Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository
 
   Shopsys\FrameworkBundle\Model\Mail\MailerService:
     arguments: ['@mailer']
+
+  Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting: ~
 
   Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade:
     arguments:
       - '@logger'
 
-  Shopsys\FrameworkBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit: ~
-
-  Shopsys\FrameworkBundle\Model\Order\Status\Grid\OrderStatusInlineEdit: ~
-
-  Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit: ~
-
-  Shopsys\FrameworkBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit: ~
+  Shopsys\FrameworkBundle\Model\Pricing\DelayedPricingSetting: ~
 
   Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculationScheduler:
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
-
-  Shopsys\FrameworkBundle\Model\Pricing\Vat\VatInlineEdit: ~
-
-  Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityInlineEdit: ~
 
   Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator:
     tags:
@@ -458,9 +472,11 @@ services:
     arguments:
       - '@shopsys.shop.product.bestselling_product.cache_provider'
 
-  Shopsys\FrameworkBundle\Model\Product\Flag\FlagInlineEdit: ~
+  Shopsys\FrameworkBundle\Model\Pricing\Rounding: ~
 
-  Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterInlineEdit: ~
+  Shopsys\FrameworkBundle\Model\Pricing\PricingSetting: ~
+
+  Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser: ~
 
   Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator:
     tags:
@@ -472,13 +488,15 @@ services:
       # must be ran after CategoryVisibilityRepository and ProductPriceRecalculator
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 10 }
 
-  Shopsys\FrameworkBundle\Model\Product\Unit\UnitInlineEdit: ~
-
   # Define RedirectController explicitly to prevent creating it on-the-fly
   # when redirecting (it causes unnecessary container rebuild).
   Symfony\Bundle\FrameworkBundle\Controller\RedirectController:
     calls:
       - [setContainer, ['@service_container']]
+
+  Symfony\Component\Config\Loader\LoaderInterface: '@routing.loader'
+
+  Shopsys\FrameworkBundle\Component\Sql\SqlQuoter: ~
 
   Shopsys\FrameworkBundle\Component\Router\CurrentDomainRouter:
     tags:
@@ -500,12 +518,6 @@ services:
   Shopsys\FrameworkBundle\Model\Script\ScriptFacade:
     public: true
 
-  Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade: ~
-
-  Shopsys\FrameworkBundle\Model\Security\AdminLogoutHandler: ~
-
-  Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler: ~
-
   Shopsys\FrameworkBundle\Model\Security\LoginService:
     arguments:
       - '@security.token_storage'
@@ -515,12 +527,12 @@ services:
     arguments:
       - '@event_dispatcher'
 
+  Shopsys\FrameworkBundle\Component\Filesystem\FilepathComparator: ~
+
   Shopsys\FrameworkBundle\Model\Security\Filesystem\FilemanagerAccess:
     public: true
     arguments:
       - '%shopsys.filemanager_upload_dir%'
-
-  Shopsys\FrameworkBundle\Model\Security\FrontLogoutHandler: ~
 
   Shopsys\FrameworkBundle\Model\Security\LoginAsUserFacade:
     arguments:
@@ -567,6 +579,14 @@ services:
   monolog.handler.fingers_crossed.error_level_activation_strategy:
     abstract: true
 
+  Doctrine\Common\EventManager: '@doctrine.dbal.default_connection.event_manager'
+
+  Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader: '@doctrine.fixtures.loader'
+
+  Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder: ~
+
+  Shopsys\FrameworkBundle\Component\Entity\EntityStringColumnsFinder: ~
+
   Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber:
     class: Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber
     arguments:
@@ -581,3 +601,9 @@ services:
       - "%shopsys.entity_extension.map%"
     tags:
       - { name: doctrine.event_subscriber, priority: -10 }
+
+  Metadata\MetadataFactory: '@prezent_doctrine_translatable.metadata_factory'
+
+  Craue\FormFlowBundle\Storage\DataManager: '@craue.form.flow.data_manager_default'
+
+  FM\ElfinderBundle\Configuration\ElFinderConfigurationReader: '@fm_elfinder.configurator.default'

@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Transport;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 class TransportFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -52,7 +52,7 @@ class TransportFacade
     private $transportPriceCalculation;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         TransportRepository $transportRepository,
         PaymentRepository $paymentRepository,
         TransportVisibilityCalculation $transportVisibilityCalculation,

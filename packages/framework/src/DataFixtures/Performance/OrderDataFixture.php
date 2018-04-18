@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\DataFixtures\Performance;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Faker\Generator as Faker;
 use Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
@@ -52,7 +52,7 @@ class OrderDataFixture
     private $performanceUserIds;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -104,7 +104,7 @@ class OrderDataFixture
     /**
      * @param int $orderTotalCount
      * @param int $orderItemCountPerOrder
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
      * @param \Faker\Generator $faker
@@ -118,7 +118,7 @@ class OrderDataFixture
     public function __construct(
         $orderTotalCount,
         $orderItemCountPerOrder,
-        EntityManager $em,
+        EntityManagerInterface $em,
         EntityManagerFacade $entityManagerFacade,
         SqlLoggerFacade $sqlLoggerFacade,
         Faker $faker,

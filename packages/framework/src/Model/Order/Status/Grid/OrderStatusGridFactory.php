@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Status\Grid;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 class OrderStatusGridFactory implements GridFactoryInterface
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -28,7 +28,7 @@ class OrderStatusGridFactory implements GridFactoryInterface
     private $localization;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         GridFactory $gridFactory,
         Localization $localization
     ) {

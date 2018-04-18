@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Pricing;
 
 use Closure;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
@@ -17,7 +17,7 @@ class InputPriceRecalculator
     const BATCH_SIZE = 500;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -52,7 +52,7 @@ class InputPriceRecalculator
     private $pricingSetting;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         InputPriceCalculation $inputPriceCalculation,
         BasePriceCalculation $basePriceCalculation,
         PaymentPriceCalculation $paymentPriceCalculation,

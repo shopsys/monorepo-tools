@@ -2,18 +2,18 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\MassAction;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductMassActionRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
     public function __construct(
-        EntityManager $entityManager
+        EntityManagerInterface $entityManager
     ) {
         $this->em = $entityManager;
     }

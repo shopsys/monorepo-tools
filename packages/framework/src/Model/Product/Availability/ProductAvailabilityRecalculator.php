@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
@@ -12,7 +12,7 @@ class ProductAvailabilityRecalculator
     const BATCH_SIZE = 100;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -37,7 +37,7 @@ class ProductAvailabilityRecalculator
     private $productRowsIterator;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         EntityManagerFacade $entityManagerFacade,
         ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
         ProductAvailabilityCalculation $productAvailabilityCalculation

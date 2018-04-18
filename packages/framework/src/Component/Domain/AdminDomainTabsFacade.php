@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Domain;
 
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class AdminDomainTabsFacade
 {
@@ -14,15 +14,15 @@ class AdminDomainTabsFacade
     private $domain;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
     private $session;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
-     * @param \Symfony\Component\HttpFoundation\Session\Session $session
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
      */
-    public function __construct(Domain $domain, Session $session)
+    public function __construct(Domain $domain, SessionInterface $session)
     {
         $this->domain = $domain;
         $this->session = $session;

@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Customer;
 
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CustomerIdentifierFactory
 {
@@ -12,11 +12,11 @@ class CustomerIdentifierFactory
     private $currentCustomer;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
     private $session;
 
-    public function __construct(CurrentCustomer $currentCustomer, Session $session)
+    public function __construct(CurrentCustomer $currentCustomer, SessionInterface $session)
     {
         $this->currentCustomer = $currentCustomer;
         $this->session = $session;

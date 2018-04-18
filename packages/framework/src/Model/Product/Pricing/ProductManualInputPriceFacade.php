@@ -2,14 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductManualInputPriceFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -24,7 +24,7 @@ class ProductManualInputPriceFacade
     private $productManualInputPriceService;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         ProductManualInputPriceRepository $productManualInputPriceRepository,
         ProductManualInputPriceService $productManualInputPriceService
     ) {

@@ -2,13 +2,13 @@
 
 namespace Shopsys\FrameworkBundle\Component\Domain;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 
 class DomainDbFunctionsFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -17,7 +17,7 @@ class DomainDbFunctionsFacade
      */
     private $domain;
 
-    public function __construct(EntityManager $em, Domain $domain)
+    public function __construct(EntityManagerInterface $em, Domain $domain)
     {
         $this->em = $em;
         $this->domain = $domain;

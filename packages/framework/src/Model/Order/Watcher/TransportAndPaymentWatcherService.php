@@ -9,7 +9,7 @@ use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class TransportAndPaymentWatcherService
 {
@@ -18,7 +18,7 @@ class TransportAndPaymentWatcherService
     const SESSION_PAYMENT_PRICES = 'payment_prices';
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
     private $session;
 
@@ -33,12 +33,12 @@ class TransportAndPaymentWatcherService
     private $transportPriceCalculation;
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Session\Session $session
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
      */
     public function __construct(
-        Session $session,
+        SessionInterface $session,
         PaymentPriceCalculation $paymentPriceCalculation,
         TransportPriceCalculation $transportPriceCalculation
     ) {

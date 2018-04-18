@@ -2,13 +2,13 @@
 
 namespace Shopsys\FrameworkBundle\Model\Administrator\Activity;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
 
 class AdministratorActivityFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -18,7 +18,7 @@ class AdministratorActivityFacade
     private $administratorActivityRepository;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         AdministratorActivityRepository $administratorActivityRepository
     ) {
         $this->em = $em;

@@ -2,12 +2,12 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\PromoCode;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PromoCodeFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -16,7 +16,7 @@ class PromoCodeFacade
      */
     private $promoCodeRepository;
 
-    public function __construct(EntityManager $em, PromoCodeRepository $promoCodeRepository)
+    public function __construct(EntityManagerInterface $em, PromoCodeRepository $promoCodeRepository)
     {
         $this->em = $em;
         $this->promoCodeRepository = $promoCodeRepository;

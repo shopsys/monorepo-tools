@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\PromoCode\PromoCodeFormType;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeData;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class PromoCodeInlineEdit extends AbstractGridInlineEdit
 {
@@ -16,14 +16,14 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
     private $promoCodeFacade;
 
     /**
-     * @var \Symfony\Component\Form\FormFactory
+     * @var \Symfony\Component\Form\FormFactoryInterface
      */
     private $formFactory;
 
     public function __construct(
         PromoCodeGridFactory $promoCodeGridFactory,
         PromoCodeFacade $promoCodeFacade,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($promoCodeGridFactory);
         $this->promoCodeFacade = $promoCodeFacade;

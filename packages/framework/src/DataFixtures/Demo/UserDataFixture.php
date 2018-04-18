@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Faker\Generator;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
@@ -29,7 +29,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     /** @var \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService */
     private $customerPasswordService;
 
-    /** @var \Doctrine\ORM\EntityManager */
+    /** @var \Doctrine\ORM\EntityManagerInterface */
     private $em;
 
     /**
@@ -37,7 +37,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixtureLoader $loaderService
      * @param \Faker\Generator $faker
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      */
     public function __construct(
@@ -45,7 +45,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
         UserDataFixtureLoader $loaderService,
         Generator $faker,
         CustomerPasswordService $customerPasswordService,
-        EntityManager $em
+        EntityManagerInterface $em
     ) {
         $this->customerFacade = $customerFacade;
         $this->loaderService = $loaderService;

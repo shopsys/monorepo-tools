@@ -18,6 +18,8 @@ services:
 
   Shopsys\MigrationBundle\Component\Doctrine\SchemaDiffFilter: ~
 
+  Shopsys\MigrationBundle\Component\Generator\GenerateMigrationsService: ~
+
   Doctrine\DBAL\Schema\Comparator: ~
 
   Doctrine\ORM\Tools\SchemaTool:

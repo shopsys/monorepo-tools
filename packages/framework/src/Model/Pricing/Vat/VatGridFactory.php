@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Pricing\Vat;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
 class VatGridFactory implements GridFactoryInterface
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -32,7 +32,7 @@ class VatGridFactory implements GridFactoryInterface
     private $priceCalculation;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         GridFactory $gridFactory,
         VatFacade $vatFacade,
         PriceCalculation $priceCalculation

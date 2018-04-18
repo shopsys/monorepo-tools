@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Category;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 class CategoryVisibilityRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -25,7 +25,7 @@ class CategoryVisibilityRepository
     private $categoryVisibilityRecalculationScheduler;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         Domain $domain,
         CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler
     ) {

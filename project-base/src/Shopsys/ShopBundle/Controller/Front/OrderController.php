@@ -26,7 +26,7 @@ use Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class OrderController extends FrontBaseController
 {
@@ -98,7 +98,7 @@ class OrderController extends FrontBaseController
     private $transportPriceCalculation;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
     private $session;
 
@@ -124,7 +124,7 @@ class OrderController extends FrontBaseController
         CurrencyFacade $currencyFacade,
         OrderDataMapper $orderDataMapper,
         DomainAwareOrderFlowFactory $domainAwareOrderFlowFactory,
-        Session $session,
+        SessionInterface $session,
         TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
         OrderMailFacade $orderMailFacade,
         LegalConditionsFacade $legalConditionsFacade,

@@ -2,14 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\Model\Category\TopCategory;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
 
 class TopCategoryRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityRepository
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -18,7 +18,7 @@ class TopCategoryRepository
      */
     private $categoryRepository;
 
-    public function __construct(EntityManager $entityManager, CategoryRepository $categoryRepository)
+    public function __construct(EntityManagerInterface $entityManager, CategoryRepository $categoryRepository)
     {
         $this->em = $entityManager;
         $this->categoryRepository = $categoryRepository;

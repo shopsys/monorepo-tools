@@ -2,12 +2,12 @@
 
 namespace Shopsys\FrameworkBundle\Model\Module;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ModuleFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -17,7 +17,7 @@ class ModuleFacade
     private $enabledModuleRepository;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         EnabledModuleRepository $enabledModuleRepository
     ) {
         $this->em = $em;

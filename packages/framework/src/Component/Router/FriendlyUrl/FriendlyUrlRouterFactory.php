@@ -3,15 +3,15 @@
 namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
-use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Routing\RequestContext;
 
 class FriendlyUrlRouterFactory
 {
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader
+     * @var \Symfony\Component\Config\Loader\LoaderInterface
      */
-    private $delegatingLoader;
+    private $configLoader;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
@@ -25,11 +25,11 @@ class FriendlyUrlRouterFactory
 
     public function __construct(
         $friendlyUrlRouterResourceFilepath,
-        DelegatingLoader $delegatingLoader,
+        LoaderInterface $configLoader,
         FriendlyUrlRepository $friendlyUrlRepository
     ) {
         $this->friendlyUrlRouterResourceFilepath = $friendlyUrlRouterResourceFilepath;
-        $this->delegatingLoader = $delegatingLoader;
+        $this->configLoader = $configLoader;
         $this->friendlyUrlRepository = $friendlyUrlRepository;
     }
 
@@ -42,7 +42,7 @@ class FriendlyUrlRouterFactory
     {
         return new FriendlyUrlRouter(
             $context,
-            $this->delegatingLoader,
+            $this->configLoader,
             new FriendlyUrlGenerator($context, $this->friendlyUrlRepository),
             new FriendlyUrlMatcher($this->friendlyUrlRepository),
             $domainConfig,

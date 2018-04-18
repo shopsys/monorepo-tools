@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Doctrine;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class DatabaseSchemaFacade
 {
@@ -12,13 +12,13 @@ class DatabaseSchemaFacade
     private $defaultSchemaFilepath;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
     public function __construct(
         $defaultSchemaFilepath,
-        EntityManager $em
+        EntityManagerInterface $em
     ) {
         $this->defaultSchemaFilepath = $defaultSchemaFilepath;
         $this->em = $em;

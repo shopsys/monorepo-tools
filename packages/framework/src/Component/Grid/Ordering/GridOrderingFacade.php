@@ -2,12 +2,12 @@
 
 namespace Shopsys\FrameworkBundle\Component\Grid\Ordering;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class GridOrderingFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -16,7 +16,7 @@ class GridOrderingFacade
      */
     private $gridOrderingService;
 
-    public function __construct(EntityManager $em, GridOrderingService $gridOrderingService)
+    public function __construct(EntityManagerInterface $em, GridOrderingService $gridOrderingService)
     {
         $this->em = $em;
         $this->gridOrderingService = $gridOrderingService;

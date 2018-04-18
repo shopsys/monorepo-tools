@@ -2,13 +2,13 @@
 
 namespace Shopsys\ProductFeed\HeurekaBundle\Model\Product;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class HeurekaProductDomainFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -23,12 +23,12 @@ class HeurekaProductDomainFacade
     private $productRepository;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainRepository $heurekaProductDomainRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         HeurekaProductDomainRepository $heurekaProductDomainRepository,
         ProductRepository $productRepository
     ) {

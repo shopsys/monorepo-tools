@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
@@ -20,7 +20,7 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationSched
 class ProductFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -110,7 +110,7 @@ class ProductFacade
     private $pluginCrudExtensionFacade;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         ProductRepository $productRepository,
         ProductVisibilityFacade $productVisibilityFacade,
         ParameterRepository $parameterRepository,

@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\PromoCode\Grid;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
 use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode;
 class PromoCodeGridFactory implements GridFactoryInterface
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -21,7 +21,7 @@ class PromoCodeGridFactory implements GridFactoryInterface
     private $gridFactory;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         GridFactory $gridFactory
     ) {
         $this->em = $em;

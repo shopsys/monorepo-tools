@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Country;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
 class CountryGridFactory implements GridFactoryInterface
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -26,7 +26,7 @@ class CountryGridFactory implements GridFactoryInterface
     private $adminDomainTabsFacade;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         GridFactory $gridFactory,
         AdminDomainTabsFacade $adminDomainTabsFacade
     ) {

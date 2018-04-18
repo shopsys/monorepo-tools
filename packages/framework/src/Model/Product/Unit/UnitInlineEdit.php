@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Unit;
 
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\Product\Unit\UnitFormType;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class UnitInlineEdit extends AbstractGridInlineEdit
 {
@@ -14,14 +14,14 @@ class UnitInlineEdit extends AbstractGridInlineEdit
     private $unitFacade;
 
     /**
-     * @var \Symfony\Component\Form\FormFactory
+     * @var \Symfony\Component\Form\FormFactoryInterface
      */
     private $formFactory;
 
     public function __construct(
         UnitGridFactory $unitGridFactory,
         UnitFacade $unitFacade,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($unitGridFactory);
         $this->unitFacade = $unitFacade;

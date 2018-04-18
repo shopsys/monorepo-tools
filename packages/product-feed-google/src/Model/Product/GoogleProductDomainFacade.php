@@ -2,13 +2,13 @@
 
 namespace Shopsys\ProductFeed\GoogleBundle\Model\Product;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class GoogleProductDomainFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -23,12 +23,12 @@ class GoogleProductDomainFacade
     private $productRepository;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainRepository $googleProductDomainRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         GoogleProductDomainRepository $googleProductDomainRepository,
         ProductRepository $productRepository
     ) {

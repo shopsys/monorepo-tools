@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService;
@@ -23,7 +23,7 @@ use Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository;
 class ProductRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -48,7 +48,7 @@ class ProductRepository
     private $productSearchRepository;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         ProductFilterRepository $productFilterRepository,
         QueryBuilderService $queryBuilderService,
         Localization $localization,

@@ -2,14 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\TopProduct;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
 class TopProductRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityRepository
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -18,7 +18,7 @@ class TopProductRepository
      */
     private $productRepository;
 
-    public function __construct(EntityManager $entityManager, ProductRepository $productRepository)
+    public function __construct(EntityManagerInterface $entityManager, ProductRepository $productRepository)
     {
         $this->em = $entityManager;
         $this->productRepository = $productRepository;

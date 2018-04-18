@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Order;
 
 use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\FrameworkBundle\Component\String\DatabaseSearching;
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
@@ -15,7 +15,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 class OrderRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -25,7 +25,7 @@ class OrderRepository
     private $orderListAdminRepository;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         OrderListAdminRepository $orderListAdminRepository
     ) {
         $this->em = $em;

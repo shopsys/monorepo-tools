@@ -2,12 +2,12 @@
 
 namespace Shopsys\FrameworkBundle\Component\DataFixture;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PersistentReferenceFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -17,10 +17,10 @@ class PersistentReferenceFacade
     private $persistentReferenceRepository;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceRepository $persistentReferenceRepository
      */
-    public function __construct(EntityManager $em, PersistentReferenceRepository $persistentReferenceRepository)
+    public function __construct(EntityManagerInterface $em, PersistentReferenceRepository $persistentReferenceRepository)
     {
         $this->em = $em;
         $this->persistentReferenceRepository = $persistentReferenceRepository;

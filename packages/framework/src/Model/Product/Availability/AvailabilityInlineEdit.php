@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\Product\Availability\AvailabilityFormType;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class AvailabilityInlineEdit extends AbstractGridInlineEdit
 {
@@ -14,19 +14,19 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit
     private $availabilityFacade;
 
     /**
-     * @var \Symfony\Component\Form\FormFactory
+     * @var \Symfony\Component\Form\FormFactoryInterface
      */
     private $formFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityGridFactory $availabilityGridFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
-     * @param \Symfony\Component\Form\FormFactory $formFactory
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      */
     public function __construct(
         AvailabilityGridFactory $availabilityGridFactory,
         AvailabilityFacade $availabilityFacade,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($availabilityGridFactory);
         $this->availabilityFacade = $availabilityFacade;

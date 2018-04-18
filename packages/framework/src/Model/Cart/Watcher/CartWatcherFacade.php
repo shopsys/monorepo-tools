@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Cart\Watcher;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\FlashMessage\FlashMessageSender;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 class CartWatcherFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -31,7 +31,7 @@ class CartWatcherFacade
 
     public function __construct(
         FlashMessageSender $flashMessageSender,
-        EntityManager $em,
+        EntityManagerInterface $em,
         CartWatcherService $cartWatcherService,
         CurrentCustomer $currentCustomer
     ) {

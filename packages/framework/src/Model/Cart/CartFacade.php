@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Cart;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
@@ -16,7 +16,7 @@ class CartFacade
     const DAYS_LIMIT_FOR_REGISTERED = 120;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -61,7 +61,7 @@ class CartFacade
     private $cartItemRepository;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         CartService $cartService,
         CartFactory $cartFactory,
         ProductRepository $productRepository,

@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationSched
 class ProductVariantFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -45,7 +45,7 @@ class ProductVariantFacade
     private $productAvailabilityRecalculationScheduler;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         ProductFacade $productFacade,
         ProductEditDataFactory $productEditDataFactory,
         ImageFacade $imageFacade,

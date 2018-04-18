@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Listing;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Component\String\DatabaseSearching;
@@ -14,7 +14,7 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 class ProductListAdminRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -23,7 +23,7 @@ class ProductListAdminRepository
      */
     private $localization;
 
-    public function __construct(EntityManager $em, Localization $localization)
+    public function __construct(EntityManagerInterface $em, Localization $localization)
     {
         $this->em = $em;
         $this->localization = $localization;

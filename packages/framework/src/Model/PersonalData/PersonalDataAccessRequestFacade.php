@@ -3,13 +3,13 @@
 namespace Shopsys\FrameworkBundle\Model\PersonalData;
 
 use DateTime;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 
 class PersonalDataAccessRequestFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -24,12 +24,12 @@ class PersonalDataAccessRequestFacade
     private $personalDataAccessRequestRepository;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
      * @param \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestRepository $personalDataAccessRequestRepository
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         HashGenerator $hashGenerator,
         PersonalDataAccessRequestRepository $personalDataAccessRequestRepository
     ) {

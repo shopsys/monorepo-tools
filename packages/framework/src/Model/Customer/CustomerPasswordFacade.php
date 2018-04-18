@@ -2,13 +2,13 @@
 
 namespace Shopsys\FrameworkBundle\Model\Customer;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMailFacade;
 
 class CustomerPasswordFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -28,7 +28,7 @@ class CustomerPasswordFacade
     private $customerPasswordService;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         UserRepository $userRepository,
         CustomerPasswordService $customerPasswordService,
         ResetPasswordMailFacade $resetPasswordMailFacade

@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Model\Module\ModuleFacade;
 use Shopsys\FrameworkBundle\Model\Module\ModuleList;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
@@ -14,7 +14,7 @@ use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade;
 class OrderProductFacade
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -54,7 +54,7 @@ class OrderProductFacade
     private $productService;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         ProductHiddenRecalculator $productHiddenRecalculator,
         ProductSellingDeniedRecalculator $productSellingDeniedRecalculator,
         ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
