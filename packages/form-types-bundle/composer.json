@@ -12,9 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Shopsys\\FormTypesBundle\\": [
-                "src/"
-            ]
+            "Shopsys\\FormTypesBundle\\": "src/"
         }
     },
     "require": {

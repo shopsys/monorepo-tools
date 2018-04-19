@@ -12,9 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Shopsys\\ProductFeed\\HeurekaDeliveryBundle\\": [
-                "src/"
-            ]
+            "Shopsys\\ProductFeed\\HeurekaDeliveryBundle\\": "src/"
         }
     },
     "autoload-dev": {

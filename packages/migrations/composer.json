@@ -12,9 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Shopsys\\": [
-                "src/Shopsys/"
-            ]
+            "Shopsys\\": "src/Shopsys/"
         }
     },
     "require": {

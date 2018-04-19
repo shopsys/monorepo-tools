@@ -12,9 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Shopsys\\ProductFeed\\GoogleBundle\\": [
-                "src/"
-            ]
+            "Shopsys\\ProductFeed\\GoogleBundle\\": "src/"
         }
     },
     "autoload-dev": {

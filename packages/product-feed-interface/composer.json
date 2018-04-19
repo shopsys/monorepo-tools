@@ -12,9 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Shopsys\\ProductFeed\\": [
-                "src/"
-            ]
+            "Shopsys\\ProductFeed\\": "src/"
         }
     },
     "require": {

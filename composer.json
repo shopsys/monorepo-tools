@@ -9,36 +9,16 @@
         "project-base/app/",
         "project-base/src/Shopsys/"
       ],
-      "Shopsys\\FormTypesBundle\\": [
-        "packages/form-types-bundle/src/"
-      ],
-      "Shopsys\\HttpSmokeTesting\\": [
-        "packages/http-smoke-testing/src/"
-      ],
-      "Shopsys\\MigrationBundle\\": [
-        "packages/migrations/src/Shopsys/MigrationBundle/"
-      ],
-      "Shopsys\\Plugin\\": [
-        "packages/plugin-interface/src/"
-      ],
-      "Shopsys\\ProductFeed\\": [
-        "packages/product-feed-interface/src/"
-      ],
-      "Shopsys\\ProductFeed\\ZboziBundle\\": [
-        "packages/product-feed-zbozi/src/"
-      ],
-      "Shopsys\\ProductFeed\\GoogleBundle\\": [
-        "packages/product-feed-google/src/"
-      ],
-      "Shopsys\\ProductFeed\\HeurekaBundle\\": [
-        "packages/product-feed-heureka/src/"
-      ],
-      "Shopsys\\ProductFeed\\HeurekaDeliveryBundle\\": [
-        "packages/product-feed-heureka-delivery/src/"
-      ],
-      "Shopsys\\FrameworkBundle\\": [
-        "packages/framework/src/"
-      ]
+      "Shopsys\\FormTypesBundle\\": "packages/form-types-bundle/src/",
+      "Shopsys\\HttpSmokeTesting\\": "packages/http-smoke-testing/src/",
+      "Shopsys\\MigrationBundle\\": "packages/migrations/src/Shopsys/MigrationBundle/",
+      "Shopsys\\Plugin\\": "packages/plugin-interface/src/",
+      "Shopsys\\ProductFeed\\": "packages/product-feed-interface/src/",
+      "Shopsys\\ProductFeed\\ZboziBundle\\": "packages/product-feed-zbozi/src/",
+      "Shopsys\\ProductFeed\\GoogleBundle\\": "packages/product-feed-google/src/",
+      "Shopsys\\ProductFeed\\HeurekaBundle\\": "packages/product-feed-heureka/src/",
+      "Shopsys\\ProductFeed\\HeurekaDeliveryBundle\\": "packages/product-feed-heureka-delivery/src/",
+      "Shopsys\\FrameworkBundle\\": "packages/framework/src/"
     },
     "classmap": [
       "project-base/app/AppCache.php",
@@ -60,12 +40,8 @@
         "packages/product-feed-heureka-delivery/tests/",
         "project-base/tests/"
       ],
-      "Tests\\FrameworkBundle\\": [
-        "packages/framework/tests/"
-      ],
-      "Tests\\Shopsys\\HttpSmokeTesting\\": [
-        "packages/http-smoke-testing/tests/"
-      ]
+      "Tests\\FrameworkBundle\\": "packages/framework/tests/",
+      "Tests\\Shopsys\\HttpSmokeTesting\\": "packages/http-smoke-testing/tests/"
     }
   },
   "repositories": [

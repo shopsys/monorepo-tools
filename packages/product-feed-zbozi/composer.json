@@ -12,9 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Shopsys\\ProductFeed\\ZboziBundle\\": [
-                "src/"
-            ]
+            "Shopsys\\ProductFeed\\ZboziBundle\\": "src/"
         }
     },
     "autoload-dev": {

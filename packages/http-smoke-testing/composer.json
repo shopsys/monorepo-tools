@@ -12,9 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Shopsys\\HttpSmokeTesting\\": [
-                "src/"
-            ]
+            "Shopsys\\HttpSmokeTesting\\": "src/"
         }
     },
     "require": {
