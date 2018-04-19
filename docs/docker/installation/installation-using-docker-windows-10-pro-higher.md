@@ -39,22 +39,5 @@ cp docker/conf/docker-compose.yml.dist docker-compose.yml
 docker-compose up -d
 ```
 
-### 5. Grant system users inside the container the required permissions
-#### Connect into terminal of the Docker container
-```
-docker exec -it shopsys-framework-php-fpm bash
-```
-
-#### Allow user with UID 33 ("www-data" in "php-fpm" container) read and write all project files
-```
-setfacl -R -m user:33:rwX -m mask:rwX .
-setfacl -dR -m user:33:rwX -m mask:rwX .
-```
-
-#### Allow user with UID 100 ("nginx" in "webserver" container) read files in "web" directory
-```
-setfacl -R -m user:100:rX ./web
-setfacl -dR -m user:100:rX ./web
-```
-### 6. Setup the application
+### 5. Setup the application
 [Application setup guide](./installation-using-docker-application-setup.md)
