@@ -42,6 +42,9 @@ class HeurekaShopCertificationFormType extends AbstractType
             ->add('heurekaWidgetCode', TextareaType::class, [
                 'required' => false,
                 'label' => t('Heureka Widget code'),
+                'attr' => [
+                    'class' => 'heureka-widget-input',
+                ],
             ]);
 
         $builder
