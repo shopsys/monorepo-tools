@@ -589,8 +589,6 @@ services:
 
   Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber:
     class: Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber
-    arguments:
-      - "%shopsys.entity_extension.map%"
     tags:
       - { name: doctrine.event_subscriber, priority: 10 }
 

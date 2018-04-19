@@ -6,7 +6,6 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Tools\SchemaTool;
-use Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber;
 use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
@@ -106,13 +105,10 @@ class EntityExtensionTest extends DatabaseTestCase
     {
         $loadORMMetadataSubscriber = $this->getContainer()->get('joschi127_doctrine_entity_override.event_subscriber.load_orm_metadata');
         /* @var $loadORMMetadataSubscriber \Tests\ShopBundle\Database\EntityExtension\OverwritableLoadORMMetadataSubscriber */
-        $cleanerEventSubscriber = $this->getContainer()->get(EntityExtensionParentMetadataCleanerEventSubscriber::class);
-        /* @var $cleanerEventSubscriber \Tests\ShopBundle\Database\EntityExtension\OverwritableEntityExtensionParentMetadataCleanerEventSubscriber */
         $entityNameResolver = $this->getContainer()->get(EntityNameResolver::class);
         /* @var $entityNameResolver \Tests\ShopBundle\Database\EntityExtension\OverwritableEntityNameResolver */
 
         $loadORMMetadataSubscriber->overwriteEntityExtensionMap($entityExtensionMap);
-        $cleanerEventSubscriber->overwriteEntityExtensionMap($entityExtensionMap);
         $entityNameResolver->overwriteEntityExtensionMap($entityExtensionMap);
     }
 
