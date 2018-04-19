@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## Changelogs of repositories maintained by monorepo
 
 * [shopsys/project-base](./project-base/CHANGELOG.md)
+* [shopsys/framework](./packages/framework/CHANGELOG.md)
 * [shopsys/product-feed-zbozi](./packages/product-feed-zbozi/CHANGELOG.md)
 * [shopsys/product-feed-google](./packages/product-feed-google/CHANGELOG.md)
 * [shopsys/product-feed-heureka](./packages/product-feed-heureka/CHANGELOG.md)
