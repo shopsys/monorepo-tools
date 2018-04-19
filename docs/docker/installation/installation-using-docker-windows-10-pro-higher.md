@@ -8,7 +8,9 @@
 
 ## Requirements
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-* [Docker](https://docs.docker.com/engine/installation/)
+* [PHP](http://php.net/manual/en/install.windows.php)
+* [Composer](https://getcomposer.org/doc/00-intro.md#installation-windows)
+* [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
 
 ## Steps
 ### 1. Create new project from Shopsys Framework sources
