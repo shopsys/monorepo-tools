@@ -32,11 +32,18 @@ Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../../p
 copy docker\conf\docker-compose.yml.dist docker-compose.yml
 ```
 
-### 3. Compose Docker container
+### 3. Create folder for persisting Postgres data
+This step is necessary to persist database data in cases you need to shutdown you `php-fpm` container. 
+
+```
+mkdir var\postgres-data
+```
+
+### 4. Compose Docker container
 Run `Docker Quickstart Terminal` as administrator, then execute:
 ```
 docker-compose up -d
 ```
 
-### 4. Setup the application
+### 5. Setup the application
 [Application setup guide](./installation-using-docker-application-setup.md)
