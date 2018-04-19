@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Transport;
 
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\PriceTableType;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Transport\Detail\TransportDetail;
@@ -32,15 +33,22 @@ class TransportEditFormType extends AbstractType
         $transportDetail = $options['transport_detail'];
         /* @var $transportDetail \Shopsys\FrameworkBundle\Model\Transport\Detail\TransportDetail */
 
+        $builderPricesGroup = $builder->create('prices', GroupType::class, [
+            'label' => t('Prices'),
+            'is_group_container_to_render_as_the_last_one' => true,
+        ]);
+        $builderPricesGroup
+            ->add('pricesByCurrencyId', PriceTableType::class, [
+                'currencies' => $this->currencyFacade->getAllIndexedById(),
+                'base_prices' => $transportDetail !== null ? $transportDetail->getBasePricesByCurrencyId() : [],
+            ]);
+
         $builder
             ->add('transportData', TransportFormType::class, [
                 'transport' => $transportDetail !== null ? $transportDetail->getTransport() : null,
                 'render_form_row' => false,
             ])
-            ->add('pricesByCurrencyId', PriceTableType::class, [
-                'currencies' => $this->currencyFacade->getAllIndexedById(),
-                'base_prices' => $transportDetail !== null ? $transportDetail->getBasePricesByCurrencyId() : [],
-            ])
+            ->add($builderPricesGroup)
             ->add('save', SubmitType::class);
     }
 
