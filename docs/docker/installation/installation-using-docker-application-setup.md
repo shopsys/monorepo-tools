@@ -16,6 +16,9 @@ docker exec -it shopsys-framework-php-fpm bash
 composer install
 ```
 
+Composer will prompt you to insert token to avoid GitHub API rate limit. You can create this token on `https://github.com/settings/tokens/new`.
+This token is reusable so keep it for further usage.
+
 Composer will prompt you to set parameters ([description of parameters](../../introduction/installation-guide.md#2-install-dependencies-and-configure-parameters)).
 The default parameters are currently set for application running in Docker so you can just use the defaults.
 
