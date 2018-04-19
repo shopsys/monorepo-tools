@@ -69,12 +69,11 @@ As we mentioned in the introduction, there must be only one entity type in the w
 So if we just test now, we will probably meet a couple of errors because repositories, query builders, and new objects use the original entities from the framework.
 This issue will be addressed in the future, entity extension is a work in progress.
 
-* Create a new entity that extends already existing framework entity
+* Create a new entity in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity
   * keep entity and table annotations
-  * if this is your first extended entity, register Doctrine mapping driver for its namespace
   * you can add new properties and use annotations to configure ORM
 * Add information about the entity extension into the container configuration
   * add it to the configuration parameter `shopsys.entity_extension.map`
   * use the parent entity name as a key and the extended entity name as a value
-  * eg. `Shopsys\FrameworkBunde\Model\Product: DreamProject\Model\Product`
+  * eg. `Shopsys\FrameworkBunde\Model\Product\Product: DreamProject\Model\Product\Product`
 * Now your extended entity should be used instead of the parent entity
