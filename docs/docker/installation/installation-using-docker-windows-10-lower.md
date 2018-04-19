@@ -23,7 +23,7 @@ cd project-base
 ```
 Notes: 
 - The `--no-install` option disables installation of the vendors - this will be done later in the Docker container
-- If you want to keep the GIT history of `shopsys/project-base` in your new project, use the `--keep-vcs` option
+- Option `--keep-vcs` initializes GIT repository in your project folder, that is needed for diff commands of application build and keeps the GIT history of `shopsys/project-base`
 
 ### 2. Create docker-compose.yml file
 Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../../project-base/docker/conf/docker-compose.yml.dist).
