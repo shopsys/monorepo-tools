@@ -29,7 +29,7 @@ Notes:
 Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../../project-base/docker/conf/docker-compose.yml.dist).
 
 ```
-cp docker/conf/docker-compose.yml.dist docker-compose.yml
+copy docker\conf\docker-compose.yml.dist docker-compose.yml
 ```
 
 ### 3. Compose Docker container
