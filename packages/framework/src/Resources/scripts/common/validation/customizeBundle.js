@@ -140,25 +140,27 @@
                 element.onValidate.apply(element.domNode, [FpJsFormValidator.getAllErrors(element, {}), event]);
             });
 
-            if (!Shopsys.validation.isFormValid($form)) {
-                event.preventDefault();
-                Shopsys.validation.showFormErrorsWindow($form);
-            } else if (!FpJsFormValidator.ajax.queue) {
-                if (Shopsys.validation.isFormValid($form) === true && $form.data('on-submit') !== undefined) {
+            if (!FpJsFormValidator.ajax.queue) {
+                if (!Shopsys.validation.isFormValid(this)) {
+                    event.preventDefault();
+                    Shopsys.validation.showFormErrorsWindow(this);
+                } else if (Shopsys.validation.isFormValid($form) === true && $form.data('on-submit') !== undefined) {
                     $(this).trigger($(this).data('on-submit'));
                     event.preventDefault();
                 }
             } else {
+                event.preventDefault();
+
                 FpJsFormValidator.ajax.callbacks.push(function () {
                     FpJsFormValidator.ajax.callbacks = [];
+
                     if (!Shopsys.validation.isFormValid($form)) {
-                        event.preventDefault();
                         Shopsys.validation.showFormErrorsWindow($form[0]);
                     } else if ($form.data('on-submit') !== undefined) {
                         $form.trigger($form.data('on-submit'));
-                        event.preventDefault();
                     } else {
                         $form.addClass('js-no-validate');
+                        $form.unbind('submit').submit();
                     }
                 });
             }
