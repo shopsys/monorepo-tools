@@ -17,7 +17,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Shopsys\\MigrationBundle\\Tests\\": "tests/"
+            "Tests\\MigrationBundle\\": "tests/"
         }
     },
     "require": {

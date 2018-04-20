@@ -1,23 +1,23 @@
 <?php
 
-namespace Shopsys\Tests\Unit\CodingStandards\CsFixer;
+namespace Tests\CodingStandards\Unit\CsFixer;
 
 use PhpCsFixer\Tokenizer\Tokens;
 use PHPUnit\Framework\TestCase;
-use Shopsys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer;
+use Shopsys\CodingStandards\CsFixer\MissingButtonTypeFixer;
 use SplFileInfo;
 
-class OrmJoinColumnRequireNullableFixerTest extends TestCase
+class MissingButtonTypeFixerTest extends TestCase
 {
     public function testFix(): void
     {
-        $ormJoinColumnRequireNullableFixer = new OrmJoinColumnRequireNullableFixer();
+        $missingButtonTypeFixer = new MissingButtonTypeFixer();
 
-        $file = new SplFileInfo(__DIR__ . '/ormJoinColumnRequireNullableFixerTestcase.txt');
-        $expectedResult = file_get_contents(__DIR__ . '/ormJoinColumnRequireNullableFixerExpectedResult.txt');
+        $file = new SplFileInfo(__DIR__ . '/missingButtonTypeFixerTestcase.txt');
+        $expectedResult = file_get_contents(__DIR__ . '/missingButtonTypeFixerExpectedResult.txt');
         $tokens = Tokens::fromCode(file_get_contents($file->getRealPath()));
 
-        $ormJoinColumnRequireNullableFixer->fix($file, $tokens);
+        $missingButtonTypeFixer->fix($file, $tokens);
 
         $this->assertSame($expectedResult, $tokens->generateCode());
     }
@@ -27,22 +27,22 @@ class OrmJoinColumnRequireNullableFixerTest extends TestCase
      */
     public function testSupports(string $filename, bool $expected): void
     {
-        $ormJoinColumnRequireNullableFixer = new OrmJoinColumnRequireNullableFixer();
+        $missingButtonTypeFixer = new MissingButtonTypeFixer();
 
         $splFileInfoMock = $this->mockSplFileInfoWithFilename($filename);
 
-        $this->assertSame($expected, $ormJoinColumnRequireNullableFixer->supports($splFileInfoMock));
+        $this->assertSame($expected, $missingButtonTypeFixer->supports($splFileInfoMock));
     }
 
     public function supportsDataProvider(): array
     {
         return [
-            ['test.php', true],
-            ['test.html', false],
+            ['test.php', false],
+            ['test.html', true],
             ['test.twig', false],
             ['test.php.twig', false],
-            ['test.html.twig', false],
-            ['test.php.xxx', false],
+            ['test.html.twig', true],
+            ['test.html.xxx', false],
         ];
     }
 

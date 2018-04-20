@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\MigrationBundle\Tests\Unit\Component\Doctrine;
+namespace Tests\MigrationBundle\Unit\Component\Doctrine;
 
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\ForeignKeyConstraint;

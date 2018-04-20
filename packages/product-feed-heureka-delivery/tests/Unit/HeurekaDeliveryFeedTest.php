@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\ProductFeed\HeurekaDeliveryBundle\Unit;
 
 use DOMDocument;
 use PHPUnit\Framework\TestCase;
@@ -30,7 +30,7 @@ class HeurekaDeliveryFeedTest extends TestCase
     {
         $this->heurekaDeliveryFeedConfig = new HeurekaDeliveryFeedConfig();
 
-        $twigLoader = new Twig_Loader_Filesystem([__DIR__ . '/../src/Resources/views']);
+        $twigLoader = new Twig_Loader_Filesystem([__DIR__ . '/../../src/Resources/views']);
         $this->twig = new Twig_Environment($twigLoader);
     }
 

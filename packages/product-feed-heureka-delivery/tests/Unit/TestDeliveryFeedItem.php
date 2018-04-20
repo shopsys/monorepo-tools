@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\ProductFeed\HeurekaDeliveryBundle\Unit;
 
 use Shopsys\ProductFeed\DeliveryFeedItemInterface;
 

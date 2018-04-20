@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests;
+namespace Tests\ProductFeed\HeurekaBundle\Unit;
 
 use Shopsys\ProductFeed\StandardFeedItemInterface;
 
-class TestZboziStandardFeedItem implements StandardFeedItemInterface
+class TestHeurekaStandardFeedItem implements StandardFeedItemInterface
 {
     /**
      * @var int
@@ -35,11 +35,6 @@ class TestZboziStandardFeedItem implements StandardFeedItemInterface
      * @var string
      */
     private $priceVat;
-
-    /**
-     * @var string
-     */
-    private $currencyCode;
 
     /**
      * @var string|null
@@ -87,6 +82,16 @@ class TestZboziStandardFeedItem implements StandardFeedItemInterface
     private $sellingDenied;
 
     /**
+     * @var string
+     */
+    private $currencyCode;
+
+    /**
+     * @var int
+     */
+    private $mainCategoryId;
+
+    /**
      * @param int $id
      * @param string $productName
      * @param string $description
@@ -102,6 +107,7 @@ class TestZboziStandardFeedItem implements StandardFeedItemInterface
      * @param string|null $partno
      * @param int|null $mainVariantId
      * @param bool $sellingDenied
+     * @param int $mainCategoryId
      */
     public function __construct(
         $id,
@@ -115,10 +121,11 @@ class TestZboziStandardFeedItem implements StandardFeedItemInterface
         $deliveryDate,
         $manufacturer,
         $categoryText,
-        $parametersByName,
+        array $parametersByName,
         $partno,
         $mainVariantId,
-        $sellingDenied
+        $sellingDenied,
+        $mainCategoryId
     ) {
         $this->id = $id;
         $this->productName = $productName;
@@ -136,6 +143,7 @@ class TestZboziStandardFeedItem implements StandardFeedItemInterface
         $this->mainVariantId = $mainVariantId;
         $this->customValues = [];
         $this->sellingDenied = $sellingDenied;
+        $this->mainCategoryId = $mainCategoryId;
     }
 
     /**
@@ -259,14 +267,6 @@ class TestZboziStandardFeedItem implements StandardFeedItemInterface
     }
 
     /**
-     * @return int
-     */
-    public function getMainCategoryId()
-    {
-        return 0;
-    }
-
-    /**
      * @param string $name
      * @return mixed
      */
@@ -282,5 +282,13 @@ class TestZboziStandardFeedItem implements StandardFeedItemInterface
     public function setCustomValue($name, $value)
     {
         $this->customValues[$name] = $value;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMainCategoryId()
+    {
+        return $this->mainCategoryId;
     }
 }

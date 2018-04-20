@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\ProductFeed\HeurekaBundle\Unit;
 
 use DOMDocument;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -71,7 +71,7 @@ class HeurekaFeedTest extends TestCase
 
         $this->heurekaFeedConfig = new HeurekaFeedConfig($heurekaProductDomainFacadeMock, $heurekaCategoryFacadeMock);
 
-        $twigLoader = new Twig_Loader_Filesystem([__DIR__ . '/../src/Resources/views']);
+        $twigLoader = new Twig_Loader_Filesystem([__DIR__ . '/../../src/Resources/views']);
         $this->twig = new Twig_Environment($twigLoader);
     }
 

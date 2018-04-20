@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests;
+namespace Tests\ProductFeed\ZboziBundle\Unit;
 
 use Shopsys\ProductFeed\StandardFeedItemInterface;
 
-class TestGoogleStandardFeedItem implements StandardFeedItemInterface
+class TestZboziStandardFeedItem implements StandardFeedItemInterface
 {
     /**
      * @var int
@@ -126,6 +126,7 @@ class TestGoogleStandardFeedItem implements StandardFeedItemInterface
         $this->url = $url;
         $this->imgUrl = $imgUrl;
         $this->priceVat = $priceVat;
+        $this->currencyCode = $currencyCode;
         $this->ean = $ean;
         $this->deliveryDate = $deliveryDate;
         $this->manufacturer = $manufacturer;
@@ -135,7 +136,6 @@ class TestGoogleStandardFeedItem implements StandardFeedItemInterface
         $this->mainVariantId = $mainVariantId;
         $this->customValues = [];
         $this->sellingDenied = $sellingDenied;
-        $this->currencyCode = $currencyCode;
     }
 
     /**
@@ -251,6 +251,14 @@ class TestGoogleStandardFeedItem implements StandardFeedItemInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isSellingDenied()
+    {
+        return $this->sellingDenied;
+    }
+
+    /**
      * @return int
      */
     public function getMainCategoryId()
@@ -274,13 +282,5 @@ class TestGoogleStandardFeedItem implements StandardFeedItemInterface
     public function setCustomValue($name, $value)
     {
         $this->customValues[$name] = $value;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSellingDenied()
-    {
-        return $this->sellingDenied;
     }
 }

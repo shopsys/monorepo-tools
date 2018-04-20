@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Shopsys\HttpSmokeTesting;
+namespace Tests\HttpSmokeTesting\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Shopsys\HttpSmokeTesting\RequestDataSetGenerator;

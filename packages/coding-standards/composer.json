@@ -22,12 +22,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Shopsys\\CodingStandards\\": "src"
+            "Shopsys\\CodingStandards\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Shopsys\\Tests\\Unit\\CodingStandards\\": "tests"
+            "Tests\\CodingStandards\\": "tests/"
         }
     },
     "scripts": {

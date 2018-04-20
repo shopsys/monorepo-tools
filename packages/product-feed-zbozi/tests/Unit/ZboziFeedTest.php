@@ -1,42 +1,42 @@
 <?php
 
-namespace Tests;
+namespace Tests\ProductFeed\ZboziBundle\Unit;
 
 use DOMDocument;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\ProductFeed\DomainConfigInterface;
-use Shopsys\ProductFeed\GoogleBundle\GoogleFeedConfig;
-use Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomain;
-use Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainFacade;
-use Symfony\Component\Translation\TranslatorInterface;
+use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomain;
+use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade;
+use Shopsys\ProductFeed\ZboziBundle\ZboziFeedConfig;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
-class GoogleFeedTest extends TestCase
+class ZboziFeedTest extends TestCase
 {
     const EXPECTED_XML_FILE_NAME = 'test.xml';
     const PRODUCT_ID_FIRST = 1;
     const PRODUCT_ID_SECOND = 2;
     const PRODUCT_ID_THIRD = 3;
+    const PRODUCT_ID_FOURTH = 4;
     const DOMAIN_ID_FIRST = 1;
     const DOMAIN_ID_SECOND = 2;
+
+    /**
+     * @var \Shopsys\ProductFeed\ZboziBundle\ZboziFeedConfig
+     */
+    private $zboziFeedConfig;
+
+    /**
+     * @var array
+     */
+    private $zboziProductDomainsGroupedByDomainId;
 
     /**
      * @var array
      */
     private $productsIds;
-
-    /**
-     * @var array
-     */
-    private $googleProductDomainsGroupedByDomainId;
-
-    /**
-     * @var \Shopsys\ProductFeed\GoogleBundle\GoogleFeedConfig
-     */
-    private $googleFeedConfig;
 
     /**
      * @var \Twig_Environment
@@ -47,101 +47,120 @@ class GoogleFeedTest extends TestCase
     {
         $this->initTestData();
 
-        $googleProductDomainFacadeMock = $this->createGoogleProductDomainFacadeMock();
+        $zboziProductDomainFacadeMock = $this->createHeurekaProductDomainFacadeMock();
 
-        /** @var \Symfony\Component\Translation\TranslatorInterface|\PHPUnit\Framework\MockObject\MockObject $translatorMock */
-        $translatorMock = $this->createMock(TranslatorInterface::class);
+        $this->zboziFeedConfig = new ZboziFeedConfig($zboziProductDomainFacadeMock);
 
-        $this->googleFeedConfig = new GoogleFeedConfig($translatorMock, $googleProductDomainFacadeMock);
-
-        $twigLoader = new Twig_Loader_Filesystem([__DIR__ . '/../src/Resources/views']);
+        $twigLoader = new Twig_Loader_Filesystem([__DIR__ . '/../../src/Resources/views']);
         $this->twig = new Twig_Environment($twigLoader);
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainFacade
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade
      */
-    private function createGoogleProductDomainFacadeMock()
+    private function createHeurekaProductDomainFacadeMock()
     {
         $returnCallback = function ($productsIds, $domainId) {
             if ($productsIds === $this->productsIds && $domainId === self::DOMAIN_ID_FIRST) {
-                return $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_FIRST];
+                return $this->zboziProductDomainsGroupedByDomainId[self::DOMAIN_ID_FIRST];
             } elseif ($productsIds === $this->productsIds && $domainId === self::DOMAIN_ID_SECOND) {
-                return $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_SECOND];
+                return $this->zboziProductDomainsGroupedByDomainId[self::DOMAIN_ID_SECOND];
             }
             return [];
         };
 
-        /** @var GoogleProductDomainFacade|\PHPUnit\Framework\MockObject\MockObject $googleProductDomainFacadeMock */
-        $googleProductDomainFacadeMock = $this->createMock(GoogleProductDomainFacade::class);
+        /** @var ZboziProductDomainFacade|\PHPUnit\Framework\MockObject\MockObject $googleProductDomainFacadeMock */
+        $zboziProductDomainFacadeMock = $this->createMock(ZboziProductDomainFacade::class);
 
-        $googleProductDomainFacadeMock->method('getGoogleProductDomainsByProductsIdsDomainIdIndexedByProductId')
+        $zboziProductDomainFacadeMock->method('getZboziProductDomainsByProductsIdsDomainIdIndexedByProductId')
             ->willReturnCallback($returnCallback);
 
-        return $googleProductDomainFacadeMock;
+        return $zboziProductDomainFacadeMock;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
     private function initTestData()
     {
         $this->productsIds = [self::PRODUCT_ID_FIRST, self::PRODUCT_ID_SECOND, self::PRODUCT_ID_THIRD];
 
-        $this->googleProductDomainsGroupedByDomainId = [
+        $this->zboziProductDomainsGroupedByDomainId = [
             self::DOMAIN_ID_FIRST => [],
             self::DOMAIN_ID_SECOND => [],
         ];
 
+        $productFirstMock = $this->getMockBuilder(Product::class)
+            ->setMethods(['getId'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $productFirstMock->method('getId')->willReturn(self::PRODUCT_ID_FIRST);
+
         $firstProductMock = $this->createProductMock(self::PRODUCT_ID_FIRST);
-        $googleProductDomainForFirstProductFirstDomainMock = $this->createGoogleProductDomainMock(
+
+        $zboziProductDomainForFirstProductFirstDomainMock = $this->createZboziProductDomainMock(
             $firstProductMock,
             self::DOMAIN_ID_FIRST,
-            true
+            true,
+            7.5,
+            8.5
         );
 
-        $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_FIRST][self::PRODUCT_ID_FIRST] = $googleProductDomainForFirstProductFirstDomainMock;
+        $this->zboziProductDomainsGroupedByDomainId[self::DOMAIN_ID_FIRST][self::PRODUCT_ID_FIRST] = $zboziProductDomainForFirstProductFirstDomainMock;
 
-        $googleProductDomainForFirstProductSecondDomainMock = $this->createGoogleProductDomainMock(
+        $zboziProductDomainForFirstProductSecondDomainMock = $this->createZboziProductDomainMock(
             $firstProductMock,
             self::DOMAIN_ID_SECOND,
-            false
+            false,
+            null,
+            null
         );
 
-        $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_SECOND][self::PRODUCT_ID_FIRST] = $googleProductDomainForFirstProductSecondDomainMock;
+        $this->zboziProductDomainsGroupedByDomainId[self::DOMAIN_ID_SECOND][self::PRODUCT_ID_FIRST] = $zboziProductDomainForFirstProductSecondDomainMock;
 
         $secondProductMock = $this->createProductMock(self::PRODUCT_ID_SECOND);
 
-        $googleProductDomainForSecondProductFirstDomainMock = $this->createGoogleProductDomainMock(
+        $zboziProductDomainForSecondProductFirstDomainMock = $this->createZboziProductDomainMock(
             $secondProductMock,
             self::DOMAIN_ID_FIRST,
-            true
+            true,
+            null,
+            null
         );
 
-        $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_FIRST][self::PRODUCT_ID_SECOND] = $googleProductDomainForSecondProductFirstDomainMock;
+        $this->zboziProductDomainsGroupedByDomainId[self::DOMAIN_ID_FIRST][self::PRODUCT_ID_SECOND] = $zboziProductDomainForSecondProductFirstDomainMock;
 
-        $googleProductDomainForSecondProductSecondDomainMock = $this->createGoogleProductDomainMock(
+        $zboziProductDomainForSecondProductSecondDomainMock = $this->createZboziProductDomainMock(
             $secondProductMock,
             self::DOMAIN_ID_SECOND,
-            false
+            false,
+            null,
+            null
         );
 
-        $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_SECOND][self::PRODUCT_ID_SECOND] = $googleProductDomainForSecondProductSecondDomainMock;
+        $this->zboziProductDomainsGroupedByDomainId[self::DOMAIN_ID_SECOND][self::PRODUCT_ID_SECOND] = $zboziProductDomainForSecondProductSecondDomainMock;
 
         $thirdProductMock = $this->createProductMock(self::PRODUCT_ID_THIRD);
 
-        $googleProductDomainForThirdProductFirstDomainMock = $this->createGoogleProductDomainMock(
+        $zboziProductDomainForThirdProductFirstDomainMock = $this->createZboziProductDomainMock(
             $thirdProductMock,
             self::DOMAIN_ID_FIRST,
-            false
+            false,
+            15.7,
+            null
         );
 
-        $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_FIRST][self::PRODUCT_ID_THIRD] = $googleProductDomainForThirdProductFirstDomainMock;
+        $this->zboziProductDomainsGroupedByDomainId[self::DOMAIN_ID_FIRST][self::PRODUCT_ID_THIRD] = $zboziProductDomainForThirdProductFirstDomainMock;
 
-        $googleProductDomainForThirdProductSecondDomainMock = $this->createGoogleProductDomainMock(
+        $zboziProductDomainForThirdProductSecondDomainMock = $this->createZboziProductDomainMock(
             $thirdProductMock,
             self::DOMAIN_ID_SECOND,
-            false
+            false,
+            9,
+            null
         );
 
-        $this->googleProductDomainsGroupedByDomainId[self::DOMAIN_ID_SECOND][self::PRODUCT_ID_THIRD] = $googleProductDomainForThirdProductSecondDomainMock;
+        $this->zboziProductDomainsGroupedByDomainId[self::DOMAIN_ID_SECOND][self::PRODUCT_ID_THIRD] = $zboziProductDomainForThirdProductSecondDomainMock;
     }
 
     /**
@@ -163,19 +182,23 @@ class GoogleFeedTest extends TestCase
      * @param \PHPUnit\Framework\MockObject\MockObject $productMock
      * @param int $domainId
      * @param bool $show
+     * @param null|float $cpc
+     * @param null|float $cpcSearch
      * @return \PHPUnit\Framework\MockObject\MockObject
      */
-    private function createGoogleProductDomainMock(MockObject $productMock, $domainId, $show)
+    private function createZboziProductDomainMock(MockObject $productMock, $domainId, $show, $cpc, $cpcSearch)
     {
-        $googleProductDomainMock = $this->getMockBuilder(GoogleProductDomain::class)
-            ->setMethods(['getProduct', 'getDomainId', 'getShow'])
+        $zboziProductDomainMock = $this->getMockBuilder(ZboziProductDomain::class)
+            ->setMethods(['getProduct', 'getDomainId', 'getShow', 'getCpc', 'getCpcSearch'])
             ->disableOriginalConstructor()
             ->getMock();
-        $googleProductDomainMock->method('getProduct')->willReturn($productMock);
-        $googleProductDomainMock->method('getDomainId')->willReturn($domainId);
-        $googleProductDomainMock->method('getShow')->willReturn($show);
+        $zboziProductDomainMock->method('getProduct')->willReturn($productMock);
+        $zboziProductDomainMock->method('getDomainId')->willReturn($domainId);
+        $zboziProductDomainMock->method('getShow')->willReturn($show);
+        $zboziProductDomainMock->method('getCpc')->willReturn($cpc);
+        $zboziProductDomainMock->method('getCpcSearch')->willReturn($cpcSearch);
 
-        return $googleProductDomainMock;
+        return $zboziProductDomainMock;
     }
 
     public function testGeneratingOfFeed()
@@ -187,7 +210,7 @@ class GoogleFeedTest extends TestCase
         $domainConfigMock->method('getUrl')->willReturn('http://www.example.com/');
         $domainConfigMock->method('getLocale')->willReturn('en');
 
-        $processedFeedItems = $this->googleFeedConfig->processItems($feedItems, $domainConfigMock);
+        $processedFeedItems = $this->zboziFeedConfig->processItems($feedItems, $domainConfigMock);
 
         $generatedXml = $this->getFeedOutputByFeedItems($processedFeedItems, $domainConfigMock);
         $generatedXml = $this->normalizeXml($generatedXml);
@@ -234,7 +257,7 @@ class GoogleFeedTest extends TestCase
     {
         $feedItems = [];
 
-        $feedItems[] = new TestGoogleStandardFeedItem(
+        $feedItems[] = new TestZboziStandardFeedItem(
             self::PRODUCT_ID_FIRST,
             'Product',
             'Lorem ipsum <strong>bold</strong>...',
@@ -252,14 +275,14 @@ class GoogleFeedTest extends TestCase
             false
         );
 
-        $feedItems[] = new TestGoogleStandardFeedItem(
+        $feedItems[] = new TestZboziStandardFeedItem(
             self::PRODUCT_ID_SECOND,
             'Product Variant',
             'Lorem ipsum...',
             'http://www.example.com/product/2',
             null,
             '10',
-            'EUR',
+            'CZK',
             null,
             '',
             null,
@@ -267,10 +290,10 @@ class GoogleFeedTest extends TestCase
             [],
             null,
             12,
-            true
+            false
         );
 
-        $feedItems[] = new TestGoogleStandardFeedItem(
+        $feedItems[] = new TestZboziStandardFeedItem(
             self::PRODUCT_ID_THIRD,
             'Hidden Product',
             'Lorem ipsum...',
@@ -279,6 +302,24 @@ class GoogleFeedTest extends TestCase
             '256.65789',
             'CZK',
             '6459879887AE',
+            '',
+            'Manufacturer',
+            'Lorem category ipsum...',
+            [],
+            '132465798',
+            null,
+            false
+        );
+
+        $feedItems[] = new TestZboziStandardFeedItem(
+            self::PRODUCT_ID_FOURTH,
+            'Product with denied selling',
+            'Lorem ipsum...',
+            'http://www.example.com/product/4',
+            'http://www.example.com/product/img/4.jpg',
+            '987.65789',
+            'EUR',
+            '13E45RT8A',
             '',
             'Manufacturer',
             'Lorem category ipsum...',

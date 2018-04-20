@@ -33,16 +33,14 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\": [
-        "packages/product-feed-google/tests/",
-        "packages/product-feed-zbozi/tests/",
-        "packages/product-feed-heureka/tests/",
-        "packages/product-feed-heureka-delivery/tests/",
-        "project-base/tests/"
-      ],
+      "Tests\\": "project-base/tests/",
       "Tests\\FrameworkBundle\\": "packages/framework/tests/",
-      "Tests\\Shopsys\\HttpSmokeTesting\\": "packages/http-smoke-testing/tests/",
-      "Shopsys\\MigrationBundle\\Tests\\": "packages/migrations/tests/"
+      "Tests\\HttpSmokeTesting\\": "packages/http-smoke-testing/tests/",
+      "Tests\\MigrationBundle\\": "packages/migrations/tests/",
+      "Tests\\ProductFeed\\ZboziBundle\\": "packages/product-feed-zbozi/tests/",
+      "Tests\\ProductFeed\\GoogleBundle\\": "packages/product-feed-google/tests/",
+      "Tests\\ProductFeed\\HeurekaBundle\\": "packages/product-feed-heureka/tests/",
+      "Tests\\ProductFeed\\HeurekaDeliveryBundle\\": "packages/product-feed-heureka-delivery/tests/"
     }
   },
   "repositories": [

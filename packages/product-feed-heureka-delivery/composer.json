@@ -17,7 +17,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\ProductFeed\\HeurekaDeliveryBundle\\": "tests/"
         }
     },
     "require": {

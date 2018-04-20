@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests;
+namespace Tests\ProductFeed\GoogleBundle\Unit;
 
 use Shopsys\ProductFeed\StandardFeedItemInterface;
 
-class TestHeurekaStandardFeedItem implements StandardFeedItemInterface
+class TestGoogleStandardFeedItem implements StandardFeedItemInterface
 {
     /**
      * @var int
@@ -35,6 +35,11 @@ class TestHeurekaStandardFeedItem implements StandardFeedItemInterface
      * @var string
      */
     private $priceVat;
+
+    /**
+     * @var string
+     */
+    private $currencyCode;
 
     /**
      * @var string|null
@@ -82,16 +87,6 @@ class TestHeurekaStandardFeedItem implements StandardFeedItemInterface
     private $sellingDenied;
 
     /**
-     * @var string
-     */
-    private $currencyCode;
-
-    /**
-     * @var int
-     */
-    private $mainCategoryId;
-
-    /**
      * @param int $id
      * @param string $productName
      * @param string $description
@@ -107,7 +102,6 @@ class TestHeurekaStandardFeedItem implements StandardFeedItemInterface
      * @param string|null $partno
      * @param int|null $mainVariantId
      * @param bool $sellingDenied
-     * @param int $mainCategoryId
      */
     public function __construct(
         $id,
@@ -121,11 +115,10 @@ class TestHeurekaStandardFeedItem implements StandardFeedItemInterface
         $deliveryDate,
         $manufacturer,
         $categoryText,
-        array $parametersByName,
+        $parametersByName,
         $partno,
         $mainVariantId,
-        $sellingDenied,
-        $mainCategoryId
+        $sellingDenied
     ) {
         $this->id = $id;
         $this->productName = $productName;
@@ -133,7 +126,6 @@ class TestHeurekaStandardFeedItem implements StandardFeedItemInterface
         $this->url = $url;
         $this->imgUrl = $imgUrl;
         $this->priceVat = $priceVat;
-        $this->currencyCode = $currencyCode;
         $this->ean = $ean;
         $this->deliveryDate = $deliveryDate;
         $this->manufacturer = $manufacturer;
@@ -143,7 +135,7 @@ class TestHeurekaStandardFeedItem implements StandardFeedItemInterface
         $this->mainVariantId = $mainVariantId;
         $this->customValues = [];
         $this->sellingDenied = $sellingDenied;
-        $this->mainCategoryId = $mainCategoryId;
+        $this->currencyCode = $currencyCode;
     }
 
     /**
@@ -259,11 +251,11 @@ class TestHeurekaStandardFeedItem implements StandardFeedItemInterface
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isSellingDenied()
+    public function getMainCategoryId()
     {
-        return $this->sellingDenied;
+        return 0;
     }
 
     /**
@@ -285,10 +277,10 @@ class TestHeurekaStandardFeedItem implements StandardFeedItemInterface
     }
 
     /**
-     * @return int
+     * @return bool
      */
-    public function getMainCategoryId()
+    public function isSellingDenied()
     {
-        return $this->mainCategoryId;
+        return $this->sellingDenied;
     }
 }
