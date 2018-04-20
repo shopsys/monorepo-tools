@@ -11,7 +11,7 @@
       ],
       "Shopsys\\FormTypesBundle\\": "packages/form-types-bundle/src/",
       "Shopsys\\HttpSmokeTesting\\": "packages/http-smoke-testing/src/",
-      "Shopsys\\MigrationBundle\\": "packages/migrations/src/Shopsys/MigrationBundle/",
+      "Shopsys\\MigrationBundle\\": "packages/migrations/src/",
       "Shopsys\\Plugin\\": "packages/plugin-interface/src/",
       "Shopsys\\ProductFeed\\": "packages/product-feed-interface/src/",
       "Shopsys\\ProductFeed\\ZboziBundle\\": "packages/product-feed-zbozi/src/",
@@ -41,7 +41,8 @@
         "project-base/tests/"
       ],
       "Tests\\FrameworkBundle\\": "packages/framework/tests/",
-      "Tests\\Shopsys\\HttpSmokeTesting\\": "packages/http-smoke-testing/tests/"
+      "Tests\\Shopsys\\HttpSmokeTesting\\": "packages/http-smoke-testing/tests/",
+      "Shopsys\\MigrationBundle\\Tests\\": "packages/migrations/tests/"
     }
   },
   "repositories": [

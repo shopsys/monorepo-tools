@@ -169,7 +169,7 @@
             <arg value="${path.packages}/http-smoke-testing/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="${path.packages}/migrations/src/Shopsys/MigrationBundle/Tests"/>
+            <arg value="${path.packages}/migrations/tests"/>
         </exec>
         <exec executable="${path.vendor}/bin/phpunit" logoutput="true" passthru="true" checkreturn="true">
             <arg value="--configuration"/>

@@ -12,7 +12,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Shopsys\\": "src/Shopsys/"
+            "Shopsys\\MigrationBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shopsys\\MigrationBundle\\Tests\\": "tests/"
         }
     },
     "require": {
