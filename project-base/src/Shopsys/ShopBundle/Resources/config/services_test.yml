@@ -10,3 +10,16 @@ services:
     factory: ['@Shopsys\FrameworkBundle\Model\Localization\CustomDateTimeFormatterFactory', create]
 
   Shopsys\FrameworkBundle\Model\Localization\IntlCurrencyRepository: ~
+
+  Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver:
+    class: Tests\ShopBundle\Database\EntityExtension\OverwritableEntityNameResolver
+    arguments:
+      - "%shopsys.entity_extension.map%"
+
+  joschi127_doctrine_entity_override.event_subscriber.load_orm_metadata:
+    class: Tests\ShopBundle\Database\EntityExtension\OverwritableLoadORMMetadataSubscriber
+    arguments:
+      - "@service_container"
+      - "%shopsys.entity_extension.map%"
+    tags:
+      - { name: doctrine.event_subscriber, priority: -10 }
