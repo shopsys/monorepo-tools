@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - all services are explicitly defined
         - services with common suffixes (`*Facade`, `*Repository` etc.) are auto-discovered
         - see `services.yml` for details
+- all exception interfaces are now Throwable (@TomasLudvik)
 
 ### Fixed
 - choiceList values are prepared for js Choice(s)ToBooleanArrayTransformer (@Miroslav-Stopka)
@@ -58,6 +59,5 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
         - ArticleFormType
         - AdvertFormType
         - AdministratorFormType
-- all exception interfaces are now Throwable (@TomasLudvik)
 
 [Unreleased]: https://github.com/shopsys/framework/compare/v7.0.0-alpha1...HEAD
