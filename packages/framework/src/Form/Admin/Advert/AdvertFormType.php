@@ -5,13 +5,13 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Advert;
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Form\DomainType;
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Advert\Advert;
 use Shopsys\FrameworkBundle\Model\Advert\AdvertData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -52,9 +52,7 @@ class AdvertFormType extends AbstractType
             ]),
         ];
 
-        $builderSettingsGroup = $builder->create('settings', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderSettingsGroup = $builder->create('settings', GroupType::class, [
             'label' => t('Settings'),
         ]);
 
@@ -139,9 +137,7 @@ class AdvertFormType extends AbstractType
                 ],
             ]);
 
-        $builderImageGroup = $builder->create('image_group', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderImageGroup = $builder->create('image_group', GroupType::class, [
             'label' => t('Images'),
             'js_container' => [
                 'container_class' => 'js-advert-type-content',

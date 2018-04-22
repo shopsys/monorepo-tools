@@ -2,8 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Heureka;
 
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,10 +19,8 @@ class HeurekaShopCertificationFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builderSettingsGroup = $builder->create('settings', FormType::class, [
-            'inherit_data' => true,
+        $builderSettingsGroup = $builder->create('settings', GroupType::class, [
             'label' => t('Settings'),
-            'is_group_container' => true,
             'is_group_container_to_render_as_the_last_one' => true,
         ]);
 

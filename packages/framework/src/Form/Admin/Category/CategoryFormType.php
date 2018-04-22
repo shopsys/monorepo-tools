@@ -9,6 +9,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Form\DomainsType;
 use Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension;
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\InvertChoiceTypeExtension;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
@@ -104,9 +105,7 @@ class CategoryFormType extends AbstractType
             $parentChoices = $this->categoryFacade->getAll();
         }
 
-        $builderSettingsGroup = $builder->create('settings', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderSettingsGroup = $builder->create('settings', GroupType::class, [
             'label' => t('Settings'),
         ]);
 
@@ -154,9 +153,7 @@ class CategoryFormType extends AbstractType
                 'label' => t('Display on'),
             ]);
 
-        $builderSeoGroup = $builder->create('seo', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderSeoGroup = $builder->create('seo', GroupType::class, [
             'label' => t('Seo'),
         ]);
 
@@ -205,9 +202,7 @@ class CategoryFormType extends AbstractType
                 ]);
         }
 
-        $builderDescriptionGroup = $builder->create('description', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderDescriptionGroup = $builder->create('description', GroupType::class, [
             'label' => t('Description'),
         ]);
 
@@ -218,9 +213,7 @@ class CategoryFormType extends AbstractType
                 'display_format' => FormRenderingConfigurationExtension::DISPLAY_FORMAT_MULTIDOMAIN_ROWS_NO_PADDING,
             ]);
 
-        $builderImageGroup = $builder->create('image', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderImageGroup = $builder->create('image', GroupType::class, [
             'label' => t('Image'),
         ]);
 

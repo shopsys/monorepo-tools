@@ -65,11 +65,9 @@
             {% endfor %}
         {% endif %}
     {% else %}
-        {% if (form.vars.is_group_container == false or form.vars.is_group_container == null) %}
-            <div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
-            {{ form_errors(form) }}
-            {{ form_label(form, label) }}
-        {% endif %}
+        <div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
+        {{ form_errors(form) }}
+        {{ form_label(form, label) }}
         {{ form_widget(form) }}
         {% if disabledField is defined %}
             <span class="form-disabled {{ disabledField.class }} js-tooltip" data-toggle="tooltip" data-placement="{{ disabledField.placement|default('right') }}"
@@ -77,9 +75,7 @@
                 <i class="svg svg-pencil"></i>
             </span>
         {% endif %}
-        {% if form.vars.is_group_container == false or form.vars.is_group_container == null %}
-            </div>
-        {% endif %}
+        </div>
     {% endif %}
 {% endblock form_row %}
 
@@ -1018,36 +1014,19 @@
     {% endif %}
 {% endblock date_picker_widget %}
 
-{%- block form_rows -%}
-    {% set previous_group_name = '' %}
-    {% for child in form %}
-        {% set current_group_name = (form.vars.is_group_container == true and form.vars.name is defined) ? form.vars.name : '' %}
-
-        {% if previous_group_name != current_group_name %}
-            {% if previous_group_name != '' %}
-                </div>
-            {% endif %}
-
-            {% if current_group_name != '' %}
-                {% if js_container is not null %}
-                    <div class="{{ js_container.container_class }}" data-type="{{ js_container.data_type }}">
-                {% endif %}
-                <div class="form-group{% if is_group_container_to_render_as_the_last_one != true %} wrap-border{% endif %}">
-                <div class="form-group__title">
-                    {{ form.vars.label }}
-                </div>
-            {% endif %}
-        {% endif %}
-
-        {{- form_row(child) -}}
-
-        {% set previous_group_name = current_group_name %}
-    {% endfor %}
-
-    {% if previous_group_name != '' %}
-        </div>
-        {% if js_container is not null %}
-            </div>
-        {% endif %}
+{% block group_row %}
+    {% if js_container is not null %}
+        <div class="{{ js_container.container_class }}" data-type="{{ js_container.data_type }}">
     {% endif %}
-{%- endblock form_rows -%}
+
+    <div class="form-group{% if is_group_container_to_render_as_the_last_one != true %} wrap-border{% endif %}">
+        <div class="form-group__title">
+            {{ form.vars.label }}
+        </div>
+        {{ form_widget(form) }}
+    </div>
+
+    {% if js_container is not null %}
+        </div>
+    {% endif %}
+{% endblock %}

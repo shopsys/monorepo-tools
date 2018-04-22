@@ -20,7 +20,6 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         parent::buildView($view, $form, $options);
-        $view->vars['is_group_container'] = $options['is_group_container'];
         $view->vars['macro'] = $options['macro'];
         $view->vars['icon_title'] = $options['icon_title'];
         $view->vars['display_format'] = $options['display_format'];
@@ -33,17 +32,14 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired('is_group_container')
-            ->addAllowedTypes('is_group_container', 'boolean')
-            ->setDefaults([
-                'is_group_container' => false,
-                'macro' => null,
-                'icon_title' => null,
-                'display_format' => null,
-                'js_container' => null,
-                'is_plugin_data_group' => false,
-                'is_group_container_to_render_as_the_last_one' => false,
-            ]);
+        $resolver->setDefaults([
+            'macro' => null,
+            'icon_title' => null,
+            'display_format' => null,
+            'js_container' => null,
+            'is_plugin_data_group' => false,
+            'is_group_container_to_render_as_the_last_one' => false,
+        ]);
     }
     /**
      * @return string

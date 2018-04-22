@@ -4,11 +4,11 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Slider;
 
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\FrameworkBundle\Form\DomainType;
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Model\Slider\SliderItem;
 use Shopsys\FrameworkBundle\Model\Slider\SliderItemData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -33,9 +33,7 @@ class SliderItemFormType extends AbstractType
             $imageConstraints[] = new Constraints\NotBlank(['message' => 'Please choose image']);
         }
 
-        $builderSettingsGroup = $builder->create('settings', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderSettingsGroup = $builder->create('settings', GroupType::class, [
             'label' => t('Settings'),
         ]);
 
@@ -93,9 +91,7 @@ class SliderItemFormType extends AbstractType
                 'label' => t('Hide'),
             ]);
 
-        $builderImageGroup = $builder->create('image', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderImageGroup = $builder->create('image', GroupType::class, [
             'is_group_container_to_render_as_the_last_one' => true,
             'label' => t('Image'),
         ]);
