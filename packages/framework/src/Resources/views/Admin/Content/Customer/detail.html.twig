@@ -96,7 +96,9 @@
 
         {% block customer_sendMail %}{% endblock %}
 
-        {% block customer_order_list %}{% endblock %}
+        {% if form.orders is defined %}
+            {{ form_row(form.orders) }}
+        {% endif %}
 
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}

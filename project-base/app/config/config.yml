@@ -187,6 +187,7 @@ twig:
     - '@ShopsysFramework/Admin/Form/fileuploadFields.html.twig'
     - '@ShopsysFramework/Admin/Form/imageuploadFields.html.twig'
     - '@ShopsysFramework/Admin/Form/pricetableFields.html.twig'
+    - '@ShopsysFramework/Admin/Form/orderlistFields.html.twig'
   strict_variables: true
   globals:
     globalMultipleFormSetting: '@Shopsys\FrameworkBundle\Component\Form\MultipleFormSetting'

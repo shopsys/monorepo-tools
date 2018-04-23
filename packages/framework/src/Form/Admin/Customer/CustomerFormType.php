@@ -2,7 +2,9 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Customer;
 
+use Shopsys\FrameworkBundle\Form\OrderListType;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
+use Shopsys\FrameworkBundle\Model\Customer\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -11,9 +13,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CustomerFormType extends AbstractType
 {
-    const SCENARIO_CREATE = 'create';
-    const SCENARIO_EDIT = 'edit';
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -22,9 +21,8 @@ class CustomerFormType extends AbstractType
     {
         $builder
             ->add('userData', UserFormType::class, [
-                'scenario' => $options['scenario'],
+                'user' => $options['user'],
                 'domain_id' => $options['domain_id'],
-                'current_email' => $options['data']->userData->email,
             ])
             ->add('billingAddressData', BillingAddressFormType::class, [
                 'domain_id' => $options['domain_id'],
@@ -34,8 +32,12 @@ class CustomerFormType extends AbstractType
             ])
             ->add('save', SubmitType::class);
 
-        if ($options['scenario'] === self::SCENARIO_CREATE) {
+        if ($options['user'] === null) {
             $builder->add('sendRegistrationMail', CheckboxType::class, ['required' => false]);
+        } else {
+            $builder->add('orders', OrderListType::class, [
+                'user' => $options['user'],
+            ]);
         }
     }
 
@@ -45,8 +47,8 @@ class CustomerFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired(['scenario', 'domain_id'])
-            ->setAllowedValues('scenario', [self::SCENARIO_CREATE, self::SCENARIO_EDIT])
+            ->setRequired(['user', 'domain_id'])
+            ->setAllowedTypes('user', [User::class, 'null'])
             ->setAllowedTypes('domain_id', 'int')
             ->setDefaults([
                 'data_class' => CustomerData::class,

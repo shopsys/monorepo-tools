@@ -7,6 +7,7 @@ use Shopsys\FrameworkBundle\Component\Constraints\FieldsAreNotIdentical;
 use Shopsys\FrameworkBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
 use Shopsys\FrameworkBundle\Component\Constraints\UniqueEmail;
 use Shopsys\FrameworkBundle\Form\DomainType;
+use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Customer\UserData;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Symfony\Component\Form\AbstractType;
@@ -65,22 +66,22 @@ class UserFormType extends AbstractType
                         'maxMessage' => 'Email cannot be longer then {{ limit }} characters',
                     ]),
                     new Email(['message' => 'Please enter valid e-mail']),
-                    new UniqueEmail(['ignoredEmail' => $options['current_email']]),
+                    new UniqueEmail(['ignoredEmail' => $options['user'] !== null ? $options['user']->getEmail() : null]),
                 ],
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'required' => $options['scenario'] === CustomerFormType::SCENARIO_CREATE,
+                'required' => $options['user'] === null,
                 'options' => [
                     'attr' => ['autocomplete' => 'off'],
                 ],
                 'first_options' => [
-                    'constraints' => $this->getFirstPasswordConstraints($options['scenario']),
+                    'constraints' => $this->getFirstPasswordConstraints($options['user'] === null),
                 ],
                 'invalid_message' => 'Passwords do not match',
             ]);
 
-        if ($options['scenario'] === CustomerFormType::SCENARIO_CREATE) {
+        if ($options['user'] === null) {
             $builder
                 ->add('domainId', DomainType::class, [
                     'required' => true,
@@ -104,16 +105,16 @@ class UserFormType extends AbstractType
     }
 
     /**
-     * @param string $scenario
+     * @param bool $isCreatingNewUser
      * @return \Symfony\Component\Validator\Constraint[]
      */
-    private function getFirstPasswordConstraints($scenario)
+    private function getFirstPasswordConstraints($isCreatingNewUser)
     {
         $constraints = [
             new Constraints\Length(['min' => 6, 'minMessage' => 'Password cannot be longer then {{ limit }} characters']),
         ];
 
-        if ($scenario === CustomerFormType::SCENARIO_CREATE) {
+        if ($isCreatingNewUser) {
             $constraints[] = new Constraints\NotBlank([
                 'message' => 'Please enter password',
             ]);
@@ -128,10 +129,9 @@ class UserFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired(['scenario', 'domain_id', 'current_email'])
-            ->setAllowedValues('scenario', [CustomerFormType::SCENARIO_CREATE, CustomerFormType::SCENARIO_EDIT])
+            ->setRequired(['user', 'domain_id'])
+            ->setAllowedTypes('user', [User::class, 'null'])
             ->setAllowedTypes('domain_id', 'int')
-            ->setAllowedTypes('current_email', ['null', 'string'])
             ->setDefaults([
                 'data_class' => UserData::class,
                 'attr' => ['novalidate' => 'novalidate'],
