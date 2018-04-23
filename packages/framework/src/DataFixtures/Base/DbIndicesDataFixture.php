@@ -5,21 +5,18 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Base;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractNativeFixture;
-use Shopsys\FrameworkBundle\Model\Localization\Localization;
+use Shopsys\FrameworkBundle\Model\Localization\DbIndicesFacade;
 
 class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFixtureInterface
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
+     * @var \Shopsys\FrameworkBundle\Model\Localization\DbIndicesFacade
      */
-    private $localization;
+    private $dbIndicesFacade;
 
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
-     */
-    public function __construct(Localization $localization)
+    public function __construct(DbIndicesFacade $dbIndicesFacade)
     {
-        $this->localization = $localization;
+        $this->dbIndicesFacade = $dbIndicesFacade;
     }
 
     /**
@@ -27,11 +24,7 @@ class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFix
      */
     public function load(ObjectManager $manager)
     {
-        foreach ($this->localization->getLocalesOfAllDomains() as $locale) {
-            $domainCollation = $this->localization->getCollationByLocale($locale);
-            $this->executeNativeQuery('CREATE INDEX product_translations_name_' . $locale . '_idx
-                ON product_translations (name COLLATE "' . $domainCollation . '") WHERE locale = \'' . $locale . '\'');
-        }
+        $this->dbIndicesFacade->updateLocaleSpecificIndices();
 
         $this->executeNativeQuery('CREATE INDEX product_translations_name_normalize_idx
             ON product_translations (NORMALIZE(name))');

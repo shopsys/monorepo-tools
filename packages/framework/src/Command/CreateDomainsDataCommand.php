@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator;
 use Shopsys\FrameworkBundle\Component\Domain\DomainDbFunctionsFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
+use Shopsys\FrameworkBundle\Model\Localization\DbIndicesFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -39,21 +40,29 @@ class CreateDomainsDataCommand extends Command
     private $multidomainEntityClassFinderFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Localization\DbIndicesFacade
+     */
+    private $dbIndicesFacade;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Domain\DomainDbFunctionsFacade $domainDbFunctionsFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator $domainDataCreator
      * @param \Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade
+     * @param \Shopsys\FrameworkBundle\Model\Localization\DbIndicesFacade $dbIndicesFacade
      */
     public function __construct(
         EntityManagerInterface $em,
         DomainDbFunctionsFacade $domainDbFunctionsFacade,
         DomainDataCreator $domainDataCreator,
-        MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade
+        MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade,
+        DbIndicesFacade $dbIndicesFacade
     ) {
         $this->em = $em;
         $this->domainDbFunctionsFacade = $domainDbFunctionsFacade;
         $this->domainDataCreator = $domainDataCreator;
         $this->multidomainEntityClassFinderFacade = $multidomainEntityClassFinderFacade;
+        $this->dbIndicesFacade = $dbIndicesFacade;
 
         parent::__construct();
     }
@@ -89,5 +98,7 @@ class CreateDomainsDataCommand extends Command
         foreach ($multidomainEntitiesNames as $multidomainEntityName) {
             $output->writeln($multidomainEntityName);
         }
+        $this->dbIndicesFacade->updateLocaleSpecificIndices();
+        $output->writeln('<fg=green>All locale specific db indices updated.</fg=green>');
     }
 }
