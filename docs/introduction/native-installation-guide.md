@@ -159,17 +159,12 @@ However, if your operating system does not provide the required locales you can 
 * Otherwise: The only other option is to create the database collation mentioned in the exception manually using a locale that your OS supports.
 (Note: every OS should support special locale `"C"` or `"POSIX"`.)
 
-### Phing target tests-db fails on test AdministratorRepositoryTest::testGetByValidMultidomainLogin
-This error is not likely to occur anymore. 
-We added new phing target `timezones-check` that is run during the application build and prevents this error.
+### Phing target timezones-check fails
 
 Error message:
 ```
-1) Tests\ShopBundle\Database\Model\Administrator\AdministratorRepositoryTest::testGetByValidMultidomainLogin
-Shopsys\FrameworkBundle\Model\Administrator\Security\Exception\InvalidTokenException: Administrator with valid multidomain login token validMultidomainLoginToken not found.
-
-.../FrameworkBundle/Model/Administrator/AdministratorRepository.php:69
-.../tests/ShopBundle/Database/Model/Administrator/AdministratorRepositoryTest.php:25
+[Shopsys\FrameworkBundle\Command\Exception\DifferentTimezonesException]
+  Timezones in PHP and database configuration must be identical. Current settings - PHP:UTC, PostgreSQL:Europe/Prague
 ```
 
 The problem is that your `timezone` setting in PostgreSQL and `date.timezone` in `php.ini` are different.
