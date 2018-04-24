@@ -50,7 +50,6 @@ cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
 
 ## 2. See it in your browser!
 
-### On Linux, MacOS and Windows 10 Pro and higher
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see running application.
 
 You can also login into the administration section on [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) with default credentials:
@@ -59,13 +58,3 @@ You can also login into the administration section on [http://127.0.0.1:8000/adm
 
 You can also manage the application database using [Adminer](https://www.adminer.org) by going to [http://127.0.0.1:1100](http://127.0.0.1:1100)
 and Redis storage using [Redis admin](https://github.com/ErikDubbelboer/phpRedisAdmin) by going to [http://127.0.0.1:1600](http://127.0.0.1:1600).
-
-### On Windows 10 Home, 8, 8.1, 7 (using Docker Toolbox)
-Open [http://192.168.99.100:8000/](http://192.168.99.100:8000/) to see running application.
-
-You can also login into the administration section on [http://192.168.99.100:8000/admin/](http://192.168.99.100:8000/admin/) with default credentials:
-* Username: `admin` or `superadmin` (the latter has access to advanced options)
-* Password: `admin123`
-
-You can also manage the application database using [Adminer](https://www.adminer.org) by going to [http://192.168.99.100:1100](http://192.168.99.100:1100)
-and Redis storage using [Redis admin](https://github.com/ErikDubbelboer/phpRedisAdmin) by going to [http://192.168.99.100:1600](http://192.168.99.100:1600).
