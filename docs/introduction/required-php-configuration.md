@@ -30,10 +30,12 @@ opcache.max_accelerated_files = 20000
 | bcmath         | required by package `commerceguys/intl`                                                                                                                       |
 | ctype          | used by various packages; should be present by default since PHP 4.2.0 but on some systems (like FreeBSD) it can be optional                                  |
 | curl           | needed by package `heureka/overeno-zakazniky` to work correctly; see https://github.com/heureka/overeno-zakazniky/issues/21                                   |
+| filter         | used for `filter_var` by `Shopsys\FrameworkBundle\Model\Cart\Item\CartItem`                                                                                   |
 | gd             | used by `Shopsys\FrameworkBundle\Component\Image` for generating images                                                                                            |
 | iconv          | used by `Shopsys\FrameworkBundle\Component\String\*` classes                                                                                                       |
 | intl           | needed because `Symfony\Intl` component supports only `en` locale                                                                                             |
 | json           | needed for `json_encode` and `json_decode` functions; should be present by default since PHP 5.2.0 but on some systems (like Ubuntu 13.10) it can be optional |
+| libxml         | used for `LIBXML_*` constants by `Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDownloader`                                          |
 | mbstring       | needed for `mb_str*` functions                                                                                                                                |
 | opcache        | optional but highly recommended for better performance                                                                                                        |
 | openssl        | needed by Composer for secure communication                                                                                                                   |
@@ -41,5 +43,6 @@ opcache.max_accelerated_files = 20000
 | pdo_pgsql      | required to support `pdo_pgsql` database driver                                                                                                               |
 | pgsql          | used in acceptance for fast repopulating of database using `COPY` command                                                                                     |
 | simplexml      | used by Heureka product feed module in `\Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryCronModule`                                   |
+| tokenizer      | used for `T_*` constants by `shopsys\coding-standards` package                                                                                                |
 | xml            | used by Phing for XML parsing                                                                                                                                 |
 | zip            | used by `Shopsys\FrameworkBundle\Command\ImageDemoCommand` to extract demo images                                                                                  |
