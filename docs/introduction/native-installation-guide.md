@@ -1,19 +1,25 @@
-# Installation Guide (obsolete)
-*This guide is obsolete, because recommended way to install Shopsys Framework is via Docker. This guide should be completely correct, but it has not been tested since Redis has been added as prerequisite.*
- 
+# Native Installation Guide
 This guide provides instructions how to install Shopsys Framework on your local machine as a server.
 If you would like to use a prepared Docker container instead go to [Installation Using Docker](../docker/installation/installation-using-docker.md).
 
 ## Requirements
 First of all, you need to install the following software on your system:
 
+### Linux / MacOS
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-* [PostgreSQL 9.4](https://wiki.postgresql.org/wiki/Detailed_installation_guides) (On Windows OS, we recommend to use [EnterpriseDB PostgreSQL distribution](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows))
+* [PostgreSQL 9.5](https://wiki.postgresql.org/wiki/Detailed_installation_guides)
 * [PHP 7.1 - 7.2](http://php.net/manual/en/install.php) (configure your `php.ini` by [Required PHP Configuration](required-php-configuration.md))
 * [Composer](https://getcomposer.org/doc/00-intro.md#globally)
-* [Node.js 4.x](https://nodejs.org/en/download/)
-* [npm 2.x](https://nodejs.org/en/download/) (npm is automatically installed when you install Node.js)
+* [Node.js with npm](https://nodejs.org/en/download/) (npm is automatically installed when you install Node.js)
 * [Redis](https://redis.io/topics/quickstart)
+
+### Windows
+* [GIT](https://git-scm.com/download/win)
+* [PostgreSQL 9.5](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows)
+* [PHP 7.1 - 7.2](http://php.net/manual/en/install.windows.php) (configure your `php.ini` by [Required PHP Configuration](required-php-configuration.md))
+* [Composer](https://getcomposer.org/doc/00-intro.md#installation-windows)
+* [Node.js with npm](https://nodejs.org/en/download/) (npm is automatically installed when you install Node.js)
+* [Redis](https://github.com/MicrosoftArchive/redis/releases)
 
 *Note: The names link to the appropriate installation guide or download page.* 
 
@@ -74,9 +80,17 @@ It will set the environment in your application to `dev` (this will, for example
 
 ### 3. Configure domains
 Create `domains_urls.yml` from `domains_urls.yml.dist`.
+
+#### Linux / MacOS
 ```
 cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
 ```
+
+#### Windows
+```
+copy app\config\domains_urls.yml.dist app\config\domains_urls.yml
+```
+
 ### 4. Create databases
 ```
 php phing db-create

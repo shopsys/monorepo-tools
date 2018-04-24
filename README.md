@@ -76,7 +76,7 @@ which is fully ready as the base for building your Shopsys Framework project.
 For more detailed instructions, follow one of the installation guides:
 
 * [Installation via Docker (recommended)](./docs/docker/installation/installation-using-docker.md)
-* [Native installation](./docs/introduction/installation-guide.md)
+* [Native installation](docs/introduction/native-installation-guide.md)
 
 ## Documentation
 For documentation of Shopsys Framework itself, see [Shopsys Framework Knowledge Base](./docs/index.md).

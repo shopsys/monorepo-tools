@@ -59,7 +59,7 @@ preserve the functionality of the package even outside the monorepo.
 Keep in mind that the file structure of Shopsys Framework (standardly located in the root of the project) is in monorepo
 located in the directory `project-base/`
 
-Installation of Shopsys Framework is described in [Shopsys Framework installation guide](installation-guide.md)
+Installation of Shopsys Framework is described in [Shopsys Framework installation guide](native-installation-guide.md)
 
 ## Troubleshooting
 * Package is functional in monorepo but broken outside of monorepo - ensure that every parameter required by package
