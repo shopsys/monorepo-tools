@@ -7,6 +7,13 @@ Shopsys/project-base repository contains the fully ready base for building your 
 For more informations about project, please see [shopsys/shopsys](https://github.com/shopsys/shopsys) readme.
 
 ## Installation
+We recommend to choose **installation via Docker** because it is the easiest and fastest way to start using Shopsys Framework.
+Docker contains complete development environment necessary for running your application.
+In the future we want to add new technologies to Shopsys Framework (e.g. ElasticSearch).
+**Updating your development environment to use these technologies will be very easy with Docker**
+because such an update will be done just by running `docker-compose build`.
+And that is all!
+
 Create new project on Shopsys Framework easily from this package following one of the installation guides:
 
 * [Installation via Docker (recommended)](https://github.com/shopsys/shopsys/blob/master/docs/docker/installation/installation-using-docker.md)

@@ -73,6 +73,14 @@ See more information about the monorepo approach in [the Monorepo article](./doc
 
 For the purposes of building a new project use our [shopsys/project-base](https://github.com/shopsys/project-base),
 which is fully ready as the base for building your Shopsys Framework project.
+
+We recommend to choose **installation via Docker** because it is the easiest and fastest way to start using Shopsys Framework.
+Docker contains complete development environment necessary for running your application.
+In the future we want to add new technologies to Shopsys Framework (e.g. ElasticSearch).
+**Updating your development environment to use these technologies will be very easy with Docker**
+because such an update will be done just by running `docker-compose build`.
+And that is all!
+
 For more detailed instructions, follow one of the installation guides:
 
 * [Installation via Docker (recommended)](./docs/docker/installation/installation-using-docker.md)
