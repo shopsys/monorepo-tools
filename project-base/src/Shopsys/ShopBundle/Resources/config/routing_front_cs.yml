@@ -60,4 +60,12 @@ front_personal_data:
 
 front_personal_data_access:
   path: /prehled-osobnich-udaju/{hash}/
-  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:access }
+  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:accessDisplay }
+
+front_personal_data_export:
+  path: /export-osobnich-udaju/
+  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:export }
+
+front_personal_data_access_export:
+  path: /export-osobnich-udaju/{hash}/
+  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:accessExport }

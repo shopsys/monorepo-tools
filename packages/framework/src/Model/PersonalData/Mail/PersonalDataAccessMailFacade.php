@@ -25,6 +25,11 @@ class PersonalDataAccessMailFacade
     private $personalDataAccessMail;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataExportMail
+     */
+    private $personalDataExportMail;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailer
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
      * @param \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail $personalDataAccessMail
@@ -32,11 +37,13 @@ class PersonalDataAccessMailFacade
     public function __construct(
         MailerService $mailer,
         MailTemplateFacade $mailTemplateFacade,
-        PersonalDataAccessMail $personalDataAccessMail
+        PersonalDataAccessMail $personalDataAccessMail,
+        PersonalDataExportMail $personalDataExportMail
     ) {
         $this->mailer = $mailer;
         $this->mailTemplateFacade = $mailTemplateFacade;
         $this->personalDataAccessMail = $personalDataAccessMail;
+        $this->personalDataExportMail = $personalDataExportMail;
     }
 
     /**
@@ -44,12 +51,22 @@ class PersonalDataAccessMailFacade
      */
     public function sendMail(PersonalDataAccessRequest $personalDataAccessRequest)
     {
-        $mailTemplate = $this->mailTemplateFacade->get(
-            MailTemplate::PERSONAL_DATA_ACCESS_NAME,
-            $personalDataAccessRequest->getDomainId()
-        );
+        if ($personalDataAccessRequest->getType() === PersonalDataAccessRequest::TYPE_DISPLAY) {
+            $mailTemplate = $this->mailTemplateFacade->get(
+                MailTemplate::PERSONAL_DATA_ACCESS_NAME,
+                $personalDataAccessRequest->getDomainId()
+            );
 
-        $messageData = $this->personalDataAccessMail->createMessage($mailTemplate, $personalDataAccessRequest);
+            $messageData = $this->personalDataAccessMail->createMessage($mailTemplate, $personalDataAccessRequest);
+        } else {
+            $mailTemplate = $this->mailTemplateFacade->get(
+                MailTemplate::PERSONAL_DATA_EXPORT_NAME,
+                $personalDataAccessRequest->getDomainId()
+            );
+
+            $messageData = $this->personalDataExportMail->createMessage($mailTemplate, $personalDataAccessRequest);
+        }
+
         $messageData->attachmentsFilepaths = $this->mailTemplateFacade->getMailTemplateAttachmentsFilepaths($mailTemplate);
 
         $this->mailer->send($messageData);

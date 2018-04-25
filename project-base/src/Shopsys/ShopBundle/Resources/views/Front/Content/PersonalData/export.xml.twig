@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<customers>
+    <customer>
+
+        {% if user is not null %}
+            <customer_name>
+                <firstname><![CDATA[{{ user.firstName }}]]></firstname>
+                <lastname><![CDATA[{{ user.lastName }}]]></lastname>
+                <phone><![CDATA[{{ user.billingAddress.telephone }}]]></phone>
+                <email><![CDATA[{{ user.email }}]]></email>
+            </customer_name>
+
+            {% if user.billingAdress is defined or user.deliveryAddress is defined %}
+                {% include '@ShopsysShop/Front/Content/PersonalData/adress.xml.twig' with {'user' : user} %}
+            {% endif %}
+
+            {% if user.billingAddress is defined and user.billingAddress.companyCustomer %}
+                {% set billingAddress = user.billingAddress %}
+                <customer_company>
+                    {% if billingAddress.companyName is not null %}
+                        <company_name><![CDATA[{{ billingAddress.companyName }}]]></company_name>
+                    {% endif %}
+                    {% if billingAddress.companyNumber is not null %}
+                        <company_registration_number><![CDATA[{{ billingAddress.companyNumber }}]]></company_registration_number>
+                    {% endif %}
+                    {% if billingAddress.companyTaxNumber is not null %}
+                        <company_vat_registration_number><![CDATA[{{ billingAddress.companyTaxNumber }}]]></company_vat_registration_number>
+                    {% endif %}
+                </customer_company>
+            {% endif %}
+        {% endif %}
+
+        <other_information>
+            <newsletter_subscription>{% if newsletterSubscriber is null %}0{% else %}1{% endif %}</newsletter_subscription>
+        </other_information>
+
+        {% if orders|length > 0 %}
+            {% include('@ShopsysShop/Front/Content/PersonalData/orders.xml.twig' ) with {'orders': orders} %}
+        {% endif %}
+
+    </customer>
+</customers>

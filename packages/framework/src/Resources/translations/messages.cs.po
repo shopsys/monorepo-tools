@@ -559,6 +559,12 @@ msgstr "Přehled států"
 msgid "Country"
 msgstr "Stát"
 
+msgid "Country code"
+msgstr "Kód země"
+
+msgid "Country code in ISO 3166-1 alpha-2"
+msgstr "Kód země v ISO 3166-1 alpha-2"
+
 msgid "Create"
 msgstr "Vytvořit"
 
@@ -1477,14 +1483,17 @@ msgstr "Světlé tlačítko"
 msgid "Link"
 msgstr "Odkaz"
 
-msgid "Link to the display personal information"
-msgstr "Odkaz na stránku se zobrazením osobních údajů"
-
 msgid "Link to the log in page"
 msgstr "Odkaz na stránku s přihlášením"
 
 msgid "Link to the overview of brands"
 msgstr "Odkaz na přehled značek"
+
+msgid "Link to the personal information export"
+msgstr "Odkaz na export osobních údajů"
+
+msgid "Link to the personal information overview"
+msgstr "Odkaz na přehled osobních údajů"
 
 msgid "List of products in order (name, quantity, price per unit including VAT, total price per item including VAT)"
 msgstr "Seznam zboží v objednávce (název, množství, cena za jednotku s DPH, celková cena za položku s DPH)"
@@ -1906,11 +1915,11 @@ msgstr "Osobní údaje"
 msgid "Personal data access"
 msgstr "Přístup k osobním údajům"
 
-msgid "Personal data request"
-msgstr "Požadavek k osobním údajům"
-
 msgid "Personal data site content updated successfully"
-msgstr ""
+msgstr "Obsah webu osobních dat byl úspěšně aktualizován"
+
+msgid "Personal information export"
+msgstr "Export osobních údajů"
 
 msgid "Personal information overview"
 msgstr "Přehled osobních údajů"

@@ -85,6 +85,9 @@ msgstr ""
 msgid "Clear filter"
 msgstr ""
 
+msgid "Clicking on the link below you can download in XML format your personal information, which we have in evidence in our online store %domain%."
+msgstr ""
+
 msgid "Close"
 msgstr ""
 
@@ -157,13 +160,19 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
+msgid "Download the personal information"
+msgstr ""
+
 msgid "E-mail"
 msgstr ""
 
 msgid "EAN"
 msgstr ""
 
-msgid "Email with link to personal data access site was sent"
+msgid "Email with link to personal data display page was sent to your email address"
+msgstr ""
+
+msgid "Email with link to personal data export page was sent to your email address"
 msgstr ""
 
 msgid "Empty cart"
@@ -176,6 +185,9 @@ msgid "Error occurred"
 msgstr ""
 
 msgid "Error occurred when sending e-mail."
+msgstr ""
+
+msgid "Export customer data"
 msgstr ""
 
 msgid "Finish the order"
@@ -374,6 +386,9 @@ msgid "Personal data"
 msgstr ""
 
 msgid "Personal data of registered customer"
+msgstr ""
+
+msgid "Personal information export"
 msgstr ""
 
 msgid "Personal information overview"

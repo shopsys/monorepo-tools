@@ -16,6 +16,7 @@ use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade;
 use Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail;
+use Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataExportMail;
 use Symfony\Component\HttpFoundation\Request;
 
 class MailController extends AdminBaseController
@@ -60,6 +61,11 @@ class MailController extends AdminBaseController
      */
     private $personalDataAccessMail;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataExportMail
+     */
+    private $personalDataExportMail;
+
     public function __construct(
         ResetPasswordMail $resetPasswordMail,
         OrderMailService $orderMailService,
@@ -68,7 +74,8 @@ class MailController extends AdminBaseController
         MailTemplateFacade $mailTemplateFacade,
         MailSettingFacade $mailSettingFacade,
         OrderStatusFacade $orderStatusFacade,
-        PersonalDataAccessMail $personalDataAccessMail
+        PersonalDataAccessMail $personalDataAccessMail,
+        PersonalDataExportMail $personalDataExportMail
     ) {
         $this->resetPasswordMail = $resetPasswordMail;
         $this->orderMailService = $orderMailService;
@@ -78,6 +85,7 @@ class MailController extends AdminBaseController
         $this->mailSettingFacade = $mailSettingFacade;
         $this->orderStatusFacade = $orderStatusFacade;
         $this->personalDataAccessMail = $personalDataAccessMail;
+        $this->personalDataExportMail = $personalDataExportMail;
     }
 
     /**
@@ -144,6 +152,81 @@ class MailController extends AdminBaseController
     }
 
     /**
+     * @return array
+     */
+    private function getPersonalExportVariablesLabels()
+    {
+        return [
+            PersonalDataExportMail::VARIABLE_DOMAIN => t('E-shop name'),
+            PersonalDataExportMail::VARIABLE_EMAIL => t('E-mail'),
+            PersonalDataExportMail::VARIABLE_URL => t('E-shop URL address'),
+        ];
+    }
+
+    /**
+     * @return array
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
+    private function getTemplateParameters()
+    {
+        $orderStatusesTemplateVariables = $this->orderMailService->getTemplateVariables();
+        $registrationTemplateVariables = $this->registrationMailService->getTemplateVariables();
+        $resetPasswordTemplateVariables = array_unique(array_merge(
+            $this->resetPasswordMail->getBodyVariables(),
+            $this->resetPasswordMail->getSubjectVariables()
+        ));
+        $resetPasswordTemplateRequiredVariables = array_unique(array_merge(
+            $this->resetPasswordMail->getRequiredBodyVariables(),
+            $this->resetPasswordMail->getRequiredSubjectVariables()
+        ));
+
+        $selectedDomainId = $this->adminDomainTabsFacade->getSelectedDomainId();
+        $orderStatusMailTemplatesByOrderStatusId = $this->mailTemplateFacade->getOrderStatusMailTemplatesIndexedByOrderStatusId(
+            $selectedDomainId
+        );
+        $registrationMailTemplate = $this->mailTemplateFacade->get(
+            MailTemplate::REGISTRATION_CONFIRM_NAME,
+            $selectedDomainId
+        );
+        $resetPasswordMailTemplate = $this->mailTemplateFacade->get(
+            MailTemplate::RESET_PASSWORD_NAME,
+            $selectedDomainId
+        );
+        $personalDataAccessTemplate = $this->mailTemplateFacade->get(
+            MailTemplate::PERSONAL_DATA_ACCESS_NAME,
+            $selectedDomainId
+        );
+
+        $personalDataExportTemplate = $this->mailTemplateFacade->get(
+            MailTemplate::PERSONAL_DATA_EXPORT_NAME,
+            $selectedDomainId
+        );
+
+        return [
+            'orderStatusesIndexedById' => $this->orderStatusFacade->getAllIndexedById(),
+            'orderStatusMailTemplatesByOrderStatusId' => $orderStatusMailTemplatesByOrderStatusId,
+            'orderStatusVariables' => $orderStatusesTemplateVariables,
+            'orderStatusVariablesLabels' => $this->getOrderStatusVariablesLabels(),
+            'registrationMailTemplate' => $registrationMailTemplate,
+            'registrationVariables' => $registrationTemplateVariables,
+            'registrationVariablesLabels' => $this->getRegistrationVariablesLabels(),
+            'resetPasswordMailTemplate' => $resetPasswordMailTemplate,
+            'resetPasswordRequiredVariables' => $resetPasswordTemplateRequiredVariables,
+            'resetPasswordVariables' => $resetPasswordTemplateVariables,
+            'resetPasswordVariablesLabels' => $this->getResetPasswordVariablesLabels(),
+            'TYPE_NEW' => OrderStatus::TYPE_NEW,
+            'personalDataAccessTemplate' => $personalDataAccessTemplate,
+            'personalDataAccessVariables' => $this->personalDataAccessMail->getSubjectVariables(),
+            'personalDataAccessRequiredVariablesLabels' => $this->personalDataAccessMail->getRequiredBodyVariables(),
+            'personalDataAccessVariablesLabels' => $this->getPersonalDataAccessVariablesLabels(),
+            'personalDataExportTemplate' => $personalDataExportTemplate,
+            'personalDataExportVariables' => $this->personalDataExportMail->getSubjectVariables(),
+            'personalDataExportRequiredVariablesLabels' => $this->personalDataExportMail->getRequiredBodyVariables(),
+            'personalDataExportVariablesLabels' => $this->getPersonalExportVariablesLabels(),
+        ];
+    }
+
+    /**
      * @Route("/mail/template/")
      */
     public function templateAction(Request $request)
@@ -204,58 +287,5 @@ class MailController extends AdminBaseController
         return $this->render('@ShopsysFramework/Admin/Content/Mail/setting.html.twig', [
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @return array
-     */
-    private function getTemplateParameters()
-    {
-        $orderStatusesTemplateVariables = $this->orderMailService->getTemplateVariables();
-        $registrationTemplateVariables = $this->registrationMailService->getTemplateVariables();
-        $resetPasswordTemplateVariables = array_unique(array_merge(
-            $this->resetPasswordMail->getBodyVariables(),
-            $this->resetPasswordMail->getSubjectVariables()
-        ));
-        $resetPasswordTemplateRequiredVariables = array_unique(array_merge(
-            $this->resetPasswordMail->getRequiredBodyVariables(),
-            $this->resetPasswordMail->getRequiredSubjectVariables()
-        ));
-
-        $selectedDomainId = $this->adminDomainTabsFacade->getSelectedDomainId();
-        $orderStatusMailTemplatesByOrderStatusId = $this->mailTemplateFacade->getOrderStatusMailTemplatesIndexedByOrderStatusId(
-            $selectedDomainId
-        );
-        $registrationMailTemplate = $this->mailTemplateFacade->get(
-            MailTemplate::REGISTRATION_CONFIRM_NAME,
-            $selectedDomainId
-        );
-        $resetPasswordMailTemplate = $this->mailTemplateFacade->get(
-            MailTemplate::RESET_PASSWORD_NAME,
-            $selectedDomainId
-        );
-        $personalDataAccessTemplate = $this->mailTemplateFacade->get(
-            MailTemplate::PERSONAL_DATA_ACCESS_NAME,
-            $selectedDomainId
-        );
-
-        return [
-            'orderStatusesIndexedById' => $this->orderStatusFacade->getAllIndexedById(),
-            'orderStatusMailTemplatesByOrderStatusId' => $orderStatusMailTemplatesByOrderStatusId,
-            'orderStatusVariables' => $orderStatusesTemplateVariables,
-            'orderStatusVariablesLabels' => $this->getOrderStatusVariablesLabels(),
-            'registrationMailTemplate' => $registrationMailTemplate,
-            'registrationVariables' => $registrationTemplateVariables,
-            'registrationVariablesLabels' => $this->getRegistrationVariablesLabels(),
-            'resetPasswordMailTemplate' => $resetPasswordMailTemplate,
-            'resetPasswordRequiredVariables' => $resetPasswordTemplateRequiredVariables,
-            'resetPasswordVariables' => $resetPasswordTemplateVariables,
-            'resetPasswordVariablesLabels' => $this->getResetPasswordVariablesLabels(),
-            'TYPE_NEW' => OrderStatus::TYPE_NEW,
-            'personalDataAccessTemplate' => $personalDataAccessTemplate,
-            'personalDataAccessVariables' => $this->personalDataAccessMail->getSubjectVariables(),
-            'personalDataAccessRequiredVariablesLabels' => $this->personalDataAccessMail->getRequiredBodyVariables(),
-            'personalDataAccessVariablesLabels' => $this->getPersonalDataAccessVariablesLabels(),
-        ];
     }
 }

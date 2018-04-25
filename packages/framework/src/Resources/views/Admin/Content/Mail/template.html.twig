@@ -135,12 +135,21 @@
             ) }}
 
             {{ _self.mailTemplate(
-                'Personal data request'|trans,
+                'Personal information overview'|trans,
                 personalDataAccessTemplate,
                 form.personalDataAccessTemplate,
                 personalDataAccessVariables,
                 personalDataAccessRequiredVariablesLabels,
                 personalDataAccessVariablesLabels
+            ) }}
+
+            {{ _self.mailTemplate(
+                'Personal information export'|trans,
+                personalDataExportTemplate,
+                form.personalDataExportTemplate,
+                personalDataExportVariables,
+                personalDataExportRequiredVariablesLabels,
+                personalDataExportVariablesLabels
             ) }}
 
             {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}

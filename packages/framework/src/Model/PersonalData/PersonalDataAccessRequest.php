@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PersonalDataAccessRequest
 {
+    const TYPE_DISPLAY = 'display';
+    const TYPE_EXPORT = 'export';
 
     /**
      * @var int
@@ -50,6 +52,11 @@ class PersonalDataAccessRequest
     protected $domainId;
 
     /**
+     * @ORM\Column(type="string", length=50)
+     */
+    protected $type;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestData $personalDataAccessRequestData
      */
     public function __construct(PersonalDataAccessRequestData $personalDataAccessRequestData)
@@ -58,6 +65,7 @@ class PersonalDataAccessRequest
         $this->createdAt = $personalDataAccessRequestData->createAt;
         $this->hash = $personalDataAccessRequestData->hash;
         $this->domainId = $personalDataAccessRequestData->domainId;
+        $this->type = $personalDataAccessRequestData->type;
     }
 
     /**
@@ -98,6 +106,14 @@ class PersonalDataAccessRequest
     public function getDomainId()
     {
         return $this->domainId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**

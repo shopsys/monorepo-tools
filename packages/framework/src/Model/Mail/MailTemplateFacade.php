@@ -140,6 +140,14 @@ class MailTemplateFacade
         }
         $allMailTemplatesData->personalDataAccessTemplate = $personalAccessTemplateData;
 
+        $personalRequestTemplateData = new MailTemplateData();
+        $personalRequestTemplate = $this->mailTemplateRepository
+            ->findByNameAndDomainId(MailTemplate::PERSONAL_DATA_EXPORT_NAME, $domainId);
+        if ($personalRequestTemplate !== null) {
+            $personalRequestTemplateData->setFromEntity($personalRequestTemplate);
+        }
+        $allMailTemplatesData->personalDataExportTemplate = $personalRequestTemplateData;
+
         return $allMailTemplatesData;
     }
 

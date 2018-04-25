@@ -4,11 +4,14 @@ namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Response\XmlStreamedResponse;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMailFacade;
+use Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequest;
+use Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactory;
 use Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFacade;
 use Shopsys\ShopBundle\Form\Front\PersonalData\PersonalDataFormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,6 +54,11 @@ class PersonalDataController extends FrontBaseController
      */
     private $personalDataAccessMailFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactory
+     */
+    private $personalDataAccessRequestDataFactory;
+
     public function __construct(
         Setting $setting,
         Domain $domain,
@@ -58,7 +66,8 @@ class PersonalDataController extends FrontBaseController
         OrderFacade $orderFacade,
         NewsletterFacade $newsletterFacade,
         PersonalDataAccessMailFacade $personalDataAccessMailFacade,
-        PersonalDataAccessRequestFacade $personalDataAccessRequestFacade
+        PersonalDataAccessRequestFacade $personalDataAccessRequestFacade,
+        PersonalDataAccessRequestDataFactory $personalDataAccessRequestDataFactory
     ) {
         $this->setting = $setting;
         $this->domain = $domain;
@@ -67,11 +76,16 @@ class PersonalDataController extends FrontBaseController
         $this->newsletterFacade = $newsletterFacade;
         $this->personalDataAccessMailFacade = $personalDataAccessMailFacade;
         $this->personalDataAccessRequestFacade = $personalDataAccessRequestFacade;
+        $this->personalDataAccessRequestDataFactory = $personalDataAccessRequestDataFactory;
     }
 
     public function indexAction(Request $request)
     {
-        $form = $this->createForm(PersonalDataFormType::class);
+        $form = $this->createForm(
+            PersonalDataFormType::class,
+            $this->personalDataAccessRequestDataFactory->createDefaultForDisplay()
+        );
+
         $form->handleRequest($request);
 
         if ($form->isValid() && $form->isSubmitted()) {
@@ -80,11 +94,41 @@ class PersonalDataController extends FrontBaseController
                 $this->domain->getId()
             );
             $this->personalDataAccessMailFacade->sendMail($personalData);
-            $this->getFlashMessageSender()->addSuccessFlash(t('Email with link to personal data access site was sent'));
+            $this->getFlashMessageSender()->addSuccessFlash(t('Email with link to personal data display page was sent to your email address'));
         }
 
+        $content = $this->setting->getForDomain(Setting::PERSONAL_DATA_DISPLAY_SITE_CONTENT, $this->domain->getId());
+
         return $this->render('@ShopsysShop/Front/Content/PersonalData/index.html.twig', [
-            'personalDataSiteContent' => $this->getPersonalDataSiteContent(),
+            'personalDataSiteContent' => $content,
+            'title' => t('Personal information overview'),
+            'form' => $form->createView(),
+        ]);
+    }
+
+    public function exportAction(Request $request)
+    {
+        $form = $this->createForm(
+            PersonalDataFormType::class,
+            $this->personalDataAccessRequestDataFactory->createDefaultForExport()
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isValid() && $form->isSubmitted()) {
+            $personalData = $this->personalDataAccessRequestFacade->createPersonalDataAccessRequest(
+                $form->getData(),
+                $this->domain->getId()
+            );
+            $this->personalDataAccessMailFacade->sendMail($personalData);
+            $this->getFlashMessageSender()->addSuccessFlash(t('Email with link to personal data export page was sent to your email address'));
+        }
+
+        $content = $this->setting->getForDomain(Setting::PERSONAL_DATA_EXPORT_SITE_CONTENT, $this->domain->getId());
+
+        return $this->render('@ShopsysShop/Front/Content/PersonalData/index.html.twig', [
+            'personalDataSiteContent' => $content,
+            'title' => t('Personal information export'),
             'form' => $form->createView(),
         ]);
     }
@@ -92,11 +136,14 @@ class PersonalDataController extends FrontBaseController
     /**
      * @param string $hash
      */
-    public function accessAction($hash)
+    public function accessDisplayAction($hash)
     {
-        $personalDataAccessRequest = $this->personalDataAccessRequestFacade->findEmailByHashAndDomainId($hash, $this->domain->getId());
+        $personalDataAccessRequest = $this->personalDataAccessRequestFacade->findByHashAndDomainId(
+            $hash,
+            $this->domain->getId()
+        );
 
-        if ($personalDataAccessRequest !== null) {
+        if ($personalDataAccessRequest !== null && $personalDataAccessRequest->getType() === PersonalDataAccessRequest::TYPE_DISPLAY) {
             $user = $this->customerFacade->findUserByEmailAndDomain(
                 $personalDataAccessRequest->getEmail(),
                 $this->domain->getId()
@@ -122,10 +169,79 @@ class PersonalDataController extends FrontBaseController
     }
 
     /**
-     * @return string|null
+     * @param $hash
      */
-    private function getPersonalDataSiteContent()
+    public function accessExportAction($hash)
     {
-        return $this->setting->getForDomain(Setting::PERSONAL_DATA_SITE_CONTENT, $this->domain->getId());
+        $personalDataAccessRequest = $this->personalDataAccessRequestFacade->findByHashAndDomainId(
+            $hash,
+            $this->domain->getId()
+        );
+
+        if ($personalDataAccessRequest !== null && $personalDataAccessRequest->getType() === PersonalDataAccessRequest::TYPE_EXPORT) {
+            $user = $this->customerFacade->findUserByEmailAndDomain($personalDataAccessRequest->getEmail(), $this->domain->getId());
+
+            $newsletterSubscriber = $this->newsletterFacade->findNewsletterSubscriberByEmailAndDomainId(
+                $personalDataAccessRequest->getEmail(),
+                $this->domain->getId()
+            );
+
+            $ordersCount = $this->orderFacade->getOrdersCountByEmailAndDomainId(
+                $personalDataAccessRequest->getEmail(),
+                $this->domain->getId()
+            );
+
+            return $this->render('@ShopsysShop/Front/Content/PersonalData/export.html.twig', [
+                'personalDataAccessRequest' => $personalDataAccessRequest,
+                'domainName' => $this->domain->getName(),
+                'hash' => $hash,
+                'user' => $user,
+                'newsletterSubscriber' => $newsletterSubscriber,
+                'ordersCount' => $ordersCount,
+            ]);
+        }
+
+        throw new NotFoundHttpException();
+    }
+
+    /**
+     * @param $hash
+     */
+    public function exportXmlAction($hash)
+    {
+        $personalDataAccessRequest = $this->personalDataAccessRequestFacade->findByHashAndDomainId(
+            $hash,
+            $this->domain->getId()
+        );
+
+        if ($personalDataAccessRequest !== null && $personalDataAccessRequest->getType() === PersonalDataAccessRequest::TYPE_EXPORT) {
+            $user = $this->customerFacade->findUserByEmailAndDomain(
+                $personalDataAccessRequest->getEmail(),
+                $this->domain->getId()
+            );
+
+            $orders = $this->orderFacade->getOrderListForEmailByDomainId(
+                $personalDataAccessRequest->getEmail(),
+                $this->domain->getId()
+            );
+
+            $newsletterSubscriber = $this->newsletterFacade->findNewsletterSubscriberByEmailAndDomainId(
+                $personalDataAccessRequest->getEmail(),
+                $this->domain->getId()
+            );
+
+            $xmlContent = $this->render('@ShopsysShop/Front/Content/PersonalData/export.xml.twig', [
+                'user' => $user,
+                'newsletterSubscriber' => $newsletterSubscriber,
+                'orders' => $orders,
+
+            ])->getContent();
+
+            $response = new XmlStreamedResponse($xmlContent, $personalDataAccessRequest->getEmail() . '.xml');
+
+            return $response;
+        }
+
+        throw new NotFoundHttpException();
     }
 }

@@ -559,6 +559,12 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
+msgid "Country code"
+msgstr ""
+
+msgid "Country code in ISO 3166-1 alpha-2"
+msgstr ""
+
 msgid "Create"
 msgstr ""
 
@@ -1477,13 +1483,16 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-msgid "Link to the display personal information"
-msgstr ""
-
 msgid "Link to the log in page"
 msgstr ""
 
 msgid "Link to the overview of brands"
+msgstr ""
+
+msgid "Link to the personal information export"
+msgstr ""
+
+msgid "Link to the personal information overview"
 msgstr ""
 
 msgid "List of products in order (name, quantity, price per unit including VAT, total price per item including VAT)"
@@ -1906,10 +1915,10 @@ msgstr ""
 msgid "Personal data access"
 msgstr ""
 
-msgid "Personal data request"
+msgid "Personal data site content updated successfully"
 msgstr ""
 
-msgid "Personal data site content updated successfully"
+msgid "Personal information export"
 msgstr ""
 
 msgid "Personal information overview"

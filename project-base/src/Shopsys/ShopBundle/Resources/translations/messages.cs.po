@@ -85,6 +85,9 @@ msgstr "Město"
 msgid "Clear filter"
 msgstr "Vynulovat filtr"
 
+msgid "Clicking on the link below you can download in XML format your personal information, which we have in evidence in our online store %domain%."
+msgstr "Klikem na tlačítko níže si ve formátu XML můžete stáhnout údaje, které k Vašemu e-mailu evidujeme na našem internetovém obchodu %domain%."
+
 msgid "Close"
 msgstr "Zavřít"
 
@@ -157,14 +160,20 @@ msgstr "Chcete dostávat nejnovější informace z našeho obchodu? Přihlašte 
 msgid "Download"
 msgstr "Stáhnout"
 
+msgid "Download the personal information"
+msgstr "Stáhnout zákaznické údaje"
+
 msgid "E-mail"
 msgstr "E-mail"
 
 msgid "EAN"
 msgstr "EAN"
 
-msgid "Email with link to personal data access site was sent"
-msgstr "E-mail s odkazem na stránku s osobními údaji byl odeslán"
+msgid "Email with link to personal data display page was sent to your email address"
+msgstr "E-mail s odkazem na stránku s údaji o osobních údajích byl odeslán na vaši e-mailovou adresu"
+
+msgid "Email with link to personal data export page was sent to your email address"
+msgstr "E-mail s odkazem na stránku exportu osobních údajů byl odeslán na vaši e-mailovou adresu"
 
 msgid "Empty cart"
 msgstr "Prázdný nákupní košík"
@@ -375,6 +384,9 @@ msgstr "Osobní údaje"
 
 msgid "Personal data of registered customer"
 msgstr "Osobní údaje registrovaného zákazníka"
+
+msgid "Personal information export"
+msgstr "Export zákaznických údajů"
 
 msgid "Personal information overview"
 msgstr "Přehled osobních údajů"

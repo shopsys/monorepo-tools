@@ -60,4 +60,12 @@ front_personal_data:
 
 front_personal_data_access:
   path: /personal-information-overview/{hash}/
-  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:access }
+  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:accessDisplay }
+
+front_personal_data_export:
+  path: /personal-information-export/
+  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:export }
+
+front_personal_data_access_export:
+  path: /personal-information-export/{hash}/
+  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:accessExport }

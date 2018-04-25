@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## Added
+- frontend: added site for requesting personal data export (@stanoMilan)
 
 ### Changed
 - moved constants with types of environment into [shopsys/framework](https://github.com/shopsys/framework) (@PetrHeinz)
@@ -27,9 +29,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Frontend site for requesting personal data information (@stanoMilan)
     - Admin - added email template for personal data request
     - Frontend send email with link to personal data access site 
-- [wip-glassbox-customization.md](https://github.com/shopsys/shopsys/blob/master/docs/wip_glassbox/wip-glassbox-customization.md): new WIP documentation about working with glassbox (@Miroslav-Stopka)
-- docker: [`php-fpm/Dockerfile`](./docker/php-fpm/Dockerfile) added installation of `grunt-cli` to be able to run `grunt watch` (@MattCzerner)
-    - [`docker-compose.yml.dist`](./docker/conf/docker-compose.yml.dist) and [`docker-compose-mac.yml.dist`](./docker/conf/docker-compose-mac.yml.dist): opened port 35729 for livereload, that is used by `grunt watch`
+- [wip-glassbox-customization.md](docs/wip_glassbox/wip-glassbox-customization.md): new WIP documentation about working with glassbox (@Miroslav-Stopka)
+- docker: [`php-fpm/Dockerfile`](docker/php-fpm/Dockerfile) added installation of `grunt-cli` to be able to run `grunt watch` (@MattCzerner)
+    - [`docker-compose.yml.dist`](docker/conf/docker-compose.yml.dist) and [`docker-compose-mac.yml.dist`](docker/conf/docker-compose-mac.yml.dist): opened port 35729 for livereload, that is used by `grunt watch`
 
 ### Changed
 - `JavascriptCompilerService` can now compile javascript from more than one source directory (@MattCzerner)

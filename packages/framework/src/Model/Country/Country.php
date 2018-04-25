@@ -27,6 +27,14 @@ class Country
     protected $name;
 
     /**
+     * Country code in ISO 3166-1 alpha-2
+     * @var string|null
+     *
+     * @ORM\Column(type="string", length=2, nullable=true)
+     */
+    protected $code;
+
+    /**
      * @var int
      *
      * @ORM\Column(type="integer")
@@ -41,6 +49,7 @@ class Country
     {
         $this->name = $countryData->name;
         $this->domainId = $domainId;
+        $this->code = $countryData->code;
     }
 
     /**
@@ -49,6 +58,7 @@ class Country
     public function edit(CountryData $countryData)
     {
         $this->name = $countryData->name;
+        $this->code = $countryData->code;
     }
 
     /**
@@ -73,5 +83,13 @@ class Country
     public function getDomainId()
     {
         return $this->domainId;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 }

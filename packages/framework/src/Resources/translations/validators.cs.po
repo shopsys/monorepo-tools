@@ -22,6 +22,9 @@ msgstr "Koeficient musí být větší než 0"
 msgid "Company name cannot be longer than {{ limit }} characters"
 msgstr "Název firmy nesmí být delší než {{ limit }} znaků"
 
+msgid "Country code cannot be longer than {{ limit }} characters"
+msgstr "Kód země nesmí být delší než {{ limit }} znaků"
+
 msgid "Country name cannot be longer than {{ limit }} characters"
 msgstr "Název státu nesmí být delší než {{ limit }} znaků"
 

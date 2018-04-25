@@ -102,11 +102,27 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
         $mailTemplateData = new MailTemplateData();
         $mailTemplateData->name = MailTemplate::PERSONAL_DATA_ACCESS_NAME;
         $mailTemplateData->sendMail = true;
-        $mailTemplateData->subject = 'Přehled osobních údajů -  {domain}';
-        $mailTemplateData->body = 'Vážený zákazníku, <br /><br />
+        $mailTemplateData->subject = 'Přehled osobních údajů - {domain}';
+        $mailTemplateData->body = 'Vážený zákazníku,<br /><br />
             na základě vašeho zadaného emailu {e-mail}, Vám zasíláme odkaz na zobrazení osobních údajů. Klikem na odkaz níže se dostanete na stránku s <br/>  
             přehledem všech osobních údajů, které k Vašemu e-mailu evidujeme na našem e-shopu {domain}.<br/><br/>
             Pro zobrazení osobních údajů klikněte zde - {url}<br/>
+            Odkaz je platný 24 hodin.<br/><br/>
+            S pozdravem<br/>
+            tým {domain}';
+
+        $this->updateMailTemplate($mailTemplateData);
+
+        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData->name = MailTemplate::PERSONAL_DATA_EXPORT_NAME;
+        $mailTemplateData->sendMail = true;
+        $mailTemplateData->subject = ' Export osobních údajů - {domain}';
+        $mailTemplateData->body = 'Vážený zákazníku,<br/><br/>
+            na základě vašeho zadaného emailu {e-mail}, Vám zasíláme odkaz ke stažení Vašich<br/>
+            údajů evidovaných na našem internetovém obchodě ve strojově čitelném formátu.<br/>
+            Klikem na odkaz se dostanete na stránku s s možností stažení těchto informací, které k<br/>
+            Vašemu e-mailu evidujeme na našem internetovém obchodu {domain}.<br/><br/>
+            Pro přechod na stažení údajů, prosím, klikněte zde - {url}<br/>
             Odkaz je platný 24 hodin.<br/><br/>
             S pozdravem<br/>
             tým {domain}';
