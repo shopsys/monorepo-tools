@@ -5,14 +5,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-## Added
+### Added
 - frontend: added site for requesting personal data export (@stanoMilan)
+- support for [native installation](https://github.com/shopsys/shopsys/blob/master/docs/installation/native-installation.md) of the application (@TomasLudvik)
 
 ### Changed
 - moved constants with types of environment into [shopsys/framework](https://github.com/shopsys/framework) (@PetrHeinz)
     - moved from `\Shopsys\Environment` to `\Shopsys\FrameworkBundle\Component\Environment\EnvironmentType`
 - Dependency Injection strict mode is now enabled (@EdoBarnas)
     - disables autowiring features that were removed in Symfony 4
+
+### Removed
+- support of installation using Docker for Windows 10 Home and lower (@TomasLudvik)
+    - virtualization is extremely slow, native installation has much better results in such case
 
 ### Fixed
 - swiftmailer setting `delivery_address` renamed to `delivery_addresses` as the former does not exist anymore in version 3.* (@vitek-rostislav)
