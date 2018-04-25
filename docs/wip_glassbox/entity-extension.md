@@ -34,6 +34,8 @@ Correct order of relevant Doctrine event subscribers:
 * TranslatableListener (*from [prezent/doctrine-translatable](https://github.com/prezent/doctrine-translatable)*)
 * LoadORMMetadataSubscriber (*from [joschi127/doctrine-entity-override-bundle](https://github.com/joschi127/doctrine-entity-override-bundle)*)
 
+`EntityManagerDecorator` is then responsible for using the extended entities instead of their parents in EntityManager, Repositories and QueryBuilders.
+
 ### EntityExtensionParentMetadataCleanerEventSubscriber
 
 LoadORMMetadataSubscriber (which must be executed as last) turns the parent entities into MappedSuperclass.
@@ -54,6 +56,26 @@ Also, it replaces all associations with parent entities by the extended entities
 It must have low priority so it runs after Gedmo and Prezent extensions.
 Gedmo and Prezent add their own mapping, entity extension must be performed after all metadata are known.
 
+### EntityManagerDecorator
+
+The original `EntityManager` is decorated to use `EntityNameResolver` to resolve extended entities in relevant methods.
+Using inheritance for this purpose was specifically discouraged in the original class annotation.
+Decoration of this class requires to use `EntitiyManagerInterface` as a type-hint instead of just `EntityManager` across the whole application.
+
+It is also responsible for instantiation of QueryBuilders and Repositories, which use the decorated EntityManager.
+
+### EntityExtension\QueryBuilder
+
+The original `QueryBuilder` is extended to use `EntityNameResolver` while adding new DQL parts.
+The overridden method `add()` is used in all other relevant methods, such as `select()`, `from()`, `where()` etc. 
+
+### EntityNameResolver
+
+The sole responsibility of this class is to resolve extended entity names in any variable that is provided using entity extension map.
+It replaces the parent entity name by the extended entity name in strings, arrays and object properties (even private ones using reflection).
+
+The various capabilities of this resolver are best described in its unit test `\Tests\FrameworkBundle\Unit\Component\EntityExtension\EntityNameResolverTest`.
+
 ## OrderItem and true mapped inheritance
 
 ![class inheritance of the OrderItem entity](img/order-item.png)
@@ -66,7 +88,7 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
 ## How can I extend an entity?
 
 As we mentioned in the introduction, there must be only one entity type in the whole system.
-So if we just test now, we will probably meet a couple of errors because repositories, query builders, and new objects use the original entities from the framework.
+So if we just test now, we will probably meet a couple of errors because the original entities are still instantiated in the framework.
 This issue will be addressed in the future, entity extension is a work in progress.
 
 * Create a new entity in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity
@@ -76,4 +98,8 @@ This issue will be addressed in the future, entity extension is a work in progre
   * add it to the configuration parameter `shopsys.entity_extension.map`
   * use the parent entity name as a key and the extended entity name as a value
   * eg. `Shopsys\FrameworkBunde\Model\Product\Product: DreamProject\Model\Product\Product`
-* Now your extended entity should be used instead of the parent entity
+* Now your extended entity is automatically used instead of the parent entity:
+  * in hydrated Doctrine references
+  * in the EntityManager, Repositories and QueryBuilders
+
+*Tip: to see how it works in practice check out `\Tests\ShopBundle\Database\EntityExtension\EntityExtensionTest` that tests end-to-end extensibility of `Product`, `Category` and `OrderItem`.*

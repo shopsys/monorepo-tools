@@ -3,14 +3,14 @@
 namespace Shopsys\MigrationBundle\Component\Doctrine;
 
 use Doctrine\DBAL\Schema\Comparator;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 
 class DatabaseSchemaFacade
 {
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
 
@@ -30,7 +30,7 @@ class DatabaseSchemaFacade
     private $schemaTool;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         SchemaDiffFilter $schemaDiffFilter,
         Comparator $comparator,
         SchemaTool $schemaTool

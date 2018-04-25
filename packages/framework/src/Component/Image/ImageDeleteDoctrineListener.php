@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Image;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -60,9 +60,9 @@ class ImageDeleteDoctrineListener
 
     /**
      * @param object $entity
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      */
-    private function deleteEntityImages($entity, EntityManager $em)
+    private function deleteEntityImages($entity, EntityManagerInterface $em)
     {
         $images = $this->getImageFacade()->getAllImagesByEntity($entity);
         foreach ($images as $image) {

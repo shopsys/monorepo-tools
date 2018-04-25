@@ -11,16 +11,16 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 class EntityExtensionParentMetadataCleanerEventSubscriber implements EventSubscriber
 {
     /**
-     * @var string[]
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
      */
-    protected $entityExtensionParentNames;
+    private $entityNameResolver;
 
     /**
-     * @param string[] $entityExtensionMap
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
      */
-    public function __construct(array $entityExtensionMap)
+    public function __construct(EntityNameResolver $entityNameResolver)
     {
-        $this->entityExtensionParentNames = array_keys($entityExtensionMap);
+        $this->entityNameResolver = $entityNameResolver;
     }
 
     /**
@@ -38,7 +38,7 @@ class EntityExtensionParentMetadataCleanerEventSubscriber implements EventSubscr
     {
         $meta = $eventArgs->getClassMetadata();
         $entityName = $meta->getName();
-        if (in_array($entityName, $this->entityExtensionParentNames, true)) {
+        if ($this->entityNameResolver->resolve($entityName) !== $entityName) {
             $meta->isMappedSuperclass = true;
             $meta->identifier = [];
             $meta->generatorType = ClassMetadataInfo::GENERATOR_TYPE_NONE;

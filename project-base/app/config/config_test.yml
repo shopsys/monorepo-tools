@@ -51,19 +51,3 @@ swiftmailer:
   host: "%test_mailer_host%"
   username: "%test_mailer_user%"
   password: "%test_mailer_password%"
-
-services:
-  Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber:
-    class: Tests\ShopBundle\Database\EntityExtension\OverwritableEntityExtensionParentMetadataCleanerEventSubscriber
-    arguments:
-      - "%shopsys.entity_extension.map%"
-    tags:
-      - { name: doctrine.event_subscriber, priority: 10 }
-
-  joschi127_doctrine_entity_override.event_subscriber.load_orm_metadata:
-    class: Tests\ShopBundle\Database\EntityExtension\OverwritableLoadORMMetadataSubscriber
-    arguments:
-      - "@service_container"
-      - "%shopsys.entity_extension.map%"
-    tags:
-      - { name: doctrine.event_subscriber, priority: -10 }

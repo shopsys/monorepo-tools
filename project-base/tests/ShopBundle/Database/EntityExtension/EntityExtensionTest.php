@@ -6,7 +6,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Tools\SchemaTool;
-use Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
@@ -76,7 +76,7 @@ class EntityExtensionTest extends DatabaseTestCase
             CategoryOneToManyBidirectionalEntity::class,
         ];
 
-        $this->overwriteEntityExtensionEventSubscribers($entityExtensionMap);
+        $this->overwriteEntityExtensionMapInServicesInContainer($entityExtensionMap);
 
         $testEntities = array_merge($newEntities, array_values($entityExtensionMap));
         $metadata = $this->getMetadata($testEntities);
@@ -101,15 +101,15 @@ class EntityExtensionTest extends DatabaseTestCase
     /**
      * @param string[] $entityExtensionMap
      */
-    public function overwriteEntityExtensionEventSubscribers(array $entityExtensionMap): void
+    public function overwriteEntityExtensionMapInServicesInContainer(array $entityExtensionMap): void
     {
         $loadORMMetadataSubscriber = $this->getContainer()->get('joschi127_doctrine_entity_override.event_subscriber.load_orm_metadata');
         /* @var $loadORMMetadataSubscriber \Tests\ShopBundle\Database\EntityExtension\OverwritableLoadORMMetadataSubscriber */
-        $cleanerEventSubscriber = $this->getContainer()->get(EntityExtensionParentMetadataCleanerEventSubscriber::class);
-        /* @var $cleanerEventSubscriber \Tests\ShopBundle\Database\EntityExtension\OverwritableEntityExtensionParentMetadataCleanerEventSubscriber */
+        $entityNameResolver = $this->getContainer()->get(EntityNameResolver::class);
+        /* @var $entityNameResolver \Tests\ShopBundle\Database\EntityExtension\OverwritableEntityNameResolver */
 
         $loadORMMetadataSubscriber->overwriteEntityExtensionMap($entityExtensionMap);
-        $cleanerEventSubscriber->overwriteEntityExtensionMap($entityExtensionMap);
+        $entityNameResolver->overwriteEntityExtensionMap($entityExtensionMap);
     }
 
     /**
@@ -148,6 +148,15 @@ class EntityExtensionTest extends DatabaseTestCase
         $this->doTestExtendedProductPersistence();
         $this->doTestExtendedCategoryPersistence();
         $this->doTestExtendedOrderItemsPersistence();
+
+        $this->doTestExtendedEntityInstantiation(Product::class, ExtendedProduct::class, self::MAIN_PRODUCT_ID);
+        $this->doTestExtendedEntityInstantiation(Category::class, ExtendedCategory::class, self::MAIN_CATEGORY_ID);
+        $this->doTestExtendedEntityInstantiation(OrderItem::class, ExtendedOrderPayment::class, self::ORDER_PAYMENT_ID);
+        $this->doTestExtendedEntityInstantiation(OrderItem::class, ExtendedOrderProduct::class, self::ORDER_PRODUCT_ID);
+        $this->doTestExtendedEntityInstantiation(OrderItem::class, ExtendedOrderTransport::class, self::ORDER_TRANSPORT_ID);
+        $this->doTestExtendedEntityInstantiation(OrderPayment::class, ExtendedOrderPayment::class, self::ORDER_PAYMENT_ID);
+        $this->doTestExtendedEntityInstantiation(OrderProduct::class, ExtendedOrderProduct::class, self::ORDER_PRODUCT_ID);
+        $this->doTestExtendedEntityInstantiation(OrderTransport::class, ExtendedOrderTransport::class, self::ORDER_TRANSPORT_ID);
     }
 
     /**
@@ -486,5 +495,33 @@ class EntityExtensionTest extends DatabaseTestCase
         $result = $query->getSingleResult();
         $this->assertInstanceOf(ExtendedOrderItem::class, $result);
         return $result;
+    }
+
+    /**
+     * @param string $parentEntityName
+     * @param string $extendedEntityName
+     * @param int $entityId
+     */
+    private function doTestExtendedEntityInstantiation(
+        string $parentEntityName,
+        string $extendedEntityName,
+        int $entityId
+    ): void {
+        $repository = $this->em->getRepository($parentEntityName);
+        $this->assertInstanceOf($extendedEntityName, $repository->find($entityId));
+
+        $query = $this->em->createQuery('SELECT x FROM ' . $parentEntityName . ' x WHERE x.id = :id')
+            ->setParameter('id', $entityId);
+        $this->assertInstanceOf($extendedEntityName, $query->getSingleResult());
+
+        $qb = $this->em->createQueryBuilder();
+        $qb->from($parentEntityName, 'x')
+            ->select('x')
+            ->where('x.id = :id')
+            ->setParameter(':id', $entityId);
+        $this->assertInstanceOf($extendedEntityName, $qb->getQuery()->getSingleResult());
+
+        $entity = $this->em->find($parentEntityName, $entityId);
+        $this->assertInstanceOf($extendedEntityName, $entity);
     }
 }

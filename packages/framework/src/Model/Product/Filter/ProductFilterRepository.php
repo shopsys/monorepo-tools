@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
@@ -152,10 +152,10 @@ class ProductFilterRepository
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[] $flags
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getFlagsQueryBuilder(array $flags, EntityManager $em)
+    private function getFlagsQueryBuilder(array $flags, EntityManagerInterface $em)
     {
         $flagsQueryBuilder = $em->createQueryBuilder();
 
@@ -171,10 +171,10 @@ class ProductFilterRepository
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[] $brands
-     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getBrandsQueryBuilder(array $brands, EntityManager $em)
+    private function getBrandsQueryBuilder(array $brands, EntityManagerInterface $em)
     {
         $brandsQueryBuilder = $em->createQueryBuilder();
 

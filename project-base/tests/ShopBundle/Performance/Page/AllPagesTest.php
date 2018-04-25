@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Performance\Page;
 
 use Doctrine\DBAL\Logging\LoggerChain;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
 use Shopsys\HttpSmokeTesting\RequestDataSet;
@@ -274,10 +274,10 @@ class AllPagesTest extends KernelTestCase
     }
 
     /**
-     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
      * @return \Tests\ShopBundle\Performance\Page\PerformanceTestSampleQueryCounter
      */
-    private function injectQueryCounter(EntityManager $entityManager)
+    private function injectQueryCounter(EntityManagerInterface $entityManager)
     {
         $connectionConfiguration = $entityManager->getConnection()->getConfiguration();
         $loggerChain = new LoggerChain();
