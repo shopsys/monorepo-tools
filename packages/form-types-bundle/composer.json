@@ -17,11 +17,15 @@
     },
     "require": {
         "php": "^7.0",
-        "symfony/form": "^3.0",
-        "symfony/framework-bundle": "^3.0",
-        "symfony/translation": "^3.0"
+        "symfony/config": "^3.4",
+        "symfony/dependency-injection": "^3.4",
+        "symfony/form": "^3.4",
+        "symfony/framework-bundle": "^3.4",
+        "symfony/http-kernel": "^3.4",
+        "symfony/options-resolver": "^3.4",
+        "symfony/translation": "^3.4"
     },
     "require-dev": {
-        "shopsys/coding-standards": "3.0.2"
+        "shopsys/coding-standards": "^3.0.2"
     }
 }

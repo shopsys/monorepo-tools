@@ -20,20 +20,40 @@
             "Tests\\ProductFeed\\ZboziBundle\\": "tests/"
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/molaux/PostgreSearchBundle.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/shopsys/doctrine2.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/shopsys/jparser.git"
+        }
+    ],
     "require": {
         "php": "^7.0",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "doctrine/dbal": "^2.7",
+        "doctrine/doctrine-bundle": "^1.8",
+        "doctrine/orm": "dev-doctrine-260-with-ddc1960-hotfix-and-ddc4005-hotfix as 2.6.0",
+        "intaro/postgres-search-bundle": "@dev",
         "shopsys/form-types-bundle": "dev-master",
+        "shopsys/framework": "dev-master",
+        "shopsys/migrations": "dev-master",
         "shopsys/plugin-interface": "dev-master",
         "shopsys/product-feed-interface": "dev-master",
-        "symfony/form": "^3.0",
-        "symfony/framework-bundle": "^3.0",
-        "symfony/translation": "^3.0",
-        "symfony/validator": "^3.0"
+        "symfony/symfony": "^3.4.8",
+        "timwhitlock/jparser": "@dev"
     },
     "require-dev": {
-        "shopsys/coding-standards": "3.0.2",
         "phpunit/phpunit": "^6.0|^7.0",
-        "twig/extensions": "1.3.0",
-        "twig/twig": "1.34.0"
+        "shopsys/coding-standards": "^3.0.2",
+        "twig/extensions": "^1.3",
+        "twig/twig": "^1.34"
     }
 }
