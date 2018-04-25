@@ -23,7 +23,7 @@ Notes:
 - The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`
 
 ### 2. Create docker-compose.yml file
-Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../../project-base/docker/conf/docker-compose.yml.dist).
+Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../project-base/docker/conf/docker-compose.yml.dist).
 
 ```
 copy docker\conf\docker-compose.yml.dist docker-compose.yml
@@ -49,4 +49,4 @@ docker-compose up -d
 ```
 
 ### 6. Setup the application
-[Application setup guide](./installation-using-docker-application-setup.md)
+[Application setup guide](installation-using-docker-application-setup.md)

@@ -10,9 +10,9 @@ Your source code is automatically synchronized between your local machine and Do
 That means that you can normally use your IDE to edit the code while it is running inside a Docker container.
 
 ## Supported systems
-- [Linux](./installation-using-docker-linux.md)
-- [MacOS](./installation-using-docker-macos.md)
-- [Windows 10 Pro and higher](./installation-using-docker-windows-10-pro-higher.md)
+- [Linux](installation-using-docker-linux.md)
+- [MacOS](installation-using-docker-macos.md)
+- [Windows 10 Pro and higher](installation-using-docker-windows-10-pro-higher.md)
 
 ## Other systems
-If your system is not listed above do not worry, you can still [install the application natively](../../introduction/native-installation-guide.md).
+If your system is not listed above do not worry, you can still [install the application natively](native-installation.md).

@@ -106,7 +106,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - `adminer` container uses port 1100 by default (as 1000 is often already in use)
     - Docker Sync is used only in configuration for MacOS as only there it is needed
     - `postgres` container is created with a volume for data persistence (in `var/postgres-data`)
-    - see documentation of [Installation Using Docker](https://github.com/shopsys/shopsys/blob/master/docs/introduction/installation-using-docker.md) for details
+    - see documentation of [Installation Using Docker](https://github.com/shopsys/shopsys/blob/master/docs/installation/installation-using-docker.md) for details
 - default parameters in `parameters.yml.dist` and `parameters_test.yml.dist` are for Docker installation (instead of native) (@MattCzerner)
 - Front/NewsletterController: extracted duplicit rendering and add return typehints (@simara-svatopluk)
 - Symfony updated to version 3.4 (@TomasLudvik)
@@ -193,7 +193,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [coding standards documentation](https://github.com/shopsys/shopsys/blob/master/docs/contributing/coding-standards.md) (@vitek-rostislav)
 - acceptance tests asserting successful image upload in admin for product, transport and payment (@vitek-rostislav)
 - Docker based server stack for easier installation and development (@TomasLudvik)
-    - see [Docker Installation Guide](https://github.com/shopsys/shopsys/blob/master/docs/docker/installation/installation-using-docker.md) for details
+    - see [Installation Using Docker](https://github.com/shopsys/shopsys/blob/master/docs/installation/installation-using-docker.md) for details
 - plugins can now extend the CRUD of categories (using `CategoryFormType`) (@MattCzerner)
 
 ### Changed

@@ -27,7 +27,7 @@ sudo ifconfig lo0 alias 127.0.0.2 up
 ```
 
 ### 2. Create docker-compose.yml file
-Create `docker-compose.yml` from template [`docker-compose-mac.yml.dist`](../../../project-base/docker/conf/docker-compose-mac.yml.dist).
+Create `docker-compose.yml` from template [`docker-compose-mac.yml.dist`](../../project-base/docker/conf/docker-compose-mac.yml.dist).
 ```
 cp docker/conf/docker-compose-mac.yml.dist docker-compose.yml
 ```
@@ -65,4 +65,4 @@ setfacl -dR -m user:100:rX ./web
 ```
 
 ### 5. Setup the application
-[Application setup guide](./installation-using-docker-application-setup.md)
+[Application setup guide](installation-using-docker-application-setup.md)

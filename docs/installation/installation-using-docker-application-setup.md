@@ -1,7 +1,7 @@
 # Installation Using Docker - application setup
 
 This guide expects that you have already set up your Docker environment.
-If you haven't already done that check the [Installation Guide for Docker](./installation-using-docker.md).
+If you haven't already done that check the [Installation Using Docker](installation-using-docker.md).
 
 ## 1. Setup the application
 Now that the Docker environment is prepared we can setup the application itself.
@@ -19,7 +19,7 @@ composer install
 Composer will prompt you to insert token to avoid GitHub API rate limit. You can create this token on `https://github.com/settings/tokens/new`.
 This token is reusable so keep it for further usage.
 
-Composer will prompt you to set parameters ([description of parameters](../../introduction/native-installation-guide.md#2-install-dependencies-and-configure-parameters)).
+Composer will prompt you to set parameters ([description of parameters](native-installation.md#2-install-dependencies-and-configure-parameters)).
 The default parameters suggested by composer are currently set for application running in Docker so you can just use these.
 
 Only exception is the `secret` parameter - you should input a random string to be used for security purposes.
