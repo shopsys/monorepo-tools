@@ -15,9 +15,10 @@ This solution uses [*docker-sync*](http://docker-sync.io/) (for fast two-way syn
 composer create-project shopsys/project-base --stability=alpha --no-install --keep-vcs
 cd project-base
 ```
-Notes: 
-- The `--no-install` option disables installation of the vendors - this will be done later in the Docker container
-- The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`
+
+*Note: The `--no-install` option disables installation of the vendors - this will be done later in the Docker container.*
+
+*Note: The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`.*
 
 ### 1.1 Enable second domain (optional)
 There are two domains each for different language in default installation. First one is available via IP adress `127.0.O.1` and second one via `127.0.0.2`.

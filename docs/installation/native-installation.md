@@ -31,8 +31,8 @@ After that, you can follow the steps below in order to install and configure Sho
 composer create-project shopsys/project-base --stability=alpha --keep-vcs
 cd project-base
 ```
-Notes: 
-- The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`
+
+*Note: The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`.*
 
 ### 2. Install dependencies and configure parameters
 Composer will prompt you to set main parameters (`app/config/parameters.yml`):
