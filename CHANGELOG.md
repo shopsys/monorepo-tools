@@ -23,6 +23,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * [shopsys/monorepo-tools](./packages/monorepo-tools/CHANGELOG.md)
 
 ## [Unreleased]
+### Changed
+- all installation guides verified and tweaked (@TomasLudvik)
+    - Docker installation supported on Linux, MacOS and Windows 10 Pro and higher (recommended way of installing the application)
+    - native installation is also supported (recommended on Windows 10 Home and lower)
 
 ## 7.0.0-alpha1 - 2018-04-12
 ### Added

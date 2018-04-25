@@ -2,6 +2,8 @@
 
 ## Requirements
 * [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+* [PHP](http://php.net/manual/en/install.unix.php)
+* [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 * [Docker](https://docs.docker.com/engine/installation/)
 
 ## Steps
@@ -10,12 +12,13 @@
 composer create-project shopsys/project-base --stability=alpha --no-install --keep-vcs
 cd project-base
 ```
-Notes: 
-- The `--no-install` option disables installation of the vendors - this will be done later in the Docker container
-- If you want to keep the GIT history of `shopsys/project-base` in your new project, use the `--keep-vcs` option
+
+*Note: The `--no-install` option disables installation of the vendors - this will be done later in the Docker container.*
+
+*Note: The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`.*
  
 ### 2. Create docker-compose.yml file
-Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../../project-base/docker/conf/docker-compose.yml.dist).
+Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../project-base/docker/conf/docker-compose.yml.dist).
 ```
 cp docker/conf/docker-compose.yml.dist docker-compose.yml
 ```
@@ -61,4 +64,4 @@ setfacl -dR -m user:100:rX ./web
 ```
 
 ### 5. Setup the application
-[Application setup guide](./installation-using-docker-application-setup.md)
+[Application setup guide](installation-using-docker-application-setup.md)

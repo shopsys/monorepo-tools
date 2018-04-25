@@ -24,15 +24,19 @@ ENV LC_ALL=en_US.utf8 LANG=en_US.utf8 LANGUAGE=en_US.utf8
 # Install required PHP extensions
 RUN apt-get update && apt-get -y --no-install-recommends install \
         php7.2-bcmath \
+        php7.2-ctype \
         php7.2-curl \
         php7.2-fpm \
         php7.2-gd \
+        php7.2-iconv \
         php7.2-intl \
         php7.2-json \
         php7.2-mbstring \
         php7.2-opcache \
+        php7.2-pdo \
         php7.2-pgsql \
         php7.2-redis \
+        php7.2-simplexml \
         php7.2-soap \
         php7.2-xml \
         php7.2-zip

@@ -14,8 +14,8 @@ For the purposes of building the new project use our [shopsys/project-base](http
 
 For more detailed instructions, follow one of the installation guides:
 
-* [Installation via Docker (recommended)](https://github.com/shopsys/shopsys/blob/master/docs/docker/installation/installation-using-docker.md)
-* [Native installation](https://github.com/shopsys/shopsys/blob/master/docs/introduction/installation-guide.md)
+* [Installation via Docker (recommended)](https://github.com/shopsys/shopsys/blob/master/docs/installation/installation-using-docker.md)
+* [Native installation](https://github.com/shopsys/shopsys/blob/master/docs/installation/native-installation.md)
 
 ## Documentation
 For documentation of Shopsys Framework itself see [Shopsys Framework Knowledge Base](https://github.com/shopsys/shopsys/blob/master/docs/index.md).

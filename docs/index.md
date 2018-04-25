@@ -1,7 +1,7 @@
 # Shopsys Framework Knowledge Base
 
 ## Introduction
-* [Installation Guide](./introduction/installation-guide.md) and [Installation Using Docker](./docker/installation/installation-using-docker.md)
+* [Installation Using Docker](installation/installation-using-docker.md) and [Native Installation](installation/native-installation.md)
 * [Phing Targets](./introduction/phing-targets.md)
 * [Automated Testing](./introduction/automated-testing.md)
 * [Basics About Model Architecture](./introduction/basics-about-model-architecture.md)

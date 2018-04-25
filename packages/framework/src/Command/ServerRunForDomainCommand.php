@@ -105,7 +105,7 @@ class ServerRunForDomainCommand extends Command
         $command = $this->getApplication()->find('server:run');
 
         $url = $domainConfig->getUrl();
-        $commandInput = new ArrayInput(['address' => preg_replace('~^https?://~', '', $url)]);
+        $commandInput = new ArrayInput(['addressport' => preg_replace('~^https?://~', '', $url)]);
 
         return $command->run($commandInput, $output);
     }

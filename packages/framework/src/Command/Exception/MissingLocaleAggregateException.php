@@ -18,7 +18,7 @@ class MissingLocaleAggregateException extends Exception
 
         $message = sprintf(
             'It looks like your operating system does not support these locales: %s. '
-                . 'Please visit docs/introduction/installation-guide.md for more details.',
+                . 'Please visit docs/installation/native-installation.md#troubleshooting for more details.',
             '"' . implode('", "', $missingLocales) . '"'
         );
 
