@@ -15,7 +15,7 @@ services:
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\CollectionType }
 
-  Shopsys\FrameworkBundle\Form\FormGroup:
+  Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension:
     class: Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
