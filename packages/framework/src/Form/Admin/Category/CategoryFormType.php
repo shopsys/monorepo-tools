@@ -8,8 +8,8 @@ use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Form\DomainsType;
-use Shopsys\FrameworkBundle\Form\FileUploadType;
 use Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\InvertChoiceTypeExtension;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
 use Shopsys\FrameworkBundle\Form\UrlListType;
@@ -224,22 +224,8 @@ class CategoryFormType extends AbstractType
             'label' => t('Image'),
         ]);
 
-        if ($options['scenario'] === self::SCENARIO_EDIT) {
-            $builderImageGroup
-                ->add('image_preview', FormType::class, [
-                    'data' => $options['category'],
-                    'mapped' => false,
-                    'required' => false,
-                    'label' => t('Image'),
-                    'image_preview' => [
-                        'size' => 'original',
-                        'height' => 100,
-                    ],
-                ]);
-        }
-
         $builderImageGroup
-            ->add('image', FileUploadType::class, [
+            ->add('image', ImageUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
                     new Constraints\Image([
@@ -251,6 +237,7 @@ class CategoryFormType extends AbstractType
                     ]),
                 ],
                 'label' => t('Upload image'),
+                'image_or_entity' => $options['category'],
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
 

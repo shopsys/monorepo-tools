@@ -5,9 +5,10 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Transport;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\FrameworkBundle\Form\DomainsType;
-use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -68,8 +69,9 @@ class TransportFormType extends AbstractType
                 'required' => false,
                 'entry_type' => CKEditorType::class,
             ])
-            ->add('image', FileUploadType::class, [
+            ->add('image', ImageUploadType::class, [
                 'required' => false,
+                'label' => t('Upload image'),
                 'file_constraints' => [
                     new Constraints\Image([
                         'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
@@ -79,6 +81,7 @@ class TransportFormType extends AbstractType
                             . 'Maximum size of an image is {{ limit }} {{ suffix }}.',
                     ]),
                 ],
+                'image_or_entity' => $options['transport'],
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
     }
@@ -88,9 +91,11 @@ class TransportFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => TransportData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver->setRequired('transport')
+            ->setAllowedTypes('transport', [Transport::class, 'null'])
+            ->setDefaults([
+                'data_class' => TransportData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

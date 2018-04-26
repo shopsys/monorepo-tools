@@ -185,6 +185,7 @@ twig:
     - '@ShopsysFramework/Common/Form/theme.html.twig'
     - '@ShopsysFramework/Admin/Form/colorpickerFields.html.twig'
     - '@ShopsysFramework/Admin/Form/fileuploadFields.html.twig'
+    - '@ShopsysFramework/Admin/Form/imageuploadFields.html.twig'
   strict_variables: true
   globals:
     globalMultipleFormSetting: '@Shopsys\FrameworkBundle\Component\Form\MultipleFormSetting'

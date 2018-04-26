@@ -71,7 +71,9 @@ class TransportController extends AdminBaseController
     {
         $transportEditData = $this->transportEditDataFactory->createDefault();
 
-        $form = $this->createForm(TransportEditFormType::class, $transportEditData);
+        $form = $this->createForm(TransportEditFormType::class, $transportEditData, [
+            'transport_detail' => null,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -105,9 +107,12 @@ class TransportController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $transport = $this->transportFacade->getById($id);
+        $transportDetail = $this->transportDetailFactory->createDetailForTransportWithIndependentPrices($transport);
         $transportEditData = $this->transportEditDataFactory->createFromTransport($transport);
 
-        $form = $this->createForm(TransportEditFormType::class, $transportEditData);
+        $form = $this->createForm(TransportEditFormType::class, $transportEditData, [
+            'transport_detail' => $transportDetail,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -131,7 +136,7 @@ class TransportController extends AdminBaseController
 
         return $this->render('@ShopsysFramework/Admin/Content/Transport/edit.html.twig', [
             'form' => $form->createView(),
-            'transportDetail' => $this->transportDetailFactory->createDetailForTransportWithIndependentPrices($transport),
+            'transportDetail' => $transportDetail,
             'currencies' => $this->currencyFacade->getAllIndexedById(),
         ]);
     }

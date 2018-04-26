@@ -183,7 +183,7 @@
             value = this.getMappedValue(element);
         } else if (
             element.type === Shopsys.constant('\\Symfony\\Component\\Form\\Extension\\Core\\Type\\CollectionType::class')
-            || (Object.keys(element.children).length > 0 && element.type !== Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\FileUploadType::class'))
+            || (Object.keys(element.children).length > 0 && element.type !== Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\FileUploadType::class') && element.type !== Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\ImageUploadType::class'))
         ) {
             value = {};
             for (var childName in element.children) {
@@ -205,7 +205,7 @@
         if (element.type === Shopsys.constant('\\Ivory\\CKEditorBundle\\Form\\Type\\CKEditorType::class')) {
             return CKEDITOR.instances[element.id].getData();
         }
-        if (element.type === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\FileUploadType::class')) {
+        if (element.type === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\FileUploadType::class') || element.type === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\ImageUploadType::class')) {
             return $(element.domNode).find('.js-file-upload-uploaded-file').toArray();
         }
         if (element.type === Shopsys.constant('\\Shopsys\\FrameworkBundle\\Form\\ProductsType::class')) {

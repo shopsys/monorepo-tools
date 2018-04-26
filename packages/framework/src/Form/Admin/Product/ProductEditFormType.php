@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Component\Transformers\ImagesIdsToImagesTransformer;
 use Shopsys\FrameworkBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use Shopsys\FrameworkBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType;
-use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\ProductsType;
 use Shopsys\FrameworkBundle\Form\UrlListType;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
@@ -136,7 +136,7 @@ class ProductEditFormType extends AbstractType
 
         $builder
             ->add('productData', ProductFormType::class, ['product' => $editedProduct])
-            ->add('imagesToUpload', FileUploadType::class, [
+            ->add('imagesToUpload', ImageUploadType::class, [
                 'required' => false,
                 'multiple' => true,
                 'file_constraints' => [

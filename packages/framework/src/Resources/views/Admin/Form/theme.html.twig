@@ -70,9 +70,6 @@
             {{ form_errors(form) }}
             {{ form_label(form, label) }}
         {% endif %}
-        {% if form.vars.image_preview is not null %}
-            {{ image(form.vars.data, { size: form.vars.image_preview.size, height: form.vars.image_preview.height }) }}
-        {% endif %}
         {{ form_widget(form) }}
         {% if disabledField is defined %}
             <span class="form-disabled {{ disabledField.class }} js-tooltip" data-toggle="tooltip" data-placement="{{ disabledField.placement|default('right') }}"

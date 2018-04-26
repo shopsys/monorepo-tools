@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Advert;
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Form\DomainType;
-use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Advert\Advert;
 use Shopsys\FrameworkBundle\Model\Advert\AdvertData;
@@ -155,22 +155,8 @@ class AdvertFormType extends AbstractType
                 'label' => t('Link'),
             ]);
 
-        if ($options['scenario'] === self::SCENARIO_EDIT) {
-            $builderImageGroup
-                ->add('image_preview', FormType::class, [
-                    'data' => $options['advert'],
-                    'mapped' => false,
-                    'required' => false,
-                    'label' => t('Image'),
-                    'image_preview' => [
-                        'size' => 'original',
-                        'height' => 100,
-                    ],
-                ]);
-        }
-
         $builderImageGroup
-            ->add('image', FileUploadType::class, [
+            ->add('image', ImageUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
                     new Constraints\Image([
@@ -183,6 +169,7 @@ class AdvertFormType extends AbstractType
                 ],
                 'constraints' => ($options['image_exists'] ? [] : $imageConstraints),
                 'label' => t('Upload new image'),
+                'image_or_entity' => $options['advert'],
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
 

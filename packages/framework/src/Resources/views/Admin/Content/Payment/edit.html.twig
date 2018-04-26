@@ -35,16 +35,3 @@
         {% endfor %}
     </div>
 {% endblock %}
-
-{% block image %}
-    <div class="form-line">
-        <label class="form-line__label">
-            {{ 'Image'|trans }}:
-        </label>
-        <div class="form-line__side">
-            <div class="form-line__item">
-                {{ image(paymentDetail.payment, { size: 'original', height: 100 }) }}
-            </div>
-        </div>
-    </div>
-{% endblock %}

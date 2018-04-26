@@ -26,7 +26,6 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
         $view->vars['display_format'] = $options['display_format'];
         $view->vars['js_container'] = $options['js_container'];
         $view->vars['is_plugin_data_group'] = $options['is_plugin_data_group'];
-        $view->vars['image_preview'] = $options['image_preview'];
         $view->vars['is_group_container_to_render_as_the_last_one'] = $options['is_group_container_to_render_as_the_last_one'];
     }
     /**
@@ -43,7 +42,6 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
                 'display_format' => null,
                 'js_container' => null,
                 'is_plugin_data_group' => false,
-                'image_preview' => null,
                 'is_group_container_to_render_as_the_last_one' => false,
             ]);
     }

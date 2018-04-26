@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Domain;
 
-use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,7 +20,7 @@ class DomainFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(self::FIELD_ICON, FileUploadType::class, [
+            ->add(self::FIELD_ICON, ImageUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
                     new Constraints\Image([

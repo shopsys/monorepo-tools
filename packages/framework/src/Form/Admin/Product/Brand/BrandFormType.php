@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Form\Admin\Product\Brand;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
 use Shopsys\FrameworkBundle\Form\UrlListType;
 use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
@@ -38,7 +38,7 @@ class BrandFormType extends AbstractType
                 'route_name' => 'front_brand_detail',
                 'entity_id' => $options['brand'] !== null ? $options['brand']->getId() : null,
             ])
-            ->add('image', FileUploadType::class, [
+            ->add('image', ImageUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
                     new Constraints\Image([
@@ -49,6 +49,7 @@ class BrandFormType extends AbstractType
                             . 'Maximum size of an image is {{ limit }} {{ suffix }}.',
                     ]),
                 ],
+                'image_or_entity' => $options['brand'],
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
     }

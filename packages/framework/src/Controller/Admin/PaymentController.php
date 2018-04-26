@@ -71,7 +71,9 @@ class PaymentController extends AdminBaseController
     {
         $paymentEditData = $this->paymentEditDataFactory->createDefault();
 
-        $form = $this->createForm(PaymentEditFormType::class, $paymentEditData);
+        $form = $this->createForm(PaymentEditFormType::class, $paymentEditData, [
+            'payment_detail' => null,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -106,8 +108,11 @@ class PaymentController extends AdminBaseController
     {
         $payment = $this->paymentFacade->getById($id);
         $paymentEditData = $this->paymentEditDataFactory->createFromPayment($payment);
+        $paymentDetail = $this->paymentDetailFactory->createDetailForPayment($payment);
 
-        $form = $this->createForm(PaymentEditFormType::class, $paymentEditData);
+        $form = $this->createForm(PaymentEditFormType::class, $paymentEditData, [
+            'payment_detail' => $paymentDetail,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -131,7 +136,7 @@ class PaymentController extends AdminBaseController
 
         return $this->render('@ShopsysFramework/Admin/Content/Payment/edit.html.twig', [
             'form' => $form->createView(),
-            'paymentDetail' => $this->paymentDetailFactory->createDetailForPayment($payment),
+            'paymentDetail' => $paymentDetail,
             'currencies' => $this->currencyFacade->getAllIndexedById(),
         ]);
     }

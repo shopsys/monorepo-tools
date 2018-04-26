@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Slider;
 
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\FrameworkBundle\Form\DomainType;
-use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Model\Slider\SliderItem;
 use Shopsys\FrameworkBundle\Model\Slider\SliderItemData;
 use Symfony\Component\Form\AbstractType;
@@ -100,22 +100,8 @@ class SliderItemFormType extends AbstractType
             'label' => t('Image'),
         ]);
 
-        if ($options['scenario'] === self::SCENARIO_EDIT) {
-            $builderImageGroup
-                ->add('image_preview', FormType::class, [
-                    'data' => $options['slider_item'],
-                    'mapped' => false,
-                    'required' => false,
-                    'label' => t('Image'),
-                    'image_preview' => [
-                        'size' => 'original',
-                        'height' => 100,
-                    ],
-                ]);
-        }
-
         $builderImageGroup
-            ->add('image', FileUploadType::class, [
+            ->add('image', ImageUploadType::class, [
                 'required' => $options['scenario'] === self::SCENARIO_CREATE,
                 'constraints' => $imageConstraints,
                 'file_constraints' => [
@@ -128,6 +114,7 @@ class SliderItemFormType extends AbstractType
                     ]),
                 ],
                 'label' => t('Upload image'),
+                'image_or_entity' => $options['slider_item'],
                 'info_text' => t('You can upload following formats: PNG, JPG'),
             ]);
 

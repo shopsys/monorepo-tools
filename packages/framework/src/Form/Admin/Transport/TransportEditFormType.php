@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Form\Admin\Transport;
 
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\FrameworkBundle\Model\Transport\Detail\TransportDetail;
 use Shopsys\FrameworkBundle\Model\Transport\TransportEditData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -29,8 +30,13 @@ class TransportEditFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $transportDetail = $options['transport_detail'];
+        /* @var $transportDetail \Shopsys\FrameworkBundle\Model\Transport\Detail\TransportDetail */
+
         $builder
-            ->add('transportData', TransportFormType::class)
+            ->add('transportData', TransportFormType::class, [
+                'transport' => $transportDetail !== null ? $transportDetail->getTransport() : null,
+            ])
             ->add($this->getPricesBuilder($builder))
             ->add('save', SubmitType::class);
     }
@@ -70,9 +76,11 @@ class TransportEditFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => TransportEditData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver->setRequired('transport_detail')
+            ->setAllowedTypes('transport_detail', [TransportDetail::class, 'null'])
+            ->setDefaults([
+                'data_class' => TransportEditData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }
