@@ -39,13 +39,13 @@ class ImageUploadType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => ImageUploadData::class,
-            'image_or_entity' => null,
+            'entity' => null,
         ]);
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['image_or_entity'] = $options['image_or_entity'];
+        $view->vars['entity'] = $options['entity'];
         $view->vars['multiple'] = $options['multiple'];
         $view->vars['images_by_id'] = $this->getImagesIndexedById($options);
     }
@@ -78,11 +78,11 @@ class ImageUploadType extends AbstractType
      */
     private function getImagesIndexedById(array $options)
     {
-        if ($options['image_or_entity'] === null) {
+        if ($options['entity'] === null) {
             return [];
         }
 
-        return $this->imageFacade->getImagesByEntityIndexedById($options['image_or_entity'], null);
+        return $this->imageFacade->getImagesByEntityIndexedById($options['entity'], null);
     }
 
     /**

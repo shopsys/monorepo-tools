@@ -237,7 +237,7 @@ class CategoryFormType extends AbstractType
                     ]),
                 ],
                 'label' => t('Upload image'),
-                'image_or_entity' => $options['category'],
+                'entity' => $options['category'],
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
 

@@ -1,5 +1,5 @@
 {% block image_upload_row %}
-    {% if image_or_entity is not null %}
+    {% if entity is not null %}
         {% if multiple %}
             {% if form.orderedImages|length > 0 %}
                 <div class="list-images__wrap">
@@ -45,7 +45,7 @@
                 </label>
                 <div class="form-line__side">
                     <div class="form-line__item">
-                        {{ image(image_or_entity, { size: 'original', height: 100 }) }}
+                        {{ image(entity, { size: 'original', height: 100 }) }}
                     </div>
                 </div>
             </div>

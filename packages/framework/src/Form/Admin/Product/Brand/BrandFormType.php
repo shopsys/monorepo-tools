@@ -49,7 +49,7 @@ class BrandFormType extends AbstractType
                             . 'Maximum size of an image is {{ limit }} {{ suffix }}.',
                     ]),
                 ],
-                'image_or_entity' => $options['brand'],
+                'entity' => $options['brand'],
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
     }

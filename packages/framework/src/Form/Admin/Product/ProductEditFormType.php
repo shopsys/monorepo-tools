@@ -124,7 +124,7 @@ class ProductEditFormType extends AbstractType
                             . 'Maximum size of an image is {{ limit }} {{ suffix }}.',
                     ]),
                 ],
-                'image_or_entity' => $options['product'],
+                'entity' => $options['product'],
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ])
             ->add($builder->create('parameters', CollectionType::class, [
