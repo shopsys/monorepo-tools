@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Advert;
 
+use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
+
 class AdvertData
 {
     /**
@@ -35,7 +37,7 @@ class AdvertData
     public $hidden;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData
      */
     public $image;
 
@@ -44,31 +46,10 @@ class AdvertData
      */
     public $domainId;
 
-    /**
-     * @param string|null $name
-     * @param string|null $type
-     * @param string|null $code
-     * @param string|null $link
-     * @param string|null $positionName
-     * @param bool $hidden
-     * @param int|null $domainId
-     */
-    public function __construct(
-        $name = null,
-        $type = null,
-        $code = null,
-        $link = null,
-        $positionName = null,
-        $hidden = false,
-        $domainId = null
-    ) {
-        $this->name = $name;
-        $this->type = $type;
-        $this->code = $code;
-        $this->link = $link;
-        $this->positionName = $positionName;
-        $this->hidden = $hidden;
-        $this->domainId = $domainId;
+    public function __construct()
+    {
+        $this->hidden = false;
+        $this->image = new ImageUploadData();
     }
 
     /**

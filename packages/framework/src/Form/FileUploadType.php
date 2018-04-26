@@ -72,10 +72,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
      */
     public function transform($value)
     {
-        return [
-            'uploadedFiles' => (array)$value,
-            'file' => null,
-        ];
+        return ['uploadedFiles' => (array)$value];
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
@@ -108,6 +105,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
             ])
             ->add('file', FileType::class, [
                 'multiple' => $options['multiple'],
+                'mapped' => false,
             ]);
 
         // fallback for IE9 and older

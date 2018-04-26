@@ -123,7 +123,7 @@ class CategoryFacade
         $this->createCategoryDomains($category, $this->domain->getAll());
         $this->refreshCategoryDomains($category, $categoryData);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
-        $this->imageFacade->uploadImage($category, $categoryData->image, null);
+        $this->imageFacade->uploadImage($category, $categoryData->image->uploadedFiles, null);
 
         $this->pluginCrudExtensionFacade->saveAllData('category', $category->getId(), $categoryData->pluginData);
 
@@ -146,7 +146,7 @@ class CategoryFacade
         $this->refreshCategoryDomains($category, $categoryData);
         $this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
-        $this->imageFacade->uploadImage($category, $categoryData->image, null);
+        $this->imageFacade->uploadImage($category, $categoryData->image->uploadedFiles, null);
 
         $this->pluginCrudExtensionFacade->saveAllData('category', $category->getId(), $categoryData->pluginData);
 

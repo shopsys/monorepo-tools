@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Category;
 
+use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
 use Shopsys\FrameworkBundle\Form\UrlListData;
 
 class CategoryData
@@ -47,7 +48,7 @@ class CategoryData
     public $urls;
 
     /**
-     * @var string[]
+     * @var \Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData
      */
     public $image;
 
@@ -65,7 +66,7 @@ class CategoryData
         $this->descriptions = [];
         $this->hiddenOnDomains = [];
         $this->urls = new UrlListData();
-        $this->image = [];
+        $this->image = new ImageUploadData();
         $this->pluginData = [];
     }
 

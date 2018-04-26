@@ -2,6 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Slider;
 
+use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
+
 class SliderItemData
 {
     /**
@@ -15,7 +17,7 @@ class SliderItemData
     public $link;
 
     /**
-     * @var string|null
+     * @var \Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData
      */
     public $image;
 
@@ -29,25 +31,10 @@ class SliderItemData
      */
     public $domainId;
 
-    /**
-     * @param string|null $name
-     * @param string|null $link
-     * @param string|null $image
-     * @param bool $hidden
-     * @param int|null $domainId
-     */
-    public function __construct(
-        $name = null,
-        $link = null,
-        $image = null,
-        $hidden = false,
-        $domainId = null
-    ) {
-        $this->name = $name;
-        $this->link = $link;
-        $this->image = $image;
-        $this->hidden = $hidden;
-        $this->domainId = $domainId;
+    public function __construct()
+    {
+        $this->image = new ImageUploadData();
+        $this->hidden = false;
     }
 
     /**

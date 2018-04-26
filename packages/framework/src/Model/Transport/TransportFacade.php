@@ -103,7 +103,7 @@ class TransportFacade
         $this->em->flush();
         $this->updateTransportPrices($transport, $transportEditData->pricesByCurrencyId);
         $this->createTransportDomains($transport, $transportEditData->transportData->domains);
-        $this->imageFacade->uploadImage($transport, $transportEditData->transportData->image, null);
+        $this->imageFacade->uploadImage($transport, $transportEditData->transportData->image->uploadedFiles, null);
         $this->em->flush();
 
         return $transport;
@@ -120,7 +120,7 @@ class TransportFacade
         $this->updateTransportPrices($transport, $transportEditData->pricesByCurrencyId);
         $this->deleteTransportDomainsByTransport($transport);
         $this->createTransportDomains($transport, $transportEditData->transportData->domains);
-        $this->imageFacade->uploadImage($transport, $transportEditData->transportData->image, null);
+        $this->imageFacade->uploadImage($transport, $transportEditData->transportData->image->uploadedFiles, null);
         $this->em->flush();
     }
 

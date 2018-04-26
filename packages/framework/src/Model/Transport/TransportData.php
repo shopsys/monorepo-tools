@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Transport;
 
+use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 
 class TransportData
@@ -32,7 +33,7 @@ class TransportData
     public $hidden;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData
      */
     public $image;
 
@@ -62,6 +63,7 @@ class TransportData
         $this->description = $descriptions;
         $this->instructions = $instructions;
         $this->hidden = $hidden;
+        $this->image = new ImageUploadData();
         $this->domains = $domains;
     }
 

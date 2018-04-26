@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product;
 
+use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
 use Shopsys\FrameworkBundle\Form\UrlListData;
 
 class ProductEditData
@@ -17,9 +18,9 @@ class ProductEditData
     public $parameters;
 
     /**
-     * @var string[]
+     * @var \Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData
      */
-    public $imagesToUpload;
+    public $images;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Image[]
@@ -83,52 +84,28 @@ class ProductEditData
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
-     * @param string[] $imagesToUpload
-     * @param \Shopsys\FrameworkBundle\Component\Image\Image[] $imagesToDelete
-     * @param \Shopsys\FrameworkBundle\Component\Image\Image[] $orderedImagesById
-     * @param string[] $manualInputPricesByPricingGroupId
-     * @param string[]|null[] $seoTitles
-     * @param string[]|null[] $seoMetaDescriptions
-     * @param string[]|null[] $descriptions
-     * @param string[]|null[] $shortDescriptions
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $accessories
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $variants
-     * @param string[]|null[] $seoH1s
      */
     public function __construct(
-        ProductData $productData = null,
-        array $parameters = [],
-        array $imagesToUpload = [],
-        array $imagesToDelete = [],
-        array $orderedImagesById = [],
-        array $manualInputPricesByPricingGroupId = [],
-        array $seoTitles = [],
-        array $seoMetaDescriptions = [],
-        array $descriptions = [],
-        array $shortDescriptions = [],
-        array $accessories = [],
-        array $variants = [],
-        array $seoH1s = []
+        ProductData $productData = null
     ) {
         if ($productData !== null) {
             $this->productData = $productData;
         } else {
             $this->productData = new ProductData();
         }
-        $this->parameters = $parameters;
-        $this->imagesToUpload = $imagesToUpload;
-        $this->imagesToDelete = $imagesToDelete;
-        $this->orderedImagesById = $orderedImagesById;
-        $this->manualInputPricesByPricingGroupId = $manualInputPricesByPricingGroupId;
-        $this->seoTitles = $seoTitles;
-        $this->seoMetaDescriptions = $seoMetaDescriptions;
-        $this->descriptions = $descriptions;
-        $this->shortDescriptions = $shortDescriptions;
+        $this->parameters = [];
+        $this->images = new ImageUploadData();
+        $this->imagesToDelete = [];
+        $this->orderedImagesById = [];
+        $this->manualInputPricesByPricingGroupId = [];
+        $this->seoTitles = [];
+        $this->seoMetaDescriptions = [];
+        $this->descriptions = [];
+        $this->shortDescriptions = [];
         $this->urls = new UrlListData();
-        $this->accessories = $accessories;
-        $this->variants = $variants;
-        $this->seoH1s = $seoH1s;
+        $this->accessories = [];
+        $this->variants = [];
+        $this->seoH1s = [];
         $this->pluginData = [];
     }
 }

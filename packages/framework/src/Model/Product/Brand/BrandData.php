@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 
+use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
 use Shopsys\FrameworkBundle\Form\UrlListData;
 
 class BrandData
@@ -12,7 +13,7 @@ class BrandData
     public $name;
 
     /**
-     * @var string[]
+     * @var \Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData
      */
     public $image;
 
@@ -29,7 +30,7 @@ class BrandData
     public function __construct()
     {
         $this->name = '';
-        $this->image = [];
+        $this->image = new ImageUploadData();
         $this->descriptions = [];
         $this->urls = new UrlListData();
     }
