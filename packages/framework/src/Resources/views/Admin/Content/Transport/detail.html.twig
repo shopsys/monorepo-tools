@@ -30,6 +30,7 @@
                 {{ 'Prices'|trans }}
             </div>
             {{ form_row(form.transportData.vat, { label: 'VAT'|trans }) }}
+            {{ form_row(form.pricesByCurrencyId, { label: inputPriceLabel() }) }}
             {% block transport_base_prices %}{% endblock %}
         </div>
 

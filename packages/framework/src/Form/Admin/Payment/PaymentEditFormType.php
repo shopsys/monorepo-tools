@@ -2,15 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Payment;
 
+use Shopsys\FrameworkBundle\Form\PriceTableType;
 use Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetail;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentEditData;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints;
 
 class PaymentEditFormType extends AbstractType
 {
@@ -37,38 +36,11 @@ class PaymentEditFormType extends AbstractType
             ->add('paymentData', PaymentFormType::class, [
                 'payment' => $paymentDetail !== null ? $paymentDetail->getPayment() : null,
             ])
-            ->add($this->getPricesBuilder($builder))
+            ->add('pricesByCurrencyId', PriceTableType::class, [
+                'currencies' => $this->currencyFacade->getAllIndexedById(),
+                'base_prices' => $paymentDetail !== null ? $paymentDetail->getBasePricesByCurrencyId() : [],
+            ])
             ->add('save', SubmitType::class);
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @return \Symfony\Component\Form\FormBuilderInterface
-     */
-    private function getPricesBuilder(FormBuilderInterface $builder)
-    {
-        $pricesBuilder = $builder->create('pricesByCurrencyId', null, [
-            'compound' => true,
-        ]);
-        foreach ($this->currencyFacade->getAll() as $currency) {
-            $pricesBuilder
-                ->add($currency->getId(), MoneyType::class, [
-                    'currency' => false,
-                    'scale' => 6,
-                    'required' => true,
-                    'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
-                    'constraints' => [
-                        new Constraints\NotBlank(['message' => 'Please enter price']),
-                        new Constraints\GreaterThanOrEqual([
-                            'value' => 0,
-                            'message' => 'Price must be greater or equal to {{ compared_value }}',
-                        ]),
-
-                    ],
-                ]);
-        }
-
-        return $pricesBuilder;
     }
 
     /**
