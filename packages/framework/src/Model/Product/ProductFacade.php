@@ -273,9 +273,9 @@ class ProductFacade
         $this->em->flush();
         $this->productHiddenRecalculator->calculateHiddenForProduct($product);
         $this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($product);
-        $this->imageFacade->saveImageOrdering($productEditData->orderedImagesById);
+        $this->imageFacade->saveImageOrdering($productEditData->images->orderedImages);
         $this->imageFacade->uploadImages($product, $productEditData->images->uploadedFiles, null);
-        $this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
+        $this->imageFacade->deleteImages($product, $productEditData->images->imagesToDelete);
         $this->friendlyUrlFacade->saveUrlListFormData('front_product_detail', $product->getId(), $productEditData->urls);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 

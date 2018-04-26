@@ -4,8 +4,8 @@
     Shopsys.productImagesSort = Shopsys.productImagesSort || {};
 
     Shopsys.productImagesSort.init = function () {
-        $('#js-product-images').sortable({
-            handle: '.js-product-images-image-handle',
+        $('.js-image-upload').sortable({
+            handle: '.js-image-upload-image-handle',
             update: Shopsys.formChangeInfo.showInfo
         });
     };

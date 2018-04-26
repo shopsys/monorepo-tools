@@ -23,16 +23,6 @@ class ProductEditData
     public $images;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Image\Image[]
-     */
-    public $imagesToDelete;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\Image\Image[]
-     */
-    public $orderedImagesById;
-
-    /**
      * @var string[]
      */
     public $manualInputPricesByPricingGroupId;
@@ -95,8 +85,6 @@ class ProductEditData
         }
         $this->parameters = [];
         $this->images = new ImageUploadData();
-        $this->imagesToDelete = [];
-        $this->orderedImagesById = [];
         $this->manualInputPricesByPricingGroupId = [];
         $this->seoTitles = [];
         $this->seoMetaDescriptions = [];

@@ -304,12 +304,7 @@
             <div class="form-group__title">
                 {{ 'Images'|trans }}
             </div>
-
-            {% block images %}{% endblock %}
-
-            {{ form_widget(form.imagesToUpload, { attr: { class: 'box-upload--bordered' } }) }}
-            {{ form_errors(form.imagesToUpload) }}
-            {{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
+            {{ form_row(form.images) }}
         </div>
 
         <div class="form-group {% if form.pluginData is not empty %}wrap-border{% endif %}">

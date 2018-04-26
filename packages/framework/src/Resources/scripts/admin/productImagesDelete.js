@@ -5,16 +5,16 @@
 
     Shopsys.productImagesDelete.init = function () {
 
-        $('.js-product-images-image').each(function () {
+        $('.js-image-upload-image').each(function () {
             var $image = $(this);
-            var $imagePreview = $image.find('.js-product-images-preview');
-            var $deleteButton = $image.find('.js-product-images-delete-button');
-            var $revertButton = $image.find('.js-product-images-delete-revert-button');
-            var $deleteInfo = $image.find('.js-product-images-image-overlay');
+            var $imagePreview = $image.find('.js-image-upload-preview');
+            var $deleteButton = $image.find('.js-image-upload-delete-button');
+            var $revertButton = $image.find('.js-image-upload-delete-revert-button');
+            var $deleteInfo = $image.find('.js-image-upload-image-overlay');
             var imageId = $image.data('id');
 
             $deleteButton.bind('click.deleteImage', function () {
-                Shopsys.choiceControl.select('#product_edit_form_imagesToDelete', imageId);
+                Shopsys.choiceControl.select($image.data('delete-input'), imageId);
                 $imagePreview.addClass('list-images__item__in--removed');
                 $deleteButton.hide();
                 $revertButton.show();
@@ -24,7 +24,7 @@
             });
 
             $revertButton.bind('click.deleteImage', function () {
-                Shopsys.choiceControl.deselect('#product_edit_form_imagesToDelete', imageId);
+                Shopsys.choiceControl.deselect($image.data('delete-input'), imageId);
                 $imagePreview.removeClass('list-images__item__in--removed');
                 $deleteButton.show();
                 $revertButton.hide();
@@ -32,7 +32,7 @@
                 return false;
             });
 
-            var imageIds = Shopsys.choiceControl.getSelectedValues('#product_edit_form_imagesToDelete');
+            var imageIds = Shopsys.choiceControl.getSelectedValues($image.data('delete-input'));
             if ($.inArray(imageId, imageIds) !== -1) {
                 $deleteButton.trigger('click.deleteImage');
             }

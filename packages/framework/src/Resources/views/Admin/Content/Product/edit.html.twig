@@ -329,41 +329,6 @@
     {% endif %}
 {% endblock %}
 
-{% block images %}
-    {% if form.orderedImagesById|length > 0 %}
-        <div class="list-images__wrap">
-            <ul class="list-images" id="js-product-images">
-                {% for imageForm in form.orderedImagesById %}
-                    {% set image = productDetail.imagesIndexedById[imageForm.vars.value] %}
-                    <li class="list-images__item js-product-images-image" data-id="{{ image.id }}">
-                        <div class="list-images__item__in">
-                            <div class="list-images__item__image js-product-images-preview">
-                                {{ image(image, {size: 'original', height: '100'}) }}
-                            </div>
-                            <span class="list-images__item__main">
-                                {{ 'Main image'|trans }}
-                            </span>
-                            <button class="js-product-images-delete-button btn-no-style list-images__item__remove" type="button" title="{{ 'Delete'|trans }}">
-                                <i class="svg svg-circle-cross"></i>
-                            </button>
-                            <span class="js-product-images-image-handle list-images__item__move" title="{{ 'Move'|trans }}">
-                                <i class="svg svg-move"></i>
-                            </span>
-                            <button class="btn-no-style js-product-images-delete-revert-button display-none list-images__item__revert" type="button" title="{{ 'Return back'|trans }}">
-                                <i class="svg svg-forward-page"></i>
-                            </button>
-                            <span class="list-images__item__overlay js-product-images-image-overlay">{{ 'Image will be deleted after saving.'|trans }}</span>
-                        </div>
-                        {# Ignore indexes from form definition. Let them reflect new positions. #}
-                        {{ form_widget(imageForm, { full_name: form.orderedImagesById.vars.full_name ~ '[]'}) }}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-    {% do form.orderedImagesById.setRendered %}
-{% endblock %}
-
 {% block product_urls %}
     {{ form_row(form.urls, { label: 'URL settings'|trans }) }}
 {% endblock %}
