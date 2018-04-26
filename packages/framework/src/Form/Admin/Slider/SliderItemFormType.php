@@ -128,6 +128,7 @@ class SliderItemFormType extends AbstractType
                     ]),
                 ],
                 'label' => t('Upload image'),
+                'info_text' => t('You can upload following formats: PNG, JPG'),
             ]);
 
         $builder

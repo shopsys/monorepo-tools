@@ -79,6 +79,7 @@ class TransportFormType extends AbstractType
                             . 'Maximum size of an image is {{ limit }} {{ suffix }}.',
                     ]),
                 ],
+                'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
     }
 

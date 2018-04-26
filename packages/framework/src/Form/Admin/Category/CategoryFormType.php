@@ -251,6 +251,7 @@ class CategoryFormType extends AbstractType
                     ]),
                 ],
                 'label' => t('Upload image'),
+                'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
 
         $builderPluginGroup = $builder->create('plugin', FormType::class, [

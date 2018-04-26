@@ -183,6 +183,7 @@ class AdvertFormType extends AbstractType
                 ],
                 'constraints' => ($options['image_exists'] ? [] : $imageConstraints),
                 'label' => t('Upload new image'),
+                'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
 
         $builder
