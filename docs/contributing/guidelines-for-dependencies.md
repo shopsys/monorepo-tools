@@ -25,7 +25,7 @@ If you add or change any dependency in package or project-base, reapply the chan
 ## How to deal with Shopsys dependencies
 
 If the package or project-base depends on a shopsys package, we declare `dev-master` dependency.
-During the release, we change `dev-master` dependency to released tag like `7.0.0.-alpha1`.
+During the release, we change `dev-master` dependency to released tag like `7.0.0-alpha1`.
 
 ## Exceptions
 
