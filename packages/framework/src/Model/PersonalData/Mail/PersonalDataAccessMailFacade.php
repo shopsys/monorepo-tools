@@ -12,22 +12,22 @@ class PersonalDataAccessMailFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailerService
      */
-    private $mailer;
+    protected $mailer;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
      */
-    private $mailTemplateFacade;
+    protected $mailTemplateFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMail
      */
-    private $personalDataAccessMail;
+    protected $personalDataAccessMail;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataExportMail
      */
-    private $personalDataExportMail;
+    protected $personalDataExportMail;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailer

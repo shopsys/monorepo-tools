@@ -14,42 +14,42 @@ class TransportFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository
      */
-    private $paymentRepository;
+    protected $paymentRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportRepository
      */
-    private $transportRepository;
+    protected $transportRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportVisibilityCalculation
      */
-    private $transportVisibilityCalculation;
+    protected $transportVisibilityCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
-    private $imageFacade;
+    protected $imageFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
-    private $currencyFacade;
+    protected $currencyFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation
      */
-    private $transportPriceCalculation;
+    protected $transportPriceCalculation;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -131,7 +131,7 @@ class TransportFacade
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @param array $domainIds
      */
-    private function createTransportDomains(Transport $transport, array $domainIds)
+    protected function createTransportDomains(Transport $transport, array $domainIds)
     {
         foreach ($domainIds as $domainId) {
             $transportDomain = new TransportDomain($transport, $domainId);
@@ -143,7 +143,7 @@ class TransportFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      */
-    private function deleteTransportDomainsByTransport(Transport $transport)
+    protected function deleteTransportDomainsByTransport(Transport $transport)
     {
         $transportDomains = $this->getTransportDomainsByTransport($transport);
         foreach ($transportDomains as $transportDomain) {
@@ -186,7 +186,7 @@ class TransportFacade
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @param string[] $pricesByCurrencyId
      */
-    private function updateTransportPrices(Transport $transport, $pricesByCurrencyId)
+    protected function updateTransportPrices(Transport $transport, $pricesByCurrencyId)
     {
         foreach ($this->currencyFacade->getAll() as $currency) {
             $price = $pricesByCurrencyId[$currency->getId()];

@@ -9,7 +9,7 @@ class FreeTransportAndPaymentFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
-    private $pricingSetting;
+    protected $pricingSetting;
 
     public function __construct(PricingSetting $pricingSetting)
     {
@@ -58,7 +58,7 @@ class FreeTransportAndPaymentFacade
      * @param int $domainId
      * @return string
      */
-    private function getFreeTransportAndPaymentPriceLimitOnDomain($domainId)
+    protected function getFreeTransportAndPaymentPriceLimitOnDomain($domainId)
     {
         return $this->pricingSetting->getFreeTransportAndPaymentPriceLimit($domainId);
     }

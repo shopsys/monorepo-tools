@@ -14,42 +14,42 @@ class PaymentFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository
      */
-    private $paymentRepository;
+    protected $paymentRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportRepository
      */
-    private $transportRepository;
+    protected $transportRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentVisibilityCalculation
      */
-    private $paymentVisibilityCalculation;
+    protected $paymentVisibilityCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
-    private $imageFacade;
+    protected $imageFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
-    private $currencyFacade;
+    protected $currencyFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation
      */
-    private $paymentPriceCalculation;
+    protected $paymentPriceCalculation;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -133,7 +133,7 @@ class PaymentFacade
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      */
-    private function setAdditionalDataAndFlush(Payment $payment, PaymentData $paymentData)
+    protected function setAdditionalDataAndFlush(Payment $payment, PaymentData $paymentData)
     {
         $transports = $this->transportRepository->getAllByIds($paymentData->transports);
         $payment->setTransports($transports);
@@ -164,7 +164,7 @@ class PaymentFacade
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param array $domainIds
      */
-    private function createPaymentDomains(Payment $payment, array $domainIds)
+    protected function createPaymentDomains(Payment $payment, array $domainIds)
     {
         foreach ($domainIds as $domainId) {
             $paymentDomain = new PaymentDomain($payment, $domainId);
@@ -176,7 +176,7 @@ class PaymentFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      */
-    private function deletePaymentDomainsByPayment(Payment $payment)
+    protected function deletePaymentDomainsByPayment(Payment $payment)
     {
         $paymentDomains = $this->getPaymentDomainsByPayment($payment);
         foreach ($paymentDomains as $paymentDomain) {
@@ -189,7 +189,7 @@ class PaymentFacade
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param string[] $pricesByCurrencyId
      */
-    private function updatePaymentPrices(Payment $payment, $pricesByCurrencyId)
+    protected function updatePaymentPrices(Payment $payment, $pricesByCurrencyId)
     {
         foreach ($this->currencyFacade->getAll() as $currency) {
             $price = $pricesByCurrencyId[$currency->getId()];

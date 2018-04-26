@@ -9,12 +9,12 @@ class OrderListAdminFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminRepository
      */
-    private $orderListAdminRepository;
+    protected $orderListAdminRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminRepository $orderListAdminRepository

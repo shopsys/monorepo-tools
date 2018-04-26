@@ -11,12 +11,12 @@ class CurrentPromoCodeFacade
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
-    private $session;
+    protected $session;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade
      */
-    private $promoCodeFacade;
+    protected $promoCodeFacade;
 
     public function __construct(PromoCodeFacade $promoCodeFacade, SessionInterface $session)
     {

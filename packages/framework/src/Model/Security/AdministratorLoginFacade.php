@@ -22,27 +22,27 @@ class AdministratorLoginFacade
     /**
      * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
      */
-    private $tokenStorage;
+    protected $tokenStorage;
 
     /**
      * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
      */
-    private $eventDispatcher;
+    protected $eventDispatcher;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository
      */
-    private $administratorRepository;
+    protected $administratorRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\String\HashGenerator
      */
-    private $hashGenerator;
+    protected $hashGenerator;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     public function __construct(
         TokenStorageInterface $tokenStorage,

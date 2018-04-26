@@ -13,27 +13,27 @@ class OrderItemFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderRepository
      */
-    private $orderRepository;
+    protected $orderRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
-    private $productPriceCalculationForUser;
+    protected $productPriceCalculationForUser;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderService
      */
-    private $orderService;
+    protected $orderService;
 
     public function __construct(
         EntityManagerInterface $em,

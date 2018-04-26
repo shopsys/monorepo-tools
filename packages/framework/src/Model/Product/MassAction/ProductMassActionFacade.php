@@ -11,17 +11,17 @@ class ProductMassActionFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionRepository
      */
-    private $productMassActionRepository;
+    protected $productMassActionRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
-    private $productVisibilityFacade;
+    protected $productVisibilityFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator
      */
-    private $productHiddenRecalculator;
+    protected $productHiddenRecalculator;
 
     public function __construct(
         ProductMassActionRepository $productMassActionRepository,
@@ -67,7 +67,7 @@ class ProductMassActionFacade
      * @param int[] $checkedProductIds
      * @return int[]
      */
-    private function getSelectedProductIds(
+    protected function getSelectedProductIds(
         ProductMassActionData $productMassActionData,
         QueryBuilder $selectQueryBuilder,
         array $checkedProductIds

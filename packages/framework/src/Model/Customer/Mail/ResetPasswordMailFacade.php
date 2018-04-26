@@ -12,17 +12,17 @@ class ResetPasswordMailFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailerService
      */
-    private $mailer;
+    protected $mailer;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
      */
-    private $mailTemplateFacade;
+    protected $mailTemplateFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\ResetPasswordMail
      */
-    private $resetPasswordMail;
+    protected $resetPasswordMail;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailer

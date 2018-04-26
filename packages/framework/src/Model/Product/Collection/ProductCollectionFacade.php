@@ -17,42 +17,42 @@ class ProductCollectionFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Collection\ProductCollectionService
      */
-    private $productCollectionService;
+    protected $productCollectionService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      */
-    private $imageConfig;
+    protected $imageConfig;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageRepository
      */
-    private $imageRepository;
+    protected $imageRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
-    private $imageFacade;
+    protected $imageFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
      */
-    private $friendlyUrlRepository;
+    protected $friendlyUrlRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService
      */
-    private $friendlyUrlService;
+    protected $friendlyUrlService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository
      */
-    private $parameterRepository;
+    protected $parameterRepository;
 
     public function __construct(
         ProductCollectionService $productCollectionService,
@@ -102,7 +102,7 @@ class ProductCollectionFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
      */
-    private function getMainImagesIndexedByProductId(array $products)
+    protected function getMainImagesIndexedByProductId(array $products)
     {
         $productEntityName = $this->imageConfig->getImageEntityConfigByClass(Product::class)->getEntityName();
         $imagesByProductId = $this->imageRepository->getMainImagesByEntitiesIndexedByEntityId($products, $productEntityName);

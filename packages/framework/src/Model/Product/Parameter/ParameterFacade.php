@@ -9,17 +9,17 @@ class ParameterFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository
      */
-    private $parameterRepository;
+    protected $parameterRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterService
      */
-    private $parameterService;
+    protected $parameterService;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

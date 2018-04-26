@@ -10,12 +10,12 @@ class AdministratorActivityFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityRepository
      */
-    private $administratorActivityRepository;
+    protected $administratorActivityRepository;
 
     public function __construct(
         EntityManagerInterface $em,

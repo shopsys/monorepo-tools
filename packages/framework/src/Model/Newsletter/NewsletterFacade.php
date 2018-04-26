@@ -11,12 +11,12 @@ class NewsletterFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository
      */
-    private $newsletterRepository;
+    protected $newsletterRepository;
 
     public function __construct(
         EntityManagerInterface $em,

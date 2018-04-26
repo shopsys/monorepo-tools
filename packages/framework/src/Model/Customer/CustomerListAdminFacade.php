@@ -9,7 +9,7 @@ class CustomerListAdminFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\UserRepository
      */
-    private $userRepository;
+    protected $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {

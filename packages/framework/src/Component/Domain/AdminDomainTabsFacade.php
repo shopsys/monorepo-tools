@@ -11,12 +11,12 @@ class AdminDomainTabsFacade
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
-    private $session;
+    protected $session;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain

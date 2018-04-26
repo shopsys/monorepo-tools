@@ -14,42 +14,42 @@ class PricingGroupFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository
      */
-    private $pricingGroupRepository;
+    protected $pricingGroupRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
      */
-    private $productPriceRecalculationScheduler;
+    protected $productPriceRecalculationScheduler;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
-    private $pricingGroupSettingFacade;
+    protected $pricingGroupSettingFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository
      */
-    private $productVisibilityRepository;
+    protected $productVisibilityRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPriceRepository
      */
-    private $productCalculatedPriceRepository;
+    protected $productCalculatedPriceRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\UserRepository
      */
-    private $userRepository;
+    protected $userRepository;
 
     public function __construct(
         EntityManagerInterface $em,

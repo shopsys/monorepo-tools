@@ -13,17 +13,17 @@ class AdvancedSearchOrderFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory
      */
-    private $orderAdvancedSearchFormFactory;
+    protected $orderAdvancedSearchFormFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService
      */
-    private $advancedSearchOrderService;
+    protected $advancedSearchOrderService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminFacade
      */
-    private $orderListAdminFacade;
+    protected $orderListAdminFacade;
 
     public function __construct(
         OrderAdvancedSearchFormFactory $orderAdvancedSearchFormFactory,

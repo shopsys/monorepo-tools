@@ -12,17 +12,17 @@ class LegalConditionsFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade
      */
-    private $articleFacade;
+    protected $articleFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     public function __construct(
         ArticleFacade $articleFacade,
@@ -103,7 +103,7 @@ class LegalConditionsFacade
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Article\Article|null
      */
-    private function findArticle($settingKey, $domainId)
+    protected function findArticle($settingKey, $domainId)
     {
         $articleId = $this->setting->getForDomain($settingKey, $domainId);
 
@@ -119,7 +119,7 @@ class LegalConditionsFacade
      * @param \Shopsys\FrameworkBundle\Model\Article\Article|null $privacyPolicy
      * @param int $domainId
      */
-    private function setArticle($settingKey, Article $privacyPolicy = null, $domainId)
+    protected function setArticle($settingKey, Article $privacyPolicy = null, $domainId)
     {
         $articleId = null;
         if ($privacyPolicy !== null) {

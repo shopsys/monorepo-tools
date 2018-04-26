@@ -11,12 +11,12 @@ class AdminProductPriceCalculationFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation
      */
-    private $basePriceCalculation;
+    protected $basePriceCalculation;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
-    private $pricingSetting;
+    protected $pricingSetting;
 
     public function __construct(BasePriceCalculation $basePriceCalculation, PricingSetting $pricingSetting)
     {

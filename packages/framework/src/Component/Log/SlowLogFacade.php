@@ -13,12 +13,12 @@ class SlowLogFacade
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
-    private $logger;
+    protected $logger;
 
     /**
      * @var float
      */
-    private $startTime;
+    protected $startTime;
 
     public function __construct(Logger $logger)
     {
@@ -54,7 +54,7 @@ class SlowLogFacade
     /**
      * @return float
      */
-    private function getRequestTime()
+    protected function getRequestTime()
     {
         return microtime(true) - $this->startTime;
     }

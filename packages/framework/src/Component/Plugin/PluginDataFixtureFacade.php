@@ -7,7 +7,7 @@ class PluginDataFixtureFacade
     /**
      * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginDataFixtureRegistry
      */
-    private $pluginDataFixtureRegistry;
+    protected $pluginDataFixtureRegistry;
 
     public function __construct(PluginDataFixtureRegistry $pluginDataFixtureRegistry)
     {

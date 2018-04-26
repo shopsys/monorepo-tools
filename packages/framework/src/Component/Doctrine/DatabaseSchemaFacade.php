@@ -9,12 +9,12 @@ class DatabaseSchemaFacade
     /**
      * @var string
      */
-    private $defaultSchemaFilepath;
+    protected $defaultSchemaFilepath;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     public function __construct(
         $defaultSchemaFilepath,

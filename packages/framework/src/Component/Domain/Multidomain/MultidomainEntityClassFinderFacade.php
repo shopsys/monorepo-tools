@@ -13,17 +13,17 @@ class MultidomainEntityClassFinderFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder
      */
-    private $multidomainEntityClassFinder;
+    protected $multidomainEntityClassFinder;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder
      */
-    private $entityNotNullableColumnsFinder;
+    protected $entityNotNullableColumnsFinder;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -63,7 +63,7 @@ class MultidomainEntityClassFinderFacade
     /**
      * @return string[]
      */
-    private function getIgnoredEntitiesNames()
+    protected function getIgnoredEntitiesNames()
     {
         return [
             SettingValue::class,
@@ -74,7 +74,7 @@ class MultidomainEntityClassFinderFacade
     /**
      * @return string[]
      */
-    private function getManualMultidomainEntitiesNames()
+    protected function getManualMultidomainEntitiesNames()
     {
         return [
             MailTemplate::class,

@@ -17,22 +17,22 @@ class AdministratorFrontSecurityFacade
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
-    private $session;
+    protected $session;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorUserProvider
      */
-    private $administratorUserProvider;
+    protected $administratorUserProvider;
 
     /**
      * @var \Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface
      */
-    private $accessDecisionManager;
+    protected $accessDecisionManager;
 
     /**
      * @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
      */
-    private $authorizationChecker;
+    protected $authorizationChecker;
 
     public function __construct(
         SessionInterface $session,
@@ -93,7 +93,7 @@ class AdministratorFrontSecurityFacade
      * @return \Symfony\Component\Security\Core\Authentication\Token\TokenInterface
      * @see \Symfony\Component\Security\Http\Firewall\ContextListener::handle()
      */
-    private function getAdministratorToken()
+    protected function getAdministratorToken()
     {
         $serializedToken = $this->session->get('_security_' . self::ADMINISTRATION_CONTEXT);
         if ($serializedToken === null) {
@@ -116,7 +116,7 @@ class AdministratorFrontSecurityFacade
      * @see \Symfony\Component\Security\Http\Firewall\ContextListener::handle()
      * @see \Symfony\Component\Security\Core\Authentication\Token\AbstractToken::setUser()
      */
-    private function refreshUserInToken(TokenInterface $token)
+    protected function refreshUserInToken(TokenInterface $token)
     {
         $user = $token->getUser();
         if (!$user instanceof UserInterface) {

@@ -14,17 +14,17 @@ class CronFacade
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
-    private $logger;
+    protected $logger;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Cron\Config\CronConfig
      */
-    private $cronConfig;
+    protected $cronConfig;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Cron\CronModuleFacade
      */
-    private $cronModuleFacade;
+    protected $cronModuleFacade;
 
     public function __construct(
         Logger $logger,
@@ -58,7 +58,7 @@ class CronFacade
      * @param \Shopsys\FrameworkBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
      * @param \Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
      */
-    private function runModules(CronModuleExecutor $cronModuleExecutor, array $cronModuleConfigs)
+    protected function runModules(CronModuleExecutor $cronModuleExecutor, array $cronModuleConfigs)
     {
         $this->logger->addInfo('====== Start of cron ======');
 
@@ -87,7 +87,7 @@ class CronFacade
      * @param \Shopsys\FrameworkBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
      * @param \Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
      */
-    private function runModule(CronModuleExecutor $cronModuleExecutor, CronModuleConfig $cronModuleConfig)
+    protected function runModule(CronModuleExecutor $cronModuleExecutor, CronModuleConfig $cronModuleConfig)
     {
         $this->logger->addInfo('Start of ' . $cronModuleConfig->getServiceId());
         $cronModuleService = $cronModuleConfig->getService();

@@ -12,27 +12,27 @@ class BrandFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository
      */
-    private $brandRepository;
+    protected $brandRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
-    private $imageFacade;
+    protected $imageFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
-    private $friendlyUrlFacade;
+    protected $friendlyUrlFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -120,7 +120,7 @@ class BrandFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditData $brandEditData
      */
-    private function refreshBrandDomains(Brand $brand, BrandEditData $brandEditData)
+    protected function refreshBrandDomains(Brand $brand, BrandEditData $brandEditData)
     {
         $brandDomains = $this->brandRepository->getBrandDomainsByBrand($brand);
         $seoTitles = $brandEditData->seoTitles;
@@ -168,7 +168,7 @@ class BrandFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domains
      */
-    private function createBrandDomains(Brand $brand, array $domains)
+    protected function createBrandDomains(Brand $brand, array $domains)
     {
         $toFlush = [];
         foreach ($domains as $domain) {

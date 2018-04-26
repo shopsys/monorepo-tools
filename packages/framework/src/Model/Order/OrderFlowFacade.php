@@ -7,7 +7,7 @@ class OrderFlowFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface
      */
-    private $orderFlowFactory;
+    protected $orderFlowFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface $orderFlowFactory

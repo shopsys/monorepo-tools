@@ -12,27 +12,27 @@ class OrderStatusFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository
      */
-    private $orderStatusRepository;
+    protected $orderStatusRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusService
      */
-    private $orderStatusService;
+    protected $orderStatusService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderRepository
      */
-    private $orderRepository;
+    protected $orderRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
      */
-    private $mailTemplateFacade;
+    protected $mailTemplateFacade;
 
     public function __construct(
         EntityManagerInterface $em,

@@ -16,27 +16,27 @@ class CookiesFacade
     /**
      * @var string
      */
-    private $environment;
+    protected $environment;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade
      */
-    private $articleFacade;
+    protected $articleFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Symfony\Component\HttpFoundation\RequestStack
      */
-    private $requestStack;
+    protected $requestStack;
 
     /**
      * @param string $environment

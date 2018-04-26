@@ -10,22 +10,22 @@ class UnitFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitRepository
      */
-    private $unitRepository;
+    protected $unitRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitService
      */
-    private $unitService;
+    protected $unitService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -130,7 +130,7 @@ class UnitFacade
     /**
      * @return int
      */
-    private function getDefaultUnitId()
+    protected function getDefaultUnitId()
     {
         return $this->setting->get(Setting::DEFAULT_UNIT);
     }

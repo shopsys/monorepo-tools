@@ -9,12 +9,12 @@ class PersistentReferenceFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceRepository
      */
-    private $persistentReferenceRepository;
+    protected $persistentReferenceRepository;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

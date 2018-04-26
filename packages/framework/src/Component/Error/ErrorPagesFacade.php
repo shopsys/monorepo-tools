@@ -19,22 +19,22 @@ class ErrorPagesFacade
     /**
      * @var string
      */
-    private $errorPagesDir;
+    protected $errorPagesDir;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
-    private $domainRouterFactory;
+    protected $domainRouterFactory;
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @param string $errorPagesDir
@@ -94,7 +94,7 @@ class ErrorPagesFacade
      * @param int $domainId
      * @param int $statusCode
      */
-    private function generateAndSaveErrorPage($domainId, $statusCode)
+    protected function generateAndSaveErrorPage($domainId, $statusCode)
     {
         $domainRouter = $this->domainRouterFactory->getRouter($domainId);
         $errorPageUrl = $domainRouter->generate(
@@ -119,7 +119,7 @@ class ErrorPagesFacade
      * @param int $statusCode
      * @return string
      */
-    private function getErrorPageFilename($domainId, $statusCode)
+    protected function getErrorPageFilename($domainId, $statusCode)
     {
         return $this->errorPagesDir . $statusCode . '_ ' . $domainId . '.html';
     }
@@ -129,7 +129,7 @@ class ErrorPagesFacade
      * @param int $expectedStatusCode
      * @return string
      */
-    private function getUrlContent($errorPageUrl, $expectedStatusCode)
+    protected function getUrlContent($errorPageUrl, $expectedStatusCode)
     {
         $errorPageKernel = new AppKernel(EnvironmentType::PRODUCTION, false);
 

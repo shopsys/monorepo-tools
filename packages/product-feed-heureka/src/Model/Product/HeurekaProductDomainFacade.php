@@ -10,17 +10,17 @@ class HeurekaProductDomainFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainRepository
      */
-    private $heurekaProductDomainRepository;
+    protected $heurekaProductDomainRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -115,7 +115,7 @@ class HeurekaProductDomainFacade
      * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomain[] $existingHeurekaProductDomains
      * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainData[] $newHeurekaProductDomainsData
      */
-    private function removeOldHeurekaProductDomainsForProductId(
+    protected function removeOldHeurekaProductDomainsForProductId(
         array $existingHeurekaProductDomains,
         array $newHeurekaProductDomainsData
     ) {

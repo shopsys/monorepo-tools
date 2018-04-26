@@ -9,12 +9,12 @@ class GridOrderingFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\Ordering\GridOrderingService
      */
-    private $gridOrderingService;
+    protected $gridOrderingService;
 
     public function __construct(EntityManagerInterface $em, GridOrderingService $gridOrderingService)
     {
@@ -43,7 +43,7 @@ class GridOrderingFacade
      * @param string $entityClass
      * @return mixed
      */
-    private function getEntityRepository($entityClass)
+    protected function getEntityRepository($entityClass)
     {
         $interfaces = class_implements($entityClass);
         if (array_key_exists(OrderableEntityInterface::class, $interfaces)) {

@@ -11,17 +11,17 @@ class PersonalDataAccessRequestFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\String\HashGenerator
      */
-    private $hashGenerator;
+    protected $hashGenerator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestRepository
      */
-    private $personalDataAccessRequestRepository;
+    protected $personalDataAccessRequestRepository;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -74,7 +74,7 @@ class PersonalDataAccessRequestFacade
     /**
      * @return string
      */
-    private function getUniqueHash()
+    protected function getUniqueHash()
     {
         do {
             $hash = $this->hashGenerator->generateHash(20);

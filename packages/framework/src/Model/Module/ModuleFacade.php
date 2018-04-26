@@ -9,12 +9,12 @@ class ModuleFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Module\EnabledModuleRepository
      */
-    private $enabledModuleRepository;
+    protected $enabledModuleRepository;
 
     public function __construct(
         EntityManagerInterface $em,

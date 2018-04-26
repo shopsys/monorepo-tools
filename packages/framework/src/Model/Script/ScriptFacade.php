@@ -14,17 +14,17 @@ class ScriptFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Script\ScriptRepository
      */
-    private $scriptRepository;
+    protected $scriptRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -171,7 +171,7 @@ class ScriptFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return string
      */
-    private function replaceVariables($code, Order $order)
+    protected function replaceVariables($code, Order $order)
     {
         $variableReplacements = [
             self::VARIABLE_NUMBER => $order->getNumber(),

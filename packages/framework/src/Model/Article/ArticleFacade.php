@@ -11,22 +11,22 @@ class ArticleFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleRepository
      */
-    private $articleRepository;
+    protected $articleRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
-    private $friendlyUrlFacade;
+    protected $friendlyUrlFacade;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

@@ -10,7 +10,7 @@ class PluginCrudExtensionFacade
     /**
      * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionRegistry
      */
-    private $pluginCrudExtensionRegistry;
+    protected $pluginCrudExtensionRegistry;
 
     public function __construct(PluginCrudExtensionRegistry $pluginCrudExtensionRegistry)
     {

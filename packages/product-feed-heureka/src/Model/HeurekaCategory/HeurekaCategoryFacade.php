@@ -10,17 +10,17 @@ class HeurekaCategoryFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryRepository
      */
-    private $heurekaCategoryRepository;
+    protected $heurekaCategoryRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
-    private $categoryRepository;
+    protected $categoryRepository;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -63,7 +63,7 @@ class HeurekaCategoryFacade
      * @param \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryData[] $newHeurekaCategoriesData
      * @param \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategory[] $existingHeurekaCategoriesIndexedByIds
      */
-    private function removeOldHeurekaCategories(
+    protected function removeOldHeurekaCategories(
         array $newHeurekaCategoriesData,
         array $existingHeurekaCategoriesIndexedByIds
     ) {

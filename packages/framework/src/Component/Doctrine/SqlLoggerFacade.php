@@ -9,17 +9,17 @@ class SqlLoggerFacade
     /**
      * @var \Doctrine\DBAL\Logging\SQLLogger|null
      */
-    private $sqlLogger;
+    protected $sqlLogger;
 
     /**
      * @var bool
      */
-    private $isLoggerTemporarilyDisabled;
+    protected $isLoggerTemporarilyDisabled;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

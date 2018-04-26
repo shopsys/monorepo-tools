@@ -12,37 +12,37 @@ class ProductVariantFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
      */
-    private $productFacade;
+    protected $productFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory
      */
-    private $productEditDataFactory;
+    protected $productEditDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
-    private $imageFacade;
+    protected $imageFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantService
      */
-    private $productVariantService;
+    protected $productVariantService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
      */
-    private $productPriceRecalculationScheduler;
+    protected $productPriceRecalculationScheduler;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
      */
-    private $productAvailabilityRecalculationScheduler;
+    protected $productAvailabilityRecalculationScheduler;
 
     public function __construct(
         EntityManagerInterface $em,

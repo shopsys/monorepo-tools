@@ -18,47 +18,47 @@ class CategoryFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
-    private $categoryRepository;
+    protected $categoryRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryService
      */
-    private $categoryService;
+    protected $categoryService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRecalculationScheduler
      */
-    private $categoryVisibilityRecalculationScheduler;
+    protected $categoryVisibilityRecalculationScheduler;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\Detail\CategoryDetailFactory
      */
-    private $categoryDetailFactory;
+    protected $categoryDetailFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
-    private $friendlyUrlFacade;
+    protected $friendlyUrlFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
-    private $imageFacade;
+    protected $imageFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade
      */
-    private $pluginCrudExtensionFacade;
+    protected $pluginCrudExtensionFacade;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -140,7 +140,7 @@ class CategoryFacade
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
      */
-    private function createCategoryDomains(Category $category, array $domainConfigs)
+    protected function createCategoryDomains(Category $category, array $domainConfigs)
     {
         $toFlush = [];
 
@@ -159,7 +159,7 @@ class CategoryFacade
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
      */
-    private function refreshCategoryDomains(Category $category, CategoryData $categoryData)
+    protected function refreshCategoryDomains(Category $category, CategoryData $categoryData)
     {
         $toFlush = [];
         $categoryDomains = $this->categoryRepository->getCategoryDomainsByCategory($category);

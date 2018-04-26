@@ -19,57 +19,57 @@ class ProductInputPriceFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
      */
-    private $entityManagerFacade;
+    protected $entityManagerFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceService
      */
-    private $productInputPriceService;
+    protected $productInputPriceService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
      */
-    private $currencyFacade;
+    protected $currencyFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
-    private $pricingSetting;
+    protected $pricingSetting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository
      */
-    private $productManualInputPriceRepository;
+    protected $productManualInputPriceRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\DomainFacade
      */
-    private $domainFacade;
+    protected $domainFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
-    private $pricingGroupFacade;
+    protected $pricingGroupFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductService
      */
-    private $productService;
+    protected $productService;
 
     /**
      * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\FrameworkBundle\Model\Product\Product[][]|null
      */
-    private $productRowsIterator;
+    protected $productRowsIterator;
 
     public function __construct(
         EntityManagerInterface $em,

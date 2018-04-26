@@ -13,22 +13,22 @@ class CartMigrationFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\CartService
      */
-    private $cartService;
+    protected $cartService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\CartFactory
      */
-    private $cartFactory;
+    protected $cartFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory
      */
-    private $customerIdentifierFactory;
+    protected $customerIdentifierFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -51,7 +51,7 @@ class CartMigrationFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      */
-    private function mergeCurrentCartWithCart(Cart $cart)
+    protected function mergeCurrentCartWithCart(Cart $cart)
     {
         $customerIdentifier = $this->customerIdentifierFactory->get();
         $currentCart = $this->cartFactory->get($customerIdentifier);

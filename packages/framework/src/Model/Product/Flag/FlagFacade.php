@@ -9,17 +9,17 @@ class FlagFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagRepository
      */
-    private $flagRepository;
+    protected $flagRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagService
      */
-    private $flagService;
+    protected $flagService;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

@@ -12,17 +12,17 @@ class CustomerMailFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailerService
      */
-    private $mailer;
+    protected $mailer;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
      */
-    private $mailTemplateFacade;
+    protected $mailTemplateFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\RegistrationMailService
      */
-    private $registrationMailService;
+    protected $registrationMailService;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailer

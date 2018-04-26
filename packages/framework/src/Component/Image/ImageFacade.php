@@ -13,42 +13,42 @@ class ImageFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      */
-    private $imageConfig;
+    protected $imageConfig;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageRepository
      */
-    private $imageRepository;
+    protected $imageRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageService
      */
-    private $imageService;
+    protected $imageService;
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload
      */
-    private $fileUpload;
+    protected $fileUpload;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageLocator
      */
-    private $imageLocator;
+    protected $imageLocator;
 
     /**
      * @var string
      */
-    private $imageUrlPrefix;
+    protected $imageUrlPrefix;
 
     public function __construct(
         $imageUrlPrefix,
@@ -203,7 +203,7 @@ class ImageFacade
      * @param object $entity
      * @return int
      */
-    private function getEntityId($entity)
+    protected function getEntityId($entity)
     {
         $entityMetadata = $this->em->getClassMetadata(get_class($entity));
         $identifier = $entityMetadata->getIdentifierValues($entity);

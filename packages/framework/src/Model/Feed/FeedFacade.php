@@ -17,37 +17,37 @@ class FeedFacade
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedXmlWriter
      */
-    private $feedXmlWriter;
+    protected $feedXmlWriter;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade
      */
-    private $feedConfigFacade;
+    protected $feedConfigFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedGenerationConfig[]
      */
-    private $standardFeedGenerationConfigs;
+    protected $standardFeedGenerationConfigs;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
      */
-    private $entityManagerFacade;
+    protected $entityManagerFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
-    private $productVisibilityFacade;
+    protected $productVisibilityFacade;
 
     public function __construct(
         FeedXmlWriter $feedXmlWriter,
@@ -135,7 +135,7 @@ class FeedFacade
      * @param int|null $seekItemId
      * @return \Shopsys\ProductFeed\FeedItemInterface|null
      */
-    private function generateFeedBatch(
+    protected function generateFeedBatch(
         FeedConfigInterface $feedConfig,
         DomainConfig $domainConfig,
         $seekItemId

@@ -10,12 +10,12 @@ class StatisticsFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Statistics\StatisticsRepository
      */
-    private $statisticsRepository;
+    protected $statisticsRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Statistics\StatisticsService
      */
-    private $statisticsService;
+    protected $statisticsService;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Statistics\StatisticsRepository $statisticsRepository

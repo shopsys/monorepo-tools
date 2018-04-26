@@ -10,17 +10,17 @@ class ZboziProductDomainFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainRepository
      */
-    private $zboziProductDomainRepository;
+    protected $zboziProductDomainRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -78,7 +78,7 @@ class ZboziProductDomainFacade
      * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomain[] $existingZboziProductDomains
      * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData[] $newZboziProductDomainsData
      */
-    private function removeOldZboziProductDomainsForProductId(
+    protected function removeOldZboziProductDomainsForProductId(
         array $existingZboziProductDomains,
         array $newZboziProductDomainsData
     ) {

@@ -10,27 +10,27 @@ class AvailabilityFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityRepository
      */
-    private $availabilityRepository;
+    protected $availabilityRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityService
      */
-    private $availabilityService;
+    protected $availabilityService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
      */
-    private $productAvailabilityRecalculationScheduler;
+    protected $productAvailabilityRecalculationScheduler;
 
     public function __construct(
         EntityManagerInterface $em,

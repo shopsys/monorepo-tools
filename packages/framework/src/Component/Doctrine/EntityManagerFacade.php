@@ -10,12 +10,12 @@ class EntityManagerFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     public function __construct(EntityManagerInterface $em, Setting $setting)
     {

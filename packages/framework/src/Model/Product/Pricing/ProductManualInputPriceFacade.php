@@ -11,17 +11,17 @@ class ProductManualInputPriceFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceRepository
      */
-    private $productManualInputPriceRepository;
+    protected $productManualInputPriceRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceService
      */
-    private $productManualInputPriceService;
+    protected $productManualInputPriceService;
 
     public function __construct(
         EntityManagerInterface $em,

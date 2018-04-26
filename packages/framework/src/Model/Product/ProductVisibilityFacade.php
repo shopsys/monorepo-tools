@@ -10,12 +10,12 @@ class ProductVisibilityFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository
      */
-    private $productVisibilityRepository;
+    protected $productVisibilityRepository;
 
     /**
      * @var bool
      */
-    private $recalcVisibilityForMarked = false;
+    protected $recalcVisibilityForMarked = false;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository

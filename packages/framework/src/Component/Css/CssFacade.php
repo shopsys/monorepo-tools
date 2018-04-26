@@ -7,7 +7,7 @@ class CssFacade
     /**
      * @var string
      */
-    private $cssVersionFilepath;
+    protected $cssVersionFilepath;
 
     public function __construct($cssVersionFilepath)
     {

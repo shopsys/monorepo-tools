@@ -10,17 +10,17 @@ class GoogleProductDomainFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainRepository
      */
-    private $googleProductDomainRepository;
+    protected $googleProductDomainRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -78,7 +78,7 @@ class GoogleProductDomainFacade
      * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomain[] $existingGoogleProductDomains
      * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainData[] $newGoogleProductDomainsData
      */
-    private function removeOldGoogleProductDomains(
+    protected function removeOldGoogleProductDomains(
         array $existingGoogleProductDomains,
         array $newGoogleProductDomainsData
     ) {

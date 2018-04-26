@@ -11,32 +11,32 @@ class SitemapFacade
     /**
      * @var string
      */
-    private $sitemapsDir;
+    protected $sitemapsDir;
 
     /**
      * @var string
      */
-    private $sitemapsUrlPrefix;
+    protected $sitemapsUrlPrefix;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Sitemap\SitemapDumperFactory
      */
-    private $domainSitemapDumperFactory;
+    protected $domainSitemapDumperFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Sitemap\SitemapRepository
      */
-    private $sitemapRepository;
+    protected $sitemapRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
-    private $pricingGroupSettingFacade;
+    protected $pricingGroupSettingFacade;
 
     public function __construct(
         $sitemapsDir,

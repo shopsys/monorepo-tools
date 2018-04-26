@@ -10,12 +10,12 @@ class DomainDbFunctionsFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     public function __construct(EntityManagerInterface $em, Domain $domain)
     {
@@ -29,7 +29,7 @@ class DomainDbFunctionsFacade
         $this->createLocaleByDomainIdFunction();
     }
 
-    private function createDomainIdsByLocaleFunction()
+    protected function createDomainIdsByLocaleFunction()
     {
         $domainsIdsByLocale = [];
         foreach ($this->domain->getAllIncludingDomainConfigsWithoutDataCreated() as $domainConfig) {
@@ -60,7 +60,7 @@ class DomainDbFunctionsFacade
         return $query->execute();
     }
 
-    private function createLocaleByDomainIdFunction()
+    protected function createLocaleByDomainIdFunction()
     {
         $localeByDomainIdSqlClauses = [];
         foreach ($this->domain->getAllIncludingDomainConfigsWithoutDataCreated() as $domainConfig) {

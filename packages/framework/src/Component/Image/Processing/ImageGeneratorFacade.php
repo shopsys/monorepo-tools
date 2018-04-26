@@ -9,12 +9,12 @@ class ImageGeneratorFacade
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageRepository
      */
-    private $imageRepository;
+    protected $imageRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Processing\ImageGeneratorService
      */
-    private $imageGeneratorService;
+    protected $imageGeneratorService;
 
     public function __construct(
         ImageRepository $imageRepository,

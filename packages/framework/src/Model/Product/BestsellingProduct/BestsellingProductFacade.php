@@ -16,22 +16,22 @@ class BestsellingProductFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\AutomaticBestsellingProductRepository
      */
-    private $automaticBestsellingProductRepository;
+    protected $automaticBestsellingProductRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository
      */
-    private $manualBestsellingProductRepository;
+    protected $manualBestsellingProductRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
      */
-    private $productDetailFactory;
+    protected $productDetailFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductService
      */
-    private $bestsellingProductService;
+    protected $bestsellingProductService;
 
     public function __construct(
         AutomaticBestsellingProductRepository $automaticBestsellingProductRepository,

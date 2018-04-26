@@ -10,12 +10,12 @@ class AdministratorGridFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface;
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridService
      */
-    private $administratorGridService;
+    protected $administratorGridService;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

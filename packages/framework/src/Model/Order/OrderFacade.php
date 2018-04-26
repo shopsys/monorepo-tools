@@ -31,97 +31,97 @@ class OrderFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository
      */
-    private $orderNumberSequenceRepository;
+    protected $orderNumberSequenceRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderRepository
      */
-    private $orderRepository;
+    protected $orderRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderService
      */
-    private $orderService;
+    protected $orderService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderCreationService
      */
-    private $orderCreationService;
+    protected $orderCreationService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository
      */
-    private $orderStatusRepository;
+    protected $orderStatusRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailFacade
      */
-    private $orderMailFacade;
+    protected $orderMailFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderHashGeneratorRepository
      */
-    private $orderHashGeneratorRepository;
+    protected $orderHashGeneratorRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
      */
-    private $administratorFrontSecurityFacade;
+    protected $administratorFrontSecurityFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
      */
-    private $currentPromoCodeFacade;
+    protected $currentPromoCodeFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\CartFacade
      */
-    private $cartFacade;
+    protected $cartFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade
      */
-    private $customerFacade;
+    protected $customerFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
-    private $currentCustomer;
+    protected $currentCustomer;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory
      */
-    private $orderPreviewFactory;
+    protected $orderPreviewFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFacade
      */
-    private $orderProductFacade;
+    protected $orderProductFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade
      */
-    private $heurekaFacade;
+    protected $heurekaFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -373,7 +373,7 @@ class OrderFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      */
-    private function setOrderDataAdministrator(OrderData $orderData)
+    protected function setOrderDataAdministrator(OrderData $orderData)
     {
         if ($this->administratorFrontSecurityFacade->isAdministratorLoggedAsCustomer()) {
             try {

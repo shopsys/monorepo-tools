@@ -18,47 +18,47 @@ class CartFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\CartService
      */
-    private $cartService;
+    protected $cartService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\CartFactory
      */
-    private $cartFactory;
+    protected $cartFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory
      */
-    private $customerIdentifierFactory;
+    protected $customerIdentifierFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
-    private $currentCustomer;
+    protected $currentCustomer;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
      */
-    private $currentPromoCodeFacade;
+    protected $currentPromoCodeFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository
      */
-    private $cartItemRepository;
+    protected $cartItemRepository;
 
     public function __construct(
         EntityManagerInterface $em,

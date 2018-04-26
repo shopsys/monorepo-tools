@@ -10,17 +10,17 @@ class ManualBestsellingProductFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository
      */
-    private $manualBestsellingProductRepository;
+    protected $manualBestsellingProductRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
      */
-    private $cachedBestsellingProductFacade;
+    protected $cachedBestsellingProductFacade;
 
     public function __construct(
         EntityManagerInterface $em,

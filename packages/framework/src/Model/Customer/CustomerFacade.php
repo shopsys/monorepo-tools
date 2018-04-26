@@ -11,22 +11,22 @@ class CustomerFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\UserRepository
      */
-    private $userRepository;
+    protected $userRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerService
      */
-    private $customerService;
+    protected $customerService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade
      */
-    private $customerMailFacade;
+    protected $customerMailFacade;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -136,7 +136,7 @@ class CustomerFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerData $customerData
      * @return \Shopsys\FrameworkBundle\Model\Customer\User
      */
-    private function edit($userId, CustomerData $customerData)
+    protected function edit($userId, CustomerData $customerData)
     {
         $user = $this->getUserById($userId);
 

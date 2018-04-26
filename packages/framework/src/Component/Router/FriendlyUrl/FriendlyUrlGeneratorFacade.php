@@ -12,22 +12,22 @@ class FriendlyUrlGeneratorFacade
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory
      */
-    private $domainRouterFactory;
+    protected $domainRouterFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
-    private $friendlyUrlFacade;
+    protected $friendlyUrlFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlToGenerateRepository
      */
-    private $friendlyUrlToGenerateRepository;
+    protected $friendlyUrlToGenerateRepository;
 
     public function __construct(
         Domain $domain,
@@ -64,7 +64,7 @@ class FriendlyUrlGeneratorFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return int
      */
-    private function generateUrlsByDomainConfig(OutputInterface $output, DomainConfig $domainConfig)
+    protected function generateUrlsByDomainConfig(OutputInterface $output, DomainConfig $domainConfig)
     {
         $totalCountOfCreatedUrls = 0;
         $friendlyUrlRouter = $this->domainRouterFactory->getFriendlyUrlRouter($domainConfig);
@@ -89,7 +89,7 @@ class FriendlyUrlGeneratorFacade
      * @param string $routeName
      * @return int
      */
-    private function generateUrlsByRoute(DomainConfig $domainConfig, $routeName)
+    protected function generateUrlsByRoute(DomainConfig $domainConfig, $routeName)
     {
         $countOfCreatedUrls = 0;
 
@@ -111,7 +111,7 @@ class FriendlyUrlGeneratorFacade
      * @param DomainConfig $domainConfig
      * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
      */
-    private function getFriendlyUrlsDataByRouteName($routeName, DomainConfig $domainConfig)
+    protected function getFriendlyUrlsDataByRouteName($routeName, DomainConfig $domainConfig)
     {
         switch ($routeName) {
             case 'front_article_detail':

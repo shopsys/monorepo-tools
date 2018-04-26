@@ -9,17 +9,17 @@ class AdministratorFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository
      */
-    private $administratorRepository;
+    protected $administratorRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorService
      */
-    private $administratorService;
+    protected $administratorService;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

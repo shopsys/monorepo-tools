@@ -12,22 +12,22 @@ class CartWatcherFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService
      */
-    private $cartWatcherService;
+    protected $cartWatcherService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\FlashMessage\FlashMessageSender
      */
-    private $flashMessageSender;
+    protected $flashMessageSender;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
-    private $currentCustomer;
+    protected $currentCustomer;
 
     public function __construct(
         FlashMessageSender $flashMessageSender,
@@ -55,7 +55,7 @@ class CartWatcherFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      */
-    private function checkModifiedPrices(Cart $cart)
+    protected function checkModifiedPrices(Cart $cart)
     {
         $modifiedItems = $this->cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
 
@@ -70,7 +70,7 @@ class CartWatcherFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      */
-    private function checkNotListableItems(Cart $cart)
+    protected function checkNotListableItems(Cart $cart)
     {
         $notVisibleItems = $this->cartWatcherService->getNotListableItems($cart, $this->currentCustomer);
 

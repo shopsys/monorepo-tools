@@ -19,42 +19,42 @@ class ProductOnCurrentDomainFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
      */
-    private $productDetailFactory;
+    protected $productDetailFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
-    private $currentCustomer;
+    protected $currentCustomer;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
-    private $categoryRepository;
+    protected $categoryRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountRepository
      */
-    private $productFilterCountRepository;
+    protected $productFilterCountRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository
      */
-    private $productAccessoryRepository;
+    protected $productAccessoryRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository
      */
-    private $brandRepository;
+    protected $brandRepository;
 
     public function __construct(
         ProductRepository $productRepository,

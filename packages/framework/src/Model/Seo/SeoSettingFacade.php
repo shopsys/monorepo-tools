@@ -13,7 +13,7 @@ class SeoSettingFacade
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     public function __construct(Setting $setting)
     {

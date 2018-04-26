@@ -12,22 +12,22 @@ class DatabaseSchemaFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\MigrationBundle\Component\Doctrine\SchemaDiffFilter
      */
-    private $schemaDiffFilter;
+    protected $schemaDiffFilter;
 
     /**
      * @var \Doctrine\DBAL\Schema\Comparator
      */
-    private $comparator;
+    protected $comparator;
 
     /**
      * @var \Doctrine\ORM\Tools\SchemaTool
      */
-    private $schemaTool;
+    protected $schemaTool;
 
     public function __construct(
         EntityManagerInterface $em,

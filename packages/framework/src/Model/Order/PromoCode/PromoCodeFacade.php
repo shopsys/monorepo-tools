@@ -9,12 +9,12 @@ class PromoCodeFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeRepository
      */
-    private $promoCodeRepository;
+    protected $promoCodeRepository;
 
     public function __construct(EntityManagerInterface $em, PromoCodeRepository $promoCodeRepository)
     {

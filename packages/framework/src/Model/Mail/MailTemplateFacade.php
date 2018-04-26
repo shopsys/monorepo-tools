@@ -13,32 +13,32 @@ class MailTemplateFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateRepository
      */
-    private $mailTemplateRepository;
+    protected $mailTemplateRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository
      */
-    private $orderStatusRepository;
+    protected $orderStatusRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusMailTemplateService
      */
-    private $orderStatusMailTemplateService;
+    protected $orderStatusMailTemplateService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain;
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade
      */
-    private $uploadedFileFacade;
+    protected $uploadedFileFacade;
 
     public function __construct(
         EntityManagerInterface $em,

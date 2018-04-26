@@ -12,17 +12,17 @@ class AdvancedSearchFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchFormFactory
      */
-    private $advancedSearchFormFactory;
+    protected $advancedSearchFormFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchService
      */
-    private $advancedSearchService;
+    protected $advancedSearchService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade
      */
-    private $productListAdminFacade;
+    protected $productListAdminFacade;
 
     public function __construct(
         ProductAdvancedSearchFormFactory $advancedSearchFormFactory,

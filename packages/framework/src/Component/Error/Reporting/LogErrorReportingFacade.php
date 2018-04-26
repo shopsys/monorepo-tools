@@ -11,7 +11,7 @@ class LogErrorReportingFacade
     /**
      * @var string
      */
-    private $logsDir;
+    protected $logsDir;
 
     /**
      * @param string $logsDir
@@ -68,7 +68,7 @@ class LogErrorReportingFacade
      * @param string $filepath
      * @return bool|string
      */
-    private function getLogFileTail($filepath)
+    protected function getLogFileTail($filepath)
     {
         if (!file_exists($filepath)) {
             return false;
@@ -93,7 +93,7 @@ class LogErrorReportingFacade
      * @param string $rotatedLogName
      * @return string
      */
-    private function getLogFilepathByDate(DateTime $date, $rotatedLogName)
+    protected function getLogFilepathByDate(DateTime $date, $rotatedLogName)
     {
         return
             $this->logsDir . '/'

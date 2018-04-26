@@ -9,12 +9,12 @@ class TopCategoryFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryRepository
      */
-    private $topCategoryRepository;
+    protected $topCategoryRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -50,7 +50,7 @@ class TopCategoryFacade
      * @param \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategory[] $topCategories
      * @return \Shopsys\FrameworkBundle\Model\Category\Category[]
      */
-    private function getCategoriesFromTopCategories($topCategories)
+    protected function getCategoriesFromTopCategories($topCategories)
     {
         $categories = [];
 

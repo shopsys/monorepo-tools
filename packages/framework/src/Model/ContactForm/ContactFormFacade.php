@@ -13,22 +13,22 @@ class ContactFormFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade
      */
-    private $mailSettingFacade;
+    protected $mailSettingFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailerService
      */
-    private $mailerService;
+    protected $mailerService;
 
     /**
      * @var \Twig_Environment
      */
-    private $twig;
+    protected $twig;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Mail\Setting\MailSettingFacade $mailSettingFacade
@@ -68,7 +68,7 @@ class ContactFormFacade
      * @param \Shopsys\FrameworkBundle\Model\ContactForm\ContactFormData $contactFormData
      * @return string
      */
-    private function getMailBody($contactFormData)
+    protected function getMailBody($contactFormData)
     {
         return $this->twig->render('@ShopsysFramework/Mail/ContactForm/mail.html.twig', [
             'contactFormData' => $contactFormData,

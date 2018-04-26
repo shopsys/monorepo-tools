@@ -22,92 +22,92 @@ class ProductFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
-    private $productVisibilityFacade;
+    protected $productVisibilityFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository
      */
-    private $parameterRepository;
+    protected $parameterRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductService
      */
-    private $productService;
+    protected $productService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
-    private $imageFacade;
+    protected $imageFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
      */
-    private $productPriceRecalculationScheduler;
+    protected $productPriceRecalculationScheduler;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository
      */
-    private $pricingGroupRepository;
+    protected $pricingGroupRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade
      */
-    private $productManualInputPriceFacade;
+    protected $productManualInputPriceFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
      */
-    private $productAvailabilityRecalculationScheduler;
+    protected $productAvailabilityRecalculationScheduler;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
-    private $friendlyUrlFacade;
+    protected $friendlyUrlFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator
      */
-    private $productHiddenRecalculator;
+    protected $productHiddenRecalculator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator
      */
-    private $productSellingDeniedRecalculator;
+    protected $productSellingDeniedRecalculator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository
      */
-    private $productAccessoryRepository;
+    protected $productAccessoryRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVariantService
      */
-    private $productVariantService;
+    protected $productVariantService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
      */
-    private $availabilityFacade;
+    protected $availabilityFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade
      */
-    private $pluginCrudExtensionFacade;
+    protected $pluginCrudExtensionFacade;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -269,7 +269,7 @@ class ProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData[] $productParameterValuesData
      */
-    private function saveParameters(Product $product, array $productParameterValuesData)
+    protected function saveParameters(Product $product, array $productParameterValuesData)
     {
         // Doctrine runs INSERTs before DELETEs in UnitOfWork. In case of UNIQUE constraint
         // in database, this leads in trying to insert duplicate entry.
@@ -301,7 +301,7 @@ class ProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domains
      */
-    private function createProductDomains(Product $product, array $domains)
+    protected function createProductDomains(Product $product, array $domains)
     {
         $toFlush = [];
         foreach ($domains as $domain) {
@@ -316,7 +316,7 @@ class ProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
      */
-    private function refreshProductDomains(Product $product, ProductEditData $productEditData)
+    protected function refreshProductDomains(Product $product, ProductEditData $productEditData)
     {
         $productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
         $seoTitles = $productEditData->seoTitles;
@@ -364,7 +364,7 @@ class ProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param string[] $manualInputPrices
      */
-    private function refreshProductManualInputPrices(Product $product, array $manualInputPrices)
+    protected function refreshProductManualInputPrices(Product $product, array $manualInputPrices)
     {
         if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_MANUAL) {
             foreach ($this->pricingGroupRepository->getAll() as $pricingGroup) {
@@ -378,7 +378,7 @@ class ProductFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
-    private function createProductVisibilities(Product $product)
+    protected function createProductVisibilities(Product $product)
     {
         $toFlush = [];
         foreach ($this->domain->getAll() as $domainConfig) {
@@ -396,7 +396,7 @@ class ProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $accessories
      */
-    private function refreshProductAccessories(Product $product, array $accessories)
+    protected function refreshProductAccessories(Product $product, array $accessories)
     {
         $oldProductAccessories = $this->productAccessoryRepository->getAllByProduct($product);
         foreach ($oldProductAccessories as $oldProductAccessory) {

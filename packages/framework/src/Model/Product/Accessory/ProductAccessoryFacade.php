@@ -10,7 +10,7 @@ class ProductAccessoryFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository
      */
-    private $productAccessoryRepository;
+    protected $productAccessoryRepository;
 
     public function __construct(ProductAccessoryRepository $productAccessoryRepository)
     {

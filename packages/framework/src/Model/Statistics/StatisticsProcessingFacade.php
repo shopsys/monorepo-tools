@@ -7,7 +7,7 @@ class StatisticsProcessingFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Statistics\StatisticsService
      */
-    private $statisticsService;
+    protected $statisticsService;
 
     public function __construct(StatisticsService $statisticsService)
     {

@@ -12,32 +12,32 @@ class UploadedFileFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig
      */
-    private $uploadedFileConfig;
+    protected $uploadedFileConfig;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileRepository
      */
-    private $uploadedFileRepository;
+    protected $uploadedFileRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileService
      */
-    private $uploadedFileService;
+    protected $uploadedFileService;
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileLocator
      */
-    private $uploadedFileLocator;
+    protected $uploadedFileLocator;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -122,7 +122,7 @@ class UploadedFileFacade
      * @param object $entity
      * @return int
      */
-    private function getEntityId($entity)
+    protected function getEntityId($entity)
     {
         $entityMetadata = $this->em->getClassMetadata(get_class($entity));
         $identifier = $entityMetadata->getIdentifierValues($entity);

@@ -11,22 +11,22 @@ class HeurekaFacade
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
-    private $logger;
+    protected $logger;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationFactory
      */
-    private $heurekaShopCertificationFactory;
+    protected $heurekaShopCertificationFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaShopCertificationService
      */
-    private $heurekaShopCertificationService;
+    protected $heurekaShopCertificationService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaSetting
      */
-    private $heurekaSetting;
+    protected $heurekaSetting;
 
     /**
      * @param \Symfony\Bridge\Monolog\Logger $logger
@@ -101,7 +101,7 @@ class HeurekaFacade
      * @param \Exception $ex
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      */
-    private function logError(Exception $ex, Order $order)
+    protected function logError(Exception $ex, Order $order)
     {
         $message = 'Sending order (ID = "' . $order->getId() . '") to Heureka failed - ' . get_class($ex) . ': ' . $ex->getMessage();
         $this->logger->error($message, ['exceptionFullInfo' => (string)$ex]);

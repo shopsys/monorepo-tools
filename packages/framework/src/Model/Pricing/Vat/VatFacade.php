@@ -11,27 +11,27 @@ class VatFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatRepository
      */
-    private $vatRepository;
+    protected $vatRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatService
      */
-    private $vatService;
+    protected $vatService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
      */
-    private $productPriceRecalculationScheduler;
+    protected $productPriceRecalculationScheduler;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

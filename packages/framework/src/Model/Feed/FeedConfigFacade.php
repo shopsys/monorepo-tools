@@ -13,32 +13,32 @@ class FeedConfigFacade
     /**
      * @var string
      */
-    private $feedUrlPrefix;
+    protected $feedUrlPrefix;
 
     /**
      * @var string
      */
-    private $feedDir;
+    protected $feedDir;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\FeedConfigRegistry
      */
-    private $feedConfigRegistry;
+    protected $feedConfigRegistry;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\Standard\StandardFeedItemRepository
      */
-    private $standardFeedItemRepository;
+    protected $standardFeedItemRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository
      */
-    private $deliveryFeedItemRepository;
+    protected $deliveryFeedItemRepository;
 
     /**
      * @param string $feedUrlPrefix
@@ -122,7 +122,7 @@ class FeedConfigFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */
-    private function getFeedFilename(FeedConfigInterface $feedConfig, DomainConfig $domainConfig)
+    protected function getFeedFilename(FeedConfigInterface $feedConfig, DomainConfig $domainConfig)
     {
         $feedHash = $this->setting->get(Setting::FEED_HASH);
 

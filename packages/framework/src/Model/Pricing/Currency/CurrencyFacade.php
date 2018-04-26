@@ -17,47 +17,47 @@ class CurrencyFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyRepository
      */
-    private $currencyRepository;
+    protected $currencyRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyService
      */
-    private $currencyService;
+    protected $currencyService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PricingSetting
      */
-    private $pricingSetting;
+    protected $pricingSetting;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\OrderRepository
      */
-    private $orderRepository;
+    protected $orderRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
      */
-    private $productPriceRecalculationScheduler;
+    protected $productPriceRecalculationScheduler;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository
      */
-    private $paymentRepository;
+    protected $paymentRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportRepository
      */
-    private $transportRepository;
+    protected $transportRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -223,7 +223,7 @@ class CurrencyFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      */
-    private function createTransportAndPaymentPrices(Currency $currency)
+    protected function createTransportAndPaymentPrices(Currency $currency)
     {
         $toFlush = [];
         foreach ($this->paymentRepository->getAll() as $payment) {

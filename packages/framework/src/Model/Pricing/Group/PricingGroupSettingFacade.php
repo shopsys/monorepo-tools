@@ -11,22 +11,22 @@ class PricingGroupSettingFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository
      */
-    private $pricingGroupRepository;
+    protected $pricingGroupRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */
-    private $adminDomainTabsFacade;
+    protected $adminDomainTabsFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
-    private $setting;
+    protected $setting;
 
     public function __construct(
         PricingGroupRepository $pricingGroupRepository,

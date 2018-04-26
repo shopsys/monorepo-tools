@@ -25,6 +25,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         - services with common suffixes (`*Facade`, `*Repository` etc.) are auto-discovered
         - see `services.yml` for details
 - all exception interfaces are now Throwable (@TomasLudvik)
+- visibility of all private properties and methods of facades was changed to protected (@vitek-rostislav)
+    - protected visibility allows overriding of behavior from projects
 
 ### Fixed
 - choiceList values are prepared for js Choice(s)ToBooleanArrayTransformer (@Miroslav-Stopka)

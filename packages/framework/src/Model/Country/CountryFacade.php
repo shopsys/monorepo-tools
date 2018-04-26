@@ -10,17 +10,17 @@ class CountryFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\CountryRepository
      */
-    private $countryRepository;
+    protected $countryRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em

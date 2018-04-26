@@ -16,42 +16,42 @@ class OrderProductFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator
      */
-    private $productHiddenRecalculator;
+    protected $productHiddenRecalculator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator
      */
-    private $productSellingDeniedRecalculator;
+    protected $productSellingDeniedRecalculator;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
      */
-    private $productAvailabilityRecalculationScheduler;
+    protected $productAvailabilityRecalculationScheduler;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
-    private $productVisibilityFacade;
+    protected $productVisibilityFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductService
      */
-    private $orderProductService;
+    protected $orderProductService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Module\ModuleFacade
      */
-    private $moduleFacade;
+    protected $moduleFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductService
      */
-    private $productService;
+    protected $productService;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -100,7 +100,7 @@ class OrderProductFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct[] $orderProducts
      */
-    private function runRecalculationsAfterStockQuantityChange(array $orderProducts)
+    protected function runRecalculationsAfterStockQuantityChange(array $orderProducts)
     {
         $relevantProducts = $this->orderProductService->getProductsUsingStockFromOrderProducts($orderProducts);
         foreach ($relevantProducts as $relevantProduct) {

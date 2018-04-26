@@ -10,17 +10,17 @@ class TopProductFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductRepository
      */
-    private $topProductRepository;
+    protected $topProductRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
      */
-    private $productDetailFactory;
+    protected $productDetailFactory;
 
     public function __construct(
         EntityManagerInterface $em,

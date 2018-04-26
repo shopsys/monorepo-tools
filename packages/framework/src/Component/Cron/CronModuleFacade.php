@@ -10,17 +10,17 @@ class CronModuleFacade
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Cron\CronModuleRepository
      */
-    private $cronModuleRepository;
+    protected $cronModuleRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Cron\CronService
      */
-    private $cronService;
+    protected $cronService;
 
     public function __construct(
         EntityManagerInterface $em,

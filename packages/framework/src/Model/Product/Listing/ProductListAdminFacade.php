@@ -10,12 +10,12 @@ class ProductListAdminFacade
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminRepository
      */
-    private $productListAdminRepository;
+    protected $productListAdminRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
-    private $pricingGroupSettingFacade;
+    protected $pricingGroupSettingFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminRepository $productListAdminRepository
