@@ -22,12 +22,14 @@
     },
     "require": {
         "php": "^5.6|^7.0",
+        "phpunit/phpunit": "^3.7.15|^4.0|^5.0|^6.0|^7.0",
         "symfony/framework-bundle": "^2.5|^3.0|^4.0",
         "symfony/http-foundation": "^2.5|^3.0|^4.0",
-        "phpunit/phpunit": "^3.7.15|^4.0|^5.0|^6.0|^7.0"
+        "symfony/dependency-injection": "^2.5|^3.0|^4.0",
+        "symfony/routing": "^2.5|^3.0|^4.0"
     },
     "require-dev": {
-        "shopsys/coding-standards": "3.0.2",
-        "phpunit/phpunit": "^5.4.3|^6.0|^7.0"
+        "phpunit/phpunit": "^5.4.3|^6.0|^7.0",
+        "shopsys/coding-standards": "^3.0.2"
     }
 }
