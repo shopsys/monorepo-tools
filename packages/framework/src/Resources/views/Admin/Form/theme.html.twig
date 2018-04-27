@@ -882,6 +882,12 @@
     {% else %}
         {{- block('appendix_block') -}}
     {% endif %}
+    {% if form.vars.icon_title is not null %}
+        <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--text js-tooltip"
+           data-toggle="tooltip" data-placement="right"
+           title="{{ form.vars.icon_title }}"
+        ></i>
+    {% endif %}
 {% endblock yes_no_widget %}
 
 {% block domain_row %}
