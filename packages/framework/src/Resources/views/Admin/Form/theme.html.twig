@@ -772,7 +772,7 @@
                     {{ child.vars.label }}
                 </label>
             {% else %}
-                {{ empty_message|default('Nothing to choose from.'|trans) }}
+                {{ empty_message }}
             {% endfor %}
         </div>
     {% endspaceless %}

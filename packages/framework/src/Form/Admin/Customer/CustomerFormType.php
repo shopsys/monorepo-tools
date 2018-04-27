@@ -23,6 +23,7 @@ class CustomerFormType extends AbstractType
             ->add('userData', UserFormType::class, [
                 'user' => $options['user'],
                 'domain_id' => $options['domain_id'],
+                'render_form_row' => false,
             ])
             ->add('billingAddressData', BillingAddressFormType::class, [
                 'domain_id' => $options['domain_id'],
@@ -35,7 +36,10 @@ class CustomerFormType extends AbstractType
             ->add('save', SubmitType::class);
 
         if ($options['user'] === null) {
-            $builder->add('sendRegistrationMail', CheckboxType::class, ['required' => false]);
+            $builder->add('sendRegistrationMail', CheckboxType::class, [
+                'required' => false,
+                'label' => t('Send confirmation e-mail about registration to customer'),
+            ]);
         } else {
             $builder->add('orders', OrderListType::class, [
                 'user' => $options['user'],

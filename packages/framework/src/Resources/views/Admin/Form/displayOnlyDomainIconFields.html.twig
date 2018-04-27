@@ -1,0 +1,5 @@
+{% block display_only_domain_icon_widget %}
+    {% if isMultidomain() and form.vars.data is not null %}
+        {{ domainIcon(form.vars.data) }} {{ getDomainName(form.vars.data) }}
+    {% endif %}
+{% endblock %}
