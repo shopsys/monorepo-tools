@@ -115,13 +115,4 @@ class PersonalDataAccessRequest
     {
         return $this->type;
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestData $personalDataAccessRequestData
-     * @return \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequest
-     */
-    public static function create(PersonalDataAccessRequestData $personalDataAccessRequestData)
-    {
-        return new self($personalDataAccessRequestData);
-    }
 }

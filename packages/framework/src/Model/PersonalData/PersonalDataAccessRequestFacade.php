@@ -53,7 +53,7 @@ class PersonalDataAccessRequestFacade
         $personalDataAccessRequestData->createAt = new DateTime();
         $personalDataAccessRequestData->domainId = $domainId;
 
-        $dataAccessRequest = PersonalDataAccessRequest::create($personalDataAccessRequestData);
+        $dataAccessRequest = new PersonalDataAccessRequest($personalDataAccessRequestData);
 
         $this->em->persist($dataAccessRequest);
         $this->em->flush();
