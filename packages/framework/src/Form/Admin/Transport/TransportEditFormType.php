@@ -35,6 +35,7 @@ class TransportEditFormType extends AbstractType
         $builder
             ->add('transportData', TransportFormType::class, [
                 'transport' => $transportDetail !== null ? $transportDetail->getTransport() : null,
+                'render_form_row' => false,
             ])
             ->add('pricesByCurrencyId', PriceTableType::class, [
                 'currencies' => $this->currencyFacade->getAllIndexedById(),

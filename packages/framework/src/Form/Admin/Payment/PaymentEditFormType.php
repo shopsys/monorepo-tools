@@ -35,6 +35,7 @@ class PaymentEditFormType extends AbstractType
         $builder
             ->add('paymentData', PaymentFormType::class, [
                 'payment' => $paymentDetail !== null ? $paymentDetail->getPayment() : null,
+                'render_form_row' => false,
             ])
             ->add('pricesByCurrencyId', PriceTableType::class, [
                 'currencies' => $this->currencyFacade->getAllIndexedById(),

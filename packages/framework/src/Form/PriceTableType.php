@@ -58,6 +58,7 @@ class PriceTableType extends AbstractType
             ->setDefaults([
                 'base_prices' => [],
                 'compound' => true,
+                'render_form_row' => false,
             ]);
     }
 

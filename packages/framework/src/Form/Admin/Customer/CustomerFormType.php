@@ -26,9 +26,11 @@ class CustomerFormType extends AbstractType
             ])
             ->add('billingAddressData', BillingAddressFormType::class, [
                 'domain_id' => $options['domain_id'],
+                'render_form_row' => false,
             ])
             ->add('deliveryAddressData', DeliveryAddressFormType::class, [
                 'domain_id' => $options['domain_id'],
+                'render_form_row' => false,
             ])
             ->add('save', SubmitType::class);
 

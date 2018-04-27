@@ -65,9 +65,11 @@
             {% endfor %}
         {% endif %}
     {% else %}
-        <div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
-        {{ form_errors(form) }}
-        {{ form_label(form, label) }}
+        {% if render_form_row %}
+            <div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
+            {{ form_errors(form) }}
+            {{ form_label(form, label) }}
+        {% endif %}
         {{ form_widget(form) }}
         {% if disabledField is defined %}
             <span class="form-disabled {{ disabledField.class }} js-tooltip" data-toggle="tooltip" data-placement="{{ disabledField.placement|default('right') }}"
@@ -75,7 +77,9 @@
                 <i class="svg svg-pencil"></i>
             </span>
         {% endif %}
-        </div>
+        {% if render_form_row %}
+            </div>
+        {% endif %}
     {% endif %}
 {% endblock form_row %}
 
