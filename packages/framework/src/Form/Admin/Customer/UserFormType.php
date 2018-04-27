@@ -75,6 +75,9 @@ class UserFormType extends AbstractType
                     'required' => true,
                     'data' => $options['domain_id'],
                     'label' => t('Domain'),
+                    'attr' => [
+                        'class' => 'js-toggle-opt-group-control',
+                    ],
                 ]);
             $pricingGroups = $this->pricingGroupFacade->getAll();
             $groupPricingGroupsBy = 'domainId';
@@ -88,6 +91,10 @@ class UserFormType extends AbstractType
                 'choice_value' => 'id',
                 'group_by' => $groupPricingGroupsBy,
                 'label' => t('Pricing group'),
+                'attr' => [
+                    'class' => 'js-toggle-opt-group',
+                    'data-js-toggle-opt-group-control' => '.js-toggle-opt-group-control',
+                ],
             ]);
 
         $builderPersonalDataGroup = $builder->create('personalData', GroupType::class, [
