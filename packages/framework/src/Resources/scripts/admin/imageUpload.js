@@ -1,9 +1,9 @@
 (function ($) {
 
     Shopsys = window.Shopsys || {};
-    Shopsys.productImagesDelete = Shopsys.productImagesDelete || {};
+    Shopsys.imageUpload = Shopsys.imageUpload || {};
 
-    Shopsys.productImagesDelete.init = function () {
+    Shopsys.imageUpload.initDelete = function () {
 
         $('.js-image-upload-image').each(function () {
             var $image = $(this);
@@ -39,8 +39,16 @@
         });
     };
 
+    Shopsys.imageUpload.initSort = function () {
+        $('.js-image-upload').sortable({
+            handle: '.js-image-upload-image-handle',
+            update: Shopsys.formChangeInfo.showInfo
+        });
+    };
+
     $(document).ready(function () {
-        Shopsys.productImagesDelete.init();
+        Shopsys.imageUpload.initDelete();
+        Shopsys.imageUpload.initSort();
     });
 
 })(jQuery);
