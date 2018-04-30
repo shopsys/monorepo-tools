@@ -620,3 +620,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactory
+
+  Shopsys\FrameworkBundle\Model\Administrator\AdministratorFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Administrator\AdministratorFactory
