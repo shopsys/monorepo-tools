@@ -32,7 +32,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - choiceList values are prepared for js Choice(s)ToBooleanArrayTransformer (@Miroslav-Stopka)
     - fixed "The choices were not found" console js error in the params filter
 - command `shopsys:server:run` for running PHP built-in web server for a chosen domain (@TomasLudvik)
-- db indices for product name are now created for translations in all locales (@vitek-rostislav) 
+- db indices for product name are now created for translations in all locales (@vitek-rostislav)
+- `LoadDataFixturesCommand` - fixed the `--fixtures` option description (@vitek-rostislav)
 
 ## 7.0.0-alpha1 - 2018-04-12
 - We are releasing the Shopsys Framework in version 7 and we are synchronizing versions because
