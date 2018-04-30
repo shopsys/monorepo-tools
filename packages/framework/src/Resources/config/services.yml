@@ -638,3 +638,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFactory
+
+  Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactory
