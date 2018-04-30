@@ -617,3 +617,6 @@ services:
   Craue\FormFlowBundle\Storage\DataManager: '@craue.form.flow.data_manager_default'
 
   FM\ElfinderBundle\Configuration\ElFinderConfigurationReader: '@fm_elfinder.configurator.default'
+
+  Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactory
