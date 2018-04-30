@@ -29,21 +29,29 @@ class ArticleFacade
     protected $friendlyUrlFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface
+     */
+    protected $articleFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Article\ArticleRepository $articleRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface $articleFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         ArticleRepository $articleRepository,
         Domain $domain,
-        FriendlyUrlFacade $friendlyUrlFacade
+        FriendlyUrlFacade $friendlyUrlFacade,
+        ArticleFactoryInterface $articleFactory
     ) {
         $this->em = $em;
         $this->articleRepository = $articleRepository;
         $this->domain = $domain;
         $this->friendlyUrlFacade = $friendlyUrlFacade;
+        $this->articleFactory = $articleFactory;
     }
 
     /**
@@ -107,7 +115,7 @@ class ArticleFacade
      */
     public function create(ArticleData $articleData)
     {
-        $article = new Article($articleData);
+        $article = $this->articleFactory->create($articleData);
 
         $this->em->persist($article);
         $this->em->flush();

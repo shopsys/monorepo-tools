@@ -632,3 +632,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Advert\AdvertFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Advert\AdvertFactory
+
+  Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Article\ArticleFactory
