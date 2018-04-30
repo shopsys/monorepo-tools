@@ -17,12 +17,24 @@ class AdministratorActivityFacade
      */
     protected $administratorActivityRepository;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFactoryInterface
+     */
+    protected $administratorActivityFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityRepository $administratorActivityRepository
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFactoryInterface $administratorActivityFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
-        AdministratorActivityRepository $administratorActivityRepository
+        AdministratorActivityRepository $administratorActivityRepository,
+        AdministratorActivityFactoryInterface $administratorActivityFactory
     ) {
         $this->em = $em;
         $this->administratorActivityRepository = $administratorActivityRepository;
+        $this->administratorActivityFactory = $administratorActivityFactory;
     }
 
     /**
@@ -34,10 +46,7 @@ class AdministratorActivityFacade
         Administrator $administrator,
         $ipAddress
     ) {
-        $administratorActivity = new AdministratorActivity(
-            $administrator,
-            $ipAddress
-        );
+        $administratorActivity = $this->administratorActivityFactory->create($administrator, $ipAddress);
 
         $this->em->persist($administratorActivity);
         $this->em->flush();

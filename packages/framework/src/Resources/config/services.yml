@@ -623,3 +623,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Administrator\AdministratorFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Administrator\AdministratorFactory
+
+  Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFactory
