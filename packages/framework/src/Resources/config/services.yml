@@ -626,3 +626,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFactory
+
+  Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimitFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimitFactory

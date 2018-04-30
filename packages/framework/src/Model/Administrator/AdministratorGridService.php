@@ -6,6 +6,20 @@ use Shopsys\FrameworkBundle\Component\Grid\Grid;
 
 class AdministratorGridService
 {
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimitFactoryInterface
+     */
+    protected $administratorGridLimitFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimitFactoryInterface $administratorGridLimitFactory
+     */
+    public function __construct(AdministratorGridLimitFactoryInterface $administratorGridLimitFactory)
+    {
+        $this->administratorGridLimitFactory = $administratorGridLimitFactory;
+    }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      * @param \Shopsys\FrameworkBundle\Component\Grid\Grid $grid
@@ -22,7 +36,7 @@ class AdministratorGridService
 
         $gridLimit = $administrator->getGridLimit($grid->getId());
         if ($gridLimit === null) {
-            $gridLimit = new AdministratorGridLimit($administrator, $grid->getId(), $grid->getLimit());
+            $gridLimit = $this->administratorGridLimitFactory->create($administrator, $grid->getId(), $grid->getLimit());
         } else {
             $gridLimit->setLimit($grid->getLimit());
         }
