@@ -27,16 +27,23 @@ class AvailabilityFacade
      */
     protected $productAvailabilityRecalculationScheduler;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFactoryInterface
+     */
+    protected $availabilityFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         AvailabilityRepository $availabilityRepository,
         Setting $setting,
-        ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
+        ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
+        AvailabilityFactoryInterface $availabilityFactory
     ) {
         $this->em = $em;
         $this->availabilityRepository = $availabilityRepository;
         $this->setting = $setting;
         $this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
+        $this->availabilityFactory = $availabilityFactory;
     }
 
     /**
@@ -54,7 +61,7 @@ class AvailabilityFacade
      */
     public function create(AvailabilityData $availabilityData)
     {
-        $availability = new Availability($availabilityData);
+        $availability = $this->availabilityFactory->create($availabilityData);
         $this->em->persist($availability);
         $this->em->flush();
 

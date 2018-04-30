@@ -635,3 +635,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Article\ArticleFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFactory
