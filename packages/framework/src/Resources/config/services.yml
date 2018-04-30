@@ -629,3 +629,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimitFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimitFactory
+
+  Shopsys\FrameworkBundle\Model\Advert\AdvertFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Advert\AdvertFactory
