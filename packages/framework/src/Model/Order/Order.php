@@ -299,7 +299,7 @@ class Order
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      * @param string $orderNumber
      * @param string $urlHash
-     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
      */
     public function __construct(
         OrderData $orderData,
