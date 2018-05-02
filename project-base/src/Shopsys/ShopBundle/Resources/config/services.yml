@@ -12,6 +12,11 @@ services:
     public: true
     tags: ['controller.service_arguments']
 
+  Shopsys\ShopBundle\Model\:
+    resource: '../../Model/*/*Facade.php'
+
   Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory: ~
 
   Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface: '@Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory'
+
+  Shopsys\FrameworkBundle\Model\Article\ArticleFacade: '@Shopsys\ShopBundle\Model\Article\ArticleFacade'

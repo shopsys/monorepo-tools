@@ -17,6 +17,8 @@
         {% endif %}
     </h1>
 
+    <p>{{ article.createdAt|date('j.n.Y') }}</p>
+
     <div class="in-user-text">
         {{ article.text|raw }}
     </div>
