@@ -5,12 +5,25 @@ namespace Shopsys\FrameworkBundle\Model\Product\Flag;
 class FlagService
 {
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactoryInterface
+     */
+    protected $flagFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactoryInterface $flagFactory
+     */
+    public function __construct(FlagFactoryInterface $flagFactory)
+    {
+        $this->flagFactory = $flagFactory;
+    }
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagData $flagData
      * @return \Shopsys\FrameworkBundle\Model\Product\Flag\Flag
      */
     public function create(FlagData $flagData)
     {
-        return new Flag($flagData);
+        return $this->flagFactory->create($flagData);
     }
 
     /**

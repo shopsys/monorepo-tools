@@ -671,3 +671,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Module\EnabledModuleFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Module\EnabledModuleFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactory
