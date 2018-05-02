@@ -659,3 +659,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Country\CountryFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Country\CountryFactory
+
+  Shopsys\FrameworkBundle\Component\Cron\CronModuleFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Component\Cron\CronModuleFactory
