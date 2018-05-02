@@ -40,13 +40,28 @@ class MailTemplateFacade
      */
     protected $uploadedFileFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface
+     */
+    protected $mailTemplateFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateRepository $mailTemplateRepository
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusMailTemplateService $orderStatusMailTemplateService
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade $uploadedFileFacade
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface $mailTemplateFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         MailTemplateRepository $mailTemplateRepository,
         OrderStatusRepository $orderStatusRepository,
         OrderStatusMailTemplateService $orderStatusMailTemplateService,
         Domain $domain,
-        UploadedFileFacade $uploadedFileFacade
+        UploadedFileFacade $uploadedFileFacade,
+        MailTemplateFactoryInterface $mailTemplateFactory
     ) {
         $this->em = $em;
         $this->mailTemplateRepository = $mailTemplateRepository;
@@ -54,6 +69,7 @@ class MailTemplateFacade
         $this->orderStatusMailTemplateService = $orderStatusMailTemplateService;
         $this->domain = $domain;
         $this->uploadedFileFacade = $uploadedFileFacade;
+        $this->mailTemplateFactory = $mailTemplateFactory;
     }
 
     /**
@@ -157,7 +173,7 @@ class MailTemplateFacade
     public function createMailTemplateForAllDomains($name)
     {
         foreach ($this->domain->getAll() as $domainConfig) {
-            $mailTemplate = new MailTemplate($name, $domainConfig->getId(), new MailTemplateData());
+            $mailTemplate = $this->mailTemplateFactory->create($name, $domainConfig->getId(), new MailTemplateData());
             $this->em->persist($mailTemplate);
         }
 

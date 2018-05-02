@@ -7,9 +7,24 @@ use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateData;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface;
 
 class MailTemplateDataFixture extends AbstractReferenceFixture
 {
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface
+     */
+    protected $mailTemplateFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface $mailTemplateFactory
+     */
+    public function __construct(MailTemplateFactoryInterface $mailTemplateFactory)
+    {
+        $this->mailTemplateFactory = $mailTemplateFactory;
+    }
+
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
@@ -114,7 +129,7 @@ team of {domain}
         ]);
 
         if ($mailTemplate === null) {
-            $mailTemplate = new MailTemplate($name, Domain::FIRST_DOMAIN_ID, $mailTemplateData);
+            $mailTemplate = $this->mailTemplateFactory->create($name, Domain::FIRST_DOMAIN_ID, $mailTemplateData);
         } else {
             $mailTemplate->edit($mailTemplateData);
         }

@@ -680,3 +680,6 @@ services:
 
   Shopsys\FrameworkBundle\Component\Image\ImageFactoryInterface:
     alias: Shopsys\FrameworkBundle\Component\Image\ImageFactory
+
+  Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactory
