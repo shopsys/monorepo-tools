@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Order;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPayment;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
@@ -37,16 +37,30 @@ class OrderCreationService
      */
     private $numberFormatterExtension;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface
+     */
+    protected $orderPaymentFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface $orderPaymentFactory
+     */
     public function __construct(
         PaymentPriceCalculation $paymentPriceCalculation,
         TransportPriceCalculation $transportPriceCalculation,
         Domain $domain,
-        NumberFormatterExtension $numberFormatterExtension
+        NumberFormatterExtension $numberFormatterExtension,
+        OrderPaymentFactoryInterface $orderPaymentFactory
     ) {
         $this->paymentPriceCalculation = $paymentPriceCalculation;
         $this->transportPriceCalculation = $transportPriceCalculation;
         $this->domain = $domain;
         $this->numberFormatterExtension = $numberFormatterExtension;
+        $this->orderPaymentFactory = $orderPaymentFactory;
     }
 
     /**
@@ -132,7 +146,7 @@ class OrderCreationService
             $orderPreview->getProductsPrice(),
             $order->getDomainId()
         );
-        $orderPayment = new OrderPayment(
+        $orderPayment = $this->orderPaymentFactory->create(
             $order,
             $payment->getName($locale),
             $paymentPrice,
