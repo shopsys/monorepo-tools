@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Cart;
 
 use DateTime;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
+use Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
@@ -17,11 +18,20 @@ class CartService
     private $productPriceCalculation;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface
      */
-    public function __construct(ProductPriceCalculationForUser $productPriceCalculation)
-    {
+    protected $cartItemFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface $cartItemFactory
+     */
+    public function __construct(
+        ProductPriceCalculationForUser $productPriceCalculation,
+        CartItemFactoryInterface $cartItemFactory
+    ) {
         $this->productPriceCalculation = $productPriceCalculation;
+        $this->cartItemFactory = $cartItemFactory;
     }
 
     /**
@@ -46,7 +56,7 @@ class CartService
         }
 
         $productPrice = $this->productPriceCalculation->calculatePriceForCurrentUser($product);
-        $newCartItem = new CartItem($customerIdentifier, $product, $quantity, $productPrice->getPriceWithVat());
+        $newCartItem = $this->cartItemFactory->create($customerIdentifier, $product, $quantity, $productPrice->getPriceWithVat());
         $cart->addItem($newCartItem);
         return new AddProductResult($newCartItem, true, $quantity);
     }
@@ -100,7 +110,7 @@ class CartService
             if ($similarCartItem instanceof CartItem) {
                 $similarCartItem->changeQuantity($cartItem->getQuantity());
             } else {
-                $newCartItem = new CartItem(
+                $newCartItem = $this->cartItemFactory->create(
                     $customerIdentifier,
                     $cartItem->getProduct(),
                     $cartItem->getQuantity(),
