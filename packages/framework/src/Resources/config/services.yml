@@ -650,3 +650,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory
+
+  Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Category\CategoryFactory
