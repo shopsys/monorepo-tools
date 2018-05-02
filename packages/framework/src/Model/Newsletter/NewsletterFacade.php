@@ -18,12 +18,24 @@ class NewsletterFacade
      */
     protected $newsletterRepository;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriberFactoryInterface
+     */
+    protected $newsletterSubscriberFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository $newsletterRepository
+     * @param \Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriberFactoryInterface $newsletterSubscriberFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
-        NewsletterRepository $newsletterRepository
+        NewsletterRepository $newsletterRepository,
+        NewsletterSubscriberFactoryInterface $newsletterSubscriberFactory
     ) {
         $this->em = $em;
         $this->newsletterRepository = $newsletterRepository;
+        $this->newsletterSubscriberFactory = $newsletterSubscriberFactory;
     }
 
     /**
@@ -33,7 +45,7 @@ class NewsletterFacade
     public function addSubscribedEmail($email, $domainId)
     {
         if (!$this->newsletterRepository->existsSubscribedEmail($email, $domainId)) {
-            $newsletterSubscriber = new NewsletterSubscriber($email, new DateTimeImmutable(), $domainId);
+            $newsletterSubscriber = $this->newsletterSubscriberFactory->create($email, new DateTimeImmutable(), $domainId);
             $this->em->persist($newsletterSubscriber);
             $this->em->flush($newsletterSubscriber);
         }

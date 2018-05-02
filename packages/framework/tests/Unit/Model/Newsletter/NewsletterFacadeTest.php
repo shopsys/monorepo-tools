@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriber;
+use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriberFactory;
 
 class NewsletterFacadeTest extends TestCase
 {
@@ -31,7 +32,11 @@ class NewsletterFacadeTest extends TestCase
         parent::setUp();
         $this->em = $this->createMock(EntityManager::class);
         $this->newsletterRepository = $this->createMock(NewsletterRepository::class);
-        $this->newsletterFacade = new NewsletterFacade($this->em, $this->newsletterRepository);
+        $this->newsletterFacade = new NewsletterFacade(
+            $this->em,
+            $this->newsletterRepository,
+            new NewsletterSubscriberFactory()
+        );
     }
 
     public function testAddSubscribedEmail(): void

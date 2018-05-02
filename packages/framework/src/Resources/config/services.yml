@@ -686,3 +686,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFactory
+
+  Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriberFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriberFactory
