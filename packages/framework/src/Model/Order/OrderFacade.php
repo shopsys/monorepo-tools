@@ -123,6 +123,11 @@ class OrderFacade
      */
     protected $domain;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderFactoryInterface
+     */
+    protected $orderFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         OrderNumberSequenceRepository $orderNumberSequenceRepository,
@@ -142,7 +147,8 @@ class OrderFacade
         OrderPreviewFactory $orderPreviewFactory,
         OrderProductFacade $orderProductFacade,
         HeurekaFacade $heurekaFacade,
-        Domain $domain
+        Domain $domain,
+        OrderFactoryInterface $orderFactory
     ) {
         $this->em = $em;
         $this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -163,6 +169,7 @@ class OrderFacade
         $this->orderProductFacade = $orderProductFacade;
         $this->heurekaFacade = $heurekaFacade;
         $this->domain = $domain;
+        $this->orderFactory = $orderFactory;
     }
 
     /**
@@ -179,7 +186,7 @@ class OrderFacade
 
         $this->setOrderDataAdministrator($orderData);
 
-        $order = new Order(
+        $order = $this->orderFactory->create(
             $orderData,
             $orderNumber,
             $orderUrlHash,

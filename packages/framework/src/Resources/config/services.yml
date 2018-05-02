@@ -689,3 +689,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriberFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Newsletter\NewsletterSubscriberFactory
+
+  Shopsys\FrameworkBundle\Model\Order\OrderFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\OrderFactory
