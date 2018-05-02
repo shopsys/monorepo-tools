@@ -23,18 +23,26 @@ class CountryFacade
     protected $domain;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryFactoryInterface
+     */
+    protected $countryFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Country\CountryRepository $countryRepository
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Country\CountryFactoryInterface $countryFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         CountryRepository $countryRepository,
-        Domain $domain
+        Domain $domain,
+        CountryFactoryInterface $countryFactory
     ) {
         $this->em = $em;
         $this->countryRepository = $countryRepository;
         $this->domain = $domain;
+        $this->countryFactory = $countryFactory;
     }
 
     /**
@@ -53,7 +61,7 @@ class CountryFacade
      */
     public function create(CountryData $countryData, $domainId)
     {
-        $country = new Country($countryData, $domainId);
+        $country = $this->countryFactory->create($countryData, $domainId);
         $this->em->persist($country);
         $this->em->flush($country);
 

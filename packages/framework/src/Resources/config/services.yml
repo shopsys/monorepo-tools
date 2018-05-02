@@ -656,3 +656,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Category\CategoryDomainFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Category\CategoryDomainFactory
+
+  Shopsys\FrameworkBundle\Model\Country\CountryFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Country\CountryFactory
