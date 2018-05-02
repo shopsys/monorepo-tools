@@ -12,9 +12,21 @@ class CustomerService
      */
     private $customerPasswordService;
 
-    public function __construct(CustomerPasswordService $customerPasswordService)
-    {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface
+     */
+    protected $deliveryAddressFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
+     */
+    public function __construct(
+        CustomerPasswordService $customerPasswordService,
+        DeliveryAddressFactoryInterface $deliveryAddressFactory
+    ) {
         $this->customerPasswordService = $customerPasswordService;
+        $this->deliveryAddressFactory = $deliveryAddressFactory;
     }
 
     /**
@@ -68,7 +80,7 @@ class CustomerService
     public function createDeliveryAddress(DeliveryAddressData $deliveryAddressData)
     {
         if ($deliveryAddressData->addressFilled) {
-            $deliveryAddress = new DeliveryAddress($deliveryAddressData);
+            $deliveryAddress = $this->deliveryAddressFactory->create($deliveryAddressData);
         } else {
             $deliveryAddress = null;
         }
@@ -91,7 +103,7 @@ class CustomerService
             if ($deliveryAddress instanceof DeliveryAddress) {
                 $deliveryAddress->edit($deliveryAddressData);
             } else {
-                $deliveryAddress = new DeliveryAddress($deliveryAddressData);
+                $deliveryAddress = $this->deliveryAddressFactory->create($deliveryAddressData);
                 $user->setDeliveryAddress($deliveryAddress);
             }
         } else {

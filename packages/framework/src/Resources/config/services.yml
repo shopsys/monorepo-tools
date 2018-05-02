@@ -665,3 +665,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFactory
+
+  Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactory
