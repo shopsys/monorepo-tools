@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactory;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 
@@ -20,10 +21,10 @@ class FriendlyUrlServiceTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlService = new FriendlyUrlService($domain);
+        $friendlyUrlService = new FriendlyUrlService($domain, new FriendlyUrlFactory());
 
         $routeName = 'route_name';
-        $entityId = '7';
+        $entityId = 7;
         $namesByLocale = [
             'cs' => 'cs-name',
             'en' => 'en-name',
@@ -50,7 +51,7 @@ class FriendlyUrlServiceTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlService = new FriendlyUrlService($domain);
+        $friendlyUrlService = new FriendlyUrlService($domain, new FriendlyUrlFactory());
 
         $attempt = 1;
         $friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
@@ -74,7 +75,7 @@ class FriendlyUrlServiceTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlService = new FriendlyUrlService($domain);
+        $friendlyUrlService = new FriendlyUrlService($domain, new FriendlyUrlFactory());
 
         $attempt = 1;
         $friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
@@ -101,7 +102,7 @@ class FriendlyUrlServiceTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlService = new FriendlyUrlService($domain);
+        $friendlyUrlService = new FriendlyUrlService($domain, new FriendlyUrlFactory());
 
         $attempt = 3;
         $friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
@@ -132,7 +133,7 @@ class FriendlyUrlServiceTest extends TestCase
         $settingMock = $this->createMock(Setting::class);
         $domain = new Domain($domainConfigs, $settingMock);
 
-        $friendlyUrlService = new FriendlyUrlService($domain);
+        $friendlyUrlService = new FriendlyUrlService($domain, new FriendlyUrlFactory());
         $friendlyUrl = new FriendlyUrl('routeName', 1, 1, 'slug/');
         $absoluteUrl = $friendlyUrlService->getAbsoluteUrlByFriendlyUrl($friendlyUrl);
 

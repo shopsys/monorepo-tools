@@ -13,9 +13,19 @@ class FriendlyUrlService
      */
     private $domain;
 
-    public function __construct(Domain $domain)
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactoryInterface
+     */
+    protected $friendlyUrlFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactoryInterface $friendlyUrlFactory
+     */
+    public function __construct(Domain $domain, FriendlyUrlFactoryInterface $friendlyUrlFactory)
     {
         $this->domain = $domain;
+        $this->friendlyUrlFactory = $friendlyUrlFactory;
     }
 
     /**
@@ -100,7 +110,7 @@ class FriendlyUrlService
             $nameForUrl = $entityName . ($entityName === null ? '' : '-' . $indexPostfix);
             $slug = TransformString::stringToFriendlyUrlSlug($nameForUrl) . '/';
 
-            return new FriendlyUrl($routeName, $entityId, $domainId, $slug);
+            return $this->friendlyUrlFactory->create($routeName, $entityId, $domainId, $slug);
         }
 
         return null;

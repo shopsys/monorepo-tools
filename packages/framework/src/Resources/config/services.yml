@@ -674,3 +674,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactory
+
+  Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactory

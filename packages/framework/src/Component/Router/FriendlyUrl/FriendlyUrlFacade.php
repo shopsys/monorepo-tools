@@ -37,18 +37,33 @@ class FriendlyUrlFacade
      */
     protected $domain;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactoryInterface
+     */
+    protected $friendlyUrlFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlService $friendlyUrlService
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository $friendlyUrlRepository
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactoryInterface $friendlyUrlFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         DomainRouterFactory $domainRouterFactory,
         FriendlyUrlService $friendlyUrlService,
         FriendlyUrlRepository $friendlyUrlRepository,
-        Domain $domain
+        Domain $domain,
+        FriendlyUrlFactoryInterface $friendlyUrlFactory
     ) {
         $this->em = $em;
         $this->domainRouterFactory = $domainRouterFactory;
         $this->friendlyUrlService = $friendlyUrlService;
         $this->friendlyUrlRepository = $friendlyUrlRepository;
         $this->domain = $domain;
+        $this->friendlyUrlFactory = $friendlyUrlFactory;
     }
 
     /**
@@ -166,7 +181,7 @@ class FriendlyUrlFacade
         foreach ($urlListData->newUrls as $urlData) {
             $domainId = $urlData[FriendlyUrlType::FIELD_DOMAIN];
             $newSlug = $urlData[FriendlyUrlType::FIELD_SLUG];
-            $newFriendlyUrl = new FriendlyUrl($routeName, $entityId, $domainId, $newSlug);
+            $newFriendlyUrl = $this->friendlyUrlFactory->create($routeName, $entityId, $domainId, $newSlug);
             $this->em->persist($newFriendlyUrl);
             $toFlush[] = $newFriendlyUrl;
         }
