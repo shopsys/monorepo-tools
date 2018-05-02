@@ -713,3 +713,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueFactory
+
+  Shopsys\FrameworkBundle\Model\Payment\PaymentFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Payment\PaymentFactory

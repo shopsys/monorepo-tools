@@ -51,6 +51,22 @@ class PaymentFacade
      */
     protected $paymentPriceCalculation;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFactoryInterface
+     */
+    protected $paymentFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository $paymentRepository
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportRepository $transportRepository
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentVisibilityCalculation $paymentVisibilityCalculation
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFactoryInterface $paymentFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         PaymentRepository $paymentRepository,
@@ -59,7 +75,8 @@ class PaymentFacade
         Domain $domain,
         ImageFacade $imageFacade,
         CurrencyFacade $currencyFacade,
-        PaymentPriceCalculation $paymentPriceCalculation
+        PaymentPriceCalculation $paymentPriceCalculation,
+        PaymentFactoryInterface $paymentFactory
     ) {
         $this->em = $em;
         $this->paymentRepository = $paymentRepository;
@@ -69,6 +86,7 @@ class PaymentFacade
         $this->imageFacade = $imageFacade;
         $this->currencyFacade = $currencyFacade;
         $this->paymentPriceCalculation = $paymentPriceCalculation;
+        $this->paymentFactory = $paymentFactory;
     }
 
     /**
@@ -77,7 +95,7 @@ class PaymentFacade
      */
     public function create(PaymentEditData $paymentEditData)
     {
-        $payment = new Payment($paymentEditData->paymentData);
+        $payment = $this->paymentFactory->create($paymentEditData->paymentData);
         $this->em->persist($payment);
         $this->em->flush();
         $this->updatePaymentPrices($payment, $paymentEditData->pricesByCurrencyId);
