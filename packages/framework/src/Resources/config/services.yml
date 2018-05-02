@@ -707,3 +707,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFactory
