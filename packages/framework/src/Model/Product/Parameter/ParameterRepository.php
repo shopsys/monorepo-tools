@@ -14,10 +14,21 @@ class ParameterRepository
      */
     private $em;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueFactoryInterface
+     */
+    protected $parameterValueFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueFactoryInterface $parameterValueFactory
+     */
     public function __construct(
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        ParameterValueFactoryInterface $parameterValueFactory
     ) {
         $this->em = $entityManager;
+        $this->parameterValueFactory = $parameterValueFactory;
     }
 
     /**
@@ -90,7 +101,7 @@ class ParameterRepository
         ]);
 
         if ($parameterValue === null) {
-            $parameterValue = new ParameterValue(new ParameterValueData($valueText, $locale));
+            $parameterValue = $this->parameterValueFactory->create(new ParameterValueData($valueText, $locale));
             $this->em->persist($parameterValue);
             // Doctrine's identity map is not cache.
             // We have to flush now, so that next findOneBy() finds new ParameterValue.

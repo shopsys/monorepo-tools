@@ -710,3 +710,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueFactory
