@@ -683,3 +683,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactory
+
+  Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFactory
