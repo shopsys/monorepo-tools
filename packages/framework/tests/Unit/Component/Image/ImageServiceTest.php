@@ -7,6 +7,7 @@ use Shopsys\FrameworkBundle\Component\FileUpload\FileNamingConvention;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig;
 use Shopsys\FrameworkBundle\Component\Image\Image;
+use Shopsys\FrameworkBundle\Component\Image\ImageFactory;
 use Shopsys\FrameworkBundle\Component\Image\ImageService;
 use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService;
 use Symfony\Component\Filesystem\Filesystem;
@@ -21,7 +22,7 @@ class ImageServiceTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload());
+        $imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload(), new ImageFactory());
 
         $this->expectException(\Shopsys\FrameworkBundle\Component\Image\Exception\EntityMultipleImageException::class);
         $imageService->getUploadedImages($imageEntityConfig, 1, [], 'type');
@@ -41,7 +42,7 @@ class ImageServiceTest extends TestCase
                 return pathinfo($filepath, PATHINFO_BASENAME);
             });
 
-        $imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload());
+        $imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload(), new ImageFactory());
         $images = $imageService->getUploadedImages($imageEntityConfig, 1, $filenames, 'type');
 
         $this->assertCount(2, $images);
@@ -64,7 +65,7 @@ class ImageServiceTest extends TestCase
             ->getMock();
         $imageProcessingServiceMock->expects($this->any())->method('convertToShopFormatAndGetNewFilename')->willReturn($filename);
 
-        $imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload());
+        $imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload(), new ImageFactory());
         $image = $imageService->createImage($imageEntityConfig, 1, $filename, 'type');
         $temporaryFiles = $image->getTemporaryFilesForUpload();
 
