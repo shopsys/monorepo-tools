@@ -668,3 +668,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactory
+
+  Shopsys\FrameworkBundle\Model\Module\EnabledModuleFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Module\EnabledModuleFactory
