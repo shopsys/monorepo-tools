@@ -662,3 +662,6 @@ services:
 
   Shopsys\FrameworkBundle\Component\Cron\CronModuleFactoryInterface:
     alias: Shopsys\FrameworkBundle\Component\Cron\CronModuleFactory
+
+  Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFactory
