@@ -30,6 +30,15 @@ class Article extends BaseArticle
     }
 
     /**
+     * @param \Shopsys\ShopBundle\Model\Article\ArticleData $articleData
+     */
+    public function edit(BaseArticleData $articleData)
+    {
+        $this->createdAt = $articleData->createdAt ?? new DateTime();
+        parent::edit($articleData);
+    }
+
+    /**
      * @return \DateTime
      */
     public function getCreatedAt(): DateTime

@@ -13,10 +13,12 @@ services:
     tags: ['controller.service_arguments']
 
   Shopsys\ShopBundle\Model\:
-    resource: '../../Model/*/*Facade.php'
+    resource: '../../Model/*/*{Facade,Factory}.php'
 
   Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory: ~
 
   Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface: '@Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory'
 
   Shopsys\FrameworkBundle\Model\Article\ArticleFacade: '@Shopsys\ShopBundle\Model\Article\ArticleFacade'
+
+  Shopsys\FrameworkBundle\Model\Article\ArticleDataFactory: '@Shopsys\ShopBundle\Model\Article\ArticleDataFactory'
