@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
@@ -43,24 +43,32 @@ class OrderCreationService
     protected $orderPaymentFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface
+     */
+    protected $orderProductFactory;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface $orderPaymentFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
      */
     public function __construct(
         PaymentPriceCalculation $paymentPriceCalculation,
         TransportPriceCalculation $transportPriceCalculation,
         Domain $domain,
         NumberFormatterExtension $numberFormatterExtension,
-        OrderPaymentFactoryInterface $orderPaymentFactory
+        OrderPaymentFactoryInterface $orderPaymentFactory,
+        OrderProductFactoryInterface $orderProductFactory
     ) {
         $this->paymentPriceCalculation = $paymentPriceCalculation;
         $this->transportPriceCalculation = $transportPriceCalculation;
         $this->domain = $domain;
         $this->numberFormatterExtension = $numberFormatterExtension;
         $this->orderPaymentFactory = $orderPaymentFactory;
+        $this->orderProductFactory = $orderProductFactory;
     }
 
     /**
@@ -196,7 +204,7 @@ class OrderCreationService
             $quantifiedItemDiscount = $quantifiedItemDiscounts[$index];
             /* @var $quantifiedItemDiscount \Shopsys\FrameworkBundle\Model\Pricing\Price|null */
 
-            $orderItem = new OrderProduct(
+            $orderItem = $this->orderProductFactory->create(
                 $order,
                 $product->getName($locale),
                 $quantifiedItemPrice->getUnitPrice(),
@@ -221,7 +229,7 @@ class OrderCreationService
     private function fillOrderRounding(Order $order, OrderPreview $orderPreview, $locale)
     {
         if ($orderPreview->getRoundingPrice() !== null) {
-            new OrderProduct(
+            $this->orderProductFactory->create(
                 $order,
                 t('Rounding', [], 'messages', $locale),
                 $orderPreview->getRoundingPrice(),
@@ -249,7 +257,7 @@ class OrderCreationService
             $orderItem->getName()
         );
 
-        new OrderProduct(
+        $this->orderProductFactory->create(
             $orderItem->getOrder(),
             $name,
             new Price(
