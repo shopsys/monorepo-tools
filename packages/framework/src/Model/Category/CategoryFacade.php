@@ -60,6 +60,23 @@ class CategoryFacade
      */
     protected $pluginCrudExtensionFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDomainFactoryInterface
+     */
+    protected $categoryDomainFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryService $categoryService
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler
+     * @param \Shopsys\FrameworkBundle\Model\Category\Detail\CategoryDetailFactory $categoryDetailFactory
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
+     * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade $pluginCrudExtensionFacade
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDomainFactoryInterface $categoryDomainFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         CategoryRepository $categoryRepository,
@@ -69,7 +86,8 @@ class CategoryFacade
         CategoryDetailFactory $categoryDetailFactory,
         FriendlyUrlFacade $friendlyUrlFacade,
         ImageFacade $imageFacade,
-        PluginCrudExtensionFacade $pluginCrudExtensionFacade
+        PluginCrudExtensionFacade $pluginCrudExtensionFacade,
+        CategoryDomainFactoryInterface $categoryDomainFactory
     ) {
         $this->em = $em;
         $this->categoryRepository = $categoryRepository;
@@ -80,6 +98,7 @@ class CategoryFacade
         $this->friendlyUrlFacade = $friendlyUrlFacade;
         $this->imageFacade = $imageFacade;
         $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
+        $this->categoryDomainFactory = $categoryDomainFactory;
     }
 
     /**
@@ -146,7 +165,7 @@ class CategoryFacade
 
         foreach ($domainConfigs as $domainConfig) {
             $domainId = $domainConfig->getId();
-            $categoryDomain = new CategoryDomain($category, $domainId);
+            $categoryDomain = $this->categoryDomainFactory->create($category, $domainId);
 
             $this->em->persist($categoryDomain);
             $toFlush[] = $categoryDomain;

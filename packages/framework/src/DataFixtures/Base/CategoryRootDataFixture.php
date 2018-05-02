@@ -7,7 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Category\CategoryData;
-use Shopsys\FrameworkBundle\Model\Category\CategoryDomain;
+use Shopsys\FrameworkBundle\Model\Category\CategoryDomainFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface;
 
 class CategoryRootDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -20,11 +20,20 @@ class CategoryRootDataFixture extends AbstractReferenceFixture implements Depend
     protected $categoryFactory;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface $categoryFactory
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDomainFactoryInterface
      */
-    public function __construct(CategoryFactoryInterface $categoryFactory)
-    {
+    protected $categoryDomainFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface $categoryFactory
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDomainFactoryInterface $categoryDomainFactory
+     */
+    public function __construct(
+        CategoryFactoryInterface $categoryFactory,
+        CategoryDomainFactoryInterface $categoryDomainFactory
+    ) {
         $this->categoryFactory = $categoryFactory;
+        $this->categoryDomainFactory = $categoryDomainFactory;
     }
 
     /**
@@ -37,7 +46,7 @@ class CategoryRootDataFixture extends AbstractReferenceFixture implements Depend
         $manager->flush($rootCategory);
         $this->addReference(self::CATEGORY_ROOT, $rootCategory);
 
-        $categoryDomain = new CategoryDomain($rootCategory, Domain::FIRST_DOMAIN_ID);
+        $categoryDomain = $this->categoryDomainFactory->create($rootCategory, Domain::FIRST_DOMAIN_ID);
         $manager->persist($categoryDomain);
 
         $manager->flush();
