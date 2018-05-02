@@ -31,7 +31,7 @@ class MailTemplateFacade
     protected $orderStatusMailTemplateService;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain;
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     protected $domain;
 
