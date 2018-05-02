@@ -641,3 +641,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory
