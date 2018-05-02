@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransport;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
@@ -48,12 +48,18 @@ class OrderCreationService
     protected $orderProductFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface
+     */
+    protected $orderTransportFactory;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentFactoryInterface $orderPaymentFactory
      * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface $orderTransportFactory
      */
     public function __construct(
         PaymentPriceCalculation $paymentPriceCalculation,
@@ -61,7 +67,8 @@ class OrderCreationService
         Domain $domain,
         NumberFormatterExtension $numberFormatterExtension,
         OrderPaymentFactoryInterface $orderPaymentFactory,
-        OrderProductFactoryInterface $orderProductFactory
+        OrderProductFactoryInterface $orderProductFactory,
+        OrderTransportFactoryInterface $orderTransportFactory
     ) {
         $this->paymentPriceCalculation = $paymentPriceCalculation;
         $this->transportPriceCalculation = $transportPriceCalculation;
@@ -69,6 +76,7 @@ class OrderCreationService
         $this->numberFormatterExtension = $numberFormatterExtension;
         $this->orderPaymentFactory = $orderPaymentFactory;
         $this->orderProductFactory = $orderProductFactory;
+        $this->orderTransportFactory = $orderTransportFactory;
     }
 
     /**
@@ -171,7 +179,7 @@ class OrderCreationService
             $orderPreview->getProductsPrice(),
             $order->getDomainId()
         );
-        $orderTransport = new OrderTransport(
+        $orderTransport = $this->orderTransportFactory->create(
             $order,
             $transport->getName($locale),
             $transportPrice,

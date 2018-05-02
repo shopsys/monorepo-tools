@@ -704,3 +704,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFactory
+
+  Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportFactory
