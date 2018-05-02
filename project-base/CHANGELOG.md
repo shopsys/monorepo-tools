@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - moved from `\Shopsys\Environment` to `\Shopsys\FrameworkBundle\Component\Environment\EnvironmentType`
 - Dependency Injection strict mode is now enabled (@EdoBarnas)
     - disables autowiring features that were removed in Symfony 4
+- as a rule, using minor versions of docker images (eg. `1.2` or `1.2-alpine`) if possible (@MattCzerner)
 
 ### Removed
 - support of installation using Docker for Windows 10 Home and lower (@TomasLudvik)

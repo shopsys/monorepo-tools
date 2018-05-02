@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - all installation guides verified and tweaked (@TomasLudvik)
     - Docker installation supported on Linux, MacOS and Windows 10 Pro and higher (recommended way of installing the application)
     - native installation is also supported (recommended on Windows 10 Home and lower)
+- as a rule, using minor versions of docker images (eg. `1.2` or `1.2-alpine`) if possible (@MattCzerner)
 
 ## 7.0.0-alpha1 - 2018-04-12
 ### Added
