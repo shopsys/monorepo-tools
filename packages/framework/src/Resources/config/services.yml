@@ -692,3 +692,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Order\OrderFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Order\OrderFactory
+
+  Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceFactory
