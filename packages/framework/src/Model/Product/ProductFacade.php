@@ -134,6 +134,11 @@ class ProductFacade
      */
     protected $productParameterValueFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFactoryInterface
+     */
+    protected $productVisibilityFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         ProductRepository $productRepository,
@@ -157,7 +162,8 @@ class ProductFacade
         ProductAccessoryFactoryInterface $productAccessoryFactory,
         ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
         ProductDomainFactoryInterface $productDomainFactory,
-        ProductParameterValueFactoryInterface $productParameterValueFactory
+        ProductParameterValueFactoryInterface $productParameterValueFactory,
+        ProductVisibilityFactoryInterface $productVisibilityFactory
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -182,6 +188,7 @@ class ProductFacade
         $this->productCategoryDomainFactory = $productCategoryDomainFactory;
         $this->productDomainFactory = $productDomainFactory;
         $this->productParameterValueFactory = $productParameterValueFactory;
+        $this->productVisibilityFactory = $productVisibilityFactory;
     }
 
     /**
@@ -419,7 +426,7 @@ class ProductFacade
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainId = $domainConfig->getId();
             foreach ($this->pricingGroupRepository->getPricingGroupsByDomainId($domainId) as $pricingGroup) {
-                $productVisibility = new ProductVisibility($product, $pricingGroup, $domainId);
+                $productVisibility = $this->productVisibilityFactory->create($product, $pricingGroup, $domainId);
                 $this->em->persist($productVisibility);
                 $toFlush[] = $productVisibility;
             }
