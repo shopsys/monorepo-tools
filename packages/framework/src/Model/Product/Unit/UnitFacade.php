@@ -23,18 +23,26 @@ class UnitFacade
     protected $setting;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFactoryInterface
+     */
+    protected $unitFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitRepository $unitRepository
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFactoryInterface $unitFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         UnitRepository $unitRepository,
-        Setting $setting
+        Setting $setting,
+        UnitFactoryInterface $unitFactory
     ) {
         $this->em = $em;
         $this->unitRepository = $unitRepository;
         $this->setting = $setting;
+        $this->unitFactory = $unitFactory;
     }
 
     /**
@@ -52,7 +60,7 @@ class UnitFacade
      */
     public function create(UnitData $unitData)
     {
-        $unit = new Unit($unitData);
+        $unit = $this->unitFactory->create($unitData);
         $this->em->persist($unit);
         $this->em->flush();
 
