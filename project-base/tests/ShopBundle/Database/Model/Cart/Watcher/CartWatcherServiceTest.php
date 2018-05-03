@@ -13,6 +13,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
@@ -50,7 +51,7 @@ class CartWatcherServiceTest extends FunctionalTestCase
         $productData2->price = 200;
         $productData2->vat = $vat;
 
-        $productMock->edit($productData2);
+        $productMock->edit(new ProductCategoryDomainFactory(), $productData2);
         $modifiedItems2 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
         $this->assertNotEmpty($modifiedItems2);
 

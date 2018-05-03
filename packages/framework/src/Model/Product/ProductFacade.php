@@ -119,6 +119,11 @@ class ProductFacade
      */
     protected $productAccessoryFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface
+     */
+    protected $productCategoryDomainFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         ProductRepository $productRepository,
@@ -139,7 +144,8 @@ class ProductFacade
         AvailabilityFacade $availabilityFacade,
         PluginCrudExtensionFacade $pluginCrudExtensionFacade,
         ProductFactoryInterface $productFactory,
-        ProductAccessoryFactoryInterface $productAccessoryFactory
+        ProductAccessoryFactoryInterface $productAccessoryFactory,
+        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -161,6 +167,7 @@ class ProductFacade
         $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
         $this->productFactory = $productFactory;
         $this->productAccessoryFactory = $productAccessoryFactory;
+        $this->productCategoryDomainFactory = $productCategoryDomainFactory;
     }
 
     /**
@@ -203,7 +210,7 @@ class ProductFacade
     {
         // Persist of ProductCategoryDomain requires known primary key of Product
         // @see https://github.com/doctrine/doctrine2/issues/4869
-        $product->setCategories($productEditData->productData->categoriesByDomainId);
+        $product->setCategories($this->productCategoryDomainFactory, $productEditData->productData->categoriesByDomainId);
         $this->em->flush($product);
 
         $this->saveParameters($product, $productEditData->parameters);

@@ -11,6 +11,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductService;
 
@@ -40,7 +41,8 @@ class ProductServiceTest extends TestCase
             $inputPriceCalculationMock,
             $basePriceCalculationMock,
             $pricingSettingMock,
-            $productPriceRecalculationSchedulerMock
+            $productPriceRecalculationSchedulerMock,
+            new ProductCategoryDomainFactory()
         );
 
         $productData = new ProductData();
@@ -73,7 +75,8 @@ class ProductServiceTest extends TestCase
             $inputPriceCalculationMock,
             $basePriceCalculationMock,
             $pricingSettingMock,
-            $productPriceRecalculationSchedulerMock
+            $productPriceRecalculationSchedulerMock,
+            new ProductCategoryDomainFactory()
         );
 
         $productData = new ProductData();
@@ -106,7 +109,8 @@ class ProductServiceTest extends TestCase
             $inputPriceCalculationMock,
             $basePriceCalculationMock,
             $pricingSettingMock,
-            $productPriceRecalculationSchedulerMock
+            $productPriceRecalculationSchedulerMock,
+            new ProductCategoryDomainFactory()
         );
 
         $productData = new ProductData();
@@ -146,7 +150,8 @@ class ProductServiceTest extends TestCase
             $inputPriceCalculationMock,
             $basePriceCalculationMock,
             $pricingSettingMock,
-            $productPriceRecalculationSchedulerMock
+            $productPriceRecalculationSchedulerMock,
+            new ProductCategoryDomainFactory()
         );
 
         $productData = new ProductData();
@@ -183,7 +188,8 @@ class ProductServiceTest extends TestCase
             $inputPriceCalculationMock,
             $basePriceCalculationMock,
             $pricingSettingMock,
-            $productPriceRecalculationSchedulerMock
+            $productPriceRecalculationSchedulerMock,
+            new ProductCategoryDomainFactory()
         );
 
         $productData = new ProductData();
@@ -221,7 +227,8 @@ class ProductServiceTest extends TestCase
             $inputPriceCalculationMock,
             $basePriceCalculationMock,
             $pricingSettingMock,
-            $productPriceRecalculationSchedulerMock
+            $productPriceRecalculationSchedulerMock,
+            new ProductCategoryDomainFactory()
         );
 
         $productData = new ProductData();
@@ -260,7 +267,8 @@ class ProductServiceTest extends TestCase
             $inputPriceCalculationMock,
             $basePriceCalculationMock,
             $pricingSettingMock,
-            $productPriceRecalculationSchedulerMock
+            $productPriceRecalculationSchedulerMock,
+            new ProductCategoryDomainFactory()
         );
 
         $productMock = $this->getMockBuilder(Product::class)
@@ -302,7 +310,8 @@ class ProductServiceTest extends TestCase
             $inputPriceCalculationMock,
             $basePriceCalculationMock,
             $pricingSettingMock,
-            $productPriceRecalculationSchedulerMock
+            $productPriceRecalculationSchedulerMock,
+            new ProductCategoryDomainFactory()
         );
 
         $variantMock = $this->getMockBuilder(Product::class)
@@ -351,7 +360,8 @@ class ProductServiceTest extends TestCase
             $inputPriceCalculationMock,
             $basePriceCalculationMock,
             $pricingSettingMock,
-            $productPriceRecalculationSchedulerMock
+            $productPriceRecalculationSchedulerMock,
+            new ProductCategoryDomainFactory()
         );
 
         $mainVariantMock = $this->getMockBuilder(Product::class)
@@ -399,7 +409,8 @@ class ProductServiceTest extends TestCase
             $inputPriceCalculationMock,
             $basePriceCalculationMock,
             $pricingSettingMock,
-            $productPriceRecalculationSchedulerMock
+            $productPriceRecalculationSchedulerMock,
+            new ProductCategoryDomainFactory()
         );
 
         $orderedProducts = $productService->sortProductsByProductIds(

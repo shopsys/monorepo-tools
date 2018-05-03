@@ -353,10 +353,13 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData
      */
-    public function edit(ProductData $productData)
-    {
+    public function edit(
+        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
+        ProductData $productData
+    ) {
         $this->vat = $productData->vat;
         $this->sellingFrom = $productData->sellingFrom;
         $this->sellingTo = $productData->sellingTo;
@@ -369,7 +372,7 @@ class Product extends AbstractTranslatableEntity
         $this->setTranslations($productData);
 
         if (!$this->isVariant()) {
-            $this->setCategories($productData->categoriesByDomainId);
+            $this->setCategories($productCategoryDomainFactory, $productData->categoriesByDomainId);
         }
         if (!$this->isMainVariant()) {
             $this->usingStock = $productData->usingStock;
@@ -639,27 +642,34 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\FrameworkBundle\Model\Category\Category[] $categoriesByDomainId
      */
-    public function setCategories(array $categoriesByDomainId)
-    {
+    public function setCategories(
+        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
+        array $categoriesByDomainId
+    ) {
         foreach ($categoriesByDomainId as $domainId => $categories) {
             $this->removeOldProductCategoryDomains($categories, $domainId);
-            $this->createNewProductCategoryDomains($categories, $domainId);
+            $this->createNewProductCategoryDomains($productCategoryDomainFactory, $categories, $domainId);
         }
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
      * @param \Shopsys\FrameworkBundle\Model\Category\Category[] $newCategories
      * @param int $domainId
      */
-    protected function createNewProductCategoryDomains(array $newCategories, $domainId)
-    {
+    protected function createNewProductCategoryDomains(
+        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
+        array $newCategories,
+        $domainId
+    ) {
         $currentProductCategoryDomainsOnDomainByCategoryId = $this->getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId);
 
         foreach ($newCategories as $newCategory) {
             if (!array_key_exists($newCategory->getId(), $currentProductCategoryDomainsOnDomainByCategoryId)) {
-                $productCategoryDomain = new ProductCategoryDomain($this, $newCategory, $domainId);
+                $productCategoryDomain = $productCategoryDomainFactory->create($this, $newCategory, $domainId);
                 $this->productCategoryDomains->add($productCategoryDomain);
             }
         }

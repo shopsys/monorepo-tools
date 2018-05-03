@@ -37,18 +37,25 @@ class ProductService
      */
     private $productPriceRecalculationScheduler;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface
+     */
+    protected $productCategoryDomainFactory;
+
     public function __construct(
         ProductPriceCalculation $productPriceCalculation,
         InputPriceCalculation $inputPriceCalculation,
         BasePriceCalculation $basePriceCalculation,
         PricingSetting $pricingSetting,
-        ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+        ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
+        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
     ) {
         $this->productPriceCalculation = $productPriceCalculation;
         $this->inputPriceCalculation = $inputPriceCalculation;
         $this->basePriceCalculation = $basePriceCalculation;
         $this->pricingSetting = $pricingSetting;
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
+        $this->productCategoryDomainFactory = $productCategoryDomainFactory;
     }
 
     /**
@@ -94,7 +101,7 @@ class ProductService
      */
     public function edit(Product $product, ProductData $productData)
     {
-        $product->edit($productData);
+        $product->edit($this->productCategoryDomainFactory, $productData);
         $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
         $this->markProductForVisibilityRecalculation($product);
     }
