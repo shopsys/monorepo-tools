@@ -85,7 +85,7 @@ class VatFacade
      */
     public function create(VatData $vatData)
     {
-        $vat = $this->vatService->create($vatData);
+        $vat = new Vat($vatData);
         $this->em->persist($vat);
         $this->em->flush();
 
@@ -100,7 +100,7 @@ class VatFacade
     public function edit($vatId, VatData $vatData)
     {
         $vat = $this->vatRepository->getById($vatId);
-        $this->vatService->edit($vat, $vatData);
+        $vat->edit($vatData);
         $this->em->flush();
 
         $this->productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
