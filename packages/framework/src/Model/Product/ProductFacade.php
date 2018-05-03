@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository;
-use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessory;
+use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
@@ -114,6 +114,11 @@ class ProductFacade
      */
     protected $productFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFactoryInterface
+     */
+    protected $productAccessoryFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         ProductRepository $productRepository,
@@ -133,7 +138,8 @@ class ProductFacade
         ProductVariantService $productVariantService,
         AvailabilityFacade $availabilityFacade,
         PluginCrudExtensionFacade $pluginCrudExtensionFacade,
-        ProductFactoryInterface $productFactory
+        ProductFactoryInterface $productFactory,
+        ProductAccessoryFactoryInterface $productAccessoryFactory
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -154,6 +160,7 @@ class ProductFacade
         $this->availabilityFacade = $availabilityFacade;
         $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
         $this->productFactory = $productFactory;
+        $this->productAccessoryFactory = $productAccessoryFactory;
     }
 
     /**
@@ -413,7 +420,7 @@ class ProductFacade
 
         $toFlush = [];
         foreach ($accessories as $position => $accessory) {
-            $newProductAccessory = new ProductAccessory($product, $accessory, $position);
+            $newProductAccessory = $this->productAccessoryFactory->create($product, $accessory, $position);
             $this->em->persist($newProductAccessory);
             $toFlush[] = $newProductAccessory;
         }

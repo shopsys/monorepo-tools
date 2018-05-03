@@ -731,3 +731,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\ProductFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFactory
