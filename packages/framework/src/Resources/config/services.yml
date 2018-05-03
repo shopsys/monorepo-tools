@@ -722,3 +722,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactory
+
+  Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFactory
