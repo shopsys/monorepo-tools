@@ -57,6 +57,11 @@ class PaymentFacade
     protected $paymentFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentDomainFactoryInterface
+     */
+    protected $paymentDomainFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository $paymentRepository
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportRepository $transportRepository
@@ -66,6 +71,7 @@ class PaymentFacade
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFactoryInterface $paymentFactory
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentDomainFactoryInterface $paymentDomainFactory
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -76,7 +82,8 @@ class PaymentFacade
         ImageFacade $imageFacade,
         CurrencyFacade $currencyFacade,
         PaymentPriceCalculation $paymentPriceCalculation,
-        PaymentFactoryInterface $paymentFactory
+        PaymentFactoryInterface $paymentFactory,
+        PaymentDomainFactoryInterface $paymentDomainFactory
     ) {
         $this->em = $em;
         $this->paymentRepository = $paymentRepository;
@@ -87,6 +94,7 @@ class PaymentFacade
         $this->currencyFacade = $currencyFacade;
         $this->paymentPriceCalculation = $paymentPriceCalculation;
         $this->paymentFactory = $paymentFactory;
+        $this->paymentDomainFactory = $paymentDomainFactory;
     }
 
     /**
@@ -185,7 +193,7 @@ class PaymentFacade
     protected function createPaymentDomains(Payment $payment, array $domainIds)
     {
         foreach ($domainIds as $domainId) {
-            $paymentDomain = new PaymentDomain($payment, $domainId);
+            $paymentDomain = $this->paymentDomainFactory->create($payment, $domainId);
             $this->em->persist($paymentDomain);
         }
         $this->em->flush();
