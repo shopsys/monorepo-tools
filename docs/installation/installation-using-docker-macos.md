@@ -33,7 +33,13 @@ Create `docker-compose.yml` from template [`docker-compose-mac.yml.dist`](../../
 cp docker/conf/docker-compose-mac.yml.dist docker-compose.yml
 ```
 
-### 3. Compose Docker container
+### 3. Set the UID and GID to allow file access in mounted volumes
+Because we want both the user in host machine (you) and user running php-fpm in the container to access shared files, we need to make sure that they both have the same UID and GID.
+This can be achieved by build arguments `www_data_uid` and `www_data_gid` that should be set to the UID and GID as your own user in your `docker-compose.yml`.
+
+You can find out your UID by running `id -u` and your GID by running `id -g`.
+
+### 4. Compose Docker container
 On MacOS you need to synchronize folders using docker-sync.
 Before starting synchronization you need to create a directory for persisting Postgres data so you won't lose it when the container is shut down.
 ```
@@ -41,28 +47,10 @@ mkdir -p var/postgres-data
 docker-sync start
 ```
 
-Then start containers
+Then rebuild and start containers
 ```
-docker-compose up -d
-```
+docker-compose up -d --build
 
-### 4. Set file permissions
-Grant system users inside the container the required permissions
-#### Connect into terminal of the Docker container
-```
-docker exec -it shopsys-framework-php-fpm sh
-```
-
-#### Allow user with UID 82 ("www-data" in "php-fpm" container) read and write all project files
-```
-setfacl -R -m user:82:rwX -m mask:rwX .
-setfacl -dR -m user:82:rwX -m mask:rwX .
-```
-
-#### Allow user with UID 100 ("nginx" in "webserver" container) read files in "web" directory
-```
-setfacl -R -m user:100:rX ./web
-setfacl -dR -m user:100:rX ./web
 ```
 
 ### 5. Setup the application

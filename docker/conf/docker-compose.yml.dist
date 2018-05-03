@@ -23,7 +23,11 @@ services:
             - smtp-server
 
     php-fpm:
-        build: project-base/docker/php-fpm
+        build:
+            context: project-base/docker/php-fpm
+            args:
+                www_data_uid: 1000
+                www_data_gid: 1000
         container_name: shopsys-framework-php-fpm
         volumes:
             - .:/var/www/html

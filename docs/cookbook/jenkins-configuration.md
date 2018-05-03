@@ -334,7 +334,7 @@ Use sed to insert new mounting volumes into php-fpm container using regular expr
 Sed does not handle `\n` well, so we change format of new lines using `tr` and change it back at the end
 Output it into new docker-compose.yml:
 ```
-cat $WORKSPACE/docker-compose.yml.new | tr '\n' '\r' | sed -r 's#(php-fpm:(\r[^\r]+)+volumes:)(\s+- )#\1\3~/.composer:/root/.composer\3#' | tr '\r' '\n' >> $WORKSPACE/docker-compose.yml
+cat $WORKSPACE/docker-compose.yml.new | tr '\n' '\r' | sed -r 's#(php-fpm:(\r[^\r]+)+volumes:)(\s+- )#\1\3~/.composer:/home/www-data/.composer\3#' | tr '\r' '\n' >> $WORKSPACE/docker-compose.yml
 ```
 
 Delete temporary `docker-compose.yml.new`:
@@ -343,27 +343,22 @@ rm $WORKSPACE/docker-compose.yml.new
 ```
 
 ### Build the application in containers
-Now we got everything ready. 
+Since we use mounted volumes, we need to make sure that UID and GID of the user running Jenkins and the user running inside the container match.
+Otherwise, the user running Jenkins would be unable to change or remove files created in the container and vice versa.
 
-We can build our images and create containers:
+We can use build arguments `www_data_uid` and `www_data_gid` to match the ids before we build the containers.
+To change the argument we will use `sed` again.
+```
+# Match UID and GID of user in host machine with the user "www-data" in php-fpm container
+sed -i "s/www_data_uid: 1000/www_data_uid: $(id -u)/" $WORKSPACE/docker-compose.yml
+sed -i "s/www_data_gid: 1000/www_data_gid: $(id -g)/" $WORKSPACE/docker-compose.yml
+```
+
+Now we can build our images and create containers:
 
 ```
 /usr/local/bin/docker-compose build
 /usr/local/bin/docker-compose up --force-recreate -d
-```
-
-Since we do everything in php-fpm container as root, we need to make sure that nginx, php-fpm and other containers has
-correct permissions for all application files.
-
-We can use `setfacl` command, which can apply multiple permission rules onto folder and make it accessible for multiple users. 
-```
-# Allow user with UID 82 (user "www-data" in container "php-fpm") read and write all project files
-/usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm setfacl -R -m user:82:rwX -m mask:rwX .
-/usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm setfacl -dR -m user:82:rwX -m mask:rwX .
-
-# Allow user with UID 100 (user "nginx" in container "webserver") read files in "web" directory
-/usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm setfacl -R -m user:100:rX ./project-base/web
-/usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm setfacl -dR -m user:100:rX ./project-base/web
 ```
 
 Install the application:

@@ -26,41 +26,15 @@ cp docker/conf/docker-compose.yml.dist docker-compose.yml
 *Note: If you don't plan any custom configuration you can create a symlink with a command `ln -s docker/conf/docker-compose.yml.dist docker-compose.yml`.*
 *This way your config will always be in sync with the template.*
 
-### 3. Compose Docker container
-```
-docker-compose up -d
-```
+### 3. Set the UID and GID to allow file access in mounted volumes
+Because we want both the user in host machine (you) and user running php-fpm in the container to access shared files, we need to make sure that they both have the same UID and GID.
+This can be achieved by build arguments `www_data_uid` and `www_data_gid` that should be set to the UID and GID as your own user in your `docker-compose.yml`.
 
-### 4. Set file permissions
-#### 4.1. Grant your local user permissions
-On Linux, synchronization between your local directory and container directory is done by mount. That means that a local directory is shared with the one in container.
+You can find out your UID by running `id -u` and your GID by running `id -g`.
 
-This brings fast synchronization between directories. The problem is that all commands executed in container are executed as root user which means that every file that is created by a command  creates belong to him and you cannot edit them.
-
-Thankfully we can use `setfacl` in order to grant the user on your host machine permissions to all existing and even newly created files.  
-
-##### Make the current and future project files accessible by the current user on your host system
+### 4. Compose Docker container
 ```
-sudo setfacl -R -m user:`whoami`:rwX -m mask:rwX .
-sudo setfacl -dR -m user:`whoami`:rwX -m mask:rwX .
-```
-
-#### 4.2. Grant system users inside the container the required permissions
-##### Connect into terminal of the Docker container
-```
-docker exec -it shopsys-framework-php-fpm sh
-```
-
-##### Allow user with UID 82 ("www-data" in "php-fpm" container) read and write all project files
-```
-setfacl -R -m user:82:rwX -m mask:rwX .
-setfacl -dR -m user:82:rwX -m mask:rwX .
-```
-
-##### Allow user with UID 100 ("nginx" in "webserver" container) read files in "web" directory
-```
-setfacl -R -m user:100:rX ./web
-setfacl -dR -m user:100:rX ./web
+docker-compose up -d --build
 ```
 
 ### 5. Setup the application

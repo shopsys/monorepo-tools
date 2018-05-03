@@ -21,6 +21,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         - built on Alpine linux which uses `apk` instead of `apt-get`
         - in the container there is no `bash` installed, use `sh` instead
     - working directory shortened to the default `/var/www/html` (from `/var/www/shopsys-framework/`)
+    - processes in the container run as user `www-data` instead of `root`
+        - on *nix systems, UID and GID can be set to match the user in host machine (you), avoiding issues with shared file permissions
+        - to set these, use build arguments `www_data_uid` and `www_data_gid` (see `docker-compose.yml.dist`)
+        - the image must be rebuilt after changing the arguments (via `docker-compose build`)
+        - using `setfacl` is not needed anymore
+        - home directory of the new user is `/home/www-data/` instead of `/root/`
 
 ### Removed
 - support of installation using Docker for Windows 10 Home and lower (@TomasLudvik)
