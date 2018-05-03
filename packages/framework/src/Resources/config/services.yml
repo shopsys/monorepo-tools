@@ -770,3 +770,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFactory
+
+  Shopsys\FrameworkBundle\Model\Transport\TransportFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Transport\TransportFactory
