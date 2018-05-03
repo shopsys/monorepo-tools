@@ -761,3 +761,6 @@ services:
 
   Shopsys\FrameworkBundle\Component\Setting\SettingValueFactoryInterface:
     alias: Shopsys\FrameworkBundle\Component\Setting\SettingValueFactory
+
+  Shopsys\FrameworkBundle\Model\Slider\SliderItemFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Slider\SliderItemFactory

@@ -28,16 +28,23 @@ class SliderItemFacade
      */
     protected $domain;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Slider\SliderItemFactoryInterface
+     */
+    protected $sliderItemFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         SliderItemRepository $sliderItemRepository,
         ImageFacade $imageFacade,
-        Domain $domain
+        Domain $domain,
+        SliderItemFactoryInterface $sliderItemFactory
     ) {
         $this->em = $em;
         $this->sliderItemRepository = $sliderItemRepository;
         $this->imageFacade = $imageFacade;
         $this->domain = $domain;
+        $this->sliderItemFactory = $sliderItemFactory;
     }
 
     /**
@@ -55,7 +62,7 @@ class SliderItemFacade
      */
     public function create(SliderItemData $sliderItemData)
     {
-        $sliderItem = new SliderItem($sliderItemData);
+        $sliderItem = $this->sliderItemFactory->create($sliderItemData);
 
         $this->em->persist($sliderItem);
         $this->em->flush();
