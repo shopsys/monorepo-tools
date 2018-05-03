@@ -746,3 +746,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactory

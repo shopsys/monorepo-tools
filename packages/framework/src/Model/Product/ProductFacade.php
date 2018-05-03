@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
-use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
@@ -129,6 +129,11 @@ class ProductFacade
      */
     protected $productDomainFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactoryInterface
+     */
+    protected $productParameterValueFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         ProductRepository $productRepository,
@@ -151,7 +156,8 @@ class ProductFacade
         ProductFactoryInterface $productFactory,
         ProductAccessoryFactoryInterface $productAccessoryFactory,
         ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
-        ProductDomainFactoryInterface $productDomainFactory
+        ProductDomainFactoryInterface $productDomainFactory,
+        ProductParameterValueFactoryInterface $productParameterValueFactory
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -175,6 +181,7 @@ class ProductFacade
         $this->productAccessoryFactory = $productAccessoryFactory;
         $this->productCategoryDomainFactory = $productCategoryDomainFactory;
         $this->productDomainFactory = $productDomainFactory;
+        $this->productParameterValueFactory = $productParameterValueFactory;
     }
 
     /**
@@ -311,7 +318,7 @@ class ProductFacade
 
         $toFlush = [];
         foreach ($productParameterValuesData as $productParameterValueData) {
-            $productParameterValue = new ProductParameterValue(
+            $productParameterValue = $this->productParameterValueFactory->create(
                 $product,
                 $productParameterValueData->parameter,
                 $this->parameterRepository->findOrCreateParameterValueByValueTextAndLocale(
