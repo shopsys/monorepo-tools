@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Payment;
 
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\PriceTableType;
 use Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetail;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentEditData;
@@ -32,15 +33,22 @@ class PaymentEditFormType extends AbstractType
         $paymentDetail = $options['payment_detail'];
         /* @var $paymentDetail \Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetail */
 
+        $builderPriceGroup = $builder->create('prices', GroupType::class, [
+            'label' => t('Prices'),
+            'is_group_container_to_render_as_the_last_one' => true,
+        ]);
+        $builderPriceGroup
+            ->add('pricesByCurrencyId', PriceTableType::class, [
+                'currencies' => $this->currencyFacade->getAllIndexedById(),
+                'base_prices' => $paymentDetail !== null ? $paymentDetail->getBasePricesByCurrencyId() : [],
+            ]);
+
         $builder
             ->add('paymentData', PaymentFormType::class, [
                 'payment' => $paymentDetail !== null ? $paymentDetail->getPayment() : null,
                 'render_form_row' => false,
             ])
-            ->add('pricesByCurrencyId', PriceTableType::class, [
-                'currencies' => $this->currencyFacade->getAllIndexedById(),
-                'base_prices' => $paymentDetail !== null ? $paymentDetail->getBasePricesByCurrencyId() : [],
-            ])
+            ->add($builderPriceGroup)
             ->add('save', SubmitType::class);
     }
 
