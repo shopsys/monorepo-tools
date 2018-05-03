@@ -56,6 +56,11 @@ class TransportFacade
      */
     protected $transportFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDomainFactoryInterface
+     */
+    protected $transportDomainFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         TransportRepository $transportRepository,
@@ -65,7 +70,8 @@ class TransportFacade
         ImageFacade $imageFacade,
         CurrencyFacade $currencyFacade,
         TransportPriceCalculation $transportPriceCalculation,
-        TransportFactoryInterface $transportFactory
+        TransportFactoryInterface $transportFactory,
+        TransportDomainFactoryInterface $transportDomainFactory
     ) {
         $this->em = $em;
         $this->transportRepository = $transportRepository;
@@ -76,6 +82,7 @@ class TransportFacade
         $this->currencyFacade = $currencyFacade;
         $this->transportPriceCalculation = $transportPriceCalculation;
         $this->transportFactory = $transportFactory;
+        $this->transportDomainFactory = $transportDomainFactory;
     }
 
     /**
@@ -141,7 +148,7 @@ class TransportFacade
     protected function createTransportDomains(Transport $transport, array $domainIds)
     {
         foreach ($domainIds as $domainId) {
-            $transportDomain = new TransportDomain($transport, $domainId);
+            $transportDomain = $this->transportDomainFactory->create($transport, $domainId);
             $this->em->persist($transportDomain);
         }
         $this->em->flush();
