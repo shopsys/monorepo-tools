@@ -755,3 +755,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFactory
+
+  Shopsys\FrameworkBundle\Model\Script\ScriptFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Script\ScriptFactory
