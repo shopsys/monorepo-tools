@@ -18,15 +18,23 @@ class CustomerService
     protected $deliveryAddressFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface
+     */
+    protected $userFactory;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface $userFactory
      */
     public function __construct(
         CustomerPasswordService $customerPasswordService,
-        DeliveryAddressFactoryInterface $deliveryAddressFactory
+        DeliveryAddressFactoryInterface $deliveryAddressFactory,
+        UserFactoryInterface $userFactory
     ) {
         $this->customerPasswordService = $customerPasswordService;
         $this->deliveryAddressFactory = $deliveryAddressFactory;
+        $this->userFactory = $userFactory;
     }
 
     /**
@@ -50,7 +58,7 @@ class CustomerService
             }
         }
 
-        $user = new User(
+        $user = $this->userFactory->create(
             $userData,
             $billingAddress,
             $deliveryAddress

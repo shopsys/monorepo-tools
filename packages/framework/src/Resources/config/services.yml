@@ -785,3 +785,6 @@ services:
 
   Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFactoryInterface:
     alias: Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFactory
+
+  Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Customer\UserFactory
