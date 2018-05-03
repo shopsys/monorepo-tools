@@ -725,3 +725,6 @@ services:
 
   Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFactoryInterface:
     alias: Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFactory
+
+  Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFactory
