@@ -12,7 +12,6 @@ services:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
 
   Shopsys\FrameworkBundle\Form\EmptyMessageChoiceTypeExtension:
-    class: Shopsys\FrameworkBundle\Form\EmptyMessageChoiceTypeExtension
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
 
@@ -21,7 +20,6 @@ services:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\CollectionType }
 
   Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension:
-    class: Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
