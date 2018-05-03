@@ -124,6 +124,11 @@ class ProductFacade
      */
     protected $productCategoryDomainFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDomainFactoryInterface
+     */
+    protected $productDomainFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         ProductRepository $productRepository,
@@ -145,7 +150,8 @@ class ProductFacade
         PluginCrudExtensionFacade $pluginCrudExtensionFacade,
         ProductFactoryInterface $productFactory,
         ProductAccessoryFactoryInterface $productAccessoryFactory,
-        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
+        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
+        ProductDomainFactoryInterface $productDomainFactory
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -168,6 +174,7 @@ class ProductFacade
         $this->productFactory = $productFactory;
         $this->productAccessoryFactory = $productAccessoryFactory;
         $this->productCategoryDomainFactory = $productCategoryDomainFactory;
+        $this->productDomainFactory = $productDomainFactory;
     }
 
     /**
@@ -326,7 +333,7 @@ class ProductFacade
     {
         $toFlush = [];
         foreach ($domains as $domain) {
-            $productDomain = new ProductDomain($product, $domain->getId());
+            $productDomain = $this->productDomainFactory->create($product, $domain->getId());
             $this->em->persist($productDomain);
             $toFlush[] = $productDomain;
         }

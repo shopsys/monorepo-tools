@@ -740,3 +740,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory
+
+  Shopsys\FrameworkBundle\Model\Product\ProductDomainFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\ProductDomainFactory
