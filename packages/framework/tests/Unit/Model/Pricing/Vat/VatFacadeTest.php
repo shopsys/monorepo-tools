@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactory;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatRepository;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatService;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
@@ -49,7 +50,8 @@ class VatFacadeTest extends TestCase
             $vatRepositoryMock,
             $vatService,
             $settingMock,
-            $productPriceRecalculationSchedulerMock
+            $productPriceRecalculationSchedulerMock,
+            new VatFactory()
         );
 
         $this->assertSame($expected, $vatFacade->getDefaultVat());
@@ -85,7 +87,8 @@ class VatFacadeTest extends TestCase
             $vatRepositoryMock,
             $vatService,
             $settingMock,
-            $productPriceRecalculationSchedulerMock
+            $productPriceRecalculationSchedulerMock,
+            new VatFactory()
         );
         $vatFacade->setDefaultVat($vatMock);
     }

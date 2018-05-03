@@ -34,24 +34,32 @@ class VatFacade
     protected $productPriceRecalculationScheduler;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface
+     */
+    protected $vatFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatRepository $vatRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatService $vatService
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface $vatFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         VatRepository $vatRepository,
         VatService $vatService,
         Setting $setting,
-        ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+        ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
+        VatFactoryInterface $vatFactory
     ) {
         $this->em = $em;
         $this->vatRepository = $vatRepository;
         $this->vatService = $vatService;
         $this->setting = $setting;
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
+        $this->vatFactory = $vatFactory;
     }
 
     /**
@@ -85,7 +93,7 @@ class VatFacade
      */
     public function create(VatData $vatData)
     {
-        $vat = new Vat($vatData);
+        $vat = $this->vatFactory->create($vatData);
         $this->em->persist($vat);
         $this->em->flush();
 

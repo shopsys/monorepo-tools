@@ -788,3 +788,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Customer\UserFactory
+
+  Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactory
