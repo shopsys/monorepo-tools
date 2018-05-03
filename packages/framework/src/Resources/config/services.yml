@@ -752,3 +752,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFactory
+
+  Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFactory
