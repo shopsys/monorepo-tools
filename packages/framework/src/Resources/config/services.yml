@@ -728,3 +728,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFactory
+
+  Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\ProductFactory

@@ -109,6 +109,11 @@ class ProductFacade
      */
     protected $pluginCrudExtensionFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface
+     */
+    protected $productFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         ProductRepository $productRepository,
@@ -127,7 +132,8 @@ class ProductFacade
         ProductAccessoryRepository $productAccessoryRepository,
         ProductVariantService $productVariantService,
         AvailabilityFacade $availabilityFacade,
-        PluginCrudExtensionFacade $pluginCrudExtensionFacade
+        PluginCrudExtensionFacade $pluginCrudExtensionFacade,
+        ProductFactoryInterface $productFactory
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -147,6 +153,7 @@ class ProductFacade
         $this->productVariantService = $productVariantService;
         $this->availabilityFacade = $availabilityFacade;
         $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
+        $this->productFactory = $productFactory;
     }
 
     /**
@@ -164,7 +171,7 @@ class ProductFacade
      */
     public function create(ProductEditData $productEditData)
     {
-        $product = Product::create($productEditData->productData);
+        $product = $this->productFactory->create($productEditData->productData);
 
         if ($product->isUsingStock()) {
             $defaultInStockAvailability = $this->availabilityFacade->getDefaultInStockAvailability();
