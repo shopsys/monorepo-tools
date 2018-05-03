@@ -767,3 +767,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFactory
+
+  Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFactory

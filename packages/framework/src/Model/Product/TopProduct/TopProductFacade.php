@@ -22,14 +22,21 @@ class TopProductFacade
      */
     protected $productDetailFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFactoryInterface
+     */
+    protected $topProductFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         TopProductRepository $topProductRepository,
-        ProductDetailFactory $productDetailFactory
+        ProductDetailFactory $productDetailFactory,
+        TopProductFactoryInterface $topProductFactory
     ) {
         $this->em = $em;
         $this->topProductRepository = $topProductRepository;
         $this->productDetailFactory = $productDetailFactory;
+        $this->topProductFactory = $topProductFactory;
     }
 
     /**
@@ -67,7 +74,7 @@ class TopProductFacade
         $topProducts = [];
         $position = 1;
         foreach ($products as $product) {
-            $topProduct = new TopProduct($product, $domainId, $position++);
+            $topProduct = $this->topProductFactory->create($product, $domainId, $position++);
             $this->em->persist($topProduct);
             $topProducts[] = $topProduct;
         }
