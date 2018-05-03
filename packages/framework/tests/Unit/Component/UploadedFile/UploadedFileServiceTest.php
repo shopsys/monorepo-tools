@@ -5,6 +5,7 @@ namespace Tests\FrameworkBundle\Unit\Component\UploadedFile;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
+use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFactory;
 use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileService;
 
 class UploadedFileServiceTest extends TestCase
@@ -30,7 +31,7 @@ class UploadedFileServiceTest extends TestCase
 
         $uploadedFileEntityConfig = new UploadedFileEntityConfig($entityName, $entityClass);
 
-        $uploadedFileService = new UploadedFileService($fileUploadMock);
+        $uploadedFileService = new UploadedFileService($fileUploadMock, new UploadedFileFactory());
         $uploadedFile = $uploadedFileService->createUploadedFile($uploadedFileEntityConfig, $entityId, $temporaryFilenames);
         $filesForUpload = $uploadedFile->getTemporaryFilesForUpload();
         $fileForUpload = array_pop($filesForUpload);
