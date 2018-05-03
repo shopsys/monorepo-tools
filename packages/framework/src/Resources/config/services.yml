@@ -764,3 +764,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Slider\SliderItemFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Slider\SliderItemFactory
+
+  Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFactory

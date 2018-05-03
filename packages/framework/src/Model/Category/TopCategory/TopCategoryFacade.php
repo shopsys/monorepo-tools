@@ -16,12 +16,19 @@ class TopCategoryFacade
      */
     protected $topCategoryRepository;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFactoryInterface
+     */
+    protected $topCategoryFactory;
+
     public function __construct(
         EntityManagerInterface $em,
-        TopCategoryRepository $topCategoryRepository
+        TopCategoryRepository $topCategoryRepository,
+        TopCategoryFactoryInterface $topCategoryFactory
     ) {
         $this->em = $em;
         $this->topCategoryRepository = $topCategoryRepository;
+        $this->topCategoryFactory = $topCategoryFactory;
     }
 
     /**
@@ -76,7 +83,7 @@ class TopCategoryFacade
         $topCategories = [];
         $position = 1;
         foreach ($categories as $category) {
-            $topCategory = new TopCategory($category, $domainId, $position++);
+            $topCategory = $this->topCategoryFactory->create($category, $domainId, $position++);
             $this->em->persist($topCategory);
             $topCategories[] = $topCategory;
         }
