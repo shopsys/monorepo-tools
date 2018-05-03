@@ -758,3 +758,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Script\ScriptFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Script\ScriptFactory
+
+  Shopsys\FrameworkBundle\Component\Setting\SettingValueFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Component\Setting\SettingValueFactory
