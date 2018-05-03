@@ -14,6 +14,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 use Shopsys\FrameworkBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactory;
 
 class TransportPriceCalculationTest extends TestCase
 {
@@ -68,7 +69,7 @@ class TransportPriceCalculationTest extends TestCase
         $currency = new Currency(new CurrencyData());
 
         $transport = new Transport(new TransportData(['cs' => 'TransportName'], $vat));
-        $transport->setPrice($currency, $inputPrice);
+        $transport->setPrice(new TransportPriceFactory(), $currency, $inputPrice);
 
         $price = $transportPriceCalculation->calculateIndependentPrice($transport, $currency);
 

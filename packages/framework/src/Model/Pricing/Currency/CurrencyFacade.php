@@ -9,7 +9,7 @@ use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use Shopsys\FrameworkBundle\Model\Transport\TransportPrice;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportRepository;
 
 class CurrencyFacade
@@ -64,6 +64,11 @@ class CurrencyFacade
      */
     protected $paymentPriceFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactoryInterface
+     */
+    protected $transportPriceFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         CurrencyRepository $currencyRepository,
@@ -74,7 +79,8 @@ class CurrencyFacade
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
         PaymentRepository $paymentRepository,
         TransportRepository $transportRepository,
-        PaymentPriceFactoryInterface $paymentPriceFactory
+        PaymentPriceFactoryInterface $paymentPriceFactory,
+        TransportPriceFactoryInterface $transportPriceFactory
     ) {
         $this->em = $em;
         $this->currencyRepository = $currencyRepository;
@@ -86,6 +92,7 @@ class CurrencyFacade
         $this->paymentRepository = $paymentRepository;
         $this->transportRepository = $transportRepository;
         $this->paymentPriceFactory = $paymentPriceFactory;
+        $this->transportPriceFactory = $transportPriceFactory;
     }
 
     /**
@@ -239,7 +246,7 @@ class CurrencyFacade
             $toFlush[] = $paymentPrice;
         }
         foreach ($this->transportRepository->getAll() as $transport) {
-            $transportPrice = new TransportPrice($transport, $currency, 0);
+            $transportPrice = $this->transportPriceFactory->create($transport, $currency, 0);
             $this->em->persist($transportPrice);
             $toFlush[] = $transportPrice;
         }

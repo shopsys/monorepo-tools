@@ -61,6 +61,11 @@ class TransportFacade
      */
     protected $transportDomainFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactoryInterface
+     */
+    protected $transportPriceFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         TransportRepository $transportRepository,
@@ -71,7 +76,8 @@ class TransportFacade
         CurrencyFacade $currencyFacade,
         TransportPriceCalculation $transportPriceCalculation,
         TransportFactoryInterface $transportFactory,
-        TransportDomainFactoryInterface $transportDomainFactory
+        TransportDomainFactoryInterface $transportDomainFactory,
+        TransportPriceFactoryInterface $transportPriceFactory
     ) {
         $this->em = $em;
         $this->transportRepository = $transportRepository;
@@ -83,6 +89,7 @@ class TransportFacade
         $this->transportPriceCalculation = $transportPriceCalculation;
         $this->transportFactory = $transportFactory;
         $this->transportDomainFactory = $transportDomainFactory;
+        $this->transportPriceFactory = $transportPriceFactory;
     }
 
     /**
@@ -204,7 +211,7 @@ class TransportFacade
     {
         foreach ($this->currencyFacade->getAll() as $currency) {
             $price = $pricesByCurrencyId[$currency->getId()];
-            $transport->setPrice($currency, $price);
+            $transport->setPrice($this->transportPriceFactory, $currency, $price);
         }
     }
 
