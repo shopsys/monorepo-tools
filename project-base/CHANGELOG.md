@@ -15,11 +15,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Dependency Injection strict mode is now enabled (@EdoBarnas)
     - disables autowiring features that were removed in Symfony 4
 - as a rule, using minor versions of docker images (eg. `1.2` or `1.2-alpine`) if possible (@MattCzerner)
-- switched to Docker image `php:7.2-fpm-alpine` instead of `phpdockerio/php72-fpm:latest` (@PetrHeinz, @MattCzerner)
-    - official PHP Docker image is much more stable and provides tags other than `latest`
-    - built on Alpine linux which uses `apk` instead of `apt-get`
-    - in the container there is no `bash` installed, use `sh` instead
-    - the default UID for user `www-data` is 82 on Alpine linux instead of 33
+- PHP-FPM Docker image tweaked for easier usage (@PetrHeinz, @MattCzerner)
+    - switched to Docker image `php:7.2-fpm-alpine` instead of `phpdockerio/php72-fpm:latest`
+        - official PHP Docker image is much more stable and provides tags other than `latest`
+        - built on Alpine linux which uses `apk` instead of `apt-get`
+        - in the container there is no `bash` installed, use `sh` instead
+    - working directory shortened to the default `/var/www/html` (from `/var/www/shopsys-framework/`)
 
 ### Removed
 - support of installation using Docker for Windows 10 Home and lower (@TomasLudvik)
