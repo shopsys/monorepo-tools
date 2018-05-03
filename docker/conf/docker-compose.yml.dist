@@ -29,7 +29,7 @@ services:
         working_dir: /var/www/shopsys-framework
         volumes:
             - .:/var/www/shopsys-framework
-            - ./project-base/docker/php-fpm/php-ini-overrides.ini:/etc/php/7.1/fpm/conf.d/99-overrides.ini
+            - ./project-base/docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - postgres
             - redis

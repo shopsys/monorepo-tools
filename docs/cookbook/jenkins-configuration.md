@@ -357,9 +357,9 @@ correct permissions for all application files.
 
 We can use `setfacl` command, which can apply multiple permission rules onto folder and make it accessible for multiple users. 
 ```
-# Allow user with UID 33 (user "www-data" in container "php-fpm") read and write all project files
-/usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm setfacl -R -m user:33:rwX -m mask:rwX .
-/usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm setfacl -dR -m user:33:rwX -m mask:rwX .
+# Allow user with UID 82 (user "www-data" in container "php-fpm") read and write all project files
+/usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm setfacl -R -m user:82:rwX -m mask:rwX .
+/usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm setfacl -dR -m user:82:rwX -m mask:rwX .
 
 # Allow user with UID 100 (user "nginx" in container "webserver") read files in "web" directory
 /usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm setfacl -R -m user:100:rX ./project-base/web

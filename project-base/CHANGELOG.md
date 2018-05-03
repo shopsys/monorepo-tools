@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Dependency Injection strict mode is now enabled (@EdoBarnas)
     - disables autowiring features that were removed in Symfony 4
 - as a rule, using minor versions of docker images (eg. `1.2` or `1.2-alpine`) if possible (@MattCzerner)
+- switched to Docker image `php:7.2-fpm-alpine` instead of `phpdockerio/php72-fpm:latest` (@PetrHeinz, @MattCzerner)
+    - official PHP Docker image is much more stable and provides tags other than `latest`
+    - built on Alpine linux which uses `apk` instead of `apt-get`
+    - in the container there is no `bash` installed, use `sh` instead
+    - the default UID for user `www-data` is 82 on Alpine linux instead of 33
 
 ### Removed
 - support of installation using Docker for Windows 10 Home and lower (@TomasLudvik)
@@ -25,6 +30,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - see https://github.com/symfony/swiftmailer-bundle/commit/5edfbd39eaefb176922a346c16b0ae3aaeec87e0
     - the new setting requires array instead of string so the parameter `mailer_master_email_address` is wrapped into array in config
 - `FpJsFormValidator` error in console on FE order pages (@vitek-rostislav)
+- failure during Docker image build triggered by `E: Unable to locate package postgresql-client-9.5` (@PetrHeinz, @MattCzerner)
 
 ## 7.0.0-alpha1 - 2018-04-12
 - We are releasing version 7 (open-source project known as Shopsys Framework) to better distinguish it from Shopsys 6

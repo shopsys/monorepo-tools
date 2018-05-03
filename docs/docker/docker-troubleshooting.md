@@ -83,7 +83,7 @@ Remember that after changing these you need to do few things differently.
   for instance, if your new container name is `my-new-project-name-php-fpm` you need to execute
 
 ```
-docker exec -it my-new-project-name-php-fpm bash
+docker exec -it my-new-project-name-php-fpm sh
 ``` 
 
 ## Update of Dockerfile is not Reflected

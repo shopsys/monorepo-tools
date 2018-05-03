@@ -48,13 +48,13 @@ sudo setfacl -dR -m user:`whoami`:rwX -m mask:rwX .
 #### 4.2. Grant system users inside the container the required permissions
 ##### Connect into terminal of the Docker container
 ```
-docker exec -it shopsys-framework-php-fpm bash
+docker exec -it shopsys-framework-php-fpm sh
 ```
 
-##### Allow user with UID 33 ("www-data" in "php-fpm" container) read and write all project files
+##### Allow user with UID 82 ("www-data" in "php-fpm" container) read and write all project files
 ```
-setfacl -R -m user:33:rwX -m mask:rwX .
-setfacl -dR -m user:33:rwX -m mask:rwX .
+setfacl -R -m user:82:rwX -m mask:rwX .
+setfacl -dR -m user:82:rwX -m mask:rwX .
 ```
 
 ##### Allow user with UID 100 ("nginx" in "webserver" container) read files in "web" directory
