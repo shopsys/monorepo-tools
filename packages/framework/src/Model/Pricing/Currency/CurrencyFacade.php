@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Pricing\Currency;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentPrice;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
@@ -59,6 +59,11 @@ class CurrencyFacade
      */
     protected $transportRepository;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface
+     */
+    protected $paymentPriceFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         CurrencyRepository $currencyRepository,
@@ -68,7 +73,8 @@ class CurrencyFacade
         Domain $domain,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
         PaymentRepository $paymentRepository,
-        TransportRepository $transportRepository
+        TransportRepository $transportRepository,
+        PaymentPriceFactoryInterface $paymentPriceFactory
     ) {
         $this->em = $em;
         $this->currencyRepository = $currencyRepository;
@@ -79,6 +85,7 @@ class CurrencyFacade
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
         $this->paymentRepository = $paymentRepository;
         $this->transportRepository = $transportRepository;
+        $this->paymentPriceFactory = $paymentPriceFactory;
     }
 
     /**
@@ -227,7 +234,7 @@ class CurrencyFacade
     {
         $toFlush = [];
         foreach ($this->paymentRepository->getAll() as $payment) {
-            $paymentPrice = new PaymentPrice($payment, $currency, 0);
+            $paymentPrice = $this->paymentPriceFactory->create($payment, $currency, 0);
             $this->em->persist($paymentPrice);
             $toFlush[] = $paymentPrice;
         }

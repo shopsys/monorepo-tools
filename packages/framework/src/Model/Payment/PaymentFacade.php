@@ -62,6 +62,11 @@ class PaymentFacade
     protected $paymentDomainFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface
+     */
+    protected $paymentPriceFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository $paymentRepository
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportRepository $transportRepository
@@ -72,6 +77,7 @@ class PaymentFacade
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFactoryInterface $paymentFactory
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentDomainFactoryInterface $paymentDomainFactory
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface $paymentPriceFactory
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -83,7 +89,8 @@ class PaymentFacade
         CurrencyFacade $currencyFacade,
         PaymentPriceCalculation $paymentPriceCalculation,
         PaymentFactoryInterface $paymentFactory,
-        PaymentDomainFactoryInterface $paymentDomainFactory
+        PaymentDomainFactoryInterface $paymentDomainFactory,
+        PaymentPriceFactoryInterface $paymentPriceFactory
     ) {
         $this->em = $em;
         $this->paymentRepository = $paymentRepository;
@@ -95,6 +102,7 @@ class PaymentFacade
         $this->paymentPriceCalculation = $paymentPriceCalculation;
         $this->paymentFactory = $paymentFactory;
         $this->paymentDomainFactory = $paymentDomainFactory;
+        $this->paymentPriceFactory = $paymentPriceFactory;
     }
 
     /**
@@ -219,7 +227,7 @@ class PaymentFacade
     {
         foreach ($this->currencyFacade->getAll() as $currency) {
             $price = $pricesByCurrencyId[$currency->getId()];
-            $payment->setPrice($currency, $price);
+            $payment->setPrice($this->paymentPriceFactory, $currency, $price);
         }
     }
 

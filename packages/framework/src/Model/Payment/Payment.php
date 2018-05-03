@@ -160,11 +160,15 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface $paymentPriceFactory
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @param string $price
      */
-    public function setPrice(Currency $currency, $price)
-    {
+    public function setPrice(
+        PaymentPriceFactoryInterface $paymentPriceFactory,
+        Currency $currency,
+        $price
+    ) {
         foreach ($this->prices as $paymentInputPrice) {
             if ($paymentInputPrice->getCurrency() === $currency) {
                 $paymentInputPrice->setPrice($price);
@@ -172,7 +176,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
             }
         }
 
-        $this->prices[] = new PaymentPrice($this, $currency, $price);
+        $this->prices[] = $paymentPriceFactory->create($this, $currency, $price);
     }
 
     /**
