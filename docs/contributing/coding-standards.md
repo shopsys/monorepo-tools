@@ -94,3 +94,4 @@ Besides the rules that are checked by automatic tools, we have few rules for whi
         return $this->getProductRepository()->findBy(['id' => $ids]);
     }
     ```
+- Entities have to be created by factories. Only allowed exception are `*Translation` entities that are created by their owner entity.
