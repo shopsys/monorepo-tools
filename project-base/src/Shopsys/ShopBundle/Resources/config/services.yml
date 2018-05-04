@@ -19,6 +19,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface: '@Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory'
 
-  Shopsys\FrameworkBundle\Model\Article\ArticleFacade: '@Shopsys\ShopBundle\Model\Article\ArticleFacade'
+  Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface: '@Shopsys\ShopBundle\Model\Article\ArticleFactory'
 
   Shopsys\FrameworkBundle\Model\Article\ArticleDataFactory: '@Shopsys\ShopBundle\Model\Article\ArticleDataFactory'
