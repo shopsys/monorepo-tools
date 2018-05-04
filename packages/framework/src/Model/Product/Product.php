@@ -344,7 +344,7 @@ class Product extends AbstractTranslatableEntity
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData[] $variants
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $variants
      * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
     public static function createMainVariant(ProductData $productData, array $variants)
