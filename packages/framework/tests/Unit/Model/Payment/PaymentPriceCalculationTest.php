@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactory;
 use Shopsys\FrameworkBundle\Model\Pricing\BasePriceCalculation;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
@@ -92,7 +93,7 @@ class PaymentPriceCalculationTest extends TestCase
         $currency = new Currency(new CurrencyData());
 
         $payment = new Payment(new PaymentData(['cs' => 'paymentName'], $vat));
-        $payment->setPrice($currency, $inputPrice);
+        $payment->setPrice(new PaymentPriceFactory(), $currency, $inputPrice);
 
         $price = $paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
 
@@ -137,7 +138,7 @@ class PaymentPriceCalculationTest extends TestCase
         $currency = new Currency(new CurrencyData());
 
         $payment = new Payment(new PaymentData(['cs' => 'paymentName'], $vat));
-        $payment->setPrice($currency, $inputPrice);
+        $payment->setPrice(new PaymentPriceFactory(), $currency, $inputPrice);
 
         $price = $paymentPriceCalculation->calculatePrice($payment, $currency, $productsPrice, 1);
 

@@ -5,13 +5,14 @@ namespace Tests\FrameworkBundle\Unit\Model\Product\Flag;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Product\Flag\Flag;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagData;
+use Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactory;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagService;
 
 class FlagServiceTest extends TestCase
 {
     public function testCreate()
     {
-        $flagService = new FlagService();
+        $flagService = new FlagService(new FlagFactory());
 
         $flagDataOriginal = new FlagData(['cs' => 'flagNameCs', 'en' => 'flagNameEn'], '#336699');
         $flag = $flagService->create($flagDataOriginal);
@@ -24,7 +25,7 @@ class FlagServiceTest extends TestCase
 
     public function testEdit()
     {
-        $flagService = new FlagService();
+        $flagService = new FlagService(new FlagFactory());
 
         $flagDataOld = new FlagData(['cs' => 'flagNameCs', 'en' => 'flagNameEn'], '#336699');
         $flagDataEdit = new FlagData(['cs' => 'editFlagNameCs', 'en' => 'editFlagNameEn'], '#00CCFF');

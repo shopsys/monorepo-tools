@@ -51,6 +51,11 @@ class PricingGroupFacade
      */
     protected $userRepository;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFactoryInterface
+     */
+    protected $pricingGroupFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         PricingGroupRepository $pricingGroupRepository,
@@ -59,7 +64,8 @@ class PricingGroupFacade
         PricingGroupSettingFacade $pricingGroupSettingFacade,
         ProductVisibilityRepository $productVisibilityRepository,
         ProductCalculatedPriceRepository $productCalculatedPriceRepository,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        PricingGroupFactoryInterface $pricingGroupFactory
     ) {
         $this->em = $em;
         $this->pricingGroupRepository = $pricingGroupRepository;
@@ -69,6 +75,7 @@ class PricingGroupFacade
         $this->productVisibilityRepository = $productVisibilityRepository;
         $this->productCalculatedPriceRepository = $productCalculatedPriceRepository;
         $this->userRepository = $userRepository;
+        $this->pricingGroupFactory = $pricingGroupFactory;
     }
 
     /**
@@ -87,7 +94,7 @@ class PricingGroupFacade
      */
     public function create(PricingGroupData $pricingGroupData, $domainId)
     {
-        $pricingGroup = new PricingGroup($pricingGroupData, $domainId);
+        $pricingGroup = $this->pricingGroupFactory->create($pricingGroupData, $domainId);
 
         $this->em->persist($pricingGroup);
         $this->em->flush();

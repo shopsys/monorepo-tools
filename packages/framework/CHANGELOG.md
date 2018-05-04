@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - this removes the need to manually override all repositories that work with extended entities
     - the functionality is automatically tested in [shopsys/project-base](https://github.com/shopsys/project-base)
         - see `\Tests\ShopBundle\Database\EntityExtension\EntityExtensionTest`
+- entities are created by factories (@simara-svatopluk)
+    - allowing override factory that creates extended entities in project-base
 
 ### Changed
 - moved constants with types of environment from [shopsys/project-base](https://github.com/shopsys/project-base) (@PetrHeinz)

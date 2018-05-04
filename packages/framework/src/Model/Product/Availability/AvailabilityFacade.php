@@ -18,11 +18,6 @@ class AvailabilityFacade
     protected $availabilityRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityService
-     */
-    protected $availabilityService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     protected $setting;
@@ -32,18 +27,23 @@ class AvailabilityFacade
      */
     protected $productAvailabilityRecalculationScheduler;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFactoryInterface
+     */
+    protected $availabilityFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         AvailabilityRepository $availabilityRepository,
-        AvailabilityService $availabilityService,
         Setting $setting,
-        ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
+        ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
+        AvailabilityFactoryInterface $availabilityFactory
     ) {
         $this->em = $em;
         $this->availabilityRepository = $availabilityRepository;
-        $this->availabilityService = $availabilityService;
         $this->setting = $setting;
         $this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
+        $this->availabilityFactory = $availabilityFactory;
     }
 
     /**
@@ -61,7 +61,7 @@ class AvailabilityFacade
      */
     public function create(AvailabilityData $availabilityData)
     {
-        $availability = $this->availabilityService->create($availabilityData);
+        $availability = $this->availabilityFactory->create($availabilityData);
         $this->em->persist($availability);
         $this->em->flush();
 
@@ -76,7 +76,7 @@ class AvailabilityFacade
     public function edit($availabilityId, AvailabilityData $availabilityData)
     {
         $availability = $this->availabilityRepository->getById($availabilityId);
-        $this->availabilityService->edit($availability, $availabilityData);
+        $availability->edit($availabilityData);
         $this->em->flush();
 
         return $availability;

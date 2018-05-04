@@ -16,10 +16,19 @@ class PromoCodeFacade
      */
     protected $promoCodeRepository;
 
-    public function __construct(EntityManagerInterface $em, PromoCodeRepository $promoCodeRepository)
-    {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFactoryInterface
+     */
+    protected $promoCodeFactory;
+
+    public function __construct(
+        EntityManagerInterface $em,
+        PromoCodeRepository $promoCodeRepository,
+        PromoCodeFactoryInterface $promoCodeFactory
+    ) {
         $this->em = $em;
         $this->promoCodeRepository = $promoCodeRepository;
+        $this->promoCodeFactory = $promoCodeFactory;
     }
 
     /**
@@ -28,7 +37,7 @@ class PromoCodeFacade
      */
     public function create(PromoCodeData $promoCodeData)
     {
-        $promoCode = new PromoCode($promoCodeData);
+        $promoCode = $this->promoCodeFactory->create($promoCodeData);
         $this->em->persist($promoCode);
         $this->em->flush();
 

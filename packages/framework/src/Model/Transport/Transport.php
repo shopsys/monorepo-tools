@@ -171,11 +171,15 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactoryInterface $transportPriceFactory
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
      * @param string $price
      */
-    public function setPrice(Currency $currency, $price)
-    {
+    public function setPrice(
+        TransportPriceFactoryInterface $transportPriceFactory,
+        Currency $currency,
+        $price
+    ) {
         foreach ($this->prices as $transportInputPrice) {
             if ($transportInputPrice->getCurrency() === $currency) {
                 $transportInputPrice->setPrice($price);
@@ -183,7 +187,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
             }
         }
 
-        $this->prices[] = new TransportPrice($this, $currency, $price);
+        $this->prices[] = $transportPriceFactory->create($this, $currency, $price);
     }
 
     /**

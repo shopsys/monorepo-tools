@@ -24,18 +24,26 @@ class PersonalDataAccessRequestFacade
     protected $personalDataAccessRequestRepository;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactoryInterface
+     */
+    protected $personalDataAccessRequestFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
      * @param \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestRepository $personalDataAccessRequestRepository
+     * @param \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFactoryInterface $personalDataAccessRequestFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         HashGenerator $hashGenerator,
-        PersonalDataAccessRequestRepository $personalDataAccessRequestRepository
+        PersonalDataAccessRequestRepository $personalDataAccessRequestRepository,
+        PersonalDataAccessRequestFactoryInterface $personalDataAccessRequestFactory
     ) {
         $this->em = $em;
         $this->hashGenerator = $hashGenerator;
         $this->personalDataAccessRequestRepository = $personalDataAccessRequestRepository;
+        $this->personalDataAccessRequestFactory = $personalDataAccessRequestFactory;
     }
 
     /**
@@ -53,7 +61,7 @@ class PersonalDataAccessRequestFacade
         $personalDataAccessRequestData->createAt = new DateTime();
         $personalDataAccessRequestData->domainId = $domainId;
 
-        $dataAccessRequest = PersonalDataAccessRequest::create($personalDataAccessRequestData);
+        $dataAccessRequest = $this->personalDataAccessRequestFactory->create($personalDataAccessRequestData);
 
         $this->em->persist($dataAccessRequest);
         $this->em->flush();

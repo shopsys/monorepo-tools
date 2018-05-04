@@ -76,6 +76,15 @@ It replaces the parent entity name by the extended entity name in strings, array
 
 The various capabilities of this resolver are best described in its unit test `\Tests\FrameworkBundle\Unit\Component\EntityExtension\EntityNameResolverTest`.
 
+### Factories
+
+Entities are created by factories. If any part of framework creates an entity, it uses a factory.
+So in the project, we can change the factory to produce extended entities instead of original and the whole system will create extended entities.
+
+Only exception are `*Translation` entities.
+They are created by their owner entity.
+If it is needed to extend the translation, it is also necessary to extend the owner entity and override the `createTranslation` method to produce the extended translation.
+
 ## OrderItem and true mapped inheritance
 
 ![class inheritance of the OrderItem entity](img/order-item.png)
@@ -87,10 +96,6 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
 
 ## How can I extend an entity?
 
-As we mentioned in the introduction, there must be only one entity type in the whole system.
-So if we just test now, we will probably meet a couple of errors because the original entities are still instantiated in the framework.
-This issue will be addressed in the future, entity extension is a work in progress.
-
 * Create a new entity in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity
   * keep entity and table annotations
   * you can add new properties and use annotations to configure ORM
@@ -98,8 +103,18 @@ This issue will be addressed in the future, entity extension is a work in progre
   * add it to the configuration parameter `shopsys.entity_extension.map`
   * use the parent entity name as a key and the extended entity name as a value
   * eg. `Shopsys\FrameworkBunde\Model\Product\Product: DreamProject\Model\Product\Product`
+* Create a factory for this entity
+  * Implement the factory interface from the framework
+    * eg. `class ProductFactory implements ProductFactoryInterface`
+  * Rewrite symfony configuration for the interface to alias your factory
+    * eg.
+      ```php
+        Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface:
+          alias: DreamProject\Model\Product\ProductFactory
+      ```
 * Now your extended entity is automatically used instead of the parent entity:
   * in hydrated Doctrine references
   * in the EntityManager, Repositories and QueryBuilders
+  * in newly created entities
 
 *Tip: to see how it works in practice check out `\Tests\ShopBundle\Database\EntityExtension\EntityExtensionTest` that tests end-to-end extensibility of `Product`, `Category` and `OrderItem`.*

@@ -18,31 +18,31 @@ class UnitFacade
     protected $unitRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitService
-     */
-    protected $unitService;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
      */
     protected $setting;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFactoryInterface
+     */
+    protected $unitFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitRepository $unitRepository
-     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitService $unitService
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFactoryInterface $unitFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         UnitRepository $unitRepository,
-        UnitService $unitService,
-        Setting $setting
+        Setting $setting,
+        UnitFactoryInterface $unitFactory
     ) {
         $this->em = $em;
         $this->unitRepository = $unitRepository;
-        $this->unitService = $unitService;
         $this->setting = $setting;
+        $this->unitFactory = $unitFactory;
     }
 
     /**
@@ -60,7 +60,7 @@ class UnitFacade
      */
     public function create(UnitData $unitData)
     {
-        $unit = $this->unitService->create($unitData);
+        $unit = $this->unitFactory->create($unitData);
         $this->em->persist($unit);
         $this->em->flush();
 
@@ -75,7 +75,7 @@ class UnitFacade
     public function edit($unitId, UnitData $unitData)
     {
         $unit = $this->unitRepository->getById($unitId);
-        $this->unitService->edit($unit, $unitData);
+        $unit->edit($unitData);
         $this->em->flush();
 
         return $unit;

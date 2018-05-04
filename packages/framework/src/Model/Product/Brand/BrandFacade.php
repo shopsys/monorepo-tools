@@ -34,18 +34,41 @@ class BrandFacade
      */
     protected $domain;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactoryInterface
+     */
+    protected $brandFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomainFactoryInterface
+     */
+    protected $brandDomainFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository $brandRepository
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactoryInterface $brandFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomainFactoryInterface $brandDomainFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         BrandRepository $brandRepository,
         ImageFacade $imageFacade,
         FriendlyUrlFacade $friendlyUrlFacade,
-        Domain $domain
+        Domain $domain,
+        BrandFactoryInterface $brandFactory,
+        BrandDomainFactoryInterface $brandDomainFactory
     ) {
         $this->em = $em;
         $this->brandRepository = $brandRepository;
         $this->imageFacade = $imageFacade;
         $this->friendlyUrlFacade = $friendlyUrlFacade;
         $this->domain = $domain;
+        $this->brandFactory = $brandFactory;
+        $this->brandDomainFactory = $brandDomainFactory;
     }
 
     /**
@@ -65,7 +88,7 @@ class BrandFacade
     {
         $domains = $this->domain->getAll();
         $brandData = $brandEditData->getBrandData();
-        $brand = new Brand($brandData);
+        $brand = $this->brandFactory->create($brandData);
         $this->em->persist($brand);
         $this->em->flush();
         $this->createBrandDomains($brand, $domains);
@@ -172,7 +195,7 @@ class BrandFacade
     {
         $toFlush = [];
         foreach ($domains as $domain) {
-            $brandDomain = new BrandDomain($brand, $domain->getId());
+            $brandDomain = $this->brandDomainFactory->create($brand, $domain->getId());
             $this->em->persist($brandDomain);
             $toFlush[] = $brandDomain;
         }

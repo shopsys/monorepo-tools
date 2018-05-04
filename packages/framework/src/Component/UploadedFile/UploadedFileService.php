@@ -12,9 +12,17 @@ class UploadedFileService
      */
     private $fileUpload;
 
-    public function __construct(FileUpload $fileUpload)
-    {
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFactoryInterface
+     */
+    protected $uploadedFileFactory;
+
+    public function __construct(
+        FileUpload $fileUpload,
+        UploadedFileFactoryInterface $uploadedFileFactory
+    ) {
         $this->fileUpload = $fileUpload;
+        $this->uploadedFileFactory = $uploadedFileFactory;
     }
 
     /**
@@ -30,7 +38,7 @@ class UploadedFileService
     ) {
         $temporaryFilepath = $this->fileUpload->getTemporaryFilepath(array_pop($temporaryFilenames));
 
-        return new UploadedFile(
+        return $this->uploadedFileFactory->create(
             $uploadedFileEntityConfig->getEntityName(),
             $entityId,
             pathinfo($temporaryFilepath, PATHINFO_BASENAME)

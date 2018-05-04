@@ -29,21 +29,29 @@ class AdvertFacade
     protected $imageFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Advert\AdvertFactoryInterface
+     */
+    protected $advertFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertRepository $advertRepository
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
+     * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertFactoryInterface $advertFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         AdvertRepository $advertRepository,
         ImageFacade $imageFacade,
-        Domain $domain
+        Domain $domain,
+        AdvertFactoryInterface $advertFactory
     ) {
         $this->em = $em;
         $this->advertRepository = $advertRepository;
         $this->imageFacade = $imageFacade;
         $this->domain = $domain;
+        $this->advertFactory = $advertFactory;
     }
 
     /**
@@ -70,7 +78,7 @@ class AdvertFacade
      */
     public function create(AdvertData $advertData)
     {
-        $advert = new Advert($advertData);
+        $advert = $this->advertFactory->create($advertData);
 
         $this->em->persist($advert);
         $this->em->flush();

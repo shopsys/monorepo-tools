@@ -29,21 +29,29 @@ class CustomerFacade
     protected $customerMailFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactoryInterface
+     */
+    protected $billingAddressFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerService $customerService
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
+     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactoryInterface $billingAddressFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         UserRepository $userRepository,
         CustomerService $customerService,
-        CustomerMailFacade $customerMailFacade
+        CustomerMailFacade $customerMailFacade,
+        BillingAddressFactoryInterface $billingAddressFactory
     ) {
         $this->em = $em;
         $this->userRepository = $userRepository;
         $this->customerService = $customerService;
         $this->customerMailFacade = $customerMailFacade;
+        $this->billingAddressFactory = $billingAddressFactory;
     }
 
     /**
@@ -73,7 +81,7 @@ class CustomerFacade
     {
         $userByEmailAndDomain = $this->findUserByEmailAndDomain($userData->email, $userData->domainId);
 
-        $billingAddress = new BillingAddress(new BillingAddressData());
+        $billingAddress = $this->billingAddressFactory->create(new BillingAddressData());
 
         $user = $this->customerService->create(
             $userData,
@@ -98,7 +106,7 @@ class CustomerFacade
     public function create(CustomerData $customerData)
     {
         $toFlush = [];
-        $billingAddress = new BillingAddress($customerData->billingAddressData);
+        $billingAddress = $this->billingAddressFactory->create($customerData->billingAddressData);
         $this->em->persist($billingAddress);
         $toFlush[] = $billingAddress;
 

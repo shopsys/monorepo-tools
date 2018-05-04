@@ -40,7 +40,7 @@ class ProductManualInputPrice
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @param string $inputPrice
+     * @param string|null $inputPrice
      */
     public function __construct(Product $product, PricingGroup $pricingGroup, $inputPrice)
     {

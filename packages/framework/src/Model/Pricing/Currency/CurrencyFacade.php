@@ -5,11 +5,11 @@ namespace Shopsys\FrameworkBundle\Model\Pricing\Currency;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentPrice;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentRepository;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use Shopsys\FrameworkBundle\Model\Transport\TransportPrice;
+use Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportRepository;
 
 class CurrencyFacade
@@ -59,6 +59,16 @@ class CurrencyFacade
      */
     protected $transportRepository;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface
+     */
+    protected $paymentPriceFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactoryInterface
+     */
+    protected $transportPriceFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         CurrencyRepository $currencyRepository,
@@ -68,7 +78,9 @@ class CurrencyFacade
         Domain $domain,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
         PaymentRepository $paymentRepository,
-        TransportRepository $transportRepository
+        TransportRepository $transportRepository,
+        PaymentPriceFactoryInterface $paymentPriceFactory,
+        TransportPriceFactoryInterface $transportPriceFactory
     ) {
         $this->em = $em;
         $this->currencyRepository = $currencyRepository;
@@ -79,6 +91,8 @@ class CurrencyFacade
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
         $this->paymentRepository = $paymentRepository;
         $this->transportRepository = $transportRepository;
+        $this->paymentPriceFactory = $paymentPriceFactory;
+        $this->transportPriceFactory = $transportPriceFactory;
     }
 
     /**
@@ -227,12 +241,12 @@ class CurrencyFacade
     {
         $toFlush = [];
         foreach ($this->paymentRepository->getAll() as $payment) {
-            $paymentPrice = new PaymentPrice($payment, $currency, 0);
+            $paymentPrice = $this->paymentPriceFactory->create($payment, $currency, 0);
             $this->em->persist($paymentPrice);
             $toFlush[] = $paymentPrice;
         }
         foreach ($this->transportRepository->getAll() as $transport) {
-            $transportPrice = new TransportPrice($transport, $currency, 0);
+            $transportPrice = $this->transportPriceFactory->create($transport, $currency, 0);
             $this->em->persist($transportPrice);
             $toFlush[] = $transportPrice;
         }

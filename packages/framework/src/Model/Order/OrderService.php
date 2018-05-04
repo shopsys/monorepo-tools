@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Order;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderProduct;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -34,16 +34,30 @@ class OrderService
      */
     private $domainRouterFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface
+     */
+    protected $orderProductFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\Item\OrderProductFactoryInterface $orderProductFactory
+     */
     public function __construct(
         Domain $domain,
         OrderItemPriceCalculation $orderItemPriceCalculation,
         OrderPriceCalculation $orderPriceCalculation,
-        DomainRouterFactory $domainRouterFactory
+        DomainRouterFactory $domainRouterFactory,
+        OrderProductFactoryInterface $orderProductFactory
     ) {
         $this->domain = $domain;
         $this->orderItemPriceCalculation = $orderItemPriceCalculation;
         $this->orderPriceCalculation = $orderPriceCalculation;
         $this->domainRouterFactory = $domainRouterFactory;
+        $this->orderProductFactory = $orderProductFactory;
     }
 
     /**
@@ -78,7 +92,7 @@ class OrderService
         $orderItemsToCreate = [];
         foreach ($orderData->getNewItemsWithoutTransportAndPayment() as $newOrderItemData) {
             $newOrderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($newOrderItemData);
-            $newOrderItem = new OrderProduct(
+            $newOrderItem = $this->orderProductFactory->create(
                 $order,
                 $newOrderItemData->name,
                 new Price(
@@ -108,7 +122,7 @@ class OrderService
     {
         $orderDomainConfig = $this->domain->getDomainConfigById($order->getDomainId());
 
-        $orderProduct = new OrderProduct(
+        $orderProduct = $this->orderProductFactory->create(
             $order,
             $product->getName($orderDomainConfig->getLocale()),
             $productPrice,

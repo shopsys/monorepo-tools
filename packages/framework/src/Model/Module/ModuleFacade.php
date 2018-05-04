@@ -16,12 +16,24 @@ class ModuleFacade
      */
     protected $enabledModuleRepository;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Module\EnabledModuleFactoryInterface
+     */
+    protected $enabledModuleFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Module\EnabledModuleRepository $enabledModuleRepository
+     * @param \Shopsys\FrameworkBundle\Model\Module\EnabledModuleFactoryInterface $enabledModuleFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
-        EnabledModuleRepository $enabledModuleRepository
+        EnabledModuleRepository $enabledModuleRepository,
+        EnabledModuleFactoryInterface $enabledModuleFactory
     ) {
         $this->em = $em;
         $this->enabledModuleRepository = $enabledModuleRepository;
+        $this->enabledModuleFactory = $enabledModuleFactory;
     }
 
     /**
@@ -44,7 +56,7 @@ class ModuleFacade
         $enabledModule = $this->enabledModuleRepository->findByName($moduleName);
 
         if ($enabledModule === null && $isEnabled) {
-            $enabledModule = new EnabledModule($moduleName);
+            $enabledModule = $this->enabledModuleFactory->create($moduleName);
             $this->em->persist($enabledModule);
         } elseif ($enabledModule !== null && !$isEnabled) {
             $this->em->remove($enabledModule);

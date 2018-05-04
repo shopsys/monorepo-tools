@@ -4,8 +4,8 @@ namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
-use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface;
 
 class OrderItemPriceCalculation
 {
@@ -15,11 +15,20 @@ class OrderItemPriceCalculation
     private $priceCalculation;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation $priceCalculation
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface
      */
-    public function __construct(PriceCalculation $priceCalculation)
-    {
+    protected $vatFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation $priceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface $vatFactory
+     */
+    public function __construct(
+        PriceCalculation $priceCalculation,
+        VatFactoryInterface $vatFactory
+    ) {
         $this->priceCalculation = $priceCalculation;
+        $this->vatFactory = $vatFactory;
     }
 
     /**
@@ -28,7 +37,7 @@ class OrderItemPriceCalculation
      */
     public function calculatePriceWithoutVat(OrderItemData $orderItemData)
     {
-        $vat = new Vat(new VatData('orderItemVat', $orderItemData->vatPercent));
+        $vat = $this->vatFactory->create(new VatData('orderItemVat', $orderItemData->vatPercent));
         $vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($orderItemData->priceWithVat, $vat);
 
         return $orderItemData->priceWithVat - $vatAmount;
@@ -40,7 +49,7 @@ class OrderItemPriceCalculation
      */
     public function calculateTotalPrice(OrderItem $orderItem)
     {
-        $vat = new Vat(new VatData('orderItemVat', $orderItem->getVatPercent()));
+        $vat = $this->vatFactory->create(new VatData('orderItemVat', $orderItem->getVatPercent()));
 
         $totalPriceWithVat = $orderItem->getPriceWithVat() * $orderItem->getQuantity();
         $totalVatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($totalPriceWithVat, $vat);

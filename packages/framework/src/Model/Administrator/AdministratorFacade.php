@@ -22,18 +22,26 @@ class AdministratorFacade
     protected $administratorService;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFactoryInterface
+     */
+    protected $administratorFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository $administratorRepository
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorService $administratorService
+     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFactoryInterface
      */
     public function __construct(
         EntityManagerInterface $em,
         AdministratorRepository $administratorRepository,
-        AdministratorService $administratorService
+        AdministratorService $administratorService,
+        AdministratorFactoryInterface $administratorFactory
     ) {
         $this->administratorRepository = $administratorRepository;
         $this->administratorService = $administratorService;
         $this->em = $em;
+        $this->administratorFactory = $administratorFactory;
     }
 
     /**
@@ -46,7 +54,7 @@ class AdministratorFacade
         if ($administratorByUserName !== null) {
             throw new \Shopsys\FrameworkBundle\Model\Administrator\Exception\DuplicateUserNameException($administratorByUserName->getUsername());
         }
-        $administrator = new Administrator($administratorData);
+        $administrator = $this->administratorFactory->create($administratorData);
         $this->administratorService->setPassword($administrator, $administratorData->password);
 
         $this->em->persist($administrator);

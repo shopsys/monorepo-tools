@@ -19,13 +19,23 @@ class ImageService
     private $fileUpload;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFactoryInterface
+     */
+    protected $imageFactory;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
      * @param \Shopsys\FrameworkBundle\Component\FileUpload\FileUpload $fileUpload
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFactoryInterface $imageFactory
      */
-    public function __construct(ImageProcessingService $imageProcessingService, FileUpload $fileUpload)
-    {
+    public function __construct(
+        ImageProcessingService $imageProcessingService,
+        FileUpload $fileUpload,
+        ImageFactoryInterface $imageFactory
+    ) {
         $this->imageProcessingService = $imageProcessingService;
         $this->fileUpload = $fileUpload;
+        $this->imageFactory = $imageFactory;
     }
 
     /**
@@ -66,7 +76,7 @@ class ImageService
     ) {
         $temporaryFilepath = $this->fileUpload->getTemporaryFilepath($temporaryFilename);
 
-        $image = new Image(
+        $image = $this->imageFactory->create(
             $imageEntityConfig->getEntityName(),
             $entityId,
             $type,

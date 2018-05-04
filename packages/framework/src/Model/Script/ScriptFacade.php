@@ -27,18 +27,26 @@ class ScriptFacade
     protected $setting;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Script\ScriptFactoryInterface
+     */
+    protected $scriptFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Script\ScriptRepository $scriptRepository
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
+     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptFactoryInterface $scriptFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         ScriptRepository $scriptRepository,
-        Setting $setting
+        Setting $setting,
+        ScriptFactoryInterface $scriptFactory
     ) {
         $this->em = $em;
         $this->scriptRepository = $scriptRepository;
         $this->setting = $setting;
+        $this->scriptFactory = $scriptFactory;
     }
 
     /**
@@ -72,7 +80,7 @@ class ScriptFacade
      */
     public function create(ScriptData $scriptData)
     {
-        $script = new Script($scriptData);
+        $script = $this->scriptFactory->create($scriptData);
 
         $this->em->persist($script);
         $this->em->flush();

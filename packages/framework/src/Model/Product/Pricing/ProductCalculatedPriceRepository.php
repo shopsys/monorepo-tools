@@ -15,11 +15,18 @@ class ProductCalculatedPriceRepository
     private $em;
 
     /**
-     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPriceFactoryInterface
      */
-    public function __construct(EntityManagerInterface $em)
+    protected $productCalculatedPriceFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPriceFactoryInterface $productCalculatedPriceFactory
+     */
+    public function __construct(EntityManagerInterface $em, ProductCalculatedPriceFactoryInterface $productCalculatedPriceFactory)
     {
         $this->em = $em;
+        $this->productCalculatedPriceFactory = $productCalculatedPriceFactory;
     }
 
     /**
@@ -43,7 +50,7 @@ class ProductCalculatedPriceRepository
         ]);
 
         if ($productCalculatedPrice === null) {
-            $productCalculatedPrice = new ProductCalculatedPrice($product, $pricingGroup, $priceWithVat);
+            $productCalculatedPrice = $this->productCalculatedPriceFactory->create($product, $pricingGroup, $priceWithVat);
             $this->em->persist($productCalculatedPrice);
         } else {
             $productCalculatedPrice->setPriceWithVat($priceWithVat);

@@ -12,9 +12,29 @@ class CustomerService
      */
     private $customerPasswordService;
 
-    public function __construct(CustomerPasswordService $customerPasswordService)
-    {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface
+     */
+    protected $deliveryAddressFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface
+     */
+    protected $userFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface $userFactory
+     */
+    public function __construct(
+        CustomerPasswordService $customerPasswordService,
+        DeliveryAddressFactoryInterface $deliveryAddressFactory,
+        UserFactoryInterface $userFactory
+    ) {
         $this->customerPasswordService = $customerPasswordService;
+        $this->deliveryAddressFactory = $deliveryAddressFactory;
+        $this->userFactory = $userFactory;
     }
 
     /**
@@ -38,7 +58,7 @@ class CustomerService
             }
         }
 
-        $user = new User(
+        $user = $this->userFactory->create(
             $userData,
             $billingAddress,
             $deliveryAddress
@@ -68,7 +88,7 @@ class CustomerService
     public function createDeliveryAddress(DeliveryAddressData $deliveryAddressData)
     {
         if ($deliveryAddressData->addressFilled) {
-            $deliveryAddress = new DeliveryAddress($deliveryAddressData);
+            $deliveryAddress = $this->deliveryAddressFactory->create($deliveryAddressData);
         } else {
             $deliveryAddress = null;
         }
@@ -91,7 +111,7 @@ class CustomerService
             if ($deliveryAddress instanceof DeliveryAddress) {
                 $deliveryAddress->edit($deliveryAddressData);
             } else {
-                $deliveryAddress = new DeliveryAddress($deliveryAddressData);
+                $deliveryAddress = $this->deliveryAddressFactory->create($deliveryAddressData);
                 $user->setDeliveryAddress($deliveryAddress);
             }
         } else {

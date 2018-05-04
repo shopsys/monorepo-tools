@@ -77,7 +77,7 @@ class Image implements EntityFileUploadInterface
      * @param string $entityName
      * @param int $entityId
      * @param string|null $type
-     * @param string $temporaryFilename
+     * @param string|null $temporaryFilename
      */
     public function __construct($entityName, $entityId, $type, $temporaryFilename)
     {

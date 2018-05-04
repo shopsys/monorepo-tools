@@ -67,6 +67,44 @@ class Product
 }
 ```
 
+### Factory
+
+Is a class that creates an entity.
+The framework must allow using extended entities and this problem is solved using factories.
+
+Only entities that are not created by the factory are `*Translation` entities.
+These entities are created by their owner entity.
+
+#### Example
+```php
+// FrameworkBundle/Model/Cart/Item/CartItemFactoryInterface.php
+
+namespace Shopsys\FrameworkBundle\Model\Cart\Item;
+
+// ...
+
+interface CartItemFactoryInterface
+{
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @param int $quantity
+     * @param string $watchedPrice
+     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem
+     */
+    public function create(
+        CustomerIdentifier $customerIdentifier,
+        Product $product,
+        int $quantity,
+        string $watchedPrice
+    ): CartItem;
+}
+```
+
+The factory has an implementation in the framework and can be overwritten in your project when you need to work with an extended entity.
+You can read about entity extension in a [separate article](../wip_glassbox/entity-extension.md).
+
 ## Repository
 Is a class used to provide access to all entities of its scope. Repository enables code reuse of retrieving logic. Thanks to repositories, there is no need to use DQL/SQL in controllers or facades.
 
@@ -159,32 +197,32 @@ class CartFacade
     /**
      * @var \Doctrine\ORM\EntityManager
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\CartService
      */
-    private $cartService;
+    protected $cartService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\CartFactory
      */
-    private $cartFactory;
+    protected $cartFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifierFactory
      */
-    private $customerIdentifierFactory;
+    protected $customerIdentifierFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
-    private $currentCustomer;
+    protected $currentCustomer;
     
     // ...
 
@@ -233,8 +271,13 @@ class CartService
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
-    private $productPriceCalculation;
+    protected $productPriceCalculation;
     
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface
+     */
+    protected $cartItemFactory;
+
     // ...
     
     /**
@@ -259,7 +302,7 @@ class CartService
         }
 
         $productPrice = $this->productPriceCalculation->calculatePriceForCurrentUser($product);
-        $newCartItem = new CartItem($customerIdentifier, $product, $quantity, $productPrice->getPriceWithVat());
+        $newCartItem = $this->cartItemFactory->create($customerIdentifier, $product, $quantity, $productPrice->getPriceWithVat());
         $cart->addItem($newCartItem);
         return new AddProductResult($newCartItem, true, $quantity);
     }

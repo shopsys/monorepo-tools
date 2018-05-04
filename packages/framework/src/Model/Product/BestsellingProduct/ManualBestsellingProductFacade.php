@@ -22,14 +22,27 @@ class ManualBestsellingProductFacade
      */
     protected $cachedBestsellingProductFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFactoryInterface
+     */
+    protected $manualBestsellingProductFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository $manualBestsellingProductRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade $cachedBestsellingProductFacade
+     * @param \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFactoryInterface $manualBestsellingProductFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         ManualBestsellingProductRepository $manualBestsellingProductRepository,
-        CachedBestsellingProductFacade $cachedBestsellingProductFacade
+        CachedBestsellingProductFacade $cachedBestsellingProductFacade,
+        ManualBestsellingProductFactoryInterface $manualBestsellingProductFactory
     ) {
         $this->em = $em;
         $this->manualBestsellingProductRepository = $manualBestsellingProductRepository;
         $this->cachedBestsellingProductFacade = $cachedBestsellingProductFacade;
+        $this->manualBestsellingProductFactory = $manualBestsellingProductFactory;
     }
 
     /**
@@ -47,7 +60,7 @@ class ManualBestsellingProductFacade
 
         foreach ($productsIndexedByPosition as $position => $product) {
             if ($product !== null) {
-                $manualBestsellingProduct = new ManualBestsellingProduct($domainId, $category, $product, $position);
+                $manualBestsellingProduct = $this->manualBestsellingProductFactory->create($domainId, $category, $product, $position);
                 $this->em->persist($manualBestsellingProduct);
             }
         }

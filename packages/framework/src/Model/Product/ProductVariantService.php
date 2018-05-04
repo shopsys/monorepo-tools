@@ -5,6 +5,16 @@ namespace Shopsys\FrameworkBundle\Model\Product;
 class ProductVariantService
 {
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface
+     */
+    protected $productFactory;
+
+    public function __construct(ProductFactoryInterface $productFactory)
+    {
+        $this->productFactory = $productFactory;
+    }
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
     public function checkProductIsNotMainVariant(Product $product)
@@ -60,6 +70,6 @@ class ProductVariantService
     {
         $variants[] = $mainProduct;
 
-        return Product::createMainVariant($mainVariantEditData->productData, $variants);
+        return $this->productFactory->createMainVariant($mainVariantEditData->productData, $variants);
     }
 }

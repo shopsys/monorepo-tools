@@ -34,18 +34,33 @@ class OrderStatusFacade
      */
     protected $mailTemplateFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFactoryInterface
+     */
+    protected $orderStatusFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusService $orderStatusService
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderRepository $orderRepository
+     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFactoryInterface $orderStatusFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         OrderStatusRepository $orderStatusRepository,
         OrderStatusService $orderStatusService,
         OrderRepository $orderRepository,
-        MailTemplateFacade $mailTemplateFacade
+        MailTemplateFacade $mailTemplateFacade,
+        OrderStatusFactoryInterface $orderStatusFactory
     ) {
         $this->em = $em;
         $this->orderStatusRepository = $orderStatusRepository;
         $this->orderStatusService = $orderStatusService;
         $this->orderRepository = $orderRepository;
         $this->mailTemplateFacade = $mailTemplateFacade;
+        $this->orderStatusFactory = $orderStatusFactory;
     }
 
     /**
@@ -54,7 +69,7 @@ class OrderStatusFacade
      */
     public function create(OrderStatusData $orderStatusFormData)
     {
-        $orderStatus = new OrderStatus($orderStatusFormData, OrderStatus::TYPE_IN_PROGRESS);
+        $orderStatus = $this->orderStatusFactory->create($orderStatusFormData, OrderStatus::TYPE_IN_PROGRESS);
         $this->em->persist($orderStatus);
         $this->em->flush();
 

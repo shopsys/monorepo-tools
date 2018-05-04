@@ -7,13 +7,27 @@ use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 
 class CurrencyService
 {
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFactoryInterface
+     */
+    protected $currencyFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFactoryInterface $currencyFactory
+     */
+    public function __construct(CurrencyFactoryInterface $currencyFactory)
+    {
+        $this->currencyFactory = $currencyFactory;
+    }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData $currencyData
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
      */
     public function create(CurrencyData $currencyData)
     {
-        return new Currency($currencyData);
+        return $this->currencyFactory->create($currencyData);
     }
 
     /**

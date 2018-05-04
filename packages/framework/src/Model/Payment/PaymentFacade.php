@@ -51,6 +51,34 @@ class PaymentFacade
      */
     protected $paymentPriceCalculation;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFactoryInterface
+     */
+    protected $paymentFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentDomainFactoryInterface
+     */
+    protected $paymentDomainFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface
+     */
+    protected $paymentPriceFactory;
+
+    /**
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository $paymentRepository
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportRepository $transportRepository
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentVisibilityCalculation $paymentVisibilityCalculation
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
+     * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFactoryInterface $paymentFactory
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentDomainFactoryInterface $paymentDomainFactory
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface $paymentPriceFactory
+     */
     public function __construct(
         EntityManagerInterface $em,
         PaymentRepository $paymentRepository,
@@ -59,7 +87,10 @@ class PaymentFacade
         Domain $domain,
         ImageFacade $imageFacade,
         CurrencyFacade $currencyFacade,
-        PaymentPriceCalculation $paymentPriceCalculation
+        PaymentPriceCalculation $paymentPriceCalculation,
+        PaymentFactoryInterface $paymentFactory,
+        PaymentDomainFactoryInterface $paymentDomainFactory,
+        PaymentPriceFactoryInterface $paymentPriceFactory
     ) {
         $this->em = $em;
         $this->paymentRepository = $paymentRepository;
@@ -69,6 +100,9 @@ class PaymentFacade
         $this->imageFacade = $imageFacade;
         $this->currencyFacade = $currencyFacade;
         $this->paymentPriceCalculation = $paymentPriceCalculation;
+        $this->paymentFactory = $paymentFactory;
+        $this->paymentDomainFactory = $paymentDomainFactory;
+        $this->paymentPriceFactory = $paymentPriceFactory;
     }
 
     /**
@@ -77,7 +111,7 @@ class PaymentFacade
      */
     public function create(PaymentEditData $paymentEditData)
     {
-        $payment = new Payment($paymentEditData->paymentData);
+        $payment = $this->paymentFactory->create($paymentEditData->paymentData);
         $this->em->persist($payment);
         $this->em->flush();
         $this->updatePaymentPrices($payment, $paymentEditData->pricesByCurrencyId);
@@ -167,7 +201,7 @@ class PaymentFacade
     protected function createPaymentDomains(Payment $payment, array $domainIds)
     {
         foreach ($domainIds as $domainId) {
-            $paymentDomain = new PaymentDomain($payment, $domainId);
+            $paymentDomain = $this->paymentDomainFactory->create($payment, $domainId);
             $this->em->persist($paymentDomain);
         }
         $this->em->flush();
@@ -193,7 +227,7 @@ class PaymentFacade
     {
         foreach ($this->currencyFacade->getAll() as $currency) {
             $price = $pricesByCurrencyId[$currency->getId()];
-            $payment->setPrice($currency, $price);
+            $payment->setPrice($this->paymentPriceFactory, $currency, $price);
         }
     }
 

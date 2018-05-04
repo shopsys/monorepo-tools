@@ -8,12 +8,12 @@ use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository;
-use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessory;
+use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
-use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
@@ -109,6 +109,36 @@ class ProductFacade
      */
     protected $pluginCrudExtensionFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface
+     */
+    protected $productFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFactoryInterface
+     */
+    protected $productAccessoryFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface
+     */
+    protected $productCategoryDomainFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDomainFactoryInterface
+     */
+    protected $productDomainFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactoryInterface
+     */
+    protected $productParameterValueFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFactoryInterface
+     */
+    protected $productVisibilityFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         ProductRepository $productRepository,
@@ -127,7 +157,13 @@ class ProductFacade
         ProductAccessoryRepository $productAccessoryRepository,
         ProductVariantService $productVariantService,
         AvailabilityFacade $availabilityFacade,
-        PluginCrudExtensionFacade $pluginCrudExtensionFacade
+        PluginCrudExtensionFacade $pluginCrudExtensionFacade,
+        ProductFactoryInterface $productFactory,
+        ProductAccessoryFactoryInterface $productAccessoryFactory,
+        ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
+        ProductDomainFactoryInterface $productDomainFactory,
+        ProductParameterValueFactoryInterface $productParameterValueFactory,
+        ProductVisibilityFactoryInterface $productVisibilityFactory
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -147,6 +183,12 @@ class ProductFacade
         $this->productVariantService = $productVariantService;
         $this->availabilityFacade = $availabilityFacade;
         $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
+        $this->productFactory = $productFactory;
+        $this->productAccessoryFactory = $productAccessoryFactory;
+        $this->productCategoryDomainFactory = $productCategoryDomainFactory;
+        $this->productDomainFactory = $productDomainFactory;
+        $this->productParameterValueFactory = $productParameterValueFactory;
+        $this->productVisibilityFactory = $productVisibilityFactory;
     }
 
     /**
@@ -164,7 +206,7 @@ class ProductFacade
      */
     public function create(ProductEditData $productEditData)
     {
-        $product = Product::create($productEditData->productData);
+        $product = $this->productFactory->create($productEditData->productData);
 
         if ($product->isUsingStock()) {
             $defaultInStockAvailability = $this->availabilityFacade->getDefaultInStockAvailability();
@@ -189,7 +231,7 @@ class ProductFacade
     {
         // Persist of ProductCategoryDomain requires known primary key of Product
         // @see https://github.com/doctrine/doctrine2/issues/4869
-        $product->setCategories($productEditData->productData->categoriesByDomainId);
+        $product->setCategories($this->productCategoryDomainFactory, $productEditData->productData->categoriesByDomainId);
         $this->em->flush($product);
 
         $this->saveParameters($product, $productEditData->parameters);
@@ -283,7 +325,7 @@ class ProductFacade
 
         $toFlush = [];
         foreach ($productParameterValuesData as $productParameterValueData) {
-            $productParameterValue = new ProductParameterValue(
+            $productParameterValue = $this->productParameterValueFactory->create(
                 $product,
                 $productParameterValueData->parameter,
                 $this->parameterRepository->findOrCreateParameterValueByValueTextAndLocale(
@@ -305,7 +347,7 @@ class ProductFacade
     {
         $toFlush = [];
         foreach ($domains as $domain) {
-            $productDomain = new ProductDomain($product, $domain->getId());
+            $productDomain = $this->productDomainFactory->create($product, $domain->getId());
             $this->em->persist($productDomain);
             $toFlush[] = $productDomain;
         }
@@ -384,7 +426,7 @@ class ProductFacade
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainId = $domainConfig->getId();
             foreach ($this->pricingGroupRepository->getPricingGroupsByDomainId($domainId) as $pricingGroup) {
-                $productVisibility = new ProductVisibility($product, $pricingGroup, $domainId);
+                $productVisibility = $this->productVisibilityFactory->create($product, $pricingGroup, $domainId);
                 $this->em->persist($productVisibility);
                 $toFlush[] = $productVisibility;
             }
@@ -406,7 +448,7 @@ class ProductFacade
 
         $toFlush = [];
         foreach ($accessories as $position => $accessory) {
-            $newProductAccessory = new ProductAccessory($product, $accessory, $position);
+            $newProductAccessory = $this->productAccessoryFactory->create($product, $accessory, $position);
             $this->em->persist($newProductAccessory);
             $toFlush[] = $newProductAccessory;
         }

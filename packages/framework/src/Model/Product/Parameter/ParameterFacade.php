@@ -17,23 +17,23 @@ class ParameterFacade
     protected $parameterRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterService
+     * @var ParameterFactoryInterface
      */
-    protected $parameterService;
+    protected $parameterFactory;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
-     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterService $parameterService
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFactoryInterface $parameterFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         ParameterRepository $parameterRepository,
-        ParameterService $parameterService
+        ParameterFactoryInterface $parameterFactory
     ) {
         $this->em = $em;
         $this->parameterRepository = $parameterRepository;
-        $this->parameterService = $parameterService;
+        $this->parameterFactory = $parameterFactory;
     }
 
     /**
@@ -59,7 +59,7 @@ class ParameterFacade
      */
     public function create(ParameterData $parameterData)
     {
-        $parameter = $this->parameterService->create($parameterData);
+        $parameter = $this->parameterFactory->create($parameterData);
         $this->em->persist($parameter);
         $this->em->flush($parameter);
 
@@ -83,7 +83,7 @@ class ParameterFacade
     public function edit($parameterId, ParameterData $parameterData)
     {
         $parameter = $this->parameterRepository->getById($parameterId);
-        $this->parameterService->edit($parameter, $parameterData);
+        $parameter->edit($parameterData);
         $this->em->flush();
 
         return $parameter;

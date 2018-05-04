@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFactoryInterface;
 
 class OrderStatusDataFixture extends AbstractReferenceFixture
 {
@@ -13,6 +14,19 @@ class OrderStatusDataFixture extends AbstractReferenceFixture
     const ORDER_STATUS_IN_PROGRESS = 'order_status_in_progress';
     const ORDER_STATUS_DONE = 'order_status_done';
     const ORDER_STATUS_CANCELED = 'order_status_canceled';
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFactoryInterface
+     */
+    protected $orderStatusFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFactoryInterface $orderStatusFactory
+     */
+    public function __construct(OrderStatusFactoryInterface $orderStatusFactory)
+    {
+        $this->orderStatusFactory = $orderStatusFactory;
+    }
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -45,7 +59,7 @@ class OrderStatusDataFixture extends AbstractReferenceFixture
         $type,
         $referenceName = null
     ) {
-        $orderStatus = new OrderStatus($orderStatusData, $type);
+        $orderStatus = $this->orderStatusFactory->create($orderStatusData, $type);
         $manager->persist($orderStatus);
         $manager->flush($orderStatus);
         if ($referenceName !== null) {

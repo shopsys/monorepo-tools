@@ -12,8 +12,10 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerService;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactory;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Customer\UserData;
+use Shopsys\FrameworkBundle\Model\Customer\UserFactory;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Order\OrderData;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
@@ -331,8 +333,10 @@ class CustomerServiceTest extends TestCase
     private function getCustomerService()
     {
         $customerPasswordServiceMock = $this->createMock(CustomerPasswordService::class);
+        $deliveryAddressFactory = new DeliveryAddressFactory();
+        $userFactory = new UserFactory();
 
-        return new CustomerService($customerPasswordServiceMock);
+        return new CustomerService($customerPasswordServiceMock, $deliveryAddressFactory, $userFactory);
     }
 
     /**

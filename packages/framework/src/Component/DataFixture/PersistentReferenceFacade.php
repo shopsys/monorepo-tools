@@ -17,13 +17,23 @@ class PersistentReferenceFacade
     protected $persistentReferenceRepository;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFactoryInterface
+     */
+    protected $persistentReferenceFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceRepository $persistentReferenceRepository
+     * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFactoryInterface $persistentReferenceFactory
      */
-    public function __construct(EntityManagerInterface $em, PersistentReferenceRepository $persistentReferenceRepository)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        PersistentReferenceRepository $persistentReferenceRepository,
+        PersistentReferenceFactoryInterface $persistentReferenceFactory
+    ) {
         $this->em = $em;
         $this->persistentReferenceRepository = $persistentReferenceRepository;
+        $this->persistentReferenceFactory = $persistentReferenceFactory;
     }
 
     /**
@@ -65,7 +75,7 @@ class PersistentReferenceFacade
                 $persistentReference = $this->persistentReferenceRepository->getByReferenceName($name);
                 $persistentReference->replace($entityName, $objectId);
             } catch (\Shopsys\FrameworkBundle\Component\DataFixture\Exception\PersistentReferenceNotFoundException $ex) {
-                $persistentReference = new PersistentReference($name, $entityName, $objectId);
+                $persistentReference = $this->persistentReferenceFactory->create($name, $entityName, $objectId);
                 $this->em->persist($persistentReference);
             }
             $this->em->flush($persistentReference);
