@@ -38,7 +38,7 @@ class Product extends BaseProduct
      * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
      * @param \Shopsys\ShopBundle\Model\Product\Product[]|null $variants
      */
-    public function __construct(BaseProductData $productData, $variants = null)
+    protected function __construct(BaseProductData $productData, $variants = null)
     {
         $this->extId = $productData->extId ?? 0;
         parent::__construct($productData, $variants);
@@ -128,42 +128,50 @@ class ProductData extends BaseProductData
 In the following steps, we will overwrite all services that are responsible 
 for `Product` and `ProductData` instantiation to make them return our extended classes.
  
-8. Create new `ProductFacade` in the same namespace as your entity
-by extending [`Shopsys\FrameworkBundle\Model\Product\ProductFacade`](../../packages/framework/src/Model/Product/ProductFacade.php)
-and overwrite the `create()` method. Use your `Product` instead of the base one. 
-The rest of the method can be copy pasted.
+8. Create new `ProductFactory` in the same namespace as your entity
+by implementing [`Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface`](../../packages/framework/src/Model/Product/ProductFactoryInterface.php)
+and implement the `create()` and `createMainVariant()` methods. Use your `Product` instead of the base one. 
 ```php
 <?php
 
 namespace Shopsys\ShopBundle\Model\Product;
 
-use Shopsys\FrameworkBundle\Model\Product\ProductEditData as BaseProductEditData;
-use Shopsys\FrameworkBundle\Model\Product\ProductFacade as BaseProductFacade;
+use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
+use Shopsys\FrameworkBundle\Model\Product\ProductData as BaseProductData;
+use Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface;
 
-class ProductFacade extends BaseProductFacade
+class ProductFactory implements ProductFactoryInterface
 {
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\ShopBundle\Model\Product\ProductData $data
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function create(BaseProductEditData $productEditData)
+    public function create(BaseProductData $data): BaseProduct
     {
-        $product = Product::create($productEditData->productData);
+        return Product::create($data);
+    }
 
-        // ... (copy paste from BaseProductFacade)
-
-        return $product;
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\ProductData $data
+     * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
+     * @return \Shopsys\ShopBundle\Model\Product\Product
+     */
+    public function createMainVariant(BaseProductData $data, array $variants): BaseProduct
+    {
+        return Product::createMainVariant($data, $variants);
     }
 }
 ```
+Again, notice that type hints and annotations of the methods do not match. 
+This is on purpose - extended class must respect interface of its parent while annotation ensures proper IDE autocomplete.
 
-Set your new `ProductFacade` for auto discovery in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) 
-and register it as an alias for the original service.
+Set your new `ProductFactory` for auto discovery in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) 
+and register it as an alias for the interface to overwrite the original implementation.
 ```
 Shopsys\ShopBundle\Model\:
-  resource: '../../Model/*/*Facade.php'
+  resource: '../../Model/*/*Factory.php'
 
-Shopsys\FrameworkBundle\Model\Product\ProductFacade: '@Shopsys\ShopBundle\Model\Product\ProductFacade'
+Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface: '@Shopsys\ShopBundle\Model\Product\ProductFactory'
 ```
 
 9. Create new `ProductDataFactory` in the same namespace as your entity
@@ -198,56 +206,10 @@ class ProductDataFactory extends BaseProductDataFactory
 }
 ```
 
-Set your new `ProductDataFactory` for auto discovery in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) 
-and register it as an alias for the original service.
+Register your `ProductDataFactory` in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) 
+as an alias for the original service.
 ```
-Shopsys\ShopBundle\Model\:
-  resource: '../../Model/*/*{Facade,Factory}.php'
-  
-...
-
 Shopsys\FrameworkBundle\Model\Product\ProductDataFactory: '@Shopsys\ShopBundle\Model\Product\ProductDataFactory'
-```
-
-10. Create new `ProductVariantService` in the same namespace as your entity
-by extending [`Shopsys\FrameworkBundle\Model\Product\ProductVariantService`](../../packages/framework/src/Model/Product/ProductVariantService.php)
-and overwrite the `createMainVariant()` method.
-Make sure to use your `Product` instead of the base one. 
-```php
-<?php
-
-namespace Shopsys\ShopBundle\Model\Product;
-
-use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditData as BaseProductEditData;
-use Shopsys\FrameworkBundle\Model\Product\ProductVariantService as BaseProductVariantService;
-
-class ProductVariantService extends BaseProductVariantService
-{
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $mainVariantEditData
-     * @param \Shopsys\ShopBundle\Model\Product\Product $mainProduct
-     * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
-     * @return \Shopsys\ShopBundle\Model\Product\Product
-     */
-    public function createMainVariant(BaseProductEditData $mainVariantEditData, BaseProduct $mainProduct, array $variants)
-    {
-        $variants[] = $mainProduct;
-
-        return Product::createMainVariant($mainVariantEditData->productData, $variants);
-    }
-}
-``` 
-
-Set your new `ProductVariantService` for auto discovery in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) 
-and register it as an alias for the original service.
-```
-Shopsys\ShopBundle\Model\:
-  resource: '../../Model/*/*{Facade,Factory,Service}.php'
-  
-...
-
-Shopsys\FrameworkBundle\Model\Product\ProductVariantService: '@Shopsys\ShopBundle\Model\Product\ProductVariantService'
 ```
 
 ## Enable administrator to edit the `extId` field
@@ -299,24 +261,38 @@ Shopsys\ShopBundle\Form\Admin\ProductFormTypeExtension:
 
 3. In your `Product` class, overwrite the `edit()` method.
 ```php
+namespace Shopsys\ShopBundle\Model\Product;
+
+use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Product\ProductData as BaseProductData;
+
+// ...
+
 /**
+ * @param \Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface $productCategoryDomainFactory
  * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
  */
-public function edit(ProductData $productData)
+public function edit(ProductCategoryDomainFactoryInterface $productCategoryDomainFactory, BaseProductData $productData)
 {
     $this->extId = $productData->extId;
-    parent::edit($productData);
+    parent::edit($productCategoryDomainFactory, $productData);
 }
 ```
 
 4. In your `ProductDataFactory` class, overwrite the `createFromProduct()` method.
 You need to copy paste the parent's method content and on top of it, set your new `extId` field.
 ```php
+namespace Shopsys\ShopBundle\Model\Product;
+
+use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
+
+// ...
+
 /**
  * @param \Shopsys\ShopBundle\Model\Product\Product $product
  * @return \Shopsys\ShopBundle\Model\Product\ProductData
  */
-public function createFromProduct(Product $product)
+public function createFromProduct(BaseProduct $product)
 {
     $productData = $this->createDefault();
 
@@ -330,21 +306,6 @@ public function createFromProduct(Product $product)
 ## Tests
 You need to fix your tests to reflect new changes:
 * Instances of `Product` and `ProductData` are often created directly in tests - change all of them to your classes.
-* `ProductFacade` is accessed directly from container in tests 
-so it must be declared public in test environment - add an alias for it in [`services_test.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services_test.yml)
-and it will do the trick:
-```
-services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: true
-
-  ... 
-  
-  Shopsys\FrameworkBundle\Model\Product\ProductFacade: '@Shopsys\ShopBundle\Model\Product\ProductFacade'
-```
-
 * In [`ProductVisibilityRepositoryTest`](../../project-base/tests/ShopBundle/Database/Model/Product/ProductVisibilityRepositoryTest.php), 
 instance of `ProductEditData` is created directly. It creates new instance of `ProductData` internally, 
 so you need to use there your class:
