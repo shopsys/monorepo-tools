@@ -17,8 +17,8 @@
             <header class="web__header">
                 <div class="web__header__in">
                     {{ render(controller('ShopsysFrameworkBundle:Admin/Menu:menu', {
-                        route: app.request.get('_route'),
-                        parameters: app.request.attributes.get('_route_params')
+                        route: getRoute(),
+                        parameters: getRouteParams()
                     } )) }}
                 </div>
             </header>

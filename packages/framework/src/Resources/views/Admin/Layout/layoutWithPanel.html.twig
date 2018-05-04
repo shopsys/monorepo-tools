@@ -6,8 +6,8 @@
             <div class="web__panel__in">
                 {% block menu_panel %}
                     {{ render(controller('ShopsysFrameworkBundle:Admin/Menu:panel', {
-                        route: app.request.get('_route'),
-                        parameters: app.request.attributes.get('_route_params')
+                        route: getRoute(),
+                        parameters: getRouteParams()
                     } )) }}
                 {% endblock %}
             </div>
@@ -16,8 +16,8 @@
         <div class="web__content">
             {% block breadcrumb %}
                 {{ render(controller('ShopsysFrameworkBundle:Admin/Breadcrumb:index', {
-                    route: app.request.get('_route'),
-                    parameters: app.request.attributes.get('_route_params')
+                    route: getRoute(),
+                    parameters: getRouteParams()
                 } )) }}
             {% endblock %}
 
