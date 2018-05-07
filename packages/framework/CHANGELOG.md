@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - allowing override factory that creates extended entities in project-base
 
 ### Changed
+- unification of terminology - indices and indexes (@Miroslav-Stopka)
+    - there is only "indexes" expression used now
 - moved constants with types of environment from [shopsys/project-base](https://github.com/shopsys/project-base) (@PetrHeinz)
     - moved from `\Shopsys\Environment` to `\Shopsys\FrameworkBundle\Component\Environment\EnvironmentType`
 - service definition follows Symfony 4 autowiring standards (@EdoBarnas)

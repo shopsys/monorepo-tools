@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Localization;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 
-class DbIndicesRepository
+class DbIndexesRepository
 {
     /**
      * @var \Doctrine\ORM\EntityManagerInterface

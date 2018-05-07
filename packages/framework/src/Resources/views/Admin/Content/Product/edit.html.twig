@@ -354,7 +354,7 @@
                             </button>
                             <span class="list-images__item__overlay js-product-images-image-overlay">{{ 'Image will be deleted after saving.'|trans }}</span>
                         </div>
-                        {# Ignore indices from form definition. Let them reflect new positions. #}
+                        {# Ignore indexes from form definition. Let them reflect new positions. #}
                         {{ form_widget(imageForm, { full_name: form.orderedImagesById.vars.full_name ~ '[]'}) }}
                     </li>
                 {% endfor %}

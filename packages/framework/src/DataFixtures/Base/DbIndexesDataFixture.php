@@ -5,18 +5,18 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Base;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractNativeFixture;
-use Shopsys\FrameworkBundle\Model\Localization\DbIndicesFacade;
+use Shopsys\FrameworkBundle\Model\Localization\DbIndexesFacade;
 
-class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFixtureInterface
+class DbIndexesDataFixture extends AbstractNativeFixture implements DependentFixtureInterface
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Localization\DbIndicesFacade
+     * @var \Shopsys\FrameworkBundle\Model\Localization\DbIndexesFacade
      */
-    private $dbIndicesFacade;
+    private $dbIndexesFacade;
 
-    public function __construct(DbIndicesFacade $dbIndicesFacade)
+    public function __construct(DbIndexesFacade $dbIndexesFacade)
     {
-        $this->dbIndicesFacade = $dbIndicesFacade;
+        $this->dbIndexesFacade = $dbIndexesFacade;
     }
 
     /**
@@ -24,7 +24,7 @@ class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFix
      */
     public function load(ObjectManager $manager)
     {
-        $this->dbIndicesFacade->updateLocaleSpecificIndices();
+        $this->dbIndexesFacade->updateLocaleSpecificIndexes();
 
         $this->executeNativeQuery('CREATE INDEX product_translations_name_normalize_idx
             ON product_translations (NORMALIZE(name))');
