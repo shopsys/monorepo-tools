@@ -177,7 +177,12 @@ Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface: '@Shopsys\ShopBun
 9. Create new `ProductDataFactory` in the same namespace as your entity
 by extending [`Shopsys\FrameworkBundle\Model\Product\ProductDataFactory`](../../packages/framework/src/Model/Product/ProductDataFactory.php)
 and overwrite the `createDefault()` method. 
-You need to copy paste the contents of the parent class and make sure to use your `Product` instead of the base one.
+You need to copy paste all the contents of the parent class and make sure to use your `Product` instead of the base one.
+
+*Note: The copy pasting is a quite hacky solution but it is necessary now 
+because of private visibility of original `ProductDataFactory` properties.
+Also, there is no interface for `ProductDataFactory` like it was in the previous step for `ProductFactory`. 
+This issue will be addressed in near future.*
 ```php
 <?php
 
@@ -303,6 +308,13 @@ public function createFromProduct(BaseProduct $product)
 }
 ```
 
+## Front-end
+In order to display your new attribute on a front-end page, you can modify the corresponding template directly 
+as it is a part of your open-box, eg. [`detail.html.twig`](../../project-base/src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig).
+```
+{{ productDetail.product.extId }}
+```
+
 ## Tests
 You need to fix your tests to reflect new changes:
 * Instances of `Product` and `ProductData` are often created directly in tests - change all of them to your classes.
@@ -338,3 +350,6 @@ add following line to the `fillForm()` method:
 ```php
 $form['product_edit_form[productData][extId]'] = 123456;
 ```
+
+## Data fixtures
+Currently, it is not possible to modify data fixtures from your project, this issue will be addressed in near future. 
