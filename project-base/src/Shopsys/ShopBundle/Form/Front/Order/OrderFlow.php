@@ -41,6 +41,7 @@ class OrderFlow extends FormFlow
         return [
             [
                 'skip' => true, // the 1st step is the shopping cart
+                'form_options' => ['js_validation' => false],
             ],
             [
                 'form_type' => TransportAndPaymentFormType::class,
