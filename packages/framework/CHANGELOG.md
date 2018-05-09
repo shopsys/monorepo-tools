@@ -5,11 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-## Added
+### Added
 - Countries have code in ISO 3166-1 alpha-2 (@petr.kadlec)
 - admin: added site content and email template for personal data export (@stanoMilan)
-
-### Added
 - extended glass-box model entities are now used instead of their parent entities in EntityManager and QueryBuilders (@PetrHeinz, @vitek-rostislav)
     - this removes the need to manually override all repositories that work with extended entities
     - the functionality is automatically tested in [shopsys/project-base](https://github.com/shopsys/project-base)
@@ -34,7 +32,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - choiceList values are prepared for js Choice(s)ToBooleanArrayTransformer (@Miroslav-Stopka)
     - fixed "The choices were not found" console js error in the params filter
 - command `shopsys:server:run` for running PHP built-in web server for a chosen domain (@TomasLudvik)
-- db indices for product name are now created for translations in all locales (@vitek-rostislav) 
+- db indices for product name are now created for translations in all locales (@vitek-rostislav)
+- `LoadDataFixturesCommand` - fixed the `--fixtures` option description (@vitek-rostislav)
 
 ## 7.0.0-alpha1 - 2018-04-12
 - We are releasing the Shopsys Framework in version 7 and we are synchronizing versions because

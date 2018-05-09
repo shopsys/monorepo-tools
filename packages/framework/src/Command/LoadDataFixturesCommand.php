@@ -45,7 +45,7 @@ class LoadDataFixturesCommand extends DoctrineCommand
            ->addOption('em', null, InputOption::VALUE_REQUIRED, 'The entity manager to use for this command.')
            ->addOption('shard', null, InputOption::VALUE_REQUIRED, 'The shard connection to use for this command.')
            ->addOption('purge-with-truncate', null, InputOption::VALUE_NONE, 'Purge data by using a database-level TRUNCATE statement')
-           ->addOption('fixtures', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Purge data by using a database-level TRUNCATE statement')
+           ->addOption('fixtures', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Define a directory to load the fixtures from')
            ->setHelp(
                <<<EOT
 The <info>%command.name%</info> command loads data fixtures from your application:

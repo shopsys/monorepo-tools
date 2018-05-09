@@ -23,6 +23,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * [shopsys/monorepo-tools](./packages/monorepo-tools/CHANGELOG.md)
 
 ## [Unreleased]
+### Added
+- [cookbook](docs/cookbook/adding-new-attribute-to-an-entity.md) for adding new attribute to an entity (@vitek-rostislav)
+
 ### Changed
 - all installation guides verified and tweaked (@TomasLudvik)
     - Docker installation supported on Linux, MacOS and Windows 10 Pro and higher (recommended way of installing the application)
