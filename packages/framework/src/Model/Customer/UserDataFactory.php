@@ -9,7 +9,7 @@ class UserDataFactory
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
-    private $pricingGroupSettingFacade;
+    protected $pricingGroupSettingFacade;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade

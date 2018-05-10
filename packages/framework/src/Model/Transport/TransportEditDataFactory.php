@@ -9,12 +9,12 @@ class TransportEditDataFactory
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
      */
-    private $transportFacade;
+    protected $transportFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
-    private $vatFacade;
+    protected $vatFacade;
 
     public function __construct(
         TransportFacade $transportFacade,
