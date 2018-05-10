@@ -1,0 +1,88 @@
+version: "3.1"
+services:
+    postgres:
+        image: postgres:9.5-alpine
+        container_name: shopsys-framework-postgres
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        environment:
+            - PGDATA=/var/lib/postgresql/data
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=root
+            - POSTGRES_DB=shopsys
+
+    webserver:
+        image: nginx:1.13-alpine
+        container_name: shopsys-framework-webserver
+        volumes:
+            - .:/var/www/html
+            - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        ports:
+            - "8000:8080"
+        links:
+            - php-fpm
+            - smtp-server
+
+    php-fpm:
+        build:
+            context: project-base/docker/php-fpm
+            args:
+                www_data_uid: 82
+                www_data_gid: 82
+        container_name: shopsys-framework-php-fpm
+        volumes:
+            - .:/var/www/html
+            - ./project-base/docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
+        links:
+            - postgres
+            - redis
+        ports:
+            - "35729:35729"
+        depends_on:
+            - postgres
+            - redis
+
+    redis:
+        image: redis:4.0-alpine
+        container_name: shopsys-framework-redis
+
+    redis-admin:
+        image: erikdubbelboer/phpredisadmin:v1.10.2
+        container_name: shopsys-framework-redis-admin
+        environment:
+            - REDIS_1_HOST=redis
+        links:
+            - redis
+        depends_on:
+            - redis
+        ports:
+            - "1600:80"
+
+    selenium-server:
+        image: selenium/standalone-chrome:3.11
+        container_name: shopsys-framework-acceptance-tests
+        ports:
+            - "4400:4444"
+        environment:
+            - HUB_PORT_4444_TCP_ADDR=hub
+            - HUB_PORT_4444_TCP_PORT=4444
+        links:
+            - webserver
+
+    adminer:
+        image: adminer:4.6
+        container_name: shopsys-framework-adminer
+        ports:
+            - "1100:8080"
+        links:
+            - postgres
+        depends_on:
+            - postgres
+
+    smtp-server:
+        image: namshi/smtp:latest
+        container_name: shopsys-framework-smtp-server
+
+volumes:
+    pgdata:
+        driver: local

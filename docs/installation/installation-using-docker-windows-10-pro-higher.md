@@ -24,30 +24,23 @@ cd project-base
 *Note: The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`.*
 
 ### 2. Create docker-compose.yml file
-Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../project-base/docker/conf/docker-compose.yml.dist).
+Create `docker-compose.yml` from template [`docker-compose-win.yml.dist`](../../project-base/docker/conf/docker-compose-win.yml.dist).
 
 ```
-copy docker\conf\docker-compose.yml.dist docker-compose.yml
+copy docker\conf\docker-compose-win.yml.dist docker-compose.yml
 ```
 
-### 3. Create folder for persisting Postgres data
-This step is necessary to persist database data in cases you need to shutdown you `php-fpm` container. 
-
-```
-mkdir var\postgres-data
-```
-
-### 4. Grant Docker access to your files
+### 3. Grant Docker access to your files
 - Right click Docker icon in your system tray and choose `Settings...`
 - From left menu choose `Shared Drives`
 - Set your system drive including Shopsys Framework repository as `Shared` (check the checkbox)
 - Click on `Apply`
 - You will be prompted for your Windows credentials
 
-### 5. Compose Docker container
+### 4. Compose Docker container
 ```
 docker-compose up -d
 ```
 
-### 6. Setup the application
+### 5. Setup the application
 [Application setup guide](installation-using-docker-application-setup.md)
