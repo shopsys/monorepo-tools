@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - docs and `docker-compose.yml` templates reflect [changes of Docker images in shopsys/project-base](./project-base/CHANGELOG.md) (@PetrHeinz, @MattCzerner)
 - `docker-compose-win.yml.dist` created for Windows OS which creates local volume because of permission problems with
     `postgresql` mounting (@MattCzerner)
+- docs: changed `./phing` instruction code with `php phing` to make it work with all operating systems (@MattCzerner)
 
 ### Fixed
 - documentation: missing redis extension in required php extensions (@pk16011990)

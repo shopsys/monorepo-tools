@@ -364,7 +364,7 @@ Now we can build our images and create containers:
 Install the application:
 ```
 /usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm composer install
-/usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm ./phing db-create test-db-create build-demo-ci
+/usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm php phing db-create test-db-create build-demo-ci
 ```
 
 Our template is done, now we just need to create actual jobs from this template.

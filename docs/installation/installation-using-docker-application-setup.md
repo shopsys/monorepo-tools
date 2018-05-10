@@ -38,14 +38,14 @@ cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
 
 ### 1.4. Create databases
 ```
-./phing db-create
-./phing test-db-create
+php phing db-create
+php phing test-db-create
 ```
 
 ### 1.5. Build the application
 ```
-./phing build-demo-dev
-./phing img-demo
+php phing build-demo-dev
+php phing img-demo
 ```
 
 ## 2. See it in your browser!
