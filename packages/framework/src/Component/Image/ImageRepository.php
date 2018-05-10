@@ -9,7 +9,7 @@ class ImageRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -19,7 +19,7 @@ class ImageRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getImageRepository()
+    protected function getImageRepository()
     {
         return $this->em->getRepository(Image::class);
     }

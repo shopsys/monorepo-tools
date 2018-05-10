@@ -9,7 +9,7 @@ class AdvertRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -22,7 +22,7 @@ class AdvertRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getAdvertRepository()
+    protected function getAdvertRepository()
     {
         return $this->em->getRepository(Advert::class);
     }
@@ -41,7 +41,7 @@ class AdvertRepository
      * @param int $domainId
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getAdvertByPositionQueryBuilder($positionName, $domainId)
+    protected function getAdvertByPositionQueryBuilder($positionName, $domainId)
     {
         return $this->em->createQueryBuilder()
             ->select('a')

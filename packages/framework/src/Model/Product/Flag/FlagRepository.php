@@ -9,7 +9,7 @@ class FlagRepository
     /**
      * @var \Doctrine\ORM\EntityRepository
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
@@ -22,7 +22,7 @@ class FlagRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getFlagRepository()
+    protected function getFlagRepository()
     {
         return $this->em->getRepository(Flag::class);
     }

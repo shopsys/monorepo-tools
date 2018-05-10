@@ -11,7 +11,7 @@ class ProductManualInputPriceRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -24,7 +24,7 @@ class ProductManualInputPriceRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getProductManualInputPriceRepository()
+    protected function getProductManualInputPriceRepository()
     {
         return $this->em->getRepository(ProductManualInputPrice::class);
     }

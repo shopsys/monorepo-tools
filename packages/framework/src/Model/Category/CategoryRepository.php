@@ -21,12 +21,12 @@ class CategoryRepository extends NestedTreeRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -43,7 +43,7 @@ class CategoryRepository extends NestedTreeRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getCategoryRepository()
+    protected function getCategoryRepository()
     {
         return $this->em->getRepository(Category::class);
     }
@@ -51,7 +51,7 @@ class CategoryRepository extends NestedTreeRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getCategoryDomainRepository()
+    protected function getCategoryDomainRepository()
     {
         return $this->em->getRepository(CategoryDomain::class);
     }
@@ -59,7 +59,7 @@ class CategoryRepository extends NestedTreeRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getAllQueryBuilder()
+    protected function getAllQueryBuilder()
     {
         return $this->getCategoryRepository()
             ->createQueryBuilder('c')
@@ -239,7 +239,7 @@ class CategoryRepository extends NestedTreeRepository
      * @param string $locale
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getPreOrderTreeTraversalForAllCategoriesByDomainQueryBuilder($domainId, $locale)
+    protected function getPreOrderTreeTraversalForAllCategoriesByDomainQueryBuilder($domainId, $locale)
     {
         $queryBuilder = $this->getAllQueryBuilder();
         $this->addTranslation($queryBuilder, $locale);
@@ -275,7 +275,7 @@ class CategoryRepository extends NestedTreeRepository
      * @param \Doctrine\ORM\QueryBuilder $categoriesQueryBuilder
      * @param string $locale
      */
-    private function addTranslation(QueryBuilder $categoriesQueryBuilder, $locale)
+    protected function addTranslation(QueryBuilder $categoriesQueryBuilder, $locale)
     {
         $categoriesQueryBuilder
             ->addSelect('ct')
@@ -340,7 +340,7 @@ class CategoryRepository extends NestedTreeRepository
      * @param string|null $searchText
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getVisibleByDomainIdAndSearchTextQueryBuilder(
+    protected function getVisibleByDomainIdAndSearchTextQueryBuilder(
         $domainId,
         $locale,
         $searchText
@@ -428,7 +428,7 @@ class CategoryRepository extends NestedTreeRepository
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param string|null $searchText
      */
-    private function filterBySearchText(QueryBuilder $queryBuilder, $searchText)
+    protected function filterBySearchText(QueryBuilder $queryBuilder, $searchText)
     {
         $queryBuilder->andWhere(
             'NORMALIZE(ct.name) LIKE NORMALIZE(:searchText)'

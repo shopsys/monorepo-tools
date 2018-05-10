@@ -12,7 +12,7 @@ class ZboziProductDomainRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     public function __construct(
         EntityManagerInterface $em

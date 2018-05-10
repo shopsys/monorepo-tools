@@ -11,7 +11,7 @@ class PersonalDataAccessRequestRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -60,7 +60,7 @@ class PersonalDataAccessRequestRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getQueryBuilder()
+    protected function getQueryBuilder()
     {
         return $this->em->createQueryBuilder()
             ->select('pdar')

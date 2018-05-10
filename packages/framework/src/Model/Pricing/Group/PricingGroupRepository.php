@@ -11,7 +11,7 @@ class PricingGroupRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -24,7 +24,7 @@ class PricingGroupRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getPricingGroupRepository()
+    protected function getPricingGroupRepository()
     {
         return $this->em->getRepository(PricingGroup::class);
     }

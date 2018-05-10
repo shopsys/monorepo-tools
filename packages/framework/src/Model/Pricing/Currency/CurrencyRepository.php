@@ -9,7 +9,7 @@ class CurrencyRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -22,7 +22,7 @@ class CurrencyRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getCurrencyRepository()
+    protected function getCurrencyRepository()
     {
         return $this->em->getRepository(Currency::class);
     }

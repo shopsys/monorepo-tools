@@ -9,7 +9,7 @@ class ArticleRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -22,7 +22,7 @@ class ArticleRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getArticleRepository()
+    protected function getArticleRepository()
     {
         return $this->em->getRepository(Article::class);
     }
@@ -52,7 +52,7 @@ class ArticleRepository
      * @param int $domainId
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getArticlesByDomainIdQueryBuilder($domainId)
+    protected function getArticlesByDomainIdQueryBuilder($domainId)
     {
         return $this->em->createQueryBuilder()
             ->select('a')
@@ -131,7 +131,7 @@ class ArticleRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getAllVisibleQueryBuilder()
+    protected function getAllVisibleQueryBuilder()
     {
         return $this->em->createQueryBuilder()
             ->select('a')

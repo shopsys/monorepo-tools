@@ -9,7 +9,7 @@ class BrandRepository
     /**
      * @var \Doctrine\ORM\EntityRepository
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
@@ -22,7 +22,7 @@ class BrandRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getBrandRepository()
+    protected function getBrandRepository()
     {
         return $this->em->getRepository(Brand::class);
     }
@@ -30,7 +30,7 @@ class BrandRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getBrandDomainRepository()
+    protected function getBrandDomainRepository()
     {
         return $this->em->getRepository(BrandDomain::class);
     }

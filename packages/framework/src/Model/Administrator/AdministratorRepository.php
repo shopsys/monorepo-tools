@@ -9,7 +9,7 @@ class AdministratorRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -22,7 +22,7 @@ class AdministratorRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getAdministratorRepository()
+    protected function getAdministratorRepository()
     {
         return $this->em->getRepository(Administrator::class);
     }

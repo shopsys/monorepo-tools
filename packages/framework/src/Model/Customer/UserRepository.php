@@ -13,7 +13,7 @@ class UserRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
@@ -26,7 +26,7 @@ class UserRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getUserRepository()
+    protected function getUserRepository()
     {
         return $this->em->getRepository(User::class);
     }

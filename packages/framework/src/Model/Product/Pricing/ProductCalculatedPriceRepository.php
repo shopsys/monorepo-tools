@@ -12,7 +12,7 @@ class ProductCalculatedPriceRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPriceFactoryInterface
@@ -32,7 +32,7 @@ class ProductCalculatedPriceRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getProductCalculatedPriceRepository()
+    protected function getProductCalculatedPriceRepository()
     {
         return $this->em->getRepository(ProductCalculatedPrice::class);
     }

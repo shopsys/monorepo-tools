@@ -12,7 +12,7 @@ class NewsletterRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -22,7 +22,7 @@ class NewsletterRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getNewsletterSubscriberRepository()
+    protected function getNewsletterSubscriberRepository()
     {
         return $this->em->getRepository(NewsletterSubscriber::class);
     }

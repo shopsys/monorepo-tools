@@ -11,7 +11,7 @@ class UnitRepository
     /**
      * @var \Doctrine\ORM\EntityRepository
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
@@ -24,7 +24,7 @@ class UnitRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getUnitRepository()
+    protected function getUnitRepository()
     {
         return $this->em->getRepository(Unit::class);
     }
@@ -56,7 +56,7 @@ class UnitRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getAllQueryBuilder()
+    protected function getAllQueryBuilder()
     {
         return $this->em->createQueryBuilder()
             ->select('u')

@@ -10,7 +10,7 @@ class AdministratorActivityRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -23,7 +23,7 @@ class AdministratorActivityRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getAdministratorActivityRepository()
+    protected function getAdministratorActivityRepository()
     {
         return $this->em->getRepository(AdministratorActivity::class);
     }
@@ -33,7 +33,7 @@ class AdministratorActivityRepository
      * @param int $maxResults
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getLastActivitiesQueryBuilder(Administrator $administrator, $maxResults)
+    protected function getLastActivitiesQueryBuilder(Administrator $administrator, $maxResults)
     {
         $lastActivitiesQueryBuilder = $this->getAdministratorActivityRepository()->createQueryBuilder('aa');
 

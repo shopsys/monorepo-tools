@@ -13,7 +13,7 @@ class VatRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -26,7 +26,7 @@ class VatRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getVatRepository()
+    protected function getVatRepository()
     {
         return $this->em->getRepository(Vat::class);
     }
@@ -35,7 +35,7 @@ class VatRepository
      * @param string $vatAlias
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getQueryBuilderForAll($vatAlias)
+    protected function getQueryBuilderForAll($vatAlias)
     {
         return $this->getVatRepository()
             ->createQueryBuilder($vatAlias)
@@ -137,7 +137,7 @@ class VatRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      * @return bool
      */
-    private function existsPaymentWithVat(Vat $vat)
+    protected function existsPaymentWithVat(Vat $vat)
     {
         $query = $this->em->createQuery('
             SELECT COUNT(p)
@@ -151,7 +151,7 @@ class VatRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      * @return bool
      */
-    private function existsTransportWithVat(Vat $vat)
+    protected function existsTransportWithVat(Vat $vat)
     {
         $query = $this->em->createQuery('
             SELECT COUNT(t)
@@ -165,7 +165,7 @@ class VatRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vat
      * @return bool
      */
-    private function existsProductWithVat(Vat $vat)
+    protected function existsProductWithVat(Vat $vat)
     {
         $query = $this->em->createQuery('
             SELECT COUNT(p)
@@ -189,7 +189,7 @@ class VatRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $oldVat
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $newVat
      */
-    private function replacePaymentsVat(Vat $oldVat, Vat $newVat)
+    protected function replacePaymentsVat(Vat $oldVat, Vat $newVat)
     {
         $this->em->createQueryBuilder()
             ->update(Payment::class, 'p')
@@ -202,7 +202,7 @@ class VatRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $oldVat
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $newVat
      */
-    private function replaceTransportsVat(Vat $oldVat, Vat $newVat)
+    protected function replaceTransportsVat(Vat $oldVat, Vat $newVat)
     {
         $this->em->createQueryBuilder()
             ->update(Transport::class, 't')

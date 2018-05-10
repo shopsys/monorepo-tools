@@ -165,7 +165,7 @@ class CartItemRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getCartItemRepository()
+    protected function getCartItemRepository()
     {
         return $this->em->getRepository(CartItem::class);
     }

@@ -9,7 +9,7 @@ class UploadedFileRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -19,7 +19,7 @@ class UploadedFileRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getUploadedFileRepository()
+    protected function getUploadedFileRepository()
     {
         return $this->em->getRepository(UploadedFile::class);
     }

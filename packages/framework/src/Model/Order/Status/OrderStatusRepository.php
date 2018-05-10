@@ -10,7 +10,7 @@ class OrderStatusRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
@@ -23,7 +23,7 @@ class OrderStatusRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getOrderStatusRepository()
+    protected function getOrderStatusRepository()
     {
         return $this->em->getRepository(OrderStatus::class);
     }

@@ -9,7 +9,7 @@ class CountryRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
@@ -22,7 +22,7 @@ class CountryRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getCountryRepository()
+    protected function getCountryRepository()
     {
         return $this->em->getRepository(Country::class);
     }

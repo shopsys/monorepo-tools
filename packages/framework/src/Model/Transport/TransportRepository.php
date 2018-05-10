@@ -10,7 +10,7 @@ class TransportRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -23,7 +23,7 @@ class TransportRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getTransportRepository()
+    protected function getTransportRepository()
     {
         return $this->em->getRepository(Transport::class);
     }
@@ -31,7 +31,7 @@ class TransportRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getTransportDomainRepository()
+    protected function getTransportDomainRepository()
     {
         return $this->em->getRepository(TransportDomain::class);
     }
