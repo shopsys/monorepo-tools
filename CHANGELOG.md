@@ -32,6 +32,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - native installation is also supported (recommended on Windows 10 Home and lower)
 - as a rule, using minor versions of docker images (eg. `1.2` or `1.2-alpine`) if possible (@MattCzerner)
 
+### Fixed
+- documentation: missing redis extension in required php extensions (@pk16011990)
+
 ## 7.0.0-alpha1 - 2018-04-12
 ### Added
 - basic infrastructure so that the monorepo can be installed and used as standard application (@Miroslav-Stopka)
