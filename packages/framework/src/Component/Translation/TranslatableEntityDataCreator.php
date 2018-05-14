@@ -90,7 +90,8 @@ class TranslatableEntityDataCreator
             'INSERT INTO ' . $quotedTableName . ' (locale, ' . $quotedColumnNamesSql . ')
             SELECT :newLocale, ' . $quotedColumnNamesSql . '
             FROM ' . $quotedTableName . '
-            WHERE locale = :templateLocale',
+            WHERE locale = :templateLocale
+            ON CONFLICT DO NOTHING',
             new ResultSetMapping()
         );
         $query->execute([
