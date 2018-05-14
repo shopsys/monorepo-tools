@@ -20,8 +20,31 @@ error_reporting = E_ALL
 ; source: http://symfony.com/doc/3.2/performance.html
 realpath_cache_size = 4096k
 realpath_cache_ttl = 600
-opcache.enable = 1
-opcache.max_accelerated_files = 20000
+
+; enable OpCache (otherwise Symfony will be slow)
+opcache.enable=1
+
+; faster mechanism for calling the deconstructors in your code at the end of a single request
+opcache.fast_shutdown = true
+
+; The amount of memory used to store interned strings, in megabytes
+opcache.interned_strings_buffer = 24
+
+; Optimizations for Symfony, as documented on http://symfony.com/doc/current/performance.html
+opcache.max_accelerated_files = 60000
+
+; The size of the shared memory storage used by OPcache, in megabytes
+opcache.memory_consuption = 256
+
+; always resolve symlinks
+opcache.revalidate_path=1
+
+; how often to check script timestamps for updates. 0 will result in opcache checking
+; for updates on every request. Recommended value for production is 300
+opcache.revalidate_freq = 0
+
+; use absolute paths, so that there are not collision for files with same names
+opcache.use_cwd=1
 ```
 
 ## Required PHP extensions
