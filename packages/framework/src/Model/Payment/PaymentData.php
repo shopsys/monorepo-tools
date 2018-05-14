@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Payment;
 
+use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 
 class PaymentData
@@ -37,7 +38,7 @@ class PaymentData
     public $hidden;
 
     /**
-     * @var string
+     * @var \Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData
      */
     public $image;
 
@@ -75,6 +76,7 @@ class PaymentData
         $this->instructions = $instructions;
         $this->domains = $domains;
         $this->hidden = $hidden;
+        $this->image = new ImageUploadData();
         $this->transports = [];
         $this->czkRounding = $czkRounding;
     }

@@ -8,7 +8,7 @@ use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class PaymentImageUploadCest
 {
-    const IMAGE_UPLOAD_FIELD_ID = 'payment_edit_form_paymentData_image_file';
+    const IMAGE_UPLOAD_FIELD_ID = 'payment_edit_form_paymentData_image_image_file';
     const SAVE_BUTTON_NAME = 'payment_edit_form[save]';
 
     const EXPECTED_SUCCESS_MESSAGE = 'Payment Credit card modified';

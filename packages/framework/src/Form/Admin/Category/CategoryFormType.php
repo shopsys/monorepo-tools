@@ -7,9 +7,11 @@ use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\DomainsType;
-use Shopsys\FrameworkBundle\Form\FileUploadType;
 use Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension;
+use Shopsys\FrameworkBundle\Form\GroupType;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\InvertChoiceTypeExtension;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
 use Shopsys\FrameworkBundle\Form\UrlListType;
@@ -104,22 +106,17 @@ class CategoryFormType extends AbstractType
             $parentChoices = $this->categoryFacade->getAll();
         }
 
-        $builderSettingsGroup = $builder->create('settings', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderSettingsGroup = $builder->create('settings', GroupType::class, [
             'label' => t('Settings'),
         ]);
 
         if ($options['scenario'] === self::SCENARIO_EDIT) {
             $builderSettingsGroup
-                ->add('id', TextType::class, [
-                    'required' => true,
+                ->add('id', DisplayOnlyType::class, [
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter article name']),
                     ],
                     'data' => $options['category']->getId(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('ID'),
                 ]);
         }
@@ -154,9 +151,7 @@ class CategoryFormType extends AbstractType
                 'label' => t('Display on'),
             ]);
 
-        $builderSeoGroup = $builder->create('seo', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderSeoGroup = $builder->create('seo', GroupType::class, [
             'label' => t('Seo'),
         ]);
 
@@ -205,9 +200,7 @@ class CategoryFormType extends AbstractType
                 ]);
         }
 
-        $builderDescriptionGroup = $builder->create('description', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderDescriptionGroup = $builder->create('description', GroupType::class, [
             'label' => t('Description'),
         ]);
 
@@ -218,28 +211,12 @@ class CategoryFormType extends AbstractType
                 'display_format' => FormRenderingConfigurationExtension::DISPLAY_FORMAT_MULTIDOMAIN_ROWS_NO_PADDING,
             ]);
 
-        $builderImageGroup = $builder->create('image', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderImageGroup = $builder->create('image', GroupType::class, [
             'label' => t('Image'),
         ]);
 
-        if ($options['scenario'] === self::SCENARIO_EDIT) {
-            $builderImageGroup
-                ->add('image_preview', FormType::class, [
-                    'data' => $options['category'],
-                    'mapped' => false,
-                    'required' => false,
-                    'label' => t('Image'),
-                    'image_preview' => [
-                        'size' => 'original',
-                        'height' => 100,
-                    ],
-                ]);
-        }
-
         $builderImageGroup
-            ->add('image', FileUploadType::class, [
+            ->add('image', ImageUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
                     new Constraints\Image([
@@ -251,6 +228,8 @@ class CategoryFormType extends AbstractType
                     ]),
                 ],
                 'label' => t('Upload image'),
+                'entity' => $options['category'],
+                'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
 
         $builderPluginGroup = $builder->create('plugin', FormType::class, [

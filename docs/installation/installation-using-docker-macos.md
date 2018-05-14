@@ -27,11 +27,28 @@ There are two domains each for different language in default installation. First
 sudo ifconfig lo0 alias 127.0.0.2 up
 ```
 
-### 2. Create docker-compose.yml file
+### 2. Create docker-compose.yml and docker-sync.yml
 Create `docker-compose.yml` from template [`docker-compose-mac.yml.dist`](../../project-base/docker/conf/docker-compose-mac.yml.dist).
 ```
 cp docker/conf/docker-compose-mac.yml.dist docker-compose.yml
 ```
+
+Create `docker-sync.yml` from template [`docker-sync.yml.dist`](../../project-base/docker/conf/docker-sync.yml.dist).
+```
+cp docker/conf/docker-sync.yml.dist docker-sync.yml
+```
+
+
+#### Set the UID and GID to allow file access in mounted volumes
+Because we want both the user in host machine (you) and the user running php-fpm in the container to access shared files, we need to make sure that they both have the same UID and GID.
+This can be achieved by build arguments `www_data_uid` and `www_data_gid` that should be set to the same UID and GID as your own user in your `docker-compose.yml`.
+Also, you need to change `sync_userid` in `docker-sync.yml` file.
+
+You can find out your UID by running `id -u` and your GID by running `id -g`.
+
+Once you get these values, set these values into your `docker-compose.yml` into `php-fpm` container definition by replacing values in `args` section.
+
+Also you need to insert your UID into `docker-sync.yml` into value `sync_userid`.
 
 ### 3. Compose Docker container
 On MacOS you need to synchronize folders using docker-sync.
@@ -41,28 +58,10 @@ mkdir -p var/postgres-data
 docker-sync start
 ```
 
-Then start containers
+Then rebuild and start containers
 ```
-docker-compose up -d
-```
+docker-compose up -d --build
 
-### 4. Set file permissions
-Grant system users inside the container the required permissions
-#### Connect into terminal of the Docker container
-```
-docker exec -it shopsys-framework-php-fpm bash
-```
-
-#### Allow user with UID 33 ("www-data" in "php-fpm" container) read and write all project files
-```
-setfacl -R -m user:33:rwX -m mask:rwX .
-setfacl -dR -m user:33:rwX -m mask:rwX .
-```
-
-#### Allow user with UID 100 ("nginx" in "webserver" container) read files in "web" directory
-```
-setfacl -R -m user:100:rX ./web
-setfacl -dR -m user:100:rX ./web
 ```
 
 ### 5. Setup the application

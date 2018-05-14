@@ -5,14 +5,15 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Article;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\DomainType;
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\UrlListType;
 use Shopsys\FrameworkBundle\Model\Article\Article;
 use Shopsys\FrameworkBundle\Model\Article\ArticleData;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -49,10 +50,8 @@ class ArticleFormType extends AbstractType
     {
         $seoMetaDescriptionAttributes = $this->getSeoMetaDescriptionAttributes($options);
 
-        $builderArticleData = $builder->create('articleData', FormType::class, [
-            'inherit_data' => true,
+        $builderArticleData = $builder->create('articleData', GroupType::class, [
             'label' => t('Article data'),
-            'is_group_container' => true,
         ]);
 
         if ($options['article'] === null) {
@@ -77,18 +76,12 @@ class ArticleFormType extends AbstractType
                 ]);
         } else {
             $builderArticleData
-                ->add('id', TextType::class, [
-                    'required' => false,
+                ->add('id', DisplayOnlyType::class, [
                     'data' => $options['article']->getId(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('ID'),
                 ])
-                ->add('domain', TextType::class, [
-                    'required' => false,
+                ->add('domain', DisplayOnlyType::class, [
                     'data' => $this->domain->getDomainConfigById($options['article']->getDomainId())->getName(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('Domain'),
                 ]);
         }
@@ -112,10 +105,8 @@ class ArticleFormType extends AbstractType
                 'label' => t('Content'),
             ]);
 
-        $builderSeoData = $builder->create('seo', FormType::class, [
-            'inherit_data' => true,
+        $builderSeoData = $builder->create('seo', GroupType::class, [
             'label' => t('SEO'),
-            'is_group_container' => true,
             'is_group_container_to_render_as_the_last_one' => true,
         ]);
 

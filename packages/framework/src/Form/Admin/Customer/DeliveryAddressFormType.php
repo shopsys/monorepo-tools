@@ -2,12 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Customer;
 
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -37,103 +39,134 @@ class DeliveryAddressFormType extends AbstractType
     {
         $countries = $this->countryFacade->getAllByDomainId($options['domain_id']);
 
-        $builder
-            ->add('addressFilled', CheckboxType::class, ['required' => false])
-            ->add('companyName', TextType::class, [
+        $builderDeliveryAdress = $builder->create('deliveryAddress', GroupType::class, [
+            'label' => t('Shipping address'),
+            'attr' => [
+                'id' => 'customer_form_deliveryAddressData',
+            ],
+        ]);
+        $builderDeliveryAdress
+            ->add('addressFilled', CheckboxType::class, [
                 'required' => false,
-                'constraints' => [
-                    new Constraints\Length([
-                        'max' => 100,
-                        'maxMessage' => 'Company name cannot be longer than {{ limit }} characters',
-                    ]),
+                'label' => t('I want to deliver products to different address than the billing one'),
+                'attr' => [
+                    'class' => 'js-checkbox-toggle',
+                    'data-checkbox-toggle-container-class' => 'js-delivery-address-fields',
                 ],
             ])
-            ->add('firstName', TextType::class, [
-                'required' => true,
-                'constraints' => [
-                    new Constraints\NotBlank([
-                        'message' => 'Please enter first name of contact person',
-                        'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
-                    ]),
-                    new Constraints\Length([
-                        'max' => 100,
-                        'maxMessage' => 'First name of contact person cannot be longer then {{ limit }} characters',
-                    ]),
-                ],
-            ])
-            ->add('lastName', TextType::class, [
-                'required' => true,
-                'constraints' => [
-                    new Constraints\NotBlank([
-                        'message' => 'Please enter last name of contact person',
-                        'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
-                    ]),
-                    new Constraints\Length([
-                        'max' => 100,
-                        'maxMessage' => 'Last name of contact person cannot be longer than {{ limit }} characters',
-                    ]),
-                ],
-            ])
-            ->add('telephone', TextType::class, [
-                'required' => false,
-                'constraints' => [
-                    new Constraints\Length([
-                        'max' => 30,
-                        'maxMessage' => 'Telephone number cannot be longer than {{ limit }} characters',
-                    ]),
-                ],
-            ])
-            ->add('street', TextType::class, [
-                'required' => true,
-                'constraints' => [
-                    new Constraints\NotBlank([
-                        'message' => 'Please enter street',
-                        'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
-                    ]),
-                    new Constraints\Length([
-                        'max' => 100,
-                        'maxMessage' => 'Street name cannot be longer than {{ limit }} characters',
-                        'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
-                    ]),
-                ],
-            ])
-            ->add('city', TextType::class, [
-                'required' => true,
-                'constraints' => [
-                    new Constraints\NotBlank([
-                        'message' => 'Please enter city',
-                        'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
-                    ]),
-                    new Constraints\Length([
-                        'max' => 100,
-                        'maxMessage' => 'City name cannot be longer than {{ limit }} characters',
-                        'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
-                    ]),
-                ],
-            ])
-            ->add('postcode', TextType::class, [
-                'required' => true,
-                'constraints' => [
-                    new Constraints\NotBlank([
-                        'message' => 'Please enter zip code',
-                        'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
-                    ]),
-                    new Constraints\Length([
-                        'max' => 30,
-                        'maxMessage' => 'Zip code cannot be longer than {{ limit }} characters',
-                        'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
-                    ]),
-                ],
-            ])
-            ->add('country', ChoiceType::class, [
-                'required' => true,
-                'choices' => $countries,
-                'choice_label' => 'name',
-                'choice_value' => 'id',
-                'constraints' => [
-                    new Constraints\NotBlank(['message' => 'Please choose country']),
-                ],
-            ]);
+            ->add(
+                $builderDeliveryAdress
+                    ->create('deliveryAddressFields', FormType::class, [
+                        'inherit_data' => true,
+                        'attr' => ['class' => 'js-delivery-address-fields form-line__js'],
+                        'render_form_row' => false,
+                    ])
+                    ->add('companyName', TextType::class, [
+                        'required' => false,
+                        'constraints' => [
+                            new Constraints\Length([
+                                'max' => 100,
+                                'maxMessage' => 'Company name cannot be longer than {{ limit }} characters',
+                            ]),
+                        ],
+                        'label' => t('Company'),
+                    ])
+                    ->add('firstName', TextType::class, [
+                        'required' => true,
+                        'constraints' => [
+                            new Constraints\NotBlank([
+                                'message' => 'Please enter first name of contact person',
+                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                            ]),
+                            new Constraints\Length([
+                                'max' => 100,
+                                'maxMessage' => 'First name of contact person cannot be longer then {{ limit }} characters',
+                            ]),
+                        ],
+                        'label' => t('First name'),
+                    ])
+                    ->add('lastName', TextType::class, [
+                        'required' => true,
+                        'constraints' => [
+                            new Constraints\NotBlank([
+                                'message' => 'Please enter last name of contact person',
+                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                            ]),
+                            new Constraints\Length([
+                                'max' => 100,
+                                'maxMessage' => 'Last name of contact person cannot be longer than {{ limit }} characters',
+                            ]),
+                        ],
+                        'label' => t('Last name'),
+                    ])
+                    ->add('telephone', TextType::class, [
+                        'required' => false,
+                        'constraints' => [
+                            new Constraints\Length([
+                                'max' => 30,
+                                'maxMessage' => 'Telephone number cannot be longer than {{ limit }} characters',
+                            ]),
+                        ],
+                        'label' => t('Telephone'),
+                    ])
+                    ->add('street', TextType::class, [
+                        'required' => true,
+                        'constraints' => [
+                            new Constraints\NotBlank([
+                                'message' => 'Please enter street',
+                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                            ]),
+                            new Constraints\Length([
+                                'max' => 100,
+                                'maxMessage' => 'Street name cannot be longer than {{ limit }} characters',
+                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                            ]),
+                        ],
+                        'label' => t('Street'),
+                    ])
+                    ->add('city', TextType::class, [
+                        'required' => true,
+                        'constraints' => [
+                            new Constraints\NotBlank([
+                                'message' => 'Please enter city',
+                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                            ]),
+                            new Constraints\Length([
+                                'max' => 100,
+                                'maxMessage' => 'City name cannot be longer than {{ limit }} characters',
+                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                            ]),
+                        ],
+                        'label' => t('City'),
+                    ])
+                    ->add('postcode', TextType::class, [
+                        'required' => true,
+                        'constraints' => [
+                            new Constraints\NotBlank([
+                                'message' => 'Please enter zip code',
+                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                            ]),
+                            new Constraints\Length([
+                                'max' => 30,
+                                'maxMessage' => 'Zip code cannot be longer than {{ limit }} characters',
+                                'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+                            ]),
+                        ],
+                        'label' => t('Postcode'),
+                    ])
+                    ->add('country', ChoiceType::class, [
+                        'required' => true,
+                        'choices' => $countries,
+                        'choice_label' => 'name',
+                        'choice_value' => 'id',
+                        'constraints' => [
+                            new Constraints\NotBlank(['message' => 'Please choose country']),
+                        ],
+                        'label' => t('Country'),
+                    ])
+            );
+
+        $builder->add($builderDeliveryAdress);
     }
 
     /**

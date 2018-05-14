@@ -4,14 +4,15 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Advert;
 
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\DomainType;
-use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\GroupType;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Advert\Advert;
 use Shopsys\FrameworkBundle\Model\Advert\AdvertData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -52,26 +53,18 @@ class AdvertFormType extends AbstractType
             ]),
         ];
 
-        $builderSettingsGroup = $builder->create('settings', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderSettingsGroup = $builder->create('settings', GroupType::class, [
             'label' => t('Settings'),
         ]);
 
         if ($options['scenario'] === self::SCENARIO_EDIT) {
             $builderSettingsGroup
-                ->add('id', TextType::class, [
-                    'required' => false,
+                ->add('id', DisplayOnlyType::class, [
                     'data' => $options['advert']->getId(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('ID'),
                 ])
-                ->add('domain', TextType::class, [
-                    'required' => false,
+                ->add('domain', DisplayOnlyType::class, [
                     'data' => $this->domain->getDomainConfigById($options['advert']->getDomainId())->getName(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('Domain'),
                 ]);
         } else {
@@ -139,9 +132,7 @@ class AdvertFormType extends AbstractType
                 ],
             ]);
 
-        $builderImageGroup = $builder->create('image_group', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderImageGroup = $builder->create('image_group', GroupType::class, [
             'label' => t('Images'),
             'js_container' => [
                 'container_class' => 'js-advert-type-content',
@@ -155,22 +146,8 @@ class AdvertFormType extends AbstractType
                 'label' => t('Link'),
             ]);
 
-        if ($options['scenario'] === self::SCENARIO_EDIT) {
-            $builderImageGroup
-                ->add('image_preview', FormType::class, [
-                    'data' => $options['advert'],
-                    'mapped' => false,
-                    'required' => false,
-                    'label' => t('Image'),
-                    'image_preview' => [
-                        'size' => 'original',
-                        'height' => 100,
-                    ],
-                ]);
-        }
-
         $builderImageGroup
-            ->add('image', FileUploadType::class, [
+            ->add('image', ImageUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
                     new Constraints\Image([
@@ -183,6 +160,8 @@ class AdvertFormType extends AbstractType
                 ],
                 'constraints' => ($options['image_exists'] ? [] : $imageConstraints),
                 'label' => t('Upload new image'),
+                'entity' => $options['advert'],
+                'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
 
         $builder

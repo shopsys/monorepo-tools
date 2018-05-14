@@ -4,9 +4,12 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Payment;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FormTypesBundle\YesNoType;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\DomainsType;
-use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\GroupType;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
@@ -42,7 +45,21 @@ class PaymentFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        $payment = $options['payment'];
+        /* @var $payment Payment */
+
+        $builderBasicInformationGroup = $builder->create('basicInformation', GroupType::class, [
+            'label' => t('Basic information'),
+        ]);
+
+        if ($payment instanceof Payment) {
+            $builderBasicInformationGroup->add('formId', DisplayOnlyType::class, [
+                'label' => t('ID'),
+                'data' => $payment->getId(),
+            ]);
+        }
+
+        $builderBasicInformationGroup
             ->add('name', LocalizedType::class, [
                 'main_constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name']),
@@ -55,16 +72,16 @@ class PaymentFormType extends AbstractType
             ])
             ->add('domains', DomainsType::class, [
                 'required' => false,
+                'label' => t('Display on'),
             ])
-            ->add('hidden', YesNoType::class, ['required' => false])
-            ->add('czkRounding', YesNoType::class, ['required' => false])
-            ->add('transports', ChoiceType::class, [
+            ->add('hidden', YesNoType::class, [
                 'required' => false,
-                'choices' => $this->transportFacade->getAll(),
-                'choice_label' => 'name',
-                'choice_value' => 'id',
-                'multiple' => true,
-                'expanded' => true,
+                'label' => t('Hidden'),
+            ])
+            ->add('czkRounding', YesNoType::class, [
+                'required' => false,
+                'label' => t('Order in CZK round to whole crowns'),
+                'icon_title' => t('Rounding item with 0 % VAT will be added to your order. It is used for payment in cash.'),
             ])
             ->add('vat', ChoiceType::class, [
                 'required' => true,
@@ -74,17 +91,41 @@ class PaymentFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],
+                'label' => t('VAT'),
+            ]);
+
+        $builderAdditionalInformationGroup = $builder->create('additionalInformation', GroupType::class, [
+            'label' => t('Additional information'),
+        ]);
+
+        $builderAdditionalInformationGroup
+            ->add('transports', ChoiceType::class, [
+                'required' => false,
+                'choices' => $this->transportFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'multiple' => true,
+                'expanded' => true,
+                'empty_message' => t('You have to create some shipping first.'),
             ])
             ->add('description', LocalizedType::class, [
                 'required' => false,
                 'entry_type' => TextareaType::class,
+                'label' => t('Description'),
             ])
             ->add('instructions', LocalizedType::class, [
                 'required' => false,
                 'entry_type' => CKEditorType::class,
-            ])
-            ->add('image', FileUploadType::class, [
+                'label' => t('Instructions'),
+            ]);
+
+        $builderImageGroup = $builder->create('image', GroupType::class, [
+            'label' => t('Image'),
+        ]);
+        $builderImageGroup
+            ->add('image', ImageUploadType::class, [
                 'required' => false,
+                'label' => t('Upload image'),
                 'file_constraints' => [
                     new Constraints\Image([
                         'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
@@ -94,7 +135,14 @@ class PaymentFormType extends AbstractType
                             . 'Maximum size of an image is {{ limit }} {{ suffix }}.',
                     ]),
                 ],
+                'entity' => $payment,
+                'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ]);
+
+        $builder
+            ->add($builderBasicInformationGroup)
+            ->add($builderAdditionalInformationGroup)
+            ->add($builderImageGroup);
     }
 
     /**
@@ -102,9 +150,11 @@ class PaymentFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => PaymentData::class,
-            'attr' => ['novalidate' => 'novalidate'],
-        ]);
+        $resolver->setRequired('payment')
+            ->setAllowedTypes('payment', [Payment::class, 'null'])
+            ->setDefaults([
+                'data_class' => PaymentData::class,
+                'attr' => ['novalidate' => 'novalidate'],
+            ]);
     }
 }

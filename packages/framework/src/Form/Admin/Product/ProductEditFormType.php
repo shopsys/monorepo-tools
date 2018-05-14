@@ -7,13 +7,11 @@ use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FrameworkBundle\Component\Constraints\UniqueProductParameters;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
-use Shopsys\FrameworkBundle\Component\Transformers\ImagesIdsToImagesTransformer;
 use Shopsys\FrameworkBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use Shopsys\FrameworkBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType;
-use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\ProductsType;
 use Shopsys\FrameworkBundle\Form\UrlListType;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
@@ -22,10 +20,8 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -44,16 +40,6 @@ class ProductEditFormType extends AbstractType
      * @var \Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
      */
     private $removeDuplicatesTransformer;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\Transformers\ImagesIdsToImagesTransformer
-     */
-    private $imagesIdsToImagesTransformer;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
-     */
-    private $imageFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
@@ -77,16 +63,12 @@ class ProductEditFormType extends AbstractType
 
     public function __construct(
         RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer,
-        ImagesIdsToImagesTransformer $imagesIdsToImagesTransformer,
-        ImageFacade $imageFacade,
         PricingGroupFacade $pricingGroupFacade,
         Domain $domain,
         SeoSettingFacade $seoSettingFacade,
         PluginCrudExtensionFacade $pluginDataFormExtensionFacade
     ) {
         $this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
-        $this->imagesIdsToImagesTransformer = $imagesIdsToImagesTransformer;
-        $this->imageFacade = $imageFacade;
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->domain = $domain;
         $this->seoSettingFacade = $seoSettingFacade;
@@ -128,15 +110,9 @@ class ProductEditFormType extends AbstractType
             ];
         }
 
-        if ($editedProduct !== null) {
-            $existingImages = $this->imageFacade->getImagesByEntityIndexedById($editedProduct, null);
-        } else {
-            $existingImages = [];
-        }
-
         $builder
             ->add('productData', ProductFormType::class, ['product' => $editedProduct])
-            ->add('imagesToUpload', FileUploadType::class, [
+            ->add('images', ImageUploadType::class, [
                 'required' => false,
                 'multiple' => true,
                 'file_constraints' => [
@@ -148,20 +124,8 @@ class ProductEditFormType extends AbstractType
                             . 'Maximum size of an image is {{ limit }} {{ suffix }}.',
                     ]),
                 ],
-            ])
-            ->add(
-                $builder->create('orderedImagesById', CollectionType::class, [
-                    'required' => false,
-                    'entry_type' => HiddenType::class,
-                ])->addModelTransformer($this->imagesIdsToImagesTransformer)
-            )
-            ->add('imagesToDelete', ChoiceType::class, [
-                'required' => false,
-                'multiple' => true,
-                'expanded' => true,
-                'choices' => $existingImages,
-                'choice_label' => 'filename',
-                'choice_value' => 'id',
+                'entity' => $options['product'],
+                'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
             ])
             ->add($builder->create('parameters', CollectionType::class, [
                     'required' => false,

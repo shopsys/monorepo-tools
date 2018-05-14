@@ -1,0 +1,37 @@
+{% block price_table_row %}
+    <div class="form-group">
+        <div class="form-price-heading margin-top-0">
+            <div class="form-price-heading__cell form-price-heading__cell--field">
+                {{ inputPriceLabel({ isSimple: true }) }}
+            </div>
+            {% if base_prices is not empty %}
+                <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price excluding VAT'|trans }}</div>
+                <div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price including VAT'|trans }}</div>
+            {% endif %}
+        </div>
+        {% for key, currency in currencies %}
+            <div class="form-line">
+                <div class="form-line__label">
+                    {{ form_label(form.children[key], 'Base price in %currencyCode%'|trans({'%currencyCode%': currency.code}), { isSimple: true } ) }}
+                </div>
+                <div class="form-line__side">
+                    <div class="form-line__item">
+                        {{ form_widget(form.children[key], { symbolAfterInput: currencySymbolByCurrencyId(currency.id) }) }}
+                    </div>
+
+                    {% if base_prices[key] is defined %}
+                        <div class="form-line__item--right">
+                            <div class="form-line__item__price">
+                                {{ base_prices[key].priceWithoutVat|priceWithCurrencyByCurrencyId(currency.id) }}
+                            </div>
+                            <div class="form-line__item__price">
+                                <strong>{{ base_prices[key].priceWithVat|priceWithCurrencyByCurrencyId(currency.id) }}</strong>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {{ form_errors(form.children[key]) }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

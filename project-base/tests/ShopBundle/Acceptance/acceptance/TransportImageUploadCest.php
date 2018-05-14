@@ -8,7 +8,7 @@ use Tests\ShopBundle\Test\Codeception\AcceptanceTester;
 
 class TransportImageUploadCest
 {
-    const IMAGE_UPLOAD_FIELD_ID = 'transport_edit_form_transportData_image_file';
+    const IMAGE_UPLOAD_FIELD_ID = 'transport_edit_form_transportData_image_image_file';
     const SAVE_BUTTON_NAME = 'transport_edit_form[save]';
 
     const EXPECTED_SUCCESS_MESSAGE = 'Shipping Czech post was modified';

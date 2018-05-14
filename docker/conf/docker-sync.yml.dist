@@ -1,6 +1,7 @@
 version: '2'
 syncs:
     shopsys-framework-sync:
+        sync_userid: 501
         src: './'
         sync_excludes: ['project-base/docker/']
 

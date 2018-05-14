@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Form\Admin\Order;
 
 use Shopsys\FrameworkBundle\Component\Constraints\Email;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
 use Shopsys\FrameworkBundle\Model\Order\Order;
@@ -80,9 +81,7 @@ class OrderFormType extends AbstractType
         }
 
         $builder
-            ->add('orderNumber', TextType::class, [
-                'attr' => ['readonly' => true],
-            ])
+            ->add('orderNumber', DisplayOnlyType::class)
             ->add('status', ChoiceType::class, [
                 'required' => true,
                 'choices' => $this->orderStatusFacade->getAll(),

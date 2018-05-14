@@ -1,10 +1,11 @@
-<h2>{{ 'Customer orders'|trans }}</h2>
+{% block order_list_row %}
+    <h2>{{ 'Customer orders'|trans }}</h2>
 
-{% if orders|length == 0 %}
-    {{ 'Customer has no orders so far.'|trans }}
-{% else %}
-    <table class="table-main">
-        <thead>
+    {% if orders|length == 0 %}
+        {{ 'Customer has no orders so far.'|trans }}
+    {% else %}
+        <table class="table-main">
+            <thead>
             <tr>
                 <th>{{ 'Order number'|trans }}</th>
                 <th>{{ 'Created on'|trans }}</th>
@@ -13,8 +14,8 @@
                 <th>{{ 'Total price including VAT'|trans }}</th>
                 <th>{{ 'Status'|trans }}</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             {% for order in orders %}
                 <tr>
                     <td>
@@ -37,6 +38,7 @@
                     <td>{{ order.status.name }}</td>
                 </tr>
             {% endfor %}
-        </tbody>
-    </table>
-{% endif %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

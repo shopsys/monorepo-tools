@@ -41,10 +41,10 @@ class CustomEntity
 
 When the entity is completed, you have to ensure the system registers it properly.
 A convinient way is to [generate migration](phing-targets.md#db-migrations-generate).
-* Execute console command `./phing db-migrations-generate`
+* Execute console command `php phing db-migrations-generate`
 * We encourage you to check this migration if everything is set as expected.
 If the system doesn't generate the migration, the entity is probably in an incorrect namespace or has wrong Doctrine annotation mapping.
 
 If the migration is fine, you can continue the work and eventually
 [execute migrations](phing-targets.md#db-migrations).
-* Execute console command `./phing db-migrations`
+* Execute console command `php phing db-migrations`

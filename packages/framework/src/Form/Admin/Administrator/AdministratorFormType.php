@@ -4,11 +4,12 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Administrator;
 
 use Shopsys\FrameworkBundle\Component\Constraints\Email;
 use Shopsys\FrameworkBundle\Component\Constraints\FieldsAreNotIdentical;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -29,22 +30,17 @@ class AdministratorFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builderSettingsGroup = $builder->create('settings', FormType::class, [
-            'inherit_data' => true,
+        $builderSettingsGroup = $builder->create('settings', GroupType::class, [
             'label' => t('Settings'),
-            'is_group_container' => true,
         ]);
 
         if ($options['scenario'] === self::SCENARIO_EDIT) {
             $builderSettingsGroup
-                ->add('id', TextType::class, [
-                    'required' => true,
+                ->add('id', DisplayOnlyType::class, [
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter article name']),
                     ],
                     'data' => $options['administrator']->getId(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('ID'),
                 ]);
         }
@@ -76,7 +72,6 @@ class AdministratorFormType extends AbstractType
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => $options['scenario'] === self::SCENARIO_CREATE,
-                'is_group_container' => false,
                 'options' => [
                     'attr' => ['autocomplete' => 'off'],
                 ],

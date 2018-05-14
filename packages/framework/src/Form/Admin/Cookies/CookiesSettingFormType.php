@@ -2,10 +2,10 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Cookies;
 
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -30,10 +30,8 @@ class CookiesSettingFormType extends AbstractType
     {
         $articles = $this->articleFacade->getAllByDomainId($options['domain_id']);
 
-        $builderSettingsGroup = $builder->create('settings', FormType::class, [
-            'inherit_data' => true,
+        $builderSettingsGroup = $builder->create('settings', GroupType::class, [
             'label' => t('Settings'),
-            'is_group_container' => true,
         ]);
 
         $builderSettingsGroup

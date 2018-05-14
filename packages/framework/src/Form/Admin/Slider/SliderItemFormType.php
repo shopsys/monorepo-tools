@@ -3,12 +3,13 @@
 namespace Shopsys\FrameworkBundle\Form\Admin\Slider;
 
 use Shopsys\FormTypesBundle\YesNoType;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\DomainType;
-use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\GroupType;
+use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Model\Slider\SliderItem;
 use Shopsys\FrameworkBundle\Model\Slider\SliderItemData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -33,22 +34,17 @@ class SliderItemFormType extends AbstractType
             $imageConstraints[] = new Constraints\NotBlank(['message' => 'Please choose image']);
         }
 
-        $builderSettingsGroup = $builder->create('settings', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderSettingsGroup = $builder->create('settings', GroupType::class, [
             'label' => t('Settings'),
         ]);
 
         if ($options['scenario'] === self::SCENARIO_EDIT) {
             $builderSettingsGroup
-                ->add('id', TextType::class, [
-                    'required' => true,
+                ->add('id', DisplayOnlyType::class, [
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter article name']),
                     ],
                     'data' => $options['slider_item']->getId(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('ID'),
                 ])
                 ->add('domainId', DomainType::class, [
@@ -93,29 +89,13 @@ class SliderItemFormType extends AbstractType
                 'label' => t('Hide'),
             ]);
 
-        $builderImageGroup = $builder->create('image', FormType::class, [
-            'inherit_data' => true,
-            'is_group_container' => true,
+        $builderImageGroup = $builder->create('image', GroupType::class, [
             'is_group_container_to_render_as_the_last_one' => true,
             'label' => t('Image'),
         ]);
 
-        if ($options['scenario'] === self::SCENARIO_EDIT) {
-            $builderImageGroup
-                ->add('image_preview', FormType::class, [
-                    'data' => $options['slider_item'],
-                    'mapped' => false,
-                    'required' => false,
-                    'label' => t('Image'),
-                    'image_preview' => [
-                        'size' => 'original',
-                        'height' => 100,
-                    ],
-                ]);
-        }
-
         $builderImageGroup
-            ->add('image', FileUploadType::class, [
+            ->add('image', ImageUploadType::class, [
                 'required' => $options['scenario'] === self::SCENARIO_CREATE,
                 'constraints' => $imageConstraints,
                 'file_constraints' => [
@@ -128,6 +108,8 @@ class SliderItemFormType extends AbstractType
                     ]),
                 ],
                 'label' => t('Upload image'),
+                'entity' => $options['slider_item'],
+                'info_text' => t('You can upload following formats: PNG, JPG'),
             ]);
 
         $builder

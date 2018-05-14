@@ -3,8 +3,6 @@
     Shopsys = window.Shopsys || {};
     Shopsys.checkboxToggle = Shopsys.checkboxToggle || {};
 
-    var containerIdDataAttribute = 'checkbox-toggle-container-id';
-
     Shopsys.checkboxToggle.init = function ($container) {
         var $checkboxToggles = $container.filterAllNodes('.js-checkbox-toggle');
 
@@ -12,7 +10,7 @@
 
         $checkboxToggles.each(function () {
             var $checkboxToggle = $(this);
-            var containerId = $checkboxToggle.data(containerIdDataAttribute);
+            var $container = Shopsys.checkboxToggle.findContainer($checkboxToggle);
 
             var show = $checkboxToggle.is(':checked');
             if ($checkboxToggle.hasClass('js-checkbox-toggle--inverted')) {
@@ -20,16 +18,16 @@
             }
 
             if (show) {
-                $('#' + containerId).show();
+                $container.show();
             } else {
-                $('#' + containerId).hide();
+                $container.hide();
             }
         });
     };
 
     Shopsys.checkboxToggle.onChange = function () {
         var $checkboxToggle = $(this);
-        var containerId = $checkboxToggle.data(containerIdDataAttribute);
+        var $container = Shopsys.checkboxToggle.findContainer($checkboxToggle);
 
         var show = $checkboxToggle.is(':checked');
         if ($checkboxToggle.hasClass('js-checkbox-toggle--inverted')) {
@@ -37,10 +35,18 @@
         }
 
         if (show) {
-            $('#' + containerId).slideDown('fast');
+            $container.slideDown('fast');
         } else {
-            $('#' + containerId).slideUp('fast');
+            $container.slideUp('fast');
         }
+    };
+
+    Shopsys.checkboxToggle.findContainer = function ($checkboxToggle) {
+        if ($checkboxToggle.data('checkbox-toggle-container-id')) {
+            return $('#' + $checkboxToggle.data('checkbox-toggle-container-id'));
+        }
+
+        return $('.' + $checkboxToggle.data('checkbox-toggle-container-class'));
     };
 
     Shopsys.register.registerCallback(Shopsys.checkboxToggle.init);

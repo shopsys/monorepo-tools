@@ -13,6 +13,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -44,12 +46,15 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'error_bubbling' => false,
-            'compound' => true,
-            'file_constraints' => [],
-            'multiple' => false,
-        ]);
+        $resolver->setRequired('info_text')
+            ->setAllowedTypes('info_text', ['string', 'null'])
+            ->setDefaults([
+                'error_bubbling' => false,
+                'compound' => true,
+                'file_constraints' => [],
+                'multiple' => false,
+                'info_text' => null,
+            ]);
     }
 
     /**
@@ -67,10 +72,13 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
      */
     public function transform($value)
     {
-        return [
-            'uploadedFiles' => (array)$value,
-            'file' => null,
-        ];
+        return ['uploadedFiles' => (array)$value];
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        parent::buildView($view, $form, $options);
+        $view->vars['info_text'] = $options['info_text'];
     }
 
     /**
@@ -97,6 +105,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
             ])
             ->add('file', FileType::class, [
                 'multiple' => $options['multiple'],
+                'mapped' => false,
             ]);
 
         // fallback for IE9 and older

@@ -116,7 +116,7 @@ class CustomerController extends AdminBaseController
         $customerData->setFromEntity($user);
 
         $form = $this->createForm(CustomerFormType::class, $customerData, [
-            'scenario' => CustomerFormType::SCENARIO_EDIT,
+            'user' => $user,
             'domain_id' => $this->adminDomainTabsFacade->getSelectedDomainId(),
         ]);
         $form->handleRequest($request);
@@ -213,7 +213,7 @@ class CustomerController extends AdminBaseController
         $customerData->userData = $userData;
 
         $form = $this->createForm(CustomerFormType::class, $customerData, [
-            'scenario' => CustomerFormType::SCENARIO_CREATE,
+            'user' => null,
             'domain_id' => $selectedDomainId,
         ]);
         $form->handleRequest($request);

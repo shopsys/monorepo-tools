@@ -31,6 +31,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - Docker installation supported on Linux, MacOS and Windows 10 Pro and higher (recommended way of installing the application)
     - native installation is also supported (recommended on Windows 10 Home and lower)
 - as a rule, using minor versions of docker images (eg. `1.2` or `1.2-alpine`) if possible (@MattCzerner)
+- docs and `docker-compose.yml` templates reflect [changes of Docker images in shopsys/project-base](./project-base/CHANGELOG.md) (@PetrHeinz, @MattCzerner)
+- `docker-compose-win.yml.dist` created for Windows OS which creates local volume because of permission problems with
+    `postgresql` mounting (@MattCzerner)
+- docs: changed `./phing` instruction code with `php phing` to make it work with all operating systems (@MattCzerner)
 
 ### Fixed
 - documentation: missing redis extension in required php extensions (@pk16011990)

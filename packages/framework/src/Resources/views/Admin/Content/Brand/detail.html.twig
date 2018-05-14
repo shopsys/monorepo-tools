@@ -31,8 +31,7 @@
             <div class="form-group__title">
                 {{ 'Image'|trans }}
             </div>
-            {% block image %}{% endblock %}
-            {{ form_row(form.brandData.image, { label: 'Upload image'|trans, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans }) }}
+            {{ form_row(form.brandData.image, { label: 'Upload image'|trans }) }}
         </div>
 
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}

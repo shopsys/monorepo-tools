@@ -65,13 +65,10 @@
             {% endfor %}
         {% endif %}
     {% else %}
-        {% if (form.vars.is_group_container == false or form.vars.is_group_container == null) %}
+        {% if render_form_row %}
             <div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
             {{ form_errors(form) }}
             {{ form_label(form, label) }}
-        {% endif %}
-        {% if form.vars.image_preview is not null %}
-            {{ image(form.vars.data, { size: form.vars.image_preview.size, height: form.vars.image_preview.height }) }}
         {% endif %}
         {{ form_widget(form) }}
         {% if disabledField is defined %}
@@ -80,7 +77,7 @@
                 <i class="svg svg-pencil"></i>
             </span>
         {% endif %}
-        {% if form.vars.is_group_container == false or form.vars.is_group_container == null %}
+        {% if render_form_row %}
             </div>
         {% endif %}
     {% endif %}
@@ -775,7 +772,7 @@
                     {{ child.vars.label }}
                 </label>
             {% else %}
-                {{ empty_message|default('Nothing to choose from.'|trans) }}
+                {{ empty_message }}
             {% endfor %}
         </div>
     {% endspaceless %}
@@ -884,6 +881,12 @@
         </div>
     {% else %}
         {{- block('appendix_block') -}}
+    {% endif %}
+    {% if form.vars.icon_title is not null %}
+        <i class="svg svg-info in-icon cursor-help form-line__item form-line__item--text js-tooltip"
+           data-toggle="tooltip" data-placement="right"
+           title="{{ form.vars.icon_title }}"
+        ></i>
     {% endif %}
 {% endblock yes_no_widget %}
 
@@ -1021,36 +1024,19 @@
     {% endif %}
 {% endblock date_picker_widget %}
 
-{%- block form_rows -%}
-    {% set previous_group_name = '' %}
-    {% for child in form %}
-        {% set current_group_name = (form.vars.is_group_container == true and form.vars.name is defined) ? form.vars.name : '' %}
-
-        {% if previous_group_name != current_group_name %}
-            {% if previous_group_name != '' %}
-                </div>
-            {% endif %}
-
-            {% if current_group_name != '' %}
-                {% if js_container is not null %}
-                    <div class="{{ js_container.container_class }}" data-type="{{ js_container.data_type }}">
-                {% endif %}
-                <div class="form-group{% if is_group_container_to_render_as_the_last_one != true %} wrap-border{% endif %}">
-                <div class="form-group__title">
-                    {{ form.vars.label }}
-                </div>
-            {% endif %}
-        {% endif %}
-
-        {{- form_row(child) -}}
-
-        {% set previous_group_name = current_group_name %}
-    {% endfor %}
-
-    {% if previous_group_name != '' %}
-        </div>
-        {% if js_container is not null %}
-            </div>
-        {% endif %}
+{% block group_row %}
+    {% if js_container is not null %}
+        <div class="{{ js_container.container_class }}" data-type="{{ js_container.data_type }}">
     {% endif %}
-{%- endblock form_rows -%}
+
+    <div class="form-group{% if is_group_container_to_render_as_the_last_one != true %} wrap-border{% endif %}">
+        <div class="form-group__title">
+            {{ form.vars.label }}
+        </div>
+        {{ form_widget(form) }}
+    </div>
+
+    {% if js_container is not null %}
+        </div>
+    {% endif %}
+{% endblock %}

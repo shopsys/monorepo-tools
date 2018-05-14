@@ -6,4 +6,5 @@
 .DS_Store
 /composer.lock
 /docker-compose.yml
+/docker-sync.yml
 /project-base/composer.lock
