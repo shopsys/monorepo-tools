@@ -164,11 +164,6 @@ class UserFormType extends AbstractType
 
             $builderRegisteredCustomerGroup->add('lastLogin', DisplayOnlyType::class, [
                 'label' => t('Last login'),
-                'mapped' => false,
-                'required' => false,
-                'attr' => [
-                    'readonly' => 'readonly',
-                ],
                 'data' => $user->getLastLogin() !== null ? $this->dateTimeFormatterExtension->formatDateTime($user->getLastLogin()) : 'never',
             ]);
         }

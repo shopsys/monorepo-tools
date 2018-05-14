@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Form\Admin\Slider;
 
 use Shopsys\FormTypesBundle\YesNoType;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\DomainType;
 use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\ImageUploadType;
@@ -39,14 +40,11 @@ class SliderItemFormType extends AbstractType
 
         if ($options['scenario'] === self::SCENARIO_EDIT) {
             $builderSettingsGroup
-                ->add('id', TextType::class, [
-                    'required' => true,
+                ->add('id', DisplayOnlyType::class, [
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter article name']),
                     ],
                     'data' => $options['slider_item']->getId(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('ID'),
                 ])
                 ->add('domainId', DomainType::class, [

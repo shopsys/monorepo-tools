@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Article;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\DomainType;
 use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\UrlListType;
@@ -75,18 +76,12 @@ class ArticleFormType extends AbstractType
                 ]);
         } else {
             $builderArticleData
-                ->add('id', TextType::class, [
-                    'required' => false,
+                ->add('id', DisplayOnlyType::class, [
                     'data' => $options['article']->getId(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('ID'),
                 ])
-                ->add('domain', TextType::class, [
-                    'required' => false,
+                ->add('domain', DisplayOnlyType::class, [
                     'data' => $this->domain->getDomainConfigById($options['article']->getDomainId())->getName(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('Domain'),
                 ]);
         }

@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Administrator;
 
 use Shopsys\FrameworkBundle\Component\Constraints\Email;
 use Shopsys\FrameworkBundle\Component\Constraints\FieldsAreNotIdentical;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorData;
@@ -35,14 +36,11 @@ class AdministratorFormType extends AbstractType
 
         if ($options['scenario'] === self::SCENARIO_EDIT) {
             $builderSettingsGroup
-                ->add('id', TextType::class, [
-                    'required' => true,
+                ->add('id', DisplayOnlyType::class, [
                     'constraints' => [
                         new Constraints\NotBlank(['message' => 'Please enter article name']),
                     ],
                     'data' => $options['administrator']->getId(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('ID'),
                 ]);
         }

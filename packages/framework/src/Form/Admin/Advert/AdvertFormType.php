@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Advert;
 
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\DomainType;
 use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\ImageUploadType;
@@ -58,18 +59,12 @@ class AdvertFormType extends AbstractType
 
         if ($options['scenario'] === self::SCENARIO_EDIT) {
             $builderSettingsGroup
-                ->add('id', TextType::class, [
-                    'required' => false,
+                ->add('id', DisplayOnlyType::class, [
                     'data' => $options['advert']->getId(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('ID'),
                 ])
-                ->add('domain', TextType::class, [
-                    'required' => false,
+                ->add('domain', DisplayOnlyType::class, [
                     'data' => $this->domain->getDomainConfigById($options['advert']->getDomainId())->getName(),
-                    'mapped' => false,
-                    'attr' => ['readonly' => 'readonly'],
                     'label' => t('Domain'),
                 ]);
         } else {
