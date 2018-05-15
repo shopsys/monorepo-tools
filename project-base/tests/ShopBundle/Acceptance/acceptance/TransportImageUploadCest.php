@@ -13,12 +13,14 @@ class TransportImageUploadCest
 
     const EXPECTED_SUCCESS_MESSAGE = 'Shipping Czech post was modified';
 
+    const TEST_IMAGE_NAME = 'transportTestImage.png';
+
     public function testSuccessfulImageUpload(AcceptanceTester $me, EntityEditPage $entityEditPage, LoginPage $loginPage)
     {
         $me->wantTo('Upload an image in admin transport edit page');
         $loginPage->loginAsAdmin();
         $me->amOnPage('/admin/transport/edit/1');
-        $entityEditPage->uploadTestImage(self::IMAGE_UPLOAD_FIELD_ID);
+        $entityEditPage->uploadTestImage(self::IMAGE_UPLOAD_FIELD_ID, self::TEST_IMAGE_NAME);
         $me->clickByName(self::SAVE_BUTTON_NAME);
         $me->see(self::EXPECTED_SUCCESS_MESSAGE);
     }
