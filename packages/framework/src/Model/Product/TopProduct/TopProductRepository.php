@@ -11,12 +11,12 @@ class TopProductRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     public function __construct(EntityManagerInterface $entityManager, ProductRepository $productRepository)
     {
@@ -27,7 +27,7 @@ class TopProductRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getTopProductRepository()
+    protected function getTopProductRepository()
     {
         return $this->em->getRepository(TopProduct::class);
     }

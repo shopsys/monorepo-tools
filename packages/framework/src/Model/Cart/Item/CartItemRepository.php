@@ -12,7 +12,7 @@ class CartItemRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -25,7 +25,7 @@ class CartItemRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getCartItemRepository()
+    protected function getCartItemRepository()
     {
         return $this->em->getRepository(CartItem::class);
     }

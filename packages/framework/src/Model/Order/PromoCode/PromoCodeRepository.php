@@ -9,7 +9,7 @@ class PromoCodeRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -22,7 +22,7 @@ class PromoCodeRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getPromoCodeRepository()
+    protected function getPromoCodeRepository()
     {
         return $this->em->getRepository(PromoCode::class);
     }

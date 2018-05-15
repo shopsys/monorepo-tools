@@ -16,17 +16,17 @@ class ProductVisibilityRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository
      */
-    private $pricingGroupRepository;
+    protected $pricingGroupRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -77,7 +77,7 @@ class ProductVisibilityRepository
     /**
      * @param bool $onlyMarkedProducts
      */
-    private function refreshGlobalProductVisibility($onlyMarkedProducts)
+    protected function refreshGlobalProductVisibility($onlyMarkedProducts)
     {
         if ($onlyMarkedProducts) {
             $onlyMarkedProductsWhereClause = ' WHERE p.recalculate_visibility = TRUE';
@@ -121,7 +121,7 @@ class ProductVisibilityRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getProductVisibilityRepository()
+    protected function getProductVisibilityRepository()
     {
         return $this->em->getRepository(ProductVisibility::class);
     }
@@ -149,7 +149,7 @@ class ProductVisibilityRepository
         return $productVisibility;
     }
 
-    private function markAllProductsVisibilityAsRecalculated()
+    protected function markAllProductsVisibilityAsRecalculated()
     {
         $this->em->createNativeQuery(
             'UPDATE products SET recalculate_visibility = FALSE WHERE recalculate_visibility = TRUE',
@@ -161,7 +161,7 @@ class ProductVisibilityRepository
      * @param bool $onlyMarkedProducts
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    private function calculateIndependentVisibility($onlyMarkedProducts)
+    protected function calculateIndependentVisibility($onlyMarkedProducts)
     {
         $now = new DateTime();
         if ($onlyMarkedProducts) {
@@ -236,7 +236,7 @@ class ProductVisibilityRepository
     /**
      * @param bool $onlyMarkedProducts
      */
-    private function hideVariantsWithInvisibleMainVariant($onlyMarkedProducts)
+    protected function hideVariantsWithInvisibleMainVariant($onlyMarkedProducts)
     {
         if ($onlyMarkedProducts) {
             $onlyMarkedProductsCondition = ' AND p.recalculate_visibility = TRUE';
@@ -271,7 +271,7 @@ class ProductVisibilityRepository
     /**
      * @param bool $onlyMarkedProducts
      */
-    private function hideMainVariantsWithoutVisibleVariants($onlyMarkedProducts)
+    protected function hideMainVariantsWithoutVisibleVariants($onlyMarkedProducts)
     {
         if ($onlyMarkedProducts) {
             $onlyMarkedProductsCondition = ' AND p.recalculate_visibility = TRUE';

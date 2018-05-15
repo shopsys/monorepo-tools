@@ -10,12 +10,12 @@ class HeurekaCategoryRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
      */
-    private $queryBuilderService;
+    protected $queryBuilderService;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -32,7 +32,7 @@ class HeurekaCategoryRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getHeurekaCategoryRepository()
+    protected function getHeurekaCategoryRepository()
     {
         return $this->em->getRepository(HeurekaCategory::class);
     }

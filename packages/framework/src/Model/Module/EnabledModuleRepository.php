@@ -9,12 +9,12 @@ class EnabledModuleRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Module\ModuleList
      */
-    private $moduleList;
+    protected $moduleList;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -27,7 +27,7 @@ class EnabledModuleRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getEnabledModuleRepository()
+    protected function getEnabledModuleRepository()
     {
         return $this->em->getRepository(EnabledModule::class);
     }

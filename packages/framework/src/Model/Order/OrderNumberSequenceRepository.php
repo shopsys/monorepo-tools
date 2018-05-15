@@ -12,7 +12,7 @@ class OrderNumberSequenceRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -25,7 +25,7 @@ class OrderNumberSequenceRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getOrderNumberSequenceRepository()
+    protected function getOrderNumberSequenceRepository()
     {
         return $this->em->getRepository(OrderNumberSequence::class);
     }

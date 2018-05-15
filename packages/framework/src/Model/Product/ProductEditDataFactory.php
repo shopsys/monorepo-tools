@@ -16,47 +16,47 @@ class ProductEditDataFactory
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository
      */
-    private $parameterRepository;
+    protected $parameterRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
      */
-    private $productDataFactory;
+    protected $productDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceFacade
      */
-    private $productInputPriceFacade;
+    protected $productInputPriceFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
-    private $friendlyUrlFacade;
+    protected $friendlyUrlFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository
      */
-    private $productAccessoryRepository;
+    protected $productAccessoryRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
      */
-    private $imageFacade;
+    protected $imageFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade
      */
-    private $pluginDataFormExtensionFacade;
+    protected $pluginDataFormExtensionFacade;
 
     public function __construct(
         Domain $domain,
@@ -134,7 +134,7 @@ class ProductEditDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    private function getAccessoriesData(Product $product)
+    protected function getAccessoriesData(Product $product)
     {
         $productAccessoriesByPosition = [];
         foreach ($this->productAccessoryRepository->getAllByProduct($product) as $productAccessory) {
@@ -148,7 +148,7 @@ class ProductEditDataFactory
      * @param Product $product
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData[]
      */
-    private function getParametersData(Product $product)
+    protected function getParametersData(Product $product)
     {
         $productParameterValuesData = [];
         $productParameterValues = $this->parameterRepository->getProductParameterValuesByProduct($product);
@@ -165,7 +165,7 @@ class ProductEditDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
      */
-    private function setMultidomainData(Product $product, ProductEditData $productEditData)
+    protected function setMultidomainData(Product $product, ProductEditData $productEditData)
     {
         $productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
         foreach ($productDomains as $domainId => $productDomain) {
@@ -183,7 +183,7 @@ class ProductEditDataFactory
     /**
      * @return array
      */
-    private function getNullForAllDomains()
+    protected function getNullForAllDomains()
     {
         $nullForAllDomains = [];
         foreach ($this->domain->getAll() as $domainConfig) {

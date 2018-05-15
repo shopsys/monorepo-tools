@@ -9,7 +9,7 @@ class ScriptRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -22,7 +22,7 @@ class ScriptRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getScriptRepository()
+    protected function getScriptRepository()
     {
         return $this->em->getRepository(Script::class);
     }

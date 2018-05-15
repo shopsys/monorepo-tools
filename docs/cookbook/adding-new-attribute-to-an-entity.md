@@ -177,26 +177,18 @@ Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface: '@Shopsys\ShopBun
 9. Create new `ProductDataFactory` in the same namespace as your entity
 by extending [`Shopsys\FrameworkBundle\Model\Product\ProductDataFactory`](../../packages/framework/src/Model/Product/ProductDataFactory.php)
 and overwrite the `createDefault()` method. 
-You need to copy paste all the contents of the parent class and make sure to use your `Product` instead of the base one.
 
-*Note: The copy pasting is a quite hacky solution but it is necessary now 
-because of private visibility of original `ProductDataFactory` properties.
-Also, there is no interface for `ProductDataFactory` like it was in the previous step for `ProductFactory`. 
+*Note: There is no interface for `ProductDataFactory` like it was in the previous step for `ProductFactory`. 
 This issue will be addressed in near future.*
 ```php
 <?php
 
 namespace Shopsys\ShopBundle\Model\Product;
 
-use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
-use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory as BaseProductDataFactory;
-use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 
 class ProductDataFactory extends BaseProductDataFactory
 {
-    // ... (copy paste from BaseProductDataFactory)
-
     /**
      * @return \Shopsys\ShopBundle\Model\Product\ProductData
      */

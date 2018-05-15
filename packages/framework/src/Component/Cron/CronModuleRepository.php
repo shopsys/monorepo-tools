@@ -9,7 +9,7 @@ class CronModuleRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Cron\CronModuleFactoryInterface
@@ -29,7 +29,7 @@ class CronModuleRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getCronModuleRepository()
+    protected function getCronModuleRepository()
     {
         return $this->em->getRepository(CronModule::class);
     }

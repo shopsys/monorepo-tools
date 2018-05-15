@@ -11,12 +11,12 @@ class TopCategoryRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
      */
-    private $categoryRepository;
+    protected $categoryRepository;
 
     public function __construct(EntityManagerInterface $entityManager, CategoryRepository $categoryRepository)
     {
@@ -27,7 +27,7 @@ class TopCategoryRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getTopCategoryRepository()
+    protected function getTopCategoryRepository()
     {
         return $this->em->getRepository(TopCategory::class);
     }

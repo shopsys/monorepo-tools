@@ -17,12 +17,12 @@ class OrderRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Order\Listing\OrderListAdminRepository
      */
-    private $orderListAdminRepository;
+    protected $orderListAdminRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -35,7 +35,7 @@ class OrderRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getOrderRepository()
+    protected function getOrderRepository()
     {
         return $this->em->getRepository(Order::class);
     }
@@ -43,7 +43,7 @@ class OrderRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function createOrderQueryBuilder()
+    protected function createOrderQueryBuilder()
     {
         return $this->em->createQueryBuilder()
             ->select('o')
@@ -268,7 +268,7 @@ class OrderRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getOrderListQueryBuilder()
+    protected function getOrderListQueryBuilder()
     {
         return $this->em->createQueryBuilder()
             ->select('o, oi, os, ost, c')

@@ -13,7 +13,7 @@ class AvailabilityRepository
     /**
      * @var \Doctrine\ORM\EntityRepository
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
@@ -26,7 +26,7 @@ class AvailabilityRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getAvailabilityRepository()
+    protected function getAvailabilityRepository()
     {
         return $this->em->getRepository(Availability::class);
     }

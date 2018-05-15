@@ -9,7 +9,7 @@ class MailTemplateRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -22,7 +22,7 @@ class MailTemplateRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getMailTemplateRepository()
+    protected function getMailTemplateRepository()
     {
         return $this->em->getRepository(MailTemplate::class);
     }

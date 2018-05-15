@@ -9,7 +9,7 @@ class FriendlyUrlRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -22,7 +22,7 @@ class FriendlyUrlRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getFriendlyUrlRepository()
+    protected function getFriendlyUrlRepository()
     {
         return $this->em->getRepository(FriendlyUrl::class);
     }

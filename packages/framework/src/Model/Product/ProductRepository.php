@@ -25,27 +25,27 @@ class ProductRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterRepository
      */
-    private $productFilterRepository;
+    protected $productFilterRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderService
      */
-    private $queryBuilderService;
+    protected $queryBuilderService;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository
      */
-    private $productSearchRepository;
+    protected $productSearchRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -64,7 +64,7 @@ class ProductRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getProductRepository()
+    protected function getProductRepository()
     {
         return $this->em->getRepository(Product::class);
     }
@@ -72,7 +72,7 @@ class ProductRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getProductDomainRepository()
+    protected function getProductDomainRepository()
     {
         return $this->em->getRepository(ProductDomain::class);
     }
@@ -193,7 +193,7 @@ class ProductRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getListableForBrandQueryBuilder(
+    protected function getListableForBrandQueryBuilder(
         $domainId,
         PricingGroup $pricingGroup,
         Brand $brand
@@ -264,7 +264,7 @@ class ProductRepository
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param int $domainId
      */
-    private function filterByCategory(QueryBuilder $queryBuilder, Category $category, $domainId)
+    protected function filterByCategory(QueryBuilder $queryBuilder, Category $category, $domainId)
     {
         $queryBuilder->join('p.productCategoryDomains', 'pcd', Join::WITH, 'pcd.category = :category AND pcd.domainId = :domainId');
         $queryBuilder->setParameter('category', $category);
@@ -275,7 +275,7 @@ class ProductRepository
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
      */
-    private function filterByBrand(QueryBuilder $queryBuilder, Brand $brand)
+    protected function filterByBrand(QueryBuilder $queryBuilder, Brand $brand)
     {
         $queryBuilder->andWhere('p.brand = :brand');
         $queryBuilder->setParameter('brand', $brand);
@@ -455,7 +455,7 @@ class ProductRepository
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string $locale
      */
-    private function applyOrdering(
+    protected function applyOrdering(
         QueryBuilder $queryBuilder,
         $orderingModeId,
         PricingGroup $pricingGroup,

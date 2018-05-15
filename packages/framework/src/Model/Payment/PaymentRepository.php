@@ -10,7 +10,7 @@ class PaymentRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -23,7 +23,7 @@ class PaymentRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getPaymentRepository()
+    protected function getPaymentRepository()
     {
         return $this->em->getRepository(Payment::class);
     }
@@ -31,7 +31,7 @@ class PaymentRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getPaymentDomainRepository()
+    protected function getPaymentDomainRepository()
     {
         return $this->em->getRepository(PaymentDomain::class);
     }

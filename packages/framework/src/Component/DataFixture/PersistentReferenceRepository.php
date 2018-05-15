@@ -9,7 +9,7 @@ class PersistentReferenceRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -22,7 +22,7 @@ class PersistentReferenceRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getReferenceRepository()
+    protected function getReferenceRepository()
     {
         return $this->em->getRepository(PersistentReference::class);
     }

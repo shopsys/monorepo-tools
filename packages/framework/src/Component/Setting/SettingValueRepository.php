@@ -10,7 +10,7 @@ class SettingValueRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -23,7 +23,7 @@ class SettingValueRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getSettingValueRepository()
+    protected function getSettingValueRepository()
     {
         return $this->em->getRepository(SettingValue::class);
     }

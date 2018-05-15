@@ -9,12 +9,12 @@ class BrandDataFactory
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
-    private $friendlyUrlFacade;
+    protected $friendlyUrlFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade
      */
-    private $brandFacade;
+    protected $brandFacade;
 
     public function __construct(
         FriendlyUrlFacade $friendlyUrlFacade,

@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - allowing override factory that creates extended entities in project-base
 
 ### Changed
+- visibility of all private properties and methods of repositories of entities was changed to protected (@Miroslav-Stopka)
+    - there are changed only repositories of entities because currently there was no need for extendibility of other repositories
+    - protected visibility allows overriding of behavior from projects
+- visibility of all private properties and methods of DataFactories was changed to protected (@Miroslav-Stopka)
+    - protected visibility allows overriding of behavior from projects
 - unification of terminology - indices and indexes (@Miroslav-Stopka)
     - there is only "indexes" expression used now
 - `CustomerFormType`, `PaymentFormType` and `TransportFormType` are now all rendered using FormType classes and they

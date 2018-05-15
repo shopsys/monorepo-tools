@@ -12,7 +12,7 @@ class ParameterRepository
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueFactoryInterface
@@ -34,7 +34,7 @@ class ParameterRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getParameterRepository()
+    protected function getParameterRepository()
     {
         return $this->em->getRepository(Parameter::class);
     }
@@ -42,7 +42,7 @@ class ParameterRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getParameterValueRepository()
+    protected function getParameterValueRepository()
     {
         return $this->em->getRepository(ParameterValue::class);
     }
@@ -50,7 +50,7 @@ class ParameterRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getProductParameterValueRepository()
+    protected function getProductParameterValueRepository()
     {
         return $this->em->getRepository(ProductParameterValue::class);
     }
@@ -115,7 +115,7 @@ class ParameterRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getProductParameterValuesByProductQueryBuilder(Product $product)
+    protected function getProductParameterValuesByProductQueryBuilder(Product $product)
     {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('ppv')
@@ -131,7 +131,7 @@ class ParameterRepository
      * @param string $locale
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getProductParameterValuesByProductSortedByNameQueryBuilder(Product $product, $locale)
+    protected function getProductParameterValuesByProductSortedByNameQueryBuilder(Product $product, $locale)
     {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('ppv')
@@ -241,7 +241,7 @@ class ParameterRepository
      * @param array $productIdsAndParameterNamesAndValues
      * @return string[][]
      */
-    private function getParameterValuesIndexedByProductIdAndParameterName(array $productIdsAndParameterNamesAndValues)
+    protected function getParameterValuesIndexedByProductIdAndParameterName(array $productIdsAndParameterNamesAndValues)
     {
         $productParameterValuesIndexedByProductIdAndParameterName = [];
         foreach ($productIdsAndParameterNamesAndValues as $productIdAndParameterNameAndValue) {

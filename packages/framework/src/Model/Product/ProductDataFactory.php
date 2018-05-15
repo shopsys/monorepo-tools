@@ -11,17 +11,17 @@ class ProductDataFactory
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
      */
-    private $vatFacade;
+    protected $vatFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceFacade
      */
-    private $productInputPriceFacade;
+    protected $productInputPriceFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
      */
-    private $unitFacade;
+    protected $unitFacade;
 
     public function __construct(
         VatFacade $vatFacade,

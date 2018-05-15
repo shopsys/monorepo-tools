@@ -7,12 +7,12 @@ class BrandEditDataFactory
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactory
      */
-    private $brandDataFactory;
+    protected $brandDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository
      */
-    private $brandRepository;
+    protected $brandRepository;
 
     public function __construct(
         BrandDataFactory $brandDataFactory,
@@ -40,7 +40,7 @@ class BrandEditDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditData $brandEditData
      */
-    private function setMultidomainData(Brand $brand, BrandEditData $brandEditData)
+    protected function setMultidomainData(Brand $brand, BrandEditData $brandEditData)
     {
         $brandDomains = $this->brandRepository->getBrandDomainsByBrand($brand);
         foreach ($brandDomains as $brandDomain) {
