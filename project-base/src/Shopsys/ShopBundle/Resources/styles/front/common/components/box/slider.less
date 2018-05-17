@@ -10,12 +10,17 @@
         margin-bottom: @margin-gap;
         width: @box-slider-width;
         max-width: 100%;
+        visibility: hidden;
 
         &__in {
             width: 100%;
             overflow: hidden;
 
             border: 1px solid @color-border;
+        }
+
+        .slick-initialized {
+            visibility: visible;
         }
 
         &__item {
