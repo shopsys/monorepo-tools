@@ -41,7 +41,7 @@ class HeurekaShopCertificationFormType extends AbstractType
                 'required' => false,
                 'label' => t('Heureka Widget code'),
                 'attr' => [
-                    'class' => 'heureka-widget-input',
+                    'class' => 'height-150',
                 ],
             ]);
 

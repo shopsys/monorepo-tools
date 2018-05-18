@@ -31,6 +31,9 @@ class ScriptFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter script code']),
                 ],
+                'attr' => [
+                    'class' => 'height-150',
+                ],
             ])
             ->add($builder
                 ->create('placement', CheckboxType::class, ['required' => false])

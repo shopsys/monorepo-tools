@@ -126,6 +126,9 @@ class AdvertFormType extends AbstractType
                         'groups' => [self::VALIDATION_GROUP_TYPE_CODE],
                     ]),
                 ],
+                'attr' => [
+                    'class' => 'height-150',
+                ],
                 'js_container' => [
                     'container_class' => 'js-advert-type-content form-line__js',
                     'data_type' => 'code',
