@@ -268,4 +268,12 @@ class PaymentFacade
 
         return $paymentVatPercentsByPaymentId;
     }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment[]
+     */
+    public function getAll()
+    {
+        return $this->paymentRepository->getAll();
+    }
 }

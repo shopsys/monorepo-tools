@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         - see `\Tests\ShopBundle\Database\EntityExtension\EntityExtensionTest`
 - entities are created by factories (@simara-svatopluk)
     - allowing override factory that creates extended entities in project-base
+- admin: shipping detail: payment now can be assigned to shipping (@TomasLudvik, @boris-brtan)
 
 ### Changed
 - visibility of all private properties and methods of repositories of entities was changed to protected (@Miroslav-Stopka)

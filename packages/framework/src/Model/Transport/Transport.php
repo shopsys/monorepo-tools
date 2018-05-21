@@ -4,11 +4,13 @@ namespace Shopsys\FrameworkBundle\Model\Transport;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Shopsys\FrameworkBundle\Component\Gedmo\SortablePosition;
 use Shopsys\FrameworkBundle\Component\Grid\Ordering\OrderableEntityInterface;
 use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 
 /**
@@ -71,6 +73,12 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     protected $position;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment[]|\Doctrine\Common\Collections\Collection
+     * @ManyToMany(targetEntity="Shopsys\FrameworkBundle\Model\Payment\Payment", mappedBy="transports", cascade={"persist"})
+     */
+    protected $payments;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportData $transportData
      */
     public function __construct(TransportData $transportData)
@@ -82,6 +90,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
         $this->setTranslations($transportData);
         $this->prices = new ArrayCollection();
         $this->position = SortablePosition::LAST_POSITION;
+        $this->payments = new ArrayCollection();
     }
 
     /**
@@ -241,5 +250,54 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     protected function createTranslation()
     {
         return new TransportTranslation();
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     */
+    public function addPayment(Payment $payment)
+    {
+        if (!$this->payments->contains($payment)) {
+            $this->payments->add($payment);
+            $payment->addTransport($this);
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment[] $payments
+     */
+    public function setPayments(array $payments)
+    {
+        $this->clearPayments();
+
+        foreach ($payments as $payment) {
+            $this->addPayment($payment);
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     */
+    public function removePayment(Payment $payment)
+    {
+        if ($this->payments->contains($payment)) {
+            $this->payments->removeElement($payment);
+            $payment->removeTransport($this);
+        }
+    }
+
+    protected function clearPayments()
+    {
+        foreach ($this->payments as $payment) {
+            $this->removePayment($payment);
+        }
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Payment\Payment[]|\Doctrine\Common\Collections\Collection
+     */
+    public function getPayments()
+    {
+        return $this->payments;
     }
 }

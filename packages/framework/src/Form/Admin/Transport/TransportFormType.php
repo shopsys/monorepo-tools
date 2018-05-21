@@ -9,6 +9,7 @@ use Shopsys\FrameworkBundle\Form\DomainsType;
 use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
@@ -26,9 +27,15 @@ class TransportFormType extends AbstractType
      */
     private $vatFacade;
 
-    public function __construct(VatFacade $vatFacade)
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
+     */
+    private $paymentFacade;
+
+    public function __construct(VatFacade $vatFacade, PaymentFacade $paymentFacade)
     {
         $this->vatFacade = $vatFacade;
+        $this->paymentFacade = $paymentFacade;
     }
 
     /**
@@ -82,6 +89,21 @@ class TransportFormType extends AbstractType
                 ],
             ]);
 
+        $builderAdditionalInformationGroup = $builder->create('additionalInformation', GroupType::class, [
+            'label' => t('Additional information'),
+        ]);
+
+        $builderAdditionalInformationGroup
+            ->add('payments', ChoiceType::class, [
+                'required' => false,
+                'choices' => $this->paymentFacade->getAll(),
+                'choice_label' => 'name',
+                'choice_value' => 'id',
+                'multiple' => true,
+                'expanded' => true,
+                'empty_message' => t('You have to create some payment first.'),
+            ]);
+
         $builderDescriptionGroup = $builder->create('description', GroupType::class, [
             'label' => t('Description'),
         ]);
@@ -121,6 +143,7 @@ class TransportFormType extends AbstractType
 
         $builder
             ->add($builderBasicInformationGroup)
+            ->add($builderAdditionalInformationGroup)
             ->add($builderDescriptionGroup)
             ->add($builderImageGroup);
     }
