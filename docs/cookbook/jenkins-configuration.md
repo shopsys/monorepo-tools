@@ -363,7 +363,7 @@ Now we can build our images and create containers:
 
 Install the application:
 ```
-/usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm composer install
+/usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm composer install -o
 /usr/bin/docker exec $JOB_NAME-shopsys-framework-php-fpm php phing db-create test-db-create build-demo-ci
 ```
 
@@ -535,13 +535,13 @@ sudo dockerd
 ```
 
 Second thing is that we need to set our composer token. Go to jenkins administration and run `Jenkins autojobs` tool, that will
-start first builds which will fail, on `composer install` and it will prompt you to start it manually.
+start first builds which will fail, on `composer install -o` and it will prompt you to start it manually.
 
 So select one of your jobs names and get into `container` in ssh. For example i will use master, but it does not really matter 
 which job will you choose:
 
 ```
-docker exec -it master-shopsys-framework-php-fpm composer install
+docker exec -it master-shopsys-framework-php-fpm composer install -o
 ```
 
 This will prompt you to set `composer token` in github, click on a link and set it. Now we got it set up for all branches,
