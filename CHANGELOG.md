@@ -76,6 +76,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - db indices for product name are now created for translations in all locales 
     - `LoadDataFixturesCommand` - fixed the `--fixtures` option description 
 
+### [shopsys/http-smoke-testing]
+#### Added
+- [Troubleshooting section in `README.md` with explanation why tests do not fail on non-existing routes](https://github.com/shopsys/http-smoke-testing/commit/8f700eda96c2f6e1b018e56f5b03a46d09b4ae00)
+
 ### [shopsys/shopsys]
 #### Added
 - [#108 - demo entity extension](https://github.com/shopsys/shopsys/pull/108): 
@@ -168,6 +172,10 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
         - ArticleFormType
         - AdvertFormType
         - AdministratorFormType
+        
+### [shopsys/http-smoke-testing]
+#### Changed
+- added support of phpunit/phpunit ^6.0 and ^7.0 (@simara-svatopluk)
 
 #### [shopsys/shopsys]
 ##### Added
@@ -225,6 +233,26 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
 ## Before monorepo
 Before we managed to implement monorepo for our packages, we had slightly different versions for each of our package, we had stored our packages on internal server so we dont have PR available.
 That's why is this section formatted differently.
+
+### [shopsys/http-smoke-testing]
+#### [1.1.0](https://github.com/shopsys/http-smoke-testing/compare/v1.0.0...v1.1.0) - 2017-11-01 
+##### Added
+- [CONTRIBUTING.md](https://github.com/shopsys/http-smoke-testing/blob/master/CONTRIBUTING.md)
+ 
+##### Changed 
+- Improved IDE auto-completion when customizing test cases via [`RouteConfig`](https://github.com/shopsys/http-smoke-testing/blob/master/src/RouteConfig.php)
+    - Methods `changeDefaultRequestDataSet()` and `addExtraRequestDataSet()` now return new interface [`RequestDataSetInterface`](https://github.com/shopsys/http-smoke-testing/blob/master/src/RequestDataSetConfig.php). 
+    - This new interface includes only a subset of methods in [`RequestDataSet`](https://github.com/shopsys/http-smoke-testing/blob/master/src/RequestDataSet.php) that is relevant to test case customization. 
+ 
+#### [1.0.1](https://github.com/shopsys/http-smoke-testing/compare/v1.0.0...v1.0.1) - 2017-07-03 
+##### Added 
+- Unit test for RequestDataSetGenerator class
+- This Changelog
+ 
+#### 1.0.0 - 2017-05-23 
+##### Added 
+- Extracted HTTP smoke testing functionality from [Shopsys Framework](http://www.shopsys-framework.com/)
+- `.travis.yml` file with Travis CI configuration
 
 ### [shopsys/project-base]
 #### 6.0.0-beta21 - 2018-03-05
