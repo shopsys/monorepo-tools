@@ -80,6 +80,30 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Added
 - [Troubleshooting section in `README.md` with explanation why tests do not fail on non-existing routes](https://github.com/shopsys/http-smoke-testing/commit/8f700eda96c2f6e1b018e56f5b03a46d09b4ae00)
 
+### [shopsys/product-feed-google]
+#### Changed
+- [#116 - Visibility of properties and methods of DataFactories and Repositories is protected](https://github.com/shopsys/shopsys/pull/116):
+    - visibility of all private properties and methods of repositories of entities was changed to protected
+        - there are changed only repositories of entities because currently there was no need for extendibility of other repositories
+        - protected visibility allows overriding of behavior from projects
+- [Doctrine entities are used for storing data instead of using `DataStorageProviderInterface`](https://github.com/shopsys/shopsys/commit/3f32f513276f112d8ef4bdf854e413829bcf80f8)
+    - previously saved data will be migrated
+- [#102 - Protected visibility of all private properties and methods of facades](https://github.com/shopsys/shopsys/pull/102):
+    - visibility of all private properties and methods of facades was changed to protected
+        - protected visibility allows overriding of behavior from projects
+
+### [shopsys/product-feed-heureka] 
+#### Changed 
+- [#116 - Visibility of properties and methods of DataFactories and Repositories is protected](https://github.com/shopsys/shopsys/pull/116): 
+    - visibility of all private properties and methods of repositories of entities was changed to protected 
+        - there are changed only repositories of entities because currently there was no need for extendibility of other repositories 
+        - protected visibility allows overriding of behavior from projects 
+- [Doctrine entities are used for storing data instead of using `DataStorageProviderInterface`](https://github.com/shopsys/shopsys/commit/3f32f513276f112d8ef4bdf854e413829bcf80f8) 
+    - previously saved data will be migrated 
+- [#102 - Protected visibility of all private properties and methods of facades](https://github.com/shopsys/shopsys/pull/102): 
+    - visibility of all private properties and methods of facades was changed to protected 
+        - protected visibility allows overriding of behavior from projects 
+ 
 ### [shopsys/shopsys]
 #### Added
 - [#108 - demo entity extension](https://github.com/shopsys/shopsys/pull/108): 
@@ -177,6 +201,16 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
 #### Changed
 - added support of phpunit/phpunit ^6.0 and ^7.0 (@simara-svatopluk)
 
+### [shopsys/product-feed-google]
+#### Changed
+- renamed [`TestStandardFeedItem`] to [`TestGoogleStandardFeedItem`]
+- updated phpunit/phpunit to version 7
+
+### [shopsys/product-feed-heureka]
+#### Changed
+- renamed [`TestStandardFeedItem`] to [`TestHeurekaStandardFeedItem`]
+- updated phpunit/phpunit to version 7
+
 ### [shopsys/monorepo-tools]
 #### Added
 - bash scripts for building and splitting monolithic repository from existing packages
@@ -271,6 +305,98 @@ That's why is this section formatted differently.
 ##### Added 
 - Extracted HTTP smoke testing functionality from [Shopsys Framework](http://www.shopsys-framework.com/)
 - `.travis.yml` file with Travis CI configuration
+
+### [shopsys/product-feed-google]
+#### [0.2.1](https://github.com/shopsys/product-feed-google/compare/v0.2.0...v0.2.1) - 2018-02-19
+##### Fixed
+- services.yml autodiscovery settings
+
+#### [0.2.0](https://github.com/shopsys/product-feed-google/compare/v0.1.2...v0.2.0) - 2018-02-19
+##### Changed
+- services.yml updated to Symfony 3.4 best practices
+
+#### [0.1.2](https://github.com/shopsys/product-feed-google/compare/v0.1.1...v0.1.2) - 2018-02-12
+##### Fixed
+- Fix availability value
+
+#### [0.1.1](https://github.com/shopsys/product-feed-google/compare/v0.1.0...v0.1.1) - 2017-10-04
+##### Added
+- support for shopsys/plugin-interface 0.3.0
+- support for shopsys/product-feed-interface 0.5.0
+
+#### 0.1.0 - 2017-09-25
+##### Added
+- added basic logic of product feed for Google
+- composer.json: added shopsys/coding-standards into require-dev
+
+### [shopsys/product-feed-heureka]
+#### [0.6.1](https://github.com/shopsys/product-feed-heureka/compare/v0.6.0...v0.6.1) - 2018-02-19
+##### Changed
+- updated package shopsys/form-types-bundle to version 0.2.0
+
+#### [0.6.0](https://github.com/shopsys/product-feed-heureka/compare/v0.5.1...v0.6.0) - 2018-02-19
+##### Changed
+- services.yml updated to Symfony 3.4 best practices
+
+#### [0.5.1](https://github.com/shopsys/product-feed-heureka/compare/v0.5.0...v0.5.1) - 2017-10-06
+- names of Heureka categories are now cached by category ID in [`HeurekaFeedConfig`](./packages/product-feed-heureka/src/HeurekaFeedConfig.php) 
+
+#### [0.5.0](https://github.com/shopsys/product-feed-heureka/compare/v0.4.2...v0.5.0) - 2017-10-05
+##### Added
+- logic of Heureka categorization moved from [Shopsys Framework](https://www.shopsys-framework.com/) core repository 
+    - Heureka categories are downloaded everyday via CRON module
+    - extends CRUD of categories for assigning Heureka categories to categories on your online store
+    - contains demo data fixtures
+
+#### [0.4.2](https://github.com/shopsys/product-feed-heureka/compare/v0.4.1...v0.4.2) - 2017-10-05
+##### Added
+- support for shopsys/plugin-interface 0.3.0 
+- support for shopsys/product-feed-interface 0.5.0 
+
+#### [0.4.1](https://github.com/shopsys/product-feed-heureka/compare/v0.4.0...v0.4.1) - 2017-09-25
+##### Added
+- [CONTRIBUTING.md](https://github.com/shopsys/product-feed-heureka/blob/master/CONTRIBUTING.md)
+##### Changed
+- Dependency [product-feed-interface](https://github.com/shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0 
+- [`HeurekaFeedConfig`](https://github.com/shopsys/product-feed-heureka/blob/master/src/HeurekaFeedConfig.php) now filters not sellable products 
+- [`HeurekaFeedConfig`](https://github.com/shopsys/product-feed-heureka/blob/master/src/HeurekaFeedConfig.php) implemented method `getAdditionalData()` 
+- [`TestStandardFeedItem`](https://github.com/shopsys/product-feed-heureka/blob/master/tests/TestStandardFeedItem.php) implemented method `getCurrencyCode()` 
+
+#### [0.4.0](https://github.com/shopsys/product-feed-heureka/compare/v0.3.0...v0.4.0) - 2017-09-12
+##### Added
+- New dependencies for dev
+    - phpunit/phpunit 5.7.21
+    - twig/twig 1.34.0
+    - twig/extensions 1.3.0
+- New automatic test that is controlling right behaviour of plugin 
+- Added travis build icon into [README.md](https://github.com/shopsys/product-feed-heureka/blob/master/README.md) 
+##### Changed
+- Dependency [shopsys/product-feed-interface] upgraded from ~0.2.0 to ~0.3.0 
+##### Removed
+- `HeurekaFeedConfig::getFeedItemRepository()` 
+
+#### [0.3.0](https://github.com/shopsys/product-feed-heureka/compare/v0.2.0...v0.3.0) - 2017-08-09
+##### Added
+- This Changelog 
+- UPGRADE.md 
+- Plugin demo data (cpc for 2 domains) 
+##### Changed
+- Dependency [shopsys/plugin-interface] upgraded from ~0.1.0 to ~0.2.0 
+
+#### [0.2.0](https://github.com/shopsys/product-feed-heureka/compare/v0.1.0...v0.2.0) - 2017-08-02
+##### Added
+- Retrieving custom plugin data 
+    - Heureka category names
+    - MAX_CPC (Maximum price per click)
+- Extension of product form with custom field for MAX_CPC 
+- New dependencies 
+    - [shopsys/plugin-interface ~0.1.0](https://github.com/shopsys/plugin-interface)
+    - [shopsys/form-types-bundle ~0.1.0](https://github.com/shopsys/form-types-bundle)
+    - [symfony/form ^3.0](https://github.com/symfony/form)
+    - [symfony/translation ^3.0](https://github.com/symfony/translation)
+    - [symfony/validator ^3.0](https://github.com/symfony/validator)
+##### Changed
+- Dependency [shopsys/product-feed-interface] upgraded from ~0.1.0 to ~0.2.0 
 
 ### [shopsys/migrations]
 #### [2.3.0](https://github.com/shopsys/migrations/compare/v2.2.0...v2.3.0 ) - 2018-02-19
