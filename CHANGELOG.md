@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - documentation: missing redis extension in required php extensions (@pk16011990)
+- admin: e-mail validation in customer editation is working correctly now (@TomasLudvik)
 
 ## 7.0.0-alpha1 - 2018-04-12
 ### Added
