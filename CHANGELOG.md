@@ -211,6 +211,11 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
 - renamed [`TestStandardFeedItem`] to [`TestHeurekaStandardFeedItem`]
 - updated phpunit/phpunit to version 7
 
+### [shopsys/product-feed-interface]
+##### Removed
+- `HeurekaCategoryNameProviderInterface` as it is specific to Heureka product feed
+   - [shopsys/product-feed-heureka](https://github.com/shopsys/product-feed-heureka) manages Heureka categories on its own since v0.5.0
+
 ### [shopsys/monorepo-tools]
 #### Added
 - bash scripts for building and splitting monolithic repository from existing packages
@@ -448,6 +453,43 @@ That's why is this section formatted differently.
 #### [2.3.0](https://github.com/shopsys/migrations/compare/v2.2.0...v2.3.0 ) - 2018-02-19
 ##### Changed
 - services.yml updated to Symfony 3.4 best practices
+
+### [shopsys/product-feed-interface]
+#### [0.5.0](https://github.com/shopsys/product-feed-interface/compare/v0.4.0...v0.5.0) - 2017-10-04
+- [`StandardFeedItemInterface`](src/StandardFeedItemInterface.php) contains ID of its main category 
+
+#### [0.4.0](https://github.com/shopsys/product-feed-interface/compare/v0.3.0...v0.4.0) - 2017-09-25
+##### Added
+- [CONTRIBUTING.md](CONTRIBUTING.md) 
+- [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) 
+- [`StandardFeedItemInterface`](./packages/product-feed-interface/src/StandardFeedItemInterface.php) has new method `isSellingDenied()` 
+- [`FeedConfigInterface`](./packages/product-feed-interface/src/FeedConfigInterface.php) has new method `getAdditionalInformation()` 
+- [`StandardFeedItemInterface`](./packages/product-feed-interface/src/StandardFeedItemInterface.php) has new method `getCurrencyShortcut()` 
+
+#### [0.3.0](https://github.com/shopsys/product-feed-interface/compare/v0.2.1...v0.3.0) - 2017-09-12
+##### Added
+- This Changelog
+- UPGRADE.md
+##### Removed
+- `FeedItemRepositoryInterface`
+- `FeedConfigInterface::getFeedItemRepository()`
+
+#### [0.2.1](https://github.com/shopsys/product-feed-interface/compare/v0.2.0...v0.2.1) - 2017-08-17
+##### Added
+- New interface for delivery feed items - `DeliveryFeedItemInterface`
+
+#### [0.2.0](https://github.com/shopsys/product-feed-interface/compare/v0.1.0...v0.2.0) - 2017-08-07
+##### Changed
+- `FeedItemInterface`: renamed method `getItemId()` to `getId()`
+- `FeedItemCustomValuesProviderInterface` renamed to `HeurekaCategoryNameProviderInterface`
+##### Removed
+- General data storage functionality extracted into separate package [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface)
+    - removed `FeedItemCustomValuesProviderInterface::getCustomValuesForItems()` and `FeedItemCustomValuesInterface`
+
+#### 0.1.0 - 2017-07-13
+##### Added
+- Package of interfaces providing compatibility between [Shopsys Framework](https://www.shopsys-framework.com) and product feed plugins.
+- `.travis.yml` file with Travis CI configuration
 
 ### [shopsys/plugin-interface]
 #### [0.3.0](https://github.com/shopsys/plugin-interface/compare/v0.2.0...v0.3.0) - 2017-10-04
