@@ -189,6 +189,12 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
     - they should be located in directory "Migrations" in the root of the bundle
 - command `shopsys:migrations:generate` now offers a list of available bundles for generating the migrations
 
+### [shopsys/plugin-interface]
+#### Removed
+- storing data via Data storage was removed
+    - removed interfaces `PluginDataStorageProviderInterface` and `DataStorageInterface`
+    - only Doctrine entities are further allowed for storing data
+
 #### [shopsys/shopsys]
 ##### Added
 - basic infrastructure so that the monorepo can be installed and used as standard application
@@ -270,6 +276,29 @@ That's why is this section formatted differently.
 #### [2.3.0](https://github.com/shopsys/migrations/compare/v2.2.0...v2.3.0 ) - 2018-02-19
 ##### Changed
 - services.yml updated to Symfony 3.4 best practices
+
+### [shopsys/plugin-interface]
+#### [0.3.0](https://github.com/shopsys/plugin-interface/compare/v0.2.0...v0.3.0) - 2017-10-04
+##### Added
+ - [CONTRIBUTING.md](https://github.com/shopsys/plugin-interface/blob/master/CONTRIBUTING.md)
+ - `DataStorageInterface` can return all saved data via `getAll()`
+ - `IteratedCronModuleInterface` and `SimpleCronModuleInterface`
+ 
+#### [0.2.0](https://github.com/shopsys/plugin-interface/compare/v0.1.0...v0.2.0) - 2017-09-06
+##### Added
+ - This Changelog
+ - interface for loading plugin's demo data
+     - `PluginDataFixtureInterface`
+ 
+#### 0.1.0 - 2017-08-04
+##### Added
+ - Package of interfaces providing compatibility between [Shopsys Framework](https://www.shopsys-framework.com) and plugins
+     - interfaces responsible for retrieving and saving plugin custom data
+         - `DataStorageInterface`
+         - `PluginDataStorageProviderInterface`
+     - interface responsible for extending CRUD with plugin custom sub-forms
+         - `PluginCrudExtensionInterface`
+ - `.travis.yml` file with Travis CI configuration
 
 ### [shopsys/project-base]
 #### 6.0.0-beta21 - 2018-03-05
