@@ -103,7 +103,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#102 - Protected visibility of all private properties and methods of facades](https://github.com/shopsys/shopsys/pull/102): 
     - visibility of all private properties and methods of facades was changed to protected 
         - protected visibility allows overriding of behavior from projects 
- 
+
+### [shopsys/product-feed-zbozi]
+##### Changed
+- [#116 - Visibility of properties and methods of DataFactories and Repositories is protected](https://github.com/shopsys/shopsys/pull/116):
+    - visibility of all private properties and methods of repositories of entities was changed to protected
+        - there are changed only repositories of entities because currently there was no need for extendibility of other repositories
+        - protected visibility allows overriding of behavior from projects
+- [Doctrine entities are used for storing data instead of using `DataStorageProviderInterface`](https://github.com/shopsys/shopsys/commit/3f32f513276f112d8ef4bdf854e413829bcf80f8)
+    - previously saved data will be migrated
+- [#102 - Protected visibility of all private properties and methods of facades](https://github.com/shopsys/shopsys/pull/102):
+    - visibility of all private properties and methods of facades was changed to protected
+        - protected visibility allows overriding of behavior from projects
+
 ### [shopsys/shopsys]
 #### Added
 - [#108 - demo entity extension](https://github.com/shopsys/shopsys/pull/108): 
@@ -209,6 +221,11 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
 ### [shopsys/product-feed-heureka]
 #### Changed
 - renamed [`TestStandardFeedItem`] to [`TestHeurekaStandardFeedItem`]
+- updated phpunit/phpunit to version 7
+
+### [shopsys/product-feed-zbozi]
+#### Changed
+- renamed [`TestStandardFeedItem`] to [`TestZboziStandardFeedItem`]
 - updated phpunit/phpunit to version 7
 
 ### [shopsys/product-feed-interface]
@@ -402,6 +419,67 @@ That's why is this section formatted differently.
     - [symfony/validator ^3.0](https://github.com/symfony/validator)
 ##### Changed
 - Dependency [shopsys/product-feed-interface] upgraded from ~0.1.0 to ~0.2.0 
+
+### [shopsys/product-feed-zbozi]
+#### [0.5.0](https://github.com/shopsys/product-feed-zbozi/compare/v0.4.2...v0.5.0) - 2018-02-19
+##### Changed
+- services.yml updated to Symfony 3.4 best practices 
+- updated shopsys/form-types-bundle to version 0.2.0 
+
+#### [0.4.2](https://github.com/shopsys/product-feed-zbozi/compare/v0.4.1...v0.4.2) - 2017-10-04
+##### Added
+- support for shopsys/plugin-interface 0.3.0 
+- support for shopsys/product-feed-interface 0.5.0 
+
+#### [0.4.1](https://github.com/shopsys/product-feed-zbozi/compare/v0.4.0...v0.4.1) - 2017-09-25
+##### Added
+- [CONTRIBUTING.md](https://github.com/shopsys/product-feed-zbozi/blob/master/CONTRIBUTING.md)
+##### Changed
+- Dependency [shopsys/product-feed-interface] upgraded from ~0.3.0 to ~0.4.0 
+- [`ZboziFeedConfig`](https://github.com/shopsys/product-feed-zbozi/blob/master/src/ZboziFeedConfig.php) now filters not sellable products 
+- [`ZboziFeedConfig`](https://github.com/shopsys/product-feed-zbozi/blob/master/src/ZboziFeedConfig.php) implemented method `getAdditionalData()` 
+- [`TestStandardFeedItem`](https://github.com/shopsys/product-feed-zbozi/blob/master/tests/TestStandardFeedItem.php) implemented method `getCurrencyCode()` 
+
+#### [0.4.0](https://github.com/shopsys/product-feed-zbozi/compare/v0.3.0...v0.4.0) - 2017-09-12
+##### Added
+- New dependencies for dev 
+    - phpunit/phpunit >=5.0.0,<6.0
+    - twig/twig 1.34.0
+    - twig/extensions 1.3.0
+- New automatic test that is controlling right behaviour of plugin 
+- Added travis build icon into [README.md](https://github.com/shopsys/product-feed-zbozi/blob/master/README.md) 
+##### Changed
+- Dependency [product-feed-interface](https://github.com/shopsys/product-feed-zbozi/blob/master/shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0 
+##### Removed
+- `ZboziFeedConfig::getFeedItemRepository()` 
+
+#### [0.3.0](https://github.com/shopsys/product-feed-zbozi/compare/v0.2.0...v0.3.0) - 2017-09-06
+##### Added
+- This Changelog 
+- UPGRADE.md 
+- Plugin demo data (cpc, cpc_search and show for 2 domains) 
+##### Changed
+- Dependency [plugin-interface](https://github.com/shopsys/plugin-interface) upgraded from ~0.1.0 to ~0.2.0 
+
+#### [0.2.0](https://github.com/shopsys/product-feed-zbozi/compare/v0.1.0...v0.2.0) - 2017-08-08
+##### Added
+- Retrieving custom plugin data and extension of product form with custom fields 
+    - show (offer in feeds)
+    - cpc (maximum price per click)
+    - cpc_search (maximum price per click in offers)
+- New dependencies 
+    - [shopsys/plugin-interface ~0.1.0](https://github.com/shopsys/plugin-interface)
+    - [shopsys/form-types-bundle ~0.1.0](https://github.com/shopsys/form-types-bundle)
+    - [symfony/form ^3.0](https://github.com/symfony/form)
+    - [symfony/translation ^3.0](https://github.com/symfony/translation)
+    - [symfony/validator ^3.0](https://github.com/symfony/validator)
+##### Changed
+- Dependency [product-feed-interface](https://github.com/shopsys/product-feed-zbozi/blob/master/shopsys/product-feed-interface) upgraded from ~0.1.0 to ~0.2.0 
+
+#### 0.1.0 - 2017-07-13
+##### Added
+- Extracted Zboží.cz product feed plugin from [Shopsys Framework](http://www.shopsys-framework.com/) 
+- `.travis.yml` file with Travis CI configuration
 
 ### [shopsys/product-feed-heureka-delivery]
 #### [0.3.0](https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.2...v0.3.0) - 2018-02-19
