@@ -12,15 +12,22 @@ RUN chmod +x /usr/local/bin/docker-install-composer && docker-install-composer
 # postgresql-dev needed by "pgsql" extension
 # libzip-dev needed by "zip" extension
 # autoconf needed by "redis" extension
+# freetype-dev needed by "gd" extension
+# libjpeg-turbo-dev needed by "gd" extension
 RUN apk add --update \
     libpng-dev \
     icu-dev \
     postgresql-dev \
     libzip-dev \
-    autoconf
+    autoconf \
+    freetype-dev \
+    libjpeg-turbo-dev
 
 # "zip" extension warns about deprecation if we do not use a system library
 RUN docker-php-ext-configure zip --with-libzip
+
+# "gd" extension needs to have specified jpeg and freetype dir for jpg/jpeg images support
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
 # install necessary PHP extensions requested by Composer
 RUN docker-php-ext-install \
