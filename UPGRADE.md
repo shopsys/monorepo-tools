@@ -14,6 +14,10 @@
 Before we managed to implement monorepo for our packages, we had slightly different versions for each of our package, 
 that's why is this section formatted differently.  
 
+### [shopsys/plugin-interface]
+#### From 0.2.0 to 0.3.0
+- all implementations of `DataStorageInterface` now must have implemented method `getAll()` for getting all saved data indexed by keys
+
 ### [shopsys/project-base]
 #### From 2.0.0-beta.21.0 to 7.0.0-alpha1      
 - manual upgrade from this version will be very hard because of BC-breaking extraction of [shopsys/framework](https://github.com/shopsys/framework)  
