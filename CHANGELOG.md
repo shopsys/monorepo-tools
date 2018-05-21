@@ -460,6 +460,21 @@ That's why is this section formatted differently.
 ##### Deleted
 - Redundant rules which were already covered by other rules
 
+### [shopsys/form-types-bundle]
+#### [0.2.0](https://github.com/shopsys/form-types-bundle/compare/v0.1.0...v0.2.0) - 2018-02-19
+##### Added
+- This Changelog
+- [CONTRIBUTING.md](https://github.com/shopsys/form-types-bundle/blob/master/CONTRIBUTING.md)
+##### Changed
+- services.yml updated to Symfony 3.4 best practices
+
+#### 0.1.0 - 2017-08-04
+##### Added
+- Custom form types extracted from [Shopsys Framework](http://www.shopsys-framework.com/), see [README](https://github.com/shopsys/form-types-bundle/blob/master/README.md) for more information
+    - MultidomainType
+    - YesNoType
+- `.travis.yml` file with Travis CI configuration
+
 [Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...HEAD
 [shopsys/shopsys]: https://github.com/shopsys/shopsys
 [shopsys/project-base]: https://github.com/shopsys/project-base
