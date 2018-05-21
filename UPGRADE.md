@@ -41,6 +41,35 @@ that's why is this section formatted differently.
     you will be prompted to fill it out again during `composer install`  
 - all implementations of `StandardFeedItemInterface` must implement methods `isSellingDenied()` and `getCurrencyCode()`, see [product-feed-interface](https://github.com/shopsys/product-feed-interface/blob/master/UPGRADE.md#from-030-to-040) 
 
+### [shopsys/coding-standards]
+#### From 3.x to 4.0
+- In order to run all checks, there is new unified way - execute `php vendor/bin/ecs check /path/to/project --config=vendor/shopsys/coding-standards/easy-coding-standard.neon`
+    - If you are overriding rules configuration in your project, it is necessary to do so in neon configuration file, see [example bellow](./example-of-custom-configuration-file).
+    - See [EasyCodingStandard docs](https://github.com/Symplify/EasyCodingStandard#usage) for more information
+##### Example of custom configuration file
+###### Version 3.x and lower
+```php
+// custom phpcs-fixer.php_cs
+<?php
+
+$originalConfig = include __DIR__ . '/../vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs';
+
+$originalConfig->getFinder()
+    ->exclude('_generated');
+
+return $originalConfig;
+```
+###### Version 4.0 and higher
+```neon
+#custom-coding-standard.neon
+includes:
+    - vendor/symplify/easy-coding-standard/config/psr2-checkers.neon
+    - vendor/shopsys/coding-standards/shopsys-coding-standard.neon
+parameters:
+    exclude_files:
+        - *_generated/*
+
+```
 
 [From 7.0.0-alpha1 to Unreleased]:(https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...HEAD) 
 
