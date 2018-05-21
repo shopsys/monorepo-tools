@@ -398,6 +398,47 @@ That's why is this section formatted differently.
 ##### Changed
 - Dependency [shopsys/product-feed-interface] upgraded from ~0.1.0 to ~0.2.0 
 
+### [shopsys/product-feed-heureka-delivery]
+#### [0.3.0](https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.2...v0.3.0) - 2018-02-19
+##### Changed
+- services.yml updated to Symfony 3.4 best practices
+- updated phpunit/phpunit to version 7
+
+#### [0.2.2](https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.1...v0.2.2) - 2017-10-04
+##### Added
+- support for [shopsys/product-feed-interface] 0.5.0
+
+#### [0.2.1](https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.0...v0.2.1) - 2017-09-25
+##### Added
+- [CONTRIBUTING.md](https://github.com/shopsys/product-feed-heureka-delivery/blob/master/CONTRIBUTING.md)
+
+##### Changed
+- Dependency [shopsys/product-feed-interface] upgraded from ~0.3.0 to ~0.4.0
+
+#### [0.2.0](https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.1.1...v0.2.0) - 2017-09-12
+##### Added
+- This Changelog (@vitek-rostislav)
+- New dependencies for dev(@MattCzerner)
+    - phpunit/phpunit >=5.0.0,<6.0
+    - twig/twig 1.34.0
+    - twig/extensions 1.3.0
+- New automatic test that is controlling right behaviour of plugin
+- Added travis build icon into [README.md](https://github.com/shopsys/product-feed-heureka-delivery/blob/master/README.md)
+##### Changed
+- Dependency [plugin-interface](https://github.com/shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0
+##### Removed
+- `HeurekaDeliveryFeedConfig::getFeedItemRepository()`
+
+#### [0.1.1](https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.1.0...v0.1.1) - 2017-08-18
+##### Fixed
+- Usage of `FeedItemInterface::getId()` method in `feed.xml.twig`
+    - it was renamed from `FeedItemInterface::getItemId()` in [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface) v0.2.0
+
+#### 0.1.0 - 2017-08-10
+##### Added
+- Extracted Heureka product delivery feed plugin from [Shopsys Framework](http://www.shopsys-framework.com/)
+- `.travis.yml` file with Travis CI configuration
+
 #### 0.1.0 - 2017-07-13
 ##### Added
 - Extracted Heureka product feed plugin from [Shopsys Framework](http://www.shopsys-framework.com/)
