@@ -339,7 +339,7 @@ That's why is this section formatted differently.
 - services.yml updated to Symfony 3.4 best practices
 
 #### [0.5.1](https://github.com/shopsys/product-feed-heureka/compare/v0.5.0...v0.5.1) - 2017-10-06
-- names of Heureka categories are now cached by category ID in [`HeurekaFeedConfig`](./packages/product-feed-heureka/src/HeurekaFeedConfig.php) 
+- names of Heureka categories are now cached by category ID in [`HeurekaFeedConfig`](./packages/product-feed-heureka/src/HeurekaFeedConfig.php)
 
 #### [0.5.0](https://github.com/shopsys/product-feed-heureka/compare/v0.4.2...v0.5.0) - 2017-10-05
 ##### Added
@@ -357,7 +357,7 @@ That's why is this section formatted differently.
 ##### Added
 - [CONTRIBUTING.md](https://github.com/shopsys/product-feed-heureka/blob/master/CONTRIBUTING.md)
 ##### Changed
-- Dependency [product-feed-interface](https://github.com/shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0 
+- Dependency [product-feed-interface](https://github.com/shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0
 - [`HeurekaFeedConfig`](https://github.com/shopsys/product-feed-heureka/blob/master/src/HeurekaFeedConfig.php) now filters not sellable products 
 - [`HeurekaFeedConfig`](https://github.com/shopsys/product-feed-heureka/blob/master/src/HeurekaFeedConfig.php) implemented method `getAdditionalData()` 
 - [`TestStandardFeedItem`](https://github.com/shopsys/product-feed-heureka/blob/master/tests/TestStandardFeedItem.php) implemented method `getCurrencyCode()` 
@@ -397,6 +397,11 @@ That's why is this section formatted differently.
     - [symfony/validator ^3.0](https://github.com/symfony/validator)
 ##### Changed
 - Dependency [shopsys/product-feed-interface] upgraded from ~0.1.0 to ~0.2.0 
+
+#### 0.1.0 - 2017-07-13
+##### Added
+- Extracted Heureka product feed plugin from [Shopsys Framework](http://www.shopsys-framework.com/)
+- `.travis.yml` file with Travis CI configuration
 
 ### [shopsys/migrations]
 #### [2.3.0](https://github.com/shopsys/migrations/compare/v2.2.0...v2.3.0 ) - 2018-02-19
