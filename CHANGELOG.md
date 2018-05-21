@@ -177,6 +177,13 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
 #### Changed
 - added support of phpunit/phpunit ^6.0 and ^7.0 (@simara-svatopluk)
 
+### [shopsys/migrations]
+#### Changed
+- updated phpunit/phpunit to version 7
+- DB migrations are installed from all registered bundles
+    - they should be located in directory "Migrations" in the root of the bundle
+- command `shopsys:migrations:generate` now offers a list of available bundles for generating the migrations
+
 #### [shopsys/shopsys]
 ##### Added
 - basic infrastructure so that the monorepo can be installed and used as standard application
@@ -253,6 +260,11 @@ That's why is this section formatted differently.
 ##### Added 
 - Extracted HTTP smoke testing functionality from [Shopsys Framework](http://www.shopsys-framework.com/)
 - `.travis.yml` file with Travis CI configuration
+
+### [shopsys/migrations]
+#### [2.3.0](https://github.com/shopsys/migrations/compare/v2.2.0...v2.3.0 ) - 2018-02-19
+##### Changed
+- services.yml updated to Symfony 3.4 best practices
 
 ### [shopsys/project-base]
 #### 6.0.0-beta21 - 2018-03-05
