@@ -177,6 +177,11 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
 #### Changed
 - added support of phpunit/phpunit ^6.0 and ^7.0 (@simara-svatopluk)
 
+### [shopsys/monorepo-tools]
+#### Added
+- bash scripts for building and splitting monolithic repository from existing packages
+    - scripts are designed to be re-used even if different use-cases
+
 ### [shopsys/migrations]
 #### Changed
 - updated phpunit/phpunit to version 7
