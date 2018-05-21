@@ -23,6 +23,59 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * [shopsys/monorepo-tools](./packages/monorepo-tools/CHANGELOG.md)
 
 ## [Unreleased]
+### [shopsys/framework]
+#### Added
+- [#74 - Export personal information](https://github.com/shopsys/shopsys/pull/74):
+    - Countries have code in ISO 3166-1 alpha-2 
+    - admin: added site content and email template for personal data export 
+- [#95 - Entity name resolving in EntityManager, QueryBuilders and Repositories](https://github.com/shopsys/shopsys/pull/95):
+    - extended glass-box model entities are now used instead of their parent entities in EntityManager and QueryBuilders 
+        - this removes the need to manually override all repositories that work with extended entities
+        - the functionality is automatically tested in [shopsys/project-base](https://github.com/shopsys/project-base)
+            - see `\Tests\ShopBundle\Database\EntityExtension\EntityExtensionTest`
+- [#107 - Entities by factories](https://github.com/shopsys/shopsys/pull/107):
+    - entities are created by factories 
+        - allowing override factory that creates extended entities in project-base
+
+#### Changed
+- [#102 - Protected visibility of all private properties and methods of facades](https://github.com/shopsys/shopsys/pull/102):
+    - visibility of all private properties and methods of repositories of entities was changed to protected 
+        - there are changed only repositories of entities because currently there was no need for extendibility of other repositories
+        - protected visibility allows overriding of behavior from projects
+- [#116 - Visibility of properties and methods of DataFactories and Repositories is protected](https://github.com/shopsys/shopsys/pull/116)
+    - visibility of all private properties and methods of DataFactories was changed to protected 
+        - protected visibility allows overriding of behavior from projects
+- [#113 - terminology: expression "indexes" is used now instead of "indices"](https://github.com/shopsys/shopsys/pull/113)
+    - unification of terminology - indices and indexes 
+        - there is only "indexes" expression used now
+- [#103 - Defaultly rendered form types](https://github.com/shopsys/shopsys/pull/103):
+    - `CustomerFormType`, `PaymentFormType` and `TransportFormType` are now all rendered using FormType classes and they
+        are ready for extension from `project-base` side.
+- [#70 - extraction of project-independent part of Shopsys\Environment](https://github.com/shopsys/shopsys/pull/70):
+    - moved constants with types of environment from [shopsys/project-base](https://github.com/shopsys/project-base) 
+        - moved from `\Shopsys\Environment` to `\Shopsys\FrameworkBundle\Component\Environment\EnvironmentType`
+- [#87 - service deprecations](https://github.com/shopsys/shopsys/pull/87):
+    - service definition follows Symfony 4 autowiring standards (@EdoBarnas)
+        - FQN is always used as service ID
+    - usage of interfaces is preferred, if possible
+    - all services are explicitly defined
+        - services with common suffixes (`*Facade`, `*Repository` etc.) are auto-discovered
+        - see `services.yml` for details
+- [#91 - all exception interfaces are now Throwable](https://github.com/shopsys/shopsys/pull/91):
+    - all exception interfaces are now Throwable 
+    - visibility of all private properties and methods of facades was changed to protected 
+        - protected visibility allows overriding of behavior from projects
+
+#### Fixed
+- [#89 - choiceList values are prepared for js ChoiceToBooleanArrayTransformer](https://github.com/shopsys/shopsys/pull/89) 
+    - choiceList values are prepared for js Choice(s)ToBooleanArrayTransformer 
+        - fixed "The choices were not found" console js error in the params filter
+- [relevant CHANGELOG.md files updated](https://github.com/shopsys/shopsys/commit/68d730ac9eed9f8cf29c843f89718194ad51b1da):
+    - command `shopsys:server:run` for running PHP built-in web server for a chosen domain
+- [#108 - demo entity extension](https://github.com/shopsys/shopsys/pull/108)
+    - db indices for product name are now created for translations in all locales 
+    - `LoadDataFixturesCommand` - fixed the `--fixtures` option description 
+
 ### [shopsys/shopsys]
 #### Added
 - [#108 - demo entity extension](https://github.com/shopsys/shopsys/pull/108): 
@@ -79,6 +132,42 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 7.0.0-alpha1 - 2018-04-12
 - We are releasing version 7 (open-source project known as Shopsys Framework) to better distinguish it from Shopsys 6
   (internal platform of Shopsys company) and older versions that we have been developing and improving for 15 years.
+
+### [shopsys/framework]
+#### Added
+- extracted core functionality of [Shopsys Framework](http://www.shopsys-framework.com/)
+from its open-box repository [shopsys/project-base](https://github.com/shopsys/project-base)
+    - this will allow the core to be upgraded via `composer update` in different project implementations
+    - core functionality includes:
+        - all Shopsys-specific Symfony commands
+        - model and components with business logic and their data fixtures
+        - Symfony controllers with form definitions, Twig templates and all javascripts of the web-based administration
+        - custom form types, form extensions and twig extensions
+        - compiler passes to allow basic extensibility with plugins (eg. product feeds)
+    - this is going to be a base of a newly built architecture of [Shopsys Framework](http://www.shopsys-framework.com/)
+- styles related to admin extracted from [shopsys/project-base](https://github.com/shopsys/project-base) package
+    - this will allow styles to be upgraded via `composer update` in project implementations
+- glass-box model entities are now extensible from project-base without changing the framework code
+    - the entity extension is a work in progress
+    - currently it would require you to override a lot of classes to use the extended entities instead of the parents
+- [Shopsys Community License](https://github.com/shopsys/framework/blob/master/LICENSE)
+
+#### Changed
+- configuration of form types in administration is enabled using form type options
+    -  following form types configured using options:
+        - VatSettingsFormType
+        - SliderItemFormType
+        - ShopInfoSettingFormType
+        - SeoSettingFormType
+        - MailSettingFormType
+        - LegalConditionsSettingFormType
+        - HeurekaShopCertificationFormType
+        - CustomerCommunicationFormType
+        - CookiesSettingFormType
+        - CategoryFormType
+        - ArticleFormType
+        - AdvertFormType
+        - AdministratorFormType
 
 #### [shopsys/shopsys]
 ##### Added
