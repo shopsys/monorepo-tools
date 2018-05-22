@@ -66,6 +66,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - all exception interfaces are now Throwable 
     - visibility of all private properties and methods of facades was changed to protected 
         - protected visibility allows overriding of behavior from projects
+- [#130 - License condition for turnover changed from 12 to 3 months](https://github.com/shopsys/shopsys/pull/130)
 
 #### Fixed
 - [#89 - choiceList values are prepared for js ChoiceToBooleanArrayTransformer](https://github.com/shopsys/shopsys/pull/89) 
