@@ -87,13 +87,8 @@ class TransportFormType extends AbstractType
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],
-            ]);
-
-        $builderAdditionalInformationGroup = $builder->create('additionalInformation', GroupType::class, [
-            'label' => t('Additional information'),
-        ]);
-
-        $builderAdditionalInformationGroup
+                'label' => t('VAT'),
+            ])
             ->add('payments', ChoiceType::class, [
                 'required' => false,
                 'choices' => $this->paymentFacade->getAll(),
@@ -102,13 +97,14 @@ class TransportFormType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'empty_message' => t('You have to create some payment first.'),
+                'label' => t('Available payment methods'),
             ]);
 
-        $builderDescriptionGroup = $builder->create('description', GroupType::class, [
-            'label' => t('Description'),
+        $builderAdditionalInformationGroup = $builder->create('additionalInformation', GroupType::class, [
+            'label' => t('Additional information'),
         ]);
 
-        $builderDescriptionGroup
+        $builderAdditionalInformationGroup
             ->add('description', LocalizedType::class, [
                 'required' => false,
                 'entry_type' => TextareaType::class,
@@ -144,7 +140,6 @@ class TransportFormType extends AbstractType
         $builder
             ->add($builderBasicInformationGroup)
             ->add($builderAdditionalInformationGroup)
-            ->add($builderDescriptionGroup)
             ->add($builderImageGroup);
     }
 

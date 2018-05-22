@@ -92,13 +92,7 @@ class PaymentFormType extends AbstractType
                     new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
                 ],
                 'label' => t('VAT'),
-            ]);
-
-        $builderAdditionalInformationGroup = $builder->create('additionalInformation', GroupType::class, [
-            'label' => t('Additional information'),
-        ]);
-
-        $builderAdditionalInformationGroup
+            ])
             ->add('transports', ChoiceType::class, [
                 'required' => false,
                 'choices' => $this->transportFacade->getAll(),
@@ -107,7 +101,14 @@ class PaymentFormType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'empty_message' => t('You have to create some shipping first.'),
-            ])
+                'label' => t('Available shipping methods'),
+            ]);
+
+        $builderAdditionalInformationGroup = $builder->create('additionalInformation', GroupType::class, [
+            'label' => t('Additional information'),
+        ]);
+
+        $builderAdditionalInformationGroup
             ->add('description', LocalizedType::class, [
                 'required' => false,
                 'entry_type' => TextareaType::class,
