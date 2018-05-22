@@ -11,6 +11,8 @@ While this is not a very sophisticated check, it can answer the essential questi
 It prevents you from triggering *500 Server Error* on some seemingly unrelated page when you are doing changes in shared code.
 Moreover, after initial configuration it is almost maintenance-free as it checks any new routes automatically.
 
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+
 ## Installation
 Add the package to `require-dev` in your application:
 ```
@@ -150,3 +152,4 @@ What to do when you are in troubles or need some help? Best way is to contact us
 
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
+[shopsys/shopsys]:(https://github.com/shopsys/shopsys)

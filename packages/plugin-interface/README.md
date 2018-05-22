@@ -5,6 +5,8 @@
 
 Package of interfaces providing compatibility between [Shopsys Framework](https://www.shopsys-framework.com) and plugins.
 
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+
 ## Features
 This package contains interfaces responsible for general functionality usable in almost any plugin.
 For specific functionality, such as generating product feeds, there are [separate repositories](https://github.com/search?q=topic%3Aplugin-interface+org%3Ashopsys&type=Repositories), eg. [ProductFeedInterface](https://github.com/shopsys/product-feed-interface/).
@@ -228,3 +230,4 @@ What to do when you are in troubles or need some help? Best way is to contact us
 
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
+[shopsys/shopsys]:(https://github.com/shopsys/shopsys)
