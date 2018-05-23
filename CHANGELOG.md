@@ -110,6 +110,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - [cookbook](docs/cookbook/adding-new-attribute-to-an-entity.md) for adding new attribute to an entity
 
 #### Changed
+- [#128 - CHANGELOG.md new format](https://github.com/shopsys/shopsys/pull/128)
 - [#110 - PHP-FPM Docker image tweaked for easier usage](https://github.com/shopsys/shopsys/pull/110):
     - PHP-FPM Docker image tweaked for easier usage
     - switched to Docker image `php:7.2-fpm-alpine` instead of `phpdockerio/php72-fpm:latest`
