@@ -24,6 +24,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### [shopsys/project-base]
+#### Fixed
+- [#131 - correct rendering of checkbox label](https://github.com/shopsys/shopsys/pull/131):
+    - `Front/Form/theme.html.twig`: block `checkbox_row` now uses block `form_label` for proper label rendering
+        - the absence of `label` html tag was causing problems with JS validation (the error message was not included in the popup overview)
 
 ## [7.0.0-alpha2] - 2018-05-24
 ### [shopsys/framework]
@@ -100,7 +105,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         - see https://github.com/symfony/swiftmailer-bundle/commit/5edfbd39eaefb176922a346c16b0ae3aaeec87e0
         - the new setting requires array instead of string so the parameter `mailer_master_email_address` is wrapped into array in config
 - [`FpJsFormValidator` error in console on FE order pages](https://github.com/shopsys/shopsys/commit/fbadde0966e92941dd470591d6a8a4924a798aa8)
-- [failure during Docker image build triggered by `E: Unable to locate package postgresql-client-9.5`](https://github.com/shopsys/shopsys/pull/110)
+- [failure during Docker image build triggered by `E: Unable to locate package postgresql-client-9.5`](https://github.com/shopsys/shopsys/pull/110) 
 
 #### Removed
 - [#94 - Installation guide update](https://github.com/shopsys/shopsys/pull/94): 
