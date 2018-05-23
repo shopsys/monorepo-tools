@@ -5,6 +5,8 @@
 
 Package of interfaces providing compatibility between [Shopsys Framework](https://www.shopsys-framework.com) and product feed plugins. 
 
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+
 ## How to implement a plugin
 Product feed plugins are implemented in a form of a [Symfony bundle](http://symfony.com/doc/current/bundles.html).
 For tips on how to write a new bundle see [Best Practices for Reusable Bundles](https://symfony.com/doc/current/bundles/best_practices.html).
@@ -47,3 +49,4 @@ What to do when you are in troubles or need some help? Best way is to contact us
 
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
+[shopsys/shopsys]:(https://github.com/shopsys/shopsys)

@@ -5,6 +5,8 @@
 
 Symfony bundle adding form types for usage in [Shopsys Framework](https://www.shopsys-framework.com), its components and plugins.
 
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+
 ## Installation
 The plugin is a Symfony bundle and is installed in the same way:
 
@@ -85,3 +87,5 @@ Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/m
 What to do when you are in troubles or need some help? Best way is to contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/)
 
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
+
+[shopsys/shopsys]:(https://github.com/shopsys/shopsys)

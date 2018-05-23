@@ -1,50 +1,953 @@
 # Changelog
-All notable changes, that change in some way the behavior of monorepo and do not interfere only with a particular package, will be documented in this file.
+All notable changes, that change in some way the behavior of any of our packages that are maintained by monorepo repository.
 
-Changes, that change the specific package or project-base, will be documented in the changelog of modified package.
+There is a list of all the repositories maintained by monorepo, changes in log below are ordered as this list:
+
+* [shopsys/framework]
+* [shopsys/project-base]
+* [shopsys/shopsys]
+* [shopsys/coding-standards]
+* [shopsys/form-types-bundle]
+* [shopsys/http-smoke-testing]
+* [shopsys/migrations]
+* [shopsys/monorepo-tools]
+* [shopsys/plugin-interface]
+* [shopsys/product-feed-google]
+* [shopsys/product-feed-heureka]
+* [shopsys/product-feed-heureka-delivery]
+* [shopsys/product-feed-interface]
+* [shopsys/product-feed-zbozi]
+
+Packages are formatted by release version. You can see all the changes done to package that you carry about with this tree.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Changelogs of repositories maintained by monorepo
-
-* [shopsys/project-base](./project-base/CHANGELOG.md)
-* [shopsys/framework](./packages/framework/CHANGELOG.md)
-* [shopsys/product-feed-zbozi](./packages/product-feed-zbozi/CHANGELOG.md)
-* [shopsys/product-feed-google](./packages/product-feed-google/CHANGELOG.md)
-* [shopsys/product-feed-heureka](./packages/product-feed-heureka/CHANGELOG.md)
-* [shopsys/product-feed-heureka-delivery](./packages/product-feed-heureka-delivery/CHANGELOG.md)
-* [shopsys/product-feed-interface](./packages/product-feed-interface/CHANGELOG.md)
-* [shopsys/plugin-interface](./packages/plugin-interface/CHANGELOG.md)
-* [shopsys/coding-standards](./packages/coding-standards/CHANGELOG.md)
-* [shopsys/http-smoke-testing](./packages/http-smoke-testing/CHANGELOG.md)
-* [shopsys/form-types-bundle](./packages/form-types-bundle/CHANGELOG.md)
-* [shopsys/migrations](./packages/migrations/CHANGELOG.md)
-* [shopsys/monorepo-tools](./packages/monorepo-tools/CHANGELOG.md)
-
 ## [Unreleased]
-### Added
-- [cookbook](docs/cookbook/adding-new-attribute-to-an-entity.md) for adding new attribute to an entity (@vitek-rostislav)
+### [shopsys/framework]
+#### Added
+- [#74 - Export personal information](https://github.com/shopsys/shopsys/pull/74):
+    - Countries have code in ISO 3166-1 alpha-2 
+    - admin: added site content and email template for personal data export 
+- [#95 - Entity name resolving in EntityManager, QueryBuilders and Repositories](https://github.com/shopsys/shopsys/pull/95):
+    - extended glass-box model entities are now used instead of their parent entities in EntityManager and QueryBuilders 
+        - this removes the need to manually override all repositories that work with extended entities
+        - the functionality is automatically tested in [shopsys/project-base](https://github.com/shopsys/project-base)
+            - see `\Tests\ShopBundle\Database\EntityExtension\EntityExtensionTest`
+- [#107 - Entities by factories](https://github.com/shopsys/shopsys/pull/107):
+    - entities are created by factories 
+        - allowing override factory that creates extended entities in project-base
 
-### Changed
-- all installation guides verified and tweaked (@TomasLudvik)
-    - Docker installation supported on Linux, MacOS and Windows 10 Pro and higher (recommended way of installing the application)
-    - native installation is also supported (recommended on Windows 10 Home and lower)
-- as a rule, using minor versions of docker images (eg. `1.2` or `1.2-alpine`) if possible (@MattCzerner)
-- docs and `docker-compose.yml` templates reflect [changes of Docker images in shopsys/project-base](./project-base/CHANGELOG.md) (@PetrHeinz, @MattCzerner)
-- `docker-compose-win.yml.dist` created for Windows OS which creates local volume because of permission problems with
-    `postgresql` mounting (@MattCzerner)
-- docs: changed `./phing` instruction code with `php phing` to make it work with all operating systems (@MattCzerner)
+#### Changed
+- [#102 - Protected visibility of all private properties and methods of facades](https://github.com/shopsys/shopsys/pull/102):
+    - visibility of all private properties and methods of repositories of entities was changed to protected 
+        - there are changed only repositories of entities because currently there was no need for extendibility of other repositories
+        - protected visibility allows overriding of behavior from projects
+- [#116 - Visibility of properties and methods of DataFactories and Repositories is protected](https://github.com/shopsys/shopsys/pull/116)
+    - visibility of all private properties and methods of DataFactories was changed to protected 
+        - protected visibility allows overriding of behavior from projects
+- [#113 - terminology: expression "indexes" is used now instead of "indices"](https://github.com/shopsys/shopsys/pull/113)
+    - unification of terminology - indices and indexes 
+        - there is only "indexes" expression used now
+- [#103 - Defaultly rendered form types](https://github.com/shopsys/shopsys/pull/103):
+    - `CustomerFormType`, `PaymentFormType` and `TransportFormType` are now all rendered using FormType classes and they
+        are ready for extension from `project-base` side.
+- [#70 - extraction of project-independent part of Shopsys\Environment](https://github.com/shopsys/shopsys/pull/70):
+    - moved constants with types of environment from [shopsys/project-base](https://github.com/shopsys/project-base) 
+        - moved from `\Shopsys\Environment` to `\Shopsys\FrameworkBundle\Component\Environment\EnvironmentType`
+- [#87 - service deprecations](https://github.com/shopsys/shopsys/pull/87):
+    - service definition follows Symfony 4 autowiring standards (@EdoBarnas)
+        - FQN is always used as service ID
+    - usage of interfaces is preferred, if possible
+    - all services are explicitly defined
+        - services with common suffixes (`*Facade`, `*Repository` etc.) are auto-discovered
+        - see `services.yml` for details
+- [#91 - all exception interfaces are now Throwable](https://github.com/shopsys/shopsys/pull/91):
+    - all exception interfaces are now Throwable 
+    - visibility of all private properties and methods of facades was changed to protected 
+        - protected visibility allows overriding of behavior from projects
 
-### Fixed
-- documentation: missing redis extension in required php extensions (@pk16011990)
-- admin: e-mail validation in customer editation is working correctly now (@TomasLudvik)
+#### Fixed
+- [#89 - choiceList values are prepared for js ChoiceToBooleanArrayTransformer](https://github.com/shopsys/shopsys/pull/89) 
+    - choiceList values are prepared for js Choice(s)ToBooleanArrayTransformer 
+        - fixed "The choices were not found" console js error in the params filter
+- [relevant CHANGELOG.md files updated](https://github.com/shopsys/shopsys/commit/68d730ac9eed9f8cf29c843f89718194ad51b1da):
+    - command `shopsys:server:run` for running PHP built-in web server for a chosen domain
+- [#108 - demo entity extension](https://github.com/shopsys/shopsys/pull/108)
+    - db indices for product name are now created for translations in all locales 
+    - `LoadDataFixturesCommand` - fixed the `--fixtures` option description 
+
+### [shopsys/project-base]
+#### Added
+- [#74 - Export personal information](https://github.com/shopsys/shopsys/pull/74): 
+    - frontend: added site for requesting personal data export [@stanoMilan]
+- [#94 - Installation guide update](https://github.com/shopsys/shopsys/pull/94): 
+    - support for [native installation](https://github.com/shopsys/shopsys/blob/master/docs/installation/native-installation.md) of the application
+
+#### Changed
+- [#70 - extraction of project-independent part of Shopsys\Environment](https://github.com/shopsys/shopsys/pull/70):
+    - moved constants with types of environment into [shopsys/framework](https://github.com/shopsys/framework)
+    - moved from `\Shopsys\Environment` to `\Shopsys\FrameworkBundle\Component\Environment\EnvironmentType`
+- [Dependency Injection strict mode is now enabled](https://github.com/shopsys/shopsys/commit/cdcb51268d56770ae460fe22b41cc09f51c4aab6) [@EdoBarnas]: 
+    - disables autowiring features that were removed in Symfony 4
+
+#### Fixed
+- [#92 - swiftmailer setting delivery_address renamed to delivery_addresses](https://github.com/shopsys/shopsys/pull/92):
+    - swiftmailer setting `delivery_address` renamed to `delivery_addresses` as the former does not exist anymore in version 3.*
+        - see https://github.com/symfony/swiftmailer-bundle/commit/5edfbd39eaefb176922a346c16b0ae3aaeec87e0
+        - the new setting requires array instead of string so the parameter `mailer_master_email_address` is wrapped into array in config
+- [`FpJsFormValidator` error in console on FE order pages](https://github.com/shopsys/shopsys/commit/fbadde0966e92941dd470591d6a8a4924a798aa8)
+- [failure during Docker image build triggered by `E: Unable to locate package postgresql-client-9.5`](https://github.com/shopsys/shopsys/pull/110)
+
+#### Removed
+- [#94 - Installation guide update](https://github.com/shopsys/shopsys/pull/94): 
+    - support of installation using Docker for Windows 10 Home and lower
+    - virtualization is extremely slow, native installation has much better results in such case
+
+### [shopsys/shopsys]
+#### Added
+- [#108 - demo entity extension](https://github.com/shopsys/shopsys/pull/108): 
+    - [cookbook](docs/cookbook/adding-new-attribute-to-an-entity.md) for adding new attribute to an entity
+
+#### Changed
+- [#128 - CHANGELOG.md new format](https://github.com/shopsys/shopsys/pull/128)
+- [#110 - PHP-FPM Docker image tweaked for easier usage](https://github.com/shopsys/shopsys/pull/110):
+    - PHP-FPM Docker image tweaked for easier usage
+    - switched to Docker image `php:7.2-fpm-alpine` instead of `phpdockerio/php72-fpm:latest`
+            - official PHP Docker image is much more stable and provides tags other than `latest`
+            - built on Alpine linux which uses `apk` instead of `apt-get`
+            - in the container there is no `bash` installed, use `sh` instead
+    - all installation guides verified and tweaked
+        - Docker installation supported on Linux, MacOS and Windows 10 Pro and higher (recommended way of installing the application)
+        - native installation is also supported (recommended on Windows 10 Home and lower)
+    - as a rule, using minor versions of docker images (eg. `1.2` or `1.2-alpine`) if possible
+    - docs and `docker-compose.yml` templates reflect [changes of Docker images in shopsys/project-base]
+    - `docker-compose-win.yml.dist` created for Windows OS which creates local volume because of permission problems with
+        `postgresql` mounting
+    - docs: changed `./phing` instruction code with `php phing` to make it work with all operating systems
+
+#### Fixed
+- [#117 - documentation: missing redis extension in required php extensions](https://github.com/shopsys/shopsys/pull/117) [@pk16011990]
+- [#124 - Admin: Customer cannot be saved + fixed js error from administration console](https://github.com/shopsys/shopsys/pull/124): 
+    - admin: e-mail validation in customer editation is working correctly now
+
+### [shopsys/http-smoke-testing]
+#### Added
+- [Troubleshooting section in `README.md` with explanation why tests do not fail on non-existing routes](https://github.com/shopsys/http-smoke-testing/commit/8f700eda96c2f6e1b018e56f5b03a46d09b4ae00)
+
+### [shopsys/product-feed-google]
+#### Changed
+- [#116 - Visibility of properties and methods of DataFactories and Repositories is protected](https://github.com/shopsys/shopsys/pull/116):
+    - visibility of all private properties and methods of repositories of entities was changed to protected
+        - there are changed only repositories of entities because currently there was no need for extendibility of other repositories
+        - protected visibility allows overriding of behavior from projects
+- [Doctrine entities are used for storing data instead of using `DataStorageProviderInterface`](https://github.com/shopsys/shopsys/commit/3f32f513276f112d8ef4bdf854e413829bcf80f8)
+    - previously saved data will be migrated
+- [#102 - Protected visibility of all private properties and methods of facades](https://github.com/shopsys/shopsys/pull/102):
+    - visibility of all private properties and methods of facades was changed to protected
+        - protected visibility allows overriding of behavior from projects
+
+### [shopsys/product-feed-heureka] 
+#### Changed 
+- [#116 - Visibility of properties and methods of DataFactories and Repositories is protected](https://github.com/shopsys/shopsys/pull/116): 
+    - visibility of all private properties and methods of repositories of entities was changed to protected 
+        - there are changed only repositories of entities because currently there was no need for extendibility of other repositories 
+        - protected visibility allows overriding of behavior from projects 
+- [Doctrine entities are used for storing data instead of using `DataStorageProviderInterface`](https://github.com/shopsys/shopsys/commit/3f32f513276f112d8ef4bdf854e413829bcf80f8) 
+    - previously saved data will be migrated 
+- [#102 - Protected visibility of all private properties and methods of facades](https://github.com/shopsys/shopsys/pull/102): 
+    - visibility of all private properties and methods of facades was changed to protected 
+        - protected visibility allows overriding of behavior from projects 
+
+### [shopsys/product-feed-zbozi]
+##### Changed
+- [#116 - Visibility of properties and methods of DataFactories and Repositories is protected](https://github.com/shopsys/shopsys/pull/116):
+    - visibility of all private properties and methods of repositories of entities was changed to protected
+        - there are changed only repositories of entities because currently there was no need for extendibility of other repositories
+        - protected visibility allows overriding of behavior from projects
+- [Doctrine entities are used for storing data instead of using `DataStorageProviderInterface`](https://github.com/shopsys/shopsys/commit/3f32f513276f112d8ef4bdf854e413829bcf80f8)
+    - previously saved data will be migrated
+- [#102 - Protected visibility of all private properties and methods of facades](https://github.com/shopsys/shopsys/pull/102):
+    - visibility of all private properties and methods of facades was changed to protected
+        - protected visibility allows overriding of behavior from projects
 
 ## 7.0.0-alpha1 - 2018-04-12
-### Added
-- basic infrastructure so that the monorepo can be installed and used as standard application (@Miroslav-Stopka)
+- We are releasing version 7 (open-source project known as Shopsys Framework) to better distinguish it from Shopsys 6
+  (internal platform of Shopsys company) and older versions that we have been developing and improving for 15 years.
+
+### [shopsys/framework]
+#### Added
+- extracted core functionality of [Shopsys Framework](http://www.shopsys-framework.com/)
+from its open-box repository [shopsys/project-base](https://github.com/shopsys/project-base)
+    - this will allow the core to be upgraded via `composer update` in different project implementations
+    - core functionality includes:
+        - all Shopsys-specific Symfony commands
+        - model and components with business logic and their data fixtures
+        - Symfony controllers with form definitions, Twig templates and all javascripts of the web-based administration
+        - custom form types, form extensions and twig extensions
+        - compiler passes to allow basic extensibility with plugins (eg. product feeds)
+    - this is going to be a base of a newly built architecture of [Shopsys Framework](http://www.shopsys-framework.com/)
+- styles related to admin extracted from [shopsys/project-base](https://github.com/shopsys/project-base) package
+    - this will allow styles to be upgraded via `composer update` in project implementations
+- glass-box model entities are now extensible from project-base without changing the framework code
+    - the entity extension is a work in progress
+    - currently it would require you to override a lot of classes to use the extended entities instead of the parents
+- [Shopsys Community License](https://github.com/shopsys/framework/blob/master/LICENSE)
+
+#### Changed
+- configuration of form types in administration is enabled using form type options
+    -  following form types configured using options:
+        - VatSettingsFormType
+        - SliderItemFormType
+        - ShopInfoSettingFormType
+        - SeoSettingFormType
+        - MailSettingFormType
+        - LegalConditionsSettingFormType
+        - HeurekaShopCertificationFormType
+        - CustomerCommunicationFormType
+        - CookiesSettingFormType
+        - CategoryFormType
+        - ArticleFormType
+        - AdvertFormType
+        - AdministratorFormType
+        
+### [shopsys/http-smoke-testing]
+#### Changed
+- added support of phpunit/phpunit ^6.0 and ^7.0 (@simara-svatopluk)
+
+### [shopsys/product-feed-google]
+#### Changed
+- renamed [`TestStandardFeedItem`] to [`TestGoogleStandardFeedItem`]
+- updated phpunit/phpunit to version 7
+
+### [shopsys/product-feed-heureka]
+#### Changed
+- renamed [`TestStandardFeedItem`] to [`TestHeurekaStandardFeedItem`]
+- updated phpunit/phpunit to version 7
+
+### [shopsys/product-feed-zbozi]
+#### Changed
+- renamed [`TestStandardFeedItem`] to [`TestZboziStandardFeedItem`]
+- updated phpunit/phpunit to version 7
+
+### [shopsys/product-feed-interface]
+##### Removed
+- `HeurekaCategoryNameProviderInterface` as it is specific to Heureka product feed
+   - [shopsys/product-feed-heureka](https://github.com/shopsys/product-feed-heureka) manages Heureka categories on its own since v0.5.0
+
+### [shopsys/monorepo-tools]
+#### Added
+- bash scripts for building and splitting monolithic repository from existing packages
+    - scripts are designed to be re-used even if different use-cases
+
+### [shopsys/migrations]
+#### Changed
+- updated phpunit/phpunit to version 7
+- DB migrations are installed from all registered bundles
+    - they should be located in directory "Migrations" in the root of the bundle
+- command `shopsys:migrations:generate` now offers a list of available bundles for generating the migrations
+
+### [shopsys/plugin-interface]
+#### Removed
+- storing data via Data storage was removed
+    - removed interfaces `PluginDataStorageProviderInterface` and `DataStorageInterface`
+    - only Doctrine entities are further allowed for storing data
+
+#### [shopsys/shopsys]
+##### Added
+- basic infrastructure so that the monorepo can be installed and used as standard application
     - for details see [the Monorepo article](./docs/introduction/monorepo.md#infrastructure) in documentation
 - [Shopsys Community License](./LICENSE)
-- documentation was moved from [shopsys/project-base](https://github.com/shopsys/project-base) (@Miroslav-Stopka)
+- documentation was moved from [shopsys/project-base](https://github.com/shopsys/project-base)
+
+### [shopsys/project-base]
+#### Added
+- Sessions are now stored in Redis
+- Admin - Legal conditions: added personal data settings 
+- Frontend site for requesting personal data information
+    - Admin - added email template for personal data request
+    - Frontend send email with link to personal data access site 
+- [wip-glassbox-customization.md](docs/wip_glassbox/wip-glassbox-customization.md): new WIP documentation about working with glassbox
+- docker: [`php-fpm/Dockerfile`](./project-base/docker/php-fpm/Dockerfile) added installation of `grunt-cli` to be able to run `grunt watch`
+    - [`docker-compose.yml.dist`](docker/conf/docker-compose.yml.dist) and [`docker-compose-mac.yml.dist`](docker/conf/docker-compose-mac.yml.dist): opened port 35729 for livereload, that is used by `grunt watch`
+
+#### Changed
+- `JavascriptCompilerService` can now compile javascript from more than one source directory
+    - the compiler supports subdirectory `common` in addition to `admin` and  `frontend`
+- **the core functionality was extracted to a separate repository [shopsys/framework](https://github.com/shopsys/framework)**
+    - this will allow the core to be upgraded via `composer update` in different project implementations
+    - core functionality includes:
+        - all Shopsys-specific Symfony commands
+        - model and components with business logic and their data fixtures
+        - database migrations
+        - Symfony controllers with form definitions, Twig templates and all javascripts of the web-based administration
+        - custom form types, form extensions and twig extensions
+        - compiler passes to allow basic extensibility with plugins (eg. product feeds)
+    - this is going to be a base of a newly built architecture of [Shopsys Framework](http://www.shopsys-framework.com/)
+    - translations are extracted from both this repository and the framework package during `phing dump-translations`
+        - this is because the translations are located solely in this package
+- styles related to admin extracted into [shopsys/framework](https://github.com/shopsys/framework) package
+    - this will allow styles to be upgraded via `composer update` in project implementations
+- grunt now compiles less files also from [shopsys/framework](https://github.com/shopsys/framework) package
+- updated phpunit/phpunit to version 7
+- phing target dump-translations does not delete messages, that are not found in translated directories 
+- docs updated in order to provide up-to-date information about the current project state 
+- installation guides: updated instructions for creating new project from Shopsys Framework sources
+- basics-about-package-architecture.md updated to reflect current architecture state
+- updated doctrine/doctrine-fixtures-bundle
+    - all fixtures now use autowiring
+- services that are not obtained directly from container in the application are not defined as public anymore
+    - IntegrationTestingBundle was removed
+    - all services that must be public because of tests moved to services_test.yml
+    - unnecessary service obtaining from container replaced with autowiring
+- new images for no image and empty cart
+- **the license was changed from MIT to [Shopsys Community License](./LICENSE)**
+
+#### Removed
+- documentation was moved into the main [Shopsys repository](https://github.com/shopsys/shopsys/blob/master/docs)
+
+## Before monorepo
+Before we managed to implement monorepo for our packages, we had slightly different versions for each of our package, we had stored our packages on internal server so we dont have PR available.
+That's why is this section formatted differently.
+
+### [shopsys/http-smoke-testing]
+#### [1.1.0](https://github.com/shopsys/http-smoke-testing/compare/v1.0.0...v1.1.0) - 2017-11-01 
+##### Added
+- [CONTRIBUTING.md](https://github.com/shopsys/http-smoke-testing/blob/master/CONTRIBUTING.md)
+ 
+##### Changed 
+- Improved IDE auto-completion when customizing test cases via [`RouteConfig`](https://github.com/shopsys/http-smoke-testing/blob/master/src/RouteConfig.php)
+    - Methods `changeDefaultRequestDataSet()` and `addExtraRequestDataSet()` now return new interface [`RequestDataSetInterface`](https://github.com/shopsys/http-smoke-testing/blob/master/src/RequestDataSetConfig.php). 
+    - This new interface includes only a subset of methods in [`RequestDataSet`](https://github.com/shopsys/http-smoke-testing/blob/master/src/RequestDataSet.php) that is relevant to test case customization. 
+ 
+#### [1.0.1](https://github.com/shopsys/http-smoke-testing/compare/v1.0.0...v1.0.1) - 2017-07-03 
+##### Added 
+- Unit test for RequestDataSetGenerator class
+- This Changelog
+ 
+#### 1.0.0 - 2017-05-23 
+##### Added 
+- Extracted HTTP smoke testing functionality from [Shopsys Framework](http://www.shopsys-framework.com/)
+- `.travis.yml` file with Travis CI configuration
+
+### [shopsys/product-feed-google]
+#### [0.2.1](https://github.com/shopsys/product-feed-google/compare/v0.2.0...v0.2.1) - 2018-02-19
+##### Fixed
+- services.yml autodiscovery settings
+
+#### [0.2.0](https://github.com/shopsys/product-feed-google/compare/v0.1.2...v0.2.0) - 2018-02-19
+##### Changed
+- services.yml updated to Symfony 3.4 best practices
+
+#### [0.1.2](https://github.com/shopsys/product-feed-google/compare/v0.1.1...v0.1.2) - 2018-02-12
+##### Fixed
+- Fix availability value
+
+#### [0.1.1](https://github.com/shopsys/product-feed-google/compare/v0.1.0...v0.1.1) - 2017-10-04
+##### Added
+- support for shopsys/plugin-interface 0.3.0
+- support for shopsys/product-feed-interface 0.5.0
+
+#### 0.1.0 - 2017-09-25
+##### Added
+- added basic logic of product feed for Google
+- composer.json: added shopsys/coding-standards into require-dev
+
+### [shopsys/product-feed-heureka]
+#### [0.6.1](https://github.com/shopsys/product-feed-heureka/compare/v0.6.0...v0.6.1) - 2018-02-19
+##### Changed
+- updated package shopsys/form-types-bundle to version 0.2.0
+
+#### [0.6.0](https://github.com/shopsys/product-feed-heureka/compare/v0.5.1...v0.6.0) - 2018-02-19
+##### Changed
+- services.yml updated to Symfony 3.4 best practices
+
+#### [0.5.1](https://github.com/shopsys/product-feed-heureka/compare/v0.5.0...v0.5.1) - 2017-10-06
+- names of Heureka categories are now cached by category ID in [`HeurekaFeedConfig`](./packages/product-feed-heureka/src/HeurekaFeedConfig.php)
+
+#### [0.5.0](https://github.com/shopsys/product-feed-heureka/compare/v0.4.2...v0.5.0) - 2017-10-05
+##### Added
+- logic of Heureka categorization moved from [Shopsys Framework](https://www.shopsys-framework.com/) core repository 
+    - Heureka categories are downloaded everyday via CRON module
+    - extends CRUD of categories for assigning Heureka categories to categories on your online store
+    - contains demo data fixtures
+
+#### [0.4.2](https://github.com/shopsys/product-feed-heureka/compare/v0.4.1...v0.4.2) - 2017-10-05
+##### Added
+- support for shopsys/plugin-interface 0.3.0 
+- support for shopsys/product-feed-interface 0.5.0 
+
+#### [0.4.1](https://github.com/shopsys/product-feed-heureka/compare/v0.4.0...v0.4.1) - 2017-09-25
+##### Added
+- [CONTRIBUTING.md](https://github.com/shopsys/product-feed-heureka/blob/master/CONTRIBUTING.md)
+##### Changed
+- Dependency [product-feed-interface](https://github.com/shopsys/product-feed-interface) upgraded from ~0.3.0 to ~0.4.0
+- [`HeurekaFeedConfig`](https://github.com/shopsys/product-feed-heureka/blob/master/src/HeurekaFeedConfig.php) now filters not sellable products 
+- [`HeurekaFeedConfig`](https://github.com/shopsys/product-feed-heureka/blob/master/src/HeurekaFeedConfig.php) implemented method `getAdditionalData()` 
+- [`TestStandardFeedItem`](https://github.com/shopsys/product-feed-heureka/blob/master/tests/TestStandardFeedItem.php) implemented method `getCurrencyCode()` 
+
+#### [0.4.0](https://github.com/shopsys/product-feed-heureka/compare/v0.3.0...v0.4.0) - 2017-09-12
+##### Added
+- New dependencies for dev
+    - phpunit/phpunit 5.7.21
+    - twig/twig 1.34.0
+    - twig/extensions 1.3.0
+- New automatic test that is controlling right behaviour of plugin 
+- Added travis build icon into [README.md](https://github.com/shopsys/product-feed-heureka/blob/master/README.md) 
+##### Changed
+- Dependency [shopsys/product-feed-interface] upgraded from ~0.2.0 to ~0.3.0 
+##### Removed
+- `HeurekaFeedConfig::getFeedItemRepository()` 
+
+#### [0.3.0](https://github.com/shopsys/product-feed-heureka/compare/v0.2.0...v0.3.0) - 2017-08-09
+##### Added
+- This Changelog 
+- UPGRADE.md 
+- Plugin demo data (cpc for 2 domains) 
+##### Changed
+- Dependency [shopsys/plugin-interface] upgraded from ~0.1.0 to ~0.2.0 
+
+#### [0.2.0](https://github.com/shopsys/product-feed-heureka/compare/v0.1.0...v0.2.0) - 2017-08-02
+##### Added
+- Retrieving custom plugin data 
+    - Heureka category names
+    - MAX_CPC (Maximum price per click)
+- Extension of product form with custom field for MAX_CPC 
+- New dependencies 
+    - [shopsys/plugin-interface ~0.1.0](https://github.com/shopsys/plugin-interface)
+    - [shopsys/form-types-bundle ~0.1.0](https://github.com/shopsys/form-types-bundle)
+    - [symfony/form ^3.0](https://github.com/symfony/form)
+    - [symfony/translation ^3.0](https://github.com/symfony/translation)
+    - [symfony/validator ^3.0](https://github.com/symfony/validator)
+##### Changed
+- Dependency [shopsys/product-feed-interface] upgraded from ~0.1.0 to ~0.2.0 
+
+### [shopsys/product-feed-zbozi]
+#### [0.5.0](https://github.com/shopsys/product-feed-zbozi/compare/v0.4.2...v0.5.0) - 2018-02-19
+##### Changed
+- services.yml updated to Symfony 3.4 best practices 
+- updated shopsys/form-types-bundle to version 0.2.0 
+
+#### [0.4.2](https://github.com/shopsys/product-feed-zbozi/compare/v0.4.1...v0.4.2) - 2017-10-04
+##### Added
+- support for shopsys/plugin-interface 0.3.0 
+- support for shopsys/product-feed-interface 0.5.0 
+
+#### [0.4.1](https://github.com/shopsys/product-feed-zbozi/compare/v0.4.0...v0.4.1) - 2017-09-25
+##### Added
+- [CONTRIBUTING.md](https://github.com/shopsys/product-feed-zbozi/blob/master/CONTRIBUTING.md)
+##### Changed
+- Dependency [shopsys/product-feed-interface] upgraded from ~0.3.0 to ~0.4.0 
+- [`ZboziFeedConfig`](https://github.com/shopsys/product-feed-zbozi/blob/master/src/ZboziFeedConfig.php) now filters not sellable products 
+- [`ZboziFeedConfig`](https://github.com/shopsys/product-feed-zbozi/blob/master/src/ZboziFeedConfig.php) implemented method `getAdditionalData()` 
+- [`TestStandardFeedItem`](https://github.com/shopsys/product-feed-zbozi/blob/master/tests/TestStandardFeedItem.php) implemented method `getCurrencyCode()` 
+
+#### [0.4.0](https://github.com/shopsys/product-feed-zbozi/compare/v0.3.0...v0.4.0) - 2017-09-12
+##### Added
+- New dependencies for dev 
+    - phpunit/phpunit >=5.0.0,<6.0
+    - twig/twig 1.34.0
+    - twig/extensions 1.3.0
+- New automatic test that is controlling right behaviour of plugin 
+- Added travis build icon into [README.md](https://github.com/shopsys/product-feed-zbozi/blob/master/README.md) 
+##### Changed
+- Dependency [product-feed-interface](https://github.com/shopsys/product-feed-zbozi/blob/master/shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0 
+##### Removed
+- `ZboziFeedConfig::getFeedItemRepository()` 
+
+#### [0.3.0](https://github.com/shopsys/product-feed-zbozi/compare/v0.2.0...v0.3.0) - 2017-09-06
+##### Added
+- This Changelog 
+- UPGRADE.md 
+- Plugin demo data (cpc, cpc_search and show for 2 domains) 
+##### Changed
+- Dependency [plugin-interface](https://github.com/shopsys/plugin-interface) upgraded from ~0.1.0 to ~0.2.0 
+
+#### [0.2.0](https://github.com/shopsys/product-feed-zbozi/compare/v0.1.0...v0.2.0) - 2017-08-08
+##### Added
+- Retrieving custom plugin data and extension of product form with custom fields 
+    - show (offer in feeds)
+    - cpc (maximum price per click)
+    - cpc_search (maximum price per click in offers)
+- New dependencies 
+    - [shopsys/plugin-interface ~0.1.0](https://github.com/shopsys/plugin-interface)
+    - [shopsys/form-types-bundle ~0.1.0](https://github.com/shopsys/form-types-bundle)
+    - [symfony/form ^3.0](https://github.com/symfony/form)
+    - [symfony/translation ^3.0](https://github.com/symfony/translation)
+    - [symfony/validator ^3.0](https://github.com/symfony/validator)
+##### Changed
+- Dependency [product-feed-interface](https://github.com/shopsys/product-feed-zbozi/blob/master/shopsys/product-feed-interface) upgraded from ~0.1.0 to ~0.2.0 
+
+#### 0.1.0 - 2017-07-13
+##### Added
+- Extracted Zboží.cz product feed plugin from [Shopsys Framework](http://www.shopsys-framework.com/) 
+- `.travis.yml` file with Travis CI configuration
+
+### [shopsys/product-feed-heureka-delivery]
+#### [0.3.0](https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.2...v0.3.0) - 2018-02-19
+##### Changed
+- services.yml updated to Symfony 3.4 best practices
+- updated phpunit/phpunit to version 7
+
+#### [0.2.2](https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.1...v0.2.2) - 2017-10-04
+##### Added
+- support for [shopsys/product-feed-interface] 0.5.0
+
+#### [0.2.1](https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.2.0...v0.2.1) - 2017-09-25
+##### Added
+- [CONTRIBUTING.md](https://github.com/shopsys/product-feed-heureka-delivery/blob/master/CONTRIBUTING.md)
+
+##### Changed
+- Dependency [shopsys/product-feed-interface] upgraded from ~0.3.0 to ~0.4.0
+
+#### [0.2.0](https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.1.1...v0.2.0) - 2017-09-12
+##### Added
+- This Changelog (@vitek-rostislav)
+- New dependencies for dev(@MattCzerner)
+    - phpunit/phpunit >=5.0.0,<6.0
+    - twig/twig 1.34.0
+    - twig/extensions 1.3.0
+- New automatic test that is controlling right behaviour of plugin
+- Added travis build icon into [README.md](https://github.com/shopsys/product-feed-heureka-delivery/blob/master/README.md)
+##### Changed
+- Dependency [plugin-interface](https://github.com/shopsys/product-feed-interface) upgraded from ~0.2.0 to ~0.3.0
+##### Removed
+- `HeurekaDeliveryFeedConfig::getFeedItemRepository()`
+
+#### [0.1.1](https://github.com/shopsys/product-feed-heureka-delivery/compare/v0.1.0...v0.1.1) - 2017-08-18
+##### Fixed
+- Usage of `FeedItemInterface::getId()` method in `feed.xml.twig`
+    - it was renamed from `FeedItemInterface::getItemId()` in [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface) v0.2.0
+
+#### 0.1.0 - 2017-08-10
+##### Added
+- Extracted Heureka product delivery feed plugin from [Shopsys Framework](http://www.shopsys-framework.com/)
+- `.travis.yml` file with Travis CI configuration
+
+#### 0.1.0 - 2017-07-13
+##### Added
+- Extracted Heureka product feed plugin from [Shopsys Framework](http://www.shopsys-framework.com/)
+- `.travis.yml` file with Travis CI configuration
+
+### [shopsys/migrations]
+#### [2.3.0](https://github.com/shopsys/migrations/compare/v2.2.0...v2.3.0 ) - 2018-02-19
+##### Changed
+- services.yml updated to Symfony 3.4 best practices
+
+### [shopsys/product-feed-interface]
+#### [0.5.0](https://github.com/shopsys/product-feed-interface/compare/v0.4.0...v0.5.0) - 2017-10-04
+- [`StandardFeedItemInterface`](src/StandardFeedItemInterface.php) contains ID of its main category 
+
+#### [0.4.0](https://github.com/shopsys/product-feed-interface/compare/v0.3.0...v0.4.0) - 2017-09-25
+##### Added
+- [CONTRIBUTING.md](CONTRIBUTING.md) 
+- [template for github pull requests](docs/PULL_REQUEST_TEMPLATE.md) 
+- [`StandardFeedItemInterface`](./packages/product-feed-interface/src/StandardFeedItemInterface.php) has new method `isSellingDenied()` 
+- [`FeedConfigInterface`](./packages/product-feed-interface/src/FeedConfigInterface.php) has new method `getAdditionalInformation()` 
+- [`StandardFeedItemInterface`](./packages/product-feed-interface/src/StandardFeedItemInterface.php) has new method `getCurrencyShortcut()` 
+
+#### [0.3.0](https://github.com/shopsys/product-feed-interface/compare/v0.2.1...v0.3.0) - 2017-09-12
+##### Added
+- This Changelog
+- UPGRADE.md
+##### Removed
+- `FeedItemRepositoryInterface`
+- `FeedConfigInterface::getFeedItemRepository()`
+
+#### [0.2.1](https://github.com/shopsys/product-feed-interface/compare/v0.2.0...v0.2.1) - 2017-08-17
+##### Added
+- New interface for delivery feed items - `DeliveryFeedItemInterface`
+
+#### [0.2.0](https://github.com/shopsys/product-feed-interface/compare/v0.1.0...v0.2.0) - 2017-08-07
+##### Changed
+- `FeedItemInterface`: renamed method `getItemId()` to `getId()`
+- `FeedItemCustomValuesProviderInterface` renamed to `HeurekaCategoryNameProviderInterface`
+##### Removed
+- General data storage functionality extracted into separate package [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface)
+    - removed `FeedItemCustomValuesProviderInterface::getCustomValuesForItems()` and `FeedItemCustomValuesInterface`
+
+#### 0.1.0 - 2017-07-13
+##### Added
+- Package of interfaces providing compatibility between [Shopsys Framework](https://www.shopsys-framework.com) and product feed plugins.
+- `.travis.yml` file with Travis CI configuration
+
+### [shopsys/plugin-interface]
+#### [0.3.0](https://github.com/shopsys/plugin-interface/compare/v0.2.0...v0.3.0) - 2017-10-04
+##### Added
+ - [CONTRIBUTING.md](https://github.com/shopsys/plugin-interface/blob/master/CONTRIBUTING.md)
+ - `DataStorageInterface` can return all saved data via `getAll()`
+ - `IteratedCronModuleInterface` and `SimpleCronModuleInterface`
+ 
+#### [0.2.0](https://github.com/shopsys/plugin-interface/compare/v0.1.0...v0.2.0) - 2017-09-06
+##### Added
+ - This Changelog
+ - interface for loading plugin's demo data
+     - `PluginDataFixtureInterface`
+ 
+#### 0.1.0 - 2017-08-04
+##### Added
+ - Package of interfaces providing compatibility between [Shopsys Framework](https://www.shopsys-framework.com) and plugins
+     - interfaces responsible for retrieving and saving plugin custom data
+         - `DataStorageInterface`
+         - `PluginDataStorageProviderInterface`
+     - interface responsible for extending CRUD with plugin custom sub-forms
+         - `PluginCrudExtensionInterface`
+ - `.travis.yml` file with Travis CI configuration
+
+### [shopsys/project-base]
+#### 6.0.0-beta21 - 2018-03-05
+- released only in closed beta
+##### Added
+- PHPStan support (@mhujer)
+    - currently analysing source code by level 0
+- PHP 7.2 support 
+- Uniformity of PHP and Postgres timezones is checked during the build
+- in `TEST` environment `Domain` is created with all instances of `DomainConfig` having URL set to `%overwrite_domain_url%`
+    - parameter is set only in `parameters_test.yml` as it is only relevant in `TEST` environment
+    - overwriting can be switched off by setting the parameter to `~` (null in Yaml)
+    - overwriting the domain URL is necessary for Selenium acceptance tests running in Docker
+- LegalConditionsSetting: added privacy policy article selection
+    - customers need to agree with privacy policy while registring, sending contact form and completing order process
+- SubscriptionFormType: added required privacy policy agreement checkbox 
+- subscription form: added link to privacy policy agreement article 
+- NewsletterController now exports date of subscription to newsletter 
+- `services_command.yml` to set Commands as services 
+- [docker-troubleshooting.md](https://github.com/shopsys/shopsys/blob/master/docs/docker/docker-troubleshooting.md): added to help developers with common problems that occurs using docker for development
+- Newsletter subscriber is distinguished by domain
+    - Admin: E-mail newsletter now exports e-mails to csv for each domain separatedly
+- DatabaseSearching: added getFullTextLikeSearchString() 
+- admin: E-mail newsletter: now contains list of registered e-mails with ability to delete them
+
+##### Changed
+- cache is cleared before PHPUnit tests only when run via [Phing targets](https://github.com/shopsys/shopsys/blob/master/docs/introduction/phing-targets.md), not when run using `phpunit` directly 
+- PHPUnit tests now fail on warning 
+- end of support of PHP 7.0 
+- renamed TermsAndCondition to LegalCondition to avoid multiple classes for legal conditions agreements 
+- emails with empty subject or body are no longer sent
+- postgresql-client is installed in [php-fpm/dockerfile](./project-base/docker/php-fpm/Dockerfile) for `pg_dump` function 
+    - postgresql was downgraded to 9.5 because of compatibility with postgresql-client
+- docker-compose: added container_name to smtp-server and adminer 
+- configuration of Docker Compose tweaked for easier development 
+    - `docker-compose.yml` is added to `.gitignore` for everyone to be able to make individual changes
+    - the predefined templates are now in `/docker/conf` directory
+    - `adminer` container uses port 1100 by default (as 1000 is often already in use)
+    - Docker Sync is used only in configuration for MacOS as only there it is needed
+    - `postgres` container is created with a volume for data persistence (in `var/postgres-data`)
+    - see documentation of [Installation Using Docker](https://github.com/shopsys/shopsys/blob/master/docs/installation/installation-using-docker.md) for details
+- default parameters in `parameters.yml.dist` and `parameters_test.yml.dist` are for Docker installation (instead of native) 
+- Front/NewsletterController: extracted duplicit rendering and add return typehints 
+- Symfony updated to version 3.4 
+    - autowiring is now done via Symfony PSR-4
+    - services now use FQN as naming convention
+    - services are private by default
+    - inlined services (called via container) are set to public
+    - services required by another service are defined in services.yml (e.g. Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorUserProvider: ~)
+    - all inline calls of services changed to use FQN
+    - services no longer required in services.yml have been removed
+    - services instanced after DI container creation are set as synthetic
+- users and administrators are logged out of all the sessions except the current one on password change (this is required in Symfony 4) 
+- running Phing without parameter now shows list of available targets instead of building application 
+- updated presta/sitemap-bundle to version 1.5.2 in order to avoid deprecated calls 
+ - updated SitemapListener to avoid using of deprecated SitemapListenerInterface
+- updated symfony/swiftmailer-bundle to version 3.2.0 in order to fix deprecated calls 
+- all calls of Form::isValid() are called only on submitted forms in order to prevent deprecated call 
+- symlink so root/bin acts like root/project-base/bin  
+- all commands are now services, that are lazy loaded with autowired dependencies  
+- NewsletterFacadeTest: renamed properties to match class name 
+
+##### Fixed
+- `BrandFacade::create()` now generates friendly URL for all domains (@sspooky13)
+- `Admin/HeurekaController::embedWidgetAction()` moved to new `Front/HeurekaController` as the action is called in FE template
+- PHPUnit tests do not fail on Windows machine with PHP 7.0 because of excessively long file paths  
+- customizeBundle.js: on-submit actions are no longer triggered when form validation error occurs 
+- fixed google product feed availability values by updating it to v0.1.2 
+- reloading of order preview now calls `Shopsys.register.registerNewContent()` (@petr.kadlec)  
+- CurrentPromoCodeFacace: promo code is not searched in database if code is empty (@petr.kadlec)
+- CategoryRepository::getCategoriesWithVisibleChildren() checks visibility of children (@petr.kadlec)
+- added missing migration for privacy policy article 
+- OrderStatusFilter: show names in labels instead of ids 
+- legal conditions text in order 3rd step is not HTML escaped anymore  
+- product search now does not cause 500 error when the search string ends with backslash
+
+##### Removed
+- PHPStorm Inspect is no longer used for static analysis of source code 
+- Phing targets standards-ci and standards-ci-diff because they were redundant to standards and standards-diff targets 
+- deprecated packages `symplify/controller-autowire` and `symplify/default-autowire` 
+
+#### 6.0.0-beta20 - 2017-12-11
+- released only in closed beta
+
+##### Changed
+- Docker `nginx.conf` has been upgraded with better performance settings 
+    - JavaScript and CSS files are compressed with GZip
+    - static content has cache headers set in order to leverage browser cache
+##### Fixed
+- miscellaneous annotations, typos and other minor fixes (@petr.kadlec)
+- `CartController::addProductAction()`: now uses `Request` instance passed as the method argument (Symfony 3 style) instead of calling the base `Controller` method `getRequest()` (Symfony 2.x style) (@petr.kadlec)
+    - see [Symfony upgrade log](https://github.com/symfony/symfony/blob/3.0/UPGRADE-3.0.md#frameworkbundle) for more information
+- `ExecutionContextInterface::buildViolation()` (Symfony 3 style) is now used instead of `ExecutionContextInterface::addViolationAt()` (Symfony 2.x style) (@petr.kadlec)
+    - see [Symfony upgrade log](https://github.com/symfony/symfony/blob/3.0/UPGRADE-3.0.md#validator) for more information
+
+#### 6.0.0-beta19.2 - 2017-11-23
+- released only in closed beta
+
+##### Fixed
+- updated symfony/symfony to v3.2.14 in order to avoid known security vulnerabilities 
+
+#### 6.0.0-beta19.1 - 2017-11-21
+- released only in closed beta
+
+##### Fixed
+- coding standards check "phing standards" passes
+
+#### 6.0.0-beta19 - 2017-11-21
+- released only in closed beta
+
+##### Added
+- size of performance data fixtures and limits for performance testing are now configurable via parameters defined in [`parameters_common.yml`](./project-base/app/config/parameters_common.yml) 
+- performance tests report database query counts 
+- UserDataFixture: alias for SettingValueDataFixture to fix [PHP bug #66862](https://bugs.php.net/bug.php?id=66862)
+
+##### Changed
+- parameters that are in `parameters.yml` or `parameters_test.yml` that are not in their `.dist` templates are not removed during `composer install` anymore 
+- customer creating controllers are not catching exception for duplicate email, it is not necessary since it is done by UniqueEmail constraint now 
+- input "remember me" in login form is encapsulated by its label for better UX
+
+#### 6.0.0-beta18 - 2017-10-19
+- released only in closed beta
+
+##### Added
+- [coding standards documentation](https://github.com/shopsys/shopsys/blob/master/docs/contributing/coding-standards.md)
+- acceptance tests asserting successful image upload in admin for product, transport and payment
+- Docker based server stack for easier installation and development 
+    - see [Installation Using Docker](https://github.com/shopsys/shopsys/blob/master/docs/installation/installation-using-docker.md) for details
+- plugins can now extend the CRUD of categories (using `CategoryFormType`) 
+
+##### Changed
+- cache deletion before running unit tests is now done using `Symfony\Filesystem` instead of using console command 
+    - deleting via console command `cache:clear` is slow, because it creates whole application container first and then deletes all cache created in process
+- Windows locales list: use more tolerant name for Czech locale
+    - in Windows 2017 Fall Creators Update the locale name was changed from "Czech_Czech Republic" to "Czech_Czechia"
+    - name "Czech" is acceptable in all Windows versions
+- interfaces for CRON modules moved to [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface) 
+- `ImageDemoCommand` now prompts to truncate "images" db table when it is not empty before new demo images are loaded
+
+##### Deleted
+- logic of Heureka categorization moved to [shopsys/product-feed-heureka](https://github.com/shopsys/product-feed-heureka) 
+    - all your current Heureka category data will be migrated into the new structure
+
+##### Fixed
+- proper `baseUrl` value from `domains_urls.yaml` is now stored into `settings` when creating new domain
+
+#### 6.0.0-beta17 - 2017-10-03
+- released only in closed beta
+
+##### Added
+- MIT license 
+- phing targets `eslint-check`, `eslint-check-diff`, `eslint-fix` and `eslint-fix-diff` to check and fix coding standards in JS files (@sspooky13)
+    - executed as a part of targets `standards`, `standards-diff`, `standards-fix` and `standards-fix-diff`
+- [product feed plugin for Google](https://github.com/shopsys/product-feed-google/) 
+- new article explaining [Basics About Package Architecture](https://github.com/shopsys/shopsys/blob/master/docs/introduction/basics-about-package-architecture.md)
+
+##### Changed
+- `StandardFeedItemRepository`: now selects available products instead of sellable, filtering of not sellable products is made in product plugins 
+- implementations of `StandardFeedItemInterface` now must have implemented methods `isSellingDenied()` and `getCurrencyCode()`
+- implementations of `FeedConfigInterface` now must have implemented method `getAdditionalInformation()` 
+
+#### 6.0.0-beta16 - 2017-09-19
+- released only in closed beta
+
+##### Added
+- new command `shopsys:plugin-data-fixtures:load` for loading demo data from plugins 
+    - called during build of demo database
+- new documentation about Shopsys Framework model architecture 
+- `FeedItemRepositoryInterface`
+    - moved from [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface/)
+- [template for github pull requests](https://github.com/shopsys/shopsys/blob/master/docs/PULL_REQUEST_TEMPLATE.md)
+
+##### Changed
+- dependency [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface/) upgraded from 0.1.0 to 0.2.0 
+- dependency [shopsys/product-feed-heureka](https://github.com/shopsys/product-feed-heureka/) upgraded from 0.2.0 to 0.4.0 
+- dependency [shopsys/product-feed-zbozi](https://github.com/shopsys/product-feed-zbozi/) upgraded from 0.2.0 to 0.4.0 
+- dependency [shopsys/product-feed-heureka-delivery](https://github.com/shopsys/product-feed-heureka-delivery/) upgraded from 0.1.1 to 0.2.0
+- dependency [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface/) upgraded from 0.2.1 to 0.3.0
+- it is no longer needed to redeclare feed plugin's implementations of `FeedConfigInterface` in `services.yml`
+    - decision about providing proper instance of `FeedItemRepositoryInterface` is made in `FeedConfigFacade`
+- FeedConfigRepository renamed to `FeedConfigRegistry` 
+    - it is not fetching data from Doctrine as other repositories, it only serves as a container for registering services of specific type
+    - similar to `PluginDataFixtureRegistry` or `PluginCrudExtensionRegistry`
+- `UknownPluginDataFixtureException` renamed to `UnknownPluginCrudExtensionTypeException` because of a typo 
+- `FeedConfigRegistry` now contains all FeedConfigs in one array (indexed by type)
+    - definition and assertion of known feed configs types moved from [`RegisterProductFeedConfigsCompilerPass`](./src/Shopsys/ShopBundle/DependencyInjection/Compiler/RegisterProductFeedConfigsCompilerPass.php) to `FeedConfigRegistry`
+    - changed message and arguments of `UnknownFeedConfigTypeException`
+- renamed methods working with standard feeds only to be more expressive 
+    - renamed `FeedConfigFacade::getFeedConfigs()` to `getStandardFeedConfigs()`
+    - renamed `FeedFacade::generateFeedsIteratively()` to `generateStandardFeedsIteratively()`
+    - renamed `FeedGenerationConfigFactory::createAll()` to `createAllForStandardFeeds()`
+- [`parameters.yml.dist`](./project-base/app/config/parameters.yml.dist): renamed parameter `email_for_error_reporting` to `error_reporting_email_to`
+- sender email for error reporting is now configured in [`parameters.yml.dist`](./project-base/app/config/parameters.yml.dist)
+- reimplemented `CategoriesType` (@Petr Heinz)
+    - it now extends `CollectionType` instead of `ChoiceType`
+    - it loads only those categories that are needed to show all selected categories in a tree, not all of them
+    - collapsed categories can be loaded via AJAX
+- `CategoryRepository::findById()` now uses `find()` method of Doctrine repository instead of query builder so it can use cached results 
+- it is possible to mention occurrences of an image size in [`images.yml`](./project-base/src/Shopsys/ShopBundle/Resources/config/images.yml) 
+    - previously they were directly in `ImageController`
+    - they are not translatable anymore (too hard to maintain)
+
+##### Removed
+- email for error reporting removed from [`parameters_test.yml.dist`](./project-base/app/config/parameters_test.yml.dist)
+- removed unused private properties from classes 
+- removed `CategoriesTypeTransformerFactory` 
+    - the `CategoriesTypeTransformer` can be fully autowired after deletion of `$domainId`
+
+##### Fixed
+- [`InlineEditPage::createNewRow()`](./project-base/tests/ShopBundle/Acceptance/acceptance/PageObject/Admin/InlineEditPage.php) now waits for AJAX to complete 
+    - fixes false negatives of acceptance test [`PromoCodeInlineEditCest::testPromoCodeCreate()`](./project-base/tests/ShopBundle/Acceptance/acceptance/PromoCodeInlineEditCest.php)
+
+#### 6.0.0-beta15 - 2017-08-31
+- previous beta versions released only internally (mentioned changes since 6.0.0-alpha)
+- this version was released only in closed beta
+
+##### Added
+- PHP 7 support
+- [a basic knowledgebase](https://github.com/shopsys/shopsys/blob/master/docs/index.md)
+    - installation guide
+    - guidelines for contributions
+    - cookbooks
+    - articles on automated testing
+
+##### Changed
+- update to Symfony 3
+- PSR-2 compliance
+- English as a main language
+    - language of first front-end domain
+    - language of administration
+    - all translatable message sources in English
+
+##### Deleted
+- separation of HTTP smoke test module into a component:
+    - https://github.com/shopsys/http-smoke-testing/
+- separation of product feed modules into plugins:
+    - https://github.com/shopsys/plugin-interface/
+    - https://github.com/shopsys/product-feed-interface/
+    - https://github.com/shopsys/product-feed-heureka/
+    - https://github.com/shopsys/product-feed-heureka-delivery/
+    - https://github.com/shopsys/product-feed-zbozi/
+
+#### 6.0.0-alpha - 2016-11-09
+- developed since 2014-03-31
+- used only as internal platform for e-commerce projects of Shopsys Agency
+- released only internally
+
+##### Added
+- product catalogue
+- registered customers
+- basic orders management
+- back-end administration
+- front-end fulltext search
+- front-end product filtering
+- 3-step ordering process
+- products variants
+- simple promo codes
+- product feeds for product aggregators
+- basic CMS
+- multiple administrators
+- support for several currencies
+- support for several languages
+- support for several domains
+- full friendly URL for main entities
+- customizable SEO attributes for main entities
+
+### [shopsys/coding-standards]
+#### [4.0](https://github.com/shopsys/coding-standards/compare/v3.1.1...v4.0.0) - 2018-01-27
+##### Added
+- composer script `run-all-checks` for easier testing of the package (@TomasVotruba)
+
+##### Changed
+- `OrmJoinColumnRequireNullableFixer` marked as *risky* (@sustmi)
+- [#11](https://github.com/shopsys/coding-standards/pull/11) dropped support of PHP 7.0 
+- [#12](https://github.com/shopsys/coding-standards/pull/12/) [EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard) is now used (@TomasVotruba)
+    - the tool encapsulates PHP-CS-Fixer and PHP_CodeSniffer 
+    - rules configuration is now unified in single file - [`easy-coding-standard.neon`](./packages/coding-standards/easy-coding-standard.neon)
+    - the option `ignore-whitespace` for rules checking method and class length is not available anymore
+        - the limits were increased to 550 (class length) and 60 (method length)
+    
+##### Removed
+- PHP Mess Detector (@TomasVotruba)
+- line length sniff (@TomasVotruba)
+
+#### [3.1.1](https://github.com/shopsys/coding-standards/compare/v3.1.0...v3.1.1) - 2017-10-31
+##### Fixed
+- enabled custom fixers
+
+#### [3.1.0](https://github.com/shopsys/coding-standards/compare/v3.0.2...v3.1.0) - 2017-10-12
+##### Added
+- This changelog 
+- [Description of used coding standards rules](./packages/coding-standards/docs/description-of-used-coding-standards-rules.md) 
+- New rules in [phpcs-fixer ruleset](./packages/coding-standards/build/phpcs-fixer.php_cs):
+    - combine_consecutive_unsets
+    - function_typehint_space
+    - hash_to_slash_comment
+    - lowercase_cast
+    - native_function_casing
+    - no_empty_comment
+    - no_empty_phpdoc
+    - no_spaces_around_offset
+    - no_unneeded_control_parentheses
+    - no_useless_return
+    - no_whitespace_before_comma_in_array
+    - non_printable_character
+    - normalize_index_brace
+    - phpdoc_annotation_without_dot
+    - phpdoc_no_useless_inheritdoc
+    - phpdoc_single_line_var_spacing
+    - protected_to_private
+    - semicolon_after_instruction
+    - short_scalar_cast
+    - space_after_semicolon
+    - whitespace_after_comma_in_array
+
+##### Changed
+- friendsofphp/php-cs-fixer upgraded from version 2.1 to version 2.3 
+- [phpcs-fixer ruleset](./build/phpcs-fixer.php_cs) 
+    - replaced deprecated "hash_to_slash_comment" rule with "single_line_comment_style" rule
+    - custom NoUnusedImportsFixer replaced with standard "no_unused_imports" rule
+
+##### Deleted
+- Redundant rules which were already covered by other rules
+
+### [shopsys/form-types-bundle]
+#### [0.2.0](https://github.com/shopsys/form-types-bundle/compare/v0.1.0...v0.2.0) - 2018-02-19
+##### Added
+- This Changelog
+- [CONTRIBUTING.md](https://github.com/shopsys/form-types-bundle/blob/master/CONTRIBUTING.md)
+##### Changed
+- services.yml updated to Symfony 3.4 best practices
+
+#### 0.1.0 - 2017-08-04
+##### Added
+- Custom form types extracted from [Shopsys Framework](http://www.shopsys-framework.com/), see [README](https://github.com/shopsys/form-types-bundle/blob/master/README.md) for more information
+    - MultidomainType
+    - YesNoType
+- `.travis.yml` file with Travis CI configuration
 
 [Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...HEAD
+[shopsys/shopsys]: https://github.com/shopsys/shopsys
+[shopsys/project-base]: https://github.com/shopsys/project-base
+[shopsys/framework]: https://github.com/shopsys/framework
+[shopsys/product-feed-zbozi]: https://github.com/shopsys/product-feed-zbozi
+[shopsys/product-feed-google]: https://github.com/shopsys/product-feed-google
+[shopsys/product-feed-heureka]: https://github.com/shopsys/product-feed-heureka
+[shopsys/product-feed-heureka-delivery]: https://github.com/shopsys/product-feed-heureka-delivery
+[shopsys/product-feed-interface]: https://github.com/shopsys/product-feed-interface
+[shopsys/plugin-interface]: https://github.com/shopsys/plugin-interface
+[shopsys/coding-standards]: https://github.com/shopsys/coding-standards
+[shopsys/http-smoke-testing]: https://github.com/shopsys/http-smoke-testing
+[shopsys/form-types-bundle]: https://github.com/shopsys/form-types-bundle
+[shopsys/migrations]: https://github.com/shopsys/migrations
+[shopsys/monorepo-tools]: https://github.com/shopsys/monorepo-tools
+
+[@pk16011990]: https://github.com/pk16011990
+[@stanoMilan]: https://github.com/stanoMilan
+[@EdoBarnas]: https://github.com/EdoBarnas

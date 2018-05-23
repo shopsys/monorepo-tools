@@ -7,6 +7,8 @@ Plugin for [Shopsys Framework](https://www.shopsys-framework.com) responsible fo
 
 For detailed information about the feed see [official documentation](https://napoveda.seznam.cz/cz/zbozi/specifikace-xml-pro-obchody/specifikace-xml-feedu/).
 
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+
 ## Installation
 The plugin is a Symfony bundle and is installed in the same way:
 
@@ -60,3 +62,4 @@ What to do when you are in troubles or need some help? Best way is to contact us
 
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
+[shopsys/shopsys]:(https://github.com/shopsys/shopsys)

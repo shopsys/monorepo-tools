@@ -6,6 +6,8 @@ Shopsys/project-base repository contains the fully ready base for building your 
 
 For more informations about project, please see [shopsys/shopsys](https://github.com/shopsys/shopsys) readme.
 
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+
 ## Installation
 We recommend to choose **installation via Docker** because it is the easiest and fastest way to start using Shopsys Framework.
 Docker contains complete development environment necessary for running your application.
@@ -38,3 +40,5 @@ Please, check our [Contribution Guide](https://github.com/shopsys/shopsys/blob/m
 What to do when you are in troubles or need some help? Best way is to contact us on our Slack [http://slack.shopsys-framework.com/](http://slack.shopsys-framework.com/)
 
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
+
+[shopsys/shopsys]:(https://github.com/shopsys/shopsys)

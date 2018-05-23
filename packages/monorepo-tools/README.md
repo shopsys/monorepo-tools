@@ -9,6 +9,8 @@ You may need to update your `git` (tested on `2.16.1`).
 
 Commands will not run on MacOS as it uses slightly different implementation of `sed` and `echo`.
 
+This repository is maintained by [shopsys/shopsys] monorepo, information about changes are in [monorepo CHANGELOG.md](https://github.com/shopsys/shopsys/blob/master/CHANGELOG.md).
+
 ## Quick start
 
 ### 1. Download
@@ -136,3 +138,4 @@ What to do when you are in troubles or need some help? Best way is to contact us
 
 If you want to [report issues](https://github.com/shopsys/shopsys/issues/new), please use the main [Shopsys repository](https://github.com/shopsys/shopsys).
 
+[shopsys/shopsys]:(https://github.com/shopsys/shopsys)
