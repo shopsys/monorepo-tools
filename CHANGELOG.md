@@ -1,6 +1,23 @@
 # Changelog
 All notable changes, that change in some way the behavior of any of our packages that are maintained by monorepo repository.
 
+There is a list of all the repositories maintained by monorepo, changes in log below are ordered as this list:
+
+* [shopsys/framework]
+* [shopsys/project-base]
+* [shopsys/shopsys]
+* [shopsys/coding-standards]
+* [shopsys/form-types-bundle]
+* [shopsys/http-smoke-testing]
+* [shopsys/migrations]
+* [shopsys/monorepo-tools]
+* [shopsys/plugin-interface]
+* [shopsys/product-feed-google]
+* [shopsys/product-feed-heureka]
+* [shopsys/product-feed-heureka-delivery]
+* [shopsys/product-feed-interface]
+* [shopsys/product-feed-zbozi]
+
 Packages are formatted by release version. You can see all the changes done to package that you carry about with this tree.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
@@ -60,6 +77,59 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - db indices for product name are now created for translations in all locales 
     - `LoadDataFixturesCommand` - fixed the `--fixtures` option description 
 
+### [shopsys/project-base]
+#### Added
+- [#74 - Export personal information](https://github.com/shopsys/shopsys/pull/74): 
+    - frontend: added site for requesting personal data export [@stanoMilan]
+- [#94 - Installation guide update](https://github.com/shopsys/shopsys/pull/94): 
+    - support for [native installation](https://github.com/shopsys/shopsys/blob/master/docs/installation/native-installation.md) of the application
+
+#### Changed
+- [#70 - extraction of project-independent part of Shopsys\Environment](https://github.com/shopsys/shopsys/pull/70):
+    - moved constants with types of environment into [shopsys/framework](https://github.com/shopsys/framework)
+    - moved from `\Shopsys\Environment` to `\Shopsys\FrameworkBundle\Component\Environment\EnvironmentType`
+- [Dependency Injection strict mode is now enabled](https://github.com/shopsys/shopsys/commit/cdcb51268d56770ae460fe22b41cc09f51c4aab6) [@EdoBarnas]: 
+    - disables autowiring features that were removed in Symfony 4
+
+#### Fixed
+- [#92 - swiftmailer setting delivery_address renamed to delivery_addresses](https://github.com/shopsys/shopsys/pull/92):
+    - swiftmailer setting `delivery_address` renamed to `delivery_addresses` as the former does not exist anymore in version 3.*
+        - see https://github.com/symfony/swiftmailer-bundle/commit/5edfbd39eaefb176922a346c16b0ae3aaeec87e0
+        - the new setting requires array instead of string so the parameter `mailer_master_email_address` is wrapped into array in config
+- [`FpJsFormValidator` error in console on FE order pages](https://github.com/shopsys/shopsys/commit/fbadde0966e92941dd470591d6a8a4924a798aa8)
+- [failure during Docker image build triggered by `E: Unable to locate package postgresql-client-9.5`](https://github.com/shopsys/shopsys/pull/110)
+
+#### Removed
+- [#94 - Installation guide update](https://github.com/shopsys/shopsys/pull/94): 
+    - support of installation using Docker for Windows 10 Home and lower
+    - virtualization is extremely slow, native installation has much better results in such case
+
+### [shopsys/shopsys]
+#### Added
+- [#108 - demo entity extension](https://github.com/shopsys/shopsys/pull/108): 
+    - [cookbook](docs/cookbook/adding-new-attribute-to-an-entity.md) for adding new attribute to an entity
+
+#### Changed
+- [#110 - PHP-FPM Docker image tweaked for easier usage](https://github.com/shopsys/shopsys/pull/110):
+    - PHP-FPM Docker image tweaked for easier usage
+    - switched to Docker image `php:7.2-fpm-alpine` instead of `phpdockerio/php72-fpm:latest`
+            - official PHP Docker image is much more stable and provides tags other than `latest`
+            - built on Alpine linux which uses `apk` instead of `apt-get`
+            - in the container there is no `bash` installed, use `sh` instead
+    - all installation guides verified and tweaked
+        - Docker installation supported on Linux, MacOS and Windows 10 Pro and higher (recommended way of installing the application)
+        - native installation is also supported (recommended on Windows 10 Home and lower)
+    - as a rule, using minor versions of docker images (eg. `1.2` or `1.2-alpine`) if possible
+    - docs and `docker-compose.yml` templates reflect [changes of Docker images in shopsys/project-base]
+    - `docker-compose-win.yml.dist` created for Windows OS which creates local volume because of permission problems with
+        `postgresql` mounting
+    - docs: changed `./phing` instruction code with `php phing` to make it work with all operating systems
+
+#### Fixed
+- [#117 - documentation: missing redis extension in required php extensions](https://github.com/shopsys/shopsys/pull/117) [@pk16011990]
+- [#124 - Admin: Customer cannot be saved + fixed js error from administration console](https://github.com/shopsys/shopsys/pull/124): 
+    - admin: e-mail validation in customer editation is working correctly now
+
 ### [shopsys/http-smoke-testing]
 #### Added
 - [Troubleshooting section in `README.md` with explanation why tests do not fail on non-existing routes](https://github.com/shopsys/http-smoke-testing/commit/8f700eda96c2f6e1b018e56f5b03a46d09b4ae00)
@@ -99,59 +169,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#102 - Protected visibility of all private properties and methods of facades](https://github.com/shopsys/shopsys/pull/102):
     - visibility of all private properties and methods of facades was changed to protected
         - protected visibility allows overriding of behavior from projects
-
-### [shopsys/shopsys]
-#### Added
-- [#108 - demo entity extension](https://github.com/shopsys/shopsys/pull/108): 
-    - [cookbook](docs/cookbook/adding-new-attribute-to-an-entity.md) for adding new attribute to an entity
-
-#### Changed
-- [#110 - PHP-FPM Docker image tweaked for easier usage](https://github.com/shopsys/shopsys/pull/110):
-    - PHP-FPM Docker image tweaked for easier usage
-    - switched to Docker image `php:7.2-fpm-alpine` instead of `phpdockerio/php72-fpm:latest`
-            - official PHP Docker image is much more stable and provides tags other than `latest`
-            - built on Alpine linux which uses `apk` instead of `apt-get`
-            - in the container there is no `bash` installed, use `sh` instead
-    - all installation guides verified and tweaked
-        - Docker installation supported on Linux, MacOS and Windows 10 Pro and higher (recommended way of installing the application)
-        - native installation is also supported (recommended on Windows 10 Home and lower)
-    - as a rule, using minor versions of docker images (eg. `1.2` or `1.2-alpine`) if possible
-    - docs and `docker-compose.yml` templates reflect [changes of Docker images in shopsys/project-base]
-    - `docker-compose-win.yml.dist` created for Windows OS which creates local volume because of permission problems with
-        `postgresql` mounting
-    - docs: changed `./phing` instruction code with `php phing` to make it work with all operating systems
-
-#### Fixed
-- [#117 - documentation: missing redis extension in required php extensions](https://github.com/shopsys/shopsys/pull/117) [@pk16011990]
-- [#124 - Admin: Customer cannot be saved + fixed js error from administration console](https://github.com/shopsys/shopsys/pull/124): 
-    - admin: e-mail validation in customer editation is working correctly now
-
-### [shopsys/project-base]
-#### Added
-- [#74 - Export personal information](https://github.com/shopsys/shopsys/pull/74): 
-    - frontend: added site for requesting personal data export [@stanoMilan]
-- [#94 - Installation guide update](https://github.com/shopsys/shopsys/pull/94): 
-    - support for [native installation](https://github.com/shopsys/shopsys/blob/master/docs/installation/native-installation.md) of the application
-
-#### Changed
-- [#70 - extraction of project-independent part of Shopsys\Environment](https://github.com/shopsys/shopsys/pull/70):
-    - moved constants with types of environment into [shopsys/framework](https://github.com/shopsys/framework)
-    - moved from `\Shopsys\Environment` to `\Shopsys\FrameworkBundle\Component\Environment\EnvironmentType`
-- [Dependency Injection strict mode is now enabled](https://github.com/shopsys/shopsys/commit/cdcb51268d56770ae460fe22b41cc09f51c4aab6) [@EdoBarnas]: 
-    - disables autowiring features that were removed in Symfony 4
-
-#### Fixed
-- [#92 - swiftmailer setting delivery_address renamed to delivery_addresses](https://github.com/shopsys/shopsys/pull/92):
-    - swiftmailer setting `delivery_address` renamed to `delivery_addresses` as the former does not exist anymore in version 3.*
-        - see https://github.com/symfony/swiftmailer-bundle/commit/5edfbd39eaefb176922a346c16b0ae3aaeec87e0
-        - the new setting requires array instead of string so the parameter `mailer_master_email_address` is wrapped into array in config
-- [`FpJsFormValidator` error in console on FE order pages](https://github.com/shopsys/shopsys/commit/fbadde0966e92941dd470591d6a8a4924a798aa8)
-- [failure during Docker image build triggered by `E: Unable to locate package postgresql-client-9.5`](https://github.com/shopsys/shopsys/pull/110)
-
-#### Removed
-- [#94 - Installation guide update](https://github.com/shopsys/shopsys/pull/94): 
-    - support of installation using Docker for Windows 10 Home and lower
-    - virtualization is extremely slow, native installation has much better results in such case
 
 ## 7.0.0-alpha1 - 2018-04-12
 - We are releasing version 7 (open-source project known as Shopsys Framework) to better distinguish it from Shopsys 6

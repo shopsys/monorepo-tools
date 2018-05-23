@@ -1,4 +1,21 @@
-# UPGRADING 
+# UPGRADING
+There is a list of all the repositories maintained by monorepo, changes in log below are ordered as this list:
+
+* [shopsys/framework]
+* [shopsys/project-base]
+* [shopsys/shopsys]
+* [shopsys/coding-standards]
+* [shopsys/form-types-bundle]
+* [shopsys/http-smoke-testing]
+* [shopsys/migrations]
+* [shopsys/monorepo-tools]
+* [shopsys/plugin-interface]
+* [shopsys/product-feed-google]
+* [shopsys/product-feed-heureka]
+* [shopsys/product-feed-heureka-delivery]
+* [shopsys/product-feed-interface]
+* [shopsys/product-feed-zbozi]
+
 ## [From 7.0.0-alpha1 to Unreleased] 
 ### [shopsys/project-base]   
 - check changes in the `docker-compose.yml` template you used, there were a couple of important changes you need to replicate 
