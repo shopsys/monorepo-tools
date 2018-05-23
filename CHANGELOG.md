@@ -24,6 +24,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### [shopsys/framework]
+#### Fixed
+- [#132 - Admin: brand edit page: URLs setting rendering](https://github.com/shopsys/shopsys/pull/132):
+    - admin: brand detail page: rendering of URLs setting
+        - brand creation: URLs setting is not rendered at all
+        - brand editing: URLs section is rendered in the SEO section
+
 ### [shopsys/project-base]
 #### Fixed
 - [#131 - correct rendering of checkbox label](https://github.com/shopsys/shopsys/pull/131):
@@ -83,7 +90,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - command `shopsys:server:run` for running PHP built-in web server for a chosen domain
 - [#108 - demo entity extension](https://github.com/shopsys/shopsys/pull/108)
     - db indices for product name are now created for translations in all locales 
-    - `LoadDataFixturesCommand` - fixed the `--fixtures` option description 
+    - `LoadDataFixturesCommand` - fixed the `--fixtures` option description
 
 ### [shopsys/project-base]
 #### Added

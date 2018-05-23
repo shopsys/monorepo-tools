@@ -24,6 +24,7 @@
                 {{ seoFormRowMacros.multidomainRow(form.seoTitles, 'Page title'|trans, 60) }}
                 {{ seoFormRowMacros.multidomainRow(form.seoMetaDescriptions, 'Meta description'|trans, 155, 'input--domain') }}
                 {{ seoFormRowMacros.multidomainRow(form.seoH1s, 'Heading (H1)'|trans) }}
+                {% block brand_urls %}{% endblock %}
             </div>
         </div>
 
