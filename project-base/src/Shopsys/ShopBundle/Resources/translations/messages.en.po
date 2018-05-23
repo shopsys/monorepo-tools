@@ -166,13 +166,13 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
+msgid "E-mail with a link to the export of your personal data was sent to your e-mail address."
+msgstr ""
+
+msgid "E-mail with a link to the page with your personal data was sent to your e-mail address."
+msgstr ""
+
 msgid "EAN"
-msgstr ""
-
-msgid "Email with link to personal data display page was sent to your email address"
-msgstr ""
-
-msgid "Email with link to personal data export page was sent to your email address"
 msgstr ""
 
 msgid "Empty cart"
@@ -185,9 +185,6 @@ msgid "Error occurred"
 msgstr ""
 
 msgid "Error occurred when sending e-mail."
-msgstr ""
-
-msgid "Export customer data"
 msgstr ""
 
 msgid "Finish the order"
@@ -292,7 +289,7 @@ msgstr ""
 msgid "No order so far."
 msgstr ""
 
-msgid "No personal data for this email address"
+msgid "No personal data for this e-mail address"
 msgstr ""
 
 msgid "No products found for this brand"
@@ -523,7 +520,7 @@ msgstr ""
 msgid "Street"
 msgstr ""
 
-msgid "Subscription to email newsletter"
+msgid "Subscription to e-mail newsletter"
 msgstr ""
 
 msgid "Tax number"

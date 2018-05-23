@@ -13,12 +13,6 @@ msgstr ""
 msgid "%name% agrees with privacy policy."
 msgstr ""
 
-msgid "- Email settings"
-msgstr ""
-
-msgid "- Heureka - Verified by Customer"
-msgstr ""
-
 msgid "-- Choose action --"
 msgstr ""
 
@@ -40,7 +34,7 @@ msgstr ""
 msgid "--seo"
 msgstr ""
 
-msgid "--textarea-big"
+msgid "--textarea"
 msgstr ""
 
 msgid "1 254 CZK"
@@ -169,9 +163,6 @@ msgstr ""
 msgid "All search results"
 msgstr ""
 
-msgid "Allowed for shipping types"
-msgstr ""
-
 msgid "Amount"
 msgstr ""
 
@@ -269,6 +260,12 @@ msgid "Availability after sellout"
 msgstr ""
 
 msgid "Available in stock"
+msgstr ""
+
+msgid "Available payment methods"
+msgstr ""
+
+msgid "Available shipping methods"
 msgstr ""
 
 msgid "BEM is a style of writing, which defines the rules for writing css"
@@ -676,7 +673,7 @@ msgstr ""
 msgid "Customer detail"
 msgstr ""
 
-msgid "Customer email adress"
+msgid "Customer e-mail address"
 msgstr ""
 
 msgid "Customer has no orders so far."
@@ -782,9 +779,6 @@ msgid "Display of inputs like checkboxes and radio buttons is done via <strong c
 msgstr ""
 
 msgid "Display on"
-msgstr ""
-
-msgid "Display personal information"
 msgstr ""
 
 msgid "Display personal information settings"
@@ -1087,7 +1081,7 @@ msgstr ""
 msgid "Existing icon"
 msgstr ""
 
-msgid "Export email list in CSV format"
+msgid "Export e-mail list in CSV format"
 msgstr ""
 
 msgid "External scripts"
@@ -1885,7 +1879,7 @@ msgstr ""
 msgid "Password again"
 msgstr ""
 
-msgid "Password must be at least six characters and can't be the same as login name ."
+msgid "Password must be at least six characters and can't be the same as login name."
 msgstr ""
 
 msgid "Payment"
@@ -2812,6 +2806,9 @@ msgstr ""
 msgid "You can set the prices on product detail of specific variant."
 msgstr ""
 
+msgid "You can upload following formats: PNG, JPG"
+msgstr ""
+
 msgid "You can upload following formats: PNG, JPG, GIF"
 msgstr ""
 
@@ -2825,6 +2822,9 @@ msgid "You cannot choose product that is variant"
 msgstr ""
 
 msgid "You have made changes, don't forget to save them!"
+msgstr ""
+
+msgid "You have to create some payment first."
 msgstr ""
 
 msgid "You have to create some shipping first."

@@ -58,6 +58,9 @@ msgstr "Vyplňte prosím název firmy"
 msgid "Please enter content"
 msgstr "Vyplňte prosím text"
 
+msgid "Please enter date of creation"
+msgstr "Vyplňte prosím datum vytvoření"
+
 msgid "Please enter e-mail"
 msgstr "Vyplňte prosím e-mail"
 

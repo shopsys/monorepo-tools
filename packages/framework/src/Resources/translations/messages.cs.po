@@ -13,12 +13,6 @@ msgstr "%defaultCurrency% za 1 jednotku"
 msgid "%name% agrees with privacy policy."
 msgstr "%name% souhlasí se zpracováním osobních údajů."
 
-msgid "- Email settings"
-msgstr "- Nastavení emailů"
-
-msgid "- Heureka - Verified by Customer"
-msgstr "- Heureka - Ověřeno zákazníky"
-
 msgid "-- Choose action --"
 msgstr "-- Vyberte akci --"
 
@@ -40,8 +34,8 @@ msgstr "-- Vyberte značku --"
 msgid "--seo"
 msgstr "--seo"
 
-msgid "--textarea-big"
-msgstr "--textarea-big"
+msgid "--textarea"
+msgstr "--textarea"
 
 msgid "1 254 CZK"
 msgstr "1 254 Kč"
@@ -169,9 +163,6 @@ msgstr "Všechny stránky"
 msgid "All search results"
 msgstr "Všechny výsledky hledání"
 
-msgid "Allowed for shipping types"
-msgstr "Povoleno pro typy doprav"
-
 msgid "Amount"
 msgstr "Množství"
 
@@ -270,6 +261,12 @@ msgstr "Dostupnost při vyprodání"
 
 msgid "Available in stock"
 msgstr "Skladem"
+
+msgid "Available payment methods"
+msgstr "Dostupné platby"
+
+msgid "Available shipping methods"
+msgstr "Dostupné dopravy"
 
 msgid "BEM is a style of writing, which defines the rules for writing css"
 msgstr "BEM je styl zápisu, který určuje pravidla pro zápis css"
@@ -676,7 +673,7 @@ msgstr "Město zákazníka"
 msgid "Customer detail"
 msgstr "Karta zákazníka"
 
-msgid "Customer email adress"
+msgid "Customer e-mail address"
 msgstr "Emailová adresa zákazníka"
 
 msgid "Customer has no orders so far."
@@ -783,9 +780,6 @@ msgstr "Zobrazení inputů, jako jsou chekcboxy a radio buttony, se dělá skrze
 
 msgid "Display on"
 msgstr "Zobrazovat na"
-
-msgid "Display personal information"
-msgstr ""
 
 msgid "Display personal information settings"
 msgstr "Nastavení zobrazení osobních údajů"
@@ -935,7 +929,7 @@ msgid "E-shop identification"
 msgstr "Identifikace e-shopu"
 
 msgid "E-shop name"
-msgstr ""
+msgstr "Název e-shopu"
 
 msgid "EAN"
 msgstr "EAN"
@@ -1040,7 +1034,7 @@ msgid "Elements can be ordered behind each other"
 msgstr "Prvky lze dávat za sebe"
 
 msgid "Enter 32-digit code which will be sent to server"
-msgstr ""
+msgstr "Zadejte 32-číselný kod, který bude odeslán na server"
 
 msgid "Entered customer not found, please check entered data."
 msgstr "Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje"
@@ -1087,7 +1081,7 @@ msgstr "Bez DPH"
 msgid "Existing icon"
 msgstr "Současná ikona"
 
-msgid "Export email list in CSV format"
+msgid "Export e-mail list in CSV format"
 msgstr "Exportovat seznam emailů jako CSV"
 
 msgid "External scripts"
@@ -1271,7 +1265,7 @@ msgid "I want to deliver products to different address than the billing one"
 msgstr "Zboží chci doručit na jinou adresu než fakturační"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "ID %productId%"
 msgstr "ID %productId%"
@@ -1885,8 +1879,8 @@ msgstr "Heslo"
 msgid "Password again"
 msgstr "Heslo znovu"
 
-msgid "Password must be at least six characters and can't be the same as login name ."
-msgstr ""
+msgid "Password must be at least six characters and can't be the same as login name."
+msgstr "Heslo musí obsahovat alespoň šest znaků a nemůže být stejné jako přihlašovací jméno."
 
 msgid "Payment"
 msgstr "Platba"
@@ -2279,7 +2273,7 @@ msgid "Sending e-mails off, no e-mail will be sent from the app."
 msgstr "Odesílání mailů je vypnuto, z aplikace nebude odeslán žádný mail."
 
 msgid "Seo"
-msgstr ""
+msgstr "Seo"
 
 msgid "Set"
 msgstr "Nastavit"
@@ -2812,6 +2806,9 @@ msgstr "Kategorie můžete nastavit na kartě hlavní varianty"
 msgid "You can set the prices on product detail of specific variant."
 msgstr "Ceny můžete nastavit na kartě konkrétní varianty."
 
+msgid "You can upload following formats: PNG, JPG"
+msgstr "Můžete nahrávat formáty: PNG, JPG"
+
 msgid "You can upload following formats: PNG, JPG, GIF"
 msgstr "Můžete nahrávat formáty: PNG, JPG a GIF"
 
@@ -2826,6 +2823,9 @@ msgstr "Nelze vybrat zboží, které je variantou"
 
 msgid "You have made changes, don't forget to save them!"
 msgstr "Provedli jste změny, nezapomeňte je uložit!"
+
+msgid "You have to create some payment first."
+msgstr "Musíte nejdřív nějakou platbu vytvořit."
 
 msgid "You have to create some shipping first."
 msgstr "Musíte nejdřív nějakou dopravu vytvořit."
