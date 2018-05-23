@@ -51,9 +51,9 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     protected $vat;
 
     /**
-     * @var Collection
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport[]|Collection
      *
-     * @ORM\ManyToMany(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport")
+     * @ORM\ManyToMany(targetEntity="Shopsys\FrameworkBundle\Model\Transport\Transport", inversedBy="payments", cascade={"persist"})
      * @ORM\JoinTable(name="payments_transports")
      */
     protected $transports;
@@ -110,6 +110,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     {
         if (!$this->transports->contains($transport)) {
             $this->transports->add($transport);
+            $transport->addPayment($this);
         }
     }
 
@@ -118,14 +119,33 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
      */
     public function setTransports(array $transports)
     {
-        $this->transports->clear();
+        $this->clearTransports();
+
         foreach ($transports as $transport) {
             $this->addTransport($transport);
         }
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     */
+    public function removeTransport(Transport $transport)
+    {
+        if ($this->transports->contains($transport)) {
+            $this->transports->removeElement($transport);
+            $transport->removePayment($this);
+        }
+    }
+
+    protected function clearTransports()
+    {
+        foreach ($this->transports as $transport) {
+            $this->removeTransport($transport);
+        }
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Transport\Transport[]|\Doctrine\Common\Collections\Collection
      */
     public function getTransports()
     {

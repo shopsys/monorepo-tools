@@ -43,6 +43,11 @@ class TransportData
     public $domains;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment[]
+     */
+    public $payments;
+
+    /**
      * @param string[] $names
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null $vat
      * @param string[] $descriptions
@@ -65,6 +70,7 @@ class TransportData
         $this->hidden = $hidden;
         $this->image = new ImageUploadData();
         $this->domains = $domains;
+        $this->payments = [];
     }
 
     /**
@@ -93,5 +99,6 @@ class TransportData
             $domains[] = $transportDomain->getDomainId();
         }
         $this->domains = $domains;
+        $this->payments = $transport->getPayments()->toArray();
     }
 }
