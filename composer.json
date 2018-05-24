@@ -54,10 +54,6 @@
     },
     {
       "type": "vcs",
-      "url": "https://github.com/shopsys/doctrine-translatable-bundle.git"
-    },
-    {
-      "type": "vcs",
       "url": "https://github.com/shopsys/jparser.git"
     }
   ],
