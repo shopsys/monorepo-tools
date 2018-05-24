@@ -936,7 +936,7 @@ That's why is this section formatted differently.
 - `.travis.yml` file with Travis CI configuration
 
 [Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...HEAD
-[v7.0.0-alpha2]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2
+[7.0.0-alpha2]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2
 
 [shopsys/shopsys]: https://github.com/shopsys/shopsys
 [shopsys/project-base]: https://github.com/shopsys/project-base

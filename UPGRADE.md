@@ -145,8 +145,8 @@ parameters:
 
 ```
 
-[From 7.0.0-alpha2 to Unreleased]:(https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...HEAD)
-[From 7.0.0-alpha1 to 7.0.0-alpha2]:(https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2)
+[From 7.0.0-alpha2 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...HEAD
+[From 7.0.0-alpha1 to 7.0.0-alpha2]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2
 
 [shopsys/shopsys]: https://github.com/shopsys/shopsys 
 [shopsys/project-base]: https://github.com/shopsys/project-base 
