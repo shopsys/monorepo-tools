@@ -16,7 +16,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/product-feed-interface]
 * [shopsys/product-feed-zbozi]
 
-## [From 7.0.0-alpha1 to Unreleased] 
+## [From 7.0.0-alpha2 to Unreleased]
+
+## [From 7.0.0-alpha1 to 7.0.0-alpha2]
 ### [shopsys/project-base]   
 - check changes in the `docker-compose.yml` template you used, there were a couple of important changes you need to replicate 
     - easiest way is to overwrite your `docker-compose.yml` with by the appropriate template 
@@ -143,7 +145,8 @@ parameters:
 
 ```
 
-[From 7.0.0-alpha1 to Unreleased]:(https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...HEAD) 
+[From 7.0.0-alpha2 to Unreleased]:(https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...HEAD)
+[From 7.0.0-alpha1 to 7.0.0-alpha2]:(https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2)
 
 [shopsys/shopsys]: https://github.com/shopsys/shopsys 
 [shopsys/project-base]: https://github.com/shopsys/project-base 
