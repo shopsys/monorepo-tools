@@ -21,7 +21,7 @@
         }
     },
     "require": {
-        "php": "^7.0",
+        "php": "^7.1",
         "shopsys/product-feed-interface": "dev-master",
         "symfony/config": "^3.4",
         "symfony/dependency-injection": "^3.4",
