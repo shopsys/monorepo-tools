@@ -78,7 +78,7 @@ class AdministratorFormType extends AbstractType
                 'first_options' => [
                     'label' => t('Password'),
                     'constraints' => $this->getFirstPasswordConstraints($options['scenario']),
-                    'icon_title' => t('Password must be at least six characters and can\'t be the same as login name .'),
+                    'icon_title' => t('Password must be at least six characters and can\'t be the same as login name.'),
 
                 ],
                 'second_options' => [

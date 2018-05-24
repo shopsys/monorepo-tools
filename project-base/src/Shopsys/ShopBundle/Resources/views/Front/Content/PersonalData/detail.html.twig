@@ -20,7 +20,7 @@
     </div>
     <div class="padding-20">
         {% if user is null and orders|length == 0 and newsletterSubscriber is null %}
-            <h2>{{ 'No personal data for this email address'|trans }}</h2>
+            <h2>{{ 'No personal data for this e-mail address'|trans }}</h2>
         {% else %}
             {% if user is not null %}
             <div class="wrap-box">
@@ -98,7 +98,7 @@
 
             {% if newsletterSubscriber %}
                 <div class="wrap-box">
-                <h2 class="wrap-box__title">{{ 'Subscription to email newsletter'|trans }}</h2>
+                <h2 class="wrap-box__title">{{ 'Subscription to e-mail newsletter'|trans }}</h2>
                 <div class="wrap-box__in">
                 <table class="table-params">
                     <tr>

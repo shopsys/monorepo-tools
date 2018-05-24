@@ -22,7 +22,7 @@
     },
     "require": {
         "php": "^7.1",
-        "shopsys/product-feed-interface": "dev-master",
+        "shopsys/product-feed-interface": "7.0.0-alpha2",
         "symfony/config": "^3.4",
         "symfony/dependency-injection": "^3.4",
         "symfony/framework-bundle": "^3.4",

@@ -122,7 +122,7 @@ msgid "Current status"
 msgstr "Aktuální stav"
 
 msgid "Customer with e-mail address <strong>{{ email }}</strong> doesn't exist. <a href=\"{{ registrationLink }}\"> Register</a>"
-msgstr "Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje. <a href=\"{{ registrationLink }}\">Zaregistrovat</a>"
+msgstr "Zákazník s e-mailovou adresou <strong>{{ email }}</strong> neexistuje. <a href=\"{{ registrationLink }}\">Zaregistrovat</a>"
 
 msgid "Date of subscription"
 msgstr "Datum přihlášení"
@@ -166,14 +166,14 @@ msgstr "Stáhnout zákaznické údaje"
 msgid "E-mail"
 msgstr "E-mail"
 
+msgid "E-mail with a link to the export of your personal data was sent to your e-mail address."
+msgstr "E-mail s odkazem na stránku exportu osobních údajů byl odeslán na vaši e-mailovou adresu."
+
+msgid "E-mail with a link to the page with your personal data was sent to your e-mail address."
+msgstr "E-mail s odkazem na stránku s údaji o osobních údajích byl odeslán na vaši e-mailovou adresu."
+
 msgid "EAN"
 msgstr "EAN"
-
-msgid "Email with link to personal data display page was sent to your email address"
-msgstr "E-mail s odkazem na stránku s údaji o osobních údajích byl odeslán na vaši e-mailovou adresu"
-
-msgid "Email with link to personal data export page was sent to your email address"
-msgstr "E-mail s odkazem na stránku exportu osobních údajů byl odeslán na vaši e-mailovou adresu"
 
 msgid "Empty cart"
 msgstr "Prázdný nákupní košík"
@@ -251,7 +251,7 @@ msgid "Last name"
 msgstr "Příjmení"
 
 msgid "Link to password reset sent to e-mail <strong>{{ email }}</strong>."
-msgstr "Odkaz pro vyresetování hesla byl zaslán na email <strong>{{ email }}</strong>."
+msgstr "Odkaz pro vyresetování hesla byl zaslán na e-mail <strong>{{ email }}</strong>."
 
 msgid "List of subcategories"
 msgstr "Seznam podkategorií"
@@ -289,7 +289,7 @@ msgstr "Ne"
 msgid "No order so far."
 msgstr "Dosud nemáte žádnou objednávku."
 
-msgid "No personal data for this email address"
+msgid "No personal data for this e-mail address"
 msgstr "Pro zadaný e-mail neevidujeme žádné osobní údaje"
 
 msgid "No products found for this brand"
@@ -520,7 +520,7 @@ msgstr "Stav"
 msgid "Street"
 msgstr "Ulice"
 
-msgid "Subscription to email newsletter"
+msgid "Subscription to e-mail newsletter"
 msgstr "Přihlášení k zpravodaji"
 
 msgid "Tax number"
@@ -596,7 +596,7 @@ msgid "Unable to remove item from cart. The link for removing it probably expire
 msgstr "Nepodařilo se odstranit položku z košíku. Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou."
 
 msgid "Unable to send some e-mails, please contact us for order verification."
-msgstr "Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte."
+msgstr "Nepodařilo se odeslat některé e-maily, pro ověření objednávky nás prosím kontaktujte."
 
 msgid "Unit price including VAT"
 msgstr "Jednotková cena s DPH"

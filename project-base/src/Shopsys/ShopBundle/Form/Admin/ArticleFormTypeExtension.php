@@ -21,7 +21,7 @@ class ArticleFormTypeExtension extends AbstractTypeExtension
             'constraints' => [
                 new Constraints\NotBlank(['message' => 'Please enter date of creation']),
             ],
-            'label' => 'Created at',
+            'label' => 'Creation date',
         ]);
         $builder->add($builderArticleDataGroup);
     }

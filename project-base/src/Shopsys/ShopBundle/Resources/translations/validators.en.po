@@ -58,6 +58,9 @@ msgstr ""
 msgid "Please enter content"
 msgstr ""
 
+msgid "Please enter date of creation"
+msgstr ""
+
 msgid "Please enter e-mail"
 msgstr ""
 

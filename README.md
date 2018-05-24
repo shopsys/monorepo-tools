@@ -110,7 +110,7 @@ We distribute our main parts of Shopsys Framework
 [shopsys/project-base](https://github.com/shopsys/project-base) and
 [shopsys/framework](https://github.com/shopsys/framework) under two different licenses: 
 
-* [Community License](./LICENSE) in MIT style for small to mid-size e-commerce sites with yearly total online sales less than €10.000.000
+* [Community License](./LICENSE) in MIT style for growing small to mid-size e-commerce sites with total online sales less than 12.000.000 EUR / year (3.000.000 EUR / quarter)
 * Commercial License
 
 Learn the principles on which we distribute our product on our website at [Licenses and Pricing section](https://www.shopsys.com/licensing).

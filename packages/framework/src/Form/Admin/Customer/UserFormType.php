@@ -132,7 +132,7 @@ class UserFormType extends AbstractType
                     new Email(['message' => 'Please enter valid e-mail']),
                     new UniqueEmail(['ignoredEmail' => $user !== null ? $user->getEmail() : null]),
                 ],
-                'label' => t('Email'),
+                'label' => t('E-mail'),
             ]);
 
         $builderRegisteredCustomerGroup = $builder->create('registeredCustomer', GroupType::class, [
@@ -164,7 +164,7 @@ class UserFormType extends AbstractType
 
             $builderRegisteredCustomerGroup->add('lastLogin', DisplayOnlyType::class, [
                 'label' => t('Last login'),
-                'data' => $user->getLastLogin() !== null ? $this->dateTimeFormatterExtension->formatDateTime($user->getLastLogin()) : 'never',
+                'data' => $user->getLastLogin() !== null ? $this->dateTimeFormatterExtension->formatDateTime($user->getLastLogin()) : t('never'),
             ]);
         }
 

@@ -13,12 +13,6 @@ msgstr "%defaultCurrency% za 1 jednotku"
 msgid "%name% agrees with privacy policy."
 msgstr "%name% souhlasí se zpracováním osobních údajů."
 
-msgid "- Email settings"
-msgstr "- Nastavení emailů"
-
-msgid "- Heureka - Verified by Customer"
-msgstr "- Heureka - Ověřeno zákazníky"
-
 msgid "-- Choose action --"
 msgstr "-- Vyberte akci --"
 
@@ -36,15 +30,6 @@ msgstr "-- Vyberte dostupnost --"
 
 msgid "-- Choose brand --"
 msgstr "-- Vyberte značku --"
-
-msgid "--seo"
-msgstr "--seo"
-
-msgid "--textarea-big"
-msgstr "--textarea-big"
-
-msgid "1 254 CZK"
-msgstr "1 254 Kč"
 
 msgid "<a href=\"{{ url }}\">Some required e-mail templates are not fully set.</a>"
 msgstr "<a href=\"{{ url }}\">Některé povinné emailové šablony nejsou vyplněny.</a>"
@@ -169,26 +154,11 @@ msgstr "Všechny stránky"
 msgid "All search results"
 msgstr "Všechny výsledky hledání"
 
-msgid "Allowed for shipping types"
-msgstr "Povoleno pro typy doprav"
-
 msgid "Amount"
 msgstr "Množství"
 
-msgid "An example might be empty space with icon behind it, which we want to align with icon next to input."
-msgstr "Příkladem může být prázdný prostor a za ním ikonka, kterou chceme lícovat s ikonkou vedle inputu."
-
 msgid "Ancestor category"
 msgstr "Nadřazená kategorie"
-
-msgid "Any content"
-msgstr "Jakýkoliv obsah"
-
-msgid "Any content with smaller indent between content and line"
-msgstr "Jakýkoliv obsah s menším odsazením mezi obsahem a čarou"
-
-msgid "Any element on right"
-msgstr "Jakýkoliv prvek vpravo"
 
 msgid "Applicable variables"
 msgstr "Použitelné proměnné"
@@ -229,20 +199,11 @@ msgstr "Přehled článků"
 msgid "Articles without positioning"
 msgstr "Články bez umístění"
 
-msgid "As this is a system which will often use same or similar elements, it is suitable to use a type of coding that divides web to components and variously combines them with each other."
-msgstr "Jelikož se jedná o systém, který bude často používat stejné či podobné prvky, je vhodné využít typ kódování, který dělí web na komponenty a různě je kombinuje mezi sebou."
-
 msgid "Assign to category"
 msgstr "Přiřazení do kategorie"
 
-msgid "At first we write underlying characteristics for element (position, float, display, width, ... ), then stylistic ones (font, color, background, ... )"
-msgstr "První píšeme zásadní vlastnosti pro element (position, float, display, width, ... ), jako druhé se píší stylistické věci (font, color, background, ... )"
-
 msgid "Attachment"
 msgstr "Příloha"
-
-msgid "Attention, the second variant doesn't have js to work with yet!"
-msgstr "Pozor, druhá varianta prozatím nemá js, které by s ní pracovalo!"
 
 msgid "Automatic stock calculation"
 msgstr "Automatické výpočty skladových zásob"
@@ -271,17 +232,14 @@ msgstr "Dostupnost při vyprodání"
 msgid "Available in stock"
 msgstr "Skladem"
 
-msgid "BEM is a style of writing, which defines the rules for writing css"
-msgstr "BEM je styl zápisu, který určuje pravidla pro zápis css"
+msgid "Available payment methods"
+msgstr "Dostupné platby"
 
-msgid "BOX - complete parts of the site - NOT REUSABLE (e.g. product detail page layout)"
-msgstr "BOX - ucelené části stránek - znovu NEPOUŽITELNÉ (např. rozvržení stránky detailu produktu)"
+msgid "Available shipping methods"
+msgstr "Dostupné dopravy"
 
 msgid "Back to overview"
 msgstr "Zpět na přehled"
-
-msgid "Base message text is without colours and outstretched only to the end of the text, therefore it needs at least to identify the colour type."
-msgstr "Text hlášky v základu je úplně bez barev a roztáhnutý pouze do konce textu, potřebuje tedy minimálně určit barevný typ."
 
 msgid "Base price"
 msgstr "Základní cena"
@@ -289,20 +247,11 @@ msgstr "Základní cena"
 msgid "Base price in %currencyCode%"
 msgstr "Základní cena v %currencyCode%"
 
-msgid "Basic component for forms, extremely big and set in the default form generating. Use this for most cases."
-msgstr "Základní komponenta pro formuláře, ohromně velká a zasazená do defaultního generování formulářů. Pro většinu příápadů použijete toto."
-
-msgid "Basic elements display"
-msgstr "Zobrazení základních prvků"
-
 msgid "Basic frontend currency %domainName%"
 msgstr "Základní měna frontendu %domainName%"
 
 msgid "Basic information"
 msgstr "Základní informace"
-
-msgid "Basic table with one class on table element. Basic look for showing simple data (not forms)."
-msgstr "Obyčejná tabulka s jednou třídou na table elementu. Jednoduchý vzhled pro zobrazení jednoduchých dat (nikoliv formulářů)."
 
 msgid "Because availability \"%name%\" is used with other products also, you have to choose a new availability which will replace the existing one. Which availability you want to set to these products?"
 msgstr "Jelikož dostupnost \"%name%\" je používána ještě u některých produktů, musíte zvolit, jaká dostupnost bude použita místo ní. Jakou dostupnost chcete těmto produktům nastavit?"
@@ -328,9 +277,6 @@ msgstr "Fakturační adresa - jméno, příjmení, firma, ič, dič a fakt. adre
 msgid "Billing data"
 msgstr "Fakturační údaje"
 
-msgid "Bolder line"
-msgstr "Výraznější řádek"
-
 msgid "Brand"
 msgstr "Značka"
 
@@ -352,47 +298,11 @@ msgstr "Značky"
 msgid "Browse"
 msgstr "Procházet"
 
-msgid "Btn"
-msgstr "Btn"
-
-msgid "Btn-link-style"
-msgstr "Btn-link-style"
-
-msgid "Btn-no-style"
-msgstr "Btn-no-style"
-
 msgid "Bulk edit"
 msgstr "Hromadné úpravy"
 
 msgid "Bulk editing done"
 msgstr "Hromadná úprava byla provedena"
-
-msgid "Button"
-msgstr "Tlačítko"
-
-msgid "Button after input"
-msgstr "Button za inputem"
-
-msgid "Button that looks like link"
-msgstr "Tlačítko, co vypadá jako odkaz"
-
-msgid "Button that looks like link with not underlined icon"
-msgstr "Tlačítko, co vypadá jako odkaz s nepodtrženou ikonkou"
-
-msgid "Button that looks like text"
-msgstr "Tlačítko, co vypadá jak text"
-
-msgid "Buttons"
-msgstr "Tlačítka"
-
-msgid "By using modifier on the line it is possible to bluish the whole line and create a group of lines with headline and image."
-msgstr "Pomocí modifikátoru na řádku lze zmodrat celý řádek a vytvořit jakoby skupiny řádků s nadpisem a obrázkem."
-
-msgid "By using modifier on the line it is possible to bluish the whole line."
-msgstr "Pomocí modifikátoru na řádku lze zmodrat celý řádek."
-
-msgid "CSS documentation"
-msgstr "CSS dokumentace"
 
 msgid "Catalogue number"
 msgstr "Katalogové číslo"
@@ -417,15 +327,6 @@ msgstr "Byla upravena kategorie <strong><a href=\"{{ url }}\">{{ name }}</a></st
 
 msgid "Change for"
 msgstr "Změna pro"
-
-msgid "Checkboxes"
-msgstr "Checkboxy"
-
-msgid "Checkboxes and radio buttons"
-msgstr "Checkboxy a radiobuttony"
-
-msgid "Checkboxes or radiobuttons"
-msgstr "Checkboxy či radia"
 
 msgid "Choose"
 msgstr "Vybrat"
@@ -472,23 +373,11 @@ msgstr "Kód"
 msgid "Code of service Heureka - Verified by Customer"
 msgstr "Kód služby Ověřeno zákazníky"
 
-msgid "Coding using BEM"
-msgstr "Kódování technikou BEM"
-
 msgid "Coefficient"
 msgstr "Koeficient"
 
 msgid "Colour"
 msgstr "Barva"
-
-msgid "Colour modification"
-msgstr "Barevené modifikace"
-
-msgid "Colouring in-message"
-msgstr "Barevnost in-message"
-
-msgid "Colours present event that happened."
-msgstr "Barvy prezentují událost, která se stala."
 
 msgid "Communication with customer"
 msgstr "Komunikace se zákazníkem"
@@ -508,9 +397,6 @@ msgstr "IČ"
 msgid "Complement to title"
 msgstr "Doplněk k titulku"
 
-msgid "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anything in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
-msgstr "Komponenta se skládá z 5 hlavních prvků. Prvním je obal <strong class=\"in-article__visible\">form-line</strong>, který dodává formuláři pozadí, odsazení a bordery. Je to vlastně jeden řárek této struktury. V něm je další důležitý prvek, a to <strong class=\"in-article__visible\">form-line__label</strong>. Nemusíme to nutně brát jako label, jedná se hlavně o buďto titulek nebo důležitou část pro celý malý formulářový blok. Nejčastěji je to však label. Další 2 prvky jsou pro zarovnání obsahové části. Je to <strong class=\"in-article__visible\">form-line__side</strong> a <strong class=\"in-article__visible\">form-line__line</strong>. Nachází se za labelem a první z nich zarovnává obsah vedle labelu a nikdy se nedostane pod label. Druhý zabírá celou šířku pod labelem. A to nejdůležitější je <strong class=\"in-article__visible\">form-line__item</strong> což je obal pro cokoliv v obsahové části. Obalit to potřebujeme proto, že prvky by měly být od sebe vždy odsazeny a správně zarovnány. Teprve do těchto prvků se strkají inputy, texty, ikonky a podobně! Tento obal nepotřebují jen prvky, které zabírají 100% šířku."
-
 msgid "Contact form"
 msgstr "Kontaktní formulář"
 
@@ -519,27 +405,6 @@ msgstr "Napište nám"
 
 msgid "Content"
 msgstr "Obsah"
-
-msgid "Conversion button always over the entire width"
-msgstr "Konverzní tlačítko vždy přes celou šířku"
-
-msgid "Conversion button big"
-msgstr "Konverzní tlačítko velké"
-
-msgid "Conversion button medium"
-msgstr "Konverzní tlačítko střední"
-
-msgid "Conversion button standard"
-msgstr "Konverzní tlačítko standartní"
-
-msgid "Conversion button to adding"
-msgstr "Konverzní tlačítko pro přidání"
-
-msgid "Conversion button to adding - small"
-msgstr "Konverzní tlačítko pro přidání - malé"
-
-msgid "Conversion button to form validations etc."
-msgstr "Konverzní tlačítko na potvrzování formulářů apod."
 
 msgid "Cookies information"
 msgstr "Informace o cookies"
@@ -676,7 +541,7 @@ msgstr "Město zákazníka"
 msgid "Customer detail"
 msgstr "Karta zákazníka"
 
-msgid "Customer email adress"
+msgid "Customer e-mail address"
 msgstr "Emailová adresa zákazníka"
 
 msgid "Customer has no orders so far."
@@ -724,9 +589,6 @@ msgstr "Výchozí měna administrace"
 msgid "Default availability for the stock settings modified"
 msgstr "Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno"
 
-msgid "Default button"
-msgstr "Defaultní tlačítko"
-
 msgid "Default pricing group"
 msgstr "Výchozí cenová skupina"
 
@@ -760,9 +622,6 @@ msgstr "Popis"
 msgid "Description can be set on product detail of the main product."
 msgstr "Popis můžete nastavit na kartě hlavní varianty."
 
-msgid "Disabled button without cursor"
-msgstr "Disabled tlačítko i bez kurzoru"
-
 msgid "Discard changes"
 msgstr "Zahodit změny"
 
@@ -775,17 +634,8 @@ msgstr "Zobrazit"
 msgid "Display and availability"
 msgstr "Zobrazení a dostupnost"
 
-msgid "Display input -> input"
-msgstr "Zobrazení input -> input"
-
-msgid "Display of inputs like checkboxes and radio buttons is done via <strong class=\"in-article__visible\">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class=\"in-article__visible\">inList</strong> and they are displayed below each other on true."
-msgstr "Zobrazení inputů, jako jsou chekcboxy a radio buttony, se dělá skrze <strong class=\"in-article__visible\">form_widget</strong>. Jaký typ se zobrazí - jestli inputy za sebou, nebo pod sebou - určí attr. Pokud není vyplněn, jsou za sebou, při nastavení <strong class=\"in-article__visible\">inList</strong> na true, se zobrazí pod sebou."
-
 msgid "Display on"
 msgstr "Zobrazovat na"
-
-msgid "Display personal information"
-msgstr ""
 
 msgid "Display personal information settings"
 msgstr "Nastavení zobrazení osobních údajů"
@@ -874,23 +724,11 @@ msgstr "Doména"
 msgid "Domain %domainName%"
 msgstr "Doména %domainName%"
 
-msgid "Domain 1"
-msgstr "Doména 1"
-
-msgid "Domain 2"
-msgstr "Doména 2"
-
 msgid "Domain <strong>{{ name }}</strong> modified"
 msgstr "Byla upravena doména <strong>{{ name }}</strong>"
 
 msgid "Domain name"
 msgstr "Název domény"
-
-msgid "Double border between elements prevention"
-msgstr "Prevence dvojtého borderu mezi prvky"
-
-msgid "Drag and drop on lines"
-msgstr "Drag and drop na řádky"
 
 msgid "Drag file here"
 msgstr "Zde přetáhněte soubor"
@@ -935,7 +773,7 @@ msgid "E-shop identification"
 msgstr "Identifikace e-shopu"
 
 msgid "E-shop name"
-msgstr ""
+msgstr "Název e-shopu"
 
 msgid "EAN"
 msgstr "EAN"
@@ -1027,20 +865,8 @@ msgstr "Editace stránky slideru"
 msgid "Editing slider page - %name%"
 msgstr "Editace stránky slideru - %name%"
 
-msgid "Element alignment to side"
-msgstr "Zarovnání prvku na stranu"
-
-msgid "Element which is being aligned is usually icon."
-msgstr "Prvkem, který se někam zarovnává bývá hlavně ikona."
-
-msgid "Elements can be aligned under label"
-msgstr "Prvky lze zarovnat pod label"
-
-msgid "Elements can be ordered behind each other"
-msgstr "Prvky lze dávat za sebe"
-
 msgid "Enter 32-digit code which will be sent to server"
-msgstr ""
+msgstr "Zadejte 32-číselný kod, který bude odeslán na server"
 
 msgid "Entered customer not found, please check entered data."
 msgstr "Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje"
@@ -1050,15 +876,6 @@ msgstr "Zadává se ve dnech. Nula reprezentuje zboží skladem, nevyplněné zn
 
 msgid "Entry price type"
 msgstr "Typ vstupní ceny"
-
-msgid "Error message"
-msgstr "Chybová hláška"
-
-msgid "Error message - block with icon, small"
-msgstr "Chybová hláška - bloková s ikonkou, malá"
-
-msgid "Error message - block with the close button, for closing, the close button can be used only with block error messages"
-msgstr "Chybová hláška - bloková s křížkem, na zavření, křížek se dá použít pouze u blokových"
 
 msgid "Error messages"
 msgstr "Chybové hlášky"
@@ -1087,14 +904,11 @@ msgstr "Bez DPH"
 msgid "Existing icon"
 msgstr "Současná ikona"
 
-msgid "Export email list in CSV format"
+msgid "Export e-mail list in CSV format"
 msgstr "Exportovat seznam emailů jako CSV"
 
 msgid "External scripts"
 msgstr "Měřící skripty"
-
-msgid "FORM - form elements, form wraps, structures"
-msgstr "FORM - formulářové prvky, obaly formulářů, struktůry"
 
 msgid "Feed"
 msgstr "Feed"
@@ -1144,9 +958,6 @@ msgstr "Příznaky"
 msgid "Flags overview"
 msgstr "Přehled příznaků"
 
-msgid "Folders structure"
-msgstr "Struktura složek"
-
 msgid "Following expressions are allowed in whitelist: %whitelist%."
 msgstr "Ve whitelistu jsou povoleny následující výrazy: %whitelist%."
 
@@ -1159,23 +970,11 @@ msgstr "Pro odstranění jednotky \"%name% musíte zvolit, která se má všude,
 msgid "For removing pricing group \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
 msgstr "Pro odstranění cenové skupiny \"%name%\" musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
 
-msgid "For subfolders of folder components, the subfolder name is inserted into the component name for better search, but the component filename contains only the rest of the class name."
-msgstr "Pro podsložky složky components platí, že název podsložky se vkládá i do názvu komponenty pro lepší vyhledání, nicméně název souboru komponenty obsahuje jen zbytek názvu třídy"
-
 msgid "Forgotten password"
 msgstr "Zapomenuté heslo"
 
 msgid "Forgotten password sending"
 msgstr "Zaslání zapomenutého hesla"
-
-msgid "Form structure"
-msgstr "Formulářová struktůra"
-
-msgid "Form-group"
-msgstr "Form-group"
-
-msgid "Form-line"
-msgstr "Form-line"
 
 msgid "Free"
 msgstr "Zdarma"
@@ -1194,9 +993,6 @@ msgstr "Frontend"
 
 msgid "Full name"
 msgstr "Celé jméno"
-
-msgid "General wrap-border"
-msgstr "Obecné wrap-border"
 
 msgid "Generate"
 msgstr "Vygenerovat"
@@ -1224,15 +1020,6 @@ msgstr "Nadpis H1"
 
 msgid "Headline"
 msgstr "Titulek"
-
-msgid "Headline of information block"
-msgstr "Titulek bloku informací"
-
-msgid "Headline of information block with button possibility"
-msgstr "Titulek bloku informací s možnosti tlačítka"
-
-msgid "Headline of information block with possibility to expand, necessary to bind to existing JS"
-msgstr "Titulek bloku informací s rozevíráním, je nutno navázat na již hotový JS"
 
 msgid "Height [px]"
 msgstr "Výška [px]"
@@ -1271,37 +1058,16 @@ msgid "I want to deliver products to different address than the billing one"
 msgstr "Zboží chci doručit na jinou adresu než fakturační"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "ID %productId%"
 msgstr "ID %productId%"
-
-msgid "ID is an element with the highest priority in the CSS and that's why we are going to avoid it. Once we tie something to ID, we can beat it only with ID again or with !important. In real usage of SSS there had to be multiple adjustments of the same parts but on different places. If we use only classes and components we won't have these problems."
-msgstr "ID je v CSS element s nejvyžší prioritou a proto se mu vyhneme. Jakmile něco navážeme na ID, přebijeme to pouze něčím s ID nebo pomocí !important. V reálném využití v SS5 se díky tomu musely stejné části na různých místech v eshopu stylovat vícekrát. Pokud využijeme pouze třídy a komponenty, těmto problémům se vyhneme."
-
-msgid "IN - small components (arrow by link, evaluation asterisks) small things that occur often on more places"
-msgstr "IN - malé komponenty (šipka u linku, hvěždičky hodnocení) malé věci co jsou často někde"
 
 msgid "IP address"
 msgstr "IP adresa"
 
 msgid "Icon"
 msgstr "Ikona"
-
-msgid "If we combine 3 components with each other, it will create nice forms design. We are talking about <strong class=\"in-article__visible\">form-group</strong> for headline, <strong class=\"in-article__visible\">form-line</strong> for form and <strong class=\"in-article__visible\">wrap-border</strong> for separating blocks of information."
-msgstr "Pokud pěkně nakombinujeme 3 komponenty do sebe, získáme skvělý vzhled formulářů. Jedná se o <strong class=\"in-article__visible\">form-group</strong> na titulek, <strong class=\"in-article__visible\">form-line</strong> na formulář a <strong class=\"in-article__visible\">wrap-border</strong> na oddělení bloků informací od sebe."
-
-msgid "If we need something about input size"
-msgstr "Když potřebujeme něco o velikosti inputu"
-
-msgid "If we want information about number of characters"
-msgstr "Když chceme info o počtu znaků"
-
-msgid "If we want to move the lines, we will insert the icon as shown below. Don't forget to connect it to JS."
-msgstr "Pokud chceme, aby řádky šlo přesouvat, vložíme ikonku podle ukázky níže. Nesmíme však zapomenout toto napojit na JS."
-
-msgid "If you add modifier to first TD/TH --label, cell is given maximum width and is aligned with other form-structure. Other cells are expanded by the browser as needed."
-msgstr "Pokud se prvním TD/TH přidá modifikátor --label, buňka dostane maximální šířku a lícuje s ostatní formulářovou strukturou. Ostatní buňky roztahuje prohlížeč podle potřeb."
 
 msgid "If you want for these changes to manifest everywhere (on production, devel, localhost etc.) instruct a programmer to commit the changes into GIT!"
 msgstr "Pokud chcete, aby se změny projevily všude (na produkci, develu, localhostu apod.), dejte vědět programátorovi, aby změny zavedl do GITu!"
@@ -1321,23 +1087,8 @@ msgstr "Obrázek s odkazem"
 msgid "Images"
 msgstr "Obrázky"
 
-msgid "Important is good sometimes, but once we tie important to something, we can beat it only with more specific write with another important. That's why we use the important only in utmost and logically excusable cases."
-msgstr "Important se opravdu někdy hodí, avšak jakmile něčemu nastavíme important, přebít to můžeme již jen specifičtějším zápisem s dalším importantem. Important využijeme tedy jen v krajních a logicky odůvodnitelných případech."
-
 msgid "In a particular domain tab it is not possible to adjust the order and plunge of categories. Please go to the category detail or to overview of categories of all domains"
 msgstr "Na záložce konkrétní domény není možné upravovat pořadí a zanoření kategorií. Prosím přejděte na kartu kategorie nebo na přehled kategorií všech domén."
-
-msgid "In case we need the tag button to look like link. There is also modification for button with icon on left."
-msgstr "V případě, že potřebujeme, aby tlačíkto (tag button) vypadalo, jako odkaz. Je zde i modifikace na tlačítko s ikonkou vlevo."
-
-msgid "In case we need the tag button to look like simple text."
-msgstr "V případě, že potřebujeme, aby tlačíkto (tag button) vypadalo, jako obyčený text."
-
-msgid "In-message"
-msgstr "In-message"
-
-msgid "In-message types"
-msgstr "Typy in-message"
 
 msgid "Inactive"
 msgstr "Neaktivní"
@@ -1345,95 +1096,17 @@ msgstr "Neaktivní"
 msgid "Including VAT"
 msgstr "S DPH"
 
-msgid "Information message"
-msgstr "Informační hláška"
-
-msgid "Information message - block"
-msgstr "Informační hláška - bloková"
-
-msgid "Input"
-msgstr "Input"
-
-msgid "Input after separator"
-msgstr "Input za oddělovačem"
-
-msgid "Input can be instead of label"
-msgstr "Místo labelu může být input"
-
-msgid "Input has to have class for left alignment"
-msgstr "Input musí mít třídu na zarovnání vlevo"
-
-msgid "Input is here"
-msgstr "Input je zde"
-
-msgid "Input label"
-msgstr "Label inputu"
-
 msgid "Input price with VAT"
 msgstr "Vstupní cena s DPH"
 
 msgid "Input price without VAT"
 msgstr "Vstupní cena bez DPH"
 
-msgid "Input with button"
-msgstr "Input s tlačítkem"
-
-msgid "Input with deduction"
-msgstr "Input s odpočtem"
-
-msgid "Input with domain"
-msgstr "Input s doménou"
-
-msgid "Input with flag"
-msgstr "Input s vlajkou"
-
-msgid "Input with icon"
-msgstr "Input s ikonou"
-
-msgid "Input with icon by label"
-msgstr "Input i ikonou u labelu"
-
-msgid "Input with icon on the left side"
-msgstr "Input i ikonou vlevo"
-
-msgid "Input with icon on the right side"
-msgstr "Input i ikonou vpravo"
-
-msgid "Input with icon simply"
-msgstr "Input i ikonou jednoduše"
-
-msgid "Input with major deduction"
-msgstr "Input s výrazným odpočtem"
-
-msgid "Input with postscript what has fixed width"
-msgstr "Input s dovětkem co má pevnou šířku"
-
-msgid "Input with prices on the right side next to each other"
-msgstr "Input s cenami vpravo vedle sebe"
-
-msgid "Input with text on the right"
-msgstr "Input s textem napravo"
-
 msgid "Instructions"
 msgstr "Pokyny"
 
 msgid "Invalid rounding settings"
 msgstr "Neplatné nastavení zaokrouhlování"
-
-msgid "It is important that buttons, inputs (text ones), selects and textarea have basic class, which means btn and input. Don't put it there and remove it only when you understand what you are doing."
-msgstr "Důležitou věcí je, že tlačítka, inputy (textové), selecty, textarea, vše by mělo mít základní třídu. Tzn btn a input. Nedávejte ji tam nebo odebírejte jen v případě, že víte, co děláte!"
-
-msgid "It is important that you don't use just parts of the components (elements), you have to use the parent component."
-msgstr "Důležité je nepoužívat jen části komponent (elementy), nýbrž vždy zde musí být mateřská komponenta!"
-
-msgid "It is not about table, but about setting the widths of cells in table-main. They are simple classes that give the width percent, or pixels. It is very useful in grids."
-msgstr "Nejedná se o tabulku, ale o nastavování šířek buňěk v tabulce table-main. Jsou to jednoduché třídy, které udávají procentro šířky, případně pixely. Je to velmi užitečné v gridech."
-
-msgid "It is possible to combine it with different contents inside, but the primary use is for tables."
-msgstr "Lze kombinovat i s jinýmy obsahy uvnitř, primární použití je ale pro tabulky."
-
-msgid "It is possible to put elements to multiple lines with one label"
-msgstr "Prvky lze dávat i do více řádků k jednomu labelu"
 
 msgid "It is possible to use this when creating a link: mark the text you want to create the link from with mouse and push the Link button (top right, interconnected staples icon). In the popup menu select the protocol <different> and insert the text \"%orderDetailUrlConstant%\" in the URL field (Including the braces)"
 msgstr "Lze použít při vytváření odkazu takto: myší označíte text, ze kterého chcete vytvořit odkaz, a klepnete na tlačítko Odkaz (vpravo nahoře, ikonka propojených sponek). Ve vyskakovacím menu vyberete protokol <jiný> a do políčka URL vložíte text \"%orderDetailUrlConstant%\" (včetně složených závorek)."
@@ -1443,15 +1116,6 @@ msgstr "Název položky"
 
 msgid "Items per page:"
 msgstr "Položek na stránku:"
-
-msgid "LIST - DL, UL, OL"
-msgstr "LIST - čistě DL nebo UL, OL"
-
-msgid "Label is here"
-msgstr "Label je zde"
-
-msgid "Label or input is here"
-msgstr "Label nebo input je zde"
 
 msgid "Language"
 msgstr "Jazyk"
@@ -1477,9 +1141,6 @@ msgstr "Nastavení právních podmínek"
 msgid "Legal conditions settings modified."
 msgstr "Nastavení právních podmínek upravené"
 
-msgid "Light button"
-msgstr "Světlé tlačítko"
-
 msgid "Link"
 msgstr "Odkaz"
 
@@ -1501,9 +1162,6 @@ msgstr "Seznam zboží v objednávce (název, množství, cena za jednotku s DPH
 msgid "Lists and nomenclatures"
 msgstr "Seznamy a číselníky"
 
-msgid "Live view of the component in white window"
-msgstr "Živý náhled na komponentu v bílém okně"
-
 msgid "Loading"
 msgstr "Načítám"
 
@@ -1521,9 +1179,6 @@ msgstr "Přihlášení se nepodařilo."
 
 msgid "Log out"
 msgstr "Odhlásit se"
-
-msgid "Logic of creating the structure is based on the graphics and the fact that the structure should be responsive and there is a possibility of putting a lot of different things in a row"
-msgstr "Logika tvoření struktury vychází z grafiky a z toho, že měla být struktura responsivní a mohlo se tam poskládat za sebe mnoho různých věcí."
 
 msgid "Login"
 msgstr "Přihlášení"
@@ -1558,9 +1213,6 @@ msgstr "Hlavní obrázek"
 msgid "Main page products"
 msgstr "Zboží na titulní stránce"
 
-msgid "Main structure logic"
-msgstr "Hlavní logika struktury"
-
 msgid "Main variant"
 msgstr "Hlavní varianta"
 
@@ -1576,20 +1228,11 @@ msgstr "Marketing"
 msgid "Master e-mail %masterMail% set"
 msgstr "Je nastaven master e-mail %masterMail%."
 
-msgid "Matching first and second cell of a row with the rest of form"
-msgstr "Lícovaná první a druhá buňka řádku se zbytkem formulářů"
-
 msgid "Message"
 msgstr "Vzkaz"
 
-msgid "Messages"
-msgstr "Hlášky/zprávy"
-
 msgid "Meta description"
 msgstr "Meta description"
-
-msgid "Modification wrap-border--small"
-msgstr "Modifikace wrap-border--small"
 
 msgid "Modifications"
 msgstr "Úpravy"
@@ -1606,9 +1249,6 @@ msgstr "Nastavení zapínacích modulů bylo upraveno"
 msgid "Move"
 msgstr "Přesunout"
 
-msgid "Multidomain, multilingual, inputs with ikon - basic"
-msgstr "Multidoménové, multijazyčné, inputy s ikonou - základní"
-
 msgid "My account"
 msgstr "Můj účet"
 
@@ -1620,9 +1260,6 @@ msgstr "Název %locale%"
 
 msgid "Name serves only for internal use within the administration"
 msgstr "Název slouží pouze pro interní použití v rámci administrace"
-
-msgid "Neutral button"
-msgstr "Neutrální tlačítko"
 
 msgid "New Payment"
 msgstr "Nová platba"
@@ -1756,9 +1393,6 @@ msgstr "Nelze přiřadit produkt sám sobě"
 msgid "Not possible to create variations of products that are already variant or main variant."
 msgstr "Nelze vytvářet varianty ze zboží, které jsou již variantou nebo hlavní variantou."
 
-msgid "Not using ID and !important for CSS"
-msgstr "Nevyužívání ID a !important pro CSS"
-
 msgid "Note"
 msgstr "Poznámka"
 
@@ -1776,9 +1410,6 @@ msgstr "Počty zboží ve filtru"
 
 msgid "Occurrence"
 msgstr "Výskyt"
-
-msgid "Often useful part, it is heading for different information contents, mainly for forms, but can be used for more purposes"
-msgstr "Často užitečná část, je to hlavička pro různé obsahy informací, hlavně pro formuláře, ale lze použít pro více účelů."
 
 msgid "Only checked products"
 msgstr "Pouze zaškrtnuté zboží"
@@ -1885,8 +1516,8 @@ msgstr "Heslo"
 msgid "Password again"
 msgstr "Heslo znovu"
 
-msgid "Password must be at least six characters and can't be the same as login name ."
-msgstr ""
+msgid "Password must be at least six characters and can't be the same as login name."
+msgstr "Heslo musí obsahovat alespoň šest znaků a nemůže být stejné jako přihlašovací jméno."
 
 msgid "Payment"
 msgstr "Platba"
@@ -1927,9 +1558,6 @@ msgstr "Přehled osobních údajů"
 msgid "Phone availability"
 msgstr "Dostupnost telefonu"
 
-msgid "Place for input"
-msgstr "Místo pro input"
-
 msgid "Please check following information:"
 msgstr "Prosím překontrolujte následující informace:"
 
@@ -1944,12 +1572,6 @@ msgstr "Prosím počkejte dokud nebudou nahrány všechny soubory a zkuste to zn
 
 msgid "Popular categories"
 msgstr "Rozcestník kategorií"
-
-msgid "Positive message"
-msgstr "Pozitivní hláška"
-
-msgid "Positive message - block with smaller space around text and smaller text"
-msgstr "Pozitivní hláška - bloková s menším prostorem okolo textu a menším textem"
 
 msgid "Postcode"
 msgstr "PSČ"
@@ -2098,17 +1720,11 @@ msgstr "Zrušit filtr"
 msgid "Return back"
 msgstr "Vrátit zpět"
 
-msgid "Right button"
-msgstr "Tlačítko napravo"
-
 msgid "Rounding"
 msgstr "Zaokrouhlení"
 
 msgid "Rounding item with 0 % VAT will be added to your order. It is used for payment in cash."
 msgstr "Do objednávky bude přidána zaokrouhlovací položka s 0% DPH. Používá se pro platbu v hotovosti."
-
-msgid "Row grouping"
-msgstr "Pseudo groupování řádků"
 
 msgid "SEO"
 msgstr "SEO"
@@ -2136,9 +1752,6 @@ msgstr "Uložit změny ve všech šablonách"
 
 msgid "Save changes in order"
 msgstr "Uložit změny v pořadí"
-
-msgid "Schema"
-msgstr "Osnova"
 
 msgid "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
 msgstr "Byl vytvořen skript <a href=\"{{ url }}\"><strong>{{ name }}</strong></a>"
@@ -2175,12 +1788,6 @@ msgstr "Vyhledávání hledá v názvu, katalogovém číslu nebo partno produkt
 
 msgid "Searching searches in order number, registered customer email, customer's email in order, customer's last name and company name. It is possible to use wildcards * and ?."
 msgstr "Vyhledávání hledá v číslu objednávky, emailu registrovaného zákazníka, emailu zákazníka v objednávce, příjmení zákazníka a názvu firmy. Je možné používat operátory * a ?."
-
-msgid "Second type of error message"
-msgstr "Druhý typ chybové hlášky"
-
-msgid "Select"
-msgstr "Select"
 
 msgid "Select new value"
 msgstr "Zvolte novou hodnotu"
@@ -2279,7 +1886,7 @@ msgid "Sending e-mails off, no e-mail will be sent from the app."
 msgstr "Odesílání mailů je vypnuto, z aplikace nebude odeslán žádný mail."
 
 msgid "Seo"
-msgstr ""
+msgstr "Seo"
 
 msgid "Set"
 msgstr "Nastavit"
@@ -2326,17 +1933,8 @@ msgstr "Krátký popis"
 msgid "Short description can be set in the main variant."
 msgstr "Krátký popis se nastavuje u hlavní varianty."
 
-msgid "Short postscripts after input"
-msgstr "Krátké dovětky za inputem"
-
-msgid "Simple view"
-msgstr "Jednoduché zobrazení"
-
 msgid "Size name"
 msgstr "Název rozměru"
-
-msgid "Sizes: 5, 10, 15, 20, 40, 45, 60, 80, 40px"
-msgstr "Velikosti: 5, 10, 15, 20, 40, 45, 60, 80, 40px"
 
 msgid "Slider on main page"
 msgstr "Slider na titulce"
@@ -2353,26 +1951,8 @@ msgstr "Byla upravena stránka slideru <strong><a href=\"{{ url }}\">{{ name }}<
 msgid "Slider pages"
 msgstr "Stránky slideru"
 
-msgid "Small conversion button"
-msgstr "Konverzní tlačítko malé"
-
-msgid "Sometimes it is necessary to align one of the elements to right/left side. You can do that using modifier <strong class=\"in-article__visible\">form-line__item--right</strong> or <strong class=\"in-article__visible\">form-line__item--left</strong>."
-msgstr "Někdy je potřčeba jeden z prvků zarovnat na pravou/levou stranu. To jde udělat pomocí modifikátoru <strong class=\"in-article__visible\">form-line__item--right</strong> případně <strong class=\"in-article__visible\">form-line__item--left</strong>."
-
-msgid "Sometimes there is thicker line between some elements than between others. It is mainly in cases when the form-line elements are not directly behind each other, but some of them are covered with some dive, e.g. because of JS, for hiding and revealing. To that kind of dive you need to add class <strong class=\"in-article__visible\">form-line__js</strong>."
-msgstr "Někdy se stává, že se mezi prvky objevuje tlustčí čára než jinde. Je to zásadně v případech, kdy nejsou prvky form-line přímo za sebou, ale nějaký z nich je obalen nějakým divem např. kvůli nějakému JS, na skrývání a odkrývání. Takovému divu je třeba přidat třídu <strong class=\"in-article__visible\">form-line__js</strong>."
-
 msgid "Sorting priority"
 msgstr "Priorita řazení"
-
-msgid "Special behavior for big table, which can't fit even in the desktop version to the content part."
-msgstr "Speciální chování pro velkou tabulku, která se nevleze ani na desktopové verzi do obsahové části."
-
-msgid "Special behavior for table for smaller devices, displaying scrollbar when the window is lessened. If we count with responsivity, this should be set around each table."
-msgstr "Speciální chování pro tabulku pro menší zařízení, kdy při zmenšeném okně se zobrazí scrollbar. Pokud se počítá s responsivitou, mělo by toto nastavení být kolem každé tabulky."
-
-msgid "Special behavior of table, which was created for parameters, but could be used also differently."
-msgstr "Speciální chování tabulky, která byla vytvořena pro parametry, nicméně, dá se využít i dalšími způsoby."
 
 msgid "Status"
 msgstr "Stav"
@@ -2410,17 +1990,11 @@ msgstr "Odběratel newsletteru <strong>{{ email }}</strong> byl smazán"
 msgid "Successfully uploaded"
 msgstr "Úspěšně nahráno"
 
-msgid "Suitable combination of components"
-msgstr "Vhodná kombinace komponent"
-
 msgid "Superadmin"
 msgstr "Superadmin"
 
 msgid "Superadmin - Closing modules"
 msgstr "Superadmin - Zapínací moduly"
-
-msgid "Superadmin - Coder documentation"
-msgstr "Superadmin - Kodérská dokumentace"
 
 msgid "Superadmin - Sale including/excluding VAT settings"
 msgstr "Superadmin - Nastavení prodeje s/bez DPH"
@@ -2431,35 +2005,8 @@ msgstr "Superadmin - URL adresy"
 msgid "System data"
 msgstr "Systémové údaje"
 
-msgid "TABLE - tables"
-msgstr "TABLE - tabulky"
-
 msgid "TOP"
 msgstr "TOP"
-
-msgid "Table text"
-msgstr "Text tabulky"
-
-msgid "Table text or input"
-msgstr "Text nebo input tabulky"
-
-msgid "Table-col"
-msgstr "Table-col"
-
-msgid "Table-form"
-msgstr "Table-form"
-
-msgid "Table-main"
-msgstr "Table-main"
-
-msgid "Table-touch"
-msgstr "Table-touch"
-
-msgid "Table-touch-always"
-msgstr "Table-touch-always"
-
-msgid "Tables"
-msgstr "Tabulky"
 
 msgid "Tax number"
 msgstr "DIČ"
@@ -2476,59 +2023,20 @@ msgstr "Obchodní podmínky"
 msgid "Terms-and-conditions.html"
 msgstr "Obchodní-podmínky.html"
 
-msgid "Text behind input. To generate the input correctly, it is necessary to write is like <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>"
-msgstr "Text za inputem. Aby se generoval input správně, je třeba jej vepsat jako <strong class=\"in-article__visible\">form_widget</strong> s parametrem <strong class=\"in-article__visible\">isSimple:true</strong>"
-
-msgid "Text behind label"
-msgstr "Text za labelem"
-
-msgid "Textarea"
-msgstr "Textarea"
-
-msgid "Textarea may be across the whole width"
-msgstr "Textarea může být i na plnou šířku"
-
-msgid "Textarea may be across the whole width next to the label"
-msgstr "Textarea může být i na plnou šířku vedle labelu"
-
-msgid "Textarea size modification"
-msgstr "Modifikace velikostí textarea"
-
-msgid "Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
-msgstr "Textarea roztáhnutá na celou šířku. V tomhletom případě nemusíme použít form-line__item, protože je prvek na 100% šířku."
-
-msgid "The basic premis for coding in admin is, that mostly programmers will work with the code. That's why there is a bigger emphasis on helpers -"
-msgstr "Základní premisou kódování v adminu je, že z velmi velké části zde budou s kódem pracovat programátoři. Proto se zde klade větší důraz na helpry -"
-
 msgid "The change will be applied to products in 10 minutes"
 msgstr "Změna se u zboží projeví do 10 minut"
 
 msgid "The price of the product <strong>{{ name }}</strong> you have in cart has changed. Please, check your order."
 msgstr "Byla změněna cena zboží <strong>{{ name }}</strong>, které máte v košíku. Prosím, překontrolujte si objednávku."
 
-msgid "There are more types of buttons, each can have a lot of modifications. These modifications can be combined with each other (colour ones with type ones)"
-msgstr "Tlačítek je více druhů, každý z nich může mít další spoustu modifiací. Tyto modifikace lze kombinovat mezi sebou (barevné s typovými)"
-
-msgid "There are several types of tables, but it is not necessary to write down those which are generated by system itself and nobody intervenes in them. That's why there are only those that you will probably want to use."
-msgstr "Tabulek je více druhů, není ale důvod vypisovat ty, co systém generuje sám, a nikdo do nich nezasahuje. Proto jsou zde jen ty, co pravděpodobně budete chtít použít."
-
 msgid "There was an error while saving. The order isn't saved."
 msgstr "Během ukládání došlo k chybě. Pořadí nebylo uloženo."
-
-msgid "Thick line between"
-msgstr "Tlustá čára mezi"
-
-msgid "Thick line between disappeared"
-msgstr "Tlustá čára mezi zmizela"
 
 msgid "This currency can't be deleted, it is set as default or is saved with order."
 msgstr "Tuto měnu nelze smazat, je nastavena jako výchozí nebo je uložena u objednávky"
 
 msgid "This e-mail was sent from the contact form located below the panel of categories."
 msgstr "Tento email byl odeslán z kontaktního formuláře umístěného pod panelem kategorií."
-
-msgid "This form-line is wrapped"
-msgstr "Tento form-line je obalen"
 
 msgid "This item can be set in product detail of a specific variant"
 msgstr "Tuto položku můžete nastavit na kartě konkrétní varianty"
@@ -2542,20 +2050,8 @@ msgstr "Tento stav není možné smazat, jelikož je na něj navázána funkčno
 msgid "This status can't be deleted. This is automatically assigned status to all new orders."
 msgstr "Tento stav není možné smazat. Jde o stav, který je automaticky přiřazen všem novým objednávkám."
 
-msgid "This structure has no place in tables!"
-msgstr "Tato struktůra nemá co dělat v tabulkách!"
-
-msgid "This text will help you understand the logic of creating a form."
-msgstr "Tento text vám objasní logiku tvoření formuláře."
-
-msgid "Title component with possible button on the right, all separated by border from below"
-msgstr "Komponenta na titulek s možností tlačítka napravo, celé zespodu odděleno borderem"
-
 msgid "To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one."
 msgstr "Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která se použije místo ní. Bohužel není za co nahrazovat, před smazáním musíte nějdřív vytvořit novou."
-
-msgid "To display same as with parameters, it is necessary to add separator with icon and make sure to remove paddings around the separator. This raises more classes in almost all surrounding TD/TH. You can also simply add and icon with an action at the end of the line."
-msgstr "Pro zobrazení jako u parametrů je třeba přidat oddělovač s ikonkou a zaručit, aby se zrušily v okolí oddělovače paddingy. Vzniká zde více tříd skoro ve všech okolních TD/TH. Lze také jednoduše přidat ikonku s akcí na konec řádku."
 
 msgid "To fifty hundredths (halfs)"
 msgstr "Na padesátníky"
@@ -2595,15 +2091,6 @@ msgstr "Číslo pro měření"
 
 msgid "Type"
 msgstr "Typ"
-
-msgid "Type modifications"
-msgstr "Typové modifikace"
-
-msgid "Type of coding used and rules"
-msgstr "Použitý typ kódování a pravidla"
-
-msgid "Types can be combined with each other and mixed with various colours"
-msgstr "Typy se dají kombinovat mezi sebou a míchat s různýma barvama."
 
 msgid "URL addresses"
 msgstr "URL adresy"
@@ -2674,9 +2161,6 @@ msgstr "Používat skladové zásoby"
 msgid "Used: %currentLength% characters. Recommended max. %recommendedLength%"
 msgstr "Využito: %currentLength% znaků. Doporučeno max. %recommendedLength%"
 
-msgid "Used: 45 characters. Recommended max. 155"
-msgstr "Využito: 45 znaků. Doporučeno max. 155"
-
 msgid "Username"
 msgstr "Uživatelské jméno"
 
@@ -2725,68 +2209,20 @@ msgstr "Alias varianty"
 msgid "Variants"
 msgstr "Varianty"
 
-msgid "Various messages and flash messages, there is more type and colour modifications. Thanks to this it is possible to create even combinations of types and colours"
-msgstr "Různé zprávy a flash zprávy, je zde více typových a barevných modifikací. Lze díky tomu vytvářet i kombinace typu a barev"
-
 msgid "Visibility"
 msgstr "Viditelnost"
 
 msgid "Visibility for unlogged customers"
 msgstr "Viditelnost pro neregistrované zákazníky"
 
-msgid "WINDOW - popup windows, floating windows etc."
-msgstr "WINDOW - vyskakovací okna, plovoucí okna atd."
-
-msgid "WRAP - basic wraps, boxes, independent of content"
-msgstr "WRAP - jednoduché obaly, boxy, nezávislé na obsahu"
-
-msgid "Warning message"
-msgstr "Upozorňující hláška"
-
-msgid "Warning message - block with icon"
-msgstr "Upozorňující hláška - bloková s ikonkou"
-
-msgid "We will get the display by adding modifiers to input, but it is important to wrap input with dive with class <strong class=\"in-article__visible\">input__wrap</strong>. Images are positioned to this class. This structure should be generated by the system itself. If manual writing needed it is important to pay attention and don't forget to add flag <strong class=\"in-article__visible\">localeFlag(locale)</strong>, domain <strong class=\"in-article__visible\">or icon."
-msgstr "Zobrazení dosáhnem přidáním modifikátorů k inputu, ale důležité je obalit input divem s třídou <strong class=\"in-article__visible\">input__wrap</strong>. K této třídě se totiž pozicují obrázky. Tadyta struktura by se měla generovat ze systému sama. V případě nutnosti psaní této struktury ručně je třeba si dávat pozor a nezapomenout dodat i vlajku <strong class=\"in-article__visible\">localeFlag(locale)</strong>, doménu <strong class=\"in-article__visible\">domainIcon(domainId)</strong> nebo ikonku."
-
-msgid "We will get the display by writing input as <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>."
-msgstr "Zobrazeni dosáhnete tak, že input vypíšete jako <strong class=\"in-article__visible\">form_widget</strong> s parametrem <strong class=\"in-article__visible\">isSimple:true</strong>."
-
-msgid "We will get the display either by adding class to element or via <strong class=\"in-article__visible\">form_widget</strong> we add <strong class=\"in-article__visible\">attr class</strong>"
-msgstr "Zobrazení dosáhnem buďto přídáním classy k prvku nebo přes <strong class=\"in-article__visible\">form_widget</strong> přidáme <strong class=\"in-article__visible\">attr class</strong>"
-
 msgid "When changing the default currency there is no recalculation of prices"
 msgstr "Při změně výchozí měny nedochází k žádnému přepočtu cen"
-
-msgid "When we work for example with currencies, we need to state the currency after the input. Inputs have different text lengths and that's why we need to set a fixed width so that icons after text are aligned."
-msgstr "Když se např. pracuje s cenami, je třeba za inputem uvést měnu. Ty ale mívají různé délky textu, proto je třeba jim vyhradit pevnou šířku, aby v případě ikonky za textem, byly ikony zarovnány."
 
 msgid "While creating a new pricing group, please be patient. The application needs to recalculate price for every product on e-shop. Products without recalculated price will not be displayed on e-shop. For instance, it takes about an hour to recalculate 2000 products."
 msgstr "Mějte na paměti, že při vytváření cenové skupiny je nutné, aby aplikace přepočítala nové ceny pro všechny produkty. Produkty bez přepočtené ceny nebudou na e-shopu zobrazeny. Pro 2000 položek přepočet trvá asi hodinu."
 
 msgid "Width [px]"
 msgstr "Šířka [px]"
-
-msgid "Without any form structure and modification"
-msgstr "Bez jakékoliv formulářové struktury a modifikací"
-
-msgid "Wrap, which will indent the entire block and add bottom border, suitable for indenting block of forms apart"
-msgstr "Obal, který celý blok odsadí a přidá spodní border, vhodné pro odsazení bloků formulářů od sebe"
-
-msgid "Wrap-bar"
-msgstr "Wrap-bar"
-
-msgid "Wrap-border"
-msgstr "Wrap-border"
-
-msgid "Wrapping elements are those which can add some features around the insides, e.g. framing, indentation, background, or it can set the heading of the whole block of information."
-msgstr "Obalující/wrapovací prvky jsou ty, kterýma můžete obalením přidat nějaké vlastnosti okolo vnitřku, např orámování, odsazení, pozadí, případně i nastaví hlavičku celého bloku informací"
-
-msgid "Wrapping/separating elements"
-msgstr "Obalovací/oddělovací prvky"
-
-msgid "Writing of css characteristics according to priorities"
-msgstr "Zápis css vlastností podle priorit"
 
 msgid "XML Feeds"
 msgstr "XML Feedy"
@@ -2812,6 +2248,9 @@ msgstr "Kategorie můžete nastavit na kartě hlavní varianty"
 msgid "You can set the prices on product detail of specific variant."
 msgstr "Ceny můžete nastavit na kartě konkrétní varianty."
 
+msgid "You can upload following formats: PNG, JPG"
+msgstr "Můžete nahrávat formáty: PNG, JPG"
+
 msgid "You can upload following formats: PNG, JPG, GIF"
 msgstr "Můžete nahrávat formáty: PNG, JPG a GIF"
 
@@ -2826,6 +2265,9 @@ msgstr "Nelze vybrat zboží, které je variantou"
 
 msgid "You have made changes, don't forget to save them!"
 msgstr "Provedli jste změny, nezapomeňte je uložit!"
+
+msgid "You have to create some payment first."
+msgstr "Musíte nejdřív nějakou platbu vytvořit."
 
 msgid "You have to create some shipping first."
 msgstr "Musíte nejdřív nějakou dopravu vytvořit."
@@ -2851,9 +2293,6 @@ msgstr "abecedně A -> Z"
 msgid "alphabetically Z -> A"
 msgstr "abecedně Z -> A"
 
-msgid "and also into more lines"
-msgstr "a také do více řádků"
-
 msgid "articles"
 msgstr "článků"
 
@@ -2868,18 +2307,6 @@ msgstr "značek"
 
 msgid "category"
 msgstr "kategorie"
-
-msgid "characters out of 155 possible"
-msgstr "znaků z 155 možných"
-
-msgid "checkbox in list"
-msgstr "checkbox v seznamu"
-
-msgid "components - components of content part, subfolders divide components logically apart"
-msgstr "components - komponenty obsahové části, podsložky rozdělují komponenty logicky od sebe"
-
-msgid "core - basic settings for elements (css reset, variables, mixins, form elements, headings..)"
-msgstr "core - základní nastavení pro prvky (reset css, proměnné, mixiny, formulářové prvky, nadpisy..)"
 
 msgid "countries"
 msgstr "státy"
@@ -2899,15 +2326,6 @@ msgstr "neobsahuje"
 msgid "doesn't use"
 msgstr "nepoužívá"
 
-msgid "domain icon only in checkbox list, icon is inserted <strong class=\"in-article__visible\">domainIcon(domainId, \"small\") </strong>"
-msgstr "ikona domény pouze v checkbox seznamu, ikona se vkládá <strong class=\"in-article__visible\">domainIcon(domainId, \"small\") </strong>"
-
-msgid "domain icon only in checkbox list, it is possible to add action icon"
-msgstr "ikona domény pouze v checkbox seznamu, je možno přidat akční ikonu"
-
-msgid "double signs are clear and developer will intuitively know senses of different classes given"
-msgstr "dvojté značky jsou přehledné a developerovi intuitivně dojde, jaký smysl má daná třída"
-
 msgid "flags"
 msgstr "příznaky"
 
@@ -2919,9 +2337,6 @@ msgstr "od nejdražšího"
 
 msgid "from the cheapest"
 msgstr "od nejlevnějšího"
-
-msgid "helpers - helpers, that have to be loaded last"
-msgstr "helpers - helpery, které se musí načítat jako poslední"
 
 msgid "higher or equal"
 msgstr "větší nebo rovno"
@@ -2947,12 +2362,6 @@ msgstr "obsahuje"
 msgid "is"
 msgstr "je"
 
-msgid "layout - settings of layout, heading and footer"
-msgstr "layout - nastavení layoutu, hlavičky a patičky"
-
-msgid "libs - third parties components"
-msgstr "libs - komponenty třetích stran"
-
 msgid "lower or equal"
 msgstr "menší nebo rovno"
 
@@ -2967,9 +2376,6 @@ msgstr "není"
 
 msgid "not entered"
 msgstr "není zadáno"
-
-msgid "one dash \"-\" represents separator in multi-word title"
-msgstr "jedna pomlčka \"-\" je oddělovačem ve víceslovném názvu"
 
 msgid "or"
 msgstr "nebo"
@@ -2995,20 +2401,8 @@ msgstr "záznamů"
 msgid "relevance"
 msgstr "relevance"
 
-msgid "simple checkbox"
-msgstr "jednoduchý checkbox"
-
-msgid "simple checkbox can be ordered consecutively"
-msgstr "jednoduchý checkbox lze skládat za sebe"
-
 msgid "subscribers"
 msgstr "odběratelé newsletteru"
-
-msgid "two dash \"--\" represent modification of component"
-msgstr "dvě pomlčky \"--\" značí modifikaci komponenty"
-
-msgid "two underscores \"__\" represent part of the component/element"
-msgstr "dva podtržítka \"__\" značí část komponenty/element"
 
 msgid "under heading"
 msgstr "pod hlavičkou"

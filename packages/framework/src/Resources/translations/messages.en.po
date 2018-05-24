@@ -13,12 +13,6 @@ msgstr ""
 msgid "%name% agrees with privacy policy."
 msgstr ""
 
-msgid "- Email settings"
-msgstr ""
-
-msgid "- Heureka - Verified by Customer"
-msgstr ""
-
 msgid "-- Choose action --"
 msgstr ""
 
@@ -35,15 +29,6 @@ msgid "-- Choose availability --"
 msgstr ""
 
 msgid "-- Choose brand --"
-msgstr ""
-
-msgid "--seo"
-msgstr ""
-
-msgid "--textarea-big"
-msgstr ""
-
-msgid "1 254 CZK"
 msgstr ""
 
 msgid "<a href=\"{{ url }}\">Some required e-mail templates are not fully set.</a>"
@@ -169,25 +154,10 @@ msgstr ""
 msgid "All search results"
 msgstr ""
 
-msgid "Allowed for shipping types"
-msgstr ""
-
 msgid "Amount"
 msgstr ""
 
-msgid "An example might be empty space with icon behind it, which we want to align with icon next to input."
-msgstr ""
-
 msgid "Ancestor category"
-msgstr ""
-
-msgid "Any content"
-msgstr ""
-
-msgid "Any content with smaller indent between content and line"
-msgstr ""
-
-msgid "Any element on right"
 msgstr ""
 
 msgid "Applicable variables"
@@ -229,19 +199,10 @@ msgstr ""
 msgid "Articles without positioning"
 msgstr ""
 
-msgid "As this is a system which will often use same or similar elements, it is suitable to use a type of coding that divides web to components and variously combines them with each other."
-msgstr ""
-
 msgid "Assign to category"
 msgstr ""
 
-msgid "At first we write underlying characteristics for element (position, float, display, width, ... ), then stylistic ones (font, color, background, ... )"
-msgstr ""
-
 msgid "Attachment"
-msgstr ""
-
-msgid "Attention, the second variant doesn't have js to work with yet!"
 msgstr ""
 
 msgid "Automatic stock calculation"
@@ -271,16 +232,13 @@ msgstr ""
 msgid "Available in stock"
 msgstr ""
 
-msgid "BEM is a style of writing, which defines the rules for writing css"
+msgid "Available payment methods"
 msgstr ""
 
-msgid "BOX - complete parts of the site - NOT REUSABLE (e.g. product detail page layout)"
+msgid "Available shipping methods"
 msgstr ""
 
 msgid "Back to overview"
-msgstr ""
-
-msgid "Base message text is without colours and outstretched only to the end of the text, therefore it needs at least to identify the colour type."
 msgstr ""
 
 msgid "Base price"
@@ -289,19 +247,10 @@ msgstr ""
 msgid "Base price in %currencyCode%"
 msgstr ""
 
-msgid "Basic component for forms, extremely big and set in the default form generating. Use this for most cases."
-msgstr ""
-
-msgid "Basic elements display"
-msgstr ""
-
 msgid "Basic frontend currency %domainName%"
 msgstr ""
 
 msgid "Basic information"
-msgstr ""
-
-msgid "Basic table with one class on table element. Basic look for showing simple data (not forms)."
 msgstr ""
 
 msgid "Because availability \"%name%\" is used with other products also, you have to choose a new availability which will replace the existing one. Which availability you want to set to these products?"
@@ -328,9 +277,6 @@ msgstr ""
 msgid "Billing data"
 msgstr ""
 
-msgid "Bolder line"
-msgstr ""
-
 msgid "Brand"
 msgstr ""
 
@@ -352,46 +298,10 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
-msgid "Btn"
-msgstr ""
-
-msgid "Btn-link-style"
-msgstr ""
-
-msgid "Btn-no-style"
-msgstr ""
-
 msgid "Bulk edit"
 msgstr ""
 
 msgid "Bulk editing done"
-msgstr ""
-
-msgid "Button"
-msgstr ""
-
-msgid "Button after input"
-msgstr ""
-
-msgid "Button that looks like link"
-msgstr ""
-
-msgid "Button that looks like link with not underlined icon"
-msgstr ""
-
-msgid "Button that looks like text"
-msgstr ""
-
-msgid "Buttons"
-msgstr ""
-
-msgid "By using modifier on the line it is possible to bluish the whole line and create a group of lines with headline and image."
-msgstr ""
-
-msgid "By using modifier on the line it is possible to bluish the whole line."
-msgstr ""
-
-msgid "CSS documentation"
 msgstr ""
 
 msgid "Catalogue number"
@@ -416,15 +326,6 @@ msgid "Category<strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modifie
 msgstr ""
 
 msgid "Change for"
-msgstr ""
-
-msgid "Checkboxes"
-msgstr ""
-
-msgid "Checkboxes and radio buttons"
-msgstr ""
-
-msgid "Checkboxes or radiobuttons"
 msgstr ""
 
 msgid "Choose"
@@ -472,22 +373,10 @@ msgstr ""
 msgid "Code of service Heureka - Verified by Customer"
 msgstr ""
 
-msgid "Coding using BEM"
-msgstr ""
-
 msgid "Coefficient"
 msgstr ""
 
 msgid "Colour"
-msgstr ""
-
-msgid "Colour modification"
-msgstr ""
-
-msgid "Colouring in-message"
-msgstr ""
-
-msgid "Colours present event that happened."
 msgstr ""
 
 msgid "Communication with customer"
@@ -508,9 +397,6 @@ msgstr ""
 msgid "Complement to title"
 msgstr ""
 
-msgid "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anything in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
-msgstr ""
-
 msgid "Contact form"
 msgstr ""
 
@@ -518,27 +404,6 @@ msgid "Contact us"
 msgstr ""
 
 msgid "Content"
-msgstr ""
-
-msgid "Conversion button always over the entire width"
-msgstr ""
-
-msgid "Conversion button big"
-msgstr ""
-
-msgid "Conversion button medium"
-msgstr ""
-
-msgid "Conversion button standard"
-msgstr ""
-
-msgid "Conversion button to adding"
-msgstr ""
-
-msgid "Conversion button to adding - small"
-msgstr ""
-
-msgid "Conversion button to form validations etc."
 msgstr ""
 
 msgid "Cookies information"
@@ -676,7 +541,7 @@ msgstr ""
 msgid "Customer detail"
 msgstr ""
 
-msgid "Customer email adress"
+msgid "Customer e-mail address"
 msgstr ""
 
 msgid "Customer has no orders so far."
@@ -724,9 +589,6 @@ msgstr ""
 msgid "Default availability for the stock settings modified"
 msgstr ""
 
-msgid "Default button"
-msgstr ""
-
 msgid "Default pricing group"
 msgstr ""
 
@@ -760,9 +622,6 @@ msgstr ""
 msgid "Description can be set on product detail of the main product."
 msgstr ""
 
-msgid "Disabled button without cursor"
-msgstr ""
-
 msgid "Discard changes"
 msgstr ""
 
@@ -775,16 +634,7 @@ msgstr ""
 msgid "Display and availability"
 msgstr ""
 
-msgid "Display input -> input"
-msgstr ""
-
-msgid "Display of inputs like checkboxes and radio buttons is done via <strong class=\"in-article__visible\">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class=\"in-article__visible\">inList</strong> and they are displayed below each other on true."
-msgstr ""
-
 msgid "Display on"
-msgstr ""
-
-msgid "Display personal information"
 msgstr ""
 
 msgid "Display personal information settings"
@@ -874,22 +724,10 @@ msgstr ""
 msgid "Domain %domainName%"
 msgstr ""
 
-msgid "Domain 1"
-msgstr ""
-
-msgid "Domain 2"
-msgstr ""
-
 msgid "Domain <strong>{{ name }}</strong> modified"
 msgstr ""
 
 msgid "Domain name"
-msgstr ""
-
-msgid "Double border between elements prevention"
-msgstr ""
-
-msgid "Drag and drop on lines"
 msgstr ""
 
 msgid "Drag file here"
@@ -1027,18 +865,6 @@ msgstr ""
 msgid "Editing slider page - %name%"
 msgstr ""
 
-msgid "Element alignment to side"
-msgstr ""
-
-msgid "Element which is being aligned is usually icon."
-msgstr ""
-
-msgid "Elements can be aligned under label"
-msgstr ""
-
-msgid "Elements can be ordered behind each other"
-msgstr ""
-
 msgid "Enter 32-digit code which will be sent to server"
 msgstr ""
 
@@ -1049,15 +875,6 @@ msgid "Entered in days. Zero represents products in stock, empty means unknown a
 msgstr ""
 
 msgid "Entry price type"
-msgstr ""
-
-msgid "Error message"
-msgstr ""
-
-msgid "Error message - block with icon, small"
-msgstr ""
-
-msgid "Error message - block with the close button, for closing, the close button can be used only with block error messages"
 msgstr ""
 
 msgid "Error messages"
@@ -1087,13 +904,10 @@ msgstr ""
 msgid "Existing icon"
 msgstr ""
 
-msgid "Export email list in CSV format"
+msgid "Export e-mail list in CSV format"
 msgstr ""
 
 msgid "External scripts"
-msgstr ""
-
-msgid "FORM - form elements, form wraps, structures"
 msgstr ""
 
 msgid "Feed"
@@ -1144,9 +958,6 @@ msgstr ""
 msgid "Flags overview"
 msgstr ""
 
-msgid "Folders structure"
-msgstr ""
-
 msgid "Following expressions are allowed in whitelist: %whitelist%."
 msgstr ""
 
@@ -1159,22 +970,10 @@ msgstr ""
 msgid "For removing pricing group \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
 msgstr ""
 
-msgid "For subfolders of folder components, the subfolder name is inserted into the component name for better search, but the component filename contains only the rest of the class name."
-msgstr ""
-
 msgid "Forgotten password"
 msgstr ""
 
 msgid "Forgotten password sending"
-msgstr ""
-
-msgid "Form structure"
-msgstr ""
-
-msgid "Form-group"
-msgstr ""
-
-msgid "Form-line"
 msgstr ""
 
 msgid "Free"
@@ -1193,9 +992,6 @@ msgid "Frontend"
 msgstr ""
 
 msgid "Full name"
-msgstr ""
-
-msgid "General wrap-border"
 msgstr ""
 
 msgid "Generate"
@@ -1223,15 +1019,6 @@ msgid "Heading (H1)"
 msgstr ""
 
 msgid "Headline"
-msgstr ""
-
-msgid "Headline of information block"
-msgstr ""
-
-msgid "Headline of information block with button possibility"
-msgstr ""
-
-msgid "Headline of information block with possibility to expand, necessary to bind to existing JS"
 msgstr ""
 
 msgid "Height [px]"
@@ -1276,31 +1063,10 @@ msgstr ""
 msgid "ID %productId%"
 msgstr ""
 
-msgid "ID is an element with the highest priority in the CSS and that's why we are going to avoid it. Once we tie something to ID, we can beat it only with ID again or with !important. In real usage of SSS there had to be multiple adjustments of the same parts but on different places. If we use only classes and components we won't have these problems."
-msgstr ""
-
-msgid "IN - small components (arrow by link, evaluation asterisks) small things that occur often on more places"
-msgstr ""
-
 msgid "IP address"
 msgstr ""
 
 msgid "Icon"
-msgstr ""
-
-msgid "If we combine 3 components with each other, it will create nice forms design. We are talking about <strong class=\"in-article__visible\">form-group</strong> for headline, <strong class=\"in-article__visible\">form-line</strong> for form and <strong class=\"in-article__visible\">wrap-border</strong> for separating blocks of information."
-msgstr ""
-
-msgid "If we need something about input size"
-msgstr ""
-
-msgid "If we want information about number of characters"
-msgstr ""
-
-msgid "If we want to move the lines, we will insert the icon as shown below. Don't forget to connect it to JS."
-msgstr ""
-
-msgid "If you add modifier to first TD/TH --label, cell is given maximum width and is aligned with other form-structure. Other cells are expanded by the browser as needed."
 msgstr ""
 
 msgid "If you want for these changes to manifest everywhere (on production, devel, localhost etc.) instruct a programmer to commit the changes into GIT!"
@@ -1321,22 +1087,7 @@ msgstr ""
 msgid "Images"
 msgstr ""
 
-msgid "Important is good sometimes, but once we tie important to something, we can beat it only with more specific write with another important. That's why we use the important only in utmost and logically excusable cases."
-msgstr ""
-
 msgid "In a particular domain tab it is not possible to adjust the order and plunge of categories. Please go to the category detail or to overview of categories of all domains"
-msgstr ""
-
-msgid "In case we need the tag button to look like link. There is also modification for button with icon on left."
-msgstr ""
-
-msgid "In case we need the tag button to look like simple text."
-msgstr ""
-
-msgid "In-message"
-msgstr ""
-
-msgid "In-message types"
 msgstr ""
 
 msgid "Inactive"
@@ -1345,94 +1096,16 @@ msgstr ""
 msgid "Including VAT"
 msgstr ""
 
-msgid "Information message"
-msgstr ""
-
-msgid "Information message - block"
-msgstr ""
-
-msgid "Input"
-msgstr ""
-
-msgid "Input after separator"
-msgstr ""
-
-msgid "Input can be instead of label"
-msgstr ""
-
-msgid "Input has to have class for left alignment"
-msgstr ""
-
-msgid "Input is here"
-msgstr ""
-
-msgid "Input label"
-msgstr ""
-
 msgid "Input price with VAT"
 msgstr ""
 
 msgid "Input price without VAT"
 msgstr ""
 
-msgid "Input with button"
-msgstr ""
-
-msgid "Input with deduction"
-msgstr ""
-
-msgid "Input with domain"
-msgstr ""
-
-msgid "Input with flag"
-msgstr ""
-
-msgid "Input with icon"
-msgstr ""
-
-msgid "Input with icon by label"
-msgstr ""
-
-msgid "Input with icon on the left side"
-msgstr ""
-
-msgid "Input with icon on the right side"
-msgstr ""
-
-msgid "Input with icon simply"
-msgstr ""
-
-msgid "Input with major deduction"
-msgstr ""
-
-msgid "Input with postscript what has fixed width"
-msgstr ""
-
-msgid "Input with prices on the right side next to each other"
-msgstr ""
-
-msgid "Input with text on the right"
-msgstr ""
-
 msgid "Instructions"
 msgstr ""
 
 msgid "Invalid rounding settings"
-msgstr ""
-
-msgid "It is important that buttons, inputs (text ones), selects and textarea have basic class, which means btn and input. Don't put it there and remove it only when you understand what you are doing."
-msgstr ""
-
-msgid "It is important that you don't use just parts of the components (elements), you have to use the parent component."
-msgstr ""
-
-msgid "It is not about table, but about setting the widths of cells in table-main. They are simple classes that give the width percent, or pixels. It is very useful in grids."
-msgstr ""
-
-msgid "It is possible to combine it with different contents inside, but the primary use is for tables."
-msgstr ""
-
-msgid "It is possible to put elements to multiple lines with one label"
 msgstr ""
 
 msgid "It is possible to use this when creating a link: mark the text you want to create the link from with mouse and push the Link button (top right, interconnected staples icon). In the popup menu select the protocol <different> and insert the text \"%orderDetailUrlConstant%\" in the URL field (Including the braces)"
@@ -1442,15 +1115,6 @@ msgid "Item name"
 msgstr ""
 
 msgid "Items per page:"
-msgstr ""
-
-msgid "LIST - DL, UL, OL"
-msgstr ""
-
-msgid "Label is here"
-msgstr ""
-
-msgid "Label or input is here"
 msgstr ""
 
 msgid "Language"
@@ -1477,9 +1141,6 @@ msgstr ""
 msgid "Legal conditions settings modified."
 msgstr ""
 
-msgid "Light button"
-msgstr ""
-
 msgid "Link"
 msgstr ""
 
@@ -1501,9 +1162,6 @@ msgstr ""
 msgid "Lists and nomenclatures"
 msgstr ""
 
-msgid "Live view of the component in white window"
-msgstr ""
-
 msgid "Loading"
 msgstr ""
 
@@ -1520,9 +1178,6 @@ msgid "Log in failed."
 msgstr ""
 
 msgid "Log out"
-msgstr ""
-
-msgid "Logic of creating the structure is based on the graphics and the fact that the structure should be responsive and there is a possibility of putting a lot of different things in a row"
 msgstr ""
 
 msgid "Login"
@@ -1558,9 +1213,6 @@ msgstr ""
 msgid "Main page products"
 msgstr ""
 
-msgid "Main structure logic"
-msgstr ""
-
 msgid "Main variant"
 msgstr ""
 
@@ -1576,19 +1228,10 @@ msgstr ""
 msgid "Master e-mail %masterMail% set"
 msgstr ""
 
-msgid "Matching first and second cell of a row with the rest of form"
-msgstr ""
-
 msgid "Message"
 msgstr ""
 
-msgid "Messages"
-msgstr ""
-
 msgid "Meta description"
-msgstr ""
-
-msgid "Modification wrap-border--small"
 msgstr ""
 
 msgid "Modifications"
@@ -1606,9 +1249,6 @@ msgstr ""
 msgid "Move"
 msgstr ""
 
-msgid "Multidomain, multilingual, inputs with ikon - basic"
-msgstr ""
-
 msgid "My account"
 msgstr ""
 
@@ -1619,9 +1259,6 @@ msgid "Name %locale%"
 msgstr ""
 
 msgid "Name serves only for internal use within the administration"
-msgstr ""
-
-msgid "Neutral button"
 msgstr ""
 
 msgid "New Payment"
@@ -1756,9 +1393,6 @@ msgstr ""
 msgid "Not possible to create variations of products that are already variant or main variant."
 msgstr ""
 
-msgid "Not using ID and !important for CSS"
-msgstr ""
-
 msgid "Note"
 msgstr ""
 
@@ -1775,9 +1409,6 @@ msgid "Number of products in filter"
 msgstr ""
 
 msgid "Occurrence"
-msgstr ""
-
-msgid "Often useful part, it is heading for different information contents, mainly for forms, but can be used for more purposes"
 msgstr ""
 
 msgid "Only checked products"
@@ -1885,7 +1516,7 @@ msgstr ""
 msgid "Password again"
 msgstr ""
 
-msgid "Password must be at least six characters and can't be the same as login name ."
+msgid "Password must be at least six characters and can't be the same as login name."
 msgstr ""
 
 msgid "Payment"
@@ -1927,9 +1558,6 @@ msgstr ""
 msgid "Phone availability"
 msgstr ""
 
-msgid "Place for input"
-msgstr ""
-
 msgid "Please check following information:"
 msgstr ""
 
@@ -1943,12 +1571,6 @@ msgid "Please wait until all files are uploaded and try again."
 msgstr ""
 
 msgid "Popular categories"
-msgstr ""
-
-msgid "Positive message"
-msgstr ""
-
-msgid "Positive message - block with smaller space around text and smaller text"
 msgstr ""
 
 msgid "Postcode"
@@ -2098,16 +1720,10 @@ msgstr ""
 msgid "Return back"
 msgstr ""
 
-msgid "Right button"
-msgstr ""
-
 msgid "Rounding"
 msgstr ""
 
 msgid "Rounding item with 0 % VAT will be added to your order. It is used for payment in cash."
-msgstr ""
-
-msgid "Row grouping"
 msgstr ""
 
 msgid "SEO"
@@ -2135,9 +1751,6 @@ msgid "Save changes in all templates"
 msgstr ""
 
 msgid "Save changes in order"
-msgstr ""
-
-msgid "Schema"
 msgstr ""
 
 msgid "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
@@ -2174,12 +1787,6 @@ msgid "Searching searches in name, catalogue number or product part number. It i
 msgstr ""
 
 msgid "Searching searches in order number, registered customer email, customer's email in order, customer's last name and company name. It is possible to use wildcards * and ?."
-msgstr ""
-
-msgid "Second type of error message"
-msgstr ""
-
-msgid "Select"
 msgstr ""
 
 msgid "Select new value"
@@ -2326,16 +1933,7 @@ msgstr ""
 msgid "Short description can be set in the main variant."
 msgstr ""
 
-msgid "Short postscripts after input"
-msgstr ""
-
-msgid "Simple view"
-msgstr ""
-
 msgid "Size name"
-msgstr ""
-
-msgid "Sizes: 5, 10, 15, 20, 40, 45, 60, 80, 40px"
 msgstr ""
 
 msgid "Slider on main page"
@@ -2353,25 +1951,7 @@ msgstr ""
 msgid "Slider pages"
 msgstr ""
 
-msgid "Small conversion button"
-msgstr ""
-
-msgid "Sometimes it is necessary to align one of the elements to right/left side. You can do that using modifier <strong class=\"in-article__visible\">form-line__item--right</strong> or <strong class=\"in-article__visible\">form-line__item--left</strong>."
-msgstr ""
-
-msgid "Sometimes there is thicker line between some elements than between others. It is mainly in cases when the form-line elements are not directly behind each other, but some of them are covered with some dive, e.g. because of JS, for hiding and revealing. To that kind of dive you need to add class <strong class=\"in-article__visible\">form-line__js</strong>."
-msgstr ""
-
 msgid "Sorting priority"
-msgstr ""
-
-msgid "Special behavior for big table, which can't fit even in the desktop version to the content part."
-msgstr ""
-
-msgid "Special behavior for table for smaller devices, displaying scrollbar when the window is lessened. If we count with responsivity, this should be set around each table."
-msgstr ""
-
-msgid "Special behavior of table, which was created for parameters, but could be used also differently."
 msgstr ""
 
 msgid "Status"
@@ -2410,16 +1990,10 @@ msgstr ""
 msgid "Successfully uploaded"
 msgstr ""
 
-msgid "Suitable combination of components"
-msgstr ""
-
 msgid "Superadmin"
 msgstr ""
 
 msgid "Superadmin - Closing modules"
-msgstr ""
-
-msgid "Superadmin - Coder documentation"
 msgstr ""
 
 msgid "Superadmin - Sale including/excluding VAT settings"
@@ -2431,34 +2005,7 @@ msgstr ""
 msgid "System data"
 msgstr ""
 
-msgid "TABLE - tables"
-msgstr ""
-
 msgid "TOP"
-msgstr ""
-
-msgid "Table text"
-msgstr ""
-
-msgid "Table text or input"
-msgstr ""
-
-msgid "Table-col"
-msgstr ""
-
-msgid "Table-form"
-msgstr ""
-
-msgid "Table-main"
-msgstr ""
-
-msgid "Table-touch"
-msgstr ""
-
-msgid "Table-touch-always"
-msgstr ""
-
-msgid "Tables"
 msgstr ""
 
 msgid "Tax number"
@@ -2476,58 +2023,19 @@ msgstr ""
 msgid "Terms-and-conditions.html"
 msgstr ""
 
-msgid "Text behind input. To generate the input correctly, it is necessary to write is like <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>"
-msgstr ""
-
-msgid "Text behind label"
-msgstr ""
-
-msgid "Textarea"
-msgstr ""
-
-msgid "Textarea may be across the whole width"
-msgstr ""
-
-msgid "Textarea may be across the whole width next to the label"
-msgstr ""
-
-msgid "Textarea size modification"
-msgstr ""
-
-msgid "Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
-msgstr ""
-
-msgid "The basic premis for coding in admin is, that mostly programmers will work with the code. That's why there is a bigger emphasis on helpers -"
-msgstr ""
-
 msgid "The change will be applied to products in 10 minutes"
 msgstr ""
 
 msgid "The price of the product <strong>{{ name }}</strong> you have in cart has changed. Please, check your order."
 msgstr ""
 
-msgid "There are more types of buttons, each can have a lot of modifications. These modifications can be combined with each other (colour ones with type ones)"
-msgstr ""
-
-msgid "There are several types of tables, but it is not necessary to write down those which are generated by system itself and nobody intervenes in them. That's why there are only those that you will probably want to use."
-msgstr ""
-
 msgid "There was an error while saving. The order isn't saved."
-msgstr ""
-
-msgid "Thick line between"
-msgstr ""
-
-msgid "Thick line between disappeared"
 msgstr ""
 
 msgid "This currency can't be deleted, it is set as default or is saved with order."
 msgstr ""
 
 msgid "This e-mail was sent from the contact form located below the panel of categories."
-msgstr ""
-
-msgid "This form-line is wrapped"
 msgstr ""
 
 msgid "This item can be set in product detail of a specific variant"
@@ -2542,19 +2050,7 @@ msgstr ""
 msgid "This status can't be deleted. This is automatically assigned status to all new orders."
 msgstr ""
 
-msgid "This structure has no place in tables!"
-msgstr ""
-
-msgid "This text will help you understand the logic of creating a form."
-msgstr ""
-
-msgid "Title component with possible button on the right, all separated by border from below"
-msgstr ""
-
 msgid "To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one."
-msgstr ""
-
-msgid "To display same as with parameters, it is necessary to add separator with icon and make sure to remove paddings around the separator. This raises more classes in almost all surrounding TD/TH. You can also simply add and icon with an action at the end of the line."
 msgstr ""
 
 msgid "To fifty hundredths (halfs)"
@@ -2594,15 +2090,6 @@ msgid "Tracking ID"
 msgstr ""
 
 msgid "Type"
-msgstr ""
-
-msgid "Type modifications"
-msgstr ""
-
-msgid "Type of coding used and rules"
-msgstr ""
-
-msgid "Types can be combined with each other and mixed with various colours"
 msgstr ""
 
 msgid "URL addresses"
@@ -2674,9 +2161,6 @@ msgstr ""
 msgid "Used: %currentLength% characters. Recommended max. %recommendedLength%"
 msgstr ""
 
-msgid "Used: 45 characters. Recommended max. 155"
-msgstr ""
-
 msgid "Username"
 msgstr ""
 
@@ -2725,67 +2209,19 @@ msgstr ""
 msgid "Variants"
 msgstr ""
 
-msgid "Various messages and flash messages, there is more type and colour modifications. Thanks to this it is possible to create even combinations of types and colours"
-msgstr ""
-
 msgid "Visibility"
 msgstr ""
 
 msgid "Visibility for unlogged customers"
 msgstr ""
 
-msgid "WINDOW - popup windows, floating windows etc."
-msgstr ""
-
-msgid "WRAP - basic wraps, boxes, independent of content"
-msgstr ""
-
-msgid "Warning message"
-msgstr ""
-
-msgid "Warning message - block with icon"
-msgstr ""
-
-msgid "We will get the display by adding modifiers to input, but it is important to wrap input with dive with class <strong class=\"in-article__visible\">input__wrap</strong>. Images are positioned to this class. This structure should be generated by the system itself. If manual writing needed it is important to pay attention and don't forget to add flag <strong class=\"in-article__visible\">localeFlag(locale)</strong>, domain <strong class=\"in-article__visible\">or icon."
-msgstr ""
-
-msgid "We will get the display by writing input as <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>."
-msgstr ""
-
-msgid "We will get the display either by adding class to element or via <strong class=\"in-article__visible\">form_widget</strong> we add <strong class=\"in-article__visible\">attr class</strong>"
-msgstr ""
-
 msgid "When changing the default currency there is no recalculation of prices"
-msgstr ""
-
-msgid "When we work for example with currencies, we need to state the currency after the input. Inputs have different text lengths and that's why we need to set a fixed width so that icons after text are aligned."
 msgstr ""
 
 msgid "While creating a new pricing group, please be patient. The application needs to recalculate price for every product on e-shop. Products without recalculated price will not be displayed on e-shop. For instance, it takes about an hour to recalculate 2000 products."
 msgstr ""
 
 msgid "Width [px]"
-msgstr ""
-
-msgid "Without any form structure and modification"
-msgstr ""
-
-msgid "Wrap, which will indent the entire block and add bottom border, suitable for indenting block of forms apart"
-msgstr ""
-
-msgid "Wrap-bar"
-msgstr ""
-
-msgid "Wrap-border"
-msgstr ""
-
-msgid "Wrapping elements are those which can add some features around the insides, e.g. framing, indentation, background, or it can set the heading of the whole block of information."
-msgstr ""
-
-msgid "Wrapping/separating elements"
-msgstr ""
-
-msgid "Writing of css characteristics according to priorities"
 msgstr ""
 
 msgid "XML Feeds"
@@ -2812,6 +2248,9 @@ msgstr ""
 msgid "You can set the prices on product detail of specific variant."
 msgstr ""
 
+msgid "You can upload following formats: PNG, JPG"
+msgstr ""
+
 msgid "You can upload following formats: PNG, JPG, GIF"
 msgstr ""
 
@@ -2825,6 +2264,9 @@ msgid "You cannot choose product that is variant"
 msgstr ""
 
 msgid "You have made changes, don't forget to save them!"
+msgstr ""
+
+msgid "You have to create some payment first."
 msgstr ""
 
 msgid "You have to create some shipping first."
@@ -2851,9 +2293,6 @@ msgstr ""
 msgid "alphabetically Z -> A"
 msgstr ""
 
-msgid "and also into more lines"
-msgstr ""
-
 msgid "articles"
 msgstr ""
 
@@ -2867,18 +2306,6 @@ msgid "brands"
 msgstr ""
 
 msgid "category"
-msgstr ""
-
-msgid "characters out of 155 possible"
-msgstr ""
-
-msgid "checkbox in list"
-msgstr ""
-
-msgid "components - components of content part, subfolders divide components logically apart"
-msgstr ""
-
-msgid "core - basic settings for elements (css reset, variables, mixins, form elements, headings..)"
 msgstr ""
 
 msgid "countries"
@@ -2899,15 +2326,6 @@ msgstr ""
 msgid "doesn't use"
 msgstr ""
 
-msgid "domain icon only in checkbox list, icon is inserted <strong class=\"in-article__visible\">domainIcon(domainId, \"small\") </strong>"
-msgstr ""
-
-msgid "domain icon only in checkbox list, it is possible to add action icon"
-msgstr ""
-
-msgid "double signs are clear and developer will intuitively know senses of different classes given"
-msgstr ""
-
 msgid "flags"
 msgstr ""
 
@@ -2918,9 +2336,6 @@ msgid "from most expensive"
 msgstr ""
 
 msgid "from the cheapest"
-msgstr ""
-
-msgid "helpers - helpers, that have to be loaded last"
 msgstr ""
 
 msgid "higher or equal"
@@ -2947,12 +2362,6 @@ msgstr ""
 msgid "is"
 msgstr ""
 
-msgid "layout - settings of layout, heading and footer"
-msgstr ""
-
-msgid "libs - third parties components"
-msgstr ""
-
 msgid "lower or equal"
 msgstr ""
 
@@ -2966,9 +2375,6 @@ msgid "not"
 msgstr ""
 
 msgid "not entered"
-msgstr ""
-
-msgid "one dash \"-\" represents separator in multi-word title"
 msgstr ""
 
 msgid "or"
@@ -2995,19 +2401,7 @@ msgstr ""
 msgid "relevance"
 msgstr ""
 
-msgid "simple checkbox"
-msgstr ""
-
-msgid "simple checkbox can be ordered consecutively"
-msgstr ""
-
 msgid "subscribers"
-msgstr ""
-
-msgid "two dash \"--\" represent modification of component"
-msgstr ""
-
-msgid "two underscores \"__\" represent part of the component/element"
 msgstr ""
 
 msgid "under heading"

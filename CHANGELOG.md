@@ -24,6 +24,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [7.0.0-alpha2] - 2018-05-24
 ### [shopsys/framework]
 #### Added
 - [#74 - Export personal information](https://github.com/shopsys/shopsys/pull/74):
@@ -66,6 +68,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - all exception interfaces are now Throwable 
     - visibility of all private properties and methods of facades was changed to protected 
         - protected visibility allows overriding of behavior from projects
+- [#130 - License condition for turnover changed from 12 to 3 months](https://github.com/shopsys/shopsys/pull/130)
 
 #### Fixed
 - [#89 - choiceList values are prepared for js ChoiceToBooleanArrayTransformer](https://github.com/shopsys/shopsys/pull/89) 
@@ -932,7 +935,9 @@ That's why is this section formatted differently.
     - YesNoType
 - `.travis.yml` file with Travis CI configuration
 
-[Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...HEAD
+[Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...HEAD
+[v7.0.0-alpha2]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2
+
 [shopsys/shopsys]: https://github.com/shopsys/shopsys
 [shopsys/project-base]: https://github.com/shopsys/project-base
 [shopsys/framework]: https://github.com/shopsys/framework
