@@ -645,9 +645,6 @@ services:
   Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory
 
-  Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomainFactoryInterface:
-    alias: Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomainFactory
-
   Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory
 

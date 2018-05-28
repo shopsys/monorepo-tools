@@ -65,6 +65,7 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
                 'cs' => 'Toto je popis značky ' . $brandData->name . '.',
                 'en' => 'This is description of brand ' . $brandData->name . '.',
             ];
+
             $brand = $this->brandFacade->create($brandData);
             $this->addReference($brandConstant, $brand);
         }

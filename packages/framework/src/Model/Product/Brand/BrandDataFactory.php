@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
 class BrandDataFactory
@@ -16,12 +17,19 @@ class BrandDataFactory
      */
     protected $brandFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
+
     public function __construct(
         FriendlyUrlFacade $friendlyUrlFacade,
-        BrandFacade $brandFacade
+        BrandFacade $brandFacade,
+        Domain $domain
     ) {
         $this->friendlyUrlFacade = $friendlyUrlFacade;
         $this->brandFacade = $brandFacade;
+        $this->domain = $domain;
     }
 
     /**
@@ -29,7 +37,15 @@ class BrandDataFactory
      */
     public function createDefault()
     {
-        return new BrandData();
+        $brandData = new BrandData();
+
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $brandData->seoMetaDescriptions[$domainId] = null;
+            $brandData->seoTitles[$domainId] = null;
+            $brandData->seoH1s[$domainId] = null;
+        }
+
+        return $brandData;
     }
 
     /**
@@ -38,9 +54,7 @@ class BrandDataFactory
      */
     public function createFromBrand(Brand $brand)
     {
-        $brandDomains = $this->brandFacade->getBrandDomainsByBrand($brand);
-
-        $brandData = new BrandData();
+        $brandData = $this->createDefault();
         $brandData->name = $brand->getName();
 
         $translations = $brand->getTranslations();
@@ -51,8 +65,10 @@ class BrandDataFactory
             $brandData->descriptions[$translation->getLocale()] = $translation->getDescription();
         }
 
-        foreach ($brandDomains as $brandDomain) {
-            $domainId = $brandDomain->getDomainId();
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $brandData->seoH1s[$domainId] = $brand->getSeoH1($domainId);
+            $brandData->seoTitles[$domainId] = $brand->getSeoTitle($domainId);
+            $brandData->seoMetaDescriptions[$domainId] = $brand->getSeoMetaDescription($domainId);
 
             $brandData->urls->mainFriendlyUrlsByDomainId[$domainId] =
                 $this->friendlyUrlFacade->findMainFriendlyUrl(
@@ -60,9 +76,6 @@ class BrandDataFactory
                     'front_brand_detail',
                     $brand->getId()
                 );
-            $brandData->seoTitles[$domainId] = $brandDomain->getSeoTitle();
-            $brandData->seoMetaDescriptions[$domainId] = $brandDomain->getSeoMetaDescription();
-            $brandData->seoH1s[$domainId] = $brandDomain->getSeoH1();
         }
 
         return $brandData;

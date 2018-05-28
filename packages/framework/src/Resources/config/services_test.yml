@@ -25,6 +25,8 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade: ~
 
+  Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory: ~
+
   Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler: ~
 
   Shopsys\FrameworkBundle\Model\Customer\CustomerFacade: ~

@@ -9,7 +9,6 @@ use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Module\ModuleFacade;
 use Shopsys\FrameworkBundle\Model\Module\ModuleList;
-use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDetailFactory;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfigFactory;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
@@ -73,11 +72,6 @@ class ProductController extends FrontBaseController
     private $moduleFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDetailFactory
-     */
-    private $brandDetailFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade
      */
     private $brandFacade;
@@ -92,8 +86,7 @@ class ProductController extends FrontBaseController
         ProductListOrderingModeForBrandFacade $productListOrderingModeForBrandFacade,
         ProductListOrderingModeForSearchFacade $productListOrderingModeForSearchFacade,
         ModuleFacade $moduleFacade,
-        BrandFacade $brandFacade,
-        BrandDetailFactory $brandDetailFactory
+        BrandFacade $brandFacade
     ) {
         $this->requestExtension = $requestExtension;
         $this->categoryFacade = $categoryFacade;
@@ -105,7 +98,6 @@ class ProductController extends FrontBaseController
         $this->productListOrderingModeForSearchFacade = $productListOrderingModeForSearchFacade;
         $this->moduleFacade = $moduleFacade;
         $this->brandFacade = $brandFacade;
-        $this->brandDetailFactory = $brandDetailFactory;
     }
 
     /**
@@ -220,11 +212,9 @@ class ProductController extends FrontBaseController
 
         $brand = $this->brandFacade->getById($id);
 
-        $brandDetail = $this->brandDetailFactory->getDetailForBrand($brand);
-
         $viewParameters = [
             'paginationResult' => $paginationResult,
-            'brandDetail' => $brandDetail,
+            'brand' => $brand,
         ];
 
         if ($request->isXmlHttpRequest()) {

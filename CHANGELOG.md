@@ -42,6 +42,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
     - updated to Twig 2.4.8
     - all depracated calls has been fixed
+- [#165 Different approach to multidomain entities](https://github.com/shopsys/shopsys/pull/165)
+    - multi-domain entities were changed so they are used similarly to translations
+    - main entities have a bidirectional association to a collection of its entity domains (eg. `BrandDomain`)
+        - only the main entity has access to its entity domains
+        - multi-domain attributes are accessed via the main entity
+    - the main entities are responsible for creating and editing its entity domains
+        - entity domain factories such as `BrandDomainFactory` were removed
+    - entity domains have their own IDs instead of compound primary keys
+    - entities that were modified: `Brand`
+    - `BrandEditFormType`, `BrandDetail` and `BrandDetailFactory` were removed as they were no longer necessary
 
 #### Fixed
 - [#132 - Admin: brand edit page: URLs setting rendering](https://github.com/shopsys/shopsys/pull/132):
@@ -74,6 +84,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#188 - Rebrading of Shopsys Framework](https://github.com/shopsys/shopsys/pull/188/)
     - old logo was changed for the new Shopsys Framework logo
     - all occurrences of netdevelo were changed to shopsys
+- [#165 Different approach to multidomain entities](https://github.com/shopsys/shopsys/pull/165)
+    - multi-domain attributes are accessed via their main entities (instead of usual entity details)
 
 #### Fixed
 - [#131 - correct rendering of checkbox label](https://github.com/shopsys/shopsys/pull/131):

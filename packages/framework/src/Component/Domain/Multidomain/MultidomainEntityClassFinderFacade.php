@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder;
 use Shopsys\FrameworkBundle\Component\Setting\SettingValue;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 
 class MultidomainEntityClassFinderFacade
@@ -77,6 +78,7 @@ class MultidomainEntityClassFinderFacade
     protected function getManualMultidomainEntitiesNames()
     {
         return [
+            BrandDomain::class,
             MailTemplate::class,
         ];
     }

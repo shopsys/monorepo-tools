@@ -22,6 +22,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - check changes in src/Model, all *editData*.php were merged into its *Data*.php relatives
 - Twig has been updated to version 2.4.8
     - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
+- access multi-domain attributes of entities via their main entity (instead of the usual entity detail)
+    - entity domains (eg. `BrandDomain`) should be created, edited and directly accessed only in their main entities (eg. `Brand`) 
+    - see [#165 Different approach to multidomain entities](https://github.com/shopsys/shopsys/pull/165) for details
 
 ### [shopsys/project-base]
 - Twig has been updated to version 2.4.8

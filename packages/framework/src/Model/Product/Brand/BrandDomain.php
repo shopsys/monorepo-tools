@@ -5,16 +5,30 @@ namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="brand_domains")
+ * @ORM\Table(
+ *     name="brand_domains",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="brand_domain", columns={"brand_id", "domain_id"})
+ *     }
+ * )
+ *
  * @ORM\Entity
  */
 class BrandDomain
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    protected $id;
+
+    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Brand\Brand
      *
-     * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Brand\Brand")
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Brand\Brand", inversedBy="domains")
      * @ORM\JoinColumn(nullable=false, name="brand_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $brand;
@@ -22,7 +36,6 @@ class BrandDomain
     /**
      * @var int
      *
-     * @ORM\Id
      * @ORM\Column(type="integer")
      */
     protected $domainId;
@@ -64,14 +77,6 @@ class BrandDomain
     public function getDomainId()
     {
         return $this->domainId;
-    }
-
-    /**
-     * @param int $domainId
-     */
-    public function setDomainId($domainId)
-    {
-        $this->domainId = $domainId;
     }
 
     /**
