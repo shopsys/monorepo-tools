@@ -20,6 +20,8 @@ cd project-base
 
 *Note: The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`.*
 
+*Note: The `--stability=alpha` option enables you to install the project from the last alpha release. Default value for the option is `stable` but there is no stable release yet.*
+
 ### 1.1 Enable second domain (optional)
 There are two domains each for different language in default installation. First one is available via IP adress `127.0.O.1` and second one via `127.0.0.2`.
 `127.0.0.2` is not alias of `127.0.0.1` on Mac by default. To create this alias in network interface run:

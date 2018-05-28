@@ -16,6 +16,8 @@ cd project-base
 *Note: The `--no-install` option disables installation of the vendors - this will be done later in the Docker container.*
 
 *Note: The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`.*
+
+*Note: The `--stability=alpha` option enables you to install the project from the last alpha release. Default value for the option is `stable` but there is no stable release yet.*
  
 ### 2. Create docker-compose.yml file
 Create `docker-compose.yml` from template [`docker-compose.yml.dist`](../../project-base/docker/conf/docker-compose.yml.dist).
