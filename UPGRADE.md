@@ -20,6 +20,27 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 ### [shopsys/framework]
 - check changes in src/Model, all *editData*.php were merged into its *Data*.php relatives
 
+### [shopsys/coding-standards]
+- In order to run all checks, there is new unified way - execute `php vendor/bin/ecs check /path/to/project --config=vendor/shopsys/coding-standards/easy-coding-standard.yml`
+    - See [EasyCodingStandard docs](https://github.com/Symplify/EasyCodingStandard#usage) for more information
+
+#### Example of custom configuration file
+```yaml
+#custom-coding-standard.yml
+imports:
+    - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/psr2.yml' }
+    - { resource: '%vendor_dir%/shopsys/coding-standards/shopsys-coding-standard.yml' }
+parameters:
+    exclude_files:
+        - '*/ignored_folder/*'
+    skip:
+        # private properties should not start with "_"
+        PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.PrivateNoUnderscore: ~
+        # skip max length of functions in files
+        ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
+            - '%current_working_dir%/src/file.php'
+```
+
 ## [From 7.0.0-alpha1 to 7.0.0-alpha2]
 ### [shopsys/project-base]   
 - check changes in the `docker-compose.yml` template you used, there were a couple of important changes you need to replicate 
@@ -135,7 +156,7 @@ $originalConfig->getFinder()
 
 return $originalConfig;
 ```
-###### Version 4.0 and higher
+###### Version 4.0
 ```neon
 #custom-coding-standard.neon
 includes:
@@ -146,7 +167,6 @@ parameters:
         - *_generated/*
 
 ```
-
 [From 7.0.0-alpha2 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...HEAD
 [From 7.0.0-alpha1 to 7.0.0-alpha2]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2
 
