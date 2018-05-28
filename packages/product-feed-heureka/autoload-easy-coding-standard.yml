@@ -1,0 +1,10 @@
+imports:
+    - { resource: '../**/coding-standards/easy-coding-standard.yml' }
+
+parameters:
+    skip:
+        ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
+        - '*/tests/Unit/HeurekaFeedTest.php'
+
+        PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.NotCamelCaps:
+            - '*/src/Model/HeurekaCategory/HeurekaCategoryDownloader.php'

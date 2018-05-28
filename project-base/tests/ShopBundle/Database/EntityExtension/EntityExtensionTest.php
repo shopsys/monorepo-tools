@@ -159,9 +159,6 @@ class EntityExtensionTest extends DatabaseTestCase
         $this->doTestExtendedEntityInstantiation(OrderTransport::class, ExtendedOrderTransport::class, self::ORDER_TRANSPORT_ID);
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     private function doTestExtendedProductPersistence(): void
     {
         $product = $this->getProduct(self::MAIN_PRODUCT_ID);
@@ -287,9 +284,6 @@ class EntityExtensionTest extends DatabaseTestCase
         return $product;
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     private function doTestExtendedCategoryPersistence(): void
     {
         $category = $this->getCategory(self::MAIN_CATEGORY_ID);

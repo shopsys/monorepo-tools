@@ -1,0 +1,8 @@
+imports:
+    - { resource: '../**/coding-standards/easy-coding-standard.yml' }
+
+parameters:
+    skip:
+        ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
+            - '*/src/ZboziPluginDataFixture.php'
+            - '*/tests/Unit/ZboziFeedTest.php'

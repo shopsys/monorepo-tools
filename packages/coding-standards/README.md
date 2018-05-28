@@ -31,9 +31,9 @@ and even add your own sniffs and fixers in the config.
 
 ```yaml
 #custom-coding-standard.yml
-includes:imports:
- - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/psr2.yml' }
- - { resource: '%vendor_dir%/shopsys/coding-standards/shopsys-coding-standard.yml' }
+imports:
+   - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/psr2.yml' }
+   - { resource: '%vendor_dir%/shopsys/coding-standards/shopsys-coding-standard.yml' }
 
 ```
 

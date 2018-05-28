@@ -104,7 +104,6 @@ class OrderController extends AdminBaseController
      * @Route("/order/edit/{id}", requirements={"id" = "\d+"})
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function editAction(Request $request, $id)
     {

@@ -8,14 +8,11 @@ use Tests\ShopBundle\Test\Codeception\Module\Db;
 
 class DatabaseHelper extends Module
 {
-    // @codingStandardsIgnoreStart
     /**
      * {@inheritDoc}
-     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
     public function _initialize()
     {
-        // @codingStandardsIgnoreEnd
         $dbModule = $this->getModule(Db::class);
         /* @var $dbModule \Tests\ShopBundle\Test\Codeception\Module\Db */
         $symfonyHelper = $this->getModule(SymfonyHelper::class);

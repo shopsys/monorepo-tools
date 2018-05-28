@@ -22,9 +22,6 @@ use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class OrderPreviewCalculationTest extends FunctionalTestCase
 {
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     public function testCalculatePreviewWithTransportAndPayment()
     {
         $domain = $this->getContainer()->get(Domain::class);
@@ -109,9 +106,6 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
         $this->assertSame($transportPrice, $orderPreview->getTransportPrice());
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     public function testCalculatePreviewWithoutTransportAndPayment()
     {
         $domain = $this->getContainer()->get(Domain::class);

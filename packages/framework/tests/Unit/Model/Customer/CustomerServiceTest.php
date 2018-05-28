@@ -164,9 +164,6 @@ class CustomerServiceTest extends TestCase
 
     const DOMAIN_ID = 1;
 
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     public function testGetAmendedCustomerDataByOrderWithoutChanges()
     {
         $customerService = $this->getCustomerService();
@@ -247,9 +244,6 @@ class CustomerServiceTest extends TestCase
         $this->assertEquals($deliveryAddressData, $customerData->deliveryAddressData);
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     public function testGetAmendedCustomerDataByOrder()
     {
         $customerService = $this->getCustomerService();

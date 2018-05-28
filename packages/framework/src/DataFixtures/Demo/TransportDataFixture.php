@@ -30,7 +30,6 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function load(ObjectManager $manager)
     {

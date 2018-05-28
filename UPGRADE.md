@@ -38,7 +38,7 @@ parameters:
         PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.PrivateNoUnderscore: ~
         # skip max length of functions in files
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
-            - '%current_working_dir%/src/file.php'
+            - '*/src/file.php'
 ```
 
 ## [From 7.0.0-alpha1 to 7.0.0-alpha2]
@@ -156,7 +156,7 @@ $originalConfig->getFinder()
 
 return $originalConfig;
 ```
-###### Version 4.0
+###### Version 4.0 and higher
 ```neon
 #custom-coding-standard.neon
 includes:

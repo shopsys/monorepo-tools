@@ -19,7 +19,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *     @ORM\Index(columns={"username"})
  *   }
  * )
- * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
 class Administrator implements UserInterface, Serializable, UniqueLoginInterface, TimelimitLoginInterface
 {

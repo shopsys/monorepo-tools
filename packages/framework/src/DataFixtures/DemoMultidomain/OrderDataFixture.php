@@ -19,9 +19,6 @@ use Shopsys\FrameworkBundle\Model\Order\OrderData;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
 
-/**
- * @SuppressWarnings(PHPMD.ExcessiveClassLength)
- */
 class OrderDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     /** @var \Shopsys\FrameworkBundle\Model\Customer\UserRepository */
@@ -56,8 +53,6 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
-     *
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function load(ObjectManager $manager)
     {

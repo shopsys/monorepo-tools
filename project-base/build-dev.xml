@@ -13,8 +13,8 @@
     <target name="checks-ci" depends="db-check-mapping,standards,tests,tests-acceptance" description="Checks ORM mapping, coding standards and runs unit, DB, smoke and acceptance tests."/>
     <target name="checks-ci-diff" depends="db-check-mapping,standards-diff,tests,tests-acceptance" description="Checks ORM mapping, coding standards on changed files and runs unit, DB, smoke and acceptance tests."/>
 
-    <target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,phpstan,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
-    <target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards on changed files."/>
+    <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check" description="Checks coding standards."/>
+    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff" description="Checks coding standards on changed files."/>
 
     <target name="test-db-demo" depends="test-db-wipe-public-schema,test-db-import-basic-structure,test-db-migrations,test-db-fixtures-demo-singledomain,test-create-domains-data,test-generate-friendly-urls,test-db-fixtures-demo-multidomain,test-load-plugin-demo-data,test-replace-domains-urls" description="Drops all data in test database and creates a new one with demo data."/>
     <target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Drops all data in test database and creates a new one with performance data."/>
@@ -216,165 +216,69 @@
         </if>
     </target>
 
-    <target name="phpcbf" description="Fixes coding standards violations in all files by PHP Code Beautifier.">
+    <target name="ecs" description="Checks coding standards in all files by PHP easy coding standards.">
         <exec
-            executable="${path.phpcbf.executable}"
+            executable="${path.ecs.executable}"
             logoutput="true"
             passthru="true"
             checkreturn="true"
         >
-            <arg value="--standard=${path.phpcs.ruleset}"/>
-            <arg value="--extensions=php"/>
-            <arg value="--encoding=utf-8"/>
-            <arg value="--tab-width=4"/>
-            <arg value="--ignore=${path.phpcs.ignored}"/>
-            <arg value="--no-patch"/>
-            <arg path="${path.src}"/>
-            <arg path="${path.tests}"/>
-        </exec>
-    </target>
-
-    <target name="phpcbf-diff" depends="diff-files" description="Fixes coding standards violations in changed files by PHP Code Beautifier.">
-        <if>
-            <not>
-                <equals arg1="${diff.files.php.spaces}" arg2="" trim="true" />
-            </not>
-            <then>
-                <exec
-                    executable="${path.phpcbf.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
-                    <arg value="--standard=${path.phpcs.ruleset}"/>
-                    <arg value="--extensions=php"/>
-                    <arg value="--encoding=utf-8"/>
-                    <arg value="--tab-width=4"/>
-                    <arg value="--ignore=${path.phpcs.ignored}"/>
-                    <arg value="--no-patch"/>
-                    <arg line="${diff.files.php.spaces}"/>
-                </exec>
-            </then>
-        </if>
-    </target>
-
-    <target name="phpcs" description="Checks coding standards in all files by PHP Code Sniffer.">
-        <exec
-            executable="${path.phpcs.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
-            <arg value="--standard=${path.phpcs.ruleset}"/>
-            <arg value="--extensions=php"/>
-            <arg value="--encoding=utf-8"/>
-            <arg value="--tab-width=4"/>
-            <arg value="-sp"/>
-            <arg value="--ignore=${path.phpcs.ignored}"/>
-            <arg path="${path.src}"/>
-            <arg path="${path.tests}"/>
-        </exec>
-    </target>
-
-    <target name="phpcs-diff" depends="diff-files" description="Checks coding standards in changed files by PHP Code Sniffer.">
-        <if>
-            <not>
-                <equals arg1="${diff.files.php.spaces}" arg2="" trim="true" />
-            </not>
-            <then>
-                <exec
-                    executable="${path.phpcs.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
-                    <arg value="--standard=${path.phpcs.ruleset}"/>
-                    <arg value="--extensions=php"/>
-                    <arg value="--encoding=utf-8"/>
-                    <arg value="--tab-width=4"/>
-                    <arg value="-sp"/>
-                    <arg value="--ignore=${path.phpcs.ignored}"/>
-                    <arg line="${diff.files.php.spaces}"/>
-                </exec>
-            </then>
-        </if>
-    </target>
-
-    <target name="phpcs-fixer" description="Checks coding standards in all files by PHP CS Fixer.">
-        <exec
-            executable="${path.phpcs-fixer.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
-            <arg value="fix" />
-            <arg value="--config=${path.phpcs-fixer.configuration}" />
-            <arg value="--dry-run" />
-            <arg value="--verbose" />
-            <arg value="--diff" />
+            <arg value="check" />
+            <arg value="--clear-cache" />
+            <arg value="--config=${path.ecs.configuration}" />
             <arg path="${path.src}" />
             <arg path="${path.tests}" />
+            <arg value="--verbose" />
         </exec>
     </target>
 
-    <target name="phpcs-fixer-fix" description="Fixes coding standards violations in all files by PHP CS Fixer.">
+    <target name="ecs-fix" description="Checks and fixes automatically fixable coding standards in all files by PHP easy coding standards.">
         <exec
-            executable="${path.phpcs-fixer.executable}"
+            executable="${path.ecs.executable}"
             logoutput="true"
             passthru="true"
-            checkreturn="false"
+            checkreturn="true"
         >
-            <arg value="fix" />
-            <arg value="--config=${path.phpcs-fixer.configuration}" />
-            <arg value="--verbose" />
+            <arg value="check" />
+            <arg value="--clear-cache" />
+            <arg value="--fix" />
+            <arg value="--config=${path.ecs.configuration}" />
             <arg path="${path.src}" />
             <arg path="${path.tests}" />
+            <arg value="--verbose" />
         </exec>
     </target>
 
-    <target name="phpcs-fixer-diff" depends="diff-files" description="Checks coding standards in changed files by PHP CS Fixer.">
-        <if>
-            <not>
-                <equals arg1="${diff.files.all.spaces}" arg2="" trim="true" />
-            </not>
-            <then>
-                <exec
-                    executable="${path.phpcs-fixer.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
-                    <arg value="fix" />
-                    <arg value="--config=${path.phpcs-fixer.configuration}" />
-                    <arg value="--dry-run" />
-                    <arg value="--verbose" />
-                    <arg value="--diff" />
-                    <arg line="${diff.files.all.spaces}"/>
-                </exec>
-            </then>
-        </if>
+
+    <target name="ecs-diff" description="Checks coding standards in all files by PHP easy coding standards.">
+        <exec
+            executable="${path.ecs.executable}"
+            logoutput="true"
+            passthru="true"
+            checkreturn="true"
+        >
+            <arg value="check" />
+            <arg value="--config=${path.ecs.configuration}" />
+            <arg path="${path.src}" />
+            <arg path="${path.tests}" />
+            <arg value="--verbose" />
+        </exec>
     </target>
 
-    <target name="phpcs-fixer-fix-diff" depends="diff-files" description="Fixes coding standards violations in changed files by PHP CS Fixer.">
-        <if>
-            <not>
-                <equals arg1="${diff.files.all.spaces}" arg2="" trim="true" />
-            </not>
-            <then>
-                <exec
-                    executable="${path.phpcs-fixer.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
-                    <arg value="fix" />
-                    <arg value="--config=${path.phpcs-fixer.configuration}" />
-                    <arg value="--verbose" />
-                    <arg value="--diff" />
-                    <arg line="${diff.files.all.spaces}"/>
-                </exec>
-            </then>
-        </if>
+    <target name="ecs-fix-diff" description="Checks and fixes automatically fixable coding standards in all files by PHP easy coding standards.">
+        <exec
+            executable="${path.ecs.executable}"
+            logoutput="true"
+            passthru="true"
+            checkreturn="true"
+        >
+            <arg value="check" />
+            <arg value="--fix" />
+            <arg value="--config=${path.ecs.configuration}" />
+            <arg path="${path.src}" />
+            <arg path="${path.tests}" />
+            <arg value="--verbose" />
+        </exec>
     </target>
 
     <target name="phplint" description="Checks syntax of PHP files.">
@@ -402,45 +306,6 @@
                     checkreturn="true"
                 >
                     <arg line="${diff.files.php.spaces}" />
-                </exec>
-            </then>
-        </if>
-    </target>
-
-    <target name="phpmd" description="Checks coding standards in all files by PHP Mess Detector.">
-        <exec
-            executable="${path.phpmd.executable}"
-            logoutput="true"
-            passthru="true"
-            checkreturn="true"
-        >
-            <arg value="${path.src},${path.tests}"/>
-            <arg value="text"/>
-            <arg value="${path.phpmd.ruleset}"/>
-            <arg value="--extensions=php"/>
-            <arg value="--exclude"/>
-            <arg value="${path.phpmd.ignored}"/>
-        </exec>
-    </target>
-
-    <target name="phpmd-diff" depends="diff-files" description="Checks coding standards in changed files by PHP Mess Detector.">
-        <if>
-            <not>
-                <equals arg1="${diff.files.php.commas}" arg2="" trim="true" />
-            </not>
-            <then>
-                <exec
-                    executable="${path.phpmd.executable}"
-                    logoutput="true"
-                    passthru="true"
-                    checkreturn="true"
-                >
-                    <arg value="${diff.files.php.commas}"/>
-                    <arg value="text"/>
-                    <arg value="${path.phpmd.ruleset}"/>
-                    <arg value="--extensions=php"/>
-                    <arg value="--exclude"/>
-                    <arg value="${path.phpmd.ignored}"/>
                 </exec>
             </then>
         </if>
@@ -485,28 +350,12 @@
     </target>
 
     <target name="standards-fix" description="Automatically fixes some coding standards violations in all files.">
-        <phingcall target="phpcs-fixer-fix" />
-        <trycatch>
-            <try>
-                <phingcall target="phpcs" />
-            </try>
-            <catch>
-                <phingcall target="phpcbf" />
-            </catch>
-        </trycatch>
+        <phingcall target="ecs-fix" />
         <phingcall target="eslint-fix" />
     </target>
 
     <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files.">
-        <phingcall target="phpcs-fixer-fix-diff" />
-        <trycatch>
-            <try>
-                <phingcall target="phpcs-diff" />
-            </try>
-            <catch>
-                <phingcall target="phpcbf-diff" />
-            </catch>
-        </trycatch>
+        <phingcall target="ecs-fix-diff" />
         <phingcall target="eslint-fix-diff" />
     </target>
 

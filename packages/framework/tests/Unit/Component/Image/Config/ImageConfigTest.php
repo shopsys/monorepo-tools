@@ -14,7 +14,6 @@ class ImageConfigTest extends TestCase
 {
     /**
      * @return \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     private function getBaseImageConfig()
     {

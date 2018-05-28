@@ -20,8 +20,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *     }
  * )
  * @ORM\Entity
- *
- * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable
 {

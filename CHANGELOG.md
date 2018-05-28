@@ -25,6 +25,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### [shopsys/framework]
+#### Changed
+- [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards) is now used
+    - version of coding-standards package was updated to dev-master in [composer.json](./packages/framework/composer.json)
+    - modified [travis script](./packages/framework/project-base/.travis.yml)
+        - removed check for php 7.0
+        - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binaries
+        - inline code skips moved to [autoload-easy-coding-standard.yml](./packages/framework/autoload-easy-coding-standard.yml) 
+
 #### Fixed
 - [#132 - Admin: brand edit page: URLs setting rendering](https://github.com/shopsys/shopsys/pull/132):
     - admin: brand detail page: rendering of URLs setting
@@ -39,6 +47,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
                 - Brand
 
 ### [shopsys/project-base]
+#### Changed
+- [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
+    - version of coding-standards package was updated to dev-master in [composer.json](./packages/project-base/composer.json)
+    - inline code skips moved to [autoload-easy-coding-standard.yml](./project-base/autoload-easy-coding-standard.yml)
+    - replaced php-cs-fixer. phpcs. phpmd for ecs in [build.xml](./project-base/build.xml) and [build-dev.xml](./project-base/build-dev.xml) scripts
+               
 #### Fixed
 - [#131 - correct rendering of checkbox label](https://github.com/shopsys/shopsys/pull/131):
     - `Front/Form/theme.html.twig`: block `checkbox_row` now uses block `form_label` for proper label rendering
@@ -48,6 +62,87 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#178 - JsFormValidatorBundle security issue with Ajax validation](https://github.com/shopsys/shopsys/pull/178)
     - removed the bundle's public route that allowed lookup any DB table by any field
     - the purpose of the route is for ajax validation of an entity uniqueness but the feature is not used anyway  
+
+### [shopsys/shopsys]
+#### Added
+- [#143](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
+    - config [easy-coding-standard.yml](./easy-coding-standard.yml]) for importing rules of new easy-coding-standard package
+
+#### Changed
+- [#143](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
+    - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binaries
+    - build scripts were modified to work with new easy-coding-standard checker 
+ 
+### [shopsys/coding-standards]
+##### Changed
+- [#143](https://github.com/shopsys/shopsys/pull/143) [EasyCodingStandard v4.3.0](https://github.com/Symplify/EasyCodingStandard/tree/4.3) is now used
+    - rules config file changed its format from neon to yaml
+
+### [shopsys/form-types-bundle]
+#### Changed
+- [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
+    - version of coding-standards package was updated to dev-master in [composer.json](./packages/form-types-bundle/composer.json)
+    - modified [travis script](./packages/form-types-bundle/.travis.yml)
+        - removed check for php 7.0 due to compatibility with ecs
+        - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
+
+### [shopsys/migrations]
+#### Changed
+- [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
+    - version of coding-standards package was updated to dev-master in [composer.json](./packages/migrations/composer.json)
+    - modified [travis script](./packages/migrations/.travis.yml)
+        - removed check for php 7.0 due to compatibility with ecs
+        - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
+
+### [shopsys/plugin-interface]
+#### Changed
+- [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
+    - version of coding-standards package was updated to dev-master in [composer.json](./packages/plugin-interface/composer.json)
+    - modified [travis script](./packages/plugin-interface/.travis.yml)
+        - removed check for php 7.0 due to compatibility with ecs
+        - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
+
+### [shopsys/product-feed-google]
+#### Changed
+- [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
+    - version of coding-standards package was updated to dev-master in [composer.json](./packages/product-feed-google/composer.json)
+    - modified [travis script](./packages/product-feed-google/.travis.yml)
+        - removed check for php 7.0 due to compatibility with ecs
+        - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
+
+### [shopsys/product-feed-heureka]
+#### Changed
+- [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
+    - version of coding-standards package was updated to dev-master in [composer.json](./packages/product-feed-heureka/composer.json)
+    - inline code skips moved to [autoload-easy-coding-standard.yml](./packages/product-feed-heureka/autoload-easy-coding-standard.yml) 
+    - modified [travis script](./packages/product-feed-heureka/.travis.yml)
+        - removed check for php 7.0 due to compatibility with ecs
+        - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
+
+### [shopsys/product-feed-heureka-delivery]
+#### Changed
+- [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
+    - version of coding-standards package was updated to dev-master in [composer.json](./packages/product-feed-heureka-delivery/composer.json)
+    - modified [travis script](./packages/product-feed-heureka-delivery/.travis.yml)
+        - removed check for php 7.0 due to compatibility with ecs
+        - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
+
+### [shopsys/product-feed-interface]
+#### Changed
+- [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
+    - version of coding-standards package was updated to dev-master in [composer.json](./packages/product-feed-interface/composer.json)
+    - modified [travis script](./packages/product-feed-interface/.travis.yml)
+        - removed check for php 7.0 due to compatibility with ecs
+        - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
+
+### [shopsys/product-feed-zbozi]
+#### Changed
+- [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
+    - version of coding-standards package was updated to dev-master in [composer.json](./packages/product-feed-zbozi/composer.json)
+    - inline code skips moved to [autoload-easy-coding-standard.yml](./packages/product-feed-zbozi/autoload-easy-coding-standard.yml) 
+    - modified [travis script](./packages/product-feed-zbozi/.travis.yml)
+        - removed check for php 7.0 due to compatibility with ecs
+        - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
 
 ## [7.0.0-alpha2] - 2018-05-24
 ### [shopsys/framework]
@@ -899,8 +994,7 @@ That's why is this section formatted differently.
     - rules configuration is now unified in single file - [`easy-coding-standard.neon`](./packages/coding-standards/easy-coding-standard.neon)
     - the option `ignore-whitespace` for rules checking method and class length is not available anymore
         - the limits were increased to 550 (class length) and 60 (method length)
-- [#13](https://github.com/shopsys/coding-standards/) [EasyCodingStandard v4.3](https://github.com/Symplify/EasyCodingStandard/tree/v4.3.0)  is now used
-    - rules config file changed its format from neon to yaml 
+
 ##### Removed
 - PHP Mess Detector (@TomasVotruba)
 - line length sniff (@TomasVotruba)

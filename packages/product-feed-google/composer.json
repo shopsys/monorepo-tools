@@ -52,7 +52,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0|^7.0",
-        "shopsys/coding-standards": "^3.0.2",
+        "shopsys/coding-standards": "dev-master",
         "twig/extensions": "^1.3",
         "twig/twig": "^1.34"
     }

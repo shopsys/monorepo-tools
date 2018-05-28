@@ -228,7 +228,6 @@ class GoogleFeedTest extends TestCase
 
     /**
      * @return array
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     private function getFeedItemsData()
     {

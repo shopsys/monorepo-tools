@@ -108,7 +108,7 @@
         "codeception/codeception": "^2.4.0",
         "phpstan/phpstan": "^0.7",
         "phpunit/phpunit": "^7.0",
-        "shopsys/coding-standards": "^3.1.1",
+        "shopsys/coding-standards": "dev-master",
         "shopsys/http-smoke-testing": "dev-master"
     },
     "scripts": {

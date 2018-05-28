@@ -26,6 +26,6 @@
         "symfony/translation": "^3.4"
     },
     "require-dev": {
-        "shopsys/coding-standards": "^3.0.2"
+        "shopsys/coding-standards": "dev-master"
     }
 }

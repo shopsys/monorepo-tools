@@ -21,7 +21,6 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
  *     }
  * )
  * @ORM\Entity
- * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
 class Product extends AbstractTranslatableEntity
 {
@@ -858,7 +857,6 @@ class Product extends AbstractTranslatableEntity
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $mainVariant
-     * @SuppressWarnings(PHPMD.UnusedprotectedMethod) method is used but not through $this
      */
     protected function setMainVariant(self $mainVariant)
     {

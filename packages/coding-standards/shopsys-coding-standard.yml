@@ -121,8 +121,6 @@ services:
         maxCount: 30
 
 parameters:
-    exclude_files:
-        - '*tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
     skip:
         # private properties should not start with "_"
         PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.PrivateNoUnderscore: ~
@@ -137,62 +135,3 @@ parameters:
         PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff.NoLineAfterClose: ~
         # allow empty "catch (Exception $exception) { }"
         PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedCatch: ~
-
-        ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
-        # skip known issues for framework
-            - '*/framework/src/DataFixtures/*/*DataFixture.php'
-            - '*/framework/src/Form/Admin/*/*FormType.php'
-            - '*/framework/src/Model/Order/Preview/OrderPreviewCalculation.php'
-            - '*/framework/src/Model/Product/ProductVisibilityRepository.php'
-            - '*/framework/src/Controller/Admin/AdministratorController.php'
-            - '*/framework/tests/Unit/Model/Customer/CustomerServiceTest.php'
-        # skip check of known issues for project-base
-            - '*/project-base/src/Shopsys/ShopBundle/Controller/Front/OrderController.php'
-            - '*/project-base/src/Shopsys/ShopBundle/Form/Front/Customer/BillingAddressFormType.php'
-            - '*/project-base/src/Shopsys/ShopBundle/Form/Front/Customer/DeliveryAddressFormType.php'
-            - '*/project-base/src/Shopsys/ShopBundle/Form/Front/Order/PersonalInfoFormType.php'
-            - '*/project-base/tests/ShopBundle/Database/EntityExtension/EntityExtensionTest.php'
-            - '*/project-base/tests/ShopBundle/Database/Model/Order/OrderFacadeTest.php'
-            - '*/project-base/tests/ShopBundle/Database/Model/Order/Preview/OrderPreviewCalculationTest.php'
-            - '*/project-base/tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php'
-            - '*/project-base/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
-        # skip known issues for heureka-feed
-            - '*/product-feed-heureka/tests/Unit/HeurekaFeedTest.php'
-        # skip known issues for product-feed-zbozi
-            - '*/product-feed-zbozi/src/ZboziPluginDataFixture.php'
-            - '*/product-feed-zbozi/tests/Unit/ZboziFeedTest.php'
-
-        ObjectCalisthenics\Sniffs\Metrics\PropertyPerClassLimitSniff:
-        # skip known issues for framework
-            - '*/framework/src/Model/Order/Order.php'
-            - '*/framework/src/Model/Order/OrderData.php'
-            - '*/framework/src/Model/Product/Product.php'
-
-        ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:
-        # skip check of known issues for framework
-            - '*/framework/src/Component/Grid/Grid.php'
-            - '*/framework/src/DataFixtures/Demo/OrderDataFixture.php'
-            - '*/framework/src/Model/Order/Order.php'
-            - '*/framework/src/Model/Product/Product.php'
-            - '*/framework/src/Model/Product/ProductRepository.php'
-        # skip check of known issues for project-base
-            - '*/project-base/tests/ShopBundle/Database/Model/Product/ProductVisibilityRepositoryTest.php'
-            - '*/project-base/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
-
-        PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedWhile:
-        # skip known issues for framework
-            - '*/framework/src/Model/Product/Availability/ProductAvailabilityRecalculator.php'
-            - '*/framework/src/Model/Product/Pricing/ProductPriceRecalculator.php'
-
-        PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\CamelCapsFunctionNameSniff.ScopeNotCamelCaps:
-        # skip check of known issues for project-base
-            - '*/project-base/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
-
-        Shopsys\CodingStandards\Sniffs\ValidVariableNameSniff:
-        # skip check of known issues for project-base
-            - '*/project-base/tests/ShopBundle/Database/EntityExtension/EntityExtensionTest.php'
-            - '*/project-base/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
-
-        PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.NotCamelCaps:
-        #skip known issues for heureka-feed
-            - '*/product-feed-heureka/src/Model/HeurekaCategory/HeurekaCategoryDownloader.php'

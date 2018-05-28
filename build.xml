@@ -6,37 +6,22 @@
     <property name="path.packages" value="./packages"/>
     <property name="path.bin-console" value="./project-base/bin/console"/>
     <property name="path.framework" value="${path.packages}/framework"/>
+    <property name="path.ecs.configuration" value="${path.root}/../easy-coding-standard.yml"/>
 
     <import file="project-base/build-dev.xml" />
     <import file="project-base/build.xml" />
 
-    <target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,phpstan,twig-lint,yaml-lint,eslint-check,standards-packages" description="Checks coding standards in both project-base and packages."/>
-    <target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages" description="Checks coding standards on changed files in project-base and all files in packages."/>
+    <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check,standards-packages" description="Checks coding standards in both project-base and packages."/>
+    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages" description="Checks coding standards on changed files in project-base and all files in packages."/>
 
     <target name="standards-fix" description="Automatically fixes some coding standards violations in both project-base and packages.">
-        <phingcall target="phpcs-fixer-fix" />
-        <trycatch>
-            <try>
-                <phingcall target="phpcs" />
-            </try>
-            <catch>
-                <phingcall target="phpcbf" />
-            </catch>
-        </trycatch>
+        <phingcall target="ecs-fix" />
         <phingcall target="eslint-fix" />
         <phingcall target="standards-fix-packages" />
     </target>
 
     <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files in project-base and all files in packages.">
-        <phingcall target="phpcs-fixer-fix-diff" />
-        <trycatch>
-            <try>
-                <phingcall target="phpcs-diff" />
-            </try>
-            <catch>
-                <phingcall target="phpcbf-diff" />
-            </catch>
-        </trycatch>
+        <phingcall target="ecs-fix-diff" />
         <phingcall target="eslint-fix-diff" />
         <phingcall target="standards-fix-packages" />
     </target>
@@ -46,30 +31,11 @@
             <arg path="./packages/*/src"/>
             <arg path="./packages/*/tests" />
         </exec>
-        <exec executable="${path.phpcs-fixer.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="fix" />
-            <arg value="--config=${path.phpcs-fixer.configuration}"/>
-            <arg value="--dry-run" />
-            <arg value="--verbose" />
-            <arg value="--diff" />
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check" />
+            <arg value="--config=${path.ecs.configuration}"/>
             <arg path="./packages/*/src"/>
             <arg path="./packages/*/tests" />
-        </exec>
-        <exec executable="${path.phpcs.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="--standard=${path.phpcs.ruleset}"/>
-            <arg value="--extensions=php" />
-            <arg value="--encoding=utf-8" />
-            <arg value="--tab-width=4" />
-            <arg value="-sp" />
-            <arg path="./packages/*/src"/>
-            <arg path="./packages/*/tests" />
-            <arg value="--ignore=./packages/coding-standards" />
-        </exec>
-        <exec executable="${path.phpmd.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg path="./packages"/>
-            <arg value="text" />
-            <arg value="${path.phpmd.ruleset}" />
-            <arg value="--extensions=php" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
@@ -93,39 +59,13 @@
     </target>
 
     <target name="standards-fix-packages" description="Automatically fixes some coding standards violations in all packages.">
-        <exec executable="${path.phpcs-fixer.executable}" logoutput="true" passthru="true" checkreturn="true">
-            <arg value="fix" />
-            <arg value="--config=${path.phpcs-fixer.configuration}"/>
-            <arg value="--verbose" />
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check" />
+            <arg value="--fix" />
+            <arg value="--config=${path.ecs.configuration}"/>
             <arg path="./packages/*/src"/>
             <arg path="./packages/*/tests" />
         </exec>
-        <trycatch>
-            <try>
-                <exec executable="${path.phpcs.executable}" logoutput="true" passthru="true" checkreturn="true">
-                    <arg value="--standard=${path.phpcs.ruleset}"/>
-                    <arg value="--extensions=php" />
-                    <arg value="--encoding=utf-8" />
-                    <arg value="--tab-width=4" />
-                    <arg value="-sp" />
-                    <arg path="./packages/*/src"/>
-                    <arg path="./packages/*/tests" />
-                    <arg value="--ignore=./packages/coding-standards" />
-                </exec>
-            </try>
-            <catch>
-                <exec executable="${path.phpcbf.executable}" logoutput="true" passthru="true" checkreturn="true">
-                    <arg value="--standard=${path.phpcs.ruleset}"/>
-                    <arg value="--extensions=php"/>
-                    <arg value="--encoding=utf-8"/>
-                    <arg value="--tab-width=4"/>
-                    <arg value="-p" />
-                    <arg path="./packages/*/src"/>
-                    <arg path="./packages/*/tests" />
-                    <arg value="--ignore=./packages/coding-standards" />
-                </exec>
-            </catch>
-        </trycatch>
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
             <arg value="--color" />
             <arg value="--fix" />

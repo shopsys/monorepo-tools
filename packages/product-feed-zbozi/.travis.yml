@@ -16,5 +16,5 @@ install:
 
 script:
   - php vendor/bin/parallel-lint ./src ./tests
-  - php vendor/bin/ecs check --config=vendor/shopsys/coding-standards/easy-coding-standard.yml --verbose ./src ./tests
+  - php vendor/bin/ecs check --config=autoload-easy-coding-standard.yml --verbose ./src ./tests
   - php vendor/bin/phpunit tests

@@ -22,8 +22,6 @@ class VarDumperExtension extends Twig_Extension
 
     /**
      * @param mixed $var
-     *
-     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public function d($var)
     {

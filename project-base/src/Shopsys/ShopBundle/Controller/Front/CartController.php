@@ -87,7 +87,6 @@ class CartController extends FrontBaseController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function indexAction(Request $request)
     {

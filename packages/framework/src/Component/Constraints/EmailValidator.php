@@ -38,7 +38,6 @@ class EmailValidator extends ConstraintValidator
      */
     private function isEmail($value)
     {
-        // @codingStandardsIgnoreStart
         $atom = "[-a-z0-9!#$%&'*+/=?^_`{|}~]"; // RFC 5322 unquoted characters in local-part
         $alpha = "a-z\x80-\xFF"; // superset of IDN
 
@@ -48,6 +47,5 @@ class EmailValidator extends ConstraintValidator
             ([0-9$alpha]([-0-9$alpha]{0,61}[0-9$alpha])?\\.)+ # domain - RFC 1034
             [$alpha]([-0-9$alpha]{0,17}[$alpha])? # top domain
             \\z)ix", $value);
-        // @codingStandardsIgnoreEnd
     }
 }
