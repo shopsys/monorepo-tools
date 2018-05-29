@@ -33,6 +33,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binaries
         - inline code skips moved to [autoload-easy-coding-standard.yml](./packages/framework/autoload-easy-coding-standard.yml) 
 
+#### Changed
+- [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
+    - updated to Twig 2.4.8
+    - all depracated calls has been fixed
+
 #### Fixed
 - [#132 - Admin: brand edit page: URLs setting rendering](https://github.com/shopsys/shopsys/pull/132):
     - admin: brand detail page: rendering of URLs setting
@@ -52,7 +57,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - version of coding-standards package was updated to dev-master in [composer.json](./packages/project-base/composer.json)
     - inline code skips moved to [autoload-easy-coding-standard.yml](./project-base/autoload-easy-coding-standard.yml)
     - replaced php-cs-fixer. phpcs. phpmd for ecs in [build.xml](./project-base/build.xml) and [build-dev.xml](./project-base/build-dev.xml) scripts
-               
+
+- [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
+    - updated to Twig 2.4.8
+    - all depracated calls has been fixed
+
 #### Fixed
 - [#131 - correct rendering of checkbox label](https://github.com/shopsys/shopsys/pull/131):
     - `Front/Form/theme.html.twig`: block `checkbox_row` now uses block `form_label` for proper label rendering
@@ -110,6 +119,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         - removed check for php 7.0 due to compatibility with ecs
         - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
 
+- [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
+    - updated to Twig 2.4.8
+    - all depracated calls has been fixed
+
 ### [shopsys/product-feed-heureka]
 #### Changed
 - [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
@@ -119,6 +132,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         - removed check for php 7.0 due to compatibility with ecs
         - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
 
+- [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
+    - updated to Twig 2.4.8
+    - all depracated calls has been fixed
+
 ### [shopsys/product-feed-heureka-delivery]
 #### Changed
 - [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
@@ -126,6 +143,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - modified [travis script](./packages/product-feed-heureka-delivery/.travis.yml)
         - removed check for php 7.0 due to compatibility with ecs
         - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
+
+- [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
+    - updated to Twig 2.4.8
+    - all depracated calls has been fixed
 
 ### [shopsys/product-feed-interface]
 #### Changed
@@ -143,6 +164,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - modified [travis script](./packages/product-feed-zbozi/.travis.yml)
         - removed check for php 7.0 due to compatibility with ecs
         - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
+
+- [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
+    - updated to Twig 2.4.8
+    - all depracated calls has been fixed
 
 ## [7.0.0-alpha2] - 2018-05-24
 ### [shopsys/framework]

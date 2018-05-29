@@ -17,8 +17,31 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/product-feed-zbozi]
 
 ## [From 7.0.0-alpha2 to Unreleased]
+
 ### [shopsys/framework]
 - check changes in src/Model, all *editData*.php were merged into its *Data*.php relatives
+- Twig has been updated to version 2.4.8
+    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
+
+### [shopsys/project-base]
+- Twig has been updated to version 2.4.8
+    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
+
+### [shopsys/product-feed-google]
+- Twig has been updated to version 2.4.8
+    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
+    
+### [shopsys/product-feed-heureka]
+- Twig has been updated to version 2.4.8
+    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
+    
+### [shopsys/product-feed-heureka-delivery]
+- Twig has been updated to version 2.4.8
+    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
+    
+### [shopsys/product-feed-zbozi]
+- Twig has been updated to version 2.4.8
+    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
 
 ### [shopsys/coding-standards]
 - In order to run all checks, there is new unified way - execute `php vendor/bin/ecs check /path/to/project --config=vendor/shopsys/coding-standards/easy-coding-standard.yml`

@@ -99,7 +99,7 @@
         "timwhitlock/jparser": "@dev",
         "tracy/tracy": "^2.4.13",
         "twig/extensions": "^1.5.1",
-        "twig/twig": "^1.35.3",
+        "twig/twig": "^2.4.8",
         "vasek-purchart/console-errors-bundle": "^1.0.1"
     },
     "require-dev": {
