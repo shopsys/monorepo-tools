@@ -10,7 +10,7 @@
             <ITEMGROUP_ID>{{ item.mainVariantId }}</ITEMGROUP_ID>
         {% endif -%}
         <PRODUCTNAME>{{ item.productName }}</PRODUCTNAME>
-        <DESCRIPTION>{{ item.description|striptags|replace("\n", ' ')|trim }}</DESCRIPTION>
+        <DESCRIPTION>{{ item.description|striptags|replace({"\n": ' '})|trim }}</DESCRIPTION>
         <URL>{{ item.url }}</URL>
         {% if item.imgUrl -%}
             <IMGURL>{{ item.imgUrl }}</IMGURL>
