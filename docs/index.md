@@ -11,3 +11,4 @@
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)
 * [Configuring Jenkins for Continuous Integration](./cookbook/jenkins-configuration.md)
+* [Adding New Attribute to an Entity](./cookbook/adding-new-attribute-to-an-entity.md)
