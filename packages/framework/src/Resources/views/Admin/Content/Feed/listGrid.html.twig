@@ -1,4 +1,5 @@
 {% extends '@ShopsysFramework/Admin/Grid/Grid.html.twig' %}
+{% import _self as self %}
 
 {% macro getLabel(row) %}
     {{ row.feedLabel }} - {{ row.domainConfig.name }}
@@ -15,10 +16,11 @@
 {% endmacro %}
 
 {% block grid_value_cell_id_label %}
+    {% import _self as self %}
     {% if row.created %}
-        <a href="{{ row.url }}" target="_blank">{{ _self.getLabel(row) }}</a>
+        <a href="{{ row.url }}" target="_blank">{{ self.getLabel(row) }}</a>
     {% else %}
-        {{ _self.getLabel(row) }}
+        {{ self.getLabel(row) }}
     {% endif %}
 {% endblock %}
 

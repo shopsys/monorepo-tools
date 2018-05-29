@@ -1,6 +1,7 @@
 {% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
 {% set showHeading = false %}
 {% import '@ShopsysFramework/Admin/Form/seoFormRowMacros.html.twig' as seoFormRowMacros %}
+{% import _self as self %}
 
 {% block title %}- {{ 'Product detail'|trans }}{% endblock %}
 {% block h1 %}{% endblock %}
@@ -238,7 +239,7 @@
                         <th class="table-form__cell"></th>
                     </tr>
                 </thead>
-                <tbody class="js-parameters" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}" data-index="{{ form.parameters|length }}">
+                <tbody class="js-parameters" data-prototype="{{ self.parameterRow(form.parameters.vars.prototype)|escape }}" data-index="{{ form.parameters|length }}">
                     {% macro parameterRow(parameter, index) %}
                         <tr class="js-parameters-item js-form-group table-form__row" data-index="{{ index }}">
                             <td class="table-form__cell table-form__cell--del-before">
@@ -265,7 +266,7 @@
                     {% endmacro %}
 
                     {% for key, parameter in form.parameters %}
-                        {{ _self.parameterRow(parameter, key) }}
+                        {{ self.parameterRow(parameter, key) }}
                     {% else %}
                         {% do form.parameters.setRendered %}
                     {% endfor %}

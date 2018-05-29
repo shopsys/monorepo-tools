@@ -1,13 +1,16 @@
 {% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+{% import _self as self %}
 
 {% block title %}- {{ 'Bestsellers'|trans }}{% endblock %}
 {% block h1 %}{{ 'Bestsellers'|trans }}{% endblock %}
 
 {% block main_content %}
-
+    {% import _self as self %}
+    
     {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
     {% macro categoryTreeItem(categoryDetails, selectedDomainId, bestsellingProductsInCategories) %}
+        {% import _self as self %}
         <ul class="js-category-tree-items form-tree__content">
             {% for categoryDetail in categoryDetails %}
                 <li class="js-category-tree-item form-tree__item" id="js-category-tree-{{ categoryDetail.category.id }}">
@@ -23,7 +26,7 @@
                             ({{ bestsellingProductsInCategories[categoryDetail.category.id] }})
                         </span>
                     </div>
-                    {{ _self.categoryTreeItem(categoryDetail.children, selectedDomainId, bestsellingProductsInCategories) }}
+                    {{ self.categoryTreeItem(categoryDetail.children, selectedDomainId, bestsellingProductsInCategories) }}
                 </li>
             {% endfor %}
         </ul>
@@ -31,7 +34,7 @@
 
     <div class="form-line">
         <div class="form-tree form-tree--open">
-            {{ _self.categoryTreeItem(categoryDetails, selectedDomainId, bestsellingProductsInCategories) }}
+            {{ self.categoryTreeItem(categoryDetails, selectedDomainId, bestsellingProductsInCategories) }}
         </div>
     </div>
 
