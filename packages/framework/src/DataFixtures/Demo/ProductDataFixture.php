@@ -7,7 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade;
 
@@ -69,8 +69,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
         $productNo = 1;
         $productsByCatnum = [];
         foreach ($csvRows as $row) {
-            $productEditData = $this->productDataFixtureLoader->createProductEditDataFromRowForFirstDomain($row);
-            $product = $this->createProduct(self::PRODUCT_PREFIX . $productNo, $productEditData);
+            $productData = $this->productDataFixtureLoader->createProductDataFromRowForFirstDomain($row);
+            $product = $this->createProduct(self::PRODUCT_PREFIX . $productNo, $productData);
 
             if ($product->getCatnum() !== null) {
                 $productsByCatnum[$product->getCatnum()] = $product;
@@ -83,12 +83,12 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 
     /**
      * @param string $referenceName
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    private function createProduct($referenceName, ProductEditData $productEditData)
+    private function createProduct($referenceName, ProductData $productData)
     {
-        $product = $this->productFacade->create($productEditData);
+        $product = $this->productFacade->create($productData);
 
         $this->addReference($referenceName, $product);
 

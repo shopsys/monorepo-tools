@@ -16,7 +16,7 @@ use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -193,11 +193,11 @@ class ProductDataFixture
                 $row = reset($csvRows);
                 $this->demoDataIterationCounter++;
             }
-            $productEditData = $this->productDataFixtureLoader->createProductEditDataFromRowForFirstDomain($row);
-            $this->productDataFixtureLoader->updateProductEditDataFromCsvRowForSecondDomain($productEditData, $row);
-            $this->makeProductEditDataUnique($productEditData);
-            $this->setRandomPerformanceCategoriesToProductEditData($productEditData);
-            $product = $this->productFacade->create($productEditData);
+            $productData = $this->productDataFixtureLoader->createProductDataFromRowForFirstDomain($row);
+            $this->productDataFixtureLoader->updateProductDataFromCsvRowForSecondDomain($productData, $row);
+            $this->makeProductDataUnique($productData);
+            $this->setRandomPerformanceCategoriesToProductData($productData);
+            $product = $this->productFacade->create($productData);
 
             if ($this->countImported === 0) {
                 $this->persistentReferenceFacade->persistReference(self::FIRST_PERFORMANCE_PRODUCT, $product);
@@ -262,24 +262,24 @@ class ProductDataFixture
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      */
-    private function makeProductEditDataUnique(ProductEditData $productEditData)
+    private function makeProductDataUnique(ProductData $productData)
     {
         $matches = [];
         $uniqueIndex = $this->getUniqueIndex();
 
-        if (preg_match('/^(.*) #\d+$/', $productEditData->productData->catnum, $matches)) {
-            $productEditData->productData->catnum = $matches[1] . $uniqueIndex;
+        if (preg_match('/^(.*) #\d+$/', $productData->catnum, $matches)) {
+            $productData->catnum = $matches[1] . $uniqueIndex;
         } else {
-            $productEditData->productData->catnum .= $uniqueIndex;
+            $productData->catnum .= $uniqueIndex;
         }
 
-        foreach ($productEditData->productData->name as $locale => $name) {
+        foreach ($productData->name as $locale => $name) {
             if (preg_match('/^(.*) #\d+$/', $name, $matches)) {
-                $productEditData->productData->name[$locale] = $matches[1] . $uniqueIndex;
+                $productData->name[$locale] = $matches[1] . $uniqueIndex;
             } else {
-                $productEditData->productData->name[$locale] .= $uniqueIndex;
+                $productData->name[$locale] .= $uniqueIndex;
             }
         }
     }
@@ -314,34 +314,34 @@ class ProductDataFixture
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      */
-    private function setRandomPerformanceCategoriesToProductEditData(ProductEditData $productEditData)
+    private function setRandomPerformanceCategoriesToProductData(ProductData $productData)
     {
-        $this->cleanPerformanceCategoriesFromProductEditDataByDomainId($productEditData, 1);
-        $this->cleanPerformanceCategoriesFromProductEditDataByDomainId($productEditData, 2);
-        $this->addRandomPerformanceCategoriesToProductEditDataByDomainId($productEditData, 1);
-        $this->addRandomPerformanceCategoriesToProductEditDataByDomainId($productEditData, 2);
+        $this->cleanPerformanceCategoriesFromProductDataByDomainId($productData, 1);
+        $this->cleanPerformanceCategoriesFromProductDataByDomainId($productData, 2);
+        $this->addRandomPerformanceCategoriesToProductDataByDomainId($productData, 1);
+        $this->addRandomPerformanceCategoriesToProductDataByDomainId($productData, 2);
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @param int $domainId
      */
-    private function cleanPerformanceCategoriesFromProductEditDataByDomainId(ProductEditData $productEditData, $domainId)
+    private function cleanPerformanceCategoriesFromProductDataByDomainId(ProductData $productData, $domainId)
     {
-        foreach ($productEditData->productData->categoriesByDomainId[$domainId] as $key => $category) {
+        foreach ($productData->categoriesByDomainId[$domainId] as $key => $category) {
             if ($this->isPerformanceCategory($category)) {
-                unset($productEditData->productData->categoriesByDomainId[$domainId][$key]);
+                unset($productData->categoriesByDomainId[$domainId][$key]);
             }
         }
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @param int $domainId
      */
-    private function addRandomPerformanceCategoriesToProductEditDataByDomainId(ProductEditData $productEditData, $domainId)
+    private function addRandomPerformanceCategoriesToProductDataByDomainId(ProductData $productData, $domainId)
     {
         $performanceCategoryIds = $this->getPerformanceCategoryIds();
         $randomPerformanceCategoryIds = $this->faker->randomElements(
@@ -351,8 +351,8 @@ class ProductDataFixture
         $randomPerformanceCategories = $this->categoryRepository->getCategoriesByIds($randomPerformanceCategoryIds);
 
         foreach ($randomPerformanceCategories as $performanceCategory) {
-            if (!in_array($performanceCategory, $productEditData->productData->categoriesByDomainId[$domainId], true)) {
-                $productEditData->productData->categoriesByDomainId[$domainId][] = $performanceCategory;
+            if (!in_array($performanceCategory, $productData->categoriesByDomainId[$domainId], true)) {
+                $productData->categoriesByDomainId[$domainId][] = $performanceCategory;
             }
         }
     }

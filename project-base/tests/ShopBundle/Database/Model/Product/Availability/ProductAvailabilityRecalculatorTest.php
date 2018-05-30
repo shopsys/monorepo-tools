@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
@@ -16,8 +16,8 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
     {
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
         $productAvailabilityRecalculator = $this->getContainer()->get(ProductAvailabilityRecalculator::class);
         /* @var $productAvailabilityRecalculator \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
@@ -25,11 +25,11 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
 
         $product = $productFacade->getById($productId);
 
-        $productEditData = $productEditDataFactory->createFromProduct($product);
-        $productEditData->productData->usingStock = false;
-        $productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_ON_REQUEST);
+        $productData = $productDataFactory->createFromProduct($product);
+        $productData->usingStock = false;
+        $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_ON_REQUEST);
 
-        $productFacade->edit($productId, $productEditData);
+        $productFacade->edit($productId, $productData);
         $productAvailabilityRecalculator->runAllScheduledRecalculations();
         $this->getEntityManager()->flush();
         $this->getEntityManagerFacade()->clear();
@@ -43,8 +43,8 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
     {
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
         $availabilityFacade = $this->getContainer()->get(AvailabilityFacade::class);
         /* @var $availabilityFacade \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade */
         $productAvailabilityRecalculator = $this->getContainer()->get(ProductAvailabilityRecalculator::class);
@@ -54,13 +54,13 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
 
         $product = $productFacade->getById($productId);
 
-        $productEditData = $productEditDataFactory->createFromProduct($product);
-        $productEditData->productData->usingStock = true;
-        $productEditData->productData->stockQuantity = 5;
-        $productEditData->productData->outOfStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_OUT_OF_STOCK);
-        $productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_ON_REQUEST);
+        $productData = $productDataFactory->createFromProduct($product);
+        $productData->usingStock = true;
+        $productData->stockQuantity = 5;
+        $productData->outOfStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_OUT_OF_STOCK);
+        $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_ON_REQUEST);
 
-        $productFacade->edit($productId, $productEditData);
+        $productFacade->edit($productId, $productData);
         $productAvailabilityRecalculator->runAllScheduledRecalculations();
         $this->getEntityManager()->flush();
         $this->getEntityManagerFacade()->clear();
@@ -74,8 +74,8 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
     {
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
         $productAvailabilityRecalculator = $this->getContainer()->get(ProductAvailabilityRecalculator::class);
         /* @var $productAvailabilityRecalculator \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
@@ -83,14 +83,14 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
 
         $product = $productFacade->getById($productId);
 
-        $productEditData = $productEditDataFactory->createFromProduct($product);
-        $productEditData->productData->usingStock = true;
-        $productEditData->productData->stockQuantity = 0;
-        $productEditData->productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY;
-        $productEditData->productData->outOfStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_OUT_OF_STOCK);
-        $productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_ON_REQUEST);
+        $productData = $productDataFactory->createFromProduct($product);
+        $productData->usingStock = true;
+        $productData->stockQuantity = 0;
+        $productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY;
+        $productData->outOfStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_OUT_OF_STOCK);
+        $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_ON_REQUEST);
 
-        $productFacade->edit($productId, $productEditData);
+        $productFacade->edit($productId, $productData);
         $productAvailabilityRecalculator->runAllScheduledRecalculations();
         $this->getEntityManager()->flush();
         $this->getEntityManagerFacade()->clear();

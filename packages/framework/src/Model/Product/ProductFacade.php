@@ -201,12 +201,12 @@ class ProductFacade
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    public function create(ProductEditData $productEditData)
+    public function create(ProductData $productData)
     {
-        $product = $this->productFactory->create($productEditData->productData);
+        $product = $this->productFactory->create($productData);
 
         if ($product->isUsingStock()) {
             $defaultInStockAvailability = $this->availabilityFacade->getDefaultInStockAvailability();
@@ -216,34 +216,34 @@ class ProductFacade
 
         $this->em->persist($product);
         $this->em->flush($product);
-        $this->setAdditionalDataAfterCreate($product, $productEditData);
+        $this->setAdditionalDataAfterCreate($product, $productData);
 
-        $this->pluginCrudExtensionFacade->saveAllData('product', $product->getId(), $productEditData->pluginData);
+        $this->pluginCrudExtensionFacade->saveAllData('product', $product->getId(), $productData->pluginData);
 
         return $product;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      */
-    public function setAdditionalDataAfterCreate(Product $product, ProductEditData $productEditData)
+    public function setAdditionalDataAfterCreate(Product $product, ProductData $productData)
     {
         // Persist of ProductCategoryDomain requires known primary key of Product
         // @see https://github.com/doctrine/doctrine2/issues/4869
-        $product->setCategories($this->productCategoryDomainFactory, $productEditData->productData->categoriesByDomainId);
+        $product->setCategories($this->productCategoryDomainFactory, $productData->categoriesByDomainId);
         $this->em->flush($product);
 
-        $this->saveParameters($product, $productEditData->parameters);
+        $this->saveParameters($product, $productData->parameters);
         $this->createProductDomains($product, $this->domain->getAll());
         $this->createProductVisibilities($product);
-        $this->refreshProductDomains($product, $productEditData);
-        $this->refreshProductManualInputPrices($product, $productEditData->manualInputPricesByPricingGroupId);
-        $this->refreshProductAccessories($product, $productEditData->accessories);
+        $this->refreshProductDomains($product, $productData);
+        $this->refreshProductManualInputPrices($product, $productData->manualInputPricesByPricingGroupId);
+        $this->refreshProductAccessories($product, $productData->accessories);
         $this->productHiddenRecalculator->calculateHiddenForProduct($product);
         $this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($product);
 
-        $this->imageFacade->uploadImages($product, $productEditData->images->uploadedFiles, null);
+        $this->imageFacade->uploadImages($product, $productData->images->uploadedFiles, null);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 
         $this->productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
@@ -253,33 +253,33 @@ class ProductFacade
 
     /**
      * @param int $productId
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    public function edit($productId, ProductEditData $productEditData)
+    public function edit($productId, ProductData $productData)
     {
         $product = $this->productRepository->getById($productId);
 
-        $this->productService->edit($product, $productEditData->productData);
+        $this->productService->edit($product, $productData);
 
-        $this->saveParameters($product, $productEditData->parameters);
-        $this->refreshProductDomains($product, $productEditData);
+        $this->saveParameters($product, $productData->parameters);
+        $this->refreshProductDomains($product, $productData);
         if (!$product->isMainVariant()) {
-            $this->refreshProductManualInputPrices($product, $productEditData->manualInputPricesByPricingGroupId);
+            $this->refreshProductManualInputPrices($product, $productData->manualInputPricesByPricingGroupId);
         } else {
-            $this->productVariantService->refreshProductVariants($product, $productEditData->variants);
+            $this->productVariantService->refreshProductVariants($product, $productData->variants);
         }
-        $this->refreshProductAccessories($product, $productEditData->accessories);
+        $this->refreshProductAccessories($product, $productData->accessories);
         $this->em->flush();
         $this->productHiddenRecalculator->calculateHiddenForProduct($product);
         $this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($product);
-        $this->imageFacade->saveImageOrdering($productEditData->images->orderedImages);
-        $this->imageFacade->uploadImages($product, $productEditData->images->uploadedFiles, null);
-        $this->imageFacade->deleteImages($product, $productEditData->images->imagesToDelete);
-        $this->friendlyUrlFacade->saveUrlListFormData('front_product_detail', $product->getId(), $productEditData->urls);
+        $this->imageFacade->saveImageOrdering($productData->images->orderedImages);
+        $this->imageFacade->uploadImages($product, $productData->images->uploadedFiles, null);
+        $this->imageFacade->deleteImages($product, $productData->images->imagesToDelete);
+        $this->friendlyUrlFacade->saveUrlListFormData('front_product_detail', $product->getId(), $productData->urls);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 
-        $this->pluginCrudExtensionFacade->saveAllData('product', $product->getId(), $productEditData->pluginData);
+        $this->pluginCrudExtensionFacade->saveAllData('product', $product->getId(), $productData->pluginData);
 
         $this->productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
         $this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
@@ -356,17 +356,17 @@ class ProductFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      */
-    protected function refreshProductDomains(Product $product, ProductEditData $productEditData)
+    protected function refreshProductDomains(Product $product, ProductData $productData)
     {
         $productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
-        $seoTitles = $productEditData->seoTitles;
-        $seoMetaDescriptions = $productEditData->seoMetaDescriptions;
-        $seoH1s = $productEditData->seoH1s;
+        $seoTitles = $productData->seoTitles;
+        $seoMetaDescriptions = $productData->seoMetaDescriptions;
+        $seoH1s = $productData->seoH1s;
         if (!$product->isVariant()) {
-            $descriptions = $productEditData->descriptions;
-            $shortDescriptions = $productEditData->shortDescriptions;
+            $descriptions = $productData->descriptions;
+            $shortDescriptions = $productData->shortDescriptions;
         }
 
         foreach ($productDomains as $domainId => $productDomain) {

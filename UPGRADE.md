@@ -17,6 +17,8 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/product-feed-zbozi]
 
 ## [From 7.0.0-alpha2 to Unreleased]
+### [shopsys/framework]
+- check changes in src/Model, all *editData*.php were merged into its *Data*.php relatives
 
 ## [From 7.0.0-alpha1 to 7.0.0-alpha2]
 ### [shopsys/project-base]   

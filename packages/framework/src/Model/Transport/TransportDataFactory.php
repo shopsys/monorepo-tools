@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Transport;
 
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 
-class TransportEditDataFactory
+class TransportDataFactory
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
@@ -25,31 +25,29 @@ class TransportEditDataFactory
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportEditData
+     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportData
      */
     public function createDefault()
     {
-        $transportEditData = new TransportEditData();
-        $transportEditData->transportData->vat = $this->vatFacade->getDefaultVat();
+        $transportData = new TransportData();
+        $transportData->vat = $this->vatFacade->getDefaultVat();
 
-        return $transportEditData;
+        return $transportData;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportEditData
+     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportData
      */
     public function createFromTransport(Transport $transport)
     {
-        $transportEditData = new TransportEditData();
         $transportData = new TransportData();
         $transportData->setFromEntity($transport, $this->transportFacade->getTransportDomainsByTransport($transport));
-        $transportEditData->transportData = $transportData;
 
         foreach ($transport->getPrices() as $transportPrice) {
-            $transportEditData->pricesByCurrencyId[$transportPrice->getCurrency()->getId()] = $transportPrice->getPrice();
+            $transportData->pricesByCurrencyId[$transportPrice->getCurrency()->getId()] = $transportPrice->getPrice();
         }
 
-        return $transportEditData;
+        return $transportData;
     }
 }

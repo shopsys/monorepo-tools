@@ -24,7 +24,7 @@ use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade;
 use Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionFacade;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade;
 use Shopsys\FrameworkBundle\Twig\ProductExtension;
@@ -58,9 +58,9 @@ class ProductController extends AdminBaseController
     private $productDetailFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
      */
-    private $productEditDataFactory;
+    private $productDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade
@@ -108,7 +108,7 @@ class ProductController extends AdminBaseController
         GridFactory $gridFactory,
         ProductFacade $productFacade,
         ProductDetailFactory $productDetailFactory,
-        ProductEditDataFactory $productEditDataFactory,
+        ProductDataFactory $productDataFactory,
         AdminProductPriceCalculationFacade $adminProductPriceCalculationFacade,
         Breadcrumb $breadcrumb,
         PricingGroupFacade $pricingGroupFacade,
@@ -123,7 +123,7 @@ class ProductController extends AdminBaseController
         $this->gridFactory = $gridFactory;
         $this->productFacade = $productFacade;
         $this->productDetailFactory = $productDetailFactory;
-        $this->productEditDataFactory = $productEditDataFactory;
+        $this->productDataFactory = $productDataFactory;
         $this->adminProductPriceCalculationFacade = $adminProductPriceCalculationFacade;
         $this->breadcrumb = $breadcrumb;
         $this->pricingGroupFacade = $pricingGroupFacade;
@@ -141,9 +141,9 @@ class ProductController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $product = $this->productFacade->getById($id);
-        $productEditData = $this->productEditDataFactory->createFromProduct($product);
+        $productData = $this->productDataFactory->createFromProduct($product);
 
-        $form = $this->createForm(ProductEditFormType::class, $productEditData, ['product' => $product]);
+        $form = $this->createForm(ProductEditFormType::class, $productData, ['product' => $product]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -191,9 +191,9 @@ class ProductController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $productEditData = $this->productEditDataFactory->createDefault();
+        $productData = $this->productDataFactory->createDefault();
 
-        $form = $this->createForm(ProductEditFormType::class, $productEditData, ['product' => null]);
+        $form = $this->createForm(ProductEditFormType::class, $productData, ['product' => null]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

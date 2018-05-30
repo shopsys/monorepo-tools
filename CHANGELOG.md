@@ -30,6 +30,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - admin: brand detail page: rendering of URLs setting
         - brand creation: URLs setting is not rendered at all
         - brand editing: URLs section is rendered in the SEO section
+- [#173 - remove editData from model: all editData from framework model were merged into Data](https://github.com/shopsys/shopsys/pull/173):
+    - remove editData from model: all editData from framework model were merged into its Data relatives
+        - merged model EditData into Data with its Factory and modified Facade and Controller for
+                - Product
+                - Payment
+                - Transport
+                - Brand
 
 ### [shopsys/project-base]
 #### Fixed

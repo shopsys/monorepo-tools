@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Product\Brand;
 use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
-use Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditData;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandData;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -70,7 +70,10 @@ class BrandEditFormType extends AbstractType
         }
 
         $builder
-            ->add('brandData', BrandFormType::class, ['brand' => $editedBrand])
+            ->add('brandData', BrandFormType::class, [
+                'brand' => $editedBrand,
+                'inherit_data' => true,
+            ])
             ->add('seoTitles', MultidomainType::class, [
                 'entry_type' => TextType::class,
                 'required' => false,
@@ -98,7 +101,7 @@ class BrandEditFormType extends AbstractType
             ->setRequired('brand')
             ->setAllowedTypes('brand', [Brand::class, 'null'])
             ->setDefaults([
-                'data_class' => BrandEditData::class,
+                'data_class' => BrandData::class,
                 'attr' => ['novalidate' => 'novalidate'],
             ]);
     }

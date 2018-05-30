@@ -5,7 +5,7 @@ namespace Tests\ShopBundle\Database\Model\Feed\Delivery;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
@@ -13,8 +13,8 @@ class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
 {
     public function testGetItemsWithProductInStock()
     {
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
         $domain = $this->getContainer()->get(Domain::class);
@@ -23,10 +23,10 @@ class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\FrameworkBundle\Model\Product\Product */
 
-        $productEditData = $productEditDataFactory->createFromProduct($product);
-        $productEditData->productData->usingStock = true;
-        $productEditData->productData->stockQuantity = 1;
-        $productFacade->edit($product->getId(), $productEditData);
+        $productData = $productDataFactory->createFromProduct($product);
+        $productData->usingStock = true;
+        $productData->stockQuantity = 1;
+        $productFacade->edit($product->getId(), $productData);
 
         $deliveryFeedItemRepository = $this->getContainer()->get(DeliveryFeedItemRepository::class);
         /* @var $deliveryFeedItemRepository \Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository */
@@ -46,8 +46,8 @@ class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
 
     public function testGetItemsWithProductOutOfStock()
     {
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
         $domain = $this->getContainer()->get(Domain::class);
@@ -56,10 +56,10 @@ class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\FrameworkBundle\Model\Product\Product */
 
-        $productEditData = $productEditDataFactory->createFromProduct($product);
-        $productEditData->productData->usingStock = true;
-        $productEditData->productData->stockQuantity = 0;
-        $productFacade->edit($product->getId(), $productEditData);
+        $productData = $productDataFactory->createFromProduct($product);
+        $productData->usingStock = true;
+        $productData->stockQuantity = 0;
+        $productFacade->edit($product->getId(), $productData);
 
         $deliveryFeedItemRepository = $this->getContainer()->get(DeliveryFeedItemRepository::class);
         /* @var $deliveryFeedItemRepository \Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository */
@@ -77,8 +77,8 @@ class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
 
     public function testGetItemsWithProductWithoutStock()
     {
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
         $domain = $this->getContainer()->get(Domain::class);
@@ -87,10 +87,10 @@ class DeliveryFeedItemRepositoryTest extends DatabaseTestCase
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\FrameworkBundle\Model\Product\Product */
 
-        $productEditData = $productEditDataFactory->createFromProduct($product);
-        $productEditData->productData->usingStock = false;
-        $productEditData->productData->stockQuantity = null;
-        $productFacade->edit($product->getId(), $productEditData);
+        $productData = $productDataFactory->createFromProduct($product);
+        $productData->usingStock = false;
+        $productData->stockQuantity = null;
+        $productFacade->edit($product->getId(), $productData);
 
         $deliveryFeedItemRepository = $this->getContainer()->get(DeliveryFeedItemRepository::class);
         /* @var $deliveryFeedItemRepository \Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository */

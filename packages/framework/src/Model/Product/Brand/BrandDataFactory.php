@@ -60,6 +60,9 @@ class BrandDataFactory
                     'front_brand_detail',
                     $brand->getId()
                 );
+            $brandData->seoTitles[$domainId] = $brandDomain->getSeoTitle();
+            $brandData->seoMetaDescriptions[$domainId] = $brandDomain->getSeoMetaDescription();
+            $brandData->seoH1s[$domainId] = $brandDomain->getSeoH1();
         }
 
         return $brandData;

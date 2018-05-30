@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetailFactory;
 use Shopsys\FrameworkBundle\Model\Payment\Grid\PaymentGridFactory;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,9 +33,9 @@ class PaymentController extends AdminBaseController
     private $paymentGridFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentEditDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory
      */
-    private $paymentEditDataFactory;
+    private $paymentDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
@@ -48,14 +48,14 @@ class PaymentController extends AdminBaseController
     private $currencyFacade;
 
     public function __construct(
-        PaymentEditDataFactory $paymentEditDataFactory,
+        PaymentDataFactory $paymentDataFactory,
         CurrencyFacade $currencyFacade,
         PaymentFacade $paymentFacade,
         PaymentDetailFactory $paymentDetailFactory,
         PaymentGridFactory $paymentGridFactory,
         Breadcrumb $breadcrumb
     ) {
-        $this->paymentEditDataFactory = $paymentEditDataFactory;
+        $this->paymentDataFactory = $paymentDataFactory;
         $this->currencyFacade = $currencyFacade;
         $this->paymentFacade = $paymentFacade;
         $this->paymentDetailFactory = $paymentDetailFactory;
@@ -69,15 +69,15 @@ class PaymentController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $paymentEditData = $this->paymentEditDataFactory->createDefault();
+        $paymentData = $this->paymentDataFactory->createDefault();
 
-        $form = $this->createForm(PaymentEditFormType::class, $paymentEditData, [
+        $form = $this->createForm(PaymentEditFormType::class, $paymentData, [
             'payment_detail' => null,
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $payment = $this->paymentFacade->create($paymentEditData);
+            $payment = $this->paymentFacade->create($paymentData);
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
                 t('Payment <strong><a href="{{ url }}">{{ name }}</a></strong> created'),
@@ -107,16 +107,16 @@ class PaymentController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $payment = $this->paymentFacade->getById($id);
-        $paymentEditData = $this->paymentEditDataFactory->createFromPayment($payment);
+        $paymentData = $this->paymentDataFactory->createFromPayment($payment);
         $paymentDetail = $this->paymentDetailFactory->createDetailForPayment($payment);
 
-        $form = $this->createForm(PaymentEditFormType::class, $paymentEditData, [
+        $form = $this->createForm(PaymentEditFormType::class, $paymentData, [
             'payment_detail' => $paymentDetail,
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->paymentFacade->edit($payment, $paymentEditData);
+            $this->paymentFacade->edit($payment, $paymentData);
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
                 t('Payment <strong><a href="{{ url }}">{{ name }}</a></strong> modified'),

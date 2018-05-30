@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\PriceTableType;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Transport\Detail\TransportDetail;
-use Shopsys\FrameworkBundle\Model\Transport\TransportEditData;
+use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -47,6 +47,7 @@ class TransportEditFormType extends AbstractType
             ->add('transportData', TransportFormType::class, [
                 'transport' => $transportDetail !== null ? $transportDetail->getTransport() : null,
                 'render_form_row' => false,
+                'inherit_data' => true,
             ])
             ->add($builderPricesGroup)
             ->add('save', SubmitType::class);
@@ -60,7 +61,7 @@ class TransportEditFormType extends AbstractType
         $resolver->setRequired('transport_detail')
             ->setAllowedTypes('transport_detail', [TransportDetail::class, 'null'])
             ->setDefaults([
-                'data_class' => TransportEditData::class,
+                'data_class' => TransportData::class,
                 'attr' => ['novalidate' => 'novalidate'],
             ]);
     }

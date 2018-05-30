@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
-use Shopsys\FrameworkBundle\Model\Transport\TransportEditData;
+use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 
 class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -34,61 +34,61 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
      */
     public function load(ObjectManager $manager)
     {
-        $transportEditData = new TransportEditData();
-        $transportEditData->transportData->name = [
+        $transportData = new TransportData();
+        $transportData->name = [
             'cs' => 'Česká pošta - balík do ruky',
             'en' => 'Czech post',
         ];
-        $transportEditData->pricesByCurrencyId = [
+        $transportData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 99.95,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 3.95,
         ];
-        $transportEditData->transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
-        $transportEditData->transportData->domains = [Domain::FIRST_DOMAIN_ID];
-        $this->createTransport(self::TRANSPORT_CZECH_POST, $transportEditData);
+        $transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
+        $transportData->domains = [Domain::FIRST_DOMAIN_ID];
+        $this->createTransport(self::TRANSPORT_CZECH_POST, $transportData);
 
-        $transportEditData = new TransportEditData();
-        $transportEditData->transportData->name = [
+        $transportData = new TransportData();
+        $transportData->name = [
             'cs' => 'PPL',
             'en' => 'PPL',
         ];
-        $transportEditData->pricesByCurrencyId = [
+        $transportData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 199.95,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 6.95,
         ];
-        $transportEditData->transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
-        $transportEditData->transportData->domains = [Domain::FIRST_DOMAIN_ID];
-        $this->createTransport(self::TRANSPORT_PPL, $transportEditData);
+        $transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
+        $transportData->domains = [Domain::FIRST_DOMAIN_ID];
+        $this->createTransport(self::TRANSPORT_PPL, $transportData);
 
-        $transportEditData = new TransportEditData();
-        $transportEditData->transportData->name = [
+        $transportData = new TransportData();
+        $transportData->name = [
             'cs' => 'Osobní převzetí',
             'en' => 'Personal collection',
         ];
-        $transportEditData->pricesByCurrencyId = [
+        $transportData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 0,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 0,
         ];
-        $transportEditData->transportData->description = [
+        $transportData->description = [
             'cs' => 'Uvítá Vás milý personál!',
             'en' => 'You will be welcomed by friendly staff!',
         ];
-        $transportEditData->transportData->instructions = [
+        $transportData->instructions = [
             'cs' => 'Těšíme se na Vaši návštěvu.',
             'en' => 'We are looking forward to your visit.',
         ];
-        $transportEditData->transportData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
-        $transportEditData->transportData->domains = [Domain::FIRST_DOMAIN_ID];
-        $this->createTransport(self::TRANSPORT_PERSONAL, $transportEditData);
+        $transportData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
+        $transportData->domains = [Domain::FIRST_DOMAIN_ID];
+        $this->createTransport(self::TRANSPORT_PERSONAL, $transportData);
     }
 
     /**
      * @param string $referenceName
-     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportEditData $transportEditData
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportData $transportData
      */
-    private function createTransport($referenceName, TransportEditData $transportEditData)
+    private function createTransport($referenceName, TransportData $transportData)
     {
-        $transport = $this->transportFacade->create($transportEditData);
+        $transport = $this->transportFacade->create($transportData);
         $this->addReference($referenceName, $transport);
     }
 

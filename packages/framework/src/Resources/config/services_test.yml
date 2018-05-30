@@ -23,8 +23,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Security\AdminLogoutHandler: ~
 
-  Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditDataFactory: ~
-
   Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade: ~
 
   Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler: ~
@@ -103,7 +101,7 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository: ~
 
-  Shopsys\FrameworkBundle\Model\Payment\PaymentEditDataFactory: ~
+  Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory: ~
 
   Shopsys\FrameworkBundle\Model\Payment\PaymentFacade: ~
 
@@ -121,7 +119,7 @@ services:
 
   Shopsys\FrameworkBundle\Component\System\PostgresqlLocaleMapper: ~
 
-  Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory: ~
+  Shopsys\FrameworkBundle\Model\Product\ProductDataFactory: ~
 
   Shopsys\FrameworkBundle\Model\Product\ProductFacade: ~
 
@@ -149,7 +147,7 @@ services:
 
   Shopsys\FrameworkBundle\Model\Localization\TranslatableListener: ~
 
-  Shopsys\FrameworkBundle\Model\Transport\TransportEditDataFactory: ~
+  Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory: ~
 
   Shopsys\FrameworkBundle\Model\Transport\TransportFacade: ~
 

@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Payment;
 use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\PriceTableType;
 use Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetail;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentEditData;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -47,6 +47,7 @@ class PaymentEditFormType extends AbstractType
             ->add('paymentData', PaymentFormType::class, [
                 'payment' => $paymentDetail !== null ? $paymentDetail->getPayment() : null,
                 'render_form_row' => false,
+                'inherit_data' => true,
             ])
             ->add($builderPriceGroup)
             ->add('save', SubmitType::class);
@@ -60,8 +61,9 @@ class PaymentEditFormType extends AbstractType
         $resolver->setRequired('payment_detail')
             ->setAllowedTypes('payment_detail', [PaymentDetail::class, 'null'])
             ->setDefaults([
-                'data_class' => PaymentEditData::class,
+                'data_class' => PaymentData::class,
                 'attr' => ['novalidate' => 'novalidate'],
+
             ]);
     }
 }

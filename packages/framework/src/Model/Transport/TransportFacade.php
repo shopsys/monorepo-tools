@@ -93,18 +93,18 @@ class TransportFacade
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportEditData $transportEditData
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportData $transportData
      * @return \Shopsys\FrameworkBundle\Model\Transport\Transport
      */
-    public function create(TransportEditData $transportEditData)
+    public function create(TransportData $transportData)
     {
-        $transport = $this->transportFactory->create($transportEditData->transportData);
+        $transport = $this->transportFactory->create($transportData);
         $this->em->persist($transport);
         $this->em->flush();
-        $this->updateTransportPrices($transport, $transportEditData->pricesByCurrencyId);
-        $this->createTransportDomains($transport, $transportEditData->transportData->domains);
-        $this->imageFacade->uploadImage($transport, $transportEditData->transportData->image->uploadedFiles, null);
-        $transport->setPayments($transportEditData->transportData->payments);
+        $this->updateTransportPrices($transport, $transportData->pricesByCurrencyId);
+        $this->createTransportDomains($transport, $transportData->domains);
+        $this->imageFacade->uploadImage($transport, $transportData->image->uploadedFiles, null);
+        $transport->setPayments($transportData->payments);
         $this->em->flush();
 
         return $transport;
@@ -112,17 +112,17 @@ class TransportFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportEditData $transportEditData
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportData $transportData
      */
-    public function edit(Transport $transport, TransportEditData $transportEditData)
+    public function edit(Transport $transport, TransportData $transportData)
     {
-        $transport->edit($transportEditData->transportData);
+        $transport->edit($transportData);
 
-        $this->updateTransportPrices($transport, $transportEditData->pricesByCurrencyId);
+        $this->updateTransportPrices($transport, $transportData->pricesByCurrencyId);
         $this->deleteTransportDomainsByTransport($transport);
-        $this->createTransportDomains($transport, $transportEditData->transportData->domains);
-        $this->imageFacade->uploadImage($transport, $transportEditData->transportData->image->uploadedFiles, null);
-        $transport->setPayments($transportEditData->transportData->payments);
+        $this->createTransportDomains($transport, $transportData->domains);
+        $this->imageFacade->uploadImage($transport, $transportData->image->uploadedFiles, null);
+        $transport->setPayments($transportData->payments);
         $this->em->flush();
     }
 

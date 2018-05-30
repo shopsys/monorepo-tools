@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Database\Model\Product;
 
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator;
 use Tests\ShopBundle\Test\DatabaseTestCase;
@@ -17,8 +17,8 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
         /* @var $productSellingDeniedRecalculator \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
         /* @var $variant1 \Shopsys\FrameworkBundle\Model\Product\Product */
@@ -29,9 +29,9 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
         $mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
         /* @var $mainVariant \Shopsys\FrameworkBundle\Model\Product\Product */
 
-        $variant1ProductEditData = $productEditDataFactory->createFromProduct($variant1);
-        $variant1ProductEditData->productData->sellingDenied = true;
-        $productFacade->edit($variant1->getId(), $variant1ProductEditData);
+        $variant1productData = $productDataFactory->createFromProduct($variant1);
+        $variant1productData->sellingDenied = true;
+        $productFacade->edit($variant1->getId(), $variant1productData);
 
         $productSellingDeniedRecalculator->calculateSellingDeniedForProduct($variant1);
 
@@ -53,8 +53,8 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
         /* @var $productSellingDeniedRecalculator \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
         /* @var $variant1 \Shopsys\FrameworkBundle\Model\Product\Product */
@@ -65,15 +65,15 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
         $mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
         /* @var $variant2 \Shopsys\FrameworkBundle\Model\Product\Product */
 
-        $variant1ProductEditData = $productEditDataFactory->createFromProduct($variant1);
-        $variant1ProductEditData->productData->sellingDenied = true;
-        $productFacade->edit($variant1->getId(), $variant1ProductEditData);
-        $variant2ProductEditData = $productEditDataFactory->createFromProduct($variant2);
-        $variant2ProductEditData->productData->sellingDenied = true;
-        $productFacade->edit($variant2->getId(), $variant2ProductEditData);
-        $variant3ProductEditData = $productEditDataFactory->createFromProduct($variant3);
-        $variant3ProductEditData->productData->sellingDenied = true;
-        $productFacade->edit($variant3->getId(), $variant3ProductEditData);
+        $variant1productData = $productDataFactory->createFromProduct($variant1);
+        $variant1productData->sellingDenied = true;
+        $productFacade->edit($variant1->getId(), $variant1productData);
+        $variant2productData = $productDataFactory->createFromProduct($variant2);
+        $variant2productData->sellingDenied = true;
+        $productFacade->edit($variant2->getId(), $variant2productData);
+        $variant3productData = $productDataFactory->createFromProduct($variant3);
+        $variant3productData->sellingDenied = true;
+        $productFacade->edit($variant3->getId(), $variant3productData);
 
         $productSellingDeniedRecalculator->calculateSellingDeniedForProduct($mainVariant);
 
@@ -95,8 +95,8 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
         /* @var $productSellingDeniedRecalculator \Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
         /* @var $variant1 \Shopsys\FrameworkBundle\Model\Product\Product */
@@ -107,9 +107,9 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
         $mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
         /* @var $mainVariant \Shopsys\FrameworkBundle\Model\Product\Product */
 
-        $mainVariantProductEditData = $productEditDataFactory->createFromProduct($mainVariant);
-        $mainVariantProductEditData->productData->sellingDenied = true;
-        $productFacade->edit($mainVariant->getId(), $mainVariantProductEditData);
+        $mainVariantproductData = $productDataFactory->createFromProduct($mainVariant);
+        $mainVariantproductData->sellingDenied = true;
+        $productFacade->edit($mainVariant->getId(), $mainVariantproductData);
 
         $productSellingDeniedRecalculator->calculateSellingDeniedForProduct($mainVariant);
 

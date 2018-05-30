@@ -9,8 +9,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
@@ -38,12 +37,10 @@ class ProductFacadeTest extends DatabaseTestCase
         $productData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
 
-        $productEditData = new ProductEditData($productData);
-
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
-        $product = $productFacade->create($productEditData);
+        $product = $productFacade->create($productData);
 
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade */
@@ -119,15 +116,15 @@ class ProductFacadeTest extends DatabaseTestCase
         /* @var $product \Shopsys\FrameworkBundle\Model\Product\Product */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
 
         $reflectionClass = new ReflectionClass(Product::class);
         $reflectionPropertyRecalculateVisibility = $reflectionClass->getProperty('recalculateVisibility');
         $reflectionPropertyRecalculateVisibility->setAccessible(true);
         $reflectionPropertyRecalculateVisibility->setValue($product, false);
 
-        $productFacade->edit($product->getId(), $productEditDataFactory->createFromProduct($product));
+        $productFacade->edit($product->getId(), $productDataFactory->createFromProduct($product));
 
         $this->assertSame(true, $reflectionPropertyRecalculateVisibility->getValue($product));
     }

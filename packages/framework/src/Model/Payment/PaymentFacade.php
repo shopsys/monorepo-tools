@@ -106,32 +106,32 @@ class PaymentFacade
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentEditData $paymentEditData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      * @return \Shopsys\FrameworkBundle\Model\Payment\Payment
      */
-    public function create(PaymentEditData $paymentEditData)
+    public function create(PaymentData $paymentData)
     {
-        $payment = $this->paymentFactory->create($paymentEditData->paymentData);
+        $payment = $this->paymentFactory->create($paymentData);
         $this->em->persist($payment);
         $this->em->flush();
-        $this->updatePaymentPrices($payment, $paymentEditData->pricesByCurrencyId);
-        $this->createPaymentDomains($payment, $paymentEditData->paymentData->domains);
-        $this->setAdditionalDataAndFlush($payment, $paymentEditData->paymentData);
+        $this->updatePaymentPrices($payment, $paymentData->pricesByCurrencyId);
+        $this->createPaymentDomains($payment, $paymentData->domains);
+        $this->setAdditionalDataAndFlush($payment, $paymentData);
 
         return $payment;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
-     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentEditData $paymentEditData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      */
-    public function edit(Payment $payment, PaymentEditData $paymentEditData)
+    public function edit(Payment $payment, PaymentData $paymentData)
     {
-        $payment->edit($paymentEditData->paymentData);
-        $this->updatePaymentPrices($payment, $paymentEditData->pricesByCurrencyId);
+        $payment->edit($paymentData);
+        $this->updatePaymentPrices($payment, $paymentData->pricesByCurrencyId);
         $this->deletePaymentDomainsByPayment($payment);
-        $this->createPaymentDomains($payment, $paymentEditData->paymentData->domains);
-        $this->setAdditionalDataAndFlush($payment, $paymentEditData->paymentData);
+        $this->createPaymentDomains($payment, $paymentData->domains);
+        $this->setAdditionalDataAndFlush($payment, $paymentData);
     }
 
     /**

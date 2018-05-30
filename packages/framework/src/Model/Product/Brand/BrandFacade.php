@@ -81,18 +81,17 @@ class BrandFacade
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditData $brandEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData $brandData
      * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand
      */
-    public function create(BrandEditData $brandEditData)
+    public function create(BrandData $brandData)
     {
         $domains = $this->domain->getAll();
-        $brandData = $brandEditData->getBrandData();
         $brand = $this->brandFactory->create($brandData);
         $this->em->persist($brand);
         $this->em->flush();
         $this->createBrandDomains($brand, $domains);
-        $this->refreshBrandDomains($brand, $brandEditData);
+        $this->refreshBrandDomains($brand, $brandData);
         $this->imageFacade->uploadImage($brand, $brandData->image->uploadedFiles, null);
 
         foreach ($domains as $domain) {
@@ -110,18 +109,17 @@ class BrandFacade
 
     /**
      * @param $brandId
-     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditData $brandEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData $brandData
      * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand
      */
-    public function edit($brandId, BrandEditData $brandEditData)
+    public function edit($brandId, BrandData $brandData)
     {
         $domains = $this->domain->getAll();
         $brand = $this->brandRepository->getById($brandId);
-        $brandData = $brandEditData->getBrandData();
         $brand->edit($brandData);
         $this->imageFacade->uploadImage($brand, $brandData->image->uploadedFiles, null);
 
-        $this->refreshBrandDomains($brand, $brandEditData);
+        $this->refreshBrandDomains($brand, $brandData);
 
         $this->em->flush();
 
@@ -141,14 +139,14 @@ class BrandFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
-     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditData $brandEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData $brandData
      */
-    protected function refreshBrandDomains(Brand $brand, BrandEditData $brandEditData)
+    protected function refreshBrandDomains(Brand $brand, BrandData $brandData)
     {
         $brandDomains = $this->brandRepository->getBrandDomainsByBrand($brand);
-        $seoTitles = $brandEditData->seoTitles;
-        $seoMetaDescriptions = $brandEditData->seoMetaDescriptions;
-        $seoH1S = $brandEditData->seoH1s;
+        $seoTitles = $brandData->seoTitles;
+        $seoMetaDescriptions = $brandData->seoMetaDescriptions;
+        $seoH1S = $brandData->seoH1s;
 
         foreach ($brandDomains as $brandDomain) {
             $domainId = $brandDomain->getDomainId();

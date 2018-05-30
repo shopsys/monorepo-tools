@@ -7,7 +7,6 @@ use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
 use Shopsys\FrameworkBundle\Form\UrlListType;
 use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
-use Shopsys\FrameworkBundle\Model\Product\Brand\BrandData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -63,7 +62,6 @@ class BrandFormType extends AbstractType
             ->setRequired('brand')
             ->setAllowedTypes('brand', [Brand::class, 'null'])
             ->setDefaults([
-                'data_class' => BrandData::class,
                 'attr' => ['novalidate' => 'novalidate'],
             ]);
     }

@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Transport\Detail\TransportDetailFactory;
 use Shopsys\FrameworkBundle\Model\Transport\Grid\TransportGridFactory;
-use Shopsys\FrameworkBundle\Model\Transport\TransportEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -38,9 +38,9 @@ class TransportController extends AdminBaseController
     private $transportGridFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportEditDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
      */
-    private $transportEditDataFactory;
+    private $transportDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
@@ -50,14 +50,14 @@ class TransportController extends AdminBaseController
     public function __construct(
         TransportFacade $transportFacade,
         TransportGridFactory $transportGridFactory,
-        TransportEditDataFactory $transportEditDataFactory,
+        TransportDataFactory $transportDataFactory,
         CurrencyFacade $currencyFacade,
         TransportDetailFactory $transportDetailFactory,
         Breadcrumb $breadcrumb
     ) {
         $this->transportFacade = $transportFacade;
         $this->transportGridFactory = $transportGridFactory;
-        $this->transportEditDataFactory = $transportEditDataFactory;
+        $this->transportDataFactory = $transportDataFactory;
         $this->currencyFacade = $currencyFacade;
         $this->transportDetailFactory = $transportDetailFactory;
         $this->breadcrumb = $breadcrumb;
@@ -69,9 +69,9 @@ class TransportController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $transportEditData = $this->transportEditDataFactory->createDefault();
+        $transportData = $this->transportDataFactory->createDefault();
 
-        $form = $this->createForm(TransportEditFormType::class, $transportEditData, [
+        $form = $this->createForm(TransportEditFormType::class, $transportData, [
             'transport_detail' => null,
         ]);
         $form->handleRequest($request);
@@ -108,15 +108,15 @@ class TransportController extends AdminBaseController
     {
         $transport = $this->transportFacade->getById($id);
         $transportDetail = $this->transportDetailFactory->createDetailForTransportWithIndependentPrices($transport);
-        $transportEditData = $this->transportEditDataFactory->createFromTransport($transport);
+        $transportData = $this->transportDataFactory->createFromTransport($transport);
 
-        $form = $this->createForm(TransportEditFormType::class, $transportEditData, [
+        $form = $this->createForm(TransportEditFormType::class, $transportData, [
             'transport_detail' => $transportDetail,
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->transportFacade->edit($transport, $transportEditData);
+            $this->transportFacade->edit($transport, $transportData);
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
                 t('Shipping <strong><a href="{{ url }}">{{ name }}</a></strong> was modified'),

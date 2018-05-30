@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
@@ -17,8 +17,8 @@ class AvailabilityFacadeTest extends DatabaseTestCase
         $em = $this->getEntityManager();
         $availabilityFacade = $this->getContainer()->get(AvailabilityFacade::class);
         /* @var $availabilityFacade \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
@@ -27,13 +27,13 @@ class AvailabilityFacadeTest extends DatabaseTestCase
         /* @var $availabilityToReplaceWith \Shopsys\FrameworkBundle\Model\Product\Availability\Availability */
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\FrameworkBundle\Model\Product\Product */
-        $productEditData = $productEditDataFactory->createFromProduct($product);
-        /* @var $productEditData \Shopsys\FrameworkBundle\Model\Product\ProductEditData */
+        $productData = $productDataFactory->createFromProduct($product);
+        /* @var $productData \Shopsys\FrameworkBundle\Model\Product\ProductData */
 
-        $productEditData->productData->availability = $availabilityToDelete;
-        $productEditData->productData->outOfStockAvailability = $availabilityToDelete;
+        $productData->availability = $availabilityToDelete;
+        $productData->outOfStockAvailability = $availabilityToDelete;
 
-        $productFacade->edit($product->getId(), $productEditData);
+        $productFacade->edit($product->getId(), $productData);
 
         $availabilityFacade->deleteById($availabilityToDelete->getId(), $availabilityToReplaceWith->getId());
 

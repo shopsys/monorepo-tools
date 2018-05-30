@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Payment;
 
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 
-class PaymentEditDataFactory
+class PaymentDataFactory
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
@@ -25,31 +25,29 @@ class PaymentEditDataFactory
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentEditData
+     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentData
      */
     public function createDefault()
     {
-        $paymentEditData = new PaymentEditData();
-        $paymentEditData->paymentData->vat = $this->vatFacade->getDefaultVat();
+        $paymentData = new PaymentData();
+        $paymentData->vat = $this->vatFacade->getDefaultVat();
 
-        return $paymentEditData;
+        return $paymentData;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
-     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentEditData
+     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentData
      */
     public function createFromPayment(Payment $payment)
     {
-        $paymentEditData = new PaymentEditData();
         $paymentData = new PaymentData();
         $paymentData->setFromEntity($payment, $this->paymentFacade->getPaymentDomainsByPayment($payment));
-        $paymentEditData->paymentData = $paymentData;
 
         foreach ($payment->getPrices() as $paymentPrice) {
-            $paymentEditData->pricesByCurrencyId[$paymentPrice->getCurrency()->getId()] = $paymentPrice->getPrice();
+            $paymentData->pricesByCurrencyId[$paymentPrice->getCurrency()->getId()] = $paymentPrice->getPrice();
         }
 
-        return $paymentEditData;
+        return $paymentData;
     }
 }

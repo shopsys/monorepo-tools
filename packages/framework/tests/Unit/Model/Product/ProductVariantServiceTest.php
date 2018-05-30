@@ -5,7 +5,6 @@ namespace Tests\FrameworkBundle\Unit\Model\Product;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
 use Shopsys\FrameworkBundle\Model\Product\ProductFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductVariantService;
 
@@ -43,12 +42,12 @@ class ProductVariantServiceTest extends TestCase
 
     public function testCreateVariant()
     {
-        $mainVariantEditData = new ProductEditData();
+        $mainVariantData = new ProductData();
         $mainProduct = Product::create(new ProductData());
         $variants = [];
 
         $productVariantService = new ProductVariantService(new ProductFactory());
-        $mainVariant = $productVariantService->createMainVariant($mainVariantEditData, $mainProduct, $variants);
+        $mainVariant = $productVariantService->createMainVariant($mainVariantData, $mainProduct, $variants);
 
         $this->assertNotSame($mainProduct, $mainVariant);
         $this->assertTrue(in_array($mainProduct, $mainVariant->getVariants(), true));

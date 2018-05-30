@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentEditData;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 
 class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -34,76 +34,76 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     public function load(ObjectManager $manager)
     {
-        $paymentEditData = new PaymentEditData();
-        $paymentEditData->paymentData->name = [
+        $paymentData = new PaymentData();
+        $paymentData->name = [
             'cs' => 'Kreditní kartou',
             'en' => 'Credit card',
         ];
-        $paymentEditData->paymentData->czkRounding = false;
-        $paymentEditData->pricesByCurrencyId = [
+        $paymentData->czkRounding = false;
+        $paymentData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 99.95,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 2.95,
         ];
-        $paymentEditData->paymentData->description = [
+        $paymentData->description = [
             'cs' => 'Rychle, levně a spolehlivě!',
             'en' => 'Quick, cheap and reliable!',
         ];
-        $paymentEditData->paymentData->instructions = [
+        $paymentData->instructions = [
             'cs' => '<b>Zvolili jste platbu kreditní kartou. Prosím proveďte ji do dvou pracovních dnů.</b>',
             'en' => '<b>You have chosen payment by credit card. Please finish it in two business days.</b>',
         ];
-        $paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
-        $paymentEditData->paymentData->domains = [Domain::FIRST_DOMAIN_ID];
-        $paymentEditData->paymentData->hidden = false;
-        $this->createPayment(self::PAYMENT_CARD, $paymentEditData, [
+        $paymentData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
+        $paymentData->domains = [Domain::FIRST_DOMAIN_ID];
+        $paymentData->hidden = false;
+        $this->createPayment(self::PAYMENT_CARD, $paymentData, [
             TransportDataFixture::TRANSPORT_PERSONAL,
             TransportDataFixture::TRANSPORT_PPL,
         ]);
 
-        $paymentEditData->paymentData->name = [
+        $paymentData->name = [
             'cs' => 'Dobírka',
             'en' => 'Cash on delivery',
         ];
-        $paymentEditData->paymentData->czkRounding = false;
-        $paymentEditData->pricesByCurrencyId = [
+        $paymentData->czkRounding = false;
+        $paymentData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 49.90,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 1.95,
         ];
-        $paymentEditData->paymentData->description = [];
-        $paymentEditData->paymentData->instructions = [];
-        $paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
-        $this->createPayment(self::PAYMENT_CASH_ON_DELIVERY, $paymentEditData, [TransportDataFixture::TRANSPORT_CZECH_POST]);
+        $paymentData->description = [];
+        $paymentData->instructions = [];
+        $paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
+        $this->createPayment(self::PAYMENT_CASH_ON_DELIVERY, $paymentData, [TransportDataFixture::TRANSPORT_CZECH_POST]);
 
-        $paymentEditData->paymentData->name = [
+        $paymentData->name = [
             'cs' => 'Hotově',
             'en' => 'Cash',
         ];
-        $paymentEditData->paymentData->czkRounding = true;
-        $paymentEditData->pricesByCurrencyId = [
+        $paymentData->czkRounding = true;
+        $paymentData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 0,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 0,
         ];
-        $paymentEditData->paymentData->description = [];
-        $paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
-        $this->createPayment(self::PAYMENT_CASH, $paymentEditData, [TransportDataFixture::TRANSPORT_PERSONAL]);
+        $paymentData->description = [];
+        $paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
+        $this->createPayment(self::PAYMENT_CASH, $paymentData, [TransportDataFixture::TRANSPORT_PERSONAL]);
     }
 
     /**
      * @param string $referenceName
-     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentEditData $paymentEditData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData $paymentData
      * @param array $transportsReferenceNames
      */
     private function createPayment(
         $referenceName,
-        PaymentEditData $paymentEditData,
+        PaymentData $paymentData,
         array $transportsReferenceNames
     ) {
-        $paymentEditData->paymentData->transports = [];
+        $paymentData->transports = [];
         foreach ($transportsReferenceNames as $transportReferenceName) {
-            $paymentEditData->paymentData->transports[] = $this->getReference($transportReferenceName);
+            $paymentData->transports[] = $this->getReference($transportReferenceName);
         }
 
-        $payment = $this->paymentFacade->create($paymentEditData);
+        $payment = $this->paymentFacade->create($paymentData);
         $this->addReference($referenceName, $payment);
     }
 

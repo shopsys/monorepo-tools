@@ -20,9 +20,9 @@ class ProductVariantFacade
     protected $productFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
      */
-    protected $productEditDataFactory;
+    protected $productDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
@@ -47,7 +47,7 @@ class ProductVariantFacade
     public function __construct(
         EntityManagerInterface $em,
         ProductFacade $productFacade,
-        ProductEditDataFactory $productEditDataFactory,
+        ProductDataFactory $productDataFactory,
         ImageFacade $imageFacade,
         ProductVariantService $productVariantService,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
@@ -55,7 +55,7 @@ class ProductVariantFacade
     ) {
         $this->em = $em;
         $this->productFacade = $productFacade;
-        $this->productEditDataFactory = $productEditDataFactory;
+        $this->productDataFactory = $productDataFactory;
         $this->imageFacade = $imageFacade;
         $this->productVariantService = $productVariantService;
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
@@ -71,15 +71,15 @@ class ProductVariantFacade
     {
         $this->productVariantService->checkProductIsNotMainVariant($mainProduct);
 
-        $mainVariantEditData = $this->productEditDataFactory->createFromProduct($mainProduct);
-        $mainVariant = $this->productVariantService->createMainVariant($mainVariantEditData, $mainProduct, $variants);
+        $mainVariantData = $this->productDataFactory->createFromProduct($mainProduct);
+        $mainVariant = $this->productVariantService->createMainVariant($mainVariantData, $mainProduct, $variants);
         $this->em->persist($mainVariant);
 
         try {
             $toFlush = $mainVariant->getVariants();
             $toFlush[] = $mainVariant;
             $this->em->flush($toFlush);
-            $this->productFacade->setAdditionalDataAfterCreate($mainVariant, $mainVariantEditData);
+            $this->productFacade->setAdditionalDataAfterCreate($mainVariant, $mainVariantData);
             $this->imageFacade->copyImages($mainProduct, $mainVariant);
         } catch (\Exception $exception) {
             $this->productAvailabilityRecalculationScheduler->cleanScheduleForImmediateRecalculation();

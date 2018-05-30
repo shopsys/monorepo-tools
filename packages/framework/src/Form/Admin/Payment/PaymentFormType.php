@@ -10,7 +10,6 @@ use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Symfony\Component\Form\AbstractType;
@@ -154,7 +153,6 @@ class PaymentFormType extends AbstractType
         $resolver->setRequired('payment')
             ->setAllowedTypes('payment', [Payment::class, 'null'])
             ->setDefaults([
-                'data_class' => PaymentData::class,
                 'attr' => ['novalidate' => 'novalidate'],
             ]);
     }

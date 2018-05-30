@@ -5,26 +5,26 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 
 class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    /** @var \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
-    private $productEditDataFactory;
+    /** @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
+    private $productDataFactory;
 
     /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
     private $productFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory $productEditDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory $productDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
      */
     public function __construct(
-        ProductEditDataFactory $productEditDataFactory,
+        ProductDataFactory $productDataFactory,
         ProductFacade $productFacade
     ) {
-        $this->productEditDataFactory = $productEditDataFactory;
+        $this->productDataFactory = $productDataFactory;
         $this->productFacade = $productFacade;
     }
 
@@ -36,12 +36,12 @@ class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements 
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\FrameworkBundle\Model\Product\Product */
 
-        $productEditData = $this->productEditDataFactory->createFromProduct($product);
-        $productEditData->accessories = [
+        $productData = $this->productDataFactory->createFromProduct($product);
+        $productData->accessories = [
             $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '24'),
             $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '13'),
         ];
-        $this->productFacade->edit($product->getId(), $productEditData);
+        $this->productFacade->edit($product->getId(), $productData);
     }
 
     /**

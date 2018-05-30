@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\SettingValueDataFixture;
-use Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade;
 
 class BrandDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -39,17 +39,17 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
     /** @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade */
     private $brandFacade;
 
-    /** @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditDataFactory */
-    private $brandEditDataFactory;
+    /** @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactory */
+    private $brandDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade $brandFacade
-     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandEditDataFactory $brandEditDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactory $brandDataFactory
      */
-    public function __construct(BrandFacade $brandFacade, BrandEditDataFactory $brandEditDataFactory)
+    public function __construct(BrandFacade $brandFacade, BrandDataFactory $brandDataFactory)
     {
         $this->brandFacade = $brandFacade;
-        $this->brandEditDataFactory = $brandEditDataFactory;
+        $this->brandDataFactory = $brandDataFactory;
     }
 
     /**
@@ -57,8 +57,7 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
      */
     public function load(ObjectManager $manager)
     {
-        $brandEditData = $this->brandEditDataFactory->createDefault();
-        $brandData = $brandEditData->getBrandData();
+        $brandData = $this->brandDataFactory->createDefault();
 
         foreach ($this->getBrandNamesIndexedByBrandConstants() as $brandConstant => $brandName) {
             $brandData->name = $brandName;
@@ -66,7 +65,7 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
                 'cs' => 'Toto je popis značky ' . $brandData->name . '.',
                 'en' => 'This is description of brand ' . $brandData->name . '.',
             ];
-            $brand = $this->brandFacade->create($brandEditData);
+            $brand = $this->brandFacade->create($brandData);
             $this->addReference($brandConstant, $brand);
         }
     }

@@ -311,7 +311,7 @@ as it is a part of your open-box, eg. [`detail.html.twig`](../../project-base/sr
 You need to fix your tests to reflect new changes:
 * Instances of `Product` and `ProductData` are often created directly in tests - change all of them to your classes.
 * In [`ProductVisibilityRepositoryTest`](../../project-base/tests/ShopBundle/Database/Model/Product/ProductVisibilityRepositoryTest.php), 
-instance of `ProductEditData` is created directly. It creates new instance of `ProductData` internally, 
+instance of `ProductData` is created directly. 
 so you need to use there your class:
 ```php
 <?php
@@ -323,14 +323,13 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 class ProductVisibilityRepositoryTest extends DatabaseTestCase
 {
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductEditData
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductData
      */
-    private function getDefaultProductEditData()
+    private function getDefaultProductData()
     {
         // ...
 
-        $productEditData = new ProductEditData();
-        $productEditData->productData = new ProductData();
+        $productData = new ProductData();
         
         // ...
     }

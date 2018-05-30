@@ -27,11 +27,29 @@ class BrandData
      */
     public $urls;
 
+    /**
+     * @var string[]|null[]
+     */
+    public $seoTitles;
+
+    /**
+     * @var string[]|null[]
+     */
+    public $seoMetaDescriptions;
+
+    /**
+     * @var string[]|null[]
+     */
+    public $seoH1s;
+
     public function __construct()
     {
         $this->name = '';
         $this->image = new ImageUploadData();
         $this->descriptions = [];
         $this->urls = new UrlListData();
+        $this->seoTitles = [];
+        $this->seoMetaDescriptions = [];
+        $this->seoH1s = [];
     }
 }

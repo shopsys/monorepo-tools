@@ -13,8 +13,8 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
@@ -23,9 +23,9 @@ use Tests\ShopBundle\Test\DatabaseTestCase;
 class ProductVisibilityRepositoryTest extends DatabaseTestCase
 {
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductEditData
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductData
      */
-    private function getDefaultProductEditData()
+    private function getDefaultproductData()
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_ELECTRONICS);
 
@@ -33,18 +33,18 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $vat = new Vat(new VatData('vat', 21));
         $em->persist($vat);
 
-        $productEditData = new ProductEditData();
-        $productEditData->productData->name = ['cs' => 'Name', 'en' => 'Name'];
-        $productEditData->productData->vat = $vat;
-        $productEditData->productData->price = 100;
-        $productEditData->productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
-        $productEditData->productData->hidden = false;
-        $productEditData->productData->sellingDenied = false;
-        $productEditData->productData->categoriesByDomainId = [1 => [$category]];
-        $productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
-        $productEditData->productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
+        $productData = new ProductData();
+        $productData->name = ['cs' => 'Name', 'en' => 'Name'];
+        $productData->vat = $vat;
+        $productData->price = 100;
+        $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
+        $productData->hidden = false;
+        $productData->sellingDenied = false;
+        $productData->categoriesByDomainId = [1 => [$category]];
+        $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
+        $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
 
-        return $productEditData;
+        return $productData;
     }
 
     public function testIsVisibleOnAnyDomainWhenHidden()
@@ -56,9 +56,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
         /* @var $productPriceRecalculator \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
-        $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->hidden = true;
-        $product = $productFacade->create($productEditData);
+        $productData = $this->getDefaultproductData();
+        $productData->hidden = true;
+        $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
         $em->flush();
@@ -92,8 +92,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
         /* @var $productPriceRecalculator \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
-        $productEditData = $this->getDefaultProductEditData();
-        $product = $productFacade->create($productEditData);
+        $productData = $this->getDefaultproductData();
+        $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
         $em->flush();
@@ -130,9 +130,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $sellingFrom = new DateTime('now');
         $sellingFrom->modify('+1 day');
 
-        $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->sellingFrom = $sellingFrom;
-        $product = $productFacade->create($productEditData);
+        $productData = $this->getDefaultproductData();
+        $productData->sellingFrom = $sellingFrom;
+        $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
         $em->flush();
@@ -161,9 +161,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $sellingTo = new DateTime('now');
         $sellingTo->modify('-1 day');
 
-        $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->sellingTo = $sellingTo;
-        $product = $productFacade->create($productEditData);
+        $productData = $this->getDefaultproductData();
+        $productData->sellingTo = $sellingTo;
+        $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
         $em->flush();
@@ -194,10 +194,10 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $sellingTo = new DateTime('now');
         $sellingTo->modify('+1 day');
 
-        $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->sellingFrom = $sellingFrom;
-        $productEditData->productData->sellingTo = $sellingTo;
-        $product = $productFacade->create($productEditData);
+        $productData = $this->getDefaultproductData();
+        $productData->sellingFrom = $sellingFrom;
+        $productData->sellingTo = $sellingTo;
+        $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
         $em->flush();
@@ -223,12 +223,12 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
         /* @var $productPriceRecalculator \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
-        $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->price = 0;
-        $product1 = $productFacade->create($productEditData);
+        $productData = $this->getDefaultproductData();
+        $productData->price = 0;
+        $product1 = $productFacade->create($productData);
 
-        $productEditData->productData->price = null;
-        $product2 = $productFacade->create($productEditData);
+        $productData->price = null;
+        $product2 = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
         $product1Id = $product1->getId();
@@ -258,9 +258,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
         /* @var $productPriceRecalculator \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
-        $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->name = ['cs' => 'Name', 'en' => 'Name'];
-        $product = $productFacade->create($productEditData);
+        $productData = $this->getDefaultproductData();
+        $productData->name = ['cs' => 'Name', 'en' => 'Name'];
+        $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
         $entityManagerFacade->clear();
@@ -289,9 +289,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
         /* @var $productPriceRecalculator \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
-        $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->name = ['cs' => null, 'en' => null];
-        $product = $productFacade->create($productEditData);
+        $productData = $this->getDefaultproductData();
+        $productData->name = ['cs' => null, 'en' => null];
+        $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
         $entityManagerFacade->clear();
@@ -322,9 +322,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $category = $this->getReference(CategoryDataFixture::CATEGORY_TOYS);
 
-        $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->categoriesByDomainId = [1 => [$category]];
-        $product = $productFacade->create($productEditData);
+        $productData = $this->getDefaultproductData();
+        $productData->categoriesByDomainId = [1 => [$category]];
+        $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
         $entityManagerFacade->clear();
@@ -353,9 +353,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
         /* @var $productPriceRecalculator \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
-        $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->categoriesByDomainId = [];
-        $product = $productFacade->create($productEditData);
+        $productData = $this->getDefaultproductData();
+        $productData->categoriesByDomainId = [];
+        $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
         $entityManagerFacade->clear();
@@ -385,19 +385,19 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
         /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
 
-        $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
+        $productData = $this->getDefaultproductData();
+        $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
 
         $allPricingGroups = $pricingGroupFacade->getAll();
         foreach ($allPricingGroups as $pricingGroup) {
-            $productEditData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = 10;
+            $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = 10;
         }
 
         $pricingGroupWithZeroPriceId = $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId();
 
-        $productEditData->manualInputPricesByPricingGroupId[$pricingGroupWithZeroPriceId] = 0;
+        $productData->manualInputPricesByPricingGroupId[$pricingGroupWithZeroPriceId] = 0;
 
-        $product = $productFacade->create($productEditData);
+        $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
         $entityManagerFacade->clear();
@@ -428,18 +428,18 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
         /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
 
-        $productEditData = $this->getDefaultProductEditData();
-        $productEditData->productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
+        $productData = $this->getDefaultproductData();
+        $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
 
         $allPricingGroups = $pricingGroupFacade->getAll();
         foreach ($allPricingGroups as $pricingGroup) {
-            $productEditData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = 10;
+            $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = 10;
         }
 
         $pricingGroupWithNullPriceId = $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId();
-        $productEditData->manualInputPricesByPricingGroupId[$pricingGroupWithNullPriceId] = null;
+        $productData->manualInputPricesByPricingGroupId[$pricingGroupWithNullPriceId] = null;
 
-        $product = $productFacade->create($productEditData);
+        $product = $productFacade->create($productData);
         $productPriceRecalculator->runImmediateRecalculations();
 
         $entityManagerFacade->clear();
@@ -465,8 +465,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         /* @var $productVisibilityRepository \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
         /* @var $variant1 \Shopsys\FrameworkBundle\Model\Product\Product */
@@ -477,9 +477,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
         /* @var $mainVariant \Shopsys\FrameworkBundle\Model\Product\Product */
 
-        $variant1ProductEditData = $productEditDataFactory->createFromProduct($variant1);
-        $variant1ProductEditData->productData->hidden = true;
-        $productFacade->edit($variant1->getId(), $variant1ProductEditData);
+        $variant1productData = $productDataFactory->createFromProduct($variant1);
+        $variant1productData->hidden = true;
+        $productFacade->edit($variant1->getId(), $variant1productData);
 
         $productVisibilityRepository->refreshProductsVisibility(true);
 
@@ -501,8 +501,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         /* @var $productVisibilityRepository \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
         /* @var $variant1 \Shopsys\FrameworkBundle\Model\Product\Product */
@@ -513,17 +513,17 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
         /* @var $mainVariant \Shopsys\FrameworkBundle\Model\Product\Product */
 
-        $variant1ProductEditData = $productEditDataFactory->createFromProduct($variant1);
-        $variant1ProductEditData->productData->hidden = true;
-        $productFacade->edit($variant1->getId(), $variant1ProductEditData);
+        $variant1productData = $productDataFactory->createFromProduct($variant1);
+        $variant1productData->hidden = true;
+        $productFacade->edit($variant1->getId(), $variant1productData);
 
-        $variant2ProductEditData = $productEditDataFactory->createFromProduct($variant2);
-        $variant2ProductEditData->productData->hidden = true;
-        $productFacade->edit($variant2->getId(), $variant2ProductEditData);
+        $variant2productData = $productDataFactory->createFromProduct($variant2);
+        $variant2productData->hidden = true;
+        $productFacade->edit($variant2->getId(), $variant2productData);
 
-        $variant3ProductEditData = $productEditDataFactory->createFromProduct($variant3);
-        $variant3ProductEditData->productData->hidden = true;
-        $productFacade->edit($variant3->getId(), $variant3ProductEditData);
+        $variant3productData = $productDataFactory->createFromProduct($variant3);
+        $variant3productData->hidden = true;
+        $productFacade->edit($variant3->getId(), $variant3productData);
 
         $productVisibilityRepository->refreshProductsVisibility(true);
 
@@ -545,8 +545,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         /* @var $productVisibilityRepository \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
 
         $variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
         /* @var $variant1 \Shopsys\FrameworkBundle\Model\Product\Product */
@@ -557,9 +557,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
         /* @var $mainVariant \Shopsys\FrameworkBundle\Model\Product\Product */
 
-        $mainVariantProductEditData = $productEditDataFactory->createFromProduct($mainVariant);
-        $mainVariantProductEditData->productData->hidden = true;
-        $productFacade->edit($mainVariant->getId(), $mainVariantProductEditData);
+        $mainVariantproductData = $productDataFactory->createFromProduct($mainVariant);
+        $mainVariantproductData->hidden = true;
+        $productFacade->edit($mainVariant->getId(), $mainVariantproductData);
 
         $productVisibilityRepository->refreshProductsVisibility(true);
 

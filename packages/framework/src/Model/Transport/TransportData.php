@@ -48,12 +48,18 @@ class TransportData
     public $payments;
 
     /**
+     * @var string[]
+     */
+    public $pricesByCurrencyId;
+
+    /**
      * @param string[] $names
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null $vat
      * @param string[] $descriptions
      * @param string[] $instructions
      * @param bool $hidden
      * @param int[] $domains
+     * @param string[] $pricesByCurrencyId
      */
     public function __construct(
         array $names = [],
@@ -61,7 +67,8 @@ class TransportData
         array $descriptions = [],
         array $instructions = [],
         $hidden = false,
-        array $domains = []
+        array $domains = [],
+        array $pricesByCurrencyId = []
     ) {
         $this->name = $names;
         $this->vat = $vat;
@@ -70,6 +77,7 @@ class TransportData
         $this->hidden = $hidden;
         $this->image = new ImageUploadData();
         $this->domains = $domains;
+        $this->pricesByCurrencyId = $pricesByCurrencyId;
         $this->payments = [];
     }
 

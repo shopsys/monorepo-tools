@@ -5,8 +5,8 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 use DateTime;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 
 class ProductDataFixtureLoader
 {
@@ -78,9 +78,9 @@ class ProductDataFixtureLoader
     private $pricingGroups;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
      */
-    private $productEditDataFactory;
+    private $productDataFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
@@ -89,11 +89,11 @@ class ProductDataFixtureLoader
 
     public function __construct(
         ProductParametersFixtureLoader $productParametersFixtureLoader,
-        ProductEditDataFactory $productEditDataFactory,
+        ProductDataFactory $productDataFactory,
         Domain $domain
     ) {
         $this->productParametersFixtureLoader = $productParametersFixtureLoader;
-        $this->productEditDataFactory = $productEditDataFactory;
+        $this->productDataFactory = $productDataFactory;
         $this->domain = $domain;
     }
 
@@ -127,14 +127,14 @@ class ProductDataFixtureLoader
 
     /**
      * @param array $row
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductEditData
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductData
      */
-    public function createProductEditDataFromRowForFirstDomain($row)
+    public function createProductDataFromRowForFirstDomain($row)
     {
-        $productEditData = $this->productEditDataFactory->createDefault();
-        $this->updateProductEditDataFromCsvRowForFirstDomain($productEditData, $row);
+        $productData = $this->productDataFactory->createDefault();
+        $this->updateProductDataFromCsvRowForFirstDomain($productData, $row);
 
-        return $productEditData;
+        return $productData;
     }
 
     /**
@@ -154,69 +154,69 @@ class ProductDataFixtureLoader
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @param array $row
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    private function updateProductEditDataFromCsvRowForFirstDomain(ProductEditData $productEditData, array $row)
+    private function updateProductDataFromCsvRowForFirstDomain(ProductData $productData, array $row)
     {
         $domainId = 1;
-        $productEditData->productData->name['cs'] = $row[self::COLUMN_NAME_CS];
-        $productEditData->productData->name['en'] = $row[self::COLUMN_NAME_EN];
-        $productEditData->productData->catnum = $row[self::COLUMN_CATNUM];
-        $productEditData->productData->partno = $row[self::COLUMN_PARTNO];
-        $productEditData->productData->ean = $row[self::COLUMN_EAN];
-        $productEditData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
-        $productEditData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
-        $productEditData->productData->priceCalculationType = $row[self::COLUMN_PRICE_CALCULATION_TYPE];
-        $this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
+        $productData->name['cs'] = $row[self::COLUMN_NAME_CS];
+        $productData->name['en'] = $row[self::COLUMN_NAME_EN];
+        $productData->catnum = $row[self::COLUMN_CATNUM];
+        $productData->partno = $row[self::COLUMN_PARTNO];
+        $productData->ean = $row[self::COLUMN_EAN];
+        $productData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
+        $productData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
+        $productData->priceCalculationType = $row[self::COLUMN_PRICE_CALCULATION_TYPE];
+        $this->setProductDataPricesFromCsv($row, $productData, $domainId);
         switch ($row[self::COLUMN_VAT]) {
             case 'high':
-                $productEditData->productData->vat = $this->vats['high'];
+                $productData->vat = $this->vats['high'];
                 break;
             case 'low':
-                $productEditData->productData->vat = $this->vats['low'];
+                $productData->vat = $this->vats['low'];
                 break;
             case 'second_low':
-                $productEditData->productData->vat = $this->vats['second_low'];
+                $productData->vat = $this->vats['second_low'];
                 break;
             case 'zero':
-                $productEditData->productData->vat = $this->vats['zero'];
+                $productData->vat = $this->vats['zero'];
                 break;
             default:
-                $productEditData->productData->vat = null;
+                $productData->vat = null;
         }
         if ($row[self::COLUMN_SELLING_FROM] !== null) {
-            $productEditData->productData->sellingFrom = new DateTime($row[self::COLUMN_SELLING_FROM]);
+            $productData->sellingFrom = new DateTime($row[self::COLUMN_SELLING_FROM]);
         }
         if ($row[self::COLUMN_SELLING_TO] !== null) {
-            $productEditData->productData->sellingTo = new DateTime($row[self::COLUMN_SELLING_TO]);
+            $productData->sellingTo = new DateTime($row[self::COLUMN_SELLING_TO]);
         }
-        $productEditData->productData->usingStock = $row[self::COLUMN_STOCK_QUANTITY] !== null;
-        $productEditData->productData->stockQuantity = $row[self::COLUMN_STOCK_QUANTITY];
-        $productEditData->productData->unit = $this->units[$row[self::COLUMN_UNIT]];
-        $productEditData->productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_HIDE;
+        $productData->usingStock = $row[self::COLUMN_STOCK_QUANTITY] !== null;
+        $productData->stockQuantity = $row[self::COLUMN_STOCK_QUANTITY];
+        $productData->unit = $this->units[$row[self::COLUMN_UNIT]];
+        $productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_HIDE;
         switch ($row[self::COLUMN_AVAILABILITY]) {
             case 'in-stock':
-                $productEditData->productData->availability = $this->availabilities['in-stock'];
+                $productData->availability = $this->availabilities['in-stock'];
                 break;
             case 'out-of-stock':
-                $productEditData->productData->availability = $this->availabilities['out-of-stock'];
+                $productData->availability = $this->availabilities['out-of-stock'];
                 break;
             case 'on-request':
-                $productEditData->productData->availability = $this->availabilities['on-request'];
+                $productData->availability = $this->availabilities['on-request'];
                 break;
         }
-        $productEditData->parameters = $this->productParametersFixtureLoader->getProductParameterValuesDataFromString(
+        $productData->parameters = $this->productParametersFixtureLoader->getProductParameterValuesDataFromString(
             $row[self::COLUMN_PARAMETERS]
         );
-        $productEditData->productData->categoriesByDomainId[$domainId] =
+        $productData->categoriesByDomainId[$domainId] =
             $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_1], $this->categories);
-        $productEditData->productData->flags = $this->getValuesByKeyString($row[self::COLUMN_FLAGS], $this->flags);
-        $productEditData->productData->sellingDenied = $row[self::COLUMN_SELLING_DENIED];
+        $productData->flags = $this->getValuesByKeyString($row[self::COLUMN_FLAGS], $this->flags);
+        $productData->sellingDenied = $row[self::COLUMN_SELLING_DENIED];
 
         if ($row[self::COLUMN_BRAND] !== null) {
-            $productEditData->productData->brand = $this->brands[$row[self::COLUMN_BRAND]];
+            $productData->brand = $this->brands[$row[self::COLUMN_BRAND]];
         }
     }
 
@@ -230,17 +230,17 @@ class ProductDataFixtureLoader
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @param array $row
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function updateProductEditDataFromCsvRowForSecondDomain(ProductEditData $productEditData, array $row)
+    public function updateProductDataFromCsvRowForSecondDomain(ProductData $productData, array $row)
     {
         $domainId = 2;
-        $productEditData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
-        $productEditData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
-        $this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
-        $productEditData->productData->categoriesByDomainId[$domainId] =
+        $productData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
+        $productData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
+        $this->setProductDataPricesFromCsv($row, $productData, $domainId);
+        $productData->categoriesByDomainId[$domainId] =
             $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_2], $this->categories);
     }
 
@@ -316,14 +316,14 @@ class ProductDataFixtureLoader
 
     /**
      * @param array $row
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @param int $domainId
      */
-    private function setProductDataPricesFromCsv(array $row, ProductEditData $productEditData, $domainId)
+    private function setProductDataPricesFromCsv(array $row, ProductData $productData, $domainId)
     {
         switch ($row[self::COLUMN_PRICE_CALCULATION_TYPE]) {
             case 'auto':
-                $productEditData->productData->price = $row[self::COLUMN_MAIN_PRICE];
+                $productData->price = $row[self::COLUMN_MAIN_PRICE];
                 break;
             case 'manual':
                 if ($domainId === 1) {
@@ -332,10 +332,10 @@ class ProductDataFixtureLoader
                     $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_2];
                 }
                 $manualPrices = $this->getProductManualPricesIndexedByPricingGroupFromString($manualPricesColumn);
-                $this->createDefaultManualPriceForAllPricingGroups($productEditData);
+                $this->createDefaultManualPriceForAllPricingGroups($productData);
                 foreach ($manualPrices as $pricingGroup => $manualPrice) {
                     $pricingGroup = $this->pricingGroups[$pricingGroup];
-                    $productEditData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = $manualPrice;
+                    $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = $manualPrice;
                 }
                 break;
             default:
@@ -346,13 +346,13 @@ class ProductDataFixtureLoader
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $productEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      */
-    private function createDefaultManualPriceForAllPricingGroups(ProductEditData $productEditData)
+    private function createDefaultManualPriceForAllPricingGroups(ProductData $productData)
     {
         foreach ($this->pricingGroups as $pricingGroupReferenceName => $pricingGroup) {
-            if (!array_key_exists($pricingGroup->getId(), $productEditData->manualInputPricesByPricingGroupId)) {
-                $productEditData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = null;
+            if (!array_key_exists($pricingGroup->getId(), $productData->manualInputPricesByPricingGroupId)) {
+                $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = null;
             }
         }
     }

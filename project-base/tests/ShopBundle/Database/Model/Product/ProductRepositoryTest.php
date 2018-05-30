@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Tests\ShopBundle\Test\DatabaseTestCase;
@@ -186,14 +186,14 @@ class ProductRepositoryTest extends DatabaseTestCase
      */
     private function setProductOrderingPriority(Product $product, $priority)
     {
-        $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-        /* @var $productEditDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductEditDataFactory */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
-        $productEditData = $productEditDataFactory->createFromProduct($product);
-        $productEditData->productData->orderingPriority = $priority;
-        $productFacade->edit($product->getId(), $productEditData);
+        $productData = $productDataFactory->createFromProduct($product);
+        $productData->orderingPriority = $priority;
+        $productFacade->edit($product->getId(), $productData);
     }
 
     /**

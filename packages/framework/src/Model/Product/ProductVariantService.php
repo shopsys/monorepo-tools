@@ -61,15 +61,15 @@ class ProductVariantService
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductEditData $mainVariantEditData
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $mainVariantData
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $mainProduct
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $variants
      * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    public function createMainVariant(ProductEditData $mainVariantEditData, Product $mainProduct, array $variants)
+    public function createMainVariant(ProductData $mainVariantData, Product $mainProduct, array $variants)
     {
         $variants[] = $mainProduct;
 
-        return $this->productFactory->createMainVariant($mainVariantEditData->productData, $variants);
+        return $this->productFactory->createMainVariant($mainVariantData, $variants);
     }
 }

@@ -53,6 +53,11 @@ class PaymentData
     public $czkRounding;
 
     /**
+     * @var string[]
+     */
+    public $pricesByCurrencyId;
+
+    /**
      * @param string[] $name
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null $vat
      * @param string[] $description
@@ -68,7 +73,8 @@ class PaymentData
         array $instructions = [],
         $hidden = false,
         array $domains = [],
-        $czkRounding = false
+        $czkRounding = false,
+        array $pricesByCurrencyId = []
     ) {
         $this->name = $name;
         $this->vat = $vat;
@@ -79,6 +85,7 @@ class PaymentData
         $this->image = new ImageUploadData();
         $this->transports = [];
         $this->czkRounding = $czkRounding;
+        $this->pricesByCurrencyId = $pricesByCurrencyId;
     }
 
     /**

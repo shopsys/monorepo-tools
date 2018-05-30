@@ -14,7 +14,6 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -290,7 +289,6 @@ class ProductFormType extends AbstractType
             ->setRequired('product')
             ->setAllowedTypes('product', [Product::class, 'null'])
             ->setDefaults([
-                'data_class' => ProductData::class,
                 'attr' => ['novalidate' => 'novalidate'],
                 'validation_groups' => function (FormInterface $form) {
                     $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];

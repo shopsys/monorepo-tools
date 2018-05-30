@@ -17,7 +17,7 @@ use Shopsys\FrameworkBundle\Form\UrlListType;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductEditData;
+use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -111,7 +111,10 @@ class ProductEditFormType extends AbstractType
         }
 
         $builder
-            ->add('productData', ProductFormType::class, ['product' => $editedProduct])
+            ->add('productData', ProductFormType::class, [
+                'product' => $editedProduct,
+                'inherit_data' => true,
+            ])
             ->add('images', ImageUploadType::class, [
                 'required' => false,
                 'multiple' => true,
@@ -227,12 +230,12 @@ class ProductEditFormType extends AbstractType
             ->setRequired('product')
             ->setAllowedTypes('product', [Product::class, 'null'])
             ->setDefaults([
-                'data_class' => ProductEditData::class,
+                'data_class' => ProductData::class,
                 'attr' => ['novalidate' => 'novalidate'],
                 'csrf_token_id' => self::CSRF_TOKEN_ID,
                 'validation_groups' => function (FormInterface $form) {
                     $validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
-                    $productData = $form->getData()->productData;
+                    $productData = $form->getData();
                     /* @var $productData \Shopsys\FrameworkBundle\Model\Product\ProductData */
 
                     if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_MANUAL) {
