@@ -268,10 +268,14 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
      */
     public function setPayments(array $payments)
     {
-        $this->clearPayments();
+        foreach ($this->payments as $currentPayment) {
+            if (!in_array($currentPayment, $payments, true)) {
+                $this->removePayment($currentPayment);
+            }
+        }
 
-        foreach ($payments as $payment) {
-            $this->addPayment($payment);
+        foreach ($payments as $newPayment) {
+            $this->addPayment($newPayment);
         }
     }
 
@@ -283,13 +287,6 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
         if ($this->payments->contains($payment)) {
             $this->payments->removeElement($payment);
             $payment->removeTransport($this);
-        }
-    }
-
-    protected function clearPayments()
-    {
-        foreach ($this->payments as $payment) {
-            $this->removePayment($payment);
         }
     }
 
