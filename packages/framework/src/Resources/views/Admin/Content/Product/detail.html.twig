@@ -177,7 +177,7 @@
                     {{ 'Description'|trans }}
                 </div>
 
-                {% for domainId, descriptionForm in form.descriptions %}
+                {% for domainId, descriptionForm in form.productData.descriptions %}
                     {% if isMultidomain() %}
                         <div class="form-line form-line--no-padd">
                             <div class="form-line__group">
@@ -204,7 +204,7 @@
                     {{ 'Short description'|trans }}
                 </div>
 
-                {% for domainId, shortDescriptionForm in form.shortDescriptions %}
+                {% for domainId, shortDescriptionForm in form.productData.shortDescriptions %}
                     {% if isMultidomain() %}
                         <div class="form-line form-line--no-padd">
                             <div class="form-line__group">
@@ -292,11 +292,11 @@
                 {{ 'SEO'|trans }}
             </div>
 
-            {{ seoFormRowMacros.multidomainRow(form.seoTitles, 'Page title'|trans, 60) }}
+            {{ seoFormRowMacros.multidomainRow(form.productData.seoTitles, 'Page title'|trans, 60) }}
 
-            {{ seoFormRowMacros.multidomainRow(form.seoMetaDescriptions, 'Meta description'|trans, 155, 'input--seo') }}
+            {{ seoFormRowMacros.multidomainRow(form.productData.seoMetaDescriptions, 'Meta description'|trans, 155, 'input--seo') }}
 
-            {{ seoFormRowMacros.multidomainRow(form.seoH1s, 'Heading (H1)'|trans) }}
+            {{ seoFormRowMacros.multidomainRow(form.productData.seoH1s, 'Heading (H1)'|trans) }}
 
             {% block product_urls %}{% endblock %}
         </div>

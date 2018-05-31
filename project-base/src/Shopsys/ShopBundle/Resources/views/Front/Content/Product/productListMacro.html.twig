@@ -4,7 +4,7 @@
 
     <ul class="list-products js-product-list {{ listCssClass|default('') }}">
         {% for productDetail in productDetails %}
-            {% set productDomain = productDetail.productDomainsIndexedByDomainId[domain.id] %}
+            {% set product = productDetail.product %}
 
             <li class="list-products__item js-list-products-item">
                 <div class="list-products__item__in">
@@ -20,7 +20,7 @@
 
                         <div class="list-products__item__info">
                             <p class="list-products__item__info__description">
-                                {{ productDomain.shortDescription }}
+                                {{ product.getShortDescription(domain.id) }}
                             </p>
                             {% if productDetail.sellingPrice is not null %}
                                 <div class="list-products__item__info__price">

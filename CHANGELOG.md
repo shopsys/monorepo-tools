@@ -50,7 +50,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - the main entities are responsible for creating and editing its entity domains
         - entity domain factories such as `BrandDomainFactory` were removed
     - entity domains have their own IDs instead of compound primary keys
-    - entities that were modified: `Brand`
+    - entities that were modified: `Brand`, `Product`
     - `BrandEditFormType`, `BrandDetail` and `BrandDetailFactory` were removed as they were no longer necessary
 
 #### Fixed

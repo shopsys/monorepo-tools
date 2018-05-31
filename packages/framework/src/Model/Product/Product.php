@@ -10,6 +10,7 @@ use Shopsys\FrameworkBundle\Component\Utils;
 use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
+use Shopsys\FrameworkBundle\Model\Product\Exception\ProductDomainNotFoundException;
 
 /**
  * Product
@@ -284,12 +285,20 @@ class Product extends AbstractTranslatableEntity
     protected $orderingPriority;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]|\Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Product\ProductDomain", mappedBy="product", cascade={"persist"}, fetch="EXTRA_LAZY")
+     */
+    protected $domains;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[]|null $variants
      */
     protected function __construct(ProductData $productData, array $variants = null)
     {
         $this->translations = new ArrayCollection();
+        $this->domains = new ArrayCollection();
         $this->catnum = $productData->catnum;
         $this->partno = $productData->partno;
         $this->ean = $productData->ean;
@@ -299,6 +308,7 @@ class Product extends AbstractTranslatableEntity
         } else {
             $this->setPrice(null);
         }
+
         $this->vat = $productData->vat;
         $this->sellingFrom = $productData->sellingFrom;
         $this->sellingTo = $productData->sellingTo;
@@ -314,6 +324,7 @@ class Product extends AbstractTranslatableEntity
         $this->recalculateAvailability = true;
         $this->calculatedVisibility = false;
         $this->setTranslations($productData);
+        $this->createDomains($productData);
         $this->productCategoryDomains = new ArrayCollection();
         $this->flags = new ArrayCollection($productData->flags);
         $this->recalculatePrice = true;
@@ -369,6 +380,7 @@ class Product extends AbstractTranslatableEntity
         $this->brand = $productData->brand;
         $this->unit = $productData->unit;
         $this->setTranslations($productData);
+        $this->setDomains($productData);
 
         if (!$this->isVariant()) {
             $this->setCategories($productCategoryDomainFactory, $productData->categoriesByDomainId);
@@ -894,10 +906,100 @@ class Product extends AbstractTranslatableEntity
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
+     */
+    protected function setDomains(ProductData $productData)
+    {
+        foreach ($this->domains as $productDomain) {
+            $domainId = $productDomain->getDomainId();
+            $productDomain->setSeoTitle($productData->seoTitles[$domainId]);
+            $productDomain->setSeoH1($productData->seoH1s[$domainId]);
+            $productDomain->setSeoMetaDescription($productData->seoMetaDescriptions[$domainId]);
+            $productDomain->setDescription($productData->descriptions[$domainId]);
+            $productDomain->setShortDescription($productData->shortDescriptions[$domainId]);
+        }
+    }
+
+    /**
+     * @param int $domainId
+     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain
+     */
+    protected function getProductDomain(int $domainId)
+    {
+        foreach ($this->domains as $domain) {
+            if ($domain->getDomainId() === $domainId) {
+                return $domain;
+            }
+        }
+
+        throw new ProductDomainNotFoundException($this->id, $domainId);
+    }
+
+    /**
+     * @param int $domainId
+     * @return string|null
+     */
+    public function getShortDescription(int $domainId)
+    {
+        return $this->getProductDomain($domainId)->getShortDescription();
+    }
+
+    /**
+     * @param int $domainId
+     * @return string|null
+     */
+    public function getDescription(int $domainId)
+    {
+        return $this->getProductDomain($domainId)->getDescription();
+    }
+
+    /**
+     * @param int $domainId
+     * @return string|null
+     */
+    public function getSeoH1(int $domainId)
+    {
+        return $this->getProductDomain($domainId)->getSeoH1();
+    }
+
+    /**
+     * @param int $domainId
+     * @return string|null
+     */
+    public function getSeoTitle(int $domainId)
+    {
+        return $this->getProductDomain($domainId)->getSeoTitle();
+    }
+
+    /**
+     * @param int $domainId
+     * @return string|null
+     */
+    public function getSeoMetaDescription(int $domainId)
+    {
+        return $this->getProductDomain($domainId)->getSeoMetaDescription();
+    }
+
+    /**
      * @return \Shopsys\FrameworkBundle\Model\Product\ProductTranslation
      */
     protected function createTranslation()
     {
         return new ProductTranslation();
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
+     */
+    protected function createDomains(ProductData $productData)
+    {
+        $domainIds = array_keys($productData->seoTitles);
+
+        foreach ($domainIds as $domainId) {
+            $productDomain = new ProductDomain($this, $domainId);
+            $this->domains[] = $productDomain;
+        }
+
+        $this->setDomains($productData);
     }
 }

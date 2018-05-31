@@ -738,9 +738,6 @@ services:
   Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory
 
-  Shopsys\FrameworkBundle\Model\Product\ProductDomainFactoryInterface:
-    alias: Shopsys\FrameworkBundle\Model\Product\ProductDomainFactory
-
   Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFactory
 

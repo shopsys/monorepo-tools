@@ -19,7 +19,7 @@
                     {{ 'Product excluded from sale.'|trans }}
                 </div>
             {% endif %}
-            {% include '@ShopsysFramework/Admin/Content/Product/visibilityItems.html.twig' with {productDetail: productDetail} only %}
+            {% include '@ShopsysFramework/Admin/Content/Product/visibilityItems.html.twig' with {productDetail: productDetail, domains: domains} only %}
         </div>
     </div>
 {% endblock %}
@@ -276,9 +276,9 @@
                 <strong>{{ 'Description can be set on product detail of the main product.'|trans }}</strong>
             </div>
         </div>
-        {% do form.descriptions.setRendered %}
+        {% do form.productData.descriptions.setRendered %}
     {% else %}
-        {% for domainId, descriptionForm in form.descriptions %}
+        {% for domainId, descriptionForm in form.productData.descriptions %}
             {% if isMultidomain() %}
                 <div class="form-line form-line--no-padd">
                     <div class="form-line__group">
@@ -309,7 +309,7 @@
             </div>
         </div>
     {% else %}
-        {% for domainId, shortDescriptionForm in form.shortDescriptions %}
+        {% for domainId, shortDescriptionForm in form.productData.shortDescriptions %}
             {% if isMultidomain() %}
                 <div class="form-line form-line--no-padd">
                     <div class="form-line__group">

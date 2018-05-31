@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Controller\Admin;
 use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
 use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -102,6 +103,11 @@ class ProductController extends AdminBaseController
      */
     private $productExtension;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
+
     public function __construct(
         CategoryFacade $categoryFacade,
         ProductMassActionFacade $productMassActionFacade,
@@ -116,7 +122,8 @@ class ProductController extends AdminBaseController
         ProductListAdminFacade $productListAdminFacade,
         AdvancedSearchFacade $advancedSearchFacade,
         ProductVariantFacade $productVariantFacade,
-        ProductExtension $productExtension
+        ProductExtension $productExtension,
+        Domain $domain
     ) {
         $this->categoryFacade = $categoryFacade;
         $this->productMassActionFacade = $productMassActionFacade;
@@ -132,6 +139,7 @@ class ProductController extends AdminBaseController
         $this->advancedSearchFacade = $advancedSearchFacade;
         $this->productVariantFacade = $productVariantFacade;
         $this->productExtension = $productExtension;
+        $this->domain = $domain;
     }
 
     /**
@@ -171,6 +179,7 @@ class ProductController extends AdminBaseController
             'product' => $product,
             'productDetail' => $this->productDetailFactory->getDetailForProduct($product),
             'productMainCategoriesIndexedByDomainId' => $this->categoryFacade->getProductMainCategoriesIndexedByDomainId($product),
+            'domains' => $this->domain->getAll(),
         ];
         if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
             $viewParameters['productBasePrice'] = $this->adminProductPriceCalculationFacade->calculateProductBasePrice($product);
@@ -394,6 +403,7 @@ class ProductController extends AdminBaseController
 
         return $this->render('@ShopsysFramework/Admin/Content/Product/visibility.html.twig', [
             'productDetail' => $this->productDetailFactory->getDetailForProduct($product),
+            'domains' => $this->domain->getAll(),
         ]);
     }
 }

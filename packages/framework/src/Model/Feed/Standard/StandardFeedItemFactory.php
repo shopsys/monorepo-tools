@@ -56,10 +56,6 @@ class StandardFeedItemFactory
      */
     public function createItems(array $products, DomainConfig $domainConfig)
     {
-        $productDomainsByProductId = $this->productCollectionFacade->getProductDomainsIndexedByProductId(
-            $products,
-            $domainConfig
-        );
         $imagesByProductId = $this->productCollectionFacade->getImagesUrlsIndexedByProductId($products, $domainConfig);
         $urlsByProductId = $this->productCollectionFacade->getAbsoluteUrlsIndexedByProductId($products, $domainConfig);
         $paramsByProductIdAndName = $this->productCollectionFacade->getProductParameterValuesIndexedByProductIdAndParameterName(
@@ -71,12 +67,11 @@ class StandardFeedItemFactory
         $items = [];
         foreach ($products as $product) {
             $mainCategory = $this->categoryFacade->getProductMainCategoryByDomainId($product, $domainConfig->getId());
-            $productDomain = $productDomainsByProductId[$product->getId()];
 
             $items[] = new StandardFeedItem(
                 $product->getId(),
                 $product->getName($domainConfig->getLocale()),
-                $productDomain->getDescription(),
+                $product->getDescription($domainConfig->getId()),
                 $urlsByProductId[$product->getId()],
                 $imagesByProductId[$product->getId()],
                 $this->getProductPrice($product, $domainConfig->getId())->getPriceWithVat(),

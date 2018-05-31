@@ -23,11 +23,6 @@ class ProductDetail
     private $sellingPrice;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]|null
-     */
-    private $productDomainsIndexedByDomainId;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue[]|null
      */
     private $parameters;
@@ -46,7 +41,6 @@ class ProductDetail
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]|null $productDomainsIndexedByDomainId
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue[]|null $parameters
      * @param \Shopsys\FrameworkBundle\Component\Image\Image[]|null $imagesById
      */
@@ -54,14 +48,12 @@ class ProductDetail
         Product $product,
         ProductDetailFactory $productDetailFactory,
         ProductPrice $sellingPrice = null,
-        array $productDomainsIndexedByDomainId = null,
         array $parameters = null,
         array $imagesById = null
     ) {
         $this->product = $product;
         $this->productDetailFactory = $productDetailFactory;
         $this->sellingPrice = $sellingPrice;
-        $this->productDomainsIndexedByDomainId = $productDomainsIndexedByDomainId;
         $this->parameters = $parameters;
         $this->imagesById = $imagesById;
         $this->sellingPriceLoaded = false;
@@ -86,18 +78,6 @@ class ProductDetail
         }
 
         return $this->sellingPrice;
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]
-     */
-    public function getProductDomainsIndexedByDomainId()
-    {
-        if ($this->productDomainsIndexedByDomainId === null) {
-            $this->productDomainsIndexedByDomainId = $this->productDetailFactory->getProductDomainsIndexedByDomainId($this->product);
-        }
-
-        return $this->productDomainsIndexedByDomainId;
     }
 
     /**

@@ -3,16 +3,16 @@
 {% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% set domain = getDomain() %}
-{% set productDomain = productDetail.productDomainsIndexedByDomainId[domain.id] %}
+{% set product = productDetail.product %}
 {% set descriptionHeadline = 'Product information'|trans %}
 {% set parametersHeadline = 'Technical parameters'|trans %}
 {% set accessoriesHeadline = 'Accessories'|trans %}
 {% block meta_description %}
-    {{- productDomain.seoMetaDescription|default(getSeoMetaDescription()) -}}
+    {{- product.getSeoMetaDescription(domain.id)|default(getSeoMetaDescription()) -}}
 {% endblock %}
 
 {% block title %}
-    {{- productDomain.getSeoTitleForHtml(domain) -}}
+    {{ product.getSeoTitle(domain.id)|default(product.name) }}
 {% endblock %}
 
 {% block main_content %}
@@ -54,11 +54,7 @@
             </div>
             <div class="box-detail__info">
                 <h1 itemprop="name">
-                    {% if productDomain.seoH1 is not null %}
-                        {{ productDomain.seoH1 }}
-                    {% else %}
-                        {{ productDetail.product.name }}
-                    {% endif %}
+                    {{ product.getSeoH1(domain.id)|default(productDetail.product.name) }}
                 </h1>
 
                 {% if productDetail.product.calculatedAvailability %}
@@ -209,13 +205,13 @@
             </table>
         {% endif %}
 
-        {% if productDomain.description
+        {% if product.getDescription(domain.id)
             or productDetail.parameters
             or accessoriesDetails|length > 0
         %}
             <div class="in-tab js-responsive-tabs">
                 <div class="in-tab__head">
-                    {% if productDomain.description %}
+                    {% if product.getDescription(domain.id) %}
                         <a href="#" class="in-tab__head__item js-tabs-button active" data-tab-id="description">
                             {{ descriptionHeadline }}
                         </a>
@@ -228,21 +224,21 @@
                     {% endif %}
                 </div>
                 <div class="in-tab__content">
-                    {% if productDomain.description or productDetail.parameters %}
+                    {% if product.getDescription(domain.id) or productDetail.parameters %}
                         <a href="#" class="in-tab__content__title js-tabs-button active" data-tab-id="description">
                             {{ descriptionHeadline }}
                             <i class="svg svg-arrow"></i>
                         </a>
                         <div class="in-tab__content__item js-tabs-content active" data-tab-id="description">
                             <div class="in-user-text" itemprop="description">
-                                {% if productDomain.description %}
+                                {% if product.getDescription(domain.id) %}
                                     <p>
-                                        {{ productDomain.description|raw }}
+                                        {{ product.getDescription(domain.id)|raw }}
                                     </p>
                                 {% endif %}
                                 {% if productDetail.parameters %}
                                     <div class="h3">{{ parametersHeadline }}</div>
-                                    <table class="table-params{% if productDomain.description %} margin-top-20{% endif %}">
+                                    <table class="table-params{% if product.getDescription(domain.id) %} margin-top-20{% endif %}">
                                         <tbody>
                                             {% for productParameterValue in productDetail.parameters %}
                                                 <tr>
