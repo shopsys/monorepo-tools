@@ -35,7 +35,10 @@
                     {% set domainName = domain.getDomainConfigById(domainId).getName() %}
                     <tr id="{{ priceLimitForm.vars.id }}" class="js-free-transport-and-payment-price-limit" data-domain-id="{{ domainId }}">
                         {% if isMultidomain() %}
-                            <td>{{ domainName }}</td>
+                        <td class="in-overlay">
+                            {{ form_errors(priceLimitForm.priceLimit) }}
+                            {{ domainName }}
+                        </td>
                         {% endif %}
                         <td>
                             {{ form_widget(priceLimitForm.enabled, { attr: { class: 'js-free-transport-and-payment-price-limit-enabled' } } ) }}
