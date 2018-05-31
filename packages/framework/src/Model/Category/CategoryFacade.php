@@ -8,7 +8,6 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use Shopsys\FrameworkBundle\Component\Utils;
 use Shopsys\FrameworkBundle\Model\Category\Detail\CategoryDetailFactory;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Product;
@@ -61,11 +60,6 @@ class CategoryFacade
     protected $pluginCrudExtensionFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDomainFactoryInterface
-     */
-    protected $categoryDomainFactory;
-
-    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryService $categoryService
@@ -75,7 +69,6 @@ class CategoryFacade
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
      * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade $pluginCrudExtensionFacade
-     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDomainFactoryInterface $categoryDomainFactory
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -86,8 +79,7 @@ class CategoryFacade
         CategoryDetailFactory $categoryDetailFactory,
         FriendlyUrlFacade $friendlyUrlFacade,
         ImageFacade $imageFacade,
-        PluginCrudExtensionFacade $pluginCrudExtensionFacade,
-        CategoryDomainFactoryInterface $categoryDomainFactory
+        PluginCrudExtensionFacade $pluginCrudExtensionFacade
     ) {
         $this->em = $em;
         $this->categoryRepository = $categoryRepository;
@@ -98,7 +90,6 @@ class CategoryFacade
         $this->friendlyUrlFacade = $friendlyUrlFacade;
         $this->imageFacade = $imageFacade;
         $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
-        $this->categoryDomainFactory = $categoryDomainFactory;
     }
 
     /**
@@ -120,8 +111,6 @@ class CategoryFacade
         $category = $this->categoryService->create($categoryData, $rootCategory);
         $this->em->persist($category);
         $this->em->flush($category);
-        $this->createCategoryDomains($category, $this->domain->getAll());
-        $this->refreshCategoryDomains($category, $categoryData);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
         $this->imageFacade->uploadImage($category, $categoryData->image->uploadedFiles, null);
 
@@ -141,9 +130,8 @@ class CategoryFacade
     {
         $rootCategory = $this->getRootCategory();
         $category = $this->categoryRepository->getById($categoryId);
-        $this->categoryService->edit($category, $categoryData, $rootCategory);
+        $category = $this->categoryService->edit($category, $categoryData, $rootCategory);
         $this->em->flush();
-        $this->refreshCategoryDomains($category, $categoryData);
         $this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
         $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
         $this->imageFacade->uploadImage($category, $categoryData->image->uploadedFiles, null);
@@ -153,49 +141,6 @@ class CategoryFacade
         $this->categoryVisibilityRecalculationScheduler->scheduleRecalculation($category);
 
         return $category;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
-     */
-    protected function createCategoryDomains(Category $category, array $domainConfigs)
-    {
-        $toFlush = [];
-
-        foreach ($domainConfigs as $domainConfig) {
-            $domainId = $domainConfig->getId();
-            $categoryDomain = $this->categoryDomainFactory->create($category, $domainId);
-
-            $this->em->persist($categoryDomain);
-            $toFlush[] = $categoryDomain;
-        }
-
-        $this->em->flush($toFlush);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
-     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
-     */
-    protected function refreshCategoryDomains(Category $category, CategoryData $categoryData)
-    {
-        $toFlush = [];
-        $categoryDomains = $this->categoryRepository->getCategoryDomainsByCategory($category);
-
-        foreach ($categoryDomains as $categoryDomain) {
-            $domainId = $categoryDomain->getDomainId();
-
-            $categoryDomain->setSeoTitle(Utils::getArrayValue($categoryData->seoTitles, $domainId));
-            $categoryDomain->setSeoMetaDescription(Utils::getArrayValue($categoryData->seoMetaDescriptions, $domainId));
-            $categoryDomain->setSeoH1(Utils::getArrayValue($categoryData->seoH1s, $domainId));
-            $categoryDomain->setDescription(Utils::getArrayValue($categoryData->descriptions, $domainId));
-            $categoryDomain->setHidden(in_array($domainId, $categoryData->hiddenOnDomains, true));
-
-            $toFlush[] = $categoryDomain;
-        }
-
-        $this->em->flush($toFlush);
     }
 
     /**
@@ -440,8 +385,7 @@ class CategoryFacade
     public function getVisibleOnDomainById($domainId, $categoryId)
     {
         $category = $this->getById($categoryId);
-        $categoryDomain = $category->getCategoryDomain($domainId);
-        if (!$categoryDomain->isVisible()) {
+        if (!$category->isVisible($domainId)) {
             $message = 'Category ID ' . $categoryId . ' is not visible on domain ID ' . $domainId;
             throw new \Shopsys\FrameworkBundle\Model\Category\Exception\CategoryNotFoundException($message);
         }

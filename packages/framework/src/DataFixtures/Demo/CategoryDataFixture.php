@@ -8,6 +8,7 @@ use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Base\CategoryRootDataFixture;
 use Shopsys\FrameworkBundle\Model\Category\CategoryData;
+use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -24,15 +25,22 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
     const CATEGORY_GARDEN_TOOLS = 'category_garden_tools';
     const CATEGORY_FOOD = 'category_food';
 
-    /** @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
+     */
     private $categoryFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory
      */
-    public function __construct(CategoryFacade $categoryFacade)
-    {
+    private $categoryDataFactory;
+
+    public function __construct(
+        CategoryFacade $categoryFacade,
+        CategoryDataFactory $categoryDataFactory
+    ) {
         $this->categoryFacade = $categoryFacade;
+        $this->categoryDataFactory = $categoryDataFactory;
     }
 
     /**
@@ -40,7 +48,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
      */
     public function load(ObjectManager $manager)
     {
-        $categoryData = new CategoryData();
+        $categoryData = $this->categoryDataFactory->createDefault();
 
         $categoryData->name = [
             'cs' => 'Elektro',
@@ -52,7 +60,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
                 . 'and home office activities (e.g., desktop computers, printers, paper shredders, etc.).',
         ];
         $categoryData->parent = $this->getReference(CategoryRootDataFixture::CATEGORY_ROOT);
-        $electronicsCategory = $this->createCategory($categoryData, self::CATEGORY_ELECTRONICS);
+        $this->createCategory($categoryData, self::CATEGORY_ELECTRONICS);
 
         $categoryData->name = [
             'cs' => 'Televize, audio',
@@ -62,7 +70,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
             Domain::FIRST_DOMAIN_ID => 'Television or TV is a telecommunication medium used for transmitting sound with moving images in monochrome '
                 . '(black-and-white), or in color, and in two or three dimensions',
         ];
-        $categoryData->parent = $electronicsCategory;
+        $categoryData->parent = $this->getReference(self::CATEGORY_ELECTRONICS);
         $this->createCategory($categoryData, self::CATEGORY_TV);
 
         $categoryData->name = [
@@ -148,7 +156,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 
         $categoryData->name = [
             'cs' => 'Zahradní náčiní',
-            'en' => 'Gargen tools',
+            'en' => 'Garden tools',
         ];
         $categoryData->descriptions = [
             Domain::FIRST_DOMAIN_ID => 'A garden tool is any one of many tools made for gardens and gardening and overlaps with the range of tools '

@@ -10,17 +10,16 @@ use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture
 {
-    /** @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFacade
+     */
     private $categoryFacade;
 
-    /** @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory
+     */
     private $categoryDataFacade;
 
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
-     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory $categoryDataFacade
-     * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
-     */
     public function __construct(
         CategoryFacade $categoryFacade,
         CategoryDataFactory $categoryDataFacade

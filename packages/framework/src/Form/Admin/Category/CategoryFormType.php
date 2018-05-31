@@ -7,13 +7,11 @@ use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
-use Shopsys\FrameworkBundle\Component\Transformers\IndexedBooleansToArrayOfIndexesTransformer;
 use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\DomainsType;
 use Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension;
 use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\ImageUploadType;
-use Shopsys\FrameworkBundle\Form\InvertChoiceTypeExtension;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
 use Shopsys\FrameworkBundle\Form\UrlListType;
 use Shopsys\FrameworkBundle\Model\Category\Category;
@@ -144,14 +142,10 @@ class CategoryFormType extends AbstractType
                 'choice_value' => 'id',
                 'label' => t('Ancestor category'),
             ])
-            ->add('showOnDomains', DomainsType::class, [
-                InvertChoiceTypeExtension::INVERT_OPTION => true,
-                'property_path' => 'hiddenOnDomains',
+            ->add('enabled', DomainsType::class, [
                 'required' => false,
                 'label' => t('Display on'),
             ]);
-        $builderSettingsGroup->get('showOnDomains')
-            ->addModelTransformer(new IndexedBooleansToArrayOfIndexesTransformer());
 
         $builderSeoGroup = $builder->create('seo', GroupType::class, [
             'label' => t('Seo'),

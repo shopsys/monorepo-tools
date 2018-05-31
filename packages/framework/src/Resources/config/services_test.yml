@@ -41,6 +41,8 @@ services:
 
   Shopsys\FrameworkBundle\Model\Category\CategoryFacade: ~
 
+  Shopsys\FrameworkBundle\Model\Category\CategoryFactory: ~
+
   Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository: ~
 
   Shopsys\FrameworkBundle\Model\Category\CategoryRepository: ~

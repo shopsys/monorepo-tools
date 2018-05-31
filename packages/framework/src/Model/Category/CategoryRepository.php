@@ -49,14 +49,6 @@ class CategoryRepository extends NestedTreeRepository
     }
 
     /**
-     * @return \Doctrine\ORM\EntityRepository
-     */
-    protected function getCategoryDomainRepository()
-    {
-        return $this->em->getRepository(CategoryDomain::class);
-    }
-
-    /**
      * @return \Doctrine\ORM\QueryBuilder
      */
     protected function getAllQueryBuilder()
@@ -281,17 +273,6 @@ class CategoryRepository extends NestedTreeRepository
             ->addSelect('ct')
             ->join('c.translations', 'ct', Join::WITH, 'ct.locale = :locale')
             ->setParameter('locale', $locale);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
-     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryDomain[]
-     */
-    public function getCategoryDomainsByCategory(Category $category)
-    {
-        return $this->getCategoryDomainRepository()->findBy([
-            'category' => $category,
-        ]);
     }
 
     /**

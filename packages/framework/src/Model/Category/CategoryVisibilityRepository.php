@@ -102,7 +102,7 @@ class CategoryVisibilityRepository
         $this->em->getConnection()->executeUpdate(
             'UPDATE category_domains AS cd
                 SET visible = (
-                    cd.hidden = FALSE
+                    cd.enabled = TRUE
                     AND
                     ct.name IS NOT NULL
                     AND
