@@ -29,13 +29,18 @@ class MigrationsLocatorTest extends TestCase
     {
         $this->kernelMock = $this->createMock(KernelInterface::class);
         $this->filesystemMock = $this->createMock(Filesystem::class);
-        $this->migrationsLocator = new MigrationsLocator($this->kernelMock, $this->filesystemMock);
+        $this->migrationsLocator = new MigrationsLocator(
+            $this->kernelMock,
+            $this->filesystemMock,
+            'MigrationsDirectory',
+            'MigrationsNamespace'
+        );
     }
 
     public function testExistingMigrationsLocation()
     {
         $this->kernelReturnsOneBundle('Test\\MockBundle', 'test/MockBundle');
-        $this->filesystemSaysPathExists('test/MockBundle/Migrations');
+        $this->filesystemSaysPathExists('test/MockBundle/MigrationsDirectory');
 
         $migrationsLocations = $this->migrationsLocator->getMigrationsLocations();
 
@@ -45,7 +50,7 @@ class MigrationsLocatorTest extends TestCase
     public function testNonExistingMigrationsLocation()
     {
         $this->kernelReturnsOneBundle('Test\\MockBundle', 'test/MockBundle');
-        $this->filesystemSaysPathExists('test/MockBundle/Migrations', false);
+        $this->filesystemSaysPathExists('test/MockBundle/MigrationsDirectory', false);
 
         $migrationsLocations = $this->migrationsLocator->getMigrationsLocations();
 
@@ -70,8 +75,8 @@ class MigrationsLocatorTest extends TestCase
 
         list($migrationsLocation) = $this->migrationsLocator->getMigrationsLocations();
 
-        $this->assertEquals('Test\\MockBundle\\Migrations', $migrationsLocation->getNamespace());
-        $this->assertEquals('test/MockBundle/Migrations', $migrationsLocation->getDirectory());
+        $this->assertEquals('Test\\MockBundle\\MigrationsNamespace', $migrationsLocation->getNamespace());
+        $this->assertEquals('test/MockBundle/MigrationsDirectory', $migrationsLocation->getDirectory());
     }
 
     /**

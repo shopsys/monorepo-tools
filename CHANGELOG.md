@@ -142,6 +142,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - modified [travis script](./packages/migrations/.travis.yml)
         - removed check for php 7.0 due to compatibility with ecs
         - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
+- [#185 Migrations now can be installed in different order or even be skipped](https://github.com/shopsys/shopsys/pull/185)
+    - order of installed migration is saved in migrations-lock.yml
+        - this order can be changed
+        - migrations can be marked as skipped
+    - you can read about the details in the [documentation](./docs/introduction/database-migrations.md)
 
 ### [shopsys/plugin-interface]
 #### Changed

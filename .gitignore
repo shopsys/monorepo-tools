@@ -9,3 +9,4 @@
 /docker-sync.yml
 /project-base/composer.lock
 /project-base/package-lock.json
+/project-base/migrations-lock.yml

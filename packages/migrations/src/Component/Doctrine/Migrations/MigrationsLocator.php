@@ -8,9 +8,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class MigrationsLocator
 {
-    const MIGRATIONS_DIRECTORY = 'Migrations';
-    const MIGRATIONS_NAMESPACE = 'Migrations';
-
     /**
      * @var \Symfony\Component\HttpKernel\KernelInterface
      */
@@ -22,16 +19,32 @@ class MigrationsLocator
     private $filesystem;
 
     /**
+     * @var string
+     */
+    private $relativeDirectory;
+
+    /**
+     * @var string
+     */
+    private $relativeNamespace;
+
+    /**
      * @param \Symfony\Component\HttpKernel\KernelInterface $kernel
      * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+     * @param string $relativeDirectory
+     * @param string $relativeNamespace
      */
-    public function __construct(KernelInterface $kernel, Filesystem $filesystem)
+    public function __construct(KernelInterface $kernel, Filesystem $filesystem, $relativeDirectory, $relativeNamespace)
     {
         $this->kernel = $kernel;
         $this->filesystem = $filesystem;
+        $this->relativeDirectory = $relativeDirectory;
+        $this->relativeNamespace = $relativeNamespace;
     }
 
     /**
+     * Gets possible locations of migration classes to allow multiple sources of migrations.
+     *
      * @return \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocation[]
      */
     public function getMigrationsLocations()
@@ -48,14 +61,16 @@ class MigrationsLocator
     }
 
     /**
+     * Creates a locations of migration classes for a particular bundle.
+     *
      * @param \Symfony\Component\HttpKernel\Bundle\BundleInterface $bundle
      * @return \Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocation
      */
     public function createMigrationsLocation(BundleInterface $bundle)
     {
         return new MigrationsLocation(
-            $bundle->getPath() . '/' . self::MIGRATIONS_DIRECTORY,
-            $bundle->getNamespace() . '\\' . self::MIGRATIONS_NAMESPACE
+            $bundle->getPath() . '/' . $this->relativeDirectory,
+            $bundle->getNamespace() . '\\' . $this->relativeNamespace
         );
     }
 }

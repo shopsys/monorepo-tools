@@ -2,35 +2,16 @@
 
 namespace Shopsys\MigrationBundle\Command;
 
-use Doctrine\Bundle\MigrationsBundle\Command\DoctrineCommand;
-use Doctrine\DBAL\Migrations\Configuration\Configuration;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\DBAL\Migrations\Version;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GetCountOfMigrationsToExecuteCommand extends ContainerAwareCommand
+class GetCountOfMigrationsToExecuteCommand extends AbstractCommand
 {
-
     /**
      * @var string
      */
     protected static $defaultName = 'shopsys:migrations:count';
-
-    /**
-     * @var \Doctrine\ORM\EntityManagerInterface
-     */
-    private $em;
-
-    /**
-     * @param \Doctrine\ORM\EntityManagerInterface $em
-     */
-    public function __construct(EntityManagerInterface $em)
-    {
-        $this->em = $em;
-
-        parent::__construct();
-    }
 
     protected function configure()
     {
@@ -44,15 +25,11 @@ class GetCountOfMigrationsToExecuteCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $migrationsConfiguration = new Configuration($this->em->getConnection());
+        $migrationsConfiguration = $this->getMigrationsConfiguration();
 
-        DoctrineCommand::configureMigrations($this->getContainer(), $migrationsConfiguration);
+        $latestVersion = $migrationsConfiguration->getLatestVersion();
+        $migrationsToExecute = $migrationsConfiguration->getMigrationsToExecute(Version::DIRECTION_UP, $latestVersion);
 
-        $migratedVersions = $migrationsConfiguration->getMigratedVersions();
-        $availableVersions = $migrationsConfiguration->getAvailableVersions();
-
-        $newMigrationsCount = count(array_diff($availableVersions, $migratedVersions));
-
-        $output->writeln('Count of migrations to execute: ' . $newMigrationsCount);
+        $output->writeln('Count of migrations to execute: ' . count($migrationsToExecute));
     }
 }

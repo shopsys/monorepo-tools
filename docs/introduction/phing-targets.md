@@ -39,12 +39,12 @@ Your go-to command when you feel something should work but does not. Especially 
 ### Database
 
 #### db-migrations-generate
-Generates migration file when DB schema is not satisfying ORM.
+Generates a new [database migration](database-migrations.md) class when DB schema is not satisfying ORM.
 
 When you make changes to ORM entities you should run this command that will generate a new migration file for you.
 
 #### db-migrations
-Executes database migrations and checks schema.
+Executes [database migrations](database-migrations.md) and checks schema.
 
 #### db-create
 Creates database with required db extensions and collations (that are operating system specific, unfortunately).

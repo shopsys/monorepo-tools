@@ -5,14 +5,13 @@ namespace Shopsys\MigrationBundle\Command;
 use Shopsys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade;
 use Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocator;
 use Shopsys\MigrationBundle\Component\Generator\GenerateMigrationsService;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class GenerateMigrationCommand extends Command
+class GenerateMigrationCommand extends AbstractCommand
 {
     const RETURN_CODE_OK = 0;
     const RETURN_CODE_ERROR = 1;
