@@ -37,6 +37,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - `Front/Form/theme.html.twig`: block `checkbox_row` now uses block `form_label` for proper label rendering
         - the absence of `label` html tag was causing problems with JS validation (the error message was not included in the popup overview)
 
+#### Security
+- [#178 - JsFormValidatorBundle security issue with Ajax validation](https://github.com/shopsys/shopsys/pull/178)
+    - removed the bundle's public route that allowed lookup any DB table by any field
+    - the purpose of the route is for ajax validation of an entity uniqueness but the feature is not used anyway  
+
 ## [7.0.0-alpha2] - 2018-05-24
 ### [shopsys/framework]
 #### Added
