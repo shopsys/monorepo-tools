@@ -34,6 +34,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         - inline code skips moved to [autoload-easy-coding-standard.yml](./packages/framework/autoload-easy-coding-standard.yml) 
 - [#188 - Rebrading of Shopsys Framework](https://github.com/shopsys/shopsys/pull/188/)
     - all occurrences of netdevelo were changed to shopsys
+- [#257 - Admin: reset.less: disable scrollbar normalization in order to fix problems with jQuery UI drag&drop]( https://github.com/shopsys/shopsys/pull/257)
+    - dragged item is now at correct position
+        -scrollbar normalization was disabled for sortable components 
 
 #### Changed
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
