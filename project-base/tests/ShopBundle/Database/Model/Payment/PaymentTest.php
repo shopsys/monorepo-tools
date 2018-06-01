@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
-use Shopsys\FrameworkBundle\Model\Transport\TransportData;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
@@ -16,10 +16,14 @@ class PaymentTest extends DatabaseTestCase
     public function testRemoveTransportFromPaymentAfterDelete()
     {
         $paymentDataFactory = $this->getContainer()->get(PaymentDataFactory::class);
+        $transportDataFactory = $this->getContainer()->get(TransportDataFactory::class);
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));
-        $transport = new Transport(new TransportData([], $vat, [], [], false));
+        $transportData = $transportDataFactory->createDefault();
+        $transportData->name['cs'] = 'name';
+        $transportData->vat = $vat;
+        $transport = new Transport($transportData);
 
         $paymentData = $paymentDataFactory->createDefault();
         $paymentData->name['cs'] = 'name';

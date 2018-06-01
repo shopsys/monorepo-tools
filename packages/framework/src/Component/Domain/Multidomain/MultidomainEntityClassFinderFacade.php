@@ -11,6 +11,7 @@ use Shopsys\FrameworkBundle\Model\Payment\PaymentDomain;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain;
 use Shopsys\FrameworkBundle\Model\Product\ProductDomain;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDomain;
 
 class MultidomainEntityClassFinderFacade
 {
@@ -86,6 +87,7 @@ class MultidomainEntityClassFinderFacade
             MailTemplate::class,
             PaymentDomain::class,
             ProductDomain::class,
+            TransportDomain::class,
         ];
     }
 }

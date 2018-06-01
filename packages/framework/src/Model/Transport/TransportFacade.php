@@ -57,11 +57,6 @@ class TransportFacade
     protected $transportFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDomainFactoryInterface
-     */
-    protected $transportDomainFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactoryInterface
      */
     protected $transportPriceFactory;
@@ -76,7 +71,6 @@ class TransportFacade
         CurrencyFacade $currencyFacade,
         TransportPriceCalculation $transportPriceCalculation,
         TransportFactoryInterface $transportFactory,
-        TransportDomainFactoryInterface $transportDomainFactory,
         TransportPriceFactoryInterface $transportPriceFactory
     ) {
         $this->em = $em;
@@ -88,7 +82,6 @@ class TransportFacade
         $this->currencyFacade = $currencyFacade;
         $this->transportPriceCalculation = $transportPriceCalculation;
         $this->transportFactory = $transportFactory;
-        $this->transportDomainFactory = $transportDomainFactory;
         $this->transportPriceFactory = $transportPriceFactory;
     }
 
@@ -102,7 +95,6 @@ class TransportFacade
         $this->em->persist($transport);
         $this->em->flush();
         $this->updateTransportPrices($transport, $transportData->pricesByCurrencyId);
-        $this->createTransportDomains($transport, $transportData->domains);
         $this->imageFacade->uploadImage($transport, $transportData->image->uploadedFiles, null);
         $transport->setPayments($transportData->payments);
         $this->em->flush();
@@ -117,10 +109,7 @@ class TransportFacade
     public function edit(Transport $transport, TransportData $transportData)
     {
         $transport->edit($transportData);
-
         $this->updateTransportPrices($transport, $transportData->pricesByCurrencyId);
-        $this->deleteTransportDomainsByTransport($transport);
-        $this->createTransportDomains($transport, $transportData->domains);
         $this->imageFacade->uploadImage($transport, $transportData->image->uploadedFiles, null);
         $transport->setPayments($transportData->payments);
         $this->em->flush();
@@ -146,32 +135,6 @@ class TransportFacade
         foreach ($paymentsByTransport as $payment) {
             $payment->getTransports()->removeElement($transport);
         }
-        $this->deleteTransportDomainsByTransport($transport);
-        $this->em->flush();
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     * @param array $domainIds
-     */
-    protected function createTransportDomains(Transport $transport, array $domainIds)
-    {
-        foreach ($domainIds as $domainId) {
-            $transportDomain = $this->transportDomainFactory->create($transport, $domainId);
-            $this->em->persist($transportDomain);
-        }
-        $this->em->flush();
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     */
-    protected function deleteTransportDomainsByTransport(Transport $transport)
-    {
-        $transportDomains = $this->getTransportDomainsByTransport($transport);
-        foreach ($transportDomains as $transportDomain) {
-            $this->em->remove($transportDomain);
-        }
         $this->em->flush();
     }
 
@@ -194,15 +157,6 @@ class TransportFacade
         $transports = $this->transportRepository->getAllByDomainId($domainId);
 
         return $this->transportVisibilityCalculation->filterVisible($transports, $visiblePaymentsOnDomain, $domainId);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportDomain[]
-     */
-    public function getTransportDomainsByTransport(Transport $transport)
-    {
-        return $this->transportRepository->getTransportDomainsByTransport($transport);
     }
 
     /**

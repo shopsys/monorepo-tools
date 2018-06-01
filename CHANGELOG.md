@@ -50,11 +50,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - the main entities are responsible for creating and editing its entity domains
         - entity domain factories such as `BrandDomainFactory` were removed
     - entity domains have their own IDs instead of compound primary keys
-    - entities that were modified: `Brand`, `Product`, `Category`, `Payment`
+    - entities that were modified: `Brand`, `Product`, `Category`, `Payment` and `Transport`
     - `BrandEditFormType`, `BrandDetail` and `BrandDetailFactory` were removed as they were no longer necessary
     - `DomainsType` now uses array of booleans indexed by domain IDs instead of array of domain IDs to be consistent with the behavior of `MultidomainType`
     - `CategoryDomain::$hidden` was changed to `CategoryDomain::$enabled` in sake of consistency
-    - `PaymentDomain` is now created even for domains on which the entity should not be visible (to allow for other multi-domain entities and in the sake of consistency)
+    - `PaymentDomain` and `TransportDomain` are now created even for domains on which the entity should not be visible (to allow for other multi-domain entities and in the sake of consistency)
 
 #### Fixed
 - [#132 - Admin: brand edit page: URLs setting rendering](https://github.com/shopsys/shopsys/pull/132):

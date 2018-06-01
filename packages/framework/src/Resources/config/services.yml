@@ -762,9 +762,6 @@ services:
   Shopsys\FrameworkBundle\Model\Transport\TransportFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Transport\TransportFactory
 
-  Shopsys\FrameworkBundle\Model\Transport\TransportDomainFactoryInterface:
-    alias: Shopsys\FrameworkBundle\Model\Transport\TransportDomainFactory
-
   Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Transport\TransportPriceFactory
 

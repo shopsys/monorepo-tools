@@ -29,14 +29,6 @@ class TransportRepository
     }
 
     /**
-     * @return \Doctrine\ORM\EntityRepository
-     */
-    protected function getTransportDomainRepository()
-    {
-        return $this->em->getRepository(TransportDomain::class);
-    }
-
-    /**
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getQueryBuilderForAll()
@@ -118,14 +110,5 @@ class TransportRepository
         }
 
         return $transport;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     * @return \Shopsys\FrameworkBundle\Model\Transport\TransportDomain[]
-     */
-    public function getTransportDomainsByTransport(Transport $transport)
-    {
-        return $this->getTransportDomainRepository()->findBy(['transport' => $transport]);
     }
 }

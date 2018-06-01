@@ -409,7 +409,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
 
         $transportData->vat = $vat;
         $transportData->hidden = $hidden;
-        $transportData->domains = array_keys(array_filter($enabledForDomains));
+        $transportData->enabled = $enabledForDomains;
 
         return new Transport($transportData);
     }
