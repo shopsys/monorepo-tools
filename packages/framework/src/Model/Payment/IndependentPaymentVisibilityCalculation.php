@@ -41,27 +41,10 @@ class IndependentPaymentVisibilityCalculation
             return false;
         }
 
-        if (!$this->isOnDomain($payment, $domainId)) {
+        if (!$payment->isEnabled($domainId)) {
             return false;
         }
 
         return true;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
-     * @param int $domainId
-     * @return bool
-     */
-    private function isOnDomain(Payment $payment, $domainId)
-    {
-        $paymentDomains = $this->paymentRepository->getPaymentDomainsByPayment($payment);
-        foreach ($paymentDomains as $paymentDomain) {
-            if ($paymentDomain->getDomainId() === $domainId) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

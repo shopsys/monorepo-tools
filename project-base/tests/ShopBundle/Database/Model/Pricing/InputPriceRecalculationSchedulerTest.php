@@ -6,6 +6,7 @@ use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculator;
@@ -101,6 +102,8 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         /* @var $paymentFacade \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
         $transportFacade = $this->getContainer()->get(TransportFacade::class);
         /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
+        $paymentDataFactory = $this->getContainer()->get(PaymentDataFactory::class);
+        /* @var $paymentDataFactory \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory */
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 
@@ -117,7 +120,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
             $vatPercent
         );
 
-        $paymentData = new PaymentData();
+        $paymentData = $paymentDataFactory->createDefault();
         $paymentData->name = ['cs' => 'name'];
         $paymentData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
         $paymentData->vat = $vat;
@@ -170,6 +173,8 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         /* @var $paymentFacade \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
         $transportFacade = $this->getContainer()->get(TransportFacade::class);
         /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
+        $paymentDataFactory = $this->getContainer()->get(PaymentDataFactory::class);
+        /* @var $paymentDataFactory \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory */
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
 
@@ -186,7 +191,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
             $vatPercent
         );
 
-        $paymentData = new PaymentData();
+        $paymentData = $paymentDataFactory->createDefault();
         $paymentData->name = ['cs' => 'name'];
         $paymentData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
         $paymentData->vat = $vat;

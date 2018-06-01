@@ -13,6 +13,7 @@ parameters:
             - '*/tests/ShopBundle/Database/EntityExtension/EntityExtensionTest.php'
             - '*/tests/ShopBundle/Database/Model/Order/OrderFacadeTest.php'
             - '*/tests/ShopBundle/Database/Model/Order/Preview/OrderPreviewCalculationTest.php'
+            - '*/tests/ShopBundle/Database/Model/Pricing/InputPriceRecalculationSchedulerTest.php'
             - '*/tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php'
 
         ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:

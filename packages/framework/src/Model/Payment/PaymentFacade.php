@@ -57,11 +57,6 @@ class PaymentFacade
     protected $paymentFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentDomainFactoryInterface
-     */
-    protected $paymentDomainFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface
      */
     protected $paymentPriceFactory;
@@ -76,7 +71,6 @@ class PaymentFacade
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFactoryInterface $paymentFactory
-     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentDomainFactoryInterface $paymentDomainFactory
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface $paymentPriceFactory
      */
     public function __construct(
@@ -89,7 +83,6 @@ class PaymentFacade
         CurrencyFacade $currencyFacade,
         PaymentPriceCalculation $paymentPriceCalculation,
         PaymentFactoryInterface $paymentFactory,
-        PaymentDomainFactoryInterface $paymentDomainFactory,
         PaymentPriceFactoryInterface $paymentPriceFactory
     ) {
         $this->em = $em;
@@ -101,7 +94,6 @@ class PaymentFacade
         $this->currencyFacade = $currencyFacade;
         $this->paymentPriceCalculation = $paymentPriceCalculation;
         $this->paymentFactory = $paymentFactory;
-        $this->paymentDomainFactory = $paymentDomainFactory;
         $this->paymentPriceFactory = $paymentPriceFactory;
     }
 
@@ -115,7 +107,6 @@ class PaymentFacade
         $this->em->persist($payment);
         $this->em->flush();
         $this->updatePaymentPrices($payment, $paymentData->pricesByCurrencyId);
-        $this->createPaymentDomains($payment, $paymentData->domains);
         $this->setAdditionalDataAndFlush($payment, $paymentData);
 
         return $payment;
@@ -129,8 +120,6 @@ class PaymentFacade
     {
         $payment->edit($paymentData);
         $this->updatePaymentPrices($payment, $paymentData->pricesByCurrencyId);
-        $this->deletePaymentDomainsByPayment($payment);
-        $this->createPaymentDomains($payment, $paymentData->domains);
         $this->setAdditionalDataAndFlush($payment, $paymentData);
     }
 
@@ -144,22 +133,12 @@ class PaymentFacade
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
-     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentDomain[]
-     */
-    public function getPaymentDomainsByPayment(Payment $payment)
-    {
-        return $this->paymentRepository->getPaymentDomainsByPayment($payment);
-    }
-
-    /**
      * @param int $id
      */
     public function deleteById($id)
     {
         $payment = $this->getById($id);
         $payment->markAsDeleted();
-        $this->deletePaymentDomainsByPayment($payment);
         $this->em->flush();
     }
 
@@ -192,31 +171,6 @@ class PaymentFacade
         $allPayments = $this->paymentRepository->getAll();
 
         return $this->paymentVisibilityCalculation->filterVisible($allPayments, $domainId);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
-     * @param array $domainIds
-     */
-    protected function createPaymentDomains(Payment $payment, array $domainIds)
-    {
-        foreach ($domainIds as $domainId) {
-            $paymentDomain = $this->paymentDomainFactory->create($payment, $domainId);
-            $this->em->persist($paymentDomain);
-        }
-        $this->em->flush();
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
-     */
-    protected function deletePaymentDomainsByPayment(Payment $payment)
-    {
-        $paymentDomains = $this->getPaymentDomainsByPayment($payment);
-        foreach ($paymentDomains as $paymentDomain) {
-            $this->em->remove($paymentDomain);
-        }
-        $this->em->flush();
     }
 
     /**

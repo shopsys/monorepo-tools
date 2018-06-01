@@ -29,14 +29,6 @@ class PaymentRepository
     }
 
     /**
-     * @return \Doctrine\ORM\EntityRepository
-     */
-    protected function getPaymentDomainRepository()
-    {
-        return $this->em->getRepository(PaymentDomain::class);
-    }
-
-    /**
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getQueryBuilderForAll()
@@ -102,14 +94,5 @@ class PaymentRepository
             ->andWhere('t = :transport')->setParameter('transport', $transport)
             ->getQuery()
             ->getResult();
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
-     * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentDomain[]
-     */
-    public function getPaymentDomainsByPayment(Payment $payment)
-    {
-        return $this->getPaymentDomainRepository()->findBy(['payment' => $payment]);
     }
 }

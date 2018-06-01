@@ -107,6 +107,8 @@ services:
 
   Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory: ~
 
+  Shopsys\FrameworkBundle\Model\Payment\PaymentFactory: ~
+
   Shopsys\FrameworkBundle\Model\Payment\PaymentFacade: ~
 
   Shopsys\FrameworkBundle\Model\Payment\PaymentRepository: ~

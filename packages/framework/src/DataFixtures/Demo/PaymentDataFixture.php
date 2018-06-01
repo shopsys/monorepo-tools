@@ -5,10 +5,10 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 
 class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -21,11 +21,20 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
     private $paymentFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade $paymentFacade
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory
      */
-    public function __construct(PaymentFacade $paymentFacade)
-    {
+    private $paymentDataFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade $paymentFacade
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory $paymentDataFactory
+     */
+    public function __construct(
+        PaymentFacade $paymentFacade,
+        PaymentDataFactory $paymentDataFactory
+    ) {
         $this->paymentFacade = $paymentFacade;
+        $this->paymentDataFactory = $paymentDataFactory;
     }
 
     /**
@@ -33,12 +42,11 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     public function load(ObjectManager $manager)
     {
-        $paymentData = new PaymentData();
+        $paymentData = $this->paymentDataFactory->createDefault();
         $paymentData->name = [
             'cs' => 'Kreditní kartou',
             'en' => 'Credit card',
         ];
-        $paymentData->czkRounding = false;
         $paymentData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 99.95,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 2.95,
@@ -52,27 +60,24 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             'en' => '<b>You have chosen payment by credit card. Please finish it in two business days.</b>',
         ];
         $paymentData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
-        $paymentData->domains = [Domain::FIRST_DOMAIN_ID];
-        $paymentData->hidden = false;
         $this->createPayment(self::PAYMENT_CARD, $paymentData, [
             TransportDataFixture::TRANSPORT_PERSONAL,
             TransportDataFixture::TRANSPORT_PPL,
         ]);
 
+        $paymentData = $this->paymentDataFactory->createDefault();
         $paymentData->name = [
             'cs' => 'Dobírka',
             'en' => 'Cash on delivery',
         ];
-        $paymentData->czkRounding = false;
         $paymentData->pricesByCurrencyId = [
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 49.90,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 1.95,
         ];
-        $paymentData->description = [];
-        $paymentData->instructions = [];
         $paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createPayment(self::PAYMENT_CASH_ON_DELIVERY, $paymentData, [TransportDataFixture::TRANSPORT_CZECH_POST]);
 
+        $paymentData = $this->paymentDataFactory->createDefault();
         $paymentData->name = [
             'cs' => 'Hotově',
             'en' => 'Cash',
@@ -82,7 +87,6 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             $this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 0,
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 0,
         ];
-        $paymentData->description = [];
         $paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createPayment(self::PAYMENT_CASH, $paymentData, [TransportDataFixture::TRANSPORT_PERSONAL]);
     }

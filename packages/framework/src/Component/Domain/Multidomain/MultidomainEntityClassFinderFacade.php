@@ -7,6 +7,7 @@ use Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder;
 use Shopsys\FrameworkBundle\Component\Setting\SettingValue;
 use Shopsys\FrameworkBundle\Model\Category\CategoryDomain;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentDomain;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain;
 use Shopsys\FrameworkBundle\Model\Product\ProductDomain;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
@@ -83,6 +84,7 @@ class MultidomainEntityClassFinderFacade
             BrandDomain::class,
             CategoryDomain::class,
             MailTemplate::class,
+            PaymentDomain::class,
             ProductDomain::class,
         ];
     }

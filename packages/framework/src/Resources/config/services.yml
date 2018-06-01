@@ -711,9 +711,6 @@ services:
   Shopsys\FrameworkBundle\Model\Payment\PaymentFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Payment\PaymentFactory
 
-  Shopsys\FrameworkBundle\Model\Payment\PaymentDomainFactoryInterface:
-    alias: Shopsys\FrameworkBundle\Model\Payment\PaymentDomainFactory
-
   Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Payment\PaymentPriceFactory
 
