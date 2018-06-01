@@ -48,6 +48,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - ProductUrlsBatchLoader and ProductParametersBatchLoader are responsible for loading product data in batches 
   - cron modules use the logger for debug information
   - DailyFeedCronModule is responsible for continuation of the correct feed after waking up
+- [#182 - Cart: flush() is called only if there are really some changes in cart items](https://github.com/shopsys/shopsys/pull/182)
 
 #### Fixed
 - [#291 - Unnecessary SQL queries on category detail in admin](https://github.com/shopsys/shopsys/pull/304):

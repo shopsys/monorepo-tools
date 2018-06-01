@@ -48,8 +48,6 @@ class CartWatcherFacade
     {
         $this->checkNotListableItems($cart);
         $this->checkModifiedPrices($cart);
-
-        $this->em->flush();
     }
 
     /**
@@ -65,6 +63,10 @@ class CartWatcherFacade
                 ['name' => $cartItem->getName()]
             );
         }
+
+        if (count($modifiedItems) > 0) {
+            $this->em->flush($modifiedItems);
+        }
     }
 
     /**
@@ -74,6 +76,7 @@ class CartWatcherFacade
     {
         $notVisibleItems = $this->cartWatcherService->getNotListableItems($cart, $this->currentCustomer);
 
+        $toFlush = [];
         foreach ($notVisibleItems as $cartItem) {
             try {
                 $productName = $cartItem->getName();
@@ -89,8 +92,11 @@ class CartWatcherFacade
 
             $cart->removeItemById($cartItem->getId());
             $this->em->remove($cartItem);
+            $toFlush[] = $cartItem;
         }
 
-        $this->em->flush();
+        if (count($toFlush) > 0) {
+            $this->em->flush($toFlush);
+        }
     }
 }
