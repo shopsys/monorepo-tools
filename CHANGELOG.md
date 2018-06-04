@@ -59,10 +59,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - version of coding-standards package was updated to dev-master in [composer.json](./packages/project-base/composer.json)
     - inline code skips moved to [autoload-easy-coding-standard.yml](./project-base/autoload-easy-coding-standard.yml)
     - replaced php-cs-fixer. phpcs. phpmd for ecs in [build.xml](./project-base/build.xml) and [build-dev.xml](./project-base/build-dev.xml) scripts
-
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
     - updated to Twig 2.4.8
     - all depracated calls has been fixed
+- [#188 - Rebrading of Shopsys Framework](https://github.com/shopsys/shopsys/pull/188/)
+    - old logo was changed for the new Shopsys Framework logo
 
 #### Fixed
 - [#131 - correct rendering of checkbox label](https://github.com/shopsys/shopsys/pull/131):
