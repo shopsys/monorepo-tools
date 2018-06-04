@@ -6,7 +6,6 @@ use Doctrine\Bundle\DoctrineBundle\Command\DoctrineCommand;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\DBAL\Sharding\PoolingShardConnection;
-use Doctrine\ORM\EntityManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\ShopsysFixturesLoader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
