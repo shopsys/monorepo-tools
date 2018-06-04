@@ -18,7 +18,7 @@ class CustomerRegistrationCest
         $me->wantTo('successfully register new customer');
         $me->amOnPage('/');
         $layoutPage->clickOnRegistration();
-        $registrationPage->register('Roman', 'Štěpánek', 'no-reply.16@netdevelo.cz', 'user123', 'user123');
+        $registrationPage->register('Roman', 'Štěpánek', 'no-reply.16@shopsys.com', 'user123', 'user123');
         $me->wait(self::MINIMUM_FORM_SUBMIT_WAIT_TIME);
         $me->see('You have been successfully registered');
         $me->see('Roman Štěpánek');
@@ -29,15 +29,15 @@ class CustomerRegistrationCest
     {
         $me->wantTo('use already used email while registration');
         $me->amOnPage('/registration/');
-        $registrationPage->register('Roman', 'Štěpánek', 'no-reply@netdevelo.cz', 'user123', 'user123');
-        $registrationPage->seeEmailError('Email no-reply@netdevelo.cz is already registered');
+        $registrationPage->register('Roman', 'Štěpánek', 'no-reply@shopsys.com', 'user123', 'user123');
+        $registrationPage->seeEmailError('Email no-reply@shopsys.com is already registered');
     }
 
     public function testPasswordMismatch(RegistrationPage $registrationPage, AcceptanceTester $me)
     {
         $me->wantTo('use mismatching passwords while registration');
         $me->amOnPage('/registration/');
-        $registrationPage->register('Roman', 'Štěpánek', 'no-reply.16@netdevelo.cz', 'user123', 'missmatchingPassword');
+        $registrationPage->register('Roman', 'Štěpánek', 'no-reply.16@shopsys.com', 'user123', 'missmatchingPassword');
         $registrationPage->seePasswordError('Passwords do not match');
     }
 }

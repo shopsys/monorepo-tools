@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         - removed check for php 7.0
         - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binaries
         - inline code skips moved to [autoload-easy-coding-standard.yml](./packages/framework/autoload-easy-coding-standard.yml) 
+- [#188 - Rebrading of Shopsys Framework](https://github.com/shopsys/shopsys/pull/188/)
+    - all occurrences of netdevelo were changed to shopsys
 
 #### Changed
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
@@ -64,6 +66,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - all depracated calls has been fixed
 - [#188 - Rebrading of Shopsys Framework](https://github.com/shopsys/shopsys/pull/188/)
     - old logo was changed for the new Shopsys Framework logo
+    - all occurrences of netdevelo were changed to shopsys
 
 #### Fixed
 - [#131 - correct rendering of checkbox label](https://github.com/shopsys/shopsys/pull/131):

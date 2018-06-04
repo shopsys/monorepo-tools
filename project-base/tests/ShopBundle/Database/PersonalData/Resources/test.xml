@@ -5,7 +5,7 @@
       <firstname><![CDATA[Jaromír]]></firstname>
       <lastname><![CDATA[Jágr]]></lastname>
       <phone><![CDATA[+420987654321]]></phone>
-      <email><![CDATA[no-reply@netdevelo.cz]]></email>
+      <email><![CDATA[no-reply@shopsys.com]]></email>
     </customer_name>
     <customer_addresses>
       <address>
@@ -24,7 +24,7 @@
       </address>
     </customer_addresses>
     <customer_company>
-      <company_name><![CDATA[Netdevelo]]></company_name>
+      <company_name><![CDATA[Shopsys]]></company_name>
       <company_registration_number><![CDATA[123456]]></company_registration_number>
       <company_vat_registration_number><![CDATA[123456]]></company_vat_registration_number>
     </customer_company>
@@ -44,14 +44,14 @@
             <postal_code><![CDATA[65421]]></postal_code>
             <country_code><![CDATA[CZ]]></country_code>
             <company>
-              <company_name><![CDATA[Netdevelo]]></company_name>
+              <company_name><![CDATA[Shopsys]]></company_name>
               <company_registration_number><![CDATA[123456]]></company_registration_number>
               <company_vat_registration_number><![CDATA[123456]]></company_vat_registration_number>
             </company>
             <contact_name>
               <firstname><![CDATA[Adam]]></firstname>
               <lastname><![CDATA[Bořič]]></lastname>
-              <company_name><![CDATA[Netdevelo]]></company_name>
+              <company_name><![CDATA[Shopsys]]></company_name>
             </contact_name>
           </address>
         </order_addresses>
@@ -68,7 +68,7 @@
         <order_other_data>
           <order_status/>
           <phone><![CDATA[+420987654321]]></phone>
-          <email><![CDATA[no-reply@netdevelo.cz]]></email>
+          <email><![CDATA[no-reply@shopsys.com]]></email>
         </order_other_data>
       </order>
     </customer_orders>

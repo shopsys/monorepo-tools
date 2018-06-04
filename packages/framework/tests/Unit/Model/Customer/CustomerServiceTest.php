@@ -37,7 +37,7 @@ class CustomerServiceTest extends TestCase
         $userData = new UserData();
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';
-        $userData->email = 'no-reply@netdevelo.cz';
+        $userData->email = 'no-reply@shopsys.com';
         $userData->password = 'pa55w0rd';
 
         $user = $customerService->create(
@@ -60,7 +60,7 @@ class CustomerServiceTest extends TestCase
         $userData1 = new UserData();
         $userData1->firstName = 'firstName1';
         $userData1->lastName = 'lastName1';
-        $userData1->email = 'no-reply@netdevelo.cz';
+        $userData1->email = 'no-reply@shopsys.com';
         $userData1->password = 'pa55w0rd';
 
         $user1 = $customerService->create(
@@ -76,7 +76,7 @@ class CustomerServiceTest extends TestCase
         $userData2 = new UserData();
         $userData2->firstName = 'firstName2';
         $userData2->lastName = 'lastName2';
-        $userData2->email = 'no-reply2@netdevelo.cz';
+        $userData2->email = 'no-reply2@shopsys.com';
         $userData2->password = 'pa55w0rd';
 
         $user2 = $customerService->create(
@@ -98,7 +98,7 @@ class CustomerServiceTest extends TestCase
         $userData1 = new UserData();
         $userData1->firstName = 'firstName1';
         $userData1->lastName = 'lastName1';
-        $userData1->email = 'no-reply@netdevelo.cz';
+        $userData1->email = 'no-reply@shopsys.com';
         $userData1->password = 'pa55w0rd';
 
         $user1 = $customerService->create(
@@ -113,7 +113,7 @@ class CustomerServiceTest extends TestCase
         $userData2 = new UserData();
         $userData2->firstName = 'firstName2';
         $userData2->lastName = 'lastName2';
-        $userData2->email = 'no-reply@netdevelo.cz';
+        $userData2->email = 'no-reply@shopsys.com';
         $userData2->password = 'pa55w0rd';
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException::class);
@@ -135,7 +135,7 @@ class CustomerServiceTest extends TestCase
         $userData1 = new UserData();
         $userData1->firstName = 'firstName1';
         $userData1->lastName = 'lastName1';
-        $userData1->email = 'no-reply@netdevelo.cz';
+        $userData1->email = 'no-reply@shopsys.com';
         $userData1->password = 'pa55w0rd';
 
         $user1 = $customerService->create(
@@ -150,7 +150,7 @@ class CustomerServiceTest extends TestCase
         $userData2 = new UserData();
         $userData2->firstName = 'firstName2';
         $userData2->lastName = 'lastName2';
-        $userData2->email = 'NO-reply@netdevelo.cz';
+        $userData2->email = 'NO-reply@shopsys.com';
         $userData2->password = 'pa55w0rd';
 
         $this->expectException(\Shopsys\FrameworkBundle\Model\Customer\Exception\DuplicateEmailException::class);

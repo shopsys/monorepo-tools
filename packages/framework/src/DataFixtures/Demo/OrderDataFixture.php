@@ -55,14 +55,14 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
      */
     public function load(ObjectManager $manager)
     {
-        $user = $this->userRepository->findUserByEmailAndDomain('no-reply@netdevelo.cz', 1);
+        $user = $this->userRepository->findUserByEmailAndDomain('no-reply@shopsys.com', 1);
         $orderData = new OrderData();
         $orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
         $orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_DONE);
         $orderData->firstName = 'Jiří';
         $orderData->lastName = 'Ševčík';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420369554147';
         $orderData->street = 'První 1';
         $orderData->city = 'Ostrava';
@@ -87,7 +87,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
         $orderData->firstName = 'Iva';
         $orderData->lastName = 'Jačková';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420367852147';
         $orderData->street = 'Druhá 2';
         $orderData->city = 'Ostrava';
@@ -114,7 +114,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
         $orderData->firstName = 'Jan';
         $orderData->lastName = 'Adamovský';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420725852147';
         $orderData->street = 'Třetí 3';
         $orderData->city = 'Ostrava';
@@ -139,7 +139,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_IN_PROGRESS);
         $orderData->firstName = 'Iveta';
         $orderData->lastName = 'Prvá';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420606952147';
         $orderData->street = 'Čtvrtá 4';
         $orderData->city = 'Ostrava';
@@ -163,7 +163,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_DONE);
         $orderData->firstName = 'Jana';
         $orderData->lastName = 'Janíčková';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420739852148';
         $orderData->street = 'Pátá 55';
         $orderData->city = 'Ostrava';
@@ -189,7 +189,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
         $orderData->firstName = 'Dominik';
         $orderData->lastName = 'Hašek';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420721852152';
         $orderData->street = 'Šestá 39';
         $orderData->city = 'Pardubice';
@@ -218,7 +218,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_CANCELED);
         $orderData->firstName = 'Jiří';
         $orderData->lastName = 'Sovák';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420755872155';
         $orderData->street = 'Sedmá 1488';
         $orderData->city = 'Opava';
@@ -243,7 +243,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_DONE);
         $orderData->firstName = 'Josef';
         $orderData->lastName = 'Somr';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420369852147';
         $orderData->street = 'Osmá 1';
         $orderData->city = 'Praha';
@@ -268,7 +268,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_CANCELED);
         $orderData->firstName = 'Ivan';
         $orderData->lastName = 'Horník';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420755496328';
         $orderData->street = 'Desátá 10';
         $orderData->city = 'Plzeň';
@@ -292,7 +292,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
         $orderData->firstName = 'Adam';
         $orderData->lastName = 'Bořič';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420987654321';
         $orderData->street = 'Cihelní 5';
         $orderData->city = 'Liberec';
@@ -315,7 +315,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_IN_PROGRESS);
         $orderData->firstName = 'Evžen';
         $orderData->lastName = 'Farný';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420456789123';
         $orderData->street = 'Gagarinova 333';
         $orderData->city = 'Hodonín';
@@ -340,7 +340,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_DONE);
         $orderData->firstName = 'Ivana';
         $orderData->lastName = 'Janečková';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420369852147';
         $orderData->street = 'Kalužní 88';
         $orderData->city = 'Lednice';
@@ -364,7 +364,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
         $orderData->firstName = 'Pavel';
         $orderData->lastName = 'Novák';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420605123654';
         $orderData->street = 'Adresní 6';
         $orderData->city = 'Opava';
@@ -388,7 +388,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_DONE);
         $orderData->firstName = 'Pavla';
         $orderData->lastName = 'Adámková';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+4206051836459';
         $orderData->street = 'Výpočetni 16';
         $orderData->city = 'Praha';
@@ -414,7 +414,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_IN_PROGRESS);
         $orderData->firstName = 'Adam';
         $orderData->lastName = 'Žitný';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+4206051836459';
         $orderData->street = 'Přímá 1';
         $orderData->city = 'Plzeň';
@@ -439,7 +439,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
         $orderData->firstName = 'Radim';
         $orderData->lastName = 'Svátek';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420733598748';
         $orderData->street = 'Křivá 11';
         $orderData->city = 'Jablonec';
@@ -469,7 +469,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
         $orderData->firstName = 'Radim';
         $orderData->lastName = 'Svátek';
-        $orderData->email = 'vitek@netdevelo.cz';
+        $orderData->email = 'vitek@shopsys.com';
         $orderData->telephone = '+420733598748';
         $orderData->street = 'Křivá 11';
         $orderData->city = 'Jablonec';
@@ -501,14 +501,14 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
             ]
         );
 
-        $user = $this->userRepository->findUserByEmailAndDomain('vitek@netdevelo.cz', Domain::FIRST_DOMAIN_ID);
+        $user = $this->userRepository->findUserByEmailAndDomain('vitek@shopsys.com', Domain::FIRST_DOMAIN_ID);
         $orderData = new OrderData();
         $orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PPL);
         $orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CARD);
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
         $orderData->firstName = 'Radim';
         $orderData->lastName = 'Svátek';
-        $orderData->email = 'vitek@netdevelo.cz';
+        $orderData->email = 'vitek@shopsys.com';
         $orderData->telephone = '+420733598748';
         $orderData->street = 'Křivá 11';
         $orderData->city = 'Jablonec';

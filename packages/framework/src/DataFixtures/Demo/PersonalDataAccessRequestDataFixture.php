@@ -29,7 +29,7 @@ class PersonalDataAccessRequestDataFixture extends AbstractReferenceFixture
     {
         $personalDataAccessRequestData = new PersonalDataAccessRequestData();
         $personalDataAccessRequestData->domainId = Domain::FIRST_DOMAIN_ID;
-        $personalDataAccessRequestData->email = 'no-reply@netdevelo.cz';
+        $personalDataAccessRequestData->email = 'no-reply@shopsys.com';
         $personalDataAccessRequestData->hash = 'UrSqiLmCK0cdGfBuwRza';
         $personalDataAccessRequestData->type = PersonalDataAccessRequest::TYPE_DISPLAY;
 
@@ -42,7 +42,7 @@ class PersonalDataAccessRequestDataFixture extends AbstractReferenceFixture
 
         $personalDataAccessRequestData = new PersonalDataAccessRequestData();
         $personalDataAccessRequestData->domainId = Domain::FIRST_DOMAIN_ID;
-        $personalDataAccessRequestData->email = 'no-reply@netdevelo.cz';
+        $personalDataAccessRequestData->email = 'no-reply@shopsys.com';
         $personalDataAccessRequestData->hash = 'UrSqiLmCK0cdGfBuwRza';
         $personalDataAccessRequestData->type = PersonalDataAccessRequest::TYPE_EXPORT;
 
