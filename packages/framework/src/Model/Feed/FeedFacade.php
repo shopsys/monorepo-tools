@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Feed;
 
-use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
+use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade;
@@ -40,9 +40,9 @@ class FeedFacade
     protected $standardFeedGenerationConfigs;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
-    protected $entityManagerFacade;
+    protected $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
@@ -55,7 +55,7 @@ class FeedFacade
         Filesystem $filesystem,
         FeedConfigFacade $feedConfigFacade,
         FeedGenerationConfigFactory $feedGenerationConfigFactory,
-        EntityManagerFacade $entityManagerFacade,
+        EntityManagerInterface $em,
         ProductVisibilityFacade $productVisibilityFacade
     ) {
         $this->feedXmlWriter = $feedXmlWriter;
@@ -63,7 +63,7 @@ class FeedFacade
         $this->filesystem = $filesystem;
         $this->feedConfigFacade = $feedConfigFacade;
         $this->standardFeedGenerationConfigs = $feedGenerationConfigFactory->createAllForStandardFeeds();
-        $this->entityManagerFacade = $entityManagerFacade;
+        $this->em = $em;
         $this->productVisibilityFacade = $productVisibilityFacade;
     }
 
@@ -168,7 +168,7 @@ class FeedFacade
             $temporaryFeedFilepath
         );
 
-        $this->entityManagerFacade->clear();
+        $this->em->clear();
 
         if (count($itemsInBatch) === self::BATCH_SIZE) {
             return array_pop($itemsInBatch);

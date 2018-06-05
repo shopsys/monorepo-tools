@@ -67,8 +67,6 @@ services:
 
   Shopsys\FrameworkBundle\Component\Domain\DomainDbFunctionsFacade:
 
-  Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade: ~
-
   Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade: ~
 
   Shopsys\FrameworkBundle\Model\Product\Flag\FlagInlineEdit: ~

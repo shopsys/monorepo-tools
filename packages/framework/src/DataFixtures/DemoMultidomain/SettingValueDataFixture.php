@@ -12,7 +12,9 @@ use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 
 class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    /** @var \Shopsys\FrameworkBundle\Component\Setting\Setting */
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
+     */
     private $setting;
 
     /**
@@ -28,8 +30,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
      */
     public function load(ObjectManager $manager)
     {
-        $this->setting->clearCache();
-
         $termsAndConditionsDomain2 = $this->getReference(ArticleDataFixture::ARTICLE_TERMS_AND_CONDITIONS_2);
         /* @var $termsAndConditionsDomain2 \Shopsys\FrameworkBundle\Model\Article\Article */
         $this->setting->setForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditionsDomain2->getId(), 2);

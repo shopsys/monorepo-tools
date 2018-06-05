@@ -15,7 +15,9 @@ class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
         ShopInfoSettingFacade::SHOP_INFO_EMAIL => 'no-reply@shopsys.cz',
     ];
 
-    /** @var \Shopsys\FrameworkBundle\Component\Setting\Setting */
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
+     */
     private $setting;
 
     /**
@@ -31,10 +33,6 @@ class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        // Any previously executed data fixture using Setting (even transitively) would fill the Setting cache.
-        // As EM identity map is cleared after each fixture we should clear the Setting cache before editing the values.
-        $this->setting->clearCache();
-
         $domainId = 2;
         foreach (self::SETTING_VALUES as $key => $value) {
             $this->setting->setForDomain($key, $value, $domainId);

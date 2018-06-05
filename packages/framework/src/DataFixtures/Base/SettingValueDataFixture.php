@@ -23,27 +23,19 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
     private $hashGenerator;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
-     */
-    private $setting;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Setting\SettingValueFactoryInterface
      */
     protected $settingValueFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\String\HashGenerator $hashGenerator
-     * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      * @param \Shopsys\FrameworkBundle\Component\Setting\SettingValueFactoryInterface $settingValueFactory
      */
     public function __construct(
         HashGenerator $hashGenerator,
-        Setting $setting,
         SettingValueFactoryInterface $settingValueFactory
     ) {
         $this->hashGenerator = $hashGenerator;
-        $this->setting = $setting;
         $this->settingValueFactory = $settingValueFactory;
     }
 
@@ -94,8 +86,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         $manager->persist($this->settingValueFactory->create(Setting::DEFAULT_UNIT, $defaultUnit->getId(), SettingValue::DOMAIN_ID_COMMON));
 
         $manager->flush();
-
-        $this->setting->clearCache();
     }
 
     /**

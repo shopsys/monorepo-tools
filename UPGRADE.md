@@ -28,6 +28,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - `DomainsType` now uses array of booleans indexed by domain IDs instead of array of domain IDs, original behavior can be restored by adding model data transformer `IndexedBooleansToArrayOfIndexesTransformer`
 - `CategoryDomain::$hidden` was changed to `CategoryDomain::$enabled` along with related methods (with negated value)
 - `PaymentDomain` and `TransportDomain` are now created even for domains on which the entity should not be visible, check your custom queries that work with payments or transports
+- instead of using `EntityManagerFacade::clear()` call `clear()` directly on the `EntityManager`
 
 ### [shopsys/project-base]
 - Twig has been updated to version 2.4.8

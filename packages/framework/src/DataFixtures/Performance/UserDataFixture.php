@@ -2,10 +2,10 @@
 
 namespace Shopsys\FrameworkBundle\DataFixtures\Performance;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Faker\Generator as Faker;
 use Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CountryDataFixture;
@@ -26,9 +26,9 @@ class UserDataFixture
     private $userCountPerDomain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
+     * @var \Doctrine\ORM\EntityManagerInterface
      */
-    private $entityManagerFacade;
+    private $em;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
@@ -67,7 +67,7 @@ class UserDataFixture
 
     /**
      * @param int $userCountPerDomain
-     * @param \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
+     * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerEditFacade
@@ -78,7 +78,7 @@ class UserDataFixture
      */
     public function __construct(
         $userCountPerDomain,
-        EntityManagerFacade $entityManagerFacade,
+        EntityManagerInterface $em,
         Domain $domain,
         SqlLoggerFacade $sqlLoggerFacade,
         CustomerFacade $customerEditFacade,
@@ -87,7 +87,7 @@ class UserDataFixture
         PersistentReferenceFacade $persistentReferenceFacade,
         ProgressBarFactory $progressBarFactory
     ) {
-        $this->entityManagerFacade = $entityManagerFacade;
+        $this->em = $em;
         $this->domain = $domain;
         $this->sqlLoggerFacade = $sqlLoggerFacade;
         $this->customerEditFacade = $customerEditFacade;
@@ -121,7 +121,7 @@ class UserDataFixture
                     $isFirstUser = false;
                 }
 
-                $this->entityManagerFacade->clear();
+                $this->em->clear();
             }
         }
 

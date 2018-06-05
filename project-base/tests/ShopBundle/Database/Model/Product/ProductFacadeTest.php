@@ -42,10 +42,7 @@ class ProductFacadeTest extends DatabaseTestCase
 
         $product = $productFacade->create($productData);
 
-        $entityManagerFacade = $this->getEntityManagerFacade();
-        /* @var $entityManagerFacade \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade */
-
-        $entityManagerFacade->clear();
+        $this->getEntityManager()->clear();
 
         $productFromDb = $productFacade->getById($product->getId());
 

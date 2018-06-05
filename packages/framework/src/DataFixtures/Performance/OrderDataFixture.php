@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Faker\Generator as Faker;
 use Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
 use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\OrderStatusDataFixture;
@@ -57,11 +56,6 @@ class OrderDataFixture
     private $em;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
-     */
-    private $entityManagerFacade;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade
      */
     private $sqlLoggerFacade;
@@ -105,7 +99,6 @@ class OrderDataFixture
      * @param int $orderTotalCount
      * @param int $orderItemCountPerOrder
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
      * @param \Faker\Generator $faker
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
@@ -119,7 +112,6 @@ class OrderDataFixture
         $orderTotalCount,
         $orderItemCountPerOrder,
         EntityManagerInterface $em,
-        EntityManagerFacade $entityManagerFacade,
         SqlLoggerFacade $sqlLoggerFacade,
         Faker $faker,
         PersistentReferenceFacade $persistentReferenceFacade,
@@ -133,7 +125,6 @@ class OrderDataFixture
         $this->orderItemCountPerOrder = $orderItemCountPerOrder;
         $this->performanceProductIds = [];
         $this->em = $em;
-        $this->entityManagerFacade = $entityManagerFacade;
         $this->sqlLoggerFacade = $sqlLoggerFacade;
         $this->faker = $faker;
         $this->persistentReferenceFacade = $persistentReferenceFacade;
@@ -163,7 +154,7 @@ class OrderDataFixture
             $progressBar->advance();
 
             if ($orderIndex % self::BATCH_SIZE === 0) {
-                $this->entityManagerFacade->clear();
+                $this->em->clear();
             }
         }
 

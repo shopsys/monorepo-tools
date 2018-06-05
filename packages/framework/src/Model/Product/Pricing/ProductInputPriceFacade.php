@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\FrameworkBundle\Component\Domain\DomainFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
@@ -20,11 +19,6 @@ class ProductInputPriceFacade
      * @var \Doctrine\ORM\EntityManagerInterface
      */
     protected $em;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
-     */
-    protected $entityManagerFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceService
@@ -73,7 +67,6 @@ class ProductInputPriceFacade
 
     public function __construct(
         EntityManagerInterface $em,
-        EntityManagerFacade $entityManagerFacade,
         ProductInputPriceService $productInputPriceService,
         CurrencyFacade $currencyFacade,
         PricingSetting $pricingSetting,
@@ -84,7 +77,6 @@ class ProductInputPriceFacade
         ProductService $productService
     ) {
         $this->em = $em;
-        $this->entityManagerFacade = $entityManagerFacade;
         $this->productInputPriceService = $productInputPriceService;
         $this->currencyFacade = $currencyFacade;
         $this->pricingSetting = $pricingSetting;
@@ -142,7 +134,7 @@ class ProductInputPriceFacade
             $row = $this->productRowsIterator->next();
             if ($row === false) {
                 $this->em->flush();
-                $this->entityManagerFacade->clear();
+                $this->em->clear();
 
                 return false;
             }
@@ -154,7 +146,7 @@ class ProductInputPriceFacade
         }
 
         $this->em->flush();
-        $this->entityManagerFacade->clear();
+        $this->em->clear();
 
         return true;
     }

@@ -10,7 +10,9 @@ use Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade;
 
 class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
 {
-    /** @var \Shopsys\FrameworkBundle\Component\Setting\Setting */
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
+     */
     private $setting;
 
     const SETTING_VALUES = [
@@ -32,10 +34,6 @@ class SettingValueShopInfoDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        // Any previously executed data fixture using Setting (even transitively) would fill the Setting cache.
-        // As EM identity map is cleared after each fixture we should clear the Setting cache before editing the values.
-        $this->setting->clearCache();
-
         foreach (self::SETTING_VALUES as $key => $value) {
             $this->setting->setForDomain($key, $value, Domain::FIRST_DOMAIN_ID);
         }

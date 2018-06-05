@@ -39,6 +39,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         -scrollbar normalization was disabled for sortable components 
 - [#261 - Sending personal data to Heureka can be disabled](https://github.com/shopsys/shopsys/pull/261)
     - the last step of cart contains opt-out checkbox to disable sending personal data to Heureka (if Heureka Verified by Customers is enabled on the domain)
+- [#206 clearing Setting's cache is now done via DoctrineEventListener](https://github.com/shopsys/shopsys/pull/206)
+    - `EntityManagerFacade` was removed
+    - Doctrine identity map can be cleared via `EntityManager::clear()` directly
 
 #### Changed
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):

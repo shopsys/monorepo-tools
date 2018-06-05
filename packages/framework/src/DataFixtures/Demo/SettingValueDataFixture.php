@@ -29,10 +29,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
      */
     public function load(ObjectManager $manager)
     {
-        // Any previously executed data fixture using Setting (even transitively) would fill the Setting cache.
-        // As EM identity map is cleared after each fixture we should clear the Setting cache before editing the values.
-        $this->setting->clearCache();
-
         $termsAndConditions = $this->getReference(ArticleDataFixture::ARTICLE_TERMS_AND_CONDITIONS_1);
         $privacyPolicy = $this->getReference(ArticleDataFixture::ARTICLE_PRIVACY_POLICY_1);
         /* @var $termsAndConditions \Shopsys\FrameworkBundle\Model\Article\Article */

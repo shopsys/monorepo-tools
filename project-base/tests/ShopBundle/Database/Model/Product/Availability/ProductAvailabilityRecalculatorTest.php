@@ -32,7 +32,7 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
         $productFacade->edit($productId, $productData);
         $productAvailabilityRecalculator->runAllScheduledRecalculations();
         $this->getEntityManager()->flush();
-        $this->getEntityManagerFacade()->clear();
+        $this->getEntityManager()->clear();
 
         $productFromDb = $productFacade->getById($productId);
 
@@ -63,7 +63,7 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
         $productFacade->edit($productId, $productData);
         $productAvailabilityRecalculator->runAllScheduledRecalculations();
         $this->getEntityManager()->flush();
-        $this->getEntityManagerFacade()->clear();
+        $this->getEntityManager()->clear();
 
         $productFromDb = $productFacade->getById($productId);
 
@@ -93,7 +93,7 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
         $productFacade->edit($productId, $productData);
         $productAvailabilityRecalculator->runAllScheduledRecalculations();
         $this->getEntityManager()->flush();
-        $this->getEntityManagerFacade()->clear();
+        $this->getEntityManager()->clear();
 
         $productFromDb = $productFacade->getById($productId);
 

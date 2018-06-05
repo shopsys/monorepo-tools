@@ -4,7 +4,6 @@ namespace Tests\FrameworkBundle\Unit\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityCalculation;
@@ -25,7 +24,6 @@ class ProductAvailabilityRecalculatorTest extends TestCase
             ->disableOriginalConstructor()
             ->setMethods(['clear', 'flush'])
             ->getMock();
-        $entityManagerFacadeMock = $this->createMock(EntityManagerFacade::class);
         $productAvailabilityCalculationMock = $this->getMockBuilder(ProductAvailabilityCalculation::class)
             ->disableOriginalConstructor()
             ->setMethods(['calculateAvailability'])
@@ -45,7 +43,6 @@ class ProductAvailabilityRecalculatorTest extends TestCase
 
         $productAvailabilityRecalculator = new ProductAvailabilityRecalculator(
             $emMock,
-            $entityManagerFacadeMock,
             $productAvailabilityRecalculationSchedulerMock,
             $productAvailabilityCalculationMock
         );
@@ -72,7 +69,6 @@ class ProductAvailabilityRecalculatorTest extends TestCase
             ->disableOriginalConstructor()
             ->setMethods(['flush'])
             ->getMock();
-        $entityManagerFacadeMock = $this->createMock(EntityManagerFacade::class);
         $productAvailabilityRecalculationSchedulerMock = $this->getMockBuilder(ProductAvailabilityRecalculationScheduler::class)
             ->disableOriginalConstructor()
             ->setMethods(['getProductsForImmediateRecalculation'])
@@ -92,7 +88,6 @@ class ProductAvailabilityRecalculatorTest extends TestCase
 
         $productAvailabilityRecalculator = new ProductAvailabilityRecalculator(
             $emMock,
-            $entityManagerFacadeMock,
             $productAvailabilityRecalculationSchedulerMock,
             $productAvailabilityCalculationMock
         );

@@ -290,6 +290,9 @@ services:
 
   Shopsys\FrameworkBundle\Component\Setting\Setting: ~
 
+  Shopsys\FrameworkBundle\Component\Setting\ClearSettingsCacheDoctrineSubscriber:
+    tags: ['doctrine.event_subscriber']
+
   Shopsys\FrameworkBundle\Component\System\System: ~
 
   Shopsys\FrameworkBundle\Component\Sitemap\SitemapDumperFactory:

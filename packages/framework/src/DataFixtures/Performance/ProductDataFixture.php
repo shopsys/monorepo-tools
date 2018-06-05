@@ -7,7 +7,6 @@ use Faker\Generator as Faker;
 use Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
-use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader;
@@ -36,11 +35,6 @@ class ProductDataFixture
      * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
-     */
-    private $entityManagerFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
@@ -120,7 +114,6 @@ class ProductDataFixture
     /**
      * @param int $productTotalCount
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade $entityManagerFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
@@ -137,7 +130,6 @@ class ProductDataFixture
     public function __construct(
         $productTotalCount,
         EntityManagerInterface $em,
-        EntityManagerFacade $entityManagerFacade,
         ProductFacade $productFacade,
         ProductDataFixtureLoader $productDataFixtureLoader,
         SqlLoggerFacade $sqlLoggerFacade,
@@ -153,7 +145,6 @@ class ProductDataFixture
     ) {
         $this->productTotalCount = $productTotalCount;
         $this->em = $em;
-        $this->entityManagerFacade = $entityManagerFacade;
         $this->productFacade = $productFacade;
         $this->productDataFixtureLoader = $productDataFixtureLoader;
         $this->sqlLoggerFacade = $sqlLoggerFacade;
@@ -221,7 +212,7 @@ class ProductDataFixture
 
         $progressBar->finish();
 
-        $this->entityManagerFacade->clear();
+        $this->em->clear();
         $this->sqlLoggerFacade->reenableLogging();
     }
 
@@ -296,7 +287,7 @@ class ProductDataFixture
     {
         $this->productAvailabilityRecalculationScheduler->cleanScheduleForImmediateRecalculation();
         $this->productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
-        $this->entityManagerFacade->clear();
+        $this->em->clear();
         gc_collect_cycles();
     }
 

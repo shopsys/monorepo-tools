@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
@@ -15,11 +14,6 @@ class ProductAvailabilityRecalculator
      * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
-     */
-    private $entityManagerFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
@@ -38,12 +32,10 @@ class ProductAvailabilityRecalculator
 
     public function __construct(
         EntityManagerInterface $em,
-        EntityManagerFacade $entityManagerFacade,
         ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
         ProductAvailabilityCalculation $productAvailabilityCalculation
     ) {
         $this->em = $em;
-        $this->entityManagerFacade = $entityManagerFacade;
         $this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
         $this->productAvailabilityCalculation = $productAvailabilityCalculation;
     }
@@ -67,14 +59,14 @@ class ProductAvailabilityRecalculator
         for ($count = 0; $count < self::BATCH_SIZE; $count++) {
             $row = $this->productRowsIterator->next();
             if ($row === false) {
-                $this->entityManagerFacade->clear();
+                $this->em->clear();
 
                 return false;
             }
             $this->recalculateProductAvailability($row[0]);
         }
 
-        $this->entityManagerFacade->clear();
+        $this->em->clear();
 
         return true;
     }

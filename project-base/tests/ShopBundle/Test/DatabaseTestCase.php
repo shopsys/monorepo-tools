@@ -2,24 +2,14 @@
 
 namespace Tests\ShopBundle\Test;
 
-use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
-
 abstract class DatabaseTestCase extends FunctionalTestCase
 {
     /**
-     * @return \Doctrine\ORM\EntityManager
+     * @return \Doctrine\ORM\EntityManagerInterface
      */
     protected function getEntityManager()
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
-     */
-    protected function getEntityManagerFacade()
-    {
-        return $this->getContainer()->get(EntityManagerFacade::class);
     }
 
     protected function setUp()

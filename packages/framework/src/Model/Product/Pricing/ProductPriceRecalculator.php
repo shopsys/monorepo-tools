@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductService;
@@ -17,11 +16,6 @@ class ProductPriceRecalculator
      * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $em;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityManagerFacade
-     */
-    private $entityManagerFacade;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation
@@ -60,7 +54,6 @@ class ProductPriceRecalculator
 
     public function __construct(
         EntityManagerInterface $em,
-        EntityManagerFacade $entityManagerFacade,
         ProductPriceCalculation $productPriceCalculation,
         ProductCalculatedPriceRepository $productCalculatedPriceRepository,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
@@ -68,7 +61,6 @@ class ProductPriceRecalculator
         ProductService $productService
     ) {
         $this->em = $em;
-        $this->entityManagerFacade = $entityManagerFacade;
         $this->productPriceCalculation = $productPriceCalculation;
         $this->productCalculatedPriceRepository = $productCalculatedPriceRepository;
         $this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
@@ -89,14 +81,14 @@ class ProductPriceRecalculator
             $row = $this->productRowsIterator->next();
             if ($row === false) {
                 $this->clearCache();
-                $this->entityManagerFacade->clear();
+                $this->em->clear();
 
                 return false;
             }
             $this->recalculateProductPrices($row[0]);
         }
         $this->clearCache();
-        $this->entityManagerFacade->clear();
+        $this->em->clear();
 
         return true;
     }
