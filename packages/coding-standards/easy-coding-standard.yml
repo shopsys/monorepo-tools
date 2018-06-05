@@ -1,6 +1,6 @@
-includes:
+imports:
     # pick set from https://github.com/Symplify/EasyCodingStandard/tree/master/config
     # for PSR-2 description, see: http://www.php-fig.org/psr/psr-2/
-    - vendor/symplify/easy-coding-standard/config/psr2.neon
+    - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/psr2.yml' }
     # shopsys coding standards
-    - shopsys-coding-standard.neon
+    - { resource: 'shopsys-coding-standard.yml' }

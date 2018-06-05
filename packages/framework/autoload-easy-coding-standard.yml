@@ -1,0 +1,29 @@
+imports:
+    - { resource: '../**/coding-standards/easy-coding-standard.yml' }
+
+parameters:
+    skip:
+        ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
+            - '*/src/DataFixtures/*/*DataFixture.php'
+            - '*/src/Form/Admin/*/*FormType.php'
+            - '*/src/Model/Order/Preview/OrderPreviewCalculation.php'
+            - '*/src/Model/Product/ProductVisibilityRepository.php'
+            - '*/src/Controller/Admin/AdministratorController.php'
+            - '*/tests/Unit/Model/Customer/CustomerServiceTest.php'
+
+        ObjectCalisthenics\Sniffs\Metrics\PropertyPerClassLimitSniff:
+            - '*/src/Model/Order/Order.php'
+            - '*/src/Model/Order/OrderData.php'
+            - '*/src/Model/Product/Product.php'
+            - '*/src/Model/Product/ProductData.php'
+
+        ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:
+            - '*/src/Component/Grid/Grid.php'
+            - '*/src/DataFixtures/Demo/OrderDataFixture.php'
+            - '*/src/Model/Order/Order.php'
+            - '*/src/Model/Product/Product.php'
+            - '*/src/Model/Product/ProductRepository.php'
+
+        PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedWhile:
+            - '*/src/Model/Product/Availability/ProductAvailabilityRecalculator.php'
+            - '*/src/Model/Product/Pricing/ProductPriceRecalculator.php'

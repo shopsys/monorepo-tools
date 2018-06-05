@@ -5,9 +5,6 @@ namespace Shopsys\FrameworkBundle\Model\Product;
 use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
 use Shopsys\FrameworkBundle\Form\UrlListData;
 
-/**
- * @SuppressWarnings(PHPMD.ExcessivePublicCount)
- */
 class ProductData
 {
     /**

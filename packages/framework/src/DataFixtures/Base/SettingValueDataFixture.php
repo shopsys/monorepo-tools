@@ -49,7 +49,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function load(ObjectManager $manager)
     {
@@ -74,7 +73,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
             </p>
         ';
 
-        // @codingStandardsIgnoreStart
         $manager->persist($this->settingValueFactory->create(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON));
         $manager->persist($this->settingValueFactory->create(PricingSetting::ROUNDING_TYPE, PricingSetting::ROUNDING_TYPE_INTEGER, SettingValue::DOMAIN_ID_COMMON));
         $manager->persist($this->settingValueFactory->create(Vat::SETTING_DEFAULT_VAT, $vat->getId(), SettingValue::DOMAIN_ID_COMMON));
@@ -94,7 +92,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         $manager->persist($this->settingValueFactory->create(Setting::DOMAIN_DATA_CREATED, true, Domain::FIRST_DOMAIN_ID));
         $manager->persist($this->settingValueFactory->create(Setting::FEED_HASH, $this->hashGenerator->generateHash(10), SettingValue::DOMAIN_ID_COMMON));
         $manager->persist($this->settingValueFactory->create(Setting::DEFAULT_UNIT, $defaultUnit->getId(), SettingValue::DOMAIN_ID_COMMON));
-        // @codingStandardsIgnoreStop
 
         $manager->flush();
 

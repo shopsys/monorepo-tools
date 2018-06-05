@@ -8,15 +8,11 @@ use Tests\ShopBundle\Test\Codeception\Helper\SymfonyHelper;
 
 class Db extends BaseDb
 {
-    // @codingStandardsIgnoreStart
     /**
      * Revert database to the original state
-     *
-     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
     public function _afterSuite()
     {
-        // @codingStandardsIgnoreEnd
         $this->cleanup();
         $this->_loadDump();
     }

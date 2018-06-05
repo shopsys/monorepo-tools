@@ -148,9 +148,6 @@ class OrderController extends FrontBaseController
         $this->newsletterFacade = $newsletterFacade;
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     public function indexAction()
     {
         $flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.front');

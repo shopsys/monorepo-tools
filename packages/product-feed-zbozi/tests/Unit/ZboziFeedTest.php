@@ -78,9 +78,6 @@ class ZboziFeedTest extends TestCase
         return $zboziProductDomainFacadeMock;
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     private function initTestData()
     {
         $this->productsIds = [self::PRODUCT_ID_FIRST, self::PRODUCT_ID_SECOND, self::PRODUCT_ID_THIRD];
@@ -251,7 +248,6 @@ class ZboziFeedTest extends TestCase
 
     /**
      * @return array
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     private function getFeedItemsData()
     {

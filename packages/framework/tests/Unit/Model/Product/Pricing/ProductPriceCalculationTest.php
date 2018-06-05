@@ -48,7 +48,6 @@ class ProductPriceCalculationTest extends TestCase
      * @param int $inputPriceType
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $variants
      * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     private function getProductPriceCalculationWithInputPriceTypeAndVariants($inputPriceType, $variants)
     {

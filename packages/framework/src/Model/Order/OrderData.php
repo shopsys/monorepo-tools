@@ -6,9 +6,6 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentData;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportData;
 
-/**
- * @SuppressWarnings(PHPMD.ExcessivePublicCount)
- */
 class OrderData
 {
     const NEW_ITEM_PREFIX = 'new_';

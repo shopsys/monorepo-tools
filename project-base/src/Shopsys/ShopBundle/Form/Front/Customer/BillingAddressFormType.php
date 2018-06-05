@@ -31,7 +31,6 @@ class BillingAddressFormType extends AbstractType
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

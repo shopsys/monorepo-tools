@@ -63,7 +63,6 @@ class OrderPreviewCalculation
      * @param \Shopsys\FrameworkBundle\Model\Customer\User|null $user
      * @param float|null $promoCodeDiscountPercent
      * @return \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreview
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function calculatePreview(
         Currency $currency,

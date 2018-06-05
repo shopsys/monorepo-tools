@@ -8,9 +8,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
 use Twig_Environment;
 
-/**
- * @SuppressWarnings(PHPMD.ExcessivePublicCount)
- */
 class Grid
 {
     const GET_PARAMETER = 'g';

@@ -16,8 +16,7 @@ class CronTimeResolver
         $hour = (int)$dateTime->format('G');
         $minute = (int)$dateTime->format('i');
 
-        return
-            $this->isMatchWithTimeString($hour, $cronTime->getTimeHours()) &&
+        return $this->isMatchWithTimeString($hour, $cronTime->getTimeHours()) &&
             $this->isMatchWithTimeString($minute, $cronTime->getTimeMinutes());
     }
 

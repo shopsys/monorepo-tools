@@ -17,9 +17,6 @@ use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListOrderingModeService
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\FrameworkBundle\Model\Product\Search\ProductSearchRepository;
 
-/**
- * @SuppressWarnings(PHPMD.ExcessivePublicCount)
- */
 class ProductRepository
 {
     /**

@@ -1,0 +1,23 @@
+imports:
+    - { resource: '../packages/coding-standards/easy-coding-standard.yml' }
+
+parameters:
+    exclude_files:
+        - '*tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
+    skip:
+        ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
+            - '*/src/Shopsys/ShopBundle/Controller/Front/OrderController.php'
+            - '*/src/Shopsys/ShopBundle/Form/Front/Customer/BillingAddressFormType.php'
+            - '*/src/Shopsys/ShopBundle/Form/Front/Customer/DeliveryAddressFormType.php'
+            - '*/src/Shopsys/ShopBundle/Form/Front/Order/PersonalInfoFormType.php'
+            - '*/tests/ShopBundle/Database/EntityExtension/EntityExtensionTest.php'
+            - '*/tests/ShopBundle/Database/Model/Order/OrderFacadeTest.php'
+            - '*/tests/ShopBundle/Database/Model/Order/Preview/OrderPreviewCalculationTest.php'
+            - '*/tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php'
+
+        ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:
+            - '*/tests/ShopBundle/Database/Model/Product/ProductVisibilityRepositoryTest.php'
+
+        Shopsys\CodingStandards\Sniffs\ValidVariableNameSniff:
+            - '*/tests/ShopBundle/Database/EntityExtension/EntityExtensionTest.php'
+            - '*/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'

@@ -9,14 +9,11 @@ use Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver;
 
 class DomainHelper extends Module
 {
-    // @codingStandardsIgnoreStart
     /**
      * {@inheritDoc}
-     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
     public function _before(TestInterface $test)
     {
-        // @codingStandardsIgnoreEnd
         $webDriver = $this->getModule(StrictWebDriver::class);
         /* @var $webDriver \Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver */
         $symfonyHelper = $this->getModule(SymfonyHelper::class);

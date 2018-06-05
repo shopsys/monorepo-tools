@@ -159,7 +159,6 @@ class ProductVisibilityRepository
 
     /**
      * @param bool $onlyMarkedProducts
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     protected function calculateIndependentVisibility($onlyMarkedProducts)
     {

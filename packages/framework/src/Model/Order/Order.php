@@ -16,7 +16,6 @@ use Shopsys\FrameworkBundle\Model\Pricing\Price;
 /**
  * @ORM\Table(name="orders")
  * @ORM\Entity
- * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
 class Order
 {

@@ -14,9 +14,7 @@ class PermanentPhpFileCache extends PhpFileCache
         $fileName = $this->getFilename($id);
 
         // note: error suppression is still faster than `file_exists`, `is_file` and `is_readable`
-        // @codingStandardsIgnoreStart
         $value = @include $fileName;
-        // @codingStandardsIgnoreEnd
 
         return unserialize($value);
     }

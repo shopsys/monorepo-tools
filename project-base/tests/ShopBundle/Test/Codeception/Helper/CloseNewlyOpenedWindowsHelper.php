@@ -10,14 +10,11 @@ use Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver;
 
 class CloseNewlyOpenedWindowsHelper extends Module
 {
-    // @codingStandardsIgnoreStart
     /**
      * {@inheritDoc}
-     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
     public function _after(TestInterface $test)
     {
-        // @codingStandardsIgnoreEnd
         $webDriver = $this->getModule(StrictWebDriver::class);
         /* @var $webDriver \Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver */
 

@@ -19,8 +19,6 @@ use Tests\ShopBundle\Test\Codeception\_generated\AcceptanceTesterActions;
  * @method void comment($description)
  * @method void haveFriend($name, $actorClass = null)
  * @method \Codeception\Scenario getScenario()
- *
- * @SuppressWarnings(PHPMD)
  */
 class AcceptanceTester extends Actor
 {

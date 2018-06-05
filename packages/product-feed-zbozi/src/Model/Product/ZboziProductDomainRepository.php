@@ -4,9 +4,6 @@ namespace Shopsys\ProductFeed\ZboziBundle\Model\Product;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * @SuppressWarnings(PHPMD.ExcessivePublicCount)
- */
 class ZboziProductDomainRepository
 {
     /**

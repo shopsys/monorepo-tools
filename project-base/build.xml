@@ -21,16 +21,9 @@
     <property name="path.npm.executable" value="npm"/>
     <property name="path.pg_dump.executable" value="pg_dump"/>
     <property name="path.php.executable" value="php"/>
-    <property name="path.phpcbf.executable" value="${path.bin}/phpcbf"/>
-    <property name="path.phpcs.executable" value="${path.bin}/phpcs"/>
-    <property name="path.phpcs.ruleset" value="${path.vendor}/shopsys/coding-standards/rulesetCS.xml"/>
-    <property name="path.phpcs.ignored" value="_generated"/>
-    <property name="path.phpcs-fixer.executable" value="${path.bin}/php-cs-fixer"/>
-    <property name="path.phpcs-fixer.configuration" value="${path.build}/phpcs-fixer.php_cs"/>
+    <property name="path.ecs.executable" value="${path.bin}/ecs"/>
+    <property name="path.ecs.configuration" value="${path.vendor}/shopsys/coding-standards/easy-coding-standard.yml"/>
     <property name="path.phplint.executable" value="${path.bin}/parallel-lint"/>
-    <property name="path.phpmd.executable" value="${path.bin}/phpmd"/>
-    <property name="path.phpmd.ignored" value="_generated"/>
-    <property name="path.phpmd.ruleset" value="${path.vendor}/shopsys/coding-standards/rulesetMD.xml"/>
     <property name="path.phpstan.config" value="${path.root}/phpstan.neon"/>
     <property name="path.phpstan.executable" value="${path.bin}/phpstan"/>
     <property name="path.phpunit.executable" value="${path.bin}/phpunit"/>

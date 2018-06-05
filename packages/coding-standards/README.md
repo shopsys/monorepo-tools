@@ -25,22 +25,23 @@ php composer require shopsys/coding-standards
 
 ## Usage
 
-Create `custom-coding-standard.neon` config file in your project which includes predefined rulesets. 
-You can also [customize the rules](./UPGRADE.md#version-4.0-and-higher) 
+Create `custom-coding-standard.yml` config file in your project which includes predefined rulesets. 
+You can also [customize the rules](./UPGRADE.md) 
 and even add your own sniffs and fixers in the config.
 
-```neon
-#custom-coding-standard.neon
-includes:
-    - vendor/symplify/easy-coding-standard/config/psr2.neon
-    - vendor/shopsys/coding-standards/shopsys-coding-standard.neon
+```yaml
+#custom-coding-standard.yml
+imports:
+   - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/psr2.yml' }
+   - { resource: '%vendor_dir%/shopsys/coding-standards/shopsys-coding-standard.yml' }
+
 ```
 
 In terminal, run following commands:
 
 ```bash
 php vendor/bin/parallel-lint /path/to/project
-php vendor/bin/ecs check /path/to/project --config=/path/to/project/custom-coding-standard.neon
+php vendor/bin/ecs check /path/to/project --config=/path/to/project/custom-coding-standard.yml
 ```
 
 ## Custom rules

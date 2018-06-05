@@ -142,7 +142,6 @@ class RouteConfigCustomization
     }
 
     /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @param \Shopsys\HttpSmokeTesting\RouteConfigCustomizer $routeConfigCustomizer
      */
     private function configureAdminRoutes(RouteConfigCustomizer $routeConfigCustomizer)
@@ -239,7 +238,6 @@ class RouteConfigCustomization
     }
 
     /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @param \Shopsys\HttpSmokeTesting\RouteConfigCustomizer $routeConfigCustomizer
      */
     private function configureFrontendRoutes(RouteConfigCustomizer $routeConfigCustomizer)

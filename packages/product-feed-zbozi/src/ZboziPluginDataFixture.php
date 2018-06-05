@@ -26,9 +26,6 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
         $this->zboziProductDomainFacade = $zboziProductDomainFacade;
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     public function load()
     {
         $firstZboziProductDomainData = new ZboziProductDomainData();

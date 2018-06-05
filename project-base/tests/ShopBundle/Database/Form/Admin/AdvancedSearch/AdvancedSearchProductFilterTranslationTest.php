@@ -13,9 +13,7 @@ class AdvancedSearchProductFilterTranslationTest extends FunctionalTestCase
         $advancedSearchConfig = $this->getContainer()->get(ProductAdvancedSearchConfig::class);
         /* @var $advancedSearchConfig \Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig */
         $advancedSearchProductFilterTranslation = $this->getContainer()->get(AdvancedSearchProductFilterTranslation::class);
-        // @codingStandardsIgnoreStart
         /* @var $advancedSearchProductFilterTranslation \Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation */
-        // @codingStandardsIgnoreEnd
 
         foreach ($advancedSearchConfig->getAllFilters() as $filter) {
             $this->assertNotEmpty($advancedSearchProductFilterTranslation->translateFilterName($filter->getName()));

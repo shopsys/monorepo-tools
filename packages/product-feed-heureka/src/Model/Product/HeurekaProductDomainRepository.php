@@ -4,9 +4,6 @@ namespace Shopsys\ProductFeed\HeurekaBundle\Model\Product;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * @SuppressWarnings(PHPMD.ExcessivePublicCount)
- */
 class HeurekaProductDomainRepository
 {
     /**

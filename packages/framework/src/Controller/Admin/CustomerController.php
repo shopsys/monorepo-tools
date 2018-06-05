@@ -154,7 +154,6 @@ class CustomerController extends AdminBaseController
     /**
      * @Route("/customer/list/")
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function listAction(Request $request)
     {

@@ -100,7 +100,6 @@ class ZboziFeedConfig implements FeedConfigInterface
     /**
      * @param \Shopsys\ProductFeed\StandardFeedItemInterface $item
      * @return bool
-     * @SuppressWarnings(PHPMD.UnusedPrivateMethod) method is used through array_filter
      */
     private function isItemSellable(StandardFeedItemInterface $item)
     {

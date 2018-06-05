@@ -21,9 +21,6 @@ use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class OrderFacadeTest extends DatabaseTestCase
 {
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     public function testCreate()
     {
         $cartFacade = $this->getContainer()->get(CartFacade::class);

@@ -8,8 +8,6 @@ use Shopsys\FrameworkBundle\Component\Translation\Translator;
  * @param string|null $domain
  * @param string|null $locale
  * @return string
- *
- * @SuppressWarnings(PHPMD.ShortMethodName)
  */
 function t($id, array $parameters = [], $domain = null, $locale = null)
 {
@@ -23,8 +21,6 @@ function t($id, array $parameters = [], $domain = null, $locale = null)
  * @param string|null $domain
  * @param string|null $locale
  * @return string
- *
- * @SuppressWarnings(PHPMD.ShortMethodName)
  */
 function tc($id, $number, array $parameters = [], $domain = null, $locale = null)
 {

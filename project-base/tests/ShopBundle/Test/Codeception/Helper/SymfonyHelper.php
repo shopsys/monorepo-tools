@@ -15,28 +15,22 @@ class SymfonyHelper extends Module
      */
     private $kernel;
 
-    // @codingStandardsIgnoreStart
     /**
      * {@inheritDoc}
-     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
     public function _initialize()
     {
-        // @codingStandardsIgnoreEnd
         require_once Configuration::projectDir() . '/../app/autoload.php';
 
         $this->kernel = new AppKernel(EnvironmentType::TEST, EnvironmentType::isDebug(EnvironmentType::TEST));
         $this->kernel->boot();
     }
 
-    // @codingStandardsIgnoreStart
     /**
      * {@inheritDoc}
-     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
     public function _before(TestInterface $test)
     {
-        // @codingStandardsIgnoreEnd
         $this->kernel->boot();
     }
 
