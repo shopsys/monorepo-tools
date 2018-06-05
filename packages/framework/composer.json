@@ -93,7 +93,7 @@
         "symfony-cmf/routing-bundle": "^2.0.3",
         "timwhitlock/jparser": "dev-get-rid-of-import#c37f4c6",
         "twig/extensions": "^1.5.1",
-        "twig/twig": "^1.35.3"
+        "twig/twig": "^2.4.8"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.7",

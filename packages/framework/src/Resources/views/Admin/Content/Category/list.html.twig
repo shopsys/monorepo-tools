@@ -1,4 +1,5 @@
 {% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+{% import _self as self %}
 
 {% block title %}- {{ 'Categories'|trans }}{% endblock %}
 {% block h1 %}{{ 'Categories'|trans }}{% endblock %}
@@ -13,6 +14,7 @@
     {{ render(controller('ShopsysFrameworkBundle:Admin/Category:listDomainTabs')) }}
 
     {% macro categoryTreeItem(categoryDetails, isFirstLevel) %}
+        {% import _self as self %}
         <ul class="js-category-tree-items {{ isFirstLevel ? 'form-tree__content' : '' }}">
             {% for categoryDetail in categoryDetails %}
                 <li class="js-category-tree-item form-tree__item" id="js-category-tree-{{ categoryDetail.category.id }}">
@@ -45,7 +47,7 @@
                             </a>
                         </span>
                     </div>
-                    {{ _self.categoryTreeItem(categoryDetail.children, false) }}
+                    {{ self.categoryTreeItem(categoryDetail.children, false) }}
                 </li>
             {% endfor %}
         </ul>
@@ -54,7 +56,7 @@
     {% if isForAllDomains %}
         <div class="form-line">
             <div id="js-category-tree-sorting" class="form-tree form-tree--open form-tree--dragable">
-                {{ _self.categoryTreeItem(categoryDetails, true) }}
+                {{ self.categoryTreeItem(categoryDetails, true) }}
             </div>
         </div>
 
@@ -73,7 +75,7 @@
     {% else %}
         <div class="form-line">
             <div class="form-tree form-tree--open form-tree--dragable">
-                {{ _self.categoryTreeItem(categoryDetails, true) }}
+                {{ self.categoryTreeItem(categoryDetails, true) }}
             </div>
         </div>
         <div>

@@ -18,7 +18,7 @@
     <form name="{{ form.vars.name }}" method="{{ form_method|lower }}" action="{{ action }}"
         {%- for attrname, attrvalue in attr -%}
             {{- " " -}}
-            {%- if attrname is sameas('multipleForm') -%}
+            {%- if attrname is same as('multipleForm') -%}
             {%- else -%}
                 {{- attrname }}="{{ attrvalue }}"
             {%- endif -%}
@@ -424,7 +424,7 @@
 
 {% block form_label %}
     {% spaceless %}
-        {% if label is not sameas(false) %}
+        {% if label is not same as(false) %}
             {% if not compound %}
                 {% set label_attr = label_attr|merge({'for': id}) %}
             {% endif %}
@@ -550,10 +550,11 @@
 {% endmacro %}
 
 {% block products_widget %}
+    {% import _self as self %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' js-products-picker')|trim}) %}
     <div
         {{ block('widget_attributes') }}
-        data-products-picker-prototype="{{ _self.productsWidgetItem(null, form.vars.prototype, form.vars.sortable)|e }}"
+        data-products-picker-prototype="{{ self.productsWidgetItem(null, form.vars.prototype, form.vars.sortable)|e }}"
         data-products-picker-url="{{ url('admin_productpicker_pickmultiple', {jsInstanceId: '__js_instance_id__', allowMainVariants: allow_main_variants, allowVariants: allow_variants}) }}"
         data-products-picker-main-product-id="{{ form.vars.main_product ? form.vars.main_product.id : '' }}"
     >
@@ -566,7 +567,7 @@
             </thead>
             <tbody class="js-products-picker-items">
                 {% for key, productForm in form %}
-                    {{ _self.productsWidgetItem(form.vars.products[key], productForm, form.vars.sortable) }}
+                    {{ self.productsWidgetItem(form.vars.products[key], productForm, form.vars.sortable) }}
                 {% endfor %}
             </tbody>
         </table>
@@ -786,6 +787,7 @@
 {% endblock choice_widget_expanded %}
 
 {%- block sortable_values_widget -%}
+    {% import _self as self %}
     {% if isSimple|default(false) == false %}
         <div class="form-line__side">
             <div class="form-line__item">
@@ -807,14 +809,14 @@
         <button
             type="button"
             class="js-sortable-values-item-add btn-link-style"
-            data-item-template="{{ _self.sortableValuesWidgetItem(item_input_name, '%value%', '%label%')|escape('html_attr') }}"
+            data-item-template="{{ self.sortableValuesWidgetItem(item_input_name, '%value%', '%label%')|escape('html_attr') }}"
         >
             {{ 'Add'|trans }}
         </button>
 
         <div class="js-sortable-values-items">
             {% for valueItem in value %}
-                {{ _self.sortableValuesWidgetItem(item_input_name, valueItem, labels_by_value[valueItem]|default(valueItem)) }}
+                {{ self.sortableValuesWidgetItem(item_input_name, valueItem, labels_by_value[valueItem]|default(valueItem)) }}
             {% endfor %}
         </div>
     </div>
@@ -957,9 +959,9 @@
         {{- " " -}}
         {%- if attrname in ['placeholder', 'title'] -%}
             {{- attrname }}="{{ attrvalue }}"
-        {%- elseif attrvalue is sameas(true) -%}
+        {%- elseif attrvalue is same as(true) -%}
             {{- attrname }}="{{ attrname }}"
-        {%- elseif attrvalue is not sameas(false) -%}
+        {%- elseif attrvalue is not same as(false) -%}
             {{- attrname }}="{{ attrvalue }}"
         {%- endif -%}
     {%- endfor -%}
@@ -979,9 +981,9 @@
         {{- " " -}}
         {%- if attrname in ['placeholder', 'title'] -%}
             {{- attrname }}="{{ attrvalue }}"
-        {%- elseif attrvalue is sameas(true) -%}
+        {%- elseif attrvalue is same as(true) -%}
             {{- attrname }}="{{ attrname }}"
-        {%- elseif attrvalue is not sameas(false) -%}
+        {%- elseif attrvalue is not same as(false) -%}
             {{- attrname }}="{{ attrvalue }}"
         {%- endif -%}
     {%- endfor -%}

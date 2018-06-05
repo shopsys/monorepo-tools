@@ -1,4 +1,5 @@
 {% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+{% import _self as self %}
 
 {% block title %}- {{ 'Image size'|trans }}{% endblock %}
 {% block h1 %}{{ 'Image size'|trans }}{% endblock %}
@@ -7,11 +8,11 @@
     {% for imageEntityConfig in imageEntityConfigs %}
         {% set entityName = imageEntityConfig.entityName %}
         {% if imageEntityConfig.sizeConfigs is not empty %}
-            {{ _self.entitySizes(entityName, imageEntityConfig.sizeConfigs) }}
+            {{ self.entitySizes(entityName, imageEntityConfig.sizeConfigs) }}
         {% endif %}
         {% if imageEntityConfig.sizeConfigsByTypes is not empty %}
             {% for typeName, sizeConfigs in imageEntityConfig.sizeConfigsByTypes %}
-                {{ _self.entitySizes(entityName ~ ' - ' ~ typeName, sizeConfigs) }}
+                {{ self.entitySizes(entityName ~ ' - ' ~ typeName, sizeConfigs) }}
             {% endfor %}
         {% endif %}
     {% endfor %}

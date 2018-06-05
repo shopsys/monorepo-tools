@@ -1,4 +1,5 @@
 {% extends '@ShopsysFramework/Admin/Layout/layoutWithPanel.html.twig' %}
+{% import _self as self %}
 
 {% block title %}- {{ 'E-mail templates settings'|trans }}{% endblock %}
 {% block h1 %}{{ 'E-mail templates settings'|trans }}{% endblock %}
@@ -92,7 +93,7 @@
             {% for orderStatusId, orderStatusTemplate in form.orderStatusTemplates %}
                 {% set orderStatus = orderStatusesIndexedById[orderStatusId] %}
                 {% if orderStatus.type == TYPE_NEW %}
-                    {{ _self.mailTemplate(
+                    {{ self.mailTemplate(
                             orderStatus.name,
                             orderStatusMailTemplatesByOrderStatusId[orderStatusId],
                             orderStatusTemplate,
@@ -103,7 +104,7 @@
                             'Send confirmation of order receipt'|trans
                     ) }}
                 {% else %}
-                    {{ _self.mailTemplate(
+                    {{ self.mailTemplate(
                             orderStatus.name,
                             orderStatusMailTemplatesByOrderStatusId[orderStatusId],
                             orderStatusTemplate,
@@ -116,7 +117,7 @@
                 {% endif %}
             {% endfor %}
 
-            {{ _self.mailTemplate(
+            {{ self.mailTemplate(
                 'Registration confirmation'|trans,
                 registrationMailTemplate,
                 form.registrationTemplate,
@@ -125,7 +126,7 @@
                 registrationVariablesLabels
             ) }}
 
-            {{ _self.mailTemplate(
+            {{ self.mailTemplate(
                 'Forgotten password sending'|trans,
                 resetPasswordMailTemplate,
                 form.resetPasswordTemplate,
@@ -134,7 +135,7 @@
                 resetPasswordVariablesLabels
             ) }}
 
-            {{ _self.mailTemplate(
+            {{ self.mailTemplate(
                 'Personal information overview'|trans,
                 personalDataAccessTemplate,
                 form.personalDataAccessTemplate,
@@ -143,7 +144,7 @@
                 personalDataAccessVariablesLabels
             ) }}
 
-            {{ _self.mailTemplate(
+            {{ self.mailTemplate(
                 'Personal information export'|trans,
                 personalDataExportTemplate,
                 form.personalDataExportTemplate,

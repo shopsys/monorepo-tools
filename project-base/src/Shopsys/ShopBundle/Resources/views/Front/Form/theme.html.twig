@@ -18,7 +18,7 @@
     <form name="{{ form.vars.name }}" method="{{ form_method|lower }}" action="{{ action }}"
         {%- for attrname, attrvalue in attr -%}
             {{- " " -}}
-            {%- if attrname is sameas('multipleForm') -%}
+            {%- if attrname is same as('multipleForm') -%}
             {%- else -%}
                 {{- attrname }}="{{ attrvalue }}"
             {%- endif -%}
@@ -82,7 +82,7 @@
 
 {% block form_label %}
     {% spaceless %}
-        {% if label is not sameas(false) %}
+        {% if label is not same as(false) %}
             {% if not compound %}
                 {% set label_attr = label_attr|merge({'for': id}) %}
             {% endif %}
@@ -227,9 +227,9 @@
         {{- " " -}}
         {%- if attrname in ['placeholder', 'title'] -%}
             {{- attrname }}="{{ attrvalue }}"
-        {%- elseif attrvalue is sameas(true) -%}
+        {%- elseif attrvalue is same as(true) -%}
             {{- attrname }}="{{ attrname }}"
-        {%- elseif attrvalue is not sameas(false) -%}
+        {%- elseif attrvalue is not same as(false) -%}
             {{- attrname }}="{{ attrvalue }}"
         {%- endif -%}
     {%- endfor -%}
@@ -249,9 +249,9 @@
         {{- " " -}}
         {%- if attrname in ['placeholder', 'title'] -%}
             {{- attrname }}="{{ attrvalue }}"
-        {%- elseif attrvalue is sameas(true) -%}
+        {%- elseif attrvalue is same as(true) -%}
             {{- attrname }}="{{ attrname }}"
-        {%- elseif attrvalue is not sameas(false) -%}
+        {%- elseif attrvalue is not same as(false) -%}
             {{- attrname }}="{{ attrvalue }}"
         {%- endif -%}
     {%- endfor -%}

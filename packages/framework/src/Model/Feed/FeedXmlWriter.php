@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Feed;
 
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Twig_Environment;
-use Twig_Template;
+use Twig_TemplateWrapper;
 
 class FeedXmlWriter
 {
@@ -25,7 +25,8 @@ class FeedXmlWriter
      */
     public function writeBegin(DomainConfig $domainConfig, $feedTemplatePath, $targetFilepath)
     {
-        $twigTemplate = $this->twig->loadTemplate($feedTemplatePath);
+        $twigTemplate = $this->twig->load($feedTemplatePath);
+
         $renderedBlock = $this->getRenderedBlock($twigTemplate, 'begin', ['domainConfig' => $domainConfig]);
         file_put_contents($targetFilepath, $renderedBlock);
     }
@@ -37,7 +38,7 @@ class FeedXmlWriter
      */
     public function writeEnd(DomainConfig $domainConfig, $feedTemplatePath, $targetFilepath)
     {
-        $twigTemplate = $this->twig->loadTemplate($feedTemplatePath);
+        $twigTemplate = $this->twig->load($feedTemplatePath);
         $renderedBlock = $this->getRenderedBlock($twigTemplate, 'end', ['domainConfig' => $domainConfig]);
         file_put_contents($targetFilepath, $renderedBlock, FILE_APPEND);
     }
@@ -50,7 +51,7 @@ class FeedXmlWriter
      */
     public function writeItems(array $items, DomainConfig $domainConfig, $feedTemplatePath, $targetFilepath)
     {
-        $twigTemplate = $this->twig->loadTemplate($feedTemplatePath);
+        $twigTemplate = $this->twig->load($feedTemplatePath);
 
         $renderedContent = '';
         foreach ($items as $item) {
@@ -68,21 +69,18 @@ class FeedXmlWriter
     }
 
     /**
-     * @param \Twig_Template $twigTemplate
+     * @param \Twig_TemplateWrapper $twigTemplateWrapper
      * @param string $name
      * @param array $parameters
      * @return string
      */
-    private function getRenderedBlock(Twig_Template $twigTemplate, $name, array $parameters = [])
+    private function getRenderedBlock(Twig_TemplateWrapper $twigTemplateWrapper, $name, array $parameters = [])
     {
-        if ($twigTemplate->hasBlock($name)) {
-            $templateParameters = array_merge(
-                $this->twig->getGlobals(),
-                $parameters
-            );
-            return $twigTemplate->renderBlock($name, $templateParameters);
+        if ($twigTemplateWrapper->hasBlock($name)) {
+            $templateParameters = $this->twig->mergeGlobals($parameters);
+            return $twigTemplateWrapper->renderBlock($name, $templateParameters);
         }
 
-        throw new \Shopsys\FrameworkBundle\Model\Feed\Exception\TemplateBlockNotFoundException($name, $twigTemplate->getTemplateName());
+        throw new \Shopsys\FrameworkBundle\Model\Feed\Exception\TemplateBlockNotFoundException($name, $twigTemplateWrapper->getTemplateName());
     }
 }

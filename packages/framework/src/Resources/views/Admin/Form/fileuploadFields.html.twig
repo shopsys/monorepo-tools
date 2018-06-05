@@ -1,4 +1,5 @@
 {% block file_upload_widget %}
+    {% import _self as self %}
     {% spaceless %}
         {%  set attr = attr|merge({'class': attr.class|default('') ~ ' js-file-upload box-upload'}) %}
         {%  set attr = attr|merge({'data-fileupload-url': url('admin_fileupload_upload')}) %}
@@ -37,10 +38,10 @@
                         </li>
                     {% endmacro %}
 
-                    <ul class="list-images js-file-upload-uploaded-files" data-prototype="{{ _self.uploadedFile(form.uploadedFiles.vars.prototype, '', '__icon-type__', false, 'js-file-upload-uploaded-file-template display-none')|escape }}">
+                    <ul class="list-images js-file-upload-uploaded-files" data-prototype="{{ self.uploadedFile(form.uploadedFiles.vars.prototype, '', '__icon-type__', false, 'js-file-upload-uploaded-file-template display-none')|escape }}">
                         {% for uploadedFile in form.uploadedFiles %}
                             {% set fileThumbnailInfo = getFileThumbnailInfoByTemporaryFilename(uploadedFile.vars.value) %}
-                            {{ _self.uploadedFile(uploadedFile, getLabelByTemporaryFilename(uploadedFile.vars.value), fileThumbnailInfo.iconType, fileThumbnailInfo.imageUri) }}
+                            {{ self.uploadedFile(uploadedFile, getLabelByTemporaryFilename(uploadedFile.vars.value), fileThumbnailInfo.iconType, fileThumbnailInfo.imageUri) }}
                         {% else %}
                             <li>
                                 {% do form.children.uploadedFiles.setRendered %}

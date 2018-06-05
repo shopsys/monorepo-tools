@@ -7,7 +7,7 @@
     <SHOPITEM>
         <ITEM_ID>{{ item.id }}</ITEM_ID>
         <PRODUCTNAME>{{ item.productName }}</PRODUCTNAME>
-        <DESCRIPTION>{{ item.description|striptags|replace("\n", ' ')|trim }}</DESCRIPTION>
+        <DESCRIPTION>{{ item.description|striptags|replace({"\n": ' '})|trim }}</DESCRIPTION>
         <URL>{{ item.url }}</URL>
         <PRICE_VAT>{{ item.priceVat|number_format(2, ',', '') }}</PRICE_VAT>
         <DELIVERY_DATE>{{ item.deliveryDate|default(-1) }}</DELIVERY_DATE>

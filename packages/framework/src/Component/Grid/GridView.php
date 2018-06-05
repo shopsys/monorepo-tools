@@ -21,7 +21,7 @@ class GridView
     private $templateParameters;
 
     /**
-     * @var \Twig_Template[]
+     * @var \Twig_TemplateWrapper[]
      */
     private $templates;
 
@@ -94,8 +94,7 @@ class GridView
     {
         foreach ($this->getTemplates() as $template) {
             if ($template->hasBlock($name)) {
-                $templateParameters = array_merge(
-                    $this->twig->getGlobals(),
+                $parameters = array_merge(
                     $parameters,
                     $this->templateParameters,
                     [
@@ -103,6 +102,8 @@ class GridView
                         'grid' => $this->grid,
                     ]
                 );
+
+                $templateParameters = $this->twig->mergeGlobals($parameters);
 
                 if ($echo) {
                     echo $template->renderBlock($name, $templateParameters);
@@ -243,7 +244,7 @@ class GridView
     }
 
     /**
-     * @return \Twig_Template[]
+     * @return \Twig_TemplateWrapper[]
      */
     private function getTemplates()
     {
@@ -251,10 +252,10 @@ class GridView
             $this->templates = [];
             if (is_array($this->theme)) {
                 foreach ($this->theme as $theme) {
-                    $this->templates += $this->getTemplatesFromString($theme);
+                    $this->templates[] = $this->getTemplateFromString($theme);
                 }
             } else {
-                $this->templates = $this->getTemplatesFromString($this->theme);
+                $this->templates[] = $this->getTemplateFromString($this->theme);
             }
         }
 
@@ -263,21 +264,11 @@ class GridView
 
     /**
      * @param string $theme
-     * @return \Twig_Template[]
+     * @return \Twig_TemplateWrapper
      */
-    private function getTemplatesFromString($theme)
+    private function getTemplateFromString($theme)
     {
-        $templates = [];
-
-        $template = $this->twig->loadTemplate($theme);
-        /* @var $template \Twig_Template */
-
-        while ($template !== false) {
-            $templates[] = $template;
-            $template = $template->getParent([]);
-        }
-
-        return $templates;
+        return $this->twig->load($theme);
     }
 
     /**
