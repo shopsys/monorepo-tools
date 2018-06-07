@@ -87,6 +87,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#143](https://github.com/shopsys/shopsys/pull/143) [EasyCodingStandard v4.3.0](https://github.com/Symplify/EasyCodingStandard/tree/4.3) is now used
     - rules config file changed its format from neon to yaml
 
+##### Fixed
+- [#222 - coding-standards package is now up to date with new PHP_codesniffer v3.3.0](https://github.com/shopsys/shopsys/pull/222)
+    - import of parent class of ForbiddenExitSniff was corrected
+
 ### [shopsys/form-types-bundle]
 #### Changed
 - [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used

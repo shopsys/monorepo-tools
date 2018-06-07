@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Shopsys\CodingStandards\Sniffs;
 
-use PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\ForbiddenFunctionsSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ForbiddenFunctionsSniff;
 
 final class ForbiddenExitSniff extends ForbiddenFunctionsSniff
 {
