@@ -54,6 +54,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
                 - Brand
 - [#176 - Admin: Validation for free shipping is inconsistent](https://github.com/shopsys/shopsys/pull/176)
     - `Resources/views/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig`: `form_errors` was included for `form_widget` for consistency of admin forms
+- [#228 - show selectbox options](https://github.com/shopsys/shopsys/pull/228)
+    - the use of jQuery plugin for selectboxes was modified on Shopsys Framework side so options will now be seen 
 
 ### [shopsys/project-base]
 #### Changed
