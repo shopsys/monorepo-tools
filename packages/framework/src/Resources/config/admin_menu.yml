@@ -130,7 +130,6 @@
 
 - label: 'Settings'
   route: admin_domain_list
-  type: settings
   icon: gear
   items:
     - label: 'E-shop identification'
@@ -276,6 +275,11 @@
       items:
       - label: 'Heureka - Verified by Customer'
         route: admin_heureka_setting
+
+- label: 'Settings'
+  route: admin_domain_list
+  type: settings
+  icon: gear
 
 - label: 'Frontend'
   type: domains

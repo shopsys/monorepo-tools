@@ -1,0 +1,38 @@
+body {
+    -webkit-backface-visibility: hidden;
+}
+
+.animated(@animationDurationTime: 1s; @animationDelayTime: 0s; @animationCount: 1; @animationFillMode: both; ) {
+    animation-duration: @animationDurationTime;
+    animation-delay: @animationDelayTime;
+    animation-fill-mode: @animationFillMode;
+    animation-iteration-count: @animationCount;
+}
+
+@-webkit-keyframes fadeIn-scale-topLeft {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+        transform-origin: top left
+    }
+    to {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+@keyframes fadeIn-scale-topLeft {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+        transform-origin: top left
+    }
+    to {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+.fadeIn-scale-topLeft {
+    animation-name: fadeIn-scale-topLeft
+}

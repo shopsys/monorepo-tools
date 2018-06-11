@@ -9,10 +9,10 @@
 {% block header %}
     <header class="web__header">
         <div class="web__header__in web__header__in--small">
+            <div class="web__header__logo">
+                <img class="web__header__logo__svg" src="{{ asset('assets/admin/images/logo.svg') }}" alt="{{ 'Shopsys Framework'|trans }}">
+            </div>
             <div class="top-info">
-                <div class="top-info__logo">
-                    <span class="sprite sprite-logo"></span>
-                </div>
                 <div class="top-info__text">
                     <h1 class="top-info__text__title">{% block product_header_heading %}{% endblock %}</h1>
                 </div>

@@ -40,16 +40,8 @@ class MenuController extends AdminBaseController
         $menu = $this->menuFactory->createMenuWithVisibleItems();
         $activePath = $menu->getMenuPath($route, $parameters);
 
-        if (isset($activePath[1]) && $menu->isRouteMatchingDescendantOfSettings($route, $parameters)) {
-            $panelItems = $activePath[1]->getItems();
-        } elseif (isset($activePath[0])) {
-            $panelItems = $activePath[0]->getItems();
-        } else {
-            $panelItems = null;
-        }
-
         return $this->render('@ShopsysFramework/Admin/Inline/Menu/panel.html.twig', [
-            'items' => $panelItems,
+            'items' => $menu->getRegularItems(),
             'activePath' => $activePath,
         ]);
     }

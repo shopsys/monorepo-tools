@@ -66,13 +66,16 @@ class MenuLoader
 
     /**
      * @param array $menuItemsData
+     * @param bool $parentSuperadmin
      * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
-    private function loadItems(array $menuItemsData)
+    private function loadItems(array $menuItemsData, bool $parentSuperadmin = false)
     {
         $items = [];
 
         foreach ($menuItemsData as $menuItemData) {
+            $menuItemData['superadmin'] = $parentSuperadmin || ($menuItemData['superadmin'] ?? null);
+
             $item = $this->loadItem($menuItemData);
             $items[] = $item;
         }
@@ -87,7 +90,7 @@ class MenuLoader
     private function loadItem(array $menuItemData)
     {
         if (isset($menuItemData['items'])) {
-            $items = $this->loadItems($menuItemData['items']);
+            $items = $this->loadItems($menuItemData['items'], $menuItemData['superadmin'] ?? false);
         } else {
             $items = [];
         }
