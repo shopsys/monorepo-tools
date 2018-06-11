@@ -49,11 +49,11 @@ RUN apk add --update nodejs-npm
 RUN npm install -g grunt-cli
 
 # install postgresql to allow execution of pg_dump for acceptance tests (using older repository to install version 9.5)
-RUN apk add --update --no-cache --repository https://dl-3.alpinelinux.org/alpine/v3.4/main "postgresql<9.6"
+RUN apk add --update --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/v3.4/main "postgresql<9.6"
 
 # install locales and switch to en_US.utf8 in order to enable UTF-8 support
 # see https://github.com/docker-library/php/issues/240#issuecomment-305038173
-RUN apk add --update --no-cache --repository https://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv
+RUN apk add --update --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/edge/testing gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 ENV LC_ALL=en_US.utf8 LANG=en_US.utf8 LANGUAGE=en_US.utf8
 

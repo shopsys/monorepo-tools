@@ -68,6 +68,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#131 - correct rendering of checkbox label](https://github.com/shopsys/shopsys/pull/131):
     - `Front/Form/theme.html.twig`: block `checkbox_row` now uses block `form_label` for proper label rendering
         - the absence of `label` html tag was causing problems with JS validation (the error message was not included in the popup overview)
+- [#229 - php-fpm/Dockerfile: switch to another mirror of alpine linux repository](https://github.com/shopsys/shopsys/pull/229):
+    - fix uninstallable postgres 9.5 by using repository https://dl-cdn.alpinelinux.org/alpine/ instead of https://dl-3.alpinelinux.org/alpine/
 
 #### Security
 - [#178 - JsFormValidatorBundle security issue with Ajax validation](https://github.com/shopsys/shopsys/pull/178)
