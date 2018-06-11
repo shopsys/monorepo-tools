@@ -16,7 +16,7 @@ class CustomerLoginCest
         $me->wantTo('login as a customer from main page');
         $me->amOnPage('/');
         $layoutPage->openLoginPopup();
-        $loginPage->login('no-reply@netdevelo.cz', 'user123');
+        $loginPage->login('no-reply@shopsys.com', 'user123');
         $me->see('Jaromír Jágr');
         $layoutPage->logout();
         $me->see('Log in');
@@ -31,7 +31,7 @@ class CustomerLoginCest
         $me->wantTo('login as a customer from category page');
         $me->amOnPage('/personal-computers-accessories/');
         $layoutPage->openLoginPopup();
-        $loginPage->login('no-reply@netdevelo.cz', 'user123');
+        $loginPage->login('no-reply@shopsys.com', 'user123');
         $me->see('Jaromír Jágr');
         $layoutPage->logout();
         $me->see('Log in');
@@ -45,7 +45,7 @@ class CustomerLoginCest
     ) {
         $me->wantTo('login as a customer from login page');
         $me->amOnPage('/login/');
-        $loginPage->login('no-reply@netdevelo.cz', 'user123');
+        $loginPage->login('no-reply@shopsys.com', 'user123');
         $me->see('Jaromír Jágr');
         $layoutPage->logout();
         $me->see('Log in');

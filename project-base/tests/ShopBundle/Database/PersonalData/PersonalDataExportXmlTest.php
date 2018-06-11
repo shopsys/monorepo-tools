@@ -24,7 +24,7 @@ use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class PersonalDataExportXmlTest extends DatabaseTestCase
 {
-    const EMAIL = 'no-reply@netdevelo.cz';
+    const EMAIL = 'no-reply@shopsys.com';
     const EXPECTED_XML_FILE_NAME = 'test.xml';
     const DOMAIN_ID_FIRST = Domain::FIRST_DOMAIN_ID;
 
@@ -96,7 +96,7 @@ class PersonalDataExportXmlTest extends DatabaseTestCase
         $billingAddressData->city = 'Ostrava';
         $billingAddressData->street = 'Hlubinská';
         $billingAddressData->companyCustomer = true;
-        $billingAddressData->companyName = 'Netdevelo';
+        $billingAddressData->companyName = 'Shopsys';
         $billingAddressData->companyNumber = 123456;
         $billingAddressData->companyTaxNumber = 123456;
         $billingAddressData->postcode = 70200;
@@ -117,7 +117,7 @@ class PersonalDataExportXmlTest extends DatabaseTestCase
         $deliveryAddressData->country = $country;
         $deliveryAddressData->telephone = '+420987654321';
         $deliveryAddressData->postcode = 70200;
-        $deliveryAddressData->companyName = 'Netdevelo';
+        $deliveryAddressData->companyName = 'Shopsys';
         $deliveryAddressData->street = 'Hlubinská';
         $deliveryAddressData->city = 'Ostrava';
         $deliveryAddressData->lastName = 'Fero';
@@ -139,7 +139,7 @@ class PersonalDataExportXmlTest extends DatabaseTestCase
         $userData->lastName = 'Jágr';
         $userData->domainId = self::DOMAIN_ID_FIRST;
         $userData->createdAt = new \DateTime('2018-04-13');
-        $userData->email = 'no-reply@netdevelo.cz';
+        $userData->email = 'no-reply@shopsys.com';
 
         $user = new User($userData, $billingAddress, $deliveryAddress);
 
@@ -157,14 +157,14 @@ class PersonalDataExportXmlTest extends DatabaseTestCase
         $orderData = new OrderData();
         $orderData->currency = $currency;
         $orderData->status = $status;
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->createdAt = new \DateTime('2018-04-13');
         $orderData->domainId = self::DOMAIN_ID_FIRST;
         $orderData->lastName = 'Bořič';
         $orderData->firstName = 'Adam';
         $orderData->city = 'Liberec';
         $orderData->street = 'Cihelní 5';
-        $orderData->companyName = 'Netdevelo';
+        $orderData->companyName = 'Shopsys';
         $orderData->postcode = 65421;
         $orderData->telephone = '+420987654321';
         $orderData->companyTaxNumber = 123456;

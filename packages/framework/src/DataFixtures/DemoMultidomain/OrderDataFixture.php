@@ -62,7 +62,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_IN_PROGRESS);
         $orderData->firstName = 'Václav';
         $orderData->lastName = 'Svěrkoš';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420725711368';
         $orderData->street = 'Devátá 25';
         $orderData->city = 'Ostrava';
@@ -79,20 +79,20 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
             ]
         );
 
-        $user = $this->userRepository->findUserByEmailAndDomain('no-reply.2@netdevelo.cz', 2);
+        $user = $this->userRepository->findUserByEmailAndDomain('no-reply.2@shopsys.com', 2);
         $orderData = new OrderData();
         $orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_PERSONAL);
         $orderData->payment = $this->getReference(DemoPaymentDataFixture::PAYMENT_CASH);
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
         $orderData->firstName = 'Jan';
         $orderData->lastName = 'Novák';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420123456789';
         $orderData->street = 'Pouliční 11';
         $orderData->city = 'Městník';
         $orderData->postcode = '12345';
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_2);
-        $orderData->companyName = 'netdevelo s.r.o.';
+        $orderData->companyName = 'shopsys s.r.o.';
         $orderData->companyNumber = '123456789';
         $orderData->companyTaxNumber = '987654321';
         $orderData->deliveryAddressSameAsBillingAddress = false;
@@ -117,14 +117,14 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
             $user
         );
 
-        $user = $this->userRepository->findUserByEmailAndDomain('no-reply.7@netdevelo.cz', 2);
+        $user = $this->userRepository->findUserByEmailAndDomain('no-reply.7@shopsys.com', 2);
         $orderData = new OrderData();
         $orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_CZECH_POST);
         $orderData->payment = $this->getReference(DemoPaymentDataFixture::PAYMENT_CASH_ON_DELIVERY);
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
         $orderData->firstName = 'Jindřich';
         $orderData->lastName = 'Němec';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420123456789';
         $orderData->street = 'Sídlištní 3259';
         $orderData->city = 'Orlová';
@@ -149,7 +149,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_CANCELED);
         $orderData->firstName = 'Viktor';
         $orderData->lastName = 'Pátek';
-        $orderData->email = 'no-reply@netdevelo.cz';
+        $orderData->email = 'no-reply@shopsys.com';
         $orderData->telephone = '+420888777111';
         $orderData->street = 'Vyhlídková 88';
         $orderData->city = 'Ostrava';

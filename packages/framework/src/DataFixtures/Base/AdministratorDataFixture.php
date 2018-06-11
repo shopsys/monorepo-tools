@@ -31,7 +31,7 @@ class AdministratorDataFixture extends AbstractReferenceFixture
         $superadminData = new AdministratorData(true);
         $superadminData->username = 'superadmin';
         $superadminData->realName = 'superadmin';
-        $superadminData->email = 'no-reply@netdevelo.cz';
+        $superadminData->email = 'no-reply@shopsys.com';
         $superadminData->password = 'admin123';
         $this->createAdministrator($superadminData, self::SUPERADMINISTRATOR);
 
@@ -39,7 +39,7 @@ class AdministratorDataFixture extends AbstractReferenceFixture
         $administratorData->username = 'admin';
         $administratorData->realName = 'admin';
         $administratorData->password = 'admin123';
-        $administratorData->email = 'no-reply@netdevelo.cz';
+        $administratorData->email = 'no-reply@shopsys.com';
         $this->createAdministrator($administratorData, self::ADMINISTRATOR);
     }
 

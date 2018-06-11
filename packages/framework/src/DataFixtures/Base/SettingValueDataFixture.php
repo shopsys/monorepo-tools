@@ -77,7 +77,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         $manager->persist($this->settingValueFactory->create(PricingSetting::ROUNDING_TYPE, PricingSetting::ROUNDING_TYPE_INTEGER, SettingValue::DOMAIN_ID_COMMON));
         $manager->persist($this->settingValueFactory->create(Vat::SETTING_DEFAULT_VAT, $vat->getId(), SettingValue::DOMAIN_ID_COMMON));
         $manager->persist($this->settingValueFactory->create(Setting::ORDER_SENT_PAGE_CONTENT, $orderSentText, Domain::FIRST_DOMAIN_ID));
-        $manager->persist($this->settingValueFactory->create(MailSetting::MAIN_ADMIN_MAIL, 'no-reply@netdevelo.cz', Domain::FIRST_DOMAIN_ID));
+        $manager->persist($this->settingValueFactory->create(MailSetting::MAIN_ADMIN_MAIL, 'no-reply@shopsys.com', Domain::FIRST_DOMAIN_ID));
         $manager->persist($this->settingValueFactory->create(MailSetting::MAIN_ADMIN_MAIL_NAME, 'Shopsys', Domain::FIRST_DOMAIN_ID));
         $manager->persist($this->settingValueFactory->create(Setting::DEFAULT_PRICING_GROUP, $pricingGroup1->getId(), Domain::FIRST_DOMAIN_ID));
         $manager->persist($this->settingValueFactory->create(PricingSetting::DEFAULT_CURRENCY, $defaultCurrency->getId(), SettingValue::DOMAIN_ID_COMMON));
