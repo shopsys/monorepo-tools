@@ -89,6 +89,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#143](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards/) is now used
     - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binaries
     - build scripts were modified to work with new easy-coding-standard checker 
+- [#230 - composer-dev updates dependencies if composer.json was changed](https://github.com/shopsys/shopsys/pull/230)
  
 ### [shopsys/coding-standards]
 ##### Changed

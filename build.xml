@@ -11,6 +11,29 @@
     <import file="project-base/build-dev.xml" />
     <import file="project-base/build.xml" />
 
+    <target name="composer-dev" description="Installs dependencies for development if composer.lock is valid, otherwise runs composer update.">
+        <exec executable="${path.composer.executable}" returnProperty="composer.validate.returnCode">
+            <arg value="validate" />
+            <arg value="--no-check-all" />
+            <arg value="--no-check-publish" />
+        </exec>
+        <if>
+            <equals arg1="${composer.validate.returnCode}" arg2="0"/>
+            <then>
+                <echo message="The lock file is valid, installing dependencies..."/>
+                <property name="composer.action" value="install"/>
+            </then>
+            <else>
+                <echo message="The lock file is invalid, updating dependencies..."/>
+                <property name="composer.action" value="update"/>
+            </else>
+        </if>
+        <exec executable="${path.composer.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="${composer.action}"/>
+        </exec>
+        <phingcall target="composer-check" />
+    </target>
+
     <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check,standards-packages" description="Checks coding standards in both project-base and packages."/>
     <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages" description="Checks coding standards on changed files in project-base and all files in packages."/>
 
