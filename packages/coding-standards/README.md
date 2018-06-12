@@ -71,6 +71,10 @@ Function `exit()` is not allowed.
 
 Usage of superglobals (`$_COOKIE`, `$_GET`, `$_FILES`, `$_POST`, `$_REQUEST`, `$_SERVER`) is not allowed.
 
+#### `ObjectIsCreatedByFactorySniff`
+
+Instantiation of objects that can be created by their factories is not allowed outside of the factory.
+
 #### `ValidVariableNameSniff`
 
 Default `\PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff`
