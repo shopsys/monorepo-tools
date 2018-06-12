@@ -118,8 +118,9 @@ class DomainController extends AdminBaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                if (count($form->getData()[DomainFormType::FIELD_ICON]) !== 0) {
-                    $iconName = reset($form->getData()[DomainFormType::FIELD_ICON]);
+                $files = $form->getData()[DomainFormType::FIELD_ICON]->uploadedFiles;
+                if (count($files) !== 0) {
+                    $iconName = reset($files);
 
                     $this->domainFacade->editIcon($id, $iconName);
                 }
