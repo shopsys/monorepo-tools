@@ -25,6 +25,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - access multi-domain attributes of entities via their main entity (instead of the usual entity detail)
     - entity domains (eg. `BrandDomain`) should be created, edited and directly accessed only in their main entities (eg. `Brand`) 
     - see [#165 Different approach to multidomain entities](https://github.com/shopsys/shopsys/pull/165) for details
+- `DomainsType` now uses array of booleans indexed by domain IDs instead of array of domain IDs, original behavior can be restored by adding model data transformer `IndexedBooleansToArrayOfIndexesTransformer`
 
 ### [shopsys/project-base]
 - Twig has been updated to version 2.4.8

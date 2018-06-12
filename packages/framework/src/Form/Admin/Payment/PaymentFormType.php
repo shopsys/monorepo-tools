@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Payment;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FormTypesBundle\YesNoType;
+use Shopsys\FrameworkBundle\Component\Transformers\IndexedBooleansToArrayOfIndexesTransformer;
 use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\DomainsType;
 use Shopsys\FrameworkBundle\Form\GroupType;
@@ -101,6 +102,8 @@ class PaymentFormType extends AbstractType
                 'empty_message' => t('You have to create some shipping first.'),
                 'label' => t('Available shipping methods'),
             ]);
+        $builderBasicInformationGroup->get('domains')
+            ->addModelTransformer(new IndexedBooleansToArrayOfIndexesTransformer());
 
         $builderAdditionalInformationGroup = $builder->create('additionalInformation', GroupType::class, [
             'label' => t('Additional information'),

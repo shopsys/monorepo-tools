@@ -4,8 +4,8 @@ namespace Shopsys\FrameworkBundle\Form;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class DomainsType extends AbstractType
 {
@@ -22,31 +22,13 @@ class DomainsType extends AbstractType
         $this->domain = $domain;
     }
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $choices = [];
         foreach ($this->domain->getAll() as $domainConfig) {
-            $choices[$domainConfig->getName()] = $domainConfig->getId();
+            $builder->add($domainConfig->getId(), CheckboxType::class, [
+                'required' => false,
+                'label' => $domainConfig->getName(),
+            ]);
         }
-
-        $resolver->setDefaults([
-            'choices' => $choices,
-            'choice_name' => function ($choice) {
-                return $choice; // Domain ID
-            },
-            'multiple' => true,
-            'expanded' => true,
-        ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getParent()
-    {
-        return ChoiceType::class;
     }
 }

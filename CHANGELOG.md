@@ -52,6 +52,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - entity domains have their own IDs instead of compound primary keys
     - entities that were modified: `Brand`, `Product`
     - `BrandEditFormType`, `BrandDetail` and `BrandDetailFactory` were removed as they were no longer necessary
+    - `DomainsType` now uses array of booleans indexed by domain IDs instead of array of domain IDs to be consistent with the behavior of `MultidomainType`
 
 #### Fixed
 - [#132 - Admin: brand edit page: URLs setting rendering](https://github.com/shopsys/shopsys/pull/132):
