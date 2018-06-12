@@ -67,7 +67,7 @@ class Product
 }
 ```
 
-### Factory
+## Entity Factory
 
 Is a class that creates an entity.
 The framework must allow using extended entities and this problem is solved using factories.
@@ -75,7 +75,7 @@ The framework must allow using extended entities and this problem is solved usin
 Only entities that are not created by the factory are `*Translation` entities.
 These entities are created by their owner entity.
 
-#### Example
+### Example
 ```php
 // FrameworkBundle/Model/Cart/Item/CartItemFactoryInterface.php
 
