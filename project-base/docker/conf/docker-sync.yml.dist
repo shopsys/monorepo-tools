@@ -3,7 +3,7 @@ syncs:
     shopsys-framework-sync:
         sync_userid: 501
         src: './'
-        sync_excludes: ['project-base/docker/']
+        sync_excludes: ['docker/']
 
     shopsys-framework-postgres-data-sync:
-        src: './project-base/var/postgres-data/'
+        src: './var/postgres-data/'

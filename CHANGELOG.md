@@ -62,6 +62,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - `PaymentDomain` and `TransportDomain` are now created even for domains on which the entity should not be visible (to allow for other multi-domain entities and in the sake of consistency)
 
 #### Fixed
+- [#246 - docker-sync.yml.dist: fixed not existing relative paths](https://github.com/shopsys/shopsys/pull/246) [@DavidKuna]
 - [#132 - Admin: brand edit page: URLs setting rendering](https://github.com/shopsys/shopsys/pull/132):
     - admin: brand detail page: rendering of URLs setting
         - brand creation: URLs setting is not rendered at all
@@ -1159,3 +1160,4 @@ That's why is this section formatted differently.
 [@pk16011990]: https://github.com/pk16011990
 [@stanoMilan]: https://github.com/stanoMilan
 [@EdoBarnas]: https://github.com/EdoBarnas
+[@DavidKuna]: https://github.com/DavidKuna
