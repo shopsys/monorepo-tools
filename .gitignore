@@ -8,3 +8,4 @@
 /docker-compose.yml
 /docker-sync.yml
 /project-base/composer.lock
+/project-base/package-lock.json
