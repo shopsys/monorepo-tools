@@ -99,7 +99,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### [shopsys/coding-standards]
 ##### Added
 - [#249 - First architectonical codesniff](https://github.com/shopsys/shopsys/pull/249)
-    - new sniff `ObjectIsCreatedByFactorySniff` was created
+    - new sniff `ObjectIsCreatedByFactorySniff` was created and was integrated into coding standards as service
 
 ##### Changed
 - [#143](https://github.com/shopsys/shopsys/pull/143) [EasyCodingStandard v4.3.0](https://github.com/Symplify/EasyCodingStandard/tree/4.3) is now used
