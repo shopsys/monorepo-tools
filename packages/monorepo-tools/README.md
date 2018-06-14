@@ -1,5 +1,7 @@
 # Shopsys Monorepo Tools
 
+[![Mentioned in Awesome Monorepo](https://awesome.re/mentioned-badge.svg)](https://github.com/korfuri/awesome-monorepo)
+
 Tools for building and splitting monolithic repository from existing packages.
 You can read about pros and cons of monorepo approach on the [Shopsys Framework Blog](https://blog.shopsys.com/how-to-maintain-multiple-git-repositories-with-ease-61a5e17152e0).
 
