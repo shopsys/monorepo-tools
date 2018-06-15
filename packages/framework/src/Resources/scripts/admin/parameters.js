@@ -33,10 +33,11 @@
             $collection.data('index', index + 1);
 
             $collection.append($item);
+            Shopsys.register.registerNewContent($item);
 
+            Shopsys.validation.addNewItemToCollection('#product_edit_form_parameters', index);
             Shopsys.formChangeInfo.showInfo();
             Shopsys.parameters.refreshCount($collection);
-            Shopsys.validation.addNewItemToCollection('#product_edit_form_parameters', index);
 
             return false;
         });
