@@ -108,7 +108,7 @@
             newItemHtml = newItemHtml.replace(/__name__/g, itemData.id);
             newItemHtml = newItemHtml.replace(/__category_name__/g, itemData.categoryName);
 
-            var $newItem = $(newItemHtml);
+            var $newItem = $($.parseHTML(newItemHtml));
             $newItem.data('load-url', itemData.loadUrl);
             $newItem.data('has-children', itemData.hasChildren);
             if (itemData.isVisible === false) {

@@ -27,7 +27,7 @@
             var item = prototype
                 .replace(/__name__label__/g, index)
                 .replace(/__name__/g, index);
-            var $item = $(item);
+            var $item = $($.parseHTML(item));
             $item.data('index', index);
 
             $collection.data('index', index + 1);
