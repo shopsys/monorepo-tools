@@ -13,4 +13,9 @@ class FrontOrderData extends OrderData
      * @var bool
      */
     public $newsletterSubscription;
+
+    /**
+     * @var bool|null
+     */
+    public $disallowHeurekaVerifiedByCustomers;
 }

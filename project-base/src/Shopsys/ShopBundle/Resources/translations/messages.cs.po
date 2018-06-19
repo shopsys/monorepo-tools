@@ -229,6 +229,9 @@ msgstr "Souhlasím s obchodními podmínkami a zpracováním osobních údajů."
 msgid "I buy on company behalf"
 msgstr "Nakupuji na firmu"
 
+msgid "I do not agree with sending a Customer Verified satisfaction questionnaire that helps improve your service"
+msgstr "Nesouhlasím se zasláním dotazníku spokojenosti v rámci programu Heureka Ověřeno zákazníky, který pomáhá zlepšovat naše služby pro Vás"
+
 msgid "I understand"
 msgstr "Rozumím"
 

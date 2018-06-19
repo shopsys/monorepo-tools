@@ -229,6 +229,9 @@ msgstr ""
 msgid "I buy on company behalf"
 msgstr ""
 
+msgid "I do not agree with sending a Customer Verified satisfaction questionnaire that helps improve your service"
+msgstr ""
+
 msgid "I understand"
 msgstr ""
 

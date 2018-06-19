@@ -3,9 +3,11 @@
 namespace Shopsys\ShopBundle\Form\Front\Order;
 
 use Shopsys\FrameworkBundle\Component\Constraints\Email;
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Transformers\InverseTransformer;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
+use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\FrameworkBundle\Model\Order\FrontOrderData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -30,11 +32,20 @@ class PersonalInfoFormType extends AbstractType
     private $countryFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Country\CountryFacade $countryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade
      */
-    public function __construct(CountryFacade $countryFacade)
+    private $heurekaFacade;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
+
+    public function __construct(CountryFacade $countryFacade, HeurekaFacade $heurekaFacade, Domain $domain)
     {
         $this->countryFacade = $countryFacade;
+        $this->heurekaFacade = $heurekaFacade;
+        $this->domain = $domain;
     }
 
     /**
@@ -257,6 +268,12 @@ class PersonalInfoFormType extends AbstractType
                 'required' => false,
             ])
             ->add('save', SubmitType::class);
+
+        if ($this->heurekaFacade->isHeurekaShopCertificationActivated($this->domain->getId())) {
+            $builder->add('disallowHeurekaVerifiedByCustomers', CheckboxType::class, [
+                'required' => false,
+            ]);
+        }
     }
 
     /**

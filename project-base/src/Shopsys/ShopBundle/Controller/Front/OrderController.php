@@ -198,6 +198,7 @@ class OrderController extends FrontBaseController
                 $form = $orderFlow->createForm();
             } elseif ($flashMessageBag->isEmpty()) {
                 $order = $this->orderFacade->createOrderFromFront($orderData);
+                $this->orderFacade->sendHeurekaOrderInfo($order, $frontOrderFormData->disallowHeurekaVerifiedByCustomers);
 
                 if ($frontOrderFormData->newsletterSubscription) {
                     $this->newsletterFacade->addSubscribedEmail($frontOrderFormData->email, $this->domain->getId());

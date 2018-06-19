@@ -2,10 +2,13 @@
 
 namespace Tests\ShopBundle\Unit\Form\Front\Order;
 
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Country\Country;
 use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
+use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;
 use Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\Validator\Validation;
@@ -13,9 +16,19 @@ use Symfony\Component\Validator\Validation;
 class PersonalInfoFormTypeTest extends TypeTestCase
 {
     /**
-     * @var CountryFacade
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryFacade|\PHPUnit\Framework\MockObject\MockObject
      */
     private $countryFacade;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade|\PHPUnit\Framework\MockObject\MockObject
+     */
+    private $heurekaFacade;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain|\PHPUnit\Framework\MockObject\MockObject
+     */
+    private $domain;
 
     /**
      * @return array
@@ -35,9 +48,9 @@ class PersonalInfoFormTypeTest extends TypeTestCase
      */
     public function testTermsAndConditionsAgreementIsMandatory(array $personalInfoFormData, $isExpectedValid)
     {
-        $personalInfoForm = $this->factory->create(PersonalInfoFormType::class, null, [
-            'domain_id' => 1,
-        ]);
+        $this->disableHeurekaShopCertification();
+
+        $personalInfoForm = $this->createPersonalInfoForm();
 
         $personalInfoForm->submit($personalInfoFormData);
 
@@ -65,6 +78,20 @@ class PersonalInfoFormTypeTest extends TypeTestCase
         return $personalInfoFormData;
     }
 
+    public function testHeurekaShopCertificationActivatedAndDisallowedByUser()
+    {
+        $this->enableHeurekaShopCertification();
+        $personalInfoFormData = $this->getPersonalInfoFormData(true);
+        $personalInfoFormData['disallowHeurekaVerifiedByCustomers'] = true;
+
+        $personalInfoForm = $this->createPersonalInfoForm();
+
+        $personalInfoForm->submit($personalInfoFormData);
+
+        $data = $personalInfoForm->getData();
+        $this->assertTrue($data->disallowHeurekaVerifiedByCustomers);
+    }
+
     /**
      * @return array
      */
@@ -72,7 +99,7 @@ class PersonalInfoFormTypeTest extends TypeTestCase
     {
         return [
             new ValidatorExtension(Validation::createValidator()),
-            new PreloadedExtension([new PersonalInfoFormType($this->countryFacade)], []),
+            new PreloadedExtension([new PersonalInfoFormType($this->countryFacade, $this->heurekaFacade, $this->domain)], []),
         ];
     }
 
@@ -83,6 +110,33 @@ class PersonalInfoFormTypeTest extends TypeTestCase
 
         $this->countryFacade = $this->createMock(CountryFacade::class);
         $this->countryFacade->method('getAllByDomainId')->willReturn([$countryMock]);
+
+        $this->domain = $this->createMock(Domain::class);
+        $this->domain->method('getId')->willReturn(1);
+
+        $this->heurekaFacade = $this->createMock(HeurekaFacade::class);
         parent::setUp();
+    }
+
+    /**
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    private function createPersonalInfoForm(): FormInterface
+    {
+        $personalInfoForm = $this->factory->create(PersonalInfoFormType::class, null, [
+            'domain_id' => 1,
+        ]);
+
+        return $personalInfoForm;
+    }
+
+    private function disableHeurekaShopCertification(): void
+    {
+        $this->heurekaFacade->method('isHeurekaShopCertificationActivated')->willReturn(false);
+    }
+
+    private function enableHeurekaShopCertification(): void
+    {
+        $this->heurekaFacade->method('isHeurekaShopCertificationActivated')->willReturn(true);
     }
 }

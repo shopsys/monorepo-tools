@@ -214,9 +214,6 @@ class OrderFacade
      */
     public function createOrderFromFront(OrderData $orderData)
     {
-        $domainConfig = $this->domain->getDomainConfigById($orderData->domainId);
-        $locale = $domainConfig->getLocale();
-
         $orderData->status = $this->orderStatusRepository->getDefault();
         $orderPreview = $this->orderPreviewFactory->createForCurrentUser($orderData->transport, $orderData->payment);
         $user = $this->currentCustomer->findCurrentUser();
@@ -229,13 +226,25 @@ class OrderFacade
         if ($user instanceof User) {
             $this->customerFacade->amendCustomerDataFromOrder($user, $order);
         }
-        if ($this->heurekaFacade->isHeurekaShopCertificationActivated($orderData->domainId) &&
-            $this->heurekaFacade->isDomainLocaleSupported($locale)
+
+        return $order;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
+     * @param bool|null $disallowHeurekaVerifiedByCustomers
+     */
+    public function sendHeurekaOrderInfo(Order $order, $disallowHeurekaVerifiedByCustomers)
+    {
+        $domainConfig = $this->domain->getDomainConfigById($order->getDomainId());
+        $locale = $domainConfig->getLocale();
+
+        if ($this->heurekaFacade->isHeurekaShopCertificationActivated($order->getDomainId()) &&
+            $this->heurekaFacade->isDomainLocaleSupported($locale) &&
+            !$disallowHeurekaVerifiedByCustomers
         ) {
             $this->heurekaFacade->sendOrderInfo($order);
         }
-
-        return $order;
     }
 
     /**

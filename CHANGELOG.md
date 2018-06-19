@@ -37,6 +37,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#257 - Admin: reset.less: disable scrollbar normalization in order to fix problems with jQuery UI drag&drop]( https://github.com/shopsys/shopsys/pull/257)
     - dragged item is now at correct position
         -scrollbar normalization was disabled for sortable components 
+- [#261 - Sending personal data to Heureka can be disabled](https://github.com/shopsys/shopsys/pull/261)
+    - the last step of cart contains opt-out checkbox to disable sending personal data to Heureka (if Heureka Verified by Customers is enabled on the domain)
 
 #### Changed
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):

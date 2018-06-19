@@ -108,6 +108,9 @@
                 </dd>
             </dl>
             {{ form_row(form.newsletterSubscription, { label: 'I want to subscribe to the newsletter'|trans }) }}
+            {% if form.disallowHeurekaVerifiedByCustomers is defined %}
+                {{ form_row(form.disallowHeurekaVerifiedByCustomers, { label: 'I do not agree with sending a Customer Verified satisfaction questionnaire that helps improve your service'|trans }) }}
+            {% endif %}
         </div>
         <div id="js-order-preview" class="box-order__cart" data-url="{{ url('front_order_preview') }}">
             {{ render(controller('ShopsysShopBundle:Front/Order:preview', {
