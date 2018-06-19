@@ -7,6 +7,7 @@
 * [Basics About Model Architecture](./introduction/basics-about-model-architecture.md)
 * [Custom Entities](introduction/custom-entities.md)
 * [Basics About Package Architecture](./introduction/basics-about-package-architecture.md)
+* [Database Migrations](./introduction/database-migrations.md)
 
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)

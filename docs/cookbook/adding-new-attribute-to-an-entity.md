@@ -83,7 +83,7 @@ parameters:
     Shopsys\FrameworkBundle\Model\Product\Product: Shopsys\ShopBundle\Model\Product\Product
 ```
 
-5. Generate database migration creating a new column for the field by running:
+5. Generate a [database migration](../introduction/database-migrations.md) creating a new column for the field by running:
 ```
 php phing db-migrations-generate
 ```

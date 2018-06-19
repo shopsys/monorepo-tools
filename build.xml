@@ -37,6 +37,20 @@
     <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check,standards-packages" description="Checks coding standards in both project-base and packages."/>
     <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages" description="Checks coding standards on changed files in project-base and all files in packages."/>
 
+    <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
+        <delete failonerror="false" includeemptydirs="true">
+            <fileset dir="${path.var}/cache/">
+                <exclude name="/" />
+            </fileset>
+            <fileset dir="${path.web.scripts}/">
+                <exclude name="/" />
+            </fileset>
+        </delete>
+        <delete failonerror="false" includeemptydirs="true" quiet="true">
+            <filelist dir="${path.root}" files="migrations-lock.yml"/>
+        </delete>
+    </target>
+
     <target name="standards-fix" description="Automatically fixes some coding standards violations in both project-base and packages.">
         <phingcall target="ecs-fix" />
         <phingcall target="eslint-fix" />

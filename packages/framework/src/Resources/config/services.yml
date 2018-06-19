@@ -35,8 +35,6 @@ services:
       - '@doctrine.dbal.default_connection'
       - '@doctrine.orm.default_configuration'
 
-  Doctrine\DBAL\Migrations\Configuration\Configuration: ~
-
   Doctrine\Common\Cache\ChainCache: ~
 
   doctrine.orm.entity_manager.abstract:

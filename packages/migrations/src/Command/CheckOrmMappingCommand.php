@@ -4,11 +4,10 @@ namespace Shopsys\MigrationBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaValidator;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CheckOrmMappingCommand extends Command
+class CheckOrmMappingCommand extends AbstractCommand
 {
     const RETURN_CODE_OK = 0;
     const RETURN_CODE_ERROR = 1;
