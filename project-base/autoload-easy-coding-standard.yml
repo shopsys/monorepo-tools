@@ -21,3 +21,6 @@ parameters:
         Shopsys\CodingStandards\Sniffs\ValidVariableNameSniff:
             - '*/tests/ShopBundle/Database/EntityExtension/EntityExtensionTest.php'
             - '*/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
+
+        Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
+          - '*/tests/*'

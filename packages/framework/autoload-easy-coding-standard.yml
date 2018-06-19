@@ -27,3 +27,21 @@ parameters:
         PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedWhile:
             - '*/src/Model/Product/Availability/ProductAvailabilityRecalculator.php'
             - '*/src/Model/Product/Pricing/ProductPriceRecalculator.php'
+
+        Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
+          - '*/tests/*'
+          - '*/src/DataFixtures/Base/CategoryRootDataFixture.php'
+          - '*/src/DataFixtures/Demo/ArticleDataFixture.php'
+          - '*/src/DataFixtures/Demo/CategoryDataFixture.php'
+          - '*/src/DataFixtures/Demo/PaymentDataFixture.php'
+          - '*/src/DataFixtures/Demo/PersonalDataAccessRequestDataFixture.php'
+          - '*/src/DataFixtures/Demo/TransportDataFixture.php'
+          - '*/src/DataFixtures/DemoMultidomain/ArticleDataFixture.php'
+          - '*/src/DataFixtures/Performance/CategoryDataFixture.php'
+          - '*/src/Component/Domain/DomainFactoryOverwritingDomainUrl.php'
+          - '*/src/Controller/Admin/BrandController.php'
+          - '*/src/Model/AdminNavigation/MenuLoader.php'
+          - '*/src/Model/Customer/CustomerData.php'
+          - '*/src/Model/Feed/FeedCronModule.php'
+          - '*/src/Model/Feed/FeedFacade.php'
+          - '*/src/Model/Order/Preview/OrderPreviewCalculation.php'
