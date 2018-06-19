@@ -1,12 +1,13 @@
 <ul class="list-domain">
-    {% for productDomain in productDetail.productDomainsIndexedByDomainId %}
+    {% for domain in domains %}
         <li class="list-domain__item">
-            {% set url = findUrlByDomainId('front_product_detail', { id: productDetail.product.id }, productDomain.domainId) %}
-            {% set isVisible = isVisibleForDefaultPricingGroup(productDetail.product, productDomain.domainId) %}
+            {% set product = productDetail.product %}
+            {% set url = findUrlByDomainId('front_product_detail', { id: productDetail.product.id }, domain.id) %}
+            {% set isVisible = isVisibleForDefaultPricingGroup(productDetail.product, domain.id) %}
 
             {% if isMultidomain() %}
                 <div class="list-domain__item__image">
-                    {{ domainIcon(productDomain.domainId) }}
+                    {{ domainIcon(domain.id) }}
                 </div>
             {% endif %}
 
@@ -16,12 +17,12 @@
 
             {% if isVisible %}
                 <a href="{{ url }}" class="list-domain__item__name" target="_blank">
-                    {{ getDomainName(productDomain.domainId) }}
+                    {{ getDomainName(domain.id) }}
                     <i class="svg svg-arrow-simple"></i>
                 </a>
             {% else %}
                 <span class="list-domain__item__name">
-                    {{ getDomainName(productDomain.domainId) }}
+                    {{ getDomainName(domain.id) }}
                 </span>
             {% endif %}
         </li>

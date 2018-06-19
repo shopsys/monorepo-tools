@@ -41,27 +41,10 @@ class IndependentTransportVisibilityCalculation
             return false;
         }
 
-        if (!$this->isOnDomain($transport, $domainId)) {
+        if (!$transport->isEnabled($domainId)) {
             return false;
         }
 
         return true;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     * @param int $domainId
-     * @return bool
-     */
-    private function isOnDomain(Transport $transport, $domainId)
-    {
-        $transportDomains = $this->transportRepository->getTransportDomainsByTransport($transport);
-        foreach ($transportDomains as $transportDomain) {
-            if ($transportDomain->getDomainId() === $domainId) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

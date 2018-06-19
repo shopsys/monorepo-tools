@@ -6,7 +6,6 @@ use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\FrameworkBundle\Model\Feed\FeedItemRepositoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductDomain;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Shopsys\ProductFeed\DomainConfigInterface;
 
@@ -50,8 +49,8 @@ class StandardFeedItemRepository implements FeedItemRepositoryInterface
             ->addSelect('v')->join('p.vat', 'v')
             ->addSelect('a')->join('p.calculatedAvailability', 'a')
             ->addSelect('b')->leftJoin('p.brand', 'b')
+            ->addSelect('pd')->join('p.domains', 'pd', Join::WITH, 'pd.domainId = :domain')
             ->andWhere('p.variantType != :variantTypeMain')->setParameter('variantTypeMain', Product::VARIANT_TYPE_MAIN)
-            ->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p.id AND pd.domainId = :domainId')
             ->orderBy('p.id', 'asc')
             ->setMaxResults($maxResults);
 

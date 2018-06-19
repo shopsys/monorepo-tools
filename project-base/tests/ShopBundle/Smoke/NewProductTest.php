@@ -64,7 +64,7 @@ class NewProductTest extends FunctionalTestCase
         $form['product_edit_form[productData][catnum]'] = '123456';
         $form['product_edit_form[productData][partno]'] = '123456';
         $form['product_edit_form[productData][ean]'] = '123456';
-        $form['product_edit_form[descriptions][1]'] = 'test description';
+        $form['product_edit_form[productData][descriptions][1]'] = 'test description';
         $form['product_edit_form[productData][price]'] = '10000';
         $form['product_edit_form[productData][vat]']->select($this->getReference(VatDataFixture::VAT_ZERO)->getId());
         $form['product_edit_form[productData][sellingFrom]'] = '1.1.1990';

@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Category;
 
+use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
@@ -22,14 +23,21 @@ class CategoryDataFactory
      */
     protected $pluginCrudExtensionFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    protected $domain;
+
     public function __construct(
         CategoryRepository $categoryRepository,
         FriendlyUrlFacade $friendlyUrlFacade,
-        PluginCrudExtensionFacade $pluginCrudExtensionFacade
+        PluginCrudExtensionFacade $pluginCrudExtensionFacade,
+        Domain $domain
     ) {
         $this->categoryRepository = $categoryRepository;
         $this->friendlyUrlFacade = $friendlyUrlFacade;
         $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
+        $this->domain = $domain;
     }
 
     /**
@@ -38,16 +46,20 @@ class CategoryDataFactory
      */
     public function createFromCategory(Category $category)
     {
-        $categoryDomains = $this->categoryRepository->getCategoryDomainsByCategory($category);
+        $categoryData = $this->createDefault();
 
-        $categoryData = new CategoryData();
-        $categoryData->setFromEntity($category, $categoryDomains);
+        $categoryData->name = $category->getNames();
+        $categoryData->parent = $category->getParent();
 
-        foreach ($categoryDomains as $categoryDomain) {
-            $domainId = $categoryDomain->getDomainId();
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $categoryData->seoMetaDescriptions[$domainId] = $category->getSeoMetaDescription($domainId);
+            $categoryData->seoTitles[$domainId] = $category->getSeoTitle($domainId);
+            $categoryData->seoH1s[$domainId] = $category->getSeoH1($domainId);
+            $categoryData->descriptions[$domainId] = $category->getDescription($domainId);
+            $categoryData->enabled[$domainId] = $category->isEnabled($domainId);
 
-            $categoryData->urls->mainFriendlyUrlsByDomainId[$domainId] =
-                $this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_list', $category->getId());
+            $mainFriendlyUrl = $this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_list', $category->getId());
+            $categoryData->urls->mainFriendlyUrlsByDomainId[$domainId] = $mainFriendlyUrl;
         }
 
         $categoryData->pluginData = $this->pluginCrudExtensionFacade->getAllData('category', $category->getId());
@@ -60,6 +72,16 @@ class CategoryDataFactory
      */
     public function createDefault()
     {
-        return new CategoryData();
+        $categoryData = new CategoryData();
+
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $categoryData->seoMetaDescriptions[$domainId] = null;
+            $categoryData->seoTitles[$domainId] = null;
+            $categoryData->seoH1s[$domainId] = null;
+            $categoryData->descriptions[$domainId] = null;
+            $categoryData->enabled[$domainId] = true;
+        }
+
+        return $categoryData;
     }
 }

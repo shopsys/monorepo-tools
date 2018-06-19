@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
+use Shopsys\FrameworkBundle\Model\Category\Exception\CategoryDomainNotFoundException;
 use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 
 /**
@@ -75,7 +76,7 @@ class Category extends AbstractTranslatableEntity
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDomain[]|\Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Category\CategoryDomain", mappedBy="category", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Shopsys\FrameworkBundle\Model\Category\CategoryDomain", mappedBy="category", cascade={"persist"}, fetch="EXTRA_LAZY")
      */
     protected $domains;
 
@@ -86,7 +87,10 @@ class Category extends AbstractTranslatableEntity
     {
         $this->setParent($categoryData->parent);
         $this->translations = new ArrayCollection();
+        $this->domains = new ArrayCollection();
+
         $this->setTranslations($categoryData);
+        $this->createDomains($categoryData);
     }
 
     /**
@@ -96,6 +100,7 @@ class Category extends AbstractTranslatableEntity
     {
         $this->setParent($categoryData->parent);
         $this->setTranslations($categoryData);
+        $this->setDomains($categoryData);
     }
 
     /**
@@ -190,7 +195,7 @@ class Category extends AbstractTranslatableEntity
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Category\CategoryDomain
      */
-    public function getCategoryDomain($domainId)
+    protected function getCategoryDomain($domainId)
     {
         foreach ($this->domains as $categoryDomain) {
             if ($categoryDomain->getDomainId() === $domainId) {
@@ -198,8 +203,9 @@ class Category extends AbstractTranslatableEntity
             }
         }
 
-        throw new \Shopsys\FrameworkBundle\Model\Category\Exception\CategoryDomainNotFoundException($this->id, $domainId);
+        throw new CategoryDomainNotFoundException($this->id, $domainId);
     }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
      */
@@ -211,10 +217,94 @@ class Category extends AbstractTranslatableEntity
     }
 
     /**
+     * @param int $domainId
+     * @return string|null
+     */
+    public function getSeoTitle(int $domainId)
+    {
+        return $this->getCategoryDomain($domainId)->getSeoTitle();
+    }
+
+    /**
+     * @param int $domainId
+     * @return string|null
+     */
+    public function getSeoH1(int $domainId)
+    {
+        return $this->getCategoryDomain($domainId)->getSeoH1();
+    }
+
+    /**
+     * @param int $domainId
+     * @return bool
+     */
+    public function isEnabled(int $domainId)
+    {
+        return $this->getCategoryDomain($domainId)->isEnabled();
+    }
+
+    /**
+     * @param $domainId
+     * @return bool
+     */
+    public function isVisible(int $domainId)
+    {
+        return $this->getCategoryDomain($domainId)->isVisible();
+    }
+
+    /**
+     * @param int $domainId
+     * @return string|null
+     */
+    public function getSeoMetaDescription(int $domainId)
+    {
+        return $this->getCategoryDomain($domainId)->getSeoMetaDescription();
+    }
+
+    /**
+     * @param int $domainId
+     * @return string|null
+     */
+    public function getDescription(int $domainId)
+    {
+        return $this->getCategoryDomain($domainId)->getDescription();
+    }
+
+    /**
      * @return \Shopsys\FrameworkBundle\Model\Category\CategoryTranslation
      */
     protected function createTranslation()
     {
         return new CategoryTranslation();
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
+     */
+    protected function setDomains(CategoryData $categoryData)
+    {
+        foreach ($this->domains as $categoryDomain) {
+            $domainId = $categoryDomain->getDomainId();
+            $categoryDomain->setSeoTitle($categoryData->seoTitles[$domainId]);
+            $categoryDomain->setSeoH1($categoryData->seoH1s[$domainId]);
+            $categoryDomain->setSeoMetaDescription($categoryData->seoMetaDescriptions[$domainId]);
+            $categoryDomain->setDescription($categoryData->descriptions[$domainId]);
+            $categoryDomain->setEnabled($categoryData->enabled[$domainId]);
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
+     */
+    protected function createDomains(CategoryData $categoryData)
+    {
+        $domainIds = array_keys($categoryData->seoTitles);
+
+        foreach ($domainIds as $domainId) {
+            $categoryDomain = new CategoryDomain($this, $domainId);
+            $this->domains[] = $categoryDomain;
+        }
+
+        $this->setDomains($categoryData);
     }
 }

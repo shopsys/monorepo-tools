@@ -12,8 +12,8 @@
                 {{ 'Basic information'|trans }}
             </div>
             {{ form_id(brand|default(null)) }}
-            {{ form_row(form.brandData.name, { label: 'Name'|trans}) }}
-            {{ form_row(form.brandData.descriptions, { label: 'Description'|trans}) }}
+            {{ form_row(form.name, { label: 'Name'|trans}) }}
+            {{ form_row(form.descriptions, { label: 'Description'|trans}) }}
         </div>
 
         <div class="wrap-border">
@@ -32,7 +32,7 @@
             <div class="form-group__title">
                 {{ 'Image'|trans }}
             </div>
-            {{ form_row(form.brandData.image, { label: 'Upload image'|trans }) }}
+            {{ form_row(form.image, { label: 'Upload image'|trans }) }}
         </div>
 
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}

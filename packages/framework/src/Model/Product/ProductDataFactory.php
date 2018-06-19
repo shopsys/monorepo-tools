@@ -130,6 +130,14 @@ class ProductDataFactory
             $names[$translation->getLocale()] = $translation->getName();
             $variantAliases[$translation->getLocale()] = $translation->getVariantAlias();
         }
+
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $productData->shortDescriptions[$domainId] = $product->getShortDescription($domainId);
+            $productData->descriptions[$domainId] = $product->getDescription($domainId);
+            $productData->seoH1s[$domainId] = $product->getSeoH1($domainId);
+            $productData->seoTitles[$domainId] = $product->getSeoTitle($domainId);
+            $productData->seoMetaDescriptions[$domainId] = $product->getSeoMetaDescription($domainId);
+        }
         $productData->name = $names;
         $productData->variantAlias = $variantAliases;
 
@@ -150,7 +158,6 @@ class ProductDataFactory
         $productData->outOfStockAction = $product->getOutOfStockAction();
 
         $productData->hidden = $product->isHidden();
-
         $productData->categoriesByDomainId = $product->getCategoriesIndexedByDomainId();
         $productData->priceCalculationType = $product->getPriceCalculationType();
         $productData->brand = $product->getBrand();
@@ -165,9 +172,6 @@ class ProductDataFactory
         $productData->accessories = $this->getAccessoriesData($product);
         $productData->images->orderedImages = $this->imageFacade->getImagesByEntityIndexedById($product, null);
         $productData->variants = $product->getVariants();
-
-        $this->setMultidomainData($product, $productData);
-
         $productData->pluginData = $this->pluginDataFormExtensionFacade->getAllData('product', $product->getId());
 
         return $productData;
@@ -202,25 +206,6 @@ class ProductDataFactory
         }
 
         return $productParameterValuesData;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     */
-    protected function setMultidomainData(Product $product, ProductData $productData)
-    {
-        $productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
-        foreach ($productDomains as $domainId => $productDomain) {
-            $productData->seoTitles[$domainId] = $productDomain->getSeoTitle();
-            $productData->seoMetaDescriptions[$domainId] = $productDomain->getSeoMetaDescription();
-            $productData->seoH1s[$domainId] = $productDomain->getSeoH1();
-            $productData->descriptions[$domainId] = $productDomain->getDescription();
-            $productData->shortDescriptions[$domainId] = $productDomain->getShortDescription();
-
-            $productData->urls->mainFriendlyUrlsByDomainId[$domainId] =
-                $this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
-        }
     }
 
     /**

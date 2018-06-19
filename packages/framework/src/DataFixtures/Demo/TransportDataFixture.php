@@ -5,10 +5,10 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 
 class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -21,11 +21,20 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
     private $transportFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
      */
-    public function __construct(TransportFacade $transportFacade)
-    {
+    private $transportDataFactory;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory $transportDataFactory
+     */
+    public function __construct(
+        TransportFacade $transportFacade,
+        TransportDataFactory $transportDataFactory
+    ) {
         $this->transportFacade = $transportFacade;
+        $this->transportDataFactory = $transportDataFactory;
     }
 
     /**
@@ -33,7 +42,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
      */
     public function load(ObjectManager $manager)
     {
-        $transportData = new TransportData();
+        $transportData = $this->transportDataFactory->createDefault();
         $transportData->name = [
             'cs' => 'Česká pošta - balík do ruky',
             'en' => 'Czech post',
@@ -43,10 +52,9 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 3.95,
         ];
         $transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
-        $transportData->domains = [Domain::FIRST_DOMAIN_ID];
         $this->createTransport(self::TRANSPORT_CZECH_POST, $transportData);
 
-        $transportData = new TransportData();
+        $transportData = $this->transportDataFactory->createDefault();
         $transportData->name = [
             'cs' => 'PPL',
             'en' => 'PPL',
@@ -56,10 +64,9 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             $this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 6.95,
         ];
         $transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
-        $transportData->domains = [Domain::FIRST_DOMAIN_ID];
         $this->createTransport(self::TRANSPORT_PPL, $transportData);
 
-        $transportData = new TransportData();
+        $transportData = $this->transportDataFactory->createDefault();
         $transportData->name = [
             'cs' => 'Osobní převzetí',
             'en' => 'Personal collection',
@@ -77,7 +84,6 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             'en' => 'We are looking forward to your visit.',
         ];
         $transportData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
-        $transportData->domains = [Domain::FIRST_DOMAIN_ID];
         $this->createTransport(self::TRANSPORT_PERSONAL, $transportData);
     }
 

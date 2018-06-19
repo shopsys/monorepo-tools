@@ -2,10 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Product;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FrameworkBundle\Component\Constraints\UniqueProductParameters;
-use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
@@ -18,14 +15,11 @@ use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
-use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -52,11 +46,6 @@ class ProductEditFormType extends AbstractType
     private $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade
-     */
-    private $seoSettingFacade;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade
      */
     private $pluginDataFormExtensionFacade;
@@ -65,13 +54,11 @@ class ProductEditFormType extends AbstractType
         RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer,
         PricingGroupFacade $pricingGroupFacade,
         Domain $domain,
-        SeoSettingFacade $seoSettingFacade,
         PluginCrudExtensionFacade $pluginDataFormExtensionFacade
     ) {
         $this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->domain = $domain;
-        $this->seoSettingFacade = $seoSettingFacade;
         $this->pluginDataFormExtensionFacade = $pluginDataFormExtensionFacade;
     }
 
@@ -82,32 +69,6 @@ class ProductEditFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $editedProduct = $options['product'];
-        $seoTitlesOptionsByDomainId = [];
-        $seoMetaDescriptionsOptionsByDomainId = [];
-        $seoH1OptionsByDomainId = [];
-        foreach ($this->domain->getAll() as $domainConfig) {
-            $domainId = $domainConfig->getId();
-
-            $seoTitlesOptionsByDomainId[$domainId] = [
-                'attr' => [
-                    'placeholder' => $this->getTitlePlaceholder($domainConfig, $editedProduct),
-                    'class' => 'js-dynamic-placeholder',
-                    'data-placeholder-source-input-id' => 'product_edit_form_productData_name_' . $domainConfig->getLocale(),
-                ],
-            ];
-            $seoMetaDescriptionsOptionsByDomainId[$domainId] = [
-                'attr' => [
-                    'placeholder' => $this->seoSettingFacade->getDescriptionMainPage($domainId),
-                ],
-            ];
-            $seoH1OptionsByDomainId[$domainId] = [
-                'attr' => [
-                    'placeholder' => $this->getTitlePlaceholder($domainConfig, $editedProduct),
-                    'class' => 'js-dynamic-placeholder',
-                    'data-placeholder-source-input-id' => 'product_edit_form_productData_name_' . $domainConfig->getLocale(),
-                ],
-            ];
-        }
 
         $builder
             ->add('productData', ProductFormType::class, [
@@ -144,29 +105,6 @@ class ProductEditFormType extends AbstractType
                 ->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer()))
             ->add('manualInputPricesByPricingGroupId', FormType::class, [
                 'compound' => true,
-            ])
-            ->add('seoTitles', MultidomainType::class, [
-                'entry_type' => TextType::class,
-                'required' => false,
-                'options_by_domain_id' => $seoTitlesOptionsByDomainId,
-            ])
-            ->add('seoMetaDescriptions', MultidomainType::class, [
-                'entry_type' => TextareaType::class,
-                'required' => false,
-                'options_by_domain_id' => $seoMetaDescriptionsOptionsByDomainId,
-            ])
-            ->add('seoH1s', MultidomainType::class, [
-                'entry_type' => TextType::class,
-                'required' => false,
-                'options_by_domain_id' => $seoH1OptionsByDomainId,
-            ])
-            ->add('descriptions', MultidomainType::class, [
-                'entry_type' => CKEditorType::class,
-                'required' => false,
-            ])
-            ->add('shortDescriptions', MultidomainType::class, [
-                'entry_type' => TextareaType::class,
-                'required' => false,
             ])
             ->add('urls', UrlListType::class, [
                 'route_name' => 'front_product_detail',
@@ -247,18 +185,6 @@ class ProductEditFormType extends AbstractType
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
-     * @return string
-     */
-    private function getTitlePlaceholder(DomainConfig $domainConfig, Product $product = null)
-    {
-        $domainLocale = $domainConfig->getLocale();
-
-        return $product !== null ? $product->getName($domainLocale) : '';
-    }
-
-    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      */
@@ -266,9 +192,6 @@ class ProductEditFormType extends AbstractType
     {
         if ($product->isMainVariant()) {
             $builder->get('manualInputPricesByPricingGroupId')->setDisabled(true);
-        }
-        if ($product->isVariant()) {
-            $builder->get('descriptions')->setDisabled(true);
         }
     }
 }

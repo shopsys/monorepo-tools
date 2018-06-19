@@ -248,7 +248,7 @@ class CategoryController extends AdminBaseController
             $categoriesData[] = [
                 'id' => $category->getId(),
                 'categoryName' => $category->getName(),
-                'isVisible' => $category->getCategoryDomain($domainId)->isVisible(),
+                'isVisible' => $category->isVisible($domainId),
                 'hasChildren' => $category->hasChildren(),
                 'loadUrl' => $this->generateUrl('admin_category_loadbranchjson', [
                     'domainId' => $domainId,

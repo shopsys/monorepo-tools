@@ -2,22 +2,20 @@
 
 namespace Shopsys\FrameworkBundle\Model\Category\Exception;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Exception;
 
-class CategoryDomainNotFoundException extends NotFoundHttpException implements CategoryException
+class CategoryDomainNotFoundException extends Exception implements CategoryException
 {
     /**
-     * @param int $categoryId
+     * @param int|null $categoryId
      * @param int $domainId
      * @param \Exception|null $previous
      */
-    public function __construct($categoryId, $domainId, \Exception $previous = null)
+    public function __construct(int $categoryId = null, int $domainId, Exception $previous = null)
     {
-        $message = sprintf(
-            'CategoryDomain for category ID %d and domain ID %d not found.',
-            $categoryId,
-            $domainId
-        );
-        parent::__construct($message, $previous, 0);
+        $categoryDescription = $categoryId !== null ? sprintf('with ID %d', $categoryId) : 'without ID';
+        $message = sprintf('CategoryDomain for category %s and domain ID %d not found.', $categoryDescription, $domainId);
+
+        parent::__construct($message, 0, $previous);
     }
 }

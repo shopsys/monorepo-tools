@@ -117,13 +117,4 @@ class ProductDetailFactory
     {
         return $this->imageFacade->getImagesByEntityIndexedById($product, null);
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]
-     */
-    public function getProductDomainsIndexedByDomainId(Product $product)
-    {
-        return $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
-    }
 }

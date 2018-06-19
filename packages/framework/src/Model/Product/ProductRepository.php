@@ -67,14 +67,6 @@ class ProductRepository
     }
 
     /**
-     * @return \Doctrine\ORM\EntityRepository
-     */
-    protected function getProductDomainRepository()
-    {
-        return $this->em->getRepository(ProductDomain::class);
-    }
-
-    /**
      * @param int $id
      * @return \Shopsys\FrameworkBundle\Model\Product\Product|null
      */
@@ -162,9 +154,11 @@ class ProductRepository
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param int $domainId
      */
-    public function addDomain(QueryBuilder $queryBuilder, $domainId)
+    protected function addDomain(QueryBuilder $queryBuilder, $domainId)
     {
-        $queryBuilder->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p AND pd.domainId = :domainId');
+        $queryBuilder->addSelect('pd')
+            ->join('p.domains', 'pd', Join::WITH, 'pd.domainId = :domainId');
+
         $queryBuilder->setParameter('domainId', $domainId);
     }
 
@@ -340,6 +334,7 @@ class ProductRepository
         );
 
         $this->addTranslation($queryBuilder, $locale);
+        $this->addDomain($queryBuilder, $domainId);
         $this->applyOrdering($queryBuilder, $orderingModeId, $pricingGroup, $locale);
 
         $queryPaginator = new QueryPaginator($queryBuilder);
@@ -369,6 +364,7 @@ class ProductRepository
         );
 
         $this->addTranslation($queryBuilder, $locale);
+        $this->addDomain($queryBuilder, $domainId);
         $this->productFilterRepository->applyFiltering(
             $queryBuilder,
             $productFilterData,
@@ -588,72 +584,6 @@ class ProductRepository
         ');
 
         return $query->iterate();
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]
-     */
-    public function getProductDomainsByProductIndexedByDomainId(Product $product)
-    {
-        $queryBuilder = $this->em->createQueryBuilder()
-            ->select('pd')
-            ->from(ProductDomain::class, 'pd', 'pd.domainId')
-            ->where('pd.product = :product')
-            ->orderBy('pd.domainId', 'ASC');
-        $queryBuilder->setParameter('product', $product);
-
-        return $queryBuilder->getQuery()->execute();
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
-     * @param int $domainId
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]
-     */
-    public function getProductDomainsByProductsAndDomainIdIndexedByProductId(array $products, $domainId)
-    {
-        $queryBuilder = $this->em->createQueryBuilder()
-            ->select('pd')
-            ->from(ProductDomain::class, 'pd')
-            ->where('pd.product IN (:products)')->setParameter('products', $products)
-            ->andWhere('pd.domainId = :domainId')->setParameter('domainId', $domainId);
-
-        $productDomainByProductId = [];
-        foreach ($queryBuilder->getQuery()->execute() as $productDomain) {
-            /* @var $productDomain \Shopsys\FrameworkBundle\Model\Product\ProductDomain */
-            $productDomainByProductId[$productDomain->getProduct()->getId()] = $productDomain;
-        }
-
-        return $productDomainByProductId;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param int $domainId
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain|null
-     */
-    public function findProductDomainByProductAndDomainId(Product $product, $domainId)
-    {
-        return $this->getProductDomainRepository()->find([
-            'product' => $product->getId(),
-            'domainId' => $domainId,
-        ]);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param int $domainId
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain
-     */
-    public function getProductDomainByProductAndDomainId(Product $product, $domainId)
-    {
-        $productDomain = $this->findProductDomainByProductAndDomainId($product, $domainId);
-        if ($productDomain === null) {
-            throw new \Shopsys\FrameworkBundle\Model\Product\Exception\ProductDomainNotFoundException();
-        }
-
-        return $productDomain;
     }
 
     public function markAllProductsForAvailabilityRecalculation()

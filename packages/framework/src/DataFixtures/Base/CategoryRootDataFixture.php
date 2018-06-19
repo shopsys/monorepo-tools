@@ -5,9 +5,7 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Base;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Model\Category\CategoryData;
-use Shopsys\FrameworkBundle\Model\Category\CategoryDomainFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface;
 
 class CategoryRootDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -20,20 +18,20 @@ class CategoryRootDataFixture extends AbstractReferenceFixture implements Depend
     protected $categoryFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDomainFactoryInterface
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory
      */
-    protected $categoryDomainFactory;
+    protected $categoryDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface $categoryFactory
-     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDomainFactoryInterface $categoryDomainFactory
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory $categoryDataFactory
      */
     public function __construct(
         CategoryFactoryInterface $categoryFactory,
-        CategoryDomainFactoryInterface $categoryDomainFactory
+        CategoryDataFactory $categoryDataFactory
     ) {
         $this->categoryFactory = $categoryFactory;
-        $this->categoryDomainFactory = $categoryDomainFactory;
+        $this->categoryDataFactory = $categoryDataFactory;
     }
 
     /**
@@ -41,15 +39,11 @@ class CategoryRootDataFixture extends AbstractReferenceFixture implements Depend
      */
     public function load(ObjectManager $manager)
     {
-        $rootCategory = $this->categoryFactory->create(new CategoryData());
+        $categoryData = $this->categoryDataFactory->createDefault();
+        $rootCategory = $this->categoryFactory->create($categoryData);
         $manager->persist($rootCategory);
         $manager->flush($rootCategory);
         $this->addReference(self::CATEGORY_ROOT, $rootCategory);
-
-        $categoryDomain = $this->categoryDomainFactory->create($rootCategory, Domain::FIRST_DOMAIN_ID);
-        $manager->persist($categoryDomain);
-
-        $manager->flush();
     }
 
     /**

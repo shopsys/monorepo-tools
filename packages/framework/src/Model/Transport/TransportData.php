@@ -38,11 +38,6 @@ class TransportData
     public $image;
 
     /**
-     * @var int[]
-     */
-    public $domains;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\Payment[]
      */
     public $payments;
@@ -53,12 +48,17 @@ class TransportData
     public $pricesByCurrencyId;
 
     /**
+     * @var bool[]
+     */
+    public $enabled;
+
+    /**
      * @param string[] $names
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null $vat
      * @param string[] $descriptions
      * @param string[] $instructions
      * @param bool $hidden
-     * @param int[] $domains
+     * @param bool[] $enabled
      * @param string[] $pricesByCurrencyId
      */
     public function __construct(
@@ -67,7 +67,7 @@ class TransportData
         array $descriptions = [],
         array $instructions = [],
         $hidden = false,
-        array $domains = [],
+        array $enabled = [],
         array $pricesByCurrencyId = []
     ) {
         $this->name = $names;
@@ -75,38 +75,9 @@ class TransportData
         $this->description = $descriptions;
         $this->instructions = $instructions;
         $this->hidden = $hidden;
+        $this->enabled = $enabled;
         $this->image = new ImageUploadData();
-        $this->domains = $domains;
         $this->pricesByCurrencyId = $pricesByCurrencyId;
         $this->payments = [];
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
-     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportDomain[] $transportDomains
-     */
-    public function setFromEntity(Transport $transport, array $transportDomains)
-    {
-        $translations = $transport->getTranslations();
-        $names = [];
-        $descriptions = [];
-        $instructions = [];
-        foreach ($translations as $translate) {
-            $names[$translate->getLocale()] = $translate->getName();
-            $descriptions[$translate->getLocale()] = $translate->getDescription();
-            $instructions[$translate->getLocale()] = $translate->getInstructions();
-        }
-        $this->name = $names;
-        $this->description = $descriptions;
-        $this->instructions = $instructions;
-        $this->hidden = $transport->isHidden();
-        $this->vat = $transport->getVat();
-
-        $domains = [];
-        foreach ($transportDomains as $transportDomain) {
-            $domains[] = $transportDomain->getDomainId();
-        }
-        $this->domains = $domains;
-        $this->payments = $transport->getPayments()->toArray();
     }
 }

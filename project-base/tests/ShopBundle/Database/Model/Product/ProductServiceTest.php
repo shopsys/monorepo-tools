@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPrice;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductService;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
@@ -22,6 +22,7 @@ class ProductServiceTest extends DatabaseTestCase
         /* @var $productService \Shopsys\FrameworkBundle\Model\Product\ProductService */
         $setting = $this->getContainer()->get(Setting::class);
         /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
+        $producDataFactory = $this->getContainer()->get(ProductDataFactory::class);
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
 
@@ -30,7 +31,7 @@ class ProductServiceTest extends DatabaseTestCase
 
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
-        $productData = new ProductData();
+        $productData = $producDataFactory->createDefault();
         $productData->price = 1000;
         $productData->vat = $vat;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
@@ -50,6 +51,7 @@ class ProductServiceTest extends DatabaseTestCase
         /* @var $productService \Shopsys\FrameworkBundle\Model\Product\ProductService */
         $setting = $this->getContainer()->get(Setting::class);
         /* @var $setting \Shopsys\FrameworkBundle\Component\Setting\Setting */
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 
@@ -58,7 +60,7 @@ class ProductServiceTest extends DatabaseTestCase
 
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
-        $productData = new ProductData();
+        $productData = $productDataFactory->createDefault();
         $productData->price = 1000;
         $productData->vat = $vat;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);

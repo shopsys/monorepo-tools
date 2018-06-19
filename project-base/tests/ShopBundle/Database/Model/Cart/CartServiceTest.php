@@ -9,7 +9,7 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class CartServiceTest extends FunctionalTestCase
@@ -175,10 +175,12 @@ class CartServiceTest extends FunctionalTestCase
      */
     private function createProduct()
     {
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+
         $price = 100;
         $vat = new Vat(new VatData('vat', 21));
 
-        $productData = new ProductData();
+        $productData = $productDataFactory->createDefault();
         $productData->name = ['cs' => 'Any name'];
         $productData->price = $price;
         $productData->vat = $vat;

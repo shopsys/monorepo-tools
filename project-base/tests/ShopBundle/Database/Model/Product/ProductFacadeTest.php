@@ -8,7 +8,6 @@ use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Tests\ShopBundle\Test\DatabaseTestCase;
@@ -26,7 +25,8 @@ class ProductFacadeTest extends DatabaseTestCase
         $calculatedHidden,
         $calculatedSellingDenied
     ) {
-        $productData = new ProductData();
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+        $productData = $productDataFactory->createDefault();
         $productData->hidden = $hidden;
         $productData->sellingDenied = $sellingDenied;
         $productData->stockQuantity = $stockQuantity;

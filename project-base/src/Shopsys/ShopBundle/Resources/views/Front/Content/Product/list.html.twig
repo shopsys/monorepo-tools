@@ -3,27 +3,25 @@
 {% import '@ShopsysShop/Front/Content/Product/filterFormMacro.html.twig' as productFilterForm %}
 {% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
+{% set domain = getDomain() %}
+
 {% block meta_robots %}
     {{ paginator.metaRobots(paginationResult) }}
 {% endblock %}
 
 {% block meta_description %}
-    {{- categoryDomain.seoMetaDescription|default(getSeoMetaDescription()) -}}
+    {{- category.getSeoMetaDescription(domain.id)|default(getSeoMetaDescription()) -}}
 {% endblock %}
 
 {% block title %}
-    {{ categoryDomain.seoTitle|default(category.name) }}
+    {{ category.getSeoTitle(domain.id)|default(category.name) }}
 {% endblock %}
 
 {% block main_content %}
     <div class="box-list">
         {{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
         <h1>
-            {% if categoryDomain.seoH1 is not null %}
-                {{ categoryDomain.seoH1 }}
-            {% else %}
-                {{ category.name }}
-            {% endif %}
+            {{ category.getSeoH1(domain.id)|default(category.name) }}
         </h1>
         {% if visibleChildren is not empty %}
             <h2>{{ 'List of subcategories'|trans }}</h2>
@@ -58,7 +56,7 @@
 
         <div class="box-list__description">
             <div class="js-category-description box-list__description__text in-user-text">
-                {{ categoryDomain.description|raw }}
+                {{ category.getDescription(domain.id)|raw }}
             </div>
             <div class="box-list__description__more">
                 <span class="js-category-description-load-more link-style box-list__description__more__btn">

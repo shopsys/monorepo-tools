@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Product;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FormTypesBundle\YesNoType;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
@@ -15,10 +16,12 @@ use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
+use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -62,13 +65,19 @@ class ProductFormType extends AbstractType
      */
     private $domain;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade
+     */
+    private $seoSettingFacade;
+
     public function __construct(
         VatFacade $vatFacade,
         AvailabilityFacade $availabilityFacade,
         BrandFacade $brandFacade,
         FlagFacade $flagFacade,
         UnitFacade $unitFacade,
-        Domain $domain
+        Domain $domain,
+        SeoSettingFacade $seoSettingFacade
     ) {
         $this->vatFacade = $vatFacade;
         $this->availabilityFacade = $availabilityFacade;
@@ -76,6 +85,7 @@ class ProductFormType extends AbstractType
         $this->flagFacade = $flagFacade;
         $this->unitFacade = $unitFacade;
         $this->domain = $domain;
+        $this->seoSettingFacade = $seoSettingFacade;
     }
 
     /**
@@ -86,7 +96,10 @@ class ProductFormType extends AbstractType
     {
         $vats = $this->vatFacade->getAllIncludingMarkedForDeletion();
 
-        if ($options['product'] !== null && $options['product']->isVariant()) {
+        $product = $options['product'];
+        /* @var $product \Shopsys\FrameworkBundle\Model\Product\Product|null */
+
+        if ($product !== null && $product->isVariant()) {
             $builder->add('variantAlias', LocalizedType::class, [
                 'required' => false,
                 'entry_options' => [
@@ -95,6 +108,34 @@ class ProductFormType extends AbstractType
                     ],
                 ],
             ]);
+        }
+
+        $seoTitlesOptionsByDomainId = [];
+        $seoMetaDescriptionsOptionsByDomainId = [];
+        $seoH1OptionsByDomainId = [];
+        foreach ($this->domain->getAll() as $domainConfig) {
+            $domainId = $domainConfig->getId();
+            $locale = $domainConfig->getLocale();
+
+            $seoTitlesOptionsByDomainId[$domainId] = [
+                'attr' => [
+                    'placeholder' => $this->getTitlePlaceholder($locale, $product),
+                    'class' => 'js-dynamic-placeholder',
+                    'data-placeholder-source-input-id' => 'product_edit_form_productData_name_' . $locale,
+                ],
+            ];
+            $seoMetaDescriptionsOptionsByDomainId[$domainId] = [
+                'attr' => [
+                    'placeholder' => $this->seoSettingFacade->getDescriptionMainPage($domainId),
+                ],
+            ];
+            $seoH1OptionsByDomainId[$domainId] = [
+                'attr' => [
+                    'placeholder' => $this->getTitlePlaceholder($locale, $product),
+                    'class' => 'js-dynamic-placeholder',
+                    'data-placeholder-source-input-id' => 'product_edit_form_productData_name_' . $locale,
+                ],
+            ];
         }
 
         $categoriesOptionsByDomainId = [];
@@ -272,10 +313,33 @@ class ProductFormType extends AbstractType
                 'required' => false,
                 'entry_type' => CategoriesType::class,
                 'options_by_domain_id' => $categoriesOptionsByDomainId,
+            ])
+            ->add('seoTitles', MultidomainType::class, [
+                'entry_type' => TextType::class,
+                'required' => false,
+                'options_by_domain_id' => $seoTitlesOptionsByDomainId,
+            ])
+            ->add('seoMetaDescriptions', MultidomainType::class, [
+                'entry_type' => TextareaType::class,
+                'required' => false,
+                'options_by_domain_id' => $seoMetaDescriptionsOptionsByDomainId,
+            ])
+            ->add('seoH1s', MultidomainType::class, [
+                'entry_type' => TextType::class,
+                'required' => false,
+                'options_by_domain_id' => $seoH1OptionsByDomainId,
+            ])
+            ->add('descriptions', MultidomainType::class, [
+                'entry_type' => CKEditorType::class,
+                'required' => false,
+            ])
+            ->add('shortDescriptions', MultidomainType::class, [
+                'entry_type' => TextareaType::class,
+                'required' => false,
             ]);
 
-        if ($options['product'] !== null) {
-            $this->disableIrrelevantFields($builder, $options['product']);
+        if ($product !== null) {
+            $this->disableIrrelevantFields($builder, $product);
         }
     }
 
@@ -337,10 +401,21 @@ class ProductFormType extends AbstractType
         if ($product->isVariant()) {
             $irrelevantFields = [
                 'categoriesByDomainId',
+                'descriptions',
             ];
         }
         foreach ($irrelevantFields as $irrelevantField) {
             $builder->get($irrelevantField)->setDisabled(true);
         }
+    }
+
+    /**
+     * @param string $locale
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product|null $product
+     * @return string
+     */
+    private function getTitlePlaceholder($locale, Product $product = null)
+    {
+        return $product !== null ? $product->getName($locale) : '';
     }
 }

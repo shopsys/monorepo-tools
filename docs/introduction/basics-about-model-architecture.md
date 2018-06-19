@@ -67,15 +67,146 @@ class Product
 }
 ```
 
-### Factory
+## Entity Domain
+It is an entity which encapsulates data that are domain-specific (similarly to an Entity Translation encapsulating locale-specific data).
+Domain entity has a bidirectional many-to-one association to its main entity.
+That means that you can access domain entity through entity itself and vice versa.
+
+Setting the properties of a domain entity is always done via the main entity itself.
+Basically, that means only the main entity knows about the existence of domain entities.
+The rest of the application uses the main entity as a proxy to the domain-specific properties.
+
+### Example
+```php
+// FrameworkBundle/Model/Product/Brand/BrandDomain.php
+
+namespace Shopsys\FrameworkBundle\Model\Product\Brand
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="brand_domains")
+ * @ORM\Entity
+ */
+class BrandDomain
+{
+     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    protected $id;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\Brand
+     *
+     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Brand\Brand", inversedBy="domains")
+     * @ORM\JoinColumn(nullable=false, name="brand_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $brand;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $domainId;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $seoTitle;
+
+    // ...
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
+     * @param int $domainId
+     */
+    public function __construct(Brand $brand, $domainId)
+    {
+        $this->brand = $brand;
+        $this->domainId = $domainId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSeoTitle()
+    {
+        return $this->seoTitle;
+    }
+
+    /**
+     * @param string|null $seoTitle
+     */
+    public function setSeoTitle($seoTitle)
+    {
+        $this->seoTitle = $seoTitle;
+    }
+
+    // ...
+
+}
+```
+
+...and its main entity `Brand` working as a proxy:
+
+```php
+// FrameworkBundle/Model/Product/Brand/Brand.php
+
+namespace Shopsys\FrameworkBundle\Model\Product\Brand;
+
+/**
+ * @ORM\Table(name="brands")
+ * @ORM\Entity
+ */
+class Brand extends AbstractTranslatableEntity
+{
+
+    // ...
+
+    /**
+     * @param int $domainId
+     * @return string
+     */
+    public function getSeoTitle(int $domainId)
+    {
+        return $this->getBrandDomain($domainId)->getSeoTitle();
+    }
+    
+    /**
+     * @param int $domainId
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain
+     */
+    protected function getBrandDomain(int $domainId)
+    {
+        foreach ($this->domains as $domain) {
+            if ($domain->getDomainId() === $domainId) {
+                return $domain;
+            }
+        }
+
+        throw new BrandDomainNotFoundException($this->id, $domainId);
+    }
+
+    // ...
+
+}
+```
+
+## Entity Factory
 
 Is a class that creates an entity.
 The framework must allow using extended entities and this problem is solved using factories.
 
-Only entities that are not created by the factory are `*Translation` entities.
-These entities are created by their owner entity.
+The only entities that are not created by a factory are `*Translation` and `*Domain` entities.
+These entities are created by their main entity.
 
-#### Example
+### Example
 ```php
 // FrameworkBundle/Model/Cart/Item/CartItemFactoryInterface.php
 

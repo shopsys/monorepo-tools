@@ -125,11 +125,6 @@ class ProductFacade
     protected $productCategoryDomainFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDomainFactoryInterface
-     */
-    protected $productDomainFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactoryInterface
      */
     protected $productParameterValueFactory;
@@ -161,7 +156,6 @@ class ProductFacade
         ProductFactoryInterface $productFactory,
         ProductAccessoryFactoryInterface $productAccessoryFactory,
         ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
-        ProductDomainFactoryInterface $productDomainFactory,
         ProductParameterValueFactoryInterface $productParameterValueFactory,
         ProductVisibilityFactoryInterface $productVisibilityFactory
     ) {
@@ -186,7 +180,6 @@ class ProductFacade
         $this->productFactory = $productFactory;
         $this->productAccessoryFactory = $productAccessoryFactory;
         $this->productCategoryDomainFactory = $productCategoryDomainFactory;
-        $this->productDomainFactory = $productDomainFactory;
         $this->productParameterValueFactory = $productParameterValueFactory;
         $this->productVisibilityFactory = $productVisibilityFactory;
     }
@@ -235,9 +228,7 @@ class ProductFacade
         $this->em->flush($product);
 
         $this->saveParameters($product, $productData->parameters);
-        $this->createProductDomains($product, $this->domain->getAll());
         $this->createProductVisibilities($product);
-        $this->refreshProductDomains($product, $productData);
         $this->refreshProductManualInputPrices($product, $productData->manualInputPricesByPricingGroupId);
         $this->refreshProductAccessories($product, $productData->accessories);
         $this->productHiddenRecalculator->calculateHiddenForProduct($product);
@@ -263,7 +254,6 @@ class ProductFacade
         $this->productService->edit($product, $productData);
 
         $this->saveParameters($product, $productData->parameters);
-        $this->refreshProductDomains($product, $productData);
         if (!$product->isMainVariant()) {
             $this->refreshProductManualInputPrices($product, $productData->manualInputPricesByPricingGroupId);
         } else {
@@ -337,57 +327,6 @@ class ProductFacade
             $toFlush[] = $productParameterValue;
         }
         $this->em->flush($toFlush);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig[] $domains
-     */
-    protected function createProductDomains(Product $product, array $domains)
-    {
-        $toFlush = [];
-        foreach ($domains as $domain) {
-            $productDomain = $this->productDomainFactory->create($product, $domain->getId());
-            $this->em->persist($productDomain);
-            $toFlush[] = $productDomain;
-        }
-        $this->em->flush($toFlush);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
-     */
-    protected function refreshProductDomains(Product $product, ProductData $productData)
-    {
-        $productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
-        $seoTitles = $productData->seoTitles;
-        $seoMetaDescriptions = $productData->seoMetaDescriptions;
-        $seoH1s = $productData->seoH1s;
-        if (!$product->isVariant()) {
-            $descriptions = $productData->descriptions;
-            $shortDescriptions = $productData->shortDescriptions;
-        }
-
-        foreach ($productDomains as $domainId => $productDomain) {
-            if (!empty($seoTitles)) {
-                $productDomain->setSeoTitle($seoTitles[$domainId]);
-            }
-            if (!empty($seoMetaDescriptions)) {
-                $productDomain->setSeoMetaDescription($seoMetaDescriptions[$domainId]);
-            }
-            if (!empty($descriptions)) {
-                $productDomain->setDescription($descriptions[$domainId]);
-            }
-            if (!empty($shortDescriptions)) {
-                $productDomain->setShortDescription($shortDescriptions[$domainId]);
-            }
-            if (!empty($seoH1s)) {
-                $productDomain->setSeoH1($seoH1s[$domainId]);
-            }
-        }
-
-        $this->em->flush($productDomains);
     }
 
     /**

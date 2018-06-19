@@ -11,7 +11,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Availability\Availability;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class CartTest extends DatabaseTestCase
@@ -19,12 +19,13 @@ class CartTest extends DatabaseTestCase
     public function testRemoveItem()
     {
         $em = $this->getEntityManager();
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
 
         $customerIdentifier = new CustomerIdentifier('randomString');
 
         $vat = new Vat(new VatData('vat', 21));
         $availability = new Availability(new AvailabilityData([], 0));
-        $productData = new ProductData();
+        $productData = $productDataFactory->createDefault();
         $productData->name = [];
         $productData->price = 100;
         $productData->vat = $vat;

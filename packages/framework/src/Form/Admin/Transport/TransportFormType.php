@@ -31,8 +31,10 @@ class TransportFormType extends AbstractType
      */
     private $paymentFacade;
 
-    public function __construct(VatFacade $vatFacade, PaymentFacade $paymentFacade)
-    {
+    public function __construct(
+        VatFacade $vatFacade,
+        PaymentFacade $paymentFacade
+    ) {
         $this->vatFacade = $vatFacade;
         $this->paymentFacade = $paymentFacade;
     }
@@ -69,7 +71,7 @@ class TransportFormType extends AbstractType
                 ],
                 'label' => t('Name'),
             ])
-            ->add('domains', DomainsType::class, [
+            ->add('enabled', DomainsType::class, [
                 'required' => false,
                 'label' => t('Display on'),
             ])

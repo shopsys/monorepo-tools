@@ -134,19 +134,6 @@ class ProductCollectionFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\FrameworkBundle\Model\Product\ProductDomain[]
-     */
-    public function getProductDomainsIndexedByProductId(array $products, DomainConfig $domainConfig)
-    {
-        return $this->productRepository->getProductDomainsByProductsAndDomainIdIndexedByProductId(
-            $products,
-            $domainConfig->getId()
-        );
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string[][]
      */
     public function getProductParameterValuesIndexedByProductIdAndParameterName(array $products, DomainConfig $domainConfig)

@@ -14,7 +14,7 @@ use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactory;
-use Shopsys\FrameworkBundle\Model\Product\ProductData;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository;
 use Tests\ShopBundle\Test\FunctionalTestCase;
@@ -24,9 +24,10 @@ class CartWatcherServiceTest extends FunctionalTestCase
     public function testGetModifiedPriceItemsAndUpdatePrices()
     {
         $customerIdentifier = new CustomerIdentifier('randomString');
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
 
         $vat = new Vat(new VatData('vat', 21));
-        $productData1 = new ProductData();
+        $productData1 = $productDataFactory->createDefault();
         $productData1->name = [];
         $productData1->price = 100;
         $productData1->vat = $vat;
@@ -46,7 +47,7 @@ class CartWatcherServiceTest extends FunctionalTestCase
         $modifiedItems1 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
         $this->assertEmpty($modifiedItems1);
 
-        $productData2 = new ProductData();
+        $productData2 = $productDataFactory->createDefault();
         $productData2->name = [];
         $productData2->price = 200;
         $productData2->vat = $vat;
@@ -88,7 +89,9 @@ class CartWatcherServiceTest extends FunctionalTestCase
 
     public function testGetNotListableItemsWithVisibleButNotSellableProduct()
     {
-        $productData = new ProductData();
+        $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
+
+        $productData = $productDataFactory->createDefault();
         $productData->name = [];
         $productData->price = 100;
         $productData->vat = new Vat(new VatData('vat', 21));

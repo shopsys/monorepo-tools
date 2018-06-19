@@ -28,11 +28,6 @@ class PaymentData
     public $instructions;
 
     /**
-     * @var int[]
-     */
-    public $domains;
-
-    /**
      * @var int
      */
     public $hidden;
@@ -58,13 +53,19 @@ class PaymentData
     public $pricesByCurrencyId;
 
     /**
+     * @var bool[]
+     */
+    public $enabled;
+
+    /**
      * @param string[] $name
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null $vat
      * @param string[] $description
      * @param string[] $instructions
      * @param bool $hidden
-     * @param int[] $domains
+     * @param bool[] $enabled
      * @param bool $czkRounding
+     * @param array $pricesByCurrencyId
      */
     public function __construct(
         array $name = [],
@@ -72,7 +73,7 @@ class PaymentData
         array $description = [],
         array $instructions = [],
         $hidden = false,
-        array $domains = [],
+        array $enabled = [],
         $czkRounding = false,
         array $pricesByCurrencyId = []
     ) {
@@ -80,42 +81,11 @@ class PaymentData
         $this->vat = $vat;
         $this->description = $description;
         $this->instructions = $instructions;
-        $this->domains = $domains;
         $this->hidden = $hidden;
+        $this->enabled = $enabled;
         $this->image = new ImageUploadData();
         $this->transports = [];
         $this->czkRounding = $czkRounding;
         $this->pricesByCurrencyId = $pricesByCurrencyId;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
-     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentDomain[] $paymentDomains
-     */
-    public function setFromEntity(Payment $payment, array $paymentDomains)
-    {
-        $this->vat = $payment->getVat();
-        $this->hidden = $payment->isHidden();
-        $this->czkRounding = $payment->isCzkRounding();
-        $this->transports = $payment->getTransports()->toArray();
-
-        $translations = $payment->getTranslations();
-        $names = [];
-        $descriptions = [];
-        $instructions = [];
-        foreach ($translations as $translate) {
-            $names[$translate->getLocale()] = $translate->getName();
-            $descriptions[$translate->getLocale()] = $translate->getDescription();
-            $instructions[$translate->getLocale()] = $translate->getInstructions();
-        }
-        $this->name = $names;
-        $this->description = $descriptions;
-        $this->instructions = $instructions;
-
-        $domains = [];
-        foreach ($paymentDomains as $paymentDomain) {
-            $domains[] = $paymentDomain->getDomainId();
-        }
-        $this->domains = $domains;
     }
 }

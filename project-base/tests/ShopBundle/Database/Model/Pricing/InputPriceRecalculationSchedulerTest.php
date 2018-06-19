@@ -5,7 +5,7 @@ namespace Tests\ShopBundle\Database\Model\Pricing;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Pricing\InputPriceRecalculator;
@@ -17,7 +17,7 @@ use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
-use Shopsys\FrameworkBundle\Model\Transport\TransportData;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Tests\ShopBundle\Test\DatabaseTestCase;
@@ -101,6 +101,10 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         /* @var $paymentFacade \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
         $transportFacade = $this->getContainer()->get(TransportFacade::class);
         /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
+        $paymentDataFactory = $this->getContainer()->get(PaymentDataFactory::class);
+        /* @var $paymentDataFactory \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory */
+        $transportDataFactory = $this->getContainer()->get(TransportDataFactory::class);
+        /* @var $transportDataFactory \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory */
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 
@@ -117,14 +121,14 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
             $vatPercent
         );
 
-        $paymentData = new PaymentData();
+        $paymentData = $paymentDataFactory->createDefault();
         $paymentData->name = ['cs' => 'name'];
         $paymentData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
         $paymentData->vat = $vat;
         $payment = $paymentFacade->create($paymentData);
         /* @var $payment \Shopsys\FrameworkBundle\Model\Payment\Payment */
 
-        $transportData = new \Shopsys\FrameworkBundle\Model\Transport\TransportData();
+        $transportData = $transportDataFactory->createDefault();
         $transportData->name = ['cs' => 'name'];
         $transportData->description = ['cs' => 'desc'];
         $transportData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
@@ -170,6 +174,10 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         /* @var $paymentFacade \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade */
         $transportFacade = $this->getContainer()->get(TransportFacade::class);
         /* @var $transportFacade \Shopsys\FrameworkBundle\Model\Transport\TransportFacade */
+        $paymentDataFactory = $this->getContainer()->get(PaymentDataFactory::class);
+        /* @var $paymentDataFactory \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory */
+        $transportDataFactory = $this->getContainer()->get(TransportDataFactory::class);
+        /* @var $transportDataFactory \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory */
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
 
@@ -186,14 +194,14 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
             $vatPercent
         );
 
-        $paymentData = new PaymentData();
+        $paymentData = $paymentDataFactory->createDefault();
         $paymentData->name = ['cs' => 'name'];
         $paymentData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
         $paymentData->vat = $vat;
         $payment = $paymentFacade->create($paymentData);
         /* @var $payment \Shopsys\FrameworkBundle\Model\Payment\Payment */
 
-        $transportData = new TransportData();
+        $transportData = $transportDataFactory->createDefault();
         $transportData->name = ['cs' => 'name'];
         $transportData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
         $transportData->vat = $vat;

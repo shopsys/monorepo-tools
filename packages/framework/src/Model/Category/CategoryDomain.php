@@ -5,15 +5,28 @@ namespace Shopsys\FrameworkBundle\Model\Category;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="category_domains")
+ * @ORM\Table(
+ *     name="category_domains",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="category_domain", columns={"category_id", "domain_id"})
+ *     }
+ * )
  * @ORM\Entity
  */
 class CategoryDomain
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    protected $id;
+
+    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Product
      *
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Category\Category", inversedBy="domains")
      * @ORM\JoinColumn(nullable=false, name="category_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -22,7 +35,6 @@ class CategoryDomain
     /**
      * @var int
      *
-     * @ORM\Id
      * @ORM\Column(type="integer")
      */
     protected $domainId;
@@ -53,7 +65,7 @@ class CategoryDomain
      *
      * @ORM\Column(type="boolean")
      */
-    protected $hidden;
+    protected $enabled;
 
     /**
      * @var bool
@@ -77,7 +89,7 @@ class CategoryDomain
     {
         $this->category = $category;
         $this->domainId = $domainId;
-        $this->hidden = false;
+        $this->enabled = true;
         $this->visible = false;
     }
 
@@ -124,9 +136,9 @@ class CategoryDomain
     /**
      * @return bool
      */
-    public function isHidden()
+    public function isEnabled()
     {
-        return $this->hidden;
+        return $this->enabled;
     }
 
     /**
@@ -154,11 +166,11 @@ class CategoryDomain
     }
 
     /**
-     * @param bool $hidden
+     * @param bool $enabled
      */
-    public function setHidden($hidden)
+    public function setEnabled($enabled)
     {
-        $this->hidden = $hidden;
+        $this->enabled = $enabled;
     }
 
     /**

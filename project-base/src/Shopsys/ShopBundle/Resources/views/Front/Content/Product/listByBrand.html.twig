@@ -3,33 +3,23 @@
 {% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% set domain = getDomain() %}
-{% set brand = brandDetail.brand %}
-{% set brandDomain = brandDetail.brandDomainsIndexedByDomainId[domain.id] %}
 
 {% block meta_robots %}
     {{ paginator.metaRobots(paginationResult) }}
 {% endblock %}
 
 {% block title %}
-    {% if brandDomain.seoTitle is not null %}
-        {{ brandDomain.seoTitle }}
-    {% else %}
-        {{ brand.name }}
-    {% endif %}
+    {{ brand.getSeoTitle(domain.id)|default(brand.name) }}
 {% endblock %}
 
 {% block meta_description %}
-    {{ brandDomain.seoMetaDescription|default(getSeoMetaDescription()) }}
+    {{ brand.getSeoMetaDescription(domain.id)|default(getSeoMetaDescription()) }}
 {% endblock %}
 
 {% block main_content %}
     <div class="box-list">
         <h1>
-            {% if brandDomain.seoH1 is not null %}
-                {{ brandDomain.seoH1 }}
-            {% else %}
-                {{ brand.name }}
-            {% endif %}
+            {{ brand.getSeoH1(domain.id)|default(brand.name) }}
         </h1>
 
         <div class="box-list__producer">
