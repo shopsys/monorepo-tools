@@ -172,6 +172,7 @@ class FriendlyUrlFacade
             foreach ($friendlyUrls as $friendlyUrl) {
                 if (!$friendlyUrl->isMain()) {
                     $this->em->remove($friendlyUrl);
+                    $toFlush[] = $friendlyUrl;
                 }
             }
         }
@@ -184,7 +185,9 @@ class FriendlyUrlFacade
             $toFlush[] = $newFriendlyUrl;
         }
 
-        $this->em->flush($toFlush);
+        if (count($toFlush) > 0) {
+            $this->em->flush($toFlush);
+        }
     }
 
     /**

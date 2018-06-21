@@ -326,7 +326,10 @@ class ProductFacade
             $this->em->persist($productParameterValue);
             $toFlush[] = $productParameterValue;
         }
-        $this->em->flush($toFlush);
+
+        if (count($toFlush) > 0) {
+            $this->em->flush($toFlush);
+        }
     }
 
     /**
@@ -370,7 +373,10 @@ class ProductFacade
                 $toFlush[] = $productVisibility;
             }
         }
-        $this->em->flush($toFlush);
+
+        if (count($toFlush) > 0) {
+            $this->em->flush($toFlush);
+        }
     }
 
     /**
@@ -391,7 +397,10 @@ class ProductFacade
             $this->em->persist($newProductAccessory);
             $toFlush[] = $newProductAccessory;
         }
-        $this->em->flush($toFlush);
+
+        if (count($toFlush) > 0) {
+            $this->em->flush($toFlush);
+        }
     }
 
     /**
