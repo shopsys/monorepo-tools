@@ -1,9 +1,9 @@
 imports:
-    - { resource: '../packages/coding-standards/easy-coding-standard.yml' }
+    - { resource: '%vendor_dir%/shopsys/coding-standards/easy-coding-standard.yml', ignore_errors: true  }
 
 parameters:
     exclude_files:
-        - '*tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
+        - '*/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
     skip:
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
             - '*/src/Shopsys/ShopBundle/Controller/Front/OrderController.php'

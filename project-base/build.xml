@@ -22,7 +22,6 @@
     <property name="path.pg_dump.executable" value="pg_dump"/>
     <property name="path.php.executable" value="php"/>
     <property name="path.ecs.executable" value="${path.bin}/ecs"/>
-    <property name="path.ecs.configuration" value="${path.vendor}/shopsys/coding-standards/easy-coding-standard.yml"/>
     <property name="path.phplint.executable" value="${path.bin}/parallel-lint"/>
     <property name="path.phpstan.config" value="${path.root}/phpstan.neon"/>
     <property name="path.phpstan.executable" value="${path.bin}/phpstan"/>

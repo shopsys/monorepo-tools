@@ -1,0 +1,7 @@
+imports:
+    - { resource: '%vendor_dir%/shopsys/coding-standards/easy-coding-standard.yml', ignore_errors: true  }
+
+parameters:
+    skip:
+        Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
+          - '*/tests/*'

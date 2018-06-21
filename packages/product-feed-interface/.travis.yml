@@ -9,4 +9,4 @@ install:
 
 script:
   - php vendor/bin/parallel-lint ./src
-  - php vendor/bin/ecs check --config=vendor/shopsys/coding-standards/easy-coding-standard.yml --verbose ./src
+  - php vendor/bin/ecs check --verbose ./src

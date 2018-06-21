@@ -1,4 +1,4 @@
 imports:
     - { resource: 'packages/coding-standards/easy-coding-standard.yml' }
-    - { resource: 'packages/*/autoload-easy-coding-standard.yml' }
-    - { resource: 'project-base/autoload-easy-coding-standard.yml' }
+    - { resource: 'packages/*/easy-coding-standard.yml' }
+    - { resource: 'project-base/easy-coding-standard.yml' }

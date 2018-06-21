@@ -1,5 +1,5 @@
 imports:
-    - { resource: '../**/coding-standards/easy-coding-standard.yml' }
+    - { resource: '%vendor_dir%/shopsys/coding-standards/easy-coding-standard.yml', ignore_errors: true  }
 
 parameters:
     skip:
@@ -8,3 +8,6 @@ parameters:
 
         PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.NotCamelCaps:
             - '*/src/Model/HeurekaCategory/HeurekaCategoryDownloader.php'
+
+        Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
+          - '*/tests/*'

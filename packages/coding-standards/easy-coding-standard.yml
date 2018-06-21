@@ -1,6 +1,143 @@
 imports:
-    # pick set from https://github.com/Symplify/EasyCodingStandard/tree/master/config
     # for PSR-2 description, see: http://www.php-fig.org/psr/psr-2/
     - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/psr2.yml' }
-    # shopsys coding standards
-    - { resource: 'shopsys-coding-standard.yml' }
+
+services:
+    # Shopsys Checkers
+    Shopsys\CodingStandards\CsFixer\MissingButtonTypeFixer: ~
+    Shopsys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer: ~
+    Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff: ~
+    Shopsys\CodingStandards\Sniffs\ForbiddenExitSniff: ~
+    Shopsys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff: ~
+    # method arguments and variables should be $camelCase
+    Shopsys\CodingStandards\Sniffs\ValidVariableNameSniff: ~
+
+    # Custom Shopsys standards
+    PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff: ~
+    PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopShouldBeWhileLoopSniff: ~
+    PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopWithTestFunctionCallSniff: ~
+    PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\JumbledIncrementerSniff: ~
+    PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UnconditionalIfStatementSniff: ~
+    PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\TodoSniff: ~
+    PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\FixmeSniff: ~
+    PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\NoSpaceAfterCastSniff: ~
+    PHP_CodeSniffer\Standards\Generic\Sniffs\Functions\CallTimePassByReferenceSniff: ~
+    PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff:
+        absoluteComplexity: 13
+    PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\ConstructorNameSniff: ~
+    PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\CamelCapsFunctionNameSniff: ~
+    PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DiscourageGotoSniff: ~
+    PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\NoSilencedErrorsSniff: ~
+    PHP_CodeSniffer\Standards\MySource\Sniffs\PHP\GetRequestDataSniff: ~
+    PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\InlineCommentSniff: ~
+    PHP_CodeSniffer\Standards\PEAR\Sniffs\NamingConventions\ValidClassNameSniff: ~
+    PHP_CodeSniffer\Standards\PSR1\Sniffs\Methods\CamelCapsMethodNameSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowMultipleAssignmentsSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DisallowSizeFunctionsInLoopsSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\EvalSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\GlobalKeywordSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\InnerFunctionsSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\LowercasePHPFunctionsSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\NonExecutableCodeSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\Scope\StaticThisUsageSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\Strings\DoubleQuoteUsageSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\CastSpacingSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff: ~
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LogicalOperatorSpacingSniff: ~
+    PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer:
+        syntax: short
+    PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer:
+        default: single_space
+    PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer: ~
+    PhpCsFixer\Fixer\LanguageConstruct\CombineConsecutiveUnsetsFixer: ~
+    PhpCsFixer\Fixer\Operator\ConcatSpaceFixer:
+        spacing: one
+    PhpCsFixer\Fixer\Alias\EregToPregFixer: ~
+    PhpCsFixer\Fixer\FunctionNotation\FunctionTypehintSpaceFixer: ~
+    PhpCsFixer\Fixer\ControlStructure\IncludeFixer: ~
+    PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer: ~
+    PhpCsFixer\Fixer\CastNotation\LowercaseCastFixer: ~
+    PhpCsFixer\Fixer\Casing\NativeFunctionCasingFixer: ~
+    PhpCsFixer\Fixer\Operator\NewWithBracesFixer: ~
+    PhpCsFixer\Fixer\Alias\NoAliasFunctionsFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer: ~
+    PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\NoEmptyPhpdocFixer: ~
+    PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer: ~
+    PhpCsFixer\Fixer\Whitespace\NoExtraConsecutiveBlankLinesFixer: ~
+    PhpCsFixer\Fixer\Import\NoLeadingImportSlashFixer: ~
+    PhpCsFixer\Fixer\NamespaceNotation\NoLeadingNamespaceWhitespaceFixer: ~
+    PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer: ~
+    PhpCsFixer\Fixer\ArrayNotation\NoMultilineWhitespaceAroundDoubleArrowFixer: ~
+    PhpCsFixer\Fixer\Semicolon\NoMultilineWhitespaceBeforeSemicolonsFixer: ~
+    PhpCsFixer\Fixer\ClassNotation\NoPhp4ConstructorFixer: ~
+    PhpCsFixer\Fixer\CastNotation\NoShortBoolCastFixer: ~
+    PhpCsFixer\Fixer\Semicolon\NoSinglelineWhitespaceBeforeSemicolonsFixer: ~
+    PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer: ~
+    PhpCsFixer\Fixer\ControlStructure\NoTrailingCommaInListCallFixer: ~
+    PhpCsFixer\Fixer\ArrayNotation\NoTrailingCommaInSinglelineArrayFixer: ~
+    PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer: ~
+    PhpCsFixer\Fixer\Import\NoUnusedImportsFixer: ~
+    PhpCsFixer\Fixer\ReturnNotation\NoUselessReturnFixer: ~
+    PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer: ~
+    PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer: ~
+    PhpCsFixer\Fixer\Basic\NonPrintableCharacterFixer: ~
+    PhpCsFixer\Fixer\ArrayNotation\NormalizeIndexBraceFixer: ~
+    PhpCsFixer\Fixer\Operator\ObjectOperatorWithoutWhitespaceFixer: ~
+    PhpCsFixer\Fixer\Import\OrderedImportsFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\PhpdocAnnotationWithoutDotFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\PhpdocIndentFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoUselessInheritdocFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoAccessFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoAliasTagFixer:
+        type: var
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoEmptyReturnFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoPackageFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\PhpdocOrderFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\PhpdocScalarFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\PhpdocSingleLineVarSpacingFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\PhpdocTrimFixer: ~
+    PhpCsFixer\Fixer\Phpdoc\PhpdocVarWithoutNameFixer: ~
+    PhpCsFixer\Fixer\ClassNotation\ProtectedToPrivateFixer: ~
+    PhpCsFixer\Fixer\ClassNotation\SelfAccessorFixer: ~
+    PhpCsFixer\Fixer\Semicolon\SemicolonAfterInstructionFixer: ~
+    PhpCsFixer\Fixer\CastNotation\ShortScalarCastFixer: ~
+    PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer: ~
+    PhpCsFixer\Fixer\Semicolon\SpaceAfterSemicolonFixer: ~
+    PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer: ~
+    PhpCsFixer\Fixer\Comment\SingleLineCommentStyleFixer:
+        comment_types:
+            - hash
+    PhpCsFixer\Fixer\Operator\StandardizeNotEqualsFixer: ~
+    PhpCsFixer\Fixer\Strict\StrictParamFixer: ~
+    PhpCsFixer\Fixer\Operator\TernaryOperatorSpacesFixer: ~
+    PhpCsFixer\Fixer\ArrayNotation\TrailingCommaInMultilineArrayFixer: ~
+    PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer: ~
+    PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer: ~
+    PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer: ~
+
+    # Code Metrics
+    ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:
+        maxLength: 550
+    ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
+        maxLength: 60
+    ObjectCalisthenics\Sniffs\Metrics\PropertyPerClassLimitSniff:
+        maxCount: 30
+
+parameters:
+    skip:
+        # private properties should not start with "_"
+        PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.PrivateNoUnderscore: ~
+        # it is not necessary to have blank line after control structure
+        PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff.NoLineAfterClose: ~
+        # allow empty "catch (Exception $exception) { }"
+        PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedCatch: ~
+
+        # private properties should not start with "_"
+        PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.PrivateNoUnderscore: ~
+        # it is not necessary to have blank line after control structure
+        PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff.NoLineAfterClose: ~
+        # allow empty "catch (Exception $exception) { }"
+        PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedCatch: ~
+

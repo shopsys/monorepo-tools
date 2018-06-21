@@ -6,7 +6,6 @@
     <property name="path.packages" value="./packages"/>
     <property name="path.bin-console" value="./project-base/bin/console"/>
     <property name="path.framework" value="${path.packages}/framework"/>
-    <property name="path.ecs.configuration" value="${path.root}/../easy-coding-standard.yml"/>
 
     <import file="project-base/build-dev.xml" />
     <import file="project-base/build.xml" />
@@ -70,7 +69,7 @@
         </exec>
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check" />
-            <arg value="--config=${path.ecs.configuration}"/>
+            <arg value="--verbose" />
             <arg path="./packages/*/src"/>
             <arg path="./packages/*/tests" />
         </exec>
@@ -98,8 +97,9 @@
     <target name="standards-fix-packages" description="Automatically fixes some coding standards violations in all packages.">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check" />
+            <arg value="--clear-cache" />
             <arg value="--fix" />
-            <arg value="--config=${path.ecs.configuration}"/>
+            <arg value="--verbose" />
             <arg path="./packages/*/src"/>
             <arg path="./packages/*/tests" />
         </exec>

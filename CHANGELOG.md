@@ -123,7 +123,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#266 ecs fix and unification in monorepo](https://github.com/shopsys/shopsys/pull/266)
     - ObjectIsCreatedByFactorySniff: cover edge case
         - previous implementation failed eg. when creating a class using a variable (new $className;)
- 
+   - autoload-easy-coding-standard.yml renamed to easy-coding-standard.yml as it is not autoloaded in any way
+   - all phing targets excluding *-diff use --clear-cache option
+   - all packages use their own configuration file
+   - all packeges skip ObjectIsCreatedByFactorySniff in tests folder
+
 ### [shopsys/coding-standards]
 ##### Added
 - [#249 - First architectonical codesniff](https://github.com/shopsys/shopsys/pull/249)

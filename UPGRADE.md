@@ -51,22 +51,18 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
 
 ### [shopsys/coding-standards]
-- In order to run all checks, there is new unified way - execute `php vendor/bin/ecs check /path/to/project --config=vendor/shopsys/coding-standards/easy-coding-standard.yml`
-    - See [EasyCodingStandard docs](https://github.com/Symplify/EasyCodingStandard#usage) for more information
-
+- create your custom `easy-coding-standard.yml` in your project root with your ruleset (you can use predefined ruleset as shown below) 
+- in order to run all checks, there is new unified way - execute `php vendor/bin/ecs check /path/to/project`
+- see [EasyCodingStandard docs](https://github.com/Symplify/EasyCodingStandard#usage) for more information
 #### Example of custom configuration file
 ```yaml
-#custom-coding-standard.yml
+#easy-coding-standard.yml
 imports:
-    - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/psr2.yml' }
-    - { resource: '%vendor_dir%/shopsys/coding-standards/shopsys-coding-standard.yml' }
+    - { resource: '%vendor_dir%/shopsys/coding-standards/easy-coding-standard.yml' }
 parameters:
     exclude_files:
         - '*/ignored_folder/*'
     skip:
-        # private properties should not start with "_"
-        PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.PrivateNoUnderscore: ~
-        # skip max length of functions in files
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
             - '*/src/file.php'
 ```

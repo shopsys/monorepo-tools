@@ -32,11 +32,5 @@
         "psr-4": {
             "Tests\\CodingStandards\\": "tests/"
         }
-    },
-    "scripts": {
-        "run-all-checks": [
-            "vendor/bin/parallel-lint ./src ./tests ./examples",
-            "vendor/bin/ecs check ./src ./tests ./examples"
-        ]
     }
 }

@@ -15,7 +15,6 @@ install:
   - composer install
 
 script:
-  # tests
-  - vendor/bin/phpunit
-  # run all tools
-  - composer run-all-checks
+  - php vendor/bin/parallel-lint ./src ./tests ./examples
+  - php vendor/bin/ecs check --verbose ./src ./tests ./examples
+  - php vendor/bin/phpunit

@@ -1,0 +1,10 @@
+imports:
+    - { resource: '%vendor_dir%/shopsys/coding-standards/easy-coding-standard.yml', ignore_errors: true  }
+
+parameters:
+    skip:
+        ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
+            - '*/src/ZboziPluginDataFixture.php'
+            - '*/tests/Unit/ZboziFeedTest.php'
+        Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
+          - '*/tests/*'

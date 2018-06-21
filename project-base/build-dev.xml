@@ -225,7 +225,6 @@
         >
             <arg value="check" />
             <arg value="--clear-cache" />
-            <arg value="--config=${path.ecs.configuration}" />
             <arg path="${path.src}" />
             <arg path="${path.tests}" />
             <arg value="--verbose" />
@@ -242,7 +241,6 @@
             <arg value="check" />
             <arg value="--clear-cache" />
             <arg value="--fix" />
-            <arg value="--config=${path.ecs.configuration}" />
             <arg path="${path.src}" />
             <arg path="${path.tests}" />
             <arg value="--verbose" />
@@ -258,7 +256,6 @@
             checkreturn="true"
         >
             <arg value="check" />
-            <arg value="--config=${path.ecs.configuration}" />
             <arg path="${path.src}" />
             <arg path="${path.tests}" />
             <arg value="--verbose" />
@@ -274,7 +271,6 @@
         >
             <arg value="check" />
             <arg value="--fix" />
-            <arg value="--config=${path.ecs.configuration}" />
             <arg path="${path.src}" />
             <arg path="${path.tests}" />
             <arg value="--verbose" />
