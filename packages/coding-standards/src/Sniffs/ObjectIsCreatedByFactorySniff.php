@@ -35,23 +35,45 @@ final class ObjectIsCreatedByFactorySniff implements Sniff
      */
     public function process(File $file, $position): void
     {
-        // get full name of the file class
-        $fileClassName = ClassHelper::getFullyQualifiedName($file, $file->findNext(T_CLASS, 2));
+        $endPosition = $file->findEndOfStatement($position);
+        $instantiatedClassNamePosition = $file->findNext(T_STRING, $position, $endPosition);
 
-        // get full name of the class that is instantiated inside of some method of the file class
-        $className = '\\' . $this->naming->getClassName($file, $file->findNext(T_STRING, $position));
-        $factoryName = $className . 'Factory';
+        if ($instantiatedClassNamePosition === false) {
+            // eg. new $className; cannot be resolved
+            return;
+        }
 
-        // if instantiated class is instantiated inside it's factory
-        // if instantiated class doesn't have factory in the same namespace path then code is valid
-        if ($factoryName === $fileClassName || !class_exists($factoryName)) {
+        $instantiatedClassName = $this->naming->getClassName($file, $instantiatedClassNamePosition);
+        $factoryClassName = $instantiatedClassName . 'Factory';
+
+        if ($factoryClassName === $this->getFirstClassNameInFile($file) || !class_exists($factoryClassName)) {
             return;
         }
 
         $file->addError(
-            sprintf('For creation of "%s" class use its factory "%s"', $className, $factoryName),
+            sprintf('For creation of "%s" class use its factory "%s"', $instantiatedClassName, $factoryClassName),
             $position,
             self::class
         );
+    }
+
+    /**
+     * We can not use Symplify\TokenRunner\Analyzer\SnifferAnalyzer\Naming::getClassName()
+     * as it does not include namespace of declared class.
+     *
+     * @param \PHP_CodeSniffer\Files\File $file
+     * @return string|null
+     */
+    private function getFirstClassNameInFile(File $file): ?string
+    {
+        $position = $file->findNext(T_CLASS, 0);
+
+        if ($position === false) {
+            return null;
+        }
+
+        $fileClassName = ClassHelper::getFullyQualifiedName($file, $position);
+
+        return ltrim($fileClassName, '\\');
     }
 }

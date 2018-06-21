@@ -118,6 +118,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binaries
     - build scripts were modified to work with new easy-coding-standard checker 
 - [#230 - composer-dev updates dependencies if composer.json was changed](https://github.com/shopsys/shopsys/pull/230)
+
+#### Fixed
+- [#266 ecs fix and unification in monorepo](https://github.com/shopsys/shopsys/pull/266)
+    - ObjectIsCreatedByFactorySniff: cover edge case
+        - previous implementation failed eg. when creating a class using a variable (new $className;)
  
 ### [shopsys/coding-standards]
 ##### Added
