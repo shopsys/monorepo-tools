@@ -15,16 +15,6 @@ class PromoCodeData
     public $percent;
 
     /**
-     * @param string|null $code
-     * @param float|null $percent
-     */
-    public function __construct($code = null, $percent = null)
-    {
-        $this->code = $code;
-        $this->percent = $percent;
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode $promoCode
      */
     public function setFromEntity(PromoCode $promoCode)

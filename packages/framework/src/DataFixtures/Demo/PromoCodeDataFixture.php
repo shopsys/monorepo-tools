@@ -25,6 +25,9 @@ class PromoCodeDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $this->promoCodeFacade->create(new PromoCodeData('test', 10.0));
+        $promoCodeData = new PromoCodeData();
+        $promoCodeData->code = 'test';
+        $promoCodeData->percent = 10.0;
+        $this->promoCodeFacade->create($promoCodeData);
     }
 }
