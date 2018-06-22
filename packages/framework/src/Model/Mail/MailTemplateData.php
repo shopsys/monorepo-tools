@@ -35,32 +35,14 @@ class MailTemplateData
     public $attachment;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $deleteAttachment;
 
-    /**
-     * @param string|null $name
-     * @param string|null $subject
-     * @param string|null $body
-     * @param bool $sendMail
-     * @param string|null $bccEmail
-     * @param string[] $attachment
-     */
-    public function __construct(
-        $name = null,
-        $subject = null,
-        $body = null,
-        $sendMail = false,
-        $bccEmail = null,
-        array $attachment = []
-    ) {
-        $this->name = $name;
-        $this->subject = $subject;
-        $this->body = $body;
-        $this->sendMail = $sendMail;
-        $this->bccEmail = $bccEmail;
-        $this->attachment = $attachment;
+    public function __construct()
+    {
+        $this->sendMail = false;
+        $this->attachment = [];
     }
 
     /**
