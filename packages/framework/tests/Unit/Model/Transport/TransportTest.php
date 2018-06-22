@@ -30,7 +30,11 @@ class TransportTest extends TestCase
     private function createPayment()
     {
         $vat = new Vat(new VatData('vat', 21));
-        $payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], $vat, [], [], true));
+        $paymentData = new PaymentData();
+        $paymentData->name = ['cs' => 'paymentName', 'en' => 'paymentName'];
+        $paymentData->vat = $vat;
+        $paymentData->hidden = true;
+        $payment = new Payment($paymentData);
 
         return $payment;
     }

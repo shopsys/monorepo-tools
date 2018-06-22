@@ -206,7 +206,9 @@ class CustomerServiceTest extends TestCase
         $user = new User($userData, $billingAddress, $deliveryAddress);
 
         $transport = new Transport(new TransportData(['cs' => 'transportName']));
-        $payment = new Payment(new PaymentData(['cs' => 'paymentName']));
+        $paymentData = new PaymentData();
+        $paymentData->name = ['cs' => 'paymentName'];
+        $payment = new Payment($paymentData);
         $orderStatusData = new OrderStatusData();
         $orderStatusData->name = ['en' => 'orderStatusName'];
         $orderStatus = new OrderStatus($orderStatusData, OrderStatus::TYPE_NEW);
@@ -271,7 +273,9 @@ class CustomerServiceTest extends TestCase
         $user = new User($userData, $billingAddress, null);
 
         $transport = new Transport(new TransportData(['cs' => 'transportName']));
-        $payment = new Payment(new PaymentData(['cs' => 'paymentName']));
+        $paymentData = new PaymentData();
+        $paymentData->name = ['cs' => 'paymentName'];
+        $payment = new Payment($paymentData);
         $orderStatusData = new OrderStatusData();
         $orderStatusData->name = ['en' => 'orderStatusName'];
         $orderStatus = new OrderStatus($orderStatusData, OrderStatus::TYPE_NEW);

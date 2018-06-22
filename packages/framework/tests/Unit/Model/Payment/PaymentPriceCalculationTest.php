@@ -92,7 +92,10 @@ class PaymentPriceCalculationTest extends TestCase
         $vat = new Vat(new VatData('vat', $vatPercent));
         $currency = new Currency(new CurrencyData());
 
-        $payment = new Payment(new PaymentData(['cs' => 'paymentName'], $vat));
+        $paymentData = new PaymentData();
+        $paymentData->name = ['cs' => 'paymentName'];
+        $paymentData->vat = $vat;
+        $payment = new Payment($paymentData);
         $payment->setPrice(new PaymentPriceFactory(), $currency, $inputPrice);
 
         $price = $paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
@@ -137,7 +140,10 @@ class PaymentPriceCalculationTest extends TestCase
         $vat = new Vat(new VatData('vat', $vatPercent));
         $currency = new Currency(new CurrencyData());
 
-        $payment = new Payment(new PaymentData(['cs' => 'paymentName'], $vat));
+        $paymentData = new PaymentData();
+        $paymentData->name = ['cs' => 'paymentName'];
+        $paymentData->vat = $vat;
+        $payment = new Payment($paymentData);
         $payment->setPrice(new PaymentPriceFactory(), $currency, $inputPrice);
 
         $price = $paymentPriceCalculation->calculatePrice($payment, $currency, $productsPrice, 1);
