@@ -55,7 +55,9 @@ class OrderTest extends TestCase
     public function testOrderWithDeliveryAddressSameAsBillingAddress()
     {
         $orderData = new OrderData();
-        $country = new Country(new CountryData('Slovenská republika'), self::DOMAIN_ID);
+        $countryData = new CountryData();
+        $countryData->name = 'Slovenská republika';
+        $country = new Country($countryData, self::DOMAIN_ID);
 
         $orderData->companyName = 'companyName';
         $orderData->telephone = 'telephone';
@@ -82,7 +84,9 @@ class OrderTest extends TestCase
     public function testOrderWithoutDeliveryAddressSameAsBillingAddress()
     {
         $orderData = new OrderData();
-        $country = new Country(new CountryData('Slovenská republika'), self::DOMAIN_ID);
+        $countryData = new CountryData();
+        $countryData->name = 'Slovenská republika';
+        $country = new Country($countryData, self::DOMAIN_ID);
 
         $orderData->companyName = 'companyName';
         $orderData->telephone = 'telephone';

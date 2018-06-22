@@ -172,7 +172,9 @@ class CustomerServiceTest extends TestCase
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';
         $userData->createdAt = new DateTime();
-        $billingCountry = new Country(new CountryData('Česká republika'), self::DOMAIN_ID);
+        $billingCountryData = new CountryData();
+        $billingCountryData->name = 'Česká republika';
+        $billingCountry = new Country($billingCountryData, self::DOMAIN_ID);
         $billingAddressData = new BillingAddressData(
             'street',
             'city',
@@ -184,7 +186,9 @@ class CustomerServiceTest extends TestCase
             'telephone',
             $billingCountry
         );
-        $deliveryCountry = new Country(new CountryData('Slovenská republika'), self::DOMAIN_ID);
+        $deliveryCountryData = new CountryData();
+        $deliveryCountryData->name = 'Slovenská republika';
+        $deliveryCountry = new Country($deliveryCountryData, self::DOMAIN_ID);
         $deliveryAddressData = new DeliveryAddressData(
             true,
             'deliveryStreet',
@@ -248,8 +252,14 @@ class CustomerServiceTest extends TestCase
     {
         $customerService = $this->getCustomerService();
 
-        $billingCountry = new Country(new CountryData('Česká republika'), self::DOMAIN_ID);
-        $deliveryCountry = new Country(new CountryData('Slovenská republika'), self::DOMAIN_ID);
+        $billingCountryData = new CountryData();
+        $billingCountryData->name = 'Česká republika';
+
+        $deliveryCountryData = new CountryData();
+        $deliveryCountryData->name = 'Slovenská republika';
+
+        $billingCountry = new Country($billingCountryData, self::DOMAIN_ID);
+        $deliveryCountry = new Country($deliveryCountryData, self::DOMAIN_ID);
         $userData = new UserData();
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';

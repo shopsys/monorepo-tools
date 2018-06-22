@@ -14,14 +14,9 @@ class CountryData
      */
     public $code;
 
-    /**
-     * @param string $name
-     * @param null $code
-     */
-    public function __construct($name = '', $code = null)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->code = $code;
+        $this->name = '';
     }
 
     /**
