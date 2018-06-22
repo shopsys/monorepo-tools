@@ -12,7 +12,9 @@ class UserTest extends TestCase
 {
     public function testGetFullNameReturnsLastnameAndFirstnameForUser()
     {
-        $userData = new UserData(1, 'Firstname', 'Lastname');
+        $userData = new UserData();
+        $userData->firstName = 'Firstname';
+        $userData->lastName = 'Lastname';
         $billingAddressData = new BillingAddressData();
         $billingAddress = new BillingAddress($billingAddressData);
         $user = new User($userData, $billingAddress);
@@ -22,7 +24,9 @@ class UserTest extends TestCase
 
     public function testGetFullNameReturnsCompanyNameForCompanyUser()
     {
-        $userData = new UserData(1, 'Firstname', 'Lastname');
+        $userData = new UserData();
+        $userData->firstName = 'Firstname';
+        $userData->lastName = 'Lastname';
         $billingAddressData = new BillingAddressData();
         $billingAddressData->companyCustomer = true;
         $billingAddressData->companyName = 'CompanyName';
