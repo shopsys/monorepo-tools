@@ -2,8 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Model\Customer;
 
-use Shopsys\FrameworkBundle\Model\Country\Country;
-
 class BillingAddressData
 {
     /**
@@ -51,37 +49,9 @@ class BillingAddressData
      */
     public $country;
 
-    /**
-     * @param string|null $street
-     * @param string|null $city
-     * @param string|null $postcode
-     * @param bool $companyCustomer
-     * @param string|null $companyName
-     * @param string|null $companyNumber
-     * @param string|null $companyTaxNumber
-     * @param string|null $telephone
-     * @param \Shopsys\FrameworkBundle\Model\Country\Country|null $country
-     */
-    public function __construct(
-        $street = null,
-        $city = null,
-        $postcode = null,
-        $companyCustomer = false,
-        $companyName = null,
-        $companyNumber = null,
-        $companyTaxNumber = null,
-        $telephone = null,
-        Country $country = null
-    ) {
-        $this->street = $street;
-        $this->city = $city;
-        $this->postcode = $postcode;
-        $this->companyCustomer = $companyCustomer;
-        $this->companyName = $companyName;
-        $this->companyNumber = $companyNumber;
-        $this->companyTaxNumber = $companyTaxNumber;
-        $this->telephone = $telephone;
-        $this->country = $country;
+    public function __construct()
+    {
+        $this->companyCustomer = false;
     }
 
     /**

@@ -172,20 +172,21 @@ class CustomerServiceTest extends TestCase
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';
         $userData->createdAt = new DateTime();
+
         $billingCountryData = new CountryData();
         $billingCountryData->name = 'Česká republika';
         $billingCountry = new Country($billingCountryData, self::DOMAIN_ID);
-        $billingAddressData = new BillingAddressData(
-            'street',
-            'city',
-            'postcode',
-            true,
-            'companyName',
-            'companyNumber',
-            'companyTaxNumber',
-            'telephone',
-            $billingCountry
-        );
+        $billingAddressData = new BillingAddressData();
+        $billingAddressData->street = 'street';
+        $billingAddressData->city = 'city';
+        $billingAddressData->postcode = 'postcode';
+        $billingAddressData->companyCustomer = true;
+        $billingAddressData->companyName = 'companyName';
+        $billingAddressData->companyNumber = 'companyNumber';
+        $billingAddressData->companyTaxNumber = 'companyTaxNumber';
+        $billingAddressData->telephone = 'telephone';
+        $billingAddressData->country = $billingCountry;
+
         $deliveryCountryData = new CountryData();
         $deliveryCountryData->name = 'Slovenská republika';
         $deliveryCountry = new Country($deliveryCountryData, self::DOMAIN_ID);
