@@ -11,127 +11,127 @@ class OrderData
     const NEW_ITEM_PREFIX = 'new_';
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport
+     * @var \Shopsys\FrameworkBundle\Model\Transport\Transport|null
      */
     public $transport;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment
+     * @var \Shopsys\FrameworkBundle\Model\Payment\Payment|null
      */
     public $payment;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $orderNumber;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus|null
      */
     public $status;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $firstName;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $lastName;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $email;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $telephone;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $companyName;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $companyNumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $companyTaxNumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $street;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $city;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $postcode;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Country\Country
+     * @var \Shopsys\FrameworkBundle\Model\Country\Country|null
      */
     public $country;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $deliveryAddressSameAsBillingAddress;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $deliveryFirstName;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $deliveryLastName;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $deliveryCompanyName;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $deliveryTelephone;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $deliveryStreet;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $deliveryCity;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $deliveryPostcode;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Country\Country
+     * @var \Shopsys\FrameworkBundle\Model\Country\Country|null
      */
     public $deliveryCountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $note;
 
@@ -146,12 +146,12 @@ class OrderData
     public $createdAt;
 
     /**
-     * @var int
+     * @var int|null
      */
     public $domainId;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency|null
      */
     public $currency;
 
@@ -166,14 +166,19 @@ class OrderData
     public $createdAsAdministratorName;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentData
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentData|null
      */
     public $orderPayment;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportData
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportData|null
      */
     public $orderTransport;
+
+    public function __construct()
+    {
+        $this->itemsWithoutTransportAndPayment = [];
+    }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
