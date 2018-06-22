@@ -71,7 +71,10 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
-        $vat = new Vat(new VatData('vat', $vatPercent));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
         $em->persist($vat);
 
         $templateProduct = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
@@ -108,7 +111,10 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 
-        $vat = new Vat(new VatData('vat', $vatPercent));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
         $availability = new Availability(new AvailabilityData([], 0));
         $em->persist($vat);
         $em->persist($availability);
@@ -184,7 +190,10 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $currency1 = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
         $currency2 = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
 
-        $vat = new Vat(new VatData('vat', $vatPercent));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
         $availability = new Availability(new AvailabilityData([], 0));
         $em->persist($vat);
         $em->persist($availability);

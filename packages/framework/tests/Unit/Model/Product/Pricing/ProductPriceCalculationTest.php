@@ -120,7 +120,10 @@ class ProductPriceCalculationTest extends TestCase
         $inputPrice,
         $vatPercent
     ) {
-        $vat = new Vat(new VatData('vat', $vatPercent));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
 
         $productData = new ProductData();
         $productData->name = ['cs' => 'anyProductName'];

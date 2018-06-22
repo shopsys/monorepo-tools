@@ -23,7 +23,10 @@ class CartTest extends DatabaseTestCase
 
         $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $vat = new Vat(new VatData('vat', 21));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        $vat = new Vat($vatData);
         $availability = new Availability(new AvailabilityData([], 0));
         $productData = $productDataFactory->createDefault();
         $productData->name = [];

@@ -26,7 +26,10 @@ class CartWatcherServiceTest extends FunctionalTestCase
         $customerIdentifier = new CustomerIdentifier('randomString');
         $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
 
-        $vat = new Vat(new VatData('vat', 21));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        $vat = new Vat($vatData);
         $productData1 = $productDataFactory->createDefault();
         $productData1->name = [];
         $productData1->price = 100;
@@ -94,7 +97,10 @@ class CartWatcherServiceTest extends FunctionalTestCase
         $productData = $productDataFactory->createDefault();
         $productData->name = [];
         $productData->price = 100;
-        $productData->vat = new Vat(new VatData('vat', 21));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        $productData->vat = new Vat($vatData);
         $product = Product::create($productData);
 
         $cartItemMock = $this->getMockBuilder(CartItem::class)

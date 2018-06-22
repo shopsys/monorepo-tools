@@ -26,7 +26,10 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
     {
         $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
-        $vat = new Vat(new VatData('vatName', 20));
+        $vatData = new VatData();
+        $vatData->name = 'vatName';
+        $vatData->percent = 20;
+        $vat = new Vat($vatData);
 
         $paymentPrice = new Price(100, 120);
         $transportPrice = new Price(10, 12);
@@ -110,7 +113,10 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
     {
         $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\FrameworkBundle\Component\Domain\Domain */
-        $vat = new Vat(new VatData('vatName', 20));
+        $vatData = new VatData();
+        $vatData->name = 'vatName';
+        $vatData->percent = 20;
+        $vat = new Vat($vatData);
 
         $unitPrice = new Price(1000, 1200);
         $totalPrice = new Price(2000, 2400);

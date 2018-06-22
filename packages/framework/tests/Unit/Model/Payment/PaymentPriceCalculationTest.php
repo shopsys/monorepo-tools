@@ -89,7 +89,10 @@ class PaymentPriceCalculationTest extends TestCase
 
         $paymentPriceCalculation = new PaymentPriceCalculation($basePriceCalculation, $pricingSettingMock);
 
-        $vat = new Vat(new VatData('vat', $vatPercent));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
         $currency = new Currency(new CurrencyData());
 
         $paymentData = new PaymentData();
@@ -137,7 +140,10 @@ class PaymentPriceCalculationTest extends TestCase
 
         $paymentPriceCalculation = new PaymentPriceCalculation($basePriceCalculation, $pricingSettingMock);
 
-        $vat = new Vat(new VatData('vat', $vatPercent));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
         $currency = new Currency(new CurrencyData());
 
         $paymentData = new PaymentData();

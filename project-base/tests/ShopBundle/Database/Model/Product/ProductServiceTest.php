@@ -26,7 +26,9 @@ class ProductServiceTest extends DatabaseTestCase
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
 
-        $vatData = new VatData('vat', 21);
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
         $vat = new Vat($vatData);
 
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
@@ -55,7 +57,9 @@ class ProductServiceTest extends DatabaseTestCase
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 
-        $vatData = new VatData('vat', 21);
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
         $vat = new Vat($vatData);
 
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);

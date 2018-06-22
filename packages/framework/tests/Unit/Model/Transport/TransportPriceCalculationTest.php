@@ -65,7 +65,10 @@ class TransportPriceCalculationTest extends TestCase
 
         $transportPriceCalculation = new TransportPriceCalculation($basePriceCalculation, $pricingSettingMock);
 
-        $vat = new Vat(new VatData('vat', $vatPercent));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
         $currency = new Currency(new CurrencyData());
 
         $transport = new Transport(new TransportData(['cs' => 'TransportName'], $vat));

@@ -55,7 +55,10 @@ class PriceCalculationTest extends TestCase
 
         $rounding = new Rounding($pricingSettingMock);
         $priceCalculation = new PriceCalculation($rounding);
-        $vat = new Vat(new VatData('testVat', $vatPercent));
+        $vatData = new VatData();
+        $vatData->name = 'testVat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
 
         $actualPriceWithVat = $priceCalculation->applyVatPercent($priceWithoutVat, $vat);
 
@@ -101,7 +104,10 @@ class PriceCalculationTest extends TestCase
 
         $rounding = new Rounding($pricingSettingMock);
         $priceCalculation = new PriceCalculation($rounding);
-        $vat = new Vat(new VatData('testVat', $vatPercent));
+        $vatData = new VatData();
+        $vatData->name = 'testVat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
 
         $actualVatAmount = $priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
 

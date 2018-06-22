@@ -137,7 +137,10 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase
      */
     private function getDefaultVat()
     {
-        return new Vat(new VatData('vat', 21));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        return new Vat($vatData);
     }
 
     /**

@@ -19,7 +19,10 @@ class PaymentTest extends DatabaseTestCase
         $transportDataFactory = $this->getContainer()->get(TransportDataFactory::class);
         $em = $this->getEntityManager();
 
-        $vat = new Vat(new VatData('vat', 21));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        $vat = new Vat($vatData);
         $transportData = $transportDataFactory->createDefault();
         $transportData->name['cs'] = 'name';
         $transportData->vat = $vat;
