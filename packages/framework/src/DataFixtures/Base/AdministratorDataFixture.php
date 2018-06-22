@@ -28,7 +28,8 @@ class AdministratorDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $superadminData = new AdministratorData(true);
+        $superadminData = new AdministratorData();
+        $superadminData->superadmin = true;
         $superadminData->username = 'superadmin';
         $superadminData->realName = 'superadmin';
         $superadminData->email = 'no-reply@shopsys.com';
