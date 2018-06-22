@@ -14,14 +14,9 @@ class PricingGroupData
      */
     public $coefficient;
 
-    /**
-     * @param string|null $name
-     * @param string $coefficient
-     */
-    public function __construct($name = null, $coefficient = '1')
+    public function __construct()
     {
-        $this->name = $name;
-        $this->coefficient = $coefficient;
+        $this->coefficient = '1';
     }
 
     /**

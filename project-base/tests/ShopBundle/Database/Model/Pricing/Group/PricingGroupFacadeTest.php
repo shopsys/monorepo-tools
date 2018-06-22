@@ -25,7 +25,9 @@ class PricingGroupFacadeTest extends DatabaseTestCase
         /* @var $pricingGroupFacade \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
         $productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
         /* @var $productPriceRecalculator \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculator */
-        $pricingGroupData = new PricingGroupData('pricing_group_name', 1);
+        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData->name = 'pricing_group_name';
+        $pricingGroupData->coefficient = 1;
         $domainId = 1;
         $pricingGroup = $pricingGroupFacade->create($pricingGroupData, $domainId);
         $productPriceRecalculator->runAllScheduledRecalculations();
@@ -59,7 +61,9 @@ class PricingGroupFacadeTest extends DatabaseTestCase
 
         $productPriceBeforeEdit = $reflectionProperty->getValue($productCalculatedPrice);
 
-        $pricingGroupData = new PricingGroupData($pricingGroup->getName(), $pricingGroup->getCoefficient() * 2);
+        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData->name = $pricingGroup->getName();
+        $pricingGroupData->coefficient = $pricingGroup->getCoefficient() * 2;
         $pricingGroupFacade->edit($pricingGroup->getId(), $pricingGroupData);
         $productPriceRecalculator->runAllScheduledRecalculations();
 
@@ -82,7 +86,9 @@ class PricingGroupFacadeTest extends DatabaseTestCase
         /* @var $customerFacade \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade */
 
         $domainId = 1;
-        $pricingGroupToDelete = $pricingGroupFacade->create(new PricingGroupData('name'), $domainId);
+        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData->name = 'name';
+        $pricingGroupToDelete = $pricingGroupFacade->create($pricingGroupData, $domainId);
         $pricingGroupToReplaceWith = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
         $user = $customerFacade->getUserById(1);

@@ -22,7 +22,10 @@ class ProductPriceCalculationForUserTest extends TestCase
     public function testCalculatePriceByUserAndDomainIdWithUser()
     {
         $product = $this->createMock(Product::class);
-        $pricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
+        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData->name = 'name';
+        $pricingGroupData->coefficient = 1;
+        $pricingGroup = new PricingGroup($pricingGroupData, 1);
         $billingAddress = $this->createMock(BillingAddress::class);
         $userData = new UserData();
         $userData->pricingGroup = $pricingGroup;
@@ -55,7 +58,10 @@ class ProductPriceCalculationForUserTest extends TestCase
     {
         $domainId = 1;
         $product = $this->createMock(Product::class);
-        $pricingGroup = new PricingGroup(new PricingGroupData('name', 1), $domainId);
+        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData->name = 'name';
+        $pricingGroupData->coefficient = 1;
+        $pricingGroup = new PricingGroup($pricingGroupData, $domainId);
         $expectedProductPrice = new ProductPrice(new Price(1, 1), false);
 
         $currentCustomerMock = $this->createMock(CurrentCustomer::class);

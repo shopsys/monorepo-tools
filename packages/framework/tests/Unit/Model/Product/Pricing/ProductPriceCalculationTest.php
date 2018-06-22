@@ -151,7 +151,10 @@ class ProductPriceCalculationTest extends TestCase
             $vatPercent
         );
 
-        $pricingGroup = new PricingGroup(new PricingGroupData('name', $pricingGroupCoefficient), 1);
+        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData->name = 'name';
+        $pricingGroupData->coefficient = $pricingGroupCoefficient;
+        $pricingGroup = new PricingGroup($pricingGroupData, 1);
 
         $productPrice = $productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
 
@@ -196,7 +199,10 @@ class ProductPriceCalculationTest extends TestCase
             $variants
         );
 
-        $pricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
+        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData->name = 'name';
+        $pricingGroupData->coefficient = 1;
+        $pricingGroup = new PricingGroup($pricingGroupData, 1);
 
         $product = Product::createMainVariant(new ProductData(), $variants);
 
@@ -214,7 +220,10 @@ class ProductPriceCalculationTest extends TestCase
             []
         );
 
-        $pricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
+        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData->name = 'name';
+        $pricingGroupData->coefficient = 1;
+        $pricingGroup = new PricingGroup($pricingGroupData, 1);
 
         $variant = Product::create(new ProductData());
         $product = Product::createMainVariant(new ProductData(), [$variant]);
