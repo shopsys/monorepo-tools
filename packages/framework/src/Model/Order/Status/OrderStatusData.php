@@ -9,12 +9,9 @@ class OrderStatusData
      */
     public $name;
 
-    /**
-     * @param string[] $name
-     */
-    public function __construct(array $name = [])
+    public function __construct()
     {
-        $this->name = $name;
+        $this->name = [];
     }
 
     /**

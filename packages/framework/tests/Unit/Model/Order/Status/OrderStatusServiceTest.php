@@ -26,10 +26,9 @@ class OrderStatusServiceTest extends TestCase
     public function testCheckForDelete($statusType, $expectedException = null)
     {
         $orderStatusService = new OrderStatusService();
-        $orderStatus = new OrderStatus(
-            new OrderStatusData(['en' => 'orderStatusName']),
-            $statusType
-        );
+        $orderStatusData = new OrderStatusData();
+        $orderStatusData->name = ['en' => 'orderStatusName'];
+        $orderStatus = new OrderStatus($orderStatusData, $statusType);
         if ($expectedException !== null) {
             $this->expectException($expectedException);
         }

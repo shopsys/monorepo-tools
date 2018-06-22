@@ -20,7 +20,9 @@ class OrderStatusFacadeTest extends DatabaseTestCase
         $orderFacade = $this->getContainer()->get(OrderFacade::class);
         /* @var $orderFacade \Shopsys\FrameworkBundle\Model\Order\OrderFacade */
 
-        $orderStatusToDelete = $orderStatusFacade->create(new OrderStatusData(['cs' => 'name']));
+        $orderStatusData = new OrderStatusData();
+        $orderStatusData->name = ['cs' => 'name'];
+        $orderStatusToDelete = $orderStatusFacade->create($orderStatusData);
         $orderStatusToReplaceWith = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
         /* @var $orderStatusToReplaceWith \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus */
         $order = $this->getReference(OrderDataFixture::ORDER_PREFIX . '1');
