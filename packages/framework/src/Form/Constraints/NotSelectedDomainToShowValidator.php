@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Constraints;
+namespace Shopsys\FrameworkBundle\Form\Constraints;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Symfony\Component\Validator\Constraint;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Constraints;
+namespace Shopsys\FrameworkBundle\Form\Constraints;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
@@ -42,7 +42,7 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator
 
     /**
      * @param array $values
-     * @param \Shopsys\FrameworkBundle\Component\Constraints\UniqueSlugsOnDomains $constraint
+     * @param \Shopsys\FrameworkBundle\Form\Constraints\UniqueSlugsOnDomains $constraint
      */
     private function validateDuplication(array $values, UniqueSlugsOnDomains $constraint)
     {
@@ -64,7 +64,7 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator
 
     /**
      * @param array $values
-     * @param \Shopsys\FrameworkBundle\Component\Constraints\UniqueSlugsOnDomains $constraint
+     * @param \Shopsys\FrameworkBundle\Form\Constraints\UniqueSlugsOnDomains $constraint
      */
     private function validateExists($values, UniqueSlugsOnDomains $constraint)
     {

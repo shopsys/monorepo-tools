@@ -1,12 +1,12 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Constraints;
+namespace Shopsys\FrameworkBundle\Form\Constraints;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class NotIdenticalToEmailLocalPartValidator extends ConstraintValidator
+class FieldsAreNotIdenticalValidator extends ConstraintValidator
 {
     /**
      * @param array $values
@@ -14,15 +14,15 @@ class NotIdenticalToEmailLocalPartValidator extends ConstraintValidator
      */
     public function validate($values, Constraint $constraint)
     {
-        if (!$constraint instanceof NotIdenticalToEmailLocalPart) {
-            throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, NotIdenticalToEmailLocalPart::class);
+        if (!$constraint instanceof FieldsAreNotIdentical) {
+            throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, FieldsAreNotIdentical::class);
         }
 
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $password = $propertyAccessor->getValue($values, $constraint->password);
-        $email = $propertyAccessor->getValue($values, $constraint->email);
+        $value1 = $propertyAccessor->getValue($values, $constraint->field1);
+        $value2 = $propertyAccessor->getValue($values, $constraint->field2);
 
-        if (strpos($email, $password . '@') === 0) {
+        if ($value1 === $value2) {
             $this->context->buildViolation($constraint->message)
                 ->atPath($constraint->errorPath)
                 ->addViolation();

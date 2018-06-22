@@ -2,8 +2,8 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Customer;
 
-use Shopsys\FrameworkBundle\Component\Constraints\FieldsAreNotIdentical;
-use Shopsys\FrameworkBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
+use Shopsys\FrameworkBundle\Form\Constraints\FieldsAreNotIdentical;
+use Shopsys\FrameworkBundle\Form\Constraints\NotIdenticalToEmailLocalPart;
 use Shopsys\FrameworkBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;

@@ -2,8 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Administrator;
 
-use Shopsys\FrameworkBundle\Component\Constraints\Email;
-use Shopsys\FrameworkBundle\Component\Constraints\FieldsAreNotIdentical;
+use Shopsys\FrameworkBundle\Form\Constraints\Email;
+use Shopsys\FrameworkBundle\Form\Constraints\FieldsAreNotIdentical;
 use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Model\Administrator\Administrator;

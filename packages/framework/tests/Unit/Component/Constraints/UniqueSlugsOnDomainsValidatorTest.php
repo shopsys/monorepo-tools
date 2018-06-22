@@ -2,12 +2,12 @@
 
 namespace Tests\FrameworkBundle\Unit\Component\Constraints;
 
-use Shopsys\FrameworkBundle\Component\Constraints\UniqueSlugsOnDomains;
-use Shopsys\FrameworkBundle\Component\Constraints\UniqueSlugsOnDomainsValidator;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Form\Constraints\UniqueSlugsOnDomains;
+use Shopsys\FrameworkBundle\Form\Constraints\UniqueSlugsOnDomainsValidator;
 use Shopsys\FrameworkBundle\Form\FriendlyUrlType;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;

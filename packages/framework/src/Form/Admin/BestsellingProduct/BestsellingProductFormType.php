@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\BestsellingProduct;
 
-use Shopsys\FrameworkBundle\Component\Constraints;
+use Shopsys\FrameworkBundle\Form\Constraints;
 use Shopsys\FrameworkBundle\Form\ProductType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;

@@ -374,13 +374,13 @@ services:
       - '%shopsys.uploaded_file_dir%'
       - '%shopsys.uploaded_file_url_prefix%'
 
-  Shopsys\FrameworkBundle\Component\Constraints\NotSelectedDomainToShowValidator:
+  Shopsys\FrameworkBundle\Form\Constraints\NotSelectedDomainToShowValidator:
     tags:
-      - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Component\Constraints\NotSelectedDomainToShowValidator }
+      - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Form\Constraints\NotSelectedDomainToShowValidator }
 
-  Shopsys\FrameworkBundle\Component\Constraints\UniqueSlugsOnDomainsValidator:
+  Shopsys\FrameworkBundle\Form\Constraints\UniqueSlugsOnDomainsValidator:
     tags:
-      - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Component\Constraints\UniqueSlugsOnDomainsValidator }
+      - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Form\Constraints\UniqueSlugsOnDomainsValidator }
 
   Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorUserProvider: ~
 
@@ -572,9 +572,9 @@ services:
   twig.stringloader:
     class: Twig_Loader_Array
 
-  Shopsys\FrameworkBundle\Component\Constraints\UniqueEmailValidator:
+  Shopsys\FrameworkBundle\Form\Constraints\UniqueEmailValidator:
     tags:
-      - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Component\Constraints\UniqueEmailValidator }
+      - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Form\Constraints\UniqueEmailValidator }
 
   monolog.activation_strategy.not_found:
     abstract: true

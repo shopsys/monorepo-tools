@@ -2,10 +2,10 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Customer;
 
-use Shopsys\FrameworkBundle\Component\Constraints\Email;
-use Shopsys\FrameworkBundle\Component\Constraints\FieldsAreNotIdentical;
-use Shopsys\FrameworkBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
-use Shopsys\FrameworkBundle\Component\Constraints\UniqueEmail;
+use Shopsys\FrameworkBundle\Form\Constraints\Email;
+use Shopsys\FrameworkBundle\Form\Constraints\FieldsAreNotIdentical;
+use Shopsys\FrameworkBundle\Form\Constraints\NotIdenticalToEmailLocalPart;
+use Shopsys\FrameworkBundle\Form\Constraints\UniqueEmail;
 use Shopsys\FrameworkBundle\Form\DisplayOnlyDomainIconType;
 use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
 use Shopsys\FrameworkBundle\Form\DomainType;

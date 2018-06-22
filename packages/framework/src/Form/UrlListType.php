@@ -2,10 +2,10 @@
 
 namespace Shopsys\FrameworkBundle\Form;
 
-use Shopsys\FrameworkBundle\Component\Constraints\UniqueSlugsOnDomains;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\FrameworkBundle\Form\Constraints\UniqueSlugsOnDomains;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

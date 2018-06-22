@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Order;
 
-use Shopsys\FrameworkBundle\Component\Constraints\Email;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Transformers\InverseTransformer;
+use Shopsys\FrameworkBundle\Form\Constraints\Email;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Country\CountryFacade;
 use Shopsys\FrameworkBundle\Model\Heureka\HeurekaFacade;

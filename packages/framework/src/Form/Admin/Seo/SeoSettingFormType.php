@@ -2,8 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Seo;
 
-use Shopsys\FrameworkBundle\Component\Constraints\NotInArray;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Form\Constraints\NotInArray;
 use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\Form\AbstractType;

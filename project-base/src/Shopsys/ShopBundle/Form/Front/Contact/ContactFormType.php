@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Contact;
 
-use Shopsys\FrameworkBundle\Component\Constraints\Email;
+use Shopsys\FrameworkBundle\Form\Constraints\Email;
 use Shopsys\FrameworkBundle\Form\HoneyPotType;
 use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
 use Shopsys\FrameworkBundle\Model\ContactForm\ContactFormData;

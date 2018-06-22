@@ -2,8 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Form;
 
-use Shopsys\FrameworkBundle\Component\Constraints\FileExtensionMaxLength;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
+use Shopsys\FrameworkBundle\Form\Constraints\FileExtensionMaxLength;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
