@@ -37,7 +37,7 @@ class ArticleData
     public $urls;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $placement;
 
