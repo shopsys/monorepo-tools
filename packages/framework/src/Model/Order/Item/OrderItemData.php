@@ -5,27 +5,27 @@ namespace Shopsys\FrameworkBundle\Model\Order\Item;
 class OrderItemData
 {
     /**
-     * @var string
+     * @var string|null
      */
     public $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $priceWithVat;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $priceWithoutVat;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $vatPercent;
 
     /**
-     * @var int
+     * @var int|null
      */
     public $quantity;
 
