@@ -190,17 +190,16 @@ class CustomerServiceTest extends TestCase
         $deliveryCountryData = new CountryData();
         $deliveryCountryData->name = 'Slovenská republika';
         $deliveryCountry = new Country($deliveryCountryData, self::DOMAIN_ID);
-        $deliveryAddressData = new DeliveryAddressData(
-            true,
-            'deliveryStreet',
-            'deliveryCity',
-            'deliveryPostcode',
-            'deliveryCompanyName',
-            'deliveryFirstName',
-            'deliveryLastName',
-            'deliveryTelephone',
-            $deliveryCountry
-        );
+        $deliveryAddressData = new DeliveryAddressData();
+        $deliveryAddressData->addressFilled = true;
+        $deliveryAddressData->street = 'deliveryStreet';
+        $deliveryAddressData->city = 'deliveryCity';
+        $deliveryAddressData->postcode = 'deliveryPostcode';
+        $deliveryAddressData->companyName = 'deliveryCompanyName';
+        $deliveryAddressData->firstName = 'deliveryFirstName';
+        $deliveryAddressData->lastName = 'deliveryLastName';
+        $deliveryAddressData->telephone = 'deliveryTelephone';
+        $deliveryAddressData->country = $deliveryCountry;
 
         $billingAddress = $this->createBillingAddress($billingAddressData);
         $deliveryAddress = $this->createDeliveryAddress($deliveryAddressData);
@@ -305,17 +304,16 @@ class CustomerServiceTest extends TestCase
             'companyTaxNumber'
         );
 
-        $deliveryAddressData = new DeliveryAddressData(
-            true,
-            $order->getDeliveryStreet(),
-            $order->getDeliveryCity(),
-            $order->getDeliveryPostcode(),
-            $order->getDeliveryCompanyName(),
-            $order->getDeliveryFirstName(),
-            $order->getDeliveryLastName(),
-            $order->getDeliveryTelephone(),
-            $deliveryCountry
-        );
+        $deliveryAddressData = new DeliveryAddressData();
+        $deliveryAddressData->addressFilled = true;
+        $deliveryAddressData->street = $order->getDeliveryStreet();
+        $deliveryAddressData->city = $order->getDeliveryCity();
+        $deliveryAddressData->postcode = $order->getDeliveryPostcode();
+        $deliveryAddressData->companyName = $order->getDeliveryCompanyName();
+        $deliveryAddressData->firstName = $order->getDeliveryFirstName();
+        $deliveryAddressData->lastName = $order->getDeliveryLastName();
+        $deliveryAddressData->telephone = $order->getDeliveryTelephone();
+        $deliveryAddressData->country = $deliveryCountry;
 
         $customerData = $customerService->getAmendedCustomerDataByOrder($user, $order);
 
