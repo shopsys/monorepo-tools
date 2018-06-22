@@ -38,6 +38,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#285 - Removal of base data fixtures](https://github.com/shopsys/shopsys/pull/285)
     - all Base Data Fixtures were removed
     - the data are created either in database migrations or in Demo Data Fixtures
+- [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271)
+  - modules are responsible for querying the data to improve performance
+  - interfaces from package product-feed-interface are not used anymore as they were only important with open-box architecture
+  - only relevant data is fetched from the database, should result in enhanced performance
+  - FeedInterface and FeedInfoInterface define the way feeds are registered in the system
+  - FeedExport is responsible for the actual generation of a file in batches on a specific domain
+  - FeedRenderer is responsible for rendering the feed from Twig template
+  - FeedPathProvider is responsible for providing the correct filepath and url to the specified feed on a domain
+  - ProductUrlsBatchLoader and ProductParametersBatchLoader are responsible for loading product data in batches 
+  - cron modules use the logger for debug information
+  - DailyFeedCronModule is responsible for continuation of the correct feed after waking up
 
 ### [shopsys/monorepo-tools]
 #### Fixed
@@ -48,18 +59,29 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#286 - Instantiate entity data objects by factories](https://github.com/shopsys/shopsys/pull/286)
     - entity data objects have only an empty constructor now
     - creation of entity data objects moved to factories to allow extensibility
+- [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271)
+    - for details see section shopsys/framework
 
 ### [shopsys/product-feed-heureka]
 #### Changed
 - [#286 - Instantiate entity data objects by factories](https://github.com/shopsys/shopsys/pull/286)
     - entity data objects have only an empty constructor now
     - creation of entity data objects moved to factories to allow extensibility
+- [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271)
+    - for details see section shopsys/framework
+
+### [shopsys/product-feed-heureka-delivery]
+#### Changed
+- [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271)
+    - for details see section shopsys/framework
 
 ### [shopsys/product-feed-zbozi]
 #### Changed
 - [#286 - Instantiate entity data objects by factories](https://github.com/shopsys/shopsys/pull/286)
     - entity data objects have only an empty constructor now
     - creation of entity data objects moved to factories to allow extensibility
+- [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271)
+    - for details see section shopsys/framework
 
 ### [shopsys/framework]
 #### Fixed

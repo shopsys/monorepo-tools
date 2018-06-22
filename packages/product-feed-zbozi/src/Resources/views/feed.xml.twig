@@ -6,10 +6,10 @@
 {% block item %}
     <SHOPITEM>
         <ITEM_ID>{{ item.id }}</ITEM_ID>
-        <PRODUCTNAME>{{ item.productName }}</PRODUCTNAME>
+        <PRODUCTNAME>{{ item.name }}</PRODUCTNAME>
         <DESCRIPTION>{{ item.description|striptags|replace({"\n": ' '})|trim }}</DESCRIPTION>
         <URL>{{ item.url }}</URL>
-        <PRICE_VAT>{{ item.priceVat|number_format(2, ',', '') }}</PRICE_VAT>
+        <PRICE_VAT>{{ item.price.priceWithVat|number_format(2, ',', '') }}</PRICE_VAT>
         <DELIVERY_DATE>{{ item.deliveryDate|default(-1) }}</DELIVERY_DATE>
         {% if item.imgUrl -%}
             <IMGURL>{{ item.imgUrl }}</IMGURL>
@@ -17,11 +17,11 @@
         {% if item.ean -%}
             <EAN>{{ item.ean }}</EAN>
         {% endif -%}
-        {% if item.partno is not null -%}
-        <PRODUCTNO>{{ item.partno }}</PRODUCTNO>
+        {% if item.productno is not null -%}
+            <PRODUCTNO>{{ item.productno }}</PRODUCTNO>
         {% endif -%}
-        {% if item.mainVariantId is not null %}
-            <ITEMGROUP_ID>{{ item.mainVariantId }}</ITEMGROUP_ID>
+        {% if item.groupId is not null %}
+            <ITEMGROUP_ID>{{ item.groupId }}</ITEMGROUP_ID>
         {% endif -%}
         {% if item.manufacturer is not null -%}
             <MANUFACTURER>{{ item.manufacturer }}</MANUFACTURER>
@@ -29,17 +29,17 @@
         {% if item.categoryText is not null -%}
             <CATEGORYTEXT>{{ item.categoryText }}</CATEGORYTEXT>
         {% endif -%}
-        {% for paramName, paramVal in item.parametersByName -%}
+        {% for paramName, paramVal in item.params -%}
             <PARAM>
                 <PARAM_NAME>{{ paramName }}</PARAM_NAME>
                 <VAL>{{ paramVal }}</VAL>
             </PARAM>
         {% endfor -%}
-        {% if item.getCustomValue('cpc') is not null -%}
-            <MAX_CPC>{{ item.getCustomValue('cpc') }}</MAX_CPC>
+        {% if item.maxCpc is not null -%}
+            <MAX_CPC>{{ item.maxCpc }}</MAX_CPC>
         {% endif %}
-        {% if item.getCustomValue('cpc_search') is not null -%}
-            <MAX_CPC_SEARCH>{{ item.getCustomValue('cpc_search') }}</MAX_CPC_SEARCH>
+        {% if item.maxCpcSearch is not null -%}
+            <MAX_CPC_SEARCH>{{ item.maxCpcSearch }}</MAX_CPC_SEARCH>
         {% endif %}
     </SHOPITEM>
 {% endblock %}

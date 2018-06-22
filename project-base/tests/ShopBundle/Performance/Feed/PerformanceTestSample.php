@@ -3,14 +3,14 @@
 namespace Tests\ShopBundle\Performance\Feed;
 
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\ProductFeed\FeedConfigInterface;
+use Shopsys\FrameworkBundle\Model\Feed\FeedInfoInterface;
 
 class PerformanceTestSample
 {
     /**
-     * @var \Shopsys\ProductFeed\FeedConfigInterface
+     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedInfoInterface
      */
-    private $feedConfig;
+    private $feedInfo;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig
@@ -43,20 +43,20 @@ class PerformanceTestSample
     private $failMessages = [];
 
     /**
-     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedInfoInterface $feedInfo
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param $generationUri
      * @param $duration
      * @param $statusCode
      */
     public function __construct(
-        FeedConfigInterface $feedConfig,
+        FeedInfoInterface $feedInfo,
         DomainConfig $domainConfig,
         $generationUri,
         $duration,
         $statusCode
     ) {
-        $this->feedConfig = $feedConfig;
+        $this->feedInfo = $feedInfo;
         $this->domainConfig = $domainConfig;
         $this->generationUri = $generationUri;
         $this->duration = $duration;
@@ -80,11 +80,11 @@ class PerformanceTestSample
     }
 
     /**
-     * @return \Shopsys\ProductFeed\FeedConfigInterface
+     * @return string
      */
-    public function getFeedConfig()
+    public function getFeedName()
     {
-        return $this->feedConfig;
+        return $this->feedInfo->getName();
     }
 
     /**

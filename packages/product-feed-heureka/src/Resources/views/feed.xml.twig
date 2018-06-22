@@ -6,16 +6,16 @@
 {% block item %}
     <SHOPITEM>
         <ITEM_ID>{{ item.id }}</ITEM_ID>
-        {% if item.mainVariantId is not null -%}
-            <ITEMGROUP_ID>{{ item.mainVariantId }}</ITEMGROUP_ID>
+        {% if item.groupId is not null -%}
+            <ITEMGROUP_ID>{{ item.groupId }}</ITEMGROUP_ID>
         {% endif -%}
-        <PRODUCTNAME>{{ item.productName }}</PRODUCTNAME>
+        <PRODUCTNAME>{{ item.name }}</PRODUCTNAME>
         <DESCRIPTION>{{ item.description|striptags|replace({"\n": ' '})|trim }}</DESCRIPTION>
         <URL>{{ item.url }}</URL>
         {% if item.imgUrl -%}
             <IMGURL>{{ item.imgUrl }}</IMGURL>
         {% endif -%}
-        <PRICE_VAT>{{ item.priceVat|number_format(2, ',', '') }}</PRICE_VAT>
+        <PRICE_VAT>{{ item.price.priceWithVat|number_format(2, ',', '') }}</PRICE_VAT>
         {% if item.ean -%}
             <EAN>{{ item.ean }}</EAN>
         {% endif -%}
@@ -25,17 +25,17 @@
         {% if item.manufacturer is not null -%}
             <MANUFACTURER>{{ item.manufacturer }}</MANUFACTURER>
         {% endif -%}
-        {% if item.getCustomValue('category_name') is not null -%}
-            <CATEGORYTEXT>{{ item.getCustomValue('category_name') }}</CATEGORYTEXT>
+        {% if item.categoryText is not null -%}
+            <CATEGORYTEXT>{{ item.categoryText }}</CATEGORYTEXT>
         {% endif -%}
-        {% for paramName, paramVal in item.parametersByName -%}
+        {% for paramName, paramVal in item.params -%}
             <PARAM>
                 <PARAM_NAME>{{ paramName }}</PARAM_NAME>
                 <VAL>{{ paramVal }}</VAL>
             </PARAM>
         {% endfor -%}
-        {% if item.getCustomValue('cpc') is not null -%}
-            <HEUREKA_CPC>{{ item.getCustomValue('cpc')|number_format(2, ',', '') }}</HEUREKA_CPC>
+        {% if item.cpc is not null -%}
+            <HEUREKA_CPC>{{ item.cpc|number_format(2, ',', '') }}</HEUREKA_CPC>
         {% endif -%}
     </SHOPITEM>
 {% endblock %}

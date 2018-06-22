@@ -431,12 +431,20 @@ services:
      arguments:
        - '%shopsys.data_fixtures.resource_customers_filepath%'
 
-  Shopsys\FrameworkBundle\Model\Feed\FeedXmlWriter: ~
-
   Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade:
     arguments:
       - '%shopsys.feed_url_prefix%'
       - '%shopsys.feed_dir%'
+
+  Shopsys\FrameworkBundle\Model\Feed\FeedPathProvider:
+    arguments:
+      $feedUrlPrefix: '%shopsys.feed_url_prefix%'
+      $feedDir: '%shopsys.feed_dir%'
+
+  Shopsys\FrameworkBundle\Model\Feed\FeedRegistry:
+    arguments:
+      $knownTypes: ['daily', 'hourly']
+      $defaultType: 'daily'
 
   Shopsys\FrameworkBundle\Component\HttpFoundation\ResponseListener:
     tags:

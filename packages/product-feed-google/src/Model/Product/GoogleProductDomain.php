@@ -63,22 +63,6 @@ class GoogleProductDomain
     }
 
     /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return null|\Shopsys\FrameworkBundle\Model\Product\Product
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
      * @return bool
      */
     public function getShow()

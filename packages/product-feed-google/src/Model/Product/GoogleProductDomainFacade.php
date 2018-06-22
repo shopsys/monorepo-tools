@@ -47,19 +47,6 @@ class GoogleProductDomainFacade
     }
 
     /**
-     * @param array $productsIds
-     * @param int $domainId
-     * @return \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomain[]
-     */
-    public function getGoogleProductDomainsByProductsIdsDomainIdIndexedByProductId($productsIds, $domainId)
-    {
-        return $this->googleProductDomainRepository->getGoogleProductDomainsByProductsIdsDomainIdIndexedByProductId(
-            $productsIds,
-            $domainId
-        );
-    }
-
-    /**
      * @param $productId
      * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainData[] $googleProductDomainsData
      */

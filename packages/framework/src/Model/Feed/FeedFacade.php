@@ -2,12 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Model\Feed;
 
-use Doctrine\ORM\EntityManagerInterface;
-use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade;
-use Shopsys\ProductFeed\FeedConfigInterface;
 
 class FeedFacade
 {
@@ -15,180 +11,117 @@ class FeedFacade
     const BATCH_SIZE = 1000;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedRegistry
      */
-    protected $domain;
-
-    /**
-     * @var \League\Flysystem\FilesystemInterface
-     */
-    protected $filesystem;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedXmlWriter
-     */
-    protected $feedXmlWriter;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade
-     */
-    protected $feedConfigFacade;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedGenerationConfig[]
-     */
-    protected $standardFeedGenerationConfigs;
-
-    /**
-     * @var \Doctrine\ORM\EntityManagerInterface
-     */
-    protected $em;
+    protected $feedRegistry;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade
      */
     protected $productVisibilityFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedExportFactory
+     */
+    protected $feedExportFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedPathProvider
+     */
+    protected $feedPathProvider;
+
     public function __construct(
-        FeedXmlWriter $feedXmlWriter,
-        Domain $domain,
-        FilesystemInterface $filesystem,
-        FeedConfigFacade $feedConfigFacade,
-        FeedGenerationConfigFactory $feedGenerationConfigFactory,
-        EntityManagerInterface $em,
-        ProductVisibilityFacade $productVisibilityFacade
+        FeedRegistry $feedRegistry,
+        ProductVisibilityFacade $productVisibilityFacade,
+        FeedExportFactory $feedExportFactory,
+        FeedPathProvider $feedPathProvider
     ) {
-        $this->feedXmlWriter = $feedXmlWriter;
-        $this->domain = $domain;
-        $this->filesystem = $filesystem;
-        $this->feedConfigFacade = $feedConfigFacade;
-        $this->standardFeedGenerationConfigs = $feedGenerationConfigFactory->createAllForStandardFeeds();
-        $this->em = $em;
+        $this->feedRegistry = $feedRegistry;
         $this->productVisibilityFacade = $productVisibilityFacade;
+        $this->feedExportFactory = $feedExportFactory;
+        $this->feedPathProvider = $feedPathProvider;
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedGenerationConfig $feedGenerationConfigToContinue
-     * @return \Shopsys\FrameworkBundle\Model\Feed\FeedGenerationConfig|null
+     * @param string $feedName
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      */
-    public function generateStandardFeedsIteratively(FeedGenerationConfig $feedGenerationConfigToContinue)
+    public function generateFeed(string $feedName, DomainConfig $domainConfig): void
     {
-        foreach ($this->standardFeedGenerationConfigs as $key => $feedGenerationConfig) {
-            if ($feedGenerationConfig->isSameFeedAndDomain($feedGenerationConfigToContinue)) {
-                $feedConfig = $this->feedConfigFacade->getFeedConfigByName($feedGenerationConfig->getFeedName());
-                $domainConfig = $this->domain->getDomainConfigById($feedGenerationConfig->getDomainId());
-                $feedItemToContinue = $this->generateFeedBatch(
-                    $feedConfig,
-                    $domainConfig,
-                    $feedGenerationConfigToContinue->getFeedItemId()
-                );
-                if ($feedItemToContinue !== null) {
-                    return new FeedGenerationConfig(
-                        $feedConfig->getFeedName(),
-                        $domainConfig->getId(),
-                        $feedItemToContinue->getId()
-                    );
-                } else {
-                    if (array_key_exists($key + 1, $this->standardFeedGenerationConfigs)) {
-                        return $this->standardFeedGenerationConfigs[$key + 1];
-                    } else {
-                        return null;
-                    }
-                }
-            }
-        }
+        $feedExport = $this->createFeedExport($feedName, $domainConfig);
 
-        return null;
-    }
-
-    public function generateDeliveryFeeds()
-    {
-        foreach ($this->feedConfigFacade->getDeliveryFeedConfigs() as $feedConfig) {
-            foreach ($this->domain->getAll() as $domainConfig) {
-                $this->generateFeed($feedConfig, $domainConfig);
-            }
+        while (!$feedExport->isFinished()) {
+            $feedExport->generateBatch();
         }
     }
 
     /**
-     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
+     * @param string $feedName
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param int|null $lastSeekId
+     * @return \Shopsys\FrameworkBundle\Model\Feed\FeedExport
      */
-    public function generateFeed(
-        FeedConfigInterface $feedConfig,
-        DomainConfig $domainConfig
-    ) {
-        $seekItemId = null;
-        do {
-            $lastFeedItem = $this->generateFeedBatch($feedConfig, $domainConfig, $seekItemId);
-            if ($lastFeedItem === null) {
-                $seekItemId = null;
-            } else {
-                $seekItemId = $lastFeedItem->getId();
-            }
-        } while ($seekItemId !== null);
-    }
-
-    /**
-     * @param \Shopsys\ProductFeed\FeedConfigInterface $feedConfig
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @param int|null $seekItemId
-     * @return \Shopsys\ProductFeed\FeedItemInterface|null
-     */
-    protected function generateFeedBatch(
-        FeedConfigInterface $feedConfig,
-        DomainConfig $domainConfig,
-        $seekItemId
-    ) {
-        $filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
-        $temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SUFFIX;
-
+    public function createFeedExport(string $feedName, DomainConfig $domainConfig, int $lastSeekId = null): FeedExport
+    {
         /*
          * Product is visible, when it has at least one visible category.
          * Hiding a category therefore could cause change of product's visibility but the visibility recalculation is not invoked immediately,
          * so we need to recalculate product's visibility here in order to get consistent data for feed generation.
          */
         $this->productVisibilityFacade->refreshProductsVisibilityForMarked();
-        $feedItemRepository = $this->feedConfigFacade->getFeedItemRepositoryByFeedConfig($feedConfig);
-        $itemsInBatch = $feedItemRepository->getItems($domainConfig, $seekItemId, self::BATCH_SIZE);
 
-        if ($seekItemId === null) {
-            $this->feedXmlWriter->writeBegin(
-                $domainConfig,
-                $feedConfig->getTemplateFilepath(),
-                $temporaryFeedFilepath
-            );
-        }
+        $feed = $this->feedRegistry->getFeedByName($feedName);
 
-        $items = $feedConfig->processItems($itemsInBatch, $domainConfig);
-        $this->feedXmlWriter->writeItems(
-            $items,
-            $domainConfig,
-            $feedConfig->getTemplateFilepath(),
-            $temporaryFeedFilepath
-        );
-
-        $this->em->clear();
-
-        if (count($itemsInBatch) === self::BATCH_SIZE) {
-            return array_pop($itemsInBatch);
-        } else {
-            $this->feedXmlWriter->writeEnd(
-                $domainConfig,
-                $feedConfig->getTemplateFilepath(),
-                $temporaryFeedFilepath
-            );
-            $this->filesystem->rename($temporaryFeedFilepath, $filepath);
-
-            return null;
-        }
+        return $this->feedExportFactory->create($feed, $domainConfig, $lastSeekId);
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Feed\FeedGenerationConfig
+     * @param string|null $feedType
+     * @return \Shopsys\FrameworkBundle\Model\Feed\FeedInfoInterface[]
      */
-    public function getFirstFeedGenerationConfig()
+    public function getFeedsInfo(string $feedType = null): array
     {
-        return reset($this->standardFeedGenerationConfigs);
+        $feeds = $feedType === null ? $this->feedRegistry->getAllFeeds() : $this->feedRegistry->getFeeds($feedType);
+
+        $feedsInfo = [];
+        foreach ($feeds as $feed) {
+            $feedsInfo[] = $feed->getInfo();
+        }
+
+        return $feedsInfo;
+    }
+
+    /**
+     * @param string|null $feedType
+     * @return string[]
+     */
+    public function getFeedNames(string $feedType = null): array
+    {
+        $feedNames = [];
+        foreach ($this->getFeedsInfo($feedType) as $feedInfo) {
+            $feedNames[] = $feedInfo->getName();
+        }
+
+        return $feedNames;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedInfoInterface $feedInfo
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return string
+     */
+    public function getFeedUrl(FeedInfoInterface $feedInfo, DomainConfig $domainConfig): string
+    {
+        return $this->feedPathProvider->getFeedUrl($feedInfo, $domainConfig);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedInfoInterface $feedInfo
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return string
+     */
+    public function getFeedFilepath(FeedInfoInterface $feedInfo, DomainConfig $domainConfig): string
+    {
+        return $this->feedPathProvider->getFeedFilepath($feedInfo, $domainConfig);
     }
 }

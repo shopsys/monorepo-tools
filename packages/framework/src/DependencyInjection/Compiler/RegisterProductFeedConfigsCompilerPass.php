@@ -2,10 +2,9 @@
 
 namespace Shopsys\FrameworkBundle\DependencyInjection\Compiler;
 
-use Shopsys\FrameworkBundle\Model\Feed\FeedConfigRegistry;
+use Shopsys\FrameworkBundle\Model\Feed\FeedRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 class RegisterProductFeedConfigsCompilerPass implements CompilerPassInterface
@@ -13,31 +12,16 @@ class RegisterProductFeedConfigsCompilerPass implements CompilerPassInterface
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
-        $feedConfigRegistryDefinition = $container->findDefinition(FeedConfigRegistry::class);
+        $feedRegistryDefinition = $container->findDefinition(FeedRegistry::class);
 
         $taggedServiceIds = $container->findTaggedServiceIds('shopsys.product_feed');
         foreach ($taggedServiceIds as $serviceId => $tags) {
             foreach ($tags as $tag) {
-                $this->registerFeedConfig($feedConfigRegistryDefinition, $serviceId, $tag['type'] ?? null);
+                $type = $tag['type'] ?? null;
+                $feedRegistryDefinition->addMethodCall('registerFeed', [new Reference($serviceId), $type]);
             }
         }
-    }
-
-    /**
-     * @param \Symfony\Component\DependencyInjection\Definition $feedConfigRegistryDefinition
-     * @param string $serviceId
-     * @param string|null $type
-     */
-    private function registerFeedConfig(Definition $feedConfigRegistryDefinition, $serviceId, $type)
-    {
-        $arguments = [new Reference($serviceId)];
-        if ($type !== null) {
-            FeedConfigRegistry::assertTypeIsKnown($type);
-            $arguments[] = $type;
-        }
-
-        $feedConfigRegistryDefinition->addMethodCall('registerFeedConfig', $arguments);
     }
 }

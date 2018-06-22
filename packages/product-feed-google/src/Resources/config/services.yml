@@ -7,7 +7,7 @@ services:
   Shopsys\ProductFeed\GoogleBundle\:
     resource: '../../*'
 
-  Shopsys\ProductFeed\GoogleBundle\GoogleFeedConfig:
+  Shopsys\ProductFeed\GoogleBundle\GoogleFeed:
     tags:
       - { name: shopsys.product_feed }
 
