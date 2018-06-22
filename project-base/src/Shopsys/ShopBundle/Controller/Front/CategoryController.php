@@ -2,12 +2,12 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\FrameworkBundle\Component\Category\CurrentCategoryResolver;
 use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Category\TopCategory\TopCategoryFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Model\Category\CurrentCategoryResolver;
 use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends FrontBaseController
@@ -23,7 +23,7 @@ class CategoryController extends FrontBaseController
     private $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Category\CurrentCategoryResolver
+     * @var \Shopsys\ShopBundle\Model\Category\CurrentCategoryResolver
      */
     private $currentCategoryResolver;
 
