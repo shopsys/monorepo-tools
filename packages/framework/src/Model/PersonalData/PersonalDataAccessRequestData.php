@@ -8,27 +8,27 @@ class PersonalDataAccessRequestData
 {
 
     /**
-     * @var DateTime
+     * @var DateTime|null
      */
     public $createAt;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $email;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $hash;
 
     /**
-     * @var int
+     * @var int|null
      */
     public $domainId;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $type;
 }
