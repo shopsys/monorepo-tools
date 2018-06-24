@@ -6,7 +6,7 @@ use Doctrine\Bundle\DoctrineBundle\Command\DoctrineCommand;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\DBAL\Sharding\PoolingShardConnection;
-use Shopsys\FrameworkBundle\Component\DataFixture\ShopsysFixturesLoader;
+use Shopsys\FrameworkBundle\Component\DataFixture\FixturesLoader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,11 +26,11 @@ class LoadDataFixturesCommand extends DoctrineCommand
 {
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\DataFixture\ShopsysFixturesLoader
+     * @var \Shopsys\FrameworkBundle\Component\DataFixture\FixturesLoader
      */
     private $fixturesLoader;
 
-    public function __construct(ShopsysFixturesLoader $fixturesLoader)
+    public function __construct(FixturesLoader $fixturesLoader)
     {
         parent::__construct();
         $this->fixturesLoader = $fixturesLoader;

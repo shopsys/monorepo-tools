@@ -14,7 +14,7 @@ use Doctrine\Common\DataFixtures\Loader;
  * @see \Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader
  * @see \Shopsys\FrameworkBundle\Command\LoadDataFixturesCommand
  */
-class ShopsysFixturesLoader extends Loader
+class FixturesLoader extends Loader
 {
 
     /**
