@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
 use Shopsys\FrameworkBundle\Component\Controller\ErrorService;
 use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;

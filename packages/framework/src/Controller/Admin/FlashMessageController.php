@@ -2,8 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Controller\Admin;
 
-use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
-
 class FlashMessageController extends AdminBaseController
 {
     public function indexAction()

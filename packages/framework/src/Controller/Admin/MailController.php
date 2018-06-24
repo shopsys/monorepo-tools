@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
 use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\FrameworkBundle\Form\Admin\Mail\AllMailTemplatesFormType;
 use Shopsys\FrameworkBundle\Form\Admin\Mail\MailSettingFormType;
