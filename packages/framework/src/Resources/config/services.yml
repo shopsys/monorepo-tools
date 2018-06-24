@@ -128,7 +128,7 @@ services:
     arguments:
       - '@monolog.logger.cron'
 
-  Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector: ~
+  Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector: ~
 
   Shopsys\FrameworkBundle\Component\Css\CssFacade:
     arguments:

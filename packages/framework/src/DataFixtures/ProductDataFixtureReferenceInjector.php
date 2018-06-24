@@ -1,7 +1,8 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\DataFixture;
+namespace Shopsys\FrameworkBundle\DataFixtures;
 
+use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\FlagDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\FulltextTriggersDataFixture;

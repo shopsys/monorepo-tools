@@ -6,10 +6,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Faker\Generator as Faker;
 use Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader;
+use Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
 use Shopsys\FrameworkBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
@@ -57,7 +57,7 @@ class ProductDataFixture
     private $productVariantFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector
+     * @var \Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector
      */
     private $productDataReferenceInjector;
 
@@ -118,7 +118,7 @@ class ProductDataFixture
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade $productVariantFacade
-     * @param \Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector $productDataReferenceInjector
+     * @param \Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector $productDataReferenceInjector
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
      * @param \Faker\Generator $faker
