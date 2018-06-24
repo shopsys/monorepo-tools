@@ -4,14 +4,6 @@ namespace Shopsys\FrameworkBundle\Component\Domain\Multidomain;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder;
-use Shopsys\FrameworkBundle\Component\Setting\SettingValue;
-use Shopsys\FrameworkBundle\Model\Category\CategoryDomain;
-use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentDomain;
-use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain;
-use Shopsys\FrameworkBundle\Model\Product\ProductDomain;
-use Shopsys\FrameworkBundle\Model\Product\ProductVisibility;
-use Shopsys\FrameworkBundle\Model\Transport\TransportDomain;
 
 class MultidomainEntityClassFinderFacade
 {
@@ -26,6 +18,11 @@ class MultidomainEntityClassFinderFacade
     protected $multidomainEntityClassFinder;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassProviderInterface
+     */
+    protected $multidomainEntityClassProvider;
+
+    /**
      * @var \Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder
      */
     protected $entityNotNullableColumnsFinder;
@@ -33,10 +30,12 @@ class MultidomainEntityClassFinderFacade
     public function __construct(
         EntityManagerInterface $em,
         MultidomainEntityClassFinder $multidomainEntityClassFinder,
+        MultidomainEntityClassProviderInterface $multidomainEntityClassProvider,
         EntityNotNullableColumnsFinder $entityNotNullableColumnsFinder
     ) {
         $this->em = $em;
         $this->multidomainEntityClassFinder = $multidomainEntityClassFinder;
+        $this->multidomainEntityClassProvider = $multidomainEntityClassProvider;
         $this->entityNotNullableColumnsFinder = $entityNotNullableColumnsFinder;
     }
 
@@ -47,8 +46,8 @@ class MultidomainEntityClassFinderFacade
     {
         return $this->multidomainEntityClassFinder->getMultidomainEntitiesNames(
             $this->em->getMetadataFactory()->getAllMetadata(),
-            $this->getIgnoredEntitiesNames(),
-            $this->getManualMultidomainEntitiesNames()
+            $this->multidomainEntityClassProvider->getIgnoredMultidomainEntitiesNames(),
+            $this->multidomainEntityClassProvider->getManualMultidomainEntitiesNames()
         );
     }
 
@@ -63,31 +62,5 @@ class MultidomainEntityClassFinderFacade
         }
 
         return $this->entityNotNullableColumnsFinder->getAllNotNullableColumnNamesIndexedByTableName($multidomainClassesMetadata);
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function getIgnoredEntitiesNames()
-    {
-        return [
-            SettingValue::class,
-            ProductVisibility::class,
-        ];
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function getManualMultidomainEntitiesNames()
-    {
-        return [
-            BrandDomain::class,
-            CategoryDomain::class,
-            MailTemplate::class,
-            PaymentDomain::class,
-            ProductDomain::class,
-            TransportDomain::class,
-        ];
     }
 }

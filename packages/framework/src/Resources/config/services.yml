@@ -157,6 +157,11 @@ services:
       - '%shopsys.domain_config_filepath%'
       - '%shopsys.domain_urls_config_filepath%'
 
+  Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultiDomainEntityClassProvider: ~
+
+  Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultiDomainEntityClassProviderInterface:
+    alias: Shopsys\FrameworkBundle\Model\MultiDomainEntityClassProvider
+
   Shopsys\FrameworkBundle\Component\Domain\DomainAwareSecurityHeadersSetter:
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
