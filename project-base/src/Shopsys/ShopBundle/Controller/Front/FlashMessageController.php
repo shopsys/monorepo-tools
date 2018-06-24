@@ -2,8 +2,6 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
-
 class FlashMessageController extends FrontBaseController
 {
     public function indexAction()

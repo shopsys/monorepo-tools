@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFacade;

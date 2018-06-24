@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade;
 use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade;

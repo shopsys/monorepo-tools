@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbResolver;
-use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
 
 class BreadcrumbController extends FrontBaseController
 {

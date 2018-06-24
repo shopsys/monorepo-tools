@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Controller;
+namespace Shopsys\ShopBundle\Controller\Front;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
