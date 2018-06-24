@@ -1,8 +1,7 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Controller;
+namespace Shopsys\FrameworkBundle\Component\FlashMessage;
 
-use Shopsys\FrameworkBundle\Component\FlashMessage\Bag;
 use Symfony\Component\Form\Form;
 
 class ErrorService

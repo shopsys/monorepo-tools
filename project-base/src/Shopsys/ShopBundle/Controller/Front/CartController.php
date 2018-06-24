@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Component\Controller\ErrorService;
+use Shopsys\FrameworkBundle\Component\FlashMessage\ErrorService;
 use Shopsys\FrameworkBundle\Model\Cart\AddProductResult;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
@@ -54,7 +54,7 @@ class CartController extends FrontBaseController
     private $orderPreviewFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Controller\ErrorService
+     * @var \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorService
      */
     private $errorService;
 

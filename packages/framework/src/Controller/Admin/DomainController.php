@@ -3,10 +3,10 @@
 namespace Shopsys\FrameworkBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Shopsys\FrameworkBundle\Component\Controller\ErrorService;
 use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Domain\DomainFacade;
+use Shopsys\FrameworkBundle\Component\FlashMessage\ErrorService;
 use Shopsys\FrameworkBundle\Component\Grid\ArrayDataSource;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
 use Shopsys\FrameworkBundle\Form\Admin\Domain\DomainFormType;
@@ -36,7 +36,7 @@ class DomainController extends AdminBaseController
     private $domainFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Controller\ErrorService
+     * @var \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorService
      */
     private $errorService;
 
