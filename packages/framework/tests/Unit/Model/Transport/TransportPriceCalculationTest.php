@@ -71,7 +71,10 @@ class TransportPriceCalculationTest extends TestCase
         $vat = new Vat($vatData);
         $currency = new Currency(new CurrencyData());
 
-        $transport = new Transport(new TransportData(['cs' => 'TransportName'], $vat));
+        $transportData = new TransportData();
+        $transportData->name = ['cs' => 'transportName'];
+        $transportData->vat = $vat;
+        $transport = new Transport($transportData);
         $transport->setPrice(new TransportPriceFactory(), $currency, $inputPrice);
 
         $price = $transportPriceCalculation->calculateIndependentPrice($transport, $currency);

@@ -205,7 +205,9 @@ class CustomerServiceTest extends TestCase
         $deliveryAddress = $this->createDeliveryAddress($deliveryAddressData);
         $user = new User($userData, $billingAddress, $deliveryAddress);
 
-        $transport = new Transport(new TransportData(['cs' => 'transportName']));
+        $transportData = new TransportData();
+        $transportData->name = ['cs' => 'transportName'];
+        $transport = new Transport($transportData);
         $paymentData = new PaymentData();
         $paymentData->name = ['cs' => 'paymentName'];
         $payment = new Payment($paymentData);
@@ -272,7 +274,9 @@ class CustomerServiceTest extends TestCase
         $billingAddress = $this->createBillingAddress();
         $user = new User($userData, $billingAddress, null);
 
-        $transport = new Transport(new TransportData(['cs' => 'transportName']));
+        $transportData = new TransportData();
+        $transportData->name = ['cs' => 'transportName'];
+        $transport = new Transport($transportData);
         $paymentData = new PaymentData();
         $paymentData->name = ['cs' => 'paymentName'];
         $payment = new Payment($paymentData);

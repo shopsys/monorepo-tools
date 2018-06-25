@@ -21,7 +21,10 @@ class TransportTest extends TestCase
         $vatData->name = 'vat';
         $vatData->percent = 21;
         $vat = new Vat($vatData);
-        $transportData = new TransportData(['cs' => 'transportName', 'en' => 'transportName'], $vat, [], [], false);
+        $transportData = new TransportData();
+        $transportData->name = ['cs' => 'transportName'];
+        $transportData->vat = $vat;
+        $transportData->hidden = false;
         $transport = new Transport($transportData);
 
         return $transport;
