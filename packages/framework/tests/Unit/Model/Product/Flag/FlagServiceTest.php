@@ -14,7 +14,9 @@ class FlagServiceTest extends TestCase
     {
         $flagService = new FlagService(new FlagFactory());
 
-        $flagDataOriginal = new FlagData(['cs' => 'flagNameCs', 'en' => 'flagNameEn'], '#336699');
+        $flagDataOriginal = new FlagData();
+        $flagDataOriginal->name = ['cs' => 'flagNameCs', 'en' => 'flagNameEn'];
+        $flagDataOriginal->rgbColor = '#336699';
         $flag = $flagService->create($flagDataOriginal);
 
         $flagDataNew = new FlagData();
@@ -27,8 +29,12 @@ class FlagServiceTest extends TestCase
     {
         $flagService = new FlagService(new FlagFactory());
 
-        $flagDataOld = new FlagData(['cs' => 'flagNameCs', 'en' => 'flagNameEn'], '#336699');
-        $flagDataEdit = new FlagData(['cs' => 'editFlagNameCs', 'en' => 'editFlagNameEn'], '#00CCFF');
+        $flagDataOld = new FlagData();
+        $flagDataOld->name = ['cs' => 'flagNameCs', 'en' => 'flagNameEn'];
+        $flagDataOld->rgbColor = '#336699';
+        $flagDataEdit = new FlagData();
+        $flagDataEdit->name = ['cs' => 'editFlagNameCs', 'en' => 'editFlagNameEn'];
+        $flagDataEdit->rgbColor = '#00CCFF';
         $flag = new Flag($flagDataOld);
 
         $flagService->edit($flag, $flagDataEdit);

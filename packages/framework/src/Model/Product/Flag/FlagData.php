@@ -10,7 +10,7 @@ class FlagData
     public $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $rgbColor;
 
@@ -19,16 +19,10 @@ class FlagData
      */
     public $visible;
 
-    /**
-     * @param array $name
-     * @param string $rgbColor
-     * @param bool $visible
-     */
-    public function __construct(array $name = [], $rgbColor = null, $visible = false)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->rgbColor = $rgbColor;
-        $this->visible = $visible;
+        $this->name = [];
+        $this->visible = false;
     }
 
     /**
