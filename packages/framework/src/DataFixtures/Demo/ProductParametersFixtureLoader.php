@@ -76,7 +76,10 @@ class ProductParametersFixtureLoader
 
         foreach ($parameterValues as $locale => $parameterValue) {
             $productParameterValueData = new ProductParameterValueData();
-            $productParameterValueData->parameterValueData = new ParameterValueData($parameterValue, $locale);
+            $parameterValueData = new ParameterValueData();
+            $parameterValueData->text = $parameterValue;
+            $parameterValueData->locale = $locale;
+            $productParameterValueData->parameterValueData = $parameterValueData;
             $productParameterValueData->parameter = $parameter;
 
             $productParameterValuesDataCollection->add($productParameterValueData);

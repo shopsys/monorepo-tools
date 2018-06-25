@@ -61,7 +61,10 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
                     if ($valueText !== null) {
                         $productParameterValueData = new ProductParameterValueData();
                         $productParameterValueData->parameter = $productParameterValuesLocalizedData->parameter;
-                        $productParameterValueData->parameterValueData = new ParameterValueData($valueText, $locale);
+                        $parameterValueData = new ParameterValueData();
+                        $parameterValueData->text = $valueText;
+                        $parameterValueData->locale = $locale;
+                        $productParameterValueData->parameterValueData = $parameterValueData;
 
                         $normData[] = $productParameterValueData;
                     }

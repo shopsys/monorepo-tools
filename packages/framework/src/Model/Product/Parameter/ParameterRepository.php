@@ -101,7 +101,10 @@ class ParameterRepository
         ]);
 
         if ($parameterValue === null) {
-            $parameterValue = $this->parameterValueFactory->create(new ParameterValueData($valueText, $locale));
+            $parameterValueData = new ParameterValueData();
+            $parameterValueData->text = $valueText;
+            $parameterValueData->locale = $locale;
+            $parameterValue = $this->parameterValueFactory->create($parameterValueData);
             $this->em->persist($parameterValue);
             // Doctrine's identity map is not cache.
             // We have to flush now, so that next findOneBy() finds new ParameterValue.
