@@ -9,12 +9,9 @@ class UnitData
      */
     public $name;
 
-    /**
-     * @param array $name
-     */
-    public function __construct(array $name = [])
+    public function __construct()
     {
-        $this->name = $name;
+        $this->name = [];
     }
 
     /**
