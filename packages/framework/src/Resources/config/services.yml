@@ -807,3 +807,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactory
+
+  Shopsys\FrameworkBundle\Model\Advert\AdvertDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Advert\AdvertDataFactory

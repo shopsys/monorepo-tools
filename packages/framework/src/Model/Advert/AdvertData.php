@@ -51,18 +51,4 @@ class AdvertData
         $this->hidden = false;
         $this->image = new ImageUploadData();
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Advert\Advert $advert
-     */
-    public function setFromEntity(Advert $advert)
-    {
-        $this->name = $advert->getName();
-        $this->type = $advert->getType();
-        $this->code = $advert->getCode();
-        $this->link = $advert->getLink();
-        $this->positionName = $advert->getPositionName();
-        $this->hidden = $advert->isHidden();
-        $this->domainId = $advert->getDomainId();
-    }
 }
