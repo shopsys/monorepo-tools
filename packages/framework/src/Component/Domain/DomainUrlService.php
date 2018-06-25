@@ -4,13 +4,13 @@ namespace Shopsys\FrameworkBundle\Component\Domain;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Shopsys\FrameworkBundle\Component\Entity\EntityStringColumnsFinder;
+use Shopsys\FrameworkBundle\Component\Doctrine\EntityStringColumnsFinder;
 use Shopsys\FrameworkBundle\Component\Sql\SqlQuoter;
 
 class DomainUrlService
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Entity\EntityStringColumnsFinder
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityStringColumnsFinder
      */
     private $entityStringColumnsFinder;
 

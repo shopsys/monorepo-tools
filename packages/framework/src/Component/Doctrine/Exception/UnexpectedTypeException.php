@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Entity\Exception;
+namespace Shopsys\FrameworkBundle\Component\Doctrine\Exception;
 
 use Exception;
 

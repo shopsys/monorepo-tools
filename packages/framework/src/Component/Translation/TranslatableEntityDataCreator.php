@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Component\Translation;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Prezent\Doctrine\Translatable\TranslationInterface;
-use Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder;
+use Shopsys\FrameworkBundle\Component\Doctrine\EntityNotNullableColumnsFinder;
 use Shopsys\FrameworkBundle\Component\Sql\SqlQuoter;
 
 class TranslatableEntityDataCreator
@@ -16,7 +16,7 @@ class TranslatableEntityDataCreator
     private $em;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityNotNullableColumnsFinder
      */
     private $entityNotNullableColumnsFinder;
 
@@ -27,7 +27,7 @@ class TranslatableEntityDataCreator
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder $entityNotNullableColumnsFinder
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\EntityNotNullableColumnsFinder $entityNotNullableColumnsFinder
      * @param \Shopsys\FrameworkBundle\Component\Sql\SqlQuoter $sqlQuoter
      */
     public function __construct(

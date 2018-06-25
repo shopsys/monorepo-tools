@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\FrameworkBundle\Unit\Component\Entity;
+namespace Tests\FrameworkBundle\Unit\Component\Doctrine;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\Entity\EntityStringColumnsFinder;
+use Shopsys\FrameworkBundle\Component\Doctrine\EntityStringColumnsFinder;
 
 class EntityStringColumnsFinderTest extends TestCase
 {
@@ -54,7 +54,7 @@ class EntityStringColumnsFinderTest extends TestCase
     public function testGetAllStringColumnNamesIndexedByTableNameException()
     {
         $classMetadataMock = $this->createMock(ClassMetadata::class);
-        $this->expectException(\Shopsys\FrameworkBundle\Component\Entity\Exception\UnexpectedTypeException::class);
+        $this->expectException(\Shopsys\FrameworkBundle\Component\Doctrine\Exception\UnexpectedTypeException::class);
 
         $entityNotNullableColumnsFinder = new EntityStringColumnsFinder();
         $entityNotNullableColumnsFinder->getAllStringColumnNamesIndexedByTableName([$classMetadataMock]);

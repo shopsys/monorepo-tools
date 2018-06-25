@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Entity;
+namespace Shopsys\FrameworkBundle\Component\Doctrine;
 
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
@@ -16,7 +16,7 @@ class EntityStringColumnsFinder
         foreach ($classesMetadata as $classMetadata) {
             if (!($classMetadata instanceof ClassMetadataInfo)) {
                 $message = 'Instance of ' . ClassMetadataInfo::class . ' is required.';
-                throw new \Shopsys\FrameworkBundle\Component\Entity\Exception\UnexpectedTypeException($message);
+                throw new \Shopsys\FrameworkBundle\Component\Doctrine\Exception\UnexpectedTypeException($message);
             }
             $stringColumnNames = $this->getStringColumnNames($classMetadata);
             if (!empty($stringColumnNames)) {

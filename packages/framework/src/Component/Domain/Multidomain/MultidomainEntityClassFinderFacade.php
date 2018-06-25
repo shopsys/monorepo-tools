@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Component\Domain\Multidomain;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder;
+use Shopsys\FrameworkBundle\Component\Doctrine\EntityNotNullableColumnsFinder;
 
 class MultidomainEntityClassFinderFacade
 {
@@ -23,7 +23,7 @@ class MultidomainEntityClassFinderFacade
     protected $multidomainEntityClassProvider;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityNotNullableColumnsFinder
      */
     protected $entityNotNullableColumnsFinder;
 
