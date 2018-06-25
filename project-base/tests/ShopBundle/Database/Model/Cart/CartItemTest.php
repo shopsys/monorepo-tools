@@ -26,7 +26,9 @@ class CartItemTest extends DatabaseTestCase
         $vatData->name = 'vat';
         $vatData->percent = 21;
         $vat = new Vat($vatData);
-        $availability = new Availability(new AvailabilityData([], 0));
+        $availabilityData = new AvailabilityData();
+        $availabilityData->dispatchTime = 0;
+        $availability = new Availability($availabilityData);
         $productData = $productDataFactory->createDefault();
         $productData->name = [];
         $productData->price = 100;

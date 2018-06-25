@@ -115,7 +115,9 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $vatData->name = 'vat';
         $vatData->percent = $vatPercent;
         $vat = new Vat($vatData);
-        $availability = new Availability(new AvailabilityData([], 0));
+        $availabilityData = new AvailabilityData();
+        $availabilityData->dispatchTime = 0;
+        $availability = new Availability($availabilityData);
         $em->persist($vat);
         $em->persist($availability);
 
@@ -194,7 +196,9 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $vatData->name = 'vat';
         $vatData->percent = $vatPercent;
         $vat = new Vat($vatData);
-        $availability = new Availability(new AvailabilityData([], 0));
+        $availabilityData = new AvailabilityData();
+        $availabilityData->dispatchTime = 0;
+        $availability = new Availability($availabilityData);
         $em->persist($vat);
         $em->persist($availability);
 
