@@ -5,12 +5,12 @@ namespace Shopsys\FrameworkBundle\Model\Product\Filter;
 class ProductFilterData
 {
     /**
-     * @var string
+     * @var string|null
      */
     public $minimalPrice;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $maximalPrice;
 
@@ -20,7 +20,7 @@ class ProductFilterData
     public $parameters = [];
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $inStock;
 
