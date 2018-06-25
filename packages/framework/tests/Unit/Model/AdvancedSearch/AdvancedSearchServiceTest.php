@@ -76,7 +76,10 @@ class AdvancedSearchServiceTest extends TestCase
 
     public function testExtendQueryBuilderByAdvancedSearchData()
     {
-        $ruleData = new AdvancedSearchRuleData('testSubject', 'testOperator', 'testValue');
+        $ruleData = new AdvancedSearchRuleData();
+        $ruleData->subject = 'testSubject';
+        $ruleData->operator = 'testOperator';
+        $ruleData->value = 'testValue';
 
         $advancedSearchData = [
             AdvancedSearchService::TEMPLATE_RULE_FORM_KEY => null,
