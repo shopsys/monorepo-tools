@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Error\Reporting;
+namespace Shopsys\FrameworkBundle\Model\Mail\Reporting;
 
 use DateTime;
 use Shopsys\FrameworkBundle\Component\Environment\EnvironmentType;
@@ -33,7 +33,7 @@ class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
     private $errorReportingEmailFrom;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Error\Reporting\LogErrorReportingFacade
+     * @var \Shopsys\FrameworkBundle\Model\Mail\Reporting\LogErrorReportingFacade
      */
     private $logErrorReportingFacade;
 
@@ -50,7 +50,7 @@ class ErrorReportingFromLastHourCronModule implements SimpleCronModuleInterface
     /**
      * @param string|null $errorReportingEmailTo
      * @param string|null $errorReportingEmailFrom
-     * @param \Shopsys\FrameworkBundle\Component\Error\Reporting\LogErrorReportingFacade $logErrorReportingFacade
+     * @param \Shopsys\FrameworkBundle\Model\Mail\Reporting\LogErrorReportingFacade $logErrorReportingFacade
      * @param \Shopsys\FrameworkBundle\Model\Mail\MailerService $mailerService
      * @param \Shopsys\FrameworkBundle\Component\Setting\Setting $setting
      */

@@ -193,7 +193,7 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
-  Shopsys\FrameworkBundle\Component\Error\Reporting\LogErrorReportingFacade:
+  Shopsys\FrameworkBundle\Model\Mail\Reporting\LogErrorReportingFacade:
     arguments:
       - '%kernel.logs_dir%'
 

@@ -4,7 +4,7 @@ services:
     autoconfigure: true
     public: false
 
-  Shopsys\FrameworkBundle\Component\Error\Reporting\ErrorReportingFromLastHourCronModule:
+  Shopsys\FrameworkBundle\Model\Mail\Reporting\ErrorReportingFromLastHourCronModule:
     tags:
       - { name: shopsys.cron, hours: '*', minutes: '55' }
     arguments:

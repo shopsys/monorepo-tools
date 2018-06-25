@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Error\Reporting;
+namespace Shopsys\FrameworkBundle\Model\Mail\Reporting;
 
 use DateTime;
 
