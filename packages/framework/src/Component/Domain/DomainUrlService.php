@@ -4,15 +4,15 @@ namespace Shopsys\FrameworkBundle\Component\Domain;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Shopsys\FrameworkBundle\Component\Doctrine\EntityStringColumnsFinder;
+use Shopsys\FrameworkBundle\Component\Doctrine\StringColumnsFinder;
 use Shopsys\FrameworkBundle\Component\Sql\SqlQuoter;
 
 class DomainUrlService
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityStringColumnsFinder
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\StringColumnsFinder
      */
-    private $entityStringColumnsFinder;
+    private $stringColumnsFinder;
 
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
@@ -25,11 +25,11 @@ class DomainUrlService
     private $sqlQuoter;
 
     public function __construct(
-        EntityStringColumnsFinder $entityStringColumnsFinder,
+        StringColumnsFinder $stringColumnsFinder,
         EntityManagerInterface $em,
         SqlQuoter $sqlQuoter
     ) {
-        $this->entityStringColumnsFinder = $entityStringColumnsFinder;
+        $this->stringColumnsFinder = $stringColumnsFinder;
         $this->em = $em;
         $this->sqlQuoter = $sqlQuoter;
     }
@@ -55,7 +55,7 @@ class DomainUrlService
     {
         $classesMetadata = $this->em->getMetadataFactory()->getAllMetadata();
 
-        return $this->entityStringColumnsFinder->getAllStringColumnNamesIndexedByTableName($classesMetadata);
+        return $this->stringColumnsFinder->getAllStringColumnNamesIndexedByTableName($classesMetadata);
     }
 
     /**

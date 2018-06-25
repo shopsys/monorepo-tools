@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Component\Translation;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Prezent\Doctrine\Translatable\TranslationInterface;
-use Shopsys\FrameworkBundle\Component\Doctrine\EntityNotNullableColumnsFinder;
+use Shopsys\FrameworkBundle\Component\Doctrine\NotNullableColumnsFinder;
 use Shopsys\FrameworkBundle\Component\Sql\SqlQuoter;
 
 class TranslatableEntityDataCreator
@@ -16,9 +16,9 @@ class TranslatableEntityDataCreator
     private $em;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Doctrine\EntityNotNullableColumnsFinder
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\NotNullableColumnsFinder
      */
-    private $entityNotNullableColumnsFinder;
+    private $notNullableColumnsFinder;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Sql\SqlQuoter
@@ -27,16 +27,16 @@ class TranslatableEntityDataCreator
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Component\Doctrine\EntityNotNullableColumnsFinder $entityNotNullableColumnsFinder
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\NotNullableColumnsFinder $notNullableColumnsFinder
      * @param \Shopsys\FrameworkBundle\Component\Sql\SqlQuoter $sqlQuoter
      */
     public function __construct(
         EntityManagerInterface $em,
-        EntityNotNullableColumnsFinder $entityNotNullableColumnsFinder,
+        NotNullableColumnsFinder $notNullableColumnsFinder,
         SqlQuoter $sqlQuoter
     ) {
         $this->em = $em;
-        $this->entityNotNullableColumnsFinder = $entityNotNullableColumnsFinder;
+        $this->notNullableColumnsFinder = $notNullableColumnsFinder;
         $this->sqlQuoter = $sqlQuoter;
     }
 
@@ -46,7 +46,7 @@ class TranslatableEntityDataCreator
      */
     public function copyAllTranslatableDataForNewLocale($templateLocale, $newLocale)
     {
-        $notNullableColumns = $this->entityNotNullableColumnsFinder->getAllNotNullableColumnNamesIndexedByTableName(
+        $notNullableColumns = $this->notNullableColumnsFinder->getAllNotNullableColumnNamesIndexedByTableName(
             $this->getAllTranslatableEntitiesMetadata()
         );
         foreach ($notNullableColumns as $tableName => $columnNames) {

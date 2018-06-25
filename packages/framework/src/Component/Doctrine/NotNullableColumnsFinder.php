@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Component\Doctrine;
 
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
-class EntityNotNullableColumnsFinder
+class NotNullableColumnsFinder
 {
     /**
      * @param \Doctrine\ORM\Mapping\ClassMetadata[] $classesMetadata

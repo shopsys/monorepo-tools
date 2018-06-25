@@ -5,9 +5,9 @@ namespace Tests\FrameworkBundle\Unit\Component\Doctrine;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\Doctrine\EntityStringColumnsFinder;
+use Shopsys\FrameworkBundle\Component\Doctrine\StringColumnsFinder;
 
-class EntityStringColumnsFinderTest extends TestCase
+class StringColumnsFinderTest extends TestCase
 {
     public function testGetAllStringColumnNamesIndexedByTableName()
     {
@@ -45,8 +45,8 @@ class EntityStringColumnsFinderTest extends TestCase
             ],
         ];
 
-        $entityStringColumnsFinder = new EntityStringColumnsFinder();
-        $actualResult = $entityStringColumnsFinder->getAllStringColumnNamesIndexedByTableName([$classMetadataInfoMock]);
+        $stringColumnsFinder = new StringColumnsFinder();
+        $actualResult = $stringColumnsFinder->getAllStringColumnNamesIndexedByTableName([$classMetadataInfoMock]);
 
         $this->assertSame($expectedResult, $actualResult);
     }
@@ -56,7 +56,7 @@ class EntityStringColumnsFinderTest extends TestCase
         $classMetadataMock = $this->createMock(ClassMetadata::class);
         $this->expectException(\Shopsys\FrameworkBundle\Component\Doctrine\Exception\UnexpectedTypeException::class);
 
-        $entityNotNullableColumnsFinder = new EntityStringColumnsFinder();
-        $entityNotNullableColumnsFinder->getAllStringColumnNamesIndexedByTableName([$classMetadataMock]);
+        $stringColumnsFinder = new StringColumnsFinder();
+        $stringColumnsFinder->getAllStringColumnNamesIndexedByTableName([$classMetadataMock]);
     }
 }

@@ -591,9 +591,9 @@ services:
 
   Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader: '@doctrine.fixtures.loader'
 
-  Shopsys\FrameworkBundle\Component\Doctrine\EntityNotNullableColumnsFinder: ~
+  Shopsys\FrameworkBundle\Component\Doctrine\NotNullableColumnsFinder: ~
 
-  Shopsys\FrameworkBundle\Component\Doctrine\EntityStringColumnsFinder: ~
+  Shopsys\FrameworkBundle\Component\Doctrine\StringColumnsFinder: ~
 
   Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber:
     class: Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber

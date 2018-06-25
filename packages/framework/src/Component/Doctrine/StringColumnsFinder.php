@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Component\Doctrine;
 
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
-class EntityStringColumnsFinder
+class StringColumnsFinder
 {
     /**
      * @param \Doctrine\ORM\Mapping\ClassMetadata[] $classesMetadata
