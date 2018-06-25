@@ -33,15 +33,4 @@ class AdministratorData
     {
         $this->superadmin = false;
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
-     */
-    public function setFromEntity(Administrator $administrator)
-    {
-        $this->email = $administrator->getEmail();
-        $this->realName = $administrator->getRealName();
-        $this->username = $administrator->getUsername();
-        $this->superadmin = $administrator->isSuperadmin();
-    }
 }

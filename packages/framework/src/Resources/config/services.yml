@@ -804,3 +804,6 @@ services:
 
   Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataFactory
+
+  Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactory

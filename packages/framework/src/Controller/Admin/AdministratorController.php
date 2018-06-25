@@ -9,7 +9,7 @@ use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\FrameworkBundle\Form\Admin\Administrator\AdministratorFormType;
 use Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade;
 use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
-use Shopsys\FrameworkBundle\Model\Administrator\AdministratorData;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
@@ -39,16 +39,23 @@ class AdministratorController extends AdminBaseController
      */
     private $administratorActivityFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface
+     */
+    private $administratorDataFactory;
+
     public function __construct(
         AdministratorFacade $administratorFacade,
         GridFactory $gridFactory,
         Breadcrumb $breadcrumb,
-        AdministratorActivityFacade $administratorActivityFacade
+        AdministratorActivityFacade $administratorActivityFacade,
+        AdministratorDataFactoryInterface $administratorDataFactory
     ) {
         $this->administratorFacade = $administratorFacade;
         $this->gridFactory = $gridFactory;
         $this->breadcrumb = $breadcrumb;
         $this->administratorActivityFacade = $administratorActivityFacade;
+        $this->administratorDataFactory = $administratorDataFactory;
     }
 
     /**
@@ -99,8 +106,7 @@ class AdministratorController extends AdminBaseController
             throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException($message);
         }
 
-        $administratorData = new AdministratorData();
-        $administratorData->setFromEntity($administrator);
+        $administratorData = $this->administratorDataFactory->createFromAdministrator($administrator);
 
         $form = $this->createForm(AdministratorFormType::class, $administratorData, [
             'administrator' => $administrator,
@@ -169,7 +175,7 @@ class AdministratorController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm(AdministratorFormType::class, new AdministratorData(), [
+        $form = $this->createForm(AdministratorFormType::class, $this->administratorDataFactory->create(), [
             'scenario' => AdministratorFormType::SCENARIO_CREATE,
             'administrator' => null,
         ]);
