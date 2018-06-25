@@ -76,10 +76,10 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
                 continue; // invalid parameter IDs are ignored
             }
 
-            $parametersFilterData[] = new ParameterFilterData(
-                $this->parameterChoicesIndexedByParameterId[$parameterId]->getParameter(),
-                $parameterValues
-            );
+            $parameterFilterData = new ParameterFilterData();
+            $parameterFilterData->parameter = $this->parameterChoicesIndexedByParameterId[$parameterId]->getParameter();
+            $parameterFilterData->values = $parameterValues;
+            $parametersFilterData[] = $parameterFilterData;
         }
 
         return $parametersFilterData;
