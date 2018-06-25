@@ -115,7 +115,9 @@ class ProductParametersFixtureLoader
 
         if ($parameter === null) {
             $visible = true;
-            $parameterData = new ParameterData($parameterNamesByLocale, $visible);
+            $parameterData = new ParameterData();
+            $parameterData->name = $parameterNamesByLocale;
+            $parameterData->visible = $visible;
             $parameter = $this->parameterFacade->create($parameterData);
         }
 

@@ -14,14 +14,10 @@ class ParameterData
      */
     public $visible;
 
-    /**
-     * @param string[] $name
-     * @param bool $visible
-     */
-    public function __construct(array $name = [], $visible = false)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->visible = $visible;
+        $this->name = [];
+        $this->visible = false;
     }
 
     /**
