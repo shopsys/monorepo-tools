@@ -2,38 +2,26 @@
 
 namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
-class FriendlyUrlDataFactory
+class FriendlyUrlDataFactory implements FriendlyUrlDataFactoryInterface
 {
-    const ARRAY_ID_FIELD = 'id';
-    const ARRAY_NAME_FIELD = 'name';
-
     /**
      * @param $data
      * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlData
      */
     public function createFromData($data)
     {
-        if (!$this->validateData($data)) {
-            throw new \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\Exception\InvalidFriendlyUrlDataArrayException();
-        }
-
         $friendlyUrlData = new FriendlyUrlData();
-        $friendlyUrlData->name = $data[self::ARRAY_NAME_FIELD];
-        $friendlyUrlData->id = $data[self::ARRAY_ID_FIELD];
+        $friendlyUrlData->name = $data['id'];
+        $friendlyUrlData->id = $data['name'];
 
         return $friendlyUrlData;
     }
 
     /**
-     * @param array $data
-     * @return bool
+     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlData
      */
-    private function validateData($data)
+    public function create(): FriendlyUrlData
     {
-        if (!isset($data[self::ARRAY_ID_FIELD]) || !isset($data[self::ARRAY_ID_FIELD])) {
-            return false;
-        }
-
-        return true;
+        return new FriendlyUrlData();
     }
 }

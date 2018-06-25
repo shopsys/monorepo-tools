@@ -801,3 +801,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactory
+
+  Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataFactory
