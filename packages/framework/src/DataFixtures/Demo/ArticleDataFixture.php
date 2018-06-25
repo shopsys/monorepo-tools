@@ -2,28 +2,36 @@
 
 namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\DataFixtures\Base\SettingValueDataFixture;
 use Shopsys\FrameworkBundle\Model\Article\Article;
 use Shopsys\FrameworkBundle\Model\Article\ArticleData;
+use Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
 
-class ArticleDataFixture extends AbstractReferenceFixture
+class ArticleDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
     const ARTICLE_TERMS_AND_CONDITIONS_1 = 'article_terms_and_conditions_1';
     const ARTICLE_PRIVACY_POLICY_1 = 'article_privacy_policy_1';
     const ARTICLE_COOKIES_1 = 'article_cookies_1';
 
-    /** @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade
+     */
     private $articleFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleFacade $articleFacade
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface
      */
-    public function __construct(ArticleFacade $articleFacade)
+    private $articleDataFactory;
+
+    public function __construct(ArticleFacade $articleFacade, ArticleDataFactoryInterface $articleDataFactory)
     {
         $this->articleFacade = $articleFacade;
+        $this->articleDataFactory = $articleDataFactory;
     }
 
     /**
@@ -31,7 +39,7 @@ class ArticleDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $articleData = new ArticleData();
+        $articleData = $this->articleDataFactory->create();
         $articleData->domainId = Domain::FIRST_DOMAIN_ID;
 
         $articleData->name = 'News';
@@ -76,5 +84,12 @@ class ArticleDataFixture extends AbstractReferenceFixture
         if ($referenceName !== null) {
             $this->addReference($referenceName, $article);
         }
+    }
+
+    public function getDependencies()
+    {
+        return [
+            SettingValueDataFixture::class,
+        ];
     }
 }

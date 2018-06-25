@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Form\Admin\Article\ArticleFormType;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\FrameworkBundle\Model\Article\Article;
-use Shopsys\FrameworkBundle\Model\Article\ArticleDataFactory;
+use Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
 use Shopsys\FrameworkBundle\Model\Cookies\CookiesFacade;
 use Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade;
@@ -32,7 +32,7 @@ class ArticleController extends AdminBaseController
     private $articleFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface
      */
     private $articleDataFactory;
 
@@ -63,7 +63,7 @@ class ArticleController extends AdminBaseController
 
     public function __construct(
         ArticleFacade $articleFacade,
-        ArticleDataFactory $articleDataFactory,
+        ArticleDataFactoryInterface $articleDataFactory,
         GridFactory $gridFactory,
         AdminDomainTabsFacade $adminDomainTabsFacade,
         Breadcrumb $breadcrumb,
@@ -147,7 +147,7 @@ class ArticleController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $articleData = $this->articleDataFactory->createDefault();
+        $articleData = $this->articleDataFactory->create();
 
         $form = $this->createForm(ArticleFormType::class, $articleData, [
             'article' => null,

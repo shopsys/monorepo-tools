@@ -810,3 +810,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Advert\AdvertDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Advert\AdvertDataFactory
+
+  Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Article\ArticleDataFactory
