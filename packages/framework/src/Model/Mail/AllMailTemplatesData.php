@@ -10,29 +10,34 @@ class AllMailTemplatesData
     public $orderStatusTemplates;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData|null
      */
     public $registrationTemplate;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData|null
      */
     public $resetPasswordTemplate;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData|null
      */
     public $personalDataAccessTemplate;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData|null
      */
     public $personalDataExportTemplate;
 
     /**
-     * @var int
+     * @var int|null
      */
     public $domainId;
+
+    public function __construct()
+    {
+        $this->orderStatusTemplates = [];
+    }
 
     /**
      * @return \Shopsys\FrameworkBundle\Model\Mail\MailTemplateData[]
