@@ -33,7 +33,6 @@ class DirectoryStructureCreatorTest extends TestCase
             ),
         ];
         $imageConfig = new ImageConfig($imageEntityConfigByClass);
-        $imageLocator = new ImageLocator($imageDir, $imageConfig);
         $filesystemMock = $this->createMock(FilesystemInterface::class);
         $filesystemMock
             ->method('createDir')
@@ -41,6 +40,7 @@ class DirectoryStructureCreatorTest extends TestCase
                 ['imageDir/entityName1/sizeName1_1/'],
                 ['imageDir/entityName2/type/sizeName2_1/']
             );
+        $imageLocator = new ImageLocator($imageDir, $imageConfig, $filesystemMock);
         $creator = new DirectoryStructureCreator($imageDir, $domainImageDir, $imageConfig, $imageLocator, $filesystemMock);
         $creator->makeImageDirectories();
     }

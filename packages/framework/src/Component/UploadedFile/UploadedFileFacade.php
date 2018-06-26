@@ -3,9 +3,9 @@
 namespace Shopsys\FrameworkBundle\Component\UploadedFile;
 
 use Doctrine\ORM\EntityManagerInterface;
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig;
-use Symfony\Component\Filesystem\Filesystem;
 
 class UploadedFileFacade
 {
@@ -30,7 +30,7 @@ class UploadedFileFacade
     protected $uploadedFileService;
 
     /**
-     * @var \Symfony\Component\Filesystem\Filesystem
+     * @var \League\Flysystem\FilesystemInterface
      */
     protected $filesystem;
 
@@ -44,7 +44,7 @@ class UploadedFileFacade
         UploadedFileConfig $uploadedFileConfig,
         UploadedFileRepository $uploadedFileRepository,
         UploadedFileService $uploadedFileService,
-        Filesystem $filesystem,
+        FilesystemInterface $filesystem,
         UploadedFileLocator $uploadedFileLocator
     ) {
         $this->em = $em;
@@ -103,7 +103,10 @@ class UploadedFileFacade
     public function deleteFileFromFilesystem(UploadedFile $uploadedFile)
     {
         $filepath = $this->uploadedFileLocator->getAbsoluteUploadedFileFilepath($uploadedFile);
-        $this->filesystem->remove($filepath);
+
+        if ($this->filesystem->has($filepath)) {
+            $this->filesystem->delete($filepath);
+        }
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\UploadedFile;
 
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 
 class UploadedFileLocator
@@ -17,13 +18,19 @@ class UploadedFileLocator
     private $uploadedFileUrlPrefix;
 
     /**
+     * @var \League\Flysystem\FilesystemInterface
+     */
+    private $filesystem;
+
+    /**
      * @param string $uploadedFileDir
      * @param string $uploadedFileUrlPrefix
      */
-    public function __construct($uploadedFileDir, $uploadedFileUrlPrefix)
+    public function __construct($uploadedFileDir, $uploadedFileUrlPrefix, FilesystemInterface $filesystem)
     {
         $this->uploadedFileDir = $uploadedFileDir;
         $this->uploadedFileUrlPrefix = $uploadedFileUrlPrefix;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -68,7 +75,7 @@ class UploadedFileLocator
     {
         $fileFilepath = $this->getAbsoluteUploadedFileFilepath($uploadedFile);
 
-        return is_file($fileFilepath) && is_readable($fileFilepath);
+        return $this->filesystem->has($fileFilepath);
     }
 
     /**

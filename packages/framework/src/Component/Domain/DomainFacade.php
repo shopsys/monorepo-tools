@@ -2,8 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Domain;
 
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
-use Symfony\Component\Filesystem\Filesystem;
 
 class DomainFacade
 {
@@ -18,7 +18,7 @@ class DomainFacade
     protected $domainService;
 
     /**
-     * @var \Symfony\Component\Filesystem\Filesystem
+     * @var \League\Flysystem\FilesystemInterface
      */
     protected $filesystem;
 
@@ -36,7 +36,7 @@ class DomainFacade
         $domainImagesDirectory,
         Domain $domain,
         DomainService $domainService,
-        Filesystem $fileSystem,
+        FilesystemInterface $fileSystem,
         FileUpload $fileUpload
     ) {
         $this->domainImagesDirectory = $domainImagesDirectory;
@@ -70,6 +70,6 @@ class DomainFacade
      */
     public function existsDomainIcon($domainId)
     {
-        return $this->filesystem->exists($this->domainImagesDirectory . '/' . $domainId . '.png');
+        return $this->filesystem->has($this->domainImagesDirectory . '/' . $domainId . '.png');
     }
 }

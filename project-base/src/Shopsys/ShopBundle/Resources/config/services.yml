@@ -15,6 +15,12 @@ services:
   Shopsys\ShopBundle\Model\:
     resource: '../../Model/*/*{Facade,Factory}.php'
 
+  League\Flysystem\MountManager:
+    arguments:
+      -
+        local: '@local_filesystem'
+        main: '@main_filesystem'
+
   Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory: ~
 
   Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface: '@Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory'

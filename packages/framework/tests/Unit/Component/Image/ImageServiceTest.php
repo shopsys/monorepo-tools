@@ -2,6 +2,8 @@
 
 namespace Tests\FrameworkBundle\Unit\Component\Image;
 
+use League\Flysystem\FilesystemInterface;
+use League\Flysystem\MountManager;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileNamingConvention;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
@@ -80,7 +82,9 @@ class ImageServiceTest extends TestCase
     {
         $fileNamingConvention = new FileNamingConvention();
         $filesystem = new Filesystem();
+        $mountManager = new MountManager();
+        $abstractFilesystem = $this->createMock(FilesystemInterface::class);
 
-        return new FileUpload('temporaryDir', 'uploadedFileDir', 'imageDir', $fileNamingConvention, $filesystem);
+        return new FileUpload('temporaryDir', 'uploadedFileDir', 'imageDir', $fileNamingConvention, $filesystem, $mountManager, $abstractFilesystem);
     }
 }

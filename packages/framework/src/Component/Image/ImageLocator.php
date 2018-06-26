@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Image;
 
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 
 class ImageLocator
@@ -16,10 +17,16 @@ class ImageLocator
      */
     private $imageConfig;
 
-    public function __construct($imageDir, ImageConfig $imageConfig)
+    /**
+     * @var \League\Flysystem\FilesystemInterface
+     */
+    private $filesystem;
+
+    public function __construct($imageDir, ImageConfig $imageConfig, FilesystemInterface $filesystem)
     {
         $this->imageDir = $imageDir;
         $this->imageConfig = $imageConfig;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -54,7 +61,7 @@ class ImageLocator
     {
         $imageFilepath = $this->getAbsoluteImageFilepath($image, ImageConfig::ORIGINAL_SIZE_NAME);
 
-        return is_file($imageFilepath) && is_readable($imageFilepath);
+        return $this->filesystem->has($imageFilepath);
     }
 
     /**

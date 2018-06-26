@@ -31,7 +31,6 @@ services:
     arguments:
       - '%shopsys.demo_images_archive_url%'
       - '%shopsys.demo_images_sql_url%'
-      - '%kernel.cache_dir%'
       - '%shopsys.image_dir%'
       - '%shopsys.domain_images_dir%'
 

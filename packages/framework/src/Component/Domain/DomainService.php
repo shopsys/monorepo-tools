@@ -2,9 +2,9 @@
 
 namespace Shopsys\FrameworkBundle\Component\Domain;
 
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Image\Processing\ImageProcessingService;
 use Symfony\Bridge\Monolog\Logger;
-use Symfony\Component\Filesystem\Filesystem;
 
 class DomainService
 {
@@ -18,19 +18,19 @@ class DomainService
     private $imageProcessingService;
 
     /**
-     * @var \Symfony\Component\Filesystem\Filesystem
-     */
-    private $filesystem;
-
-    /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
     private $logger;
 
+    /**
+     * @var \League\Flysystem\FilesystemInterface
+     */
+    private $filesystem;
+
     public function __construct(
         Logger $logger,
         ImageProcessingService $imageProcessingService,
-        Filesystem $filesystem
+        FilesystemInterface $filesystem
     ) {
         $this->logger = $logger;
         $this->imageProcessingService = $imageProcessingService;
@@ -44,27 +44,19 @@ class DomainService
      */
     public function convertToDomainIconFormatAndSave($domainId, $filepath, $domainImagesDirectory)
     {
-        $newTemporaryFilepath = pathinfo($filepath, PATHINFO_DIRNAME)
-            . '/'
-            . $domainId
-            . '.'
-            . ImageProcessingService::EXTENSION_PNG;
-
         $resizedImage = $this->imageProcessingService->resize(
             $this->imageProcessingService->createInterventionImage($filepath),
             self::DOMAIN_ICON_WIDTH,
             self::DOMAIN_ICON_HEIGHT,
             self::DOMAIN_ICON_CROP
         );
-        $resizedImage->save($newTemporaryFilepath);
+        $resizedImage->encode(ImageProcessingService::EXTENSION_PNG);
 
-        $targetFileName = pathinfo($newTemporaryFilepath, PATHINFO_BASENAME);
-        $targetFilePath = $domainImagesDirectory . '/' . $targetFileName;
+        $targetFilePath = $domainImagesDirectory . '/' . $domainId . '.' . ImageProcessingService::EXTENSION_PNG;
 
         try {
-            $this->filesystem->rename($newTemporaryFilepath, $targetFilePath, true);
-            $this->filesystem->remove($filepath);
-        } catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
+            $this->filesystem->put($targetFilePath, $resizedImage);
+        } catch (\Exception $ex) {
             $message = 'Move file from temporary directory to domain directory failed';
             $moveToFolderFailedException = new \Shopsys\FrameworkBundle\Component\FileUpload\Exception\MoveToFolderFailedException(
                 $message,

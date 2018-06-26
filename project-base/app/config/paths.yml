@@ -11,7 +11,7 @@ parameters:
   shopsys.doctrine.metadata_cache_directory_path: '%kernel.cache_dir%/doctrine_metadata'
   shopsys.doctrine.query_cache_directory_path: '%kernel.cache_dir%/doctrine_query'
   shopsys.domain_config_filepath: '%kernel.root_dir%/config/domains.yml'
-  shopsys.domain_images_dir: '%shopsys.web_dir%%shopsys.domain_images_url_prefix%'
+  shopsys.domain_images_dir: '/web%shopsys.domain_images_url_prefix%'
   shopsys.domain_images_url_prefix: /content/admin/images/domain
   shopsys.domain_urls_config_filepath: '%kernel.root_dir%/config/domains_urls.yml'
   shopsys.error_pages_dir: '%shopsys.root_dir%/var/errorPages/'
@@ -22,7 +22,7 @@ parameters:
   shopsys.framework.root_dir: '%shopsys.root_dir%/vendor/shopsys/framework'
   shopsys.front_design_image_url_prefix: /assets/frontend/images/
   shopsys.image_config_filepath: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/images.yml'
-  shopsys.image_dir: '%shopsys.web_dir%%shopsys.image_url_prefix%'
+  shopsys.image_dir: '/web%shopsys.image_url_prefix%'
   shopsys.image_url_prefix: /content/images/
   shopsys.javascript_sources_dir: '%shopsys.resources_dir%/scripts'
   shopsys.javascript_url_prefix: /assets/scripts/
@@ -31,7 +31,7 @@ parameters:
   shopsys.sitemaps_dir: '%shopsys.web_dir%%shopsys.sitemaps_url_prefix%'
   shopsys.sitemaps_url_prefix: /content/sitemaps
   shopsys.uploaded_file_config_filepath: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/uploaded_files.yml'
-  shopsys.uploaded_file_dir: '%shopsys.web_dir%%shopsys.uploaded_file_url_prefix%'
+  shopsys.uploaded_file_dir: '/web%shopsys.uploaded_file_url_prefix%'
   shopsys.uploaded_file_url_prefix: /content/uploadedFiles/
   shopsys.web_dir: '%shopsys.root_dir%/web'
   shopsys.vendor_dir: '%kernel.root_dir%/../vendor'

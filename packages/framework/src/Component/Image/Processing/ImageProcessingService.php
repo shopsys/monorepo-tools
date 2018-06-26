@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Component\Image\Processing;
 use Intervention\Image\Constraint;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -26,13 +27,19 @@ class ImageProcessingService
     private $imageManager;
 
     /**
-     * @var \Symfony\Component\Filesystem\Filesystem
+     * @var \League\Flysystem\FilesystemInterface
      */
     private $filesystem;
 
+    /**
+     * @var \Symfony\Component\Filesystem\Filesystem
+     */
+    private $localFilesystem;
+
     public function __construct(
         ImageManager $imageManager,
-        Filesystem $filesystem
+        FilesystemInterface $filesystem,
+        Filesystem $localFilesystem
     ) {
         $this->imageManager = $imageManager;
         $this->filesystem = $filesystem;
@@ -43,6 +50,7 @@ class ImageProcessingService
             self::EXTENSION_GIF,
             self::EXTENSION_PNG,
         ];
+        $this->localFilesystem = $localFilesystem;
     }
 
     /**
@@ -52,11 +60,20 @@ class ImageProcessingService
     public function createInterventionImage($filepath)
     {
         $extension = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
+
         if (!in_array($extension, $this->supportedImageExtensions, true)) {
             throw new \Shopsys\FrameworkBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
         }
         try {
-            return $this->imageManager->make($filepath);
+            if ($this->filesystem->has($filepath)) {
+                $file = $this->filesystem->read($filepath);
+
+                return $this->imageManager->make($file);
+            } elseif ($this->localFilesystem->exists($filepath)) {
+                return $this->imageManager->make($filepath);
+            } else {
+                throw new \Shopsys\FrameworkBundle\Component\Image\Exception\ImageNotFoundException('File ' . $filepath . ' not found.');
+            }
         } catch (\Intervention\Image\Exception\NotReadableException $ex) {
             throw new \Shopsys\FrameworkBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath, $ex);
         }
@@ -79,10 +96,12 @@ class ImageProcessingService
             throw new \Shopsys\FrameworkBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
         }
 
-        $image = $this->createInterventionImage($filepath)->save($newFilepath);
-        if (realpath($filepath) !== realpath($newFilepath)) {
-            $this->filesystem->remove($filepath);
-        }
+        $image = $this->createInterventionImage($filepath);
+
+        $image->encode();
+        $this->filesystem->put($newFilepath, $image);
+
+        $this->removeFileIfRenamed($filepath, $newFilepath);
 
         return $image->filename . '.' . $image->extension;
     }
@@ -126,5 +145,18 @@ class ImageProcessingService
     public function getSupportedImageExtensions()
     {
         return $this->supportedImageExtensions;
+    }
+
+    /**
+     * @param string $filepath
+     * @param string $newFilepath
+     */
+    private function removeFileIfRenamed($filepath, $newFilepath)
+    {
+        if ($this->filesystem->has($filepath) && $filepath !== $newFilepath) {
+            $this->filesystem->delete($filepath);
+        } elseif ($this->localFilesystem->exists($filepath) && realpath($filepath) !== realpath($newFilepath)) {
+            $this->localFilesystem->remove($filepath);
+        }
     }
 }
