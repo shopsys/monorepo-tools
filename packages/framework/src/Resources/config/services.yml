@@ -813,3 +813,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Article\ArticleDataFactory
+
+  Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory

@@ -40,7 +40,7 @@ class CategoryDomainTest extends DatabaseTestCase
 
     public function testCreateCategoryEnabledOnDomain()
     {
-        $categoryData = $this->categoryDataFactory->createDefault();
+        $categoryData = $this->categoryDataFactory->create();
 
         $categoryData->enabled[self::FIRST_DOMAIN_ID] = true;
 
@@ -53,7 +53,7 @@ class CategoryDomainTest extends DatabaseTestCase
 
     public function testCreateCategoryDisabledOnDomain()
     {
-        $categoryData = $this->categoryDataFactory->createDefault();
+        $categoryData = $this->categoryDataFactory->create();
 
         $categoryData->enabled[self::FIRST_DOMAIN_ID] = false;
 
@@ -69,7 +69,7 @@ class CategoryDomainTest extends DatabaseTestCase
      */
     public function testCreateCategoryWithDifferentVisibilityOnDomains()
     {
-        $categoryData = $this->categoryDataFactory->createDefault();
+        $categoryData = $this->categoryDataFactory->create();
 
         $categoryData->enabled[self::FIRST_DOMAIN_ID] = true;
         $categoryData->enabled[self::SECOND_DOMAIN_ID] = false;
@@ -87,7 +87,7 @@ class CategoryDomainTest extends DatabaseTestCase
      */
     public function testCreateCategoryDomainWithData()
     {
-        $categoryData = $this->categoryDataFactory->createDefault();
+        $categoryData = $this->categoryDataFactory->create();
 
         $categoryData->seoTitles[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_TITLE;
         $categoryData->seoMetaDescriptions[self::SECOND_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_META_DESCRIPTION;
