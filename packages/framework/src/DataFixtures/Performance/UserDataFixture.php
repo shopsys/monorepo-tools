@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class UserDataFixture
@@ -46,7 +46,7 @@ class UserDataFixture
     private $customerEditFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface
      */
     private $userDataFactory;
 
@@ -86,7 +86,7 @@ class UserDataFixture
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerEditFacade
-     * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory $userDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface $userDataFactory
      * @param \Faker\Generator $faker
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
@@ -100,7 +100,7 @@ class UserDataFixture
         Domain $domain,
         SqlLoggerFacade $sqlLoggerFacade,
         CustomerFacade $customerEditFacade,
-        UserDataFactory $userDataFactory,
+        UserDataFactoryInterface $userDataFactory,
         Faker $faker,
         PersistentReferenceFacade $persistentReferenceFacade,
         ProgressBarFactory $progressBarFactory,
@@ -175,7 +175,7 @@ class UserDataFixture
 
         $country = $this->persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 
-        $userData = $this->userDataFactory->createDefault($domainId);
+        $userData = $this->userDataFactory->createForDomainId($domainId);
         $userData->firstName = $this->faker->firstName;
         $userData->lastName = $this->faker->lastName;
         $userData->email = $userNumber . '.' . $this->faker->safeEmail;

@@ -828,3 +828,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactory
+
+  Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Customer\UserDataFactory

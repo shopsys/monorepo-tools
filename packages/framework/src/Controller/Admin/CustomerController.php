@@ -19,7 +19,7 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerListAdminFacade;
 use Shopsys\FrameworkBundle\Model\Customer\User;
-use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Security\LoginAsUserFacade;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +30,7 @@ class CustomerController extends AdminBaseController
     const LOGIN_AS_TOKEN_ID_PREFIX = 'loginAs';
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface
      */
     private $userDataFactory;
 
@@ -85,7 +85,7 @@ class CustomerController extends AdminBaseController
     private $customerDataFactory;
 
     public function __construct(
-        UserDataFactory $userDataFactory,
+        UserDataFactoryInterface $userDataFactory,
         CustomerListAdminFacade $customerListAdminFacade,
         CustomerFacade $customerFacade,
         Breadcrumb $breadcrumb,
@@ -213,7 +213,7 @@ class CustomerController extends AdminBaseController
     {
         $customerData = $this->customerDataFactory->create();
         $selectedDomainId = $this->adminDomainTabsFacade->getSelectedDomainId();
-        $userData = $this->userDataFactory->createDefault($selectedDomainId);
+        $userData = $this->userDataFactory->createForDomainId($selectedDomainId);
         $customerData->userData = $userData;
 
         $form = $this->createForm(CustomerFormType::class, $customerData, [

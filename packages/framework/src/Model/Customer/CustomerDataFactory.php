@@ -14,12 +14,19 @@ class CustomerDataFactory implements CustomerDataFactoryInterface
      */
     private $deliveryAddressDataFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface
+     */
+    private $userDataFactory;
+
     public function __construct(
         BillingAddressDataFactoryInterface $billingAddressDataFactory,
-        DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
+        DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory,
+        UserDataFactoryInterface $userDataFactory
     ) {
         $this->billingAddressDataFactory = $billingAddressDataFactory;
         $this->deliveryAddressDataFactory = $deliveryAddressDataFactory;
+        $this->userDataFactory = $userDataFactory;
     }
 
     /**
@@ -29,7 +36,8 @@ class CustomerDataFactory implements CustomerDataFactoryInterface
     {
         return new CustomerData(
             $this->billingAddressDataFactory->create(),
-            $this->deliveryAddressDataFactory->create()
+            $this->deliveryAddressDataFactory->create(),
+            $this->userDataFactory->create()
         );
     }
 
@@ -41,9 +49,9 @@ class CustomerDataFactory implements CustomerDataFactoryInterface
     {
         $customerData = new CustomerData(
             $this->billingAddressDataFactory->createFromBillingAddress($user->getBillingAddress()),
-            $this->getDeliveryAddressDataFromUser($user)
+            $this->getDeliveryAddressDataFromUser($user),
+            $this->userDataFactory->createFromUser($user)
         );
-        $customerData->userData->setFromEntity($user);
 
         return $customerData;
     }

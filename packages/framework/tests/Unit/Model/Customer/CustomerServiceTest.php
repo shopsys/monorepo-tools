@@ -18,6 +18,7 @@ use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactory;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Customer\UserData;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\UserFactory;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Order\OrderData;
@@ -25,6 +26,7 @@ use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 
@@ -355,7 +357,8 @@ class CustomerServiceTest extends TestCase
         $userFactory = new UserFactory();
         $billingAddressDataFactory = new BillingAddressDataFactory();
         $deliveryAddressDataFactory = new DeliveryAddressDataFactory();
-        $customerDataFactory = new CustomerDataFactory($billingAddressDataFactory, $deliveryAddressDataFactory);
+        $userDataFactory = new UserDataFactory($this->createMock(PricingGroupSettingFacade::class));
+        $customerDataFactory = new CustomerDataFactory($billingAddressDataFactory, $deliveryAddressDataFactory, $userDataFactory);
 
         return new CustomerService(
             $customerPasswordServiceMock,

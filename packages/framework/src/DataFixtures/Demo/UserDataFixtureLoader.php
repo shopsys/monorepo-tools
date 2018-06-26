@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\String\TransformString;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface;
-use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface;
 
 class UserDataFixtureLoader
 {
@@ -47,7 +47,7 @@ class UserDataFixtureLoader
     private $path;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface
      */
     private $userDataFactory;
 
@@ -74,7 +74,7 @@ class UserDataFixtureLoader
     /**
      * @param string $path
      * @param \Shopsys\FrameworkBundle\Component\Csv\CsvReader $csvReader
-     * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory $userDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface $userDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
@@ -82,7 +82,7 @@ class UserDataFixtureLoader
     public function __construct(
         $path,
         CsvReader $csvReader,
-        UserDataFactory $userDataFactory,
+        UserDataFactoryInterface $userDataFactory,
         CustomerDataFactoryInterface $customerDataFactory,
         BillingAddressDataFactoryInterface $billingAddressDataFactory,
         DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
@@ -156,7 +156,7 @@ class UserDataFixtureLoader
     {
         $customerData = $this->customerDataFactory->create();
         $domainId = (int)$row[self::COLUMN_DOMAIN_ID];
-        $userData = $this->userDataFactory->createDefault($domainId);
+        $userData = $this->userDataFactory->createForDomainId($domainId);
         $billingAddressData = $this->billingAddressDataFactory->create();
 
         $userData->firstName = $row[self::COLUMN_FIRSTNAME];

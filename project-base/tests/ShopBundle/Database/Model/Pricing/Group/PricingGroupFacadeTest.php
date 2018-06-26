@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
-use Shopsys\FrameworkBundle\Model\Customer\UserData;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductCalculatedPrice;
@@ -93,8 +93,9 @@ class PricingGroupFacadeTest extends DatabaseTestCase
         /* @var $pricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
         $user = $customerFacade->getUserById(1);
         /* @var $user \Shopsys\FrameworkBundle\Model\Customer\User */
-        $userData = new UserData();
-        $userData->setFromEntity($user);
+        $userDataFactory = $this->getContainer()->get(UserDataFactory::class);
+        /* @var $userDataFactory \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory */
+        $userData = $userDataFactory->createFromUser($user);
         $customerDataFactory = $this->getContainer()->get(CustomerDataFactory::class);
         /* @var $customerDataFactory \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory */
 
