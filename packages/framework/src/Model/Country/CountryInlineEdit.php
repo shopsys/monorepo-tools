@@ -24,16 +24,23 @@ class CountryInlineEdit extends AbstractGridInlineEdit
      */
     private $formFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Country\CountryDataFactoryInterface
+     */
+    private $countryDataFactory;
+
     public function __construct(
         CountryGridFactory $countryGridFactory,
         CountryFacade $countryFacade,
         AdminDomainTabsFacade $adminDomainTabsFacade,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        CountryDataFactoryInterface $countryDataFactory
     ) {
         parent::__construct($countryGridFactory);
         $this->countryFacade = $countryFacade;
         $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->formFactory = $formFactory;
+        $this->countryDataFactory = $countryDataFactory;
     }
 
     /**
@@ -62,11 +69,11 @@ class CountryInlineEdit extends AbstractGridInlineEdit
      */
     public function getForm($countryId)
     {
-        $countryData = new CountryData();
-
         if ($countryId !== null) {
             $country = $this->countryFacade->getById((int)$countryId);
-            $countryData->setFromEntity($country);
+            $countryData = $this->countryDataFactory->createFromCountry($country);
+        } else {
+            $countryData = $this->countryDataFactory->create();
         }
 
         return $this->formFactory->create(CountryFormType::class, $countryData);

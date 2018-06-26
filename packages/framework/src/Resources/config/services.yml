@@ -816,3 +816,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory
+
+  Shopsys\FrameworkBundle\Model\Country\CountryDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Country\CountryDataFactory
