@@ -134,11 +134,11 @@
 {% block grid_row %}
     <tr class="table-grid__row {{ cycle(['odd', 'even'], loopIndex) }} js-grid-row"
             {% if grid.inlineEdit and row is not null%} data-inline-edit-row-id="{{ grid.getRowId(row)|json_encode() }}"{% endif %}
-            {% if grid.dragAndDrop or grid.multipleDragAndDrop %} data-drag-and-drop-grid-row-id="{{ grid.getRowId(row)|json_encode() }}"{% endif %}
+            {% if (grid.dragAndDrop or grid.multipleDragAndDrop)  and row is not null  %} data-drag-and-drop-grid-row-id="{{ grid.getRowId(row)|json_encode() }}"{% endif %}
     >
-        {% if grid.dragAndDrop or grid.multipleDragAndDrop %}
-            <td class="table-grid__cell table-grid__cell--move">
-                <i class="cursor-move svg svg-move"></i>
+        {% if (grid.dragAndDrop or grid.multipleDragAndDrop)%}
+            <td class="table-grid__cell {% if (row is not null) %}table-grid__cell--move{% endif %}">
+                {% if (row is not null) %}<i class="cursor-move svg svg-move"></i>{% endif %}
             </td>
         {% endif %}
         {% if grid.enabledSelecting %}

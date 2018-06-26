@@ -43,6 +43,7 @@
 
         $grid.on('click', '.js-inline-edit-save', function () {
             Shopsys.grid.inlineEdit.saveRow($(this).closest('.js-grid-editing-row'), $grid);
+            $grid.find('.js-drag-and-drop-grid-rows').sortable('enable');
             return false;
         });
 
@@ -132,6 +133,7 @@
                 Shopsys.register.registerNewContent($formRow);
                 $grid.find('.js-inline-edit-rows').prepend($formRow);
                 $formRow.find('input[type=text]:first').focus();
+                $grid.find('.js-drag-and-drop-grid-rows').sortable('disable');
             }
         });
     };
