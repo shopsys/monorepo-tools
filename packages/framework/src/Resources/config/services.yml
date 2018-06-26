@@ -837,3 +837,12 @@ services:
 
   Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Order\OrderDataFactory
+
+  Shopsys\FrameworkBundle\Model\Order\Item\OrderItemDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderItemDataFactory
+
+  Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportDataFactory
+
+  Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentDataFactory

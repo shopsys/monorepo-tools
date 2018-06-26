@@ -2,12 +2,37 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order;
 
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentData;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportData;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemDataFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentDataFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportDataFactoryInterface;
 
 class OrderDataFactory implements OrderDataFactoryInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderItemDataFactoryInterface
+     */
+    private $orderItemDataFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportDataFactoryInterface
+     */
+    private $orderTransportDataFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentDataFactoryInterface
+     */
+    private $orderPaymentDataFactory;
+
+    public function __construct(
+        OrderItemDataFactoryInterface $orderItemDataFactory,
+        OrderTransportDataFactoryInterface $orderTransportDataFactory,
+        OrderPaymentDataFactoryInterface $orderPaymentDataFactory
+    ) {
+        $this->orderItemDataFactory = $orderItemDataFactory;
+        $this->orderTransportDataFactory = $orderTransportDataFactory;
+        $this->orderPaymentDataFactory = $orderPaymentDataFactory;
+    }
+
     /**
      * @return \Shopsys\FrameworkBundle\Model\Order\OrderData
      */
@@ -61,8 +86,7 @@ class OrderDataFactory implements OrderDataFactoryInterface
         $orderData->note = $order->getNote();
         $orderItemsWithoutTransportAndPaymentData = [];
         foreach ($order->getItemsWithoutTransportAndPayment() as $orderItem) {
-            $orderItemData = new OrderItemData();
-            $orderItemData->setFromEntity($orderItem);
+            $orderItemData = $this->orderItemDataFactory->createFromOrderItem($orderItem);
             $orderItemsWithoutTransportAndPaymentData[$orderItem->getId()] = $orderItemData;
         }
         $orderData->itemsWithoutTransportAndPayment = $orderItemsWithoutTransportAndPaymentData;
@@ -71,9 +95,7 @@ class OrderDataFactory implements OrderDataFactoryInterface
         $orderData->currency = $order->getCurrency();
         $orderData->createdAsAdministrator = $order->getCreatedAsAdministrator();
         $orderData->createdAsAdministratorName = $order->getCreatedAsAdministratorName();
-        $orderData->orderTransport = new OrderTransportData();
-        $orderData->orderTransport->setFromEntity($order->getOrderTransport());
-        $orderData->orderPayment = new OrderPaymentData();
-        $orderData->orderPayment->setFromEntity($order->getOrderPayment());
+        $orderData->orderTransport = $this->orderTransportDataFactory->createFromOrderTransport($order->getOrderTransport());
+        $orderData->orderPayment = $this->orderPaymentDataFactory->createFromOrderPayment($order->getOrderPayment());
     }
 }
