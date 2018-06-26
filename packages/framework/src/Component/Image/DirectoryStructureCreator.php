@@ -2,8 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\Image;
 
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
-use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreator
 {
@@ -18,9 +18,9 @@ class DirectoryStructureCreator
     private $imageLocator;
 
     /**
-     * @var \Symfony\Component\Filesystem\Filesystem
+     * @var \League\Flysystem\FilesystemInterface
      */
-    private $filesysytem;
+    private $filesystem;
 
     /**
      * @var string
@@ -37,20 +37,20 @@ class DirectoryStructureCreator
      * @param string $domainImageDir
      * @param \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig $imageConfig
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageLocator $imageLocator
-     * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+     * @param \League\Flysystem\FilesystemInterface $filesystem
      */
     public function __construct(
         $imageDir,
         $domainImageDir,
         ImageConfig $imageConfig,
         ImageLocator $imageLocator,
-        Filesystem $filesystem
+        FilesystemInterface $filesystem
     ) {
         $this->imageDir = $imageDir;
         $this->domainImageDir = $domainImageDir;
         $this->imageConfig = $imageConfig;
         $this->imageLocator = $imageLocator;
-        $this->filesysytem = $filesystem;
+        $this->filesystem = $filesystem;
     }
 
     public function makeImageDirectories()
@@ -79,7 +79,9 @@ class DirectoryStructureCreator
 
         $directories[] = $this->domainImageDir;
 
-        $this->filesysytem->mkdir($directories);
+        foreach ($directories as $directory) {
+            $this->filesystem->createDir($directory);
+        }
     }
 
     /**

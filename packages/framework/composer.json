@@ -72,6 +72,8 @@
         "jms/metadata": "^1.6",
         "jms/translation-bundle": "^1.4.1",
         "joschi127/doctrine-entity-override-bundle": "^0.5.0",
+        "league/flysystem": "^1.0",
+        "oneup/flysystem-bundle": "^3.0",
         "nikic/php-parser": "^3.1",
         "presta/sitemap-bundle": "^1.5.3",
         "prezent/doctrine-translatable": "^1.2",

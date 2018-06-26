@@ -24,3 +24,5 @@ services:
   Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface: '@Shopsys\ShopBundle\Model\Article\ArticleDataFactory'
 
   Shopsys\ShopBundle\Model\Category\CurrentCategoryResolver: ~
+
+  League\Flysystem\FilesystemInterface: '@main_filesystem'

@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Command;
 
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Image\DirectoryStructureCreator as ImageDirectoryStructureCreator;
 use Shopsys\FrameworkBundle\Component\UploadedFile\DirectoryStructureCreator as UploadedFileDirectoryStructureCreator;
 use Symfony\Component\Console\Command\Command;
@@ -18,19 +19,14 @@ class CreateApplicationDirectoriesCommand extends Command
     protected static $defaultName = 'shopsys:create-directories';
 
     /**
-     * @var string
+     * @var \League\Flysystem\FilesystemInterface
      */
-    private $rootDirectory;
-
-    /**
-     * @var string
-     */
-    private $webDirectory;
+    private $filesystem;
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
-    private $filesystem;
+    private $localFilesystem;
 
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\DirectoryStructureCreator
@@ -43,26 +39,31 @@ class CreateApplicationDirectoriesCommand extends Command
     private $uploadedFileDirectoryStructureCreator;
 
     /**
-     * @param string $rootDirectory
-     * @param string $webDirectory
-     * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+     * @var string
+     */
+    private $projectDir;
+
+    /**
+     * @param string $projectDir
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     * @param \Symfony\Component\Filesystem\Filesystem $localFilesystem
      * @param \Shopsys\FrameworkBundle\Component\Image\DirectoryStructureCreator $imageDirectoryStructureCreator
      * @param \Shopsys\FrameworkBundle\Component\UploadedFile\DirectoryStructureCreator $uploadedFileDirectoryStructureCreator
      */
     public function __construct(
-        $rootDirectory,
-        $webDirectory,
-        Filesystem $filesystem,
+        string $projectDir,
+        FilesystemInterface $filesystem,
+        Filesystem $localFilesystem,
         ImageDirectoryStructureCreator $imageDirectoryStructureCreator,
         UploadedFileDirectoryStructureCreator $uploadedFileDirectoryStructureCreator
     ) {
-        $this->rootDirectory = $rootDirectory;
-        $this->webDirectory = $webDirectory;
         $this->filesystem = $filesystem;
+        $this->localFilesystem = $localFilesystem;
         $this->imageDirectoryStructureCreator = $imageDirectoryStructureCreator;
         $this->uploadedFileDirectoryStructureCreator = $uploadedFileDirectoryStructureCreator;
 
         parent::__construct();
+        $this->projectDir = $projectDir;
     }
 
     protected function configure()
@@ -85,21 +86,28 @@ class CreateApplicationDirectoriesCommand extends Command
     private function createMiscellaneousDirectories(OutputInterface $output)
     {
         $directories = [
-            $this->rootDirectory . '/build/stats',
-            $this->rootDirectory . '/docs/generated',
-            $this->rootDirectory . '/var/cache',
-            $this->rootDirectory . '/var/lock',
-            $this->rootDirectory . '/var/logs',
-            $this->rootDirectory . '/var/errorPages',
-            $this->webDirectory . '/assets/admin/styles',
-            $this->webDirectory . '/assets/frontend/styles',
-            $this->webDirectory . '/assets/scripts',
-            $this->webDirectory . '/content/feeds',
-            $this->webDirectory . '/content/sitemaps',
-            $this->webDirectory . '/content/wysiwyg',
+            '/web/content/feeds',
+            '/web/content/sitemaps',
+            '/web/content/wysiwyg',
         ];
 
-        $this->filesystem->mkdir($directories);
+        $localDirectories = [
+            $this->projectDir . '/build/stats',
+            $this->projectDir . '/docs/generated',
+            $this->projectDir . '/var/cache',
+            $this->projectDir . '/var/lock',
+            $this->projectDir . '/var/logs',
+            $this->projectDir . '/var/errorPages',
+            $this->projectDir . '/web/assets/admin/styles',
+            $this->projectDir . '/web/assets/frontend/styles',
+            $this->projectDir . '/web/assets/scripts',
+        ];
+
+        foreach ($directories as $directory) {
+            $this->filesystem->createDir($directory);
+        }
+
+        $this->localFilesystem->mkdir($localDirectories);
 
         $output->writeln('<fg=green>Miscellaneous application directories were successfully created.</fg=green>');
     }
