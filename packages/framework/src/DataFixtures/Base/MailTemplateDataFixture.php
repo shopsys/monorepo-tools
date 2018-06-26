@@ -7,22 +7,27 @@ use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateData;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface;
 
 class MailTemplateDataFixture extends AbstractReferenceFixture
 {
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface
      */
     protected $mailTemplateFactory;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface $mailTemplateFactory
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface
      */
-    public function __construct(MailTemplateFactoryInterface $mailTemplateFactory)
-    {
+    protected $mailTemplateDataFactory;
+
+    public function __construct(
+        MailTemplateFactoryInterface $mailTemplateFactory,
+        MailTemplateDataFactoryInterface $mailTemplateDataFactory
+    ) {
         $this->mailTemplateFactory = $mailTemplateFactory;
+        $this->mailTemplateDataFactory = $mailTemplateDataFactory;
     }
 
     /**
@@ -30,7 +35,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData = $this->mailTemplateDataFactory->create();
         $mailTemplateData->sendMail = true;
 
         $mailTemplateData->subject = 'Thank you for your order no. {number} placed at {date}';

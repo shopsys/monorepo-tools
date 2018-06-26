@@ -831,3 +831,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Customer\UserDataFactory
+
+  Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactory

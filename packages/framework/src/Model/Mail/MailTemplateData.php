@@ -44,17 +44,4 @@ class MailTemplateData
         $this->sendMail = false;
         $this->attachment = [];
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplate $mailTemplate
-     */
-    public function setFromEntity(MailTemplate $mailTemplate)
-    {
-        $this->name = $mailTemplate->getName();
-        $this->bccEmail = $mailTemplate->getBccEmail();
-        $this->subject = $mailTemplate->getSubject();
-        $this->body = $mailTemplate->getBody();
-        $this->sendMail = $mailTemplate->isSendMail();
-        $this->attachment = [];
-    }
 }

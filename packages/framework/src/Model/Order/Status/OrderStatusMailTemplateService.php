@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order\Status;
 
-use Shopsys\FrameworkBundle\Model\Mail\MailTemplateData;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService;
 
 class OrderStatusMailTemplateService
@@ -13,11 +13,16 @@ class OrderStatusMailTemplateService
     private $orderMailService;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Mail\OrderMailService $orderMailService
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface
      */
-    public function __construct(OrderMailService $orderMailService)
-    {
+    private $mailTemplateDataFactory;
+
+    public function __construct(
+        OrderMailService $orderMailService,
+        MailTemplateDataFactoryInterface $mailTemplateDataFactory
+    ) {
         $this->orderMailService = $orderMailService;
+        $this->mailTemplateDataFactory = $mailTemplateDataFactory;
     }
 
     /**
@@ -45,11 +50,11 @@ class OrderStatusMailTemplateService
     {
         $orderStatusMailTemplatesData = [];
         foreach ($orderStatuses as $orderStatus) {
-            $orderStatusMailTemplateData = new MailTemplateData();
-
             $mailTemplate = $this->getMailTemplateByOrderStatus($mailTemplates, $orderStatus);
             if ($mailTemplate !== null) {
-                $orderStatusMailTemplateData->setFromEntity($mailTemplate);
+                $orderStatusMailTemplateData = $this->mailTemplateDataFactory->createFromMailTemplate($mailTemplate);
+            } else {
+                $orderStatusMailTemplateData = $this->mailTemplateDataFactory->create();
             }
             $orderStatusMailTemplateData->name = $this->orderMailService->getMailTemplateNameByStatus($orderStatus);
 
