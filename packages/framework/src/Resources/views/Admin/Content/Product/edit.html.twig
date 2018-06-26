@@ -14,12 +14,12 @@
             <div class="panel__in__title">
                 {{ 'Visibility'|trans }}
             </div>
-            {% if productDetail.product.calculatedSellingDenied %}
+            {% if product.calculatedSellingDenied %}
                 <div class="in-message in-message--warning in-message--small in-message--block">
                     {{ 'Product excluded from sale.'|trans }}
                 </div>
             {% endif %}
-            {% include '@ShopsysFramework/Admin/Content/Product/visibilityItems.html.twig' with {productDetail: productDetail, domains: domains} only %}
+            {% include '@ShopsysFramework/Admin/Content/Product/visibilityItems.html.twig' with {product: product, domains: domains} only %}
         </div>
     </div>
 {% endblock %}

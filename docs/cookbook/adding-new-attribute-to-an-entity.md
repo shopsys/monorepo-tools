@@ -304,7 +304,7 @@ public function createFromProduct(BaseProduct $product)
 In order to display your new attribute on a front-end page, you can modify the corresponding template directly 
 as it is a part of your open-box, eg. [`detail.html.twig`](../../project-base/src/Shopsys/ShopBundle/Resources/views/Front/Content/Product/detail.html.twig).
 ```
-{{ productDetail.product.extId }}
+{{ product.extId }}
 ```
 
 ## Tests

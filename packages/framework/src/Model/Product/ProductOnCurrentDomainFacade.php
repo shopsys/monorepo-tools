@@ -8,7 +8,6 @@ use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
 use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandRepository;
-use Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountRepository;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;
@@ -25,11 +24,6 @@ class ProductOnCurrentDomainFacade
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     protected $domain;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
-     */
-    protected $productDetailFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
@@ -59,7 +53,6 @@ class ProductOnCurrentDomainFacade
     public function __construct(
         ProductRepository $productRepository,
         Domain $domain,
-        ProductDetailFactory $productDetailFactory,
         CurrentCustomer $currentCustomer,
         CategoryRepository $categoryRepository,
         ProductFilterCountRepository $productFilterCountRepository,
@@ -69,7 +62,6 @@ class ProductOnCurrentDomainFacade
         $this->productRepository = $productRepository;
         $this->domain = $domain;
         $this->currentCustomer = $currentCustomer;
-        $this->productDetailFactory = $productDetailFactory;
         $this->categoryRepository = $categoryRepository;
         $this->productFilterCountRepository = $productFilterCountRepository;
         $this->productAccessoryRepository = $productAccessoryRepository;
@@ -78,47 +70,41 @@ class ProductOnCurrentDomainFacade
 
     /**
      * @param int $productId
-     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
      */
-    public function getVisibleProductDetailById($productId)
+    public function getVisibleProductById($productId)
     {
-        $product = $this->productRepository->getVisible(
+        return $this->productRepository->getVisible(
             $productId,
             $this->domain->getId(),
             $this->currentCustomer->getPricingGroup()
         );
-
-        return $this->productDetailFactory->getDetailForProduct($product);
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    public function getAccessoriesProductDetailsForProduct(Product $product)
+    public function getAccessoriesForProduct(Product $product)
     {
-        $accessories = $this->productAccessoryRepository->getAllOfferedAccessoriesByProduct(
+        return $this->productAccessoryRepository->getAllOfferedAccessoriesByProduct(
             $product,
             $this->domain->getId(),
             $this->currentCustomer->getPricingGroup()
         );
-
-        return $this->productDetailFactory->getDetailsForProducts($accessories);
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    public function getVariantsProductDetailsForProduct(Product $product)
+    public function getVariantsForProduct(Product $product)
     {
-        $variants = $this->productRepository->getAllSellableVariantsByMainVariant(
+        return $this->productRepository->getAllSellableVariantsByMainVariant(
             $product,
             $this->domain->getId(),
             $this->currentCustomer->getPricingGroup()
         );
-
-        return $this->productDetailFactory->getDetailsForProducts($variants);
     }
 
     /**
@@ -154,7 +140,7 @@ class ProductOnCurrentDomainFacade
             $paginationResult->getPage(),
             $paginationResult->getPageSize(),
             $paginationResult->getTotalCount(),
-            $this->productDetailFactory->getDetailsForProducts($products)
+            $products
         );
     }
 
@@ -188,7 +174,7 @@ class ProductOnCurrentDomainFacade
             $paginationResult->getPage(),
             $paginationResult->getPageSize(),
             $paginationResult->getTotalCount(),
-            $this->productDetailFactory->getDetailsForProducts($products)
+            $products
         );
     }
 
@@ -223,7 +209,7 @@ class ProductOnCurrentDomainFacade
             $paginationResult->getPage(),
             $paginationResult->getPageSize(),
             $paginationResult->getTotalCount(),
-            $this->productDetailFactory->getDetailsForProducts($products)
+            $products
         );
     }
 

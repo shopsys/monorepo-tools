@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory;
 
 class TopProductFacade
 {
@@ -18,11 +17,6 @@ class TopProductFacade
     protected $topProductRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
-     */
-    protected $productDetailFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\TopProduct\TopProductFactoryInterface
      */
     protected $topProductFactory;
@@ -30,12 +24,10 @@ class TopProductFacade
     public function __construct(
         EntityManagerInterface $em,
         TopProductRepository $topProductRepository,
-        ProductDetailFactory $productDetailFactory,
         TopProductFactoryInterface $topProductFactory
     ) {
         $this->em = $em;
         $this->topProductRepository = $topProductRepository;
-        $this->productDetailFactory = $productDetailFactory;
         $this->topProductFactory = $topProductFactory;
     }
 
@@ -51,12 +43,11 @@ class TopProductFacade
     /**
      * @param int $domainId
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    public function getAllOfferedProductDetails($domainId, $pricingGroup)
+    public function getAllOfferedProducts($domainId, $pricingGroup)
     {
-        $products = $this->topProductRepository->getOfferedProductsForTopProductsOnDomain($domainId, $pricingGroup);
-        return $this->productDetailFactory->getDetailsForProducts($products);
+        return $this->topProductRepository->getOfferedProductsForTopProductsOnDomain($domainId, $pricingGroup);
     }
 
     /**

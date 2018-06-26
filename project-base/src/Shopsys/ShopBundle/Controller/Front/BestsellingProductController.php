@@ -38,14 +38,14 @@ class BestsellingProductController extends FrontBaseController
 
     public function listAction(Category $category)
     {
-        $bestsellingProducts = $this->cachedBestsellingProductFacade->getAllOfferedProductDetails(
+        $bestsellingProducts = $this->cachedBestsellingProductFacade->getAllOfferedBestsellingProducts(
             $this->domain->getId(),
             $category,
             $this->currentCustomer->getPricingGroup()
         );
 
         return $this->render('@ShopsysShop/Front/Content/Product/bestsellingProductsList.html.twig', [
-            'productDetails' => $bestsellingProducts,
+            'products' => $bestsellingProducts,
             'maxShownProducts' => BestsellingProductFacade::MAX_SHOW_RESULTS,
         ]);
     }

@@ -3,7 +3,6 @@
 {% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% set domain = getDomain() %}
-{% set product = productDetail.product %}
 {% set descriptionHeadline = 'Product information'|trans %}
 {% set parametersHeadline = 'Technical parameters'|trans %}
 {% set accessoriesHeadline = 'Accessories'|trans %}
@@ -19,18 +18,18 @@
     <div itemscope itemtype="http://schema.org/Product">
         <div class="box-detail">
             <div class="box-detail__image">
-                {% set galleryImages = getImages(productDetail.product) %}
+                {% set galleryImages = getImages(product) %}
                 {% set showGallery = galleryImages|length > 1 %}
                 <div class="box-detail__image__main">
-                    {% if imageExists(productDetail.product) %}
-                        <a href="{{ imageUrl(productDetail.product, 'original') }}" class="{{ showGallery ? 'js-gallery-main-image' : 'js-popup-image' }}">
-                            {{ image(productDetail.product, { itemprop: 'image' }) }}
+                    {% if imageExists(product) %}
+                        <a href="{{ imageUrl(product, 'original') }}" class="{{ showGallery ? 'js-gallery-main-image' : 'js-popup-image' }}">
+                            {{ image(product, { itemprop: 'image' }) }}
                         </a>
                     {% else %}
-                        {{ noimage({ alt: productDetail.product.name }) }}
+                        {{ noimage({ alt: product.name }) }}
                     {% endif %}
                 </div>
-                {{ productFlags.list(productDetail.product) }}
+                {{ productFlags.list(product) }}
 
                 {% if showGallery %}
                     <div class="box-gallery js-gallery">
@@ -54,43 +53,43 @@
             </div>
             <div class="box-detail__info">
                 <h1 itemprop="name">
-                    {{ product.getSeoH1(domain.id)|default(productDetail.product.name) }}
+                    {{ product.getSeoH1(domain.id)|default(product.name) }}
                 </h1>
 
-                {% if productDetail.product.calculatedAvailability %}
+                {% if product.calculatedAvailability %}
                     <div class="box-detail__info__availability">
-                        {% if productDetail.product.calculatedSellingDenied %}
+                        {% if product.calculatedSellingDenied %}
                             {{ 'Product no longer on sale'|trans }}
                         {% else %}
-                            {{ productDetail.product.calculatedAvailability.name }}
+                            {{ product.calculatedAvailability.name }}
                         {% endif %}
                     </div>
                 {% endif %}
 
-                {% if not productDetail.product.isMainVariant %}
+                {% if not product.isMainVariant %}
                     <div class="js-product-detail-main-add-to-cart-wrapper box-detail-add">
-                        {% if not productDetail.product.calculatedSellingDenied %}
+                        {% if not product.calculatedSellingDenied %}
                             <div itemprop="offers"
                                 itemscope
                                 itemtype="http://schema.org/Offer"
                                 class="box-detail-add__prices">
                                 <div class="box-detail-add__prices__item box-detail-add__prices__item--main">
-                                    {{ productDetail.sellingPrice.priceWithVat|price }}
+                                    {{ getProductSellingPrice(product).priceWithVat|price }}
                                 </div>
                                 <div class="box-detail-add__prices__item">
-                                    {{ productDetail.sellingPrice.priceWithoutVat|price }} {{ 'excluding VAT'|trans }}
+                                    {{ getProductSellingPrice(product).priceWithoutVat|price }} {{ 'excluding VAT'|trans }}
                                 </div>
                                 <meta itemprop="priceCurrency"
                                     content="{{ currencyCode(domain.id) }}"
                                 >
                                 <meta itemprop="price"
-                                    content="{{ productDetail.sellingPrice.priceWithVat }}"
+                                    content="{{ getProductSellingPrice(product).priceWithVat }}"
                                 >
                                 <link itemprop="availability"
-                                    href="{{ productDetail.product.calculatedSellingDenied ? 'http://schema.org/OutOfStock' : 'http://schema.org/InStock' }}"
+                                    href="{{ product.calculatedSellingDenied ? 'http://schema.org/OutOfStock' : 'http://schema.org/InStock' }}"
                                 >
                             </div>
-                            {{ render(controller('ShopsysShopBundle:Front/Cart:addProductForm', {product: productDetail.product, type: 'large'})) }}
+                            {{ render(controller('ShopsysShopBundle:Front/Cart:addProductForm', {product: product, type: 'large'})) }}
                         {% else %}
                             <div>
                                 {{ 'This product is no longer available for purchase. Have a look at similar products <a href="%url%">here</a>.'|transHtml({"%url%": url('front_product_list', { id: productMainCategory })}) }}
@@ -99,54 +98,54 @@
                     </div>
                 {% endif %}
 
-                {% if productDetail.hasContentForDetailBox %}
+                {% spaceless %}
                     <dl class="box-detail__info__params">
-                        {% if productDetail.product.brand %}
+                        {% if product.brand %}
                             <dt>
                                 {{ 'Brand'|trans }}:
                             </dt>
                             <dd>
-                                <a href="{{ url('front_brand_detail', { id: productDetail.product.brand.id }) }}">
-                                    <span itemprop="brand">{{ productDetail.product.brand.name }}</span>
+                                <a href="{{ url('front_brand_detail', { id: product.brand.id }) }}">
+                                    <span itemprop="brand">{{ product.brand.name }}</span>
                                 </a>
                             </dd>
                         {% endif %}
 
-                        {% if not productDetail.product.isMainVariant %}
-                            {% if productDetail.product.catnum %}
+                        {% if not product.isMainVariant %}
+                            {% if product.catnum %}
                                 <dt>
                                     {{ 'Catalogue number'|trans }}:
                                 </dt>
                                 <dd>
-                                    {{ productDetail.product.catnum }}
+                                    {{ product.catnum }}
                                 </dd>
                             {% endif %}
 
-                            {% if productDetail.product.partno %}
+                            {% if product.partno %}
                                 <dt>
                                     {{ 'Serial number'|trans }}:
                                 </dt>
                                 <dd>
-                                    {{ productDetail.product.partno }}
+                                    {{ product.partno }}
                                 </dd>
                             {% endif %}
 
-                            {% if productDetail.product.ean %}
+                            {% if product.ean %}
                                 <dt>
                                     {{ 'EAN'|trans }}:
                                 </dt>
                                 <dd>
-                                    {{ productDetail.product.ean }}
+                                    {{ product.ean }}
                                 </dd>
                             {% endif %}
                         {% endif %}
                     </dl>
-                {% endif %}
+                {% endspaceless %}
             </div>
         </div>
 
-        {% if productDetail.product.isMainVariant %}
-            <table {% if productDetail.sellingPrice is not null %}itemprop="offers"
+        {% if product.isMainVariant %}
+            <table {% if getProductSellingPrice(product) is not null %}itemprop="offers"
                 itemscope
                 itemtype="http://schema.org/AggregateOffer" {% endif %}
                 class="table-variants"
@@ -157,15 +156,15 @@
                         <th class="table-variants__cell table-variants__cell--name">{{ 'Name'|trans }}</th>
                         <th class="table-variants__cell table-variants__cell--price">
                             {{ 'Price including VAT'|trans }}
-                            {% if productDetail.sellingPrice is not null %}
+                            {% if getProductSellingPrice(product) is not null %}
                                 <meta itemprop="priceCurrency"
                                     content="{{ currencyCode(domain.id) }}"
                                 >
                                 <meta itemprop="lowPrice"
-                                    content="{{ productDetail.sellingPrice.priceWithVat }}"
+                                    content="{{ getProductSellingPrice(product).priceWithVat }}"
                                 >
                                 <link itemprop="availability"
-                                    href="{{ productDetail.product.calculatedSellingDenied ? 'http://schema.org/OutOfStock' : 'http://schema.org/InStock' }}"
+                                    href="{{ product.calculatedSellingDenied ? 'http://schema.org/OutOfStock' : 'http://schema.org/InStock' }}"
                                 >
                             {% endif %}
                         </th>
@@ -173,13 +172,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for variantDetail in variantsDetails %}
+                    {% for variant in variants %}
                         <tr class="table-variants__row">
                             <td class="table-variants__cell table-variants__cell--image">
                                 <div class="table-variants__cell__image">
-                                    {% if imageExists(variantDetail.product) %}
-                                        <a href="{{ imageUrl(variantDetail.product, 'original') }}" class="js-popup-image">
-                                            {{ image(variantDetail.product, { size: 'thumbnail' }) }}
+                                    {% if imageExists(variant) %}
+                                        <a href="{{ imageUrl(variant, 'original') }}" class="js-popup-image">
+                                            {{ image(variant, { size: 'thumbnail' }) }}
                                         </a>
                                     {% else %}
                                         {{ noimage() }}
@@ -187,17 +186,17 @@
                                 </div>
                             </td>
                             <td class="table-variants__cell table-variants__cell--name">
-                                {% if variantDetail.product.variantAlias is not null %}
-                                    {{ variantDetail.product.variantAlias }}
+                                {% if variant.variantAlias is not null %}
+                                    {{ variant.variantAlias }}
                                 {% else %}
-                                    {{ variantDetail.product.name }}
+                                    {{ variant.name }}
                                 {% endif %}
                             </td>
                             <td class="table-variants__cell table-variants__cell--price">
-                                {{ variantDetail.sellingPrice.priceWithVat|price }}
+                                {{ getProductSellingPrice(variant).priceWithVat|price }}
                             </td>
                             <td class="table-variants__cell table-variants__cell--action">
-                                {{ render(controller('ShopsysShopBundle:Front/Cart:addProductForm', {product: variantDetail.product})) }}
+                                {{ render(controller('ShopsysShopBundle:Front/Cart:addProductForm', {product: variant})) }}
                             </td>
                         </tr>
                     {% endfor %}
@@ -205,9 +204,10 @@
             </table>
         {% endif %}
 
+        {% set productParameterValues = getProductParameterValues(product) %}
         {% if product.getDescription(domain.id)
-            or productDetail.parameters
-            or accessoriesDetails|length > 0
+            or productParameterValues > 0
+            or accessories|length > 0
         %}
             <div class="in-tab js-responsive-tabs">
                 <div class="in-tab__head">
@@ -217,14 +217,14 @@
                         </a>
                     {% endif %}
 
-                    {% if accessoriesDetails|length > 0 %}
+                    {% if accessories|length > 0 %}
                         <a href="#" class="in-tab__head__item js-tabs-button" data-tab-id="accessories">
                             {{ accessoriesHeadline }}
                         </a>
                     {% endif %}
                 </div>
                 <div class="in-tab__content">
-                    {% if product.getDescription(domain.id) or productDetail.parameters %}
+                    {% if product.getDescription(domain.id) or productParameterValues > 0 %}
                         <a href="#" class="in-tab__content__title js-tabs-button active" data-tab-id="description">
                             {{ descriptionHeadline }}
                             <i class="svg svg-arrow"></i>
@@ -236,11 +236,11 @@
                                         {{ product.getDescription(domain.id)|raw }}
                                     </p>
                                 {% endif %}
-                                {% if productDetail.parameters %}
+                                {% if productParameterValues > 0 %}
                                     <div class="h3">{{ parametersHeadline }}</div>
                                     <table class="table-params{% if product.getDescription(domain.id) %} margin-top-20{% endif %}">
                                         <tbody>
-                                            {% for productParameterValue in productDetail.parameters %}
+                                            {% for productParameterValue in productParameterValues %}
                                                 <tr>
                                                     <th>
                                                         {{ productParameterValue.parameter.name }}
@@ -257,13 +257,13 @@
                         </div>
                     {% endif %}
 
-                    {% if accessoriesDetails|length > 0 %}
+                    {% if accessories|length > 0 %}
                         <a href="#" class="in-tab__content__title js-tabs-button" data-tab-id="accessories">
                             {{ accessoriesHeadline }}
                             <i class="svg svg-arrow"></i>
                         </a>
                         <div class="in-tab__content__item js-tabs-content" data-tab-id="accessories">
-                            {{ productList.list(accessoriesDetails) }}
+                            {{ productList.list(accessories) }}
                         </div>
                     {% endif %}
                 </div>

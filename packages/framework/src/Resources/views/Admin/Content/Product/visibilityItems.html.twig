@@ -1,9 +1,8 @@
 <ul class="list-domain">
     {% for domain in domains %}
         <li class="list-domain__item">
-            {% set product = productDetail.product %}
-            {% set url = findUrlByDomainId('front_product_detail', { id: productDetail.product.id }, domain.id) %}
-            {% set isVisible = isVisibleForDefaultPricingGroup(productDetail.product, domain.id) %}
+            {% set url = findUrlByDomainId('front_product_detail', { id: product.id }, domain.id) %}
+            {% set isVisible = isVisibleForDefaultPricingGroup(product, domain.id) %}
 
             {% if isMultidomain() %}
                 <div class="list-domain__item__image">
