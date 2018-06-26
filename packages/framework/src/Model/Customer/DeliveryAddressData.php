@@ -53,24 +53,4 @@ class DeliveryAddressData
     {
         $this->addressFilled = false;
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-     */
-    public function setFromEntity(DeliveryAddress $deliveryAddress = null)
-    {
-        if ($deliveryAddress !== null) {
-            $this->addressFilled = true;
-            $this->companyName = $deliveryAddress->getCompanyName();
-            $this->firstName = $deliveryAddress->getFirstName();
-            $this->lastName = $deliveryAddress->getLastName();
-            $this->telephone = $deliveryAddress->getTelephone();
-            $this->street = $deliveryAddress->getStreet();
-            $this->city = $deliveryAddress->getCity();
-            $this->postcode = $deliveryAddress->getPostcode();
-            $this->country = $deliveryAddress->getCountry();
-        } else {
-            $this->addressFilled = false;
-        }
-    }
 }

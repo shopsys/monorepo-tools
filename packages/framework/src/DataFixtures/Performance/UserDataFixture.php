@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Demo\CountryDataFixture;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
-use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -76,6 +76,11 @@ class UserDataFixture
     private $billingAddressDataFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface
+     */
+    private $deliveryAddressDataFactory;
+
+    /**
      * @param int $userCountPerDomain
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
@@ -87,6 +92,7 @@ class UserDataFixture
      * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
      */
     public function __construct(
         $userCountPerDomain,
@@ -99,7 +105,8 @@ class UserDataFixture
         PersistentReferenceFacade $persistentReferenceFacade,
         ProgressBarFactory $progressBarFactory,
         CustomerDataFactoryInterface $customerDataFactory,
-        BillingAddressDataFactoryInterface $billingAddressDataFactory
+        BillingAddressDataFactoryInterface $billingAddressDataFactory,
+        DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
     ) {
         $this->em = $em;
         $this->domain = $domain;
@@ -112,6 +119,7 @@ class UserDataFixture
         $this->progressBarFactory = $progressBarFactory;
         $this->customerDataFactory = $customerDataFactory;
         $this->billingAddressDataFactory = $billingAddressDataFactory;
+        $this->deliveryAddressDataFactory = $deliveryAddressDataFactory;
     }
 
     /**
@@ -191,7 +199,7 @@ class UserDataFixture
         $billingAddressData->telephone = $this->faker->phoneNumber;
         $customerData->billingAddressData = $billingAddressData;
 
-        $deliveryAddressData = new DeliveryAddressData();
+        $deliveryAddressData = $this->deliveryAddressDataFactory->create();
         $deliveryAddressData->addressFilled = true;
         $deliveryAddressData->city = $this->faker->city;
         $deliveryAddressData->companyName = $this->faker->company;

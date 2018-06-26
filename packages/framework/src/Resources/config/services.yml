@@ -825,3 +825,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactory
+
+  Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactory

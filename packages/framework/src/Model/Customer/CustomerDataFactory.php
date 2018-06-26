@@ -9,9 +9,17 @@ class CustomerDataFactory implements CustomerDataFactoryInterface
      */
     private $billingAddressDataFactory;
 
-    public function __construct(BillingAddressDataFactoryInterface $billingAddressDataFactory)
-    {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface
+     */
+    private $deliveryAddressDataFactory;
+
+    public function __construct(
+        BillingAddressDataFactoryInterface $billingAddressDataFactory,
+        DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
+    ) {
         $this->billingAddressDataFactory = $billingAddressDataFactory;
+        $this->deliveryAddressDataFactory = $deliveryAddressDataFactory;
     }
 
     /**
@@ -20,7 +28,8 @@ class CustomerDataFactory implements CustomerDataFactoryInterface
     public function create(): CustomerData
     {
         return new CustomerData(
-            $this->billingAddressDataFactory->create()
+            $this->billingAddressDataFactory->create(),
+            $this->deliveryAddressDataFactory->create()
         );
     }
 
@@ -31,11 +40,24 @@ class CustomerDataFactory implements CustomerDataFactoryInterface
     public function createFromUser(User $user): CustomerData
     {
         $customerData = new CustomerData(
-            $this->billingAddressDataFactory->createFromBillingAddress($user->getBillingAddress())
+            $this->billingAddressDataFactory->createFromBillingAddress($user->getBillingAddress()),
+            $this->getDeliveryAddressDataFromUser($user)
         );
         $customerData->userData->setFromEntity($user);
-        $customerData->deliveryAddressData->setFromEntity($user->getDeliveryAddress());
 
         return $customerData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
+     * @return \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData
+     */
+    protected function getDeliveryAddressDataFromUser(User $user): DeliveryAddressData
+    {
+        if ($user->getDeliveryAddress()) {
+            return $this->deliveryAddressDataFactory->createFromDeliveryAddress($user->getDeliveryAddress());
+        }
+
+        return $this->deliveryAddressDataFactory->create();
     }
 }

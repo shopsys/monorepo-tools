@@ -14,6 +14,7 @@ use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerService;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactory;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Customer\UserData;
@@ -353,14 +354,16 @@ class CustomerServiceTest extends TestCase
         $deliveryAddressFactory = new DeliveryAddressFactory();
         $userFactory = new UserFactory();
         $billingAddressDataFactory = new BillingAddressDataFactory();
-        $customerDataFactory = new CustomerDataFactory($billingAddressDataFactory);
+        $deliveryAddressDataFactory = new DeliveryAddressDataFactory();
+        $customerDataFactory = new CustomerDataFactory($billingAddressDataFactory, $deliveryAddressDataFactory);
 
         return new CustomerService(
             $customerPasswordServiceMock,
             $deliveryAddressFactory,
             $userFactory,
             $customerDataFactory,
-            $billingAddressDataFactory
+            $billingAddressDataFactory,
+            $deliveryAddressDataFactory
         );
     }
 

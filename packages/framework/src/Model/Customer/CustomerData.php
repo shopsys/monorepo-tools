@@ -25,11 +25,12 @@ class CustomerData
     public $sendRegistrationMail;
 
     public function __construct(
-        BillingAddressData $billingAddressData
+        BillingAddressData $billingAddressData,
+        DeliveryAddressData $deliveryAddressData
     ) {
         $this->userData = new UserData();
         $this->billingAddressData = $billingAddressData;
-        $this->deliveryAddressData = new DeliveryAddressData();
+        $this->deliveryAddressData = $deliveryAddressData;
         $this->sendRegistrationMail = false;
     }
 }

@@ -33,24 +33,32 @@ class CustomerService
     private $billingAddressDataFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface
+     */
+    private $deliveryAddressDataFactory;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface $userFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
      */
     public function __construct(
         CustomerPasswordService $customerPasswordService,
         DeliveryAddressFactoryInterface $deliveryAddressFactory,
         UserFactoryInterface $userFactory,
         CustomerDataFactoryInterface $customerDataFactory,
-        BillingAddressDataFactoryInterface $billingAddressDataFactory
+        BillingAddressDataFactoryInterface $billingAddressDataFactory,
+        DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
     ) {
         $this->customerPasswordService = $customerPasswordService;
         $this->deliveryAddressFactory = $deliveryAddressFactory;
         $this->userFactory = $userFactory;
         $this->customerDataFactory = $customerDataFactory;
         $this->billingAddressDataFactory = $billingAddressDataFactory;
+        $this->deliveryAddressDataFactory = $deliveryAddressDataFactory;
     }
 
     /**
@@ -212,9 +220,8 @@ class CustomerService
      */
     private function getAmendedDeliveryAddressDataByOrder(Order $order, DeliveryAddress $deliveryAddress = null)
     {
-        $deliveryAddressData = new DeliveryAddressData();
-
         if ($deliveryAddress === null) {
+            $deliveryAddressData = $this->deliveryAddressDataFactory->create();
             $deliveryAddressData->addressFilled = !$order->isDeliveryAddressSameAsBillingAddress();
             $deliveryAddressData->street = $order->getDeliveryStreet();
             $deliveryAddressData->city = $order->getDeliveryCity();
@@ -225,7 +232,7 @@ class CustomerService
             $deliveryAddressData->lastName = $order->getDeliveryLastName();
             $deliveryAddressData->telephone = $order->getDeliveryTelephone();
         } else {
-            $deliveryAddressData->setFromEntity($deliveryAddress);
+            $deliveryAddressData = $this->deliveryAddressDataFactory->createFromDeliveryAddress($deliveryAddress);
         }
 
         if ($deliveryAddress !== null && $deliveryAddress->getTelephone() === null) {
