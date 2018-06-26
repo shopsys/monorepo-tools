@@ -42,6 +42,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#206 clearing Setting's cache is now done via DoctrineEventListener](https://github.com/shopsys/shopsys/pull/206)
     - `EntityManagerFacade` was removed
     - Doctrine identity map can be cleared via `EntityManager::clear()` directly
+- [#254 - Removal of EntityDetail classes](https://github.com/shopsys/shopsys/pull/276)
+    - `TransportDetail` and `TransportDetailFactory` were removed - `TransportFacade` is now able to provide transport base prices
 
 #### Changed
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):

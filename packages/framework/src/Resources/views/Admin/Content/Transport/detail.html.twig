@@ -15,7 +15,7 @@
         {% embed '@ShopsysFramework/Admin/Inline/FixedBar/fixedBar.html.twig' %}
             {% block fixed_bar_content %}
                 <a href="{{ url('admin_transportandpayment_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
-                {{ form_save(transportDetail|default(null), form) }}
+                {{ form_save(transport|default(null), form) }}
             {% endblock %}
         {% endembed %}
     {{ form_end(form) }}

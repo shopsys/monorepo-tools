@@ -213,4 +213,19 @@ class TransportFacade
 
         return $transportVatPercentsByTransportId;
     }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price[]
+     */
+    public function getIndependentBasePricesIndexedByCurrencyId(Transport $transport)
+    {
+        $prices = [];
+        foreach ($transport->getPrices() as $transportInputPrice) {
+            $currency = $transportInputPrice->getCurrency();
+            $prices[$currency->getId()] = $this->transportPriceCalculation->calculateIndependentPrice($transport, $currency);
+        }
+
+        return $prices;
+    }
 }
