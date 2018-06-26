@@ -11,6 +11,7 @@ use Shopsys\FrameworkBundle\Model\Cart\CartService;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
 use Shopsys\FrameworkBundle\Model\Order\OrderData;
+use Shopsys\FrameworkBundle\Model\Order\OrderDataFactory;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\OrderRepository;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
@@ -119,14 +120,15 @@ class OrderFacadeTest extends DatabaseTestCase
         /* @var $orderFacade \Shopsys\FrameworkBundle\Model\Order\OrderFacade */
         $orderRepository = $this->getContainer()->get(OrderRepository::class);
         /* @var $orderRepository \Shopsys\FrameworkBundle\Model\Order\OrderRepository */
+        $orderDataFactory = $this->getContainer()->get(OrderDataFactory::class);
+        /* @var $orderDataFactory \Shopsys\FrameworkBundle\Model\Order\OrderDataFactory */
 
         $order = $this->getReference('order_1');
         /* @var $order \Shopsys\FrameworkBundle\Model\Order\Order */
 
         $this->assertCount(4, $order->getItems());
 
-        $orderData = new OrderData();
-        $orderData->setFromEntity($order);
+        $orderData = $orderDataFactory->createFromOrder($order);
 
         $orderItemsData = $orderData->itemsWithoutTransportAndPayment;
         array_pop($orderItemsData);

@@ -2,10 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Model\Order;
 
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemData;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentData;
-use Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportData;
-
 class OrderData
 {
     const NEW_ITEM_PREFIX = 'new_';
@@ -178,54 +174,6 @@ class OrderData
     public function __construct()
     {
         $this->itemsWithoutTransportAndPayment = [];
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
-     */
-    public function setFromEntity(Order $order)
-    {
-        $this->orderNumber = $order->getNumber();
-        $this->status = $order->getStatus();
-        $this->firstName = $order->getFirstName();
-        $this->lastName = $order->getLastName();
-        $this->email = $order->getEmail();
-        $this->telephone = $order->getTelephone();
-        $this->companyName = $order->getCompanyName();
-        $this->companyNumber = $order->getCompanyNumber();
-        $this->companyTaxNumber = $order->getCompanyTaxNumber();
-        $this->street = $order->getStreet();
-        $this->city = $order->getCity();
-        $this->postcode = $order->getPostcode();
-        $this->country = $order->getCountry();
-        $this->deliveryAddressSameAsBillingAddress = $order->isDeliveryAddressSameAsBillingAddress();
-        if (!$order->isDeliveryAddressSameAsBillingAddress()) {
-            $this->deliveryFirstName = $order->getDeliveryFirstName();
-            $this->deliveryLastName = $order->getDeliveryLastName();
-            $this->deliveryCompanyName = $order->getDeliveryCompanyName();
-            $this->deliveryTelephone = $order->getDeliveryTelephone();
-            $this->deliveryStreet = $order->getDeliveryStreet();
-            $this->deliveryCity = $order->getDeliveryCity();
-            $this->deliveryPostcode = $order->getDeliveryPostcode();
-            $this->deliveryCountry = $order->getDeliveryCountry();
-        }
-        $this->note = $order->getNote();
-        $orderItemsWithoutTransportAndPaymentData = [];
-        foreach ($order->getItemsWithoutTransportAndPayment() as $orderItem) {
-            $orderItemData = new OrderItemData();
-            $orderItemData->setFromEntity($orderItem);
-            $orderItemsWithoutTransportAndPaymentData[$orderItem->getId()] = $orderItemData;
-        }
-        $this->itemsWithoutTransportAndPayment = $orderItemsWithoutTransportAndPaymentData;
-        $this->createdAt = $order->getCreatedAt();
-        $this->domainId = $order->getDomainId();
-        $this->currency = $order->getCurrency();
-        $this->createdAsAdministrator = $order->getCreatedAsAdministrator();
-        $this->createdAsAdministratorName = $order->getCreatedAsAdministratorName();
-        $this->orderTransport = new OrderTransportData();
-        $this->orderTransport->setFromEntity($order->getOrderTransport());
-        $this->orderPayment = new OrderPaymentData();
-        $this->orderPayment->setFromEntity($order->getOrderPayment());
     }
 
     /**

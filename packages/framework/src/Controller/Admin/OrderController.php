@@ -17,7 +17,7 @@ use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
-use Shopsys\FrameworkBundle\Model\Order\OrderData;
+use Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
@@ -75,6 +75,11 @@ class OrderController extends AdminBaseController
      */
     private $domain;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface
+     */
+    private $orderDataFactory;
+
     public function __construct(
         OrderFacade $orderFacade,
         AdvancedSearchOrderFacade $advancedSearchOrderFacade,
@@ -85,7 +90,8 @@ class OrderController extends AdminBaseController
         OrderItemFacade $orderItemFacade,
         TransportFacade $transportFacade,
         PaymentFacade $paymentFacade,
-        Domain $domain
+        Domain $domain,
+        OrderDataFactoryInterface $orderDataFactory
     ) {
         $this->orderFacade = $orderFacade;
         $this->advancedSearchOrderFacade = $advancedSearchOrderFacade;
@@ -97,6 +103,7 @@ class OrderController extends AdminBaseController
         $this->transportFacade = $transportFacade;
         $this->paymentFacade = $paymentFacade;
         $this->domain = $domain;
+        $this->orderDataFactory = $orderDataFactory;
     }
 
     /**
@@ -108,8 +115,7 @@ class OrderController extends AdminBaseController
     {
         $order = $this->orderFacade->getById($id);
 
-        $orderData = new OrderData();
-        $orderData->setFromEntity($order);
+        $orderData = $this->orderDataFactory->createFromOrder($order);
 
         $form = $this->createForm(OrderFormType::class, $orderData, ['order' => $order]);
         $form->handleRequest($request);
@@ -170,8 +176,7 @@ class OrderController extends AdminBaseController
 
         $order = $this->orderFacade->getById($orderId);
 
-        $orderData = new OrderData();
-        $orderData->setFromEntity($order);
+        $orderData = $this->orderDataFactory->createFromOrder($order);
 
         $form = $this->createForm(OrderFormType::class, $orderData, ['order' => $order]);
 
