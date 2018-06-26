@@ -9,7 +9,7 @@ use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CountryDataFixture;
-use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
@@ -71,6 +71,11 @@ class UserDataFixture
     private $customerDataFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface
+     */
+    private $billingAddressDataFactory;
+
+    /**
      * @param int $userCountPerDomain
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
@@ -81,6 +86,7 @@ class UserDataFixture
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
      */
     public function __construct(
         $userCountPerDomain,
@@ -92,7 +98,8 @@ class UserDataFixture
         Faker $faker,
         PersistentReferenceFacade $persistentReferenceFacade,
         ProgressBarFactory $progressBarFactory,
-        CustomerDataFactoryInterface $customerDataFactory
+        CustomerDataFactoryInterface $customerDataFactory,
+        BillingAddressDataFactoryInterface $billingAddressDataFactory
     ) {
         $this->em = $em;
         $this->domain = $domain;
@@ -104,6 +111,7 @@ class UserDataFixture
         $this->userCountPerDomain = $userCountPerDomain;
         $this->progressBarFactory = $progressBarFactory;
         $this->customerDataFactory = $customerDataFactory;
+        $this->billingAddressDataFactory = $billingAddressDataFactory;
     }
 
     /**
@@ -169,7 +177,7 @@ class UserDataFixture
 
         $customerData->userData = $userData;
 
-        $billingAddressData = new BillingAddressData();
+        $billingAddressData = $this->billingAddressDataFactory->create();
         $billingAddressData->companyCustomer = $this->faker->boolean();
         if ($billingAddressData->companyCustomer === true) {
             $billingAddressData->companyName = $this->faker->company;

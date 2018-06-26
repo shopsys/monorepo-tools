@@ -8,6 +8,7 @@ use Shopsys\FrameworkBundle\Model\Country\Country;
 use Shopsys\FrameworkBundle\Model\Country\CountryData;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerService;
@@ -351,13 +352,15 @@ class CustomerServiceTest extends TestCase
         $customerPasswordServiceMock = $this->createMock(CustomerPasswordService::class);
         $deliveryAddressFactory = new DeliveryAddressFactory();
         $userFactory = new UserFactory();
-        $customerDataFactory = new CustomerDataFactory();
+        $billingAddressDataFactory = new BillingAddressDataFactory();
+        $customerDataFactory = new CustomerDataFactory($billingAddressDataFactory);
 
         return new CustomerService(
             $customerPasswordServiceMock,
             $deliveryAddressFactory,
             $userFactory,
-            $customerDataFactory
+            $customerDataFactory,
+            $billingAddressDataFactory
         );
     }
 

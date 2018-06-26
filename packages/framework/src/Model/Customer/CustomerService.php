@@ -28,21 +28,29 @@ class CustomerService
     private $customerDataFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface
+     */
+    private $billingAddressDataFactory;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService $customerPasswordService
      * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactoryInterface $deliveryAddressFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserFactoryInterface $userFactory
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
      */
     public function __construct(
         CustomerPasswordService $customerPasswordService,
         DeliveryAddressFactoryInterface $deliveryAddressFactory,
         UserFactoryInterface $userFactory,
-        CustomerDataFactoryInterface $customerDataFactory
+        CustomerDataFactoryInterface $customerDataFactory,
+        BillingAddressDataFactoryInterface $billingAddressDataFactory
     ) {
         $this->customerPasswordService = $customerPasswordService;
         $this->deliveryAddressFactory = $deliveryAddressFactory;
         $this->userFactory = $userFactory;
         $this->customerDataFactory = $customerDataFactory;
+        $this->billingAddressDataFactory = $billingAddressDataFactory;
     }
 
     /**
@@ -177,8 +185,7 @@ class CustomerService
      */
     private function getAmendedBillingAddressDataByOrder(Order $order, BillingAddress $billingAddress)
     {
-        $billingAddressData = new BillingAddressData();
-        $billingAddressData->setFromEntity($billingAddress);
+        $billingAddressData = $this->billingAddressDataFactory->createFromBillingAddress($billingAddress);
 
         if ($billingAddress->getStreet() === null) {
             $billingAddressData->companyCustomer = $order->getCompanyNumber() !== null;

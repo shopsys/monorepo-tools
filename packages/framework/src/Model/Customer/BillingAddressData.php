@@ -53,20 +53,4 @@ class BillingAddressData
     {
         $this->companyCustomer = false;
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddress $billingAddress
-     */
-    public function setFromEntity(BillingAddress $billingAddress)
-    {
-        $this->telephone = $billingAddress->getTelephone();
-        $this->companyCustomer = $billingAddress->isCompanyCustomer();
-        $this->companyName = $billingAddress->getCompanyName();
-        $this->companyNumber = $billingAddress->getCompanyNumber();
-        $this->companyTaxNumber = $billingAddress->getCompanyTaxNumber();
-        $this->street = $billingAddress->getStreet();
-        $this->city = $billingAddress->getCity();
-        $this->postcode = $billingAddress->getPostcode();
-        $this->country = $billingAddress->getCountry();
-    }
 }
