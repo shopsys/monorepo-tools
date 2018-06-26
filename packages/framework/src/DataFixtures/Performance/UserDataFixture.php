@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CountryDataFixture;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
 use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
@@ -66,6 +66,11 @@ class UserDataFixture
     private $progressBarFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
+     */
+    private $customerDataFactory;
+
+    /**
      * @param int $userCountPerDomain
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
@@ -75,6 +80,7 @@ class UserDataFixture
      * @param \Faker\Generator $faker
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
      */
     public function __construct(
         $userCountPerDomain,
@@ -85,7 +91,8 @@ class UserDataFixture
         UserDataFactory $userDataFactory,
         Faker $faker,
         PersistentReferenceFacade $persistentReferenceFacade,
-        ProgressBarFactory $progressBarFactory
+        ProgressBarFactory $progressBarFactory,
+        CustomerDataFactoryInterface $customerDataFactory
     ) {
         $this->em = $em;
         $this->domain = $domain;
@@ -96,6 +103,7 @@ class UserDataFixture
         $this->persistentReferenceFacade = $persistentReferenceFacade;
         $this->userCountPerDomain = $userCountPerDomain;
         $this->progressBarFactory = $progressBarFactory;
+        $this->customerDataFactory = $customerDataFactory;
     }
 
     /**
@@ -147,7 +155,7 @@ class UserDataFixture
      */
     private function getRandomCustomerDataByDomainId($domainId, $userNumber)
     {
-        $customerData = new CustomerData();
+        $customerData = $this->customerDataFactory->create();
 
         $country = $this->persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 

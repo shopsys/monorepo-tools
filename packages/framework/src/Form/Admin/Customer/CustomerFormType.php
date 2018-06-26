@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Form\Admin\Customer;
 
 use Shopsys\FrameworkBundle\Form\OrderListType;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -13,6 +13,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CustomerFormType extends AbstractType
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
+     */
+    private $customerDataFactory;
+
+    public function __construct(CustomerDataFactoryInterface $customerDataFactory)
+    {
+        $this->customerDataFactory = $customerDataFactory;
+    }
+
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -57,7 +67,7 @@ class CustomerFormType extends AbstractType
             ->setAllowedTypes('user', [User::class, 'null'])
             ->setAllowedTypes('domain_id', 'int')
             ->setDefaults([
-                'data_class' => CustomerData::class,
+                'empty_data' => $this->customerDataFactory->create(),
                 'attr' => ['novalidate' => 'novalidate'],
             ]);
     }

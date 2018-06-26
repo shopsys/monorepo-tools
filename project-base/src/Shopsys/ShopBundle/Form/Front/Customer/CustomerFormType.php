@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Customer;
 
-use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,6 +10,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CustomerFormType extends AbstractType
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
+     */
+    private $customerDataFactory;
+
+    public function __construct(CustomerDataFactoryInterface $customerDataFactory)
+    {
+        $this->customerDataFactory = $customerDataFactory;
+    }
+
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -36,7 +46,7 @@ class CustomerFormType extends AbstractType
             ->setRequired('domain_id')
             ->addAllowedTypes('domain_id', 'int')
             ->setDefaults([
-                'data_class' => CustomerData::class,
+                'empty_data' => $this->customerDataFactory->create(),
                 'attr' => ['novalidate' => 'novalidate'],
             ]);
     }

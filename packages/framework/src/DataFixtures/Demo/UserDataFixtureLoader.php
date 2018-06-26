@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\Component\Csv\CsvReader;
 use Shopsys\FrameworkBundle\Component\String\EncodingConverter;
 use Shopsys\FrameworkBundle\Component\String\TransformString;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
 use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
 
@@ -57,15 +57,26 @@ class UserDataFixtureLoader
     private $countries;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
+     */
+    private $customerDataFactory;
+
+    /**
      * @param string $path
      * @param \Shopsys\FrameworkBundle\Component\Csv\CsvReader $csvReader
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory $userDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
      */
-    public function __construct($path, CsvReader $csvReader, UserDataFactory $userDataFactory)
-    {
+    public function __construct(
+        $path,
+        CsvReader $csvReader,
+        UserDataFactory $userDataFactory,
+        CustomerDataFactoryInterface $customerDataFactory
+    ) {
         $this->path = $path;
         $this->csvReader = $csvReader;
         $this->userDataFactory = $userDataFactory;
+        $this->customerDataFactory = $customerDataFactory;
     }
 
     /**
@@ -127,7 +138,7 @@ class UserDataFixtureLoader
      */
     private function getCustomerDataFromCsvRow(array $row)
     {
-        $customerData = new CustomerData();
+        $customerData = $this->customerDataFactory->create();
         $domainId = (int)$row[self::COLUMN_DOMAIN_ID];
         $userData = $this->userDataFactory->createDefault($domainId);
         $billingAddressData = new BillingAddressData();

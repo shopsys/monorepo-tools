@@ -5,7 +5,7 @@ namespace Tests\ShopBundle\Database\Model\Pricing\Group;
 use ReflectionClass;
 use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\UserData;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
@@ -95,9 +95,12 @@ class PricingGroupFacadeTest extends DatabaseTestCase
         /* @var $user \Shopsys\FrameworkBundle\Model\Customer\User */
         $userData = new UserData();
         $userData->setFromEntity($user);
+        $customerDataFactory = $this->getContainer()->get(CustomerDataFactory::class);
+        /* @var $customerDataFactory \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory */
 
         $userData->pricingGroup = $pricingGroupToDelete;
-        $customerData = new CustomerData($userData);
+        $customerData = $customerDataFactory->create();
+        $customerData->userData = $userData;
         $customerFacade->editByAdmin($user->getId(), $customerData);
 
         $pricingGroupFacade->delete($pricingGroupToDelete->getId(), $pricingGroupToReplaceWith->getId());

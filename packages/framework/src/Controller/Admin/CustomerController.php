@@ -15,7 +15,7 @@ use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerListAdminFacade;
 use Shopsys\FrameworkBundle\Model\Customer\User;
@@ -79,6 +79,11 @@ class CustomerController extends AdminBaseController
      */
     private $domainRouterFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
+     */
+    private $customerDataFactory;
+
     public function __construct(
         UserDataFactory $userDataFactory,
         CustomerListAdminFacade $customerListAdminFacade,
@@ -89,7 +94,8 @@ class CustomerController extends AdminBaseController
         AdminDomainTabsFacade $adminDomainTabsFacade,
         OrderFacade $orderFacade,
         LoginAsUserFacade $loginAsUserFacade,
-        DomainRouterFactory $domainRouterFactory
+        DomainRouterFactory $domainRouterFactory,
+        CustomerDataFactoryInterface $customerDataFactory
     ) {
         $this->userDataFactory = $userDataFactory;
         $this->customerListAdminFacade = $customerListAdminFacade;
@@ -101,6 +107,7 @@ class CustomerController extends AdminBaseController
         $this->orderFacade = $orderFacade;
         $this->loginAsUserFacade = $loginAsUserFacade;
         $this->domainRouterFactory = $domainRouterFactory;
+        $this->customerDataFactory = $customerDataFactory;
     }
 
     /**
@@ -111,8 +118,7 @@ class CustomerController extends AdminBaseController
     public function editAction(Request $request, $id)
     {
         $user = $this->customerFacade->getUserById($id);
-        $customerData = new CustomerData();
-        $customerData->setFromEntity($user);
+        $customerData = $this->customerDataFactory->createFromUser($user);
 
         $form = $this->createForm(CustomerFormType::class, $customerData, [
             'user' => $user,
@@ -205,7 +211,7 @@ class CustomerController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $customerData = new CustomerData();
+        $customerData = $this->customerDataFactory->create();
         $selectedDomainId = $this->adminDomainTabsFacade->getSelectedDomainId();
         $userData = $this->userDataFactory->createDefault($selectedDomainId);
         $customerData->userData = $userData;
