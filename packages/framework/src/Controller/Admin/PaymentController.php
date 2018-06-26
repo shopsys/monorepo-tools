@@ -8,7 +8,6 @@ use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\FrameworkBundle\Form\Admin\Payment\PaymentEditFormType;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetailFactory;
 use Shopsys\FrameworkBundle\Model\Payment\Grid\PaymentGridFactory;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
@@ -21,11 +20,6 @@ class PaymentController extends AdminBaseController
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
      */
     private $breadcrumb;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetailFactory
-     */
-    private $paymentDetailFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\Grid\PaymentGridFactory
@@ -51,14 +45,12 @@ class PaymentController extends AdminBaseController
         PaymentDataFactory $paymentDataFactory,
         CurrencyFacade $currencyFacade,
         PaymentFacade $paymentFacade,
-        PaymentDetailFactory $paymentDetailFactory,
         PaymentGridFactory $paymentGridFactory,
         Breadcrumb $breadcrumb
     ) {
         $this->paymentDataFactory = $paymentDataFactory;
         $this->currencyFacade = $currencyFacade;
         $this->paymentFacade = $paymentFacade;
-        $this->paymentDetailFactory = $paymentDetailFactory;
         $this->paymentGridFactory = $paymentGridFactory;
         $this->breadcrumb = $breadcrumb;
     }
@@ -72,7 +64,7 @@ class PaymentController extends AdminBaseController
         $paymentData = $this->paymentDataFactory->createDefault();
 
         $form = $this->createForm(PaymentEditFormType::class, $paymentData, [
-            'payment_detail' => null,
+            'payment' => null,
         ]);
         $form->handleRequest($request);
 
@@ -108,10 +100,9 @@ class PaymentController extends AdminBaseController
     {
         $payment = $this->paymentFacade->getById($id);
         $paymentData = $this->paymentDataFactory->createFromPayment($payment);
-        $paymentDetail = $this->paymentDetailFactory->createDetailForPayment($payment);
 
         $form = $this->createForm(PaymentEditFormType::class, $paymentData, [
-            'payment_detail' => $paymentDetail,
+            'payment' => $payment,
         ]);
         $form->handleRequest($request);
 
@@ -136,7 +127,7 @@ class PaymentController extends AdminBaseController
 
         return $this->render('@ShopsysFramework/Admin/Content/Payment/edit.html.twig', [
             'form' => $form->createView(),
-            'paymentDetail' => $paymentDetail,
+            'payment' => $payment,
             'currencies' => $this->currencyFacade->getAllIndexedById(),
         ]);
     }
