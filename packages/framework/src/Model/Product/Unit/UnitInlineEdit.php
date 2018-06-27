@@ -18,14 +18,21 @@ class UnitInlineEdit extends AbstractGridInlineEdit
      */
     private $formFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactoryInterface
+     */
+    private $unitDataFactory;
+
     public function __construct(
         UnitGridFactory $unitGridFactory,
         UnitFacade $unitFacade,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        UnitDataFactoryInterface $unitDataFactory
     ) {
         parent::__construct($unitGridFactory);
         $this->unitFacade = $unitFacade;
         $this->formFactory = $formFactory;
+        $this->unitDataFactory = $unitDataFactory;
     }
 
     /**
@@ -54,11 +61,11 @@ class UnitInlineEdit extends AbstractGridInlineEdit
      */
     public function getForm($unitId)
     {
-        $unitData = new UnitData();
-
         if ($unitId !== null) {
             $unit = $this->unitFacade->getById((int)$unitId);
-            $unitData->setFromEntity($unit);
+            $unitData = $this->unitDataFactory->createFromUnit($unit);
+        } else {
+            $unitData = $this->unitDataFactory->create();
         }
 
         return $this->formFactory->create(UnitFormType::class, $unitData);
