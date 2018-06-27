@@ -2,8 +2,8 @@
 
 namespace Tests\ProductFeed\HeurekaDeliveryBundle\Unit;
 
-use DOMDocument;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Xml\XmlNormalizer;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\HeurekaDeliveryBundle\HeurekaDeliveryFeedConfig;
 use Twig_Environment;
@@ -46,10 +46,10 @@ class HeurekaDeliveryFeedTest extends TestCase
         $processedFeedItems = $this->heurekaDeliveryFeedConfig->processItems($feedItems, $domainConfigMock);
 
         $generatedXml = $this->getFeedOutputByFeedItems($processedFeedItems, $domainConfigMock);
-        $generatedXml = $this->normalizeXml($generatedXml);
+        $generatedXml = XmlNormalizer::normalizeXml($generatedXml);
 
         $expectedXml = file_get_contents(__DIR__ . '/Resources/' . self::EXPECTED_XML_FILE_NAME);
-        $expectedXml = $this->normalizeXml($expectedXml);
+        $expectedXml = XmlNormalizer::normalizeXml($expectedXml);
 
         $this->assertEquals($expectedXml, $generatedXml);
     }
@@ -104,20 +104,5 @@ class HeurekaDeliveryFeedTest extends TestCase
         );
 
         return $feedItems;
-    }
-    /**
-     * @param $feedContent
-     * @return string
-     */
-    private function normalizeXml($feedContent)
-    {
-        $document = new DOMDocument('1.0');
-        $document->preserveWhiteSpace = false;
-        $document->formatOutput = true;
-
-        $document->loadXML($feedContent);
-        $generatedXml = $document->saveXML();
-
-        return $generatedXml;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Response;
 
-use DOMDocument;
+use Shopsys\FrameworkBundle\Component\Xml\XmlNormalizer;
 use SplFileObject;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -29,27 +29,11 @@ class XmlStreamedResponse extends StreamedResponse
      */
     private function createCallback($xmlContent)
     {
-        $xmlContent = $this->normalizeXml($xmlContent);
+        $xmlContent = XmlNormalizer::normalizeXml($xmlContent);
 
         return function () use (&$xmlContent) {
             $output = new SplFileObject('php://output', 'w+');
             $output->fwrite($xmlContent);
         };
-    }
-
-    /**
-     * @param string $content
-     * @return string
-     */
-    private function normalizeXml($content)
-    {
-        $document = new DOMDocument('1.0');
-        $document->preserveWhiteSpace = false;
-        $document->formatOutput = true;
-
-        $document->loadXML($content);
-        $generatedXml = $document->saveXML();
-
-        return $generatedXml;
     }
 }
