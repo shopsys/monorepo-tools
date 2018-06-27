@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Mutex;
+namespace Shopsys\FrameworkBundle\Component\Cron;
 
 use NinjaMutex\Lock\LockInterface;
 use NinjaMutex\Mutex;

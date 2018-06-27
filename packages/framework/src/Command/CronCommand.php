@@ -6,7 +6,7 @@ use DateTime;
 use DateTimeImmutable;
 use Shopsys\FrameworkBundle\Component\Cron\Config\CronModuleConfig;
 use Shopsys\FrameworkBundle\Component\Cron\CronFacade;
-use Shopsys\FrameworkBundle\Component\Mutex\MutexFactory;
+use Shopsys\FrameworkBundle\Component\Cron\MutexFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -28,13 +28,13 @@ class CronCommand extends Command
     private $cronFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Mutex\MutexFactory
+     * @var \Shopsys\FrameworkBundle\Component\Cron\MutexFactory
      */
     private $mutexFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Cron\CronFacade $cronFacade
-     * @param \Shopsys\FrameworkBundle\Component\Mutex\MutexFactory $mutexFactory
+     * @param \Shopsys\FrameworkBundle\Component\Cron\MutexFactory $mutexFactory
      */
     public function __construct(
         CronFacade $cronFacade,
@@ -88,7 +88,7 @@ class CronCommand extends Command
     /**
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Shopsys\FrameworkBundle\Component\Cron\CronFacade $cronFacade
-     * @param \Shopsys\FrameworkBundle\Component\Mutex\MutexFactory $mutexFactory
+     * @param \Shopsys\FrameworkBundle\Component\Cron\MutexFactory $mutexFactory
      */
     private function runCron(InputInterface $input, CronFacade $cronFacade, MutexFactory $mutexFactory)
     {
