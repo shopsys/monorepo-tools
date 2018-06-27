@@ -861,3 +861,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyDataFactory
+
+  Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactory

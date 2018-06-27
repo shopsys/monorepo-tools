@@ -18,13 +18,4 @@ class PricingGroupData
     {
         $this->coefficient = '1';
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     */
-    public function setFromEntity(PricingGroup $pricingGroup)
-    {
-        $this->name = $pricingGroup->getName();
-        $this->coefficient = $pricingGroup->getCoefficient();
-    }
 }

@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Pricing\Group\Grid;
 use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\Pricing\Group\PricingGroupFormType;
-use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -26,16 +26,23 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
      */
     private $formFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface
+     */
+    private $pricingGroupDataFactory;
+
     public function __construct(
         PricingGroupGridFactory $pricingGroupGridFactory,
         PricingGroupFacade $pricingGroupFacade,
         AdminDomainTabsFacade $adminDomainTabsFacade,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        PricingGroupDataFactoryInterface $pricingGroupDataFactory
     ) {
         parent::__construct($pricingGroupGridFactory);
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->adminDomainTabsFacade = $adminDomainTabsFacade;
         $this->formFactory = $formFactory;
+        $this->pricingGroupDataFactory = $pricingGroupDataFactory;
     }
 
     /**
@@ -64,12 +71,12 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
      */
     public function getForm($pricingGroupId)
     {
-        $pricingGroupData = new PricingGroupData();
-
         if ($pricingGroupId !== null) {
             $pricingGroupId = (int)$pricingGroupId;
             $pricingGroup = $this->pricingGroupFacade->getById($pricingGroupId);
-            $pricingGroupData->setFromEntity($pricingGroup);
+            $pricingGroupData = $this->pricingGroupDataFactory->createFromPricingGroup($pricingGroup);
+        } else {
+            $pricingGroupData = $this->pricingGroupDataFactory->create();
         }
 
         return $this->formFactory->create(PricingGroupFormType::class, $pricingGroupData);
