@@ -5,6 +5,7 @@ namespace Tests\FrameworkBundle\Unit\Model\Product\Flag;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Model\Product\Flag\Flag;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagData;
+use Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactory;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagService;
 
@@ -19,8 +20,8 @@ class FlagServiceTest extends TestCase
         $flagDataOriginal->rgbColor = '#336699';
         $flag = $flagService->create($flagDataOriginal);
 
-        $flagDataNew = new FlagData();
-        $flagDataNew->setFromEntity($flag);
+        $flagDataFactory = new FlagDataFactory();
+        $flagDataNew = $flagDataFactory->createFromFlag($flag);
 
         $this->assertEquals($flagDataOriginal, $flagDataNew);
     }
@@ -39,8 +40,8 @@ class FlagServiceTest extends TestCase
 
         $flagService->edit($flag, $flagDataEdit);
 
-        $flagDataNew = new FlagData();
-        $flagDataNew->setFromEntity($flag);
+        $flagDataFactory = new FlagDataFactory();
+        $flagDataNew = $flagDataFactory->createFromFlag($flag);
 
         $this->assertEquals($flagDataEdit, $flagDataNew);
     }

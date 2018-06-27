@@ -24,19 +24,4 @@ class FlagData
         $this->name = [];
         $this->visible = false;
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag $flag
-     */
-    public function setFromEntity(Flag $flag)
-    {
-        $translations = $flag->getTranslations();
-        $names = [];
-        foreach ($translations as $translate) {
-            $names[$translate->getLocale()] = $translate->getName();
-        }
-        $this->name = $names;
-        $this->rgbColor = $flag->getRgbColor();
-        $this->visible = $flag->isVisible();
-    }
 }

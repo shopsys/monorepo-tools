@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Base;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagData;
+use Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade;
 
 class FlagDataFixture extends AbstractReferenceFixture
@@ -19,11 +20,16 @@ class FlagDataFixture extends AbstractReferenceFixture
     private $flagFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade $flagFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactoryInterface
      */
-    public function __construct(FlagFacade $flagFacade)
-    {
+    private $flagDataFactory;
+
+    public function __construct(
+        FlagFacade $flagFacade,
+        FlagDataFactoryInterface $flagDataFactory
+    ) {
         $this->flagFacade = $flagFacade;
+        $this->flagDataFactory = $flagDataFactory;
     }
 
     /**
@@ -31,7 +37,7 @@ class FlagDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $flagData = new FlagData();
+        $flagData = $this->flagDataFactory->create();
 
         $flagData->name = ['cs' => 'Novinka', 'en' => 'New'];
         $flagData->rgbColor = '#efd6ff';
