@@ -855,3 +855,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory
+
+  Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactory
