@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
-class BrandDataFactory
+class BrandDataFactory implements BrandDataFactoryInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
@@ -35,30 +35,48 @@ class BrandDataFactory
     /**
      * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData
      */
-    public function createDefault()
+    public function create(): BrandData
     {
         $brandData = new BrandData();
+        $this->fillNew($brandData);
 
+        return $brandData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData $brandData
+     */
+    protected function fillNew(BrandData $brandData)
+    {
         foreach ($this->domain->getAllIds() as $domainId) {
             $brandData->seoMetaDescriptions[$domainId] = null;
             $brandData->seoTitles[$domainId] = null;
             $brandData->seoH1s[$domainId] = null;
         }
-
-        return $brandData;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
      * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData
      */
-    public function createFromBrand(Brand $brand)
+    public function createFromBrand(Brand $brand): BrandData
     {
-        $brandData = $this->createDefault();
+        $brandData = new BrandData();
+        $this->fillFromBrand($brandData, $brand);
+
+        return $brandData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandData $brandData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
+     */
+    protected function fillFromBrand(BrandData $brandData, Brand $brand)
+    {
         $brandData->name = $brand->getName();
 
         $translations = $brand->getTranslations();
-        /* @var $translations \Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation[]  */
+        /* @var $translations \Shopsys\FrameworkBundle\Model\Product\Brand\BrandTranslation[] */
 
         $brandData->descriptions = [];
         foreach ($translations as $translation) {
@@ -77,7 +95,5 @@ class BrandDataFactory
                     $brand->getId()
                 );
         }
-
-        return $brandData;
     }
 }

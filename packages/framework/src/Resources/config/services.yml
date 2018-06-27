@@ -870,3 +870,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactory
