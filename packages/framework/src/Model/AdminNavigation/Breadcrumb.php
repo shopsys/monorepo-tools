@@ -34,7 +34,7 @@ class Breadcrumb
      */
     public function getItems($route, $routeParameters)
     {
-        $menu = $this->menuFactory->createMenuWithVisibleItems();
+        $menu = $this->menuFactory->createMenuWithAllowedItems();
         $items = $menu->getMenuPath($route, $routeParameters);
 
         if ($this->overridingLastItem !== null) {
