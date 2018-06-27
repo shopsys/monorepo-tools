@@ -59,7 +59,7 @@
     <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files in project-base and all files in packages.">
         <phingcall target="ecs-fix-diff" />
         <phingcall target="eslint-fix-diff" />
-        <phingcall target="standards-fix-packages" />
+        <phingcall target="standards-fix-packages-diff" />
     </target>
 
     <target name="standards-packages" description="Checks coding standards in all packages.">
@@ -98,6 +98,25 @@
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check" />
             <arg value="--clear-cache" />
+            <arg value="--fix" />
+            <arg value="--verbose" />
+            <arg path="./packages/*/src"/>
+            <arg path="./packages/*/tests" />
+        </exec>
+        <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
+            <arg value="--color" />
+            <arg value="--fix" />
+            <arg path="${path.framework}/src/Resources/scripts" />
+            <arg value="--config" />
+            <arg path="${path.framework}/.eslintrc.json" />
+            <arg value="--ignore-path" />
+            <arg path="${path.framework}/.eslintignore" />
+        </exec>
+    </target>
+
+    <target name="standards-fix-packages-diff" description="Automatically fixes some coding standards violations in all changed files of packages.">
+        <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="check" />
             <arg value="--fix" />
             <arg value="--verbose" />
             <arg path="./packages/*/src"/>
