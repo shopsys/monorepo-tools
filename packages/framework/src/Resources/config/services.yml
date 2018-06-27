@@ -858,3 +858,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactory
+
+  Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyDataFactory

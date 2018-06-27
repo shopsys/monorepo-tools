@@ -23,14 +23,4 @@ class CurrencyData
     {
         $this->exchangeRate = Currency::DEFAULT_EXCHANGE_RATE;
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     */
-    public function setFromEntity(Currency $currency)
-    {
-        $this->name = $currency->getName();
-        $this->code = $currency->getCode();
-        $this->exchangeRate = $currency->getExchangeRate();
-    }
 }
