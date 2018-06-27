@@ -9,24 +9,24 @@
     
     {{ render(controller('ShopsysFrameworkBundle:Admin/Domain:domainTabs')) }}
 
-    {% macro categoryTreeItem(categoryDetails, selectedDomainId, bestsellingProductsInCategories) %}
+    {% macro categoryTreeItem(categoriesWithPreloadedChildren, selectedDomainId, bestsellingProductsInCategories) %}
         {% import _self as self %}
         <ul class="js-category-tree-items form-tree__content">
-            {% for categoryDetail in categoryDetails %}
-                <li class="js-category-tree-item form-tree__item" id="js-category-tree-{{ categoryDetail.category.id }}">
+            {% for categoryWithPreloadedChildren in categoriesWithPreloadedChildren %}
+                <li class="js-category-tree-item form-tree__item" id="js-category-tree-{{ categoryWithPreloadedChildren.category.id }}">
                     <div class="js-category-tree-item-line">
                         <span class="js-category-tree-item-handle">
                             <span class="form-tree__item__icon form-tree__item__icon--level sprite sprite-level"></span>
                             <a
-                                href="{{ url('admin_bestsellingproduct_detail', {categoryId: categoryDetail.category.id, domainId: selectedDomainId}) }}"
+                                href="{{ url('admin_bestsellingproduct_detail', {categoryId: categoryWithPreloadedChildren.category.id, domainId: selectedDomainId}) }}"
                                 class="form-tree__item__name form-tree__item__name--link"
                             >
-                                {{ categoryDetail.category.name }}
+                                {{ categoryWithPreloadedChildren.category.name }}
                             </a>
-                            ({{ bestsellingProductsInCategories[categoryDetail.category.id] }})
+                            ({{ bestsellingProductsInCategories[categoryWithPreloadedChildren.category.id] }})
                         </span>
                     </div>
-                    {{ self.categoryTreeItem(categoryDetail.children, selectedDomainId, bestsellingProductsInCategories) }}
+                    {{ self.categoryTreeItem(categoryWithPreloadedChildren.children, selectedDomainId, bestsellingProductsInCategories) }}
                 </li>
             {% endfor %}
         </ul>
@@ -34,7 +34,7 @@
 
     <div class="form-line">
         <div class="form-tree form-tree--open">
-            {{ self.categoryTreeItem(categoryDetails, selectedDomainId, bestsellingProductsInCategories) }}
+            {{ self.categoryTreeItem(categoriesWithPreloadedChildren, selectedDomainId, bestsellingProductsInCategories) }}
         </div>
     </div>
 

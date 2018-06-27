@@ -60,6 +60,11 @@ class CategoryFacade
     protected $pluginCrudExtensionFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryWithPreloadedChildrenFactory
+     */
+    protected $categoryWithPreloadedChildrenFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryService $categoryService
@@ -69,6 +74,7 @@ class CategoryFacade
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
      * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade $pluginCrudExtensionFacade
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryWithPreloadedChildrenFactory $categoryWithPreloadedChildrenFactory
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -79,7 +85,8 @@ class CategoryFacade
         CategoryDetailFactory $categoryDetailFactory,
         FriendlyUrlFacade $friendlyUrlFacade,
         ImageFacade $imageFacade,
-        PluginCrudExtensionFacade $pluginCrudExtensionFacade
+        PluginCrudExtensionFacade $pluginCrudExtensionFacade,
+        CategoryWithPreloadedChildrenFactory $categoryWithPreloadedChildrenFactory
     ) {
         $this->em = $em;
         $this->categoryRepository = $categoryRepository;
@@ -90,6 +97,7 @@ class CategoryFacade
         $this->friendlyUrlFacade = $friendlyUrlFacade;
         $this->imageFacade = $imageFacade;
         $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
+        $this->categoryWithPreloadedChildrenFactory = $categoryWithPreloadedChildrenFactory;
     }
 
     /**
@@ -218,28 +226,28 @@ class CategoryFacade
 
     /**
      * @param string $locale
-     * @return \Shopsys\FrameworkBundle\Model\Category\Detail\CategoryDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryWithPreloadedChildren[]
      */
-    public function getAllCategoryDetails($locale)
+    public function getAllCategoriesWithPreloadedChildren($locale)
     {
         $categories = $this->categoryRepository->getPreOrderTreeTraversalForAllCategories($locale);
-        $categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
+        $categoriesWithPreloadedChildren = $this->categoryWithPreloadedChildrenFactory->createCategoriesWithPreloadedChildren($categories);
 
-        return $categoryDetails;
+        return $categoriesWithPreloadedChildren;
     }
 
     /**
      * @param int $domainId
      * @param string $locale
-     * @return \Shopsys\FrameworkBundle\Model\Category\Detail\CategoryDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryWithPreloadedChildren[]
      */
-    public function getVisibleCategoryDetailsForDomain($domainId, $locale)
+    public function getVisibleCategoriesWithPreloadedChildrenForDomain($domainId, $locale)
     {
         $categories = $this->categoryRepository->getPreOrderTreeTraversalForVisibleCategoriesByDomain($domainId, $locale);
 
-        $categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
+        $categoriesWithPreloadedChildren = $this->categoryWithPreloadedChildrenFactory->createCategoriesWithPreloadedChildren($categories);
 
-        return $categoryDetails;
+        return $categoriesWithPreloadedChildren;
     }
 
     /**
