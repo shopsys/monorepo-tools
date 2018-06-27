@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - `PaymentDetail` and `PaymentDetailFactory` were removed - `PaymentFacade` is now able to provide payment base prices
     - `ProductDetail` and `ProductDetailFactory` were removed - new `ProductCachedAttributesFacade` is now responsible for caching of products selling prices and parameters 
     - `CategoryDetail` was renamed to `CategoryWithPreloadedChildren` and methods for it's creation were moved from `CategoryDetailFactory` to new `CategoryWithPreloadedChildrenFactory` 
+    - `LazyLoadedCategoryDetail` was renamed to `CategoryWithLazyLoadedVisibleChildren` and methods for it's creation were moved from deleted `CategoryDetailFactory` to new `CategoryWithLazyLoadedVisibleChildrenFactory` 
 
 #### Changed
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):

@@ -1,11 +1,10 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Model\Category\Detail;
+namespace Shopsys\FrameworkBundle\Model\Category;
 
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
-use Shopsys\FrameworkBundle\Model\Category\CategoryRepository;
 
-class CategoryDetailFactory
+class CategoryWithLazyLoadedVisibleChildrenFactory
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
@@ -20,26 +19,26 @@ class CategoryDetailFactory
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\Category[] $categories
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\FrameworkBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryWithLazyLoadedVisibleChildren[]
      */
-    public function createLazyLoadedDetails($categories, DomainConfig $domainConfig)
+    public function createCategoriesWithLazyLoadedVisibleChildren($categories, DomainConfig $domainConfig)
     {
-        $categoriesWithChildren = $this->categoryRepository->getCategoriesWithVisibleChildren($categories, $domainConfig->getId());
+        $categoriesWithVisibleChildren = $this->categoryRepository->getCategoriesWithVisibleChildren($categories, $domainConfig->getId());
 
-        $lazyLoadedCategoryDetails = [];
+        $categoriesWithLazyLoadedVisibleChildren = [];
         foreach ($categories as $category) {
-            $hasChildren = in_array($category, $categoriesWithChildren, true);
-            $lazyLoadedCategoryDetails[] = new LazyLoadedCategoryDetail(
+            $hasChildren = in_array($category, $categoriesWithVisibleChildren, true);
+            $categoriesWithLazyLoadedVisibleChildren[] = new CategoryWithLazyLoadedVisibleChildren(
                 function () use ($category, $domainConfig) {
                     $categories = $this->categoryRepository->getTranslatedVisibleSubcategoriesByDomain($category, $domainConfig);
 
-                    return $this->createLazyLoadedDetails($categories, $domainConfig);
+                    return $this->createCategoriesWithLazyLoadedVisibleChildren($categories, $domainConfig);
                 },
                 $category,
                 $hasChildren
             );
         }
 
-        return $lazyLoadedCategoryDetails;
+        return $categoriesWithLazyLoadedVisibleChildren;
     }
 }

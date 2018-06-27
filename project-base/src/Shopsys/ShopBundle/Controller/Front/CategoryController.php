@@ -56,7 +56,7 @@ class CategoryController extends FrontBaseController
      */
     public function panelAction(Request $request)
     {
-        $categoryDetails = $this->categoryFacade->getVisibleLazyLoadedCategoryDetailsForParent(
+        $categoriesWithLazyLoadedVisibleChildren = $this->categoryFacade->getCategoriesWithLazyLoadedVisibleChildrenForParent(
             $this->categoryFacade->getRootCategory(),
             $this->domain->getCurrentDomainConfig()
         );
@@ -72,7 +72,7 @@ class CategoryController extends FrontBaseController
         }
 
         return $this->render('@ShopsysShop/Front/Content/Category/panel.html.twig', [
-            'lazyLoadedCategoryDetails' => $categoryDetails,
+            'categoriesWithLazyLoadedVisibleChildren' => $categoriesWithLazyLoadedVisibleChildren,
             'isFirstLevel' => true,
             'openCategories' => $openCategories,
             'currentCategory' => $currentCategory,
@@ -86,13 +86,13 @@ class CategoryController extends FrontBaseController
     {
         $parentCategory = $this->categoryFacade->getById($parentCategoryId);
 
-        $categoryDetails = $this->categoryFacade->getVisibleLazyLoadedCategoryDetailsForParent(
+        $categoriesWithLazyLoadedVisibleChildren = $this->categoryFacade->getCategoriesWithLazyLoadedVisibleChildrenForParent(
             $parentCategory,
             $this->domain->getCurrentDomainConfig()
         );
 
         return $this->render('@ShopsysShop/Front/Content/Category/panel.html.twig', [
-            'lazyLoadedCategoryDetails' => $categoryDetails,
+            'categoriesWithLazyLoadedVisibleChildren' => $categoriesWithLazyLoadedVisibleChildren,
             'isFirstLevel' => false,
             'openCategories' => [],
             'currentCategory' => null,

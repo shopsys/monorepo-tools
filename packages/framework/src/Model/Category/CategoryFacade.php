@@ -8,7 +8,6 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use Shopsys\FrameworkBundle\Model\Category\Detail\CategoryDetailFactory;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 
@@ -40,11 +39,6 @@ class CategoryFacade
     protected $categoryVisibilityRecalculationScheduler;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\Detail\CategoryDetailFactory
-     */
-    protected $categoryDetailFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */
     protected $friendlyUrlFacade;
@@ -65,16 +59,21 @@ class CategoryFacade
     protected $categoryWithPreloadedChildrenFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryWithLazyLoadedVisibleChildrenFactory
+     */
+    protected $categoryWithLazyLoadedVisibleChildrenFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryRepository $categoryRepository
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryService $categoryService
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler
-     * @param \Shopsys\FrameworkBundle\Model\Category\Detail\CategoryDetailFactory $categoryDetailFactory
      * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade $friendlyUrlFacade
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
      * @param \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade $pluginCrudExtensionFacade
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryWithPreloadedChildrenFactory $categoryWithPreloadedChildrenFactory
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryWithLazyLoadedVisibleChildrenFactory $categoryWithLazyLoadedVisibleChildrenFactory
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -82,22 +81,22 @@ class CategoryFacade
         CategoryService $categoryService,
         Domain $domain,
         CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler,
-        CategoryDetailFactory $categoryDetailFactory,
         FriendlyUrlFacade $friendlyUrlFacade,
         ImageFacade $imageFacade,
         PluginCrudExtensionFacade $pluginCrudExtensionFacade,
-        CategoryWithPreloadedChildrenFactory $categoryWithPreloadedChildrenFactory
+        CategoryWithPreloadedChildrenFactory $categoryWithPreloadedChildrenFactory,
+        CategoryWithLazyLoadedVisibleChildrenFactory $categoryWithLazyLoadedVisibleChildrenFactory
     ) {
         $this->em = $em;
         $this->categoryRepository = $categoryRepository;
         $this->categoryService = $categoryService;
         $this->domain = $domain;
         $this->categoryVisibilityRecalculationScheduler = $categoryVisibilityRecalculationScheduler;
-        $this->categoryDetailFactory = $categoryDetailFactory;
         $this->friendlyUrlFacade = $friendlyUrlFacade;
         $this->imageFacade = $imageFacade;
         $this->pluginCrudExtensionFacade = $pluginCrudExtensionFacade;
         $this->categoryWithPreloadedChildrenFactory = $categoryWithPreloadedChildrenFactory;
+        $this->categoryWithLazyLoadedVisibleChildrenFactory = $categoryWithLazyLoadedVisibleChildrenFactory;
     }
 
     /**
@@ -263,15 +262,16 @@ class CategoryFacade
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $parentCategory
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\FrameworkBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryWithLazyLoadedVisibleChildren[]
      */
-    public function getVisibleLazyLoadedCategoryDetailsForParent(Category $parentCategory, DomainConfig $domainConfig)
+    public function getCategoriesWithLazyLoadedVisibleChildrenForParent(Category $parentCategory, DomainConfig $domainConfig)
     {
         $categories = $this->categoryRepository->getTranslatedVisibleSubcategoriesByDomain($parentCategory, $domainConfig);
 
-        $categoryDetails = $this->categoryDetailFactory->createLazyLoadedDetails($categories, $domainConfig);
+        $categoriesWithLazyLoadedVisibleChildren = $this->categoryWithLazyLoadedVisibleChildrenFactory
+            ->createCategoriesWithLazyLoadedVisibleChildren($categories, $domainConfig);
 
-        return $categoryDetails;
+        return $categoriesWithLazyLoadedVisibleChildren;
     }
 
     /**
