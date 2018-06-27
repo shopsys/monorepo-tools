@@ -5,6 +5,16 @@ namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 class ProductParameterValueDataFactory implements ProductParameterValueDataFactoryInterface
 {
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface
+     */
+    protected $parameterValueDataFactory;
+
+    public function __construct(ParameterValueDataFactoryInterface $parameterValueDataFactory)
+    {
+        $this->parameterValueDataFactory = $parameterValueDataFactory;
+    }
+
+    /**
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData
      */
     public function create(): ProductParameterValueData
@@ -31,7 +41,6 @@ class ProductParameterValueDataFactory implements ProductParameterValueDataFacto
     protected function fillFromProductParameterValue(ProductParameterValueData $productParameterValueData, ProductParameterValue $productParameterValue)
     {
         $productParameterValueData->parameter = $productParameterValue->getParameter();
-        $productParameterValueData->parameterValueData = new ParameterValueData();
-        $productParameterValueData->parameterValueData->setFromEntity($productParameterValue->getValue());
+        $productParameterValueData->parameterValueData = $this->parameterValueDataFactory->createFromParameterValue($productParameterValue->getValue());
     }
 }

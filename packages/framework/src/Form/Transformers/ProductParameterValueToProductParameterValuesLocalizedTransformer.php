@@ -2,8 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form\Transformers;
 
-use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueData;
-use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -15,9 +14,17 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
      */
     private $productParameterValueDataFactory;
 
-    public function __construct(ProductParameterValueDataFactoryInterface $productParameterValueDataFactory)
-    {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface
+     */
+    private $parameterValueDataFactory;
+
+    public function __construct(
+        ProductParameterValueDataFactoryInterface $productParameterValueDataFactory,
+        ParameterValueDataFactoryInterface $parameterValueDataFactory
+    ) {
         $this->productParameterValueDataFactory = $productParameterValueDataFactory;
+        $this->parameterValueDataFactory = $parameterValueDataFactory;
     }
 
     /**
@@ -72,7 +79,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
                     if ($valueText !== null) {
                         $productParameterValueData = $this->productParameterValueDataFactory->create();
                         $productParameterValueData->parameter = $productParameterValuesLocalizedData->parameter;
-                        $parameterValueData = new ParameterValueData();
+                        $parameterValueData = $this->parameterValueDataFactory->create();
                         $parameterValueData->text = $valueText;
                         $parameterValueData->locale = $locale;
                         $productParameterValueData->parameterValueData = $parameterValueData;
