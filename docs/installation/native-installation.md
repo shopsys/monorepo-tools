@@ -183,5 +183,14 @@ Timezone for PHP can be set in your `php.ini` (usually located in `/etc/php.ini`
 date.timezone = "UTC"
 ```
 
+### Sorting is different on different platforms
+This is known PostgreSQL issue, PostgreSQL uses the collation implementation from the OS.
+As a result, sorting can be different on different platforms.
+For example, results sorted by name can begin with a product starting with “A” (Apple iPhone 5S) on iOS and with “1” (100 Czech crowns) on Linux.
+
+This problem only occurs if the installation is native and it should be solved in PostgreSQL v10, when the sorting will be solved by the independent ICU library. 
+
+Installation using docker provides a unified environment for all platforms as a result of which the sorting is the same.
+
 ### Still struggling with installation?
 If you encountered any other problem during the installation please [file an issue](https://github.com/shopsys/shopsys/issues/new) and we will help you.
