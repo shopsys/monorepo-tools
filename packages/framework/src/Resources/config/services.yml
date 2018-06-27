@@ -282,13 +282,13 @@ services:
     tags:
       - { name: kernel.event_subscriber }
 
-  Shopsys\FrameworkBundle\Component\Request\TransactionalMasterRequestService:
+  Shopsys\FrameworkBundle\Component\HttpFoundation\TransactionalMasterRequestService:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
-  Shopsys\FrameworkBundle\Component\Request\VaryResponseByXRequestedWithHeaderListener:
+  Shopsys\FrameworkBundle\Component\HttpFoundation\VaryResponseByXRequestedWithHeaderListener:
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
