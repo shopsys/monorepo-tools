@@ -18,14 +18,21 @@ class VatInlineEdit extends AbstractGridInlineEdit
      */
     private $formFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface
+     */
+    private $vatDataFactory;
+
     public function __construct(
         VatGridFactory $vatGridFactory,
         VatFacade $vatFacade,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        VatDataFactoryInterface $vatDataFactory
     ) {
         parent::__construct($vatGridFactory);
         $this->vatFacade = $vatFacade;
         $this->formFactory = $formFactory;
+        $this->vatDataFactory = $vatDataFactory;
     }
 
     /**
@@ -54,11 +61,11 @@ class VatInlineEdit extends AbstractGridInlineEdit
      */
     public function getForm($vatId)
     {
-        $vatData = new VatData();
-
         if ($vatId !== null) {
             $vat = $this->vatFacade->getById((int)$vatId);
-            $vatData->setFromEntity($vat);
+            $vatData = $this->vatDataFactory->createFromVat($vat);
+        } else {
+            $vatData = $this->vatDataFactory->create();
         }
 
         return $this->formFactory->create(VatFormType::class, $vatData, [

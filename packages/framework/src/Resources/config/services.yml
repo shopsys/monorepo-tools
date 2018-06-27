@@ -864,3 +864,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactory
+
+  Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactory

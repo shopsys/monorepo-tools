@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Order\Item;
 
 use Shopsys\FrameworkBundle\Model\Pricing\Price;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation;
-use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface;
 
 class OrderItemPriceCalculation
@@ -20,15 +20,18 @@ class OrderItemPriceCalculation
     protected $vatFactory;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation $priceCalculation
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface $vatFactory
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface
      */
+    private $vatDataFactory;
+
     public function __construct(
         PriceCalculation $priceCalculation,
-        VatFactoryInterface $vatFactory
+        VatFactoryInterface $vatFactory,
+        VatDataFactoryInterface $vatDataFactory
     ) {
         $this->priceCalculation = $priceCalculation;
         $this->vatFactory = $vatFactory;
+        $this->vatDataFactory = $vatDataFactory;
     }
 
     /**
@@ -37,7 +40,7 @@ class OrderItemPriceCalculation
      */
     public function calculatePriceWithoutVat(OrderItemData $orderItemData)
     {
-        $vatData = new VatData();
+        $vatData = $this->vatDataFactory->create();
         $vatData->name = 'orderItemVat';
         $vatData->percent = $orderItemData->vatPercent;
         $vat = $this->vatFactory->create($vatData);
@@ -52,7 +55,7 @@ class OrderItemPriceCalculation
      */
     public function calculateTotalPrice(OrderItem $orderItem)
     {
-        $vatData = new VatData();
+        $vatData = $this->vatDataFactory->create();
         $vatData->name = 'orderItemVat';
         $vatData->percent = $orderItem->getVatPercent();
         $vat = $this->vatFactory->create($vatData);
