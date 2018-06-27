@@ -85,7 +85,7 @@ class GenerateMigrationCommand extends AbstractCommand
 
         $filteredSchemaDiffSqlCommands = $this->databaseSchemaFacade->getFilteredSchemaDiffSqlCommands();
         if (count($filteredSchemaDiffSqlCommands) === 0) {
-            $output->writeln('<info>Database schema is satisfying ORM, no migrations was generated.</info>');
+            $output->writeln('<info>Database schema is satisfying ORM, no migrations were generated.</info>');
 
             return self::RETURN_CODE_OK;
         }
