@@ -5,7 +5,6 @@ namespace Shopsys\FrameworkBundle\DataFixtures;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\FlagDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Base\FulltextTriggersDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture as BasePricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
@@ -191,7 +190,6 @@ class ProductDataFixtureReferenceInjector
     public static function getDependenciesForFirstDomain()
     {
         return [
-            FulltextTriggersDataFixture::class,
             VatDataFixture::class,
             AvailabilityDataFixture::class,
             CategoryDataFixture::class,

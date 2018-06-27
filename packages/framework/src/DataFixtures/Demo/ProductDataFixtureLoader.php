@@ -160,7 +160,7 @@ class ProductDataFixtureLoader
     private function updateProductDataFromCsvRowForFirstDomain(ProductData $productData, array $row)
     {
         $domainId = 1;
-        $productData->name['cs'] = $row[self::COLUMN_NAME_CS];
+
         $productData->name['en'] = $row[self::COLUMN_NAME_EN];
         $productData->catnum = $row[self::COLUMN_CATNUM];
         $productData->partno = $row[self::COLUMN_PARTNO];
@@ -237,6 +237,7 @@ class ProductDataFixtureLoader
         $domainId = 2;
         $productData->descriptions[$domainId] = $row[$this->getDescriptionColumnForDomain($domainId)];
         $productData->shortDescriptions[$domainId] = $row[$this->getShortDescriptionColumnForDomain($domainId)];
+        $productData->name['cs'] = $row[self::COLUMN_NAME_CS];
         $this->setProductDataPricesFromCsv($row, $productData, $domainId);
         $productData->categoriesByDomainId[$domainId] =
             $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_2], $this->categories);

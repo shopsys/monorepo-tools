@@ -1,31 +1,103 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\DataFixtures\Base;
+namespace Shopsys\FrameworkBundle\Migrations;
 
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\FrameworkBundle\Component\DataFixture\AbstractNativeFixture;
+use Doctrine\DBAL\Schema\Schema;
+use Shopsys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;
 
-class FulltextTriggersDataFixture extends AbstractNativeFixture implements DependentFixtureInterface
+class Version20180603135340 extends AbstractMigration
 {
     /**
-     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function load(ObjectManager $manager)
+    public function up(Schema $schema)
     {
+        $this->createGetDomainIdsByLocaleFunction();
+        $this->createGetDomainLocaleFunction();
+        $this->createImmutableUnaccentFunction();
+        $this->createNormalizeFunction();
+        $this->createDefaultDbIndexes();
         $this->createProductCatnumTrigger();
         $this->createProductPartnoTrigger();
         $this->createProductTranslationNameTrigger();
         $this->createProductDomainDescriptionTrigger();
-
         $this->createProductDomainFulltextTriggerOnProduct();
         $this->createProductDomainFulltextTriggerOnProductTranslation();
         $this->createProductDomainFulltextTriggerOnProductDomain();
     }
 
-    private function createProductCatnumTrigger()
+    /**
+     * @param \Doctrine\DBAL\Schema\Schema $schema
+     */
+    public function down(Schema $schema)
     {
-        $this->executeNativeQuery('
+    }
+
+    private function createGetDomainIdsByLocaleFunction(): void
+    {
+        $this->sql('CREATE OR REPLACE FUNCTION get_domain_ids_by_locale(locale text) RETURNS SETOF integer AS $$
+            BEGIN
+                CASE
+                    WHEN locale = \'en\' THEN RETURN NEXT 1;
+                    ELSE RAISE EXCEPTION \'Locale % does not exists\', locale;
+                END CASE;
+            END
+            $$ LANGUAGE plpgsql IMMUTABLE;');
+    }
+
+    private function createGetDomainLocaleFunction(): void
+    {
+        $this->sql('CREATE OR REPLACE FUNCTION get_domain_locale(domain_id integer) RETURNS text AS $$
+            BEGIN
+                CASE
+                    WHEN domain_id = 1 THEN RETURN \'en\';
+                    ELSE RAISE EXCEPTION \'Domain with ID % does not exists\', domain_id;
+                END CASE;
+            END
+            $$ LANGUAGE plpgsql IMMUTABLE;');
+    }
+
+    private function createImmutableUnaccentFunction(): void
+    {
+        $this->sql('CREATE OR REPLACE FUNCTION immutable_unaccent(text)
+            RETURNS text AS
+            $$
+            SELECT pg_catalog.unaccent(\'pg_catalog.unaccent\', $1)
+            $$
+            LANGUAGE SQL IMMUTABLE');
+    }
+
+    private function createNormalizeFunction(): void
+    {
+        $this->sql('CREATE OR REPLACE FUNCTION normalize(text)
+            RETURNS text AS
+            $$
+            SELECT pg_catalog.lower(public.immutable_unaccent($1))
+            $$
+            LANGUAGE SQL IMMUTABLE');
+    }
+
+    private function createDefaultDbIndexes(): void
+    {
+        $this->sql('CREATE INDEX IF NOT EXISTS product_translations_name_normalize_idx
+            ON product_translations (NORMALIZE(name))');
+        $this->sql('CREATE INDEX IF NOT EXISTS product_catnum_normalize_idx
+            ON products (NORMALIZE(catnum))');
+        $this->sql('CREATE INDEX IF NOT EXISTS product_partno_normalize_idx
+            ON products (NORMALIZE(partno))');
+        $this->sql('CREATE INDEX IF NOT EXISTS order_email_normalize_idx
+            ON orders (NORMALIZE(email))');
+        $this->sql('CREATE INDEX IF NOT EXISTS order_last_name_normalize_idx
+            ON orders (NORMALIZE(last_name))');
+        $this->sql('CREATE INDEX IF NOT EXISTS order_company_name_normalize_idx
+            ON orders (NORMALIZE(company_name))');
+        $this->sql('CREATE INDEX IF NOT EXISTS user_email_normalize_idx
+            ON users (NORMALIZE(email))');
+    }
+
+    private function createProductCatnumTrigger(): void
+    {
+        $this->sql('
             CREATE OR REPLACE FUNCTION set_product_catnum_tsvector() RETURNS trigger AS $$
                 BEGIN
                     NEW.catnum_tsvector := to_tsvector(coalesce(NEW.catnum, \'\'));
@@ -34,7 +106,7 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
             $$ LANGUAGE plpgsql;
         ');
 
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE TRIGGER recalc_catnum_tsvector
             BEFORE INSERT OR UPDATE OF catnum
             ON products
@@ -43,9 +115,9 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
     }
 
-    private function createProductPartnoTrigger()
+    private function createProductPartnoTrigger(): void
     {
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE OR REPLACE FUNCTION set_product_partno_tsvector() RETURNS trigger AS $$
                 BEGIN
                     NEW.partno_tsvector := to_tsvector(coalesce(NEW.partno, \'\'));
@@ -54,7 +126,7 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
             $$ LANGUAGE plpgsql;
         ');
 
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE TRIGGER recalc_partno_tsvector
             BEFORE INSERT OR UPDATE OF partno
             ON products
@@ -63,9 +135,9 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
     }
 
-    private function createProductTranslationNameTrigger()
+    private function createProductTranslationNameTrigger(): void
     {
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE OR REPLACE FUNCTION set_product_translation_name_tsvector() RETURNS trigger AS $$
                 BEGIN
                     NEW.name_tsvector := to_tsvector(coalesce(NEW.name, \'\'));
@@ -74,7 +146,7 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
             $$ LANGUAGE plpgsql;
         ');
 
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE TRIGGER recalc_name_tsvector
             BEFORE INSERT OR UPDATE OF name
             ON product_translations
@@ -83,9 +155,9 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
     }
 
-    private function createProductDomainDescriptionTrigger()
+    private function createProductDomainDescriptionTrigger(): void
     {
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE OR REPLACE FUNCTION set_product_domain_description_tsvector() RETURNS trigger AS $$
                 BEGIN
                     NEW.description_tsvector := to_tsvector(coalesce(NEW.description, \'\'));
@@ -94,7 +166,7 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
             $$ LANGUAGE plpgsql;
         ');
 
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE TRIGGER recalc_description_tsvector
             BEFORE INSERT OR UPDATE OF description
             ON product_domains
@@ -103,9 +175,9 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
     }
 
-    private function createProductDomainFulltextTriggerOnProduct()
+    private function createProductDomainFulltextTriggerOnProduct(): void
     {
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE OR REPLACE FUNCTION update_product_domain_fulltext_tsvector_by_product() RETURNS trigger AS $$
                 BEGIN
                     UPDATE product_domains pd
@@ -130,7 +202,7 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
             $$ LANGUAGE plpgsql;
         ');
 
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE TRIGGER recalc_product_domain_fulltext_tsvector
             AFTER INSERT OR UPDATE OF catnum, partno
             ON products
@@ -139,9 +211,9 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
     }
 
-    private function createProductDomainFulltextTriggerOnProductTranslation()
+    private function createProductDomainFulltextTriggerOnProductTranslation(): void
     {
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE OR REPLACE FUNCTION update_product_domain_fulltext_tsvector_by_product_translation() RETURNS trigger AS $$
                 BEGIN
                     UPDATE product_domains pd
@@ -166,7 +238,7 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
             $$ LANGUAGE plpgsql;
         ');
 
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE TRIGGER recalc_product_domain_fulltext_tsvector
             AFTER INSERT OR UPDATE OF name
             ON product_translations
@@ -175,9 +247,9 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
     }
 
-    private function createProductDomainFulltextTriggerOnProductDomain()
+    private function createProductDomainFulltextTriggerOnProductDomain(): void
     {
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE OR REPLACE FUNCTION set_product_domain_fulltext_tsvector() RETURNS trigger AS $$
                 BEGIN
                     NEW.fulltext_tsvector :=
@@ -203,25 +275,15 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
             $$ LANGUAGE plpgsql;
         ');
 
-        $this->executeNativeQuery('
+        $this->sql('
             DROP TRIGGER IF EXISTS recalc_product_domain_fulltext_tsvector on product_domains;
         ');
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE TRIGGER recalc_product_domain_fulltext_tsvector
             BEFORE INSERT OR UPDATE OF description, short_description
             ON product_domains
             FOR EACH ROW
             EXECUTE PROCEDURE set_product_domain_fulltext_tsvector();
         ');
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDependencies()
-    {
-        return [
-            DomainDbFunctionsDataFixture::class,
-        ];
     }
 }
