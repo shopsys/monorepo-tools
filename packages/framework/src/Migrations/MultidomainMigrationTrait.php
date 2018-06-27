@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Migration;
+namespace Shopsys\FrameworkBundle\Migrations;
 
 use PDO;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
