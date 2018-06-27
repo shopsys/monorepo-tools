@@ -6,26 +6,20 @@
   route: admin_order_list
   icon: document-copy
   items:
-    - label: 'Orders overview'
-      route: admin_order_list
-      items:
-        - label: 'Editing order'
-          route: admin_order_edit
-          visible: false
+    - label: 'Editing order'
+      route: admin_order_edit
+      visible: false
 
 - label: 'Customers'
   route: admin_customer_list
   icon: person-public
   items:
-    - label: 'Registered customers'
-      route: admin_customer_list
-      items:
-        - label: 'New customer'
-          route: admin_customer_new
-          visible: false
-        - label: 'Editing customer'
-          route: admin_customer_edit
-          visible: false
+    - label: 'New customer'
+      route: admin_customer_new
+      visible: false
+    - label: 'Editing customer'
+      route: admin_customer_edit
+      visible: false
 
 - label: 'Products'
   route: admin_product_list
@@ -118,15 +112,12 @@
   route: admin_administrator_list
   icon: person-door-man
   items:
-    - label: 'Administrators overview'
-      route: admin_administrator_list
-      items:
-        - label: 'New administrator'
-          route: admin_administrator_new
-          visible: false
-        - label: 'Editing administrator'
-          route: admin_administrator_edit
-          visible: false
+    - label: 'New administrator'
+      route: admin_administrator_new
+      visible: false
+    - label: 'Editing administrator'
+      route: admin_administrator_edit
+      visible: false
 
 - label: 'Settings'
   route: admin_domain_list
