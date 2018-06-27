@@ -23,14 +23,9 @@ class MenuController extends AdminBaseController
         $this->domainFacade = $domainFacade;
     }
 
-    public function menuAction($route, array $parameters = null)
+    public function menuAction()
     {
-        $menu = $this->menuFactory->createMenuWithAllowedItems();
-        $activePath = $menu->getMenuPath($route, $parameters);
-
         return $this->render('@ShopsysFramework/Admin/Inline/Menu/menu.html.twig', [
-            'menu' => $menu,
-            'activePath' => $activePath,
             'domainConfigs' => $this->domainFacade->getAllDomainConfigs(),
         ]);
     }
@@ -41,7 +36,7 @@ class MenuController extends AdminBaseController
         $activePath = $menu->getMenuPath($route, $parameters);
 
         return $this->render('@ShopsysFramework/Admin/Inline/Menu/panel.html.twig', [
-            'items' => $menu->getRegularItems(),
+            'items' => $menu->getItems(),
             'activePath' => $activePath,
         ]);
     }

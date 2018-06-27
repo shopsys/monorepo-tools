@@ -72,7 +72,6 @@ class MenuFactory
 
                 $allowedMenuItems[] = new MenuItem(
                     $menuItem->getLabel(),
-                    $menuItem->getType(),
                     $menuItem->getRoute(),
                     $menuItem->getRouteParameters(),
                     $menuItem->isVisible(),

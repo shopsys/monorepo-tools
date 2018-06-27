@@ -98,7 +98,6 @@ class MenuLoader
         $item = new MenuItem(
             /** @Ignore Extraction of labels in YAML file is done by \Shopsys\FrameworkBundle\Component\Translation\AdminMenuYamlFileExtractor */
             $this->translator->trans($menuItemData['label']),
-            isset($menuItemData['type']) ? $menuItemData['type'] : null,
             isset($menuItemData['route']) ? $menuItemData['route'] : null,
             isset($menuItemData['route_parameters']) ? $menuItemData['route_parameters'] : null,
             isset($menuItemData['visible']) ? $menuItemData['visible'] : null,

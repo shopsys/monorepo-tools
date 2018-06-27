@@ -21,10 +21,7 @@
                         <img class="web__header__logo__svg" src="{{ asset('assets/admin/images/logo.svg') }}" alt="{{ 'Shopsys Framework'|trans }}">
 
                     </div>
-                    {{ render(controller('ShopsysFrameworkBundle:Admin/Menu:menu', {
-                        route: getRoute(),
-                        parameters: getRouteParams()
-                    } )) }}
+                    {{ render(controller('ShopsysFrameworkBundle:Admin/Menu:menu')) }}
                 </div>
             </header>
         {% endblock %}

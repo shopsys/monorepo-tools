@@ -275,15 +275,3 @@
       items:
       - label: 'Heureka - Verified by Customer'
         route: admin_heureka_setting
-
-- label: 'Frontend'
-  type: domains
-  icon: forward-page
-
-- label: 'Account'
-  route: admin_domain_list
-  type: account
-  icon: person-man
-  items:
-  - label: 'My account'
-    route: admin_administrator_myaccount

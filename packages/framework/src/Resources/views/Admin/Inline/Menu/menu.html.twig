@@ -2,9 +2,9 @@
     <li class="js-toggle-menu-item navig__item" >
         <div
                 class="navig__item__link navig__item__link--bordered"
-                title="{{ menu.domainsItem.label|trans }}"
+                title="{{ 'Frontend'|trans }}"
         >
-            <i class="svg svg-{{ menu.domainsItem.icon }}"></i>
+            <i class="svg svg-forward-page"></i>
         </div>
         <ul class="js-toggle-menu-submenu display-none navig__item__sub">
             {% for domainConfig in domainConfigs %}
@@ -17,19 +17,17 @@
 
     <li class="js-toggle-menu-item navig__item" >
         <div
-                class="navig__item__link navig__item__link--bordered {% if menu.accountItem in activePath %}navig__item__link--active{% endif %}"
-                title="{{ menu.accountItem.label|trans }}"
+                class="navig__item__link navig__item__link--bordered"
+                title="{{ 'Account'|trans }}"
         >
-            <i class="svg svg-{{ menu.accountItem.icon }}"></i>
+            <i class="svg svg-person-man"></i>
         </div>
         <ul class="js-toggle-menu-submenu display-none navig__item__sub">
-            {% for item in menu.accountItem.items %}
-                {% if (item.visible) %}
-                    <li class="navig__item__sub__item">
-                        <a href="{{ url(item.route, item.routeParameters) }}" class="navig__item__sub__item__link" title="{{ item.label }}">{{ item.label }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
+            <li class="navig__item__sub__item">
+                <a href="{{ url('admin_administrator_myaccount') }}" class="navig__item__sub__item__link" title="{{ 'My account'|trans }}">
+                    {{ 'My account'|trans }}
+                </a>
+            </li>
             <li class="navig__item__sub__item">
                 <a href="{{ url('admin_logout', { _csrf_token: csrf_token('admin_logout')}) }}" class="navig__item__sub__item__link" title="{{ 'Log out'|trans }}">
                     {{ 'Log out'|trans }}

@@ -10,38 +10,11 @@ class Menu
     private $items;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
-     */
-    private $regularItems;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
-     */
-    private $accountItem;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
-     */
-    private $domainsItem;
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[] $items
      */
     public function __construct(array $items)
     {
         $this->items = $items;
-
-        $this->regularItems = [];
-
-        foreach ($items as $item) {
-            if ($item->getType() === MenuItem::TYPE_REGULAR) {
-                $this->regularItems[] = $item;
-            } elseif ($item->getType() === MenuItem::TYPE_ACCOUNT) {
-                $this->accountItem = $item;
-            } elseif ($item->getType() === MenuItem::TYPE_DOMAINS) {
-                $this->domainsItem = $item;
-            }
-        }
     }
 
     /**
@@ -50,30 +23,6 @@ class Menu
     public function getItems()
     {
         return $this->items;
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
-     */
-    public function getRegularItems()
-    {
-        return $this->regularItems;
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
-     */
-    public function getAccountItem()
-    {
-        return $this->accountItem;
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
-     */
-    public function getDomainsItem()
-    {
-        return $this->domainsItem;
     }
 
     /**

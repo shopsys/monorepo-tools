@@ -4,20 +4,10 @@ namespace Shopsys\FrameworkBundle\Model\AdminNavigation;
 
 class MenuItem
 {
-    const TYPE_REGULAR = 'regular';
-    const TYPE_SETTINGS = 'settings';
-    const TYPE_ACCOUNT = 'account';
-    const TYPE_DOMAINS = 'domains';
-
     /**
      * @var string
      */
     private $label;
-
-    /**
-     * @var string
-     */
-    private $type;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
@@ -56,7 +46,6 @@ class MenuItem
 
     /**
      * @param string $label
-     * @param string|null $type
      * @param string|null $route
      * @param array|null $routeParameters
      * @param bool $visible
@@ -67,7 +56,6 @@ class MenuItem
      */
     public function __construct(
         $label,
-        $type = null,
         $route = null,
         array $routeParameters = null,
         $visible = true,
@@ -76,12 +64,6 @@ class MenuItem
         $multidomainOnly = false,
         array $items = []
     ) {
-        if (isset($type)) {
-            $this->setType($type);
-        } else {
-            $this->setType(self::TYPE_REGULAR);
-        }
-
         $this->label = $label;
         $this->route = $route;
 
@@ -119,14 +101,6 @@ class MenuItem
     public function getLabel()
     {
         return $this->label;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**
@@ -183,31 +157,5 @@ class MenuItem
     public function getIcon()
     {
         return $this->icon;
-    }
-
-    /**
-     * @param string $type
-     */
-    private function setType($type)
-    {
-        if (!in_array($type, $this->getTypes(), true)) {
-            throw new \Shopsys\FrameworkBundle\Model\AdminNavigation\Exception\InvalidItemTypeException(
-                $type . ' is not a valid item type. Supported types are: ' . implode(', ', $this->getTypes()) . '.'
-            );
-        }
-        $this->type = $type;
-    }
-
-    /**
-     * @return array
-     */
-    private function getTypes()
-    {
-        return [
-            self::TYPE_REGULAR,
-            self::TYPE_SETTINGS,
-            self::TYPE_ACCOUNT,
-            self::TYPE_DOMAINS,
-        ];
     }
 }
