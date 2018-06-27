@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Component\Form;
 
 use DateTime;
-use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class FormTimeProvider

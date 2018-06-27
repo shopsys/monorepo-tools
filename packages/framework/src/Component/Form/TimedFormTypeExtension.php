@@ -1,9 +1,7 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Form;
+namespace Shopsys\FrameworkBundle\Component\Form;
 
-use Shopsys\FrameworkBundle\Component\Form\FormTimeProvider;
-use Shopsys\FrameworkBundle\Component\Form\TimedSpamValidationListener;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;

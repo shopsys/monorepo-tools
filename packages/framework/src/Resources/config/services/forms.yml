@@ -27,7 +27,7 @@ services:
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\MoneyType }
 
-  Shopsys\FrameworkBundle\Form\TimedFormTypeExtension:
+  Shopsys\FrameworkBundle\Component\Form\TimedFormTypeExtension:
     tags:
       - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
