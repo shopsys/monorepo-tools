@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface;
@@ -30,15 +30,22 @@ class ProductParametersFixtureLoader
      */
     private $parameterValueDataFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterDataFactoryInterface
+     */
+    private $parameterDataFactory;
+
     public function __construct(
         ParameterFacade $parameterFacade,
         ProductParameterValueDataFactoryInterface $productParameterValueDataFactory,
-        ParameterValueDataFactoryInterface $parameterValueDataFactory
+        ParameterValueDataFactoryInterface $parameterValueDataFactory,
+        ParameterDataFactoryInterface $parameterDataFactory
     ) {
         $this->parameterFacade = $parameterFacade;
         $this->parameters = [];
         $this->productParameterValueDataFactory = $productParameterValueDataFactory;
         $this->parameterValueDataFactory = $parameterValueDataFactory;
+        $this->parameterDataFactory = $parameterDataFactory;
     }
 
     /**
@@ -130,7 +137,7 @@ class ProductParametersFixtureLoader
 
         if ($parameter === null) {
             $visible = true;
-            $parameterData = new ParameterData();
+            $parameterData = $this->parameterDataFactory->create();
             $parameterData->name = $parameterNamesByLocale;
             $parameterData->visible = $visible;
             $parameter = $this->parameterFacade->create($parameterData);

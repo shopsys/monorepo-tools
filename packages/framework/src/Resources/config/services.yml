@@ -882,3 +882,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterDataFactory

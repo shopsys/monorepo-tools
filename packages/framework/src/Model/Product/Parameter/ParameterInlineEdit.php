@@ -18,14 +18,21 @@ class ParameterInlineEdit extends AbstractGridInlineEdit
      */
     private $formFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterDataFactoryInterface
+     */
+    private $parameterDataFactory;
+
     public function __construct(
         ParameterGridFactory $parameterGridFactory,
         ParameterFacade $parameterFacade,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        ParameterDataFactoryInterface $parameterDataFactory
     ) {
         parent::__construct($parameterGridFactory);
         $this->parameterFacade = $parameterFacade;
         $this->formFactory = $formFactory;
+        $this->parameterDataFactory = $parameterDataFactory;
     }
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
@@ -53,11 +60,11 @@ class ParameterInlineEdit extends AbstractGridInlineEdit
      */
     public function getForm($parameterId)
     {
-        $parameterData = new ParameterData();
-
         if ($parameterId !== null) {
             $parameter = $this->parameterFacade->getById((int)$parameterId);
-            $parameterData->setFromEntity($parameter);
+            $parameterData = $this->parameterDataFactory->createFromParameter($parameter);
+        } else {
+            $parameterData = $this->parameterDataFactory->create();
         }
 
         return $this->formFactory->create(ParameterFormType::class, $parameterData);
