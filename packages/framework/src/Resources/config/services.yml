@@ -276,12 +276,11 @@ services:
     factory: ['@Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory', create]
     synthetic: false
 
-  Shopsys\FrameworkBundle\Component\Log\SlowLogFacade:
+  Shopsys\FrameworkBundle\Component\Log\SlowLogSubscriber:
     arguments:
       - '@monolog.logger.slow'
     tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-      - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
+      - { name: kernel.event_subscriber }
 
   Shopsys\FrameworkBundle\Component\Request\TransactionalMasterRequestService:
     tags:

@@ -3,10 +3,12 @@
 namespace Shopsys\FrameworkBundle\Component\Log;
 
 use Symfony\Bridge\Monolog\Logger;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\PostResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
-class SlowLogFacade
+class SlowLogSubscriber implements EventSubscriberInterface
 {
     const REQUEST_TIME_LIMIT_SECONDS = 2;
 
@@ -29,7 +31,7 @@ class SlowLogFacade
     /**
      * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function initStartTime(GetResponseEvent $event)
     {
         if ($event->isMasterRequest()) {
             $this->startTime = microtime(true);
@@ -39,7 +41,7 @@ class SlowLogFacade
     /**
      * @param \Symfony\Component\HttpKernel\Event\PostResponseEvent $event
      */
-    public function onKernelTerminate(PostResponseEvent $event)
+    public function addNotice(PostResponseEvent $event)
     {
         $requestTime = $this->getRequestTime();
         if ($requestTime > self::REQUEST_TIME_LIMIT_SECONDS) {
@@ -57,5 +59,16 @@ class SlowLogFacade
     protected function getRequestTime()
     {
         return microtime(true) - $this->startTime;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            KernelEvents::REQUEST => 'initStartTime',
+            KernelEvents::TERMINATE => 'addNotice',
+        ];
     }
 }
