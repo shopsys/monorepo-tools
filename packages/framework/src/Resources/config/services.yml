@@ -849,3 +849,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeDataFactory
+
+  Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusDataFactory
