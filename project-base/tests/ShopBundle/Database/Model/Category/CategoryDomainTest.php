@@ -64,6 +64,9 @@ class CategoryDomainTest extends DatabaseTestCase
         $this->assertFalse($refreshedCategory->isEnabled(self::FIRST_DOMAIN_ID));
     }
 
+    /**
+     * @group multidomain
+     */
     public function testCreateCategoryWithDifferentVisibilityOnDomains()
     {
         $categoryData = $this->categoryDataFactory->createDefault();
@@ -79,6 +82,9 @@ class CategoryDomainTest extends DatabaseTestCase
         $this->assertFalse($refreshedCategory->isEnabled(self::SECOND_DOMAIN_ID));
     }
 
+    /**
+     * @group multidomain
+     */
     public function testCreateCategoryDomainWithData()
     {
         $categoryData = $this->categoryDataFactory->createDefault();
@@ -97,6 +103,26 @@ class CategoryDomainTest extends DatabaseTestCase
         $this->assertNull($refreshedCategory->getSeoMetaDescription(self::FIRST_DOMAIN_ID));
         $this->assertSame(self::DEMONSTRATIVE_SEO_H1, $refreshedCategory->getSeoH1(self::FIRST_DOMAIN_ID));
         $this->assertNull($refreshedCategory->getSeoH1(self::SECOND_DOMAIN_ID));
+    }
+
+    /**
+     * @group singledomain
+     */
+    public function testCreateCategoryDomainWithDataForSingleDomain()
+    {
+        $categoryData = $this->categoryDataFactory->createDefault();
+
+        $categoryData->seoTitles[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_TITLE;
+        $categoryData->seoMetaDescriptions[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_META_DESCRIPTION;
+        $categoryData->seoH1s[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_H1;
+
+        $category = $this->categoryFactory->create($categoryData);
+
+        $refreshedCategory = $this->getRefreshedCategoryFromDatabase($category);
+
+        $this->assertSame(self::DEMONSTRATIVE_SEO_TITLE, $refreshedCategory->getSeoTitle(self::FIRST_DOMAIN_ID));
+        $this->assertSame(self::DEMONSTRATIVE_SEO_META_DESCRIPTION, $refreshedCategory->getSeoMetaDescription(self::FIRST_DOMAIN_ID));
+        $this->assertSame(self::DEMONSTRATIVE_SEO_H1, $refreshedCategory->getSeoH1(self::FIRST_DOMAIN_ID));
     }
 
     /**

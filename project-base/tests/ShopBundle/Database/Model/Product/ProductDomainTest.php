@@ -41,6 +41,9 @@ class ProductDomainTest extends DatabaseTestCase
         $this->em = $this->getEntityManager();
     }
 
+    /**
+     * @group multidomain
+     */
     public function testCreateProductDomainWithData()
     {
         $productData = $this->productDataFactory->createDefault();
@@ -67,6 +70,32 @@ class ProductDomainTest extends DatabaseTestCase
         $this->assertNull($refreshedProduct->getDescription(self::FIRST_DOMAIN_ID));
         $this->assertSame(self::DEMONSTRATIVE_SHORT_DESCRIPTION, $refreshedProduct->getShortDescription(self::FIRST_DOMAIN_ID));
         $this->assertNull($refreshedProduct->getShortDescription(self::SECOND_DOMAIN_ID));
+    }
+
+    /**
+     * @group singledomain
+     */
+    public function testCreateProductDomainWithDataForSingleDomain()
+    {
+        $productData = $this->productDataFactory->createDefault();
+
+        $productData->seoTitles[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_TITLE;
+        $productData->seoMetaDescriptions[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_META_DESCRIPTION;
+        $productData->seoH1s[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_H1;
+        $productData->descriptions[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_DESCRIPTION;
+        $productData->shortDescriptions[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SHORT_DESCRIPTION;
+        $productData->availability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
+        $productData->outOfStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_OUT_OF_STOCK);
+
+        $product = $this->productFactory->create($productData);
+
+        $refreshedProduct = $this->getRefreshedProductFromDatabase($product);
+
+        $this->assertSame(self::DEMONSTRATIVE_SEO_TITLE, $refreshedProduct->getSeoTitle(self::FIRST_DOMAIN_ID));
+        $this->assertSame(self::DEMONSTRATIVE_SEO_META_DESCRIPTION, $refreshedProduct->getSeoMetaDescription(self::FIRST_DOMAIN_ID));
+        $this->assertSame(self::DEMONSTRATIVE_SEO_H1, $refreshedProduct->getSeoH1(self::FIRST_DOMAIN_ID));
+        $this->assertSame(self::DEMONSTRATIVE_DESCRIPTION, $refreshedProduct->getDescription(self::FIRST_DOMAIN_ID));
+        $this->assertSame(self::DEMONSTRATIVE_SHORT_DESCRIPTION, $refreshedProduct->getShortDescription(self::FIRST_DOMAIN_ID));
     }
 
     /**

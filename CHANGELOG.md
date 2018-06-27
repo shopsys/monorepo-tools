@@ -114,6 +114,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#229 - php-fpm/Dockerfile: switch to another mirror of alpine linux repository](https://github.com/shopsys/shopsys/pull/229):
     - fix uninstallable postgres 9.5 by using repository https://dl-cdn.alpinelinux.org/alpine/ instead of https://dl-3.alpinelinux.org/alpine/
 - [#242 - php-fpm/Dockerfile: drop usage of https when accessing dl-cdn.alpinelinux.org](https://github.com/shopsys/shopsys/pull/242)
+- [#277 - Tests fail when only one domain is set](https://github.com/shopsys/shopsys/issues/277)
 
 #### Security
 - [#178 - JsFormValidatorBundle security issue with Ajax validation](https://github.com/shopsys/shopsys/pull/178)

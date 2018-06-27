@@ -37,6 +37,9 @@ class BrandDomainTest extends DatabaseTestCase
         $this->em = $this->getEntityManager();
     }
 
+    /**
+     * @group multidomain
+     */
     public function testCreateBrandDomain()
     {
         $brandData = $this->brandDataFactory->createDefault();
@@ -52,6 +55,24 @@ class BrandDomainTest extends DatabaseTestCase
         $this->assertNull($refreshedBrand->getSeoTitle(self::SECOND_DOMAIN_ID));
         $this->assertSame(self::DEMONSTRATIVE_SEO_H1, $refreshedBrand->getSeoH1(self::SECOND_DOMAIN_ID));
         $this->assertNull($refreshedBrand->getSeoH1(self::FIRST_DOMAIN_ID));
+    }
+
+    /**
+     * @group singledomain
+     */
+    public function testCreateBrandDomainForSingleDomain()
+    {
+        $brandData = $this->brandDataFactory->createDefault();
+
+        $brandData->seoTitles[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_TITLE;
+        $brandData->seoH1s[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_H1;
+
+        $brand = $this->brandFactory->create($brandData);
+
+        $refreshedBrand = $this->getRefreshedBrandFromDatabase($brand);
+
+        $this->assertSame(self::DEMONSTRATIVE_SEO_TITLE, $refreshedBrand->getSeoTitle(self::FIRST_DOMAIN_ID));
+        $this->assertSame(self::DEMONSTRATIVE_SEO_H1, $refreshedBrand->getSeoH1(self::FIRST_DOMAIN_ID));
     }
 
     /**
