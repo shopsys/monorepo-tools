@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use Shopsys\FrameworkBundle\Component\Gedmo\SortablePosition;
 use Shopsys\FrameworkBundle\Component\Grid\Ordering\OrderableEntityInterface;
 use Shopsys\FrameworkBundle\Model\Localization\AbstractTranslatableEntity;
 use Shopsys\FrameworkBundle\Model\Payment\Exception\PaymentDomainNotFoundException;
@@ -20,6 +19,8 @@ use Shopsys\FrameworkBundle\Model\Transport\Transport;
  */
 class Payment extends AbstractTranslatableEntity implements OrderableEntityInterface
 {
+    private const GEDMO_SORTABLE_LAST_POSITION = -1;
+
     /**
      * @var int
      *
@@ -110,7 +111,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
         $this->createDomains($paymentData);
         $this->prices = new ArrayCollection();
         $this->czkRounding = $paymentData->czkRounding;
-        $this->position = SortablePosition::LAST_POSITION;
+        $this->position = self::GEDMO_SORTABLE_LAST_POSITION;
     }
 
     /**
