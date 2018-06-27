@@ -4,18 +4,12 @@ namespace Tests\ShopBundle\Database\Config;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuFactory;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuLoader;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Tests\ShopBundle\Test\FunctionalTestCase;
 
 class AdminNavigationTest extends FunctionalTestCase
 {
-    public function testHasSettingsItem()
-    {
-        $this->assertInstanceOf(MenuItem::class, $this->getMenu()->getSettingsItem());
-    }
-
     public function testResolveRoutes()
     {
         $this->resolveRoutesRecursive($this->getMenu()->getItems());
