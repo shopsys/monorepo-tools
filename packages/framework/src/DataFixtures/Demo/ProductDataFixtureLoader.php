@@ -6,7 +6,7 @@ use DateTime;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
-use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 
 class ProductDataFixtureLoader
 {
@@ -78,7 +78,7 @@ class ProductDataFixtureLoader
     private $pricingGroups;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface
      */
     private $productDataFactory;
 
@@ -89,7 +89,7 @@ class ProductDataFixtureLoader
 
     public function __construct(
         ProductParametersFixtureLoader $productParametersFixtureLoader,
-        ProductDataFactory $productDataFactory,
+        ProductDataFactoryInterface $productDataFactory,
         Domain $domain
     ) {
         $this->productParametersFixtureLoader = $productParametersFixtureLoader;
@@ -131,7 +131,7 @@ class ProductDataFixtureLoader
      */
     public function createProductDataFromRowForFirstDomain($row)
     {
-        $productData = $this->productDataFactory->createDefault();
+        $productData = $this->productDataFactory->create();
         $this->updateProductDataFromCsvRowForFirstDomain($productData, $row);
 
         return $productData;

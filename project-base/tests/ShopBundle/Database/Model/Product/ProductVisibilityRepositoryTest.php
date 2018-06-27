@@ -38,7 +38,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
         /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
 
-        $productData = $productDataFactory->createDefault();
+        $productData = $productDataFactory->create();
         $productData->name = ['cs' => 'Name', 'en' => 'Name'];
         $productData->vat = $vat;
         $productData->price = 100;

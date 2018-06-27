@@ -33,7 +33,7 @@ class ProductServiceTest extends DatabaseTestCase
 
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
-        $productData = $producDataFactory->createDefault();
+        $productData = $producDataFactory->create();
         $productData->price = 1000;
         $productData->vat = $vat;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);
@@ -64,7 +64,7 @@ class ProductServiceTest extends DatabaseTestCase
 
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
-        $productData = $productDataFactory->createDefault();
+        $productData = $productDataFactory->create();
         $productData->price = 1000;
         $productData->vat = $vat;
         $productData->unit = $this->getReference(UnitDataFixture::UNIT_PIECES);

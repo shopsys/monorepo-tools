@@ -888,3 +888,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\ProductDataFactory

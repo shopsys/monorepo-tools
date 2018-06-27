@@ -29,7 +29,7 @@ class CartItemTest extends DatabaseTestCase
         $availabilityData = new AvailabilityData();
         $availabilityData->dispatchTime = 0;
         $availability = new Availability($availabilityData);
-        $productData = $productDataFactory->createDefault();
+        $productData = $productDataFactory->create();
         $productData->name = [];
         $productData->price = 100;
         $productData->vat = $vat;

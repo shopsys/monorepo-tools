@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFac
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceFacade;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 
-class ProductDataFactory
+class ProductDataFactory implements ProductDataFactoryInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade
@@ -99,10 +99,19 @@ class ProductDataFactory
     /**
      * @return \Shopsys\FrameworkBundle\Model\Product\ProductData
      */
-    public function createDefault()
+    public function create(): ProductData
     {
         $productData = new ProductData();
+        $this->fillNew($productData);
 
+        return $productData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData
+     */
+    protected function fillNew($productData)
+    {
         $productData->vat = $this->vatFacade->getDefaultVat();
         $productData->unit = $this->unitFacade->getDefaultUnit();
 
@@ -118,18 +127,26 @@ class ProductDataFactory
         $productData->descriptions = $nullForAllDomains;
         $productData->shortDescriptions = $nullForAllDomains;
         $productData->accessories = [];
-
-        return $productData;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @return \Shopsys\FrameworkBundle\Model\Product\ProductData
      */
-    public function createFromProduct(Product $product)
+    public function createFromProduct(Product $product): ProductData
     {
-        $productData = $this->createDefault();
+        $productData = new ProductData();
+        $this->fillFromProduct($productData, $product);
 
+        return $productData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $productData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     */
+    protected function fillFromProduct(ProductData $productData, Product $product)
+    {
         $translations = $product->getTranslations();
         $names = [];
         $variantAliases = [];
@@ -180,8 +197,6 @@ class ProductDataFactory
         $productData->images->orderedImages = $this->imageFacade->getImagesByEntityIndexedById($product, null);
         $productData->variants = $product->getVariants();
         $productData->pluginData = $this->pluginDataFormExtensionFacade->getAllData('product', $product->getId());
-
-        return $productData;
     }
 
     /**

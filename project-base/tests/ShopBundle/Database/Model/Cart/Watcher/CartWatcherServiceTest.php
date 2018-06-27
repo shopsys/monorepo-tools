@@ -30,7 +30,7 @@ class CartWatcherServiceTest extends FunctionalTestCase
         $vatData->name = 'vat';
         $vatData->percent = 21;
         $vat = new Vat($vatData);
-        $productData1 = $productDataFactory->createDefault();
+        $productData1 = $productDataFactory->create();
         $productData1->name = [];
         $productData1->price = 100;
         $productData1->vat = $vat;
@@ -50,7 +50,7 @@ class CartWatcherServiceTest extends FunctionalTestCase
         $modifiedItems1 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
         $this->assertEmpty($modifiedItems1);
 
-        $productData2 = $productDataFactory->createDefault();
+        $productData2 = $productDataFactory->create();
         $productData2->name = [];
         $productData2->price = 200;
         $productData2->vat = $vat;
@@ -94,7 +94,7 @@ class CartWatcherServiceTest extends FunctionalTestCase
     {
         $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
 
-        $productData = $productDataFactory->createDefault();
+        $productData = $productDataFactory->create();
         $productData->name = [];
         $productData->price = 100;
         $vatData = new VatData();

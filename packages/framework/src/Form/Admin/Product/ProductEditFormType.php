@@ -51,7 +51,7 @@ class ProductEditFormType extends AbstractType
     private $pluginDataFormExtensionFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer
+     * @var \Shopsys\FrameworkBundle\Form\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer
      */
     private $productParameterValueToProductParameterValuesLocalizedTransformer;
 

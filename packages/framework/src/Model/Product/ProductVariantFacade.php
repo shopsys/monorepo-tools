@@ -20,7 +20,7 @@ class ProductVariantFacade
     protected $productFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface
      */
     protected $productDataFactory;
 
@@ -47,7 +47,7 @@ class ProductVariantFacade
     public function __construct(
         EntityManagerInterface $em,
         ProductFacade $productFacade,
-        ProductDataFactory $productDataFactory,
+        ProductDataFactoryInterface $productDataFactory,
         ImageFacade $imageFacade,
         ProductVariantService $productVariantService,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,

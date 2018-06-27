@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -30,7 +30,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
     /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
     private $productFacade;
 
-    /** @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
+    /** @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface */
     private $productDataFactory;
 
     /**
@@ -39,7 +39,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader $productDataFixtureCsvReader
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory $productDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface $productDataFactory
      */
     public function __construct(
         ProductDataFixtureLoader $productDataFixtureLoader,
@@ -47,7 +47,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
         PersistentReferenceFacade $persistentReferenceFacade,
         ProductDataFixtureCsvReader $productDataFixtureCsvReader,
         ProductFacade $productFacade,
-        ProductDataFactory $productDataFactory
+        ProductDataFactoryInterface $productDataFactory
     ) {
         $this->productDataFixtureLoader = $productDataFixtureLoader;
         $this->referenceInjector = $referenceInjector;

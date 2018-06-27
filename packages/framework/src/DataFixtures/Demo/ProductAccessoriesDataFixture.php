@@ -5,23 +5,23 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 
 class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-    /** @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
+    /** @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface */
     private $productDataFactory;
 
     /** @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
     private $productFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory $productDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface $productDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
      */
     public function __construct(
-        ProductDataFactory $productDataFactory,
+        ProductDataFactoryInterface $productDataFactory,
         ProductFacade $productFacade
     ) {
         $this->productDataFactory = $productDataFactory;
