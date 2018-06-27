@@ -80,7 +80,10 @@ class OrderFormType extends AbstractType
         }
 
         $builder
-            ->add('orderNumber', DisplayOnlyType::class)
+            ->add('orderNumber', DisplayOnlyType::class, [
+                'label' => t('Order number'),
+                'data' => $options['order']->getNumber(),
+            ])
             ->add('status', ChoiceType::class, [
                 'required' => true,
                 'choices' => $this->orderStatusFacade->getAll(),
