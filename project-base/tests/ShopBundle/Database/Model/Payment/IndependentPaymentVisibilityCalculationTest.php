@@ -41,7 +41,7 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase
         $em = $this->getEntityManager();
         $vat = $this->getDefaultVat();
 
-        $paymentData = $this->getPaymentDataFactory()->createDefault();
+        $paymentData = $this->getPaymentDataFactory()->create();
         $paymentData->name = [
             'cs' => null,
             'en' => null,
@@ -120,7 +120,7 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase
     {
         $paymentDataFactory = $this->getPaymentDataFactory();
 
-        $paymentData = $paymentDataFactory->createDefault();
+        $paymentData = $paymentDataFactory->create();
         $paymentData->name = [
             'cs' => 'paymentName',
             'en' => 'paymentName',

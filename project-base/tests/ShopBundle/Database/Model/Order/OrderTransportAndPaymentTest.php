@@ -379,7 +379,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
     {
         $paymentDataFactory = $this->getPaymentDataFactory();
 
-        $paymentData = $paymentDataFactory->createDefault();
+        $paymentData = $paymentDataFactory->create();
         $paymentData->name = [
             'cs' => 'paymentName',
             'en' => 'paymentName',

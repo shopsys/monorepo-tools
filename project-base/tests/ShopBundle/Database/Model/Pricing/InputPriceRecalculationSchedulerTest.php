@@ -129,7 +129,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
             $vatPercent
         );
 
-        $paymentData = $paymentDataFactory->createDefault();
+        $paymentData = $paymentDataFactory->create();
         $paymentData->name = ['cs' => 'name'];
         $paymentData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
         $paymentData->vat = $vat;
@@ -207,7 +207,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
             $vatPercent
         );
 
-        $paymentData = $paymentDataFactory->createDefault();
+        $paymentData = $paymentDataFactory->create();
         $paymentData->name = ['cs' => 'name'];
         $paymentData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
         $paymentData->vat = $vat;

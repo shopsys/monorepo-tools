@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Payment;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 
-class PaymentDataFactory
+class PaymentDataFactory implements PaymentDataFactoryInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
@@ -35,26 +35,44 @@ class PaymentDataFactory
     /**
      * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentData
      */
-    public function createDefault()
+    public function create(): PaymentData
     {
         $paymentData = new PaymentData();
+        $this->fillNew($paymentData);
+
+        return $paymentData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData
+     */
+    protected function fillNew(PaymentData $paymentData): void
+    {
         $paymentData->vat = $this->vatFacade->getDefaultVat();
 
         foreach ($this->domain->getAllIds() as $domainId) {
             $paymentData->enabled[$domainId] = true;
         }
-
-        return $paymentData;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @return \Shopsys\FrameworkBundle\Model\Payment\PaymentData
      */
-    public function createFromPayment(Payment $payment)
+    public function createFromPayment(Payment $payment): PaymentData
     {
-        $paymentData = $this->createDefault();
+        $paymentData = new PaymentData();
+        $this->fillFromPayment($paymentData, $payment);
 
+        return $paymentData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentData
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     */
+    protected function fillFromPayment(PaymentData $paymentData, Payment $payment)
+    {
         $paymentData->vat = $payment->getVat();
         $paymentData->hidden = $payment->isHidden();
         $paymentData->czkRounding = $payment->isCzkRounding();
@@ -83,7 +101,5 @@ class PaymentDataFactory
         foreach ($payment->getPrices() as $paymentPrice) {
             $paymentData->pricesByCurrencyId[$paymentPrice->getCurrency()->getId()] = $paymentPrice->getPrice();
         }
-
-        return $paymentData;
     }
 }

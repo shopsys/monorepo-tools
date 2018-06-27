@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
-use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 
 class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -21,17 +21,17 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
     private $paymentFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface
      */
     private $paymentDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade $paymentFacade
-     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory $paymentDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface $paymentDataFactory
      */
     public function __construct(
         PaymentFacade $paymentFacade,
-        PaymentDataFactory $paymentDataFactory
+        PaymentDataFactoryInterface $paymentDataFactory
     ) {
         $this->paymentFacade = $paymentFacade;
         $this->paymentDataFactory = $paymentDataFactory;
@@ -42,7 +42,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     public function load(ObjectManager $manager)
     {
-        $paymentData = $this->paymentDataFactory->createDefault();
+        $paymentData = $this->paymentDataFactory->create();
         $paymentData->name = [
             'cs' => 'Kreditní kartou',
             'en' => 'Credit card',
@@ -65,7 +65,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             TransportDataFixture::TRANSPORT_PPL,
         ]);
 
-        $paymentData = $this->paymentDataFactory->createDefault();
+        $paymentData = $this->paymentDataFactory->create();
         $paymentData->name = [
             'cs' => 'Dobírka',
             'en' => 'Cash on delivery',
@@ -77,7 +77,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
         $paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createPayment(self::PAYMENT_CASH_ON_DELIVERY, $paymentData, [TransportDataFixture::TRANSPORT_CZECH_POST]);
 
-        $paymentData = $this->paymentDataFactory->createDefault();
+        $paymentData = $this->paymentDataFactory->create();
         $paymentData->name = [
             'cs' => 'Hotově',
             'en' => 'Cash',

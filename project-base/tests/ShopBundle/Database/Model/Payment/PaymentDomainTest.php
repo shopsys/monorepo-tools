@@ -37,7 +37,7 @@ class PaymentDomainTest extends DatabaseTestCase
 
     public function testCreatePaymentEnabledOnDomain()
     {
-        $paymentData = $this->paymentDataFactory->createDefault();
+        $paymentData = $this->paymentDataFactory->create();
 
         $paymentData->enabled = [
             self::FIRST_DOMAIN_ID => true,
@@ -52,7 +52,7 @@ class PaymentDomainTest extends DatabaseTestCase
 
     public function testCreatePaymentDisabledOnDomain()
     {
-        $paymentData = $this->paymentDataFactory->createDefault();
+        $paymentData = $this->paymentDataFactory->create();
 
         $paymentData->enabled[self::FIRST_DOMAIN_ID] = false;
 
@@ -65,7 +65,7 @@ class PaymentDomainTest extends DatabaseTestCase
 
     public function testCreatePaymentWithDifferentVisibilityOnDomains()
     {
-        $paymentData = $this->paymentDataFactory->createDefault();
+        $paymentData = $this->paymentDataFactory->create();
 
         $paymentData->enabled[self::FIRST_DOMAIN_ID] = true;
         $paymentData->enabled[self::SECOND_DOMAIN_ID] = false;
