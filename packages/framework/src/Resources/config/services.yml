@@ -292,6 +292,8 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
+  Shopsys\FrameworkBundle\Component\HttpFoundation\XmlResponse: ~
+
   Shopsys\FrameworkBundle\Component\Setting\Setting: ~
 
   Shopsys\FrameworkBundle\Component\Setting\ClearSettingsCacheDoctrineSubscriber:
