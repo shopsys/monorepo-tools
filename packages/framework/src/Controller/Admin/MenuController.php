@@ -36,7 +36,7 @@ class MenuController extends AdminBaseController
         $activePath = $menu->getMenuPath($route, $parameters);
 
         return $this->render('@ShopsysFramework/Admin/Inline/Menu/panel.html.twig', [
-            'items' => $menu->getItems(),
+            'visibleItems' => $menu->getVisibleItems(),
             'activePath' => $activePath,
         ]);
     }

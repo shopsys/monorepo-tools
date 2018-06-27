@@ -112,6 +112,16 @@ class MenuItem
     }
 
     /**
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
+     */
+    public function getVisibleItems()
+    {
+        return array_filter($this->items, function (MenuItem $item) {
+            return $item->isVisible();
+        });
+    }
+
+    /**
      * @return string|null
      */
     public function getRoute()

@@ -26,6 +26,16 @@ class Menu
     }
 
     /**
+     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
+     */
+    public function getVisibleItems()
+    {
+        return array_filter($this->items, function (MenuItem $item) {
+            return $item->isVisible();
+        });
+    }
+
+    /**
      * Finds deepest item matching specified route.
      *
      * @param string $route
