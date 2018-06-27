@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueData;
-use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface;
 
 class ProductParametersFixtureLoader
 {
@@ -21,12 +21,17 @@ class ProductParametersFixtureLoader
     private $parameters;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface
      */
-    public function __construct(ParameterFacade $parameterFacade)
-    {
+    private $productParameterValueDataFactory;
+
+    public function __construct(
+        ParameterFacade $parameterFacade,
+        ProductParameterValueDataFactoryInterface $productParameterValueDataFactory
+    ) {
         $this->parameterFacade = $parameterFacade;
         $this->parameters = [];
+        $this->productParameterValueDataFactory = $productParameterValueDataFactory;
     }
 
     /**
@@ -75,7 +80,7 @@ class ProductParametersFixtureLoader
         $parameter = $this->findParameterByNamesOrCreateNew($parameterNames);
 
         foreach ($parameterValues as $locale => $parameterValue) {
-            $productParameterValueData = new ProductParameterValueData();
+            $productParameterValueData = $this->productParameterValueDataFactory->create();
             $parameterValueData = new ParameterValueData();
             $parameterValueData->text = $parameterValue;
             $parameterValueData->locale = $locale;

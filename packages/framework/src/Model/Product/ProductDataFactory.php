@@ -9,7 +9,7 @@ use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
-use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductInputPriceFacade;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 
@@ -65,6 +65,11 @@ class ProductDataFactory
      */
     protected $pluginDataFormExtensionFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface
+     */
+    protected $productParameterValueDataFactory;
+
     public function __construct(
         VatFacade $vatFacade,
         ProductInputPriceFacade $productInputPriceFacade,
@@ -75,7 +80,8 @@ class ProductDataFactory
         FriendlyUrlFacade $friendlyUrlFacade,
         ProductAccessoryRepository $productAccessoryRepository,
         ImageFacade $imageFacade,
-        PluginCrudExtensionFacade $pluginDataFormExtensionFacade
+        PluginCrudExtensionFacade $pluginDataFormExtensionFacade,
+        ProductParameterValueDataFactoryInterface $productParameterValueDataFactory
     ) {
         $this->vatFacade = $vatFacade;
         $this->productInputPriceFacade = $productInputPriceFacade;
@@ -87,6 +93,7 @@ class ProductDataFactory
         $this->productAccessoryRepository = $productAccessoryRepository;
         $this->imageFacade = $imageFacade;
         $this->pluginDataFormExtensionFacade = $pluginDataFormExtensionFacade;
+        $this->productParameterValueDataFactory = $productParameterValueDataFactory;
     }
 
     /**
@@ -200,9 +207,7 @@ class ProductDataFactory
         $productParameterValuesData = [];
         $productParameterValues = $this->parameterRepository->getProductParameterValuesByProduct($product);
         foreach ($productParameterValues as $productParameterValue) {
-            $productParameterValueData = new ProductParameterValueData();
-            $productParameterValueData->setFromEntity($productParameterValue);
-            $productParameterValuesData[] = $productParameterValueData;
+            $productParameterValuesData[] = $this->productParameterValueDataFactory->createFromProductParameterValue($productParameterValue);
         }
 
         return $productParameterValuesData;

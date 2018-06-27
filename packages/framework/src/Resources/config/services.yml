@@ -876,3 +876,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactory

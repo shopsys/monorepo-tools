@@ -4,11 +4,22 @@ namespace Shopsys\FrameworkBundle\Form\Transformers;
 
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueData;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class ProductParameterValueToProductParameterValuesLocalizedTransformer implements DataTransformerInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface
+     */
+    private $productParameterValueDataFactory;
+
+    public function __construct(ProductParameterValueDataFactoryInterface $productParameterValueDataFactory)
+    {
+        $this->productParameterValueDataFactory = $productParameterValueDataFactory;
+    }
+
     /**
      * @param mixed $normData
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData[]
@@ -59,7 +70,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 
                 foreach ($productParameterValuesLocalizedData->valueTextsByLocale as $locale => $valueText) {
                     if ($valueText !== null) {
-                        $productParameterValueData = new ProductParameterValueData();
+                        $productParameterValueData = $this->productParameterValueDataFactory->create();
                         $productParameterValueData->parameter = $productParameterValuesLocalizedData->parameter;
                         $parameterValueData = new ParameterValueData();
                         $parameterValueData->text = $valueText;
