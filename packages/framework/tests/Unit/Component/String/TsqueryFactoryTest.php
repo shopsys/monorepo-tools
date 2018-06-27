@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\FrameworkBundle\Unit\Component\Fulltext;
+namespace Tests\FrameworkBundle\Unit\Component\String;
 
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\Fulltext\TsqueryFactory;
+use Shopsys\FrameworkBundle\Component\String\TsqueryFactory;
 
 class TsqueryFactoryTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Fulltext;
+namespace Shopsys\FrameworkBundle\Component\String;
 
 class TsqueryFactory
 {

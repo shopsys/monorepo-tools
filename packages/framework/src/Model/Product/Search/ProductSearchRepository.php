@@ -3,13 +3,13 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Search;
 
 use Doctrine\ORM\QueryBuilder;
-use Shopsys\FrameworkBundle\Component\Fulltext\TsqueryFactory;
 use Shopsys\FrameworkBundle\Component\String\DatabaseSearching;
+use Shopsys\FrameworkBundle\Component\String\TsqueryFactory;
 
 class ProductSearchRepository
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Fulltext\TsqueryFactory
+     * @var \Shopsys\FrameworkBundle\Component\String\TsqueryFactory
      */
     private $tsqueryFactory;
 
