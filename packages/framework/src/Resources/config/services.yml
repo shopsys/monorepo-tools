@@ -867,3 +867,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityDataFactory
