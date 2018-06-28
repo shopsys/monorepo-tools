@@ -1,16 +1,16 @@
-{% if lazyLoadedCategoryDetails|length > 0 %}
+{% if categoriesWithLazyLoadedVisibleChildren|length > 0 %}
     <ul class="js-category-list list-menu {% if isFirstLevel %}list-menu--root{% endif %}" {% if isFirstLevel %}id="js-categories"{% endif %}>
-        {% for lazyLoadedCategoryDetail in lazyLoadedCategoryDetails %}
-            {% set isCurrentCategory = (currentCategory is not null and currentCategory == lazyLoadedCategoryDetail.category) %}
+        {% for categoriyWithLazyLoadedVisibleChildren in categoriesWithLazyLoadedVisibleChildren %}
+            {% set isCurrentCategory = (currentCategory is not null and currentCategory == categoriyWithLazyLoadedVisibleChildren.category) %}
             <li class="list-menu__item js-category-item">
-                <a href="{{ url('front_product_list', { id: lazyLoadedCategoryDetail.category.id }) }}" class="list-menu__item__link list-menu__item__link--level-{{ lazyLoadedCategoryDetail.category.level }} {% if isCurrentCategory %}current{% endif %}">
-                    {{ lazyLoadedCategoryDetail.category.name }}
-                    {% if lazyLoadedCategoryDetail.hasChildren %}
-                        <i class="list-menu__item__control svg svg-arrow js-category-collapse-control {% if lazyLoadedCategoryDetail.category in openCategories %}open{% endif %}" data-url="{{ url('front_category_branch', { parentCategoryId: lazyLoadedCategoryDetail.category.id }) }}"></i>
+                <a href="{{ url('front_product_list', { id: categoriyWithLazyLoadedVisibleChildren.category.id }) }}" class="list-menu__item__link list-menu__item__link--level-{{ categoriyWithLazyLoadedVisibleChildren.category.level }} {% if isCurrentCategory %}current{% endif %}">
+                    {{ categoriyWithLazyLoadedVisibleChildren.category.name }}
+                    {% if categoriyWithLazyLoadedVisibleChildren.hasChildren %}
+                        <i class="list-menu__item__control svg svg-arrow js-category-collapse-control {% if categoriyWithLazyLoadedVisibleChildren.category in openCategories %}open{% endif %}" data-url="{{ url('front_category_branch', { parentCategoryId: categoriyWithLazyLoadedVisibleChildren.category.id }) }}"></i>
                     {% endif %}
                 </a>
-                {% if lazyLoadedCategoryDetail.category in openCategories %}
-                    {% set lazyLoadedCategoryDetails = lazyLoadedCategoryDetail.children %}
+                {% if categoriyWithLazyLoadedVisibleChildren.category in openCategories %}
+                    {% set categoriesWithLazyLoadedVisibleChildren = categoriyWithLazyLoadedVisibleChildren.children %}
                     {% set isFirstLevel = false %}
 
                     {% include _self %}

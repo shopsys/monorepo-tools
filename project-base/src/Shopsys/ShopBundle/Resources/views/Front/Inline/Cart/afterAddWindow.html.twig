@@ -2,13 +2,13 @@
 {% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% if isModuleEnabled(ACCESSORIES_ON_BUY) %}
-    {% if accessoryDetails|length > 0 %}
+    {% if accessories|length > 0 %}
         <div class="wrap-box margin-top-20 margin-bottom-0">
             <h3 class="wrap-box__title">
                 {{ 'Our customers who bought this bought also'|trans }}
             </h3>
             <div class="wrap-box__in">
-                {{ productList.list(accessoryDetails, 'list-products--in-window') }}
+                {{ productList.list(accessories, 'list-products--in-window') }}
             </div>
         </div>
         <span class="js-add-product-wide-window" data-wide="true"></span>

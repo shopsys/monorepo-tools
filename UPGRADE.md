@@ -29,6 +29,19 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - `CategoryDomain::$hidden` was changed to `CategoryDomain::$enabled` along with related methods (with negated value)
 - `PaymentDomain` and `TransportDomain` are now created even for domains on which the entity should not be visible, check your custom queries that work with payments or transports
 - instead of using `EntityManagerFacade::clear()` call `clear()` directly on the `EntityManager`
+- all *Detail classes were removed:
+    - use `CategoryWithLazyLoadedVisibleChildren` instead of `LazyLoadedCategoryDetail`
+    - use `CategoryWithLazyLoadedVisibleChildrenFactory::createCategoriesWithLazyLoadedVisibleChildren()` instead of `CategoryDetailFactory::createLazyLoadedDetails()`
+    - use `CategoryFacade::getCategoriesWithLazyLoadedVisibleChildrenForParent()` instead of `CategoryFacade::getVisibleLazyLoadedCategoryDetailsForParent()`
+    - use `CategoryWithPreloadedChildren` instead of `CategoryDetail`
+    - use `CategoryWithPreloadedChildrenFactory::createCategoriesWithPreloadedChildren()` instead of `CategoryDetailFactory::createDetailsHierarchy()`
+    - use `CategoryFacade::getVisibleCategoriesWithPreloadedChildrenForDomain()` instead of `CategoryFacade::getVisibleCategoryDetailsForDomain()`
+    - use `PaymentFacade::getIndependentBasePricesIndexedByCurrencyId()` instead of `PaymentDetail::$basePricesByCurrencyId`
+    - use `TransportFacade::getIndependentBasePricesIndexedByCurrencyId()` instead of `TransportDetail::$basePricesByCurrencyId`
+    - `ProductDetail::hasContentForDetailBox()` is not available anymore (it was useless)
+    - use `ProductCachedAttributesFacade` for accessing product parameter values and selling price
+    - in templates, use Twig function `getProductParameterValues(product)` instead of `productDetail.parameters`
+    - in templates, use Twig function `getProductSellingPrice(product)` instead of `productDetail.sellingPrice`
 
 ### [shopsys/project-base]
 - Twig has been updated to version 2.4.8

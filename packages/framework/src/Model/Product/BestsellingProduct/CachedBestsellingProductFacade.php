@@ -6,7 +6,6 @@ use Doctrine\Common\Cache\CacheProvider;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository;
-use Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 use Shopsys\FrameworkBundle\Model\Product\ProductService;
 
@@ -18,11 +17,6 @@ class CachedBestsellingProductFacade
      * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductFacade
      */
     protected $bestsellingProductFacade;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
-     */
-    protected $productDetailFactory;
 
     /**
      * @var \Doctrine\Common\Cache\CacheProvider
@@ -47,14 +41,12 @@ class CachedBestsellingProductFacade
     public function __construct(
         CacheProvider $cacheProvider,
         BestsellingProductFacade $bestsellingProductFacade,
-        ProductDetailFactory $productDetailFactory,
         ProductRepository $productRepository,
         ProductService $productService,
         PricingGroupRepository $pricingGroupRepository
     ) {
         $this->cacheProvider = $cacheProvider;
         $this->bestsellingProductFacade = $bestsellingProductFacade;
-        $this->productDetailFactory = $productDetailFactory;
         $this->productRepository = $productRepository;
         $this->productService = $productService;
         $this->pricingGroupRepository = $pricingGroupRepository;
@@ -64,24 +56,24 @@ class CachedBestsellingProductFacade
      * @param int $domainId
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    public function getAllOfferedProductDetails($domainId, Category $category, PricingGroup $pricingGroup)
+    public function getAllOfferedBestsellingProducts($domainId, Category $category, PricingGroup $pricingGroup)
     {
         $cacheId = $this->getCacheId($domainId, $category, $pricingGroup);
-        $sortedProducts = $this->cacheProvider->fetch($cacheId);
+        $sortedProductsIds = $this->cacheProvider->fetch($cacheId);
 
-        if ($sortedProducts === false) {
-            $bestsellingProductDetails = $this->bestsellingProductFacade->getAllOfferedProductDetails(
+        if ($sortedProductsIds === false) {
+            $bestsellingProducts = $this->bestsellingProductFacade->getAllOfferedBestsellingProducts(
                 $domainId,
                 $category,
                 $pricingGroup
             );
-            $this->saveToCache($bestsellingProductDetails, $cacheId);
+            $this->saveToCache($bestsellingProducts, $cacheId);
 
-            return $bestsellingProductDetails;
+            return $bestsellingProducts;
         } else {
-            return $this->getSortedProductDetails($domainId, $pricingGroup, $sortedProducts);
+            return $this->getSortedProducts($domainId, $pricingGroup, $sortedProductsIds);
         }
     }
 
@@ -99,14 +91,14 @@ class CachedBestsellingProductFacade
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[] $bestsellingProductDetails
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $bestsellingProducts
      * @param string $cacheId
      */
-    protected function saveToCache(array $bestsellingProductDetails, $cacheId)
+    protected function saveToCache(array $bestsellingProducts, $cacheId)
     {
         $sortedProductIds = [];
-        foreach ($bestsellingProductDetails as $productDetail) {
-            $sortedProductIds[] = $productDetail->getProduct()->getId();
+        foreach ($bestsellingProducts as $product) {
+            $sortedProductIds[] = $product->getId();
         }
 
         $this->cacheProvider->save($cacheId, $sortedProductIds, self::LIFETIME);
@@ -116,14 +108,13 @@ class CachedBestsellingProductFacade
      * @param int $domainId
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int[] $sortedProductIds
-     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    protected function getSortedProductDetails($domainId, PricingGroup $pricingGroup, array $sortedProductIds)
+    protected function getSortedProducts($domainId, PricingGroup $pricingGroup, array $sortedProductIds)
     {
         $products = $this->productRepository->getOfferedByIds($domainId, $pricingGroup, $sortedProductIds);
-        $sortedProducts = $this->productService->sortProductsByProductIds($products, $sortedProductIds);
 
-        return $this->productDetailFactory->getDetailsForProducts($sortedProducts);
+        return $this->productService->sortProductsByProductIds($products, $sortedProductIds);
     }
 
     /**

@@ -1,90 +1,64 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Model\Product\Detail;
+namespace Shopsys\FrameworkBundle\Model\Product;
 
-use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
-class ProductDetailFactory
+class ProductCachedAttributesFacade
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
-    private $productPriceCalculationForUser;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductRepository
-     */
-    private $productRepository;
+    protected $productPriceCalculationForUser;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository
      */
-    private $parameterRepository;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Component\Image\ImageFacade
-     */
-    private $imageFacade;
+    protected $parameterRepository;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */
-    private $localization;
+    protected $localization;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice[]
+     */
+    protected $sellingPricesByProductId;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue[]
+     */
+    protected $parameterValuesByProductId;
 
     public function __construct(
         ProductPriceCalculationForUser $productPriceCalculationForUser,
-        ProductRepository $productRepository,
         ParameterRepository $parameterRepository,
-        ImageFacade $imageFacade,
         Localization $localization
     ) {
         $this->productPriceCalculationForUser = $productPriceCalculationForUser;
-        $this->productRepository = $productRepository;
         $this->parameterRepository = $parameterRepository;
-        $this->imageFacade = $imageFacade;
         $this->localization = $localization;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail
-     */
-    public function getDetailForProduct(Product $product)
-    {
-        return new ProductDetail($product, $this);
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product[] $products
-     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
-     */
-    public function getDetailsForProducts(array $products)
-    {
-        $details = [];
-
-        foreach ($products as $product) {
-            $details[] = $this->getDetailForProduct($product);
-        }
-
-        return $details;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice|null
      */
-    public function getSellingPrice(Product $product)
+    public function getProductSellingPrice(Product $product)
     {
+        if (isset($this->sellingPricesByProductId[$product->getId()])) {
+            return $this->sellingPricesByProductId[$product->getId()];
+        }
         try {
             $productPrice = $this->productPriceCalculationForUser->calculatePriceForCurrentUser($product);
         } catch (\Shopsys\FrameworkBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
             $productPrice = null;
         }
+        $this->sellingPricesByProductId[$product->getId()] = $productPrice;
+
         return $productPrice;
     }
 
@@ -92,8 +66,11 @@ class ProductDetailFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue[]
      */
-    public function getParameters(Product $product)
+    public function getProductParameterValues(Product $product)
     {
+        if (isset($this->parameterValuesByProductId[$product->getId()])) {
+            return $this->parameterValuesByProductId[$product->getId()];
+        }
         $locale = $this->localization->getLocale();
 
         $productParameterValues = $this->parameterRepository->getProductParameterValuesByProductSortedByName($product, $locale);
@@ -105,16 +82,8 @@ class ProductDetailFactory
                 unset($productParameterValues[$index]);
             }
         }
+        $this->parameterValuesByProductId[$product->getId()] = $productParameterValues;
 
         return $productParameterValues;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @return \Shopsys\FrameworkBundle\Component\Image\Image[]
-     */
-    public function getImagesIndexedById(Product $product)
-    {
-        return $this->imageFacade->getImagesByEntityIndexedById($product, null);
     }
 }

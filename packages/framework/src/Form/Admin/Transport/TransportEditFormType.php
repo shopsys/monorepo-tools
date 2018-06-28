@@ -5,8 +5,9 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Transport;
 use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\PriceTableType;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
-use Shopsys\FrameworkBundle\Model\Transport\Detail\TransportDetail;
+use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
+use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,9 +20,15 @@ class TransportEditFormType extends AbstractType
      */
     private $currencyFacade;
 
-    public function __construct(CurrencyFacade $currencyFacade)
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
+     */
+    private $transportFacade;
+
+    public function __construct(CurrencyFacade $currencyFacade, TransportFacade $transportFacade)
     {
         $this->currencyFacade = $currencyFacade;
+        $this->transportFacade = $transportFacade;
     }
 
     /**
@@ -30,8 +37,8 @@ class TransportEditFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transportDetail = $options['transport_detail'];
-        /* @var $transportDetail \Shopsys\FrameworkBundle\Model\Transport\Detail\TransportDetail */
+        $transport = $options['transport'];
+        /* @var $transport \Shopsys\FrameworkBundle\Model\Transport\Transport */
 
         $builderPricesGroup = $builder->create('prices', GroupType::class, [
             'label' => t('Prices'),
@@ -40,12 +47,12 @@ class TransportEditFormType extends AbstractType
         $builderPricesGroup
             ->add('pricesByCurrencyId', PriceTableType::class, [
                 'currencies' => $this->currencyFacade->getAllIndexedById(),
-                'base_prices' => $transportDetail !== null ? $transportDetail->getBasePricesByCurrencyId() : [],
+                'base_prices' => $transport !== null ? $this->transportFacade->getIndependentBasePricesIndexedByCurrencyId($transport) : [],
             ]);
 
         $builder
             ->add('transportData', TransportFormType::class, [
-                'transport' => $transportDetail !== null ? $transportDetail->getTransport() : null,
+                'transport' => $transport,
                 'render_form_row' => false,
                 'inherit_data' => true,
             ])
@@ -58,8 +65,8 @@ class TransportEditFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired('transport_detail')
-            ->setAllowedTypes('transport_detail', [TransportDetail::class, 'null'])
+        $resolver->setRequired('transport')
+            ->setAllowedTypes('transport', [Transport::class, 'null'])
             ->setDefaults([
                 'data_class' => TransportData::class,
                 'attr' => ['novalidate' => 'novalidate'],

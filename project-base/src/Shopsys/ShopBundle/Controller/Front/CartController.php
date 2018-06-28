@@ -11,7 +11,6 @@ use Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer;
 use Shopsys\FrameworkBundle\Model\Module\ModuleList;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFacade;
-use Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade;
 use Shopsys\ShopBundle\Form\Front\Cart\AddProductFormType;
@@ -46,11 +45,6 @@ class CartController extends FrontBaseController
     private $productAccessoryFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
-     */
-    private $productDetailFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade
      */
     private $freeTransportAndPaymentFacade;
@@ -71,7 +65,6 @@ class CartController extends FrontBaseController
         CurrentCustomer $currentCustomer,
         Domain $domain,
         FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade,
-        ProductDetailFactory $productDetailFactory,
         OrderPreviewFactory $orderPreviewFactory,
         ErrorService $errorService
     ) {
@@ -80,7 +73,6 @@ class CartController extends FrontBaseController
         $this->currentCustomer = $currentCustomer;
         $this->domain = $domain;
         $this->freeTransportAndPaymentFacade = $freeTransportAndPaymentFacade;
-        $this->productDetailFactory = $productDetailFactory;
         $this->orderPreviewFactory = $orderPreviewFactory;
         $this->errorService = $errorService;
     }
@@ -241,10 +233,9 @@ class CartController extends FrontBaseController
                     $this->currentCustomer->getPricingGroup(),
                     self::AFTER_ADD_WINDOW_ACCESSORIES_LIMIT
                 );
-                $accessoryDetails = $this->productDetailFactory->getDetailsForProducts($accessories);
 
                 return $this->render('@ShopsysShop/Front/Inline/Cart/afterAddWindow.html.twig', [
-                    'accessoryDetails' => $accessoryDetails,
+                    'accessories' => $accessories,
                     'ACCESSORIES_ON_BUY' => ModuleList::ACCESSORIES_ON_BUY,
                 ]);
             } catch (\Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException $ex) {

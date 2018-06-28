@@ -20,7 +20,6 @@ use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
-use Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory;
 use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade;
 use Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionFacade;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade;
@@ -52,11 +51,6 @@ class ProductController extends AdminBaseController
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductFacade
      */
     private $productFacade;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
-     */
-    private $productDetailFactory;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
@@ -113,7 +107,6 @@ class ProductController extends AdminBaseController
         ProductMassActionFacade $productMassActionFacade,
         GridFactory $gridFactory,
         ProductFacade $productFacade,
-        ProductDetailFactory $productDetailFactory,
         ProductDataFactory $productDataFactory,
         AdminProductPriceCalculationFacade $adminProductPriceCalculationFacade,
         Breadcrumb $breadcrumb,
@@ -129,7 +122,6 @@ class ProductController extends AdminBaseController
         $this->productMassActionFacade = $productMassActionFacade;
         $this->gridFactory = $gridFactory;
         $this->productFacade = $productFacade;
-        $this->productDetailFactory = $productDetailFactory;
         $this->productDataFactory = $productDataFactory;
         $this->adminProductPriceCalculationFacade = $adminProductPriceCalculationFacade;
         $this->breadcrumb = $breadcrumb;
@@ -177,7 +169,6 @@ class ProductController extends AdminBaseController
         $viewParameters = [
             'form' => $form->createView(),
             'product' => $product,
-            'productDetail' => $this->productDetailFactory->getDetailForProduct($product),
             'productMainCategoriesIndexedByDomainId' => $this->categoryFacade->getProductMainCategoriesIndexedByDomainId($product),
             'domains' => $this->domain->getAll(),
         ];
@@ -402,7 +393,7 @@ class ProductController extends AdminBaseController
         $product = $this->productFacade->getById($productId);
 
         return $this->render('@ShopsysFramework/Admin/Content/Product/visibility.html.twig', [
-            'productDetail' => $this->productDetailFactory->getDetailForProduct($product),
+            'product' => $product,
             'domains' => $this->domain->getAll(),
         ]);
     }

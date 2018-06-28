@@ -4,8 +4,9 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Payment;
 
 use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\PriceTableType;
-use Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetail;
+use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
+use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -19,9 +20,15 @@ class PaymentEditFormType extends AbstractType
      */
     private $currencyFacade;
 
-    public function __construct(CurrencyFacade $currencyFacade)
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentFacade
+     */
+    private $paymentFacade;
+
+    public function __construct(CurrencyFacade $currencyFacade, PaymentFacade $paymentFacade)
     {
         $this->currencyFacade = $currencyFacade;
+        $this->paymentFacade = $paymentFacade;
     }
 
     /**
@@ -30,8 +37,8 @@ class PaymentEditFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $paymentDetail = $options['payment_detail'];
-        /* @var $paymentDetail \Shopsys\FrameworkBundle\Model\Payment\Detail\PaymentDetail */
+        $payment = $options['payment'];
+        /* @var $payment \Shopsys\FrameworkBundle\Model\Payment\Payment */
 
         $builderPriceGroup = $builder->create('prices', GroupType::class, [
             'label' => t('Prices'),
@@ -40,12 +47,12 @@ class PaymentEditFormType extends AbstractType
         $builderPriceGroup
             ->add('pricesByCurrencyId', PriceTableType::class, [
                 'currencies' => $this->currencyFacade->getAllIndexedById(),
-                'base_prices' => $paymentDetail !== null ? $paymentDetail->getBasePricesByCurrencyId() : [],
+                'base_prices' => $payment !== null ? $this->paymentFacade->getIndependentBasePricesIndexedByCurrencyId($payment) : [],
             ]);
 
         $builder
             ->add('paymentData', PaymentFormType::class, [
-                'payment' => $paymentDetail !== null ? $paymentDetail->getPayment() : null,
+                'payment' => $payment,
                 'render_form_row' => false,
                 'inherit_data' => true,
             ])
@@ -58,8 +65,8 @@ class PaymentEditFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired('payment_detail')
-            ->setAllowedTypes('payment_detail', [PaymentDetail::class, 'null'])
+        $resolver->setRequired('payment')
+            ->setAllowedTypes('payment', [Payment::class, 'null'])
             ->setDefaults([
                 'data_class' => PaymentData::class,
                 'attr' => ['novalidate' => 'novalidate'],

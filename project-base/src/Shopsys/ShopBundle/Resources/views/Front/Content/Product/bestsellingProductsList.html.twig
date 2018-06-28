@@ -1,32 +1,32 @@
-{% if productDetails|length > 0 %}
+{% if products|length > 0 %}
     <div class="js-bestselling-products list-products-line">
         <h2>{{ 'Bestsellers'|trans }}</h2>
         <ul class="list-products-line__list">
-            {% for productDetail in productDetails %}
+            {% for product in products %}
                 <li class="list-products-line__item js-bestselling-product{% if (loop.index > maxShownProducts )%} display-none{% endif %}">
-                    <a href="{{ url('front_product_detail', {'id': productDetail.product.id}) }}" class="list-products-line__item__block">
+                    <a href="{{ url('front_product_detail', {'id': product.id}) }}" class="list-products-line__item__block">
                         <div class="list-products-line__item__position">
                             {{ loop.index }}.
                         </div>
                         <div class="list-products-line__item__image">
-                            {{ image(productDetail.product, { size: 'thumbnail', alt: productDetail.product.name }) }}
+                            {{ image(product, { size: 'thumbnail', alt: product.name }) }}
                         </div>
                         <h3 class="list-products-line__item__title">
-                            {{ productDetail.product.name }}
+                            {{ product.name }}
                         </h3>
                         <div class="list-products-line__item__price">
                             <div class="list-products-line__item__price__item list-products-line__item__price__item--main">
-                                {{ productDetail.sellingPrice.priceWithVat|price }}
+                                {{ getProductSellingPrice(product).priceWithVat|price }}
                             </div>
                             <div class="list-products-line__item__price__item">
-                                {{ productDetail.sellingPrice.priceWithoutVat|price }} {{ 'excluding VAT'|trans }}
+                                {{ getProductSellingPrice(product).priceWithoutVat|price }} {{ 'excluding VAT'|trans }}
                             </div>
                         </div>
                     </a>
                 </li>
             {% endfor %}
         </ul>
-        {% if productDetails|length > maxShownProducts %}
+        {% if products|length > maxShownProducts %}
             <div class="list-products-line__more js-bestselling-products-load-more-container">
                 <span class="btn js-bestselling-products-load-more">
                     {{ 'More bestsellers'|trans }}

@@ -1,11 +1,16 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Model\Category\Detail;
+namespace Shopsys\FrameworkBundle\Model\Category;
 
 use Closure;
-use Shopsys\FrameworkBundle\Model\Category\Category;
 
-class LazyLoadedCategoryDetail
+/**
+ * The class encapsulates Category along with it's visible children
+ * that are lazy loaded to prevent unnecessary SQL queries.
+ * It is used for rendering front-end category tree.
+ * @see \Shopsys\FrameworkBundle\Model\Category\Category
+ */
+class CategoryWithLazyLoadedVisibleChildren
 {
     /**
      * @var \Closure
@@ -23,7 +28,7 @@ class LazyLoadedCategoryDetail
     private $hasChildren;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]|null
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryWithLazyLoadedVisibleChildren[]|null
      */
     private $children;
 
@@ -59,7 +64,7 @@ class LazyLoadedCategoryDetail
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryWithLazyLoadedVisibleChildren[]
      */
     public function getChildren()
     {

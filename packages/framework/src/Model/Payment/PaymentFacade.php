@@ -230,4 +230,18 @@ class PaymentFacade
     {
         return $this->paymentRepository->getAll();
     }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
+     * @return \Shopsys\FrameworkBundle\Model\Pricing\Price[]
+     */
+    public function getIndependentBasePricesIndexedByCurrencyId(Payment $payment)
+    {
+        $prices = [];
+        foreach ($payment->getPrices() as $paymentInputPrice) {
+            $currency = $paymentInputPrice->getCurrency();
+            $prices[$currency->getId()] = $this->paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
+        }
+        return $prices;
+    }
 }

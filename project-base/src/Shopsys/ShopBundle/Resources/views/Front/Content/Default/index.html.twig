@@ -34,10 +34,10 @@
 
     {{ render(controller('ShopsysShopBundle:Front/Category:top')) }}
 
-    {% if topProductsDetails is not empty %}
+    {% if topProducts is not empty %}
         <div id="top-products">
             <h2>{{ 'Special offers'|trans }}</h2>
-            {{ productList.list(topProductsDetails, null, 'h3') }}
+            {{ productList.list(topProducts, null, 'h3') }}
         </div>
     {% endif %}
 

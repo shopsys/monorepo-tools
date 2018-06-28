@@ -5,7 +5,6 @@ namespace Shopsys\FrameworkBundle\Model\Product\BestsellingProduct;
 use DateTime;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
-use Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory;
 
 class BestsellingProductFacade
 {
@@ -24,11 +23,6 @@ class BestsellingProductFacade
     protected $manualBestsellingProductRepository;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetailFactory
-     */
-    protected $productDetailFactory;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\BestsellingProductService
      */
     protected $bestsellingProductService;
@@ -36,12 +30,10 @@ class BestsellingProductFacade
     public function __construct(
         AutomaticBestsellingProductRepository $automaticBestsellingProductRepository,
         ManualBestsellingProductRepository $manualBestsellingProductRepository,
-        ProductDetailFactory $productDetailFactory,
         BestsellingProductService $bestsellingProductService
     ) {
         $this->automaticBestsellingProductRepository = $automaticBestsellingProductRepository;
         $this->manualBestsellingProductRepository = $manualBestsellingProductRepository;
-        $this->productDetailFactory = $productDetailFactory;
         $this->bestsellingProductService = $bestsellingProductService;
     }
 
@@ -49,9 +41,9 @@ class BestsellingProductFacade
      * @param int $domainId
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-     * @return \Shopsys\FrameworkBundle\Model\Product\Detail\ProductDetail[]
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product[]
      */
-    public function getAllOfferedProductDetails($domainId, Category $category, PricingGroup $pricingGroup)
+    public function getAllOfferedBestsellingProducts($domainId, Category $category, PricingGroup $pricingGroup)
     {
         $manualBestsellingProducts = $this->manualBestsellingProductRepository->getOfferedByCategory(
             $domainId,
@@ -72,12 +64,10 @@ class BestsellingProductFacade
             self::MAX_RESULTS
         );
 
-        $combinedProducts = $this->bestsellingProductService->combineManualAndAutomaticProducts(
+        return $this->bestsellingProductService->combineManualAndAutomaticProducts(
             $manualProductsIndexedByPosition,
             $automaticProducts,
             self::MAX_RESULTS
         );
-
-        return $this->productDetailFactory->getDetailsForProducts($combinedProducts);
     }
 }

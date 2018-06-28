@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\Twig;
 
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductCachedAttributesFacade;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
 
@@ -14,9 +15,17 @@ class ProductExtension extends \Twig_Extension
      */
     private $categoryFacade;
 
-    public function __construct(CategoryFacade $categoryFacade)
-    {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductCachedAttributesFacade
+     */
+    private $productCachedAttributesFacade;
+
+    public function __construct(
+        CategoryFacade $categoryFacade,
+        ProductCachedAttributesFacade $productCachedAttributesFacade
+    ) {
         $this->categoryFacade = $categoryFacade;
+        $this->productCachedAttributesFacade = $productCachedAttributesFacade;
     }
 
     /**
@@ -43,6 +52,14 @@ class ProductExtension extends \Twig_Extension
             new Twig_SimpleFunction(
                 'findProductMainCategory',
                 [$this, 'findProductMainCategory']
+            ),
+            new Twig_SimpleFunction(
+                'getProductSellingPrice',
+                [$this, 'getProductSellingPrice']
+            ),
+            new Twig_SimpleFunction(
+                'getProductParameterValues',
+                [$this, 'getProductParameterValues']
             ),
         ];
     }
@@ -101,5 +118,23 @@ class ProductExtension extends \Twig_Extension
     public function findProductMainCategory(Product $product, $domainId)
     {
         return $this->categoryFacade->findProductMainCategoryByDomainId($product, $domainId);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPrice|null
+     */
+    public function getProductSellingPrice(Product $product)
+    {
+        return $this->productCachedAttributesFacade->getProductSellingPrice($product);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValue[]
+     */
+    public function getProductParameterValues(Product $product)
+    {
+        return $this->productCachedAttributesFacade->getProductParameterValues($product);
     }
 }
