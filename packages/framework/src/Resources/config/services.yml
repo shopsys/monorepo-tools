@@ -2,7 +2,7 @@ imports:
   - { resource: services/*.yml }
 
 parameters:
-  fp_js_form_validator.factory.class: Shopsys\FrameworkBundle\Component\Validator\JsFormValidatorFactory
+  fp_js_form_validator.factory.class: Shopsys\FrameworkBundle\Form\JsFormValidatorFactory
   prezent_doctrine_translatable.listener.class: Shopsys\FrameworkBundle\Model\Localization\TranslatableListener
   faker.seed: 1234
   shopsys.entity_extension.map: {}

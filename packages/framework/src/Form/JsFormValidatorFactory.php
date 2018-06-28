@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Validator;
+namespace Shopsys\FrameworkBundle\Form;
 
 use Fp\JsFormValidatorBundle\Factory\JsFormValidatorFactory as BaseJsFormValidatorFactory;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue;
