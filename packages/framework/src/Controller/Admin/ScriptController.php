@@ -9,7 +9,7 @@ use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\FrameworkBundle\Form\Admin\Script\GoogleAnalyticsScriptFormType;
 use Shopsys\FrameworkBundle\Form\Admin\Script\ScriptFormType;
 use Shopsys\FrameworkBundle\Model\Script\Script;
-use Shopsys\FrameworkBundle\Model\Script\ScriptData;
+use Shopsys\FrameworkBundle\Model\Script\ScriptDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Script\ScriptFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -30,14 +30,21 @@ class ScriptController extends AdminBaseController
      */
     private $adminDomainTabsFacade;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Script\ScriptDataFactoryInterface
+     */
+    private $scriptDataFactory;
+
     public function __construct(
         ScriptFacade $scriptFacade,
         GridFactory $gridFactory,
-        AdminDomainTabsFacade $adminDomainTabsFacade
+        AdminDomainTabsFacade $adminDomainTabsFacade,
+        ScriptDataFactoryInterface $scriptDataFactory
     ) {
         $this->scriptFacade = $scriptFacade;
         $this->gridFactory = $gridFactory;
         $this->adminDomainTabsFacade = $adminDomainTabsFacade;
+        $this->scriptDataFactory = $scriptDataFactory;
     }
 
     /**
@@ -46,7 +53,7 @@ class ScriptController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm(ScriptFormType::class, new ScriptData());
+        $form = $this->createForm(ScriptFormType::class, $this->scriptDataFactory->create());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -80,8 +87,7 @@ class ScriptController extends AdminBaseController
     public function editAction(Request $request, $scriptId)
     {
         $script = $this->scriptFacade->getById($scriptId);
-        $scriptData = new ScriptData();
-        $scriptData->setFromEntity($script);
+        $scriptData = $this->scriptDataFactory->createFromScript($script);
 
         $form = $this->createForm(ScriptFormType::class, $scriptData);
         $form->handleRequest($request);

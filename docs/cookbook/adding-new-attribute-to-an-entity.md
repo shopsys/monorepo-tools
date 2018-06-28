@@ -343,4 +343,4 @@ $form['product_edit_form[productData][extId]'] = 123456;
 ```
 
 ## Data fixtures
-Currently, it is not possible to modify data fixtures from your project, this issue will be addressed in near future. 
+Currently, it is not possible to modify data fixtures from your project, this issue will be addressed in near future.

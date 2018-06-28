@@ -891,3 +891,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
+
+  Shopsys\FrameworkBundle\Model\Script\ScriptDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Script\ScriptDataFactory
