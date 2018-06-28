@@ -53,22 +53,6 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 - Twig has been updated to version 2.4.8
     - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
 
-### [shopsys/product-feed-google]
-- Twig has been updated to version 2.4.8
-    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
-    
-### [shopsys/product-feed-heureka]
-- Twig has been updated to version 2.4.8
-    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
-    
-### [shopsys/product-feed-heureka-delivery]
-- Twig has been updated to version 2.4.8
-    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
-    
-### [shopsys/product-feed-zbozi]
-- Twig has been updated to version 2.4.8
-    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
-
 ### [shopsys/coding-standards]
 - create your custom `easy-coding-standard.yml` in your project root with your ruleset (you can use predefined ruleset as shown below) 
 - in order to run all checks, there is new unified way - execute `php vendor/bin/ecs check /path/to/project`
@@ -85,6 +69,22 @@ parameters:
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
             - '*/src/file.php'
 ```
+
+### [shopsys/product-feed-google]
+- Twig has been updated to version 2.4.8
+    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
+    
+### [shopsys/product-feed-heureka]
+- Twig has been updated to version 2.4.8
+    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
+    
+### [shopsys/product-feed-heureka-delivery]
+- Twig has been updated to version 2.4.8
+    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
+    
+### [shopsys/product-feed-zbozi]
+- Twig has been updated to version 2.4.8
+    - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue
 
 ## [From 7.0.0-alpha1 to 7.0.0-alpha2]
 ### [shopsys/project-base]   
@@ -226,7 +226,7 @@ parameters:
 [shopsys/product-feed-interface]: https://github.com/shopsys/product-feed-interface 
 [shopsys/plugin-interface]: https://github.com/shopsys/plugin-interface 
 [shopsys/coding-standards]: https://github.com/shopsys/coding-standards 
-[shopsys/http-smoke-testing]: https://github.com/shopsys/http-smoking-testing 
+[shopsys/http-smoke-testing]: https://github.com/shopsys/http-smoke-testing 
 [shopsys/form-types-bundle]: https://github.com/shopsys/form-types-bundle 
 [shopsys/migrations]: https://github.com/shopsys/migrations 
 [shopsys/monorepo-tools]: https://github.com/shopsys/monorepo-tools

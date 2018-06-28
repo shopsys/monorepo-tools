@@ -39,6 +39,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         - removed check for php 7.0
         - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binaries
         - inline code skips moved to [autoload-easy-coding-standard.yml](./packages/framework/autoload-easy-coding-standard.yml) 
+- [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
+    - updated to Twig 2.4.8
+    - all depracated calls has been fixed
 - [#188 - Rebrading of Shopsys Framework](https://github.com/shopsys/shopsys/pull/188/)
     - all occurrences of netdevelo were changed to shopsys
 - [#257 - Admin: reset.less: disable scrollbar normalization in order to fix problems with jQuery UI drag&drop]( https://github.com/shopsys/shopsys/pull/257)
@@ -56,11 +59,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - `CategoryDetail` was renamed to `CategoryWithPreloadedChildren` and methods for it's creation were moved from `CategoryDetailFactory` to new `CategoryWithPreloadedChildrenFactory` 
     - `LazyLoadedCategoryDetail` was renamed to `CategoryWithLazyLoadedVisibleChildren` and methods for it's creation were moved from deleted `CategoryDetailFactory` to new `CategoryWithLazyLoadedVisibleChildrenFactory` 
 - [#274 grid: drag&drop is supported with enabled gridInlineEdit](https://github.com/shopsys/shopsys/pull/274)
-
-#### Changed
-- [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
-    - updated to Twig 2.4.8
-    - all depracated calls has been fixed
 - [#165 Different approach to multidomain entities](https://github.com/shopsys/shopsys/pull/165)
     - multi-domain entities were changed so they are used similarly to translations
     - main entities have a bidirectional association to a collection of its entity domains (eg. `BrandDomain`)
@@ -193,7 +191,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - modified [travis script](./packages/product-feed-google/.travis.yml)
         - removed check for php 7.0 due to compatibility with ecs
         - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
-
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
     - updated to Twig 2.4.8
     - all depracated calls has been fixed
@@ -206,7 +203,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - modified [travis script](./packages/product-feed-heureka/.travis.yml)
         - removed check for php 7.0 due to compatibility with ecs
         - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
-
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
     - updated to Twig 2.4.8
     - all depracated calls has been fixed
@@ -218,7 +214,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - modified [travis script](./packages/product-feed-heureka-delivery/.travis.yml)
         - removed check for php 7.0 due to compatibility with ecs
         - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
-
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
     - updated to Twig 2.4.8
     - all depracated calls has been fixed
@@ -239,7 +234,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - modified [travis script](./packages/product-feed-zbozi/.travis.yml)
         - removed check for php 7.0 due to compatibility with ecs
         - php-cs-fixer, phpcs, phpmd binaries replaced by ecs binary
-
 - [#171 - Update to twig 2.x](https://github.com/shopsys/shopsys/pull/171):
     - updated to Twig 2.4.8
     - all depracated calls has been fixed
