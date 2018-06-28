@@ -18,7 +18,7 @@ class UniqueProductParametersValidator extends ConstraintValidator
         }
 
         // Dummy validator, because validator is implemented in JS and
-        // \Shopsys\FrameworkBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer
+        // \Shopsys\FrameworkBundle\Form\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer
         // throw exception on duplicate parameters
     }
 }

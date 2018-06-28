@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Form;
 
 use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
-use Shopsys\FrameworkBundle\Component\Transformers\RemoveWhitespacesTransformer;
+use Shopsys\FrameworkBundle\Form\Transformers\RemoveWhitespacesTransformer;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;

@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Form;
 
 use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
-use Shopsys\FrameworkBundle\Component\Transformers\ImagesIdsToImagesTransformer;
+use Shopsys\FrameworkBundle\Form\Transformers\ImagesIdsToImagesTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -22,7 +22,7 @@ class ImageUploadType extends AbstractType
     private $imageFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Transformers\ImagesIdsToImagesTransformer
+     * @var \Shopsys\FrameworkBundle\Form\Transformers\ImagesIdsToImagesTransformer
      */
     private $imagesIdsToImagesTransformer;
 

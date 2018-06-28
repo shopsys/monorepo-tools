@@ -3,7 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Component\Transformers;
 
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\Transformers\ProductIdToProductTransformer;
+use Shopsys\FrameworkBundle\Form\Transformers\ProductIdToProductTransformer;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductRepository;
 
