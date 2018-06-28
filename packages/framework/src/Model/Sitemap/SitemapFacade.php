@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Sitemap;
+namespace Shopsys\FrameworkBundle\Model\Sitemap;
 
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
@@ -24,12 +24,12 @@ class SitemapFacade
     protected $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Sitemap\SitemapDumperFactory
+     * @var \Shopsys\FrameworkBundle\Model\Sitemap\SitemapDumperFactory
      */
     protected $domainSitemapDumperFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Sitemap\SitemapRepository
+     * @var \Shopsys\FrameworkBundle\Model\Sitemap\SitemapRepository
      */
     protected $sitemapRepository;
 
@@ -70,7 +70,7 @@ class SitemapFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\FrameworkBundle\Component\Sitemap\SitemapItem[]
+     * @return \Shopsys\FrameworkBundle\Model\Sitemap\SitemapItem[]
      */
     public function getSitemapItemsForVisibleProducts(DomainConfig $domainConfig)
     {
@@ -81,7 +81,7 @@ class SitemapFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\FrameworkBundle\Component\Sitemap\SitemapItem[]
+     * @return \Shopsys\FrameworkBundle\Model\Sitemap\SitemapItem[]
      */
     public function getSitemapItemsForVisibleCategories(DomainConfig $domainConfig)
     {
@@ -90,7 +90,7 @@ class SitemapFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @return \Shopsys\FrameworkBundle\Component\Sitemap\SitemapItem[]
+     * @return \Shopsys\FrameworkBundle\Model\Sitemap\SitemapItem[]
      */
     public function getSitemapItemsForArticlesOnDomain(DomainConfig $domainConfig)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Sitemap;
+namespace Shopsys\FrameworkBundle\Model\Sitemap;
 
 use Shopsys\Plugin\Cron\SimpleCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
@@ -8,7 +8,7 @@ use Symfony\Bridge\Monolog\Logger;
 class SitemapCronModule implements SimpleCronModuleInterface
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Sitemap\SitemapFacade
+     * @var \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFacade
      */
     private $sitemapFacade;
 

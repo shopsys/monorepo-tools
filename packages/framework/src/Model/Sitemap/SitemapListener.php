@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Component\Sitemap;
+namespace Shopsys\FrameworkBundle\Model\Sitemap;
 
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
 use Presta\SitemapBundle\Service\AbstractGenerator;
@@ -20,7 +20,7 @@ class SitemapListener implements EventSubscriberInterface
     const PRIORITY_ARTICLES = 0.5;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Sitemap\SitemapFacade
+     * @var \Shopsys\FrameworkBundle\Model\Sitemap\SitemapFacade
      */
     private $sitemapFacade;
 
@@ -85,7 +85,7 @@ class SitemapListener implements EventSubscriberInterface
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Sitemap\SitemapItem[] $sitemapItems
+     * @param \Shopsys\FrameworkBundle\Model\Sitemap\SitemapItem[] $sitemapItems
      * @param \Presta\SitemapBundle\Service\AbstractGenerator $generator
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param string $section

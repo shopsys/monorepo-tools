@@ -301,16 +301,16 @@ services:
 
   Shopsys\FrameworkBundle\Component\System\System: ~
 
-  Shopsys\FrameworkBundle\Component\Sitemap\SitemapDumperFactory:
+  Shopsys\FrameworkBundle\Model\Sitemap\SitemapDumperFactory:
     arguments:
       - '@event_dispatcher'
 
-  Shopsys\FrameworkBundle\Component\Sitemap\SitemapFacade:
+  Shopsys\FrameworkBundle\Model\Sitemap\SitemapFacade:
     arguments:
       - '%shopsys.sitemaps_dir%'
       - '%shopsys.sitemaps_url_prefix%'
 
-  Shopsys\FrameworkBundle\Component\Sitemap\SitemapListener:
+  Shopsys\FrameworkBundle\Model\Sitemap\SitemapListener:
     tags:
       - { name: 'kernel.event_subscriber', priority: 100 }
 
