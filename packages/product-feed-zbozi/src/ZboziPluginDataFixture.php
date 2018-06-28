@@ -3,7 +3,7 @@
 namespace Shopsys\ProductFeed\ZboziBundle;
 
 use Shopsys\Plugin\PluginDataFixtureInterface;
-use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData;
+use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainDataFactoryInterface;
 use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade;
 
 class ZboziPluginDataFixture implements PluginDataFixtureInterface
@@ -17,18 +17,26 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
     const PRODUCT_ID_FIFTH = 5;
 
     /**
-     * @var ZboziProductDomainFacade
+     * @var \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade
      */
     private $zboziProductDomainFacade;
 
-    public function __construct(ZboziProductDomainFacade $zboziProductDomainFacade)
-    {
+    /**
+     * @var \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainDataFactoryInterface
+     */
+    private $zboziProductDomainDataFactory;
+
+    public function __construct(
+        ZboziProductDomainFacade $zboziProductDomainFacade,
+        ZboziProductDomainDataFactoryInterface $zboziProductDomainDataFactory
+    ) {
         $this->zboziProductDomainFacade = $zboziProductDomainFacade;
+        $this->zboziProductDomainDataFactory = $zboziProductDomainDataFactory;
     }
 
     public function load()
     {
-        $firstZboziProductDomainData = new ZboziProductDomainData();
+        $firstZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
         $firstZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
         $firstZboziProductDomainData->cpc = 15;
         $firstZboziProductDomainData->cpcSearch = 8;
@@ -36,7 +44,7 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
 
         $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FIRST, $firstZboziProductDomainData);
 
-        $secondZboziProductDomainData = new ZboziProductDomainData();
+        $secondZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
         $secondZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
         $secondZboziProductDomainData->cpc = 12;
         $secondZboziProductDomainData->cpcSearch = 15;
@@ -44,7 +52,7 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
 
         $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FIRST, $secondZboziProductDomainData);
 
-        $thirdZboziProductDomainData = new ZboziProductDomainData();
+        $thirdZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
         $thirdZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
         $thirdZboziProductDomainData->cpc = 5;
         $thirdZboziProductDomainData->cpcSearch = 3;
@@ -52,7 +60,7 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
 
         $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_SECOND, $thirdZboziProductDomainData);
 
-        $fourthZboziProductDomainData = new ZboziProductDomainData();
+        $fourthZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
         $fourthZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
         $fourthZboziProductDomainData->cpc = 20;
         $fourthZboziProductDomainData->cpcSearch = 5;
@@ -60,7 +68,7 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
 
         $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_SECOND, $fourthZboziProductDomainData);
 
-        $fifthZboziProductDomainData = new ZboziProductDomainData();
+        $fifthZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
         $fifthZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
         $fifthZboziProductDomainData->cpc = 10;
         $fifthZboziProductDomainData->cpcSearch = 5;
@@ -68,7 +76,7 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
 
         $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_THIRD, $fifthZboziProductDomainData);
 
-        $sixthZboziProductDomainData = new ZboziProductDomainData();
+        $sixthZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
         $sixthZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
         $sixthZboziProductDomainData->cpc = 15;
         $sixthZboziProductDomainData->cpcSearch = 7;
@@ -76,7 +84,7 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
 
         $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_THIRD, $sixthZboziProductDomainData);
 
-        $seventhZboziProductDomainData = new ZboziProductDomainData();
+        $seventhZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
         $seventhZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
         $seventhZboziProductDomainData->cpc = 9;
         $seventhZboziProductDomainData->cpcSearch = 8;
@@ -84,7 +92,7 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
 
         $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FOURTH, $seventhZboziProductDomainData);
 
-        $eighthZboziProductDomainData = new ZboziProductDomainData();
+        $eighthZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
         $eighthZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
         $eighthZboziProductDomainData->cpc = 4;
         $eighthZboziProductDomainData->cpcSearch = 3;
@@ -92,7 +100,7 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
 
         $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FOURTH, $eighthZboziProductDomainData);
 
-        $ninthZboziProductDomainData = new ZboziProductDomainData();
+        $ninthZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
         $ninthZboziProductDomainData->domainId = self::DOMAIN_ID_FIRST;
         $ninthZboziProductDomainData->cpc = 4;
         $ninthZboziProductDomainData->cpcSearch = 2;
@@ -100,7 +108,7 @@ class ZboziPluginDataFixture implements PluginDataFixtureInterface
 
         $this->zboziProductDomainFacade->saveZboziProductDomain(self::PRODUCT_ID_FIFTH, $ninthZboziProductDomainData);
 
-        $tenthZboziProductDomainData = new ZboziProductDomainData();
+        $tenthZboziProductDomainData = $this->zboziProductDomainDataFactory->create();
         $tenthZboziProductDomainData->domainId = self::DOMAIN_ID_SECOND;
         $tenthZboziProductDomainData->cpc = 5;
         $tenthZboziProductDomainData->cpcSearch = 6;

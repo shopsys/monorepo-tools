@@ -4,6 +4,7 @@ namespace Shopsys\ProductFeed\ZboziBundle;
 
 use Shopsys\Plugin\PluginCrudExtensionInterface;
 use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData;
+use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainDataFactoryInterface;
 use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -20,15 +21,18 @@ class ZboziProductCrudExtension implements PluginCrudExtensionInterface
     private $zboziProductDomainFacade;
 
     /**
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainFacade $zboziProductDomainFacade
+     * @var \Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainDataFactoryInterface
      */
+    private $zboziProductDomainDataFactory;
+
     public function __construct(
         TranslatorInterface $translator,
-        ZboziProductDomainFacade $zboziProductDomainFacade
+        ZboziProductDomainFacade $zboziProductDomainFacade,
+        ZboziProductDomainDataFactoryInterface $zboziProductDomainDataFactory
     ) {
         $this->translator = $translator;
         $this->zboziProductDomainFacade = $zboziProductDomainFacade;
+        $this->zboziProductDomainDataFactory = $zboziProductDomainDataFactory;
     }
 
     /**
@@ -69,9 +73,10 @@ class ZboziProductCrudExtension implements PluginCrudExtensionInterface
         foreach ($data as $productAttributeName => $productAttributeValuesByDomainIds) {
             foreach ($productAttributeValuesByDomainIds as $domainId => $productAttributeValue) {
                 if (!array_key_exists($domainId, $zboziProductDomainsDataIndexedByDomainId)) {
-                    $zboziProductDomainsDataIndexedByDomainId[$domainId] = new ZboziProductDomainData();
+                    $zboziProductDomainsData = $this->zboziProductDomainDataFactory->create();
+                    $zboziProductDomainsData->domainId = $domainId;
 
-                    $zboziProductDomainsDataIndexedByDomainId[$domainId]->domainId = $domainId;
+                    $zboziProductDomainsDataIndexedByDomainId[$domainId] = $zboziProductDomainsData;
                 }
 
                 $this->setZboziProductDomainDataProperty(
