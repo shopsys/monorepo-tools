@@ -24,6 +24,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [7.0.0-alpha3] - 2018-07-03
 ### [shopsys/framework]
 #### Changed
 - [#272 - Changed concept of Components](https://github.com/shopsys/shopsys/pull/143):
@@ -1152,7 +1154,8 @@ That's why is this section formatted differently.
     - YesNoType
 - `.travis.yml` file with Travis CI configuration
 
-[Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...HEAD
+[Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha3...HEAD
+[7.0.0-alpha3]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...v7.0.0-alpha3
 [7.0.0-alpha2]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2
 
 [shopsys/shopsys]: https://github.com/shopsys/shopsys
