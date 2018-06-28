@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Prezent\Doctrine\Translatable\TranslationInterface;
 use Shopsys\FrameworkBundle\Component\Doctrine\NotNullableColumnsFinder;
-use Shopsys\FrameworkBundle\Component\Sql\SqlQuoter;
+use Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter;
 
 class TranslatableEntityDataCreator
 {
@@ -21,14 +21,14 @@ class TranslatableEntityDataCreator
     private $notNullableColumnsFinder;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Sql\SqlQuoter
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter
      */
     private $sqlQuoter;
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\NotNullableColumnsFinder $notNullableColumnsFinder
-     * @param \Shopsys\FrameworkBundle\Component\Sql\SqlQuoter $sqlQuoter
+     * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter $sqlQuoter
      */
     public function __construct(
         EntityManagerInterface $em,

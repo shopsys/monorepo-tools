@@ -4,8 +4,8 @@ namespace Shopsys\FrameworkBundle\Component\Domain;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
+use Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter;
 use Shopsys\FrameworkBundle\Component\Doctrine\StringColumnsFinder;
-use Shopsys\FrameworkBundle\Component\Sql\SqlQuoter;
 
 class DomainUrlService
 {
@@ -20,7 +20,7 @@ class DomainUrlService
     private $em;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Sql\SqlQuoter
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter
      */
     private $sqlQuoter;
 
