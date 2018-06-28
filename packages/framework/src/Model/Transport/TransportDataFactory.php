@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Transport;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 
-class TransportDataFactory
+class TransportDataFactory implements TransportDataFactoryInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Transport\TransportFacade
@@ -35,26 +35,44 @@ class TransportDataFactory
     /**
      * @return \Shopsys\FrameworkBundle\Model\Transport\TransportData
      */
-    public function createDefault()
+    public function create(): TransportData
     {
         $transportData = new TransportData();
+        $this->fillNew($transportData);
+
+        return $transportData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportData $transportData
+     */
+    protected function fillNew(TransportData $transportData)
+    {
         $transportData->vat = $this->vatFacade->getDefaultVat();
 
         foreach ($this->domain->getAllIds() as $domainId) {
             $transportData->enabled[$domainId] = true;
         }
-
-        return $transportData;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
      * @return \Shopsys\FrameworkBundle\Model\Transport\TransportData
      */
-    public function createFromTransport(Transport $transport)
+    public function createFromTransport(Transport $transport): TransportData
     {
-        $transportData = $this->createDefault();
+        $transportData = new TransportData();
+        $this->fillFromTransport($transportData, $transport);
 
+        return $transportData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportData $transportData
+     * @param \Shopsys\FrameworkBundle\Model\Transport\Transport $transport
+     */
+    protected function fillFromTransport(TransportData $transportData, Transport $transport)
+    {
         $names = [];
         $descriptions = [];
         $instructions = [];
@@ -82,7 +100,5 @@ class TransportDataFactory
         foreach ($transport->getPrices() as $transportPrice) {
             $transportData->pricesByCurrencyId[$transportPrice->getCurrency()->getId()] = $transportPrice->getPrice();
         }
-
-        return $transportData;
     }
 }

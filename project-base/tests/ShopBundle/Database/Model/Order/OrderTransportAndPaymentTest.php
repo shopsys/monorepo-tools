@@ -401,7 +401,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
     {
         $transportDataFactory = $this->getTransportDataFactory();
 
-        $transportData = $transportDataFactory->createDefault();
+        $transportData = $transportDataFactory->create();
         $transportData->name = [
             'cs' => 'paymentName',
             'en' => 'paymentName',

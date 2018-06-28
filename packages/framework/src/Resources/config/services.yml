@@ -897,3 +897,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Slider\SliderItemDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Slider\SliderItemDataFactory
+
+  Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory

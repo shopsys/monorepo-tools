@@ -25,7 +25,7 @@ class PaymentTest extends DatabaseTestCase
         $vatData->name = 'vat';
         $vatData->percent = 21;
         $vat = new Vat($vatData);
-        $transportData = $transportDataFactory->createDefault();
+        $transportData = $transportDataFactory->create();
         $transportData->name['cs'] = 'name';
         $transportData->vat = $vat;
         $transport = new Transport($transportData);

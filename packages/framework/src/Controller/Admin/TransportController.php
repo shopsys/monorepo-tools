@@ -9,7 +9,7 @@ use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Transport\Grid\TransportGridFactory;
-use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,7 +31,7 @@ class TransportController extends AdminBaseController
     private $transportGridFactory;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface
      */
     private $transportDataFactory;
 
@@ -43,7 +43,7 @@ class TransportController extends AdminBaseController
     public function __construct(
         TransportFacade $transportFacade,
         TransportGridFactory $transportGridFactory,
-        TransportDataFactory $transportDataFactory,
+        TransportDataFactoryInterface $transportDataFactory,
         CurrencyFacade $currencyFacade,
         Breadcrumb $breadcrumb
     ) {
@@ -60,7 +60,7 @@ class TransportController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $transportData = $this->transportDataFactory->createDefault();
+        $transportData = $this->transportDataFactory->create();
 
         $form = $this->createForm(TransportEditFormType::class, $transportData, [
             'transport' => null,

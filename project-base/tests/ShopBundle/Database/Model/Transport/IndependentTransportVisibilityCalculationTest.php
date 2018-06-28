@@ -42,7 +42,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
         $em = $this->getEntityManager();
         $vat = $this->getDefaultVat();
 
-        $transportData = $this->getTransportDataFactory()->createDefault();
+        $transportData = $this->getTransportDataFactory()->create();
         $transportData->name = [
             'cs' => null,
             'en' => null,
@@ -123,7 +123,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
     {
         $transportDataFactory = $this->getTransportDataFactory();
 
-        $transportData = $transportDataFactory->createDefault();
+        $transportData = $transportDataFactory->create();
         $transportData->name = [
             'cs' => 'paymentName',
             'en' => 'paymentName',

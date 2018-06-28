@@ -136,7 +136,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $payment = $paymentFacade->create($paymentData);
         /* @var $payment \Shopsys\FrameworkBundle\Model\Payment\Payment */
 
-        $transportData = $transportDataFactory->createDefault();
+        $transportData = $transportDataFactory->create();
         $transportData->name = ['cs' => 'name'];
         $transportData->description = ['cs' => 'desc'];
         $transportData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
@@ -214,7 +214,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $payment = $paymentFacade->create($paymentData);
         /* @var $payment \Shopsys\FrameworkBundle\Model\Payment\Payment */
 
-        $transportData = $transportDataFactory->createDefault();
+        $transportData = $transportDataFactory->create();
         $transportData->name = ['cs' => 'name'];
         $transportData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
         $transportData->vat = $vat;
