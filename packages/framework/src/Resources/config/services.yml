@@ -894,3 +894,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Script\ScriptDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Script\ScriptDataFactory
+
+  Shopsys\FrameworkBundle\Model\Slider\SliderItemDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Slider\SliderItemDataFactory

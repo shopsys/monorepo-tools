@@ -5,20 +5,27 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Model\Slider\SliderItemData;
+use Shopsys\FrameworkBundle\Model\Slider\SliderItemDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade;
 
 class SliderItemDataFixture extends AbstractReferenceFixture
 {
-    /** @var \Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade
+     */
     private $sliderItemFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Slider\SliderItemFacade $sliderItemFacade
+     * @var \Shopsys\FrameworkBundle\Model\Slider\SliderItemDataFactoryInterface
      */
-    public function __construct(SliderItemFacade $sliderItemFacade)
-    {
+    private $sliderItemDataFactory;
+
+    public function __construct(
+        SliderItemFacade $sliderItemFacade,
+        SliderItemDataFactoryInterface $sliderItemDataFactory
+    ) {
         $this->sliderItemFacade = $sliderItemFacade;
+        $this->sliderItemDataFactory = $sliderItemDataFactory;
     }
 
     /**
@@ -26,7 +33,7 @@ class SliderItemDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $sliderItemData = new SliderItemData();
+        $sliderItemData = $this->sliderItemDataFactory->create();
         $sliderItemData->domainId = Domain::FIRST_DOMAIN_ID;
 
         $sliderItemData->name = 'Shopsys';
