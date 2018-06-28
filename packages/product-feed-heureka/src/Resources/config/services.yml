@@ -37,3 +37,6 @@ services:
 
   Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDataFactoryInterface:
     alias: Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDataFactory
+
+  Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainDataFactoryInterface:
+    alias: Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainDataFactory

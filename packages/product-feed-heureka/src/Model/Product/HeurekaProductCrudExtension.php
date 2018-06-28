@@ -19,15 +19,18 @@ class HeurekaProductCrudExtension implements PluginCrudExtensionInterface
     private $heurekaProductDomainFacade;
 
     /**
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade $heurekaProductDomainFacade
+     * @var \Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainDataFactoryInterface
      */
+    private $heurekaProductDomainDataFactory;
+
     public function __construct(
         TranslatorInterface $translator,
-        HeurekaProductDomainFacade $heurekaProductDomainFacade
+        HeurekaProductDomainFacade $heurekaProductDomainFacade,
+        HeurekaProductDomainDataFactoryInterface $heurekaProductDomainDataFactory
     ) {
         $this->translator = $translator;
         $this->heurekaProductDomainFacade = $heurekaProductDomainFacade;
+        $this->heurekaProductDomainDataFactory = $heurekaProductDomainDataFactory;
     }
 
     /**
@@ -72,7 +75,7 @@ class HeurekaProductCrudExtension implements PluginCrudExtensionInterface
         $heurekaProductDomainsData = [];
         if (array_key_exists('cpc', $data)) {
             foreach ($data['cpc'] as $domainId => $cpc) {
-                $heurekaProductDomainData = new HeurekaProductDomainData();
+                $heurekaProductDomainData = $this->heurekaProductDomainDataFactory->create();
                 $heurekaProductDomainData->domainId = $domainId;
                 $heurekaProductDomainData->cpc = $cpc;
 
