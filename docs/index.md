@@ -8,6 +8,7 @@
 * [Custom Entities](introduction/custom-entities.md)
 * [Basics About Package Architecture](./introduction/basics-about-package-architecture.md)
 * [Database Migrations](./introduction/database-migrations.md)
+* [Components](./introduction/components.md)
 
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)

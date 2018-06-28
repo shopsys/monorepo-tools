@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Controller\Admin;
 
-use Shopsys\FrameworkBundle\Component\Controller\AdminBaseController;
 use Shopsys\FrameworkBundle\Component\Domain\DomainFacade;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuFactory;
 

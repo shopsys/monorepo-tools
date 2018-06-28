@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Component\Doctrine\Exception;
 
 use Exception;
-use Shopsys\FrameworkBundle\Component\Debug;
+use Shopsys\FrameworkBundle\Component\Utils\Debug;
 
 class InvalidCountOfAliasesException extends Exception
 {

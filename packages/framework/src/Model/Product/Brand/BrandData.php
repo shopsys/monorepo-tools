@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Brand;
 
 use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
-use Shopsys\FrameworkBundle\Form\UrlListData;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData;
 
 class BrandData
 {
@@ -23,7 +23,7 @@ class BrandData
     public $descriptions;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Form\UrlListData
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData
      */
     public $urls;
 

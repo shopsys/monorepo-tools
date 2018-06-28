@@ -3,10 +3,10 @@
 namespace Shopsys\FrameworkBundle\Form\Admin\Mail;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Shopsys\FrameworkBundle\Component\Constraints\Contains;
-use Shopsys\FrameworkBundle\Component\Constraints\Email;
-use Shopsys\FrameworkBundle\Component\Transformers\EmptyWysiwygTransformer;
+use Shopsys\FrameworkBundle\Form\Constraints\Contains;
+use Shopsys\FrameworkBundle\Form\Constraints\Email;
 use Shopsys\FrameworkBundle\Form\FileUploadType;
+use Shopsys\FrameworkBundle\Form\Transformers\EmptyWysiwygTransformer;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateData;
 use Symfony\Component\Form\AbstractType;

@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Shopsys\FrameworkBundle\Component\Domain\DomainFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
@@ -72,7 +71,6 @@ class ProductInputPriceFacade
         PricingSetting $pricingSetting,
         ProductManualInputPriceRepository $productManualInputPriceRepository,
         PricingGroupFacade $pricingGroupFacade,
-        DomainFacade $domainFacade,
         ProductRepository $productRepository,
         ProductService $productService
     ) {
@@ -81,7 +79,6 @@ class ProductInputPriceFacade
         $this->currencyFacade = $currencyFacade;
         $this->pricingSetting = $pricingSetting;
         $this->productManualInputPriceRepository = $productManualInputPriceRepository;
-        $this->domainFacade = $domainFacade;
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->productRepository = $productRepository;
         $this->productService = $productService;
@@ -97,7 +94,7 @@ class ProductInputPriceFacade
         $defaultCurrency = $this->currencyFacade->getDefaultCurrency();
         $manualInputPricesInDefaultCurrency = $this->productManualInputPriceRepository->getByProductAndDomainConfigs(
             $product,
-            $this->domainFacade->getDomainConfigsByCurrency($defaultCurrency)
+            $this->currencyFacade->getDomainConfigsByCurrency($defaultCurrency)
         );
 
         return $this->productInputPriceService->getInputPrice($product, $inputPriceType, $manualInputPricesInDefaultCurrency);

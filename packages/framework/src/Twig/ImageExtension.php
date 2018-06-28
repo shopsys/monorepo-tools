@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\Twig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
 use Shopsys\FrameworkBundle\Component\Image\ImageLocator;
-use Shopsys\FrameworkBundle\Component\Utils;
+use Shopsys\FrameworkBundle\Component\Utils\Utils;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_Extension;

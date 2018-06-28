@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Component\Domain\Multidomain;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Shopsys\FrameworkBundle\Component\Sql\SqlQuoter;
+use Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter;
 
 class MultidomainEntityDataCreator
 {
@@ -19,7 +19,7 @@ class MultidomainEntityDataCreator
     private $em;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Sql\SqlQuoter
+     * @var \Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter
      */
     private $sqlQuoter;
 

@@ -3,7 +3,6 @@
 namespace Shopsys\ShopBundle\Controller\Front;
 
 use Exception;
-use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Error\ErrorPagesFacade;
 use Shopsys\FrameworkBundle\Component\Error\ExceptionController;

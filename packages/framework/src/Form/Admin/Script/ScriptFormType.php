@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Script;
 
-use Shopsys\FrameworkBundle\Component\Transformers\ScriptPlacementToBooleanTransformer;
+use Shopsys\FrameworkBundle\Form\Transformers\ScriptPlacementToBooleanTransformer;
 use Shopsys\FrameworkBundle\Model\Script\ScriptData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

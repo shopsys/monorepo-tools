@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
 use Shopsys\FrameworkBundle\Model\Advert\AdvertFacade;
 
 class AdvertController extends FrontBaseController

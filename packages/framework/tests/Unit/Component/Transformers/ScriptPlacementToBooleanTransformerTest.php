@@ -3,7 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Component\Transformers;
 
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\Transformers\ScriptPlacementToBooleanTransformer;
+use Shopsys\FrameworkBundle\Form\Transformers\ScriptPlacementToBooleanTransformer;
 use Shopsys\FrameworkBundle\Model\Script\Script;
 use stdClass;
 

@@ -2,9 +2,9 @@
 
 namespace Tests\ShopBundle\Database\Component\Domain\Multidomain;
 
+use Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter;
 use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
-use Shopsys\FrameworkBundle\Component\Sql\SqlQuoter;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
 class MultidomainEntityDataCreatorTest extends DatabaseTestCase

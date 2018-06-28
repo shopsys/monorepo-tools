@@ -2,7 +2,6 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\ContactForm\ContactFormData;
 use Shopsys\FrameworkBundle\Model\ContactForm\ContactFormFacade;

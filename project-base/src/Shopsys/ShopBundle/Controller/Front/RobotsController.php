@@ -2,9 +2,8 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
-use Shopsys\FrameworkBundle\Component\Controller\FrontBaseController;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\Component\Sitemap\SitemapService;
+use Shopsys\FrameworkBundle\Model\Sitemap\SitemapService;
 use Symfony\Component\HttpFoundation\Response;
 
 class RobotsController extends FrontBaseController
@@ -15,7 +14,7 @@ class RobotsController extends FrontBaseController
     private $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Sitemap\SitemapService
+     * @var \Shopsys\FrameworkBundle\Model\Sitemap\SitemapService
      */
     private $sitemapService;
 

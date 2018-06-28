@@ -6,9 +6,9 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader;
+use Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
@@ -18,7 +18,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
     /** @var \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader */
     private $productDataFixtureLoader;
 
-    /** @var \Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector */
+    /** @var \Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector */
     private $referenceInjector;
 
     /** @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade */
@@ -35,7 +35,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 
     /**
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
-     * @param \Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector $referenceInjector
+     * @param \Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector $referenceInjector
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @param \Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureCsvReader $productDataFixtureCsvReader
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade

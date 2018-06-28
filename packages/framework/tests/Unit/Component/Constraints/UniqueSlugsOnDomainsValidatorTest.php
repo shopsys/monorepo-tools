@@ -2,13 +2,13 @@
 
 namespace Tests\FrameworkBundle\Unit\Component\Constraints;
 
-use Shopsys\FrameworkBundle\Component\Constraints\UniqueSlugsOnDomains;
-use Shopsys\FrameworkBundle\Component\Constraints\UniqueSlugsOnDomainsValidator;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
-use Shopsys\FrameworkBundle\Form\FriendlyUrlType;
+use Shopsys\FrameworkBundle\Form\Constraints\UniqueSlugsOnDomains;
+use Shopsys\FrameworkBundle\Form\Constraints\UniqueSlugsOnDomainsValidator;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
@@ -49,12 +49,12 @@ class UniqueSlugsOnDomainsValidatorTest extends ConstraintValidatorTestCase
     {
         $values = [
             [
-                FriendlyUrlType::FIELD_DOMAIN => 1,
-                FriendlyUrlType::FIELD_SLUG => 'new-url/',
+                UrlListData::FIELD_DOMAIN => 1,
+                UrlListData::FIELD_SLUG => 'new-url/',
             ],
             [
-                FriendlyUrlType::FIELD_DOMAIN => 2,
-                FriendlyUrlType::FIELD_SLUG => 'new-url/',
+                UrlListData::FIELD_DOMAIN => 2,
+                UrlListData::FIELD_SLUG => 'new-url/',
             ],
         ];
         $constraint = new UniqueSlugsOnDomains();
@@ -67,12 +67,12 @@ class UniqueSlugsOnDomainsValidatorTest extends ConstraintValidatorTestCase
     {
         $values = [
             [
-                FriendlyUrlType::FIELD_DOMAIN => 1,
-                FriendlyUrlType::FIELD_SLUG => 'new-url/',
+                UrlListData::FIELD_DOMAIN => 1,
+                UrlListData::FIELD_SLUG => 'new-url/',
             ],
             [
-                FriendlyUrlType::FIELD_DOMAIN => 1,
-                FriendlyUrlType::FIELD_SLUG => 'new-url/',
+                UrlListData::FIELD_DOMAIN => 1,
+                UrlListData::FIELD_SLUG => 'new-url/',
             ],
         ];
         $constraint = new UniqueSlugsOnDomains();
@@ -89,8 +89,8 @@ class UniqueSlugsOnDomainsValidatorTest extends ConstraintValidatorTestCase
     {
         $values = [
             [
-                FriendlyUrlType::FIELD_DOMAIN => 1,
-                FriendlyUrlType::FIELD_SLUG => 'existing-url/',
+                UrlListData::FIELD_DOMAIN => 1,
+                UrlListData::FIELD_SLUG => 'existing-url/',
             ],
         ];
         $constraint = new UniqueSlugsOnDomains();

@@ -2,9 +2,9 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Category\TopCategory;
 
-use Shopsys\FrameworkBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer;
-use Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use Shopsys\FrameworkBundle\Form\SortableValuesType;
+use Shopsys\FrameworkBundle\Form\Transformers\CategoriesIdsToCategoriesTransformer;
+use Shopsys\FrameworkBundle\Form\Transformers\RemoveDuplicatesFromArrayTransformer;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -19,19 +19,19 @@ class TopCategoriesFormType extends AbstractType
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
+     * @var \Shopsys\FrameworkBundle\Form\Transformers\RemoveDuplicatesFromArrayTransformer
      */
     private $removeDuplicatesTransformer;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer
+     * @var \Shopsys\FrameworkBundle\Form\Transformers\CategoriesIdsToCategoriesTransformer
      */
     private $categoriesIdsToCategoriesTransformer;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
-     * @param \Shopsys\FrameworkBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
-     * @param \Shopsys\FrameworkBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer $categoriesIdsToCategoriesTransformer
+     * @param \Shopsys\FrameworkBundle\Form\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
+     * @param \Shopsys\FrameworkBundle\Form\Transformers\CategoriesIdsToCategoriesTransformer $categoriesIdsToCategoriesTransformer
      */
     public function __construct(
         CategoryFacade $categoryFacade,

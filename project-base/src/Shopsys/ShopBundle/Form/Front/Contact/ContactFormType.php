@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Form\Front\Contact;
 
-use Shopsys\FrameworkBundle\Component\Constraints\Email;
+use Shopsys\FrameworkBundle\Component\Form\TimedFormTypeExtension;
+use Shopsys\FrameworkBundle\Form\Constraints\Email;
 use Shopsys\FrameworkBundle\Form\HoneyPotType;
-use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
 use Shopsys\FrameworkBundle\Model\ContactForm\ContactFormData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

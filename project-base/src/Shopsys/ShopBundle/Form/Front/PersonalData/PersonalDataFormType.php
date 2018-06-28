@@ -2,8 +2,8 @@
 
 namespace Shopsys\ShopBundle\Form\Front\PersonalData;
 
+use Shopsys\FrameworkBundle\Component\Form\TimedFormTypeExtension;
 use Shopsys\FrameworkBundle\Form\HoneyPotType;
-use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
 use Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;

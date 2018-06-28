@@ -3,7 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Component\Transformers;
 
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\Transformers\IndexedBooleansToArrayOfIndexesTransformer;
+use Shopsys\FrameworkBundle\Form\Transformers\IndexedBooleansToArrayOfIndexesTransformer;
 
 class IndexedBooleansToArrayOfIndexesTransformerTest extends TestCase
 {

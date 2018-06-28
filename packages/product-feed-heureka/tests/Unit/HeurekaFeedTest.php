@@ -2,9 +2,9 @@
 
 namespace Tests\ProductFeed\HeurekaBundle\Unit;
 
-use DOMDocument;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Xml\XmlNormalizer;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\HeurekaBundle\HeurekaFeedConfig;
@@ -208,10 +208,10 @@ class HeurekaFeedTest extends TestCase
         $processedFeedItems = $this->heurekaFeedConfig->processItems($feedItems, $domainConfigMock);
 
         $generatedXml = $this->getFeedOutputByFeedItems($processedFeedItems, $domainConfigMock);
-        $generatedXml = $this->normalizeXml($generatedXml);
+        $generatedXml = XmlNormalizer::normalizeXml($generatedXml);
 
         $expectedXml = file_get_contents(__DIR__ . '/Resources/' . self::EXPECTED_XML_FILE_NAME);
-        $expectedXml = $this->normalizeXml($expectedXml);
+        $expectedXml = XmlNormalizer::normalizeXml($expectedXml);
 
         $this->assertEquals($expectedXml, $generatedXml);
     }
@@ -324,21 +324,5 @@ class HeurekaFeedTest extends TestCase
         $domainConfigMock->method('getLocale')->willReturn($locale);
 
         return $domainConfigMock;
-    }
-
-    /**
-     * @param $feedContent
-     * @return string
-     */
-    private function normalizeXml($feedContent)
-    {
-        $document = new DOMDocument('1.0');
-        $document->preserveWhiteSpace = false;
-        $document->formatOutput = true;
-
-        $document->loadXML($feedContent);
-        $generatedXml = $document->saveXML();
-
-        return $generatedXml;
     }
 }

@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Article;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Shopsys\FrameworkBundle\Component\Gedmo\SortablePosition;
 use Shopsys\FrameworkBundle\Component\Grid\Ordering\OrderableEntityInterface;
 
 /**
@@ -16,6 +15,8 @@ class Article implements OrderableEntityInterface
     const PLACEMENT_TOP_MENU = 'topMenu';
     const PLACEMENT_FOOTER = 'footer';
     const PLACEMENT_NONE = 'none';
+
+    private const GEDMO_SORTABLE_LAST_POSITION = -1;
 
     /**
      * @var int
@@ -104,7 +105,7 @@ class Article implements OrderableEntityInterface
         $this->seoMetaDescription = $articleData->seoMetaDescription;
         $this->seoH1 = $articleData->seoH1;
         $this->placement = $articleData->placement;
-        $this->position = SortablePosition::LAST_POSITION;
+        $this->position = self::GEDMO_SORTABLE_LAST_POSITION;
         $this->hidden = $articleData->hidden;
     }
 

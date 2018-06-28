@@ -2,8 +2,8 @@
 
 namespace Tests\FrameworkBundle\Unit\Component\Constraints;
 
-use Shopsys\FrameworkBundle\Component\Constraints\FileExtensionMaxLength;
-use Shopsys\FrameworkBundle\Component\Constraints\FileExtensionMaxLengthValidator;
+use Shopsys\FrameworkBundle\Form\Constraints\FileExtensionMaxLength;
+use Shopsys\FrameworkBundle\Form\Constraints\FileExtensionMaxLengthValidator;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 

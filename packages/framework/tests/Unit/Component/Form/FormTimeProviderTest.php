@@ -5,7 +5,7 @@ namespace Tests\FrameworkBundle\Unit\Component\Form;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Form\FormTimeProvider;
-use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
+use Shopsys\FrameworkBundle\Component\Form\TimedFormTypeExtension;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class FormTimeProviderTest extends TestCase

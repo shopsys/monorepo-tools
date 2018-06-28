@@ -2,7 +2,7 @@ imports:
   - { resource: services/*.yml }
 
 parameters:
-  fp_js_form_validator.factory.class: Shopsys\FrameworkBundle\Component\Validator\JsFormValidatorFactory
+  fp_js_form_validator.factory.class: Shopsys\FrameworkBundle\Form\JsFormValidatorFactory
   prezent_doctrine_translatable.listener.class: Shopsys\FrameworkBundle\Model\Localization\TranslatableListener
   faker.seed: 1234
   shopsys.entity_extension.map: {}
@@ -128,7 +128,7 @@ services:
     arguments:
       - '@monolog.logger.cron'
 
-  Shopsys\FrameworkBundle\Component\DataFixture\ProductDataFixtureReferenceInjector: ~
+  Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector: ~
 
   Shopsys\FrameworkBundle\Component\Css\CssFacade:
     arguments:
@@ -156,6 +156,11 @@ services:
     arguments:
       - '%shopsys.domain_config_filepath%'
       - '%shopsys.domain_urls_config_filepath%'
+
+  Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultiDomainEntityClassProvider: ~
+
+  Shopsys\FrameworkBundle\Component\Domain\Multidomain\MultiDomainEntityClassProviderInterface:
+    alias: Shopsys\FrameworkBundle\Model\MultiDomainEntityClassProvider
 
   Shopsys\FrameworkBundle\Component\Domain\DomainAwareSecurityHeadersSetter:
     tags:
@@ -188,7 +193,7 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
-  Shopsys\FrameworkBundle\Component\Error\Reporting\LogErrorReportingFacade:
+  Shopsys\FrameworkBundle\Model\Mail\Reporting\LogErrorReportingFacade:
     arguments:
       - '%kernel.logs_dir%'
 
@@ -271,22 +276,23 @@ services:
     factory: ['@Shopsys\FrameworkBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory', create]
     synthetic: false
 
-  Shopsys\FrameworkBundle\Component\Log\SlowLogFacade:
+  Shopsys\FrameworkBundle\Component\Log\SlowLogSubscriber:
     arguments:
       - '@monolog.logger.slow'
     tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-      - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
+      - { name: kernel.event_subscriber }
 
-  Shopsys\FrameworkBundle\Component\Request\TransactionalMasterRequestService:
+  Shopsys\FrameworkBundle\Component\HttpFoundation\TransactionalMasterRequestService:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
-  Shopsys\FrameworkBundle\Component\Request\VaryResponseByXRequestedWithHeaderListener:
+  Shopsys\FrameworkBundle\Component\HttpFoundation\VaryResponseByXRequestedWithHeaderListener:
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
+  Shopsys\FrameworkBundle\Component\HttpFoundation\XmlResponse: ~
 
   Shopsys\FrameworkBundle\Component\Setting\Setting: ~
 
@@ -295,16 +301,16 @@ services:
 
   Shopsys\FrameworkBundle\Component\System\System: ~
 
-  Shopsys\FrameworkBundle\Component\Sitemap\SitemapDumperFactory:
+  Shopsys\FrameworkBundle\Model\Sitemap\SitemapDumperFactory:
     arguments:
       - '@event_dispatcher'
 
-  Shopsys\FrameworkBundle\Component\Sitemap\SitemapFacade:
+  Shopsys\FrameworkBundle\Model\Sitemap\SitemapFacade:
     arguments:
       - '%shopsys.sitemaps_dir%'
       - '%shopsys.sitemaps_url_prefix%'
 
-  Shopsys\FrameworkBundle\Component\Sitemap\SitemapListener:
+  Shopsys\FrameworkBundle\Model\Sitemap\SitemapListener:
     tags:
       - { name: 'kernel.event_subscriber', priority: 100 }
 
@@ -374,13 +380,13 @@ services:
       - '%shopsys.uploaded_file_dir%'
       - '%shopsys.uploaded_file_url_prefix%'
 
-  Shopsys\FrameworkBundle\Component\Constraints\NotSelectedDomainToShowValidator:
+  Shopsys\FrameworkBundle\Form\Constraints\NotSelectedDomainToShowValidator:
     tags:
-      - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Component\Constraints\NotSelectedDomainToShowValidator }
+      - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Form\Constraints\NotSelectedDomainToShowValidator }
 
-  Shopsys\FrameworkBundle\Component\Constraints\UniqueSlugsOnDomainsValidator:
+  Shopsys\FrameworkBundle\Form\Constraints\UniqueSlugsOnDomainsValidator:
     tags:
-      - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Component\Constraints\UniqueSlugsOnDomainsValidator }
+      - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Form\Constraints\UniqueSlugsOnDomainsValidator }
 
   Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorUserProvider: ~
 
@@ -499,7 +505,7 @@ services:
 
   Symfony\Component\Config\Loader\LoaderInterface: '@routing.loader'
 
-  Shopsys\FrameworkBundle\Component\Sql\SqlQuoter: ~
+  Shopsys\FrameworkBundle\Component\Doctrine\SqlQuoter: ~
 
   Shopsys\FrameworkBundle\Component\Router\CurrentDomainRouter:
     tags:
@@ -572,9 +578,9 @@ services:
   twig.stringloader:
     class: Twig_Loader_Array
 
-  Shopsys\FrameworkBundle\Component\Constraints\UniqueEmailValidator:
+  Shopsys\FrameworkBundle\Form\Constraints\UniqueEmailValidator:
     tags:
-      - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Component\Constraints\UniqueEmailValidator }
+      - { name: validator.constraint_validator, alias: Shopsys\FrameworkBundle\Form\Constraints\UniqueEmailValidator }
 
   monolog.activation_strategy.not_found:
     abstract: true
@@ -586,9 +592,9 @@ services:
 
   Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader: '@doctrine.fixtures.loader'
 
-  Shopsys\FrameworkBundle\Component\Entity\EntityNotNullableColumnsFinder: ~
+  Shopsys\FrameworkBundle\Component\Doctrine\NotNullableColumnsFinder: ~
 
-  Shopsys\FrameworkBundle\Component\Entity\EntityStringColumnsFinder: ~
+  Shopsys\FrameworkBundle\Component\Doctrine\StringColumnsFinder: ~
 
   Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber:
     class: Shopsys\FrameworkBundle\Component\EntityExtension\EntityExtensionParentMetadataCleanerEventSubscriber
@@ -637,6 +643,10 @@ services:
   Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Article\ArticleFactory
 
+  Shopsys\FrameworkBundle\Model\Article\ArticleDetailFriendlyUrlDataProvider:
+    tags:
+      - {name: shopsys.friendly_url_provider}
+
   Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFactory
 
@@ -645,6 +655,10 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Brand\BrandDetailFriendlyUrlDataProvider:
+    tags:
+      - {name: shopsys.friendly_url_provider}
 
   Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory
@@ -669,6 +683,8 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactory
+
+  Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderConfig: ~
 
   Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactoryInterface:
     alias: Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactory
@@ -723,6 +739,14 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\ProductFactory
+
+  Shopsys\FrameworkBundle\Model\Product\ProductDetailFriendlyUrlDataProvider:
+    tags:
+      - {name: shopsys.friendly_url_provider}
+
+  Shopsys\FrameworkBundle\Model\Product\ProductListFriendlyUrlDataProvider:
+    tags:
+      - {name: shopsys.friendly_url_provider}
 
   Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFactory

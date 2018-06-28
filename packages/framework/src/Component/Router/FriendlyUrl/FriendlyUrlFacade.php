@@ -5,8 +5,6 @@ namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
-use Shopsys\FrameworkBundle\Form\FriendlyUrlType;
-use Shopsys\FrameworkBundle\Form\UrlListData;
 
 class FriendlyUrlFacade
 {
@@ -157,7 +155,7 @@ class FriendlyUrlFacade
     /**
      * @param string $routeName
      * @param int $entityId
-     * @param \Shopsys\FrameworkBundle\Form\UrlListData $urlListData
+     * @param \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData $urlListData
      */
     public function saveUrlListFormData($routeName, $entityId, UrlListData $urlListData)
     {
@@ -179,8 +177,8 @@ class FriendlyUrlFacade
         }
 
         foreach ($urlListData->newUrls as $urlData) {
-            $domainId = $urlData[FriendlyUrlType::FIELD_DOMAIN];
-            $newSlug = $urlData[FriendlyUrlType::FIELD_SLUG];
+            $domainId = $urlData[UrlListData::FIELD_DOMAIN];
+            $newSlug = $urlData[UrlListData::FIELD_SLUG];
             $newFriendlyUrl = $this->friendlyUrlFactory->create($routeName, $entityId, $domainId, $newSlug);
             $this->em->persist($newFriendlyUrl);
             $toFlush[] = $newFriendlyUrl;

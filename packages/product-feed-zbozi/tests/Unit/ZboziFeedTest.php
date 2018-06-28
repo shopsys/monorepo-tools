@@ -2,9 +2,9 @@
 
 namespace Tests\ProductFeed\ZboziBundle\Unit;
 
-use DOMDocument;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Shopsys\FrameworkBundle\Component\Xml\XmlNormalizer;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\ProductFeed\DomainConfigInterface;
 use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomain;
@@ -210,10 +210,10 @@ class ZboziFeedTest extends TestCase
         $processedFeedItems = $this->zboziFeedConfig->processItems($feedItems, $domainConfigMock);
 
         $generatedXml = $this->getFeedOutputByFeedItems($processedFeedItems, $domainConfigMock);
-        $generatedXml = $this->normalizeXml($generatedXml);
+        $generatedXml = XmlNormalizer::normalizeXml($generatedXml);
 
         $expectedXml = file_get_contents(__DIR__ . '/Resources/' . self::EXPECTED_XML_FILE_NAME);
-        $expectedXml = $this->normalizeXml($expectedXml);
+        $expectedXml = XmlNormalizer::normalizeXml($expectedXml);
 
         $this->assertEquals($expectedXml, $generatedXml);
     }
@@ -326,21 +326,5 @@ class ZboziFeedTest extends TestCase
         );
 
         return $feedItems;
-    }
-
-    /**
-     * @param string $feedContent
-     * @return string
-     */
-    private function normalizeXml($feedContent)
-    {
-        $document = new DOMDocument('1.0');
-        $document->preserveWhiteSpace = false;
-        $document->formatOutput = true;
-
-        $document->loadXML($feedContent);
-        $generatedXml = $document->saveXML();
-
-        return $generatedXml;
     }
 }

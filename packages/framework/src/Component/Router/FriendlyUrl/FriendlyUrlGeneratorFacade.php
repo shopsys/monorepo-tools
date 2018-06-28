@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderRegistry;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class FriendlyUrlGeneratorFacade
@@ -25,20 +26,20 @@ class FriendlyUrlGeneratorFacade
     protected $friendlyUrlFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlToGenerateRepository
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderRegistry
      */
-    protected $friendlyUrlToGenerateRepository;
+    protected $friendlyUrlDataProviderConfig;
 
     public function __construct(
         Domain $domain,
         DomainRouterFactory $domainRouterFactory,
         FriendlyUrlFacade $friendlyUrlFacade,
-        FriendlyUrlToGenerateRepository $friendlyUrlToGenerateRepository
+        FriendlyUrlDataProviderRegistry $friendlyUrlDataProviderConfig
     ) {
         $this->domain = $domain;
         $this->domainRouterFactory = $domainRouterFactory;
         $this->friendlyUrlFacade = $friendlyUrlFacade;
-        $this->friendlyUrlToGenerateRepository = $friendlyUrlToGenerateRepository;
+        $this->friendlyUrlDataProviderConfig = $friendlyUrlDataProviderConfig;
     }
 
     /**
@@ -93,7 +94,9 @@ class FriendlyUrlGeneratorFacade
     {
         $countOfCreatedUrls = 0;
 
-        foreach ($this->getFriendlyUrlsDataByRouteName($routeName, $domainConfig) as $friendlyUrlData) {
+        $friendlyUrlsData = $this->friendlyUrlDataProviderConfig->getFriendlyUrlDataByRouteAndDomain($routeName, $domainConfig);
+
+        foreach ($friendlyUrlsData as $friendlyUrlData) {
             $this->friendlyUrlFacade->createFriendlyUrlForDomain(
                 $routeName,
                 $friendlyUrlData->id,
@@ -104,29 +107,5 @@ class FriendlyUrlGeneratorFacade
         }
 
         return $countOfCreatedUrls;
-    }
-
-    /**
-     * @param string $routeName
-     * @param DomainConfig $domainConfig
-     * @return \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
-     */
-    protected function getFriendlyUrlsDataByRouteName($routeName, DomainConfig $domainConfig)
-    {
-        switch ($routeName) {
-            case 'front_article_detail':
-                return $this->friendlyUrlToGenerateRepository->getArticleData($routeName, $domainConfig);
-
-            case 'front_product_detail':
-                return $this->friendlyUrlToGenerateRepository->getProductDetailData($routeName, $domainConfig);
-
-            case 'front_product_list':
-                return $this->friendlyUrlToGenerateRepository->getProductListData($routeName, $domainConfig);
-
-            case 'front_brand_detail':
-                return $this->friendlyUrlToGenerateRepository->getBrandDetailData($routeName, $domainConfig);
-        }
-
-        throw new \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlRouteNotSupportedException($routeName);
     }
 }

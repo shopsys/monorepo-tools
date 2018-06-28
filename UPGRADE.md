@@ -19,6 +19,10 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 ## [From 7.0.0-alpha2 to Unreleased]
 
 ### [shopsys/framework]
+- classes in src/Components were revised, refactored and some of them were moved to model,
+    for upgrading to newer version, you must go through commits done in [#272](https://github.com/shopsys/shopsys/pull/272) and reflect the changes of namespaces.
+- FriendlyUrlToGenerateRepository: deleted. If you want to define your own data for friendly url generation, do it so by
+    implementing the FriendlyUrlDataProviderInterface and tag your service with `shopsys.friendly_url_provider`.
 - check changes in src/Model, all *editData*.php were merged into its *Data*.php relatives
 - Twig has been updated to version 2.4.8
     - https://symfony.com/blog/twig-how-to-upgrade-to-2-0-deprecation-notices-to-the-rescue

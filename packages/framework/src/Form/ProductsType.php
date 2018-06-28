@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form;
 
-use Shopsys\FrameworkBundle\Component\Transformers\ProductsIdsToProductsTransformer;
+use Shopsys\FrameworkBundle\Form\Transformers\ProductsIdsToProductsTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -14,12 +14,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProductsType extends AbstractType
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Transformers\ProductsIdsToProductsTransformer
+     * @var \Shopsys\FrameworkBundle\Form\Transformers\ProductsIdsToProductsTransformer
      */
     private $productsIdsToProductsTransformer;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Component\Transformers\ProductsIdsToProductsTransformer $productsIdsToProductsTransformer
+     * @param \Shopsys\FrameworkBundle\Form\Transformers\ProductsIdsToProductsTransformer $productsIdsToProductsTransformer
      */
     public function __construct(ProductsIdsToProductsTransformer $productsIdsToProductsTransformer)
     {

@@ -3,7 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Component\Transformers;
 
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\Transformers\RemoveWhitespacesTransformer;
+use Shopsys\FrameworkBundle\Form\Transformers\RemoveWhitespacesTransformer;
 
 class RemoveWhitespacesTransformerTest extends TestCase
 {

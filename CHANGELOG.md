@@ -26,6 +26,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### [shopsys/framework]
 #### Changed
+- [#272 - Changed concept of Components](https://github.com/shopsys/shopsys/pull/143):
+    - added definition of Components in [components.md](./docs/introduction/components.md):
+    - by this definition, classes that did not match it were moved or refactored.
+    - FriendlyUrlGenerator refactored: FriendlyUrlGeneratorFacade does not know anything about particular entities that the friendly urls are generated for.
+        These data are now served from implementations of FriendlyUrlDataProviderInterface.
 - [#143 - Shopsys framework now uses latest version of Shopsys coding standards](https://github.com/shopsys/shopsys/pull/143) [Shopsys Coding Standards dev-master](./packages/coding-standards) is now used
     - version of coding-standards package was updated to dev-master in [composer.json](./packages/framework/composer.json)
     - modified [travis script](./packages/framework/project-base/.travis.yml)

@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Form\Locale;
 
-use Shopsys\FrameworkBundle\Component\Utils;
+use Shopsys\FrameworkBundle\Component\Utils\Utils;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

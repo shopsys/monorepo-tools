@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Acceptance\acceptance\PageObject\Front;
 
-use Shopsys\FrameworkBundle\Form\TimedFormTypeExtension;
+use Shopsys\FrameworkBundle\Component\Form\TimedFormTypeExtension;
 use Tests\ShopBundle\Acceptance\acceptance\PageObject\AbstractPage;
 
 class RegistrationPage extends AbstractPage
