@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle;
 
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\RegisterFriendlyUrlDataProviderCompilerPass;
 use Shopsys\FrameworkBundle\DependencyInjection\Compiler\RegisterCronModulesCompilerPass;
 use Shopsys\FrameworkBundle\DependencyInjection\Compiler\RegisterPluginCrudExtensionsCompilerPass;
 use Shopsys\FrameworkBundle\DependencyInjection\Compiler\RegisterPluginDataFixturesCompilerPass;
@@ -16,6 +17,7 @@ class ShopsysFrameworkBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterCronModulesCompilerPass());
+        $container->addCompilerPass(new RegisterFriendlyUrlDataProviderCompilerPass());
         $container->addCompilerPass(new RegisterPluginCrudExtensionsCompilerPass());
         $container->addCompilerPass(new RegisterPluginDataFixturesCompilerPass());
         $container->addCompilerPass(new RegisterProductFeedConfigsCompilerPass());

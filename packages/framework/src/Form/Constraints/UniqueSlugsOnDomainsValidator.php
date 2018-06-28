@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Form\Constraints;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
-use Shopsys\FrameworkBundle\Form\FriendlyUrlType;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -69,9 +69,9 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator
     private function validateExists($values, UniqueSlugsOnDomains $constraint)
     {
         foreach ($values as $urlData) {
-            $domainId = $urlData[FriendlyUrlType::FIELD_DOMAIN];
+            $domainId = $urlData[UrlListData::FIELD_DOMAIN];
             $domainConfig = $this->domain->getDomainConfigById($domainId);
-            $slug = $urlData[FriendlyUrlType::FIELD_SLUG];
+            $slug = $urlData[UrlListData::FIELD_SLUG];
 
             $domainRouter = $this->domainRouterFactory->getRouter($domainId);
             try {
@@ -97,8 +97,8 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator
     {
         $slugsCountByDomainId = [];
         foreach ($values as $urlData) {
-            $domainId = $urlData[FriendlyUrlType::FIELD_DOMAIN];
-            $slug = $urlData[FriendlyUrlType::FIELD_SLUG];
+            $domainId = $urlData[UrlListData::FIELD_DOMAIN];
+            $slug = $urlData[UrlListData::FIELD_SLUG];
             if (!array_key_exists($domainId, $slugsCountByDomainId)) {
                 $slugsCountByDomainId[$domainId] = [];
             }

@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Category;
 
 use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
-use Shopsys\FrameworkBundle\Form\UrlListData;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData;
 
 class CategoryData
 {
@@ -43,7 +43,7 @@ class CategoryData
     public $enabled;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Form\UrlListData
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData
      */
     public $urls;
 

@@ -1,9 +1,12 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\Form;
+namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
 class UrlListData
 {
+    const FIELD_DOMAIN = 'domain';
+    const FIELD_SLUG = 'slug';
+
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
      */

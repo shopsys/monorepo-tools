@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Article;
 
-use Shopsys\FrameworkBundle\Form\UrlListData;
+use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData;
 
 class ArticleData
 {
@@ -32,7 +32,7 @@ class ArticleData
     public $domainId;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Form\UrlListData
+     * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\UrlListData
      */
     public $urls;
 

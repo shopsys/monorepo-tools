@@ -643,6 +643,10 @@ services:
   Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Article\ArticleFactory
 
+  Shopsys\FrameworkBundle\Model\Article\ArticleDetailFriendlyUrlDataProvider:
+    tags:
+      - {name: shopsys.friendly_url_provider}
+
   Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFactory
 
@@ -651,6 +655,10 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Brand\BrandDetailFriendlyUrlDataProvider:
+    tags:
+      - {name: shopsys.friendly_url_provider}
 
   Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactory
@@ -675,6 +683,8 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Flag\FlagFactory
+
+  Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\CompilerPass\FriendlyUrlDataProviderConfig: ~
 
   Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactoryInterface:
     alias: Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFactory
@@ -729,6 +739,14 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\ProductFactory
+
+  Shopsys\FrameworkBundle\Model\Product\ProductDetailFriendlyUrlDataProvider:
+    tags:
+      - {name: shopsys.friendly_url_provider}
+
+  Shopsys\FrameworkBundle\Model\Product\ProductListFriendlyUrlDataProvider:
+    tags:
+      - {name: shopsys.friendly_url_provider}
 
   Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Product\Accessory\ProductAccessoryFactory

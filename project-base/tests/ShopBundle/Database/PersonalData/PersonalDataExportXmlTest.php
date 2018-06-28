@@ -2,8 +2,8 @@
 
 namespace Tests\ShopBundle\Database\PersonalData;
 
-use Normalizer;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Component\Xml\XmlNormalizer;
 use Shopsys\FrameworkBundle\Model\Country\Country;
 use Shopsys\FrameworkBundle\Model\Country\CountryData;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
@@ -52,7 +52,7 @@ class PersonalDataExportXmlTest extends DatabaseTestCase
             'newsletterSubscriber' => null,
         ]);
 
-        $generatedXml = Normalizer::normalize($generatedXml);
+        $generatedXml = XmlNormalizer::normalizeXml($generatedXml);
 
         $expectedXml = file_get_contents(__DIR__ . '/Resources/' . self::EXPECTED_XML_FILE_NAME);
         $this->assertEquals($expectedXml, $generatedXml);
