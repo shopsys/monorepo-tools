@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Image\Config;
 
-use Shopsys\FrameworkBundle\Component\Utils;
+use Shopsys\FrameworkBundle\Component\Utils\Utils;
 
 class ImageEntityConfig
 {

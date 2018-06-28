@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\Model\Mail\Exception;
 
 use Exception;
-use Shopsys\FrameworkBundle\Component\Debug;
+use Shopsys\FrameworkBundle\Component\Utils\Debug;
 
 class SendMailFailedException extends Exception implements MailException
 {

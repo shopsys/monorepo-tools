@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Component\DataFixture\Exception;
 
 use Exception;
 use InvalidArgumentException;
-use Shopsys\FrameworkBundle\Component\Debug;
+use Shopsys\FrameworkBundle\Component\Utils\Debug;
 
 class ObjectRequiredException extends InvalidArgumentException implements DataFixtureException
 {

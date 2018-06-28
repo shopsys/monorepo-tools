@@ -2,7 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Twig\Javascript;
 
-use Shopsys\FrameworkBundle\Component\Utils;
+use Shopsys\FrameworkBundle\Component\Utils\Utils;
 use Twig_Extension;
 use Twig_SimpleFunction;
 

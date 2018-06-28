@@ -3,7 +3,7 @@
 namespace Tests\FrameworkBundle\Unit\Component;
 
 use PHPUnit\Framework\TestCase;
-use Shopsys\FrameworkBundle\Component\Utils;
+use Shopsys\FrameworkBundle\Component\Utils\Utils;
 
 class UtilsTest extends TestCase
 {
