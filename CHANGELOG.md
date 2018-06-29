@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - framework doesn't use Elasticsearch directly anymore
     - feeds Elasticsearch via Product Search Export microservice
 - [#438 - Attribute telephone moved from a billing address to the personal data of a user](https://github.com/shopsys/shopsys/pull/438)
+- [#295 - Javascript compiling: lower memory consumption](https://github.com/shopsys/shopsys/pull/295), thanks to [@pk16011990]
 
 #### Fixed
 - [#420 - Order flow fix](https://github.com/shopsys/shopsys/pull/420)

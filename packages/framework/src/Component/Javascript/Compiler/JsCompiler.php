@@ -33,6 +33,11 @@ class JsCompiler
             $compilerPass->process($node);
         }
 
-        return $node->format();
+        $format = $node->format();
+        $node->free_memory();
+        $node->destroy();
+        unset($node);
+
+        return $format;
     }
 }
