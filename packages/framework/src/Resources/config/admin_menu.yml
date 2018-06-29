@@ -132,12 +132,8 @@
         - label: 'Editing domain'
           route: admin_domain_edit
           visible: false
-
-    - label: 'Operator information'
-      route: admin_shopinfo_setting
-      items:
-      - label: 'Operator information'
-        route: admin_shopinfo_setting
+        - label: 'Operator information'
+          route: admin_shopinfo_setting
 
     - label: 'Legal conditions'
       route: admin_legalconditions_setting
@@ -146,30 +142,8 @@
           route: admin_legalconditions_setting
         - label: 'Personal data access'
           route: admin_personaldata_setting
-
-    - label: 'Cookies information'
-      route: admin_cookies_setting
-      items:
         - label: 'Cookies information'
           route: admin_cookies_setting
-
-    - label: 'Shippings and payments'
-      route: admin_transportandpayment_list
-      items:
-        - label: 'Shippings and payments'
-          route: admin_transportandpayment_list
-        - label: 'New shipping'
-          route: admin_transport_new
-          visible: false
-        - label: 'Editing shipping'
-          route: admin_transport_edit
-          visible: false
-        - label: 'New Payment'
-          route: admin_payment_new
-          visible: false
-        - label: 'Editing payment'
-          route: admin_payment_edit
-          visible: false
 
     - label: 'Communication with customer'
       route: admin_mail_setting
@@ -186,6 +160,24 @@
     - label: 'Lists and nomenclatures'
       route: admin_availability_list
       items:
+        - label: 'Shippings and payments'
+          route: admin_transportandpayment_list
+          items:
+            - label: 'Shippings and payments'
+              route: admin_transportandpayment_list
+            - label: 'New shipping'
+              route: admin_transport_new
+              visible: false
+            - label: 'Editing shipping'
+              route: admin_transport_edit
+              visible: false
+            - label: 'New Payment'
+              route: admin_payment_new
+              visible: false
+            - label: 'Editing payment'
+              route: admin_payment_edit
+              visible: false
+
         - label: 'Availability'
           route: admin_availability_list
 
