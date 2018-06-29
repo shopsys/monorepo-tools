@@ -49,6 +49,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - cron modules use the logger for debug information
   - DailyFeedCronModule is responsible for continuation of the correct feed after waking up
 
+### [shopsys/shopsys]
+#### Changed
+- [#296 - normalize phing target "timezones-check"](https://github.com/shopsys/shopsys/pull/296): [@pk16011990]
+
 ### [shopsys/monorepo-tools]
 #### Fixed
 - [#281 - monorepo-tools: Fix scripts to work on OS X](https://github.com/shopsys/shopsys/pull/282) [@lukaso]
