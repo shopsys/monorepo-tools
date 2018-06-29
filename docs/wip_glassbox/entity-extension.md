@@ -67,7 +67,7 @@ It is also responsible for instantiation of QueryBuilders and Repositories, whic
 ### EntityExtension\QueryBuilder
 
 The original `QueryBuilder` is extended to use `EntityNameResolver` while adding new DQL parts.
-The overridden method `add()` is used in all other relevant methods, such as `select()`, `from()`, `where()` etc. 
+The overridden method `add()` is used in all other relevant methods, such as `select()`, `from()`, `where()` etc.
 
 ### EntityNameResolver
 
@@ -80,10 +80,21 @@ The various capabilities of this resolver are best described in its unit test `\
 
 Entities are created by factories. If any part of framework creates an entity, it uses a factory.
 So in the project, we can change the factory to produce extended entities instead of original and the whole system will create extended entities.
+We enforce using factories by our coding standard sniff [`ObjectIsCreatedByFactorySniff`](../../packages/coding-standards/src/Sniffs/ObjectIsCreatedByFactorySniff.php).
 
 Only exception are `*Translation` entities.
 They are created by their owner entity.
 If it is needed to extend the translation, it is also necessary to extend the owner entity and override the `createTranslation` method to produce the extended translation.
+
+### Data and DataFactories
+
+Entity data are extended by inheritance.
+Since they are not persisted, there is no need to do anything like in case of entities.
+
+Entity data are created by factories only.
+These factories work as same as entity factories.
+If any part of framework creates an entity data, it uses a factory.
+So in the project, we can change the factory to produce extended entity data instead of original and the whole system will create extended entity data.
 
 ## OrderItem and true mapped inheritance
 
@@ -111,6 +122,16 @@ DiscriminatorMap must always contain descendants' FQN because LoadORMMetadataSub
       ```php
         Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface:
           alias: DreamProject\Model\Product\ProductFactory
+      ```
+* Create a new data object in your `src/Shopsys/ShopBundle/Model` directory that extends already existing framework entity data
+* Create a factory for this entity data
+* Implement the factory interface from the framework
+    * eg. `class ProductDataFactory implements ProductDataFactoryInterface`
+  * Rewrite symfony configuration for the interface to alias your factory
+    * eg.
+      ```php
+        Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface:
+          alias: DreamProject\Model\Product\ProductDataFactory
       ```
 * Now your extended entity is automatically used instead of the parent entity:
   * in hydrated Doctrine references

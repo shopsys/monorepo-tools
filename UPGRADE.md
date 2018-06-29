@@ -18,6 +18,22 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 
 ## [From 7.0.0-alpha3 to Unreleased]
 
+### [shopsys/framework]
+- move creation of data objects into factories
+- already existing data object factories changed their signatures
+
+### [shopsys/product-feed-google]
+- move creation of data objects into factories
+- already existing data object factories changed their signatures
+
+### [shopsys/product-feed-heureka]
+- move creation of data objects into factories
+- already existing data object factories changed their signatures
+
+### [shopsys/product-feed-zbozi]
+- move creation of data objects into factories
+- already existing data object factories changed their signatures
+
 ## [From 7.0.0-alpha2 to 7.0.0-alpha3]
 
 ### [shopsys/framework]

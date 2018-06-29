@@ -8,7 +8,7 @@ Model architecture of Shopsys Framework is inspired by Domain Driven Design (DDD
 - **Domain** in DDD is a sphere of knowledge or activity we build application logic around. The domain of Shopsys Framework is e-commerce.
 - **Domain model** is a system of abstractions that describes selected aspects of the domain.
 - **Domain logic** or **business logic** is the higher level rules for how objects of the domain model interact with one another.
- 
+
 Domain model of Shopsys Framework is located in [`FrameworkBundle/Model`](https://github.com/shopsys/framework/tree/master/src/Model). Its concept is to separate behavior and properties of objects from its persistence. This separation is suitable for code reusability, easier testing and it fulfills the Single Responsibility Principle.
 
 Code belonging to the same feature is grouped together (eg. `Cart` and `CartItem`). Names of classes and methods are based on real world vocabulary to be more intuitive (eg. `OrderHashGenerator` or `getSellableProductsInCategory()`).
@@ -23,6 +23,8 @@ Is class encapsulating data. All entities are persisted by Doctrine ORM. One ent
 Entities are inspired by Rich Domain Model. That means entity contains not only getters and setters, but also some use case methods with basic domain logic (e.g. `Product::changeVat()` sets vat and marks product for price recalculation). The entity cannot depend on any other class.
 
 Entities can be used by all layers of the model and even outside of model (eg. controller or templates).
+
+You'll find more about our entities specialities in a [detailed article](entities.md).
 
 ### Example
 ```php
@@ -61,180 +63,11 @@ class Product
         $this->vat = $vat;
         $this->recalculatePrice = true;
     }
-    
-    // ...
-    
-}
-```
-
-## Entity Domain
-It is an entity which encapsulates data that are domain-specific (similarly to an Entity Translation encapsulating locale-specific data).
-Domain entity has a bidirectional many-to-one association to its main entity.
-That means that you can access domain entity through entity itself and vice versa.
-
-Setting the properties of a domain entity is always done via the main entity itself.
-Basically, that means only the main entity knows about the existence of domain entities.
-The rest of the application uses the main entity as a proxy to the domain-specific properties.
-
-### Example
-```php
-// FrameworkBundle/Model/Product/Brand/BrandDomain.php
-
-namespace Shopsys\FrameworkBundle\Model\Product\Brand
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\Table(name="brand_domains")
- * @ORM\Entity
- */
-class BrandDomain
-{
-     /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    protected $id;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\Brand
-     *
-     * @ORM\ManyToOne(targetEntity="Shopsys\FrameworkBundle\Model\Product\Brand\Brand", inversedBy="domains")
-     * @ORM\JoinColumn(nullable=false, name="brand_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    protected $brand;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     */
-    protected $domainId;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
-    protected $seoTitle;
-
-    // ...
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Brand\Brand $brand
-     * @param int $domainId
-     */
-    public function __construct(Brand $brand, $domainId)
-    {
-        $this->brand = $brand;
-        $this->domainId = $domainId;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSeoTitle()
-    {
-        return $this->seoTitle;
-    }
-
-    /**
-     * @param string|null $seoTitle
-     */
-    public function setSeoTitle($seoTitle)
-    {
-        $this->seoTitle = $seoTitle;
-    }
 
     // ...
 
 }
 ```
-
-...and its main entity `Brand` working as a proxy:
-
-```php
-// FrameworkBundle/Model/Product/Brand/Brand.php
-
-namespace Shopsys\FrameworkBundle\Model\Product\Brand;
-
-/**
- * @ORM\Table(name="brands")
- * @ORM\Entity
- */
-class Brand extends AbstractTranslatableEntity
-{
-
-    // ...
-
-    /**
-     * @param int $domainId
-     * @return string
-     */
-    public function getSeoTitle(int $domainId)
-    {
-        return $this->getBrandDomain($domainId)->getSeoTitle();
-    }
-    
-    /**
-     * @param int $domainId
-     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDomain
-     */
-    protected function getBrandDomain(int $domainId)
-    {
-        foreach ($this->domains as $domain) {
-            if ($domain->getDomainId() === $domainId) {
-                return $domain;
-            }
-        }
-
-        throw new BrandDomainNotFoundException($this->id, $domainId);
-    }
-
-    // ...
-
-}
-```
-
-## Entity Factory
-
-Is a class that creates an entity.
-The framework must allow using extended entities and this problem is solved using factories.
-
-The only entities that are not created by a factory are `*Translation` and `*Domain` entities.
-These entities are created by their main entity.
-
-### Example
-```php
-// FrameworkBundle/Model/Cart/Item/CartItemFactoryInterface.php
-
-namespace Shopsys\FrameworkBundle\Model\Cart\Item;
-
-// ...
-
-interface CartItemFactoryInterface
-{
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
-     * @param int $quantity
-     * @param string $watchedPrice
-     * @return \Shopsys\FrameworkBundle\Model\Cart\Item\CartItem
-     */
-    public function create(
-        CustomerIdentifier $customerIdentifier,
-        Product $product,
-        int $quantity,
-        string $watchedPrice
-    ): CartItem;
-}
-```
-
-The factory has an implementation in the framework and can be overwritten in your project when you need to work with an extended entity.
-You can read about entity extension in a [separate article](../wip_glassbox/entity-extension.md).
 
 ## Repository
 Is a class used to provide access to all entities of its scope. Repository enables code reuse of retrieving logic. Thanks to repositories, there is no need to use DQL/SQL in controllers or facades.
@@ -255,7 +88,7 @@ namespace Shopsys\FrameworkBundle\Model\Cart\Item;
 
 class CartItemRepository
 {
-    
+
     // ...
 
     /**
@@ -300,9 +133,9 @@ class CartItemRepository
     {
         return $this->em->getRepository(CartItem::class);
     }
-    
+
     // ...
-    
+
 }
 ```
 *Note: Repositories in Shopsys Framework wrap Doctrine repositories. This is done in order to provide only useful methods with understandable names instead of generic API of Doctrine repositories.*
@@ -310,7 +143,7 @@ class CartItemRepository
 ## Facade
 Facades are a single entry-point into the model. That means you can use the same method in your controller, CLI command, REST API, etc. with the same results. All methods in facade should have single responsibility without any complex logic. Every method has a single use case and does not contain any business logic only sequence of calls of repositories and services methods.
 
-Facades as entry-point of the model can be used anywhere outside of the model. 
+Facades as entry-point of the model can be used anywhere outside of the model.
 
 ### Example
 ```php
@@ -354,7 +187,7 @@ class CartFacade
      * @var \Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer
      */
     protected $currentCustomer;
-    
+
     // ...
 
     /**
@@ -378,9 +211,9 @@ class CartFacade
 
         return $result;
     }
-    
+
     // ...
-    
+
 }
 ```
 
@@ -403,14 +236,14 @@ class CartService
      * @var \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */
     protected $productPriceCalculation;
-    
+
     /**
      * @var \Shopsys\FrameworkBundle\Model\Cart\Item\CartItemFactoryInterface
      */
     protected $cartItemFactory;
 
     // ...
-    
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\Cart $cart
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
@@ -437,9 +270,9 @@ class CartService
         $cart->addItem($newCartItem);
         return new AddProductResult($newCartItem, true, $quantity);
     }
-    
+
     // ...
-    
+
 }
 ```
 
