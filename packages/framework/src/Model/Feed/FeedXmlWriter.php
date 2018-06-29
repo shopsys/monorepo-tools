@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Feed;
 
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Twig_Environment;
 use Twig_TemplateWrapper;
@@ -13,9 +14,15 @@ class FeedXmlWriter
      */
     private $twig;
 
-    public function __construct(Twig_Environment $twig)
+    /**
+     * @var \League\Flysystem\FilesystemInterface
+     */
+    private $filesystem;
+
+    public function __construct(Twig_Environment $twig, FilesystemInterface $filesystem)
     {
         $this->twig = $twig;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -28,7 +35,7 @@ class FeedXmlWriter
         $twigTemplate = $this->twig->load($feedTemplatePath);
 
         $renderedBlock = $this->getRenderedBlock($twigTemplate, 'begin', ['domainConfig' => $domainConfig]);
-        file_put_contents($targetFilepath, $renderedBlock);
+        $this->filesystem->put($targetFilepath, $renderedBlock);
     }
 
     /**
@@ -40,7 +47,9 @@ class FeedXmlWriter
     {
         $twigTemplate = $this->twig->load($feedTemplatePath);
         $renderedBlock = $this->getRenderedBlock($twigTemplate, 'end', ['domainConfig' => $domainConfig]);
-        file_put_contents($targetFilepath, $renderedBlock, FILE_APPEND);
+
+        $fileData = $this->filesystem->read($targetFilepath);
+        $this->filesystem->put($targetFilepath, $fileData . $renderedBlock);
     }
 
     /**
@@ -65,7 +74,8 @@ class FeedXmlWriter
             );
         }
 
-        file_put_contents($targetFilepath, $renderedContent, FILE_APPEND);
+        $fileData = $this->filesystem->read($targetFilepath);
+        $this->filesystem->put($targetFilepath, $fileData . $renderedContent);
     }
 
     /**
