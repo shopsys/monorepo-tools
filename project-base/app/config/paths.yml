@@ -28,7 +28,7 @@ parameters:
   shopsys.javascript_url_prefix: /assets/scripts/
   shopsys.resources_dir: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources'
   shopsys.root_dir: '%kernel.root_dir%/..'
-  shopsys.sitemaps_dir: '%shopsys.web_dir%%shopsys.sitemaps_url_prefix%'
+  shopsys.sitemaps_dir: '/web%shopsys.sitemaps_url_prefix%'
   shopsys.sitemaps_url_prefix: /content/sitemaps
   shopsys.uploaded_file_config_filepath: '%shopsys.root_dir%/src/Shopsys/ShopBundle/Resources/config/uploaded_files.yml'
   shopsys.uploaded_file_dir: '/web%shopsys.uploaded_file_url_prefix%'
