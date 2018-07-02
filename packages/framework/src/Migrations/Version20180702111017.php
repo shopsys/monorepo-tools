@@ -1,18 +1,18 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\DataFixtures\Base;
+namespace Shopsys\FrameworkBundle\Migrations;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Shopsys\FrameworkBundle\Component\DataFixture\AbstractNativeFixture;
+use Doctrine\DBAL\Schema\Schema;
+use Shopsys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;
 
-class MainVariantPriceTriggerDataFixture extends AbstractNativeFixture
+class Version20180702111017 extends AbstractMigration
 {
     /**
-     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function load(ObjectManager $manager)
+    public function up(Schema $schema)
     {
-        $this->executeNativeQuery('
+        $this->sql('
             CREATE OR REPLACE FUNCTION set_main_variant_price_recalculation_by_product_visibility() RETURNS trigger AS $$
                 BEGIN
                     UPDATE products p_main
@@ -25,12 +25,20 @@ class MainVariantPriceTriggerDataFixture extends AbstractNativeFixture
             $$ LANGUAGE plpgsql;
         ');
 
-        $this->executeNativeQuery('
+        $this->sql('DROP TRIGGER IF EXISTS recalc_main_variant_price ON product_visibilities');
+        $this->sql('
             CREATE TRIGGER recalc_main_variant_price
             AFTER INSERT OR UPDATE OF visible
             ON product_visibilities
             FOR EACH ROW
             EXECUTE PROCEDURE set_main_variant_price_recalculation_by_product_visibility();
         ');
+    }
+
+    /**
+     * @param \Doctrine\DBAL\Schema\Schema $schema
+     */
+    public function down(Schema $schema)
+    {
     }
 }
