@@ -77,7 +77,7 @@ class TsqueryFactory
     private function splitToTokens($searchText)
     {
         return preg_split(
-            '/[^\w-]+/ui',
+            '/[^\w\/-]+/ui',
             $searchText,
             -1,
             PREG_SPLIT_NO_EMPTY
