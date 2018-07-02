@@ -12,7 +12,6 @@ use Shopsys\FrameworkBundle\Component\Setting\SettingValueFactoryInterface;
 use Shopsys\FrameworkBundle\Component\String\HashGenerator;
 use Shopsys\FrameworkBundle\Model\Mail\Setting\MailSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
-use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 
 class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -44,8 +43,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
      */
     public function load(ObjectManager $manager)
     {
-        $vat = $this->getReference(VatDataFixture::VAT_HIGH);
-        /* @var $vat \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat */
         $pricingGroup1 = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup2 \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
         $defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
@@ -65,7 +62,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 
         $manager->persist($this->settingValueFactory->create(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON));
         $manager->persist($this->settingValueFactory->create(PricingSetting::ROUNDING_TYPE, PricingSetting::ROUNDING_TYPE_INTEGER, SettingValue::DOMAIN_ID_COMMON));
-        $manager->persist($this->settingValueFactory->create(Vat::SETTING_DEFAULT_VAT, $vat->getId(), SettingValue::DOMAIN_ID_COMMON));
         $manager->persist($this->settingValueFactory->create(Setting::ORDER_SENT_PAGE_CONTENT, $orderSentText, Domain::FIRST_DOMAIN_ID));
         $manager->persist($this->settingValueFactory->create(MailSetting::MAIN_ADMIN_MAIL, 'no-reply@shopsys.com', Domain::FIRST_DOMAIN_ID));
         $manager->persist($this->settingValueFactory->create(MailSetting::MAIN_ADMIN_MAIL_NAME, 'Shopsys', Domain::FIRST_DOMAIN_ID));
@@ -91,7 +87,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
     {
         return [
             AvailabilityDataFixture::class,
-            VatDataFixture::class,
         ];
     }
 }

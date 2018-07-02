@@ -7,11 +7,11 @@ use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\FlagDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture as BasePricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\BrandDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain\PricingGroupDataFixture as MultidomainPricingGroupDataFixture;
 
 class ProductDataFixtureReferenceInjector

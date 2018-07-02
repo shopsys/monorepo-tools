@@ -1,9 +1,11 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\DataFixtures\Base;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
@@ -25,12 +27,19 @@ class VatDataFixture extends AbstractReferenceFixture
      */
     private $vatDataFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
+     */
+    private $setting;
+
     public function __construct(
         VatFacade $vatFacade,
-        VatDataFactoryInterface $vatDataFactory
+        VatDataFactoryInterface $vatDataFactory,
+        Setting $setting
     ) {
         $this->vatFacade = $vatFacade;
         $this->vatDataFactory = $vatDataFactory;
+        $this->setting = $setting;
     }
 
     /**
@@ -38,11 +47,15 @@ class VatDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $vatData = $this->vatDataFactory->create();
 
-        $vatData->name = 'Zero rate';
-        $vatData->percent = '0';
-        $this->createVat($vatData, self::VAT_ZERO);
+        /**
+         * Vat with zero rate is created in database migration.
+         * @see \Shopsys\FrameworkBundle\Migrations\Version20180603135343
+         */
+        $vatZeroRate = $this->vatFacade->getById(1);
+        $this->addReference(self::VAT_ZERO, $vatZeroRate);
+
+        $vatData = $this->vatDataFactory->create();
 
         $vatData->name = 'Second reduced rate';
         $vatData->percent = '10';
@@ -55,6 +68,8 @@ class VatDataFixture extends AbstractReferenceFixture
         $vatData->name = 'Standard rate';
         $vatData->percent = '21';
         $this->createVat($vatData, self::VAT_HIGH);
+
+        $this->setHighVatAsDefault();
     }
 
     /**
@@ -67,5 +82,12 @@ class VatDataFixture extends AbstractReferenceFixture
         if ($referenceName !== null) {
             $this->addReference($referenceName, $vat);
         }
+    }
+
+    private function setHighVatAsDefault()
+    {
+        $defaultVat = $this->getReference(self::VAT_HIGH);
+        /** @var $defaultVat \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat */
+        $this->setting->set(Vat::SETTING_DEFAULT_VAT, $defaultVat->getId());
     }
 }
