@@ -2,6 +2,8 @@ imports:
     - { resource: '%vendor_dir%/shopsys/coding-standards/easy-coding-standard.yml', ignore_errors: true  }
 
 parameters:
+    exclude_files:
+      - '*/src/Resources/views/Migration/migration.php.twig'
     skip:
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
           - '*/tests/*'

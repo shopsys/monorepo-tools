@@ -6,6 +6,7 @@ services:
     # Shopsys Checkers
     Shopsys\CodingStandards\CsFixer\MissingButtonTypeFixer: ~
     Shopsys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer: ~
+    Shopsys\CodingStandards\Finder\FileFinder: ~
     Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff: ~
     Shopsys\CodingStandards\Sniffs\ForbiddenExitSniff: ~
     Shopsys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff: ~
@@ -142,4 +143,3 @@ parameters:
         PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff.NoLineAfterClose: ~
         # allow empty "catch (Exception $exception) { }"
         PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedCatch: ~
-
