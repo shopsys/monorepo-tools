@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitData;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
@@ -11,6 +12,7 @@ use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 class UnitDataFixture extends AbstractReferenceFixture
 {
     const UNIT_CUBIC_METERS = 'unit_m3';
+    const UNIT_PIECES = 'unit_pcs';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
@@ -22,12 +24,19 @@ class UnitDataFixture extends AbstractReferenceFixture
      */
     private $unitDataFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
+     */
+    private $setting;
+
     public function __construct(
         UnitFacade $unitFacade,
-        UnitDataFactoryInterface $unitDataFactory
+        UnitDataFactoryInterface $unitDataFactory,
+        Setting $setting
     ) {
         $this->unitFacade = $unitFacade;
         $this->unitDataFactory = $unitDataFactory;
+        $this->setting = $setting;
     }
 
     /**
@@ -39,6 +48,11 @@ class UnitDataFixture extends AbstractReferenceFixture
 
         $unitData->name = ['cs' => 'm³', 'en' => 'm³'];
         $this->createUnit($unitData, self::UNIT_CUBIC_METERS);
+
+        $unitData->name = ['cs' => 'ks', 'en' => 'pcs'];
+        $this->createUnit($unitData, self::UNIT_PIECES);
+
+        $this->setPiecesAsDefaultUnit();
     }
 
     /**
@@ -51,5 +65,12 @@ class UnitDataFixture extends AbstractReferenceFixture
         if ($referenceName !== null) {
             $this->addReference($referenceName, $unit);
         }
+    }
+
+    private function setPiecesAsDefaultUnit(): void
+    {
+        $defaultUnit = $this->getReference(self::UNIT_PIECES);
+        /** @var $defaultUnit \Shopsys\FrameworkBundle\Model\Product\Unit\Unit */
+        $this->setting->set(Setting::DEFAULT_UNIT, $defaultUnit->getId());
     }
 }

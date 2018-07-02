@@ -47,8 +47,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         /* @var $pricingGroup2 \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
         $defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
         /* @var $defaultInStockAvailability \Shopsys\FrameworkBundle\Model\Product\Availability\Availability */
-        $defaultUnit = $this->getReference(UnitDataFixture::UNIT_PIECES);
-        /* @var $defaultUnit \Shopsys\FrameworkBundle\Model\Product\Unit\Unit */
 
         $orderSentText = '
             <p>
@@ -75,7 +73,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         $manager->persist($this->settingValueFactory->create(Setting::COOKIES_ARTICLE_ID, null, Domain::FIRST_DOMAIN_ID));
         $manager->persist($this->settingValueFactory->create(Setting::DOMAIN_DATA_CREATED, true, Domain::FIRST_DOMAIN_ID));
         $manager->persist($this->settingValueFactory->create(Setting::FEED_HASH, $this->hashGenerator->generateHash(10), SettingValue::DOMAIN_ID_COMMON));
-        $manager->persist($this->settingValueFactory->create(Setting::DEFAULT_UNIT, $defaultUnit->getId(), SettingValue::DOMAIN_ID_COMMON));
 
         $manager->flush();
     }

@@ -6,11 +6,10 @@ use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\FlagDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture as BasePricingGroupDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\BrandDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixtureLoader;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain\PricingGroupDataFixture as MultidomainPricingGroupDataFixture;
 
@@ -151,8 +150,8 @@ class ProductDataFixtureReferenceInjector
     private function getUnitReferences(PersistentReferenceFacade $persistentReferenceFacade)
     {
         return [
-            'pcs' => $persistentReferenceFacade->getReference(BaseUnitDataFixture::UNIT_PIECES),
-            'm3' => $persistentReferenceFacade->getReference(DemoUnitDataFixture::UNIT_CUBIC_METERS),
+            'pcs' => $persistentReferenceFacade->getReference(UnitDataFixture::UNIT_PIECES),
+            'm3' => $persistentReferenceFacade->getReference(UnitDataFixture::UNIT_CUBIC_METERS),
         ];
     }
 
@@ -194,8 +193,7 @@ class ProductDataFixtureReferenceInjector
             AvailabilityDataFixture::class,
             CategoryDataFixture::class,
             BrandDataFixture::class,
-            BaseUnitDataFixture::class,
-            DemoUnitDataFixture::class,
+            UnitDataFixture::class,
             BasePricingGroupDataFixture::class,
         ];
     }

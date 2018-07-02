@@ -4,8 +4,8 @@ namespace Tests\ShopBundle\Database\Model\Product;
 
 use ReflectionClass;
 use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;

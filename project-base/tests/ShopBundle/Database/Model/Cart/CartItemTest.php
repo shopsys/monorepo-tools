@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Database\Model\Cart;
 
-use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
