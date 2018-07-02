@@ -44,3 +44,10 @@ parameters:
           - '*/src/Model/Feed/FeedCronModule.php'
           - '*/src/Model/Feed/FeedFacade.php'
           - '*/src/Model/Order/Preview/OrderPreviewCalculation.php'
+
+        Shopsys\CodingStandards\Sniffs\ForbiddenDumpSniff:
+          - '*/src/Component/DateTimeHelper/Exception/CannotParseDateTimeException.php'
+          - '*/src/Component/Doctrine/Cache/PermanentPhpFileCache.php'
+          - '*/src/Model/AdminNavigation/Exception/MenuItemNotMatchingRouteException.php'
+          - '*/src/Twig/VarDumperExtension.php'
+          - '*/src/Resources/views/Migration/migration.php.twig'

@@ -15,7 +15,6 @@ final class ObjectIsCreatedByFactorySniffTest extends AbstractCheckerTestCase
 
     public function testWrong(): void
     {
-
         require_once __DIR__ . '/Wrong/SomeController.php';
         require_once __DIR__ . '/Wrong/PostFactory.php';
 

@@ -68,6 +68,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#308 - Sniff for forgotten dumps](https://github.com/shopsys/shopsys/pull/308)
     - ecs tester for coding standards was added with tests for sniffs and fixers [@TomasVotruba]
     - added support for checking standards of file types twig, html
+    - added sniff for checking of forgotten dump functions
 
 ### [shopsys/product-feed-google]
 #### Changed
