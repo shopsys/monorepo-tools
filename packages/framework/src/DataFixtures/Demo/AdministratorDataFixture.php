@@ -1,10 +1,9 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\DataFixtures\Base;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\FrameworkBundle\Model\Administrator\AdministratorData;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade;
 
@@ -34,31 +33,20 @@ class AdministratorDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $superadminData = $this->administratorDataFactory->create();
-        $superadminData->superadmin = true;
-        $superadminData->username = 'superadmin';
-        $superadminData->realName = 'superadmin';
-        $superadminData->email = 'no-reply@shopsys.com';
-        $superadminData->password = 'admin123';
-        $this->createAdministrator($superadminData, self::SUPERADMINISTRATOR);
-
-        $administratorData = $this->administratorDataFactory->create();
-        $administratorData->username = 'admin';
-        $administratorData->realName = 'admin';
-        $administratorData->password = 'admin123';
-        $administratorData->email = 'no-reply@shopsys.com';
-        $this->createAdministrator($administratorData, self::ADMINISTRATOR);
+        $this->createAdministratorReference(1, self::SUPERADMINISTRATOR);
+        $this->createAdministratorReference(2, self::ADMINISTRATOR);
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorData $administratorData
-     * @param string|null $referenceName
+     * Administrators are created (with specific ids) in database migration.
+     *
+     * @param int $administratorId
+     * @param string $referenceName
+     * @see \Shopsys\FrameworkBundle\Migrations\Version20180702111015
      */
-    private function createAdministrator(AdministratorData $administratorData, $referenceName = null)
+    private function createAdministratorReference(int $administratorId, string $referenceName)
     {
-        $administrator = $this->administratorFacade->create($administratorData);
-        if ($referenceName !== null) {
-            $this->addReference($referenceName, $administrator);
-        }
+        $administrator = $this->administratorFacade->getById($administratorId);
+        $this->addReference($referenceName, $administrator);
     }
 }

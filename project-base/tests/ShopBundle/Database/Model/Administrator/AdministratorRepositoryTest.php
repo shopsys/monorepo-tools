@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Database\Model\Administrator;
 
 use DateTime;
-use Shopsys\FrameworkBundle\DataFixtures\Base\AdministratorDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\AdministratorDataFixture;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository;
 use Tests\ShopBundle\Test\DatabaseTestCase;
 
