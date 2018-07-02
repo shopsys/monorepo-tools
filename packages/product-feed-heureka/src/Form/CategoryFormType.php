@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ProductFeed\HeurekaBundle\Model\Category;
+namespace Shopsys\ProductFeed\HeurekaBundle\Form;
 
 use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade;
 use Symfony\Component\Form\AbstractType;

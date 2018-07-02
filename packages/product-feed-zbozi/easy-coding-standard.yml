@@ -4,7 +4,7 @@ imports:
 parameters:
     skip:
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
-            - '*/src/ZboziPluginDataFixture.php'
+            - '*/src/DataFixtures/ZboziPluginDataFixture.php'
             - '*/tests/Unit/ZboziFeedTest.php'
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
           - '*/tests/*'

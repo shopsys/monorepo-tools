@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ProductFeed\ZboziBundle;
+namespace Shopsys\ProductFeed\ZboziBundle\DataFixtures;
 
 use Shopsys\Plugin\PluginDataFixtureInterface;
 use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainDataFactoryInterface;

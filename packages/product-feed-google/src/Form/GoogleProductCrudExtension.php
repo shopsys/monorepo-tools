@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ProductFeed\GoogleBundle;
+namespace Shopsys\ProductFeed\GoogleBundle\Form;
 
 use Shopsys\Plugin\PluginCrudExtensionInterface;
 use Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainData;

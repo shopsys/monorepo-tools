@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ProductFeed\HeurekaBundle\Model\Category;
+namespace Shopsys\ProductFeed\HeurekaBundle\Form;
 
 use Shopsys\Plugin\PluginCrudExtensionInterface;
 use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategory;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ProductFeed\ZboziBundle;
+namespace Shopsys\ProductFeed\ZboziBundle\Form;
 
 use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FormTypesBundle\YesNoType;

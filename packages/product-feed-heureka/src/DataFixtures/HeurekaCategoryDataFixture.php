@@ -1,8 +1,10 @@
 <?php
 
-namespace Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory;
+namespace Shopsys\ProductFeed\HeurekaBundle\DataFixtures;
 
 use Shopsys\Plugin\PluginDataFixtureInterface;
+use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDataFactoryInterface;
+use Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade;
 
 class HeurekaCategoryDataFixture implements PluginDataFixtureInterface
 {

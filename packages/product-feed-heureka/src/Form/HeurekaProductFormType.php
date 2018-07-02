@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ProductFeed\HeurekaBundle\Model\Product;
+namespace Shopsys\ProductFeed\HeurekaBundle\Form;
 
 use Shopsys\FormTypesBundle\MultidomainType;
 use Symfony\Component\Form\AbstractType;

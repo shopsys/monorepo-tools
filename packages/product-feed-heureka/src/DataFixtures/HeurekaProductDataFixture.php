@@ -1,9 +1,11 @@
 <?php
 
-namespace Shopsys\ProductFeed\HeurekaBundle\Model\Product;
+namespace Shopsys\ProductFeed\HeurekaBundle\DataFixtures;
 
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\Plugin\PluginDataFixtureInterface;
+use Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainDataFactoryInterface;
+use Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade;
 
 class HeurekaProductDataFixture implements PluginDataFixtureInterface
 {

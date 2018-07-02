@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ProductFeed\GoogleBundle;
+namespace Shopsys\ProductFeed\GoogleBundle\Form;
 
 use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FormTypesBundle\YesNoType;

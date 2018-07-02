@@ -1,8 +1,10 @@
 <?php
 
-namespace Shopsys\ProductFeed\HeurekaBundle\Model\Product;
+namespace Shopsys\ProductFeed\HeurekaBundle\Form;
 
 use Shopsys\Plugin\PluginCrudExtensionInterface;
+use Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainDataFactoryInterface;
+use Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDomainFacade;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class HeurekaProductCrudExtension implements PluginCrudExtensionInterface

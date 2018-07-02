@@ -7,17 +7,18 @@ services:
   Shopsys\ProductFeed\ZboziBundle\:
     resource: '../../*'
 
+  Shopsys\ProductFeed\ZboziBundle\DataFixtures\:
+    resource: '../../DataFixtures/*'
+    tags:
+      - { name: shopsys.data_fixture }
+
   Shopsys\ProductFeed\ZboziBundle\ZboziFeed:
     tags:
       - { name: shopsys.product_feed }
 
-  Shopsys\ProductFeed\ZboziBundle\ZboziProductCrudExtension:
+  Shopsys\ProductFeed\ZboziBundle\Form\ZboziProductCrudExtension:
     tags:
       - { name: shopsys.crud_extension, type: product }
-
-  Shopsys\ProductFeed\ZboziBundle\ZboziPluginDataFixture:
-    tags:
-      - { name: shopsys.data_fixture}
 
   Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainDataFactoryInterface:
     alias: Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainDataFactory

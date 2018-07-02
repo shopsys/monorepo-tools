@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\ProductFeed\ZboziBundle;
+namespace Shopsys\ProductFeed\ZboziBundle\Form;
 
 use Shopsys\Plugin\PluginCrudExtensionInterface;
 use Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainData;
