@@ -49,7 +49,7 @@ class SitemapDumper extends Dumper
 
         $finder = new Finder();
         foreach ($finder->files()->in($this->tmpFolder)->getIterator() as $file) {
-            $this->mountManager->move('local://' . $file->getPathname(), 'basic://' . $targetDir . '/' . $file->getBasename());
+            $this->mountManager->move('local://' . $file->getPathname(), 'main://' . $targetDir . '/' . $file->getBasename());
         }
 
         parent::cleanup();

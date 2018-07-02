@@ -52,6 +52,7 @@
         "ext-redis": "*",
         "ext-xml": "*",
         "arvenil/ninja-mutex": "^0.4.1",
+        "barryvdh/elfinder-flysystem-driver": "^0.2",
         "bmatzner/jquery-bundle": "^2.2.2",
         "bmatzner/jquery-ui-bundle": "^1.10.3",
         "commerceguys/intl": "0.7.4",

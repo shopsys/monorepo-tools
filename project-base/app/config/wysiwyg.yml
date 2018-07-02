@@ -44,14 +44,23 @@ fm_elfinder:
       editor: ckeditor
       relative_path: false
       connector:
+        debug: true
         roots:
-          uploads:
-            driver: LocalFileSystem
+          local:
+            driver: Flysystem
             path: '%shopsys.filemanager_upload_web_dir%'
-            tmb_path: '_thumbnails'
+            flysystem:
+              type: local
+              options:
+                local:
+                  path: '%shopsys.web_dir%'
+            upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+            tmb_path: '%shopsys.filemanager_upload_web_dir%/_thumbnails'
+            url: '%shopsys.filemanager_upload_web_dir%'
+            tmb_url: '%shopsys.filemanager_upload_web_dir%/_thumbnails'
             attributes:
               thumbnails:
-                pattern: '/^\/_thumbnails$/'
+                pattern: '/^\/content\/wysiwyg\/_thumbnails$/'
                 hidden: true
             disabled_commands:
               - 'archive'
