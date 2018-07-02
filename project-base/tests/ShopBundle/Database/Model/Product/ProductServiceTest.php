@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Database\Model\Product;
 
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
-use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;

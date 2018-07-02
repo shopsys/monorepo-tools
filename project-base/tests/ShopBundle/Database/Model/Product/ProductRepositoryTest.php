@@ -3,8 +3,8 @@
 namespace Tests\ShopBundle\Database\Model\Product;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;

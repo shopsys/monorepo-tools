@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Database\Model\Cart\Watcher;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\Model\Cart\Cart;
 use Shopsys\FrameworkBundle\Model\Cart\Item\CartItem;
 use Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService;
