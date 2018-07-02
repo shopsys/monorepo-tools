@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Database\Model\Pricing;
 
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
-use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;

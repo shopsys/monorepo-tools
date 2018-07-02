@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Generator;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\OrderDataFixture as DemoOrderDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\OrderStatusDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\PaymentDataFixture as DemoPaymentDataFixture;

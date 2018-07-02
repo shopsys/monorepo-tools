@@ -48,8 +48,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         /* @var $vat \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat */
         $pricingGroup1 = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
         /* @var $pricingGroup2 \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
-        $defaultCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-        /* @var $defaultCurrency \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency */
         $defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::AVAILABILITY_IN_STOCK);
         /* @var $defaultInStockAvailability \Shopsys\FrameworkBundle\Model\Product\Availability\Availability */
         $defaultUnit = $this->getReference(UnitDataFixture::UNIT_PIECES);
@@ -72,8 +70,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         $manager->persist($this->settingValueFactory->create(MailSetting::MAIN_ADMIN_MAIL, 'no-reply@shopsys.com', Domain::FIRST_DOMAIN_ID));
         $manager->persist($this->settingValueFactory->create(MailSetting::MAIN_ADMIN_MAIL_NAME, 'Shopsys', Domain::FIRST_DOMAIN_ID));
         $manager->persist($this->settingValueFactory->create(Setting::DEFAULT_PRICING_GROUP, $pricingGroup1->getId(), Domain::FIRST_DOMAIN_ID));
-        $manager->persist($this->settingValueFactory->create(PricingSetting::DEFAULT_CURRENCY, $defaultCurrency->getId(), SettingValue::DOMAIN_ID_COMMON));
-        $manager->persist($this->settingValueFactory->create(PricingSetting::DEFAULT_DOMAIN_CURRENCY, $defaultCurrency->getId(), Domain::FIRST_DOMAIN_ID));
         $manager->persist($this->settingValueFactory->create(Setting::DEFAULT_AVAILABILITY_IN_STOCK, $defaultInStockAvailability->getId(), SettingValue::DOMAIN_ID_COMMON));
         $manager->persist($this->settingValueFactory->create(PricingSetting::FREE_TRANSPORT_AND_PAYMENT_PRICE_LIMIT, null, Domain::FIRST_DOMAIN_ID));
         $manager->persist($this->settingValueFactory->create(SeoSettingFacade::SEO_META_DESCRIPTION_MAIN_PAGE, 'Shopsys Framework - the best solution for your eshop.', Domain::FIRST_DOMAIN_ID));

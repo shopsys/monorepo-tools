@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
-use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 use Shopsys\FrameworkBundle\Model\Seo\SeoSettingFacade;
 

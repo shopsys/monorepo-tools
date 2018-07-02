@@ -7,7 +7,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Generator;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Customer\UserRepository;
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
