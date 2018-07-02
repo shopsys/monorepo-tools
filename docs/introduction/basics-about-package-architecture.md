@@ -38,7 +38,7 @@ So far, we created packages for [HTTP Smoke testing](https://github.com/shopsys/
 and extracted product XML feeds (eg. [Google Shopping product feed](https://github.com/shopsys/product-feed-google)).
 Other candidates for extraction into modules are for example payment methods gateways, package shipping integrations or analytic service integrations.
 
-![Shopsys Framework package architecture schema](./img/package-architecture.png)
+![Shopsys Framework package architecture schema](../img/package-architecture.png 'Shopsys Framework Package Architecture')
 
 *Note: The specific modules in this diagram are just examples.*
 

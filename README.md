@@ -14,6 +14,7 @@ These are most important packages and the way they depend on each other.
 For more info see the article [Basics About Package Architecture](./docs/introduction/basics-about-package-architecture.md) in our knowledge base.
 
 ![Shopsys Framework package architecture schema](./docs/img/package-architecture.png 'Shopsys Framework Package Architecture')
+*Note: The specific modules in this diagram are just examples.*
 
 ## Current State and a Roadmap
 
