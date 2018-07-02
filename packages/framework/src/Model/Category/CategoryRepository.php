@@ -150,12 +150,15 @@ class CategoryRepository extends NestedTreeRepository
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $categoryBranch
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\FrameworkBundle\Model\Category\Category[]
      */
-    public function getAllWithoutBranch(Category $categoryBranch)
+    public function getTranslatedAllWithoutBranch(Category $categoryBranch, DomainConfig $domainConfig)
     {
-        return $this->getAllQueryBuilder()
-            ->andWhere('c.lft < :branchLft OR c.rgt > :branchRgt')
+        $queryBuilder = $this->getAllQueryBuilder();
+        $this->addTranslation($queryBuilder, $domainConfig->getLocale());
+
+        return $queryBuilder->andWhere('c.lft < :branchLft OR c.rgt > :branchRgt')
             ->setParameter('branchLft', $categoryBranch->getLft())
             ->setParameter('branchRgt', $categoryBranch->getRgt())
             ->getQuery()
@@ -529,5 +532,18 @@ class CategoryRepository extends NestedTreeRepository
             ->setParameter('categories', $categories);
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * @param  \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return \Shopsys\FrameworkBundle\Model\Category\Category[]
+     */
+    public function getTranslatedAll(DomainConfig $domainConfig)
+    {
+        $queryBuilder = $this->getAllQueryBuilder();
+        $this->addTranslation($queryBuilder, $domainConfig->getLocale());
+
+        return $queryBuilder->getQuery()
+            ->getResult();
     }
 }

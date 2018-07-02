@@ -195,11 +195,12 @@ class CategoryFacade
     }
 
     /**
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\FrameworkBundle\Model\Category\Category[]
      */
-    public function getAll()
+    public function getTranslatedAll(DomainConfig $domainConfig)
     {
-        return $this->categoryRepository->getAll();
+        return $this->categoryRepository->getTranslatedAll($domainConfig);
     }
 
     /**
@@ -303,11 +304,12 @@ class CategoryFacade
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\FrameworkBundle\Model\Category\Category[]
      */
-    public function getAllWithoutBranch(Category $category)
+    public function getTranslatedAllWithoutBranch(Category $category, DomainConfig $domainConfig)
     {
-        return $this->categoryRepository->getAllWithoutBranch($category);
+        return $this->categoryRepository->getTranslatedAllWithoutBranch($category, $domainConfig);
     }
 
     /**

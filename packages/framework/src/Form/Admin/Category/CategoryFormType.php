@@ -99,9 +99,9 @@ class CategoryFormType extends AbstractType
         }
 
         if ($options['category'] !== null) {
-            $parentChoices = $this->categoryFacade->getAllWithoutBranch($options['category']);
+            $parentChoices = $this->categoryFacade->getTranslatedAllWithoutBranch($options['category'], $this->domain->getCurrentDomainConfig());
         } else {
-            $parentChoices = $this->categoryFacade->getAll();
+            $parentChoices = $this->categoryFacade->getTranslatedAll($this->domain->getCurrentDomainConfig());
         }
 
         $builderSettingsGroup = $builder->create('settings', GroupType::class, [
