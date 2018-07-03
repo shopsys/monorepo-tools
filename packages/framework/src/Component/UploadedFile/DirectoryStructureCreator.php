@@ -2,8 +2,8 @@
 
 namespace Shopsys\FrameworkBundle\Component\UploadedFile;
 
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig;
-use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreator
 {
@@ -18,14 +18,14 @@ class DirectoryStructureCreator
     private $uploadedFileLocator;
 
     /**
-     * @var \Symfony\Component\Filesystem\Filesystem
+     * @var \League\Flysystem\FilesystemInterface
      */
     private $filesysytem;
 
     public function __construct(
         UploadedFileConfig $uploadedFileConfig,
         UploadedFileLocator $uploadedFileLocator,
-        Filesystem $filesystem
+        FilesystemInterface $filesystem
     ) {
         $this->uploadedFileConfig = $uploadedFileConfig;
         $this->uploadedFileLocator = $uploadedFileLocator;
@@ -40,6 +40,8 @@ class DirectoryStructureCreator
             $directories[] = $this->uploadedFileLocator->getAbsoluteFilePath($uploadedFileEntityConfig->getEntityName());
         }
 
-        $this->filesysytem->mkdir($directories);
+        foreach ($directories as $directory) {
+            $this->filesysytem->createDir($directory);
+        }
     }
 }

@@ -137,6 +137,23 @@ monolog:
     console_output:
       type: console
 
+oneup_flysystem:
+  adapters:
+    main_adapter:
+      local:
+        directory: "%kernel.project_dir%"
+    local_adapter:
+      local:
+        directory: "/"
+
+  filesystems:
+    main_filesystem:
+      adapter: main_adapter
+      alias: "main_filesystem"
+    local_filesystem:
+      adapter: local_adapter
+      alias: "local_filesystem"
+
 presta_sitemap:
   route_annotation_listener: false
 
@@ -154,6 +171,24 @@ shopsys_shop:
 
 snc_redis:
   clients:
+    bestselling_products:
+      type: 'phpredis'
+      alias: 'bestselling_products'
+      dsn: 'redis://%redis_host%'
+      options:
+        prefix: 'bestselling_products_'
+    doctrine_metadata:
+      type: 'phpredis'
+      alias: 'doctrine_metadata'
+      dsn: 'redis://%redis_host%'
+      options:
+        prefix: 'doctrine_metadata_'
+    doctrine_query:
+      type: 'phpredis'
+      alias: 'doctrine_query'
+      dsn: 'redis://%redis_host%'
+      options:
+        prefix: 'doctrine_query_'
     session:
       type: 'phpredis'
       alias: 'session'

@@ -3,10 +3,10 @@
 namespace Shopsys\FrameworkBundle\Component\Image;
 
 use Doctrine\ORM\EntityManagerInterface;
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\FileUpload\FileUpload;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
-use Symfony\Component\Filesystem\Filesystem;
 
 class ImageFacade
 {
@@ -31,7 +31,7 @@ class ImageFacade
     protected $imageService;
 
     /**
-     * @var \Symfony\Component\Filesystem\Filesystem
+     * @var \League\Flysystem\FilesystemInterface
      */
     protected $filesystem;
 
@@ -56,7 +56,7 @@ class ImageFacade
         ImageConfig $imageConfig,
         ImageRepository $imageRepository,
         ImageService $imageService,
-        Filesystem $filesystem,
+        FilesystemInterface $filesystem,
         FileUpload $fileUpload,
         ImageLocator $imageLocator
     ) {
@@ -195,7 +195,10 @@ class ImageFacade
         $imageConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
         foreach ($imageConfig->getSizeConfigs() as $sizeConfig) {
             $filepath = $this->imageLocator->getAbsoluteImageFilepath($image, $sizeConfig->getName());
-            $this->filesystem->remove($filepath);
+
+            if ($this->filesystem->has($filepath)) {
+                $this->filesystem->delete($filepath);
+            }
         }
     }
 
@@ -276,8 +279,7 @@ class ImageFacade
         foreach ($sourceImages as $sourceImage) {
             $this->filesystem->copy(
                 $this->imageLocator->getAbsoluteImageFilepath($sourceImage, ImageConfig::ORIGINAL_SIZE_NAME),
-                $this->fileUpload->getTemporaryFilepath($sourceImage->getFilename()),
-                true
+                $this->fileUpload->getTemporaryFilepath($sourceImage->getFilename())
             );
 
             $targetImage = $this->imageService->createImage(

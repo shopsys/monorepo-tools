@@ -3,11 +3,11 @@
 namespace Shopsys\FrameworkBundle\Model\Feed;
 
 use Doctrine\ORM\EntityManagerInterface;
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade;
 use Shopsys\ProductFeed\FeedConfigInterface;
-use Symfony\Component\Filesystem\Filesystem;
 
 class FeedFacade
 {
@@ -20,7 +20,7 @@ class FeedFacade
     protected $domain;
 
     /**
-     * @var \Symfony\Component\Filesystem\Filesystem
+     * @var \League\Flysystem\FilesystemInterface
      */
     protected $filesystem;
 
@@ -52,7 +52,7 @@ class FeedFacade
     public function __construct(
         FeedXmlWriter $feedXmlWriter,
         Domain $domain,
-        Filesystem $filesystem,
+        FilesystemInterface $filesystem,
         FeedConfigFacade $feedConfigFacade,
         FeedGenerationConfigFactory $feedGenerationConfigFactory,
         EntityManagerInterface $em,
@@ -178,7 +178,7 @@ class FeedFacade
                 $feedConfig->getTemplateFilepath(),
                 $temporaryFeedFilepath
             );
-            $this->filesystem->rename($temporaryFeedFilepath, $filepath, true);
+            $this->filesystem->rename($temporaryFeedFilepath, $filepath);
 
             return null;
         }

@@ -2,13 +2,13 @@
 
 namespace Tests\FrameworkBundle\Unit\Component\Image;
 
+use League\Flysystem\FilesystemInterface;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageEntityConfig;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageSizeConfig;
 use Shopsys\FrameworkBundle\Component\Image\DirectoryStructureCreator;
 use Shopsys\FrameworkBundle\Component\Image\ImageLocator;
-use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreatorTest extends TestCase
 {
@@ -33,25 +33,14 @@ class DirectoryStructureCreatorTest extends TestCase
             ),
         ];
         $imageConfig = new ImageConfig($imageEntityConfigByClass);
-        $imageLocator = new ImageLocator($imageDir, $imageConfig);
-        $filesystemMock = $this->getMockBuilder(Filesystem::class)
-            ->setMethods(['mkdir'])
-            ->getMock();
+        $filesystemMock = $this->createMock(FilesystemInterface::class);
         $filesystemMock
-            ->expects($this->once())
-            ->method('mkdir')
-            ->with($this->callback(function ($actual) {
-                $expected = [
-                    'imageDir/entityName1/sizeName1_1/',
-                    'imageDir/entityName2/type/sizeName2_1/',
-                    'domainImageDir',
-                ];
-                asort($expected);
-                asort($actual);
-                $this->assertSame($expected, $actual);
-                return true;
-            }));
-
+            ->method('createDir')
+            ->withConsecutive(
+                ['imageDir/entityName1/sizeName1_1/'],
+                ['imageDir/entityName2/type/sizeName2_1/']
+            );
+        $imageLocator = new ImageLocator($imageDir, $imageConfig, $filesystemMock);
         $creator = new DirectoryStructureCreator($imageDir, $domainImageDir, $imageConfig, $imageLocator, $filesystemMock);
         $creator->makeImageDirectories();
     }

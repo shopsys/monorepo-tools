@@ -2,9 +2,10 @@
 
 namespace Shopsys\ShopBundle\Controller\Front;
 
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Shopsys\FrameworkBundle\Component\Image\Processing\ImageGeneratorFacade;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ImageController extends FrontBaseController
 {
@@ -13,9 +14,15 @@ class ImageController extends FrontBaseController
      */
     private $imageGeneratorFacade;
 
-    public function __construct(ImageGeneratorFacade $imageGeneratorFacade)
+    /**
+     * @var \League\Flysystem\FilesystemInterface
+     */
+    private $filesystem;
+
+    public function __construct(ImageGeneratorFacade $imageGeneratorFacade, FilesystemInterface $filesystem)
     {
         $this->imageGeneratorFacade = $imageGeneratorFacade;
+        $this->filesystem = $filesystem;
     }
 
     public function getImageAction($entityName, $type, $sizeName, $imageId)
@@ -33,8 +40,19 @@ class ImageController extends FrontBaseController
         }
 
         try {
-            return new BinaryFileResponse($imageFilepath);
-        } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
+            $fileStream = $this->filesystem->readStream($imageFilepath);
+            $headers = [
+                'content-type' => $this->filesystem->getMimetype($imageFilepath),
+                'content-size' => $this->filesystem->getSize($imageFilepath),
+            ];
+
+            $callback = function () use ($fileStream) {
+                $out = fopen('php://output', 'wb');
+                stream_copy_to_stream($fileStream, $out);
+            };
+
+            return new StreamedResponse($callback, 200, $headers);
+        } catch (\Exception $e) {
             $message = 'Response with file "' . $imageFilepath . '" failed.';
             throw $this->createNotFoundException($message, $e);
         }

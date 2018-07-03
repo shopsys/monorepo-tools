@@ -2,6 +2,7 @@
 
 namespace Tests\FrameworkBundle\Unit\Component\Image;
 
+use League\Flysystem\FilesystemInterface;
 use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfigDefinition;
@@ -110,7 +111,8 @@ class ImageLocatorTest extends TestCase
      */
     public function testGetRelativeImagePath($entityName, $type, $sizeName, $expectedPath)
     {
-        $imageLocator = new ImageLocator('imageDir', $this->getBaseImageConfig());
+        $filesystemMock = $this->createMock(FilesystemInterface::class);
+        $imageLocator = new ImageLocator('imageDir', $this->getBaseImageConfig(), $filesystemMock);
 
         $this->assertSame($expectedPath, $imageLocator->getRelativeImagePath($entityName, $type, $sizeName));
     }
@@ -144,7 +146,8 @@ class ImageLocatorTest extends TestCase
      */
     public function testGetRelativeImagePathException($entityName, $type, $sizeName, $exceptionClass)
     {
-        $imageLocator = new ImageLocator('imageDir', $this->getBaseImageConfig());
+        $filesystemMock = $this->createMock(FilesystemInterface::class);
+        $imageLocator = new ImageLocator('imageDir', $this->getBaseImageConfig(), $filesystemMock);
 
         $this->expectException($exceptionClass);
         $imageLocator->getRelativeImagePath($entityName, $type, $sizeName);

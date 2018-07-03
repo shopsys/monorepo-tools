@@ -57,6 +57,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [7.0.0-alpha3] - 2018-07-03
 ### [shopsys/framework]
 #### Changed
+- [#302 - All persistent files like uploads are now stored using abstract filesystem (Flysystem)](https://github.com/shopsys/shopsys/pull/302)
+    - abstract filesystem is used to store:
+        - uploaded files and images
+        - uploaded files and images via WYSIWYG
+        - generated feeds
+        - generated sitemaps
+    - all services using PernamentPhpFileCache now use RedisCache instead
 - [#272 - Changed concept of Components](https://github.com/shopsys/shopsys/pull/143):
     - added definition of Components in [components.md](./docs/introduction/components.md):
     - by this definition, classes that did not match it were moved or refactored.

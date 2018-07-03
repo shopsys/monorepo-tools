@@ -5,12 +5,15 @@ namespace Shopsys\FrameworkBundle\Command;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Exception;
+use League\Flysystem\FilesystemInterface;
+use League\Flysystem\MountManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 use ZipArchive;
 
 class ImageDemoCommand extends Command
@@ -39,11 +42,6 @@ class ImageDemoCommand extends Command
     /**
      * @var string
      */
-    private $cacheDirectory;
-
-    /**
-     * @var string
-     */
     private $imagesDirectory;
 
     /**
@@ -57,35 +55,49 @@ class ImageDemoCommand extends Command
     private $em;
 
     /**
-     * @var \Symfony\Component\Filesystem\Filesystem
+     * @var \League\Flysystem\FilesystemInterface
      */
     private $filesystem;
 
     /**
+     * @var \Symfony\Component\Filesystem\Filesystem
+     */
+    private $localFilesystem;
+
+    /**
+     * @var \League\Flysystem\MountManager
+     */
+    private $mountManager;
+
+    /**
      * @param string $demoImagesArchiveUrl
      * @param string $demoImagesSqlUrl
-     * @param string $cacheDirectory
      * @param string $imagesDirectory
      * @param string $domainImagesDirectory
-     * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+     * @param \League\Flysystem\FilesystemInterface $localFilesystem
+     * @param \League\Flysystem\FilesystemInterface $filesystem
+     * @param \Symfony\Component\Filesystem\Filesystem $symfonyFilesystem
      * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param \League\Flysystem\MountManager $mountManager
      */
     public function __construct(
         $demoImagesArchiveUrl,
         $demoImagesSqlUrl,
-        $cacheDirectory,
         $imagesDirectory,
         $domainImagesDirectory,
-        Filesystem $filesystem,
-        EntityManagerInterface $em
+        FilesystemInterface $filesystem,
+        Filesystem $symfonyFilesystem,
+        EntityManagerInterface $em,
+        MountManager $mountManager
     ) {
         $this->demoImagesArchiveUrl = $demoImagesArchiveUrl;
         $this->demoImagesSqlUrl = $demoImagesSqlUrl;
-        $this->cacheDirectory = $cacheDirectory;
         $this->imagesDirectory = $imagesDirectory;
         $this->domainImagesDirectory = $domainImagesDirectory;
         $this->filesystem = $filesystem;
+        $this->localFilesystem = $symfonyFilesystem;
         $this->em = $em;
+        $this->mountManager = $mountManager;
 
         parent::__construct();
     }
@@ -103,8 +115,9 @@ class ImageDemoCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $localArchiveFilepath = $this->cacheDirectory . '/' . 'demoImages.zip';
-        $unpackedDomainImagesPath = $this->imagesDirectory . 'domain';
+        $localArchiveFilepath = sys_get_temp_dir() . '/' . 'demoImages.zip';
+        $temporaryImagesDirectory = sys_get_temp_dir() . '/img/';
+        $unpackedDomainImagesDirectory = $temporaryImagesDirectory . 'domain/';
 
         $isCompleted = false;
 
@@ -125,14 +138,15 @@ class ImageDemoCommand extends Command
         }
 
         if ($this->downloadImages($output, $this->demoImagesArchiveUrl, $localArchiveFilepath)) {
-            if ($this->unpackImages($output, $this->imagesDirectory, $localArchiveFilepath)) {
-                $this->moveFiles($unpackedDomainImagesPath, $this->domainImagesDirectory);
+            if ($this->unpackImages($output, $temporaryImagesDirectory, $localArchiveFilepath)) {
+                $this->moveFilesFromLocalFilesystemToFilesystem($unpackedDomainImagesDirectory, $this->domainImagesDirectory);
+                $this->moveFilesFromLocalFilesystemToFilesystem($temporaryImagesDirectory, $this->imagesDirectory);
                 $this->loadDbChanges($output, $this->demoImagesSqlUrl);
                 $isCompleted = true;
             }
         }
 
-        $this->cleanUp($output, [$localArchiveFilepath, $unpackedDomainImagesPath]);
+        $this->cleanUp($output, [$localArchiveFilepath, $unpackedDomainImagesDirectory]);
 
         return $isCompleted ? self::EXIT_CODE_OK : self::EXIT_CODE_ERROR;
     }
@@ -193,7 +207,7 @@ class ImageDemoCommand extends Command
         $output->writeln('Start downloading demo images');
 
         try {
-            $this->filesystem->copy($archiveUrl, $localArchiveFilepath, true);
+            $this->localFilesystem->copy($archiveUrl, $localArchiveFilepath, true);
         } catch (Exception $e) {
             $output->writeln('<fg=red>Downloading of demo images failed</fg=red>');
             $output->writeln('<fg=red>Exception: ' . $e->getMessage() . '</fg=red>');
@@ -212,7 +226,7 @@ class ImageDemoCommand extends Command
     private function cleanUp(OutputInterface $output, $pathsToRemove)
     {
         try {
-            $this->filesystem->remove($pathsToRemove);
+            $this->localFilesystem->remove($pathsToRemove);
         } catch (Exception $e) {
             $output->writeln('<fg=red>Deleting of demo archive in cache failed</fg=red>');
             $output->writeln('<fg=red>Exception: ' . $e->getMessage() . '</fg=red>');
@@ -223,14 +237,20 @@ class ImageDemoCommand extends Command
      * @param string $origin
      * @param string $target
      */
-    private function moveFiles($origin, $target)
+    private function moveFilesFromLocalFilesystemToFilesystem($origin, $target)
     {
-        $files = scandir($origin);
-        foreach ($files as $file) {
-            $filepath = $origin . '/' . $file;
-            if (is_file($filepath)) {
-                $newFilepath = $target . '/' . $file;
-                $this->filesystem->rename($filepath, $newFilepath, true);
+        $finder = new Finder();
+        $finder->files()->in($origin);
+        foreach ($finder as $file) {
+            $filepath = $file->getPathname();
+
+            if ($this->localFilesystem->exists($filepath)) {
+                $newFilepath = $target . $file->getRelativePathname();
+
+                if ($this->filesystem->has($newFilepath)) {
+                    $this->filesystem->delete($newFilepath);
+                }
+                $this->mountManager->move('local://' . $filepath, 'main://' . $newFilepath);
             }
         }
     }

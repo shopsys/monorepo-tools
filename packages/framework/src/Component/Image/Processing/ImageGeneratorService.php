@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Image\Processing;
 
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
 use Shopsys\FrameworkBundle\Component\Image\Image;
 use Shopsys\FrameworkBundle\Component\Image\ImageLocator;
@@ -23,14 +24,21 @@ class ImageGeneratorService
      */
     private $imageConfig;
 
+    /**
+     * @var \League\Flysystem\FilesystemInterface
+     */
+    private $filesystem;
+
     public function __construct(
         ImageProcessingService $imageProcessingService,
         ImageLocator $imageLocator,
-        ImageConfig $imageConfig
+        ImageConfig $imageConfig,
+        FilesystemInterface $filesystem
     ) {
         $this->imageProcessingService = $imageProcessingService;
         $this->imageLocator = $imageLocator;
         $this->imageConfig = $imageConfig;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -52,7 +60,10 @@ class ImageGeneratorService
 
         $interventionImage = $this->imageProcessingService->createInterventionImage($sourceImageFilepath);
         $this->imageProcessingService->resizeBySizeConfig($interventionImage, $sizeConfig);
-        $interventionImage->save($targetImageFilepath);
+
+        $interventionImage->encode();
+
+        $this->filesystem->put($targetImageFilepath, $interventionImage);
 
         return $targetImageFilepath;
     }
