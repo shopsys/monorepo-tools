@@ -35,6 +35,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - main menu moved to the left panel along with settings menu
     - menu items do not have type anymore, which lead to simplification of the code
     - menu was slightly restructured
+- [#285 - Removal of base data fixtures](https://github.com/shopsys/shopsys/pull/285)
+    - all Base Data Fixtures were removed
+    - the data are created either in database migrations or in Demo Data Fixtures
 
 ### [shopsys/product-feed-google]
 #### Changed
