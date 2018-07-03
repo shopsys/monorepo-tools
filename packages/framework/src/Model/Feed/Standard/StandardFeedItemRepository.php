@@ -50,6 +50,7 @@ class StandardFeedItemRepository implements FeedItemRepositoryInterface
             ->addSelect('a')->join('p.calculatedAvailability', 'a')
             ->addSelect('b')->leftJoin('p.brand', 'b')
             ->addSelect('pd')->join('p.domains', 'pd', Join::WITH, 'pd.domainId = :domain')
+            ->setParameter('domain', $domainConfig->getId())
             ->andWhere('p.variantType != :variantTypeMain')->setParameter('variantTypeMain', Product::VARIANT_TYPE_MAIN)
             ->orderBy('p.id', 'asc')
             ->setMaxResults($maxResults);
