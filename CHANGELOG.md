@@ -29,6 +29,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#286 - Instantiate entity data objects by factories](https://github.com/shopsys/shopsys/pull/286)
     - entity data objects have only an empty constructor now
     - creation of entity data objects moved to factories to allow extensibility
+- [#244 Redesign of administration](https://github.com/shopsys/shopsys/pull/244)
+    - full-width layout
+    - colors changed to match new Shopsys CI
+    - main menu moved to the left panel along with settings menu
+    - menu items do not have type anymore, which lead to simplification of the code
+    - menu was slightly restructured
 
 ### [shopsys/product-feed-google]
 #### Changed

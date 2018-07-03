@@ -16,10 +16,12 @@
         {% block header %}
             <header class="web__header">
                 <div class="web__header__in">
-                    {{ render(controller('ShopsysFrameworkBundle:Admin/Menu:menu', {
-                        route: getRoute(),
-                        parameters: getRouteParams()
-                    } )) }}
+                    <div class="web__header__logo">
+
+                        <img class="web__header__logo__svg" src="{{ asset('assets/admin/images/logo.svg') }}" alt="{{ 'Shopsys Framework'|trans }}">
+
+                    </div>
+                    {{ render(controller('ShopsysFrameworkBundle:Admin/Menu:menu')) }}
                 </div>
             </header>
         {% endblock %}

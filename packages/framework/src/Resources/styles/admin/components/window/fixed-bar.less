@@ -1,10 +1,11 @@
 .window-fixed-bar {
     position: fixed;
     bottom: 0;
-    left: 0;
+    left: @width-panel;
     right: 0;
     z-index: 1010;
 
+    background-color: @color-f;
     border: 1px solid @color-border-dark;
 
     &--developer-mode {
@@ -13,9 +14,14 @@
 
     &--top {
         top: 0;
+        left: 0;
         bottom: auto;
 
         border: 0;
+    }
+
+    .window-content & {
+        left: 0;
     }
 
     &__in {
@@ -23,24 +29,26 @@
         width: 100%;
         height: @height-fixed-bar;
         margin: 0 auto;
-        min-width: 768px;
         max-width: 100%;
 
         background: @color-f;
-        text-align: center;
 
         .window-fixed-bar--type-alert & {
             background: @color-alert;
             color: @color-f;
             text-align: left;
         }
+
+        .window-fixed-bar--top & {
+            max-width: 100%;
+        }
     }
 
     &__item {
-        padding-left: 20px;
-        padding-right: 20px;
-        height: @height-fixed-bar;
         display: flex;
+        height: @height-fixed-bar;
+        padding-left: 30px;
+        padding-right: 30px;
         flex: 1;
         align-items: center;
 
@@ -80,7 +88,7 @@
     .window-fixed-bar {
         &__in {
             width: @width-web;
-            text-align: right
+            text-align: right;
         }
     }
 }

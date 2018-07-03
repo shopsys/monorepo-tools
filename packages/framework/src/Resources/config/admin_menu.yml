@@ -6,26 +6,20 @@
   route: admin_order_list
   icon: document-copy
   items:
-    - label: 'Orders overview'
-      route: admin_order_list
-      items:
-        - label: 'Editing order'
-          route: admin_order_edit
-          visible: false
+    - label: 'Editing order'
+      route: admin_order_edit
+      visible: false
 
 - label: 'Customers'
   route: admin_customer_list
   icon: person-public
   items:
-    - label: 'Registered customers'
-      route: admin_customer_list
-      items:
-        - label: 'New customer'
-          route: admin_customer_new
-          visible: false
-        - label: 'Editing customer'
-          route: admin_customer_edit
-          visible: false
+    - label: 'New customer'
+      route: admin_customer_new
+      visible: false
+    - label: 'Editing customer'
+      route: admin_customer_edit
+      visible: false
 
 - label: 'Products'
   route: admin_product_list
@@ -118,19 +112,15 @@
   route: admin_administrator_list
   icon: person-door-man
   items:
-    - label: 'Administrators overview'
-      route: admin_administrator_list
-      items:
-        - label: 'New administrator'
-          route: admin_administrator_new
-          visible: false
-        - label: 'Editing administrator'
-          route: admin_administrator_edit
-          visible: false
+    - label: 'New administrator'
+      route: admin_administrator_new
+      visible: false
+    - label: 'Editing administrator'
+      route: admin_administrator_edit
+      visible: false
 
 - label: 'Settings'
   route: admin_domain_list
-  type: settings
   icon: gear
   items:
     - label: 'E-shop identification'
@@ -142,12 +132,8 @@
         - label: 'Editing domain'
           route: admin_domain_edit
           visible: false
-
-    - label: 'Operator information'
-      route: admin_shopinfo_setting
-      items:
-      - label: 'Operator information'
-        route: admin_shopinfo_setting
+        - label: 'Operator information'
+          route: admin_shopinfo_setting
 
     - label: 'Legal conditions'
       route: admin_legalconditions_setting
@@ -156,30 +142,8 @@
           route: admin_legalconditions_setting
         - label: 'Personal data access'
           route: admin_personaldata_setting
-
-    - label: 'Cookies information'
-      route: admin_cookies_setting
-      items:
         - label: 'Cookies information'
           route: admin_cookies_setting
-
-    - label: 'Shippings and payments'
-      route: admin_transportandpayment_list
-      items:
-        - label: 'Shippings and payments'
-          route: admin_transportandpayment_list
-        - label: 'New shipping'
-          route: admin_transport_new
-          visible: false
-        - label: 'Editing shipping'
-          route: admin_transport_edit
-          visible: false
-        - label: 'New Payment'
-          route: admin_payment_new
-          visible: false
-        - label: 'Editing payment'
-          route: admin_payment_edit
-          visible: false
 
     - label: 'Communication with customer'
       route: admin_mail_setting
@@ -196,6 +160,24 @@
     - label: 'Lists and nomenclatures'
       route: admin_availability_list
       items:
+        - label: 'Shippings and payments'
+          route: admin_transportandpayment_list
+          items:
+            - label: 'Shippings and payments'
+              route: admin_transportandpayment_list
+            - label: 'New shipping'
+              route: admin_transport_new
+              visible: false
+            - label: 'Editing shipping'
+              route: admin_transport_edit
+              visible: false
+            - label: 'New Payment'
+              route: admin_payment_new
+              visible: false
+            - label: 'Editing payment'
+              route: admin_payment_edit
+              visible: false
+
         - label: 'Availability'
           route: admin_availability_list
 
@@ -276,15 +258,3 @@
       items:
       - label: 'Heureka - Verified by Customer'
         route: admin_heureka_setting
-
-- label: 'Frontend'
-  type: domains
-  icon: forward-page
-
-- label: 'Account'
-  route: admin_domain_list
-  type: account
-  icon: person-man
-  items:
-  - label: 'My account'
-    route: admin_administrator_myaccount

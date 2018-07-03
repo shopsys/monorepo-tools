@@ -49,49 +49,48 @@ class MenuFactory
     /**
      * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\Menu
      */
-    public function createMenuWithVisibleItems()
+    public function createMenuWithAllowedItems()
     {
         $menu = $this->menuLoader->loadFromYaml($this->configFilepath);
 
-        $visibleMenuItems = $this->filterVisibleRecursive($menu->getItems());
+        $allowedMenuItems = $this->filterAllowedRecursive($menu->getItems());
 
-        return new Menu($visibleMenuItems);
+        return new Menu($allowedMenuItems);
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[] $menuItems
      * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
-    private function filterVisibleRecursive(array $menuItems)
+    private function filterAllowedRecursive(array $menuItems)
     {
-        $visibleMenuItems = [];
+        $allowedMenuItems = [];
 
         foreach ($menuItems as $menuItem) {
-            if ($this->isMenuItemVisible($menuItem)) {
-                $visibleSubitems = $this->filterVisibleRecursive($menuItem->getItems());
+            if ($this->isMenuItemAllowed($menuItem)) {
+                $allowedSubitems = $this->filterAllowedRecursive($menuItem->getItems());
 
-                $visibleMenuItems[] = new MenuItem(
+                $allowedMenuItems[] = new MenuItem(
                     $menuItem->getLabel(),
-                    $menuItem->getType(),
                     $menuItem->getRoute(),
                     $menuItem->getRouteParameters(),
                     $menuItem->isVisible(),
                     $menuItem->isSuperadmin(),
                     $menuItem->getIcon(),
                     $menuItem->isMultidomainOnly(),
-                    $visibleSubitems
+                    $allowedSubitems
                 );
             }
         }
 
-        return $visibleMenuItems;
+        return $allowedMenuItems;
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem $menuItem
      * @return bool
      */
-    private function isMenuItemVisible(MenuItem $menuItem)
+    private function isMenuItemAllowed(MenuItem $menuItem)
     {
         if ($menuItem->isSuperadmin() && !$this->authorizationChecker->isGranted(Roles::ROLE_SUPER_ADMIN)) {
             return false;

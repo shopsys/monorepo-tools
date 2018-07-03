@@ -10,51 +10,11 @@ class Menu
     private $items;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
-     */
-    private $regularItems;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
-     */
-    private $settingsItem;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
-     */
-    private $accountItem;
-
-    /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
-     */
-    private $domainsItem;
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[] $items
      */
     public function __construct(array $items)
     {
         $this->items = $items;
-
-        $this->regularItems = [];
-
-        foreach ($items as $item) {
-            if ($item->getType() === MenuItem::TYPE_REGULAR) {
-                $this->regularItems[] = $item;
-            } elseif ($item->getType() === MenuItem::TYPE_SETTINGS) {
-                $this->settingsItem = $item;
-            } elseif ($item->getType() === MenuItem::TYPE_ACCOUNT) {
-                $this->accountItem = $item;
-            } elseif ($item->getType() === MenuItem::TYPE_DOMAINS) {
-                $this->domainsItem = $item;
-            }
-        }
-
-        if (!isset($this->settingsItem)) {
-            throw new \Shopsys\FrameworkBundle\Model\AdminNavigation\Exception\MissingSettingsItemException(
-                'Menu item of type ' . MenuItem::TYPE_SETTINGS . ' not found in config'
-            );
-        }
     }
 
     /**
@@ -68,41 +28,11 @@ class Menu
     /**
      * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
      */
-    public function getRegularItems()
+    public function getVisibleItems()
     {
-        return $this->regularItems;
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
-     */
-    public function getSettingsItem()
-    {
-        return $this->settingsItem;
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]
-     */
-    public function getSettingsItems()
-    {
-        return $this->settingsItem->getItems();
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
-     */
-    public function getAccountItem()
-    {
-        return $this->accountItem;
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem
-     */
-    public function getDomainsItem()
-    {
-        return $this->domainsItem;
+        return array_filter($this->items, function (MenuItem $item) {
+            return $item->isVisible();
+        });
     }
 
     /**
@@ -183,24 +113,6 @@ class Menu
     }
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem $item
-     * @return bool
-     */
-    private function isItemDescendantOfSettings(MenuItem $item)
-    {
-        $itemPath = $this->getItemPath($item);
-        if ($itemPath !== null) {
-            foreach ($itemPath as $ancestor) {
-                if ($ancestor->getType() === MenuItem::TYPE_SETTINGS) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[] $items
      * @param \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem $item
      * @return \Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem[]|null
@@ -238,20 +150,5 @@ class Menu
         }
 
         return $this->getItemPath($matchingItem);
-    }
-
-    /**
-     * @param string $route
-     * @param array|null $parameters
-     * @return bool
-     */
-    public function isRouteMatchingDescendantOfSettings($route, $parameters)
-    {
-        $matchingItem = $this->getItemMatchingRoute($route, $parameters);
-        if ($matchingItem === null) {
-            return false;
-        }
-
-        return $this->isItemDescendantOfSettings($matchingItem);
     }
 }

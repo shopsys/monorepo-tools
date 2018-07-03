@@ -1,24 +1,48 @@
-<div class="panel">
-    <ul class="side-menu">
-        {% for item in items %}
-            {% if (item.visible) %}
-                <li class="side-menu__item {% if item in activePath %}side-menu__item--active {% endif %}{% if item.superadmin %} side-menu__item--superadmin{% endif %}" >
-                    <a href="{{ url(item.route, item.routeParameters) }}" class="side-menu__item__link">
-                        {{ item.label }}
+<nav class="panel">
+    <ul class="side-menu js-panel-menu">
+        {% for item in visibleItems %}
+            <li class="side-menu__item js-panel-menu-item{% if item in activePath %} side-menu__item--active{% endif %}{% if item.superadmin %} side-menu__item--superadmin{% endif %}" >
+                {% if item.route and item.visibleItems is empty %}
+                    <a href="{{ url(item.route, item.routeParameters) }}" class=" side-menu__item__link" title="{{ item.label }}">
+                        <div>
+                            <i class="svg svg-{{ item.icon }}"></i>
+                            <span>{{ item.label }}</span>
+                        </div>
                     </a>
-                    {% if item.items is not empty %}
-                        <ul class="side-menu__submenu">
-                            {% for subitem in item.items %}
-                                {% if (subitem.visible) %}
-                                    <li class="side-menu__submenu__item {% if subitem in activePath %}side-menu__submenu__item--active{% endif %}{% if subitem.superadmin or item.superadmin %} side-menu__submenu__item--superadmin{% endif %}" >
-                                        <a href="{{ url(subitem.route, subitem.routeParameters) }}" class="side-menu__submenu__item__link">{{ subitem.label }}</a>
-                                    </li>
+                {% else %}
+                    <div class="side-menu__item__link {% if item in activePath %}side-menu__item__link--active{% endif %}" title="{{ item.label }}">
+                        <div>
+                            <i class="svg svg-{{ item.icon }}"></i>
+                            <span>{{ item.label }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if item.visibleItems is not empty %}
+                    <ul class="side-menu__submenu js-panel-menu js-panel-menu-submenu display-none">
+                        {% for subitem in item.visibleItems %}
+                            <li class="side-menu__submenu__item{% if subitem in activePath %} side-menu__submenu__item--active{% endif %}{% if subitem.superadmin %} side-menu__submenu__item--superadmin{% endif %}">
+                                <a href="{{ url(subitem.route, subitem.routeParameters) }}" class="side-menu__submenu__item__link" title="{{ subitem.label }}">
+                                    <div>
+                                        <span>{{ subitem.label }}</span>
+                                    </div>
+                                </a>
+                                {% if subitem.visibleItems is not empty %}
+                                    <ul class="side-menu__submenu side-menu__submenu--level2">
+                                        {% for subitem2 in subitem.visibleItems %}
+                                            <li class="side-menu__submenu__item{% if subitem2 in activePath %} side-menu__submenu__item--active{% endif %}{% if subitem2.superadmin %} side-menu__submenu__item--superadmin{% endif %}" >
+                                                <a href="{{ url(subitem2.route, subitem2.routeParameters) }}" class="side-menu__submenu__item__link">
+                                                    <i class="svg svg-arrow-strong"></i>
+                                                    <span>{{ subitem2.label }}</span>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
                                 {% endif %}
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </li>
-            {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
         {% endfor %}
     </ul>
-</div>
+</nav>
