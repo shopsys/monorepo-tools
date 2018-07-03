@@ -7,6 +7,7 @@
 * [Basics About Model Architecture](./introduction/basics-about-model-architecture.md)
 * [Custom Entities](introduction/custom-entities.md)
 * [Basics About Package Architecture](./introduction/basics-about-package-architecture.md)
+* [Basic and Demo Data During Application Installation](introduction/basic-and-demo-data-during-application-installation.md)
 * [Database Migrations](./introduction/database-migrations.md)
 * [Components](./introduction/components.md)
 * [Abstract Filesystem](./introduction/abstract-filesystem.md)
