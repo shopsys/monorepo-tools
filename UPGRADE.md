@@ -13,7 +13,6 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/product-feed-google]
 * [shopsys/product-feed-heureka]
 * [shopsys/product-feed-heureka-delivery]
-* [shopsys/product-feed-interface]
 * [shopsys/product-feed-zbozi]
 
 ## [From 7.0.0-alpha3 to Unreleased]

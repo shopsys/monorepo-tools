@@ -9,7 +9,7 @@ This repository is maintained by [shopsys/shopsys] monorepo, information about c
 
 ## Features
 This package contains interfaces responsible for general functionality usable in almost any plugin.
-For specific functionality, such as generating product feeds, there are [separate repositories](https://github.com/search?q=topic%3Aplugin-interface+org%3Ashopsys&type=Repositories), eg. [ProductFeedInterface](https://github.com/shopsys/product-feed-interface/).
+For specific functionality, such as generating product feeds, there are [separate repositories](https://github.com/search?q=topic%3Aplugin-interface+org%3Ashopsys&type=Repositories).
 
 #### Example
 For example usage see the `AcmeProductCrudExtension` in the CRUD extension section below.

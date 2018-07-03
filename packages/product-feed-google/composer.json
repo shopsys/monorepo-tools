@@ -46,7 +46,6 @@
         "shopsys/framework": "dev-master",
         "shopsys/migrations": "dev-master",
         "shopsys/plugin-interface": "dev-master",
-        "shopsys/product-feed-interface": "dev-master",
         "symfony/symfony": "^3.4.8",
         "timwhitlock/jparser": "@dev"
     },

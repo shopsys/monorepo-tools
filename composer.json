@@ -14,7 +14,6 @@
       "Shopsys\\HttpSmokeTesting\\": "packages/http-smoke-testing/src/",
       "Shopsys\\MigrationBundle\\": "packages/migrations/src/",
       "Shopsys\\Plugin\\": "packages/plugin-interface/src/",
-      "Shopsys\\ProductFeed\\": "packages/product-feed-interface/src/",
       "Shopsys\\ProductFeed\\ZboziBundle\\": "packages/product-feed-zbozi/src/",
       "Shopsys\\ProductFeed\\GoogleBundle\\": "packages/product-feed-google/src/",
       "Shopsys\\ProductFeed\\HeurekaBundle\\": "packages/product-feed-heureka/src/",
@@ -194,7 +193,6 @@
     "shopsys/product-feed-zbozi": "self.version",
     "shopsys/product-feed-heureka": "self.version",
     "shopsys/product-feed-heureka-delivery": "self.version",
-    "shopsys/product-feed-interface": "self.version",
     "shopsys/framework": "self.version",
     "shopsys/coding-standards": "self.version"
   }

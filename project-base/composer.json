@@ -88,7 +88,6 @@
         "shopsys/plugin-interface": "dev-master",
         "shopsys/product-feed-heureka": "dev-master",
         "shopsys/product-feed-heureka-delivery": "dev-master",
-        "shopsys/product-feed-interface": "dev-master",
         "shopsys/product-feed-zbozi": "dev-master",
         "shopsys/product-feed-google": "dev-master",
         "snc/redis-bundle": "^2.1.0",

@@ -15,7 +15,6 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/product-feed-google]
 * [shopsys/product-feed-heureka]
 * [shopsys/product-feed-heureka-delivery]
-* [shopsys/product-feed-interface]
 * [shopsys/product-feed-zbozi]
 
 Packages are formatted by release version. You can see all the changes done to package that you carry about with this tree.
@@ -74,6 +73,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Changed
 - [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271)
     - for details see section shopsys/framework
+
+### [shopsys/product-feed-interface]
+#### Abandoned
+The package was removed from monorepo during [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271) and it's development was discontinued.
+It was only important with [the original open-box architecture](https://blog.shopsys.com/architecture-and-workflow-overview-f54ccae348ce), but after the creation of [shopsys/framework] there is no need for isolating interfaces in separate packages.
 
 ### [shopsys/product-feed-zbozi]
 #### Changed

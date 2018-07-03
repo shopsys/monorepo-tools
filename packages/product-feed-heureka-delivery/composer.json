@@ -38,7 +38,6 @@
         "php": "^7.1",
         "doctrine/orm": "dev-doctrine-260-with-ddc1960-hotfix-and-ddc4005-hotfix as 2.6.0",
         "intaro/postgres-search-bundle": "@dev",
-        "shopsys/product-feed-interface": "dev-master",
         "shopsys/form-types-bundle": "dev-master",
         "shopsys/framework": "dev-master",
         "shopsys/migrations": "dev-master",
