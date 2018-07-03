@@ -42,17 +42,17 @@
         "doctrine/doctrine-bundle": "^1.8",
         "doctrine/orm": "dev-doctrine-260-with-ddc1960-hotfix-and-ddc4005-hotfix as 2.6.0",
         "intaro/postgres-search-bundle": "@dev",
-        "shopsys/form-types-bundle": "dev-master",
-        "shopsys/framework": "dev-master",
-        "shopsys/migrations": "dev-master",
-        "shopsys/plugin-interface": "dev-master",
-        "shopsys/product-feed-interface": "dev-master",
+        "shopsys/form-types-bundle": "v7.0.0-alpha3",
+        "shopsys/framework": "v7.0.0-alpha3",
+        "shopsys/migrations": "v7.0.0-alpha3",
+        "shopsys/plugin-interface": "v7.0.0-alpha3",
+        "shopsys/product-feed-interface": "v7.0.0-alpha3",
         "symfony/symfony": "^3.4.8",
         "timwhitlock/jparser": "@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0|^7.0",
-        "shopsys/coding-standards": "dev-master",
+        "shopsys/coding-standards": "v7.0.0-alpha3",
         "twig/extensions": "^1.5.1",
         "twig/twig": "^2.4.8"
     }
