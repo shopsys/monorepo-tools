@@ -19,6 +19,6 @@
         "php": "^7.0"
     },
     "require-dev": {
-        "shopsys/coding-standards": "v7.0.0-alpha3"
+        "shopsys/coding-standards": "dev-master"
     }
 }
