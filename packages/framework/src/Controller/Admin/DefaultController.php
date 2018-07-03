@@ -70,6 +70,21 @@ class DefaultController extends AdminBaseController
         $newOrdersInLastTwoWeeksDates = $this->statisticsProcessingFacade->getDateTimesFormattedToLocaleFormat($newOrdersCountByDayInLastTwoWeeks);
         $newOrdersInLastTwoWeeksCounts = $this->statisticsProcessingFacade->getCounts($newOrdersCountByDayInLastTwoWeeks);
 
+        $this->addWarningMessagesOnDashboard();
+
+        return $this->render(
+            '@ShopsysFramework/Admin/Content/Default/index.html.twig',
+            [
+                'registeredInLastTwoWeeksLabels' => $registeredInLastTwoWeeksDates,
+                'registeredInLastTwoWeeksValues' => $registeredInLastTwoWeeksCounts,
+                'newOrdersInLastTwoWeeksLabels' => $newOrdersInLastTwoWeeksDates,
+                'newOrdersInLastTwoWeeksValues' => $newOrdersInLastTwoWeeksCounts,
+            ]
+        );
+    }
+
+    private function addWarningMessagesOnDashboard(): void
+    {
         if ($this->mailTemplateFacade->existsTemplateWithEnabledSendingHavingEmptyBodyOrSubject()) {
             $this->getFlashMessageSender()->addErrorFlashTwig(
                 t('<a href="{{ url }}">Some required e-mail templates are not fully set.</a>'),
@@ -114,15 +129,5 @@ class DefaultController extends AdminBaseController
                 ]
             );
         }
-
-        return $this->render(
-            '@ShopsysFramework/Admin/Content/Default/index.html.twig',
-            [
-                'registeredInLastTwoWeeksLabels' => $registeredInLastTwoWeeksDates,
-                'registeredInLastTwoWeeksValues' => $registeredInLastTwoWeeksCounts,
-                'newOrdersInLastTwoWeeksLabels' => $newOrdersInLastTwoWeeksDates,
-                'newOrdersInLastTwoWeeksValues' => $newOrdersInLastTwoWeeksCounts,
-            ]
-        );
     }
 }
