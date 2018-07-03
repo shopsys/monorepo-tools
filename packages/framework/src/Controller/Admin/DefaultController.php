@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 use Shopsys\FrameworkBundle\Model\Statistics\StatisticsFacade;
 use Shopsys\FrameworkBundle\Model\Statistics\StatisticsProcessingFacade;
@@ -36,18 +37,25 @@ class DefaultController extends AdminBaseController
      */
     private $setting;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
+     */
+    private $availabilityFacade;
+
     public function __construct(
         StatisticsFacade $statisticsFacade,
         StatisticsProcessingFacade $statisticsProcessingFacade,
         MailTemplateFacade $mailTemplateFacade,
         UnitFacade $unitFacade,
-        Setting $setting
+        Setting $setting,
+        AvailabilityFacade $availabilityFacade
     ) {
         $this->statisticsFacade = $statisticsFacade;
         $this->statisticsProcessingFacade = $statisticsProcessingFacade;
         $this->mailTemplateFacade = $mailTemplateFacade;
         $this->unitFacade = $unitFacade;
         $this->setting = $setting;
+        $this->availabilityFacade = $availabilityFacade;
     }
 
     /**
@@ -85,6 +93,24 @@ class DefaultController extends AdminBaseController
                 t('<a href="{{ url }}">Default unit is not set.</a>'),
                 [
                     'url' => $this->generateUrl('admin_unit_list'),
+                ]
+            );
+        }
+
+        if (empty($this->availabilityFacade->getAll())) {
+            $this->getFlashMessageSender()->addErrorFlashTwig(
+                t('<a href="{{ url }}">There are no availabilities, you need to create some.</a>'),
+                [
+                    'url' => $this->generateUrl('admin_availability_list'),
+                ]
+            );
+        }
+
+        if ($this->setting->get(Setting::DEFAULT_AVAILABILITY_IN_STOCK) === 0) {
+            $this->getFlashMessageSender()->addErrorFlashTwig(
+                t('<a href="{{ url }}">Default product in stock availability is not set.</a>'),
+                [
+                    'url' => $this->generateUrl('admin_availability_list'),
                 ]
             );
         }

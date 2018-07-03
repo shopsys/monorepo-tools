@@ -3,7 +3,7 @@
 namespace Shopsys\FrameworkBundle\DataFixtures;
 
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\BrandDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\FlagDataFixture;

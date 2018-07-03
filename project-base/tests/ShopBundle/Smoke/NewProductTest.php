@@ -2,7 +2,7 @@
 
 namespace Tests\ShopBundle\Smoke;
 
-use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\FrameworkBundle\Form\Admin\Product\ProductEditFormType;

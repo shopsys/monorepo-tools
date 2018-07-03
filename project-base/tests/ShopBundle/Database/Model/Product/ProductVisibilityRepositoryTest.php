@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Database\Model\Product;
 
 use DateTime;
-use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;

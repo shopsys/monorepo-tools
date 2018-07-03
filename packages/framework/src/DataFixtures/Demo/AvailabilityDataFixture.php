@@ -1,9 +1,10 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\DataFixtures\Base;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\FrameworkBundle\Component\Setting\Setting;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
@@ -25,12 +26,19 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
      */
     private $availabilityDataFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Setting\Setting
+     */
+    private $setting;
+
     public function __construct(
         AvailabilityFacade $availabilityFacade,
-        AvailabilityDataFactoryInterface $availabilityDataFactory
+        AvailabilityDataFactoryInterface $availabilityDataFactory,
+        Setting $setting
     ) {
         $this->availabilityFacade = $availabilityFacade;
         $this->availabilityDataFactory = $availabilityDataFactory;
+        $this->setting = $setting;
     }
 
     /**
@@ -45,7 +53,8 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
 
         $availabilityData->name = ['cs' => 'Skladem', 'en' => 'In stock'];
         $availabilityData->dispatchTime = 0;
-        $this->createAvailability($availabilityData, self::AVAILABILITY_IN_STOCK);
+        $inStockAvailability = $this->createAvailability($availabilityData, self::AVAILABILITY_IN_STOCK);
+        $this->setting->set(Setting::DEFAULT_AVAILABILITY_IN_STOCK, $inStockAvailability->getId());
 
         $availabilityData->name = ['cs' => 'Na dotaz', 'en' => 'On request'];
         $availabilityData->dispatchTime = 7;
@@ -59,6 +68,7 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData $availabilityData
      * @param string|null $referenceName
+     * @return \Shopsys\FrameworkBundle\Model\Product\Availability\Availability
      */
     private function createAvailability(AvailabilityData $availabilityData, $referenceName = null)
     {
@@ -66,5 +76,7 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
         if ($referenceName !== null) {
             $this->addReference($referenceName, $availability);
         }
+
+        return $availability;
     }
 }
