@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Faker\Generator;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\DataFixtures\Base\SettingValueDataFixture as BaseSettingValueDataFixture;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
 use Shopsys\FrameworkBundle\Model\Customer\User;
@@ -85,7 +84,6 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     public function getDependencies()
     {
         return [
-            BaseSettingValueDataFixture::class,
             CountryDataFixture::class,
         ];
     }

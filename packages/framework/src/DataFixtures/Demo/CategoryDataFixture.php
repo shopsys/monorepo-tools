@@ -2,16 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\DataFixtures\Base\SettingValueDataFixture;
 use Shopsys\FrameworkBundle\Model\Category\CategoryData;
 use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 
-class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+class CategoryDataFixture extends AbstractReferenceFixture
 {
     const CATEGORY_ELECTRONICS = 'category_electronics';
     const CATEGORY_TV = 'category_tv';
@@ -195,15 +193,5 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
         }
 
         return $category;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDependencies()
-    {
-        return [
-            SettingValueDataFixture::class,
-        ];
     }
 }
