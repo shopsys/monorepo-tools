@@ -24,6 +24,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### [shopsys/framework]
+#### Changed
+- [#286 - Instantiate entity data objects by factories](https://github.com/shopsys/shopsys/pull/286)
+    - entity data objects have only an empty constructor now
+    - creation of entity data objects moved to factories to allow extensibility
+
+### [shopsys/product-feed-google]
+#### Changed
+- [#286 - Instantiate entity data objects by factories](https://github.com/shopsys/shopsys/pull/286)
+    - entity data objects have only an empty constructor now
+    - creation of entity data objects moved to factories to allow extensibility
+
+### [shopsys/product-feed-heureka]
+#### Changed
+- [#286 - Instantiate entity data objects by factories](https://github.com/shopsys/shopsys/pull/286)
+    - entity data objects have only an empty constructor now
+    - creation of entity data objects moved to factories to allow extensibility
+
+### [shopsys/product-feed-zbozi]
+#### Changed
+- [#286 - Instantiate entity data objects by factories](https://github.com/shopsys/shopsys/pull/286)
+    - entity data objects have only an empty constructor now
+    - creation of entity data objects moved to factories to allow extensibility
 
 ## [7.0.0-alpha3] - 2018-07-03
 ### [shopsys/framework]

@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
-class ArticleDataFactory
+class ArticleDataFactory implements ArticleDataFactoryInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
@@ -37,10 +37,39 @@ class ArticleDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Article\Article $article
      * @return \Shopsys\FrameworkBundle\Model\Article\ArticleData
      */
-    public function createFromArticle(Article $article)
+    public function createFromArticle(Article $article): ArticleData
     {
         $articleData = new ArticleData();
-        $articleData->setFromEntity($article);
+        $this->fillFromArticle($articleData, $article);
+
+        return $articleData;
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Article\ArticleData
+     */
+    public function create(): ArticleData
+    {
+        $articleData = new ArticleData();
+        $this->fillNew($articleData);
+
+        return $articleData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleData $articleData
+     * @param \Shopsys\FrameworkBundle\Model\Article\Article $article
+     */
+    protected function fillFromArticle(ArticleData $articleData, Article $article)
+    {
+        $articleData->name = $article->getName();
+        $articleData->text = $article->getText();
+        $articleData->seoTitle = $article->getSeoTitle();
+        $articleData->seoMetaDescription = $article->getSeoMetaDescription();
+        $articleData->domainId = $article->getDomainId();
+        $articleData->placement = $article->getPlacement();
+        $articleData->hidden = $article->isHidden();
+        $articleData->seoH1 = $article->getSeoH1();
 
         foreach ($this->domain->getAll() as $domainConfig) {
             $articleData->urls->mainFriendlyUrlsByDomainId[$domainConfig->getId()] =
@@ -50,18 +79,13 @@ class ArticleDataFactory
                     $article->getId()
                 );
         }
-
-        return $articleData;
     }
 
     /**
-     * @return \Shopsys\FrameworkBundle\Model\Article\ArticleData
+     * @param \Shopsys\FrameworkBundle\Model\Article\ArticleData $articleData
      */
-    public function createDefault()
+    protected function fillNew(ArticleData $articleData)
     {
-        $articleData = new ArticleData();
         $articleData->domainId = $this->adminDomainTabsFacade->getSelectedDomainId();
-
-        return $articleData;
     }
 }

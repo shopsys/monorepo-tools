@@ -178,9 +178,12 @@ class CartServiceTest extends FunctionalTestCase
         $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
 
         $price = 100;
-        $vat = new Vat(new VatData('vat', 21));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        $vat = new Vat($vatData);
 
-        $productData = $productDataFactory->createDefault();
+        $productData = $productDataFactory->create();
         $productData->name = ['cs' => 'Any name'];
         $productData->price = $price;
         $productData->vat = $vat;

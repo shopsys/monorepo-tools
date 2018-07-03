@@ -5,7 +5,7 @@ namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture as DemoCategoryDataFixture;
-use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory;
+use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture
@@ -16,13 +16,13 @@ class CategoryDataFixture extends AbstractReferenceFixture
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface
      */
     private $categoryDataFacade;
 
     public function __construct(
         CategoryFacade $categoryFacade,
-        CategoryDataFactory $categoryDataFacade
+        CategoryDataFactoryInterface $categoryDataFacade
     ) {
         $this->categoryFacade = $categoryFacade;
         $this->categoryDataFacade = $categoryDataFacade;

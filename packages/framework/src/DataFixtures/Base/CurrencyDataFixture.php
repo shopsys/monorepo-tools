@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class CurrencyDataFixture extends AbstractReferenceFixture
@@ -13,15 +14,22 @@ class CurrencyDataFixture extends AbstractReferenceFixture
     const CURRENCY_CZK = 'currency_czk';
     const CURRENCY_EUR = 'currency_eur';
 
-    /** @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
+     */
     private $currencyFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyDataFactoryInterface
      */
-    public function __construct(CurrencyFacade $currencyFacade)
-    {
+    private $currencyDataFactory;
+
+    public function __construct(
+        CurrencyFacade $currencyFacade,
+        CurrencyDataFactoryInterface $currencyDataFactory
+    ) {
         $this->currencyFacade = $currencyFacade;
+        $this->currencyDataFactory = $currencyDataFactory;
     }
 
     /**
@@ -29,7 +37,7 @@ class CurrencyDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $currencyData = new CurrencyData();
+        $currencyData = $this->currencyDataFactory->create();
 
         $currencyData->name = 'Česká koruna';
         $currencyData->code = Currency::CODE_CZK;

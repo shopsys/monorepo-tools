@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Base\CategoryRootDataFixture;
 use Shopsys\FrameworkBundle\Model\Category\CategoryData;
-use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory;
+use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -31,13 +31,13 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
     private $categoryFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface
      */
     private $categoryDataFactory;
 
     public function __construct(
         CategoryFacade $categoryFacade,
-        CategoryDataFactory $categoryDataFactory
+        CategoryDataFactoryInterface $categoryDataFactory
     ) {
         $this->categoryFacade = $categoryFacade;
         $this->categoryDataFactory = $categoryDataFactory;
@@ -48,7 +48,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
      */
     public function load(ObjectManager $manager)
     {
-        $categoryData = $this->categoryDataFactory->createDefault();
+        $categoryData = $this->categoryDataFactory->create();
 
         $categoryData->name = [
             'cs' => 'Elektro',

@@ -17,7 +17,7 @@ use Shopsys\FrameworkBundle\DataFixtures\Performance\UserDataFixture as Performa
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Order\Item\QuantifiedProduct;
-use Shopsys\FrameworkBundle\Model\Order\OrderData;
+use Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\FrameworkBundle\Model\Product\Product;
@@ -96,6 +96,11 @@ class OrderDataFixture
     private $progressBarFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface
+     */
+    private $orderDataFactory;
+
+    /**
      * @param int $orderTotalCount
      * @param int $orderItemCountPerOrder
      * @param \Doctrine\ORM\EntityManagerInterface $em
@@ -107,6 +112,7 @@ class OrderDataFixture
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerFacade
      * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
+     * @param \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface $orderDataFactory
      */
     public function __construct(
         $orderTotalCount,
@@ -119,7 +125,8 @@ class OrderDataFixture
         OrderPreviewFactory $orderPreviewFactory,
         ProductFacade $productFacade,
         CustomerFacade $customerFacade,
-        ProgressBarFactory $progressBarFactory
+        ProgressBarFactory $progressBarFactory,
+        OrderDataFactoryInterface $orderDataFactory
     ) {
         $this->orderTotalCount = $orderTotalCount;
         $this->orderItemCountPerOrder = $orderItemCountPerOrder;
@@ -133,6 +140,7 @@ class OrderDataFixture
         $this->productFacade = $productFacade;
         $this->customerFacade = $customerFacade;
         $this->progressBarFactory = $progressBarFactory;
+        $this->orderDataFactory = $orderDataFactory;
     }
 
     /**
@@ -188,7 +196,7 @@ class OrderDataFixture
      */
     private function createOrderData(User $user = null)
     {
-        $orderData = new OrderData();
+        $orderData = $this->orderDataFactory->create();
 
         if ($user !== null) {
             $orderData->firstName = $user->getFirstName();

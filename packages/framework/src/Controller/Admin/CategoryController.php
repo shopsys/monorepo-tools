@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\FrameworkBundle\Form\Admin\Category\CategoryFormType;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
-use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory;
+use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +24,7 @@ class CategoryController extends AdminBaseController
     private $breadcrumb;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface
      */
     private $categoryDataFactory;
 
@@ -45,7 +45,7 @@ class CategoryController extends AdminBaseController
 
     public function __construct(
         CategoryFacade $categoryFacade,
-        CategoryDataFactory $categoryDataFactory,
+        CategoryDataFactoryInterface $categoryDataFactory,
         SessionInterface $session,
         Domain $domain,
         Breadcrumb $breadcrumb
@@ -103,7 +103,7 @@ class CategoryController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $categoryData = $this->categoryDataFactory->createDefault();
+        $categoryData = $this->categoryDataFactory->create();
 
         $form = $this->createForm(CategoryFormType::class, $categoryData, [
             'category' => null,

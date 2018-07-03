@@ -17,7 +17,10 @@ class CurrentCustomerTest extends TestCase
 {
     public function testGetPricingGroupForUnregisteredCustomerReturnsDefaultPricingGroup()
     {
-        $expectedPricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
+        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData->name = 'name';
+        $pricingGroupData->coefficient = 1;
+        $expectedPricingGroup = new PricingGroup($pricingGroupData, 1);
 
         $tokenStorageMock = $this->createMock(TokenStorage::class);
         $pricingGroupSettingFacadeMock = $this->getPricingGroupSettingFacadeMockReturningDefaultPricingGroup($expectedPricingGroup);
@@ -30,7 +33,10 @@ class CurrentCustomerTest extends TestCase
 
     public function testGetPricingGroupForRegisteredCustomerReturnsHisPricingGroup()
     {
-        $expectedPricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
+        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData->name = 'name';
+        $pricingGroupData->coefficient = 1;
+        $expectedPricingGroup = new PricingGroup($pricingGroupData, 1);
         $user = $this->getUserWithPricingGroup($expectedPricingGroup);
 
         $tokenStorageMock = $this->getTokenStorageMockForUser($user);

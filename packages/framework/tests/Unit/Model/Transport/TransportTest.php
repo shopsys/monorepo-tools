@@ -17,8 +17,14 @@ class TransportTest extends TestCase
      */
     private function createTransport()
     {
-        $vat = new Vat(new VatData('vat', 21));
-        $transportData = new TransportData(['cs' => 'transportName', 'en' => 'transportName'], $vat, [], [], false);
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        $vat = new Vat($vatData);
+        $transportData = new TransportData();
+        $transportData->name = ['cs' => 'transportName'];
+        $transportData->vat = $vat;
+        $transportData->hidden = false;
         $transport = new Transport($transportData);
 
         return $transport;
@@ -29,8 +35,15 @@ class TransportTest extends TestCase
      */
     private function createPayment()
     {
-        $vat = new Vat(new VatData('vat', 21));
-        $payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], $vat, [], [], true));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        $vat = new Vat($vatData);
+        $paymentData = new PaymentData();
+        $paymentData->name = ['cs' => 'paymentName', 'en' => 'paymentName'];
+        $paymentData->vat = $vat;
+        $paymentData->hidden = true;
+        $payment = new Payment($paymentData);
 
         return $payment;
     }

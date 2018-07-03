@@ -2,23 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\Model\PersonalData;
 
-class PersonalDataAccessRequestDataFactory
+class PersonalDataAccessRequestDataFactory implements PersonalDataAccessRequestDataFactoryInterface
 {
-
     /**
      * @return \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestData
      */
-    public function createDefault()
+    public function createForExport(): PersonalDataAccessRequestData
     {
-        return new PersonalDataAccessRequestData();
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestData
-     */
-    public function createDefaultForExport()
-    {
-        $personalDataAccessRequestData = $this->createDefault();
+        $personalDataAccessRequestData = new PersonalDataAccessRequestData();
         $personalDataAccessRequestData->type = PersonalDataAccessRequest::TYPE_EXPORT;
 
         return $personalDataAccessRequestData;
@@ -27,9 +18,9 @@ class PersonalDataAccessRequestDataFactory
     /**
      * @return \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestData
      */
-    public function createDefaultForDisplay()
+    public function createForDisplay(): PersonalDataAccessRequestData
     {
-        $personalDataAccessRequestData = $this->createDefault();
+        $personalDataAccessRequestData = new PersonalDataAccessRequestData();
         $personalDataAccessRequestData->type = PersonalDataAccessRequest::TYPE_DISPLAY;
 
         return $personalDataAccessRequestData;

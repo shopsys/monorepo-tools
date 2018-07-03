@@ -58,7 +58,10 @@ class BasePriceCalculationTest extends TestCase
         $priceCalculation = new PriceCalculation($rounding);
         $basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
 
-        $vat = new Vat(new VatData('vat', $vatPercent));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
 
         $basePrice = $basePriceCalculation->calculateBasePrice($inputPrice, $inputPriceType, $vat);
 
@@ -125,7 +128,10 @@ class BasePriceCalculationTest extends TestCase
         $basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
 
         $price = new Price(0, $priceWithVat);
-        $vat = new Vat(new VatData('vat', $vatPercent));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
         $resultPrice = $basePriceCalculation->applyCoefficients($price, $vat, $coefficients);
 
         $this->assertSame(round($resultPriceWithVat, 6), round($resultPrice->getPriceWithVat(), 6));

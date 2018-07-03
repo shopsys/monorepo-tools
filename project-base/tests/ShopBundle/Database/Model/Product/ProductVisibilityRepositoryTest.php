@@ -29,13 +29,16 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $category = $this->getReference(CategoryDataFixture::CATEGORY_ELECTRONICS);
 
         $em = $this->getEntityManager();
-        $vat = new Vat(new VatData('vat', 21));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        $vat = new Vat($vatData);
         $em->persist($vat);
 
         $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
         /* @var $productDataFactory \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory */
 
-        $productData = $productDataFactory->createDefault();
+        $productData = $productDataFactory->create();
         $productData->name = ['cs' => 'Name', 'en' => 'Name'];
         $productData->vat = $vat;
         $productData->price = 100;

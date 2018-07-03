@@ -3,10 +3,10 @@
 namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade;
-use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueData;
-use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface;
 
 class ProductParametersFixtureLoader
 {
@@ -21,12 +21,31 @@ class ProductParametersFixtureLoader
     private $parameters;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface
      */
-    public function __construct(ParameterFacade $parameterFacade)
-    {
+    private $productParameterValueDataFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface
+     */
+    private $parameterValueDataFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterDataFactoryInterface
+     */
+    private $parameterDataFactory;
+
+    public function __construct(
+        ParameterFacade $parameterFacade,
+        ProductParameterValueDataFactoryInterface $productParameterValueDataFactory,
+        ParameterValueDataFactoryInterface $parameterValueDataFactory,
+        ParameterDataFactoryInterface $parameterDataFactory
+    ) {
         $this->parameterFacade = $parameterFacade;
         $this->parameters = [];
+        $this->productParameterValueDataFactory = $productParameterValueDataFactory;
+        $this->parameterValueDataFactory = $parameterValueDataFactory;
+        $this->parameterDataFactory = $parameterDataFactory;
     }
 
     /**
@@ -75,8 +94,11 @@ class ProductParametersFixtureLoader
         $parameter = $this->findParameterByNamesOrCreateNew($parameterNames);
 
         foreach ($parameterValues as $locale => $parameterValue) {
-            $productParameterValueData = new ProductParameterValueData();
-            $productParameterValueData->parameterValueData = new ParameterValueData($parameterValue, $locale);
+            $productParameterValueData = $this->productParameterValueDataFactory->create();
+            $parameterValueData = $this->parameterValueDataFactory->create();
+            $parameterValueData->text = $parameterValue;
+            $parameterValueData->locale = $locale;
+            $productParameterValueData->parameterValueData = $parameterValueData;
             $productParameterValueData->parameter = $parameter;
 
             $productParameterValuesDataCollection->add($productParameterValueData);
@@ -115,7 +137,9 @@ class ProductParametersFixtureLoader
 
         if ($parameter === null) {
             $visible = true;
-            $parameterData = new ParameterData($parameterNamesByLocale, $visible);
+            $parameterData = $this->parameterDataFactory->create();
+            $parameterData->name = $parameterNamesByLocale;
+            $parameterData->visible = $visible;
             $parameter = $this->parameterFacade->create($parameterData);
         }
 

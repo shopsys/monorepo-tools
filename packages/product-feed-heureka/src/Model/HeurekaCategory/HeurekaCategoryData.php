@@ -5,7 +5,7 @@ namespace Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory;
 class HeurekaCategoryData
 {
     /**
-     * @var int
+     * @var int|null
      */
     public $id;
 

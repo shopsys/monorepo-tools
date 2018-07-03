@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
-use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\LegalConditions\LegalConditionsFacade;
 use Shopsys\FrameworkBundle\Model\Security\LoginService;
 use Shopsys\ShopBundle\Form\Front\Registration\RegistrationFormType;
@@ -19,7 +19,7 @@ class RegistrationController extends FrontBaseController
     private $customerFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface
      */
     private $userDataFactory;
 
@@ -40,7 +40,7 @@ class RegistrationController extends FrontBaseController
 
     public function __construct(
         Domain $domain,
-        UserDataFactory $userDataFactory,
+        UserDataFactoryInterface $userDataFactory,
         CustomerFacade $customerFacade,
         LoginService $loginService,
         LegalConditionsFacade $legalConditionsFacade
@@ -62,7 +62,7 @@ class RegistrationController extends FrontBaseController
 
     public function registerAction(Request $request)
     {
-        $userData = $this->userDataFactory->createDefault($this->domain->getId());
+        $userData = $this->userDataFactory->createForDomainId($this->domain->getId());
 
         $form = $this->createForm(RegistrationFormType::class, $userData);
         $form->handleRequest($request);

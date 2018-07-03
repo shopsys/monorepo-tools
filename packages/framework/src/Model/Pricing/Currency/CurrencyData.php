@@ -5,12 +5,12 @@ namespace Shopsys\FrameworkBundle\Model\Pricing\Currency;
 class CurrencyData
 {
     /**
-     * @var string
+     * @var string|null
      */
     public $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $code;
 
@@ -19,25 +19,8 @@ class CurrencyData
      */
     public $exchangeRate;
 
-    /**
-     * @param string|null $name
-     * @param string|null $code
-     * @param string $exchangeRate
-     */
-    public function __construct($name = null, $code = null, $exchangeRate = Currency::DEFAULT_EXCHANGE_RATE)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->code = $code;
-        $this->exchangeRate = $exchangeRate;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency
-     */
-    public function setFromEntity(Currency $currency)
-    {
-        $this->name = $currency->getName();
-        $this->code = $currency->getCode();
-        $this->exchangeRate = $currency->getExchangeRate();
+        $this->exchangeRate = Currency::DEFAULT_EXCHANGE_RATE;
     }
 }

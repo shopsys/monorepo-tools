@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData;
+use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFactoryInterface;
 
 class OrderStatusDataFixture extends AbstractReferenceFixture
@@ -21,11 +22,16 @@ class OrderStatusDataFixture extends AbstractReferenceFixture
     protected $orderStatusFactory;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFactoryInterface $orderStatusFactory
+     * @var \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusDataFactoryInterface
      */
-    public function __construct(OrderStatusFactoryInterface $orderStatusFactory)
-    {
+    private $orderStatusDataFactory;
+
+    public function __construct(
+        OrderStatusFactoryInterface $orderStatusFactory,
+        OrderStatusDataFactoryInterface $orderStatusDataFactory
+    ) {
         $this->orderStatusFactory = $orderStatusFactory;
+        $this->orderStatusDataFactory = $orderStatusDataFactory;
     }
 
     /**
@@ -33,7 +39,7 @@ class OrderStatusDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $orderStatusData = new OrderStatusData();
+        $orderStatusData = $this->orderStatusDataFactory->create();
         $orderStatusData->name = ['cs' => 'Nová', 'en' => 'New'];
         $this->createOrderStatus($manager, $orderStatusData, OrderStatus::TYPE_NEW, self::ORDER_STATUS_NEW);
 

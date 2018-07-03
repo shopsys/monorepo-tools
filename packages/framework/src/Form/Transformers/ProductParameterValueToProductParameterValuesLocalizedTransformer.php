@@ -2,13 +2,31 @@
 
 namespace Shopsys\FrameworkBundle\Form\Transformers;
 
-use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueData;
-use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueData;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class ProductParameterValueToProductParameterValuesLocalizedTransformer implements DataTransformerInterface
 {
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface
+     */
+    private $productParameterValueDataFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface
+     */
+    private $parameterValueDataFactory;
+
+    public function __construct(
+        ProductParameterValueDataFactoryInterface $productParameterValueDataFactory,
+        ParameterValueDataFactoryInterface $parameterValueDataFactory
+    ) {
+        $this->productParameterValueDataFactory = $productParameterValueDataFactory;
+        $this->parameterValueDataFactory = $parameterValueDataFactory;
+    }
+
     /**
      * @param mixed $normData
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData[]
@@ -59,9 +77,12 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 
                 foreach ($productParameterValuesLocalizedData->valueTextsByLocale as $locale => $valueText) {
                     if ($valueText !== null) {
-                        $productParameterValueData = new ProductParameterValueData();
+                        $productParameterValueData = $this->productParameterValueDataFactory->create();
                         $productParameterValueData->parameter = $productParameterValuesLocalizedData->parameter;
-                        $productParameterValueData->parameterValueData = new ParameterValueData($valueText, $locale);
+                        $parameterValueData = $this->parameterValueDataFactory->create();
+                        $parameterValueData->text = $valueText;
+                        $parameterValueData->locale = $locale;
+                        $productParameterValueData->parameterValueData = $parameterValueData;
 
                         $normData[] = $productParameterValueData;
                     }

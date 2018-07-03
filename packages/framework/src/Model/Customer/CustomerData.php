@@ -25,36 +25,13 @@ class CustomerData
     public $sendRegistrationMail;
 
     public function __construct(
-        UserData $userData = null,
-        BillingAddressData $billingAddressData = null,
-        DeliveryAddressData $deliveryAddressData = null,
-        $sendRegistrationMail = false
+        BillingAddressData $billingAddressData,
+        DeliveryAddressData $deliveryAddressData,
+        UserData $userData
     ) {
-        if ($userData !== null) {
-            $this->userData = $userData;
-        } else {
-            $this->userData = new UserData();
-        }
-        if ($billingAddressData !== null) {
-            $this->billingAddressData = $billingAddressData;
-        } else {
-            $this->billingAddressData = new BillingAddressData();
-        }
-        if ($deliveryAddressData !== null) {
-            $this->deliveryAddressData = $deliveryAddressData;
-        } else {
-            $this->deliveryAddressData = new DeliveryAddressData();
-        }
-        $this->sendRegistrationMail = $sendRegistrationMail;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Customer\User $user
-     */
-    public function setFromEntity(User $user)
-    {
-        $this->userData->setFromEntity($user);
-        $this->billingAddressData->setFromEntity($user->getBillingAddress());
-        $this->deliveryAddressData->setFromEntity($user->getDeliveryAddress());
+        $this->userData = $userData;
+        $this->billingAddressData = $billingAddressData;
+        $this->deliveryAddressData = $deliveryAddressData;
+        $this->sendRegistrationMail = false;
     }
 }

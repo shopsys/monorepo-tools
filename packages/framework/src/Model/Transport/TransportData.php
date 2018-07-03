@@ -3,7 +3,6 @@
 namespace Shopsys\FrameworkBundle\Model\Transport;
 
 use Shopsys\FrameworkBundle\Component\FileUpload\ImageUploadData;
-use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 
 class TransportData
 {
@@ -13,7 +12,7 @@ class TransportData
     public $name;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null
      */
     public $vat;
 
@@ -52,32 +51,15 @@ class TransportData
      */
     public $enabled;
 
-    /**
-     * @param string[] $names
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat|null $vat
-     * @param string[] $descriptions
-     * @param string[] $instructions
-     * @param bool $hidden
-     * @param bool[] $enabled
-     * @param string[] $pricesByCurrencyId
-     */
-    public function __construct(
-        array $names = [],
-        Vat $vat = null,
-        array $descriptions = [],
-        array $instructions = [],
-        $hidden = false,
-        array $enabled = [],
-        array $pricesByCurrencyId = []
-    ) {
-        $this->name = $names;
-        $this->vat = $vat;
-        $this->description = $descriptions;
-        $this->instructions = $instructions;
-        $this->hidden = $hidden;
-        $this->enabled = $enabled;
+    public function __construct()
+    {
+        $this->name = [];
+        $this->description = [];
+        $this->instructions = [];
+        $this->hidden = false;
+        $this->enabled = [];
         $this->image = new ImageUploadData();
-        $this->pricesByCurrencyId = $pricesByCurrencyId;
+        $this->pricesByCurrencyId = [];
         $this->payments = [];
     }
 }

@@ -176,27 +176,39 @@ Shopsys\FrameworkBundle\Model\Product\ProductFactoryInterface: '@Shopsys\ShopBun
 
 9. Create new `ProductDataFactory` in the same namespace as your entity
 by extending [`Shopsys\FrameworkBundle\Model\Product\ProductDataFactory`](../../packages/framework/src/Model/Product/ProductDataFactory.php)
-and overwrite the `createDefault()` method. 
+and overwrite `create()` and `createFromProduct()` methods. Or you can create an independent class by implementing
+[`Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface`](../../packages/framework/src/Model/Product/ProductDataFactoryInterface.php).
 
-*Note: There is no interface for `ProductDataFactory` like it was in the previous step for `ProductFactory`. 
-This issue will be addressed in near future.*
 ```php
 <?php
 
 namespace Shopsys\ShopBundle\Model\Product;
 
+use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
+use Shopsys\FrameworkBundle\Model\Product\ProductData as BaseProductData;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory as BaseProductDataFactory;
 
 class ProductDataFactory extends BaseProductDataFactory
 {
     /**
+     * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\ProductData
      */
-    public function createDefault()
+    public function createFromProduct(BaseProduct $product): BaseProductData
     {
         $productData = new ProductData();
+        $this->fillFromProduct($productData, $product);
 
-        // ... (copy paste from BaseProductDataFactory)
+        return $productData;
+    }
+
+    /**
+     * @return \Shopsys\ShopBundle\Model\Product\ProductData
+     */
+    public function create(): BaseProductData
+    {
+        $productData = new ProductData();
+        $this->fillNew($productData);
 
         return $productData;
     }
@@ -204,9 +216,9 @@ class ProductDataFactory extends BaseProductDataFactory
 ```
 
 Register your `ProductDataFactory` in [`services.yml`](../../project-base/src/Shopsys/ShopBundle/Resources/config/services.yml) 
-as an alias for the original service.
+as an alias for the original interface.
 ```
-Shopsys\FrameworkBundle\Model\Product\ProductDataFactory: '@Shopsys\ShopBundle\Model\Product\ProductDataFactory'
+Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface: '@Shopsys\ShopBundle\Model\Product\ProductDataFactory'
 ```
 
 ## Enable administrator to edit the `extId` field
@@ -258,6 +270,8 @@ Shopsys\ShopBundle\Form\Admin\ProductFormTypeExtension:
 
 3. In your `Product` class, overwrite the `edit()` method.
 ```php
+<?php
+
 namespace Shopsys\ShopBundle\Model\Product;
 
 use Shopsys\FrameworkBundle\Model\Product\ProductCategoryDomainFactoryInterface;
@@ -276,27 +290,34 @@ public function edit(ProductCategoryDomainFactoryInterface $productCategoryDomai
 }
 ```
 
-4. In your `ProductDataFactory` class, overwrite the `createFromProduct()` method.
-You need to copy paste the parent's method content and on top of it, set your new `extId` field.
+4. In your `ProductDataFactory` class, update the `createFromProduct()` method so it sets your new `extId` field.
+
 ```php
+<?php
+
 namespace Shopsys\ShopBundle\Model\Product;
 
-use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
+use Shopsys\FrameworkBundle\Model\Product\Product;
+use Shopsys\FrameworkBundle\Model\Product\ProductData as BaseProductData;
 
 // ...
 
-/**
- * @param \Shopsys\ShopBundle\Model\Product\Product $product
- * @return \Shopsys\ShopBundle\Model\Product\ProductData
- */
-public function createFromProduct(BaseProduct $product)
+class ProductDataFactory extends BaseProductDataFactory
 {
-    $productData = $this->createDefault();
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @return \Shopsys\ShopBundle\Model\Product\ProductData
+     */
+    public function createFromProduct(BaseProduct $product): BaseProductData
+    {
+        $productData = new ProductData();
+        $this->fillFromProduct($productData, $product);
+        $productData->extId = $product->getExtId();
 
-    // ... (copy paste from BaseProductDataFactory)
-    $productData->extId = $product->getExtId();
+        return $productData;
+    }
 
-    return $productData;
+    // ...
 }
 ```
 
@@ -343,4 +364,4 @@ $form['product_edit_form[productData][extId]'] = 123456;
 ```
 
 ## Data fixtures
-Currently, it is not possible to modify data fixtures from your project, this issue will be addressed in near future. 
+Currently, it is not possible to modify data fixtures from your project, this issue will be addressed in near future.

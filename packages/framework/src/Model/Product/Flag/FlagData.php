@@ -10,7 +10,7 @@ class FlagData
     public $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $rgbColor;
 
@@ -19,30 +19,9 @@ class FlagData
      */
     public $visible;
 
-    /**
-     * @param array $name
-     * @param string $rgbColor
-     * @param bool $visible
-     */
-    public function __construct(array $name = [], $rgbColor = null, $visible = false)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->rgbColor = $rgbColor;
-        $this->visible = $visible;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Flag\Flag $flag
-     */
-    public function setFromEntity(Flag $flag)
-    {
-        $translations = $flag->getTranslations();
-        $names = [];
-        foreach ($translations as $translate) {
-            $names[$translate->getLocale()] = $translate->getName();
-        }
-        $this->name = $names;
-        $this->rgbColor = $flag->getRgbColor();
-        $this->visible = $flag->isVisible();
+        $this->name = [];
+        $this->visible = false;
     }
 }

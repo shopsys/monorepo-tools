@@ -24,7 +24,7 @@ class CategoryRepositoryTest extends DatabaseTestCase
         $categoryDataFactory = $this->getContainer()->get(CategoryDataFactory::class);
         /* @var $categoryDataFactory \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory */
 
-        $categoryData = $categoryDataFactory->createDefault();
+        $categoryData = $categoryDataFactory->create();
         $categoryData->name = ['en' => 'name'];
         $categoryData->parent = $categoryFacade->getRootCategory();
 
@@ -54,7 +54,7 @@ class CategoryRepositoryTest extends DatabaseTestCase
         $categoryDataFactory = $this->getContainer()->get(CategoryDataFactory::class);
         /* @var $categoryDataFactory \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory */
 
-        $categoryData = $categoryDataFactory->createDefault();
+        $categoryData = $categoryDataFactory->create();
         $categoryData->name = ['en' => 'name'];
         $categoryData->parent = $categoryFacade->getRootCategory();
 

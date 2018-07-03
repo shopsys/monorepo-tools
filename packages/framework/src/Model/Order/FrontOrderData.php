@@ -5,12 +5,12 @@ namespace Shopsys\FrameworkBundle\Model\Order;
 class FrontOrderData extends OrderData
 {
     /**
-     * @var bool
+     * @var bool|null
      */
     public $companyCustomer;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $newsletterSubscription;
 

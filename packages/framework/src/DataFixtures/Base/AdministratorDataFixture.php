@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Base;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorData;
+use Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade;
 
 class AdministratorDataFixture extends AbstractReferenceFixture
@@ -12,15 +13,20 @@ class AdministratorDataFixture extends AbstractReferenceFixture
     const SUPERADMINISTRATOR = 'administrator_superadministrator';
     const ADMINISTRATOR = 'administrator_administrator';
 
-    /** @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade
+     */
     private $administratorFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade $administratorFacade
+     * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface
      */
-    public function __construct(AdministratorFacade $administratorFacade)
+    private $administratorDataFactory;
+
+    public function __construct(AdministratorFacade $administratorFacade, AdministratorDataFactoryInterface $administratorDataFactory)
     {
         $this->administratorFacade = $administratorFacade;
+        $this->administratorDataFactory = $administratorDataFactory;
     }
 
     /**
@@ -28,14 +34,15 @@ class AdministratorDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $superadminData = new AdministratorData(true);
+        $superadminData = $this->administratorDataFactory->create();
+        $superadminData->superadmin = true;
         $superadminData->username = 'superadmin';
         $superadminData->realName = 'superadmin';
         $superadminData->email = 'no-reply@shopsys.com';
         $superadminData->password = 'admin123';
         $this->createAdministrator($superadminData, self::SUPERADMINISTRATOR);
 
-        $administratorData = new AdministratorData();
+        $administratorData = $this->administratorDataFactory->create();
         $administratorData->username = 'admin';
         $administratorData->realName = 'admin';
         $administratorData->password = 'admin123';

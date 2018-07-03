@@ -16,7 +16,10 @@ class CurrentPromoCodeFacadeTest extends TestCase
 {
     public function testGetEnteredPromoCode()
     {
-        $validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));
+        $validPromoCodeData = new PromoCodeData();
+        $validPromoCodeData->code = 'validCode';
+        $validPromoCodeData->percent = 10.0;
+        $validPromoCode = new PromoCode($validPromoCodeData);
         $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
         $sessionMock->expects($this->atLeastOnce())->method('get')->willReturn($validPromoCode->getCode());
         $emMock = $this->createMock(EntityManager::class);
@@ -34,7 +37,10 @@ class CurrentPromoCodeFacadeTest extends TestCase
 
     public function testGetEnteredPromoCodeInvalid()
     {
-        $validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));
+        $validPromoCodeData = new PromoCodeData();
+        $validPromoCodeData->code = 'validCode';
+        $validPromoCodeData->percent = 10.0;
+        $validPromoCode = new PromoCode($validPromoCodeData);
         $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
         $sessionMock->expects($this->atLeastOnce())->method('get')->willReturn($validPromoCode->getCode());
         $emMock = $this->createMock(EntityManager::class);
@@ -53,7 +59,10 @@ class CurrentPromoCodeFacadeTest extends TestCase
     public function testSetEnteredPromoCode()
     {
         $enteredCode = 'validCode';
-        $validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));
+        $validPromoCodeData = new PromoCodeData();
+        $validPromoCodeData->code = 'validCode';
+        $validPromoCodeData->percent = 10.0;
+        $validPromoCode = new PromoCode($validPromoCodeData);
         $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
         $sessionMock->expects($this->atLeastOnce())->method('set')->with(
             $this->anything(),

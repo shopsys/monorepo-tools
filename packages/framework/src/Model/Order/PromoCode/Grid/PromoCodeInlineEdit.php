@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Order\PromoCode\Grid;
 
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\PromoCode\PromoCodeFormType;
-use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeData;
+use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeFacade;
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -20,14 +20,21 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
      */
     private $formFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeDataFactoryInterface
+     */
+    private $promoCodeDataFactory;
+
     public function __construct(
         PromoCodeGridFactory $promoCodeGridFactory,
         PromoCodeFacade $promoCodeFacade,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        PromoCodeDataFactoryInterface $promoCodeDataFactory
     ) {
         parent::__construct($promoCodeGridFactory);
         $this->promoCodeFacade = $promoCodeFacade;
         $this->formFactory = $formFactory;
+        $this->promoCodeDataFactory = $promoCodeDataFactory;
     }
 
     /**
@@ -57,11 +64,12 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
     public function getForm($promoCodeId)
     {
         $promoCode = null;
-        $promoCodeData = new PromoCodeData();
 
         if ($promoCodeId !== null) {
             $promoCode = $this->promoCodeFacade->getById((int)$promoCodeId);
-            $promoCodeData->setFromEntity($promoCode);
+            $promoCodeData = $this->promoCodeDataFactory->createFromPromoCode($promoCode);
+        } else {
+            $promoCodeData = $this->promoCodeDataFactory->create();
         }
 
         return $this->formFactory->create(PromoCodeFormType::class, $promoCodeData, ['promo_code' => $promoCode]);

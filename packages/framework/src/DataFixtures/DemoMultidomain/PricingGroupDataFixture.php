@@ -5,27 +5,35 @@ namespace Shopsys\FrameworkBundle\DataFixtures\DemoMultidomain;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 
 class PricingGroupDataFixture extends AbstractReferenceFixture
 {
-    /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade */
-    private $pricingGroupFacade;
-
     const PRICING_GROUP_ORDINARY_DOMAIN_2 = 'pricing_group_ordinary_domain_2';
     const PRICING_GROUP_VIP_DOMAIN_2 = 'pricing_group_vip_domain_2';
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */
-    public function __construct(PricingGroupFacade $pricingGroupFacade)
-    {
+    private $pricingGroupFacade;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface
+     */
+    private $pricingGroupDataFactory;
+
+    public function __construct(
+        PricingGroupFacade $pricingGroupFacade,
+        PricingGroupDataFactoryInterface $pricingGroupDataFactory
+    ) {
         $this->pricingGroupFacade = $pricingGroupFacade;
+        $this->pricingGroupDataFactory = $pricingGroupDataFactory;
     }
 
     public function load(ObjectManager $manager)
     {
-        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData = $this->pricingGroupDataFactory->create();
 
         $pricingGroupData->name = 'Obyčejný zákazník';
         $domainId = 2;

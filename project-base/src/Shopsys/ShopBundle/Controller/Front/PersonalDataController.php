@@ -10,7 +10,7 @@ use Shopsys\FrameworkBundle\Model\Newsletter\NewsletterFacade;
 use Shopsys\FrameworkBundle\Model\Order\OrderFacade;
 use Shopsys\FrameworkBundle\Model\PersonalData\Mail\PersonalDataAccessMailFacade;
 use Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequest;
-use Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactory;
+use Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestFacade;
 use Shopsys\ShopBundle\Form\Front\PersonalData\PersonalDataFormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,7 +54,7 @@ class PersonalDataController extends FrontBaseController
     private $personalDataAccessMailFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactoryInterface
      */
     private $personalDataAccessRequestDataFactory;
 
@@ -71,7 +71,7 @@ class PersonalDataController extends FrontBaseController
         NewsletterFacade $newsletterFacade,
         PersonalDataAccessMailFacade $personalDataAccessMailFacade,
         PersonalDataAccessRequestFacade $personalDataAccessRequestFacade,
-        PersonalDataAccessRequestDataFactory $personalDataAccessRequestDataFactory,
+        PersonalDataAccessRequestDataFactoryInterface $personalDataAccessRequestDataFactory,
         XmlResponse $xmlResponse
     ) {
         $this->setting = $setting;
@@ -89,7 +89,7 @@ class PersonalDataController extends FrontBaseController
     {
         $form = $this->createForm(
             PersonalDataFormType::class,
-            $this->personalDataAccessRequestDataFactory->createDefaultForDisplay()
+            $this->personalDataAccessRequestDataFactory->createForDisplay()
         );
 
         $form->handleRequest($request);
@@ -116,7 +116,7 @@ class PersonalDataController extends FrontBaseController
     {
         $form = $this->createForm(
             PersonalDataFormType::class,
-            $this->personalDataAccessRequestDataFactory->createDefaultForExport()
+            $this->personalDataAccessRequestDataFactory->createForExport()
         );
 
         $form->handleRequest($request);

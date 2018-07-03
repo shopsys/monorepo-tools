@@ -8,13 +8,17 @@ use Shopsys\FrameworkBundle\Model\Country\Country;
 use Shopsys\FrameworkBundle\Model\Country\CountryData;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddress;
 use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactory;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerService;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddress;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
+use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressFactory;
 use Shopsys\FrameworkBundle\Model\Customer\User;
 use Shopsys\FrameworkBundle\Model\Customer\UserData;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\UserFactory;
 use Shopsys\FrameworkBundle\Model\Order\Order;
 use Shopsys\FrameworkBundle\Model\Order\OrderData;
@@ -22,6 +26,7 @@ use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus;
 use Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData;
 use Shopsys\FrameworkBundle\Model\Payment\Payment;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\FrameworkBundle\Model\Transport\Transport;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
 
@@ -172,38 +177,48 @@ class CustomerServiceTest extends TestCase
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';
         $userData->createdAt = new DateTime();
-        $billingCountry = new Country(new CountryData('Česká republika'), self::DOMAIN_ID);
-        $billingAddressData = new BillingAddressData(
-            'street',
-            'city',
-            'postcode',
-            true,
-            'companyName',
-            'companyNumber',
-            'companyTaxNumber',
-            'telephone',
-            $billingCountry
-        );
-        $deliveryCountry = new Country(new CountryData('Slovenská republika'), self::DOMAIN_ID);
-        $deliveryAddressData = new DeliveryAddressData(
-            true,
-            'deliveryStreet',
-            'deliveryCity',
-            'deliveryPostcode',
-            'deliveryCompanyName',
-            'deliveryFirstName',
-            'deliveryLastName',
-            'deliveryTelephone',
-            $deliveryCountry
-        );
+
+        $billingCountryData = new CountryData();
+        $billingCountryData->name = 'Česká republika';
+        $billingCountry = new Country($billingCountryData, self::DOMAIN_ID);
+        $billingAddressData = new BillingAddressData();
+        $billingAddressData->street = 'street';
+        $billingAddressData->city = 'city';
+        $billingAddressData->postcode = 'postcode';
+        $billingAddressData->companyCustomer = true;
+        $billingAddressData->companyName = 'companyName';
+        $billingAddressData->companyNumber = 'companyNumber';
+        $billingAddressData->companyTaxNumber = 'companyTaxNumber';
+        $billingAddressData->telephone = 'telephone';
+        $billingAddressData->country = $billingCountry;
+
+        $deliveryCountryData = new CountryData();
+        $deliveryCountryData->name = 'Slovenská republika';
+        $deliveryCountry = new Country($deliveryCountryData, self::DOMAIN_ID);
+        $deliveryAddressData = new DeliveryAddressData();
+        $deliveryAddressData->addressFilled = true;
+        $deliveryAddressData->street = 'deliveryStreet';
+        $deliveryAddressData->city = 'deliveryCity';
+        $deliveryAddressData->postcode = 'deliveryPostcode';
+        $deliveryAddressData->companyName = 'deliveryCompanyName';
+        $deliveryAddressData->firstName = 'deliveryFirstName';
+        $deliveryAddressData->lastName = 'deliveryLastName';
+        $deliveryAddressData->telephone = 'deliveryTelephone';
+        $deliveryAddressData->country = $deliveryCountry;
 
         $billingAddress = $this->createBillingAddress($billingAddressData);
         $deliveryAddress = $this->createDeliveryAddress($deliveryAddressData);
         $user = new User($userData, $billingAddress, $deliveryAddress);
 
-        $transport = new Transport(new TransportData(['cs' => 'transportName']));
-        $payment = new Payment(new PaymentData(['cs' => 'paymentName']));
-        $orderStatus = new OrderStatus(new OrderStatusData(['en' => 'orderStatusName']), OrderStatus::TYPE_NEW);
+        $transportData = new TransportData();
+        $transportData->name = ['cs' => 'transportName'];
+        $transport = new Transport($transportData);
+        $paymentData = new PaymentData();
+        $paymentData->name = ['cs' => 'paymentName'];
+        $payment = new Payment($paymentData);
+        $orderStatusData = new OrderStatusData();
+        $orderStatusData->name = ['en' => 'orderStatusName'];
+        $orderStatus = new OrderStatus($orderStatusData, OrderStatus::TYPE_NEW);
         $orderData = new OrderData();
         $orderData->transport = $transport;
         $orderData->payment = $payment;
@@ -248,8 +263,14 @@ class CustomerServiceTest extends TestCase
     {
         $customerService = $this->getCustomerService();
 
-        $billingCountry = new Country(new CountryData('Česká republika'), self::DOMAIN_ID);
-        $deliveryCountry = new Country(new CountryData('Slovenská republika'), self::DOMAIN_ID);
+        $billingCountryData = new CountryData();
+        $billingCountryData->name = 'Česká republika';
+
+        $deliveryCountryData = new CountryData();
+        $deliveryCountryData->name = 'Slovenská republika';
+
+        $billingCountry = new Country($billingCountryData, self::DOMAIN_ID);
+        $deliveryCountry = new Country($deliveryCountryData, self::DOMAIN_ID);
         $userData = new UserData();
         $userData->firstName = 'firstName';
         $userData->lastName = 'lastName';
@@ -258,9 +279,15 @@ class CustomerServiceTest extends TestCase
         $billingAddress = $this->createBillingAddress();
         $user = new User($userData, $billingAddress, null);
 
-        $transport = new Transport(new TransportData(['cs' => 'transportName']));
-        $payment = new Payment(new PaymentData(['cs' => 'paymentName']));
-        $orderStatus = new OrderStatus(new OrderStatusData(['en' => 'orderStatusName']), OrderStatus::TYPE_NEW);
+        $transportData = new TransportData();
+        $transportData->name = ['cs' => 'transportName'];
+        $transport = new Transport($transportData);
+        $paymentData = new PaymentData();
+        $paymentData->name = ['cs' => 'paymentName'];
+        $payment = new Payment($paymentData);
+        $orderStatusData = new OrderStatusData();
+        $orderStatusData->name = ['en' => 'orderStatusName'];
+        $orderStatus = new OrderStatus($orderStatusData, OrderStatus::TYPE_NEW);
         $orderData = new OrderData();
         $orderData->transport = $transport;
         $orderData->payment = $payment;
@@ -294,17 +321,16 @@ class CustomerServiceTest extends TestCase
             'companyTaxNumber'
         );
 
-        $deliveryAddressData = new DeliveryAddressData(
-            true,
-            $order->getDeliveryStreet(),
-            $order->getDeliveryCity(),
-            $order->getDeliveryPostcode(),
-            $order->getDeliveryCompanyName(),
-            $order->getDeliveryFirstName(),
-            $order->getDeliveryLastName(),
-            $order->getDeliveryTelephone(),
-            $deliveryCountry
-        );
+        $deliveryAddressData = new DeliveryAddressData();
+        $deliveryAddressData->addressFilled = true;
+        $deliveryAddressData->street = $order->getDeliveryStreet();
+        $deliveryAddressData->city = $order->getDeliveryCity();
+        $deliveryAddressData->postcode = $order->getDeliveryPostcode();
+        $deliveryAddressData->companyName = $order->getDeliveryCompanyName();
+        $deliveryAddressData->firstName = $order->getDeliveryFirstName();
+        $deliveryAddressData->lastName = $order->getDeliveryLastName();
+        $deliveryAddressData->telephone = $order->getDeliveryTelephone();
+        $deliveryAddressData->country = $deliveryCountry;
 
         $customerData = $customerService->getAmendedCustomerDataByOrder($user, $order);
 
@@ -329,8 +355,19 @@ class CustomerServiceTest extends TestCase
         $customerPasswordServiceMock = $this->createMock(CustomerPasswordService::class);
         $deliveryAddressFactory = new DeliveryAddressFactory();
         $userFactory = new UserFactory();
+        $billingAddressDataFactory = new BillingAddressDataFactory();
+        $deliveryAddressDataFactory = new DeliveryAddressDataFactory();
+        $userDataFactory = new UserDataFactory($this->createMock(PricingGroupSettingFacade::class));
+        $customerDataFactory = new CustomerDataFactory($billingAddressDataFactory, $deliveryAddressDataFactory, $userDataFactory);
 
-        return new CustomerService($customerPasswordServiceMock, $deliveryAddressFactory, $userFactory);
+        return new CustomerService(
+            $customerPasswordServiceMock,
+            $deliveryAddressFactory,
+            $userFactory,
+            $customerDataFactory,
+            $billingAddressDataFactory,
+            $deliveryAddressDataFactory
+        );
     }
 
     /**

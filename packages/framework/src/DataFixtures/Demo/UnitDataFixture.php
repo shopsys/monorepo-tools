@@ -5,21 +5,29 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitData;
+use Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 
 class UnitDataFixture extends AbstractReferenceFixture
 {
     const UNIT_CUBIC_METERS = 'unit_m3';
 
-    /** @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade
+     */
     private $unitFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade $unitFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactoryInterface
      */
-    public function __construct(UnitFacade $unitFacade)
-    {
+    private $unitDataFactory;
+
+    public function __construct(
+        UnitFacade $unitFacade,
+        UnitDataFactoryInterface $unitDataFactory
+    ) {
         $this->unitFacade = $unitFacade;
+        $this->unitDataFactory = $unitDataFactory;
     }
 
     /**
@@ -27,7 +35,7 @@ class UnitDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $unitData = new UnitData();
+        $unitData = $this->unitDataFactory->create();
 
         $unitData->name = ['cs' => 'm³', 'en' => 'm³'];
         $this->createUnit($unitData, self::UNIT_CUBIC_METERS);

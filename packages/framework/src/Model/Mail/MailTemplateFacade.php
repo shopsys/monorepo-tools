@@ -46,14 +46,10 @@ class MailTemplateFacade
     protected $mailTemplateFactory;
 
     /**
-     * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateRepository $mailTemplateRepository
-     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
-     * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusMailTemplateService $orderStatusMailTemplateService
-     * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
-     * @param \Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade $uploadedFileFacade
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFactoryInterface $mailTemplateFactory
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface
      */
+    private $mailTemplateDataFactory;
+
     public function __construct(
         EntityManagerInterface $em,
         MailTemplateRepository $mailTemplateRepository,
@@ -61,7 +57,8 @@ class MailTemplateFacade
         OrderStatusMailTemplateService $orderStatusMailTemplateService,
         Domain $domain,
         UploadedFileFacade $uploadedFileFacade,
-        MailTemplateFactoryInterface $mailTemplateFactory
+        MailTemplateFactoryInterface $mailTemplateFactory,
+        MailTemplateDataFactoryInterface $mailTemplateDataFactory
     ) {
         $this->em = $em;
         $this->mailTemplateRepository = $mailTemplateRepository;
@@ -70,6 +67,7 @@ class MailTemplateFacade
         $this->domain = $domain;
         $this->uploadedFileFacade = $uploadedFileFacade;
         $this->mailTemplateFactory = $mailTemplateFactory;
+        $this->mailTemplateDataFactory = $mailTemplateDataFactory;
     }
 
     /**
@@ -127,20 +125,22 @@ class MailTemplateFacade
         $allMailTemplatesData = new AllMailTemplatesData();
         $allMailTemplatesData->domainId = $domainId;
 
-        $registrationMailTemplatesData = new MailTemplateData();
         $registrationMailTemplate = $this->mailTemplateRepository
             ->findByNameAndDomainId(MailTemplate::REGISTRATION_CONFIRM_NAME, $domainId);
         if ($registrationMailTemplate !== null) {
-            $registrationMailTemplatesData->setFromEntity($registrationMailTemplate);
+            $registrationMailTemplatesData = $this->mailTemplateDataFactory->createFromMailTemplate($registrationMailTemplate);
+        } else {
+            $registrationMailTemplatesData = $this->mailTemplateDataFactory->create();
         }
         $registrationMailTemplatesData->name = MailTemplate::REGISTRATION_CONFIRM_NAME;
         $allMailTemplatesData->registrationTemplate = $registrationMailTemplatesData;
 
-        $resetPasswordMailTemplateData = new MailTemplateData();
         $resetPasswordMailTemplate = $this->mailTemplateRepository
             ->findByNameAndDomainId(MailTemplate::RESET_PASSWORD_NAME, $domainId);
         if ($resetPasswordMailTemplate !== null) {
-            $resetPasswordMailTemplateData->setFromEntity($resetPasswordMailTemplate);
+            $resetPasswordMailTemplateData = $this->mailTemplateDataFactory->createFromMailTemplate($resetPasswordMailTemplate);
+        } else {
+            $resetPasswordMailTemplateData = $this->mailTemplateDataFactory->create();
         }
         $resetPasswordMailTemplateData->name = MailTemplate::RESET_PASSWORD_NAME;
         $allMailTemplatesData->resetPasswordTemplate = $resetPasswordMailTemplateData;
@@ -148,19 +148,21 @@ class MailTemplateFacade
         $allMailTemplatesData->orderStatusTemplates =
             $this->orderStatusMailTemplateService->getOrderStatusMailTemplatesData($orderStatuses, $mailTemplates);
 
-        $personalAccessTemplateData = new MailTemplateData();
         $personaAccessTemplate = $this->mailTemplateRepository
             ->findByNameAndDomainId(MailTemplate::PERSONAL_DATA_ACCESS_NAME, $domainId);
         if ($personaAccessTemplate !== null) {
-            $personalAccessTemplateData->setFromEntity($personaAccessTemplate);
+            $personalAccessTemplateData = $this->mailTemplateDataFactory->createFromMailTemplate($personaAccessTemplate);
+        } else {
+            $personalAccessTemplateData = $this->mailTemplateDataFactory->create();
         }
         $allMailTemplatesData->personalDataAccessTemplate = $personalAccessTemplateData;
 
-        $personalRequestTemplateData = new MailTemplateData();
         $personalRequestTemplate = $this->mailTemplateRepository
             ->findByNameAndDomainId(MailTemplate::PERSONAL_DATA_EXPORT_NAME, $domainId);
         if ($personalRequestTemplate !== null) {
-            $personalRequestTemplateData->setFromEntity($personalRequestTemplate);
+            $personalRequestTemplateData = $this->mailTemplateDataFactory->createFromMailTemplate($personalRequestTemplate);
+        } else {
+            $personalRequestTemplateData = $this->mailTemplateDataFactory->create();
         }
         $allMailTemplatesData->personalDataExportTemplate = $personalRequestTemplateData;
 
@@ -173,7 +175,8 @@ class MailTemplateFacade
     public function createMailTemplateForAllDomains($name)
     {
         foreach ($this->domain->getAll() as $domainConfig) {
-            $mailTemplate = $this->mailTemplateFactory->create($name, $domainConfig->getId(), new MailTemplateData());
+            $mailTemplateData = $this->mailTemplateDataFactory->create();
+            $mailTemplate = $this->mailTemplateFactory->create($name, $domainConfig->getId(), $mailTemplateData);
             $this->em->persist($mailTemplate);
         }
 

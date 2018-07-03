@@ -5,20 +5,27 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Model\Script\Script;
-use Shopsys\FrameworkBundle\Model\Script\ScriptData;
+use Shopsys\FrameworkBundle\Model\Script\ScriptDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Script\ScriptFacade;
 
 class ScriptDataFixture extends AbstractReferenceFixture
 {
-    /** @var \Shopsys\FrameworkBundle\Model\Script\ScriptFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Script\ScriptFacade
+     */
     private $scriptFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Script\ScriptFacade $scriptFacade
+     * @var \Shopsys\FrameworkBundle\Model\Script\ScriptDataFactoryInterface
      */
-    public function __construct(ScriptFacade $scriptFacade)
-    {
+    private $scriptDataFactory;
+
+    public function __construct(
+        ScriptFacade $scriptFacade,
+        ScriptDataFactoryInterface $scriptDataFactory
+    ) {
         $this->scriptFacade = $scriptFacade;
+        $this->scriptDataFactory = $scriptDataFactory;
     }
 
     /**
@@ -26,7 +33,7 @@ class ScriptDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $scriptData = new ScriptData();
+        $scriptData = $this->scriptDataFactory->create();
         $scriptData->name = 'Demo skript 1';
         $scriptData->code = '<!-- demo script -->';
         $scriptData->placement = Script::PLACEMENT_ALL_PAGES;

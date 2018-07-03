@@ -12,7 +12,7 @@ use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
-use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -44,7 +44,7 @@ class BrandController extends AdminBaseController
     private $domain;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface
      */
     private $brandDataFactory;
 
@@ -54,7 +54,7 @@ class BrandController extends AdminBaseController
         GridFactory $gridFactory,
         Breadcrumb $breadcrumb,
         Domain $domain,
-        BrandDataFactory $brandDataFactory
+        BrandDataFactoryInterface $brandDataFactory
     ) {
         $this->brandFacade = $brandFacade;
         $this->administratorGridFacade = $administratorGridFacade;
@@ -143,7 +143,7 @@ class BrandController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $brandData = $this->brandDataFactory->createDefault();
+        $brandData = $this->brandDataFactory->create();
 
         $form = $this->createForm(BrandFormType::class, $brandData, ['brand' => null]);
         $form->handleRequest($request);

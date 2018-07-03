@@ -35,7 +35,9 @@ class PersonalDataExportXmlTest extends DatabaseTestCase
         $deliveryAddress = $this->createDeliveryAddress($country);
         $user = $this->createUser($billingAddress, $deliveryAddress);
         $status = $this->createMock(OrderStatus::class);
-        $currencyData = new CurrencyData('CZK', 'CZK');
+        $currencyData = new CurrencyData();
+        $currencyData->name = 'CZK';
+        $currencyData->code = 'CZK';
         $currency = new Currency($currencyData);
         $order = $this->createOrder($currency, $status, $country);
         $product = $this->createMock(Product::class);

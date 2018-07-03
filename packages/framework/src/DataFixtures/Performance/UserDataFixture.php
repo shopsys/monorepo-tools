@@ -9,11 +9,11 @@ use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CountryDataFixture;
-use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
-use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
-use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
+use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class UserDataFixture
@@ -46,7 +46,7 @@ class UserDataFixture
     private $customerEditFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface
      */
     private $userDataFactory;
 
@@ -66,15 +66,33 @@ class UserDataFixture
     private $progressBarFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
+     */
+    private $customerDataFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface
+     */
+    private $billingAddressDataFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface
+     */
+    private $deliveryAddressDataFactory;
+
+    /**
      * @param int $userCountPerDomain
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerFacade $customerEditFacade
-     * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory $userDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface $userDataFactory
      * @param \Faker\Generator $faker
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @param \Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory $progressBarFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
      */
     public function __construct(
         $userCountPerDomain,
@@ -82,10 +100,13 @@ class UserDataFixture
         Domain $domain,
         SqlLoggerFacade $sqlLoggerFacade,
         CustomerFacade $customerEditFacade,
-        UserDataFactory $userDataFactory,
+        UserDataFactoryInterface $userDataFactory,
         Faker $faker,
         PersistentReferenceFacade $persistentReferenceFacade,
-        ProgressBarFactory $progressBarFactory
+        ProgressBarFactory $progressBarFactory,
+        CustomerDataFactoryInterface $customerDataFactory,
+        BillingAddressDataFactoryInterface $billingAddressDataFactory,
+        DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
     ) {
         $this->em = $em;
         $this->domain = $domain;
@@ -96,6 +117,9 @@ class UserDataFixture
         $this->persistentReferenceFacade = $persistentReferenceFacade;
         $this->userCountPerDomain = $userCountPerDomain;
         $this->progressBarFactory = $progressBarFactory;
+        $this->customerDataFactory = $customerDataFactory;
+        $this->billingAddressDataFactory = $billingAddressDataFactory;
+        $this->deliveryAddressDataFactory = $deliveryAddressDataFactory;
     }
 
     /**
@@ -147,11 +171,11 @@ class UserDataFixture
      */
     private function getRandomCustomerDataByDomainId($domainId, $userNumber)
     {
-        $customerData = new CustomerData();
+        $customerData = $this->customerDataFactory->create();
 
         $country = $this->persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 
-        $userData = $this->userDataFactory->createDefault($domainId);
+        $userData = $this->userDataFactory->createForDomainId($domainId);
         $userData->firstName = $this->faker->firstName;
         $userData->lastName = $this->faker->lastName;
         $userData->email = $userNumber . '.' . $this->faker->safeEmail;
@@ -161,7 +185,7 @@ class UserDataFixture
 
         $customerData->userData = $userData;
 
-        $billingAddressData = new BillingAddressData();
+        $billingAddressData = $this->billingAddressDataFactory->create();
         $billingAddressData->companyCustomer = $this->faker->boolean();
         if ($billingAddressData->companyCustomer === true) {
             $billingAddressData->companyName = $this->faker->company;
@@ -175,7 +199,7 @@ class UserDataFixture
         $billingAddressData->telephone = $this->faker->phoneNumber;
         $customerData->billingAddressData = $billingAddressData;
 
-        $deliveryAddressData = new DeliveryAddressData();
+        $deliveryAddressData = $this->deliveryAddressDataFactory->create();
         $deliveryAddressData->addressFilled = true;
         $deliveryAddressData->city = $this->faker->city;
         $deliveryAddressData->companyName = $this->faker->company;

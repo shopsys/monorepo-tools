@@ -379,7 +379,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
     {
         $paymentDataFactory = $this->getPaymentDataFactory();
 
-        $paymentData = $paymentDataFactory->createDefault();
+        $paymentData = $paymentDataFactory->create();
         $paymentData->name = [
             'cs' => 'paymentName',
             'en' => 'paymentName',
@@ -401,7 +401,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
     {
         $transportDataFactory = $this->getTransportDataFactory();
 
-        $transportData = $transportDataFactory->createDefault();
+        $transportData = $transportDataFactory->create();
         $transportData->name = [
             'cs' => 'paymentName',
             'en' => 'paymentName',
@@ -419,7 +419,10 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
      */
     private function getDefaultVat()
     {
-        return new Vat(new VatData('vat', 21));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        return new Vat($vatData);
     }
 
     /**

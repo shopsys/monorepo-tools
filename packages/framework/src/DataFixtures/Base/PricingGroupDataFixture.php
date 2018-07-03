@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 
 class PricingGroupDataFixture extends AbstractReferenceFixture
@@ -20,16 +21,21 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
     private $pricingGroupFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface
      */
-    public function __construct(PricingGroupFacade $pricingGroupFacade)
-    {
+    private $pricingGroupDataFactory;
+
+    public function __construct(
+        PricingGroupFacade $pricingGroupFacade,
+        PricingGroupDataFactoryInterface $pricingGroupDataFactory
+    ) {
         $this->pricingGroupFacade = $pricingGroupFacade;
+        $this->pricingGroupDataFactory = $pricingGroupDataFactory;
     }
 
     public function load(ObjectManager $manager)
     {
-        $pricingGroupData = new PricingGroupData();
+        $pricingGroupData = $this->pricingGroupDataFactory->create();
 
         $pricingGroupData->name = 'Ordinary customer';
         $this->createPricingGroup($pricingGroupData, self::PRICING_GROUP_ORDINARY_DOMAIN_1);

@@ -24,7 +24,10 @@ class CartTest extends TestCase
     {
         $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $vat = new Vat(new VatData('vat', 21));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        $vat = new Vat($vatData);
         $productData1 = new ProductData();
         $productData1->name = ['cs' => 'Product 1'];
         $productData1->price = 100;
@@ -59,7 +62,10 @@ class CartTest extends TestCase
         $customerIdentifier = new CustomerIdentifier('randomString');
 
         $price = 100;
-        $vat = new Vat(new VatData('vat', 21));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        $vat = new Vat($vatData);
         $productData = new ProductData();
         $productData->name = ['cs' => 'Product 1'];
         $productData->price = $price;
@@ -77,7 +83,10 @@ class CartTest extends TestCase
     {
         $customerIdentifier = new CustomerIdentifier('randomString');
 
-        $vat = new Vat(new VatData('vat', 21));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = 21;
+        $vat = new Vat($vatData);
         $productData1 = new ProductData();
         $productData1->name = ['cs' => 'Product 1'];
         $productData1->price = 100;

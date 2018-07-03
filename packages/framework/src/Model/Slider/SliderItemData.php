@@ -36,15 +36,4 @@ class SliderItemData
         $this->image = new ImageUploadData();
         $this->hidden = false;
     }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Slider\SliderItem $sliderItem
-     */
-    public function setFromEntity(SliderItem $sliderItem)
-    {
-        $this->name = $sliderItem->getName();
-        $this->link = $sliderItem->getLink();
-        $this->hidden = $sliderItem->isHidden();
-        $this->domainId = $sliderItem->getDomainId();
-    }
 }

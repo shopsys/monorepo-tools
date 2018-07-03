@@ -801,3 +801,102 @@ services:
 
   Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFactory
+
+  Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlDataFactory
+
+  Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactory
+
+  Shopsys\FrameworkBundle\Model\Advert\AdvertDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Advert\AdvertDataFactory
+
+  Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Article\ArticleDataFactory
+
+  Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory
+
+  Shopsys\FrameworkBundle\Model\Country\CountryDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Country\CountryDataFactory
+
+  Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory
+
+  Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactory
+
+  Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactory
+
+  Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Customer\UserDataFactory
+
+  Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactory
+
+  Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\OrderDataFactory
+
+  Shopsys\FrameworkBundle\Model\Order\Item\OrderItemDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderItemDataFactory
+
+  Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderTransportDataFactory
+
+  Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\Item\OrderPaymentDataFactory
+
+  Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeDataFactory
+
+  Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusDataFactory
+
+  Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory
+
+  Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestDataFactory
+
+  Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyDataFactory
+
+  Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupDataFactory
+
+  Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValueDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\Unit\UnitDataFactory
+
+  Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
+
+  Shopsys\FrameworkBundle\Model\Script\ScriptDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Script\ScriptDataFactory
+
+  Shopsys\FrameworkBundle\Model\Slider\SliderItemDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Slider\SliderItemDataFactory
+
+  Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface:
+    alias: Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory

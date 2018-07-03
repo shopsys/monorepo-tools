@@ -66,7 +66,11 @@ class OrderPriceCalculationTest extends TestCase
         $paymentData->czkRounding = true;
         $payment = new Payment($paymentData);
 
-        $currency = new Currency(new CurrencyData('currencyName', Currency::CODE_EUR, 1.0));
+        $currencyData = new CurrencyData();
+        $currencyData->name = 'currencyName';
+        $currencyData->code = Currency::CODE_EUR;
+        $currencyData->exchangeRate = 1.0;
+        $currency = new Currency($currencyData);
         $orderTotalPrice = new Price(100, 120);
 
         $roundingMock = $this->createMock(Rounding::class);
@@ -84,7 +88,11 @@ class OrderPriceCalculationTest extends TestCase
         $paymentData->czkRounding = false;
         $payment = new Payment($paymentData);
 
-        $currency = new Currency(new CurrencyData('currencyName', Currency::CODE_CZK, 1.0));
+        $currencyData = new CurrencyData();
+        $currencyData->name = 'currencyName';
+        $currencyData->code = Currency::CODE_CZK;
+        $currencyData->exchangeRate = 1.0;
+        $currency = new Currency($currencyData);
         $orderTotalPrice = new Price(100, 120);
 
         $roundingMock = $this->createMock(Rounding::class);
@@ -102,7 +110,11 @@ class OrderPriceCalculationTest extends TestCase
         $paymentData->czkRounding = true;
         $payment = new Payment($paymentData);
 
-        $currency = new Currency(new CurrencyData('currencyName', Currency::CODE_CZK, 1.0));
+        $currencyData = new CurrencyData();
+        $currencyData->name = 'currencyName';
+        $currencyData->code = Currency::CODE_CZK;
+        $currencyData->exchangeRate = 1.0;
+        $currency = new Currency($currencyData);
         $orderTotalPrice = new Price(100, 120.3);
 
         $roundingMock = $this->getMockBuilder(Rounding::class)
@@ -127,7 +139,11 @@ class OrderPriceCalculationTest extends TestCase
         $paymentData->czkRounding = true;
         $payment = new Payment($paymentData);
 
-        $currency = new Currency(new CurrencyData('currencyName', Currency::CODE_CZK, 1.0));
+        $currencyData = new CurrencyData();
+        $currencyData->name = 'currencyName';
+        $currencyData->code = Currency::CODE_CZK;
+        $currencyData->exchangeRate = 1.0;
+        $currency = new Currency($currencyData);
         $orderTotalPrice = new Price(100, 120.9);
 
         $roundingMock = $this->getMockBuilder(Rounding::class)

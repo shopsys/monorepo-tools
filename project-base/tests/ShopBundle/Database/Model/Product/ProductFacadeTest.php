@@ -26,7 +26,7 @@ class ProductFacadeTest extends DatabaseTestCase
         $calculatedSellingDenied
     ) {
         $productDataFactory = $this->getContainer()->get(ProductDataFactory::class);
-        $productData = $productDataFactory->createDefault();
+        $productData = $productDataFactory->create();
         $productData->hidden = $hidden;
         $productData->sellingDenied = $sellingDenied;
         $productData->stockQuantity = $stockQuantity;

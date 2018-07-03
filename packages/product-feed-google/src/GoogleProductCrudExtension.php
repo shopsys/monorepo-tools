@@ -4,6 +4,7 @@ namespace Shopsys\ProductFeed\GoogleBundle;
 
 use Shopsys\Plugin\PluginCrudExtensionInterface;
 use Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainData;
+use Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainDataFactoryInterface;
 use Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainFacade;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -21,15 +22,18 @@ class GoogleProductCrudExtension implements PluginCrudExtensionInterface
     private $googleProductDomainFacade;
 
     /**
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainFacade $googleProductDomainFacade
+     * @var \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomainDataFactoryInterface
      */
+    private $googleProductDomainDataFactory;
+
     public function __construct(
         TranslatorInterface $translator,
-        GoogleProductDomainFacade $googleProductDomainFacade
+        GoogleProductDomainFacade $googleProductDomainFacade,
+        GoogleProductDomainDataFactoryInterface $googleProductDomainDataFactory
     ) {
         $this->translator = $translator;
         $this->googleProductDomainFacade = $googleProductDomainFacade;
+        $this->googleProductDomainDataFactory = $googleProductDomainDataFactory;
     }
 
     /**
@@ -71,17 +75,18 @@ class GoogleProductCrudExtension implements PluginCrudExtensionInterface
      */
     public function saveData($productId, $data)
     {
-        $googleProductDomainsDataIndexdByDomainId = [];
+        $googleProductDomainsDataIndexedByDomainId = [];
         foreach ($data as $productAttributeName => $productAttributeValuesByDomainIds) {
             foreach ($productAttributeValuesByDomainIds as $domainId => $productAttributeValue) {
-                if (!array_key_exists($domainId, $googleProductDomainsDataIndexdByDomainId)) {
-                    $googleProductDomainsDataIndexdByDomainId[$domainId] = new GoogleProductDomainData();
+                if (!array_key_exists($domainId, $googleProductDomainsDataIndexedByDomainId)) {
+                    $googleProductDomainData = $this->googleProductDomainDataFactory->create();
+                    $googleProductDomainData->domainId = $domainId;
 
-                    $googleProductDomainsDataIndexdByDomainId[$domainId]->domainId = $domainId;
+                    $googleProductDomainsDataIndexedByDomainId[$domainId] = $googleProductDomainData;
                 }
 
                 $this->setGoogleProductDomainDataProperty(
-                    $googleProductDomainsDataIndexdByDomainId[$domainId],
+                    $googleProductDomainsDataIndexedByDomainId[$domainId],
                     $productAttributeName,
                     $productAttributeValue
                 );
@@ -90,7 +95,7 @@ class GoogleProductCrudExtension implements PluginCrudExtensionInterface
 
         $this->googleProductDomainFacade->saveGoogleProductDomainsForProductId(
             $productId,
-            $googleProductDomainsDataIndexdByDomainId
+            $googleProductDomainsDataIndexedByDomainId
         );
     }
 

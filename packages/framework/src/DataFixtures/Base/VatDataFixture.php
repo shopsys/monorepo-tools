@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Base;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
+use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade;
 
 class VatDataFixture extends AbstractReferenceFixture
@@ -20,11 +21,16 @@ class VatDataFixture extends AbstractReferenceFixture
     private $vatFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade $vatFacade
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatDataFactoryInterface
      */
-    public function __construct(VatFacade $vatFacade)
-    {
+    private $vatDataFactory;
+
+    public function __construct(
+        VatFacade $vatFacade,
+        VatDataFactoryInterface $vatDataFactory
+    ) {
         $this->vatFacade = $vatFacade;
+        $this->vatDataFactory = $vatDataFactory;
     }
 
     /**
@@ -32,7 +38,7 @@ class VatDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $vatData = new VatData();
+        $vatData = $this->vatDataFactory->create();
 
         $vatData->name = 'Zero rate';
         $vatData->percent = '0';

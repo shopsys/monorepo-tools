@@ -71,7 +71,10 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\FrameworkBundle\Model\Product\ProductFacade */
 
-        $vat = new Vat(new VatData('vat', $vatPercent));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
         $em->persist($vat);
 
         $templateProduct = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
@@ -108,8 +111,13 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
 
         $setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 
-        $vat = new Vat(new VatData('vat', $vatPercent));
-        $availability = new Availability(new AvailabilityData([], 0));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
+        $availabilityData = new AvailabilityData();
+        $availabilityData->dispatchTime = 0;
+        $availability = new Availability($availabilityData);
         $em->persist($vat);
         $em->persist($availability);
 
@@ -121,14 +129,14 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
             $vatPercent
         );
 
-        $paymentData = $paymentDataFactory->createDefault();
+        $paymentData = $paymentDataFactory->create();
         $paymentData->name = ['cs' => 'name'];
         $paymentData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
         $paymentData->vat = $vat;
         $payment = $paymentFacade->create($paymentData);
         /* @var $payment \Shopsys\FrameworkBundle\Model\Payment\Payment */
 
-        $transportData = $transportDataFactory->createDefault();
+        $transportData = $transportDataFactory->create();
         $transportData->name = ['cs' => 'name'];
         $transportData->description = ['cs' => 'desc'];
         $transportData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
@@ -184,8 +192,13 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $currency1 = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
         $currency2 = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
 
-        $vat = new Vat(new VatData('vat', $vatPercent));
-        $availability = new Availability(new AvailabilityData([], 0));
+        $vatData = new VatData();
+        $vatData->name = 'vat';
+        $vatData->percent = $vatPercent;
+        $vat = new Vat($vatData);
+        $availabilityData = new AvailabilityData();
+        $availabilityData->dispatchTime = 0;
+        $availability = new Availability($availabilityData);
         $em->persist($vat);
         $em->persist($availability);
 
@@ -194,14 +207,14 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
             $vatPercent
         );
 
-        $paymentData = $paymentDataFactory->createDefault();
+        $paymentData = $paymentDataFactory->create();
         $paymentData->name = ['cs' => 'name'];
         $paymentData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
         $paymentData->vat = $vat;
         $payment = $paymentFacade->create($paymentData);
         /* @var $payment \Shopsys\FrameworkBundle\Model\Payment\Payment */
 
-        $transportData = $transportDataFactory->createDefault();
+        $transportData = $transportDataFactory->create();
         $transportData->name = ['cs' => 'name'];
         $transportData->pricesByCurrencyId = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
         $transportData->vat = $vat;

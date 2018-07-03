@@ -4,7 +4,7 @@ namespace Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid;
 
 use Shopsys\FrameworkBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use Shopsys\FrameworkBundle\Form\Admin\Pricing\Currency\CurrencyFormType;
-use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyData;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -20,14 +20,21 @@ class CurrencyInlineEdit extends AbstractGridInlineEdit
      */
     private $formFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyDataFactoryInterface
+     */
+    private $currencyDataFactory;
+
     public function __construct(
         CurrencyGridFactory $currencyGridFactory,
         CurrencyFacade $currencyFacade,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        CurrencyDataFactoryInterface $currencyDataFactory
     ) {
         parent::__construct($currencyGridFactory);
         $this->currencyFacade = $currencyFacade;
         $this->formFactory = $formFactory;
+        $this->currencyDataFactory = $currencyDataFactory;
     }
 
     /**
@@ -56,11 +63,11 @@ class CurrencyInlineEdit extends AbstractGridInlineEdit
      */
     public function getForm($currencyId)
     {
-        $currencyData = new CurrencyData();
-
         if ($currencyId !== null) {
             $currency = $this->currencyFacade->getById((int)$currencyId);
-            $currencyData->setFromEntity($currency);
+            $currencyData = $this->currencyDataFactory->createFromCurrency($currency);
+        } else {
+            $currencyData = $this->currencyDataFactory->create();
         }
 
         return $this->formFactory->create(CurrencyFormType::class, $currencyData, [

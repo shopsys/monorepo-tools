@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Base;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityData;
+use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade;
 
 class AvailabilityDataFixture extends AbstractReferenceFixture
@@ -14,15 +15,22 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
     const AVAILABILITY_OUT_OF_STOCK = 'availability_out_of_stock';
     const AVAILABILITY_PREPARING = 'availability_preparing';
 
-    /** @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade
+     */
     private $availabilityFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityDataFactoryInterface
      */
-    public function __construct(AvailabilityFacade $availabilityFacade)
-    {
+    private $availabilityDataFactory;
+
+    public function __construct(
+        AvailabilityFacade $availabilityFacade,
+        AvailabilityDataFactoryInterface $availabilityDataFactory
+    ) {
         $this->availabilityFacade = $availabilityFacade;
+        $this->availabilityDataFactory = $availabilityDataFactory;
     }
 
     /**
@@ -30,7 +38,7 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $availabilityData = new AvailabilityData();
+        $availabilityData = $this->availabilityDataFactory->create();
         $availabilityData->name = ['cs' => 'Připravujeme', 'en' => 'Preparing'];
         $availabilityData->dispatchTime = 14;
         $this->createAvailability($availabilityData, self::AVAILABILITY_PREPARING);

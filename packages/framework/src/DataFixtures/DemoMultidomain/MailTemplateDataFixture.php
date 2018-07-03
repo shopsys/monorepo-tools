@@ -6,19 +6,27 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplate;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateData;
+use Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade;
 
 class MailTemplateDataFixture extends AbstractReferenceFixture
 {
-    /** @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade */
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade
+     */
     private $mailTemplateFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
+     * @var \Shopsys\FrameworkBundle\Model\Mail\MailTemplateDataFactoryInterface
      */
-    public function __construct(MailTemplateFacade $mailTemplateFacade)
-    {
+    private $mailTemplateDataFactory;
+
+    public function __construct(
+        MailTemplateFacade $mailTemplateFacade,
+        MailTemplateDataFactoryInterface $mailTemplateDataFactory
+    ) {
         $this->mailTemplateFacade = $mailTemplateFacade;
+        $this->mailTemplateDataFactory = $mailTemplateDataFactory;
     }
 
     /**
@@ -26,7 +34,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
      */
     public function load(ObjectManager $manager)
     {
-        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData = $this->mailTemplateDataFactory->create();
         $mailTemplateData->name = 'order_status_1';
         $mailTemplateData->sendMail = true;
         $mailTemplateData->subject = 'Děkujeme za objednávku č. {number} ze dne {date}';
@@ -49,7 +57,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 
         $this->updateMailTemplate($mailTemplateData);
 
-        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData = $this->mailTemplateDataFactory->create();
         $mailTemplateData->name = 'order_status_2';
         $mailTemplateData->sendMail = false;
         $mailTemplateData->subject = 'Stav objednávky se změnil';
@@ -58,7 +66,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 
         $this->updateMailTemplate($mailTemplateData);
 
-        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData = $this->mailTemplateDataFactory->create();
         $mailTemplateData->name = 'order_status_3';
         $mailTemplateData->sendMail = false;
         $mailTemplateData->subject = 'Stav objednávky se změnil';
@@ -67,7 +75,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 
         $this->updateMailTemplate($mailTemplateData);
 
-        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData = $this->mailTemplateDataFactory->create();
         $mailTemplateData->name = 'order_status_4';
         $mailTemplateData->sendMail = false;
         $mailTemplateData->subject = 'Stav objednávky se změnil';
@@ -76,7 +84,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 
         $this->updateMailTemplate($mailTemplateData);
 
-        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData = $this->mailTemplateDataFactory->create();
         $mailTemplateData->name = 'reset_password';
         $mailTemplateData->sendMail = true;
         $mailTemplateData->subject = 'Žádost o heslo';
@@ -85,7 +93,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 
         $this->updateMailTemplate($mailTemplateData);
 
-        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData = $this->mailTemplateDataFactory->create();
         $mailTemplateData->name = 'registration_confirm';
         $mailTemplateData->sendMail = true;
         $mailTemplateData->subject = 'Registrace byla dokončena';
@@ -98,7 +106,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 
         $this->updateMailTemplate($mailTemplateData);
 
-        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData = $this->mailTemplateDataFactory->create();
         $mailTemplateData->name = MailTemplate::PERSONAL_DATA_ACCESS_NAME;
         $mailTemplateData->sendMail = true;
         $mailTemplateData->subject = 'Přehled osobních údajů - {domain}';
@@ -112,7 +120,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture
 
         $this->updateMailTemplate($mailTemplateData);
 
-        $mailTemplateData = new MailTemplateData();
+        $mailTemplateData = $this->mailTemplateDataFactory->create();
         $mailTemplateData->name = MailTemplate::PERSONAL_DATA_EXPORT_NAME;
         $mailTemplateData->sendMail = true;
         $mailTemplateData->subject = ' Export osobních údajů - {domain}';

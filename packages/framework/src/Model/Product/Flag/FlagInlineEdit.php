@@ -18,14 +18,21 @@ class FlagInlineEdit extends AbstractGridInlineEdit
      */
     private $formFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Flag\FlagDataFactoryInterface
+     */
+    private $flagDataFactory;
+
     public function __construct(
         FlagGridFactory $flagGridFactory,
         FlagFacade $flagFacade,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        FlagDataFactoryInterface $flagDataFactory
     ) {
         parent::__construct($flagGridFactory);
         $this->flagFacade = $flagFacade;
         $this->formFactory = $formFactory;
+        $this->flagDataFactory = $flagDataFactory;
     }
 
     /**
@@ -54,11 +61,11 @@ class FlagInlineEdit extends AbstractGridInlineEdit
      */
     public function getForm($flagId)
     {
-        $flagData = new FlagData();
-
         if ($flagId !== null) {
             $flag = $this->flagFacade->getById((int)$flagId);
-            $flagData->setFromEntity($flag);
+            $flagData = $this->flagDataFactory->createFromFlag($flag);
+        } else {
+            $flagData = $this->flagDataFactory->create();
         }
 
         return $this->formFactory->create(FlagFormType::class, $flagData);

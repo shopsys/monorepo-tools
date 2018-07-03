@@ -15,17 +15,17 @@ class ProductMassActionData
     const VALUE_PRODUCT_HIDE = 1;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $selectType;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $action;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $subject;
 

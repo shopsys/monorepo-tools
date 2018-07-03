@@ -6,7 +6,7 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
-class CategoryDataFactory
+class CategoryDataFactory implements CategoryDataFactoryInterface
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryRepository
@@ -44,10 +44,45 @@ class CategoryDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @return \Shopsys\FrameworkBundle\Model\Category\CategoryData
      */
-    public function createFromCategory(Category $category)
+    public function createFromCategory(Category $category): CategoryData
     {
-        $categoryData = $this->createDefault();
+        $categoryData = new CategoryData();
+        $this->fillFromCategory($categoryData, $category);
 
+        return $categoryData;
+    }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryData
+     */
+    public function create(): CategoryData
+    {
+        $categoryData = new CategoryData();
+        $this->fillNew($categoryData);
+
+        return $categoryData;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
+     */
+    protected function fillNew(CategoryData $categoryData)
+    {
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $categoryData->seoMetaDescriptions[$domainId] = null;
+            $categoryData->seoTitles[$domainId] = null;
+            $categoryData->seoH1s[$domainId] = null;
+            $categoryData->descriptions[$domainId] = null;
+            $categoryData->enabled[$domainId] = true;
+        }
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryData $categoryData
+     * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
+     */
+    protected function fillFromCategory(CategoryData $categoryData, Category $category)
+    {
         $categoryData->name = $category->getNames();
         $categoryData->parent = $category->getParent();
 
@@ -63,25 +98,5 @@ class CategoryDataFactory
         }
 
         $categoryData->pluginData = $this->pluginCrudExtensionFacade->getAllData('category', $category->getId());
-
-        return $categoryData;
-    }
-
-    /**
-     * @return \Shopsys\FrameworkBundle\Model\Category\CategoryData
-     */
-    public function createDefault()
-    {
-        $categoryData = new CategoryData();
-
-        foreach ($this->domain->getAllIds() as $domainId) {
-            $categoryData->seoMetaDescriptions[$domainId] = null;
-            $categoryData->seoTitles[$domainId] = null;
-            $categoryData->seoH1s[$domainId] = null;
-            $categoryData->descriptions[$domainId] = null;
-            $categoryData->enabled[$domainId] = true;
-        }
-
-        return $categoryData;
     }
 }

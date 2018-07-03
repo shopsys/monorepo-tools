@@ -7,7 +7,7 @@ use Shopsys\FrameworkBundle\Component\Console\ProgressBarFactory;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade;
 use Shopsys\FrameworkBundle\Model\Category\Category;
-use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory;
+use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,7 +17,7 @@ class CategoryDataFixture
     const FIRST_PERFORMANCE_CATEGORY = 'first_performance_category';
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface
      */
     private $categoryDataFactory;
 
@@ -58,7 +58,7 @@ class CategoryDataFixture
 
     /**
      * @param int[] $categoryCountsByLevel
-     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactory $categoryDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface $categoryDataFactory
      * @param \Shopsys\FrameworkBundle\Model\Category\CategoryFacade $categoryFacade
      * @param \Shopsys\FrameworkBundle\Component\Doctrine\SqlLoggerFacade $sqlLoggerFacade
      * @param \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
@@ -67,7 +67,7 @@ class CategoryDataFixture
      */
     public function __construct(
         $categoryCountsByLevel,
-        CategoryDataFactory $categoryDataFactory,
+        CategoryDataFactoryInterface $categoryDataFactory,
         CategoryFacade $categoryFacade,
         SqlLoggerFacade $sqlLoggerFacade,
         PersistentReferenceFacade $persistentReferenceFacade,
@@ -141,7 +141,7 @@ class CategoryDataFixture
      */
     private function getRandomCategoryDataByParentCategory(Category $parentCategory)
     {
-        $categoryData = $this->categoryDataFactory->createDefault();
+        $categoryData = $this->categoryDataFactory->create();
         $categoryName = $this->faker->word . ' #' . $this->categoriesCreated;
         $categoryData->name = ['cs' => $categoryName, 'en' => $categoryName];
         $categoryData->descriptions = [

@@ -5,10 +5,10 @@ namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 use Shopsys\FrameworkBundle\Component\Csv\CsvReader;
 use Shopsys\FrameworkBundle\Component\String\EncodingConverter;
 use Shopsys\FrameworkBundle\Component\String\TransformString;
-use Shopsys\FrameworkBundle\Model\Customer\BillingAddressData;
-use Shopsys\FrameworkBundle\Model\Customer\CustomerData;
-use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressData;
-use Shopsys\FrameworkBundle\Model\Customer\UserDataFactory;
+use Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface;
+use Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface;
 
 class UserDataFixtureLoader
 {
@@ -47,7 +47,7 @@ class UserDataFixtureLoader
     private $path;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface
      */
     private $userDataFactory;
 
@@ -57,15 +57,42 @@ class UserDataFixtureLoader
     private $countries;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface
+     */
+    private $customerDataFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface
+     */
+    private $billingAddressDataFactory;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface
+     */
+    private $deliveryAddressDataFactory;
+
+    /**
      * @param string $path
      * @param \Shopsys\FrameworkBundle\Component\Csv\CsvReader $csvReader
-     * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactory $userDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\UserDataFactoryInterface $userDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface $customerDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
      */
-    public function __construct($path, CsvReader $csvReader, UserDataFactory $userDataFactory)
-    {
+    public function __construct(
+        $path,
+        CsvReader $csvReader,
+        UserDataFactoryInterface $userDataFactory,
+        CustomerDataFactoryInterface $customerDataFactory,
+        BillingAddressDataFactoryInterface $billingAddressDataFactory,
+        DeliveryAddressDataFactoryInterface $deliveryAddressDataFactory
+    ) {
         $this->path = $path;
         $this->csvReader = $csvReader;
         $this->userDataFactory = $userDataFactory;
+        $this->customerDataFactory = $customerDataFactory;
+        $this->billingAddressDataFactory = $billingAddressDataFactory;
+        $this->deliveryAddressDataFactory = $deliveryAddressDataFactory;
     }
 
     /**
@@ -127,10 +154,10 @@ class UserDataFixtureLoader
      */
     private function getCustomerDataFromCsvRow(array $row)
     {
-        $customerData = new CustomerData();
+        $customerData = $this->customerDataFactory->create();
         $domainId = (int)$row[self::COLUMN_DOMAIN_ID];
-        $userData = $this->userDataFactory->createDefault($domainId);
-        $billingAddressData = new BillingAddressData();
+        $userData = $this->userDataFactory->createForDomainId($domainId);
+        $billingAddressData = $this->billingAddressDataFactory->create();
 
         $userData->firstName = $row[self::COLUMN_FIRSTNAME];
         $userData->lastName = $row[self::COLUMN_LASTNAME];
@@ -147,7 +174,7 @@ class UserDataFixtureLoader
         $billingAddressData->telephone = $row[self::COLUMN_TELEPHONE];
         $billingAddressData->country = $this->getCountryByName($row[self::COLUMN_COUNTRY]);
         if ($row[self::COLUMN_DELIVERY_ADDRESS_FILLED] === 'true') {
-            $deliveryAddressData = new DeliveryAddressData();
+            $deliveryAddressData = $this->deliveryAddressDataFactory->create();
             $deliveryAddressData->addressFilled = true;
             $deliveryAddressData->city = $row[self::COLUMN_DELIVERY_CITY];
             $deliveryAddressData->companyName = $row[self::COLUMN_DELIVERY_COMPANY_NAME];
@@ -159,7 +186,7 @@ class UserDataFixtureLoader
             $deliveryAddressData->country = $this->getCountryByName($row[self::COLUMN_DELIVERY_COUNTRY]);
             $customerData->deliveryAddressData = $deliveryAddressData;
         } else {
-            $customerData->deliveryAddressData = new DeliveryAddressData();
+            $customerData->deliveryAddressData = $this->deliveryAddressDataFactory->create();
         }
         $userData->domainId = $domainId;
 

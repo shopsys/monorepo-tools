@@ -34,24 +34,32 @@ class CustomerFacade
     protected $billingAddressFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface
+     */
+    private $billingAddressDataFactory;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserRepository $userRepository
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerService $customerService
      * @param \Shopsys\FrameworkBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressFactoryInterface $billingAddressFactory
+     * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddressDataFactoryInterface $billingAddressDataFactory
      */
     public function __construct(
         EntityManagerInterface $em,
         UserRepository $userRepository,
         CustomerService $customerService,
         CustomerMailFacade $customerMailFacade,
-        BillingAddressFactoryInterface $billingAddressFactory
+        BillingAddressFactoryInterface $billingAddressFactory,
+        BillingAddressDataFactoryInterface $billingAddressDataFactory
     ) {
         $this->em = $em;
         $this->userRepository = $userRepository;
         $this->customerService = $customerService;
         $this->customerMailFacade = $customerMailFacade;
         $this->billingAddressFactory = $billingAddressFactory;
+        $this->billingAddressDataFactory = $billingAddressDataFactory;
     }
 
     /**
@@ -81,7 +89,8 @@ class CustomerFacade
     {
         $userByEmailAndDomain = $this->findUserByEmailAndDomain($userData->email, $userData->domainId);
 
-        $billingAddress = $this->billingAddressFactory->create(new BillingAddressData());
+        $billingAddressData = $this->billingAddressDataFactory->create();
+        $billingAddress = $this->billingAddressFactory->create($billingAddressData);
 
         $user = $this->customerService->create(
             $userData,

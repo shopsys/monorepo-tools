@@ -5,29 +5,17 @@ namespace Shopsys\FrameworkBundle\Model\ContactForm;
 class ContactFormData
 {
     /**
-     * @var string
+     * @var string|null
      */
     public $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $message;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $email;
-
-    /**
-     * @param string $name
-     * @param string $message
-     * @param string $email
-     */
-    public function __construct($name = null, $message = null, $email = null)
-    {
-        $this->name = $name;
-        $this->message = $message;
-        $this->email = $email;
-    }
 }

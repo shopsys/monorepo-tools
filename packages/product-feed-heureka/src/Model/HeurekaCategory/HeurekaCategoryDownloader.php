@@ -12,11 +12,20 @@ class HeurekaCategoryDownloader
     private $heurekaCategoryFeedUrl;
 
     /**
-     * @param string $heurekaCategoryFeedUrl
+     * @var \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDataFactoryInterface
      */
-    public function __construct($heurekaCategoryFeedUrl)
-    {
+    private $heurekaCategoryDataFactory;
+
+    /**
+     * @param string $heurekaCategoryFeedUrl
+     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDataFactoryInterface $heurekaCategoryDataFactory
+     */
+    public function __construct(
+        $heurekaCategoryFeedUrl,
+        HeurekaCategoryDataFactoryInterface $heurekaCategoryDataFactory
+    ) {
         $this->heurekaCategoryFeedUrl = $heurekaCategoryFeedUrl;
+        $this->heurekaCategoryDataFactory = $heurekaCategoryDataFactory;
     }
 
     /**
@@ -52,7 +61,7 @@ class HeurekaCategoryDownloader
         foreach ($xmlCategoryDataObjects as $xmlCategoryDataObject) {
             $categoryId = (int)$xmlCategoryDataObject->CATEGORY_ID;
 
-            $heurekaCategoryData = new HeurekaCategoryData();
+            $heurekaCategoryData = $this->heurekaCategoryDataFactory->create();
             $heurekaCategoryData->id = $categoryId;
             $heurekaCategoryData->name = (string)$xmlCategoryDataObject->CATEGORY_NAME;
             $heurekaCategoryData->fullName = (string)$xmlCategoryDataObject->CATEGORY_FULLNAME;

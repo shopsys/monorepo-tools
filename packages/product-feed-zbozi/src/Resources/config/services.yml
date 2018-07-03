@@ -18,3 +18,6 @@ services:
   Shopsys\ProductFeed\ZboziBundle\ZboziPluginDataFixture:
     tags:
       - { name: shopsys.data_fixture}
+
+  Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainDataFactoryInterface:
+    alias: Shopsys\ProductFeed\ZboziBundle\Model\Product\ZboziProductDomainDataFactory

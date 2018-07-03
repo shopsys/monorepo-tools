@@ -21,7 +21,10 @@ class ProductInputPriceServiceTest extends TestCase
     public function testGetManualInputPricesDataWithManualCalculationType()
     {
         $productData = new ProductData();
-        $productData->vat = new Vat(new VatData('VatName', '10.0'));
+        $vatData = new VatData();
+        $vatData->name = 'VatName';
+        $vatData->percent = '10.0';
+        $productData->vat = new Vat($vatData);
         $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
         $product = Product::create($productData);
 
@@ -67,7 +70,10 @@ class ProductInputPriceServiceTest extends TestCase
     public function testGetManualInputPricesDataWithAutoCalculationType()
     {
         $productData = new ProductData();
-        $productData->vat = new Vat(new VatData('VatName', '10.0'));
+        $vatData = new VatData();
+        $vatData->name = 'VatName';
+        $vatData->percent = '10.0';
+        $productData->vat = new Vat($vatData);
         $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
         $product = Product::create($productData);
 
@@ -121,7 +127,10 @@ class ProductInputPriceServiceTest extends TestCase
     public function testGetInputPriceWithManualCalculationType()
     {
         $productData = new ProductData();
-        $productData->vat = new Vat(new VatData('VatName', '10.0'));
+        $vatData = new VatData();
+        $vatData->name = 'VatName';
+        $vatData->percent = '10.0';
+        $productData->vat = new Vat($vatData);
         $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
         $product = Product::create($productData);
 
@@ -172,7 +181,10 @@ class ProductInputPriceServiceTest extends TestCase
     public function testGetInputPriceWithAutoCalculationType()
     {
         $productData = new ProductData();
-        $productData->vat = new Vat(new VatData('VatName', '10.0'));
+        $vatData = new VatData();
+        $vatData->name = 'VatName';
+        $vatData->percent = '10.0';
+        $productData->vat = new Vat($vatData);
         $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
         $productData->price = '1000';
         $product = Product::create($productData);

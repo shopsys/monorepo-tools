@@ -5,12 +5,22 @@ namespace Shopsys\FrameworkBundle\Model\Order;
 class OrderDataMapper
 {
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Order\OrderDataFactoryInterface
+     */
+    private $orderDataFactory;
+
+    public function __construct(OrderDataFactoryInterface $orderDataFactory)
+    {
+        $this->orderDataFactory = $orderDataFactory;
+    }
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Order\FrontOrderData $frontOrderData
      * @return \Shopsys\FrameworkBundle\Model\Order\OrderData
      */
     public function getOrderDataFromFrontOrderData(FrontOrderData $frontOrderData)
     {
-        $orderData = new OrderData();
+        $orderData = $this->orderDataFactory->create();
         $orderData->transport = $frontOrderData->transport;
         $orderData->payment = $frontOrderData->payment;
         $orderData->orderNumber = $frontOrderData->orderNumber;

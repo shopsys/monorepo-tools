@@ -8,7 +8,7 @@ use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\FrameworkBundle\Model\Transport\TransportData;
-use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory;
+use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Transport\TransportFacade;
 
 class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
@@ -21,17 +21,17 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
     private $transportFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface
      */
     private $transportDataFactory;
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Transport\TransportFacade $transportFacade
-     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory $transportDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface $transportDataFactory
      */
     public function __construct(
         TransportFacade $transportFacade,
-        TransportDataFactory $transportDataFactory
+        TransportDataFactoryInterface $transportDataFactory
     ) {
         $this->transportFacade = $transportFacade;
         $this->transportDataFactory = $transportDataFactory;
@@ -42,7 +42,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
      */
     public function load(ObjectManager $manager)
     {
-        $transportData = $this->transportDataFactory->createDefault();
+        $transportData = $this->transportDataFactory->create();
         $transportData->name = [
             'cs' => 'Česká pošta - balík do ruky',
             'en' => 'Czech post',
@@ -54,7 +54,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
         $transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createTransport(self::TRANSPORT_CZECH_POST, $transportData);
 
-        $transportData = $this->transportDataFactory->createDefault();
+        $transportData = $this->transportDataFactory->create();
         $transportData->name = [
             'cs' => 'PPL',
             'en' => 'PPL',
@@ -66,7 +66,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
         $transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createTransport(self::TRANSPORT_PPL, $transportData);
 
-        $transportData = $this->transportDataFactory->createDefault();
+        $transportData = $this->transportDataFactory->create();
         $transportData->name = [
             'cs' => 'Osobní převzetí',
             'en' => 'Personal collection',

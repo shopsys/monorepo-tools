@@ -9,24 +9,8 @@ class UnitData
      */
     public $name;
 
-    /**
-     * @param array $name
-     */
-    public function __construct(array $name = [])
+    public function __construct()
     {
-        $this->name = $name;
-    }
-
-    /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Unit\Unit $unit
-     */
-    public function setFromEntity(Unit $unit)
-    {
-        $translations = $unit->getTranslations();
-        $names = [];
-        foreach ($translations as $translate) {
-            $names[$translate->getLocale()] = $translate->getName();
-        }
-        $this->name = $names;
+        $this->name = [];
     }
 }

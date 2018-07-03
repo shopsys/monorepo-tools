@@ -19,18 +19,20 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit
     private $formFactory;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityGridFactory $availabilityGridFactory
-     * @param \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
-     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityDataFactoryInterface
      */
+    private $availabilityDataFactory;
+
     public function __construct(
         AvailabilityGridFactory $availabilityGridFactory,
         AvailabilityFacade $availabilityFacade,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        AvailabilityDataFactoryInterface $availabilityDataFactory
     ) {
         parent::__construct($availabilityGridFactory);
         $this->availabilityFacade = $availabilityFacade;
         $this->formFactory = $formFactory;
+        $this->availabilityDataFactory = $availabilityDataFactory;
     }
 
     /**
@@ -59,11 +61,11 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit
      */
     public function getForm($availabilityId)
     {
-        $availabilityData = new AvailabilityData();
-
         if ($availabilityId !== null) {
             $availability = $this->availabilityFacade->getById((int)$availabilityId);
-            $availabilityData->setFromEntity($availability);
+            $availabilityData = $this->availabilityDataFactory->createFromAvailability($availability);
+        } else {
+            $availabilityData = $this->availabilityDataFactory->create();
         }
 
         return $this->formFactory->create(AvailabilityFormType::class, $availabilityData);

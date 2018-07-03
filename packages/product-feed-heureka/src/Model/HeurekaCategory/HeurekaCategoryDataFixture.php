@@ -22,32 +22,37 @@ class HeurekaCategoryDataFixture implements PluginDataFixtureInterface
     private $heurekaCategoryFacade;
 
     /**
-     * @param \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryFacade $heurekaCategoryFacade
+     * @var \Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDataFactoryInterface
      */
-    public function __construct(HeurekaCategoryFacade $heurekaCategoryFacade)
-    {
+    private $heurekaCategoryDataFactory;
+
+    public function __construct(
+        HeurekaCategoryFacade $heurekaCategoryFacade,
+        HeurekaCategoryDataFactoryInterface $heurekaCategoryDataFactory
+    ) {
         $this->heurekaCategoryFacade = $heurekaCategoryFacade;
+        $this->heurekaCategoryDataFactory = $heurekaCategoryDataFactory;
     }
 
     public function load()
     {
         $heurekaCategoriesData = [];
 
-        $firsHeurekaCategoryData = new HeurekaCategoryData();
+        $firsHeurekaCategoryData = $this->heurekaCategoryDataFactory->create();
         $firsHeurekaCategoryData->id = self::HEUREKA_CATEGORY_ID_FIRST;
         $firsHeurekaCategoryData->name = 'Autobaterie';
         $firsHeurekaCategoryData->fullName = 'Heureka.cz | Auto-moto | Autodoplňky | Autobaterie';
 
         $heurekaCategoriesData[] = $firsHeurekaCategoryData;
 
-        $secondHeurekaCategoryData = new HeurekaCategoryData();
+        $secondHeurekaCategoryData = $this->heurekaCategoryDataFactory->create();
         $secondHeurekaCategoryData->id = self::HEUREKA_CATEGORY_ID_SECOND;
         $secondHeurekaCategoryData->name = 'Bublifuky';
         $secondHeurekaCategoryData->fullName = 'Heureka.cz | Dětské zboží | Hračky | Hry na zahradu | Bublifuky';
 
         $heurekaCategoriesData[] = $secondHeurekaCategoryData;
 
-        $thirdHeurekaCategoryData = new HeurekaCategoryData();
+        $thirdHeurekaCategoryData = $this->heurekaCategoryDataFactory->create();
         $thirdHeurekaCategoryData->id = self::HEUREKA_CATEGORY_ID_THIRD;
         $thirdHeurekaCategoryData->name = 'Cukřenky';
         $thirdHeurekaCategoryData->fullName = 'Heureka.cz | Dům a zahrada | Domácnost | Kuchyně | Stolování | Cukřenky';

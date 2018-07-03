@@ -23,7 +23,7 @@ use Shopsys\FrameworkBundle\Model\Product\Listing\ProductListAdminFacade;
 use Shopsys\FrameworkBundle\Model\Product\MassAction\ProductMassActionFacade;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\AdminProductPriceCalculationFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
-use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
+use Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade;
 use Shopsys\FrameworkBundle\Twig\ProductExtension;
@@ -52,7 +52,7 @@ class ProductController extends AdminBaseController
     private $productFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactory
+     * @var \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface
      */
     private $productDataFactory;
 
@@ -106,7 +106,7 @@ class ProductController extends AdminBaseController
         ProductMassActionFacade $productMassActionFacade,
         GridFactory $gridFactory,
         ProductFacade $productFacade,
-        ProductDataFactory $productDataFactory,
+        ProductDataFactoryInterface $productDataFactory,
         AdminProductPriceCalculationFacade $adminProductPriceCalculationFacade,
         Breadcrumb $breadcrumb,
         PricingGroupFacade $pricingGroupFacade,
@@ -190,7 +190,7 @@ class ProductController extends AdminBaseController
      */
     public function newAction(Request $request)
     {
-        $productData = $this->productDataFactory->createDefault();
+        $productData = $this->productDataFactory->create();
 
         $form = $this->createForm(ProductEditFormType::class, $productData, ['product' => null]);
         $form->handleRequest($request);

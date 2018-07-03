@@ -37,7 +37,7 @@ class TransportDomainTest extends DatabaseTestCase
 
     public function testCreateTransportEnabledOnDomain()
     {
-        $transportData = $this->transportDataFactory->createDefault();
+        $transportData = $this->transportDataFactory->create();
 
         $transportData->enabled[self::FIRST_DOMAIN_ID] = true;
 
@@ -50,7 +50,7 @@ class TransportDomainTest extends DatabaseTestCase
 
     public function testCreateTransportDisabledOnDomain()
     {
-        $transportData = $this->transportDataFactory->createDefault();
+        $transportData = $this->transportDataFactory->create();
 
         $transportData->enabled[self::FIRST_DOMAIN_ID] = false;
 
@@ -63,7 +63,7 @@ class TransportDomainTest extends DatabaseTestCase
 
     public function testCreateTransportWithDifferentVisibilityOnDomains()
     {
-        $transportData = $this->transportDataFactory->createDefault();
+        $transportData = $this->transportDataFactory->create();
 
         $transportData->enabled[self::FIRST_DOMAIN_ID] = true;
         $transportData->enabled[self::SECOND_DOMAIN_ID] = false;
