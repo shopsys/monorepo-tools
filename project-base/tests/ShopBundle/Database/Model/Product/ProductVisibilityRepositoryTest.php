@@ -3,11 +3,11 @@
 namespace Tests\ShopBundle\Database\Model\Product;
 
 use DateTime;
-use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture as DemoPricingGroupDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat;
 use Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData;
@@ -75,7 +75,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $productAgain,
-            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
+            'pricingGroup' => $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
             'domainId' => 1,
         ]);
         /* @var $productVisibility1 \Shopsys\FrameworkBundle\Model\Product\ProductVisibility */
@@ -108,7 +108,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $productAgain->getId(),
-            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
+            'pricingGroup' => $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
             'domainId' => 1,
         ]);
         /* @var $productVisibility1 \Shopsys\FrameworkBundle\Model\Product\ProductVisibility */
@@ -260,7 +260,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $product,
-            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
+            'pricingGroup' => $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
             'domainId' => 1,
         ]);
         /* @var $productVisibility \Shopsys\FrameworkBundle\Model\Product\ProductVisibility */
@@ -289,7 +289,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $product,
-            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
+            'pricingGroup' => $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
             'domainId' => 1,
         ]);
         /* @var $productVisibility \Shopsys\FrameworkBundle\Model\Product\ProductVisibility */
@@ -320,7 +320,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $product,
-            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
+            'pricingGroup' => $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
             'domainId' => 1,
         ]);
         /* @var $productVisibility \Shopsys\FrameworkBundle\Model\Product\ProductVisibility */
@@ -349,7 +349,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
 
         $productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
             'product' => $product,
-            'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
+            'pricingGroup' => $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId(),
             'domainId' => 1,
         ]);
 
@@ -374,7 +374,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
             $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = 10;
         }
 
-        $pricingGroupWithZeroPriceId = $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId();
+        $pricingGroupWithZeroPriceId = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId();
 
         $productData->manualInputPricesByPricingGroupId[$pricingGroupWithZeroPriceId] = 0;
 
@@ -415,7 +415,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
             $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = 10;
         }
 
-        $pricingGroupWithNullPriceId = $this->getReference(DemoPricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId();
+        $pricingGroupWithNullPriceId = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1)->getId();
         $productData->manualInputPricesByPricingGroupId[$pricingGroupWithNullPriceId] = null;
 
         $product = $productFacade->create($productData);

@@ -2,14 +2,12 @@
 
 namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Base\SettingValueDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade;
 
-class BrandDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+class BrandDataFixture extends AbstractReferenceFixture
 {
     const BRAND_APPLE = 'brand_apple';
     const BRAND_CANON = 'brand_canon';
@@ -101,16 +99,6 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
             self::BRAND_OLYMPUS => 'Olympus',
             self::BRAND_HYUNDAI => 'Hyundai',
             self::BRAND_NIKON => 'Nikon',
-        ];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDependencies()
-    {
-        return [
-            SettingValueDataFixture::class,
         ];
     }
 }

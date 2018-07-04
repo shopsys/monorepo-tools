@@ -2,17 +2,15 @@
 
 namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\DataFixtures\Base\SettingValueDataFixture;
 use Shopsys\FrameworkBundle\Model\Article\Article;
 use Shopsys\FrameworkBundle\Model\Article\ArticleData;
 use Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
 
-class ArticleDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+class ArticleDataFixture extends AbstractReferenceFixture
 {
     const ARTICLE_TERMS_AND_CONDITIONS_1 = 'article_terms_and_conditions_1';
     const ARTICLE_PRIVACY_POLICY_1 = 'article_privacy_policy_1';
@@ -84,12 +82,5 @@ class ArticleDataFixture extends AbstractReferenceFixture implements DependentFi
         if ($referenceName !== null) {
             $this->addReference($referenceName, $article);
         }
-    }
-
-    public function getDependencies()
-    {
-        return [
-            SettingValueDataFixture::class,
-        ];
     }
 }

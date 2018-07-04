@@ -2,9 +2,9 @@
 
 namespace Tests\ShopBundle\Database\Model\Product;
 
-use Shopsys\FrameworkBundle\DataFixtures\Base\FlagDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\BrandDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CategoryDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\FlagDataFixture;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ParameterFilterData;
 use Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData;

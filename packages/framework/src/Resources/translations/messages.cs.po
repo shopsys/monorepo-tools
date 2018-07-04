@@ -31,8 +31,23 @@ msgstr "-- Vyberte dostupnost --"
 msgid "-- Choose brand --"
 msgstr "-- Vyberte značku --"
 
+msgid "-- Choose unit --"
+msgstr "-- Vyberte jednotku --"
+
+msgid "<a href=\"{{ url }}\">Default product in stock availability is not set.</a>"
+msgstr "<a href=\"{{ url }}\">Není nastavena výchozí dostupnost pro produkty skladem.</a>"
+
+msgid "<a href=\"{{ url }}\">Default unit is not set.</a>"
+msgstr "<a href=\"{{ url }}\">Není nastavena výchozí jednotka.</a>"
+
 msgid "<a href=\"{{ url }}\">Some required e-mail templates are not fully set.</a>"
 msgstr "<a href=\"{{ url }}\">Některé povinné emailové šablony nejsou vyplněny.</a>"
+
+msgid "<a href=\"{{ url }}\">There are no availabilities, you need to create some.</a>"
+msgstr "<a href=\"{{ url }}\">Neexistují žádné dostupnosti, musíte nějakou vytvořit.</a>"
+
+msgid "<a href=\"{{ url }}\">There are no units, you need to create some.</a>"
+msgstr "<a href=\"{{ url }}\">Neexistují žádné jednotky, musíte nějakou vytvořit.</a>"
 
 msgid "ATTENTION - inserting scripts on the page can seriously endanger the security, performance or design of the app."
 msgstr "POZOR - vkládání skriptů na stránky může vážně ohrozit bezpečnost, výkonnost nebo vzhled aplikace!"

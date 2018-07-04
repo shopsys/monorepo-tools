@@ -2,8 +2,8 @@
 
 namespace Tests\ShopBundle\Database\Model\Unit;
 
-use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\ProductDataFactory;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitData;

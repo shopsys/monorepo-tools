@@ -17,7 +17,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 /**
  * The class is copy-pasted from LoadDataFixturesDoctrineCommand from DoctrineFixutresBundle and adds the --fixtures
  * option that enables loading data fixtures from specified directories. We need it for our phing targets
- * (eg. test-db-fixtures-base-settings). The option is not supported in the original command in the new version of the bundle anymore.
+ * (eg. db-fixtures-demo-multidomain). The option is not supported in the original command in the new version of the bundle anymore.
  * Extending the original class is not possible because it requires final class \Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader
  * in constructor which can not be extended.
  * @see \Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand

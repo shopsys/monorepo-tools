@@ -572,17 +572,6 @@
         </exec>
     </target>
 
-    <target name="test-db-fixtures-base-settings" description="Loads base data fixtures into test DB.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="--env=test" />
-            <arg value="shopsys:fixtures:load" />
-            <arg value="--fixtures=${path.framework}/src/DataFixtures/Base" />
-            <arg value="--append" />
-            <arg value="--no-interaction" />
-        </exec>
-    </target>
-
     <target name="test-db-fixtures-demo-multidomain" description="Loads multidomain demo data fixtures excluding first domain into test DB.">
         <if>
             <istrue value="${is-multidomain}" />
@@ -612,7 +601,6 @@
             <arg value="${path.bin-console}" />
             <arg value="--env=test" />
             <arg value="shopsys:fixtures:load" />
-            <arg value="--fixtures=${path.framework}/src/DataFixtures/Base" />
             <arg value="--fixtures=${path.framework}/src/DataFixtures/Demo" />
             <arg value="--append" />
             <arg value="--no-interaction" />

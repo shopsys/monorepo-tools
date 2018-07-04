@@ -3,7 +3,7 @@
 namespace Tests\ShopBundle\Database\Model\Pricing\Group;
 
 use ReflectionClass;
-use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactory;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;

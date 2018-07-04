@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\DataFixtures\Base;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;

@@ -30,7 +30,6 @@ parameters:
 
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
           - '*/tests/*'
-          - '*/src/DataFixtures/Base/CategoryRootDataFixture.php'
           - '*/src/DataFixtures/Demo/ArticleDataFixture.php'
           - '*/src/DataFixtures/Demo/CategoryDataFixture.php'
           - '*/src/DataFixtures/Demo/PaymentDataFixture.php'

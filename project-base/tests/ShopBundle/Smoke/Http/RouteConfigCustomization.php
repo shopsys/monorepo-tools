@@ -5,13 +5,12 @@ namespace Tests\ShopBundle\Smoke\Http;
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\Security\RouteCsrfProtector;
-use Shopsys\FrameworkBundle\DataFixtures\Base\PricingGroupDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\OrderDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\PersonalDataAccessRequestDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\PricingGroupDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\UserDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\HttpSmokeTesting\Auth\BasicHttpAuth;
 use Shopsys\HttpSmokeTesting\Auth\NoAuth;
 use Shopsys\HttpSmokeTesting\RequestDataSet;
@@ -214,9 +213,9 @@ class RouteConfigCustomization
                     ->setParameter('id', 75);
             })
             ->customizeByRouteName('admin_unit_delete', function (RouteConfig $config) {
-                $unit = $this->getPersistentReference(BaseUnitDataFixture::UNIT_PIECES);
+                $unit = $this->getPersistentReference(UnitDataFixture::UNIT_PIECES);
                 /* @var $unit \Shopsys\FrameworkBundle\Model\Product\Unit\Unit */
-                $newUnit = $this->getPersistentReference(DemoUnitDataFixture::UNIT_CUBIC_METERS);
+                $newUnit = $this->getPersistentReference(UnitDataFixture::UNIT_CUBIC_METERS);
                 /* @var $newUnit \Shopsys\FrameworkBundle\Model\Product\Unit\Unit */
 
                 $debugNote = sprintf('Delete unit "%s" and replace it by "%s".', $unit->getName('en'), $newUnit->getName('en'));

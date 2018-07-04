@@ -31,7 +31,22 @@ msgstr ""
 msgid "-- Choose brand --"
 msgstr ""
 
+msgid "-- Choose unit --"
+msgstr ""
+
+msgid "<a href=\"{{ url }}\">Default product in stock availability is not set.</a>"
+msgstr ""
+
+msgid "<a href=\"{{ url }}\">Default unit is not set.</a>"
+msgstr ""
+
 msgid "<a href=\"{{ url }}\">Some required e-mail templates are not fully set.</a>"
+msgstr ""
+
+msgid "<a href=\"{{ url }}\">There are no availabilities, you need to create some.</a>"
+msgstr ""
+
+msgid "<a href=\"{{ url }}\">There are no units, you need to create some.</a>"
 msgstr ""
 
 msgid "ATTENTION - inserting scripts on the page can seriously endanger the security, performance or design of the app."

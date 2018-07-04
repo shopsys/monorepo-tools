@@ -3,9 +3,9 @@
 namespace Tests\ShopBundle\Database\Model\Order;
 
 use Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade;
-use Shopsys\FrameworkBundle\DataFixtures\Base\CurrencyDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Base\OrderStatusDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\CountryDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\CurrencyDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\OrderStatusDataFixture;
 use Shopsys\FrameworkBundle\Model\Cart\CartFacade;
 use Shopsys\FrameworkBundle\Model\Cart\CartService;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier;

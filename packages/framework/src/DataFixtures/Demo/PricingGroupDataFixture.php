@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopsys\FrameworkBundle\DataFixtures\Base;
+namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
@@ -35,11 +35,15 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
 
     public function load(ObjectManager $manager)
     {
+        /**
+         * The pricing group is created with specific ID in database migration.
+         * @see \Shopsys\FrameworkBundle\Migrations\Version20180603135346
+         */
+        $defaultPricingGroup = $this->pricingGroupFacade->getById(1);
+        /** @var $defaultPricingGroup \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup */
+        $this->addReference(self::PRICING_GROUP_ORDINARY_DOMAIN_1, $defaultPricingGroup);
+
         $pricingGroupData = $this->pricingGroupDataFactory->create();
-
-        $pricingGroupData->name = 'Ordinary customer';
-        $this->createPricingGroup($pricingGroupData, self::PRICING_GROUP_ORDINARY_DOMAIN_1);
-
         $pricingGroupData->name = 'Partner';
         $this->createPricingGroup($pricingGroupData, self::PRICING_GROUP_PARTNER_DOMAIN_1);
 

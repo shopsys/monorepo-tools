@@ -2,9 +2,9 @@
 
 namespace Tests\ShopBundle\Smoke;
 
-use Shopsys\FrameworkBundle\DataFixtures\Base\AvailabilityDataFixture;
-use Shopsys\FrameworkBundle\DataFixtures\Base\VatDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\AvailabilityDataFixture;
 use Shopsys\FrameworkBundle\DataFixtures\Demo\UnitDataFixture;
+use Shopsys\FrameworkBundle\DataFixtures\Demo\VatDataFixture;
 use Shopsys\FrameworkBundle\Form\Admin\Product\ProductEditFormType;
 use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\Security\Csrf\CsrfToken;

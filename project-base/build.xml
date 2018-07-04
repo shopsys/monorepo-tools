@@ -57,7 +57,7 @@
     <target name="build-new" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-rebuild,grunt,error-pages-generate,warmup" description="Builds application for production preserving your DB."/>
     <target name="build-demo" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-demo,grunt,error-pages-generate,warmup" description="Builds application for production with clean DB."/>
     <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,db-fixtures-demo-singledomain,create-domains-data,db-fixtures-demo-multidomain,load-plugin-demo-data,generate-friendly-urls,replace-domains-urls" description="Builds application for production with clean demo DB."/>
-    <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,db-fixtures-base-settings,create-domains-data,generate-friendly-urls,replace-domains-urls" description="Drops all data in database and creates a new one with base data only."/>
+    <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls" description="Drops all data in database and creates a new one with base data only."/>
 
     <target name="assets" description="Installs web assets from external bundles into a public web directory.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
@@ -154,16 +154,6 @@
         </exec>
     </target>
 
-    <target name="db-fixtures-base-settings" description="Loads base data fixtures.">
-        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-            <arg value="${path.bin-console}" />
-            <arg value="shopsys:fixtures:load" />
-            <arg value="--fixtures=${path.framework}/src/DataFixtures/Base" />
-            <arg value="--append" />
-            <arg value="--no-interaction" />
-        </exec>
-    </target>
-
     <target name="db-fixtures-demo-multidomain" description="Loads multidomain demo data fixtures excluding first domain.">
         <if>
             <istrue value="${is-multidomain}" />
@@ -186,11 +176,10 @@
         </if>
     </target>
 
-    <target name="db-fixtures-demo-singledomain" description="Loads base and demo data fixtures for the first domain.">
+    <target name="db-fixtures-demo-singledomain" description="Loads demo data fixtures for the first domain.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
             <arg value="shopsys:fixtures:load" />
-            <arg value="--fixtures=${path.framework}/src/DataFixtures/Base" />
             <arg value="--fixtures=${path.framework}/src/DataFixtures/Demo" />
             <arg value="--append" />
             <arg value="--no-interaction" />

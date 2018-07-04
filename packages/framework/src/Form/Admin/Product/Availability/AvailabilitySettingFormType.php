@@ -30,6 +30,7 @@ class AvailabilitySettingFormType extends AbstractType
     {
         $builder
             ->add('defaultInStockAvailability', ChoiceType::class, [
+                'placeholder' => t('-- Choose availability --'),
                 'required' => true,
                 'choices' => $this->availabilityFacade->getAll(),
                 'choice_label' => 'name',

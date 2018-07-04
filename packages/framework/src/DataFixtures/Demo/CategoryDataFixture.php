@@ -2,16 +2,14 @@
 
 namespace Shopsys\FrameworkBundle\DataFixtures\Demo;
 
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\FrameworkBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
-use Shopsys\FrameworkBundle\DataFixtures\Base\CategoryRootDataFixture;
 use Shopsys\FrameworkBundle\Model\Category\CategoryData;
 use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 
-class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+class CategoryDataFixture extends AbstractReferenceFixture
 {
     const CATEGORY_ELECTRONICS = 'category_electronics';
     const CATEGORY_TV = 'category_tv';
@@ -48,6 +46,11 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
      */
     public function load(ObjectManager $manager)
     {
+        /**
+         * Root category is created in database migration.
+         * @see \Shopsys\FrameworkBundle\Migrations\Version20180603135345
+         */
+        $rootCategory = $this->categoryFacade->getRootCategory();
         $categoryData = $this->categoryDataFactory->create();
 
         $categoryData->name = [
@@ -59,7 +62,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
                 . 'video games, remote control cars, etc.), communications (telephones, cell phones, e-mail-capable laptops, etc.) '
                 . 'and home office activities (e.g., desktop computers, printers, paper shredders, etc.).',
         ];
-        $categoryData->parent = $this->getReference(CategoryRootDataFixture::CATEGORY_ROOT);
+        $categoryData->parent = $rootCategory;
         $this->createCategory($categoryData, self::CATEGORY_ELECTRONICS);
 
         $categoryData->name = [
@@ -140,7 +143,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
                 . 'is a page. A set of text-filled or illustrated pages produced in electronic format is known as an electronic book, '
                 . 'or e-book.',
         ];
-        $categoryData->parent = $this->getReference(CategoryRootDataFixture::CATEGORY_ROOT);
+        $categoryData->parent = $rootCategory;
         $this->createCategory($categoryData, self::CATEGORY_BOOKS);
 
         $categoryData->name = [
@@ -190,15 +193,5 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
         }
 
         return $category;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDependencies()
-    {
-        return [
-            CategoryRootDataFixture::class,
-        ];
     }
 }
