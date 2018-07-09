@@ -45,9 +45,7 @@ have modified behaviour in such a way that their actions are launched over all m
 * **composer.json** - contains the dependencies required by individual packages and by Shopsys Framework.
 It is not generated automatically, so each change made in the `composer.json` of the specific package must be reflected
 also in `composer.json` in the root of monorepo. In monorepo, Shopsys packages are used directly from the directory
-`packages/`, so there are no requirements of those packages in `composer.json`. The exception is the coding-standards
-package that continues to be installed in the vendor because the current master version of the package in
-`packages/` is not supported by Shopsys Framework.
+`packages/`, so there are no requirements of those packages in `composer.json`.
 
 * **parameters_monorepo.yml** - overriding of global variables of Shopsys Framework, which makes it possible to run 
 Shopsys Framework in monorepo
