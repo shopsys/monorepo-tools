@@ -76,6 +76,21 @@ Other branches are not pushed.
 
 It may again take a while, depending on the size of your monorepo.
 
+### Add a new package into the monorepo
+
+When you have the monorepo, you may find a reason for adding a new package after some time you already use the monorepo.
+In this case, don't use `monorepo_build.sh`, but do following steps:
+
+* Create a new repository, for example, *vendor/gamma*
+* Add remote into the monorepo `git remote add package-gamma http://github.com/vendor/gamma.git`
+* Create a new directory in the monorepo **packages/gamma**
+* Add the code and commit it
+* Use split tool with the new package
+    ```
+    ~/monorepo-tools/monorepo_split.sh \
+        main-repository package-alpha:packages/alpha package-beta:packages/beta package-gamma:packages/gamma
+    ```
+
 ## Reference
 
 This is just a short description and usage of all the tools in the package.
@@ -122,6 +137,18 @@ Usage: `original_refs_wipe.sh`
 Delete all local branches and create all non-remote-tracking branches of a specified remote.
 
 Usage: `load_branches_from_remote.sh <remote-name>`
+
+### [tag_refs_backup.sh](./tag_refs_backup.sh)
+
+Backup tag refs into `refs/original-tags/`
+
+Usage: `tag_refs_backup.sh`
+
+### [tag_refs_move_to_original.sh](./tag_refs_move_to_original.sh)
+
+Move tag refs from `refs/original-tags/` into `refs/original/`
+
+Usage: `tag_refs_move_to_original.sh`
 
 ## Contributing
 Thank you for your contributions to Shopsys Monorepo Tools package.
