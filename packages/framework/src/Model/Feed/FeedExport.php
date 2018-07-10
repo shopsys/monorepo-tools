@@ -154,7 +154,12 @@ class FeedExport
     protected function finishFile(): void
     {
         $this->writeBufferToFile();
+
+        if ($this->filesystem->has($this->feedFilepath)) {
+            $this->filesystem->delete($this->feedFilepath);
+        }
         $this->filesystem->rename($this->getTemporaryFilepath(), $this->feedFilepath);
+
         $this->finished = true;
     }
 
