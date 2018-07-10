@@ -39,6 +39,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - all Base Data Fixtures were removed
     - the data are created either in database migrations or in Demo Data Fixtures
 
+### [shopsys/monorepo-tools]
+#### Fixed
+- [#281 - monorepo-tools: Fix scripts to work on OS X](https://github.com/shopsys/shopsys/pull/282) [@lukaso]
+
 ### [shopsys/product-feed-google]
 #### Changed
 - [#286 - Instantiate entity data objects by factories](https://github.com/shopsys/shopsys/pull/286)
@@ -118,8 +122,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - `PaymentDomain` and `TransportDomain` are now created even for domains on which the entity should not be visible (to allow for other multi-domain entities and in the sake of consistency)
 
 #### Fixed
-- [#281 - monorepo-tools: Fix scripts to work on OS X](https://github.com/shopsys/shopsys/pull/282) [@lukaso]
-    - monorepo-tools: fixes non-portable use of tab to function on OS X
 - [#246 - docker-sync.yml.dist: fixed not existing relative paths](https://github.com/shopsys/shopsys/pull/246) [@DavidKuna]
 - [#132 - Admin: brand edit page: URLs setting rendering](https://github.com/shopsys/shopsys/pull/132):
     - admin: brand detail page: rendering of URLs setting
