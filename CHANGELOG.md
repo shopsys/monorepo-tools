@@ -49,6 +49,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - cron modules use the logger for debug information
   - DailyFeedCronModule is responsible for continuation of the correct feed after waking up
 
+#### Fixed
+- [#291 - Unnecessary SQL queries on category detail in admin](https://github.com/shopsys/shopsys/pull/304):
+    - category translations for ancestor category are loaded in the same query as categories
+
 ### [shopsys/shopsys]
 #### Changed
 - [#296 - normalize phing target "timezones-check"](https://github.com/shopsys/shopsys/pull/296): [@pk16011990]
@@ -90,11 +94,6 @@ It was only important with [the original open-box architecture](https://blog.sho
     - creation of entity data objects moved to factories to allow extensibility
 - [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271)
     - for details see section shopsys/framework
-
-### [shopsys/framework]
-#### Fixed
-- [#291 - Unnecessary SQL queries on category detail in admin](https://github.com/shopsys/shopsys/pull/304):
-    - category translations for ancestor category are loaded in the same query as categories
 
 ## [7.0.0-alpha3] - 2018-07-03
 ### [shopsys/framework]
