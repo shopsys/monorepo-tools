@@ -4,6 +4,9 @@ services:
     autoconfigure: true
     public: false
 
-  Shopsys\ProductFeed\HeurekaDeliveryBundle\HeurekaDeliveryFeedConfig:
+  Shopsys\ProductFeed\HeurekaDeliveryBundle\:
+    resource: '../../*'
+
+  Shopsys\ProductFeed\HeurekaDeliveryBundle\HeurekaDeliveryFeed:
     tags:
-      - { name: shopsys.product_feed, type: delivery }
+      - { name: shopsys.product_feed, type: hourly }

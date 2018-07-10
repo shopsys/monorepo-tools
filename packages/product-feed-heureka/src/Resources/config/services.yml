@@ -7,25 +7,22 @@ services:
   Shopsys\ProductFeed\HeurekaBundle\:
     resource: '../../*'
 
-  Shopsys\ProductFeed\HeurekaBundle\HeurekaFeedConfig:
+  Shopsys\ProductFeed\HeurekaBundle\DataFixtures\:
+    resource: '../../DataFixtures/*'
+    tags:
+      - { name: shopsys.data_fixture }
+
+  Shopsys\ProductFeed\HeurekaBundle\HeurekaFeed:
     tags:
       - { name: shopsys.product_feed }
 
-  Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductCrudExtension:
+  Shopsys\ProductFeed\HeurekaBundle\Form\HeurekaProductCrudExtension:
     tags:
       - { name: shopsys.crud_extension, type: product }
 
-  Shopsys\ProductFeed\HeurekaBundle\Model\Product\HeurekaProductDataFixture:
-    tags:
-      - { name: shopsys.data_fixture }
-
-  Shopsys\ProductFeed\HeurekaBundle\Model\Category\CategoryCrudExtension:
+  Shopsys\ProductFeed\HeurekaBundle\Form\CategoryCrudExtension:
     tags:
       - { name: shopsys.crud_extension, type: category }
-
-  Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDataFixture:
-    tags:
-      - { name: shopsys.data_fixture }
 
   Shopsys\ProductFeed\HeurekaBundle\Model\HeurekaCategory\HeurekaCategoryDownloader:
     arguments:

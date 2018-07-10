@@ -50,30 +50,4 @@ class GoogleProductDomainRepository
         return $queryBuilder->getQuery()
             ->getOneOrNullResult();
     }
-
-    /**
-     * @param array $productsIds
-     * @param int $domainId
-     * @return \Shopsys\ProductFeed\GoogleBundle\Model\Product\GoogleProductDomain[]
-     */
-    public function getGoogleProductDomainsByProductsIdsDomainIdIndexedByProductId($productsIds, $domainId)
-    {
-        $queryBuilder = $this->em->createQueryBuilder()
-            ->select('p')
-            ->from(GoogleProductDomain::class, 'p')
-            ->where('p.domainId = :domainId')
-            ->andWhere('p.product IN (:productIds)')
-            ->setParameter('productIds', $productsIds)
-            ->setParameter('domainId', $domainId);
-
-        $result = $queryBuilder->getQuery()->execute();
-
-        $indexedResult = [];
-        foreach ($result as $googleProductDomain) {
-            $productId = $googleProductDomain->getProduct()->getId();
-            $indexedResult[$productId] = $googleProductDomain;
-        }
-
-        return $indexedResult;
-    }
 }

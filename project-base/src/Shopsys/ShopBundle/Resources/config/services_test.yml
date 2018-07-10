@@ -16,6 +16,8 @@ services:
     arguments:
       - "%shopsys.entity_extension.map%"
 
+  Symfony\Component\Filesystem\Filesystem: ~
+
   joschi127_doctrine_entity_override.event_subscriber.load_orm_metadata:
     class: Tests\ShopBundle\Database\EntityExtension\OverwritableLoadORMMetadataSubscriber
     arguments:
@@ -23,3 +25,5 @@ services:
       - "%shopsys.entity_extension.map%"
     tags:
       - { name: doctrine.event_subscriber, priority: -10 }
+
+  League\Flysystem\FilesystemInterface: '@main_filesystem'

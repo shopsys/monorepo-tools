@@ -35,11 +35,11 @@ services:
     tags:
       - { name: shopsys.cron, hours: '*', minutes: '*' }
 
-  Shopsys\FrameworkBundle\Model\Feed\FeedCronModule:
+  Shopsys\FrameworkBundle\Model\Feed\DailyFeedCronModule:
     tags:
       - { name: shopsys.cron, hours: '*/6', minutes: '0' }
 
-  Shopsys\FrameworkBundle\Model\Feed\DeliveryFeedCronModule:
+  Shopsys\FrameworkBundle\Model\Feed\HourlyFeedCronModule:
     tags:
       - { name: shopsys.cron, hours: '*', minutes: '10' }
 

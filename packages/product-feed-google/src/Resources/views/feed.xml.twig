@@ -7,32 +7,22 @@
 {% block item %}
     <item>
         <g:id>{{ item.id }}</g:id>
-        <title>{{ item.productName }}</title>
+        <title>{{ item.title }}</title>
         <g:description>{{ item.description|striptags|replace({"\n": ' '})|trim }}</g:description>
-        <link>{{ item.url }}</link>
-        {% if item.imgUrl is not null -%}
-            <g:image_link>{{ item.imgUrl }}</g:image_link>
+        <link>{{ item.link }}</link>
+        {% if item.imageLink is not null -%}
+            <g:image_link>{{ item.imageLink }}</g:image_link>
         {% endif -%}
-        <g:availability>
-            {%- if item.sellingDenied -%}
-                out of stock
-            {%- else -%}
-                in stock
-            {%- endif -%}
-        </g:availability>
-        <g:price>{{ item.priceVat|number_format(2, '.', '') }} {{ item.currencyCode }}</g:price>
-        {%  if item.manufacturer is not null -%}
-            <g:brand>{{ item.manufacturer }}</g:brand>
+        <g:availability>{{ item.availability }}</g:availability>
+        <g:price>{{ item.price.priceWithVat|number_format(2, '.', '') }} {{ item.currency.code }}</g:price>
+        {%  if item.brand is not null -%}
+            <g:brand>{{ item.brand }}</g:brand>
         {% endif -%}
-        {% if item.ean is not null -%}
-            <g:gtin>{{ item.ean }}</g:gtin>
-        {% endif -%}
-        {% if item.partno is not null -%}
-            <g:mpn>{{ item.partno }}</g:mpn>
-        {% endif -%}
-        {% if item.ean is null and item.partno is null -%}
+        {% for type, value in item.identifiers %}
+            <g:{{ type }}>{{ value }}</g:{{ type }}>
+        {% else %}
             <g:identifier_exists>no</g:identifier_exists>
-        {% endif -%}
+        {% endfor %}
         <g:adult>no</g:adult>
         <g:condition>new</g:condition>
     </item>

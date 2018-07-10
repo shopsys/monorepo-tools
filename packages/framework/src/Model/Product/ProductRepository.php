@@ -154,7 +154,7 @@ class ProductRepository
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param int $domainId
      */
-    protected function addDomain(QueryBuilder $queryBuilder, $domainId)
+    public function addDomain(QueryBuilder $queryBuilder, $domainId)
     {
         $queryBuilder->addSelect('pd')
             ->join('p.domains', 'pd', Join::WITH, 'pd.domainId = :domainId');

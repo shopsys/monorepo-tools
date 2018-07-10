@@ -2,9 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Domain\Config;
 
-use Shopsys\ProductFeed\DomainConfigInterface;
-
-class DomainConfig implements DomainConfigInterface
+class DomainConfig
 {
     const STYLES_DIRECTORY_DEFAULT = 'common';
 

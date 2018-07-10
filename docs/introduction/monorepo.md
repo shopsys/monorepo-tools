@@ -26,7 +26,6 @@ after some changes are made in monorepo. This splitting is initiated automatical
 * [shopsys/product-feed-google](https://github.com/shopsys/product-feed-google)
 * [shopsys/product-feed-heureka](https://github.com/shopsys/product-feed-heureka)
 * [shopsys/product-feed-heureka-delivery](https://github.com/shopsys/product-feed-heureka-delivery)
-* [shopsys/product-feed-interface](https://github.com/shopsys/product-feed-interface)
 * [shopsys/plugin-interface](https://github.com/shopsys/plugin-interface)
 * [shopsys/coding-standards](https://github.com/shopsys/coding-standards)
 * [shopsys/http-smoke-testing](https://github.com/shopsys/http-smoke-testing)

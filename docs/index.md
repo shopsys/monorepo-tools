@@ -11,6 +11,7 @@
 * [Database Migrations](./introduction/database-migrations.md)
 * [Components](./introduction/components.md)
 * [Abstract Filesystem](./introduction/abstract-filesystem.md)
+* [Product Feeds](./introduction/product-feeds.md)
 
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)

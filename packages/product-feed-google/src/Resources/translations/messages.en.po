@@ -7,8 +7,8 @@ msgstr ""
 msgid "Google Shopping product feed"
 msgstr "Google Shopping product feed"
 
-msgid "Google Shopping product feed is not optimized for selling to Australia, Czechia, France, Germany, Italy, Netherlands, Spain, Switzerland, the UK, and the US. It is caused by missing 'shipping' atribute."
-msgstr "Google Shopping product feed is not optimized for selling to Australia, Czechia, France, Germany, Italy, Netherlands, Spain, Switzerland, the UK, and the US. It is caused by missing 'shipping' atribute."
+msgid "Google Shopping product feed is not optimized for selling to Australia, Czechia, France, Germany, Italy, Netherlands, Spain, Switzerland, the UK, and the US. It is caused by missing 'shipping' attribute."
+msgstr "Google Shopping product feed is not optimized for selling to Australia, Czechia, France, Germany, Italy, Netherlands, Spain, Switzerland, the UK, and the US. It is caused by missing 'shipping' attribute."
 
 msgid "Show in feed"
 msgstr "Show in feed"

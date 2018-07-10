@@ -7,11 +7,11 @@ services:
   Shopsys\ProductFeed\GoogleBundle\:
     resource: '../../*'
 
-  Shopsys\ProductFeed\GoogleBundle\GoogleFeedConfig:
+  Shopsys\ProductFeed\GoogleBundle\GoogleFeed:
     tags:
       - { name: shopsys.product_feed }
 
-  Shopsys\ProductFeed\GoogleBundle\GoogleProductCrudExtension:
+  Shopsys\ProductFeed\GoogleBundle\Form\GoogleProductCrudExtension:
     tags:
       - { name: shopsys.crud_extension, type: product }
 

@@ -7,7 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Grid\ArrayDataSource;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
-use Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade;
 use Shopsys\FrameworkBundle\Model\Feed\FeedFacade;
 use Shopsys\FrameworkBundle\Model\Security\Roles;
 
@@ -24,23 +23,16 @@ class FeedController extends AdminBaseController
     private $feedFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Feed\FeedConfigFacade
-     */
-    private $feedConfigFacade;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\GridFactory
      */
     private $gridFactory;
 
     public function __construct(
         FeedFacade $feedFacade,
-        FeedConfigFacade $feedConfigFacade,
         GridFactory $gridFactory,
         Domain $domain
     ) {
         $this->feedFacade = $feedFacade;
-        $this->feedConfigFacade = $feedConfigFacade;
         $this->gridFactory = $gridFactory;
         $this->domain = $domain;
     }
@@ -52,18 +44,18 @@ class FeedController extends AdminBaseController
      */
     public function generateAction($feedName, $domainId)
     {
-        try {
-            $feedConfig = $this->feedConfigFacade->getFeedConfigByName($feedName);
-            $domainConfig = $this->domain->getDomainConfigById((int)$domainId);
+        $domainConfig = $this->domain->getDomainConfigById((int)$domainId);
 
-            $this->feedFacade->generateFeed($feedConfig, $domainConfig);
+        try {
+            $this->feedFacade->generateFeed($feedName, $domainConfig);
+
             $this->getFlashMessageSender()->addSuccessFlashTwig(
                 t('Feed "{{ feedName }}" successfully generated.'),
                 [
                     'feedName' => $feedName,
                 ]
             );
-        } catch (\Shopsys\FrameworkBundle\Model\Feed\Exception\FeedConfigNotFoundException $ex) {
+        } catch (\Shopsys\FrameworkBundle\Model\Feed\Exception\FeedNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlashTwig(
                 t('Feed "{{ feedName }}" not found.'),
                 [
@@ -80,25 +72,25 @@ class FeedController extends AdminBaseController
      */
     public function listAction()
     {
-        $feeds = [];
+        $feedsData = [];
 
-        $feedConfigs = $this->feedConfigFacade->getAllFeedConfigs();
-        foreach ($feedConfigs as $feedConfig) {
+        $feedsInfo = $this->feedFacade->getFeedsInfo();
+        foreach ($feedsInfo as $feedInfo) {
             foreach ($this->domain->getAll() as $domainConfig) {
-                $filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
-                $feeds[] = [
-                    'feedLabel' => $feedConfig->getLabel(),
-                    'feedName' => $feedConfig->getFeedName(),
+                $filepath = $this->feedFacade->getFeedFilepath($feedInfo, $domainConfig);
+                $feedsData[] = [
+                    'feedLabel' => $feedInfo->getLabel(),
+                    'feedName' => $feedInfo->getName(),
                     'domainConfig' => $domainConfig,
-                    'url' => $this->feedConfigFacade->getFeedUrl($feedConfig, $domainConfig),
+                    'url' => $this->feedFacade->getFeedUrl($feedInfo, $domainConfig),
                     'created' => file_exists($filepath) ? new DateTime('@' . filemtime($filepath)) : null,
                     'actions' => null,
-                    'additionalInformation' => $feedConfig->getAdditionalInformation(),
+                    'additionalInformation' => $feedInfo->getAdditionalInformation(),
                 ];
             }
         }
 
-        $dataSource = new ArrayDataSource($feeds, 'label');
+        $dataSource = new ArrayDataSource($feedsData, 'label');
 
         $grid = $this->gridFactory->create('feedsList', $dataSource);
 
