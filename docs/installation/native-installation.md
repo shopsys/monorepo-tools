@@ -36,7 +36,21 @@ cd project-base
 - *The `--keep-vcs` option initializes GIT repository in your project folder that is needed for diff commands of the application build and keeps the GIT history of `shopsys/project-base`.*
 - *The `--stability=alpha` option enables you to install the project from the last alpha release. Default value for the option is `stable` but there is no stable release yet.*
 
-### 2. Install dependencies and configure parameters
+### 2. Set up configuration for native installation
+Monolog is configured to log into streams in `app/config/config.yml`.
+If you want to log into a file change the configuration of handlers like this:
+```yaml
+monolog:
+  # ...
+  handlers:
+    # ...
+    cron:
+      type: rotating_file
+      max_files: 7
+      path: "%kernel.logs_dir%/%kernel.environment%.cron.log"
+```
+
+### 3. Install dependencies and configure parameters
 Composer will prompt you to set main parameters (`app/config/parameters.yml`):
 
 | Name                              | Description                                                                   | Default value |
@@ -80,7 +94,7 @@ For development choose `n` when asked `Build in production environment? (Y/n)`.
 
 It will set the environment in your application to `dev` (this will, for example, show Symfony Web Debug Toolbar).
 
-### 3. Configure domains
+### 4. Configure domains
 Create `domains_urls.yml` from `domains_urls.yml.dist`.
 
 #### Linux / MacOS
@@ -93,12 +107,12 @@ cp app/config/domains_urls.yml.dist app/config/domains_urls.yml
 copy app\config\domains_urls.yml.dist app\config\domains_urls.yml
 ```
 
-### 4. Create databases
+### 5. Create databases
 ```
 php phing db-create
 php phing test-db-create
 ```
-### 5. Build application
+### 6. Build application
 ```
 php phing build-demo-dev
 php phing img-demo
@@ -107,13 +121,13 @@ php phing img-demo
 
 *Tip: See introduction into [Phing Targets](../introduction/phing-targets.md) to learn how can you easily accomplish some common tasks.*
 
-### 6. Run integrated HTTP server
+### 7. Run integrated HTTP server
 ```
 php bin/console server:run
 ```
 *Note: If you did not use default domain URLs in step 4 you should run `php bin/console server:run <your-domain-address>`.*
 
-### 7. See it in your browser!
+### 8. See it in your browser!
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see running application.
 
 You can also login into the administration section on [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) with default credentials:

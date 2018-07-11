@@ -56,6 +56,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - admin menu is now implemented using the KnpMenuBundle as a part of [#335 - Possibility to add a new administration page](https://github.com/shopsys/shopsys/pull/335)
     - old implementation using the `admin_menu.yml` configuration along with `AdminMenuYamlFileExtractor` was removed
     - class `Breadcrumb` was renamed to `BreadcrumbOverrider` and its scope was reduced
+- [#313 - Streamed logging](https://github.com/shopsys/shopsys/pull/313)
+    - monolog logs into streams instead of files (use `docker-compose logs` to access it)
+    - see details in the [Logging](/docs/introduction/logging.md) article
 
 #### Fixed
 - [#291 - Unnecessary SQL queries on category detail in admin](https://github.com/shopsys/shopsys/pull/304):
