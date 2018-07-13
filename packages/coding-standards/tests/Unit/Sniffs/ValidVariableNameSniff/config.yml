@@ -1,0 +1,2 @@
+services:
+    Shopsys\CodingStandards\Sniffs\ValidVariableNameSniff:

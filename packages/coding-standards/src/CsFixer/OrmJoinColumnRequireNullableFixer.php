@@ -118,7 +118,7 @@ SAMPLE
         $joinColumnAnnotation = $this->findJoinColumnAnnotation($doc);
         if ($joinColumnAnnotation === null) {
             $this->addJoinColumnAnnotation($doc, $relationAnnotation);
-        } elseif (preg_match('~(,|\\()\\s*nullable\\s*=~', $joinColumnAnnotation->getContent()) !== 1) {
+        } elseif (preg_match('~(,|\\(|\\*\\s)\\s*nullable\\s*=~', $joinColumnAnnotation->getContent()) !== 1) {
             $this->extendJoinColumnAnnotation($doc, $joinColumnAnnotation);
         }
     }
