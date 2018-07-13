@@ -4,9 +4,12 @@ imports:
 
 services:
     # Shopsys Checkers
+    Shopsys\CodingStandards\CsFixer\ForbiddenDumpFixer: ~
     Shopsys\CodingStandards\CsFixer\MissingButtonTypeFixer: ~
     Shopsys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer: ~
+    Shopsys\CodingStandards\Finder\FileFinder: ~
     Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff: ~
+    Shopsys\CodingStandards\Sniffs\ForbiddenDumpSniff: ~
     Shopsys\CodingStandards\Sniffs\ForbiddenExitSniff: ~
     Shopsys\CodingStandards\Sniffs\ForbiddenSuperGlobalSniff: ~
     # method arguments and variables should be $camelCase
@@ -126,6 +129,8 @@ services:
         maxCount: 30
 
 parameters:
+    exclude_files:
+        - '*/tests/Unit/**/wrong/*'
     skip:
         # private properties should not start with "_"
         PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.PrivateNoUnderscore: ~
@@ -140,4 +145,3 @@ parameters:
         PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff.NoLineAfterClose: ~
         # allow empty "catch (Exception $exception) { }"
         PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedCatch: ~
-

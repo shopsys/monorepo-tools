@@ -25,3 +25,5 @@ parameters:
 
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
           - '*/tests/*'
+        Shopsys\CodingStandards\Sniffs\ForbiddenDumpSniff:
+          - '*/tests/ShopBundle/Database/Model/Cart/CartFacadeTest.php'

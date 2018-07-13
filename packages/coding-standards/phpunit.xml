@@ -4,10 +4,12 @@
     backupGlobals="false"
     colors="true"
     verbose="true"
+    backupStaticAttributes="false"
+    bootstrap="tests/autoload.php"
 >
     <testsuites>
         <testsuite name="Unit">
-            <directory>tests</directory>
+            <directory>tests/Unit</directory>
         </testsuite>
     </testsuites>
 </phpunit>
