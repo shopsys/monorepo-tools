@@ -57,6 +57,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - redis extension enabled in configuration for travis
 - [#316 - Admin: feed items on feeds generation page contain clickable link and datetime](https://github.com/shopsys/shopsys/pull/316)
     - checks for existing file and for modified time of file use abstract filesystem methods
+- [#291 - Dropped triggers before creation](https://github.com/shopsys/shopsys/pull/314)
 
 ### [shopsys/shopsys]
 #### Changed

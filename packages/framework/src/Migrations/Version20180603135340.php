@@ -106,6 +106,7 @@ class Version20180603135340 extends AbstractMigration
             $$ LANGUAGE plpgsql;
         ');
 
+        $this->sql('DROP TRIGGER IF EXISTS recalc_catnum_tsvector ON products');
         $this->sql('
             CREATE TRIGGER recalc_catnum_tsvector
             BEFORE INSERT OR UPDATE OF catnum
@@ -126,6 +127,7 @@ class Version20180603135340 extends AbstractMigration
             $$ LANGUAGE plpgsql;
         ');
 
+        $this->sql('DROP TRIGGER IF EXISTS recalc_partno_tsvector ON products');
         $this->sql('
             CREATE TRIGGER recalc_partno_tsvector
             BEFORE INSERT OR UPDATE OF partno
@@ -146,6 +148,7 @@ class Version20180603135340 extends AbstractMigration
             $$ LANGUAGE plpgsql;
         ');
 
+        $this->sql('DROP TRIGGER IF EXISTS recalc_name_tsvector ON product_translations');
         $this->sql('
             CREATE TRIGGER recalc_name_tsvector
             BEFORE INSERT OR UPDATE OF name
@@ -166,6 +169,7 @@ class Version20180603135340 extends AbstractMigration
             $$ LANGUAGE plpgsql;
         ');
 
+        $this->sql('DROP TRIGGER IF EXISTS recalc_description_tsvector ON product_domains');
         $this->sql('
             CREATE TRIGGER recalc_description_tsvector
             BEFORE INSERT OR UPDATE OF description
@@ -202,6 +206,7 @@ class Version20180603135340 extends AbstractMigration
             $$ LANGUAGE plpgsql;
         ');
 
+        $this->sql('DROP TRIGGER IF EXISTS recalc_product_domain_fulltext_tsvector ON products');
         $this->sql('
             CREATE TRIGGER recalc_product_domain_fulltext_tsvector
             AFTER INSERT OR UPDATE OF catnum, partno
@@ -238,6 +243,7 @@ class Version20180603135340 extends AbstractMigration
             $$ LANGUAGE plpgsql;
         ');
 
+        $this->sql('DROP TRIGGER IF EXISTS recalc_product_domain_fulltext_tsvector ON product_translations');
         $this->sql('
             CREATE TRIGGER recalc_product_domain_fulltext_tsvector
             AFTER INSERT OR UPDATE OF name
