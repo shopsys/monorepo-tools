@@ -52,6 +52,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Fixed
 - [#291 - Unnecessary SQL queries on category detail in admin](https://github.com/shopsys/shopsys/pull/304):
     - category translations for ancestor category are loaded in the same query as categories
+- [#317 - Travis build is failing for shopsys/framework](https://github.com/shopsys/shopsys/pull/317):
+    - framework package requires redis bundle and redis extension
+    - redis extension enabled in configuration for travis
 
 ### [shopsys/shopsys]
 #### Changed
