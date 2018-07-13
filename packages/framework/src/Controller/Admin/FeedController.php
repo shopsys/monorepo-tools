@@ -77,13 +77,13 @@ class FeedController extends AdminBaseController
         $feedsInfo = $this->feedFacade->getFeedsInfo();
         foreach ($feedsInfo as $feedInfo) {
             foreach ($this->domain->getAll() as $domainConfig) {
-                $filepath = $this->feedFacade->getFeedFilepath($feedInfo, $domainConfig);
+                $feedTimestamp = $this->feedFacade->getFeedTimestamp($feedInfo, $domainConfig);
                 $feedsData[] = [
                     'feedLabel' => $feedInfo->getLabel(),
                     'feedName' => $feedInfo->getName(),
                     'domainConfig' => $domainConfig,
                     'url' => $this->feedFacade->getFeedUrl($feedInfo, $domainConfig),
-                    'created' => file_exists($filepath) ? new DateTime('@' . filemtime($filepath)) : null,
+                    'created' => $feedTimestamp === null ? null : (new DateTime())->setTimestamp($feedTimestamp),
                     'actions' => null,
                     'additionalInformation' => $feedInfo->getAdditionalInformation(),
                 ];

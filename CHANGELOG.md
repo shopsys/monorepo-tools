@@ -55,6 +55,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#317 - Travis build is failing for shopsys/framework](https://github.com/shopsys/shopsys/pull/317):
     - framework package requires redis bundle and redis extension
     - redis extension enabled in configuration for travis
+- [#316 - Admin: feed items on feeds generation page contain clickable link and datetime](https://github.com/shopsys/shopsys/pull/316)
+    - checks for existing file and for modified time of file use abstract filesystem methods
 
 ### [shopsys/shopsys]
 #### Changed

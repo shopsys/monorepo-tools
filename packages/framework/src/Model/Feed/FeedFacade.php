@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Feed;
 
+use League\Flysystem\FilesystemInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade;
 
@@ -30,16 +31,23 @@ class FeedFacade
      */
     protected $feedPathProvider;
 
+    /**
+     * @var \League\Flysystem\FilesystemInterface
+     */
+    protected $filesystem;
+
     public function __construct(
         FeedRegistry $feedRegistry,
         ProductVisibilityFacade $productVisibilityFacade,
         FeedExportFactory $feedExportFactory,
-        FeedPathProvider $feedPathProvider
+        FeedPathProvider $feedPathProvider,
+        FilesystemInterface $filesystem
     ) {
         $this->feedRegistry = $feedRegistry;
         $this->productVisibilityFacade = $productVisibilityFacade;
         $this->feedExportFactory = $feedExportFactory;
         $this->feedPathProvider = $feedPathProvider;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -123,5 +131,21 @@ class FeedFacade
     public function getFeedFilepath(FeedInfoInterface $feedInfo, DomainConfig $domainConfig): string
     {
         return $this->feedPathProvider->getFeedFilepath($feedInfo, $domainConfig);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Feed\FeedInfoInterface $feedInfo
+     * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return int|null
+     */
+    public function getFeedTimestamp(FeedInfoInterface $feedInfo, DomainConfig $domainConfig): ?int
+    {
+        $filePath = $this->feedPathProvider->getFeedFilepath($feedInfo, $domainConfig);
+
+        try {
+            return $this->filesystem->getTimestamp($filePath);
+        } catch (\League\Flysystem\FileNotFoundException $fileNotFundException) {
+            return null;
+        }
     }
 }
