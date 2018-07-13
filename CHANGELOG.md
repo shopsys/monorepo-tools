@@ -108,6 +108,11 @@ It was only important with [the original open-box architecture](https://blog.sho
     - creation of entity data objects moved to factories to allow extensibility
 - [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271)
     - for details see section shopsys/framework
+    
+### [shopsys/project-base]
+#### Fixed
+- [#315 - Route logout/ without csrf token returns not found](https://github.com/shopsys/shopsys/pull/315)
+    - route logout/ must to be called with token in every case because LogoutListener from Symfony throws exception if token generator is set in configuration of firewall but the route logout is used without csrf token parameter
 
 ## [7.0.0-alpha3] - 2018-07-03
 ### [shopsys/framework]
