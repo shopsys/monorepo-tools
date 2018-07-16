@@ -5,6 +5,7 @@
 * [Phing Targets](./introduction/phing-targets.md)
 * [Automated Testing](./introduction/automated-testing.md)
 * [Basics About Model Architecture](./introduction/basics-about-model-architecture.md)
+* [Framework Extensibility](introduction/framework-extensibility.md)
 * [Custom Entities](introduction/custom-entities.md)
 * [Basics About Package Architecture](./introduction/basics-about-package-architecture.md)
 * [Basic and Demo Data During Application Installation](introduction/basic-and-demo-data-during-application-installation.md)
