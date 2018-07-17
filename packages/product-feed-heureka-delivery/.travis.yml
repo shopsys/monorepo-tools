@@ -10,6 +10,7 @@ cache:
 
 before_install:
   - composer config github-oauth.github.com $GITHUB_TOKEN
+  - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 install:
   - composer install

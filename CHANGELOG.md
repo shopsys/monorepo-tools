@@ -86,6 +86,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271)
     - for details see section shopsys/framework
 
+#### Fixed
+- [#323 - Packages that depend on shopsys/framework need redis extension enabled](https://github.com/shopsys/shopsys/pull/323)
+    - redis extension in travis config was enabled
+
 ### [shopsys/product-feed-heureka]
 #### Changed
 - [#286 - Instantiate entity data objects by factories](https://github.com/shopsys/shopsys/pull/286)
@@ -94,10 +98,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271)
     - for details see section shopsys/framework
 
+#### Fixed
+- [#323 - Packages that depend on shopsys/framework need redis extension enabled](https://github.com/shopsys/shopsys/pull/323)
+    - redis extension in travis config was enabled
+
 ### [shopsys/product-feed-heureka-delivery]
 #### Changed
 - [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271)
     - for details see section shopsys/framework
+
+#### Fixed
+- [#323 - Packages that depend on shopsys/framework need redis extension enabled](https://github.com/shopsys/shopsys/pull/323)
+    - redis extension in travis config was enabled
 
 ### [shopsys/product-feed-interface]
 #### Abandoned
@@ -111,6 +123,10 @@ It was only important with [the original open-box architecture](https://blog.sho
     - creation of entity data objects moved to factories to allow extensibility
 - [#271 - Complete refactoring of feeds functionality](https://github.com/shopsys/shopsys/pull/271)
     - for details see section shopsys/framework
+
+#### Fixed
+- [#323 - Packages that depend on shopsys/framework need redis extension enabled](https://github.com/shopsys/shopsys/pull/323)
+    - redis extension in travis config was enabled
     
 ### [shopsys/project-base]
 #### Fixed
