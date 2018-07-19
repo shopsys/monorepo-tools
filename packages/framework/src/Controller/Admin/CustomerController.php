@@ -13,8 +13,7 @@ use Shopsys\FrameworkBundle\Form\Admin\Customer\CustomerFormType;
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerFacade;
 use Shopsys\FrameworkBundle\Model\Customer\CustomerListAdminFacade;
@@ -45,9 +44,9 @@ class CustomerController extends AdminBaseController
     private $customerFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumb;
+    private $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
@@ -88,7 +87,7 @@ class CustomerController extends AdminBaseController
         UserDataFactoryInterface $userDataFactory,
         CustomerListAdminFacade $customerListAdminFacade,
         CustomerFacade $customerFacade,
-        Breadcrumb $breadcrumb,
+        BreadcrumbOverrider $breadcrumbOverrider,
         AdministratorGridFacade $administratorGridFacade,
         GridFactory $gridFactory,
         AdminDomainTabsFacade $adminDomainTabsFacade,
@@ -100,7 +99,7 @@ class CustomerController extends AdminBaseController
         $this->userDataFactory = $userDataFactory;
         $this->customerListAdminFacade = $customerListAdminFacade;
         $this->customerFacade = $customerFacade;
-        $this->breadcrumb = $breadcrumb;
+        $this->breadcrumbOverrider = $breadcrumbOverrider;
         $this->administratorGridFacade = $administratorGridFacade;
         $this->gridFactory = $gridFactory;
         $this->adminDomainTabsFacade = $adminDomainTabsFacade;
@@ -144,7 +143,7 @@ class CustomerController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing customer - %name%', ['%name%' => $user->getFullName()])));
+        $this->breadcrumbOverrider->overrideLastItem(t('Editing customer - %name%', ['%name%' => $user->getFullName()]));
 
         $orders = $this->orderFacade->getCustomerOrderList($user);
 

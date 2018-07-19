@@ -3,6 +3,7 @@ imports:
 
 parameters:
   fp_js_form_validator.factory.class: Shopsys\FrameworkBundle\Form\JsFormValidatorFactory
+  knp_menu.factory_extension.routing.class: Shopsys\FrameworkBundle\Model\AdminNavigation\RoutingExtension
   prezent_doctrine_translatable.listener.class: Shopsys\FrameworkBundle\Model\Localization\TranslatableListener
   faker.seed: 1234
   shopsys.entity_extension.map: {}
@@ -91,18 +92,20 @@ services:
         - '@Doctrine\Common\Cache\ArrayCache'
         - '@shopsys.shop.component.doctrine.cache.metadata.redis_cache'
 
+  Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider: ~
+
+  Shopsys\FrameworkBundle\Model\AdminNavigation\SideMenuBuilder:
+    public: true
+    arguments:
+      $menuFactory: '@knp_menu.factory'
+    tags:
+      - { name: knp_menu.menu_builder, method: createMenu, alias: admin_side_menu }
+
   Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig: ~
 
   Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig: ~
 
   Shopsys\FrameworkBundle\Model\Module\ModuleList: ~
-
-  Shopsys\FrameworkBundle\Model\AdminNavigation\MenuFactory:
-    arguments:
-      - '%shopsys.admin_navigation.config_filepath%'
-      - '@security.authorization_checker'
-
-  Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb: ~
 
   Shopsys\FrameworkBundle\Component\Breadcrumb\BreadcrumbResolver:
     factory: ['@Shopsys\FrameworkBundle\Model\Breadcrumb\FrontBreadcrumbResolverFactory', create]
@@ -333,12 +336,6 @@ services:
       - { name: jms_translation.file_visitor }
 
   Shopsys\FrameworkBundle\Component\Translation\ConstraintMessageExtractor:
-    tags:
-      - { name: jms_translation.file_visitor }
-
-  Shopsys\FrameworkBundle\Component\Translation\AdminMenuYamlFileExtractor:
-    arguments:
-      - '%shopsys.admin_navigation.config_filepath%'
     tags:
       - { name: jms_translation.file_visitor }
 

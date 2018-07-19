@@ -9,8 +9,7 @@ use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\FrameworkBundle\Form\Admin\Product\Brand\BrandFormType;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\Product\Brand\Brand;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade;
@@ -19,9 +18,9 @@ use Symfony\Component\HttpFoundation\Request;
 class BrandController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumb;
+    private $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
@@ -52,14 +51,14 @@ class BrandController extends AdminBaseController
         BrandFacade $brandFacade,
         AdministratorGridFacade $administratorGridFacade,
         GridFactory $gridFactory,
-        Breadcrumb $breadcrumb,
+        BreadcrumbOverrider $breadcrumbOverrider,
         Domain $domain,
         BrandDataFactoryInterface $brandDataFactory
     ) {
         $this->brandFacade = $brandFacade;
         $this->administratorGridFacade = $administratorGridFacade;
         $this->gridFactory = $gridFactory;
-        $this->breadcrumb = $breadcrumb;
+        $this->breadcrumbOverrider = $breadcrumbOverrider;
         $this->domain = $domain;
         $this->brandDataFactory = $brandDataFactory;
     }
@@ -95,7 +94,7 @@ class BrandController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing brand - %name%', ['%name%' => $brand->getName()])));
+        $this->breadcrumbOverrider->overrideLastItem(t('Editing brand - %name%', ['%name%' => $brand->getName()]));
 
         return $this->render('@ShopsysFramework/Admin/Content/Brand/edit.html.twig', [
             'form' => $form->createView(),

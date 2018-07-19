@@ -14,19 +14,14 @@
             background: lighten(@color-red, 53%);
         }
 
-        &__link {
+        &__link, &__label {
             display: block;
             position: relative;
             padding: 15px;
 
-            cursor: pointer;
             color: @color-base;
             font-size: 16px;
             text-decoration: none;
-
-            &:hover {
-                color: @color-primary;
-            }
 
             .side-menu__submenu & {
                 font-size: 14px;
@@ -38,10 +33,6 @@
                 background-color: @bg-info;
                 border-left: 4px solid @color-blue;
                 color: @color-link;
-
-                &:hover {
-                    color: @color-link-hover;
-                }
             }
 
             .side-menu__item--superadmin & {
@@ -50,7 +41,7 @@
             }
 
             .svg {
-                margin-right: 4px;
+                margin-right: 8px;
 
                 color: @color-darklink;
             }
@@ -63,6 +54,21 @@
 
                 color: @color-move;
                 font-weight: normal;
+            }
+        }
+
+        &__link {
+            cursor: pointer;
+
+            &:hover {
+                color: @color-primary;
+            }
+
+            .side-menu__item--active & {
+
+                &:hover {
+                    color: @color-link-hover;
+                }
             }
         }
     }
@@ -87,19 +93,14 @@
             }
 
 
-            &__link {
+            &__link, &__label {
                 display: block;
                 position: relative;
                 padding: 8px 15px 8px 37px;
 
-                cursor: pointer;
                 color: @color-darklink;
                 font-size: 14px;
                 text-decoration: none;
-
-                &:hover {
-                    color: @color-darklink-hover;
-                }
 
                 .side-menu__item--active & {
                     padding-left: 33px;
@@ -114,10 +115,6 @@
                 .side-menu__submenu__item--active > & {
                     color: @color-link;
                     font-weight: bold;
-
-                    &:hover {
-                        color: @color-link-hover;
-                    }
                 }
 
                 .side-menu__submenu__item--superadmin & {
@@ -142,6 +139,21 @@
 
                 .side-menu__submenu--level2 .side-menu__submenu__item:last-child & {
                     padding-bottom: 10px;
+                }
+            }
+
+            &__link {
+                cursor: pointer;
+
+                &:hover {
+                    color: @color-darklink-hover;
+                }
+
+                .side-menu__submenu__item--active & {
+
+                    &:hover {
+                        color: @color-link-hover;
+                    }
                 }
             }
         }

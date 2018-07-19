@@ -9,8 +9,7 @@ use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
 use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\FrameworkBundle\Form\Admin\Article\ArticleFormType;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\Article\Article;
 use Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Article\ArticleFacade;
@@ -22,9 +21,9 @@ use Symfony\Component\HttpFoundation\Request;
 class ArticleController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumb;
+    private $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Article\ArticleFacade
@@ -66,7 +65,7 @@ class ArticleController extends AdminBaseController
         ArticleDataFactoryInterface $articleDataFactory,
         GridFactory $gridFactory,
         AdminDomainTabsFacade $adminDomainTabsFacade,
-        Breadcrumb $breadcrumb,
+        BreadcrumbOverrider $breadcrumbOverrider,
         ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
         LegalConditionsFacade $legalConditionsFacade,
         CookiesFacade $cookiesFacade
@@ -75,7 +74,7 @@ class ArticleController extends AdminBaseController
         $this->articleDataFactory = $articleDataFactory;
         $this->gridFactory = $gridFactory;
         $this->adminDomainTabsFacade = $adminDomainTabsFacade;
-        $this->breadcrumb = $breadcrumb;
+        $this->breadcrumbOverrider = $breadcrumbOverrider;
         $this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
         $this->legalConditionsFacade = $legalConditionsFacade;
         $this->cookiesFacade = $cookiesFacade;
@@ -115,7 +114,7 @@ class ArticleController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing article - %name%', ['%name%' => $article->getName()])));
+        $this->breadcrumbOverrider->overrideLastItem(t('Editing article - %name%', ['%name%' => $article->getName()]));
 
         return $this->render('@ShopsysFramework/Admin/Content/Article/edit.html.twig', [
             'form' => $form->createView(),

@@ -9,8 +9,7 @@ use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSou
 use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\FrameworkBundle\Form\Admin\Advert\AdvertFormType;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\Advert\Advert;
 use Shopsys\FrameworkBundle\Model\Advert\AdvertDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Advert\AdvertFacade;
@@ -20,9 +19,9 @@ use Symfony\Component\HttpFoundation\Request;
 class AdvertController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumb;
+    private $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
@@ -59,7 +58,7 @@ class AdvertController extends AdminBaseController
         AdministratorGridFacade $administratorGridFacade,
         GridFactory $gridFactory,
         AdminDomainTabsFacade $adminDomainTabsFacade,
-        Breadcrumb $breadcrumb,
+        BreadcrumbOverrider $breadcrumbOverrider,
         ImageExtension $imageExtension,
         AdvertDataFactoryInterface $advertDataFactory
     ) {
@@ -67,7 +66,7 @@ class AdvertController extends AdminBaseController
         $this->administratorGridFacade = $administratorGridFacade;
         $this->gridFactory = $gridFactory;
         $this->adminDomainTabsFacade = $adminDomainTabsFacade;
-        $this->breadcrumb = $breadcrumb;
+        $this->breadcrumbOverrider = $breadcrumbOverrider;
         $this->imageExtension = $imageExtension;
         $this->advertDataFactory = $advertDataFactory;
     }
@@ -108,7 +107,7 @@ class AdvertController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing advertising - %name%', ['%name%' => $advert->getName()])));
+        $this->breadcrumbOverrider->overrideLastItem(t('Editing advertising - %name%', ['%name%' => $advert->getName()]));
 
         return $this->render('@ShopsysFramework/Admin/Content/Advert/edit.html.twig', [
             'form' => $form->createView(),

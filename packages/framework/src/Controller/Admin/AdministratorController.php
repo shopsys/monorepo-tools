@@ -11,8 +11,7 @@ use Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFa
 use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdministratorController extends AdminBaseController
@@ -20,9 +19,9 @@ class AdministratorController extends AdminBaseController
     const MAX_ADMINISTRATOR_ACTIVITIES_COUNT = 10;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumb;
+    private $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade
@@ -47,13 +46,13 @@ class AdministratorController extends AdminBaseController
     public function __construct(
         AdministratorFacade $administratorFacade,
         GridFactory $gridFactory,
-        Breadcrumb $breadcrumb,
+        BreadcrumbOverrider $breadcrumbOverrider,
         AdministratorActivityFacade $administratorActivityFacade,
         AdministratorDataFactoryInterface $administratorDataFactory
     ) {
         $this->administratorFacade = $administratorFacade;
         $this->gridFactory = $gridFactory;
-        $this->breadcrumb = $breadcrumb;
+        $this->breadcrumbOverrider = $breadcrumbOverrider;
         $this->administratorActivityFacade = $administratorActivityFacade;
         $this->administratorDataFactory = $administratorDataFactory;
     }
@@ -140,9 +139,7 @@ class AdministratorController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
         }
 
-        $this->breadcrumb->overrideLastItem(
-            new MenuItem(t('Editing administrator - %name%', ['%name%' => $administrator->getRealName()]))
-        );
+        $this->breadcrumbOverrider->overrideLastItem(t('Editing administrator - %name%', ['%name%' => $administrator->getRealName()]));
 
         $lastAdminActivities = $this->administratorActivityFacade->getLastAdministratorActivities(
             $administrator,

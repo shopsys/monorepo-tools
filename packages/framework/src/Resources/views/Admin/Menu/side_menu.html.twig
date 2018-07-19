@@ -1,0 +1,114 @@
+{% extends 'knp_menu_base.html.twig' %}
+{% import _self as self %}
+
+{% macro attributes(attributes, classes) %}
+    {%- if classes is not empty -%}
+        {%- if attributes.class is defined and attributes.class is not empty -%}
+            {%- set classes = classes|merge([attributes.class]) -%}
+        {%- endif -%}
+        {%- set attributes = attributes|merge({'class': classes|join(' ')}) -%}
+    {%- endif -%}
+    {%- for name, value in attributes -%}
+        {%- if value is not none and value is not same as(false) -%}
+            {{- ' %s="%s"'|format(name, value is same as(true) ? name|e : value|e)|raw -}}
+        {%- endif -%}
+    {%- endfor -%}
+{% endmacro %}
+
+{% block compressed_root %}
+    {% spaceless %}
+        {{ block('root') }}
+    {% endspaceless %}
+{% endblock %}
+
+{% block root %}
+    <nav class="panel">
+        {{ block('list') -}}
+    </nav>
+{% endblock %}
+
+{% block list %}
+    {%- if item.level == 0 -%}
+        {%- set classes = ['side-menu', 'js-panel-menu'] -%}
+    {%- else -%}
+        {%- set classes = ['side-menu__submenu', 'side-menu__submenu--level' ~ item.level] -%}
+        {%- if item.level == 1 -%}
+            {%- set classes = classes|merge(['js-panel-menu-submenu display-none']) -%}
+        {%- endif -%}
+    {%- endif -%}
+    {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
+        <ul{{ self.attributes(item.childrenAttributes, classes) }}>
+            {{ block('children') }}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block children %}
+    {# save current variables #}
+    {%- set currentOptions = options -%}
+    {%- set currentItem = item -%}
+    {%- set currentSuperadmin = superadmin|default(false) -%}
+    {# update the depth for children #}
+    {%- if options.depth is not none -%}
+        {%- set options = options|merge({'depth': currentOptions.depth - 1}) -%}
+    {%- endif -%}
+    {# update the matchingDepth for children #}
+    {%- if options.matchingDepth is not none and options.matchingDepth > 0 -%}
+        {%- set options = options|merge({'matchingDepth': currentOptions.matchingDepth - 1}) -%}
+    {%- endif -%}
+    {%- for item in currentItem.children -%}
+        {%- set superadmin = currentSuperadmin or item.extra('superadmin', false) -%}
+        {{ block('item') }}
+    {%- endfor -%}
+    {# restore current variables #}
+    {%- set item = currentItem -%}
+    {%- set options = currentOptions -%}
+    {%- set superadmin = currentSuperadmin -%}
+{% endblock %}
+
+{% block item %}
+    {% if item.displayed %}
+        {%- if item.level == 1 -%}
+            {%- set classes = ['side-menu__item', 'js-panel-menu-item'] -%}
+        {%- else -%}
+            {%- set classes = ['side-menu__submenu__item'] -%}
+        {%- endif -%}
+        {%- if matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) -%}
+            {%- set classes = classes|merge([classes[0] ~ '--active']) -%}
+        {%- endif -%}
+        {%- if superadmin %}
+            {%- set classes = classes|merge([classes[0] ~ '--superadmin']) -%}
+        {%- endif -%}
+        {%- set icon = item.extra('icon')|default(item.level > 2 ? 'arrow-strong' : '') -%}
+        <li{{ self.attributes(item.attributes, classes) }}>
+            {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) -%}
+                {{ block('linkElement') }}
+            {%- else -%}
+                {{ block('spanElement') }}
+            {%- endif -%}
+            {{ block('list') }}
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block linkElement %}
+    {%- set attributes = item.linkAttribute('title') is empty ? item.linkAttributes|merge({'title': item.label}) : item.linkAttributes -%}
+    {%- set class = item.level == 1 ? 'side-menu__item__link' : 'side-menu__submenu__item__link' -%}
+    <a href="{{ item.uri }}"{{ self.attributes(attributes, [class]) }}>{{ block('label') }}</a>
+{% endblock %}
+
+{% block spanElement %}
+    {%- set class = item.level == 1 ? 'side-menu__item__link' : 'side-menu__submenu__item__label' -%}
+    <span{{ self.attributes(item.labelAttributes, [class]) }}>{{ block('label') }}</span>
+{% endblock %}
+
+{% block label %}
+    {%- if icon is not null -%}
+        <i class="svg svg-{{ icon }}"></i>
+    {%- endif -%}
+    {%- if options.allow_safe_labels and item.getExtra('safe_label', false) -%}
+        {{ item.label|raw }}
+    {%- else -%}
+        {{ item.label }}
+    {%- endif -%}
+{% endblock %}

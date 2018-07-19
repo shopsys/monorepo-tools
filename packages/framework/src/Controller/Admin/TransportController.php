@@ -5,8 +5,7 @@ namespace Shopsys\FrameworkBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\FrameworkBundle\Form\Admin\Transport\TransportEditFormType;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Transport\Grid\TransportGridFactory;
 use Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface;
@@ -16,9 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 class TransportController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumb;
+    private $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
@@ -45,13 +44,13 @@ class TransportController extends AdminBaseController
         TransportGridFactory $transportGridFactory,
         TransportDataFactoryInterface $transportDataFactory,
         CurrencyFacade $currencyFacade,
-        Breadcrumb $breadcrumb
+        BreadcrumbOverrider $breadcrumbOverrider
     ) {
         $this->transportFacade = $transportFacade;
         $this->transportGridFactory = $transportGridFactory;
         $this->transportDataFactory = $transportDataFactory;
         $this->currencyFacade = $currencyFacade;
-        $this->breadcrumb = $breadcrumb;
+        $this->breadcrumbOverrider = $breadcrumbOverrider;
     }
 
     /**
@@ -122,7 +121,7 @@ class TransportController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
         }
 
-        $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing shipping - %name%', ['%name%' => $transport->getName()])));
+        $this->breadcrumbOverrider->overrideLastItem(t('Editing shipping - %name%', ['%name%' => $transport->getName()]));
 
         return $this->render('@ShopsysFramework/Admin/Content/Transport/edit.html.twig', [
             'form' => $form->createView(),
