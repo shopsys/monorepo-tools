@@ -77,7 +77,7 @@ class ProductDomainTest extends DatabaseTestCase
      */
     public function testCreateProductDomainWithDataForSingleDomain()
     {
-        $productData = $this->productDataFactory->createDefault();
+        $productData = $this->productDataFactory->create();
 
         $productData->seoTitles[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_TITLE;
         $productData->seoMetaDescriptions[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_META_DESCRIPTION;
