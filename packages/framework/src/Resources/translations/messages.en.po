@@ -319,6 +319,9 @@ msgstr ""
 msgid "Bulk editing done"
 msgstr ""
 
+msgid "CSS documentation"
+msgstr ""
+
 msgid "Catalogue number"
 msgstr ""
 
@@ -524,9 +527,6 @@ msgid "Created on"
 msgstr ""
 
 msgid "Cropping"
-msgstr ""
-
-msgid "Css documentation"
 msgstr ""
 
 msgid "Currencies"
@@ -847,9 +847,6 @@ msgstr ""
 msgid "Editing order - Nr. %number%"
 msgstr ""
 
-msgid "Editing order status"
-msgstr ""
-
 msgid "Editing page"
 msgstr ""
 
@@ -1016,9 +1013,6 @@ msgid "Generated"
 msgstr ""
 
 msgid "Go to page:"
-msgstr ""
-
-msgid "Go to:"
 msgstr ""
 
 msgid "Google analytics"
@@ -1276,9 +1270,6 @@ msgstr ""
 msgid "Name serves only for internal use within the administration"
 msgstr ""
 
-msgid "New Payment"
-msgstr ""
-
 msgid "New administrator"
 msgstr ""
 
@@ -1300,13 +1291,13 @@ msgstr ""
 msgid "New orders"
 msgstr ""
 
-msgid "New orders status"
-msgstr ""
-
 msgid "New page"
 msgstr ""
 
 msgid "New password settings URL address"
+msgstr ""
+
+msgid "New payment"
 msgstr ""
 
 msgid "New product"
@@ -1715,9 +1706,6 @@ msgid "Rate can't be modified. It is necessary to create new rate, remove existi
 msgstr ""
 
 msgid "Registered cust."
-msgstr ""
-
-msgid "Registered customers"
 msgstr ""
 
 msgid "Registration"
@@ -2246,9 +2234,6 @@ msgid "XML availability feeds"
 msgstr ""
 
 msgid "Yes"
-msgstr ""
-
-msgid "You are in:"
 msgstr ""
 
 msgid "You can drag additional content here."

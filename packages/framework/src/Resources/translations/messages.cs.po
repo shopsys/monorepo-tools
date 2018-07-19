@@ -319,6 +319,9 @@ msgstr "Hromadné úpravy"
 msgid "Bulk editing done"
 msgstr "Hromadná úprava byla provedena"
 
+msgid "CSS documentation"
+msgstr "CSS dokumentace"
+
 msgid "Catalogue number"
 msgstr "Katalogové číslo"
 
@@ -525,9 +528,6 @@ msgstr "Vytvořeno dne"
 
 msgid "Cropping"
 msgstr "Ořezávání"
-
-msgid "Css documentation"
-msgstr "Css dokumentace"
 
 msgid "Currencies"
 msgstr "Měny"
@@ -847,9 +847,6 @@ msgstr "Editace objednávky"
 msgid "Editing order - Nr. %number%"
 msgstr "Editace objednávky - č. %number%"
 
-msgid "Editing order status"
-msgstr "Editace stavu objednávek"
-
 msgid "Editing page"
 msgstr "Editace stránky"
 
@@ -1017,9 +1014,6 @@ msgstr "Vygenerováno"
 
 msgid "Go to page:"
 msgstr "Přejít na stránku:"
-
-msgid "Go to:"
-msgstr "Přejít na:"
 
 msgid "Google analytics"
 msgstr "Google analytics"
@@ -1276,9 +1270,6 @@ msgstr "Název %locale%"
 msgid "Name serves only for internal use within the administration"
 msgstr "Název slouží pouze pro interní použití v rámci administrace"
 
-msgid "New Payment"
-msgstr "Nová platba"
-
 msgid "New administrator"
 msgstr "Nový administrátor"
 
@@ -1300,14 +1291,14 @@ msgstr "Nový zákazník"
 msgid "New orders"
 msgstr "Nové objednávky"
 
-msgid "New orders status"
-msgstr "Nový stav objednávek"
-
 msgid "New page"
 msgstr "Nová stránka"
 
 msgid "New password settings URL address"
 msgstr "URL adresa pro nastavení nového hesla"
+
+msgid "New payment"
+msgstr "Nová platba"
 
 msgid "New product"
 msgstr "Nové zboží"
@@ -1716,9 +1707,6 @@ msgstr "Výši sazby nelze upravit. Je třeba vytvořit novou sazbu a starou ods
 
 msgid "Registered cust."
 msgstr "Registrovaní zák."
-
-msgid "Registered customers"
-msgstr "Registrovaní zákazníci"
 
 msgid "Registration"
 msgstr "Registrace"
@@ -2247,9 +2235,6 @@ msgstr "XML dostupnostní feedy"
 
 msgid "Yes"
 msgstr "Ano"
-
-msgid "You are in:"
-msgstr "Nacházíte se v:"
 
 msgid "You can drag additional content here."
 msgstr "Zde můžete přetáhnout další obsah."
