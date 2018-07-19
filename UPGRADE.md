@@ -20,6 +20,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 ### [shopsys/framework]
 - move creation of data objects into factories
 - already existing data object factories changed their signatures
+- to change the last item in admin breadcrumb, use `BreadcrumbOverrider:overrideLastItem(string $label)` instead of `Breadcrumb::overrideLastItem(MenuItem $item)`
+- if you've customized the admin menu by using your own `admin_menu.yml`, implement event listeners instead
+    - see the [Adding a New Administration Page](/docs/cookbook/adding-a-new-administration-page.md) cookbook for details
 
 ### [shopsys/product-feed-google]
 - move creation of data objects into factories
