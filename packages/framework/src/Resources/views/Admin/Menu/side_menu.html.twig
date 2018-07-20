@@ -29,11 +29,11 @@
 
 {% block list %}
     {%- if item.level == 0 -%}
-        {%- set classes = ['side-menu', 'js-panel-menu'] -%}
+        {%- set classes = ['side-menu', 'js-side-menu'] -%}
     {%- else -%}
         {%- set classes = ['side-menu__submenu', 'side-menu__submenu--level' ~ item.level] -%}
         {%- if item.level == 1 -%}
-            {%- set classes = classes|merge(['js-panel-menu-submenu display-none']) -%}
+            {%- set classes = classes|merge(['js-side-menu-submenu display-none']) -%}
         {%- endif -%}
     {%- endif -%}
     {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
@@ -69,7 +69,7 @@
 {% block item %}
     {% if item.displayed %}
         {%- if item.level == 1 -%}
-            {%- set classes = ['side-menu__item', 'js-panel-menu-item'] -%}
+            {%- set classes = ['side-menu__item', 'js-side-menu-item'] -%}
         {%- else -%}
             {%- set classes = ['side-menu__submenu__item'] -%}
         {%- endif -%}
