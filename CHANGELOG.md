@@ -60,6 +60,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - checks for existing file and for modified time of file use abstract filesystem methods
 - [#291 - Dropped triggers before creation](https://github.com/shopsys/shopsys/pull/314)
 - [#263 - CartWatcherFacade: fixed swapped messages](https://github.com/shopsys/shopsys/pull/263)
+- [#339 - Downgrade snc/redis-bundle to 2.1.4 due to Issue in phpredis](https://github.com/shopsys/shopsys/pull/339)
 
 ### [shopsys/shopsys]
 #### Added
@@ -135,6 +136,7 @@ It was only important with [the original open-box architecture](https://blog.sho
 #### Fixed
 - [#315 - Route logout/ without csrf token returns not found](https://github.com/shopsys/shopsys/pull/315)
     - route logout/ must to be called with token in every case because LogoutListener from Symfony throws exception if token generator is set in configuration of firewall but the route logout is used without csrf token parameter
+- [#339 - Downgrade snc/redis-bundle to 2.1.4 due to Issue in phpredis](https://github.com/shopsys/shopsys/pull/339)
 
 ## [7.0.0-alpha3] - 2018-07-03
 ### [shopsys/framework]
