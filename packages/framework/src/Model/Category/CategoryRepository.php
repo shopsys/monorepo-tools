@@ -7,6 +7,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 use Shopsys\FrameworkBundle\Component\Paginator\QueryPaginator;
 use Shopsys\FrameworkBundle\Component\String\DatabaseSearching;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
@@ -30,13 +31,19 @@ class CategoryRepository extends NestedTreeRepository
 
     /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
      */
-    public function __construct(EntityManagerInterface $em, ProductRepository $productRepository)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        ProductRepository $productRepository,
+        EntityNameResolver $entityNameResolver
+    ) {
         $this->em = $em;
-        $classMetadata = $this->em->getClassMetadata(Category::class);
         $this->productRepository = $productRepository;
+
+        $resolvedClassName = $entityNameResolver->resolve(Category::class);
+        $classMetadata = $this->em->getClassMetadata($resolvedClassName);
         parent::__construct($this->em, $classMetadata);
     }
 

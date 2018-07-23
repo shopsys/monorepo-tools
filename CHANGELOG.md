@@ -59,6 +59,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#313 - Streamed logging](https://github.com/shopsys/shopsys/pull/313)
     - monolog logs into streams instead of files (use `docker-compose logs` to access it)
     - see details in the [Logging](/docs/introduction/logging.md) article
+- [#341 - Category entity in constructor of CategoryRepository is resolved via EntityNameResolver](https://github.com/shopsys/shopsys/pull/341)
 
 #### Fixed
 - [#291 - Unnecessary SQL queries on category detail in admin](https://github.com/shopsys/shopsys/pull/304):
