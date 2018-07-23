@@ -107,20 +107,17 @@ monolog:
       excluded_404s:
         - ^/
     nested:
-      type: rotating_file
-      max_files: 7
-      path: "%kernel.logs_dir%/%kernel.environment%.log"
+      type: stream
+      path: "%shopsys.log_stream%"
       level: debug
     cron:
-      type: rotating_file
-      max_files: 7
-      path: "%kernel.logs_dir%/%kernel.environment%.cron.log"
+      type: stream
+      path: "%shopsys.log_stream%"
       channels: cron
       level: debug
     slow:
-      type: rotating_file
-      max_files: 7
-      path: "%kernel.logs_dir%/%kernel.environment%.slow.log"
+      type: stream
+      path: "%shopsys.log_stream%"
       channels: slow
       level: debug
     # display cron.DEBUG messages in console for -v, -vv and -vvv verbosities

@@ -198,10 +198,6 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
-  Shopsys\FrameworkBundle\Model\Mail\Reporting\LogErrorReportingFacade:
-    arguments:
-      - '%kernel.logs_dir%'
-
   Shopsys\FrameworkBundle\Component\FileUpload\FileNamingConvention: ~
 
   Shopsys\FrameworkBundle\Component\FileUpload\FileUpload:
