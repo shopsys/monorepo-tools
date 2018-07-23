@@ -274,14 +274,6 @@ cp $WORKSPACE/project-base/app/config/parameters.yml.dist $WORKSPACE/project-bas
 cp $WORKSPACE/project-base/app/config/parameters_test.yml.dist $WORKSPACE/project-base/app/config/parameters_test.yml
 ```
 
-##### Set emails for error reporting
-Set your error reporting mail for sending error reports.
-
-```
-sed -i "s/error_reporting_email_to:.*/error_reporting_email_to: errors@yourserver.com/" $WORKSPACE/project-base/app/config/parameters.yml
-sed -i "s/error_reporting_email_from:.*/error_reporting_email_from: no-reply@yourserver.com/" $WORKSPACE/project-base/app/config/parameters.yml
-```
-
 #### Set domains
 Now we just create domain file, in this case, we use branch name for domain name, and we add domain number into beginning of URL,
 that way domain names are related with the git branches, this makes jenkins more organized.
