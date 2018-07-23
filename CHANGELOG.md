@@ -24,6 +24,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### [shopsys/framework]
+#### Added
+- [#335 - Possibility to add a new administration page](https://github.com/shopsys/shopsys/pull/335)
+    - added cookbook [Adding a New Administration Page](/docs/cookbook/adding-a-new-administration-page.md) along with the side menu and breadcrumbs
+
 #### Changed
 - [#286 - Instantiate entity data objects by factories](https://github.com/shopsys/shopsys/pull/286)
     - entity data objects have only an empty constructor now
@@ -49,6 +53,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - cron modules use the logger for debug information
   - DailyFeedCronModule is responsible for continuation of the correct feed after waking up
 - [#182 - Cart: flush() is called only if there are really some changes in cart items](https://github.com/shopsys/shopsys/pull/182)
+- admin menu is now implemented using the KnpMenuBundle as a part of [#335 - Possibility to add a new administration page](https://github.com/shopsys/shopsys/pull/335)
+    - old implementation using the `admin_menu.yml` configuration along with `AdminMenuYamlFileExtractor` was removed
+    - class `Breadcrumb` was renamed to `BreadcrumbOverrider` and its scope was reduced
 
 #### Fixed
 - [#291 - Unnecessary SQL queries on category detail in admin](https://github.com/shopsys/shopsys/pull/304):
@@ -133,6 +140,10 @@ It was only important with [the original open-box architecture](https://blog.sho
     - redis extension in travis config was enabled
     
 ### [shopsys/project-base]
+#### Added
+- configuration for admin controllers as a part of [#335 - Possibility to add a new administration page](https://github.com/shopsys/shopsys/pull/335)
+    - see the config file in `src/Shopsys/ShopBundle/Resources/config/routing.yml`
+
 #### Fixed
 - [#315 - Route logout/ without csrf token returns not found](https://github.com/shopsys/shopsys/pull/315)
     - route logout/ must to be called with token in every case because LogoutListener from Symfony throws exception if token generator is set in configuration of firewall but the route logout is used without csrf token parameter

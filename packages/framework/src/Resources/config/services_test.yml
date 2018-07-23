@@ -93,8 +93,6 @@ services:
 
   Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade: ~
 
-  Shopsys\FrameworkBundle\Model\AdminNavigation\MenuLoader: ~
-
   Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository: ~
 
   Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig: ~

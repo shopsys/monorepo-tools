@@ -1,5 +1,4 @@
 parameters:
-  shopsys.admin_navigation.config_filepath: '%shopsys.framework.resources_dir%/config/admin_menu.yml'
   shopsys.css_version_filepath: '%shopsys.web_dir%/assets/cssVersion'
   shopsys.data_fixtures.resource_customers_filepath: '%shopsys.data_fixtures.resources_dir%/demo-data-customers.csv'
   shopsys.data_fixtures.resource_products_filepath: '%shopsys.data_fixtures.resources_dir%/demo-data-products.csv'

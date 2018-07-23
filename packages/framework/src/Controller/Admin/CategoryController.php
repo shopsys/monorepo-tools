@@ -6,8 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\FrameworkBundle\Form\Admin\Category\CategoryFormType;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,9 +18,9 @@ class CategoryController extends AdminBaseController
     const ALL_DOMAINS = 0;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumb;
+    private $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryDataFactoryInterface
@@ -48,13 +47,13 @@ class CategoryController extends AdminBaseController
         CategoryDataFactoryInterface $categoryDataFactory,
         SessionInterface $session,
         Domain $domain,
-        Breadcrumb $breadcrumb
+        BreadcrumbOverrider $breadcrumbOverrider
     ) {
         $this->categoryFacade = $categoryFacade;
         $this->categoryDataFactory = $categoryDataFactory;
         $this->session = $session;
         $this->domain = $domain;
-        $this->breadcrumb = $breadcrumb;
+        $this->breadcrumbOverrider = $breadcrumbOverrider;
     }
 
     /**
@@ -89,7 +88,7 @@ class CategoryController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing category - %name%', ['%name%' => $category->getName()])));
+        $this->breadcrumbOverrider->overrideLastItem(t('Editing category - %name%', ['%name%' => $category->getName()]));
 
         return $this->render('@ShopsysFramework/Admin/Content/Category/edit.html.twig', [
             'form' => $form->createView(),

@@ -6,6 +6,7 @@ parameters:
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
             - '*/src/DataFixtures/*/*DataFixture.php'
             - '*/src/Form/Admin/*/*FormType.php'
+            - '*/src/Model/AdminNavigation/SideMenuBuilder.php'
             - '*/src/Model/Order/Preview/OrderPreviewCalculation.php'
             - '*/src/Model/Product/ProductVisibilityRepository.php'
             - '*/src/Controller/Admin/AdministratorController.php'
@@ -39,7 +40,6 @@ parameters:
           - '*/src/DataFixtures/Performance/CategoryDataFixture.php'
           - '*/src/Component/Domain/DomainFactoryOverwritingDomainUrl.php'
           - '*/src/Controller/Admin/BrandController.php'
-          - '*/src/Model/AdminNavigation/MenuLoader.php'
           - '*/src/Model/Customer/CustomerData.php'
           - '*/src/Model/Feed/FeedCronModule.php'
           - '*/src/Model/Feed/FeedFacade.php'
@@ -48,6 +48,5 @@ parameters:
         Shopsys\CodingStandards\Sniffs\ForbiddenDumpSniff:
           - '*/src/Component/DateTimeHelper/Exception/CannotParseDateTimeException.php'
           - '*/src/Component/Doctrine/Cache/PermanentPhpFileCache.php'
-          - '*/src/Model/AdminNavigation/Exception/MenuItemNotMatchingRouteException.php'
           - '*/src/Twig/VarDumperExtension.php'
           - '*/src/Resources/views/Migration/migration.php.twig'

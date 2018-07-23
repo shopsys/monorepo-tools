@@ -14,8 +14,7 @@ use Shopsys\FrameworkBundle\Form\Admin\Product\VariantFormType;
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\AdvancedSearch\AdvancedSearchFacade;
 use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
@@ -62,9 +61,9 @@ class ProductController extends AdminBaseController
     private $adminProductPriceCalculationFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumb;
+    private $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
@@ -108,7 +107,7 @@ class ProductController extends AdminBaseController
         ProductFacade $productFacade,
         ProductDataFactoryInterface $productDataFactory,
         AdminProductPriceCalculationFacade $adminProductPriceCalculationFacade,
-        Breadcrumb $breadcrumb,
+        BreadcrumbOverrider $breadcrumbOverrider,
         PricingGroupFacade $pricingGroupFacade,
         AdministratorGridFacade $administratorGridFacade,
         ProductListAdminFacade $productListAdminFacade,
@@ -123,7 +122,7 @@ class ProductController extends AdminBaseController
         $this->productFacade = $productFacade;
         $this->productDataFactory = $productDataFactory;
         $this->adminProductPriceCalculationFacade = $adminProductPriceCalculationFacade;
-        $this->breadcrumb = $breadcrumb;
+        $this->breadcrumbOverrider = $breadcrumbOverrider;
         $this->pricingGroupFacade = $pricingGroupFacade;
         $this->administratorGridFacade = $administratorGridFacade;
         $this->productListAdminFacade = $productListAdminFacade;
@@ -161,9 +160,7 @@ class ProductController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        $this->breadcrumb->overrideLastItem(
-            new MenuItem(t('Editing product - %name%', ['%name%' => $this->productExtension->getProductDisplayName($product)]))
-        );
+        $this->breadcrumbOverrider->overrideLastItem(t('Editing product - %name%', ['%name%' => $this->productExtension->getProductDisplayName($product)]));
 
         $viewParameters = [
             'form' => $form->createView(),

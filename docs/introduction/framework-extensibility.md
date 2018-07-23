@@ -7,7 +7,9 @@ as well as a list of customizations that are not (and will not be) possible at a
 ## What is achievable easily
 * [Extending an entity](/docs/wip_glassbox/entity-extension.md)
     * [Adding a new attribute](/docs/cookbook/adding-new-attribute-to-an-entity.md)
-* [Extending particular forms in the administration](/docs/wip_glassbox/form-extension.md) without the need of the template overriding
+* The administration can be extended by:
+    * [Adding a new administration page](/docs/cookbook/adding-a-new-administration-page.md) along with the side menu and breadcrumbs
+    * [Extending particular forms](/docs/wip_glassbox/form-extension.md) without the need of the template overriding
 * [Customizing database migrations](/docs/introduction/database-migrations.md)
     * adding a new migration as well as skipping and reordering the existing ones
 * Configuring the smoke tests (see [`RouteConfigCustomization`](/project-base/tests/ShopBundle/Smoke/Http/RouteConfigCustomization.php) class)
@@ -20,7 +22,6 @@ as well as a list of customizations that are not (and will not be) possible at a
     * e.g. adding new entities, changing the FE design, customization of FE javascripts, adding new FE pages (routes and controllers), ...
 
 ## Which issues are going to be addressed soon
-* Adding a new page into the administration (including adding a new item into the admin menu)
 * Extending data fixtures (including performance data fixtures)
 * Extending data grids in the administration
 * Extending all forms in the administration without the need of the template overriding

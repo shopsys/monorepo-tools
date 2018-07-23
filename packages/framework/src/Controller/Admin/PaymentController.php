@@ -5,8 +5,7 @@ namespace Shopsys\FrameworkBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\FrameworkBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\FrameworkBundle\Form\Admin\Payment\PaymentEditFormType;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\Payment\Grid\PaymentGridFactory;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Payment\PaymentFacade;
@@ -16,9 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 class PaymentController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumb;
+    private $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Payment\Grid\PaymentGridFactory
@@ -45,13 +44,13 @@ class PaymentController extends AdminBaseController
         CurrencyFacade $currencyFacade,
         PaymentFacade $paymentFacade,
         PaymentGridFactory $paymentGridFactory,
-        Breadcrumb $breadcrumb
+        BreadcrumbOverrider $breadcrumbOverrider
     ) {
         $this->paymentDataFactory = $paymentDataFactory;
         $this->currencyFacade = $currencyFacade;
         $this->paymentFacade = $paymentFacade;
         $this->paymentGridFactory = $paymentGridFactory;
-        $this->breadcrumb = $breadcrumb;
+        $this->breadcrumbOverrider = $breadcrumbOverrider;
     }
 
     /**
@@ -122,7 +121,7 @@ class PaymentController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
         }
 
-        $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing payment - %name%', ['%name%' => $payment->getName()])));
+        $this->breadcrumbOverrider->overrideLastItem(t('Editing payment - %name%', ['%name%' => $payment->getName()]));
 
         return $this->render('@ShopsysFramework/Admin/Content/Payment/edit.html.twig', [
             'form' => $form->createView(),

@@ -12,8 +12,7 @@ use Shopsys\FrameworkBundle\Form\Admin\Order\OrderFormType;
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use Shopsys\FrameworkBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
-use Shopsys\FrameworkBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemFacade;
 use Shopsys\FrameworkBundle\Model\Order\Item\OrderItemPriceCalculation;
@@ -26,9 +25,9 @@ use Symfony\Component\HttpFoundation\Request;
 class OrderController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumb;
+    private $breadcrumbOverrider;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridFacade
@@ -86,7 +85,7 @@ class OrderController extends AdminBaseController
         OrderItemPriceCalculation $orderItemPriceCalculation,
         AdministratorGridFacade $administratorGridFacade,
         GridFactory $gridFactory,
-        Breadcrumb $breadcrumb,
+        BreadcrumbOverrider $breadcrumbOverrider,
         OrderItemFacade $orderItemFacade,
         TransportFacade $transportFacade,
         PaymentFacade $paymentFacade,
@@ -98,7 +97,7 @@ class OrderController extends AdminBaseController
         $this->orderItemPriceCalculation = $orderItemPriceCalculation;
         $this->administratorGridFacade = $administratorGridFacade;
         $this->gridFactory = $gridFactory;
-        $this->breadcrumb = $breadcrumb;
+        $this->breadcrumbOverrider = $breadcrumbOverrider;
         $this->orderItemFacade = $orderItemFacade;
         $this->transportFacade = $transportFacade;
         $this->paymentFacade = $paymentFacade;
@@ -145,7 +144,7 @@ class OrderController extends AdminBaseController
             $this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
         }
 
-        $this->breadcrumb->overrideLastItem(new MenuItem(t('Editing order - Nr. %number%', ['%number%' => $order->getNumber()])));
+        $this->breadcrumbOverrider->overrideLastItem(t('Editing order - Nr. %number%', ['%number%' => $order->getNumber()]));
 
         $orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 

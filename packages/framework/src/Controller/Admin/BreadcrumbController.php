@@ -2,30 +2,24 @@
 
 namespace Shopsys\FrameworkBundle\Controller\Admin;
 
-use Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 
 class BreadcrumbController extends AdminBaseController
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\Breadcrumb
+     * @var \Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider
      */
-    private $breadcrumb;
+    private $breadcrumbOverrider;
 
-    public function __construct(Breadcrumb $breadcrumb)
+    public function __construct(BreadcrumbOverrider $breadcrumbOverrider)
     {
-        $this->breadcrumb = $breadcrumb;
+        $this->breadcrumbOverrider = $breadcrumbOverrider;
     }
 
-    /**
-     * @param string $route
-     * @param array|null $parameters
-     */
-    public function indexAction($route, array $parameters = null)
+    public function indexAction()
     {
-        $items = $this->breadcrumb->getItems($route, $parameters);
-
         return $this->render('@ShopsysFramework/Admin/Inline/Breadcrumb/breadcrumb.html.twig', [
-            'items' => $items,
+            'breadcrumbOverrider' => $this->breadcrumbOverrider,
         ]);
     }
 }
