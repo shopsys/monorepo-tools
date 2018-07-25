@@ -150,6 +150,9 @@
     "phpstan/phpstan": "^0.7",
     "symplify/easy-coding-standard-tester": "^4.4"
   },
+  "conflict": {
+    "codeception/stub": "2.0.2"
+  },
   "scripts": {
     "post-install-cmd": [
       "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",

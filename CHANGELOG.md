@@ -76,6 +76,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Error reporting functionality was removed as a part of [#313 - Streamed logging](https://github.com/shopsys/shopsys/pull/313)
     - error reporting should be done from the outside of the application (eg. by [Kubernetes](https://kubernetes.io/))
 
+### [shopsys/project-base]
+#### Fixed
+- [#347 - Composer: disable installation of broken version of codeception/stub](https://github.com/shopsys/shopsys/pull/347)
+
 ### [shopsys/shopsys]
 #### Added
 - [#320 - Docs: overview of possible and impossible glassbox customizations](https://github.com/shopsys/shopsys/pull/320)

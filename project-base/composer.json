@@ -113,6 +113,9 @@
         "shopsys/coding-standards": "dev-master",
         "shopsys/http-smoke-testing": "dev-master"
     },
+    "conflict": {
+        "codeception/stub": "2.0.2"
+    },
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
