@@ -349,6 +349,7 @@
                 <exclude name=".gitkeep" />
                 <exclude name="logs/**" />
                 <exclude name="postgres-data/**" />
+                <exclude name="elasticsearch-data/**" />
             </fileset>
             <fileset dir="${path.build.stats}/">
                 <exclude name="/" />

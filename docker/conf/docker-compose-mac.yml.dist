@@ -91,10 +91,15 @@ services:
                 hard: 65536
         ports:
             - "9200:9200"
+        volumes:
+            - shopsys-framework-elasticsearch-data-sync:/usr/share/elasticsearch/data
 
 volumes:
     shopsys-framework-sync:
         external: true
 
     shopsys-framework-postgres-data-sync:
+        external: true
+
+    shopsys-framework-elasticsearch-data-sync:
         external: true

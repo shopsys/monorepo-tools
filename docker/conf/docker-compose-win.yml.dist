@@ -92,7 +92,11 @@ services:
                 hard: 65536
         ports:
             - "9200:9200"
+        volumes:
+            - elasticsearch-data:/usr/share/elasticsearch/data
 
 volumes:
     pgdata:
+        driver: local
+    elasticsearch-data:
         driver: local
