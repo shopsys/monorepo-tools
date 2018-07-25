@@ -6,6 +6,7 @@
 1. [Update of Dockerfile is not Reflected](#update-of-dockerfile-is-not-reflected)
 1. [Update of Docker-compose is not Reflected](#update-of-docker-compose-is-not-reflected)
 1. [Docker Sync does not Synchronize File Consistently](#docker-sync-does-not-synchronize-file-consistently)
+1. [A docker container is not running](#a-docker-container-is-not-running)
 
 If you are developing on Shopsys Framework using docker, you might run into some problems during the process.
 
@@ -132,3 +133,8 @@ Start docker-sync so your docker-sync containers and volumes will be recreated:
 ```
 docker-sync start
 ```
+
+## A docker container is not running
+You can inspect what is wrong by using `docker logs <container-name>` command.
+E.g., you might encounter a problem with elasticsearch container - there might be the need for the `vm.max_map_count` setting to be properly set on your system. 
+See the [official documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) for more information. 

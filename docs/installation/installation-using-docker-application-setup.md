@@ -64,3 +64,6 @@ You can also login into the administration section on [http://127.0.0.1:8000/adm
 
 You can also manage the application database using [Adminer](https://www.adminer.org) by going to [http://127.0.0.1:1100](http://127.0.0.1:1100)
 and Redis storage using [Redis admin](https://github.com/ErikDubbelboer/phpRedisAdmin) by going to [http://127.0.0.1:1600](http://127.0.0.1:1600).
+
+Elasticsearch API is available on the address [http://127.0.0.1:9200](http://127.0.0.1:9200).
+You can use e.g. [Postman](https://www.getpostman.com/apps) or [Kibana](https://www.elastic.co/downloads/kibana) for Elasticseacrh management.

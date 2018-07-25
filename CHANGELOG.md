@@ -24,6 +24,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### [shopsys/framework]
+#### Added
+- [#354 - Product search in elasticsearch](https://github.com/shopsys/shopsys/pull/354)
+
 #### Fixed
 - [#260 - JS validation: dynamically added form inputs are now validated](https://github.com/shopsys/shopsys/pull/260)
 
