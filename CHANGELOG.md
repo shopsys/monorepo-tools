@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Added
 - [#354 - Product search in elasticsearch](https://github.com/shopsys/shopsys/pull/354)
     - elasticsearch docker container: volumes are now set in order to preserve data when the container is shut down
+    - added Symfony commands for creating and removing Elasticsearch indexes
 
 #### Fixed
 - [#260 - JS validation: dynamically added form inputs are now validated](https://github.com/shopsys/shopsys/pull/260)

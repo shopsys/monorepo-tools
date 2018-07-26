@@ -17,3 +17,5 @@ parameters:
   mailer_delivery_whitelist: [/@shopsys\.com$/]
 
   secret: ThisTokenIsNotSoSecretChangeIt
+
+  elasticsearch_hosts: ['elasticsearch:9200']

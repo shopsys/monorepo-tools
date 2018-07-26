@@ -904,3 +904,19 @@ services:
 
   Shopsys\FrameworkBundle\Model\Transport\TransportDataFactoryInterface:
     alias: Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory
+
+  Elasticsearch\ClientBuilder:
+    class: Elasticsearch\ClientBuilder
+    factory: [Elasticsearch\ClientBuilder, create]
+    calls:
+      - method: setHosts
+        arguments:
+          - '%elasticsearch_hosts%'
+
+  Elasticsearch\Client:
+    class: Elasticsearch\Client
+    factory: ['@Elasticsearch\ClientBuilder', build]
+
+  Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureFacade:
+    arguments:
+      - '%shopsys.framework.elasticsearch_sources_dir%'
