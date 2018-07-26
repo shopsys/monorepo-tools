@@ -25,14 +25,14 @@ services:
 
     php-fpm:
         build:
-            context: project-base/docker/php-fpm
+            context: docker/php-fpm
             args:
                 www_data_uid: 82
                 www_data_gid: 82
         container_name: shopsys-framework-php-fpm
         volumes:
             - .:/var/www/html
-            - ./project-base/docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
+            - ./docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
         links:
             - postgres
             - redis
