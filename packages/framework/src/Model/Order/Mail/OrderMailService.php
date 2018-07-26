@@ -256,7 +256,7 @@ class OrderMailService
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @return string
      */
-    private function getDomainLocaleByOrder($order)
+    private function getDomainLocaleByOrder(Order $order)
     {
         return $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
     }
