@@ -16,6 +16,8 @@ parameters:
     mailer_master_email_address: no-reply@shopsys.com
     mailer_delivery_whitelist: [/@shopsys\.com$/]
 
+    microservice_product_search_url: 'http://microservice-product-search:8000'
+
     secret: ThisTokenIsNotSoSecretChangeIt
 
     elasticsearch_hosts: ['elasticsearch:9200']

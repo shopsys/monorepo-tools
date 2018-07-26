@@ -6,27 +6,37 @@ use GuzzleHttp\Client;
 
 class MicroserviceClient
 {
+    const PARAMETER_DOMAIN_ID = 'domainId';
+
     /**
      * @var \GuzzleHttp\Client
      */
     private $guzzleClient;
 
-    public function __construct()
+    /**
+     * @param \GuzzleHttp\Client $guzzleClient
+     */
+    public function __construct(Client $guzzleClient)
     {
-        $this->guzzleClient = new Client();
+        $this->guzzleClient = $guzzleClient;
     }
 
     /**
-     * @param int $domainId
-     * @param string $searchText
-     * @return object
+     * @param string $resource
+     * @param array $parameters
+     * @return mixed
      */
-    public function search(int $domainId, string $searchText) {
-        $uri = sprintf('http://microservice-product-search:8000/%s/product-ids', $domainId);
-        $response = $this->guzzleClient->get($uri, ['query' => ['searchText' => $searchText]]);
+    public function get(string $resource, array $parameters = [])
+    {
+        if (array_key_exists(self::PARAMETER_DOMAIN_ID, $parameters)) {
+            $domainId = (int)$parameters[self::PARAMETER_DOMAIN_ID];
+            $resource = $domainId . '/' . $resource;
 
-        $responseContent = $response->getBody()->getContents();
+            unset($parameters[self::PARAMETER_DOMAIN_ID]);
+        }
 
-        return json_decode($responseContent);
+        $response = $this->guzzleClient->get($resource, ['query' => $parameters]);
+
+        return json_decode($response->getBody()->getContents());
     }
 }

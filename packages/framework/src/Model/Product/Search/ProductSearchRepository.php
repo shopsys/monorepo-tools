@@ -62,7 +62,10 @@ class ProductSearchRepository
         $domainId = $productQueryBuilder->getParameter('domainId')->getValue();
 
         if (!isset($this->foundProductIdsCache[$domainId][$searchText])) {
-            $searchResult = $this->microserviceProductSearchClient->search($domainId, $searchText);
+            $searchResult = $this->microserviceProductSearchClient->get('search-product-ids', [
+                'searchText' => $searchText,
+                'domainId' => $domainId,
+            ]);
             $foundProductIds = $searchResult->productIds;
 
             $this->foundProductIdsCache[$domainId][$searchText] = $foundProductIds;
