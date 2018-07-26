@@ -1,0 +1,15 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Shopsys\MicroserviceProductSearch\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    Shopsys\MicroserviceProductSearch\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']

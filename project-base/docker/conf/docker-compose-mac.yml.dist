@@ -96,6 +96,21 @@ services:
         environment:
             - discovery.type=single-node
 
+    microservice-product-search:
+        build:
+            context: ../microservices/product-search/docker
+            args:
+                www_data_uid: 501
+                www_data_gid: 20
+        container_name: shopsys-framework-microservice-product-search
+        volumes:
+            - shopsys-framework-microservice-product-search-sync:/var/www/html
+            - ../microservices/product-search/docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/php.ini
+        links:
+            - elasticsearch
+        depends_on:
+            - elasticsearch
+
 volumes:
     shopsys-framework-sync:
         external: true
@@ -104,4 +119,7 @@ volumes:
         external: true
 
     shopsys-framework-elasticsearch-data-sync:
+        external: true
+
+    shopsys-framework-microservice-product-search-sync:
         external: true

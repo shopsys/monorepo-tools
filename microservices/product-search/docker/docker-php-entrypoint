@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+# this file is an extension of the original entry-point from the PHP Docker image
+# https://github.com/docker-library/php/blob/master/docker-php-entrypoint
+
+# reading from a named pipe and writing to stdout via "tail -f"
+# this workaround prevents logs from being output to console during console commands
+PIPE=/tmp/log-pipe
+if ! [ -p $PIPE ]; then
+    mkfifo $PIPE
+    chmod 660 $PIPE
+fi
+tail -f $PIPE &
+
+# first arg is `-f` or `--some-option`
+if [ "${1#-}" != "$1" ]; then
+    set -- php-fpm "$@"
+fi
+
+exec "$@"
