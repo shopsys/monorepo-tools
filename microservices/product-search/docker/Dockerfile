@@ -4,15 +4,9 @@ FROM php:7.2-fpm-alpine
 COPY docker-install-composer /usr/local/bin/docker-install-composer
 RUN chmod +x /usr/local/bin/docker-install-composer && docker-install-composer
 
-# postgresql-dev needed by "pgsql" extension
-RUN apk add --update \
-    postgresql-dev
-
-# install necessary PHP extensions requested by Composer
+# install necessary PHP extensions
 RUN docker-php-ext-install \
-    opcache \
-    pgsql \
-    pdo_pgsql
+    opcache
 
 # install locales and switch to en_US.utf8 in order to enable UTF-8 support
 # see https://github.com/docker-library/php/issues/240#issuecomment-305038173

@@ -1,3 +1,5 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+search_product_ids:
+  path: /{domainId}/search-product-ids
+  controller: Shopsys\MicroserviceProductSearch\Controller\SearchController::productIdsAction
+  requirements:
+    domainId: \d+

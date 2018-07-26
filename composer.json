@@ -101,6 +101,7 @@
     "fp/jsformvalidator-bundle": "^1.5.1",
     "fzaninotto/faker": "^1.7.1",
     "gedmo/doctrine-extensions": "^2.4.34",
+    "guzzlehttp/guzzle": "^6.3",
     "helios-ag/fm-elfinder-bundle": "^8.0",
     "heureka/overeno-zakazniky": "^2.0.6",
     "incenteev/composer-parameter-handler": "^2.1.3",

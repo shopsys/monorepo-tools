@@ -283,6 +283,8 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient: ~
+
     Shopsys\FrameworkBundle\Component\HttpFoundation\TransactionalMasterRequestService:
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
@@ -924,13 +926,3 @@ services:
     Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductExporter: ~
 
     Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductDataConverter: ~
-
-    Shopsys\FrameworkBundle\Model\Product\Search\ElasticsearchSearchClient: ~
-
-    Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient:
-        class: Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient
-        arguments:
-            - '@Shopsys\FrameworkBundle\Model\Product\Search\ElasticsearchSearchClient'
-
-    Shopsys\FrameworkBundle\Model\Product\Search\SearchClient:
-        alias: Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient

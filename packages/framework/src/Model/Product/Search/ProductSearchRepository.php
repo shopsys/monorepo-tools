@@ -3,17 +3,23 @@
 namespace Shopsys\FrameworkBundle\Model\Product\Search;
 
 use Doctrine\ORM\QueryBuilder;
+use Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient;
 
 class ProductSearchRepository
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Product\Search\SearchClient
+     * @var \Shopsys\FrameworkBundle\Component\Microservice\MicroserviceClient
      */
-    protected $client;
+    protected $microserviceProductSearchClient;
 
-    public function __construct(SearchClient $client)
+    /**
+     * @var int[][][]
+     */
+    protected $foundProductIdsCache = [];
+
+    public function __construct(MicroserviceClient $microserviceProductSearchClient)
     {
-        $this->client = $client;
+        $this->microserviceProductSearchClient = $microserviceProductSearchClient;
     }
 
     /**
@@ -22,10 +28,9 @@ class ProductSearchRepository
      */
     public function filterBySearchText(QueryBuilder $productQueryBuilder, $searchText)
     {
-        $domainId = $productQueryBuilder->getParameter('domainId')->getValue();
-        $productIds = $this->client->search($domainId, $searchText);
+        $productIds = $this->getFoundProductIds($productQueryBuilder, $searchText);
 
-        if (count($productIds)) {
+        if (count($productIds) > 0) {
             $productQueryBuilder->andWhere('p.id IN (:productIds)')->setParameter('productIds', $productIds);
         } else {
             $productQueryBuilder->andWhere('TRUE = FALSE');
@@ -38,13 +43,31 @@ class ProductSearchRepository
      */
     public function addRelevance(QueryBuilder $productQueryBuilder, $searchText)
     {
-        $domainId = $productQueryBuilder->getParameter('domainId')->getValue();
-        $productIds = $this->client->search($domainId, $searchText);
+        $productIds = $this->getFoundProductIds($productQueryBuilder, $searchText);
 
         if (count($productIds)) {
             $productQueryBuilder->addSelect('field(p.id, ' . implode(',', $productIds) . ') AS HIDDEN relevance');
         } else {
             $productQueryBuilder->addSelect('-1 AS HIDDEN relevance');
         }
+    }
+
+    /**
+     * @param \Doctrine\ORM\QueryBuilder $productQueryBuilder
+     * @param $searchText
+     * @return int[]
+     */
+    protected function getFoundProductIds(QueryBuilder $productQueryBuilder, $searchText)
+    {
+        $domainId = $productQueryBuilder->getParameter('domainId')->getValue();
+
+        if (!isset($this->foundProductIdsCache[$domainId][$searchText])) {
+            $searchResult = $this->microserviceProductSearchClient->search($domainId, $searchText);
+            $foundProductIds = $searchResult->productIds;
+
+            $this->foundProductIdsCache[$domainId][$searchText] = $foundProductIds;
+        }
+
+        return $this->foundProductIdsCache[$domainId][$searchText];
     }
 }
