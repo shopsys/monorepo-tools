@@ -133,7 +133,7 @@ class ZboziProductDomainFacade
 
         foreach ($zboziProductDomains as $zboziProductDomain) {
             $this->em->remove($zboziProductDomain);
-            $this->em->flush();
         }
+        $this->em->flush();
     }
 }

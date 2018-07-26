@@ -74,8 +74,8 @@ class HeurekaProductDomainFacade
 
         foreach ($heurekaProductDomains as $heurekaProductDomain) {
             $this->em->remove($heurekaProductDomain);
-            $this->em->flush();
         }
+        $this->em->flush();
     }
 
     /**
