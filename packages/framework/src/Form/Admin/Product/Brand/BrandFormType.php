@@ -5,6 +5,8 @@ namespace Shopsys\FrameworkBundle\Form\Admin\Product\Brand;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Shopsys\FormTypesBundle\MultidomainType;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
+use Shopsys\FrameworkBundle\Form\DisplayOnlyType;
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\Locale\LocalizedType;
 use Shopsys\FrameworkBundle\Form\UrlListType;
@@ -80,22 +82,77 @@ class BrandFormType extends AbstractType
             ];
         }
 
-        $builder
+        $builderBasicInformationGroup = $builder->create('basicInformation', GroupType::class, [
+            'label' => t('Basic information'),
+        ]);
+
+        if ($brand !== null) {
+            $builderBasicInformationGroup
+                ->add('id', DisplayOnlyType::class, [
+                    'label' => t('ID'),
+                    'data' => $brand->getId(),
+                ]);
+        }
+
+        $builderBasicInformationGroup
             ->add('name', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please enter name']),
                     new Constraints\Length(['max' => 255, 'maxMessage' => 'Name cannot be longer than {{ limit }} characters']),
                 ],
+                'label' => t('Name'),
             ])
             ->add('descriptions', LocalizedType::class, [
                 'entry_type' => CKEditorType::class,
                 'required' => false,
+                'label' => t('Description'),
+            ]);
+
+        $builderSeoGroup = $builder->create('seo', GroupType::class, [
+            'label' => t('Seo'),
+        ]);
+        $builderSeoGroup
+            ->add('seoTitles', MultidomainType::class, [
+                'entry_type' => TextType::class,
+                'required' => false,
+                'options_by_domain_id' => $seoTitlesOptionsByDomainId,
+                'macro' => [
+                    'name' => 'seoFormRowMacros.multidomainRow',
+                    'recommended_length' => 60,
+                ],
+                'label' => t('Page title'),
             ])
-            ->add('urls', UrlListType::class, [
+            ->add('seoMetaDescriptions', MultidomainType::class, [
+                'entry_type' => TextareaType::class,
+                'required' => false,
+                'options_by_domain_id' => $seoMetaDescriptionsOptionsByDomainId,
+                'macro' => [
+                    'name' => 'seoFormRowMacros.multidomainRow',
+                    'recommended_length' => 155,
+                ],
+                'label' => t('Meta description'),
+            ])
+            ->add('seoH1s', MultidomainType::class, [
+                'entry_type' => TextType::class,
+                'required' => false,
+                'options_by_domain_id' => $seoH1sOptionsByDomainId,
+                'label' => t('Heading (H1)'),
+            ]);
+
+        if ($brand) {
+            $builderSeoGroup->add('urls', UrlListType::class, [
                 'route_name' => 'front_brand_detail',
-                'entity_id' => $brand !== null ? $brand->getId() : null,
-            ])
+                'entity_id' => $brand->getId(),
+                'label' => t('URL addresses'),
+            ]);
+        }
+
+        $builderImageGroup = $builder->create('image', GroupType::class, [
+            'label' => t('Image'),
+            'is_group_container_to_render_as_the_last_one' => true,
+        ]);
+        $builderImageGroup
             ->add('image', ImageUploadType::class, [
                 'required' => false,
                 'file_constraints' => [
@@ -109,22 +166,13 @@ class BrandFormType extends AbstractType
                 ],
                 'entity' => $brand,
                 'info_text' => t('You can upload following formats: PNG, JPG, GIF'),
-            ])
-            ->add('seoTitles', MultidomainType::class, [
-                'entry_type' => TextType::class,
-                'required' => false,
-                'options_by_domain_id' => $seoTitlesOptionsByDomainId,
-            ])
-            ->add('seoMetaDescriptions', MultidomainType::class, [
-                'entry_type' => TextareaType::class,
-                'required' => false,
-                'options_by_domain_id' => $seoMetaDescriptionsOptionsByDomainId,
-            ])
-            ->add('seoH1s', MultidomainType::class, [
-                'entry_type' => TextType::class,
-                'required' => false,
-                'options_by_domain_id' => $seoH1sOptionsByDomainId,
-            ])
+                'label' => t('Upload image'),
+            ]);
+
+        $builder
+            ->add($builderBasicInformationGroup)
+            ->add($builderSeoGroup)
+            ->add($builderImageGroup)
             ->add('save', SubmitType::class);
     }
 
