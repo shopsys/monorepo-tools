@@ -33,8 +33,8 @@
         <phingcall target="composer-check" />
     </target>
 
-    <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check,standards-packages" description="Checks coding standards in both project-base and packages."/>
-    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages" description="Checks coding standards on changed files in project-base and all files in packages."/>
+    <target name="standards" depends="phplint,ecs,phpstan,twig-lint,yaml-lint,eslint-check,standards-packages" description="Checks coding standards in the project-base, packages and microservices."/>
+    <target name="standards-diff" depends="phplint-diff,ecs-diff,phpstan,twig-lint-diff,yaml-lint,eslint-check-diff,standards-packages" description="Checks coding standards on changed files in the project-base, packages and microservices."/>
 
     <target name="clean" description="Cleans up directories with cache and scripts which are generated on demand.">
         <delete failonerror="false" includeemptydirs="true">
@@ -50,27 +50,29 @@
         </delete>
     </target>
 
-    <target name="standards-fix" description="Automatically fixes some coding standards violations in both project-base and packages.">
+    <target name="standards-fix" description="Automatically fixes some coding standards violations in the project-base, packages and microservices.">
         <phingcall target="ecs-fix" />
         <phingcall target="eslint-fix" />
         <phingcall target="standards-fix-packages" />
     </target>
 
-    <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files in project-base and all files in packages.">
+    <target name="standards-fix-diff" description="Automatically fixes some coding standards violations in changed files in project-base and all files in packages and microservices.">
         <phingcall target="ecs-fix-diff" />
         <phingcall target="eslint-fix-diff" />
         <phingcall target="standards-fix-packages-diff" />
     </target>
 
-    <target name="standards-packages" description="Checks coding standards in all packages.">
+    <target name="standards-packages" description="Checks coding standards in all packages and microservices.">
         <exec executable="${path.phplint.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg path="./packages/*/src"/>
+            <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
         </exec>
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check" />
             <arg value="--verbose" />
             <arg path="./packages/*/src"/>
+            <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
         </exec>
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
@@ -94,13 +96,14 @@
         </exec>
     </target>
 
-    <target name="standards-fix-packages" description="Automatically fixes some coding standards violations in all packages.">
+    <target name="standards-fix-packages" description="Automatically fixes some coding standards violations in all packages and microservices.">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check" />
             <arg value="--clear-cache" />
             <arg value="--fix" />
             <arg value="--verbose" />
             <arg path="./packages/*/src"/>
+            <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
         </exec>
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
@@ -114,12 +117,13 @@
         </exec>
     </target>
 
-    <target name="standards-fix-packages-diff" description="Automatically fixes some coding standards violations in all changed files of packages.">
+    <target name="standards-fix-packages-diff" description="Automatically fixes some coding standards violations in all changed files of packages and microservices.">
         <exec executable="${path.ecs.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="check" />
             <arg value="--fix" />
             <arg value="--verbose" />
             <arg path="./packages/*/src"/>
+            <arg path="./microservices/*/src"/>
             <arg path="./packages/*/tests" />
         </exec>
         <exec executable="${path.eslint.executable}" passthru="true" checkreturn="true">
