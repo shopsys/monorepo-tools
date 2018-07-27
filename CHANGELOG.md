@@ -83,6 +83,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Fixed
 - [#347 - Composer: disable installation of broken version of codeception/stub](https://github.com/shopsys/shopsys/pull/347)
 - [#353 - Fixed paths in project-base/docker/conf/docker-compose-win.yml.dist](https://github.com/shopsys/shopsys/pull/353)
+- [#363 - docker-sync.yml added to gitignore to allow individual configuration](https://github.com/shopsys/shopsys/pull/363)
 
 ### [shopsys/shopsys]
 #### Added
