@@ -73,6 +73,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#339 - Downgrade snc/redis-bundle to 2.1.4 due to Issue in phpredis](https://github.com/shopsys/shopsys/pull/339)
 - [#351 - added missing typehints in methods of CookiesFacade and OrderMailService](https://github.com/shopsys/shopsys/pull/351)
 - [#352 - flushes executed in loops are now executed outside of loop](https://github.com/shopsys/shopsys/pull/352)
+- [#342 - procedures are now executed only if relevant columns are changed](https://github.com/shopsys/shopsys/pull/342)
 
 #### Removed
 - Error reporting functionality was removed as a part of [#313 - Streamed logging](https://github.com/shopsys/shopsys/pull/313)
