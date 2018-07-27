@@ -1,4 +1,5 @@
 parameters:
+    env(LOG_STREAM): /tmp/log-pipe
 
 services:
     _defaults:
