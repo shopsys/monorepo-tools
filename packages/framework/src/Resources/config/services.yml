@@ -920,3 +920,6 @@ services:
   Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureFacade:
     arguments:
       - '%shopsys.framework.elasticsearch_sources_dir%'
+
+  Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductExporter: ~
+  Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductDataConverter: ~
