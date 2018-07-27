@@ -74,6 +74,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#351 - added missing typehints in methods of CookiesFacade and OrderMailService](https://github.com/shopsys/shopsys/pull/351)
 - [#352 - flushes executed in loops are now executed outside of loop](https://github.com/shopsys/shopsys/pull/352)
 - [#342 - procedures are now executed only if relevant columns are changed](https://github.com/shopsys/shopsys/pull/342)
+- [#362 - guidelines-for-pull-request.md: fixed indentation of lines and code blocks](https://github.com/shopsys/shopsys/pull/362)
 
 #### Removed
 - Error reporting functionality was removed as a part of [#313 - Streamed logging](https://github.com/shopsys/shopsys/pull/313)
