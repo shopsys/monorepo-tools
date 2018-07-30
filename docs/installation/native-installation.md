@@ -39,6 +39,7 @@ cd project-base
 - *The `--stability=alpha` option enables you to install the project from the last alpha release. Default value for the option is `stable` but there is no stable release yet.*
 
 ### 2. Set up configuration for native installation
+#### 2.1. Set up logging
 Monolog is configured to log into streams in `app/config/config.yml`.
 If you want to log into a file change the configuration of handlers like this:
 ```yaml
@@ -51,6 +52,31 @@ monolog:
       max_files: 7
       path: "%kernel.logs_dir%/%kernel.environment%.cron.log"
 ```
+
+#### 2.2. Set up the microservice for product search
+For the product search to be working correctly, you'll have to install a [microservice for product search](https://github.com/shopsys/microservice-product-search).
+It will act as a fully independent unit with a separate web server and repository.
+
+Clone the repository into a separate directory,
+```
+git clone https://github.com/shopsys/microservice-product-search.git
+cd microservice-product-search
+```
+
+install all its dependencies,
+```
+composer install
+```
+
+configure connection to the Elasticsearch by setting up the ELASTICSEARCH_HOSTS_STRING environment variable (or the [.env file](http://symfony.com/doc/current/components/dotenv.html)) and run the server.
+In the current version of this experimental microservice, the PHP's built-in Web Server is used.
+```
+php bin/console server:run 127.0.0.1:8001
+```
+
+In this moment the microservice is ready for the requests processing.
+
+*Note: If you use other port for the microservice to run, you'll have to pass its URL to the application as a parameter `microservice_product_search_url`.*
 
 ### 3. Install dependencies and configure parameters
 Composer will prompt you to set main parameters (`app/config/parameters.yml`):
@@ -71,6 +97,7 @@ Composer will prompt you to set main parameters (`app/config/parameters.yml`):
 | `mailer_disable_delivery`         | set to `true` if you don't want to send any e-mails                           | ...           |
 | `mailer_master_email_address`     | set if you want to send all e-mails to one address (useful for development)   | ...           |
 | `mailer_delivery_whitelist`       | set if you want to have master e-mail but allow sending to specific addresses | ...           |
+| `microservice_product_search_url` | URL of the product search microservice                                        | http://127.0.0.1:8001 |
 | `secret`                          | randomly generated secret token                                               | ...           |
 
 Composer will then prompt you to set parameters for testing environment (`app/config/parameters_test.yml`):

@@ -9,6 +9,8 @@ Therefore, relevant product attributes are also stored in Elasticsearch index un
 When the product search action is performed on frontend, the query is send to Elasticsearch.
 As a result, found product IDs are returned from Elasticsearch and then the product data are loaded from PostgreSQL database into entities using Doctrine ORM.
 
+The search process itself is provided through a microservice. For more information about the microservice, see [Microservice Product Search](https://github.com/shopsys/microservice-product-search).
+
 ### Elasticsearch index setting
 Elasticsearch [index](https://www.elastic.co/blog/what-is-an-elasticsearch-index) is a logical namespace, you can imagine single index as a single database in terms of relational databases.
 
@@ -56,7 +58,7 @@ But if we simplify, we can say that the search term is searched in attributes an
 * short description - match anywhere
 * description - match anywhere
 
-The searched fields and their priority are defined directly in the `ElasticsearchSearchClient::createQuery()` function.
+The searched fields and their priority are defined directly in the `Shopsys\MicroserviceProductSearch\Repository\ProductSearchRepository::createQuery()` function.
 
 If you want to improve searching, you can learn more in [Elasticsearch analysis](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html).
 
@@ -69,7 +71,7 @@ to your custom directory and put your own JSON configurations in it using the sa
 
 If you need to change the data that are exported into Elasticsearch, overwrite appropriate methods in `ElasticsearchProductRepository` and `ElasticsearchProductDataConverter` classes.
 
-You can also change the searching behavior by overwriting `ElasticsearchSearchClient` class.
+You can also change the searching behavior by overwriting the Microservice product search, specifically  `ProductSearchRepository` class.
 
 ## Known issues
 * When you need to add a new domain, you have to do following steps

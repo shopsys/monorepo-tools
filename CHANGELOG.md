@@ -16,6 +16,7 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/product-feed-heureka]
 * [shopsys/product-feed-heureka-delivery]
 * [shopsys/product-feed-zbozi]
+* [shopsys/microservice-product-search]
 
 Packages are formatted by release version. You can see all the changes done to package that you carry about with this tree.
 
@@ -50,6 +51,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
         - FormType elements were joint into groups and newly created FormTypes were used
         - javascript validation and tests were bound to the new paths of the form elements
         - docs were updated
+- [#401 - Microservice Product Search](https://github.com/shopsys/shopsys/pull/401)
+    - added [Microservice Product Search](https://github.com/shopsys/microservice-product-search), microservice is used for the searching of products on Shopsys Framework 
+    - added MicroserviceClient component
 
 #### Changed
 - [#385 - AccessDeniedHttpException replaced by AccessDeniedException](https://github.com/shopsys/shopsys/pull/385)
@@ -70,6 +74,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#399 - monorepo-tools: Handle rewriting of empty commits](https://github.com/shopsys/shopsys/pull/399) [@drekbour]
 
 ### [shopsys/project-base]
+#### Changed
+- [#401 - Microservice Product Search](https://github.com/shopsys/shopsys/pull/401)
+    - added [Microservice Product Search](https://github.com/shopsys/microservice-product-search), microservice is used for the searching of products on Shopsys Framework 
+    - now the following phing targets are also triggered over the microservice
+        - standards
+        - standards-diff
+        - standards-fix
+        - standards-fix-diff
+        - standards-packages
+        - standards-fix-packages
+        - standards-fix-packages-diff
+
 #### Fixed
 - [#359 - fix wrong variable usage in url to reset product filter](https://github.com/shopsys/shopsys/pull/359)
 
@@ -78,10 +94,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#379 - Stale bot activation](https://github.com/shopsys/shopsys/pull/379)
     - added configuration file for GitHub Stale bot
     - templates for pull requests and issues were moved into [.github](/.github) folder
-    
+- [#401 - Microservice Product Search](https://github.com/shopsys/shopsys/pull/401)
+    - added [Microservice Product Search](https://github.com/shopsys/microservice-product-search), microservice is used for the searching of products on Shopsys Framework 
+       
 #### Changed
 - [#389 - Standardized YAML files indentation to 4 spaces](https://github.com/shopsys/shopsys/pull/389)
-
+              
 ## [7.0.0-alpha4] - 2018-08-02
 ### [shopsys/framework]
 #### Added
@@ -162,9 +180,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Added
 - [#320 - Docs: overview of possible and impossible glassbox customizations](https://github.com/shopsys/shopsys/pull/320)
     - added [framework-extensibility.md](/docs/introduction/framework-extensibility.md) article
+
 #### Changed
 - [#296 - normalize phing target "timezones-check"](https://github.com/shopsys/shopsys/pull/296): [@pk16011990]
-
+    
 ### [shopsys/monorepo-tools]
 #### Added
 - [#345 - monorepo-tools: allow incremental build of monorepo](https://github.com/shopsys/shopsys/pull/345) [@lukaso]
@@ -245,6 +264,11 @@ It was only important with [the original open-box architecture](https://blog.sho
 
 #### Removed
 - [#371 - Remove unused dependencies](https://github.com/shopsys/shopsys/pull/371) [@TomasVotruba]
+
+### [shopsys/microservice-product-search]
+#### Added
+- [#368 - Microservice Product Search](https://github.com/shopsys/shopsys/pull/368)
+    - the repository was added, extracting current product search of Shopsys Framework
 
 ## [7.0.0-alpha3] - 2018-07-03
 ### [shopsys/framework]
@@ -1390,6 +1414,7 @@ That's why is this section formatted differently.
 [shopsys/form-types-bundle]: https://github.com/shopsys/form-types-bundle
 [shopsys/migrations]: https://github.com/shopsys/migrations
 [shopsys/monorepo-tools]: https://github.com/shopsys/monorepo-tools
+[shopsys/microservice-product-search]: https://github.com/shopsys/microservice-product-search
 
 [@pk16011990]: https://github.com/pk16011990
 [@stanoMilan]: https://github.com/stanoMilan
