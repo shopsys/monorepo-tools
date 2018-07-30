@@ -151,7 +151,7 @@
     "symplify/easy-coding-standard-tester": "^4.4"
   },
   "conflict": {
-    "codeception/stub": "2.0.2"
+    "codeception/stub": ">=2.0.2"
   },
   "scripts": {
     "post-install-cmd": [

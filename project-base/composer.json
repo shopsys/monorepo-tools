@@ -114,7 +114,7 @@
         "shopsys/http-smoke-testing": "dev-master"
     },
     "conflict": {
-        "codeception/stub": "2.0.2"
+        "codeception/stub": ">=2.0.2"
     },
     "scripts": {
         "post-install-cmd": [
