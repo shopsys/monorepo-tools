@@ -54,10 +54,11 @@
     <target name="build" depends="build-deploy-part-1-db-independent, build-deploy-part-2-db-dependent" description="Builds application for production preserving your DB."/>
     <target name="build-deploy-part-1-db-independent" depends="clean,composer,npm,dirs-create,domains-urls-check,assets" description="First part of application build for production preserving your DB (can be run without maintenance page)."/>
     <target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,warmup" description="Second part of application build for production preserving your DB (must be run with maintenance page when containing DB migrations)."/>
-    <target name="build-new" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-rebuild,grunt,error-pages-generate,warmup" description="Builds application for production with clean DB (with base data only)."/>
-    <target name="build-demo" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-demo,grunt,error-pages-generate,warmup" description="Builds application for production with clean demo DB."/>
+    <target name="build-new" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-rebuild,grunt,error-pages-generate,warmup,elasticsearch-indexes-create" description="Builds application for production with clean DB (with base data only)."/>
+    <target name="build-demo" depends="wipe,composer,npm,dirs-create,domains-urls-check,assets,db-demo,grunt,error-pages-generate,warmup,elasticsearch-indexes-recreate" description="Builds application for production with clean demo DB."/>
     <target name="db-demo" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,db-fixtures-demo-singledomain,create-domains-data,db-fixtures-demo-multidomain,load-plugin-demo-data,generate-friendly-urls,replace-domains-urls" description="Creates DB and fills it with demo data"/>
     <target name="db-rebuild" depends="db-wipe-public-schema,db-import-basic-structure,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls" description="Drops all data in database and creates a new one with base data only."/>
+    <target name="elasticsearch-indexes-recreate" depends="elasticsearch-indexes-delete,elasticsearch-indexes-create" description="Recreates Elasticsearch indexes structure (deletes existing structure and creates new one)" />
 
     <target name="assets" description="Installs web assets from external bundles into a public web directory.">
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
@@ -115,6 +116,27 @@
         <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
             <arg value="${path.bin-console}" />
             <arg value="shopsys:domains-data:create" />
+        </exec>
+    </target>
+
+    <target name="elasticsearch-indexes-create" description="Creates Elasticsearch indexes structure.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}" />
+            <arg value="shopsys:elasticsearch:create-indexes" />
+        </exec>
+    </target>
+
+    <target name="elasticsearch-indexes-delete" description="Deletes Elasticsearch indexes structure.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}" />
+            <arg value="shopsys:elasticsearch:delete-indexes" />
+        </exec>
+    </target>
+
+    <target name="elasticsearch-products-export" description="Exports all products to Elasticsearch.">
+        <exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+            <arg value="${path.bin-console}" />
+            <arg value="shopsys:elasticsearch:export-products" />
         </exec>
     </target>
 

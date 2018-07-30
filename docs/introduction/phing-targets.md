@@ -66,6 +66,15 @@ Drops all data in the test database and creates a new one with demo data.
 #### img-demo
 Installs demo images.
 
+#### elasticsearch-indexes-recreate
+Recreates Elasticsearch indexes structure.
+Consists of two subtasks that can be run independently:
+* `elasticsearch-indexes-delete` - deletes existing indexes structure
+* `elasticsearch-indexes-create` - creates new indexes structure by json definitions stored in `%shopsys.framework.elasticsearch_sources_dir%` directory.
+
+#### elasticsearch-products-export
+Exports all visible products to Elasticsearch.
+
 ### Coding standards
 
 #### standards / standards-diff
