@@ -3,6 +3,7 @@
 namespace Shopsys\FrameworkBundle\Component\Microservice;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 
 class MicroserviceClient
 {
@@ -35,7 +36,12 @@ class MicroserviceClient
             unset($parameters[self::PARAMETER_DOMAIN_ID]);
         }
 
-        $response = $this->guzzleClient->get($resource, ['query' => $parameters]);
+        $response = $this->guzzleClient->get($resource, [
+            RequestOptions::QUERY => $parameters,
+            RequestOptions::CONNECT_TIMEOUT => 0.1,
+            RequestOptions::TIMEOUT => 1.0,
+            RequestOptions::HEADERS => ['Accept' => 'application/json'],
+        ]);
 
         return json_decode($response->getBody()->getContents());
     }
