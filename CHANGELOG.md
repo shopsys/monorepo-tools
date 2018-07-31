@@ -61,6 +61,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - see details in the [Logging](/docs/introduction/logging.md) article
 - [#341 - Category entity in constructor of CategoryRepository is resolved via EntityNameResolver](https://github.com/shopsys/shopsys/pull/341)
 - [#364 - Admin: brand form is rendered via BrandFormType](https://github.com/shopsys/shopsys/pull/364)
+- [#370 - MultidomainEntityClassFinderFacade: metadata are checked on class name resolved by EntityNameResolver](https://github.com/shopsys/shopsys/pull/370)
 
 #### Fixed
 - [#291 - Unnecessary SQL queries on category detail in admin](https://github.com/shopsys/shopsys/pull/304):
