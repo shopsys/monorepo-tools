@@ -108,6 +108,12 @@ Split monorepo built by `monorepo_build.sh` and push all `master` branches along
 
 Usage: `monorepo_split.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...`
 
+### [monorepo_add.sh](./monorepo_add.sh)
+
+Add repositories to an existing monorepo from specified remotes. The remotes must be already added to your repository and fetched. Only master branch will be added from each repo.
+
+Usage: `monorepo_add.sh <remote-name>[:<subdirectory>] <remote-name>[:<subdirectory>] ...`
+
 ### [rewrite_history_into.sh](./rewrite_history_into.sh)
 
 Rewrite git history (even tags) so that all filepaths are in a specific subdirectory.

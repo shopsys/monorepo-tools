@@ -97,6 +97,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### [shopsys/monorepo-tools]
 #### Added
+- [#345 - monorepo-tools: allow incremental build of monorepo](https://github.com/shopsys/shopsys/pull/345) [@lukaso]
 - [# 311 - monorepo split allows adding new package when monorepo is already tagged](https://github.com/shopsys/shopsys/pull/311)
 #### Fixed
 - [#281 - monorepo-tools: Fix scripts to work on OS X](https://github.com/shopsys/shopsys/pull/282) [@lukaso]
