@@ -166,14 +166,14 @@ class ProductRepositoryTest extends DatabaseTestCase
         $product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . 1);
         $product2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . 45);
 
-        $this->setProductOrderingPriority($product1, 0);
-        $this->setProductOrderingPriority($product2, 1);
+        $this->setProductOrderingPriority($product1, 2);
+        $this->setProductOrderingPriority($product2, 3);
 
         $results = $this->getProductsForSearchOrderedByPriority('sencor');
         $this->assertSame($product2, $results[0]);
         $this->assertSame($product1, $results[1]);
 
-        $this->setProductOrderingPriority($product2, -1);
+        $this->setProductOrderingPriority($product2, 1);
 
         $results = $this->getProductsForSearchOrderedByPriority('sencor');
         $this->assertSame($product1, $results[0]);

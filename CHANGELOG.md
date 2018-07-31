@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - added Symfony command for exporting all products to Elasticsearch
     - added new phing targets for working with Elasticsearch
     - added CRON module for exporting products' data into Elasticsearch
+    - product search uses Elasticsearch
 
 #### Fixed
 - [#260 - JS validation: dynamically added form inputs are now validated](https://github.com/shopsys/shopsys/pull/260)

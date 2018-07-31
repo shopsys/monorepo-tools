@@ -36,6 +36,7 @@ doctrine:
       string_functions:
         collate: Shopsys\FrameworkBundle\Component\Doctrine\CollateFunction
         normalize: Shopsys\FrameworkBundle\Component\Doctrine\NormalizeFunction
+        field: Shopsys\FrameworkBundle\Component\Doctrine\FieldFunction
     naming_strategy: doctrine.orm.naming_strategy.underscore
     metadata_cache_driver:
       type: service

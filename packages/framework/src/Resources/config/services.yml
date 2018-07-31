@@ -922,4 +922,15 @@ services:
       - '%shopsys.framework.elasticsearch_sources_dir%'
 
   Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductExporter: ~
+
   Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductDataConverter: ~
+
+  Shopsys\FrameworkBundle\Model\Product\Search\ElasticsearchSearchClient: ~
+
+  Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient:
+    class: Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient
+    arguments:
+      - '@Shopsys\FrameworkBundle\Model\Product\Search\ElasticsearchSearchClient'
+
+  Shopsys\FrameworkBundle\Model\Product\Search\SearchClient:
+    alias: Shopsys\FrameworkBundle\Model\Product\Search\CachedSearchClient
