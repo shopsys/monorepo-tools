@@ -110,7 +110,7 @@ class CategoryDomainTest extends DatabaseTestCase
      */
     public function testCreateCategoryDomainWithDataForSingleDomain()
     {
-        $categoryData = $this->categoryDataFactory->createDefault();
+        $categoryData = $this->categoryDataFactory->create();
 
         $categoryData->seoTitles[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_TITLE;
         $categoryData->seoMetaDescriptions[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_META_DESCRIPTION;

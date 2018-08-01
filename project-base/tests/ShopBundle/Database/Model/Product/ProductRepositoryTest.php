@@ -210,7 +210,7 @@ class ProductRepositoryTest extends DatabaseTestCase
         $paginationResult = $productRepository->getPaginationResultForSearchListable(
             $searchText,
             1,
-            'cs',
+            'en',
             new ProductFilterData(),
             ProductListOrderingModeService::ORDER_BY_PRIORITY,
             $pricingGroup,
@@ -235,7 +235,7 @@ class ProductRepositoryTest extends DatabaseTestCase
         $paginationResult = $productRepository->getPaginationResultForListableInCategory(
             $category,
             1,
-            'cs',
+            'en',
             new ProductFilterData(),
             ProductListOrderingModeService::ORDER_BY_PRIORITY,
             $pricingGroup,

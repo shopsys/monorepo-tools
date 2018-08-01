@@ -62,7 +62,7 @@ class BrandDomainTest extends DatabaseTestCase
      */
     public function testCreateBrandDomainForSingleDomain()
     {
-        $brandData = $this->brandDataFactory->createDefault();
+        $brandData = $this->brandDataFactory->create();
 
         $brandData->seoTitles[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_TITLE;
         $brandData->seoH1s[self::FIRST_DOMAIN_ID] = self::DEMONSTRATIVE_SEO_H1;
