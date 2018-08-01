@@ -29,6 +29,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - added cookbook [Adding a New Administration Page](/docs/cookbook/adding-a-new-administration-page.md) along with the side menu and breadcrumbs
 
 #### Changed
+- [#302 - All persistent files like uploads are now stored using abstract filesystem (Flysystem)](https://github.com/shopsys/shopsys/pull/302)
+    - abstract filesystem is used to store:
+        - uploaded files and images
+        - uploaded files and images via WYSIWYG
+        - generated feeds
+        - generated sitemaps
+    - all services using PernamentPhpFileCache now use RedisCache instead
 - [#286 - Instantiate entity data objects by factories](https://github.com/shopsys/shopsys/pull/286)
     - entity data objects have only an empty constructor now
     - creation of entity data objects moved to factories to allow extensibility
@@ -64,14 +71,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#370 - MultidomainEntityClassFinderFacade: metadata are checked on class name resolved by EntityNameResolver](https://github.com/shopsys/shopsys/pull/370)
 
 #### Fixed
-- [#291 - Unnecessary SQL queries on category detail in admin](https://github.com/shopsys/shopsys/pull/304):
+- [#304 - Unnecessary SQL queries on category detail in admin](https://github.com/shopsys/shopsys/pull/304):
     - category translations for ancestor category are loaded in the same query as categories
 - [#317 - Travis build is failing for shopsys/framework](https://github.com/shopsys/shopsys/pull/317):
     - framework package requires redis bundle and redis extension
     - redis extension enabled in configuration for travis
 - [#316 - Admin: feed items on feeds generation page contain clickable link and datetime](https://github.com/shopsys/shopsys/pull/316)
     - checks for existing file and for modified time of file use abstract filesystem methods
-- [#291 - Dropped triggers before creation](https://github.com/shopsys/shopsys/pull/314)
+- [#314 - Dropped triggers before creation](https://github.com/shopsys/shopsys/pull/314)
 - [#263 - CartWatcherFacade: fixed swapped messages](https://github.com/shopsys/shopsys/pull/263)
 - [#339 - Downgrade snc/redis-bundle to 2.1.4 due to Issue in phpredis](https://github.com/shopsys/shopsys/pull/339)
 - [#351 - added missing typehints in methods of CookiesFacade and OrderMailService](https://github.com/shopsys/shopsys/pull/351)
@@ -100,7 +107,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### [shopsys/monorepo-tools]
 #### Added
 - [#345 - monorepo-tools: allow incremental build of monorepo](https://github.com/shopsys/shopsys/pull/345) [@lukaso]
-- [# 311 - monorepo split allows adding new package when monorepo is already tagged](https://github.com/shopsys/shopsys/pull/311)
+- [#311 - monorepo split allows adding new package when monorepo is already tagged](https://github.com/shopsys/shopsys/pull/311)
 #### Fixed
 - [#281 - monorepo-tools: Fix scripts to work on OS X](https://github.com/shopsys/shopsys/pull/282) [@lukaso]
 
@@ -174,13 +181,6 @@ It was only important with [the original open-box architecture](https://blog.sho
 ## [7.0.0-alpha3] - 2018-07-03
 ### [shopsys/framework]
 #### Changed
-- [#302 - All persistent files like uploads are now stored using abstract filesystem (Flysystem)](https://github.com/shopsys/shopsys/pull/302)
-    - abstract filesystem is used to store:
-        - uploaded files and images
-        - uploaded files and images via WYSIWYG
-        - generated feeds
-        - generated sitemaps
-    - all services using PernamentPhpFileCache now use RedisCache instead
 - [#272 - Changed concept of Components](https://github.com/shopsys/shopsys/pull/143):
     - added definition of Components in [components.md](./docs/introduction/components.md):
     - by this definition, classes that did not match it were moved or refactored.
@@ -298,15 +298,15 @@ It was only important with [the original open-box architecture](https://blog.sho
    - all packeges skip ObjectIsCreatedByFactorySniff in tests folder
 
 ### [shopsys/coding-standards]
-##### Added
+#### Added
 - [#249 - First architectonical codesniff](https://github.com/shopsys/shopsys/pull/249)
     - new sniff `ObjectIsCreatedByFactorySniff` was created and was integrated into coding standards as service
 
-##### Changed
+#### Changed
 - [#143](https://github.com/shopsys/shopsys/pull/143) [EasyCodingStandard v4.3.0](https://github.com/Symplify/EasyCodingStandard/tree/4.3) is now used
     - rules config file changed its format from neon to yaml
 
-##### Fixed
+#### Fixed
 - [#222 - coding-standards package is now up to date with new PHP_codesniffer v3.3.0](https://github.com/shopsys/shopsys/pull/222)
     - import of parent class of ForbiddenExitSniff was corrected
 
@@ -531,7 +531,7 @@ It was only important with [the original open-box architecture](https://blog.sho
         - protected visibility allows overriding of behavior from projects 
 
 ### [shopsys/product-feed-zbozi]
-##### Changed
+#### Changed
 - [#116 - Visibility of properties and methods of DataFactories and Repositories is protected](https://github.com/shopsys/shopsys/pull/116):
     - visibility of all private properties and methods of repositories of entities was changed to protected
         - there are changed only repositories of entities because currently there was no need for extendibility of other repositories
@@ -602,7 +602,7 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
 - updated phpunit/phpunit to version 7
 
 ### [shopsys/product-feed-interface]
-##### Removed
+#### Removed
 - `HeurekaCategoryNameProviderInterface` as it is specific to Heureka product feed
    - [shopsys/product-feed-heureka](https://github.com/shopsys/product-feed-heureka) manages Heureka categories on its own since v0.5.0
 
@@ -624,8 +624,8 @@ from its open-box repository [shopsys/project-base](https://github.com/shopsys/p
     - removed interfaces `PluginDataStorageProviderInterface` and `DataStorageInterface`
     - only Doctrine entities are further allowed for storing data
 
-#### [shopsys/shopsys]
-##### Added
+### [shopsys/shopsys]
+#### Added
 - basic infrastructure so that the monorepo can be installed and used as standard application
     - for details see [the Monorepo article](./docs/introduction/monorepo.md#infrastructure) in documentation
 - [Shopsys Community License](./LICENSE)
