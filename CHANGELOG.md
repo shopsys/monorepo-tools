@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [7.0.0-alpha3] - 2018-08-02
+## [7.0.0-alpha4] - 2018-08-02
 ### [shopsys/framework]
 #### Added
 - [#335 - Possibility to add a new administration page](https://github.com/shopsys/shopsys/pull/335)
