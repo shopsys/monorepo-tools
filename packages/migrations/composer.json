@@ -37,6 +37,6 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7|^6.0|^7.0",
-        "shopsys/coding-standards": "7.0.0-alpha4"
+        "shopsys/coding-standards": "dev-master"
     }
 }
