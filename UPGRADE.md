@@ -15,7 +15,9 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/product-feed-heureka-delivery]
 * [shopsys/product-feed-zbozi]
 
-## [From 7.0.0-alpha3 to Unreleased]
+## [From 7.0.0-alpha4 to Unreleased]
+
+## [From 7.0.0-alpha3 to 7.0.0-alpha4]
 
 ### [shopsys/framework]
 - move creation of data objects into factories
@@ -230,7 +232,8 @@ parameters:
         - *_generated/*
 
 ```
-[From 7.0.0-alpha3 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha3...HEAD
+[From 7.0.0-alpha4 to Unreleased]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha4...HEAD
+[From 7.0.0-alpha3 to 7.0.0-alpha4]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha3...v7.0.0-alpha4
 [From 7.0.0-alpha2 to 7.0.0-alpha3]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha2...v7.0.0-alpha3
 [From 7.0.0-alpha1 to 7.0.0-alpha2]: https://github.com/shopsys/shopsys/compare/v7.0.0-alpha1...v7.0.0-alpha2
 
