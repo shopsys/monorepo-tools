@@ -115,6 +115,23 @@
         Shopsys.timeout.setTimeoutAndClearPrevious('Shopsys.validation.validateWithParentsDelayed', executeDelayedValidators, 100);
     };
 
+    // Issue in dynamic collections validation that causes duplication of substrings in identifiers
+    // Issue described in https://github.com/formapro/JsFormValidatorBundle/issues/139
+    // PR with fix in the original package: https://github.com/formapro/JsFormValidatorBundle/pull/141
+    FpJsFormValidator._preparePrototype = FpJsFormValidator.preparePrototype;
+    FpJsFormValidator.preparePrototype = function (prototype, name) {
+        prototype.name = prototype.name.replace(/__name__/g, name);
+        prototype.id = prototype.id.replace(/__name__/g, name);
+
+        if (typeof prototype.children === 'object') {
+            for (var childName in prototype.children) {
+                prototype[childName] = this.preparePrototype(prototype.children[childName], name);
+            }
+        }
+
+        return prototype;
+    };
+
     Shopsys.validation.removeDelayedValidationWithParents = function (jsFormValidator) {
         do {
             delete delayedValidators[jsFormValidator.id];

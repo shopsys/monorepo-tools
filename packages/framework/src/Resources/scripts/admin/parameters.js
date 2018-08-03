@@ -27,16 +27,17 @@
             var item = prototype
                 .replace(/__name__label__/g, index)
                 .replace(/__name__/g, index);
-            var $item = $(item);
+            var $item = $($.parseHTML(item));
             $item.data('index', index);
 
             $collection.data('index', index + 1);
 
             $collection.append($item);
+            Shopsys.register.registerNewContent($item);
 
+            Shopsys.validation.addNewItemToCollection('#product_edit_form_parameters', index);
             Shopsys.formChangeInfo.showInfo();
             Shopsys.parameters.refreshCount($collection);
-            Shopsys.validation.addNewItemToCollection('#product_edit_form_parameters', index);
 
             return false;
         });

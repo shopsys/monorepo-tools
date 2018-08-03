@@ -20,6 +20,7 @@
             var $newUrl = $($.parseHTML(newUrl));
 
             $newUrlsContainer.append($newUrl);
+            Shopsys.register.registerNewContent($newUrl);
 
             Shopsys.validation.addNewItemToCollection('#' + newUrlsId, index);
             Shopsys.formChangeInfo.showInfo();

@@ -74,10 +74,11 @@
         $item.data('index', index);
 
         $collection.append($item);
-        Shopsys.validation.addNewItemToCollection('#order_form_items', index);
+        Shopsys.register.registerNewContent($item);
 
-        Shopsys.order.items.refreshCount($collection);
+        Shopsys.validation.addNewItemToCollection('#order_form_items', index);
         Shopsys.formChangeInfo.showInfo();
+        Shopsys.order.items.refreshCount($collection);
     };
 
     Shopsys.order.items.addProduct = function (productId, productName) {
