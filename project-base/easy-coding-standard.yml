@@ -4,6 +4,7 @@ imports:
 parameters:
     exclude_files:
         - '*/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
+
     skip:
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
             - '*/src/Shopsys/ShopBundle/Controller/Front/OrderController.php'
@@ -25,5 +26,6 @@ parameters:
 
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
             - '*/tests/*'
+
         Shopsys\CodingStandards\Sniffs\ForbiddenDumpSniff:
             - '*/tests/ShopBundle/Database/Model/Cart/CartFacadeTest.php'

@@ -3,6 +3,9 @@ imports:
     - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/psr2.yml' }
 
 services:
+    # Slevomat Checkers
+    SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff: ~
+
     # Shopsys Checkers
     Shopsys\CodingStandards\CsFixer\ForbiddenDumpFixer: ~
     Shopsys\CodingStandards\CsFixer\MissingButtonTypeFixer: ~
@@ -132,6 +135,8 @@ parameters:
     exclude_files:
         - '*/tests/Unit/**/wrong/*'
     skip:
+        SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff:
+            - '*/tests/Unit/CsFixer/OrmJoinColumnRequireNullableFixer/*'
         # private properties should not start with "_"
         PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.PrivateNoUnderscore: ~
         # it is not necessary to have blank line after control structure
