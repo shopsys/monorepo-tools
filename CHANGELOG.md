@@ -34,6 +34,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - product search uses Elasticsearch
     - docs: added [article](./docs/introduction/product-search-via-elasticsearch.md) with Elasticsearch overview
 
+#### Changed
+- [#385 - AccessDeniedHttpException replaced by AccessDeniedException](https://github.com/shopsys/shopsys/pull/385)
+
 #### Fixed
 - [#260 - JS validation: dynamically added form inputs are now validated](https://github.com/shopsys/shopsys/pull/260)
 

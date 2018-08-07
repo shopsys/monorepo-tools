@@ -13,6 +13,7 @@ use Shopsys\FrameworkBundle\Model\Administrator\AdministratorDataFactoryInterfac
 use Shopsys\FrameworkBundle\Model\Administrator\AdministratorFacade;
 use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class AdministratorController extends AdminBaseController
 {
@@ -94,7 +95,7 @@ class AdministratorController extends AdminBaseController
 
         $loggedUser = $this->getUser();
         if (!$loggedUser instanceof Administrator) {
-            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException(sprintf(
+            throw new AccessDeniedException(sprintf(
                 'Logged user is not instance of "%s". That should not happen due to security.yml configuration.',
                 Administrator::class
             ));
@@ -102,7 +103,7 @@ class AdministratorController extends AdminBaseController
 
         if ($administrator->isSuperadmin() && !$loggedUser->isSuperadmin()) {
             $message = 'Superadmin can only be edited by superadmin.';
-            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException($message);
+            throw new AccessDeniedException($message);
         }
 
         $administratorData = $this->administratorDataFactory->createFromAdministrator($administrator);
