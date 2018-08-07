@@ -41,7 +41,6 @@ class Environment
         return self::getEnvironmentFileSetting()->getEnvironment($console);
     }
 
-
     /**
      * @param \Composer\IO\IOInterface $io
      */
