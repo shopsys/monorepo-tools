@@ -4,16 +4,10 @@ namespace Shopsys\FrameworkBundle\Twig;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
 
 class ShopInfoExtension extends \Twig_Extension
 {
-    /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade
      */
@@ -25,16 +19,13 @@ class ShopInfoExtension extends \Twig_Extension
     private $domain;
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param \Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade $shopInfoSettingFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      */
     public function __construct(
-        ContainerInterface $container,
         ShopInfoSettingFacade $shopInfoSettingFacade,
         Domain $domain
     ) {
-        $this->container = $container;
         $this->shopInfoSettingFacade = $shopInfoSettingFacade;
         $this->domain = $domain;
     }

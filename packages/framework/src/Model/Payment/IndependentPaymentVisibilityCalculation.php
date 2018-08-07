@@ -7,20 +7,12 @@ use Shopsys\FrameworkBundle\Component\Domain\Domain;
 class IndependentPaymentVisibilityCalculation
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Model\Payment\PaymentRepository
-     */
-    private $paymentRepository;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */
     private $domain;
 
-    public function __construct(
-        PaymentRepository $paymentRepository,
-        Domain $domain
-    ) {
-        $this->paymentRepository = $paymentRepository;
+    public function __construct(Domain $domain)
+    {
         $this->domain = $domain;
     }
 

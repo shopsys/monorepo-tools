@@ -8,11 +8,6 @@ use Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig;
 class UploadedFileDeleteDoctrineListener
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\UploadedFile\Config\UploadedFileConfig
      */
     private $uploadedFileConfig;

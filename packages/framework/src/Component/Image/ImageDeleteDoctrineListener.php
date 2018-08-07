@@ -5,15 +5,9 @@ namespace Shopsys\FrameworkBundle\Component\Image;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ImageDeleteDoctrineListener
 {
-    /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
-
     /**
      * @var \Shopsys\FrameworkBundle\Component\Image\Config\ImageConfig
      */
@@ -25,11 +19,9 @@ class ImageDeleteDoctrineListener
     private $imageFacade;
 
     public function __construct(
-        ContainerInterface $container,
         ImageConfig $imageConfig,
         ImageFacade $imageFacade
     ) {
-        $this->container = $container;
         $this->imageConfig = $imageConfig;
         $this->imageFacade = $imageFacade;
     }

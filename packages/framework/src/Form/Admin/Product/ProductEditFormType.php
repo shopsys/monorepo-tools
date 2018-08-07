@@ -2,7 +2,6 @@
 
 namespace Shopsys\FrameworkBundle\Form\Admin\Product;
 
-use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType;
 use Shopsys\FrameworkBundle\Form\Constraints\UniqueProductParameters;
@@ -41,11 +40,6 @@ class ProductEditFormType extends AbstractType
     private $pricingGroupFacade;
 
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
-     */
-    private $domain;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade
      */
     private $pluginDataFormExtensionFacade;
@@ -58,13 +52,11 @@ class ProductEditFormType extends AbstractType
     public function __construct(
         RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer,
         PricingGroupFacade $pricingGroupFacade,
-        Domain $domain,
         PluginCrudExtensionFacade $pluginDataFormExtensionFacade,
         ProductParameterValueToProductParameterValuesLocalizedTransformer $productParameterValueToProductParameterValuesLocalizedTransformer
     ) {
         $this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
         $this->pricingGroupFacade = $pricingGroupFacade;
-        $this->domain = $domain;
         $this->pluginDataFormExtensionFacade = $pluginDataFormExtensionFacade;
         $this->productParameterValueToProductParameterValuesLocalizedTransformer = $productParameterValueToProductParameterValuesLocalizedTransformer;
     }

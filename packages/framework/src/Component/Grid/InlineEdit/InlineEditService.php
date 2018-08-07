@@ -3,31 +3,21 @@
 namespace Shopsys\FrameworkBundle\Component\Grid\InlineEdit;
 
 use Shopsys\FrameworkBundle\Component\Grid\Grid;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
 class InlineEditService
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditRegistry
      */
     private $gridInlineEditRegistry;
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditRegistry $gridInlineEditRegistry
      */
-    public function __construct(
-        ContainerInterface $container,
-        GridInlineEditRegistry $gridInlineEditRegistry
-    ) {
-        $this->container = $container;
+    public function __construct(GridInlineEditRegistry $gridInlineEditRegistry)
+    {
         $this->gridInlineEditRegistry = $gridInlineEditRegistry;
     }
 
