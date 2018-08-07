@@ -12,7 +12,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PerformanceDataCommand extends Command
 {
-
     /**
      * @var string
      */

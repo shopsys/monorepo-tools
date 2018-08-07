@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CategoryOneToManyBidirectionalEntity
 {
-
     /**
      * @var int
      *

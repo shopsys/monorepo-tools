@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Administrator;
 
 class AdministratorFactory implements AdministratorFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Administrator\AdministratorData $data
      * @return \Shopsys\FrameworkBundle\Model\Administrator\Administrator

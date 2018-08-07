@@ -6,7 +6,6 @@ use DateTimeImmutable;
 
 interface NewsletterSubscriberFactoryInterface
 {
-
     /**
      * @param string $email
      * @param DateTimeImmutable $createdAt

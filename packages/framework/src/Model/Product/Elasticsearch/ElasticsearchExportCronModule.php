@@ -7,7 +7,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 class ElasticsearchExportCronModule implements SimpleCronModuleInterface
 {
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchExportProductFacade
      */

@@ -6,7 +6,6 @@ use Shopsys\FrameworkBundle\Model\Category\Category;
 
 interface ProductCategoryDomainFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category

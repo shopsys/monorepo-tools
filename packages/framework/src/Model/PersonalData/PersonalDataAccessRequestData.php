@@ -6,7 +6,6 @@ use DateTime;
 
 class PersonalDataAccessRequestData
 {
-
     /**
      * @var DateTime|null
      */

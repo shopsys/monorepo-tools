@@ -8,7 +8,6 @@ use Doctrine\ORM\Query\ResultSetMapping;
 
 abstract class AbstractNativeFixture extends AbstractFixture
 {
-
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */

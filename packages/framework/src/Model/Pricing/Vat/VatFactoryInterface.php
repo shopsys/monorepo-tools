@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Pricing\Vat;
 
 interface VatFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\VatData $data
      * @return \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat

@@ -6,7 +6,6 @@ use Exception;
 
 class CheckSchemaCommandException extends Exception
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

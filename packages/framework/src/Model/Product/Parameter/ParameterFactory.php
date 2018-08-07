@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Product\Parameter;
 
 class ParameterFactory implements ParameterFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $data
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter

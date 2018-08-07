@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Administrator;
 
 interface AdministratorGridLimitFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      * @param string $gridId

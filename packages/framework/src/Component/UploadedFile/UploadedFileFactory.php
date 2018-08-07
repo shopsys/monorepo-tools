@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Component\UploadedFile;
 
 class UploadedFileFactory implements UploadedFileFactoryInterface
 {
-
     /**
      * @param string $entityName
      * @param int $entityId

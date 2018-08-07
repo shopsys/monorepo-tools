@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Order;
 
 interface OrderNumberSequenceFactoryInterface
 {
-
     /**
      * @param int $id
      * @param string $number

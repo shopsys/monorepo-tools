@@ -11,7 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ReplaceDomainsUrlsCommand extends Command
 {
-
     /**
      * @var string
      */

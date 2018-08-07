@@ -24,6 +24,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### [shopsys/coding-standards]
+#### Added
+- [#384 - cs: keep class spacing consistent](https://github.com/shopsys/shopsys/pull/384) [@TomasVotruba]
+    - added new rule (along with fixer `ClassAttributesSeparationFixer`) into `easy-coding-standard.yml`
 
 ## [7.0.0-alpha5] - 2018-08-22
 ### [shopsys/framework]

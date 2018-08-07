@@ -34,6 +34,7 @@ class ParameterInlineEdit extends AbstractGridInlineEdit
         $this->formFactory = $formFactory;
         $this->parameterDataFactory = $parameterDataFactory;
     }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterData $parameterData
      * @return int

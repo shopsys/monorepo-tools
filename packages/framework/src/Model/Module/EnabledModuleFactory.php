@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Module;
 
 class EnabledModuleFactory implements EnabledModuleFactoryInterface
 {
-
     /**
      * @param string $name
      * @return \Shopsys\FrameworkBundle\Model\Module\EnabledModule

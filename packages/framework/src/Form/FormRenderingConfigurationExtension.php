@@ -28,6 +28,7 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
         $view->vars['is_group_container_to_render_as_the_last_one'] = $options['is_group_container_to_render_as_the_last_one'];
         $view->vars['render_form_row'] = $options['render_form_row'];
     }
+
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
@@ -43,6 +44,7 @@ class FormRenderingConfigurationExtension extends AbstractTypeExtension
             'render_form_row' => true,
         ]);
     }
+
     /**
      * @return string
      */

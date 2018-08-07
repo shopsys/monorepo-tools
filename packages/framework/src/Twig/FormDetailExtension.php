@@ -9,7 +9,6 @@ use Twig_SimpleFunction;
 
 class FormDetailExtension extends Twig_Extension
 {
-
     /**
      * @var \Twig_Environment
      */

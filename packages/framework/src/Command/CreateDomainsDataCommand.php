@@ -13,7 +13,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateDomainsDataCommand extends Command
 {
-
     /**
      * @var string
      */

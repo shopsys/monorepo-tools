@@ -26,7 +26,6 @@ use Symfony\Component\Validator\Constraints;
 
 class UserFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
      */

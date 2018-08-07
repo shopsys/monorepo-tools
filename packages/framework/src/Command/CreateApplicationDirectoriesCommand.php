@@ -12,7 +12,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class CreateApplicationDirectoriesCommand extends Command
 {
-
     /**
      * @var string
      */

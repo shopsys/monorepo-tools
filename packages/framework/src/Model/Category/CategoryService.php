@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Category;
 
 class CategoryService
 {
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\Category\CategoryFactoryInterface
      */

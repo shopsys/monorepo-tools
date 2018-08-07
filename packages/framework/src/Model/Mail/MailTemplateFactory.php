@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Mail;
 
 class MailTemplateFactory implements MailTemplateFactoryInterface
 {
-
     /**
      * @param string $name
      * @param int $domainId

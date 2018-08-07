@@ -7,7 +7,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class GoogleFeedInfo implements FeedInfoInterface
 {
-
     /**
      * @var \Symfony\Component\Translation\TranslatorInterface
      */

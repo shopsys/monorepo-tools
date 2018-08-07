@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Order\PromoCode;
 
 class PromoCodeFactory implements PromoCodeFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCodeData $data
      * @return \Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode

@@ -12,7 +12,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ServerRunForDomainCommand extends Command
 {
-
     /**
      * @var string
      */

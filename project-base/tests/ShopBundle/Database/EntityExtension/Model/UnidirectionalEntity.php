@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UnidirectionalEntity
 {
-
     /**
      * @var int
      *

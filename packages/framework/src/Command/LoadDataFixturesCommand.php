@@ -24,7 +24,6 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
  */
 class LoadDataFixturesCommand extends DoctrineCommand
 {
-
     /**
      * @var \Shopsys\FrameworkBundle\Component\DataFixture\FixturesLoader
      */

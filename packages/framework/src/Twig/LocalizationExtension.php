@@ -8,7 +8,6 @@ use Twig_SimpleFunction;
 
 class LocalizationExtension extends \Twig_Extension
 {
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\Localization\Localization
      */

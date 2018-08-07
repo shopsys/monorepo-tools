@@ -7,7 +7,6 @@ use Shopsys\FrameworkBundle\Model\Pricing\PricingSetting;
 
 class CurrencyService
 {
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFactoryInterface
      */

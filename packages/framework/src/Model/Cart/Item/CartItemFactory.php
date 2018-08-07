@@ -7,7 +7,6 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class CartItemFactory implements CartItemFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product

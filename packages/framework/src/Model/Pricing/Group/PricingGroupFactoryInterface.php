@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Pricing\Group;
 
 interface PricingGroupFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData $data
      * @param int $domainId

@@ -6,7 +6,6 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup;
 
 class ProductVisibilityFactory implements ProductVisibilityFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup

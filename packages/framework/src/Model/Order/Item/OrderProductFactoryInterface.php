@@ -8,7 +8,6 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 
 interface OrderProductFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @param string $name

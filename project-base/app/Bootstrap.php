@@ -19,6 +19,7 @@ setlocale(LC_CTYPE, 'en_US.utf8');
 class Bootstrap
 {
     private $environment;
+
     private $console;
 
     public function __construct($console = false, $environment = null)

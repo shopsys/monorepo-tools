@@ -22,7 +22,6 @@ use Symfony\Component\Validator\Constraints;
 
 class BrandFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
      */

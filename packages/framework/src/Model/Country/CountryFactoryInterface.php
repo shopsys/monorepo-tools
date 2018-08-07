@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Country;
 
 interface CountryFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $data
      * @param int $domainId

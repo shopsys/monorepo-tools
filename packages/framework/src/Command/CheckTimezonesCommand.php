@@ -10,7 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CheckTimezonesCommand extends Command
 {
-
     /**
      * @var string
      */

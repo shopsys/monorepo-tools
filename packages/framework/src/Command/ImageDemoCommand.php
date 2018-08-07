@@ -18,7 +18,6 @@ use ZipArchive;
 
 class ImageDemoCommand extends Command
 {
-
     /**
      * @var string
      */

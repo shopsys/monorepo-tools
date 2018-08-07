@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Component\DataFixture;
 
 class PersistentReferenceFactory implements PersistentReferenceFactoryInterface
 {
-
     /**
      * @param string $referenceName
      * @param string $entityName

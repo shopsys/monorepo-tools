@@ -10,7 +10,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class GoogleProductCrudExtension implements PluginCrudExtensionInterface
 {
-
     /**
      * @var \Symfony\Component\Translation\TranslatorInterface
      */

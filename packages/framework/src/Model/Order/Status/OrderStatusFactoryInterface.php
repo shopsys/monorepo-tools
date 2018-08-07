@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Order\Status;
 
 interface OrderStatusFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusData $data
      * @param int $type

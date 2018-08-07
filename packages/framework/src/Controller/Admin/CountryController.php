@@ -7,7 +7,6 @@ use Shopsys\FrameworkBundle\Model\Country\CountryInlineEdit;
 
 class CountryController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\Country\CountryInlineEdit
      */

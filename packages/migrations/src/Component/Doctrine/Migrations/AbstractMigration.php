@@ -7,7 +7,6 @@ use Doctrine\DBAL\Migrations\AbstractMigration as DoctrineAbstractMigration;
 
 abstract class AbstractMigration extends DoctrineAbstractMigration
 {
-
     /**
      * {@inheritDoc}
      * @deprecated use "sql" method instead

@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Component\Router\FriendlyUrl;
 
 class FriendlyUrlFactory implements FriendlyUrlFactoryInterface
 {
-
     /**
      * @param string $routeName
      * @param int $entityId

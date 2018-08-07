@@ -12,7 +12,6 @@ namespace Shopsys\FrameworkBundle\Component\Domain\Multidomain;
  */
 interface MultidomainEntityClassProviderInterface
 {
-
     /**
      * Return entities FQNs that have identifier called $domainId but is not multidomain entity.
      *

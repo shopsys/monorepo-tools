@@ -9,7 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CheckMicroservicesCommand extends Command
 {
-
     /**
      * @var string
      */

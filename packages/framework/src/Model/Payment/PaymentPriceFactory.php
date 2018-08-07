@@ -6,7 +6,6 @@ use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 
 class PaymentPriceFactory implements PaymentPriceFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Payment\Payment $payment
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency $currency

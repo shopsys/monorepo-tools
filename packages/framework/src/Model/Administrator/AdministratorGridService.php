@@ -6,7 +6,6 @@ use Shopsys\FrameworkBundle\Component\Grid\Grid;
 
 class AdministratorGridService
 {
-
     /**
      * @var \Shopsys\FrameworkBundle\Model\Administrator\AdministratorGridLimitFactoryInterface
      */

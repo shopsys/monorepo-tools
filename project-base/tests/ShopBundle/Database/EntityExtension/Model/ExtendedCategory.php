@@ -13,7 +13,6 @@ use Shopsys\FrameworkBundle\Model\Category\CategoryData;
  */
 class ExtendedCategory extends Category
 {
-
     /**
      * @var string|null
      *

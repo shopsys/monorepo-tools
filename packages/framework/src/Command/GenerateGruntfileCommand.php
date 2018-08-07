@@ -11,7 +11,6 @@ use Twig\Environment;
 
 class GenerateGruntfileCommand extends Command
 {
-
     /**
      * @var string
      */

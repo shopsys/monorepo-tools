@@ -8,7 +8,6 @@ use Doctrine\ORM\Tools\SchemaTool;
 
 class DatabaseSchemaFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */

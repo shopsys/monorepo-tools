@@ -14,7 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class RecalculationsCommand extends Command
 {
-
     /**
      * @var string
      */

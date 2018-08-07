@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\PersonalData;
 
 class PersonalDataAccessRequestFactory implements PersonalDataAccessRequestFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequestData $data
      * @return \Shopsys\FrameworkBundle\Model\PersonalData\PersonalDataAccessRequest

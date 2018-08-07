@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Product;
 
 class ProductFactory implements ProductFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductData $data
      * @return \Shopsys\FrameworkBundle\Model\Product\Product

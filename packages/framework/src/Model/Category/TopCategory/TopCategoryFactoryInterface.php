@@ -6,7 +6,6 @@ use Shopsys\FrameworkBundle\Model\Category\Category;
 
 interface TopCategoryFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category
      * @param int $domainId

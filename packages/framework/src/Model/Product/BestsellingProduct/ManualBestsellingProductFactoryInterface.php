@@ -7,7 +7,6 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 
 interface ManualBestsellingProductFactoryInterface
 {
-
     /**
      * @param int $domainId
      * @param \Shopsys\FrameworkBundle\Model\Category\Category $category

@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Country;
 
 class CountryFactory implements CountryFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Country\CountryData $data
      * @param int $domainId

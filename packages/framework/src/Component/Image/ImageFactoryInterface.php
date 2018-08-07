@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Component\Image;
 
 interface ImageFactoryInterface
 {
-
     /**
      * @param string $entityName
      * @param int $entityId

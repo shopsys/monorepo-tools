@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Component\Grid\InlineEdit;
 
 class GridInlineEditRegistry
 {
-
     /**
      * @var \Shopsys\FrameworkBundle\Component\Grid\InlineEdit\GridInlineEditInterface[]
      */

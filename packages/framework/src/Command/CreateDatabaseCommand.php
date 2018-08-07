@@ -15,7 +15,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class CreateDatabaseCommand extends Command
 {
-
     /**
      * @var string
      */

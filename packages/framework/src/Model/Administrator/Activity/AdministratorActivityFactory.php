@@ -6,7 +6,6 @@ use Shopsys\FrameworkBundle\Model\Administrator\Administrator;
 
 class AdministratorActivityFactory implements AdministratorActivityFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Administrator\Administrator $administrator
      * @param string $ipAddress

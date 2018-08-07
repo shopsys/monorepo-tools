@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Component\Setting;
 
 interface SettingValueFactoryInterface
 {
-
     /**
      * @param string $name
      * @param \DateTime|string|int|float|bool|null $value

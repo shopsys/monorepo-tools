@@ -7,7 +7,6 @@ use Twig_SimpleFilter;
 
 class JoinNoneEmptyExtension extends Twig_Extension
 {
-
     /**
      * @return \Twig_SimpleFilter[]
      */

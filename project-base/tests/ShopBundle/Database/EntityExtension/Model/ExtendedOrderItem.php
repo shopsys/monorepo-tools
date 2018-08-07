@@ -18,7 +18,6 @@ use Shopsys\FrameworkBundle\Model\Order\Item\OrderItem;
  */
 abstract class ExtendedOrderItem extends OrderItem
 {
-
     /**
      * @var string|null
      *

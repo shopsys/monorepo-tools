@@ -16,7 +16,6 @@ use Doctrine\Common\DataFixtures\Loader;
  */
 class FixturesLoader extends Loader
 {
-
     /**
      * @var \Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader
      */

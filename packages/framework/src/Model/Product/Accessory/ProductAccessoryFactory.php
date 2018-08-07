@@ -6,7 +6,6 @@ use Shopsys\FrameworkBundle\Model\Product\Product;
 
 class ProductAccessoryFactory implements ProductAccessoryFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
      * @param \Shopsys\FrameworkBundle\Model\Product\Product $accessory

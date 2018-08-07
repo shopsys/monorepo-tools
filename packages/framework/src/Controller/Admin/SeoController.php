@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SeoController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\AdminDomainTabsFacade
      */

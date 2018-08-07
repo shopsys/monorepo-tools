@@ -157,6 +157,7 @@ class CartFacade
     {
         $this->currentPromoCodeFacade->removeEnteredPromoCode();
     }
+
     /**
      * @return \Shopsys\FrameworkBundle\Model\Cart\Cart
      */

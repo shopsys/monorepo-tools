@@ -8,7 +8,6 @@ use Shopsys\FrameworkBundle\Model\Transport\Transport;
 
 class OrderTransportFactory implements OrderTransportFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Order $order
      * @param string $name

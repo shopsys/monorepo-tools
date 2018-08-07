@@ -9,7 +9,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class HeurekaProductCrudExtension implements PluginCrudExtensionInterface
 {
-
     /**
      * @var \Symfony\Component\Translation\TranslatorInterface
      */

@@ -4,7 +4,6 @@ namespace Shopsys\MigrationBundle\Component\Generator;
 
 class GeneratorResult
 {
-
     /**
      * @var string
      */

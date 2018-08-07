@@ -122,6 +122,13 @@ services:
     PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer: ~
     PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer: ~
     PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer: ~
+    # keep 1 empty line between constants, properties and methods
+    # keep 0 empty lines after class open bracket {
+    # keep 0 empty lines before class end bracket }
+    PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer:
+        elements:
+        - 'property'
+        - 'method'
 
     # Code Metrics
     ObjectCalisthenics\Sniffs\Files\ClassTraitAndInterfaceLengthSniff:

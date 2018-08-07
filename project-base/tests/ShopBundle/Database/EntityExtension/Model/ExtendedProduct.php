@@ -13,7 +13,6 @@ use Shopsys\FrameworkBundle\Model\Product\ProductData;
  */
 class ExtendedProduct extends Product
 {
-
     /**
      * @var string|null
      *

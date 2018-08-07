@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Pricing\Vat;
 
 class VatService
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $defaultVat
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Vat\Vat $vatToDelete

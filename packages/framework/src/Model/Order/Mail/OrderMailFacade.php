@@ -49,6 +49,7 @@ class OrderMailFacade
         $messageData->attachmentsFilepaths = $this->mailTemplateFacade->getMailTemplateAttachmentsFilepaths($mailTemplate);
         $this->mailer->send($messageData);
     }
+
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\Status\OrderStatus $orderStatus
      * @param int $domainId

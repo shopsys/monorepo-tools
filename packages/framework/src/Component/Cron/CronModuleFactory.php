@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Component\Cron;
 
 class CronModuleFactory implements CronModuleFactoryInterface
 {
-
     /**
      * @param string $serviceId
      * @return \Shopsys\FrameworkBundle\Component\Cron\CronModule

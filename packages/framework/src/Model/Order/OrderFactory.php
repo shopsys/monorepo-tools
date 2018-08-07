@@ -6,7 +6,6 @@ use Shopsys\FrameworkBundle\Model\Customer\User;
 
 class OrderFactory implements OrderFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Order\OrderData $orderData
      * @param string $orderNumber

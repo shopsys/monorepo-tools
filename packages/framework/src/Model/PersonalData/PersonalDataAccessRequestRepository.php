@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class PersonalDataAccessRequestRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
      */

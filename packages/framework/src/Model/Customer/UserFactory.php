@@ -4,7 +4,6 @@ namespace Shopsys\FrameworkBundle\Model\Customer;
 
 class UserFactory implements UserFactoryInterface
 {
-
     /**
      * @param \Shopsys\FrameworkBundle\Model\Customer\UserData $userData
      * @param \Shopsys\FrameworkBundle\Model\Customer\BillingAddress $billingAddress

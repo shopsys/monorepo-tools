@@ -9,7 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImportDefaultDatabaseSchemaCommand extends Command
 {
-
     /**
      * @var string
      */
