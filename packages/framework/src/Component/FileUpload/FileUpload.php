@@ -81,7 +81,7 @@ class FileUpload
     public function upload(UploadedFile $file)
     {
         if ($file->getError()) {
-            throw new \Shopsys\FrameworkBundle\Component\FileUpload\Exception\UploadFailedException($file->getErrorMessage(), $file->getError());
+            throw new \Shopsys\FrameworkBundle\Component\FileUpload\Exception\UploadFailedException($file->getErrorMessage());
         }
 
         $temporaryFilename = $this->getTemporaryFilename($file->getClientOriginalName());
