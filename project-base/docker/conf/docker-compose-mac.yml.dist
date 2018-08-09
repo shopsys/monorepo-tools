@@ -82,9 +82,24 @@ services:
         image: namshi/smtp:latest
         container_name: shopsys-framework-smtp-server
 
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.3.2
+        container_name: shopsys-framework-elasticsearch
+        ulimits:
+            nofile:
+                soft: 65536
+                hard: 65536
+        ports:
+            - "9200:9200"
+        volumes:
+            - shopsys-framework-elasticsearch-data-sync:/usr/share/elasticsearch/data
+
 volumes:
     shopsys-framework-sync:
         external: true
 
     shopsys-framework-postgres-data-sync:
+        external: true
+
+    shopsys-framework-elasticsearch-data-sync:
         external: true

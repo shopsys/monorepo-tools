@@ -63,6 +63,7 @@
         "doctrine/doctrine-fixtures-bundle": "^3.0.2",
         "doctrine/orm": "dev-doctrine-260-with-ddc1960-hotfix-and-ddc4005-hotfix as 2.6.0",
         "egeloen/ckeditor-bundle": "^4.0.6",
+        "elasticsearch/elasticsearch": "^6.0.1",
         "fp/jsformvalidator-bundle": "^1.5.1",
         "fzaninotto/faker": "^1.7.1",
         "gedmo/doctrine-extensions": "^2.4.34",

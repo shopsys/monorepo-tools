@@ -174,3 +174,5 @@ services:
   Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade: ~
 
   Shopsys\FrameworkBundle\Model\Localization\Localization: ~
+
+  Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductRepository: ~

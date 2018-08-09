@@ -7,3 +7,6 @@ syncs:
 
     shopsys-framework-postgres-data-sync:
         src: './var/postgres-data/'
+
+    shopsys-framework-elasticsearch-data-sync:
+        src: './var/elasticsearch-data/'

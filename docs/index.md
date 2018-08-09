@@ -15,6 +15,7 @@
 * [Product Feeds](./introduction/product-feeds.md)
 * [Administration Menu](./introduction/administration-menu.md)
 * [Logging](./introduction/logging.md)
+* [Product Searching via Elasticsearch](./introduction/product-search-via-elasticsearch.md)
 
 ## Cookbook
 * [Dumping and Importing the Database](./cookbook/dumping-and-importing-the-database.md)

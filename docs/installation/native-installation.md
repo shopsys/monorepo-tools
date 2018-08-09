@@ -12,6 +12,7 @@ First of all, you need to install the following software on your system:
 * [Composer](https://getcomposer.org/doc/00-intro.md#globally)
 * [Node.js with npm](https://nodejs.org/en/download/) (npm is automatically installed when you install Node.js)
 * [Redis](https://redis.io/topics/quickstart)
+* [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)
 
 ### Windows
 * [GIT](https://git-scm.com/download/win)
@@ -20,6 +21,7 @@ First of all, you need to install the following software on your system:
 * [Composer](https://getcomposer.org/doc/00-intro.md#installation-windows)
 * [Node.js with npm](https://nodejs.org/en/download/) (npm is automatically installed when you install Node.js)
 * [Redis](https://github.com/MicrosoftArchive/redis/releases)
+* [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)
 
 *Note: The names link to the appropriate installation guide or download page.* 
 

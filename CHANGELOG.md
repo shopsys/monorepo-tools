@@ -24,6 +24,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### [shopsys/framework]
+#### Added
+- [#354 - Product search in elasticsearch](https://github.com/shopsys/shopsys/pull/354)
+    - elasticsearch docker container: volumes are now set in order to preserve data when the container is shut down
+    - added Symfony commands for creating and removing Elasticsearch indexes
+    - added Symfony command for exporting all products to Elasticsearch
+    - added new phing targets for working with Elasticsearch
+    - added CRON module for exporting products' data into Elasticsearch
+    - product search uses Elasticsearch
+    - docs: added [article](./docs/introduction/product-search-via-elasticsearch.md) with Elasticsearch overview
+
 #### Fixed
 - [#260 - JS validation: dynamically added form inputs are now validated](https://github.com/shopsys/shopsys/pull/260)
 
