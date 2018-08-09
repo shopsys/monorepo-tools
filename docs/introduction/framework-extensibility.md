@@ -18,6 +18,7 @@ as well as a list of customizations that are not (and will not be) possible at a
 * [Implementing custom product feed or modifying an existing one](/docs/introduction/product-feeds.md)
 * [Extending the application using standard Symfony techniques](https://symfony.com/doc/current/bundles/override.html)
     * e.g. overriding Twig templates, routes, services, ...
+* [Adding a new advert position](/docs/cookbook/adding-a-new-advert-position.md) to be used in the administration section *Marketing > Advertising system*
 * open-box modifications in `project-base`
     * e.g. adding new entities, changing the FE design, customization of FE javascripts, adding new FE pages (routes and controllers), ...
 

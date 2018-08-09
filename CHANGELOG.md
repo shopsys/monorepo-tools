@@ -39,6 +39,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 #### Changed
 - [#385 - AccessDeniedHttpException replaced by AccessDeniedException](https://github.com/shopsys/shopsys/pull/385)
+- [#395 - ability of adding new advert position from project-base](https://github.com/shopsys/shopsys/pull/395)
+    - added new `AdvertPositionRegistry` class responsible for providing known advert banner positions
+    - existence of the class enables adding new custom positions from project-base (by using class inheritance)
+    - twig templates: advert position names are used directly instead of using class constants to ease the usage
+    - added new [cookbook for adding a new advert position](./docs/cookbook/adding-a-new-advert-position.md)
 
 #### Fixed
 - [#260 - JS validation: dynamically added form inputs are now validated](https://github.com/shopsys/shopsys/pull/260)

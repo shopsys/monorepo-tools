@@ -13,6 +13,7 @@ use Shopsys\FrameworkBundle\Model\AdminNavigation\BreadcrumbOverrider;
 use Shopsys\FrameworkBundle\Model\Advert\Advert;
 use Shopsys\FrameworkBundle\Model\Advert\AdvertDataFactoryInterface;
 use Shopsys\FrameworkBundle\Model\Advert\AdvertFacade;
+use Shopsys\FrameworkBundle\Model\Advert\AdvertPositionRegistry;
 use Shopsys\FrameworkBundle\Twig\ImageExtension;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -53,6 +54,11 @@ class AdvertController extends AdminBaseController
      */
     private $advertDataFactory;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Advert\AdvertPositionRegistry
+     */
+    private $advertPositionRegistry;
+
     public function __construct(
         AdvertFacade $advertFacade,
         AdministratorGridFacade $administratorGridFacade,
@@ -60,7 +66,8 @@ class AdvertController extends AdminBaseController
         AdminDomainTabsFacade $adminDomainTabsFacade,
         BreadcrumbOverrider $breadcrumbOverrider,
         ImageExtension $imageExtension,
-        AdvertDataFactoryInterface $advertDataFactory
+        AdvertDataFactoryInterface $advertDataFactory,
+        AdvertPositionRegistry $advertPositionRegistry
     ) {
         $this->advertFacade = $advertFacade;
         $this->administratorGridFacade = $administratorGridFacade;
@@ -69,6 +76,7 @@ class AdvertController extends AdminBaseController
         $this->breadcrumbOverrider = $breadcrumbOverrider;
         $this->imageExtension = $imageExtension;
         $this->advertDataFactory = $advertDataFactory;
+        $this->advertPositionRegistry = $advertPositionRegistry;
     }
 
     /**
@@ -154,12 +162,7 @@ class AdvertController extends AdminBaseController
             ->setConfirmMessage(t('Do you really want to remove this advert?'));
 
         $grid->setTheme('@ShopsysFramework/Admin/Content/Advert/listGrid.html.twig', [
-            'advertPositionNames' => [
-                Advert::POSITION_HEADER => t('under heading'),
-                Advert::POSITION_FOOTER => t('above footer'),
-                Advert::POSITION_PRODUCT_LIST => t('in category (above the category name)'),
-                Advert::POSITION_LEFT_SIDEBAR => t('in left panel (under category tree)'),
-            ],
+            'advertPositionNames' => $this->advertPositionRegistry->getAllLabelsIndexedByNames(),
             'TYPE_IMAGE' => Advert::TYPE_IMAGE,
         ]);
 

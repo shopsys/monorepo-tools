@@ -11,6 +11,7 @@ use Shopsys\FrameworkBundle\Form\ImageUploadType;
 use Shopsys\FrameworkBundle\Form\ValidationGroup;
 use Shopsys\FrameworkBundle\Model\Advert\Advert;
 use Shopsys\FrameworkBundle\Model\Advert\AdvertData;
+use Shopsys\FrameworkBundle\Model\Advert\AdvertPositionRegistry;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -33,10 +34,17 @@ class AdvertFormType extends AbstractType
      */
     private $domain;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Advert\AdvertPositionRegistry
+     */
+    private $advertPositionRegistry;
+
     public function __construct(
-        Domain $domain
+        Domain $domain,
+        AdvertPositionRegistry $advertPositionRegistry
     ) {
         $this->domain = $domain;
+        $this->advertPositionRegistry = $advertPositionRegistry;
     }
 
     /**
@@ -101,12 +109,7 @@ class AdvertFormType extends AbstractType
             ])
             ->add('positionName', ChoiceType::class, [
                 'required' => true,
-                'choices' => [
-                    t('under heading') => Advert::POSITION_HEADER,
-                    t('above footer') => Advert::POSITION_FOOTER,
-                    t('in category (above the category name)') => Advert::POSITION_PRODUCT_LIST,
-                    t('in left panel (under category tree)') => Advert::POSITION_LEFT_SIDEBAR,
-                ],
+                'choices' => array_flip($this->advertPositionRegistry->getAllLabelsIndexedByNames()),
                 'placeholder' => t('-- Choose area --'),
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Please choose advertisement area']),

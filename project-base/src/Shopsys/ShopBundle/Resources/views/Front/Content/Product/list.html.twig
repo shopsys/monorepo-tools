@@ -19,7 +19,7 @@
 
 {% block main_content %}
     <div class="box-list">
-        {{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
+        {{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : 'productList'})) }}
         <h1>
             {{ category.getSeoH1(domain.id)|default(category.name) }}
         </h1>

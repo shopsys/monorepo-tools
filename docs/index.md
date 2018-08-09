@@ -22,3 +22,4 @@
 * [Configuring Jenkins for Continuous Integration](./cookbook/jenkins-configuration.md)
 * [Adding New Attribute to an Entity](./cookbook/adding-new-attribute-to-an-entity.md)
 * [Adding a New Administration Page](./cookbook/adding-a-new-administration-page.md)
+* [Adding a New Advert Position](./cookbook/adding-a-new-advert-position.md)

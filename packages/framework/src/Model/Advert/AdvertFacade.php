@@ -34,24 +34,32 @@ class AdvertFacade
     protected $advertFactory;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Advert\AdvertPositionRegistry
+     */
+    protected $advertPositionRegistry;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertRepository $advertRepository
      * @param \Shopsys\FrameworkBundle\Component\Image\ImageFacade $imageFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain
      * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertFactoryInterface $advertFactory
+     * @param \Shopsys\FrameworkBundle\Model\Advert\AdvertPositionRegistry $advertPositionRegistry
      */
     public function __construct(
         EntityManagerInterface $em,
         AdvertRepository $advertRepository,
         ImageFacade $imageFacade,
         Domain $domain,
-        AdvertFactoryInterface $advertFactory
+        AdvertFactoryInterface $advertFactory,
+        AdvertPositionRegistry $advertPositionRegistry
     ) {
         $this->em = $em;
         $this->advertRepository = $advertRepository;
         $this->imageFacade = $imageFacade;
         $this->domain = $domain;
         $this->advertFactory = $advertFactory;
+        $this->advertPositionRegistry = $advertPositionRegistry;
     }
 
     /**
@@ -69,6 +77,8 @@ class AdvertFacade
      */
     public function findRandomAdvertByPositionOnCurrentDomain($positionName)
     {
+        $this->advertPositionRegistry->assertPositionNameIsKnown($positionName);
+
         return $this->advertRepository->findRandomAdvertByPosition($positionName, $this->domain->getId());
     }
 
