@@ -227,6 +227,7 @@ twig:
         - '@ShopsysFramework/Admin/Form/displayOnlyUrl.html.twig'
         - '@ShopsysFramework/Admin/Form/localizedFullWidth.html.twig'
         - '@ShopsysFramework/Admin/Form/productParameterValue.html.twig'
+        - '@ShopsysFramework/Admin/Form/productCalculatedPrices.html.twig'
     strict_variables: true
     globals:
         globalMultipleFormSetting: '@Shopsys\FrameworkBundle\Component\Form\MultipleFormSetting'
