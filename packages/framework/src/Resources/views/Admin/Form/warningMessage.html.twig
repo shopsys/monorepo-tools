@@ -1,0 +1,9 @@
+{% block warning_message_label %}{% endblock warning_message_label %}
+{% block warning_message_widget %}
+    <div class="form-line__line form-line__line--no-space">
+        <div class="in-message in-message--warning">
+            <span class="in-message__icon svg svg-warning"></span>
+            {{ data }}
+        </div>
+    </div>
+{% endblock warning_message_widget %}

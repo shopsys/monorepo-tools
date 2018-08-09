@@ -39,6 +39,10 @@ option if it is last group of fields.
 Sometimes form needs to only display information but does not need to change and persist this data, for this usages
 there is `DisplayOnlyType` which does not map property onto `entity` and let you to display your own data.
 
+### [WarningMessageType](../../packages/framework/src/Form/WarningMessageType.php)
+Sometimes the form needs to contain some information that is important for viewer, for this usage there is  `WarningMessageType` 
+that shows highlighted message with warning icon.
+
 ## Adding fields into already existing form types
 Imagine that you have added new property into `Product entity` and you want this property to be set in administration
 using forms.

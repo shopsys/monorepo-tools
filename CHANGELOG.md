@@ -33,6 +33,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - added CRON module for exporting products' data into Elasticsearch
     - product search uses Elasticsearch
     - docs: added [article](./docs/introduction/product-search-via-elasticsearch.md) with Elasticsearch overview
+- [#375 ProductFormType should be extensible](https://github.com/shopsys/shopsys/pull/375)
+    - `WarningMessageType` is ready to use
 
 #### Changed
 - [#385 - AccessDeniedHttpException replaced by AccessDeniedException](https://github.com/shopsys/shopsys/pull/385)
