@@ -45,6 +45,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - templates of FormTypes were modified for use with `ProductFormType` elements
         - `multidomain_row` can contain label that is needed for categories assignment
         - `disabledField` template variable is used via `attr.disabledField`
+    - Admin: product form was modified
+        - detail, edit, new twig temlpates code was reduced
+        - FormType elements were joint into groups and newly created FormTypes were used
+        - javascript validation and tests were bound to the new paths of the form elements
+        - docs were updated
 
 #### Changed
 - [#385 - AccessDeniedHttpException replaced by AccessDeniedException](https://github.com/shopsys/shopsys/pull/385)

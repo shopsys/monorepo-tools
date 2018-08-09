@@ -150,7 +150,14 @@
 
 {% block multidomain_form_rows -%}
     {% for domainId, child in form %}
+        {% if child.vars.attr.show_label is defined %}
+            <div class="form-line__line">
+                {{- form_label(child) -}}
+        {% endif %}
         {{- form_row(child, { multidomain: true, domainId: domainId }) -}}
+        {% if child.vars.attr.show_label is defined %}
+            </div>
+        {% endif %}
     {% endfor %}
 {%- endblock multidomain_form_rows %}
 

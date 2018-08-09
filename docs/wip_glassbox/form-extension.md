@@ -6,8 +6,6 @@ At this time we do not have every single form in our application ready for exten
 forms for extensions is below:
 
 * `BrandFormType`
-* `ProductFormType`
-* `ProductEditFormType`
 * `ProductMassActionFormType`
 * `VariantFormType`
 * `OrderFormType`
