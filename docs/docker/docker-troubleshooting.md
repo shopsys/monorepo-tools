@@ -136,5 +136,3 @@ docker-sync start
 
 ## A docker container is not running
 You can inspect what is wrong by using `docker logs <container-name>` command.
-E.g., you might encounter a problem with elasticsearch container - there might be the need for the `vm.max_map_count` setting to be properly set on your system. 
-See the [official documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) for more information. 

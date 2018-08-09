@@ -16,6 +16,12 @@ There is a list of all the repositories maintained by monorepo, changes in log b
 * [shopsys/product-feed-zbozi]
 
 ## [From 7.0.0-alpha4 to Unreleased]
+- for [product search via Elasticsearch](/docs/introduction/product-search-via-elasticsearch.md), you'll have to:
+    - check changes in the `docker-compose.yml` template you used and replicate them, there is a new container with Elasticsearch
+    - run `docker-compose up -d`
+    - update composer dependencies `composer update`
+    - create Elasticsearch indexes by running `php phing elasticsearch-indexes-create`
+    - export products into Elasticsearch by `php phing elasticsearch-products-export`
 
 ## [From 7.0.0-alpha3 to 7.0.0-alpha4]
 

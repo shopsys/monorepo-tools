@@ -93,6 +93,8 @@ services:
             - "9200:9200"
         volumes:
             - shopsys-framework-elasticsearch-data-sync:/usr/share/elasticsearch/data
+        environment:
+            - discovery.type=single-node
 
 volumes:
     shopsys-framework-sync:
