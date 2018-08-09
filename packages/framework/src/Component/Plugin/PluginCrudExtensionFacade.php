@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Component\Plugin;
 
+use Shopsys\FrameworkBundle\Form\GroupType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -26,12 +27,21 @@ class PluginCrudExtensionFacade
     {
         $builder->add($name, FormType::class, [
             'compound' => true,
+            'render_form_row' => false,
         ]);
 
-        foreach ($this->pluginCrudExtensionRegistry->getCrudExtensions($type) as $key => $crudExtension) {
-            $builder->get($name)->add($key, $crudExtension->getFormTypeClass(), [
+        $crudExtensions = $this->pluginCrudExtensionRegistry->getCrudExtensions($type);
+        foreach ($crudExtensions as $key => $crudExtension) {
+            $builderExtensionGroup = $builder->create($key . 'Group', GroupType::class, [
                 'label' => $crudExtension->getFormLabel(),
+                'is_group_container_to_render_as_the_last_one' => end($crudExtensions) === $crudExtension,
             ]);
+
+            $builderExtensionGroup->add($key, $crudExtension->getFormTypeClass(), [
+                'render_form_row' => false,
+            ]);
+
+            $builder->get($name)->add($builderExtensionGroup);
         }
     }
 

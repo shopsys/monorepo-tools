@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - `ProductCalculatedPricesType` is ready to use
     - `ProductsType` can be used for variants group with customized button name and info title above the form group
     - `DisplayOnlyType` can be used for disabled groups to display only message instead of original fields of the group
+    - `PluginCrudExtensionFacade` was modified to extend forms in `GroupType` design
 
 #### Changed
 - [#385 - AccessDeniedHttpException replaced by AccessDeniedException](https://github.com/shopsys/shopsys/pull/385)
