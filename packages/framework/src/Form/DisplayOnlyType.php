@@ -19,6 +19,7 @@ class DisplayOnlyType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'readonly' => 'readonly',
+                    'class' => '',
                 ],
             ]);
     }
