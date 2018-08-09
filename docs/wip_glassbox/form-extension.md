@@ -43,6 +43,9 @@ there is `DisplayOnlyType` which does not map property onto `entity` and let you
 Sometimes the form needs to contain some information that is important for viewer, for this usage there is  `WarningMessageType` 
 that shows highlighted message with warning icon.
 
+### [DisplayOnlyUrlType](../../packages/framework/src/Form/DisplayOnlyUrlType.php)
+For displaying custom URL based on routing system we can use `DisplayOnlyUrlType`.
+
 ## Adding fields into already existing form types
 Imagine that you have added new property into `Product entity` and you want this property to be set in administration
 using forms.
