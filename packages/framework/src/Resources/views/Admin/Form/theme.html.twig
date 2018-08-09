@@ -507,6 +507,9 @@
 {% endblock product_widget %}
 
 {% block products_row -%}
+    {% if top_info_title is not empty %}
+        <strong>{{ top_info_title }}</strong>
+    {% endif %}
     <div class="form-group">
         <div class="form-group__title">
             {{- form_label(form) -}}
@@ -518,7 +521,6 @@
         {{- form_widget(form) -}}
     </div>
 {%- endblock %}
-
 
 {% block products_label -%}
     {{ label }}
@@ -573,11 +575,7 @@
         </table>
         <a href="#" class="btn btn--plus js-products-picker-button-add">
             <i class="btn__icon">+</i>
-            {% if labelButtonAdd is defined %}
-                {{ labelButtonAdd }}
-            {% else %}
-                {{ 'Add product'|trans }}
-            {% endif %}
+            {{ label_button_add }}
         </a>
     </div>
 {% endblock products_widget %}
