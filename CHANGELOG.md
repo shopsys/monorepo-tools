@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#375 ProductFormType should be extensible](https://github.com/shopsys/shopsys/pull/375)
     - `WarningMessageType` is ready to use
     - `DisplayOnlyUrlType` is ready to use
+    - `LocalizedFullWidthType` is ready to use
 
 #### Changed
 - [#385 - AccessDeniedHttpException replaced by AccessDeniedException](https://github.com/shopsys/shopsys/pull/385)

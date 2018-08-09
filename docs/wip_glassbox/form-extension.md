@@ -44,7 +44,10 @@ Sometimes the form needs to contain some information that is important for viewe
 that shows highlighted message with warning icon.
 
 ### [DisplayOnlyUrlType](../../packages/framework/src/Form/DisplayOnlyUrlType.php)
-For displaying custom URL based on routing system we can use `DisplayOnlyUrlType`.
+For displaying custom URL based on routing system, there can be used `DisplayOnlyUrlType`.
+
+### [LocalizedFullWidthType](../../packages/framework/src/Form/LocalizedFullWidthType.php)
+For displaying localized field in vertical order of full-width label and inputs, there can be used `LocalizedFullWidthType`.
 
 ## Adding fields into already existing form types
 Imagine that you have added new property into `Product entity` and you want this property to be set in administration

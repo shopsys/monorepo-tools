@@ -1,0 +1,21 @@
+{% block localized_full_width_widget %}
+    <div class="wrap-border wrap-border--small">
+        <div class="form-full">
+            <div class="form-full__title">
+                <div class="form-full__title__in">{{ label }}</div>
+                <div class="form-full__title__buttons"></div>
+            </div>
+            {% for locale, formName in form.children %}
+                <div class="form-full__field">
+                    <div class="input__wrap">
+                        {{ form_widget(formName, { attr: { class: 'input--flag form-full__field__input'} }) }}
+                        <span class="input__flag">
+                            {{ localeFlag(locale) }}
+                        </span>
+                    </div>
+                    {{ form_errors(formName) }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock localized_full_width_widget %}
