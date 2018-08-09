@@ -42,6 +42,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     - `ProductsType` can be used for variants group with customized button name and info title above the form group
     - `DisplayOnlyType` can be used for disabled groups to display only message instead of original fields of the group
     - `PluginCrudExtensionFacade` was modified to extend forms in `GroupType` design
+    - templates of FormTypes were modified for use with `ProductFormType` elements
+        - `multidomain_row` can contain label that is needed for categories assignment
+        - `disabledField` template variable is used via `attr.disabledField`
 
 #### Changed
 - [#385 - AccessDeniedHttpException replaced by AccessDeniedException](https://github.com/shopsys/shopsys/pull/385)
