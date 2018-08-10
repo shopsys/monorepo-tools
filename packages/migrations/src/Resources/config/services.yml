@@ -1,41 +1,41 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: true
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
 
-  Shopsys\MigrationBundle\Command\:
-    resource: '../../Command/'
+    Shopsys\MigrationBundle\Command\:
+        resource: '../../Command/'
 
-  Shopsys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade:
-    arguments:
-      - '@Doctrine\ORM\EntityManagerInterface'
-      - '@Shopsys\MigrationBundle\Component\Doctrine\SchemaDiffFilter'
-      - '@Doctrine\DBAL\Schema\Comparator'
-      - '@Doctrine\ORM\Tools\SchemaTool'
+    Shopsys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade:
+        arguments:
+            - '@Doctrine\ORM\EntityManagerInterface'
+            - '@Shopsys\MigrationBundle\Component\Doctrine\SchemaDiffFilter'
+            - '@Doctrine\DBAL\Schema\Comparator'
+            - '@Doctrine\ORM\Tools\SchemaTool'
 
-  Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsFinder: ~
+    Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsFinder: ~
 
-  Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLock:
-    arguments:
-        $migrationsLockFilePath: '%kernel.project_dir%/migrations-lock.yml'
+    Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLock:
+        arguments:
+                $migrationsLockFilePath: '%kernel.project_dir%/migrations-lock.yml'
 
-  Doctrine\DBAL\Migrations\Finder\RecursiveRegexFinder: ~
+    Doctrine\DBAL\Migrations\Finder\RecursiveRegexFinder: ~
 
-  Doctrine\DBAL\Migrations\Finder\MigrationFinderInterface:
-    alias: Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsFinder
+    Doctrine\DBAL\Migrations\Finder\MigrationFinderInterface:
+        alias: Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsFinder
 
-  Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocator:
-    arguments:
-      $relativeDirectory: 'Migrations'
-      $relativeNamespace: 'Migrations'
+    Shopsys\MigrationBundle\Component\Doctrine\Migrations\MigrationsLocator:
+        arguments:
+            $relativeDirectory: 'Migrations'
+            $relativeNamespace: 'Migrations'
 
-  Shopsys\MigrationBundle\Component\Doctrine\SchemaDiffFilter: ~
+    Shopsys\MigrationBundle\Component\Doctrine\SchemaDiffFilter: ~
 
-  Shopsys\MigrationBundle\Component\Generator\GenerateMigrationsService: ~
+    Shopsys\MigrationBundle\Component\Generator\GenerateMigrationsService: ~
 
-  Doctrine\DBAL\Schema\Comparator: ~
+    Doctrine\DBAL\Schema\Comparator: ~
 
-  Doctrine\ORM\Tools\SchemaTool:
-    arguments:
-      - '@Doctrine\ORM\EntityManagerInterface'
+    Doctrine\ORM\Tools\SchemaTool:
+        arguments:
+            - '@Doctrine\ORM\EntityManagerInterface'

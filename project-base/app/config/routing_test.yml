@@ -1,7 +1,7 @@
 shopsys_shop_tests:
-  resource: "@ShopsysShopBundle/Controller/Test"
-  prefix: /test
-  type: annotation
+    resource: "@ShopsysShopBundle/Controller/Test"
+    prefix: /test
+    type: annotation
 
 _main:
-  resource: routing.yml
+    resource: routing.yml

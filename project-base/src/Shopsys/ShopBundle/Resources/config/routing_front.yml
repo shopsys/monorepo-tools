@@ -1,127 +1,127 @@
 front_cart_add_product:
-  path: /cart/addProduct/
-  defaults: { _controller: ShopsysShopBundle:Front\Cart:addProduct }
-  methods: [POST]
+    path: /cart/addProduct/
+    defaults: { _controller: ShopsysShopBundle:Front\Cart:addProduct }
+    methods: [POST]
 
 front_cart_add_product_ajax:
-  path: /cart/addProductAjax/
-  defaults: { _controller: ShopsysShopBundle:Front\Cart:addProductAjax }
-  methods: [POST]
+    path: /cart/addProductAjax/
+    defaults: { _controller: ShopsysShopBundle:Front\Cart:addProductAjax }
+    methods: [POST]
 
 front_cart_box:
-  path: /cart/box/
-  defaults: { _controller: ShopsysShopBundle:Front\Cart:box }
+    path: /cart/box/
+    defaults: { _controller: ShopsysShopBundle:Front\Cart:box }
 
 front_cart_delete:
-  path: /cart/delete/{cartItemId}/
-  defaults: { _controller: ShopsysShopBundle:Front\Cart:delete }
-  requirements:
-    cartItemId: \d+
+    path: /cart/delete/{cartItemId}/
+    defaults: { _controller: ShopsysShopBundle:Front\Cart:delete }
+    requirements:
+        cartItemId: \d+
 
 front_category_branch:
-  path: /categoryPanel/{parentCategoryId}/
-  defaults: { _controller: ShopsysShopBundle:Front\Category:branch }
-  condition: "request.isXmlHttpRequest()"
+    path: /categoryPanel/{parentCategoryId}/
+    defaults: { _controller: ShopsysShopBundle:Front\Category:branch }
+    condition: "request.isXmlHttpRequest()"
 
 front_category_panel:
-  path: /categoryPanel/
-  defaults: { _controller: ShopsysShopBundle:Front\Category:panel }
-  condition: "request.isXmlHttpRequest()"
+    path: /categoryPanel/
+    defaults: { _controller: ShopsysShopBundle:Front\Category:panel }
+    condition: "request.isXmlHttpRequest()"
 
 front_contact_form_send:
-  path: /contactForm/
-  defaults: { _controller: ShopsysShopBundle:Front\ContactForm:send }
-  methods: [POST]
-  condition: "request.isXmlHttpRequest()"
+    path: /contactForm/
+    defaults: { _controller: ShopsysShopBundle:Front\ContactForm:send }
+    methods: [POST]
+    condition: "request.isXmlHttpRequest()"
 
 front_customer_login_as_remembered_user:
-  # same path must be in security.yml
-  path: /login-as-remembered-user/
-  defaults: { _controller: ShopsysShopBundle:Front\Customer:loginAsRememberedUser}
+    # same path must be in security.yml
+    path: /login-as-remembered-user/
+    defaults: { _controller: ShopsysShopBundle:Front\Customer:loginAsRememberedUser}
 
 front_error_page:
-  path: /_error/{code}/
-  defaults: { _controller: ShopsysShopBundle:Front\Error:errorPage}
-  requirements:
-    code: \d+
+    path: /_error/{code}/
+    defaults: { _controller: ShopsysShopBundle:Front\Error:errorPage}
+    requirements:
+        code: \d+
 
 front_error_page_format:
-  path: /_error/{code}/{_format}/
-  defaults: { _controller: ShopsysShopBundle:Front\Error:errorPage}
-  requirements:
-    code: \d+
-    _format: css|html|js|json|txt|xml
+    path: /_error/{code}/{_format}/
+    defaults: { _controller: ShopsysShopBundle:Front\Error:errorPage}
+    requirements:
+        code: \d+
+        _format: css|html|js|json|txt|xml
 
 front_homepage:
-  path: /
-  defaults: { _controller: ShopsysShopBundle:Front\Homepage:index }
+    path: /
+    defaults: { _controller: ShopsysShopBundle:Front\Homepage:index }
 
 front_image:
-  path: /content/images/{entityName}/{type}/{sizeName}/{imageId}.{extension}
-  defaults: { _controller: ShopsysShopBundle:Front\Image:getImage }
-  requirements:
-    imageId: \d+
+    path: /content/images/{entityName}/{type}/{sizeName}/{imageId}.{extension}
+    defaults: { _controller: ShopsysShopBundle:Front\Image:getImage }
+    requirements:
+        imageId: \d+
 
 front_image_without_type:
-  path: /content/images/{entityName}/{sizeName}/{imageId}.{extension}
-  defaults:
-    _controller: ShopsysShopBundle:Front\Image:getImage
-    type: ~
-  requirements:
-    imageId: \d+
+    path: /content/images/{entityName}/{sizeName}/{imageId}.{extension}
+    defaults:
+        _controller: ShopsysShopBundle:Front\Image:getImage
+        type: ~
+    requirements:
+        imageId: \d+
 
 front_login_check:
-  path: /login/check/
-  # controller's action is unnecessary, because firewall processes whole request
+    path: /login/check/
+    # controller's action is unnecessary, because firewall processes whole request
 
 front_newsletter_send:
-  path: /newsletter/subscribe-email/
-  defaults: { _controller: ShopsysShopBundle:Front\Newsletter:subscribeEmail }
-  methods: [POST]
-  condition: "request.isXmlHttpRequest()"
+    path: /newsletter/subscribe-email/
+    defaults: { _controller: ShopsysShopBundle:Front\Newsletter:subscribeEmail }
+    methods: [POST]
+    condition: "request.isXmlHttpRequest()"
 
 front_order_preview:
-  path: /order/preview/
-  defaults: { _controller: ShopsysShopBundle:Front\Order:preview }
-  condition: "request.isXmlHttpRequest()"
-  methods: [GET]
+    path: /order/preview/
+    defaults: { _controller: ShopsysShopBundle:Front\Order:preview }
+    condition: "request.isXmlHttpRequest()"
+    methods: [GET]
 
 front_order_save_form:
-  path: /order/save-form/
-  defaults: { _controller: ShopsysShopBundle:Front\Order:saveOrderForm }
-  methods: [POST]
+    path: /order/save-form/
+    defaults: { _controller: ShopsysShopBundle:Front\Order:saveOrderForm }
+    methods: [POST]
 
 front_order_terms_and_conditions:
-  path: /order/terms-and-conditions/
-  defaults: { _controller: ShopsysShopBundle:Front\Order:termsAndConditions }
+    path: /order/terms-and-conditions/
+    defaults: { _controller: ShopsysShopBundle:Front\Order:termsAndConditions }
 
 front_order_terms_and_conditions_download:
-  path: /order/terms-and-conditions-download/
-  defaults: { _controller: ShopsysShopBundle:Front\Order:TermsAndConditionsDownload }
+    path: /order/terms-and-conditions-download/
+    defaults: { _controller: ShopsysShopBundle:Front\Order:TermsAndConditionsDownload }
 
 front_promo_code_apply:
-  path: /promo-code/apply/
-  defaults: { _controller: ShopsysShopBundle:Front\PromoCode:apply }
-  methods: [POST]
+    path: /promo-code/apply/
+    defaults: { _controller: ShopsysShopBundle:Front\PromoCode:apply }
+    methods: [POST]
 
 front_promo_code_remove:
-  path: /promo-code/remove/
-  defaults: { _controller: ShopsysShopBundle:Front\PromoCode:remove }
+    path: /promo-code/remove/
+    defaults: { _controller: ShopsysShopBundle:Front\PromoCode:remove }
 
 front_robots_txt:
-  path: /robots.txt
-  defaults: { _controller: ShopsysShopBundle:Front\Robots:index }
+    path: /robots.txt
+    defaults: { _controller: ShopsysShopBundle:Front\Robots:index }
 
 front_search_autocomplete:
-  path: /search/autocomplete/
-  defaults: { _controller: ShopsysShopBundle:Front\Search:autocomplete }
-  methods: [POST]
+    path: /search/autocomplete/
+    defaults: { _controller: ShopsysShopBundle:Front\Search:autocomplete }
+    methods: [POST]
 
 front_registration_exists_email:
-  path: /registration/exists-email
-  defaults: { _controller: ShopsysShopBundle:Front\Registration:existsEmail }
-  methods: [POST]
+    path: /registration/exists-email
+    defaults: { _controller: ShopsysShopBundle:Front\Registration:existsEmail }
+    methods: [POST]
 
 front_export_personal_data:
-  path: /personal-overview-export/xml/{hash}
-  defaults: { _controller: ShopsysShopBundle:Front\PersonalData:exportXml }
+    path: /personal-overview-export/xml/{hash}
+    defaults: { _controller: ShopsysShopBundle:Front\PersonalData:exportXml }

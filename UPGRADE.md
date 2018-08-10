@@ -23,6 +23,10 @@ There is a list of all the repositories maintained by monorepo, changes in log b
     - create Elasticsearch indexes by running `php phing elasticsearch-indexes-create`
     - export products into Elasticsearch by `php phing elasticsearch-products-export`
 
+### [shopsys/project-base]
+- standardize indentation in your yaml files
+    - you can find yaml files with wrong indentation with regexp `^( {4})* {1,3}[^ ]`
+
 ## [From 7.0.0-alpha3 to 7.0.0-alpha4]
 
 ### [shopsys/framework]

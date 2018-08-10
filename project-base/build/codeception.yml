@@ -1,13 +1,13 @@
 namespace: Tests\ShopBundle\Test\Codeception
 actor: Tester
 paths:
-  tests: ../tests/ShopBundle/Acceptance
-  log: ../var/logs/codeception
-  data: ../tests/ShopBundle/Acceptance/data
-  support: ../tests/ShopBundle/Test/Codeception
+    tests: ../tests/ShopBundle/Acceptance
+    log: ../var/logs/codeception
+    data: ../tests/ShopBundle/Acceptance/data
+    support: ../tests/ShopBundle/Test/Codeception
 params:
-  - ../app/config/parameters_test.yml
+    - ../app/config/parameters_test.yml
 settings:
-  bootstrap: _bootstrap.php
-  colors: true
-  memory_limit: 1024M
+    bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 1024M

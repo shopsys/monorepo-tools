@@ -1,21 +1,21 @@
 language: php
 
 php:
-  - 7.1
-  - 7.2
+    - 7.1
+    - 7.2
 
 cache:
-  directories:
-    - ~/.composer/cache
+    directories:
+        - ~/.composer/cache
 
 before_install:
-  - composer config github-oauth.github.com $GITHUB_TOKEN
-  - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - composer config github-oauth.github.com $GITHUB_TOKEN
+    - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 install:
-  - composer install
+    - composer install
 
 script:
-  - php vendor/bin/parallel-lint ./src ./tests
-  - php vendor/bin/ecs check --verbose ./src ./tests
-  - php vendor/bin/phpunit tests
+    - php vendor/bin/parallel-lint ./src ./tests
+    - php vendor/bin/ecs check --verbose ./src ./tests
+    - php vendor/bin/phpunit tests

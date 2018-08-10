@@ -1,21 +1,21 @@
 parameters:
-  database_host: postgres
-  database_port: ~
-  database_name: shopsys
-  database_user: root
-  database_password: root
-  database_server_version: 9.5
+    database_host: postgres
+    database_port: ~
+    database_name: shopsys
+    database_user: root
+    database_password: root
+    database_server_version: 9.5
 
-  redis_host: redis
+    redis_host: redis
 
-  mailer_transport: smtp
-  mailer_host: smtp-server
-  mailer_user: ~
-  mailer_password: ~
-  mailer_disable_delivery: false
-  mailer_master_email_address: no-reply@shopsys.com
-  mailer_delivery_whitelist: [/@shopsys\.com$/]
+    mailer_transport: smtp
+    mailer_host: smtp-server
+    mailer_user: ~
+    mailer_password: ~
+    mailer_disable_delivery: false
+    mailer_master_email_address: no-reply@shopsys.com
+    mailer_delivery_whitelist: [/@shopsys\.com$/]
 
-  secret: ThisTokenIsNotSoSecretChangeIt
+    secret: ThisTokenIsNotSoSecretChangeIt
 
-  elasticsearch_hosts: ['elasticsearch:9200']
+    elasticsearch_hosts: ['elasticsearch:9200']

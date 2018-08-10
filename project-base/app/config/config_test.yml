@@ -2,52 +2,52 @@
 # Should be as same with production as it is possible.
 
 doctrine:
-  dbal:
-    host: "%test_database_host%"
-    port: "%test_database_port%"
-    dbname: "%test_database_name%"
-    user: "%test_database_user%"
-    password: "%test_database_password%"
+    dbal:
+        host: "%test_database_host%"
+        port: "%test_database_port%"
+        dbname: "%test_database_name%"
+        user: "%test_database_user%"
+        password: "%test_database_password%"
 
 framework:
-  test: ~
-  session:
-    storage_id: session.storage.mock_file
-    cookie_httponly: true
-  router:
-    resource: "%kernel.root_dir%/config/routing_test.yml"
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+        cookie_httponly: true
+    router:
+        resource: "%kernel.root_dir%/config/routing_test.yml"
 
 # disable logging in tests
 monolog:
-  handlers:
-    main:
-      type: "null"
-    nested:
-      type: "null"
-    cron:
-      type: "null"
-    slow:
-      type: "null"
-    cron_console_output:
-      type: "null"
-    console_output:
-      type: "null"
+    handlers:
+        main:
+            type: "null"
+        nested:
+            type: "null"
+        cron:
+            type: "null"
+        slow:
+            type: "null"
+        cron_console_output:
+            type: "null"
+        console_output:
+            type: "null"
 
 security:
-  # simple login for smoke tests
-  firewalls:
-    administration:
-      http_basic: ~
-    frontend:
-      http_basic: ~
-  # quicker password encryption in test data fixtures
-  encoders:
-    Symfony\Component\Security\Core\User\UserInterface:
-      algorithm: bcrypt
-      cost: 4
+    # simple login for smoke tests
+    firewalls:
+        administration:
+            http_basic: ~
+        frontend:
+            http_basic: ~
+    # quicker password encryption in test data fixtures
+    encoders:
+        Symfony\Component\Security\Core\User\UserInterface:
+            algorithm: bcrypt
+            cost: 4
 
 swiftmailer:
-  transport: "%test_mailer_transport%"
-  host: "%test_mailer_host%"
-  username: "%test_mailer_user%"
-  password: "%test_mailer_password%"
+    transport: "%test_mailer_transport%"
+    host: "%test_mailer_host%"
+    username: "%test_mailer_user%"
+    password: "%test_mailer_password%"

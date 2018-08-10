@@ -7,4 +7,4 @@ parameters:
             - '*/src/DataFixtures/ZboziPluginDataFixture.php'
             - '*/tests/Unit/ZboziFeedTest.php'
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
-          - '*/tests/*'
+            - '*/tests/*'

@@ -1,178 +1,178 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: true
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
 
-  Shopsys\FrameworkBundle\Component\Domain\DomainFactory:
-    class: Shopsys\FrameworkBundle\Component\Domain\DomainFactoryOverwritingDomainUrl
-    arguments:
-      - '%overwrite_domain_url%'
+    Shopsys\FrameworkBundle\Component\Domain\DomainFactory:
+        class: Shopsys\FrameworkBundle\Component\Domain\DomainFactoryOverwritingDomainUrl
+        arguments:
+            - '%overwrite_domain_url%'
 
-  Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade: ~
+    Shopsys\FrameworkBundle\Model\Administrator\Activity\AdministratorActivityFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository: ~
+    Shopsys\FrameworkBundle\Model\Administrator\AdministratorRepository: ~
 
-  Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation: ~
+    Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation: ~
 
-  Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation: ~
+    Shopsys\FrameworkBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation: ~
 
-  Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade: ~
+    Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade: ~
+    Shopsys\FrameworkBundle\Model\Product\Availability\AvailabilityFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Security\AdminLogoutHandler: ~
+    Shopsys\FrameworkBundle\Model\Security\AdminLogoutHandler: ~
 
-  Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade: ~
+    Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory: ~
+    Shopsys\FrameworkBundle\Model\Product\Brand\BrandFactory: ~
 
-  Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler: ~
+    Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler: ~
 
-  Shopsys\FrameworkBundle\Model\Customer\CustomerFacade: ~
+    Shopsys\FrameworkBundle\Model\Customer\CustomerFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade: ~
+    Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit: ~
+    Shopsys\FrameworkBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit: ~
 
-  Shopsys\FrameworkBundle\Model\Cart\CartService: ~
+    Shopsys\FrameworkBundle\Model\Cart\CartService: ~
 
-  Shopsys\FrameworkBundle\Model\Cart\CartFactory: ~
+    Shopsys\FrameworkBundle\Model\Cart\CartFactory: ~
 
-  Shopsys\FrameworkBundle\Model\Category\CategoryFacade: ~
+    Shopsys\FrameworkBundle\Model\Category\CategoryFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Category\CategoryFactory: ~
+    Shopsys\FrameworkBundle\Model\Category\CategoryFactory: ~
 
-  Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository: ~
+    Shopsys\FrameworkBundle\Model\Cart\Item\CartItemRepository: ~
 
-  Shopsys\FrameworkBundle\Model\Category\CategoryRepository: ~
+    Shopsys\FrameworkBundle\Model\Category\CategoryRepository: ~
 
-  Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService: ~
+    Shopsys\FrameworkBundle\Model\Cart\Watcher\CartWatcherService: ~
 
-  Shopsys\FrameworkBundle\Model\Cart\CartFacade: ~
+    Shopsys\FrameworkBundle\Model\Cart\CartFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Country\CountryFacade: ~
+    Shopsys\FrameworkBundle\Model\Country\CountryFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService: ~
+    Shopsys\FrameworkBundle\Model\Customer\CustomerPasswordService: ~
 
-  Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer: ~
+    Shopsys\FrameworkBundle\Model\Customer\CurrentCustomer: ~
 
-  Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade: ~
+    Shopsys\FrameworkBundle\Model\Order\PromoCode\CurrentPromoCodeFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository: ~
+    Shopsys\FrameworkBundle\Model\Feed\Delivery\DeliveryFeedItemRepository: ~
 
-  Shopsys\FrameworkBundle\Component\Doctrine\DatabaseSchemaFacade:
-    arguments:
-      - '%shopsys.default_db_schema_filepath%'
+    Shopsys\FrameworkBundle\Component\Doctrine\DatabaseSchemaFacade:
+        arguments:
+            - '%shopsys.default_db_schema_filepath%'
 
-  Shopsys\FrameworkBundle\Component\Domain\Domain:
-    factory: ['@Shopsys\FrameworkBundle\Component\Domain\DomainFactory', create]
-    arguments:
-      - '%shopsys.domain_config_filepath%'
-      - '%shopsys.domain_urls_config_filepath%'
+    Shopsys\FrameworkBundle\Component\Domain\Domain:
+        factory: ['@Shopsys\FrameworkBundle\Component\Domain\DomainFactory', create]
+        arguments:
+            - '%shopsys.domain_config_filepath%'
+            - '%shopsys.domain_urls_config_filepath%'
 
-  Shopsys\FrameworkBundle\Component\Domain\Config\DomainsConfigLoader: ~
+    Shopsys\FrameworkBundle\Component\Domain\Config\DomainsConfigLoader: ~
 
-  Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator: ~
+    Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator: ~
 
-  Shopsys\FrameworkBundle\Component\Domain\DomainDbFunctionsFacade:
+    Shopsys\FrameworkBundle\Component\Domain\DomainDbFunctionsFacade:
 
-  Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade: ~
+    Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Product\Flag\FlagInlineEdit: ~
+    Shopsys\FrameworkBundle\Model\Product\Flag\FlagInlineEdit: ~
 
-  Shopsys\FrameworkBundle\Component\String\HashGenerator: ~
+    Shopsys\FrameworkBundle\Component\String\HashGenerator: ~
 
-  Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation: ~
+    Shopsys\FrameworkBundle\Model\Transport\IndependentTransportVisibilityCalculation: ~
 
-  Shopsys\FrameworkBundle\Model\Payment\IndependentPaymentVisibilityCalculation: ~
+    Shopsys\FrameworkBundle\Model\Payment\IndependentPaymentVisibilityCalculation: ~
 
-  Shopsys\FrameworkBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass: ~
+    Shopsys\FrameworkBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass: ~
 
-  Shopsys\FrameworkBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass: ~
+    Shopsys\FrameworkBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass: ~
 
-  Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade: ~
+    Shopsys\FrameworkBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository: ~
+    Shopsys\FrameworkBundle\Model\Newsletter\NewsletterRepository: ~
 
-  Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig: ~
+    Shopsys\FrameworkBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig: ~
 
-  Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository: ~
+    Shopsys\FrameworkBundle\Model\Order\OrderNumberSequenceRepository: ~
 
-  Shopsys\FrameworkBundle\Model\Order\OrderRepository: ~
+    Shopsys\FrameworkBundle\Model\Order\OrderRepository: ~
 
-  Shopsys\FrameworkBundle\Model\Order\OrderFacade: ~
+    Shopsys\FrameworkBundle\Model\Order\OrderFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade: ~
+    Shopsys\FrameworkBundle\Model\Order\Status\OrderStatusFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory: ~
+    Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory: ~
 
-  Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterInlineEdit: ~
+    Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterInlineEdit: ~
 
-  Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository: ~
+    Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterRepository: ~
 
-  Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory: ~
+    Shopsys\FrameworkBundle\Model\Payment\PaymentDataFactory: ~
 
-  Shopsys\FrameworkBundle\Model\Payment\PaymentFactory: ~
+    Shopsys\FrameworkBundle\Model\Payment\PaymentFactory: ~
 
-  Shopsys\FrameworkBundle\Model\Payment\PaymentFacade: ~
+    Shopsys\FrameworkBundle\Model\Payment\PaymentFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Payment\PaymentRepository: ~
+    Shopsys\FrameworkBundle\Model\Payment\PaymentRepository: ~
 
-  Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade: ~
+    Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade: ~
 
-  Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig: ~
+    Shopsys\FrameworkBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig: ~
 
-  Shopsys\FrameworkBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit: ~
+    Shopsys\FrameworkBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit: ~
 
-  Shopsys\FrameworkBundle\Component\Plugin\PluginDataFixtureRegistry: ~
+    Shopsys\FrameworkBundle\Component\Plugin\PluginDataFixtureRegistry: ~
 
-  Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade: ~
+    Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade: ~
 
-  Shopsys\FrameworkBundle\Component\System\PostgresqlLocaleMapper: ~
+    Shopsys\FrameworkBundle\Component\System\PostgresqlLocaleMapper: ~
 
-  Shopsys\FrameworkBundle\Model\Product\ProductDataFactory: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductDataFactory: ~
 
-  Shopsys\FrameworkBundle\Model\Product\ProductFacade: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Product\ProductFactory: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductFactory: ~
 
-  Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductHiddenRecalculator: ~
 
-  Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductSellingDeniedRecalculator: ~
 
-  Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductVisibilityRepository: ~
 
-  Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductVariantFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductOnCurrentDomainFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser: ~
+    Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculationForUser: ~
 
-  Shopsys\FrameworkBundle\Model\Product\ProductRepository: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductRepository: ~
 
-  Shopsys\FrameworkBundle\Model\Product\ProductService: ~
+    Shopsys\FrameworkBundle\Model\Product\ProductService: ~
 
-  Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector: ~
+    Shopsys\FrameworkBundle\DataFixtures\ProductDataFixtureReferenceInjector: ~
 
-  Shopsys\FrameworkBundle\Model\Script\ScriptFacade: ~
+    Shopsys\FrameworkBundle\Model\Script\ScriptFacade: ~
 
-  Shopsys\FrameworkBundle\Component\System\System: ~
+    Shopsys\FrameworkBundle\Component\System\System: ~
 
-  Shopsys\FrameworkBundle\Model\Localization\TranslatableListener: ~
+    Shopsys\FrameworkBundle\Model\Localization\TranslatableListener: ~
 
-  Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory: ~
+    Shopsys\FrameworkBundle\Model\Transport\TransportDataFactory: ~
 
-  Shopsys\FrameworkBundle\Model\Transport\TransportFacade: ~
+    Shopsys\FrameworkBundle\Model\Transport\TransportFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Transport\TransportFactory: ~
+    Shopsys\FrameworkBundle\Model\Transport\TransportFactory: ~
 
-  Shopsys\FrameworkBundle\Model\Transport\TransportRepository: ~
+    Shopsys\FrameworkBundle\Model\Transport\TransportRepository: ~
 
-  Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade: ~
+    Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade: ~
+    Shopsys\FrameworkBundle\Model\Pricing\Vat\VatFacade: ~
 
-  Shopsys\FrameworkBundle\Model\Localization\Localization: ~
+    Shopsys\FrameworkBundle\Model\Localization\Localization: ~
 
-  Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductRepository: ~
+    Shopsys\FrameworkBundle\Model\Product\Elasticsearch\ElasticsearchProductRepository: ~

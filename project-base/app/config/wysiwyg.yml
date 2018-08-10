@@ -1,71 +1,71 @@
 ivory_ck_editor:
-  default_config: default
-  configs:
-    default:
-      entities_greek: false
-      entities_latin: false
-      enterMode: 2
-      shiftEnterMode: 1
-      filebrowserBrowseRoute: elfinder
-      toolbar:
-        - ['Bold', 'Italic', 'Underline', 'Strike', 'Superscript', 'Subscript', '-', 'RemoveFormat']
-        - ['PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
-        - ['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
-        - ['Outdent', 'Indent', '-', 'Blockquote']
-        - ['Link', 'Unlink']
-        - '/'
-        - ['Source', '-', 'Image', 'Flash', 'Table', 'SpecialChar', 'Iframe']
-        - ['Format']
-        - ['FontSize']
-        - ['TextColor']
+    default_config: default
+    configs:
+        default:
+            entities_greek: false
+            entities_latin: false
+            enterMode: 2
+            shiftEnterMode: 1
+            filebrowserBrowseRoute: elfinder
+            toolbar:
+                - ['Bold', 'Italic', 'Underline', 'Strike', 'Superscript', 'Subscript', '-', 'RemoveFormat']
+                - ['PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+                - ['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+                - ['Outdent', 'Indent', '-', 'Blockquote']
+                - ['Link', 'Unlink']
+                - '/'
+                - ['Source', '-', 'Image', 'Flash', 'Table', 'SpecialChar', 'Iframe']
+                - ['Format']
+                - ['FontSize']
+                - ['TextColor']
 
-    email:
-      entities_greek: false
-      entities_latin: false
-      enterMode: 2
-      shiftEnterMode: 1
-      filebrowserBrowseRoute: elfinder
-      toolbar:
-        - ['Bold', 'Italic', 'Underline', 'Strike', 'Superscript', 'Subscript', '-', 'RemoveFormat']
-        - ['PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
-        - ['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
-        - ['Outdent', 'Indent', '-', 'Blockquote']
-        - ['Link', 'Unlink']
-        - '/'
-        - ['Source', '-', 'Image', 'SpecialChar']
-        - ['Format']
-        - ['FontSize']
-        - ['TextColor']
+        email:
+            entities_greek: false
+            entities_latin: false
+            enterMode: 2
+            shiftEnterMode: 1
+            filebrowserBrowseRoute: elfinder
+            toolbar:
+                - ['Bold', 'Italic', 'Underline', 'Strike', 'Superscript', 'Subscript', '-', 'RemoveFormat']
+                - ['PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+                - ['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+                - ['Outdent', 'Indent', '-', 'Blockquote']
+                - ['Link', 'Unlink']
+                - '/'
+                - ['Source', '-', 'Image', 'SpecialChar']
+                - ['Format']
+                - ['FontSize']
+                - ['TextColor']
 
 fm_elfinder:
-  assets_path: /components
-  instances:
-    default:
-      editor: ckeditor
-      relative_path: false
-      connector:
-        debug: true
-        roots:
-          local:
-            driver: Flysystem
-            path: '%shopsys.filemanager_upload_web_dir%'
-            flysystem:
-              type: local
-              options:
-                local:
-                  path: '%shopsys.web_dir%'
-            upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
-            tmb_path: '%shopsys.filemanager_upload_web_dir%/_thumbnails'
-            url: '%shopsys.filemanager_upload_web_dir%'
-            tmb_url: '%shopsys.filemanager_upload_web_dir%/_thumbnails'
-            attributes:
-              thumbnails:
-                pattern: '/^\/content\/wysiwyg\/_thumbnails$/'
-                hidden: true
-            disabled_commands:
-              - 'archive'
-              - 'extract'
-              - 'edit'
-              - 'mkfile'
-              - 'netmount'
-              - 'zipdl'
+    assets_path: /components
+    instances:
+        default:
+            editor: ckeditor
+            relative_path: false
+            connector:
+                debug: true
+                roots:
+                    local:
+                        driver: Flysystem
+                        path: '%shopsys.filemanager_upload_web_dir%'
+                        flysystem:
+                            type: local
+                            options:
+                                local:
+                                    path: '%shopsys.web_dir%'
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        tmb_path: '%shopsys.filemanager_upload_web_dir%/_thumbnails'
+                        url: '%shopsys.filemanager_upload_web_dir%'
+                        tmb_url: '%shopsys.filemanager_upload_web_dir%/_thumbnails'
+                        attributes:
+                            thumbnails:
+                                pattern: '/^\/content\/wysiwyg\/_thumbnails$/'
+                                hidden: true
+                        disabled_commands:
+                            - 'archive'
+                            - 'extract'
+                            - 'edit'
+                            - 'mkfile'
+                            - 'netmount'
+                            - 'zipdl'

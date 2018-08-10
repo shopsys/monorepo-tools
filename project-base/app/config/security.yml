@@ -1,78 +1,78 @@
 security:
-  encoders:
-    Symfony\Component\Security\Core\User\UserInterface:
-      algorithm: bcrypt
-      cost: 12
+    encoders:
+        Symfony\Component\Security\Core\User\UserInterface:
+            algorithm: bcrypt
+            cost: 12
 
-  role_hierarchy:
-    ROLE_SUPER_ADMIN: [ROLE_ADMIN]
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN]
 
-  providers:
-    administrators:
-      id: Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorUserProvider
+    providers:
+        administrators:
+            id: Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorUserProvider
 
-    user_identities:
-      id: Shopsys\FrameworkBundle\Model\Customer\FrontendUserProvider
+        user_identities:
+            id: Shopsys\FrameworkBundle\Model\Customer\FrontendUserProvider
 
-  firewalls:
-    # see Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
-    administration:
-      pattern: ^/(admin/|efconnect|elfinder)
-      anonymous: ~
-      provider: administrators
-      logout_on_user_change: true
-      form_login:
-        check_path: admin_login_check
-        login_path: admin_login
-        default_target_path: admin_default_dashboard
-        use_referer: true
-        username_parameter: "admin_login_form[username]"
-        password_parameter: "admin_login_form[password]"
-        csrf_parameter: "admin_login_form[_token]"
-      logout:
-        path: admin_logout
-        success_handler: Shopsys\FrameworkBundle\Model\Security\AdminLogoutHandler
-        csrf_parameter: _csrf_token
-        csrf_token_generator: security.csrf.token_manager
-        csrf_token_id: admin_logout
-        invalidate_session: false
+    firewalls:
+        # see Shopsys\FrameworkBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
+        administration:
+            pattern: ^/(admin/|efconnect|elfinder)
+            anonymous: ~
+            provider: administrators
+            logout_on_user_change: true
+            form_login:
+                check_path: admin_login_check
+                login_path: admin_login
+                default_target_path: admin_default_dashboard
+                use_referer: true
+                username_parameter: "admin_login_form[username]"
+                password_parameter: "admin_login_form[password]"
+                csrf_parameter: "admin_login_form[_token]"
+            logout:
+                path: admin_logout
+                success_handler: Shopsys\FrameworkBundle\Model\Security\AdminLogoutHandler
+                csrf_parameter: _csrf_token
+                csrf_token_generator: security.csrf.token_manager
+                csrf_token_id: admin_logout
+                invalidate_session: false
 
-    frontend:
-      pattern: ^/
-      anonymous: ~
-      provider: user_identities
-      logout_on_user_change: true
-      form_login:
-        check_path: front_login_check
-        login_path: front_login
-        username_parameter: "front_login_form[email]"
-        password_parameter: "front_login_form[password]"
-        csrf_parameter: "front_login_form[_token]"
-        success_handler: Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler
-        failure_handler: Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler
-        remember_me: true
-      remember_me:
-        secret: "%secret%"
-        lifetime: 2592000 # 30 days
-        path: /
-        domain: ~
-        remember_me_parameter: "front_login_form[rememberMe]"
-      logout:
-        path: front_logout
-        success_handler: Shopsys\FrameworkBundle\Model\Security\FrontLogoutHandler
-        csrf_parameter: _csrf_token
-        csrf_token_generator: security.csrf.token_manager
-        csrf_token_id: frontend_logout
-        invalidate_session: false
+        frontend:
+            pattern: ^/
+            anonymous: ~
+            provider: user_identities
+            logout_on_user_change: true
+            form_login:
+                check_path: front_login_check
+                login_path: front_login
+                username_parameter: "front_login_form[email]"
+                password_parameter: "front_login_form[password]"
+                csrf_parameter: "front_login_form[_token]"
+                success_handler: Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler
+                failure_handler: Shopsys\FrameworkBundle\Model\Security\CustomerLoginHandler
+                remember_me: true
+            remember_me:
+                secret: "%secret%"
+                lifetime: 2592000 # 30 days
+                path: /
+                domain: ~
+                remember_me_parameter: "front_login_form[rememberMe]"
+            logout:
+                path: front_logout
+                success_handler: Shopsys\FrameworkBundle\Model\Security\FrontLogoutHandler
+                csrf_parameter: _csrf_token
+                csrf_token_generator: security.csrf.token_manager
+                csrf_token_id: frontend_logout
+                invalidate_session: false
 
-  access_control:
-    # same pattern must be in routing_front.yml
-    - { path: ^/login-as-remembered-user/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/admin/superadmin/, roles: ROLE_SUPER_ADMIN }
-    - { path: ^/admin/translation/list/$, roles: ROLE_SUPER_ADMIN }
-    - { path: ^/admin/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/admin/authorization/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/admin/, roles: ROLE_ADMIN }
-    - { path: ^/efconnect, roles: ROLE_ADMIN }
-    - { path: ^/elfinder, roles: ROLE_ADMIN }
-    - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    access_control:
+        # same pattern must be in routing_front.yml
+        - { path: ^/login-as-remembered-user/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/superadmin/, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/admin/translation/list/$, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/admin/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/authorization/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, roles: ROLE_ADMIN }
+        - { path: ^/efconnect, roles: ROLE_ADMIN }
+        - { path: ^/elfinder, roles: ROLE_ADMIN }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

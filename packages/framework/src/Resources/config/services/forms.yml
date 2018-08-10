@@ -1,36 +1,36 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
 
-  Shopsys\FrameworkBundle\Form\:
-    resource: '../../Form/'
+    Shopsys\FrameworkBundle\Form\:
+        resource: '../../Form/'
 
-  Shopsys\FrameworkBundle\Form\InvertChoiceTypeExtension:
-    tags:
-      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
+    Shopsys\FrameworkBundle\Form\InvertChoiceTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
 
-  Shopsys\FrameworkBundle\Form\EmptyMessageChoiceTypeExtension:
-    tags:
-      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
+    Shopsys\FrameworkBundle\Form\EmptyMessageChoiceTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
 
-  Shopsys\FrameworkBundle\Form\CollectionTypeExtension:
-    tags:
-      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\CollectionType }
+    Shopsys\FrameworkBundle\Form\CollectionTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\CollectionType }
 
-  Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension:
-    tags:
-      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+    Shopsys\FrameworkBundle\Form\FormRenderingConfigurationExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
-  Shopsys\FrameworkBundle\Form\MoneyTypeExtension:
-    tags:
-      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\MoneyType }
+    Shopsys\FrameworkBundle\Form\MoneyTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\MoneyType }
 
-  Shopsys\FrameworkBundle\Component\Form\TimedFormTypeExtension:
-    tags:
-      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+    Shopsys\FrameworkBundle\Component\Form\TimedFormTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
-  Shopsys\FrameworkBundle\Form\WysiwygTypeExtension:
-    tags:
-      - { name: form.type_extension, extended_type: Ivory\CKEditorBundle\Form\Type\CKEditorType }
+    Shopsys\FrameworkBundle\Form\WysiwygTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Ivory\CKEditorBundle\Form\Type\CKEditorType }

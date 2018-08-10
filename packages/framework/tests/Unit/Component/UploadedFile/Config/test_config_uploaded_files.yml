@@ -1,2 +1,2 @@
-- name: testEntity
-  class: Tests\FrameworkBundle\Unit\Component\UploadedFile\Dummy
+-   name: testEntity
+    class: Tests\FrameworkBundle\Unit\Component\UploadedFile\Dummy

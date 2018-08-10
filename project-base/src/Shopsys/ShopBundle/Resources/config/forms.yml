@@ -1,12 +1,12 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
 
-  Shopsys\ShopBundle\Form\:
-      resource: '../../Form/'
+    Shopsys\ShopBundle\Form\:
+            resource: '../../Form/'
 
-  Shopsys\ShopBundle\Form\Admin\ArticleFormTypeExtension:
-    tags:
-      - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Article\ArticleFormType }
+    Shopsys\ShopBundle\Form\Admin\ArticleFormTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Shopsys\FrameworkBundle\Form\Admin\Article\ArticleFormType }

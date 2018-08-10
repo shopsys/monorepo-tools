@@ -1,31 +1,31 @@
 language: php
 
 php:
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
+    - 5.6
+    - 7.0
+    - 7.1
+    - 7.2
 
 cache:
-  directories:
-    - ~/.composer/cache
+    directories:
+        - ~/.composer/cache
 
 matrix:
-  include:
-    - php: 5.6
-      env: DEPENDENCIES="--prefer-lowest --prefer-stable"
-    - php: 7.1
-      env: DEPENDENCIES="--prefer-lowest --prefer-stable"
+    include:
+        -   php: 5.6
+            env: DEPENDENCIES="--prefer-lowest --prefer-stable"
+        -   php: 7.1
+            env: DEPENDENCIES="--prefer-lowest --prefer-stable"
 
 before_install:
-  - composer config github-oauth.github.com $GITHUB_TOKEN
+    - composer config github-oauth.github.com $GITHUB_TOKEN
 
 install:
-  - travis_retry composer update $DEPENDENCIES
+    - travis_retry composer update $DEPENDENCIES
 
 script:
-  - php vendor/bin/parallel-lint ./src ./tests
-  - php vendor/bin/php-cs-fixer fix --config=vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs --dry-run --verbose --diff ./src ./tests
-  - php vendor/bin/phpcs --standard=vendor/shopsys/coding-standards/rulesetCS.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp ./src ./tests
-  - php vendor/bin/phpmd "./src,./tests" text vendor/shopsys/coding-standards/rulesetMD.xml --extensions=php
-  - php vendor/bin/phpunit tests
+    - php vendor/bin/parallel-lint ./src ./tests
+    - php vendor/bin/php-cs-fixer fix --config=vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs --dry-run --verbose --diff ./src ./tests
+    - php vendor/bin/phpcs --standard=vendor/shopsys/coding-standards/rulesetCS.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp ./src ./tests
+    - php vendor/bin/phpmd "./src,./tests" text vendor/shopsys/coding-standards/rulesetMD.xml --extensions=php
+    - php vendor/bin/phpunit tests

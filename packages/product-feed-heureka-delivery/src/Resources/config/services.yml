@@ -1,12 +1,12 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
 
-  Shopsys\ProductFeed\HeurekaDeliveryBundle\:
-    resource: '../../*'
+    Shopsys\ProductFeed\HeurekaDeliveryBundle\:
+        resource: '../../*'
 
-  Shopsys\ProductFeed\HeurekaDeliveryBundle\HeurekaDeliveryFeed:
-    tags:
-      - { name: shopsys.product_feed, type: hourly }
+    Shopsys\ProductFeed\HeurekaDeliveryBundle\HeurekaDeliveryFeed:
+        tags:
+            - { name: shopsys.product_feed, type: hourly }

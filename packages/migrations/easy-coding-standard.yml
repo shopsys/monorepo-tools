@@ -3,7 +3,7 @@ imports:
 
 parameters:
     exclude_files:
-      - '*/src/Resources/views/Migration/migration.php.twig'
+        - '*/src/Resources/views/Migration/migration.php.twig'
     skip:
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
-          - '*/tests/*'
+            - '*/tests/*'

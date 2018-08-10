@@ -4,10 +4,10 @@ imports:
 parameters:
     skip:
         ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff:
-        - '*/tests/Unit/HeurekaFeedTest.php'
+            - '*/tests/Unit/HeurekaFeedTest.php'
 
         PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.NotCamelCaps:
             - '*/src/Model/HeurekaCategory/HeurekaCategoryDownloader.php'
 
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
-          - '*/tests/*'
+            - '*/tests/*'

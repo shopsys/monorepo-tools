@@ -4,4 +4,4 @@ imports:
 parameters:
     skip:
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
-          - '*/tests/*'
+            - '*/tests/*'

@@ -1,118 +1,118 @@
 # Example:
-#- name: product
-#  class: Shopsys\FrameworkBundle\Model\Product\Product
-#  types:
-#    - name: gallery
-#      multiple: true
-#      sizes:
-#        - name: detail
-#          width: 200
-#          height: 300
-#          crop: false
-#          occurrence: 'Front-end: Product detail, when selected'
-#        - name: list
-#          width: 100
-#          height: 100
-#          crop: true
-#          occurrence: 'Front-end: Product detail'
-#    - name: main
-#      sizes:
-#        - name: ~
-#          width: 200
-#          height: 300
-#          crop: false
-#          occurrence: 'Front-end: Product detail, Product list'
+#-   name: product
+#    class: Shopsys\FrameworkBundle\Model\Product\Product
+#    types:
+#        -   name: gallery
+#            multiple: true
+#            sizes:
+#                -   name: detail
+#                    width: 200
+#                    height: 300
+#                    crop: false
+#                    occurrence: 'Front-end: Product detail, when selected'
+#                -   name: list
+#                    width: 100
+#                    height: 100
+#                    crop: true
+#                    occurrence: 'Front-end: Product detail'
+#        -   name: main
+#            sizes:
+#                -   name: ~
+#                    width: 200
+#                    height: 300
+#                    crop: false
+#                    occurrence: 'Front-end: Product detail, Product list'
 
-- name: payment
-  class: Shopsys\FrameworkBundle\Model\Payment\Payment
-  sizes:
-    - name: ~
-      width: ~
-      height: 20
-      crop: false
-      occurrence: 'Front-end: Ordering process'
+-   name: payment
+    class: Shopsys\FrameworkBundle\Model\Payment\Payment
+    sizes:
+        -   name: ~
+            width: ~
+            height: 20
+            crop: false
+            occurrence: 'Front-end: Ordering process'
 
-- name: category
-  class: Shopsys\FrameworkBundle\Model\Category\Category
-  sizes:
-    - name: ~
-      width: 30
-      height: 30
-      crop: false
-      occurrence: 'Front-end: Product list by category'
+-   name: category
+    class: Shopsys\FrameworkBundle\Model\Category\Category
+    sizes:
+        -   name: ~
+            width: 30
+            height: 30
+            crop: false
+            occurrence: 'Front-end: Product list by category'
 
-- name: product
-  class: Shopsys\FrameworkBundle\Model\Product\Product
-  multiple: true
-  sizes:
-    - name: ~
-      width: 550
-      height: ~
-      crop: false
-      occurrence: 'Front-end: Main image in product detail'
-    - name: galleryThumbnail
-      width: ~
-      height: 35
-      crop: false
-      occurrence: 'Front-end: Thumbnail of images under the main image in product detail'
-    - name: list
-      width: 300
-      height: 200
-      crop: false
-      occurrence: 'Front-end: Listing of products in section, listing of products on special offer'
-    - name: thumbnail
-      width: 50
-      height: 40
-      crop: false
-      occurrence: 'Front-end: Preview in autocomplete for search, preview in cart during ordering process'
+-   name: product
+    class: Shopsys\FrameworkBundle\Model\Product\Product
+    multiple: true
+    sizes:
+        -   name: ~
+            width: 550
+            height: ~
+            crop: false
+            occurrence: 'Front-end: Main image in product detail'
+        -   name: galleryThumbnail
+            width: ~
+            height: 35
+            crop: false
+            occurrence: 'Front-end: Thumbnail of images under the main image in product detail'
+        -   name: list
+            width: 300
+            height: 200
+            crop: false
+            occurrence: 'Front-end: Listing of products in section, listing of products on special offer'
+        -   name: thumbnail
+            width: 50
+            height: 40
+            crop: false
+            occurrence: 'Front-end: Preview in autocomplete for search, preview in cart during ordering process'
 
-- name: sliderItem
-  class: Shopsys\FrameworkBundle\Model\Slider\SliderItem
-  sizes:
-    - name: ~
-      width: 918
-      height: 230
-      crop: true
-      occurrence: 'Front-end: Main page slider'
+-   name: sliderItem
+    class: Shopsys\FrameworkBundle\Model\Slider\SliderItem
+    sizes:
+        -   name: ~
+            width: 918
+            height: 230
+            crop: true
+            occurrence: 'Front-end: Main page slider'
 
-- name: transport
-  class: Shopsys\FrameworkBundle\Model\Transport\Transport
-  sizes:
-    - name: ~
-      width: ~
-      height: 20
-      crop: false
-      occurrence: 'Front-end: Ordering process'
+-   name: transport
+    class: Shopsys\FrameworkBundle\Model\Transport\Transport
+    sizes:
+        -   name: ~
+            width: ~
+            height: 20
+            crop: false
+            occurrence: 'Front-end: Ordering process'
 
-- name: noticer
-  class: Shopsys\FrameworkBundle\Model\Advert\Advert
-  sizes:
-    - name: header
-      width: 1160
-      height: ~
-      crop: false
-      occurrence: 'Front-end: Advertising under heading'
-    - name: footer
-      width: 1160
-      height: ~
-      crop: false
-      occurrence: 'Front-end: Advertising above footer'
-    - name: productList
-      width: 920
-      height: ~
-      crop: false
-      occurrence: 'Front-end: Advertising in category (above the category name)'
-    - name: leftSidebar
-      width: 220
-      height: ~
-      crop: false
-      occurrence: 'Front-end: Advertising in the left panel under the category tree'
+-   name: noticer
+    class: Shopsys\FrameworkBundle\Model\Advert\Advert
+    sizes:
+        -   name: header
+            width: 1160
+            height: ~
+            crop: false
+            occurrence: 'Front-end: Advertising under heading'
+        -   name: footer
+            width: 1160
+            height: ~
+            crop: false
+            occurrence: 'Front-end: Advertising above footer'
+        -   name: productList
+            width: 920
+            height: ~
+            crop: false
+            occurrence: 'Front-end: Advertising in category (above the category name)'
+        -   name: leftSidebar
+            width: 220
+            height: ~
+            crop: false
+            occurrence: 'Front-end: Advertising in the left panel under the category tree'
 
-- name: brand
-  class: Shopsys\FrameworkBundle\Model\Product\Brand\Brand
-  sizes:
-    - name: ~
-      width: 300
-      height: 200
-      crop: false
-      occurrence: 'Front-end: Brand page'
+-   name: brand
+    class: Shopsys\FrameworkBundle\Model\Product\Brand\Brand
+    sizes:
+        -   name: ~
+            width: 300
+            height: 200
+            crop: false
+            occurrence: 'Front-end: Brand page'

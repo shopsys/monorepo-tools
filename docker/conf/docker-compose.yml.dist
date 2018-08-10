@@ -97,5 +97,5 @@ services:
             - discovery.type=single-node
 
 volumes:
-  elasticsearch-data:
-    driver: local
+    elasticsearch-data:
+        driver: local

@@ -2,17 +2,17 @@
 # see \Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter
 
 front_article_detail:
-  path: friendly-url
-  defaults: { _controller: ShopsysShopBundle:Front\Article:detail }
+    path: friendly-url
+    defaults: { _controller: ShopsysShopBundle:Front\Article:detail }
 
 front_product_detail:
-  path: friendly-url
-  defaults: { _controller: ShopsysShopBundle:Front\Product:detail }
+    path: friendly-url
+    defaults: { _controller: ShopsysShopBundle:Front\Product:detail }
 
 front_product_list:
-  path: friendly-url
-  defaults: { _controller: ShopsysShopBundle:Front\Product:listByCategory }
+    path: friendly-url
+    defaults: { _controller: ShopsysShopBundle:Front\Product:listByCategory }
 
 front_brand_detail:
-  path: friendly-url
-  defaults: { _controller: ShopsysShopBundle:Front\Product:listByBrand }
+    path: friendly-url
+    defaults: { _controller: ShopsysShopBundle:Front\Product:listByBrand }

@@ -24,6 +24,6 @@ parameters:
             - '*/tests/ShopBundle/Test/Codeception/_generated/AcceptanceTesterActions.php'
 
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
-          - '*/tests/*'
+            - '*/tests/*'
         Shopsys\CodingStandards\Sniffs\ForbiddenDumpSniff:
-          - '*/tests/ShopBundle/Database/Model/Cart/CartFacadeTest.php'
+            - '*/tests/ShopBundle/Database/Model/Cart/CartFacadeTest.php'

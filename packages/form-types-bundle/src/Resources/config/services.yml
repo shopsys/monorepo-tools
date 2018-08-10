@@ -1,8 +1,8 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
 
-  Shopsys\FormTypesBundle\:
-    resource: '../../*'
+    Shopsys\FormTypesBundle\:
+        resource: '../../*'

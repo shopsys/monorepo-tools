@@ -1,20 +1,20 @@
 # specific development configuration
 
 assetic:
-  use_controller: false
+    use_controller: false
 
 doctrine:
-  orm:
-    auto_generate_proxy_classes: true
-    metadata_cache_driver: array
-    query_cache_driver: array
+    orm:
+        auto_generate_proxy_classes: true
+        metadata_cache_driver: array
+        query_cache_driver: array
 
 monolog:
-  handlers:
-    main:
-      # change "fingers_crossed" handler to "group" that works as a passthrough to "nested"
-      type: group
-      members: [ nested ]
+    handlers:
+        main:
+            # change "fingers_crossed" handler to "group" that works as a passthrough to "nested"
+            type: group
+            members: [ nested ]
 #    doctrine:
 #      action_level: debug
 #      type:  stream
@@ -22,22 +22,22 @@ monolog:
 #      channels: doctrine
 
 framework:
-  router:
-    resource: "%kernel.root_dir%/config/routing_dev.yml"
-    strict_requirements: true
-  profiler:
-    enabled: true
-    collect: true
-    only_exceptions: false
-    only_master_requests: true
+    router:
+        resource: "%kernel.root_dir%/config/routing_dev.yml"
+        strict_requirements: true
+    profiler:
+        enabled: true
+        collect: true
+        only_exceptions: false
+        only_master_requests: true
 
 #swiftmailer:
 #    delivery_address: me@example.com
 
 web_profiler:
-  toolbar: true
-  intercept_redirects: false
+    toolbar: true
+    intercept_redirects: false
 
 debug:
-  max_items: 500
-  max_string_length: 5000
+    max_items: 500
+    max_string_length: 5000

@@ -1,4 +1,4 @@
 shopsys_framework_admin:
-  resource: "@ShopsysFrameworkBundle/Controller"
-  prefix: /admin
-  type: annotation
+    resource: "@ShopsysFrameworkBundle/Controller"
+    prefix: /admin
+    type: annotation

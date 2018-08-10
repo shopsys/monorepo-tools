@@ -1,34 +1,34 @@
 imports:
-  - { resource: forms.yml }
+    - { resource: forms.yml }
 
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
 
-  Shopsys\ShopBundle\Controller\:
-    resource: '../../Controller/'
-    public: true
-    tags: ['controller.service_arguments']
+    Shopsys\ShopBundle\Controller\:
+        resource: '../../Controller/'
+        public: true
+        tags: ['controller.service_arguments']
 
-  Shopsys\ShopBundle\Model\:
-    resource: '../../Model/*/*{Facade,Factory}.php'
+    Shopsys\ShopBundle\Model\:
+        resource: '../../Model/*/*{Facade,Factory}.php'
 
-  League\Flysystem\MountManager:
-    arguments:
-      -
-        local: '@local_filesystem'
-        main: '@main_filesystem'
+    League\Flysystem\MountManager:
+        arguments:
+            -
+                local: '@local_filesystem'
+                main: '@main_filesystem'
 
-  Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory: ~
+    Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory: ~
 
-  Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface: '@Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory'
+    Shopsys\FrameworkBundle\Model\Order\OrderFlowFactoryInterface: '@Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory'
 
-  Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface: '@Shopsys\ShopBundle\Model\Article\ArticleFactory'
+    Shopsys\FrameworkBundle\Model\Article\ArticleFactoryInterface: '@Shopsys\ShopBundle\Model\Article\ArticleFactory'
 
-  Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface: '@Shopsys\ShopBundle\Model\Article\ArticleDataFactory'
+    Shopsys\FrameworkBundle\Model\Article\ArticleDataFactoryInterface: '@Shopsys\ShopBundle\Model\Article\ArticleDataFactory'
 
-  Shopsys\ShopBundle\Model\Category\CurrentCategoryResolver: ~
+    Shopsys\ShopBundle\Model\Category\CurrentCategoryResolver: ~
 
-  League\Flysystem\FilesystemInterface: '@main_filesystem'
+    League\Flysystem\FilesystemInterface: '@main_filesystem'

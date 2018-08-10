@@ -1,20 +1,20 @@
 language: php
 
 php:
-  - 7.1
-  - 7.2
+    - 7.1
+    - 7.2
 
 cache:
-  directories:
-    - ~/.composer/cache
+    directories:
+        - ~/.composer/cache
 
 before_install:
-  - composer config github-oauth.github.com $GITHUB_TOKEN
+    - composer config github-oauth.github.com $GITHUB_TOKEN
 
 install:
-  - composer install
+    - composer install
 
 script:
-  - php vendor/bin/parallel-lint ./src ./tests ./examples
-  - php vendor/bin/ecs check --verbose ./src ./tests ./examples
-  - php vendor/bin/phpunit
+    - php vendor/bin/parallel-lint ./src ./tests ./examples
+    - php vendor/bin/ecs check --verbose ./src ./tests ./examples
+    - php vendor/bin/phpunit

@@ -101,4 +101,4 @@ volumes:
     pgdata:
         driver: local
     elasticsearch-data:
-      driver: local
+        driver: local
