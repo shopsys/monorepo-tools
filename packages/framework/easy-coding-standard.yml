@@ -32,18 +32,9 @@ parameters:
 
         Shopsys\CodingStandards\Sniffs\ObjectIsCreatedByFactorySniff:
             - '*/tests/*'
-            - '*/src/DataFixtures/Demo/ArticleDataFixture.php'
-            - '*/src/DataFixtures/Demo/CategoryDataFixture.php'
-            - '*/src/DataFixtures/Demo/PaymentDataFixture.php'
-            - '*/src/DataFixtures/Demo/PersonalDataAccessRequestDataFixture.php'
-            - '*/src/DataFixtures/Demo/TransportDataFixture.php'
-            - '*/src/DataFixtures/DemoMultidomain/ArticleDataFixture.php'
-            - '*/src/DataFixtures/Performance/CategoryDataFixture.php'
+            # class that is extended from DomainFactory
             - '*/src/Component/Domain/DomainFactoryOverwritingDomainUrl.php'
-            - '*/src/Controller/Admin/BrandController.php'
-            - '*/src/Model/Customer/CustomerData.php'
-            - '*/src/Model/Feed/FeedCronModule.php'
-            - '*/src/Model/Feed/FeedFacade.php'
+            # class that is used by OrderPreviewFactory to create OrderPreview
             - '*/src/Model/Order/Preview/OrderPreviewCalculation.php'
 
         Shopsys\CodingStandards\Sniffs\ForbiddenDumpSniff:

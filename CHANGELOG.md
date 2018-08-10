@@ -44,6 +44,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 #### Fixed
 - [#260 - JS validation: dynamically added form inputs are now validated](https://github.com/shopsys/shopsys/pull/260)
+- [#397 - classes excluded from ObjectIsCreatedByFactorySniff rule are fixed](https://github.com/shopsys/shopsys/pull/397)
 
 ### [shopsys/project-base]
 #### Fixed
