@@ -307,7 +307,7 @@
         </if>
     </target>
 
-    <target name="phpstan" description="Performs static analysis of PHP files using PHPStan.">
+    <target name="phpstan" depends="tests-acceptance-build" description="Performs static analysis of PHP files using PHPStan.">
         <exec
             executable="${path.phpstan.executable}"
             logoutput="true"

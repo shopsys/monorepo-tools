@@ -133,7 +133,7 @@
         </exec>
     </target>
 
-    <target name="phpstan" description="Performs static analysis of PHP files using PHPStan on all packages.">
+    <target name="phpstan" depends="tests-acceptance-build" description="Performs static analysis of PHP files using PHPStan on all packages.">
         <exec executable="${path.phpstan.executable}" logoutput="true" passthru="true" checkreturn="true">
             <arg value="analyze"/>
             <arg value="-c"/>
