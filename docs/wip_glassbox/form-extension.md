@@ -5,7 +5,6 @@ solution of extending forms is not complete and there will be several tasks that
 At this time we do not have every single form in our application ready for extension, the list of not prepared
 forms for extensions is below:
 
-* `BrandFormType`
 * `ProductMassActionFormType`
 * `VariantFormType`
 * `OrderFormType`
