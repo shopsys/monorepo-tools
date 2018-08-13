@@ -23,9 +23,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### [shopsys/shopsys]
-- [#389 - Standardized YAML files indentation to 4 spaces](https://github.com/shopsys/shopsys/pull/389)
-
 ### [shopsys/framework]
 #### Added
 - [#354 - Product search in elasticsearch](https://github.com/shopsys/shopsys/pull/354)
@@ -57,6 +54,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [#379 - Stale bot activation](https://github.com/shopsys/shopsys/pull/379)
     - added configuration file for GitHub Stale bot
     - templates for pull requests and issues were moved into [.github](/.github) folder
+    
+#### Changed
+- [#389 - Standardized YAML files indentation to 4 spaces](https://github.com/shopsys/shopsys/pull/389)
 
 ## [7.0.0-alpha4] - 2018-08-02
 ### [shopsys/framework]
