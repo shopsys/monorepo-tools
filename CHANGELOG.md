@@ -56,6 +56,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Added
 - [#379 - Stale bot activation](https://github.com/shopsys/shopsys/pull/379)
     - added configuration file for GitHub Stale bot
+    - templates for pull requests and issues were moved into [.github](/.github) folder
 
 ## [7.0.0-alpha4] - 2018-08-02
 ### [shopsys/framework]
