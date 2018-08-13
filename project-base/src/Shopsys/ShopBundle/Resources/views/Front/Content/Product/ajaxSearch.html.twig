@@ -4,7 +4,7 @@
     {{ productFilterForm.filterForm(
         filterForm,
         url('front_product_search'),
-        url('front_product_search', { SEARCH_TEXT_PARAMETER : searchText }),
+        url('front_product_search', { (SEARCH_TEXT_PARAMETER) : searchText }),
         searchText,
         'search',
         productFilterCountData,
