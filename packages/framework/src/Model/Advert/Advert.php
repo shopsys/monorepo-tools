@@ -14,7 +14,7 @@ class Advert
     const TYPE_CODE = 'code';
 
     /**
-     * @deprecated Use of position constants is discouraged, use literal strings instead.
+     * @deprecated use of position constants is discouraged, use literal strings instead
      */
     const POSITION_HEADER = 'header';
     const POSITION_FOOTER = 'footer';
