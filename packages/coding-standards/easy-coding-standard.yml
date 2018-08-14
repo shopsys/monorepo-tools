@@ -137,12 +137,6 @@ parameters:
     skip:
         SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff:
             - '*/tests/Unit/CsFixer/OrmJoinColumnRequireNullableFixer/*'
-        # private properties should not start with "_"
-        PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.PrivateNoUnderscore: ~
-        # it is not necessary to have blank line after control structure
-        PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff.NoLineAfterClose: ~
-        # allow empty "catch (Exception $exception) { }"
-        PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\EmptyStatementSniff.DetectedCatch: ~
 
         # private properties should not start with "_"
         PHP_CodeSniffer\Standards\Squiz\Sniffs\NamingConventions\ValidVariableNameSniff.PrivateNoUnderscore: ~
